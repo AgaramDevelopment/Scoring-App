@@ -198,7 +198,7 @@
     //to change selected team players A color after selected 7 players
     NSMutableArray *countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
     
-    if(countTeam.count > 0){
+    if(countTeam > 0){
         
         _view_teamA.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
         
