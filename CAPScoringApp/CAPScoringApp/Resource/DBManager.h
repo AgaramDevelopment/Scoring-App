@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
+#import "BallEventRecord.h"
 @interface DBManager : NSObject
 //tournament
 +(NSMutableArray *)RetrieveEventData;
@@ -41,5 +42,6 @@
 +(NSMutableArray *)SelectTeamPlayers:(NSString*) matchCode teamCode:(NSString*)teamCode;
 +(BOOL)updateOverInfo:(NSString*)comments matchCode:(NSString*) matchCode competitionCode:(NSString*)competitionCode;
 
-
+// StartBall Record
++ (BOOL) saveBallEventData:(BallEventRecord *) ballEventData;
 @end
