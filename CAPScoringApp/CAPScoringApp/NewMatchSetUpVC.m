@@ -61,10 +61,10 @@
     //logo image
     NSMutableArray *playersCode = [[NSMutableArray alloc]init];
     
-    [playersCode addObject:@"PYC0000001"];
-    [playersCode addObject:@"PYC0000002"];
-    [playersCode addObject:@"PYC0000003"];
-    [playersCode addObject:@"PYC0000004"];
+    [playersCode addObject:@"TEA0000005"];
+    [playersCode addObject:@"TEA0000006"];
+    [playersCode addObject:@"TEA0000008"];
+   
     
     
     for(int i=0;i<[playersCode count];i++){
@@ -81,24 +81,22 @@
     [mTeam addObject:self.teamAcode];
     
     
-    
-    
     self.selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: self.selectedPlayerArray];
     
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir,@"PYC0000001"];
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir,self.teamAcode];
     
     
     BOOL isFileExist = [fileManager fileExistsAtPath:pngFilePath];
     UIImage *img;
     if(isFileExist){
         img = [UIImage imageWithContentsOfFile:pngFilePath];
-        self.img_teamALogo = img;
+        self.img_teamALogo.image = img;
     }else{
         img  = [UIImage imageNamed: @"no_image.png"];
-        _img_teamALogo = img;
+        _img_teamALogo.image = img;
     }
     
     
@@ -106,15 +104,15 @@
     
     NSFileManager *fileManagerB = [NSFileManager defaultManager];
     NSString *docDirB = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *pngFilePathB = [NSString stringWithFormat:@"%@/%@.png", docDirB,self.teamAcode];
+    NSString *pngFilePathB = [NSString stringWithFormat:@"%@/%@.png", docDirB,self.teamBcode];
     BOOL isFileExistB = [fileManagerB fileExistsAtPath:pngFilePathB];
     UIImage *imgB;
     if(isFileExistB){
         imgB = [UIImage imageWithContentsOfFile:pngFilePathB];
-        _img_teamBLogo = imgB;
+        _img_teamBLogo.image = imgB;
     }else{
         imgB  = [UIImage imageNamed: @"no_image.png"];
-        _img_teamBLogo = imgB;
+        _img_teamBLogo.image = imgB;
     }
 }
 -(void) addImageInAppDocumentLocation:(NSString*) fileName{
@@ -225,6 +223,9 @@
     
     _txt_overs.enabled = YES;
     
+    
+    
+    
 }
 
 - (IBAction)btn_proceed:(id)sender {
@@ -264,18 +265,21 @@
     if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){
         if(twentyText > 20){
             [self showDialog:@"Please enter below 20 overs" andTitle:@"Error"];
-        }else{
-            [self showDialog:@"Updated successfully" andTitle:@"Message"];
         }
+        //else{
+            
+            //[self showDialog:@"Updated successfully" andTitle:@"Message"];
+       // }
         return NO;
     }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){
         if(OdiText > 50){
             
             [self showDialog:@"Please enter below 50 overs" andTitle:@"Error"];
-        }else {
-            
-            [self showDialog:@"Updated successfully" andTitle:@"Message"];
-        }
+       }
+            //else {
+//            
+//           // [self showDialog:@"Updated successfully" andTitle:@"Message"];
+//        }
         return NO;
         
     }
