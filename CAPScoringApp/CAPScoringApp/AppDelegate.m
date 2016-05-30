@@ -23,50 +23,44 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
-//    
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        UIViewController *initViewController = [storyboard instantiateViewControllerWithIdentifier:@"login_sbid"];
-//    
-//        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//        self.window.rootViewController = initViewController;
-//        [self.window makeKeyAndVisible];
-//    
-//        BOOL isValiduser = YES;
-//    
-//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//        if([defaults boolForKey:@"isUserLoggedin"]) {
-//            NSLog(@"Loged in");
-//            if([DBManager checkExpiryDate:[defaults objectForKey:@"userCode"]]){
-//    
-//            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//            UIViewController *initViewController = [storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
-//    
-//            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//            self.window.rootViewController = initViewController;
-//            [self.window makeKeyAndVisible];
-//    
-//                isValiduser = NO;
-//            }
-//        }
-//    
-//        if(isValiduser) {
-//            NSLog(@"NOT Loged in");
-//            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//            UIViewController *initViewController = [storyboard instantiateViewControllerWithIdentifier:@"login_sbid"];
-//    
-//            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//            self.window.rootViewController = initViewController;
-//            [self.window makeKeyAndVisible];
-//        }
+    
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *initViewController = [storyboard instantiateViewControllerWithIdentifier:@"login_sbid"];
+    
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        self.window.rootViewController = initViewController;
+        [self.window makeKeyAndVisible];
+    
+        BOOL isValiduser = YES;
+    
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if([defaults boolForKey:@"isUserLoggedin"]) {
+            NSLog(@"Loged in");
+            if([DBManager checkExpiryDate:[defaults objectForKey:@"userCode"]]){
+    
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UIViewController *initViewController = [storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+    
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            self.window.rootViewController = initViewController;
+            [self.window makeKeyAndVisible];
+    
+                isValiduser = NO;
+            }
+        }
+    
+        if(isValiduser) {
+            NSLog(@"NOT Loged in");
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UIViewController *initViewController = [storyboard instantiateViewControllerWithIdentifier:@"login_sbid"];
+    
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            self.window.rootViewController = initViewController;
+            [self.window makeKeyAndVisible];
+        }
     
     
-    // fixtures to match setup
-//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    FixturesVC*tossvc =(FixturesVC*) [storyBoard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
-//   navigationController=[[UINavigationController alloc]initWithRootViewController:tossvc];
-//    self.window.rootViewController = navigationController;
-//    [self.window makeKeyAndVisible];
-
+     
 
     return YES;
 }
