@@ -14,7 +14,8 @@
 @property(strong,nonatomic)NSString *userName;
 @property(strong,nonatomic)NSString *password;
 @property(strong,nonatomic)NSString *expiryDate;
-
+@property(strong,nonatomic)NSString *electedTo;
+@property(strong,nonatomic)NSString *MasterSubCode;
 
 
 @end

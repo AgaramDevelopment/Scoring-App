@@ -15,4 +15,8 @@
 @synthesize password;
 @synthesize expiryDate;
 
+//Toss Details
+@synthesize electedTo;
+@synthesize MasterSubCode;
+
 @end

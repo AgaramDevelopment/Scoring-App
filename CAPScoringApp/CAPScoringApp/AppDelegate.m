@@ -9,9 +9,11 @@
 #import "AppDelegate.h"
 #import "LoginVC.h"
 #import "DBManager.h"
-
+#import "FixturesVC.h"
 @interface AppDelegate ()
 {UIActivityIndicatorView *indicator;
+    UINavigationController *navigationController;
+
 }
 @end
 
@@ -56,6 +58,16 @@
             self.window.rootViewController = initViewController;
             [self.window makeKeyAndVisible];
         }
+    
+    
+    // fixtures to match setup
+//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    FixturesVC*tossvc =(FixturesVC*) [storyBoard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
+//   navigationController=[[UINavigationController alloc]initWithRootViewController:tossvc];
+//    self.window.rootViewController = navigationController;
+//    [self.window makeKeyAndVisible];
+
+
     return YES;
 }
 

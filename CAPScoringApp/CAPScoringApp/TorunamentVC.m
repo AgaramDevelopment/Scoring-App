@@ -9,7 +9,9 @@
 #import "TorunamentVC.h"
 #import "DBManager.h"
 #import "EventRecord.h"
-#import "FixturesTvc.h"
+#import "TossDetailsVC.h"
+#import "FixturesVC.h"
+
 @interface TorunamentVC ()
 {
     BOOL isEnableTbl;
@@ -27,7 +29,8 @@
    
     // Do any additional setup after loading the view.
     [self.tableView setHidden:YES];
-    
+     self.Nextbtn_outlet.enabled = NO;
+    //[self didClickNextBtnAction setHidden:YES];
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -114,16 +117,32 @@
        [self.tableView reloadData];
         self.tableView.hidden=NO;
         isEnableTbl=NO;
+        self.Nextbtn_outlet.enabled = YES;
     }
 }
 
 -(IBAction)didClickNextBtnAction:(id)sender
 {
+    
+    
+//    
+//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//   TossDetailsVC *Fixvc =(TossDetailsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"TossDetails"];
+//      //Fixvc.CompitionCode=selectindexarray;
+//    [Fixvc setModalPresentationStyle:UIModalPresentationFullScreen];
+//    [self presentViewController:Fixvc animated:NO completion:nil];
+//    
 
-UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    FixturesTvc *fixt =  (FixturesTvc*)[storyboard instantiateViewControllerWithIdentifier:@"Fixtures"];
-     fixt.fixArray=selectindexarray;
-    [self.navigationController pushViewController:fixt animated:YES];
-
+    
+    
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FixturesVC *Fixvc =(FixturesVC*) [storyBoard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
+    EventRecord *eventRecord = [selectindexarray objectAtIndex:0] ;
+    Fixvc.CompitionCode=[eventRecord competitioncode];
+    [Fixvc setModalPresentationStyle:UIModalPresentationFullScreen];
+    [self presentViewController:Fixvc animated:NO completion:nil];
 }
 @end
+
+
+

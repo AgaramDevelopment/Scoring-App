@@ -12,4 +12,8 @@
 @synthesize competitioncode;
 @synthesize competitionname;
 @synthesize recordstatus;
+
+@synthesize TEAMCODE_TOSSWONBY;
+@synthesize TEAMNAME_TOSSWONBY;
+
 @end

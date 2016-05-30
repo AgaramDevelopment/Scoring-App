@@ -12,4 +12,14 @@
 @property(strong,nonatomic)NSString *competitionname;
 @property(strong,nonatomic)NSString *competitioncode;
 @property(strong,nonatomic)NSString *recordstatus;
+
+
+// TossDetailsEvent
+@property(strong,nonatomic)NSString *TEAMCODE_TOSSWONBY;
+@property(strong,nonatomic)NSString *TEAMNAME_TOSSWONBY;
+
+
+
+
+
 @end

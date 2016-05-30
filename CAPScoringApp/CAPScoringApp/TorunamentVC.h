@@ -14,5 +14,6 @@
 
 
 - (IBAction)Btn_touch:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *Nextbtn_outlet;
 
 @end

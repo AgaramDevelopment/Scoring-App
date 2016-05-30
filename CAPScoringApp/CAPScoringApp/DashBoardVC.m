@@ -52,7 +52,7 @@
     _view_new_Match.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
     
     
-    [self openContentView];
+    [self tournmentView];
 }
 
 - (IBAction)btn_archives:(id)sender {
@@ -73,11 +73,11 @@
 
 
 
--(void) openContentView{
+-(void) tournmentView{
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-      TorunamentVC*homeVc =(TorunamentVC*) [storyBoard instantiateViewControllerWithIdentifier:@"tornmentid"];
-    [homeVc setModalPresentationStyle:UIModalPresentationFullScreen];
-    [self presentViewController:homeVc animated:NO completion:nil];
+      TorunamentVC*tournmentVc =(TorunamentVC*) [storyBoard instantiateViewControllerWithIdentifier:@"tornmentid"];
+    [tournmentVc setModalPresentationStyle:UIModalPresentationFullScreen];
+    [self presentViewController:tournmentVc animated:NO completion:nil];
     
 }
 @end
