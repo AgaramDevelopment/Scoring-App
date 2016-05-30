@@ -8,11 +8,14 @@
 
 #import "ScorEnginVC.h"
 #import "CDRTranslucentSideBar.h"
+#import "DBManager.h"
+#import "BallEventRecord.h"
 @interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     NSMutableArray *Btn_NameArray;
     BOOL isSelectleftview;
     UITableView* objextras;
+    BallEventRecord *objBalleventRecord;
     
 }
 
@@ -185,6 +188,7 @@
         self.btn_StartOver.userInteractionEnabled=YES;
         self.btn_StartBall.userInteractionEnabled=NO;
         [self AllBtndisableMethod];
+        [DBManager saveBallEventData:objBalleventRecord];
     }
 }
 -(IBAction)DidClickStartOver:(id)sender
