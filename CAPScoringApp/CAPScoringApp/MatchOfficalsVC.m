@@ -9,6 +9,7 @@
 #import "MatchOfficalsVC.h"
 #import "DBManager.h"
 #import "OfficialMasterRecord.h"
+#import "TossDetailsVC.h"
 
 @interface MatchOfficalsVC ()
 @property (nonatomic,strong)NSMutableArray *FetchOfficalMasterArray;
@@ -74,5 +75,13 @@
  */
 
 - (IBAction)btn_proceed:(id)sender {
+    
+    
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+       TossDetailsVC *tossvc =(TossDetailsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"TossDetails"];
+    tossvc.MATCHCODE=_Matchcode;
+        [tossvc setModalPresentationStyle:UIModalPresentationFullScreen];
+        [self presentViewController:tossvc animated:NO completion:nil];
+    
 }
 @end

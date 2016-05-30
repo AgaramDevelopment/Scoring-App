@@ -125,13 +125,7 @@
 {
     
     
-//    
-//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//   TossDetailsVC *Fixvc =(TossDetailsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"TossDetails"];
-//      //Fixvc.CompitionCode=selectindexarray;
-//    [Fixvc setModalPresentationStyle:UIModalPresentationFullScreen];
-//    [self presentViewController:Fixvc animated:NO completion:nil];
-//    
+
 
     
     

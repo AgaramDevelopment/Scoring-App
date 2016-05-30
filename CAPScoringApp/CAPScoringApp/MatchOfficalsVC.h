@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "NewMatchSetUpVC.h"
 
 @interface MatchOfficalsVC : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *view_umpire;
@@ -20,6 +21,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_umpire3;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_matchreferee;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_scorer1;
+
+
+
+@property(strong,nonatomic)NSString*Matchcode;
 
 - (IBAction)btn_proceed:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_scorer2;

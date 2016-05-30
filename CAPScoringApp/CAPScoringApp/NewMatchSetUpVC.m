@@ -11,6 +11,7 @@
 #import "FixturesRecord.h"
 #import "TeamLogoRecords.h"
 #import "SelectPlayersVC.h"
+#import "MatchOfficalsVC.h"
 
 @interface NewMatchSetUpVC ()
 
@@ -234,6 +235,14 @@
     [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
     
     
+    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MatchOfficalsVC *matchvc =(MatchOfficalsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"matchofficial"];
+    //matchvc.teamCode=teamAcode;
+    matchvc.Matchcode = matchCode;
+    [matchvc setModalPresentationStyle:UIModalPresentationFullScreen];
+    [self presentViewController:matchvc animated:NO completion:nil];
+
+    
     
 }
 
@@ -274,5 +283,9 @@
     
     
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [self viewDidLoad];
+    
+}
 @end

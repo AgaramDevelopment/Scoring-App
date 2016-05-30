@@ -40,7 +40,7 @@
 @property (nonatomic,strong)NSMutableArray*nonStrikerArray;
 @property(nonatomic,strong)NSMutableArray*BowleArray;
 
-@property(nonatomic,strong) NSString *MATCHCODE;
+
 @end
 
 @implementation TossDetailsVC
@@ -49,6 +49,7 @@
 @synthesize StrikerArray;
 @synthesize nonStrikerArray;
 @synthesize BowleArray;
+@synthesize MATCHCODE;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -67,7 +68,7 @@
      // self.outlet_btn_proceed.enabled = YES;
     
     // Do any additional setup after loading the view.
- _MATCHCODE=@"IMSC0221C6F6595E95A00001";
+// _MATCHCODE=@"IMSC0221C6F6595E95A00001";
     //wontoss
     
     [self.view_Wonby.layer setBorderWidth:3];
@@ -355,7 +356,7 @@ return 1;
     if(isEnableTbl==YES)
     {
         WonTossArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchTossWonArray =[DBManager checkTossDetailsWonby:_MATCHCODE];
+        NSMutableArray * FetchTossWonArray =[DBManager checkTossDetailsWonby:MATCHCODE];
         for(int i=0; i < [FetchTossWonArray count]; i++)
         {
             
@@ -440,7 +441,7 @@ return 1;
         
         StrikerArray=[[NSMutableArray alloc]init];
       
-        NSMutableArray * FetchstrikerArray =[DBManager StrikerNonstriker:_MATCHCODE:PlayerCode];
+        NSMutableArray * FetchstrikerArray =[DBManager StrikerNonstriker:MATCHCODE:PlayerCode];
         for(int i=0; i < [FetchstrikerArray count]; i++)
         {
        objTossDeatilsRecord=(TossDeatilsEvent*)[FetchstrikerArray objectAtIndex:i];
@@ -491,7 +492,7 @@ return 1;
         
         nonStrikerArray=[[NSMutableArray alloc]init];
         
-        NSMutableArray * FetchnonstrikerArray =[DBManager StrikerNonstriker:_MATCHCODE:PlayerCode];
+        NSMutableArray * FetchnonstrikerArray =[DBManager StrikerNonstriker:MATCHCODE:PlayerCode];
         for(int i=0; i < [FetchnonstrikerArray count]; i++)
         {
             objTossDeatilsRecord=(TossDeatilsEvent*)[FetchnonstrikerArray objectAtIndex:i];
@@ -544,7 +545,7 @@ return 1;
         
         BowleArray=[[NSMutableArray alloc]init];
         
-        NSMutableArray * FetchBowlerArray =[DBManager Bowler:_MATCHCODE :PlayerCode];
+        NSMutableArray * FetchBowlerArray =[DBManager Bowler:MATCHCODE :PlayerCode];
         for(int i=0; i < [FetchBowlerArray count]; i++)
         {
             objBowlerEventRecord=(BowlerEvent*)[FetchBowlerArray objectAtIndex:i];

@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TorunamentVC.h"
+#import "MatchOfficalsVC.h"
 @interface TossDetailsVC : UIViewController<UITableViewDataSource,UITableViewDataSource>
 
 
@@ -53,6 +54,6 @@ IBOutlet UIView *nonStriker;
 
 - (IBAction)Btn_Proceed:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *outlet_btn_proceed;
-
+@property(nonatomic,strong)NSString*MATCHCODE;
 
 @end
