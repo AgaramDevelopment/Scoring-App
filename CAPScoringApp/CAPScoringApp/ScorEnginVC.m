@@ -14,20 +14,36 @@
 {
     NSMutableArray *Btn_NameArray;
     BOOL isSelectleftview;
+    UITableView* extrasTableView;
+    UITableView* overThrowTableView;
+    
+    
     UITableView* objextras;
     BallEventRecord *objBalleventRecord;
     
+    BOOL isMoreRunSelected;
+    BOOL isExtrasSelected;
+    BOOL isOverthrowSelected;
+    
 }
+
+
+@property(nonatomic,strong) NSMutableArray *extrasOptionArray;
+@property(nonatomic,strong) NSMutableArray *overThrowOptionArray;
 
 @property (nonatomic, strong) CDRTranslucentSideBar *sideBar;
 @property (nonatomic, strong) CDRTranslucentSideBar *rightSideBar;
 @property(nonatomic,strong) NSMutableArray *selectbtnvalueArray;
+@property(nonatomic,strong)  BallEventRecord *ballEventRecord;
 @end
 
 @implementation ScorEnginVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self resetBallObject];
+    
     self.sideBar = [[CDRTranslucentSideBar alloc] init];
     self.sideBar.sideBarWidth = 200;
     self.sideBar.delegate = self;
@@ -140,6 +156,14 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    if(extrasTableView == tableView){
+        return self.extrasOptionArray.count;
+    }else if(overThrowTableView == tableView){
+        return self.overThrowOptionArray.count;
+    }
+    
+    
+    
     if([self.selectbtnvalueArray count] > 0)
     {
         return self.selectbtnvalueArray.count;
@@ -150,12 +174,22 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
         cell.backgroundColor = [UIColor clearColor];
+        
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+        cell.selectedBackgroundView = bgColorView;
     }
-    
-    cell.textLabel.text = [self.selectbtnvalueArray objectAtIndex:indexPath.row];
+    if(tableView == extrasTableView){
+        cell.textLabel.text = [self.extrasOptionArray objectAtIndex:indexPath.row];
+    }else if(tableView == overThrowTableView){
+        cell.textLabel.text = [self.overThrowOptionArray objectAtIndex:indexPath.row];
+    }else{
+        cell.textLabel.text = [self.selectbtnvalueArray objectAtIndex:indexPath.row];
+    }
     
     return cell;
 }
@@ -276,51 +310,60 @@
         [objextras removeFromSuperview];
     }
     
+    if(extrasTableView !=nil){
+        [extrasTableView removeFromSuperview];
+    }
+    
+    if(overThrowTableView !=nil){
+        [overThrowTableView removeFromSuperview];
+    }
+    
     UIButton *selectBtnTag=(UIButton*)sender;
     
-    if(selectBtnTag.tag==100)
+    if(selectBtnTag.tag==100)//Run one
     {
-        [self selectBtncolor_Action:@"100" :self.btn_run1 :0];
+        [self calculateRuns:selectBtnTag.tag];
     }
-    else if(selectBtnTag.tag==101)
+    else if(selectBtnTag.tag==101)// Run two
     {
-        [self selectBtncolor_Action:@"101" :self.btn_run2 :0];
+        [self calculateRuns:selectBtnTag.tag];
     }
-    else if(selectBtnTag.tag==102)
+    else if(selectBtnTag.tag==102)// Run three
     {
-        [self selectBtncolor_Action:@"102" :self.btn_run3 :0];
+        [self calculateRuns:selectBtnTag.tag];
     }
-    else if(selectBtnTag.tag==103)
+    else if(selectBtnTag.tag==103)//More Runs
     {
-        [self selectBtncolor_Action:@"103" :self.btn_highRun :0];
+        [self calculateRuns:selectBtnTag.tag];
         
-        [self highrunMethods:selectBtnTag];
     }
-    else if(selectBtnTag.tag==104)
+    else if(selectBtnTag.tag==104)// B4
     {
-        [self selectBtncolor_Action:@"104" :self.btn_B4 :0];
+        [self calculateRuns:selectBtnTag.tag];
     }
-    else if(selectBtnTag.tag==105)
+    else if(selectBtnTag.tag==105)// B6
     {
-        [self selectBtncolor_Action:@"105" :self.btn_B6 :0];
+        [self calculateRuns:selectBtnTag.tag];
     }
-    else if(selectBtnTag.tag==106)
+    else if(selectBtnTag.tag==106)//Extras
     {
-        [self selectBtncolor_Action:@"106" :self.btn_extras :0];
-        
-        self.selectbtnvalueArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
-        [self selelectbtnPop_View:selectBtnTag];
-        
+        [self extrasPopupMenu:selectBtnTag];
+        //[self selectBtncolor_Action:@"106" :self.btn_extras :0];
+        //self.selectbtnvalueArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
+        //[self selelectbtnPop_View:selectBtnTag];
     }
     else if(selectBtnTag.tag==107)
     {
         [self selectBtncolor_Action:@"107" :self.btn_wkts :0];
     }
-    else if(selectBtnTag.tag==108)
+    else if(selectBtnTag.tag==108)//Overthrow
     {
-        [self selectBtncolor_Action:@"108" :self.btn_overthrow :0];
-        self.selectbtnvalueArray=[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12", nil];
-        [self selelectbtnPop_View:selectBtnTag];
+        
+        [self overThrowPopupMenu:selectBtnTag];
+        
+        //  [self selectBtncolor_Action:@"108" :self.btn_overthrow :0];
+        //  self.selectbtnvalueArray=[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12", nil];
+        //  [self selelectbtnPop_View:selectBtnTag];
     }
     else if(selectBtnTag.tag==109)
     {
@@ -337,29 +380,6 @@
         [self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
         
         
-    }
-}
--(void) highrunMethods:(UIButton *) select_btn
-{
-    
-    if([self.btn_highRun.currentImage isEqual:[UIImage imageNamed:@"moreRuns"]])
-    {
-        [self.btn_highRun setImage:[UIImage imageNamed:@"dropDown"] forState:UIControlStateNormal];
-        CGFloat btn_1=[[self.btn_run1 currentTitle] integerValue]+3;
-        CGFloat btn_2=[[self.btn_run2 currentTitle] integerValue]+3;
-        CGFloat btn_3=[[self.btn_run3 currentTitle] integerValue]+3;
-        self.btn_run1.titleLabel.text=[NSString stringWithFormat:@"%f",btn_1];
-        self.btn_run2.titleLabel.text=[NSString stringWithFormat:@"%f",btn_2];
-        self.btn_run3.titleLabel.text=[NSString stringWithFormat:@"%f",btn_3];
-    }
-    else{
-        [self.btn_highRun setImage:[UIImage imageNamed:@"moreRuns"] forState:UIControlStateNormal];
-        CGFloat btn_1=[[self.btn_run1 currentTitle] integerValue]-3;
-        CGFloat btn_2=[[self.btn_run2 currentTitle] integerValue]-3;
-        CGFloat btn_3=[[self.btn_run3 currentTitle] integerValue]-3;
-        self.btn_run1.titleLabel.text=[NSString stringWithFormat:@"%f",btn_1];
-        self.btn_run2.titleLabel.text=[NSString stringWithFormat:@"%f",btn_2];
-        self.btn_run3.titleLabel.text=[NSString stringWithFormat:@"%f",btn_3];
     }
 }
 -(void)selelectbtnPop_View:(UIButton *)btn_selection
@@ -545,5 +565,762 @@
     // Dispose of any resources that can be recreated.
 }
 
+//Sathish
+
+-(void) resetBallObject{
+    self.ballEventRecord = [[BallEventRecord alloc] init];
+    self.ballEventRecord.objIsFour = 0;
+    self.ballEventRecord.objIssix = 0;
+    self.ballEventRecord.objRuns = 0;
+    
+    
+    self.ballEventRecord.objByes = 0;
+    self.ballEventRecord.objLegByes = 0;
+    self.ballEventRecord.objWide = 0;
+    self.ballEventRecord.objNoball = 0;
+    self.ballEventRecord.objIslegalball = 0;
+    
+    
+    self.ballEventRecord.objOverthrow = 0;
+    self.ballEventRecord.objTotalruns = 0;
+    self.ballEventRecord.objPenalty = 0;
+    self.ballEventRecord.objTotalextras = 0;
+    self.ballEventRecord.objGrandtotal = 0;
+    
+    isMoreRunSelected = NO;
+    isExtrasSelected = NO;
+    isOverthrowSelected = NO;
+}
+
+//Set to normal background for runs button
+-(void) resetRunsBoundriesView{
+    [self unselectedButtonBg: self.btn_run1];
+    [self unselectedButtonBg: self.btn_run2];
+    [self unselectedButtonBg: self.btn_run3];
+    [self unselectedButtonBg: self.btn_B4];
+    
+    if(!isMoreRunSelected && (self.ballEventRecord.objLegByes.integerValue==1 || self.ballEventRecord.objWide.integerValue==1 || self.ballEventRecord.objByes.integerValue==1)){//Check for LB,WD,B selected
+        [self disableButtonBg: self.btn_B6];
+    }else{
+        [self unselectedButtonBg: self.btn_B6];
+    }
+    
+    
+}
+
+//set selected background for runs button
+-(void) setRunsBoundriesView{
+    if(self.ballEventRecord.objRuns.integerValue == 4 || self.ballEventRecord.objRuns.integerValue == 1){
+        [self selectedButtonBg: self.btn_run1];
+    }else if(self.ballEventRecord.objRuns.integerValue == 5 || self.ballEventRecord.objRuns.integerValue == 2){
+        [self selectedButtonBg: self.btn_run2];
+    }else if(self.ballEventRecord.objRuns.integerValue == 6 || self.ballEventRecord.objRuns.integerValue == 3){
+        [self selectedButtonBg: self.btn_run3];
+    }else if(self.ballEventRecord.objRuns.integerValue == 7 || self.ballEventRecord.objIsFour.integerValue == 1){
+        [self selectedButtonBg: self.btn_B4];
+    }else if(self.ballEventRecord.objRuns.integerValue == 8 || self.ballEventRecord.objIssix.integerValue == 1){
+        [self selectedButtonBg: self.btn_B6];
+    }
+    
+}
+
+//Reset boundries and runs values
+-(void) resetRunsBoundriesValue{
+    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+    self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
+    self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];
+}
+
+-(void) calculateRuns:(long) tagNumber{
+    
+    switch ((int)tagNumber) {
+        case 100: // One, Four
+            [self resetRunsBoundriesView];
+            [self resetOverthrowViewAndValue];//Reset overthrow
+            
+            if(self.ballEventRecord.objRuns.integerValue == 1){// If runs has one
+                [self resetRunsBoundriesValue];
+                
+                if(isMoreRunSelected){//More selected
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:4];
+                    [self selectedButtonBg: self.btn_run1];
+                }else{
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+                    [self unselectedButtonBg: self.btn_run1];
+                }
+                
+            }else if(self.ballEventRecord.objRuns.integerValue == 4){// If runs has four
+                [self resetRunsBoundriesValue];
+                
+                if(!isMoreRunSelected){//More unselected
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:1];
+                    [self selectedButtonBg: self.btn_run1];
+                }else{
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+                    [self unselectedButtonBg: self.btn_run1];
+                }
+            }else{//Other run selected
+                [self resetRunsBoundriesValue];
+                self.ballEventRecord.objRuns = [NSNumber numberWithInt:isMoreRunSelected?4:1];
+                [self selectedButtonBg: self.btn_run1];
+            }
+            
+            break;
+        case 101: // Two, Five
+            
+            [self resetRunsBoundriesView];
+            [self resetOverthrowViewAndValue];//Reset overthrow
+            
+            if(self.ballEventRecord.objRuns.integerValue == 2){// If runs has two
+                [self resetRunsBoundriesValue];
+                
+                if(isMoreRunSelected){//More selected
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:5];
+                    [self selectedButtonBg: self.btn_run2];
+                }else{
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+                    [self unselectedButtonBg: self.btn_run2];
+                }
+                
+            }else if(self.ballEventRecord.objRuns.integerValue == 5){// If runs has five
+                [self resetRunsBoundriesValue];
+                
+                if(!isMoreRunSelected){//More unselected
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:2];
+                    [self selectedButtonBg: self.btn_run2];
+                }else{
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+                    [self unselectedButtonBg: self.btn_run2];
+                }
+            }else{//Other run selected
+                [self resetRunsBoundriesValue];
+                self.ballEventRecord.objRuns = [NSNumber numberWithInt:isMoreRunSelected?5:2];
+                [self selectedButtonBg: self.btn_run2];
+                
+            }
+            
+            break;
+        case 102: // Three, Six
+            
+            [self resetRunsBoundriesView];
+            [self resetOverthrowViewAndValue];//Reset overthrow
+            
+            if(self.ballEventRecord.objRuns.integerValue == 3){// If runs has three
+                [self resetRunsBoundriesValue];
+                
+                if(isMoreRunSelected){//More selected
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:6];
+                    [self selectedButtonBg: self.btn_run3];
+                }else{
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+                    [self unselectedButtonBg: self.btn_run3];
+                }
+                
+            }else if(self.ballEventRecord.objRuns.integerValue == 6){// If runs has six
+                [self resetRunsBoundriesValue];
+                
+                if(!isMoreRunSelected){//More unselected
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:3];
+                    [self selectedButtonBg: self.btn_run3];
+                }else{
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+                    [self unselectedButtonBg: self.btn_run3];
+                }
+            }else{//Other run selected
+                [self resetRunsBoundriesValue];
+                self.ballEventRecord.objRuns = [NSNumber numberWithInt:isMoreRunSelected?6:3];
+                [self selectedButtonBg: self.btn_run3];
+                
+            }
+            
+            break;
+        case 103: // More runs
+            [self didSelectMoreRuns];
+            break;
+        case 104: // B4, Seven
+            
+            [self resetRunsBoundriesView];
+            [self resetOverthrowViewAndValue];//Reset overthrow
+            
+            if(self.ballEventRecord.objIsFour.integerValue == 1){// If isFour has one
+                [self resetRunsBoundriesValue];
+                if(!isMoreRunSelected){//More unselected
+                    self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];
+                    [self unselectedButtonBg: self.btn_B4];
+                }else{
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:7];
+                    [self selectedButtonBg: self.btn_B4];
+                }
+                
+            } else if( self.ballEventRecord.objRuns.integerValue == 7){// If runs has seven
+                [self resetRunsBoundriesValue];
+                if(isMoreRunSelected){//More selected
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+                    [self unselectedButtonBg: self.btn_B4];
+                }else{
+                    self.ballEventRecord.objIsFour = [NSNumber numberWithInt:1];
+                    [self selectedButtonBg: self.btn_B4];
+                    
+                    //Hide overthrow
+                    [self disableButtonBg: self.btn_overthrow];
+                    self.btn_overthrow.userInteractionEnabled=NO;
+                    self.ballEventRecord.objOverthrow = [NSNumber numberWithInt:0];
+                }
+            }
+            else{//Other run selected
+                [self resetRunsBoundriesValue];
+                if(isMoreRunSelected){//More selected
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:7];
+                }else{
+                    self.ballEventRecord.objIsFour = [NSNumber numberWithInt:1];
+                    
+                    //Hide overthrow
+                    [self disableButtonBg: self.btn_overthrow];
+                    self.btn_overthrow.userInteractionEnabled=NO;
+                    self.ballEventRecord.objOverthrow = [NSNumber numberWithInt:0];
+                    
+                }
+                
+                [self selectedButtonBg: self.btn_B4];
+                
+            }
+            
+            break;
+        case 105: // B6, Eight
+            
+            [self resetRunsBoundriesView];
+            [self resetOverthrowViewAndValue];//Reset overthrow
+            
+            
+            if(self.ballEventRecord.objIssix.integerValue == 1){// If isSix has one
+                [self resetRunsBoundriesValue];
+                if(!isMoreRunSelected){//More unselected
+                    self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
+                    [self unselectedButtonBg: self.btn_B6];
+                }else{
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:8];
+                    [self selectedButtonBg: self.btn_B6];
+                }
+                
+            } else if( self.ballEventRecord.objRuns.integerValue == 8){// If runs has eight
+                [self resetRunsBoundriesValue];
+                if(isMoreRunSelected){//More selected
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+                    [self unselectedButtonBg: self.btn_B6];
+                }else{
+                    self.ballEventRecord.objIssix = [NSNumber numberWithInt:1];
+                    [self selectedButtonBg: self.btn_B6];
+                    
+                    //Hide overthrow
+                    [self disableButtonBg: self.btn_overthrow];
+                    self.btn_overthrow.userInteractionEnabled=NO;
+                    self.ballEventRecord.objOverthrow = [NSNumber numberWithInt:0];
+                }
+            }
+            else{//Other run selected
+                [self resetRunsBoundriesValue];
+                if(isMoreRunSelected){//More selected
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:8];
+                }else{
+                    self.ballEventRecord.objIssix = [NSNumber numberWithInt:1];
+                    
+                    //Hide overthrow
+                    [self disableButtonBg: self.btn_overthrow];
+                    self.btn_overthrow.userInteractionEnabled=NO;
+                    self.ballEventRecord.objOverthrow = [NSNumber numberWithInt:0];
+                }
+                
+                [self selectedButtonBg: self.btn_B6];
+                
+            }
+            
+            break;
+        default:
+            break;
+    }
+    
+}
+
+-(void) resetOverthrowViewAndValue{
+    if(self.ballEventRecord.objIssix.integerValue == 1 || self.ballEventRecord.objIsFour.integerValue == 1){
+        [self unselectedButtonBg: self.btn_overthrow];
+        self.btn_overthrow.userInteractionEnabled=YES;
+        self.ballEventRecord.objOverthrow = [NSNumber numberWithInt:0];
+    }
+}
+
+//Selected background for button
+-(void) selectedButtonBg:(UIButton *) select_btn{
+    select_btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+}
+
+//Normal background for button
+-(void) unselectedButtonBg:(UIButton *) select_btn{
+    
+    select_btn.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+}
+
+//Disable background for button
+-(void) disableButtonBg:(UIButton *) select_btn{
+    select_btn.backgroundColor=[UIColor colorWithRed:(139/255.0f) green:(137/255.0f) blue:(137/255.0f) alpha:1.0f];
+}
+
+
+
+
+//Toggle for more runs
+-(void) didSelectMoreRuns
+{
+    
+    //[self resetRunsBoundriesView];
+    [self unselectedButtonBg: self.btn_run1];
+    [self unselectedButtonBg: self.btn_run2];
+    [self unselectedButtonBg: self.btn_run3];
+    [self unselectedButtonBg: self.btn_B4];
+    [self unselectedButtonBg: self.btn_B6];
+   
+    
+    if(!isMoreRunSelected)//Not selected state
+    {
+        //Set down toggle image
+        [self.btn_highRun setImage:[UIImage imageNamed:@"dropDown"] forState:UIControlStateNormal];
+        [self selectedButtonBg: self.btn_highRun];
+        isMoreRunSelected = YES;
+    
+        //Set run button name
+        [self.btn_run1 setTitle:@"4" forState:UIControlStateNormal];
+        [self.btn_run2 setTitle:@"5" forState:UIControlStateNormal];
+        [self.btn_run3 setTitle:@"6" forState:UIControlStateNormal];
+        [self.btn_B4 setTitle:@"7" forState:UIControlStateNormal];
+        [self.btn_B6 setTitle:@"8" forState:UIControlStateNormal];
+        
+        //Set run button highlight
+        if(self.ballEventRecord.objRuns.integerValue == 4){
+            [self selectedButtonBg: self.btn_run1];
+        }else if(self.ballEventRecord.objRuns.integerValue == 5){
+            [self selectedButtonBg: self.btn_run2];
+        }else if(self.ballEventRecord.objRuns.integerValue == 6){
+            [self selectedButtonBg: self.btn_run3];
+        }else if(self.ballEventRecord.objRuns.integerValue == 7){
+            [self selectedButtonBg: self.btn_B4];
+        }else if(self.ballEventRecord.objRuns.integerValue == 8){
+            [self selectedButtonBg: self.btn_B6];
+        }
+        
+        self.btn_B6.userInteractionEnabled=YES;
+    }
+    else{//Selected state
+        
+        //Set up toggle image
+        [self.btn_highRun setImage:[UIImage imageNamed:@"moreRuns"] forState:UIControlStateNormal];
+        [self unselectedButtonBg: self.btn_highRun];
+        isMoreRunSelected = NO;
+        
+        //Set run button values
+        [self.btn_run1 setTitle:@"1" forState:UIControlStateNormal];
+        [self.btn_run2 setTitle:@"2" forState:UIControlStateNormal];
+        [self.btn_run3 setTitle:@"3" forState:UIControlStateNormal];
+        [self.btn_B4 setTitle:@"B4" forState:UIControlStateNormal];
+        [self.btn_B6 setTitle:@"B6" forState:UIControlStateNormal];
+        
+        //Set run button highlight
+        if(self.ballEventRecord.objRuns.integerValue == 1){
+            [self selectedButtonBg: self.btn_run1];
+        }else if(self.ballEventRecord.objRuns.integerValue == 2){
+            [self selectedButtonBg: self.btn_run2];
+        }else if(self.ballEventRecord.objRuns.integerValue == 3){
+            [self selectedButtonBg: self.btn_run3];
+        }else if(self.ballEventRecord.objIsFour.integerValue == 1){
+            [self selectedButtonBg: self.btn_B4];
+        }
+        
+        if(self.ballEventRecord.objIssix.integerValue == 1){
+                [self selectedButtonBg: self.btn_B6];
+        }else{
+            if(self.ballEventRecord.objLegByes.integerValue==1 || self.ballEventRecord.objWide.integerValue==1 || self.ballEventRecord.objByes.integerValue==1){//Check for LB,WD,B selected
+                [self disableButtonBg:self.btn_B6];
+                self.btn_B6.userInteractionEnabled=NO;
+            }
+        }
+        
+        
+    }
+}
+
+// Fetch extras list based on perviously selected option
+-(NSMutableArray*) getExtrasOptionArray{
+    
+    NSMutableArray *extrasOptionArray;
+    
+    if(self.ballEventRecord.objWide.integerValue == 1){//if wide enable
+        extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide", nil];
+    }else if(self.ballEventRecord.objIssix.integerValue == 1){//if B6 enable
+        extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall", nil];
+    }else{// Default
+        extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
+    }
+    
+    return extrasOptionArray;
+}
+
+//Extras popup screen
+-(void) extrasPopupMenu:(UIButton *)btn_selection
+{
+    
+    if(isExtrasSelected){//Already open state
+        
+        
+        if(self.ballEventRecord.objNoball.integerValue ==0 && self.ballEventRecord.objWide.integerValue ==0 && self.ballEventRecord.objByes.integerValue ==0 && self.ballEventRecord.objLegByes.integerValue ==0){//Nothing selected
+            
+            [self unselectedButtonBg:btn_selection];
+        }else{//If any one selected
+            
+            [self selectedButtonBg:btn_selection];
+        }
+        
+        if(extrasTableView!=nil){
+            [extrasTableView removeFromSuperview];
+        }
+        
+        
+        isExtrasSelected = NO;
+        
+    }else{ // Not open state
+        //Extras option array
+        self.extrasOptionArray=[self getExtrasOptionArray];
+        
+        //Table view
+        extrasTableView=[[UITableView alloc]initWithFrame:CGRectMake(btn_selection.frame.origin.x+btn_selection.frame.size.width+10, btn_selection.frame.origin.y-50,100,200)];
+        extrasTableView.backgroundColor=[UIColor whiteColor];
+        extrasTableView.allowsMultipleSelection = YES;
+        extrasTableView.dataSource = self;
+        extrasTableView.delegate = self;
+        [self.commonleftrightview addSubview:extrasTableView];
+        [extrasTableView reloadData];
+        
+        //Set highlight for selected options
+        if(self.ballEventRecord.objNoball.integerValue!=0){
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+        if(self.ballEventRecord.objWide.integerValue!=0){
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+        if(self.ballEventRecord.objByes.integerValue!=0){
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+            [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+        if(self.ballEventRecord.objLegByes.integerValue!=0){
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+            [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        }
+        
+        //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        //  [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        
+        //         indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        //        [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        //
+        
+        [self selectedButtonBg:btn_selection];
+        isExtrasSelected = YES;
+    }
+    
+}
+
+//Shows popup for over throw
+-(void) overThrowPopupMenu:(UIButton *)btn_selection
+{
+    
+    if(isOverthrowSelected){// Already open state
+        if(overThrowTableView!=nil){
+            [overThrowTableView removeFromSuperview];
+        }
+        
+        if(self.ballEventRecord.objOverthrow.integerValue!=0){
+             [self selectedButtonBg:btn_selection];
+        }else{
+           [self unselectedButtonBg:btn_selection];
+        }
+
+        isOverthrowSelected = NO;
+        
+    }else{ // Not open state
+        //Overthrow option array
+        self.overThrowOptionArray = [[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12", nil];
+        
+        //Table view
+        overThrowTableView=[[UITableView alloc]initWithFrame:CGRectMake(btn_selection.frame.origin.x+btn_selection.frame.size.width+10, btn_selection.frame.origin.y-50,100,200)];
+        overThrowTableView.backgroundColor=[UIColor whiteColor];
+        overThrowTableView.dataSource = self;
+        overThrowTableView.delegate = self;
+        [self.commonleftrightview addSubview:overThrowTableView];
+        [overThrowTableView reloadData];
+        
+        if(self.ballEventRecord.objOverthrow!=0){
+            NSInteger position = [self.overThrowOptionArray indexOfObject:self.ballEventRecord.objOverthrow];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
+            [overThrowTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            
+            [overThrowTableView scrollToRowAtIndexPath:indexPath
+                                 atScrollPosition:UITableViewScrollPositionTop
+                                         animated:YES];
+        }
+
+        //    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        //  [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        
+        //         indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        //        [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        //
+        
+        [self selectedButtonBg:btn_selection];
+        isOverthrowSelected = YES;
+    }
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"Index Path %d",indexPath.row);
+    
+    if(tableView == extrasTableView){//Extras table view
+        
+        if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"NoBall"]){//No ball
+        
+            
+            //Wide
+            self.ballEventRecord.objWide = [NSNumber numberWithInt:0];
+           // NSIndexPath *wideIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            //[extrasTableView deselectRowAtIndexPath:wideIndexPath animated:NO];
+            
+            //Recreate list
+            //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
+            self.extrasOptionArray=[self getExtrasOptionArray];
+            [extrasTableView reloadData];
+            
+            //B6
+            if(self.ballEventRecord.objIssix.integerValue == 0){
+                if(!isMoreRunSelected){
+                    [self unselectedButtonBg:self.btn_B6];
+                }
+                self.btn_B6.userInteractionEnabled=YES;
+            }
+            
+            //Noball
+            NSIndexPath *noballIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+            [extrasTableView selectRowAtIndexPath:noballIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            self.ballEventRecord.objNoball = [NSNumber numberWithInt:1];
+            
+            //Byes Select
+            if(self.ballEventRecord.objByes.integerValue !=0){
+                NSIndexPath *byesIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+                [extrasTableView selectRowAtIndexPath:byesIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            }
+            
+            //Legbyes Select
+            if(self.ballEventRecord.objLegByes.integerValue !=0){
+                NSIndexPath *legbyesIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+                [extrasTableView selectRowAtIndexPath:legbyesIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            }
+            
+        }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"Wide"]){//Wide
+            
+            //B6
+            self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
+            if(!isMoreRunSelected){
+                [self disableButtonBg:self.btn_B6];
+                self.btn_B6.userInteractionEnabled=NO;
+            }
+            //Legbyes
+            self.ballEventRecord.objLegByes = [NSNumber numberWithInt:0];
+            
+            //Byes
+            self.ballEventRecord.objByes = [NSNumber numberWithInt:0];
+            
+            //Noball
+            self.ballEventRecord.objNoball = [NSNumber numberWithInt:0];
+            
+            //Wide Value
+            self.ballEventRecord.objWide = [NSNumber numberWithInt:1];
+            
+            //Recreate list
+            //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide", nil];
+            self.extrasOptionArray=[self getExtrasOptionArray];
+            [extrasTableView reloadData];
+            
+            //Wide Selector
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+            [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            
+            
+            
+        }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"Byes"]){//Byes
+            //B6
+            self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
+            if(!isMoreRunSelected){
+                [self disableButtonBg:self.btn_B6];
+                self.btn_B6.userInteractionEnabled=NO;
+            }
+            //Legbyes
+            self.ballEventRecord.objLegByes = [NSNumber numberWithInt:0];
+            NSIndexPath *legbyesIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+            [extrasTableView deselectRowAtIndexPath:legbyesIndexPath animated:NO];
+            
+            //Byes
+            self.ballEventRecord.objByes = [NSNumber numberWithInt:1];
+            
+            
+        }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"LegByes"]){//Legbyes
+            //B6
+            self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
+            if(!isMoreRunSelected){
+                [self disableButtonBg:self.btn_B6];
+                self.btn_B6.userInteractionEnabled=NO;
+
+            }
+            
+            //Byes
+            self.ballEventRecord.objByes = [NSNumber numberWithInt:0];
+            NSIndexPath *byesIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+            [extrasTableView deselectRowAtIndexPath:byesIndexPath animated:NO];
+            
+            //Legbyes
+            self.ballEventRecord.objLegByes = [NSNumber numberWithInt:1];
+            
+        }
+    }else if(tableView == overThrowTableView){//Over throw table view
+        if( self.ballEventRecord.objOverthrow != [self.overThrowOptionArray objectAtIndex:indexPath.row]){
+            self.ballEventRecord.objOverthrow = [self.overThrowOptionArray objectAtIndex:indexPath.row];
+            [overThrowTableView removeFromSuperview];
+            isOverthrowSelected = NO;
+            
+            if(self.ballEventRecord.objOverthrow!=0){
+                [self selectedButtonBg:self.btn_overthrow];
+                //self.btn_RBW.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:0.5f];
+            }else{
+                [self unselectedButtonBg:self.btn_overthrow];
+               // self.btn_RBW.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
+            }
+        }else{
+            self.ballEventRecord.objOverthrow = [NSNumber numberWithInteger:0];
+            [overThrowTableView removeFromSuperview];
+            [self unselectedButtonBg:self.btn_overthrow];
+           // self.btn_RBW.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
+            
+            isOverthrowSelected = NO;
+        }
+        
+    }
+    //    for (NSIndexPath *indexPath in extrasTableView.indexPathsForSelectedRows) {
+    //        NSLog(@"Loop %d",indexPath.row);
+    //    }
+    //  rowcount = count;
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
+    NSLog(@"D Index Path %d",indexPath.row);
+    if(tableView == extrasTableView){//Extras Table view
+        if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"NoBall"]){//No ball
+            
+            //Noball
+            self.ballEventRecord.objNoball = [NSNumber numberWithInt:0];
+            
+            //Recreate list
+            //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
+            self.extrasOptionArray=[self getExtrasOptionArray];
+            [extrasTableView reloadData];
+            
+            
+            if(self.ballEventRecord.objIssix.integerValue == 0){
+                [self unselectedButtonBg:self.btn_B6];
+                self.btn_B6.userInteractionEnabled=YES;
+            }
+            
+            //Byes Select
+            if(self.ballEventRecord.objByes.integerValue !=0){
+                NSIndexPath *byesIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
+                [extrasTableView selectRowAtIndexPath:byesIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            }
+            
+            //Legbyes Select
+            if(self.ballEventRecord.objLegByes.integerValue !=0){
+                NSIndexPath *legbyesIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+                [extrasTableView selectRowAtIndexPath:legbyesIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            }
+            
+        }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"Wide"]){//Wide
+            
+            
+            //B6
+            self.btn_B6.userInteractionEnabled=YES;
+            if(!isMoreRunSelected){
+                [self unselectedButtonBg:self.btn_B6];
+            }
+            
+            //Wide
+            self.ballEventRecord.objWide = [NSNumber numberWithInt:0];
+            
+            //Recreate list
+            //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
+            self.extrasOptionArray=[self getExtrasOptionArray];
+            [extrasTableView reloadData];
+            
+            
+            
+        }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"Byes"]){//Byes
+            
+            //B6
+            [self unselectedButtonBg:self.btn_B6];
+            self.btn_B6.userInteractionEnabled=YES;
+            
+            //Wide
+            self.ballEventRecord.objByes = [NSNumber numberWithInt:0];
+            
+            
+        }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"LegByes"]){
+            
+            //B6
+            [self unselectedButtonBg:self.btn_B6];
+            self.btn_B6.userInteractionEnabled=YES;
+            
+            //Wide
+            self.ballEventRecord.objLegByes = [NSNumber numberWithInt:0];
+            
+        }
+    }
+    //    for (NSIndexPath *indexPath in extrasTableView.indexPathsForSelectedRows) {
+    //        NSLog(@"D Loop %d",indexPath.row);
+    //    }
+}
+
+
+-(void) selectExtrasOption{
+    
+    [extrasTableView reloadData];
+    
+    if([self.ballEventRecord objNoball].integerValue==1){
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        
+    }
+    
+    if([self.ballEventRecord objWide].integerValue==1){
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    }
+    
+    if([self.ballEventRecord objLegByes].integerValue==1){
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        
+    }
+    
+    if([self.ballEventRecord objByes].integerValue==1){
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+        [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        
+    }
+}
 
 @end
