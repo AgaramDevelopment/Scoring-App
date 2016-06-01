@@ -9,7 +9,7 @@
 #import "SelectPlayersVC.h"
 #import "SelectPlayerRecord.h"
 #import "SelectPlayerCVCell.h"
-
+#import "PlayerOrderLevelVC.h"
 
 #import "DBManager.h"
 
@@ -238,7 +238,15 @@ static NSString * const reuseIdentifier = @"Cell";
             SelectPlayerRecord *selectedPlayerFilterRecord = [self.selectedPlayerArray objectAtIndex:i];
             NSString *recordStatus = [[selectedPlayerFilterRecord isSelected]boolValue]? @"MSC001":@"MSC002";
             [DBManager updateSelectedPlayersResultCode:[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus];
-        }}else{
+            
+        }
+        PlayerOrderLevelVC *viewController = [[PlayerOrderLevelVC alloc] init];
+        
+        // push a new stack
+        [self.navigationController pushViewController:viewController animated:YES];
+        
+    
+}else{
             [self showDialog:@"Please select minimum seven players" andTitle:@""];
         }
     

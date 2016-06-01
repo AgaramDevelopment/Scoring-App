@@ -80,6 +80,7 @@
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
        TossDetailsVC *tossvc =(TossDetailsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"TossDetails"];
     tossvc.MATCHCODE=_Matchcode;
+    tossvc.CompetitionCode=_competitionCode;
         [tossvc setModalPresentationStyle:UIModalPresentationFullScreen];
         [self presentViewController:tossvc animated:NO completion:nil];
     

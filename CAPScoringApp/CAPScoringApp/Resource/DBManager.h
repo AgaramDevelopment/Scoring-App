@@ -44,4 +44,17 @@
 
 // StartBall Record
 + (BOOL) saveBallEventData:(BallEventRecord *) ballEventData;
+
++ (BOOL) insertBallCodeAppealEvent:(BallEventRecord *) ballcode;
++ (BOOL) insertBallCodeFieldEvent :(BallEventRecord *) ballcode;
++ (BOOL) insertBallCodeWicketEvent :(BallEventRecord *) ballcode;
+
++ (NSMutableArray *) getballcodemethod;
++ (NSMutableArray *) getTeamCodemethod;
++ (NSMutableArray *) getInningsNomethod;
++ (NSMutableArray *) getDayNomethod;
+
+
++(NSMutableArray *)AppealRetrieveEventData;
++(NSMutableArray *)getOtwRtw;
 @end
