@@ -39,6 +39,8 @@
 		CE1FBF641CF9984B00A9B6FE /* FixturesRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1FBF631CF9984B00A9B6FE /* FixturesRecord.m */; };
 		CE1FBF671CF9A05B00A9B6FE /* OfficialMasterRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1FBF661CF9A05B00A9B6FE /* OfficialMasterRecord.m */; };
 		CE1FBF6A1CF9A17500A9B6FE /* MatchOfficalsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1FBF691CF9A17500A9B6FE /* MatchOfficalsVC.m */; };
+		CE22AF261CFD584D0026E0DA /* AppealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE22AF251CFD584D0026E0DA /* AppealCell.m */; };
+		CE22AF291CFD58720026E0DA /* AppealRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE22AF281CFD58720026E0DA /* AppealRecord.m */; };
 		CE3DD4191CFBFA1600D93A55 /* SelectPlayersVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD4181CFBFA1600D93A55 /* SelectPlayersVC.m */; };
 		CE3DD41C1CFBFA7000D93A55 /* SelectPlayerRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD41B1CFBFA7000D93A55 /* SelectPlayerRecord.m */; };
 		CE3DD41F1CFBFB4F00D93A55 /* SelectPlayerCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD41E1CFBFB4F00D93A55 /* SelectPlayerCVCell.m */; };
@@ -121,6 +123,10 @@
 		CE1FBF661CF9A05B00A9B6FE /* OfficialMasterRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialMasterRecord.m; sourceTree = "<group>"; };
 		CE1FBF681CF9A17500A9B6FE /* MatchOfficalsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchOfficalsVC.h; sourceTree = "<group>"; };
 		CE1FBF691CF9A17500A9B6FE /* MatchOfficalsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchOfficalsVC.m; sourceTree = "<group>"; };
+		CE22AF241CFD584D0026E0DA /* AppealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealCell.h; sourceTree = "<group>"; };
+		CE22AF251CFD584D0026E0DA /* AppealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppealCell.m; sourceTree = "<group>"; };
+		CE22AF271CFD58720026E0DA /* AppealRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealRecord.h; sourceTree = "<group>"; };
+		CE22AF281CFD58720026E0DA /* AppealRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppealRecord.m; sourceTree = "<group>"; };
 		CE3DD4171CFBFA1600D93A55 /* SelectPlayersVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPlayersVC.h; sourceTree = "<group>"; };
 		CE3DD4181CFBFA1600D93A55 /* SelectPlayersVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectPlayersVC.m; sourceTree = "<group>"; };
 		CE3DD41A1CFBFA7000D93A55 /* SelectPlayerRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectPlayerRecord.h; sourceTree = "<group>"; };
@@ -194,6 +200,7 @@
 				CE0018481CF460C900668D8B /* Fonts */,
 				CE0018371CF4308C00668D8B /* SubClass */,
 				CE0018361CF4308000668D8B /* ViewController */,
+				CE0018401CF431D300668D8B /* EventRecord.h */,
 				CE0018351CF4306200668D8B /* Frameworks */,
 				CE0018341CF4305100668D8B /* ReSource */,
 				CE0018011CF42FA500668D8B /* AppDelegate.h */,
@@ -289,6 +296,8 @@
 				CE1FBF5D1CF992C900A9B6FE /* FixturesCell.m */,
 				CE3DD41D1CFBFB4F00D93A55 /* SelectPlayerCVCell.h */,
 				CE3DD41E1CFBFB4F00D93A55 /* SelectPlayerCVCell.m */,
+				CE22AF241CFD584D0026E0DA /* AppealCell.h */,
+				CE22AF251CFD584D0026E0DA /* AppealCell.m */,
 			);
 			name = SubClass;
 			sourceTree = "<group>";
@@ -298,7 +307,6 @@
 			children = (
 				CE0F19BE1CF5D3D60030FFA2 /* UserRecord.h */,
 				CE0F19BF1CF5D3D60030FFA2 /* UserRecord.m */,
-				CE0018401CF431D300668D8B /* EventRecord.h */,
 				CE0018411CF431D300668D8B /* EventRecord.m */,
 				CE1FBF561CF96EDB00A9B6FE /* TossDeatilsEvent.h */,
 				CE1FBF571CF96EDB00A9B6FE /* TossDeatilsEvent.m */,
@@ -310,6 +318,8 @@
 				CE3DD41B1CFBFA7000D93A55 /* SelectPlayerRecord.m */,
 				CE3DD4231CFBFDD400D93A55 /* TeamLogoRecords.h */,
 				CE3DD4241CFBFDD400D93A55 /* TeamLogoRecords.m */,
+				CE22AF271CFD58720026E0DA /* AppealRecord.h */,
+				CE22AF281CFD58720026E0DA /* AppealRecord.m */,
 			);
 			name = Records;
 			sourceTree = "<group>";
@@ -490,12 +500,14 @@
 				CE3DD41F1CFBFB4F00D93A55 /* SelectPlayerCVCell.m in Sources */,
 				CE1FBF641CF9984B00A9B6FE /* FixturesRecord.m in Sources */,
 				2479C3E31CFC3FD300A3CCA2 /* BallEventRecord.m in Sources */,
+				CE22AF261CFD584D0026E0DA /* AppealCell.m in Sources */,
 				CE0F19BD1CF5D1460030FFA2 /* Reachability.m in Sources */,
 				CE00185C1CF4667400668D8B /* CDRTranslucentSideBar.m in Sources */,
 				CE3DD41C1CFBFA7000D93A55 /* SelectPlayerRecord.m in Sources */,
 				CE1FBF5B1CF96FE400A9B6FE /* BowlerEvent.m in Sources */,
 				CE1FBF6A1CF9A17500A9B6FE /* MatchOfficalsVC.m in Sources */,
 				CE1FBF671CF9A05B00A9B6FE /* OfficialMasterRecord.m in Sources */,
+				CE22AF291CFD58720026E0DA /* AppealRecord.m in Sources */,
 				CE3DD4221CFBFD4400D93A55 /* NewMatchSetUpVC.m in Sources */,
 				CE1FBF611CF997FB00A9B6FE /* FixturesVC.m in Sources */,
 				CE0018471CF4485500668D8B /* TorunamentVC.m in Sources */,

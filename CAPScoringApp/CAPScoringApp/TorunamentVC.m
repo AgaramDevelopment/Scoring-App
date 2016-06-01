@@ -124,11 +124,6 @@
 -(IBAction)didClickNextBtnAction:(id)sender
 {
     
-    
-
-
-    
-    
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FixturesVC *Fixvc =(FixturesVC*) [storyBoard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
     EventRecord *eventRecord = [selectindexarray objectAtIndex:0] ;

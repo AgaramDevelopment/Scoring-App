@@ -44,4 +44,15 @@
 
 // StartBall Record
 + (BOOL) saveBallEventData:(BallEventRecord *) ballEventData;
+
+
+
+
+
+//Appeal
++(NSMutableArray *)AppealRetrieveEventData;
+
+
+//OTW and RTW
++(NSMutableArray *)getOtwRtw;
 @end

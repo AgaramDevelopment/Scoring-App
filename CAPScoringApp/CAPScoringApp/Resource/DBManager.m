@@ -15,6 +15,7 @@
 #import "OfficialMasterRecord.h"
 #import "SelectPlayerRecord.h"
 #import "BallEventRecord.h"
+#import "AppealRecord.h"
 
 @implementation DBManager
 
@@ -594,7 +595,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbpath, &mySqliteDB) == SQLITE_OK)
     {
         
-        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO BALLEVENTS(BALLCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,DAYNO,INNINGSNO,OVERNO,BALLNO,BALLCOUNT,OVERBALLCOUNT,SESSIONNO,STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE,UMPIRE2CODE,ATWOROTW,BOWLINGEND,BOWLTYPE,SHOTTYPE,ISLEGALBALL,ISFOUR,ISSIX,RUNS,OVERTHROW,TOTALRUNS,WIDE,NOBALL,BYES,LEGBYES,PENALTY,TOTALEXTRAS,GRANDTOTAL,RBW,PMLINECODE,PMLENGTHCODE,PMX1,PMY1,PMX2,PMY3,WWREGION,WWX1,WWY1,WWX2,WWY2,BALLDURATION,ISAPPEAL,ISBEATEN,ISUNCOMFORT,ISWTB,ISRELEASESHOT,MARKEDFOREDIT,REMARKS,VIDEOFILENAME,SHOTTYPECATEGORY,PMSTRIKEPOINT,PMSTRIKEPOINTLINECODE,BALLSPEED,UNCOMFORTCLASSIFCATION) VALUES (\"DMSC1144C72B9B1FDDA000200000000001\",\"UCC0000001\", \"DMSC1144C72B9B1FDDA00020\", \"TEA0000001\",\"1\",\"1\",\"0\",\"1\",\"1\",\"1\",\"1 \",\"PYC0000007\",\"PYC0000008\",\"PYC0000027\",\"PYC0000146\",\"OFC0000001\",\"OFC0000002\",\"MSC150\",\"BWT0000009\",\"UCH0000001\",\"1\",\"1\",\"0\",\"1\",\"4\",\"5\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"5\",\"0\",\"MSC031\",\"MSC032\",\"1\",\"1\",\"113\",\"214\",1,\"MSC197\",\"157\",\"125\",\"107\",1,1,1,1,1,1,1,1,1,1,1,2,2,2,2)"];
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO BALLEVENTS(BALLCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,DAYNO,INNINGSNO,OVERNO,BALLNO,BALLCOUNT,OVERBALLCOUNT,SESSIONNO,STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE,UMPIRE2CODE,ATWOROTW,BOWLINGEND,BOWLTYPE,SHOTTYPE,ISLEGALBALL,ISFOUR,ISSIX,RUNS,OVERTHROW,TOTALRUNS,WIDE,NOBALL,BYES,LEGBYES,PENALTY,TOTALEXTRAS,GRANDTOTAL,RBW,PMLINECODE,PMLENGTHCODE,PMX1,PMY1,PMX2,PMY3,WWREGION,WWX1,WWY1,WWX2,WWY2,BALLDURATION,ISAPPEAL,ISBEATEN,ISUNCOMFORT,ISWTB,ISRELEASESHOT,MARKEDFOREDIT,REMARKS,VIDEOFILENAME,SHOTTYPECATEGORY,PMSTRIKEPOINT,PMSTRIKEPOINTLINECODE,BALLSPEED,UNCOMFORTCLASSIFCATION) VALUES (\"DMSC1144C72B9B1FDDA000200000000001\",\"UCC0000001\", \"DMSC1144C72B9B1FDDA00020\", \"TEA0000001\",\"1\",\"1\",\"0\",\"1\",\"1\",\"1\",\"1 \",\"PYC0000007\",\"PYC0000008\",\"PYC0000027\",\"PYC0000146\",\"OFC0000001\",\"OFC0000002\",\"%@\",\"BWT0000009\",\"UCH0000001\",\"1\",\"1\",\"0\",\"1\",\"4\",\"5\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"5\",\"0\",\"MSC031\",\"MSC032\",\"1\",\"1\",\"113\",\"214\",1,\"MSC197\",\"157\",\"125\",\"107\",1,1,1,1,1,1,1,1,1,1,1,2,2,2,2)",ballEventData.objAtworotw];
         
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(mySqliteDB, insert_stmt, -1, &statement, NULL);
@@ -611,6 +612,76 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     return success;
     
+    
+}
+
+
+
+
+//  Appeal Database
+
++(NSMutableArray *)AppealRetrieveEventData{
+    NSMutableArray *AppealeventArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:@"TNCA_DATABASE.sqlite"];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT * FROM METADATA WHERE METADATATYPECODE='MDT021'"];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            AppealRecord *appealrecord=[[AppealRecord alloc]init];
+            //            record.id=(int)sqlite3_column_int(statement, 0);
+            appealrecord.MetaSubCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            appealrecord.MetaSubCodeDescriptision=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+        
+            [AppealeventArray addObject:appealrecord];
+            
+        }
+    }
+    
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return AppealeventArray;
+    
+}
+
++(NSMutableArray *)getOtwRtw{
+    NSMutableArray *OtwRtwArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT METASUBCODE,METASUBCODEDESCRIPTION FROM METADATA WHERE METADATATYPECODE = 'MDT032'"];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            AppealRecord *appealrecord=[[AppealRecord alloc]init];
+            appealrecord.MetaSubCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            appealrecord.MetaSubCodeDescriptision=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            
+            [OtwRtwArray addObject:appealrecord];
+            
+        }
+    }
+    
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return OtwRtwArray;
     
 }
 
