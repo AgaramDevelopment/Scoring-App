@@ -10,6 +10,9 @@
 #import "CDRTranslucentSideBar.h"
 #import "DBManager.h"
 #import "BallEventRecord.h"
+#import "AppealRecord.h"
+#import "AppealCell.h"
+
 @interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource>
 {
     NSMutableArray *Btn_NameArray;
@@ -23,10 +26,13 @@
 @property (nonatomic, strong) CDRTranslucentSideBar *sideBar;
 @property (nonatomic, strong) CDRTranslucentSideBar *rightSideBar;
 @property(nonatomic,strong) NSMutableArray *selectbtnvalueArray;
+@property(nonatomic,strong) NSMutableArray *AppealValuesArray;
+@property(nonatomic,strong) NSMutableArray *otwRtwArray;
+
 @end
 
 @implementation ScorEnginVC
-
+@synthesize table_Appeal;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.sideBar = [[CDRTranslucentSideBar alloc] init];
@@ -58,6 +64,17 @@
     //
     //    // Set ContentView in SideBar
     //    [self.sideBar setContentViewInSideBar:tableView];
+    
+    
+     _View_Appeal.hidden=YES;
+    _view_table_select.hidden=YES;
+    _AppealValuesArray=[[NSMutableArray alloc]init];
+    _AppealValuesArray =[DBManager AppealRetrieveEventData];
+    
+    
+    //OTW and RTW
+    _otwRtwArray = [[NSMutableArray alloc]init];
+    //_otwRtwArray = [DBManager getOtwRtw];
     
     
 }
@@ -232,6 +249,10 @@
     if([self.selectbtnvalueArray count] > 0)
     {
         return self.selectbtnvalueArray.count;
+        
+    }else if (tableView == table_Appeal) {
+        
+        return self.AppealValuesArray.count;
     }
     
     return 0;
@@ -245,6 +266,33 @@
     }
     
     cell.textLabel.text = [self.selectbtnvalueArray objectAtIndex:indexPath.row];
+    
+    
+    
+    if (tableView == table_Appeal) {
+//        static NSString *CellIdentifier = @"Cell";
+//            AppealCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+//                                                                 forIndexPath:indexPath];
+//        
+//            AppealRecord *objAppealrecord=(AppealRecord*)[_AppealValuesArray objectAtIndex:indexPath.row];
+//        
+//        
+//            cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
+        
+//        
+//        static NSString *MyIdentifier4 = @"Cell";
+        
+                static NSString *CellIdentifier = @"Cell";
+                    AppealCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                                         forIndexPath:indexPath];
+        
+                    AppealRecord *objAppealrecord=(AppealRecord*)[_AppealValuesArray objectAtIndex:indexPath.row];
+        
+        
+                    cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
+        return cell;
+        
+    }
     
     return cell;
 }
@@ -327,6 +375,7 @@
         [DBManager insertBallCodeFieldEvent:objBalleventRecord];
         [DBManager insertBallCodeWicketEvent:objBalleventRecord];
         
+        //[DBManager saveBallEventData:objBalleventRecord otwOrRtw:];
     }
 }
 
@@ -512,12 +561,13 @@
     {
         [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
         [self.img_pichmap setImage:[UIImage imageNamed:@"pitchmap_img"]];
+           _View_Appeal.hidden=YES;
     }
     else if(selectBtnTag.tag==111)
     {
         [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
         [self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
-        
+         _View_Appeal.hidden=YES;
         
     }
 }
@@ -555,13 +605,24 @@
     [objextras reloadData];
     
 }
+
 -(IBAction)didClickRightSideBtn_Action:(id)sender
 {
     UIButton *selectBtnTag=(UIButton*)sender;
     //isSelectleftview=NO;
     if(selectBtnTag.tag==112)
     {
+        
         [self selectBtncolor_Action:@"112" :nil :201];
+        NSString *otw;
+        
+        AppealRecord *objAppealrecord=(AppealRecord*)[_otwRtwArray objectAtIndex:0];
+        otw = objAppealrecord.MetaSubCode;
+        
+        objBalleventRecord.objAtworotw = [NSString stringWithFormat:@"%@",otw];
+        
+        
+        
     }
     else if(selectBtnTag.tag==113)
     {
@@ -604,6 +665,9 @@
     else if(selectBtnTag.tag==122)
     {
         [self selectBtncolor_Action:@"122" :nil :211];
+         _View_Appeal.hidden=NO;
+        
+        
     }
     else if(selectBtnTag.tag==123)
     {
@@ -643,7 +707,7 @@
 {
     
 }
--(IBAction)didClickRemarkCancel_Action:(id)sender
+-(IBAction)didClickRemarkCancel_Action:(id)senderf
 {
     
 }
@@ -725,6 +789,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+_view_table_select.hidden=NO;
 }
 
 

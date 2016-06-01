@@ -112,4 +112,11 @@
 
 @property(nonatomic,strong) IBOutlet UIImageView * img_pichmap;
 
+
+//Appeal
+@property (strong, nonatomic) IBOutlet UIView *View_Appeal;
+
+@property (strong, nonatomic) IBOutlet UITableView *table_Appeal;
+@property (strong, nonatomic) IBOutlet UIView *view_table_select;
+
 @end

@@ -15,6 +15,7 @@
 #import "OfficialMasterRecord.h"
 #import "SelectPlayerRecord.h"
 #import "BallEventRecord.h"
+#import "AppealRecord.h"
 
 @implementation DBManager
 
@@ -78,7 +79,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             record.competitioncode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
             record.competitionname=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
             record.recordstatus=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
-                      [eventArray addObject:record];
+            [eventArray addObject:record];
             
         }
     }
@@ -167,7 +168,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     retVal=sqlite3_open([dbPath UTF8String], &dataBase);
     if(retVal ==0){
-
+        
         NSString *query=[NSString stringWithFormat:@"SELECT MR.TEAMACODE AS TEAMCODE,TMA.TEAMNAME AS TEAMNAME FROM MATCHREGISTRATION MR INNER JOIN TEAMMASTER TMA ON TMA.TEAMCODE = MR.TEAMACODE WHERE MR.MATCHCODE = '%@' UNION SELECT MR.TEAMBCODE AS TEAMCODE,TMB.TEAMNAME AS TEAMNAME  FROM MATCHREGISTRATION MR INNER JOIN TEAMMASTER TMB ON TMB.TEAMCODE = MR.TEAMBCODE WHERE MR.MATCHCODE = '%@'", MATCHCODE,MATCHCODE];
         NSLog(@"%@",query);
         stmt=[query UTF8String];
@@ -177,7 +178,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 NSLog(@"Success");
                 
                 EventRecord *record=[[EventRecord alloc]init];
-//need to edit
+                //need to edit
                 record.TEAMCODE_TOSSWONBY=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.TEAMNAME_TOSSWONBY=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 
@@ -214,9 +215,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             UserRecord *record=[[UserRecord alloc]init];
             record.MasterSubCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-          record.electedTo=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-
-                 [electedeventArray addObject:record];
+            record.electedTo=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            
+            [electedeventArray addObject:record];
         }
     }
     
@@ -248,12 +249,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 NSLog(@"Success");
                 
-            TossDeatilsEvent *record=[[TossDeatilsEvent alloc]init];
+                TossDeatilsEvent *record=[[TossDeatilsEvent alloc]init];
                 //need to edit
                 record.PlaercodeStrike_nonStrike=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.PlaerNameStrike_nonStrike=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 
-      //TEAMCODE_TOSSWONBY
+                //TEAMCODE_TOSSWONBY
                 [SrikerEventArray addObject:record];
                 
                 
@@ -293,7 +294,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                 //TEAMCODE_TOSSWONBY
                 [BowlerEventArray addObject:record];
-
+                
                 
                 
             }
@@ -400,7 +401,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 +(BOOL)updateFixtureInfo:(NSString*)comments matchCode:(NSString*) matchCode competitionCode:(NSString*)competitionCode  {
     
-   
+    
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -855,6 +856,77 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return ModiArray;
     
 }
+
+
+//  Appeal Database
+
++(NSMutableArray *)AppealRetrieveEventData{
+    NSMutableArray *AppealeventArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+  //  const char *dbpath = [databasePath UTF8String];
+
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT * FROM METADATA WHERE METADATATYPECODE='MDT021'"];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            AppealRecord *appealrecord=[[AppealRecord alloc]init];
+            //            record.id=(int)sqlite3_column_int(statement, 0);
+            appealrecord.MetaSubCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            appealrecord.MetaSubCodeDescriptision=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+            
+            [AppealeventArray addObject:appealrecord];
+            
+        }
+    }
+    
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return AppealeventArray;
+    
+}
+
++(NSMutableArray *)getOtwRtw{
+    NSMutableArray *OtwRtwArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT METASUBCODE,METASUBCODEDESCRIPTION FROM METADATA WHERE METADATATYPECODE = 'MDT032'"];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            AppealRecord *appealrecord=[[AppealRecord alloc]init];
+            appealrecord.MetaSubCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            appealrecord.MetaSubCodeDescriptision=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            
+            [OtwRtwArray addObject:appealrecord];
+            
+        }
+    }
+    
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return OtwRtwArray;
+    
+}
+
 
 
 @end

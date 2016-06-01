@@ -54,4 +54,7 @@
 + (NSMutableArray *) getInningsNomethod;
 + (NSMutableArray *) getDayNomethod;
 
+
++(NSMutableArray *)AppealRetrieveEventData;
++(NSMutableArray *)getOtwRtw;
 @end
