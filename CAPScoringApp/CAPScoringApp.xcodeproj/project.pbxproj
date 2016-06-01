@@ -12,6 +12,7 @@
 		24D24CE21CFEC71800CD75D2 /* PlayerOrderLevelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D24CE11CFEC71800CD75D2 /* PlayerOrderLevelVC.m */; };
 		24D24CEE1CFEF4EE00CD75D2 /* CustomNavigationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D24CED1CFEF4EE00CD75D2 /* CustomNavigationVC.m */; };
 		24D24CF01CFEF50000CD75D2 /* CustomNavigationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24D24CEF1CFEF50000CD75D2 /* CustomNavigationVC.xib */; };
+		24D24CF31CFF0A9A00CD75D2 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 24D24CF21CFF0A9A00CD75D2 /* TNCA_DATABASE.sqlite */; };
 		CE0018001CF42FA500668D8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0017FF1CF42FA500668D8B /* main.m */; };
 		CE0018031CF42FA500668D8B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018021CF42FA500668D8B /* AppDelegate.m */; };
 		CE0018091CF42FA500668D8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0018071CF42FA500668D8B /* Main.storyboard */; };
@@ -70,7 +71,6 @@
 /* Begin PBXFileReference section */
 		2479C3E11CFC3FCD00A3CCA2 /* BallEventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BallEventRecord.h; path = Resource/BallEvents/BallEventRecord.h; sourceTree = "<group>"; };
 		2479C3E21CFC3FD300A3CCA2 /* BallEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BallEventRecord.m; path = Resource/BallEvents/BallEventRecord.m; sourceTree = "<group>"; };
-		24D24CD81CFE9F5100CD75D2 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		24D24CDD1CFEC70A00CD75D2 /* ScorEnginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScorEnginVC.h; path = ViewController/ScoreEnginVC/ScorEnginVC.h; sourceTree = "<group>"; };
 		24D24CDE1CFEC70A00CD75D2 /* ScorEnginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScorEnginVC.m; path = ViewController/ScoreEnginVC/ScorEnginVC.m; sourceTree = "<group>"; };
 		24D24CE01CFEC71800CD75D2 /* PlayerOrderLevelVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerOrderLevelVC.h; path = ViewController/PlayerOrderlevelVC/PlayerOrderLevelVC.h; sourceTree = "<group>"; };
@@ -78,6 +78,7 @@
 		24D24CEC1CFEF4EE00CD75D2 /* CustomNavigationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationVC.h; sourceTree = "<group>"; };
 		24D24CED1CFEF4EE00CD75D2 /* CustomNavigationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationVC.m; sourceTree = "<group>"; };
 		24D24CEF1CFEF50000CD75D2 /* CustomNavigationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomNavigationVC.xib; sourceTree = "<group>"; };
+		24D24CF21CFF0A9A00CD75D2 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		CE0017FB1CF42FA500668D8B /* CAPScoringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CAPScoringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0017FF1CF42FA500668D8B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE0018011CF42FA500668D8B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -269,7 +270,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
-				24D24CD81CFE9F5100CD75D2 /* TNCA_DATABASE.sqlite */,
+				24D24CF21CFF0A9A00CD75D2 /* TNCA_DATABASE.sqlite */,
 				2479C3E01CFC3FBC00A3CCA2 /* ballevent */,
 				CE0F19BA1CF5D1460030FFA2 /* Reachability.h */,
 				CE0F19BB1CF5D1460030FFA2 /* Reachability.m */,
@@ -485,6 +486,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24D24CF31CFF0A9A00CD75D2 /* TNCA_DATABASE.sqlite in Resources */,
 				CE0018511CF460DE00668D8B /* RAJDHANI-REGULAR.TTF in Resources */,
 				24D24CF01CFEF50000CD75D2 /* CustomNavigationVC.xib in Resources */,
 				CE00184F1CF460DE00668D8B /* RAJDHANI-LIGHT.TTF in Resources */,

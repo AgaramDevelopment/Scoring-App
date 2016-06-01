@@ -16,9 +16,11 @@
 @end
 
 @implementation CustomNavigationVC
+@synthesize Btn_Back,lbl_titleName,mainView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     self.view.frame =CGRectMake(0,0, [[UIScreen mainScreen] bounds].size.width, 100);
     
     // Do any additional setup after loading the view.
