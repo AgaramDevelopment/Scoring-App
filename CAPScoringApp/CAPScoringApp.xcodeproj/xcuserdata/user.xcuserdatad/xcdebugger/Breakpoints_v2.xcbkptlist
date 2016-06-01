@@ -28,9 +28,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "-Btn_touch:"
-            landmarkType = "5">
+            endingLineNumber = "102">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -140,9 +138,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "201"
-            endingLineNumber = "201"
-            landmarkName = "+Electedto"
-            landmarkType = "5">
+            endingLineNumber = "201">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -156,9 +152,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "210"
-            endingLineNumber = "210"
-            landmarkName = "+Electedto"
-            landmarkType = "5">
+            endingLineNumber = "210">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -508,9 +502,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "657"
-            endingLineNumber = "657"
-            landmarkName = "+getOtwRtw"
-            landmarkType = "5">
+            endingLineNumber = "657">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -556,9 +548,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "589"
-            endingLineNumber = "589"
-            landmarkName = "+saveBallEventData:"
-            landmarkType = "5">
+            endingLineNumber = "589">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
