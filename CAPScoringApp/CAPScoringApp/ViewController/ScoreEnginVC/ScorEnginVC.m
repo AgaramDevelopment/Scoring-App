@@ -74,7 +74,7 @@
     
     //OTW and RTW
     _otwRtwArray = [[NSMutableArray alloc]init];
-    _otwRtwArray = [DBManager getOtwRtw];
+    //_otwRtwArray = [DBManager getOtwRtw];
     
     
 }
@@ -374,6 +374,10 @@
         
         
         [DBManager saveBallEventData:objBalleventRecord];
+        [DBManager insertBallCodeAppealEvent:objBalleventRecord];
+        [DBManager insertBallCodeFieldEvent:objBalleventRecord];
+        [DBManager insertBallCodeWicketEvent:objBalleventRecord];
+        
         //[DBManager saveBallEventData:objBalleventRecord otwOrRtw:];
     }
 }
