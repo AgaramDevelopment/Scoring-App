@@ -1,27 +1,26 @@
 //
-//  PlayerOrderLevelVC.m
+//  CustomNavigationVC.m
 //  CAPScoringApp
 //
 //  Created by RamaSubramanian on 01/06/16.
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
-#import "PlayerOrderLevelVC.h"
 #import "CustomNavigationVC.h"
-@interface PlayerOrderLevelVC ()
+
+@interface CustomNavigationVC ()
+{
+   
+}
 
 @end
 
-@implementation PlayerOrderLevelVC
+@implementation CustomNavigationVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.view.backgroundColor=[UIColor redColor];
-    CustomNavigationVC *vc=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
+    self.view.frame =CGRectMake(0,0, [[UIScreen mainScreen] bounds].size.width, 100);
     
-    [self.view addSubview:vc.view];
-                            
-   
     // Do any additional setup after loading the view.
 }
 

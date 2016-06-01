@@ -322,9 +322,6 @@
         [self timeLeftSinceDate:startBallTime];
         
         
-        
-        
-        
         [DBManager saveBallEventData:objBalleventRecord];
         [DBManager insertBallCodeAppealEvent:objBalleventRecord];
         [DBManager insertBallCodeFieldEvent:objBalleventRecord];

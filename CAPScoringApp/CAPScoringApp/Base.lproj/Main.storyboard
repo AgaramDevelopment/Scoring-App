@@ -643,15 +643,29 @@
                         <viewControllerLayoutGuide type="top" id="B4K-xH-1fk"/>
                         <viewControllerLayoutGuide type="bottom" id="VAp-jZ-sUL"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="bTM-RM-2b9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <view key="view" contentMode="scaleToFill" id="uz7-DJ-eGe">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cuz-F4-mS0">
+                                <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
+                                <color key="backgroundColor" red="1" green="0.44770115539999999" blue="0.40635159840000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.44770115539999999" blue="0.40635159840000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="Cuz-F4-mS0" firstAttribute="top" secondItem="uz7-DJ-eGe" secondAttribute="top" id="D6b-0c-kAf"/>
+                            <constraint firstAttribute="trailing" secondItem="Cuz-F4-mS0" secondAttribute="trailing" id="GBN-Eh-xSF"/>
+                            <constraint firstItem="Cuz-F4-mS0" firstAttribute="leading" secondItem="uz7-DJ-eGe" secondAttribute="leading" id="IDz-Jv-Gbb"/>
+                            <constraint firstItem="VAp-jZ-sUL" firstAttribute="top" secondItem="Cuz-F4-mS0" secondAttribute="bottom" id="rBg-R7-4ke"/>
+                        </constraints>
                     </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="768" height="1024"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="63Z-TC-MfA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-667" y="-159"/>
+            <point key="canvasLocation" x="-651" y="7"/>
         </scene>
         <!--Dash BoardVC-->
         <scene sceneID="MOd-ZQ-Pbe">
