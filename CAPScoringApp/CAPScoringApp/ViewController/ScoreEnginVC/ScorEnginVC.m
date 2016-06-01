@@ -28,11 +28,17 @@
     BOOL isExtrasSelected;
     BOOL isOverthrowSelected;
     
+    NSString * ballnoStr;
+    NSDate * startBallTime;
+    
 }
 
 
 @property(nonatomic,strong) NSMutableArray *extrasOptionArray;
 @property(nonatomic,strong) NSMutableArray *overThrowOptionArray;
+@property(nonatomic,strong) NSMutableArray *AppealValuesArray;
+@property(nonatomic,strong) NSMutableArray *otwRtwArray;
+
 
 @property (nonatomic, strong) CDRTranslucentSideBar *sideBar;
 @property (nonatomic, strong) CDRTranslucentSideBar *rightSideBar;
@@ -1324,6 +1330,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    _view_table_select.hidden=NO;
     NSLog(@"Index Path %d",indexPath.row);
     
     if(tableView == extrasTableView){//Extras table view
@@ -1566,11 +1573,11 @@
 }
 
 
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-_view_table_select.hidden=NO;
-}
+//
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//
+//}
 
 
 @end
