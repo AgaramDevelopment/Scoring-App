@@ -19,7 +19,8 @@
     BOOL isSelectleftview;
     UITableView* objextras;
     BallEventRecord *objBalleventRecord;
-    
+    NSString * ballnoStr;
+     NSDate * startBallTime;
 }
 
 @property (nonatomic, strong) CDRTranslucentSideBar *sideBar;
@@ -82,6 +83,94 @@
     self.btn_StartBall.userInteractionEnabled=NO;
     [self AllBtndisableMethod];
 }
+-(void)SaveBallEventREcordvalue
+{
+    objBalleventRecord=[[BallEventRecord alloc]init];
+    
+    NSMutableArray * teamCodeArray=[DBManager getTeamCodemethod];
+    if(teamCodeArray.count > 0 && teamCodeArray != NULL)
+    {
+        NSString * objTeamCode = [NSString stringWithFormat:@"%@",teamCodeArray.lastObject];
+        objBalleventRecord.objTeamcode =objTeamCode;
+    }
+    
+    NSMutableArray * inningsNoArray=[DBManager getInningsNomethod];
+    if(inningsNoArray.count > 0 && inningsNoArray != NULL)
+    {
+        NSString * objInningsno = [NSString stringWithFormat:@"%@",inningsNoArray.lastObject];
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
+        objBalleventRecord.objInningsno = [f numberFromString:objInningsno];
+        
+    }
+    
+    [self getDayNOValue];
+    NSMutableArray * ballCodevalueArray=[DBManager getballcodemethod];
+    NSLog(@"array : %@",[ballCodevalueArray lastObject]);
+    if(ballCodevalueArray.count > 0 && ballCodevalueArray!= NULL)
+    {
+        
+        NSString*ballcode= [NSString stringWithFormat:@"%@",ballCodevalueArray.lastObject];
+        
+        NSString *code = [ballcode substringFromIndex: [ballcode length] - 10];
+        
+        NSString * myURL = [NSString stringWithFormat:@"1%@",code];
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber * myNumber = [f numberFromString:myURL];
+        NSInteger value = [myNumber integerValue]+1;
+        NSString *addcode = [@(value) stringValue];
+        
+        NSString * ballno = [addcode substringFromIndex:1];
+        
+        
+        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballno];
+        NSLog(@"array : %@",ballnoStr);
+        
+        
+    }
+    else{
+        NSString * myURL = [NSString stringWithFormat:@"10000000001"];
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber * myNumber = [f numberFromString:myURL];
+        NSInteger value = [myNumber integerValue];
+        NSString *ballno1 = [@(value) stringValue];
+        NSString * ballno = [ballno1 substringFromIndex:1];
+        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballno];
+        NSLog(@"array : %@",ballnoStr);
+        
+    }
+    
+    
+    objBalleventRecord.objBallcode   = ballnoStr;
+    objBalleventRecord.objmatchcode=self.matchCode;
+    objBalleventRecord.objcompetitioncode=self.competitionCode;
+}
+
+-(void)getDayNOValue
+{
+    NSMutableArray * DayNoArray=[DBManager getDayNomethod];
+    NSString * objDayno;
+    if(DayNoArray.count > 0 && DayNoArray != NULL)
+    {
+        objDayno = [NSString stringWithFormat:@"%@",DayNoArray.lastObject];
+        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+        f.numberStyle = NSNumberFormatterDecimalStyle;
+        NSNumber * myNumber = [f numberFromString:objDayno];
+        NSInteger value = [myNumber integerValue]+1;
+        objBalleventRecord.objDayno = [NSNumber numberWithInteger:value];
+        objBalleventRecord.objSessionno = [NSNumber numberWithInteger:value];
+    }
+    else{
+        objDayno = @"1";
+        objBalleventRecord.objDayno=@1;
+        objBalleventRecord.objSessionno=@1;
+    }
+    
+    
+}
+
 
 #pragma mark - Gesture Handler
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
@@ -221,8 +310,35 @@
 -(IBAction)DidClickStartBall:(id)sender
 {
     NSLog(@"btnname=%@",self.btn_StartBall.currentTitle);
+    float startballandendballdifference;
+   
+      NSDate * EndBallTime;
     if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
     {
+        [self SaveBallEventREcordvalue];
+       startBallTime = [NSDate date];
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        // display in 12HR/24HR (i.e. 11:25PM or 23:25) format according to User Settings
+//        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+//        NSString *currentTime = [dateFormatter stringFromDate:today];
+//        
+//        NSString*text ;
+//        text = [currentTime stringByReplacingOccurrencesOfString:@"AM" withString:@""];
+//        text = [currentTime stringByReplacingOccurrencesOfString:@"PM" withString:@""];
+//        NSLog(@"User's current time in their preference format:%@",text);
+//         NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
+//        startBallTime = [dateFormatter1 dateFromString:currentTime];;
+        //startBallTime=[text floatValue];
+        
+        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        // or @"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
+        NSLog(@"%@",[dateFormatter stringFromDate:[NSDate date]]);
+        NSString *time =[dateFormatter stringFromDate:[NSDate date]];
+        
+        NSDateFormatter *dateFormatter1=[[NSDateFormatter alloc] init];
+        [dateFormatter1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        startBallTime= [dateFormatter1 dateFromString:time];
         [self.btn_StartBall setTitle:@"END BALL" forState:UIControlStateNormal];
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
         self.btn_StartOver.userInteractionEnabled=NO;
@@ -236,10 +352,77 @@
         self.btn_StartOver.userInteractionEnabled=YES;
         self.btn_StartBall.userInteractionEnabled=NO;
         [self AllBtndisableMethod];
+       //EndBallTime = [NSDate date];
+//        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+//        // display in 12HR/24HR (i.e. 11:25PM or 23:25) format according to User Settings
+//        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+//        NSString *currentTime = [dateFormatter stringFromDate:today];
+//        
+//        NSString*text ;
+//        text = [currentTime stringByReplacingOccurrencesOfString:@"AM" withString:@""];
+//        text = [currentTime stringByReplacingOccurrencesOfString:@"PM" withString:@""];
+//        NSLog(@"User's current time in their preference format:%@",text);
+//        
+//        EndBallTime =[text floatValue];
+        //startballandendballdifference =EndBallTime-startBallTime;
+        //objBalleventRecord.objballduration=startballandendballdifference;
+        
+        [self timeLeftSinceDate:startBallTime];
+        
+        
+        
+        
+        
         [DBManager saveBallEventData:objBalleventRecord];
         //[DBManager saveBallEventData:objBalleventRecord otwOrRtw:];
     }
 }
+
+
+
+
+-(NSMutableString*) timeLeftSinceDate: (NSDate *) dateT{
+    
+    NSMutableString *timeLeft = [[NSMutableString alloc]init];
+    
+    NSDate *today10am =[NSDate date];
+    
+    NSInteger seconds = [today10am timeIntervalSinceDate:dateT];
+    
+    NSInteger days = (int) (floor(seconds / (3600 * 24)));
+    if(days) seconds -= days * 3600 * 24;
+    
+    NSInteger hours = (int) (floor(seconds / 3600));
+    if(hours) seconds -= hours * 3600;
+    
+    NSInteger minutes = (int) (floor(seconds / 60));
+    if(minutes) seconds -= minutes * 60;
+    
+    if(days) {
+        [timeLeft appendString:[NSString stringWithFormat:@"%ld Days", (long)days*-1]];
+        
+        objBalleventRecord.objballduration=[NSNumber numberWithInteger:days];
+    }
+    
+    if(hours) {
+        [timeLeft appendString:[NSString stringWithFormat: @"%ld H", (long)hours*-1]];
+         objBalleventRecord.objballduration=[NSNumber numberWithInteger:hours];
+    }
+    
+    if(minutes) {
+        [timeLeft appendString: [NSString stringWithFormat: @"%ld M",(long)minutes*-1]];
+         objBalleventRecord.objballduration=[NSNumber numberWithInteger:minutes];
+    }
+    
+    if(seconds) {
+        [timeLeft appendString:[NSString stringWithFormat: @"%lds", (long)seconds*1]];
+        objBalleventRecord.objballduration=[NSNumber numberWithInteger:seconds];
+    }
+    
+    return timeLeft;
+}
+
+
 -(IBAction)DidClickStartOver:(id)sender
 {
     NSLog(@"btnname%@",self.btn_StartOver.currentTitle);
@@ -248,9 +431,7 @@
         self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
         [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
         self.btn_StartBall.userInteractionEnabled=YES;
-        self.btn_StartOver.userInteractionEnabled=NO;
-        
-        
+       
     }
     else
     {

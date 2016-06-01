@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2479C3E31CFC3FD300A3CCA2 /* BallEventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 2479C3E21CFC3FD300A3CCA2 /* BallEventRecord.m */; };
+		24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D24CDE1CFEC70A00CD75D2 /* ScorEnginVC.m */; };
+		24D24CE21CFEC71800CD75D2 /* PlayerOrderLevelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D24CE11CFEC71800CD75D2 /* PlayerOrderLevelVC.m */; };
 		CE0018001CF42FA500668D8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0017FF1CF42FA500668D8B /* main.m */; };
 		CE0018031CF42FA500668D8B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018021CF42FA500668D8B /* AppDelegate.m */; };
 		CE0018091CF42FA500668D8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0018071CF42FA500668D8B /* Main.storyboard */; };
@@ -16,7 +18,6 @@
 		CE0018191CF42FA500668D8B /* CAPScoringAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018181CF42FA500668D8B /* CAPScoringAppTests.m */; };
 		CE0018241CF42FA500668D8B /* CAPScoringAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018231CF42FA500668D8B /* CAPScoringAppUITests.m */; };
 		CE00183B1CF430E400668D8B /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018391CF430E400668D8B /* DBManager.m */; };
-		CE00183E1CF4317900668D8B /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = CE00183D1CF4317900668D8B /* TNCA_DATABASE.sqlite */; };
 		CE0018421CF431D300668D8B /* EventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018411CF431D300668D8B /* EventRecord.m */; };
 		CE0018441CF431EA00668D8B /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0018431CF431EA00668D8B /* libsqlite3.0.tbd */; };
 		CE0018471CF4485500668D8B /* TorunamentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018461CF4485500668D8B /* TorunamentVC.m */; };
@@ -25,7 +26,6 @@
 		CE0018501CF460DE00668D8B /* RAJDHANI-MEDIUM.TTF in Resources */ = {isa = PBXBuildFile; fileRef = CE00184B1CF460DE00668D8B /* RAJDHANI-MEDIUM.TTF */; };
 		CE0018511CF460DE00668D8B /* RAJDHANI-REGULAR.TTF in Resources */ = {isa = PBXBuildFile; fileRef = CE00184C1CF460DE00668D8B /* RAJDHANI-REGULAR.TTF */; };
 		CE0018521CF460DE00668D8B /* RAJDHANI-SEMIBOLD.TTF in Resources */ = {isa = PBXBuildFile; fileRef = CE00184D1CF460DE00668D8B /* RAJDHANI-SEMIBOLD.TTF */; };
-		CE0018561CF4642400668D8B /* ScorEnginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018551CF4642400668D8B /* ScorEnginVC.m */; };
 		CE00185C1CF4667400668D8B /* CDRTranslucentSideBar.m in Sources */ = {isa = PBXBuildFile; fileRef = CE00185B1CF4667400668D8B /* CDRTranslucentSideBar.m */; };
 		CE0F19B81CF5D0480030FFA2 /* LoginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0F19B71CF5D0480030FFA2 /* LoginVC.m */; };
 		CE0F19BD1CF5D1460030FFA2 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0F19BB1CF5D1460030FFA2 /* Reachability.m */; };
@@ -68,6 +68,11 @@
 /* Begin PBXFileReference section */
 		2479C3E11CFC3FCD00A3CCA2 /* BallEventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BallEventRecord.h; path = Resource/BallEvents/BallEventRecord.h; sourceTree = "<group>"; };
 		2479C3E21CFC3FD300A3CCA2 /* BallEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BallEventRecord.m; path = Resource/BallEvents/BallEventRecord.m; sourceTree = "<group>"; };
+		24D24CD81CFE9F5100CD75D2 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
+		24D24CDD1CFEC70A00CD75D2 /* ScorEnginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScorEnginVC.h; path = ViewController/ScoreEnginVC/ScorEnginVC.h; sourceTree = "<group>"; };
+		24D24CDE1CFEC70A00CD75D2 /* ScorEnginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScorEnginVC.m; path = ViewController/ScoreEnginVC/ScorEnginVC.m; sourceTree = "<group>"; };
+		24D24CE01CFEC71800CD75D2 /* PlayerOrderLevelVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerOrderLevelVC.h; path = ViewController/PlayerOrderlevelVC/PlayerOrderLevelVC.h; sourceTree = "<group>"; };
+		24D24CE11CFEC71800CD75D2 /* PlayerOrderLevelVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerOrderLevelVC.m; path = ViewController/PlayerOrderlevelVC/PlayerOrderLevelVC.m; sourceTree = "<group>"; };
 		CE0017FB1CF42FA500668D8B /* CAPScoringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CAPScoringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0017FF1CF42FA500668D8B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE0018011CF42FA500668D8B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -84,7 +89,6 @@
 		CE0018251CF42FA500668D8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE0018381CF430E400668D8B /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManager.h; path = Resource/DBManager.h; sourceTree = "<group>"; };
 		CE0018391CF430E400668D8B /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManager.m; path = Resource/DBManager.m; sourceTree = "<group>"; };
-		CE00183D1CF4317900668D8B /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		CE0018401CF431D300668D8B /* EventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventRecord.h; path = Resource/EventRecord.h; sourceTree = "<group>"; };
 		CE0018411CF431D300668D8B /* EventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventRecord.m; path = Resource/EventRecord.m; sourceTree = "<group>"; };
 		CE0018431CF431EA00668D8B /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -95,8 +99,6 @@
 		CE00184B1CF460DE00668D8B /* RAJDHANI-MEDIUM.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RAJDHANI-MEDIUM.TTF"; path = "Custom Font/RAJDHANI-MEDIUM.TTF"; sourceTree = "<group>"; };
 		CE00184C1CF460DE00668D8B /* RAJDHANI-REGULAR.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RAJDHANI-REGULAR.TTF"; path = "Custom Font/RAJDHANI-REGULAR.TTF"; sourceTree = "<group>"; };
 		CE00184D1CF460DE00668D8B /* RAJDHANI-SEMIBOLD.TTF */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RAJDHANI-SEMIBOLD.TTF"; path = "Custom Font/RAJDHANI-SEMIBOLD.TTF"; sourceTree = "<group>"; };
-		CE0018541CF4642400668D8B /* ScorEnginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScorEnginVC.h; sourceTree = "<group>"; };
-		CE0018551CF4642400668D8B /* ScorEnginVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScorEnginVC.m; sourceTree = "<group>"; };
 		CE00185A1CF4667400668D8B /* CDRTranslucentSideBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDRTranslucentSideBar.h; path = SubClass/CDRTranslucentSideBar/CDRTranslucentSideBar.h; sourceTree = "<group>"; };
 		CE00185B1CF4667400668D8B /* CDRTranslucentSideBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDRTranslucentSideBar.m; path = SubClass/CDRTranslucentSideBar/CDRTranslucentSideBar.m; sourceTree = "<group>"; };
 		CE0F19B61CF5D0480030FFA2 /* LoginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginVC.h; sourceTree = "<group>"; };
@@ -174,6 +176,15 @@
 			name = ballevent;
 			sourceTree = "<group>";
 		};
+		24D24CD91CFEC60C00CD75D2 /* PlayerorderLevel */ = {
+			isa = PBXGroup;
+			children = (
+				24D24CE01CFEC71800CD75D2 /* PlayerOrderLevelVC.h */,
+				24D24CE11CFEC71800CD75D2 /* PlayerOrderLevelVC.m */,
+			);
+			name = PlayerorderLevel;
+			sourceTree = "<group>";
+		};
 		CE0017F21CF42FA500668D8B = {
 			isa = PBXGroup;
 			children = (
@@ -243,11 +254,11 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				24D24CD81CFE9F5100CD75D2 /* TNCA_DATABASE.sqlite */,
 				2479C3E01CFC3FBC00A3CCA2 /* ballevent */,
 				CE0F19BA1CF5D1460030FFA2 /* Reachability.h */,
 				CE0F19BB1CF5D1460030FFA2 /* Reachability.m */,
 				CE00183F1CF431C100668D8B /* Records */,
-				CE00183D1CF4317900668D8B /* TNCA_DATABASE.sqlite */,
 				CE0018381CF430E400668D8B /* DBManager.h */,
 				CE0018391CF430E400668D8B /* DBManager.m */,
 				CE1FBF621CF9984B00A9B6FE /* FixturesRecord.h */,
@@ -267,6 +278,7 @@
 		CE0018361CF4308000668D8B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				24D24CD91CFEC60C00CD75D2 /* PlayerorderLevel */,
 				CE0018531CF463DF00668D8B /* ScorEnginVC */,
 				CE0018451CF4485500668D8B /* TorunamentVC.h */,
 				CE0018461CF4485500668D8B /* TorunamentVC.m */,
@@ -339,8 +351,8 @@
 		CE0018531CF463DF00668D8B /* ScorEnginVC */ = {
 			isa = PBXGroup;
 			children = (
-				CE0018541CF4642400668D8B /* ScorEnginVC.h */,
-				CE0018551CF4642400668D8B /* ScorEnginVC.m */,
+				24D24CDD1CFEC70A00CD75D2 /* ScorEnginVC.h */,
+				24D24CDE1CFEC70A00CD75D2 /* ScorEnginVC.m */,
 			);
 			name = ScorEnginVC;
 			sourceTree = "<group>";
@@ -461,7 +473,6 @@
 				CE00184F1CF460DE00668D8B /* RAJDHANI-LIGHT.TTF in Resources */,
 				CE00180E1CF42FA500668D8B /* LaunchScreen.storyboard in Resources */,
 				CE00180B1CF42FA500668D8B /* Assets.xcassets in Resources */,
-				CE00183E1CF4317900668D8B /* TNCA_DATABASE.sqlite in Resources */,
 				CE0018501CF460DE00668D8B /* RAJDHANI-MEDIUM.TTF in Resources */,
 				CE00184E1CF460DE00668D8B /* RAJDHANI-BOLD.TTF in Resources */,
 				CE0018521CF460DE00668D8B /* RAJDHANI-SEMIBOLD.TTF in Resources */,
@@ -493,7 +504,6 @@
 				CE1FBF581CF96EDB00A9B6FE /* TossDeatilsEvent.m in Sources */,
 				CE0F19C91CF6C2CC0030FFA2 /* TossDetailsVC.m in Sources */,
 				CE00183B1CF430E400668D8B /* DBManager.m in Sources */,
-				CE0018561CF4642400668D8B /* ScorEnginVC.m in Sources */,
 				CE0F19B81CF5D0480030FFA2 /* LoginVC.m in Sources */,
 				CE0018421CF431D300668D8B /* EventRecord.m in Sources */,
 				CE0F19C01CF5D3D60030FFA2 /* UserRecord.m in Sources */,
@@ -505,6 +515,7 @@
 				CE00185C1CF4667400668D8B /* CDRTranslucentSideBar.m in Sources */,
 				CE3DD41C1CFBFA7000D93A55 /* SelectPlayerRecord.m in Sources */,
 				CE1FBF5B1CF96FE400A9B6FE /* BowlerEvent.m in Sources */,
+				24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */,
 				CE1FBF6A1CF9A17500A9B6FE /* MatchOfficalsVC.m in Sources */,
 				CE1FBF671CF9A05B00A9B6FE /* OfficialMasterRecord.m in Sources */,
 				CE22AF291CFD58720026E0DA /* AppealRecord.m in Sources */,
@@ -517,6 +528,7 @@
 				CE1FBF5E1CF992C900A9B6FE /* FixturesCell.m in Sources */,
 				CE3DD4251CFBFDD400D93A55 /* TeamLogoRecords.m in Sources */,
 				CE0018001CF42FA500668D8B /* main.m in Sources */,
+				24D24CE21CFEC71800CD75D2 /* PlayerOrderLevelVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

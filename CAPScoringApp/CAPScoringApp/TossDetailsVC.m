@@ -610,6 +610,8 @@ return 1;
                 UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             
                 ScorEnginVC *scoreEngine =(ScorEnginVC*) [storyBoard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+               scoreEngine.matchCode=self.MATCHCODE;
+               scoreEngine.competitionCode=self.CompetitionCode;
                 //Fixvc.CompitionCode=selectindexarray;
                 [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
                 [self presentViewController:scoreEngine animated:NO completion:nil];

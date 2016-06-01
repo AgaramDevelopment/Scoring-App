@@ -74,10 +74,15 @@
 
 
 -(void) tournmentView{
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-      TorunamentVC*tournmentVc =(TorunamentVC*) [storyBoard instantiateViewControllerWithIdentifier:@"tornmentid"];
-    [tournmentVc setModalPresentationStyle:UIModalPresentationFullScreen];
-    [self presentViewController:tournmentVc animated:NO completion:nil];
+    
+    TorunamentVC*tournmentVc = [[TorunamentVC alloc]init];
+    
+    tournmentVc =  (TorunamentVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"tornmentid"];
+ [self.navigationController pushViewController:tournmentVc animated:YES];
+//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//      TorunamentVC*tournmentVc =(TorunamentVC*) [storyBoard instantiateViewControllerWithIdentifier:@"tornmentid"];
+//    [tournmentVc setModalPresentationStyle:UIModalPresentationFullScreen];
+//    [self presentViewController:tournmentVc animated:NO completion:nil];
     
 }
 @end

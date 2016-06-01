@@ -185,12 +185,22 @@
         _view_teamB.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
         
     }
+    SelectPlayersVC * selectvc = [[SelectPlayersVC alloc]init];
     
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SelectPlayersVC *selectvc =(SelectPlayersVC*) [storyBoard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
-    selectvc.teamCode=teamBcode;
-    [selectvc setModalPresentationStyle:UIModalPresentationFullScreen];
-    [self presentViewController:selectvc animated:NO completion:nil];
+    selectvc =  (SelectPlayersVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
+    
+   selectvc.teamCode=teamBcode;
+    
+    [self.navigationController pushViewController:selectvc animated:YES];
+    
+    
+    
+    
+//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    SelectPlayersVC *selectvc =(SelectPlayersVC*) [storyBoard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
+//    selectvc.teamCode=teamBcode;
+//    [selectvc setModalPresentationStyle:UIModalPresentationFullScreen];
+//    [self presentViewController:selectvc animated:NO completion:nil];
 }
 
 - (IBAction)btn_selectPlayersTeamA:(id)sender {
@@ -207,12 +217,21 @@
     NSLog(@"COUNT = %@",countTeam);
     
     
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    SelectPlayersVC *selectvc =(SelectPlayersVC*) [storyBoard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
-      selectvc.teamCode=teamAcode;
+    SelectPlayersVC * selectvc = [[SelectPlayersVC alloc]init];
+    
+    selectvc =  (SelectPlayersVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
+    
+    selectvc.teamCode=teamAcode;
     selectvc.matchCode = matchCode;
-    [selectvc setModalPresentationStyle:UIModalPresentationFullScreen];
-    [self presentViewController:selectvc animated:NO completion:nil];
+    
+    [self.navigationController pushViewController:selectvc animated:YES];
+    
+//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    SelectPlayersVC *selectvc =(SelectPlayersVC*) [storyBoard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
+//      selectvc.teamCode=teamAcode;
+//    selectvc.matchCode = matchCode;
+//    [selectvc setModalPresentationStyle:UIModalPresentationFullScreen];
+//    [self presentViewController:selectvc animated:NO completion:nil];
     
     
 }
@@ -235,13 +254,21 @@
     
     [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
     
+    MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
     
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    MatchOfficalsVC *matchvc =(MatchOfficalsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"matchofficial"];
-    //matchvc.teamCode=teamAcode;
+    matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
+  
     matchvc.Matchcode = matchCode;
-    [matchvc setModalPresentationStyle:UIModalPresentationFullScreen];
-    [self presentViewController:matchvc animated:NO completion:nil];
+    
+    [self.navigationController pushViewController:matchvc animated:YES];
+    
+    
+//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    MatchOfficalsVC *matchvc =(MatchOfficalsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"matchofficial"];
+//    //matchvc.teamCode=teamAcode;
+//    matchvc.Matchcode = matchCode;
+//    [matchvc setModalPresentationStyle:UIModalPresentationFullScreen];
+//    [self presentViewController:matchvc animated:NO completion:nil];
 
     
     
