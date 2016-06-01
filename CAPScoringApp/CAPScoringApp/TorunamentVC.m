@@ -26,10 +26,10 @@
 @synthesize resultArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
+    
     // Do any additional setup after loading the view.
     [self.tableView setHidden:YES];
-     self.Nextbtn_outlet.enabled = NO;
+    self.Nextbtn_outlet.enabled = NO;
     //[self didClickNextBtnAction setHidden:YES];
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -76,12 +76,12 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-   
+    
     selectindexarray=[[NSMutableArray alloc]init];
     EventRecord *objEventRecord=(EventRecord*)[resultArray objectAtIndex:indexPath.row];
     self.selectMatchName.text =objEventRecord.competitionname;
     [selectindexarray addObject:objEventRecord];
-
+    
     self.tableView.hidden=YES;
     isEnableTbl=YES;
     
@@ -98,8 +98,8 @@
 - (IBAction)Btn_touch:(id)sender {
     if(isEnableTbl==YES)
     {
-         resultArray=[[NSMutableArray alloc]init];
-      NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
+        resultArray=[[NSMutableArray alloc]init];
+        NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
         for(int i=0; i < [FetchCompitionArray count]; i++)
         {
             
@@ -112,9 +112,9 @@
             }
             //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
         }
-            
         
-       [self.tableView reloadData];
+        
+        [self.tableView reloadData];
         self.tableView.hidden=NO;
         isEnableTbl=NO;
         self.Nextbtn_outlet.enabled = YES;
@@ -125,8 +125,8 @@
 {
     
     
-
-
+    
+    
     
     
     UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

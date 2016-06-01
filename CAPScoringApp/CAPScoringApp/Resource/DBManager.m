@@ -60,7 +60,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 +(NSMutableArray *)RetrieveEventData{
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
     int retVal;
-    NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:@"TNCA_DATABASE.sqlite"];
+    NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
@@ -95,7 +95,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 +(BOOL)checkExpiryDate: (NSString *) userId{
     int retVal;
-    NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:@"TNCA_DATABASE.sqlite"];
+    NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
@@ -123,7 +123,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 +(NSMutableArray *)checkUserLogin: (NSString *) userName password: (NSString *) password{
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
     int retVal;
-    NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:@"TNCA_DATABASE.sqlite"];
+    NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
@@ -161,7 +161,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 +(NSMutableArray *)checkTossDetailsWonby: (NSString *) MATCHCODE{
     NSMutableArray *TOSSWonArray=[[NSMutableArray alloc]init];
     int retVal;
-    NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:@"TNCA_DATABASE.sqlite"];
+    NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
@@ -199,7 +199,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 +(NSMutableArray *)Electedto{
     NSMutableArray *electedeventArray=[[NSMutableArray alloc]init];
     int retVal;
-    NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:@"TNCA_DATABASE.sqlite"];
+    NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
@@ -233,7 +233,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 +(NSMutableArray *)StrikerNonstriker: (NSString *) MATCHCODE :(NSString *) TeamCODE{
     NSMutableArray *SrikerEventArray=[[NSMutableArray alloc]init];
     int retVal;
-    NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:@"TNCA_DATABASE.sqlite"];
+    NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
@@ -271,7 +271,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 +(NSMutableArray *)Bowler: (NSString *) MATCHCODE :(NSString *) TeamCODE{
     NSMutableArray *BowlerEventArray=[[NSMutableArray alloc]init];
     int retVal;
-    NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:@"TNCA_DATABASE.sqlite"];
+    NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;

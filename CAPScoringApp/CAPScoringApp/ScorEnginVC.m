@@ -58,7 +58,7 @@
     //    // Set ContentView in SideBar
     //    [self.sideBar setContentViewInSideBar:tableView];
     
-     [self SaveBallEventREcordvalue];
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -266,6 +266,7 @@
     float EndBallTime;
     if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
     {
+        [self SaveBallEventREcordvalue];
         NSDate *today = [NSDate date];
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         // display in 12HR/24HR (i.e. 11:25PM or 23:25) format according to User Settings
@@ -319,9 +320,7 @@
         self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
         [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
         self.btn_StartBall.userInteractionEnabled=YES;
-        self.btn_StartOver.userInteractionEnabled=NO;
-        
-        
+       
     }
     else
     {
