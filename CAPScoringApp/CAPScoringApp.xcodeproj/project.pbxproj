@@ -16,7 +16,6 @@
 		CE0018191CF42FA500668D8B /* CAPScoringAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018181CF42FA500668D8B /* CAPScoringAppTests.m */; };
 		CE0018241CF42FA500668D8B /* CAPScoringAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018231CF42FA500668D8B /* CAPScoringAppUITests.m */; };
 		CE00183B1CF430E400668D8B /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018391CF430E400668D8B /* DBManager.m */; };
-		CE00183E1CF4317900668D8B /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = CE00183D1CF4317900668D8B /* TNCA_DATABASE.sqlite */; };
 		CE0018421CF431D300668D8B /* EventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018411CF431D300668D8B /* EventRecord.m */; };
 		CE0018441CF431EA00668D8B /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0018431CF431EA00668D8B /* libsqlite3.0.tbd */; };
 		CE0018471CF4485500668D8B /* TorunamentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018461CF4485500668D8B /* TorunamentVC.m */; };
@@ -66,6 +65,7 @@
 /* Begin PBXFileReference section */
 		2479C3E11CFC3FCD00A3CCA2 /* BallEventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BallEventRecord.h; path = Resource/BallEvents/BallEventRecord.h; sourceTree = "<group>"; };
 		2479C3E21CFC3FD300A3CCA2 /* BallEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BallEventRecord.m; path = Resource/BallEvents/BallEventRecord.m; sourceTree = "<group>"; };
+		24D24CD81CFE9F5100CD75D2 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		CE0017FB1CF42FA500668D8B /* CAPScoringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CAPScoringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0017FF1CF42FA500668D8B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE0018011CF42FA500668D8B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -82,7 +82,6 @@
 		CE0018251CF42FA500668D8B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CE0018381CF430E400668D8B /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManager.h; path = Resource/DBManager.h; sourceTree = "<group>"; };
 		CE0018391CF430E400668D8B /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManager.m; path = Resource/DBManager.m; sourceTree = "<group>"; };
-		CE00183D1CF4317900668D8B /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		CE0018401CF431D300668D8B /* EventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventRecord.h; path = Resource/EventRecord.h; sourceTree = "<group>"; };
 		CE0018411CF431D300668D8B /* EventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventRecord.m; path = Resource/EventRecord.m; sourceTree = "<group>"; };
 		CE0018431CF431EA00668D8B /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
@@ -236,11 +235,11 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				24D24CD81CFE9F5100CD75D2 /* TNCA_DATABASE.sqlite */,
 				2479C3E01CFC3FBC00A3CCA2 /* ballevent */,
 				CE0F19BA1CF5D1460030FFA2 /* Reachability.h */,
 				CE0F19BB1CF5D1460030FFA2 /* Reachability.m */,
 				CE00183F1CF431C100668D8B /* Records */,
-				CE00183D1CF4317900668D8B /* TNCA_DATABASE.sqlite */,
 				CE0018381CF430E400668D8B /* DBManager.h */,
 				CE0018391CF430E400668D8B /* DBManager.m */,
 				CE1FBF621CF9984B00A9B6FE /* FixturesRecord.h */,
@@ -451,7 +450,6 @@
 				CE00184F1CF460DE00668D8B /* RAJDHANI-LIGHT.TTF in Resources */,
 				CE00180E1CF42FA500668D8B /* LaunchScreen.storyboard in Resources */,
 				CE00180B1CF42FA500668D8B /* Assets.xcassets in Resources */,
-				CE00183E1CF4317900668D8B /* TNCA_DATABASE.sqlite in Resources */,
 				CE0018501CF460DE00668D8B /* RAJDHANI-MEDIUM.TTF in Resources */,
 				CE00184E1CF460DE00668D8B /* RAJDHANI-BOLD.TTF in Resources */,
 				CE0018521CF460DE00668D8B /* RAJDHANI-SEMIBOLD.TTF in Resources */,
