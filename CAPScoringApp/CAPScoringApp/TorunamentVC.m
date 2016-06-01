@@ -124,17 +124,23 @@
 -(IBAction)didClickNextBtnAction:(id)sender
 {
     
+    FixturesVC*Fixvc = [[FixturesVC alloc]init];
     
-    
-    
-    
-    
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    FixturesVC *Fixvc =(FixturesVC*) [storyBoard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
+    Fixvc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
     EventRecord *eventRecord = [selectindexarray objectAtIndex:0] ;
     Fixvc.CompitionCode=[eventRecord competitioncode];
-    [Fixvc setModalPresentationStyle:UIModalPresentationFullScreen];
-    [self presentViewController:Fixvc animated:NO completion:nil];
+
+    [self.navigationController pushViewController:Fixvc animated:YES];
+    
+    
+    
+//    
+//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    FixturesVC *Fixvc =(FixturesVC*) [storyBoard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
+//    EventRecord *eventRecord = [selectindexarray objectAtIndex:0] ;
+//    Fixvc.CompitionCode=[eventRecord competitioncode];
+//    [Fixvc setModalPresentationStyle:UIModalPresentationFullScreen];
+//    [self presentViewController:Fixvc animated:NO completion:nil];
 }
 @end
 

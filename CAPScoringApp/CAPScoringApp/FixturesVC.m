@@ -114,10 +114,10 @@
     NSIndexPath *selectedIndexPath = [tableView indexPathForSelectedRow];
     
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-
-    
-    NewMatchSetUpVC *detail =(NewMatchSetUpVC*) [storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//
+//    
+    NewMatchSetUpVC *detail =(NewMatchSetUpVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
     
 //
 //    NewMatchSetUpVC*detail = [[NewMatchSetUpVC alloc]init];
@@ -178,9 +178,9 @@
     detail.teamBcode = teamBcode;
     
     
-    [detail setModalPresentationStyle:UIModalPresentationFullScreen];
-    [self presentViewController:detail animated:NO completion:nil];
-    
+//    [detail setModalPresentationStyle:UIModalPresentationFullScreen];
+//    [self presentViewController:detail animated:NO completion:nil];
+    [self.navigationController pushViewController:detail animated:YES];
     NSLog(@"indexframe=%@",selectedIndexPath);
     
     
