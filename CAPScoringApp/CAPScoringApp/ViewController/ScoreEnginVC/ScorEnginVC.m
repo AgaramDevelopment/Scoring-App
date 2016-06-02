@@ -16,6 +16,9 @@
 #import "BowlTypeCell.h"
 #import "FastBowlTypeCell.h"
 #import "AggressiveShotTypeCell.h"
+#import "FieldingFactorCell.h"
+#import "FieldingFactorRecord.h"
+
 
 @interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource>
 {
@@ -57,13 +60,11 @@
 @property(nonatomic,strong) NSMutableArray *rbwOptionArray;
 @property(nonatomic,strong) NSMutableArray *miscfiltersOptionArray;
 
-//Fielding Factors
-@property (nonatomic,strong)NSMutableArray *fieldingfactorArray;
-
-
 @property (nonatomic, strong) CDRTranslucentSideBar *sideBar;
 @property (nonatomic, strong) CDRTranslucentSideBar *rightSideBar;
-@property(nonatomic,strong) NSMutableArray *selectbtnvalueArray;
+//@property(nonatomic,strong) NSMutableArray *selectbtnvalueArray;
+//Fielding Factors
+@property (nonatomic,strong)NSMutableArray *fieldingfactorArray;
 
 
 
@@ -72,7 +73,7 @@
 @property(nonatomic,strong)NSMutableArray *aggressiveShotTypeArray;
 @property(nonatomic,strong)NSMutableArray *defensiveShotTypeArray;
 
-@property(nonatomic,strong)BallEventRecord *ballEventRecord;
+//@property(nonatomic,strong)BallEventRecord *ballEventRecord;
 
 @end
 
@@ -81,6 +82,9 @@
 @synthesize tbl_bowlType;
 @synthesize tbl_fastBowl;
 @synthesize tbl_aggressiveShot;
+@synthesize tbl_fieldingfactor;
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -377,6 +381,21 @@
         return [self.defensiveShotTypeArray count];
     }
     
+    //Rbw,miscfilters and fieldingfactor
+    if(rbwTableview == tableView)
+    {
+        return self.rbwOptionArray.count;
+    }
+    
+    if(miscFiltersTableview == tableView)
+    {
+        return self.miscfiltersOptionArray.count;
+    }
+    
+    if(tableView == tbl_fieldingfactor)
+    {
+        return [self.fieldingfactorArray count];
+    }
     return 0;
 }
 
