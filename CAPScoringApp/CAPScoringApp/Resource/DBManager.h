@@ -57,4 +57,10 @@
 
 +(NSMutableArray *)AppealRetrieveEventData;
 +(NSMutableArray *)getOtwRtw;
+
+//Bowl type - Spin
++(NSMutableArray *)getBowlType;
+
+//bowl type - fast
++(NSMutableArray *)getBowlFastType;
 @end

@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1837AA8C1CFF125B00B7259C /* BowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA8B1CFF125B00B7259C /* BowlTypeCell.m */; };
+		1837AA8F1CFF189900B7259C /* BowlAndShotTypeRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA8E1CFF189900B7259C /* BowlAndShotTypeRecords.m */; };
+		1837AA951CFF264A00B7259C /* FastBowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA941CFF264A00B7259C /* FastBowlTypeCell.m */; };
 		2479C3E31CFC3FD300A3CCA2 /* BallEventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 2479C3E21CFC3FD300A3CCA2 /* BallEventRecord.m */; };
 		24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D24CDE1CFEC70A00CD75D2 /* ScorEnginVC.m */; };
 		24D24CE21CFEC71800CD75D2 /* PlayerOrderLevelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D24CE11CFEC71800CD75D2 /* PlayerOrderLevelVC.m */; };
@@ -69,6 +72,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1837AA8A1CFF125B00B7259C /* BowlTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlTypeCell.h; sourceTree = "<group>"; };
+		1837AA8B1CFF125B00B7259C /* BowlTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlTypeCell.m; sourceTree = "<group>"; };
+		1837AA8D1CFF189900B7259C /* BowlAndShotTypeRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlAndShotTypeRecords.h; sourceTree = "<group>"; };
+		1837AA8E1CFF189900B7259C /* BowlAndShotTypeRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlAndShotTypeRecords.m; sourceTree = "<group>"; };
+		1837AA931CFF264A00B7259C /* FastBowlTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastBowlTypeCell.h; sourceTree = "<group>"; };
+		1837AA941CFF264A00B7259C /* FastBowlTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FastBowlTypeCell.m; sourceTree = "<group>"; };
 		2479C3E11CFC3FCD00A3CCA2 /* BallEventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BallEventRecord.h; path = Resource/BallEvents/BallEventRecord.h; sourceTree = "<group>"; };
 		2479C3E21CFC3FD300A3CCA2 /* BallEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BallEventRecord.m; path = Resource/BallEvents/BallEventRecord.m; sourceTree = "<group>"; };
 		24D24CDD1CFEC70A00CD75D2 /* ScorEnginVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ScorEnginVC.h; path = ViewController/ScoreEnginVC/ScorEnginVC.h; sourceTree = "<group>"; };
@@ -327,6 +336,10 @@
 				CE3DD41E1CFBFB4F00D93A55 /* SelectPlayerCVCell.m */,
 				CE22AF241CFD584D0026E0DA /* AppealCell.h */,
 				CE22AF251CFD584D0026E0DA /* AppealCell.m */,
+				1837AA8A1CFF125B00B7259C /* BowlTypeCell.h */,
+				1837AA8B1CFF125B00B7259C /* BowlTypeCell.m */,
+				1837AA931CFF264A00B7259C /* FastBowlTypeCell.h */,
+				1837AA941CFF264A00B7259C /* FastBowlTypeCell.m */,
 			);
 			name = SubClass;
 			sourceTree = "<group>";
@@ -349,6 +362,8 @@
 				CE3DD4241CFBFDD400D93A55 /* TeamLogoRecords.m */,
 				CE22AF271CFD58720026E0DA /* AppealRecord.h */,
 				CE22AF281CFD58720026E0DA /* AppealRecord.m */,
+				1837AA8D1CFF189900B7259C /* BowlAndShotTypeRecords.h */,
+				1837AA8E1CFF189900B7259C /* BowlAndShotTypeRecords.m */,
 			);
 			name = Records;
 			sourceTree = "<group>";
@@ -535,12 +550,15 @@
 				CE3DD41C1CFBFA7000D93A55 /* SelectPlayerRecord.m in Sources */,
 				CE1FBF5B1CF96FE400A9B6FE /* BowlerEvent.m in Sources */,
 				24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */,
+				1837AA8F1CFF189900B7259C /* BowlAndShotTypeRecords.m in Sources */,
 				CE1FBF6A1CF9A17500A9B6FE /* MatchOfficalsVC.m in Sources */,
+				1837AA951CFF264A00B7259C /* FastBowlTypeCell.m in Sources */,
 				CE1FBF671CF9A05B00A9B6FE /* OfficialMasterRecord.m in Sources */,
 				CE22AF291CFD58720026E0DA /* AppealRecord.m in Sources */,
 				CE3DD4221CFBFD4400D93A55 /* NewMatchSetUpVC.m in Sources */,
 				CE1FBF611CF997FB00A9B6FE /* FixturesVC.m in Sources */,
 				24D24CEE1CFEF4EE00CD75D2 /* CustomNavigationVC.m in Sources */,
+				1837AA8C1CFF125B00B7259C /* BowlTypeCell.m in Sources */,
 				CE0018471CF4485500668D8B /* TorunamentVC.m in Sources */,
 				CE0018031CF42FA500668D8B /* AppDelegate.m in Sources */,
 				CE3DD4191CFBFA1600D93A55 /* SelectPlayersVC.m in Sources */,
