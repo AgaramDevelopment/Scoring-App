@@ -27,6 +27,12 @@
     UITableView* objextras;
     BallEventRecord *objBalleventRecord;
     
+    //RBW and Miscfilters
+    UITableView* rbwTableview;
+    UITableView* miscFiltersTableview;
+    BOOL isRBWSelected;
+    BOOL ismiscFilters;
+    
     BOOL isMoreRunSelected;
     BOOL isExtrasSelected;
     BOOL isOverthrowSelected;
@@ -37,10 +43,19 @@
 }
 
 
+@property(nonatomic,strong) NSMutableArray *selectbtnvalueArray;
 @property(nonatomic,strong) NSMutableArray *extrasOptionArray;
 @property(nonatomic,strong) NSMutableArray *overThrowOptionArray;
 @property(nonatomic,strong) NSMutableArray *AppealValuesArray;
 @property(nonatomic,strong) NSMutableArray *otwRtwArray;
+@property(nonatomic,strong) BallEventRecord *ballEventRecord;
+
+//RBW and Miscfilters
+@property(nonatomic,strong) NSMutableArray *rbwOptionArray;
+@property(nonatomic,strong) NSMutableArray *miscfiltersOptionArray;
+
+//Fielding Factors
+@property (nonatomic,strong)NSMutableArray *fieldingfactorArray;
 
 
 @property (nonatomic,strong)NSMutableArray *bowlTypeArray;
@@ -52,6 +67,8 @@
 @synthesize table_Appeal;
 @synthesize tbl_bowlType;
 @synthesize tbl_fastBowl;
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -75,17 +92,17 @@
 
     self.View_Appeal.hidden = YES;
     
-    
-    self.sideBar = [[CDRTranslucentSideBar alloc] init];
-    self.sideBar.sideBarWidth = 200;
-    self.sideBar.delegate = self;
-    self.sideBar.tag = 0;
+//    
+//    self.sideBar = [[CDRTranslucentSideBar alloc] init];
+//    self.sideBar.sideBarWidth = 200;
+//    self.sideBar.delegate = self;
+//    self.sideBar.tag = 0;
     
     // Create Right SideBar
-    self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirectionFromRight:YES];
-    self.rightSideBar.delegate = self;
-    self.rightSideBar.translucentStyle = UIBarStyleBlack;
-    self.rightSideBar.tag = 1;
+//    self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirectionFromRight:YES];
+//    self.rightSideBar.delegate = self;
+//    self.rightSideBar.translucentStyle = UIBarStyleBlack;
+//    self.rightSideBar.tag = 1;
     
     // Add PanGesture to Show SideBar by PanGesture
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
@@ -116,6 +133,26 @@
     //OTW and RTW
     _otwRtwArray = [[NSMutableArray alloc]init];
     //_otwRtwArray = [DBManager getOtwRtw];
+    
+    
+    //RBW and Misc Filters
+    self.ballEventRecord = [[BallEventRecord alloc] init];
+    self.ballEventRecord.objRbw =[NSNumber numberWithInt:0];
+    self.ballEventRecord.objIswtb=[NSNumber numberWithInt:0];
+    self.ballEventRecord.objIsuncomfort=[NSNumber numberWithInt:0];
+    self.ballEventRecord.objIsreleaseshot=[NSNumber numberWithInt:0];
+    self.ballEventRecord.objIsbeaten=[NSNumber numberWithInt:0];
+    
+    isRBWSelected = NO;
+    ismiscFilters = NO;
+    
+    //Fielding Factor
+    _fieldingfactorArray=[[NSMutableArray alloc]init];
+    _fieldingfactorArray =[DBManager RetrieveFieldingFactorData];
+    
+//    self.view_fieldingfactor.hidden = YES;
+//    self.view_fieldername.hidden = YES;
+//    self.view_nrs.hidden=YES;
     
     
 }
@@ -216,22 +253,22 @@
 #pragma mark - Gesture Handler
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
     // if you have left and right sidebar, you can control the pan gesture by start point.
-    if (recognizer.state == UIGestureRecognizerStateBegan) {
-        CGPoint startPoint = [recognizer locationInView:self.view];
-        
-        // Left SideBar
-        if (startPoint.x < self.view.bounds.size.width / 2.0) {
-            self.sideBar.isCurrentPanGestureTarget = YES;
-        }
-        // Right SideBar
-        else {
-            self.rightSideBar.isCurrentPanGestureTarget = YES;
-        }
-    }
-    
-    [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
-    [self.rightSideBar handlePanGestureToShow:recognizer inViewController:self];
-    
+//    if (recognizer.state == UIGestureRecognizerStateBegan) {
+//        CGPoint startPoint = [recognizer locationInView:self.view];
+//        
+//        // Left SideBar
+//        if (startPoint.x < self.view.bounds.size.width / 2.0) {
+//            self.sideBar.isCurrentPanGestureTarget = YES;
+//        }
+//        // Right SideBar
+//        else {
+//            self.rightSideBar.isCurrentPanGestureTarget = YES;
+//        }
+//    }
+//    
+//    [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
+//    [self.rightSideBar handlePanGestureToShow:recognizer inViewController:self];
+//    
     // if you have only one sidebar, do like following
     
     // self.sideBar.isCurrentPanGestureTarget = YES;

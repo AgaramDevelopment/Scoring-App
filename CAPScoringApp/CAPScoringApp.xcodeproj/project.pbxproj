@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		048F6F561CFFFCB700F2C5F5 /* FieldingFactorRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 048F6F551CFFFCB700F2C5F5 /* FieldingFactorRecord.m */; };
 		1837AA8C1CFF125B00B7259C /* BowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA8B1CFF125B00B7259C /* BowlTypeCell.m */; };
 		1837AA8F1CFF189900B7259C /* BowlAndShotTypeRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA8E1CFF189900B7259C /* BowlAndShotTypeRecords.m */; };
 		1837AA951CFF264A00B7259C /* FastBowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA941CFF264A00B7259C /* FastBowlTypeCell.m */; };
@@ -72,6 +73,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		048F6F541CFFFCB700F2C5F5 /* FieldingFactorRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldingFactorRecord.h; sourceTree = "<group>"; };
+		048F6F551CFFFCB700F2C5F5 /* FieldingFactorRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldingFactorRecord.m; sourceTree = "<group>"; };
 		1837AA8A1CFF125B00B7259C /* BowlTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlTypeCell.h; sourceTree = "<group>"; };
 		1837AA8B1CFF125B00B7259C /* BowlTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlTypeCell.m; sourceTree = "<group>"; };
 		1837AA8D1CFF189900B7259C /* BowlAndShotTypeRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlAndShotTypeRecords.h; sourceTree = "<group>"; };
@@ -347,6 +350,8 @@
 		CE00183F1CF431C100668D8B /* Records */ = {
 			isa = PBXGroup;
 			children = (
+				048F6F541CFFFCB700F2C5F5 /* FieldingFactorRecord.h */,
+				048F6F551CFFFCB700F2C5F5 /* FieldingFactorRecord.m */,
 				CE0F19BE1CF5D3D60030FFA2 /* UserRecord.h */,
 				CE0F19BF1CF5D3D60030FFA2 /* UserRecord.m */,
 				CE0018411CF431D300668D8B /* EventRecord.m */,
@@ -535,6 +540,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				048F6F561CFFFCB700F2C5F5 /* FieldingFactorRecord.m in Sources */,
 				CE1FBF581CF96EDB00A9B6FE /* TossDeatilsEvent.m in Sources */,
 				CE0F19C91CF6C2CC0030FFA2 /* TossDetailsVC.m in Sources */,
 				CE00183B1CF430E400668D8B /* DBManager.m in Sources */,
@@ -710,6 +716,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CAPScoringApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agaraminfotech.CAPScoringApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -722,6 +729,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = CAPScoringApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agaraminfotech.CAPScoringApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
