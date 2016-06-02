@@ -119,4 +119,13 @@
 @property (strong, nonatomic) IBOutlet UITableView *table_Appeal;
 @property (strong, nonatomic) IBOutlet UIView *view_table_select;
 
+//bowltype
+@property (weak, nonatomic) IBOutlet UITableView *tbl_bowlType;
+@property (weak, nonatomic) IBOutlet UIView *view_bowlType;
+
+
+//fast bowl type
+@property (weak, nonatomic) IBOutlet UIView *view_fastBowl;
+@property (weak, nonatomic) IBOutlet UITableView *tbl_fastBowl;
+
 @end

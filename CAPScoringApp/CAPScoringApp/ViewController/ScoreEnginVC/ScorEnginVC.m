@@ -12,6 +12,9 @@
 #import "BallEventRecord.h"
 #import "AppealRecord.h"
 #import "AppealCell.h"
+#import "BowlAndShotTypeRecords.h"
+#import "BowlTypeCell.h"
+#import "FastBowlTypeCell.h"
 
 @interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource>
 {
@@ -29,12 +32,40 @@
 @property(nonatomic,strong) NSMutableArray *AppealValuesArray;
 @property(nonatomic,strong) NSMutableArray *otwRtwArray;
 
+
+@property (nonatomic,strong)NSMutableArray *bowlTypeArray;
+@property(nonatomic,strong)NSMutableArray *fastBowlTypeArray;
+
 @end
 
 @implementation ScorEnginVC
 @synthesize table_Appeal;
+@synthesize tbl_bowlType;
+@synthesize tbl_fastBowl;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
+    //bowl type - spin array
+    _bowlTypeArray=[[NSMutableArray alloc]init];
+    _bowlTypeArray =[DBManager getBowlType];
+    
+    self.view_bowlType.hidden = YES;
+    self.tbl_bowlType.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    
+    //fast bowl type
+    
+    _fastBowlTypeArray = [[NSMutableArray alloc]init];
+    _fastBowlTypeArray = [DBManager getBowlFastType];
+    
+    self.view_fastBowl.hidden = YES;
+
+
+    self.View_Appeal.hidden = YES;
+    
+    
     self.sideBar = [[CDRTranslucentSideBar alloc] init];
     self.sideBar.sideBarWidth = 200;
     self.sideBar.delegate = self;
@@ -253,8 +284,13 @@
     }else if (tableView == table_Appeal) {
         
         return self.AppealValuesArray.count;
+    }else if(tableView == tbl_bowlType){
+        
+        return self.bowlTypeArray.count;
+        
+    }else if(tableView == tbl_fastBowl){
+        return [self.fastBowlTypeArray count];
     }
-    
     return 0;
 }
 
@@ -270,18 +306,7 @@
     
     
     if (tableView == table_Appeal) {
-//        static NSString *CellIdentifier = @"Cell";
-//            AppealCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
-//                                                                 forIndexPath:indexPath];
-//        
-//            AppealRecord *objAppealrecord=(AppealRecord*)[_AppealValuesArray objectAtIndex:indexPath.row];
-//        
-//        
-//            cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
-        
-//        
-//        static NSString *MyIdentifier4 = @"Cell";
-        
+
                 static NSString *CellIdentifier = @"Cell";
                     AppealCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                                                          forIndexPath:indexPath];
@@ -292,9 +317,37 @@
                     cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
         return cell;
         
+    } else if(tableView == tbl_bowlType){
+        static NSString *CellIdentifier = @"cell";
+        
+        BowlTypeCell *bowlCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                                 forIndexPath:indexPath];
+        
+        BowlAndShotTypeRecords *objBowlRecord=(BowlAndShotTypeRecords*)[_bowlTypeArray objectAtIndex:indexPath.row];
+        
+        
+        bowlCell.lbl_BowlTypeOdd.text = objBowlRecord.BowlType;
+        
+        return bowlCell;
+    }else if (tableView == tbl_fastBowl){
+        
+        static NSString *CellIdentifier = @"fastBowlCell";
+        
+        FastBowlTypeCell *fastBowlCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                                         forIndexPath:indexPath];
+        
+        BowlAndShotTypeRecords *objBowlRecord=(BowlAndShotTypeRecords*)[_fastBowlTypeArray objectAtIndex:indexPath.row];
+        
+        
+        fastBowlCell.lbl_fastBowl.text = objBowlRecord.BowlType;
+        
+        return fastBowlCell;
+
+        
     }
     
-    return cell;
+
+    return 0;
 }
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -631,10 +684,15 @@
     else if(selectBtnTag.tag==114)
     {
         [self selectBtncolor_Action:@"114" :nil :203];
+        self.view_bowlType.hidden = NO;
+        self.view_fastBowl.hidden = YES;
+
     }
     else if(selectBtnTag.tag==115)
     {
         [self selectBtncolor_Action:@"115" :nil :204];
+          self.view_bowlType.hidden = YES;
+        self.view_fastBowl.hidden = NO;
     }
     else if(selectBtnTag.tag==116)
     {
