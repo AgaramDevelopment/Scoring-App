@@ -4,11 +4,17 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="RAJDHANI-BOLD.TTF">
+            <string>Rajdhani-Bold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomNavigationVC">
             <connections>
                 <outlet property="Btn_Back" destination="b6T-ea-VN1" id="gTY-tF-rVa"/>
                 <outlet property="lbl_titleName" destination="MOp-tB-bJb" id="OEP-o1-FWo"/>
+                <outlet property="mainView" destination="R1c-e7-RKk" id="BRQ-B9-bUV"/>
                 <outlet property="view" destination="iN0-l3-epB" id="aH1-TW-H7g"/>
             </connections>
         </placeholder>
@@ -22,8 +28,8 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOp-tB-bJb">
                             <rect key="frame" x="100" y="20" width="569" height="60"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="33"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6T-ea-VN1">
@@ -32,10 +38,10 @@
                                 <constraint firstAttribute="width" constant="60" id="GIS-go-fxQ"/>
                                 <constraint firstAttribute="height" constant="60" id="TvL-IC-azK"/>
                             </constraints>
-                            <state key="normal" title="Button" image="ico-back-btn"/>
+                            <state key="normal" image="ico-back-btn"/>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.094117647058823528" green="0.14509803921568626" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.019607843137254902" green="0.023529411764705882" blue="0.031372549019607843" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="b6T-ea-VN1" firstAttribute="leading" secondItem="R1c-e7-RKk" secondAttribute="leading" constant="20" id="3KM-Hz-a1h"/>
                         <constraint firstItem="MOp-tB-bJb" firstAttribute="leading" secondItem="b6T-ea-VN1" secondAttribute="trailing" constant="20" id="9dF-Wc-VzO"/>

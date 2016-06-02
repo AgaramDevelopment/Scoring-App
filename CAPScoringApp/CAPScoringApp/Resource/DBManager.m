@@ -17,6 +17,7 @@
 #import "BallEventRecord.h"
 #import "AppealRecord.h"
 #import "BowlAndShotTypeRecords.h"
+#import "FieldingFactorRecord.h"
 
 
 @implementation DBManager

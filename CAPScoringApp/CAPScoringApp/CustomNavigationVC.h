@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface CustomNavigationVC : UIViewController
+@property (nonatomic,strong) IBOutlet UIView *mainView;
 @property (nonatomic,strong) IBOutlet UILabel *lbl_titleName;
 @property (nonatomic,strong) IBOutlet UIButton *Btn_Back;
 @end
