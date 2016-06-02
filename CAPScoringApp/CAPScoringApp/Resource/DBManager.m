@@ -999,7 +999,47 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
-
+//Retrieve FieldingFactor
++(NSMutableArray *)RetrieveFieldingFactorData{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:@"TNCA_DATABASE.sqlite"];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"select * FROM FIELDINGFACTOR"];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            FieldingFactorRecord *record=[[FieldingFactorRecord alloc]init];
+            //            record.id=(int)sqlite3_column_int(statement, 0);
+            record.fieldingfactorcode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            record.fieldingfactor=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            record.displayorder=[NSNumber numberWithChar:*(char *)sqlite3_column_text(statement, 2)];
+            
+            record.recordstatus=[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 3)];
+            
+            
+            
+            
+            //            record.displayorder=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+            //            record.recordstatus=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+            //            [eventArray addObject:record];
+            
+        }
+    }
+    
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return eventArray;
+    
+}
 
 
 

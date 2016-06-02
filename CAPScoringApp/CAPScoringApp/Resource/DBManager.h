@@ -58,9 +58,14 @@
 +(NSMutableArray *)AppealRetrieveEventData;
 +(NSMutableArray *)getOtwRtw;
 
+
+//fielding factor
++(NSMutableArray *)RetrieveFieldingFactorData;
+
 //Bowl type - Spin
 +(NSMutableArray *)getBowlType;
 
 //bowl type - fast
 +(NSMutableArray *)getBowlFastType;
+
 @end

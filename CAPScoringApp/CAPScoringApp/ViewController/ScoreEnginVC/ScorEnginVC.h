@@ -128,4 +128,11 @@
 @property (weak, nonatomic) IBOutlet UIView *view_fastBowl;
 @property (weak, nonatomic) IBOutlet UITableView *tbl_fastBowl;
 
+
+//fielding factor
+@property (strong, nonatomic) IBOutlet UIView *view_fieldingfactor;
+@property (strong, nonatomic) IBOutlet UITableView *tbl_fieldingfactor;
+@property (strong, nonatomic) IBOutlet UIView *view_fieldername;  //fielding factor playername
+@property (strong, nonatomic) IBOutlet UIView *view_nrs;   //fileiding factor netruns
+
 @end
