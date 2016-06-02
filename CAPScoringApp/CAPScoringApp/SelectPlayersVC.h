@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *txt_search;
 
 - (IBAction)btn_search:(id)sender;
+- (IBAction)btn_back:(id)sender;
+
 
 @property (strong,nonatomic) NSString *teamCode;
 @property (strong,nonatomic) NSString *matchCode;

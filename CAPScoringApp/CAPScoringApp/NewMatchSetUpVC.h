@@ -59,5 +59,6 @@
 - (IBAction)btn_selectPlayersTeamB:(id)sender;
 - (IBAction)btn_edit:(id)sender;
 - (IBAction)btn_proceed:(id)sender;
+- (IBAction)btn_back:(id)sender;
 
 @end

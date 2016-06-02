@@ -128,4 +128,14 @@
 @property (weak, nonatomic) IBOutlet UIView *view_fastBowl;
 @property (weak, nonatomic) IBOutlet UITableView *tbl_fastBowl;
 
+
+//aggressive shot type
+@property (weak, nonatomic) IBOutlet UITableView *tbl_aggressiveShot;
+@property (weak, nonatomic) IBOutlet UIView *view_aggressiveShot;
+
+//defensive shot type
+@property (weak, nonatomic) IBOutlet UITableView *tbl_defensive;
+@property (weak, nonatomic) IBOutlet UIView *view_defensive;
+
+
 @end
