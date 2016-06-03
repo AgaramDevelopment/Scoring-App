@@ -141,6 +141,7 @@
 //defensive shot type
 @property (weak, nonatomic) IBOutlet UITableView *tbl_defensive;
 @property (weak, nonatomic) IBOutlet UIView *view_defensive;
+@property (strong, nonatomic) IBOutlet UIView *view_Rbw;
 
 
 @end

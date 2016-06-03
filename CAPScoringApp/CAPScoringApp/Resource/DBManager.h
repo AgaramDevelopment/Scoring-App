@@ -61,6 +61,7 @@
 
 //fielding factor
 +(NSMutableArray *)RetrieveFieldingFactorData;
++(NSMutableArray *)RetrieveFieldingPlayerData;
 
 //Bowl type - Spin
 +(NSMutableArray *)getBowlType;
