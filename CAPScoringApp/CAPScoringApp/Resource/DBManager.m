@@ -19,7 +19,6 @@
 #import "BowlAndShotTypeRecords.h"
 #import "FieldingFactorRecord.h"
 
-
 @implementation DBManager
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
