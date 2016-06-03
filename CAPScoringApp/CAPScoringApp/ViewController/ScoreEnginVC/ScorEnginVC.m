@@ -571,7 +571,7 @@
     cell.selectedBackgroundView = bgColorView;
     
 
-    return 0;
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -1771,11 +1771,21 @@
             [extrasTableView reloadData];
             
             //B6
-            if(self.ballEventRecord.objIssix.integerValue == 0){
-                if(!isMoreRunSelected){
-                    [self unselectedButtonBg:self.btn_B6];
+            if(self.ballEventRecord.objIssix.integerValue == 0){//Six un selected
+               
+                if(!isMoreRunSelected){//Normal state
+                    
+                    if(self.ballEventRecord.objLegByes.integerValue==1 || self.ballEventRecord.objWide.integerValue==1 || self.ballEventRecord.objByes.integerValue==1){//Check for LB,WD,B selected
+                        [self disableButtonBg:self.btn_B6];
+                        self.btn_B6.userInteractionEnabled=NO;
+                    }
+                    else{
+                        [self unselectedButtonBg:self.btn_B6];
+                        self.btn_B6.userInteractionEnabled=YES;
+                    
+                    }
                 }
-                self.btn_B6.userInteractionEnabled=YES;
+                
             }
             
             //Noball
@@ -1858,6 +1868,7 @@
             
             //Legbyes
             self.ballEventRecord.objLegByes = [NSNumber numberWithInt:1];
+
             
         }
     }else if(tableView == overThrowTableView){//Over throw table view
@@ -1943,10 +1954,11 @@
             [extrasTableView reloadData];
             
             
-            if(self.ballEventRecord.objIssix.integerValue == 0){
-                [self unselectedButtonBg:self.btn_B6];
-                self.btn_B6.userInteractionEnabled=YES;
-            }
+//            if(self.ballEventRecord.objIssix.integerValue == 0){
+//                [self unselectedButtonBg:self.btn_B6];
+//                self.btn_B6.userInteractionEnabled=YES;
+//            }
+            
             
             //Byes Select
             if(self.ballEventRecord.objByes.integerValue !=0){
@@ -2046,7 +2058,6 @@
         
     }
 }
-
 
 //
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
