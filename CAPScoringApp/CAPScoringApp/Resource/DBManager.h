@@ -68,4 +68,10 @@
 //bowl type - fast
 +(NSMutableArray *)getBowlFastType;
 
+//Aggressive Shot Type
++(NSMutableArray *)getAggressiveShotType;
+
+//Defensice shot Type
++(NSMutableArray *)getDefenceShotType;
+
 @end

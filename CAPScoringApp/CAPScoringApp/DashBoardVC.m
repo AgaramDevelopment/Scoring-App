@@ -8,6 +8,7 @@
 
 #import "DashBoardVC.h"
 #import "TorunamentVC.h"
+#import "LoginVC.h"
 @interface DashBoardVC ()
 
 @end
@@ -17,7 +18,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-}
+    
+    
+    }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -67,6 +70,29 @@
     _img_reports.image = [UIImage imageNamed:@"ico-reports02.png"];
     
     _view_reports.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
+    
+    
+}
+
+- (IBAction)btn_signOut:(id)sender {
+    
+//    [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+//    [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+    
+
+    NSUserDefaults * removeUD = [NSUserDefaults standardUserDefaults];
+    [removeUD removeObjectForKey:@"isUserLoggedin"];
+    [[NSUserDefaults standardUserDefaults]synchronize ];
+    
+//    NSUserDefaults * removeUDCode = [NSUserDefaults standardUserDefaults];
+//    [removeUDCode removeObjectForKey:@"userCode"];
+//    [[NSUserDefaults standardUserDefaults]synchronize ];
+    
+    LoginVC *loginVC = [[LoginVC alloc]init];
+    
+    loginVC =  (LoginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"login_sbid"];
+    [self.navigationController pushViewController:loginVC animated:YES];
+    
     
     
 }
