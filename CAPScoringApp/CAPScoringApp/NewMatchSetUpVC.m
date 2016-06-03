@@ -40,13 +40,16 @@
     _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
     
     
-    if (_countTeam > 0) {
+    if (_countTeam.count >= 7) {
+        
+        //grey color
         _view_teamA.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
      
         
         _view_teamB.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
     }else{
         
+        //orange color
         _view_teamA.backgroundColor = [UIColor colorWithRed:(228/255.0f) green:(98/255.0f) blue:(58/255.0f) alpha:(1)];
         
         _view_teamB.backgroundColor = [UIColor colorWithRed:(228/255.0f) green:(98/255.0f) blue:(58/255.0f) alpha:(1)];
@@ -208,7 +211,7 @@
     //to change selected team players B color after selected 7 players
     //NSMutableArray *countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
     
-    if(_countTeam > 0){
+    if(_countTeam.count > 7){
         
         _view_teamB.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
         
@@ -233,7 +236,7 @@
     //to change selected team players A color after selected 7 players
     //NSMutableArray *countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
     
-    if(_countTeam > 0){
+    if(_countTeam.count > 7){
         
         _view_teamA.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
         
