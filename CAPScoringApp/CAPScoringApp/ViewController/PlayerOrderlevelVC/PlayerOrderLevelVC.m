@@ -39,7 +39,7 @@
     [bg_img addSubview:searchView];
     [searchView setBackgroundColor:[UIColor colorWithRed:(8.0/255.0f) green:(9.0/255.0f) blue:(11.0/255.0f) alpha:1.0f]];
     
-    UITextField *lastName = [[UITextField alloc] initWithFrame:CGRectMake(10,objCustomNavigation.view.frame.origin.y+objCustomNavigation.view.frame.size.height+30,300,70)];
+    UITextField *lastName = [[UITextField alloc] initWithFrame:CGRectMake(10,110,300,70)];
     [searchView addSubview:lastName];
     
     lastName.placeholder = @"Enter your last name here";
