@@ -245,7 +245,6 @@
 				CE0018481CF460C900668D8B /* Fonts */,
 				CE0018371CF4308C00668D8B /* SubClass */,
 				CE0018361CF4308000668D8B /* ViewController */,
-				CE0018401CF431D300668D8B /* EventRecord.h */,
 				CE0018351CF4306200668D8B /* Frameworks */,
 				CE0018341CF4305100668D8B /* ReSource */,
 				CE0018011CF42FA500668D8B /* AppDelegate.h */,
@@ -362,6 +361,7 @@
 			children = (
 				CE0F19BE1CF5D3D60030FFA2 /* UserRecord.h */,
 				CE0F19BF1CF5D3D60030FFA2 /* UserRecord.m */,
+				CE0018401CF431D300668D8B /* EventRecord.h */,
 				CE0018411CF431D300668D8B /* EventRecord.m */,
 				CE1FBF561CF96EDB00A9B6FE /* TossDeatilsEvent.h */,
 				CE1FBF571CF96EDB00A9B6FE /* TossDeatilsEvent.m */,
