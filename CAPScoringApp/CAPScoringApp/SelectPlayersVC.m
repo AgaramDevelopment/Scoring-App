@@ -255,10 +255,11 @@ static NSString * const reuseIdentifier = @"Cell";
             [DBManager updateSelectedPlayersResultCode:[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus];
             
         }
-        PlayerOrderLevelVC *viewController = [[PlayerOrderLevelVC alloc] init];
+        PlayerOrderLevelVC *obPlayerOrderLevelVCj = [[PlayerOrderLevelVC alloc] init];
+        obPlayerOrderLevelVCj.objSelectplayerList_Array=self.selectedPlayerArray;
         
         // push a new stack
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.navigationController pushViewController:obPlayerOrderLevelVCj animated:YES];
         
     
 }else{
