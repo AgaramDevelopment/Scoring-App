@@ -543,15 +543,49 @@
         [objextras removeFromSuperview];
     }
     
-    if(extrasTableView !=nil){
-        [extrasTableView removeFromSuperview];
-    }
-    
-    if(overThrowTableView !=nil){
-        [overThrowTableView removeFromSuperview];
-    }
-    
+//    if(extrasTableView !=nil){
+//        [extrasTableView removeFromSuperview];
+//    }
+//    
+//    if(overThrowTableView !=nil){
+//        [overThrowTableView removeFromSuperview];
+//    }
     UIButton *selectBtnTag=(UIButton*)sender;
+    
+    if(isExtrasSelected && selectBtnTag.tag!=106){//Already open state
+        
+        
+        if(self.ballEventRecord.objNoball.integerValue ==0 && self.ballEventRecord.objWide.integerValue ==0 && self.ballEventRecord.objByes.integerValue ==0 && self.ballEventRecord.objLegByes.integerValue ==0){//Nothing selected
+            
+            [self unselectedButtonBg:self.btn_extras];
+        }else{//If any one selected
+            
+            [self selectedButtonBg:self.btn_extras];
+        }
+        
+        if(extrasTableView!=nil){
+            [extrasTableView removeFromSuperview];
+        }
+        
+        
+        isExtrasSelected = NO;
+        
+    }
+    
+    if(isOverthrowSelected  && selectBtnTag.tag!=108){// Already open state
+        if(overThrowTableView!=nil){
+            [overThrowTableView removeFromSuperview];
+        }
+        
+        if(self.ballEventRecord.objOverthrow.integerValue!=0){
+            [self selectedButtonBg:self.btn_overthrow];
+        }else{
+            [self unselectedButtonBg:self.btn_overthrow];
+        }
+        
+        isOverthrowSelected = NO;
+        
+    }
     
     if(selectBtnTag.tag==100)//Run one
     {
