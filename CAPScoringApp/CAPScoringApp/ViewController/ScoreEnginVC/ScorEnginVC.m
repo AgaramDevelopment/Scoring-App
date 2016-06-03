@@ -1237,7 +1237,7 @@
     self.ballEventRecord.objLegByes = 0;
     self.ballEventRecord.objWide = 0;
     self.ballEventRecord.objNoball = 0;
-    self.ballEventRecord.objIslegalball = 0;
+    self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:1];
     
     
     self.ballEventRecord.objOverthrow = 0;
@@ -1793,6 +1793,9 @@
             [extrasTableView selectRowAtIndexPath:noballIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
             self.ballEventRecord.objNoball = [NSNumber numberWithInt:1];
             
+            //Is Legal ball
+            self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:0];
+            
             //Byes Select
             if(self.ballEventRecord.objByes.integerValue !=0){
                 NSIndexPath *byesIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
@@ -1824,6 +1827,9 @@
             
             //Wide Value
             self.ballEventRecord.objWide = [NSNumber numberWithInt:1];
+            
+            //is Legal ball
+             self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:0];
             
             //Recreate list
             //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide", nil];
@@ -1948,6 +1954,9 @@
             //Noball
             self.ballEventRecord.objNoball = [NSNumber numberWithInt:0];
             
+            //Legalball
+            self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:1];
+            
             //Recreate list
             //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
             self.extrasOptionArray=[self getExtrasOptionArray];
@@ -1983,6 +1992,8 @@
             
             //Wide
             self.ballEventRecord.objWide = [NSNumber numberWithInt:0];
+            //Is Legal ball
+            self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:1];
             
             //Recreate list
             //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
