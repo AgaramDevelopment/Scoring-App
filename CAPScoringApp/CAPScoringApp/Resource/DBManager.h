@@ -57,4 +57,23 @@
 
 +(NSMutableArray *)AppealRetrieveEventData;
 +(NSMutableArray *)getOtwRtw;
+
+
+//toss proceed Save
++(NSString *) TossSaveDetails:(NSString*) MATCHCODE:(NSString*)COMPETITIONCODE;
++ (BOOL) insertMatchEvent :(NSString*) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)selectTeamcode :(NSString*)electedcode:(NSString*)teamCode:(NSString*)teambCode;
+
++(NSString *) getMaxInningsNumber:(NSString*) MATCHCODE:(NSString*)COMPETITIONCODE;
++ (BOOL) inserMaxInningsEvent :(NSString*) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE :(NSString*)maxInnNo:(NSString*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)CURRENTSTRIKERCODE:(NSString*)CURRENTNONSTRIKERCODE:(NSString*)BATTINGTEAMCODE:(NSString*)INNINGSSTATUS:(NSString*)BOWLINGEND;
+
++ (BOOL) inserMaxInningsEvent :(NSString*) CompetitionCode:(NSString*)MATCHCODE:(NSString*)teamaCode :(NSString*)maxInnNo:(NSString*)StrikerCode:(NSString*)NonStrikerCode:(NSString*)selectBowlerCode:(NSString*)StrikerCode:(NSString*)NonStrikerCode:(NSString*)selectBowlerCode:(NSString*)teamaCode:(NSString*)inningsStatus:(NSString*)BowlingEnd;
+
++(BOOL)updateProcced:(NSString*)CompetitionCode:(NSString*)MATCHCODE;
+
+//Appeal
++(NSMutableArray *)AppealSystemRetrieveEventData;
++(NSMutableArray *)AppealComponentRetrieveEventData;
++(NSMutableArray *) AppealUmpireRetrieveEventData:(NSString*) COMPETITIONCODE:(NSString*)MATCHCODE;
+
+
 @end

@@ -28,7 +28,7 @@
     [super viewDidLoad];
     
     _FetchCompitionArray=[[NSMutableArray alloc]init];
-    _FetchCompitionArray =[DBManager RetrieveFixturesData:(CompitionCode)];
+    _FetchCompitionArray =[DBManager RetrieveFixturesData:CompitionCode];
     self.popView.hidden=YES;
     
 }
@@ -131,7 +131,7 @@
     NSString*teamB = objFixtureRecord.teamBname;
     NSString*matchType = objFixtureRecord.matchTypeName;
     NSString*matchCode = objFixtureRecord.matchcode;
-    NSString*competitionCode = objFixtureRecord.competitioncode;
+    NSString*competitionCode = self.CompitionCode;
     NSString*matchTypeCode = objFixtureRecord.matchTypeCode;
     NSString*overs = objFixtureRecord.overs;
     

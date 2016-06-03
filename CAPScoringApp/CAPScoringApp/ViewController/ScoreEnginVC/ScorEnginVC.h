@@ -118,5 +118,25 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *table_Appeal;
 @property (strong, nonatomic) IBOutlet UIView *view_table_select;
+@property (strong, nonatomic) IBOutlet UITableView *table_AppealSystem;
+@property (strong, nonatomic) IBOutlet UITableView *table_AppealComponent;
+@property (strong, nonatomic) IBOutlet UITableView *tanle_umpirename;
+@property (strong, nonatomic) IBOutlet UITableView *table_BatsmenName;
+@property (strong, nonatomic) IBOutlet UIView *view_AppealSystem;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_appealsystem;
+- (IBAction)appeal_btn:(id)sender;
+@property (strong, nonatomic) IBOutlet UIView *view_AppealComponent;
+- (IBAction)btn_AppealComponent:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UILabel *lbl_appealComponent;
+
+@property (strong, nonatomic) IBOutlet UIView *view_umpireName;
+- (IBAction)btn_umpireName:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_umpirename;
+@property (strong, nonatomic) IBOutlet UIView *view_batsmen;
+- (IBAction)btn_batsmen:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_batsmen;
+- (IBAction)btn_AppealSave:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextField *comments_txt;
 
 @end

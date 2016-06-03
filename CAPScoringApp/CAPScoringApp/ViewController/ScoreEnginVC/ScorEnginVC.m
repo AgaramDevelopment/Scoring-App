@@ -12,9 +12,33 @@
 #import "BallEventRecord.h"
 #import "AppealRecord.h"
 #import "AppealCell.h"
+#import "AppealSystemRecords.h"
+#import "AppealComponentRecord.h"
+#import "AppealUmpireRecord.h"
 
 @interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource>
-{
+{   //appeal System
+    BOOL isEnableTbl;
+    NSMutableArray * AppealSystemSelectionArray;
+    NSString*AppealSystemSelectCode;
+    AppealSystemRecords *objAppealSystemEventRecord;
+    
+    //AppealComponent
+    NSMutableArray * AppealComponentSelectionArray;
+    NSString*AppealComponentSelectCode;
+    AppealComponentRecord *objAppealComponentEventRecord;
+    
+    //AppealUmpire
+    NSMutableArray * AppealUmpireSelectionArray;
+    NSString*AppealUmpireSelectCode;
+    AppealUmpireRecord *objAppealUmpireEventRecord;
+    
+    //AppealBatsmen
+    NSMutableArray *AppealBatsmenSelectionArray;
+    NSArray*AppealBatsmenSelectCode;
+    
+    
+    
     NSMutableArray *Btn_NameArray;
     BOOL isSelectleftview;
     UITableView* objextras;
@@ -26,13 +50,27 @@
 @property (nonatomic, strong) CDRTranslucentSideBar *sideBar;
 @property (nonatomic, strong) CDRTranslucentSideBar *rightSideBar;
 @property(nonatomic,strong) NSMutableArray *selectbtnvalueArray;
-@property(nonatomic,strong) NSMutableArray *AppealValuesArray;
+
 @property(nonatomic,strong) NSMutableArray *otwRtwArray;
+
+//appeal
+@property (nonatomic,strong)NSMutableArray*AppealSystemArray;
+@property (nonatomic,strong)NSMutableArray*AppealComponentArray;
+@property (nonatomic,strong)NSMutableArray*AppealUmpireArray;
+@property(nonatomic,strong) NSMutableArray *AppealBatsmenArray;
+@property(nonatomic,strong) NSMutableArray *AppealValuesArray;
+
 
 @end
 
 @implementation ScorEnginVC
 @synthesize table_Appeal;
+
+//appeal
+@synthesize AppealSystemArray;
+@synthesize AppealComponentArray;
+@synthesize AppealUmpireArray;
+@synthesize AppealBatsmenArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.sideBar = [[CDRTranslucentSideBar alloc] init];
@@ -77,11 +115,71 @@
     //_otwRtwArray = [DBManager getOtwRtw];
     
     
+    
+    //Appeal
+    
+    [self.view_AppealSystem.layer setBorderWidth:3];
+    [self.view_AppealSystem.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_AppealSystem .layer setMasksToBounds:YES];
+    [_table_AppealSystem setHidden:YES];
+    
+    
+    [self.view_AppealComponent.layer setBorderWidth:3];
+    [self.view_AppealComponent.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_AppealComponent .layer setMasksToBounds:YES];
+    [_table_AppealComponent setHidden:YES];
+    
+    
+    
+    [self.view_umpireName.layer setBorderWidth:3];
+    [self.view_umpireName.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_umpireName .layer setMasksToBounds:YES];
+    [_tanle_umpirename setHidden:YES];
+    
+    
+    [self.view_batsmen.layer setBorderWidth:3];
+    [self.view_batsmen.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_batsmen .layer setMasksToBounds:YES];
+    [_table_BatsmenName setHidden:YES];
+    
+AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
 }
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
     self.btn_StartBall.userInteractionEnabled=NO;
     [self AllBtndisableMethod];
+    
+    
+    
+    //Appeal
+    
+    [self.view_AppealSystem.layer setBorderWidth:3];
+    [self.view_AppealSystem.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_AppealSystem .layer setMasksToBounds:YES];
+    [_table_AppealSystem setHidden:YES];
+    
+    
+    [self.view_AppealComponent.layer setBorderWidth:3];
+    [self.view_AppealComponent.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_AppealComponent .layer setMasksToBounds:YES];
+    [_table_AppealComponent setHidden:YES];
+    
+    
+    
+    [self.view_umpireName.layer setBorderWidth:3];
+    [self.view_umpireName.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_umpireName .layer setMasksToBounds:YES];
+    [_tanle_umpirename setHidden:YES];
+    
+    
+    [self.view_batsmen.layer setBorderWidth:3];
+    [self.view_batsmen.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_batsmen .layer setMasksToBounds:YES];
+    [_table_BatsmenName setHidden:YES];
+      isEnableTbl=YES;
+
 }
 -(void)SaveBallEventREcordvalue
 {
@@ -255,6 +353,28 @@
         return self.AppealValuesArray.count;
     }
     
+    if (tableView == self.table_AppealSystem)
+    {
+        return [AppealSystemArray count];
+    }
+    
+    if (tableView == self.table_AppealComponent)
+    {
+        return [AppealComponentArray count];
+    }
+    
+    
+    if (tableView == self.tanle_umpirename)
+    {
+        return [AppealUmpireArray count];
+    }
+    
+    
+    if (tableView == self.table_BatsmenName)
+    {
+        return [AppealBatsmenArray count];
+    }
+    
     return 0;
 }
 
@@ -293,6 +413,83 @@
         return cell;
         
     }
+    
+    
+    if (tableView == self.table_AppealSystem)
+    {
+        static NSString *MyIdentifier = @"MyIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:MyIdentifier];
+        }
+        objAppealSystemEventRecord=(AppealSystemRecords*)[AppealSystemArray objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text =objAppealSystemEventRecord.AppealSystemMetaSubCodeDescription;
+        return cell;
+    }
+    
+    
+    
+    if (tableView == self.table_AppealComponent)
+    {
+        static NSString *MyIdentifier = @"MyIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:MyIdentifier];
+        }
+        objAppealComponentEventRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text =objAppealComponentEventRecord.AppealComponentMetaSubCodeDescription;
+        return cell;
+    }
+    
+    
+    if (tableView == self.tanle_umpirename)
+    {
+        static NSString *MyIdentifier = @"MyIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:MyIdentifier];
+        }
+        
+        objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
+        
+        
+        cell.textLabel.text =objAppealUmpireEventRecord.AppealUmpireName1;
+        cell.textLabel.text =objAppealUmpireEventRecord.AppealUmpireName2;
+        return cell;
+    }
+    
+    
+    if (tableView == self.table_BatsmenName)
+    {
+        static NSString *MyIdentifier = @"MyIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:MyIdentifier];
+        }
+     // ll.textLabel.text=[AppealComponentArray objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text =[AppealBatsmenArray objectAtIndex:indexPath.row];
+        return cell;
+    }
+    
     
     return cell;
 }
@@ -800,7 +997,172 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 _view_table_select.hidden=NO;
+    
+    
+    if (tableView == self.table_AppealSystem)
+    {
+        
+        
+        AppealSystemSelectionArray=[[NSMutableArray alloc]init];
+        objAppealSystemEventRecord=(AppealSystemRecords*)[AppealSystemArray objectAtIndex:indexPath.row];
+        
+        self.lbl_appealsystem.text =objAppealSystemEventRecord.AppealSystemMetaSubCodeDescription;
+       // selectTeam=self.Wonby_lbl.text;
+        AppealSystemSelectCode=objAppealSystemEventRecord.AppealSystemMetaSubCode;
+        [AppealSystemSelectionArray addObject:objAppealSystemEventRecord];
+        
+        self.table_AppealSystem.hidden=YES;
+        isEnableTbl=YES;
+    }
+
+    
+    
+    
+    if (tableView == self.table_AppealComponent)
+    {
+        
+        
+        AppealComponentSelectionArray=[[NSMutableArray alloc]init];
+        objAppealComponentEventRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
+        
+        self.lbl_appealComponent.text =objAppealComponentEventRecord.AppealComponentMetaSubCodeDescription;
+        // selectTeam=self.Wonby_lbl.text;
+        AppealComponentSelectCode=objAppealComponentEventRecord.AppealComponentMetaSubCode;
+        [AppealComponentSelectionArray addObject:objAppealComponentEventRecord];
+        
+        self.table_AppealComponent.hidden=YES;
+        isEnableTbl=YES;
+    }
+    
+    
+    
+    if (tableView == self.tanle_umpirename)
+    {
+        
+        
+        AppealUmpireSelectionArray=[[NSMutableArray alloc]init];
+        objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
+        
+        self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName1;
+        self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName2;
+        // selectTeam=self.Wonby_lbl.text;
+        AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode1;
+         AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode2;
+        [AppealUmpireSelectionArray addObject:objAppealUmpireEventRecord];
+        
+        self.tanle_umpirename.hidden=YES;
+        isEnableTbl=YES;
+    }
+    
+    if (tableView == self.table_BatsmenName)
+    {
+        
+        
+      AppealUmpireSelectionArray=[[NSMutableArray alloc]init];
+       // objAppealComponentEventRecord=(AppealComponentRecord*)[AppealBatsmenArray objectAtIndex:indexPath.row];
+        
+        self.lbl_batsmen.text =[AppealBatsmenArray objectAtIndex:indexPath.row];
+        // selectTeam=self.Wonby_lbl.text;
+        AppealComponentSelectCode=@"PYCOOOO050";
+     //   [AppealComponentSelectionArray addObject:objAppealComponentEventRecord];
+        
+        self.table_BatsmenName.hidden=YES;
+        isEnableTbl=YES;
+    }
+
 }
 
 
+- (IBAction)appeal_btn:(id)sender {
+    if(isEnableTbl==YES)
+    {
+        AppealSystemArray=[[NSMutableArray alloc]init];
+        NSMutableArray * FetchAppealSystemArray =[DBManager AppealSystemRetrieveEventData];
+        for(int i=0; i < [FetchAppealSystemArray count]; i++)
+        {
+            
+            objAppealSystemEventRecord=(AppealSystemRecords*)[FetchAppealSystemArray objectAtIndex:i];
+            
+            [AppealSystemArray addObject:objAppealSystemEventRecord];
+            
+            
+        }
+        
+        
+        [self.table_AppealSystem reloadData];
+        self.table_AppealSystem.hidden=NO;
+        isEnableTbl=NO;
+    }
+    
+    
+}
+- (IBAction)btn_AppealComponent:(id)sender {
+    
+    if(isEnableTbl==YES)
+    {
+        AppealComponentArray=[[NSMutableArray alloc]init];
+        NSMutableArray * FetchAppealComponentArray =[DBManager AppealComponentRetrieveEventData];
+        for(int i=0; i < [FetchAppealComponentArray count]; i++)
+        {
+            
+            objAppealComponentEventRecord=(AppealComponentRecord*)[FetchAppealComponentArray objectAtIndex:i];
+            
+            [AppealComponentArray addObject:objAppealComponentEventRecord];
+            
+            
+        }
+        
+        
+        [self.table_AppealComponent reloadData];
+        self.table_AppealComponent.hidden=NO;
+        isEnableTbl=NO;
+    }
+}
+- (IBAction)btn_umpireName:(id)sender {
+    
+    
+    if(isEnableTbl==YES)
+    {
+        AppealUmpireArray=[[NSMutableArray alloc]init];
+        NSMutableArray * FetchAppealumpireArray =[DBManager AppealUmpireRetrieveEventData:_competitionCode :_matchCode];
+        for(int i=0; i < [FetchAppealumpireArray count]; i++)
+        {
+            
+            objAppealUmpireEventRecord=(AppealUmpireRecord*)[FetchAppealumpireArray objectAtIndex:i];
+            
+            [AppealUmpireArray addObject:objAppealUmpireEventRecord];
+            
+            
+        }
+        
+        
+        [self.tanle_umpirename reloadData];
+        self.tanle_umpirename.hidden=NO;
+        isEnableTbl=NO;
+    }
+
+}
+- (IBAction)btn_batsmen:(id)sender {
+    if (self.table_BatsmenName.hidden ==YES) {
+        
+        self.table_BatsmenName.hidden=NO;
+        
+    }
+    else
+        self.table_BatsmenName.hidden=YES;
+}
+
+
+
+- (IBAction)btn_AppealSave:(id)sender {
+    
+   // UIColor colorWithRed:84 green:106 blue:126 alpha:0
+     NSString *commentText =[NSString stringWithFormat:@"%@",[_comments_txt text]];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
+    [dic setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
+    [dic setValue:AppealUmpireSelectCode forKey:@"AppealUmpireSelct"];
+     [dic setValue:AppealBatsmenSelectCode forKey:@"AppealBatsmenSelct"];
+    [dic setValue:commentText forKey:@"Commenttext"];
+}
 @end
