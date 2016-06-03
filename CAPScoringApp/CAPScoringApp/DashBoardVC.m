@@ -76,25 +76,52 @@
 
 - (IBAction)btn_signOut:(id)sender {
     
-//    [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
-//    [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
-    
-
-    NSUserDefaults * removeUD = [NSUserDefaults standardUserDefaults];
-    [removeUD removeObjectForKey:@"isUserLoggedin"];
-    [[NSUserDefaults standardUserDefaults]synchronize ];
-    
+        
 //    NSUserDefaults * removeUDCode = [NSUserDefaults standardUserDefaults];
 //    [removeUDCode removeObjectForKey:@"userCode"];
 //    [[NSUserDefaults standardUserDefaults]synchronize ];
     
-    LoginVC *loginVC = [[LoginVC alloc]init];
     
-    loginVC =  (LoginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"login_sbid"];
-    [self.navigationController pushViewController:loginVC animated:YES];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+                                                   message: @"Are sure you want to signout?"
+                                                  delegate: self
+                                         cancelButtonTitle:@"Signout"
+                                         otherButtonTitles:@"Cancel",nil];
     
     
+    [alert show];
+
     
+}
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    //if (alertView.tag == 1) { // UIAlertView with tag 1 detected
+    if (buttonIndex == 0)
+    {
+        
+        NSUserDefaults * removeUD = [NSUserDefaults standardUserDefaults];
+        [removeUD removeObjectForKey:@"isUserLoggedin"];
+        [[NSUserDefaults standardUserDefaults]synchronize ];
+        
+        NSLog(@"user pressed Button Indexed 0");
+        
+        LoginVC *loginVC = [[LoginVC alloc]init];
+        
+        loginVC =  (LoginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"login_sbid"];
+        [self.navigationController pushViewController:loginVC animated:YES];
+
+    }
+    else
+    {
+        NSLog(@"user pressed Button Indexed 1");
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        DashBoardVC *dashBoard =(DashBoardVC*) [storyBoard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+        //Fixvc.CompitionCode=selectindexarray;
+        [dashBoard setModalPresentationStyle:UIModalPresentationFullScreen];
+        [self presentViewController:dashBoard animated:NO completion:nil];
+    }
 }
 
 

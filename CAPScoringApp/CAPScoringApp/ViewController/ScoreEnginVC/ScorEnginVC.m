@@ -957,7 +957,7 @@
     if(selectBtnTag.tag==112)
     {
         
-        //[self selectBtncolor_Action:@"112" :nil :201];
+        [self selectBtncolor_Action:@"112" :nil :201];
         NSString *otw;
         
         AppealRecord *objAppealrecord=(AppealRecord*)[_otwRtwArray objectAtIndex:0];
@@ -1524,18 +1524,18 @@
     select_btn.backgroundColor=[UIColor colorWithRed:(139/255.0f) green:(137/255.0f) blue:(137/255.0f) alpha:1.0f];
 }
 
--(void) didSelectOTWRTW
-{
-    [self unselectedButtonBg:self.btn_OTW];
-    [self unselectedButtonBg:self.btn_RTW];
-    
-    if(!isOTWselected)
-    {
-        [self selectedButtonBg:self.btn_OTW];
-        isOTWselected = YES;
-        
-    }
-}
+//-(void) didSelectOTWRTW
+//{
+//    [self unselectedButtonBg:self.btn_OTW];
+//    [self unselectedButtonBg:self.btn_RTW];
+//    
+//    if(!isOTWselected)
+//    {
+//        [self selectedButtonBg:self.btn_OTW];
+//        isOTWselected = YES;
+//        
+//    }
+//}
 
 
 //Toggle for more runs
