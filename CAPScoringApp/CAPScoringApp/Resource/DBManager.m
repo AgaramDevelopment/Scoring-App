@@ -16,6 +16,9 @@
 #import "SelectPlayerRecord.h"
 #import "BallEventRecord.h"
 #import "AppealRecord.h"
+#import "BowlAndShotTypeRecords.h"
+#import "FieldingFactorRecord.h"
+
 
 @implementation DBManager
 
@@ -110,14 +113,16 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 NSLog(@"Success");
-                
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
                 
             }
         }
-        sqlite3_finalize(statement);
-        sqlite3_close(dataBase);
+       
     }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -595,7 +600,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbpath, &mySqliteDB) == SQLITE_OK)
     {
         
-        NSString *insertBallevent = [NSString stringWithFormat:@"INSERT INTO BALLEVENTS(BALLCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,DAYNO,INNINGSNO,OVERNO,BALLNO,BALLCOUNT,OVERBALLCOUNT,SESSIONNO,STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE,UMPIRE2CODE,ATWOROTW,BOWLINGEND,BOWLTYPE,SHOTTYPE,ISLEGALBALL,ISFOUR,ISSIX,RUNS,OVERTHROW,TOTALRUNS,WIDE,NOBALL,BYES,LEGBYES,PENALTY,TOTALEXTRAS,GRANDTOTAL,RBW,PMLINECODE,PMLENGTHCODE,PMX1,PMY1,PMX2,PMY3,WWREGION,WWX1,WWY1,WWX2,WWY2,BALLDURATION,ISAPPEAL,ISBEATEN,ISUNCOMFORT,ISWTB,ISRELEASESHOT,MARKEDFOREDIT,REMARKS,VIDEOFILENAME,SHOTTYPECATEGORY,PMSTRIKEPOINT,PMSTRIKEPOINTLINECODE,BALLSPEED,UNCOMFORTCLASSIFCATION) VALUES (\"%@\",\"%@\", \"%@\", \"%@\",\"%@\",\"%@\",\"0\",\"1\",\"1\",\"1\",\" %@\",\"PYC0000007\",\"PYC0000008\",\"PYC0000027\",\"PYC0000146\",\"OFC0000001\",\"OFC0000002\",\"MSC150\",\"BWT0000009\",\"UCH0000001\",\"1\",\"1\",\"0\",\"1\",\"4\",\"5\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"5\",\"0\",\"MSC031\",\"MSC032\",\"1\",\"1\",\"113\",\"214\",1,\"MSC197\",\"157\",\"125\",\"107\",1,1,1,1,1,1,1,1,1,1,1,2,2,2,2)",ballEventData.objBallcode,ballEventData.objcompetitioncode,ballEventData.objmatchcode,ballEventData.objTeamcode,ballEventData.objDayno,ballEventData.objInningsno,ballEventData.objSessionno];
+        NSString *insertBallevent = [NSString stringWithFormat:@"INSERT INTO BALLEVENTS(BALLCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,DAYNO,INNINGSNO,OVERNO,BALLNO,BALLCOUNT,OVERBALLCOUNT,SESSIONNO,STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE,UMPIRE2CODE,ATWOROTW,BOWLINGEND,BOWLTYPE,SHOTTYPE,ISLEGALBALL,ISFOUR,ISSIX,RUNS,OVERTHROW,TOTALRUNS,WIDE,NOBALL,BYES,LEGBYES,PENALTY,TOTALEXTRAS,GRANDTOTAL,RBW,PMLINECODE,PMLENGTHCODE,PMX1,PMY1,PMX2,PMY3,WWREGION,WWX1,WWY1,WWX2,WWY2,BALLDURATION,ISAPPEAL,ISBEATEN,ISUNCOMFORT,ISWTB,ISRELEASESHOT,MARKEDFOREDIT,REMARKS,VIDEOFILENAME,SHOTTYPECATEGORY,PMSTRIKEPOINT,PMSTRIKEPOINTLINECODE,BALLSPEED,UNCOMFORTCLASSIFCATION) VALUES (\"%@\",\"%@\", \"%@\", \"%@\",\"%@\",\"%@\",\"0\",\"1\",\"1\",\"1\",\" %@\",\"PYC0000007\",\"PYC0000008\",\"PYC0000027\",\"PYC0000146\",\"OFC0000001\",\"OFC0000002\",\"%@\",\"BWT0000009\",\"UCH0000001\",\"1\",\"1\",\"0\",\"1\",\"4\",\"5\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"5\",\"0\",\"MSC031\",\"MSC032\",\"1\",\"1\",\"113\",\"214\",1,\"MSC197\",\"157\",\"125\",\"107\",1,1,1,1,1,1,1,1,1,1,1,2,2,2,2)",ballEventData.objBallcode,ballEventData.objcompetitioncode,ballEventData.objmatchcode,ballEventData.objTeamcode,ballEventData.objDayno,ballEventData.objInningsno,ballEventData.objSessionno,ballEventData.objAtworotw];
         
         const char *insert_stmt = [insertBallevent UTF8String];
         sqlite3_prepare_v2(mySqliteDB, insert_stmt, -1, &statement, NULL);
@@ -925,6 +930,142 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_close(dataBase);
     return OtwRtwArray;
     
+}
+
+//Bowl Type for Spin
++(NSMutableArray *)getBowlType {
+    NSMutableArray *bowlTypeArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT BOWLTYPECODE,BOWLTYPE FROM BOWLTYPE WHERE BOWLERTYPE = 'MSC016' AND RECORDSTATUS = 'MSC001'"];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                
+                BowlAndShotTypeRecords *bowlTypeRecord = [[BowlAndShotTypeRecords alloc]init];
+                bowlTypeRecord.BowlTypeCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                bowlTypeRecord.BowlType = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                
+                [bowlTypeArray addObject:bowlTypeRecord];
+                
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
+    }
+    return bowlTypeArray;
+}
+
+
+//Bowl Type for Fast
++(NSMutableArray *)getBowlFastType {
+    NSMutableArray *fastBowlTypeArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT BOWLTYPECODE,BOWLTYPE FROM BOWLTYPE WHERE BOWLERTYPE = 'MSC015' AND RECORDSTATUS = 'MSC001'"];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                
+                BowlAndShotTypeRecords *bowlTypeRecord = [[BowlAndShotTypeRecords alloc]init];
+                bowlTypeRecord.BowlTypeCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                bowlTypeRecord.BowlType = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                
+                [fastBowlTypeArray addObject:bowlTypeRecord];
+                
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
+    }
+    return fastBowlTypeArray;
+}
+
+//Aggressive Shot Type
++(NSMutableArray *)getAggressiveShotType {
+    NSMutableArray *aggressiveShotType=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT SHOTCODE,SHOTNAME FROM SHOTTYPE WHERE SHOTTYPE = 'MSC005' AND RECORDSTATUS = 'MSC001'"];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                
+                BowlAndShotTypeRecords *shotTypeRecord = [[BowlAndShotTypeRecords alloc]init];
+                shotTypeRecord.ShotTypeCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                shotTypeRecord.ShotType = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                
+                [aggressiveShotType addObject:shotTypeRecord];
+                
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
+    }
+    return aggressiveShotType;
+}
+
+
+//Defence Shot Type
++(NSMutableArray *)getDefenceShotType {
+    NSMutableArray *defenceShotType=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT SHOTCODE,SHOTNAME FROM SHOTTYPE WHERE SHOTTYPE = 'MSC006' AND RECORDSTATUS = 'MSC001'"];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                
+                BowlAndShotTypeRecords *shotTypeRecord = [[BowlAndShotTypeRecords alloc]init];
+                shotTypeRecord.ShotTypeCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                shotTypeRecord.ShotType = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                
+                [defenceShotType addObject:shotTypeRecord];
+                
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
+    }
+    return defenceShotType;
 }
 
 

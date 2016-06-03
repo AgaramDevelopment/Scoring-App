@@ -29,4 +29,6 @@
 - (IBAction)btn_archives:(id)sender;
 - (IBAction)btn_reports:(id)sender;
 
+- (IBAction)btn_signOut:(id)sender;
+
 @end

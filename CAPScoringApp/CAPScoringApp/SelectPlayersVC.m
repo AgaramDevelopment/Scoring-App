@@ -10,10 +10,13 @@
 #import "SelectPlayerRecord.h"
 #import "SelectPlayerCVCell.h"
 #import "PlayerOrderLevelVC.h"
+#import "CustomNavigationVC.h"
 
 #import "DBManager.h"
 
-@interface SelectPlayersVC ()
+@interface SelectPlayersVC (){
+    CustomNavigationVC *objCustomNavigation;
+}
 
 @property (nonatomic,strong) NSMutableArray *selectedPlayerArray;
 @property (nonatomic,strong) NSMutableArray *selectedPlayerFilterArray;
@@ -72,6 +75,18 @@ static NSString * const reuseIdentifier = @"Cell";
     
     
 }
+
+
+-(void)customnavigationmethod
+{
+    objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
+    [self.view addSubview:objCustomNavigation.view];
+    objCustomNavigation.lbl_titleName.text=@"SELECT PLAYERS";
+    [objCustomNavigation.Btn_Back addTarget:self action:@selector(btn_back:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+
 
 -(void) addImageInAppDocumentLocation:(NSString*) fileName{
     
@@ -277,6 +292,11 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     //Relaod view
     [self.collectionView reloadData];
+}
+
+- (IBAction)btn_back:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 /**
