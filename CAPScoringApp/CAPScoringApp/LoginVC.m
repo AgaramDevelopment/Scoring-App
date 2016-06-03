@@ -142,12 +142,19 @@
  * Open content page
  */
 -(void) openContentView{
-    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    DashBoardVC  *homeVc =(DashBoardVC*) [storyBoard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
-    [homeVc setModalPresentationStyle:UIModalPresentationFullScreen];
-    [self presentViewController:homeVc animated:NO completion:nil];
+//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    DashBoardVC  *homeVc =(DashBoardVC*) [storyBoard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+//    [homeVc setModalPresentationStyle:UIModalPresentationFullScreen];
+//    [self presentViewController:homeVc animated:NO completion:nil];
+    
+    DashBoardVC *loginVC = [[DashBoardVC alloc]init];
+    loginVC =  (DashBoardVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+    [self.navigationController pushViewController:loginVC animated:YES];
+    
     
 }
+
+
 
 
 /**
