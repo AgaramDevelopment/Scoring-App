@@ -18,6 +18,7 @@
 #import "AggressiveShotTypeCell.h"
 #import "FieldingFactorCell.h"
 #import "FieldingFactorRecord.h"
+#import "BowlerEvent.h"
 
 
 @interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource>
@@ -40,6 +41,8 @@
     BOOL isMoreRunSelected;
     BOOL isExtrasSelected;
     BOOL isOverthrowSelected;
+    BOOL isFieldingSelected;
+    int fieldingOption;
     BOOL isOTWselected;
     BOOL isRTWselected;
     
@@ -63,8 +66,11 @@
 @property (nonatomic, strong) CDRTranslucentSideBar *sideBar;
 @property (nonatomic, strong) CDRTranslucentSideBar *rightSideBar;
 //@property(nonatomic,strong) NSMutableArray *selectbtnvalueArray;
+
 //Fielding Factors
 @property (nonatomic,strong)NSMutableArray *fieldingfactorArray;
+@property (nonatomic,strong)NSMutableArray *fieldingPlayerArray;
+@property (nonatomic,strong)NSMutableArray *nrsArray;
 
 
 
@@ -82,7 +88,6 @@
 @synthesize tbl_bowlType;
 @synthesize tbl_fastBowl;
 @synthesize tbl_aggressiveShot;
-@synthesize tbl_fieldingfactor;
 
 
 
@@ -176,10 +181,12 @@
     
     isRBWSelected = NO;
     ismiscFilters = NO;
+    isFieldingSelected = NO;
+    fieldingOption = 0;
     
     //Fielding Factor
-    _fieldingfactorArray=[[NSMutableArray alloc]init];
-    _fieldingfactorArray =[DBManager RetrieveFieldingFactorData];
+    //_fieldingfactorArray=[[NSMutableArray alloc]init];
+   // _fieldingfactorArray =[DBManager RetrieveFieldingFactorData];
     
 //    self.view_fieldingfactor.hidden = YES;
 //    self.view_fieldername.hidden = YES;
@@ -355,6 +362,22 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    
+    //Fielding array
+    if(isFieldingSelected && fieldingOption == 1)
+    {
+        return [self.fieldingfactorArray count];
+    }
+    if(isFieldingSelected && fieldingOption == 2)
+    {
+        return [self.fieldingPlayerArray count];
+    }
+    if(isFieldingSelected && fieldingOption == 3)
+    {
+        return [self.nrsArray count];
+    }
+
+    
     if(extrasTableView == tableView){
         return self.extrasOptionArray.count;
     }else if(overThrowTableView == tableView){
@@ -392,10 +415,6 @@
         return self.miscfiltersOptionArray.count;
     }
     
-    if(tableView == tbl_fieldingfactor)
-    {
-        return [self.fieldingfactorArray count];
-    }
     return 0;
 }
 
@@ -409,6 +428,42 @@
         UIView *bgColorView = [[UIView alloc] init];
         bgColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
         cell.selectedBackgroundView = bgColorView;
+        
+        
+        //Fielding factor
+        if(isFieldingSelected && fieldingOption == 1)
+        {
+            static NSString *CellIdentifier = @"fastBowlCell";
+            
+            FastBowlTypeCell *fieldFactorCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                                                forIndexPath:indexPath];
+            FieldingFactorRecord *objFieldingFactorRecord=(FieldingFactorRecord*)[_fieldingfactorArray objectAtIndex:indexPath.row];
+            fieldFactorCell.lbl_fastBowl.text = objFieldingFactorRecord.fieldingfactor;
+            return fieldFactorCell;
+        }
+        if(isFieldingSelected && fieldingOption == 2)
+        {
+            static NSString *CellIdentifier = @"fastBowlCell";
+            FastBowlTypeCell *fieldFactorCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                                                forIndexPath:indexPath];
+            BowlerEvent *bowlerEvent=(BowlerEvent*)[_fieldingPlayerArray objectAtIndex:indexPath.row];
+            fieldFactorCell.lbl_fastBowl.text = bowlerEvent.BowlerName;
+            return fieldFactorCell;
+        }
+        if(isFieldingSelected && fieldingOption == 3)
+        {
+            static NSString *CellIdentifier = @"fastBowlCell";
+            
+            FastBowlTypeCell *fieldFactorCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                                                forIndexPath:indexPath];
+            NSString *nrs=(NSString*)[_nrsArray objectAtIndex:indexPath.row];
+            fieldFactorCell.lbl_fastBowl.text = nrs;
+            return fieldFactorCell;
+        }
+        
+        
+        
+        
     }
     if(tableView == extrasTableView){
         cell.textLabel.text = [self.extrasOptionArray objectAtIndex:indexPath.row];
@@ -495,20 +550,20 @@
         cell.textLabel.text = [self.miscfiltersOptionArray objectAtIndex:indexPath.row];
     }
     
-    //fielding factor
-    if(tableView == tbl_fieldingfactor){
-        static NSString *CellIdentifier = @"cell";
-        
-        FieldingFactorCell *fielidngfactorCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
-                                                                                 forIndexPath:indexPath];
-        
-        FieldingFactorRecord *objFieldingFactorRecord=(FieldingFactorRecord*)[_fieldingfactorArray objectAtIndex:indexPath.row];
-        
-        
-        fielidngfactorCell.lbl_fieldingfactor.text = objFieldingFactorRecord.fieldingfactor;
-        
-        return fielidngfactorCell;
-    }
+//    //fielding factor
+//    if(tableView == tbl_fieldingfactor){
+//        static NSString *CellIdentifier = @"cell";
+//        
+//        FieldingFactorCell *fielidngfactorCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+//                                                                                 forIndexPath:indexPath];
+//        
+//        FieldingFactorRecord *objFieldingFactorRecord=(FieldingFactorRecord*)[_fieldingfactorArray objectAtIndex:indexPath.row];
+//        
+//        
+//        fielidngfactorCell.lbl_fieldingfactor.text = objFieldingFactorRecord.fieldingfactor;
+//        
+//        return fielidngfactorCell;
+//    }
     
     //background color for selected cell
     UIView *bgColorView = [[UIView alloc] init];
@@ -822,12 +877,12 @@
     {
         if (ismiscFilters) {
             if(self.ballEventRecord.objIsbeaten.integerValue ==0 && self.ballEventRecord.objIswtb.integerValue ==0 && self.ballEventRecord.objIsuncomfort.integerValue ==0 && self.ballEventRecord.objIsreleaseshot.integerValue ==0){
-                self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];//Black
+                self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Black
                 
                 
             }else{
                 
-                self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:0.5f];//Green
+                self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Green
             }
             [miscFiltersTableview removeFromSuperview];
             
@@ -835,12 +890,12 @@
         }else{
             ismiscFilters = YES;
             
-            self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:0.5f];
+            self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
             self.miscfiltersOptionArray=[[NSMutableArray alloc]initWithObjects:@"Uncomfort",@"Beaten",@"Release Shot",@"WTB", nil];
             
             
             
-            miscFiltersTableview=[[UITableView alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.size.width-180, self.btn_miscFilter.frame.origin.y-80,100,250)];
+            miscFiltersTableview=[[UITableView alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.size.width-570, self.btn_miscFilter.frame.origin.y-80,100,250)];
             miscFiltersTableview.backgroundColor=[UIColor whiteColor];
             
             miscFiltersTableview.dataSource = self;
@@ -961,18 +1016,41 @@
      
         
     }
-    else if(selectBtnTag.tag==118)
+    else if(selectBtnTag.tag==118) //fielding factor
     {
-        [self selectBtncolor_Action:@"118" :nil :207];
+        //   [self selectBtncolor_Action:@"118" :nil :207];
+        
+        if(isFieldingSelected){
+            isFieldingSelected = NO;
+            fieldingOption = 0;
+            
+            self.view_bowlType.hidden = YES;
+            self.view_fastBowl.hidden = YES;
+            [self unselectedButtonBg:selectBtnTag];
+        }else{
+            //Fielding Factor
+            _fieldingfactorArray=[[NSMutableArray alloc]init];
+            _fieldingfactorArray =[DBManager RetrieveFieldingFactorData];
+            
+            [self selectedButtonBg:selectBtnTag];
+            isFieldingSelected = YES;
+            fieldingOption = 1;
+            
+            self.view_bowlType.hidden = YES;
+            self.view_fastBowl.hidden = NO;
+            
+            [self.tbl_fastBowl reloadData];
+        }
+
     }
-    else if(selectBtnTag.tag==119)
+    else if(selectBtnTag.tag==119)//RBW
     {
         if (isRBWSelected) {
             if(self.ballEventRecord.objRbw!=0){
                 
-                self.btn_RBW.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:0.5f];
+                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:0.5f];
             }else{
-                self.btn_RBW.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
+                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
             }
             [rbwTableview removeFromSuperview];
             
@@ -980,7 +1058,7 @@
         }else{
             isRBWSelected = YES;
             
-            self.btn_RBW.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:0.5f];
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:0.5f];
             self.rbwOptionArray=[[NSMutableArray alloc]initWithObjects:@"-1",@"-2",@"-3",@"-4",@"-5",@"1",@"2",@"3",@"4",@"5", nil];
             
             
@@ -1809,19 +1887,19 @@
         if( self.ballEventRecord.objRbw != [self.rbwOptionArray objectAtIndex:indexPath.row]){
             self.ballEventRecord.objRbw = [self.rbwOptionArray objectAtIndex:indexPath.row];
             [rbwTableview removeFromSuperview];
-            self.btn_RBW.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
             isRBWSelected = NO;
             
             if(self.ballEventRecord.objRbw!=0){
-                self.btn_RBW.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:0.5f];
+                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:0.5f];
             }else{
-                self.btn_RBW.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
+                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
             }
         }else{
             self.ballEventRecord.objRbw = [NSNumber numberWithInteger:0];
             [rbwTableview removeFromSuperview];
             
-            self.btn_RBW.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
             
             isRBWSelected = NO;
         }
