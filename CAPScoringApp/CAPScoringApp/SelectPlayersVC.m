@@ -255,10 +255,11 @@ static NSString * const reuseIdentifier = @"Cell";
             [DBManager updateSelectedPlayersResultCode:[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus];
             
         }
-        PlayerOrderLevelVC *viewController = [[PlayerOrderLevelVC alloc] init];
+        PlayerOrderLevelVC *obPlayerOrderLevelVCj = [[PlayerOrderLevelVC alloc] init];
+        obPlayerOrderLevelVCj.objSelectplayerList_Array=self.selectedPlayerArray;
         
         // push a new stack
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.navigationController pushViewController:obPlayerOrderLevelVCj animated:YES];
         
     
 }else{
@@ -323,5 +324,17 @@ static NSString * const reuseIdentifier = @"Cell";
         }
     }
     return selectCount>=7?YES:NO;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenRect.size.width;
+    float cellWidth = screenWidth / 3.0; //Replace the divisor with the column count requirement. Make sure to have it in float.
+    CGSize size = CGSizeMake(cellWidth, cellWidth);
+    
+    return size;
 }
 @end
