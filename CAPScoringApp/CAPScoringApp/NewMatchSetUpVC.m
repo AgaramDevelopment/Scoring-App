@@ -226,7 +226,7 @@
    selectvc.teamCode=teamBcode;
     
     [self.navigationController pushViewController:selectvc animated:YES];
-    
+
     
     
 }

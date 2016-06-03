@@ -12,6 +12,6 @@
 
 @synthesize playerCode;
 @synthesize playerName;
-@synthesize isSelected;
+@synthesize isSelected,isSelectCapten,isSelectWKTKeeper,playerOrder;
 
 @end

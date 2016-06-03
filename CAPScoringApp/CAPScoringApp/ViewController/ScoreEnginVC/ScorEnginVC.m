@@ -1262,7 +1262,7 @@
     self.ballEventRecord.objLegByes = 0;
     self.ballEventRecord.objWide = 0;
     self.ballEventRecord.objNoball = 0;
-    self.ballEventRecord.objIslegalball = 0;
+    self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:1];
     
     
     self.ballEventRecord.objOverthrow = 0;
@@ -1875,17 +1875,30 @@
             [extrasTableView reloadData];
             
             //B6
-            if(self.ballEventRecord.objIssix.integerValue == 0){
-                if(!isMoreRunSelected){
-                    [self unselectedButtonBg:self.btn_B6];
+            if(self.ballEventRecord.objIssix.integerValue == 0){//Six un selected
+               
+                if(!isMoreRunSelected){//Normal state
+                    
+                    if(self.ballEventRecord.objLegByes.integerValue==1 || self.ballEventRecord.objWide.integerValue==1 || self.ballEventRecord.objByes.integerValue==1){//Check for LB,WD,B selected
+                        [self disableButtonBg:self.btn_B6];
+                        self.btn_B6.userInteractionEnabled=NO;
+                    }
+                    else{
+                        [self unselectedButtonBg:self.btn_B6];
+                        self.btn_B6.userInteractionEnabled=YES;
+                    
+                    }
                 }
-                self.btn_B6.userInteractionEnabled=YES;
+                
             }
             
             //Noball
             NSIndexPath *noballIndexPath = [NSIndexPath indexPathForRow:0 inSection:0];
             [extrasTableView selectRowAtIndexPath:noballIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
             self.ballEventRecord.objNoball = [NSNumber numberWithInt:1];
+            
+            //Is Legal ball
+            self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:0];
             
             //Byes Select
             if(self.ballEventRecord.objByes.integerValue !=0){
@@ -1918,6 +1931,9 @@
             
             //Wide Value
             self.ballEventRecord.objWide = [NSNumber numberWithInt:1];
+            
+            //is Legal ball
+             self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:0];
             
             //Recreate list
             //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide", nil];
@@ -1962,6 +1978,7 @@
             
             //Legbyes
             self.ballEventRecord.objLegByes = [NSNumber numberWithInt:1];
+
             
         }
     }else if(tableView == overThrowTableView){//Over throw table view
@@ -2047,16 +2064,20 @@
             //Noball
             self.ballEventRecord.objNoball = [NSNumber numberWithInt:0];
             
+            //Legalball
+            self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:1];
+            
             //Recreate list
             //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
             self.extrasOptionArray=[self getExtrasOptionArray];
             [extrasTableView reloadData];
             
             
-            if(self.ballEventRecord.objIssix.integerValue == 0){
-                [self unselectedButtonBg:self.btn_B6];
-                self.btn_B6.userInteractionEnabled=YES;
-            }
+//            if(self.ballEventRecord.objIssix.integerValue == 0){
+//                [self unselectedButtonBg:self.btn_B6];
+//                self.btn_B6.userInteractionEnabled=YES;
+//            }
+            
             
             //Byes Select
             if(self.ballEventRecord.objByes.integerValue !=0){
@@ -2081,6 +2102,8 @@
             
             //Wide
             self.ballEventRecord.objWide = [NSNumber numberWithInt:0];
+            //Is Legal ball
+            self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:1];
             
             //Recreate list
             //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
@@ -2156,7 +2179,6 @@
         
     }
 }
-
 
 //
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
