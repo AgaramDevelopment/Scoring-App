@@ -25,24 +25,24 @@
     _FetchOfficalMasterArray =[DBManager RetrieveOfficalMasterData];
     
     
-    [self.view_umpire.layer setBorderColor:[UIColor colorWithRed:75 green:95 blue:114 alpha:0.5].CGColor];
+    [self.view_umpire.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.view_umpire.layer.borderWidth = 2;
     
     
-    [self.view_umpier1.layer setBorderColor:[UIColor colorWithRed:75 green:95 blue:114 alpha:0.5].CGColor];
+    [self.view_umpier1.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.view_umpier1.layer.borderWidth = 2;
     
-    [self.view_umpier2.layer setBorderColor:[UIColor colorWithRed:75 green:95 blue:114 alpha:0.5].CGColor];
+    [self.view_umpier2.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.view_umpier2.layer.borderWidth = 2;
     
     
-    [self.view_matchrefree.layer setBorderColor:[UIColor colorWithRed:75 green:95 blue:114 alpha:0.5].CGColor];
+    [self.view_matchrefree.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.view_matchrefree.layer.borderWidth = 2;
     
-    [self.view_scorer1.layer setBorderColor:[UIColor colorWithRed:75 green:95 blue:114 alpha:0.5].CGColor];
+    [self.view_scorer1.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.view_scorer1.layer.borderWidth = 2;
     
-    [self.view_scorer2.layer setBorderColor:[UIColor colorWithRed:75 green:95 blue:114 alpha:0.5].CGColor];
+    [self.view_scorer2.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.view_scorer2.layer.borderWidth = 2;
     
     
