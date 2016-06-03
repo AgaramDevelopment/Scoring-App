@@ -609,7 +609,7 @@
         startBallTime= [dateFormatter1 dateFromString:time];
         [self.btn_StartBall setTitle:@"END BALL" forState:UIControlStateNormal];
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
-        self.btn_StartOver.userInteractionEnabled=NO;
+//        self.btn_StartOver.userInteractionEnabled=NO;
         [self AllBtnEnableMethod];
         
     }
@@ -618,7 +618,7 @@
         [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
         self.btn_StartOver.userInteractionEnabled=YES;
-        self.btn_StartBall.userInteractionEnabled=NO;
+//        self.btn_StartBall.userInteractionEnabled=NO;
         [self AllBtndisableMethod];
        //EndBallTime = [NSDate date];
 //        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -699,6 +699,8 @@
     {
         self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
         [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
+        if(![self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
+            [self DidClickStartBall : self.btn_StartBall];
         self.btn_StartBall.userInteractionEnabled=YES;
        
     }
