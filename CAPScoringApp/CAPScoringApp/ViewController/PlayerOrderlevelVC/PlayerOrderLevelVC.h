@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PlayerOrderLevelVC : UIViewController
+@property(nonatomic,strong) NSMutableArray *objSelectplayerList_Array;
 
 @end

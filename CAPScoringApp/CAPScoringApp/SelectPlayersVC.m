@@ -10,10 +10,13 @@
 #import "SelectPlayerRecord.h"
 #import "SelectPlayerCVCell.h"
 #import "PlayerOrderLevelVC.h"
+#import "CustomNavigationVC.h"
 
 #import "DBManager.h"
 
-@interface SelectPlayersVC ()
+@interface SelectPlayersVC (){
+    CustomNavigationVC *objCustomNavigation;
+}
 
 @property (nonatomic,strong) NSMutableArray *selectedPlayerArray;
 @property (nonatomic,strong) NSMutableArray *selectedPlayerFilterArray;
@@ -73,6 +76,18 @@ static NSString * const reuseIdentifier = @"Cell";
     
 }
 
+
+-(void)customnavigationmethod
+{
+    objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
+    [self.view addSubview:objCustomNavigation.view];
+    objCustomNavigation.lbl_titleName.text=@"SELECT PLAYERS";
+    [objCustomNavigation.Btn_Back addTarget:self action:@selector(btn_back:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+
+
 -(void) addImageInAppDocumentLocation:(NSString*) fileName{
     
     BOOL success = [self checkFileExist:fileName];
@@ -114,6 +129,19 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
     return 1;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    int t =collectionView.frame.size.width/3.2;
+    return CGSizeMake(235 , 273);
+    
+//    CGRect screenRect = [[UIScreen mainScreen] bounds];
+//    CGFloat screenWidth = screenRect.size.width;
+//    float cellWidth = screenWidth / 3.0; //Replace the divisor with the column count requirement. Make sure to have it in float.
+//    CGSize size = CGSizeMake(cellWidth, cellWidth);
+//    
+//    return size;
 }
 
 
@@ -240,10 +268,11 @@ static NSString * const reuseIdentifier = @"Cell";
             [DBManager updateSelectedPlayersResultCode:[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus];
             
         }
-        PlayerOrderLevelVC *viewController = [[PlayerOrderLevelVC alloc] init];
+        PlayerOrderLevelVC *obPlayerOrderLevelVCj = [[PlayerOrderLevelVC alloc] init];
+        obPlayerOrderLevelVCj.objSelectplayerList_Array=self.selectedPlayerArray;
         
         // push a new stack
-        [self.navigationController pushViewController:viewController animated:YES];
+        [self.navigationController pushViewController:obPlayerOrderLevelVCj animated:YES];
         
     
 }else{
@@ -279,6 +308,11 @@ static NSString * const reuseIdentifier = @"Cell";
     [self.collectionView reloadData];
 }
 
+- (IBAction)btn_back:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 /**
  * Show message for given title and content
  */
@@ -304,4 +338,16 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     return selectCount>=7?YES:NO;
 }
+
+//- (CGSize)collectionView:(UICollectionView *)collectionView
+//                  layout:(UICollectionViewLayout *)collectionViewLayout
+//  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    CGRect screenRect = [[UIScreen mainScreen] bounds];
+//    CGFloat screenWidth = screenRect.size.width;
+//    float cellWidth = screenWidth / 3.0; //Replace the divisor with the column count requirement. Make sure to have it in float.
+//    CGSize size = CGSizeMake(cellWidth, cellWidth);
+//    
+//    return size;
+//}
 @end

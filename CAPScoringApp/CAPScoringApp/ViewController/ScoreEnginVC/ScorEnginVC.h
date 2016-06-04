@@ -139,4 +139,31 @@
 - (IBAction)btn_AppealSave:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *comments_txt;
 
+//bowltype
+@property (weak, nonatomic) IBOutlet UITableView *tbl_bowlType;
+@property (weak, nonatomic) IBOutlet UIView *view_bowlType;
+
+
+//fast bowl type
+@property (weak, nonatomic) IBOutlet UIView *view_fastBowl;
+@property (weak, nonatomic) IBOutlet UITableView *tbl_fastBowl;
+
+
+//aggressive shot type
+@property (weak, nonatomic) IBOutlet UITableView *tbl_aggressiveShot;
+@property (weak, nonatomic) IBOutlet UIView *view_aggressiveShot;
+//fielding factor
+@property (strong, nonatomic) IBOutlet UIView *view_fieldingfactor;
+@property (strong, nonatomic) IBOutlet UITableView *tbl_fieldingfactor;
+@property (strong, nonatomic) IBOutlet UIView *view_fieldername;  //fielding factor playername
+@property (strong, nonatomic) IBOutlet UIView *view_nrs;   //fileiding factor netruns
+
+//defensive shot type
+@property (weak, nonatomic) IBOutlet UITableView *tbl_defensive;
+@property (weak, nonatomic) IBOutlet UIView *view_defensive;
+@property (strong, nonatomic) IBOutlet UIView *view_Rbw;
+
+
+
+
 @end

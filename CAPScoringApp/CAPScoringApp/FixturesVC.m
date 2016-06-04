@@ -89,7 +89,7 @@
     
     // change background color of selected cell
     UIView *bgColorView = [[UIView alloc] init];
-    [bgColorView setBackgroundColor:[UIColor colorWithRed:0.2 green:0.7 blue:0.2 alpha:0.5]];
+    [bgColorView setBackgroundColor:[UIColor colorWithRed:0.2 green:0.7 blue:0.2 alpha:1.0]];
     
     [cell setSelectedBackgroundView:bgColorView];
     
