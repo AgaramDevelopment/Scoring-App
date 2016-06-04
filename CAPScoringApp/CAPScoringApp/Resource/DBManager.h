@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 #import "BallEventRecord.h"
+#import "BowlerEvent.h"
+#import "FieldingFactorRecord.h"
+
 @interface DBManager : NSObject
 //tournament
 +(NSMutableArray *)RetrieveEventData;
@@ -29,7 +32,8 @@
 
 +(NSMutableArray *)RetrieveFixturesData;
 +(BOOL)updateFixtureInfo:(NSString*)comments matchCode:(NSString*) matchCode competitionCode:(NSString*)competitionCode;
-+(NSMutableArray *)RetrieveOfficalMasterData;
+//+(NSMutableArray *)RetrieveOfficalMasterData;
++(NSMutableArray *)RetrieveOfficalMasterData:(NSString*) matchCode competitionCode:(NSString*)competitionCode;
 
 
 //select player
@@ -48,6 +52,7 @@
 + (BOOL) insertBallCodeAppealEvent:(BallEventRecord *) ballcode;
 + (BOOL) insertBallCodeFieldEvent :(BallEventRecord *) ballcode;
 + (BOOL) insertBallCodeWicketEvent :(BallEventRecord *) ballcode;
++ (BOOL) insertBallCodeFieldEvent :(BallEventRecord *) ballEvent bowlerEvent:(BowlerEvent *)bowlerEvent fieldingFactor:(FieldingFactorRecord *) fieldingFactor nrs:(NSString *) nrs;
 
 + (NSMutableArray *) getballcodemethod;
 + (NSMutableArray *) getTeamCodemethod;

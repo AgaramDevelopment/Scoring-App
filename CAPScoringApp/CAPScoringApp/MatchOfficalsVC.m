@@ -18,11 +18,13 @@
 
 @implementation MatchOfficalsVC
 @synthesize competitionCode;
+@synthesize Matchcode;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     //_FetchOfficalMasterArray=[[NSMutableArray alloc]init];
-    _FetchOfficalMasterArray =[DBManager RetrieveOfficalMasterData];
+    _FetchOfficalMasterArray =[DBManager RetrieveOfficalMasterData:Matchcode competitionCode:competitionCode];
     
     
     [self.view_umpire.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
@@ -79,7 +81,7 @@
     
         UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
        TossDetailsVC *tossvc =(TossDetailsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"TossDetails"];
-    tossvc.MATCHCODE=_Matchcode;
+    tossvc.MATCHCODE=Matchcode;
     tossvc.CompetitionCode=competitionCode;
         [tossvc setModalPresentationStyle:UIModalPresentationFullScreen];
         [self presentViewController:tossvc animated:NO completion:nil];

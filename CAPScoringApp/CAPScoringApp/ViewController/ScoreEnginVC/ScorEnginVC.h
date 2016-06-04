@@ -164,17 +164,17 @@
 @property (strong, nonatomic) IBOutlet UIView *view_Rbw;
 
 @property (weak, nonatomic) IBOutlet UIView *view_otw;
-@property (weak, nonatomic) IBOutlet UIView *view_rtw;
-@property (weak, nonatomic) IBOutlet UIView *view_spin;
-@property (weak, nonatomic) IBOutlet UIView *view_fast;
+//@property (weak, nonatomic) IBOutlet UIView *view_rtw;
+//@property (weak, nonatomic) IBOutlet UIView *view_spin;
+//@property (weak, nonatomic) IBOutlet UIView *view_fast;
 
-@property (weak, nonatomic) IBOutlet UIView *view_aggressive;
+//@property (weak, nonatomic) IBOutlet UIView *view_aggressive;
 
-@property (weak, nonatomic) IBOutlet UIView *view_defense;
+//@property (weak, nonatomic) IBOutlet UIView *view_defense;
 
 @property (weak, nonatomic) IBOutlet UIView *view_fielding_factor;
 
-@property (weak, nonatomic) IBOutlet UIView *view_otw;
+//@property (weak, nonatomic) IBOutlet UIView *view_otw;
 @property (weak, nonatomic) IBOutlet UIView *view_rtw;
 @property (weak, nonatomic) IBOutlet UIView *view_spin;
 @property (weak, nonatomic) IBOutlet UIView *view_fast;
