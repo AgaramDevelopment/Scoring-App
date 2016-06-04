@@ -491,6 +491,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //select count team A and B players
 +(NSMutableArray *)SelectTeamPlayers:(NSString*) matchCode teamCode:(NSString*)teamCode  {
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    
+   // NSString *count = [[NSString alloc]init];
+    
     int retVal;
     
     
@@ -510,7 +513,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             FixturesRecord *record=[[FixturesRecord alloc]init];
             record.count=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            [eventArray addObject:record];
+           [eventArray addObject:record];
             
         }
     }

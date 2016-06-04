@@ -20,6 +20,7 @@
 @property (nonatomic,strong) NSMutableArray *selectedPlayerArray;
 @property (nonatomic,strong) NSMutableArray *selectedPlayerFilterArray;
 @property(nonatomic,strong)NSMutableArray *countTeam;
+@property (nonatomic,strong)NSMutableArray *countTeamB;
 
 @end
 
@@ -28,6 +29,7 @@
 @synthesize  matchCode;
 @synthesize teamAcode;
 @synthesize teamBcode;
+@synthesize competitionCode;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -35,11 +37,14 @@
     //fetch data from fixture screen and display in controls
     
     
+
+    
     [self customnavigationmethod];
     
-    //[self colorChange];
+   [self colorChange];
     
-    
+    _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
+    _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
     
     self.lbl_teamA.text = self.teamA;
     self.lbl_teamB.text = self.teamB;
@@ -196,7 +201,15 @@
     
     NSMutableArray *countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
     
-    if(countTeamB.count > 0){
+    
+    
+    FixturesRecord *fixture = (FixturesRecord*) [countTeamB objectAtIndex:0];
+    
+    
+    NSUInteger teamCountB = [fixture.count integerValue];
+    
+    
+    if(teamCountB >= 7){
         
         _view_teamB.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
         
@@ -209,6 +222,7 @@
     selectvc =  (SelectPlayersVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
     
     selectvc.teamCode=teamBcode;
+    selectvc.matchCode = matchCode;
     
     [self.navigationController pushViewController:selectvc animated:YES];
     
@@ -221,7 +235,16 @@
     //to change selected team players A color after selected 7 players
     NSMutableArray *countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
     
-    if(countTeam.count > 0){
+    
+    
+    FixturesRecord *fixture = (FixturesRecord*) [countTeam objectAtIndex:0];
+    
+    
+    NSUInteger teamCountA = [fixture.count integerValue];
+
+    
+    
+    if(teamCountA >= 7){
         
         _view_teamA.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
         
@@ -284,9 +307,22 @@
 
 //Validation for over update validation
 -(BOOL) overValidation{
+    
+    
+    _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
+    _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
+    
+    FixturesRecord *fixture = (FixturesRecord*) [_countTeam objectAtIndex:0];
+        FixturesRecord *fixtureB = (FixturesRecord*) [_countTeamB objectAtIndex:0];
+    
     NSString *oversTxt = self.txt_overs.text;
     NSInteger twentyText = [oversTxt intValue];
     NSInteger OdiText = [oversTxt intValue];
+    
+    NSUInteger teamCountA = [fixture.count integerValue];
+    NSUInteger teamCountB = [fixtureB.count integerValue];
+
+  
     
     if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){
         if(twentyText > 20){
@@ -295,17 +331,26 @@
             
             [self showDialog:@"Please enter overs" andTitle:@"Error"];
         }
-        else{
+        
+        
+        
+        else if (teamCountA >= 7 && teamCountB >= 7){
             
             MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
             
             matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
             
             matchvc.Matchcode = matchCode;
+            matchvc.competitionCode = competitionCode;
             
             [self.navigationController pushViewController:matchvc animated:YES];
+        }else{
+            
+            [self showDialog:@"Please select minimum seven players" andTitle:@"Error"];
+
         }
         return NO;
+        
     }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){
         if(OdiText > 50){
             
@@ -321,6 +366,7 @@
             matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
             
             matchvc.Matchcode = matchCode;
+            matchvc.competitionCode = competitionCode;
             
             [self.navigationController pushViewController:matchvc animated:YES];
             
@@ -333,13 +379,28 @@
     
 }
 
+
+
+
+
+
+
 -(void)colorChange{
     
-    _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
     
-    NSMutableArray *countTeamB =[DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
+    
+    _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
+     _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
+    
+    
+    FixturesRecord *fixture = (FixturesRecord*) [_countTeam objectAtIndex:0];
+     FixturesRecord *fixtureB = (FixturesRecord*) [_countTeamB objectAtIndex:0];
+  
+    
+    NSUInteger teamCountA = [fixture.count integerValue];
+    NSUInteger teamCountB = [fixtureB.count integerValue];
 
-    if (_countTeam.count > 0) {
+    if (teamCountA > 7) {
         
         //grey color
         _view_teamA.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
@@ -355,7 +416,7 @@
         
     }
         
-    if (countTeamB.count > 0) {
+    if (teamCountB > 7) {
         
         
         _view_teamB.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
