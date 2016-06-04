@@ -392,6 +392,9 @@
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="ico-back-btn"/>
+                                                <connections>
+                                                    <action selector="Back_BtnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uf6-uK-id8"/>
+                                                </connections>
                                             </button>
                                         </barButtonItem>
                                     </navigationItem>
@@ -1863,6 +1866,9 @@
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" image="ico-back-btn"/>
+                                                <connections>
+                                                    <action selector="Back_BtnAction:" destination="lOZ-LR-VXW" eventType="touchUpInside" id="RdW-mt-dYN"/>
+                                                </connections>
                                             </button>
                                         </barButtonItem>
                                     </navigationItem>

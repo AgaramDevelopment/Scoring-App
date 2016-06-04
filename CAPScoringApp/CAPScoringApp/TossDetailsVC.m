@@ -13,6 +13,7 @@
 #import "TossDeatilsEvent.h"
 #import "BowlerEvent.h"
 #import "ScorEnginVC.h"
+#import "CustomNavigationVC.h"
 @interface TossDetailsVC ()
 {
     BOOL isEnableTbl;
@@ -22,7 +23,7 @@
     NSMutableArray *NonStrikerselectindexarray;
     NSMutableArray *BowlerselectionIndexArray;
     
-    
+     CustomNavigationVC *objCustomNavigation;
     
     
     EventRecord *objEventRecord;
@@ -73,6 +74,7 @@
     
     
     
+    [self customnavigationmethod];
 
     
     [self.view_Striker setUserInteractionEnabled:NO];
@@ -86,34 +88,32 @@
     
     // Do any additional setup after loading the view.
 // _MATCHCODE=@"IMSC0221C6F6595E95A00001";
-    //wontoss
-    
-    [self.view_Wonby.layer setBorderWidth:3];
-    [self.view_Wonby.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_Wonby.layer setBorderWidth:2.0];
+    [self.view_Wonby.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Wonby .layer setMasksToBounds:YES];
     [_Wonby_table setHidden:YES];
     
     //electedto
-    [self.view_Electedto .layer setBorderWidth:3];
-    [self.view_Electedto.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_Electedto .layer setBorderWidth:2.0];
+    [self.view_Electedto.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Electedto .layer setMasksToBounds:YES];
     [_electedTo_table setHidden:YES];
     
     //striker
-    [self.view_Striker .layer setBorderWidth:3];
-    [self.view_Striker.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_Striker .layer setBorderWidth:2.0];
+    [self.view_Striker.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Striker .layer setMasksToBounds:YES];
     [_Striker_table setHidden:YES];
     
     //nonstriker
-    [self.nonStriker .layer setBorderWidth:3];
-    [self.nonStriker.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.nonStriker .layer setBorderWidth:2.0];
+    [self.nonStriker.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.nonStriker .layer setMasksToBounds:YES];
     [_nonStriker_table setHidden:YES];
     
     //Bowler
-    [self.view_Bowler .layer setBorderWidth:3];
-    [self.view_Bowler.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_Bowler .layer setBorderWidth:2.0];
+    [self.view_Bowler.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Bowler .layer setMasksToBounds:YES];
     [_Bowler_table setHidden:YES];
  
@@ -122,31 +122,34 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.view_Wonby .layer setBorderWidth:3];
-    [self.view_Wonby.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_Wonby.layer setBorderWidth:2.0];
+    [self.view_Wonby.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Wonby .layer setMasksToBounds:YES];
+    [_Wonby_table setHidden:YES];
     
-    [super viewWillAppear:animated];
-    [self.view_Electedto .layer setBorderWidth:3];
-    [self.view_Electedto.layer setBorderColor:[UIColor grayColor].CGColor];
+    //electedto
+    [self.view_Electedto .layer setBorderWidth:2.0];
+    [self.view_Electedto.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Electedto .layer setMasksToBounds:YES];
-   
-    [super viewWillAppear:animated];
-    [self.view_Striker .layer setBorderWidth:3];
-    [self.view_Striker.layer setBorderColor:[UIColor grayColor].CGColor];
-    [self.view_Striker .layer setMasksToBounds:YES];
-
+    [_electedTo_table setHidden:YES];
     
-    [self.nonStriker .layer setBorderWidth:3];
-    [self.nonStriker.layer setBorderColor:[UIColor grayColor].CGColor];
+    //striker
+    [self.view_Striker .layer setBorderWidth:2.0];
+    [self.view_Striker.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    [self.view_Striker .layer setMasksToBounds:YES];
+    [_Striker_table setHidden:YES];
+    
+    //nonstriker
+    [self.nonStriker .layer setBorderWidth:2.0];
+    [self.nonStriker.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.nonStriker .layer setMasksToBounds:YES];
     [_nonStriker_table setHidden:YES];
-
-    [self.view_Bowler .layer setBorderWidth:3];
-    [self.view_Bowler.layer setBorderColor:[UIColor grayColor].CGColor];
+    
+    //Bowler
+    [self.view_Bowler .layer setBorderWidth:2.0];
+    [self.view_Bowler.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Bowler .layer setMasksToBounds:YES];
     [_Bowler_table setHidden:YES];
-
     isEnableTbl=YES;
     
 }
@@ -664,6 +667,14 @@ return 1;
     //if (alertView.tag == 1) { // UIAlertView with tag 1 detected
         if (buttonIndex == 0)
         {
+            
+            
+//            ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
+//            
+//            scoreEngine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+//                       scoreEngine.matchCode=self.MATCHCODE;
+//                      scoreEngine.competitionCode=self.CompetitionCode;
+//            [self.navigationController pushViewController:scoreEngine animated:YES];
             NSLog(@"user pressed Button Indexed 0");
                 UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             
@@ -685,6 +696,21 @@ return 1;
 //            [self presentViewController:toss animated:NO completion:nil];
 //        }
     }
+
+
+-(void)customnavigationmethod
+{
+    objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
+    [self.view addSubview:objCustomNavigation.view];
+    objCustomNavigation.lbl_titleName.text=@"TOSS DETAILS";
+    [objCustomNavigation.Btn_Back addTarget:self action:@selector(Back_BtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+-(IBAction)Back_BtnAction:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 @end
