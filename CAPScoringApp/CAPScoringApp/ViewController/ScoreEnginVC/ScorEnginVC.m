@@ -236,27 +236,27 @@
     
     //Appeal
     
-    [self.view_AppealSystem.layer setBorderWidth:3];
-    [self.view_AppealSystem.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_AppealSystem.layer setBorderWidth:2.0];
+    [self.view_AppealSystem.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_AppealSystem .layer setMasksToBounds:YES];
     [_table_AppealSystem setHidden:YES];
     
     
-    [self.view_AppealComponent.layer setBorderWidth:3];
-    [self.view_AppealComponent.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_AppealComponent.layer setBorderWidth:2.0];
+    [self.view_AppealComponent.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_AppealComponent .layer setMasksToBounds:YES];
     [_table_AppealComponent setHidden:YES];
     
     
     
-    [self.view_umpireName.layer setBorderWidth:3];
-    [self.view_umpireName.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_umpireName.layer setBorderWidth:2.0];
+    [self.view_umpireName.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_umpireName .layer setMasksToBounds:YES];
     [_tanle_umpirename setHidden:YES];
     
     
-    [self.view_batsmen.layer setBorderWidth:3];
-    [self.view_batsmen.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_batsmen.layer setBorderWidth:2.0];
+    [self.view_batsmen.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_batsmen .layer setMasksToBounds:YES];
     [_table_BatsmenName setHidden:YES];
     
@@ -273,30 +273,30 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     
     //Appeal
     
-    [self.view_AppealSystem.layer setBorderWidth:3];
-    [self.view_AppealSystem.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_AppealSystem.layer setBorderWidth:2.0];
+    [self.view_AppealSystem.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_AppealSystem .layer setMasksToBounds:YES];
     [_table_AppealSystem setHidden:YES];
     
     
-    [self.view_AppealComponent.layer setBorderWidth:3];
-    [self.view_AppealComponent.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_AppealComponent.layer setBorderWidth:2.0];
+    [self.view_AppealComponent.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_AppealComponent .layer setMasksToBounds:YES];
     [_table_AppealComponent setHidden:YES];
     
     
     
-    [self.view_umpireName.layer setBorderWidth:3];
-    [self.view_umpireName.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_umpireName.layer setBorderWidth:2.0];
+    [self.view_umpireName.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_umpireName .layer setMasksToBounds:YES];
     [_tanle_umpirename setHidden:YES];
     
     
-    [self.view_batsmen.layer setBorderWidth:3];
-    [self.view_batsmen.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_batsmen.layer setBorderWidth:2.0];
+    [self.view_batsmen.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_batsmen .layer setMasksToBounds:YES];
     [_table_BatsmenName setHidden:YES];
-      isEnableTbl=YES;
+    isEnableTbl=YES;
 
 }
 -(void)SaveBallEventREcordvalue
