@@ -282,13 +282,13 @@
     
     [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
     
-    MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
-    
-    matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
-  
-    matchvc.Matchcode = matchCode;
-     matchvc.competitionCode = competitionCode;
-    [self.navigationController pushViewController:matchvc animated:YES];
+//    MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
+//    
+//    matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
+//  
+//    matchvc.Matchcode = matchCode;
+//     matchvc.competitionCode = competitionCode;
+//    [self.navigationController pushViewController:matchvc animated:YES];
     
 }
 
