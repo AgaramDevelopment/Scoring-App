@@ -1477,5 +1477,39 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return AppealUmpireEventArray;
     
 }
++(BOOL)updatePlayerorder:(NSString *) matchCode :(NSString *) teamcode PlayerCode:(NSString *)playerCode PlayerOrder:(NSString *)playerorder
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    
+    
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        
+          
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHTEAMPLAYERDETAILS SET PLAYINGORDER='%@' WHERE TEAMCODE=  '%@' AND MATCHCODE ='%@' AND PLAYERCODE='%@'",playerorder,teamcode,matchCode,playerCode];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+       
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
+        }
+        }
+    
+    sqlite3_reset(statement);
+    return NO;
+
+}
 
 @end

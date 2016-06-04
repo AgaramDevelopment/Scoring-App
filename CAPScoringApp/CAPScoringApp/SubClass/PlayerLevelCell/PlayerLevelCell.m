@@ -36,7 +36,7 @@
         
         lbl_playerName.font = [UIFont systemFontOfSize:25];
         
-        Img_drag = [[UIImageView alloc]initWithFrame:CGRectMake(mainview.frame.size.width-100, 15,50, 50)];
+        Img_drag = [[UIImageView alloc]initWithFrame:CGRectMake(mainview.frame.size.width-90, 15,50, 50)];
         [Img_drag setImage:[UIImage imageNamed:@"Img_drag"]];
         _Btn_drag = [[UIButton alloc]initWithFrame:CGRectMake(mainview.frame.size.width-100, 15,50, 50)];
         

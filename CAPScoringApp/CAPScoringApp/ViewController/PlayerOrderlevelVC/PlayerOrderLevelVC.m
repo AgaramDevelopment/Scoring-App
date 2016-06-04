@@ -10,6 +10,7 @@
 #import "CustomNavigationVC.h"
 #import "PlayerLevelCell.h"
 #import "SelectPlayerRecord.h"
+#import "DBManager.h"
 
 @interface PlayerOrderLevelVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
@@ -20,6 +21,7 @@
     NSMutableArray*slecteplayerlist;
     UIGestureRecognizer *_dndLongPressGestureRecognizer;
     PlayerLevelCell*playercell;
+    NSMutableArray *objPreviousorderList;
     
 
 }
@@ -51,8 +53,9 @@
     [self customnavigationmethod];
     
     slecteplayerlist=[[NSMutableArray alloc]init];
+    objPreviousorderList=[[NSMutableArray alloc]init];
     slecteplayerlist=self.objSelectplayerList_Array;
-    
+    objPreviousorderList=slecteplayerlist;
     UIImageView *bg_img=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,objCustomNavigation.view.frame.origin.y+objCustomNavigation.view.frame.size.height,self.view.frame.size.width,self.view.frame.size.height)];
     bg_img.image=[UIImage imageNamed:@"BackgroundImg"];
     [self.view addSubview:bg_img];
@@ -67,7 +70,7 @@
     [self.view addSubview:self.txt_search];
     
     
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"SEARCH PLAYER" attributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] ,NSFontAttributeName : [UIFont systemFontOfSize:40]}];
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"SEARCH PLAYER" attributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] ,NSFontAttributeName : [UIFont systemFontOfSize:35]}];
    
      self.txt_search.attributedPlaceholder = str;
     //lastName.placeholder = @"Enter your last name here";
@@ -101,32 +104,34 @@
     [BottomView setBackgroundColor:[UIColor colorWithRed:(8.0/255.0f) green:(9.0/255.0f) blue:(11.0/255.0f) alpha:1.0f]];
     
     
-    UIImageView *Img_Delete=[[UIImageView alloc]initWithFrame:CGRectMake(BottomView.frame.size.width-190,15,70,70)];
+    UIImageView *Img_Delete=[[UIImageView alloc]initWithFrame:CGRectMake(BottomView.frame.size.width-180,25,52,52)];
     
     [Img_Delete setImage:[UIImage imageNamed:@"ico-cancel"]];
+    
     [BottomView addSubview:Img_Delete];
     
+   
     
-    UIImageView *Img_Save=[[UIImageView alloc]initWithFrame:CGRectMake(BottomView.frame.size.width-90,15,70,70)];
+    UIImageView *Img_Save=[[UIImageView alloc]initWithFrame:CGRectMake(BottomView.frame.size.width-90,25,52,52)];
     
     [Img_Save setImage:[UIImage imageNamed:@"ico-proceed"]];
     [BottomView addSubview:Img_Save];
     
     
-    UIButton *Btn_Delete=[[UIButton alloc]initWithFrame:CGRectMake(BottomView.frame.size.width-190,15,70,70)];
+    UIButton *Btn_Delete=[[UIButton alloc]initWithFrame:CGRectMake(BottomView.frame.size.width-180,bg_img.frame.size.height-80,70,70)];
     [Btn_Delete setBackgroundColor:[UIColor clearColor]];
     //[Btn_Delete setImage:[UIImage imageNamed:@"ico-cancel"] forState:UIControlStateNormal];
-    [Btn_Delete addTarget:self action:@selector(didClickDeleteplayer) forControlEvents:UIControlEventTouchUpInside];
-    [BottomView addSubview:Btn_Delete];
+    [Btn_Delete addTarget:self action:@selector(didClickDeleteplayer:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:Btn_Delete];
     
     
     
-    UIButton *Btn_Save=[[UIButton alloc]initWithFrame:CGRectMake(BottomView.frame.size.width-90,15,70,70)];
+    UIButton *Btn_Save=[[UIButton alloc]initWithFrame:CGRectMake(BottomView.frame.size.width-90,bg_img.frame.size.height-80,70,70)];
     [Btn_Save setBackgroundColor:[UIColor clearColor]];
     //[Btn_Save setImage:[UIImage imageNamed:@"ico-proceed"] forState:UIControlStateNormal];
-    [Btn_Save addTarget:self action:@selector(didClickSaveplayer) forControlEvents:UIControlEventTouchUpInside];
+    [Btn_Save addTarget:self action:@selector(didClickSaveplayer:) forControlEvents:UIControlEventTouchUpInside];
     
-    [BottomView addSubview:Btn_Save];
+    [self.view addSubview:Btn_Save];
     
     
     // tableview design
@@ -238,14 +243,21 @@
     }
     return YES;
 }
--(void)didClickDeleteplayer
+-(IBAction)didClickDeleteplayer:(id)sender
 {
-    
+    slecteplayerlist=objPreviousorderList;
+    [self.tbl_playerSelectList reloadData];
 }
 
--(void)didClickSaveplayer
+-(IBAction)didClickSaveplayer:(id)sender
 {
    
+    for(int i=0;  i < slecteplayerlist.count; i++)
+    {
+        SelectPlayerRecord *playerorderRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:i];
+        [DBManager updatePlayerorder:self.MatchCode :self.TeamCode PlayerCode:playerorderRecord.playerCode PlayerOrder:playerorderRecord.playerOrder];
+        
+    }
 }
 
 
@@ -271,8 +283,8 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
    playercell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
-   // NSInteger variable = indexPath.row;
-    int ordernumber ;//(int) variable +1;
+    NSInteger variable = indexPath.row;
+    int ordernumber =(int) variable +1;
     SelectPlayerRecord *objSelectPlayerRecord;
     
     if (playercell == nil) {
@@ -300,10 +312,10 @@
        objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
     }
     
-    NSString *playerOrder=[NSString stringWithFormat:@"%@",objSelectPlayerRecord.playerOrder];
+    //NSString *playerOrder=[NSString stringWithFormat:@"%@",objSelectPlayerRecord.playerOrder];
     
-    playercell.Lbl_playerordernumber.text=playerOrder;
-    ordernumber=[playerOrder intValue];
+    playercell.Lbl_playerordernumber.text=[NSString stringWithFormat:@"%d",ordernumber];
+    //ordernumber=[ intValue];
     
     if(ordernumber==12)
     {
@@ -449,14 +461,18 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     
     NSInteger sourceRow = sourceIndexPath.row;
     NSInteger destRow = destinationIndexPath.row;
+    NSString * changeIndexId=[NSString stringWithFormat:@"%ld",destRow+1];
     SelectPlayerRecord*objRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:sourceRow];
+    objRecord.playerOrder =changeIndexId;
     
     id object = [slecteplayerlist objectAtIndex:sourceRow];
     
     [slecteplayerlist removeObjectAtIndex:sourceRow];
     [slecteplayerlist insertObject:object atIndex:destRow];
+    
     playercell.editing=NO;
     [self.tbl_playerSelectList setEditing:playercell.editing animated:YES];
+    [self.tbl_playerSelectList reloadData];
     
 }
 
