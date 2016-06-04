@@ -253,7 +253,7 @@ static NSString * const reuseIdentifier = @"Cell";
             selectCount++;
         }
     }
-    self.lbl_select_count.text = [NSString stringWithFormat: @" %d / 15 SELECTED",selectCount];
+    self.lbl_select_count.text = [NSString stringWithFormat: @" %d / %d SELECTED",selectCount,self.selectedPlayerArray==nil?0:self.selectedPlayerArray.count];
     
 }
 
@@ -338,7 +338,7 @@ static NSString * const reuseIdentifier = @"Cell";
             selectCount++;
         }
     }
-    return selectCount>=7?YES:NO;
+    return (selectCount>=7)?YES:NO;
 }
 
 //- (CGSize)collectionView:(UICollectionView *)collectionView
