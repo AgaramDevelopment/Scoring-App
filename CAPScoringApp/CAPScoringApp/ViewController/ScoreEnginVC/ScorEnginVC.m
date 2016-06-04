@@ -69,6 +69,10 @@
     int fieldingOption;
     BOOL isOTWselected;
     BOOL isRTWselected;
+    BOOL isSpinSelected;
+    BOOL isFastSelected;
+    BOOL isAggressiveSelected;
+    BOOL isDefensiveSelected;
     
     NSString * ballnoStr;
     NSDate * startBallTime;
@@ -222,6 +226,10 @@
     isRBWSelected = NO;
     ismiscFilters = NO;
     isFieldingSelected = NO;
+    isSpinSelected = NO;
+    isFastSelected = NO;
+    isAggressiveSelected = NO;
+
     fieldingOption = 0;
     
     //Fielding Factor
@@ -491,6 +499,7 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     }else if (tableView == table_Appeal) {
         
         return self.AppealValuesArray.count;
+        
     }else if(tableView == tbl_bowlType){
         
         return self.bowlTypeArray.count;
@@ -619,6 +628,15 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
         
         
         bowlCell.lbl_BowlTypeOdd.text = objBowlRecord.BowlType;
+        
+        // this is where you set your color view
+        UIView *customColorView = [[UIView alloc] init];
+        customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                          green:161/255.0
+                                                           blue:79/255.0
+                                                          alpha:0.5];
+        bowlCell.selectedBackgroundView =  customColorView;
+        
         
         return bowlCell;
     }else if (tableView == tbl_fastBowl){
@@ -1109,12 +1127,21 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
         [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
         [self.img_pichmap setImage:[UIImage imageNamed:@"pitchmap_img"]];
            _View_Appeal.hidden=YES;
+        self.view_bowlType.hidden = YES;
+        self.view_fastBowl.hidden = YES;
+        self.view_aggressiveShot.hidden = YES;
+        self.view_defensive.hidden = YES;
     }
     else if(selectBtnTag.tag==111)
     {
         [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
         [self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
          _View_Appeal.hidden=YES;
+        self.view_bowlType.hidden = YES;
+        self.view_fastBowl.hidden = YES;
+        self.view_aggressiveShot.hidden = YES;
+        self.view_defensive.hidden = YES;
+
         
     }
 }
@@ -1137,62 +1164,133 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     if(selectBtnTag.tag==112)
     {
         
-        [self selectBtncolor_Action:@"112" :nil :201];
-        NSString *otw;
-        
-        AppealRecord *objAppealrecord=(AppealRecord*)[_otwRtwArray objectAtIndex:0];
-        otw = objAppealrecord.MetaSubCode;
-        
-        objBalleventRecord.objAtworotw = [NSString stringWithFormat:@"%@",otw];
-        
-        
+
+         [self otwSelectAndDeselect];
         
     }
     else if(selectBtnTag.tag==113)
     {
-        [self selectBtncolor_Action:@"113" :nil :202];
-        NSString *rtw;
-        
-        AppealRecord *objRtwRecord = (AppealRecord*)[_otwRtwArray objectAtIndex:1];
-        rtw = objRtwRecord.MetaSubCode;
-        objBalleventRecord.objAtworotw = [NSString stringWithFormat:@"%@",rtw];
+        [self rtwSelectAndDeselect];
         
     }
     else if(selectBtnTag.tag==114)
     {
-        [self selectBtncolor_Action:@"114" :nil :203];
+        //  [self selectBtncolor_Action:@"114" :nil :203];
+        
         self.view_bowlType.hidden = NO;
         self.view_fastBowl.hidden = YES;
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
+        
+        if(isSpinSelected){
+            
+            NSInteger position = [self.bowlTypeArray indexOfObject:self.ballEventRecord.objBowltype];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
+            [tbl_bowlType selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            
+            [tbl_bowlType scrollToRowAtIndexPath:indexPath
+                                atScrollPosition:UITableViewScrollPositionTop
+                                        animated:YES];
+        }else{
+            objBalleventRecord.objBowltype = nil;
+            [tbl_bowlType reloadData];
+        }
+        
+        //View
+        _view_spin.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        
+        _view_fast.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        
+
 
     }
-    else if(selectBtnTag.tag==115)
+    else if(selectBtnTag.tag==115)//fast
     {
-        [self selectBtncolor_Action:@"115" :nil :204];
+        //[self selectBtncolor_Action:@"115" :nil :204];
         self.view_aggressiveShot.hidden = YES;
-          self.view_bowlType.hidden = YES;
+        self.view_bowlType.hidden = YES;
         self.view_fastBowl.hidden = NO;
         self.view_defensive.hidden = YES;
         
+        if(isFastSelected){
+            
+            NSInteger position = [self.bowlTypeArray indexOfObject:self.ballEventRecord.objBowltype];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
+            [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            
+            [tbl_fastBowl scrollToRowAtIndexPath:indexPath
+                                atScrollPosition:UITableViewScrollPositionTop
+                                        animated:YES];
+        }else{
+            objBalleventRecord.objBowltype = nil;
+            [tbl_bowlType reloadData];
+        }
+        
+        //View
+        _view_fast.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        
+        _view_spin.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        
+        
     }
-    else if(selectBtnTag.tag==116)
+    else if(selectBtnTag.tag==116)//aggressive
     {
-        [self selectBtncolor_Action:@"116" :nil :205];
+        //[self selectBtncolor_Action:@"116" :nil :205];
         self.view_aggressiveShot.hidden = NO;
         self.view_fastBowl.hidden = YES;
         self.view_bowlType.hidden = YES;
         self.view_defensive.hidden = YES;
         
+        if(isAggressiveSelected){
+            
+            NSInteger position = [self.aggressiveShotTypeArray indexOfObject:self.ballEventRecord.objShottype];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
+            [tbl_aggressiveShot selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            
+            [tbl_aggressiveShot scrollToRowAtIndexPath:indexPath
+                                      atScrollPosition:UITableViewScrollPositionTop
+                                              animated:YES];
+        }else{
+            objBalleventRecord.objShottype = nil;
+            [tbl_aggressiveShot reloadData];
+        }
+        
+        //View
+        _view_aggressive.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        
+        _view_defense.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        
+        
+        
         
     }
     else if(selectBtnTag.tag==117)
     {
-        [self selectBtncolor_Action:@"117" :nil :206];
+        //[self selectBtncolor_Action:@"117" :nil :206];
         self.view_defensive.hidden = NO;
         self.view_aggressiveShot.hidden = YES;
         self.view_fastBowl.hidden = YES;
         self.view_bowlType.hidden = YES;
+        
+        if(isDefensiveSelected){
+            
+            NSInteger position = [self.defensiveShotTypeArray indexOfObject:self.ballEventRecord.objShottype];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
+            [_tbl_defensive selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            
+            [_tbl_defensive scrollToRowAtIndexPath:indexPath
+                                  atScrollPosition:UITableViewScrollPositionTop
+                                          animated:YES];
+        }else{
+            objBalleventRecord.objShottype = nil;
+            [_tbl_defensive reloadData];
+        }
+        
+        //View
+        _view_aggressive.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        
+        _view_defense.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        
      
         
     }
@@ -1315,6 +1413,57 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     }
     
 }
+
+
+//otw select,deselect and reset values
+-(void)otwSelectAndDeselect{
+    
+    //    NSString *otw;
+    //
+    //    AppealRecord *objRtwRecord = (AppealRecord*)[_otwRtwArray objectAtIndex:0];
+    //    otw = objRtwRecord.MetaSubCode;
+    //
+    
+    if ([objBalleventRecord.objAtworotw isEqual: @"MSC148"]){
+        
+        // _btn_OTW.selected = YES;
+        
+        _view_otw.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        objBalleventRecord.objAtworotw = nil;
+        
+        
+    }else{
+        _view_otw.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        _view_rtw.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        objBalleventRecord.objAtworotw = @"MSC148";
+        
+    }
+    
+    
+    
+}
+
+//rtw select,deselect and reset values
+-(void)rtwSelectAndDeselect{
+    if ([objBalleventRecord.objAtworotw isEqual: @"MSC149"]){
+        
+        // _btn_OTW.selected = YES;
+        
+        _view_rtw.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        objBalleventRecord.objAtworotw = nil;
+        
+        
+    }else{
+        _view_rtw.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        _view_otw.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        objBalleventRecord.objAtworotw = @"MSC149";
+        
+    }
+    
+    
+}
+
+
 
 -(void)RemarkMethode
 {
@@ -2369,11 +2518,49 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
         }else if([[self.miscfiltersOptionArray objectAtIndex:indexPath.row]  isEqual: @"WTB"]){
             self.ballEventRecord.objIswtb = [NSNumber numberWithInt:1];
         }
-        }
-//    else if(tbl_fastBowl==tableView)
-//    {
-//        [self.fieldingfactorArray objectAtIndex:indexPath.row];
-//    }
+    }else if(tbl_bowlType == tableView){
+        
+        isSpinSelected = YES;
+        isFastSelected = NO;
+        
+        BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.bowlTypeArray objectAtIndex:indexPath.row];
+        objBalleventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        
+        //        if([bowlAndShortTypeRecord.BowlTypeCode  isEqualToString:objBalleventRecord.objBowltype])
+        //        {
+        //            objBalleventRecord.objBowltype = nil;
+        //            [tbl_bowlType reloadData];
+        //        }
+        
+        
+    }else if (tbl_fastBowl == tableView){
+        
+        isFastSelected = YES;
+        isSpinSelected = NO;
+        
+        BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.fastBowlTypeArray objectAtIndex:indexPath.row];
+        objBalleventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        
+        
+    }else if (tbl_aggressiveShot == tableView){
+        isAggressiveSelected = YES;
+        isDefensiveSelected = NO;
+        
+        BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.aggressiveShotTypeArray objectAtIndex:indexPath.row];
+        
+        objBalleventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+    }else if (_tbl_defensive == tableView){
+        isDefensiveSelected = YES;
+        isAggressiveSelected = NO;
+        
+        
+        BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.defensiveShotTypeArray objectAtIndex:indexPath.row];
+        
+        objBalleventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+        
+    }
+
+
     
     NSLog(@"Index Path %d",indexPath.row);
     

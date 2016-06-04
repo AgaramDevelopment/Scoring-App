@@ -2,7 +2,7 @@
 //  NewMatchSetUpVC.m
 //  CAPScoringApp
 //
-//  Created by mac on 25/05/16.
+//  Created by deepak on 25/05/16.
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
@@ -28,35 +28,18 @@
 @synthesize  matchCode;
 @synthesize teamAcode;
 @synthesize teamBcode;
-@synthesize competitionCode;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
     //fetch data from fixture screen and display in controls
     
-    //self.matchTypeCode = @"MSC114";
+    
+    [self customnavigationmethod];
+    
+    //[self colorChange];
     
     
-    _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
-    
-    
-    if (_countTeam.count >= 7) {
-        
-        //grey color
-        _view_teamA.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
-     
-        
-        _view_teamB.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
-    }else{
-        
-        //orange color
-        _view_teamA.backgroundColor = [UIColor colorWithRed:(228/255.0f) green:(98/255.0f) blue:(58/255.0f) alpha:(1)];
-        
-        _view_teamB.backgroundColor = [UIColor colorWithRed:(228/255.0f) green:(98/255.0f) blue:(58/255.0f) alpha:(1)];
-    }
-    
-   
     
     self.lbl_teamA.text = self.teamA;
     self.lbl_teamB.text = self.teamB;
@@ -80,17 +63,17 @@
     }
     
     //logo image
-    NSMutableArray *playersCode = [[NSMutableArray alloc]init];
+    NSMutableArray *teamCode = [[NSMutableArray alloc]init];
     
-    [playersCode addObject:@"TEA0000005"];
-    [playersCode addObject:@"TEA0000006"];
-    [playersCode addObject:@"TEA0000008"];
-   
+    [teamCode addObject:@"TEA0000005"];
+    [teamCode addObject:@"TEA0000006"];
+    [teamCode addObject:@"TEA0000008"];
     
     
-    for(int i=0;i<[playersCode count];i++){
+    
+    for(int i=0;i<[teamCode count];i++){
         
-        [self addImageInAppDocumentLocation:[playersCode objectAtIndex:i]];
+        [self addImageInAppDocumentLocation:[teamCode objectAtIndex:i]];
     }
     
     
@@ -210,9 +193,10 @@
 - (IBAction)btn_selectPlayersTeamB:(id)sender {
     
     //to change selected team players B color after selected 7 players
-    //NSMutableArray *countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
     
-    if(_countTeam.count > 7){
+    NSMutableArray *countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
+    
+    if(countTeamB.count > 0){
         
         _view_teamB.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
         
@@ -224,11 +208,10 @@
     
     selectvc =  (SelectPlayersVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
     
-   selectvc.teamCode=teamBcode;
-    selectvc.matchCode = matchCode;
+    selectvc.teamCode=teamBcode;
     
     [self.navigationController pushViewController:selectvc animated:YES];
-
+    
     
     
 }
@@ -236,9 +219,9 @@
 - (IBAction)btn_selectPlayersTeamA:(id)sender {
     
     //to change selected team players A color after selected 7 players
-    //NSMutableArray *countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
+    NSMutableArray *countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
     
-    if(_countTeam.count > 7){
+    if(countTeam.count > 0){
         
         _view_teamA.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
         
@@ -246,7 +229,7 @@
         
         _view_teamA.backgroundColor = [UIColor colorWithRed:(228/255.0f) green:(98/255.0f) blue:(58/255.0f) alpha:(1)];
         
-    
+        
     }
     
     NSLog(@"COUNT = %@",_countTeam);
@@ -282,13 +265,6 @@
     
     [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
     
-//    MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
-//    
-//    matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
-//  
-//    matchvc.Matchcode = matchCode;
-//     matchvc.competitionCode = competitionCode;
-//    [self.navigationController pushViewController:matchvc animated:YES];
     
 }
 
@@ -315,6 +291,9 @@
     if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){
         if(twentyText > 20){
             [self showDialog:@"Please enter below 20 overs" andTitle:@"Error"];
+        }else if (twentyText == 0){
+            
+            [self showDialog:@"Please enter overs" andTitle:@"Error"];
         }
         else{
             
@@ -323,7 +302,6 @@
             matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
             
             matchvc.Matchcode = matchCode;
-            matchvc.competitionCode = competitionCode;
             
             [self.navigationController pushViewController:matchvc animated:YES];
         }
@@ -332,18 +310,21 @@
         if(OdiText > 50){
             
             [self showDialog:@"Please enter below 50 overs" andTitle:@"Error"];
-       }
-           else {
-               MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
-               
-               matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
-               
-               matchvc.Matchcode = matchCode;
-               matchvc.competitionCode = competitionCode;
-               
-               [self.navigationController pushViewController:matchvc animated:YES];
-               
-      }
+        }else if (twentyText == 0){
+            
+            [self showDialog:@"Please enter overs" andTitle:@"Error"];
+        }
+        
+        else {
+            MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
+            
+            matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
+            
+            matchvc.Matchcode = matchCode;
+            
+            [self.navigationController pushViewController:matchvc animated:YES];
+            
+        }
         return NO;
         
     }
@@ -351,9 +332,43 @@
     
     
 }
-//-(void)viewWillAppear:(BOOL)animated{
-//    
-//    [self viewDidLoad];
-//    
-//}
+
+-(void)colorChange{
+    
+    _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
+    
+    NSMutableArray *countTeamB =[DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
+
+    if (_countTeam.count > 0) {
+        
+        //grey color
+        _view_teamA.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
+        
+        
+        
+    }else{
+        
+        //orange color
+        _view_teamA.backgroundColor = [UIColor colorWithRed:(228/255.0f) green:(98/255.0f) blue:(58/255.0f) alpha:(1)];
+        
+      
+        
+    }
+        
+    if (countTeamB.count > 0) {
+        
+        
+        _view_teamB.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
+        
+    }else{
+        
+        //orange color
+
+        
+        _view_teamB.backgroundColor = [UIColor colorWithRed:(228/255.0f) green:(98/255.0f) blue:(58/255.0f) alpha:(1)];
+        
+    }
+    
+}
+
 @end

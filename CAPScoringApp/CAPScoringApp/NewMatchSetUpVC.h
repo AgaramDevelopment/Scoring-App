@@ -2,7 +2,7 @@
 //  NewMatchSetUpVC.h
 //  CAPScoringApp
 //
-//  Created by mac on 25/05/16.
+//  Created by deepak on 25/05/16.
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
