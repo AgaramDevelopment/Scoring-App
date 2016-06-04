@@ -76,4 +76,10 @@
 +(NSMutableArray *) AppealUmpireRetrieveEventData:(NSString*) COMPETITIONCODE:(NSString*)MATCHCODE;
 
 
++(NSMutableArray *)getBowlType;
++(NSMutableArray *)getBowlFastType;
++(NSMutableArray *)getAggressiveShotType;
++(NSMutableArray *)getDefenceShotType;
++(NSMutableArray *)RetrieveFieldingFactorData;
++(NSMutableArray *)RetrieveFieldingPlayerData;
 @end

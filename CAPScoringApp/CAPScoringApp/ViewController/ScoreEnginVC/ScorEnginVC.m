@@ -15,6 +15,14 @@
 #import "AppealSystemRecords.h"
 #import "AppealComponentRecord.h"
 #import "AppealUmpireRecord.h"
+#import "FieldingFactorRecord.h"
+#import "BowlerEvent.h"
+#import "FastBowlTypeCell.h"
+#import "BowlAndShotTypeRecords.h"
+#import "BowlTypeCell.h"
+#import "FastBowlTypeCell.h"
+#import "AggressiveShotTypeCell.h"
+#import "FieldingFactorCell.h"
 
 @interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource>
 {   //appeal System
@@ -74,7 +82,8 @@
 
 
 @property(nonatomic,strong) NSMutableArray *selectbtnvalueArray;
-
+@property(nonatomic,strong) NSMutableArray *extrasOptionArray;
+@property(nonatomic,strong) NSMutableArray *overThrowOptionArray;
 @property(nonatomic,strong) NSMutableArray *otwRtwArray;
 @property(nonatomic,strong) BallEventRecord *ballEventRecord;
 
@@ -112,6 +121,10 @@
 
 @implementation ScorEnginVC
 @synthesize table_Appeal;
+@synthesize tbl_bowlType;
+@synthesize tbl_fastBowl;
+@synthesize tbl_aggressiveShot;
+@synthesize tbl_fieldingfactor;
 
 //appeal
 @synthesize AppealSystemArray;
@@ -1468,84 +1481,6 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-_view_table_select.hidden=NO;
-    
-    
-    if (tableView == self.table_AppealSystem)
-    {
-        
-        
-        AppealSystemSelectionArray=[[NSMutableArray alloc]init];
-        objAppealSystemEventRecord=(AppealSystemRecords*)[AppealSystemArray objectAtIndex:indexPath.row];
-        
-        self.lbl_appealsystem.text =objAppealSystemEventRecord.AppealSystemMetaSubCodeDescription;
-       // selectTeam=self.Wonby_lbl.text;
-        AppealSystemSelectCode=objAppealSystemEventRecord.AppealSystemMetaSubCode;
-        [AppealSystemSelectionArray addObject:objAppealSystemEventRecord];
-        
-        self.table_AppealSystem.hidden=YES;
-        isEnableTbl=YES;
-    }
-
-    
-    
-    
-    if (tableView == self.table_AppealComponent)
-    {
-        
-        
-        AppealComponentSelectionArray=[[NSMutableArray alloc]init];
-        objAppealComponentEventRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
-        
-        self.lbl_appealComponent.text =objAppealComponentEventRecord.AppealComponentMetaSubCodeDescription;
-        // selectTeam=self.Wonby_lbl.text;
-        AppealComponentSelectCode=objAppealComponentEventRecord.AppealComponentMetaSubCode;
-        [AppealComponentSelectionArray addObject:objAppealComponentEventRecord];
-        
-        self.table_AppealComponent.hidden=YES;
-        isEnableTbl=YES;
-    }
-    
-    
-    
-    if (tableView == self.tanle_umpirename)
-    {
-        
-        
-        AppealUmpireSelectionArray=[[NSMutableArray alloc]init];
-        objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
-        
-        self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName1;
-        self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName2;
-        // selectTeam=self.Wonby_lbl.text;
-        AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode1;
-         AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode2;
-        [AppealUmpireSelectionArray addObject:objAppealUmpireEventRecord];
-        
-        self.tanle_umpirename.hidden=YES;
-        isEnableTbl=YES;
-    }
-    
-    if (tableView == self.table_BatsmenName)
-    {
-        
-        
-      AppealUmpireSelectionArray=[[NSMutableArray alloc]init];
-       // objAppealComponentEventRecord=(AppealComponentRecord*)[AppealBatsmenArray objectAtIndex:indexPath.row];
-        
-        self.lbl_batsmen.text =[AppealBatsmenArray objectAtIndex:indexPath.row];
-        // selectTeam=self.Wonby_lbl.text;
-        AppealComponentSelectCode=@"PYCOOOO050";
-     //   [AppealComponentSelectionArray addObject:objAppealComponentEventRecord];
-        
-        self.table_BatsmenName.hidden=YES;
-        isEnableTbl=YES;
-    }
-
-}
-
 
 - (IBAction)appeal_btn:(id)sender {
     if(isEnableTbl==YES)
@@ -1624,6 +1559,13 @@ _view_table_select.hidden=NO;
     }
     else
         self.table_BatsmenName.hidden=YES;
+}
+
+//Reset boundries and runs values
+-(void) resetRunsBoundriesValue{
+    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+    self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
+    self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];
 }
 
 
@@ -2089,6 +2031,82 @@ _view_table_select.hidden=NO;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    _view_table_select.hidden=NO;
+    
+    
+    if (tableView == self.table_AppealSystem)
+    {
+        
+        
+        AppealSystemSelectionArray=[[NSMutableArray alloc]init];
+        objAppealSystemEventRecord=(AppealSystemRecords*)[AppealSystemArray objectAtIndex:indexPath.row];
+        
+        self.lbl_appealsystem.text =objAppealSystemEventRecord.AppealSystemMetaSubCodeDescription;
+        // selectTeam=self.Wonby_lbl.text;
+        AppealSystemSelectCode=objAppealSystemEventRecord.AppealSystemMetaSubCode;
+        [AppealSystemSelectionArray addObject:objAppealSystemEventRecord];
+        
+        self.table_AppealSystem.hidden=YES;
+        isEnableTbl=YES;
+    }
+    
+    
+    
+    
+    if (tableView == self.table_AppealComponent)
+    {
+        
+        
+        AppealComponentSelectionArray=[[NSMutableArray alloc]init];
+        objAppealComponentEventRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
+        
+        self.lbl_appealComponent.text =objAppealComponentEventRecord.AppealComponentMetaSubCodeDescription;
+        // selectTeam=self.Wonby_lbl.text;
+        AppealComponentSelectCode=objAppealComponentEventRecord.AppealComponentMetaSubCode;
+        [AppealComponentSelectionArray addObject:objAppealComponentEventRecord];
+        
+        self.table_AppealComponent.hidden=YES;
+        isEnableTbl=YES;
+    }
+    
+    
+    
+    if (tableView == self.tanle_umpirename)
+    {
+        
+        
+        AppealUmpireSelectionArray=[[NSMutableArray alloc]init];
+        objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
+        
+        self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName1;
+        self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName2;
+        // selectTeam=self.Wonby_lbl.text;
+        AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode1;
+        AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode2;
+        [AppealUmpireSelectionArray addObject:objAppealUmpireEventRecord];
+        
+        self.tanle_umpirename.hidden=YES;
+        isEnableTbl=YES;
+    }
+    
+    if (tableView == self.table_BatsmenName)
+    {
+        
+        
+        AppealUmpireSelectionArray=[[NSMutableArray alloc]init];
+        // objAppealComponentEventRecord=(AppealComponentRecord*)[AppealBatsmenArray objectAtIndex:indexPath.row];
+        
+        self.lbl_batsmen.text =[AppealBatsmenArray objectAtIndex:indexPath.row];
+        // selectTeam=self.Wonby_lbl.text;
+        AppealComponentSelectCode=@"PYCOOOO050";
+        //   [AppealComponentSelectionArray addObject:objAppealComponentEventRecord];
+        
+        self.table_BatsmenName.hidden=YES;
+        isEnableTbl=YES;
+    }
+
     
     //Fielding Factor
     if(isFieldingSelected && fieldingOption == 1)

@@ -287,7 +287,7 @@
     matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
   
     matchvc.Matchcode = matchCode;
-     matchvc.competitionCode = _competitionCode;
+     matchvc.competitionCode = competitionCode;
     [self.navigationController pushViewController:matchvc animated:YES];
     
 }

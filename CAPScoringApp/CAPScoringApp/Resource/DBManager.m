@@ -20,6 +20,8 @@
 #import "AppealSystemRecords.h"
 #import "AppealComponentRecord.h"
 #import "AppealUmpireRecord.h"
+#import "BowlAndShotTypeRecords.h"
+#import "FieldingFactorRecord.h"
 @implementation DBManager
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
