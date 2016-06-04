@@ -14,14 +14,16 @@
 @interface PlayerOrderLevelVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
     CustomNavigationVC *objCustomNavigation;
-    NSMutableArray * slecteplayerlist;
+   
     BOOL isSelectCaptainType;
     BOOL isSelectWKTKeeperType;
-    
+    NSMutableArray*slecteplayerlist;
     UIGestureRecognizer *_dndLongPressGestureRecognizer;
+    PlayerLevelCell*playercell;
     
 
 }
+@property (nonatomic, getter=isPseudoEditing) BOOL pseudoEdit;
 @property(nonatomic,strong)UITableView * tbl_playerSelectList;
 @property(nonatomic,strong)UITextField *txt_search;
 @property(nonatomic,strong) NSMutableArray*selectedPlayerFilterArray;
@@ -33,6 +35,8 @@
 @property (nonatomic, strong) NSIndexPath *initialIndexPath;
 @property (nonatomic, retain) id savedObject;
 @property (nonatomic, strong) CADisplayLink *scrollDisplayLink;
+@property (nonatomic, assign) CGFloat draggingRowHeight;
+@property (nonatomic, assign) CGFloat draggingViewOpacity;
 
 @end
 
@@ -127,23 +131,27 @@
     
     // tableview design
     
-    
-    self. tbl_playerSelectList= [[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,objCustomNavigation.view.frame.origin.y+objCustomNavigation.view.frame.size.height+150,self.view.frame.size.width-40,BottomView.frame.origin.y-160)];
-    [self.view addSubview: self.tbl_playerSelectList];
-    self.tbl_playerSelectList.backgroundColor=[UIColor clearColor];
+    _tbl_playerSelectList = [[UITableView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x+20,objCustomNavigation.view.frame.origin.y+objCustomNavigation.view.frame.size.height+150,self.view.frame.size.width-40,BottomView.frame.origin.y-160)];
+    [self.view addSubview:_tbl_playerSelectList];
+    _tbl_playerSelectList.backgroundColor=[UIColor clearColor];
     //[ self.tbl_playerSelectList setBackgroundColor:[UIColor colorWithRed:(8.0/255.0f) green:(9.0/255.0f) blue:(11.0/255.0f) alpha:1.0f]];
-    self.tbl_playerSelectList.delegate=self;
-    self.tbl_playerSelectList.dataSource=self;
-    self.tbl_playerSelectList.scrollEnabled=YES;
+    _tbl_playerSelectList.delegate=self;
+    _tbl_playerSelectList.dataSource=self;
+    //tbl_playerSelectList.scrollEnabled=YES;
     
-    self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
-    [self.tbl_playerSelectList addGestureRecognizer: self.longPress];
+    
 
     // self.tbl_playerSelectList.bounces = YES;
     
     // Do any additional setup after loading the view.
 }
-
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    // Move this asignment to the method/action that
+    // handles table editing for bulk operation.
+    self.pseudoEdit = YES;
+    
+    [super setEditing:editing animated:animated];
+}
 -(void)customnavigationmethod
 {
     objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
@@ -179,7 +187,7 @@
         
     }
     //Relaod view
-    [self.tbl_playerSelectList reloadData];
+    [_tbl_playerSelectList reloadData];
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
@@ -207,7 +215,7 @@
         //    NSLog(@"count2 %lu",(unsigned long)[self.selectedPlayerArray count]);
         
         self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
-        [self.tbl_playerSelectList reloadData];
+        [_tbl_playerSelectList reloadData];
 
         return YES;
     }
@@ -256,29 +264,33 @@
    }
  else
    {
-      return [slecteplayerlist count];
+      return [slecteplayerlist  count];
    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PlayerLevelCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+   playercell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
    // NSInteger variable = indexPath.row;
     int ordernumber ;//(int) variable +1;
     SelectPlayerRecord *objSelectPlayerRecord;
     
-    if (cell == nil) {
-        cell = [[PlayerLevelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-        cell.backgroundColor = [UIColor clearColor];
+    if (playercell == nil) {
+        playercell = [[PlayerLevelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        playercell.backgroundColor = [UIColor clearColor];
        
         
         
     }
-    [cell.Btn_Captain addTarget:self action:@selector(didClickCaptain_BtnAction:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.Btn_WktKeeper addTarget:self action:@selector(didClickWktKeeper_BtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [playercell.Btn_Captain addTarget:self action:@selector(didClickCaptain_BtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [playercell.Btn_WktKeeper addTarget:self action:@selector(didClickWktKeeper_BtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    [playercell.Btn_drag addTarget:self action:@selector(didClickDrag_BtnAction:) forControlEvents:UIControlEventTouchUpInside];
 
-    _dndLongPressGestureRecognizer = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(onLongPressGestureRecognizerTap:)];
-    [cell addGestureRecognizer:_dndLongPressGestureRecognizer];
+
+//    self.longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+//    [playercell addGestureRecognizer: self.longPress];
+    
+    
     if(self.selectedPlayerFilterArray > 0)
     {
         objSelectPlayerRecord=(SelectPlayerRecord*)[self.selectedPlayerFilterArray objectAtIndex:indexPath.row];
@@ -290,27 +302,43 @@
     
     NSString *playerOrder=[NSString stringWithFormat:@"%@",objSelectPlayerRecord.playerOrder];
     
-    cell.Lbl_playerordernumber.text=playerOrder;
+    playercell.Lbl_playerordernumber.text=playerOrder;
     ordernumber=[playerOrder intValue];
     
     if(ordernumber==12)
     {
-        cell.lbl_playerName.text =[NSString stringWithFormat:@"%@   (12 Member)",objSelectPlayerRecord.playerName] ;
+        playercell.lbl_playerName.text =[NSString stringWithFormat:@"%@   (12 Member)",objSelectPlayerRecord.playerName] ;
     }
     else if (ordernumber > 12)
     {
-        cell.lbl_playerName.text =[NSString stringWithFormat:@"%@   (Sub)",objSelectPlayerRecord.playerName] ;
+        playercell.lbl_playerName.text =[NSString stringWithFormat:@"%@   (Sub)",objSelectPlayerRecord.playerName] ;
     }
     else if(ordernumber < 12)
     {
-        cell.lbl_playerName.text =[NSString stringWithFormat:@"%@",objSelectPlayerRecord.playerName] ;
+        playercell.lbl_playerName.text =[NSString stringWithFormat:@"%@",objSelectPlayerRecord.playerName] ;
     }
-    cell.IMg_captain.image=([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])?[UIImage imageNamed:@"Img_Captain"]:nil;
-    cell.Img_wktkeeper.image=([objSelectPlayerRecord.isSelectWKTKeeper isEqualToString:@"YES"])?[UIImage imageNamed:@"Img_wktKeeper"]:nil;
+    playercell.IMg_captain.image=([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])?[UIImage imageNamed:@"Img_Captain"]:nil;
+    playercell.Img_wktkeeper.image=([objSelectPlayerRecord.isSelectWKTKeeper isEqualToString:@"YES"])?[UIImage imageNamed:@"Img_wktKeeper"]:nil;
     
+    playercell.shouldIndentWhileEditing = YES;
+    playercell.showsReorderControl = YES;
+    [playercell setEditing:self.isEditing];
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    return cell;
+     playercell.selectionStyle = UITableViewCellSelectionStyleNone;
+    return playercell;
+}
+
+
+-(IBAction)didClickDrag_BtnAction:(id)sender
+{
+    //[playercell setEditing: playercell.editing animated: YES];
+    
+   // self.showsReorderControl = NO;
+    
+    //self.editingAccessoryView = editing ? [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"yourReorderIcon"]] : nil;
+   
+    [self.tbl_playerSelectList setEditing:!playercell.editing animated:YES];
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -323,18 +351,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
-    
-    
-    PlayerLevelCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-   NSIndexPath * indexPaths = [self.tbl_playerSelectList indexPathForCell:cell];
+   playercell = [tableView cellForRowAtIndexPath:indexPath];
+   NSIndexPath * indexPaths = [_tbl_playerSelectList indexPathForCell:playercell];
    SelectPlayerRecord* objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPaths.row];
     if(isSelectCaptainType==NO)
     {
-        cell.IMg_captain.frame=CGRectMake(cell.contentView.frame.size.width-130, 15,50, 50);
-        cell.Btn_Captain.frame=CGRectMake(cell.contentView.frame.size.width-130, 15,50, 50);
-        cell.IMg_captain.image=[UIImage imageNamed:@"Img_Captain"];
-        [cell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+        playercell.IMg_captain.frame=CGRectMake(playercell.contentView.frame.size.width-130, 15,50, 50);
+        playercell.Btn_Captain.frame=CGRectMake(playercell.contentView.frame.size.width-130, 15,50, 50);
+        playercell.IMg_captain.image=[UIImage imageNamed:@"Img_Captain"];
+        [playercell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
                objSelectPlayerRecord.isSelectCapten=@"YES";
        
 
@@ -347,17 +372,17 @@
            
             if([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])
             {
-                cell.IMg_captain.frame=CGRectMake(cell.contentView.frame.size.width-180, 15,50, 50);
-                cell.Btn_Captain.frame=CGRectMake(cell.contentView.frame.size.width-190, 15,50, 50);
+                playercell.IMg_captain.frame=CGRectMake(playercell.contentView.frame.size.width-180, 15,50, 50);
+                playercell.Btn_Captain.frame=CGRectMake(playercell.contentView.frame.size.width-190, 15,50, 50);
             }
             else{
-                cell.IMg_captain.frame=CGRectMake(cell.contentView.frame.size.width-180, 15,50, 50);
-                cell.Btn_Captain.frame=CGRectMake(cell.contentView.frame.size.width-190, 15,50, 50);
+                playercell.IMg_captain.frame=CGRectMake(playercell.contentView.frame.size.width-180, 15,50, 50);
+                playercell.Btn_Captain.frame=CGRectMake(playercell.contentView.frame.size.width-190, 15,50, 50);
             }
-            cell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
+            playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
              objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
             objSelectPlayerRecord.isSelectWKTKeeper=@"YES";
-            [cell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+            [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
             isSelectWKTKeeperType=YES;
         }
     }
@@ -395,164 +420,44 @@
 }
 
 
-- (void)longPress:(UILongPressGestureRecognizer *)gesture {
-    
-    CGPoint location = [gesture locationInView:self];
-    NSIndexPath *indexPath = [self.tbl_playerSelectList indexPathForRowAtPoint:location];
-    
-    int sections = [self.tbl_playerSelectList numberOfSections];
-    int rows = 0;
-    for(int i = 0; i < sections; i++) {
-        rows += [self.tbl_playerSelectList numberOfRowsInSection:i];
-    }
-    
-    // get out of here if the long press was not on a valid row or our table is empty
-    // or the dataSource tableView:canMoveRowAtIndexPath: doesn't allow moving the row
-    if (rows == 0 || (gesture.state == UIGestureRecognizerStateBegan && indexPath == nil) ||
-        (gesture.state == UIGestureRecognizerStateEnded && self.currentLocationIndexPath == nil) ||
-        (gesture.state == UIGestureRecognizerStateBegan &&
-         [self.tbl_playerSelectList.dataSource respondsToSelector:@selector(tableView:canMoveRowAtIndexPath:)] &&
-         indexPath && ![self.tbl_playerSelectList.dataSource tableView:self canMoveRowAtIndexPath:indexPath])) {
-           // [self.tbl_playerSelectList cancelGesture];
-            return;
-        }
-    
-    // started
-    if (gesture.state == UIGestureRecognizerStateBegan) {
-        
-        UITableViewCell *cell = [self.tbl_playerSelectList cellForRowAtIndexPath:indexPath];
-        //self.tbl_playerSelectList.draggingRowHeight = cell.frame.size.height;
-        [cell setSelected:NO animated:NO];
-        [cell setHighlighted:NO animated:NO];
-        
-        
-        // make an image from the pressed tableview cell
-        UIGraphicsBeginImageContextWithOptions(cell.bounds.size, NO, 0);
-        [cell.layer renderInContext:UIGraphicsGetCurrentContext()];
-        UIImage *cellImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        // create and image view that we will drag around the screen
-        if (!self.draggingView) {
-           self. draggingView = [[UIImageView alloc] initWithImage:cellImage];
-            [self.tbl_playerSelectList addSubview:self.draggingView];
-            CGRect rect = [self.tbl_playerSelectList rectForRowAtIndexPath:indexPath];
-           self. draggingView.frame = CGRectOffset(self.draggingView.bounds, rect.origin.x, rect.origin.y);
-            
-            // add drop shadow to image and lower opacity
-            self.draggingView.layer.masksToBounds = NO;
-            self.draggingView.layer.shadowColor = [[UIColor blackColor] CGColor];
-            self.draggingView.layer.shadowOffset = CGSizeMake(0, 0);
-            self.draggingView.layer.shadowRadius = 4.0;
-           self. draggingView.layer.shadowOpacity = 0.7;
-          // self. draggingView.layer.opacity = self.draggingViewOpacity;
-            
-            // zoom image towards user
-            [UIView beginAnimations:@"zoom" context:nil];
-            self.draggingView.transform = CGAffineTransformMakeScale(1.1, 1.1);
-            self.draggingView.center = CGPointMake(self.tbl_playerSelectList.center.x, location.y);
-            [UIView commitAnimations];
-        }
-        
-        [self.tbl_playerSelectList beginUpdates];
-        [self.tbl_playerSelectList deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        [self.tbl_playerSelectList insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-        
-        if ([self.tbl_playerSelectList.delegate respondsToSelector:@selector(saveObjectAndInsertBlankRowAtIndexPath:)]) {
-            //self.savedObject = [self.tbl_playerSelectList.delegate saveObjectAndInsertBlankRowAtIndexPath:indexPath];
-        }
-        else {
-            NSLog(@"saveObjectAndInsertBlankRowAtIndexPath: is not implemented");
-        }
-        
-        self.currentLocationIndexPath = indexPath;
-        self.initialIndexPath = indexPath;
-        [self.tbl_playerSelectList endUpdates];
-        
-        // enable scrolling for cell
-        self.scrollDisplayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(scrollTableWithCell:)];
-        [self.scrollDisplayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSDefaultRunLoopMode];
-    }
-    // dragging
-    else if (gesture.state == UIGestureRecognizerStateChanged) {
-        // update position of the drag view
-        // don't let it go past the top or the bottom too far
-        if (location.y >= 0 && location.y <= self.tbl_playerSelectList.contentSize.height + 50) {
-            self.draggingView.center = CGPointMake(self.tbl_playerSelectList.center.x, location.y);
-        }
-        
-        CGRect rect = self.tbl_playerSelectList.bounds;
-        // adjust rect for content inset as we will use it below for calculating scroll zones
-        rect.size.height -= self.tbl_playerSelectList.contentInset.top;
-        CGPoint location = [gesture locationInView:self];
-        
-        //[self updateCurrentLocation:gesture];
-        
-        // tell us if we should scroll and which direction
-        CGFloat scrollZoneHeight = rect.size.height / 6;
-        CGFloat bottomScrollBeginning = self.tbl_playerSelectList.contentOffset.y + self.tbl_playerSelectList.contentInset.top + rect.size.height - scrollZoneHeight;
-        CGFloat topScrollBeginning = self.tbl_playerSelectList.contentOffset.y + self.tbl_playerSelectList.contentInset.top  + scrollZoneHeight;
-        // we're in the bottom zone
-        if (location.y >= bottomScrollBeginning) {
-            self.scrollRate = (location.y - bottomScrollBeginning) / scrollZoneHeight;
-        }
-        // we're in the top zone
-        else if (location.y <= topScrollBeginning) {
-            self.scrollRate = (location.y - topScrollBeginning) / scrollZoneHeight;
-        }
-        else {
-            self.scrollRate = 0;
-        }
-    }
-    // dropped
-    else if (gesture.state == UIGestureRecognizerStateEnded) {
-        
-        NSIndexPath *indexPath = self.currentLocationIndexPath;
-        
-        // remove scrolling CADisplayLink
-        [self.scrollDisplayLink invalidate];
-        self.scrollDisplayLink = nil;
-        self.scrollRate = 0;
-        
-        // animate the drag view to the newly hovered cell
-        [UIView animateWithDuration:0.3
-                         animations:^{
-                             CGRect rect = [self.tbl_playerSelectList rectForRowAtIndexPath:indexPath];
-                            self. draggingView.transform = CGAffineTransformIdentity;
-                             self.draggingView.frame = CGRectOffset(self.draggingView.bounds, rect.origin.x, rect.origin.y);
-                         } completion:^(BOOL finished) {
-                             [self.draggingView removeFromSuperview];
-                             
-                             [self.tbl_playerSelectList beginUpdates];
-                             [self.tbl_playerSelectList deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                             [self.tbl_playerSelectList insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
-                             
-                             if ([self.tbl_playerSelectList.delegate respondsToSelector:@selector(finishReorderingWithObject:atIndexPath:)])
-                             {
-                                // [self.tbl_playerSelectList.delegate finishReorderingWithObject:self.savedObject atIndexPath:indexPath];
-                             }
-                             else {
-                                 NSLog(@"finishReorderingWithObject:atIndexPath: is not implemented");
-                             }
-                             [self.tbl_playerSelectList endUpdates];
-                             
-                             // reload the rows that were affected just to be safe
-                             NSMutableArray *visibleRows = [[self.tbl_playerSelectList indexPathsForVisibleRows] mutableCopy];
-                             [visibleRows removeObject:indexPath];
-                             [self.tbl_playerSelectList reloadRowsAtIndexPaths:visibleRows withRowAnimation:UITableViewRowAnimationNone];
-                             
-                             self.currentLocationIndexPath = nil;
-                             self.draggingView = nil;
-                         }];
-    }
-}
-
-
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)tableView:(UITableView *)tableView willBeginEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PlayerLevelCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.contentView.clipsToBounds = YES;
+}
+- (UITableViewCellEditingStyle) tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return UITableViewCellEditingStyleNone;
+}
+- (void)tableView:(UITableView *)tableView
+commitEditingStyle:(UITableViewCellEditingStyle)editingStyle
+forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+}
+- (BOOL) tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void) tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    
+    NSInteger sourceRow = sourceIndexPath.row;
+    NSInteger destRow = destinationIndexPath.row;
+    SelectPlayerRecord*objRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:sourceRow];
+    
+    id object = [slecteplayerlist objectAtIndex:sourceRow];
+    
+    [slecteplayerlist removeObjectAtIndex:sourceRow];
+    [slecteplayerlist insertObject:object atIndex:destRow];
+    playercell.editing=NO;
+    [self.tbl_playerSelectList setEditing:playercell.editing animated:YES];
+    
 }
 
 -(IBAction)Back_BtnAction:(id)sender
