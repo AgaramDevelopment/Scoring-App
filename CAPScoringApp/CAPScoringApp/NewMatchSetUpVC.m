@@ -209,6 +209,7 @@
     selectvc =  (SelectPlayersVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
     
     selectvc.teamCode=teamBcode;
+    selectvc.matchCode = matchCode;
     
     [self.navigationController pushViewController:selectvc animated:YES];
     
