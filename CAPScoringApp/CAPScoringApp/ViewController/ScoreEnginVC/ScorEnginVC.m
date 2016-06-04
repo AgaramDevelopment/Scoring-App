@@ -853,7 +853,7 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
         
         [DBManager saveBallEventData:objBalleventRecord];
         [DBManager insertBallCodeAppealEvent:objBalleventRecord];
-        [DBManager insertBallCodeFieldEvent:objBalleventRecord];
+        [DBManager insertBallCodeFieldEvent: objBalleventRecord bowlerEvent:selectedfieldPlayer fieldingFactor: selectedfieldFactor nrs :selectedNRS];
         [DBManager insertBallCodeWicketEvent:objBalleventRecord];
         
         //[DBManager saveBallEventData:objBalleventRecord otwOrRtw:];
