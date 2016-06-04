@@ -23,9 +23,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_scorer1;
 
 
-
 @property(strong,nonatomic)NSString*Matchcode;
 @property(strong,nonatomic)NSString*competitionCode;
+
 
 - (IBAction)btn_proceed:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_scorer2;
