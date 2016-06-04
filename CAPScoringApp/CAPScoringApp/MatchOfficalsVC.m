@@ -10,6 +10,7 @@
 #import "DBManager.h"
 #import "OfficialMasterRecord.h"
 #import "TossDetailsVC.h"
+#import "CustomNavigationVC.h"
 
 @interface MatchOfficalsVC ()
 @property (nonatomic,strong)NSMutableArray *FetchOfficalMasterArray;
@@ -26,6 +27,7 @@
     //_FetchOfficalMasterArray=[[NSMutableArray alloc]init];
     _FetchOfficalMasterArray =[DBManager RetrieveOfficalMasterData:Matchcode competitionCode:competitionCode];
     
+    [self customnavigationmethod];
     
     [self.view_umpire.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.view_umpire.layer.borderWidth = 2;
@@ -76,6 +78,21 @@
  }
  */
 
+//Navigation bar action
+-(void)customnavigationmethod
+{
+    CustomNavigationVC *objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
+    [self.view addSubview:objCustomNavigation.view];
+    objCustomNavigation.lbl_titleName.text=@"MATCH OFFICALS";
+    [objCustomNavigation.Btn_Back addTarget:self action:@selector(btn_back:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+
+- (IBAction)btn_back:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 - (IBAction)btn_proceed:(id)sender {
     
     

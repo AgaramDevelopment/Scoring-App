@@ -10,6 +10,7 @@
 #import "FixturesCell.h"
 #import "FixturesRecord.h"
 #import "NewMatchSetUpVC.h"
+#import "CustomNavigationVC.h"
 
 #import "DBManager.h"
 
@@ -30,7 +31,7 @@
     _FetchCompitionArray=[[NSMutableArray alloc]init];
     _FetchCompitionArray =[DBManager RetrieveFixturesData:CompitionCode];
     self.popView.hidden=YES;
-    
+    [self customnavigationmethod];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -89,7 +90,7 @@
     
     // change background color of selected cell
     UIView *bgColorView = [[UIView alloc] init];
-    [bgColorView setBackgroundColor:[UIColor colorWithRed:0.2 green:0.7 blue:0.2 alpha:1.0]];
+    [bgColorView setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
     
     [cell setSelectedBackgroundView:bgColorView];
     
@@ -195,13 +196,14 @@
 
 -(void)didClickinfoBtn_Action:(id)sender
 {
+    
     UIButton *button = (UIButton *)sender;
     NSLog(@"indexPath.row: %d", button.tag);
-    CGFloat frameyposition=button.tag*50;
+    //CGFloat frameyposition=button.tag*50;
     
-    CGFloat yposition=frameyposition+50;
+   // CGFloat yposition=frameyposition+30;
     [self.view layoutIfNeeded];
-    self.popviewYposition.constant=yposition;
+   // self.popviewYposition.constant=yposition;
     self.popView.hidden =NO;
     NSLog(@"TAG %ld",(long)button.tag);
     self.btnSaveOutlet.tag=button.tag;
@@ -213,7 +215,20 @@
     
 }
 
+//Navigation bar action
+-(void)customnavigationmethod
+{
+    CustomNavigationVC *objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
+    [self.view addSubview:objCustomNavigation.view];
+    objCustomNavigation.lbl_titleName.text=@"FIXTURES";
+    [objCustomNavigation.Btn_Back addTarget:self action:@selector(btn_back:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
 
+- (IBAction)btn_back:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 /*
  #pragma mark - Navigation
