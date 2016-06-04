@@ -138,4 +138,13 @@
 //    [self presentViewController:tournmentVc animated:NO completion:nil];
     
 }
+
+-(void)viewWillAppear:(BOOL)animated{
+    
+    
+    _img_newMatch.image = [UIImage imageNamed:@"ico-new-mach01.png"];
+    _view_new_Match.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:(0.3f)];
+
+    
+}
 @end

@@ -50,6 +50,8 @@
     
     NSString * BOWLCOMPUTESHOW;
     int selectTeamindex;
+    
+    NSString* BowlingEnd;
    }
 @property (nonatomic,strong)NSMutableArray*WonTossArray;
 @property (nonatomic,strong)NSMutableArray*ElectedToArray;
@@ -68,6 +70,8 @@
 @synthesize BowleArray;
 @synthesize MATCHCODE;
 @synthesize CompetitionCode;
+@synthesize radiobutton1;
+@synthesize radiobutton2;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -615,8 +619,60 @@ return 1;
 
 }
 
+-(void)viewDidAppear:(BOOL)animated
+{
+    
+    //radio buttons
+   
+    [self.radiobutton1 setTag:0];
+   [self.radiobutton1 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+    [self.radiobutton1 setBackgroundImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateSelected];
+ [self.radiobutton1 addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
+   
+    [self.radiobutton2 setTag:1];
+    [self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];[self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateSelected];
+  [self.radiobutton2 addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
+      [self.view addSubview:self.radiobutton2];
+      [self.view addSubview:self.radiobutton2];
+}
 
 
+
+-(void)radiobuttonSelected:(id)sender{
+    switch ([sender tag]) {
+        case 0:
+            if([self.radiobutton1 isSelected]==YES)
+            
+            {
+                [self.radiobutton1 setSelected:NO];
+                [self.radiobutton2 setSelected:YES];
+            }
+            else{
+                [self.radiobutton1 setSelected:YES];
+                [self.radiobutton2 setSelected:NO];
+            }
+            
+            break;
+        case 1:
+            if([self.radiobutton2 isSelected]==YES)
+                
+            {
+                [self.radiobutton2 setSelected:NO];
+                [self.radiobutton1 setSelected:YES];
+                
+            }
+            else{
+               BowlingEnd=@"MSC151"; 
+                [self.radiobutton2 setSelected:YES];
+                [self.radiobutton1 setSelected:NO];
+            }
+            
+            break;
+        default:
+            break;
+    }
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -634,7 +690,7 @@ return 1;
     NSString *maxInnNo = [DBManager getMaxInningsNumber:CompetitionCode :MATCHCODE];
   
     NSString*inningsstatus=@"0";
-       NSString* BowlingEnd=@"MSC150";
+     BowlingEnd=@"MSC150";
     [DBManager inserMaxInningsEvent:CompetitionCode :MATCHCODE :teamaCode :maxInnNo :StrikerCode:NonStrikerCode :selectBowlerCode :StrikerCode :NonStrikerCode :selectBowlerCode :teamaCode :inningsstatus:BowlingEnd];
     [DBManager updateProcced:CompetitionCode :MATCHCODE];
     

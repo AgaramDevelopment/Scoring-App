@@ -59,4 +59,10 @@ IBOutlet UIView *nonStriker;
 
 -(IBAction)Back_BtnAction:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UIButton *radiobutton1;
+
+//@property(strong, nonatomic) UIButton *radiobutton1;
+//@property(strong, nonatomic) UIButton *radiobutton2;
+@property (strong, nonatomic) IBOutlet UIButton *radiobutton2;
+-(void)radiobuttonSelected:(id)sender;
 @end

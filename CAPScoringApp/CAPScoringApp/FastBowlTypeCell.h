@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface FastBowlTypeCell : UITableViewCell
+//@property (weak, nonatomic) IBOutlet UILabel *lbl_fastBowl;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_fastBowl;
 
 @end

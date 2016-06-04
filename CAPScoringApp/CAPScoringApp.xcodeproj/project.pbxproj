@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		048F6F591CFFFEE600F2C5F5 /* FieldingFactorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048F6F581CFFFEE600F2C5F5 /* FieldingFactorCell.m */; };
 		1837AA8C1CFF125B00B7259C /* BowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA8B1CFF125B00B7259C /* BowlTypeCell.m */; };
+		185060561D0300190030E3E2 /* FastBowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA941CFF264A00B7259C /* FastBowlTypeCell.m */; };
 		187952321D02A410001A1224 /* BowlAndShotTypeRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 1879522F1D02A410001A1224 /* BowlAndShotTypeRecords.m */; };
 		187952331D02A410001A1224 /* FieldingEventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 187952311D02A410001A1224 /* FieldingEventRecord.m */; };
 		187952351D02AD28001A1224 /* FieldingFactorRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1879522C1D02A0B4001A1224 /* FieldingFactorRecord.m */; };
@@ -596,6 +597,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				185060561D0300190030E3E2 /* FastBowlTypeCell.m in Sources */,
 				187952351D02AD28001A1224 /* FieldingFactorRecord.m in Sources */,
 				CE1FBF581CF96EDB00A9B6FE /* TossDeatilsEvent.m in Sources */,
 				CE0F19C91CF6C2CC0030FFA2 /* TossDetailsVC.m in Sources */,
