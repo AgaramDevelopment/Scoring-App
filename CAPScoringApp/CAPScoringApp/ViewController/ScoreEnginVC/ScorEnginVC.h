@@ -153,16 +153,26 @@
 @property (weak, nonatomic) IBOutlet UITableView *tbl_aggressiveShot;
 @property (weak, nonatomic) IBOutlet UIView *view_aggressiveShot;
 //fielding factor
-@property (strong, nonatomic) IBOutlet UIView *view_fieldingfactor;
-@property (strong, nonatomic) IBOutlet UITableView *tbl_fieldingfactor;
-@property (strong, nonatomic) IBOutlet UIView *view_fieldername;  //fielding factor playername
-@property (strong, nonatomic) IBOutlet UIView *view_nrs;   //fileiding factor netruns
+//@property (strong, nonatomic) IBOutlet UIView *view_fieldingfactor;
+//@property (strong, nonatomic) IBOutlet UITableView *tbl_fieldingfactor;
+//@property (strong, nonatomic) IBOutlet UIView *view_fieldername;  //fielding factor playername
+//@property (strong, nonatomic) IBOutlet UIView *view_nrs;   //fileiding factor netruns
 
 //defensive shot type
 @property (weak, nonatomic) IBOutlet UITableView *tbl_defensive;
 @property (weak, nonatomic) IBOutlet UIView *view_defensive;
 @property (strong, nonatomic) IBOutlet UIView *view_Rbw;
 
+@property (weak, nonatomic) IBOutlet UIView *view_otw;
+@property (weak, nonatomic) IBOutlet UIView *view_rtw;
+@property (weak, nonatomic) IBOutlet UIView *view_spin;
+@property (weak, nonatomic) IBOutlet UIView *view_fast;
+
+@property (weak, nonatomic) IBOutlet UIView *view_aggressive;
+
+@property (weak, nonatomic) IBOutlet UIView *view_defense;
+
+@property (weak, nonatomic) IBOutlet UIView *view_fielding_factor;
 
 @property (weak, nonatomic) IBOutlet UIView *view_otw;
 @property (weak, nonatomic) IBOutlet UIView *view_rtw;
