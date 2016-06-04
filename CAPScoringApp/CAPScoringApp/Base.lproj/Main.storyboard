@@ -8608,11 +8608,18 @@
                         <outlet property="view_AppealComponent" destination="04e-JY-eUX" id="vZ8-Vt-xNC"/>
                         <outlet property="view_AppealSystem" destination="T9G-hC-PbK" id="hPu-iD-iFY"/>
                         <outlet property="view_Rbw" destination="lcE-j5-csW" id="GQQ-Rz-cu1"/>
+                        <outlet property="view_aggressive" destination="IUf-wG-G5K" id="gCt-Nn-TuO"/>
                         <outlet property="view_aggressiveShot" destination="Mww-qs-iOI" id="cBu-sl-4yg"/>
                         <outlet property="view_batsmen" destination="T8h-Mk-hso" id="v0r-1s-MAL"/>
                         <outlet property="view_bowlType" destination="RMI-yK-Nlh" id="zor-p5-g0D"/>
+                        <outlet property="view_defense" destination="yWm-pg-DLe" id="oUQ-rz-pBW"/>
                         <outlet property="view_defensive" destination="09F-Ac-hCD" id="Ks6-op-CG7"/>
+                        <outlet property="view_fast" destination="FBP-5O-uVe" id="6Vf-ba-5oP"/>
                         <outlet property="view_fastBowl" destination="ZaP-qa-qve" id="rOf-Xr-kOK"/>
+                        <outlet property="view_fielding_factor" destination="gK1-iG-4WN" id="gqS-4m-Jh9"/>
+                        <outlet property="view_otw" destination="oNY-ku-ACQ" id="jml-VF-QvQ"/>
+                        <outlet property="view_rtw" destination="BbT-vt-UQ3" id="kR4-rR-Jzl"/>
+                        <outlet property="view_spin" destination="yps-fZ-Aa8" id="3kK-8Z-Zdy"/>
                         <outlet property="view_table_select" destination="YuY-c8-SjD" id="Y3K-7R-qlR"/>
                         <outlet property="view_umpireName" destination="KjS-Gv-1mB" id="u7M-qW-KgJ"/>
                     </connections>
