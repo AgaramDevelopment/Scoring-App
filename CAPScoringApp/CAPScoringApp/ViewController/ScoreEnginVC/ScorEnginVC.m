@@ -124,7 +124,7 @@
 @synthesize tbl_bowlType;
 @synthesize tbl_fastBowl;
 @synthesize tbl_aggressiveShot;
-@synthesize tbl_fieldingfactor;
+//@synthesize tbl_fieldingfactor;
 
 //appeal
 @synthesize AppealSystemArray;
