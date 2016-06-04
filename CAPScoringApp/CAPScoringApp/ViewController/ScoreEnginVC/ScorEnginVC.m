@@ -85,6 +85,8 @@
 }
 
 
+
+
 @property(nonatomic,strong) NSMutableArray *selectbtnvalueArray;
 @property(nonatomic,strong) NSMutableArray *extrasOptionArray;
 @property(nonatomic,strong) NSMutableArray *overThrowOptionArray;
@@ -580,6 +582,14 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
             fieldFactorCell.lbl_fastBowl.text = objFieldingFactorRecord.fieldingfactor;
          
             
+            // this is where you set your color view
+            UIView *customColorView = [[UIView alloc] init];
+            customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                              green:161/255.0
+                                                               blue:79/255.0
+                                                              alpha:0.5];
+            fieldFactorCell.selectedBackgroundView =  customColorView;
+            
             return fieldFactorCell;
         }
         if(isFieldingSelected && fieldingOption == 2)
@@ -589,6 +599,14 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
                                                                                 forIndexPath:indexPath];
             BowlerEvent *bowlerEvent=(BowlerEvent*)[_fieldingPlayerArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = bowlerEvent.BowlerName;
+            
+            // this is where you set your color view
+            UIView *customColorView = [[UIView alloc] init];
+            customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                              green:161/255.0
+                                                               blue:79/255.0
+                                                              alpha:0.5];
+            fieldFactorCell.selectedBackgroundView =  customColorView;
             return fieldFactorCell;
         }
         if(isFieldingSelected && fieldingOption == 3)
@@ -599,6 +617,13 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
                                                                                 forIndexPath:indexPath];
             NSString *nrs=(NSString*)[_nrsArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = nrs;
+            // this is where you set your color view
+            UIView *customColorView = [[UIView alloc] init];
+            customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                              green:161/255.0
+                                                               blue:79/255.0
+                                                              alpha:0.5];
+            fieldFactorCell.selectedBackgroundView =  customColorView;
             return fieldFactorCell;
         }
         
@@ -659,6 +684,14 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
         
         fastBowlCell.lbl_fastBowl.text = objBowlRecord.BowlType;
         
+        // this is where you set your color view
+        UIView *customColorView = [[UIView alloc] init];
+        customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                          green:161/255.0
+                                                           blue:79/255.0
+                                                          alpha:0.5];
+        fastBowlCell.selectedBackgroundView =  customColorView;
+        
         return fastBowlCell;
 
         
@@ -675,6 +708,14 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
         
         aggressiveCell.lbl_aggressive.text = objShotRecord.ShotType;
         
+        // this is where you set your color view
+        UIView *customColorView = [[UIView alloc] init];
+        customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                          green:161/255.0
+                                                           blue:79/255.0
+                                                          alpha:0.5];
+        aggressiveCell.selectedBackgroundView =  customColorView;
+        
         return aggressiveCell;
         
     }else if(tableView == _tbl_defensive){
@@ -688,6 +729,14 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
         
         
         aggressiveCell.lbl_defensive.text = objShotRecord.ShotType;
+        
+        // this is where you set your color view
+        UIView *customColorView = [[UIView alloc] init];
+        customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                          green:161/255.0
+                                                           blue:79/255.0
+                                                          alpha:0.5];
+        aggressiveCell.selectedBackgroundView =  customColorView;
         
         return aggressiveCell;
     }
@@ -1034,6 +1083,38 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
         
     }
     
+    if(isFieldingSelected && isFieldingSelected>0){
+        fieldingOption = 0;
+    }
+    
+    if (isRBWSelected) {
+        if(self.ballEventRecord.objRbw!=0){
+            
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+            
+        }else{
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+            
+        }
+        [rbwTableview removeFromSuperview];
+        
+        isRBWSelected = NO;
+    }
+    
+    if (ismiscFilters) {
+        if(self.ballEventRecord.objIsbeaten.integerValue ==0 && self.ballEventRecord.objIswtb.integerValue ==0 && self.ballEventRecord.objIsuncomfort.integerValue ==0 && self.ballEventRecord.objIsreleaseshot.integerValue ==0){
+            self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Black
+            
+            
+        }else{
+            
+            self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Green
+        }
+        [miscFiltersTableview removeFromSuperview];
+        
+        ismiscFilters = NO;
+    }
+    
     if(selectBtnTag.tag==100)//Run one
     {
         [self calculateRuns:selectBtnTag.tag];
@@ -1068,7 +1149,7 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     }
     else if(selectBtnTag.tag==107)
     {
-        [self selectBtncolor_Action:@"107" :self.btn_wkts :0];
+        //[self selectBtncolor_Action:@"107" :self.btn_wkts :0];
     }
     else if(selectBtnTag.tag==108)//Overthrow
     {
@@ -1079,7 +1160,7 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
         //  self.selectbtnvalueArray=[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4",@"5",@"6",@"7",@"8",@"9",@"10",@"11",@"12", nil];
         //  [self selelectbtnPop_View:selectBtnTag];
     }
-    else if(selectBtnTag.tag==109)
+    else if(selectBtnTag.tag==109)//Misc Filter
     {
         if (ismiscFilters) {
             if(self.ballEventRecord.objIsbeaten.integerValue ==0 && self.ballEventRecord.objIswtb.integerValue ==0 && self.ballEventRecord.objIsuncomfort.integerValue ==0 && self.ballEventRecord.objIsreleaseshot.integerValue ==0){
@@ -1096,12 +1177,13 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
         }else{
             ismiscFilters = YES;
             
+            
+            
             self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
             self.miscfiltersOptionArray=[[NSMutableArray alloc]initWithObjects:@"Uncomfort",@"Beaten",@"Release Shot",@"WTB", nil];
-            
-            
-            
-            miscFiltersTableview=[[UITableView alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.size.width-570, self.btn_miscFilter.frame.origin.y-80,130,190)];
+           
+           
+            miscFiltersTableview=[[UITableView alloc]initWithFrame:CGRectMake(selectBtnTag.frame.origin.x+selectBtnTag.frame.size.width+10, selectBtnTag.frame.origin.y-50,150,200)];
             miscFiltersTableview.backgroundColor=[UIColor whiteColor];
             
             miscFiltersTableview.dataSource = self;
@@ -1132,23 +1214,23 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     }
     else if(selectBtnTag.tag==110)
     {
-        [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
-        [self.img_pichmap setImage:[UIImage imageNamed:@"pitchmap_img"]];
-           _View_Appeal.hidden=YES;
-        self.view_bowlType.hidden = YES;
-        self.view_fastBowl.hidden = YES;
-        self.view_aggressiveShot.hidden = YES;
-        self.view_defensive.hidden = YES;
+//        [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
+//        [self.img_pichmap setImage:[UIImage imageNamed:@"pitchmap_img"]];
+//           _View_Appeal.hidden=YES;
+//        self.view_bowlType.hidden = YES;
+//        self.view_fastBowl.hidden = YES;
+//        self.view_aggressiveShot.hidden = YES;
+//        self.view_defensive.hidden = YES;
     }
     else if(selectBtnTag.tag==111)
     {
-        [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
-        [self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
-         _View_Appeal.hidden=YES;
-        self.view_bowlType.hidden = YES;
-        self.view_fastBowl.hidden = YES;
-        self.view_aggressiveShot.hidden = YES;
-        self.view_defensive.hidden = YES;
+//        [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
+//        [self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
+//         _View_Appeal.hidden=YES;
+//        self.view_bowlType.hidden = YES;
+//        self.view_fastBowl.hidden = YES;
+//        self.view_aggressiveShot.hidden = YES;
+//        self.view_defensive.hidden = YES;
 
         
     }
@@ -1168,6 +1250,76 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
 -(IBAction)didClickRightSideBtn_Action:(id)sender
 {
     UIButton *selectBtnTag=(UIButton*)sender;
+    
+    
+    if(isExtrasSelected && selectBtnTag.tag!=106){//Already open state
+        
+        
+        if(self.ballEventRecord.objNoball.integerValue ==0 && self.ballEventRecord.objWide.integerValue ==0 && self.ballEventRecord.objByes.integerValue ==0 && self.ballEventRecord.objLegByes.integerValue ==0){//Nothing selected
+            
+            [self unselectedButtonBg:self.btn_extras];
+        }else{//If any one selected
+            
+            [self selectedButtonBg:self.btn_extras];
+        }
+        
+        if(extrasTableView!=nil){
+            [extrasTableView removeFromSuperview];
+        }
+        
+        
+        isExtrasSelected = NO;
+        
+    }
+    
+    if(isOverthrowSelected  && selectBtnTag.tag!=108){// Already open state
+        if(overThrowTableView!=nil){
+            [overThrowTableView removeFromSuperview];
+        }
+        
+        if(self.ballEventRecord.objOverthrow.integerValue!=0){
+            [self selectedButtonBg:self.btn_overthrow];
+        }else{
+            [self unselectedButtonBg:self.btn_overthrow];
+        }
+        
+        isOverthrowSelected = NO;
+        
+    }
+    
+    
+    if(isFieldingSelected && isFieldingSelected>0){
+        fieldingOption = 0;
+    }
+    
+    if (isRBWSelected) {
+        if(self.ballEventRecord.objRbw!=0){
+            
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+            
+        }else{
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+            
+        }
+        [rbwTableview removeFromSuperview];
+        
+        isRBWSelected = NO;
+    }
+    
+    if (ismiscFilters) {
+        if(self.ballEventRecord.objIsbeaten.integerValue ==0 && self.ballEventRecord.objIswtb.integerValue ==0 && self.ballEventRecord.objIsuncomfort.integerValue ==0 && self.ballEventRecord.objIsreleaseshot.integerValue ==0){
+            self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Black
+            
+            
+        }else{
+            
+            self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Green
+        }
+        [miscFiltersTableview removeFromSuperview];
+        
+        ismiscFilters = NO;
+    }
+    
     //isSelectleftview=NO;
     if(selectBtnTag.tag==112)
     {
@@ -1295,9 +1447,9 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
         }
         
         //View
-        _view_aggressive.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        _view_defense.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
         
-        _view_defense.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        _view_aggressive.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
         
      
         
@@ -1318,13 +1470,17 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
             self.view_defensive.hidden = YES;
             self.view_bowlType.hidden = YES;
             self.view_fastBowl.hidden = YES;
-           [self unselectedButtonBg:selectBtnTag];
+           //[self unselectedButtonBg:selectBtnTag];
+           
+            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+            
         }else{
             //Fielding Factor
             _fieldingfactorArray=[[NSMutableArray alloc]init];
             _fieldingfactorArray =[DBManager RetrieveFieldingFactorData];
             
-            [self selectedButtonBg:selectBtnTag];
+             _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+             
             isFieldingSelected = YES;
             fieldingOption = 1;
             
@@ -1400,24 +1556,28 @@ AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     }
     else if(selectBtnTag.tag==120)
     {
-        [self selectBtncolor_Action:@"120" :nil :209];
+      //  [self selectBtncolor_Action:@"120" :nil :209];
         //[self RemarkMethode];
         
     }
     else if(selectBtnTag.tag==121)
     {
-        [self selectBtncolor_Action:@"121" :nil :210];
+     //   [self selectBtncolor_Action:@"121" :nil :210];
     }
-    else if(selectBtnTag.tag==122)
+    else if(selectBtnTag.tag==122)//Appels
     {
-        [self selectBtncolor_Action:@"122" :nil :211];
+      //  [self selectBtncolor_Action:@"122" :nil :211];
          _View_Appeal.hidden=NO;
         
+        self.view_aggressiveShot.hidden = YES;
+        self.view_defensive.hidden = YES;
+        self.view_bowlType.hidden = YES;
+        self.view_fastBowl.hidden = YES;
         
     }
     else if(selectBtnTag.tag==123)
     {
-        [self selectBtncolor_Action:@"123" :nil :212];
+      //  [self selectBtncolor_Action:@"123" :nil :212];
     }
     
 }

@@ -270,11 +270,13 @@ static NSString * const reuseIdentifier = @"Cell";
             [DBManager updateSelectedPlayersResultCode:[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus];
             
         }
-        PlayerOrderLevelVC *obPlayerOrderLevelVCj = [[PlayerOrderLevelVC alloc] init];
-        obPlayerOrderLevelVCj.objSelectplayerList_Array=self.selectedPlayerArray;
+        PlayerOrderLevelVC *obPlayerOrderLevelVC = [[PlayerOrderLevelVC alloc] init];
+        obPlayerOrderLevelVC.objSelectplayerList_Array=self.selectedPlayerArray;
+        obPlayerOrderLevelVC.TeamCode=self.teamCode;
+        obPlayerOrderLevelVC.MatchCode= self.matchCode;
         
         // push a new stack
-        [self.navigationController pushViewController:obPlayerOrderLevelVCj animated:YES];
+        [self.navigationController pushViewController:obPlayerOrderLevelVC animated:YES];
         
     
 }else{

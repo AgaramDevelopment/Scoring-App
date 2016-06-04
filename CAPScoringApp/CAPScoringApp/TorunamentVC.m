@@ -17,8 +17,7 @@
 {
     BOOL isEnableTbl;
     NSMutableArray * selectindexarray;
-    CustomNavigationVC *objCustomNavigation;
-}
+   }
 @property (nonatomic,strong)NSMutableArray*resultArray;
 @property(nonatomic,weak) IBOutlet UIView *selectmatchTittleview;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
@@ -37,14 +36,16 @@
     [self.selectmatchTittleview .layer setBorderWidth:2.0];
     [self.selectmatchTittleview.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.selectmatchTittleview .layer setMasksToBounds:YES];
+   
 
     
     
 }
 
+
 -(void)customnavigationmethod
 {
-    objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
+    CustomNavigationVC *objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
     [self.view addSubview:objCustomNavigation.view];
     objCustomNavigation.lbl_titleName.text=@"SELECT TOURNAMENT";
     [objCustomNavigation.Btn_Back addTarget:self action:@selector(Back_BtnAction:) forControlEvents:UIControlEventTouchUpInside];

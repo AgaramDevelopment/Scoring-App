@@ -87,4 +87,8 @@
 +(NSMutableArray *)getDefenceShotType;
 +(NSMutableArray *)RetrieveFieldingFactorData;
 +(NSMutableArray *)RetrieveFieldingPlayerData;
+
+
+// playerOrderlevel
++(BOOL)updatePlayerorder:(NSString *) matchCode :(NSString *) teamcode PlayerCode:(NSString *)playerCode PlayerOrder:(NSString *)playerorder ;
 @end

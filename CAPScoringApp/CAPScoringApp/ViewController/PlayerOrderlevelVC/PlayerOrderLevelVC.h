@@ -12,6 +12,8 @@
     NSMutableArray *arrayOfItems;
 }
 @property(nonatomic,strong) NSMutableArray *objSelectplayerList_Array;
-- (void)updateCurrentLocation:(UILongPressGestureRecognizer *)gesture;
+
+@property (strong,nonatomic) NSString *TeamCode;
+@property (strong,nonatomic) NSString *MatchCode;
 
 @end
