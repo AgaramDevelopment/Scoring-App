@@ -2070,6 +2070,63 @@
     }
 }
 
+
+-(void) calculateRunsOnEndBall   {
+    //Wides and Noball calculation.
+    if (self.ballEventRecord.objIslegalball.integerValue == 0)//Illegal ball.
+    {
+        if (self.ballEventRecord.objWide.integerValue != 0)
+        {
+            self.ballEventRecord.objWide = [NSNumber numberWithInt: (self.ballEventRecord.objRuns.intValue + self.ballEventRecord.objOverthrow.intValue) + 1];
+            self.ballEventRecord.objRuns = 0;
+        }
+        else if (self.ballEventRecord.objNoball.integerValue != 0)
+        {
+            if (self.ballEventRecord.objByes.integerValue != 0 || self.ballEventRecord.objLegByes.integerValue != 0)
+            {
+                
+                self.ballEventRecord.objNoball = [NSNumber numberWithInt:1];
+                
+                self.ballEventRecord.objByes = self.ballEventRecord.objByes.integerValue > 0 ?  [NSNumber numberWithInt: (self.ballEventRecord.objRuns.intValue + self.ballEventRecord.objOverthrow.intValue)] : self.ballEventRecord.objByes;
+                
+                self.ballEventRecord.objLegByes =  self.ballEventRecord.objLegByes.integerValue>0?
+                [NSNumber numberWithInt: self.ballEventRecord.objRuns.intValue+ self.ballEventRecord.objOverthrow.intValue]:
+                self.ballEventRecord.objLegByes;
+                self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+            }
+            else
+            {
+                self.ballEventRecord.objNoball = [NSNumber numberWithInt:1];
+            }
+        }
+    }
+    else//Legal ball.
+    {
+        
+        if (self.ballEventRecord.objByes.integerValue != 0 || self.ballEventRecord.objLegByes.integerValue != 0)
+        {
+            
+            self.ballEventRecord.objByes = self.ballEventRecord.objByes.integerValue > 0 ?  [NSNumber numberWithInt: self.ballEventRecord.objRuns.intValue + self.ballEventRecord.objOverthrow.intValue] : self.ballEventRecord.objByes;
+            
+            self.ballEventRecord.objLegByes =  self.ballEventRecord.objLegByes.integerValue>0?
+            [NSNumber numberWithInt: self.ballEventRecord.objRuns.intValue+ self.ballEventRecord.objOverthrow.intValue]:
+            self.ballEventRecord.objLegByes;
+            self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+        }
+          }
+    
+    self.ballEventRecord.objTotalruns =
+    (self.ballEventRecord.objRuns.intValue+( self.ballEventRecord.objByes.intValue == 0 &&  self.ballEventRecord.objLegByes.intValue == 0 &&  self.ballEventRecord.objWide.intValue == 0)) ? [NSNumber numberWithInt: self.ballEventRecord.objOverthrow.intValue]: [NSNumber numberWithInt:0];
+    //Total runs scored for the particular ball including byes or legbyes.
+    
+    int totalExtras = 0;
+    self.ballEventRecord.objTotalextras = [NSNumber numberWithInt: self.ballEventRecord.objNoball.intValue +self.ballEventRecord.objWide.intValue+self.ballEventRecord.objByes.intValue+self.ballEventRecord.objLegByes.intValue+self.ballEventRecord.objPenalty.intValue];
+    /*+ ((Byes > 0 || Legbyes > 0) ? Overthrow : 0)*/;
+}
+
+
+
+
 //
 //- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 //{
