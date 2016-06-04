@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
 @interface PlayerOrderLevelVC : UIViewController
+{
+    NSMutableArray *arrayOfItems;
+}
 @property(nonatomic,strong) NSMutableArray *objSelectplayerList_Array;
+- (void)updateCurrentLocation:(UILongPressGestureRecognizer *)gesture;
 
 @end

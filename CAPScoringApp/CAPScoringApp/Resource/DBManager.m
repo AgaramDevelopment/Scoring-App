@@ -22,6 +22,8 @@
 #import "AppealUmpireRecord.h"
 #import "BowlAndShotTypeRecords.h"
 #import "FieldingFactorRecord.h"
+#import "FieldingEventRecord.h"
+
 @implementation DBManager
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
@@ -445,7 +447,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(NSMutableArray *)RetrieveOfficalMasterData{
++(NSMutableArray *)RetrieveOfficalMasterData:(NSString*) matchCode competitionCode:(NSString*)competitionCode{
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
     int retVal;
     NSString *dbPath = [self getDBPath];
@@ -457,7 +459,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
-    NSString *query=[NSString stringWithFormat:@"SELECT MR.UMPIRE1CODE ,OM.NAME AS  UMPIRE1NAME, MR.UMPIRE2CODE,OM1.NAME AS UMPIRE2NAME,MR.UMPIRE3CODE,OM2.NAME AS UMPIRE3NAME,MR.MATCHREFEREECODE ,OM3.NAME AS MATCHREFEREENAME FROM MATCHREGISTRATION MR INNER JOIN OFFICIALSMASTER OM ON MR.UMPIRE1CODE= OM.OFFICIALSCODE INNER JOIN OFFICIALSMASTER OM1 ON MR.UMPIRE2CODE= OM1.OFFICIALSCODE INNER JOIN OFFICIALSMASTER OM2 ON MR.UMPIRE3CODE= OM2.OFFICIALSCODE INNER JOIN OFFICIALSMASTER OM3 ON MR.MATCHREFEREECODE= OM3.OFFICIALSCODE WHERE MATCHCODE ='IMSC0221C6F6595E95A00002'"];
+    NSString *query=[NSString stringWithFormat:@"SELECT MR.UMPIRE1CODE ,OM.NAME AS  UMPIRE1NAME, MR.UMPIRE2CODE,OM1.NAME AS UMPIRE2NAME,MR.UMPIRE3CODE,OM2.NAME AS UMPIRE3NAME,MR.MATCHREFEREECODE ,OM3.NAME AS MATCHREFEREENAME FROM MATCHREGISTRATION MR INNER JOIN OFFICIALSMASTER OM ON MR.UMPIRE1CODE= OM.OFFICIALSCODE INNER JOIN OFFICIALSMASTER OM1 ON MR.UMPIRE2CODE= OM1.OFFICIALSCODE INNER JOIN OFFICIALSMASTER OM2 ON MR.UMPIRE3CODE= OM2.OFFICIALSCODE INNER JOIN OFFICIALSMASTER OM3 ON MR.MATCHREFEREECODE= OM3.OFFICIALSCODE MATCHCODE='%@' AND COMPETITIONCODE='%@'",matchCode,competitionCode];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         
@@ -486,6 +488,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return eventArray;
     
 }
+
 
 
 //select count team A and B players
@@ -655,7 +658,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
 }
 
-+ (BOOL) insertBallCodeFieldEvent :(BallEventRecord *) ballEvent
++ (BOOL) insertBallCodeFieldEvent :(BallEventRecord *) ballEvent bowlerEvent:(BowlerEvent *)bowlerEvent fieldingFactor:(FieldingFactorRecord *) fieldingFactor nrs:(NSString *) nrs;
+
+
+
 {
     BOOL success = false;
     NSString *databasePath =[self getDBPath];
@@ -666,7 +672,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbpath, &mySqliteDB) == SQLITE_OK)
     {
         
-        NSString *insertBallevent = [NSString stringWithFormat:@"INSERT INTO FIELDINGEVENTS(BALLCODE,FIELDERCODE,ISSUBSTITUTE,FIELDINGFACTORCODE,NRS,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO) VALUES (\"%@\",\"MSC104\",\"MSC218\",\"MSC219\",\"OFC0000001\",\"%@\",\"%@\",\"%@\",\"%@\")",ballEvent.objBallcode,ballEvent.objcompetitioncode,ballEvent.objmatchcode,ballEvent.objTeamcode,ballEvent.objInningsno];
+        NSString *insertBallevent = [NSString stringWithFormat:@"INSERT INTO FIELDINGEVENTS(BALLCODE,FIELDERCODE,ISSUBSTITUTE,FIELDINGFACTORCODE,NRS,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO) VALUES (\"%@\",\"%@\",\"MSC218\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\")",ballEvent.objBallcode,bowlerEvent.BowlerCode,fieldingFactor.fieldingfactorcode,nrs,ballEvent.objcompetitioncode,ballEvent.objmatchcode,ballEvent.objTeamcode,ballEvent.objInningsno];
         
         const char *insert_stmt = [insertBallevent UTF8String];
         sqlite3_prepare_v2(mySqliteDB, insert_stmt, -1, &statement, NULL);
