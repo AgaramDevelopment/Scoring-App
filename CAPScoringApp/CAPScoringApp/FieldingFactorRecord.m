@@ -2,7 +2,7 @@
 //  FieldingFactorRecord.m
 //  CAPScoringApp
 //
-//  Created by Ramas Mac Book on 6/1/16.
+//  Created by APPLE on 04/06/16.
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
@@ -13,5 +13,4 @@
 @synthesize fieldingfactor;
 @synthesize displayorder;
 @synthesize recordstatus;
-
 @end

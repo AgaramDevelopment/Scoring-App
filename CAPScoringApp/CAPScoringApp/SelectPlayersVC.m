@@ -33,6 +33,8 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [super viewDidLoad];
     
+    [self customnavigationmethod];
+    
     NSMutableArray *playersCode = [[NSMutableArray alloc]init];
     
     [playersCode addObject:@"PYC0000001"];

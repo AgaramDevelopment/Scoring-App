@@ -34,6 +34,12 @@
     [self.tableView setHidden:YES];
     self.Nextbtn_outlet.enabled = NO;
     //[self didClickNextBtnAction setHidden:YES];
+    [self.selectmatchTittleview .layer setBorderWidth:2.0];
+    [self.selectmatchTittleview.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    [self.selectmatchTittleview .layer setMasksToBounds:YES];
+
+    
+    
 }
 
 -(void)customnavigationmethod
@@ -53,12 +59,10 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.selectmatchTittleview .layer setBorderWidth:2];
-    [self.selectmatchTittleview.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.selectmatchTittleview .layer setBorderWidth:2.0];
+    [self.selectmatchTittleview.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.selectmatchTittleview .layer setMasksToBounds:YES];
-    isEnableTbl=YES;
-    
-}
+    isEnableTbl=YES;}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -159,7 +163,13 @@
 //    Fixvc.CompitionCode=[eventRecord competitioncode];
 //    [Fixvc setModalPresentationStyle:UIModalPresentationFullScreen];
 //    [self presentViewController:Fixvc animated:NO completion:nil];
+    
 }
+
+
+
+
+
 @end
 
 

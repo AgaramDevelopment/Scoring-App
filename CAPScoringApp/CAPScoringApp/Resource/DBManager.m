@@ -16,9 +16,12 @@
 #import "SelectPlayerRecord.h"
 #import "BallEventRecord.h"
 #import "AppealRecord.h"
+#import "MatcheventRecord.h"
+#import "AppealSystemRecords.h"
+#import "AppealComponentRecord.h"
+#import "AppealUmpireRecord.h"
 #import "BowlAndShotTypeRecords.h"
 #import "FieldingFactorRecord.h"
-
 @implementation DBManager
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
@@ -114,6 +117,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 NSLog(@"Success");
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+
                 return YES;
                 
             }
@@ -282,8 +286,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     retVal=sqlite3_open([dbPath UTF8String], &dataBase);
     if(retVal ==0){
-        
-        NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE INNER JOIN MATCHREGISTRATION MR ON MR.MATCHCODE=MTP.MATCHCODE WHERE MTP.MATCHCODE='%@'  AND MTP.TEAMCODE=(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)", MATCHCODE,TeamCODE];
+        //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
+        NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE INNER JOIN MATCHREGISTRATION MR ON MR.MATCHCODE=MTP.MATCHCODE WHERE MTP.MATCHCODE='%@'  AND MTP.TEAMCODE='%@'", MATCHCODE,TeamCODE];
         NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -600,7 +604,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbpath, &mySqliteDB) == SQLITE_OK)
     {
         
-        NSString *insertBallevent = [NSString stringWithFormat:@"INSERT INTO BALLEVENTS(BALLCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,DAYNO,INNINGSNO,OVERNO,BALLNO,BALLCOUNT,OVERBALLCOUNT,SESSIONNO,STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE,UMPIRE2CODE,ATWOROTW,BOWLINGEND,BOWLTYPE,SHOTTYPE,ISLEGALBALL,ISFOUR,ISSIX,RUNS,OVERTHROW,TOTALRUNS,WIDE,NOBALL,BYES,LEGBYES,PENALTY,TOTALEXTRAS,GRANDTOTAL,RBW,PMLINECODE,PMLENGTHCODE,PMX1,PMY1,PMX2,PMY3,WWREGION,WWX1,WWY1,WWX2,WWY2,BALLDURATION,ISAPPEAL,ISBEATEN,ISUNCOMFORT,ISWTB,ISRELEASESHOT,MARKEDFOREDIT,REMARKS,VIDEOFILENAME,SHOTTYPECATEGORY,PMSTRIKEPOINT,PMSTRIKEPOINTLINECODE,BALLSPEED,UNCOMFORTCLASSIFCATION) VALUES (\"%@\",\"%@\", \"%@\", \"%@\",\"%@\",\"%@\",\"0\",\"1\",\"1\",\"1\",\" %@\",\"PYC0000007\",\"PYC0000008\",\"PYC0000027\",\"PYC0000146\",\"OFC0000001\",\"OFC0000002\",\"MSC150\",\"BWT0000009\",\"UCH0000001\",\"1\",\"1\",\"0\",\"1\",\"4\",\"5\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"5\",\"0\",\"MSC031\",\"MSC032\",\"1\",\"1\",\"113\",\"214\",1,\"MSC197\",\"157\",\"125\",\"107\",1,1,1,1,1,1,1,1,1,1,1,2,2,2,2)",ballEventData.objBallcode,ballEventData.objcompetitioncode,ballEventData.objmatchcode,ballEventData.objTeamcode,ballEventData.objDayno,ballEventData.objInningsno,ballEventData.objSessionno];
+        NSString *insertBallevent = [NSString stringWithFormat:@"INSERT INTO BALLEVENTS(BALLCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,DAYNO,INNINGSNO,OVERNO,BALLNO,BALLCOUNT,OVERBALLCOUNT,SESSIONNO,STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE,UMPIRE2CODE,ATWOROTW,BOWLINGEND,BOWLTYPE,SHOTTYPE,ISLEGALBALL,ISFOUR,ISSIX,RUNS,OVERTHROW,TOTALRUNS,WIDE,NOBALL,BYES,LEGBYES,PENALTY,TOTALEXTRAS,GRANDTOTAL,RBW,PMLINECODE,PMLENGTHCODE,PMX1,PMY1,PMX2,PMY3,WWREGION,WWX1,WWY1,WWX2,WWY2,BALLDURATION,ISAPPEAL,ISBEATEN,ISUNCOMFORT,ISWTB,ISRELEASESHOT,MARKEDFOREDIT,REMARKS,VIDEOFILENAME,SHOTTYPECATEGORY,PMSTRIKEPOINT,PMSTRIKEPOINTLINECODE,BALLSPEED,UNCOMFORTCLASSIFCATION) VALUES (\"%@\",\"%@\", \"%@\", \"%@\",\"%@\",\"%@\",\"0\",\"1\",\"1\",\"1\",\" %@\",\"PYC0000007\",\"PYC0000008\",\"PYC0000027\",\"PYC0000146\",\"OFC0000001\",\"OFC0000002\",\"%@\",\"BWT0000009\",\"%@\",\"%@\",\"1\",\"0\",\"1\",\"4\",\"5\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"5\",\"0\",\"MSC031\",\"MSC032\",\"1\",\"1\",\"113\",\"214\",1,\"MSC197\",\"157\",\"125\",\"107\",1,1,1,1,1,1,1,1,1,1,1,2,2,2,2)",ballEventData.objBallcode,ballEventData.objcompetitioncode,ballEventData.objmatchcode,ballEventData.objTeamcode,ballEventData.objDayno,ballEventData.objInningsno,ballEventData.objSessionno,ballEventData.objAtworotw,ballEventData.objBowltype,ballEventData.objShottype];
         
         const char *insert_stmt = [insertBallevent UTF8String];
         sqlite3_prepare_v2(mySqliteDB, insert_stmt, -1, &statement, NULL);
@@ -618,6 +622,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     
 }
+
 + (BOOL) insertBallCodeAppealEvent:(BallEventRecord *) ballEvent
 {
     BOOL success = false;
@@ -1184,5 +1189,293 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
+//proceed save action
+
+
+
+
++(NSString *) TossSaveDetails:(NSString*) MATCHCODE:(NSString*)COMPETITIONCODE{
+   // NSMutableArray *TossArray=[[NSMutableArray alloc]init];
+    NSString *count = [[NSString alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+  NSString *query = [NSString stringWithFormat:@"SELECT count(*) FROM MATCHEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE ='%@'",COMPETITIONCODE,MATCHCODE];
+    stmt=[query UTF8String];
+    
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+           // MatcheventRecord *matchrecord=[[MatcheventRecord alloc]init];
+            
+            count = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+           
+            
+            //[TossArray addObject:matchrecord];
+            
+        }
+    }
+    
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return count;
+    
+}
+
++ (BOOL) insertMatchEvent :(NSString*) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)selectTeamcode :(NSString*)electedcode:(NSString*)teamCode:(NSString*)teambCode;
+{
+    BOOL success = false;
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *mySqliteDB;
+    sqlite3_stmt *statement;
+    const char *dbpath = [databasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &mySqliteDB) == SQLITE_OK)
+    {
+        
+        NSString *insertBallevent = [NSString stringWithFormat:@"INSERT INTO  MATCHEVENTS (COMPETITIONCODE,MATCHCODE,TOSSWONTEAMCODE,ELECTEDTO,BATTINGTEAMCODE,BOWLINGTEAMCODE,BOWLCOMPUTESHOW)  VALUES (\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",'1')",COMPETITIONCODE,MATCHCODE,selectTeamcode,electedcode,teamCode,teambCode];
+        
+        const char *insert_stmt = [insertBallevent UTF8String];
+        sqlite3_prepare_v2(mySqliteDB, insert_stmt, -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            success = true;
+        }
+        
+         NSLog(@"%s", sqlite3_errmsg(mySqliteDB));
+        sqlite3_finalize(statement);
+        sqlite3_close(mySqliteDB);
+        
+    }
+    
+    return success;
+    
+    
+    
+}
+
+
+
++(NSString *) getMaxInningsNumber:(NSString*) MATCHCODE:(NSString*)COMPETITIONCODE{
+    // NSMutableArray *TossArray=[[NSMutableArray alloc]init];
+    NSString *maxInnNo = [[NSString alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query = [NSString stringWithFormat:@"SELECT  IFNULL(MAX(INNINGSNO),0)+1 from INNINGSEVENTS  WHERE COMPETITIONCODE = '%@' AND MATCHCODE ='%@'",COMPETITIONCODE,MATCHCODE];
+    stmt=[query UTF8String];
+    
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            // MatcheventRecord *matchrecord=[[MatcheventRecord alloc]init];
+            
+            maxInnNo = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            
+            
+            //[TossArray addObject:matchrecord];
+            
+        }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return maxInnNo;
+    
+}
+
+
+
+
++ (BOOL) inserMaxInningsEvent :(NSString*) CompetitionCode:(NSString*)MATCHCODE:(NSString*)teamaCode :(NSString*)maxInnNo:(NSString*)StrikerCode:(NSString*)NonStrikerCode:(NSString*)selectBowlerCode:(NSString*)StrikerCode:(NSString*)NonStrikerCode:(NSString*)selectBowlerCode:(NSString*)teamaCode:(NSString*)inningsStatus:(NSString*)BowlingEnd
+{
+    BOOL success = false;
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *mySqliteDB;
+    sqlite3_stmt *statement;
+    const char *dbpath = [databasePath UTF8String];
+    
+    if (sqlite3_open(dbpath, &mySqliteDB) == SQLITE_OK)
+    {
+        
+        NSString *insertBallevent = [NSString stringWithFormat:@"INSERT INTO  INNINGSEVENTS (COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,CURRENTSTRIKERCODE,CURRENTNONSTRIKERCODE,CURRENTBOWLERCODE,BATTINGTEAMCODE,INNINGSSTATUS,BOWLINGEND)  VALUES (\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",'%@','%@')",CompetitionCode,MATCHCODE ,teamaCode,maxInnNo ,StrikerCode,NonStrikerCode ,selectBowlerCode,StrikerCode ,NonStrikerCode ,selectBowlerCode,teamaCode,inningsStatus,BowlingEnd];
+        
+        const char *insert_stmt = [insertBallevent UTF8String];
+        sqlite3_prepare_v2(mySqliteDB, insert_stmt, -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            success = true;
+        }
+        
+        NSLog(@"%s", sqlite3_errmsg(mySqliteDB));
+        sqlite3_finalize(statement);
+        sqlite3_close(mySqliteDB);
+        
+    }
+    
+    return success;
+    
+    
+    
+}
+
++(BOOL)updateProcced:(NSString*)CompetitionCode:(NSString*)MATCHCODE  {
+    
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION SET MATCHSTATUS = (CASE WHEN MATCHSTATUS = 'MSC123' THEN 'MSC240' ELSE MATCHSTATUS END) WHERE COMPETITIONCODE ='%@' AND MATCHCODE ='%@';",CompetitionCode,MATCHCODE];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
+        }
+    }
+    sqlite3_reset(statement);
+    return NO;
+    
+}
+
+
+
+//Appeal
+
+
++(NSMutableArray *)AppealSystemRetrieveEventData{
+    NSMutableArray *AppealSyetemeventArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+    //  const char *dbpath = [databasePath UTF8String];
+    
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT METASUBCODE,METASUBCODEDESCRIPTION FROM METADATA WHERE METADATATYPECODE='MDT046';"];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            AppealSystemRecords *appealsystemrecord=[[AppealSystemRecords alloc]init];
+            //            record.id=(int)sqlite3_column_int(statement, 0);
+            appealsystemrecord.AppealSystemMetaSubCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            appealsystemrecord.AppealSystemMetaSubCodeDescription=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            
+            [AppealSyetemeventArray addObject:appealsystemrecord];
+            
+        }
+    }
+    
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return AppealSyetemeventArray;
+    
+}
+
+
+
+
++(NSMutableArray *)AppealComponentRetrieveEventData{
+    NSMutableArray *AppealComponenteventArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+    //  const char *dbpath = [databasePath UTF8String];
+    
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT METASUBCODE,METASUBCODEDESCRIPTION FROM METADATA WHERE METADATATYPECODE='MDT047';"];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            AppealComponentRecord *appealComponentrecord=[[AppealComponentRecord alloc]init];
+            //            record.id=(int)sqlite3_column_int(statement, 0);
+            appealComponentrecord.AppealComponentMetaSubCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            appealComponentrecord.AppealComponentMetaSubCodeDescription=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            
+            [AppealComponenteventArray addObject:appealComponentrecord];
+            
+        }
+    }
+    
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return AppealComponenteventArray;
+    
+}
+
+
+
++(NSMutableArray *) AppealUmpireRetrieveEventData:(NSString*) COMPETITIONCODE:(NSString*)MATCHCODE{
+    NSMutableArray *AppealUmpireEventArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+    //  const char *dbpath = [databasePath UTF8String];
+    
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT UMPIRE1CODE,OM.NAME AS UMPIRE1NAME,UMPIRE2CODE ,OM1.NAME AS UMPIRE2NAME FROM MATCHREGISTRATION MR INNER JOIN OFFICIALSMASTER OM ON OM.OFFICIALSCODE=MR.UMPIRE1CODE INNER JOIN OFFICIALSMASTER OM1 ON OM1.OFFICIALSCODE=MR.UMPIRE2CODE WHERE COMPETITIONCODE ='%@' AND MATCHCODE ='%@'",COMPETITIONCODE,MATCHCODE];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            AppealUmpireRecord *appealumpirerecord=[[AppealUmpireRecord alloc]init];
+            //            record.id=(int)sqlite3_column_int(statement, 0);
+            appealumpirerecord.AppealUmpireCode1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            appealumpirerecord.AppealUmpireName1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            appealumpirerecord.AppealUmpireCode2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+            appealumpirerecord.AppealUmpireName2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+            
+            [AppealUmpireEventArray addObject:appealumpirerecord];
+            
+        }
+    }
+    
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return AppealUmpireEventArray;
+    
+}
 
 @end

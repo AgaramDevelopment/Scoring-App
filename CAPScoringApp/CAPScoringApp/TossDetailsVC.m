@@ -13,6 +13,7 @@
 #import "TossDeatilsEvent.h"
 #import "BowlerEvent.h"
 #import "ScorEnginVC.h"
+#import "CustomNavigationVC.h"
 @interface TossDetailsVC ()
 {
     BOOL isEnableTbl;
@@ -22,7 +23,7 @@
     NSMutableArray *NonStrikerselectindexarray;
     NSMutableArray *BowlerselectionIndexArray;
     
-    
+     CustomNavigationVC *objCustomNavigation;
     
     
     EventRecord *objEventRecord;
@@ -31,7 +32,23 @@
     BowlerEvent *objBowlerEventRecord;
     
     NSString *selectTeam;
+    NSString *selectTeamcode;
+    
     NSString * selectedElected;
+    NSString *electedcode;
+    
+    NSString *selectStriker;
+    NSString *StrikerCode;
+    
+    NSString *selectNonStriker;
+    NSString *NonStrikerCode;
+    
+    NSString *selectBowler;
+    NSString*selectBowlerCode;
+    NSString *teamaCode;
+    NSString *teambCode;
+    
+    NSString * BOWLCOMPUTESHOW;
     int selectTeamindex;
    }
 @property (nonatomic,strong)NSMutableArray*WonTossArray;
@@ -50,12 +67,14 @@
 @synthesize nonStrikerArray;
 @synthesize BowleArray;
 @synthesize MATCHCODE;
+@synthesize CompetitionCode;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     
     
+    [self customnavigationmethod];
 
     
     [self.view_Striker setUserInteractionEnabled:NO];
@@ -69,34 +88,32 @@
     
     // Do any additional setup after loading the view.
 // _MATCHCODE=@"IMSC0221C6F6595E95A00001";
-    //wontoss
-    
-    [self.view_Wonby.layer setBorderWidth:3];
-    [self.view_Wonby.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_Wonby.layer setBorderWidth:2.0];
+    [self.view_Wonby.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Wonby .layer setMasksToBounds:YES];
     [_Wonby_table setHidden:YES];
     
     //electedto
-    [self.view_Electedto .layer setBorderWidth:3];
-    [self.view_Electedto.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_Electedto .layer setBorderWidth:2.0];
+    [self.view_Electedto.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Electedto .layer setMasksToBounds:YES];
     [_electedTo_table setHidden:YES];
     
     //striker
-    [self.view_Striker .layer setBorderWidth:3];
-    [self.view_Striker.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_Striker .layer setBorderWidth:2.0];
+    [self.view_Striker.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Striker .layer setMasksToBounds:YES];
     [_Striker_table setHidden:YES];
     
     //nonstriker
-    [self.nonStriker .layer setBorderWidth:3];
-    [self.nonStriker.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.nonStriker .layer setBorderWidth:2.0];
+    [self.nonStriker.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.nonStriker .layer setMasksToBounds:YES];
     [_nonStriker_table setHidden:YES];
     
     //Bowler
-    [self.view_Bowler .layer setBorderWidth:3];
-    [self.view_Bowler.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_Bowler .layer setBorderWidth:2.0];
+    [self.view_Bowler.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Bowler .layer setMasksToBounds:YES];
     [_Bowler_table setHidden:YES];
  
@@ -105,31 +122,34 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.view_Wonby .layer setBorderWidth:3];
-    [self.view_Wonby.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_Wonby.layer setBorderWidth:2.0];
+    [self.view_Wonby.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Wonby .layer setMasksToBounds:YES];
+    [_Wonby_table setHidden:YES];
     
-    [super viewWillAppear:animated];
-    [self.view_Electedto .layer setBorderWidth:3];
-    [self.view_Electedto.layer setBorderColor:[UIColor grayColor].CGColor];
+    //electedto
+    [self.view_Electedto .layer setBorderWidth:2.0];
+    [self.view_Electedto.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Electedto .layer setMasksToBounds:YES];
-   
-    [super viewWillAppear:animated];
-    [self.view_Striker .layer setBorderWidth:3];
-    [self.view_Striker.layer setBorderColor:[UIColor grayColor].CGColor];
-    [self.view_Striker .layer setMasksToBounds:YES];
-
+    [_electedTo_table setHidden:YES];
     
-    [self.nonStriker .layer setBorderWidth:3];
-    [self.nonStriker.layer setBorderColor:[UIColor grayColor].CGColor];
+    //striker
+    [self.view_Striker .layer setBorderWidth:2.0];
+    [self.view_Striker.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    [self.view_Striker .layer setMasksToBounds:YES];
+    [_Striker_table setHidden:YES];
+    
+    //nonstriker
+    [self.nonStriker .layer setBorderWidth:2.0];
+    [self.nonStriker.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.nonStriker .layer setMasksToBounds:YES];
     [_nonStriker_table setHidden:YES];
-
-    [self.view_Bowler .layer setBorderWidth:3];
-    [self.view_Bowler.layer setBorderColor:[UIColor grayColor].CGColor];
+    
+    //Bowler
+    [self.view_Bowler .layer setBorderWidth:2.0];
+    [self.view_Bowler.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Bowler .layer setMasksToBounds:YES];
     [_Bowler_table setHidden:YES];
-
     isEnableTbl=YES;
     
 }
@@ -246,10 +266,12 @@ return 1;
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                           reuseIdentifier:MyIdentifier3];
         }
-        objTossDeatilsRecord=(TossDeatilsEvent*)[nonStrikerArray objectAtIndex:indexPath.row];
+        objTossDeatilsRecord=(TossDeatilsEvent*)[StrikerArray objectAtIndex:indexPath.row];
         
         cell.textLabel.text =objTossDeatilsRecord.PlaerNameStrike_nonStrike;
         return cell;
+        
+        
     }
     
 
@@ -293,6 +315,7 @@ return 1;
        selectTeamindex= (int) selectindex;
     self.Wonby_lbl.text =objEventRecord.TEAMNAME_TOSSWONBY;
     selectTeam=self.Wonby_lbl.text;
+        selectTeamcode=objEventRecord.TEAMCODE_TOSSWONBY;
     [TossWonByselectindexarray addObject:objEventRecord];
     
     self.Wonby_table.hidden=YES;
@@ -306,6 +329,8 @@ return 1;
        objUserRecord=(UserRecord*)[ElectedToArray objectAtIndex:indexPath.row];
         self.electedTo_lbl.text =objUserRecord.electedTo;
       selectedElected=self.electedTo_lbl.text;
+        electedcode=objUserRecord.MasterSubCode;
+        
         [Electedselectindexarray addObject:objUserRecord];
         
         self.electedTo_table.hidden=YES;
@@ -317,6 +342,8 @@ return 1;
         Strikerselectindexarray=[[NSMutableArray alloc]init];
       objTossDeatilsRecord=(TossDeatilsEvent*)[StrikerArray objectAtIndex:indexPath.row];
         self.Striker_lbl.text =objTossDeatilsRecord.PlaerNameStrike_nonStrike;
+        selectStriker=self.Striker_lbl.text;
+        StrikerCode=objTossDeatilsRecord.PlaercodeStrike_nonStrike;
         [Strikerselectindexarray addObject:objTossDeatilsRecord];
         
         self.Striker_table.hidden=YES;
@@ -327,8 +354,11 @@ return 1;
     if (tableView == self.nonStriker_table)
     {
         NonStrikerselectindexarray=[[NSMutableArray alloc]init];
-        objTossDeatilsRecord=(TossDeatilsEvent*)[nonStrikerArray objectAtIndex:indexPath.row];
+        objTossDeatilsRecord=(TossDeatilsEvent*)[StrikerArray objectAtIndex:indexPath.row];
         self.nonStriker_lbl.text =objTossDeatilsRecord.PlaerNameStrike_nonStrike;
+        selectNonStriker=self.nonStriker_lbl.text;
+        
+        NonStrikerCode=objTossDeatilsRecord.PlaercodeStrike_nonStrike;
         [NonStrikerselectindexarray addObject:objTossDeatilsRecord];
         
         self.nonStriker_table.hidden=YES;
@@ -340,6 +370,9 @@ return 1;
         BowlerselectionIndexArray=[[NSMutableArray alloc]init];
         objBowlerEventRecord=(BowlerEvent*)[BowleArray objectAtIndex:indexPath.row];
         self.Bowler_lbl.text =objBowlerEventRecord.BowlerName;
+        selectBowler=self.Bowler_lbl.text;
+        
+        selectBowlerCode=objBowlerEventRecord.BowlerCode;
         [BowlerselectionIndexArray addObject:objBowlerEventRecord];
         
         self.Bowler_table.hidden=YES;
@@ -419,21 +452,21 @@ return 1;
     if(isEnableTbl==YES)
     {
         
-        NSString *PlayerCode;
+        //NSString *teamCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
             
-            PlayerCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
+            teamaCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
             //PlayerCode =objEventRecord.TEAMCODE_TOSSWONBY;
         }
         else{
             if(selectTeamindex==0)
             {
-             PlayerCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+             teamaCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
             }
             if(selectTeamindex==1)
             {
-                PlayerCode=[[WonTossArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+                teamaCode=[[WonTossArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
             }
             //PlayerCode =objEventRecord.TEAMCODE_TOSSWONBY;
         }
@@ -441,7 +474,7 @@ return 1;
         
         StrikerArray=[[NSMutableArray alloc]init];
       
-        NSMutableArray * FetchstrikerArray =[DBManager StrikerNonstriker:MATCHCODE:PlayerCode];
+        NSMutableArray * FetchstrikerArray =[DBManager StrikerNonstriker:MATCHCODE:teamaCode];
         for(int i=0; i < [FetchstrikerArray count]; i++)
         {
        objTossDeatilsRecord=(TossDeatilsEvent*)[FetchstrikerArray objectAtIndex:i];
@@ -472,27 +505,27 @@ return 1;
     if(isEnableTbl==YES)
     {
         
-        NSString *PlayerCode;
+      //  NSString *teamCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
             
-            PlayerCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
+            teamaCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
             //PlayerCode =objEventRecord.TEAMCODE_TOSSWONBY;
         }
         else if(selectTeamindex==0)
         {
-            PlayerCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+            teamaCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
         }
         if(selectTeamindex==1)
         {
-            PlayerCode=[[WonTossArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+            teamaCode=[[WonTossArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
         }
 
         
         
         nonStrikerArray=[[NSMutableArray alloc]init];
         
-        NSMutableArray * FetchnonstrikerArray =[DBManager StrikerNonstriker:MATCHCODE:PlayerCode];
+        NSMutableArray * FetchnonstrikerArray =[DBManager StrikerNonstriker:MATCHCODE:teamaCode];
         for(int i=0; i < [FetchnonstrikerArray count]; i++)
         {
             objTossDeatilsRecord=(TossDeatilsEvent*)[FetchnonstrikerArray objectAtIndex:i];
@@ -523,29 +556,40 @@ return 1;
     if(isEnableTbl==YES)
     {
         
-        NSString *PlayerCode;
+        //NSString *teambCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
             
-            PlayerCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
-            //PlayerCode =objEventRecord.TEAMCODE_TOSSWONBY;
-        }
-        else{
+           // teambCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
+            
             if(selectTeamindex==0)
             {
-                PlayerCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+                teambCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
             }
             if(selectTeamindex==1)
             {
-                PlayerCode=[[WonTossArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+                teambCode=[[WonTossArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
             }
+            
+            //PlayerCode =objEventRecord.TEAMCODE_TOSSWONBY;
+        }
+        else{
+            teambCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
+//            if(selectTeamindex==0)
+//            {
+//                teambCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+//            }
+//            if(selectTeamindex==1)
+//            {
+//                teambCode=[[WonTossArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+//            }
 
         }
         
         
         BowleArray=[[NSMutableArray alloc]init];
         
-        NSMutableArray * FetchBowlerArray =[DBManager Bowler:MATCHCODE :PlayerCode];
+        NSMutableArray * FetchBowlerArray =[DBManager Bowler:MATCHCODE :teambCode];
         for(int i=0; i < [FetchBowlerArray count]; i++)
         {
             objBowlerEventRecord=(BowlerEvent*)[FetchBowlerArray objectAtIndex:i];
@@ -581,6 +625,19 @@ return 1;
 
 - (IBAction)Btn_Proceed:(id)sender {
     
+    //save option
+   NSString *count =[DBManager TossSaveDetails:MATCHCODE :CompetitionCode];
+    if([count isEqualToString:@"0"]){
+        [DBManager insertMatchEvent:CompetitionCode :MATCHCODE :selectTeamcode :electedcode :teamaCode :teambCode];
+    }
+    
+    NSString *maxInnNo = [DBManager getMaxInningsNumber:CompetitionCode :MATCHCODE];
+  
+    NSString*inningsstatus=@"0";
+       NSString* BowlingEnd=@"MSC150";
+    [DBManager inserMaxInningsEvent:CompetitionCode :MATCHCODE :teamaCode :maxInnNo :StrikerCode:NonStrikerCode :selectBowlerCode :StrikerCode :NonStrikerCode :selectBowlerCode :teamaCode :inningsstatus:BowlingEnd];
+    [DBManager updateProcced:CompetitionCode :MATCHCODE];
+    
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
                                                    message: @"Please confirm to start the match"
                                                   delegate: self
@@ -588,7 +645,11 @@ return 1;
                                          otherButtonTitles:@"Cancel",nil];
     
   
+    
+  
     [alert show];
+    
+    
     
 //    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //    
@@ -606,6 +667,14 @@ return 1;
     //if (alertView.tag == 1) { // UIAlertView with tag 1 detected
         if (buttonIndex == 0)
         {
+            
+            
+//            ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
+//            
+//            scoreEngine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+//                       scoreEngine.matchCode=self.MATCHCODE;
+//                      scoreEngine.competitionCode=self.CompetitionCode;
+//            [self.navigationController pushViewController:scoreEngine animated:YES];
             NSLog(@"user pressed Button Indexed 0");
                 UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             
@@ -616,17 +685,32 @@ return 1;
                 [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
                 [self presentViewController:scoreEngine animated:NO completion:nil];
         }
-        else
-        {
-            NSLog(@"user pressed Button Indexed 1");
-            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            
-            TossDetailsVC *toss =(TossDetailsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"TossDetails"];
-            //Fixvc.CompitionCode=selectindexarray;
-            [toss setModalPresentationStyle:UIModalPresentationFullScreen];
-            [self presentViewController:toss animated:NO completion:nil];
-        }
+//        else
+//        {
+//            NSLog(@"user pressed Button Indexed 1");
+//            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//            
+//            TossDetailsVC *toss =(TossDetailsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"TossDetails"];
+//            //Fixvc.CompitionCode=selectindexarray;
+//            [toss setModalPresentationStyle:UIModalPresentationFullScreen];
+//            [self presentViewController:toss animated:NO completion:nil];
+//        }
     }
+
+
+-(void)customnavigationmethod
+{
+    objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
+    [self.view addSubview:objCustomNavigation.view];
+    objCustomNavigation.lbl_titleName.text=@"TOSS DETAILS";
+    [objCustomNavigation.Btn_Back addTarget:self action:@selector(Back_BtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+-(IBAction)Back_BtnAction:(id)sender
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
 
 
 @end
