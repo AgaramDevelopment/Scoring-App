@@ -28,6 +28,7 @@
 @synthesize  matchCode;
 @synthesize teamAcode;
 @synthesize teamBcode;
+@synthesize competitionCode;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -224,9 +225,10 @@
     selectvc =  (SelectPlayersVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
     
    selectvc.teamCode=teamBcode;
+    selectvc.matchCode = matchCode;
     
     [self.navigationController pushViewController:selectvc animated:YES];
-    
+
     
     
 }
@@ -280,6 +282,13 @@
     
     [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
     
+    MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
+    
+    matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
+  
+    matchvc.Matchcode = matchCode;
+     matchvc.competitionCode = _competitionCode;
+    [self.navigationController pushViewController:matchvc animated:YES];
     
 }
 
@@ -314,6 +323,7 @@
             matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
             
             matchvc.Matchcode = matchCode;
+            matchvc.competitionCode = competitionCode;
             
             [self.navigationController pushViewController:matchvc animated:YES];
         }
@@ -329,6 +339,7 @@
                matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
                
                matchvc.Matchcode = matchCode;
+               matchvc.competitionCode = competitionCode;
                
                [self.navigationController pushViewController:matchvc animated:YES];
                

@@ -12,17 +12,33 @@
 #import "BallEventRecord.h"
 #import "AppealRecord.h"
 #import "AppealCell.h"
-#import "BowlAndShotTypeRecords.h"
-#import "BowlTypeCell.h"
-#import "FastBowlTypeCell.h"
-#import "AggressiveShotTypeCell.h"
-#import "FieldingFactorCell.h"
-#import "FieldingFactorRecord.h"
-#import "BowlerEvent.h"
-
+#import "AppealSystemRecords.h"
+#import "AppealComponentRecord.h"
+#import "AppealUmpireRecord.h"
 
 @interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource>
-{
+{   //appeal System
+    BOOL isEnableTbl;
+    NSMutableArray * AppealSystemSelectionArray;
+    NSString*AppealSystemSelectCode;
+    AppealSystemRecords *objAppealSystemEventRecord;
+    
+    //AppealComponent
+    NSMutableArray * AppealComponentSelectionArray;
+    NSString*AppealComponentSelectCode;
+    AppealComponentRecord *objAppealComponentEventRecord;
+    
+    //AppealUmpire
+    NSMutableArray * AppealUmpireSelectionArray;
+    NSString*AppealUmpireSelectCode;
+    AppealUmpireRecord *objAppealUmpireEventRecord;
+    
+    //AppealBatsmen
+    NSMutableArray *AppealBatsmenSelectionArray;
+    NSArray*AppealBatsmenSelectCode;
+    
+    
+    
     NSMutableArray *Btn_NameArray;
     BOOL isSelectleftview;
     UITableView* extrasTableView;
@@ -49,13 +65,16 @@
     NSString * ballnoStr;
     NSDate * startBallTime;
     
+    
+    FieldingFactorRecord *selectedfieldFactor;
+    BowlerEvent *selectedfieldPlayer;
+    NSString *selectedNRS;
+
 }
 
 
 @property(nonatomic,strong) NSMutableArray *selectbtnvalueArray;
-@property(nonatomic,strong) NSMutableArray *extrasOptionArray;
-@property(nonatomic,strong) NSMutableArray *overThrowOptionArray;
-@property(nonatomic,strong) NSMutableArray *AppealValuesArray;
+
 @property(nonatomic,strong) NSMutableArray *otwRtwArray;
 @property(nonatomic,strong) BallEventRecord *ballEventRecord;
 
@@ -81,16 +100,24 @@
 
 //@property(nonatomic,strong)BallEventRecord *ballEventRecord;
 
+//appeal
+@property (nonatomic,strong)NSMutableArray*AppealSystemArray;
+@property (nonatomic,strong)NSMutableArray*AppealComponentArray;
+@property (nonatomic,strong)NSMutableArray*AppealUmpireArray;
+@property(nonatomic,strong) NSMutableArray *AppealBatsmenArray;
+@property(nonatomic,strong) NSMutableArray *AppealValuesArray;
+
+
 @end
 
 @implementation ScorEnginVC
 @synthesize table_Appeal;
-@synthesize tbl_bowlType;
-@synthesize tbl_fastBowl;
-@synthesize tbl_aggressiveShot;
 
-
-
+//appeal
+@synthesize AppealSystemArray;
+@synthesize AppealComponentArray;
+@synthesize AppealUmpireArray;
+@synthesize AppealBatsmenArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -193,11 +220,71 @@
 //    self.view_nrs.hidden=YES;
     
     
+    
+    //Appeal
+    
+    [self.view_AppealSystem.layer setBorderWidth:3];
+    [self.view_AppealSystem.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_AppealSystem .layer setMasksToBounds:YES];
+    [_table_AppealSystem setHidden:YES];
+    
+    
+    [self.view_AppealComponent.layer setBorderWidth:3];
+    [self.view_AppealComponent.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_AppealComponent .layer setMasksToBounds:YES];
+    [_table_AppealComponent setHidden:YES];
+    
+    
+    
+    [self.view_umpireName.layer setBorderWidth:3];
+    [self.view_umpireName.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_umpireName .layer setMasksToBounds:YES];
+    [_tanle_umpirename setHidden:YES];
+    
+    
+    [self.view_batsmen.layer setBorderWidth:3];
+    [self.view_batsmen.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_batsmen .layer setMasksToBounds:YES];
+    [_table_BatsmenName setHidden:YES];
+    
+AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
 }
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
     self.btn_StartBall.userInteractionEnabled=NO;
     [self AllBtndisableMethod];
+    
+    
+    
+    //Appeal
+    
+    [self.view_AppealSystem.layer setBorderWidth:3];
+    [self.view_AppealSystem.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_AppealSystem .layer setMasksToBounds:YES];
+    [_table_AppealSystem setHidden:YES];
+    
+    
+    [self.view_AppealComponent.layer setBorderWidth:3];
+    [self.view_AppealComponent.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_AppealComponent .layer setMasksToBounds:YES];
+    [_table_AppealComponent setHidden:YES];
+    
+    
+    
+    [self.view_umpireName.layer setBorderWidth:3];
+    [self.view_umpireName.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_umpireName .layer setMasksToBounds:YES];
+    [_tanle_umpirename setHidden:YES];
+    
+    
+    [self.view_batsmen.layer setBorderWidth:3];
+    [self.view_batsmen.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.view_batsmen .layer setMasksToBounds:YES];
+    [_table_BatsmenName setHidden:YES];
+      isEnableTbl=YES;
+
 }
 -(void)SaveBallEventREcordvalue
 {
@@ -415,6 +502,28 @@
         return self.miscfiltersOptionArray.count;
     }
     
+    if (tableView == self.table_AppealSystem)
+    {
+        return [AppealSystemArray count];
+    }
+    
+    if (tableView == self.table_AppealComponent)
+    {
+        return [AppealComponentArray count];
+    }
+    
+    
+    if (tableView == self.tanle_umpirename)
+    {
+        return [AppealUmpireArray count];
+    }
+    
+    
+    if (tableView == self.table_BatsmenName)
+    {
+        return [AppealBatsmenArray count];
+    }
+    
     return 0;
 }
 
@@ -439,6 +548,8 @@
                                                                                 forIndexPath:indexPath];
             FieldingFactorRecord *objFieldingFactorRecord=(FieldingFactorRecord*)[_fieldingfactorArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = objFieldingFactorRecord.fieldingfactor;
+         
+            
             return fieldFactorCell;
         }
         if(isFieldingSelected && fieldingOption == 2)
@@ -471,9 +582,7 @@
         cell.textLabel.text = [self.overThrowOptionArray objectAtIndex:indexPath.row];
     }else{
         cell.textLabel.text = [self.selectbtnvalueArray objectAtIndex:indexPath.row];
-    }
-    
-    
+    } 
     
     if (tableView == table_Appeal) {
 
@@ -550,27 +659,83 @@
         cell.textLabel.text = [self.miscfiltersOptionArray objectAtIndex:indexPath.row];
     }
     
-//    //fielding factor
-//    if(tableView == tbl_fieldingfactor){
-//        static NSString *CellIdentifier = @"cell";
-//        
-//        FieldingFactorCell *fielidngfactorCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
-//                                                                                 forIndexPath:indexPath];
-//        
-//        FieldingFactorRecord *objFieldingFactorRecord=(FieldingFactorRecord*)[_fieldingfactorArray objectAtIndex:indexPath.row];
-//        
-//        
-//        fielidngfactorCell.lbl_fieldingfactor.text = objFieldingFactorRecord.fieldingfactor;
-//        
-//        return fielidngfactorCell;
-//    }
     
-    //background color for selected cell
-    UIView *bgColorView = [[UIView alloc] init];
-    bgColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
-    cell.selectedBackgroundView = bgColorView;
+    if (tableView == self.table_AppealSystem)
+    {
+        static NSString *MyIdentifier = @"MyIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:MyIdentifier];
+        }
+        objAppealSystemEventRecord=(AppealSystemRecords*)[AppealSystemArray objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text =objAppealSystemEventRecord.AppealSystemMetaSubCodeDescription;
+        return cell;
+    }
     
-
+    
+    
+    if (tableView == self.table_AppealComponent)
+    {
+        static NSString *MyIdentifier = @"MyIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:MyIdentifier];
+        }
+        objAppealComponentEventRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text =objAppealComponentEventRecord.AppealComponentMetaSubCodeDescription;
+        return cell;
+    }
+    
+    
+    if (tableView == self.tanle_umpirename)
+    {
+        static NSString *MyIdentifier = @"MyIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:MyIdentifier];
+        }
+        
+        objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
+        
+        
+        cell.textLabel.text =objAppealUmpireEventRecord.AppealUmpireName1;
+        cell.textLabel.text =objAppealUmpireEventRecord.AppealUmpireName2;
+        return cell;
+    }
+    
+    
+    if (tableView == self.table_BatsmenName)
+    {
+        static NSString *MyIdentifier = @"MyIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:MyIdentifier];
+        }
+     // ll.textLabel.text=[AppealComponentArray objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text =[AppealBatsmenArray objectAtIndex:indexPath.row];
+        return cell;
+    }
+    
+    
     return cell;
 }
 
@@ -618,7 +783,7 @@
         startBallTime= [dateFormatter1 dateFromString:time];
         [self.btn_StartBall setTitle:@"END BALL" forState:UIControlStateNormal];
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
-        self.btn_StartOver.userInteractionEnabled=NO;
+//        self.btn_StartOver.userInteractionEnabled=NO;
         [self AllBtnEnableMethod];
         
     }
@@ -627,7 +792,7 @@
         [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
         self.btn_StartOver.userInteractionEnabled=YES;
-        self.btn_StartBall.userInteractionEnabled=NO;
+//        self.btn_StartBall.userInteractionEnabled=NO;
         [self AllBtndisableMethod];
        //EndBallTime = [NSDate date];
 //        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -708,6 +873,8 @@
     {
         self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
         [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
+        if(![self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
+            [self DidClickStartBall : self.btn_StartBall];
         self.btn_StartBall.userInteractionEnabled=YES;
        
     }
@@ -895,7 +1062,7 @@
             
             
             
-            miscFiltersTableview=[[UITableView alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.size.width-570, self.btn_miscFilter.frame.origin.y-80,100,250)];
+            miscFiltersTableview=[[UITableView alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.size.width-570, self.btn_miscFilter.frame.origin.y-80,130,190)];
             miscFiltersTableview.backgroundColor=[UIColor whiteColor];
             
             miscFiltersTableview.dataSource = self;
@@ -1018,15 +1185,21 @@
     }
     else if(selectBtnTag.tag==118) //fielding factor
     {
-        //   [self selectBtncolor_Action:@"118" :nil :207];
+        //[self selectBtncolor_Action:@"118" :nil :207];
         
         if(isFieldingSelected){
+            
+            selectedNRS = nil;
+            selectedfieldPlayer = nil;
+            selectedfieldFactor = nil;
+            
             isFieldingSelected = NO;
             fieldingOption = 0;
-            
+            self.view_aggressiveShot.hidden = YES;
+            self.view_defensive.hidden = YES;
             self.view_bowlType.hidden = YES;
             self.view_fastBowl.hidden = YES;
-            [self unselectedButtonBg:selectBtnTag];
+           [self unselectedButtonBg:selectBtnTag];
         }else{
             //Fielding Factor
             _fieldingfactorArray=[[NSMutableArray alloc]init];
@@ -1036,10 +1209,36 @@
             isFieldingSelected = YES;
             fieldingOption = 1;
             
+            self.view_aggressiveShot.hidden = YES;
+            self.view_defensive.hidden = YES;
             self.view_bowlType.hidden = YES;
             self.view_fastBowl.hidden = NO;
             
             [self.tbl_fastBowl reloadData];
+            
+            if(selectedNRS!=nil){
+                
+                int indx=0;
+                int selectePosition = -1;
+                for (FieldingFactorRecord *record in _fieldingfactorArray)
+                {
+                    bool chk = ([[record fieldingfactorcode] isEqualToString:selectedfieldFactor.fieldingfactorcode]);
+                    if (chk)
+                    {
+                        selectePosition = indx;
+                        break;
+                    }
+                    indx ++;
+                }
+                
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+                [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                
+                [tbl_fastBowl scrollToRowAtIndexPath:indexPath
+                                          atScrollPosition:UITableViewScrollPositionTop
+                                                  animated:YES];
+                
+            }
         }
 
     }
@@ -1048,9 +1247,11 @@
         if (isRBWSelected) {
             if(self.ballEventRecord.objRbw!=0){
                 
-                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:0.5f];
+                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+               
             }else{
-                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
+                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+               
             }
             [rbwTableview removeFromSuperview];
             
@@ -1058,8 +1259,8 @@
         }else{
             isRBWSelected = YES;
             
-            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:0.5f];
-            self.rbwOptionArray=[[NSMutableArray alloc]initWithObjects:@"-1",@"-2",@"-3",@"-4",@"-5",@"1",@"2",@"3",@"4",@"5", nil];
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+            self.rbwOptionArray=[[NSMutableArray alloc]initWithObjects:@"-5",@"-4",@"-3",@"-2",@"-1",@"1",@"2",@"3",@"4",@"5", nil];
             
             
             rbwTableview=[[UITableView alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.size.width-180, self.btn_RBW.frame.origin.y-80,100,250)];
@@ -1267,28 +1468,164 @@
     
 }
 
-//set selected background for runs button
--(void) setRunsBoundriesView{
-    if(self.ballEventRecord.objRuns.integerValue == 4 || self.ballEventRecord.objRuns.integerValue == 1){
-        [self selectedButtonBg: self.btn_run1];
-    }else if(self.ballEventRecord.objRuns.integerValue == 5 || self.ballEventRecord.objRuns.integerValue == 2){
-        [self selectedButtonBg: self.btn_run2];
-    }else if(self.ballEventRecord.objRuns.integerValue == 6 || self.ballEventRecord.objRuns.integerValue == 3){
-        [self selectedButtonBg: self.btn_run3];
-    }else if(self.ballEventRecord.objRuns.integerValue == 7 || self.ballEventRecord.objIsFour.integerValue == 1){
-        [self selectedButtonBg: self.btn_B4];
-    }else if(self.ballEventRecord.objRuns.integerValue == 8 || self.ballEventRecord.objIssix.integerValue == 1){
-        [self selectedButtonBg: self.btn_B6];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+_view_table_select.hidden=NO;
+    
+    
+    if (tableView == self.table_AppealSystem)
+    {
+        
+        
+        AppealSystemSelectionArray=[[NSMutableArray alloc]init];
+        objAppealSystemEventRecord=(AppealSystemRecords*)[AppealSystemArray objectAtIndex:indexPath.row];
+        
+        self.lbl_appealsystem.text =objAppealSystemEventRecord.AppealSystemMetaSubCodeDescription;
+       // selectTeam=self.Wonby_lbl.text;
+        AppealSystemSelectCode=objAppealSystemEventRecord.AppealSystemMetaSubCode;
+        [AppealSystemSelectionArray addObject:objAppealSystemEventRecord];
+        
+        self.table_AppealSystem.hidden=YES;
+        isEnableTbl=YES;
+    }
+
+    
+    
+    
+    if (tableView == self.table_AppealComponent)
+    {
+        
+        
+        AppealComponentSelectionArray=[[NSMutableArray alloc]init];
+        objAppealComponentEventRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
+        
+        self.lbl_appealComponent.text =objAppealComponentEventRecord.AppealComponentMetaSubCodeDescription;
+        // selectTeam=self.Wonby_lbl.text;
+        AppealComponentSelectCode=objAppealComponentEventRecord.AppealComponentMetaSubCode;
+        [AppealComponentSelectionArray addObject:objAppealComponentEventRecord];
+        
+        self.table_AppealComponent.hidden=YES;
+        isEnableTbl=YES;
     }
     
+    
+    
+    if (tableView == self.tanle_umpirename)
+    {
+        
+        
+        AppealUmpireSelectionArray=[[NSMutableArray alloc]init];
+        objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
+        
+        self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName1;
+        self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName2;
+        // selectTeam=self.Wonby_lbl.text;
+        AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode1;
+         AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode2;
+        [AppealUmpireSelectionArray addObject:objAppealUmpireEventRecord];
+        
+        self.tanle_umpirename.hidden=YES;
+        isEnableTbl=YES;
+    }
+    
+    if (tableView == self.table_BatsmenName)
+    {
+        
+        
+      AppealUmpireSelectionArray=[[NSMutableArray alloc]init];
+       // objAppealComponentEventRecord=(AppealComponentRecord*)[AppealBatsmenArray objectAtIndex:indexPath.row];
+        
+        self.lbl_batsmen.text =[AppealBatsmenArray objectAtIndex:indexPath.row];
+        // selectTeam=self.Wonby_lbl.text;
+        AppealComponentSelectCode=@"PYCOOOO050";
+     //   [AppealComponentSelectionArray addObject:objAppealComponentEventRecord];
+        
+        self.table_BatsmenName.hidden=YES;
+        isEnableTbl=YES;
+    }
+
 }
 
-//Reset boundries and runs values
--(void) resetRunsBoundriesValue{
-    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
-    self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
-    self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];
+
+- (IBAction)appeal_btn:(id)sender {
+    if(isEnableTbl==YES)
+    {
+        AppealSystemArray=[[NSMutableArray alloc]init];
+        NSMutableArray * FetchAppealSystemArray =[DBManager AppealSystemRetrieveEventData];
+        for(int i=0; i < [FetchAppealSystemArray count]; i++)
+        {
+            
+            objAppealSystemEventRecord=(AppealSystemRecords*)[FetchAppealSystemArray objectAtIndex:i];
+            
+            [AppealSystemArray addObject:objAppealSystemEventRecord];
+            
+            
+        }
+        
+        
+        [self.table_AppealSystem reloadData];
+        self.table_AppealSystem.hidden=NO;
+        isEnableTbl=NO;
+    }
+    
+    
 }
+- (IBAction)btn_AppealComponent:(id)sender {
+    
+    if(isEnableTbl==YES)
+    {
+        AppealComponentArray=[[NSMutableArray alloc]init];
+        NSMutableArray * FetchAppealComponentArray =[DBManager AppealComponentRetrieveEventData];
+        for(int i=0; i < [FetchAppealComponentArray count]; i++)
+        {
+            
+            objAppealComponentEventRecord=(AppealComponentRecord*)[FetchAppealComponentArray objectAtIndex:i];
+            
+            [AppealComponentArray addObject:objAppealComponentEventRecord];
+            
+            
+        }
+        
+        
+        [self.table_AppealComponent reloadData];
+        self.table_AppealComponent.hidden=NO;
+        isEnableTbl=NO;
+    }
+}
+- (IBAction)btn_umpireName:(id)sender {
+    
+    
+    if(isEnableTbl==YES)
+    {
+        AppealUmpireArray=[[NSMutableArray alloc]init];
+        NSMutableArray * FetchAppealumpireArray =[DBManager AppealUmpireRetrieveEventData:_competitionCode :_matchCode];
+        for(int i=0; i < [FetchAppealumpireArray count]; i++)
+        {
+            
+            objAppealUmpireEventRecord=(AppealUmpireRecord*)[FetchAppealumpireArray objectAtIndex:i];
+            
+            [AppealUmpireArray addObject:objAppealUmpireEventRecord];
+            
+            
+        }
+        
+        
+        [self.tanle_umpirename reloadData];
+        self.tanle_umpirename.hidden=NO;
+        isEnableTbl=NO;
+    }
+
+}
+- (IBAction)btn_batsmen:(id)sender {
+    if (self.table_BatsmenName.hidden ==YES) {
+        
+        self.table_BatsmenName.hidden=NO;
+        
+    }
+    else
+        self.table_BatsmenName.hidden=YES;
+}
+
 
 -(void) calculateRuns:(long) tagNumber{
     
@@ -1752,6 +2089,85 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    //Fielding Factor
+    if(isFieldingSelected && fieldingOption == 1)
+    {
+        selectedfieldFactor = [self.fieldingfactorArray objectAtIndex:indexPath.row];
+        
+        _fieldingPlayerArray=[[NSMutableArray alloc]init];
+        _fieldingPlayerArray =[DBManager RetrieveFieldingPlayerData];
+       
+        isFieldingSelected = YES;
+        fieldingOption = 2;
+        
+        self.view_bowlType.hidden = YES;
+        self.view_fastBowl.hidden = NO;
+        
+        [self.tbl_fastBowl reloadData];
+        
+        if(selectedfieldPlayer!=nil){
+            
+            int indx=0;
+            int selectePosition = -1;
+            for (BowlerEvent *record in _fieldingPlayerArray)
+            {
+                bool chk = ([[record BowlerCode] isEqualToString:selectedfieldPlayer.BowlerCode]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    break;
+                }
+                indx ++;
+            }
+            
+        //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+        [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        
+        [tbl_fastBowl scrollToRowAtIndexPath:indexPath
+                            atScrollPosition:UITableViewScrollPositionTop
+                                    animated:YES];
+        }
+        
+        
+    }else if(isFieldingSelected && fieldingOption == 2)
+    {
+        selectedfieldPlayer = [self.fieldingPlayerArray objectAtIndex:indexPath.row];
+        
+        
+        self.nrsArray=[[NSMutableArray alloc]initWithObjects:@"-6",@"-5",@"-4",@"-3",@"-2",@"-1",@"0",@"1",@"2",@"3",@"4",@"5",@"6", nil];
+        isFieldingSelected = YES;
+        fieldingOption = 3;
+        
+        self.view_bowlType.hidden = YES;
+        self.view_fastBowl.hidden = NO;
+        
+        [self.tbl_fastBowl reloadData];
+        
+        if(selectedNRS!=nil){
+        NSInteger position = [self.nrsArray indexOfObject:selectedNRS];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
+        [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        
+        [tbl_fastBowl scrollToRowAtIndexPath:indexPath
+                            atScrollPosition:UITableViewScrollPositionTop
+                                    animated:YES];
+        }
+    }else if(isFieldingSelected && fieldingOption == 3)
+    {
+        
+        selectedNRS = [self.nrsArray objectAtIndex:indexPath.row];
+        
+        fieldingOption = 0;
+        self.view_bowlType.hidden = YES;
+        self.view_fastBowl.hidden = YES;
+        self.view_aggressiveShot.hidden = YES;
+        self.view_defensive.hidden =YES;
+        
+        isFieldingSelected = NO;
+    }
+    
     _view_table_select.hidden=NO;
     NSLog(@"Index Path %d",indexPath.row);
     
@@ -1904,19 +2320,19 @@
         if( self.ballEventRecord.objRbw != [self.rbwOptionArray objectAtIndex:indexPath.row]){
             self.ballEventRecord.objRbw = [self.rbwOptionArray objectAtIndex:indexPath.row];
             [rbwTableview removeFromSuperview];
-            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
             isRBWSelected = NO;
             
             if(self.ballEventRecord.objRbw!=0){
-                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:0.5f];
+                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
             }else{
-                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
+                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
             }
         }else{
             self.ballEventRecord.objRbw = [NSNumber numberWithInteger:0];
             [rbwTableview removeFromSuperview];
             
-            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
             
             isRBWSelected = NO;
         }
@@ -1931,10 +2347,16 @@
             
         }else if([[self.miscfiltersOptionArray objectAtIndex:indexPath.row]  isEqual: @"Release Shot"]){
             self.ballEventRecord.objIsreleaseshot = [NSNumber numberWithInt:1];
+            
         }else if([[self.miscfiltersOptionArray objectAtIndex:indexPath.row]  isEqual: @"WTB"]){
             self.ballEventRecord.objIswtb = [NSNumber numberWithInt:1];
         }
         }
+//    else if(tbl_fastBowl==tableView)
+//    {
+//        [self.fieldingfactorArray objectAtIndex:indexPath.row];
+//    }
+    
     NSLog(@"Index Path %d",indexPath.row);
     
     for (NSIndexPath *indexPath in rbwTableview.indexPathsForSelectedRows) {
@@ -2134,4 +2556,15 @@
 //}
 
 
+- (IBAction)btn_AppealSave:(id)sender {
+    
+   // UIColor colorWithRed:84 green:106 blue:126 alpha:0
+     NSString *commentText =[NSString stringWithFormat:@"%@",[_comments_txt text]];
+    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+    [dic setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
+    [dic setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
+    [dic setValue:AppealUmpireSelectCode forKey:@"AppealUmpireSelct"];
+     [dic setValue:AppealBatsmenSelectCode forKey:@"AppealBatsmenSelct"];
+    [dic setValue:commentText forKey:@"Commenttext"];
+}
 @end

@@ -11,6 +11,6 @@
 @interface FieldingFactorRecord : NSObject
 @property(strong,nonatomic)NSString *fieldingfactorcode;
 @property(strong,nonatomic)NSString *fieldingfactor;
-@property(strong,nonatomic)NSNumber *displayorder;
+@property(strong,nonatomic)NSString *displayorder;
 @property(strong,nonatomic)NSString *recordstatus;
 @end

@@ -53,8 +53,8 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [self.selectmatchTittleview .layer setBorderWidth:2];
-    [self.selectmatchTittleview.layer setBorderColor:[UIColor grayColor].CGColor];
+    [self.selectmatchTittleview .layer setBorderWidth:3];
+    [self.selectmatchTittleview.layer setBorderColor:[UIColor colorWithRed:84 green:106 blue:126 alpha:alphaStage].CGColor];
     [self.selectmatchTittleview .layer setMasksToBounds:YES];
     isEnableTbl=YES;
     
@@ -159,7 +159,13 @@
 //    Fixvc.CompitionCode=[eventRecord competitioncode];
 //    [Fixvc setModalPresentationStyle:UIModalPresentationFullScreen];
 //    [self presentViewController:Fixvc animated:NO completion:nil];
+    
 }
+
+
+
+
+
 @end
 
 

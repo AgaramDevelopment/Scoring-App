@@ -59,20 +59,21 @@
 +(NSMutableArray *)getOtwRtw;
 
 
-//fielding factor
-+(NSMutableArray *)RetrieveFieldingFactorData;
-+(NSMutableArray *)RetrieveFieldingPlayerData;
+//toss proceed Save
++(NSString *) TossSaveDetails:(NSString*) MATCHCODE:(NSString*)COMPETITIONCODE;
++ (BOOL) insertMatchEvent :(NSString*) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)selectTeamcode :(NSString*)electedcode:(NSString*)teamCode:(NSString*)teambCode;
 
-//Bowl type - Spin
-+(NSMutableArray *)getBowlType;
++(NSString *) getMaxInningsNumber:(NSString*) MATCHCODE:(NSString*)COMPETITIONCODE;
++ (BOOL) inserMaxInningsEvent :(NSString*) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE :(NSString*)maxInnNo:(NSString*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)CURRENTSTRIKERCODE:(NSString*)CURRENTNONSTRIKERCODE:(NSString*)BATTINGTEAMCODE:(NSString*)INNINGSSTATUS:(NSString*)BOWLINGEND;
 
-//bowl type - fast
-+(NSMutableArray *)getBowlFastType;
++ (BOOL) inserMaxInningsEvent :(NSString*) CompetitionCode:(NSString*)MATCHCODE:(NSString*)teamaCode :(NSString*)maxInnNo:(NSString*)StrikerCode:(NSString*)NonStrikerCode:(NSString*)selectBowlerCode:(NSString*)StrikerCode:(NSString*)NonStrikerCode:(NSString*)selectBowlerCode:(NSString*)teamaCode:(NSString*)inningsStatus:(NSString*)BowlingEnd;
 
-//Aggressive Shot Type
-+(NSMutableArray *)getAggressiveShotType;
++(BOOL)updateProcced:(NSString*)CompetitionCode:(NSString*)MATCHCODE;
 
-//Defensice shot Type
-+(NSMutableArray *)getDefenceShotType;
+//Appeal
++(NSMutableArray *)AppealSystemRetrieveEventData;
++(NSMutableArray *)AppealComponentRetrieveEventData;
++(NSMutableArray *) AppealUmpireRetrieveEventData:(NSString*) COMPETITIONCODE:(NSString*)MATCHCODE;
+
 
 @end

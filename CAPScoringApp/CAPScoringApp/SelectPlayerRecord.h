@@ -13,4 +13,7 @@
 @property(strong,nonatomic)NSString *playerName;
 @property(strong,nonatomic)NSString *playerCode;
 @property(strong,nonatomic)NSNumber *isSelected;
+@property(nonatomic,strong)NSString *isSelectCapten;
+@property(nonatomic,strong)NSString *isSelectWKTKeeper;
+@property(nonatomic,strong)NSString *playerOrder;
 @end

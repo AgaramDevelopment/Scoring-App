@@ -9,7 +9,7 @@
 #import "PlayerLevelCell.h"
 
 @implementation PlayerLevelCell
-@synthesize lbl_playerName,Lbl_playerordernumber,mainview,Img_drag;
+@synthesize lbl_playerName,Lbl_playerordernumber,mainview,Img_drag,IMg_captain,Img_wktkeeper,Btn_Captain,Btn_WktKeeper;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -22,14 +22,14 @@
         self.mainview.backgroundColor=[UIColor colorWithRed:(8.0/255.0f) green:(9.0/255.0f) blue:(11.0/255.0f) alpha:1.0f];
         
         
-        Lbl_playerordernumber = [[UILabel alloc]initWithFrame:CGRectMake(10, 18,100, 30)];
+        Lbl_playerordernumber = [[UILabel alloc]initWithFrame:CGRectMake(10, 20,100, 30)];
         
         //Lbl_playerordernumber.textAlignment = UITextAlignmentLeft;
         
         Lbl_playerordernumber.font = [UIFont systemFontOfSize:25];
         Lbl_playerordernumber.textColor=[UIColor whiteColor];
         
-        lbl_playerName = [[UILabel alloc]initWithFrame:CGRectMake(120, 18,mainview.frame.size.width-120, 30)];
+        lbl_playerName = [[UILabel alloc]initWithFrame:CGRectMake(120, 20,mainview.frame.size.width-120, 30)];
         
         //secondaryLabel.textAlignment = UITextAlignmentLeft;
          lbl_playerName.textColor=[UIColor whiteColor];
@@ -38,6 +38,19 @@
         
         Img_drag = [[UIImageView alloc]initWithFrame:CGRectMake(mainview.frame.size.width-100, 15,50, 50)];
         [Img_drag setImage:[UIImage imageNamed:@"Img_drag"]];
+        
+        Img_wktkeeper = [[UIImageView alloc]initWithFrame:CGRectMake(mainview.frame.size.width-170, 15,50, 50)];
+        //[Img_wktkeeper setImage:[UIImage imageNamed:@""]];
+        
+        IMg_captain = [[UIImageView alloc]initWithFrame:CGRectMake(mainview.frame.size.width-230, 15,50, 50)];
+        //[IMg_captain setImage:[UIImage imageNamed:@""]];
+        
+        Btn_Captain = [[UIButton alloc]initWithFrame:CGRectMake(mainview.frame.size.width-230, 15,50, 50)];
+        [Btn_Captain setBackgroundColor:[UIColor clearColor]];
+        
+        Btn_WktKeeper = [[UIButton alloc]initWithFrame:CGRectMake(mainview.frame.size.width-170, 15,50, 50)];
+        [Btn_WktKeeper setBackgroundColor:[UIColor clearColor]];
+        
         [self.contentView addSubview:mainview];
         
         [self.contentView addSubview:Lbl_playerordernumber];
@@ -45,6 +58,14 @@
         [self.contentView addSubview:lbl_playerName];
         
         [self.contentView addSubview:Img_drag];
+        
+        [self. contentView addSubview:Img_wktkeeper];
+        
+        [self.contentView addSubview:IMg_captain];
+        
+        [self.contentView addSubview:Btn_WktKeeper];
+        
+        [self.contentView addSubview: Btn_Captain];
         
         
     }
