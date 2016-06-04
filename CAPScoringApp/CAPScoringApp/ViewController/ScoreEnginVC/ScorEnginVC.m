@@ -140,6 +140,9 @@
     
     [self resetBallObject];
     
+    
+    
+    
     //bowl type - spin array
     _bowlTypeArray=[[NSMutableArray alloc]init];
     _bowlTypeArray =[DBManager getBowlType];
@@ -269,6 +272,11 @@
     [_table_BatsmenName setHidden:YES];
     
 AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
+    
+    self.view_bowlType.hidden = YES;
+    self.view_fastBowl.hidden = YES;
+    self.view_aggressiveShot.hidden = YES;
+    self.view_defensive.hidden = YES;
 }
 
 

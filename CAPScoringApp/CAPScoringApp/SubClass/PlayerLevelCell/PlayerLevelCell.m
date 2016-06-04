@@ -38,6 +38,7 @@
         
         Img_drag = [[UIImageView alloc]initWithFrame:CGRectMake(mainview.frame.size.width-100, 15,50, 50)];
         [Img_drag setImage:[UIImage imageNamed:@"Img_drag"]];
+        _Btn_drag = [[UIButton alloc]initWithFrame:CGRectMake(mainview.frame.size.width-100, 15,50, 50)];
         
         Img_wktkeeper = [[UIImageView alloc]initWithFrame:CGRectMake(mainview.frame.size.width-170, 15,50, 50)];
         //[Img_wktkeeper setImage:[UIImage imageNamed:@""]];
@@ -58,7 +59,9 @@
         [self.contentView addSubview:lbl_playerName];
         
         [self.contentView addSubview:Img_drag];
-        
+                     
+        [self.contentView addSubview:_Btn_drag];
+                     
         [self. contentView addSubview:Img_wktkeeper];
         
         [self.contentView addSubview:IMg_captain];
