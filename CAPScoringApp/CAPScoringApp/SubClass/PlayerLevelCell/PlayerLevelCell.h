@@ -14,6 +14,7 @@
 @property(nonatomic,strong)  UILabel *Lbl_playerordernumber;
 @property(nonatomic,strong)  UILabel * lbl_playerName;
 @property(nonatomic,strong)  UIImageView * Img_drag;
+@property(nonatomic,strong)  UIButton *Btn_drag;
 @property(nonatomic,strong)  UIImageView *Img_wktkeeper;
 @property(nonatomic,strong)  UIImageView * IMg_captain;
 @property(nonatomic,strong)  UIButton   * Btn_Captain;
