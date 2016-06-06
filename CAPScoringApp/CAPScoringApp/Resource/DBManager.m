@@ -23,6 +23,7 @@
 #import "BowlAndShotTypeRecords.h"
 #import "FieldingFactorRecord.h"
 #import "FieldingEventRecord.h"
+#import "CpitainWicketKeeperRecord.h"
 
 @implementation DBManager
 
@@ -1517,6 +1518,45 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     sqlite3_reset(statement);
     return NO;
+
+}
++(NSMutableArray *)getTeamCaptainandTeamwicketkeeper:(NSString*) competitioncode :(NSString*) matchcode
+{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    
+    // NSString *count = [[NSString alloc]init];
+    
+    int retVal;
+    
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT MR.TEAMACAPTAIN,MR.TEAMAWICKETKEEPER,MR.TEAMBCAPTAIN,MR.TEAMBWICKETKEEPER from  matchregistration MR where competitioncode='%@' and matchcode='%@'",competitioncode,matchcode];
+    stmt=[selectPlayersSQL UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+           CpitainWicketKeeperRecord *record=[[CpitainWicketKeeperRecord alloc]init];
+            record.objTeamACapitain=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            record.objTeamAWicketKeeper=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            record.objTeamBCapitain=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+             record.objTeamBWicketKeeper=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+            [eventArray addObject:record];
+            
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return eventArray;
+    
 
 }
 

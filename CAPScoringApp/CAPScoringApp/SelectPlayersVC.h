@@ -20,9 +20,27 @@
 - (IBAction)btn_search:(id)sender;
 - (IBAction)btn_back:(id)sender;
 
+@property(strong,nonatomic) NSString *teamA;
+@property(strong,nonatomic) NSString *teamB;
+@property(strong,nonatomic) NSString *matchType;
+@property(strong,nonatomic) NSString *overs;
+@property(strong,nonatomic) NSString *date;
+@property(strong,nonatomic) NSString *time;
+@property(strong,nonatomic) NSString *matchVenu;
+@property(strong,nonatomic) NSString *month;
+@property(strong,nonatomic) NSString *matchCode;
+@property(strong,nonatomic) NSString *competitionCode;
+@property(strong,nonatomic)NSString *matchTypeCode;
+@property(strong,nonatomic)NSString *teamAcode;
+@property(strong,nonatomic)NSString *teamBcode;
 
-@property (strong,nonatomic) NSString *teamCode;
-@property (strong,nonatomic) NSString *matchCode;
+
+
+
+
+
+@property (strong,nonatomic) NSString *SelectTeamCode;
+//@property (strong,nonatomic) NSString *matchCode;
 
 
 

@@ -63,7 +63,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
    // self.teamCode = @"TEA0000001";
     //self.matchCode= @"IMSC0221C6F6595E95A00002";
-    self.selectedPlayerArray = [DBManager getSelectingPlayerArray:self.teamCode matchCode:self.matchCode];
+    self.selectedPlayerArray = [DBManager getSelectingPlayerArray:self.SelectTeamCode matchCode:self.matchCode];
     self.selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: self.selectedPlayerArray ];
     
     [self setSelectCount];
@@ -270,13 +270,25 @@ static NSString * const reuseIdentifier = @"Cell";
             [DBManager updateSelectedPlayersResultCode:[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus];
             
         }
-        PlayerOrderLevelVC *obPlayerOrderLevelVC = [[PlayerOrderLevelVC alloc] init];
-        obPlayerOrderLevelVC.objSelectplayerList_Array=self.selectedPlayerArray;
-        obPlayerOrderLevelVC.TeamCode=self.teamCode;
-        obPlayerOrderLevelVC.MatchCode= self.matchCode;
+        PlayerOrderLevelVC *objPlayerOrderLevelVC = [[PlayerOrderLevelVC alloc] init];
+         objPlayerOrderLevelVC =  (PlayerOrderLevelVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"PlayerOrderLevelVC"];
+        objPlayerOrderLevelVC.objSelectplayerList_Array=self.selectedPlayerArray;
+        objPlayerOrderLevelVC.TeamCode=self.SelectTeamCode;
+        objPlayerOrderLevelVC.matchCode= self.matchCode;
+        objPlayerOrderLevelVC.teamA=self.teamA;
+        objPlayerOrderLevelVC.teamB=self.teamB;
+        objPlayerOrderLevelVC.matchType=self.matchType;
+        objPlayerOrderLevelVC.matchTypeCode=self.matchTypeCode;
+        objPlayerOrderLevelVC.matchVenu=self.matchVenu;
+        objPlayerOrderLevelVC.time=self.time;
+        objPlayerOrderLevelVC.date=self.date;
+        objPlayerOrderLevelVC.teamAcode=self.teamAcode;
+        objPlayerOrderLevelVC.teamBcode=self.teamBcode;
+        objPlayerOrderLevelVC.competitionCode=self.competitionCode;
+        objPlayerOrderLevelVC.overs=self.overs;
         
         // push a new stack
-        [self.navigationController pushViewController:obPlayerOrderLevelVC animated:YES];
+        [self.navigationController pushViewController:objPlayerOrderLevelVC animated:YES];
         
     
 }else{

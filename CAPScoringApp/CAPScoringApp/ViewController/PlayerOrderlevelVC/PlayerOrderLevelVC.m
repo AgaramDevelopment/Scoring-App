@@ -11,6 +11,7 @@
 #import "PlayerLevelCell.h"
 #import "SelectPlayerRecord.h"
 #import "DBManager.h"
+#import "NewMatchSetUpVC.h"
 
 @interface PlayerOrderLevelVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
@@ -145,10 +146,8 @@
     //tbl_playerSelectList.scrollEnabled=YES;
     
     
-
-    // self.tbl_playerSelectList.bounces = YES;
+   [DBManager getTeamCaptainandTeamwicketkeeper:self.competitionCode :self.matchCode];
     
-    // Do any additional setup after loading the view.
 }
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     // Move this asignment to the method/action that
@@ -255,9 +254,31 @@
     for(int i=0;  i < slecteplayerlist.count; i++)
     {
         SelectPlayerRecord *playerorderRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:i];
-        [DBManager updatePlayerorder:self.MatchCode :self.TeamCode PlayerCode:playerorderRecord.playerCode PlayerOrder:playerorderRecord.playerOrder];
+        [DBManager updatePlayerorder:self.matchCode :self.TeamCode PlayerCode:playerorderRecord.playerCode PlayerOrder:playerorderRecord.playerOrder];
         
     }
+    
+    
+    NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
+    objNewMatchSetUp =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
+    objNewMatchSetUp.matchCode=self.matchCode;
+    objNewMatchSetUp.teamAcode=self.TeamCode;
+    
+    objNewMatchSetUp.teamA=self.teamA;
+    objNewMatchSetUp.teamB=self.teamB;
+    objNewMatchSetUp.teamAcode=self.teamAcode;
+    objNewMatchSetUp.teamBcode=self.teamBcode;
+    objNewMatchSetUp.matchVenu=self.matchVenu;
+    objNewMatchSetUp.matchTypeCode=self.matchTypeCode;
+    objNewMatchSetUp.matchType=self.matchType;
+    objNewMatchSetUp.month=self.month;
+    objNewMatchSetUp.time=self.time;
+    objNewMatchSetUp.date=self.date;
+    objNewMatchSetUp.overs=self.overs;
+    objNewMatchSetUp.competitionCode=self.competitionCode;
+    objNewMatchSetUp.overs=self.overs;
+    [self.navigationController pushViewController:objNewMatchSetUp animated:YES];
+
 }
 
 

@@ -217,17 +217,38 @@
         
         _view_teamB.backgroundColor = [UIColor colorWithRed:(228/255.0f) green:(98/255.0f) blue:(58/255.0f) alpha:(1)];
     }
+    [self RedirectSelectPlayerVC:NO :teamBcode];
+    
+    
+    
+}
+-(void)RedirectSelectPlayerVC:(BOOL)selectTeam :(NSString *)selectteamcode
+{
     SelectPlayersVC * selectvc = [[SelectPlayersVC alloc]init];
     
     selectvc =  (SelectPlayersVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
     
-    selectvc.teamCode=teamBcode;
+    selectvc.SelectTeamCode=selectteamcode;
     selectvc.matchCode = matchCode;
+    //selectvc.teamAcode=teamAcode;
+   // selectvc.teamBcode=teamBcode;
+    
+    selectvc.teamA = self.teamA;
+    selectvc.teamB = self.teamB;
+    selectvc.matchType = self.matchType;
+    selectvc.overs = self.overs;
+    selectvc.date = self.date;
+    selectvc.time = self.time;
+    selectvc.month = self.month;
+    selectvc.matchVenu = self.matchVenu;
+    selectvc.overs= self.overs;
+    selectvc.teamAcode=self.teamAcode;
+    selectvc.teamBcode=self.teamBcode;
+    selectvc.competitionCode=competitionCode;
+    selectvc.matchTypeCode=_matchTypeCode;
+    
     
     [self.navigationController pushViewController:selectvc animated:YES];
-    
-    
-    
 }
 
 - (IBAction)btn_selectPlayersTeamA:(id)sender {
@@ -257,15 +278,15 @@
     
     NSLog(@"COUNT = %@",_countTeam);
     
-    
-    SelectPlayersVC * selectvc = [[SelectPlayersVC alloc]init];
-    
-    selectvc =  (SelectPlayersVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
-    
-    selectvc.teamCode=teamAcode;
-    selectvc.matchCode = matchCode;
-    
-    [self.navigationController pushViewController:selectvc animated:YES];
+    [self RedirectSelectPlayerVC:YES :teamAcode];
+//    SelectPlayersVC * selectvc = [[SelectPlayersVC alloc]init];
+//    
+//    selectvc =  (SelectPlayersVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
+//    
+//    selectvc.SelectTeamCode=teamAcode;
+//    selectvc.matchCode = matchCode;
+//    
+//    [self.navigationController pushViewController:selectvc animated:YES];
     
     
     
