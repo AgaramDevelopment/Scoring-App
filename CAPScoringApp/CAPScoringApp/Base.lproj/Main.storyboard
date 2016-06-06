@@ -1110,7 +1110,7 @@
                         <viewControllerLayoutGuide type="bottom" id="8Ll-4Y-jF6"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eix-Rj-LER">
-                        <rect key="frame" x="0.0" y="0.0" width="768" height="1500"/>
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aff-hj-tjT">
@@ -8715,6 +8715,7 @@
                         <outlet property="tbl_fastBowl" destination="tc6-o8-vss" id="IvT-7b-WM7"/>
                         <outlet property="view_AppealComponent" destination="04e-JY-eUX" id="vZ8-Vt-xNC"/>
                         <outlet property="view_AppealSystem" destination="T9G-hC-PbK" id="hPu-iD-iFY"/>
+                        <outlet property="view_BallTicker" destination="eqX-57-Pdv" id="cxS-MI-Owx"/>
                         <outlet property="view_Rbw" destination="lcE-j5-csW" id="GQQ-Rz-cu1"/>
                         <outlet property="view_aggressive" destination="IUf-wG-G5K" id="gCt-Nn-TuO"/>
                         <outlet property="view_aggressiveShot" destination="Mww-qs-iOI" id="cBu-sl-4yg"/>

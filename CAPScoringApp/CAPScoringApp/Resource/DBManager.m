@@ -1272,7 +1272,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(NSString *) getMaxInningsNumber:(NSString*) MATCHCODE:(NSString*)COMPETITIONCODE{
++(NSString *) getMaxInningsNumber : (NSString*) MATCHCODE : (NSString*)COMPETITIONCODE{
     // NSMutableArray *TossArray=[[NSMutableArray alloc]init];
     NSString *maxInnNo = [[NSString alloc]init];
     int retVal;
@@ -1308,7 +1308,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+ (BOOL) inserMaxInningsEvent :(NSString*) CompetitionCode:(NSString*)MATCHCODE:(NSString*)teamaCode :(NSString*)maxInnNo:(NSString*)StrikerCode:(NSString*)NonStrikerCode:(NSString*)selectBowlerCode:(NSString*)StrikerCode:(NSString*)NonStrikerCode:(NSString*)selectBowlerCode:(NSString*)teamaCode:(NSString*)inningsStatus:(NSString*)BowlingEnd
++ (BOOL) inserMaxInningsEvent : (NSString*) CompetitionCode :(NSString*) MATCHCODE :(NSString*) teamaCode :(NSString*) maxInnNo :(NSString*) StrikerCode :(NSString*) NonStrikerCode :(NSString*) selectBowlerCode :(NSString*) StrikerCode : (NSString*) NonStrikerCode : (NSString*)selectBowlerCode : (NSString*) teamaCode :(NSString*) inningsStatus : (NSString*)BowlingEnd
 {
     BOOL success = false;
     NSString *databasePath =[self getDBPath];
@@ -1558,6 +1558,64 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return eventArray;
     
 
+}
+
++(NSMutableArray *)GetBallDetails: (NSString*) competitioncode : (NSString*) matchcode
+{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    int retVal;
+
+    NSString *databasePath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT BALL.BALLCODE, (BALL.OVERNO+'.'+ BALL.BALLNO) AS BALLNO, BWLR.PLAYERNAME BOWLER, STRKR.PLAYERNAME STRIKER, NSTRKR.PLAYERNAME NONSTRIKER,  BT.BOWLTYPE BOWLTYPE, ST.SHOTNAME AS SHOTTYPE, BALL.TOTALRUNS, BALL.TOTALEXTRAS, BALL.OVERNO,BALL.BALLCOUNT,BALL.ISLEGALBALL,BALL.ISFOUR,BALL.ISSIX,BALL.RUNS,BALL.OVERTHROW, BALL.WIDE,BALL.NOBALL,BALL.BYES,BALL.LEGBYES,BALL.GRANDTOTAL,WE.WICKETNO,WE.WICKETTYPE,BALL.MARKEDFOREDIT, PTY.PENALTYRUNS, PTY.PENALTYTYPECODE, 0 AS ISINNINGSLASTOVER, (MR.VIDEOLOCATION + '\' + BALL.VIDEOFILENAME) VIDEOFILEPATH FROM BALLEVENTS BALL INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE = BALL.COMPETITIONCODE AND MR.MATCHCODE = BALL.MATCHCODE INNER JOIN TEAMMASTER TM ON BALL.TEAMCODE = TM.TEAMCODE INNER JOIN PLAYERMASTER BWLR ON BALL.BOWLERCODE=BWLR.PLAYERCODE INNER JOIN PLAYERMASTER STRKR ON BALL.STRIKERCODE = STRKR.PLAYERCODE INNER JOIN PLAYERMASTER NSTRKR ON BALL.NONSTRIKERCODE = NSTRKR.PLAYERCODE LEFT JOIN BOWLTYPE BT ON BALL.BOWLTYPE = BT.BOWLTYPECODE LEFT JOIN SHOTTYPE ST ON BALL.SHOTTYPE = ST.SHOTCODE LEFT JOIN WICKETEVENTS WE ON BALL.BALLCODE = WE.BALLCODE AND WE.ISWICKET = 1 LEFT JOIN PENALTYDETAILS PTY ON BALL.BALLCODE = PTY.BALLCODE WHERE  BALL.COMPETITIONCODE='%@'  AND BALL.MATCHCODE='%@' AND BALL.OVERNO =(CASE WHEN   = 1 THEN 4+1 ELSE 4 END) ORDER BY BALL.OVERNO, BALL.BALLNO, BALL.BALLCOUNT;",competitioncode,matchcode];
+    stmt=[selectPlayersSQL UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            BallEventRecord *record=[[BallEventRecord alloc]init];
+            record.objBallcode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            record.objBallno=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            record.objBowltype=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+            record.objShottype=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+            
+            record.objTotalruns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+            record.objTotalextras=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+            record.objOverno=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+            record.objBallcount=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+            record.objIslegalball=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+            record.objIsFour=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
+            record.objIssix=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
+            record.objRuns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
+            record.objOverthrow=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
+            
+            record.objWide=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
+            record.objNoball=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
+            record.objByes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
+            record.objLegByes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
+            record.objGrandtotal=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 20)];
+            record.objWicketno=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 21)];
+            record.objWicketType=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 22)];
+            record.objMarkedforedit=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)];
+            record.objPenalty=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 24)];
+            
+            record.objPenaltytypecode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 25)];
+            
+            record.objVideoFile=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 26)];
+            [eventArray addObject:record];
+            
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return eventArray;
 }
 
 @end

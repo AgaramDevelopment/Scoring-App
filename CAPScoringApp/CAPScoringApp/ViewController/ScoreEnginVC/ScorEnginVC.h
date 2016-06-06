@@ -174,7 +174,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *view_fielding_factor;
 
-
+@property (weak, nonatomic) IBOutlet UIView *view_BallTicker;
 
 
 

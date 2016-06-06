@@ -134,7 +134,10 @@
 
 @property(nonatomic,strong) NSString * objUncomfortclassification;
 
+@property(nonatomic,strong) NSNumber * objWicketno;
 
+@property(nonatomic,strong) NSString * objWicketType;
 
+@property(nonatomic,strong) NSString * objPenaltytypecode;
 
 @end

@@ -63,6 +63,8 @@
 +(NSMutableArray *)AppealRetrieveEventData;
 +(NSMutableArray *)getOtwRtw;
 
++(NSMutableArray *)GetBallDetails : (NSString *) MatchCode : (NSString *) CompetitionCode;
+
 
 //toss proceed Save
 +(NSString *) TossSaveDetails:(NSString*) MATCHCODE:(NSString*)COMPETITIONCODE;

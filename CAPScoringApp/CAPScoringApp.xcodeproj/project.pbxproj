@@ -61,6 +61,7 @@
 		CEC305811D014C3400301ED3 /* AppealSystemRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305801D014C3400301ED3 /* AppealSystemRecords.m */; };
 		CEC305841D01566100301ED3 /* AppealComponentRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305831D01566100301ED3 /* AppealComponentRecord.m */; };
 		CEC305871D015BB900301ED3 /* AppealUmpireRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305861D015BB800301ED3 /* AppealUmpireRecord.m */; };
+		DCED38981D05DE4D00119EFC /* CpitainWicketKeeperRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = DCED38971D05DE4D00119EFC /* CpitainWicketKeeperRecord.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -181,6 +182,8 @@
 		CEC305831D01566100301ED3 /* AppealComponentRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppealComponentRecord.m; sourceTree = "<group>"; };
 		CEC305851D015BB800301ED3 /* AppealUmpireRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealUmpireRecord.h; sourceTree = "<group>"; };
 		CEC305861D015BB800301ED3 /* AppealUmpireRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppealUmpireRecord.m; sourceTree = "<group>"; };
+		DCED38961D05DE4D00119EFC /* CpitainWicketKeeperRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CpitainWicketKeeperRecord.h; sourceTree = "<group>"; };
+		DCED38971D05DE4D00119EFC /* CpitainWicketKeeperRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CpitainWicketKeeperRecord.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -321,6 +324,8 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				DCED38961D05DE4D00119EFC /* CpitainWicketKeeperRecord.h */,
+				DCED38971D05DE4D00119EFC /* CpitainWicketKeeperRecord.m */,
 				CE0162E81D004B190066B683 /* TNCA_DATABASE.sqlite */,
 				2479C3E01CFC3FBC00A3CCA2 /* ballevent */,
 				CE0F19BA1CF5D1460030FFA2 /* Reachability.h */,
@@ -615,6 +620,7 @@
 				CE0F19BD1CF5D1460030FFA2 /* Reachability.m in Sources */,
 				CE00185C1CF4667400668D8B /* CDRTranslucentSideBar.m in Sources */,
 				CE3DD41C1CFBFA7000D93A55 /* SelectPlayerRecord.m in Sources */,
+				DCED38981D05DE4D00119EFC /* CpitainWicketKeeperRecord.m in Sources */,
 				CEC305811D014C3400301ED3 /* AppealSystemRecords.m in Sources */,
 				CE1FBF5B1CF96FE400A9B6FE /* BowlerEvent.m in Sources */,
 				24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */,
