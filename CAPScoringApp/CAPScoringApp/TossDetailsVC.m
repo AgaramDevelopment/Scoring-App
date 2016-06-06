@@ -355,20 +355,31 @@ return 1;
     }
     
     
+    
     if (tableView == self.nonStriker_table)
     {
         NonStrikerselectindexarray=[[NSMutableArray alloc]init];
         objTossDeatilsRecord=(TossDeatilsEvent*)[StrikerArray objectAtIndex:indexPath.row];
-        self.nonStriker_lbl.text =objTossDeatilsRecord.PlaerNameStrike_nonStrike;
-        selectNonStriker=self.nonStriker_lbl.text;
-        
-        NonStrikerCode=objTossDeatilsRecord.PlaercodeStrike_nonStrike;
-        [NonStrikerselectindexarray addObject:objTossDeatilsRecord];
-        
+        if(![StrikerCode isEqualToString: objTossDeatilsRecord.PlaercodeStrike_nonStrike])
+        {
+            self.nonStriker_lbl.text =objTossDeatilsRecord.PlaerNameStrike_nonStrike;
+            selectNonStriker=self.nonStriker_lbl.text;
+            
+            NonStrikerCode=objTossDeatilsRecord.PlaercodeStrike_nonStrike;
+            [NonStrikerselectindexarray addObject:objTossDeatilsRecord];
+        }
+        else
+        {
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+                                                            message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
+                                                           delegate: self
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+            [alert1 show];
+        }
         self.nonStriker_table.hidden=YES;
         isEnableTbl=YES;
     }
-    
     if (tableView == self.Bowler_table)
     {
         BowlerselectionIndexArray=[[NSMutableArray alloc]init];
@@ -455,7 +466,7 @@ return 1;
     
     if(isEnableTbl==YES)
     {
-        
+        _Striker_lbl.text = @"";
         //NSString *teamCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
@@ -508,7 +519,7 @@ return 1;
 - (IBAction)nonStriker_btn:(id)sender{
     if(isEnableTbl==YES)
     {
-        
+        _nonStriker_lbl.text = @"";
       //  NSString *teamCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
@@ -559,7 +570,7 @@ return 1;
 
     if(isEnableTbl==YES)
     {
-        
+        _Bowler_lbl.text = @"";
         //NSString *teambCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
@@ -701,7 +712,7 @@ return 1;
                                          otherButtonTitles:@"Cancel",nil];
     
   
-    
+      alert.tag =1;
   
     [alert show];
     
@@ -721,7 +732,7 @@ return 1;
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     //if (alertView.tag == 1) { // UIAlertView with tag 1 detected
-        if (buttonIndex == 0)
+if (buttonIndex == 0 && alertView.tag == 1)
         {
             
             
