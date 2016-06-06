@@ -25,4 +25,5 @@
 @property(strong,nonatomic)NSString *matchTypeName;
 @property(strong,nonatomic)NSString *matchTypeCode;
 @property(strong,nonatomic)NSString *count;
+@property(strong,nonatomic)NSString *MatchStatus;
 @end

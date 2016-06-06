@@ -11,7 +11,7 @@
 #import "FixturesRecord.h"
 #import "NewMatchSetUpVC.h"
 #import "CustomNavigationVC.h"
-
+#import "ScorEnginVC.h"
 #import "DBManager.h"
 
 @interface FixturesVC ()
@@ -115,15 +115,15 @@
     NSIndexPath *selectedIndexPath = [tableView indexPathForSelectedRow];
     
     
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//
-//    
+    //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    //
+    //
     NewMatchSetUpVC *detail =(NewMatchSetUpVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
     
-//
-//    NewMatchSetUpVC*detail = [[NewMatchSetUpVC alloc]init];
-//    
-//    detail =  (NewMatchSetUpVC*)[storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
+    //
+    //    NewMatchSetUpVC*detail = [[NewMatchSetUpVC alloc]init];
+    //
+    //    detail =  (NewMatchSetUpVC*)[storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
     
     NSString*teamAcode = objFixtureRecord.teamAcode;
     NSString*teamBcode = objFixtureRecord.teamBcode;
@@ -135,62 +135,76 @@
     NSString*competitionCode = self.CompitionCode;
     NSString*matchTypeCode = objFixtureRecord.matchTypeCode;
     NSString*overs = objFixtureRecord.overs;
+    NSString *MatchStatus = objFixtureRecord.MatchStatus;
+    
+    if([MatchStatus  isEqual: @"MSC123"])
+    {
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+        
+        NSDate *date = [formatter dateFromString:objFixtureRecord.matchdate];
+        [formatter setDateFormat:@"dd"];
+        NSString *newDate = [formatter stringFromDate:date];
+        
+        
+        
+        
+        //NSDate *monthYY = [formatter dateFromString:objFixtureRecord.matchdate];
+        [formatter setDateFormat:@"MMM ''yy"];
+        NSString*newMonth = [formatter stringFromDate:date];
+        
+        
+        
+        // NSDate *time = [formatter dateFromString:objFixtureRecord.matchdate];
+        [formatter setDateFormat:@"hh:mm a"];
+        NSString *newTime = [formatter stringFromDate:date];
+        
+        
+        
+        NSString*matchVenu = objFixtureRecord.city;
+        
+        
+        
+        detail.matchSetUp = mSetUp;
+        detail.teamA = teamA;
+        detail.teamB = teamB;
+        detail.date = newDate;
+        detail.matchVenu = matchVenu;
+        detail.matchType = matchType;
+        detail.overs = overs;
+        detail.month = newMonth;
+        detail.time = newTime;
+        detail.matchCode = matchCode;
+        detail.competitionCode = competitionCode;
+        detail.matchTypeCode = matchTypeCode;
+        detail.teamAcode = teamAcode;
+        detail.teamBcode = teamBcode;
+        
+        
+        //    [detail setModalPresentationStyle:UIModalPresentationFullScreen];
+        //    [self presentViewController:detail animated:NO completion:nil];
+        [self.navigationController pushViewController:detail animated:YES];
+        NSLog(@"indexframe=%@",selectedIndexPath);
+    }
+    else
+    {
+        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        
+        ScorEnginVC *scoreEngine =(ScorEnginVC*) [storyBoard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+        scoreEngine.matchCode=matchCode;
+        scoreEngine.competitionCode=competitionCode;
+        [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
+        [self presentViewController:scoreEngine animated:NO completion:nil];
+    }
     
     
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
     
-    NSDate *date = [formatter dateFromString:objFixtureRecord.matchdate];
-    [formatter setDateFormat:@"dd"];
-    NSString *newDate = [formatter stringFromDate:date];
-    
-    
-    
-    
-    //NSDate *monthYY = [formatter dateFromString:objFixtureRecord.matchdate];
-    [formatter setDateFormat:@"MMM ''yy"];
-    NSString*newMonth = [formatter stringFromDate:date];
-    
-    
-    
-    // NSDate *time = [formatter dateFromString:objFixtureRecord.matchdate];
-    [formatter setDateFormat:@"hh:mm a"];
-    NSString *newTime = [formatter stringFromDate:date];
-    
-    
-    
-    NSString*matchVenu = objFixtureRecord.city;
-    
-    
-    
-    detail.matchSetUp = mSetUp;
-    detail.teamA = teamA;
-    detail.teamB = teamB;
-    detail.date = newDate;
-    detail.matchVenu = matchVenu;
-    detail.matchType = matchType;
-    detail.overs = overs;
-    detail.month = newMonth;
-    detail.time = newTime;
-    detail.matchCode = matchCode;
-    detail.competitionCode = competitionCode;
-    detail.matchTypeCode = matchTypeCode;
-    detail.teamAcode = teamAcode;
-    detail.teamBcode = teamBcode;
-    
-    
-//    [detail setModalPresentationStyle:UIModalPresentationFullScreen];
-//    [self presentViewController:detail animated:NO completion:nil];
-    [self.navigationController pushViewController:detail animated:YES];
-    NSLog(@"indexframe=%@",selectedIndexPath);
-    
-    
-    
-//
-//    NSIndexPath *selectedIndexPath = [tableView indexPathForSelectedRow];
-//    NSLog(@"indexframe=%@",selectedIndexPath);
-//    FixturesCell *cell =(FixturesCell *) [tableView cellForRowAtIndexPath:indexPath];
-//    cell.lbl_date.backgroundColor=[UIColor whiteColor];
+    //
+    //    NSIndexPath *selectedIndexPath = [tableView indexPathForSelectedRow];
+    //    NSLog(@"indexframe=%@",selectedIndexPath);
+    //    FixturesCell *cell =(FixturesCell *) [tableView cellForRowAtIndexPath:indexPath];
+    //    cell.lbl_date.backgroundColor=[UIColor whiteColor];
     
 }
 

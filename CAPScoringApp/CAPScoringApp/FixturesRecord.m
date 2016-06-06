@@ -25,4 +25,5 @@
 @synthesize matchTypeName;
 @synthesize matchTypeCode;
 @synthesize count;
+@synthesize MatchStatus;
 @end

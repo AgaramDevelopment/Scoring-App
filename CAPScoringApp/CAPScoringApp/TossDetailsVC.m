@@ -632,8 +632,8 @@ return 1;
     [self.radiobutton2 setTag:1];
     [self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];[self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateSelected];
   [self.radiobutton2 addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
-      [self.view addSubview:self.radiobutton2];
-      [self.view addSubview:self.radiobutton2];
+      //[self.view addSubview:self.radiobutton2];
+      //[self.view addSubview:self.radiobutton2];
 }
 
 

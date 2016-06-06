@@ -96,12 +96,14 @@
 - (IBAction)btn_proceed:(id)sender {
     
     
-        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-       TossDetailsVC *tossvc =(TossDetailsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"TossDetails"];
+       // UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+       TossDetailsVC *tossvc =[[TossDetailsVC alloc]init];
+        tossvc =  (TossDetailsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"TossDetails"];
     tossvc.MATCHCODE=Matchcode;
     tossvc.CompetitionCode=competitionCode;
-        [tossvc setModalPresentationStyle:UIModalPresentationFullScreen];
-        [self presentViewController:tossvc animated:NO completion:nil];
+     [self.navigationController pushViewController:tossvc animated:YES];
+       // [tossvc setModalPresentationStyle:UIModalPresentationFullScreen];
+        //[self presentViewController:tossvc animated:NO completion:nil];
     
 }
 @end

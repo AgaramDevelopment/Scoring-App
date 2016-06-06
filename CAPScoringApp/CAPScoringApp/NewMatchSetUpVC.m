@@ -400,7 +400,7 @@
     NSUInteger teamCountA = [fixture.count integerValue];
     NSUInteger teamCountB = [fixtureB.count integerValue];
 
-    if (teamCountA > 7) {
+    if (teamCountA >= 7) {
         
         //grey color
         _view_teamA.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
@@ -416,7 +416,7 @@
         
     }
         
-    if (teamCountB > 7) {
+    if (teamCountB >= 7) {
         
         
         _view_teamB.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
@@ -431,5 +431,8 @@
     }
     
 }
-
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [self colorChange];
+}
 @end
