@@ -23,7 +23,7 @@
 #import "BowlAndShotTypeRecords.h"
 #import "FieldingFactorRecord.h"
 #import "FieldingEventRecord.h"
-#import "CpitainWicketKeeperRecord.h"
+#import "CapitainWicketKeeperRecord.h"
 
 @implementation DBManager
 
@@ -1520,6 +1520,40 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return NO;
 
 }
+
++(BOOL)updateCapitainWicketkeeper:(NSString *) compatitioncode :(NSString *) matchCode capitainAteam:(NSString *)capitainAteam capitainBteam:(NSString *)capitainBteam wicketkeeperAteam:(NSString *)wicketkeeperAteam  wicketkeeperBteam:(NSString *)wicketkeeperBteam
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    
+    
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        
+        
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION SET TEAMACAPTAIN='%@' ,TEAMBCAPTAIN='%@',TEAMAWICKETKEEPER='%@',TEAMBWICKETKEEPER='%@' WHERE COMPETITIONCODE=  '%@' AND MATCHCODE ='%@'",capitainAteam,capitainBteam,wicketkeeperAteam,wicketkeeperBteam,compatitioncode,matchCode];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
+        }
+    }
+    
+    sqlite3_reset(statement);
+    return NO;
+}
 +(NSMutableArray *)getTeamCaptainandTeamwicketkeeper:(NSString*) competitioncode :(NSString*) matchcode
 {
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
@@ -1543,7 +1577,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
-           CpitainWicketKeeperRecord *record=[[CpitainWicketKeeperRecord alloc]init];
+           CapitainWicketKeeperRecord *record=[[CapitainWicketKeeperRecord alloc]init];
             record.objTeamACapitain=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
             record.objTeamAWicketKeeper=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
             record.objTeamBCapitain=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];

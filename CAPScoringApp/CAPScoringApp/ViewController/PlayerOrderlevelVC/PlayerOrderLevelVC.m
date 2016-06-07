@@ -12,6 +12,7 @@
 #import "SelectPlayerRecord.h"
 #import "DBManager.h"
 #import "NewMatchSetUpVC.h"
+#import "CapitainWicketKeeperRecord.h"
 
 @interface PlayerOrderLevelVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
@@ -23,6 +24,8 @@
     UIGestureRecognizer *_dndLongPressGestureRecognizer;
     PlayerLevelCell*playercell;
     NSMutableArray *objPreviousorderList;
+    NSMutableArray* capitainWicketkeeperarray;
+    CapitainWicketKeeperRecord* objCapitainWicketKeeper;
     
 
 }
@@ -144,9 +147,9 @@
     _tbl_playerSelectList.delegate=self;
     _tbl_playerSelectList.dataSource=self;
     //tbl_playerSelectList.scrollEnabled=YES;
+   capitainWicketkeeperarray=[NSMutableArray alloc];
     
-    
-   [DBManager getTeamCaptainandTeamwicketkeeper:self.competitionCode :self.matchCode];
+   capitainWicketkeeperarray=  [DBManager getTeamCaptainandTeamwicketkeeper:self.competitionCode :self.matchCode];
     
 }
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
@@ -250,13 +253,16 @@
 
 -(IBAction)didClickSaveplayer:(id)sender
 {
-   
+   if(objCapitainWicketKeeper.objTeamACapitain!=nil && objCapitainWicketKeeper.objTeamBCapitain!= nil && objCapitainWicketKeeper.objTeamAWicketKeeper!=nil && objCapitainWicketKeeper.objTeamBWicketKeeper!=nil)
+   {
     for(int i=0;  i < slecteplayerlist.count; i++)
     {
         SelectPlayerRecord *playerorderRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:i];
         [DBManager updatePlayerorder:self.matchCode :self.TeamCode PlayerCode:playerorderRecord.playerCode PlayerOrder:playerorderRecord.playerOrder];
         
     }
+    
+        [DBManager updateCapitainWicketkeeper:self.competitionCode :self.matchCode capitainAteam:objCapitainWicketKeeper.objTeamACapitain capitainBteam:objCapitainWicketKeeper.objTeamBCapitain wicketkeeperAteam:objCapitainWicketKeeper.objTeamAWicketKeeper wicketkeeperBteam:  objCapitainWicketKeeper.objTeamBWicketKeeper];
     
     
     NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
@@ -279,6 +285,11 @@
     objNewMatchSetUp.overs=self.overs;
     [self.navigationController pushViewController:objNewMatchSetUp animated:YES];
 
+}
+   else{
+       UIAlertView *alter=[[UIAlertView alloc]initWithTitle:nil message:@"Please select Capitain and Wicketkeeper" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+       [alter show];
+   }
 }
 
 
@@ -307,6 +318,8 @@
     NSInteger variable = indexPath.row;
     int ordernumber =(int) variable +1;
     SelectPlayerRecord *objSelectPlayerRecord;
+    CapitainWicketKeeperRecord*objCapitainWicketRecord;
+    
     
     if (playercell == nil) {
         playercell = [[PlayerLevelCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
@@ -327,12 +340,59 @@
     if(self.selectedPlayerFilterArray > 0)
     {
         objSelectPlayerRecord=(SelectPlayerRecord*)[self.selectedPlayerFilterArray objectAtIndex:indexPath.row];
+        objCapitainWicketRecord=(CapitainWicketKeeperRecord*)[self.selectedPlayerFilterArray objectAtIndex:indexPath.row];
     }
     else
     {
        objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
+        objCapitainWicketRecord=(CapitainWicketKeeperRecord*)[capitainWicketkeeperarray objectAtIndex:0];
+        
+    }
+    NSString *captainATeam=objCapitainWicketRecord.objTeamACapitain;
+    NSString *captainBTeam=objCapitainWicketRecord.objTeamBCapitain;
+    NSLog(@"capitainWicketkeeperarrayA = %@",captainATeam);
+    NSLog(@"capitainWicketkeeperarrayB = %@",captainBTeam);
+    NSLog(@"SelectPlayerRecord = %@",objSelectPlayerRecord.playerCode);
+
+
+    if([objSelectPlayerRecord.playerCode isEqualToString:captainATeam] || [objSelectPlayerRecord.playerCode isEqualToString:captainBTeam])
+    {
+        playercell.IMg_captain.frame=CGRectMake(playercell.contentView.frame.size.width-155, 15,50, 50);
+        playercell.Btn_Captain.frame=CGRectMake(playercell.contentView.frame.size.width-155, 15,50, 50);
+        playercell.IMg_captain.image=[UIImage imageNamed:@"Img_Captain"];
+        [playercell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+        objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
+        objSelectPlayerRecord.isSelectCapten=@"YES";
+          //isSelectCaptainType=YES;
+    }
+    else{
+        playercell.IMg_captain.image=[UIImage imageNamed:@""];
+        [playercell.IMg_captain setBackgroundColor:[UIColor clearColor]];
+        playercell.IMg_captain.frame=CGRectMake(playercell.contentView.frame.size.width-180, 15,50, 50);
+        playercell.Btn_Captain.frame=CGRectMake(playercell.contentView.frame.size.width-190, 15,50, 50);
+        objSelectPlayerRecord.isSelectCapten=nil;
     }
     
+    
+    
+     if ([objSelectPlayerRecord.playerCode isEqualToString:objCapitainWicketRecord.objTeamAWicketKeeper] || [objSelectPlayerRecord.playerCode isEqualToString:objCapitainWicketRecord.objTeamBWicketKeeper])
+    {
+        playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
+        objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
+        objSelectPlayerRecord.isSelectWKTKeeper=@"YES";
+        [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+        isSelectWKTKeeperType=YES;
+      
+
+
+    }
+     else{
+         playercell.Img_wktkeeper.image=[UIImage imageNamed:@""];
+         [playercell.Img_wktkeeper setBackgroundColor:[UIColor clearColor]];
+         objSelectPlayerRecord.isSelectWKTKeeper=nil;
+         //isSelectWKTKeeperType=NO;
+
+     }
     //NSString *playerOrder=[NSString stringWithFormat:@"%@",objSelectPlayerRecord.playerOrder];
     
     playercell.Lbl_playerordernumber.text=[NSString stringWithFormat:@"%d",ordernumber];
@@ -350,8 +410,8 @@
     {
         playercell.lbl_playerName.text =[NSString stringWithFormat:@"%@",objSelectPlayerRecord.playerName] ;
     }
-    playercell.IMg_captain.image=([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])?[UIImage imageNamed:@"Img_Captain"]:nil;
-    playercell.Img_wktkeeper.image=([objSelectPlayerRecord.isSelectWKTKeeper isEqualToString:@"YES"])?[UIImage imageNamed:@"Img_wktKeeper"]:nil;
+   // playercell.IMg_captain.image=([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])?[UIImage imageNamed:@"Img_Captain"]:nil;
+   // playercell.Img_wktkeeper.image=([objSelectPlayerRecord.isSelectWKTKeeper isEqualToString:@"YES"])?[UIImage imageNamed:@"Img_wktKeeper"]:nil;
     
     playercell.shouldIndentWhileEditing = YES;
     playercell.showsReorderControl = YES;
@@ -387,6 +447,8 @@
    playercell = [tableView cellForRowAtIndexPath:indexPath];
    NSIndexPath * indexPaths = [_tbl_playerSelectList indexPathForCell:playercell];
    SelectPlayerRecord* objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPaths.row];
+    objCapitainWicketKeeper=(CapitainWicketKeeperRecord*)[capitainWicketkeeperarray objectAtIndex:0];
+    
     if(isSelectCaptainType==NO)
     {
         playercell.IMg_captain.frame=CGRectMake(playercell.contentView.frame.size.width-130, 15,50, 50);
@@ -397,6 +459,14 @@
        
 
         isSelectCaptainType=YES;
+        if([self.chooseTeam isEqualToString:@"SelectTeamA"])
+        {
+            objCapitainWicketKeeper.objTeamACapitain=objSelectPlayerRecord.playerCode;
+        }
+        else if ([self.chooseTeam isEqualToString:@"SelectTeamB"])
+        {
+            objCapitainWicketKeeper.objTeamBCapitain=objSelectPlayerRecord.playerCode;
+        }
     }
     else{
         if(isSelectWKTKeeperType== NO)
@@ -417,8 +487,18 @@
             objSelectPlayerRecord.isSelectWKTKeeper=@"YES";
             [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
             isSelectWKTKeeperType=YES;
+            if([self.chooseTeam isEqualToString:@"SelectTeamA"])
+            {
+                objCapitainWicketKeeper.objTeamAWicketKeeper=objSelectPlayerRecord.playerCode;
+            }
+            else if ([self.chooseTeam isEqualToString:@"SelectTeamB"])
+            {
+                objCapitainWicketKeeper.objTeamBWicketKeeper=objSelectPlayerRecord.playerCode;
+            }
+
         }
     }
+   
 }
 
 -(IBAction)didClickCaptain_BtnAction:(id)sender
@@ -436,6 +516,14 @@
         Cell.Btn_Captain.frame=CGRectMake(Cell.contentView.frame.size.width-190, 15,50, 50);
         isSelectCaptainType=NO;
         objSelectPlayerRecord.isSelectCapten=nil;
+        if([self.chooseTeam isEqualToString:@"SelectTeamA"])
+        {
+            objCapitainWicketKeeper.objTeamACapitain=nil;
+        }
+        else if ([self.chooseTeam isEqualToString:@"SelectTeamB"])
+        {
+            objCapitainWicketKeeper.objTeamBCapitain=nil;
+        }
     }
 }
 -(IBAction)didClickWktKeeper_BtnAction:(id)sender
@@ -449,6 +537,14 @@
         [Cell.Img_wktkeeper setBackgroundColor:[UIColor clearColor]];
         objSelectPlayerRecord.isSelectWKTKeeper=nil;
         isSelectWKTKeeperType=NO;
+        if([self.chooseTeam isEqualToString:@"SelectTeamA"])
+        {
+            objCapitainWicketKeeper.objTeamAWicketKeeper=nil;
+        }
+        else if ([self.chooseTeam isEqualToString:@"SelectTeamB"])
+        {
+            objCapitainWicketKeeper.objTeamBWicketKeeper=nil;
+        }
     }
 }
 

@@ -6,9 +6,9 @@
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
-#import "CpitainWicketKeeperRecord.h"
+#import "CapitainWicketKeeperRecord.h"
 
-@implementation CpitainWicketKeeperRecord
+@implementation CapitainWicketKeeperRecord
 @synthesize objTeamACapitain,objTeamBCapitain,objTeamAWicketKeeper,objTeamBWicketKeeper;
 
 @end

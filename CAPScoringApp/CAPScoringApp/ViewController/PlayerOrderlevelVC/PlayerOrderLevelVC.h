@@ -31,5 +31,7 @@
 @property(strong,nonatomic)NSString *teamAcode;
 @property(strong,nonatomic)NSString *teamBcode;
 
+@property(nonatomic,strong) NSString *chooseTeam;
+
 
 @end
