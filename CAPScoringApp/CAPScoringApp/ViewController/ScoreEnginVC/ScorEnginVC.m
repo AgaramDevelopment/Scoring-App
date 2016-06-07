@@ -24,7 +24,7 @@
 #import "AggressiveShotTypeCell.h"
 #import "FieldingFactorCell.h"
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -81,6 +81,7 @@
     FieldingFactorRecord *selectedfieldFactor;
     BowlerEvent *selectedfieldPlayer;
     NSString *selectedNRS;
+     UIImageView * Img_ball;
     
 }
 
@@ -344,6 +345,15 @@
     {
         
         NSString*ballcode= [NSString stringWithFormat:@"%@",ballCodevalueArray.lastObject];
+        if([ballcode isEqualToString:@"(null)"])
+            
+        {
+            [ballCodevalueArray removeLastObject];
+            ballcode=[NSString stringWithFormat:@"%@",ballCodevalueArray.lastObject];
+            [ballCodevalueArray removeLastObject];
+             ballcode=[NSString stringWithFormat:@"%@",ballCodevalueArray.lastObject];
+        }
+        
         
         NSString *code = [ballcode substringFromIndex: [ballcode length] - 10];
         
@@ -839,30 +849,17 @@
 -(IBAction)DidClickStartBall:(id)sender
 {
     NSLog(@"btnname=%@",self.btn_StartBall.currentTitle);
-    float startballandendballdifference;
     
-    NSDate * EndBallTime;
+   
     if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
     {
-        [self SaveBallEventREcordvalue];
+       
         startBallTime = [NSDate date];
-        //        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        //        // display in 12HR/24HR (i.e. 11:25PM or 23:25) format according to User Settings
-        //        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        //        NSString *currentTime = [dateFormatter stringFromDate:today];
-        //
-        //        NSString*text ;
-        //        text = [currentTime stringByReplacingOccurrencesOfString:@"AM" withString:@""];
-        //        text = [currentTime stringByReplacingOccurrencesOfString:@"PM" withString:@""];
-        //        NSLog(@"User's current time in their preference format:%@",text);
-        //         NSDateFormatter *dateFormatter1 = [[NSDateFormatter alloc] init];
-        //        startBallTime = [dateFormatter1 dateFromString:currentTime];;
-        //startBallTime=[text floatValue];
         
         NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        // or @"yyyy-MM-dd hh:mm:ss a" if you prefer the time with AM/PM
-        NSLog(@"%@",[dateFormatter stringFromDate:[NSDate date]]);
+       
+        
         NSString *time =[dateFormatter stringFromDate:[NSDate date]];
         
         NSDateFormatter *dateFormatter1=[[NSDateFormatter alloc] init];
@@ -870,7 +867,7 @@
         startBallTime= [dateFormatter1 dateFromString:time];
         [self.btn_StartBall setTitle:@"END BALL" forState:UIControlStateNormal];
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
-        //        self.btn_StartOver.userInteractionEnabled=NO;
+        self.btn_StartOver.userInteractionEnabled=NO;
         [self AllBtnEnableMethod];
         
         [self resetBallEventObject];
@@ -883,21 +880,9 @@
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
         self.btn_StartOver.userInteractionEnabled=YES;
         //        self.btn_StartBall.userInteractionEnabled=NO;
+         [self SaveBallEventREcordvalue];
         [self AllBtndisableMethod];
-        //EndBallTime = [NSDate date];
-        //        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        //        // display in 12HR/24HR (i.e. 11:25PM or 23:25) format according to User Settings
-        //        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
-        //        NSString *currentTime = [dateFormatter stringFromDate:today];
-        //
-        //        NSString*text ;
-        //        text = [currentTime stringByReplacingOccurrencesOfString:@"AM" withString:@""];
-        //        text = [currentTime stringByReplacingOccurrencesOfString:@"PM" withString:@""];
-        //        NSLog(@"User's current time in their preference format:%@",text);
-        //
-        //        EndBallTime =[text floatValue];
-        //startballandendballdifference =EndBallTime-startBallTime;
-        //objBalleventRecord.objballduration=startballandendballdifference;
+        
         
         [self timeLeftSinceDate:startBallTime];
         
@@ -908,7 +893,7 @@
         [DBManager insertBallCodeWicketEvent:self.ballEventRecord];
         [DBManager GetBallDetails :_competitionCode :_matchCode];
         
-        //[DBManager saveBallEventData:objBalleventRecord otwOrRtw:];
+        
     }
 }
 
@@ -1456,13 +1441,22 @@
     }
     else if(selectBtnTag.tag==110)
     {
-        //        [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
-        //        [self.img_pichmap setImage:[UIImage imageNamed:@"pitchmap_img"]];
-        //           _View_Appeal.hidden=YES;
-        //        self.view_bowlType.hidden = YES;
-        //        self.view_fastBowl.hidden = YES;
-        //        self.view_aggressiveShot.hidden = YES;
-        //        self.view_defensive.hidden = YES;
+                [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
+                [self.img_pichmap setImage:[UIImage imageNamed:@"pitchmap_img"]];
+                UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickPichmapTapAction:)];
+                tapRecognizer.numberOfTapsRequired = 1;
+                tapRecognizer.numberOfTouchesRequired=1;
+                tapRecognizer.delegate=self;
+                [self.img_pichmap addGestureRecognizer:tapRecognizer];
+                [self.img_pichmap setUserInteractionEnabled:YES];
+        
+                   _View_Appeal.hidden=YES;
+                self.view_bowlType.hidden = YES;
+                self.view_fastBowl.hidden = YES;
+                self.view_aggressiveShot.hidden = YES;
+                self.view_defensive.hidden = YES;
+        
+        
     }
     else if(selectBtnTag.tag==111)
     {
@@ -1477,6 +1471,25 @@
         
     }
 }
+
+- (void)didClickPichmapTapAction:(UIGestureRecognizer *)aGesture
+   {
+      
+       if(Img_ball != nil)
+       {
+           [Img_ball removeFromSuperview];
+       }
+
+       CGPoint p = [aGesture locationInView:self.img_pichmap];
+       NSLog(@"pointx=%f,pointY=%f",p.x,p.y);
+       float Xposition = p.x-20;
+       float Yposition = p.y-20;
+       Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition, 50, 50)];
+       //if(Xposition > 200 )
+       Img_ball.image =[UIImage imageNamed:@"ballImg"];
+       [self.img_pichmap addSubview:Img_ball];
+       
+    }
 -(void)selelectbtnPop_View:(UIButton *)btn_selection
 {
     objextras=[[UITableView alloc]initWithFrame:CGRectMake(btn_selection.frame.origin.x+btn_selection.frame.size.width+10, btn_selection.frame.origin.y-50,100,200)];
