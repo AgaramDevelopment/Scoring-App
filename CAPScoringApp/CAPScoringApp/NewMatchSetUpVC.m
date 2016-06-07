@@ -217,12 +217,12 @@
         
         _view_teamB.backgroundColor = [UIColor colorWithRed:(228/255.0f) green:(98/255.0f) blue:(58/255.0f) alpha:(1)];
     }
-    [self RedirectSelectPlayerVC:NO :teamBcode];
+    [self RedirectSelectPlayerVC:@"SelectTeamB" :teamBcode];
     
     
     
 }
--(void)RedirectSelectPlayerVC:(BOOL)selectTeam :(NSString *)selectteamcode
+-(void)RedirectSelectPlayerVC:(NSString *)selectTeam :(NSString *)selectteamcode
 {
     SelectPlayersVC * selectvc = [[SelectPlayersVC alloc]init];
     
@@ -246,6 +246,7 @@
     selectvc.teamBcode=self.teamBcode;
     selectvc.competitionCode=competitionCode;
     selectvc.matchTypeCode=_matchTypeCode;
+    selectvc.chooseTeam   =selectTeam;
     
     
     [self.navigationController pushViewController:selectvc animated:YES];
@@ -278,7 +279,7 @@
     
     NSLog(@"COUNT = %@",_countTeam);
     
-    [self RedirectSelectPlayerVC:YES :teamAcode];
+    [self RedirectSelectPlayerVC:@"SelectTeamA" :teamAcode];
 //    SelectPlayersVC * selectvc = [[SelectPlayersVC alloc]init];
 //    
 //    selectvc =  (SelectPlayersVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectPlayers"];

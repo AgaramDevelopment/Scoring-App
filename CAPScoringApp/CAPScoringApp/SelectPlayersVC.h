@@ -40,6 +40,8 @@
 
 
 @property (strong,nonatomic) NSString *SelectTeamCode;
+
+@property(strong,nonatomic) NSString *chooseTeam;
 //@property (strong,nonatomic) NSString *matchCode;
 
 

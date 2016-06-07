@@ -286,6 +286,7 @@ static NSString * const reuseIdentifier = @"Cell";
         objPlayerOrderLevelVC.teamBcode=self.teamBcode;
         objPlayerOrderLevelVC.competitionCode=self.competitionCode;
         objPlayerOrderLevelVC.overs=self.overs;
+        objPlayerOrderLevelVC.chooseTeam =self.chooseTeam;
         
         // push a new stack
         [self.navigationController pushViewController:objPlayerOrderLevelVC animated:YES];

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface CpitainWicketKeeperRecord : NSObject
+@interface CapitainWicketKeeperRecord : NSObject
 
 @property(nonatomic,strong) NSString * objTeamACapitain;
 @property(nonatomic,strong) NSString * objTeamBCapitain;
