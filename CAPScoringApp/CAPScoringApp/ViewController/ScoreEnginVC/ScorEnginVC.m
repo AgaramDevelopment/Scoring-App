@@ -139,7 +139,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self resetBallObject];
+   // [self resetBallObject];
     
     
     
@@ -872,6 +872,9 @@
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
         //        self.btn_StartOver.userInteractionEnabled=NO;
         [self AllBtnEnableMethod];
+        
+        [self resetBallEventObject];
+        [self resetAllButtonOnEndBall];
         
     }
     else
@@ -1996,7 +1999,7 @@
 
 //Sathish
 
--(void) resetBallObject{
+-(void) resetBallEventObject{
     self.ballEventRecord = [[BallEventRecord alloc] init];
     self.ballEventRecord.objIsFour = 0;
     self.ballEventRecord.objIssix = 0;
@@ -2020,6 +2023,44 @@
     isExtrasSelected = NO;
     isOverthrowSelected = NO;
 }
+
+
+-(void) resetAllButtonOnEndBall{
+    
+    //Left buttons
+    [self unselectedButtonBg: self.btn_run1];
+    [self unselectedButtonBg: self.btn_run2];
+    [self unselectedButtonBg: self.btn_run3];
+    [self unselectedButtonBg: self.btn_highRun];
+    [self unselectedButtonBg: self.btn_B4];
+    [self unselectedButtonBg: self.btn_B6];
+    [self unselectedButtonBg: self.btn_extras];
+    [self unselectedButtonBg: self.btn_wkts];
+    [self unselectedButtonBg: self.btn_overthrow];
+    [self unselectedButtonBg: self.btn_miscFilter];
+    [self unselectedButtonBg: self.btn_pichmap];
+    [self unselectedButtonBg: self.btn_wagonwheel];
+
+    //Right buttons
+    [self unselectedViewBg: self.view_otw];
+    [self unselectedViewBg: self.view_rtw];
+    [self unselectedViewBg: self.view_spin];
+    [self unselectedViewBg: self.view_fast];
+    [self unselectedViewBg: self.view_aggressive];
+    [self unselectedViewBg: self.view_defensive];
+    [self unselectedViewBg: self.view_fielding_factor];
+    [self unselectedViewBg: self.view_Rbw];
+    //[self unselectedViewBg: self.view_remark]; need to set reference
+    //[self unselectedViewBg: self.view_edit];
+    //[self unselectedViewBg: self.View_Appeal);
+    //[self unselectedViewBg: self.view_lastinstance];
+    
+  }
+
+
+
+
+
 
 //Set to normal background for runs button
 -(void) resetRunsBoundriesView{
@@ -2342,6 +2383,21 @@
         self.ballEventRecord.objOverthrow = [NSNumber numberWithInt:0];
     }
 }
+
+
+   
+    //Selected background for view
+    -(void) selectedViewBg:(UIView *) view{
+        view.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+
+    }
+    
+    //Normal background for view
+    -(void) unselectedViewBg:(UIView *) view{
+        
+       view.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+    }
+
 
 //Selected background for button
 -(void) selectedButtonBg:(UIButton *) select_btn{
