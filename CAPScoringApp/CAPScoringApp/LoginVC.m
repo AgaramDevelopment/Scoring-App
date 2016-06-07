@@ -109,7 +109,7 @@
                     [self showDialog:@"Login expired" andTitle:@""];
                 }
             }else{
-                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+                [self showDialog:@"No internet connection" andTitle:@"Error"];
             }
         }
     }

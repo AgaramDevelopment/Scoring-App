@@ -9043,7 +9043,7 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-proceed" translatesAutoresizingMaskIntoConstraints="NO" id="oR4-Tg-w4J">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-cancel" translatesAutoresizingMaskIntoConstraints="NO" id="oR4-Tg-w4J">
                                                 <rect key="frame" x="626" y="19" width="52" height="52"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="52" id="gft-ps-ij1"/>
@@ -9058,7 +9058,7 @@
                                                     <constraint firstAttribute="width" constant="58" id="GcM-1i-2Tq"/>
                                                 </constraints>
                                                 <connections>
-                                                    <action selector="btn_cancel:" destination="QCD-xR-WAM" eventType="touchUpInside" id="pVP-nB-ntO"/>
+                                                    <action selector="btn_select:" destination="QCD-xR-WAM" eventType="touchUpInside" id="QOO-cw-gzV"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cg5-1E-Nqs">
@@ -9069,10 +9069,10 @@
                                                     <constraint firstAttribute="height" constant="62" id="Ivr-uQ-6ja"/>
                                                 </constraints>
                                                 <connections>
-                                                    <action selector="btn_select:" destination="QCD-xR-WAM" eventType="touchUpInside" id="6l1-8X-Ys2"/>
+                                                    <action selector="btn_cancel:" destination="QCD-xR-WAM" eventType="touchUpInside" id="vgY-qO-AWf"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-cancel" translatesAutoresizingMaskIntoConstraints="NO" id="puR-vj-LXU">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-proceed" translatesAutoresizingMaskIntoConstraints="NO" id="puR-vj-LXU">
                                                 <rect key="frame" x="697" y="19" width="52" height="52"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="52" id="1hk-8d-Ahx"/>
