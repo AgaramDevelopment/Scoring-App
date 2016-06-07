@@ -54,7 +54,7 @@
     
     
     UITableView* objextras;
-    BallEventRecord *objBalleventRecord;
+    //BallEventRecord *objBalleventRecord;
     
     //RBW and Miscfilters
     UITableView* rbwTableview;
@@ -113,7 +113,6 @@
 @property(nonatomic,strong)NSMutableArray *aggressiveShotTypeArray;
 @property(nonatomic,strong)NSMutableArray *defensiveShotTypeArray;
 
-//@property(nonatomic,strong)BallEventRecord *ballEventRecord;
 
 //appeal
 @property (nonatomic,strong)NSMutableArray*AppealSystemArray;
@@ -319,13 +318,13 @@
 }
 -(void)SaveBallEventREcordvalue
 {
-    objBalleventRecord=[[BallEventRecord alloc]init];
+    self.ballEventRecord=[[BallEventRecord alloc]init];
     
     NSMutableArray * teamCodeArray=[DBManager getTeamCodemethod];
     if(teamCodeArray.count > 0 && teamCodeArray != NULL)
     {
         NSString * objTeamCode = [NSString stringWithFormat:@"%@",teamCodeArray.lastObject];
-        objBalleventRecord.objTeamcode =objTeamCode;
+        self.ballEventRecord.objTeamcode =objTeamCode;
     }
     
     NSMutableArray * inningsNoArray=[DBManager getInningsNomethod];
@@ -334,7 +333,7 @@
         NSString * objInningsno = [NSString stringWithFormat:@"%@",inningsNoArray.lastObject];
         NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
         f.numberStyle = NSNumberFormatterDecimalStyle;
-        objBalleventRecord.objInningsno = [f numberFromString:objInningsno];
+        self.ballEventRecord.objInningsno = [f numberFromString:objInningsno];
         
     }
     
@@ -377,9 +376,9 @@
     }
     
     
-    objBalleventRecord.objBallcode   = ballnoStr;
-    objBalleventRecord.objmatchcode=self.matchCode;
-    objBalleventRecord.objcompetitioncode=self.competitionCode;
+    self.ballEventRecord.objBallcode   = ballnoStr;
+    self.ballEventRecord.objmatchcode=self.matchCode;
+    self.ballEventRecord.objcompetitioncode=self.competitionCode;
 }
 
 -(void)getDayNOValue
@@ -393,13 +392,13 @@
         f.numberStyle = NSNumberFormatterDecimalStyle;
         NSNumber * myNumber = [f numberFromString:objDayno];
         NSInteger value = [myNumber integerValue]+1;
-        objBalleventRecord.objDayno = [NSNumber numberWithInteger:value];
-        objBalleventRecord.objSessionno = [NSNumber numberWithInteger:value];
+        self.ballEventRecord.objDayno = [NSNumber numberWithInteger:value];
+        self.ballEventRecord.objSessionno = [NSNumber numberWithInteger:value];
     }
     else{
         objDayno = @"1";
-        objBalleventRecord.objDayno=@1;
-        objBalleventRecord.objSessionno=@1;
+        self.ballEventRecord.objDayno=@1;
+        self.ballEventRecord.objSessionno=@1;
     }
     
     
@@ -900,10 +899,10 @@
         [self timeLeftSinceDate:startBallTime];
         
         
-        [DBManager saveBallEventData:objBalleventRecord];
-        [DBManager insertBallCodeAppealEvent:objBalleventRecord];
-        [DBManager insertBallCodeFieldEvent: objBalleventRecord bowlerEvent:selectedfieldPlayer fieldingFactor: selectedfieldFactor nrs :selectedNRS];
-        [DBManager insertBallCodeWicketEvent:objBalleventRecord];
+        [DBManager saveBallEventData:self.ballEventRecord];
+        [DBManager insertBallCodeAppealEvent:self.ballEventRecord];
+        [DBManager insertBallCodeFieldEvent: self.ballEventRecord bowlerEvent:selectedfieldPlayer fieldingFactor: selectedfieldFactor nrs :selectedNRS];
+        [DBManager insertBallCodeWicketEvent:self.ballEventRecord];
         [DBManager GetBallDetails :_competitionCode :_matchCode];
         
         //[DBManager saveBallEventData:objBalleventRecord otwOrRtw:];
@@ -1172,22 +1171,22 @@
     if(days) {
         [timeLeft appendString:[NSString stringWithFormat:@"%ld Days", (long)days*-1]];
         
-        objBalleventRecord.objballduration=[NSNumber numberWithInteger:days];
+        self.ballEventRecord.objballduration=[NSNumber numberWithInteger:days];
     }
     
     if(hours) {
         [timeLeft appendString:[NSString stringWithFormat: @"%ld H", (long)hours*-1]];
-        objBalleventRecord.objballduration=[NSNumber numberWithInteger:hours];
+        self.ballEventRecord.objballduration=[NSNumber numberWithInteger:hours];
     }
     
     if(minutes) {
         [timeLeft appendString: [NSString stringWithFormat: @"%ld M",(long)minutes*-1]];
-        objBalleventRecord.objballduration=[NSNumber numberWithInteger:minutes];
+        self.ballEventRecord.objballduration=[NSNumber numberWithInteger:minutes];
     }
     
     if(seconds) {
         [timeLeft appendString:[NSString stringWithFormat: @"%lds", (long)seconds*1]];
-        objBalleventRecord.objballduration=[NSNumber numberWithInteger:seconds];
+        self.ballEventRecord.objballduration=[NSNumber numberWithInteger:seconds];
     }
     
     return timeLeft;
@@ -1592,7 +1591,7 @@
                                 atScrollPosition:UITableViewScrollPositionTop
                                         animated:YES];
         }else{
-            objBalleventRecord.objBowltype = nil;
+            self.ballEventRecord.objBowltype = nil;
             [tbl_bowlType reloadData];
         }
         
@@ -1622,7 +1621,7 @@
                                 atScrollPosition:UITableViewScrollPositionTop
                                         animated:YES];
         }else{
-            objBalleventRecord.objBowltype = nil;
+            self.ballEventRecord.objBowltype = nil;
             [tbl_bowlType reloadData];
         }
         
@@ -1651,7 +1650,7 @@
                                       atScrollPosition:UITableViewScrollPositionTop
                                               animated:YES];
         }else{
-            objBalleventRecord.objShottype = nil;
+            self.ballEventRecord.objShottype = nil;
             [tbl_aggressiveShot reloadData];
         }
         
@@ -1682,7 +1681,7 @@
                                   atScrollPosition:UITableViewScrollPositionTop
                                           animated:YES];
         }else{
-            objBalleventRecord.objShottype = nil;
+            self.ballEventRecord.objShottype = nil;
             [_tbl_defensive reloadData];
         }
         
@@ -1832,18 +1831,18 @@
     //    otw = objRtwRecord.MetaSubCode;
     //
     
-    if ([objBalleventRecord.objAtworotw isEqual: @"MSC148"]){
+    if ([self.ballEventRecord.objAtworotw isEqual: @"MSC148"]){
         
         // _btn_OTW.selected = YES;
         
         _view_otw.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
-        objBalleventRecord.objAtworotw = nil;
+        self.ballEventRecord.objAtworotw = nil;
         
         
     }else{
         _view_otw.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
         _view_rtw.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
-        objBalleventRecord.objAtworotw = @"MSC148";
+        self.ballEventRecord.objAtworotw = @"MSC148";
         
     }
     
@@ -1853,18 +1852,18 @@
 
 //rtw select,deselect and reset values
 -(void)rtwSelectAndDeselect{
-    if ([objBalleventRecord.objAtworotw isEqual: @"MSC149"]){
+    if ([self.ballEventRecord.objAtworotw isEqual: @"MSC149"]){
         
         // _btn_OTW.selected = YES;
         
         _view_rtw.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
-        objBalleventRecord.objAtworotw = nil;
+        self.ballEventRecord.objAtworotw = nil;
         
         
     }else{
         _view_rtw.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
         _view_otw.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
-        objBalleventRecord.objAtworotw = @"MSC149";
+        self.ballEventRecord.objAtworotw = @"MSC149";
         
     }
     
@@ -2932,7 +2931,7 @@
         isFastSelected = NO;
         
         BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.bowlTypeArray objectAtIndex:indexPath.row];
-        objBalleventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
         
         //        if([bowlAndShortTypeRecord.BowlTypeCode  isEqualToString:objBalleventRecord.objBowltype])
         //        {
@@ -2947,7 +2946,7 @@
         isSpinSelected = NO;
         
         BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.fastBowlTypeArray objectAtIndex:indexPath.row];
-        objBalleventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
         
         
     }else if (tbl_aggressiveShot == tableView){
@@ -2956,7 +2955,7 @@
         
         BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.aggressiveShotTypeArray objectAtIndex:indexPath.row];
         
-        objBalleventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+        self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
     }else if (_tbl_defensive == tableView){
         isDefensiveSelected = YES;
         isAggressiveSelected = NO;
@@ -2964,7 +2963,7 @@
         
         BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.defensiveShotTypeArray objectAtIndex:indexPath.row];
         
-        objBalleventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+        self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
         
     }
     
