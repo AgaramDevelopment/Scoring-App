@@ -1482,12 +1482,52 @@
 
        CGPoint p = [aGesture locationInView:self.img_pichmap];
        NSLog(@"pointx=%f,pointY=%f",p.x,p.y);
-       float Xposition = p.x-20;
-       float Yposition = p.y-20;
+       float Xposition = p.x-25;
+       float Yposition = p.y-25;
        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition, 50, 50)];
-       //if(Xposition > 200 )
-       Img_ball.image =[UIImage imageNamed:@"ballImg"];
-       [self.img_pichmap addSubview:Img_ball];
+       if(Xposition > 175 && Yposition > 20 && Xposition < 430 && Yposition < 83)
+       {
+           if(Xposition>175 && Yposition > 20 && Xposition > 245 && Yposition >165)
+           {
+               NSLog(@"yorker wide0.0");
+           }
+           else if(Xposition >244 && Yposition > 20 && Xposition > 284 && Yposition >165)
+           {
+               NSLog(@"yorker outside off");
+           }
+           else if(Xposition >283 && Yposition > 20 && Xposition > 284 && Yposition >165)
+           {
+               NSLog(@"yorker outside off");
+           }
+
+          Img_ball.image =[UIImage imageNamed:@"ballImg"];
+           [self.img_pichmap addSubview:Img_ball];
+       }
+       else if ((Xposition > 166 && Yposition > 84 && Xposition < 440 && Yposition < 130))
+       {
+           Img_ball.image =[UIImage imageNamed:@"ballImg"];
+           [self.img_pichmap addSubview:Img_ball];
+       }
+       else if ((Xposition > 151 && Yposition > 143 && Xposition < 455 && Yposition < 208))
+       {
+           Img_ball.image =[UIImage imageNamed:@"ballImg"];
+           [self.img_pichmap addSubview:Img_ball];
+       }
+       else if ((Xposition > 137 && Yposition >220 && Xposition < 484 && Yposition < 243))
+       {
+           Img_ball.image =[UIImage imageNamed:@"ballImg"];
+           [self.img_pichmap addSubview:Img_ball];
+       }
+       else if ((Xposition > 115 && Yposition >355 && Xposition < 517 && Yposition < 500))
+       {
+           Img_ball.image =[UIImage imageNamed:@"ballImg"];
+           [self.img_pichmap addSubview:Img_ball];
+       }
+       else if ((Xposition > 83 && Yposition >516 && Xposition < 549 && Yposition < 608))
+       {
+           Img_ball.image =[UIImage imageNamed:@"ballImg"];
+           [self.img_pichmap addSubview:Img_ball];
+       }
        
     }
 -(void)selelectbtnPop_View:(UIButton *)btn_selection
