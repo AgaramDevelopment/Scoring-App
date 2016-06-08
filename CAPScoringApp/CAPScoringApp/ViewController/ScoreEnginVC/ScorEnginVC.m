@@ -24,6 +24,12 @@
 #import "AggressiveShotTypeCell.h"
 #import "FieldingFactorCell.h"
 
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
+//#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
+
 @interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate>
 {   //appeal System
     BOOL isEnableTbl;
@@ -1442,7 +1448,7 @@
     else if(selectBtnTag.tag==110)
     {
                 [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
-                [self.img_pichmap setImage:[UIImage imageNamed:@"pitchmap_img"]];
+                [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapLH"]];
                 UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickPichmapTapAction:)];
                 tapRecognizer.numberOfTapsRequired = 1;
                 tapRecognizer.numberOfTouchesRequired=1;
@@ -1460,13 +1466,13 @@
     }
     else if(selectBtnTag.tag==111)
     {
-        //        [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
-        //        [self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
-        //         _View_Appeal.hidden=YES;
-        //        self.view_bowlType.hidden = YES;
-        //        self.view_fastBowl.hidden = YES;
-        //        self.view_aggressiveShot.hidden = YES;
-        //        self.view_defensive.hidden = YES;
+                [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
+                [self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
+                 _View_Appeal.hidden=YES;
+                self.view_bowlType.hidden = YES;
+                self.view_fastBowl.hidden = YES;
+                self.view_aggressiveShot.hidden = YES;
+                self.view_defensive.hidden = YES;
         
         
     }
@@ -1485,48 +1491,310 @@
        float Xposition = p.x-25;
        float Yposition = p.y-25;
        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition, 50, 50)];
-       if(Xposition > 175 && Yposition > 20 && Xposition < 430 && Yposition < 83)
+       if(IS_IPAD_PRO)
        {
-           if(Xposition>175 && Yposition > 20 && Xposition > 245 && Yposition >165)
+       if(Xposition > 180 && Yposition > 68 && Xposition < 440 && Yposition < 128)
+       {
+
+          Img_ball.image =[UIImage imageNamed:@"RedBall"];
+           [self.img_pichmap addSubview:Img_ball];
+           _ballEventRecord.objPMX1=@1;
+           _ballEventRecord.objPMY1=@1;
+           _ballEventRecord.objPMX2=@(Xposition);
+           _ballEventRecord.objPMY2=@(Yposition);
+       }
+       else if ((Xposition > 168 && Yposition > 128 && Xposition < 451 && Yposition < 170))
+       {
+           if(Xposition > 171 && Yposition > 130 && Xposition < 260)
            {
                NSLog(@"yorker wide0.0");
+               
            }
-           else if(Xposition >244 && Yposition > 20 && Xposition > 284 && Yposition >165)
+         
+          else if(Xposition >260 && Yposition >130 && Xposition < 287)
            {
-               NSLog(@"yorker outside off");
+               NSLog(@"yorker outside LEG");
            }
-           else if(Xposition >283 && Yposition > 20 && Xposition > 284 && Yposition >165)
+          else if(Xposition >300 && Yposition >130 && Xposition < 323)
+          {
+              NSLog(@"yorker Middle");
+          }
+          else if(Xposition >330 && Yposition >130 && Xposition < 360)
+          {
+              NSLog(@"yorker outside off");
+          }
+          else if(Xposition >365 && Yposition >130 && Xposition < 448)
+          {
+              NSLog(@"yorker wide 0.0");
+          }
+
+
+           Img_ball.image =[UIImage imageNamed:@"RedBall"];
+           [self.img_pichmap addSubview:Img_ball];
+           _ballEventRecord.objPMX1=@1;
+           _ballEventRecord.objPMY1=@1;
+           _ballEventRecord.objPMX2=@(Xposition);
+           _ballEventRecord.objPMY2=@(Yposition);
+       }
+       else if ((Xposition > 160 && Yposition > 182 && Xposition < 468 && Yposition < 245))
+       {
+           if(Xposition > 160 && Yposition > 182 && Xposition < 232)
            {
-               NSLog(@"yorker outside off");
+               NSLog(@"Full wide0.0");
+           }
+           else if(Xposition >250 && Yposition >182 && Xposition < 284)
+           {
+               NSLog(@"full outside LEG");
            }
 
-          Img_ball.image =[UIImage imageNamed:@"ballImg"];
+           else if(Xposition >300 && Yposition >182 && Xposition < 329)
+           {
+               NSLog(@"full Middle");
+           }
+           else if(Xposition >335 && Yposition >182 && Xposition < 374)
+           {
+               NSLog(@"full outside off");
+           }
+           else if(Xposition >389 && Yposition >182 && Xposition < 462)
+           {
+               NSLog(@"full wide 0.0");
+           }
+           
+           Img_ball.image =[UIImage imageNamed:@"RedBall"];
            [self.img_pichmap addSubview:Img_ball];
+           _ballEventRecord.objPMX1=@1;
+           _ballEventRecord.objPMY1=@1;
+           _ballEventRecord.objPMX2=@(Xposition);
+           _ballEventRecord.objPMY2=@(Yposition);
        }
-       else if ((Xposition > 166 && Yposition > 84 && Xposition < 440 && Yposition < 130))
+       else if ((Xposition > 142 && Yposition >255 && Xposition < 488 && Yposition < 375))
        {
-           Img_ball.image =[UIImage imageNamed:@"ballImg"];
+           if(Xposition > 142 && Yposition > 255 && Xposition < 206)
+           {
+               NSLog(@"good wide0.0");
+           }
+           else if(Xposition >234 && Yposition >255 && Xposition < 269)
+           {
+               NSLog(@"good outside LEG");
+           }
+           
+           else if(Xposition >290 && Yposition >255 && Xposition < 332)
+           {
+               NSLog(@"good Middle");
+           }
+           else if(Xposition >340 && Yposition >255 && Xposition < 394)
+           {
+               NSLog(@"good outside off");
+           }
+           else if(Xposition >389 && Yposition >255 && Xposition < 480)
+           {
+               NSLog(@"good wide 0.0");
+           }
+           Img_ball.image =[UIImage imageNamed:@"RedBall"];
            [self.img_pichmap addSubview:Img_ball];
+           _ballEventRecord.objPMX1=@1;
+           _ballEventRecord.objPMY1=@1;
+           _ballEventRecord.objPMX2=@(Xposition);
+           _ballEventRecord.objPMY2=@(Yposition);
        }
-       else if ((Xposition > 151 && Yposition > 143 && Xposition < 455 && Yposition < 208))
+       else if ((Xposition > 116 && Yposition >381 && Xposition < 523 && Yposition < 522))
        {
-           Img_ball.image =[UIImage imageNamed:@"ballImg"];
+           if(Xposition > 120 && Yposition > 382 && Xposition < 173)
+           {
+               NSLog(@"short wide0.0");
+           }
+           else if(Xposition >214 && Yposition >384 && Xposition < 260)
+           {
+               NSLog(@"short outside LEG");
+           }
+           else if(Xposition >281 && Yposition >388 && Xposition < 341)
+           {
+               NSLog(@"short Middle");
+           }
+           else if(Xposition >346 && Yposition >392 && Xposition < 419)
+           {
+               NSLog(@"short outside off");
+           }
+           else if(Xposition >417 && Yposition >391 && Xposition < 514)
+           {
+               NSLog(@"short wide 0.0");
+           }
+           Img_ball.image =[UIImage imageNamed:@"RedBall"];
            [self.img_pichmap addSubview:Img_ball];
+           _ballEventRecord.objPMX1=@1;
+           _ballEventRecord.objPMY1=@1;
+           _ballEventRecord.objPMX2=@(Xposition);
+           _ballEventRecord.objPMY2=@(Yposition);
        }
-       else if ((Xposition > 137 && Yposition >220 && Xposition < 484 && Yposition < 243))
+       else if ((Xposition > 70 && Yposition >536 && Xposition < 540 && Yposition < 628))
        {
-           Img_ball.image =[UIImage imageNamed:@"ballImg"];
+           if(Xposition >89 && Yposition > 536 && Xposition < 148)
+           {
+               NSLog(@"Bouncer wide0.0");
+           }
+           else if(Xposition >185 && Yposition >536 && Xposition < 255)
+           {
+               NSLog(@"Bouncer outside LEG");
+           }
+           else if(Xposition >270 && Yposition >541 && Xposition < 350)
+           {
+               NSLog(@"Bouncer Middle");
+           }
+           else if(Xposition >359 && Yposition >539 && Xposition < 441)
+           {
+               NSLog(@"Bouncer outside off");
+           }
+           else if(Xposition >443 && Yposition >540 && Xposition < 535)
+           {
+               NSLog(@"Bouncer wide 0.0");
+           }
+           Img_ball.image =[UIImage imageNamed:@"RedBall"];
            [self.img_pichmap addSubview:Img_ball];
+           _ballEventRecord.objPMX1=@1;
+           _ballEventRecord.objPMY1=@1;
+           _ballEventRecord.objPMX2=@(Xposition);
+           _ballEventRecord.objPMY2=@(Yposition);
        }
-       else if ((Xposition > 115 && Yposition >355 && Xposition < 517 && Yposition < 500))
-       {
-           Img_ball.image =[UIImage imageNamed:@"ballImg"];
-           [self.img_pichmap addSubview:Img_ball];
        }
-       else if ((Xposition > 83 && Yposition >516 && Xposition < 549 && Yposition < 608))
-       {
-           Img_ball.image =[UIImage imageNamed:@"ballImg"];
-           [self.img_pichmap addSubview:Img_ball];
+       else{
+           if(Xposition >96 && Yposition > 27 && Xposition < 220 && Yposition < 60)
+           {
+               
+               Img_ball.image =[UIImage imageNamed:@"RedBall"];
+               [self.img_pichmap addSubview:Img_ball];
+               
+           }
+           else if ((Xposition > 90 && Yposition > 61 && Xposition < 255 && Yposition < 88))
+           {
+               if(Xposition > 90 && Yposition > 61 && Xposition < 135)
+               {
+                   NSLog(@"yorker wide0.0");
+                   
+               }
+               else if(Xposition >143 && Yposition >61 && Xposition < 158)
+               {
+                   NSLog(@"yorker outside LEG");
+               }
+               else if(Xposition >164 && Yposition >61 && Xposition < 180)
+               {
+                   NSLog(@"yorker Middle");
+               }
+               else if(Xposition >183 && Yposition >62 && Xposition < 203)
+               {
+                   NSLog(@"yorker outside off");
+               }
+               else if(Xposition >203 && Yposition >64 && Xposition < 255)
+               {
+                   NSLog(@"yorker wide 0.0");
+               }
+
+               Img_ball.image =[UIImage imageNamed:@"RedBall"];
+               [self.img_pichmap addSubview:Img_ball];
+           }
+           else if ((Xposition > 83 && Yposition > 93 && Xposition < 263 && Yposition < 128))
+           {
+               if(Xposition > 83 && Yposition > 93 && Xposition < 128)
+               {
+                   NSLog(@"Full wide0.0");
+               }
+               else if(Xposition >93 && Yposition >93 && Xposition < 158)
+               {
+                   NSLog(@"full outside LEG");
+               }
+               else if(Xposition >163 && Yposition >93 && Xposition < 184)
+               {
+                   NSLog(@"full Middle");
+               }
+               else if(Xposition >185 && Yposition >93 && Xposition < 211)
+               {
+                   NSLog(@"full outside off");
+               }
+               else if(Xposition >208 && Yposition >93 && Xposition < 262)
+               {
+                   NSLog(@"full wide 0.0");
+               }
+               Img_ball.image =[UIImage imageNamed:@"RedBall"];
+               [self.img_pichmap addSubview:Img_ball];
+           }
+           else if ((Xposition > 73 && Yposition > 134 && Xposition < 276 && Yposition < 200))
+           {
+               if(Xposition > 73 && Yposition > 134 && Xposition < 114)
+               {
+                   NSLog(@"good wide0.0");
+               }
+               else if(Xposition >130 && Yposition >134 && Xposition < 150)
+               {
+                   NSLog(@"good outside LEG");
+               }
+               else if(Xposition >159 && Yposition >134&& Xposition < 188)
+               {
+                   NSLog(@"good Middle");
+               }
+               else if(Xposition >187 && Yposition >134 && Xposition < 225)
+               {
+                   NSLog(@"good outside off");
+               }
+               else if(Xposition >215 && Yposition >134 && Xposition < 278)
+               {
+                   NSLog(@"good wide 0.0");
+               }
+               Img_ball.image =[UIImage imageNamed:@"RedBall"];
+               [self.img_pichmap addSubview:Img_ball];
+           }
+           else if ((Xposition > 60 && Yposition > 207 && Xposition < 293 && Yposition < 286))
+           {
+               if(Xposition > 60 && Yposition > 207 && Xposition < 96)
+               {
+                   NSLog(@"short wide0.0");
+               }
+               else if(Xposition >116 && Yposition >207 && Xposition < 145)
+               {
+                   NSLog(@"short outside LEG");
+               }
+               else if(Xposition >153 && Yposition >207 && Xposition < 193)
+               {
+                   NSLog(@"short Middle");
+               }
+               else if(Xposition >190 && Yposition >207 && Xposition < 238)
+               {
+                   NSLog(@"short outside off");
+               }
+               else if(Xposition >231 && Yposition >207 && Xposition < 295)
+               {
+                   NSLog(@"short wide 0.0");
+               }
+               Img_ball.image =[UIImage imageNamed:@"RedBall"];
+               [self.img_pichmap addSubview:Img_ball];
+           }
+           else if ((Xposition > 32 && Yposition > 293 && Xposition < 304 && Yposition < 341))
+           {
+               if(Xposition >32 && Yposition > 293 && Xposition < 85)
+               {
+                   NSLog(@"Bouncer wide0.0");
+               }
+               else if(Xposition >96 && Yposition >293 && Xposition < 138)
+               {
+                   NSLog(@"Bouncer outside LEG");
+               }
+               else if(Xposition >148 && Yposition >293 && Xposition < 197)
+               {
+                   NSLog(@"Bouncer Middle");
+               }
+               else if(Xposition >198 && Yposition >293 && Xposition < 251)
+               {
+                   NSLog(@"Bouncer outside off");
+               }
+               else if(Xposition >248 && Yposition >293 && Xposition < 308 )
+               {
+                   NSLog(@"Bouncer wide 0.0");
+               }
+               Img_ball.image =[UIImage imageNamed:@"RedBall"];
+               [self.img_pichmap addSubview:Img_ball];
+           }
+           _ballEventRecord.objPMX1=@1;
+           _ballEventRecord.objPMY1=@1;
+           _ballEventRecord.objPMX2=@(Xposition);
+           _ballEventRecord.objPMY2=@(Yposition);
        }
        
     }

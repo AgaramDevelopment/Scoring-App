@@ -401,12 +401,6 @@
     
 }
 
-
-
-
-
-
-
 -(void)colorChange{
     
     
