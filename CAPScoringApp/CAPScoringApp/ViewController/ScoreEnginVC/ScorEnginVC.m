@@ -150,7 +150,7 @@
     
     
     
-    
+  //_view_Wagon_wheel.hidden=YES;
     //bowl type - spin array
     _bowlTypeArray=[[NSMutableArray alloc]init];
     _bowlTypeArray =[DBManager getBowlType];
@@ -3561,4 +3561,56 @@
     [dic setValue:AppealBatsmenSelectCode forKey:@"AppealBatsmenSelct"];
     [dic setValue:commentText forKey:@"Commenttext"];
 }
+- (IBAction)WagonwheelTuch_btn:(id)sender forEvent:(UIEvent *)event {
+    
+    NSSet *touchSet = [event touchesForView:sender];
+    UITouch *touch = [touchSet anyObject];
+    CGPoint touchpoint = [touch locationInView:sender];
+    NSLog(@"Axis = %@",NSStringFromCGPoint(touchpoint));
+    
+    
+    UILabel* obj =[[UILabel alloc]initWithFrame:CGRectMake(touchpoint.x, touchpoint.y,10, 10)];
+    [obj setBackgroundColor:[UIColor redColor]];
+    
+    [self.view_DrawlineWagon addSubview:obj];
+    
+    
+    
+    int n = 360 - (atan2((125-touchpoint.y),(161-touchpoint.x)))*270/M_PI;
+    NSLog(@"n= %d",n);
+    
+    int wheelAngle = n%360;
+    NSLog(@"wh= %d",wheelAngle);
+    
+    for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
+        [layer removeFromSuperlayer];
+    }
+    
+    UIBezierPath *path = [UIBezierPath bezierPath];
+    [path moveToPoint:CGPointMake(160, 124)];
+    [path addLineToPoint:CGPointMake(touchpoint.x, touchpoint.y)];
+    
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    shapeLayer.path = [path CGPath];
+    shapeLayer.strokeColor = [[UIColor redColor] CGColor];
+    shapeLayer.lineWidth = 2.0;
+    shapeLayer.fillColor = [[UIColor clearColor] CGColor];
+    [self.img_WagonWheel.layer addSublayer:shapeLayer];
+    
+
+    
+}
+
+
+
+-(void) findPosition:(CGPoint *) cgpoint{
+    
+    int n = 360 - (atan2((124+1-cgpoint->x),(160+1-cgpoint->y)));
+    NSLog(@"n= %d",n);
+    
+    int wheelAngle = n%360;
+    NSLog(@"wh= %d",wheelAngle);
+    
+}
+
 @end

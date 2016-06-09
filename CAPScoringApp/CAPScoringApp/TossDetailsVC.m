@@ -87,7 +87,8 @@
     self.outlet_btn_proceed.enabled = NO;
 
     
-    
+//    self.radiobutton1 = [[RadioButton alloc] initWithGroupId:@"first group" index:0];
+//    RadioButton *rb2 = [[RadioButton alloc] initWithGroupId:@"first group" index:1];
      // self.outlet_btn_proceed.enabled = YES;
     
     // Do any additional setup after loading the view.
