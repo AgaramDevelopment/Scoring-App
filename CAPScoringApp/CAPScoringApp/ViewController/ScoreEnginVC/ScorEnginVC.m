@@ -1493,7 +1493,12 @@
        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition, 50, 50)];
        if(IS_IPAD_PRO)
        {
-       if(Xposition > 180 && Yposition > 68 && Xposition < 440 && Yposition < 128)
+        if(Xposition > 180 && Yposition > -18 && Xposition < 440 && Yposition < 128)
+        {
+            Img_ball.image =[UIImage imageNamed:@"RedBall"];
+            [self.img_pichmap addSubview:Img_ball];
+        }
+       else if(Xposition > 180 && Yposition > 5 && Xposition < 440 && Yposition < 128)
        {
 
           Img_ball.image =[UIImage imageNamed:@"RedBall"];
