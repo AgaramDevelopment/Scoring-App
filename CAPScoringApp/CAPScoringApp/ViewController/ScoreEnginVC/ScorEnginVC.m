@@ -150,7 +150,7 @@
     
     
     
-  //_view_Wagon_wheel.hidden=YES;
+  _view_Wagon_wheel.hidden=YES;
     //bowl type - spin array
     _bowlTypeArray=[[NSMutableArray alloc]init];
     _bowlTypeArray =[DBManager getBowlType];
@@ -1448,7 +1448,7 @@
     else if(selectBtnTag.tag==110)
     {
                 [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
-                [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapLH"]];
+                [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
                 UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickPichmapTapAction:)];
                 tapRecognizer.numberOfTapsRequired = 1;
                 tapRecognizer.numberOfTouchesRequired=1;
@@ -1467,8 +1467,14 @@
     else if(selectBtnTag.tag==111)
     {
                 [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
-                [self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
+                //[self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
                  _View_Appeal.hidden=YES;
+        UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickWagonWheelmapTapAction:)];
+        tapRecognizer.numberOfTapsRequired = 1;
+        tapRecognizer.numberOfTouchesRequired=1;
+        tapRecognizer.delegate=self;
+        [self.view_DrawlineWagon addGestureRecognizer:tapRecognizer];
+        [self.view_DrawlineWagon setUserInteractionEnabled:YES];
                 self.view_bowlType.hidden = YES;
                 self.view_fastBowl.hidden = YES;
                 self.view_aggressiveShot.hidden = YES;
@@ -1478,7 +1484,32 @@
     }
 }
 
-- (void)didClickPichmapTapAction:(UIGestureRecognizer *)aGesture
+
+-(void)didClickWagonWheelmapTapAction:(UIGestureRecognizer *)wagon_Wheelgesture
+{
+     CGPoint p = [wagon_Wheelgesture locationInView:self.view_DrawlineWagon];
+    float Xposition = p.x-23;
+    float Yposition = p.y-28;
+    CGMutablePathRef straightLinePath = CGPathCreateMutable();
+    CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+    CGPathAddLineToPoint(straightLinePath, NULL,self.view_DrawlineWagon.center.x-30,self.view_DrawlineWagon.center.y-115);
+    
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    shapeLayer.path = straightLinePath;
+    UIColor *fillColor = [UIColor redColor];
+    shapeLayer.fillColor = fillColor.CGColor;
+    UIColor *strokeColor = [UIColor redColor];
+    shapeLayer.strokeColor = strokeColor.CGColor;
+    shapeLayer.lineWidth = 2.0f;
+    shapeLayer.fillRule = kCAFillRuleNonZero;
+    [self.img_WagonWheel.layer addSublayer:shapeLayer];
+
+    
+}
+
+
+
+- (void)didClickPichmapTapAction:(UIGestureRecognizer *)pichmapGesture
    {
       
        if(Img_ball != nil)
@@ -1486,7 +1517,7 @@
            [Img_ball removeFromSuperview];
        }
 
-       CGPoint p = [aGesture locationInView:self.img_pichmap];
+       CGPoint p = [pichmapGesture locationInView:self.img_pichmap];
        NSLog(@"pointx=%f,pointY=%f",p.x,p.y);
        float Xposition = p.x-25;
        float Yposition = p.y-25;
@@ -3569,36 +3600,48 @@
     NSLog(@"Axis = %@",NSStringFromCGPoint(touchpoint));
     
     
-    UILabel* obj =[[UILabel alloc]initWithFrame:CGRectMake(touchpoint.x, touchpoint.y,10, 10)];
-    [obj setBackgroundColor:[UIColor redColor]];
+    //UILabel* obj =[[UILabel alloc]initWithFrame:CGRectMake(touchpoint.x, touchpoint.y,5, 56)];
+    //[obj setBackgroundColor:[UIColor redColor]];
     
-    [self.view_DrawlineWagon addSubview:obj];
+    //[self.view_DrawlineWagon addSubview:obj];
+       //CGFloat differenceXpoint=(161- touchpoint.x);
+   // CGFloat differenceYpoint=(125-touchpoint.y);
     
     
+//    int n = 360 - (atan2((125-touchpoint.y),(161-touchpoint.x)))*270/M_PI;
+//    NSLog(@"n= %d",n);
+//    
+//    int wheelAngle = n%360;
+//    NSLog(@"wh= %d",wheelAngle);
+//    
+//    for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
+//        [layer removeFromSuperlayer];
+//    }
+//    
+//    UIBezierPath *path = [UIBezierPath bezierPath];
+//    [path moveToPoint:CGPointMake(160, 124)];
+//    [path addLineToPoint:CGPointMake(touchpoint.x, touchpoint.y)];
+//    
+//    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+//    shapeLayer.path = [path CGPath];
+//    shapeLayer.strokeColor = [[UIColor redColor] CGColor];
+//    shapeLayer.lineWidth = 2.0;
+//    shapeLayer.fillColor = [[UIColor clearColor] CGColor];
+//    [self.img_WagonWheel.layer addSublayer:shapeLayer];
     
-    int n = 360 - (atan2((125-touchpoint.y),(161-touchpoint.x)))*270/M_PI;
-    NSLog(@"n= %d",n);
-    
-    int wheelAngle = n%360;
-    NSLog(@"wh= %d",wheelAngle);
-    
-    for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
-        [layer removeFromSuperlayer];
-    }
-    
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointMake(160, 124)];
-    [path addLineToPoint:CGPointMake(touchpoint.x, touchpoint.y)];
+    CGMutablePathRef straightLinePath = CGPathCreateMutable();
+    CGPathMoveToPoint(straightLinePath, NULL, touchpoint.x, touchpoint.y);
+    CGPathAddLineToPoint(straightLinePath, NULL,self.view_Wagon_wheel.center.x,self.view_Wagon_wheel.center.y);
     
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    shapeLayer.path = [path CGPath];
-    shapeLayer.strokeColor = [[UIColor redColor] CGColor];
-    shapeLayer.lineWidth = 2.0;
-    shapeLayer.fillColor = [[UIColor clearColor] CGColor];
+    shapeLayer.path = straightLinePath;
+    UIColor *fillColor = [UIColor redColor];
+    shapeLayer.fillColor = fillColor.CGColor;
+    UIColor *strokeColor = [UIColor redColor];
+    shapeLayer.strokeColor = strokeColor.CGColor;
+    shapeLayer.lineWidth = 0.5f;
+    shapeLayer.fillRule = kCAFillRuleNonZero;
     [self.img_WagonWheel.layer addSublayer:shapeLayer];
-    
-
-    
 }
 
 
