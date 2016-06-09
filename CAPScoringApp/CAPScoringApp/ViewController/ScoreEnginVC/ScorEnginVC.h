@@ -144,6 +144,7 @@
 @property (weak, nonatomic) IBOutlet UIView *view_bowlType;
 
 
+
 //fast bowl type
 @property (weak, nonatomic) IBOutlet UIView *view_fastBowl;
 @property (weak, nonatomic) IBOutlet UITableView *tbl_fastBowl;
@@ -176,11 +177,13 @@
 
 @property (weak, nonatomic) IBOutlet UIView *view_BallTicker;
 
+@property (strong, nonatomic) IBOutlet UIView *view_Wagon_wheel;
 
+@property (strong, nonatomic) IBOutlet UIImageView *img_WagonWheel;
 
-
-
-
+- (IBAction)WagonwheelTuch_btn:(id)sender forEvent:(UIEvent *)event;
+    
+@property (strong, nonatomic) IBOutlet UIView *view_DrawlineWagon;
 
 
 @end
