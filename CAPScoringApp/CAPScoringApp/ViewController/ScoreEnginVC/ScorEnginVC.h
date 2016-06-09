@@ -13,7 +13,11 @@
 
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;
+//@property(nonatomic,strong) NSMutableArray * strikerArray;
+//@property(nonatomic,strong) NSMutableArray *non_StrikerArray;
 
+
+@property(nonatomic,strong) NSString * BatmenStyle;
 
 @property (nonatomic,strong) IBOutlet UIView *CommonView;
 @property (nonatomic,strong) IBOutlet UIView *TopView;
