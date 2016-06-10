@@ -24,6 +24,7 @@
 #import "AggressiveShotTypeCell.h"
 #import "FieldingFactorCell.h"
 #import "TossDeatilsEvent.h"
+#import "WicketTypeRecord.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -84,14 +85,21 @@
     NSString * ballnoStr;
     NSDate * startBallTime;
     
-    
     FieldingFactorRecord *selectedfieldFactor;
     BowlerEvent *selectedfieldPlayer;
     NSString *selectedNRS;
-     UIImageView * Img_ball;
+    UIImageView * Img_ball;
     
-     NSString *wagonregiontext;
-     NSString *regioncode;
+    NSString *wagonregiontext;
+    NSString *regioncode;
+    
+    //wicket type
+    BOOL isWicketSelected;
+    int wicketOption;
+    WicketTypeRecord *selectedwickettype;
+    NSString *selectedStrikernonstriker;
+    NSString *selectedWicketEvent;
+    BowlerEvent *selectedwicketBowlerlist;
     
 }
 
@@ -132,6 +140,12 @@
 @property(nonatomic,strong) NSMutableArray *AppealBatsmenArray;
 @property(nonatomic,strong) NSMutableArray *AppealValuesArray;
 
+//wicketType
+@property (nonatomic,strong)NSMutableArray *WicketTypeArray;
+@property (nonatomic,strong)NSMutableArray *StrikerandNonStrikerArray;
+@property (nonatomic,strong)NSMutableArray *WicketEventArray;
+@property (nonatomic,strong)NSMutableArray *PlayerlistArray;
+
 
 @end
 
@@ -140,7 +154,7 @@
 @synthesize tbl_bowlType;
 @synthesize tbl_fastBowl;
 @synthesize tbl_aggressiveShot;
-//@synthesize tbl_fieldingfactor;
+
 
 //appeal
 @synthesize AppealSystemArray;
@@ -169,6 +183,7 @@
     _fastBowlTypeArray = [DBManager getBowlFastType];
     
     self.view_fastBowl.hidden = YES;
+    
     
     
     
@@ -228,6 +243,7 @@
     //OTW and RTW
     _otwRtwArray = [[NSMutableArray alloc]init];
     _otwRtwArray = [DBManager getOtwRtw];
+
     
     
     //RBW and Misc Filters
@@ -245,7 +261,10 @@
     isFastSelected = NO;
     isAggressiveSelected = NO;
     
+    isWicketSelected=NO;
+    
     fieldingOption = 0;
+    wicketOption = 0;
     
     //Fielding Factor
     //_fieldingfactorArray=[[NSMutableArray alloc]init];
@@ -507,6 +526,19 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    //wicket type
+    if(isWicketSelected && wicketOption == 1){
+        return [self.WicketTypeArray count];
+    }
+    if(isWicketSelected && wicketOption ==2){
+        return [self.StrikerandNonStrikerArray count];
+    }
+    if(isWicketSelected && wicketOption ==3){
+        return [self.WicketEventArray count];
+    }
+    if(isWicketSelected && wicketOption ==4){
+        return [self.PlayerlistArray count];
+    }
     
     //Fielding array
     if(isFieldingSelected && fieldingOption == 1)
@@ -583,6 +615,7 @@
         return [AppealBatsmenArray count];
     }
     
+    
     return 0;
 }
 
@@ -598,6 +631,94 @@
         cell.selectedBackgroundView = bgColorView;
         
         
+        //wicket type
+        if (isWicketSelected && wicketOption == 1){
+            
+            static NSString *CellIdentifier = @"fastBowlCell";
+            
+            FastBowlTypeCell *wicketTypeCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                                                forIndexPath:indexPath];
+            WicketTypeRecord *objFieldingFactorRecord=(WicketTypeRecord*)[_WicketTypeArray objectAtIndex:indexPath.row];
+            wicketTypeCell.lbl_fastBowl.text = objFieldingFactorRecord.metasubcodedescription;
+            self.lbl_fast1.text=@"Wicket Type";
+            
+            // this is where you set your color view
+            UIView *customColorView = [[UIView alloc] init];
+            customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                              green:161/255.0
+                                                               blue:79/255.0
+                                                              alpha:0.5];
+            wicketTypeCell.selectedBackgroundView =  customColorView;
+            
+            return wicketTypeCell;
+            
+            
+        }
+        if(isWicketSelected && wicketOption==2){
+            
+            static NSString *CellIdentifier = @"fastBowlCell";
+            
+            FastBowlTypeCell *strikerNonstrikerCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                                                forIndexPath:indexPath];
+            NSString *strikerandnonstriker=(NSString*)[_StrikerandNonStrikerArray objectAtIndex:indexPath.row];
+            strikerNonstrikerCell.lbl_fastBowl.text = strikerandnonstriker;
+            self.lbl_fast1.text=@"Batting Players";
+            // this is where you set your color view
+            UIView *customColorView = [[UIView alloc] init];
+            customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                              green:161/255.0
+                                                               blue:79/255.0
+                                                              alpha:0.5];
+            strikerNonstrikerCell.selectedBackgroundView =  customColorView;
+            return strikerNonstrikerCell;
+
+
+        }
+        if(isWicketSelected && wicketOption==3){
+            
+            static NSString *CellIdentifier = @"fastBowlCell";
+            
+            FastBowlTypeCell *wicketEventCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                                                      forIndexPath:indexPath];
+            NSString *wicketevent=(NSString*)[_WicketEventArray objectAtIndex:indexPath.row];
+            wicketEventCell.lbl_fastBowl.text = wicketevent;
+            self.lbl_fast1.text=@"Wicket Events";
+            // this is where you set your color view
+            UIView *customColorView = [[UIView alloc] init];
+            customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                              green:161/255.0
+                                                               blue:79/255.0
+                                                              alpha:0.5];
+            wicketEventCell.selectedBackgroundView =  customColorView;
+            return wicketEventCell;
+            
+            
+        }
+        if (isWicketSelected && wicketOption == 4){
+            
+            static NSString *CellIdentifier = @"fastBowlCell";
+            
+            FastBowlTypeCell *playerlistCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                                               forIndexPath:indexPath];
+            BowlerEvent *objPlayerlistRecord=(BowlerEvent*)[_PlayerlistArray objectAtIndex:indexPath.row];
+            playerlistCell.lbl_fastBowl.text = objPlayerlistRecord.BowlerName;
+            self.lbl_fast1.text=@"Bowlers";
+            
+            // this is where you set your color view
+            UIView *customColorView = [[UIView alloc] init];
+            customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                              green:161/255.0
+                                                               blue:79/255.0
+                                                              alpha:0.5];
+            playerlistCell.selectedBackgroundView =  customColorView;
+            
+            return playerlistCell;
+            
+            
+        }
+
+        
+        
         //Fielding factor
         if(isFieldingSelected && fieldingOption == 1)
         {
@@ -607,7 +728,7 @@
                                                                                 forIndexPath:indexPath];
             FieldingFactorRecord *objFieldingFactorRecord=(FieldingFactorRecord*)[_fieldingfactorArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = objFieldingFactorRecord.fieldingfactor;
-            
+            self.lbl_fast1.text=@"Fielding Factor";
             
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
@@ -626,7 +747,7 @@
                                                                                 forIndexPath:indexPath];
             BowlerEvent *bowlerEvent=(BowlerEvent*)[_fieldingPlayerArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = bowlerEvent.BowlerName;
-            
+            self.lbl_fast1.text=@"Bowlers";
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
             customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
@@ -644,6 +765,7 @@
                                                                                 forIndexPath:indexPath];
             NSString *nrs=(NSString*)[_nrsArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = nrs;
+            self.lbl_fast1.text=@"Net Run Saved";
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
             customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
@@ -831,6 +953,8 @@
         cell.textLabel.text =objAppealUmpireEventRecord.AppealUmpireName2;
         return cell;
     }
+    
+    
     
     
     if (tableView == self.table_BatsmenName)
@@ -1328,8 +1452,12 @@
         
     }
     
-    if(isFieldingSelected && isFieldingSelected>0){
+    if(isFieldingSelected && fieldingOption>0){
         fieldingOption = 0;
+    }
+    
+    if(isWicketSelected && wicketOption>0){
+        wicketOption = 0;
     }
     
     if (isRBWSelected) {
@@ -1392,9 +1520,70 @@
         //self.selectbtnvalueArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
         //[self selelectbtnPop_View:selectBtnTag];
     }
-    else if(selectBtnTag.tag==107)
+    else if(selectBtnTag.tag==107)   //wicket
     {
         //[self selectBtncolor_Action:@"107" :self.btn_wkts :0];
+        
+        
+       //self.view_bowlType.hidden = YES;
+        if(isWicketSelected){
+            
+           
+            selectedwickettype = nil;
+            
+            isWicketSelected = NO;
+            wicketOption = 0;
+            self.view_aggressiveShot.hidden = YES;
+            self.view_defensive.hidden = YES;
+            self.view_bowlType.hidden = YES;
+            self.view_fastBowl.hidden = YES;
+            [self unselectedButtonBg:selectBtnTag];
+            
+        }else{
+        
+            _WicketTypeArray=[[NSMutableArray alloc]init];
+            _WicketTypeArray =[DBManager RetrieveWicketType];
+            
+            [self selectedButtonBg:selectBtnTag];
+            
+            isWicketSelected = YES;
+            wicketOption = 1;
+            
+            self.view_aggressiveShot.hidden = YES;
+            self.view_defensive.hidden = YES;
+            self.view_bowlType.hidden = YES;
+            self.view_fastBowl.hidden = NO;
+            
+            [self.tbl_fastBowl reloadData];
+            
+//            if(selectedNRS!=nil){
+//                
+//                int indx=0;
+//                int selectePosition = -1;
+//                for (FieldingFactorRecord *record in _fieldingfactorArray)
+//                {
+//                    bool chk = ([[record fieldingfactorcode] isEqualToString:selectedfieldFactor.fieldingfactorcode]);
+//                    if (chk)
+//                    {
+//                        selectePosition = indx;
+//                        break;
+//                    }
+//                    indx ++;
+//                }
+//                
+//                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+//                [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+//                
+//                [tbl_fastBowl scrollToRowAtIndexPath:indexPath
+//                                    atScrollPosition:UITableViewScrollPositionTop
+//                                            animated:YES];
+//                
+//            }
+        }
+        
+    
+        
+        
     }
     else if(selectBtnTag.tag==108)//Overthrow
     {
@@ -2221,8 +2410,12 @@
     }
     
     
-    if(isFieldingSelected && isFieldingSelected>0){
+    if(isFieldingSelected && fieldingOption>0){
         fieldingOption = 0;
+    }
+    
+    if(isWicketSelected && wicketOption>0){
+        wicketOption = 0;
     }
     
     if (isRBWSelected) {
@@ -3410,6 +3603,148 @@
         isEnableTbl=YES;
     }
     
+    
+    
+    
+    //wicket type
+    if(isWicketSelected && wicketOption == 1)
+    {
+        selectedwickettype = [self.WicketTypeArray objectAtIndex:indexPath.row];
+        if([selectedwickettype.metasubcode isEqualToString:@"MSC097"]|| [selectedwickettype.metasubcode isEqualToString:@"MSC106"])
+        {
+            self.StrikerandNonStrikerArray=[[NSMutableArray alloc]initWithObjects:@"ABHINAV MUKHUND",@"APARAJITH BABA", nil];
+            isWicketSelected = YES;
+            wicketOption = 2;
+            
+            self.view_bowlType.hidden = YES;
+            self.view_fastBowl.hidden = NO;
+            
+            [self.tbl_fastBowl reloadData];
+            
+            if(selectedStrikernonstriker!=nil){
+                NSInteger position = [self.StrikerandNonStrikerArray indexOfObject:selectedStrikernonstriker];
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
+                [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                
+                [tbl_fastBowl scrollToRowAtIndexPath:indexPath
+                                    atScrollPosition:UITableViewScrollPositionTop
+                                            animated:YES];
+            }
+ 
+        } else{
+            self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Typical",@"Strong",@"Medium", nil];
+            
+            
+            isWicketSelected = YES;
+            wicketOption = 3;
+            
+            self.view_bowlType.hidden = YES;
+            self.view_fastBowl.hidden = NO;
+            
+            [self.tbl_fastBowl reloadData];
+            
+            if(selectedWicketEvent!=nil){
+                NSInteger position = [self.WicketEventArray indexOfObject:selectedWicketEvent];
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
+                [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                
+                [tbl_fastBowl scrollToRowAtIndexPath:indexPath
+                                    atScrollPosition:UITableViewScrollPositionTop
+                                            animated:YES];
+            }
+
+            
+        }
+    
+        
+    }else if(isWicketSelected && wicketOption == 2)
+    {
+        selectedStrikernonstriker = [self.StrikerandNonStrikerArray objectAtIndex:indexPath.row];
+        
+        self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Typical",@"Strong",@"Medium", nil];
+        isWicketSelected = YES;
+        wicketOption = 3;
+        
+        self.view_bowlType.hidden = YES;
+        self.view_fastBowl.hidden = NO;
+        
+        [self.tbl_fastBowl reloadData];
+        
+        if(selectedWicketEvent!=nil){
+            NSInteger position = [self.WicketEventArray indexOfObject:selectedWicketEvent];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
+            [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            
+            [tbl_fastBowl scrollToRowAtIndexPath:indexPath
+                                atScrollPosition:UITableViewScrollPositionTop
+                                        animated:YES];
+        }
+        
+        }else if(isWicketSelected && wicketOption == 3){
+        selectedWicketEvent = [self.WicketEventArray objectAtIndex:indexPath.row];
+            if([selectedwickettype.metasubcode isEqualToString:@"MSC097"]|| [selectedwickettype.metasubcode isEqualToString:@"MSC095"])
+            {
+        _PlayerlistArray=[[NSMutableArray alloc]init];
+        _PlayerlistArray =[DBManager RetrievePlayerData];
+        
+        isWicketSelected = YES;
+        wicketOption = 4;
+        
+        self.view_bowlType.hidden = YES;
+        self.view_fastBowl.hidden = NO;
+        
+        [self.tbl_fastBowl reloadData];
+        
+        if(selectedwicketBowlerlist!=nil){
+            
+            int indx=0;
+            int selectePosition = -1;
+            for (BowlerEvent *record in _PlayerlistArray)
+            {
+                bool chk = ([[record BowlerCode] isEqualToString:selectedwicketBowlerlist.BowlerCode]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    break;
+                }
+                indx ++;
+            }
+            
+            //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+            [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            
+            [tbl_fastBowl scrollToRowAtIndexPath:indexPath
+                                atScrollPosition:UITableViewScrollPositionTop
+                                        animated:YES];
+        }
+            }else{
+                wicketOption = 0;
+                self.view_bowlType.hidden = YES;
+                self.view_fastBowl.hidden = YES;
+                self.view_aggressiveShot.hidden = YES;
+                self.view_defensive.hidden =YES;
+                
+                isWicketSelected = NO;
+            }
+           
+    }else if(isWicketSelected && wicketOption == 4)
+    {
+        
+        selectedwicketBowlerlist = [self.PlayerlistArray objectAtIndex:indexPath.row];
+        
+        wicketOption = 0;
+        self.view_bowlType.hidden = YES;
+        self.view_fastBowl.hidden = YES;
+        self.view_aggressiveShot.hidden = YES;
+        self.view_defensive.hidden =YES;
+        
+        isWicketSelected = NO;
+    }
+    
+    
+
+   
     
     //Fielding Factor
     if(isFieldingSelected && fieldingOption == 1)
