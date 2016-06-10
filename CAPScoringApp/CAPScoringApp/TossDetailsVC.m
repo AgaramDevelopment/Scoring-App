@@ -404,6 +404,10 @@ return 1;
     
     if(isEnableTbl==YES)
     {
+        _Striker_lbl.text = @"";
+        _nonStriker_lbl.text = @"";
+        _Bowler_lbl.text = @"";
+        
         WonTossArray=[[NSMutableArray alloc]init];
         NSMutableArray * FetchTossWonArray =[DBManager checkTossDetailsWonby:MATCHCODE];
         for(int i=0; i < [FetchTossWonArray count]; i++)
@@ -435,7 +439,11 @@ return 1;
     
     
     if(isEnableTbl==YES)
-    {         ElectedToArray=[[NSMutableArray alloc]init];
+    {
+          _Striker_lbl.text = @"";
+          _nonStriker_lbl.text = @"";
+          _Bowler_lbl.text = @"";
+        ElectedToArray=[[NSMutableArray alloc]init];
         NSMutableArray * FetchElectedToArray =[DBManager Electedto];
         for(int i=0; i < [FetchElectedToArray count]; i++)
         {

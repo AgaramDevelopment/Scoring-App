@@ -173,6 +173,7 @@
 @property (weak, nonatomic) IBOutlet UIView *view_rtw;
 @property (weak, nonatomic) IBOutlet UIView *view_spin;
 @property (weak, nonatomic) IBOutlet UIView *view_fast;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_fast;
 
 @property (weak, nonatomic) IBOutlet UIView *view_aggressive;
 
@@ -189,6 +190,8 @@
 - (IBAction)WagonwheelTuch_btn:(id)sender forEvent:(UIEvent *)event;
     
 @property (strong, nonatomic) IBOutlet UIView *view_DrawlineWagon;
+
+@property (strong, nonatomic) IBOutlet UILabel *lbl_fast1;
 
 
 @end
