@@ -84,6 +84,7 @@
 
 
 @property(nonatomic,strong) IBOutlet UIView *commonleftrightview;
+@property(nonatomic,strong)  UILabel * PichMapTittle;
 
 // Buttons left property
 

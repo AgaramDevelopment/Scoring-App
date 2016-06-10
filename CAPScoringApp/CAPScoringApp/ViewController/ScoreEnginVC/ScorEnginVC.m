@@ -88,7 +88,7 @@
     FieldingFactorRecord *selectedfieldFactor;
     BowlerEvent *selectedfieldPlayer;
     NSString *selectedNRS;
-     UIImageView * Img_ball;
+    UIImageView* Img_ball;
     
      NSString *wagonregiontext;
      NSString *regioncode;
@@ -1283,7 +1283,7 @@
     {
         [objextras removeFromSuperview];
     }
-    
+    self.PichMapTittle.hidden=YES;
     //    if(extrasTableView !=nil){
     //        [extrasTableView removeFromSuperview];
     //    }
@@ -1474,6 +1474,15 @@
                 tapRecognizer.delegate=self;
                 [self.img_pichmap addGestureRecognizer:tapRecognizer];
                 [self.img_pichmap setUserInteractionEnabled:YES];
+        self.PichMapTittle =[[UILabel alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.origin.x-20,self.Allvaluedisplayview.frame.origin.y-75,self.Allvaluedisplayview.frame.size.width, 35)];
+        self.PichMapTittle.text=@"PICHMAP";
+        self.PichMapTittle.font=[UIFont fontWithName:@"RAJDHANI-MEDIUM" size:20];
+        self.PichMapTittle.textColor=[UIColor whiteColor];
+        self.PichMapTittle.textAlignment=NSTextAlignmentCenter;
+        self.PichMapTittle.backgroundColor=[UIColor colorWithRed:(49/255.0f) green:(72/255.0f) blue:(159/255.0f) alpha:1.0f];
+        self.PichMapTittle.hidden=NO;
+        [self.Allvaluedisplayview addSubview:self.PichMapTittle];
+        
         
                    _View_Appeal.hidden=YES;
                 self.view_bowlType.hidden = YES;
@@ -1566,22 +1575,23 @@
 
        CGPoint p = [pichmapGesture locationInView:self.img_pichmap];
        NSLog(@"pointx=%f,pointY=%f",p.x,p.y);
-       float Xposition = p.x-25;
-       float Yposition = p.y-25;
-       Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition, 50, 50)];
+       float Xposition = p.x-10;
+       float Yposition = p.y-10;
+      
        if(IS_IPAD_PRO)
        {
-        if(Xposition > 180 && Yposition > -18 && Xposition < 440 && Yposition < 128)
-        {
-            Img_ball.image =[UIImage imageNamed:@"RedBall"];
-            [self.img_pichmap addSubview:Img_ball];
-            _ballEventRecord.objPMX1=@1;
-            _ballEventRecord.objPMY1=@1;
-            _ballEventRecord.objPMX2=@(Xposition);
-            _ballEventRecord.objPMY2=@(Yposition);
-
-        }
-       else if(Xposition > 180 && Yposition > 5 && Xposition < 440 && Yposition < 128)
+        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
+//        if(Xposition > 180 && Yposition > -18 && Xposition < 440 && Yposition < 128)
+//        {
+//            Img_ball.image =[UIImage imageNamed:@"RedBall"];
+//            [self.img_pichmap addSubview:Img_ball];
+//            _ballEventRecord.objPMX1=@1;
+//            _ballEventRecord.objPMY1=@1;
+//            _ballEventRecord.objPMX2=@(Xposition);
+//            _ballEventRecord.objPMY2=@(Yposition);
+//
+//        }
+     if(Xposition > 205 && Yposition > 85 && Xposition < 455 && Yposition < 200)
        {
 
           Img_ball.image =[UIImage imageNamed:@"RedBall"];
@@ -1591,9 +1601,9 @@
            _ballEventRecord.objPMX2=@(Xposition);
            _ballEventRecord.objPMY2=@(Yposition);
        }
-       else if ((Xposition > 168 && Yposition > 128 && Xposition < 451 && Yposition < 170))
+       else if ((Xposition > 183 && Yposition > 200 && Xposition < 465 && Yposition < 238))
        {
-           if(Xposition > 171 && Yposition > 130 && Xposition < 260)
+           if(Xposition > 183 && Yposition > 200 && Xposition < 264)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1605,7 +1615,7 @@
                
            }
          
-          else if(Xposition >260 && Yposition >130 && Xposition < 287)
+          else if(Xposition >270 && Yposition >200 && Xposition < 304)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1615,13 +1625,13 @@
                   NSLog(@"yorker outside LEG");
                }
            }
-          else if(Xposition >300 && Yposition >130 && Xposition < 323)
+          else if(Xposition >310 && Yposition >200 && Xposition < 341)
           {
               
                  NSLog(@"yorker Middle");
               
           }
-          else if(Xposition >330 && Yposition >130 && Xposition < 360)
+          else if(Xposition >342 && Yposition >200 && Xposition < 377)
           {
               if([self.BatmenStyle isEqualToString:@"MSC013"])
               {
@@ -1631,7 +1641,7 @@
                   NSLog(@"yorker outside off");
               }
           }
-          else if(Xposition >365 && Yposition >130 && Xposition < 448)
+          else if(Xposition >375 && Yposition >200 && Xposition < 463)
           {
               if([self.BatmenStyle isEqualToString:@"MSC013"])
               {
@@ -1651,9 +1661,9 @@
            _ballEventRecord.objPMX2=@(Xposition);
            _ballEventRecord.objPMY2=@(Yposition);
        }
-       else if ((Xposition > 160 && Yposition > 182 && Xposition < 468 && Yposition < 245))
+       else if ((Xposition > 172 && Yposition > 240 && Xposition < 479 && Yposition < 290))
        {
-           if(Xposition > 160 && Yposition > 182 && Xposition < 232)
+           if(Xposition > 172 && Yposition > 240 && Xposition < 246)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1664,7 +1674,7 @@
                }
                
            }
-           else if(Xposition >250 && Yposition >182 && Xposition < 284)
+           else if(Xposition >265 && Yposition >240 && Xposition < 296)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1676,11 +1686,11 @@
                
            }
 
-           else if(Xposition >300 && Yposition >182 && Xposition < 329)
+           else if(Xposition >300 && Yposition >240 && Xposition < 343)
            {
                NSLog(@"full Middle");
            }
-           else if(Xposition >335 && Yposition >182 && Xposition < 374)
+           else if(Xposition >343 && Yposition >240 && Xposition < 390)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1691,7 +1701,7 @@
                }
                
            }
-           else if(Xposition >389 && Yposition >182 && Xposition < 462)
+           else if(Xposition >385 && Yposition >240 && Xposition < 479)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1711,9 +1721,9 @@
            _ballEventRecord.objPMX2=@(Xposition);
            _ballEventRecord.objPMY2=@(Yposition);
        }
-       else if ((Xposition > 142 && Yposition >255 && Xposition < 488 && Yposition < 375))
+       else if ((Xposition > 158 && Yposition >297 && Xposition < 505 && Yposition < 389))
        {
-           if(Xposition > 142 && Yposition > 255 && Xposition < 206)
+           if(Xposition > 158 && Yposition > 297 && Xposition < 223)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1724,7 +1734,7 @@
                }
               
            }
-           else if(Xposition >234 && Yposition >255 && Xposition < 269)
+           else if(Xposition >249 && Yposition >297 && Xposition < 290)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1735,11 +1745,11 @@
                }
             }
            
-           else if(Xposition >290 && Yposition >255 && Xposition < 332)
+           else if(Xposition >300 && Yposition >297 && Xposition < 350)
            {
                NSLog(@"good Middle");
            }
-           else if(Xposition >340 && Yposition >255 && Xposition < 394)
+           else if(Xposition >350 && Yposition >297 && Xposition < 409)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1750,7 +1760,7 @@
                }
                
            }
-           else if(Xposition >389 && Yposition >255 && Xposition < 480)
+           else if(Xposition >395 && Yposition >298 && Xposition < 505)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1769,9 +1779,9 @@
            _ballEventRecord.objPMX2=@(Xposition);
            _ballEventRecord.objPMY2=@(Yposition);
        }
-       else if ((Xposition > 116 && Yposition >381 && Xposition < 523 && Yposition < 522))
+       else if ((Xposition > 130 && Yposition >398 && Xposition < 535 && Yposition < 500))
        {
-           if(Xposition > 120 && Yposition > 382 && Xposition < 173)
+           if(Xposition > 130 && Yposition > 398 && Xposition < 192)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1782,7 +1792,7 @@
                }
               
            }
-           else if(Xposition >214 && Yposition >384 && Xposition < 260)
+           else if(Xposition >226 && Yposition >398 && Xposition < 275)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1792,11 +1802,11 @@
                    NSLog(@"short outside LEG");
                }
            }
-           else if(Xposition >281 && Yposition >388 && Xposition < 341)
+           else if(Xposition >291 && Yposition >398 && Xposition < 400)
            {
                NSLog(@"short Middle");
            }
-           else if(Xposition >346 && Yposition >392 && Xposition < 419)
+           else if(Xposition >356 && Yposition >398 && Xposition < 435)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1807,7 +1817,7 @@
                }
 
            }
-           else if(Xposition >417 && Yposition >391 && Xposition < 514)
+           else if(Xposition >423 && Yposition >398 && Xposition < 535)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1826,20 +1836,20 @@
            _ballEventRecord.objPMX2=@(Xposition);
            _ballEventRecord.objPMY2=@(Yposition);
        }
-       else if ((Xposition > 70 && Yposition >536 && Xposition < 540 && Yposition < 628))
+       else if ((Xposition > 100 && Yposition >500 && Xposition < 555 && Yposition < 578))
        {
-           if(Xposition >89 && Yposition > 536 && Xposition < 148)
+           if(Xposition >100 && Yposition > 500 && Xposition < 175)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"Bouncer wide0.0");
                }
                else{
-                   NSLog(@"short wide D.L");
+                   NSLog(@"Bouncer wide D.L");
                }
               
            }
-           else if(Xposition >185 && Yposition >536 && Xposition < 255)
+           else if(Xposition >196 && Yposition >500 && Xposition < 267)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1849,11 +1859,11 @@
                    NSLog(@"Bouncer outside LEG");
                }
             }
-           else if(Xposition >270 && Yposition >541 && Xposition < 350)
+           else if(Xposition >280 && Yposition >500 && Xposition < 363)
            {
                NSLog(@"Bouncer Middle");
            }
-           else if(Xposition >359 && Yposition >539 && Xposition < 441)
+           else if(Xposition >368 && Yposition >500 && Xposition < 455)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1864,7 +1874,7 @@
                }
 
             }
-           else if(Xposition >443 && Yposition >540 && Xposition < 535)
+           else if(Xposition >447 && Yposition >500 && Xposition < 553)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
@@ -1885,23 +1895,24 @@
        }
        }
        else{
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,15, 15)];
            
-           if(Xposition > 103 && Yposition > -19 && Xposition < 243 && Yposition < 60)
-           {
-               Img_ball.image =[UIImage imageNamed:@"RedBall"];
-               [self.img_pichmap addSubview:Img_ball];
-           }
+//           if(Xposition > 103 && Yposition > -19 && Xposition < 243 && Yposition < 60)
+//           {
+//               Img_ball.image =[UIImage imageNamed:@"RedBall"];
+//               [self.img_pichmap addSubview:Img_ball];
+//           }
            
-         else if(Xposition >96 && Yposition > 27 && Xposition < 243 && Yposition < 60)
+          if(Xposition >96 && Yposition > 37 && Xposition < 265 && Yposition < 105)
            {
                
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
                [self.img_pichmap addSubview:Img_ball];
                
            }
-           else if ((Xposition > 90 && Yposition > 61 && Xposition < 255 && Yposition < 88))
+           else if ((Xposition > 100 && Yposition > 93 && Xposition < 271 && Yposition < 128))
            {
-               if(Xposition > 90 && Yposition > 61 && Xposition < 135)
+               if(Xposition > 100 && Yposition > 93 && Xposition < 151)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -1911,7 +1922,7 @@
                        NSLog(@"yorker wide D.L");
                    }
                 }
-               else if(Xposition >143 && Yposition >61 && Xposition < 158)
+               else if(Xposition >156 && Yposition >105 && Xposition < 177)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -1922,11 +1933,11 @@
                    }
                    
                }
-               else if(Xposition >164 && Yposition >61 && Xposition < 180)
+               else if(Xposition >177 && Yposition >105 && Xposition < 198)
                {
                    NSLog(@"yorker Middle");
                }
-               else if(Xposition >183 && Yposition >62 && Xposition < 203)
+               else if(Xposition >198 && Yposition >105 && Xposition < 219)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -1937,7 +1948,7 @@
                    }
                   
                }
-               else if(Xposition >203 && Yposition >64 && Xposition < 255)
+               else if(Xposition >216 && Yposition >105 && Xposition < 270)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -1952,9 +1963,9 @@
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
                [self.img_pichmap addSubview:Img_ball];
            }
-           else if ((Xposition > 83 && Yposition > 93 && Xposition < 263 && Yposition < 128))
+           else if ((Xposition > 98 && Yposition > 127 && Xposition < 279 && Yposition < 160))
            {
-               if(Xposition > 83 && Yposition > 93 && Xposition < 128)
+               if(Xposition > 98 && Yposition > 127 && Xposition < 145)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -1964,7 +1975,7 @@
                        NSLog(@"Full wide D.L");
                    }
                }
-               else if(Xposition >93 && Yposition >93 && Xposition < 158)
+               else if(Xposition >93 && Yposition >127 && Xposition < 174)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -1975,11 +1986,11 @@
                    }
                    
                }
-               else if(Xposition >163 && Yposition >93 && Xposition < 184)
+               else if(Xposition >175 && Yposition >127 && Xposition < 197)
                {
                    NSLog(@"full Middle");
                }
-               else if(Xposition >185 && Yposition >93 && Xposition < 211)
+               else if(Xposition >198 && Yposition >127 && Xposition < 227)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -1990,7 +2001,7 @@
                    }
                   
                }
-               else if(Xposition >208 && Yposition >93 && Xposition < 262)
+               else if(Xposition >220 && Yposition >127 && Xposition < 281)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -2004,9 +2015,9 @@
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
                [self.img_pichmap addSubview:Img_ball];
            }
-           else if ((Xposition > 73 && Yposition > 134 && Xposition < 276 && Yposition < 200))
+           else if ((Xposition > 85 && Yposition > 160 && Xposition < 294 && Yposition < 217))
            {
-               if(Xposition > 73 && Yposition > 134 && Xposition < 114)
+               if(Xposition > 85 && Yposition > 160 && Xposition < 127)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -2017,7 +2028,7 @@
                    }
                   
                }
-               else if(Xposition >130 && Yposition >134 && Xposition < 150)
+               else if(Xposition > 130 && Yposition > 160 && Xposition < 166)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -2027,11 +2038,11 @@
                        NSLog(@"good outside LEG");
                    }
                }
-               else if(Xposition >159 && Yposition >134&& Xposition < 188)
+               else if(Xposition >162 && Yposition >160 && Xposition < 203)
                {
                    NSLog(@"good Middle");
                }
-               else if(Xposition >187 && Yposition >134 && Xposition < 225)
+               else if(Xposition >203 && Yposition >160 && Xposition < 239)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -2041,7 +2052,7 @@
                        NSLog(@"good outside off");
                    }
                }
-               else if(Xposition >215 && Yposition >134 && Xposition < 278)
+               else if(Xposition >215 && Yposition >134 && Xposition < 294)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -2055,9 +2066,9 @@
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
                [self.img_pichmap addSubview:Img_ball];
            }
-           else if ((Xposition > 60 && Yposition > 207 && Xposition < 293 && Yposition < 286))
+           else if ((Xposition > 70 && Yposition > 220 && Xposition < 315 && Yposition < 286))
            {
-               if(Xposition > 60 && Yposition > 207 && Xposition < 96)
+               if(Xposition > 70 && Yposition > 220 && Xposition < 111)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -2068,7 +2079,7 @@
                    }
                    
                }
-               else if(Xposition >116 && Yposition >207 && Xposition < 145)
+               else if(Xposition >125 && Yposition >220 && Xposition < 160)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -2079,11 +2090,11 @@
                    }
                   
                }
-               else if(Xposition >153 && Yposition >207 && Xposition < 193)
+               else if(Xposition >163 && Yposition >220 && Xposition < 210)
                {
                    NSLog(@"short Middle");
                }
-               else if(Xposition >190 && Yposition >207 && Xposition < 238)
+               else if(Xposition >207 && Yposition >220 && Xposition < 255)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -2094,7 +2105,7 @@
                    }
                    
                }
-               else if(Xposition >231 && Yposition >207 && Xposition < 295)
+               else if(Xposition >246 && Yposition >220 && Xposition < 315)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -2109,9 +2120,9 @@
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
                [self.img_pichmap addSubview:Img_ball];
            }
-           else if ((Xposition > 32 && Yposition > 293 && Xposition < 304 && Yposition < 341))
+           else if ((Xposition > 54 && Yposition > 288 && Xposition < 325 && Yposition < 331))
            {
-               if(Xposition >32 && Yposition > 293 && Xposition < 85)
+               if(Xposition >54 && Yposition > 288 && Xposition < 100)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -2122,7 +2133,7 @@
                    }
                    
                }
-               else if(Xposition >96 && Yposition >293 && Xposition < 138)
+               else if(Xposition >110 && Yposition >288 && Xposition < 156)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -2133,11 +2144,11 @@
                    }
 
                 }
-               else if(Xposition >148 && Yposition >293 && Xposition < 197)
+               else if(Xposition >159 && Yposition >290 && Xposition < 213)
                {
                    NSLog(@"Bouncer Middle");
                }
-               else if(Xposition >198 && Yposition >293 && Xposition < 251)
+               else if(Xposition >213 && Yposition >290 && Xposition < 268)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
@@ -2147,7 +2158,7 @@
                        NSLog(@"Bouncer outside off");
                    }
                }
-               else if(Xposition >248 && Yposition >293 && Xposition < 308 )
+               else if(Xposition >260 && Yposition >290 && Xposition < 325 )
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
