@@ -11,4 +11,5 @@
 @interface TossDeatilsEvent : NSObject
 @property(strong,nonatomic)NSString *PlaercodeStrike_nonStrike;
 @property(strong,nonatomic)NSString *PlaerNameStrike_nonStrike;
+@property(strong,nonatomic)NSString *batMenStyle;
 @end

@@ -11,4 +11,5 @@
 @implementation TossDeatilsEvent
 @synthesize PlaerNameStrike_nonStrike;
 @synthesize PlaercodeStrike_nonStrike;
+@synthesize batMenStyle;
 @end

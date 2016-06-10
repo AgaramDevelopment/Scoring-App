@@ -23,6 +23,7 @@
 #import "FastBowlTypeCell.h"
 #import "AggressiveShotTypeCell.h"
 #import "FieldingFactorCell.h"
+#import "TossDeatilsEvent.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -89,6 +90,9 @@
     NSString *selectedNRS;
      UIImageView * Img_ball;
     
+     NSString *wagonregiontext;
+     NSString *regioncode;
+    
 }
 
 
@@ -150,7 +154,7 @@
     
     
     
-  //_view_Wagon_wheel.hidden=YES;
+  _view_Wagon_wheel.hidden=YES;
     //bowl type - spin array
     _bowlTypeArray=[[NSMutableArray alloc]init];
     _bowlTypeArray =[DBManager getBowlType];
@@ -285,6 +289,10 @@
     self.view_fastBowl.hidden = YES;
     self.view_aggressiveShot.hidden = YES;
     self.view_defensive.hidden = YES;
+    [self.view_BallTicker setBackgroundColor:[UIColor colorWithRed:0
+                                                             green:0
+                                                              blue:0
+                                                             alpha:0.36]];
 }
 
 
@@ -321,6 +329,10 @@
     [self.view_batsmen .layer setMasksToBounds:YES];
     [_table_BatsmenName setHidden:YES];
     isEnableTbl=YES;
+//    TossDeatilsEvent*objEvent=(TossDeatilsEvent*)[self.strikerArray objectAtIndex:0];
+//    self.lbl_Batsmen1Name.text=objEvent.PlaerNameStrike_nonStrike;
+//    TossDeatilsEvent*objEvent1=(TossDeatilsEvent*)[self.non_StrikerArray objectAtIndex:0];
+//    self.lbl_Batsmen2Name.text=objEvent1.PlaerNameStrike_nonStrike;
     
 }
 -(void)SaveBallEventREcordvalue
@@ -883,7 +895,7 @@
     else
     {
         [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
-        self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+        self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
         self.btn_StartOver.userInteractionEnabled=YES;
         //        self.btn_StartBall.userInteractionEnabled=NO;
          [self SaveBallEventREcordvalue];
@@ -1326,7 +1338,7 @@
             self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
             
         }else{
-            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
             
         }
         [rbwTableview removeFromSuperview];
@@ -1336,7 +1348,7 @@
     
     if (ismiscFilters) {
         if(self.ballEventRecord.objIsbeaten.integerValue ==0 && self.ballEventRecord.objIswtb.integerValue ==0 && self.ballEventRecord.objIsuncomfort.integerValue ==0 && self.ballEventRecord.objIsreleaseshot.integerValue ==0){
-            self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Black
+            self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Black
             
             
         }else{
@@ -1397,7 +1409,7 @@
     {
         if (ismiscFilters) {
             if(self.ballEventRecord.objIsbeaten.integerValue ==0 && self.ballEventRecord.objIswtb.integerValue ==0 && self.ballEventRecord.objIsuncomfort.integerValue ==0 && self.ballEventRecord.objIsreleaseshot.integerValue ==0){
-                self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Black
+                self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Black
                 
                 
             }else{
@@ -1447,8 +1459,15 @@
     }
     else if(selectBtnTag.tag==110)
     {
+        
                 [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
-                [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapLH"]];
+             if([self.BatmenStyle isEqualToString:@"MSC013"])
+                {
+                    [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
+                }
+            else{
+                    [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapLH"]];
+                }
                 UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickPichmapTapAction:)];
                 tapRecognizer.numberOfTapsRequired = 1;
                 tapRecognizer.numberOfTouchesRequired=1;
@@ -1461,14 +1480,22 @@
                 self.view_fastBowl.hidden = YES;
                 self.view_aggressiveShot.hidden = YES;
                 self.view_defensive.hidden = YES;
+                self.view_Wagon_wheel.hidden=YES;
         
         
     }
     else if(selectBtnTag.tag==111)
     {
                 [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
-                [self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
+                //[self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
                  _View_Appeal.hidden=YES;
+          _view_Wagon_wheel.hidden=NO;
+        UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickWagonWheelmapTapAction:)];
+        tapRecognizer.numberOfTapsRequired = 1;
+        tapRecognizer.numberOfTouchesRequired=1;
+        tapRecognizer.delegate=self;
+        [self.view_DrawlineWagon addGestureRecognizer:tapRecognizer];
+        [self.view_DrawlineWagon setUserInteractionEnabled:YES];
                 self.view_bowlType.hidden = YES;
                 self.view_fastBowl.hidden = YES;
                 self.view_aggressiveShot.hidden = YES;
@@ -1478,7 +1505,58 @@
     }
 }
 
-- (void)didClickPichmapTapAction:(UIGestureRecognizer *)aGesture
+
+-(void)didClickWagonWheelmapTapAction:(UIGestureRecognizer *)wagon_Wheelgesture
+{
+     CGPoint p = [wagon_Wheelgesture locationInView:self.view_DrawlineWagon];
+    float Xposition = p.x-62;
+    float Yposition = p.y-85;
+    CGMutablePathRef straightLinePath = CGPathCreateMutable();
+    CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+    CGPathAddLineToPoint(straightLinePath, NULL,self.view_DrawlineWagon.center.x-62,self.view_DrawlineWagon.center.y-145);
+    
+    
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    shapeLayer.path = straightLinePath;
+    UIColor *fillColor = [UIColor redColor];
+    shapeLayer.fillColor = fillColor.CGColor;
+    UIColor *strokeColor = [UIColor redColor];
+    shapeLayer.strokeColor = strokeColor.CGColor;
+    shapeLayer.lineWidth = 2.0f;
+    shapeLayer.fillRule = kCAFillRuleNonZero;
+    
+    [self.img_WagonWheel.layer addSublayer:shapeLayer];
+    
+     if(IS_IPAD)
+     {
+         if ((Xposition  >= 35 && Yposition >= 65 && Xposition >=247 && Yposition >=59))
+             
+         {  if(Xposition  <= 113 && Yposition <= 21)
+         {
+             wagonregiontext = @"Long On";
+             regioncode = @"MSC178";
+             
+             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+         }
+             
+             if(Xposition  <= 111 && Yposition <= 88 &&Xposition  <= 112 && Yposition <= 87)
+             {
+                 wagonregiontext = @"Long off";
+                 regioncode = @"MSC178";
+                 
+                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+             }
+         }
+     }
+
+    
+    
+    
+}
+
+
+
+- (void)didClickPichmapTapAction:(UIGestureRecognizer *)pichmapGesture
    {
       
        if(Img_ball != nil)
@@ -1486,14 +1564,24 @@
            [Img_ball removeFromSuperview];
        }
 
-       CGPoint p = [aGesture locationInView:self.img_pichmap];
+       CGPoint p = [pichmapGesture locationInView:self.img_pichmap];
        NSLog(@"pointx=%f,pointY=%f",p.x,p.y);
        float Xposition = p.x-25;
        float Yposition = p.y-25;
        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition, 50, 50)];
        if(IS_IPAD_PRO)
        {
-       if(Xposition > 180 && Yposition > 68 && Xposition < 440 && Yposition < 128)
+        if(Xposition > 180 && Yposition > -18 && Xposition < 440 && Yposition < 128)
+        {
+            Img_ball.image =[UIImage imageNamed:@"RedBall"];
+            [self.img_pichmap addSubview:Img_ball];
+            _ballEventRecord.objPMX1=@1;
+            _ballEventRecord.objPMY1=@1;
+            _ballEventRecord.objPMX2=@(Xposition);
+            _ballEventRecord.objPMY2=@(Yposition);
+
+        }
+       else if(Xposition > 180 && Yposition > 5 && Xposition < 440 && Yposition < 128)
        {
 
           Img_ball.image =[UIImage imageNamed:@"RedBall"];
@@ -1507,25 +1595,52 @@
        {
            if(Xposition > 171 && Yposition > 130 && Xposition < 260)
            {
-               NSLog(@"yorker wide0.0");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"yorker wide0.0");
+               }
+               else{
+                    NSLog(@"yorker wide D.L");
+               }
                
            }
          
           else if(Xposition >260 && Yposition >130 && Xposition < 287)
            {
-               NSLog(@"yorker outside LEG");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                    NSLog(@"yorker outside OFF");
+               }
+           else{
+                  NSLog(@"yorker outside LEG");
+               }
            }
           else if(Xposition >300 && Yposition >130 && Xposition < 323)
           {
-              NSLog(@"yorker Middle");
+              
+                 NSLog(@"yorker Middle");
+              
           }
           else if(Xposition >330 && Yposition >130 && Xposition < 360)
           {
-              NSLog(@"yorker outside off");
+              if([self.BatmenStyle isEqualToString:@"MSC013"])
+              {
+                  NSLog(@"yorker outside LEG");
+              }
+          else{
+                  NSLog(@"yorker outside off");
+              }
           }
           else if(Xposition >365 && Yposition >130 && Xposition < 448)
           {
-              NSLog(@"yorker wide 0.0");
+              if([self.BatmenStyle isEqualToString:@"MSC013"])
+              {
+                  NSLog(@"yorker wide D.L");
+              }
+          else{
+              
+                  NSLog(@"yorker wide 0.0");
+              }
           }
 
 
@@ -1540,11 +1655,25 @@
        {
            if(Xposition > 160 && Yposition > 182 && Xposition < 232)
            {
-               NSLog(@"Full wide0.0");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"Full wide0.0");
+               }
+               else{
+                   NSLog(@"Full wide D.L");
+               }
+               
            }
            else if(Xposition >250 && Yposition >182 && Xposition < 284)
            {
-               NSLog(@"full outside LEG");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"full outside OFF");
+               }
+               else{
+                   NSLog(@"full outside LEG");
+               }
+               
            }
 
            else if(Xposition >300 && Yposition >182 && Xposition < 329)
@@ -1553,11 +1682,26 @@
            }
            else if(Xposition >335 && Yposition >182 && Xposition < 374)
            {
-               NSLog(@"full outside off");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"full outside LEG");
+               }
+               else{
+                   NSLog(@"full outside off");
+               }
+               
            }
            else if(Xposition >389 && Yposition >182 && Xposition < 462)
            {
-               NSLog(@"full wide 0.0");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"full wide D.L");
+               }
+               else{
+                   
+                   NSLog(@"full wide 0.0");
+               }
+              
            }
            
            Img_ball.image =[UIImage imageNamed:@"RedBall"];
@@ -1571,12 +1715,25 @@
        {
            if(Xposition > 142 && Yposition > 255 && Xposition < 206)
            {
-               NSLog(@"good wide0.0");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"good wide0.0");
+               }
+               else{
+                   NSLog(@"good wide D.L");
+               }
+              
            }
            else if(Xposition >234 && Yposition >255 && Xposition < 269)
            {
-               NSLog(@"good outside LEG");
-           }
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"good outside OFF");
+               }
+               else{
+                   NSLog(@"good outside LEG");
+               }
+            }
            
            else if(Xposition >290 && Yposition >255 && Xposition < 332)
            {
@@ -1584,11 +1741,26 @@
            }
            else if(Xposition >340 && Yposition >255 && Xposition < 394)
            {
-               NSLog(@"good outside off");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"good outside LEG");
+               }
+               else{
+                   NSLog(@"good outside off");
+               }
+               
            }
            else if(Xposition >389 && Yposition >255 && Xposition < 480)
            {
-               NSLog(@"good wide 0.0");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"good wide D.L");
+               }
+               else{
+                   
+                   NSLog(@"good wide 0.0");
+               }
+               //NSLog(@"good wide 0.0");
            }
            Img_ball.image =[UIImage imageNamed:@"RedBall"];
            [self.img_pichmap addSubview:Img_ball];
@@ -1601,11 +1773,24 @@
        {
            if(Xposition > 120 && Yposition > 382 && Xposition < 173)
            {
-               NSLog(@"short wide0.0");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"short wide0.0");
+               }
+               else{
+                   NSLog(@"short wide D.L");
+               }
+              
            }
            else if(Xposition >214 && Yposition >384 && Xposition < 260)
            {
-               NSLog(@"short outside LEG");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"short outside OFF");
+               }
+               else{
+                   NSLog(@"short outside LEG");
+               }
            }
            else if(Xposition >281 && Yposition >388 && Xposition < 341)
            {
@@ -1613,11 +1798,26 @@
            }
            else if(Xposition >346 && Yposition >392 && Xposition < 419)
            {
-               NSLog(@"short outside off");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"short outside LEG");
+               }
+               else{
+                   NSLog(@"short outside off");
+               }
+
            }
            else if(Xposition >417 && Yposition >391 && Xposition < 514)
            {
-               NSLog(@"short wide 0.0");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"short wide D.L");
+               }
+               else{
+                   
+                   NSLog(@"short wide 0.0");
+               }
+              
            }
            Img_ball.image =[UIImage imageNamed:@"RedBall"];
            [self.img_pichmap addSubview:Img_ball];
@@ -1630,23 +1830,51 @@
        {
            if(Xposition >89 && Yposition > 536 && Xposition < 148)
            {
-               NSLog(@"Bouncer wide0.0");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"Bouncer wide0.0");
+               }
+               else{
+                   NSLog(@"short wide D.L");
+               }
+              
            }
            else if(Xposition >185 && Yposition >536 && Xposition < 255)
            {
-               NSLog(@"Bouncer outside LEG");
-           }
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"Bouncer outside OFF");
+               }
+               else{
+                   NSLog(@"Bouncer outside LEG");
+               }
+            }
            else if(Xposition >270 && Yposition >541 && Xposition < 350)
            {
                NSLog(@"Bouncer Middle");
            }
            else if(Xposition >359 && Yposition >539 && Xposition < 441)
            {
-               NSLog(@"Bouncer outside off");
-           }
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"Bouncer outside LEG");
+               }
+               else{
+                   NSLog(@"Bouncer outside off");
+               }
+
+            }
            else if(Xposition >443 && Yposition >540 && Xposition < 535)
            {
-               NSLog(@"Bouncer wide 0.0");
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"Bouncer wide D.L");
+               }
+               else{
+                   
+                   NSLog(@"Bouncer wide 0.0");
+               }
+               
            }
            Img_ball.image =[UIImage imageNamed:@"RedBall"];
            [self.img_pichmap addSubview:Img_ball];
@@ -1657,7 +1885,14 @@
        }
        }
        else{
-           if(Xposition >96 && Yposition > 27 && Xposition < 220 && Yposition < 60)
+           
+           if(Xposition > 103 && Yposition > -19 && Xposition < 243 && Yposition < 60)
+           {
+               Img_ball.image =[UIImage imageNamed:@"RedBall"];
+               [self.img_pichmap addSubview:Img_ball];
+           }
+           
+         else if(Xposition >96 && Yposition > 27 && Xposition < 243 && Yposition < 60)
            {
                
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
@@ -1668,12 +1903,24 @@
            {
                if(Xposition > 90 && Yposition > 61 && Xposition < 135)
                {
-                   NSLog(@"yorker wide0.0");
-                   
-               }
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"yorker wide0.0");
+                   }
+                   else{
+                       NSLog(@"yorker wide D.L");
+                   }
+                }
                else if(Xposition >143 && Yposition >61 && Xposition < 158)
                {
-                   NSLog(@"yorker outside LEG");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"yorker outside OFF");
+                   }
+                   else{
+                       NSLog(@"yorker outside LEG");
+                   }
+                   
                }
                else if(Xposition >164 && Yposition >61 && Xposition < 180)
                {
@@ -1681,11 +1928,25 @@
                }
                else if(Xposition >183 && Yposition >62 && Xposition < 203)
                {
-                   NSLog(@"yorker outside off");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"yorker outside LEG");
+                   }
+                   else{
+                       NSLog(@"yorker outside off");
+                   }
+                  
                }
                else if(Xposition >203 && Yposition >64 && Xposition < 255)
                {
-                   NSLog(@"yorker wide 0.0");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"yorker wide D.L");
+                   }
+                   else{
+                       
+                       NSLog(@"yorker wide 0.0");
+                   }
                }
 
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
@@ -1695,11 +1956,24 @@
            {
                if(Xposition > 83 && Yposition > 93 && Xposition < 128)
                {
-                   NSLog(@"Full wide0.0");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"Full wide0.0");
+                   }
+                   else{
+                       NSLog(@"Full wide D.L");
+                   }
                }
                else if(Xposition >93 && Yposition >93 && Xposition < 158)
                {
-                   NSLog(@"full outside LEG");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"full outside OFF");
+                   }
+                   else{
+                       NSLog(@"full outside LEG");
+                   }
+                   
                }
                else if(Xposition >163 && Yposition >93 && Xposition < 184)
                {
@@ -1707,11 +1981,25 @@
                }
                else if(Xposition >185 && Yposition >93 && Xposition < 211)
                {
-                   NSLog(@"full outside off");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"full outside LEG");
+                   }
+                   else{
+                       NSLog(@"full outside off");
+                   }
+                  
                }
                else if(Xposition >208 && Yposition >93 && Xposition < 262)
                {
-                   NSLog(@"full wide 0.0");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"full wide D.L");
+                   }
+                   else{
+                       
+                       NSLog(@"full wide 0.0");
+                   }
                }
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
                [self.img_pichmap addSubview:Img_ball];
@@ -1720,11 +2008,24 @@
            {
                if(Xposition > 73 && Yposition > 134 && Xposition < 114)
                {
-                   NSLog(@"good wide0.0");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"good wide0.0");
+                   }
+                   else{
+                       NSLog(@"good wide D.L");
+                   }
+                  
                }
                else if(Xposition >130 && Yposition >134 && Xposition < 150)
                {
-                   NSLog(@"good outside LEG");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"good outside OFF");
+                   }
+                   else{
+                       NSLog(@"good outside LEG");
+                   }
                }
                else if(Xposition >159 && Yposition >134&& Xposition < 188)
                {
@@ -1732,11 +2033,24 @@
                }
                else if(Xposition >187 && Yposition >134 && Xposition < 225)
                {
-                   NSLog(@"good outside off");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"good outside LEG");
+                   }
+                   else{
+                       NSLog(@"good outside off");
+                   }
                }
                else if(Xposition >215 && Yposition >134 && Xposition < 278)
                {
-                   NSLog(@"good wide 0.0");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"good wide D.L");
+                   }
+                   else{
+                       
+                       NSLog(@"good wide 0.0");
+                   }
                }
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
                [self.img_pichmap addSubview:Img_ball];
@@ -1745,11 +2059,25 @@
            {
                if(Xposition > 60 && Yposition > 207 && Xposition < 96)
                {
-                   NSLog(@"short wide0.0");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"short wide0.0");
+                   }
+                   else{
+                       NSLog(@"short wide D.L");
+                   }
+                   
                }
                else if(Xposition >116 && Yposition >207 && Xposition < 145)
                {
-                   NSLog(@"short outside LEG");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"short outside OFF");
+                   }
+                   else{
+                       NSLog(@"short outside LEG");
+                   }
+                  
                }
                else if(Xposition >153 && Yposition >207 && Xposition < 193)
                {
@@ -1757,11 +2085,26 @@
                }
                else if(Xposition >190 && Yposition >207 && Xposition < 238)
                {
-                   NSLog(@"short outside off");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"short outside LEG");
+                   }
+                   else{
+                       NSLog(@"short outside off");
+                   }
+                   
                }
                else if(Xposition >231 && Yposition >207 && Xposition < 295)
                {
-                   NSLog(@"short wide 0.0");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"short wide D.L");
+                   }
+                   else{
+                       
+                       NSLog(@"short wide 0.0");
+                   }
+                   
                }
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
                [self.img_pichmap addSubview:Img_ball];
@@ -1770,23 +2113,50 @@
            {
                if(Xposition >32 && Yposition > 293 && Xposition < 85)
                {
-                   NSLog(@"Bouncer wide0.0");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"Bouncer wide0.0");
+                   }
+                   else{
+                       NSLog(@"Bouncer wide D.L");
+                   }
+                   
                }
                else if(Xposition >96 && Yposition >293 && Xposition < 138)
                {
-                   NSLog(@"Bouncer outside LEG");
-               }
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"Bouncer outside OFF");
+                   }
+                   else{
+                       NSLog(@"Bouncer outside LEG");
+                   }
+
+                }
                else if(Xposition >148 && Yposition >293 && Xposition < 197)
                {
                    NSLog(@"Bouncer Middle");
                }
                else if(Xposition >198 && Yposition >293 && Xposition < 251)
                {
-                   NSLog(@"Bouncer outside off");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"Bouncer outside LEG");
+                   }
+                   else{
+                       NSLog(@"Bouncer outside off");
+                   }
                }
                else if(Xposition >248 && Yposition >293 && Xposition < 308 )
                {
-                   NSLog(@"Bouncer wide 0.0");
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"Bouncer wide D.L");
+                   }
+                   else{
+                       
+                       NSLog(@"Bouncer wide 0.0");
+                   }
                }
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
                [self.img_pichmap addSubview:Img_ball];
@@ -1861,7 +2231,7 @@
             self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
             
         }else{
-            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
             
         }
         [rbwTableview removeFromSuperview];
@@ -1871,7 +2241,7 @@
     
     if (ismiscFilters) {
         if(self.ballEventRecord.objIsbeaten.integerValue ==0 && self.ballEventRecord.objIswtb.integerValue ==0 && self.ballEventRecord.objIsuncomfort.integerValue ==0 && self.ballEventRecord.objIsreleaseshot.integerValue ==0){
-            self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Black
+            self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Black
             
             
         }else{
@@ -1922,7 +2292,7 @@
         //View
         _view_spin.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
         
-        _view_fast.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        _view_fast.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         
         
         
@@ -1952,7 +2322,7 @@
         //View
         _view_fast.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
         
-        _view_spin.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        _view_spin.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         
         
     }
@@ -1981,7 +2351,7 @@
         //View
         _view_aggressive.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
         
-        _view_defense.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        _view_defense.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         
         
         
@@ -2012,7 +2382,7 @@
         //View
         _view_defense.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
         
-        _view_aggressive.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        _view_aggressive.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         
         
         
@@ -2035,7 +2405,7 @@
             self.view_fastBowl.hidden = YES;
             //[self unselectedButtonBg:selectBtnTag];
             
-            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(4/255.0f) alpha:1.0f];//Normal
             
         }else{
             //Fielding Factor
@@ -2088,7 +2458,7 @@
                 self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
                 
             }else{
-                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
                 
             }
             [rbwTableview removeFromSuperview];
@@ -2159,13 +2529,13 @@
         
         // _btn_OTW.selected = YES;
         
-        _view_otw.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        _view_otw.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         self.ballEventRecord.objAtworotw = nil;
         
         
     }else{
         _view_otw.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
-        _view_rtw.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        _view_rtw.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         self.ballEventRecord.objAtworotw = @"MSC148";
         
     }
@@ -2180,13 +2550,13 @@
         
         // _btn_OTW.selected = YES;
         
-        _view_rtw.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        _view_rtw.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         self.ballEventRecord.objAtworotw = nil;
         
         
     }else{
         _view_rtw.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
-        _view_otw.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+        _view_otw.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         self.ballEventRecord.objAtworotw = @"MSC149";
         
     }
@@ -2263,7 +2633,7 @@
                             if ([classStr isEqualToString:@"UIView"]) {
                                 UIView *button = (UIView*)obj;
                                 NSLog(@"tag=%ld",(long)button.tag);
-                                button.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+                                button.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
                             }
                         }
                         
@@ -2284,7 +2654,7 @@
             if ([classStr isEqualToString:@"UIView"]) {
                 UIView *button = (UIView*)obj;
                 NSLog(@"tag=%ld",(long)button.tag);
-                button.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+                button.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
                 if(button.tag== selectview)
                 {
                     
@@ -2716,7 +3086,7 @@
     //Normal background for view
     -(void) unselectedViewBg:(UIView *) view{
         
-       view.backgroundColor = [UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];//Normal
+       view.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
     }
 
 
@@ -2728,7 +3098,7 @@
 //Normal background for button
 -(void) unselectedButtonBg:(UIButton *) select_btn{
     
-    select_btn.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+    select_btn.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
 }
 
 //Disable background for button
@@ -3271,19 +3641,19 @@
         if( self.ballEventRecord.objRbw != [self.rbwOptionArray objectAtIndex:indexPath.row]){
             self.ballEventRecord.objRbw = [self.rbwOptionArray objectAtIndex:indexPath.row];
             [rbwTableview removeFromSuperview];
-            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
             isRBWSelected = NO;
             
             if(self.ballEventRecord.objRbw!=0){
                 self.view_Rbw.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
             }else{
-                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+                self.view_Rbw.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
             }
         }else{
             self.ballEventRecord.objRbw = [NSNumber numberWithInteger:0];
             [rbwTableview removeFromSuperview];
             
-            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
+            self.view_Rbw.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
             
             isRBWSelected = NO;
         }
@@ -3538,13 +3908,6 @@
 
 
 
-//
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//
-//}
-
-
 - (IBAction)btn_AppealSave:(id)sender {
     
     // UIColor colorWithRed:84 green:106 blue:126 alpha:0
@@ -3599,15 +3962,5 @@
 }
 
 
-
--(void) findPosition:(CGPoint *) cgpoint{
-    
-    int n = 360 - (atan2((124+1-cgpoint->x),(160+1-cgpoint->y)));
-    NSLog(@"n= %d",n);
-    
-    int wheelAngle = n%360;
-    NSLog(@"wh= %d",wheelAngle);
-    
-}
 
 @end

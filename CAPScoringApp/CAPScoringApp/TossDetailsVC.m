@@ -757,6 +757,8 @@ if (buttonIndex == 0 && alertView.tag == 1)
                 ScorEnginVC *scoreEngine =(ScorEnginVC*) [storyBoard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
                scoreEngine.matchCode=self.MATCHCODE;
                scoreEngine.competitionCode=self.CompetitionCode;
+              // scoreEngine.strikerArray  =Strikerselectindexarray;
+            //scoreEngine.non_StrikerArray =NonStrikerselectindexarray;
                 //Fixvc.CompitionCode=selectindexarray;
                 [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
                 [self presentViewController:scoreEngine animated:NO completion:nil];
