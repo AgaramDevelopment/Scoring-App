@@ -3563,12 +3563,14 @@
     CGPoint touchpoint = [touch locationInView:sender];
     NSLog(@"Axis = %@",NSStringFromCGPoint(touchpoint));
     
-    
-    UILabel* obj =[[UILabel alloc]initWithFrame:CGRectMake(touchpoint.x, touchpoint.y,10, 10)];
-    [obj setBackgroundColor:[UIColor redColor]];
-    
-    [self.view_DrawlineWagon addSubview:obj];
-    
+//    
+//    int angle = atan2(124 -touchpoint.y, 161 - touchpoint.x);
+//    CGFloat *hight=angle;
+//    
+//    UILabel* obj =[[UILabel alloc]initWithFrame:CGRectMake(touchpoint.x, touchpoint.y,10, *hight)];
+//    [obj setBackgroundColor:[UIColor redColor]];
+//    
+//    [self.view_DrawlineWagon addSubview:obj];
     
     
     int n = 360 - (atan2((125-touchpoint.y),(161-touchpoint.x)))*270/M_PI;
