@@ -88,7 +88,10 @@
     FieldingFactorRecord *selectedfieldFactor;
     BowlerEvent *selectedfieldPlayer;
     NSString *selectedNRS;
-    UIImageView* Img_ball;
+    UIImageView * Img_ball;
+    
+    NSString *wagonregiontext;
+    NSString *regioncode;
     
     //wicket type
     BOOL isWicketSelected;
