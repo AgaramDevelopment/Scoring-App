@@ -4328,4 +4328,12 @@
 }
 
 
+- (IBAction)btn_stricker_names:(id)sender {
+}
+- (IBAction)btn_nonstricker_name:(id)sender {
+}
+- (IBAction)btn_bowler_name:(id)sender {
+}
+- (IBAction)btn_last_bowler_name:(id)sender {
+}
 @end
