@@ -173,6 +173,12 @@
     
     [converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
+    _lbl_battingShrtName.text = converstion.BATTEAMSHORTNAME;
+    
+    _lbl_firstIngsTeamName.text = converstion.BATTEAMSHORTNAME;
+    
+    _lbl_secIngsTeamName.text = converstion.BOWLTEAMSHORTNAME;
+    
     
     
   _view_Wagon_wheel.hidden=YES;
