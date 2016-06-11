@@ -55,6 +55,8 @@
 @synthesize SHOTNAME;
 @synthesize SHOTTYPE;
 
+@synthesize BATTEAMRUNS;
+
 //@synthesize TEAMCODE;
 
 
@@ -76,7 +78,7 @@ BOOL  getOverStatus;
     
     NSString *selectedNRS;
     NSInteger *TEMPBATTEAMPENALTY;
-    NSInteger *BATTEAMRUNS;
+    //NSInteger *BATTEAMRUNS;
     NSInteger *BATTEAMPENALTY;
     NSInteger *BOWLTEAMPENALTY;
     NSInteger *BATTEAMWICKETS;
@@ -113,16 +115,6 @@ BOOL  getOverStatus;
     TEAMACODE= spteam.TEAMACODE;
     TEAMBCODE = spteam.TEAMBCODE;
     MATCHOVERS = spteam.MATCHOVERS;
-    
-    //    FetchSEPageLoadRecord *spteam = [[FetchSEPageLoadRecord alloc]init];
-    //    spteam.TEAMACODE =[_teamAndoverArray objectAtIndex:0];
-    //    spteam.TEAMBCODE = [_teamAndoverArray objectAtIndex:1];
-    //   spteam.MATCHOVERS =[_teamAndoverArray objectAtIndex:2];
-    //
-    
-    
-    
-    
     
     
     
@@ -380,84 +372,86 @@ BOOL  getOverStatus;
         
     }else if (inningsNo == 4 && (follow - 1)== 1){
         
-        TEMPBATTEAMPENALTY = &penalty;
+        TEMPBATTEAMPENALTY = penalty;
         
     }else{
-        TEMPBATTEAMPENALTY = &penaltyS;
+        TEMPBATTEAMPENALTY = penaltyS;
     }
-    BATTEAMRUNS = &grandscore;
+    
+   BATTEAMRUNS = grandscore;
     int tempBatteamRuns = (BATTEAMRUNS == nil ? 0: (int)BATTEAMRUNS);
+    
     int tempBatTeamPenalty =  (TEMPBATTEAMPENALTY == nil ? 0 :(int)TEMPBATTEAMPENALTY);
     
     BATTEAMRUNS = tempBatteamRuns + tempBatTeamPenalty;
     
     
     if (inningsNo == 1) {
-        BATTEAMPENALTY = &batPenalty;
+        BATTEAMPENALTY = batPenalty;
         BOWLTEAMPENALTY = 0;
         
     }else if (inningsNo == 2){
         
-        BATTEAMPENALTY = &penaltyDts;
+        BATTEAMPENALTY = penaltyDts;
         
         if ([self.MATCHTYPE isEqualToString: @"MSC023"] || [self.MATCHTYPE isEqualToString: @"MSC114"]) {
             
-            BOWLTEAMPENALTY = &penaltyBowl;
+            BOWLTEAMPENALTY = penaltyBowl;
             
         }else{
             
-            BOWLTEAMPENALTY = &penaltyInns;
+            BOWLTEAMPENALTY = penaltyInns;
         }
         
     }
     else if (inningsNo == 3) {
         
         if (follow == 1 ) {
-            BATTEAMPENALTY = &penaltyInnsTwo;
+            BATTEAMPENALTY = penaltyInnsTwo;
             
         }else
         {
-            BATTEAMPENALTY = &penaltyInThre;
+            BATTEAMPENALTY = penaltyInThre;
         }
         
-        BOWLTEAMPENALTY = &BowlingPnty;
+        BOWLTEAMPENALTY = BowlingPnty;
     }
     if (inningsNo == 4) {
         if (OnFollow == 1) {
-            BATTEAMPENALTY = &batpty;
+            BATTEAMPENALTY = batpty;
         }else{
-            BATTEAMPENALTY = &penaltyInThre;
+            BATTEAMPENALTY = penaltyInThre;
         }
-        BOWLTEAMPENALTY = &bowlPtyInnings;
+        BOWLTEAMPENALTY = bowlPtyInnings;
     }
     
-    BATTEAMWICKETS = &battingsWickets;
-    BATTEAMOVERS = &teamOvers;
-    BATTEAMOVRBALLS = &teamOvsBall;
+    BATTEAMWICKETS = battingsWickets;
+    BATTEAMOVERS = teamOvers;
+    BATTEAMOVRBALLS = teamOvsBall;
     
     
-    BATTEAMOVRWITHEXTRASBALLS = &teamExtBall;
+    BATTEAMOVRWITHEXTRASBALLS = teamExtBall;
     
     
     
     if (BATTEAMOVRBALLS == 0) {
-        PREVOVRBALLS = &preBall;
-        PREVOVRWITHEXTRASBALLS = &preExtBall;
-        PREVOVRBALLSCNT = &preCntBall;
+        PREVOVRBALLS = preBall;
+        PREVOVRWITHEXTRASBALLS = preExtBall;
+        PREVOVRBALLSCNT = preCntBall;
     }
-    BATTEAMOVRBALLSCNT = &batBallCnt;
+    BATTEAMOVRBALLSCNT = batBallCnt;
     
     
     
     if (teamBallCount) {
         
-        LASTBALLCODE = &lastBallCode;
+        LASTBALLCODE = lastBallCode;
         
         
     }else{
         if (BATTEAMOVRWITHEXTRASBALLS == 0) {
             
-            LASTBALLCODE = &lastBallCodeMinus;
+            LASTBALLCODE = lastBallCodeMinus;
             
         }
     }
@@ -480,7 +474,7 @@ BOOL  getOverStatus;
         
         ISPREVIOUSLEGALBALL = 1;
     }else{
-        ISPREVIOUSLEGALBALL = &legalBalls;
+        ISPREVIOUSLEGALBALL = legalBalls;
         
     }
     int totalBallData = (((int)ISOVERCOMPLETE == 1 ? (int)BATTEAMOVERS + 1 : (int)BATTEAMOVERS) * 6) + ((int)BATTEAMOVRBALLS > 6 ? 6: (int)BATTEAMOVRBALLS);

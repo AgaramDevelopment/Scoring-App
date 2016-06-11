@@ -179,6 +179,9 @@
     
     _lbl_secIngsTeamName.text = converstion.BOWLTEAMSHORTNAME;
     
+    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld",(unsigned long) converstion.BATTEAMRUNS];
+    
+    
     
     
   _view_Wagon_wheel.hidden=YES;
