@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -4103,6 +4103,9 @@
                                                                 <include reference="wJX-R8-SQL"/>
                                                             </mask>
                                                         </variation>
+                                                        <connections>
+                                                            <action selector="btn_stricker_names:" destination="uQF-Xu-t2R" eventType="touchUpInside" id="8Yc-cK-OGB"/>
+                                                        </connections>
                                                     </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="batImg" translatesAutoresizingMaskIntoConstraints="NO" id="VgF-S5-WuZ">
                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -4343,6 +4346,9 @@
                                                                 <include reference="KCm-jc-SlF"/>
                                                             </mask>
                                                         </variation>
+                                                        <connections>
+                                                            <action selector="btn_nonstricker_name:" destination="uQF-Xu-t2R" eventType="touchUpInside" id="ysw-jV-t2v"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Izf-on-Vwl">
                                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -4970,6 +4976,9 @@
                                                                 <include reference="mct-sB-ce5"/>
                                                             </mask>
                                                         </variation>
+                                                        <connections>
+                                                            <action selector="btn_bowler_name:" destination="uQF-Xu-t2R" eventType="touchUpInside" id="7YH-zg-FXo"/>
+                                                        </connections>
                                                     </button>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ballImg" translatesAutoresizingMaskIntoConstraints="NO" id="njO-Rx-OT5">
                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -5210,6 +5219,9 @@
                                                                 <include reference="SgE-m5-8Uf"/>
                                                             </mask>
                                                         </variation>
+                                                        <connections>
+                                                            <action selector="btn_last_bowler_name:" destination="uQF-Xu-t2R" eventType="touchUpInside" id="ulE-eT-0y9"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYq-ew-2lB">
                                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
@@ -5545,9 +5557,6 @@
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="160" y="1" width="440" height="118"/>
-                                                </variation>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBk-zT-YMj">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -5566,8 +5575,7 @@
                                                         <exclude reference="cIY-gc-wL3"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="1" width="150" height="122"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
                                                     <mask key="constraints">
                                                         <include reference="cIY-gc-wL3"/>
                                                     </mask>
@@ -8565,8 +8573,6 @@
                                                         <exclude reference="nr3-sR-794"/>
                                                         <exclude reference="s3d-MA-z9s"/>
                                                         <exclude reference="zbu-OH-0qB"/>
-                                                        <exclude reference="3tx-xz-BN2"/>
-                                                        <exclude reference="COW-6m-ZhJ"/>
                                                         <exclude reference="PeR-gH-qVa"/>
                                                         <exclude reference="pnQ-Gi-ZEp"/>
                                                         <exclude reference="sPq-93-g4N"/>
@@ -8604,8 +8610,6 @@
                                                         <include reference="nr3-sR-794"/>
                                                         <include reference="s3d-MA-z9s"/>
                                                         <include reference="zbu-OH-0qB"/>
-                                                        <include reference="3tx-xz-BN2"/>
-                                                        <include reference="COW-6m-ZhJ"/>
                                                         <include reference="PeR-gH-qVa"/>
                                                         <include reference="pnQ-Gi-ZEp"/>
                                                         <include reference="sPq-93-g4N"/>
@@ -8877,12 +8881,44 @@
                         <outlet property="commonleftrightview" destination="Ox6-sN-d81" id="qev-BE-3Yp"/>
                         <outlet property="height" destination="ddq-b9-eqD" id="c40-X5-oa5"/>
                         <outlet property="img_WagonWheel" destination="Hb9-Im-FDR" id="abW-Dx-KCa"/>
+                        <outlet property="img_firstIngsTeamName" destination="UTW-YE-qvT" id="u9E-4Z-on5"/>
                         <outlet property="img_pichmap" destination="HZu-QE-ye7" id="4L6-Q4-OXP"/>
+                        <outlet property="img_secIngsTeamName" destination="VLt-6c-Pza" id="Rfq-Tq-3d6"/>
                         <outlet property="lbl_Batsmen1Name" destination="5pe-eI-xRP" id="kXI-Za-G1d"/>
                         <outlet property="lbl_Batsmen2Name" destination="Izf-on-Vwl" id="gwz-dM-Gzr"/>
                         <outlet property="lbl_appealComponent" destination="bR9-fc-g16" id="QCS-Nd-izc"/>
                         <outlet property="lbl_appealsystem" destination="dY9-Kl-xna" id="c1o-4W-vM3"/>
                         <outlet property="lbl_batsmen" destination="2KT-CR-JCF" id="iHR-3J-OvQ"/>
+                        <outlet property="lbl_battingScoreWkts" destination="MnM-VB-f5c" id="CjT-vz-HbJ"/>
+                        <outlet property="lbl_battingShrtName" destination="X7O-bx-rHR" id="oHk-TN-dE0"/>
+                        <outlet property="lbl_bowler_balls" destination="u94-8k-psR" id="c9v-ab-J0u"/>
+                        <outlet property="lbl_bowler_fours" destination="KsN-2W-l8R" id="jCr-3U-IQJ"/>
+                        <outlet property="lbl_bowler_name" destination="cKY-rf-sD7" id="OCb-Fj-nuI"/>
+                        <outlet property="lbl_bowler_runs" destination="uts-Mf-AVl" id="qPr-KX-zbD"/>
+                        <outlet property="lbl_bowler_sixs" destination="uCS-DE-d96" id="XWx-gN-Tts"/>
+                        <outlet property="lbl_bowler_strickrate" destination="XpG-aw-6GN" id="oy3-5h-2tq"/>
+                        <outlet property="lbl_firstIngsTeamName" destination="TTq-cT-Pyi" id="laT-kp-IpY"/>
+                        <outlet property="lbl_last_bowler_balls" destination="8L7-74-trS" id="8D6-fi-k1s"/>
+                        <outlet property="lbl_last_bowler_fours" destination="FG1-3W-Uvk" id="jdE-db-TK6"/>
+                        <outlet property="lbl_last_bowler_name" destination="mus-RH-oA1" id="8Fn-fd-lWI"/>
+                        <outlet property="lbl_last_bowler_runs" destination="oYq-ew-2lB" id="KTl-jG-StV"/>
+                        <outlet property="lbl_last_bowler_sixs" destination="1Vi-nb-zA6" id="C9u-iE-Dp1"/>
+                        <outlet property="lbl_last_bowler_strickrate" destination="7T1-JD-0g5" id="tPo-FS-Nfg"/>
+                        <outlet property="lbl_nonstricker_balls" destination="qyc-re-Ihf" id="DOc-Cy-3kr"/>
+                        <outlet property="lbl_nonstricker_fours" destination="vWx-SH-kcB" id="aj7-QG-BZo"/>
+                        <outlet property="lbl_nonstricker_name" destination="Izf-on-Vwl" id="y83-jB-ShP"/>
+                        <outlet property="lbl_nonstricker_runs" destination="0HW-Do-Smd" id="azp-6C-dqd"/>
+                        <outlet property="lbl_nonstricker_sixs" destination="iDu-YW-NH0" id="hzP-Mn-zTJ"/>
+                        <outlet property="lbl_nonstricker_strickrate" destination="BuD-64-Ps6" id="NKu-xk-OQx"/>
+                        <outlet property="lbl_overs" destination="0vV-14-AWt" id="4Tw-RP-L8M"/>
+                        <outlet property="lbl_runRate" destination="Q4H-g0-kTh" id="PdH-OS-ZDM"/>
+                        <outlet property="lbl_secIngsTeamName" destination="cSq-jh-1Mv" id="fZZ-cO-db1"/>
+                        <outlet property="lbl_stricker_balls" destination="G7G-gK-Z3q" id="y0P-Hb-ysP"/>
+                        <outlet property="lbl_stricker_fours" destination="Qqq-vY-1co" id="aMO-gD-4jl"/>
+                        <outlet property="lbl_stricker_name" destination="5pe-eI-xRP" id="pyI-ux-yH7"/>
+                        <outlet property="lbl_stricker_runs" destination="xCt-W8-Uti" id="0ka-gB-UN8"/>
+                        <outlet property="lbl_stricker_sixs" destination="WKy-3Z-zJ4" id="vdO-AQ-5p8"/>
+                        <outlet property="lbl_stricker_strickrate" destination="fZb-Cm-pDs" id="qVj-90-IWn"/>
                         <outlet property="lbl_umpirename" destination="sUV-S7-KRQ" id="mPg-Nz-1hr"/>
                         <outlet property="leftsideview" destination="c52-76-qBe" id="R3O-R6-g4I"/>
                         <outlet property="selectBatsmenName" destination="gNa-HE-7T4" id="UBt-R3-sKR"/>

@@ -25,6 +25,8 @@
 #import "FieldingFactorCell.h"
 #import "TossDeatilsEvent.h"
 #import "WicketTypeRecord.h"
+#import "FetchSEPageLoadRecord.h"
+
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -165,6 +167,20 @@
     [super viewDidLoad];
     
    // [self resetBallObject];
+    
+    FetchSEPageLoadRecord *converstion = [[FetchSEPageLoadRecord alloc]init];
+    
+    
+    [converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
+    _lbl_battingShrtName.text = converstion.BATTEAMSHORTNAME;
+    
+    _lbl_firstIngsTeamName.text = converstion.BATTEAMSHORTNAME;
+    
+    _lbl_secIngsTeamName.text = converstion.BOWLTEAMSHORTNAME;
+    
+    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld",(unsigned long) converstion.BATTEAMRUNS];
+    
     
     
     
@@ -5198,4 +5214,12 @@
 }
 
 
+- (IBAction)btn_stricker_names:(id)sender {
+}
+- (IBAction)btn_nonstricker_name:(id)sender {
+}
+- (IBAction)btn_bowler_name:(id)sender {
+}
+- (IBAction)btn_last_bowler_name:(id)sender {
+}
 @end
