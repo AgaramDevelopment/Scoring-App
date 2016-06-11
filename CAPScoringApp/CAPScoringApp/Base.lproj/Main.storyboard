@@ -8447,6 +8447,9 @@
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="fzf-fB-i9h">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="-4"/>
                                                                     </constraint>
+                                                                    <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="Cdi-ih-iVb">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="12"/>
+                                                                    </constraint>
                                                                 </constraints>
                                                                 <variation key="default">
                                                                     <mask key="subviews">
