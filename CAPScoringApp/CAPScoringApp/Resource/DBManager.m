@@ -27,6 +27,7 @@
 #import "WicketTypeRecord.h"
 #import "FetchSEPageLoadRecord.h"
 #import "Breaks.h"
+#import "EndInnings.h"
 
 @implementation DBManager
 
@@ -5845,7 +5846,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return @"";
 }
 
-+(BOOL) InsertInningsEvents:(NSString*) COMPETITIONCODE:(NSString*) INNINGSNO:(NSString*) MATCHCODE:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMMENTS:(NSString*) BREAKNO:(NSString*) ISINCLUDEDURATION
++(BOOL) InsertInningsBreakEvents:(NSString*) COMPETITIONCODE:(NSString*) INNINGSNO:(NSString*) MATCHCODE:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMMENTS:(NSString*) BREAKNO:(NSString*) ISINCLUDEDURATION
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -6280,58 +6281,850 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return @"";
 }
 
-+(void) InsertBreaks:(NSString *)COMPETITIONCODE:(NSString*)INNINGSNO:(NSString*)MATCHCODE:(NSString*)BREAKSTARTTIME:(NSString*)BREAKENDTIME:
-(NSString*)COMMENTS:(NSString*)ISINCLUDEDURATION:(NSString*)BREAKNO
-{
-    
-    if([DBManager GetMatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE].length !=0)
-    {
-        if([DBManager GetCompetitionCodeForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : COMMENTS : ISINCLUDEDURATION : BREAKNO])
-        {
-            if([DBManager MatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE : INNINGSNO])
-            {
-                bool*insertstatus=[DBManager InsertInningsEvents : COMPETITIONCODE : INNINGSNO : MATCHCODE : BREAKSTARTTIME : BREAKENDTIME : COMMENTS : BREAKNO : ISINCLUDEDURATION];
-            }
-        }
-    }
-    
-    NSMutableArray*BreaksArray=[DBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
-    NSString* MAXBREAKNO =[DBManager GetMaxBreakNoForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
-}
+//SP_INSERTENDINNINGS
 
-//SP_UPDATEBREAKS
-+(void) UpdateBreaks:(NSString *)COMPETITIONCODE:(NSString*)INNINGSNO:(NSString*)MATCHCODE:(NSString*)BREAKSTARTTIME:(NSString*)BREAKENDTIME:
-(NSString*)COMMENTS:(NSString*)ISINCLUDEDURATION:(NSString*)BREAKNO;
-{
++(NSString*) GetMatchTypeUsingCompetition:(NSString*) COMPETITIONCODE{
     
-    if([DBManager GetMatchCodeForUpdateBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE].length !=0)
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        if([DBManager GetCompetitionCodeForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : COMMENTS : ISINCLUDEDURATION : BREAKNO])
-        {
-            if([DBManager GetBreakNoForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKNO ])
-            {
-                bool updatestatus=[DBManager UpdateInningsBreakEvents : BREAKSTARTTIME : BREAKENDTIME : COMMENTS : ISINCLUDEDURATION : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
-            }
-        }
-    }
-    
-    NSMutableArray*UpdateBreaksArray=[DBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
-    BREAKNO =[DBManager GetMaxBreakNoForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
-}
-
-//SP_DELETEBREAKS
-+(void) DeleteBreaks:(NSString *)COMPETITIONCODE:(NSString*)INNINGSNO:(NSString*)MATCHCODE:(NSString*)COMMENTS:(NSString*)BREAKNO
-
-{
-    
-    if([DBManager GetCompetitionCodeForDeleteBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO].length !=0)
-    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHTYPE FROM COMPETITION where COMPETITIONCODE = '%@'",COMPETITIONCODE];
         
-        bool deletestatus=[DBManager DeleteInningsBreakEvents : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *MATCHTYPE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return MATCHTYPE;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
     }
+    sqlite3_reset(statement);
+    return @"";
     
-    NSMutableArray*DeleteBreaksArray=[DBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
-    BREAKNO =[DBManager GetMaxBreakNoForDeleteBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+}
+
++(NSMutableArray *) GetInningsDetails:(NSString*) MATCHCODE
+{
+    NSMutableArray *InningsArray=[[NSMutableArray alloc]init];
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT STARTTIME,ENDTIME,TEAMNAME,TOTALRUNS,TOTALOVERS,TOTALWICKETS,INNINGSNO,BATTINGTEAMCODE,DAYDURATION,INNINGSDURATION,CASE WHEN DAYDURATION IS NULL THEN CAST(INNINGSDURATION AS NVARCHAR)+' MINS'  ELSE CAST(DAYDURATION AS NVARCHAR)+' MINS' END AS DURATION FROM (SELECT IE.INNINGSSTARTTIME AS STARTTIME,IE.INNINGSENDTIME AS ENDTIME,DATEDIFF(MINUTE,IE.INNINGSSTARTTIME,IE.INNINGSENDTIME) AS INNINGSDURATION,CASE WHEN DE.STARTTIME!=NULL THEN SUM(DATEDIFF(MINUTE,DE.STARTTIME,DE.ENDTIME)) ELSE SUM(DATEDIFF(MINUTE,DE.STARTTIME,DE.ENDTIME)) END AS DAYDURATION,TM.TEAMNAME,IE.TOTALRUNS,IE.TOTALOVERS,IE.TOTALWICKETS,IE.INNINGSNO,IE.BATTINGTEAMCODE FROM   INNINGSEVENTS IE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=IE.BATTINGTEAMCODE LEFT JOIN DAYEVENTS DE ON DE.MATCHCODE=IE.MATCHCODE AND DE.BATTINGTEAMCODE=IE.BATTINGTEAMCODE AND DE.INNINGSNO=IE.INNINGSNO WHERE IE.MATCHCODE='%@' AND IE.INNINGSSTATUS='1' GROUP BY IE.INNINGSSTARTTIME, IE.INNINGSENDTIME,   TM.TEAMNAME, IE.TOTALRUNS,IE.TOTALOVERS,IE.TOTALWICKETS,IE.INNINGSNO,IE.BATTINGTEAMCODE )  DETAILS ORDER BY INNINGSNO;",MATCHCODE];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                InningsDetails *record=[[InningsDetails alloc]init];
+                record.STARTTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.ENDTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record.TEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record.TOTALRUNS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.TOTALOVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record.TOTALWICKETS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                record.INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                record.BATTINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record.DAYDURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                record.INNINGSDURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                record.DURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                [InningsArray addObject:record];
+            }
+            
+        }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return InningsArray;
+}
++(NSString*) GetDayNoForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT DAYNO AS DAYNO FROM DAYEVENTS WHERE COMPETITIONCODE='%@'AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *DAYNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return DAYNO;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(NSString*) GetMaxDayNoForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MAX(DAYNO) AS DAYNO FROM DAYEVENTS WHERE COMPETITIONCODE='%@'AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *DAYNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return DAYNO;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
++(NSString*) GetSessionNoForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) OLDINNINGSNO: (NSString*) DAYNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MAX(SESSIONNO) AS SESSIONNO FROM BALLEVENTSWHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND INNINGSNO='%@' AND DAYNO='%@'",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO,DAYNO];
+				    
+        
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *SESSIONNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return SESSIONNO;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(NSNumber*) GetStartoverNoForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) OLDTEAMCODE:(NSString*) SESSIONNO: (NSString*) OLDINNINGSNO: (NSString*) DAYNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MIN(OVERNO) AS STARTOVER FROM BALLEVENTSWHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND SESSIONNO='%@' AND INNINGSNO='%@' AND DAYNO='%@'",COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,SESSIONNO,OLDINNINGSNO,DAYNO];
+        
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSNumber *STARTOVER = [NSNumber numberWithInteger: [[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)] integerValue]];
+                
+                return STARTOVER;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
++(NSNumber*) GetBallNoForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) OLDTEAMCODE:(NSString*) SESSIONNO: (NSString*) OLDINNINGSNO: (NSString*) STARTOVERNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MIN(BALLNO) AS STARTOVERBALLNO FROM BALLEVENTSWHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND SESSIONNO='%@' AND INNINGSNO='%@' AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,SESSIONNO,OLDINNINGSNO,STARTOVERNO];
+        
+        
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSNumber *STARTOVERBALLNO = [NSNumber numberWithInteger: [[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)] integerValue]];
+                
+                return STARTOVERBALLNO;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(NSNumber*) GetRunScoredForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) OLDTEAMCODE:(NSString*) SESSIONNO: (NSString*) OLDINNINGSNO: (NSString*) DAYNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT  ISNULL(SUM(GRANDTOTAL) ,0) AS RUNSSCORED FROM BALLEVENTSWHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND SESSIONNO='%@' AND INNINGSNO='%@' AND DAYNO='%@'",COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,SESSIONNO,OLDINNINGSNO,DAYNO];
+        
+        
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSNumber *RUNSSCORED = [NSNumber numberWithInteger: [[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)] integerValue]];
+                
+                return RUNSSCORED;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
++(NSString*) GetWicketLostForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) OLDTEAMCODE:(NSString*) OLDINNINGSNO:(NSString*) SESSIONNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRAWICKETCOUNT  FROM BALLEVENTS BALL  LEFT JOIN WICKETEVENTS WKT ON BALL.COMPETITIONCODE = WKT.COMPETITIONCODE AND BALL.MATCHCODE = WKT.MATCHCODE AND BALL.INNINGSNO = WKT.INNINGSNO AND BALL.TEAMCODE = WKT.TEAMCODE AND BALL.BALLCODE = WKT.BALLCODE WHERE BALL.COMPETITIONCODE='%@' AND BALL.MATCHCODE='%@' AND BALL.TEAMCODE='%@' AND BALL.INNINGSNO='%@' AND BALL.SESSIONNO ='%@'",COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,OLDINNINGSNO,SESSIONNO];
+        
+        
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *EXTRAWICKETCOUNT =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return EXTRAWICKETCOUNT;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(NSString*) GetCompetitioncodeForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) OLDINNINGSNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT COMPETITIONCODE FROM INNINGSEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND  INNINGSNO='%@' AND INNINGSSTATUS='0'  ",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *COMPETITIONCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return COMPETITIONCODE;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
++(BOOL) UpdateInningsEventForMatchTypeBasedInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) OLDTEAMCODE: (NSString*) OLDINNINGSNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE  INNINGSEVENTS  SET ISDECLARE='1' WHERE 	COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,OLDINNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return BOOL;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
++(NSString*) GetLastBallCodeForInsertEndInninges:(NSString*) MATCHCODE: (NSString*) OLDINNINGSNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS BE WHERE (SELECT MAX(CONVERT(NUMERIC(10,5),(CONVERT(NVARCHAR,BALL.OVERNO) + '.' + CONVERT(NVARCHAR,BALL.BALLNO) + CONVERT(NVARCHAR,BALL.BALLCOUNT))))FROM BALLEVENTS BALL WHERE BALL.MATCHCODE = '%@' AND BALL.INNINGSNO = '%@')AND BE.MATCHCODE = '%@' AND BE.INNINGSNO = '%@'",MATCHCODE,OLDINNINGSNO];
+        
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *BALLCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return BALLCODE;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(NSMutableArray *) GetBallEventForInningsDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) OLDTEAMCODE: (NSString*) LASTBALLCODE
+{
+    NSMutableArray *BallEventArray=[[NSMutableArray alloc]init];
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT  TEAMCODE,OVERNO,   BOWLERCODE, = STRIKERCODE,NONSTRIKERCODE, WICKETKEEPERCODE, UMPIRE1CODE, UMPIRE2CODE,ATWOROTW,  BOWLINGEND FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BALLCODE = '%@';",MATCHCODE,OLDTEAMCODE,LASTBALLCODE];
+        
+        
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                BallEventForInningsDetails *record=[[BallEventForInningsDetails alloc]init];
+                record.TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.OVERNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record.BOWLERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record.STRIKERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.NONSTRIKERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record.WICKETKEEPERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                record.UMPIRE1CODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                record.UMPIRE2CODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record.ATWOROTW=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                record.BOWLINGEND=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                [BallEventArray addObject:record];
+            }
+            
+        }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return BallEventArray;
+}
+
+
++(BOOL) UpdateInningsEventForInsertEndInninges:(NSString*) INNINGSSTARTTIME : (NSString*) INNINGSENDTIME :(NSString*) OLDTEAMCODE :(NSString*) TOTALRUNS : (NSString*) ENDOVER :(NSString*) TOTALWICKETS :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) OLDTEAMCODE: (NSString*) OLDINNINGSNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE  INNINGSEVENTS  SET INNINGSSTARTTIME='%@',INNINGSENDTIME='%@',BATTINGTEAMCODE='%@',TOTALRUNS='%@',TOTALOVERS='%@',TOTALWICKETS='%@',INNINGSSTATUS='1' WHERE 	COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'",INNINGSSTARTTIME,INNINGSENDTIME,OLDTEAMCODE,TOTALRUNS,ENDOVER,TOTALWICKETS,COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,OLDINNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return BOOL;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(NSString*) GetCompetitioncodeInAddOldInningsNoForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) OLDTEAMCODE:(NSString*) OLDINNINGSNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"	SELECT COMPETITIONCODE FROM INNINGSEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'+1 AND ISDECLARE=0 ",COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,OLDINNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *COMPETITIONCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return COMPETITIONCODE;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(NSString*) GetInningsCountForInsertEndInnings:(NSString*) MATCHCODE{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"	SELECT INNINGSCOUNT = COUNT(INNINGSNO) FROM INNINGSEVENTS WHERE MATCHCODE ='%@'",MATCHCODE];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *INNINGSCOUNT =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return INNINGSCOUNT;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(BOOL) UpdateMatchRegistrationForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION SET [MATCHSTATUS] = 'MSC125' ,[MODIFIEDBY] = 'USER' ,[MODIFIEDDATE] = GETDATE() WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return BOOL;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(NSString*) GetMatchBasedSessionNoForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) OLDINNINGSNO: (NSString*) DAYNO: (NSString*) SESSIONNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@" SELECT SESSIONNO FROM SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@' AND DAYNO='%@' AND SESSIONNO='%@'",COMPETITIONCODE, MATCHCODE ,OLDINNINGSNO , DAYNO , SESSIONNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *SESSIONNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return SESSIONNO;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
+
++(BOOL) InsertSessionEventForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) OLDINNINGSNO: (NSString*) DAYNO: (NSString*) SESSIONNO: (NSString*) OLDTEAMCODE: (NSString*) STARTOVERBALLNO:(NSString*) ENDOVER:(NSString*) RUNSSCORED:(NSString*) TOTALWICKETS{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO SESSIONEVENTS ( COMPETITIONCODE, MATCHCODE,INNINGSNO,DAYNO,SESSIONNO,SESSIONSTARTTIME,SESSIONENDTIME,BATTINGTEAMCODE,STARTOVER,ENDOVER,TOTALRUNS,DOMINANTTEAMCODE,SESSIONSTATUS) VALUES  ( '%@', '%@','%@','%@','%@','','','%@','%@','%@','%@','%@','',0)",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO,DAYNO,SESSIONNO,OLDTEAMCODE,STARTOVERBALLNO,ENDOVER,RUNSSCORED,TOTALWICKETS];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return BOOL;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(NSString*) GetDayNoInDayEventForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : OLDINNINGSNO: (NSString*) DAYNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT DAYNO FROM DAYEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@' AND DAYNO='%@'",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO,DAYNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *DAYNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return DAYNO;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(BOOL) InsertDayEventForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) OLDINNINGSNO: (NSString*) DAYNO: (NSString*) OLDTEAMCODE: (NSString*) TOTALRUNS:(NSString*) ENDOVER:(NSString*) TOTALWICKETS : (NSString*) SESSIONNO : (NSString*) STARTOVERBALLNO : (NSString*) RUNSSCORED{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO DAYEVENTS(COMPETITIONCODE,MATCHCODE,	INNINGSNO,STARTTIME,ENDTIME,DAYNO,BATTINGTEAMCODE,	TOTALRUNS,TOTALOVERS,TOTALWICKETS,COMMENTS,DAYSTATUS)  VALUES('%@','%@','%@','','','%@','%@','%@','%@','%@',''0);)",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO,DAYNO,SESSIONNO,OLDTEAMCODE,STARTOVERBALLNO,ENDOVER,RUNSSCORED,TOTALWICKETS];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return BOOL;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(NSString*) GetCompetitioncodeInUpdateForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) OLDTEAMCODE:(NSString*) OLDINNINGSNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT COMPETITIONCODE FROM INNINGSEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@' AND INNINGSSTATUS='1' ",COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,OLDINNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *COMPETITIONCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return COMPETITIONCODE;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(BOOL) UpdateInningsEventInUpdateForInsertEndInninges:(NSString*) INNINGSSTARTTIME : (NSString*) INNINGSENDTIME :(NSString*) TOTALRUNS : (NSString*) ENDOVER :(NSString*) TOTALWICKETS :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) OLDTEAMCODE: (NSString*) OLDINNINGSNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE  INNINGSEVENTS  SET	INNINGSSTARTTIME='%@',	INNINGSENDTIME='%@',TOTALRUNS='%@',TOTALOVERS='%@',TOTALWICKETS='%@'  WHERE COMPETITIONCODE='%@' AND  MATCHCODE='%@' AND TEAMCODE='%@' AND  INNINGSNO='%@' ",INNINGSSTARTTIME,INNINGSENDTIME,OLDTEAMCODE,TOTALRUNS,ENDOVER,TOTALWICKETS,COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,OLDINNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return BOOL;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
+
++(NSString*) GetSecondTeamCodeForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) OLDINNINGSNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT  TEAMCODE FROM INNINGSEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO=2",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *TEAMCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return TEAMCODE;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
+}
+
++(NSString*) GetThirdTeamCodeForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) OLDINNINGSNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT  TEAMCODE FROM INNINGSEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO=3",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                NSString *TEAMCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                return TEAMCODE;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return @"";
+        }
+    }
+    sqlite3_reset(statement);
+    return @"";
 }
 
 @end
