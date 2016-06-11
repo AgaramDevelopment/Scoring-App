@@ -84,7 +84,7 @@
     [self.view_Striker setUserInteractionEnabled:NO];
      [self.nonStriker setUserInteractionEnabled:NO];
      [self.view_Bowler setUserInteractionEnabled:NO];
-    self.outlet_btn_proceed.enabled = NO;
+   // self.outlet_btn_proceed.enabled = NO;
 
     
 //    self.radiobutton1 = [[RadioButton alloc] initWithGroupId:@"first group" index:0];

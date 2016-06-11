@@ -8432,44 +8432,41 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ytp-Xz-BdY">
                                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RHWagon" translatesAutoresizingMaskIntoConstraints="NO" id="Hb9-Im-FDR">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RHWagon" translatesAutoresizingMaskIntoConstraints="NO" id="Hb9-Im-FDR">
                                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="284" id="iWK-jT-skS">
-                                                                                <variation key="heightClass=regular-widthClass=regular" constant="284"/>
-                                                                            </constraint>
-                                                                            <constraint firstAttribute="width" constant="284" id="jMg-oe-w6t">
-                                                                                <variation key="heightClass=regular-widthClass=regular" constant="284"/>
-                                                                            </constraint>
+                                                                            <constraint firstAttribute="width" constant="350" id="XnN-Re-mdk"/>
+                                                                            <constraint firstAttribute="height" constant="350" id="ddq-b9-eqD"/>
                                                                         </constraints>
                                                                         <variation key="default">
                                                                             <mask key="constraints">
-                                                                                <exclude reference="iWK-jT-skS"/>
-                                                                                <exclude reference="jMg-oe-w6t"/>
+                                                                                <exclude reference="XnN-Re-mdk"/>
+                                                                                <exclude reference="ddq-b9-eqD"/>
                                                                             </mask>
                                                                         </variation>
                                                                         <variation key="heightClass=regular-widthClass=regular">
                                                                             <mask key="constraints">
-                                                                                <include reference="iWK-jT-skS"/>
-                                                                                <include reference="jMg-oe-w6t"/>
+                                                                                <include reference="XnN-Re-mdk"/>
+                                                                                <include reference="ddq-b9-eqD"/>
                                                                             </mask>
                                                                         </variation>
                                                                     </imageView>
                                                                 </subviews>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <constraints>
-                                                                    <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerY" secondItem="Ytp-Xz-BdY" secondAttribute="centerY" id="0tM-qY-TvR">
-                                                                        <variation key="heightClass=regular-widthClass=regular" constant="2.5"/>
+                                                                    <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerY" secondItem="Ytp-Xz-BdY" secondAttribute="centerY" id="WBf-Y8-bQX"/>
+                                                                    <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="fzf-fB-i9h">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="-4"/>
                                                                     </constraint>
-                                                                    <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="Cdi-ih-iVb"/>
                                                                 </constraints>
                                                                 <variation key="default">
                                                                     <mask key="subviews">
                                                                         <exclude reference="Hb9-Im-FDR"/>
                                                                     </mask>
                                                                     <mask key="constraints">
-                                                                        <exclude reference="0tM-qY-TvR"/>
-                                                                        <exclude reference="Cdi-ih-iVb"/>
+                                                                        <exclude reference="WBf-Y8-bQX"/>
+                                                                        <exclude reference="fzf-fB-i9h"/>
                                                                     </mask>
                                                                 </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
@@ -8477,8 +8474,8 @@
                                                                         <include reference="Hb9-Im-FDR"/>
                                                                     </mask>
                                                                     <mask key="constraints">
-                                                                        <include reference="0tM-qY-TvR"/>
-                                                                        <include reference="Cdi-ih-iVb"/>
+                                                                        <include reference="WBf-Y8-bQX"/>
+                                                                        <include reference="fzf-fB-i9h"/>
                                                                     </mask>
                                                                 </variation>
                                                             </view>
@@ -8585,6 +8582,8 @@
                                                         <exclude reference="nr3-sR-794"/>
                                                         <exclude reference="s3d-MA-z9s"/>
                                                         <exclude reference="zbu-OH-0qB"/>
+                                                        <exclude reference="3tx-xz-BN2"/>
+                                                        <exclude reference="COW-6m-ZhJ"/>
                                                         <exclude reference="PeR-gH-qVa"/>
                                                         <exclude reference="pnQ-Gi-ZEp"/>
                                                         <exclude reference="sPq-93-g4N"/>
@@ -8601,8 +8600,6 @@
                                                         <exclude reference="JFQ-ws-aqM"/>
                                                         <exclude reference="R95-IW-b9B"/>
                                                         <exclude reference="u0O-8L-JPI"/>
-                                                        <exclude reference="3tx-xz-BN2"/>
-                                                        <exclude reference="COW-6m-ZhJ"/>
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=regular">
@@ -8624,6 +8621,8 @@
                                                         <include reference="nr3-sR-794"/>
                                                         <include reference="s3d-MA-z9s"/>
                                                         <include reference="zbu-OH-0qB"/>
+                                                        <include reference="3tx-xz-BN2"/>
+                                                        <include reference="COW-6m-ZhJ"/>
                                                         <include reference="PeR-gH-qVa"/>
                                                         <include reference="pnQ-Gi-ZEp"/>
                                                         <include reference="sPq-93-g4N"/>
@@ -8640,8 +8639,6 @@
                                                         <include reference="JFQ-ws-aqM"/>
                                                         <include reference="R95-IW-b9B"/>
                                                         <include reference="u0O-8L-JPI"/>
-                                                        <include reference="3tx-xz-BN2"/>
-                                                        <include reference="COW-6m-ZhJ"/>
                                                     </mask>
                                                 </variation>
                                             </view>
@@ -8895,6 +8892,7 @@
                         <outlet property="btn_wkts" destination="L96-uB-0cZ" id="LLC-QF-ucG"/>
                         <outlet property="comments_txt" destination="0Jz-hR-Frv" id="xEx-eu-QD2"/>
                         <outlet property="commonleftrightview" destination="Ox6-sN-d81" id="qev-BE-3Yp"/>
+                        <outlet property="height" destination="ddq-b9-eqD" id="c40-X5-oa5"/>
                         <outlet property="img_WagonWheel" destination="Hb9-Im-FDR" id="abW-Dx-KCa"/>
                         <outlet property="img_pichmap" destination="HZu-QE-ye7" id="4L6-Q4-OXP"/>
                         <outlet property="lbl_Batsmen1Name" destination="5pe-eI-xRP" id="kXI-Za-G1d"/>
@@ -8935,6 +8933,7 @@
                         <outlet property="view_spin" destination="yps-fZ-Aa8" id="3kK-8Z-Zdy"/>
                         <outlet property="view_table_select" destination="YuY-c8-SjD" id="Y3K-7R-qlR"/>
                         <outlet property="view_umpireName" destination="KjS-Gv-1mB" id="u7M-qW-KgJ"/>
+                        <outlet property="width" destination="XnN-Re-mdk" id="0Qy-bV-64U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VIB-Of-rar" userLabel="First Responder" sceneMemberID="firstResponder"/>

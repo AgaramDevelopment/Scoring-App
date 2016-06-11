@@ -1490,6 +1490,48 @@
                 //[self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
                  _View_Appeal.hidden=YES;
           _view_Wagon_wheel.hidden=NO;
+        
+        if(IS_IPAD_PRO)
+        {
+            self.height.constant=450;
+            self.width.constant=450;
+        }
+        else{
+            self.height.constant=350;
+            self.width.constant=350;
+        }
+        
+        if([self.BatmenStyle isEqualToString:@"MSC013"])
+        {
+            [self.img_WagonWheel setImage:[UIImage imageNamed:@"LHWagon"]];
+        }
+        else{
+            [self.img_WagonWheel setImage:[UIImage imageNamed:@"RHWagon"]];
+        }
+        
+        if (IS_IPAD_PRO) {
+                    self.centerlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.img_WagonWheel.frame.size.width/2+46, self.img_WagonWheel.frame.size.width/2+11, 5, 5)];
+        }
+        else
+            
+        self.centerlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.img_WagonWheel.frame.size.width/2-3, self.img_WagonWheel.frame.size.width/2-30, 5, 5)];
+      
+        [self.centerlbl setBackgroundColor:[UIColor redColor]];
+        [self.img_WagonWheel addSubview:self.centerlbl];
+        
+        
+        
+        //fineleglabel
+        UILabel *FineLeg=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 5, 5)];
+        
+        [FineLeg setBackgroundColor:[UIColor redColor]];
+        [self.img_WagonWheel addSubview:FineLeg];
+        
+        
+        
+        
+        
+       // [self.img_WagonWheel setBackgroundColor:[UIColor whiteColor]];
         UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickWagonWheelmapTapAction:)];
         tapRecognizer.numberOfTapsRequired = 1;
         tapRecognizer.numberOfTouchesRequired=1;
@@ -1508,12 +1550,12 @@
 
 -(void)didClickWagonWheelmapTapAction:(UIGestureRecognizer *)wagon_Wheelgesture
 {
-     CGPoint p = [wagon_Wheelgesture locationInView:self.view_DrawlineWagon];
-    float Xposition = p.x-62;
-    float Yposition = p.y-85;
+     CGPoint p = [wagon_Wheelgesture locationInView:self.img_WagonWheel];
+    float Xposition = p.x;
+    float Yposition = p.y;
     CGMutablePathRef straightLinePath = CGPathCreateMutable();
     CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-    CGPathAddLineToPoint(straightLinePath, NULL,self.view_DrawlineWagon.center.x-62,self.view_DrawlineWagon.center.y-145);
+    CGPathAddLineToPoint(straightLinePath, NULL,self.centerlbl.center.x,self.centerlbl.center.y);
     
     
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
@@ -1529,24 +1571,27 @@
     
      if(IS_IPAD)
      {
-         if ((Xposition  >= 35 && Yposition >= 65 && Xposition >=247 && Yposition >=59))
+         if (( Xposition <182 && Xposition  > 168   && Yposition > 19 && Yposition <28))
              
-         {  if(Xposition  <= 113 && Yposition <= 21)
+                 
          {
-             wagonregiontext = @"Long On";
-             regioncode = @"MSC178";
+             wagonregiontext = @"Long Stop";
+             regioncode = @"MSC154";
              
              NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
          }
-             
-             if(Xposition  <= 111 && Yposition <= 88 &&Xposition  <= 112 && Yposition <= 87)
-             {
-                 wagonregiontext = @"Long off";
-                 regioncode = @"MSC178";
                  
-                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-             }
-         }
+                 
+                 if ( Xposition >168 && Yposition <0)
+                     
+                     {
+                         wagonregiontext = @"Long Stop";
+                         regioncode = @"MSC154";
+                         
+                         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+                     }
+
+         
      }
 
     
@@ -3919,48 +3964,6 @@
     [dic setValue:AppealBatsmenSelectCode forKey:@"AppealBatsmenSelct"];
     [dic setValue:commentText forKey:@"Commenttext"];
 }
-- (IBAction)WagonwheelTuch_btn:(id)sender forEvent:(UIEvent *)event {
-    
-    NSSet *touchSet = [event touchesForView:sender];
-    UITouch *touch = [touchSet anyObject];
-    CGPoint touchpoint = [touch locationInView:sender];
-    NSLog(@"Axis = %@",NSStringFromCGPoint(touchpoint));
-    
-//    
-//    int angle = atan2(124 -touchpoint.y, 161 - touchpoint.x);
-//    CGFloat *hight=angle;
-//    
-//    UILabel* obj =[[UILabel alloc]initWithFrame:CGRectMake(touchpoint.x, touchpoint.y,10, *hight)];
-//    [obj setBackgroundColor:[UIColor redColor]];
-//    
-//    [self.view_DrawlineWagon addSubview:obj];
-    
-    
-    int n = 360 - (atan2((125-touchpoint.y),(161-touchpoint.x)))*270/M_PI;
-    NSLog(@"n= %d",n);
-    
-    int wheelAngle = n%360;
-    NSLog(@"wh= %d",wheelAngle);
-    
-    for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
-        [layer removeFromSuperlayer];
-    }
-    
-    UIBezierPath *path = [UIBezierPath bezierPath];
-    [path moveToPoint:CGPointMake(160, 124)];
-    [path addLineToPoint:CGPointMake(touchpoint.x, touchpoint.y)];
-    
-    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    shapeLayer.path = [path CGPath];
-    shapeLayer.strokeColor = [[UIColor redColor] CGColor];
-    shapeLayer.lineWidth = 2.0;
-    shapeLayer.fillColor = [[UIColor clearColor] CGColor];
-    [self.img_WagonWheel.layer addSublayer:shapeLayer];
-    
-
-    
-}
-
 
 
 @end

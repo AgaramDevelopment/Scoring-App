@@ -334,30 +334,55 @@
     _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
     _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
     
-    FixturesRecord *fixture = (FixturesRecord*) [_countTeam objectAtIndex:0];
-        FixturesRecord *fixtureB = (FixturesRecord*) [_countTeamB objectAtIndex:0];
-    
-    NSString *oversTxt = self.txt_overs.text;
-    NSInteger twentyText = [oversTxt intValue];
-    NSInteger OdiText = [oversTxt intValue];
-    
-    NSUInteger teamCountA = [fixture.count integerValue];
-    NSUInteger teamCountB = [fixtureB.count integerValue];
-
-  
-    
-    if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){
-        if(twentyText > 20){
-            [self showDialog:@"Please enter below 20 overs" andTitle:@"Error"];
-        }else if (twentyText == 0){
-            
-            [self showDialog:@"Please enter overs" andTitle:@"Error"];
-        }
-        
-        
-        
-        else if (teamCountA >= 7 && teamCountB >= 7){
-            
+//    FixturesRecord *fixture = (FixturesRecord*) [_countTeam objectAtIndex:0];
+//        FixturesRecord *fixtureB = (FixturesRecord*) [_countTeamB objectAtIndex:0];
+//    
+//    NSString *oversTxt = self.txt_overs.text;
+//    NSInteger twentyText = [oversTxt intValue];
+//    NSInteger OdiText = [oversTxt intValue];
+//    
+//    NSUInteger teamCountA = [fixture.count integerValue];
+//    NSUInteger teamCountB = [fixtureB.count integerValue];
+//
+//  
+//    
+//    if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){
+//        if(twentyText > 20){
+//            [self showDialog:@"Please enter below 20 overs" andTitle:@"Error"];
+//        }else if (twentyText == 0){
+//            
+//            [self showDialog:@"Please enter overs" andTitle:@"Error"];
+//        }
+//        
+//        
+//        
+//        else if (teamCountA >= 7 && teamCountB >= 7){
+//            
+//            MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
+//            
+//            matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
+//            
+//            matchvc.Matchcode = matchCode;
+//            matchvc.competitionCode = competitionCode;
+//            
+//            [self.navigationController pushViewController:matchvc animated:YES];
+//        }else{
+//            
+//            [self showDialog:@"Please select minimum seven players" andTitle:@"Error"];
+//
+//        }
+//        return NO;
+//        
+//    }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){
+//        if(OdiText > 50){
+//            
+//            [self showDialog:@"Please enter below 50 overs" andTitle:@"Error"];
+//        }else if (twentyText == 0){
+//            
+//            [self showDialog:@"Please enter overs" andTitle:@"Error"];
+//        }
+//        
+//        else {
             MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
             
             matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
@@ -366,37 +391,12 @@
             matchvc.competitionCode = competitionCode;
             
             [self.navigationController pushViewController:matchvc animated:YES];
-        }else{
             
-            [self showDialog:@"Please select minimum seven players" andTitle:@"Error"];
-
-        }
-        return NO;
-        
-    }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){
-        if(OdiText > 50){
-            
-            [self showDialog:@"Please enter below 50 overs" andTitle:@"Error"];
-        }else if (twentyText == 0){
-            
-            [self showDialog:@"Please enter overs" andTitle:@"Error"];
-        }
-        
-        else {
-            MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
-            
-            matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
-            
-            matchvc.Matchcode = matchCode;
-            matchvc.competitionCode = competitionCode;
-            
-            [self.navigationController pushViewController:matchvc animated:YES];
-            
-        }
-        return NO;
-        
-    }
-    return YES;
+//        }
+//        return NO;
+//        
+//    }
+  return YES;
     
     
 }

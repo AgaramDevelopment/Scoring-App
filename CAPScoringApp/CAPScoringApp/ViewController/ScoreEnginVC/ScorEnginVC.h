@@ -164,6 +164,10 @@
 //@property (strong, nonatomic) IBOutlet UIView *view_nrs;   //fileiding factor netruns
 
 //defensive shot type
+
+@property(nonatomic,strong) UILabel *centerlbl;
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint* height;
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint* width;
 @property (weak, nonatomic) IBOutlet UITableView *tbl_defensive;
 @property (weak, nonatomic) IBOutlet UIView *view_defensive;
 @property (strong, nonatomic) IBOutlet UIView *view_Rbw;
@@ -189,5 +193,6 @@
     
 @property (strong, nonatomic) IBOutlet UIView *view_DrawlineWagon;
 
+@property (strong, nonatomic) IBOutlet UILabel *lbl_centerpoint;
 
 @end
