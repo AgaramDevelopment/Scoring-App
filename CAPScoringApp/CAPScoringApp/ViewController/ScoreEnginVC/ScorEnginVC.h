@@ -196,5 +196,6 @@
 @property (strong, nonatomic) IBOutlet UIView *view_DrawlineWagon;
 
 @property (strong, nonatomic) IBOutlet UILabel *lbl_centerpoint;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_fast1;
 
 @end
