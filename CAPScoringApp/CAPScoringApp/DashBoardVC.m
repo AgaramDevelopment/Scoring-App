@@ -9,6 +9,7 @@
 #import "DashBoardVC.h"
 #import "TorunamentVC.h"
 #import "LoginVC.h"
+#import "ArchivesVC.h"
 @interface DashBoardVC ()
 
 @end
@@ -62,6 +63,13 @@
     
     _img_archives.image = [UIImage imageNamed:@"ico-archives02.png"];
     _view_archives.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
+   
+        ArchivesVC * objArchiveVC=[[ArchivesVC alloc]init];
+        objArchiveVC=(ArchivesVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+        [self.navigationController pushViewController:objArchiveVC animated:YES];
+        
+   
+
 }
 
 - (IBAction)btn_reports:(id)sender {

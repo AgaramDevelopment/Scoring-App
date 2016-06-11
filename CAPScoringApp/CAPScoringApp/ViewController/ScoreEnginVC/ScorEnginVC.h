@@ -84,6 +84,7 @@
 
 
 @property(nonatomic,strong) IBOutlet UIView *commonleftrightview;
+@property(nonatomic,strong)  UILabel * PichMapTittle;
 
 // Buttons left property
 
@@ -176,6 +177,7 @@
 @property (weak, nonatomic) IBOutlet UIView *view_rtw;
 @property (weak, nonatomic) IBOutlet UIView *view_spin;
 @property (weak, nonatomic) IBOutlet UIView *view_fast;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_fast;
 
 @property (weak, nonatomic) IBOutlet UIView *view_aggressive;
 

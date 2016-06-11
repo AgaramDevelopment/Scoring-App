@@ -97,4 +97,8 @@
 +(NSMutableArray *)getTeamCaptainandTeamwicketkeeper:(NSString*) competitioncode :(NSString*) matchcode;
 
 +(BOOL)updateCapitainWicketkeeper:(NSString *) compatitioncode :(NSString *) matchCode capitainAteam:(NSString *)capitainAteam capitainBteam:(NSString *)capitainBteam wicketkeeperAteam:(NSString *)wicketkeeperAteam  wicketkeeperBteam:(NSString *)wicketkeeperBteam;
+
+//Wicket type
++(NSMutableArray *)RetrieveWicketType;
++(NSMutableArray *)RetrievePlayerData;
 @end
