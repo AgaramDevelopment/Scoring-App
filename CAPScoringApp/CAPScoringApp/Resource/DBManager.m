@@ -25,6 +25,7 @@
 #import "FieldingEventRecord.h"
 #import "CapitainWicketKeeperRecord.h"
 #import "WicketTypeRecord.h"
+#import "FetchSEPageLoadRecord.h"
 
 @implementation DBManager
 

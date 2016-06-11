@@ -25,6 +25,8 @@
 #import "FieldingFactorCell.h"
 #import "TossDeatilsEvent.h"
 #import "WicketTypeRecord.h"
+#import "FetchSEPageLoadRecord.h"
+
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -165,6 +167,11 @@
     [super viewDidLoad];
     
    // [self resetBallObject];
+    
+    FetchSEPageLoadRecord *converstion = [[FetchSEPageLoadRecord alloc]init];
+    
+    
+    [converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
     
     

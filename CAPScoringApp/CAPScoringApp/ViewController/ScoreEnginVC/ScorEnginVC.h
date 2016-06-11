@@ -178,6 +178,8 @@
 @property (weak, nonatomic) IBOutlet UIView *view_spin;
 @property (weak, nonatomic) IBOutlet UIView *view_fast;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_fast;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_fast1;
+
 
 @property (weak, nonatomic) IBOutlet UIView *view_aggressive;
 

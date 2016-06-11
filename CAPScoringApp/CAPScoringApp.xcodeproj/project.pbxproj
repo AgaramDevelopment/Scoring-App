@@ -14,6 +14,7 @@
 		187952321D02A410001A1224 /* BowlAndShotTypeRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 1879522F1D02A410001A1224 /* BowlAndShotTypeRecords.m */; };
 		187952331D02A410001A1224 /* FieldingEventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 187952311D02A410001A1224 /* FieldingEventRecord.m */; };
 		187952351D02AD28001A1224 /* FieldingFactorRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1879522C1D02A0B4001A1224 /* FieldingFactorRecord.m */; };
+		188130401D0BF3ED00908F65 /* FetchSEPageLoadRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1881303F1D0BF3ED00908F65 /* FetchSEPageLoadRecord.m */; };
 		1886718A1CFFF77E004DEDA0 /* AggressiveShotTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */; };
 		245E9F161D0143C200D7C07A /* PlayerLevelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 245E9F151D0143C200D7C07A /* PlayerLevelCell.m */; };
 		24622DBE1D0AD8860057A08A /* ArchivesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24622DBD1D0AD8860057A08A /* ArchivesVC.m */; };
@@ -100,6 +101,8 @@
 		1879522F1D02A410001A1224 /* BowlAndShotTypeRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlAndShotTypeRecords.m; sourceTree = "<group>"; };
 		187952301D02A410001A1224 /* FieldingEventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldingEventRecord.h; sourceTree = "<group>"; };
 		187952311D02A410001A1224 /* FieldingEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldingEventRecord.m; sourceTree = "<group>"; };
+		1881303E1D0BF3ED00908F65 /* FetchSEPageLoadRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchSEPageLoadRecord.h; sourceTree = "<group>"; };
+		1881303F1D0BF3ED00908F65 /* FetchSEPageLoadRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchSEPageLoadRecord.m; sourceTree = "<group>"; };
 		188671881CFFF77E004DEDA0 /* AggressiveShotTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AggressiveShotTypeCell.h; sourceTree = "<group>"; };
 		188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggressiveShotTypeCell.m; sourceTree = "<group>"; };
 		245E9F141D0143C200D7C07A /* PlayerLevelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerLevelCell.h; path = SubClass/PlayerLevelCell/PlayerLevelCell.h; sourceTree = "<group>"; };
@@ -432,6 +435,8 @@
 		CE00183F1CF431C100668D8B /* Records */ = {
 			isa = PBXGroup;
 			children = (
+				1881303E1D0BF3ED00908F65 /* FetchSEPageLoadRecord.h */,
+				1881303F1D0BF3ED00908F65 /* FetchSEPageLoadRecord.m */,
 				048B5A9C1D0AF1A7009F12B8 /* WicketTypeRecord.h */,
 				048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */,
 				1879522E1D02A410001A1224 /* BowlAndShotTypeRecords.h */,
@@ -655,6 +660,7 @@
 				CE0F19BD1CF5D1460030FFA2 /* Reachability.m in Sources */,
 				CE00185C1CF4667400668D8B /* CDRTranslucentSideBar.m in Sources */,
 				CE3DD41C1CFBFA7000D93A55 /* SelectPlayerRecord.m in Sources */,
+				188130401D0BF3ED00908F65 /* FetchSEPageLoadRecord.m in Sources */,
 				CEC305811D014C3400301ED3 /* AppealSystemRecords.m in Sources */,
 				CE1FBF5B1CF96FE400A9B6FE /* BowlerEvent.m in Sources */,
 				24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */,
