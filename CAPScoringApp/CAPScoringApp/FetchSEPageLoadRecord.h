@@ -74,4 +74,24 @@
 
 -(void) fetchSEPageLoadDetails :(NSString*) COMPETITIONCODE :(NSString *)MATCHCODE;
 
+
+//Stricker Details
+@property(strong,nonatomic)NSString *strickerPlayerCode ;
+@property(strong,nonatomic)NSString *strickerPlayerName;
+@property(strong,nonatomic)NSString *strickerTotalRuns;
+@property(strong,nonatomic)NSString *strickerFours;
+@property(strong,nonatomic)NSString *strickerSixes ;
+@property(strong,nonatomic)NSString *strickerTotalBalls;
+@property(strong,nonatomic)NSString *strickerStrickRate ;
+
+
+//Non Stricker Details
+@property(strong,nonatomic)NSString *nonstrickerPlayerCode ;
+@property(strong,nonatomic)NSString *nonstrickerPlayerName;
+@property(strong,nonatomic)NSString *nonstrickerTotalRuns;
+@property(strong,nonatomic)NSString *nonstrickerFours;
+@property(strong,nonatomic)NSString *nonstrickerSixes ;
+@property(strong,nonatomic)NSString *nonstrickerTotalBalls;
+@property(strong,nonatomic)NSString *nonstrickerStrickRate ;
+
 @end

@@ -57,6 +57,26 @@
 
 @synthesize BATTEAMRUNS;
 
+
+@synthesize strickerPlayerCode ;
+@synthesize strickerPlayerName;
+@synthesize strickerTotalRuns;
+@synthesize strickerFours;
+@synthesize strickerSixes ;
+@synthesize strickerTotalBalls;
+@synthesize strickerStrickRate ;
+
+
+//Non Stricker Details
+@synthesize nonstrickerPlayerCode ;
+@synthesize nonstrickerPlayerName;
+@synthesize nonstrickerTotalRuns;
+@synthesize nonstrickerFours;
+@synthesize nonstrickerSixes ;
+@synthesize nonstrickerTotalBalls;
+@synthesize nonstrickerStrickRate ;
+
+
 //@synthesize TEAMCODE;
 
 
@@ -128,7 +148,9 @@ BOOL  getOverStatus;
     FetchSEPageLoadRecord *inns = (FetchSEPageLoadRecord*)[innArray objectAtIndex:0];
     NSString *teamInns = inns.INNINGSNO;
     NSUInteger inningsNo = [teamInns integerValue];
-    INNINGSNO = [NSString stringWithFormat: @"%ld",inningsNo];
+    INNINGSNO = [@(inningsNo) stringValue];
+    NSLog(@"%@",INNINGSNO);
+
     
     //batting team code
     BATTINGTEAMCODE =  [DBManager getBattingTeamCode:COMPETITIONCODE :MATCHCODE];
@@ -285,7 +307,7 @@ BOOL  getOverStatus;
     if ([INNINGSPROGRESS intValue]>0) {
         
         
-        INNINGSNO = [DBManager InningsNo:COMPETITIONCODE :MATCHCODE];
+        INNINGSNO = [DBManager InningsNo: MATCHCODE:COMPETITIONCODE];
         
         BATTINGTEAMCODE = [DBManager batsManteamCode:MATCHCODE :COMPETITIONCODE];
         
@@ -671,11 +693,12 @@ BOOL  getOverStatus;
         
         NSMutableArray *totalRunsArray = [DBManager getTotalRuns:LASTBALLCODEDATA];
         
+        if(totalRunsArray.count >0){
         T_TOTALRUNS = [totalRunsArray objectAtIndex:0];
         T_OVERSTATUS = [totalRunsArray objectAtIndex:1];
         T_WICKETPLAYER = [totalRunsArray objectAtIndex:2];
         T_WICKETTYPE = [totalRunsArray objectAtIndex:3];
-        
+        }
         
     }
     
@@ -699,20 +722,46 @@ BOOL  getOverStatus;
     STRIKERBALLS = [DBManager getSTRIKERBALLS:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE STRIKERCODE:STRIKERCODE];
     
     //Striker details
+    NSMutableArray *strickerDetaailsArray;
     if([DBManager hasSTRIKERBALLS:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE STRIKERCODE:STRIKERCODE]){
-        [DBManager getStrickerCode:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO: INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE STRIKERCODE:STRIKERCODE STRIKERBALLS:STRIKERBALLS];
+         strickerDetaailsArray = [DBManager getStrickerCode:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO: INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE STRIKERCODE:STRIKERCODE STRIKERBALLS:STRIKERBALLS];
     }else{
-        [DBManager getStrickerDetails:STRIKERCODE];
+       strickerDetaailsArray =  [DBManager getStrickerDetails:STRIKERCODE];
+    }
+    
+    if(strickerDetaailsArray.count>0){
+        
+        strickerPlayerCode = [strickerDetaailsArray objectAtIndex:0];
+        strickerPlayerName = [strickerDetaailsArray objectAtIndex:1];
+        strickerTotalRuns = [strickerDetaailsArray objectAtIndex:2];
+        strickerFours = [strickerDetaailsArray objectAtIndex:3];
+        strickerSixes = [strickerDetaailsArray objectAtIndex:4];
+        strickerTotalBalls = [strickerDetaailsArray objectAtIndex:5];
+        strickerStrickRate = [strickerDetaailsArray objectAtIndex:6];
+      
     }
     
     NONSTRIKERBALLS = [DBManager getBALLCODECOUNT:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE NONSTRIKERCODE:NONSTRIKERCODE];
     
     
     //NONSTRIKER DETAILS
+    NSMutableArray *nonstrickerDetaailsArray;
     if([DBManager hasSTRIKERBALLS:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE STRIKERCODE:NONSTRIKERCODE]){
-        [DBManager getStrickerCode:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO: INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE STRIKERCODE:NONSTRIKERCODE STRIKERBALLS:NONSTRIKERBALLS];
+       nonstrickerDetaailsArray = [DBManager getStrickerCode:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO: INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE STRIKERCODE:NONSTRIKERCODE STRIKERBALLS:NONSTRIKERBALLS];
     }else{
-        [DBManager getStrickerDetails:STRIKERCODE];
+      nonstrickerDetaailsArray =  [DBManager getStrickerDetails:STRIKERCODE];
+    }
+    
+    if(nonstrickerDetaailsArray.count>0){
+        
+        nonstrickerPlayerCode = [nonstrickerDetaailsArray objectAtIndex:0];
+        nonstrickerPlayerName = [nonstrickerDetaailsArray objectAtIndex:1];
+        nonstrickerTotalRuns = [nonstrickerDetaailsArray objectAtIndex:2];
+        nonstrickerFours = [nonstrickerDetaailsArray objectAtIndex:3];
+        nonstrickerSixes = [nonstrickerDetaailsArray objectAtIndex:4];
+        nonstrickerTotalBalls = [nonstrickerDetaailsArray objectAtIndex:5];
+        nonstrickerStrickRate = [nonstrickerDetaailsArray objectAtIndex:6];
+        
     }
     
     //PARTNERSHIP DETAILS

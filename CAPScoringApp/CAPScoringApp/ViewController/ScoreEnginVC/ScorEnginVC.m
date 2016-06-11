@@ -170,8 +170,25 @@
     
     FetchSEPageLoadRecord *converstion = [[FetchSEPageLoadRecord alloc]init];
     
-    
     [converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
+    
+    //Stricker Details
+    self.lbl_stricker_name.text = converstion.strickerPlayerName;
+    self.lbl_stricker_runs.text = converstion.strickerTotalRuns;
+    self.lbl_stricker_balls.text = converstion.strickerTotalBalls;
+    self.lbl_stricker_sixs.text = converstion.strickerSixes;
+    self.lbl_stricker_strickrate.text = converstion.strickerStrickRate;
+    self.lbl_stricker_fours.text = converstion.strickerFours;
+    
+    //Non Stricker Details
+    self.lbl_nonstricker_name.text = converstion.nonstrickerPlayerName;
+    self.lbl_nonstricker_runs.text = converstion.nonstrickerTotalRuns;
+    self.lbl_nonstricker_balls.text = converstion.nonstrickerTotalBalls;
+    self.lbl_nonstricker_fours.text = converstion.nonstrickerFours;
+    self.lbl_nonstricker_sixs.text = converstion.nonstrickerSixes;
+    self.lbl_nonstricker_strickrate.text = converstion.nonstrickerStrickRate;
+    
     
     _lbl_battingShrtName.text = converstion.BATTEAMSHORTNAME;
     
