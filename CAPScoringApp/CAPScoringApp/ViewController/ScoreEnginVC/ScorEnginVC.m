@@ -25,6 +25,8 @@
 #import "FieldingFactorCell.h"
 #import "TossDeatilsEvent.h"
 #import "WicketTypeRecord.h"
+#import "FetchSEPageLoadRecord.h"
+
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -169,6 +171,20 @@
     [super viewDidLoad];
     
    // [self resetBallObject];
+    
+    FetchSEPageLoadRecord *converstion = [[FetchSEPageLoadRecord alloc]init];
+    
+    
+    [converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
+    _lbl_battingShrtName.text = converstion.BATTEAMSHORTNAME;
+    
+    _lbl_firstIngsTeamName.text = converstion.BATTEAMSHORTNAME;
+    
+    _lbl_secIngsTeamName.text = converstion.BOWLTEAMSHORTNAME;
+    
+    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld",(unsigned long) converstion.BATTEAMRUNS];
+    
     
     
     
@@ -644,7 +660,7 @@
                                                                                 forIndexPath:indexPath];
             WicketTypeRecord *objFieldingFactorRecord=(WicketTypeRecord*)[_WicketTypeArray objectAtIndex:indexPath.row];
             wicketTypeCell.lbl_fastBowl.text = objFieldingFactorRecord.metasubcodedescription;
-            self.lbl_fast1.text=@"Wicket Type";
+            self.lbl_fast.text=@"Wicket Type";
             
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
@@ -666,7 +682,7 @@
                                                                                 forIndexPath:indexPath];
             NSString *strikerandnonstriker=(NSString*)[_StrikerandNonStrikerArray objectAtIndex:indexPath.row];
             strikerNonstrikerCell.lbl_fastBowl.text = strikerandnonstriker;
-            self.lbl_fast1.text=@"Batting Players";
+            self.lbl_fast.text=@"Batting Players";
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
             customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
@@ -686,7 +702,7 @@
                                                                                       forIndexPath:indexPath];
             NSString *wicketevent=(NSString*)[_WicketEventArray objectAtIndex:indexPath.row];
             wicketEventCell.lbl_fastBowl.text = wicketevent;
-            self.lbl_fast1.text=@"Wicket Events";
+            self.lbl_fast.text=@"Wicket Events";
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
             customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
@@ -706,7 +722,7 @@
                                                                                forIndexPath:indexPath];
             BowlerEvent *objPlayerlistRecord=(BowlerEvent*)[_PlayerlistArray objectAtIndex:indexPath.row];
             playerlistCell.lbl_fastBowl.text = objPlayerlistRecord.BowlerName;
-            self.lbl_fast1.text=@"Bowlers";
+            self.lbl_fast.text=@"Bowlers";
             
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
@@ -732,7 +748,7 @@
                                                                                 forIndexPath:indexPath];
             FieldingFactorRecord *objFieldingFactorRecord=(FieldingFactorRecord*)[_fieldingfactorArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = objFieldingFactorRecord.fieldingfactor;
-            self.lbl_fast1.text=@"Fielding Factor";
+            self.lbl_fast.text=@"Fielding Factor";
             
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
@@ -751,7 +767,7 @@
                                                                                 forIndexPath:indexPath];
             BowlerEvent *bowlerEvent=(BowlerEvent*)[_fieldingPlayerArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = bowlerEvent.BowlerName;
-            self.lbl_fast1.text=@"Bowlers";
+            self.lbl_fast.text=@"Bowlers";
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
             customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
@@ -769,7 +785,7 @@
                                                                                 forIndexPath:indexPath];
             NSString *nrs=(NSString*)[_nrsArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = nrs;
-            self.lbl_fast1.text=@"Net Run Saved";
+            self.lbl_fast.text=@"Net Run Saved";
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
             customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
@@ -1839,35 +1855,930 @@
     
     [self.img_WagonWheel.layer addSublayer:shapeLayer];
     
-     if(IS_IPAD)
-     {
-         if (( Xposition <182 && Xposition  > 168   && Yposition > 19 && Yposition <28))
-             
-                 
-         {
-             wagonregiontext = @"Long Stop";
-             regioncode = @"MSC154";
-             
-             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-         }
-                 
-                 
-                 if ( Xposition >168 && Yposition <0)
-                     
-                     {
-                         wagonregiontext = @"Long Stop";
-                         regioncode = @"MSC154";
-                         
-                         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-                     }
-
+    
+    //Long Stop
+      if (IS_IPAD_PRO)
+      {
+   
+      if (( Xposition <237 && Xposition  > 210   && Yposition > 12 && Yposition <44))
+      {
+          wagonregiontext = @"Long Stop";
+          regioncode = @"MSC154";
+          
+          NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+      }
+          
+      else if(( Xposition >222 && Yposition <0)) {
+              wagonregiontext = @"Long Stop";
+              regioncode = @"MSC154";
+              
+              NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
          
-     }
+      }
+      }
+    
+      else if(( Xposition <185 && Xposition  > 168   && Yposition > 19 && Yposition <33))
+              
+              
+          {
+              wagonregiontext = @"Long Stop";
+              regioncode = @"MSC154";
+              
+              NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+          }
+          
+          
+          else if ( Xposition >168 && Yposition <0)
+              
+          {
+              wagonregiontext = @"Long Stop";
+              regioncode = @"MSC154";
+              
+              NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+          }
+    
+    
+    
+    //Fine Leg Straight
+ 
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <265 && Xposition  > 250   && Yposition > 50 && Yposition <62))
+        {
+            wagonregiontext = @"Straight";
+            regioncode = @"MSC244";
+            
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+//        
+//        else if(( Xposition >222 && Yposition <0)) {
+//            wagonregiontext = @"Long Stop";
+//            regioncode = @"MSC154";
+//            
+//            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+//            
+//        }
+    }
+    
+    else if(( Xposition <208 && Xposition  > 197   && Yposition > 41 && Yposition <49))
+        
+        
+    {
+        wagonregiontext = @"Straight";
+        regioncode = @"MSC244";
+        
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+//    
+//    else if ( Xposition >168 && Yposition <0)
+//        
+//    {
+//        wagonregiontext = @"Long Stop";
+//        regioncode = @"MSC154";
+//        
+//        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+//    }
+    
+
+    
+    // Fine Leg Long Leg
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <315 && Xposition  > 289   && Yposition > 30 && Yposition <50))
+        {
+            wagonregiontext = @"Long Leg";
+            regioncode = @"MSC155";
+            
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <235 && Xposition  > 223   && Yposition > 23 && Yposition <33))
+        
+        
+    {
+        wagonregiontext = @"Long Leg";
+        regioncode = @"MSC155";
+        
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    //
+    //    else if ( Xposition >168 && Yposition <0)
+    //
+    //    {
+    //        wagonregiontext = @"Long Stop";
+    //        regioncode = @"MSC154";
+    //
+    //        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    //    }
+    
+    
+    
+    
+    
+    
+    //Fine Leg
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <300 && Xposition  > 289   && Yposition > 60 && Yposition <70))
+        {
+            wagonregiontext = @"Fine Leg";
+            regioncode = @"MSC156";
+            
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <233 && Xposition  > 220   && Yposition > 44 && Yposition <55))
+        
+        
+    {
+        wagonregiontext = @"Fine Leg";
+        regioncode = @"MSC156";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    //
+    //    else if ( Xposition >168 && Yposition <0)
+    //
+    //    {
+    //        wagonregiontext = @"Long Stop";
+    //        regioncode = @"MSC154";
+    //
+    //        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    //    }
+    
+    
+    
+    // Fine Leg Deep
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <342 && Xposition  > 330   && Yposition > 50 && Yposition <68))
+        {
+            wagonregiontext = @"Deep Fine Leg";
+            regioncode = @"MSC157";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <270 && Xposition  > 253   && Yposition > 37 && Yposition <50))
+        
+        
+    {
+        wagonregiontext = @"Deep Fine Leg";
+        regioncode = @"MSC157";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    //
+    //    else if ( Xposition >168 && Yposition <0)
+    //
+    //    {
+    //        wagonregiontext = @"Long Stop";
+    //        regioncode = @"MSC154";
+    //
+    //        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    //    }
+    
+    
+    
+    
+    //Short Fine Leg
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <270 && Xposition  > 255   && Yposition > 100 && Yposition <120))
+        {
+            wagonregiontext = @"Short Fine Leg";
+            regioncode = @"MSC158";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+            
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <215 && Xposition  > 195   && Yposition > 79 && Yposition <93))
+        
+        
+    {
+        wagonregiontext = @"Short Fine Leg";
+        regioncode = @"MSC158";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    //
+    //    else if ( Xposition >168 && Yposition <0)
+    //
+    //    {
+    //        wagonregiontext = @"Long Stop";
+    //        regioncode = @"MSC154";
+    //
+    //        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    //    }
+    
+
+    
+
+    
+    // Backward Short Leg
+
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <262 && Xposition  > 245   && Yposition > 130 && Yposition <150))
+        {
+            wagonregiontext = @"Backward Short Leg";
+            regioncode = @"MSC159";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+            
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <213 && Xposition  > 193   && Yposition > 110 && Yposition <120))
+        
+        
+    {
+        wagonregiontext = @"Backward Short Leg";
+        regioncode = @"MSC159";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    //
+    //    else if ( Xposition >168 && Yposition <0)
+    //
+    //    {
+    //        wagonregiontext = @"Long Stop";
+    //        regioncode = @"MSC154";
+    //
+    //        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    //    }
+    
+    
+
+    // Leg Gully
+
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <265 && Xposition  > 255   && Yposition > 152 && Yposition <165))
+        {
+            wagonregiontext = @"Leg Gully";
+            regioncode = @"MSC160";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+            
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <213 && Xposition  > 200   && Yposition > 120 && Yposition <130))
+        
+        
+    {
+        wagonregiontext = @"Leg Gully";
+        regioncode = @"MSC160";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    //
+    //    else if ( Xposition >168 && Yposition <0)
+    //
+    //    {
+    //        wagonregiontext = @"Long Stop";
+    //        regioncode = @"MSC154";
+    //
+    //        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    //    }
+    
+
+    //Leg Slip
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <245 && Xposition  > 233   && Yposition > 158 && Yposition <170))
+        {
+            wagonregiontext = @"Leg Slip";
+            regioncode = @"MSC161";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <195 && Xposition  > 185   && Yposition > 123 && Yposition <136))
+        
+        
+    {
+        wagonregiontext = @"Leg Slip";
+        regioncode = @"MSC161";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    //
+    //    else if ( Xposition >168 && Yposition <0)
+    //
+    //    {
+    //        wagonregiontext = @"Long Stop";
+    //        regioncode = @"MSC154";
+    //
+    //        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    //    }
+    
+    
+    
+    // SQUARE LEG Short Leg
+
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <245 && Xposition  > 233   && Yposition > 175 && Yposition <185))
+        {
+            wagonregiontext = @"Short Leg";
+            regioncode = @"MSC162";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <190 && Xposition  > 182   && Yposition > 135 && Yposition <141))
+        
+        
+    {
+        wagonregiontext = @"Short Leg";
+        regioncode = @"MSC162";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    //
+    //    else if ( Xposition >168 && Yposition <0)
+    //
+    //    {
+    //        wagonregiontext = @"Long Stop";
+    //        regioncode = @"MSC154";
+    //
+    //        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    //    }
+    
+    
+    //Wicket Keeper
+
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <230 && Xposition  > 220   && Yposition > 174 && Yposition <181))
+        {
+            wagonregiontext = @"Wicket Keeper";
+            regioncode = @"MSC152";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <180 && Xposition  > 170   && Yposition > 132 && Yposition <143))
+        
+        
+    {
+        wagonregiontext = @"Wicket Keeper";
+        regioncode = @"MSC152";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+
+    // Slip 1  THIRD MAN
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <220 && Xposition  > 203   && Yposition > 162 && Yposition <170))
+        {
+            wagonregiontext = @"Slip 1";
+            regioncode = @"MSC202";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <170 && Xposition  > 158   && Yposition > 128 && Yposition <123))
+        
+        
+    {
+        wagonregiontext = @"Slip 1";
+        regioncode = @"MSC202";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
 
     
     
     
+    //  FINE LEG Square
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <378 && Xposition  > 353   && Yposition > 79 && Yposition <95))
+        {
+            wagonregiontext = @"Square";
+            regioncode = @"MSC243";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <295 && Xposition  > 275   && Yposition > 60 && Yposition <75))
+        
+        
+    {
+        wagonregiontext = @"Square";
+        regioncode = @"MSC243";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+
+    
+    
+    //Deep Backward Square Leg  SQUARE LEG
+
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <405 && Xposition  > 385   && Yposition > 113 && Yposition <132))
+        {
+            wagonregiontext = @"Deep Backward Square Leg";
+            regioncode = @"MSC166";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <315 && Xposition  > 298   && Yposition > 82 && Yposition <98))
+        
+        
+    {
+        wagonregiontext = @"Deep Backward Square Leg";
+        regioncode = @"MSC166";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+  
+    
+    
+    // Deep Square Leg  SQUARE LEG
+
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <415 && Xposition  > 385   && Yposition > 150 && Yposition <170))
+        {
+            wagonregiontext = @"Deep Square Leg";
+            regioncode = @"MSC164";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <412 && Xposition  > 388   && Yposition > 150 && Yposition <170))
+        
+        
+    {
+        wagonregiontext = @"Deep Square Leg";
+        regioncode = @"MSC164";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    
+    // SQUARE LEG Deep Forward Square Leg
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <418 && Xposition  > 390   && Yposition > 185 && Yposition <220))
+        {
+            wagonregiontext = @"Deep Forward Square Leg";
+            regioncode = @"MSC168";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <412 && Xposition  > 388   && Yposition > 150 && Yposition <170))
+        
+        
+    {
+        wagonregiontext = @"Deep Forward Square Leg";
+        regioncode = @"MSC168";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);    }
+    
+
+    // SQUARE LEG  Backward Square Leg
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <308 && Xposition  > 290   && Yposition > 155 && Yposition <170))
+        {
+            wagonregiontext = @"Backward Square Leg";
+            regioncode = @"MSC165";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <242 && Xposition  > 225   && Yposition > 118 && Yposition <135))
+        
+        
+    {
+        wagonregiontext = @"Backward Square Leg";
+        regioncode = @"MSC165";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    
+    
+    
+    
+    //Square Leg
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <317 && Xposition  > 298   && Yposition > 175 && Yposition <195))
+        {
+            wagonregiontext = @"Square Leg";
+            regioncode = @"MSC163";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <248 && Xposition  > 223   && Yposition > 130 && Yposition <145))
+        
+    {
+        wagonregiontext = @"Square Leg";
+        regioncode = @"MSC163";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+
+
+    
+    //Forward Square Leg
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <325 && Xposition  > 291   && Yposition > 182 && Yposition <205))
+        {
+            wagonregiontext = @"Forward Square Leg";
+            regioncode = @"MSC167";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <247 && Xposition  > 223   && Yposition > 145 && Yposition <156))
+        
+    {
+        wagonregiontext = @"Forward Square Leg";
+        regioncode = @"MSC167";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    
+    //Short MID WICKET
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <286 && Xposition  > 260   && Yposition > 225 && Yposition <205))
+        {
+            wagonregiontext = @"Short Mid Wicket";
+            regioncode = @"MSC170";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <220 && Xposition  > 200   && Yposition > 155 && Yposition <175))
+        
+    {
+        wagonregiontext = @"Short Mid Wicket";
+        regioncode = @"MSC170";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    
+    
+    //Mid Wicket
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <320 && Xposition  > 290   && Yposition > 225 && Yposition <260))
+        {
+            wagonregiontext = @"Mid Wicket";
+            regioncode = @"MSC171";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <248 && Xposition  > 222   && Yposition > 185 && Yposition <210))
+        
+    {
+        wagonregiontext = @"Mid Wicket";
+        regioncode = @"MSC171";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+
+    
+  //  Deep Mid Wicket (Sweeper)
+
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <423 && Xposition  > 393   && Yposition > 245 && Yposition <280))
+        {
+            wagonregiontext = @"Deep Mid Wicket (Sweeper)";
+            regioncode = @"MSC172";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <335 && Xposition  > 302   && Yposition > 185 && Yposition <216))
+        
+    {
+        wagonregiontext = @"Deep Mid Wicket (Sweeper)";
+        regioncode = @"MSC172";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+  
+    
+    //Deep Forward (Sweeper)
+
+
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition <388 && Xposition  > 350   && Yposition > 320 && Yposition <360))
+        {
+            wagonregiontext = @"Deep Forward (Sweeper)";
+            regioncode = @"MSC173";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition <315 && Xposition  > 277   && Yposition > 242 && Yposition <280))
+        
+    {
+        wagonregiontext = @"Deep Forward (Sweeper)";
+        regioncode = @"MSC173";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+    }
+    
+    
+    //Silly Mid On
+
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition < 250 && Xposition > 230 && Yposition > 203 && Yposition <225))
+        {
+            wagonregiontext = @"Silly Mid On";
+            regioncode = @"MSC169";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition < 195 && Xposition  > 185   && Yposition > 160 && Yposition <174))
+        
+    {
+        wagonregiontext = @"Silly Mid On";
+        regioncode = @"MSC169";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+
+    }
+    
+    
+   // Short Mid On
+
+    
+    if (IS_IPAD_PRO)
+    {
+        
+        if (( Xposition < 260 && Xposition > 235 && Yposition > 236 && Yposition <254))
+        {
+            wagonregiontext = @"Short Mid On";
+            regioncode = @"MSC174";
+            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        }
+        //
+        //        else if(( Xposition >222 && Yposition <0)) {
+        //            wagonregiontext = @"Long Stop";
+        //            regioncode = @"MSC154";
+        //
+        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        //
+        //        }
+    }
+    
+    else if(( Xposition < 195 && Xposition  > 185   && Yposition > 184 && Yposition <200))
+        
+    {
+        wagonregiontext = @"Short Mid On";
+        regioncode = @"MSC174";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+        
+    }
+
 }
+
+
+
 
 
 
@@ -1887,16 +2798,7 @@
        if(IS_IPAD_PRO)
        {
         Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
-//        if(Xposition > 180 && Yposition > -18 && Xposition < 440 && Yposition < 128)
-//        {
-//            Img_ball.image =[UIImage imageNamed:@"RedBall"];
-//            [self.img_pichmap addSubview:Img_ball];
-//            _ballEventRecord.objPMX1=@1;
-//            _ballEventRecord.objPMY1=@1;
-//            _ballEventRecord.objPMX2=@(Xposition);
-//            _ballEventRecord.objPMY2=@(Yposition);
-//
-//        }
+
      if(Xposition > 205 && Yposition > 85 && Xposition < 455 && Yposition < 200)
        {
 
@@ -4379,4 +5281,12 @@
 }
 
 
+- (IBAction)btn_stricker_names:(id)sender {
+}
+- (IBAction)btn_nonstricker_name:(id)sender {
+}
+- (IBAction)btn_bowler_name:(id)sender {
+}
+- (IBAction)btn_last_bowler_name:(id)sender {
+}
 @end
