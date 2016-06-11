@@ -194,15 +194,16 @@
     self.lbl_nonstricker_strickrate.text = converstion.nonstrickerStrickRate;
     
     
+    
+    //team score details display
     _lbl_battingShrtName.text = converstion.BATTEAMSHORTNAME;
-    
     _lbl_firstIngsTeamName.text = converstion.BATTEAMSHORTNAME;
-    
     _lbl_secIngsTeamName.text = converstion.BOWLTEAMSHORTNAME;
+    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)converstion.BATTEAMRUNS,(unsigned long)converstion.BATTEAMWICKETS];
     
-    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld",(unsigned long) converstion.BATTEAMRUNS];
+    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld overs" ,(unsigned long)converstion.BATTEAMOVERS,(unsigned long)converstion.BATTEAMOVRBALLS];
     
-    
+    _lbl_runRate.text = [NSString stringWithFormat:@"RR %ld RRR ",(long)converstion.BATTEAMRUNRATE];
     
     
   _view_Wagon_wheel.hidden=YES;

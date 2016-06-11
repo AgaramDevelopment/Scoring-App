@@ -32,6 +32,11 @@
 
 @synthesize T_TARGETRUNS;
 @synthesize T_TARGETOVERS;
+@synthesize BATTEAMRUNS;
+@synthesize BATTEAMWICKETS;
+@synthesize BATTEAMOVERS;
+@synthesize BATTEAMOVRBALLS;
+@synthesize BATTEAMRUNRATE;
 
 
 
@@ -55,7 +60,6 @@
 @synthesize SHOTNAME;
 @synthesize SHOTTYPE;
 
-@synthesize BATTEAMRUNS;
 
 
 @synthesize strickerPlayerCode ;
@@ -101,9 +105,8 @@ BOOL  getOverStatus;
     //NSInteger *BATTEAMRUNS;
     NSInteger *BATTEAMPENALTY;
     NSInteger *BOWLTEAMPENALTY;
-    NSInteger *BATTEAMWICKETS;
-    NSInteger *BATTEAMOVERS;
-    NSInteger *BATTEAMOVRBALLS;
+   // NSInteger *BATTEAMWICKETS;
+
     NSInteger *BATTEAMOVRWITHEXTRASBALLS;
     NSInteger *PREVOVRBALLS;
     NSInteger *PREVOVRWITHEXTRASBALLS;
@@ -114,7 +117,7 @@ BOOL  getOverStatus;
     NSInteger *LASTBALLCODE;
     NSNumber *TOTALBALLS;
     NSInteger *INNINGSNUM;
-    NSNumber *BATTEAMRUNRATE;
+  
     //============================================================================
     //Deepak
     
@@ -140,9 +143,12 @@ BOOL  getOverStatus;
     
     
     NSMutableArray *countTeam = [DBManager getCountOver:COMPETITIONCODE :MATCHCODE];
+    if(countTeam.count>0){
     FetchSEPageLoadRecord *fetchSEPageLoadRecord = (FetchSEPageLoadRecord*)[countTeam objectAtIndex:0];
     INNINGSPROGRESS = fetchSEPageLoadRecord.INNINGSPROGRESS;
-    
+    }else{
+        INNINGSPROGRESS = 0;
+    }
     //getInningsNo
     NSMutableArray *innArray = [DBManager getInningsNo:COMPETITIONCODE :MATCHCODE];
     FetchSEPageLoadRecord *inns = (FetchSEPageLoadRecord*)[innArray objectAtIndex:0];
@@ -749,7 +755,7 @@ BOOL  getOverStatus;
     if([DBManager hasSTRIKERBALLS:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE STRIKERCODE:NONSTRIKERCODE]){
        nonstrickerDetaailsArray = [DBManager getStrickerCode:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO: INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE STRIKERCODE:NONSTRIKERCODE STRIKERBALLS:NONSTRIKERBALLS];
     }else{
-      nonstrickerDetaailsArray =  [DBManager getStrickerDetails:STRIKERCODE];
+      nonstrickerDetaailsArray =  [DBManager getStrickerDetails:NONSTRIKERCODE];
     }
     
     if(nonstrickerDetaailsArray.count>0){

@@ -94,4 +94,9 @@
 @property(strong,nonatomic)NSString *nonstrickerTotalBalls;
 @property(strong,nonatomic)NSString *nonstrickerStrickRate ;
 
+
+@property(nonatomic,assign)NSInteger *BATTEAMWICKETS;
+@property(nonatomic,assign)NSInteger *BATTEAMOVERS;
+@property(nonatomic,assign)NSInteger *BATTEAMOVRBALLS;
+@property(nonatomic,assign)NSNumber *BATTEAMRUNRATE;
 @end
