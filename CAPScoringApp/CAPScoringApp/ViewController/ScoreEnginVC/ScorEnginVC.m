@@ -148,6 +148,10 @@
 @property (nonatomic,strong)NSMutableArray *WicketEventArray;
 @property (nonatomic,strong)NSMutableArray *PlayerlistArray;
 
+@property (nonatomic, weak) IBOutlet UIView *objcommonRemarkviews;
+
+
+
 
 @end
 
@@ -170,18 +174,36 @@
     
     FetchSEPageLoadRecord *converstion = [[FetchSEPageLoadRecord alloc]init];
     
-    
     [converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
+    
+    //Stricker Details
+    self.lbl_stricker_name.text = converstion.strickerPlayerName;
+    self.lbl_stricker_runs.text = converstion.strickerTotalRuns;
+    self.lbl_stricker_balls.text = converstion.strickerTotalBalls;
+    self.lbl_stricker_sixs.text = converstion.strickerSixes;
+    self.lbl_stricker_strickrate.text = converstion.strickerStrickRate;
+    self.lbl_stricker_fours.text = converstion.strickerFours;
+    
+    //Non Stricker Details
+    self.lbl_nonstricker_name.text = converstion.nonstrickerPlayerName;
+    self.lbl_nonstricker_runs.text = converstion.nonstrickerTotalRuns;
+    self.lbl_nonstricker_balls.text = converstion.nonstrickerTotalBalls;
+    self.lbl_nonstricker_fours.text = converstion.nonstrickerFours;
+    self.lbl_nonstricker_sixs.text = converstion.nonstrickerSixes;
+    self.lbl_nonstricker_strickrate.text = converstion.nonstrickerStrickRate;
+    
+    
+    
+    //team score details display
     _lbl_battingShrtName.text = converstion.BATTEAMSHORTNAME;
-    
     _lbl_firstIngsTeamName.text = converstion.BATTEAMSHORTNAME;
-    
     _lbl_secIngsTeamName.text = converstion.BOWLTEAMSHORTNAME;
+    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)converstion.BATTEAMRUNS,(unsigned long)converstion.BATTEAMWICKETS];
     
-    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld",(unsigned long) converstion.BATTEAMRUNS];
+    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld overs" ,(unsigned long)converstion.BATTEAMOVERS,(unsigned long)converstion.BATTEAMOVRBALLS];
     
-    
+    _lbl_runRate.text = [NSString stringWithFormat:@"RR %ld RRR ",(long)converstion.BATTEAMRUNRATE];
     
     
   _view_Wagon_wheel.hidden=YES;
@@ -1417,6 +1439,16 @@
     self.btn_lastinstance.userInteractionEnabled=NO;
 }
 
+-(void)BtndisableforWicketsMethod{
+    self.btn_run1.userInteractionEnabled=NO;
+    self.btn_run2.userInteractionEnabled=NO;
+    self.btn_run3.userInteractionEnabled=NO;
+    self.btn_highRun.userInteractionEnabled=NO;
+    self.btn_B4.userInteractionEnabled=NO;
+    self.btn_B6.userInteractionEnabled=NO;
+    
+}
+
 -(IBAction)didClickLeftSideBtn_Action:(id)sender
 {
     if(objextras!=nil)
@@ -1558,20 +1590,78 @@
         }else{
         
             _WicketTypeArray=[[NSMutableArray alloc]init];
-            _WicketTypeArray =[DBManager RetrieveWicketType];
+            NSMutableArray *tempWickettypeArray  =[DBManager RetrieveWicketType];
+            
+            
+            if(self.ballEventRecord.objIssix.intValue == 1){
+                
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                message:@"wicket not possible in B6"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+                
+            }else if(self.ballEventRecord.objIsFour.intValue == 1){
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                message:@"wicket not possible in B4"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+                [alert show];
+            } else {if(self.ballEventRecord.objNoball.intValue !=0){
+                for(int i=0;i<tempWickettypeArray.count;i++){
+                    WicketTypeRecord *wicketTypeRecord =[tempWickettypeArray objectAtIndex:i];
+                    if ([wicketTypeRecord.metasubcode isEqual:@"MSC097"] || [wicketTypeRecord.metasubcode isEqual:@"MSC100"]|| [wicketTypeRecord.metasubcode isEqual:@"MSC103"] || [wicketTypeRecord.metasubcode isEqual:@"MSC106"]) {
+                        [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
+                    }
+                }
+             }else if(self.ballEventRecord.objWide.intValue !=0){
+                 for(int i=0;i<tempWickettypeArray.count;i++){
+                     WicketTypeRecord *wicketTypeRecord =[tempWickettypeArray objectAtIndex:i];
+                     if([wicketTypeRecord.metasubcode isEqual:@"MSC097"] || [wicketTypeRecord.metasubcode isEqual:@"MSC104"] ||[wicketTypeRecord.metasubcode isEqual:@"MSC099"] || [wicketTypeRecord.metasubcode isEqual:@"MSC106"] ){
+                         [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
+                     }
+                 }
+             }else if(self.ballEventRecord.objRuns.intValue != 0){
+                for(int i=0;i<tempWickettypeArray.count;i++){
+                    WicketTypeRecord *wicketTypeRecord  = [tempWickettypeArray objectAtIndex:i];
+                    if([wicketTypeRecord.metasubcode isEqual: @"MSC097"]){
+                        [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
+                    }
+                }
+            }else if(self.ballEventRecord.objLegByes.intValue !=0){
+                for(int i=0;i<tempWickettypeArray.count;i++){
+                    WicketTypeRecord *wicketTypeRecord =[tempWickettypeArray objectAtIndex:i];
+                    if([wicketTypeRecord.metasubcode isEqual: @"MSC097"]){
+                        [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
+                    }
+                }
+            }else if(self.ballEventRecord.objByes.intValue !=0){
+                for(int i=0;i<tempWickettypeArray.count;i++){
+                    WicketTypeRecord *wicketTypeRecord =[tempWickettypeArray objectAtIndex:i];
+                    if([wicketTypeRecord.metasubcode isEqual:@"MSC097"]){
+                        [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
+                    }
+                }
+            }else{
+                _WicketTypeArray  = [[NSMutableArray alloc]initWithArray:tempWickettypeArray];
+                
+            }
             
             [self selectedButtonBg:selectBtnTag];
             
             isWicketSelected = YES;
             wicketOption = 1;
-            
+            // [self BtndisableforWicketsMethod];
+                
             self.view_aggressiveShot.hidden = YES;
             self.view_defensive.hidden = YES;
             self.view_bowlType.hidden = YES;
             self.view_fastBowl.hidden = NO;
             
             [self.tbl_fastBowl reloadData];
-            
+            }
 //            if(selectedNRS!=nil){
 //                
 //                int indx=0;
@@ -3640,8 +3730,8 @@
     }
     else if(selectBtnTag.tag==120)
     {
-        //  [self selectBtncolor_Action:@"120" :nil :209];
-        //[self RemarkMethode];
+         [self selectBtncolor_Action:@"120" :nil :209];
+         [self RemarkMethode];
         
     }
     else if(selectBtnTag.tag==121)
@@ -3719,10 +3809,10 @@
 
 -(void)RemarkMethode
 {
-    UIView * objcommonRemarkview=[[UIView alloc]initWithFrame:CGRectMake(self.Allvaluedisplayview.frame.origin.x-110,self.Allvaluedisplayview.frame.origin.y+50, self.Allvaluedisplayview.frame.size.width-100, 200)];
-    [objcommonRemarkview setBackgroundColor:[UIColor redColor]];
-    UITextView *txt_Remark=[[UITextView alloc]initWithFrame:CGRectMake(objcommonRemarkview.frame.origin.x,objcommonRemarkview.frame.origin.y-100, objcommonRemarkview.frame.size.width-100,100)];
-    [txt_Remark setBackgroundColor:[UIColor grayColor]];
+    UIView *objcommonRemarkview=[[UIView alloc]initWithFrame:CGRectMake(self.Allvaluedisplayview.frame.origin.x-110,self.Allvaluedisplayview.frame.origin.y+50, self.Allvaluedisplayview.frame.size.width-100, 200)];
+    [objcommonRemarkview setBackgroundColor:[UIColor grayColor]];
+    UITextView *txt_Remark=[[UITextView alloc]initWithFrame:CGRectMake(objcommonRemarkview.frame.origin.x-30,objcommonRemarkview.frame.origin.y-110, objcommonRemarkview.frame.size.width-40,120)];
+    [txt_Remark setBackgroundColor:[UIColor whiteColor]];
     
     [objcommonRemarkview addSubview:txt_Remark];
     
@@ -3730,34 +3820,29 @@
     
     
     
-    UIButton *btn_save=[[UIButton alloc]initWithFrame:CGRectMake(objcommonRemarkview.frame.origin.x+50,objcommonRemarkview.frame.size.height-50,50,50)];
-    [btn_save setBackgroundColor:[UIColor whiteColor]];
+    UIButton *btn_save=[[UIButton alloc]initWithFrame:CGRectMake(objcommonRemarkview.frame.origin.x-10,objcommonRemarkview.frame.size.height-50,50,50)];
+    //[btn_save setBackgroundColor:[UIColor whiteColor]];
     [btn_save setTitle:@"Save" forState:UIControlStateNormal];
     [btn_save addTarget:self action:@selector(didClickRemarkSave_Action:) forControlEvents:UIControlEventTouchUpInside];
     [objcommonRemarkview addSubview:btn_save];
-    UIButton *btn_Cancel=[[UIButton alloc]initWithFrame:CGRectMake(objcommonRemarkview.frame.size.width-50,objcommonRemarkview.frame.size.height-50,50,50)];
-    [btn_Cancel setTitle:@"Cancel" forState:UIControlStateNormal];
-    [btn_Cancel setBackgroundColor:[UIColor whiteColor]];
-    [btn_save addTarget:self action:@selector(didClickRemarkCancel_Action:) forControlEvents:UIControlEventTouchUpInside];
-    [objcommonRemarkview addSubview:btn_Cancel];
     
+    UIButton *btn_Cancel=[[UIButton alloc]initWithFrame:CGRectMake(objcommonRemarkview.frame.size.width-90,objcommonRemarkview.frame.size.height-50,60,50)];
+    [btn_Cancel setTitle:@"Cancel" forState:UIControlStateNormal];
+    //[btn_Cancel setBackgroundColor:[UIColor whiteColor]];
+    [btn_Cancel addTarget:self action:@selector(didClickRemarkCancel_Action:) forControlEvents:UIControlEventTouchUpInside];
+    [objcommonRemarkview addSubview:btn_Cancel];
+     btn_Cancel.userInteractionEnabled=YES;
     
 }
-
-
-
-
-
-
-
 
 -(IBAction)didClickRemarkSave_Action:(id)sender
 {
     
 }
--(IBAction)didClickRemarkCancel_Action:(id)senderf
+-(IBAction)didClickRemarkCancel_Action:(id)sender
 {
-    
+ 
+    [[self.view viewWithTag:120] setHidden:YES];
 }
 
 -(void)selectBtncolor_Action:(NSString*)select_Btntag :(UIButton *)select_BtnName :(NSInteger)selectview
