@@ -201,8 +201,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *lbl_centerpoint;
 
-
-//team score details
 @property (weak, nonatomic) IBOutlet UILabel *lbl_battingShrtName;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_battingScoreWkts;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_overs;
