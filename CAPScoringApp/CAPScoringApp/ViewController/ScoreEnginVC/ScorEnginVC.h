@@ -10,6 +10,8 @@
 
 @interface ScorEnginVC : UIViewController<UIGestureRecognizerDelegate>
 
+@property(nonatomic,strong) NSString *teamAcode;
+@property(nonatomic,strong) NSString *teamBcode;
 
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;
@@ -209,6 +211,21 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbl_secIngsTeamName;
 @property (weak, nonatomic) IBOutlet UIImageView *img_firstIngsTeamName;
 @property (weak, nonatomic) IBOutlet UIImageView *img_secIngsTeamName;
+
+@property (weak, nonatomic) IBOutlet UILabel *lbl_teamAsecIngsHeading;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_teamBsecIngsHeading;
+
+
+
+@property (weak, nonatomic) IBOutlet UILabel *lbl_teamAfirstIngsScore;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_teamAfirstIngsOvs;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_teamASecIngsScore;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_teamASecIngsOvs;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_teamBSecIngsScore;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_teamBSecIngsOvs;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_teamBfirstIngsScore;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_teamBfirstIngsOvs;
+
 
 //Stricker
 @property (strong, nonatomic) IBOutlet UILabel *lbl_stricker_name;
