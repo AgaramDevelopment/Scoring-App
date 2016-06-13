@@ -199,5 +199,12 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *lbl_centerpoint;
 
-
+@property (weak, nonatomic) IBOutlet UILabel *lbl_battingShrtName;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_battingScoreWkts;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_overs;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_runRate;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_firstIngsTeamName;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_secIngsTeamName;
+@property (weak, nonatomic) IBOutlet UIImageView *img_firstIngsTeamName;
+@property (weak, nonatomic) IBOutlet UIImageView *img_secIngsTeamName;
 @end
