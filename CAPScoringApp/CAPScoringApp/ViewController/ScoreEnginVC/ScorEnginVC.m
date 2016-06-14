@@ -109,8 +109,10 @@
     
 }
 
-
-
+@property(strong,nonatomic)NSString *matchTypeCode;
+//team logo
+@property (nonatomic,strong) NSMutableArray *selectedTeamArray;
+@property (nonatomic,strong) NSMutableArray *selectedTeamFilterArray;
 
 @property(nonatomic,strong) NSMutableArray *selectbtnvalueArray;
 @property(nonatomic,strong) NSMutableArray *extrasOptionArray;
@@ -5357,6 +5359,117 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     [dic setValue:commentText forKey:@"Commenttext"];
 }
 
+
+//-(void)teamLogo{
+//    //logo image
+//    NSMutableArray *teamCode = [[NSMutableArray alloc]init];
+//    
+//    [teamCode addObject:@"TEA0000005"];
+//    [teamCode addObject:@"TEA0000006"];
+//    [teamCode addObject:@"TEA0000008"];
+//
+//    
+//    for(int i=0;i<[teamCode count];i++){
+//        
+//        [self addImageInAppDocumentLocation:[teamCode objectAtIndex:i]];
+//    }
+//    
+//    
+//    
+//    NSMutableArray *mTeam = [[NSMutableArray alloc]init];
+//    [mTeam addObject:self.matchCode];
+//    [mTeam addObject:self.teamAcode];
+//    
+//    
+//    self.selectedTeamFilterArray = [[NSMutableArray alloc]initWithArray: self.selectedTeamArray];
+//    
+//    
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir,self.teamAcode];
+//    
+//    
+//    BOOL isFileExist = [fileManager fileExistsAtPath:pngFilePath];
+//    UIImage *img;
+//    if(isFileExist){
+//        img = [UIImage imageWithContentsOfFile:pngFilePath];
+//        self.img_firstIngsTeamName.image = img;
+//    }else{
+//        img  = [UIImage imageNamed: @"no_image.png"];
+//        _img_firstIngsTeamName.image = img;
+//    }
+//    
+//    
+//    
+//    
+//    NSFileManager *fileManagerB = [NSFileManager defaultManager];
+//    NSString *docDirB = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+//    NSString *pngFilePathB = [NSString stringWithFormat:@"%@/%@.png", docDirB,self.teamBcode];
+//    BOOL isFileExistB = [fileManagerB fileExistsAtPath:pngFilePathB];
+//    UIImage *imgB;
+//    if(isFileExistB){
+//        imgB = [UIImage imageWithContentsOfFile:pngFilePathB];
+//        _img_secIngsTeamName.image = imgB;
+//    }else{
+//        imgB  = [UIImage imageNamed: @"no_image.png"];
+//        _img_secIngsTeamName.image = imgB;
+//    }
+//}
+//-(void) addImageInAppDocumentLocation:(NSString*) fileName{
+//    
+//    BOOL success = [self checkFileExist:fileName];
+//    
+//    if(!success) {//If file not exist
+//        
+//        UIImage  *newImage = [UIImage imageNamed:fileName];
+//        NSData *imageData = UIImagePNGRepresentation(newImage);
+//        
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString *documentsDirectory = [paths objectAtIndex:0];
+//        
+//        NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]];
+//        
+//        if (![imageData writeToFile:imagePath atomically:NO])
+//        {
+//            NSLog((@"Failed to cache image data to disk"));
+//        }else
+//        {
+//            NSLog(@"the cachedImagedPath is %@",imagePath);
+//        }
+//    }
+//}
+//
+////Check given file name exist in document directory
+//- (BOOL) checkFileExist:(NSString*) fileName{
+//    NSFileManager *fileManager = [NSFileManager defaultManager];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
+//    NSString *documentsDir = [paths objectAtIndex:0];
+//    NSString *filePath = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]];
+//    return [fileManager fileExistsAtPath:filePath];
+//}
+
+-(void)hideLabelBasedOnMatchType{
+    
+    self.matchTypeCode = @"MSC115";
+    
+    if ([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] ||
+        [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) {
+        
+     
+        _lbl_teamAsecIngsHeading.hidden = YES;
+        _lbl_teamBsecIngsHeading.hidden = YES;
+        
+        _lbl_teamASecIngsScore.hidden = YES;
+        _lbl_teamASecIngsOvs.hidden = YES;
+        _lbl_teamBSecIngsScore.hidden = YES;
+        _lbl_teamBSecIngsOvs.hidden = YES;
+        
+    }
+    
+    
+    
+    
+}
 
 - (IBAction)btn_stricker_names:(id)sender {
     [strickerTableView removeFromSuperview];

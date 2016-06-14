@@ -8963,6 +8963,16 @@
                         <outlet property="lbl_stricker_runs" destination="xCt-W8-Uti" id="0ka-gB-UN8"/>
                         <outlet property="lbl_stricker_sixs" destination="WKy-3Z-zJ4" id="vdO-AQ-5p8"/>
                         <outlet property="lbl_stricker_strickrate" destination="fZb-Cm-pDs" id="qVj-90-IWn"/>
+                        <outlet property="lbl_teamASecIngsOvs" destination="9QZ-9z-q59" id="KET-Lj-taH"/>
+                        <outlet property="lbl_teamASecIngsScore" destination="63m-Pb-YHG" id="W98-vW-gXZ"/>
+                        <outlet property="lbl_teamAfirstIngsOvs" destination="aPP-eB-Fw8" id="xMm-HZ-NhJ"/>
+                        <outlet property="lbl_teamAfirstIngsScore" destination="8Pt-61-iMm" id="yBq-Td-W0g"/>
+                        <outlet property="lbl_teamAsecIngsHeading" destination="xBA-TM-k7C" id="xgC-Rt-ECj"/>
+                        <outlet property="lbl_teamBSecIngsOvs" destination="Rob-4m-cNt" id="Vh9-Ep-J1z"/>
+                        <outlet property="lbl_teamBSecIngsScore" destination="BiT-Tf-41I" id="Df3-c0-Uaj"/>
+                        <outlet property="lbl_teamBfirstIngsOvs" destination="jEw-F3-zNz" id="sDR-NC-s8C"/>
+                        <outlet property="lbl_teamBfirstIngsScore" destination="hjv-Z6-est" id="3kG-Mu-IMr"/>
+                        <outlet property="lbl_teamBsecIngsHeading" destination="Jno-fG-AkE" id="Lkf-jj-2xT"/>
                         <outlet property="lbl_umpirename" destination="sUV-S7-KRQ" id="mPg-Nz-1hr"/>
                         <outlet property="leftsideview" destination="c52-76-qBe" id="R3O-R6-g4I"/>
                         <outlet property="selectBatsmenName" destination="gNa-HE-7T4" id="UBt-R3-sKR"/>
