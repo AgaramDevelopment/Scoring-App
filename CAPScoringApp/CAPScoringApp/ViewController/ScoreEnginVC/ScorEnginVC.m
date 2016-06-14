@@ -201,6 +201,8 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
 //    [fetchLastBallBowledPlayer getLastBallBowlerPlayer:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO OVERNO:data BATTINGTEAMCODE:fetchSEPageLoadRecord.BATTINGTEAMCODE];
    
     
+    //[converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
     
     //Stricker Details
     self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
