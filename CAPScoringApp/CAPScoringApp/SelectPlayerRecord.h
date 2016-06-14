@@ -16,4 +16,5 @@
 @property(nonatomic,strong)NSString *isSelectCapten;
 @property(nonatomic,strong)NSString *isSelectWKTKeeper;
 @property(nonatomic,strong)NSString *playerOrder;
+@property(nonatomic,strong)NSString *battingStyle;
 @end

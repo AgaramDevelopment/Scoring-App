@@ -224,7 +224,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbl_teamBfirstIngsScore;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_teamBfirstIngsOvs;
 
-
 //Stricker
 @property (strong, nonatomic) IBOutlet UILabel *lbl_stricker_name;
 - (IBAction)btn_stricker_names:(id)sender;
@@ -261,6 +260,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_sixs;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_strickrate;
 
+- (IBAction)btn_swap:(id)sender;
 
 
 @end

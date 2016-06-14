@@ -11,4 +11,6 @@
 @implementation BowlerEvent
 @synthesize BowlerName;
 @synthesize BowlerCode;
+@synthesize bowlingType;
+@synthesize bowlingStyle;
 @end

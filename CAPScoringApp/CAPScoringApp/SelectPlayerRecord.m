@@ -12,6 +12,7 @@
 
 @synthesize playerCode;
 @synthesize playerName;
+@synthesize battingStyle;
 @synthesize isSelected,isSelectCapten,isSelectWKTKeeper,playerOrder;
 
 @end
