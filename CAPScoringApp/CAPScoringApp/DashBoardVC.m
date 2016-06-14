@@ -9,7 +9,7 @@
 #import "DashBoardVC.h"
 #import "TorunamentVC.h"
 #import "LoginVC.h"
-#import "ArchivesVC.h"
+
 @interface DashBoardVC ()
 
 @end
@@ -27,16 +27,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 
 - (IBAction)btn_syn_Data:(id)sender {
@@ -56,19 +46,15 @@
     _view_new_Match.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
     
     
-    [self tournmentView];
+    [self tournmentView:@"Newmatch"];
 }
 
 - (IBAction)btn_archives:(id)sender {
     
     _img_archives.image = [UIImage imageNamed:@"ico-archives02.png"];
     _view_archives.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
-   
-        ArchivesVC * objArchiveVC=[[ArchivesVC alloc]init];
-        objArchiveVC=(ArchivesVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
-        [self.navigationController pushViewController:objArchiveVC animated:YES];
-        
-   
+     [self tournmentView:@"Archives"];
+
 
 }
 
@@ -123,27 +109,24 @@
     else
     {
         NSLog(@"user pressed Button Indexed 1");
-        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
-        DashBoardVC *dashBoard =(DashBoardVC*) [storyBoard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+        
+        DashBoardVC *dashBoard =(DashBoardVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+        [self.navigationController pushViewController:dashBoard animated:YES];
         //Fixvc.CompitionCode=selectindexarray;
-        [dashBoard setModalPresentationStyle:UIModalPresentationFullScreen];
-        [self presentViewController:dashBoard animated:NO completion:nil];
-    }
+            }
 }
 
 
 
--(void) tournmentView{
+-(void) tournmentView :(NSString *) selectType{
     
     TorunamentVC*tournmentVc = [[TorunamentVC alloc]init];
     
     tournmentVc =  (TorunamentVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"tornmentid"];
+    tournmentVc.selectDashBoard=selectType;
  [self.navigationController pushViewController:tournmentVc animated:YES];
-//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//      TorunamentVC*tournmentVc =(TorunamentVC*) [storyBoard instantiateViewControllerWithIdentifier:@"tornmentid"];
-//    [tournmentVc setModalPresentationStyle:UIModalPresentationFullScreen];
-//    [self presentViewController:tournmentVc animated:NO completion:nil];
+
     
 }
 

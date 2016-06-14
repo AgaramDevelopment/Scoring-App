@@ -210,21 +210,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img_firstIngsTeamName;
 @property (weak, nonatomic) IBOutlet UIImageView *img_secIngsTeamName;
 
-@property (weak, nonatomic) IBOutlet UILabel *lbl_teamAsecIngsHeading;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_teamBsecIngsHeading;
-
-
-
-@property (weak, nonatomic) IBOutlet UILabel *lbl_teamAfirstIngsScore;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_teamAfirstIngsOvs;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_teamASecIngsScore;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_teamASecIngsOvs;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_teamBSecIngsScore;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_teamBSecIngsOvs;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_teamBfirstIngsScore;
-@property (weak, nonatomic) IBOutlet UILabel *lbl_teamBfirstIngsOvs;
-
-//Stricker
 @property (strong, nonatomic) IBOutlet UILabel *lbl_stricker_name;
 - (IBAction)btn_stricker_names:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_stricker_runs;
@@ -241,26 +226,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_fours;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_sixs;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_strickrate;
-
-//Current Bowler
-@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_name;
-- (IBAction)btn_bowler_name:(id)sender;
-@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_runs;
-@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_balls;
-@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_fours;
-@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_sixs;
-@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_strickrate;
-
-//Last Bowler
-@property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_name;
-- (IBAction)btn_last_bowler_name:(id)sender;
-@property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_runs;
-@property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_balls;
-@property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_fours;
-@property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_sixs;
-@property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_strickrate;
-
-- (IBAction)btn_swap:(id)sender;
-
 
 @end
