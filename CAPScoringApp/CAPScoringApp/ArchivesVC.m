@@ -11,6 +11,7 @@
 #import "DBManager.h"
 #import "Archive.h"
 #import "FixturesRecord.h"
+#import "FetchSEPageLoadRecord.h"
 
 @interface ArchivesVC ()<SwipeableCellDelegate>
 {
@@ -77,6 +78,8 @@
     
 
     FixturesRecord *objFixtureRecord=(FixturesRecord*)[FetchCompitionArray objectAtIndex:indexPath.row];
+    NSLog(@"Matchcode=%@",objFixtureRecord.matchcode);
+    NSLog(@"Compitioncode=%@",objFixtureRecord.competitioncode);
     
     NSString * teamAname=objFixtureRecord.teamAname;
     NSString * teamBname =objFixtureRecord.teamBname;
@@ -94,10 +97,43 @@
     [formatter setDateFormat:@"MMM ''yy"];
     newDate = [formatter stringFromDate:date];
     cell.lbl_displaydate.text=newDate;
-    [cell.Btn_swipebutton addTarget:self action:@selector(swiftRightsideBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    NSMutableArray* objInniningsarray=[DBManager FETCHSEALLINNINGSSCOREDETAILS:objFixtureRecord.competitioncode MATCHCODE:objFixtureRecord.matchcode];
+     FetchSEPageLoadRecord *objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
+    cell.innings1teamname1.text=objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME;
+    cell.innings1team1runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FIRSTINNINGSTOTAL,objfetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+    cell.innings1team1overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+    cell.innings2teamname2.text=objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
+    cell.innings2team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+    cell.innings2team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
+//    objFixtureRecord.matchTypeCode = @"MSC115";
+//    
+//    if ([objFixtureRecord.matchTypeCode isEqualToString:@"MSC115"] || [objFixtureRecord.matchTypeCode isEqualToString:@"MSC116"] ||
+//        [objFixtureRecord.matchTypeCode isEqualToString:@"MSC022"] || [objFixtureRecord.matchTypeCode isEqualToString:@"MSC024"]) {
+//        
+//        
+//        _lbl_teamAsecIngsHeading.hidden = YES;
+//        _lbl_teamBsecIngsHeading.hidden = YES;
+//        
+//        _lbl_teamASecIngsScore.hidden = YES;
+//        _lbl_teamASecIngsOvs.hidden = YES;
+//        _lbl_teamBSecIngsScore.hidden = YES;
+//        _lbl_teamBSecIngsOvs.hidden = YES;
+//        
+//    }else{
+//        _lbl_teamAsecIngsHeading.hidden = NO;
+//        _lbl_teamBsecIngsHeading.hidden = NO;
+//        
+//        _lbl_teamASecIngsScore.hidden = NO;
+//        _lbl_teamASecIngsOvs.hidden = NO;
+//        _lbl_teamBSecIngsScore.hidden = NO;
+//        _lbl_teamBSecIngsOvs.hidden = NO;
+//        
+//    }
+
     cell.backgroundColor=[UIColor clearColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
+    
       return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

@@ -217,7 +217,11 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     //team score details display
     _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
     _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+    
     _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
+    
+    
+    
     _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
     
     _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld OVS" ,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVERS,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVRBALLS];
@@ -4549,9 +4553,6 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
         _lbl_teamBSecIngsOvs.hidden = NO;
         
     }
-    
-    
-    
     
 }
 

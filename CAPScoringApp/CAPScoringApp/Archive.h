@@ -22,6 +22,21 @@
 @property(nonatomic,strong) IBOutlet UILabel * lbl_date;
 @property(nonatomic,strong) IBOutlet UILabel * lbl_displaydate;
 
+
+
+@property(strong,nonatomic) IBOutlet UILabel * innings1teamname1;
+@property(strong,nonatomic) IBOutlet UILabel * innings1teamname2;
+@property(strong,nonatomic) IBOutlet UILabel * innings1team1runs;
+@property(strong,nonatomic) IBOutlet UILabel * innings1team2runs;
+@property(strong,nonatomic) IBOutlet UILabel * innings1team1overs;
+@property(strong,nonatomic) IBOutlet UILabel * innings1team2overs;
+
+@property(strong,nonatomic) IBOutlet UILabel * innings2teamname1;
+@property(strong,nonatomic) IBOutlet UILabel * innings2teamname2;
+@property(strong,nonatomic) IBOutlet UILabel * innings2team1runs;
+@property(strong,nonatomic) IBOutlet UILabel * innings2team2runs;
+@property(strong,nonatomic) IBOutlet UILabel * innings2team1overs;
+@property(strong,nonatomic) IBOutlet UILabel * innings2team2overs;
 @property (nonatomic, weak) id <SwipeableCellDelegate> delegate;
 @property (nonatomic, strong) NSString *itemText;
 

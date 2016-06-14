@@ -227,4 +227,34 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_sixs;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_strickrate;
 
+
+//Current Bowler
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_name;
+- (IBAction)btn_bowler_name:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_runs;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_balls;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_fours;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_sixs;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_strickrate;
+
+//Last Bowler
+@property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_name;
+- (IBAction)btn_last_bowler_name:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_runs;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_balls;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_fours;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_sixs;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_strickrate;
+
+@property (strong,nonatomic) IBOutlet UILabel  * lbl_teamAfirstIngsScore;
+@property (strong,nonatomic) IBOutlet UILabel  * lbl_teamAfirstIngsOvs;
+@property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBfirstIngsScore;
+@property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBfirstIngsOvs;
+@property (strong,nonatomic) IBOutlet UILabel  * lbl_teamAsecIngsHeading;
+@property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBsecIngsHeading;
+@property (strong,nonatomic) IBOutlet UILabel  * lbl_teamASecIngsScore;
+@property (strong,nonatomic) IBOutlet UILabel  * lbl_teamASecIngsOvs;
+@property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsScore;
+@property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsOvs;
+
 @end
