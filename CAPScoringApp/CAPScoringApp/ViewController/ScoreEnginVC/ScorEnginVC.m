@@ -174,7 +174,7 @@
     
     FetchSEPageLoadRecord *converstion = [[FetchSEPageLoadRecord alloc]init];
     
-    [converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    //[converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
     
     //Stricker Details

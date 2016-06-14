@@ -367,4 +367,6 @@
 +(NSString*) GetSecondTeamCodeForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) OLDINNINGSNO;
 
 +(NSString*) GetThirdTeamCodeForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) OLDINNINGSNO;
+
++(NSMutableArray *)getMatchStatus;
 @end

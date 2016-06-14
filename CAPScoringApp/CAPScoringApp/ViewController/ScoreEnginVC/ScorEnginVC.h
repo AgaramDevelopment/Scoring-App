@@ -207,4 +207,22 @@
 @property (weak, nonatomic) IBOutlet UILabel *lbl_secIngsTeamName;
 @property (weak, nonatomic) IBOutlet UIImageView *img_firstIngsTeamName;
 @property (weak, nonatomic) IBOutlet UIImageView *img_secIngsTeamName;
+
+@property (strong, nonatomic) IBOutlet UILabel *lbl_stricker_name;
+- (IBAction)btn_stricker_names:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_stricker_runs;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_stricker_balls;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_stricker_sixs;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_stricker_strickrate;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_stricker_fours;
+
+//Non Stricker
+@property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_name;
+- (IBAction)btn_nonstricker_name:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_runs;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_balls;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_fours;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_sixs;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_strickrate;
+
 @end

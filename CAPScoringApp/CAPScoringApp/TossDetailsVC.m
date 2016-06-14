@@ -745,23 +745,23 @@ if (buttonIndex == 0 && alertView.tag == 1)
         {
             
             
-//            ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
-//            
-//            scoreEngine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
-//                       scoreEngine.matchCode=self.MATCHCODE;
-//                      scoreEngine.competitionCode=self.CompetitionCode;
-//            [self.navigationController pushViewController:scoreEngine animated:YES];
-            NSLog(@"user pressed Button Indexed 0");
-                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
             
-                ScorEnginVC *scoreEngine =(ScorEnginVC*) [storyBoard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
-               scoreEngine.matchCode=self.MATCHCODE;
-               scoreEngine.competitionCode=self.CompetitionCode;
-              // scoreEngine.strikerArray  =Strikerselectindexarray;
-            //scoreEngine.non_StrikerArray =NonStrikerselectindexarray;
-                //Fixvc.CompitionCode=selectindexarray;
-                [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
-                [self presentViewController:scoreEngine animated:NO completion:nil];
+            scoreEngine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+                       scoreEngine.matchCode=self.MATCHCODE;
+                      scoreEngine.competitionCode=self.CompetitionCode;
+            [self.navigationController pushViewController:scoreEngine animated:YES];
+           // NSLog(@"user pressed Button Indexed 0");
+//                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//            
+//                ScorEnginVC *scoreEngine =(ScorEnginVC*) [storyBoard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+//               scoreEngine.matchCode=self.MATCHCODE;
+//               scoreEngine.competitionCode=self.CompetitionCode;
+//              // scoreEngine.strikerArray  =Strikerselectindexarray;
+//            //scoreEngine.non_StrikerArray =NonStrikerselectindexarray;
+//                //Fixvc.CompitionCode=selectindexarray;
+//                [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
+//                [self presentViewController:scoreEngine animated:NO completion:nil];
         }
 //        else
 //        {
