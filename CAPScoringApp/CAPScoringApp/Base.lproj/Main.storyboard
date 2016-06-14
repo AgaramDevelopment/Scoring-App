@@ -8464,7 +8464,7 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ytp-Xz-BdY">
                                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                                 <subviews>
-                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RHWagon" translatesAutoresizingMaskIntoConstraints="NO" id="Hb9-Im-FDR">
+                                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Hb9-Im-FDR">
                                                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                         <constraints>
@@ -11093,7 +11093,6 @@
         <image name="BowlingLogo" width="48" height="48"/>
         <image name="Fast" width="54" height="54"/>
         <image name="Fielding" width="54" height="54"/>
-        <image name="RHWagon" width="284" height="284"/>
         <image name="Radio.off" width="72" height="72"/>
         <image name="Radio.on" width="72" height="72"/>
         <image name="TNCAImg" width="48" height="48"/>
