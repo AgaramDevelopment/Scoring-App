@@ -10,6 +10,8 @@
 
 @interface ScorEnginVC : UIViewController<UIGestureRecognizerDelegate>
 
+@property(nonatomic,strong) NSString *teamAcode;
+@property(nonatomic,strong) NSString *teamBcode;
 
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;

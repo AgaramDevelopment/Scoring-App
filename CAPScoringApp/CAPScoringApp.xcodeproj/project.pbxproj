@@ -15,6 +15,9 @@
 		187952331D02A410001A1224 /* FieldingEventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 187952311D02A410001A1224 /* FieldingEventRecord.m */; };
 		187952351D02AD28001A1224 /* FieldingFactorRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1879522C1D02A0B4001A1224 /* FieldingFactorRecord.m */; };
 		188130401D0BF3ED00908F65 /* FetchSEPageLoadRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1881303F1D0BF3ED00908F65 /* FetchSEPageLoadRecord.m */; };
+		1881304E1D0C725100908F65 /* Breaks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1881304D1D0C725100908F65 /* Breaks.m */; };
+		188130511D0C725E00908F65 /* EndInnings.m in Sources */ = {isa = PBXBuildFile; fileRef = 188130501D0C725E00908F65 /* EndInnings.m */; };
+		1881E07F1D0FEC86003DEA09 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 1881E07E1D0FEC86003DEA09 /* TNCA_DATABASE.sqlite */; };
 		1886718A1CFFF77E004DEDA0 /* AggressiveShotTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */; };
 		245E9F161D0143C200D7C07A /* PlayerLevelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 245E9F151D0143C200D7C07A /* PlayerLevelCell.m */; };
 		24622DBE1D0AD8860057A08A /* ArchivesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24622DBD1D0AD8860057A08A /* ArchivesVC.m */; };
@@ -104,6 +107,11 @@
 		187952311D02A410001A1224 /* FieldingEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldingEventRecord.m; sourceTree = "<group>"; };
 		1881303E1D0BF3ED00908F65 /* FetchSEPageLoadRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchSEPageLoadRecord.h; sourceTree = "<group>"; };
 		1881303F1D0BF3ED00908F65 /* FetchSEPageLoadRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchSEPageLoadRecord.m; sourceTree = "<group>"; };
+		1881304C1D0C725100908F65 /* Breaks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Breaks.h; path = Resource/Breaks.h; sourceTree = "<group>"; };
+		1881304D1D0C725100908F65 /* Breaks.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Breaks.m; path = Resource/Breaks.m; sourceTree = "<group>"; };
+		1881304F1D0C725E00908F65 /* EndInnings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EndInnings.h; path = Resource/EndInnings.h; sourceTree = "<group>"; };
+		188130501D0C725E00908F65 /* EndInnings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EndInnings.m; path = Resource/EndInnings.m; sourceTree = "<group>"; };
+		1881E07E1D0FEC86003DEA09 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = ../../../../../TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		188671881CFFF77E004DEDA0 /* AggressiveShotTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AggressiveShotTypeCell.h; sourceTree = "<group>"; };
 		188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggressiveShotTypeCell.m; sourceTree = "<group>"; };
 		245E9F141D0143C200D7C07A /* PlayerLevelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerLevelCell.h; path = SubClass/PlayerLevelCell/PlayerLevelCell.h; sourceTree = "<group>"; };
@@ -442,6 +450,10 @@
 		CE00183F1CF431C100668D8B /* Records */ = {
 			isa = PBXGroup;
 			children = (
+				1881304F1D0C725E00908F65 /* EndInnings.h */,
+				188130501D0C725E00908F65 /* EndInnings.m */,
+				1881304C1D0C725100908F65 /* Breaks.h */,
+				1881304D1D0C725100908F65 /* Breaks.m */,
 				1881303E1D0BF3ED00908F65 /* FetchSEPageLoadRecord.h */,
 				1881303F1D0BF3ED00908F65 /* FetchSEPageLoadRecord.m */,
 				048B5A9C1D0AF1A7009F12B8 /* WicketTypeRecord.h */,

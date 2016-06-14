@@ -70,6 +70,9 @@
 @property(strong,nonatomic)NSString *TEAMCODE;
 
 @property(nonatomic,assign)NSInteger *BATTEAMRUNS;
+@property(nonatomic,assign)NSNumber *RUNSREQUIRED;
+
+
 
 
 -(void) fetchSEPageLoadDetails :(NSString*) COMPETITIONCODE :(NSString *)MATCHCODE;
@@ -95,8 +98,67 @@
 @property(strong,nonatomic)NSString *nonstrickerStrickRate ;
 
 
+//Stricker Details
+@property(strong,nonatomic)NSString *currentBowlerPlayerCode ;
+@property(strong,nonatomic)NSString *currentBowlerPlayerName;
+@property(strong,nonatomic)NSString *currentBowlerOver;
+@property(strong,nonatomic)NSString *currentBowlerMaidan;
+@property(strong,nonatomic)NSString *currentBowlerRuns;
+@property(strong,nonatomic)NSString *currentBowlerWicket;
+@property(strong,nonatomic)NSString *currentBowlerEcoRate;
+
+
+//Non Stricker Details
+@property(strong,nonatomic)NSString *lastBowlerPlayerCode ;
+@property(strong,nonatomic)NSString *lastBowlerPlayerName;
+@property(strong,nonatomic)NSString *lastBowlerOver;
+@property(strong,nonatomic)NSString *lastBowlerMaidan;
+@property(strong,nonatomic)NSString *lastBowlerRuns;
+@property(strong,nonatomic)NSString *lastBowlerWicket;
+@property(strong,nonatomic)NSString *lastBowlerEcoRate;
+
+
 @property(nonatomic,assign)NSInteger *BATTEAMWICKETS;
 @property(nonatomic,assign)NSInteger *BATTEAMOVERS;
 @property(nonatomic,assign)NSInteger *BATTEAMOVRBALLS;
 @property(nonatomic,assign)NSNumber *BATTEAMRUNRATE;
+
+//Bowlers List
+@property(strong,nonatomic) NSMutableArray* getBowlingTeamPlayers;
+@property(strong,nonatomic) NSMutableArray* getBattingTeamPlayers;
+
+
+
+
+
+//Innings record for team A and team B
+
+@property(strong,nonatomic)NSString *MATCHDATE;
+@property(strong,nonatomic)NSString *FIRSTINNINGSTOTAL;
+@property(strong,nonatomic)NSString *SECONDINNINGSTOTAL;
+@property(strong,nonatomic)NSString *THIRDINNINGSTOTAL;
+@property(strong,nonatomic)NSString *FOURTHINNINGSTOTAL;
+@property(strong,nonatomic)NSString *FIRSTINNINGSWICKET;
+@property(strong,nonatomic)NSString *SECONDINNINGSWICKET;
+@property(strong,nonatomic)NSString *THIRDINNINGSWICKET;
+@property(strong,nonatomic)NSString *FOURTHINNINGSWICKET;
+@property(strong,nonatomic)NSString *FIRSTINNINGSSCORE;
+@property(strong,nonatomic)NSString *SECONDINNINGSSCORE;
+@property(strong,nonatomic)NSString *THIRDINNINGSSCORE;
+@property(strong,nonatomic)NSString *FOURTHINNINGSSCORE;
+@property(strong,nonatomic)NSString *FIRSTINNINGSOVERS;
+@property(strong,nonatomic)NSString *SECONDINNINGSOVERS;
+@property(strong,nonatomic)NSString *THIRDINNINGSOVERS;
+@property(strong,nonatomic)NSString *FOURTHINNINGSOVERS;
+@property(strong,nonatomic)NSString *FIRSTINNINGSSHORTNAME;
+@property(strong,nonatomic)NSString *SECONDINNINGSSHORTNAME;
+@property(strong,nonatomic)NSString *THIRDINNINGSSHORTNAME;
+@property(strong,nonatomic)NSString *FOURTHINNINGSSHORTNAME;
+@property(strong,nonatomic)NSString *AA;
+@property(strong,nonatomic)NSString *BB;
+@property(strong,nonatomic)NSString *AAWIC;
+@property(strong,nonatomic)NSString *BBWIC;
+
+
+
 @end
