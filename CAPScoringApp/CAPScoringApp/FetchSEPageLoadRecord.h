@@ -95,8 +95,33 @@
 @property(strong,nonatomic)NSString *nonstrickerStrickRate ;
 
 
+//Stricker Details
+@property(strong,nonatomic)NSString *currentBowlerPlayerCode ;
+@property(strong,nonatomic)NSString *currentBowlerPlayerName;
+@property(strong,nonatomic)NSString *currentBowlerOver;
+@property(strong,nonatomic)NSString *currentBowlerMaidan;
+@property(strong,nonatomic)NSString *currentBowlerRuns;
+@property(strong,nonatomic)NSString *currentBowlerWicket;
+@property(strong,nonatomic)NSString *currentBowlerEcoRate;
+
+
+//Non Stricker Details
+@property(strong,nonatomic)NSString *lastBowlerPlayerCode ;
+@property(strong,nonatomic)NSString *lastBowlerPlayerName;
+@property(strong,nonatomic)NSString *lastBowlerOver;
+@property(strong,nonatomic)NSString *lastBowlerMaidan;
+@property(strong,nonatomic)NSString *lastBowlerRuns;
+@property(strong,nonatomic)NSString *lastBowlerWicket;
+@property(strong,nonatomic)NSString *lastBowlerEcoRate;
+
+
 @property(nonatomic,assign)NSInteger *BATTEAMWICKETS;
 @property(nonatomic,assign)NSInteger *BATTEAMOVERS;
 @property(nonatomic,assign)NSInteger *BATTEAMOVRBALLS;
 @property(nonatomic,assign)NSNumber *BATTEAMRUNRATE;
+
+//Bowlers List
+@property(strong,nonatomic) NSMutableArray* getBowlingTeamPlayers;
+@property(strong,nonatomic) NSMutableArray* getBattingTeamPlayers;
+
 @end

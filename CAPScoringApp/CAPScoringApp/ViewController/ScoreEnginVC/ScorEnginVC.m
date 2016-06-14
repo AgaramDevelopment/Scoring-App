@@ -26,6 +26,7 @@
 #import "TossDeatilsEvent.h"
 #import "WicketTypeRecord.h"
 #import "FetchSEPageLoadRecord.h"
+#import "SelectPlayerRecord.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -61,7 +62,10 @@
     BOOL isSelectleftview;
     UITableView* extrasTableView;
     UITableView* overThrowTableView;
-    
+    UITableView* currentBowlersTableView;
+    UITableView* strickerTableView;
+    UITableView* nonstrickerTableView;
+
     
     UITableView* objextras;
     //BallEventRecord *objBalleventRecord;
@@ -167,43 +171,55 @@
 @synthesize AppealComponentArray;
 @synthesize AppealUmpireArray;
 @synthesize AppealBatsmenArray;
+
+FetchSEPageLoadRecord *fetchSEPageLoadRecord;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
    // [self resetBallObject];
     
-    FetchSEPageLoadRecord *converstion = [[FetchSEPageLoadRecord alloc]init];
+    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     
-    [converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
     
     //Stricker Details
-    self.lbl_stricker_name.text = converstion.strickerPlayerName;
-    self.lbl_stricker_runs.text = converstion.strickerTotalRuns;
-    self.lbl_stricker_balls.text = converstion.strickerTotalBalls;
-    self.lbl_stricker_sixs.text = converstion.strickerSixes;
-    self.lbl_stricker_strickrate.text = converstion.strickerStrickRate;
-    self.lbl_stricker_fours.text = converstion.strickerFours;
+    self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
+    self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
+    self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
+    self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
+    self.lbl_stricker_strickrate.text = fetchSEPageLoadRecord.strickerStrickRate;
+    self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     
     //Non Stricker Details
-    self.lbl_nonstricker_name.text = converstion.nonstrickerPlayerName;
-    self.lbl_nonstricker_runs.text = converstion.nonstrickerTotalRuns;
-    self.lbl_nonstricker_balls.text = converstion.nonstrickerTotalBalls;
-    self.lbl_nonstricker_fours.text = converstion.nonstrickerFours;
-    self.lbl_nonstricker_sixs.text = converstion.nonstrickerSixes;
-    self.lbl_nonstricker_strickrate.text = converstion.nonstrickerStrickRate;
+    self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
+    self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
+    self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
+    self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
+    self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
+    self.lbl_nonstricker_strickrate.text = fetchSEPageLoadRecord.nonstrickerStrickRate;
+    
+    //Bowler
+    
+   self.lbl_bowler_name.text = fetchSEPageLoadRecord.currentBowlerPlayerName;
+   self.lbl_bowler_runs.text = fetchSEPageLoadRecord.currentBowlerOver;
+   self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
+   self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
+   self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
+   self.lbl_bowler_strickrate.text = fetchSEPageLoadRecord.currentBowlerEcoRate;
     
     
     
     //team score details display
-    _lbl_battingShrtName.text = converstion.BATTEAMSHORTNAME;
-    _lbl_firstIngsTeamName.text = converstion.BATTEAMSHORTNAME;
-    _lbl_secIngsTeamName.text = converstion.BOWLTEAMSHORTNAME;
-    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)converstion.BATTEAMRUNS,(unsigned long)converstion.BATTEAMWICKETS];
+    _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+    _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
+    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
     
-    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld overs" ,(unsigned long)converstion.BATTEAMOVERS,(unsigned long)converstion.BATTEAMOVRBALLS];
+    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld overs" ,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVERS,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %ld RRR ",(long)converstion.BATTEAMRUNRATE];
+    _lbl_runRate.text = [NSString stringWithFormat:@"RR %ld RRR ",(long)fetchSEPageLoadRecord.BATTEAMRUNRATE];
     
     
   _view_Wagon_wheel.hidden=YES;
@@ -564,6 +580,15 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
+    if(tableView == strickerTableView && fetchSEPageLoadRecord != nil){
+        return  fetchSEPageLoadRecord.getBattingTeamPlayers.count;
+    }
+    if(tableView == nonstrickerTableView && fetchSEPageLoadRecord != nil){
+        return  fetchSEPageLoadRecord.getBattingTeamPlayers.count;
+    }
+    if(tableView == currentBowlersTableView && fetchSEPageLoadRecord != nil){
+      return  fetchSEPageLoadRecord.getBowlingTeamPlayers.count;
+    }
     //wicket type
     if(isWicketSelected && wicketOption == 1){
         return [self.WicketTypeArray count];
@@ -822,7 +847,16 @@
         cell.textLabel.text = [self.extrasOptionArray objectAtIndex:indexPath.row];
     }else if(tableView == overThrowTableView){
         cell.textLabel.text = [self.overThrowOptionArray objectAtIndex:indexPath.row];
-    }else{
+    }else if(tableView == currentBowlersTableView){
+        BowlerEvent *bowlerEvent = [fetchSEPageLoadRecord.getBowlingTeamPlayers objectAtIndex:indexPath.row];
+        cell.textLabel.text = bowlerEvent.BowlerName;
+    }else if(tableView == nonstrickerTableView){
+        SelectPlayerRecord *battingEvent = [fetchSEPageLoadRecord.getBattingTeamPlayers objectAtIndex:indexPath.row];
+        cell.textLabel.text = battingEvent.playerName;
+    }else if(tableView == strickerTableView){
+        SelectPlayerRecord *battingEvent = [fetchSEPageLoadRecord.getBattingTeamPlayers objectAtIndex:indexPath.row];
+        cell.textLabel.text = battingEvent.playerName;
+    }else {
         cell.textLabel.text = [self.selectbtnvalueArray objectAtIndex:indexPath.row];
     }
     
@@ -5090,7 +5124,32 @@
         
         self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
         
+    }else if(tableView == currentBowlersTableView){
+        
+        BowlerEvent *bowlEvent = [fetchSEPageLoadRecord.getBowlingTeamPlayers objectAtIndex:indexPath.row];
+        [DBManager updateBOWLERCODE:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO BOWLERCODE:bowlEvent.BowlerCode];
+        
+        [currentBowlersTableView removeFromSuperview];
+        [self reloadBowlerTeamBatsmanDetails];
+        
+    }else if(tableView == nonstrickerTableView){
+        SelectPlayerRecord *selectPlayer = [fetchSEPageLoadRecord.getBattingTeamPlayers objectAtIndex:indexPath.row];
+        
+        [DBManager updateNONSTRIKERCODE:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO NONSTRIKERCODE:selectPlayer.playerCode];
+        [nonstrickerTableView removeFromSuperview];
+        [self reloadBowlerTeamBatsmanDetails];
+        
+    }else if(tableView == strickerTableView){
+        
+        SelectPlayerRecord *selectPlayer = [fetchSEPageLoadRecord.getBattingTeamPlayers objectAtIndex:indexPath.row];
+        
+        [DBManager updateStricker:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO STRIKERCODE:selectPlayer.playerCode];
+        
+        [strickerTableView removeFromSuperview];
+        [self reloadBowlerTeamBatsmanDetails];
+        
     }
+    
     
     
     
@@ -5300,11 +5359,157 @@
 
 
 - (IBAction)btn_stricker_names:(id)sender {
+    [strickerTableView removeFromSuperview];
+    [currentBowlersTableView removeFromSuperview];
+    [nonstrickerTableView removeFromSuperview];
+    
+    strickerTableView=[[UITableView alloc]initWithFrame:CGRectMake(self.BatsmenView.frame.origin.x, self.BatsmenView.frame.origin.y+80,300,300)];
+    strickerTableView.backgroundColor=[UIColor whiteColor];
+    strickerTableView.dataSource = self;
+    strickerTableView.delegate = self;
+    [self.view addSubview:strickerTableView];
+    [strickerTableView reloadData];
+    
+    int indx=0;
+    int selectePosition = -1;
+    for (SelectPlayerRecord *record in fetchSEPageLoadRecord.getBattingTeamPlayers)
+    {
+        bool chk = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.strickerPlayerCode]);
+        if (chk)
+        {
+            selectePosition = indx;
+            break;
+        }
+        indx ++;
+    }
+    
+    //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+    [strickerTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    
+    [strickerTableView scrollToRowAtIndexPath:indexPath
+                                atScrollPosition:UITableViewScrollPositionTop
+                                        animated:YES];
+
+
 }
 - (IBAction)btn_nonstricker_name:(id)sender {
+    [strickerTableView removeFromSuperview];
+    [currentBowlersTableView removeFromSuperview];
+    [nonstrickerTableView removeFromSuperview];
+    
+    nonstrickerTableView=[[UITableView alloc]initWithFrame:CGRectMake(self.BatsmenView.frame.origin.x, self.BatsmenView.frame.origin.y+80,300,300)];
+    nonstrickerTableView.backgroundColor=[UIColor whiteColor];
+    nonstrickerTableView.dataSource = self;
+    nonstrickerTableView.delegate = self;
+    [self.view addSubview:nonstrickerTableView];
+    [nonstrickerTableView reloadData];
+    
+    int indx=0;
+    int selectePosition = -1;
+    for (SelectPlayerRecord *record in fetchSEPageLoadRecord.getBattingTeamPlayers)
+    {
+        bool chk = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.nonstrickerPlayerCode]);
+        if (chk)
+        {
+            selectePosition = indx;
+            break;
+        }
+        indx ++;
+    }
+    
+    //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+    [nonstrickerTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    
+    [nonstrickerTableView scrollToRowAtIndexPath:indexPath
+                                   atScrollPosition:UITableViewScrollPositionTop
+                                           animated:YES];
+
 }
 - (IBAction)btn_bowler_name:(id)sender {
+    
+    [strickerTableView removeFromSuperview];
+    [currentBowlersTableView removeFromSuperview];
+    [nonstrickerTableView removeFromSuperview];
+    
+    currentBowlersTableView=[[UITableView alloc]initWithFrame:CGRectMake(self.BowlerView.frame.origin.x, self.BowlerView.frame.origin.y+80,300,300)];
+    currentBowlersTableView.backgroundColor=[UIColor whiteColor];
+    currentBowlersTableView.dataSource = self;
+    currentBowlersTableView.delegate = self;
+    [self.view addSubview:currentBowlersTableView];
+    [currentBowlersTableView reloadData];
+    
+    
+    int indx=0;
+    int selectePosition = -1;
+    for (BowlerEvent *record in fetchSEPageLoadRecord.getBowlingTeamPlayers)
+    {
+        bool chk = ([[record BowlerCode] isEqualToString:fetchSEPageLoadRecord.currentBowlerPlayerCode]);
+        if (chk)
+        {
+            selectePosition = indx;
+            break;
+        }
+        indx ++;
+    }
+    
+    //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+    [currentBowlersTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+    
+    [currentBowlersTableView scrollToRowAtIndexPath:indexPath
+                        atScrollPosition:UITableViewScrollPositionTop
+                                animated:YES];
 }
 - (IBAction)btn_last_bowler_name:(id)sender {
+}
+
+
+-(void) reloadBowlerTeamBatsmanDetails{
+    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+    
+    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
+    
+    //Stricker Details
+    self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
+    self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
+    self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
+    self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
+    self.lbl_stricker_strickrate.text = fetchSEPageLoadRecord.strickerStrickRate;
+    self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
+    
+    //Non Stricker Details
+    self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
+    self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
+    self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
+    self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
+    self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
+    self.lbl_nonstricker_strickrate.text = fetchSEPageLoadRecord.nonstrickerStrickRate;
+    
+    //Bowler
+    
+    self.lbl_bowler_name.text = fetchSEPageLoadRecord.currentBowlerPlayerName;
+    self.lbl_bowler_runs.text = fetchSEPageLoadRecord.currentBowlerOver;
+    self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
+    self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
+    self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
+    self.lbl_bowler_strickrate.text = fetchSEPageLoadRecord.currentBowlerEcoRate;
+    
+    
+    
+    //team score details display
+    _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+    _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
+    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
+    
+    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld overs" ,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVERS,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+    
+    _lbl_runRate.text = [NSString stringWithFormat:@"RR %ld RRR ",(long)fetchSEPageLoadRecord.BATTEAMRUNRATE];
+    
+}
+- (IBAction)btn_swap:(id)sender {
 }
 @end

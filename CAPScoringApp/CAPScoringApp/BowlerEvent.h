@@ -11,6 +11,9 @@
 @interface BowlerEvent : NSObject
 @property(strong,nonatomic)NSString *BowlerName;
 @property(strong,nonatomic)NSString *BowlerCode;
+@property(strong,nonatomic)NSString *bowlingType;
+@property(strong,nonatomic)NSString *bowlingStyle;
+
 
 //@property(strong,nonatomic)NSString *PlaerNameStrike_nonStrike;
 @end

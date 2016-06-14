@@ -246,6 +246,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_sixs;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_last_bowler_strickrate;
 
+- (IBAction)btn_swap:(id)sender;
 
 
 @end

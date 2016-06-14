@@ -59,9 +59,11 @@
 @synthesize SHOTCODE;
 @synthesize SHOTNAME;
 @synthesize SHOTTYPE;
+@synthesize getBowlingTeamPlayers;
+@synthesize getBattingTeamPlayers;
 
 
-
+//Stricker
 @synthesize strickerPlayerCode ;
 @synthesize strickerPlayerName;
 @synthesize strickerTotalRuns;
@@ -79,6 +81,26 @@
 @synthesize nonstrickerSixes ;
 @synthesize nonstrickerTotalBalls;
 @synthesize nonstrickerStrickRate ;
+
+//Current Bowler
+@synthesize currentBowlerPlayerCode ;
+@synthesize currentBowlerPlayerName;
+@synthesize currentBowlerOver;
+@synthesize currentBowlerMaidan;
+@synthesize currentBowlerRuns;
+@synthesize currentBowlerWicket;
+@synthesize currentBowlerEcoRate;
+
+
+//Last Bowler
+@synthesize lastBowlerPlayerCode ;
+@synthesize lastBowlerPlayerName;
+@synthesize lastBowlerOver;
+@synthesize lastBowlerMaidan;
+@synthesize lastBowlerRuns;
+@synthesize lastBowlerWicket;
+@synthesize lastBowlerEcoRate;
+
 
 
 //@synthesize TEAMCODE;
@@ -151,10 +173,17 @@ BOOL  getOverStatus;
     }
     //getInningsNo
     NSMutableArray *innArray = [DBManager getInningsNo:COMPETITIONCODE :MATCHCODE];
-    FetchSEPageLoadRecord *inns = (FetchSEPageLoadRecord*)[innArray objectAtIndex:0];
+    FetchSEPageLoadRecord *inns = [[FetchSEPageLoadRecord alloc]init];
+    NSUInteger inningsNo;
+    if(innArray.count>0){
+    inns = (FetchSEPageLoadRecord*)[innArray objectAtIndex:0];
     NSString *teamInns = inns.INNINGSNO;
-    NSUInteger inningsNo = [teamInns integerValue];
+     inningsNo = [teamInns integerValue];
     INNINGSNO = [@(inningsNo) stringValue];
+    }else{
+        INNINGSNO = 0;
+        inningsNo = 0;
+    }
     NSLog(@"%@",INNINGSNO);
 
     
@@ -296,12 +325,15 @@ BOOL  getOverStatus;
     NSString *legalBall = [DBManager getLegalBall:getLastBallCode];
     NSInteger legalBalls = [legalBall integerValue];
     
-    
-    
-    NSString *penaltyBowlerCode = [DBManager getPENULTIMATEBOWLERCODE:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:inns.INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE OVERNO:@"" ISOVERCOMPLETE:isOverComplete BATTEAMOVERS:batTeamOver];//OVERS
-    
-    BOOL  getBowlingTeamPlayers = [DBManager GETBOWLINGTEAMPLAYERS:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:inns.INNINGSNO TEAMCODE:BATTINGTEAMCODE OVERNO:@"" PENULTIMATEBOWLERCODE:penaltyBowlerCode BATTINGTEAMCODE:BATTINGTEAMCODE BOWLINGTEAMCODE:BOWLINGTEAMCODE];
-    
+//    BATTEAMOVERS = teamOvers;
+//    
+//    NSString *BATTEAMOVERSDATA = [NSString stringWithFormat:@"%d",BATTEAMOVERS];
+//    
+//    
+//    NSString *penaltyBowlerCode = [DBManager getPENULTIMATEBOWLERCODE:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:inns.INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE OVERNO:BATTEAMOVERSDATA ISOVERCOMPLETE:isOverComplete BATTEAMOVERS:batTeamOver];//OVERS
+//    
+//    BOOL  getBowlingTeamPlayers = [DBManager GETBOWLINGTEAMPLAYERS:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:inns.INNINGSNO TEAMCODE:BATTINGTEAMCODE OVERNO:BATTEAMOVERSDATA PENULTIMATEBOWLERCODE:penaltyBowlerCode BATTINGTEAMCODE:BATTINGTEAMCODE BOWLINGTEAMCODE:BOWLINGTEAMCODE];
+//    
     
     //max innings
     
@@ -321,7 +353,13 @@ BOOL  getOverStatus;
         BOWLINGTEAMCODE = TEAMACODE == BATTINGTEAMCODE ? TEAMACODE : TEAMBCODE;
         
     }else{
-        INNINGSNO = [DBManager getMaxInningsNo: COMPETITIONCODE :MATCHCODE];
+        NSMutableArray *dataInnings= [DBManager getMaxInningsNo: COMPETITIONCODE :MATCHCODE];
+        
+        if(dataInnings.count>0){
+            FetchSEPageLoadRecord *spinngs = (FetchSEPageLoadRecord*)[dataInnings objectAtIndex:0];
+            
+            INNINGSNO = spinngs.INNINGSNO;
+        }
         
         if ([self.MATCHTYPE isEqualToString: @"MSC023"]||[self.MATCHTYPE isEqualToString: @"MSC0114"]) {
             
@@ -351,7 +389,7 @@ BOOL  getOverStatus;
     SESSIONNO = [DBManager sessionNo:MATCHCODE :COMPETITIONCODE :DAYNO];
     
     
-    if (BATTINGTEAMCODE == nil ||  BOWLINGTEAMCODE == nil) {
+    if (BATTINGTEAMCODE == nil || [BATTINGTEAMCODE isEqual:@""] || [BOWLINGTEAMCODE isEqual:@""] ||  BOWLINGTEAMCODE == nil) {
         
         
         BATTINGTEAMCODE = [DBManager getBowlteamCode:MATCHCODE :COMPETITIONCODE :TEAMACODE :TEAMBCODE];
@@ -390,7 +428,7 @@ BOOL  getOverStatus;
     
     //Batting team player
     
-    [DBManager GETWICKETDETAILS];
+ getBattingTeamPlayers =[DBManager GETWICKETDETAILS:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE COMPETITIONCODE:COMPETITIONCODE INNINGSNO:INNINGSNO];
     
     
     if (inningsNo == 3 && follow == 1){
@@ -512,6 +550,16 @@ BOOL  getOverStatus;
     int batteamRunRateData = (TOTALBALLS.intValue == 0) ? 0 :((int)BATTEAMRUNS/TOTALBALLS.intValue)*6;
     
     BATTEAMRUNRATE = [NSNumber numberWithInt:batteamRunRateData];
+    
+    
+    BATTEAMOVERS = teamOvers;
+    
+    NSString *BATTEAMOVERSDATA = [NSString stringWithFormat:@"%d",BATTEAMOVERS];
+    
+    
+    NSString *penaltyBowlerCode = [DBManager getPENULTIMATEBOWLERCODE:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:inns.INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE OVERNO:BATTEAMOVERSDATA ISOVERCOMPLETE:isOverComplete BATTEAMOVERS:batTeamOver];//OVERS
+    
+     getBowlingTeamPlayers = [DBManager GETBOWLINGTEAMPLAYERS:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:inns.INNINGSNO TEAMCODE:BATTINGTEAMCODE OVERNO:BATTEAMOVERSDATA PENULTIMATEBOWLERCODE:penaltyBowlerCode BATTINGTEAMCODE:BATTINGTEAMCODE BOWLINGTEAMCODE:BOWLINGTEAMCODE];
     
     
     //=============================================================================
@@ -682,7 +730,7 @@ BOOL  getOverStatus;
     
     NSString *BATTEAMRUNSDATA = [NSString stringWithFormat: @"%d", (long)BATTEAMRUNS];
     NSString *BATTEAMWICKETSDATA = [NSString stringWithFormat: @"%d", (long)BATTEAMWICKETS];
-    NSString *BATTEAMOVERSDATA = [NSString stringWithFormat: @"%d", (long)BATTEAMOVERS];
+   // NSString *BATTEAMOVERSDATA = [NSString stringWithFormat: @"%d", (long)BATTEAMOVERS];
     NSString *BATTEAMOVRBALLSDATA = [NSString stringWithFormat: @"%d", (long)BATTEAMOVRBALLS];
     NSString *ISPREVIOUSLEGALBALLDATA = [NSString stringWithFormat: @"%d", (long)ISPREVIOUSLEGALBALL];
     
@@ -837,14 +885,33 @@ BOOL  getOverStatus;
     BOWLERSPELL = [NSNumber numberWithInt:BOWLERSPELLDATA];
     
     
+    
+    
     //BOWLER DETAILS
+    NSMutableArray *curentBowlerDetaailsArray;
+
     if([DBManager GETBOLWERDETAIL:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE BOWLERCODE:BOWLERCODE]){
         
-        [DBManager GETBOLWLINGDETAIL:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO BOWLERCODE:BOWLERCODE BOWLERSPELL:BOWLERSPELL BOWLERRUNS:BOWLERRUNS S_ATWOROTW:S_ATWOROTW TOTALBALLSBOWL:TOTALBALLSBOWL WICKETS:WICKETS MAIDENS:MAIDENS ISPARTIALOVER:ISPARTIALOVER LASTBOWLEROVERBALLNO:LASTBOWLEROVERBALLNO];
+        curentBowlerDetaailsArray =[DBManager GETBOLWLINGDETAIL:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO BOWLERCODE:BOWLERCODE BOWLERSPELL:BOWLERSPELL BOWLERRUNS:BOWLERRUNS S_ATWOROTW:S_ATWOROTW TOTALBALLSBOWL:TOTALBALLSBOWL WICKETS:WICKETS MAIDENS:MAIDENS ISPARTIALOVER:ISPARTIALOVER LASTBOWLEROVERBALLNO:LASTBOWLEROVERBALLNO];
+        
+               
     }else{
         
-        [DBManager GETPLAYERDETAIL:BOWLERCODE];
+        curentBowlerDetaailsArray =[DBManager GETPLAYERDETAIL:BOWLERCODE];
     }
+    
+    if(curentBowlerDetaailsArray.count>0){
+        
+        currentBowlerPlayerCode = [curentBowlerDetaailsArray objectAtIndex:0];
+        currentBowlerPlayerName = [curentBowlerDetaailsArray objectAtIndex:1];
+        currentBowlerRuns = [curentBowlerDetaailsArray objectAtIndex:2];
+        currentBowlerOver = [curentBowlerDetaailsArray objectAtIndex:3];
+        currentBowlerMaidan = [curentBowlerDetaailsArray objectAtIndex:4];
+        currentBowlerWicket = [curentBowlerDetaailsArray objectAtIndex:5];
+        currentBowlerEcoRate = [curentBowlerDetaailsArray objectAtIndex:6];
+        
+    }
+
     
     NSString *LASTBALLCODEDATA = [NSString stringWithFormat: @"%d", (long)LASTBALLCODE];
     
