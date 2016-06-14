@@ -203,9 +203,28 @@
     _lbl_secIngsTeamName.text = converstion.BOWLTEAMSHORTNAME;
     _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)converstion.BATTEAMRUNS,(unsigned long)converstion.BATTEAMWICKETS];
     
-    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld overs" ,(unsigned long)converstion.BATTEAMOVERS,(unsigned long)converstion.BATTEAMOVRBALLS];
+    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld OVS" ,(unsigned long)converstion.BATTEAMOVERS,(unsigned long)converstion.BATTEAMOVRBALLS];
     
     _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[converstion.BATTEAMRUNRATE floatValue], [converstion.RUNSREQUIRED floatValue]];
+    
+    
+    
+
+    //all innings details for team A and team B
+    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", converstion.SECONDINNINGSTOTAL,converstion.SECONDINNINGSWICKET];
+    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",converstion.SECONDINNINGSOVERS];
+    
+    
+   // _lbl_teamASecIngsScore.text = 
+    //_lbl_teamASecIngsOvs.text =
+    
+    
+  //  _lbl_teamBSecIngsScore.text =
+//    _lbl_teamBSecIngsOvs.text =
+    
+    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",converstion.FIRSTINNINGSTOTAL,converstion.FIRSTINNINGSWICKET];
+    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",converstion.FIRSTINNINGSOVERS];
+    
     
     
   _view_Wagon_wheel.hidden=YES;
@@ -5405,6 +5424,15 @@
         _lbl_teamBSecIngsScore.hidden = YES;
         _lbl_teamBSecIngsOvs.hidden = YES;
         
+    }else{
+        _lbl_teamAsecIngsHeading.hidden = NO;
+        _lbl_teamBsecIngsHeading.hidden = NO;
+        
+        _lbl_teamASecIngsScore.hidden = NO;
+        _lbl_teamASecIngsOvs.hidden = NO;
+        _lbl_teamBSecIngsScore.hidden = NO;
+        _lbl_teamBSecIngsOvs.hidden = NO;
+
     }
     
     

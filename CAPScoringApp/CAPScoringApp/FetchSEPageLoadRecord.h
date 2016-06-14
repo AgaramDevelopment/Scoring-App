@@ -101,4 +101,38 @@
 @property(nonatomic,assign)NSNumber *BATTEAMRUNRATE;
 @property(nonatomic,assign)NSNumber *RUNSREQUIRED;
 
+
+
+
+
+//Innings record for team A and team B
+
+@property(strong,nonatomic)NSString *MATCHDATE;
+@property(strong,nonatomic)NSString *FIRSTINNINGSTOTAL;
+@property(strong,nonatomic)NSString *SECONDINNINGSTOTAL;
+@property(strong,nonatomic)NSString *THIRDINNINGSTOTAL;
+@property(strong,nonatomic)NSString *FOURTHINNINGSTOTAL;
+@property(strong,nonatomic)NSString *FIRSTINNINGSWICKET;
+@property(strong,nonatomic)NSString *SECONDINNINGSWICKET;
+@property(strong,nonatomic)NSString *THIRDINNINGSWICKET;
+@property(strong,nonatomic)NSString *FOURTHINNINGSWICKET;
+@property(strong,nonatomic)NSString *FIRSTINNINGSSCORE;
+@property(strong,nonatomic)NSString *SECONDINNINGSSCORE;
+@property(strong,nonatomic)NSString *THIRDINNINGSSCORE;
+@property(strong,nonatomic)NSString *FOURTHINNINGSSCORE;
+@property(strong,nonatomic)NSString *FIRSTINNINGSOVERS;
+@property(strong,nonatomic)NSString *SECONDINNINGSOVERS;
+@property(strong,nonatomic)NSString *THIRDINNINGSOVERS;
+@property(strong,nonatomic)NSString *FOURTHINNINGSOVERS;
+@property(strong,nonatomic)NSString *FIRSTINNINGSSHORTNAME;
+@property(strong,nonatomic)NSString *SECONDINNINGSSHORTNAME;
+@property(strong,nonatomic)NSString *THIRDINNINGSSHORTNAME;
+@property(strong,nonatomic)NSString *FOURTHINNINGSSHORTNAME;
+@property(strong,nonatomic)NSString *AA;
+@property(strong,nonatomic)NSString *BB;
+@property(strong,nonatomic)NSString *AAWIC;
+@property(strong,nonatomic)NSString *BBWIC;
+
+
+
 @end
