@@ -220,7 +220,7 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
     _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
     
-    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld OVS" ,(unsigned long)converstion.BATTEAMOVERS,(unsigned long)converstion.BATTEAMOVRBALLS];
+    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld OVS" ,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVERS,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
     _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
     
@@ -228,8 +228,8 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
 
     //all innings details for team A and team B
-    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", converstion.SECONDINNINGSTOTAL,converstion.SECONDINNINGSWICKET];
-    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",converstion.SECONDINNINGSOVERS];
+    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET];
+    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
     
    // _lbl_teamASecIngsScore.text = 
@@ -239,8 +239,8 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
   //  _lbl_teamBSecIngsScore.text =
 //    _lbl_teamBSecIngsOvs.text =
     
-    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",converstion.FIRSTINNINGSTOTAL,converstion.FIRSTINNINGSWICKET];
-    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",converstion.FIRSTINNINGSOVERS];
+    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
     
     
     
@@ -4523,7 +4523,6 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
 //    NSString *filePath = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]];
 //    return [fileManager fileExistsAtPath:filePath];
 //}
-
 -(void)hideLabelBasedOnMatchType{
     
     self.matchTypeCode = @"MSC115";
@@ -4531,7 +4530,7 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     if ([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] ||
         [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) {
         
-     
+        
         _lbl_teamAsecIngsHeading.hidden = YES;
         _lbl_teamBsecIngsHeading.hidden = YES;
         
@@ -4540,12 +4539,23 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
         _lbl_teamBSecIngsScore.hidden = YES;
         _lbl_teamBSecIngsOvs.hidden = YES;
         
+    }else{
+        _lbl_teamAsecIngsHeading.hidden = NO;
+        _lbl_teamBsecIngsHeading.hidden = NO;
+        
+        _lbl_teamASecIngsScore.hidden = NO;
+        _lbl_teamASecIngsOvs.hidden = NO;
+        _lbl_teamBSecIngsScore.hidden = NO;
+        _lbl_teamBSecIngsOvs.hidden = NO;
+        
     }
     
     
     
     
 }
+
+
 
 - (IBAction)btn_stricker_names:(id)sender {
     [strickerTableView removeFromSuperview];
@@ -6929,23 +6939,21 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
         //
         //        }
     }
-    
     else if((Xposition < 170 && Xposition > 135 && Yposition > 20 && Yposition <41))
         
-    }else{
-        _lbl_teamAsecIngsHeading.hidden = NO;
-        _lbl_teamBsecIngsHeading.hidden = NO;
-        
-        _lbl_teamASecIngsScore.hidden = NO;
-        _lbl_teamASecIngsOvs.hidden = NO;
-        _lbl_teamBSecIngsScore.hidden = NO;
-        _lbl_teamBSecIngsOvs.hidden = NO;
-
+    {
+        wagonregiontext = @"Third Man - Fine";
+        regioncode = @"MSC215";
+        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
-    
+
+
     
     
     
 }
+
+
+
 
 @end
