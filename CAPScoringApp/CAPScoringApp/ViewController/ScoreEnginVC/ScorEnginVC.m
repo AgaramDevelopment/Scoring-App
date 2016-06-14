@@ -182,10 +182,10 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
    // [self resetBallObject];
     
-    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-    
-    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
-    
+//    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+//    
+//    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+//    
     
     //Stricker Details
     self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
@@ -1857,17 +1857,17 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
             
         self.centerlbl=[[UILabel alloc]initWithFrame:CGRectMake(self.img_WagonWheel.frame.size.width/2-3, self.img_WagonWheel.frame.size.width/2-30, 5, 5)];
       
-        [self.centerlbl setBackgroundColor:[UIColor redColor]];
+        [self.centerlbl setBackgroundColor:[UIColor clearColor]];
         [self.img_WagonWheel addSubview:self.centerlbl];
         
         
         
-        //fineleglabel
-        UILabel *FineLeg=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 5, 5)];
-        
-        [FineLeg setBackgroundColor:[UIColor redColor]];
-        [self.img_WagonWheel addSubview:FineLeg];
-        
+//        //fineleglabel
+//        UILabel *FineLeg=[[UILabel alloc]initWithFrame:CGRectMake(10, 10, 5, 5)];
+//        
+//        [FineLeg setBackgroundColor:[UIColor redColor]];
+//        [self.img_WagonWheel addSubview:FineLeg];
+//        
         
         
         
