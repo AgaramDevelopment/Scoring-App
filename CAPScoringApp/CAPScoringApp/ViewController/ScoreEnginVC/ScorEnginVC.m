@@ -27,6 +27,7 @@
 #import "WicketTypeRecord.h"
 #import "FetchSEPageLoadRecord.h"
 #import "SelectPlayerRecord.h"
+#import "FetchLastBallBowledPlayer.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -87,6 +88,13 @@
     BOOL isFastSelected;
     BOOL isAggressiveSelected;
     BOOL isDefensiveSelected;
+    BOOL isStrickerOpen;
+    BOOL isNONStrickerOpen;
+    BOOL isBowlerOpen;
+    
+    NSMutableArray *strickerList;
+    NSMutableArray *nonStrickerList;
+    
     
     NSString * ballnoStr;
     NSDate * startBallTime;
@@ -182,17 +190,25 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
    // [self resetBallObject];
     
-//    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
+    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+    
+    
+//    NSString *data= [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS];
 //    
-//    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
-//    
+//    [fetchLastBallBowledPlayer getLastBallBowlerPlayer:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO OVERNO:data BATTINGTEAMCODE:fetchSEPageLoadRecord.BATTINGTEAMCODE];
+   
+    
     
     //Stricker Details
     self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
     self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
     self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
     self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
-    self.lbl_stricker_strickrate.text = fetchSEPageLoadRecord.strickerStrickRate;
+    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
+    
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     
     //Non Stricker Details
@@ -201,7 +217,8 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
     self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
     self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
-    self.lbl_nonstricker_strickrate.text = fetchSEPageLoadRecord.nonstrickerStrickRate;
+    self.lbl_nonstricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
+    //[formatter stringFromNumber:fetchSEPageLoadRecord.nonstrickerStrickRate];
     
     //Bowler
     
@@ -210,10 +227,8 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
    self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
    self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
    self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
-   self.lbl_bowler_strickrate.text = fetchSEPageLoadRecord.currentBowlerEcoRate;
-    
-    
-    
+    self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
+
     //team score details display
     _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
     _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
@@ -603,10 +618,10 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
     if(tableView == strickerTableView && fetchSEPageLoadRecord != nil){
-        return  fetchSEPageLoadRecord.getBattingTeamPlayers.count;
+        return  strickerList.count;
     }
     if(tableView == nonstrickerTableView && fetchSEPageLoadRecord != nil){
-        return  fetchSEPageLoadRecord.getBattingTeamPlayers.count;
+        return  nonStrickerList.count;
     }
     if(tableView == currentBowlersTableView && fetchSEPageLoadRecord != nil){
       return  fetchSEPageLoadRecord.getBowlingTeamPlayers.count;
@@ -873,10 +888,10 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
         BowlerEvent *bowlerEvent = [fetchSEPageLoadRecord.getBowlingTeamPlayers objectAtIndex:indexPath.row];
         cell.textLabel.text = bowlerEvent.BowlerName;
     }else if(tableView == nonstrickerTableView){
-        SelectPlayerRecord *battingEvent = [fetchSEPageLoadRecord.getBattingTeamPlayers objectAtIndex:indexPath.row];
+        SelectPlayerRecord *battingEvent = [nonStrickerList objectAtIndex:indexPath.row];
         cell.textLabel.text = battingEvent.playerName;
     }else if(tableView == strickerTableView){
-        SelectPlayerRecord *battingEvent = [fetchSEPageLoadRecord.getBattingTeamPlayers objectAtIndex:indexPath.row];
+        SelectPlayerRecord *battingEvent = [strickerList objectAtIndex:indexPath.row];
         cell.textLabel.text = battingEvent.playerName;
     }else {
         cell.textLabel.text = [self.selectbtnvalueArray objectAtIndex:indexPath.row];
@@ -4208,21 +4223,29 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
         [DBManager updateBOWLERCODE:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO BOWLERCODE:bowlEvent.BowlerCode];
         
         [currentBowlersTableView removeFromSuperview];
+        isBowlerOpen = NO;
+        isNONStrickerOpen = NO;
+        isStrickerOpen = NO;
         [self reloadBowlerTeamBatsmanDetails];
         
     }else if(tableView == nonstrickerTableView){
-        SelectPlayerRecord *selectPlayer = [fetchSEPageLoadRecord.getBattingTeamPlayers objectAtIndex:indexPath.row];
+        SelectPlayerRecord *selectPlayer = [nonStrickerList objectAtIndex:indexPath.row];
         
         [DBManager updateNONSTRIKERCODE:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO NONSTRIKERCODE:selectPlayer.playerCode];
+        isBowlerOpen = NO;
+        isNONStrickerOpen = NO;
+        isStrickerOpen = NO;
         [nonstrickerTableView removeFromSuperview];
         [self reloadBowlerTeamBatsmanDetails];
         
     }else if(tableView == strickerTableView){
         
-        SelectPlayerRecord *selectPlayer = [fetchSEPageLoadRecord.getBattingTeamPlayers objectAtIndex:indexPath.row];
+        SelectPlayerRecord *selectPlayer = [strickerList objectAtIndex:indexPath.row];
         
         [DBManager updateStricker:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO STRIKERCODE:selectPlayer.playerCode];
-        
+        isBowlerOpen = NO;
+        isNONStrickerOpen = NO;
+        isStrickerOpen = NO;
         [strickerTableView removeFromSuperview];
         [self reloadBowlerTeamBatsmanDetails];
         
@@ -4555,32 +4578,45 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
 }
 
-
-
-- (IBAction)btn_stricker_names:(id)sender {
+-(void) resetBowlerBatsmanTableView{
     [strickerTableView removeFromSuperview];
     [currentBowlersTableView removeFromSuperview];
     [nonstrickerTableView removeFromSuperview];
-    
-    strickerTableView=[[UITableView alloc]initWithFrame:CGRectMake(self.BatsmenView.frame.origin.x, self.BatsmenView.frame.origin.y+80,300,300)];
+}
+
+- (IBAction)btn_stricker_names:(id)sender {
+    [self resetBowlerBatsmanTableView];
+    if(!isStrickerOpen){
+        isStrickerOpen = YES;
+        isNONStrickerOpen = NO;
+        isBowlerOpen = NO;
+    strickerTableView=[[UITableView alloc]initWithFrame:CGRectMake(self.BatsmenView.frame.origin.x, self.BatsmenView.frame.origin.y+75,300,300)];
     strickerTableView.backgroundColor=[UIColor whiteColor];
     strickerTableView.dataSource = self;
     strickerTableView.delegate = self;
     [self.view addSubview:strickerTableView];
-    [strickerTableView reloadData];
     
+        strickerList = [[NSMutableArray alloc]init];
     int indx=0;
     int selectePosition = -1;
     for (SelectPlayerRecord *record in fetchSEPageLoadRecord.getBattingTeamPlayers)
     {
+          bool chkNonStricker = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.nonstrickerPlayerCode]);
+        if(!chkNonStricker){
+            [strickerList addObject:record];
+        }
+        
         bool chk = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.strickerPlayerCode]);
         if (chk)
         {
             selectePosition = indx;
-            break;
+           // break;
         }
         indx ++;
     }
+        
+        [strickerTableView reloadData];
+        
     
     //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
@@ -4589,34 +4625,46 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     [strickerTableView scrollToRowAtIndexPath:indexPath
                                 atScrollPosition:UITableViewScrollPositionTop
                                         animated:YES];
+    }else{
+        isStrickerOpen = NO;
+        isNONStrickerOpen = NO;
+        isBowlerOpen = NO;
+    }
 
 
 }
 - (IBAction)btn_nonstricker_name:(id)sender {
-    [strickerTableView removeFromSuperview];
-    [currentBowlersTableView removeFromSuperview];
-    [nonstrickerTableView removeFromSuperview];
-    
-    nonstrickerTableView=[[UITableView alloc]initWithFrame:CGRectMake(self.BatsmenView.frame.origin.x, self.BatsmenView.frame.origin.y+80,300,300)];
+    [self resetBowlerBatsmanTableView];
+    if(!isNONStrickerOpen){
+        isStrickerOpen = NO;
+        isNONStrickerOpen = YES;
+        isBowlerOpen = NO;
+    nonstrickerTableView=[[UITableView alloc]initWithFrame:CGRectMake(self.BatsmenView.frame.origin.x, self.BatsmenView.frame.origin.y+100,300,300)];
     nonstrickerTableView.backgroundColor=[UIColor whiteColor];
     nonstrickerTableView.dataSource = self;
     nonstrickerTableView.delegate = self;
     [self.view addSubview:nonstrickerTableView];
-    [nonstrickerTableView reloadData];
     
+    
+         nonStrickerList = [[NSMutableArray alloc]init];
     int indx=0;
     int selectePosition = -1;
     for (SelectPlayerRecord *record in fetchSEPageLoadRecord.getBattingTeamPlayers)
     {
+          bool chkStricker = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.strickerPlayerCode]);
+        if(!chkStricker){
+            [nonStrickerList addObject:record];
+        }
+        
         bool chk = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.nonstrickerPlayerCode]);
         if (chk)
         {
             selectePosition = indx;
-            break;
+           // break;
         }
         indx ++;
     }
-    
+    [nonstrickerTableView reloadData];
     //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
     [nonstrickerTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
@@ -4624,13 +4672,19 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     [nonstrickerTableView scrollToRowAtIndexPath:indexPath
                                    atScrollPosition:UITableViewScrollPositionTop
                                            animated:YES];
-
+    }else{
+        isStrickerOpen = NO;
+        isNONStrickerOpen = NO;
+        isBowlerOpen = NO;
+    }
 }
 - (IBAction)btn_bowler_name:(id)sender {
     
-    [strickerTableView removeFromSuperview];
-    [currentBowlersTableView removeFromSuperview];
-    [nonstrickerTableView removeFromSuperview];
+    [self resetBowlerBatsmanTableView];
+    if(!isBowlerOpen){
+        isStrickerOpen = NO;
+        isNONStrickerOpen = NO;
+        isBowlerOpen = YES;
     
     currentBowlersTableView=[[UITableView alloc]initWithFrame:CGRectMake(self.BowlerView.frame.origin.x, self.BowlerView.frame.origin.y+80,300,300)];
     currentBowlersTableView.backgroundColor=[UIColor whiteColor];
@@ -4660,14 +4714,19 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     [currentBowlersTableView scrollToRowAtIndexPath:indexPath
                         atScrollPosition:UITableViewScrollPositionTop
                                 animated:YES];
+    }else{
+        isStrickerOpen = NO;
+        isNONStrickerOpen = NO;
+        isBowlerOpen = NO;
+    }
 }
 - (IBAction)btn_last_bowler_name:(id)sender {
 }
 
 
 -(void) reloadBowlerTeamBatsmanDetails{
-    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     
+    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
     
@@ -4704,9 +4763,28 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
     _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
     
-    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld overs" ,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVERS,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld OVS" ,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVERS,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %ld RRR ",(long)fetchSEPageLoadRecord.BATTEAMRUNRATE];
+    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+    
+    
+    
+    
+    //all innings details for team A and team B
+    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET];
+    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS];
+    
+    
+    // _lbl_teamASecIngsScore.text =
+    //_lbl_teamASecIngsOvs.text =
+    
+    
+    //  _lbl_teamBSecIngsScore.text =
+    //    _lbl_teamBSecIngsOvs.text =
+    
+    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+    
     
 }
 - (IBAction)btn_swap:(id)sender {
