@@ -118,12 +118,12 @@
     //    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     //
     //
-    NewMatchSetUpVC *detail =(NewMatchSetUpVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
+    //NewMatchSetUpVC *detail =(NewMatchSetUpVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
     
     //
-    //    NewMatchSetUpVC*detail = [[NewMatchSetUpVC alloc]init];
-    //
-    //    detail =  (NewMatchSetUpVC*)[storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
+        NewMatchSetUpVC*detail = [[NewMatchSetUpVC alloc]init];
+    
+    detail =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
     
     NSString*teamAcode = objFixtureRecord.teamAcode;
     NSString*teamBcode = objFixtureRecord.teamBcode;
@@ -189,13 +189,16 @@
     }
     else
     {
-        UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        //UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         
-        ScorEnginVC *scoreEngine =(ScorEnginVC*) [storyBoard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+        ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+        
+        scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
         scoreEngine.matchCode=matchCode;
         scoreEngine.competitionCode=competitionCode;
-        [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
-        [self presentViewController:scoreEngine animated:NO completion:nil];
+        [self.navigationController pushViewController:scoreEngine animated:YES];
+       // [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
+        //[self presentViewController:scoreEngine animated:NO completion:nil];
     }
     
     

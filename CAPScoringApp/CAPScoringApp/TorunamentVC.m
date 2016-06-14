@@ -12,15 +12,18 @@
 #import "TossDetailsVC.h"
 #import "FixturesVC.h"
 #import "CustomNavigationVC.h"
+#import "ArchivesVC.h"
 
 @interface TorunamentVC ()
 {
     BOOL isEnableTbl;
     NSMutableArray * selectindexarray;
+   
    }
 @property (nonatomic,strong)NSMutableArray*resultArray;
 @property(nonatomic,weak) IBOutlet UIView *selectmatchTittleview;
 @property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
+
 
 @end
 
@@ -146,24 +149,23 @@
 
 -(IBAction)didClickNextBtnAction:(id)sender
 {
+    if([self.selectDashBoard isEqualToString:@"Newmatch"])
+    {
+        FixturesVC*Fixvc = [[FixturesVC alloc]init];
     
-    FixturesVC*Fixvc = [[FixturesVC alloc]init];
-    
-    Fixvc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
-    EventRecord *eventRecord = [selectindexarray objectAtIndex:0] ;
-    Fixvc.CompitionCode=[eventRecord competitioncode];
+        Fixvc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
+        EventRecord *eventRecord = [selectindexarray objectAtIndex:0] ;
+        Fixvc.CompitionCode=[eventRecord competitioncode];
 
-    [self.navigationController pushViewController:Fixvc animated:YES];
-    
-    
-    
-//    
-//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    FixturesVC *Fixvc =(FixturesVC*) [storyBoard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
-//    EventRecord *eventRecord = [selectindexarray objectAtIndex:0] ;
-//    Fixvc.CompitionCode=[eventRecord competitioncode];
-//    [Fixvc setModalPresentationStyle:UIModalPresentationFullScreen];
-//    [self presentViewController:Fixvc animated:NO completion:nil];
+        [self.navigationController pushViewController:Fixvc animated:YES];
+    }
+else{
+        ArchivesVC * objArchiveVC=[[ArchivesVC alloc]init];
+        objArchiveVC=(ArchivesVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    EventRecord *eventRecord = [selectindexarray objectAtIndex:0] ;
+    objArchiveVC.CompitionCode=[eventRecord competitioncode];
+        [self.navigationController pushViewController:objArchiveVC animated:YES];
+    }
     
 }
 

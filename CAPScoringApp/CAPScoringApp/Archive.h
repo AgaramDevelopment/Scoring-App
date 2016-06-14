@@ -7,6 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol SwipeableCellDelegate <NSObject>
+- (void)buttonOneActionForItemText:(NSString *)itemText;
+- (void)buttonTwoActionForItemText:(NSString *)itemText;
+- (void)cellDidOpen:(UITableViewCell *)cell;
+- (void)cellDidClose:(UITableViewCell *)cell;
+@end
 
 @interface Archive : UITableViewCell
 @property(nonatomic,strong) IBOutlet UILabel * lbl_teamname;
@@ -15,4 +21,25 @@
 @property(nonatomic,strong) IBOutlet UIButton * Btn_swipebutton;
 @property(nonatomic,strong) IBOutlet UILabel * lbl_date;
 @property(nonatomic,strong) IBOutlet UILabel * lbl_displaydate;
+
+
+
+@property(strong,nonatomic) IBOutlet UILabel * innings1teamname1;
+@property(strong,nonatomic) IBOutlet UILabel * innings1teamname2;
+@property(strong,nonatomic) IBOutlet UILabel * innings1team1runs;
+@property(strong,nonatomic) IBOutlet UILabel * innings1team2runs;
+@property(strong,nonatomic) IBOutlet UILabel * innings1team1overs;
+@property(strong,nonatomic) IBOutlet UILabel * innings1team2overs;
+
+@property(strong,nonatomic) IBOutlet UILabel * innings2teamname1;
+@property(strong,nonatomic) IBOutlet UILabel * innings2teamname2;
+@property(strong,nonatomic) IBOutlet UILabel * innings2team1runs;
+@property(strong,nonatomic) IBOutlet UILabel * innings2team2runs;
+@property(strong,nonatomic) IBOutlet UILabel * innings2team1overs;
+@property(strong,nonatomic) IBOutlet UILabel * innings2team2overs;
+@property (nonatomic, weak) id <SwipeableCellDelegate> delegate;
+@property (nonatomic, strong) NSString *itemText;
+
+- (void)openCell;
+
 @end
