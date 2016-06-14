@@ -2545,9 +2545,6 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="558" y="20" width="98" height="24"/>
-                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2560,9 +2557,6 @@
                                                 <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                             </constraint>
                                         </constraints>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="44" y="101" width="680" height="64"/>
-                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GmH-pL-2mo">
                                         <rect key="frame" x="44" y="360" width="680" height="50"/>
@@ -2581,9 +2575,6 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="573" y="20" width="84" height="21"/>
-                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2614,9 +2605,6 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="499" y="20" width="155" height="21"/>
-                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2647,9 +2635,6 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="498" y="20" width="157" height="21"/>
-                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2680,9 +2665,6 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="534" y="20" width="122" height="21"/>
-                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2705,9 +2687,6 @@
                                                 <state key="normal" title="PROCEED">
                                                     <color key="titleColor" red="0.99108743320000003" green="1" blue="0.98888242749999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="0.0" width="680" height="45"/>
-                                                </variation>
                                                 <connections>
                                                     <action selector="btn_proceed:" destination="aP7-N0-MwG" eventType="touchUpInside" id="HeJ-I7-QQP"/>
                                                 </connections>
@@ -2762,9 +2741,6 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="540" y="20" width="119" height="21"/>
-                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -4039,20 +4015,20 @@
                                                     </mask>
                                                     <mask key="constraints">
                                                         <exclude reference="cLh-u6-bf0"/>
-                                                        <exclude reference="Bzb-L6-9PO"/>
-                                                        <exclude reference="uQH-Qc-MJY"/>
                                                         <exclude reference="2Cu-TY-vpn"/>
                                                         <exclude reference="Pgv-rf-qVL"/>
                                                         <exclude reference="jEi-B3-bDH"/>
+                                                        <exclude reference="MGz-p8-NLP"/>
+                                                        <exclude reference="bNE-Ij-PNg"/>
+                                                        <exclude reference="3rG-yd-GWL"/>
+                                                        <exclude reference="dLN-ic-vLu"/>
                                                         <exclude reference="Zo8-3V-aS9"/>
                                                         <exclude reference="fS8-QR-krm"/>
                                                         <exclude reference="m3t-Lb-Pg4"/>
-                                                        <exclude reference="MGz-p8-NLP"/>
-                                                        <exclude reference="bNE-Ij-PNg"/>
                                                         <exclude reference="2dg-nU-Qft"/>
                                                         <exclude reference="GGF-Pq-vOZ"/>
-                                                        <exclude reference="3rG-yd-GWL"/>
-                                                        <exclude reference="dLN-ic-vLu"/>
+                                                        <exclude reference="Bzb-L6-9PO"/>
+                                                        <exclude reference="uQH-Qc-MJY"/>
                                                         <exclude reference="Vhx-vC-H9p"/>
                                                         <exclude reference="aPB-Ig-D39"/>
                                                         <exclude reference="ia4-HJ-Zc0"/>
@@ -4071,20 +4047,20 @@
                                                     </mask>
                                                     <mask key="constraints">
                                                         <include reference="cLh-u6-bf0"/>
-                                                        <include reference="Bzb-L6-9PO"/>
-                                                        <include reference="uQH-Qc-MJY"/>
                                                         <include reference="2Cu-TY-vpn"/>
                                                         <include reference="Pgv-rf-qVL"/>
                                                         <include reference="jEi-B3-bDH"/>
+                                                        <include reference="MGz-p8-NLP"/>
+                                                        <include reference="bNE-Ij-PNg"/>
+                                                        <include reference="3rG-yd-GWL"/>
+                                                        <include reference="dLN-ic-vLu"/>
                                                         <include reference="Zo8-3V-aS9"/>
                                                         <include reference="fS8-QR-krm"/>
                                                         <include reference="m3t-Lb-Pg4"/>
-                                                        <include reference="MGz-p8-NLP"/>
-                                                        <include reference="bNE-Ij-PNg"/>
                                                         <include reference="2dg-nU-Qft"/>
                                                         <include reference="GGF-Pq-vOZ"/>
-                                                        <include reference="3rG-yd-GWL"/>
-                                                        <include reference="dLN-ic-vLu"/>
+                                                        <include reference="Bzb-L6-9PO"/>
+                                                        <include reference="uQH-Qc-MJY"/>
                                                         <include reference="Vhx-vC-H9p"/>
                                                         <include reference="aPB-Ig-D39"/>
                                                         <include reference="ia4-HJ-Zc0"/>
@@ -5590,9 +5566,6 @@
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="160" y="1" width="440" height="118"/>
-                                                </variation>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBk-zT-YMj">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -5611,8 +5584,7 @@
                                                         <exclude reference="cIY-gc-wL3"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="1" width="150" height="122"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
                                                     <mask key="constraints">
                                                         <include reference="cIY-gc-wL3"/>
                                                     </mask>
@@ -9481,9 +9453,6 @@
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="35"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                            <rect key="frame" x="96" y="16" width="94" height="41"/>
-                                                        </variation>
                                                     </label>
                                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7hN-f2-TjW" userLabel="View_SelectedA">
                                                         <rect key="frame" x="96" y="59" width="217" height="37"/>
@@ -9524,9 +9493,6 @@
                                                             <constraint firstAttribute="height" constant="37" id="rGT-m9-Pgv"/>
                                                             <constraint firstAttribute="trailing" secondItem="cuY-Gj-zB4" secondAttribute="trailing" constant="8" id="ztN-pF-5Qd"/>
                                                         </constraints>
-                                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                            <rect key="frame" x="96" y="65" width="217" height="37"/>
-                                                        </variation>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -9557,9 +9523,6 @@
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="35"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                            <rect key="frame" x="123" y="16" width="94" height="41"/>
-                                                        </variation>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhu-HL-kMM" userLabel="View_SelectedB">
                                                         <rect key="frame" x="0.0" y="63" width="217" height="37"/>
@@ -9802,9 +9765,6 @@
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
-                                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                            <rect key="frame" x="22" y="69" width="62" height="21"/>
-                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Qj-vi-EbN">
                                                         <rect key="frame" x="102" y="64" width="40" height="21"/>

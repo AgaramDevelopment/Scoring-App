@@ -81,6 +81,7 @@
 @synthesize nonstrickerSixes ;
 @synthesize nonstrickerTotalBalls;
 @synthesize nonstrickerStrickRate ;
+@synthesize RUNSREQUIRED;
 
 //Current Bowler
 @synthesize currentBowlerPlayerCode ;
@@ -553,11 +554,9 @@ BOOL  getOverStatus;
     
      BATTEAMRUNRATE  = [NSNumber numberWithFloat:batteamRunRateData];
     
-    
-    
-    BATTEAMOVERS = teamOvers;
-    
+      BATTEAMOVERS = teamOvers;
     NSString *BATTEAMOVERSDATA = [NSString stringWithFormat:@"%d",BATTEAMOVERS];
+
     
     
     NSString *penaltyBowlerCode = [DBManager getPENULTIMATEBOWLERCODE:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:inns.INNINGSNO BATTINGTEAMCODE:BATTINGTEAMCODE OVERNO:BATTEAMOVERSDATA ISOVERCOMPLETE:isOverComplete BATTEAMOVERS:batTeamOver];//OVERS

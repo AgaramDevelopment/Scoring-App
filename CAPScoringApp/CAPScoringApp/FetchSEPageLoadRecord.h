@@ -70,6 +70,9 @@
 @property(strong,nonatomic)NSString *TEAMCODE;
 
 @property(nonatomic,assign)NSInteger *BATTEAMRUNS;
+@property(nonatomic,assign)NSNumber *RUNSREQUIRED;
+
+
 
 
 -(void) fetchSEPageLoadDetails :(NSString*) COMPETITIONCODE :(NSString *)MATCHCODE;

@@ -178,6 +178,7 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     [self hideLabelBasedOnMatchType];
     
    // [self resetBallObject];
     
@@ -221,7 +222,7 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
     _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld overs" ,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVERS,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %ld RRR ",(long)fetchSEPageLoadRecord.BATTEAMRUNRATE];
+    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
     
     
   _view_Wagon_wheel.hidden=YES;
