@@ -28,6 +28,8 @@
 #import "FetchSEPageLoadRecord.h"
 #import "SelectPlayerRecord.h"
 #import "FetchLastBallBowledPlayer.h"
+#import "InitializeInningsScoreBoardRecord.h"
+
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -4213,8 +4215,12 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     }else if(tableView == currentBowlersTableView){
         
         BowlerEvent *bowlEvent = [fetchSEPageLoadRecord.getBowlingTeamPlayers objectAtIndex:indexPath.row];
-        [DBManager updateBOWLERCODE:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO BOWLERCODE:bowlEvent.BowlerCode];
-        
+        InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
+
+        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode :bowlEvent.BowlerCode];
+
+//        [DBManager updateBOWLERCODE:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO BOWLERCODE:bowlEvent.BowlerCode];
+//        
         [currentBowlersTableView removeFromSuperview];
         isBowlerOpen = NO;
         isNONStrickerOpen = NO;
@@ -4223,8 +4229,11 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
         
     }else if(tableView == nonstrickerTableView){
         SelectPlayerRecord *selectPlayer = [nonStrickerList objectAtIndex:indexPath.row];
+        InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
+
         
-        [DBManager updateNONSTRIKERCODE:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO NONSTRIKERCODE:selectPlayer.playerCode];
+        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :selectPlayer.playerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode  :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+//        [DBManager updateNONSTRIKERCODE:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO NONSTRIKERCODE:selectPlayer.playerCode];
         isBowlerOpen = NO;
         isNONStrickerOpen = NO;
         isStrickerOpen = NO;
@@ -4233,6 +4242,10 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
         
     }else if(tableView == strickerTableView){
         
+        InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
+        
+        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+
         SelectPlayerRecord *selectPlayer = [strickerList objectAtIndex:indexPath.row];
         
         [DBManager updateStricker:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO STRIKERCODE:selectPlayer.playerCode];
@@ -4778,6 +4791,21 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
 }
 - (IBAction)btn_swap:(id)sender {
+    InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
+    
+    
+    [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode  :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+ 
+    isBowlerOpen = NO;
+    isNONStrickerOpen = NO;
+    isStrickerOpen = NO;
+    
+    [nonstrickerTableView removeFromSuperview];
+    [strickerTableView removeFromSuperview];
+    [currentBowlersTableView removeFromSuperview];
+
+    
+    [self reloadBowlerTeamBatsmanDetails];
 }
 
 
