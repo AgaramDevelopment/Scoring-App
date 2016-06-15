@@ -8381,6 +8381,41 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 }
 
 
++(NSMutableArray *)GetBolwerDetailsonEdit:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *) INNINGSNO
+{
+    NSMutableArray * BOWLERDETAILS =[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT BE.BOWLERCODE,PM.PLAYERNAME,BE.OVERNO,BE.OVERBALLCOUNT,BE.BALLCOUNT,BE.ISLEGALBALL,BE.ISFOUR,BE.ISSIX,BE.RUNS,BE.OVERTHROW,BE.TOTALRUNS,BE.WIDE,BE.NOBALL FROM BALLEVENTS BEINNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE = BE.BOWLERCODEWHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@' AND BE.INNINGSNO = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                
+                UserRecord *record=[[UserRecord alloc]init];
+                record.userCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.userName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                
+                
+                [BOWLERDETAILS addObject:record];
+                
+                
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
+    }
+    return BOWLERDETAILS;
+    
+}
 
 
 
