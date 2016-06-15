@@ -192,10 +192,10 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
    // [self resetBallObject];
     
-    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
-    
-    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+//    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+//    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+//    
+//    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
     
 //    NSString *data= [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS];
@@ -7663,33 +7663,33 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
 
 
-    if (IS_IPAD_PRO)
-    {
-        
-        if (( Xposition < 220 && Xposition > 172 && Yposition > 20 && Yposition <57))
-        {
-            wagonregiontext = @"Third Man - Fine";
-            regioncode = @"MSC215";
-            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-        }
-        //
-        //        else if(( Xposition >222 && Yposition <0)) {
-        //            wagonregiontext = @"Long Stop";
-        //            regioncode = @"MSC154";
-        //
-        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-        //
-        //        }
-    }
-    else if((Xposition < 170 && Xposition > 135 && Yposition > 20 && Yposition <41))
-        
-    {
-        wagonregiontext = @"Third Man - Fine";
-        regioncode = @"MSC215";
-        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-    }
-
-    
+//    if (IS_IPAD_PRO)
+//    {
+//        
+//        if (( Xposition < 220 && Xposition > 172 && Yposition > 20 && Yposition <57))
+//        {
+//            wagonregiontext = @"Third Man - Fine";
+//            regioncode = @"MSC215";
+//            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+//        }
+//        //
+//        //        else if(( Xposition >222 && Yposition <0)) {
+//        //            wagonregiontext = @"Long Stop";
+//        //            regioncode = @"MSC154";
+//        //
+//        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+//        //
+//        //        }
+//    }
+//    else if((Xposition < 170 && Xposition > 135 && Yposition > 20 && Yposition <41))
+//        
+//    {
+//        wagonregiontext = @"Third Man - Fine";
+//        regioncode = @"MSC215";
+//        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+//    }
+//
+//    
     
     
 }
