@@ -7,6 +7,7 @@
 //
 
 #import "Archive.h"
+
 @interface Archive() <UIGestureRecognizerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIView *button1;
@@ -47,16 +48,16 @@ static CGFloat const kBounceValue = 20.0f;
     [self setConstraintsToShowAllButtons:NO notifyDelegateDidOpen:NO];
 }
 
-- (IBAction)buttonClicked:(id)sender
-{
-    if (sender == self.button1) {
-        [self.delegate buttonOneActionForItemText:self.itemText];
-    } else if (sender == self.button2) {
-        [self.delegate buttonTwoActionForItemText:self.itemText];
-    } else {
-        NSLog(@"Clicked unknown button!");
-    }
-}
+//- (IBAction)buttonClicked:(id)sender
+//{
+//    if (sender == self.button1) {
+//        [self.delegate buttonOneActionForItemText];
+//    } else if (sender == self.button2) {
+//        [self.delegate buttonTwoActionForItemText:self.itemText];
+//    } else {
+//        NSLog(@"Clicked unknown button!");
+//    }
+//}
 
 - (void)setItemText:(NSString *)itemText
 {
@@ -251,5 +252,19 @@ static CGFloat const kBounceValue = 20.0f;
 -(IBAction)swiftRightsideBtnAction:(id)sender
 {
     [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:YES];
+}
+-(IBAction)didSwifeRightsideCancelBtnAction:(id)sender
+{
+    [self resetConstraintContstantsToZero:YES notifyDelegateDidClose:YES];
+}
+-(IBAction)didClickRightsideResumebtnAction:(id)sender
+{
+    [self.delegate RightsideResumeBtnAction];
+}
+-(IBAction)didClickRightsideEditBtnAction:(id)sender
+{
+    [self.delegate RightSideEditBtnAction];
+    
+
 }
 @end
