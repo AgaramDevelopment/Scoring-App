@@ -206,10 +206,10 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
    // [self resetBallObject];
     
-    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
-    
-    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+//    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+//    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+//    
+//    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
     
 //    NSString *data= [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS];
@@ -4246,7 +4246,7 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
         InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
 
         
-        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :selectPlayer.playerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode  :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE : fetchSEPageLoadRecord.strickerPlayerCode:selectPlayer.playerCode   :fetchSEPageLoadRecord.currentBowlerPlayerCode];
 //        [DBManager updateNONSTRIKERCODE:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO NONSTRIKERCODE:selectPlayer.playerCode];
         isBowlerOpen = NO;
         isNONStrickerOpen = NO;
@@ -4255,12 +4255,12 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
         [self reloadBowlerTeamBatsmanDetails];
         
     }else if(tableView == strickerTableView){
-        
+         SelectPlayerRecord *selectPlayer = [strickerList objectAtIndex:indexPath.row];
         InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
         
-        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :selectPlayer.playerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode];
 
-        SelectPlayerRecord *selectPlayer = [strickerList objectAtIndex:indexPath.row];
+       
         
         [DBManager updateStricker:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO STRIKERCODE:selectPlayer.playerCode];
         isBowlerOpen = NO;
@@ -4808,7 +4808,7 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
     
     
-    [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode  :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+    [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.strickerPlayerCode  :fetchSEPageLoadRecord.currentBowlerPlayerCode];
  
     isBowlerOpen = NO;
     isNONStrickerOpen = NO;
@@ -7677,33 +7677,33 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
 
 
-    if (IS_IPAD_PRO)
-    {
-        
-        if (( Xposition < 220 && Xposition > 172 && Yposition > 20 && Yposition <57))
-        {
-            wagonregiontext = @"Third Man - Fine";
-            regioncode = @"MSC215";
-            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-        }
-        //
-        //        else if(( Xposition >222 && Yposition <0)) {
-        //            wagonregiontext = @"Long Stop";
-        //            regioncode = @"MSC154";
-        //
-        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-        //
-        //        }
-    }
-    else if((Xposition < 170 && Xposition > 135 && Yposition > 20 && Yposition <41))
-        
-    {
-        wagonregiontext = @"Third Man - Fine";
-        regioncode = @"MSC215";
-        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-    }
-
-    
+//    if (IS_IPAD_PRO)
+//    {
+//        
+//        if (( Xposition < 220 && Xposition > 172 && Yposition > 20 && Yposition <57))
+//        {
+//            wagonregiontext = @"Third Man - Fine";
+//            regioncode = @"MSC215";
+//            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+//        }
+//        //
+//        //        else if(( Xposition >222 && Yposition <0)) {
+//        //            wagonregiontext = @"Long Stop";
+//        //            regioncode = @"MSC154";
+//        //
+//        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+//        //
+//        //        }
+//    }
+//    else if((Xposition < 170 && Xposition > 135 && Yposition > 20 && Yposition <41))
+//        
+//    {
+//        wagonregiontext = @"Third Man - Fine";
+//        regioncode = @"MSC215";
+//        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+//    }
+//
+//    
     
     
 }

@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 @protocol SwipeableCellDelegate <NSObject>
-- (void)buttonOneActionForItemText:(NSString *)itemText;
-- (void)buttonTwoActionForItemText:(NSString *)itemText;
+- (void)RightSideEditBtnAction;
+- (void)RightsideResumeBtnAction;
 - (void)cellDidOpen:(UITableViewCell *)cell;
 - (void)cellDidClose:(UITableViewCell *)cell;
 @end

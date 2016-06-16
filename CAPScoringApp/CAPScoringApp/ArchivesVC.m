@@ -12,10 +12,12 @@
 #import "Archive.h"
 #import "FixturesRecord.h"
 #import "FetchSEPageLoadRecord.h"
+#import "EditModeVC.h"
 
 @interface ArchivesVC ()<SwipeableCellDelegate>
 {
     CustomNavigationVC * objCustomNavigation;
+    NSString * matchCode;
 }
 @property(nonatomic,strong) NSMutableArray* FetchCompitionArray;
 @property (nonatomic, strong) NSMutableArray *cellsCurrentlyEditing;
@@ -46,7 +48,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [FetchCompitionArray count];    //count number of row from counting array hear cataGorry is An Array
+    return [FetchCompitionArray count];
 }
 
 
@@ -56,27 +58,15 @@
 {
     static NSString *MyIdentifier = @"ArchiveCell";
     
-
+    
     Archive *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
     
-//    if (cell == nil)
-//    {
-//        //cell = [[Archive alloc] initWithStyle:UITableViewCellStyleDefault
-//                                      // reuseIdentifier:MyIdentifier];
-//       // NSArray* views = [[NSBundle mainBundle] loadNibNamed:@"Archive" owner:nil options:nil];
-//        cell = (Archive*)[[[NSBundle mainBundle] loadNibNamed:@"Archive" owner:nil options:nil] objectAtIndex:0];
-//       // cell = [views objectAtIndex:0];
-//       
-//        
-//    }
-    //NSString *item = self.FetchCompitionArray[indexPath.row];
-    //cell.itemText = item;
     cell.delegate = self;
     if ([self.cellsCurrentlyEditing containsObject:indexPath]) {
         [cell openCell];
     }
     
-
+    
     FixturesRecord *objFixtureRecord=(FixturesRecord*)[FetchCompitionArray objectAtIndex:indexPath.row];
     NSLog(@"Matchcode=%@",objFixtureRecord.matchcode);
     NSLog(@"Compitioncode=%@",objFixtureRecord.competitioncode);
@@ -93,48 +83,31 @@
     [formatter setDateFormat:@"dd"];
     NSString *newDate = [formatter stringFromDate:date];
     cell.lbl_date.text=newDate;
-
+    matchCode=objFixtureRecord.matchcode;
+    
     [formatter setDateFormat:@"MMM ''yy"];
     newDate = [formatter stringFromDate:date];
     cell.lbl_displaydate.text=newDate;
     NSMutableArray* objInniningsarray=[DBManager FETCHSEALLINNINGSSCOREDETAILS:objFixtureRecord.competitioncode MATCHCODE:objFixtureRecord.matchcode];
-     FetchSEPageLoadRecord *objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
+    FetchSEPageLoadRecord *objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
     cell.innings1teamname1.text=objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME;
     cell.innings1team1runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FIRSTINNINGSTOTAL,objfetchSEPageLoadRecord.FIRSTINNINGSWICKET];
     cell.innings1team1overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+    
+    
+    
+    
+    
+    
     cell.innings2teamname2.text=objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
     cell.innings2team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
     cell.innings2team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
-//    objFixtureRecord.matchTypeCode = @"MSC115";
-//    
-//    if ([objFixtureRecord.matchTypeCode isEqualToString:@"MSC115"] || [objFixtureRecord.matchTypeCode isEqualToString:@"MSC116"] ||
-//        [objFixtureRecord.matchTypeCode isEqualToString:@"MSC022"] || [objFixtureRecord.matchTypeCode isEqualToString:@"MSC024"]) {
-//        
-//        
-//        _lbl_teamAsecIngsHeading.hidden = YES;
-//        _lbl_teamBsecIngsHeading.hidden = YES;
-//        
-//        _lbl_teamASecIngsScore.hidden = YES;
-//        _lbl_teamASecIngsOvs.hidden = YES;
-//        _lbl_teamBSecIngsScore.hidden = YES;
-//        _lbl_teamBSecIngsOvs.hidden = YES;
-//        
-//    }else{
-//        _lbl_teamAsecIngsHeading.hidden = NO;
-//        _lbl_teamBsecIngsHeading.hidden = NO;
-//        
-//        _lbl_teamASecIngsScore.hidden = NO;
-//        _lbl_teamASecIngsOvs.hidden = NO;
-//        _lbl_teamBSecIngsScore.hidden = NO;
-//        _lbl_teamBSecIngsOvs.hidden = NO;
-//        
-//    }
-
+    
     cell.backgroundColor=[UIColor clearColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
     
-      return cell;
+    return cell;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -144,7 +117,7 @@
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-   
+    
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -173,14 +146,18 @@
 }
 
 #pragma mark - SwipeableCellDelegate
-- (void)buttonOneActionForItemText:(NSString *)itemText
+- (void)RightSideEditBtnAction
 {
-   // [self showDetailWithText:[NSString stringWithFormat:@"Clicked button one for %@", itemText]];
+    EditModeVC * objEditModeVC=[[EditModeVC alloc]init];
+    objEditModeVC=(EditModeVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"EditModeVC"];
+    objEditModeVC.Comptitioncode =self.CompitionCode;
+    objEditModeVC.matchCode = matchCode;
+    [self.navigationController pushViewController:objEditModeVC animated:YES];
 }
 
-- (void)buttonTwoActionForItemText:(NSString *)itemText
+- (void)RightsideResumeBtnAction
 {
-   // [self showDetailWithText:[NSString stringWithFormat:@"Clicked button two for %@", itemText]];
+    // [self showDetailWithText:[NSString stringWithFormat:@"Clicked button two for %@", itemText]];
 }
 
 

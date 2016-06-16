@@ -26,7 +26,9 @@
 		1886718A1CFFF77E004DEDA0 /* AggressiveShotTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */; };
 		245E9F161D0143C200D7C07A /* PlayerLevelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 245E9F151D0143C200D7C07A /* PlayerLevelCell.m */; };
 		24622DBE1D0AD8860057A08A /* ArchivesVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24622DBD1D0AD8860057A08A /* ArchivesVC.m */; };
-		24622DC31D0AE2430057A08A /* Archive.m in Sources */ = {isa = PBXBuildFile; fileRef = 24622DC11D0AE2430057A08A /* Archive.m */; };
+		2468C0DC1D11740D007C68AA /* EditModeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2468C0DB1D11740D007C68AA /* EditModeVC.m */; };
+		2468C0DE1D1174A4007C68AA /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 2468C0DD1D1174A4007C68AA /* TNCA_DATABASE.sqlite */; };
+		2468C0E11D1177D7007C68AA /* Archive.m in Sources */ = {isa = PBXBuildFile; fileRef = 2468C0E01D1177D7007C68AA /* Archive.m */; };
 		2479C3E31CFC3FD300A3CCA2 /* BallEventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 2479C3E21CFC3FD300A3CCA2 /* BallEventRecord.m */; };
 		2487FD251D06ABD40039CFB2 /* CapitainWicketKeeperRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 2487FD241D06ABD40039CFB2 /* CapitainWicketKeeperRecord.m */; };
 		24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D24CDE1CFEC70A00CD75D2 /* ScorEnginVC.m */; };
@@ -130,8 +132,11 @@
 		245E9F151D0143C200D7C07A /* PlayerLevelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerLevelCell.m; path = SubClass/PlayerLevelCell/PlayerLevelCell.m; sourceTree = "<group>"; };
 		24622DBC1D0AD8860057A08A /* ArchivesVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArchivesVC.h; sourceTree = "<group>"; };
 		24622DBD1D0AD8860057A08A /* ArchivesVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArchivesVC.m; sourceTree = "<group>"; };
-		24622DC01D0AE2430057A08A /* Archive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Archive.h; sourceTree = "<group>"; };
-		24622DC11D0AE2430057A08A /* Archive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Archive.m; sourceTree = "<group>"; };
+		2468C0DA1D11740D007C68AA /* EditModeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditModeVC.h; path = ViewController/EditMode/EditModeVC.h; sourceTree = "<group>"; };
+		2468C0DB1D11740D007C68AA /* EditModeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditModeVC.m; path = ViewController/EditMode/EditModeVC.m; sourceTree = "<group>"; };
+		2468C0DD1D1174A4007C68AA /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
+		2468C0DF1D1177D7007C68AA /* Archive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Archive.h; path = SubClass/ArchiveCell/Archive.h; sourceTree = "<group>"; };
+		2468C0E01D1177D7007C68AA /* Archive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Archive.m; path = SubClass/ArchiveCell/Archive.m; sourceTree = "<group>"; };
 		2479C3E11CFC3FCD00A3CCA2 /* BallEventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BallEventRecord.h; path = Resource/BallEvents/BallEventRecord.h; sourceTree = "<group>"; };
 		2479C3E21CFC3FD300A3CCA2 /* BallEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BallEventRecord.m; path = Resource/BallEvents/BallEventRecord.m; sourceTree = "<group>"; };
 		2487FD231D06ABD40039CFB2 /* CapitainWicketKeeperRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CapitainWicketKeeperRecord.h; path = Resource/CaptainW.KeeperRecord/CapitainWicketKeeperRecord.h; sourceTree = "<group>"; };
@@ -286,10 +291,19 @@
 		24622DBF1D0AE2150057A08A /* Archive Cell */ = {
 			isa = PBXGroup;
 			children = (
-				24622DC01D0AE2430057A08A /* Archive.h */,
-				24622DC11D0AE2430057A08A /* Archive.m */,
+				2468C0DF1D1177D7007C68AA /* Archive.h */,
+				2468C0E01D1177D7007C68AA /* Archive.m */,
 			);
 			name = "Archive Cell";
+			sourceTree = "<group>";
+		};
+		2468C0D91D1173E7007C68AA /* EditMode */ = {
+			isa = PBXGroup;
+			children = (
+				2468C0DA1D11740D007C68AA /* EditModeVC.h */,
+				2468C0DB1D11740D007C68AA /* EditModeVC.m */,
+			);
+			name = EditMode;
 			sourceTree = "<group>";
 		};
 		2479C3E01CFC3FBC00A3CCA2 /* ballevent */ = {
@@ -422,6 +436,7 @@
 		CE0018361CF4308000668D8B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				2468C0D91D1173E7007C68AA /* EditMode */,
 				24622DBB1D0AD83D0057A08A /* Archives */,
 				24D24CD91CFEC60C00CD75D2 /* PlayerorderLevel */,
 				CE0018531CF463DF00668D8B /* ScorEnginVC */,
@@ -655,6 +670,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2468C0DE1D1174A4007C68AA /* TNCA_DATABASE.sqlite in Resources */,
 				CE0018511CF460DE00668D8B /* RAJDHANI-REGULAR.TTF in Resources */,
 				24D24CF01CFEF50000CD75D2 /* CustomNavigationVC.xib in Resources */,
 				048BB4561D1124F900C7A438 /* RevisedTarget.xib in Resources */,
@@ -697,9 +713,11 @@
 				188130511D0C725E00908F65 /* EndInnings.m in Sources */,
 				CE00183B1CF430E400668D8B /* DBManager.m in Sources */,
 				1881304E1D0C725100908F65 /* Breaks.m in Sources */,
+				2468C0DC1D11740D007C68AA /* EditModeVC.m in Sources */,
 				CE0F19B81CF5D0480030FFA2 /* LoginVC.m in Sources */,
 				CE0018421CF431D300668D8B /* EventRecord.m in Sources */,
 				CE0F19C01CF5D3D60030FFA2 /* UserRecord.m in Sources */,
+				2468C0E11D1177D7007C68AA /* Archive.m in Sources */,
 				CE3DD41F1CFBFB4F00D93A55 /* SelectPlayerCVCell.m in Sources */,
 				CE1FBF641CF9984B00A9B6FE /* FixturesRecord.m in Sources */,
 				2479C3E31CFC3FD300A3CCA2 /* BallEventRecord.m in Sources */,
@@ -734,7 +752,6 @@
 				1881E0851D103FFC003DEA09 /* FetchLastBallBowledPlayer.m in Sources */,
 				CE3DD4191CFBFA1600D93A55 /* SelectPlayersVC.m in Sources */,
 				CE0F19C31CF5D81D0030FFA2 /* DashBoardVC.m in Sources */,
-				24622DC31D0AE2430057A08A /* Archive.m in Sources */,
 				CE1FBF5E1CF992C900A9B6FE /* FixturesCell.m in Sources */,
 				187952321D02A410001A1224 /* BowlAndShotTypeRecords.m in Sources */,
 				048BB4551D1124F900C7A438 /* RevisedTarget.m in Sources */,
