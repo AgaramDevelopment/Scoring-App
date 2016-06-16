@@ -29,7 +29,12 @@
 #import "SelectPlayerRecord.h"
 #import "FetchLastBallBowledPlayer.h"
 #import "InitializeInningsScoreBoardRecord.h"
+#import "RevicedOverVC.h"
+#import "FixturesRecord.h"
+#import "RevisedTarget.h"
+#import "Reachability.h"
 #import "FetchScorecard.h"
+
 
 
 
@@ -201,16 +206,18 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
      [self hideLabelBasedOnMatchType];
     
    // [self resetBallObject];
-    
+
+    //Fetch Scroe details
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+//    
+//    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
     //ScoreCard
     FetchScorecard *fsc = [[FetchScorecard alloc]init];
     [fsc FetchScoreBoard:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO];
     
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
-    
     
 //    NSString *data= [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS];
 //    
