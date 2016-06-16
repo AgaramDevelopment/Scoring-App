@@ -28,6 +28,7 @@
 #import "FetchSEPageLoadRecord.h"
 #import "Breaks.h"
 #import "EndInnings.h"
+#import "InningsBowlerDetailsRecord.h"
 
 
 @implementation DBManager
@@ -8527,6 +8528,48 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
     return revisedtargetArray;
+    
+}
++(NSMutableArray *)GetBolwerDetailsonEdit:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *) INNINGSNO
+{
+    NSMutableArray * BOWLERDETAILS =[[NSMutableArray alloc]init];
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BE.BOWLERCODE,PM.PLAYERNAME,BE.OVERNO,BE.OVERBALLCOUNT,BE.BALLCOUNT,BE.ISLEGALBALL,BE.ISFOUR,BE.ISSIX,BE.RUNS,BE.OVERTHROW,BE.TOTALRUNS,BE.WIDE,BE.NOBALL FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE = BE.BOWLERCODE WHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@' AND BE.INNINGSNO = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=[[InningsBowlerDetailsRecord alloc]init];
+                objInningsBowlerDetailsRecord.BowlerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                objInningsBowlerDetailsRecord.Playername=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                objInningsBowlerDetailsRecord.OverNo=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                objInningsBowlerDetailsRecord.OverballCount=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                objInningsBowlerDetailsRecord.BallCount=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                objInningsBowlerDetailsRecord.islegalBall=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                objInningsBowlerDetailsRecord.isFour=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                objInningsBowlerDetailsRecord.isSix=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                objInningsBowlerDetailsRecord.Runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                objInningsBowlerDetailsRecord.overThrow=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                objInningsBowlerDetailsRecord.totalRuns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                objInningsBowlerDetailsRecord.Wide=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                objInningsBowlerDetailsRecord.noBall=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
+                
+                [BOWLERDETAILS addObject:objInningsBowlerDetailsRecord];
+            }
+            
+        }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return BOWLERDETAILS;
     
 }
 
