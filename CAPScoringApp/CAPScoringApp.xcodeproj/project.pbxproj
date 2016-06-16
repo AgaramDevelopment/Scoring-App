@@ -414,17 +414,17 @@
 		246256D31D12655D00712F47 /* InningsBowlerDetailRecord */ = {
 			isa = PBXGroup;
 			children = (
-				246256D41D12658000712F47 /* InningsBowlerDetailsRecord.h */,
-				246256D51D12658000712F47 /* InningsBowlerDetailsRecord.m */,
+				246256E91D12729600712F47 /* InningsBowlerDetailsRecord.h */,
+				246256EA1D12729600712F47 /* InningsBowlerDetailsRecord.m */,
 			);
 			name = InningsBowlerDetailRecord;
 			sourceTree = "<group>";
 		};
-		246256D71D12660200712F47 /* EditModeCell */ = {
+		246256DB1D12709B00712F47 /* EditModeCell */ = {
 			isa = PBXGroup;
 			children = (
-				246256D81D12664A00712F47 /* EditModeCell.h */,
-				246256D91D12664A00712F47 /* EditModeCell.m */,
+				246256E61D1271F400712F47 /* EditModeCell.h */,
+				246256E71D1271F400712F47 /* EditModeCell.m */,
 			);
 			name = EditModeCell;
 			sourceTree = "<group>";
@@ -620,6 +620,7 @@
 		CE00183F1CF431C100668D8B /* Records */ = {
 			isa = PBXGroup;
 			children = (
+				246256DF1D1270BE00712F47 /* OversorderRecord */,
 				246256D31D12655D00712F47 /* InningsBowlerDetailRecord */,
 				1878CD8F1D11101600A80BEE /* InitializeInningsScoreBoardRecord.h */,
 				1878CD901D11101600A80BEE /* InitializeInningsScoreBoardRecord.m */,
@@ -801,6 +802,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1872291C1D12653100CC168F /* RevicedOverVC.xib in Resources */,
 				CE0018511CF460DE00668D8B /* RAJDHANI-REGULAR.TTF in Resources */,
 				24D24CF01CFEF50000CD75D2 /* CustomNavigationVC.xib in Resources */,
 				CE00184F1CF460DE00668D8B /* RAJDHANI-LIGHT.TTF in Resources */,
@@ -856,7 +858,6 @@
 				CE0018421CF431D300668D8B /* EventRecord.m in Sources */,
 				CE0F19C01CF5D3D60030FFA2 /* UserRecord.m in Sources */,
 				2468C0E11D1177D7007C68AA /* Archive.m in Sources */,
-				246256DA1D12664A00712F47 /* EditModeCell.m in Sources */,
 				CE3DD41F1CFBFB4F00D93A55 /* SelectPlayerCVCell.m in Sources */,
 				CE1FBF641CF9984B00A9B6FE /* FixturesRecord.m in Sources */,
 				187229471D12701400CC168F /* MatchRegistrationDetailsForScoreBoard.m in Sources */,
@@ -874,10 +875,11 @@
 				CEC305811D014C3400301ED3 /* AppealSystemRecords.m in Sources */,
 				CE1FBF5B1CF96FE400A9B6FE /* BowlerEvent.m in Sources */,
 				24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */,
-				246256D61D12658000712F47 /* InningsBowlerDetailsRecord.m in Sources */,
+				187229201D12654300CC168F /* RevisedTarget.m in Sources */,
 				CE1FBF6A1CF9A17500A9B6FE /* MatchOfficalsVC.m in Sources */,
 				1878CD911D11101600A80BEE /* InitializeInningsScoreBoardRecord.m in Sources */,
 				2487FD251D06ABD40039CFB2 /* CapitainWicketKeeperRecord.m in Sources */,
+				246256E81D1271F400712F47 /* EditModeCell.m in Sources */,
 				CEC305871D015BB900301ED3 /* AppealUmpireRecord.m in Sources */,
 				CE1FBF671CF9A05B00A9B6FE /* OfficialMasterRecord.m in Sources */,
 				CE22AF291CFD58720026E0DA /* AppealRecord.m in Sources */,
@@ -905,6 +907,7 @@
 				CE3DD4251CFBFDD400D93A55 /* TeamLogoRecords.m in Sources */,
 				187229431D12701400CC168F /* BowlingSummaryElseDetailsForScoreBoard.m in Sources */,
 				CE0018001CF42FA500668D8B /* main.m in Sources */,
+				246256EB1D12729600712F47 /* InningsBowlerDetailsRecord.m in Sources */,
 				048B5A9E1D0AF1A7009F12B8 /* WicketTypeRecord.m in Sources */,
 				24D24CE21CFEC71800CD75D2 /* PlayerOrderLevelVC.m in Sources */,
 				187229411D12701400CC168F /* BattingSummaryDetailsForScoreBoard.m in Sources */,
