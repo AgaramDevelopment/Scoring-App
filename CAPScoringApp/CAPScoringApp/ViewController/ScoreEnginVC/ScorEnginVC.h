@@ -257,4 +257,12 @@
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsScore;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsOvs;
 
+@property (strong,nonatomic)UIView *objcommonRemarkview;
+@property (strong,nonatomic)UITextView *txt_Remark;
+- (IBAction)btn_revisetarget:(id)sender;
+
+- (IBAction)btn_reviseover:(id)sender;
+-(BOOL) checkInternetConnection;
+
+
 @end

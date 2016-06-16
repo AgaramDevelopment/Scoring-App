@@ -29,6 +29,11 @@
 #import "SelectPlayerRecord.h"
 #import "FetchLastBallBowledPlayer.h"
 #import "InitializeInningsScoreBoardRecord.h"
+#import "RevicedOverVC.h"
+#import "FixturesRecord.h"
+#import "RevisedTarget.h"
+#import "Reachability.h"
+
 
 
 
@@ -116,6 +121,15 @@
     NSString *selectedStrikernonstriker;
     NSString *selectedWicketEvent;
     BowlerEvent *selectedwicketBowlerlist;
+    
+    //Revised overs
+    NSString *strovers;
+    NSString *strcomments;
+    
+    //Revised target
+    NSString *strtargetovers;
+    NSString *strtargetruns;
+    NSString *strtargetcomments;
     
 }
 
@@ -301,36 +315,36 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
     self.View_Appeal.hidden = YES;
     
-    //
-    //    self.sideBar = [[CDRTranslucentSideBar alloc] init];
-    //    self.sideBar.sideBarWidth = 200;
-    //    self.sideBar.delegate = self;
-    //    self.sideBar.tag = 0;
+    
+        self.sideBar = [[CDRTranslucentSideBar alloc] init];
+        self.sideBar.sideBarWidth = 200;
+        self.sideBar.delegate = self;
+        self.sideBar.tag = 0;
     
     // Create Right SideBar
-    //    self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirectionFromRight:YES];
-    //    self.rightSideBar.delegate = self;
-    //    self.rightSideBar.translucentStyle = UIBarStyleBlack;
-    //    self.rightSideBar.tag = 1;
+        self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirectionFromRight:YES];
+        self.rightSideBar.delegate = self;
+        self.rightSideBar.translucentStyle = UIBarStyleBlack;
+        self.rightSideBar.tag = 1;
     
     // Add PanGesture to Show SideBar by PanGesture
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
     [self.view addGestureRecognizer:panGestureRecognizer];
     
     // Create Content of SideBar
-    //    UITableView *tableView = [[UITableView alloc] init];
-    //    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-    //    v.backgroundColor = [UIColor clearColor];
-    //    [tableView setTableHeaderView:v];
-    //    [tableView setTableFooterView:v];
-    //
-    //    //If you create UITableViewController and set datasource or delegate to it, don't forget to add childcontroller to this viewController.
-    //    //[[self addChildViewController: @"your view controller"];
-    //    tableView.dataSource = self;
-    //    tableView.delegate = self;
-    //
-    //    // Set ContentView in SideBar
-    //    [self.sideBar setContentViewInSideBar:tableView];
+        UITableView *tableView = [[UITableView alloc] init];
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+        v.backgroundColor = [UIColor clearColor];
+        [tableView setTableHeaderView:v];
+        [tableView setTableFooterView:v];
+    
+        //If you create UITableViewController and set datasource or delegate to it, don't forget to add childcontroller to this viewController.
+        //[[self addChildViewController: @"your view controller"];
+        tableView.dataSource = self;
+        tableView.delegate = self;
+    
+        // Set ContentView in SideBar
+        [self.sideBar setContentViewInSideBar:tableView];
     
     
     _View_Appeal.hidden=YES;
@@ -553,27 +567,27 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
 
 #pragma mark - Gesture Handler
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
-    // if you have left and right sidebar, you can control the pan gesture by start point.
-    //    if (recognizer.state == UIGestureRecognizerStateBegan) {
-    //        CGPoint startPoint = [recognizer locationInView:self.view];
-    //
-    //        // Left SideBar
-    //        if (startPoint.x < self.view.bounds.size.width / 2.0) {
-    //            self.sideBar.isCurrentPanGestureTarget = YES;
-    //        }
-    //        // Right SideBar
-    //        else {
-    //            self.rightSideBar.isCurrentPanGestureTarget = YES;
-    //        }
-    //    }
-    //
-    //    [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
-    //    [self.rightSideBar handlePanGestureToShow:recognizer inViewController:self];
-    //
-    // if you have only one sidebar, do like following
+  //   if you have left and right sidebar, you can control the pan gesture by start point.
+        if (recognizer.state == UIGestureRecognizerStateBegan) {
+            CGPoint startPoint = [recognizer locationInView:self.view];
     
-    // self.sideBar.isCurrentPanGestureTarget = YES;
-    //[self.sideBar handlePanGestureToShow:recognizer inView:self.view];
+            // Left SideBar
+            if (startPoint.x < self.view.bounds.size.width / 2.0) {
+                self.sideBar.isCurrentPanGestureTarget = YES;
+            }
+            // Right SideBar
+            else {
+                self.rightSideBar.isCurrentPanGestureTarget = YES;
+            }
+        }
+    
+        [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
+        [self.rightSideBar handlePanGestureToShow:recognizer inViewController:self];
+    
+   //  if you have only one sidebar, do like following
+    
+     self.sideBar.isCurrentPanGestureTarget = YES;
+    [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
 }
 
 #pragma mark - CDRTranslucentSideBarDelegate
@@ -7694,7 +7708,179 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
 }
 
+////Revised overs
+//
+//-(void) revisedoverview{
+//    
+//    RevicedOverVC *revisedoverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
+//    revisedoverVc.matchCode =self.matchCode;
+//    revisedoverVc.competitionCode =self.competitionCode;
+//    
+//    [self.view addSubview:revisedoverVc.view];
+//    revisedoverVc.txt_comments.delegate=self;
+//    revisedoverVc.txt_overs.delegate=self;
+//    [revisedoverVc.btn_submit addTarget:self action:@selector(btn_submit:) forControlEvents:UIControlEventTouchUpInside];    
+//}
+//
+//- (IBAction)btn_submit:(id)sender {
+//if(self.checkInternetConnection){
+//    NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/REVISEOVER/%@/%@/TEA0000013/1/%@/%@",self.competitionCode,self.matchCode,strovers,strcomments];
+//    
+//    NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//    
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    NSURLResponse *response;
+//    NSError *error;
+//    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//    
+//    
+//    NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//    
+//    
+//}else{
+//
+//    [DBManager updateRevisedOvers:strovers comments:strcomments matchCode:self.matchCode competitionCode:self.competitionCode];
+//   }
+//}
+//
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+//    NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
+//    
+//    if(textField.tag == 21)
+//    {
+//        
+//        if (![string isEqualToString:@""]) {
+//            strovers=[textField.text stringByAppendingString:string];
+//            return YES;
+//            
+//        }
+//    }
+//    else if (textField.tag == 22)
+//    {
+//        if (![string isEqualToString:@""]) {
+//            strcomments=[textField.text stringByAppendingString:string];
+//            return YES;
+//            
+//        }
+//        
+//    }
+//    return YES;
+//}
+//
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+//    NSLog(@"textFieldShouldReturn:");
+//    if (textField.tag == 21) {
+//        UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:2];
+//        [passwordTextField becomeFirstResponder];
+//    }
+//    else if(textField.tag== 22){
+//        [textField resignFirstResponder];
+//    }
+//    return YES;
+//}
+//
+//
+//
+//- (IBAction)btn_reviseover:(id)sender {
+//    [self revisedoverview];
+//}
 
+//Revised Target
+-(void) revisedtargetview{
+    
+    RevisedTarget *revisedtargetVc = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
+    revisedtargetVc.matchCode =self.matchCode;
+    revisedtargetVc.competitionCode =self.competitionCode;
+    [self.view addSubview:revisedtargetVc.view];
+    revisedtargetVc.txt_overs.delegate=self;
+    revisedtargetVc.txt_target.delegate=self;
+    revisedtargetVc.txt_comments.delegate=self;
+
+    [revisedtargetVc.btn_targetok addTarget:self action:@selector(btn_targetok:) forControlEvents:UIControlEventTouchUpInside];
+}
+- (IBAction)btn_revisetarget:(id)sender {
+    [self revisedtargetview ];
+}
+
+//Check internet connection
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
+- (IBAction)btn_targetok:(id)sender {
+    
+    if(self.checkInternetConnection){
+        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETREVISETARGET/%@/%@/'TEA0000024'/%@/%@/%@/'2'",self.competitionCode,self.matchCode,strtargetruns,strtargetovers,strtargetcomments];
+        
+        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSURLResponse *response;
+        NSError *error;
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        
+        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+        
+        
+    }else{
+        
+         [DBManager updateRevisedTarget:strtargetovers runs:strtargetruns comments:strtargetcomments matchCode:self.matchCode competitionCode:self.competitionCode];
+        
+    }
+    
+    
+    
+   
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
+    
+    if(textField.tag == 23)
+    {
+        
+        if (![string isEqualToString:@""]) {
+            strtargetovers=[textField.text stringByAppendingString:string];
+            return YES;
+            
+        }
+    }
+    else if (textField.tag == 24)
+    {
+        if (![string isEqualToString:@""]) {
+            strtargetruns=[textField.text stringByAppendingString:string];
+            return YES;
+        }
+        } else if (textField.tag == 25)
+        {
+            if (![string isEqualToString:@""]) {
+                strtargetcomments=[textField.text stringByAppendingString:string];
+                return YES;
+                
+            }
+        
+    }
+return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    NSLog(@"textFieldShouldReturn:");
+    if (textField.tag == 23) {
+        UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:3];
+        [passwordTextField becomeFirstResponder];
+    }
+    else if(textField.tag== 24){
+        [textField resignFirstResponder];
+    }
+    else if(textField.tag== 25){
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
 
 
 @end

@@ -468,4 +468,12 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 
 +(NSString*) GetNonStrikerDetailsForBallCode:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*) INNINGSNO:(NSString*) NONSTRIKERCODE;
 
+
+//Revised overs
++(NSMutableArray *) RetrieveRevisedOverData:(NSString*)matchcode competitionCode:(NSString*) competitionCode;
++(BOOL)updateRevisedOvers:(NSString*)overs comments:(NSString*)comments matchCode:(NSString*) matchCode competitionCode:(NSString*)competitionCode ;
+//Revised Target
++(BOOL)updateRevisedTarget:(NSString*)overs runs:(NSString*)runs comments:(NSString*)comments matchCode:(NSString*) matchCode competitionCode:(NSString*)competitionCode;
++(NSMutableArray *) RetrieveRevisedTargetData:(NSString*)matchcode competitionCode:(NSString*) competitionCode;
+
 @end
