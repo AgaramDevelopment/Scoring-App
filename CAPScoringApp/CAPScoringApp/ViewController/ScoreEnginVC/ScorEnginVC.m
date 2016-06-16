@@ -4819,6 +4819,10 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
     CGPathAddLineToPoint(straightLinePath, NULL,self.centerlbl.center.x,self.centerlbl.center.y);
     
+//    CGContextSetFillColorWithColor(UIGraphicsGetCurrentContext(),self.backgroundColor.CGColor);
+//    
+//    CGContextFillRect(UIGraphicsGetCurrentContext(), rect);
+ 
     
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.path = straightLinePath;
@@ -4828,6 +4832,7 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     shapeLayer.strokeColor = strokeColor.CGColor;
     shapeLayer.lineWidth = 2.0f;
     shapeLayer.fillRule = kCAFillRuleNonZero;
+    
     
     [self.img_WagonWheel.layer addSublayer:shapeLayer];
     

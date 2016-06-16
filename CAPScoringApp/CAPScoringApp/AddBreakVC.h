@@ -28,4 +28,6 @@
 @property (strong, nonatomic) IBOutlet UIView *view_breakMinutes;
 - (IBAction)Switch_minuts:(id)sender;
 - (IBAction)Finish_btn:(id)sender;
+
+
 @end

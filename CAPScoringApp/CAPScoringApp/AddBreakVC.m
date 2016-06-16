@@ -154,7 +154,7 @@
 - (IBAction)Finish_btn:(id)sender {
     
     COMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
-    
+   // [self InsertBreaks];
 
 }
 
