@@ -29,6 +29,7 @@
 #import "SelectPlayerRecord.h"
 #import "FetchLastBallBowledPlayer.h"
 #import "InitializeInningsScoreBoardRecord.h"
+#import "FetchScorecard.h"
 
 
 
@@ -194,6 +195,10 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
+    //ScoreCard
+    FetchScorecard *fsc = [[FetchScorecard alloc]init];
+    [fsc FetchScoreBoard:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO];
     
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
