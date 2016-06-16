@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface BattingSummaryDetailsForScoreBoard : NSObject
+
+@property(strong,nonatomic)NSString *BATSMANCODE;
 @property(strong,nonatomic)NSString *BATSMANNAME;
 @property(strong,nonatomic)NSString *BATTINGSTYLE;
 @property(strong,nonatomic)NSString *BOWLERCODE;

@@ -26,7 +26,7 @@
     
     NSMutableArray *MatchRegistrationForScoreBoard=[ DBManagerScoreCard GetMatchRegistrationForScoreBoard :  COMPETITIONCODE : MATCHCODE : INNINGSNO ];
     
-    NSMutableArray *BattingSummaryForScoreBoard=[ DBManagerScoreCard GetBattingSummaryForScoreBoard :  COMPETITIONCODE : MATCHCODE : INNINGSNO ];
+     self.BattingSummaryForScoreBoard=[ DBManagerScoreCard GetBattingSummaryForScoreBoard :  COMPETITIONCODE : MATCHCODE : INNINGSNO ];
     
     ISINNINGSCOMPLETE = [DBManagerScoreCard GetInningsStatusForScoreBoard : COMPETITIONCODE : MATCHCODE: INNINGSNO];
     
@@ -37,6 +37,7 @@
         MATCHBALLS=[MatchOverandBallForScoreBoard objectAtIndex: 1];
         
     }
+
     
     FINALINNINGS=[DBManagerScoreCard GetFinalInningsForScoreBoard : COMPETITIONCODE : MATCHCODE];
     
@@ -67,12 +68,12 @@
     
     if([ISTIMESHOW isEqual:@"1"])
     {
-        NSMutableArray *BowlingSummaryForScoreBoard=[ DBManagerScoreCard GetBowlingSummaryForScoreBoard:  COMPETITIONCODE : MATCHCODE : INNINGSNO];
+         self.BowlingSummaryForScoreBoard=[ DBManagerScoreCard GetBowlingSummaryForScoreBoard:  COMPETITIONCODE : MATCHCODE : INNINGSNO];
         
     }
     else
     {
-        NSMutableArray *BowlingSummaryInElseForScoreBoard=[ DBManagerScoreCard GetBowlingSummaryInElseForScoreBoard:  COMPETITIONCODE : MATCHCODE : INNINGSNO];
+        self.BowlingSummaryForScoreBoard=[ DBManagerScoreCard GetBowlingSummaryInElseForScoreBoard:  COMPETITIONCODE : MATCHCODE : INNINGSNO];
         
     }
     
