@@ -10555,6 +10555,7 @@
                                                     <outlet property="lbl_overcountwkt" destination="5D1-OJ-s4M" id="k9s-il-mqs"/>
                                                     <outlet property="lbl_overs" destination="JNs-Il-zWy" id="gcz-Vn-pa2"/>
                                                     <outlet property="lbl_playername" destination="wAh-pJ-OKA" id="QEn-lO-mPW"/>
+                                                    <outlet property="view_main" destination="MXz-oK-tOZ" id="Hlh-G4-SLa"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
