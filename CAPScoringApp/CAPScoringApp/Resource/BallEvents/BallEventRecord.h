@@ -20,7 +20,7 @@
 
 @property(nonatomic,strong) NSNumber * objDayno;
 
-@property(nonatomic,strong) NSNumber * objInningsno;
+@property(nonatomic,strong) NSString * objInningsno;
 
 @property(nonatomic,strong) NSNumber * objOverno;
 

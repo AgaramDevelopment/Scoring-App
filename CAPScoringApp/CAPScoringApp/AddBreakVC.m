@@ -8,6 +8,9 @@
 
 #import "AddBreakVC.h"
 #import "DBManager.h"
+#import "BallEventRecord.h"
+#import "FetchSEPageLoadRecord.h"
+//#import "Scor"
 
 @interface AddBreakVC ()
 {
@@ -16,9 +19,18 @@
     NSString *BREAKENDTIME;
     NSString*INNINGSNO;
     NSString *COMMENTS;
+    NSString *BREAKNO;
     NSString * ISINCLUDEDURATION;
+    NSString*COMPETITIONCODE;
+    NSString*MATCHCODE;
     NSDateFormatter *formatter;
     NSDateFormatter *formatter1;
+    NSDate *dateFromString;
+    NSDate *dateFromString1;
+    
+    //objInningsno;
+    BallEventRecord*obj;
+    FetchSEPageLoadRecord*fetchSEPageLoadRecord;
 }
 @end
 
@@ -26,10 +38,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-     self.view.frame =CGRectMake(100,350, [[UIScreen mainScreen] bounds].size.width/2, 500);
+  
+   INNINGSNO= fetchSEPageLoadRecord.INNINGSNO;
+    COMPETITIONCODE=fetchSEPageLoadRecord.COMPETITIONCODE;
+    MATCHCODE=fetchSEPageLoadRecord.MATCHCODE;
     
-    
+     [_datePicker_View setHidden:YES];
     [self.View_BreakStart.layer setBorderWidth:2.0];
     [self.View_BreakStart.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.View_BreakStart.layer setMasksToBounds:YES];
@@ -45,101 +59,110 @@
     [self.View_Comments.layer setBorderWidth:2.0];
     [self.View_Comments.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.View_Comments.layer setMasksToBounds:YES];
-    
-    
-    datepicker=[[UIDatePicker alloc]init];
-    datepicker1=[[UIDatePicker alloc]init];
-    
-    datepicker.datePickerMode=UIDatePickerModeDate;
-    datepicker1.datePickerMode=UIDatePickerModeDate;
-    
-    
-    
-    // [self.ok_lbl.text:datepicker];
-    [self.Text_BreakStart setInputView:datepicker];
-    [self.text_EndBreak setInputView:datepicker1];
-    
-    UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-    [toolbar setTintColor:[UIColor grayColor]];
-    UIBarButtonItem *doneBtn=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(ShowSelectedDate)];
-    
-    UIBarButtonItem *space =[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    [toolbar setItems:[NSArray arrayWithObjects:space,doneBtn, nil]];
-    [self.Text_BreakStart setInputAccessoryView:toolbar];
-    
-    //Another Dte Picker Tool for Toate Picker
-    UIToolbar *toolbar1 =[[UIToolbar alloc]initWithFrame:CGRectMake(0, 0, 320, 44)];
-    [toolbar1 setTintColor:[UIColor grayColor]];
-    //  datepicker.backgroundColor=[UIColor blueColor];
-    // toolbar.backgroundColor=[UIColor b];
-    UIBarButtonItem *doneBtn1=[[UIBarButtonItem alloc]initWithTitle:@"Done" style:UIBarButtonItemStyleBordered target:self action:@selector(ShowSelectedDate1)];
-    UIBarButtonItem *space1 =[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    [toolbar1 setItems:[NSArray arrayWithObjects:space1,doneBtn1, nil]];
-    [self.text_EndBreak setInputAccessoryView:toolbar1];
-    
-    
-//    NSDate *minutes = [BREAKSTARTTIME timeIntervalSinceDate:BREAKENDTIME];
-//    int numberOfDays = minutes / 1440;
-    
-  
+     NSDate *dateFromString = [[NSDate alloc] init];
+        NSDate *dateFromString1 = [[NSDate alloc] init];
 }
+//
+//
+//
+////Another Dte Picker Tool for Toate Picker
+//-(void) ShowSelectedDate1
+//{  formatter1=[[NSDateFormatter alloc]init];
+//    [formatter1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    self.text_EndBreak.text=[NSString stringWithFormat:@"%@",[formatter1 stringFromDate:_date_picker.date]];
+//    [self.text_EndBreak resignFirstResponder];
+//}
 
 
--(void) ShowSelectedDate
-
-{
-    formatter=[[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    self.Text_BreakStart.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datepicker.date]];
-    
-    [self.Text_BreakStart resignFirstResponder];
-}
-
-//Another Dte Picker Tool for Toate Picker
--(void) ShowSelectedDate1
-{  formatter1=[[NSDateFormatter alloc]init];
-    [formatter1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    self.text_EndBreak.text=[NSString stringWithFormat:@"%@",[formatter1 stringFromDate:datepicker1.date]];
-    [self.text_EndBreak resignFirstResponder];
-}
 
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 
 
 - (IBAction)StartBreack_btn:(id)sender {
     
-    BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
+_Text_BreakStart.text=@"";
+    [_datePicker_View setHidden:NO];
+     [_date_picker1 setHidden:YES];
+    [_date_picker setHidden:NO];
+    
+    _date_picker.datePickerMode = UIDatePickerModeDateAndTime;
+      [_date_picker addTarget:self
+                    action:@selector(BreakStart:)forControlEvents:UIControlEventValueChanged];
+    
+  formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"dd-MMM-yy hh:mm a "];
+    //set date too your lable here
+   // =[formate stringFromDate:_date_picker.date];
+    
+    
+
+    
    
 }
+
+-(void)BreakStart:(id)sender
+{
+    NSLog(@"date is %@",_date_picker.date);
+    NSDateFormatter *formate=[[NSDateFormatter alloc]init];
+    [formate setDateFormat:@"dd-MMM-yy hh:mm a "];
+    _Text_BreakStart.text=[formate stringFromDate:_date_picker.date];
+    BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
+    
+}
+
+
+
+
 - (IBAction)EndBreak_btn:(id)sender {
-     BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
     
-      NSDate *date1 = [formatter dateFromString:BREAKSTARTTIME];
-     NSDate *date2 = [formatter dateFromString:BREAKENDTIME];
     
-      NSTimeInterval timeDifference = [date1 timeIntervalSinceDate:date2];
-    double days = timeDifference / 1440;
-    NSString *Duration = [NSString stringWithFormat:@"%.20f", days];
-    _lbl_Duration.text=[NSString stringWithFormat:@"%@", Duration];
+    _text_EndBreak.text=@"";
+    [_datePicker_View setHidden:NO];
+    [_date_picker setHidden:YES];
+     [_date_picker1 setHidden:NO];
+    _date_picker1.datePickerMode = UIDatePickerModeDateAndTime;
+    [_date_picker1 addTarget:self
+                     action:@selector(BreakEnd:)forControlEvents:UIControlEventValueChanged];
+    
+    formatter1=[[NSDateFormatter alloc]init];
+    [formatter1 setDateFormat:@"dd-MMM-yy hh:mm a "];
+
+//
+    
     
     
 }
+
+
+-(void)DurationCalculation
+{
+   
+       dateFromString = [formatter dateFromString:BREAKSTARTTIME];
+   
+
+    dateFromString1 = [formatter1 dateFromString:BREAKENDTIME];
+    
+    NSTimeInterval timeDifference = [dateFromString1 timeIntervalSinceDate:dateFromString];
+    double days = timeDifference / 60;
+    NSString *Duration = [NSString stringWithFormat:@"%f", days];
+    _lbl_Duration.text=[NSString stringWithFormat:@"%@", Duration];
+}
+
+
+-(void)BreakEnd:(id)sender
+{
+    NSLog(@"date is %@",_date_picker1.date);
+    NSDateFormatter *formate=[[NSDateFormatter alloc]init];
+    [formate setDateFormat:@"dd-MMM-yy hh:mm a "];
+    _text_EndBreak.text=[formate stringFromDate:_date_picker1.date];
+    BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
+    
+}
+
+
 - (IBAction)Switch_minuts:(id)sender {
     
     if([sender isOn]){
@@ -152,9 +175,12 @@
 }
 
 - (IBAction)Finish_btn:(id)sender {
-    
+     [self DurationCalculation];
     COMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
    // [self InsertBreaks];
+    
+    
+   //   BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
 
 }
 
@@ -176,6 +202,20 @@
     
     NSMutableArray*BreaksArray=[DBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+}
+
+- (IBAction)hidepickerbtn:(id)sender {
+    
+      [_datePicker_View setHidden:YES];
+}
+
+
+
+
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 @end

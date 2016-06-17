@@ -192,9 +192,9 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     
    // [self resetBallObject];
     
-//    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-//    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
-//    
+    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
 //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
     

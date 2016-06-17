@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AddBreakVC : UIViewController
+@interface AddBreakVC : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource>
 
-{
-    UIDatePicker * datepicker;
-    UIDatePicker * datepicker1;
-}
+//{
+//    UIDatePicker * datepicker;
+//    UIDatePicker * datepicker1;
+//}
 @property (strong, nonatomic) IBOutlet UIView *View_BreakStart;
 @property (strong, nonatomic) IBOutlet UITextField *Text_BreakStart;
 - (IBAction)StartBreack_btn:(id)sender;
@@ -28,6 +28,10 @@
 @property (strong, nonatomic) IBOutlet UIView *view_breakMinutes;
 - (IBAction)Switch_minuts:(id)sender;
 - (IBAction)Finish_btn:(id)sender;
+@property (strong, nonatomic) IBOutlet UIView *datePicker_View;
+@property (strong, nonatomic) IBOutlet UIDatePicker *date_picker;
+@property (strong, nonatomic) IBOutlet UIDatePicker *date_picker1;
 
+- (IBAction)hidepickerbtn:(id)sender;
 
 @end
