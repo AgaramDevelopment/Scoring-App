@@ -10,4 +10,7 @@
 
 @interface MatcheventRecord : NSObject
 @property(nonatomic,strong)NSString*readrecoed;
+@property(nonatomic,strong)NSString*targetruns;
+@property(nonatomic,strong)NSString*targetovers;
+@property(nonatomic,strong)NSString*targetcomments;
 @end

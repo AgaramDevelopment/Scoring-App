@@ -120,6 +120,15 @@
     NSString *selectedWicketEvent;
     BowlerEvent *selectedwicketBowlerlist;
     
+    //Revised overs
+    NSString *strovers;
+    NSString *strcomments;
+    
+    //Revised target
+    NSString *strtargetovers;
+    NSString *strtargetruns;
+    NSString *strtargetcomments;
+    
 }
 
 @property(strong,nonatomic)NSString *matchTypeCode;
@@ -195,12 +204,18 @@ EndInnings *endInnings;
      [self hideLabelBasedOnMatchType];
     
    // [self resetBallObject];
-    
+
+    //Fetch Scroe details
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+//    
+//    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+    
+    //ScoreCard
+    FetchScorecard *fsc = [[FetchScorecard alloc]init];
+    [fsc FetchScoreBoard:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO];
     
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
-    
     
     endInnings = [[EndInnings alloc]init];
     
@@ -4266,7 +4281,7 @@ EndInnings *endInnings;
         InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
 
         
-        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :selectPlayer.playerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode  :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE : fetchSEPageLoadRecord.strickerPlayerCode:selectPlayer.playerCode   :fetchSEPageLoadRecord.currentBowlerPlayerCode];
 //        [DBManager updateNONSTRIKERCODE:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO NONSTRIKERCODE:selectPlayer.playerCode];
         isBowlerOpen = NO;
         isNONStrickerOpen = NO;
@@ -4275,12 +4290,12 @@ EndInnings *endInnings;
         [self reloadBowlerTeamBatsmanDetails];
         
     }else if(tableView == strickerTableView){
-        
+         SelectPlayerRecord *selectPlayer = [strickerList objectAtIndex:indexPath.row];
         InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
         
-        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :selectPlayer.playerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode];
 
-        SelectPlayerRecord *selectPlayer = [strickerList objectAtIndex:indexPath.row];
+       
         
         [DBManager updateStricker:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO STRIKERCODE:selectPlayer.playerCode];
         isBowlerOpen = NO;
@@ -4828,7 +4843,7 @@ EndInnings *endInnings;
     InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
     
     
-    [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode  :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+    [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.strickerPlayerCode  :fetchSEPageLoadRecord.currentBowlerPlayerCode];
  
     isBowlerOpen = NO;
     isNONStrickerOpen = NO;
@@ -7697,38 +7712,210 @@ EndInnings *endInnings;
     
 
 
-    if (IS_IPAD_PRO)
-    {
-        
-        if (( Xposition < 220 && Xposition > 172 && Yposition > 20 && Yposition <57))
-        {
-            wagonregiontext = @"Third Man - Fine";
-            regioncode = @"MSC215";
-            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-        }
-        //
-        //        else if(( Xposition >222 && Yposition <0)) {
-        //            wagonregiontext = @"Long Stop";
-        //            regioncode = @"MSC154";
-        //
-        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-        //
-        //        }
-    }
-    else if((Xposition < 170 && Xposition > 135 && Yposition > 20 && Yposition <41))
-        
-    {
-        wagonregiontext = @"Third Man - Fine";
-        regioncode = @"MSC215";
-        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-    }
-
-    
+//    if (IS_IPAD_PRO)
+//    {
+//        
+//        if (( Xposition < 220 && Xposition > 172 && Yposition > 20 && Yposition <57))
+//        {
+//            wagonregiontext = @"Third Man - Fine";
+//            regioncode = @"MSC215";
+//            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+//        }
+//        //
+//        //        else if(( Xposition >222 && Yposition <0)) {
+//        //            wagonregiontext = @"Long Stop";
+//        //            regioncode = @"MSC154";
+//        //
+//        //            NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+//        //
+//        //        }
+//    }
+//    else if((Xposition < 170 && Xposition > 135 && Yposition > 20 && Yposition <41))
+//        
+//    {
+//        wagonregiontext = @"Third Man - Fine";
+//        regioncode = @"MSC215";
+//        NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+//    }
+//
+//    
     
     
 }
 
+////Revised overs
+//
+//-(void) revisedoverview{
+//    
+//    RevicedOverVC *revisedoverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
+//    revisedoverVc.matchCode =self.matchCode;
+//    revisedoverVc.competitionCode =self.competitionCode;
+//    
+//    [self.view addSubview:revisedoverVc.view];
+//    revisedoverVc.txt_comments.delegate=self;
+//    revisedoverVc.txt_overs.delegate=self;
+//    [revisedoverVc.btn_submit addTarget:self action:@selector(btn_submit:) forControlEvents:UIControlEventTouchUpInside];    
+//}
+//
+//- (IBAction)btn_submit:(id)sender {
+//if(self.checkInternetConnection){
+//    NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/REVISEOVER/%@/%@/TEA0000013/1/%@/%@",self.competitionCode,self.matchCode,strovers,strcomments];
+//    
+//    NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//    
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    NSURLResponse *response;
+//    NSError *error;
+//    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//    
+//    
+//    NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//    
+//    
+//}else{
+//
+//    [DBManager updateRevisedOvers:strovers comments:strcomments matchCode:self.matchCode competitionCode:self.competitionCode];
+//   }
+//}
+//
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+//    NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
+//    
+//    if(textField.tag == 21)
+//    {
+//        
+//        if (![string isEqualToString:@""]) {
+//            strovers=[textField.text stringByAppendingString:string];
+//            return YES;
+//            
+//        }
+//    }
+//    else if (textField.tag == 22)
+//    {
+//        if (![string isEqualToString:@""]) {
+//            strcomments=[textField.text stringByAppendingString:string];
+//            return YES;
+//            
+//        }
+//        
+//    }
+//    return YES;
+//}
+//
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+//    NSLog(@"textFieldShouldReturn:");
+//    if (textField.tag == 21) {
+//        UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:2];
+//        [passwordTextField becomeFirstResponder];
+//    }
+//    else if(textField.tag== 22){
+//        [textField resignFirstResponder];
+//    }
+//    return YES;
+//}
+//
+//
+//
+//- (IBAction)btn_reviseover:(id)sender {
+//    [self revisedoverview];
+//}
 
+//Revised Target
+-(void) revisedtargetview{
+    
+    RevisedTarget *revisedtargetVc = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
+    revisedtargetVc.matchCode =self.matchCode;
+    revisedtargetVc.competitionCode =self.competitionCode;
+    [self.view addSubview:revisedtargetVc.view];
+    revisedtargetVc.txt_overs.delegate=self;
+    revisedtargetVc.txt_target.delegate=self;
+    revisedtargetVc.txt_comments.delegate=self;
+
+    [revisedtargetVc.btn_targetok addTarget:self action:@selector(btn_targetok:) forControlEvents:UIControlEventTouchUpInside];
+}
+- (IBAction)btn_revisetarget:(id)sender {
+    [self revisedtargetview ];
+}
+
+//Check internet connection
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
+- (IBAction)btn_targetok:(id)sender {
+    
+    if(self.checkInternetConnection){
+        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETREVISETARGET/%@/%@/'TEA0000024'/%@/%@/%@/'2'",self.competitionCode,self.matchCode,strtargetruns,strtargetovers,strtargetcomments];
+        
+        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSURLResponse *response;
+        NSError *error;
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        
+        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+        
+        
+    }else{
+        
+         [DBManager updateRevisedTarget:strtargetovers runs:strtargetruns comments:strtargetcomments matchCode:self.matchCode competitionCode:self.competitionCode];
+        
+    }
+    
+    
+    
+   
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
+    
+    if(textField.tag == 23)
+    {
+        
+        if (![string isEqualToString:@""]) {
+            strtargetovers=[textField.text stringByAppendingString:string];
+            return YES;
+            
+        }
+    }
+    else if (textField.tag == 24)
+    {
+        if (![string isEqualToString:@""]) {
+            strtargetruns=[textField.text stringByAppendingString:string];
+            return YES;
+        }
+        } else if (textField.tag == 25)
+        {
+            if (![string isEqualToString:@""]) {
+                strtargetcomments=[textField.text stringByAppendingString:string];
+                return YES;
+                
+            }
+        
+    }
+return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+    NSLog(@"textFieldShouldReturn:");
+    if (textField.tag == 23) {
+        UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:3];
+        [passwordTextField becomeFirstResponder];
+    }
+    else if(textField.tag== 24){
+        [textField resignFirstResponder];
+    }
+    else if(textField.tag== 25){
+        [textField resignFirstResponder];
+    }
+    return YES;
+}
 
 
 @end
