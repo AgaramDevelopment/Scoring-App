@@ -9,7 +9,7 @@
 #import "DashBoardVC.h"
 #import "TorunamentVC.h"
 #import "LoginVC.h"
-#import "AddBreakVC.h"
+
 
 @interface DashBoardVC ()
 
@@ -72,46 +72,26 @@
 - (IBAction)btn_signOut:(id)sender {
     
         
-//    NSUserDefaults * removeUDCode = [NSUserDefaults standardUserDefaults];
-//    [removeUDCode removeObjectForKey:@"userCode"];
-//    [[NSUserDefaults standardUserDefaults]synchronize ];
+    NSUserDefaults * removeUDCode = [NSUserDefaults standardUserDefaults];
+    [removeUDCode removeObjectForKey:@"userCode"];
+    [[NSUserDefaults standardUserDefaults]synchronize ];
     
     
     
     
-    AddBreakVC *add = [[AddBreakVC alloc]initWithNibName:@"AddBreakVC" bundle:nil];
+
+
     
     
-    
-    //vc2 *viewController = [[vc2 alloc]init];
-    [self addChildViewController:add];
-    add.view.frame =CGRectMake(300, 500, add.view.frame.size.width, add.view.frame.size.height);
-    [self.view addSubview:add.view];
-    add.view.alpha = 0;
-    [add didMoveToParentViewController:self];
-    
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         add.view.alpha = 1;
-     }
-                     completion:nil];
-    
-//    //SubView *sub = [[SubView alloc] initWithNibName:@"SubView" bundle:nil];
-//    add.view.frame =
-//    
-//   
-//    [self.view addSubview:add.view];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+                                                   message: @"Are sure you want to signout?"
+                                                  delegate: self
+                                         cancelButtonTitle:@"Signout"
+                                         otherButtonTitles:@"Cancel",nil];
     
     
-//    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
-//                                                   message: @"Are sure you want to signout?"
-//                                                  delegate: self
-//                                         cancelButtonTitle:@"Signout"
-//                                         otherButtonTitles:@"Cancel",nil];
-//    
-//    
-//    [alert show];
-//
+    [alert show];
+
     
 }
 
