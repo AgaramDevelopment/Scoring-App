@@ -108,6 +108,7 @@
                 btn_Run.layer.borderWidth=2;
                 btn_Run.layer.borderColor= [UIColor redColor].CGColor;
                 btn_Run.layer.masksToBounds=YES;
+                [btn_Run addTarget:self action:@selector(didClickEditAction:) forControlEvents:UIControlEventTouchUpInside];
                
                 [cell.view_main addSubview:btn_Run];
 
@@ -134,7 +135,45 @@
     
     
 }
+-(IBAction)didClickEditAction:(id)sender
+{
+    //UIButton * btn_add=(UIButton*)sender;
+     UIButton * btn_add = (UIButton *)sender;
+    
+    // the loop should take care of any changes in the view heirarchy, whether from
+    // changes we make or apple makes.
+//    while (![btn_add.class isSubclassOfClass:UITableViewCell.class])
+//        btn_add = btn_add.superview;
+//    
+//    if ([btn_add.class isSubclassOfClass:UITableViewCell.class]) {
+//        EditModeCell *cell = (EditModeCell *) btn_add;
+//        
+//    }
+  
+    //EditModeCell *cell = [self.tbl_innnings indexPathForCell:sender];
+    //NSIndexPath *indexPath = [self.tbl_innnings indexPathForCell:cell];
+   EditModeCell *cell = (EditModeCell*)[sender superview];
+    NSIndexPath* indexPath = [self.tbl_innnings indexPathForCell:cell];
+    UIView * view_addedit=[[UIView alloc]initWithFrame:CGRectMake(btn_add.frame.origin.x-20,btn_add.frame.origin.y-50,130, 50)];
+    [view_addedit setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+    [cell addSubview:view_addedit];
+    UIButton * leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(5, view_addedit.frame.origin.y+45, 25, 25)];
+    [leftrotation setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [view_addedit addSubview:leftrotation];
+    
+    UIButton * Editrotation=[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.origin.x+leftrotation.frame.size.width+8, leftrotation.frame.origin.y-3, 25, 25)];
+    [Editrotation setImage:[UIImage imageNamed:@"ArchiveEdit"] forState:UIControlStateNormal];
+    [view_addedit addSubview:Editrotation];
+    
+    UIButton * Cancelrotation=[[UIButton alloc]initWithFrame:CGRectMake(Editrotation.frame.origin.x+Editrotation.frame.size.width+8, Editrotation.frame.origin.y, 25, 25)];
+    [Cancelrotation setImage:[UIImage imageNamed:@"ArchiveCancel"] forState:UIControlStateNormal];
+    [view_addedit addSubview:Cancelrotation];
+    
+    UIButton * Rightrotation=[[UIButton alloc]initWithFrame:CGRectMake(Cancelrotation.frame.origin.x+Cancelrotation.frame.size.width+8, Cancelrotation.frame.origin.y, 25, 25)];
+    [Rightrotation setImage:[UIImage imageNamed:@""] forState:UIControlStateNormal];
+    [view_addedit addSubview:Rightrotation];
 
+}
 -(IBAction)didClickInnings1team1:(id)sender
 {
     self.highlightbtnxposition.constant=0;
