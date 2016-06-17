@@ -9018,7 +9018,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BE.BOWLERCODE,PM.PLAYERNAME,BE.OVERNO,BE.OVERBALLCOUNT,BE.BALLCOUNT,BE.ISLEGALBALL,BE.ISFOUR,BE.ISSIX,BE.RUNS,BE.OVERTHROW,BE.TOTALRUNS,BE.WIDE,BE.NOBALL FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE = BE.BOWLERCODE WHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@' AND BE.INNINGSNO = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALL.BALLCODE,BWLR.PLAYERNAME BOWLER, STRKR.PLAYERNAME STRIKER, NSTRKR.PLAYERNAME NONSTRIKER,BT.BOWLTYPE BOWLTYPE, ST.SHOTNAME AS SHOTTYPE, BALL.TOTALRUNS, BALL.TOTALEXTRAS,BALL.OVERNO,BALL.BALLNO,BALL.BALLCOUNT,BALL.ISLEGALBALL,BALL.ISFOUR,BALL.ISSIX,BALL.RUNS,BALL.OVERTHROW,BALL.TOTALRUNS,BALL.WIDE,BALL.NOBALL,BALL.BYES,BALL.LEGBYES,BALL.TOTALEXTRAS,WE.WICKETNO,WE.WICKETTYPE, PTY.PENALTYRUNS, PTY.PENALTYTYPECODE FROM BALLEVENTS BALL INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE = BALL.COMPETITIONCODE AND MR.MATCHCODE = BALL.MATCHCODE INNER JOIN TEAMMASTER TM ON BALL.TEAMCODE = TM.TEAMCODE INNER JOIN PLAYERMASTER BWLR ON BALL.BOWLERCODE=BWLR.PLAYERCODE INNER JOIN PLAYERMASTER STRKR ON BALL.STRIKERCODE = STRKR.PLAYERCODE INNER JOIN PLAYERMASTER NSTRKR ON BALL.NONSTRIKERCODE = NSTRKR.PLAYERCODE LEFT JOIN BOWLTYPE BT ON BALL.BOWLTYPE = BT.BOWLTYPECODE LEFT JOIN SHOTTYPE ST ON BALL.SHOTTYPE = ST.SHOTCODE LEFT JOIN WICKETEVENTS WE ON BALL.BALLCODE = WE.BALLCODE AND WE.ISWICKET = 1 LEFT JOIN PENALTYDETAILS PTY ON BALL.BALLCODE = PTY.BALLCODE WHERE  BALL.COMPETITIONCODE='%@'AND BALL.MATCHCODE='%@'AND BALL.INNINGSNO='%@'ORDER BY BALL.COMPETITIONCODE,BALL.MATCHCODE,BALL.INNINGSNO, BALL.OVERNO, BALL.BALLNO, BALL.BALLCOUNT",COMPETITIONCODE,MATCHCODE,INNINGSNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
@@ -9029,17 +9029,30 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=[[InningsBowlerDetailsRecord alloc]init];
                 objInningsBowlerDetailsRecord.BowlerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 objInningsBowlerDetailsRecord.Playername=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                objInningsBowlerDetailsRecord.OverNo=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                objInningsBowlerDetailsRecord.OverballCount=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                objInningsBowlerDetailsRecord.BallCount=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
-                objInningsBowlerDetailsRecord.islegalBall=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
-                objInningsBowlerDetailsRecord.isFour=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
-                objInningsBowlerDetailsRecord.isSix=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-                objInningsBowlerDetailsRecord.Runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                objInningsBowlerDetailsRecord.overThrow=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
-                objInningsBowlerDetailsRecord.totalRuns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
-                objInningsBowlerDetailsRecord.Wide=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
-                objInningsBowlerDetailsRecord.noBall=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
+                
+                objInningsBowlerDetailsRecord.Striker=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                objInningsBowlerDetailsRecord.nonStriker=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                objInningsBowlerDetailsRecord.bowlerType=[self getValueByNull:statement :4];
+                objInningsBowlerDetailsRecord.shorType=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                objInningsBowlerDetailsRecord.totalRuns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                objInningsBowlerDetailsRecord.totalExtras=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                objInningsBowlerDetailsRecord.OverNo=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                objInningsBowlerDetailsRecord.ballNo=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                objInningsBowlerDetailsRecord.BallCount=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                objInningsBowlerDetailsRecord.islegalBall=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                objInningsBowlerDetailsRecord.isFour=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
+                objInningsBowlerDetailsRecord.isSix=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
+                objInningsBowlerDetailsRecord.Runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
+                objInningsBowlerDetailsRecord.overThrow=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
+                objInningsBowlerDetailsRecord.totalRuns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
+                objInningsBowlerDetailsRecord.Wide=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
+                objInningsBowlerDetailsRecord.noBall=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
+                 objInningsBowlerDetailsRecord.Byes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
+                 objInningsBowlerDetailsRecord.Legbyes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 20)];
+                 objInningsBowlerDetailsRecord.WicketNo=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 21)];
+                 objInningsBowlerDetailsRecord.WicketType=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 22)];
+                 objInningsBowlerDetailsRecord.penaltyRuns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)];
+                 objInningsBowlerDetailsRecord.penaltytypeCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)];
                 
                 [BOWLERDETAILS addObject:objInningsBowlerDetailsRecord];
             }
@@ -9081,6 +9094,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
     return BOWLEROVERSORDER;
+}
++(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
+    return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
+}
 
 
 @end
