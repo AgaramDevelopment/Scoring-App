@@ -263,6 +263,7 @@
 
 - (IBAction)btn_reviseover:(id)sender;
 -(BOOL) checkInternetConnection;
+- (IBAction)btn_show_scorecard:(id)sender;
 
 
 @end

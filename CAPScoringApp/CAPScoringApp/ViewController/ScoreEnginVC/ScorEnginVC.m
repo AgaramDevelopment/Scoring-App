@@ -7817,6 +7817,9 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     return networkStatus != NotReachable;
 }
 
+- (IBAction)btn_show_scorecard:(id)sender {
+}
+
 - (IBAction)btn_targetok:(id)sender {
     
     if(self.checkInternetConnection){
