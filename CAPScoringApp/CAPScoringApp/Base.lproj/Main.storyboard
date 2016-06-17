@@ -11867,21 +11867,11 @@
                                                                 <mask key="subviews">
                                                                     <exclude reference="wAh-pJ-OKA"/>
                                                                 </mask>
-                                                                <mask key="constraints">
-                                                                    <exclude reference="z9w-uS-vnZ"/>
-                                                                    <exclude reference="sX8-iC-EyI"/>
-                                                                    <exclude reference="tAI-yJ-p0d"/>
-                                                                </mask>
                                                             </variation>
                                                             <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
                                                                 <rect key="frame" x="0.0" y="0.0" width="232" height="78"/>
                                                                 <mask key="subviews">
                                                                     <include reference="wAh-pJ-OKA"/>
-                                                                </mask>
-                                                                <mask key="constraints">
-                                                                    <include reference="z9w-uS-vnZ"/>
-                                                                    <include reference="sX8-iC-EyI"/>
-                                                                    <include reference="tAI-yJ-p0d"/>
                                                                 </mask>
                                                             </variation>
                                                         </view>
@@ -12006,8 +11996,6 @@
                                                             <exclude reference="UN9-mR-IkZ"/>
                                                             <exclude reference="rTt-B4-Kuh"/>
                                                             <exclude reference="zd1-pi-yne"/>
-                                                            <exclude reference="1bh-7p-zyN"/>
-                                                            <exclude reference="BeH-Gu-8j0"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=regular">
@@ -12020,8 +12008,6 @@
                                                             <include reference="UN9-mR-IkZ"/>
                                                             <include reference="rTt-B4-Kuh"/>
                                                             <include reference="zd1-pi-yne"/>
-                                                            <include reference="1bh-7p-zyN"/>
-                                                            <include reference="BeH-Gu-8j0"/>
                                                         </mask>
                                                     </variation>
                                                 </tableViewCellContentView>
@@ -12133,6 +12119,8 @@
                         <outlet property="Btn_innings1team1" destination="ASQ-hc-UjG" id="uXL-DH-F88"/>
                         <outlet property="Btn_innings1team2" destination="urO-Qz-KQY" id="CrS-9p-3ys"/>
                         <outlet property="Btn_innings2team2" destination="FCn-rr-vbc" id="AX9-Cq-Gyx"/>
+                        <outlet property="btn_innings1Widthposition" destination="0Ya-Ww-keS" id="tks-cl-XEp"/>
+                        <outlet property="btn_innings2xposition" destination="QCN-Rs-9rs" id="JsJ-U0-y9m"/>
                         <outlet property="highlightbtnxposition" destination="Wmf-Rr-xAf" id="9Q1-7z-nBb"/>
                         <outlet property="selectbtnhighlight" destination="gHH-R1-Ag9" id="HEx-Au-bG4"/>
                         <outlet property="tbl_innnings" destination="mtI-BM-X45" id="vFz-38-nQW"/>

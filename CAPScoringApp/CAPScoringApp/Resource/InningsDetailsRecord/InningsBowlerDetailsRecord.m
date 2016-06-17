@@ -9,5 +9,5 @@
 #import "InningsBowlerDetailsRecord.h"
 
 @implementation InningsBowlerDetailsRecord
-@synthesize BallCount,BowlerCode,noBall,OverNo,OverballCount,overThrow,isFour,totalRuns,Playername,isSix,islegalBall,Wide;
+@synthesize BallCount,BowlerCode,noBall,OverNo,OverballCount,overThrow,isFour,totalRuns,Playername,isSix,islegalBall,Wide,Legbyes,Byes,WicketNo,WicketType,penaltyRuns,penaltytypeCode,shorType;
 @end

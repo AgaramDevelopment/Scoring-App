@@ -24,4 +24,11 @@
 @property (nonatomic,strong) IBOutlet UITableView * tbl_innnings;
 
 @property(nonatomic,strong) IBOutlet NSLayoutConstraint * highlightbtnxposition;
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint * btn_innings1Widthposition;
+
+
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint * btn_innings2xposition;
+
+
+
 @end
