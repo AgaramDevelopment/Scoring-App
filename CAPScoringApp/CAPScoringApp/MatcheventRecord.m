@@ -10,4 +10,7 @@
 
 @implementation MatcheventRecord
 @synthesize readrecoed;
+@synthesize targetruns;
+@synthesize targetovers;
+@synthesize targetcomments;
 @end
