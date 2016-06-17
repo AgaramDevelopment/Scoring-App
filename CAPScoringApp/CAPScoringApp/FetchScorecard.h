@@ -12,6 +12,9 @@
 
 @property(strong,nonatomic)NSString *ISFOLLOWON	;
 -(void ) FetchScoreBoard:(NSString *) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
+
+@property(strong,nonatomic)NSMutableArray *BattingSummaryForScoreBoard;
+@property(strong,nonatomic)NSMutableArray *BowlingSummaryForScoreBoard;
 //
 //@property(strong,nonatomic)NSString *MATCHCODE;
 //@property(strong,nonatomic)NSString *MATCHNAME;

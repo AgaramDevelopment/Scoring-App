@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -153,6 +153,28 @@
             <string>Rajdhani-Bold</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-MEDIUM.TTF">
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
             <string>Rajdhani-Medium</string>
             <string>Rajdhani-Medium</string>
             <string>Rajdhani-Medium</string>
@@ -2540,7 +2562,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="lFX-Ru-mui">
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kES-qL-JGQ">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kES-qL-JGQ">
                                         <rect key="frame" x="44" y="121" width="680" height="49"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Umpire 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHz-1O-plr">
@@ -2557,6 +2579,9 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="558" y="20" width="98" height="24"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2569,6 +2594,9 @@
                                                 <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                             </constraint>
                                         </constraints>
+                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="44" y="101" width="680" height="64"/>
+                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GmH-pL-2mo">
                                         <rect key="frame" x="44" y="360" width="680" height="50"/>
@@ -2587,6 +2615,9 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="573" y="20" width="84" height="21"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2617,6 +2648,9 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="499" y="20" width="155" height="21"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2647,6 +2681,9 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="498" y="20" width="157" height="21"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2677,6 +2714,9 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="534" y="20" width="122" height="21"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2699,6 +2739,9 @@
                                                 <state key="normal" title="PROCEED">
                                                     <color key="titleColor" red="0.99108743320000003" green="1" blue="0.98888242749999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="0.0" width="680" height="45"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="btn_proceed:" destination="aP7-N0-MwG" eventType="touchUpInside" id="HeJ-I7-QQP"/>
                                                 </connections>
@@ -2753,6 +2796,9 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="540" y="20" width="119" height="21"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -5578,6 +5624,9 @@
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="160" y="1" width="440" height="118"/>
+                                                </variation>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBk-zT-YMj">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -5596,7 +5645,8 @@
                                                         <exclude reference="cIY-gc-wL3"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=regular">
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="1" width="150" height="122"/>
                                                     <mask key="constraints">
                                                         <include reference="cIY-gc-wL3"/>
                                                     </mask>
@@ -8997,6 +9047,1349 @@
             </objects>
             <point key="canvasLocation" x="334.5" y="579"/>
         </scene>
+        <!--Score CardVC-->
+        <scene sceneID="VYk-Xb-Mcn">
+            <objects>
+                <viewController storyboardIdentifier="scorecard_sbid" id="srV-8K-Ywy" customClass="ScoreCardVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Xx7-4Q-48N"/>
+                        <viewControllerLayoutGuide type="bottom" id="m2r-D6-qj7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4iU-Qe-z26">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LkB-MC-59t" userLabel="rootView">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="y02-gY-L0h">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    </imageView>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fvu-Xw-COH">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggI-L2-YfD">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TNCA" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j6k-80-6GQ">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="24"/>
+                                                        <color key="textColor" red="0.74901960779999999" green="0.63137254899999995" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="246/5" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tZA-DA-ME7">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                                                        <color key="textColor" red="0.74901960779999999" green="0.63137254899999995" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RR 4.95 I RRR 2.34" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YUw-b6-Kd1">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="15"/>
+                                                        <color key="textColor" red="0.74901960779999999" green="0.63137254899999995" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50 overs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRw-sa-R0L">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="16"/>
+                                                        <color key="textColor" red="0.74901960779999999" green="0.63137254899999995" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="j6k-80-6GQ" firstAttribute="top" secondItem="ggI-L2-YfD" secondAttribute="top" constant="10" id="2TO-gU-8dZ"/>
+                                                    <constraint firstItem="YUw-b6-Kd1" firstAttribute="height" secondItem="j6k-80-6GQ" secondAttribute="height" id="740-Cu-fsc">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="-3"/>
+                                                    </constraint>
+                                                    <constraint firstItem="YUw-b6-Kd1" firstAttribute="leading" secondItem="ggI-L2-YfD" secondAttribute="leading" constant="5" id="9KU-Q6-IC6"/>
+                                                    <constraint firstItem="YUw-b6-Kd1" firstAttribute="top" secondItem="FRw-sa-R0L" secondAttribute="bottom" constant="1" id="GAi-gW-9pW"/>
+                                                    <constraint firstItem="j6k-80-6GQ" firstAttribute="leading" secondItem="ggI-L2-YfD" secondAttribute="leading" constant="5" id="Lkb-jt-LMi"/>
+                                                    <constraint firstAttribute="trailing" secondItem="tZA-DA-ME7" secondAttribute="trailing" constant="95" id="Lr2-Zs-zs2"/>
+                                                    <constraint firstAttribute="trailing" secondItem="j6k-80-6GQ" secondAttribute="trailing" constant="95" id="OpQ-3P-6sN"/>
+                                                    <constraint firstAttribute="width" constant="250" id="PKt-la-DhS"/>
+                                                    <constraint firstItem="tZA-DA-ME7" firstAttribute="leading" secondItem="ggI-L2-YfD" secondAttribute="leading" constant="5" id="PWW-XO-2jL"/>
+                                                    <constraint firstItem="FRw-sa-R0L" firstAttribute="leading" secondItem="ggI-L2-YfD" secondAttribute="leading" constant="5" id="WVq-lq-tdl"/>
+                                                    <constraint firstAttribute="trailing" secondItem="YUw-b6-Kd1" secondAttribute="trailing" constant="95" id="baL-uy-qJ0"/>
+                                                    <constraint firstAttribute="trailing" secondItem="FRw-sa-R0L" secondAttribute="trailing" constant="95" id="cRV-NE-N9f"/>
+                                                    <constraint firstAttribute="bottom" secondItem="YUw-b6-Kd1" secondAttribute="bottom" constant="7" id="dOV-7Q-KSZ"/>
+                                                    <constraint firstItem="FRw-sa-R0L" firstAttribute="height" secondItem="j6k-80-6GQ" secondAttribute="height" id="g5g-MI-3hJ">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="-3"/>
+                                                    </constraint>
+                                                    <constraint firstItem="tZA-DA-ME7" firstAttribute="top" secondItem="j6k-80-6GQ" secondAttribute="bottom" constant="1" id="lfn-Uh-JYp"/>
+                                                    <constraint firstItem="FRw-sa-R0L" firstAttribute="top" secondItem="tZA-DA-ME7" secondAttribute="bottom" constant="1" id="lfq-Tg-aMh"/>
+                                                    <constraint firstItem="tZA-DA-ME7" firstAttribute="height" secondItem="j6k-80-6GQ" secondAttribute="height" id="yKA-qc-7Qa"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="subviews">
+                                                        <exclude reference="j6k-80-6GQ"/>
+                                                        <exclude reference="tZA-DA-ME7"/>
+                                                        <exclude reference="YUw-b6-Kd1"/>
+                                                        <exclude reference="FRw-sa-R0L"/>
+                                                    </mask>
+                                                    <mask key="constraints">
+                                                        <exclude reference="PKt-la-DhS"/>
+                                                        <exclude reference="WVq-lq-tdl"/>
+                                                        <exclude reference="g5g-MI-3hJ"/>
+                                                        <exclude reference="lfq-Tg-aMh"/>
+                                                        <exclude reference="cRV-NE-N9f"/>
+                                                        <exclude reference="lfn-Uh-JYp"/>
+                                                        <exclude reference="Lr2-Zs-zs2"/>
+                                                        <exclude reference="yKA-qc-7Qa"/>
+                                                        <exclude reference="PWW-XO-2jL"/>
+                                                        <exclude reference="740-Cu-fsc"/>
+                                                        <exclude reference="dOV-7Q-KSZ"/>
+                                                        <exclude reference="GAi-gW-9pW"/>
+                                                        <exclude reference="baL-uy-qJ0"/>
+                                                        <exclude reference="9KU-Q6-IC6"/>
+                                                        <exclude reference="Lkb-jt-LMi"/>
+                                                        <exclude reference="2TO-gU-8dZ"/>
+                                                        <exclude reference="OpQ-3P-6sN"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <mask key="subviews">
+                                                        <include reference="j6k-80-6GQ"/>
+                                                        <include reference="tZA-DA-ME7"/>
+                                                        <include reference="YUw-b6-Kd1"/>
+                                                        <include reference="FRw-sa-R0L"/>
+                                                    </mask>
+                                                    <mask key="constraints">
+                                                        <include reference="PKt-la-DhS"/>
+                                                        <include reference="WVq-lq-tdl"/>
+                                                        <include reference="g5g-MI-3hJ"/>
+                                                        <include reference="lfq-Tg-aMh"/>
+                                                        <include reference="cRV-NE-N9f"/>
+                                                        <include reference="lfn-Uh-JYp"/>
+                                                        <include reference="Lr2-Zs-zs2"/>
+                                                        <include reference="yKA-qc-7Qa"/>
+                                                        <include reference="PWW-XO-2jL"/>
+                                                        <include reference="740-Cu-fsc"/>
+                                                        <include reference="dOV-7Q-KSZ"/>
+                                                        <include reference="GAi-gW-9pW"/>
+                                                        <include reference="baL-uy-qJ0"/>
+                                                        <include reference="9KU-Q6-IC6"/>
+                                                        <include reference="Lkb-jt-LMi"/>
+                                                        <include reference="2TO-gU-8dZ"/>
+                                                        <include reference="OpQ-3P-6sN"/>
+                                                    </mask>
+                                                </variation>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="neh-0Z-St1">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1ST INS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5b-uq-3TX">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="80" id="4Vz-Me-ndo"/>
+                                                            <constraint firstAttribute="height" constant="20" id="qT6-WV-LWe"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="15"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="4Vz-Me-ndo"/>
+                                                                <exclude reference="qT6-WV-LWe"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="4Vz-Me-ndo"/>
+                                                                <include reference="qT6-WV-LWe"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="2ND INS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Euh-sV-B9L">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="83" id="A9h-co-akV"/>
+                                                            <constraint firstAttribute="height" constant="20" id="FqL-MJ-wUf"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="15"/>
+                                                        <color key="textColor" red="0.74901960779999999" green="0.63137254899999995" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="A9h-co-akV"/>
+                                                                <exclude reference="FqL-MJ-wUf"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="A9h-co-akV"/>
+                                                                <include reference="FqL-MJ-wUf"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="249/9" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vOb-vG-yqg">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="Kri-E1-XYc"/>
+                                                            <constraint firstAttribute="width" constant="83" id="o7P-QJ-cuh"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
+                                                        <color key="textColor" red="0.74901960779999999" green="0.63137254899999995" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="Kri-E1-XYc"/>
+                                                                <exclude reference="o7P-QJ-cuh"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="Kri-E1-XYc"/>
+                                                                <include reference="o7P-QJ-cuh"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="36 OVS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mmQ-Wb-qcJ">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="22" id="0eA-tB-E8v"/>
+                                                            <constraint firstAttribute="width" constant="80" id="MA9-Xn-5bc"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="MA9-Xn-5bc"/>
+                                                                <exclude reference="0eA-tB-E8v"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="MA9-Xn-5bc"/>
+                                                                <include reference="0eA-tB-E8v"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="50 OVS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pRj-ii-oFN">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="83" id="Odn-CN-cIc"/>
+                                                            <constraint firstAttribute="height" constant="22" id="zC5-WD-SCK"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="17"/>
+                                                        <color key="textColor" red="0.74901960779999999" green="0.63137254899999995" blue="0.2666666667" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="Odn-CN-cIc"/>
+                                                                <exclude reference="zC5-WD-SCK"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="Odn-CN-cIc"/>
+                                                                <include reference="zC5-WD-SCK"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HCb-H2-6au">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="TqR-H5-ZqZ"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="TqR-H5-ZqZ"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="TqR-H5-ZqZ"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TNCAImg" translatesAutoresizingMaskIntoConstraints="NO" id="Ec6-Jx-Tjs">
+                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="30" id="cdP-AV-DmD"/>
+                                                            <constraint firstAttribute="height" constant="30" id="uy1-gt-mFj"/>
+                                                        </constraints>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="uy1-gt-mFj"/>
+                                                                <exclude reference="cdP-AV-DmD"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="uy1-gt-mFj"/>
+                                                                <include reference="cdP-AV-DmD"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TNCA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ifq-91-P7X">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="Tdj-n6-mcF"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="23"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="Tdj-n6-mcF"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="Tdj-n6-mcF"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="431/10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="42K-VW-IwX">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="80" id="DrJ-0G-sEA"/>
+                                                            <constraint firstAttribute="height" constant="20" id="aaZ-JJ-rDp"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="aaZ-JJ-rDp"/>
+                                                                <exclude reference="DrJ-0G-sEA"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="aaZ-JJ-rDp"/>
+                                                                <include reference="DrJ-0G-sEA"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="HCb-H2-6au" firstAttribute="leading" secondItem="neh-0Z-St1" secondAttribute="leading" constant="10" id="0mA-V8-kDB"/>
+                                                    <constraint firstItem="vOb-vG-yqg" firstAttribute="top" secondItem="Euh-sV-B9L" secondAttribute="bottom" constant="1" id="174-HY-8wN">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="5"/>
+                                                    </constraint>
+                                                    <constraint firstItem="Euh-sV-B9L" firstAttribute="leading" secondItem="e5b-uq-3TX" secondAttribute="trailing" constant="7" id="1kr-3z-C5w"/>
+                                                    <constraint firstItem="mmQ-Wb-qcJ" firstAttribute="top" secondItem="42K-VW-IwX" secondAttribute="bottom" constant="1" id="2yV-hI-hjg">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="5"/>
+                                                    </constraint>
+                                                    <constraint firstItem="e5b-uq-3TX" firstAttribute="top" secondItem="neh-0Z-St1" secondAttribute="top" constant="5" id="6c2-4i-nJe"/>
+                                                    <constraint firstItem="pRj-ii-oFN" firstAttribute="top" secondItem="vOb-vG-yqg" secondAttribute="bottom" constant="2" id="8Uc-TB-VdV">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="5"/>
+                                                    </constraint>
+                                                    <constraint firstItem="Ifq-91-P7X" firstAttribute="leading" secondItem="Ec6-Jx-Tjs" secondAttribute="trailing" constant="10" id="8hB-o1-2Te"/>
+                                                    <constraint firstItem="42K-VW-IwX" firstAttribute="top" secondItem="e5b-uq-3TX" secondAttribute="bottom" constant="1" id="9Yf-XT-Pma">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="5"/>
+                                                    </constraint>
+                                                    <constraint firstItem="e5b-uq-3TX" firstAttribute="leading" secondItem="neh-0Z-St1" secondAttribute="leading" constant="3" id="CSi-P9-SC2"/>
+                                                    <constraint firstItem="pRj-ii-oFN" firstAttribute="top" secondItem="vOb-vG-yqg" secondAttribute="bottom" constant="2" id="CfC-lc-NEU">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="5"/>
+                                                    </constraint>
+                                                    <constraint firstAttribute="bottom" secondItem="Ec6-Jx-Tjs" secondAttribute="bottom" constant="5" id="KLc-y4-K58">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="5"/>
+                                                    </constraint>
+                                                    <constraint firstItem="mmQ-Wb-qcJ" firstAttribute="top" secondItem="42K-VW-IwX" secondAttribute="bottom" constant="1" id="Krb-8w-vbv">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="5"/>
+                                                    </constraint>
+                                                    <constraint firstAttribute="trailing" secondItem="pRj-ii-oFN" secondAttribute="trailing" constant="7" id="LBF-Xm-xIU"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Ifq-91-P7X" secondAttribute="bottom" constant="5" id="Mq8-CG-MmD">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                                    </constraint>
+                                                    <constraint firstItem="Ec6-Jx-Tjs" firstAttribute="top" secondItem="HCb-H2-6au" secondAttribute="bottom" constant="4" id="NN4-NG-Bpg">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="9"/>
+                                                    </constraint>
+                                                    <constraint firstItem="Ec6-Jx-Tjs" firstAttribute="leading" secondItem="neh-0Z-St1" secondAttribute="leading" constant="15" id="Nke-wA-M75"/>
+                                                    <constraint firstItem="42K-VW-IwX" firstAttribute="top" secondItem="e5b-uq-3TX" secondAttribute="bottom" constant="1" id="RnP-JR-rli">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="5"/>
+                                                    </constraint>
+                                                    <constraint firstAttribute="trailing" secondItem="HCb-H2-6au" secondAttribute="trailing" constant="10" id="Uga-Oa-WBB"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Euh-sV-B9L" secondAttribute="trailing" constant="7" id="VpH-vk-Nox"/>
+                                                    <constraint firstItem="42K-VW-IwX" firstAttribute="leading" secondItem="neh-0Z-St1" secondAttribute="leading" constant="3" id="W1L-g7-8Fm"/>
+                                                    <constraint firstItem="Euh-sV-B9L" firstAttribute="top" secondItem="neh-0Z-St1" secondAttribute="top" constant="5" id="YfQ-4e-RCB"/>
+                                                    <constraint firstItem="mmQ-Wb-qcJ" firstAttribute="leading" secondItem="neh-0Z-St1" secondAttribute="leading" constant="3" id="YmB-RG-L0f"/>
+                                                    <constraint firstAttribute="trailing" secondItem="vOb-vG-yqg" secondAttribute="trailing" constant="7" id="Z3p-mS-kuI"/>
+                                                    <constraint firstItem="Ifq-91-P7X" firstAttribute="leading" secondItem="Ec6-Jx-Tjs" secondAttribute="trailing" constant="10" id="Zxr-ke-vUk"/>
+                                                    <constraint firstItem="Ec6-Jx-Tjs" firstAttribute="top" secondItem="HCb-H2-6au" secondAttribute="bottom" constant="4" id="ahE-fK-Gqx">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="9"/>
+                                                    </constraint>
+                                                    <constraint firstItem="Euh-sV-B9L" firstAttribute="leading" secondItem="e5b-uq-3TX" secondAttribute="trailing" constant="7" id="ebv-L1-eyS"/>
+                                                    <constraint firstItem="vOb-vG-yqg" firstAttribute="top" secondItem="Euh-sV-B9L" secondAttribute="bottom" constant="1" id="fE8-VK-p1P">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="5"/>
+                                                    </constraint>
+                                                    <constraint firstAttribute="trailing" secondItem="Ifq-91-P7X" secondAttribute="trailing" constant="25" id="gUv-Ry-okt"/>
+                                                    <constraint firstAttribute="width" constant="150" id="jW4-kz-UZX">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="180"/>
+                                                    </constraint>
+                                                    <constraint firstItem="HCb-H2-6au" firstAttribute="top" secondItem="pRj-ii-oFN" secondAttribute="bottom" id="jX5-Fb-vlk">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="8"/>
+                                                    </constraint>
+                                                    <constraint firstItem="vOb-vG-yqg" firstAttribute="leading" secondItem="42K-VW-IwX" secondAttribute="trailing" constant="7" id="jyn-kw-cki"/>
+                                                    <constraint firstItem="Ifq-91-P7X" firstAttribute="top" secondItem="HCb-H2-6au" secondAttribute="bottom" constant="9" id="lq6-R9-Rdw">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="9"/>
+                                                    </constraint>
+                                                    <constraint firstItem="pRj-ii-oFN" firstAttribute="leading" secondItem="mmQ-Wb-qcJ" secondAttribute="trailing" constant="7" id="pN9-Fb-d38"/>
+                                                    <constraint firstItem="pRj-ii-oFN" firstAttribute="leading" secondItem="mmQ-Wb-qcJ" secondAttribute="trailing" constant="7" id="paj-Fd-VUB"/>
+                                                    <constraint firstItem="vOb-vG-yqg" firstAttribute="leading" secondItem="42K-VW-IwX" secondAttribute="trailing" constant="7" id="rbj-AF-Bk0"/>
+                                                    <constraint firstItem="HCb-H2-6au" firstAttribute="top" secondItem="mmQ-Wb-qcJ" secondAttribute="bottom" constant="1" id="udg-su-0aR">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="8"/>
+                                                    </constraint>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="subviews">
+                                                        <exclude reference="e5b-uq-3TX"/>
+                                                        <exclude reference="Euh-sV-B9L"/>
+                                                        <exclude reference="vOb-vG-yqg"/>
+                                                        <exclude reference="mmQ-Wb-qcJ"/>
+                                                        <exclude reference="pRj-ii-oFN"/>
+                                                        <exclude reference="HCb-H2-6au"/>
+                                                        <exclude reference="Ec6-Jx-Tjs"/>
+                                                        <exclude reference="Ifq-91-P7X"/>
+                                                        <exclude reference="42K-VW-IwX"/>
+                                                    </mask>
+                                                    <mask key="constraints">
+                                                        <exclude reference="jW4-kz-UZX"/>
+                                                        <exclude reference="CSi-P9-SC2"/>
+                                                        <exclude reference="6c2-4i-nJe"/>
+                                                        <exclude reference="jyn-kw-cki"/>
+                                                        <exclude reference="174-HY-8wN"/>
+                                                        <exclude reference="Z3p-mS-kuI"/>
+                                                        <exclude reference="rbj-AF-Bk0"/>
+                                                        <exclude reference="fE8-VK-p1P"/>
+                                                        <exclude reference="9Yf-XT-Pma"/>
+                                                        <exclude reference="RnP-JR-rli"/>
+                                                        <exclude reference="W1L-g7-8Fm"/>
+                                                        <exclude reference="pN9-Fb-d38"/>
+                                                        <exclude reference="LBF-Xm-xIU"/>
+                                                        <exclude reference="paj-Fd-VUB"/>
+                                                        <exclude reference="CfC-lc-NEU"/>
+                                                        <exclude reference="8Uc-TB-VdV"/>
+                                                        <exclude reference="8hB-o1-2Te"/>
+                                                        <exclude reference="lq6-R9-Rdw"/>
+                                                        <exclude reference="Mq8-CG-MmD"/>
+                                                        <exclude reference="Zxr-ke-vUk"/>
+                                                        <exclude reference="gUv-Ry-okt"/>
+                                                        <exclude reference="Krb-8w-vbv"/>
+                                                        <exclude reference="YmB-RG-L0f"/>
+                                                        <exclude reference="2yV-hI-hjg"/>
+                                                        <exclude reference="ebv-L1-eyS"/>
+                                                        <exclude reference="1kr-3z-C5w"/>
+                                                        <exclude reference="VpH-vk-Nox"/>
+                                                        <exclude reference="YfQ-4e-RCB"/>
+                                                        <exclude reference="udg-su-0aR"/>
+                                                        <exclude reference="Uga-Oa-WBB"/>
+                                                        <exclude reference="0mA-V8-kDB"/>
+                                                        <exclude reference="jX5-Fb-vlk"/>
+                                                        <exclude reference="KLc-y4-K58"/>
+                                                        <exclude reference="NN4-NG-Bpg"/>
+                                                        <exclude reference="ahE-fK-Gqx"/>
+                                                        <exclude reference="Nke-wA-M75"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <mask key="subviews">
+                                                        <include reference="e5b-uq-3TX"/>
+                                                        <include reference="Euh-sV-B9L"/>
+                                                        <include reference="vOb-vG-yqg"/>
+                                                        <include reference="mmQ-Wb-qcJ"/>
+                                                        <include reference="pRj-ii-oFN"/>
+                                                        <include reference="HCb-H2-6au"/>
+                                                        <include reference="Ec6-Jx-Tjs"/>
+                                                        <include reference="Ifq-91-P7X"/>
+                                                        <include reference="42K-VW-IwX"/>
+                                                    </mask>
+                                                    <mask key="constraints">
+                                                        <include reference="jW4-kz-UZX"/>
+                                                        <include reference="CSi-P9-SC2"/>
+                                                        <include reference="6c2-4i-nJe"/>
+                                                        <include reference="jyn-kw-cki"/>
+                                                        <include reference="174-HY-8wN"/>
+                                                        <include reference="Z3p-mS-kuI"/>
+                                                        <include reference="rbj-AF-Bk0"/>
+                                                        <include reference="fE8-VK-p1P"/>
+                                                        <include reference="9Yf-XT-Pma"/>
+                                                        <include reference="RnP-JR-rli"/>
+                                                        <include reference="W1L-g7-8Fm"/>
+                                                        <include reference="pN9-Fb-d38"/>
+                                                        <include reference="LBF-Xm-xIU"/>
+                                                        <include reference="paj-Fd-VUB"/>
+                                                        <include reference="CfC-lc-NEU"/>
+                                                        <include reference="8Uc-TB-VdV"/>
+                                                        <include reference="8hB-o1-2Te"/>
+                                                        <include reference="lq6-R9-Rdw"/>
+                                                        <include reference="Mq8-CG-MmD"/>
+                                                        <include reference="Zxr-ke-vUk"/>
+                                                        <include reference="gUv-Ry-okt"/>
+                                                        <include reference="Krb-8w-vbv"/>
+                                                        <include reference="YmB-RG-L0f"/>
+                                                        <include reference="2yV-hI-hjg"/>
+                                                        <include reference="ebv-L1-eyS"/>
+                                                        <include reference="1kr-3z-C5w"/>
+                                                        <include reference="VpH-vk-Nox"/>
+                                                        <include reference="YfQ-4e-RCB"/>
+                                                        <include reference="udg-su-0aR"/>
+                                                        <include reference="Uga-Oa-WBB"/>
+                                                        <include reference="0mA-V8-kDB"/>
+                                                        <include reference="jX5-Fb-vlk"/>
+                                                        <include reference="KLc-y4-K58"/>
+                                                        <include reference="NN4-NG-Bpg"/>
+                                                        <include reference="ahE-fK-Gqx"/>
+                                                        <include reference="Nke-wA-M75"/>
+                                                    </mask>
+                                                </variation>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iVR-2p-17b">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2ND INS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dMK-Wx-LWq">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="80" id="g2f-97-3RN"/>
+                                                            <constraint firstAttribute="height" constant="20" id="oS2-G5-ez9"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="15"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="g2f-97-3RN"/>
+                                                                <exclude reference="oS2-G5-ez9"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="g2f-97-3RN"/>
+                                                                <include reference="oS2-G5-ez9"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1ST INS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INU-vK-HO0">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="83" id="Voe-sF-Lcz"/>
+                                                            <constraint firstAttribute="height" constant="20" id="lEq-WQ-uNa"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="15"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="Voe-sF-Lcz"/>
+                                                                <exclude reference="lEq-WQ-uNa"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="Voe-sF-Lcz"/>
+                                                                <include reference="lEq-WQ-uNa"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="431/10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OEk-63-nC4">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="80" id="HYD-6r-qxP"/>
+                                                            <constraint firstAttribute="height" constant="20" id="ojs-nk-aQl"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="HYD-6r-qxP"/>
+                                                                <exclude reference="ojs-nk-aQl"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="HYD-6r-qxP"/>
+                                                                <include reference="ojs-nk-aQl"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="36 OVS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bAp-cO-za0">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="80" id="f9m-0R-WnH"/>
+                                                            <constraint firstAttribute="height" constant="20" id="iUL-kB-nxq"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="iUL-kB-nxq"/>
+                                                                <exclude reference="f9m-0R-WnH"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="iUL-kB-nxq"/>
+                                                                <include reference="f9m-0R-WnH"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="36 OVS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8vo-jN-l3R">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="20" id="1nu-Ya-c3p"/>
+                                                            <constraint firstAttribute="width" constant="83" id="KiW-7q-Sc8"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="1nu-Ya-c3p"/>
+                                                                <exclude reference="KiW-7q-Sc8"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="1nu-Ya-c3p"/>
+                                                                <include reference="KiW-7q-Sc8"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5do-CB-qEy">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="1" id="XZP-NM-kSt"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="XZP-NM-kSt"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="XZP-NM-kSt"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BowlingLogo" translatesAutoresizingMaskIntoConstraints="NO" id="fcj-1K-P05">
+                                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="5lx-8e-VzA"/>
+                                                            <constraint firstAttribute="width" constant="30" id="IMQ-S2-0PV"/>
+                                                        </constraints>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="5lx-8e-VzA"/>
+                                                                <exclude reference="IMQ-S2-0PV"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="5lx-8e-VzA"/>
+                                                                <include reference="IMQ-S2-0PV"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KSCA" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0YP-Hs-aPG">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="ur8-DQ-MM2"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="22"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="ur8-DQ-MM2"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="ur8-DQ-MM2"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="267/3 DEC" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="suv-uN-kcg">
+                                                        <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="83" id="8hH-8U-ZWG"/>
+                                                            <constraint firstAttribute="height" constant="20" id="Q3S-7a-JOz"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <nil key="highlightedColor"/>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="8hH-8U-ZWG"/>
+                                                                <exclude reference="Q3S-7a-JOz"/>
+                                                            </mask>
+                                                        </variation>
+                                                        <variation key="heightClass=regular-widthClass=regular">
+                                                            <mask key="constraints">
+                                                                <include reference="8hH-8U-ZWG"/>
+                                                                <include reference="Q3S-7a-JOz"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstItem="0YP-Hs-aPG" firstAttribute="leading" secondItem="iVR-2p-17b" secondAttribute="leading" constant="19" id="0IP-ju-AWm"/>
+                                                    <constraint firstAttribute="trailing" secondItem="5do-CB-qEy" secondAttribute="trailing" constant="10" id="1Gg-hh-1hg"/>
+                                                    <constraint firstItem="OEk-63-nC4" firstAttribute="top" secondItem="dMK-Wx-LWq" secondAttribute="bottom" constant="2" id="2K0-iS-O9o">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                                                    </constraint>
+                                                    <constraint firstItem="bAp-cO-za0" firstAttribute="top" secondItem="OEk-63-nC4" secondAttribute="bottom" constant="2" id="5wU-xM-r3Y">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                                                    </constraint>
+                                                    <constraint firstItem="bAp-cO-za0" firstAttribute="leading" secondItem="iVR-2p-17b" secondAttribute="leading" constant="3" id="9Pj-QN-6jn"/>
+                                                    <constraint firstAttribute="bottom" secondItem="0YP-Hs-aPG" secondAttribute="bottom" constant="7" id="9wp-fv-Pn6">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                                    </constraint>
+                                                    <constraint firstItem="INU-vK-HO0" firstAttribute="leading" secondItem="dMK-Wx-LWq" secondAttribute="trailing" constant="7" id="Bq9-H3-ICt"/>
+                                                    <constraint firstItem="fcj-1K-P05" firstAttribute="top" secondItem="5do-CB-qEy" secondAttribute="bottom" constant="4" id="Cd8-rl-ddN">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="9"/>
+                                                    </constraint>
+                                                    <constraint firstItem="OEk-63-nC4" firstAttribute="top" secondItem="dMK-Wx-LWq" secondAttribute="bottom" constant="2" id="DMj-0Q-eQz">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                                                    </constraint>
+                                                    <constraint firstItem="suv-uN-kcg" firstAttribute="leading" secondItem="OEk-63-nC4" secondAttribute="trailing" constant="7" id="ENj-c7-Gzh"/>
+                                                    <constraint firstItem="5do-CB-qEy" firstAttribute="leading" secondItem="iVR-2p-17b" secondAttribute="leading" constant="10" id="GO5-g4-8Ls"/>
+                                                    <constraint firstItem="bAp-cO-za0" firstAttribute="top" secondItem="OEk-63-nC4" secondAttribute="bottom" constant="2" id="GOA-ns-JUo">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                                                    </constraint>
+                                                    <constraint firstItem="INU-vK-HO0" firstAttribute="top" secondItem="iVR-2p-17b" secondAttribute="top" constant="5" id="HVn-VV-xy5"/>
+                                                    <constraint firstAttribute="trailing" secondItem="8vo-jN-l3R" secondAttribute="trailing" constant="7" id="HY8-Kh-nHL"/>
+                                                    <constraint firstAttribute="trailing" secondItem="fcj-1K-P05" secondAttribute="trailing" constant="15" id="IMx-JI-gVG"/>
+                                                    <constraint firstItem="dMK-Wx-LWq" firstAttribute="leading" secondItem="iVR-2p-17b" secondAttribute="leading" constant="3" id="Jjd-W5-rkd"/>
+                                                    <constraint firstItem="suv-uN-kcg" firstAttribute="top" secondItem="INU-vK-HO0" secondAttribute="bottom" constant="1" id="Jrq-8l-neu">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                                                    </constraint>
+                                                    <constraint firstItem="8vo-jN-l3R" firstAttribute="top" secondItem="suv-uN-kcg" secondAttribute="bottom" constant="2" id="O1m-GP-bWl">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                                                    </constraint>
+                                                    <constraint firstItem="8vo-jN-l3R" firstAttribute="leading" secondItem="bAp-cO-za0" secondAttribute="trailing" constant="7" id="OHR-dE-N4l"/>
+                                                    <constraint firstItem="fcj-1K-P05" firstAttribute="leading" secondItem="0YP-Hs-aPG" secondAttribute="trailing" constant="16" id="SuA-Ke-elo"/>
+                                                    <constraint firstItem="8vo-jN-l3R" firstAttribute="leading" secondItem="bAp-cO-za0" secondAttribute="trailing" constant="7" id="T6V-lF-h8F"/>
+                                                    <constraint firstAttribute="bottom" secondItem="fcj-1K-P05" secondAttribute="bottom" constant="5" id="TfR-MK-mJP">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="5"/>
+                                                    </constraint>
+                                                    <constraint firstItem="5do-CB-qEy" firstAttribute="top" secondItem="bAp-cO-za0" secondAttribute="bottom" constant="1" id="UN0-gH-J7H">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="8"/>
+                                                    </constraint>
+                                                    <constraint firstItem="OEk-63-nC4" firstAttribute="leading" secondItem="iVR-2p-17b" secondAttribute="leading" constant="3" id="WVP-jW-6Av"/>
+                                                    <constraint firstItem="fcj-1K-P05" firstAttribute="top" secondItem="5do-CB-qEy" secondAttribute="bottom" constant="4" id="Xe4-SE-v0Z">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="9"/>
+                                                    </constraint>
+                                                    <constraint firstAttribute="width" constant="150" id="Yqh-3f-kQc">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="180"/>
+                                                    </constraint>
+                                                    <constraint firstItem="dMK-Wx-LWq" firstAttribute="top" secondItem="iVR-2p-17b" secondAttribute="top" constant="5" id="Zrn-AD-zQe"/>
+                                                    <constraint firstItem="INU-vK-HO0" firstAttribute="leading" secondItem="dMK-Wx-LWq" secondAttribute="trailing" constant="7" id="beD-TQ-KMz"/>
+                                                    <constraint firstItem="5do-CB-qEy" firstAttribute="top" secondItem="8vo-jN-l3R" secondAttribute="bottom" constant="2" id="fnj-8J-r9c">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="8"/>
+                                                    </constraint>
+                                                    <constraint firstItem="0YP-Hs-aPG" firstAttribute="top" secondItem="5do-CB-qEy" secondAttribute="bottom" constant="7" id="iGU-PH-h5d">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="9"/>
+                                                    </constraint>
+                                                    <constraint firstAttribute="trailing" secondItem="INU-vK-HO0" secondAttribute="trailing" constant="7" id="jSc-eu-5T6"/>
+                                                    <constraint firstItem="suv-uN-kcg" firstAttribute="top" secondItem="INU-vK-HO0" secondAttribute="bottom" constant="1" id="kds-sn-UUM">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                                                    </constraint>
+                                                    <constraint firstAttribute="trailing" secondItem="suv-uN-kcg" secondAttribute="trailing" constant="7" id="nYB-gv-tI1"/>
+                                                    <constraint firstItem="suv-uN-kcg" firstAttribute="leading" secondItem="OEk-63-nC4" secondAttribute="trailing" constant="7" id="sia-wg-pDp"/>
+                                                    <constraint firstItem="8vo-jN-l3R" firstAttribute="top" secondItem="suv-uN-kcg" secondAttribute="bottom" constant="2" id="zWQ-bL-ozc">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="6"/>
+                                                    </constraint>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="subviews">
+                                                        <exclude reference="dMK-Wx-LWq"/>
+                                                        <exclude reference="INU-vK-HO0"/>
+                                                        <exclude reference="OEk-63-nC4"/>
+                                                        <exclude reference="bAp-cO-za0"/>
+                                                        <exclude reference="8vo-jN-l3R"/>
+                                                        <exclude reference="5do-CB-qEy"/>
+                                                        <exclude reference="fcj-1K-P05"/>
+                                                        <exclude reference="0YP-Hs-aPG"/>
+                                                        <exclude reference="suv-uN-kcg"/>
+                                                    </mask>
+                                                    <mask key="constraints">
+                                                        <exclude reference="Yqh-3f-kQc"/>
+                                                        <exclude reference="DMj-0Q-eQz"/>
+                                                        <exclude reference="WVP-jW-6Av"/>
+                                                        <exclude reference="2K0-iS-O9o"/>
+                                                        <exclude reference="Jjd-W5-rkd"/>
+                                                        <exclude reference="Zrn-AD-zQe"/>
+                                                        <exclude reference="GOA-ns-JUo"/>
+                                                        <exclude reference="9Pj-QN-6jn"/>
+                                                        <exclude reference="5wU-xM-r3Y"/>
+                                                        <exclude reference="9wp-fv-Pn6"/>
+                                                        <exclude reference="iGU-PH-h5d"/>
+                                                        <exclude reference="0IP-ju-AWm"/>
+                                                        <exclude reference="Bq9-H3-ICt"/>
+                                                        <exclude reference="HVn-VV-xy5"/>
+                                                        <exclude reference="jSc-eu-5T6"/>
+                                                        <exclude reference="beD-TQ-KMz"/>
+                                                        <exclude reference="1Gg-hh-1hg"/>
+                                                        <exclude reference="UN0-gH-J7H"/>
+                                                        <exclude reference="fnj-8J-r9c"/>
+                                                        <exclude reference="GO5-g4-8Ls"/>
+                                                        <exclude reference="kds-sn-UUM"/>
+                                                        <exclude reference="sia-wg-pDp"/>
+                                                        <exclude reference="nYB-gv-tI1"/>
+                                                        <exclude reference="Jrq-8l-neu"/>
+                                                        <exclude reference="ENj-c7-Gzh"/>
+                                                        <exclude reference="O1m-GP-bWl"/>
+                                                        <exclude reference="OHR-dE-N4l"/>
+                                                        <exclude reference="HY8-Kh-nHL"/>
+                                                        <exclude reference="T6V-lF-h8F"/>
+                                                        <exclude reference="zWQ-bL-ozc"/>
+                                                        <exclude reference="SuA-Ke-elo"/>
+                                                        <exclude reference="TfR-MK-mJP"/>
+                                                        <exclude reference="Cd8-rl-ddN"/>
+                                                        <exclude reference="Xe4-SE-v0Z"/>
+                                                        <exclude reference="IMx-JI-gVG"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <mask key="subviews">
+                                                        <include reference="dMK-Wx-LWq"/>
+                                                        <include reference="INU-vK-HO0"/>
+                                                        <include reference="OEk-63-nC4"/>
+                                                        <include reference="bAp-cO-za0"/>
+                                                        <include reference="8vo-jN-l3R"/>
+                                                        <include reference="5do-CB-qEy"/>
+                                                        <include reference="fcj-1K-P05"/>
+                                                        <include reference="0YP-Hs-aPG"/>
+                                                        <include reference="suv-uN-kcg"/>
+                                                    </mask>
+                                                    <mask key="constraints">
+                                                        <include reference="Yqh-3f-kQc"/>
+                                                        <include reference="DMj-0Q-eQz"/>
+                                                        <include reference="WVP-jW-6Av"/>
+                                                        <include reference="2K0-iS-O9o"/>
+                                                        <include reference="Jjd-W5-rkd"/>
+                                                        <include reference="Zrn-AD-zQe"/>
+                                                        <include reference="GOA-ns-JUo"/>
+                                                        <include reference="9Pj-QN-6jn"/>
+                                                        <include reference="5wU-xM-r3Y"/>
+                                                        <include reference="9wp-fv-Pn6"/>
+                                                        <include reference="iGU-PH-h5d"/>
+                                                        <include reference="0IP-ju-AWm"/>
+                                                        <include reference="Bq9-H3-ICt"/>
+                                                        <include reference="HVn-VV-xy5"/>
+                                                        <include reference="jSc-eu-5T6"/>
+                                                        <include reference="beD-TQ-KMz"/>
+                                                        <include reference="1Gg-hh-1hg"/>
+                                                        <include reference="UN0-gH-J7H"/>
+                                                        <include reference="fnj-8J-r9c"/>
+                                                        <include reference="GO5-g4-8Ls"/>
+                                                        <include reference="kds-sn-UUM"/>
+                                                        <include reference="sia-wg-pDp"/>
+                                                        <include reference="nYB-gv-tI1"/>
+                                                        <include reference="Jrq-8l-neu"/>
+                                                        <include reference="ENj-c7-Gzh"/>
+                                                        <include reference="O1m-GP-bWl"/>
+                                                        <include reference="OHR-dE-N4l"/>
+                                                        <include reference="HY8-Kh-nHL"/>
+                                                        <include reference="T6V-lF-h8F"/>
+                                                        <include reference="zWQ-bL-ozc"/>
+                                                        <include reference="SuA-Ke-elo"/>
+                                                        <include reference="TfR-MK-mJP"/>
+                                                        <include reference="Cd8-rl-ddN"/>
+                                                        <include reference="Xe4-SE-v0Z"/>
+                                                        <include reference="IMx-JI-gVG"/>
+                                                    </mask>
+                                                </variation>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.35621675530000002" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="iVR-2p-17b" firstAttribute="top" secondItem="fvu-Xw-COH" secondAttribute="top" constant="10" id="1BH-ta-uc3">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                            </constraint>
+                                            <constraint firstAttribute="bottom" secondItem="ggI-L2-YfD" secondAttribute="bottom" constant="10" id="3Wc-yJ-3yh">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                            </constraint>
+                                            <constraint firstItem="iVR-2p-17b" firstAttribute="leading" secondItem="neh-0Z-St1" secondAttribute="trailing" constant="20" id="DhW-Ng-GAP">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="7"/>
+                                            </constraint>
+                                            <constraint firstItem="ggI-L2-YfD" firstAttribute="leading" secondItem="fvu-Xw-COH" secondAttribute="leading" constant="10" id="GfH-Ny-g1E">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="22"/>
+                                            </constraint>
+                                            <constraint firstAttribute="height" constant="130" id="Kok-Pm-l4o"/>
+                                            <constraint firstAttribute="trailing" secondItem="iVR-2p-17b" secondAttribute="trailing" constant="10" id="Sa1-93-2du">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="14"/>
+                                            </constraint>
+                                            <constraint firstAttribute="bottom" secondItem="iVR-2p-17b" secondAttribute="bottom" constant="10" id="Z1m-l3-Jsv">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                            </constraint>
+                                            <constraint firstAttribute="bottom" secondItem="neh-0Z-St1" secondAttribute="bottom" constant="10" id="bKd-xn-SQI">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                            </constraint>
+                                            <constraint firstItem="neh-0Z-St1" firstAttribute="top" secondItem="fvu-Xw-COH" secondAttribute="top" constant="10" id="jqk-FW-JGj">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                            </constraint>
+                                            <constraint firstItem="ggI-L2-YfD" firstAttribute="top" secondItem="fvu-Xw-COH" secondAttribute="top" constant="10" id="qEe-GD-7vp">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                            </constraint>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="ggI-L2-YfD"/>
+                                                <exclude reference="neh-0Z-St1"/>
+                                                <exclude reference="iVR-2p-17b"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <exclude reference="Kok-Pm-l4o"/>
+                                                <exclude reference="3Wc-yJ-3yh"/>
+                                                <exclude reference="GfH-Ny-g1E"/>
+                                                <exclude reference="qEe-GD-7vp"/>
+                                                <exclude reference="jqk-FW-JGj"/>
+                                                <exclude reference="bKd-xn-SQI"/>
+                                                <exclude reference="DhW-Ng-GAP"/>
+                                                <exclude reference="1BH-ta-uc3"/>
+                                                <exclude reference="Sa1-93-2du"/>
+                                                <exclude reference="Z1m-l3-Jsv"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <mask key="subviews">
+                                                <include reference="ggI-L2-YfD"/>
+                                                <include reference="neh-0Z-St1"/>
+                                                <include reference="iVR-2p-17b"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <include reference="Kok-Pm-l4o"/>
+                                                <include reference="3Wc-yJ-3yh"/>
+                                                <include reference="GfH-Ny-g1E"/>
+                                                <include reference="qEe-GD-7vp"/>
+                                                <include reference="jqk-FW-JGj"/>
+                                                <include reference="bKd-xn-SQI"/>
+                                                <include reference="DhW-Ng-GAP"/>
+                                                <include reference="1BH-ta-uc3"/>
+                                                <include reference="Sa1-93-2du"/>
+                                                <include reference="Z1m-l3-Jsv"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUs-w9-tAd">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9RF-h3-3SN">
+                                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                                                <state key="normal" title="TNCA 1st INNS">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didClickInnings1team1:" destination="h9h-9j-TZn" eventType="touchUpInside" id="P6k-3g-eqd"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mnj-Yh-zK8">
+                                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                <color key="backgroundColor" red="0.31764705879999999" green="0.32156862749999998" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="D2k-Sy-zHc"/>
+                                                    <constraint firstAttribute="width" constant="3" id="VAn-Yg-5VJ"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="VAn-Yg-5VJ"/>
+                                                        <exclude reference="D2k-Sy-zHc"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <mask key="constraints">
+                                                        <include reference="VAn-Yg-5VJ"/>
+                                                        <include reference="D2k-Sy-zHc"/>
+                                                    </mask>
+                                                </variation>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ooa-eE-dMR">
+                                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                                                <state key="normal" title="KSCA 1st INNS">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didClickInnings1team2:" destination="h9h-9j-TZn" eventType="touchUpInside" id="DfM-HN-1Ha"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I11-Kg-SbS">
+                                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                <color key="backgroundColor" red="0.31764705879999999" green="0.32156862749999998" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="3" id="P8g-0K-umg"/>
+                                                    <constraint firstAttribute="height" constant="20" id="u3I-Md-zbI"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="u3I-Md-zbI"/>
+                                                        <exclude reference="P8g-0K-umg"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <mask key="constraints">
+                                                        <include reference="u3I-Md-zbI"/>
+                                                        <include reference="P8g-0K-umg"/>
+                                                    </mask>
+                                                </variation>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7bd-fG-vZe">
+                                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                                                <state key="normal" title="TNCA 2nd INNS">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didClickInnings2team1:" destination="h9h-9j-TZn" eventType="touchUpInside" id="gxS-5p-BYN"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GuY-uz-Zxx">
+                                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                <color key="backgroundColor" red="0.31764705879999999" green="0.32156862749999998" blue="0.32549019610000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="3" id="6is-am-Oi0"/>
+                                                    <constraint firstAttribute="height" constant="20" id="dg5-4b-EOg"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="6is-am-Oi0"/>
+                                                        <exclude reference="dg5-4b-EOg"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <mask key="constraints">
+                                                        <include reference="6is-am-Oi0"/>
+                                                        <include reference="dg5-4b-EOg"/>
+                                                    </mask>
+                                                </variation>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a9f-Y7-9Lr">
+                                                <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                                                <state key="normal" title="KSCA 2nd INNS">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didClickInnings2team2:" destination="h9h-9j-TZn" eventType="touchUpInside" id="7BL-6h-Yfy"/>
+                                                </connections>
+                                            </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Df-iY-uvU">
+                                                <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                <color key="backgroundColor" red="0.0" green="0.62745098040000002" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="190" id="6Wf-Ct-Cjx"/>
+                                                    <constraint firstAttribute="height" constant="3" id="iSl-Ir-ZFS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="6Wf-Ct-Cjx"/>
+                                                        <exclude reference="iSl-Ir-ZFS"/>
+                                                    </mask>
+                                                </variation>
+                                                <variation key="heightClass=regular-widthClass=regular">
+                                                    <mask key="constraints">
+                                                        <include reference="6Wf-Ct-Cjx"/>
+                                                        <include reference="iSl-Ir-ZFS"/>
+                                                    </mask>
+                                                </variation>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.047058823530000002" green="0.062745098040000002" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="7bd-fG-vZe" firstAttribute="leading" secondItem="I11-Kg-SbS" secondAttribute="trailing" constant="1" id="1kd-0y-FYG"/>
+                                            <constraint firstItem="7bd-fG-vZe" firstAttribute="leading" secondItem="I11-Kg-SbS" secondAttribute="trailing" constant="1" id="2r5-fZ-9g9"/>
+                                            <constraint firstItem="GuY-uz-Zxx" firstAttribute="leading" secondItem="7bd-fG-vZe" secondAttribute="trailing" constant="1" id="5d4-MS-1gE"/>
+                                            <constraint firstItem="Ooa-eE-dMR" firstAttribute="height" secondItem="9RF-h3-3SN" secondAttribute="height" id="9E0-ve-Sxq"/>
+                                            <constraint firstItem="Ooa-eE-dMR" firstAttribute="width" secondItem="9RF-h3-3SN" secondAttribute="width" id="BGD-d9-les"/>
+                                            <constraint firstItem="Mnj-Yh-zK8" firstAttribute="leading" secondItem="9RF-h3-3SN" secondAttribute="trailing" constant="1" id="FKB-5t-eVX"/>
+                                            <constraint firstItem="I11-Kg-SbS" firstAttribute="leading" secondItem="Ooa-eE-dMR" secondAttribute="trailing" constant="1" id="Fme-e9-rP8"/>
+                                            <constraint firstAttribute="height" constant="90" id="J5L-G5-YFm">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="65"/>
+                                            </constraint>
+                                            <constraint firstItem="GuY-uz-Zxx" firstAttribute="top" secondItem="VUs-w9-tAd" secondAttribute="top" constant="20" id="K75-Xg-WZ0"/>
+                                            <constraint firstItem="9RF-h3-3SN" firstAttribute="leading" secondItem="VUs-w9-tAd" secondAttribute="leading" constant="5" id="KJh-HY-Z3f"/>
+                                            <constraint firstAttribute="bottom" secondItem="a9f-Y7-9Lr" secondAttribute="bottom" constant="10" id="Log-SF-h6B"/>
+                                            <constraint firstAttribute="bottom" secondItem="GuY-uz-Zxx" secondAttribute="bottom" constant="25" id="MMk-Hc-vE1"/>
+                                            <constraint firstItem="I11-Kg-SbS" firstAttribute="top" secondItem="VUs-w9-tAd" secondAttribute="top" constant="20" id="Mhc-NI-CkW"/>
+                                            <constraint firstItem="7bd-fG-vZe" firstAttribute="height" secondItem="9RF-h3-3SN" secondAttribute="height" id="Mtg-HZ-4Zm"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ooa-eE-dMR" secondAttribute="bottom" constant="10" id="OVx-Hg-6RA"/>
+                                            <constraint firstAttribute="bottom" secondItem="Mnj-Yh-zK8" secondAttribute="bottom" constant="23" id="P1f-zN-Kzf"/>
+                                            <constraint firstItem="3Df-iY-uvU" firstAttribute="leading" secondItem="VUs-w9-tAd" secondAttribute="leading" id="PIU-b0-FYN"/>
+                                            <constraint firstItem="a9f-Y7-9Lr" firstAttribute="leading" secondItem="GuY-uz-Zxx" secondAttribute="trailing" constant="1" id="QTk-BN-vtO"/>
+                                            <constraint firstAttribute="bottom" secondItem="9RF-h3-3SN" secondAttribute="bottom" constant="10" id="RmY-2P-WNd"/>
+                                            <constraint firstItem="a9f-Y7-9Lr" firstAttribute="height" secondItem="9RF-h3-3SN" secondAttribute="height" id="TKx-JI-NpD"/>
+                                            <constraint firstItem="GuY-uz-Zxx" firstAttribute="leading" secondItem="7bd-fG-vZe" secondAttribute="trailing" constant="1" id="VD9-jW-s16"/>
+                                            <constraint firstItem="9RF-h3-3SN" firstAttribute="top" secondItem="VUs-w9-tAd" secondAttribute="top" constant="5" id="VTD-oY-7E6"/>
+                                            <constraint firstItem="7bd-fG-vZe" firstAttribute="width" secondItem="9RF-h3-3SN" secondAttribute="width" id="YDa-tk-T29"/>
+                                            <constraint firstItem="7bd-fG-vZe" firstAttribute="top" secondItem="VUs-w9-tAd" secondAttribute="top" constant="5" id="Z8i-fl-GIs"/>
+                                            <constraint firstItem="Mnj-Yh-zK8" firstAttribute="leading" secondItem="9RF-h3-3SN" secondAttribute="trailing" constant="1" id="d58-GJ-LS5"/>
+                                            <constraint firstItem="Ooa-eE-dMR" firstAttribute="leading" secondItem="Mnj-Yh-zK8" secondAttribute="trailing" constant="1" id="gUQ-eK-uKO"/>
+                                            <constraint firstItem="Ooa-eE-dMR" firstAttribute="top" secondItem="VUs-w9-tAd" secondAttribute="top" constant="5" id="h7v-6U-Yom"/>
+                                            <constraint firstItem="a9f-Y7-9Lr" firstAttribute="top" secondItem="VUs-w9-tAd" secondAttribute="top" constant="5" id="ho3-ok-ewt"/>
+                                            <constraint firstItem="Ooa-eE-dMR" firstAttribute="leading" secondItem="Mnj-Yh-zK8" secondAttribute="trailing" constant="1" id="itV-sp-ezo"/>
+                                            <constraint firstItem="a9f-Y7-9Lr" firstAttribute="leading" secondItem="GuY-uz-Zxx" secondAttribute="trailing" constant="1" id="oYv-o9-MwC"/>
+                                            <constraint firstAttribute="bottom" secondItem="7bd-fG-vZe" secondAttribute="bottom" constant="10" id="p4i-Sp-4D9"/>
+                                            <constraint firstAttribute="bottom" secondItem="I11-Kg-SbS" secondAttribute="bottom" constant="25" id="pLe-bd-OAs"/>
+                                            <constraint firstItem="I11-Kg-SbS" firstAttribute="leading" secondItem="Ooa-eE-dMR" secondAttribute="trailing" constant="1" id="qk5-oQ-zRX"/>
+                                            <constraint firstAttribute="trailing" secondItem="a9f-Y7-9Lr" secondAttribute="trailing" constant="8" id="rYJ-1O-Nlr"/>
+                                            <constraint firstItem="a9f-Y7-9Lr" firstAttribute="width" secondItem="9RF-h3-3SN" secondAttribute="width" id="xsH-B7-dro"/>
+                                            <constraint firstItem="Mnj-Yh-zK8" firstAttribute="top" secondItem="VUs-w9-tAd" secondAttribute="top" constant="22" id="xxc-iU-JVF"/>
+                                            <constraint firstItem="3Df-iY-uvU" firstAttribute="top" secondItem="9RF-h3-3SN" secondAttribute="bottom" constant="1" id="zdP-HY-dew"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="subviews">
+                                                <exclude reference="9RF-h3-3SN"/>
+                                                <exclude reference="Mnj-Yh-zK8"/>
+                                                <exclude reference="Ooa-eE-dMR"/>
+                                                <exclude reference="I11-Kg-SbS"/>
+                                                <exclude reference="7bd-fG-vZe"/>
+                                                <exclude reference="GuY-uz-Zxx"/>
+                                                <exclude reference="a9f-Y7-9Lr"/>
+                                                <exclude reference="3Df-iY-uvU"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <exclude reference="J5L-G5-YFm"/>
+                                                <exclude reference="KJh-HY-Z3f"/>
+                                                <exclude reference="RmY-2P-WNd"/>
+                                                <exclude reference="VTD-oY-7E6"/>
+                                                <exclude reference="xsH-B7-dro"/>
+                                                <exclude reference="oYv-o9-MwC"/>
+                                                <exclude reference="rYJ-1O-Nlr"/>
+                                                <exclude reference="ho3-ok-ewt"/>
+                                                <exclude reference="Log-SF-h6B"/>
+                                                <exclude reference="TKx-JI-NpD"/>
+                                                <exclude reference="QTk-BN-vtO"/>
+                                                <exclude reference="2r5-fZ-9g9"/>
+                                                <exclude reference="YDa-tk-T29"/>
+                                                <exclude reference="Z8i-fl-GIs"/>
+                                                <exclude reference="Mtg-HZ-4Zm"/>
+                                                <exclude reference="1kd-0y-FYG"/>
+                                                <exclude reference="p4i-Sp-4D9"/>
+                                                <exclude reference="BGD-d9-les"/>
+                                                <exclude reference="h7v-6U-Yom"/>
+                                                <exclude reference="OVx-Hg-6RA"/>
+                                                <exclude reference="itV-sp-ezo"/>
+                                                <exclude reference="9E0-ve-Sxq"/>
+                                                <exclude reference="gUQ-eK-uKO"/>
+                                                <exclude reference="5d4-MS-1gE"/>
+                                                <exclude reference="MMk-Hc-vE1"/>
+                                                <exclude reference="VD9-jW-s16"/>
+                                                <exclude reference="K75-Xg-WZ0"/>
+                                                <exclude reference="qk5-oQ-zRX"/>
+                                                <exclude reference="Fme-e9-rP8"/>
+                                                <exclude reference="pLe-bd-OAs"/>
+                                                <exclude reference="Mhc-NI-CkW"/>
+                                                <exclude reference="zdP-HY-dew"/>
+                                                <exclude reference="PIU-b0-FYN"/>
+                                                <exclude reference="FKB-5t-eVX"/>
+                                                <exclude reference="xxc-iU-JVF"/>
+                                                <exclude reference="P1f-zN-Kzf"/>
+                                                <exclude reference="d58-GJ-LS5"/>
+                                            </mask>
+                                        </variation>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <mask key="subviews">
+                                                <include reference="9RF-h3-3SN"/>
+                                                <include reference="Mnj-Yh-zK8"/>
+                                                <include reference="Ooa-eE-dMR"/>
+                                                <include reference="I11-Kg-SbS"/>
+                                                <include reference="7bd-fG-vZe"/>
+                                                <include reference="GuY-uz-Zxx"/>
+                                                <include reference="a9f-Y7-9Lr"/>
+                                                <include reference="3Df-iY-uvU"/>
+                                            </mask>
+                                            <mask key="constraints">
+                                                <include reference="J5L-G5-YFm"/>
+                                                <include reference="KJh-HY-Z3f"/>
+                                                <include reference="RmY-2P-WNd"/>
+                                                <include reference="VTD-oY-7E6"/>
+                                                <include reference="xsH-B7-dro"/>
+                                                <include reference="oYv-o9-MwC"/>
+                                                <include reference="rYJ-1O-Nlr"/>
+                                                <include reference="ho3-ok-ewt"/>
+                                                <include reference="Log-SF-h6B"/>
+                                                <include reference="TKx-JI-NpD"/>
+                                                <include reference="QTk-BN-vtO"/>
+                                                <include reference="2r5-fZ-9g9"/>
+                                                <include reference="YDa-tk-T29"/>
+                                                <include reference="Z8i-fl-GIs"/>
+                                                <include reference="Mtg-HZ-4Zm"/>
+                                                <include reference="1kd-0y-FYG"/>
+                                                <include reference="p4i-Sp-4D9"/>
+                                                <include reference="BGD-d9-les"/>
+                                                <include reference="h7v-6U-Yom"/>
+                                                <include reference="OVx-Hg-6RA"/>
+                                                <include reference="itV-sp-ezo"/>
+                                                <include reference="9E0-ve-Sxq"/>
+                                                <include reference="gUQ-eK-uKO"/>
+                                                <include reference="5d4-MS-1gE"/>
+                                                <include reference="MMk-Hc-vE1"/>
+                                                <include reference="VD9-jW-s16"/>
+                                                <include reference="K75-Xg-WZ0"/>
+                                                <include reference="qk5-oQ-zRX"/>
+                                                <include reference="Fme-e9-rP8"/>
+                                                <include reference="pLe-bd-OAs"/>
+                                                <include reference="Mhc-NI-CkW"/>
+                                                <include reference="zdP-HY-dew"/>
+                                                <include reference="PIU-b0-FYN"/>
+                                                <include reference="FKB-5t-eVX"/>
+                                                <include reference="xxc-iU-JVF"/>
+                                                <include reference="P1f-zN-Kzf"/>
+                                                <include reference="d58-GJ-LS5"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qho-pK-tBa">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="srV-8K-Ywy" id="uNy-j6-Q3M"/>
+                                            <outlet property="delegate" destination="srV-8K-Ywy" id="etl-8W-hlr"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="Qho-pK-tBa" secondAttribute="bottom" id="0Th-ua-QNx"/>
+                                    <constraint firstAttribute="bottom" secondItem="y02-gY-L0h" secondAttribute="bottom" id="1UO-4l-k4f"/>
+                                    <constraint firstItem="fvu-Xw-COH" firstAttribute="top" secondItem="LkB-MC-59t" secondAttribute="top" id="92U-H5-Ep9">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                                    </constraint>
+                                    <constraint firstItem="VUs-w9-tAd" firstAttribute="leading" secondItem="fvu-Xw-COH" secondAttribute="leading" id="C12-v0-Ox8"/>
+                                    <constraint firstAttribute="trailing" secondItem="Qho-pK-tBa" secondAttribute="trailing" id="HOG-7l-yfF"/>
+                                    <constraint firstItem="Qho-pK-tBa" firstAttribute="leading" secondItem="LkB-MC-59t" secondAttribute="leading" id="OY9-Ty-XXU"/>
+                                    <constraint firstItem="VUs-w9-tAd" firstAttribute="trailing" secondItem="y02-gY-L0h" secondAttribute="trailing" id="cf1-ka-etF"/>
+                                    <constraint firstAttribute="trailing" secondItem="y02-gY-L0h" secondAttribute="trailing" id="hGa-fW-z8x"/>
+                                    <constraint firstItem="fvu-Xw-COH" firstAttribute="leading" secondItem="LkB-MC-59t" secondAttribute="leading" id="kbT-uT-L5Y"/>
+                                    <constraint firstItem="y02-gY-L0h" firstAttribute="leading" secondItem="fvu-Xw-COH" secondAttribute="leading" id="mjB-JM-x1t"/>
+                                    <constraint firstItem="y02-gY-L0h" firstAttribute="top" secondItem="fvu-Xw-COH" secondAttribute="top" id="q3v-6z-xO5">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-15"/>
+                                    </constraint>
+                                    <constraint firstItem="Qho-pK-tBa" firstAttribute="top" secondItem="VUs-w9-tAd" secondAttribute="bottom" constant="18" id="rak-HU-Ayf">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                    </constraint>
+                                    <constraint firstItem="fvu-Xw-COH" firstAttribute="trailing" secondItem="LkB-MC-59t" secondAttribute="trailingMargin" id="uuu-4z-Mj7"/>
+                                    <constraint firstItem="VUs-w9-tAd" firstAttribute="centerY" secondItem="y02-gY-L0h" secondAttribute="centerY" id="z2v-aa-44B">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-332.5"/>
+                                    </constraint>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="subviews">
+                                        <exclude reference="y02-gY-L0h"/>
+                                        <exclude reference="fvu-Xw-COH"/>
+                                        <exclude reference="VUs-w9-tAd"/>
+                                        <exclude reference="Qho-pK-tBa"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <exclude reference="1UO-4l-k4f"/>
+                                        <exclude reference="hGa-fW-z8x"/>
+                                        <exclude reference="mjB-JM-x1t"/>
+                                        <exclude reference="q3v-6z-xO5"/>
+                                        <exclude reference="92U-H5-Ep9"/>
+                                        <exclude reference="kbT-uT-L5Y"/>
+                                        <exclude reference="uuu-4z-Mj7"/>
+                                        <exclude reference="C12-v0-Ox8"/>
+                                        <exclude reference="cf1-ka-etF"/>
+                                        <exclude reference="z2v-aa-44B"/>
+                                        <exclude reference="0Th-ua-QNx"/>
+                                        <exclude reference="HOG-7l-yfF"/>
+                                        <exclude reference="OY9-Ty-XXU"/>
+                                        <exclude reference="rak-HU-Ayf"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="subviews">
+                                        <include reference="y02-gY-L0h"/>
+                                        <include reference="fvu-Xw-COH"/>
+                                        <include reference="VUs-w9-tAd"/>
+                                        <include reference="Qho-pK-tBa"/>
+                                    </mask>
+                                    <mask key="constraints">
+                                        <include reference="1UO-4l-k4f"/>
+                                        <include reference="hGa-fW-z8x"/>
+                                        <include reference="mjB-JM-x1t"/>
+                                        <include reference="q3v-6z-xO5"/>
+                                        <include reference="92U-H5-Ep9"/>
+                                        <include reference="kbT-uT-L5Y"/>
+                                        <include reference="uuu-4z-Mj7"/>
+                                        <include reference="C12-v0-Ox8"/>
+                                        <include reference="cf1-ka-etF"/>
+                                        <include reference="z2v-aa-44B"/>
+                                        <include reference="0Th-ua-QNx"/>
+                                        <include reference="HOG-7l-yfF"/>
+                                        <include reference="OY9-Ty-XXU"/>
+                                        <include reference="rak-HU-Ayf"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="LkB-MC-59t" firstAttribute="leading" secondItem="4iU-Qe-z26" secondAttribute="leading" id="6xC-5g-yas"/>
+                            <constraint firstAttribute="trailing" secondItem="LkB-MC-59t" secondAttribute="trailing" id="Fqa-JO-wVQ"/>
+                            <constraint firstItem="LkB-MC-59t" firstAttribute="top" secondItem="4iU-Qe-z26" secondAttribute="top" id="hvc-2M-IjC"/>
+                            <constraint firstItem="m2r-D6-qj7" firstAttribute="top" secondItem="LkB-MC-59t" secondAttribute="bottom" id="j0R-Oa-PdA"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="LkB-MC-59t"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="6xC-5g-yas"/>
+                                <exclude reference="Fqa-JO-wVQ"/>
+                                <exclude reference="hvc-2M-IjC"/>
+                                <exclude reference="j0R-Oa-PdA"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="LkB-MC-59t"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="6xC-5g-yas"/>
+                                <include reference="Fqa-JO-wVQ"/>
+                                <include reference="hvc-2M-IjC"/>
+                                <include reference="j0R-Oa-PdA"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="768" height="1024"/>
+                    <connections>
+                        <outlet property="tbl_scorecard" destination="Qho-pK-tBa" id="HaD-NF-4fo"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="96J-Y0-rBd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="607.5" y="1434"/>
+        </scene>
         <!--Select PlayersVC-->
         <scene sceneID="w4t-nA-wf9">
             <objects>
@@ -9460,13 +10853,16 @@
                                                             <constraint firstAttribute="width" constant="80" id="qNJ-Gc-MUq"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TNCA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VX7-j8-5mn">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TNCA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VX7-j8-5mn">
                                                         <rect key="frame" x="96" y="16" width="75" height="35"/>
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="35"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                            <rect key="frame" x="96" y="16" width="94" height="41"/>
+                                                        </variation>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7hN-f2-TjW" userLabel="View_SelectedA">
+                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7hN-f2-TjW" userLabel="View_SelectedA">
                                                         <rect key="frame" x="96" y="59" width="217" height="37"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-add" translatesAutoresizingMaskIntoConstraints="NO" id="v5S-bd-7Yg">
@@ -9505,6 +10901,9 @@
                                                             <constraint firstAttribute="height" constant="37" id="rGT-m9-Pgv"/>
                                                             <constraint firstAttribute="trailing" secondItem="cuY-Gj-zB4" secondAttribute="trailing" constant="8" id="ztN-pF-5Qd"/>
                                                         </constraints>
+                                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                            <rect key="frame" x="96" y="65" width="217" height="37"/>
+                                                        </variation>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -9530,11 +10929,14 @@
                                                             <constraint firstAttribute="width" constant="80" id="X00-Vj-Ji5"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KSCA" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CuD-nj-Z9R">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="KSCA" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CuD-nj-Z9R">
                                                         <rect key="frame" x="140" y="16" width="77" height="41"/>
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="35"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                            <rect key="frame" x="123" y="16" width="94" height="41"/>
+                                                        </variation>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhu-HL-kMM" userLabel="View_SelectedB">
                                                         <rect key="frame" x="0.0" y="63" width="217" height="37"/>
@@ -9769,7 +11171,7 @@
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAY, 26" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1e-Ah-1Vh">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="MAY, 26" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1e-Ah-1Vh">
                                                         <rect key="frame" x="22" y="69" width="56" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="PH2-Hw-2by"/>
@@ -9777,6 +11179,9 @@
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                            <rect key="frame" x="22" y="69" width="62" height="21"/>
+                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Qj-vi-EbN">
                                                         <rect key="frame" x="102" y="64" width="40" height="21"/>
@@ -10395,9 +11800,16 @@
                                                                     <exclude reference="wAh-pJ-OKA"/>
                                                                 </mask>
                                                                 <mask key="constraints">
-                                                                    <exclude reference="z9w-uS-vnZ"/>
-                                                                    <exclude reference="sX8-iC-EyI"/>
-                                                                    <exclude reference="tAI-yJ-p0d"/>
+                                                                    <exclude reference="J5E-WT-YRE"/>
+                                                                    <exclude reference="QUS-lH-3pF"/>
+                                                                    <exclude reference="P0z-1P-Koo"/>
+                                                                    <exclude reference="U2H-E0-EXr"/>
+                                                                    <exclude reference="YVE-b7-gPa"/>
+                                                                    <exclude reference="Djl-wx-wq7"/>
+                                                                    <exclude reference="Uji-Kq-DZF"/>
+                                                                    <exclude reference="cnP-Uk-TfT"/>
+                                                                    <exclude reference="pNz-6q-Rx3"/>
+                                                                    <exclude reference="wSX-SF-3TI"/>
                                                                 </mask>
                                                             </variation>
                                                             <variation key="heightClass=regular-widthClass=regular">
@@ -10405,9 +11817,16 @@
                                                                     <include reference="wAh-pJ-OKA"/>
                                                                 </mask>
                                                                 <mask key="constraints">
-                                                                    <include reference="z9w-uS-vnZ"/>
-                                                                    <include reference="sX8-iC-EyI"/>
-                                                                    <include reference="tAI-yJ-p0d"/>
+                                                                    <include reference="J5E-WT-YRE"/>
+                                                                    <include reference="QUS-lH-3pF"/>
+                                                                    <include reference="P0z-1P-Koo"/>
+                                                                    <include reference="U2H-E0-EXr"/>
+                                                                    <include reference="YVE-b7-gPa"/>
+                                                                    <include reference="Djl-wx-wq7"/>
+                                                                    <include reference="Uji-Kq-DZF"/>
+                                                                    <include reference="cnP-Uk-TfT"/>
+                                                                    <include reference="pNz-6q-Rx3"/>
+                                                                    <include reference="wSX-SF-3TI"/>
                                                                 </mask>
                                                             </variation>
                                                         </view>
@@ -10531,8 +11950,9 @@
                                                             <exclude reference="UN9-mR-IkZ"/>
                                                             <exclude reference="rTt-B4-Kuh"/>
                                                             <exclude reference="zd1-pi-yne"/>
-                                                            <exclude reference="1bh-7p-zyN"/>
-                                                            <exclude reference="BeH-Gu-8j0"/>
+                                                            <exclude reference="JgB-WZ-Tem"/>
+                                                            <exclude reference="OO6-o8-4U2"/>
+                                                            <exclude reference="vqi-7H-tBC"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=regular">
@@ -10545,8 +11965,9 @@
                                                             <include reference="UN9-mR-IkZ"/>
                                                             <include reference="rTt-B4-Kuh"/>
                                                             <include reference="zd1-pi-yne"/>
-                                                            <include reference="1bh-7p-zyN"/>
-                                                            <include reference="BeH-Gu-8j0"/>
+                                                            <include reference="JgB-WZ-Tem"/>
+                                                            <include reference="OO6-o8-4U2"/>
+                                                            <include reference="vqi-7H-tBC"/>
                                                         </mask>
                                                     </variation>
                                                 </tableViewCellContentView>
