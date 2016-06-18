@@ -9960,7 +9960,7 @@
                                             </constraint>
                                             <constraint firstAttribute="height" constant="130" id="Kok-Pm-l4o"/>
                                             <constraint firstAttribute="trailing" secondItem="iVR-2p-17b" secondAttribute="trailing" constant="10" id="Sa1-93-2du">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="14"/>
+                                                <variation key="heightClass=regular-widthClass=regular" constant="22"/>
                                             </constraint>
                                             <constraint firstAttribute="bottom" secondItem="iVR-2p-17b" secondAttribute="bottom" constant="10" id="Z1m-l3-Jsv">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
@@ -10154,7 +10154,7 @@
                                                 </variation>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.047058823530000002" green="0.062745098040000002" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstItem="7bd-fG-vZe" firstAttribute="leading" secondItem="I11-Kg-SbS" secondAttribute="trailing" constant="1" id="1kd-0y-FYG"/>
                                             <constraint firstItem="7bd-fG-vZe" firstAttribute="leading" secondItem="I11-Kg-SbS" secondAttribute="trailing" constant="1" id="2r5-fZ-9g9"/>
@@ -10314,11 +10314,13 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="Qho-pK-tBa" secondAttribute="bottom" id="0Th-ua-QNx">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-110"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                     </constraint>
-                                    <constraint firstAttribute="bottom" secondItem="y02-gY-L0h" secondAttribute="bottom" id="1UO-4l-k4f"/>
+                                    <constraint firstAttribute="bottom" secondItem="y02-gY-L0h" secondAttribute="bottom" id="1UO-4l-k4f">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-10"/>
+                                    </constraint>
                                     <constraint firstItem="fvu-Xw-COH" firstAttribute="top" secondItem="LkB-MC-59t" secondAttribute="top" id="92U-H5-Ep9">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="110"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="15"/>
                                     </constraint>
                                     <constraint firstItem="VUs-w9-tAd" firstAttribute="leading" secondItem="fvu-Xw-COH" secondAttribute="leading" id="C12-v0-Ox8"/>
                                     <constraint firstAttribute="trailing" secondItem="Qho-pK-tBa" secondAttribute="trailing" id="HOG-7l-yfF"/>
@@ -10328,14 +10330,16 @@
                                     <constraint firstItem="fvu-Xw-COH" firstAttribute="leading" secondItem="LkB-MC-59t" secondAttribute="leading" id="kbT-uT-L5Y"/>
                                     <constraint firstItem="y02-gY-L0h" firstAttribute="leading" secondItem="fvu-Xw-COH" secondAttribute="leading" id="mjB-JM-x1t"/>
                                     <constraint firstItem="y02-gY-L0h" firstAttribute="top" secondItem="fvu-Xw-COH" secondAttribute="top" id="q3v-6z-xO5">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-110"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-15"/>
                                     </constraint>
                                     <constraint firstItem="Qho-pK-tBa" firstAttribute="top" secondItem="VUs-w9-tAd" secondAttribute="bottom" constant="18" id="rak-HU-Ayf">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="10"/>
                                     </constraint>
-                                    <constraint firstItem="fvu-Xw-COH" firstAttribute="trailing" secondItem="LkB-MC-59t" secondAttribute="trailingMargin" id="uuu-4z-Mj7"/>
+                                    <constraint firstItem="fvu-Xw-COH" firstAttribute="trailing" secondItem="LkB-MC-59t" secondAttribute="trailingMargin" id="uuu-4z-Mj7">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="8"/>
+                                    </constraint>
                                     <constraint firstItem="VUs-w9-tAd" firstAttribute="centerY" secondItem="y02-gY-L0h" secondAttribute="centerY" id="z2v-aa-44B">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-222.5"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-274.5"/>
                                     </constraint>
                                 </constraints>
                                 <variation key="default">
@@ -10392,8 +10396,12 @@
                         <constraints>
                             <constraint firstItem="LkB-MC-59t" firstAttribute="leading" secondItem="4iU-Qe-z26" secondAttribute="leading" id="6xC-5g-yas"/>
                             <constraint firstAttribute="trailing" secondItem="LkB-MC-59t" secondAttribute="trailing" id="Fqa-JO-wVQ"/>
-                            <constraint firstItem="LkB-MC-59t" firstAttribute="top" secondItem="4iU-Qe-z26" secondAttribute="top" id="hvc-2M-IjC"/>
-                            <constraint firstItem="m2r-D6-qj7" firstAttribute="top" secondItem="LkB-MC-59t" secondAttribute="bottom" id="j0R-Oa-PdA"/>
+                            <constraint firstItem="LkB-MC-59t" firstAttribute="top" secondItem="4iU-Qe-z26" secondAttribute="top" id="hvc-2M-IjC">
+                                <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                            </constraint>
+                            <constraint firstItem="m2r-D6-qj7" firstAttribute="top" secondItem="LkB-MC-59t" secondAttribute="bottom" id="j0R-Oa-PdA">
+                                <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">

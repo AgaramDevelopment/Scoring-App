@@ -3251,6 +3251,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 [result addObject:wicket];
                 [result addObject:ecoRate];
                 
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+
                 return result;
                 
             }
@@ -6191,7 +6194,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                 [UpdateBreaksArray addObject:record];
             }
             
-        }BreakEventRecords
+        }
     }
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
