@@ -19,7 +19,19 @@
     NSMutableArray * OversorderArray;
     BOOL isFirsttime;
     UIView * view_addedit;
-   
+    int  totalRun;
+    NSMutableArray * objoverballCount;
+    NSMutableArray * eachoverRun;
+    NSMutableArray * objOverrthrow;
+    NSMutableArray  *objnoballArray;
+    NSMutableArray * objWide;
+    NSMutableArray * objlegByes;
+    NSMutableArray * objByes;
+    NSMutableArray * objIsfour;
+    NSMutableArray * objissix;
+    NSMutableArray * objWicketno;
+    NSMutableArray * objwicketType;
+    int EachoverWicketCount;
 }
 
 @end
@@ -31,14 +43,9 @@
     [self customnavigationmethod];
     inningsDetail =[[NSMutableArray alloc]init];
     OversorderArray =[[NSMutableArray alloc]init];
-    //self.btn_innings1Widthposition.constant =400;
-//self.btn_innings2xposition.constant=400;
     
-   // [self.view layoutIfNeeded];
-//    self.Btn_innings1team1.frame= CGRectMake(10, self.Btn_innings1team1.frame.origin.y,200, 50);
-//    self.Btn_innings1team2.frame =CGRectMake(self.Btn_innings1team1.frame.size.width+10,self.Btn_innings1team1.frame.origin.y, 200, 50);
-   // OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
-   //inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+     OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+   inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
     isFirsttime=NO;
     // Do any additional setup after loading the view.
 }
@@ -71,62 +78,99 @@
     NSInteger currentRow = indexPath.row;
     EditModeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     OversorderRecord *objOversorderRecord=(OversorderRecord *)[OversorderArray objectAtIndex:indexPath.row];
+     InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:indexPath.row];
     cell.lbl_playername.text =objOversorderRecord.BowlerName;
    
     cell.lbl_overs.text= objOversorderRecord.OversOrder;
-     NSMutableArray * objoverballCount =[[NSMutableArray alloc]init];
+    NSString *strCurrentRow=[NSString stringWithFormat:@"%d",currentRow];
+     objoverballCount =[[NSMutableArray alloc]init];
+     eachoverRun =[[NSMutableArray alloc]init];
+    objOverrthrow =[[NSMutableArray alloc]init];
+    
+    objWide     =[[NSMutableArray alloc]init];
+    objlegByes     =[[NSMutableArray alloc]init];
+    objByes     =[[NSMutableArray alloc]init];
+    objIsfour     =[[NSMutableArray alloc]init];
+    objissix     =[[NSMutableArray alloc]init];
+    objWicketno     =[[NSMutableArray alloc]init];
+    objwicketType     =[[NSMutableArray alloc]init];
+    objnoballArray   =[[NSMutableArray alloc]init];
     if (cell != nil) {
        
 
         for(int i=0; i < [inningsDetail count]; i++)
                 {
-                    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:i];
+                        InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:i];
             
-                    NSString *ballcount=objInningsBowlerDetailsRecord.OverballCount;
-                    if([objOversorderRecord.OversOrder isEqualToString:objInningsBowlerDetailsRecord.OverNo])
+                    NSString *ballcount=objInningsBowlerDetailsRecord.ballNo;
+                    NSString * objRun    =objInningsBowlerDetailsRecord.Runs;
+                    NSString * objoverThrow =objInningsBowlerDetailsRecord.overThrow;
+                    NSString * objWidevalue =objInningsBowlerDetailsRecord.Wide;
+                    NSString * objLegbyes =objInningsBowlerDetailsRecord.Legbyes;
+                    NSString * objByesvalue =objInningsBowlerDetailsRecord.Byes;
+                    NSString * objisFour =objInningsBowlerDetailsRecord.isFour;
+                    NSString * objisSix =objInningsBowlerDetailsRecord.isSix;
+                    NSString * objWicketNo =objInningsBowlerDetailsRecord.WicketNo;
+                    NSString * objWicketType =objInningsBowlerDetailsRecord.WicketType;
+                    NSString  * objNoBall    =objInningsBowlerDetailsRecord.noBall;
+
+                    if([strCurrentRow isEqualToString:objInningsBowlerDetailsRecord.OverNo])
                     {
                         [objoverballCount addObject: ballcount];
-                        
-            
-                       
-                    }
+                        [eachoverRun addObject:objRun];
+                        [objOverrthrow addObject:objoverThrow];
+                        [objWide addObject:objWidevalue];
+                        [objlegByes addObject:objLegbyes];
+                        [objByes addObject:objByesvalue];
+                        [objIsfour addObject:objisFour];
+                        [objissix addObject:objisSix];
+                         [objWicketno addObject:objWicketNo];
+                         [objwicketType addObject:objWicketType];
+                        [objnoballArray addObject:objNoBall];
+                     }
                 }
-        [self createboltierMethod:currentRow :cell ];
+        for (UILabel *view in cell.view_main.subviews) {
+            [view removeFromSuperview];
+        }
        
-//        for(int j=0; j< objoverballCount.count; j++)
-//            {
-//                //[self createboltierMethod:currentRow];
-//               
-//        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake((j*40.0)+28,65.0, 30.0, 15.0)];
-//        [nameLabel setBackgroundColor:[UIColor clearColor]]; // transparent label background
-//        [nameLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
-//                nameLabel.textAlignment=NSTextAlignmentCenter;
-//       
-//        [cell.view_main addSubview:nameLabel];
-//            InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:indexPath.row];
-//              
-//                nameLabel .text=[NSString stringWithFormat:@"%@.%@",[@(currentRow) stringValue],[@(j+1) stringValue]];
-//                        nameLabel.textColor=[UIColor whiteColor];
-//                 nameLabel .text=@"";
-//                UIButton *btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((j*40.0)+25,30.0,30.0, 30.0)];
-//              
-//                [btn_Run setBackgroundColor:[UIColor clearColor]];
-//                [btn_Run setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-//                [btn_Run setTitle:@"1" forState:UIControlStateNormal];
-//                btn_Run .layer. cornerRadius=15;
-//                btn_Run.layer.borderWidth=2;
-//                btn_Run.layer.borderColor= [UIColor redColor].CGColor;
-//                btn_Run.layer.masksToBounds=YES;
-//                [btn_Run addTarget:self action:@selector(didClickEditAction:) forControlEvents:UIControlEventTouchUpInside];
-//               
-//                [cell.view_main addSubview:btn_Run];
+        for(int j=0; j< objoverballCount.count; j++)
+            {
+                
+                
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake((j*40.0)+28,65.0, 30.0, 15.0)];
+       [nameLabel setBackgroundColor:[UIColor clearColor]]; // transparent label background
+        [nameLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+                nameLabel.textAlignment=NSTextAlignmentCenter;
+       
+           [cell.view_main addSubview:nameLabel];
+            InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:indexPath.row];
+              
+                nameLabel .text=[NSString stringWithFormat:@"%@.%@",[@(currentRow) stringValue],[@(j+1) stringValue]];
+                        nameLabel.textColor=[UIColor whiteColor];
+               
+                 //nameLabel .text=@"";
+               //UIButton *btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((j*40.0)+25,30.0,30.0, 30.0)];
+               
+                //[btn_Run setBackgroundColor:[UIColor clearColor]];
+               /// [btn_Run setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+               // [btn_Run setTitle:@"1" forState:UIControlStateNormal];
+                //btn_Run .layer. cornerRadius=15;
+                //btn_Run.layer.borderWidth=2;
+               // btn_Run.layer.borderColor= [UIColor redColor].CGColor;
+               //btn_Run.layer.masksToBounds=YES;
+                //[btn_Run addTarget:self action:@selector(didClickEditAction:) forControlEvents:UIControlEventTouchUpInside];
+               
+                //[cell.view_main addSubview:btn_Run];
 
 
-       // }
-       
+       }
+        
    }
     
-
+     [self createboltierMethod:currentRow :cell ];
+    cell.lbl_overcountwkt.text=[NSString stringWithFormat:@"%d/ %d",totalRun,EachoverWicketCount];
+    totalRun=0;
+    EachoverWicketCount=0;
     
     cell.backgroundColor=[UIColor clearColor];
     cell.selectionStyle=UITableViewCellSelectionStyleNone;
@@ -148,21 +192,36 @@
 -(void)createboltierMethod:(int *) indexpath :(EditModeCell *)cell
 {
     NSLog(@"%d",indexpath);
-     InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:indexpath];
-    NSMutableDictionary * dicAddbowlerdetails=[NSMutableDictionary new];
-    int overThrow = [objInningsBowlerDetailsRecord.overThrow intValue];
-    int runs      = [objInningsBowlerDetailsRecord.Runs intValue]+overThrow;
-    int noBall    = [objInningsBowlerDetailsRecord.noBall intValue];
-    int wide      = [objInningsBowlerDetailsRecord.Wide intValue];
-    int legalbyes = [objInningsBowlerDetailsRecord.Legbyes intValue];
-    int byes      = [objInningsBowlerDetailsRecord.Byes intValue];
+    
+    for(int i=0; i< objoverballCount.count; i++)
+    {
+        InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:i];
+        indexpath=i;
+        NSString * objoverThrow =[objOverrthrow objectAtIndex:i];
+        NSString * objRuns      =[eachoverRun objectAtIndex:i];
+        NSString * objnoball     =[objnoballArray objectAtIndex:i];
+        NSString * objWidevalue =[objWide objectAtIndex:i];
+        NSString * objLegbyes =[objlegByes objectAtIndex:i];
+        NSString * objByesvalue =[objByes objectAtIndex:i];
+        NSString * objisFour =[objIsfour objectAtIndex:i];
+        NSString * objisSix =[objissix objectAtIndex:i];
+        NSString * objWicketNo =[objWicketno objectAtIndex:i];
+        NSString * objWicketType =[objwicketType objectAtIndex:i];
+    
+    NSMutableDictionary * dicAddbowlerdetails=[[NSMutableDictionary alloc]init];
+    int overThrow = [objoverThrow intValue];
+    int runs      = [objRuns intValue]+overThrow;
+    int noBall    = [objnoball intValue];
+    int wide      = [objWidevalue intValue];
+    int legalbyes = [objLegbyes intValue];
+    int byes      = [objByesvalue intValue];
     
     noBall =noBall > 1 ?noBall-1:noBall;
-     if([objInningsBowlerDetailsRecord.isFour isEqualToString:@"1"])
+     if([objisFour isEqualToString:@"1"])
      {
          [dicAddbowlerdetails setValue:@"4" forKey:@"RUNS"];
      }
-     else if ([objInningsBowlerDetailsRecord.isSix isEqualToString:@"1"])
+     else if ([objisSix isEqualToString:@"1"])
      {
          [dicAddbowlerdetails setValue:@"6" forKey:@"RUNS"];
      }
@@ -176,7 +235,10 @@
     {
         if (noBall > 0)
         {
-             NSString* noballValues = [NSString stringWithFormat:@"(%@ + %d)", runs,noBall-1];
+            noBall =noBall-1;
+           
+            int  noBall = noBall+runs;
+             NSString* noballValues = [NSString stringWithFormat:@"%d",noBall];
             [dicAddbowlerdetails removeObjectForKey:@"RUNS"];
             [dicAddbowlerdetails setValue:noballValues forKey:@"RUNS"];
           
@@ -200,15 +262,23 @@
     {
         if (legalbyes > 0)
         {
-            int* objlegalbyesValues = legalbyes+(noBall==0?0:noBall-1);
-            NSString *legalbyesValues=[NSString stringWithFormat:@"%@",objlegalbyesValues];
+            if(noBall== 0)
+            {
+                noBall=0;
+            }
+            else{
+                noBall=noBall-1;
+            }
+            int objlegalbyesValues = legalbyes+noBall;
+            NSString *legalbyesValues=[NSString stringWithFormat:@"%d",objlegalbyesValues];
             [dicAddbowlerdetails removeObjectForKey:@"RUNS"];
             [dicAddbowlerdetails setValue:legalbyesValues forKey:@"RUNS"];
             
         }
+        if (noBall == 0)
+            [dicAddbowlerdetails setValue:@"LB" forKey:@"EXTRAS"];
     }
-    if (noBall == 0)
-        [dicAddbowlerdetails setValue:@"LB" forKey:@"EXTRAS"];
+    
     if (byes != 0)//Ball ticker for byes.
     {
         if (byes > 0)
@@ -221,18 +291,26 @@
         }
         if (noBall == 0)
             [dicAddbowlerdetails setValue:@"B" forKey:@"EXTRAS"];
-    
+    }
         // MessageBox.Show(drballdetails["WICKETNO"].ToString());
-        if (![objInningsBowlerDetailsRecord.WicketNo isEqualToString:@"" ])
+        if (![objWicketNo isEqualToString:@"0"])
         {
-            if ([objInningsBowlerDetailsRecord.WicketType isEqualToString:@"MSC102"])
+            if ([objWicketType isEqualToString:@"MSC102"])
                 [dicAddbowlerdetails setValue:@"RH" forKey:@"WICKETS"];
             
             else
+            {
                 [dicAddbowlerdetails setValue:@"W" forKey:@"WICKETS"];
+                NSString *wickCount = [dicAddbowlerdetails valueForKey:@"WICKETS"];
+                if([wickCount isEqualToString:@"W"])
+                {
+                     EachoverWicketCount =1+EachoverWicketCount;
+                }
+            }
 
             //dicBall.Add("WICKETS", "W");
         }
+        
         //MSC134 - BATTING, MSC135 - BOWLING
         int  penalty ;
         NSString * penaltyLabel = objInningsBowlerDetailsRecord.penaltytypeCode;
@@ -255,45 +333,63 @@
             [dicAddbowlerdetails setValue:penaltyLabel forKey:@"PENALTY"];
             
         }
-        NSString * content;
+    
+        NSString * content=@"";
         bool isExtras ;
-        bool isSix =[objInningsBowlerDetailsRecord.isSix isEqualToString:@"1"]? YES: NO;
-        bool isFour =[objInningsBowlerDetailsRecord.isFour isEqualToString:@"1"]? YES:NO;
+        bool isSix =[objisSix isEqualToString:@"1"]? YES: NO;
+        bool isFour =[objisFour isEqualToString:@"1"]? YES:NO;
         bool isSpecialEvents;
-        if(isFour == YES || isSix == YES || ![objInningsBowlerDetailsRecord.WicketNo isEqualToString:@""])
+        if(isFour == YES || isSix == YES || ![objWicketNo isEqualToString:@""])
         {
             isSpecialEvents=YES;
         }
         else{
             isSpecialEvents=NO;
         }
+    NSString * runvalue;
         for(NSString * kvpItem in dicAddbowlerdetails)
         {
-            isExtras = [kvpItem isEqualToString:@"WD"] || [kvpItem isEqualToString:@"NB"] || [kvpItem isEqualToString:@"B"] || [kvpItem isEqualToString:@"LB"] || [kvpItem isEqualToString:@"PENALTY"];
-            if ([kvpItem isEqualToString:@"RUNS"] && [kvpItem isEqualToString:@"0"] && dicAddbowlerdetails > 1)
-                content = [content stringByAppendingString:content];
+            isExtras = [[dicAddbowlerdetails valueForKey:kvpItem ] isEqualToString:@"WD"] || [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"NB"] || [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"B"] || [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"LB"] || [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"PENALTY"];
+            NSString * dicRunValue =[dicAddbowlerdetails valueForKey:kvpItem];
+            if ([kvpItem isEqualToString:@"RUNS"] && [dicRunValue isEqualToString:@"0"] &&  dicAddbowlerdetails.count > 1)
+                content = [dicAddbowlerdetails valueForKey:@"RUNS" ];
             else
-                content =[kvpItem stringByAppendingString:@""];          //kvpItem.Value + " ";
+            {
+                 runvalue=[dicAddbowlerdetails valueForKey:@"RUNS"];
+                
+                
+                NSString * extraValue =(![kvpItem isEqualToString:@"RUNS"])? [dicAddbowlerdetails valueForKey:kvpItem]:@"";
+                content =[runvalue stringByAppendingString:extraValue];
+            }   //kvpItem.Value + " ";
         }
-        //string videoURL = dtballdetails.Columns.Contains("VIDEOFILEPATH") ? drballdetails["VIDEOFILEPATH"].ToString() : string.Empty;
-        //To Create ball tiker for each row.
-        
-        [self CreateBallTickerInstance:content :isExtras :isSpecialEvents :objInningsBowlerDetailsRecord.ballNo :cell];
-       //[self CreateBallTickerInstance content isExtras, isSpecialEvents,objInningsBowlerDetailsRecord.ballNo)];
-    
+    if(runvalue != @"")
+    {
+        totalRun  =[runvalue intValue]+totalRun;
+    }
 
+    
+        [self CreateBallTickerInstance:content :isExtras :isSpecialEvents :objnoball :cell :indexpath];
 
     }
 
 }
 
--(void)CreateBallTickerInstance:(NSString *)content :(BOOL ) isextra: (BOOL) isspecialevent :(NSString *)ballno :(EditModeCell *) cell;
+
+   // [self CreateBallTickerInstance:content :isExtras :isSpecialEvents :objInningsBowlerDetailsRecord.ballNo :cell];
+
+
+
+-(void)CreateBallTickerInstance:(NSString *)content :(BOOL ) isextra: (BOOL) isspecialevent :(NSString *)ballno :(EditModeCell *) cell: (int) currentindex;
 {
-    UIButton *btn_Run = [[UIButton alloc] initWithFrame:CGRectMake(40.0+25,30.0,30.0, 30.0)];
     
+    UIButton *btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((currentindex*40.0)+25,30.0,30.0, 30.0)];
+       // NSString *objeachRunsValue =[eachoverRun objectAtIndex:i];
     [btn_Run setBackgroundColor:[UIColor clearColor]];
     [btn_Run setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btn_Run setTitle:@"1" forState:UIControlStateNormal];
+        
+    [btn_Run setTitle:[NSString stringWithFormat:content] forState:UIControlStateNormal];
+    btn_Run.font=[UIFont fontWithName:@"Rajdhani-Bold" size:10];
+    [btn_Run sizeToFit];
     btn_Run .layer. cornerRadius=15;
     btn_Run.layer.borderWidth=2;
     btn_Run.layer.borderColor= [UIColor redColor].CGColor;
@@ -331,8 +427,8 @@
     {
         btn_Run.layer.borderColor= [UIColor yellowColor].CGColor;
     }
-
-
+    
+    
 }
 
 
