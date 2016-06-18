@@ -11,9 +11,11 @@
 #import "FetchScorecard.h"
 #import "BattingSummaryDetailsForScoreBoard.h"
 #import "BowlingSummaryDetailsForScoreBoard.h"
+#import "CustomNavigationVC.h"
 
-@interface ScoreCardVC ()
-
+@interface ScoreCardVC (){
+ CustomNavigationVC *objCustomNavigation;
+}
 @end
 
 @implementation ScoreCardVC
@@ -31,9 +33,11 @@ int bowlerPostion = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    competitionCode = @"UCC0000004";
-    matchCode = @"IMSC02200224DB2663B00002";
-    inningsNo = @"1";
+     [self customnavigationmethod];
+    
+//    competitionCode = @"UCC0000004";
+//    matchCode = @"IMSC02200224DB2663B00002";
+//    inningsNo = @"1";
     self.matchTypeCode = @"MSC115";
     
     
@@ -65,9 +69,10 @@ int bowlerPostion = 0;
     
 
     
-//    self.btn_tab_fst_inns.constant =400;
+    self.btn_tab_fst_inns.constant =0;
 //    self.btn_tab_second_inns.constant =400;
-//    self.btn_fst_inn_x.constant=400;
+self.btn_fst_inn_x.constant=400;
+    self.btn_fst_inn_width.constant = 400;
 //    self.btn_sec_inn_x.constant=400;
     
 //    
@@ -88,6 +93,21 @@ int bowlerPostion = 0;
     [super didReceiveMemoryWarning];
 }
 
+-(void)customnavigationmethod
+{
+    objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
+    [self.view addSubview:objCustomNavigation.view];
+    objCustomNavigation.lbl_titleName.text=@"";
+    [objCustomNavigation.Btn_Back addTarget:self action:@selector(btn_back:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+}
+
+- (IBAction)btn_back:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 -(void)hideLabelBasedOnMatchType{
     
     

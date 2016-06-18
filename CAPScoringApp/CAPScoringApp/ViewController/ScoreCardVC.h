@@ -118,5 +118,8 @@
 @property(strong,nonatomic)NSString *BBWIC;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btn_fst_inn_x;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btn_sec_inn_x;
+- (IBAction)btn_back:(id)sender;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *btn_fst_inn_width;
+
 
 @end

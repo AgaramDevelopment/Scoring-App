@@ -31,11 +31,11 @@
 #import "InitializeInningsScoreBoardRecord.h"
 #import "AddBreakVC.h"
 #import "EndInnings.h"
-#import "FetchSEPageLoadRecord.h"
-#import "FetchScorecard.h"
+#import "ScoreCardVC.h"
 #import "RightSlideVC.h"
 #import "RevisedTarget.h"
 #import "Reachability.h"
+
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -218,7 +218,6 @@ EndInnings *endInnings;
     //[fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
 //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
-    
     
     
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
@@ -7935,7 +7934,74 @@ EndInnings *endInnings;
 
 
 
-//penality
+- (IBAction)btn_show_scorecard:(id)sender {
+    //ScoreCard
+       ScoreCardVC *scoreCardVC = [[ScoreCardVC alloc]init];
+    
+     scoreCardVC =  (ScoreCardVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"scorecard_sbid"];
+    if(fetchSEPageLoadRecord!=nil){
+        
+       scoreCardVC.BATTEAMWICKETS= fetchSEPageLoadRecord.BATTEAMWICKETS;
+        scoreCardVC.BATTEAMOVERS= fetchSEPageLoadRecord.BATTEAMOVERS;
+       scoreCardVC.BATTEAMOVRBALLS= fetchSEPageLoadRecord.BATTEAMOVRBALLS;
+     //  scoreCardVC.BATTEAMRUNRATE= fetchSEPageLoadRecord.BATTEAMRUNRATE;
+        
+        
+       scoreCardVC.BATTEAMRUNS= fetchSEPageLoadRecord.BATTEAMRUNS;
+        scoreCardVC.RUNSREQUIRED= fetchSEPageLoadRecord.RUNSREQUIRED;
+        
+        
+        scoreCardVC.competitionCode= self.competitionCode;
+        scoreCardVC.matchCode = self.matchCode;
+      
+        scoreCardVC.matchTypeCode;
+        
+        
+        scoreCardVC.inningsNo = fetchSEPageLoadRecord.INNINGSNO;
+       scoreCardVC.BATTEAMSHORTNAME = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+        scoreCardVC.BOWLTEAMSHORTNAME = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
+        
+        
+        
+        
+        scoreCardVC.FIRSTINNINGSTOTAL = fetchSEPageLoadRecord.FIRSTINNINGSTOTAL;
+        scoreCardVC.SECONDINNINGSTOTAL = fetchSEPageLoadRecord.SECONDINNINGSTOTAL;
+        scoreCardVC.THIRDINNINGSTOTAL = fetchSEPageLoadRecord.THIRDINNINGSTOTAL;
+        scoreCardVC.FOURTHINNINGSTOTAL = fetchSEPageLoadRecord.FOURTHINNINGSTOTAL;
+        
+        scoreCardVC.FIRSTINNINGSWICKET = fetchSEPageLoadRecord.FIRSTINNINGSWICKET;
+        scoreCardVC.SECONDINNINGSWICKET = fetchSEPageLoadRecord.SECONDINNINGSWICKET;
+       scoreCardVC.THIRDINNINGSWICKET = fetchSEPageLoadRecord.THIRDINNINGSWICKET;
+        scoreCardVC.FOURTHINNINGSWICKET = fetchSEPageLoadRecord.FOURTHINNINGSWICKET;
+        
+        scoreCardVC.FIRSTINNINGSSCORE = fetchSEPageLoadRecord.FIRSTINNINGSSCORE;
+        scoreCardVC.SECONDINNINGSSCORE = fetchSEPageLoadRecord.SECONDINNINGSSCORE;
+        scoreCardVC.THIRDINNINGSSCORE = fetchSEPageLoadRecord.THIRDINNINGSSCORE;
+        scoreCardVC.FOURTHINNINGSSCORE = fetchSEPageLoadRecord.FOURTHINNINGSSCORE;
+        
+        scoreCardVC.FIRSTINNINGSOVERS = fetchSEPageLoadRecord.FIRSTINNINGSOVERS;
+        scoreCardVC.SECONDINNINGSOVERS = fetchSEPageLoadRecord.SECONDINNINGSOVERS;
+        scoreCardVC.THIRDINNINGSOVERS = fetchSEPageLoadRecord.THIRDINNINGSOVERS;
+        scoreCardVC.FOURTHINNINGSOVERS = fetchSEPageLoadRecord.FOURTHINNINGSOVERS;
+        
+        scoreCardVC.FIRSTINNINGSSHORTNAME = fetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME;
+        scoreCardVC.SECONDINNINGSSHORTNAME = fetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
+        
+        scoreCardVC.THIRDINNINGSSHORTNAME = fetchSEPageLoadRecord.THIRDINNINGSSHORTNAME;
+        scoreCardVC.FOURTHINNINGSSHORTNAME = fetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME;
+        
+       
+    }
+    
+    
+    
+    
+   
+    [self.navigationController pushViewController:scoreCardVC animated:YES];
+    
+    
+    
+}
 
 -(void) penalityview{
     
