@@ -8,7 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+
+
+
+
+
+
 @interface ScorEnginVC : UIViewController<UIGestureRecognizerDelegate>
+
+
 
 @property(nonatomic,strong) NSString *teamAcode;
 @property(nonatomic,strong) NSString *teamBcode;
@@ -17,7 +25,7 @@
 @property(nonatomic,strong) NSString *competitionCode;
 //@property(nonatomic,strong) NSMutableArray * strikerArray;
 //@property(nonatomic,strong) NSMutableArray *non_StrikerArray;
-
+@property(nonatomic,strong) NSString *metadatatypecode;
 
 @property(nonatomic,strong) NSString * BatmenStyle;
 
@@ -265,5 +273,6 @@
 -(BOOL) checkInternetConnection;
 - (IBAction)btn_show_scorecard:(id)sender;
 
+- (IBAction)btn_penality:(id)sender;
 
 @end

@@ -8,7 +8,7 @@
 
 #import "FetchSEPageLoadRecord.h"
 #import "DBManager.h"
-
+#import "AddBreakVC.h"
 @implementation FetchSEPageLoadRecord
 
 @synthesize INNINGSPROGRESS;
