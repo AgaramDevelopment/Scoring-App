@@ -133,6 +133,11 @@
     NSString *strtargetruns;
     NSString *strtargetcomments;
     
+    //
+    NSString *strpenalityruns;
+    
+    PenalityVC *penalityVc;
+    
 }
 
 @property(strong,nonatomic)NSString *matchTypeCode;
@@ -1884,54 +1889,37 @@ EndInnings *endInnings;
     else if(selectBtnTag.tag==110)
     {
         
+                
+                [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
+             if([self.BatmenStyle isEqualToString:@"MSC013"])
+                {
+                    [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
+                }
+            else{
+                    [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapLH"]];
+                }
+                UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickPichmapTapAction:)];
+                tapRecognizer.numberOfTapsRequired = 1;
+                tapRecognizer.numberOfTouchesRequired=1;
+                tapRecognizer.delegate=self;
+                [self.img_pichmap addGestureRecognizer:tapRecognizer];
+                [self.img_pichmap setUserInteractionEnabled:YES];
+        self.PichMapTittle =[[UILabel alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.origin.x-20,self.Allvaluedisplayview.frame.origin.y-75,self.Allvaluedisplayview.frame.size.width, 35)];
+        self.PichMapTittle.text=@"PICHMAP";
+        self.PichMapTittle.font=[UIFont fontWithName:@"RAJDHANI-MEDIUM" size:20];
+        self.PichMapTittle.textColor=[UIColor whiteColor];
+        self.PichMapTittle.textAlignment=NSTextAlignmentCenter;
+        self.PichMapTittle.backgroundColor=[UIColor colorWithRed:(49/255.0f) green:(72/255.0f) blue:(159/255.0f) alpha:1.0f];
+        self.PichMapTittle.hidden=NO;
+        [self.Allvaluedisplayview addSubview:self.PichMapTittle];
         
-        AddBreakVC *add = [[AddBreakVC alloc]initWithNibName:@"AddBreakVC" bundle:nil];
         
-        
-        
-        //vc2 *viewController = [[vc2 alloc]init];
-        [self addChildViewController:add];
-        add.view.frame =CGRectMake(300, 500, add.view.frame.size.width, add.view.frame.size.height);
-        [self.view addSubview:add.view];
-        add.view.alpha = 0;
-        [add didMoveToParentViewController:self];
-        
-        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-         {
-             add.view.alpha = 1;
-         }
-                         completion:nil];
-        
-//                [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
-//             if([self.BatmenStyle isEqualToString:@"MSC013"])
-//                {
-//                    [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
-//                }
-//            else{
-//                    [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapLH"]];
-//                }
-//                UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickPichmapTapAction:)];
-//                tapRecognizer.numberOfTapsRequired = 1;
-//                tapRecognizer.numberOfTouchesRequired=1;
-//                tapRecognizer.delegate=self;
-//                [self.img_pichmap addGestureRecognizer:tapRecognizer];
-//                [self.img_pichmap setUserInteractionEnabled:YES];
-//        self.PichMapTittle =[[UILabel alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.origin.x-20,self.Allvaluedisplayview.frame.origin.y-75,self.Allvaluedisplayview.frame.size.width, 35)];
-//        self.PichMapTittle.text=@"PICHMAP";
-//        self.PichMapTittle.font=[UIFont fontWithName:@"RAJDHANI-MEDIUM" size:20];
-//        self.PichMapTittle.textColor=[UIColor whiteColor];
-//        self.PichMapTittle.textAlignment=NSTextAlignmentCenter;
-//        self.PichMapTittle.backgroundColor=[UIColor colorWithRed:(49/255.0f) green:(72/255.0f) blue:(159/255.0f) alpha:1.0f];
-//        self.PichMapTittle.hidden=NO;
-//        [self.Allvaluedisplayview addSubview:self.PichMapTittle];
-//        
-//        
-//                   _View_Appeal.hidden=YES;
-//                self.view_bowlType.hidden = YES;
-//                self.view_fastBowl.hidden = YES;
-//                self.view_aggressiveShot.hidden = YES;
-//                self.view_defensive.hidden = YES;
-//                self.view_Wagon_wheel.hidden=YES;
+                   _View_Appeal.hidden=YES;
+                self.view_bowlType.hidden = YES;
+                self.view_fastBowl.hidden = YES;
+                self.view_aggressiveShot.hidden = YES;
+                self.view_defensive.hidden = YES;
+                self.view_Wagon_wheel.hidden=YES;
         
         
     }
@@ -7844,102 +7832,182 @@ EndInnings *endInnings;
 //    [self revisedoverview];
 //}
 
-//Revised Target
--(void) revisedtargetview{
+////Revised Target
+//-(void) revisedtargetview{
+//    
+//    RevisedTarget *revisedtargetVc = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
+//    
+//    revisedtargetVc.matchCode =self.matchCode;
+//    revisedtargetVc.competitionCode =self.competitionCode;
+//    
+//    [self.view addSubview:revisedtargetVc.view];
+//    revisedtargetVc.txt_overs.delegate=self;
+//    revisedtargetVc.txt_target.delegate=self;
+//    revisedtargetVc.txt_comments.delegate=self;
+//
+//    [revisedtargetVc.btn_targetok addTarget:self action:@selector(btn_targetok:) forControlEvents:UIControlEventTouchUpInside];
+//}
+//
+//
+//- (IBAction)btn_revisetarget:(id)sender {
+//    [self revisedtargetview ];
+//}
+//
+////Check internet connection
+//- (BOOL)checkInternetConnection
+//{
+//    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+//    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+//    return networkStatus != NotReachable;
+//}
+//
+//- (IBAction)btn_targetok:(id)sender {
+//    
+//    if(self.checkInternetConnection){
+//        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETREVISETARGET/%@/%@/'TEA0000024'/%@/%@/%@/'2'",self.competitionCode,self.matchCode,strtargetruns,strtargetovers,strtargetcomments];
+//        
+//        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//        
+//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//        NSURLResponse *response;
+//        NSError *error;
+//        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//        
+//        
+//        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//        
+//        
+//    }else{
+//        
+//         [DBManager updateRevisedTarget:strtargetovers runs:strtargetruns comments:strtargetcomments matchCode:self.matchCode competitionCode:self.competitionCode];
+//        
+//    }
+//    
+//    
+//    
+//   
+//}
+//
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+//    NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
+//    
+//    if(textField.tag == 23)
+//    {
+//        
+//        if (![string isEqualToString:@""]) {
+//            strtargetovers=[textField.text stringByAppendingString:string];
+//            return YES;
+//            
+//        }
+//    }
+//    else if (textField.tag == 24)
+//    {
+//        if (![string isEqualToString:@""]) {
+//            strtargetruns=[textField.text stringByAppendingString:string];
+//            return YES;
+//        }
+//        } else if (textField.tag == 25)
+//        {
+//            if (![string isEqualToString:@""]) {
+//                strtargetcomments=[textField.text stringByAppendingString:string];
+//                return YES;
+//                
+//            }
+//        
+//    }
+//return YES;
+//}
+//
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+//    NSLog(@"textFieldShouldReturn:");
+//    if (textField.tag == 23) {
+//        UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:3];
+//        [passwordTextField becomeFirstResponder];
+//    }
+//    else if(textField.tag== 24){
+//        [textField resignFirstResponder];
+//    }
+//    else if(textField.tag== 25){
+//        [textField resignFirstResponder];
+//    }
+//    return YES;
+//}
+
+
+
+//penality
+
+-(void) penalityview{
     
-    RevisedTarget *revisedtargetVc = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
-    revisedtargetVc.matchCode =self.matchCode;
-    revisedtargetVc.competitionCode =self.competitionCode;
-    [self.view addSubview:revisedtargetVc.view];
-    revisedtargetVc.txt_overs.delegate=self;
-    revisedtargetVc.txt_target.delegate=self;
-    revisedtargetVc.txt_comments.delegate=self;
-
-    [revisedtargetVc.btn_targetok addTarget:self action:@selector(btn_targetok:) forControlEvents:UIControlEventTouchUpInside];
-}
-- (IBAction)btn_revisetarget:(id)sender {
-    [self revisedtargetview ];
-}
-
-//Check internet connection
-- (BOOL)checkInternetConnection
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-    return networkStatus != NotReachable;
-}
-
-- (IBAction)btn_targetok:(id)sender {
+         penalityVc = [[PenalityVC alloc]initWithNibName:@"PenalityVC" bundle:nil];
     
-    if(self.checkInternetConnection){
-        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETREVISETARGET/%@/%@/'TEA0000024'/%@/%@/%@/'2'",self.competitionCode,self.matchCode,strtargetruns,strtargetovers,strtargetcomments];
-        
-        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSURLResponse *response;
-        NSError *error;
-        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
-        
-        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-        
-        
-    }else{
-        
-         [DBManager updateRevisedTarget:strtargetovers runs:strtargetruns comments:strtargetcomments matchCode:self.matchCode competitionCode:self.competitionCode];
-        
+    penalityVc.matchcode=self.matchCode;
+    penalityVc.competitioncode=self.competitionCode;
+    
+        [self.view addSubview:penalityVc.view];
+    
+    
     }
-    
-    
-    
-   
-}
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
+        NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
     
-    if(textField.tag == 23)
-    {
-        
-        if (![string isEqualToString:@""]) {
-            strtargetovers=[textField.text stringByAppendingString:string];
-            return YES;
-            
-        }
-    }
-    else if (textField.tag == 24)
-    {
-        if (![string isEqualToString:@""]) {
-            strtargetruns=[textField.text stringByAppendingString:string];
-            return YES;
-        }
-        } else if (textField.tag == 25)
+        if(textField.tag == 26)
         {
+    
             if (![string isEqualToString:@""]) {
-                strtargetcomments=[textField.text stringByAppendingString:string];
+                strpenalityruns=[textField.text stringByAppendingString:string];
                 return YES;
-                
+    
             }
-        
-    }
-return YES;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    NSLog(@"textFieldShouldReturn:");
-    if (textField.tag == 23) {
-        UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:3];
-        [passwordTextField becomeFirstResponder];
-    }
-    else if(textField.tag== 24){
-        [textField resignFirstResponder];
-    }
-    else if(textField.tag== 25){
-        [textField resignFirstResponder];
-    }
+        }
+        else
+        {
+          return YES;
+                }
+    
+    
     return YES;
+    }
+    
+    - (BOOL)textFieldShouldReturn:(UITextField *)textField{
+        NSLog(@"textFieldShouldReturn:");
+        if (textField.tag == 23) {
+            UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:3];
+            [passwordTextField becomeFirstResponder];
+        }
+        else {
+            
+         return YES;
+        }
+        return YES;
+    }
+
+//-(IBAction)btn_batting:(id)sender{
+//
+//   // [penalityVc.delegate RightSideEditBtnAction];
+//
+//}
+//
+//
+//
+//-(IBAction)btn_bowling:(id)sender{
+//   
+//    [penalityVc.delegate RightSideEditBtnAction];
+// 
+//}
+//
+//-(IBAction)btn_touch:(id)sender{
+//    [penalityVc.delegate RightSideEditBtnAction];
+//
+//}
+//
+//-(IBAction)btn_submitpenality:(id)sender{
+//    
+//}
+
+- (IBAction)btn_penality:(id)sender {
+    [self penalityview];
+
 }
-
-
 @end
