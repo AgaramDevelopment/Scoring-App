@@ -9094,4 +9094,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     return BOWLEROVERSORDER;
 }
 
++(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
+    return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
+}
 @end

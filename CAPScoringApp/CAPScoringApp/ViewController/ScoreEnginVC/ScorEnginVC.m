@@ -32,9 +32,12 @@
 #import "AddBreakVC.h"
 #import "EndInnings.h"
 #import "ScoreCardVC.h"
+#import "FetchSEPageLoadRecord.h"
+#import "FetchScorecard.h"
 #import "RightSlideVC.h"
 #import "RevisedTarget.h"
 #import "Reachability.h"
+#import "PenalityVC.h"
 
 
 
@@ -218,6 +221,7 @@ EndInnings *endInnings;
     //[fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
 //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+    
     
     
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
