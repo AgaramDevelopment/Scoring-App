@@ -31,10 +31,14 @@
 #import "InitializeInningsScoreBoardRecord.h"
 #import "AddBreakVC.h"
 #import "EndInnings.h"
+#import "ScoreCardVC.h"
+#import "FetchSEPageLoadRecord.h"
 #import "FetchScorecard.h"
 #import "RightSlideVC.h"
 #import "RevisedTarget.h"
 #import "Reachability.h"
+#import "PenalityVC.h"
+
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -132,6 +136,11 @@
     NSString *strtargetruns;
     NSString *strtargetcomments;
     
+    //
+    NSString *strpenalityruns;
+    
+    PenalityVC *penalityVc;
+    
 }
 
 @property(strong,nonatomic)NSString *matchTypeCode;
@@ -209,13 +218,11 @@ EndInnings *endInnings;
    // [self resetBallObject];
     
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    //[fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
 //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
-    //ScoreCard
-    FetchScorecard *fsc = [[FetchScorecard alloc]init];
-    [fsc FetchScoreBoard:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO];
+    
     
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
@@ -7828,102 +7835,249 @@ EndInnings *endInnings;
 //    [self revisedoverview];
 //}
 
-//Revised Target
--(void) revisedtargetview{
+////Revised Target
+//-(void) revisedtargetview{
+//    
+//    RevisedTarget *revisedtargetVc = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
+//    
+//    revisedtargetVc.matchCode =self.matchCode;
+//    revisedtargetVc.competitionCode =self.competitionCode;
+//    
+//    [self.view addSubview:revisedtargetVc.view];
+//    revisedtargetVc.txt_overs.delegate=self;
+//    revisedtargetVc.txt_target.delegate=self;
+//    revisedtargetVc.txt_comments.delegate=self;
+//
+//    [revisedtargetVc.btn_targetok addTarget:self action:@selector(btn_targetok:) forControlEvents:UIControlEventTouchUpInside];
+//}
+//
+//
+//- (IBAction)btn_revisetarget:(id)sender {
+//    [self revisedtargetview ];
+//}
+//
+////Check internet connection
+//- (BOOL)checkInternetConnection
+//{
+//    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+//    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+//    return networkStatus != NotReachable;
+//}
+//
+//- (IBAction)btn_targetok:(id)sender {
+//    
+//    if(self.checkInternetConnection){
+//        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETREVISETARGET/%@/%@/'TEA0000024'/%@/%@/%@/'2'",self.competitionCode,self.matchCode,strtargetruns,strtargetovers,strtargetcomments];
+//        
+//        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//        
+//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//        NSURLResponse *response;
+//        NSError *error;
+//        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//        
+//        
+//        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//        
+//        
+//    }else{
+//        
+//         [DBManager updateRevisedTarget:strtargetovers runs:strtargetruns comments:strtargetcomments matchCode:self.matchCode competitionCode:self.competitionCode];
+//        
+//    }
+//    
+//    
+//    
+//   
+//}
+//
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+//    NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
+//    
+//    if(textField.tag == 23)
+//    {
+//        
+//        if (![string isEqualToString:@""]) {
+//            strtargetovers=[textField.text stringByAppendingString:string];
+//            return YES;
+//            
+//        }
+//    }
+//    else if (textField.tag == 24)
+//    {
+//        if (![string isEqualToString:@""]) {
+//            strtargetruns=[textField.text stringByAppendingString:string];
+//            return YES;
+//        }
+//        } else if (textField.tag == 25)
+//        {
+//            if (![string isEqualToString:@""]) {
+//                strtargetcomments=[textField.text stringByAppendingString:string];
+//                return YES;
+//                
+//            }
+//        
+//    }
+//return YES;
+//}
+//
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+//    NSLog(@"textFieldShouldReturn:");
+//    if (textField.tag == 23) {
+//        UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:3];
+//        [passwordTextField becomeFirstResponder];
+//    }
+//    else if(textField.tag== 24){
+//        [textField resignFirstResponder];
+//    }
+//    else if(textField.tag== 25){
+//        [textField resignFirstResponder];
+//    }
+//    return YES;
+//}
+
+
+
+- (IBAction)btn_show_scorecard:(id)sender {
+    //ScoreCard
+       ScoreCardVC *scoreCardVC = [[ScoreCardVC alloc]init];
     
-    RevisedTarget *revisedtargetVc = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
-    revisedtargetVc.matchCode =self.matchCode;
-    revisedtargetVc.competitionCode =self.competitionCode;
-    [self.view addSubview:revisedtargetVc.view];
-    revisedtargetVc.txt_overs.delegate=self;
-    revisedtargetVc.txt_target.delegate=self;
-    revisedtargetVc.txt_comments.delegate=self;
-
-    [revisedtargetVc.btn_targetok addTarget:self action:@selector(btn_targetok:) forControlEvents:UIControlEventTouchUpInside];
-}
-- (IBAction)btn_revisetarget:(id)sender {
-    [self revisedtargetview ];
-}
-
-//Check internet connection
-- (BOOL)checkInternetConnection
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-    return networkStatus != NotReachable;
-}
-
-- (IBAction)btn_targetok:(id)sender {
-    
-    if(self.checkInternetConnection){
-        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETREVISETARGET/%@/%@/'TEA0000024'/%@/%@/%@/'2'",self.competitionCode,self.matchCode,strtargetruns,strtargetovers,strtargetcomments];
+     scoreCardVC =  (ScoreCardVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"scorecard_sbid"];
+    if(fetchSEPageLoadRecord!=nil){
         
-        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSURLResponse *response;
-        NSError *error;
-        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+       scoreCardVC.BATTEAMWICKETS= fetchSEPageLoadRecord.BATTEAMWICKETS;
+        scoreCardVC.BATTEAMOVERS= fetchSEPageLoadRecord.BATTEAMOVERS;
+       scoreCardVC.BATTEAMOVRBALLS= fetchSEPageLoadRecord.BATTEAMOVRBALLS;
+     //  scoreCardVC.BATTEAMRUNRATE= fetchSEPageLoadRecord.BATTEAMRUNRATE;
         
         
-        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+       scoreCardVC.BATTEAMRUNS= fetchSEPageLoadRecord.BATTEAMRUNS;
+        scoreCardVC.RUNSREQUIRED= fetchSEPageLoadRecord.RUNSREQUIRED;
         
         
-    }else{
+        scoreCardVC.competitionCode= self.competitionCode;
+        scoreCardVC.matchCode = self.matchCode;
+      
+        scoreCardVC.matchTypeCode;
         
-         [DBManager updateRevisedTarget:strtargetovers runs:strtargetruns comments:strtargetcomments matchCode:self.matchCode competitionCode:self.competitionCode];
         
+        scoreCardVC.inningsNo = fetchSEPageLoadRecord.INNINGSNO;
+       scoreCardVC.BATTEAMSHORTNAME = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+        scoreCardVC.BOWLTEAMSHORTNAME = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
+        
+        
+        
+        
+        scoreCardVC.FIRSTINNINGSTOTAL = fetchSEPageLoadRecord.FIRSTINNINGSTOTAL;
+        scoreCardVC.SECONDINNINGSTOTAL = fetchSEPageLoadRecord.SECONDINNINGSTOTAL;
+        scoreCardVC.THIRDINNINGSTOTAL = fetchSEPageLoadRecord.THIRDINNINGSTOTAL;
+        scoreCardVC.FOURTHINNINGSTOTAL = fetchSEPageLoadRecord.FOURTHINNINGSTOTAL;
+        
+        scoreCardVC.FIRSTINNINGSWICKET = fetchSEPageLoadRecord.FIRSTINNINGSWICKET;
+        scoreCardVC.SECONDINNINGSWICKET = fetchSEPageLoadRecord.SECONDINNINGSWICKET;
+       scoreCardVC.THIRDINNINGSWICKET = fetchSEPageLoadRecord.THIRDINNINGSWICKET;
+        scoreCardVC.FOURTHINNINGSWICKET = fetchSEPageLoadRecord.FOURTHINNINGSWICKET;
+        
+        scoreCardVC.FIRSTINNINGSSCORE = fetchSEPageLoadRecord.FIRSTINNINGSSCORE;
+        scoreCardVC.SECONDINNINGSSCORE = fetchSEPageLoadRecord.SECONDINNINGSSCORE;
+        scoreCardVC.THIRDINNINGSSCORE = fetchSEPageLoadRecord.THIRDINNINGSSCORE;
+        scoreCardVC.FOURTHINNINGSSCORE = fetchSEPageLoadRecord.FOURTHINNINGSSCORE;
+        
+        scoreCardVC.FIRSTINNINGSOVERS = fetchSEPageLoadRecord.FIRSTINNINGSOVERS;
+        scoreCardVC.SECONDINNINGSOVERS = fetchSEPageLoadRecord.SECONDINNINGSOVERS;
+        scoreCardVC.THIRDINNINGSOVERS = fetchSEPageLoadRecord.THIRDINNINGSOVERS;
+        scoreCardVC.FOURTHINNINGSOVERS = fetchSEPageLoadRecord.FOURTHINNINGSOVERS;
+        
+        scoreCardVC.FIRSTINNINGSSHORTNAME = fetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME;
+        scoreCardVC.SECONDINNINGSSHORTNAME = fetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
+        
+        scoreCardVC.THIRDINNINGSSHORTNAME = fetchSEPageLoadRecord.THIRDINNINGSSHORTNAME;
+        scoreCardVC.FOURTHINNINGSSHORTNAME = fetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME;
+        
+       
     }
+    
     
     
     
    
+    [self.navigationController pushViewController:scoreCardVC animated:YES];
+    
+    
+    
 }
+
+-(void) penalityview{
+    
+         penalityVc = [[PenalityVC alloc]initWithNibName:@"PenalityVC" bundle:nil];
+    
+    penalityVc.matchcode=self.matchCode;
+    penalityVc.competitioncode=self.competitionCode;
+    
+        [self.view addSubview:penalityVc.view];
+    
+    
+    }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
+        NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
     
-    if(textField.tag == 23)
-    {
-        
-        if (![string isEqualToString:@""]) {
-            strtargetovers=[textField.text stringByAppendingString:string];
-            return YES;
-            
-        }
-    }
-    else if (textField.tag == 24)
-    {
-        if (![string isEqualToString:@""]) {
-            strtargetruns=[textField.text stringByAppendingString:string];
-            return YES;
-        }
-        } else if (textField.tag == 25)
+        if(textField.tag == 26)
         {
+    
             if (![string isEqualToString:@""]) {
-                strtargetcomments=[textField.text stringByAppendingString:string];
+                strpenalityruns=[textField.text stringByAppendingString:string];
                 return YES;
-                
+    
             }
-        
-    }
-return YES;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    NSLog(@"textFieldShouldReturn:");
-    if (textField.tag == 23) {
-        UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:3];
-        [passwordTextField becomeFirstResponder];
-    }
-    else if(textField.tag== 24){
-        [textField resignFirstResponder];
-    }
-    else if(textField.tag== 25){
-        [textField resignFirstResponder];
-    }
+        }
+        else
+        {
+          return YES;
+                }
+    
+    
     return YES;
+    }
+    
+    - (BOOL)textFieldShouldReturn:(UITextField *)textField{
+        NSLog(@"textFieldShouldReturn:");
+        if (textField.tag == 23) {
+            UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:3];
+            [passwordTextField becomeFirstResponder];
+        }
+        else {
+            
+         return YES;
+        }
+        return YES;
+    }
+
+//-(IBAction)btn_batting:(id)sender{
+//
+//   // [penalityVc.delegate RightSideEditBtnAction];
+//
+//}
+//
+//
+//
+//-(IBAction)btn_bowling:(id)sender{
+//   
+//    [penalityVc.delegate RightSideEditBtnAction];
+// 
+//}
+//
+//-(IBAction)btn_touch:(id)sender{
+//    [penalityVc.delegate RightSideEditBtnAction];
+//
+//}
+//
+//-(IBAction)btn_submitpenality:(id)sender{
+//    
+//}
+
+- (IBAction)btn_penality:(id)sender {
+    [self penalityview];
+
 }
-
-
 @end

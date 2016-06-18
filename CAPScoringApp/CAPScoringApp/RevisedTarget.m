@@ -11,7 +11,7 @@
 #import "DBManager.h"
 #import "MatcheventRecord.h"
 
-@interface RevisedTarget ()
+@interface RevisedTarget ()<UITextFieldDelegate>
 @property(nonatomic,strong)NSMutableArray*selecttargets;
 
 @end

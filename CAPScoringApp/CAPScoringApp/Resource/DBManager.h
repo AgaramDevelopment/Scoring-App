@@ -11,6 +11,7 @@
 #import "BallEventRecord.h"
 #import "BowlerEvent.h"
 #import "FieldingFactorRecord.h"
+#import "AddBreakVC.h"
 
 @interface DBManager : NSObject
 //tournament
@@ -274,24 +275,25 @@
 
 
 //SP_INSERTBREAKS
-+(NSString *) GetMatchCodeForInsertBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
++(BOOL) GetMatchCodeForInsertBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 
-+(NSString*) GetCompetitionCodeForInsertBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) ISINCLUDEDURATION:(NSString*) BREAKNO : (NSString*) BREAKCOMMENTS;
 
-+(NSString *) MatchCodeForInsertBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
++(BOOL) GetCompetitionCodeForInsertBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) ISINCLUDEDURATION:(NSString*) BREAKNO:(NSString*) BREAKCOMMENTS;
 
-+(BOOL) InsertInningsBreakEvents:(NSString*) COMPETITIONCODE :(NSString*) INNINGSNO :(NSString*) MATCHCODE :(NSString*) BREAKSTARTTIME :(NSString*) BREAKENDTIME :(NSString*) COMMENTS :(NSString*) BREAKNO :(NSString*) ISINCLUDEDURATION;
++(BOOL) MatchCodeForInsertBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
+
++(BOOL) InsertInningsEvents:(NSString*) COMPETITIONCODE:(NSString*) INNINGSNO:(NSString*) MATCHCODE:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) BREAKCOMMENTS:(NSString*) BREAKNO:(NSString*) ISINCLUDEDURATION;
 
 +(NSMutableArray *) GetBreakDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 
 +(NSString*) GetMaxBreakNoForInsertBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 
 //SP_UPDATEBREAKS
-+(NSString *) GetMatchCodeForUpdateBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
++(BOOL) GetMatchCodeForUpdateBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 
-+(NSString*) GetCompetitionCodeForUpdateBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMMENTS:(NSString*) ISINCLUDEDURATION:(NSString*) BREAKNO;
++(BOOL) GetCompetitionCodeForUpdateBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMMENTS:(NSString*) ISINCLUDEDURATION:(NSString*) BREAKNO;
 
-+(NSString *) GetBreakNoForUpdateBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) BREAKNO;
++(BOOL) GetBreakNoForUpdateBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) BREAKNO;
 
 +(BOOL) UpdateInningsBreakEvents:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMMENTS:(NSString*) ISINCLUDEDURATION : (NSString*) COMPETITIONCODE : (NSString*) MATCHCODE : (NSString*) INNINGSNO : (NSString*) BREAKNO;
 
@@ -496,17 +498,6 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 
 //break
 
-+(NSString *) GetMatchCodeForInsertBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
-
-+(NSString*) GetCompetitionCodeForInsertBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) ISINCLUDEDURATION:(NSString*) BREAKNO;
-
-+(NSString *) MatchCodeForInsertBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
-
-+(BOOL) InsertInningsEvents:(NSString*) COMPETITIONCODE:(NSString*) INNINGSNO:(NSString*) MATCHCODE:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMMENTS:(NSString*) BREAKNO:(NSString*) ISINCLUDEDURATION;
-
-//+(NSMutableArray) GetBreakDetails1:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
-
-+(NSString*) GetMaxBreakNoForInsertBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 
 
 //Revised overs
@@ -516,6 +507,8 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 +(BOOL)updateRevisedTarget:(NSString*)overs runs:(NSString*)runs comments:(NSString*)comments matchCode:(NSString*) matchCode competitionCode:(NSString*)competitionCode;
 +(NSMutableArray *) RetrieveRevisedTargetData:(NSString*)matchcode competitionCode:(NSString*) competitionCode;
 
-+ (NSMutableArray *)getBowlerOversorder :(NSString *) Competitioncode :(NSString *) Matchcode :(NSString *) inningsno;
-
+//penality
++(NSMutableArray *) GetPenaltyReasonForPenalty:(NSString*)metadatatypecode;
++(BOOL) SetPenaltyDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) BALLCODE:(NSString*) PENALTYCODE:(NSString*) AWARDEDTOTEAMCODE:(NSString*) PENALTYRUNS:(NSString*) PENALTYTYPECODE:(NSString*) PENALTYREASONCODE;
++(NSMutableArray *) GetPenaltyDetailsForPageLoadPenalty:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 @end
