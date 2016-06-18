@@ -97,7 +97,7 @@ self.btn_fst_inn_x.constant=400;
 {
     objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
     [self.view addSubview:objCustomNavigation.view];
-    objCustomNavigation.lbl_titleName.text=@" ";
+    objCustomNavigation.lbl_titleName.text=@"";
     [objCustomNavigation.Btn_Back addTarget:self action:@selector(btn_back:) forControlEvents:UIControlEventTouchUpInside];
     
     
