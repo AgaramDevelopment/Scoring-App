@@ -12,6 +12,41 @@
 #import "InningsBowlerDetailsRecord.h"
 #import "EditModeCell.h"
 #import "OversorderRecord.h"
+
+
+//#region Border Brushes
+
+#define runBrushBDR [UIColor colorWithRed:(82.0/255.0f) green:(131.0/255.0f) blue:(174.0/255.0f) alpha:1.0]
+
+#define extrasBrushBDR [UIColor colorWithRed:(255.0/255.0f) green:(77.0/255.0f) blue:(166.0/255.0f) alpha:1.0]
+
+#define fourBrushBDR [UIColor colorWithRed:(1.0/255.0f) green:(126.0/255.0f) blue:(254.0/255.0f) alpha:1.0]
+
+#define sixBrushBDR [UIColor colorWithRed:(148.0/255.0f) green:(52.0/255.0f) blue:(227.0/255.0f) alpha:1.0]
+
+
+#define wicketBrushBDR [UIColor colorWithRed:(251.0/255.0f) green:(53.0/255.0f) blue:(54.0/255.0f) alpha:1.0]
+
+#define wicketBrushBDR [UIColor colorWithRed:(237.0/255.0f) green:(192.0/255.0f) blue:(60.0/255.0f) alpha:1.0]
+
+
+//#endregion
+//
+//#region Background Brushes
+//SolidColorBrush runBrushBG = new SolidColorBrush(Colors.Transparent);
+//SolidColorBrush extrasBrushBG = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF4DA6"));
+//SolidColorBrush fourBrushBG = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#017EFE"));
+//SolidColorBrush sixBrushBG = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#9434E3"));
+//SolidColorBrush wicketBrushBG = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3536"));
+//#endregion
+//
+//#region Foreground Brushes
+//SolidColorBrush brushFGNormal = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5283AE"));
+//SolidColorBrush brushFGSplEvents = new SolidColorBrush(Colors.White);
+
+
+
+
 @interface EditModeVC ()
 {
     CustomNavigationVC * objCustomNavigation;
