@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="srV-8K-Ywy">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -3013,24 +3013,24 @@
                                                     </mask>
                                                     <mask key="constraints">
                                                         <exclude reference="OLc-qz-g3A"/>
-                                                        <exclude reference="9Pn-AP-EtF"/>
-                                                        <exclude reference="RmS-Ic-xxz"/>
-                                                        <exclude reference="ttc-vG-kha"/>
-                                                        <exclude reference="115-Wh-Gv1"/>
-                                                        <exclude reference="CZy-dE-qrv"/>
-                                                        <exclude reference="FOP-9a-JMl"/>
-                                                        <exclude reference="a6v-dW-kZ3"/>
+                                                        <exclude reference="ggT-8c-mgJ"/>
+                                                        <exclude reference="guf-4I-3gO"/>
                                                         <exclude reference="4fV-LK-mfA"/>
                                                         <exclude reference="GaL-LQ-9DL"/>
                                                         <exclude reference="L9p-Oe-Zdh"/>
                                                         <exclude reference="vsJ-U2-Ey2"/>
+                                                        <exclude reference="115-Wh-Gv1"/>
+                                                        <exclude reference="CZy-dE-qrv"/>
+                                                        <exclude reference="FOP-9a-JMl"/>
+                                                        <exclude reference="a6v-dW-kZ3"/>
                                                         <exclude reference="4DS-SU-gwT"/>
                                                         <exclude reference="clw-8Y-Gjh"/>
                                                         <exclude reference="k3V-35-jDV"/>
                                                         <exclude reference="lxA-WP-qxN"/>
                                                         <exclude reference="rhx-03-iZu"/>
-                                                        <exclude reference="ggT-8c-mgJ"/>
-                                                        <exclude reference="guf-4I-3gO"/>
+                                                        <exclude reference="9Pn-AP-EtF"/>
+                                                        <exclude reference="RmS-Ic-xxz"/>
+                                                        <exclude reference="ttc-vG-kha"/>
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=regular">
@@ -3043,24 +3043,24 @@
                                                     </mask>
                                                     <mask key="constraints">
                                                         <include reference="OLc-qz-g3A"/>
-                                                        <include reference="9Pn-AP-EtF"/>
-                                                        <include reference="RmS-Ic-xxz"/>
-                                                        <include reference="ttc-vG-kha"/>
-                                                        <include reference="115-Wh-Gv1"/>
-                                                        <include reference="CZy-dE-qrv"/>
-                                                        <include reference="FOP-9a-JMl"/>
-                                                        <include reference="a6v-dW-kZ3"/>
+                                                        <include reference="ggT-8c-mgJ"/>
+                                                        <include reference="guf-4I-3gO"/>
                                                         <include reference="4fV-LK-mfA"/>
                                                         <include reference="GaL-LQ-9DL"/>
                                                         <include reference="L9p-Oe-Zdh"/>
                                                         <include reference="vsJ-U2-Ey2"/>
+                                                        <include reference="115-Wh-Gv1"/>
+                                                        <include reference="CZy-dE-qrv"/>
+                                                        <include reference="FOP-9a-JMl"/>
+                                                        <include reference="a6v-dW-kZ3"/>
                                                         <include reference="4DS-SU-gwT"/>
                                                         <include reference="clw-8Y-Gjh"/>
                                                         <include reference="k3V-35-jDV"/>
                                                         <include reference="lxA-WP-qxN"/>
                                                         <include reference="rhx-03-iZu"/>
-                                                        <include reference="ggT-8c-mgJ"/>
-                                                        <include reference="guf-4I-3gO"/>
+                                                        <include reference="9Pn-AP-EtF"/>
+                                                        <include reference="RmS-Ic-xxz"/>
+                                                        <include reference="ttc-vG-kha"/>
                                                     </mask>
                                                 </variation>
                                             </view>
@@ -10313,10 +10313,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="Qho-pK-tBa" secondAttribute="bottom" id="0Th-ua-QNx"/>
+                                    <constraint firstAttribute="bottom" secondItem="Qho-pK-tBa" secondAttribute="bottom" id="0Th-ua-QNx">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-110"/>
+                                    </constraint>
                                     <constraint firstAttribute="bottom" secondItem="y02-gY-L0h" secondAttribute="bottom" id="1UO-4l-k4f"/>
                                     <constraint firstItem="fvu-Xw-COH" firstAttribute="top" secondItem="LkB-MC-59t" secondAttribute="top" id="92U-H5-Ep9">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="110"/>
                                     </constraint>
                                     <constraint firstItem="VUs-w9-tAd" firstAttribute="leading" secondItem="fvu-Xw-COH" secondAttribute="leading" id="C12-v0-Ox8"/>
                                     <constraint firstAttribute="trailing" secondItem="Qho-pK-tBa" secondAttribute="trailing" id="HOG-7l-yfF"/>
@@ -10326,14 +10328,14 @@
                                     <constraint firstItem="fvu-Xw-COH" firstAttribute="leading" secondItem="LkB-MC-59t" secondAttribute="leading" id="kbT-uT-L5Y"/>
                                     <constraint firstItem="y02-gY-L0h" firstAttribute="leading" secondItem="fvu-Xw-COH" secondAttribute="leading" id="mjB-JM-x1t"/>
                                     <constraint firstItem="y02-gY-L0h" firstAttribute="top" secondItem="fvu-Xw-COH" secondAttribute="top" id="q3v-6z-xO5">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-15"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-110"/>
                                     </constraint>
                                     <constraint firstItem="Qho-pK-tBa" firstAttribute="top" secondItem="VUs-w9-tAd" secondAttribute="bottom" constant="18" id="rak-HU-Ayf">
                                         <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                     </constraint>
                                     <constraint firstItem="fvu-Xw-COH" firstAttribute="trailing" secondItem="LkB-MC-59t" secondAttribute="trailingMargin" id="uuu-4z-Mj7"/>
                                     <constraint firstItem="VUs-w9-tAd" firstAttribute="centerY" secondItem="y02-gY-L0h" secondAttribute="centerY" id="z2v-aa-44B">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-332.5"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-222.5"/>
                                     </constraint>
                                 </constraints>
                                 <variation key="default">
@@ -10420,6 +10422,7 @@
                     <size key="freeformSize" width="768" height="1024"/>
                     <connections>
                         <outlet property="btn_fourth_inns_id" destination="a9f-Y7-9Lr" id="MCg-aY-yoO"/>
+                        <outlet property="btn_fst_inn_width" destination="xsH-B7-dro" id="dhg-CC-cPH"/>
                         <outlet property="btn_fst_inn_x" destination="KJh-HY-Z3f" id="hc4-R3-VgN"/>
                         <outlet property="btn_fst_inns_id" destination="9RF-h3-3SN" id="6iC-g6-GFm"/>
                         <outlet property="btn_sec_inn_x" destination="gUQ-eK-uKO" id="231-3L-OB8"/>

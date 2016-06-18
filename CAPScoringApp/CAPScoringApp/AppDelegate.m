@@ -22,40 +22,40 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-//    UIViewController *initViewController;
-//    
-//    
-//    
-//   UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    
-//    
-//        BOOL isValiduser = YES;
-//    
-//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//        if([defaults boolForKey:@"isUserLoggedin"]) {
-//            NSLog(@"Loged in");
-//            if([DBManager checkExpiryDate:[defaults objectForKey:@"userCode"]]){
-//    
-//           initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
-//    
-//                isValiduser = NO;
-//            }
-//        }
-//    
-//        if(isValiduser) {
-//            NSLog(@"NOT Loged in");
-//          
-//            initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"login_sbid"];
-//    
-//
-//        }
-//     initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
-//    navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
-//    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-//    navigationController.navigationBarHidden = YES;
-//    _window.rootViewController = navigationController;
-//    //[_window addSubview:navigationController.view];
-//    [self.window makeKeyAndVisible];
+    UIViewController *initViewController;
+    
+    
+    
+   UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    
+        BOOL isValiduser = YES;
+    
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if([defaults boolForKey:@"isUserLoggedin"]) {
+            NSLog(@"Loged in");
+            if([DBManager checkExpiryDate:[defaults objectForKey:@"userCode"]]){
+    
+           initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+    
+                isValiduser = NO;
+            }
+        }
+    
+        if(isValiduser) {
+            NSLog(@"NOT Loged in");
+          
+            initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"login_sbid"];
+    
+
+        }
+     initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+    navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
+    _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    navigationController.navigationBarHidden = YES;
+    _window.rootViewController = navigationController;
+    //[_window addSubview:navigationController.view];
+    [self.window makeKeyAndVisible];
 
     
      
