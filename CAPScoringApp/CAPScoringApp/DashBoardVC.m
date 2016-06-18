@@ -9,6 +9,8 @@
 #import "DashBoardVC.h"
 #import "TorunamentVC.h"
 #import "LoginVC.h"
+#import "EndInnings.h"
+#import "EndInningsVC.h"
 
 
 @interface DashBoardVC ()

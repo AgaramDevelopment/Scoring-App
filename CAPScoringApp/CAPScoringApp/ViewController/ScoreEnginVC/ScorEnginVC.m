@@ -30,7 +30,12 @@
 #import "FetchLastBallBowledPlayer.h"
 #import "InitializeInningsScoreBoardRecord.h"
 #import "AddBreakVC.h"
-
+#import "EndInnings.h"
+#import "FetchSEPageLoadRecord.h"
+#import "FetchScorecard.h"
+#import "RightSlideVC.h"
+#import "RevisedTarget.h"
+#import "Reachability.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -205,13 +210,11 @@ EndInnings *endInnings;
    // [self resetBallObject];
     
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    //[fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
 //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
-    //ScoreCard
-    FetchScorecard *fsc = [[FetchScorecard alloc]init];
-    [fsc FetchScoreBoard:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO];
+    
     
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     

@@ -18,7 +18,7 @@
     NSString *BREAKSTARTTIME;
     NSString *BREAKENDTIME;
     NSString*INNINGSNO;
-    NSString *COMMENTS;
+    NSString *BREAKCOMMENTS;
     NSString *BREAKNO;
     NSString * ISINCLUDEDURATION;
     NSString*COMPETITIONCODE;
@@ -39,9 +39,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-   INNINGSNO= fetchSEPageLoadRecord.INNINGSNO;
-    COMPETITIONCODE=fetchSEPageLoadRecord.COMPETITIONCODE;
-    MATCHCODE=fetchSEPageLoadRecord.MATCHCODE;
+        //fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+//        INNINGSNO= fetchSEPageLoadRecord.INNINGSNO;
+//        COMPETITIONCODE=fetchSEPageLoadRecord.COMPETITIONCODE;
+//   INNINGSNO= fetchSEPageLoadRecord.INNINGSNO;
+//    COMPETITIONCODE=fetchSEPageLoadRecord.COMPETITIONCODE;
+//    MATCHCODE=fetchSEPageLoadRecord.MATCHCODE;
     
      [_datePicker_View setHidden:YES];
     [self.View_BreakStart.layer setBorderWidth:2.0];
@@ -61,6 +64,8 @@
     [self.View_Comments.layer setMasksToBounds:YES];
      NSDate *dateFromString = [[NSDate alloc] init];
         NSDate *dateFromString1 = [[NSDate alloc] init];
+    
+    //[self DurationCalculation1];
 }
 //
 //
@@ -93,7 +98,7 @@ _Text_BreakStart.text=@"";
                     action:@selector(BreakStart:)forControlEvents:UIControlEventValueChanged];
     
   formatter=[[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"dd-MMM-yy hh:mm a "];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:s"];
     //set date too your lable here
    // =[formate stringFromDate:_date_picker.date];
     
@@ -107,7 +112,7 @@ _Text_BreakStart.text=@"";
 {
     NSLog(@"date is %@",_date_picker.date);
     NSDateFormatter *formate=[[NSDateFormatter alloc]init];
-    [formate setDateFormat:@"dd-MMM-yy hh:mm a "];
+    [formate setDateFormat:@"yyyy-MM-dd hh:mm:s"];
     _Text_BreakStart.text=[formate stringFromDate:_date_picker.date];
     BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
     
@@ -128,7 +133,7 @@ _Text_BreakStart.text=@"";
                      action:@selector(BreakEnd:)forControlEvents:UIControlEventValueChanged];
     
     formatter1=[[NSDateFormatter alloc]init];
-    [formatter1 setDateFormat:@"dd-MMM-yy hh:mm a "];
+    [formatter1 setDateFormat:@"yyyy-MM-dd hh:mm:s"];
 
 //
     
@@ -149,6 +154,7 @@ _Text_BreakStart.text=@"";
     double days = timeDifference / 60;
     NSString *Duration = [NSString stringWithFormat:@"%f", days];
     _lbl_Duration.text=[NSString stringWithFormat:@"%@", Duration];
+    
 }
 
 
@@ -156,52 +162,68 @@ _Text_BreakStart.text=@"";
 {
     NSLog(@"date is %@",_date_picker1.date);
     NSDateFormatter *formate=[[NSDateFormatter alloc]init];
-    [formate setDateFormat:@"dd-MMM-yy hh:mm a "];
+    [formate setDateFormat:@"yyyy-MM-dd hh:mm:s"];
     _text_EndBreak.text=[formate stringFromDate:_date_picker1.date];
     BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
     
+    
+   
 }
 
 
 - (IBAction)Switch_minuts:(id)sender {
     
     if([sender isOn]){
-        [ISINCLUDEDURATION isEqual:@"1"];
-        NSLog(@"Switch is ON");
+        
+        NSString *checkoffon=@"1";
+        [checkoffon isEqual:@"1"];
+        ISINCLUDEDURATION=@"1";
+        NSLog(@"Switch is ON 1");
     } else{
-        [ISINCLUDEDURATION isEqual:@"0"];
-        NSLog(@"Switch is OFF");
+        
+        ISINCLUDEDURATION=@"0";
+        NSLog(@"Switch is OFF 0");
     }
 }
 
 - (IBAction)Finish_btn:(id)sender {
+    
      [self DurationCalculation];
-    COMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
-   // [self InsertBreaks];
+    BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
+    MATCHCODE=@"IMSC02214DDA97AF2FD00004";
+    COMPETITIONCODE=@"UCC0000004";
+    INNINGSNO=@"2";
     
+    BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
     
-   //   BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
+    BREAKNO=  [NSString stringWithFormat:@"%d", [BREAKNO integerValue] + 1];
+  
+   
+    [self InsertBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
 
 }
+
+
+
 
 
 
 -(void) InsertBreaks:(NSString *)COMPETITIONCODE:(NSString*)INNINGSNO:(NSString*)MATCHCODE:(NSString*)BREAKSTARTTIME:(NSString*)BREAKENDTIME:(NSString*)COMMENTS:(NSString*)ISINCLUDEDURATION:(NSString*)BREAKNO
 {
     
-    if([DBManager GetMatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE].length !=0)
+    if([DBManager GetMatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE])
     {
-        if([DBManager GetCompetitionCodeForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : ISINCLUDEDURATION : BREAKNO])
+        if(![DBManager GetCompetitionCodeForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : ISINCLUDEDURATION : BREAKNO:BREAKCOMMENTS])
         {
-            if([DBManager MatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE : INNINGSNO])
+            if(![DBManager MatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE : INNINGSNO])
             {
-                [DBManager InsertInningsEvents : COMPETITIONCODE : INNINGSNO : MATCHCODE : BREAKSTARTTIME : BREAKENDTIME : COMMENTS : BREAKNO : ISINCLUDEDURATION];
+                [DBManager InsertInningsEvents : COMPETITIONCODE : INNINGSNO : MATCHCODE : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : BREAKNO : ISINCLUDEDURATION];
             }
         }
     }
     
     NSMutableArray*BreaksArray=[DBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
-    BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+    //BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
 }
 
 - (IBAction)hidepickerbtn:(id)sender {
