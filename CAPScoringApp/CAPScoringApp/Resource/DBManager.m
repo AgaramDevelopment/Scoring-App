@@ -9027,32 +9027,32 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=[[InningsBowlerDetailsRecord alloc]init];
-                objInningsBowlerDetailsRecord.BowlerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                objInningsBowlerDetailsRecord.Playername=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                objInningsBowlerDetailsRecord.BowlerCode=[self getValueByNull:statement :0];
+                objInningsBowlerDetailsRecord.Playername=[self getValueByNull:statement :1];
                 
-                objInningsBowlerDetailsRecord.Striker=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                objInningsBowlerDetailsRecord.nonStriker=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                objInningsBowlerDetailsRecord.Striker=[self getValueByNull:statement :2];
+                objInningsBowlerDetailsRecord.nonStriker=[self getValueByNull:statement :3];
                 objInningsBowlerDetailsRecord.bowlerType=[self getValueByNull:statement :4];
-                objInningsBowlerDetailsRecord.shorType=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
-                objInningsBowlerDetailsRecord.totalRuns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
-                objInningsBowlerDetailsRecord.totalExtras=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-                objInningsBowlerDetailsRecord.OverNo=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                objInningsBowlerDetailsRecord.ballNo=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
-                objInningsBowlerDetailsRecord.BallCount=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
-                objInningsBowlerDetailsRecord.islegalBall=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
-                objInningsBowlerDetailsRecord.isFour=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
-                objInningsBowlerDetailsRecord.isSix=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
-                objInningsBowlerDetailsRecord.Runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
-                objInningsBowlerDetailsRecord.overThrow=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
-                objInningsBowlerDetailsRecord.totalRuns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
-                objInningsBowlerDetailsRecord.Wide=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
-                objInningsBowlerDetailsRecord.noBall=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
-                 objInningsBowlerDetailsRecord.Byes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
-                 objInningsBowlerDetailsRecord.Legbyes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 20)];
-                 objInningsBowlerDetailsRecord.WicketNo=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 21)];
-                 objInningsBowlerDetailsRecord.WicketType=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 22)];
-                 objInningsBowlerDetailsRecord.penaltyRuns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)];
-                 objInningsBowlerDetailsRecord.penaltytypeCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)];
+                objInningsBowlerDetailsRecord.shorType=[self getValueByNull:statement :5];
+                objInningsBowlerDetailsRecord.totalRuns=[self getValueByNull:statement :6];
+                objInningsBowlerDetailsRecord.totalExtras=[self getValueByNull:statement :7];
+                objInningsBowlerDetailsRecord.OverNo=[self getValueByNull:statement :8];
+                objInningsBowlerDetailsRecord.ballNo=[self getValueByNull:statement :9];
+                objInningsBowlerDetailsRecord.BallCount=[self getValueByNull:statement :10];
+                objInningsBowlerDetailsRecord.islegalBall=[self getValueByNull:statement :11];
+                objInningsBowlerDetailsRecord.isFour=[self getValueByNull:statement :12];
+                objInningsBowlerDetailsRecord.isSix=[self getValueByNull:statement :13];
+                objInningsBowlerDetailsRecord.Runs=[self getValueByNull:statement :14];
+                objInningsBowlerDetailsRecord.overThrow=[self getValueByNull:statement :15];
+                objInningsBowlerDetailsRecord.totalRuns=[self getValueByNull:statement :16];
+                objInningsBowlerDetailsRecord.Wide=[self getValueByNull:statement :17];
+                objInningsBowlerDetailsRecord.noBall=[self getValueByNull:statement :18];
+                 objInningsBowlerDetailsRecord.Byes=[self getValueByNull:statement :19];
+                 objInningsBowlerDetailsRecord.Legbyes=[self getValueByNull:statement :20];
+                 objInningsBowlerDetailsRecord.WicketNo=[self getValueByNull:statement :21];
+                 objInningsBowlerDetailsRecord.WicketType=[self getValueByNull:statement :22];
+                 objInningsBowlerDetailsRecord.penaltyRuns=[self getValueByNull:statement :23];
+                 objInningsBowlerDetailsRecord.penaltytypeCode=[self getValueByNull:statement :24];
                 
                 [BOWLERDETAILS addObject:objInningsBowlerDetailsRecord];
             }
