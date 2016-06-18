@@ -29,8 +29,10 @@
 #import "SelectPlayerRecord.h"
 #import "FetchLastBallBowledPlayer.h"
 #import "InitializeInningsScoreBoardRecord.h"
-#import "RevicedOverVC.h"
-#import "FixturesRecord.h"
+#import "AddBreakVC.h"
+#import "EndInnings.h"
+#import "FetchScorecard.h"
+#import "RightSlideVC.h"
 #import "RevisedTarget.h"
 #import "Reachability.h"
 #import "FetchScorecard.h"
@@ -102,6 +104,7 @@
     BOOL isStrickerOpen;
     BOOL isNONStrickerOpen;
     BOOL isBowlerOpen;
+    BOOL leftSlideSwipe;
     
     NSMutableArray *strickerList;
     NSMutableArray *nonStrickerList;
@@ -189,7 +192,7 @@
 
 @property (nonatomic, weak) IBOutlet UIView *objcommonRemarkviews;
 
-
+@property(nonatomic,strong)NSMutableArray *rightSlideArray;
 
 
 @end
@@ -208,17 +211,17 @@
 @synthesize AppealBatsmenArray;
 
 FetchSEPageLoadRecord *fetchSEPageLoadRecord;
+EndInnings *endInnings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
      [self hideLabelBasedOnMatchType];
     
    // [self resetBallObject];
-
-    //Fetch Scroe details
+    
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
-//    
+    
 //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
     //ScoreCard
@@ -226,6 +229,10 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     [fsc FetchScoreBoard:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO];
     
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+    
+    endInnings = [[EndInnings alloc]init];
+    
+[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
     
 //    NSString *data= [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS];
 //    
@@ -331,12 +338,15 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     self.View_Appeal.hidden = YES;
     
     
+    
+    //create Left SideBar
         self.sideBar = [[CDRTranslucentSideBar alloc] init];
-        self.sideBar.sideBarWidth = 200;
+        self.sideBar.sideBarWidth = 300;
         self.sideBar.delegate = self;
+       self.rightSideBar.translucentStyle = UIBarStyleBlack;
         self.sideBar.tag = 0;
     
-    // Create Right SideBar
+     //Create Right SideBar
         self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirectionFromRight:YES];
         self.rightSideBar.delegate = self;
         self.rightSideBar.translucentStyle = UIBarStyleBlack;
@@ -347,26 +357,37 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     [self.view addGestureRecognizer:panGestureRecognizer];
     
     // Create Content of SideBar
-        UITableView *tableView = [[UITableView alloc] init];
-        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-        v.backgroundColor = [UIColor clearColor];
-        [tableView setTableHeaderView:v];
-        [tableView setTableFooterView:v];
+//        UITableView *tableView = [[UITableView alloc] init];
+//        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+//    v.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+//    
+//    
+//        [tableView setTableHeaderView:v];
+//        [tableView setTableFooterView:v];
+//    
+//        //If you create UITableViewController and set datasource or delegate to it, don't forget to add childcontroller to this viewController.
+//        //[[self addChildViewController: @"your view controller"];
+//        tableView.dataSource = self;
+//        tableView.delegate = self;
     
-        //If you create UITableViewController and set datasource or delegate to it, don't forget to add childcontroller to this viewController.
-        //[[self addChildViewController: @"your view controller"];
-        tableView.dataSource = self;
-        tableView.delegate = self;
+    
+    _rightSlideArray = [[NSMutableArray alloc]init];
+    
+    
+    RightSlideVC *rightSideVc = [[RightSlideVC alloc]initWithNibName:@"RightSlideVC" bundle:nil];
+    //[tableView addSubview:rightSideVc.view];
     
         // Set ContentView in SideBar
-        [self.sideBar setContentViewInSideBar:tableView];
-    
+        [self.sideBar setContentViewInSideBar:rightSideVc.view];
+    rightSideVc.rightSlideTableView.delegate = self;
+    rightSideVc.rightSlideTableView.dataSource = self;
     
     _View_Appeal.hidden=YES;
     _view_table_select.hidden=YES;
     _AppealValuesArray=[[NSMutableArray alloc]init];
     _AppealValuesArray =[DBManager AppealRetrieveEventData];
-    
+    _rightSlideArray = rightSideVc.rightSlideArray;
+    leftSlideSwipe = NO;
     
     //OTW and RTW
     _otwRtwArray = [[NSMutableArray alloc]init];
@@ -582,13 +603,16 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
 
 #pragma mark - Gesture Handler
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
-  //   if you have left and right sidebar, you can control the pan gesture by start point.
+     //if you have left and right sidebar, you can control the pan gesture by start point.
         if (recognizer.state == UIGestureRecognizerStateBegan) {
             CGPoint startPoint = [recognizer locationInView:self.view];
     
             // Left SideBar
             if (startPoint.x < self.view.bounds.size.width / 2.0) {
                 self.sideBar.isCurrentPanGestureTarget = YES;
+                leftSlideSwipe = YES;
+                
+                
             }
             // Right SideBar
             else {
@@ -599,7 +623,7 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
         [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
         [self.rightSideBar handlePanGestureToShow:recognizer inViewController:self];
     
-   //  if you have only one sidebar, do like following
+     //if you have only one sidebar, do like following
     
      self.sideBar.isCurrentPanGestureTarget = YES;
     [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
@@ -653,6 +677,11 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if(leftSlideSwipe == YES){
+        return _rightSlideArray.count;
+        
+    }
     
     if(tableView == strickerTableView && fetchSEPageLoadRecord != nil){
         return  strickerList.count;
@@ -753,11 +782,13 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     }
     
     
+    
     return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
@@ -1119,6 +1150,8 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
         cell.textLabel.text =[AppealBatsmenArray objectAtIndex:indexPath.row];
         return cell;
     }
+    
+  
     
     
     return cell;
@@ -1863,6 +1896,7 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     else if(selectBtnTag.tag==110)
     {
         
+                
                 [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
              if([self.BatmenStyle isEqualToString:@"MSC013"])
                 {
@@ -4848,6 +4882,10 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
     CGPathAddLineToPoint(straightLinePath, NULL,self.centerlbl.center.x,self.centerlbl.center.y);
     
+//    CGContextSetFillColorWithColor(UIGraphicsGetCurrentContext(),self.backgroundColor.CGColor);
+//    
+//    CGContextFillRect(UIGraphicsGetCurrentContext(), rect);
+ 
     
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.path = straightLinePath;
@@ -4857,6 +4895,7 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
     shapeLayer.strokeColor = strokeColor.CGColor;
     shapeLayer.lineWidth = 2.0f;
     shapeLayer.fillRule = kCAFillRuleNonZero;
+    
     
     [self.img_WagonWheel.layer addSublayer:shapeLayer];
     

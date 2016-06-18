@@ -31,6 +31,9 @@
                 <outlet property="View_Comments" destination="8gv-et-8c1" id="XI3-e4-C4u"/>
                 <outlet property="View_Duration" destination="NOr-6a-qQM" id="Xhm-dW-z8u"/>
                 <outlet property="View_EndBreak" destination="LUO-Z6-JOi" id="DmN-tb-3sM"/>
+                <outlet property="datePicker_View" destination="rTp-rz-qa0" id="ggQ-jC-ywQ"/>
+                <outlet property="date_picker" destination="2Ji-ua-MD8" id="ali-wY-Nqu"/>
+                <outlet property="date_picker1" destination="tFR-v9-se5" id="8tD-5M-2uS"/>
                 <outlet property="lbl_Duration" destination="Y5n-yS-jXa" id="sUt-so-0o3"/>
                 <outlet property="text_Comments" destination="mow-OJ-6S4" id="vJk-nb-fiu"/>
                 <outlet property="text_EndBreak" destination="j5c-fG-Kaw" id="jwl-23-YSF"/>
@@ -39,7 +42,7 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" restorationIdentifier="Addbreak" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="450" height="500"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -145,12 +148,13 @@
                                 </textField>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A8G-R5-MFT">
                                     <rect key="frame" x="0.0" y="0.0" width="257" height="30"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <connections>
-                                        <action selector="StartBreack_btn:" destination="-1" eventType="touchUpInside" id="zh5-12-kmJ"/>
+                                        <action selector="StartBreack_btn:" destination="-1" eventType="touchUpInside" id="lzj-VO-KvI"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="A8G-R5-MFT" secondAttribute="bottom" id="6h1-eW-LU2"/>
                                 <constraint firstAttribute="width" constant="257" id="En6-WG-oMN"/>
@@ -180,7 +184,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="j5c-fG-Kaw" secondAttribute="trailing" id="2BS-U5-hOi"/>
                                 <constraint firstAttribute="width" constant="257" id="CbC-DJ-kOI"/>
@@ -204,7 +208,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="2GW-zR-bCC"/>
                                 <constraint firstItem="Y5n-yS-jXa" firstAttribute="top" secondItem="NOr-6a-qQM" secondAttribute="top" id="2qL-fn-b2N"/>
@@ -227,7 +231,7 @@
                                     <textInputTraits key="textInputTraits"/>
                                 </textField>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="mow-OJ-6S4" firstAttribute="leading" secondItem="8gv-et-8c1" secondAttribute="leading" id="CIO-Qf-5ia"/>
                                 <constraint firstAttribute="width" constant="257" id="U7J-zs-uW5"/>
@@ -274,12 +278,54 @@
                                 <action selector="Finish_btn:" destination="-1" eventType="touchUpInside" id="3df-u7-ses"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTp-rz-qa0">
+                            <rect key="frame" x="0.0" y="305" width="450" height="195"/>
+                            <subviews>
+                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="2Ji-ua-MD8">
+                                    <rect key="frame" x="0.0" y="39" width="450" height="154"/>
+                                    <date key="date" timeIntervalSinceReferenceDate="487746899.174981">
+                                        <!--2016-06-16 05:14:59 +0000-->
+                                    </date>
+                                </datePicker>
+                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tFR-v9-se5">
+                                    <rect key="frame" x="0.0" y="39" width="450" height="154"/>
+                                    <date key="date" timeIntervalSinceReferenceDate="487765400.97751403">
+                                        <!--2016-06-16 10:23:20 +0000-->
+                                    </date>
+                                </datePicker>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOW-IW-2Ng">
+                                    <rect key="frame" x="405" y="1" width="37" height="36"/>
+                                    <state key="normal" title="Done"/>
+                                    <connections>
+                                        <action selector="hidepickerbtn:" destination="-1" eventType="touchUpInside" id="kg5-hp-N8a"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="tFR-v9-se5" firstAttribute="top" secondItem="VOW-IW-2Ng" secondAttribute="bottom" constant="2" id="A0y-K6-uL9"/>
+                                <constraint firstItem="2Ji-ua-MD8" firstAttribute="leading" secondItem="rTp-rz-qa0" secondAttribute="leading" id="HbB-b6-P74"/>
+                                <constraint firstAttribute="width" constant="450" id="J2n-6D-XVj"/>
+                                <constraint firstAttribute="trailing" secondItem="tFR-v9-se5" secondAttribute="trailing" id="JpD-Rt-6Mp"/>
+                                <constraint firstItem="2Ji-ua-MD8" firstAttribute="top" secondItem="VOW-IW-2Ng" secondAttribute="bottom" constant="2" id="L5c-il-gKu"/>
+                                <constraint firstItem="VOW-IW-2Ng" firstAttribute="top" secondItem="rTp-rz-qa0" secondAttribute="top" constant="1" id="Reu-U3-yZo"/>
+                                <constraint firstItem="tFR-v9-se5" firstAttribute="leading" secondItem="rTp-rz-qa0" secondAttribute="leading" id="e0P-5G-NGi"/>
+                                <constraint firstAttribute="bottom" secondItem="2Ji-ua-MD8" secondAttribute="bottom" constant="2" id="ht8-n3-ibw"/>
+                                <constraint firstItem="2Ji-ua-MD8" firstAttribute="top" secondItem="rTp-rz-qa0" secondAttribute="top" constant="39" id="m6y-PN-tfw"/>
+                                <constraint firstAttribute="trailing" secondItem="2Ji-ua-MD8" secondAttribute="trailing" id="mpw-RM-Gyz"/>
+                                <constraint firstAttribute="bottom" secondItem="tFR-v9-se5" secondAttribute="bottom" constant="2" id="tsA-OY-yJx"/>
+                                <constraint firstAttribute="trailing" secondItem="VOW-IW-2Ng" secondAttribute="trailing" constant="8" id="vUa-fX-IT0"/>
+                                <constraint firstAttribute="height" constant="195" id="zJo-xK-t6a"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.10980392160000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="rTp-rz-qa0" secondAttribute="trailing" id="35i-iy-GgQ"/>
                         <constraint firstItem="QSA-IE-83y" firstAttribute="leading" secondItem="0Sw-mI-hFr" secondAttribute="trailing" constant="2" id="3Tz-Kn-j81"/>
                         <constraint firstItem="LUO-Z6-JOi" firstAttribute="top" secondItem="8FM-L9-ZGa" secondAttribute="bottom" constant="29" id="3qg-pZ-kVG"/>
                         <constraint firstAttribute="bottom" secondItem="hm4-hK-TUm" secondAttribute="bottom" constant="46" id="4Zn-88-9RL"/>
+                        <constraint firstAttribute="bottom" secondItem="rTp-rz-qa0" secondAttribute="bottom" id="69p-ut-QTt"/>
                         <constraint firstItem="vuG-vT-wAc" firstAttribute="top" secondItem="0QR-4Z-bqt" secondAttribute="topMargin" id="9To-Si-EMt"/>
                         <constraint firstAttribute="trailing" secondItem="LUO-Z6-JOi" secondAttribute="trailing" constant="38" id="D8U-ZE-SM0"/>
                         <constraint firstItem="4hv-tp-QSo" firstAttribute="top" secondItem="oxT-Lq-pOP" secondAttribute="bottom" constant="141" id="GYg-uY-eIG"/>
@@ -291,6 +337,7 @@
                         <constraint firstAttribute="trailing" secondItem="oxT-Lq-pOP" secondAttribute="trailing" id="KdF-tf-pkQ"/>
                         <constraint firstItem="4hv-tp-QSo" firstAttribute="leading" secondItem="NOr-6a-qQM" secondAttribute="trailing" constant="7" id="Nl1-ri-1Qt"/>
                         <constraint firstItem="j4J-Zz-pxe" firstAttribute="leading" secondItem="0QR-4Z-bqt" secondAttribute="leading" constant="10" id="Nsq-1s-mHa"/>
+                        <constraint firstItem="rTp-rz-qa0" firstAttribute="leading" secondItem="0QR-4Z-bqt" secondAttribute="leading" id="OQ4-J0-jHN"/>
                         <constraint firstItem="gWb-cH-wOZ" firstAttribute="top" secondItem="omq-fM-tsP" secondAttribute="bottom" constant="30" id="PQw-Po-KcB"/>
                         <constraint firstItem="8FM-L9-ZGa" firstAttribute="top" secondItem="oxT-Lq-pOP" secondAttribute="bottom" constant="18" id="QPg-0e-SMJ"/>
                         <constraint firstItem="M9c-93-tDP" firstAttribute="leading" secondItem="0QR-4Z-bqt" secondAttribute="leading" constant="10" id="SFq-my-tOI"/>

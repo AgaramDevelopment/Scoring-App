@@ -21,7 +21,14 @@
 @property(nonatomic,strong) IBOutlet UIButton *Btn_innings1team2;
 @property(nonatomic,strong) IBOutlet UIButton *Btn_inning2steam1;
 @property(nonatomic,strong) IBOutlet UIButton *Btn_innings2team2;
-
+@property (nonatomic,strong) IBOutlet UITableView * tbl_innnings;
 
 @property(nonatomic,strong) IBOutlet NSLayoutConstraint * highlightbtnxposition;
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint * btn_innings1Widthposition;
+
+
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint * btn_innings2xposition;
+
+
+
 @end
