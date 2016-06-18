@@ -10,6 +10,7 @@
 #import "DBManager.h"
 #import "BallEventRecord.h"
 #import "FetchSEPageLoadRecord.h"
+#import "BreakVC.h"
 //#import "Scor"
 
 @interface AddBreakVC ()
@@ -201,6 +202,12 @@ _Text_BreakStart.text=@"";
    
     [self InsertBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
 
+    
+    
+    
+    
+    
+    
 }
 
 
@@ -224,6 +231,28 @@ _Text_BreakStart.text=@"";
     
     NSMutableArray*BreaksArray=[DBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     //BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+    
+    
+    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
+    
+    add.resultarray=BreaksArray;
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:add];
+    add.view.frame =CGRectMake(100, 100, add.view.frame.size.width, add.view.frame.size.height);
+    [self.view addSubview:add.view];
+    add.view.alpha = 0;
+    [add didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         add.view.alpha = 1;
+     }
+                     completion:nil];
+
+    
+    
+    
 }
 
 - (IBAction)hidepickerbtn:(id)sender {

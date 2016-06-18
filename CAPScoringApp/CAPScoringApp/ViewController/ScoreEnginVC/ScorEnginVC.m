@@ -29,7 +29,8 @@
 #import "SelectPlayerRecord.h"
 #import "FetchLastBallBowledPlayer.h"
 #import "InitializeInningsScoreBoardRecord.h"
-#import "AddBreakVC.h"
+
+#import "intialBreakVC.h"
 #import "EndInnings.h"
 #import "ScoreCardVC.h"
 #import "FetchSEPageLoadRecord.h"
@@ -38,6 +39,7 @@
 #import "RevisedTarget.h"
 #import "Reachability.h"
 #import "PenalityVC.h"
+
 
 
 
@@ -1892,37 +1894,55 @@ EndInnings *endInnings;
     else if(selectBtnTag.tag==110)
     {
         
-                
-                [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
-             if([self.BatmenStyle isEqualToString:@"MSC013"])
-                {
-                    [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
-                }
-            else{
-                    [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapLH"]];
-                }
-                UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickPichmapTapAction:)];
-                tapRecognizer.numberOfTapsRequired = 1;
-                tapRecognizer.numberOfTouchesRequired=1;
-                tapRecognizer.delegate=self;
-                [self.img_pichmap addGestureRecognizer:tapRecognizer];
-                [self.img_pichmap setUserInteractionEnabled:YES];
-        self.PichMapTittle =[[UILabel alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.origin.x-20,self.Allvaluedisplayview.frame.origin.y-75,self.Allvaluedisplayview.frame.size.width, 35)];
-        self.PichMapTittle.text=@"PICHMAP";
-        self.PichMapTittle.font=[UIFont fontWithName:@"RAJDHANI-MEDIUM" size:20];
-        self.PichMapTittle.textColor=[UIColor whiteColor];
-        self.PichMapTittle.textAlignment=NSTextAlignmentCenter;
-        self.PichMapTittle.backgroundColor=[UIColor colorWithRed:(49/255.0f) green:(72/255.0f) blue:(159/255.0f) alpha:1.0f];
-        self.PichMapTittle.hidden=NO;
-        [self.Allvaluedisplayview addSubview:self.PichMapTittle];
+        intialBreakVC *add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
         
         
-                   _View_Appeal.hidden=YES;
-                self.view_bowlType.hidden = YES;
-                self.view_fastBowl.hidden = YES;
-                self.view_aggressiveShot.hidden = YES;
-                self.view_defensive.hidden = YES;
-                self.view_Wagon_wheel.hidden=YES;
+        
+        //vc2 *viewController = [[vc2 alloc]init];
+        [self addChildViewController:add];
+        add.view.frame =CGRectMake(300, 500, add.view.frame.size.width, add.view.frame.size.height);
+        [self.view addSubview:add.view];
+        add.view.alpha = 0;
+        [add didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             add.view.alpha = 1;
+         }
+                         completion:nil];
+
+        
+//                
+//                [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
+//             if([self.BatmenStyle isEqualToString:@"MSC013"])
+//                {
+//                    [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
+//                }
+//            else{
+//                    [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapLH"]];
+//                }
+//                UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickPichmapTapAction:)];
+//                tapRecognizer.numberOfTapsRequired = 1;
+//                tapRecognizer.numberOfTouchesRequired=1;
+//                tapRecognizer.delegate=self;
+//                [self.img_pichmap addGestureRecognizer:tapRecognizer];
+//                [self.img_pichmap setUserInteractionEnabled:YES];
+//        self.PichMapTittle =[[UILabel alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.origin.x-20,self.Allvaluedisplayview.frame.origin.y-75,self.Allvaluedisplayview.frame.size.width, 35)];
+//        self.PichMapTittle.text=@"PICHMAP";
+//        self.PichMapTittle.font=[UIFont fontWithName:@"RAJDHANI-MEDIUM" size:20];
+//        self.PichMapTittle.textColor=[UIColor whiteColor];
+//        self.PichMapTittle.textAlignment=NSTextAlignmentCenter;
+//        self.PichMapTittle.backgroundColor=[UIColor colorWithRed:(49/255.0f) green:(72/255.0f) blue:(159/255.0f) alpha:1.0f];
+//        self.PichMapTittle.hidden=NO;
+//        [self.Allvaluedisplayview addSubview:self.PichMapTittle];
+//        
+//        
+//                   _View_Appeal.hidden=YES;
+//                self.view_bowlType.hidden = YES;
+//                self.view_fastBowl.hidden = YES;
+//                self.view_aggressiveShot.hidden = YES;
+//                self.view_defensive.hidden = YES;
+//                self.view_Wagon_wheel.hidden=YES;
         
         
     }

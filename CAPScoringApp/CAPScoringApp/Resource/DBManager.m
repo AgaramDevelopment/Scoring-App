@@ -6191,7 +6191,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                 [UpdateBreaksArray addObject:record];
             }
             
-        }BreakEventRecords
+        }
     }
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
