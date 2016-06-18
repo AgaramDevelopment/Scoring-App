@@ -34,6 +34,9 @@
 #import "RevisedTarget.h"
 #import "Reachability.h"
 #import "FetchScorecard.h"
+#import "PenalityVC.h"
+
+
 
 
 
@@ -131,6 +134,11 @@
     NSString *strtargetovers;
     NSString *strtargetruns;
     NSString *strtargetcomments;
+    
+    //
+    NSString *strpenalityruns;
+    
+    PenalityVC *penalityVc;
     
 }
 
@@ -7792,102 +7800,182 @@ FetchSEPageLoadRecord *fetchSEPageLoadRecord;
 //    [self revisedoverview];
 //}
 
-//Revised Target
--(void) revisedtargetview{
+////Revised Target
+//-(void) revisedtargetview{
+//    
+//    RevisedTarget *revisedtargetVc = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
+//    
+//    revisedtargetVc.matchCode =self.matchCode;
+//    revisedtargetVc.competitionCode =self.competitionCode;
+//    
+//    [self.view addSubview:revisedtargetVc.view];
+//    revisedtargetVc.txt_overs.delegate=self;
+//    revisedtargetVc.txt_target.delegate=self;
+//    revisedtargetVc.txt_comments.delegate=self;
+//
+//    [revisedtargetVc.btn_targetok addTarget:self action:@selector(btn_targetok:) forControlEvents:UIControlEventTouchUpInside];
+//}
+//
+//
+//- (IBAction)btn_revisetarget:(id)sender {
+//    [self revisedtargetview ];
+//}
+//
+////Check internet connection
+//- (BOOL)checkInternetConnection
+//{
+//    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+//    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+//    return networkStatus != NotReachable;
+//}
+//
+//- (IBAction)btn_targetok:(id)sender {
+//    
+//    if(self.checkInternetConnection){
+//        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETREVISETARGET/%@/%@/'TEA0000024'/%@/%@/%@/'2'",self.competitionCode,self.matchCode,strtargetruns,strtargetovers,strtargetcomments];
+//        
+//        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//        
+//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//        NSURLResponse *response;
+//        NSError *error;
+//        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//        
+//        
+//        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//        
+//        
+//    }else{
+//        
+//         [DBManager updateRevisedTarget:strtargetovers runs:strtargetruns comments:strtargetcomments matchCode:self.matchCode competitionCode:self.competitionCode];
+//        
+//    }
+//    
+//    
+//    
+//   
+//}
+//
+//- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+//    NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
+//    
+//    if(textField.tag == 23)
+//    {
+//        
+//        if (![string isEqualToString:@""]) {
+//            strtargetovers=[textField.text stringByAppendingString:string];
+//            return YES;
+//            
+//        }
+//    }
+//    else if (textField.tag == 24)
+//    {
+//        if (![string isEqualToString:@""]) {
+//            strtargetruns=[textField.text stringByAppendingString:string];
+//            return YES;
+//        }
+//        } else if (textField.tag == 25)
+//        {
+//            if (![string isEqualToString:@""]) {
+//                strtargetcomments=[textField.text stringByAppendingString:string];
+//                return YES;
+//                
+//            }
+//        
+//    }
+//return YES;
+//}
+//
+//- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+//    NSLog(@"textFieldShouldReturn:");
+//    if (textField.tag == 23) {
+//        UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:3];
+//        [passwordTextField becomeFirstResponder];
+//    }
+//    else if(textField.tag== 24){
+//        [textField resignFirstResponder];
+//    }
+//    else if(textField.tag== 25){
+//        [textField resignFirstResponder];
+//    }
+//    return YES;
+//}
+
+
+
+//penality
+
+-(void) penalityview{
     
-    RevisedTarget *revisedtargetVc = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
-    revisedtargetVc.matchCode =self.matchCode;
-    revisedtargetVc.competitionCode =self.competitionCode;
-    [self.view addSubview:revisedtargetVc.view];
-    revisedtargetVc.txt_overs.delegate=self;
-    revisedtargetVc.txt_target.delegate=self;
-    revisedtargetVc.txt_comments.delegate=self;
-
-    [revisedtargetVc.btn_targetok addTarget:self action:@selector(btn_targetok:) forControlEvents:UIControlEventTouchUpInside];
-}
-- (IBAction)btn_revisetarget:(id)sender {
-    [self revisedtargetview ];
-}
-
-//Check internet connection
-- (BOOL)checkInternetConnection
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-    return networkStatus != NotReachable;
-}
-
-- (IBAction)btn_targetok:(id)sender {
+         penalityVc = [[PenalityVC alloc]initWithNibName:@"PenalityVC" bundle:nil];
     
-    if(self.checkInternetConnection){
-        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETREVISETARGET/%@/%@/'TEA0000024'/%@/%@/%@/'2'",self.competitionCode,self.matchCode,strtargetruns,strtargetovers,strtargetcomments];
-        
-        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSURLResponse *response;
-        NSError *error;
-        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
-        
-        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-        
-        
-    }else{
-        
-         [DBManager updateRevisedTarget:strtargetovers runs:strtargetruns comments:strtargetcomments matchCode:self.matchCode competitionCode:self.competitionCode];
-        
+    penalityVc.matchcode=self.matchCode;
+    penalityVc.competitioncode=self.competitionCode;
+    
+        [self.view addSubview:penalityVc.view];
+    
+    
     }
-    
-    
-    
-   
-}
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
-    NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
+        NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
     
-    if(textField.tag == 23)
-    {
-        
-        if (![string isEqualToString:@""]) {
-            strtargetovers=[textField.text stringByAppendingString:string];
-            return YES;
-            
-        }
-    }
-    else if (textField.tag == 24)
-    {
-        if (![string isEqualToString:@""]) {
-            strtargetruns=[textField.text stringByAppendingString:string];
-            return YES;
-        }
-        } else if (textField.tag == 25)
+        if(textField.tag == 26)
         {
+    
             if (![string isEqualToString:@""]) {
-                strtargetcomments=[textField.text stringByAppendingString:string];
+                strpenalityruns=[textField.text stringByAppendingString:string];
                 return YES;
-                
+    
             }
-        
-    }
-return YES;
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
-    NSLog(@"textFieldShouldReturn:");
-    if (textField.tag == 23) {
-        UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:3];
-        [passwordTextField becomeFirstResponder];
-    }
-    else if(textField.tag== 24){
-        [textField resignFirstResponder];
-    }
-    else if(textField.tag== 25){
-        [textField resignFirstResponder];
-    }
+        }
+        else
+        {
+          return YES;
+                }
+    
+    
     return YES;
+    }
+    
+    - (BOOL)textFieldShouldReturn:(UITextField *)textField{
+        NSLog(@"textFieldShouldReturn:");
+        if (textField.tag == 23) {
+            UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:3];
+            [passwordTextField becomeFirstResponder];
+        }
+        else {
+            
+         return YES;
+        }
+        return YES;
+    }
+
+//-(IBAction)btn_batting:(id)sender{
+//
+//   // [penalityVc.delegate RightSideEditBtnAction];
+//
+//}
+//
+//
+//
+//-(IBAction)btn_bowling:(id)sender{
+//   
+//    [penalityVc.delegate RightSideEditBtnAction];
+// 
+//}
+//
+//-(IBAction)btn_touch:(id)sender{
+//    [penalityVc.delegate RightSideEditBtnAction];
+//
+//}
+//
+//-(IBAction)btn_submitpenality:(id)sender{
+//    
+//}
+
+- (IBAction)btn_penality:(id)sender {
+    [self penalityview];
+
 }
-
-
 @end
