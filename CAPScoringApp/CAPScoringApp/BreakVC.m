@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
    
-    self.view.frame =CGRectMake(100,350, [[UIScreen mainScreen] bounds].size.width/2, 500);
+   // self.view.frame =CGRectMake(100,350, [[UIScreen mainScreen] bounds].size.width/2, 500);
     
 
     
@@ -122,13 +122,13 @@
 
 - (IBAction)addbreak_btn:(id)sender {
     
-    UpdateBreakVC *add = [[UpdateBreakVC alloc]initWithNibName:@"UpdateBreakVC" bundle:nil];
+    AddBreakVC *add = [[AddBreakVC alloc]initWithNibName:@"AddBreakVC" bundle:nil];
     
     
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
-    add.view.frame =CGRectMake(300, 500, add.view.frame.size.width, add.view.frame.size.height);
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
     [self.view addSubview:add.view];
     add.view.alpha = 0;
     [add didMoveToParentViewController:self];
@@ -139,6 +139,27 @@
      }
                      completion:nil];
     
+
+}
+- (IBAction)Back_btn:(id)sender {
+    
+    
+    AddBreakVC*add = [[AddBreakVC alloc]initWithNibName:@"AddBreakVC" bundle:nil];
+    
+    
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:add];
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+    [self.view addSubview:add.view];
+    add.view.alpha = 0;
+    [add didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         add.view.alpha = 1;
+     }
+                     completion:nil];
 
 }
 @end

@@ -38,6 +38,7 @@
 - (IBAction)delete_btn:(id)sender;
 
 
+- (IBAction)bck_btn:(id)sender;
 
 - (IBAction)hidepickerbtn:(id)sender;
 @end

@@ -32,7 +32,7 @@
 #import "OversorderRecord.h"
 #import "AddBreakVC.h"
 #import "UpdateBreaksArrayDetails.h"
-
+#import "DeleteEventRecord.h"
 
 @implementation DBManager
 
@@ -6330,7 +6330,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                BreakEventRecords *record=[[BreakEventRecords alloc]init];
+                DeleteEventRecord *record=[[DeleteEventRecord alloc]init];
                 record.BREAKNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.BREAKSTARTTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 record.BREAKENDTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];

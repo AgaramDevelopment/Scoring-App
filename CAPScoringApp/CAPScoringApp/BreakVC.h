@@ -15,6 +15,7 @@
 @property(nonatomic,strong)NSMutableArray*resultarray;
 @property (strong, nonatomic) IBOutlet BreakTableViewCell *GridBreakcell;
 
+- (IBAction)Back_btn:(id)sender;
 @property(strong,nonatomic)NSString*MATCHCODE;
 @property(strong,nonatomic)NSString*COMPETITIONCODE;
 @property(strong,nonatomic)NSString*INNINGSNO;

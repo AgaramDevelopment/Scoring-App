@@ -8,6 +8,7 @@
 
 #import "UpdateBreakVC.h"
 #import "DBManager.h"
+#import "BreakVC.h"
 
 @interface UpdateBreakVC ()
 {
@@ -196,7 +197,22 @@ NSString *DURATION;
 
     
     
+    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
     
+    
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:add];
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+    [self.view addSubview:add.view];
+    add.view.alpha = 0;
+    [add didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         add.view.alpha = 1;
+     }
+                     completion:nil];
     
     
     
@@ -272,5 +288,46 @@ NSString *DURATION;
     BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
     
     [self DeleteBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKCOMMENTS :BREAKNO];
+    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
+    
+    
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:add];
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+    [self.view addSubview:add.view];
+    add.view.alpha = 0;
+    [add didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         add.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
+
+}
+
+- (IBAction)bck_btn:(id)sender {
+    
+    
+    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
+    
+    
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:add];
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+    [self.view addSubview:add.view];
+    add.view.alpha = 0;
+    [add didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         add.view.alpha = 1;
+     }
+                     completion:nil];
+
 }
 @end

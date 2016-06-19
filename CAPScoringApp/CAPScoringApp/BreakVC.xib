@@ -37,6 +37,9 @@
                                             <rect key="frame" x="20" y="7" width="30" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <state key="normal" image="ico-back-btn"/>
+                                            <connections>
+                                                <action selector="Back_btn:" destination="-1" eventType="touchUpInside" id="gxc-dg-4f0"/>
+                                            </connections>
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem key="rightBarButtonItem" style="plain" id="9gh-w2-8GB">
@@ -88,12 +91,13 @@
                                 </navigationItem>
                             </items>
                         </navigationBar>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1eu-Vn-lqc">
-                            <rect key="frame" x="0.0" y="49" width="550" height="551"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1eu-Vn-lqc">
+                            <rect key="frame" x="0.0" y="44" width="550" height="548"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="551" id="0S2-xh-Dwd"/>
+                                <constraint firstAttribute="height" constant="548" id="0S2-xh-Dwd"/>
                             </constraints>
+                            <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="GFo-At-dzt"/>
                                 <outlet property="delegate" destination="-1" id="7fg-mJ-uPD"/>
@@ -103,9 +107,9 @@
                     <color key="backgroundColor" red="0.10980392156862745" green="0.13725490196078433" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="HeA-0X-gRC" firstAttribute="centerX" secondItem="jjX-CP-veN" secondAttribute="centerX" id="GKB-OG-yA2"/>
-                        <constraint firstItem="1eu-Vn-lqc" firstAttribute="top" secondItem="jjX-CP-veN" secondAttribute="top" constant="49" id="Gny-Fy-EDA"/>
+                        <constraint firstItem="1eu-Vn-lqc" firstAttribute="top" secondItem="jjX-CP-veN" secondAttribute="top" constant="44" id="Gny-Fy-EDA"/>
                         <constraint firstItem="HeA-0X-gRC" firstAttribute="leading" secondItem="jjX-CP-veN" secondAttribute="leading" id="YjV-1e-zGQ"/>
-                        <constraint firstAttribute="bottom" secondItem="1eu-Vn-lqc" secondAttribute="bottom" id="iz9-Cb-oeR"/>
+                        <constraint firstAttribute="bottom" secondItem="1eu-Vn-lqc" secondAttribute="bottom" constant="8" id="iz9-Cb-oeR"/>
                         <constraint firstItem="HeA-0X-gRC" firstAttribute="top" secondItem="jjX-CP-veN" secondAttribute="top" id="nlQ-RX-h6U"/>
                         <constraint firstItem="1eu-Vn-lqc" firstAttribute="leading" secondItem="jjX-CP-veN" secondAttribute="leading" id="qX9-GB-z07"/>
                         <constraint firstAttribute="trailing" secondItem="HeA-0X-gRC" secondAttribute="trailing" id="smp-sl-woy"/>

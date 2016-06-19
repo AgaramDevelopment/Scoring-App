@@ -11,6 +11,7 @@
 #import "BallEventRecord.h"
 #import "FetchSEPageLoadRecord.h"
 #import "BreakVC.h"
+#import "intialBreakVC.h"
 //#import "Scor"
 
 @interface AddBreakVC ()
@@ -243,7 +244,7 @@ _Text_BreakStart.text=@"";
     add.INNINGSNO=INNINGSNO;
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
-    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width-50, add.view.frame.size.height);
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
     [self.view addSubview:add.view];
     add.view.alpha = 0;
     [add didMoveToParentViewController:self];
@@ -262,6 +263,27 @@ _Text_BreakStart.text=@"";
 - (IBAction)hidepickerbtn:(id)sender {
     
       [_datePicker_View setHidden:YES];
+}
+
+- (IBAction)back_btn:(id)sender {
+    
+    
+    intialBreakVC*add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
+    
+    
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:add];
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+    [self.view addSubview:add.view];
+    add.view.alpha = 0;
+    [add didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         add.view.alpha = 1;
+     }
+                     completion:nil];
 }
 
 
