@@ -378,6 +378,7 @@
 }
 
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
+    
 	if (!self.isCurrentPanGestureTarget) {
 		return;
 	}

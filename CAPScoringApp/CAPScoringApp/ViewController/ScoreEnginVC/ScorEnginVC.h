@@ -8,15 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-
-
-
-
-
-
 @interface ScorEnginVC : UIViewController<UIGestureRecognizerDelegate>
 
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint * sideviewXposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewXposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewwidthposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * CommonviewRightsideposition;
 
+@property (nonatomic,strong) IBOutlet UITableView * sideviewtable;
 
 @property(nonatomic,strong) NSString *teamAcode;
 @property(nonatomic,strong) NSString *teamBcode;

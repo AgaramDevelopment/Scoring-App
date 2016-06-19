@@ -39,6 +39,7 @@
 #import "RevisedTarget.h"
 #import "Reachability.h"
 #import "PenalityVC.h"
+#import "FetchLastBowler.h"
 
 
 
@@ -71,6 +72,8 @@
     NSArray*AppealBatsmenSelectCode;
     
     
+    //Remark
+    NSString *remarks;
     
     NSMutableArray *Btn_NameArray;
     BOOL isSelectleftview;
@@ -142,7 +145,8 @@
     NSString *strpenalityruns;
     
     PenalityVC *penalityVc;
-    
+    UISwipeGestureRecognizer *RightsideGesture;
+    UISwipeGestureRecognizer *LeftsideGesture;
 }
 
 @property(strong,nonatomic)NSString *matchTypeCode;
@@ -220,17 +224,23 @@ EndInnings *endInnings;
    // [self resetBallObject];
     
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-    //[fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
 //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
+    FetchLastBowler *fetchLastBowler = [[FetchLastBowler alloc]init];
     
     
+    
+    [fetchLastBowler LastBowlerDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS] :[NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT]];
+   
+     
+     
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
     endInnings = [[EndInnings alloc]init];
     
-[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
+//[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
     
 //    NSString *data= [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS];
 //    
@@ -335,24 +345,38 @@ EndInnings *endInnings;
     
     self.View_Appeal.hidden = YES;
     
+  
     
+    RightsideGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFromRightside:)];
+    [RightsideGesture setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.view addGestureRecognizer:RightsideGesture];
     
-    //create Left SideBar
-        self.sideBar = [[CDRTranslucentSideBar alloc] init];
-        self.sideBar.sideBarWidth = 300;
-        self.sideBar.delegate = self;
-       self.rightSideBar.translucentStyle = UIBarStyleBlack;
-        self.sideBar.tag = 0;
+    LeftsideGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFromLeftside:)];
+    [LeftsideGesture setDirection:UISwipeGestureRecognizerDirectionRight];
+    [self.view addGestureRecognizer:LeftsideGesture];
+   
+
     
-     //Create Right SideBar
-        self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirectionFromRight:YES];
-        self.rightSideBar.delegate = self;
-        self.rightSideBar.translucentStyle = UIBarStyleBlack;
-        self.rightSideBar.tag = 1;
+//    //create Left SideBar
+//        self.sideBar = [[CDRTranslucentSideBar alloc] init];
+//        self.sideBar.sideBarWidth = 300;
+//        self.sideBar.delegate = self;
+//       self.rightSideBar.translucentStyle = UIBarStyleBlack;
+//        self.sideBar.tag = 0;
+//    
+//     //Create Right SideBar
+//        self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirectionFromRight:YES];
+//        self.rightSideBar.delegate = self;
+//        self.rightSideBar.translucentStyle = UIBarStyleBlack;
+//        self.rightSideBar.tag = 1;
     
     // Add PanGesture to Show SideBar by PanGesture
-    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-    [self.view addGestureRecognizer:panGestureRecognizer];
+//    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
+//    [self.view addGestureRecognizer:panGestureRecognizer];
+    self.sideviewXposition.constant =-300;
+    self.commonViewXposition.constant=0;
+    self.commonViewwidthposition.constant =self.view.frame.size.width;
+    
     
     // Create Content of SideBar
 //        UITableView *tableView = [[UITableView alloc] init];
@@ -369,22 +393,22 @@ EndInnings *endInnings;
 //        tableView.delegate = self;
     
     
-    _rightSlideArray = [[NSMutableArray alloc]init];
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"break",@"ChangeTeam",@"EndInnings",@"OverWicket", nil];
     
     
-    RightSlideVC *rightSideVc = [[RightSlideVC alloc]initWithNibName:@"RightSlideVC" bundle:nil];
+   // RightSlideVC *rightSideVc = [[RightSlideVC alloc]initWithNibName:@"RightSlideVC" bundle:nil];
     //[tableView addSubview:rightSideVc.view];
     
         // Set ContentView in SideBar
-        [self.sideBar setContentViewInSideBar:rightSideVc.view];
-    rightSideVc.rightSlideTableView.delegate = self;
-    rightSideVc.rightSlideTableView.dataSource = self;
+       // [self.sideBar setContentViewInSideBar:rightSideVc.view];
+    //rightSideVc.rightSlideTableView.delegate = self;
+    //rightSideVc.rightSlideTableView.dataSource = self;
     
     _View_Appeal.hidden=YES;
     _view_table_select.hidden=YES;
     _AppealValuesArray=[[NSMutableArray alloc]init];
     _AppealValuesArray =[DBManager AppealRetrieveEventData];
-    _rightSlideArray = rightSideVc.rightSlideArray;
+    //_rightSlideArray = rightSideVc.rightSlideArray;
     leftSlideSwipe = NO;
     
     //OTW and RTW
@@ -600,73 +624,114 @@ EndInnings *endInnings;
 
 
 #pragma mark - Gesture Handler
+
+- (void)handleSwipeFromRightside:(UIPanGestureRecognizer *)recognizer
+{
+    self.sideviewXposition.constant =-300;
+    self.commonViewXposition.constant=0;
+    self.commonViewwidthposition.constant =self.view.frame.size.width;
+    leftSlideSwipe = NO;
+    }
+- (void)handleSwipeFromLeftside:(UIPanGestureRecognizer *)recognizer
+{
+    
+    self.sideviewXposition.constant =0;
+    self.commonViewXposition.constant=300;
+    self.commonViewwidthposition.constant =768;
+    self.CommonviewRightsideposition.constant =self.view.frame.size.width+300;
+    leftSlideSwipe = YES;
+    [self.sideviewtable reloadData];
+    
+    
+    
+}
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
+   
+    if(leftSlideSwipe ==NO)
+    {
+        self.sideviewXposition.constant =0;
+        self.commonViewXposition.constant=300;
+        self.commonViewwidthposition.constant =768;
+        self.CommonviewRightsideposition.constant =self.view.frame.size.width+300;
+         leftSlideSwipe = YES;
+    }
+    else{
+        self.sideviewXposition.constant =-300;
+        self.commonViewXposition.constant=0;
+        self.commonViewwidthposition.constant =self.view.frame.size.width;
+         leftSlideSwipe = NO;
+    }
+    
      //if you have left and right sidebar, you can control the pan gesture by start point.
-        if (recognizer.state == UIGestureRecognizerStateBegan) {
-            CGPoint startPoint = [recognizer locationInView:self.view];
-    
-            // Left SideBar
-            if (startPoint.x < self.view.bounds.size.width / 2.0) {
-                self.sideBar.isCurrentPanGestureTarget = YES;
-                leftSlideSwipe = YES;
-                
-                
-            }
-            // Right SideBar
-            else {
-                self.rightSideBar.isCurrentPanGestureTarget = YES;
-            }
-        }
-    
-        [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
-        [self.rightSideBar handlePanGestureToShow:recognizer inViewController:self];
-    
-     //if you have only one sidebar, do like following
-    
-     self.sideBar.isCurrentPanGestureTarget = YES;
-    [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
+//        if (recognizer.state == UIGestureRecognizerStateBegan) {
+//            CGPoint startPoint = [recognizer locationInView:self.view];
+//    
+//            // Left SideBar
+//            if (startPoint.x < self.view.bounds.size.width / 2.0) {
+//                self.sideBar.isCurrentPanGestureTarget = YES;
+////                self.sideviewXposition.constant =0;
+////                self.commonViewXposition.constant=300;
+////                self.commonViewwidthposition.constant =768;
+////                self.CommonviewRightsideposition.constant =self.view.frame.size.width+300;
+//                leftSlideSwipe = YES;
+//                
+//                
+//            }
+//            // Right SideBar
+//            else {
+//                self.rightSideBar.isCurrentPanGestureTarget = YES;
+//            }
+//        }
+//    
+//        [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
+//        [self.rightSideBar handlePanGestureToShow:recognizer inViewController:self];
+//    
+//     //if you have only one sidebar, do like following
+//    
+//     self.sideBar.isCurrentPanGestureTarget = YES;
+//    [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
 }
 
-#pragma mark - CDRTranslucentSideBarDelegate
-- (void)sideBar:(CDRTranslucentSideBar *)sideBar didAppear:(BOOL)animated {
-    if (sideBar.tag == 0) {
-        NSLog(@"Left SideBar did appear");
-    }
-    
-    if (sideBar.tag == 1) {
-        NSLog(@"Right SideBar did appear");
-    }
-}
-
-- (void)sideBar:(CDRTranslucentSideBar *)sideBar willAppear:(BOOL)animated {
-    if (sideBar.tag == 0) {
-        NSLog(@"Left SideBar will appear");
-    }
-    
-    if (sideBar.tag == 1) {
-        NSLog(@"Right SideBar will appear");
-    }
-}
-
-- (void)sideBar:(CDRTranslucentSideBar *)sideBar didDisappear:(BOOL)animated {
-    if (sideBar.tag == 0) {
-        NSLog(@"Left SideBar did disappear");
-    }
-    
-    if (sideBar.tag == 1) {
-        NSLog(@"Right SideBar did disappear");
-    }
-}
-
-- (void)sideBar:(CDRTranslucentSideBar *)sideBar willDisappear:(BOOL)animated {
-    if (sideBar.tag == 0) {
-        NSLog(@"Left SideBar will disappear");
-    }
-    
-    if (sideBar.tag == 1) {
-        NSLog(@"Right SideBar will disappear");
-    }
-}
+//#pragma mark - CDRTranslucentSideBarDelegate
+//- (void)sideBar:(CDRTranslucentSideBar *)sideBar didAppear:(BOOL)animated {
+//    if (sideBar.tag == 0) {
+//        NSLog(@"Left SideBar did appear");
+//    }
+//    
+//    if (sideBar.tag == 1) {
+//        NSLog(@"Right SideBar did appear");
+//    }
+//}
+//
+//- (void)sideBar:(CDRTranslucentSideBar *)sideBar willAppear:(BOOL)animated {
+//    if (sideBar.tag == 0) {
+//        NSLog(@"Left SideBar will appear");
+//    }
+//    
+//    if (sideBar.tag == 1) {
+//        NSLog(@"Right SideBar will appear");
+//    }
+//}
+//
+//- (void)sideBar:(CDRTranslucentSideBar *)sideBar didDisappear:(BOOL)animated {
+//    if (sideBar.tag == 0) {
+//        NSLog(@"Left SideBar did disappear");
+//    }
+//    
+//    if (sideBar.tag == 1) {
+//        NSLog(@"Right SideBar did disappear");
+//    }
+//}
+//
+//- (void)sideBar:(CDRTranslucentSideBar *)sideBar willDisappear:(BOOL)animated {
+//    if (sideBar.tag == 0) {
+//        NSLog(@"Left SideBar will disappear");
+//    }
+//    
+//    if (sideBar.tag == 1) {
+//        NSLog(@"Right SideBar will disappear");
+//    }
+//}
 
 // This is just a sample for tableview menu
 #pragma mark - UITableViewDataSource
@@ -785,6 +850,8 @@ EndInnings *endInnings;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     
@@ -946,6 +1013,13 @@ EndInnings *endInnings;
         
         
     }
+    if(tableView == self.sideviewtable)
+    {
+         cell.textLabel.text = [self.rightSlideArray objectAtIndex:indexPath.row];
+        cell.textLabel.textColor=[UIColor blackColor];
+        return cell;
+    }
+    
     if(tableView == extrasTableView){
         cell.textLabel.text = [self.extrasOptionArray objectAtIndex:indexPath.row];
     }else if(tableView == overThrowTableView){
@@ -3010,40 +3084,46 @@ EndInnings *endInnings;
 
 -(void)RemarkMethode
 {
-    UIView *objcommonRemarkview=[[UIView alloc]initWithFrame:CGRectMake(self.Allvaluedisplayview.frame.origin.x-110,self.Allvaluedisplayview.frame.origin.y+50, self.Allvaluedisplayview.frame.size.width-100, 200)];
-    [objcommonRemarkview setBackgroundColor:[UIColor grayColor]];
-    UITextView *txt_Remark=[[UITextView alloc]initWithFrame:CGRectMake(objcommonRemarkview.frame.origin.x-30,objcommonRemarkview.frame.origin.y-110, objcommonRemarkview.frame.size.width-40,120)];
-    [txt_Remark setBackgroundColor:[UIColor whiteColor]];
+    self.objcommonRemarkview=[[UIView alloc]initWithFrame:CGRectMake(self.Allvaluedisplayview.frame.origin.x-110,self.Allvaluedisplayview.frame.origin.y+50, self.Allvaluedisplayview.frame.size.width-100, 200)];
+    [self.objcommonRemarkview setBackgroundColor:[UIColor grayColor]];
+    self.txt_Remark=[[UITextView alloc]initWithFrame:CGRectMake(self.objcommonRemarkview.frame.origin.x-30,self.objcommonRemarkview.frame.origin.y-110, self.objcommonRemarkview.frame.size.width-40,120)];
+    [_txt_Remark setBackgroundColor:[UIColor whiteColor]];
     
-    [objcommonRemarkview addSubview:txt_Remark];
+    [self.objcommonRemarkview addSubview:_txt_Remark];
     
-    [self.Allvaluedisplayview addSubview:objcommonRemarkview];
+    [self.Allvaluedisplayview addSubview:self.objcommonRemarkview];
+    
+    
+    if(self.ballEventRecord.objRemark!=nil){
+        self.txt_Remark.text = self.ballEventRecord.objRemark;
+    }
     
     
     
-    UIButton *btn_save=[[UIButton alloc]initWithFrame:CGRectMake(objcommonRemarkview.frame.origin.x-10,objcommonRemarkview.frame.size.height-50,50,50)];
+    UIButton *btn_save=[[UIButton alloc]initWithFrame:CGRectMake(self.objcommonRemarkview.frame.origin.x-10,self.objcommonRemarkview.frame.size.height-50,50,50)];
     //[btn_save setBackgroundColor:[UIColor whiteColor]];
     [btn_save setTitle:@"Save" forState:UIControlStateNormal];
     [btn_save addTarget:self action:@selector(didClickRemarkSave_Action:) forControlEvents:UIControlEventTouchUpInside];
-    [objcommonRemarkview addSubview:btn_save];
-    
-    UIButton *btn_Cancel=[[UIButton alloc]initWithFrame:CGRectMake(objcommonRemarkview.frame.size.width-90,objcommonRemarkview.frame.size.height-50,60,50)];
+    [self.objcommonRemarkview addSubview:btn_save];
+    self.objcommonRemarkview.hidden=NO;
+    UIButton *btn_Cancel=[[UIButton alloc]initWithFrame:CGRectMake(self.objcommonRemarkview.frame.size.width-90,self.objcommonRemarkview.frame.size.height-50,60,50)];
     [btn_Cancel setTitle:@"Cancel" forState:UIControlStateNormal];
     //[btn_Cancel setBackgroundColor:[UIColor whiteColor]];
     [btn_Cancel addTarget:self action:@selector(didClickRemarkCancel_Action:) forControlEvents:UIControlEventTouchUpInside];
-    [objcommonRemarkview addSubview:btn_Cancel];
-     btn_Cancel.userInteractionEnabled=YES;
-    
+    [self.objcommonRemarkview addSubview:btn_Cancel];
+    btn_Cancel.userInteractionEnabled=YES;
 }
-
 -(IBAction)didClickRemarkSave_Action:(id)sender
 {
     
+    self.ballEventRecord.objRemark=self.txt_Remark.text;
+    NSLog(@"remarks : %@",remarks);
+    self.objcommonRemarkview.hidden=YES;
 }
 -(IBAction)didClickRemarkCancel_Action:(id)sender
 {
- 
-    [[self.view viewWithTag:120] setHidden:YES];
+    
+    self.objcommonRemarkview.hidden=YES;
 }
 
 -(void)selectBtncolor_Action:(NSString*)select_Btntag :(UIButton *)select_BtnName :(NSInteger)selectview
@@ -3774,7 +3854,11 @@ EndInnings *endInnings;
     
     
     _view_table_select.hidden=NO;
-    
+    if(leftSlideSwipe == YES){
+        
+       
+        
+    }
     
     if (tableView == self.table_AppealSystem)
     {
