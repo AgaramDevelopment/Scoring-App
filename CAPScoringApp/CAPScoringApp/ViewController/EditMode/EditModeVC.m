@@ -14,45 +14,13 @@
 #import "OversorderRecord.h"
 
 
-//#region Border Brushes
-
-#define runBrushBDR [UIColor colorWithRed:(82.0/255.0f) green:(131.0/255.0f) blue:(174.0/255.0f) alpha:1.0]
-
-#define extrasBrushBDR [UIColor colorWithRed:(255.0/255.0f) green:(77.0/255.0f) blue:(166.0/255.0f) alpha:1.0]
-
-#define fourBrushBDR [UIColor colorWithRed:(1.0/255.0f) green:(126.0/255.0f) blue:(254.0/255.0f) alpha:1.0]
-
-#define sixBrushBDR [UIColor colorWithRed:(148.0/255.0f) green:(52.0/255.0f) blue:(227.0/255.0f) alpha:1.0]
-
-
-#define wicketBrushBDR [UIColor colorWithRed:(251.0/255.0f) green:(53.0/255.0f) blue:(54.0/255.0f) alpha:1.0]
-
-#define wicketBrushBDR [UIColor colorWithRed:(237.0/255.0f) green:(192.0/255.0f) blue:(60.0/255.0f) alpha:1.0]
-
-
-//#endregion
-//
-//#region Background Brushes
-//SolidColorBrush runBrushBG = new SolidColorBrush(Colors.Transparent);
-//SolidColorBrush extrasBrushBG = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF4DA6"));
-//SolidColorBrush fourBrushBG = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#017EFE"));
-//SolidColorBrush sixBrushBG = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#9434E3"));
-//SolidColorBrush wicketBrushBG = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FB3536"));
-//#endregion
-//
-//#region Foreground Brushes
-//SolidColorBrush brushFGNormal = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5283AE"));
-//SolidColorBrush brushFGSplEvents = new SolidColorBrush(Colors.White);
-
-
-
 
 @interface EditModeVC ()
 {
     CustomNavigationVC * objCustomNavigation;
     NSMutableArray* inningsDetail;
     NSMutableArray * OversorderArray;
-    BOOL isFirsttime;
+    
     UIView * view_addedit;
     int  totalRun;
     NSMutableArray * objoverballCount;
@@ -78,10 +46,25 @@
     [self customnavigationmethod];
     inningsDetail =[[NSMutableArray alloc]init];
     OversorderArray =[[NSMutableArray alloc]init];
+    //CGFloat totalwidth =1200;
+   
+    [self.view layoutIfNeeded];
     
-     OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+    self.Btn_innings1team1.frame= CGRectMake(self.Btn_innings1team1.frame.origin.x, self.Btn_innings1team1.frame.origin.y, 400, self.Btn_innings1team1.frame.size.height);
+    
+    
+    //self.inningsviewWidth.constant =totalwidth;
+    //self.btn_innings1Widthposition.constant=400;
+    //self.btn_innings2xposition.constant     =self.btn_innings1Widthposition.constant+10;
+    // self.inningButtonView.constant = totalwidth;
+    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
-    isFirsttime=NO;
+    
+    if ([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] ||
+        [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) {
+       // self.btn_third_inns_id.hidden = YES;
+       // self.btn_fourth_inns_id.hidden = YES;
+    }
     // Do any additional setup after loading the view.
 }
 -(void)customnavigationmethod
@@ -172,7 +155,7 @@
             {
                 
                 
-        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake((j*40.0)+28,65.0, 30.0, 15.0)];
+        UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake((j*40.0)+5,30.0, 30.0, 15.0)];
        [nameLabel setBackgroundColor:[UIColor clearColor]]; // transparent label background
         [nameLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
                 nameLabel.textAlignment=NSTextAlignmentCenter;
@@ -417,7 +400,7 @@
 -(void)CreateBallTickerInstance:(NSString *)content :(BOOL ) isextra: (BOOL) isspecialevent :(NSString *)ballno :(EditModeCell *) cell: (int) currentindex;
 {
     
-    UIButton *btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((currentindex*40.0)+25,30.0,30.0, 30.0)];
+    UIButton *btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((currentindex*40.0)+5,2.0,33.0, 35.0)];
        // NSString *objeachRunsValue =[eachoverRun objectAtIndex:i];
     [btn_Run setBackgroundColor:[UIColor clearColor]];
     [btn_Run setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -425,7 +408,7 @@
     [btn_Run setTitle:[NSString stringWithFormat:content] forState:UIControlStateNormal];
     btn_Run.font=[UIFont fontWithName:@"Rajdhani-Bold" size:10];
     [btn_Run sizeToFit];
-    btn_Run .layer. cornerRadius=15;
+    btn_Run .layer. cornerRadius=11;
     btn_Run.layer.borderWidth=2;
     btn_Run.layer.borderColor= [UIColor redColor].CGColor;
     btn_Run.layer.masksToBounds=YES;
@@ -447,20 +430,25 @@
     
     if([content isEqualToString:@"4"])
     {
-         btn_Run.layer.borderColor= [UIColor whiteColor].CGColor;
+         [btn_Run setBackgroundColor:[UIColor colorWithRed:(0.0/255.0f) green:(176.0/255.0f) blue:(191.0/255.0f) alpha:1.0f]];
+         btn_Run.layer.borderColor= [UIColor clearColor].CGColor;
     }
     else if([content isEqualToString :@"6" ])
     {
-         btn_Run.layer.borderColor= [UIColor greenColor].CGColor;
+        [btn_Run setBackgroundColor: [UIColor colorWithRed:(0.0/255.0f) green:(161.0/255.0f) blue:(90.0/255.0f) alpha:1.0f]];
+
+         btn_Run.layer.borderColor= [UIColor clearColor].CGColor;
     }
     
     else if([content isEqualToString :@"W"])
     {
-        btn_Run.layer.borderColor= [UIColor redColor].CGColor;
+         [btn_Run setBackgroundColor:[UIColor colorWithRed:(196.0/255.0f) green:(40.0/255.0f) blue:(38.0/255.0f) alpha:1.0f]];
+        btn_Run.layer.borderColor= [UIColor clearColor].CGColor;
+        
     }
     else
     {
-        btn_Run.layer.borderColor= [UIColor yellowColor].CGColor;
+        btn_Run.layer.borderColor= [UIColor colorWithRed:(231.0/255.0f) green:(211.0/255.0f) blue:(76.0/255.0f) alpha:1.0f].CGColor;
     }
     
     
@@ -485,11 +473,11 @@
      view_addedit=[[UIView alloc]initWithFrame:CGRectMake(btn_add.frame.origin.x-20,btn_add.frame.origin.y-50,130, 50)];
     [view_addedit setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
     [cell addSubview:view_addedit];
-    UIButton * leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(5, view_addedit.frame.origin.y+45, 25, 25)];
+    UIButton * leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(5, view_addedit.frame.origin.y+70, 25, 25)];
     [leftrotation setImage:[UIImage imageNamed:@"LeftRotation"] forState:UIControlStateNormal];
     [view_addedit addSubview:leftrotation];
     
-    UIButton * Editrotation=[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.origin.x+leftrotation.frame.size.width+8, leftrotation.frame.origin.y-3, 25, 25)];
+    UIButton * Editrotation=[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.origin.x+leftrotation.frame.size.width+8, leftrotation.frame.origin.y, 25, 25)];
     [Editrotation setImage:[UIImage imageNamed:@"ArchiveEdit"] forState:UIControlStateNormal];
     [view_addedit addSubview:Editrotation];
     
@@ -507,18 +495,32 @@
 -(IBAction)didClickInnings1team1:(id)sender
 {
     self.highlightbtnxposition.constant=0;
+    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+    [_tbl_innnings reloadData];
+
 }
 -(IBAction)didClickInnings1team2:(id)sender
 {
     self.highlightbtnxposition.constant=self.Btn_innings1team2.frame.origin.x;
+    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"2"];
+    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"2"];
+    [_tbl_innnings reloadData];
+
 }
 -(IBAction)didClickInnings2team1:(id)sender
 {
      self.highlightbtnxposition.constant=self.Btn_inning2steam1.frame.origin.x;
+    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"3"];
+    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"3"];
+    [_tbl_innnings reloadData];
 }
 -(IBAction)didClickInnings2team2:(id)sender
 {
      self.highlightbtnxposition.constant=self.Btn_innings2team2.frame.origin.x;
+    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"4"];
+    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"4"];
+    [_tbl_innnings reloadData];
 }
 -(IBAction)Back_BtnAction:(id)sender
 {

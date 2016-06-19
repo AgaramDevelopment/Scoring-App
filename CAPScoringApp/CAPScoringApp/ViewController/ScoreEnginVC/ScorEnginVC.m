@@ -3828,6 +3828,7 @@ EndInnings *endInnings;
     
     _view_table_select.hidden=NO;
     if(leftSlideSwipe == YES){
+        
        
         
     }

@@ -18,6 +18,7 @@
 {
     CustomNavigationVC * objCustomNavigation;
     NSString * matchCode;
+    NSString * matchTypeCode;
 }
 @property(nonatomic,strong) NSMutableArray* FetchCompitionArray;
 @property (nonatomic, strong) NSMutableArray *cellsCurrentlyEditing;
@@ -84,6 +85,7 @@
     NSString *newDate = [formatter stringFromDate:date];
     cell.lbl_date.text=newDate;
     matchCode=objFixtureRecord.matchcode;
+    matchTypeCode =objFixtureRecord.matchTypeCode;
     
     [formatter setDateFormat:@"MMM ''yy"];
     newDate = [formatter stringFromDate:date];
@@ -152,6 +154,7 @@
     objEditModeVC=(EditModeVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"EditModeVC"];
     objEditModeVC.Comptitioncode =self.CompitionCode;
     objEditModeVC.matchCode = matchCode;
+    objEditModeVC.matchTypeCode=matchTypeCode;
     [self.navigationController pushViewController:objEditModeVC animated:YES];
 }
 
