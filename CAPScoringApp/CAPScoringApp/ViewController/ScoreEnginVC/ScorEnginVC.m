@@ -32,15 +32,13 @@
 
 #import "intialBreakVC.h"
 #import "EndInnings.h"
-#import "ScoreCardVC.h"
-#import "FetchSEPageLoadRecord.h"
-#import "FetchScorecard.h"
-#import "RightSlideVC.h"
+#import "RevicedOverVC.h"
+#import "FixturesRecord.h"
 #import "RevisedTarget.h"
 #import "Reachability.h"
 #import "PenalityVC.h"
 #import "FetchLastBowler.h"
-
+#import "LastBolwerDetailRecord.h"
 
 
 
@@ -214,8 +212,10 @@
 @synthesize AppealUmpireArray;
 @synthesize AppealBatsmenArray;
 
+FetchLastBowler *fetchLastBowler;
 FetchSEPageLoadRecord *fetchSEPageLoadRecord;
 EndInnings *endInnings;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -228,19 +228,44 @@ EndInnings *endInnings;
     
 //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
-    FetchLastBowler *fetchLastBowler = [[FetchLastBowler alloc]init];
     
-    
-    
+    //Get Last bowler details
+     fetchLastBowler = [[FetchLastBowler alloc]init];
     [fetchLastBowler LastBowlerDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS] :[NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT]];
    
+    if(fetchLastBowler.GetLastBolwerDetails.count!=0){
+        LastBolwerDetailRecord *lastBowlerDetailRecord = [fetchLastBowler.GetLastBolwerDetails objectAtIndex:0];
+        
+        
+        self.lbl_last_bowler_name.text = lastBowlerDetailRecord.BOWLERNAME;
+        self.lbl_last_bowler_runs.text = lastBowlerDetailRecord.OVERS;
+        self.lbl_last_bowler_balls.text = lastBowlerDetailRecord.MAIDENOVERS;
+        self.lbl_last_bowler_fours.text = lastBowlerDetailRecord.TOTALRUNS;
+        self.lbl_last_bowler_sixs.text = lastBowlerDetailRecord.WICKETS;
+        self.lbl_last_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[lastBowlerDetailRecord.ECONOMY floatValue]];
+
+    }else{
+        self.lbl_last_bowler_name.text = @"-";
+        self.lbl_last_bowler_runs.text = @"-";
+        self.lbl_last_bowler_balls.text = @"-";
+        self.lbl_last_bowler_fours.text = @"-";
+        self.lbl_last_bowler_sixs.text = @"-";
+        self.lbl_last_bowler_strickrate.text = @"-";
+    }
      
      
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
+    
     endInnings = [[EndInnings alloc]init];
     
-//[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
+[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
+
+    
+    [endInnings InsertEndInnings:@"UCC0000001" :@"DMSC114AC811243879400014" :@"TEA0000022" :@"TEA0000024" :@"1" :@"2016-01-20 02:10:00" :@"2016-01-20 05:55:00" :@"49" :@"308" :@"8" :@"SAVE"];
+    
+  
+
     
 //    NSString *data= [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS];
 //    
@@ -295,8 +320,8 @@ EndInnings *endInnings;
     
 
     //all innings details for team A and team B
-    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET];
-    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS];
+    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
+    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
     
    // _lbl_teamASecIngsScore.text = 
@@ -306,8 +331,8 @@ EndInnings *endInnings;
   //  _lbl_teamBSecIngsScore.text =
 //    _lbl_teamBSecIngsOvs.text =
     
-    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
-    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
     
     
     
@@ -347,9 +372,16 @@ EndInnings *endInnings;
     
   
     
-    RightsideGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFromRightside:)];
-    [RightsideGesture setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.view addGestureRecognizer:RightsideGesture];
+        self.sideBar = [[CDRTranslucentSideBar alloc] init];
+        self.sideBar.sideBarWidth = 200;
+        self.sideBar.delegate = self;
+        self.sideBar.tag = 0;
+    
+    // Create Right SideBar
+        self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirectionFromRight:YES];
+        self.rightSideBar.delegate = self;
+        self.rightSideBar.translucentStyle = UIBarStyleBlack;
+        self.rightSideBar.tag = 1;
     
     LeftsideGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFromLeftside:)];
     [LeftsideGesture setDirection:UISwipeGestureRecognizerDirectionRight];
@@ -391,7 +423,16 @@ EndInnings *endInnings;
 //        //[[self addChildViewController: @"your view controller"];
 //        tableView.dataSource = self;
 //        tableView.delegate = self;
+        UITableView *tableView = [[UITableView alloc] init];
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+        v.backgroundColor = [UIColor clearColor];
+        [tableView setTableHeaderView:v];
+        [tableView setTableFooterView:v];
     
+        //If you create UITableViewController and set datasource or delegate to it, don't forget to add childcontroller to this viewController.
+        //[[self addChildViewController: @"your view controller"];
+        tableView.dataSource = self;
+        tableView.delegate = self;
     
     _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"break",@"ChangeTeam",@"EndInnings",@"OverWicket", nil];
     
@@ -400,9 +441,11 @@ EndInnings *endInnings;
     //[tableView addSubview:rightSideVc.view];
     
         // Set ContentView in SideBar
-       // [self.sideBar setContentViewInSideBar:rightSideVc.view];
-    //rightSideVc.rightSlideTableView.delegate = self;
-    //rightSideVc.rightSlideTableView.dataSource = self;
+        [self.sideBar setContentViewInSideBar:rightSideVc.view];
+    rightSideVc.rightSlideTableView.delegate = self;
+    rightSideVc.rightSlideTableView.dataSource = self;
+        [self.sideBar setContentViewInSideBar:tableView];
+    
     
     _View_Appeal.hidden=YES;
     _view_table_select.hidden=YES;
@@ -527,7 +570,7 @@ EndInnings *endInnings;
 }
 -(void)SaveBallEventREcordvalue
 {
-    self.ballEventRecord=[[BallEventRecord alloc]init];
+    //self.ballEventRecord=[[BallEventRecord alloc]init];
     
     NSMutableArray * teamCodeArray=[DBManager getTeamCodemethod];
     if(teamCodeArray.count > 0 && teamCodeArray != NULL)
@@ -1967,52 +2010,9 @@ EndInnings *endInnings;
     }
     else if(selectBtnTag.tag==110)
     {
-        
-//        
-//        if (IS_IPAD_PRO) {
-//            intialBreakVC *add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
-//            
-//            
-//            
-//            //vc2 *viewController = [[vc2 alloc]init];
-//            [self addChildViewController:add];
-//            
-//            add.view.frame =CGRectMake(250, 500, add.view.frame.size.width, add.view.frame.size.height);
-//            [self.view addSubview:add.view];
-//            add.view.alpha = 0;
-//            [add didMoveToParentViewController:self];
-//            
-//            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-//             {
-//                 add.view.alpha = 1;
-//             }
-//                             completion:nil];
-//        }
-//   
-//        
-//        else{
-//            intialBreakVC *add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
-//        
-//        
-//        
-//        //vc2 *viewController = [[vc2 alloc]init];
-//        [self addChildViewController:add];
-//        
-//        add.view.frame =CGRectMake(100, 200, add.view.frame.size.width, add.view.frame.size.height);
-//        [self.view addSubview:add.view];
-//        add.view.alpha = 0;
-//        [add didMoveToParentViewController:self];
-//        
-//        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-//         {
-//             add.view.alpha = 1;
-//         }
-//                         completion:nil];
-//        }
-
-        
-
-                [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
+            [self selectedButtonBg:selectBtnTag];
+                
+               // [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
              if([self.BatmenStyle isEqualToString:@"MSC013"])
                 {
                     [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
@@ -2047,7 +2047,8 @@ EndInnings *endInnings;
     }
     else if(selectBtnTag.tag==111)
     {
-                [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
+            [self selectedButtonBg:selectBtnTag];
+               // [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
                 //[self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
                  _View_Appeal.hidden=YES;
           _view_Wagon_wheel.hidden=NO;
@@ -3030,7 +3031,7 @@ EndInnings *endInnings;
     }
     else if(selectBtnTag.tag==120)
     {
-         [self selectBtncolor_Action:@"120" :nil :209];
+       //  [self selectBtncolor_Action:@"120" :nil :209];
          [self RemarkMethode];
         
     }
@@ -3150,80 +3151,80 @@ EndInnings *endInnings;
     
     self.objcommonRemarkview.hidden=YES;
 }
-
--(void)selectBtncolor_Action:(NSString*)select_Btntag :(UIButton *)select_BtnName :(NSInteger)selectview
-{
-    if(select_BtnName!= 0)
-    {
-        for (id obj in self.leftsideview.subviews) {
-            
-            NSString *classStr = NSStringFromClass([obj class]);
-            
-            if ([classStr isEqualToString:@"UIButton"]) {
-                UIButton *button = (UIButton*)obj;
-                NSLog(@"tag=%ld",(long)button.tag);
-                button.backgroundColor=[UIColor blackColor];
-                if(button.tag== select_BtnName.tag)
-                {
-                    
-                    if(isSelectleftview==NO)
-                    {
-                        for (id obj in self.Rightsideview.subviews) {
-                            
-                            NSString *classStr = NSStringFromClass([obj class]);
-                            
-                            if ([classStr isEqualToString:@"UIView"]) {
-                                UIView *button = (UIView*)obj;
-                                NSLog(@"tag=%ld",(long)button.tag);
-                                button.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
-                            }
-                        }
-                        
-                    }
-                    isSelectleftview=YES;
-                    button.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
-                    
-                }
-            }
-        }
-        
-    }
-    else{
-        for (id obj in self.Rightsideview.subviews) {
-            
-            NSString *classStr = NSStringFromClass([obj class]);
-            
-            if ([classStr isEqualToString:@"UIView"]) {
-                UIView *button = (UIView*)obj;
-                NSLog(@"tag=%ld",(long)button.tag);
-                button.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
-                if(button.tag== selectview)
-                {
-                    
-                    if(isSelectleftview==YES)
-                    {
-                        for (id obj in self.leftsideview.subviews) {
-                            
-                            NSString *classStr = NSStringFromClass([obj class]);
-                            
-                            if ([classStr isEqualToString:@"UIButton"]) {
-                                UIButton *button = (UIButton*)obj;
-                                NSLog(@"tag=%ld",(long)button.tag);
-                                button.backgroundColor=[UIColor blackColor];
-                            }
-                        }
-                        
-                    }
-                    isSelectleftview=NO;
-                    
-                    button.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
-                }
-                
-            }
-        }
-        
-    }
-}
+//
+//-(void)selectBtncolor_Action:(NSString*)select_Btntag :(UIButton *)select_BtnName :(NSInteger)selectview
+//{
+//    if(select_BtnName!= 0)
+//    {
+//        for (id obj in self.leftsideview.subviews) {
+//            
+//            NSString *classStr = NSStringFromClass([obj class]);
+//            
+//            if ([classStr isEqualToString:@"UIButton"]) {
+//                UIButton *button = (UIButton*)obj;
+//                NSLog(@"tag=%ld",(long)button.tag);
+//                button.backgroundColor=[UIColor blackColor];
+//                if(button.tag== select_BtnName.tag)
+//                {
+//                    
+//                    if(isSelectleftview==NO)
+//                    {
+//                        for (id obj in self.Rightsideview.subviews) {
+//                            
+//                            NSString *classStr = NSStringFromClass([obj class]);
+//                            
+//                            if ([classStr isEqualToString:@"UIView"]) {
+//                                UIView *button = (UIView*)obj;
+//                                NSLog(@"tag=%ld",(long)button.tag);
+//                                button.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+//                            }
+//                        }
+//                        
+//                    }
+//                    isSelectleftview=YES;
+//                    button.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+//                    
+//                }
+//            }
+//        }
+//        
+//    }
+//    else{
+//        for (id obj in self.Rightsideview.subviews) {
+//            
+//            NSString *classStr = NSStringFromClass([obj class]);
+//            
+//            if ([classStr isEqualToString:@"UIView"]) {
+//                UIView *button = (UIView*)obj;
+//                NSLog(@"tag=%ld",(long)button.tag);
+//                button.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+//                if(button.tag== selectview)
+//                {
+//                    
+//                    if(isSelectleftview==YES)
+//                    {
+//                        for (id obj in self.leftsideview.subviews) {
+//                            
+//                            NSString *classStr = NSStringFromClass([obj class]);
+//                            
+//                            if ([classStr isEqualToString:@"UIButton"]) {
+//                                UIButton *button = (UIButton*)obj;
+//                                NSLog(@"tag=%ld",(long)button.tag);
+//                                button.backgroundColor=[UIColor blackColor];
+//                            }
+//                        }
+//                        
+//                    }
+//                    isSelectleftview=NO;
+//                    
+//                    button.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+//                }
+//                
+//            }
+//        }
+//        
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -8104,16 +8105,14 @@ EndInnings *endInnings;
        scoreCardVC.BATTEAMSHORTNAME = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
         scoreCardVC.BOWLTEAMSHORTNAME = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
         
-        
-        
-        
-        scoreCardVC.FIRSTINNINGSTOTAL = fetchSEPageLoadRecord.FIRSTINNINGSTOTAL;
-        scoreCardVC.SECONDINNINGSTOTAL = fetchSEPageLoadRecord.SECONDINNINGSTOTAL;
+                
+        scoreCardVC.FIRSTINNINGSTOTAL = fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL;
+        scoreCardVC.SECONDINNINGSTOTAL = fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL;
         scoreCardVC.THIRDINNINGSTOTAL = fetchSEPageLoadRecord.THIRDINNINGSTOTAL;
         scoreCardVC.FOURTHINNINGSTOTAL = fetchSEPageLoadRecord.FOURTHINNINGSTOTAL;
         
-        scoreCardVC.FIRSTINNINGSWICKET = fetchSEPageLoadRecord.FIRSTINNINGSWICKET;
-        scoreCardVC.SECONDINNINGSWICKET = fetchSEPageLoadRecord.SECONDINNINGSWICKET;
+        scoreCardVC.FIRSTINNINGSWICKET = fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET;
+        scoreCardVC.SECONDINNINGSWICKET = fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET;
        scoreCardVC.THIRDINNINGSWICKET = fetchSEPageLoadRecord.THIRDINNINGSWICKET;
         scoreCardVC.FOURTHINNINGSWICKET = fetchSEPageLoadRecord.FOURTHINNINGSWICKET;
         
@@ -8122,8 +8121,8 @@ EndInnings *endInnings;
         scoreCardVC.THIRDINNINGSSCORE = fetchSEPageLoadRecord.THIRDINNINGSSCORE;
         scoreCardVC.FOURTHINNINGSSCORE = fetchSEPageLoadRecord.FOURTHINNINGSSCORE;
         
-        scoreCardVC.FIRSTINNINGSOVERS = fetchSEPageLoadRecord.FIRSTINNINGSOVERS;
-        scoreCardVC.SECONDINNINGSOVERS = fetchSEPageLoadRecord.SECONDINNINGSOVERS;
+        scoreCardVC.FIRSTINNINGSOVERS =  fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS;
+        scoreCardVC.SECONDINNINGSOVERS = fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS;
         scoreCardVC.THIRDINNINGSOVERS = fetchSEPageLoadRecord.THIRDINNINGSOVERS;
         scoreCardVC.FOURTHINNINGSOVERS = fetchSEPageLoadRecord.FOURTHINNINGSOVERS;
         

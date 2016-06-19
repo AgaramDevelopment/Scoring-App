@@ -13,6 +13,9 @@
 {
     UIDatePicker *datePicker;
 }
+
+@property (strong,nonatomic) NSString *MATCHCODE;
+
 @property (weak, nonatomic) IBOutlet UIView *view_allControls;
 
 @property (weak, nonatomic) IBOutlet UIView *view_startInnings;
@@ -48,7 +51,19 @@
 @property (weak, nonatomic) IBOutlet UIScrollView *scroll_endInnings;
 
 @property (strong,nonatomic)IBOutlet NSLayoutConstraint *saveHeight;
-@property (weak, nonatomic) IBOutlet UIButton *btn_addInnings;
+//@property (weak, nonatomic) IBOutlet UIButton *btn_addInnings;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_thirdnFourthInnings;
 
+- (IBAction)btn_addInnings:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UITableView *tbl_endInnings;
+
+@property (strong, nonatomic) IBOutlet EndInningsVC *GridRowCell;
+
+- (IBAction)btn_save:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *btn_save;
+
+- (IBAction)btn_back:(id)sender;
 
 @end
