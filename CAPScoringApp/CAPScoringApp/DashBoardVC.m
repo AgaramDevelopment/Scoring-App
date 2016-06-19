@@ -9,8 +9,10 @@
 #import "DashBoardVC.h"
 #import "TorunamentVC.h"
 #import "LoginVC.h"
-#import "EndInningsVC.h"
 #import "EndInnings.h"
+#import "EndInningsVC.h"
+
+
 @interface DashBoardVC ()
 
 @end
@@ -97,9 +99,15 @@
 - (IBAction)btn_signOut:(id)sender {
     
         
-//    NSUserDefaults * removeUDCode = [NSUserDefaults standardUserDefaults];
-//    [removeUDCode removeObjectForKey:@"userCode"];
-//    [[NSUserDefaults standardUserDefaults]synchronize ];
+    NSUserDefaults * removeUDCode = [NSUserDefaults standardUserDefaults];
+    [removeUDCode removeObjectForKey:@"userCode"];
+    [[NSUserDefaults standardUserDefaults]synchronize ];
+    
+    
+    
+    
+
+
     
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"

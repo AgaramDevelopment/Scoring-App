@@ -90,10 +90,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.ELECTEDTODESCRIPTION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
                 record.BATTINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
                 record.BATTINGTEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
-                record.BATTINGTEAMLOGO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
+                //record.BATTINGTEAMLOGO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
                 record.BOWLINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
                 record.BOWLINGTEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
-                record.BOWLINGTEAMLOGO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
+               // record.BOWLINGTEAMLOGO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
                 
                 
                 [MatchRegistrationForScoreBoard addObject:record];
@@ -218,8 +218,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
               //  record.MATCHBALLS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 
                 
-                [MatchOverandBallForScoreBoard addObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
-                  [MatchOverandBallForScoreBoard addObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)]];
+                [MatchOverandBallForScoreBoard addObject:[self getValueByNull:statement :0]];
+                  [MatchOverandBallForScoreBoard addObject:[self getValueByNull:statement :1]];
             }
             
         }
@@ -636,7 +636,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BOWLERCODE, BOWLERNAME, TOTALMINUTES =''  , CASE WHEN PARTIALOVERBALLS > 0       THEN CAST(((((OVERS * 6) + BALLS) / 6) + ((((OVERS * 6) + BALLS) %% 6)/10)) AS NUMERIC(6,1))       ELSE CAST((OVERS + (BALLS/10)) AS NUMERIC(6,1))      END OVERS    , MAIDENS, RUNS, WICKETS, NOBALLS, WIDES, DOTBALLS, FOURS, SIXES    , CAST((CASE WHEN ((OVERS * 6) + BALLS) = 0 THEN 0 ELSE ((RUNS / ((OVERS * 6) + BALLS)) * 6) END) AS NUMERIC (6,2)) ECONOMY    FROM    (     SELECT BS.BOWLINGPOSITIONNO, BS.BOWLERCODE, BC.PLAYERNAME BOWLERNAME,  julianday(BIOT.STARTTIME) - julianday(BIOT.ENDTIME)  TOTALMINUTES     , BS.OVERS     , (BS.BALLS + BS.PARTIALOVERBALLS) BALLS     , BS.PARTIALOVERBALLS     , BS.MAIDENS , BS.RUNS, BS.WICKETS, BS.NOBALLS, BS.WIDES, BS.DOTBALLS, BS.FOURS, BS.SIXES     FROM BOWLINGSUMMARY BS     INNER JOIN PLAYERMASTER BC     ON BC.PLAYERCODE = BS.BOWLERCODE     LEFT JOIN BOWLEROVERDETAILS BIOT     ON BIOT.BOWLERCODE = BS.BOWLERCODE     AND BIOT.COMPETITIONCODE = BS.COMPETITIONCODE     AND BIOT.MATCHCODE = BS.MATCHCODE     AND BIOT.INNINGSNO = BS.INNINGSNO     WHERE BS.COMPETITIONCODE = '%@'     AND BS.MATCHCODE ='%@' AND BS.INNINGSNO ='%@'     GROUP BY BS.BOWLINGPOSITIONNO, BS.BOWLERCODE, BC.PLAYERNAME, BS.OVERS, BS.BALLS, BS.PARTIALOVERBALLS, BS.MAIDENS , BS.RUNS,BS.WICKETS, BS.NOBALLS, BS.WIDES, BS.DOTBALLS, BS.FOURS, BS.SIXES    ) BOWLINGCARD    ORDER BY BOWLINGPOSITIONNO  ",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BOWLERCODE, BOWLERNAME, TOTALMINUTES =''  , CASE WHEN PARTIALOVERBALLS > 0       THEN CAST(((((OVERS * 6) + BALLS) / 6) + ((((OVERS * 6) + BALLS) %% 6)/10)) AS NUMERIC(6,1))       ELSE CAST((OVERS + (BALLS/10)) AS NUMERIC(6,1))      END OVERS    , MAIDENS, RUNS, WICKETS, NOBALLS, WIDES, DOTBALLS, FOURS, SIXES    , CAST((CASE WHEN ((OVERS * 6) + BALLS) = 0 THEN 0.0 ELSE ((RUNS / ((OVERS * 6.0) + BALLS)) * 6) END) AS NUMERIC (6,2)) ECONOMY    FROM    (     SELECT BS.BOWLINGPOSITIONNO, BS.BOWLERCODE, BC.PLAYERNAME BOWLERNAME,  julianday(BIOT.STARTTIME) - julianday(BIOT.ENDTIME)  TOTALMINUTES     , BS.OVERS     , (BS.BALLS + BS.PARTIALOVERBALLS) BALLS     , BS.PARTIALOVERBALLS     , BS.MAIDENS , BS.RUNS, BS.WICKETS, BS.NOBALLS, BS.WIDES, BS.DOTBALLS, BS.FOURS, BS.SIXES     FROM BOWLINGSUMMARY BS     INNER JOIN PLAYERMASTER BC     ON BC.PLAYERCODE = BS.BOWLERCODE     LEFT JOIN BOWLEROVERDETAILS BIOT     ON BIOT.BOWLERCODE = BS.BOWLERCODE     AND BIOT.COMPETITIONCODE = BS.COMPETITIONCODE     AND BIOT.MATCHCODE = BS.MATCHCODE     AND BIOT.INNINGSNO = BS.INNINGSNO     WHERE BS.COMPETITIONCODE = '%@'     AND BS.MATCHCODE ='%@' AND BS.INNINGSNO ='%@'     GROUP BY BS.BOWLINGPOSITIONNO, BS.BOWLERCODE, BC.PLAYERNAME, BS.OVERS, BS.BALLS, BS.PARTIALOVERBALLS, BS.MAIDENS , BS.RUNS,BS.WICKETS, BS.NOBALLS, BS.WIDES, BS.DOTBALLS, BS.FOURS, BS.SIXES    ) BOWLINGCARD    ORDER BY BOWLINGPOSITIONNO  ",COMPETITIONCODE,MATCHCODE,INNINGSNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         //sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
@@ -662,7 +662,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 BowlingSummaryDetailsForScoreBoard *record=[[BowlingSummaryDetailsForScoreBoard alloc]init];
                 record.BOWLERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.BOWLERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.TOTALMINUTES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record.TOTALMINUTES=[self getValueByNull:statement :2];
                 record.OVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
                 record.MAIDENS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
                 record.RUNS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];

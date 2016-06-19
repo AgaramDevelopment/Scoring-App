@@ -22,4 +22,16 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_player_name;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_how_out;
 
+//Bowler
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_name;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_over;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_noball;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_wide;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_ecno;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_fours;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_sixes;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_wicket;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_maiden;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_runs;
+
 @end

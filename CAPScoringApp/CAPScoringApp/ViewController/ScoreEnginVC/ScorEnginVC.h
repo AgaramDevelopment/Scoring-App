@@ -10,6 +10,13 @@
 
 @interface ScorEnginVC : UIViewController<UIGestureRecognizerDelegate>
 
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint * sideviewXposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewXposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewwidthposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * CommonviewRightsideposition;
+
+@property (nonatomic,strong) IBOutlet UITableView * sideviewtable;
+
 @property(nonatomic,strong) NSString *teamAcode;
 @property(nonatomic,strong) NSString *teamBcode;
 
@@ -17,7 +24,7 @@
 @property(nonatomic,strong) NSString *competitionCode;
 //@property(nonatomic,strong) NSMutableArray * strikerArray;
 //@property(nonatomic,strong) NSMutableArray *non_StrikerArray;
-
+@property(nonatomic,strong) NSString *metadatatypecode;
 
 @property(nonatomic,strong) NSString * BatmenStyle;
 
@@ -263,6 +270,8 @@
 
 - (IBAction)btn_reviseover:(id)sender;
 -(BOOL) checkInternetConnection;
+- (IBAction)btn_show_scorecard:(id)sender;
 
+- (IBAction)btn_penality:(id)sender;
 
 @end

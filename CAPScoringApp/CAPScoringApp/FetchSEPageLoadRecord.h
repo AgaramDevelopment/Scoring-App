@@ -160,5 +160,5 @@
 @property(strong,nonatomic)NSString *BBWIC;
 
 
-
+@property(nonatomic,assign)NSInteger *BATTEAMOVRBALLSCNT;
 @end
