@@ -38,6 +38,7 @@
 #import "RevisedTarget.h"
 #import "Reachability.h"
 #import "PenalityVC.h"
+#import "FetchLastBowler.h"
 
 
 
@@ -224,13 +225,19 @@ EndInnings *endInnings;
     
 //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
+    FetchLastBowler *fetchLastBowler = [[FetchLastBowler alloc]init];
     
     
+    
+    [fetchLastBowler LastBowlerDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS] :[NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT]];
+   
+     
+     
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
     endInnings = [[EndInnings alloc]init];
     
-[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
+//[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
     
 //    NSString *data= [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS];
 //    

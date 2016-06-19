@@ -90,10 +90,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.ELECTEDTODESCRIPTION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
                 record.BATTINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
                 record.BATTINGTEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
-                record.BATTINGTEAMLOGO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
+                //record.BATTINGTEAMLOGO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
                 record.BOWLINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
                 record.BOWLINGTEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
-                record.BOWLINGTEAMLOGO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
+               // record.BOWLINGTEAMLOGO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
                 
                 
                 [MatchRegistrationForScoreBoard addObject:record];
@@ -218,8 +218,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
               //  record.MATCHBALLS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 
                 
-                [MatchOverandBallForScoreBoard addObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
-                  [MatchOverandBallForScoreBoard addObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)]];
+                [MatchOverandBallForScoreBoard addObject:[self getValueByNull:statement :0]];
+                  [MatchOverandBallForScoreBoard addObject:[self getValueByNull:statement :1]];
             }
             
         }
@@ -662,7 +662,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 BowlingSummaryDetailsForScoreBoard *record=[[BowlingSummaryDetailsForScoreBoard alloc]init];
                 record.BOWLERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.BOWLERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.TOTALMINUTES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record.TOTALMINUTES=[self getValueByNull:statement :2];
                 record.OVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
                 record.MAIDENS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
                 record.RUNS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
