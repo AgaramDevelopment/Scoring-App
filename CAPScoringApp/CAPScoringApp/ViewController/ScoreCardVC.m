@@ -11,9 +11,11 @@
 #import "FetchScorecard.h"
 #import "BattingSummaryDetailsForScoreBoard.h"
 #import "BowlingSummaryDetailsForScoreBoard.h"
+#import "CustomNavigationVC.h"
 
-@interface ScoreCardVC ()
-
+@interface ScoreCardVC (){
+    CustomNavigationVC *objCustomNavigation;
+}
 @end
 
 @implementation ScoreCardVC
@@ -31,9 +33,11 @@ int bowlerPostion = 0;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    competitionCode = @"UCC0000004";
-    matchCode = @"IMSC02200224DB2663B00002";
-    inningsNo = @"1";
+    [self customnavigationmethod];
+    
+    //    competitionCode = @"UCC0000004";
+    //    matchCode = @"IMSC02200224DB2663B00002";
+    //    inningsNo = @"1";
     self.matchTypeCode = @"MSC115";
     
     
@@ -43,7 +47,7 @@ int bowlerPostion = 0;
     //Set Table Cell Position
     batsmanHeaderPosition = 0;
     batsmanPostion =fetchScorecard.BattingSummaryForScoreBoard.count > 0 ? 1 :0;
-   bowlerHeaderPosition =fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1; bowlerPostion = bowlerHeaderPosition+1;
+    bowlerHeaderPosition =fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1; bowlerPostion = bowlerHeaderPosition+1;
     
     [self hideLabelBasedOnMatchType];
     
@@ -63,31 +67,65 @@ int bowlerPostion = 0;
                                      _FIRSTINNINGSWICKET];
     _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",_FIRSTINNINGSOVERS];
     
+    [self setInitView];
+    int btnSize =self.btn_sec_inns_id.frame.origin.x;
+    
+    //    self.btn_tab_fst_inns.constant =200;
+    ////    self.btn_tab_second_inns.constant =400;
+    //self.btn_fst_inn_x.constant=btnSize*2;
+    //    self.btn_fst_inn_width.constant = 200;
+    ////    self.btn_sec_inn_x.constant=400;
+    
+    //
+    //    self.lbl_strip.constant=500;
+    //
+    //
+    //    self.btn_tab_fst_inns.constant=500;
+    //
+    //    self.btn_tab_second_inns.constant=500;
+    
+    
+    
+    
+}
 
+-(void) setInitView{
     
-//    self.btn_tab_fst_inns.constant =400;
-//    self.btn_tab_second_inns.constant =400;
-//    self.btn_fst_inn_x.constant=400;
-//    self.btn_sec_inn_x.constant=400;
-    
-//    
-//    self.lbl_strip.constant=500;
-//    
-//    
-//    self.btn_tab_fst_inns.constant=500;
-//    
-//    self.btn_tab_second_inns.constant=500;
-    
-    self.btn_third_inns_id.hidden = YES;
-    self.btn_fourth_inns_id.hidden = YES;
-    
-    
+    if([inningsNo isEqual:@"1"]){
+        self.lbl_strip.constant=0;
+    }else if([inningsNo isEqual:@"2"]){
+        self.lbl_strip.constant=self.btn_sec_inns_id.frame.origin.x;
+    }else if([inningsNo isEqual:@"3"]){
+        self.lbl_strip.constant=self.btn_third_inns_id.frame.origin.x;
+    }else if([inningsNo isEqual:@"4"]){
+        self.lbl_strip.constant=self.btn_fourth_inns_id.frame.origin.x;
+    }
+    if ([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] ||
+        [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) {
+        self.btn_third_inns_id.hidden = YES;
+        self.btn_fourth_inns_id.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+-(void)customnavigationmethod
+{
+    objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
+    [self.view addSubview:objCustomNavigation.view];
+    objCustomNavigation.lbl_titleName.text=@"Score Card";
+    [objCustomNavigation.Btn_Back addTarget:self action:@selector(btn_back:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+}
+
+- (IBAction)btn_back:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
+}
 -(void)hideLabelBasedOnMatchType{
     
     
@@ -164,7 +202,7 @@ int bowlerPostion = 0;
         cell.lbl_sr.text = [NSString stringWithFormat:@"%.02f",[battingSummaryDetailsForSB.STRIKERATE floatValue]];
         
         
-        cell.lbl_rss.text = [NSString stringWithFormat:@"%.02f",[battingSummaryDetailsForSB.RUNSPERSCORINGSHOTS floatValue]];         
+        cell.lbl_rss.text = [NSString stringWithFormat:@"%.02f",[battingSummaryDetailsForSB.RUNSPERSCORINGSHOTS floatValue]];
         cell.lbl_runs.text = battingSummaryDetailsForSB.RUNS;
         cell.lbl_balls.text = battingSummaryDetailsForSB.BALLS;
         cell.lbl_b_fours.text = battingSummaryDetailsForSB.FOURS;
@@ -344,12 +382,12 @@ int bowlerPostion = 0;
 - (IBAction)btn_sec_inns_action:(id)sender {
     self.lbl_strip.constant=self.btn_sec_inns_id.frame.origin.x;
     inningsNo = @"2";
-[self reloadScroeCard];
+    [self reloadScroeCard];
 }
 - (IBAction)btn_third_inns_action:(id)sender {
     self.lbl_strip.constant=self.btn_third_inns_id.frame.origin.x;
     inningsNo = @"3";
-[self reloadScroeCard];
+    [self reloadScroeCard];
 }
 - (IBAction)btn_fourth_inns_action:(id)sender {
     self.lbl_strip.constant=self.btn_fourth_inns_id.frame.origin.x;

@@ -32,6 +32,10 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *date_picker;
 @property (strong, nonatomic) IBOutlet UIDatePicker *date_picker1;
 
+@property (strong, nonatomic) IBOutlet UIButton *back_btn;
+
+
 - (IBAction)hidepickerbtn:(id)sender;
+- (IBAction)back_btn:(id)sender;
 
 @end

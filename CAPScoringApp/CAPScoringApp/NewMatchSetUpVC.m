@@ -395,6 +395,20 @@
         }
         return NO;
         
+    }else if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){
+       
+        
+            MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
+            
+            matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
+            
+            matchvc.Matchcode = matchCode;
+            matchvc.competitionCode = competitionCode;
+            
+            [self.navigationController pushViewController:matchvc animated:YES];
+            
+        return NO;
+        
     }
   return YES;
     
