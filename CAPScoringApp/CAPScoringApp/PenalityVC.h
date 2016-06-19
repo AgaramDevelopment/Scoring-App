@@ -42,5 +42,7 @@
 @property(nonatomic,strong) NSString *competitioncode;
 @property(nonatomic,strong) NSString *inningsno;
 @property(nonatomic,strong) NSString *metasubcode;
+@property (nonatomic,strong)NSDictionary *test;
+@property(nonatomic,strong) NSDictionary *sample;
 
 @end

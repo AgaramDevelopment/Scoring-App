@@ -28,6 +28,8 @@
 #import "FetchSEPageLoadRecord.h"
 #import "Breaks.h"
 #import "EndInnings.h"
+#import "InningsBowlerDetailsRecord.h"
+#import "OversorderRecord.h"
 #import "MetaDataRecord.h"
 #import "PenaltyDetailsRecord.h"
 
@@ -3249,6 +3251,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 [result addObject:maidan];
                 [result addObject:wicket];
                 [result addObject:ecoRate];
+                
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 
                 return result;
                 
@@ -9146,13 +9151,20 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         //const char *insert_stmt = [SetPenaltyDetails UTF8String];
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            
+            return YES;
+            
         }
+        else {
+            sqlite3_reset(statement);
+            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
+            return NO;
+        }
+
     }
     sqlite3_reset(statement);
     return NO;
@@ -9209,5 +9221,104 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_close(dataBase);
     return PenaltyDetailsArray;
 }
+
++(NSMutableArray *) SetPenaltyDetailsForInsert:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO{
+    NSMutableArray *insertPenaltyDetailsArray=[[NSMutableArray alloc]init];
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT PD.COMPETITIONCODE,PD.MATCHCODE,PD.INNINGSNO,PD.BALLCODE,PD.PENALTYCODE,PD.AWARDEDTOTEAMCODE,PD.PENALTYRUNS,PD.PENALTYTYPECODE,MD.METASUBCODEDESCRIPTION AS PENALTYTYPEDESCRIPTION,PD.PENALTYREASONCODE,MDR.METASUBCODEDESCRIPTION AS PENALTYREASONDESCRIPTION FROM PENALTYDETAILS PD INNER JOIN METADATA MD ON PD.PENALTYTYPECODE = MD.METASUBCODE INNER JOIN METADATA MDR ON PD.PENALTYREASONCODE = MDR.METASUBCODE WHERE PD.COMPETITIONCODE = '%@' AND PD.MATCHCODE = '%@' AND PD.INNINGSNO = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                PenaltyDetailsRecord *record=[[PenaltyDetailsRecord alloc]init];
+                record.competitioncode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.matchcode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                
+                record.inningsno = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                
+                record.ballcode= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.penaltycode= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                
+                record.awardedtoteamcode= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                
+                record.penaltyruns= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                
+                record.penaltytypecode= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                
+                record.penaltytypedescription= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                
+                record.penaltyreasoncode= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                
+                
+                record.penaltyreasondescription=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                
+                [insertPenaltyDetailsArray addObject:record];
+                
+                
+            }
+            
+        }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return insertPenaltyDetailsArray;
+}
+
+
++(NSMutableArray *) GetPenaltyDetailsForUpdate:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) PENALTYCODE{
+    NSMutableArray *UpdatePenaltyArray=[[NSMutableArray alloc]init];
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT PD.COMPETITIONCODE,PD.MATCHCODE,PD.INNINGSNO,PD.BALLCODE,PD.PENALTYCODE,PD.AWARDEDTOTEAMCODE,PD.PENALTYRUNS,PD.PENALTYTYPECODE,MD.METASUBCODEDESCRIPTION AS PENALTYTYPEDESCRIPTION,PD.PENALTYREASONCODE,MDR.METASUBCODEDESCRIPTION AS PENALTYREASONDESCRIPTION FROM PENALTYDETAILS PD INNER JOIN METADATA MD ON PD.PENALTYTYPECODE = MD.METASUBCODE INNER JOIN METADATA MDR ON PD.PENALTYREASONCODE = MDR.METASUBCODE WHERE PD.COMPETITIONCODE = @COMPETITIONCODE AND PD.MATCHCODE = @MATCHCODE AND PD.INNINGSNO = @INNINGSNO AND PD.PENALTYCODE = @PENALTYCODE",COMPETITIONCODE,MATCHCODE,INNINGSNO,PENALTYCODE];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                PenaltyDetailsRecord *record=[[PenaltyDetailsRecord alloc]init];
+                record.competitioncode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.matchcode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                
+                record.inningsno = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                
+                record.ballcode= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.penaltycode= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                
+                record.awardedtoteamcode= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                
+                record.penaltyruns= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                
+                record.penaltytypecode= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                
+                record.penaltytypedescription= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                
+                record.penaltyreasoncode= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                
+                
+                record.penaltyreasondescription=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                
+                [UpdatePenaltyArray addObject:record];
+
+            }
+            
+        }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return UpdatePenaltyArray;
+}
+
 
 @end

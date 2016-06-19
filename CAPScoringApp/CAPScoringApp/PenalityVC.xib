@@ -9,6 +9,7 @@
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-REGULAR.TTF">
             <string>Rajdhani-Regular</string>
@@ -165,6 +166,18 @@
                                 <outlet property="delegate" destination="-1" id="6Ue-NK-nJ1"/>
                             </connections>
                         </tableView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sd5-BW-gWo">
+                            <rect key="frame" x="0.0" y="23" width="568" height="77"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Penalty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LSq-cS-PGu">
+                                    <rect key="frame" x="233" y="22" width="106" height="34"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="27"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.1764705882" green="0.23529411759999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -180,15 +193,18 @@
                         <constraint firstItem="poV-4y-jP4" firstAttribute="leading" secondItem="S6O-hy-Hce" secondAttribute="leading" constant="64" id="F2t-jJ-bbe"/>
                         <constraint firstAttribute="bottom" secondItem="mnz-C8-jiG" secondAttribute="bottom" constant="408" id="HNY-yG-wRX"/>
                         <constraint firstItem="mnz-C8-jiG" firstAttribute="bottom" secondItem="Wjy-SU-g1d" secondAttribute="bottom" id="HoS-uX-Zd6"/>
+                        <constraint firstItem="3PM-Jx-xqt" firstAttribute="top" secondItem="sd5-BW-gWo" secondAttribute="bottom" constant="54" id="J8G-8z-B6h"/>
                         <constraint firstAttribute="bottom" secondItem="poV-4y-jP4" secondAttribute="bottom" constant="301" id="JZI-KP-ui3"/>
                         <constraint firstItem="poV-4y-jP4" firstAttribute="top" secondItem="Wjy-SU-g1d" secondAttribute="bottom" constant="57" id="KgI-ud-yOC"/>
                         <constraint firstItem="3PM-Jx-xqt" firstAttribute="top" secondItem="S6O-hy-Hce" secondAttribute="top" constant="154" id="LLh-l0-oZu"/>
+                        <constraint firstAttribute="trailing" secondItem="sd5-BW-gWo" secondAttribute="trailing" id="Lf5-6J-j21"/>
                         <constraint firstItem="3PM-Jx-xqt" firstAttribute="leading" secondItem="S6O-hy-Hce" secondAttribute="leading" constant="64" id="OvL-nJ-Vje"/>
                         <constraint firstItem="Wjy-SU-g1d" firstAttribute="trailing" secondItem="3PM-Jx-xqt" secondAttribute="trailing" constant="13" id="TNe-Gm-FaF"/>
                         <constraint firstItem="oSg-io-tgk" firstAttribute="leading" secondItem="S6O-hy-Hce" secondAttribute="leading" constant="64" id="Tzt-vV-pT3"/>
                         <constraint firstItem="mnz-C8-jiG" firstAttribute="top" secondItem="Wjy-SU-g1d" secondAttribute="top" id="UB1-IO-6Xf"/>
                         <constraint firstAttribute="bottom" secondItem="oSg-io-tgk" secondAttribute="bottom" constant="186" id="Y31-40-hJB"/>
                         <constraint firstItem="87E-cS-evs" firstAttribute="leading" secondItem="S6O-hy-Hce" secondAttribute="leading" id="Z7L-mq-vOP"/>
+                        <constraint firstItem="sd5-BW-gWo" firstAttribute="leading" secondItem="S6O-hy-Hce" secondAttribute="leading" id="Zq1-Sg-p1n"/>
                         <constraint firstAttribute="trailing" secondItem="87E-cS-evs" secondAttribute="trailing" id="dSh-I5-UBX"/>
                         <constraint firstAttribute="bottom" secondItem="87E-cS-evs" secondAttribute="bottom" id="enr-Cd-EXm"/>
                         <constraint firstAttribute="trailing" secondItem="oSg-io-tgk" secondAttribute="trailing" constant="64" id="fzH-jT-SZn"/>
@@ -196,6 +212,7 @@
                         <constraint firstItem="mnz-C8-jiG" firstAttribute="leading" secondItem="S6O-hy-Hce" secondAttribute="leading" constant="77" id="hpe-4U-U7D"/>
                         <constraint firstAttribute="bottom" secondItem="Wjy-SU-g1d" secondAttribute="bottom" constant="408" id="mGO-uR-PuW"/>
                         <constraint firstItem="oSg-io-tgk" firstAttribute="top" secondItem="poV-4y-jP4" secondAttribute="bottom" constant="65" id="mGp-3I-GZ7"/>
+                        <constraint firstItem="sd5-BW-gWo" firstAttribute="top" secondItem="S6O-hy-Hce" secondAttribute="top" constant="23" id="pdM-Sk-wMC"/>
                         <constraint firstItem="Wjy-SU-g1d" firstAttribute="top" secondItem="3PM-Jx-xqt" secondAttribute="bottom" constant="71" id="un3-MF-OOb"/>
                         <constraint firstAttribute="trailing" secondItem="mnz-C8-jiG" secondAttribute="trailing" constant="271" id="x3w-Wi-cYu"/>
                         <constraint firstItem="87E-cS-evs" firstAttribute="top" secondItem="S6O-hy-Hce" secondAttribute="top" constant="100" id="yf2-qX-ruK"/>

@@ -11,16 +11,23 @@
 #import "DBManager.h"
 #import "MetaDataRecord.h"
 #import "PenaltyDetailsRecord.h"
+#import "PenaltyGridTVC.h"
+#import "PenaltygridVC.h"
 
 @interface PenalityVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
     NSMutableArray * selectindexarray;
+    
+   
 }
 @property (nonatomic,strong)NSMutableArray *FetchPenalityArray;
 @end
 
 NSString *btnbatting;
 NSString *penaltytypereasons;
+
+ NSMutableArray *penaltyarray;
+PenaltyGridTVC *penaltygridTVC;
 
 @implementation PenalityVC
 @synthesize metadatatypecode;
@@ -31,6 +38,7 @@ NSString *penaltytypereasons;
 
 PenaltyDetailsRecord *penaltyrecord;
 MetaDataRecord *objMetaDataRecord;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -160,6 +168,7 @@ MetaDataRecord *objMetaDataRecord;
 }
 
 
+
 -(IBAction)didclicksubmit:(id)sender{
     
     PenaltyDetailsRecord *penaltyrecord = [[PenaltyDetailsRecord alloc]init];
@@ -167,13 +176,32 @@ MetaDataRecord *objMetaDataRecord;
     penaltyrecord.penaltyruns=txt_penalityruns.text;
     penaltyrecord.penaltytypecode=btnbatting;
     penaltyrecord.penaltyreasoncode=penaltytypereasons;
-
-   
-   
-[DBManager SetPenaltyDetails:self.competitioncode :self.matchcode :@"2" :@"17258" :@"PNT0000004" :@"TEA0000006" :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
     
 
+    [DBManager SetPenaltyDetails:self.competitioncode :self.matchcode :@"2" :@"17259" :@"PNT0000005" :@"TEA0000006" :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
+    
+    penaltyarray=[DBManager SetPenaltyDetailsForInsert:self.competitioncode :self.matchcode :@"2"];
+    
+    PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
+    add.resultarray=penaltyarray;
+    add.matchcode=matchcode;
+    add.competitioncode=competitioncode;
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:add];
+    add.view.frame =CGRectMake(10, 150, add.view.frame.size.width-50, add.view.frame.size.height);
+    [self.view addSubview:add.view];
+    add.view.alpha = 0;
+    [add didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         add.view.alpha = 1;
+     }
+    completion:nil];
+
+
 }
+
 
 
 

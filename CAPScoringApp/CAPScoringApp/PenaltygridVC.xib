@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PenaltygridVC">
+            <connections>
+                <outlet property="tbl_penaltyrecord" destination="QJ8-UJ-RvT" id="2yv-Df-j5q"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="450" height="500"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzg-bf-cOV">
+                    <rect key="frame" x="0.0" y="0.0" width="450" height="500"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="KbH-Oc-8Nv">
+                            <rect key="frame" x="0.0" y="0.0" width="450" height="500"/>
+                        </imageView>
+                        <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="js5-CO-JEc">
+                            <rect key="frame" x="0.0" y="0.0" width="450" height="44"/>
+                            <items>
+                                <navigationItem title="Penalty" id="rC8-Gi-mdo">
+                                    <barButtonItem key="rightBarButtonItem" style="plain" id="gXS-hM-5D5">
+                                        <view key="customView" contentMode="scaleToFill" id="Yxk-hI-nwJ">
+                                            <rect key="frame" x="330" y="5" width="100" height="33"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qrF-Cn-464">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="30"/>
+                                                    <state key="normal" title="Add penalty"/>
+                                                    <connections>
+                                                        <action selector="btn_addpenalty:" destination="-1" eventType="touchUpInside" id="XhF-5n-1di"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="qrF-Cn-464" secondAttribute="bottom" constant="3" id="Dm9-vH-qLR"/>
+                                                <constraint firstItem="qrF-Cn-464" firstAttribute="top" secondItem="Yxk-hI-nwJ" secondAttribute="top" id="gFy-RV-ejd"/>
+                                                <constraint firstAttribute="trailing" secondItem="qrF-Cn-464" secondAttribute="trailing" id="oii-j9-dhV"/>
+                                                <constraint firstItem="qrF-Cn-464" firstAttribute="leading" secondItem="Yxk-hI-nwJ" secondAttribute="leading" id="pc6-Qa-esN"/>
+                                            </constraints>
+                                        </view>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QJ8-UJ-RvT">
+                            <rect key="frame" x="0.0" y="48" width="450" height="450"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="zuM-mX-ZDL"/>
+                                <outlet property="delegate" destination="-1" id="m67-Z4-ff7"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="js5-CO-JEc" firstAttribute="top" secondItem="gzg-bf-cOV" secondAttribute="top" id="4OQ-SW-xPR"/>
+                        <constraint firstAttribute="trailing" secondItem="js5-CO-JEc" secondAttribute="trailing" id="GkG-Ie-NgZ"/>
+                        <constraint firstAttribute="trailing" secondItem="QJ8-UJ-RvT" secondAttribute="trailing" id="Omn-6G-8Qd"/>
+                        <constraint firstItem="QJ8-UJ-RvT" firstAttribute="leading" secondItem="gzg-bf-cOV" secondAttribute="leading" id="Yu3-zS-0Zi"/>
+                        <constraint firstItem="js5-CO-JEc" firstAttribute="leading" secondItem="gzg-bf-cOV" secondAttribute="leading" id="bkx-W0-4to"/>
+                        <constraint firstAttribute="bottom" secondItem="QJ8-UJ-RvT" secondAttribute="bottom" constant="2" id="kga-Gn-3Jv"/>
+                        <constraint firstItem="QJ8-UJ-RvT" firstAttribute="top" secondItem="js5-CO-JEc" secondAttribute="bottom" constant="4" id="lmG-db-u49"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="gzg-bf-cOV" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="37t-Z1-3RU"/>
+                <constraint firstItem="gzg-bf-cOV" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="7DW-9I-IaB"/>
+                <constraint firstAttribute="bottom" secondItem="gzg-bf-cOV" secondAttribute="bottom" id="7HO-pO-oWH"/>
+                <constraint firstAttribute="trailing" secondItem="gzg-bf-cOV" secondAttribute="trailing" id="Kbd-4c-HTX"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="BackgroundImg" width="2048" height="2732"/>
+    </resources>
+</document>

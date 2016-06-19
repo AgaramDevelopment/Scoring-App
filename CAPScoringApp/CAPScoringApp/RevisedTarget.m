@@ -49,7 +49,7 @@
 
 // This method enables or disables the processing of return key
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange1:(NSRange)range replacementString:(NSString *)string{
     NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
     if ([string isEqualToString:@""]) {
         return NO;
@@ -58,7 +58,7 @@
         return YES;
     }
 }
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn1:(UITextField *)textField{
     NSLog(@"textFieldShouldReturn:");
     if (textField.tag == 23) {
         UITextField *passwordTextField = (UITextField *)[self.view viewWithTag:3];
