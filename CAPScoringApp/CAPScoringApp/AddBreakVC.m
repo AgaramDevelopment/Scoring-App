@@ -10,6 +10,8 @@
 #import "DBManager.h"
 #import "BallEventRecord.h"
 #import "FetchSEPageLoadRecord.h"
+#import "BreakVC.h"
+#import "intialBreakVC.h"
 //#import "Scor"
 
 @interface AddBreakVC ()
@@ -27,6 +29,7 @@
     NSDateFormatter *formatter1;
     NSDate *dateFromString;
     NSDate *dateFromString1;
+    NSString*Durationtime;
     
     //objInningsno;
     BallEventRecord*obj;
@@ -153,7 +156,8 @@ _Text_BreakStart.text=@"";
     NSTimeInterval timeDifference = [dateFromString1 timeIntervalSinceDate:dateFromString];
     double days = timeDifference / 60;
     NSString *Duration = [NSString stringWithFormat:@"%f", days];
-    _lbl_Duration.text=[NSString stringWithFormat:@"%@", Duration];
+   _lbl_Duration.text =[NSString stringWithFormat:@"%@", Duration];
+    Durationtime=_lbl_Duration.text;
     
 }
 
@@ -201,6 +205,12 @@ _Text_BreakStart.text=@"";
    
     [self InsertBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
 
+    
+    
+    
+    
+    
+    
 }
 
 
@@ -208,7 +218,7 @@ _Text_BreakStart.text=@"";
 
 
 
--(void) InsertBreaks:(NSString *)COMPETITIONCODE:(NSString*)INNINGSNO:(NSString*)MATCHCODE:(NSString*)BREAKSTARTTIME:(NSString*)BREAKENDTIME:(NSString*)COMMENTS:(NSString*)ISINCLUDEDURATION:(NSString*)BREAKNO
+-(void) InsertBreaks:(NSString *)COMPETITIONCODE:(NSString*)INNINGSNO:(NSString*)MATCHCODE:(NSString*)BREAKSTARTTIME:(NSString*)BREAKENDTIME:(NSString*)BREAKCOMMENTS:(NSString*)ISINCLUDEDURATION:(NSString*)BREAKNO
 {
     
     if([DBManager GetMatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE])
@@ -224,11 +234,56 @@ _Text_BreakStart.text=@"";
     
     NSMutableArray*BreaksArray=[DBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     //BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+    
+    
+    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
+    
+    add.resultarray=BreaksArray;
+    add.MATCHCODE=MATCHCODE;
+    add.COMPETITIONCODE=COMPETITIONCODE;
+    add.INNINGSNO=INNINGSNO;
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:add];
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+    [self.view addSubview:add.view];
+    add.view.alpha = 0;
+    [add didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         add.view.alpha = 1;
+     }
+                     completion:nil];
+
+    
+    
+    
 }
 
 - (IBAction)hidepickerbtn:(id)sender {
     
       [_datePicker_View setHidden:YES];
+}
+
+- (IBAction)back_btn:(id)sender {
+    
+    
+    intialBreakVC*add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
+    
+    
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:add];
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+    [self.view addSubview:add.view];
+    add.view.alpha = 0;
+    [add didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         add.view.alpha = 1;
+     }
+                     completion:nil];
 }
 
 

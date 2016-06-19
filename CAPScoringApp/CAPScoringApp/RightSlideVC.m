@@ -7,7 +7,13 @@
 //
 
 #import "RightSlideVC.h"
+#import "intialBreakVC.h"
 
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 @interface RightSlideVC ()<UITableViewDelegate,UITableViewDataSource>
 
 
@@ -58,6 +64,51 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
+    if (indexPath.row==0) {
+        if (IS_IPAD_PRO) {
+            intialBreakVC *add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
+            
+            
+            
+            //vc2 *viewController = [[vc2 alloc]init];
+            [self addChildViewController:add];
+            
+            add.view.frame =CGRectMake(250, 500, add.view.frame.size.width, add.view.frame.size.height);
+            [self.view addSubview:add.view];
+            add.view.alpha = 0;
+            [add didMoveToParentViewController:self];
+            
+            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+             {
+                 add.view.alpha = 1;
+             }
+                             completion:nil];
+        }
+        
+        
+        else{
+            intialBreakVC *add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
+            
+            
+            
+            //vc2 *viewController = [[vc2 alloc]init];
+            [self addChildViewController:add];
+            
+            add.view.frame =CGRectMake(100, 200, add.view.frame.size.width, add.view.frame.size.height);
+            [self.view addSubview:add.view];
+            add.view.alpha = 0;
+            [add didMoveToParentViewController:self];
+            
+            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+             {
+                 add.view.alpha = 1;
+             }
+                             completion:nil];
+        }
+
+    }
+    
+    
     
 }
 
@@ -65,6 +116,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation

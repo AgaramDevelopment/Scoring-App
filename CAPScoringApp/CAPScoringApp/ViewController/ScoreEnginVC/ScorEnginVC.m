@@ -29,12 +29,11 @@
 #import "SelectPlayerRecord.h"
 #import "FetchLastBallBowledPlayer.h"
 #import "InitializeInningsScoreBoardRecord.h"
-#import "AddBreakVC.h"
+
+#import "intialBreakVC.h"
 #import "EndInnings.h"
-#import "ScoreCardVC.h"
-#import "FetchSEPageLoadRecord.h"
-#import "FetchScorecard.h"
-#import "RightSlideVC.h"
+#import "RevicedOverVC.h"
+#import "FixturesRecord.h"
 #import "RevisedTarget.h"
 #import "Reachability.h"
 #import "PenalityVC.h"
@@ -257,9 +256,16 @@ EndInnings *endInnings;
      
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
+    
     endInnings = [[EndInnings alloc]init];
     
-//[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
+[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
+
+    
+    [endInnings InsertEndInnings:@"UCC0000001" :@"DMSC114AC811243879400014" :@"TEA0000022" :@"TEA0000024" :@"1" :@"2016-01-20 02:10:00" :@"2016-01-20 05:55:00" :@"49" :@"308" :@"8" :@"SAVE"];
+    
+  
+
     
 //    NSString *data= [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS];
 //    
@@ -366,9 +372,16 @@ EndInnings *endInnings;
     
   
     
-    RightsideGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFromRightside:)];
-    [RightsideGesture setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.view addGestureRecognizer:RightsideGesture];
+        self.sideBar = [[CDRTranslucentSideBar alloc] init];
+        self.sideBar.sideBarWidth = 200;
+        self.sideBar.delegate = self;
+        self.sideBar.tag = 0;
+    
+    // Create Right SideBar
+        self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirectionFromRight:YES];
+        self.rightSideBar.delegate = self;
+        self.rightSideBar.translucentStyle = UIBarStyleBlack;
+        self.rightSideBar.tag = 1;
     
     LeftsideGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFromLeftside:)];
     [LeftsideGesture setDirection:UISwipeGestureRecognizerDirectionRight];
@@ -410,7 +423,16 @@ EndInnings *endInnings;
 //        //[[self addChildViewController: @"your view controller"];
 //        tableView.dataSource = self;
 //        tableView.delegate = self;
+        UITableView *tableView = [[UITableView alloc] init];
+        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
+        v.backgroundColor = [UIColor clearColor];
+        [tableView setTableHeaderView:v];
+        [tableView setTableFooterView:v];
     
+        //If you create UITableViewController and set datasource or delegate to it, don't forget to add childcontroller to this viewController.
+        //[[self addChildViewController: @"your view controller"];
+        tableView.dataSource = self;
+        tableView.delegate = self;
     
     _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"break",@"ChangeTeam",@"EndInnings",@"OverWicket", nil];
     
@@ -419,9 +441,11 @@ EndInnings *endInnings;
     //[tableView addSubview:rightSideVc.view];
     
         // Set ContentView in SideBar
-       // [self.sideBar setContentViewInSideBar:rightSideVc.view];
-    //rightSideVc.rightSlideTableView.delegate = self;
-    //rightSideVc.rightSlideTableView.dataSource = self;
+        [self.sideBar setContentViewInSideBar:rightSideVc.view];
+    rightSideVc.rightSlideTableView.delegate = self;
+    rightSideVc.rightSlideTableView.dataSource = self;
+        [self.sideBar setContentViewInSideBar:tableView];
+    
     
     _View_Appeal.hidden=YES;
     _view_table_select.hidden=YES;
