@@ -42,7 +42,7 @@
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
-    add.view.frame =CGRectMake(100, 100, add.view.frame.size.width, add.view.frame.size.height);
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
     [self.view addSubview:add.view];
     add.view.alpha = 0;
     [add didMoveToParentViewController:self];

@@ -1,19 +1,17 @@
 //
-//  AddBreakVC.h
+//  UpdateBreakVC.h
 //  CAPScoringApp
 //
-//  Created by Lexicon on 15/06/16.
+//  Created by Lexicon on 19/06/16.
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@interface AddBreakVC : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource>
+@interface UpdateBreakVC : UIViewController
+@property(strong,nonatomic)NSDictionary *test;
 
-//{
-//    UIDatePicker * datepicker;
-//    UIDatePicker * datepicker1;
-//}
+
 @property (strong, nonatomic) IBOutlet UIView *View_BreakStart;
 @property (strong, nonatomic) IBOutlet UITextField *Text_BreakStart;
 - (IBAction)StartBreack_btn:(id)sender;
@@ -33,7 +31,13 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *date_picker1;
 
 
+@property(strong,nonatomic)NSString*MATCHCODE;
+@property(strong,nonatomic)NSString*COMPETITIONCODE;
+@property(strong,nonatomic)NSString*INNINGSNO;
+
+- (IBAction)delete_btn:(id)sender;
+
+
 
 - (IBAction)hidepickerbtn:(id)sender;
-
 @end

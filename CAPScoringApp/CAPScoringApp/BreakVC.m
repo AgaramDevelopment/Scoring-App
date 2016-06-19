@@ -11,6 +11,7 @@
 #import "DBManager.h"
 #import "BreakEventRecords.h"
 #import "AddBreakVC.h"
+#import "UpdateBreakVC.h"
 
 @interface BreakVC ()
 
@@ -18,6 +19,9 @@
 
 @implementation BreakVC
 
+@synthesize COMPETITIONCODE;
+@synthesize MATCHCODE;
+@synthesize INNINGSNO;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
@@ -66,21 +70,59 @@
     BreakEventRecords *veb=(BreakEventRecords*)[_resultarray objectAtIndex:indexPath.row];
     
     
-    cell.test.text=veb.BREAKSTARTTIME;
+    cell.test.text=veb.BREAKCOMMENTS;
+    
+    cell.Starttime_lbl.text=veb.BREAKSTARTTIME;
+     cell.Endtime_lbl.text=veb.BREAKENDTIME;
+     cell.duration_lbl.text=veb.DURATION;
     return cell;
 }
 
 
-  
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    
+    UpdateBreakVC*add = [[UpdateBreakVC alloc]initWithNibName:@"UpdateBreakVC" bundle:nil];
+    
+    
+   
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    
+    NSDictionary *sample=[self.resultarray objectAtIndex:indexPath.row];
+     add.test=sample;
+    
+    add.COMPETITIONCODE=COMPETITIONCODE;
+    add.MATCHCODE=MATCHCODE;
+    add.INNINGSNO=INNINGSNO;
+    
+    [self addChildViewController:add];
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+    [self.view addSubview:add.view];
+    add.view.alpha = 0;
+    [add didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         add.view.alpha = 1;
+     }
+                     completion:nil];
+    
 
+    
+    // //destViewController = [CategoryVC.destViewController objectAtIndex:0];
+    
+
+}
 
 
 
 
 - (IBAction)addbreak_btn:(id)sender {
     
-    AddBreakVC *add = [[AddBreakVC alloc]initWithNibName:@"AddBreakVC" bundle:nil];
+    UpdateBreakVC *add = [[UpdateBreakVC alloc]initWithNibName:@"UpdateBreakVC" bundle:nil];
     
     
     

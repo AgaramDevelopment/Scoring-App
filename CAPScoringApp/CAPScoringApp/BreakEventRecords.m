@@ -15,4 +15,5 @@
 @synthesize BREAKENDTIME;
 @synthesize ISINCLUDEINPLAYERDURATION;
 @synthesize BREAKCOMMENTS;
+@synthesize DURATION;
 @end

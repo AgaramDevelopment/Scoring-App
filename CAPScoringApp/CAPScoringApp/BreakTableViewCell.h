@@ -12,6 +12,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *checklbl;
 @property (strong, nonatomic) IBOutlet UILabel *test;
 
+@property (strong, nonatomic) IBOutlet UILabel *Starttime_lbl;
+@property (strong, nonatomic) IBOutlet UILabel *Endtime_lbl;
 
+@property (strong, nonatomic) IBOutlet UIImageView *durationimg;
+@property (strong, nonatomic) IBOutlet UILabel *duration_lbl;
 
 @end

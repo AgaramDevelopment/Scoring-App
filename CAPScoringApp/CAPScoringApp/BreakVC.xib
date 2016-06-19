@@ -90,7 +90,7 @@
                         </navigationBar>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1eu-Vn-lqc">
                             <rect key="frame" x="0.0" y="49" width="550" height="551"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="551" id="0S2-xh-Dwd"/>
                             </constraints>
@@ -113,7 +113,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="jjX-CP-veN" secondAttribute="trailing" id="SvX-tT-pL6"/>
                 <constraint firstAttribute="bottom" secondItem="jjX-CP-veN" secondAttribute="bottom" id="TkS-Vj-N89"/>
