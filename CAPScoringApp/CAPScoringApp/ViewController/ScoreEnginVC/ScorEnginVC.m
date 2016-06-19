@@ -5037,6 +5037,7 @@ EndInnings *endInnings;
             regioncode = @"MSC217";
             
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+               
             }
             
             else{
@@ -7856,6 +7857,15 @@ EndInnings *endInnings;
     
 
 
+    
+    _ballEventRecord.objWWX1=@(self.centerlbl.center.x);
+    _ballEventRecord.objWWY1=@(self.centerlbl.center.y);
+    _ballEventRecord.objWWX2=@(Xposition);
+    _ballEventRecord.objWWY2=@(Yposition);
+    _ballEventRecord.objWWREGION=@(regioncode);
+    
+    
+    
 //    if (IS_IPAD_PRO)
 //    {
 //        

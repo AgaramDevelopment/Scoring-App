@@ -104,10 +104,10 @@
 		CE3DD41F1CFBFB4F00D93A55 /* SelectPlayerCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD41E1CFBFB4F00D93A55 /* SelectPlayerCVCell.m */; };
 		CE3DD4221CFBFD4400D93A55 /* NewMatchSetUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD4211CFBFD4400D93A55 /* NewMatchSetUpVC.m */; };
 		CE3DD4251CFBFDD400D93A55 /* TeamLogoRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD4241CFBFDD400D93A55 /* TeamLogoRecords.m */; };
+		CE73F74F1D16F75900056671 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = CE73F74E1D16F75900056671 /* TNCA_DATABASE.sqlite */; };
 		CE7463A81D166F8200D69CD9 /* UpdateBreakVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463A61D166F8200D69CD9 /* UpdateBreakVC.m */; };
 		CE7463A91D166F8200D69CD9 /* UpdateBreakVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */; };
 		CE7463AC1D16942200D69CD9 /* UpdateBreaksArrayDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463AB1D16942200D69CD9 /* UpdateBreaksArrayDetails.m */; };
-		CE7463B01D16AEEB00D69CD9 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = CE7463AF1D16AEEB00D69CD9 /* TNCA_DATABASE.sqlite */; };
 		CE7463B31D16B03800D69CD9 /* DeleteEventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463B21D16B03800D69CD9 /* DeleteEventRecord.m */; };
 		CEC305811D014C3400301ED3 /* AppealSystemRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305801D014C3400301ED3 /* AppealSystemRecords.m */; };
 		CEC305841D01566100301ED3 /* AppealComponentRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305831D01566100301ED3 /* AppealComponentRecord.m */; };
@@ -315,12 +315,12 @@
 		CE3DD4211CFBFD4400D93A55 /* NewMatchSetUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMatchSetUpVC.m; sourceTree = "<group>"; };
 		CE3DD4231CFBFDD400D93A55 /* TeamLogoRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamLogoRecords.h; sourceTree = "<group>"; };
 		CE3DD4241CFBFDD400D93A55 /* TeamLogoRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamLogoRecords.m; sourceTree = "<group>"; };
+		CE73F74E1D16F75900056671 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		CE7463A51D166F8200D69CD9 /* UpdateBreakVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateBreakVC.h; sourceTree = "<group>"; };
 		CE7463A61D166F8200D69CD9 /* UpdateBreakVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBreakVC.m; sourceTree = "<group>"; };
 		CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateBreakVC.xib; sourceTree = "<group>"; };
 		CE7463AA1D16942200D69CD9 /* UpdateBreaksArrayDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateBreaksArrayDetails.h; sourceTree = "<group>"; };
 		CE7463AB1D16942200D69CD9 /* UpdateBreaksArrayDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBreaksArrayDetails.m; sourceTree = "<group>"; };
-		CE7463AF1D16AEEB00D69CD9 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		CE7463B11D16B03800D69CD9 /* DeleteEventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteEventRecord.h; sourceTree = "<group>"; };
 		CE7463B21D16B03800D69CD9 /* DeleteEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteEventRecord.m; sourceTree = "<group>"; };
 		CEC3057F1D014C3400301ED3 /* AppealSystemRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealSystemRecords.h; sourceTree = "<group>"; };
@@ -621,7 +621,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
-				CE7463AF1D16AEEB00D69CD9 /* TNCA_DATABASE.sqlite */,
+				CE73F74E1D16F75900056671 /* TNCA_DATABASE.sqlite */,
 				18785EE61D16677A00A09AEC /* StoreProcedure */,
 				1876250D1D1544CD009374F8 /* BatPlayerDetailsForScoreBoard.h */,
 				1876250E1D1544CD009374F8 /* BatPlayerDetailsForScoreBoard.m */,
@@ -941,11 +941,11 @@
 				CE00180E1CF42FA500668D8B /* LaunchScreen.storyboard in Resources */,
 				0468B3891D12743900B98576 /* PenalityVC.xib in Resources */,
 				CE00180B1CF42FA500668D8B /* Assets.xcassets in Resources */,
+				CE73F74F1D16F75900056671 /* TNCA_DATABASE.sqlite in Resources */,
 				1876250A1D154495009374F8 /* RevicedOverVC.xib in Resources */,
 				CEC858B31D155D36007F5384 /* intialBreakVC.xib in Resources */,
 				CE0018501CF460DE00668D8B /* RAJDHANI-MEDIUM.TTF in Resources */,
 				CE00184E1CF460DE00668D8B /* RAJDHANI-BOLD.TTF in Resources */,
-				CE7463B01D16AEEB00D69CD9 /* TNCA_DATABASE.sqlite in Resources */,
 				187229291D12665600CC168F /* AddBreakVC.xib in Resources */,
 				246125081D13C5D1004B85E7 /* RightSlideVC.xib in Resources */,
 				CE0018521CF460DE00668D8B /* RAJDHANI-SEMIBOLD.TTF in Resources */,
