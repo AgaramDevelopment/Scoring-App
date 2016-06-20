@@ -39,6 +39,8 @@
 #import "PenalityVC.h"
 #import "FetchLastBowler.h"
 #import "LastBolwerDetailRecord.h"
+#import "ScoreCardVC.h"
+#import "EndInningsVC.h"
 
 
 
@@ -145,6 +147,10 @@
     PenalityVC *penalityVc;
     UISwipeGestureRecognizer *RightsideGesture;
     UISwipeGestureRecognizer *LeftsideGesture;
+    intialBreakVC * BreakVC;
+    UIView * fullview;
+    RevicedOverVC * revicedOverVc ;
+    RevisedTarget  *revisedTarget;
 }
 
 @property(strong,nonatomic)NSString *matchTypeCode;
@@ -224,7 +230,7 @@ EndInnings *endInnings;
    // [self resetBallObject];
     
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+   [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
 //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
@@ -262,7 +268,7 @@ EndInnings *endInnings;
 [endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
 
     
-    [endInnings InsertEndInnings:@"UCC0000001" :@"DMSC114AC811243879400014" :@"TEA0000022" :@"TEA0000024" :@"1" :@"2016-01-20 02:10:00" :@"2016-01-20 05:55:00" :@"49" :@"308" :@"8" :@"SAVE"];
+   // [endInnings InsertEndInnings:@"UCC0000001" :@"DMSC114AC811243879400014" :@"TEA0000022" :@"TEA0000024" :@"1" :@"2016-01-20 02:10:00" :@"2016-01-20 05:55:00" :@"49" :@"308" :@"8" :@"SAVE"];
     
   
 
@@ -383,10 +389,13 @@ EndInnings *endInnings;
         self.rightSideBar.translucentStyle = UIBarStyleBlack;
         self.rightSideBar.tag = 1;
     
+    RightsideGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFromRightside:)];
+    [RightsideGesture setDirection:UISwipeGestureRecognizerDirectionLeft];
+    [self.view addGestureRecognizer:RightsideGesture];
+    
     LeftsideGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFromLeftside:)];
     [LeftsideGesture setDirection:UISwipeGestureRecognizerDirectionRight];
     [self.view addGestureRecognizer:LeftsideGesture];
-   
 
     
 //    //create Left SideBar
@@ -434,17 +443,17 @@ EndInnings *endInnings;
         tableView.dataSource = self;
         tableView.delegate = self;
     
-    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"break",@"ChangeTeam",@"EndInnings",@"OverWicket", nil];
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     
     
    // RightSlideVC *rightSideVc = [[RightSlideVC alloc]initWithNibName:@"RightSlideVC" bundle:nil];
     //[tableView addSubview:rightSideVc.view];
     
         // Set ContentView in SideBar
-        [self.sideBar setContentViewInSideBar:rightSideVc.view];
-    rightSideVc.rightSlideTableView.delegate = self;
-    rightSideVc.rightSlideTableView.dataSource = self;
-        [self.sideBar setContentViewInSideBar:tableView];
+//        [self.sideBar setContentViewInSideBar:rightSideVc.view];
+//    rightSideVc.rightSlideTableView.delegate = self;
+//    rightSideVc.rightSlideTableView.dataSource = self;
+//        [self.sideBar setContentViewInSideBar:tableView];
     
     
     _View_Appeal.hidden=YES;
@@ -668,22 +677,28 @@ EndInnings *endInnings;
 
 #pragma mark - Gesture Handler
 
-- (void)handleSwipeFromRightside:(UIPanGestureRecognizer *)recognizer
+- (void)handleSwipeFromRightside:(UISwipeGestureRecognizer *)recognizer
 {
-    self.sideviewXposition.constant =-300;
-    self.commonViewXposition.constant=0;
-    self.commonViewwidthposition.constant =self.view.frame.size.width;
-    leftSlideSwipe = NO;
-    }
-- (void)handleSwipeFromLeftside:(UIPanGestureRecognizer *)recognizer
-{
+   
+    [UIView animateWithDuration:5.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{ self.sideviewXposition.constant =-300;
+        self.commonViewXposition.constant=0;
+        self.commonViewwidthposition.constant =self.view.frame.size.width;
+        leftSlideSwipe = NO;
+    } completion:^(BOOL finished){ }];
     
-    self.sideviewXposition.constant =0;
-    self.commonViewXposition.constant=300;
-    self.commonViewwidthposition.constant =768;
-    self.CommonviewRightsideposition.constant =self.view.frame.size.width+300;
-    leftSlideSwipe = YES;
-    [self.sideviewtable reloadData];
+    
+    }
+- (void)handleSwipeFromLeftside:(UISwipeGestureRecognizer *)recognizer
+{
+   
+        self.sideviewXposition.constant =0;
+        self.commonViewXposition.constant=300;
+        self.commonViewwidthposition.constant =768;
+        self.CommonviewRightsideposition.constant =self.view.frame.size.width+300;
+        leftSlideSwipe = YES;
+        [self.sideviewtable reloadData];
+    
+    
     
     
     
@@ -1286,15 +1301,15 @@ EndInnings *endInnings;
 {
     NSLog(@"btnname=%@",self.btn_StartBall.currentTitle);
     
-   
+    
     if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
     {
-       
+        
         startBallTime = [NSDate date];
         
         NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-       
+        
         
         NSString *time =[dateFormatter stringFromDate:[NSDate date]];
         
@@ -1316,18 +1331,32 @@ EndInnings *endInnings;
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
         self.btn_StartOver.userInteractionEnabled=YES;
         //        self.btn_StartBall.userInteractionEnabled=NO;
-         [self SaveBallEventREcordvalue];
+        [self SaveBallEventREcordvalue];
         [self AllBtndisableMethod];
         
         
         [self timeLeftSinceDate:startBallTime];
+        int overNo = fetchSEPageLoadRecord.BATTEAMOVERS;
+        int ballNo = fetchSEPageLoadRecord.BATTEAMOVRBALLS+1;//Check isillegal ball for pervious ball
+        int overballNo = fetchSEPageLoadRecord.BATTEAMOVRBALLS+1;
         
+        self.ballEventRecord.objOverno=[NSNumber numberWithInt:overNo];
+        self.ballEventRecord.objBallno=[NSNumber numberWithInt:ballNo];
+        self.ballEventRecord.objOverBallcount = [NSNumber numberWithInt:overballNo];
+        self.ballEventRecord.objBallcount=@1;
+        self.ballEventRecord.objBowlercode = fetchSEPageLoadRecord.currentBowlerPlayerCode;
+        self.ballEventRecord.objStrikercode = fetchSEPageLoadRecord.strickerPlayerCode;
+        self.ballEventRecord.objNonstrikercode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
+        
+        [self calculateRunsOnEndBall];
         
         [DBManager saveBallEventData:self.ballEventRecord];
         [DBManager insertBallCodeAppealEvent:self.ballEventRecord];
         [DBManager insertBallCodeFieldEvent: self.ballEventRecord bowlerEvent:selectedfieldPlayer fieldingFactor: selectedfieldFactor nrs :selectedNRS];
         [DBManager insertBallCodeWicketEvent:self.ballEventRecord];
         [DBManager GetBallDetails :_competitionCode :_matchCode];
+        
+        [self reloadBowlerTeamBatsmanDetails];
         
         
     }
@@ -2035,7 +2064,7 @@ EndInnings *endInnings;
         self.PichMapTittle.hidden=NO;
         [self.Allvaluedisplayview addSubview:self.PichMapTittle];
         
-        
+               self.img_pichmap.hidden=NO;
                    _View_Appeal.hidden=YES;
                 self.view_bowlType.hidden = YES;
                 self.view_fastBowl.hidden = YES;
@@ -2052,6 +2081,16 @@ EndInnings *endInnings;
                 //[self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
                  _View_Appeal.hidden=YES;
           _view_Wagon_wheel.hidden=NO;
+        
+        
+        
+        _View_Appeal.hidden=YES;
+        self.view_bowlType.hidden = YES;
+        self.view_fastBowl.hidden = YES;
+        self.view_aggressiveShot.hidden = YES;
+        self.view_defensive.hidden = YES;
+        self.img_pichmap.hidden=YES;
+        self.PichMapTittle.hidden=YES;
         
         if(IS_IPAD_PRO)
         {
@@ -3880,9 +3919,89 @@ EndInnings *endInnings;
     
     
     _view_table_select.hidden=NO;
+    
+    if(BreakVC.view != nil)
+    {
+        [BreakVC.view removeFromSuperview];
+    }
+    
+    
+    
     if(leftSlideSwipe == YES){
         
-       
+       if(indexPath.row == 0)
+       {
+           NSLog(@"1");
+          
+        [self BreakviewMethod];
+       }
+       else if(indexPath.row == 1)
+       {
+           NSLog(@"2");
+           [self ChangeTeam];
+       }
+       else if(indexPath.row == 2)
+       {
+           NSLog(@"3");
+           [self DeclearINNINGS];
+       }
+        else if(indexPath.row == 3)
+        {
+            NSLog(@"4");
+            [self ENDDAY];
+        }
+        else if(indexPath.row == 4)
+        {
+            NSLog(@"5");
+            [self ENDINNINGS];
+        }
+        else if(indexPath.row == 5)
+        {
+            NSLog(@"6");
+            [self ENDSession];
+        }
+        else if(indexPath.row == 6)
+        {
+            NSLog(@"7");
+            [self FollowOn];
+        }
+        else if(indexPath.row == 7)
+        {
+            NSLog(@"8");
+            [self PlayingXIEdit];
+        }
+        else if(indexPath.row == 8)
+        {
+            NSLog(@"9");
+            [self MatchResult];
+        }
+        else if(indexPath.row == 9)
+        {
+            NSLog(@"10");
+            [self OtherWicket];
+        }
+        else if(indexPath.row == 10)
+        {
+            NSLog(@"11");
+            [self Penalty];
+        }
+
+        else if(indexPath.row == 11)
+        {
+            NSLog(@"12");
+            [self PowerPlay];
+        }
+        else if(indexPath.row == 12)
+        {
+            NSLog(@"13");
+            [self revisedoverview];
+        }
+        else if(indexPath.row == 13)
+        {
+            NSLog(@"14");
+            [self revisiedTarget];
+        }
+
         
     }
     
@@ -4555,6 +4674,205 @@ EndInnings *endInnings;
     //    }
 }
 
+// Sidemenuview action
+
+-(void) BreakviewMethod
+{
+    BreakVC = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
+    
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    //fullview.alpha=0.9;
+    
+    [self.view addSubview:fullview];
+    //     BreakVC = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
+    //
+    [fullview addSubview:BreakVC.view];
+    
+    [self addChildViewController:BreakVC];
+    BreakVC.view.frame =CGRectMake(90, 200, BreakVC.view.frame.size.width, BreakVC.view.frame.size.height);
+    
+    
+    [fullview addSubview:BreakVC.view];
+    BreakVC.view.alpha = 0;
+    [BreakVC didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         BreakVC.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
+    
+    if (IS_IPAD_PRO) {
+        
+        BreakVC.view.frame =CGRectMake(250, 500, BreakVC.view.frame.size.width, BreakVC.view.frame.size.height);
+        [self.view addSubview:BreakVC.view];
+        BreakVC.view.alpha = 0;
+        [BreakVC didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             BreakVC.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+    
+    else{
+        
+        
+        BreakVC.view.frame =CGRectMake(100, 200, BreakVC.view.frame.size.width, BreakVC.view.frame.size.height);
+        //[self.view addSubview:add.view];
+        BreakVC.view.alpha = 0;
+        [BreakVC didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             BreakVC.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+}
+
+-(void)ChangeTeam
+{
+    
+}
+-(void)ENDINNINGS
+{
+    EndInningsVC *endInning = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
+    
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    //fullview.alpha=0.9;
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:revisedTarget.view];
+    
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:endInning];
+    endInning.view.frame =CGRectMake(90, 200, endInning.view.frame.size.width, endInning.view.frame.size.height);
+    
+    
+    [fullview addSubview:endInning.view];
+    endInning.view.alpha = 0;
+    [endInning didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         endInning.view.alpha = 1;
+     }
+                     completion:nil];
+}
+-(void)ENDDAY
+{
+    
+}
+-(void)ENDSession
+{
+    
+}
+-(void)FollowOn
+{
+    
+}
+-(void)PlayingXIEdit
+{
+    
+}
+-(void)DeclearINNINGS
+{
+    
+}
+-(void)MatchResult
+{
+    
+}
+-(void)OtherWicket
+{
+    
+}
+-(void)Penalty
+{
+    
+}
+-(void)PowerPlay
+{
+    
+}
+
+-(void) revisiedTarget
+{
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    //fullview.alpha=0.9;
+    
+    [self.view addSubview:fullview];
+    revisedTarget = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
+    revisedTarget.competitionCode=self.competitionCode;
+    revisedTarget.matchCode =self.matchCode;
+    [fullview addSubview:revisedTarget.view];
+    
+    
+    if (IS_IPAD_PRO) {
+        
+        
+        
+        
+        //vc2 *viewController = [[vc2 alloc]init];
+        
+        
+        revisedTarget.view.frame =CGRectMake(250, 500, revisedTarget.view.frame.size.width, revisedTarget.view.frame.size.height);
+        [self.view addSubview:revisedTarget.view];
+        revisedTarget.view.alpha = 0;
+        [revisedTarget didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             revisedTarget.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+    
+    else{
+        //intialBreakVC *add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
+        
+        
+        
+        //vc2 *viewController = [[vc2 alloc]init];
+        // [self addChildViewController:add];
+        
+        revisedTarget.view.frame =CGRectMake(100, 200, revisedTarget.view.frame.size.width, revisedTarget.view.frame.size.height);
+        //[self.view addSubview:add.view];
+        revisedTarget.view.alpha = 0;
+        [revisedTarget didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             revisedTarget.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+
+}
+-(IBAction)FullviewHideMethod:(id)sender
+{
+    [fullview removeFromSuperview];
+}
 
 -(void) selectExtrasOption{
     
@@ -4915,7 +5233,12 @@ EndInnings *endInnings;
 - (IBAction)btn_last_bowler_name:(id)sender {
 }
 
-
+-(IBAction)didclickcloseSideMenu:(id)sender
+{
+    self.sideviewXposition.constant =-300;
+    self.commonViewXposition.constant=0;
+    self.commonViewwidthposition.constant =self.view.frame.size.width;
+}
 -(void) reloadBowlerTeamBatsmanDetails{
     
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
@@ -7863,7 +8186,7 @@ EndInnings *endInnings;
     _ballEventRecord.objWWY1=@(self.centerlbl.center.y);
     _ballEventRecord.objWWX2=@(Xposition);
     _ballEventRecord.objWWY2=@(Yposition);
-    _ballEventRecord.objWWREGION=@(regioncode);
+    _ballEventRecord.objWWREGION=regioncode;
     
     
     
@@ -7900,38 +8223,96 @@ EndInnings *endInnings;
 
 ////Revised overs
 //
-//-(void) revisedoverview{
-//    
+-(void) revisedoverview{
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+   
+    
+    [self.view addSubview:fullview];
+     revicedOverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
+    revicedOverVc.matchCode=self.matchCode;
+    revicedOverVc.competitionCode =self.competitionCode;
+    [fullview addSubview:revicedOverVc.view];
+   
+    //[revicedOverVc.btn_submit addTarget:self action:@selector(btn_submit:) forControlEvents:UIControlEventTouchUpInside];
+
+   
+    if (IS_IPAD_PRO) {
+        
+        
+        
+        
+        //vc2 *viewController = [[vc2 alloc]init];
+        
+        
+        revicedOverVc.view.frame =CGRectMake(250, 500, revicedOverVc.view.frame.size.width, revicedOverVc.view.frame.size.height);
+        //[self.view addSubview:BreakVC.view];
+        revicedOverVc.view.alpha = 0;
+        
+        [revicedOverVc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             revicedOverVc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+    
+    else{
+        //intialBreakVC *add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
+        
+        
+        
+        //vc2 *viewController = [[vc2 alloc]init];
+        // [self addChildViewController:add];
+        
+        revicedOverVc.view.frame =CGRectMake(100, 200, revicedOverVc.view.frame.size.width, revicedOverVc.view.frame.size.height);
+        //[self.view addSubview:add.view];
+        revicedOverVc.view.alpha = 0;
+       [revicedOverVc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             revicedOverVc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+ 
 //    RevicedOverVC *revisedoverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
 //    revisedoverVc.matchCode =self.matchCode;
 //    revisedoverVc.competitionCode =self.competitionCode;
-//    
-//    [self.view addSubview:revisedoverVc.view];
+//
+//    [fullview addSubview:revisedoverVc.view];
 //    revisedoverVc.txt_comments.delegate=self;
 //    revisedoverVc.txt_overs.delegate=self;
-//    [revisedoverVc.btn_submit addTarget:self action:@selector(btn_submit:) forControlEvents:UIControlEventTouchUpInside];    
-//}
+//    [revisedoverVc.btn_submit addTarget:self action:@selector(btn_submit:) forControlEvents:UIControlEventTouchUpInside];
+}
 //
-//- (IBAction)btn_submit:(id)sender {
-//if(self.checkInternetConnection){
-//    NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/REVISEOVER/%@/%@/TEA0000013/1/%@/%@",self.competitionCode,self.matchCode,strovers,strcomments];
-//    
-//    NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//    
-//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//    NSURLResponse *response;
-//    NSError *error;
-//    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//    
-//    
-//    NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-//    
-//    
-//}else{
-//
-//    [DBManager updateRevisedOvers:strovers comments:strcomments matchCode:self.matchCode competitionCode:self.competitionCode];
-//   }
-//}
+- (IBAction)btn_submit:(id)sender
+{
+if(self.checkInternetConnection){
+    NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/REVISEOVER/%@/%@/TEA0000013/1/%@/%@",self.competitionCode,self.matchCode,strovers,strcomments];
+    
+    NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLResponse *response;
+    NSError *error;
+    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    
+    NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+    
+    
+}else{
+
+    [DBManager updateRevisedOvers:strovers comments:strcomments matchCode:self.matchCode competitionCode:self.competitionCode];
+   }
+}
 //
 //- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
 //    NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
@@ -8092,7 +8473,8 @@ EndInnings *endInnings;
         
         
        scoreCardVC.BATTEAMRUNS= fetchSEPageLoadRecord.BATTEAMRUNS;
-        scoreCardVC.RUNSREQUIRED= fetchSEPageLoadRecord.RUNSREQUIRED;
+    //    scoreCardVC.RUNSREQUIRED= fetchSEPageLoadRecord.RUNSREQUIRED;
+        scoreCardVC.RUNSREQUIRED= @"0.0";
         
         
         scoreCardVC.competitionCode= self.competitionCode;

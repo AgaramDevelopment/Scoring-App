@@ -12,6 +12,10 @@
 #import "FixturesRecord.h"
 
 @interface RevicedOverVC ()<UITextFieldDelegate>
+{
+    NSString *strovers;
+    NSString * strcomments;
+}
 @property(nonatomic,strong)NSMutableArray*selectOvers;
 
 
@@ -40,21 +44,30 @@
 }
 
 // This method is called once we complete editing
--(void)textFieldDidEndEditing:(UITextField *)textField{
-    NSLog(@"Text field ended editing");
-}
-
-// This method enables or disables the processing of return key
-
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
-    if ([string isEqualToString:@""]) {
-        return NO;
+
+    if(textField.tag == 21)
+    {
+
+        if (![string isEqualToString:@""]) {
+            strovers=[textField.text stringByAppendingString:string];
+            return YES;
+
+        }
     }
-    else {
-        return YES;
+    else if (textField.tag == 22)
+    {
+        if (![string isEqualToString:@""]) {
+            strcomments=[textField.text stringByAppendingString:string];
+            return YES;
+
+        }
+
     }
+    return YES;
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     NSLog(@"textFieldShouldReturn:");
     if (textField.tag == 21) {
@@ -67,6 +80,28 @@
     return YES;
 }
 
+-(IBAction)btn_submit:(id)sender
+{
+//    if(self.checkInternetConnection){
+//        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/REVISEOVER/%@/%@/TEA0000013/1/%@/%@",self.competitionCode,self.matchCode,strovers,strcomments];
+//        
+//        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//        
+//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//        NSURLResponse *response;
+//        NSError *error;
+//        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//        
+//        
+//        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//        
+//        
+//    }else{
+    
+        [DBManager updateRevisedOvers:strovers comments:strcomments matchCode:self.matchCode competitionCode:self.competitionCode];
+    //}
+
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

@@ -215,7 +215,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *SESSIONNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *SESSIONNO = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return SESSIONNO;
@@ -248,10 +248,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+               // NSString *obj =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 
-                NSNumber *STARTOVER = [NSNumber numberWithInteger: [[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)] integerValue]];
-                sqlite3_finalize(statement);
-                sqlite3_close(dataBase);
+                NSNumber *STARTOVER =@1; //[NSNumber numberWithInteger:[ obj integerValue]];
+                //sqlite3_finalize(statement);
+               // sqlite3_close(dataBase);
                 return STARTOVER;
             }
             

@@ -155,7 +155,7 @@
     
         Fixvc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
         EventRecord *eventRecord = [selectindexarray objectAtIndex:0] ;
-        Fixvc.CompitionCode=[eventRecord competitioncode];
+        Fixvc.CompitionCode=eventRecord.competitioncode;
 
         [self.navigationController pushViewController:Fixvc animated:YES];
     }

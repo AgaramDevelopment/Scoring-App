@@ -14,9 +14,11 @@
 @property (strong, nonatomic) IBOutlet UITextField *txt_overs;
 @property (strong, nonatomic) IBOutlet UITextField *txt_comments;
 @property(strong,nonatomic) IBOutlet UIButton * btn_submit;
-- (IBAction)btn_submit:(id)sender;
+
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;
 
+- (IBAction)btn_submit:(id)sender;
+-(BOOL) checkInternetConnection;
 
 @end

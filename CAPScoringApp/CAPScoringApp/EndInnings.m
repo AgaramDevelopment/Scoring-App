@@ -218,7 +218,7 @@
     }
     
     //SESSION NO
-SESSIONNO = [DBManagerEndInnings GetSessionNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO:DAYNO];
+   SESSIONNO = [DBManagerEndInnings GetSessionNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO:@"1"];
     
     if(SESSIONNO = nil)
     {
@@ -226,7 +226,7 @@ SESSIONNO = [DBManagerEndInnings GetSessionNoForInsertEndInnings : COMPETITIONCO
         
     }
     //STARTOVERNO
-    STARTOVERNO = [DBManagerEndInnings GetStartoverNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO: DAYNO];
+    STARTOVERNO = [DBManagerEndInnings GetStartoverNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: @"1": OLDINNINGSNO: @"1"];
     
     
     if(STARTOVERNO = nil)
@@ -235,7 +235,7 @@ SESSIONNO = [DBManagerEndInnings GetSessionNoForInsertEndInnings : COMPETITIONCO
     }
     
      //STARTBALLNO
-    STARTBALLNO = [DBManagerEndInnings GetBallNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO: STARTOVERNO];
+    STARTBALLNO = [DBManagerEndInnings GetBallNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO: 0];
     
     
     if(STARTBALLNO = nil)
