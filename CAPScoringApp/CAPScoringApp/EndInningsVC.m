@@ -21,7 +21,7 @@ EndInnings *end;
 NSMutableArray *endInningsArray;
 @implementation EndInningsVC
 @synthesize MATCHCODE;
-
+EndInnings *innings;
 BOOL IsBack;
 
 - (void)viewDidLoad {
@@ -32,10 +32,11 @@ BOOL IsBack;
     [self.btn_save addTarget:self action:@selector(btn_save:) forControlEvents:UIControlEventTouchUpInside];
     
     self.lbl_thirdnFourthInnings.hidden = YES;
-     EndInnings *innings = [[EndInnings alloc]init];
+    
+     innings = [[EndInnings alloc]init];
     MATCHCODE = @"IMSC02200224DB2663B00003";
     endInningsArray = [[NSMutableArray alloc]init];
-    endInningsArray = [DBManagerEndInnings FetchEndInningsDetailsForFetchEndInnings: MATCHCODE];
+   endInningsArray = [DBManagerEndInnings FetchEndInningsDetailsForFetchEndInnings: MATCHCODE];
     
    
     //self.view_allControls.hidden = YES;
@@ -253,7 +254,7 @@ self.lbl_duration.text=[NSString stringWithFormat:@"%.20f", Duration];
     NSString*startInningsTime = obj.STARTTIME;
     NSString*endInningsTime  = obj.ENDTIME;
     NSString*teamName = obj.TEAMNAME;
-    NSNumber*totalRuns =  obj.TOTALRUNS;
+    //NSNumber*totalRuns =  obj.TOTALRUNS;
     NSString*totalOvers = obj.TOTALOVERS;
     NSNumber *totalWickets = obj.TOTALWICKETS;
     
@@ -262,7 +263,7 @@ self.lbl_duration.text=[NSString stringWithFormat:@"%.20f", Duration];
     self.txt_startInnings.text = startInningsTime;
     self.txt_endInnings.text = endInningsTime;
     self.lbl_teamName.text = teamName;
-    self.lbl_runScored.text = [NSString stringWithFormat:@"%@",totalRuns];
+    //self.lbl_runScored.text = [NSString stringWithFormat:@"%@",totalRuns];
     self.lbl_wktLost.text = [NSString stringWithFormat:@"%@", totalWickets];
 
   
@@ -303,6 +304,17 @@ self.lbl_duration.text=[NSString stringWithFormat:@"%.20f", Duration];
     }
         
         
+    
+}
+
+- (IBAction)btn_delete:(id)sender {
+    
+
+    
+    innings = [[EndInnings alloc]init];
+    
+   [innings DeleteEndInnings:@"UCC0000004" :@"IMSC02200224DB2663B00003" :@"TEA0000024":@"1"];
+    
     
 }
 @end

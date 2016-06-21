@@ -69,27 +69,7 @@
     
     _view_reports.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
     
-    EndInningsVC *endInning = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
-
-
-    
-    
-    //vc2 *viewController = [[vc2 alloc]init];
-    [self addChildViewController:endInning];
-    endInning.view.frame =CGRectMake(90, 200, endInning.view.frame.size.width, endInning.view.frame.size.height);
-    [self.view addSubview:endInning.view];
-    endInning.view.alpha = 0;
-    [endInning didMoveToParentViewController:self];
-    
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         endInning.view.alpha = 1;
-     }
-                     completion:nil];
-    
-    
-  //  endInnings.view_allControls.hidden = YES;
-    
+       
     
     
 }

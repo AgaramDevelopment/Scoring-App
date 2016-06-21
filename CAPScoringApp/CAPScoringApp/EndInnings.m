@@ -1015,56 +1015,63 @@
 }
 
 //SP_DELETEENDINNINGS---------------------------------------------------------------------------
-//-(void) DeleteEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO
-//{
-//    NSString* MATCHTYPE = [[NSString alloc] init];
-//    int INNINGSCOUNT;
-//    
-//    
-//    MATCHTYPE = [DBManagerEndInnings GetMatchTypeUsingCompetitionForDeleteEndInnings : COMPETITIONCODE];
-//    
-//    if(![DBManagerEndInnings GetBallCodeForDeleteEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO] && ![DBManagerEndInnings GetInningsNoForDeleteEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO])
-//    {
-//        
-//        [DBManagerEndInnings UpdateInningsEventForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO];
-//        
-//        [DBManagerEndInnings DeleteInningsEventForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
-//        
-//        [DBManagerEndInnings DeleteOverEventsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
-//        
-//        [DBManagerEndInnings DeleteBowlerOverDetailsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
-//        
-//        [DBManagerEndInnings DeleteSessionEventsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
-//        
-//        if([DBManagerEndInnings GetSessionNoForDeleteEndInninges : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO])
-//        {
-//            
-//            [DBManagerEndInnings DeleteSessionEventsInInningsEntryForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
-//            
-//            [DBManagerEndInnings DeleteDayEventsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
-//            
-//            if([DBManagerEndInnings GetDayNoForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO]!=0)
-//            {
-//                
-//                [DBManagerEndInnings DeleteDayEventsInInningsEntryForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
-//                
-//                [DBManagerEndInnings DeletePenaltyDetailsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
-//                
-//                INNINGSCOUNT=[DBManagerEndInnings GetInningsCountForDeleteEndInnings : MATCHCODE];
-//                
-//                NSArray *array = @[@"MSC022", @"MSC024", @"MSC115", @"MSC116"];
-//                if (MATCHTYPE IN ( [array contains]) && INNINGSCOUNT > 1)
-//                {
-//                    [DBManagerEndInnings UpdatematchRegistrationForDeleteEndInnings : COMPETITIONCODE : MATCHCODE];
-//                    
-//                }
-//                
-//            }
-//            NSMutableArray *InningsArrayForDelete=[DBManagerEndInnings GetInningsDetailsForDeleteEndInnings: MATCHCODE];	  
-//        }
-//        
-//    }
-//    
-//}
+
+-(void) DeleteEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO
+{
+   
+    
+    MATCHTYPE = [DBManagerEndInnings GetMatchTypeUsingCompetitionForDeleteEndInnings : COMPETITIONCODE];
+    
+    if([DBManagerEndInnings GetBallCodeForDeleteEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO] && [DBManagerEndInnings GetInningsNoForDeleteEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO])
+    {
+        
+        [DBManagerEndInnings UpdateInningsEventForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO];
+        
+        [DBManagerEndInnings DeleteInningsEventForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+        
+        [DBManagerEndInnings DeleteOverEventsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+        
+        [DBManagerEndInnings DeleteBowlerOverDetailsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+        
+        [DBManagerEndInnings DeleteSessionEventsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+        
+    if([DBManagerEndInnings GetSessionNoForDeleteEndInninges : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO])
+        {
+            
+            [DBManagerEndInnings DeleteSessionEventsInInningsEntryForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+            
+            [DBManagerEndInnings DeleteDayEventsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+            
+    if([DBManagerEndInnings GetDayNoForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO])
+            {
+                
+                [DBManagerEndInnings DeleteDayEventsInInningsEntryForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+                
+                [DBManagerEndInnings DeletePenaltyDetailsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+                
+                
+                NSString *inningsCount = [DBManagerEndInnings GetInningsCountForDeleteEndInnings : MATCHCODE];
+                
+                INNINGSCOUNT = [inningsCount integerValue];
+                
+                
+                
+   
+        if ([MATCHTYPE isEqualToString:@"MSC022"] || [ MATCHTYPE isEqualToString:@"MSC024"]||[ MATCHTYPE isEqualToString:@"MSC115"]||[ MATCHTYPE isEqualToString:@"MSC116"] && INNINGSCOUNT > 1)
+                    
+                    
+                   
+                {
+                    [DBManagerEndInnings UpdatematchRegistrationForDeleteEndInnings : COMPETITIONCODE : MATCHCODE];
+                    
+                }
+                
+            }
+            NSMutableArray *InningsArrayForDelete=[DBManagerEndInnings GetInningsDetailsForDeleteEndInnings: MATCHCODE];	  
+        }
+        
+    }
+    
+}
 
 @end

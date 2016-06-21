@@ -203,6 +203,7 @@
 +(BOOL) UpdatematchRegistrationForDeleteEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 +(NSMutableArray *) GetInningsDetailsForDeleteEndInnings:(NSString*) MATCHCODE;
 
++(BOOL) GetSessionNoForDeleteEndInninges:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) OLDINNINGSNO;
 
 
 

@@ -66,4 +66,6 @@
 
 - (IBAction)btn_back:(id)sender;
 
+- (IBAction)btn_delete:(id)sender;
+
 @end
