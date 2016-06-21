@@ -151,6 +151,8 @@
     UIView * fullview;
     RevicedOverVC * revicedOverVc ;
     RevisedTarget  *revisedTarget;
+    
+    CAShapeLayer *shapeLayer;
 }
 
 @property(strong,nonatomic)NSString *matchTypeCode;
@@ -4687,6 +4689,11 @@ EndInnings *endInnings;
     [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     //fullview.alpha=0.9;
     
+    BreakVC.MATCHCODE=self.matchCode;
+    BreakVC.COMPETITIONCODE=self.competitionCode;
+    BreakVC.INNINGSNO=fetchSEPageLoadRecord.INNINGSNO;
+    
+    
     [self.view addSubview:fullview];
     //     BreakVC = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
     //
@@ -5322,20 +5329,22 @@ EndInnings *endInnings;
 
 
 
--(void)didClickWagonWheelmapTapAction:(UIGestureRecognizer *)wagon_Wheelgesture
-{
+-(void)didClickWagonWheelmapTapAction:(UIGestureRecognizer *)wagon_Wheelgesture {
+    
+    for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
+        if ([layer.name isEqualToString:@"DrawLine"]) {
+            [layer removeFromSuperlayer];
+            break;
+        }
+    }
+    
+    
     CGPoint p = [wagon_Wheelgesture locationInView:self.img_WagonWheel];
-    float Xposition = p.x;
-    float Yposition = p.y;
+    int Xposition = p.x;
+    int Yposition = p.y;
     CGMutablePathRef straightLinePath = CGPathCreateMutable();
     CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
     CGPathAddLineToPoint(straightLinePath, NULL,self.centerlbl.center.x,self.centerlbl.center.y);
-    
-//    CGContextSetFillColorWithColor(UIGraphicsGetCurrentContext(),self.backgroundColor.CGColor);
-//    
-//    CGContextFillRect(UIGraphicsGetCurrentContext(), rect);
- 
-    
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.path = straightLinePath;
     UIColor *fillColor = [UIColor redColor];
@@ -5344,9 +5353,39 @@ EndInnings *endInnings;
     shapeLayer.strokeColor = strokeColor.CGColor;
     shapeLayer.lineWidth = 2.0f;
     shapeLayer.fillRule = kCAFillRuleNonZero;
-    
-    
+    shapeLayer.name = @"DrawLine";
     [self.img_WagonWheel.layer addSublayer:shapeLayer];
+//    
+//    CGPoint p = [wagon_Wheelgesture locationInView:self.img_WagonWheel];
+//    float Xposition = p.x;
+//    float Yposition = p.y;
+//    CGMutablePathRef straightLinePath = CGPathCreateMutable();
+//    CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+//    CGPathAddLineToPoint(straightLinePath, NULL,self.centerlbl.center.x,self.centerlbl.center.y);
+    
+    
+    
+  
+    
+ 
+    
+    
+//    
+//    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+//    shapeLayer.path = straightLinePath;
+//    UIColor *fillColor = [UIColor redColor];
+//    shapeLayer.fillColor = fillColor.CGColor;
+//    UIColor *strokeColor = [UIColor redColor];
+//    shapeLayer.strokeColor = strokeColor.CGColor;
+//    shapeLayer.lineWidth = 2.0f;
+//    shapeLayer.fillRule = kCAFillRuleNonZero;
+//       [self.img_WagonWheel.layer addSublayer:shapeLayer];
+    //Add your code here that you are using to draw the line
+
+    
+   
+
+    
     
     
     //Long Stop Third Man
@@ -5371,6 +5410,8 @@ EndInnings *endInnings;
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
+           
+            
         }
     
         else if(( Xposition >222 && Yposition <0)) {
@@ -5380,6 +5421,7 @@ EndInnings *endInnings;
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }
+        
     }
     
     else if(( Xposition <185 && Xposition  > 180   && Yposition > 19 && Yposition <33))
@@ -8179,14 +8221,23 @@ EndInnings *endInnings;
         }
     }
     
-
-
+    if (IS_IPAD_PRO) {
+        _ballEventRecord.objWWX1=@(221);
+        _ballEventRecord.objWWY1=@(186);
+        _ballEventRecord.objWWX2=@(Xposition);
+        _ballEventRecord.objWWY2=@(Yposition);
+        _ballEventRecord.objWWREGION=regioncode;
+    }
+    else{
+        
+        _ballEventRecord.objWWX1=@(172);
+        _ballEventRecord.objWWY1=@(145);
+        _ballEventRecord.objWWX2=@(Xposition);
+        _ballEventRecord.objWWY2=@(Yposition);
+        _ballEventRecord.objWWREGION=regioncode;
     
-    _ballEventRecord.objWWX1=@(self.centerlbl.center.x);
-    _ballEventRecord.objWWY1=@(self.centerlbl.center.y);
-    _ballEventRecord.objWWX2=@(Xposition);
-    _ballEventRecord.objWWY2=@(Yposition);
-    _ballEventRecord.objWWREGION=regioncode;
+    }
+    
     
     
     
