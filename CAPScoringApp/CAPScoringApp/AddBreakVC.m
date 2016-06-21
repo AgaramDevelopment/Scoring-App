@@ -12,6 +12,8 @@
 #import "FetchSEPageLoadRecord.h"
 #import "BreakVC.h"
 #import "intialBreakVC.h"
+
+
 //#import "Scor"
 
 @interface AddBreakVC ()
@@ -19,12 +21,11 @@
     
     NSString *BREAKSTARTTIME;
     NSString *BREAKENDTIME;
-    NSString*INNINGSNO;
+ 
     NSString *BREAKCOMMENTS;
     NSString *BREAKNO;
     NSString * ISINCLUDEDURATION;
-    NSString*COMPETITIONCODE;
-    NSString*MATCHCODE;
+   
     NSDateFormatter *formatter;
     NSDateFormatter *formatter1;
     NSDate *dateFromString;
@@ -38,7 +39,9 @@
 @end
 
 @implementation AddBreakVC
-
+@synthesize COMPETITIONCODE;
+@synthesize MATCHCODE;
+@synthesize INNINGSNO;
 - (void)viewDidLoad {
     [super viewDidLoad];
   
@@ -194,9 +197,9 @@ _Text_BreakStart.text=@"";
     
      [self DurationCalculation];
     BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
-    MATCHCODE=@"IMSC02214DDA97AF2FD00004";
-    COMPETITIONCODE=@"UCC0000004";
-    INNINGSNO=@"2";
+//    MATCHCODE=@"IMSC02214DDA97AF2FD00004";
+//    COMPETITIONCODE=@"UCC0000004";
+//    INNINGSNO=@"2";
     
     BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
     

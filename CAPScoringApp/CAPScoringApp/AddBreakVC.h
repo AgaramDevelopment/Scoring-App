@@ -38,4 +38,8 @@
 - (IBAction)hidepickerbtn:(id)sender;
 - (IBAction)back_btn:(id)sender;
 
+@property(strong,nonatomic)NSString*MATCHCODE;
+@property(strong,nonatomic)NSString*COMPETITIONCODE;
+@property(strong,nonatomic)NSString*INNINGSNO;
+
 @end

@@ -4689,6 +4689,11 @@ EndInnings *endInnings;
     [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     //fullview.alpha=0.9;
     
+    BreakVC.MATCHCODE=self.matchCode;
+    BreakVC.COMPETITIONCODE=self.competitionCode;
+    BreakVC.INNINGSNO=fetchSEPageLoadRecord.INNINGSNO;
+    
+    
     [self.view addSubview:fullview];
     //     BreakVC = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
     //
