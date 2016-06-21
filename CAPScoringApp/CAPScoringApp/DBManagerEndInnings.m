@@ -1235,7 +1235,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BALLEVENTS(BALLCODE, COMPETITIONCODE, MATCHCODE,TEAMCODE, INNINGSNO, DAYNO, OVERNO,BALLNO, BALLCOUNT, SESSIONNO, STRIKERCODE, NONSTRIKERCODE, BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE, UMPIRE2CODE, ATWOROTW, BOWLINGEND,BOWLTYPE, SHOTTYPE,  ISLEGALBALL,ISFOUR,ISSIX,RUNS,OVERTHROW, TOTALRUNS, WIDE, NOBALL,BYES,LEGBYES,PENALTY, TOTALEXTRAS,GRANDTOTAL,RBW,PMLINECODE, PMLENGTHCODE,PMSTRIKEPOINT, PMX1, PMY1,PMX2,PMY2,PMX3,        PMY3,WWREGION, WWX1, WWY1, WWX2, WWY2, BALLDURATION,ISAPPEAL,ISBEATEN,ISUNCOMFORT,ISWTB,        ISRELEASESHOT, MARKEDFOREDIT,REMARKS) VALUES ('%@','%@','%@','%@','%@', '%@','%@','%@',1,'%@',        '%@','%@','%@','%@','%@','%@','%@','%@','','',1,0,0,0,0,0,0,0,0,0,0,0,0,0,'','', '', 1,1,1,1,1,        1,'',165,124,165,124,0,0,0,0,0,0,0,'')", BALLCODENO, COMPETITIONCODE,MATCHCODE, TEAMCODE, INNINGSNO, DAYNO, OVERNO , BALLNO, SESSIONNO,STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE, UMPIRE2CODE,ATWOROTW,BOWLINGEND];
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BALLEVENTS(BALLCODE, COMPETITIONCODE, MATCHCODE,TEAMCODE, INNINGSNO, DAYNO, OVERNO,BALLNO, BALLCOUNT, SESSIONNO, STRIKERCODE, NONSTRIKERCODE, BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE, UMPIRE2CODE, ATWOROTW, BOWLINGEND,BOWLTYPE, SHOTTYPE,  ISLEGALBALL,ISFOUR,ISSIX,RUNS,OVERTHROW, TOTALRUNS, WIDE, NOBALL,BYES,LEGBYES,PENALTY, TOTALEXTRAS,GRANDTOTAL,RBW,PMLINECODE, PMLENGTHCODE,PMSTRIKEPOINT, PMX1, PMY1,PMX2,PMY2,PMX3, PMY3,WWREGION, WWX1, WWY1, WWX2, WWY2, BALLDURATION,ISAPPEAL,ISBEATEN,ISUNCOMFORT,ISWTB,ISRELEASESHOT, MARKEDFOREDIT,REMARKS) VALUES ('%@','%@','%@','%@','%@', '%@','%@','%@',1,'%@',        '%@','%@','%@','%@','%@','%@','%@','%@','','',1,0,0,0,0,0,0,0,0,0,0,0,0,0,'','', '', 1,1,1,1,1,        1,'',165,124,165,124,0,0,0,0,0,0,0,'')", BALLCODENO, COMPETITIONCODE,MATCHCODE, TEAMCODE, INNINGSNO, DAYNO, OVERNO , BALLNO, SESSIONNO,STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE, UMPIRE2CODE,ATWOROTW,BOWLINGEND];
         const char *selectStmt = [updateSQL UTF8String];
         
         if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
@@ -2566,7 +2566,7 @@ return 0;
         
     }
                                                           
- //SP_FETCHENDINNINGS-------------------------------------------------------------------------------------
+//SP_FETCHENDINNINGS---------------------------------------------------------------------------------
                                                           
 +(NSString *)GetTeamNameForFetchEndInnings:(NSString *)TEAMCODE
 {
@@ -2911,7 +2911,7 @@ return 0;
         
     }
 
-//--------------------------------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------------------------
 //SP_DELETEENDINNINGS
 
 +(NSString*) GetMatchTypeUsingCompetitionForDeleteEndInnings:(NSString*) COMPETITIONCODE{
@@ -2989,7 +2989,7 @@ return 0;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT INNINGSNO FROM INNINGSEVENTS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'   AND INNINGSNO>'%@' AND INNINGSSTATUS=1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT INNINGSNO FROM INNINGSEVENTS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO>'%@' AND INNINGSSTATUS=1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
         
         
         const char *update_stmt = [updateSQL UTF8String];
@@ -3023,21 +3023,26 @@ return 0;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE  INNINGSEVENTS  SET  INNINGSSTARTTIME='',INNINGSENDTIME='',TOTALRUNS='',TOTALOVERS='',TOTALWICKETS='',INNINGSSTATUS='0',ISDECLARE='0'  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND  TEAMCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,OLDINNINGSNO];
-        const char *selectStmt = [updateSQL UTF8String];
-        
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS  SET  INNINGSSTARTTIME='',INNINGSENDTIME='',TOTALRUNS='',TOTALOVERS='',TOTALWICKETS='',INNINGSSTATUS='0',ISDECLARE='0'  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,OLDINNINGSNO];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
         }
     }
     sqlite3_reset(statement);
     return NO;
-    
 }
+
 
 +(BOOL) DeleteInningsEventForDeleteEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) OLDINNINGSNO{
     
@@ -3047,20 +3052,24 @@ return 0;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"DELETE INNINGSEVENTS  WHERE COMPETITIONCODE='%@' AND   MATCHCODE='%@'  AND   INNINGSNO='%@'+1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
-        const char *selectStmt = [updateSQL UTF8String];
-        
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM INNINGSEVENTS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'+1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
         }
     }
     sqlite3_reset(statement);
     return NO;
-    
 }
 
 +(BOOL) DeleteOverEventsForDeleteEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) OLDINNINGSNO
@@ -3072,20 +3081,24 @@ return 0;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"DELETE OVEREVENTS WHERE COMPETITIONCODE='%@' AND   MATCHCODE='%@'  AND   INNINGSNO='%@'+1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
-        const char *selectStmt = [updateSQL UTF8String];
-        
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM OVEREVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'+1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
         }
     }
     sqlite3_reset(statement);
     return NO;
-    
 }
 
 +(BOOL) DeleteBowlerOverDetailsForDeleteEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) OLDINNINGSNO{
@@ -3096,20 +3109,24 @@ return 0;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"DELETE BOWLEROVERDETAILS WHERE COMPETITIONCODE='%@' AND   MATCHCODE='%@'  AND   INNINGSNO='%@'+1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
-        const char *selectStmt = [updateSQL UTF8String];
-        
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM BOWLEROVERDETAILS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'+1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
         }
     }
     sqlite3_reset(statement);
     return NO;
-    
 }
 
 +(BOOL) DeleteSessionEventsForDeleteEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) OLDINNINGSNO{
@@ -3120,7 +3137,7 @@ return 0;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"DELETE SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND   MATCHCODE='%@'  AND   INNINGSNO='%@'+1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'+1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
         const char *selectStmt = [updateSQL UTF8String];
         
         if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
@@ -3144,7 +3161,7 @@ return 0;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT SESSIONNO FROM  SESSIONEVENTS WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND INNINGSNO='%@' AND SESSIONSTATUS='0'",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT SESSIONNO FROM  SESSIONEVENTS WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@' AND SESSIONSTATUS='0'",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
         
         
         const char *update_stmt = [updateSQL UTF8String];
@@ -3178,20 +3195,24 @@ return 0;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"DELETE SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND  MATCHCODE='%@' AND INNINGSNO='%@' AND  SESSIONNO=(SELECT MAX(SESSIONNO) FROM SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND  MATCHCODE='%@'  AND INNINGSNO='%@' AND  SESSIONSTATUS='0') ",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
-        const char *selectStmt = [updateSQL UTF8String];
-        
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND  MATCHCODE='%@' AND INNINGSNO='%@' AND  SESSIONNO=(SELECT MAX(SESSIONNO) FROM SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND  MATCHCODE='%@'  AND INNINGSNO='%@' AND  SESSIONSTATUS='0')",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO,COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
         }
     }
     sqlite3_reset(statement);
     return NO;
-    
 }
 
 +(BOOL) DeleteDayEventsForDeleteEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) OLDINNINGSNO{
@@ -3202,24 +3223,26 @@ return 0;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"DELETE DAYEVENTS WHERE COMPETITIONCODE='%@' AND   MATCHCODE='%@' AND INNINGSNO='%@'+1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM DAYEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'+1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
         
-        const char *selectStmt = [updateSQL UTF8String];
-        
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
         }
     }
     sqlite3_reset(statement);
     return NO;
-    
 }
-
-
 
 +(NSString*) GetDayNoForDeleteEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) OLDINNINGSNO{
     
@@ -3263,21 +3286,25 @@ return 0;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"DELETE DAYEVENTS WHERE COMPETITIONCODE='%@' AND  MATCHCODE='%@'  AND   INNINGSNO='%@' AND  DAYNO=(SELECT MAX(DAYNO) FROM DAYEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@' AND 	DAYSTATUS='0')",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM DAYEVENTS WHERE COMPETITIONCODE='%@' AND  MATCHCODE='%@'  AND   INNINGSNO='%@' AND  DAYNO=(SELECT MAX(DAYNO) FROM DAYEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@' AND 	DAYSTATUS='0')",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
         
-        const char *selectStmt = [updateSQL UTF8String];
-        
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
         }
     }
     sqlite3_reset(statement);
     return NO;
-    
 }
 
 +(BOOL) DeletePenaltyDetailsForDeleteEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) OLDINNINGSNO{
@@ -3288,21 +3315,25 @@ return 0;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"DELETE PENALTYDETAILS WHERE COMPETITIONCODE ='%@' AND MATCHCODE ='%@'  AND INNINGSNO ='%@' + 1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM PENALTYDETAILS WHERE COMPETITIONCODE ='%@' AND MATCHCODE ='%@'  AND INNINGSNO ='%@' + 1",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
         
-        const char *selectStmt = [updateSQL UTF8String];
-        
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
         }
     }
     sqlite3_reset(statement);
     return NO;
-    
 }
 
 +(NSString*) GetInningsCountForDeleteEndInnings:(NSString*) MATCHCODE{
@@ -3313,16 +3344,19 @@ return 0;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT INNINGSCOUNT = COUNT(INNINGSNO) FROM INNINGSEVENTS WHERE MATCHCODE ='%@'",MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT COUNT(INNINGSNO) FROM INNINGSEVENTS WHERE MATCHCODE ='%@'",MATCHCODE];
         
         
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *INNINGSNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+        NSString *INNINGSNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+            
+                
+                
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return INNINGSNO;
@@ -3348,19 +3382,23 @@ return 0;
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION SET MATCHSTATUS = 'MSC124',MODIFIEDBY = 'USER',MODIFIEDDATE= GETDATE()  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
-        const char *selectStmt = [updateSQL UTF8String];
-        
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
         }
     }
     sqlite3_reset(statement);
     return NO;
-    
 }
 
 +(NSMutableArray *) GetInningsDetailsForDeleteEndInnings:(NSString*) MATCHCODE
@@ -3377,8 +3415,8 @@ return 0;
   
         
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+      
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 EndInnings *record=[[EndInnings alloc]init];
@@ -3401,6 +3439,36 @@ return 0;
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
     return InningsArrayForDelete;
+}
+
+
+
++(BOOL) GetSessionNoForDeleteEndInninges:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) OLDINNINGSNO {
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+    NSString *updateSQL = [NSString stringWithFormat:@"SELECT SESSIONNO FROM SESSIONEVENTS WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND INNINGSNO='%@' AND SESSIONSTATUS='0'",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
+        }
+    }
+    sqlite3_reset(statement);
+    return NO;
 }
 
 //---------------------------------------------------------------------------------------------------------
