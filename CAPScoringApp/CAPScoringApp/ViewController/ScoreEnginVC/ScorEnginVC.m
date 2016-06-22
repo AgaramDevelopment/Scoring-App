@@ -41,6 +41,8 @@
 #import "LastBolwerDetailRecord.h"
 #import "ScoreCardVC.h"
 #import "EndInningsVC.h"
+#import "FetchMatchResult.h"
+
 
 
 
@@ -233,6 +235,9 @@ EndInnings *endInnings;
     
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
+    FetchMatchResult *matRes = [[FetchMatchResult alloc]init];
+    [matRes getMatchReultsDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.TEAMACODE :fetchSEPageLoadRecord.INNINGSNO];
     
 //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
