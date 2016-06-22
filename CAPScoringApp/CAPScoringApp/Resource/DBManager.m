@@ -620,21 +620,29 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbpath, &mySqliteDB) == SQLITE_OK)
     {
         
-        NSString *insertBallevent = [NSString stringWithFormat:@"INSERT INTO BALLEVENTS(BALLCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,DAYNO,INNINGSNO,OVERNO,BALLNO,BALLCOUNT,OVERBALLCOUNT,SESSIONNO,STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE,UMPIRE2CODE,ATWOROTW,BOWLINGEND,BOWLTYPE,SHOTTYPE,ISLEGALBALL,ISFOUR,ISSIX,RUNS,OVERTHROW,TOTALRUNS,WIDE,NOBALL,BYES,LEGBYES,PENALTY,TOTALEXTRAS,GRANDTOTAL,RBW,PMLINECODE,PMLENGTHCODE,PMX1,PMY1,PMX2,PMY2,WWREGION,WWX1,WWY1,WWX2,WWY2,BALLDURATION,ISAPPEAL,ISBEATEN,ISUNCOMFORT,ISWTB,ISRELEASESHOT,MARKEDFOREDIT,REMARKS,VIDEOFILENAME,SHOTTYPECATEGORY,PMSTRIKEPOINT,PMSTRIKEPOINTLINECODE,BALLSPEED,UNCOMFORTCLASSIFCATION) VALUES (\"%@\",\"%@\", \"%@\", \"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\" %@\",\"%@\",\"%@\",\"%@\",\"PYC0000146\",\"OFC0000001\",\"OFC0000002\",\"%@\",\"BWT0000009\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"0\",\"%@\",\"%@\",\"MSC031\",\"MSC032\",\"%@\",\"%@\",\"%@\",\"%@\",'%@',\"0\",\"0\",\"0\",\"107\",'0','%@','0',1,'0','0','0','0','%@',1,1,2,2,2,2)",ballEventData.objBallcode,ballEventData.objcompetitioncode,ballEventData.objmatchcode,ballEventData.objTeamcode,ballEventData.objDayno,ballEventData.objInningsno,ballEventData.objOverno,ballEventData.objBallno,ballEventData.objBallcount,ballEventData.objOverBallcount,ballEventData.objSessionno,ballEventData.objStrikercode,ballEventData.objNonstrikercode,ballEventData.objBowlercode,ballEventData.objAtworotw,ballEventData.objBowltype,ballEventData.objShottype,ballEventData.objIslegalball,ballEventData.objIsFour,ballEventData.objIssix,ballEventData.objRuns,ballEventData.objOverthrow,ballEventData.objTotalruns,ballEventData.objWide,ballEventData.objNoball,ballEventData.objByes,ballEventData.objLegByes,ballEventData.objTotalextras,ballEventData.objGrandtotal,ballEventData.objRbw,ballEventData.objPMX1,ballEventData.objPMY1,ballEventData.objPMX2,ballEventData.objPMY2,ballEventData.objballduration,ballEventData.objRemark];
-        
+        NSString *insertBallevent = [NSString stringWithFormat:@"INSERT INTO BALLEVENTS(BALLCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,DAYNO,INNINGSNO,OVERNO,BALLNO,BALLCOUNT,OVERBALLCOUNT,SESSIONNO,STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE,UMPIRE2CODE,ATWOROTW,BOWLINGEND,BOWLTYPE,SHOTTYPE,ISLEGALBALL,ISFOUR,ISSIX,RUNS,OVERTHROW,TOTALRUNS,WIDE,NOBALL,BYES,LEGBYES,PENALTY,TOTALEXTRAS,GRANDTOTAL,RBW,PMLINECODE,PMLENGTHCODE,PMX1,PMY1,PMX2,PMY2,WWREGION,WWX1,WWY1,WWX2,WWY2,BALLDURATION,ISAPPEAL,ISBEATEN,ISUNCOMFORT,ISWTB,ISRELEASESHOT,MARKEDFOREDIT,REMARKS,VIDEOFILENAME,SHOTTYPECATEGORY,PMSTRIKEPOINT,PMSTRIKEPOINTLINECODE,BALLSPEED,UNCOMFORTCLASSIFCATION) VALUES (\"%@\",\"%@\", \"%@\", \"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\" %@\",\"%@\",\"%@\",\"%@\",\"PYC0000146\",\"OFC0000001\",\"OFC0000002\",\"%@\",\"BWT0000009\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"0\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",'%@',\"%@\",\"%@\",\"%@\",\"%@\",'%@','%@','0',1,'0','0','0','0','%@',1,1,2,2,2,2)",ballEventData.objBallcode,ballEventData.objcompetitioncode,ballEventData.objmatchcode,ballEventData.objTeamcode,ballEventData.objDayno,ballEventData.objInningsno,ballEventData.objOverno,ballEventData.objBallno,ballEventData.objBallcount,ballEventData.objOverBallcount,ballEventData.objSessionno,ballEventData.objStrikercode,ballEventData.objNonstrikercode,ballEventData.objBowlercode,ballEventData.objAtworotw,ballEventData.objBowltype,ballEventData.objShottype,ballEventData.objIslegalball,ballEventData.objIsFour,ballEventData.objIssix,ballEventData.objRuns,ballEventData.objOverthrow,ballEventData.objTotalruns,ballEventData.objWide,ballEventData.objNoball,ballEventData.objByes,ballEventData.objLegByes,ballEventData.objTotalextras,ballEventData.objGrandtotal,ballEventData.objRbw,ballEventData.objPMlinecode,ballEventData.objPMlengthcode,ballEventData.objPMX1,ballEventData.objPMY1,ballEventData.objPMX2,ballEventData.objPMY2,ballEventData.objWWREGION,ballEventData.objWWX1,ballEventData.objWWY1,ballEventData.objWWX2,ballEventData.objWWY2,ballEventData.objballduration,ballEventData.objRemark];
+      
         const char *insert_stmt = [insertBallevent UTF8String];
-        sqlite3_prepare_v2(mySqliteDB, insert_stmt, -1, &statement, NULL);
+       sqlite3_prepare_v2(mySqliteDB, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            success = true;
+            sqlite3_reset(statement);
+            
+            return YES;
+            
         }
-        
-        sqlite3_finalize(statement);
-        sqlite3_close(mySqliteDB);
-        
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
+        }
     }
+    sqlite3_reset(statement);
+    return NO;
     
-    return success;
+
+
+
     
     
 }
@@ -745,7 +753,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         // Setup the SQL Statement and compile it for faster access
         //SQLIte Statement
-        NSString *sqlStatement_userInfo =[NSString stringWithFormat:@"Select BALLCODE from BALLEVENTS"];
+        NSString *sqlStatement_userInfo =[NSString stringWithFormat:@"Select MATCHCODE from BALLEVENTS"];
         sqlite3_stmt *compiledStatement;
         if(sqlite3_prepare_v2(database2, [sqlStatement_userInfo UTF8String], -1, &compiledStatement, NULL) == SQLITE_OK)
         {
