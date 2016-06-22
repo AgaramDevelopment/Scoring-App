@@ -30,7 +30,7 @@
 #import "FetchLastBallBowledPlayer.h"
 #import "InitializeInningsScoreBoardRecord.h"
 
-#import "intialBreakVC.h"
+#import "BreakVC.h"
 #import "EndInnings.h"
 #import "RevicedOverVC.h"
 #import "FixturesRecord.h"
@@ -41,6 +41,8 @@
 #import "LastBolwerDetailRecord.h"
 #import "ScoreCardVC.h"
 #import "EndInningsVC.h"
+#import "FetchMatchResult.h"
+
 
 
 
@@ -147,12 +149,12 @@
     PenalityVC *penalityVc;
     UISwipeGestureRecognizer *RightsideGesture;
     UISwipeGestureRecognizer *LeftsideGesture;
-    intialBreakVC * BreakVC;
+    BreakVC * breakvc;
     UIView * fullview;
     RevicedOverVC * revicedOverVc ;
     RevisedTarget  *revisedTarget;
     
-    CAShapeLayer *shapeLayer;
+
 }
 
 @property(strong,nonatomic)NSString *matchTypeCode;
@@ -283,66 +285,8 @@ EndInnings *endInnings;
     //[converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
     
-    //Stricker Details
-    self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
-    self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
-    self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
-    self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
-    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
-    
-    self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
-    
-    //Non Stricker Details
-    self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
-    self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
-    self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
-    self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
-    self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
-    self.lbl_nonstricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
-    //[formatter stringFromNumber:fetchSEPageLoadRecord.nonstrickerStrickRate];
-    
-    //Bowler
-    
-   self.lbl_bowler_name.text = fetchSEPageLoadRecord.currentBowlerPlayerName;
-   self.lbl_bowler_runs.text = fetchSEPageLoadRecord.currentBowlerOver;
-   self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
-   self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
-   self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
-    self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
+    [self displaystrickerdetailsmethod];
 
-    //team score details display
-    _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
-    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
-    
-    _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
-    
-    
-    
-    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
-    
-    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld OVS" ,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVERS,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVRBALLS];
-    
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
-    
-    
-    
-
-    //all innings details for team A and team B
-    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
-    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
-    
-    
-   // _lbl_teamASecIngsScore.text = 
-    //_lbl_teamASecIngsOvs.text =
-    
-    
-  //  _lbl_teamBSecIngsScore.text =
-//    _lbl_teamBSecIngsOvs.text =
-    
-    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
-    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
-    
-    
     
   _view_Wagon_wheel.hidden=YES;
     //bowl type - spin array
@@ -400,41 +344,13 @@ EndInnings *endInnings;
     [self.view addGestureRecognizer:LeftsideGesture];
 
     
-//    //create Left SideBar
-//        self.sideBar = [[CDRTranslucentSideBar alloc] init];
-//        self.sideBar.sideBarWidth = 300;
-//        self.sideBar.delegate = self;
-//       self.rightSideBar.translucentStyle = UIBarStyleBlack;
-//        self.sideBar.tag = 0;
-//    
-//     //Create Right SideBar
-//        self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirectionFromRight:YES];
-//        self.rightSideBar.delegate = self;
-//        self.rightSideBar.translucentStyle = UIBarStyleBlack;
-//        self.rightSideBar.tag = 1;
-    
-    // Add PanGesture to Show SideBar by PanGesture
-//    UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(handlePanGesture:)];
-//    [self.view addGestureRecognizer:panGestureRecognizer];
+
     self.sideviewXposition.constant =-300;
     self.commonViewXposition.constant=0;
     self.commonViewwidthposition.constant =self.view.frame.size.width;
     
     
-    // Create Content of SideBar
-//        UITableView *tableView = [[UITableView alloc] init];
-//        UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
-//    v.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
-//    
-//    
-//        [tableView setTableHeaderView:v];
-//        [tableView setTableFooterView:v];
-//    
-//        //If you create UITableViewController and set datasource or delegate to it, don't forget to add childcontroller to this viewController.
-//        //[[self addChildViewController: @"your view controller"];
-//        tableView.dataSource = self;
-//        tableView.delegate = self;
-        UITableView *tableView = [[UITableView alloc] init];
+         UITableView *tableView = [[UITableView alloc] init];
         UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
         v.backgroundColor = [UIColor clearColor];
         [tableView setTableHeaderView:v];
@@ -448,15 +364,6 @@ EndInnings *endInnings;
     _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     
     
-   // RightSlideVC *rightSideVc = [[RightSlideVC alloc]initWithNibName:@"RightSlideVC" bundle:nil];
-    //[tableView addSubview:rightSideVc.view];
-    
-        // Set ContentView in SideBar
-//        [self.sideBar setContentViewInSideBar:rightSideVc.view];
-//    rightSideVc.rightSlideTableView.delegate = self;
-//    rightSideVc.rightSlideTableView.dataSource = self;
-//        [self.sideBar setContentViewInSideBar:tableView];
-    
     
     _View_Appeal.hidden=YES;
     _view_table_select.hidden=YES;
@@ -469,7 +376,7 @@ EndInnings *endInnings;
     _otwRtwArray = [[NSMutableArray alloc]init];
     _otwRtwArray = [DBManager getOtwRtw];
 
-    
+   
     
     //RBW and Misc Filters
     self.ballEventRecord = [[BallEventRecord alloc] init];
@@ -478,6 +385,29 @@ EndInnings *endInnings;
     self.ballEventRecord.objIsuncomfort=[NSNumber numberWithInt:0];
     self.ballEventRecord.objIsreleaseshot=[NSNumber numberWithInt:0];
     self.ballEventRecord.objIsbeaten=[NSNumber numberWithInt:0];
+    self.ballEventRecord.objPMlengthcode=@"";
+    self.ballEventRecord.objPMlinecode =@"";
+    self.ballEventRecord.objPMX1=@1;
+    self.ballEventRecord.objPMY1=@1;
+    self.ballEventRecord.objPMX2=@1;
+    self.ballEventRecord.objPMY2=@1;
+    if (IS_IPAD_PRO) {
+        _ballEventRecord.objWWX1=@(221);
+        _ballEventRecord.objWWY1=@(186);
+        _ballEventRecord.objWWX2=@(221);
+        _ballEventRecord.objWWY2=@(186);
+    }
+    else{
+        
+        _ballEventRecord.objWWX1=@(172);
+        _ballEventRecord.objWWY1=@(145);
+        _ballEventRecord.objWWX2=@(172);
+        _ballEventRecord.objWWY2=@(145);
+        
+    }
+
+    self.ballEventRecord.objWWREGION=@"";
+
     
     isRBWSelected = NO;
     ismiscFilters = NO;
@@ -490,6 +420,9 @@ EndInnings *endInnings;
     
     fieldingOption = 0;
     wicketOption = 0;
+   
+   
+    
     
     //Fielding Factor
     //_fieldingfactorArray=[[NSMutableArray alloc]init];
@@ -579,6 +512,105 @@ EndInnings *endInnings;
 //    self.lbl_Batsmen2Name.text=objEvent1.PlaerNameStrike_nonStrike;
     
 }
+
+
+-(void)displaystrickerdetailsmethod
+{
+    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
+    //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+    
+    
+    //Get Last bowler details
+    fetchLastBowler = [[FetchLastBowler alloc]init];
+    [fetchLastBowler LastBowlerDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS] :[NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT]];
+    
+    if(fetchLastBowler.GetLastBolwerDetails.count!=0){
+        LastBolwerDetailRecord *lastBowlerDetailRecord = [fetchLastBowler.GetLastBolwerDetails objectAtIndex:0];
+        
+        
+        self.lbl_last_bowler_name.text = lastBowlerDetailRecord.BOWLERNAME;
+        self.lbl_last_bowler_runs.text = lastBowlerDetailRecord.OVERS;
+        self.lbl_last_bowler_balls.text = lastBowlerDetailRecord.MAIDENOVERS;
+        self.lbl_last_bowler_fours.text = lastBowlerDetailRecord.TOTALRUNS;
+        self.lbl_last_bowler_sixs.text = lastBowlerDetailRecord.WICKETS;
+        self.lbl_last_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[lastBowlerDetailRecord.ECONOMY floatValue]];
+        
+    }else{
+        self.lbl_last_bowler_name.text = @"-";
+        self.lbl_last_bowler_runs.text = @"-";
+        self.lbl_last_bowler_balls.text = @"-";
+        self.lbl_last_bowler_fours.text = @"-";
+        self.lbl_last_bowler_sixs.text = @"-";
+        self.lbl_last_bowler_strickrate.text = @"-";
+    }
+    
+    
+    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+    
+    
+    
+
+    //Stricker Details
+    self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
+    self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
+    self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
+    self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
+    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
+    
+    self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
+    
+    //Non Stricker Details
+    self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
+    self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
+    self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
+    self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
+    self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
+    self.lbl_nonstricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
+    //[formatter stringFromNumber:fetchSEPageLoadRecord.nonstrickerStrickRate];
+    
+    //Bowler
+    
+    self.lbl_bowler_name.text = fetchSEPageLoadRecord.currentBowlerPlayerName;
+    self.lbl_bowler_runs.text = fetchSEPageLoadRecord.currentBowlerOver;
+    self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
+    self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
+    self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
+    self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
+    
+    //team score details display
+    _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+    
+    _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
+    
+    
+    
+    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
+    
+    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld OVS" ,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVERS,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+    
+    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+    
+    
+    
+    
+    //all innings details for team A and team B
+    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
+    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
+    
+    
+    // _lbl_teamASecIngsScore.text =
+    //_lbl_teamASecIngsOvs.text =
+    
+    
+    //  _lbl_teamBSecIngsScore.text =
+    //    _lbl_teamBSecIngsOvs.text =
+    
+    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+}
 -(void)SaveBallEventREcordvalue
 {
     //self.ballEventRecord=[[BallEventRecord alloc]init];
@@ -601,48 +633,76 @@ EndInnings *endInnings;
     }
     
     [self getDayNOValue];
-    NSMutableArray * ballCodevalueArray=[DBManager getballcodemethod];
-    NSLog(@"array : %@",[ballCodevalueArray lastObject]);
-    if(ballCodevalueArray.count > 0 && ballCodevalueArray!= NULL)
+   NSString * ballCodevalue=[DBManager getballcodemethod:self.matchCode];
+   // NSLog(@"array : %@",[ballCodevalueArray lastObject]);
+    if(![ballCodevalue isEqualToString: @""])
     {
         
-        NSString*ballcode= [NSString stringWithFormat:@"%@",ballCodevalueArray.lastObject];
+        NSString*ballcode= [NSString stringWithFormat:@"%@",ballCodevalue];
         if([ballcode isEqualToString:@"(null)"])
             
         {
-            [ballCodevalueArray removeLastObject];
-            ballcode=[NSString stringWithFormat:@"%@",ballCodevalueArray.lastObject];
-            [ballCodevalueArray removeLastObject];
-             ballcode=[NSString stringWithFormat:@"%@",ballCodevalueArray.lastObject];
+           // [ballCodevalueArray removeLastObject];
+            ballcode=[NSString stringWithFormat:@"%@",ballCodevalue];
+           // [ballCodevalueArray removeLastObject];
+             ballcode=[NSString stringWithFormat:@"%@",ballCodevalue];
         }
-        
+       
         
         NSString *code = [ballcode substringFromIndex: [ballcode length] - 10];
         
-        NSString * myURL = [NSString stringWithFormat:@"1%@",code];
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        f.numberStyle = NSNumberFormatterDecimalStyle;
-        NSNumber * myNumber = [f numberFromString:myURL];
-        NSInteger value = [myNumber integerValue]+1;
-        NSString *addcode = [@(value) stringValue];
+        NSInteger add =[code intValue];
+        add = add+1;
         
-        NSString * ballno = [addcode substringFromIndex:1];
+        NSString *ballcodeValue = [NSString stringWithFormat:@"%010d",add];
+        //NSString * addCode=[NSString stringWithFormat:@"%d",add];
+        
+        //NSInteger sum = 1000000000;
+       
+            //sum += [addCode intValue];
+        //NSMutableString *addValue;
+        //NSString * matchcodeaddValue =[NSString stringWithFormat:@"%d",sum];
+//       NSString* adds = nil;
+//        if([matchcodeaddValue hasPrefix:@"1"]) {
+//            adds = [matchcodeaddValue substringFromIndex:1];
+//           addValue = [NSMutableString stringWithString:adds];
+//            [addValue insertString:@"0" atIndex:1];
+//        }
+        
+       //NSString* addValue = [matchcodeaddValue stringByReplacingOccurrencesOfString:@"1"
+                                            // withString:@"0"];
+        
+    
+      
+//        
+//        NSString * myURL = [NSString stringWithFormat:@"1%@",code];
+//        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//        f.numberStyle = NSNumberFormatterDecimalStyle;
+//        NSNumber * myNumber = [f numberFromString:myURL];
+//        NSInteger value = [myNumber integerValue]+1;
+//        NSString *addcode = [@(value) stringValue];
+//        
+//        NSString * ballno = [addcode substringFromIndex:1];
         
         
-        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballno];
+        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballcodeValue];
         NSLog(@"array : %@",ballnoStr);
         
         
     }
     else{
-        NSString * myURL = [NSString stringWithFormat:@"10000000001"];
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        f.numberStyle = NSNumberFormatterDecimalStyle;
-        NSNumber * myNumber = [f numberFromString:myURL];
-        NSInteger value = [myNumber integerValue];
-        NSString *ballno1 = [@(value) stringValue];
-        NSString * ballno = [ballno1 substringFromIndex:1];
-        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballno];
+        
+      
+         NSString *ballcodeValue = [NSString stringWithFormat:@"%010d",1];
+        
+        //NSString * myURL = [NSString stringWithFormat:@"0000000001"];
+//        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//        f.numberStyle = NSNumberFormatterDecimalStyle;
+//        NSNumber * myNumber = [f numberFromString:myURL];
+//        NSInteger value = [myNumber integerValue];
+//        NSString *ballno1 = [@(value) stringValue];
+        //NSString * ballno = [ballno1 substringFromIndex:1];
+        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballcodeValue];
         NSLog(@"array : %@",ballnoStr);
         
     }
@@ -675,6 +735,13 @@ EndInnings *endInnings;
     
     
 }
+
+// End ball process
+-(void)EndBallMethod
+{
+    
+}
+
 
 
 #pragma mark - Gesture Handler
@@ -1334,6 +1401,7 @@ EndInnings *endInnings;
         self.btn_StartOver.userInteractionEnabled=YES;
         //        self.btn_StartBall.userInteractionEnabled=NO;
         [self SaveBallEventREcordvalue];
+      
         [self AllBtndisableMethod];
         
         
@@ -2159,8 +2227,75 @@ EndInnings *endInnings;
        {
         Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
 
-     if(Xposition > 205 && Yposition > 85 && Xposition < 455 && Yposition < 200)
+     if(Xposition > 187 && Yposition > 85 && Xposition < 455 && Yposition < 200)
        {
+           if(Xposition > 187 && Yposition > 85 && Xposition < 268)
+           {
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"full toss wide0.0");
+                   self.ballEventRecord.objPMlengthcode=@"MSC037";
+                   self.ballEventRecord.objPMlinecode =@"MSC031";
+               }
+               else{
+                   NSLog(@"full toss wide D.L");
+                   self.ballEventRecord.objPMlengthcode=@"MSC037";
+                   self.ballEventRecord.objPMlinecode =@"MSC030";
+               }
+               
+           }
+           
+           else if(Xposition >270 && Yposition >85 && Xposition < 304)
+           {
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"full toss outside OFF");
+                   self.ballEventRecord.objPMlengthcode=@"MSC037";
+                   self.ballEventRecord.objPMlinecode =@"MSC028";
+               }
+               else{
+                   NSLog(@"full toss outside LEG");
+                   self.ballEventRecord.objPMlengthcode=@"MSC037";
+                   self.ballEventRecord.objPMlinecode =@"MSC029";
+               }
+           }
+           else if(Xposition > 304 && Yposition >85 && Xposition < 341)
+           {
+               
+               NSLog(@"full toss Middle");
+               self.ballEventRecord.objPMlengthcode=@"MSC037";
+               self.ballEventRecord.objPMlinecode =@"MSC026";
+               
+           }
+           else if(Xposition >342 && Yposition >85 && Xposition < 366)
+           {
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"full toss outside LEG");
+                   self.ballEventRecord.objPMlengthcode=@"MSC037";
+                   self.ballEventRecord.objPMlinecode =@"MSC029";
+               }
+               else{
+                   NSLog(@"full toss outside off");
+                   self.ballEventRecord.objPMlengthcode=@"MSC037";
+                   self.ballEventRecord.objPMlinecode =@"MSC028";
+               }
+           }
+           else if(Xposition >366 && Yposition >85 && Xposition < 455)
+           {
+               if([self.BatmenStyle isEqualToString:@"MSC013"])
+               {
+                   NSLog(@"full toss wide D.L");
+                   self.ballEventRecord.objPMlengthcode=@"MSC037";
+                   self.ballEventRecord.objPMlinecode =@"MSC030";
+               }
+               else{
+                   
+                   NSLog(@"full toss wide 0.0");
+                   self.ballEventRecord.objPMlengthcode=@"MSC037";
+                   self.ballEventRecord.objPMlinecode =@"MSC031";
+               }
+           }
 
           Img_ball.image =[UIImage imageNamed:@"RedBall"];
            [self.img_pichmap addSubview:Img_ball];
@@ -2176,9 +2311,13 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"yorker wide0.0");
+                   self.ballEventRecord.objPMlengthcode=@"MSC036";
+                   self.ballEventRecord.objPMlinecode =@"MSC031";
                }
                else{
                     NSLog(@"yorker wide D.L");
+                   self.ballEventRecord.objPMlengthcode=@"MSC036";
+                   self.ballEventRecord.objPMlinecode =@"MSC030";
                }
                
            }
@@ -2188,15 +2327,21 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                     NSLog(@"yorker outside OFF");
+                   self.ballEventRecord.objPMlengthcode=@"MSC036";
+                   self.ballEventRecord.objPMlinecode =@"MSC028";
                }
            else{
                   NSLog(@"yorker outside LEG");
+               self.ballEventRecord.objPMlengthcode=@"MSC036";
+               self.ballEventRecord.objPMlinecode =@"MSC029";
                }
            }
           else if(Xposition >310 && Yposition >200 && Xposition < 341)
           {
               
                  NSLog(@"yorker Middle");
+              self.ballEventRecord.objPMlengthcode=@"MSC036";
+              self.ballEventRecord.objPMlinecode =@"MSC026";
               
           }
           else if(Xposition >342 && Yposition >200 && Xposition < 377)
@@ -2204,9 +2349,13 @@ EndInnings *endInnings;
               if([self.BatmenStyle isEqualToString:@"MSC013"])
               {
                   NSLog(@"yorker outside LEG");
+                  self.ballEventRecord.objPMlengthcode=@"MSC036";
+                  self.ballEventRecord.objPMlinecode =@"MSC029";
               }
           else{
                   NSLog(@"yorker outside off");
+              self.ballEventRecord.objPMlengthcode=@"MSC036";
+              self.ballEventRecord.objPMlinecode =@"MSC028";
               }
           }
           else if(Xposition >375 && Yposition >200 && Xposition < 463)
@@ -2214,10 +2363,14 @@ EndInnings *endInnings;
               if([self.BatmenStyle isEqualToString:@"MSC013"])
               {
                   NSLog(@"yorker wide D.L");
+                  self.ballEventRecord.objPMlengthcode=@"MSC036";
+                  self.ballEventRecord.objPMlinecode =@"MSC030";
               }
           else{
               
                   NSLog(@"yorker wide 0.0");
+              self.ballEventRecord.objPMlengthcode=@"MSC036";
+              self.ballEventRecord.objPMlinecode =@"MSC031";
               }
           }
 
@@ -2236,9 +2389,13 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"Full wide0.0");
+                   self.ballEventRecord.objPMlengthcode=@"MSC035";
+                   self.ballEventRecord.objPMlinecode =@"MSC031";
                }
                else{
                    NSLog(@"Full wide D.L");
+                   self.ballEventRecord.objPMlengthcode=@"MSC035";
+                   self.ballEventRecord.objPMlinecode =@"MSC030";
                }
                
            }
@@ -2247,9 +2404,13 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"full outside OFF");
+                   self.ballEventRecord.objPMlengthcode=@"MSC035";
+                   self.ballEventRecord.objPMlinecode =@"MSC028";
                }
                else{
                    NSLog(@"full outside LEG");
+                   self.ballEventRecord.objPMlengthcode=@"MSC035";
+                   self.ballEventRecord.objPMlinecode =@"MSC029";
                }
                
            }
@@ -2257,15 +2418,21 @@ EndInnings *endInnings;
            else if(Xposition >300 && Yposition >240 && Xposition < 343)
            {
                NSLog(@"full Middle");
+               self.ballEventRecord.objPMlengthcode=@"MSC035";
+               self.ballEventRecord.objPMlinecode =@"MSC026";
            }
            else if(Xposition >343 && Yposition >240 && Xposition < 390)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"full outside LEG");
+                   self.ballEventRecord.objPMlengthcode=@"MSC035";
+                   self.ballEventRecord.objPMlinecode =@"MSC029";
                }
                else{
                    NSLog(@"full outside off");
+                   self.ballEventRecord.objPMlengthcode=@"MSC035";
+                   self.ballEventRecord.objPMlinecode =@"MSC028";
                }
                
            }
@@ -2274,10 +2441,14 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"full wide D.L");
+                   self.ballEventRecord.objPMlengthcode=@"MSC035";
+                   self.ballEventRecord.objPMlinecode =@"MSC030";
                }
                else{
                    
                    NSLog(@"full wide 0.0");
+                   self.ballEventRecord.objPMlengthcode=@"MSC035";
+                   self.ballEventRecord.objPMlinecode =@"MSC031";
                }
               
            }
@@ -2296,9 +2467,13 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"good wide0.0");
+                   self.ballEventRecord.objPMlengthcode=@"MSC034";
+                   self.ballEventRecord.objPMlinecode =@"MSC031";
                }
                else{
                    NSLog(@"good wide D.L");
+                   self.ballEventRecord.objPMlengthcode=@"MSC034";
+                   self.ballEventRecord.objPMlinecode =@"MSC030";
                }
               
            }
@@ -2307,24 +2482,34 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"good outside OFF");
+                   self.ballEventRecord.objPMlengthcode=@"MSC034";
+                   self.ballEventRecord.objPMlinecode =@"MSC028";
                }
                else{
                    NSLog(@"good outside LEG");
+                   self.ballEventRecord.objPMlengthcode=@"MSC034";
+                   self.ballEventRecord.objPMlinecode =@"MSC029";
                }
             }
            
            else if(Xposition >300 && Yposition >297 && Xposition < 350)
            {
                NSLog(@"good Middle");
+               self.ballEventRecord.objPMlengthcode=@"MSC034";
+               self.ballEventRecord.objPMlinecode =@"MSC026";
            }
            else if(Xposition >350 && Yposition >297 && Xposition < 409)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"good outside LEG");
+                   self.ballEventRecord.objPMlengthcode=@"MSC034";
+                   self.ballEventRecord.objPMlinecode =@"MSC029";
                }
                else{
                    NSLog(@"good outside off");
+                   self.ballEventRecord.objPMlengthcode=@"MSC034";
+                   self.ballEventRecord.objPMlinecode =@"MSC028";
                }
                
            }
@@ -2333,10 +2518,14 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"good wide D.L");
+                   self.ballEventRecord.objPMlengthcode=@"MSC034";
+                   self.ballEventRecord.objPMlinecode =@"MSC030";
                }
                else{
                    
                    NSLog(@"good wide 0.0");
+                   self.ballEventRecord.objPMlengthcode=@"MSC034";
+                   self.ballEventRecord.objPMlinecode =@"MSC031";
                }
                //NSLog(@"good wide 0.0");
            }
@@ -2354,9 +2543,13 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"short wide0.0");
+                   self.ballEventRecord.objPMlengthcode=@"MSC033";
+                   self.ballEventRecord.objPMlinecode =@"MSC031";
                }
                else{
                    NSLog(@"short wide D.L");
+                   self.ballEventRecord.objPMlengthcode=@"MSC033";
+                   self.ballEventRecord.objPMlinecode =@"MSC030";
                }
               
            }
@@ -2365,23 +2558,33 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"short outside OFF");
+                   self.ballEventRecord.objPMlengthcode=@"MSC033";
+                   self.ballEventRecord.objPMlinecode =@"MSC028";
                }
                else{
                    NSLog(@"short outside LEG");
+                   self.ballEventRecord.objPMlengthcode=@"MSC033";
+                   self.ballEventRecord.objPMlinecode =@"MSC029";
                }
            }
-           else if(Xposition >291 && Yposition >398 && Xposition < 400)
+           else if(Xposition >291 && Yposition >398 && Xposition < 358)
            {
                NSLog(@"short Middle");
+               self.ballEventRecord.objPMlengthcode=@"MSC033";
+               self.ballEventRecord.objPMlinecode =@"MSC026";
            }
-           else if(Xposition >356 && Yposition >398 && Xposition < 435)
+           else if(Xposition >358 && Yposition >398 && Xposition < 435)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"short outside LEG");
+                   self.ballEventRecord.objPMlengthcode=@"MSC033";
+                   self.ballEventRecord.objPMlinecode =@"MSC029";
                }
                else{
                    NSLog(@"short outside off");
+                   self.ballEventRecord.objPMlengthcode=@"MSC033";
+                   self.ballEventRecord.objPMlinecode =@"MSC028";
                }
 
            }
@@ -2390,10 +2593,14 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"short wide D.L");
+                   self.ballEventRecord.objPMlengthcode=@"MSC033";
+                   self.ballEventRecord.objPMlinecode =@"MSC030";
                }
                else{
                    
                    NSLog(@"short wide 0.0");
+                   self.ballEventRecord.objPMlengthcode=@"MSC033";
+                   self.ballEventRecord.objPMlinecode =@"MSC031";
                }
               
            }
@@ -2411,9 +2618,13 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"Bouncer wide0.0");
+                   self.ballEventRecord.objPMlengthcode=@"MSC032";
+                   self.ballEventRecord.objPMlinecode =@"MSC031";
                }
                else{
                    NSLog(@"Bouncer wide D.L");
+                   self.ballEventRecord.objPMlengthcode=@"MSC032";
+                   self.ballEventRecord.objPMlinecode =@"MSC030";
                }
               
            }
@@ -2422,23 +2633,33 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"Bouncer outside OFF");
+                   self.ballEventRecord.objPMlengthcode=@"MSC032";
+                   self.ballEventRecord.objPMlinecode =@"MSC028";
                }
                else{
                    NSLog(@"Bouncer outside LEG");
+                   self.ballEventRecord.objPMlengthcode=@"MSC032";
+                   self.ballEventRecord.objPMlinecode =@"MSC029";
                }
             }
            else if(Xposition >280 && Yposition >500 && Xposition < 363)
            {
                NSLog(@"Bouncer Middle");
+               self.ballEventRecord.objPMlengthcode=@"MSC032";
+               self.ballEventRecord.objPMlinecode =@"MSC026";
            }
            else if(Xposition >368 && Yposition >500 && Xposition < 455)
            {
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"Bouncer outside LEG");
+                   self.ballEventRecord.objPMlengthcode=@"MSC032";
+                   self.ballEventRecord.objPMlinecode =@"MSC029";
                }
                else{
                    NSLog(@"Bouncer outside off");
+                   self.ballEventRecord.objPMlengthcode=@"MSC032";
+                   self.ballEventRecord.objPMlinecode =@"MSC028";
                }
 
             }
@@ -2447,10 +2668,14 @@ EndInnings *endInnings;
                if([self.BatmenStyle isEqualToString:@"MSC013"])
                {
                    NSLog(@"Bouncer wide D.L");
+                   self.ballEventRecord.objPMlengthcode=@"MSC032";
+                   self.ballEventRecord.objPMlinecode =@"MSC030";
                }
                else{
                    
                    NSLog(@"Bouncer wide 0.0");
+                   self.ballEventRecord.objPMlengthcode=@"MSC032";
+                   self.ballEventRecord.objPMlinecode =@"MSC031";
                }
                
            }
@@ -2473,58 +2698,143 @@ EndInnings *endInnings;
            
           if(Xposition >96 && Yposition > 37 && Xposition < 265 && Yposition < 105)
            {
-               
-               Img_ball.image =[UIImage imageNamed:@"RedBall"];
-               [self.img_pichmap addSubview:Img_ball];
-               
-           }
-           else if ((Xposition > 100 && Yposition > 93 && Xposition < 271 && Yposition < 128))
-           {
-               if(Xposition > 100 && Yposition > 93 && Xposition < 151)
+               if(Xposition > 96 && Yposition > 37 && Xposition < 158)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
-                       NSLog(@"yorker wide0.0");
+                       NSLog(@"Full over wide0.0");
+                       self.ballEventRecord.objPMlengthcode=@"MSC037";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
                    }
                    else{
-                       NSLog(@"yorker wide D.L");
+                       NSLog(@"Full over wide D.L");
+                       self.ballEventRecord.objPMlengthcode=@"MSC037";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
                    }
-                }
-               else if(Xposition >156 && Yposition >105 && Xposition < 177)
+               }
+               else if(Xposition >157 && Yposition >37 && Xposition < 177)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
-                       NSLog(@"yorker outside OFF");
+                       NSLog(@"Full over outside OFF");
+                       self.ballEventRecord.objPMlengthcode=@"MSC037";
+                       self.ballEventRecord.objPMlinecode =@"MSC028";
                    }
                    else{
-                       NSLog(@"yorker outside LEG");
+                       NSLog(@"Full over outside LEG");
+                       self.ballEventRecord.objPMlengthcode=@"MSC037";
+                       self.ballEventRecord.objPMlinecode =@"MSC029";
                    }
                    
                }
-               else if(Xposition >177 && Yposition >105 && Xposition < 198)
+               else if(Xposition >177 && Yposition >37 && Xposition < 196)
                {
-                   NSLog(@"yorker Middle");
+                   NSLog(@"Full over Middle");
+                   self.ballEventRecord.objPMlengthcode=@"MSC037";
+                   self.ballEventRecord.objPMlinecode =@"MSC026";
                }
-               else if(Xposition >198 && Yposition >105 && Xposition < 219)
+               else if(Xposition >195 && Yposition >37 && Xposition < 218)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
-                       NSLog(@"yorker outside LEG");
+                       NSLog(@"Full over outside LEG");
+                       self.ballEventRecord.objPMlengthcode=@"MSC037";
+                       self.ballEventRecord.objPMlinecode =@"MSC029";
                    }
                    else{
-                       NSLog(@"yorker outside off");
+                       NSLog(@"Full over outside off");
+                       self.ballEventRecord.objPMlengthcode=@"MSC037";
+                       self.ballEventRecord.objPMlinecode =@"MSC028";
                    }
-                  
+                   
                }
-               else if(Xposition >216 && Yposition >105 && Xposition < 270)
+               else if(Xposition >217 && Yposition >37 && Xposition < 260)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"yorker wide D.L");
+                       self.ballEventRecord.objPMlengthcode=@"MSC037";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
                    }
                    else{
                        
                        NSLog(@"yorker wide 0.0");
+                       self.ballEventRecord.objPMlengthcode=@"MSC037";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
+                   }
+               }
+
+               Img_ball.image =[UIImage imageNamed:@"RedBall"];
+               [self.img_pichmap addSubview:Img_ball];
+               self.ballEventRecord.objPMlengthcode=@"MSC037";
+               self.ballEventRecord.objPMlinecode =@"MSC031";
+               
+           }
+           else if ((Xposition > 100 && Yposition > 104 && Xposition < 271 && Yposition < 128))
+           {
+               if(Xposition > 100 && Yposition > 104 && Xposition < 151)
+               {
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"yorker wide0.0");
+                       self.ballEventRecord.objPMlengthcode=@"msc036";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
+                   }
+                   else{
+                       NSLog(@"yorker wide D.L");
+                       self.ballEventRecord.objPMlengthcode=@"MSC036";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
+                   }
+                }
+               else if(Xposition >156 && Yposition >104 && Xposition < 177)
+               {
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"yorker outside OFF");
+                       self.ballEventRecord.objPMlengthcode=@"MSC036";
+                       self.ballEventRecord.objPMlinecode =@"MSC028";
+                   }
+                   else{
+                       NSLog(@"yorker outside LEG");
+                       self.ballEventRecord.objPMlengthcode=@"MSC036";
+                       self.ballEventRecord.objPMlinecode =@"MSC029";
+                   }
+                   
+               }
+               else if(Xposition >177 && Yposition >104 && Xposition < 198)
+               {
+                   NSLog(@"yorker Middle");
+                   self.ballEventRecord.objPMlengthcode=@"MSC036";
+                   self.ballEventRecord.objPMlinecode =@"MSC026";
+               }
+               else if(Xposition >197 && Yposition >104 && Xposition < 219)
+               {
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"yorker outside LEG");
+                       self.ballEventRecord.objPMlengthcode=@"MSC036";
+                       self.ballEventRecord.objPMlinecode =@"MSC029";
+                   }
+                   else{
+                       NSLog(@"yorker outside off");
+                       self.ballEventRecord.objPMlengthcode=@"MSC036";
+                       self.ballEventRecord.objPMlinecode =@"MSC028";
+                   }
+                  
+               }
+               else if(Xposition >216 && Yposition >104 && Xposition < 267)
+               {
+                   if([self.BatmenStyle isEqualToString:@"MSC013"])
+                   {
+                       NSLog(@"yorker wide D.L");
+                       self.ballEventRecord.objPMlengthcode=@"MSC036";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
+                   }
+                   else{
+                       
+                       NSLog(@"yorker wide 0.0");
+                       self.ballEventRecord.objPMlengthcode=@"MSC036";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
                    }
                }
 
@@ -2538,9 +2848,13 @@ EndInnings *endInnings;
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"Full wide0.0");
+                       self.ballEventRecord.objPMlengthcode=@"MSC035";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
                    }
                    else{
                        NSLog(@"Full wide D.L");
+                       self.ballEventRecord.objPMlengthcode=@"MSC035";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
                    }
                }
                else if(Xposition >93 && Yposition >127 && Xposition < 174)
@@ -2548,24 +2862,34 @@ EndInnings *endInnings;
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"full outside OFF");
+                       self.ballEventRecord.objPMlengthcode=@"MSC035";
+                       self.ballEventRecord.objPMlinecode =@"MSC028";
                    }
                    else{
                        NSLog(@"full outside LEG");
+                       self.ballEventRecord.objPMlengthcode=@"MSC035";
+                       self.ballEventRecord.objPMlinecode =@"MSC029";
                    }
                    
                }
                else if(Xposition >175 && Yposition >127 && Xposition < 197)
                {
                    NSLog(@"full Middle");
+                   self.ballEventRecord.objPMlengthcode=@"MSC035";
+                   self.ballEventRecord.objPMlinecode =@"MSC026";
                }
                else if(Xposition >198 && Yposition >127 && Xposition < 227)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"full outside LEG");
+                       self.ballEventRecord.objPMlengthcode=@"MSC035";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
                    }
                    else{
                        NSLog(@"full outside off");
+                       self.ballEventRecord.objPMlengthcode=@"MSC035";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
                    }
                   
                }
@@ -2574,10 +2898,14 @@ EndInnings *endInnings;
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"full wide D.L");
+                       self.ballEventRecord.objPMlengthcode=@"MSC035";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
                    }
                    else{
                        
                        NSLog(@"full wide 0.0");
+                       self.ballEventRecord.objPMlengthcode=@"MSC035";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
                    }
                }
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
@@ -2590,9 +2918,13 @@ EndInnings *endInnings;
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"good wide0.0");
+                       self.ballEventRecord.objPMlengthcode=@"MSC034";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
                    }
                    else{
                        NSLog(@"good wide D.L");
+                       self.ballEventRecord.objPMlengthcode=@"MSC034";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
                    }
                   
                }
@@ -2601,23 +2933,33 @@ EndInnings *endInnings;
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"good outside OFF");
+                       self.ballEventRecord.objPMlengthcode=@"MSC034";
+                       self.ballEventRecord.objPMlinecode =@"MSC028";
                    }
                    else{
                        NSLog(@"good outside LEG");
+                       self.ballEventRecord.objPMlengthcode=@"MSC034";
+                       self.ballEventRecord.objPMlinecode =@"MSC029";
                    }
                }
                else if(Xposition >162 && Yposition >160 && Xposition < 203)
                {
                    NSLog(@"good Middle");
+                   self.ballEventRecord.objPMlengthcode=@"MSC034";
+                   self.ballEventRecord.objPMlinecode =@"MSC026";
                }
                else if(Xposition >203 && Yposition >160 && Xposition < 239)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"good outside LEG");
+                       self.ballEventRecord.objPMlengthcode=@"MSC034";
+                       self.ballEventRecord.objPMlinecode =@"MSC029";
                    }
                    else{
                        NSLog(@"good outside off");
+                       self.ballEventRecord.objPMlengthcode=@"MSC034";
+                       self.ballEventRecord.objPMlinecode =@"MSC028";
                    }
                }
                else if(Xposition >215 && Yposition >134 && Xposition < 294)
@@ -2625,10 +2967,14 @@ EndInnings *endInnings;
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"good wide D.L");
+                       self.ballEventRecord.objPMlengthcode=@"MSC034";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
                    }
                    else{
                        
                        NSLog(@"good wide 0.0");
+                       self.ballEventRecord.objPMlengthcode=@"MSC034";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
                    }
                }
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
@@ -2641,9 +2987,13 @@ EndInnings *endInnings;
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"short wide0.0");
+                       self.ballEventRecord.objPMlengthcode=@"MSC033";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
                    }
                    else{
                        NSLog(@"short wide D.L");
+                       self.ballEventRecord.objPMlengthcode=@"MSC033";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
                    }
                    
                }
@@ -2652,36 +3002,50 @@ EndInnings *endInnings;
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"short outside OFF");
+                       self.ballEventRecord.objPMlengthcode=@"MSC033";
+                       self.ballEventRecord.objPMlinecode =@"MSC028";
                    }
                    else{
                        NSLog(@"short outside LEG");
+                       self.ballEventRecord.objPMlengthcode=@"MSC033";
+                       self.ballEventRecord.objPMlinecode =@"MSC029";
                    }
                   
                }
-               else if(Xposition >163 && Yposition >220 && Xposition < 210)
+               else if(Xposition >163 && Yposition >220 && Xposition < 207)
                {
                    NSLog(@"short Middle");
+                   self.ballEventRecord.objPMlengthcode=@"MSC033";
+                   self.ballEventRecord.objPMlinecode =@"MSC026";
                }
-               else if(Xposition >207 && Yposition >220 && Xposition < 255)
+               else if(Xposition >207 && Yposition >220 && Xposition < 250)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"short outside LEG");
+                       self.ballEventRecord.objPMlengthcode=@"MSC033";
+                       self.ballEventRecord.objPMlinecode =@"MSC029";
                    }
                    else{
                        NSLog(@"short outside off");
+                       self.ballEventRecord.objPMlengthcode=@"MSC033";
+                       self.ballEventRecord.objPMlinecode =@"MSC028";
                    }
                    
                }
-               else if(Xposition >246 && Yposition >220 && Xposition < 315)
+               else if(Xposition >250 && Yposition >220 && Xposition < 315)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"short wide D.L");
+                       self.ballEventRecord.objPMlengthcode=@"MSC033";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
                    }
                    else{
                        
                        NSLog(@"short wide 0.0");
+                       self.ballEventRecord.objPMlengthcode=@"MSC033";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
                    }
                    
                }
@@ -2695,9 +3059,13 @@ EndInnings *endInnings;
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"Bouncer wide0.0");
+                       self.ballEventRecord.objPMlengthcode=@"MSC032";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
                    }
                    else{
                        NSLog(@"Bouncer wide D.L");
+                       self.ballEventRecord.objPMlengthcode=@"MSC032";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
                    }
                    
                }
@@ -2706,24 +3074,34 @@ EndInnings *endInnings;
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"Bouncer outside OFF");
+                       self.ballEventRecord.objPMlengthcode=@"MSC032";
+                       self.ballEventRecord.objPMlinecode =@"MSC028";
                    }
                    else{
                        NSLog(@"Bouncer outside LEG");
+                       self.ballEventRecord.objPMlengthcode=@"MSC032";
+                       self.ballEventRecord.objPMlinecode =@"MSC029";
                    }
 
                 }
                else if(Xposition >159 && Yposition >290 && Xposition < 213)
                {
                    NSLog(@"Bouncer Middle");
+                   self.ballEventRecord.objPMlengthcode=@"MSC032";
+                   self.ballEventRecord.objPMlinecode =@"MSC026";
                }
                else if(Xposition >213 && Yposition >290 && Xposition < 268)
                {
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"Bouncer outside LEG");
+                       self.ballEventRecord.objPMlengthcode=@"MSC032";
+                       self.ballEventRecord.objPMlinecode =@"MSC029";
                    }
                    else{
                        NSLog(@"Bouncer outside off");
+                       self.ballEventRecord.objPMlengthcode=@"MSC032";
+                       self.ballEventRecord.objPMlinecode =@"MSC028";
                    }
                }
                else if(Xposition >260 && Yposition >290 && Xposition < 325 )
@@ -2731,10 +3109,14 @@ EndInnings *endInnings;
                    if([self.BatmenStyle isEqualToString:@"MSC013"])
                    {
                        NSLog(@"Bouncer wide D.L");
+                       self.ballEventRecord.objPMlengthcode=@"MSC032";
+                       self.ballEventRecord.objPMlinecode =@"MSC030";
                    }
                    else{
                        
                        NSLog(@"Bouncer wide 0.0");
+                       self.ballEventRecord.objPMlengthcode=@"MSC032";
+                       self.ballEventRecord.objPMlinecode =@"MSC031";
                    }
                }
                Img_ball.image =[UIImage imageNamed:@"RedBall"];
@@ -3922,9 +4304,9 @@ EndInnings *endInnings;
     
     _view_table_select.hidden=NO;
     
-    if(BreakVC.view != nil)
+    if(breakvc.view != nil)
     {
-        [BreakVC.view removeFromSuperview];
+        [breakvc.view removeFromSuperview];
     }
     
     
@@ -4680,7 +5062,7 @@ EndInnings *endInnings;
 
 -(void) BreakviewMethod
 {
-    BreakVC = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
+    breakvc = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
@@ -4689,27 +5071,27 @@ EndInnings *endInnings;
     [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     //fullview.alpha=0.9;
     
-    BreakVC.MATCHCODE=self.matchCode;
-    BreakVC.COMPETITIONCODE=self.competitionCode;
-    BreakVC.INNINGSNO=fetchSEPageLoadRecord.INNINGSNO;
+    breakvc.MATCHCODE=self.matchCode;
+    breakvc.COMPETITIONCODE=self.competitionCode;
+    breakvc.INNINGSNO=fetchSEPageLoadRecord.INNINGSNO;
     
     
     [self.view addSubview:fullview];
     //     BreakVC = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
     //
-    [fullview addSubview:BreakVC.view];
+    [fullview addSubview:breakvc.view];
     
-    [self addChildViewController:BreakVC];
-    BreakVC.view.frame =CGRectMake(90, 200, BreakVC.view.frame.size.width, BreakVC.view.frame.size.height);
+    [self addChildViewController:breakvc];
+    breakvc.view.frame =CGRectMake(90, 200, breakvc.view.frame.size.width, breakvc.view.frame.size.height);
     
     
-    [fullview addSubview:BreakVC.view];
-    BreakVC.view.alpha = 0;
-    [BreakVC didMoveToParentViewController:self];
+    [fullview addSubview:breakvc.view];
+    breakvc.view.alpha = 0;
+    [breakvc didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
      {
-         BreakVC.view.alpha = 1;
+         breakvc.view.alpha = 1;
      }
                      completion:nil];
     
@@ -4717,14 +5099,14 @@ EndInnings *endInnings;
     
     if (IS_IPAD_PRO) {
         
-        BreakVC.view.frame =CGRectMake(250, 500, BreakVC.view.frame.size.width, BreakVC.view.frame.size.height);
-        [self.view addSubview:BreakVC.view];
-        BreakVC.view.alpha = 0;
-        [BreakVC didMoveToParentViewController:self];
+        breakvc.view.frame =CGRectMake(250, 500, breakvc.view.frame.size.width, breakvc.view.frame.size.height);
+        [self.view addSubview:breakvc.view];
+        breakvc.view.alpha = 0;
+        [breakvc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             BreakVC.view.alpha = 1;
+             breakvc.view.alpha = 1;
          }
                          completion:nil];
     }
@@ -4733,14 +5115,14 @@ EndInnings *endInnings;
     else{
         
         
-        BreakVC.view.frame =CGRectMake(100, 200, BreakVC.view.frame.size.width, BreakVC.view.frame.size.height);
+        breakvc.view.frame =CGRectMake(100, 200, breakvc.view.frame.size.width, breakvc.view.frame.size.height);
         //[self.view addSubview:add.view];
-        BreakVC.view.alpha = 0;
-        [BreakVC didMoveToParentViewController:self];
+        breakvc.view.alpha = 0;
+        [breakvc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             BreakVC.view.alpha = 1;
+             breakvc.view.alpha = 1;
          }
                          completion:nil];
     }
@@ -4968,6 +5350,8 @@ EndInnings *endInnings;
     
     int totalExtras = 0;
     self.ballEventRecord.objTotalextras = [NSNumber numberWithInt: self.ballEventRecord.objNoball.intValue +self.ballEventRecord.objWide.intValue+self.ballEventRecord.objByes.intValue+self.ballEventRecord.objLegByes.intValue+self.ballEventRecord.objPenalty.intValue];
+    
+    self.ballEventRecord.objGrandtotal =[NSNumber numberWithInt: self.ballEventRecord.objTotalruns.intValue +self.ballEventRecord.objTotalextras.intValue];
     /*+ ((Byes > 0 || Legbyes > 0) ? Overthrow : 0)*/;
 }
 
@@ -8632,31 +9016,11 @@ if(self.checkInternetConnection){
         return YES;
     }
 
-//-(IBAction)btn_batting:(id)sender{
-//
-//   // [penalityVc.delegate RightSideEditBtnAction];
-//
-//}
-//
-//
-//
-//-(IBAction)btn_bowling:(id)sender{
-//   
-//    [penalityVc.delegate RightSideEditBtnAction];
-// 
-//}
-//
-//-(IBAction)btn_touch:(id)sender{
-//    [penalityVc.delegate RightSideEditBtnAction];
-//
-//}
-//
-//-(IBAction)btn_submitpenality:(id)sender{
-//    
-//}
 
 - (IBAction)btn_penality:(id)sender {
     [self penalityview];
 
 }
+
+
 @end

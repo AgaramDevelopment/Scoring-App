@@ -55,7 +55,8 @@
 + (BOOL) insertBallCodeWicketEvent :(BallEventRecord *) ballcode;
 + (BOOL) insertBallCodeFieldEvent :(BallEventRecord *) ballEvent bowlerEvent:(BowlerEvent *)bowlerEvent fieldingFactor:(FieldingFactorRecord *) fieldingFactor nrs:(NSString *) nrs;
 
-+ (NSMutableArray *) getballcodemethod;
++ (NSString *) getballcodemethod :(NSString *)matchcode;
+//+ (NSMutableArray *) getballcodemethod;
 + (NSMutableArray *) getTeamCodemethod;
 + (NSMutableArray *) getInningsNomethod;
 + (NSMutableArray *) getDayNomethod;

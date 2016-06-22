@@ -196,9 +196,11 @@ NSString *DURATION;
     
 
     
-    
     BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
     
+    add.COMPETITIONCODE=self.COMPETITIONCODE;
+    add.MATCHCODE=self.MATCHCODE;
+    add.INNINGSNO=self.INNINGSNO;
     
     
     //vc2 *viewController = [[vc2 alloc]init];
@@ -290,7 +292,9 @@ NSString *DURATION;
     [self DeleteBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKCOMMENTS :BREAKNO];
     BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
     
-    
+    add.COMPETITIONCODE=self.COMPETITIONCODE;
+    add.MATCHCODE=self.MATCHCODE;
+    add.INNINGSNO=self.INNINGSNO;
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
@@ -314,7 +318,10 @@ NSString *DURATION;
     
     BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
     
-    
+
+    add.COMPETITIONCODE=self.COMPETITIONCODE;
+    add.MATCHCODE=self.MATCHCODE;
+    add.INNINGSNO=self.INNINGSNO;
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
