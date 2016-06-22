@@ -142,7 +142,7 @@ _Text_BreakStart.text=@"";
     [formatter1 setDateFormat:@"yyyy-MM-dd hh:mm:s"];
 
 //
-    
+      [self DurationCalculation];
     
     
 }
@@ -179,7 +179,8 @@ _Text_BreakStart.text=@"";
 
 
 - (IBAction)Switch_minuts:(id)sender {
-    
+  
+
     if([sender isOn]){
         
         NSString *checkoffon=@"1";
@@ -195,8 +196,7 @@ _Text_BreakStart.text=@"";
 
 - (IBAction)Finish_btn:(id)sender {
     
-     [self DurationCalculation];
-    BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
+         BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
 //    MATCHCODE=@"IMSC02214DDA97AF2FD00004";
 //    COMPETITIONCODE=@"UCC0000004";
 //    INNINGSNO=@"2";
@@ -270,10 +270,13 @@ _Text_BreakStart.text=@"";
 
 - (IBAction)back_btn:(id)sender {
     
+//    
+//    intialBreakVC*add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
     
-    intialBreakVC*add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
-    
-    
+    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
+    add.COMPETITIONCODE=self.COMPETITIONCODE;
+    add.MATCHCODE=self.MATCHCODE;
+    add.INNINGSNO=self.INNINGSNO;
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
