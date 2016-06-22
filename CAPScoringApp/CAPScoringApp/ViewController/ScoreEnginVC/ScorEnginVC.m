@@ -204,7 +204,6 @@
 
 @property(nonatomic,strong)NSMutableArray *rightSlideArray;
 
-
 @end
 
 @implementation ScorEnginVC
@@ -230,6 +229,7 @@ EndInnings *endInnings;
      [self hideLabelBasedOnMatchType];
     
    // [self resetBallObject];
+    
     
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
@@ -265,12 +265,12 @@ EndInnings *endInnings;
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
     
-    endInnings = [[EndInnings alloc]init];
-    
-[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
+//    endInnings = [[EndInnings alloc]init];
+//    
+//[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
 
     
-   // [endInnings InsertEndInnings:@"UCC0000001" :@"DMSC114AC811243879400014" :@"TEA0000022" :@"TEA0000024" :@"1" :@"2016-01-20 02:10:00" :@"2016-01-20 05:55:00" :@"49" :@"308" :@"8" :@"SAVE"];
+  
     
   
 
@@ -4753,7 +4753,15 @@ EndInnings *endInnings;
 }
 -(void)ENDINNINGS
 {
+    
+    
+    
     EndInningsVC *endInning = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
+    
+    
+       endInnings = [[EndInnings alloc]init];
+    
+    [endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];

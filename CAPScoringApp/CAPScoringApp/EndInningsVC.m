@@ -11,7 +11,9 @@
 #import "EndInningsTVC.h"
 #import "DBManagerEndInnings.h"
 #import "DashBoardVC.h"
-
+#import "FixturesVC.h"
+#import "CustomNavigationVC.h"
+#import "Reachability.h"
 @interface EndInningsVC ()
 {
     NSDateFormatter *formatter;
@@ -26,6 +28,8 @@ BOOL IsBack;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSString *SAVE = self.btn_save;
     
     IsBack = NO;
     
@@ -45,13 +49,7 @@ BOOL IsBack;
     
   [innings fetchEndInnings:@"UCC0000004" :@"IMSC02200224DB2663B00003" :@"TEA0000024":@"1"];
     
-    
-    
-    //EndInningsVC *endInnings = [[EndInningsVC alloc]init];
-    
-//    [innings InsertEndInnings:@"UCC0000004" :@"IMSC02200224DB2663B00003" :@"TEA0000024" :@"TEA0000022" :@"1" :@"2015-10-15 12:04:00" :@"2015-10-16 12:05:00" :@"49" :@"249" :@"8" :@"SAVE"];
-    
-    
+
     
 
     
@@ -280,7 +278,39 @@ self.lbl_duration.text=[NSString stringWithFormat:@"%.20f", Duration];
 
 - (IBAction)btn_save:(id)sender {
     
-    self.view_allControls.hidden = YES;
+    //self.view_allControls.hidden = YES;
+   // EndInnings *endInnings = [[EndInnings alloc]init];
+    NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
+    
+    if([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable){
+        
+
+NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETENDINNINGS/UCC0000004/IMSC02200224DB2663B00003/TEA0000024/TEA0000024/1/2015-10-15 12:04:00/2015-10-16 12:05:00/49/249/8/INSERT"];
+    
+            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURLResponse *response;
+            NSError *error;
+            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    
+            NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+            
+            
+        }else{
+    
+    [innings InsertEndInnings:@"UCC0000004" :@"IMSC02200224DB2663B00003" :@"TEA0000024" :@"TEA0000024" :@"1" :@"2015-10-15 12:04:00" :@"2015-10-16 12:05:00" :@"49" :@"249" :@"8" :BtnurrentTittle:@"45"];
+    
+}
+    FixturesVC *fixturevc = [[FixturesVC alloc]init];
+    
+fixturevc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
+    
+//    fixturevc.Matchcode = matchCode;
+//    fixturevc.competitionCode = competitionCode;
+    
+    [self.navigationController pushViewController:fixturevc animated:YES];
     
 }
 - (IBAction)btn_back:(id)sender {
