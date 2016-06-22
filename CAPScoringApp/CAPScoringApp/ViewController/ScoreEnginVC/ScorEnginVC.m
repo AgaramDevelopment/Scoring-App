@@ -152,7 +152,6 @@
     RevicedOverVC * revicedOverVc ;
     RevisedTarget  *revisedTarget;
     
-    int  addballcode;
 
 }
 
@@ -232,44 +231,7 @@ EndInnings *endInnings;
     
    // [self resetBallObject];
     
-    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-   [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
-    
-//    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
-    
-    
-    //Get Last bowler details
-     fetchLastBowler = [[FetchLastBowler alloc]init];
-    [fetchLastBowler LastBowlerDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS] :[NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT]];
    
-    if(fetchLastBowler.GetLastBolwerDetails.count!=0){
-        LastBolwerDetailRecord *lastBowlerDetailRecord = [fetchLastBowler.GetLastBolwerDetails objectAtIndex:0];
-        
-        
-        self.lbl_last_bowler_name.text = lastBowlerDetailRecord.BOWLERNAME;
-        self.lbl_last_bowler_runs.text = lastBowlerDetailRecord.OVERS;
-        self.lbl_last_bowler_balls.text = lastBowlerDetailRecord.MAIDENOVERS;
-        self.lbl_last_bowler_fours.text = lastBowlerDetailRecord.TOTALRUNS;
-        self.lbl_last_bowler_sixs.text = lastBowlerDetailRecord.WICKETS;
-        self.lbl_last_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[lastBowlerDetailRecord.ECONOMY floatValue]];
-
-    }else{
-        self.lbl_last_bowler_name.text = @"-";
-        self.lbl_last_bowler_runs.text = @"-";
-        self.lbl_last_bowler_balls.text = @"-";
-        self.lbl_last_bowler_fours.text = @"-";
-        self.lbl_last_bowler_sixs.text = @"-";
-        self.lbl_last_bowler_strickrate.text = @"-";
-    }
-     
-     
-    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
-    
-    
-    endInnings = [[EndInnings alloc]init];
-    
-[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
-
     
    // [endInnings InsertEndInnings:@"UCC0000001" :@"DMSC114AC811243879400014" :@"TEA0000022" :@"TEA0000024" :@"1" :@"2016-01-20 02:10:00" :@"2016-01-20 05:55:00" :@"49" :@"308" :@"8" :@"SAVE"];
     
@@ -284,66 +246,8 @@ EndInnings *endInnings;
     //[converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
     
-    //Stricker Details
-    self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
-    self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
-    self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
-    self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
-    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
-    
-    self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
-    
-    //Non Stricker Details
-    self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
-    self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
-    self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
-    self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
-    self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
-    self.lbl_nonstricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
-    //[formatter stringFromNumber:fetchSEPageLoadRecord.nonstrickerStrickRate];
-    
-    //Bowler
-    
-   self.lbl_bowler_name.text = fetchSEPageLoadRecord.currentBowlerPlayerName;
-   self.lbl_bowler_runs.text = fetchSEPageLoadRecord.currentBowlerOver;
-   self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
-   self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
-   self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
-    self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
+    [self displaystrickerdetailsmethod];
 
-    //team score details display
-    _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
-    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
-    
-    _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
-    
-    
-    
-    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
-    
-    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld OVS" ,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVERS,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVRBALLS];
-    
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
-    
-    
-    
-
-    //all innings details for team A and team B
-    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
-    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
-    
-    
-   // _lbl_teamASecIngsScore.text = 
-    //_lbl_teamASecIngsOvs.text =
-    
-    
-  //  _lbl_teamBSecIngsScore.text =
-//    _lbl_teamBSecIngsOvs.text =
-    
-    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
-    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
-    
-    
     
   _view_Wagon_wheel.hidden=YES;
     //bowl type - spin array
@@ -433,7 +337,7 @@ EndInnings *endInnings;
     _otwRtwArray = [[NSMutableArray alloc]init];
     _otwRtwArray = [DBManager getOtwRtw];
 
-    addballcode=10000000000;
+   
     
     //RBW and Misc Filters
     self.ballEventRecord = [[BallEventRecord alloc] init];
@@ -569,6 +473,105 @@ EndInnings *endInnings;
 //    self.lbl_Batsmen2Name.text=objEvent1.PlaerNameStrike_nonStrike;
     
 }
+
+
+-(void)displaystrickerdetailsmethod
+{
+    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
+    //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+    
+    
+    //Get Last bowler details
+    fetchLastBowler = [[FetchLastBowler alloc]init];
+    [fetchLastBowler LastBowlerDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS] :[NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT]];
+    
+    if(fetchLastBowler.GetLastBolwerDetails.count!=0){
+        LastBolwerDetailRecord *lastBowlerDetailRecord = [fetchLastBowler.GetLastBolwerDetails objectAtIndex:0];
+        
+        
+        self.lbl_last_bowler_name.text = lastBowlerDetailRecord.BOWLERNAME;
+        self.lbl_last_bowler_runs.text = lastBowlerDetailRecord.OVERS;
+        self.lbl_last_bowler_balls.text = lastBowlerDetailRecord.MAIDENOVERS;
+        self.lbl_last_bowler_fours.text = lastBowlerDetailRecord.TOTALRUNS;
+        self.lbl_last_bowler_sixs.text = lastBowlerDetailRecord.WICKETS;
+        self.lbl_last_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[lastBowlerDetailRecord.ECONOMY floatValue]];
+        
+    }else{
+        self.lbl_last_bowler_name.text = @"-";
+        self.lbl_last_bowler_runs.text = @"-";
+        self.lbl_last_bowler_balls.text = @"-";
+        self.lbl_last_bowler_fours.text = @"-";
+        self.lbl_last_bowler_sixs.text = @"-";
+        self.lbl_last_bowler_strickrate.text = @"-";
+    }
+    
+    
+    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+    
+    
+    
+
+    //Stricker Details
+    self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
+    self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
+    self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
+    self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
+    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
+    
+    self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
+    
+    //Non Stricker Details
+    self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
+    self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
+    self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
+    self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
+    self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
+    self.lbl_nonstricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
+    //[formatter stringFromNumber:fetchSEPageLoadRecord.nonstrickerStrickRate];
+    
+    //Bowler
+    
+    self.lbl_bowler_name.text = fetchSEPageLoadRecord.currentBowlerPlayerName;
+    self.lbl_bowler_runs.text = fetchSEPageLoadRecord.currentBowlerOver;
+    self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
+    self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
+    self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
+    self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
+    
+    //team score details display
+    _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+    
+    _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
+    
+    
+    
+    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
+    
+    _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld OVS" ,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVERS,(unsigned long)fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+    
+    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+    
+    
+    
+    
+    //all innings details for team A and team B
+    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
+    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
+    
+    
+    // _lbl_teamASecIngsScore.text =
+    //_lbl_teamASecIngsOvs.text =
+    
+    
+    //  _lbl_teamBSecIngsScore.text =
+    //    _lbl_teamBSecIngsOvs.text =
+    
+    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+}
 -(void)SaveBallEventREcordvalue
 {
     //self.ballEventRecord=[[BallEventRecord alloc]init];
@@ -591,48 +594,76 @@ EndInnings *endInnings;
     }
     
     [self getDayNOValue];
-    NSMutableArray * ballCodevalueArray=[DBManager getballcodemethod];
-    NSLog(@"array : %@",[ballCodevalueArray lastObject]);
-    if(ballCodevalueArray.count > 0 && ballCodevalueArray!= NULL)
+   NSString * ballCodevalue=[DBManager getballcodemethod:self.matchCode];
+   // NSLog(@"array : %@",[ballCodevalueArray lastObject]);
+    if(![ballCodevalue isEqualToString: @""])
     {
         
-        NSString*ballcode= [NSString stringWithFormat:@"%@",ballCodevalueArray.lastObject];
+        NSString*ballcode= [NSString stringWithFormat:@"%@",ballCodevalue];
         if([ballcode isEqualToString:@"(null)"])
             
         {
-            [ballCodevalueArray removeLastObject];
-            ballcode=[NSString stringWithFormat:@"%@",ballCodevalueArray.lastObject];
-            [ballCodevalueArray removeLastObject];
-             ballcode=[NSString stringWithFormat:@"%@",ballCodevalueArray.lastObject];
+           // [ballCodevalueArray removeLastObject];
+            ballcode=[NSString stringWithFormat:@"%@",ballCodevalue];
+           // [ballCodevalueArray removeLastObject];
+             ballcode=[NSString stringWithFormat:@"%@",ballCodevalue];
         }
        
-    
+        
         NSString *code = [ballcode substringFromIndex: [ballcode length] - 10];
         
-        NSString * myURL = [NSString stringWithFormat:@"1%@",code];
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        f.numberStyle = NSNumberFormatterDecimalStyle;
-        NSNumber * myNumber = [f numberFromString:myURL];
-        NSInteger value = [myNumber integerValue]+1;
-        NSString *addcode = [@(value) stringValue];
+        NSInteger add =[code intValue];
+        add = add+1;
         
-        NSString * ballno = [addcode substringFromIndex:1];
+        NSString *ballcodeValue = [NSString stringWithFormat:@"%010d",add];
+        //NSString * addCode=[NSString stringWithFormat:@"%d",add];
+        
+        //NSInteger sum = 1000000000;
+       
+            //sum += [addCode intValue];
+        //NSMutableString *addValue;
+        //NSString * matchcodeaddValue =[NSString stringWithFormat:@"%d",sum];
+//       NSString* adds = nil;
+//        if([matchcodeaddValue hasPrefix:@"1"]) {
+//            adds = [matchcodeaddValue substringFromIndex:1];
+//           addValue = [NSMutableString stringWithString:adds];
+//            [addValue insertString:@"0" atIndex:1];
+//        }
+        
+       //NSString* addValue = [matchcodeaddValue stringByReplacingOccurrencesOfString:@"1"
+                                            // withString:@"0"];
+        
+    
+      
+//        
+//        NSString * myURL = [NSString stringWithFormat:@"1%@",code];
+//        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//        f.numberStyle = NSNumberFormatterDecimalStyle;
+//        NSNumber * myNumber = [f numberFromString:myURL];
+//        NSInteger value = [myNumber integerValue]+1;
+//        NSString *addcode = [@(value) stringValue];
+//        
+//        NSString * ballno = [addcode substringFromIndex:1];
         
         
-        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballno];
+        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballcodeValue];
         NSLog(@"array : %@",ballnoStr);
         
         
     }
     else{
-        NSString * myURL = [NSString stringWithFormat:@"10000000001"];
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        f.numberStyle = NSNumberFormatterDecimalStyle;
-        NSNumber * myNumber = [f numberFromString:myURL];
-        NSInteger value = [myNumber integerValue];
-        NSString *ballno1 = [@(value) stringValue];
-        NSString * ballno = [ballno1 substringFromIndex:1];
-        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballno];
+        
+      
+         NSString *ballcodeValue = [NSString stringWithFormat:@"%010d",1];
+        
+        //NSString * myURL = [NSString stringWithFormat:@"0000000001"];
+//        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//        f.numberStyle = NSNumberFormatterDecimalStyle;
+//        NSNumber * myNumber = [f numberFromString:myURL];
+//        NSInteger value = [myNumber integerValue];
+//        NSString *ballno1 = [@(value) stringValue];
+        //NSString * ballno = [ballno1 substringFromIndex:1];
+        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballcodeValue];
         NSLog(@"array : %@",ballnoStr);
         
     }
@@ -1331,6 +1362,7 @@ EndInnings *endInnings;
         self.btn_StartOver.userInteractionEnabled=YES;
         //        self.btn_StartBall.userInteractionEnabled=NO;
         [self SaveBallEventREcordvalue];
+      
         [self AllBtndisableMethod];
         
         
@@ -5064,6 +5096,9 @@ EndInnings *endInnings;
 }
 -(void)ENDINNINGS
 {
+    endInnings = [[EndInnings alloc]init];
+    
+    [endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
     EndInningsVC *endInning = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -5271,6 +5306,8 @@ EndInnings *endInnings;
     
     int totalExtras = 0;
     self.ballEventRecord.objTotalextras = [NSNumber numberWithInt: self.ballEventRecord.objNoball.intValue +self.ballEventRecord.objWide.intValue+self.ballEventRecord.objByes.intValue+self.ballEventRecord.objLegByes.intValue+self.ballEventRecord.objPenalty.intValue];
+    
+    self.ballEventRecord.objGrandtotal =[NSNumber numberWithInt: self.ballEventRecord.objTotalruns.intValue +self.ballEventRecord.objTotalextras.intValue];
     /*+ ((Byes > 0 || Legbyes > 0) ? Overthrow : 0)*/;
 }
 
@@ -8935,31 +8972,11 @@ if(self.checkInternetConnection){
         return YES;
     }
 
-//-(IBAction)btn_batting:(id)sender{
-//
-//   // [penalityVc.delegate RightSideEditBtnAction];
-//
-//}
-//
-//
-//
-//-(IBAction)btn_bowling:(id)sender{
-//   
-//    [penalityVc.delegate RightSideEditBtnAction];
-// 
-//}
-//
-//-(IBAction)btn_touch:(id)sender{
-//    [penalityVc.delegate RightSideEditBtnAction];
-//
-//}
-//
-//-(IBAction)btn_submitpenality:(id)sender{
-//    
-//}
 
 - (IBAction)btn_penality:(id)sender {
     [self penalityview];
 
 }
+
+
 @end

@@ -251,8 +251,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                // NSString *obj =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 
                 NSNumber *STARTOVER =@1; //[NSNumber numberWithInteger:[ obj integerValue]];
-                //sqlite3_finalize(statement);
-               // sqlite3_close(dataBase);
+                sqlite3_finalize(statement);
+               sqlite3_close(dataBase);
                 return STARTOVER;
             }
             
@@ -1242,11 +1242,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
             }
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -1268,11 +1272,17 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 sqlite3_reset(statement);
+                
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
             }
         }
     }
+ 
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -1293,11 +1303,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
             }
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -1392,11 +1406,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -1422,11 +1440,16 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    
     return @"";
 }
 
@@ -1482,11 +1505,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
             }
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -1512,10 +1539,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -1542,10 +1573,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             }
             else {
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return @"";
             }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -1573,11 +1608,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -1637,10 +1676,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -1660,11 +1703,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW)
             {
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
             }
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -1685,11 +1732,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
             }
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -1709,11 +1760,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
             }
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -1743,11 +1798,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -1845,11 +1904,15 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT BATTINGPOSITIONNO, RUN
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return YES;
                 }
             }
         }
         sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
         return NO;
         
     }
@@ -1871,11 +1934,15 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT BATTINGPOSITIONNO, RUN
                     {
                         while(sqlite3_step(statement)==SQLITE_ROW){
                             sqlite3_reset(statement);
+                            sqlite3_finalize(statement);
+                            sqlite3_close(dataBase);
                             return YES;
                         }
                     }
                 }
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return NO;
                 
             }
@@ -1904,11 +1971,15 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT BATTINGPOSITIONNO, RUN
                 }
                 else {
                     sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     
                     return @"";
                 }
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
                                
@@ -1963,11 +2034,15 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT BATTINGPOSITIONNO, RUN
                 {
                     while(sqlite3_step(statement)==SQLITE_ROW){
                         sqlite3_reset(statement);
+                        sqlite3_finalize(statement);
+                        sqlite3_close(dataBase);
                         return YES;
                     }
                 }
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
             
         }
@@ -1997,11 +2072,15 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT BATTINGPOSITIONNO, RUN
                 }
                 else {
                     sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     
                     return @"";
                 }
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
 
@@ -2059,11 +2138,15 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT BATTINGPOSITIONNO, RUN
                     {
                         while(sqlite3_step(statement)==SQLITE_ROW){
                             sqlite3_reset(statement);
+                            sqlite3_finalize(statement);
+                            sqlite3_close(dataBase);
                             return YES;
                         }
                     }
                 }
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return NO;
                 
             }
@@ -2085,12 +2168,16 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT BATTINGPOSITIONNO, RUN
         if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
         {
                                 while(sqlite3_step(statement)==SQLITE_ROW){
-                            sqlite3_reset(statement);
+                                    sqlite3_reset(statement);
+                                    sqlite3_finalize(statement);
+                                    sqlite3_close(dataBase);
                             return YES;
                         }
                 }
             }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
             return NO;
     
 }
@@ -2111,12 +2198,16 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT BATTINGPOSITIONNO, RUN
         if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
     {
                 while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_reset(statement);
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                 return YES;
     }
         }
     }
-        sqlite3_reset(statement);
+    sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
         return NO;
                                                                                                                                 
 }
@@ -2238,11 +2329,15 @@ return 0;
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
             }
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -2478,11 +2573,15 @@ return 0;
                 {
                     while(sqlite3_step(statement)==SQLITE_ROW){
                         sqlite3_reset(statement);
+                        sqlite3_finalize(statement);
+                        sqlite3_close(dataBase);
                         return YES;
                     }
                 }
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
             
         }
@@ -2505,11 +2604,15 @@ return 0;
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return YES;
                 }
             }
         }
         sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
         return NO;
         
     }
@@ -2532,11 +2635,15 @@ return 0;
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return YES;
                 }
             }
         }
         sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
         return NO;
         
     }
@@ -2557,11 +2664,15 @@ return 0;
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return YES;
                 }
             }
         }
         sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
         return NO;
         
     }
@@ -2938,11 +3049,15 @@ return 0;
         }
         else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
     
 }
@@ -2973,11 +3088,15 @@ return 0;
         }
         else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -3007,11 +3126,15 @@ return 0;
         }
         else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -3029,17 +3152,23 @@ return 0;
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             
             return YES;
             
         }
         else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -3069,6 +3198,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -3098,6 +3229,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -3126,6 +3259,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -3149,6 +3284,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -3184,6 +3321,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -3212,6 +3351,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -3241,6 +3382,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -3275,6 +3418,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -3304,6 +3449,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -3333,6 +3480,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -3370,6 +3519,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -3398,6 +3549,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -3468,6 +3621,8 @@ return 0;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 

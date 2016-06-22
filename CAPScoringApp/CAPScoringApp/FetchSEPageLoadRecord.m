@@ -220,12 +220,8 @@ BOOL  getOverStatus;
     BATTINGTEAMCODE =  [DBManager getBattingTeamCode:COMPETITIONCODE :MATCHCODE];
     
     
-    
-    
-    
     //bowling team code
     BOWLINGTEAMCODE = [DBManager getBowlteamCode:MATCHCODE :COMPETITIONCODE :TEAMACODE :TEAMBCODE];
-    
     
     
     //follow on
@@ -233,7 +229,6 @@ BOOL  getOverStatus;
     NSUInteger follow = [followOnArray integerValue];
     
     //penalty
-    
     NSString *penaltyInt = [DBManager getPenalty:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE];
     NSInteger penalty = [penaltyInt integerValue];
     
