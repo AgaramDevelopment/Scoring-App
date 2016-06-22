@@ -22,7 +22,8 @@
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *img_reports;
-
+@property(strong,nonatomic)NSMutableArray *checkErrorItem;
+@property(strong,nonatomic)NSMutableArray*CompitisionArray;
 
 - (IBAction)btn_syn_Data:(id)sender;
 - (IBAction)btn_new_Match:(id)sender;

@@ -11,6 +11,7 @@
 #import "LoginVC.h"
 #import "EndInnings.h"
 #import "EndInningsVC.h"
+#import "DBMANAGERSYNC.h"
 
 
 @interface DashBoardVC ()
@@ -19,7 +20,8 @@
 
 @implementation DashBoardVC
 
-
+@synthesize checkErrorItem;
+@synthesize CompitisionArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -39,6 +41,98 @@
     _img_synData.image = [UIImage imageNamed:@"ico-sync-data02.png"];
     
     _view_syn_data.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
+    
+    
+    
+    NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/PULLSCORERDATAFROMSERVER/1"];
+    NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    NSURLResponse *response;
+    NSError *error;
+    
+    NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    if (responseData != nil) {
+        
+        NSDictionary *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+       checkErrorItem=[serviceResponse objectForKey:@"lstErrorItem"];
+        
+        NSDictionary * ErrorNoDict =[checkErrorItem objectAtIndex:0];
+        NSString *ErrorNoStr=[ErrorNoDict valueForKey:@"ErrorNo"];
+        NSString *CompareErrorno=@"MOB0005";
+        if ([ErrorNoStr isEqualToString:CompareErrorno]) {
+       
+           //CompitisionArray=[serviceResponse objectForKey:@"Competition"];
+          
+           NSArray *temp =   [serviceResponse objectForKey:@"Competition"];
+            [CompitisionArray removeAllObjects];
+            CompitisionArray = [NSMutableArray new];
+                int i;
+                for (i=0; i<[temp count]; i++) {
+                    NSDictionary*test=[temp objectAtIndex:i];
+                    NSString*COMPETITIONCODE=[test objectForKey:@"Competitioncode"];
+                    NSString *COMPETITIONNAME=[test objectForKey:@"Competitionname"];
+                      NSString *SEASON=[test objectForKey:@"Season"];
+                      NSString *TROPHY=[test objectForKey:@"Trophy"];
+                       NSString *STARTDATE=[test objectForKey:@"Startdate"];
+                    NSString *ENDDATE=[test objectForKey:@"Enddate"];
+                    NSString *MATCHTYPE=[test objectForKey:@"Matchtype"];
+                    NSString *ISOTHERSMATCHTYPE=[test objectForKey:@"Isothersmatchtype"];
+                     NSString*MANOFTHESERIESCODE=[test objectForKey:@"Manoftheseriescode"];
+                     NSString*BESTBATSMANCODE =[test objectForKey:@"Bestbatsmancode"];
+                     NSString*BESTBOWLERCODE=[test objectForKey:@"Bestbowlercode"];
+                     NSString*BESTALLROUNDERCODE=[test objectForKey:@"Bestallroundercode"];
+                     NSString*MOSTVALUABLEPLAYERCODE=[test objectForKey:@"Mostvaluableplayercode"];
+                     NSString*RECORDSTATUS=[test objectForKey:@"Recordstatus"];
+                     NSString*CREATEDBY=[test objectForKey:@"Createdby"];
+                    NSString*CREATEDDATE=[test objectForKey:@"Createddate"];
+                    NSString*MODIFIEDBY=[test objectForKey:@"Modifiedby"];
+                    NSString*MODIFIEDDATE=[test objectForKey:@"Modifieddate"];
+                   
+                    
+                    
+                    
+                    
+                    bool CheckStatus=[DBMANAGERSYNC CheckCompetitionCode:COMPETITIONCODE];
+                    if (CheckStatus==YES) {
+                        [DBMANAGERSYNC UPDATECOMPETITION:COMPETITIONCODE: COMPETITIONNAME:SEASON: TROPHY:STARTDATE:ENDDATE:MATCHTYPE:ISOTHERSMATCHTYPE : MODIFIEDBY: MODIFIEDDATE];
+                    }
+                    
+                    else
+                    {
+                        [DBMANAGERSYNC  InsertMASTEREvents:COMPETITIONCODE:COMPETITIONNAME:SEASON:TROPHY:STARTDATE:ENDDATE:MATCHTYPE: ISOTHERSMATCHTYPE :MANOFTHESERIESCODE:BESTBATSMANCODE : BESTBOWLERCODE:BESTALLROUNDERCODE:MOSTVALUABLEPLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    
+                    }
+                    
+                    
+                    
+                 //   [CompitisionArray addObject:add];
+                    
+                    
+               
+                }
+            }
+            
+     
+            
+        
+        else
+        {
+    
+    
+       
+            UIAlertView *alert = [[UIAlertView alloc]
+                                  initWithTitle:@"Alert"
+                                  message:@"Message"
+                                  delegate:nil //or self
+                                  cancelButtonTitle:@"Failed"
+                                  otherButtonTitles:nil];
+            
+            [alert show];
+    
+    }
+    
+    
+    }
     
     
     

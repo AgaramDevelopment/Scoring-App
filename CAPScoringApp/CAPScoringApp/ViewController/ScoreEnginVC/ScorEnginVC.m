@@ -30,7 +30,7 @@
 #import "FetchLastBallBowledPlayer.h"
 #import "InitializeInningsScoreBoardRecord.h"
 
-#import "intialBreakVC.h"
+#import "BreakVC.h"
 #import "EndInnings.h"
 #import "RevicedOverVC.h"
 #import "FixturesRecord.h"
@@ -41,6 +41,8 @@
 #import "LastBolwerDetailRecord.h"
 #import "ScoreCardVC.h"
 #import "EndInningsVC.h"
+#import "FetchMatchResult.h"
+
 
 
 
@@ -147,7 +149,7 @@
     PenalityVC *penalityVc;
     UISwipeGestureRecognizer *RightsideGesture;
     UISwipeGestureRecognizer *LeftsideGesture;
-    intialBreakVC * BreakVC;
+    BreakVC * breakvc;
     UIView * fullview;
     RevicedOverVC * revicedOverVc ;
     RevisedTarget  *revisedTarget;
@@ -4265,9 +4267,9 @@ EndInnings *endInnings;
     
     _view_table_select.hidden=NO;
     
-    if(BreakVC.view != nil)
+    if(breakvc.view != nil)
     {
-        [BreakVC.view removeFromSuperview];
+        [breakvc.view removeFromSuperview];
     }
     
     
@@ -5023,7 +5025,7 @@ EndInnings *endInnings;
 
 -(void) BreakviewMethod
 {
-    BreakVC = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
+    breakvc = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
@@ -5032,27 +5034,27 @@ EndInnings *endInnings;
     [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     //fullview.alpha=0.9;
     
-    BreakVC.MATCHCODE=self.matchCode;
-    BreakVC.COMPETITIONCODE=self.competitionCode;
-    BreakVC.INNINGSNO=fetchSEPageLoadRecord.INNINGSNO;
+    breakvc.MATCHCODE=self.matchCode;
+    breakvc.COMPETITIONCODE=self.competitionCode;
+    breakvc.INNINGSNO=fetchSEPageLoadRecord.INNINGSNO;
     
     
     [self.view addSubview:fullview];
     //     BreakVC = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
     //
-    [fullview addSubview:BreakVC.view];
+    [fullview addSubview:breakvc.view];
     
-    [self addChildViewController:BreakVC];
-    BreakVC.view.frame =CGRectMake(90, 200, BreakVC.view.frame.size.width, BreakVC.view.frame.size.height);
+    [self addChildViewController:breakvc];
+    breakvc.view.frame =CGRectMake(90, 200, breakvc.view.frame.size.width, breakvc.view.frame.size.height);
     
     
-    [fullview addSubview:BreakVC.view];
-    BreakVC.view.alpha = 0;
-    [BreakVC didMoveToParentViewController:self];
+    [fullview addSubview:breakvc.view];
+    breakvc.view.alpha = 0;
+    [breakvc didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
      {
-         BreakVC.view.alpha = 1;
+         breakvc.view.alpha = 1;
      }
                      completion:nil];
     
@@ -5060,14 +5062,14 @@ EndInnings *endInnings;
     
     if (IS_IPAD_PRO) {
         
-        BreakVC.view.frame =CGRectMake(250, 500, BreakVC.view.frame.size.width, BreakVC.view.frame.size.height);
-        [self.view addSubview:BreakVC.view];
-        BreakVC.view.alpha = 0;
-        [BreakVC didMoveToParentViewController:self];
+        breakvc.view.frame =CGRectMake(250, 500, breakvc.view.frame.size.width, breakvc.view.frame.size.height);
+        [self.view addSubview:breakvc.view];
+        breakvc.view.alpha = 0;
+        [breakvc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             BreakVC.view.alpha = 1;
+             breakvc.view.alpha = 1;
          }
                          completion:nil];
     }
@@ -5076,14 +5078,14 @@ EndInnings *endInnings;
     else{
         
         
-        BreakVC.view.frame =CGRectMake(100, 200, BreakVC.view.frame.size.width, BreakVC.view.frame.size.height);
+        breakvc.view.frame =CGRectMake(100, 200, breakvc.view.frame.size.width, breakvc.view.frame.size.height);
         //[self.view addSubview:add.view];
-        BreakVC.view.alpha = 0;
-        [BreakVC didMoveToParentViewController:self];
+        breakvc.view.alpha = 0;
+        [breakvc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             BreakVC.view.alpha = 1;
+             breakvc.view.alpha = 1;
          }
                          completion:nil];
     }
