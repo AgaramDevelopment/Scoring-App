@@ -29,6 +29,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_man_of_the_series;
 - (IBAction)btn_man_of_the_series:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UIButton *btn_team_id;
 
 @property (strong, nonatomic) IBOutlet UIView *view_team_layer;
 @property (strong, nonatomic) IBOutlet UIView *view_man_of_the_match;
@@ -38,6 +39,7 @@
 @property (strong, nonatomic) IBOutlet UIView *view_best_allrounder;
 @property (strong, nonatomic) IBOutlet UIView *view_most_wicket;
 
+@property (strong, nonatomic) IBOutlet UIButton *btn_submit_id;
 
 @property (strong, nonatomic) IBOutlet UITextField *txtf_team_a_point;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_team_a_point;
@@ -53,7 +55,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_select_most_valu_player;
 
 - (IBAction)btn_most_valu_player:(id)sender;
+@property (strong, nonatomic) IBOutlet UIButton *btn_back;
 
+@property (strong, nonatomic) IBOutlet UIButton *btn_revert_id;
 
 
 

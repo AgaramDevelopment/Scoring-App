@@ -321,11 +321,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 GetMatchResultDetail *record =[[GetMatchResultDetail alloc]init];
-                record.RESULTTYPE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                record.COMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.MANOFTHEMATCH=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                record.TEAMAPOINTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                record.TEAMBPOINTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record.RESULTTYPE=[self getValueByNull:statement :0];
+                record.TEAM=[self getValueByNull:statement :1];
+                record.COMMENTS=[self getValueByNull:statement :2];
+                record.MANOFTHEMATCH=[self getValueByNull:statement :3];
+                record.TEAMAPOINTS=[self getValueByNull:statement :4];
+                record.TEAMBPOINTS=[self getValueByNull:statement :5];
                 
                 [resultArray addObject:record];
             }

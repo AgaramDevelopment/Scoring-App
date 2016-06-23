@@ -1787,7 +1787,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             NSString *totalRuns = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
             
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return totalRuns;
         }
     }
@@ -5856,9 +5857,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                NSString *COMPETITIONCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                NSString *COMPETITIONCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 
                 return YES;
             }
@@ -5936,6 +5937,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         }
 
     }
+     sqlite3_reset(statement);
      return YES;
 }
 
@@ -5989,9 +5991,9 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                NSString *BREAKNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                NSString *BREAKNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 
                 return BREAKNO;
             }
@@ -6204,10 +6206,10 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                NSString *BREAKNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                NSString *BREAKNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                
                 return BREAKNO;
             }
             
@@ -6340,10 +6342,10 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+               
+                NSString *BREAKNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                NSString *BREAKNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                
                 return BREAKNO;
             }
             
@@ -7311,11 +7313,11 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                 }
                 
             }
-            else {
-                sqlite3_reset(statement);
-                
-                return NO;
-            }
+//            else {
+//              //  sqlite3_reset(statement);
+//                
+//                return NO;
+//            }
             
             sqlite3_reset(statement);
             return NO;
@@ -7708,10 +7710,10 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                
                 return BOOL;
             }
             
@@ -7741,10 +7743,10 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                                NSString *COMPETITIONCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                NSString *COMPETITIONCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                
+
                 return COMPETITIONCODE;
             }
             
@@ -7809,10 +7811,10 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+               
+                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                
                 return BOOL;
             }
             
@@ -7876,10 +7878,10 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                
                 return BOOL;
             }
             
@@ -7909,10 +7911,10 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                NSString *DAYNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                NSString *DAYNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                
                 return DAYNO;
             }
             
@@ -7942,9 +7944,9 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                NSString *BOOL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 
                 return BOOL;
             }

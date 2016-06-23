@@ -269,9 +269,9 @@ EndInnings *endInnings;
     FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
     
-    endInnings = [[EndInnings alloc]init];
-    
-//  [endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
+//    endInnings = [[EndInnings alloc]init];
+//    
+//[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
 
     
   
@@ -5214,6 +5214,7 @@ EndInnings *endInnings;
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:matchResult];
     matchResult.view.frame =CGRectMake(90, 200, matchResult.view.frame.size.width, matchResult.view.frame.size.height);
+    [matchResult.btn_back addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     
     
     [fullview addSubview:matchResult.view];
@@ -5304,6 +5305,7 @@ EndInnings *endInnings;
 {
     [fullview removeFromSuperview];
 }
+
 
 -(void) selectExtrasOption{
     

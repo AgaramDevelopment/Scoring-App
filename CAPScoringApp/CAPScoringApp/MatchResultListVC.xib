@@ -37,7 +37,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MatchResultListVC">
             <connections>
+                <outlet property="btn_back" destination="OAe-L1-Jx5" id="gLU-ym-15r"/>
                 <outlet property="btn_result_type_frame" destination="lti-Yh-U5t" id="LfH-PI-jxI"/>
+                <outlet property="btn_revert_id" destination="qc5-7k-TeF" id="gl5-8U-QgW"/>
+                <outlet property="btn_submit_id" destination="yRV-0M-aag" id="CHP-Ys-lWx"/>
+                <outlet property="btn_team_id" destination="Bmf-f3-jGb" id="Hm5-oo-rDK"/>
                 <outlet property="lbl_man_of_the_match" destination="5j6-Lp-IE1" id="PiC-pM-q56"/>
                 <outlet property="lbl_man_of_the_series" destination="bgG-Pn-Zy4" id="9Y9-8k-BNf"/>
                 <outlet property="lbl_result_type" destination="epa-yr-bnM" id="yzj-eZ-OmH"/>
@@ -130,8 +134,12 @@
                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="f87-pp-gJd"/>
-                                        <constraint firstAttribute="width" constant="30" id="lDT-4T-gfB"/>
+                                        <constraint firstAttribute="height" constant="30" id="f87-pp-gJd">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="75"/>
+                                        </constraint>
+                                        <constraint firstAttribute="width" constant="30" id="lDT-4T-gfB">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="70"/>
+                                        </constraint>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -152,8 +160,12 @@
                             </subviews>
                             <color key="backgroundColor" red="0.18039215689999999" green="0.24313725489999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="OAe-L1-Jx5" firstAttribute="top" secondItem="Q65-Zg-nVn" secondAttribute="top" constant="21" id="4IH-qg-S41"/>
-                                <constraint firstAttribute="bottom" secondItem="OAe-L1-Jx5" secondAttribute="bottom" constant="24" id="GHV-J5-5Xp"/>
+                                <constraint firstItem="OAe-L1-Jx5" firstAttribute="top" secondItem="Q65-Zg-nVn" secondAttribute="top" constant="21" id="4IH-qg-S41">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                </constraint>
+                                <constraint firstAttribute="bottom" secondItem="OAe-L1-Jx5" secondAttribute="bottom" constant="24" id="GHV-J5-5Xp">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                </constraint>
                                 <constraint firstAttribute="height" constant="75" id="K8R-tH-AiO"/>
                                 <constraint firstItem="pz3-Aq-LnO" firstAttribute="top" secondItem="Q65-Zg-nVn" secondAttribute="top" constant="18" id="KbX-N4-JM1">
                                     <variation key="heightClass=regular-widthClass=regular" constant="21"/>
@@ -167,7 +179,9 @@
                                 <constraint firstItem="flY-GY-DIH" firstAttribute="leading" secondItem="Q65-Zg-nVn" secondAttribute="leading" constant="14" id="bqS-fh-MZQ">
                                     <variation key="heightClass=regular-widthClass=regular" constant="13"/>
                                 </constraint>
-                                <constraint firstItem="OAe-L1-Jx5" firstAttribute="leading" secondItem="Q65-Zg-nVn" secondAttribute="leading" constant="13" id="n2E-Gx-fhH"/>
+                                <constraint firstItem="OAe-L1-Jx5" firstAttribute="leading" secondItem="Q65-Zg-nVn" secondAttribute="leading" constant="13" id="n2E-Gx-fhH">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                </constraint>
                                 <constraint firstAttribute="bottom" secondItem="flY-GY-DIH" secondAttribute="bottom" constant="15" id="vWc-EZ-Zis">
                                     <variation key="heightClass=regular-widthClass=regular" constant="24"/>
                                 </constraint>
