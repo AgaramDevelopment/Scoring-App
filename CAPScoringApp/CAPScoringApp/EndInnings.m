@@ -10,7 +10,7 @@
 #import "DBManager.h"
 #import "DBManagerEndInnings.h"
 #import "BallEventRecord.h"
-
+#import "EndInningsVC.h"
 @implementation EndInnings
 
 @synthesize COMPETITIONCODE;
