@@ -9,6 +9,7 @@
 #import "EndInnings.h"
 #import "DBManager.h"
 #import "DBManagerEndInnings.h"
+#import "EndInningsVC.h"
 
 @implementation EndInnings
 
@@ -183,23 +184,28 @@
 @synthesize ISWICKETCOUNTABLE;
 @synthesize ISOVERCOMPLETE;
 @synthesize fetchEndInningsArray;
+//@synthesize RESULTCODE;
+//@synthesize RESULTTYPE;
+EndInningsVC *save;
 
--(void) InsertEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO:(NSString*)INNINGSSTARTTIME:
-(NSString*)INNINGSENDTIME:(NSString*)ENDOVER:(NSString*)TOTALRUNS:(NSString*)TOTALWICKETS:(NSString*)BUTTONNAME
+-(void) InsertEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO:(NSString*)INNINGSSTARTTIME:(NSString*)INNINGSENDTIME:(NSString*)ENDOVER:(NSString*)TOTALRUNS:(NSString*)TOTALWICKETS:(NSString*)BUTTONNAME:(NSString*)STARTOVERNO
 {
     {
     
+        
+        
     MATCHTYPE = [DBManagerEndInnings GetMatchTypeUsingCompetition:COMPETITIONCODE];
     
+        NSUInteger totalRuns = [TOTALRUNS integerValue];
     
-    if(TOTALRUNS = nil){
+    if(totalRuns == nil){
         
-        TOTALRUNS.intValue == 0;
+        totalRuns == 0;
     }
-    if (ENDOVER = nil) {
+    if (ENDOVER == nil) {
         ENDOVER = @"0.0";
     }
-    if (TOTALWICKETS = nil) {
+    if (TOTALWICKETS == nil) {
         TOTALWICKETS.intValue == 0;
     }
     
@@ -212,7 +218,7 @@
     {
         DAYNO = @"1";
     }
-    if(DAYNO = nil)
+    if(DAYNO == nil)
     {
         DAYNO = @"1";
     }
@@ -220,7 +226,7 @@
     //SESSION NO
    SESSIONNO = [DBManagerEndInnings GetSessionNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO:@"1"];
     
-    if(SESSIONNO = nil)
+    if(SESSIONNO == nil)
     {
         SESSIONNO = @"1";
         
@@ -229,36 +235,44 @@
     STARTOVERNO = [DBManagerEndInnings GetStartoverNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: @"1": OLDINNINGSNO: @"1"];
     
     
-    if(STARTOVERNO = nil)
+    if(STARTOVERNO == nil)
     {
         STARTOVERNO.intValue == 0;
     }
     
      //STARTBALLNO
-    STARTBALLNO = [DBManagerEndInnings GetBallNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO: 0];
+        STARTBALLNO = [DBManagerEndInnings GetBallNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO:STARTOVERNO];
     
     
-    if(STARTBALLNO = nil)
+    if(STARTBALLNO == nil)
     {
         STARTBALLNO.intValue ==0;
     }
     
    //STARTOVERBALLNO
-    STARTOVERBALLNO = [NSString stringWithFormat:@"%@ . %@", STARTOVERNO ,STARTBALLNO];
+    STARTOVERBALLNO = [NSString stringWithFormat:@"%@.%@", STARTOVERNO ,STARTBALLNO];
     
     }
+    
+    NSUInteger oldInningsNo = [OLDINNINGSNO integerValue];
+    NSUInteger totalWickets = [TOTALWICKETS integerValue];
     
     //RUNSCORED
     RUNSSCORED = [DBManagerEndInnings GetRunScoredForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO: DAYNO];
     
     WICKETLOST = [DBManagerEndInnings GetWicketLostForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO: SESSIONNO ];
     
+    
+      save = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
+
+     NSLog(@"BTNSAVE=%@",BUTTONNAME);
     if([BUTTONNAME isEqualToString: @"SAVE"])
     {
         if([DBManagerEndInnings GetCompetitioncodeForInsertEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO])
         {
             //MATCH TYPE BASED DECLARED INNINGS
-            if(TOTALWICKETS.intValue < 10 && [MATCHTYPE isEqualToString:@"MSC023"] || [MATCHTYPE isEqualToString :@"MSC115"] && OLDINNINGSNO.intValue < 4)
+            
+            if(totalWickets < 10 && [MATCHTYPE isEqualToString:@"MSC023"] || [MATCHTYPE isEqualToString :@"MSC115"] && oldInningsNo < 4)
             {
                 [DBManagerEndInnings UpdateInningsEventForMatchTypeBasedInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO];
                 
@@ -266,13 +280,20 @@
             
             //UPDATE OVER EVENTS FOR LASTE BALL IN A OVER
           
-            
-//            if(ENDOVER.intValue > 0)
-           //{
-//                
-//            if (CONVERT(int,SUBSTRING(ENDOVER), CHARINDEX('.',ENDOVER,0) + 1,length(ENDOVER))) >= 6)
-//                
-//            {
+            NSUInteger endOver = [ENDOVER integerValue];
+ 
+            NSString *charIndex = nil;
+            if([ENDOVER hasPrefix:@"."]) {
+                charIndex = [ENDOVER substringFromIndex:1];
+            }
+          if(endOver > 0)
+           {
+               
+            if(charIndex.length >=6)
+                   
+           // if (CONVERT(int,SUBSTRING(ENDOVER), CHARINDEX('.',ENDOVER,0) + 1,length(ENDOVER))) >= 6)
+                
+            {
             
             LASTBALLCODE = [DBManagerEndInnings GetLastBallCodeForInsertEndInninges : MATCHCODE: OLDINNINGSNO];
                     
@@ -289,20 +310,21 @@
                             
                             
                             
-                       // }
+                        }
                         
-                    //}
+                    }
            
             }
-                
+            
+            
                 [DBManagerEndInnings UpdateInningsEventForInsertEndInninges :INNINGSSTARTTIME: INNINGSENDTIME :OLDTEAMCODE :TOTALRUNS: ENDOVER: TOTALWICKETS :COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO];
                 
                 if(![DBManagerEndInnings GetCompetitioncodeInAddOldInningsNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE : OLDTEAMCODE: OLDINNINGSNO])
                 {
                     
-                    NSString *inningsCount;
+                    //NSString *inningsCount;
                     
-                    inningsCount = [DBManagerEndInnings GetInningsCountForInsertEndInnings:MATCHCODE];
+                      NSString *inningsCount = [DBManagerEndInnings GetInningsCountForInsertEndInnings:MATCHCODE];
                     
                     INNINGSCOUNT = [inningsCount integerValue];
                     
@@ -330,7 +352,8 @@
                 }
                 
 
-    
+            EndInningsVC *end = [[EndInningsVC alloc]init];
+            NSLog(@"btnname=%@",BUTTONNAME);
     if([BUTTONNAME isEqualToString:@"UPDATE"])
     {
   if([DBManagerEndInnings GetCompetitioncodeInUpdateForInsertEndInnings : COMPETITIONCODE : MATCHCODE :OLDTEAMCODE :OLDINNINGSNO])
@@ -392,7 +415,7 @@
             
         }
     }
-    
+           
 
         }
     }
@@ -434,25 +457,6 @@
     
      WICKETS=[DBManagerEndInnings GetWicketForFetchEndInnings : COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO ];
     
-    fetchEndInningsArray = [DBManagerEndInnings FetchEndInningsDetailsForFetchEndInnings: MATCHCODE];
-        
-        
-        EndInnings *inningsRecord = (EndInnings*)[fetchEndInningsArray objectAtIndex:0];
-        INNINGSSTARTTIME = inningsRecord.STARTTIME;
-        INNINGSENDTIME = inningsRecord.ENDTIME;
-        TEAMNAME = inningsRecord.TEAMNAME;
-        
-        TOTALRUNS = inningsRecord.TOTALRUNS;
-        TOTALWICKETS = inningsRecord.TOTALWICKETS;
-        INNINGSNO = inningsRecord.INNINGSNO;
-        TOTALOVERS = inningsRecord.TOTALOVERS;
-        BATTINGTEAMCODE = inningsRecord.BATTINGTEAMCODE;
-        INNINGSDURATION = inningsRecord.INNINGSDURATION;
-        DURATION = inningsRecord.DURATION;
-        
- 
-        
-        
 	  [DBManagerEndInnings GetMatchDateForFetchEndInnings : COMPETITIONCODE: MATCHCODE];
     
 }

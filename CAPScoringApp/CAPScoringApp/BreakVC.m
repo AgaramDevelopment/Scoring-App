@@ -122,13 +122,16 @@
 
 - (IBAction)addbreak_btn:(id)sender {
     
-    AddBreakVC *add = [[AddBreakVC alloc]initWithNibName:@"AddBreakVC" bundle:nil];
+    AddBreakVC*add = [[AddBreakVC alloc]initWithNibName:@"AddBreakVC" bundle:nil];
     
-    
+    add.COMPETITIONCODE=self.COMPETITIONCODE;
+    add.MATCHCODE=self.MATCHCODE;
+    add.INNINGSNO=self.INNINGSNO;
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
     add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+    
     [self.view addSubview:add.view];
     add.view.alpha = 0;
     [add didMoveToParentViewController:self];
@@ -138,6 +141,13 @@
          add.view.alpha = 1;
      }
                      completion:nil];
+    
+
+    
+    
+    
+    
+    
     
 
 }

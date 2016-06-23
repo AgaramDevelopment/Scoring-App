@@ -55,7 +55,8 @@
 + (BOOL) insertBallCodeWicketEvent :(BallEventRecord *) ballcode;
 + (BOOL) insertBallCodeFieldEvent :(BallEventRecord *) ballEvent bowlerEvent:(BowlerEvent *)bowlerEvent fieldingFactor:(FieldingFactorRecord *) fieldingFactor nrs:(NSString *) nrs;
 
-+ (NSMutableArray *) getballcodemethod;
++ (NSString *) getballcodemethod :(NSString *)matchcode;
+//+ (NSMutableArray *) getballcodemethod;
 + (NSMutableArray *) getTeamCodemethod;
 + (NSMutableArray *) getInningsNomethod;
 + (NSMutableArray *) getDayNomethod;
@@ -445,4 +446,6 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 +(NSMutableArray *) GetPenaltyDetailsForPageLoadPenalty:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 +(NSMutableArray *) SetPenaltyDetailsForInsert:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 +(NSMutableArray *) GetPenaltyDetailsForUpdate:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) PENALTYCODE;
+
++(NSMutableArray *) GetMatchResultTypeAndCodeForFetchMatchResult;
 @end
