@@ -1729,6 +1729,7 @@ EndInnings *endInnings;
             [self DidClickStartBall : self.btn_StartBall];
         self.btn_StartBall.userInteractionEnabled=YES;
         
+        
     }
     else
     {
@@ -1736,7 +1737,14 @@ EndInnings *endInnings;
         self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
         self.btn_StartBall.userInteractionEnabled=NO;
         [self AllBtndisableMethod];
+        
+        NSString * overStatus =[DBManager GETOVERSTATUS:self.ballEventRecord.objcompetitioncode :self.ballEventRecord.objmatchcode :self.ballEventRecord.objTeamcode :self.ballEventRecord.objInningsno :self.ballEventRecord.objOverno];
+        
+        endInnings=[[EndInnings alloc]init ];
+        
+        [endInnings manageSeOverDetails:self.ballEventRecord.objcompetitioncode :self.ballEventRecord.objmatchcode :self.ballEventRecord.objTeamcode :self.ballEventRecord.objInningsno :self.ballEventRecord];
     }
+    
 }
 
 -(void)AllBtnEnableMethod
