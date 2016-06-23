@@ -228,15 +228,16 @@
 @property(nonatomic,assign)NSNumber *N_BOWLERSIXES;
 @property(nonatomic,assign)NSNumber *ISWICKETCOUNTABLE;
 @property(nonatomic,assign)NSNumber *ISOVERCOMPLETE;
+@property(strong,nonatomic)NSString *RESULTCODE;
+@property(strong,nonatomic)NSString *RESULTTYPE;
 
 
 
 
 
+-(void) InsertEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO:(NSString*)INNINGSSTARTTIME:(NSString*)INNINGSENDTIME:(NSString*)ENDOVER:(NSString*)TOTALRUNS:(NSString*)TOTALWICKETS:(NSString *)BUTTONNAME:(NSString*)STARTOVERNO;
 
--(void) InsertEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO:(NSString*)INNINGSSTARTTIME:(NSString*)INNINGSENDTIME:(NSString*)ENDOVER:(NSString*)TOTALRUNS:(NSString*)TOTALWICKETS:(NSString*)BUTTONNAME;
-
--(void)fetchEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO;
+-(void)fetchEndInnings:(NSString *) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE:(NSString*) INNINGSNO;
 
 -(void) DeleteEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO;
 

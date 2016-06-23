@@ -11,10 +11,10 @@
 #import "LoginVC.h"
 #import "EndInnings.h"
 #import "EndInningsVC.h"
-#import "DBMANAGERSYNC.h"
-
+#import "DBManager.h"
 
 @interface DashBoardVC ()
+
 
 @end
 
@@ -26,7 +26,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    
+
+  
     
     }
 

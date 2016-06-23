@@ -179,10 +179,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                GetTeamBNameDetails *record=[[GetTeamBNameDetails alloc]init];
+                GetTeamANameDetails *record=[[GetTeamANameDetails alloc]init];
                 record.TEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.SHORTTEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.TEAMBCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record.TEAMACODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
                 
                 [GetTeamBNameDetail addObject:record];
             }

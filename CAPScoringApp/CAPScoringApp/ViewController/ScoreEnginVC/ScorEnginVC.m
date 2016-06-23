@@ -41,7 +41,7 @@
 #import "LastBolwerDetailRecord.h"
 #import "ScoreCardVC.h"
 #import "EndInningsVC.h"
-#import "FetchMatchResult.h"
+#import "MatchResultListVC.h"
 
 
 
@@ -206,7 +206,6 @@
 
 @property(nonatomic,strong)NSMutableArray *rightSlideArray;
 
-
 @end
 
 @implementation ScorEnginVC
@@ -233,9 +232,49 @@ EndInnings *endInnings;
     
    // [self resetBallObject];
     
-   
     
-   // [endInnings InsertEndInnings:@"UCC0000001" :@"DMSC114AC811243879400014" :@"TEA0000022" :@"TEA0000024" :@"1" :@"2016-01-20 02:10:00" :@"2016-01-20 05:55:00" :@"49" :@"308" :@"8" :@"SAVE"];
+    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+   [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
+    
+    
+//    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+    
+    
+    //Get Last bowler details
+     fetchLastBowler = [[FetchLastBowler alloc]init];
+    [fetchLastBowler LastBowlerDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS] :[NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT]];
+   
+    if(fetchLastBowler.GetLastBolwerDetails.count!=0){
+        LastBolwerDetailRecord *lastBowlerDetailRecord = [fetchLastBowler.GetLastBolwerDetails objectAtIndex:0];
+        
+        
+        self.lbl_last_bowler_name.text = lastBowlerDetailRecord.BOWLERNAME;
+        self.lbl_last_bowler_runs.text = lastBowlerDetailRecord.OVERS;
+        self.lbl_last_bowler_balls.text = lastBowlerDetailRecord.MAIDENOVERS;
+        self.lbl_last_bowler_fours.text = lastBowlerDetailRecord.TOTALRUNS;
+        self.lbl_last_bowler_sixs.text = lastBowlerDetailRecord.WICKETS;
+        self.lbl_last_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[lastBowlerDetailRecord.ECONOMY floatValue]];
+
+    }else{
+        self.lbl_last_bowler_name.text = @"-";
+        self.lbl_last_bowler_runs.text = @"-";
+        self.lbl_last_bowler_balls.text = @"-";
+        self.lbl_last_bowler_fours.text = @"-";
+        self.lbl_last_bowler_sixs.text = @"-";
+        self.lbl_last_bowler_strickrate.text = @"-";
+    }
+     
+     
+    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+    
+    
+    endInnings = [[EndInnings alloc]init];
+    
+//  [endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
+
+    
+  
     
   
 
@@ -5106,10 +5145,15 @@ EndInnings *endInnings;
 }
 -(void)ENDINNINGS
 {
-    endInnings = [[EndInnings alloc]init];
+    
+    
+    
+    EndInningsVC *endInning = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
+    
+    
+       endInnings = [[EndInnings alloc]init];
     
     [endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
-    EndInningsVC *endInning = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
@@ -5159,6 +5203,38 @@ EndInnings *endInnings;
 }
 -(void)MatchResult
 {
+    
+    MatchResultListVC *matchResult = [[MatchResultListVC alloc]initWithNibName:@"MatchResultListVC" bundle:nil];
+    matchResult.competitionCode = self.competitionCode;
+    matchResult.matchCode = self.matchCode;
+    
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    //fullview.alpha=0.9;
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:revisedTarget.view];
+    
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:matchResult];
+    matchResult.view.frame =CGRectMake(90, 200, matchResult.view.frame.size.width, matchResult.view.frame.size.height);
+    
+    
+    [fullview addSubview:matchResult.view];
+    matchResult.view.alpha = 0;
+    [matchResult didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         matchResult.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
     
 }
 -(void)OtherWicket
