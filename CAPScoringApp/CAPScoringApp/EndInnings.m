@@ -9,6 +9,7 @@
 #import "EndInnings.h"
 #import "DBManager.h"
 #import "DBManagerEndInnings.h"
+#import "BallEventRecord.h"
 
 @implementation EndInnings
 
@@ -188,6 +189,7 @@
 (NSString*)INNINGSENDTIME:(NSString*)ENDOVER:(NSString*)TOTALRUNS:(NSString*)TOTALWICKETS:(NSString*)BUTTONNAME
 {
     {
+      
     
     MATCHTYPE = [DBManagerEndInnings GetMatchTypeUsingCompetition:COMPETITIONCODE];
     
@@ -285,7 +287,7 @@
                         
                         //[SP_MANAGESEOVERDETAILS]
                     
-                      [self manageSeOverDetails:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
+                      [self manageSeOverDetails:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :objBallEventRecord];
                             
                             
                             
@@ -461,28 +463,30 @@
 //SP_MANAGESEOVERDETAILS---------------------------------------------------------
 
 
--(void)manageSeOverDetails:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO
+-(void)manageSeOverDetails:(NSString *)COMPETITIONCODE :(NSString *)MATCHCODE :(NSString *)TEAMCODE :(NSString *)INNINGSNO :(NSObject *)balleventRecord
 
 
     {
-
+        objBallEventRecord =[[BallEventRecord alloc]init];
+        objBallEventRecord=balleventRecord;
+  NSLog(@"ballevent%@",objBallEventRecord.objOverno);
     
     BATTEAMOVRWITHEXTRASBALLS.intValue == 0;
     ISMAIDENOVER.intValue == 0;
     BOWLERCOUNT.intValue == 1;
     
-    if(![DBManagerEndInnings GetOverNoFormanageOverDetails : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO :OVERNO])
+    if(![DBManagerEndInnings GetOverNoFormanageOverDetails : objBallEventRecord.objcompetitioncode : objBallEventRecord.objmatchcode : objBallEventRecord.objTeamcode : objBallEventRecord.objInningsno :objBallEventRecord.objOverno])
     {
-        [DBManagerEndInnings  InsertOverEventFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO : OVERNO: OVERSTATUS ];
-        [DBManagerEndInnings InsertBowlerOverDetailsFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO : OVERNO: BOWLERCODE];
+        [DBManagerEndInnings  InsertOverEventFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO : objBallEventRecord.objOverno: OVERSTATUS ];
+        [DBManagerEndInnings InsertBowlerOverDetailsFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO : objBallEventRecord.objOverno: objBallEventRecord.objBowlercode];
     }
     else
     {
-        if(![DBManagerEndInnings GetBallCodeFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO : OVERNO])
+        if(![DBManagerEndInnings GetBallCodeFormanageOverDetails :objBallEventRecord.objcompetitioncode: objBallEventRecord.objmatchcode: objBallEventRecord.objTeamcode: objBallEventRecord.objInningsno : objBallEventRecord.objOverno])
         {
-            BOWLINGTEAMCODE=[DBManagerEndInnings  GetBowlingTeamCodeFormanageOverDetails :TEAMCODE :COMPETITIONCODE: MATCHCODE];
+            BOWLINGTEAMCODE=[DBManagerEndInnings  GetBowlingTeamCodeFormanageOverDetails :objBallEventRecord.objTeamcode :objBallEventRecord.objcompetitioncode: objBallEventRecord.objmatchcode];
             
-            BATTEAMRUNS=[DBManagerEndInnings GetBatTeanRunsFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE :INNINGSNO];
+            BATTEAMRUNS=[DBManagerEndInnings GetBatTeanRunsFormanageOverDetails :objBallEventRecord.objcompetitioncode:objBallEventRecord.objmatchcode: objBallEventRecord.objTeamcode :objBallEventRecord.objInningsno];
             
             NSUInteger ballNo = [BALLNO integerValue];
             
@@ -492,14 +496,14 @@
           
                     while(ballNo >= 1 && ballNo <= 6)
                                     {
-                                                MAXID=[DBManagerEndInnings GetMaxidFormanageOverDetails : MATCHCODE];
+                                                MAXID=[DBManagerEndInnings GetMaxidFormanageOverDetails :objBallEventRecord.objmatchcode];
             
             
                                    // BALLCODENO = MATCHCODE + RIGHT(REPLICATE('0',10)+ MAXID,10);
                                         
                                     }
             
-            [DBManagerEndInnings  InsertBallEventsFormanageOverDetails :  BALLCODENO:  COMPETITIONCODE:  MATCHCODE:   TEAMCODE:  INNINGSNO :  DAYNO:  OVERNO :   BALLNO:  SESSIONNO  :  STRIKERCODE:  NONSTRIKERCODE :  BOWLERCODE:  WICKETKEEPERCODE:  UMPIRE1CODE:  UMPIRE2CODE:  ATWOROTW:  BOWLINGEND];
+            [DBManagerEndInnings  InsertBallEventsFormanageOverDetails :objBallEventRecord.objBallcode: objBallEventRecord.objcompetitioncode: objBallEventRecord.objmatchcode:objBallEventRecord.objTeamcode: objBallEventRecord.objInningsno : objBallEventRecord.objDayno: objBallEventRecord.objOverno : objBallEventRecord.objBallno: objBallEventRecord.objSessionno  : objBallEventRecord.objStrikercode: objBallEventRecord.objNonstrikercode : objBallEventRecord.objBowlercode:objBallEventRecord.objWicketkeepercode:objBallEventRecord.objUmpire1code:objBallEventRecord.objUmpire2code: objBallEventRecord.objAtworotw:objBallEventRecord.objBowlingEnd];
             
         
             //EXEC SP_INSERTSCOREBOARD
@@ -510,17 +514,17 @@
         }
     }
     
-    [DBManagerEndInnings  UpdateOverEventFormanageOverDetails :OVERSTATUS :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO : OVERNO];
+    [DBManagerEndInnings  UpdateOverEventFormanageOverDetails :OVERSTATUS :objBallEventRecord.objcompetitioncode:objBallEventRecord.objmatchcode:objBallEventRecord.objTeamcode: objBallEventRecord.objInningsno :objBallEventRecord.objOverno];
     
-    [DBManagerEndInnings  UpdateBowlerOverDetailsFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO : OVERNO];
+    [DBManagerEndInnings  UpdateBowlerOverDetailsFormanageOverDetails :objBallEventRecord.objcompetitioncode:objBallEventRecord.objmatchcode:objBallEventRecord.objTeamcode:objBallEventRecord.objInningsno :objBallEventRecord.objOverno];
     
-    BATTEAMOVRWITHEXTRASBALLS=[DBManagerEndInnings  GetBattingteamOverwithExtraBallFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO : OVERNO];
+    BATTEAMOVRWITHEXTRASBALLS=[DBManagerEndInnings  GetBattingteamOverwithExtraBallFormanageOverDetails :objBallEventRecord.objcompetitioncode:objBallEventRecord.objmatchcode: objBallEventRecord.objTeamcode: objBallEventRecord.objInningsno : objBallEventRecord.objOverno];
     
-    BATTEAMOVRBALLSCNT=[DBManagerEndInnings  GetBattingteamOverBallCountFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO : OVERNO : BATTEAMOVRWITHEXTRASBALLS];
+    BATTEAMOVRBALLSCNT=[DBManagerEndInnings  GetBattingteamOverBallCountFormanageOverDetails :objBallEventRecord.objcompetitioncode:objBallEventRecord.objmatchcode:objBallEventRecord.objTeamcode: objBallEventRecord.objInningsno : objBallEventRecord.objOverno : BATTEAMOVRWITHEXTRASBALLS];
     
-    LASTBALLCODE=[DBManagerEndInnings  GetLastBallCodeFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO : OVERNO : BATTEAMOVRWITHEXTRASBALLS : BATTEAMOVRBALLSCNT];
+    LASTBALLCODE=[DBManagerEndInnings  GetLastBallCodeFormanageOverDetails :objBallEventRecord.objcompetitioncode:objBallEventRecord.objmatchcode:objBallEventRecord.objTeamcode:objBallEventRecord.objInningsno :objBallEventRecord.objOverno : BATTEAMOVRWITHEXTRASBALLS : BATTEAMOVRBALLSCNT];
     
-    if([DBManagerEndInnings  GetBallEventCountFormanageOverDetails :COMPETITIONCODE: MATCHCODE:  INNINGSNO ])
+    if([DBManagerEndInnings  GetBallEventCountFormanageOverDetails :objBallEventRecord.objcompetitioncode:objBallEventRecord.objmatchcode: objBallEventRecord.objInningsno ])
     {
         
         NSMutableArray * GetStrickerNonStrickerDetails=[DBManagerEndInnings GetStrickerNonStrickerRunFormanageOverDetails : LASTBALLCODE];
@@ -550,25 +554,25 @@
         [DBManagerEndInnings  UpdateInningsEventFormanageOverDetails: T_STRIKERCODE: T_NONSTRIKERCODE : COMPETITIONCODE: MATCHCODE:  TEAMCODE: INNINGSNO];
         ISMAIDENOVER=0;
         
-        if([DBManagerEndInnings GetBallNoFormanageOverDetails: COMPETITIONCODE: MATCHCODE: INNINGSNO :OVERNO]!=0)
+        if([DBManagerEndInnings GetBallNoFormanageOverDetails: COMPETITIONCODE: MATCHCODE: INNINGSNO :objBallEventRecord.objOverno]!=0)
         {
             
             
-            ISMAIDENOVER=[DBManagerEndInnings GetIsMaidenOverFormanageOverDetails: COMPETITIONCODE: MATCHCODE: INNINGSNO :OVERNO];
+            ISMAIDENOVER=[DBManagerEndInnings GetIsMaidenOverFormanageOverDetails: COMPETITIONCODE: MATCHCODE: INNINGSNO :objBallEventRecord.objOverno];
             
             BOWLERCOUNT==1;
         }
-        if([DBManagerEndInnings GetBowlerCodeFormanageOverDetails: COMPETITIONCODE: MATCHCODE: INNINGSNO :OVERNO  ]!=0)
+        if([DBManagerEndInnings GetBowlerCodeFormanageOverDetails: COMPETITIONCODE: MATCHCODE: INNINGSNO :objBallEventRecord.objOverno  ]!=0)
         {
             
-            BOWLERCOUNT=[DBManagerEndInnings GetCurrentBowlerCountFormanageOverDetails:COMPETITIONCODE :MATCHCODE:INNINGSNO :OVERNO];
+            BOWLERCOUNT=[DBManagerEndInnings GetCurrentBowlerCountFormanageOverDetails:COMPETITIONCODE :MATCHCODE:INNINGSNO :objBallEventRecord.objOverno];
             
             
         }
         
         if(BOWLERCOUNT.intValue ==1)
         {
-            CURRENTBOWLER==[DBManagerEndInnings GetCurrentBowlerCountFormanageOverDetails: COMPETITIONCODE: MATCHCODE: INNINGSNO :OVERNO];
+            CURRENTBOWLER==[DBManagerEndInnings GetCurrentBowlerCountFormanageOverDetails: COMPETITIONCODE: MATCHCODE: INNINGSNO :objBallEventRecord.objOverno];
             
             [DBManagerEndInnings UpdateBowlingSummaryFormanageOverDetails: BOWLERCOUNT: ISMAIDENOVER : COMPETITIONCODE: MATCHCODE:  INNINGSNO: CURRENTBOWLER ];
             
@@ -576,12 +580,12 @@
         }
         else
         {
-            [DBManagerEndInnings UpdateBowlingSummaryFormanageOverDetails: BOWLERCOUNT: ISMAIDENOVER : COMPETITIONCODE: MATCHCODE:  INNINGSNO: OVERNO];
+            [DBManagerEndInnings UpdateBowlingSummaryFormanageOverDetails: BOWLERCOUNT: ISMAIDENOVER : COMPETITIONCODE: MATCHCODE:  INNINGSNO: objBallEventRecord.objOverno];
             
         }
         if(ISMAIDENOVER.intValue ==1 && BOWLERCOUNT.intValue==1)
         {
-            [DBManagerEndInnings InsertBowlingMaidenSummaryInElseFormanageOverDetails: COMPETITIONCODE: MATCHCODE:  INNINGSNO:  BOWLERCODE: OVERNO];
+            [DBManagerEndInnings InsertBowlingMaidenSummaryInElseFormanageOverDetails: COMPETITIONCODE: MATCHCODE:  INNINGSNO:  objBallEventRecord.objBowlercode: objBallEventRecord.objOverno];
             
         }
         
