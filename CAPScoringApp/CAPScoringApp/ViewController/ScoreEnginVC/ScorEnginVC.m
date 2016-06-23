@@ -41,7 +41,7 @@
 #import "LastBolwerDetailRecord.h"
 #import "ScoreCardVC.h"
 #import "EndInningsVC.h"
-#import "FetchMatchResult.h"
+#import "MatchResultListVC.h"
 
 
 
@@ -237,8 +237,7 @@ EndInnings *endInnings;
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
-    FetchMatchResult *matRes = [[FetchMatchResult alloc]init];
-    [matRes getMatchReultsDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.TEAMACODE :fetchSEPageLoadRecord.INNINGSNO];
+    
     
 //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
@@ -273,7 +272,7 @@ EndInnings *endInnings;
     
     endInnings = [[EndInnings alloc]init];
     
-[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
+//  [endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
 
     
    // [endInnings InsertEndInnings:@"UCC0000001" :@"DMSC114AC811243879400014" :@"TEA0000022" :@"TEA0000024" :@"1" :@"2016-01-20 02:10:00" :@"2016-01-20 05:55:00" :@"49" :@"308" :@"8" :@"SAVE"];
@@ -5119,6 +5118,38 @@ EndInnings *endInnings;
 }
 -(void)MatchResult
 {
+    
+    MatchResultListVC *matchResult = [[MatchResultListVC alloc]initWithNibName:@"MatchResultListVC" bundle:nil];
+    matchResult.competitionCode = self.competitionCode;
+    matchResult.matchCode = self.matchCode;
+    
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    //fullview.alpha=0.9;
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:revisedTarget.view];
+    
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:matchResult];
+    matchResult.view.frame =CGRectMake(90, 200, matchResult.view.frame.size.width, matchResult.view.frame.size.height);
+    
+    
+    [fullview addSubview:matchResult.view];
+    matchResult.view.alpha = 0;
+    [matchResult didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         matchResult.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
     
 }
 -(void)OtherWicket
