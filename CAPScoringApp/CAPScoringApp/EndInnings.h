@@ -7,8 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BallEventRecord.h"
 
 @interface EndInnings : NSObject
+{
+    BallEventRecord * objBallEventRecord;
+}
+
 
 
 @property (strong,nonatomic)NSMutableArray *fetchEndInningsArray;
@@ -236,5 +241,7 @@
 
 -(void) DeleteEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO;
 
+//-(void)manageSeOverDetails:(NSObject *) balleventRecord;
 
+-(void)manageSeOverDetails:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO :(NSObject *) balleventRecord;
 @end
