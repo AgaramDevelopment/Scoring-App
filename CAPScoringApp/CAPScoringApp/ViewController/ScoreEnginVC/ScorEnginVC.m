@@ -42,7 +42,7 @@
 #import "ScoreCardVC.h"
 #import "EndInningsVC.h"
 #import "MatchResultListVC.h"
-
+#import "EndDayVC.h"
 
 
 
@@ -5183,6 +5183,40 @@ EndInnings *endInnings;
 }
 -(void)ENDDAY
 {
+    
+    
+    EndDayVC *endDayVC = [[EndDayVC alloc]initWithNibName:@"EndDayVC" bundle:nil];
+    endDayVC.COMPETITIONCODE = self.competitionCode;
+    endDayVC.MATCHCODE = self.matchCode;
+    endDayVC.TEAMCODE = fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    endDayVC.INNINGSNO = fetchSEPageLoadRecord.INNINGSNO;
+
+    
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    //fullview.alpha=0.9;
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:revisedTarget.view];
+    
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:endDayVC];
+    endDayVC.view.frame =CGRectMake(90, 200, endDayVC.view.frame.size.width, endDayVC.view.frame.size.height);
+    
+    
+    [fullview addSubview:endDayVC.view];
+    endDayVC.view.alpha = 0;
+    [endDayVC didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         endDayVC.view.alpha = 1;
+     }
+                     completion:nil];
     
 }
 -(void)ENDSession
