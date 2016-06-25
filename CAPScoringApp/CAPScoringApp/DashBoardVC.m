@@ -752,14 +752,23 @@
          
          NSLog(@"%f,%f",image.size.width,image.size.height);
          
-   
+         NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
          
          NSString *Dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
          
-         NSString *pngPath = [NSString stringWithFormat:@"%@.png",Dir];// this path if you want save reference path in sqlite
-         NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
+         NSString *pngPath = [Dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",playercodestr]];// this path if you want save reference path in sqlite
+        
          [data1 writeToFile:pngPath atomically:YES];
          
+         
+//         
+//         UIImage  *newImage = [UIImage imageNamed:fileName];
+//         NSData *imageData = UIImagePNGRepresentation(newImage);
+//         
+//         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//         NSString *documentsDirectory = [paths objectAtIndex:0];
+//         
+//         NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]];
          
     }
     
@@ -783,12 +792,13 @@ for (i=0; i<[officialscode count]; i++)
     NSLog(@"%f,%f",image.size.width,image.size.height);
     
     
+    NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
     
     NSString *Dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     
-    NSString *pngPath = [NSString stringWithFormat:@"%@.png",Dir];// this path if you want save reference path in sqlite
-    NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
-    [data1 writeToFile:pngPath atomically:YES];
+    NSString *pngPath = [Dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",officialscodestr]];// this path if you want save reference path in sqlite
+    
+    [data1 writeToFile:pngPath atomically:YES]
     
     
 }
@@ -811,13 +821,13 @@ for (i=0; i<[officialscode count]; i++)
         NSLog(@"%f,%f",image.size.width,image.size.height);
         
         
+        NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
         
         NSString *Dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
         
-        NSString *pngPath = [NSString stringWithFormat:@"%@.png",Dir];// this path if you want save reference path in sqlite
-        NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
-        [data1 writeToFile:pngPath atomically:YES];
+        NSString *pngPath = [Dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",groundcodestr]];// this path if you want save reference path in sqlite
         
+        [data1 writeToFile:pngPath atomically:YES]
         
     }
 }
