@@ -17,9 +17,9 @@
 @property(strong,nonatomic)NSString *RUNS;
 @property(strong,nonatomic)NSString *OVERBALLNO;
 
+@property(strong,nonatomic)NSString *WICKETS;
 
 
-NSString* WICKETS;
 
 -(void) FetchEndDay:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSNumber*)INNINGSNO;
 @end

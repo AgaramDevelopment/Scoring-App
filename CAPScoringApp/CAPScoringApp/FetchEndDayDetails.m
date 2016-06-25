@@ -72,7 +72,7 @@
     
     OVERBALLNO=OVERS;
     
-    WICKETS= [DBManagerEndDay GetWicketsCountForFetchEndDay : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : DAYNO];
+    _WICKETS= [DBManagerEndDay GetWicketsCountForFetchEndDay : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : DAYNO];
     
     int runData = [RUNS intValue]+ (PENALITYRUNS==nil ?[PENALITYRUNS intValue]: 0);
     RUNS = [NSString stringWithFormat:@"%d",runData];
