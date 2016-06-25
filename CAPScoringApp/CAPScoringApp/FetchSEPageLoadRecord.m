@@ -235,11 +235,11 @@ BOOL  getOverStatus;
     
     
     //penalty score
-    NSString *penaltyScore = [DBManager getPenaltyScore:COMPETITIONCODE :MATCHCODE :inns.INNINGSNO:BATTINGTEAMCODE];
+    NSString *penaltyScore = [DBManager getPenaltyScore:COMPETITIONCODE :MATCHCODE :inns.INNINGSNO :BATTINGTEAMCODE];
     NSInteger penaltyS = [penaltyScore integerValue];
     
     //grand total
-    NSString *grandTotal = [DBManager getGrandTotal:COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE:inns.INNINGSNO];
+    NSString *grandTotal = [DBManager getGrandTotal:COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE :inns.INNINGSNO];
     NSInteger grandscore = [grandTotal integerValue];
     
     NSString *batTeamPenalty = [DBManager getBatTeamPenalty:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE];

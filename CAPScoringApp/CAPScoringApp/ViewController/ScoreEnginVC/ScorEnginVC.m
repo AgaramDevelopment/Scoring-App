@@ -1,4 +1,4 @@
-//
+	//
 //  ScorEnginVC.m
 //  CAPScoringApp
 //
@@ -43,6 +43,8 @@
 #import "EndInningsVC.h"
 #import "MatchResultListVC.h"
 #import "EndDayVC.h"
+#import "DBManagerEndDay.h"
+
 
 
 
@@ -162,10 +164,11 @@
 
     
     NSString * alterviewSelect;
+    DBManagerEndDay *objDBManagerEndDay;
 
 }
 
-@property(strong,nonatomic)NSString *matchTypeCode;
+
 //team logo
 @property (nonatomic,strong) NSMutableArray *selectedTeamArray;
 @property (nonatomic,strong) NSMutableArray *selectedTeamFilterArray;
@@ -236,6 +239,13 @@ EndInnings *endInnings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //GetMatchTypeForInserTEnd
+    //objDBManagerEndDay=[[DBManagerEndDay alloc]init];
+    if(self.matchTypeCode == nil)
+    {
+      NSString* matchtype=  [DBManagerEndDay GetMatchTypeForInserTEndDay:self.competitionCode ];
+        self.matchTypeCode=matchtype;
+    }
      [self hideLabelBasedOnMatchType];
    
    // [self resetBallObject];
@@ -614,12 +624,12 @@ EndInnings *endInnings;
     _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
     
-    // _lbl_teamASecIngsScore.text =
-    //_lbl_teamASecIngsOvs.text =
+     _lbl_teamASecIngsScore.text = @"";
+    _lbl_teamASecIngsOvs.text = @"";
     
     
-    //  _lbl_teamBSecIngsScore.text =
-    //    _lbl_teamBSecIngsOvs.text =
+      _lbl_teamBSecIngsScore.text =@"";
+        _lbl_teamBSecIngsOvs.text =@"";
     
     _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
     _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
@@ -1406,6 +1416,7 @@ EndInnings *endInnings;
     }
     else
     {
+         [self calculateRunsOnEndBall];
          [self EndBallMethod];
         [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
@@ -1418,8 +1429,8 @@ EndInnings *endInnings;
         
         [self timeLeftSinceDate:startBallTime];
         int overNo = fetchSEPageLoadRecord.BATTEAMOVERS;
-        int ballNo = fetchSEPageLoadRecord.BATTEAMOVRBALLS+1;//Check isillegal ball for pervious ball
-        int overballNo = fetchSEPageLoadRecord.BATTEAMOVRBALLS+1;
+        int ballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;//Check isillegal ball for pervious ball
+        int overballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
         
         self.ballEventRecord.objOverno=[NSNumber numberWithInt:overNo];
         self.ballEventRecord.objBallno=[NSNumber numberWithInt:ballNo];
@@ -1429,7 +1440,7 @@ EndInnings *endInnings;
         self.ballEventRecord.objStrikercode = fetchSEPageLoadRecord.strickerPlayerCode;
         self.ballEventRecord.objNonstrikercode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
         
-        [self calculateRunsOnEndBall];
+       
         
         [DBManager saveBallEventData:self.ballEventRecord];
         [DBManager insertBallCodeAppealEvent:self.ballEventRecord];
@@ -1451,7 +1462,7 @@ EndInnings *endInnings;
         {
             if([self IsTeamALLOUT] == YES)
             {
-                if(self.ballEventRecord.objBallno >6)
+                if(self.ballEventRecord.objBallno > 6)
                 {
                     //[self.]
                     // btb_overclick action
@@ -1965,11 +1976,12 @@ EndInnings *endInnings;
 -(void)overEVENT
 {
    
-    endInnings=[[EndInnings alloc]init ];
+    //endInnings=[[EndInnings alloc]init ];
+    NSLog(@"matchtype=%@",self.matchTypeCode);
     NSString * Matchtype;
     NSArray * MuliteDayMatchtype ;
     NSArray  * ValidedMatchType;
-    NSString *matchoversvalue=fetchSEPageLoadRecord.MATCHOVERS;
+    NSString *matchoversvalue=fetchSEPageLoadRecord.MATCHTYPE;
     int overNoint =[self.ballEventRecord.objOverno intValue];
     
      NSMutableArray * objUmpireArray =[DBManager GETUMPIRE:self.competitionCode :self.matchCode ];
@@ -2012,7 +2024,7 @@ EndInnings *endInnings;
              }
         
         //NSLog(@"%d",matchoversvalue);
-        else  if(![ValidedMatchType containsObject:matchoversvalue] && overNoint >= [matchoversvalue intValue] && ![MuliteDayMatchtype containsObject:matchoversvalue])
+        else  if(![ValidedMatchType containsObject:self.matchTypeCode] && overNoint >= [self.matchTypeCode intValue] && ![MuliteDayMatchtype containsObject:self.matchTypeCode])
         {
             
             UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Inning is Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
@@ -4177,23 +4189,23 @@ EndInnings *endInnings;
 
 -(void) resetBallEventObject{
     self.ballEventRecord = [[BallEventRecord alloc] init];
-    self.ballEventRecord.objIsFour = 0;
-    self.ballEventRecord.objIssix = 0;
-    self.ballEventRecord.objRuns = 0;
+    self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];;
+    self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];;
+    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];;
     
     
-    self.ballEventRecord.objByes = 0;
-    self.ballEventRecord.objLegByes = 0;
-    self.ballEventRecord.objWide = 0;
-    self.ballEventRecord.objNoball = 0;
+    self.ballEventRecord.objByes = [NSNumber numberWithInt:0];;
+    self.ballEventRecord.objLegByes = [NSNumber numberWithInt:0];;
+    self.ballEventRecord.objWide = [NSNumber numberWithInt:0];;
+    self.ballEventRecord.objNoball = [NSNumber numberWithInt:0];;
     self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:1];
     
     
-    self.ballEventRecord.objOverthrow = 0;
-    self.ballEventRecord.objTotalruns = 0;
-    self.ballEventRecord.objPenalty = 0;
-    self.ballEventRecord.objTotalextras = 0;
-    self.ballEventRecord.objGrandtotal = 0;
+    self.ballEventRecord.objOverthrow = [NSNumber numberWithInt:0];;
+    self.ballEventRecord.objTotalruns = [NSNumber numberWithInt:0];;
+    self.ballEventRecord.objPenalty = [NSNumber numberWithInt:0];;
+    self.ballEventRecord.objTotalextras = [NSNumber numberWithInt:0];;
+    self.ballEventRecord.objGrandtotal = [NSNumber numberWithInt:0];
     
     isMoreRunSelected = NO;
     isExtrasSelected = NO;
@@ -4496,6 +4508,8 @@ EndInnings *endInnings;
                     [self unselectedButtonBg: self.btn_B4];
                 }else{
                     self.ballEventRecord.objIsFour = [NSNumber numberWithInt:1];
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:4];
+
                     [self selectedButtonBg: self.btn_B4];
                     
                     //Hide overthrow
@@ -4512,7 +4526,8 @@ EndInnings *endInnings;
                     self.ballEventRecord.objRuns = [NSNumber numberWithInt:7];
                 }else{
                     self.ballEventRecord.objIsFour = [NSNumber numberWithInt:1];
-                    
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:4];
+
                     //Hide overthrow
                     [self disableButtonBg: self.btn_overthrow];
                     self.btn_overthrow.userInteractionEnabled=NO;
@@ -4552,6 +4567,7 @@ EndInnings *endInnings;
                     [self unselectedButtonBg: self.btn_B6];
                 }else{
                     self.ballEventRecord.objIssix = [NSNumber numberWithInt:1];
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:6];
                     [self selectedButtonBg: self.btn_B6];
                     
                     //Hide overthrow
@@ -4568,7 +4584,8 @@ EndInnings *endInnings;
                     self.ballEventRecord.objRuns = [NSNumber numberWithInt:8];
                 }else{
                     self.ballEventRecord.objIssix = [NSNumber numberWithInt:1];
-                    
+                    self.ballEventRecord.objRuns = [NSNumber numberWithInt:6];
+
                     //Hide overthrow
                     [self disableButtonBg: self.btn_overthrow];
                     self.btn_overthrow.userInteractionEnabled=NO;
@@ -5696,7 +5713,7 @@ EndInnings *endInnings;
     EndInningsVC *endInning = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
     
     
-       endInnings = [[EndInnings alloc]init];
+      // endInnings = [[EndInnings alloc]init];
     
     [endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
     
@@ -5967,14 +5984,16 @@ EndInnings *endInnings;
         }
     }
     
-    self.ballEventRecord.objTotalruns =
-    (self.ballEventRecord.objRuns.intValue+( self.ballEventRecord.objByes.intValue == 0 &&  self.ballEventRecord.objLegByes.intValue == 0 &&  self.ballEventRecord.objWide.intValue == 0)) ? [NSNumber numberWithInt: self.ballEventRecord.objOverthrow.intValue]: [NSNumber numberWithInt:0];
+    int totalRns =  self.ballEventRecord.objRuns.intValue+(( self.ballEventRecord.objByes.intValue == 0 &&  self.ballEventRecord.objLegByes.intValue == 0 &&  self.ballEventRecord.objWide.intValue == 0) ? self.ballEventRecord.objOverthrow.intValue: 0);
+    
+    self.ballEventRecord.objTotalruns =[NSNumber numberWithInt:totalRns]
+   ;
     //Total runs scored for the particular ball including byes or legbyes.
     
-    int totalExtras = 0;
-    self.ballEventRecord.objTotalextras = [NSNumber numberWithInt: self.ballEventRecord.objNoball.intValue +self.ballEventRecord.objWide.intValue+self.ballEventRecord.objByes.intValue+self.ballEventRecord.objLegByes.intValue+self.ballEventRecord.objPenalty.intValue];
+    int totalExtras = (self.ballEventRecord.objNoball.intValue +self.ballEventRecord.objWide.intValue+self.ballEventRecord.objByes.intValue+self.ballEventRecord.objLegByes.intValue+self.ballEventRecord.objPenalty.intValue);
+    self.ballEventRecord.objTotalextras = [NSNumber numberWithInt: totalExtras];
     
-    self.ballEventRecord.objGrandtotal =[NSNumber numberWithInt: self.ballEventRecord.objTotalruns.intValue +self.ballEventRecord.objTotalextras.intValue];
+    self.ballEventRecord.objGrandtotal =[NSNumber numberWithInt: totalRns+totalExtras];
     /*+ ((Byes > 0 || Legbyes > 0) ? Overthrow : 0)*/;
 }
 
@@ -6083,7 +6102,7 @@ EndInnings *endInnings;
 //}
 -(void)hideLabelBasedOnMatchType{
     
-    self.matchTypeCode = @"MSC115";
+    //self.matchTypeCode = @"MSC115";
     
     if ([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] ||
         [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) {
@@ -6098,6 +6117,7 @@ EndInnings *endInnings;
         _lbl_teamBSecIngsOvs.hidden = YES;
         
     }else{
+        
         _lbl_teamAsecIngsHeading.hidden = NO;
         _lbl_teamBsecIngsHeading.hidden = NO;
         

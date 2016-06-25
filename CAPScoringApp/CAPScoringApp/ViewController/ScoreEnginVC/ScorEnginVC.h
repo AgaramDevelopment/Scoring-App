@@ -276,5 +276,5 @@
 - (IBAction)btn_show_scorecard:(id)sender;
 
 - (IBAction)btn_penality:(id)sender;
-
+@property (strong,nonatomic)NSString *matchTypeCode;
 @end

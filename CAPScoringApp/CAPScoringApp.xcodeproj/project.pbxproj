@@ -43,7 +43,6 @@
 		187621011D1D0BC8006E160F /* FetchEndDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 187621001D1D0BC8006E160F /* FetchEndDay.m */; };
 		187621091D1D3749006E160F /* EndDayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187621071D1D3749006E160F /* EndDayVC.m */; };
 		1876210A1D1D3749006E160F /* EndDayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187621081D1D3749006E160F /* EndDayVC.xib */; };
-		1876211F1D1D625A006E160F /* EndDayTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1876211D1D1D625A006E160F /* EndDayTVC.m */; };
 		187621201D1D625A006E160F /* EndDayTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1876211E1D1D625A006E160F /* EndDayTVC.xib */; };
 		187621251D1D644C006E160F /* EndInningsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187621231D1D644C006E160F /* EndInningsVC.m */; };
 		187621261D1D644C006E160F /* EndInningsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187621241D1D644C006E160F /* EndInningsVC.xib */; };
@@ -103,6 +102,7 @@
 		246465251D17255C0078A446 /* PenaltygridVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 246465151D17255C0078A446 /* PenaltygridVC.xib */; };
 		2468C0E11D1177D7007C68AA /* Archive.m in Sources */ = {isa = PBXBuildFile; fileRef = 2468C0E01D1177D7007C68AA /* Archive.m */; };
 		2469625F1D1E9A1200CC30D0 /* UpdateScoreEngineRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 2469625E1D1E9A1200CC30D0 /* UpdateScoreEngineRecord.m */; };
+		246962621D1E9CCA00CC30D0 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 246962611D1E9CCA00CC30D0 /* TNCA_DATABASE.sqlite */; };
 		2479C3E31CFC3FD300A3CCA2 /* BallEventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 2479C3E21CFC3FD300A3CCA2 /* BallEventRecord.m */; };
 		2487FD251D06ABD40039CFB2 /* CapitainWicketKeeperRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 2487FD241D06ABD40039CFB2 /* CapitainWicketKeeperRecord.m */; };
 		24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D24CDE1CFEC70A00CD75D2 /* ScorEnginVC.m */; };
@@ -158,7 +158,6 @@
 		CEC858B21D155D36007F5384 /* intialBreakVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC858B01D155D36007F5384 /* intialBreakVC.m */; };
 		CEC858B31D155D36007F5384 /* intialBreakVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC858B11D155D36007F5384 /* intialBreakVC.xib */; };
 		CED03D261D1AAE3B00522B89 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */; };
-		CEE1A1101D1E41CC004E775D /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = CEE1A10F1D1E41CC004E775D /* TNCA_DATABASE.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -349,6 +348,7 @@
 		2468C0E01D1177D7007C68AA /* Archive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Archive.m; path = SubClass/ArchiveCell/Archive.m; sourceTree = "<group>"; };
 		2469625D1D1E9A1200CC30D0 /* UpdateScoreEngineRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateScoreEngineRecord.h; sourceTree = "<group>"; };
 		2469625E1D1E9A1200CC30D0 /* UpdateScoreEngineRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateScoreEngineRecord.m; sourceTree = "<group>"; };
+		246962611D1E9CCA00CC30D0 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		2479C3E11CFC3FCD00A3CCA2 /* BallEventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BallEventRecord.h; path = Resource/BallEvents/BallEventRecord.h; sourceTree = "<group>"; };
 		2479C3E21CFC3FD300A3CCA2 /* BallEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BallEventRecord.m; path = Resource/BallEvents/BallEventRecord.m; sourceTree = "<group>"; };
 		2487FD231D06ABD40039CFB2 /* CapitainWicketKeeperRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CapitainWicketKeeperRecord.h; path = Resource/CaptainW.KeeperRecord/CapitainWicketKeeperRecord.h; sourceTree = "<group>"; };
@@ -451,7 +451,6 @@
 		CEC858B11D155D36007F5384 /* intialBreakVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = intialBreakVC.xib; sourceTree = "<group>"; };
 		CED03D241D1AAE3B00522B89 /* DBMANAGERSYNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMANAGERSYNC.h; sourceTree = "<group>"; };
 		CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMANAGERSYNC.m; sourceTree = "<group>"; };
-		CEE1A10F1D1E41CC004E775D /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -843,9 +842,9 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				246962611D1E9CCA00CC30D0 /* TNCA_DATABASE.sqlite */,
 				2469625C1D1E99DE00CC30D0 /* UpdateScoreengineRecord */,
 				245E31841D1DB4E3009FE70F /* DBManagerEndBall */,
-				245F74981D1A8E460074A3C3 /* TNCA_DATABASE.sqlite */,
 				246464FD1D17255C0078A446 /* DBManagerEndInnings.h */,
 				246464FE1D17255C0078A446 /* DBManagerEndInnings.m */,
 				246464FF1D17255C0078A446 /* DBMangerOtherWicket.h */,
@@ -1223,7 +1222,7 @@
 				1876212A1D1D7967006E160F /* InningsDetailsRecord in Resources */,
 				CE7463A91D166F8200D69CD9 /* UpdateBreakVC.xib in Resources */,
 				2464651D1D17255C0078A446 /* OtherWicketPlayerlistVC.xib in Resources */,
-				CEE1A1101D1E41CC004E775D /* TNCA_DATABASE.sqlite in Resources */,
+				246962621D1E9CCA00CC30D0 /* TNCA_DATABASE.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

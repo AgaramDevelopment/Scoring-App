@@ -210,7 +210,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         const char *dbPath = [databasePath UTF8String];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
-            NSString *updateSQL = [NSString stringWithFormat:@"SELECT F_STRIKERCODE = STRIKERCODE, F_BOWLERCODE = BOWLERCODE, F_ISLEGALBALL = ISLEGALBALL, F_OVERS = OVERNO, F_BALLS = BALLNO, F_RUNS = RUNS, F_OVERTHROW = OVERTHROW, F_ISFOUR = ISFOUR, F_ISSIX = ISSIX , F_WIDE = WIDE, F_NOBALL = NOBALL, F_BYES = BYES, F_LEGBYES = LEGBYES--, F_PENALTY = PENALTY FROM BALLEVENTS	WHERE COMPETITIONCODE = '%@' AND	MATCHCODE = '%@' AND BALLCODE = '%@'",COMPETITIONCODE,MATCHCODE,BALLCODE];
+            NSString *updateSQL = [NSString stringWithFormat:@"SELECT STRIKERCODE, BOWLERCODE, ISLEGALBALL, OVERNO, BALLNO, RUNS, OVERTHROW, ISFOUR, ISSIX , WIDE, NOBALL, BYES, LEGBYES, PENALTY FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND	MATCHCODE = '%@' AND BALLCODE = '%@'",COMPETITIONCODE,MATCHCODE,BALLCODE];
             const char *update_stmt = [updateSQL UTF8String];
             sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
             if (sqlite3_step(statement) == SQLITE_DONE)
