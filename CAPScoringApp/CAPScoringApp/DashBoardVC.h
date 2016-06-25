@@ -24,6 +24,10 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img_reports;
 @property(strong,nonatomic)NSMutableArray *checkErrorItem;
 @property(strong,nonatomic)NSMutableArray*CompitisionArray;
+@property(strong,nonatomic)NSMutableArray*Competitionteamdetailsarray;
+@property(strong,nonatomic)NSMutableArray*MatchRegistraionarray;
+@property(strong,nonatomic)NSMutableArray*MatchteamplayerdetailsArray;
+
 
 - (IBAction)btn_syn_Data:(id)sender;
 - (IBAction)btn_new_Match:(id)sender;

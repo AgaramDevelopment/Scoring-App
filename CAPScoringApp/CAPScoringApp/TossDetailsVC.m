@@ -663,11 +663,12 @@ return 1;
         case 0:
             if([self.radiobutton1 isSelected]==YES)
             
-            {
+            {   BowlingEnd=@"MSC151";
                 [self.radiobutton1 setSelected:NO];
                 [self.radiobutton2 setSelected:YES];
             }
             else{
+                BowlingEnd=@"MSC150";
                 [self.radiobutton1 setSelected:YES];
                 [self.radiobutton2 setSelected:NO];
             }
@@ -675,14 +676,14 @@ return 1;
             break;
         case 1:
             if([self.radiobutton2 isSelected]==YES)
-                
-            {
+           
+            {   BowlingEnd=@"MSC150";
                 [self.radiobutton2 setSelected:NO];
                 [self.radiobutton1 setSelected:YES];
                 
             }
             else{
-               BowlingEnd=@"MSC151"; 
+               BowlingEnd=@"MSC151";
                 [self.radiobutton2 setSelected:YES];
                 [self.radiobutton1 setSelected:NO];
             }
@@ -710,7 +711,7 @@ return 1;
     NSString *maxInnNo = [DBManager getMaxInningsNumber:CompetitionCode :MATCHCODE];
   
     NSString*inningsstatus=@"0";
-     BowlingEnd=@"MSC150";
+   //  BowlingEnd=@"MSC150";
     [DBManager inserMaxInningsEvent:CompetitionCode :MATCHCODE :teamaCode :maxInnNo :StrikerCode:NonStrikerCode :selectBowlerCode :StrikerCode :NonStrikerCode :selectBowlerCode :teamaCode :inningsstatus:BowlingEnd];
     [DBManager updateProcced:CompetitionCode :MATCHCODE];
     
