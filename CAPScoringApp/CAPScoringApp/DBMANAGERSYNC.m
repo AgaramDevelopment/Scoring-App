@@ -9,6 +9,7 @@
 #import "DBMANAGERSYNC.h"
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
+#import "getimageRecord.h"
 
 @implementation DBMANAGERSYNC
 
@@ -1470,6 +1471,117 @@ return YES;
 
 
 
+
++(NSMutableArray *)getPlayerCode
+{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    
+    // NSString *count = [[NSString alloc]init];
+    
+    int retVal;
+    
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT PLAYERCODE FROM PLAYERMASTER"];
+    stmt=[selectPlayersSQL UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            getimageRecord *record=[[getimageRecord alloc]init];
+            record.playercodeimage=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+         [eventArray addObject:record];
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return eventArray;
+    
+    
+}
+
+
+
+
++(NSMutableArray *)getofficailCode
+{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    
+    // NSString *count = [[NSString alloc]init];
+    
+    int retVal;
+    
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT OFFICIALSCODE FROM OFFICIALSMASTER"];
+    stmt=[selectPlayersSQL UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            getimageRecord *record=[[getimageRecord alloc]init];
+            record.officialscodeimage=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            [eventArray addObject:record];
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return eventArray;
+    
+    
+}
+
++(NSMutableArray *)getgroundcode
+{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    
+    // NSString *count = [[NSString alloc]init];
+    
+    int retVal;
+    
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT GROUNDCODE FROM GROUNDMASTER"];
+    stmt=[selectPlayersSQL UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            getimageRecord *record=[[getimageRecord alloc]init];
+            record.groundcodeimage=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            [eventArray addObject:record];
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return eventArray;
+    
+    
+}
 
 
 @end

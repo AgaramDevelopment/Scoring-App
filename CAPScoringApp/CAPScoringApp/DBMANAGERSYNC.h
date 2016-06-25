@@ -135,8 +135,10 @@
 +(BOOL)UpdateFieldingfactor:(NSString*)FIELDINGFACTORCODE:(NSString*)FIELDINGFACTOR:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE;
 +(BOOL)InsertFieldingfactor:(NSString*)FIELDINGFACTORCODE:(NSString*)FIELDINGFACTOR:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE;
 
+//fetch the image
++(NSMutableArray *)getPlayerCode;
 
-
-
++(NSMutableArray *)getofficailCode;
++(NSMutableArray *)getgroundcode;
 
 @end
