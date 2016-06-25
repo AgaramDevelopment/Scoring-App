@@ -1304,7 +1304,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BOWLEROVERDETAILS SET ENDTIME = GETDATE()  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'  AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE ,INNINGSNO,OVERNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BOWLEROVERDETAILS SET ENDTIME = date('now')  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'  AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE ,INNINGSNO,OVERNO];
         const char *selectStmt = [updateSQL UTF8String];
         
         if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1367,7 +1367,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
-    NSString *updateSQL = [NSString stringWithFormat:@" SELECT ISNULL(MAX(BALLCOUNT),1) as BALLCOUNT FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'  AND TEAMCODE = '%@'  AND INNINGSNO = '%@' AND OVERNO = '%@' AND BALLNO = '%@'  ",COMPETITIONCODE,MATCHCODE,TEAMCODE ,INNINGSNO,OVERNO,BATTEAMOVRWITHEXTRASBALLS];
+    NSString *updateSQL = [NSString stringWithFormat:@" SELECT IFNULL(MAX(BALLCOUNT),1) as BALLCOUNT FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'  AND TEAMCODE = '%@'  AND INNINGSNO = '%@' AND OVERNO = '%@' AND BALLNO = '%@'  ",COMPETITIONCODE,MATCHCODE,TEAMCODE ,INNINGSNO,OVERNO,BATTEAMOVRWITHEXTRASBALLS];
     
     stmt=[updateSQL UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1398,7 +1398,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE =  '%@' AND MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO =  '%@'  AND OVERNO =  '%@' AND BALLNO =  '%@'  AND BALLCOUNT =  '%@'  ",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,BATTEAMOVRWITHEXTRASBALLS,BATTEAMOVRBALLSCNT];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE =  '%@' AND MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO =  '%@'  AND OVERNO =  '%@' AND BALLNO =  '%@'  AND BALLCOUNT =  '%@'  ",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BATTEAMOVRWITHEXTRASBALLS,BATTEAMOVRBALLSCNT];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
             
@@ -1419,7 +1419,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             return @"";
         }
     }
-    sqlite3_reset(statement);
+    
     sqlite3_reset(statement);
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
@@ -1566,7 +1566,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT CASE WHEN (ISNULL(SUM(TOTALRUNS+NOBALL+WIDE),0) = 0) THEN 1 ELSE 0 END  as MAIDENOVERS FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = '%@' HAVING MAX(BALLNO) > 4 ",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT CASE WHEN (ISNULL(SUM(TOTALRUNS+NOBALL+WIDE),0) = 0) THEN 1 ELSE 0 END  as MAIDENOVERS FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = '%@'group by ballno  HAVING MAX(BALLNO) > 4 ",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
             if (sqlite3_step(statement) == SQLITE_DONE)

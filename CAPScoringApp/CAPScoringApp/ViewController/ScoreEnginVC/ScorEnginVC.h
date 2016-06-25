@@ -153,6 +153,8 @@
 - (IBAction)btn_AppealSave:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *comments_txt;
 
+@property(nonatomic,strong) IBOutlet UITextView * txt_Commantry;
+
 //bowltype
 @property (weak, nonatomic) IBOutlet UITableView *tbl_bowlType;
 @property (weak, nonatomic) IBOutlet UIView *view_bowlType;
@@ -234,6 +236,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_sixs;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_nonstricker_strickrate;
 
+@property (weak, nonatomic) IBOutlet UIButton *btn_bowlername;
 
 //Current Bowler
 @property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_name;
@@ -273,5 +276,7 @@
 - (IBAction)btn_show_scorecard:(id)sender;
 
 - (IBAction)btn_penality:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *Lbl_umpirename2;
+@property (strong, nonatomic) IBOutlet UILabel *Lbl_batsmen;
 
 @end
