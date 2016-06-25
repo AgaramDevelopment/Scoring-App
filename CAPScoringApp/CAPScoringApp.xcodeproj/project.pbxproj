@@ -20,6 +20,7 @@
 		18674AC31D1A4F9600DB7C71 /* MatchResultListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18674AC11D1A4F9600DB7C71 /* MatchResultListVC.m */; };
 		18674AC41D1A4F9600DB7C71 /* MatchResultListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18674AC21D1A4F9600DB7C71 /* MatchResultListVC.xib */; };
 		186DC7F81D1E56DC00293B7F /* Utitliy.m in Sources */ = {isa = PBXBuildFile; fileRef = 186DC7F71D1E56DC00293B7F /* Utitliy.m */; };
+		186DC8001D1EAA9B00293B7F /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 186DC7FF1D1EAA9B00293B7F /* TNCA_DATABASE.sqlite */; };
 		18704ED21D1954E100996BF3 /* FetchMatchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704ED11D1954E100996BF3 /* FetchMatchResult.m */; };
 		18704ED51D19560C00996BF3 /* DBManagerMatchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704ED41D19560C00996BF3 /* DBManagerMatchResult.m */; };
 		18704ED81D19590000996BF3 /* GetMatchResultTypeAndCodeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704ED71D19590000996BF3 /* GetMatchResultTypeAndCodeDetails.m */; };
@@ -156,7 +157,6 @@
 		CEC858B21D155D36007F5384 /* intialBreakVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC858B01D155D36007F5384 /* intialBreakVC.m */; };
 		CEC858B31D155D36007F5384 /* intialBreakVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC858B11D155D36007F5384 /* intialBreakVC.xib */; };
 		CED03D261D1AAE3B00522B89 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */; };
-		CEE1A1101D1E41CC004E775D /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = CEE1A10F1D1E41CC004E775D /* TNCA_DATABASE.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +200,7 @@
 		18674AC21D1A4F9600DB7C71 /* MatchResultListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchResultListVC.xib; sourceTree = "<group>"; };
 		186DC7F61D1E56DC00293B7F /* Utitliy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utitliy.h; sourceTree = "<group>"; };
 		186DC7F71D1E56DC00293B7F /* Utitliy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utitliy.m; sourceTree = "<group>"; };
+		186DC7FF1D1EAA9B00293B7F /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = "../../../../Backup/Sathish 30-May-2016/TNCA_DATABASE.sqlite"; sourceTree = "<group>"; };
 		18704ED01D1954E100996BF3 /* FetchMatchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchMatchResult.h; sourceTree = "<group>"; };
 		18704ED11D1954E100996BF3 /* FetchMatchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchMatchResult.m; sourceTree = "<group>"; };
 		18704ED31D19560C00996BF3 /* DBManagerMatchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerMatchResult.h; sourceTree = "<group>"; };
@@ -445,7 +446,6 @@
 		CEC858B11D155D36007F5384 /* intialBreakVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = intialBreakVC.xib; sourceTree = "<group>"; };
 		CED03D241D1AAE3B00522B89 /* DBMANAGERSYNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMANAGERSYNC.h; sourceTree = "<group>"; };
 		CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMANAGERSYNC.m; sourceTree = "<group>"; };
-		CEE1A10F1D1E41CC004E775D /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -819,7 +819,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
-				CEE1A10F1D1E41CC004E775D /* TNCA_DATABASE.sqlite */,
+				186DC7FF1D1EAA9B00293B7F /* TNCA_DATABASE.sqlite */,
 				246464FD1D17255C0078A446 /* DBManagerEndInnings.h */,
 				246464FE1D17255C0078A446 /* DBManagerEndInnings.m */,
 				246464FF1D17255C0078A446 /* DBMangerOtherWicket.h */,
@@ -1197,7 +1197,7 @@
 				1876212A1D1D7967006E160F /* InningsDetailsRecord in Resources */,
 				CE7463A91D166F8200D69CD9 /* UpdateBreakVC.xib in Resources */,
 				2464651D1D17255C0078A446 /* OtherWicketPlayerlistVC.xib in Resources */,
-				CEE1A1101D1E41CC004E775D /* TNCA_DATABASE.sqlite in Resources */,
+				186DC8001D1EAA9B00293B7F /* TNCA_DATABASE.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

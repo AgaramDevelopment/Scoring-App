@@ -21,4 +21,6 @@
 @property(strong,nonatomic)NSString *COMMENTS;
 @property(strong,nonatomic)NSString *BATTINGTEAMCODE;
 
+-(void) InsertEndDay:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)INNINGSNO:(NSString*)STARTTIME:(NSString*)ENDTIME:(NSString*)DAYNO:(NSString*)BATTINGTEAMCODE:(NSString*)TOTALRUNS:(NSString*)TOTALOVERS:(NSString*)TOTALWICKETS:(NSString*)COMMENTS:(NSString*)STARTTIMEFORMAT:(NSString*)ENDTIMEFORMAT;
+
 @end

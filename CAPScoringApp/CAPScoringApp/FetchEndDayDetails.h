@@ -16,7 +16,6 @@
 @property(strong,nonatomic)NSString *TEAMNAME;
 @property(strong,nonatomic)NSString *RUNS;
 @property(strong,nonatomic)NSString *OVERBALLNO;
-
 @property(strong,nonatomic)NSString *WICKETS;
 
 
