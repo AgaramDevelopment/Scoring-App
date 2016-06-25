@@ -16,6 +16,7 @@
 #import "GetBestPlayerDetail.h"
 #import "Reachability.h"
 #import "AppDelegate.h"
+#import "Utitliy.h"
 
 
 @interface MatchResultListVC ()<UITableViewDelegate,UITableViewDataSource>
@@ -773,10 +774,10 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
     }else if(([selectedResultType.RESULTTYPE isEqual:@"Win"] || [selectedResultType.RESULTTYPE isEqual:@"Match Awarded"]) &&  selectedTeam==nil){
         [self showDialog:@"Please select team." andTitle:@""];
         return NO;
-    }else if(![_txtf_team_a_point.text isEqual:@""] && [_txtf_team_a_point.text intValue]<0 && [_txtf_team_a_point.text intValue]>9){
+    }else if(![_txtf_team_a_point.text isEqual:@""] && ([_txtf_team_a_point.text intValue]<0 || [_txtf_team_a_point.text intValue]>9)){
         [self showDialog:@"Please enter point between 0 to 9." andTitle:@""];
         return NO;
-    }else if(![_txtf_team_b_point.text isEqual:@""] && [_txtf_team_b_point.text intValue]<0 && [_txtf_team_b_point.text intValue]>9){
+    }else if(![_txtf_team_b_point.text isEqual:@""] && ([_txtf_team_b_point.text intValue]<0 || [_txtf_team_b_point.text intValue]>9)){
         [self showDialog:@"Please enter point between 0 to 9." andTitle:@""];
         return NO;
     }
@@ -826,8 +827,8 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             
-            NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/MATCHRESULT/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",self.competitionCode,self.matchCode,MANOFTHESERIESCODE,BESTBATSMANCODE,BESTBOWLERCODE,BESTALLROUNDERCODE,MOSTVALUABLEPLAYERCODE,MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,TEAMBPOINTS,MANOFTHEMATCHCODE,COMMENTS,TEAMNAME,OPERATIONTYPE];
-            
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHRESULT/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], self.competitionCode,self.matchCode,MANOFTHESERIESCODE,BESTBATSMANCODE,BESTBOWLERCODE,BESTALLROUNDERCODE,MOSTVALUABLEPLAYERCODE,MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,TEAMBPOINTS,MANOFTHEMATCHCODE,COMMENTS,TEAMNAME,OPERATIONTYPE];
+            NSLog(@"-%@",baseURL);
           
 
             NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];

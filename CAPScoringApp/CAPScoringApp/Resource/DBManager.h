@@ -447,13 +447,14 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 +(NSMutableArray *) SetPenaltyDetailsForInsert:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 +(NSMutableArray *) GetPenaltyDetailsForUpdate:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) PENALTYCODE;
 
++(NSMutableArray *) GetMatchResultTypeAndCodeForFetchMatchResult;
 // END OVER STATUS
 
 //get overStatus
 
 + (NSString *)GETOVERSTATUS :(NSString *) Competitioncode :(NSString *) MatchCode :(NSString *) Teamcode :(NSString *)Inningsno :(NSString *) Overno;
 
-
++(NSMutableArray *)GETUMPIRE :(NSString *)Competitioncode :(NSString *) MatchCode;
 
 
 

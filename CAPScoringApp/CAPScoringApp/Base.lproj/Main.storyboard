@@ -220,6 +220,7 @@
             <string>Rajdhani-Medium</string>
             <string>Rajdhani-Medium</string>
             <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-REGULAR.TTF">
             <string>Rajdhani-Regular</string>
@@ -5657,14 +5658,14 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v1D-6w-1CY">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="pve-fs-UQQ">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pve-fs-UQQ">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="160" y="1" width="440" height="118"/>
+                                                    <rect key="frame" x="160" y="1" width="440" height="114"/>
                                                 </variation>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBk-zT-YMj">
@@ -5685,7 +5686,7 @@
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="1" width="150" height="118"/>
+                                                    <rect key="frame" x="0.0" y="1" width="150" height="114"/>
                                                     <mask key="constraints">
                                                         <include reference="cIY-gc-wL3"/>
                                                     </mask>
@@ -5732,7 +5733,7 @@
                                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                             </constraint>
                                             <constraint firstItem="HBk-zT-YMj" firstAttribute="baseline" secondItem="pDR-Ao-xxS" secondAttribute="firstBaseline" id="EpO-IN-HJs">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="1"/>
+                                                <variation key="heightClass=regular-widthClass=regular" constant="-1"/>
                                             </constraint>
                                             <constraint firstItem="pDR-Ao-xxS" firstAttribute="leading" secondItem="pve-fs-UQQ" secondAttribute="trailing" constant="45" id="FlW-HC-xLJ">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="10"/>
@@ -5741,7 +5742,7 @@
                                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                             </constraint>
                                             <constraint firstItem="HBk-zT-YMj" firstAttribute="firstBaseline" secondItem="pDR-Ao-xxS" secondAttribute="baseline" id="Hjg-fc-7kD">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="1"/>
+                                                <variation key="heightClass=regular-widthClass=regular" constant="-1"/>
                                             </constraint>
                                             <constraint firstAttribute="height" constant="130" id="Jjo-78-8rz"/>
                                             <constraint firstAttribute="bottom" secondItem="pDR-Ao-xxS" secondAttribute="bottom" constant="10" id="K5F-q9-hIY">
@@ -9387,6 +9388,7 @@
                         <outlet property="btn_Spin" destination="Toi-nM-JbT" id="36L-Ad-VQU"/>
                         <outlet property="btn_StartBall" destination="HBk-zT-YMj" id="f13-Ol-eXd"/>
                         <outlet property="btn_StartOver" destination="pDR-Ao-xxS" id="buJ-aH-iMd"/>
+                        <outlet property="btn_bowlername" destination="jcp-qF-AKJ" id="Ubg-BO-K4d"/>
                         <outlet property="btn_extras" destination="QjF-4C-Sno" id="1bP-ar-Rff"/>
                         <outlet property="btn_highRun" destination="cRC-ti-68O" id="WUc-vI-gRV"/>
                         <outlet property="btn_lastinstance" destination="6VS-uP-koE" id="D7N-q1-gPb"/>
@@ -9467,6 +9469,7 @@
                         <outlet property="tbl_bowlType" destination="hBo-wx-u0b" id="nCv-u9-MyQ"/>
                         <outlet property="tbl_defensive" destination="OVn-ZQ-a6o" id="6JS-DM-N5Q"/>
                         <outlet property="tbl_fastBowl" destination="tc6-o8-vss" id="IvT-7b-WM7"/>
+                        <outlet property="txt_Commantry" destination="pve-fs-UQQ" id="z8X-VB-FKI"/>
                         <outlet property="view_AppealComponent" destination="04e-JY-eUX" id="vZ8-Vt-xNC"/>
                         <outlet property="view_AppealSystem" destination="T9G-hC-PbK" id="hPu-iD-iFY"/>
                         <outlet property="view_BallTicker" destination="eqX-57-Pdv" id="cxS-MI-Owx"/>

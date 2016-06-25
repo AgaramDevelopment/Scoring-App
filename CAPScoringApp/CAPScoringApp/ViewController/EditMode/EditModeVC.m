@@ -35,6 +35,7 @@
     NSMutableArray * objWicketno;
     NSMutableArray * objwicketType;
     int EachoverWicketCount;
+    UIButton *btn_Run;
 }
 
 @end
@@ -400,7 +401,7 @@
 -(void)CreateBallTickerInstance:(NSString *)content :(BOOL ) isextra: (BOOL) isspecialevent :(NSString *)ballno :(EditModeCell *) cell: (int) currentindex;
 {
     
-    UIButton *btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((currentindex*40.0)+5,2.0,33.0, 35.0)];
+    btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((currentindex*40.0)+5,2.0,33.0, 35.0)];
        // NSString *objeachRunsValue =[eachoverRun objectAtIndex:i];
     [btn_Run setBackgroundColor:[UIColor clearColor]];
     [btn_Run setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -412,6 +413,7 @@
     btn_Run.layer.borderWidth=2;
     btn_Run.layer.borderColor= [UIColor redColor].CGColor;
     btn_Run.layer.masksToBounds=YES;
+    btn_Run.tag =currentindex;
     [btn_Run addTarget:self action:@selector(didClickEditAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [cell.view_main addSubview:btn_Run];
@@ -467,30 +469,74 @@
     }
      UIButton * btn_add = (UIButton *)sender;
     
-   
+    
+
    EditModeCell *cell = (EditModeCell*)[sender superview];
     NSIndexPath* indexPath = [self.tbl_innnings indexPathForCell:cell];
-     view_addedit=[[UIView alloc]initWithFrame:CGRectMake(btn_add.frame.origin.x-20,btn_add.frame.origin.y-50,130, 50)];
+     view_addedit=[[UIView alloc]initWithFrame:CGRectMake(btn_add.frame.origin.x-20,btn_add.frame.origin.y+30,130, 50)];
     [view_addedit setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
     [cell addSubview:view_addedit];
-    UIButton * leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(5, view_addedit.frame.origin.y+70, 25, 25)];
+    UIButton * leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(view_addedit.frame.origin.x, view_addedit.frame.origin.y, 25, 25)];
     [leftrotation setImage:[UIImage imageNamed:@"LeftRotation"] forState:UIControlStateNormal];
-    [view_addedit addSubview:leftrotation];
+    [cell addSubview:leftrotation];
+    [leftrotation addTarget:self action:@selector(didClickLeftRotation:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
     
     UIButton * Editrotation=[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.origin.x+leftrotation.frame.size.width+8, leftrotation.frame.origin.y, 25, 25)];
     [Editrotation setImage:[UIImage imageNamed:@"ArchiveEdit"] forState:UIControlStateNormal];
-    [view_addedit addSubview:Editrotation];
+    [cell addSubview:Editrotation];
+    
+    [Editrotation addTarget:self action:@selector(didClickEditrotation:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton * Cancelrotation=[[UIButton alloc]initWithFrame:CGRectMake(Editrotation.frame.origin.x+Editrotation.frame.size.width+8, Editrotation.frame.origin.y, 25, 25)];
     [Cancelrotation setImage:[UIImage imageNamed:@"ArchiveCancel"] forState:UIControlStateNormal];
-    [view_addedit addSubview:Cancelrotation];
+    [cell addSubview:Cancelrotation];
+    [Cancelrotation addTarget:self action:@selector(didClickCancelrotation:) forControlEvents:UIControlEventTouchUpInside];
     
     UIButton * Rightrotation=[[UIButton alloc]initWithFrame:CGRectMake(Cancelrotation.frame.origin.x+Cancelrotation.frame.size.width+8, Cancelrotation.frame.origin.y, 25, 25)];
     [Rightrotation setImage:[UIImage imageNamed:@"RightRotation"] forState:UIControlStateNormal];
-    [view_addedit addSubview:Rightrotation];
+    [cell addSubview:Rightrotation];
+    [Rightrotation addTarget:self action:@selector(didClickRightrotation:) forControlEvents:UIControlEventTouchUpInside];
 
 }
 
+-(IBAction)didClickLeftRotation:(id)sender
+{
+    UIButton *senderButton = (UIButton *)sender;
+    EditModeCell *buttonCell = (EditModeCell *)[senderButton superview];
+    
+    NSIndexPath* pathOfTheCell = [self.tbl_innnings indexPathForCell:buttonCell];
+    NSInteger rowOfTheCell = [pathOfTheCell row];
+    NSLog(@"rowofthecell %d", rowOfTheCell);
+    for (id obj in buttonCell.subviews) {
+        
+        NSString *classStr = NSStringFromClass([obj class]);
+        
+        if ([classStr isEqualToString:@"UIButton"]) {
+            
+            UIButton *button = (UIButton*)obj;
+            if(btn_Run.tag == button.tag)
+            {
+               button.layer.borderWidth = 2.0;
+                button.layer.borderColor = [UIColor greenColor].CGColor;
+            }
+        }
+    }
+}
+
+-(IBAction)didClickEditrotation:(id)sender
+{
+    
+}
+-(IBAction)didClickCancelrotation:(id)sender
+{
+    
+}
+-(IBAction)didClickRightrotation:(id)sender
+{
+    
+}
 
 -(IBAction)didClickInnings1team1:(id)sender
 {
