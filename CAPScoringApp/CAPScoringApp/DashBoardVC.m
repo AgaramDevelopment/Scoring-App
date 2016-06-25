@@ -594,7 +594,10 @@
                 
             }
 
-            //playercodeimage
+            
+            [self playercodeimage];
+            [self officialcodeimage];
+            [self groundcodeimage];
             
             }
             
@@ -649,10 +652,7 @@
     
     _view_reports.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
     
-       
-    [self playercodeimage];
-[self officialcodeimage];
-    [self groundcodeimage];
+
     
 }
 
