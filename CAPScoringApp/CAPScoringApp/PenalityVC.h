@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "PenalityTVC.h"
+#import "PenaltyDetailsRecord.h"
 
 //@protocol penalityDelegate <NSObject>
 //- (void)RightSideEditBtnAction;
@@ -38,11 +39,16 @@
 @property (strong, nonatomic) IBOutlet PenalityTVC *penality_cell;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_penaltytype;
 
-@property(nonatomic,strong) NSString *matchcode;
-@property(nonatomic,strong) NSString *competitioncode;
-@property(nonatomic,strong) NSString *inningsno;
+@property(nonatomic,strong) NSString *matchCode;
+@property(nonatomic,strong) NSString *competitionCode;
+@property(nonatomic,strong) NSString *inningsNo;
 @property(nonatomic,strong) NSString *metasubcode;
 @property (nonatomic,strong)NSDictionary *test;
 @property(nonatomic,strong) NSDictionary *sample;
+
+@property(nonatomic,strong)PenaltyDetailsRecord *penaltyDetailsRecord;
+
+- (IBAction)btn_back:(id)sender;
+
 
 @end

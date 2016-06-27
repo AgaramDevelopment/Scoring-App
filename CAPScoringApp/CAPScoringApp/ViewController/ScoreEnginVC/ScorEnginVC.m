@@ -46,6 +46,11 @@
 #import "umpiretablecell.h"
 #import "Batsmancell.h"
 #import "AppealBatsmenRecord.h"
+#import "EndInningsVC.h"
+#import "PenaltygridVC.h"
+#import "PowerPlayVC.h"
+#import "PowerPlayGridVC.h"
+#import "OtherWicketVC.h"
 
 
 
@@ -149,19 +154,25 @@
     //
     NSString *strpenalityruns;
     
-    PenalityVC *penalityVc;
+
     UISwipeGestureRecognizer *RightsideGesture;
     UISwipeGestureRecognizer *LeftsideGesture;
     BreakVC * breakvc;
     UIView * fullview;
-    RevicedOverVC * revicedOverVc ;
-    RevisedTarget  *revisedTarget;
+
     BOOL isTargetReached;
     NSString * overStatus;
     NSString * Umpire1Code;
     NSString * umpire2Code;
     NSString  *TEAMAWICKETKEEPER;
     NSString  *TEAMBWICKETKEEPER;
+    
+    PowerPlayGridVC *powerplaygridvc;
+    OtherWicketVC *otherwicketvc;
+    RevicedOverVC * revicedOverVc ;
+    RevisedTarget  *revisedTarget;
+    PenalityVC *penalityVc;
+    PenaltygridVC *penaltygridvc;
 
     
     NSString * alterviewSelect;
@@ -5848,14 +5859,172 @@ EndInnings *endInnings;
 }
 -(void)OtherWicket
 {
+    otherwicketvc = [[OtherWicketVC alloc]initWithNibName:@"OtherWicketVC" bundle:nil];
+    otherwicketvc.competitioncode=self.competitionCode;
+    otherwicketvc.matchcode =self.matchCode;
+  //  otherwicketvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:otherwicketvc.view];
+    
+    otherwicketvc.view.frame =CGRectMake(90, 200, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
+    
+    otherwicketvc.view.alpha = 0;
+    [otherwicketvc didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         otherwicketvc.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
+    
+    if (IS_IPAD_PRO) {
+        
+        otherwicketvc.view.frame =CGRectMake(250, 500, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
+        otherwicketvc.view.alpha = 0;
+        [otherwicketvc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             otherwicketvc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+    
+    else{
+        otherwicketvc.view.frame =CGRectMake(100, 200, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
+        otherwicketvc.view.alpha = 0;
+        [otherwicketvc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             otherwicketvc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+
     
 }
 -(void)Penalty
 {
+    penaltygridvc = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
+    penaltygridvc.competitionCode=self.competitionCode;
+    penaltygridvc.matchCode =self.matchCode;
+    penaltygridvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:penaltygridvc.view];
+    
+    penaltygridvc.view.frame =CGRectMake(90, 200, penaltygridvc.view.frame.size.width, penaltygridvc.view.frame.size.height);
+    
+    penaltygridvc.view.alpha = 0;
+    [penaltygridvc didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         penaltygridvc.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
+    
+    if (IS_IPAD_PRO) {
+        
+        penaltygridvc.view.frame =CGRectMake(250, 500, penaltygridvc.view.frame.size.width, penaltygridvc.view.frame.size.height);
+        penaltygridvc.view.alpha = 0;
+        [penaltygridvc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             penaltygridvc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+    
+    else{
+        penaltygridvc.view.frame =CGRectMake(100, 200, penaltygridvc.view.frame.size.width, penaltygridvc.view.frame.size.height);
+        penaltygridvc.view.alpha = 0;
+        [penaltygridvc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             penaltygridvc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+
     
 }
 -(void)PowerPlay
 {
+    powerplaygridvc = [[PowerPlayGridVC alloc]initWithNibName:@"PowerPlayGridVC" bundle:nil];
+    powerplaygridvc.competitionCode=self.competitionCode;
+    powerplaygridvc.matchCode =self.matchCode;
+    powerplaygridvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:powerplaygridvc.view];
+    
+    powerplaygridvc.view.frame =CGRectMake(90, 200, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
+    
+    powerplaygridvc.view.alpha = 0;
+    [powerplaygridvc didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         powerplaygridvc.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
+    
+    if (IS_IPAD_PRO) {
+        
+        powerplaygridvc.view.frame =CGRectMake(250, 500, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
+        powerplaygridvc.view.alpha = 0;
+        [powerplaygridvc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             powerplaygridvc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+    
+    else{
+        powerplaygridvc.view.frame =CGRectMake(100, 200, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
+        powerplaygridvc.view.alpha = 0;
+        [powerplaygridvc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             powerplaygridvc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+
     
 }
 
@@ -5876,13 +6045,6 @@ EndInnings *endInnings;
     
     
     if (IS_IPAD_PRO) {
-        
-        
-        
-        
-        //vc2 *viewController = [[vc2 alloc]init];
-        
-        
         revisedTarget.view.frame =CGRectMake(250, 500, revisedTarget.view.frame.size.width, revisedTarget.view.frame.size.height);
         [self.view addSubview:revisedTarget.view];
         revisedTarget.view.alpha = 0;
@@ -5897,15 +6059,8 @@ EndInnings *endInnings;
     
     
     else{
-        //intialBreakVC *add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
-        
-        
-        
-        //vc2 *viewController = [[vc2 alloc]init];
-        // [self addChildViewController:add];
         
         revisedTarget.view.frame =CGRectMake(100, 200, revisedTarget.view.frame.size.width, revisedTarget.view.frame.size.height);
-        //[self.view addSubview:add.view];
         revisedTarget.view.alpha = 0;
         [revisedTarget didMoveToParentViewController:self];
         
@@ -9328,17 +9483,18 @@ EndInnings *endInnings;
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     [fullview addSubview:Btn_Fullview];
     [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-   
+    
     
     [self.view addSubview:fullview];
-     revicedOverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
+    revicedOverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
     revicedOverVc.matchCode=self.matchCode;
     revicedOverVc.competitionCode =self.competitionCode;
+   // revicedOverVc.inningsNo = self.;
     [fullview addSubview:revicedOverVc.view];
-   
+    
     //[revicedOverVc.btn_submit addTarget:self action:@selector(btn_submit:) forControlEvents:UIControlEventTouchUpInside];
-
-   
+    
+    
     if (IS_IPAD_PRO) {
         
         
@@ -9372,7 +9528,7 @@ EndInnings *endInnings;
         revicedOverVc.view.frame =CGRectMake(100, 200, revicedOverVc.view.frame.size.width, revicedOverVc.view.frame.size.height);
         //[self.view addSubview:add.view];
         revicedOverVc.view.alpha = 0;
-       [revicedOverVc didMoveToParentViewController:self];
+        [revicedOverVc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
@@ -9380,15 +9536,6 @@ EndInnings *endInnings;
          }
                          completion:nil];
     }
- 
-//    RevicedOverVC *revisedoverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
-//    revisedoverVc.matchCode =self.matchCode;
-//    revisedoverVc.competitionCode =self.competitionCode;
-//
-//    [fullview addSubview:revisedoverVc.view];
-//    revisedoverVc.txt_comments.delegate=self;
-//    revisedoverVc.txt_overs.delegate=self;
-//    [revisedoverVc.btn_submit addTarget:self action:@selector(btn_submit:) forControlEvents:UIControlEventTouchUpInside];
 }
 //
 - (IBAction)btn_submit:(id)sender
@@ -9630,8 +9777,8 @@ if(self.checkInternetConnection){
     
          penalityVc = [[PenalityVC alloc]initWithNibName:@"PenalityVC" bundle:nil];
     
-    penalityVc.matchcode=self.matchCode;
-    penalityVc.competitioncode=self.competitionCode;
+    penalityVc.matchCode=self.matchCode;
+    penalityVc.competitionCode=self.competitionCode;
     
         [self.view addSubview:penalityVc.view];
     
