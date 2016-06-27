@@ -204,14 +204,18 @@ _Text_BreakStart.text=@"";
 //    COMPETITIONCODE=@"UCC0000004";
 //    INNINGSNO=@"2";
     
-    BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
+    NSString *BREAKNO1 =[DBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
     
     
-    BREAKNO=  [NSString stringWithFormat:@"%d", [BREAKNO integerValue] + 1];
-  
-   
-    [self InsertBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
-
+    BREAKNO=  [NSString stringWithFormat:@"%d", [BREAKNO1 integerValue] + 1];
+//    int i=5;
+//    
+//    for (i=0; i< BREAKNO ; i++) {
+//     
+//    }
+//   
+    
+   [self InsertBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
     
     
     [self startService:@"INSERT"];
