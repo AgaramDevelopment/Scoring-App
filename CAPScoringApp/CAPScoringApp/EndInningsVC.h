@@ -16,6 +16,7 @@
 
 @property (strong,nonatomic) NSString *MATCHCODE;
 
+
 @property (weak, nonatomic) IBOutlet UIView *view_allControls;
 
 @property (weak, nonatomic) IBOutlet UIView *view_startInnings;

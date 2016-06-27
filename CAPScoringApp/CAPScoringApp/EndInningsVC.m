@@ -17,7 +17,7 @@
 #import "AppDelegate.h"
 #import "FetchSEPageLoadRecord.h"
 #import "DBManagerEndInnings.h"
-#import "MatchResultListVC.m"
+#import "MatchResultListVC.h"
 @interface EndInningsVC ()
 {
     NSDateFormatter *formatter;
@@ -43,11 +43,6 @@ BOOL IsBack;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-  
-
-    
-
    
 }
 -(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE{

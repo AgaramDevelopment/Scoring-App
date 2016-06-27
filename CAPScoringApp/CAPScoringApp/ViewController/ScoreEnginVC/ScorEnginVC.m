@@ -46,6 +46,7 @@
 #import "umpiretablecell.h"
 #import "Batsmancell.h"
 #import "AppealBatsmenRecord.h"
+#import "DeclareInnings.h"
 
 
 
@@ -5742,8 +5743,9 @@ EndInnings *endInnings;
      }
                      completion:nil];
     
+
     
-    [endInning fetchPageload:fetchSEPageLoadRecord:self.competitionCode:self.matchCode];
+    [endInning fetchPageload:fetchSEPageLoadRecord :self.competitionCode :self.matchCode];
 }
 -(void)ENDDAY
 {
@@ -5797,6 +5799,48 @@ EndInnings *endInnings;
 }
 -(void)DeclearINNINGS
 {
+    
+    
+    DeclareInnings *declareInning = [[DeclareInnings alloc]initWithNibName:@"DeclareInnings" bundle:nil];
+    declareInning.COMPETITIONCODE = self.competitionCode;
+    declareInning.MATCHCODE = self.matchCode;
+    declareInning.INNINGSNO = fetchSEPageLoadRecord.INNINGSNO;
+    declareInning.TEAMNAME = fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    declareInning.BOWLINGTEAMCODE = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+    declareInning.ISDECLARE = @"1";
+    
+
+    
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    //fullview.alpha=0.9;
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:revisedTarget.view];
+    
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:declareInning];
+    declareInning.view.frame =CGRectMake(90, 200, declareInning.view.frame.size.width, declareInning.view.frame.size.height);
+    
+    
+    [fullview addSubview:declareInning.view];
+    declareInning.view.alpha = 0;
+    [declareInning didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         declareInning.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
+    
+    
+    
     
 }
 -(void)MatchResult
