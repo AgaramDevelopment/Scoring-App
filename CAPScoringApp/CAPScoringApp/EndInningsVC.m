@@ -17,7 +17,7 @@
 #import "AppDelegate.h"
 #import "FetchSEPageLoadRecord.h"
 #import "DBManagerEndInnings.h"
-#import "MatchResultListVC.m"
+#import "MatchResultListVC.h"
 @interface EndInningsVC ()
 {
     NSDateFormatter *formatter;
