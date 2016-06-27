@@ -20,6 +20,7 @@
 		18674AC31D1A4F9600DB7C71 /* MatchResultListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18674AC11D1A4F9600DB7C71 /* MatchResultListVC.m */; };
 		18674AC41D1A4F9600DB7C71 /* MatchResultListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18674AC21D1A4F9600DB7C71 /* MatchResultListVC.xib */; };
 		186DC7F81D1E56DC00293B7F /* Utitliy.m in Sources */ = {isa = PBXBuildFile; fileRef = 186DC7F71D1E56DC00293B7F /* Utitliy.m */; };
+		186DC8191D21451500293B7F /* EndDayTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1876211D1D1D625A006E160F /* EndDayTVC.m */; };
 		18704ED21D1954E100996BF3 /* FetchMatchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704ED11D1954E100996BF3 /* FetchMatchResult.m */; };
 		18704ED51D19560C00996BF3 /* DBManagerMatchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704ED41D19560C00996BF3 /* DBManagerMatchResult.m */; };
 		18704ED81D19590000996BF3 /* GetMatchResultTypeAndCodeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704ED71D19590000996BF3 /* GetMatchResultTypeAndCodeDetails.m */; };
@@ -1267,6 +1268,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186DC8191D21451500293B7F /* EndDayTVC.m in Sources */,
 				187620FE1D1D0126006E160F /* DBManagerEndDay.m in Sources */,
 				187625091D154495009374F8 /* RevicedOverVC.m in Sources */,
 				246125191D13C85E004B85E7 /* Reachability.m in Sources */,
