@@ -203,6 +203,7 @@ _Text_BreakStart.text=@"";
     
     BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
     
+    
     BREAKNO=  [NSString stringWithFormat:@"%d", [BREAKNO integerValue] + 1];
   
    

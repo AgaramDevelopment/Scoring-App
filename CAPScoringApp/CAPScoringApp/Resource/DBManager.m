@@ -652,11 +652,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
      sqlite3_finalize(statement);
     sqlite3_close(mySqliteDB);
     return NO;
-    
-
-
-
-    
+   
     
 }
 
@@ -680,11 +676,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             success = true;
         }
         
-        sqlite3_finalize(statement);
-        sqlite3_close(mySqliteDB);
+        
+            sqlite3_finalize(statement);
+            sqlite3_close(mySqliteDB);
+      
         
     }
-   
+    
     return success;
     
 }
@@ -709,15 +707,16 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_prepare_v2(mySqliteDB, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
+            
             success = true;
         }
         
-        sqlite3_finalize(statement);
-        sqlite3_close(mySqliteDB);
+        
         
     }
     
-    
+    sqlite3_finalize(statement);
+    sqlite3_close(mySqliteDB);
     return success;
     
 }
@@ -1685,8 +1684,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
             }
         }
-        sqlite3_finalize(statement);
-        sqlite3_close(dataBase);
     }
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
@@ -1764,7 +1761,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
-    return 0;
+    return NO;
     
 }
 
@@ -3178,6 +3175,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         //        }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -3232,6 +3231,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
     }
     sqlite3_reset(statement);
+
     return result;
     
 }
@@ -3505,40 +3505,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return 0;
 }
 
-////U_BALLCOUNT  NUMERIC
-//+(NSNumber *) GETU_BALLCOUNT:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE INNINGSNO:(NSString *)INNINGSNO OVERNO:(NSString *)OVERNO BALLNO:(NSString *)BALLNO{
-//
-//
-//    int retVal;
-//    NSString *databasePath =[self getDBPath];
-//    sqlite3 *dataBase;
-//    const char *stmt;
-//    sqlite3_stmt *statement;
-//    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-//    if(retVal !=0){
-//    }
-//
-//    NSString *query=[NSString stringWithFormat:@"SELECT MAX(OVERNO) FROM BALLEVENTS B WHERE COMPETITIONCODE = %@ AND MATCHCODE = %@ AND INNINGSNO = %@ AND OVERNO = %@ AND BALLNO=%@",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO,BALLNO];
-//
-//
-//    stmt=[query UTF8String];
-//    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
-//    {
-//        while(sqlite3_step(statement)==SQLITE_ROW){
-//            sqlite3_finalize(statement);
-//            sqlite3_close(dataBase);
-//            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-//            f.numberStyle = NSNumberFormatterDecimalStyle;
-//            NSNumber *OVERNO = [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
-//
-//            return OVERNO;
-//        }
-//    }
-//
-//    sqlite3_finalize(statement);
-//    sqlite3_close(dataBase);
-//    return 0;
-//}
 
 //GETUMPIREBYBALLEVENT//
 +(BOOL)GETUMPIREBYBALLEVENT:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE BALLNO:(NSString *)BALLNO INNINGSNO:(NSString *)INNINGSNO  BALLCOUNT:(NSString *)BALLCOUNT  OVERNO:(NSString *)OVERNO {
@@ -8829,7 +8795,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     int retVal;
     NSString *databasePath =[self getDBPath];
     
-    NSString *getWkt = [[NSString alloc]init];
+    NSString *getoverStatus = [[NSString alloc]init];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
@@ -8837,18 +8803,18 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     if(retVal !=0){
     }
     
-    NSString *query=[NSString stringWithFormat:@"SELECT OVERSTATUS FROM   MATCHREGISTRATION WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@',AND TEAMCODE='%@',AND OVERNO ='%@'",Competitioncode,MatchCode,Teamcode,Overno];
+    NSString *query=[NSString stringWithFormat:@"SELECT OVERSTATUS FROM OVEREVENTS WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO ='%@'",Competitioncode,MatchCode,Teamcode,Inningsno];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             
-            getWkt = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            getoverStatus = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
-            return getWkt;
+            return getoverStatus;
             
             
         }
@@ -8857,9 +8823,50 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
-    return NO;
+    return getoverStatus;
 
 }
++(NSMutableArray *)GETUMPIRE :(NSString *)Competitioncode :(NSString *) MatchCode
+{
+    NSMutableArray *UMPIREDETAILS = [[NSMutableArray alloc]init];
+    
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT UMPIRE1CODE,UMPIRE2CODE,TEAMAWICKETKEEPER,TEAMBWICKETKEEPER FROM matchregistration WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' ",Competitioncode,MatchCode];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+            f.numberStyle = NSNumberFormatterDecimalStyle;
+            NSString *UMPIRE1CODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *UMPIRE2CODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            NSString *TeamAwicketKeeper = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+            NSString *TeamBwicketKeeper = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+            
+            
+            [UMPIREDETAILS addObject:UMPIRE1CODE];
+            [UMPIREDETAILS addObject:UMPIRE2CODE];
+            [UMPIREDETAILS addObject:TeamAwicketKeeper];
+            [UMPIREDETAILS addObject:TeamBwicketKeeper];
+            
+            
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return UMPIREDETAILS;
+
+}
+
 
 
 

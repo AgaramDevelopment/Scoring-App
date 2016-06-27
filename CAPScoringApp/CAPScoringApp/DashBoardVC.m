@@ -13,6 +13,7 @@
 #import "EndInningsVC.h"
 #import "DBManager.h"
 #import "DBMANAGERSYNC.h"
+
 @interface DashBoardVC ()
 
 
@@ -48,7 +49,7 @@
     
     
     
-    NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/PULLSCORERDATAFROMSERVER/1"];
+    NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.39:8096/CAPMobilityService.svc/PULLSCORERDATAFROMSERVER/0x0100000088F0BDA6134BA1A808FA82837D998FD8C45AC41C001C2762A27AC7C22D0961149CE3F7B7D0EB9047"];
     NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLResponse *response;
@@ -593,8 +594,10 @@
                 
             }
 
-            //
             
+            [self playercodeimage];
+            [self officialcodeimage];
+            [self groundcodeimage];
             
             }
             
@@ -649,8 +652,7 @@
     
     _view_reports.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
     
-       
-    
+
     
 }
 
@@ -732,4 +734,103 @@
 
     
 }
+
+
+-(void)playercodeimage
+{
+  
+    NSMutableArray*playercode=[DBMANAGERSYNC getPlayerCode];
+    int i;
+    for (i=0; i<[playercode count]; i++)
+     {
+          NSDictionary*test=[playercode objectAtIndex:i];
+         NSString *playercodestr=[test valueForKey:@"playercodeimage"];
+     NSString *ImgeURL1 = [NSString stringWithFormat:@"http://192.168.1.39:8096/CAPMobilityService.svc/GETIMAGE/%@",playercodestr];
+         
+         
+         UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgeURL1]]];
+         
+         NSLog(@"%f,%f",image.size.width,image.size.height);
+         
+         NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
+         
+         NSString *Dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+         
+         NSString *pngPath = [Dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",playercodestr]];// this path if you want save reference path in sqlite
+        
+         [data1 writeToFile:pngPath atomically:YES];
+         
+         
+//         
+//         UIImage  *newImage = [UIImage imageNamed:fileName];
+//         NSData *imageData = UIImagePNGRepresentation(newImage);
+//         
+//         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//         NSString *documentsDirectory = [paths objectAtIndex:0];
+//         
+//         NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]];
+         
+    }
+    
+    
+    
+}
+
+
+-(void)officialcodeimage{
+NSMutableArray*officialscode=[DBMANAGERSYNC getofficailCode];
+int i;
+for (i=0; i<[officialscode count]; i++)
+{
+    NSDictionary*test=[officialscode objectAtIndex:i];
+    NSString *officialscodestr=[test valueForKey:@"officialscodeimage"];
+    NSString *ImgeURL1 = [NSString stringWithFormat:@"http://192.168.1.39:8096/CAPMobilityService.svc/GETIMAGE/%@",officialscodestr];
+    
+    
+    UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgeURL1]]];
+    
+    NSLog(@"%f,%f",image.size.width,image.size.height);
+    
+    
+    NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
+    
+    NSString *Dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSString *pngPath = [Dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",officialscodestr]];// this path if you want save reference path in sqlite
+    
+    [data1 writeToFile:pngPath atomically:YES];
+    
+    
+}
+}
+
+
+
+-(void)groundcodeimage{
+    NSMutableArray*groundcode=[DBMANAGERSYNC getgroundcode];
+    int i;
+    for (i=0; i<[groundcode count]; i++)
+    {
+        NSDictionary*test=[groundcode objectAtIndex:i];
+        NSString *groundcodestr=[test valueForKey:@"groundcodeimage"];
+        NSString *ImgeURL1 = [NSString stringWithFormat:@"http://192.168.1.39:8096/CAPMobilityService.svc/GETIMAGE/%@",groundcodestr];
+        
+        
+        UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgeURL1]]];
+        
+        NSLog(@"%f,%f",image.size.width,image.size.height);
+        
+        
+        NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
+        
+        NSString *Dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        
+        NSString *pngPath = [Dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",groundcodestr]];// this path if you want save reference path in sqlite
+        
+        [data1 writeToFile:pngPath atomically:YES];
+        
+    }
+}
+
+
 @end
