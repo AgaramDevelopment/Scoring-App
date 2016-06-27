@@ -17,6 +17,8 @@
 
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;
+@property(nonatomic,strong) NSString *inningsNo;
+
 
 - (IBAction)btn_submit:(id)sender;
 -(BOOL) checkInternetConnection;
