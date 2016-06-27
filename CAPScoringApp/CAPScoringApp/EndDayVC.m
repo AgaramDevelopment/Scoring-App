@@ -12,7 +12,9 @@
 #import "InsertEndDay.h"
 #import "UpdateEndDay.h"
 #import "DeleteEndDay.h"
-
+#import "Reachability.h"
+#import "AppDelegate.h"
+#import "Utitliy.h"
 
 @interface EndDayVC (){
     BOOL IsBack;
@@ -153,8 +155,8 @@ NSDateFormatter *formatter;
     NSDate *date2 = [formatter dateFromString:startEndTF];
     
     NSTimeInterval timeDifference = [date2 timeIntervalSinceDate:date1];
-    double days = timeDifference / 60;
-    NSString *Duration = [NSString stringWithFormat:@"%f", days];
+    int days = timeDifference / 60;
+    NSString *Duration = [NSString stringWithFormat:@"%d", days];
     
     self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
     
@@ -255,7 +257,7 @@ NSDateFormatter *formatter;
     self.txt_endTime.text = @"";
     self.lbl_teamName.text = fetchEndDayDetails.TEAMNAME;
     self.lbl_innings.text = [NSString stringWithFormat:@"%@", self.INNINGSNO];
-    self.lbl_duration.text =  @"1";
+    self.lbl_duration.text =  @"";
     self.lbl_day_no.text = [NSString stringWithFormat:@"%@", fetchEndDayDetails.DAYNO];
     self.lbl_runScored.text = fetchEndDayDetails.RUNS;
     self.lbl_overPlayed.text = fetchEndDayDetails.OVERBALLNO;
@@ -275,8 +277,28 @@ NSDateFormatter *formatter;
 
 -(BOOL) checkValidation{
  
+    if([self.txt_startTime.text isEqual:@""]){
+        [self showDialog:@"Please select start time." andTitle:@""];
+        return NO;
+    }else if([self.txt_endTime.text isEqual:@""]){
+        [self showDialog:@"Please select end time." andTitle:@""];
+        return NO;
+    }else if([self.lbl_duration.text integerValue]<0){
+        [self showDialog:@"Duration should be greated than zero" andTitle:@""];
+        return NO;
+    }
     return YES;
 }
+
+/**
+ * Show message for given title and content
+ */
+-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
+
 
 
 - (IBAction)btn_save:(id)sender {
@@ -305,7 +327,9 @@ NSDateFormatter *formatter;
             
             UpdateEndDay *updateEndDay = [[UpdateEndDay alloc]init];
             [updateEndDay UpdateEndDay:self.COMPETITIONCODE :self.MATCHCODE :[NSString  stringWithFormat:@"%@",self.INNINGSNO] :_txt_startTime.text :endDayTime : _lbl_day_no.text : self.TEAMCODE :_txt_comments.text :startTimeData :endTimeData];
-             
+           
+            [self duration];
+            [self startService:@"UPDATE"];
            
         }else{
             NSString *endDayTime = _txt_endTime.text;
@@ -334,44 +358,42 @@ NSDateFormatter *formatter;
             
             [insertEndDay InsertEndDay:self.COMPETITIONCODE :self.MATCHCODE :[NSString  stringWithFormat:@"%@",self.INNINGSNO] :_txt_startTime.text :endDayTime : _lbl_day_no.text : self.TEAMCODE :_lbl_runScored.text :_lbl_overPlayed.text :_lbl_wktLost.text :_txt_comments.text :startTimeData :endTimeData];
             
+            
+            [self startService:@"INSERT"];
+            
         }
+        
+        self.view_allControls.hidden = YES;
+        self.tbl_endday.hidden = NO;
+        
+        fetchEndDayDetails = [[FetchEndDayDetails alloc]init];
+        [fetchEndDayDetails FetchEndDay:_COMPETITIONCODE :_MATCHCODE :_TEAMCODE :_INNINGSNO];
+        
+        [self.tbl_endday reloadData];
+        
     }
   
     
-//    //self.view_allControls.hidden = YES;
-//    // EndInnings *endInnings = [[EndInnings alloc]init];
-//    NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
-//    
-//    if([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable){
-//        
-//        
-//        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETENDINNINGS/UCC0000004/IMSC02200224DB2663B00003/TEA0000024/TEA0000024/1/2015-10-15 12:04:00/2015-10-16 12:05:00/49/249/8/INSERT"];
-//        
-//        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//        
-//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//        NSURLResponse *response;
-//        NSError *error;
-//        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//        
-//        
-//        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-//        
-//        
-//    }else{
-//        
-//        [innings InsertEndInnings:@"UCC0000004" :@"IMSC02200224DB2663B00003" :@"TEA0000024" :@"TEA0000024" :@"1" :@"2015-10-15 12:04:00" :@"2015-10-16 12:05:00" :@"49" :@"249" :@"8" :BtnurrentTittle:@"45"];
-//        
-//    }
-//    FixturesVC *fixturevc = [[FixturesVC alloc]init];
-//    
-//    fixturevc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
-//    
-//    //    fixturevc.Matchcode = matchCode;
-//    //    fixturevc.competitionCode = competitionCode;
-//    
-//    [self.navigationController pushViewController:fixturevc animated:YES];
     
+}
+
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 100) { // UIAlertView with tag 1 detected
+        if (buttonIndex == 0)
+        {
+            
+            DeleteEndDay *deleteEndDay = [[DeleteEndDay alloc]init];
+            [deleteEndDay DeleteEndDay:self.COMPETITIONCODE :self.MATCHCODE :[NSString  stringWithFormat:@"%@",self.INNINGSNO] :_lbl_day_no.text];
+    
+            [self startService:@"DELETE"];
+            
+        }
+        else
+        {
+        }
+    }
 }
 - (IBAction)btn_back:(id)sender {
     
@@ -402,8 +424,15 @@ NSDateFormatter *formatter;
 - (IBAction)btn_delete:(id)sender {
     
     if(IsEditMode){
-        DeleteEndDay *deleteEndDay = [[DeleteEndDay alloc]init];
-        [deleteEndDay DeleteEndDay:self.COMPETITIONCODE :self.MATCHCODE :[NSString  stringWithFormat:@"%@",self.INNINGSNO] :_lbl_day_no.text];
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+                                                       message: @"Do you want to Revert?"
+                                                      delegate: self
+                                             cancelButtonTitle:@"Yes"
+                                             otherButtonTitles:@"No",nil];
+        
+        alert.tag = 100;
+        [alert show];
         
     }
 //    
@@ -413,6 +442,101 @@ NSDateFormatter *formatter;
     
     
 }
+
+
+
+//Check internet connection
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
+
+-(void) startService:(NSString *)OPERATIONTYPE{
+    if(self.checkInternetConnection){
+
+        
+        NSString *startTimeData;
+        NSString *endTimeData;
+        
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        
+        NSDate *startdate = [formatter dateFromString:_txt_startTime.text];
+        NSDate *enddate = [formatter dateFromString:_txt_endTime.text];
+        
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        
+        startTimeData = [formatter stringFromDate:startdate];
+        endTimeData = [formatter stringFromDate:enddate];
+        
+        NSString *COMMENTS = [_txt_comments.text isEqual: @""] ?@"NULL":_txt_comments.text;
+        
+        
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        //Show indicator
+        [delegate showLoading];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            
+            NSString *baseURL =[NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDDAY/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],_COMPETITIONCODE ,_MATCHCODE ,_INNINGSNO,_txt_startTime.text,_txt_endTime.text,_lbl_day_no.text,_TEAMCODE,_lbl_runScored.text,_lbl_overPlayed.text,_lbl_wktLost.text,COMMENTS,startTimeData,endTimeData,OPERATIONTYPE];
+            NSLog(@"-%@",baseURL);
+            
+//            SETENDDAY/{COMPETITIONCODE}/{MATCHCODE}/{INNINGSNO}/{STARTTIME}/{ENDTIME}/{DAYNO}/{BATTINGTEAMCODE}/{TOTALRUNS}/{TOTALOVERS}/{TOTALWICKETS}/{COMMENTS}/{STARTTIMEFORMAT}/{ENDTIMEFORMAT}/{OPERATIONTYPE}
+//            
+            
+            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURLResponse *response;
+            NSError *error;
+            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+            
+            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+            
+            if(rootArray !=nil && rootArray.count>0){
+                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                NSString *success = [valueDict valueForKey:@"DataItem"];
+                if([success isEqual:@"Success"]){
+                    
+                }
+            }else{
+                
+            }
+            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
+            //            NSLog(@"%@",errorCode);
+            //
+            //
+            //            if([errorCode boolValue] == YES)
+            //            {
+            //
+            //                BOOL isUserLogin = YES;
+            //
+            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+            //                [[NSUserDefaults standardUserDefaults] synchronize];
+            //
+            //                [self openContentView];
+            //
+            //            }else{
+            //
+            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+            //            }
+            [delegate hideLoading];
+        });
+        
+        //[delegate hideLoading];
+    }
+}
+
+
+
 
 
 @end

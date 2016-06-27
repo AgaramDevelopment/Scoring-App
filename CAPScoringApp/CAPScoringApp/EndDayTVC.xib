@@ -130,12 +130,12 @@
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="lbl_day" destination="zwH-io-SEd" id="jzT-jd-Ocj"/>
-                <outlet property="lbl_innings" destination="yWM-fS-VPU" id="o1F-sq-FNb"/>
-                <outlet property="lbl_overs" destination="NaI-BS-e88" id="u6X-vg-EGY"/>
-                <outlet property="lbl_runs" destination="A3p-Ta-O2A" id="I4G-sj-jFe"/>
-                <outlet property="lbl_team_name" destination="O8Y-NE-X27" id="tlb-Vr-oEn"/>
-                <outlet property="lbl_wickets" destination="arE-aB-GWY" id="eFy-Hx-Qfr"/>
+                <outlet property="lbl_day" destination="zwH-io-SEd" id="GIy-wS-1Ho"/>
+                <outlet property="lbl_innings" destination="yWM-fS-VPU" id="FPf-3X-lTn"/>
+                <outlet property="lbl_overs" destination="NaI-BS-e88" id="FYY-Dr-pwW"/>
+                <outlet property="lbl_runs" destination="A3p-Ta-O2A" id="aPc-KZ-Gcy"/>
+                <outlet property="lbl_team_name" destination="O8Y-NE-X27" id="Esh-Gs-paL"/>
+                <outlet property="lbl_wickets" destination="arE-aB-GWY" id="1ZC-BD-XF3"/>
             </connections>
         </tableViewCell>
     </objects>
