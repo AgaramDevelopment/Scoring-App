@@ -34,6 +34,8 @@
     
 //    UINib *nib = [UINib nibWithNibName:@"BreakTableViewCell" bundle:nil];
 //    [[self tablView] registerNib:nib forCellReuseIdentifier:@"BreakTableViewCell"];
+    
+    [self.tablView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -154,22 +156,22 @@
 - (IBAction)Back_btn:(id)sender {
     
     
-    AddBreakVC*add = [[AddBreakVC alloc]initWithNibName:@"AddBreakVC" bundle:nil];
-    
-    
-    
-    //vc2 *viewController = [[vc2 alloc]init];
-    [self addChildViewController:add];
-    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-    [self.view addSubview:add.view];
-    add.view.alpha = 0;
-    [add didMoveToParentViewController:self];
-    
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         add.view.alpha = 1;
-     }
-                     completion:nil];
+//    AddBreakVC*add = [[AddBreakVC alloc]initWithNibName:@"AddBreakVC" bundle:nil];
+//    
+//    
+//    
+//    //vc2 *viewController = [[vc2 alloc]init];
+//    [self addChildViewController:add];
+//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//    [self.view addSubview:add.view];
+//    add.view.alpha = 0;
+//    [add didMoveToParentViewController:self];
+//    
+//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//     {
+//         add.view.alpha = 1;
+//     }
+//                     completion:nil];
 
 }
 @end

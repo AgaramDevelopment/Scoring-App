@@ -14,96 +14,140 @@
 #import "FixturesVC.h"
 #import "CustomNavigationVC.h"
 #import "Reachability.h"
+#import "AppDelegate.h"
+#import "FetchSEPageLoadRecord.h"
+#import "DBManagerEndInnings.h"
+#import "MatchResultListVC.h"
 @interface EndInningsVC ()
 {
     NSDateFormatter *formatter;
+    NSObject *fetchEndinnings;
+    NSString *CompetitionCode;
+    NSString *MatchCode;
+    NSString *TOTALRUNS;
+    NSString *OVERNO;
+    NSString *WICKETS;
+    
 }
 @end
 EndInnings *end;
 NSMutableArray *endInningsArray;
+
 @implementation EndInningsVC
 @synthesize MATCHCODE;
 EndInnings *innings;
+FetchSEPageLoadRecord *fetchSePageLoad;
+
 BOOL IsBack;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSString *SAVE = self.btn_save;
+
+  
+
     
-    IsBack = NO;
-    
-    [self.btn_save addTarget:self action:@selector(btn_save:) forControlEvents:UIControlEventTouchUpInside];
-    
-    self.lbl_thirdnFourthInnings.hidden = YES;
-    
-     innings = [[EndInnings alloc]init];
-    MATCHCODE = @"IMSC02200224DB2663B00003";
-    endInningsArray = [[NSMutableArray alloc]init];
-   endInningsArray = [DBManagerEndInnings FetchEndInningsDetailsForFetchEndInnings: MATCHCODE];
-    
+
    
-    //self.view_allControls.hidden = YES;
-    
-   
-    
-  [innings fetchEndInnings:@"UCC0000004" :@"IMSC02200224DB2663B00003" :@"TEA0000024":@"1"];
-    
-
-    
-
-    
-    self.lbl_teamName.text = innings.TEAMNAME;
-    self.lbl_runScored.text = [NSString stringWithFormat:@"%@", innings.TOTALRUNS];
-    self.lbl_overPlayed.text = innings.OVERNO;
-    self.lbl_wktLost.text = innings.WICKETS;
-    self.lbl_innings.text = innings.INNINGSNO;
-    
-    
-    // Do any additional setup after loading the view from its nib.
-    //self.view.frame =CGRectMake(0,0, [[UIScreen mainScreen] bounds].size.width, 100);
-    
-  //self.view.frame =CGRectMake(200,500, [[UIScreen mainScreen] bounds].size.width/2,500);
-    
-    [self.view layoutIfNeeded];
-    self.scroll_endInnings.contentSize = CGSizeMake(self.view.frame.size.width, 650);
-
-    [self.view_startInnings.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
-    self.view_startInnings.layer.borderWidth = 2;
-    
-    
-    [self.view_endInnings.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
-    self.view_endInnings.layer.borderWidth = 2;
-    
-    
-    [self.view_duration.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
-    self.view_duration.layer.borderWidth = 2;
-    
-    
-    
-    
-    [self.view_teamName.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
-    self.view_teamName.layer.borderWidth = 2;
-    
-    [self.view_runScored.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
-    self.view_runScored.layer.borderWidth = 2;
-    
-    
-    [self.view_OverPlayed.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
-    self.view_OverPlayed.layer.borderWidth = 2;
-    
-    [self.view_wkts.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
-    self.view_wkts.layer.borderWidth = 2;
-    
-    [self.view_innings.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
-    self.view_innings.layer.borderWidth = 2;
-    
-    [self datePicker];
-    [self endDatePicker];
-    [self duration];
-    
 }
+-(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE{
+    if (fetchRecord !=0 ) {
+        fetchSePageLoad = [[FetchSEPageLoadRecord alloc]init];
 
+        CompetitionCode = COMPETITIONCODE;
+        MatchCode = MATCHCODE;
+        
+        //fetchSePageLoad = fetchRecord;
+        fetchEndinnings = fetchRecord;
+        
+        
+        NSString *SAVE = self.btn_save;
+        
+        IsBack = NO;
+        
+        [self.btn_save addTarget:self action:@selector(btn_save:) forControlEvents:UIControlEventTouchUpInside];
+        
+        self.lbl_thirdnFourthInnings.hidden = YES;
+        
+        //fetchSePageLoad = [[FetchSEPageLoadRecord alloc]init];
+        
+        fetchSePageLoad = fetchEndinnings;
+        
+        innings = [[EndInnings alloc]init];
+        
+        
+        endInningsArray = [[NSMutableArray alloc]init];
+        endInningsArray = [DBManagerEndInnings FetchEndInningsDetailsForFetchEndInnings: MATCHCODE];
+        
+        
+        //self.view_allControls.hidden = YES;
+        
+        
+        
+        [innings fetchEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO ];
+        
+        
+        
+        self.lbl_teamName.text = innings.TEAMNAME;
+        self.lbl_runScored.text = [NSString stringWithFormat:@"%@", innings.TOTALRUNS];
+        self.lbl_overPlayed.text = innings.OVERNO;
+        self.lbl_wktLost.text = innings.WICKETS;
+        self.lbl_innings.text = fetchSePageLoad.INNINGSNO;
+        
+        
+        // Do any additional setup after loading the view from its nib.
+        //self.view.frame =CGRectMake(0,0, [[UIScreen mainScreen] bounds].size.width, 100);
+        
+        //self.view.frame =CGRectMake(200,500, [[UIScreen mainScreen] bounds].size.width/2,500);
+        
+        [self.view layoutIfNeeded];
+        self.scroll_endInnings.contentSize = CGSizeMake(self.view.frame.size.width, 650);
+        
+        [self.view_startInnings.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+        self.view_startInnings.layer.borderWidth = 2;
+        
+        
+        [self.view_endInnings.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+        self.view_endInnings.layer.borderWidth = 2;
+        
+        
+        [self.view_duration.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+        self.view_duration.layer.borderWidth = 2;
+        
+        
+        
+        
+        [self.view_teamName.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+        self.view_teamName.layer.borderWidth = 2;
+        
+        [self.view_runScored.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+        self.view_runScored.layer.borderWidth = 2;
+        
+        
+        [self.view_OverPlayed.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+        self.view_OverPlayed.layer.borderWidth = 2;
+        
+        [self.view_wkts.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+        self.view_wkts.layer.borderWidth = 2;
+        
+        [self.view_innings.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+        self.view_innings.layer.borderWidth = 2;
+        
+        [self datePicker];
+        [self endDatePicker];
+        [self duration];
+        
+        
+        
+        
+        TOTALRUNS=[DBManagerEndInnings GetTotalRunsForFetchEndInnings : CompetitionCode: MatchCode :fetchSePageLoad.BATTINGTEAMCODE: fetchSePageLoad.INNINGSNO ];
+        
+        OVERNO=[DBManagerEndInnings GetOverNoForFetchEndInnings : CompetitionCode: MatchCode :fetchSePageLoad.BATTINGTEAMCODE: fetchSePageLoad.INNINGSNO ];
+        
+        WICKETS=[DBManagerEndInnings GetWicketForFetchEndInnings : CompetitionCode: MatchCode :fetchSePageLoad.BATTINGTEAMCODE: fetchSePageLoad.INNINGSNO];
+        
+    }
+}
 -(void)datePicker{
     
     datePicker =[[UIDatePicker alloc]init];
@@ -270,47 +314,91 @@ self.lbl_duration.text=[NSString stringWithFormat:@"%.20f", Duration];
     self.view_allControls.hidden = NO;
     
     
-    [_btn_save setTitle:@"UPDATE" forState:UIControlStateNormal];
+    
 
     
 }
 
 
-- (IBAction)btn_save:(id)sender {
-    
-    //self.view_allControls.hidden = YES;
-   // EndInnings *endInnings = [[EndInnings alloc]init];
-    NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
-    
-    if([[Reachability reachabilityForInternetConnection]currentReachabilityStatus]==NotReachable){
-        
 
-NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETENDINNINGS/UCC0000004/IMSC02200224DB2663B00003/TEA0000024/TEA0000024/1/2015-10-15 12:04:00/2015-10-16 12:05:00/49/249/8/INSERT"];
+
+- (IBAction)btn_save:(id)sender {
+
+    NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
+    BtnurrentTittle = @"INSERT";
     
+    
+        innings = [[EndInnings alloc]init];
+    
+
+    if(self.checkInternetConnection){
+        
+        //        NSString *MANOFTHESERIESCODE = selectedManOfTheSeries == nil ?@"NULL":selectedManOfTheSeries.playerCode;
+        //        NSString *BESTBATSMANCODE = selectedBestBatsman == nil ?@"NULL":selectedBestBatsman.playerCode;
+        //        NSString *BESTBOWLERCODE = selectedBestBowler == nil ?@"NULL":selectedBestBowler.playerCode;
+        //        NSString *BESTALLROUNDERCODE = selectedBestAllRounder == nil ?@"NULL":selectedBestAllRounder.playerCode;
+        //        NSString *MOSTVALUABLEPLAYERCODE = selectedMostValuPlayer == nil ?@"":selectedMostValuPlayer.playerCode;
+        //        NSString *MATCHRESULTCODE = selectedResultType == nil ?@"NULL":selectedResultType.RESULTCODE;
+        //        NSString *MATCHWONTEAMCODE = selectedTeam == nil ?@"NULL":selectedTeam.TEAMACODE;
+        //        NSNumber *TEAMAPOINTS = [NSNumber numberWithInteger: [_txtf_team_a_point.text integerValue]]  ;
+        //        NSString *TEAMBPOINTS = [_txtf_team_b_point.text isEqual: @""] ?@"NULL":_txtf_team_b_point.text;
+        //        NSString *MANOFTHEMATCHCODE =selectedManOfTheMatch == nil ?@"NULL":selectedManOfTheMatch.playerCode;
+        //        NSString *COMMENTS = [_txtf_comments.text isEqual: @""] ?@"NULL":_txtf_comments.text;
+        //        NSString *TEAMNAME = @"NULL";
+        
+        
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        //Show indicator
+        [delegate showLoading];
+        //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+        
+        //dispatch_get_main_queue(), ^
+        {
+            
+        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",CompetitionCode,MatchCode,fetchSePageLoad.BOWLINGTEAMCODE,fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO ,@"2015-10-15",@"2015-10-16",OVERNO,TOTALRUNS,WICKETS,BtnurrentTittle];
+            
+
+            
+            NSLog(@"%@",baseURL);
+            
             NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-    
+            
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
             NSURLResponse *response;
             NSError *error;
             NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    
-    
-            NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
             
             
-        }else{
+            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+            
+            if(rootArray !=nil && rootArray.count>0){
+                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                NSString *success = [valueDict valueForKey:@"DataItem"];
+                if([success isEqual:@"Success"]){
+                    
+                }
+            }else{
+                
+            }
+            
+            [delegate hideLoading];
+        }
+        
+        
+    }else{
+        
+        
+        
+    }
     
-    [innings InsertEndInnings:@"UCC0000004" :@"IMSC02200224DB2663B00003" :@"TEA0000024" :@"TEA0000024" :@"1" :@"2015-10-15 12:04:00" :@"2015-10-16 12:05:00" :@"49" :@"249" :@"8" :BtnurrentTittle:@"45"];
     
-}
-    FixturesVC *fixturevc = [[FixturesVC alloc]init];
+    [innings InsertEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :@"2015-10-15" :@"2015-10-16" :OVERNO :TOTALRUNS :WICKETS :BtnurrentTittle];
+     
     
-fixturevc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
+   
     
-//    fixturevc.Matchcode = matchCode;
-//    fixturevc.competitionCode = competitionCode;
-    
-    [self.navigationController pushViewController:fixturevc animated:YES];
+
     
 }
 - (IBAction)btn_back:(id)sender {
@@ -337,14 +425,73 @@ fixturevc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifi
     
 }
 
+//Check internet connection
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
 - (IBAction)btn_delete:(id)sender {
     
-
+    
+    if(self.checkInternetConnection){
+        
+        
+        
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        //Show indicator
+        [delegate showLoading];
+//      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+        
+        //dispatch_get_main_queue(), ^
+        {
+            NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",CompetitionCode,MatchCode,@"NULL",fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO,@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"DELETE"];
+     
+            NSLog(@"%@",baseURL);
+            
+            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURLResponse *response;
+            NSError *error;
+            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+            
+            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+            
+            if(rootArray !=nil && rootArray.count>0){
+                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                NSString *success = [valueDict valueForKey:@"DataItem"];
+                if([success isEqual:@"Success"]){
+                    
+                }
+            }else{
+                
+        }
+            
+            [delegate hideLoading];
+        }
+        
+        
+    }else{
+        
+        
+        
+    }
     
     innings = [[EndInnings alloc]init];
     
-   [innings DeleteEndInnings:@"UCC0000004" :@"IMSC02200224DB2663B00003" :@"TEA0000024":@"1"];
+    [innings DeleteEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO];
+
     
+
     
 }
+
+
+
+
 @end

@@ -29,6 +29,7 @@
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-REGULAR.TTF">
             <string>Rajdhani-Regular</string>
@@ -38,7 +39,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EndDayVC">
             <connections>
                 <outlet property="btn_save" destination="lSe-De-Zwf" id="DWb-OL-TL0"/>
-                <outlet property="lbl_day_no" destination="NNa-jM-fFQ" id="Yop-cz-A6Q"/>
+                <outlet property="lbl_day_no" destination="s2e-i0-jJA" id="SCh-RF-gAl"/>
                 <outlet property="lbl_duration" destination="ekW-dX-E8g" id="bog-YC-GcL"/>
                 <outlet property="lbl_innings" destination="ajJ-kM-9Wl" id="LTm-qk-13I"/>
                 <outlet property="lbl_overPlayed" destination="M2q-ot-cWf" id="GMI-RT-aPI"/>
@@ -47,7 +48,7 @@
                 <outlet property="lbl_wktLost" destination="Oxd-W5-k76" id="sgq-AA-GM3"/>
                 <outlet property="scroll_endDay" destination="d7p-nJ-Bz3" id="8PT-eT-8PS"/>
                 <outlet property="tbl_endday" destination="lgz-si-jFr" id="gJY-Ab-h4a"/>
-                <outlet property="txt_comments" destination="xOy-OH-2n3" id="s3m-XH-jim"/>
+                <outlet property="txt_comments" destination="mM8-3V-BUg" id="ilt-OB-JWr"/>
                 <outlet property="txt_endTime" destination="H3w-Sh-S84" id="GCQ-bq-Uv4"/>
                 <outlet property="txt_startTime" destination="U8V-pw-XZ1" id="rVJ-Ug-fn2"/>
                 <outlet property="view" destination="xWX-kp-jyA" id="2n7-ru-kWu"/>
@@ -351,7 +352,7 @@
                                 </mask>
                             </variation>
                         </view>
-                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7p-nJ-Bz3">
+                        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d7p-nJ-Bz3">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="85z-nw-2rE" userLabel="View_subview">
@@ -645,7 +646,7 @@
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DAY NO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkI-iT-tlE">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMMENTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkI-iT-tlE" userLabel="COMMENTS">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="26" id="O9Y-ec-FQr"/>
@@ -667,58 +668,56 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lTM-c9-syc">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NNa-jM-fFQ">
-                                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="mM8-3V-BUg">
+                                                    <rect key="frame" x="-25" y="-30" width="97" height="30"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="38" id="hNT-rc-fpa"/>
-                                                        <constraint firstAttribute="width" constant="281" id="jmR-eS-Oin"/>
+                                                        <constraint firstAttribute="height" constant="38" id="4Tn-At-UX9"/>
+                                                        <constraint firstAttribute="width" constant="281" id="rR7-ca-sS1"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
+                                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
+                                                    <textInputTraits key="textInputTraits"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="hNT-rc-fpa"/>
-                                                            <exclude reference="jmR-eS-Oin"/>
+                                                            <exclude reference="4Tn-At-UX9"/>
+                                                            <exclude reference="rR7-ca-sS1"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <mask key="constraints">
-                                                            <include reference="hNT-rc-fpa"/>
-                                                            <include reference="jmR-eS-Oin"/>
+                                                            <include reference="4Tn-At-UX9"/>
+                                                            <include reference="rR7-ca-sS1"/>
                                                         </mask>
                                                     </variation>
-                                                </label>
+                                                </textField>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="281" id="6Le-Qe-LDU"/>
                                                 <constraint firstAttribute="height" constant="38" id="9m5-sy-cm2"/>
-                                                <constraint firstAttribute="trailing" secondItem="NNa-jM-fFQ" secondAttribute="trailing" id="iQF-5x-jsc">
-                                                    <variation key="heightClass=regular-widthClass=regular" constant="-4"/>
-                                                </constraint>
-                                                <constraint firstItem="NNa-jM-fFQ" firstAttribute="top" secondItem="lTM-c9-syc" secondAttribute="top" id="jSK-dJ-TMV"/>
+                                                <constraint firstItem="mM8-3V-BUg" firstAttribute="top" secondItem="lTM-c9-syc" secondAttribute="top" constant="4" id="GwD-9s-pst"/>
+                                                <constraint firstAttribute="trailing" secondItem="mM8-3V-BUg" secondAttribute="trailing" id="stZ-Uf-UV9"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
-                                                    <exclude reference="NNa-jM-fFQ"/>
+                                                    <exclude reference="mM8-3V-BUg"/>
                                                 </mask>
                                                 <mask key="constraints">
                                                     <exclude reference="6Le-Qe-LDU"/>
                                                     <exclude reference="9m5-sy-cm2"/>
-                                                    <exclude reference="iQF-5x-jsc"/>
-                                                    <exclude reference="jSK-dJ-TMV"/>
+                                                    <exclude reference="GwD-9s-pst"/>
+                                                    <exclude reference="stZ-Uf-UV9"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=regular">
                                                 <mask key="subviews">
-                                                    <include reference="NNa-jM-fFQ"/>
+                                                    <include reference="mM8-3V-BUg"/>
                                                 </mask>
                                                 <mask key="constraints">
                                                     <include reference="6Le-Qe-LDU"/>
                                                     <include reference="9m5-sy-cm2"/>
-                                                    <include reference="iQF-5x-jsc"/>
-                                                    <include reference="jSK-dJ-TMV"/>
+                                                    <include reference="GwD-9s-pst"/>
+                                                    <include reference="stZ-Uf-UV9"/>
                                                 </mask>
                                             </variation>
                                         </view>
@@ -1055,11 +1054,24 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oxd-W5-k76">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="38" id="nne-zy-vHK"/>
+                                                        <constraint firstAttribute="width" constant="281" id="vB3-hm-HH7"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
-                                                    <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                                        <rect key="frame" x="4" y="0.0" width="281" height="38"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="nne-zy-vHK"/>
+                                                            <exclude reference="vB3-hm-HH7"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <mask key="constraints">
+                                                            <include reference="nne-zy-vHK"/>
+                                                            <include reference="vB3-hm-HH7"/>
+                                                        </mask>
                                                     </variation>
                                                 </label>
                                             </subviews>
@@ -1067,6 +1079,9 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="38" id="ZLh-L1-TX8"/>
                                                 <constraint firstAttribute="width" constant="281" id="lOF-2a-VhG"/>
+                                                <constraint firstItem="Oxd-W5-k76" firstAttribute="top" secondItem="ebh-2w-65e" secondAttribute="top" id="pZC-9E-CwZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="Oxd-W5-k76" secondAttribute="bottom" id="sa6-tA-mNA"/>
+                                                <constraint firstAttribute="trailing" secondItem="Oxd-W5-k76" secondAttribute="trailing" constant="-4" id="vcS-TU-k7y"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="subviews">
@@ -1075,6 +1090,9 @@
                                                 <mask key="constraints">
                                                     <exclude reference="ZLh-L1-TX8"/>
                                                     <exclude reference="lOF-2a-VhG"/>
+                                                    <exclude reference="pZC-9E-CwZ"/>
+                                                    <exclude reference="sa6-tA-mNA"/>
+                                                    <exclude reference="vcS-TU-k7y"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=regular">
@@ -1084,10 +1102,13 @@
                                                 <mask key="constraints">
                                                     <include reference="ZLh-L1-TX8"/>
                                                     <include reference="lOF-2a-VhG"/>
+                                                    <include reference="pZC-9E-CwZ"/>
+                                                    <include reference="sa6-tA-mNA"/>
+                                                    <include reference="vcS-TU-k7y"/>
                                                 </mask>
                                             </variation>
                                         </view>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMMENTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbD-we-BHM">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DAY NO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cbD-we-BHM">
                                             <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="153" id="KVU-hi-tk1"/>
@@ -1109,27 +1130,28 @@
                                                 </mask>
                                             </variation>
                                         </label>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xOy-OH-2n3">
-                                            <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s2e-i0-jJA">
+                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="281" id="RL0-pO-BXf"/>
-                                                <constraint firstAttribute="height" constant="38" id="hJI-aH-csK"/>
+                                                <constraint firstAttribute="width" constant="281" id="lar-6l-aQf"/>
+                                                <constraint firstAttribute="height" constant="38" id="qJe-vh-XHe"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
                                             <variation key="default">
                                                 <mask key="constraints">
-                                                    <exclude reference="RL0-pO-BXf"/>
-                                                    <exclude reference="hJI-aH-csK"/>
+                                                    <exclude reference="lar-6l-aQf"/>
+                                                    <exclude reference="qJe-vh-XHe"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=regular">
                                                 <mask key="constraints">
-                                                    <include reference="RL0-pO-BXf"/>
-                                                    <include reference="hJI-aH-csK"/>
+                                                    <include reference="lar-6l-aQf"/>
+                                                    <include reference="qJe-vh-XHe"/>
                                                 </mask>
                                             </variation>
-                                        </textField>
+                                        </label>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -1138,10 +1160,10 @@
                                         </constraint>
                                         <constraint firstItem="Mmq-Tn-ung" firstAttribute="leading" secondItem="nkI-iT-tlE" secondAttribute="leading" id="1Dx-Qf-HHf"/>
                                         <constraint firstItem="nkI-iT-tlE" firstAttribute="leading" secondItem="gnw-Xf-GJF" secondAttribute="leading" id="1yb-DO-cJX"/>
-                                        <constraint firstAttribute="trailing" secondItem="xOy-OH-2n3" secondAttribute="trailing" constant="33" id="3D0-OV-x82"/>
                                         <constraint firstItem="iwW-Xu-9dN" firstAttribute="top" secondItem="wEe-9U-1oG" secondAttribute="bottom" constant="31" id="4O4-ua-9Zd"/>
                                         <constraint firstItem="6PQ-qH-ijP" firstAttribute="top" secondItem="gkQ-HV-iJW" secondAttribute="bottom" constant="9" id="66y-Hh-rZK"/>
                                         <constraint firstItem="gkQ-HV-iJW" firstAttribute="leading" secondItem="85z-nw-2rE" secondAttribute="leading" id="6tA-px-4ti"/>
+                                        <constraint firstItem="s2e-i0-jJA" firstAttribute="top" secondItem="ebh-2w-65e" secondAttribute="bottom" constant="42" id="7A4-uW-6iM"/>
                                         <constraint firstItem="UZv-sn-MNP" firstAttribute="leading" secondItem="85z-nw-2rE" secondAttribute="leading" constant="23" id="AUG-Go-xcJ"/>
                                         <constraint firstItem="lTM-c9-syc" firstAttribute="top" secondItem="UnD-p7-G49" secondAttribute="bottom" constant="49" id="BPF-iD-ajJ">
                                             <variation key="heightClass=regular-widthClass=regular" constant="37"/>
@@ -1169,7 +1191,6 @@
                                         </constraint>
                                         <constraint firstItem="gnw-Xf-GJF" firstAttribute="leading" secondItem="HNZ-HQ-N3D" secondAttribute="leading" id="TFn-XP-pSB"/>
                                         <constraint firstItem="ebh-2w-65e" firstAttribute="top" secondItem="rh7-0H-FP3" secondAttribute="bottom" constant="42" id="TG4-g4-H5w"/>
-                                        <constraint firstItem="xOy-OH-2n3" firstAttribute="top" secondItem="ebh-2w-65e" secondAttribute="bottom" constant="42" id="W2T-1j-BVp"/>
                                         <constraint firstItem="652-F7-MlS" firstAttribute="leading" secondItem="iwW-Xu-9dN" secondAttribute="leading" id="Xa0-n8-6fv">
                                             <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                         </constraint>
@@ -1189,6 +1210,7 @@
                                         </constraint>
                                         <constraint firstItem="7kl-oy-B8V" firstAttribute="top" secondItem="LKG-aS-F7s" secondAttribute="bottom" constant="28" id="jM8-U1-alQ"/>
                                         <constraint firstItem="NS2-BD-ay1" firstAttribute="top" secondItem="gkQ-HV-iJW" secondAttribute="bottom" constant="1" id="mUd-aa-QzX"/>
+                                        <constraint firstAttribute="trailing" secondItem="s2e-i0-jJA" secondAttribute="trailing" constant="33" id="mj3-Th-JGo"/>
                                         <constraint firstItem="Rr9-Nb-T79" firstAttribute="trailing" secondItem="Mmq-Tn-ung" secondAttribute="trailing" id="nJy-c5-kv9">
                                             <variation key="heightClass=regular-widthClass=regular" constant="-47"/>
                                         </constraint>
@@ -1236,12 +1258,10 @@
                                             <exclude reference="1ae-sg-RbQ"/>
                                             <exclude reference="ebh-2w-65e"/>
                                             <exclude reference="cbD-we-BHM"/>
-                                            <exclude reference="xOy-OH-2n3"/>
+                                            <exclude reference="s2e-i0-jJA"/>
                                         </mask>
                                         <mask key="constraints">
                                             <exclude reference="g8j-IR-yaB"/>
-                                            <exclude reference="3D0-OV-x82"/>
-                                            <exclude reference="W2T-1j-BVp"/>
                                             <exclude reference="CKt-yO-IdE"/>
                                             <exclude reference="gdE-wV-OAG"/>
                                             <exclude reference="66y-Hh-rZK"/>
@@ -1268,6 +1288,8 @@
                                             <exclude reference="1yb-DO-cJX"/>
                                             <exclude reference="aRJ-fE-E1z"/>
                                             <exclude reference="qjH-Tq-xJA"/>
+                                            <exclude reference="7A4-uW-6iM"/>
+                                            <exclude reference="mj3-Th-JGo"/>
                                             <exclude reference="Ps7-yr-fwf"/>
                                             <exclude reference="SBX-9T-VQ3"/>
                                             <exclude reference="Xa0-n8-6fv"/>
@@ -1315,12 +1337,10 @@
                                             <include reference="1ae-sg-RbQ"/>
                                             <include reference="ebh-2w-65e"/>
                                             <include reference="cbD-we-BHM"/>
-                                            <include reference="xOy-OH-2n3"/>
+                                            <include reference="s2e-i0-jJA"/>
                                         </mask>
                                         <mask key="constraints">
                                             <include reference="g8j-IR-yaB"/>
-                                            <include reference="3D0-OV-x82"/>
-                                            <include reference="W2T-1j-BVp"/>
                                             <include reference="CKt-yO-IdE"/>
                                             <include reference="gdE-wV-OAG"/>
                                             <include reference="66y-Hh-rZK"/>
@@ -1347,6 +1367,8 @@
                                             <include reference="1yb-DO-cJX"/>
                                             <include reference="aRJ-fE-E1z"/>
                                             <include reference="qjH-Tq-xJA"/>
+                                            <include reference="7A4-uW-6iM"/>
+                                            <include reference="mj3-Th-JGo"/>
                                             <include reference="Ps7-yr-fwf"/>
                                             <include reference="SBX-9T-VQ3"/>
                                             <include reference="Xa0-n8-6fv"/>
@@ -1462,7 +1484,7 @@
                                 <action selector="btn_delete:" destination="-1" eventType="touchUpInside" id="58w-Cx-cap"/>
                             </connections>
                         </button>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lgz-si-jFr">
+                        <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lgz-si-jFr">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>

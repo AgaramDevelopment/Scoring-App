@@ -12,6 +12,7 @@
 #import "Reachability.h"
 #import "DBManager.h"
 #import "UserRecord.h"
+#import "Utitliy.h"
 
 @interface LoginVC ()
 
@@ -56,7 +57,7 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
                 
-                NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.245:8087/CAPService.svc/LOGIN/%@/%@",userNameLbl,passwordLbl];
+                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETAUTHORIZATIONDETAILS/%@/%@/admin",[Utitliy getIPPORT] ,userNameLbl,passwordLbl];
                 NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                 
                 NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -67,27 +68,46 @@
                 
                 NSMutableDictionary *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
                 
+                NSMutableArray *errorItemArray = [rootDictionary objectForKey: @"lstErrorItem"];
+                NSMutableDictionary  *errorItemObj = [errorItemArray objectAtIndex:0];
                 
-                NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
-                NSLog(@"%@",errorCode);
-                
-                
-                if([errorCode boolValue] == YES)
-                {
-                    
+                if([[errorItemObj objectForKey:@"ErrorNo"] isEqual:@"MOB0005"]){
                     BOOL isUserLogin = YES;
                     
-                    NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+                    NSString *userCode = [rootDictionary valueForKey:@"UserFullname"];
+                    NSString *secureId = [rootDictionary valueForKey:@"SecureId"];
+
                     [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
                     [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+                    [[NSUserDefaults standardUserDefaults] setObject:secureId forKey:[Utitliy SecureId]];
                     [[NSUserDefaults standardUserDefaults] synchronize];
-                    
+                                        
                     [self openContentView];
-                    
                 }else{
                     
-                    [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+                    [self showDialog:[errorItemObj objectForKey:@"DataItem"] andTitle:@"Login failed"];
                 }
+                
+//                NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"lstErrorItem"];
+//                NSLog(@"%@",errorCode);
+//                
+//                
+//                if([errorCode boolValue] == YES)
+//                {
+//                    
+//                    BOOL isUserLogin = YES;
+//                    
+//                    NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+//                    [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+//                    [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+//                    [[NSUserDefaults standardUserDefaults] synchronize];
+//                    
+//                    [self openContentView];
+//                    
+//                }else{
+//                    
+//                    [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+//                }
                 [delegate hideLoading];
             });
             

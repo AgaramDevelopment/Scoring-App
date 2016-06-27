@@ -13,21 +13,23 @@
 #import "DBManager.h"
 
 @interface PenaltygridVC ()<UITableViewDataSource,UITableViewDelegate>
+@property(nonatomic,strong)NSDictionary *sample;
 
 @end
 
 @implementation PenaltygridVC
-@synthesize matchcode;
-@synthesize competitioncode;
+@synthesize matchCode;
+@synthesize competitionCode;
+@synthesize inningsNo;
 
 
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    _resultarray=[DBManager SetPenaltyDetailsForInsert:self.competitioncode :self.matchcode :@"2"];
+    self.resultarray =[[NSMutableArray alloc]init];
     
+    _resultarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
 }
 
 
@@ -73,6 +75,7 @@
     
 
     return cell;
+ 
 }
 
 
@@ -82,17 +85,21 @@
 {
     
     
+    
     PenalityVC *add = [[PenalityVC alloc]initWithNibName:@"PenalityVC" bundle:nil];
     
-    NSDictionary *sample=[self.resultarray objectAtIndex:indexPath.row];
-    add.test=sample;
+    NSDictionary *sample=[[NSDictionary alloc]init];
+    sample=[self.resultarray objectAtIndex:indexPath.row];
+    PenaltyDetailsRecord *veb=(PenaltyDetailsRecord*)[_resultarray objectAtIndex:indexPath.row];
     
-    add.competitioncode=competitioncode;
-    add.matchcode=matchcode;
-    
-    
+    add.penaltyDetailsRecord=veb;
+    add.competitionCode=competitionCode;
+    add.matchCode=matchCode;
+    add.inningsNo=inningsNo;
+  
+  
     [self addChildViewController:add];
-    add.view.frame =CGRectMake(-200, -200, add.view.frame.size.width, add.view.frame.size.height);
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
     [self.view addSubview:add.view];
     add.view.alpha = 0;
     [add didMoveToParentViewController:self];
@@ -104,6 +111,8 @@
                      completion:nil];
     
     
+    
+    
 }
 
 
@@ -111,12 +120,14 @@
     
     PenalityVC *penaltyvc = [[PenalityVC alloc]init];
     
-    penaltyvc.matchcode=self.matchcode;
-    penaltyvc.competitioncode=self.competitioncode;
+    penaltyvc.matchCode=self.matchCode;
+    penaltyvc.competitionCode=self.competitionCode;
+    penaltyvc.inningsNo=self.inningsNo;
     
+      
     [self.view addSubview:penaltyvc.view];
     [self addChildViewController:penaltyvc];
-    penaltyvc.view.frame =CGRectMake(0, 0, penaltyvc.view.frame.size.width-50, penaltyvc.view.frame.size.height);
+    penaltyvc.view.frame =CGRectMake(0, 0, penaltyvc.view.frame.size.width, penaltyvc.view.frame.size.height);
     [self.view addSubview:penaltyvc.view];
     penaltyvc.view.alpha = 0;
     [penaltyvc didMoveToParentViewController:self];

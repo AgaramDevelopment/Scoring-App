@@ -15,10 +15,16 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tbl_penaltyrecord;
 
-@property(nonatomic,strong) NSString *matchcode;
-@property(nonatomic,strong) NSString *competitioncode;
+@property(nonatomic,strong) NSString *matchCode;
+@property(nonatomic,strong) NSString *competitionCode;
+@property(nonatomic,strong) NSString *inningsNo;
 @property(nonatomic,strong) NSMutableArray *resultarray;
+@property(nonatomic,strong)NSMutableArray *penaltyDetailsRecord;
 
 - (IBAction)btn_addpenalty:(id)sender;
+- (IBAction)btn_back:(id)sender;
+
+
+
 
 @end

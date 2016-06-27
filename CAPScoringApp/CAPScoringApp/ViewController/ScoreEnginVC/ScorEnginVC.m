@@ -73,7 +73,7 @@
     //AppealBatsmen
     NSMutableArray *AppealBatsmenSelectionArray;
     NSArray*AppealBatsmenSelectCode;
-    
+    AppealBatsmenRecord *objAppealBatsmenEventRecord;
     
     //Remark
     NSString *remarks;
@@ -147,19 +147,25 @@
     //
     NSString *strpenalityruns;
     
-    PenalityVC *penalityVc;
+
     UISwipeGestureRecognizer *RightsideGesture;
     UISwipeGestureRecognizer *LeftsideGesture;
     BreakVC * breakvc;
     UIView * fullview;
-    RevicedOverVC * revicedOverVc ;
-    RevisedTarget  *revisedTarget;
+
     BOOL isTargetReached;
     NSString * overStatus;
     NSString * Umpire1Code;
     NSString * umpire2Code;
     NSString  *TEAMAWICKETKEEPER;
     NSString  *TEAMBWICKETKEEPER;
+    
+    PowerPlayGridVC *powerplaygridvc;
+    OtherWicketVC *otherwicketvc;
+    RevicedOverVC * revicedOverVc ;
+    RevisedTarget  *revisedTarget;
+    PenalityVC *penalityVc;
+    PenaltygridVC *penaltygridvc;
 
     
     NSString * alterviewSelect;
@@ -381,7 +387,7 @@ EndInnings *endInnings;
         tableView.dataSource = self;
         tableView.delegate = self;
     
-    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI A EDIT",@"PLAYING XI B EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     
     
     
@@ -482,7 +488,7 @@ EndInnings *endInnings;
     [self.view_batsmen .layer setMasksToBounds:YES];
     [_table_BatsmenName setHidden:YES];
     
-    AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
+  //  AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     
     self.view_bowlType.hidden = YES;
     self.view_fastBowl.hidden = YES;
@@ -1337,21 +1343,31 @@ EndInnings *endInnings;
     
     if (tableView == self.tanle_umpirename)
     {
-        static NSString *MyIdentifier = @"MyIdentifier";
-        
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-        
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                          reuseIdentifier:MyIdentifier];
-        }
+        static NSString *CellIdentifier = @"umpirecell";
+        umpiretablecell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                             forIndexPath:indexPath];
         
         objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
         
         
-        cell.textLabel.text =objAppealUmpireEventRecord.AppealUmpireName1;
-        cell.textLabel.text =objAppealUmpireEventRecord.AppealUmpireName2;
+        cell.umpirename1_lbl.text=objAppealUmpireEventRecord.AppealUmpireName1;
+        cell.umirename2_lbl.text=objAppealUmpireEventRecord.AppealUmpireName2;
+        
+//        static NSString *MyIdentifier = @"MyIdentifier";
+//        
+//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+//        
+//        if (cell == nil)
+//        {
+//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+//                                          reuseIdentifier:MyIdentifier];
+//        }
+//        
+//        objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
+//        
+//        
+//        cell.textLabel.text =objAppealUmpireEventRecord.AppealUmpireName1;
+//        //cell.textLabel.text =objAppealUmpireEventRecord.AppealUmpireName2;
         return cell;
     }
     
@@ -1360,19 +1376,15 @@ EndInnings *endInnings;
     
     if (tableView == self.table_BatsmenName)
     {
-        static NSString *MyIdentifier = @"MyIdentifier";
+        static NSString *CellIdentifier = @"Batsmancell";
+        Batsmancell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                            forIndexPath:indexPath];
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        fetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[AppealBatsmenArray objectAtIndex:indexPath.row];
         
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                          reuseIdentifier:MyIdentifier];
-        }
-        // ll.textLabel.text=[AppealComponentArray objectAtIndex:indexPath.row];
         
-        cell.textLabel.text =[AppealBatsmenArray objectAtIndex:indexPath.row];
-        return cell;
+        cell.Batsman1_lbl.text=fetchSEPageLoadRecord.strickerPlayerName;
+        cell.Batsman2_lbl.text=fetchSEPageLoadRecord.nonstrickerPlayerName;
     }
     
   
@@ -5310,35 +5322,39 @@ EndInnings *endInnings;
         else if(indexPath.row == 7)
         {
             NSLog(@"8");
-            [self PlayingXIEdit];
+            [self PlayingXIAEdit];
+        }else if(indexPath.row == 8)
+        {
+            NSLog(@"8");
+            [self PlayingXIBEdit];
         }
-        else if(indexPath.row == 8)
+        else if(indexPath.row == 9)
         {
             NSLog(@"9");
             [self MatchResult];
         }
-        else if(indexPath.row == 9)
+        else if(indexPath.row == 10)
         {
             NSLog(@"10");
             [self OtherWicket];
         }
-        else if(indexPath.row == 10)
+        else if(indexPath.row == 11)
         {
             NSLog(@"11");
             [self Penalty];
         }
 
-        else if(indexPath.row == 11)
+        else if(indexPath.row == 12)
         {
             NSLog(@"12");
             [self PowerPlay];
         }
-        else if(indexPath.row == 12)
+        else if(indexPath.row == 13)
         {
             NSLog(@"13");
             [self revisedoverview];
         }
-        else if(indexPath.row == 13)
+        else if(indexPath.row == 14)
         {
             NSLog(@"14");
             [self revisiedTarget];
@@ -5390,9 +5406,13 @@ EndInnings *endInnings;
         
         AppealUmpireSelectionArray=[[NSMutableArray alloc]init];
         objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
-        
-        self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName1;
-        self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName2;
+      
+            self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName1;
+            [self.Lbl_umpirename2 setHighlighted:YES];
+    
+        self.Lbl_umpirename2.text =objAppealUmpireEventRecord.AppealUmpireName2;
+          [self.Lbl_umpirename2 setHighlighted:YES];
+    
         // selectTeam=self.Wonby_lbl.text;
         AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode1;
         AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode2;
@@ -5407,11 +5427,14 @@ EndInnings *endInnings;
         
         
         AppealUmpireSelectionArray=[[NSMutableArray alloc]init];
-        // objAppealComponentEventRecord=(AppealComponentRecord*)[AppealBatsmenArray objectAtIndex:indexPath.row];
+      objAppealBatsmenEventRecord=(AppealBatsmenRecord*)[AppealBatsmenArray objectAtIndex:indexPath.row];
         
-        self.lbl_batsmen.text =[AppealBatsmenArray objectAtIndex:indexPath.row];
+        self.lbl_batsmen.text =objAppealBatsmenEventRecord.strikerbatsmenname;
+        self.Lbl_batsmen.text=objAppealBatsmenEventRecord.nonstrikerbatsmenname;
+
         // selectTeam=self.Wonby_lbl.text;
-        AppealComponentSelectCode=@"PYCOOOO050";
+       // AppealComponentSelectCode=fetchSEPageLoadRecord.strickerPlayerCode;
+        ;
         //   [AppealComponentSelectionArray addObject:objAppealComponentEventRecord];
         
         self.table_BatsmenName.hidden=YES;
@@ -6041,6 +6064,8 @@ EndInnings *endInnings;
     
     [self addChildViewController:breakvc];
     breakvc.view.frame =CGRectMake(90, 200, breakvc.view.frame.size.width, breakvc.view.frame.size.height);
+       [breakvc.Back_btn addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     
     [fullview addSubview:breakvc.view];
@@ -6077,7 +6102,7 @@ EndInnings *endInnings;
         //[self.view addSubview:add.view];
         breakvc.view.alpha = 0;
         [breakvc didMoveToParentViewController:self];
-        
+      //  Back_btn
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
              breakvc.view.alpha = 1;
@@ -6101,7 +6126,7 @@ EndInnings *endInnings;
     
       // endInnings = [[EndInnings alloc]init];
     
-    [endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
+    //[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
@@ -6128,6 +6153,9 @@ EndInnings *endInnings;
          endInning.view.alpha = 1;
      }
                      completion:nil];
+    
+    
+    [endInning fetchPageload:fetchSEPageLoadRecord:self.competitionCode:self.matchCode];
 }
 -(void)ENDDAY
 {
@@ -6175,7 +6203,11 @@ EndInnings *endInnings;
 {
     
 }
--(void)PlayingXIEdit
+-(void)PlayingXIAEdit
+{
+    
+}
+-(void)PlayingXIBEdit
 {
     
 }
@@ -6222,14 +6254,172 @@ EndInnings *endInnings;
 }
 -(void)OtherWicket
 {
+    otherwicketvc = [[OtherWicketVC alloc]initWithNibName:@"OtherWicketVC" bundle:nil];
+    otherwicketvc.competitioncode=self.competitionCode;
+    otherwicketvc.matchcode =self.matchCode;
+  //  otherwicketvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:otherwicketvc.view];
+    
+    otherwicketvc.view.frame =CGRectMake(90, 200, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
+    
+    otherwicketvc.view.alpha = 0;
+    [otherwicketvc didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         otherwicketvc.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
+    
+    if (IS_IPAD_PRO) {
+        
+        otherwicketvc.view.frame =CGRectMake(250, 500, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
+        otherwicketvc.view.alpha = 0;
+        [otherwicketvc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             otherwicketvc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+    
+    else{
+        otherwicketvc.view.frame =CGRectMake(100, 200, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
+        otherwicketvc.view.alpha = 0;
+        [otherwicketvc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             otherwicketvc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+
     
 }
 -(void)Penalty
 {
+    penaltygridvc = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
+    penaltygridvc.competitionCode=self.competitionCode;
+    penaltygridvc.matchCode =self.matchCode;
+    penaltygridvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:penaltygridvc.view];
+    
+    penaltygridvc.view.frame =CGRectMake(90, 200, penaltygridvc.view.frame.size.width, penaltygridvc.view.frame.size.height);
+    
+    penaltygridvc.view.alpha = 0;
+    [penaltygridvc didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         penaltygridvc.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
+    
+    if (IS_IPAD_PRO) {
+        
+        penaltygridvc.view.frame =CGRectMake(250, 500, penaltygridvc.view.frame.size.width, penaltygridvc.view.frame.size.height);
+        penaltygridvc.view.alpha = 0;
+        [penaltygridvc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             penaltygridvc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+    
+    else{
+        penaltygridvc.view.frame =CGRectMake(100, 200, penaltygridvc.view.frame.size.width, penaltygridvc.view.frame.size.height);
+        penaltygridvc.view.alpha = 0;
+        [penaltygridvc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             penaltygridvc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+
     
 }
 -(void)PowerPlay
 {
+    powerplaygridvc = [[PowerPlayGridVC alloc]initWithNibName:@"PowerPlayGridVC" bundle:nil];
+    powerplaygridvc.competitionCode=self.competitionCode;
+    powerplaygridvc.matchCode =self.matchCode;
+    powerplaygridvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:powerplaygridvc.view];
+    
+    powerplaygridvc.view.frame =CGRectMake(90, 200, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
+    
+    powerplaygridvc.view.alpha = 0;
+    [powerplaygridvc didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         powerplaygridvc.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
+    
+    if (IS_IPAD_PRO) {
+        
+        powerplaygridvc.view.frame =CGRectMake(250, 500, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
+        powerplaygridvc.view.alpha = 0;
+        [powerplaygridvc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             powerplaygridvc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+    
+    else{
+        powerplaygridvc.view.frame =CGRectMake(100, 200, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
+        powerplaygridvc.view.alpha = 0;
+        [powerplaygridvc didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             powerplaygridvc.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+
     
 }
 
@@ -6250,13 +6440,6 @@ EndInnings *endInnings;
     
     
     if (IS_IPAD_PRO) {
-        
-        
-        
-        
-        //vc2 *viewController = [[vc2 alloc]init];
-        
-        
         revisedTarget.view.frame =CGRectMake(250, 500, revisedTarget.view.frame.size.width, revisedTarget.view.frame.size.height);
         [self.view addSubview:revisedTarget.view];
         revisedTarget.view.alpha = 0;
@@ -6271,15 +6454,8 @@ EndInnings *endInnings;
     
     
     else{
-        //intialBreakVC *add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
-        
-        
-        
-        //vc2 *viewController = [[vc2 alloc]init];
-        // [self addChildViewController:add];
         
         revisedTarget.view.frame =CGRectMake(100, 200, revisedTarget.view.frame.size.width, revisedTarget.view.frame.size.height);
-        //[self.view addSubview:add.view];
         revisedTarget.view.alpha = 0;
         [revisedTarget didMoveToParentViewController:self];
         
@@ -6415,7 +6591,11 @@ EndInnings *endInnings;
     [dic setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
     [dic setValue:AppealUmpireSelectCode forKey:@"AppealUmpireSelct"];
     [dic setValue:AppealBatsmenSelectCode forKey:@"AppealBatsmenSelct"];
+    NSString*AppealBowlercode=fetchSEPageLoadRecord.currentBowlerPlayerCode;
+    [dic setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
     [dic setValue:commentText forKey:@"Commenttext"];
+    
+    [self.View_Appeal setHidden:YES];
 }
 
 
@@ -9721,17 +9901,18 @@ EndInnings *endInnings;
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     [fullview addSubview:Btn_Fullview];
     [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-   
+    
     
     [self.view addSubview:fullview];
-     revicedOverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
+    revicedOverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
     revicedOverVc.matchCode=self.matchCode;
     revicedOverVc.competitionCode =self.competitionCode;
+   // revicedOverVc.inningsNo = self.;
     [fullview addSubview:revicedOverVc.view];
-   
+    
     //[revicedOverVc.btn_submit addTarget:self action:@selector(btn_submit:) forControlEvents:UIControlEventTouchUpInside];
-
-   
+    
+    
     if (IS_IPAD_PRO) {
         
         
@@ -9765,7 +9946,7 @@ EndInnings *endInnings;
         revicedOverVc.view.frame =CGRectMake(100, 200, revicedOverVc.view.frame.size.width, revicedOverVc.view.frame.size.height);
         //[self.view addSubview:add.view];
         revicedOverVc.view.alpha = 0;
-       [revicedOverVc didMoveToParentViewController:self];
+        [revicedOverVc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
@@ -9773,15 +9954,6 @@ EndInnings *endInnings;
          }
                          completion:nil];
     }
- 
-//    RevicedOverVC *revisedoverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
-//    revisedoverVc.matchCode =self.matchCode;
-//    revisedoverVc.competitionCode =self.competitionCode;
-//
-//    [fullview addSubview:revisedoverVc.view];
-//    revisedoverVc.txt_comments.delegate=self;
-//    revisedoverVc.txt_overs.delegate=self;
-//    [revisedoverVc.btn_submit addTarget:self action:@selector(btn_submit:) forControlEvents:UIControlEventTouchUpInside];
 }
 //
 - (IBAction)btn_submit:(id)sender
@@ -10023,8 +10195,8 @@ if(self.checkInternetConnection){
     
          penalityVc = [[PenalityVC alloc]initWithNibName:@"PenalityVC" bundle:nil];
     
-    penalityVc.matchcode=self.matchCode;
-    penalityVc.competitioncode=self.competitionCode;
+    penalityVc.matchCode=self.matchCode;
+    penalityVc.competitionCode=self.competitionCode;
     
         [self.view addSubview:penalityVc.view];
     
