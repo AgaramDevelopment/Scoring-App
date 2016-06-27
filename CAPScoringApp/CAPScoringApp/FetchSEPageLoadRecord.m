@@ -291,12 +291,15 @@ BOOL  getOverStatus;
     NSString *battingwkts = [DBManager getBattingWkt:COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE:inns.INNINGSNO];
     NSInteger battingsWickets = [battingwkts integerValue];
     //team over
-    NSString *teamOver = [DBManager getTeamOver:COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE:inns.INNINGSNO];
-    NSInteger teamOvers = [teamOver integerValue];
+    NSString *teamOver = [DBManager getTeamOver:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO];
+    
+    NSInteger teamOvers = [teamOver intValue];
     
     
     
-    NSString *teamOverBall = [DBManager getTeamOverBall:COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE:inns.INNINGSNO:batTeamOver];
+    NSString *teamOverBall = [DBManager getTeamOverBall:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :inns.INNINGSNO :batTeamOver]; 
+    
+    
     //BATTEAMOVERS
     NSInteger teamOvsBall = [teamOverBall integerValue];
     

@@ -48,10 +48,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
--(void) UpdateScoreBoard:(NSString *) BALLCODE:(NSString *) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSNumber*)INNINGSNO :(NSString *)BATSMANCODE:(NSNumber *) ISFOUR:(NSNumber*)ISSIX:(NSNumber*)RUNS:(NSNumber*)OVERTHROW:(NSNumber*)ISWICKET :(NSString *)WICKETTYPE:(NSString *)WICKETPLAYER:(NSString*)BOWLERCODE:(NSString*)OVERNO:(NSNumber*)BALLNO:(NSNumber*)WICKETSCORE :(NSNumber *)WIDE:(NSNumber *)NOBALL:(NSNumber*)BYES	:(NSNumber*)LEGBYES:(NSNumber*)PENALTY:(NSNumber*)ISDELETE :(NSNumber *)ISWICKETUNDO:(NSNumber *)F_ISWICKETCOUNTABLE:(NSNumber*)F_ISWICKET :(NSNumber*)F_WICKETTYPE
++(void) UpdateScoreBoard:(NSString *) BALLCODE:(NSString *) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSNumber*)INNINGSNO :(NSString *)BATSMANCODE:(NSNumber *) ISFOUR:(NSNumber*)ISSIX:(NSNumber*)RUNS:(NSNumber*)OVERTHROW:(NSNumber*)ISWICKET :(NSString *)WICKETTYPE:(NSString *)WICKETPLAYER:(NSString*)BOWLERCODE:(NSString*)OVERNO:(NSNumber*)BALLNO:(NSNumber*)WICKETSCORE :(NSNumber *)WIDE:(NSNumber *)NOBALL:(NSNumber*)BYES	:(NSNumber*)LEGBYES:(NSNumber*)PENALTY:(NSNumber*)ISDELETE :(NSNumber *)ISWICKETUNDO:(NSNumber *)F_ISWICKETCOUNTABLE:(NSNumber*)F_ISWICKET :(NSNumber*)F_WICKETTYPE
 {
 
-   
+    NSString* F_STRIKERCODE = [[NSString alloc] init];
+    NSString* F_BOWLERCODE = [[NSString alloc] init];
+    NSNumber* F_ISLEGALBALL = [[NSNumber alloc] init];
+    NSNumber* F_OVERS = [[NSNumber alloc] init];
+    NSNumber* F_BALLS = [[NSNumber alloc] init];
+    NSNumber* F_RUNS = [[NSNumber alloc] init];
+    NSNumber* F_OVERTHROW = [[NSNumber alloc] init];
+    NSNumber* F_ISFOUR = [[NSNumber alloc] init];
+    NSNumber* F_ISSIX = [[NSNumber alloc] init];
+    NSNumber* F_WIDE = [[NSNumber alloc] init];
+    NSNumber* F_NOBALL = [[NSNumber alloc] init];
+    NSNumber* F_BYES = [[NSNumber alloc] init];
+    NSNumber* F_LEGBYES = [[NSNumber alloc] init];
+    NSNumber* F_PENALTY = [[NSNumber alloc] init];
+    NSNumber* F_WICKETNO = [[NSNumber alloc] init];
+    NSString* F_WICKETPLAYER = [[NSString alloc] init];
+    NSString* F_FIELDINGPLAYER = [[NSString alloc] init];
     
     [DBManagerEndBall SELECTALLUPSC : COMPETITIONCODE: MATCHCODE: BALLCODE ];
     
@@ -62,6 +78,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     O_RUNSvalue=F_RUNS.intValue + F_OVERTHROW.intValue + F_BYES.intValue + F_LEGBYES.intValue + F_NOBALL.intValue + F_WIDE.intValue + F_PENALTY.intValue;
     
     N_RUNSvalue= RUNS.intValue + OVERTHROW.intValue + BYES.intValue + LEGBYES.intValue + NOBALL.intValue + WIDE.intValue + PENALTY.intValue;
+    
+    NSString* O_RUNS = [[NSNumber alloc] init];
+    NSString* N_RUNS = [[NSNumber alloc] init];
     
     O_RUNS = [NSString stringWithFormat:@"%d",O_RUNSvalue]  ;
     N_RUNS = [NSString stringWithFormat:@"%d",N_RUNSvalue];  ;
@@ -76,10 +95,41 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         [DBManagerEndBall UPDATEBATTINGSUMMARYUPSC:O_RUNS :N_RUNS :COMPETITIONCODE :MATCHCODE :INNINGSNO];
     }
     
-   
+    NSNumber* F_BOWLEROVERS = [[NSNumber alloc] init];
+    NSNumber* F_BOWLERBALLS = [[NSNumber alloc] init];
+    NSNumber* F_BOWLERRUNS = [[NSNumber alloc] init];
+    NSNumber* F_BOWLERMAIDENS = [[NSNumber alloc] init];
+    NSNumber* F_BOWLERWICKETS = [[NSNumber alloc] init];
+    NSNumber* F_BOWLERNOBALLS = [[NSNumber alloc] init];
+    NSNumber* F_BOWLERWIDES = [[NSNumber alloc] init];
+    NSNumber* F_BOWLERDOTBALLS = [[NSNumber alloc] init];
+    NSNumber* F_BOWLERFOURS = [[NSNumber alloc] init];
+    NSNumber* F_BOWLERSIXES = [[NSNumber alloc] init];
+    
+    
     [DBManagerEndBall SELECTINNBOWLEROVERSUPSC : COMPETITIONCODE:MATCHCODE:BOWLINGTEAMCODE:INNINGSNO:F_BOWLERCODE ];
     
-   
+    
+    NSNumber* U_BOWLEROVERS = [[NSNumber alloc] init];
+    NSNumber* U_BOWLERBALLS = [[NSNumber alloc] init];
+    NSNumber* U_BOWLERPARTIALOVERBALLS = [[NSNumber alloc] init];
+    NSNumber* U_BOWLERRUNS = [[NSNumber alloc] init];
+    NSNumber* U_BOWLERMAIDENS = [[NSNumber alloc] init];
+    NSNumber* U_BOWLERWICKETS = [[NSNumber alloc] init];
+    NSNumber* U_BOWLERNOBALLS = [[NSNumber alloc] init];
+    NSNumber* U_BOWLERWIDES = [[NSNumber alloc] init];
+    NSNumber* U_BOWLERDOTBALLS = [[NSNumber alloc] init];
+    NSNumber* U_BOWLERFOURS = [[NSNumber alloc] init];
+    NSNumber* U_BOWLERSIXES = [[NSNumber alloc] init];
+    NSNumber* BOWLERCOUNT = [[NSNumber alloc] init];
+    NSNumber* ISOVERCOMPLETE = [[NSNumber alloc] init];
+    
+    
+    NSString * TEAMCODE;
+    NSString *F_OVERNO;
+    NSString *OVERS;
+    NSString *O_WICKETNO;
+    NSString * U_BOWLERCODE;
     ISOVERCOMPLETE = [DBManagerEndBall GETISOVERCOMPLETE : COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:F_OVERS ];
     BOWLERCOUNT  = [DBManagerEndBall GETBALLCOUNT : COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:OVERNO ];
     
@@ -88,6 +138,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     NSNumber* ISBOWLERCHANGED;
     ISBOWLERCHANGED = (BOWLERCODE != F_BOWLERCODE) ? @1 : @0;
     
+    NSNumber*F_BOWLERPARTIALOVERBALLS;
+
     if([ISDELETE  isEqual: @1])
     {
         if(ISOVERCOMPLETE == 0 || BOWLERCOUNT > [NSNumber numberWithInt:1])
@@ -198,10 +250,177 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
     }
 }
-    //DBManager.h
-    //UpdateScoreCard
-    //DBManager.M
-    //UpdateScoreCard
+
+
++(void) UpdateScoreEngine:(NSString *)BALLCODE:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSNumber*)OVERNO:(NSNumber*)BALLNO:(NSNumber*)BALLCOUNT:(NSNumber*)SESSIONNO:(NSNumber*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)WICKETKEEPERCODE:(NSString*)UMPIRE1CODE:(NSString*)UMPIRE2CODE:(NSString*)ATWOROTW:(NSString*)BOWLINGEN:(NSString*)BOWLTYPE:(NSString*)SHOTTYPE:(NSString*)SHOTTYPECATEGORY:(NSString*)ISLEGALBALL:(NSString*)ISFOUR:(NSString*)ISSIX:(NSString*)RUNS:(NSNumber*)OVERTHROW:(NSNumber*)TOTALRUNS:(NSNumber*)WIDE:(NSNumber*)NOBALL:(NSNumber*)BYES:(NSNumber*)LEGBYES:(NSNumber*)PENALTY:(NSNumber*)TOTALEXTRAS:(NSNumber*)GRANDTOTAL:(NSNumber*)RBW:(NSString*)PMLINECODE:(NSString*)PMLENGTHCODE:(NSString*)PMSTRIKEPOINT:(NSString*)PMSTRIKEPOINTLINECODE:(NSNumber*)PMX1:(NSNumber*)PMY1:(NSNumber*)PMX2:(NSNumber*)PMY2:(NSNumber*)PMX3:(NSNumber*)PMY3:(NSString*)WWREGION:(NSNumber*)WWX1:(NSNumber*)WWY1:(NSNumber*)WWX2:(NSNumber*)WWY2:(NSNumber*)BALLDURATION:(NSString*)ISAPPEAL:(NSString*)ISBEATEN:(NSString*)ISUNCOMFORT:(NSString*)ISWTB:(NSString*)ISRELEASESHOT:(NSString*)MARKEDFOREDIT:(NSString*)REMARKS:(NSNumber*)ISWICKET:(NSString*)WICKETTYPE:(NSString*)WICKETPLAYER:(NSString*)FIELDINGPLAYER:(NSNumber*)ISWICKETUNDO:(NSString*)AWARDEDTOTEAMCODE:(NSNumber*)PENALTYRUNS:(NSString*)PENALTYTYPECODE:(NSString*)PENALTYREASONCODE:(NSString*)BALLSPEED:(NSString*)UNCOMFORTCLASSIFCATION:(NSString*)WICKETEVENT
+{
+    NSString* BATTINGTEAMCODE = [[NSString alloc] init];
+    NSString* BOWLINGTEAMCODE = [[NSString alloc] init];
+    NSString* BATTEAMSHORTNAME = [[NSString alloc] init];
+    NSString* BOWLTEAMSHORTNAME = [[NSString alloc] init];
+    NSString* BATTEAMNAME = [[NSString alloc] init];
+    NSString* BOWLTEAMNAME = [[NSString alloc] init];
+    NSNumber* MATCHOVERS = [[NSNumber alloc] init];
+    NSString* BATTEAMLOGO = [[NSString alloc] init];
+    NSString* BOWLTEAMLOGO = [[NSString alloc] init];
+    NSString* MATCHTYPE = [[NSString alloc] init];
+    NSNumber* OLDISLEGALBALL = [[NSNumber alloc] init];
+    NSString* OLDBOWLERCODE = [[NSString alloc] init];
+    NSString* OLDSTRIKERCODE = [[NSString alloc] init];
+    NSString* OLDNONSTRIKERCODE = [[NSString alloc] init];
+    
+    NSMutableArray *GetDataArrayUpdateScoreEngine=[ DBManagerEndBall GetDataFromUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
+    if(GetDataArrayUpdateScoreEngine.count>0)
+    {
+        OLDISLEGALBALL=[GetDataArrayUpdateScoreEngine objectAtIndex:0];
+        OLDBOWLERCODE=[GetDataArrayUpdateScoreEngine objectAtIndex:1];
+        OLDSTRIKERCODE=[GetDataArrayUpdateScoreEngine objectAtIndex:2];
+        OLDNONSTRIKERCODE=[GetDataArrayUpdateScoreEngine objectAtIndex:3];
+        
+        
+    }
+    
+    BATTINGTEAMCODE =TEAMCODE;
+    
+    NSNumber* F_ISWICKET = [[NSNumber alloc] init];
+    NSNumber* F_ISWICKETCOUNTABLE = [[NSNumber alloc] init];
+    NSString* F_WICKETTYPE = [[NSString alloc] init];
+    
+    F_ISWICKETCOUNTABLE = [ DBManagerEndBall GetWicCountUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
+    
+    F_ISWICKET = [ DBManagerEndBall GetISWicCountUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
+    
+    F_WICKETTYPE = [ DBManagerEndBall GetWicTypeUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
+    
+    if(ISWICKET.intValue == 1)
+    {
+        
+        if( [DBManagerEndBall GetBallCodeExistsUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ] != 0)
+        {
+            [DBManagerEndBall UpdateWicEventsUpdateScoreEngine : WICKETTYPE :WICKETPLAYER:FIELDINGPLAYER:WICKETEVENT:COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
+        }
+        else
+        {
+            NSString *WICKETNO;
+            WICKETNO = [ DBManagerEndBall GetWicketNoUpdateScoreEngine :COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO ];
+            [DBManagerEndBall InsertWicEventsUpdateScoreEngine : BALLCODE:COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:ISWICKET:WICKETNO:WICKETTYPE:WICKETPLAYER:FIELDINGPLAYER:WICKETEVENT];
+        }
+        WICKETPLAYER =[ DBManagerEndBall GetWicPlayersUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO ];
+        
+        if(ISWICKETUNDO.intValue == 1)
+        {
+            NSNumber* WICKETNO = [[NSNumber alloc] init];
+            WICKETNOS = [ DBManagerEndBall GetWicketNoUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO ];
+            [DBManagerEndBall DeleteWicketUpdateScoreEngine : COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
+            //BALLCODE = [ DBManager UpdateWicketEveUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO ]
+            [ DBManagerEndBall UpdateWicketEveUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO ];
+        }
+        [self UpdateScoreBoard: BALLCODE:COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:BOWLINGTEAMCODE:INNINGSNO:STRIKERCODE:ISFOUR:ISSIX:RUNS:OVERTHROW:ISWICKET:WICKETTYPE:WICKETPLAYER:BOWLERCODE:OVERNO:BALLNO:0:WIDE:NOBALL:BYES:LEGBYES:0:0:ISWICKETUNDO:F_ISWICKETCOUNTABLE:F_ISWICKET:F_WICKETTYPE];
+    }
+    if( STRIKERCODE != OLDSTRIKERCODE || NONSTRIKERCODE != OLDNONSTRIKERCODE)
+    {
+        [DBManagerEndBall UpdateBattingOrderUpdateScoreEngine : COMPETITIONCODE, MATCHCODE,INNINGSNO,COMPETITIONCODE, MATCHCODE,INNINGSNO ];
+        [DBManagerEndBall UpdateBowlingOrderUpdateScoreEngine : COMPETITIONCODE, MATCHCODE,INNINGSNO,COMPETITIONCODE, MATCHCODE,INNINGSNO ];
+        [DBManagerEndBall DeleteRemoveUnusedBatFBSUpdateScoreEngine : COMPETITIONCODE, MATCHCODE,BOWLINGTEAMCODE,INNINGSNO,COMPETITIONCODE, MATCHCODE,BOWLINGTEAMCODE,INNINGSNO ];
+        [DBManagerEndBall DeleteRemoveUnusedBowFBSUpdateScoreEngine : COMPETITIONCODE, MATCHCODE,BOWLINGTEAMCODE,INNINGSNO,COMPETITIONCODE, MATCHCODE,BOWLINGTEAMCODE,INNINGSNO ];
+        if(AWARDEDTOTEAMCODE.length > 0)
+        {
+            if( [DBManagerEndBall GetPenaltyBallCodeUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE : INNINGSNO: BALLCODE ] != 0)
+            {
+                [DBManagerEndBall UpdatePenaltyScoreEngine : AWARDEDTOTEAMCODE :PENALTYRUNS : PENALTYTYPECODE : PENALTYREASONCODE :COMPETITIONCODE:MATCHCODE:TEAMCODE:BALLCODE ];
+            }
+            else
+            {
+                NSString* MAXID = [[NSString alloc] init];
+                NSString* PENALTYCODE = [[NSString alloc] init];
+                MAXID = [DBManagerEndBall GetMaxidUpdateScoreEngine];
+                PENALTYCODE = 'PNT' + RIGHT(REPLICATE('0',7)+CAST(@MAXID AS VARCHAR(7)),7)
+                [DBManager InsertPenaltyScoreEngine :COMPETITIONCODE,MATCHCODE,INNINGSNO,BALLCODE,PENALTYCODE,AWARDEDTOTEAMCODE,PENALTYRUNS,PENALTYTYPECODE,PENALTYREASONCODE ];
+            }
+            if(OLDISLEGALBALL == 1 && ISLEGALBALL == 0)
+            {
+                [DBManagerEndBall UpdateBallPlusoneScoreEngine  : COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BALLCODE ];
+                [DBManagerEndBall UpdateBallMinusoneScoreEngine :COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BALLCODE ];
+            }
+            else if(OLDISLEGALBALL == 0 && ISLEGALBALL == 1)
+            {
+                [DBManagerEndBall LegalBallByOverNoUpdateScoreEngine  : COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BALLNO];
+                [DBManagerEndBall LegalBallCountUpdateScoreEngine :BALLCOUNT,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BALLNO,BALLCOUNT];
+            }
+            NSString* LASTBALLCODE = [[NSString alloc] init];
+            LASTBALLCODE = [DBManagerEndBall LastBallCodeUPSE  : MATCHCODE,INNINGSNO];
+            if(BALLCODE = LASTBALLCODE)
+            {
+                NSString* CURRENTSTRIKERCODE = [[NSString alloc] init];
+                NSString* CURRENTNONSTRIKERCODE = [[NSString alloc] init];
+                NSString* CURRENTBOWLERCODE = [[NSString alloc] init];
+                NSNumber* OVERSTATUS = [[NSNumber alloc] init];
+                OVERSTATUS =  [DBManagerEndBall OverStatusUPSE  : COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
+                CURRENTSTRIKERCODE = STRIKERCODE, CURRENTNONSTRIKERCODE = NONSTRIKERCODE, CURRENTBOWLERCODE = BOWLERCODE;
+                NSString* T_STRIKERCODE = [[NSString alloc] init];
+                NSString* T_NONSTRIKERCODE = [[NSString alloc] init];
+                NSNumber* T_TOTALRUNS = [[NSNumber alloc] init];
+                
+                T_TOTALRUNS = (TOTALRUNS + (CASE WHEN @WIDE > 0 THEN WIDE-1 ELSE WIDE END) +
+                               (CASE WHEN NOBALL > 0 THEN NOBALL-1 ELSE NOBALL END) + LEGBYES + BYES + (CASE WHEN (BYES > 0 OR LEGBYES > 0) THEN OVERTHROW ELSE 0 END))
+                if((T_TOTALRUNS%2) = 0)
+                {
+                    T_STRIKERCODE = CASE WHEN OVERSTATUS = 1 THEN NONSTRIKERCODE ELSE STRIKERCODE END;
+                    T_NONSTRIKERCODE = CASE WHEN OVERSTATUS = 1 THEN STRIKERCODE ELSE NONSTRIKERCODE END;
+                }
+                else
+                {
+                    T_STRIKERCODE = CASE WHEN OVERSTATUS = 1 THEN STRIKERCODE ELSE NONSTRIKERCODE END;
+                    T_NONSTRIKERCODE = CASE WHEN OVERSTATUS = 1 THEN NONSTRIKERCODE ELSE STRIKERCODE END;
+                }
+                [DBManager InningEveUpdateScoreEngine :T_STRIKERCODE,T_NONSTRIKERCODE,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
+                
+            }
+            if( [DBManager BallCodeUPSE :  COMPETITIONCODE ,MATCHCODE,INNINGSNO,OVERNO,OLDBOWLERCODE ] != 0)
+            {
+                [DBManager DeleteOverDetailsUPSE  :  COMPETITIONCODE ,MATCHCODE,INNINGSNO,OVERNO,OLDBOWLERCODE ];
+                NSString* OTHERBOWLEROVERBALLCNT = [[NSString alloc] init];
+                [DBManager OtherOverBallcntUPSE  :  COMPETITIONCODE ,MATCHCODE,INNINGSNO,OVERNO ];
+                
+                NSString* OTHERBOWLER = [[NSString alloc] init];
+                [DBManager OtherOverBallcntUPSE  :  COMPETITIONCODE ,MATCHCODE,INNINGSNO,OVERNO,BOWLERCODE];
+                
+                if OTHERBOWLEROVERBALLCNT > 0
+                {
+                    NSString* OTHERBOWLER = [[NSString alloc] init];
+                    [DBManager IsMaidenOverUPSE  :  COMPETITIONCODE ,MATCHCODE,INNINGSNO,OVERNO,BOWLERCODE];
+                    NSString* ISMAIDENOVER = [[NSString alloc] init];
+                    [DBManager IsOverCompleteUPSE  :  COMPETITIONCODE ,MATCHCODE,INNINGSNO,OVERNO,BOWLERCODE];
+                }
+                if(ISMAIDENOVER = 1 && ISOVERCOMPLETE = 1)
+                {
+                    [DBManager BowMadienSummUPSE  :  COMPETITIONCODE ,MATCHCODE,INNINGSNO,OVERNO,BOWLERCODE];
+                    U_BOWLERMAIDENS = 1;
+                }
+                if(ISOVERCOMPLETE = 1)
+                {
+                    [DBManager BowSummaryOverplusoneUPSE  : COMPETITIONCODE,MATCHCODE,BOWLINGTEAMCODE,INNINGSNO,OTHERBOWLER, OVERNO];
+                }
+                else
+                {
+                    [DBManager BowSummaryUPSE  : COMPETITIONCODE,MATCHCODE,BOWLINGTEAMCODE,INNINGSNO,OTHERBOWLER, OVERNO];
+                }			
+                [DBManager BowSummaryUPSE  : COMPETITIONCODE,MATCHCODE,INNINGSNO];
+            }		
+        }
+    }
+}
+
+
+
+
+
+
+
+//DBManager.h
+//UpdateScoreCard
+//DBManager.M
+//UpdateScoreCard
 +(NSString*) SELECTALLUPSC :(NSNumber*) COMPETITIONCODE:(NSNumber*) MATCHCODE:(NSString*) BALLCODE
     {
         NSString *databasePath = [self getDBPath];
