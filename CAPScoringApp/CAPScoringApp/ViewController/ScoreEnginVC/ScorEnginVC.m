@@ -5716,7 +5716,7 @@ EndInnings *endInnings;
     
        endInnings = [[EndInnings alloc]init];
     
-    [endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
+    //[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
@@ -5743,6 +5743,9 @@ EndInnings *endInnings;
          endInning.view.alpha = 1;
      }
                      completion:nil];
+    
+    
+    [endInning fetchPageload:fetchSEPageLoadRecord:self.competitionCode:self.matchCode];
 }
 -(void)ENDDAY
 {
