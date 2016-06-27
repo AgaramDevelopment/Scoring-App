@@ -158,6 +158,7 @@
 		CE7463A91D166F8200D69CD9 /* UpdateBreakVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */; };
 		CE7463AC1D16942200D69CD9 /* UpdateBreaksArrayDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463AB1D16942200D69CD9 /* UpdateBreaksArrayDetails.m */; };
 		CE7463B31D16B03800D69CD9 /* DeleteEventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463B21D16B03800D69CD9 /* DeleteEventRecord.m */; };
+		CE8AC79B1D213A5B0068B0AF /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = CE8AC79A1D213A5B0068B0AF /* TNCA_DATABASE.sqlite */; };
 		CEC305811D014C3400301ED3 /* AppealSystemRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305801D014C3400301ED3 /* AppealSystemRecords.m */; };
 		CEC305841D01566100301ED3 /* AppealComponentRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305831D01566100301ED3 /* AppealComponentRecord.m */; };
 		CEC305871D015BB900301ED3 /* AppealUmpireRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305861D015BB800301ED3 /* AppealUmpireRecord.m */; };
@@ -462,6 +463,7 @@
 		CE7463AB1D16942200D69CD9 /* UpdateBreaksArrayDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBreaksArrayDetails.m; sourceTree = "<group>"; };
 		CE7463B11D16B03800D69CD9 /* DeleteEventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteEventRecord.h; sourceTree = "<group>"; };
 		CE7463B21D16B03800D69CD9 /* DeleteEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteEventRecord.m; sourceTree = "<group>"; };
+		CE8AC79A1D213A5B0068B0AF /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		CEC3057F1D014C3400301ED3 /* AppealSystemRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealSystemRecords.h; sourceTree = "<group>"; };
 		CEC305801D014C3400301ED3 /* AppealSystemRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppealSystemRecords.m; sourceTree = "<group>"; };
 		CEC305821D01566100301ED3 /* AppealComponentRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealComponentRecord.h; sourceTree = "<group>"; };
@@ -1316,6 +1318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186DC8191D21451500293B7F /* EndDayTVC.m in Sources */,
 				187620FE1D1D0126006E160F /* DBManagerEndDay.m in Sources */,
 				187625091D154495009374F8 /* RevicedOverVC.m in Sources */,
 				246125191D13C85E004B85E7 /* Reachability.m in Sources */,

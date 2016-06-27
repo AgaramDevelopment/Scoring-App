@@ -5665,6 +5665,8 @@ EndInnings *endInnings;
     
     [self addChildViewController:breakvc];
     breakvc.view.frame =CGRectMake(90, 200, breakvc.view.frame.size.width, breakvc.view.frame.size.height);
+       [breakvc.Back_btn addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     
     [fullview addSubview:breakvc.view];
@@ -5701,7 +5703,7 @@ EndInnings *endInnings;
         //[self.view addSubview:add.view];
         breakvc.view.alpha = 0;
         [breakvc didMoveToParentViewController:self];
-        
+      //  Back_btn
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
              breakvc.view.alpha = 1;
