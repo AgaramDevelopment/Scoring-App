@@ -14,7 +14,7 @@
 -(void) DeleteEndDay:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)INNINGSNO:(NSString*)DAYNO
 {
     // int R_INNINGSNO;
-    if(![DBManagerEndDay GetBallCodeForDeleteEndDay : COMPETITIONCODE : MATCHCODE : DAYNO] && ![DBManagerEndDay GetDayEventsForDeleteEndDay : COMPETITIONCODE : MATCHCODE : DAYNO])
+    if([[DBManagerEndDay GetBallCodeForDeleteEndDay : COMPETITIONCODE : MATCHCODE : DAYNO] isEqual:@""] && ![DBManagerEndDay GetDayEventsForDeleteEndDay : COMPETITIONCODE : MATCHCODE : DAYNO])
     {
         [DBManagerEndDay DeleteDayEventsForDeleteEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO];
     }

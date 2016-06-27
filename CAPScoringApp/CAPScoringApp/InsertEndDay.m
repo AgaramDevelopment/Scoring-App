@@ -32,7 +32,7 @@
     
     SESSIONNO=[DBManagerEndDay GetMaxSessionNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO];
     
-    if(SESSIONNO==nil)
+    if([SESSIONNO isEqual:@""])
     {
         SESSIONNO= @"1";
         
@@ -61,9 +61,9 @@
     RUNSSCORED=[DBManagerEndDay GetRunsScoredForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : SESSIONNO : INNINGSNO : DAYNO];
     WICKETLOST=[DBManagerEndDay GetWicketLostForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO : SESSIONNO];
     
-    if(![DBManagerEndDay GetDayNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO : DAYNO])
+    if([[DBManagerEndDay GetDayNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO : DAYNO] isEqual:@""])
     {
-        if(![DBManagerEndDay GetStartTimeForInsertEndDay : STARTTIMEFORMAT : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE])
+        if([[DBManagerEndDay GetStartTimeForInsertEndDay : STARTTIMEFORMAT : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE] isEqual:@""])
         {
             
             [DBManagerEndDay SetDayEventsForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : STARTTIME : ENDTIME : DAYNO : BATTINGTEAMCODE : TOTALRUNS : TOTALOVERS : TOTALWICKETS : COMMENTS];
