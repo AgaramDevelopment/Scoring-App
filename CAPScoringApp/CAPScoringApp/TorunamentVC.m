@@ -48,12 +48,26 @@
         refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
         
         
+        resultArray=[[NSMutableArray alloc]init];
+        NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
+        for(int i=0; i < [FetchCompitionArray count]; i++)
+        {
+            
+            EventRecord *objEventRecord=(EventRecord*)[FetchCompitionArray objectAtIndex:i];
+            NSLog(@"%@",objEventRecord.recordstatus);
+            NSString *matchStatus=objEventRecord.recordstatus;
+            if([matchStatus isEqualToString:@"MSC001"])
+            {
+                [resultArray addObject:objEventRecord];
+            }
+            //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
+        }
         
-        [refresh addTarget:self action:@selector(crunchNumbers)
-         
-          forControlEvents:UIControlEventValueChanged];
         
+        [self.tableView reloadData];
         
+        [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:2.5];
+        [refreshControl endRefreshing];
         
         [self.tableView addSubview:refresh];
     }
