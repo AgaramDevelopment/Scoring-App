@@ -11,4 +11,5 @@
 @interface Utitliy : NSObject
 +(NSString *) getIPPORT;
 +(NSString *)getSyncIPPORT;
++(NSString *) SecureId;
 @end

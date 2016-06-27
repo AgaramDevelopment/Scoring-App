@@ -374,7 +374,7 @@ EndInnings *endInnings;
         tableView.dataSource = self;
         tableView.delegate = self;
     
-    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI A EDIT",@"PLAYING XI B EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     
     
     
@@ -4916,35 +4916,39 @@ EndInnings *endInnings;
         else if(indexPath.row == 7)
         {
             NSLog(@"8");
-            [self PlayingXIEdit];
+            [self PlayingXIAEdit];
+        }else if(indexPath.row == 8)
+        {
+            NSLog(@"8");
+            [self PlayingXIBEdit];
         }
-        else if(indexPath.row == 8)
+        else if(indexPath.row == 9)
         {
             NSLog(@"9");
             [self MatchResult];
         }
-        else if(indexPath.row == 9)
+        else if(indexPath.row == 10)
         {
             NSLog(@"10");
             [self OtherWicket];
         }
-        else if(indexPath.row == 10)
+        else if(indexPath.row == 11)
         {
             NSLog(@"11");
             [self Penalty];
         }
 
-        else if(indexPath.row == 11)
+        else if(indexPath.row == 12)
         {
             NSLog(@"12");
             [self PowerPlay];
         }
-        else if(indexPath.row == 12)
+        else if(indexPath.row == 13)
         {
             NSLog(@"13");
             [self revisedoverview];
         }
-        else if(indexPath.row == 13)
+        else if(indexPath.row == 14)
         {
             NSLog(@"14");
             [self revisiedTarget];
@@ -5793,7 +5797,11 @@ EndInnings *endInnings;
 {
     
 }
--(void)PlayingXIEdit
+-(void)PlayingXIAEdit
+{
+    
+}
+-(void)PlayingXIBEdit
 {
     
 }

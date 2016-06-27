@@ -21,6 +21,7 @@
 		18674AC41D1A4F9600DB7C71 /* MatchResultListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18674AC21D1A4F9600DB7C71 /* MatchResultListVC.xib */; };
 		186DC7F81D1E56DC00293B7F /* Utitliy.m in Sources */ = {isa = PBXBuildFile; fileRef = 186DC7F71D1E56DC00293B7F /* Utitliy.m */; };
 		186DC8191D21451500293B7F /* EndDayTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1876211D1D1D625A006E160F /* EndDayTVC.m */; };
+		186DC81D1D2146DB00293B7F /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 186DC81C1D2146DB00293B7F /* TNCA_DATABASE.sqlite */; };
 		18704ED21D1954E100996BF3 /* FetchMatchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704ED11D1954E100996BF3 /* FetchMatchResult.m */; };
 		18704ED51D19560C00996BF3 /* DBManagerMatchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704ED41D19560C00996BF3 /* DBManagerMatchResult.m */; };
 		18704ED81D19590000996BF3 /* GetMatchResultTypeAndCodeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704ED71D19590000996BF3 /* GetMatchResultTypeAndCodeDetails.m */; };
@@ -149,7 +150,6 @@
 		CE7463A91D166F8200D69CD9 /* UpdateBreakVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */; };
 		CE7463AC1D16942200D69CD9 /* UpdateBreaksArrayDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463AB1D16942200D69CD9 /* UpdateBreaksArrayDetails.m */; };
 		CE7463B31D16B03800D69CD9 /* DeleteEventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463B21D16B03800D69CD9 /* DeleteEventRecord.m */; };
-		CE8AC79B1D213A5B0068B0AF /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = CE8AC79A1D213A5B0068B0AF /* TNCA_DATABASE.sqlite */; };
 		CEC305811D014C3400301ED3 /* AppealSystemRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305801D014C3400301ED3 /* AppealSystemRecords.m */; };
 		CEC305841D01566100301ED3 /* AppealComponentRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305831D01566100301ED3 /* AppealComponentRecord.m */; };
 		CEC305871D015BB900301ED3 /* AppealUmpireRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305861D015BB800301ED3 /* AppealUmpireRecord.m */; };
@@ -206,6 +206,7 @@
 		18674AC21D1A4F9600DB7C71 /* MatchResultListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchResultListVC.xib; sourceTree = "<group>"; };
 		186DC7F61D1E56DC00293B7F /* Utitliy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utitliy.h; sourceTree = "<group>"; };
 		186DC7F71D1E56DC00293B7F /* Utitliy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utitliy.m; sourceTree = "<group>"; };
+		186DC81C1D2146DB00293B7F /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = "../../../../../Backup/TNCA MOBILITY/TNCA_DATABASE.sqlite"; sourceTree = "<group>"; };
 		18704ED01D1954E100996BF3 /* FetchMatchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchMatchResult.h; sourceTree = "<group>"; };
 		18704ED11D1954E100996BF3 /* FetchMatchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchMatchResult.m; sourceTree = "<group>"; };
 		18704ED31D19560C00996BF3 /* DBManagerMatchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerMatchResult.h; sourceTree = "<group>"; };
@@ -439,7 +440,6 @@
 		CE7463AB1D16942200D69CD9 /* UpdateBreaksArrayDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBreaksArrayDetails.m; sourceTree = "<group>"; };
 		CE7463B11D16B03800D69CD9 /* DeleteEventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteEventRecord.h; sourceTree = "<group>"; };
 		CE7463B21D16B03800D69CD9 /* DeleteEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteEventRecord.m; sourceTree = "<group>"; };
-		CE8AC79A1D213A5B0068B0AF /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		CEC3057F1D014C3400301ED3 /* AppealSystemRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealSystemRecords.h; sourceTree = "<group>"; };
 		CEC305801D014C3400301ED3 /* AppealSystemRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppealSystemRecords.m; sourceTree = "<group>"; };
 		CEC305821D01566100301ED3 /* AppealComponentRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealComponentRecord.h; sourceTree = "<group>"; };
@@ -855,7 +855,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
-				CE8AC79A1D213A5B0068B0AF /* TNCA_DATABASE.sqlite */,
+				186DC81C1D2146DB00293B7F /* TNCA_DATABASE.sqlite */,
 				2469625C1D1E99DE00CC30D0 /* UpdateScoreengineRecord */,
 				245E31841D1DB4E3009FE70F /* DBManagerEndBall */,
 				246464FD1D17255C0078A446 /* DBManagerEndInnings.h */,
@@ -1243,7 +1243,7 @@
 				1876212A1D1D7967006E160F /* InningsDetailsRecord in Resources */,
 				CE7463A91D166F8200D69CD9 /* UpdateBreakVC.xib in Resources */,
 				2464651D1D17255C0078A446 /* OtherWicketPlayerlistVC.xib in Resources */,
-				CE8AC79B1D213A5B0068B0AF /* TNCA_DATABASE.sqlite in Resources */,
+				186DC81D1D2146DB00293B7F /* TNCA_DATABASE.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
