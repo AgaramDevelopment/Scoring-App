@@ -798,7 +798,7 @@ for (i=0; i<[officialscode count]; i++)
     
     NSString *pngPath = [Dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",officialscodestr]];// this path if you want save reference path in sqlite
     
-    [data1 writeToFile:pngPath atomically:YES]
+    [data1 writeToFile:pngPath atomically:YES];
     
     
 }
@@ -827,7 +827,7 @@ for (i=0; i<[officialscode count]; i++)
         
         NSString *pngPath = [Dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",groundcodestr]];// this path if you want save reference path in sqlite
         
-        [data1 writeToFile:pngPath atomically:YES]
+        [data1 writeToFile:pngPath atomically:YES];
         
     }
 }
