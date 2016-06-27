@@ -188,7 +188,7 @@
 //@synthesize RESULTTYPE;
 EndInningsVC *save;
 
--(void) InsertEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO:(NSString*)INNINGSSTARTTIME:(NSString*)INNINGSENDTIME:(NSString*)ENDOVER:(NSString*)TOTALRUNS:(NSString*)TOTALWICKETS:(NSString*)BUTTONNAME:(NSString*)STARTOVERNO
+-(void) InsertEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO:(NSString*)INNINGSSTARTTIME:(NSString*)INNINGSENDTIME:(NSString*)ENDOVER:(NSString*)TOTALRUNS:(NSString*)TOTALWICKETS:(NSString*)BUTTONNAME
 {
     {
       
@@ -267,7 +267,8 @@ EndInningsVC *save;
       save = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
 
      NSLog(@"BTNSAVE=%@",BUTTONNAME);
-    if([BUTTONNAME isEqualToString: @"SAVE"])
+    
+    if([BUTTONNAME isEqualToString: @"INSERT"])
     {
         if([DBManagerEndInnings GetCompetitioncodeForInsertEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO])
         {
@@ -351,8 +352,8 @@ EndInningsVC *save;
                     }
                     
                 }
-                
-
+        }
+    }
             EndInningsVC *end = [[EndInningsVC alloc]init];
             NSLog(@"btnname=%@",BUTTONNAME);
     if([BUTTONNAME isEqualToString:@"UPDATE"])
@@ -418,8 +419,8 @@ EndInningsVC *save;
     }
            
 
-        }
-    }
+      
+    
 }
 
 
@@ -1029,7 +1030,8 @@ EndInningsVC *save;
     
     MATCHTYPE = [DBManagerEndInnings GetMatchTypeUsingCompetitionForDeleteEndInnings : COMPETITIONCODE];
     
-    if([DBManagerEndInnings GetBallCodeForDeleteEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO] && [DBManagerEndInnings GetInningsNoForDeleteEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO])
+if(![DBManagerEndInnings GetBallCodeForDeleteEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO] &&
+   ![DBManagerEndInnings GetInningsNoForDeleteEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO])
     {
         
         [DBManagerEndInnings UpdateInningsEventForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO];

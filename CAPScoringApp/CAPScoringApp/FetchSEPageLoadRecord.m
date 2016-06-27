@@ -252,8 +252,8 @@ BOOL  getOverStatus;
     
     
     //penalty details bowler
-    NSString *penaltyBowler = [DBManager getPenaltyDetailsBowling:COMPETITIONCODE :MATCHCODE :inns.INNINGSNO :BATTINGTEAMCODE];
-    NSInteger penaltyBowl = [penaltyBowler integerValue];
+    NSString *b = [DBManager getPenaltyDetailsBowling:COMPETITIONCODE :MATCHCODE :inns.INNINGSNO :BATTINGTEAMCODE];
+    NSInteger penaltyBowl = [b integerValue];
     
     
     //penalty innings

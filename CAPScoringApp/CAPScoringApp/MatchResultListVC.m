@@ -22,7 +22,7 @@
 
 @end
 
-int selectedTablePostition ;
+int selectedTablePostition;
 
 int POS_RESULT_TYPE = 1;
 int POS_TEAM = 2;

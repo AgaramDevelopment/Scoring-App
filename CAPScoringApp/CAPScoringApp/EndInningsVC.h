@@ -68,4 +68,5 @@
 
 - (IBAction)btn_delete:(id)sender;
 
+-(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE;
 @end
