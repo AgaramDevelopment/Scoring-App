@@ -10,4 +10,5 @@
 
 @interface Utitliy : NSObject
 +(NSString *) getIPPORT;
++(NSString *)getSyncIPPORT;
 @end

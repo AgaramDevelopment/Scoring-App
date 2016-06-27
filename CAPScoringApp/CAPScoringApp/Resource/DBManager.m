@@ -6094,7 +6094,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSBREAKEVENTS SET BREAKSTARTTIME = '%@',BREAKENDTIME = '%@',BREAKCOMMENTS='%@',ISINCLUDEINPLAYERDURATION='%@' WHERE COMPETITIONCODE = '%@' AND MATCHCODE='%@'  AND INNINGSNO = '%@' AND BREAKNO='%@';",BREAKSTARTTIME,BREAKENDTIME,BREAKCOMMENTS,ISINCLUDEDURATION,COMPETITIONCODE,MATCHCODE,INNINGSNO,BREAKNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSBREAKEVENTS SET BREAKSTARTTIME = '%@',BREAKENDTIME = '%@',BREAKCOMMENTS='%@',ISINCLUDEINPLAYERDURATION='%@' WHERE COMPETITIONCODE = '%@' AND MATCHCODE='%@'  AND INNINGSNO = '%@' AND BREAKNO='%@'",BREAKSTARTTIME,BREAKENDTIME,BREAKCOMMENTS,ISINCLUDEDURATION,COMPETITIONCODE,MATCHCODE,INNINGSNO,BREAKNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -6233,7 +6233,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"DELETE INNINGSBREAKEVENTS WHERE COMPETITIONCODE = @COMPETITIONCODE AND MATCHCODE=@MATCHCODE AND INNINGSNO = @INNINGSNO AND BREAKNO=@BREAKNO",COMPETITIONCODE,MATCHCODE,INNINGSNO,BREAKNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE INNINGSBREAKEVENTS WHERE COMPETITIONCODE ='%@' AND MATCHCODE='%@' AND INNINGSNO ='%@' AND BREAKNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,BREAKNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)

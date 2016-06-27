@@ -13,12 +13,13 @@
 #import "FixturesVC.h"
 #import "CustomNavigationVC.h"
 #import "ArchivesVC.h"
+#import "Reachability.h"
 
 @interface TorunamentVC ()
 {
     BOOL isEnableTbl;
     NSMutableArray * selectindexarray;
-   
+    UIRefreshControl *refreshControl;
    }
 @property (nonatomic,strong)NSMutableArray*resultArray;
 @property(nonatomic,weak) IBOutlet UIView *selectmatchTittleview;
@@ -40,10 +41,59 @@
     [self.selectmatchTittleview.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.selectmatchTittleview .layer setMasksToBounds:YES];
    
+    if(self.checkInternetConnection)
+    {
+        UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+        refreshControl.tintColor = [UIColor blueColor];
+        refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+        
+        
+        
+        [refresh addTarget:self action:@selector(crunchNumbers)
+         
+          forControlEvents:UIControlEventValueChanged];
+        
+        
+        
+        [self.tableView addSubview:refresh];
+    }
+}
 
+
+
+-(void)crunchNumbers
+{
+    resultArray=[[NSMutableArray alloc]init];
+    NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
+    for(int i=0; i < [FetchCompitionArray count]; i++)
+    {
+        
+        EventRecord *objEventRecord=(EventRecord*)[FetchCompitionArray objectAtIndex:i];
+        NSLog(@"%@",objEventRecord.recordstatus);
+        NSString *matchStatus=objEventRecord.recordstatus;
+        if([matchStatus isEqualToString:@"MSC001"])
+        {
+            [resultArray addObject:objEventRecord];
+        }
+        //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
+    }
     
+    
+    [self.tableView reloadData];
+    
+    [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:2.5];
+
+}
+
+
+- (void)stopRefresh
+
+{
+    
+    [refreshControl endRefreshing];
     
 }
+
 
 
 -(void)customnavigationmethod
@@ -170,7 +220,12 @@ else{
 }
 
 
-
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
 
 @end
 
