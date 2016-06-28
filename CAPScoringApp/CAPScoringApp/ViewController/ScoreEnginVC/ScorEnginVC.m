@@ -29,6 +29,7 @@
 #import "SelectPlayerRecord.h"
 #import "FetchLastBallBowledPlayer.h"
 #import "InitializeInningsScoreBoardRecord.h"
+#import "AppealBatsmenRecord.h"
 
 #import "BreakVC.h"
 #import "EndInnings.h"
@@ -44,6 +45,12 @@
 #import "MatchResultListVC.h"
 #import "EndDayVC.h"
 #import "DBManagerEndDay.h"
+#import "PowerPlayGridVC.h"
+#import "PenaltygridVC.h"
+#import "OtherWicketVC.h"
+#import "umpiretablecell.h"
+#import "Batsmancell.h"
+
 
 
 
