@@ -600,7 +600,60 @@
                 }
                 
             }
+            
+            
+            //MetaData
+            
+            NSArray *temp15=   [serviceResponse objectForKey:@"Metadata"];
+            
+            int B;
+            for (B=0; B<[temp15 count]; B++) {
+                NSDictionary*test15=[temp15 objectAtIndex:B];
+                NSString*METASUBCODE=[test15 objectForKey:@"Metasubcode"];
+                NSString *METADATATYPECODE=[test15 objectForKey:@"Metadatatypecode"];
+                NSString *METADATATYPEDESCRIPTION=[test15 objectForKey:@"Metadatatypedescription"];
+                NSString *METASUBCODEDESCRIPTION=[test15 objectForKey:@"Metasubcodedescription"];
+              
+                
+                bool CheckStatus1=[DBMANAGERSYNC CheckMetaData:METASUBCODE];
+                
+                if (CheckStatus1==NO) {
+                      [DBMANAGERSYNC InsertMetaData:METASUBCODE:METADATATYPECODE:METADATATYPEDESCRIPTION:METASUBCODEDESCRIPTION];
+                }
 
+                
+            }
+
+            
+       //PowerplayType
+            NSArray *temp16=   [serviceResponse objectForKey:@"PowerplayType"];
+            
+            int G;
+            for (G=0; G<[temp16 count]; G++) {
+                NSDictionary*test16=[temp16 objectAtIndex:G];
+                NSString*POWERPLAYTYPECODE=[test16 objectForKey:@"Powerplaytypecode"];
+                NSString *POWERPLAYTYPENAME=[test16 objectForKey:@"Powerplaytypename"];
+                NSString *RECORDSTATUS=[test16 objectForKey:@"Recordstatus"];
+                NSString *CREATEDBY=[test16 objectForKey:@"Createdby"];
+                NSString *CREATEDDATE=[test16 objectForKey:@"Createddate"];
+                NSString *MODIFIEDBY=[test16 objectForKey:@"Modifiedby"];
+                NSString *MODIFIEDDATE=[test16 objectForKey:@"Modifieddate"];
+                NSString *ISSYSTEMREFERENCE=[test16 objectForKey:@"Issystemreference"];
+                
+                
+                bool CheckStatus1=[DBMANAGERSYNC CheckPowerplayType:POWERPLAYTYPECODE];
+                
+                if (CheckStatus1==YES) {
+                    [DBMANAGERSYNC  UpdatePowerplayType:POWERPLAYTYPECODE:POWERPLAYTYPENAME:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:ISSYSTEMREFERENCE];
+                }
+                else{
+                    [DBMANAGERSYNC InsertPowerplayType:POWERPLAYTYPECODE:POWERPLAYTYPENAME:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:ISSYSTEMREFERENCE];
+                }
+                
+            }
+
+            
+            
             
             [self playercodeimage];
             [self officialcodeimage];
