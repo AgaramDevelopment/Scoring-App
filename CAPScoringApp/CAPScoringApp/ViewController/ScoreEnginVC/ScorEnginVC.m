@@ -10,7 +10,6 @@
 #import "CDRTranslucentSideBar.h"
 #import "DBManager.h"
 #import "BallEventRecord.h"
-#import "AppealRecord.h"
 #import "AppealCell.h"
 #import "AppealSystemRecords.h"
 #import "AppealComponentRecord.h"
@@ -167,6 +166,7 @@
     NSString  *TEAMAWICKETKEEPER;
     NSString  *TEAMBWICKETKEEPER;
     
+
     PowerPlayGridVC *powerplaygridvc;
     OtherWicketVC *otherwicketvc;
     RevicedOverVC * revicedOverVc ;
@@ -1208,7 +1208,7 @@ EndInnings *endInnings;
         AppealCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                                            forIndexPath:indexPath];
         
-        AppealRecord *objAppealrecord=(AppealRecord*)[_AppealValuesArray objectAtIndex:indexPath.row];
+        AppealRecord *objAppealrecord=(AppealRecord*)[self.AppealValuesArray objectAtIndex:indexPath.row];
         
         
         cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
@@ -5415,10 +5415,10 @@ EndInnings *endInnings;
         objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
       
             self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName1;
-            [self.Lbl_umpirename2 setHighlighted:YES];
+           // [self.Lbl_umpirename2 setHighlighted:YES];
     
         self.Lbl_umpirename2.text =objAppealUmpireEventRecord.AppealUmpireName2;
-          [self.Lbl_umpirename2 setHighlighted:YES];
+         // [self.Lbl_umpirename2 setHighlighted:YES];
     
         // selectTeam=self.Wonby_lbl.text;
         AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode1;
@@ -5437,7 +5437,7 @@ EndInnings *endInnings;
       objAppealBatsmenEventRecord=(AppealBatsmenRecord*)[AppealBatsmenArray objectAtIndex:indexPath.row];
         
         self.lbl_batsmen.text =objAppealBatsmenEventRecord.strikerbatsmenname;
-        self.Lbl_batsmen.text=objAppealBatsmenEventRecord.nonstrikerbatsmenname;
+       // self.Lbl_batsmen.text=objAppealBatsmenEventRecord.nonstrikerbatsmenname;
 
         // selectTeam=self.Wonby_lbl.text;
        // AppealComponentSelectCode=fetchSEPageLoadRecord.strickerPlayerCode;
