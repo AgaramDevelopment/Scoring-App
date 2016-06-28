@@ -14,7 +14,6 @@
 		0468B3921D12AD2100B98576 /* MetaDataRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0468B3911D12AD2100B98576 /* MetaDataRecord.m */; };
 		047669DD1D14229600572E39 /* PenaltyDetailsRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */; };
 		0481DCFF1D213B250084BFF7 /* PowerPlayGridTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCF21D213B250084BFF7 /* PowerPlayGridTVC.m */; };
-		0481DD001D213B250084BFF7 /* PowerPlayGridTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCF31D213B250084BFF7 /* PowerPlayGridTVC.xib */; };
 		0481DD011D213B250084BFF7 /* PowerPlayGridVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCF51D213B250084BFF7 /* PowerPlayGridVC.m */; };
 		0481DD021D213B250084BFF7 /* PowerPlayGridVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCF61D213B250084BFF7 /* PowerPlayGridVC.xib */; };
 		0481DD031D213B250084BFF7 /* PowerPlayRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCF81D213B250084BFF7 /* PowerPlayRecord.m */; };
@@ -22,7 +21,6 @@
 		0481DD051D213B250084BFF7 /* PowerPlayTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCFB1D213B250084BFF7 /* PowerPlayTVCell.xib */; };
 		0481DD061D213B250084BFF7 /* PowerPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCFD1D213B250084BFF7 /* PowerPlayVC.m */; };
 		0481DD071D213B250084BFF7 /* PowerPlayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCFE1D213B250084BFF7 /* PowerPlayVC.xib */; };
-		0481DD0A1D2145310084BFF7 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0481DD091D2145310084BFF7 /* TNCA_DATABASE.sqlite */; };
 		048B5A9E1D0AF1A7009F12B8 /* WicketTypeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */; };
 		048F6F591CFFFEE600F2C5F5 /* FieldingFactorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048F6F581CFFFEE600F2C5F5 /* FieldingFactorCell.m */; };
 		1837AA8C1CFF125B00B7259C /* BowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA8B1CFF125B00B7259C /* BowlTypeCell.m */; };
@@ -217,7 +215,6 @@
 		0481DCFC1D213B250084BFF7 /* PowerPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerPlayVC.h; sourceTree = "<group>"; };
 		0481DCFD1D213B250084BFF7 /* PowerPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerPlayVC.m; sourceTree = "<group>"; };
 		0481DCFE1D213B250084BFF7 /* PowerPlayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PowerPlayVC.xib; sourceTree = "<group>"; };
-		0481DD091D2145310084BFF7 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = "../../../../BACKUP/untitled folder/TNCA_DATABASE.sqlite"; sourceTree = "<group>"; };
 		048B5A9C1D0AF1A7009F12B8 /* WicketTypeRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WicketTypeRecord.h; sourceTree = "<group>"; };
 		048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WicketTypeRecord.m; sourceTree = "<group>"; };
 		048F6F571CFFFEE600F2C5F5 /* FieldingFactorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldingFactorCell.h; sourceTree = "<group>"; };
@@ -1277,7 +1274,6 @@
 				0468B3891D12743900B98576 /* PenalityVC.xib in Resources */,
 				0481DD021D213B250084BFF7 /* PowerPlayGridVC.xib in Resources */,
 				CE00180B1CF42FA500668D8B /* Assets.xcassets in Resources */,
-				0481DD0A1D2145310084BFF7 /* TNCA_DATABASE.sqlite in Resources */,
 				1876250A1D154495009374F8 /* RevicedOverVC.xib in Resources */,
 				CEC858B31D155D36007F5384 /* intialBreakVC.xib in Resources */,
 				CE0018501CF460DE00668D8B /* RAJDHANI-MEDIUM.TTF in Resources */,
