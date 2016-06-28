@@ -756,6 +756,8 @@ if (buttonIndex == 0 && alertView.tag == 1)
             scoreEngine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
                        scoreEngine.matchCode=self.MATCHCODE;
                       scoreEngine.competitionCode=self.CompetitionCode;
+            scoreEngine.matchTypeCode = self.matchTypeCode;
+            
             [self.navigationController pushViewController:scoreEngine animated:YES];
            // NSLog(@"user pressed Button Indexed 0");
 //                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

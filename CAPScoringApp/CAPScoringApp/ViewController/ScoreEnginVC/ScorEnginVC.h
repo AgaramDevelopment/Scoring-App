@@ -276,7 +276,5 @@
 - (IBAction)btn_show_scorecard:(id)sender;
 
 - (IBAction)btn_penality:(id)sender;
-@property (strong, nonatomic) IBOutlet UILabel *Lbl_umpirename2;
-@property (strong, nonatomic) IBOutlet UILabel *Lbl_batsmen;
-
+@property (strong,nonatomic)NSString *matchTypeCode;
 @end
