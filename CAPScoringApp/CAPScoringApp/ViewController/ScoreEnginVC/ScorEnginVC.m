@@ -5435,7 +5435,7 @@ EndInnings *endInnings;
       objAppealBatsmenEventRecord=(AppealBatsmenRecord*)[AppealBatsmenArray objectAtIndex:indexPath.row];
         
         self.lbl_batsmen.text =objAppealBatsmenEventRecord.strikerbatsmenname;
-       // self.Lbl_batsmen.text=objAppealBatsmenEventRecord.nonstrikerbatsmenname;
+       self.Lbl_batsmen.text=objAppealBatsmenEventRecord.nonstrikerbatsmenname;
 
         // selectTeam=self.Wonby_lbl.text;
        // AppealComponentSelectCode=fetchSEPageLoadRecord.strickerPlayerCode;

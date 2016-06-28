@@ -151,6 +151,7 @@
 @property (strong, nonatomic) IBOutlet UIView *view_batsmen;
 - (IBAction)btn_batsmen:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_batsmen;
+@property (strong, nonatomic) IBOutlet UILabel *Lbl_batsmen;
 - (IBAction)btn_AppealSave:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *comments_txt;
 
