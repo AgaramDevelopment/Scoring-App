@@ -101,6 +101,7 @@
         tossvc =  (TossDetailsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"TossDetails"];
     tossvc.MATCHCODE=Matchcode;
     tossvc.CompetitionCode=competitionCode;
+    tossvc.matchTypeCode = self.matchTypeCode;
      [self.navigationController pushViewController:tossvc animated:YES];
        // [tossvc setModalPresentationStyle:UIModalPresentationFullScreen];
         //[self presentViewController:tossvc animated:NO completion:nil];

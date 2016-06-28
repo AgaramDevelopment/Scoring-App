@@ -25,6 +25,7 @@
 
 @property(strong,nonatomic)NSString*Matchcode;
 @property(strong,nonatomic)NSString*competitionCode;
+@property(strong,nonatomic)NSString*matchTypeCode;
 
 
 - (IBAction)btn_proceed:(id)sender;

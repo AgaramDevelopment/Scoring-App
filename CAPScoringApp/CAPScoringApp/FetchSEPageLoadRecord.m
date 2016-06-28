@@ -235,11 +235,11 @@ BOOL  getOverStatus;
     
     
     //penalty score
-    NSString *penaltyScore = [DBManager getPenaltyScore:COMPETITIONCODE :MATCHCODE :inns.INNINGSNO:BATTINGTEAMCODE];
+    NSString *penaltyScore = [DBManager getPenaltyScore:COMPETITIONCODE :MATCHCODE :inns.INNINGSNO :BATTINGTEAMCODE];
     NSInteger penaltyS = [penaltyScore integerValue];
     
     //grand total
-    NSString *grandTotal = [DBManager getGrandTotal:COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE:inns.INNINGSNO];
+    NSString *grandTotal = [DBManager getGrandTotal:COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE :inns.INNINGSNO];
     NSInteger grandscore = [grandTotal integerValue];
     
     NSString *batTeamPenalty = [DBManager getBatTeamPenalty:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE];
@@ -291,12 +291,15 @@ BOOL  getOverStatus;
     NSString *battingwkts = [DBManager getBattingWkt:COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE:inns.INNINGSNO];
     NSInteger battingsWickets = [battingwkts integerValue];
     //team over
-    NSString *teamOver = [DBManager getTeamOver:COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE:inns.INNINGSNO];
-    NSInteger teamOvers = [teamOver integerValue];
+    NSString *teamOver = [DBManager getTeamOver:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO];
+    
+    NSInteger teamOvers = [teamOver intValue];
     
     
     
-    NSString *teamOverBall = [DBManager getTeamOverBall:COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE:inns.INNINGSNO:batTeamOver];
+    NSString *teamOverBall = [DBManager getTeamOverBall:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :inns.INNINGSNO :batTeamOver]; 
+    
+    
     //BATTEAMOVERS
     NSInteger teamOvsBall = [teamOverBall integerValue];
     
