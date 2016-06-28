@@ -300,8 +300,6 @@
 		1876251C1D1544CD009374F8 /* MatchRegistrationDetailsForScoreBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchRegistrationDetailsForScoreBoard.m; sourceTree = "<group>"; };
 		187625271D154548009374F8 /* EditModeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditModeCell.h; path = SubClass/EditModeCell/EditModeCell.h; sourceTree = "<group>"; };
 		187625281D154548009374F8 /* EditModeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditModeCell.m; path = SubClass/EditModeCell/EditModeCell.m; sourceTree = "<group>"; };
-		187777621D2230F6002F31E5 /* AppealBatsmenRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealBatsmenRecord.h; sourceTree = "<group>"; };
-		187777631D2230F6002F31E5 /* AppealBatsmenRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppealBatsmenRecord.m; sourceTree = "<group>"; };
 		187777651D2232FA002F31E5 /* Batsmancell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Batsmancell.h; sourceTree = "<group>"; };
 		187777661D2232FA002F31E5 /* Batsmancell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Batsmancell.m; sourceTree = "<group>"; };
 		187777671D2232FA002F31E5 /* DBManagerEndBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerEndBall.h; sourceTree = "<group>"; };
@@ -1099,8 +1097,6 @@
 		CE00183F1CF431C100668D8B /* Records */ = {
 			isa = PBXGroup;
 			children = (
-				187777621D2230F6002F31E5 /* AppealBatsmenRecord.h */,
-				187777631D2230F6002F31E5 /* AppealBatsmenRecord.m */,
 				18785EE21D1662EE00A09AEC /* LastBowlerDetails */,
 				246124FF1D13C4E3004B85E7 /* OversorderRecord */,
 				246124F41D13C429004B85E7 /* EndInnings.h */,
@@ -1316,7 +1312,6 @@
 				187229291D12665600CC168F /* AddBreakVC.xib in Resources */,
 				246125081D13C5D1004B85E7 /* RightSlideVC.xib in Resources */,
 				187621201D1D625A006E160F /* EndDayTVC.xib in Resources */,
-				CEBA5CB31D22578C00CE2472 /* TNCA_DATABASE.sqlite in Resources */,
 				1876210A1D1D3749006E160F /* EndDayVC.xib in Resources */,
 				CE0018521CF460DE00668D8B /* RAJDHANI-SEMIBOLD.TTF in Resources */,
 				1876250C1D154495009374F8 /* ScoreCardCellTVCell.xib in Resources */,
