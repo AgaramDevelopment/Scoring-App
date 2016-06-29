@@ -51,7 +51,7 @@
 #import "Batsmancell.h"
 #import "AppealBatsmenRecord.h"
 #import "DeclareInnings.h"
-#import "OtherWicketVC.h"
+#import "Other_WicketVC.h"
 #import "NewMatchSetUpVC.h"
 #import "FETCHSEBALLCODEDETAILS.h"
 #import "ScoreEnginEditRecord.h"
@@ -123,6 +123,7 @@
     BOOL isNONStrickerOpen;
     BOOL isBowlerOpen;
     BOOL leftSlideSwipe;
+    BOOL isCaught;
     
     NSMutableArray *strickerList;
     NSMutableArray *nonStrickerList;
@@ -174,7 +175,7 @@
     
 
     PowerPlayGridVC *powerplaygridvc;
-    OtherWicketVC *otherwicketvc;
+    Other_WicketVC *otherwicketvc;
     RevicedOverVC * revicedOverVc ;
     RevisedTarget  *revisedTarget;
     PenalityVC *penalityVc;
@@ -2660,29 +2661,116 @@ EndInnings *endInnings;
     
     if(selectBtnTag.tag==100)//Run one
     {
-        [self calculateRuns:selectBtnTag.tag];
+        if(isWicketSelected == YES)
+        {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                            message:@"Run not possible"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            
+            
+        }
+        else{
+             [self calculateRuns:selectBtnTag.tag];
+        }
         
     }
     else if(selectBtnTag.tag==101)// Run two
     {
-        [self calculateRuns:selectBtnTag.tag];
+        if(isWicketSelected == YES)
+        {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                                message:@"Run not possible"
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                      otherButtonTitles:nil];
+            [alert show];
+                
+          
+        }
+        else{
+             [self calculateRuns:selectBtnTag.tag];
+        }
+        
     }
     else if(selectBtnTag.tag==102)// Run three
     {
-        [self calculateRuns:selectBtnTag.tag];
+        if(isWicketSelected == YES)
+        {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                            message:@"Run not possible"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            
+            
+        }
+        else{
+              [self calculateRuns:selectBtnTag.tag];
+        }
     }
     else if(selectBtnTag.tag==103)//More Runs
     {
-        [self calculateRuns:selectBtnTag.tag];
+        if(isWicketSelected == YES)
+        {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                            message:@"Run not possible"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            
+            
+        }
+        else{
+               [self calculateRuns:selectBtnTag.tag];
+        }
         
     }
     else if(selectBtnTag.tag==104)// B4
     {
-        [self calculateRuns:selectBtnTag.tag];
+        if(isWicketSelected == YES)
+        {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                            message:@"Run not possible"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            
+            
+        }
+        else{
+
+           [self calculateRuns:selectBtnTag.tag];
+        }
     }
     else if(selectBtnTag.tag==105)// B6
     {
-        [self calculateRuns:selectBtnTag.tag];
+        if(isWicketSelected == YES)
+        {
+            
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                            message:@"Run not possible"
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"OK"
+                                                  otherButtonTitles:nil];
+            [alert show];
+            
+            
+        }
+        else{
+
+             [self calculateRuns:selectBtnTag.tag];
+        }
     }
     else if(selectBtnTag.tag==106)//Extras
     {
@@ -2698,8 +2786,12 @@ EndInnings *endInnings;
         
        //self.view_bowlType.hidden = YES;
         if(isWicketSelected){
-            
-           
+            [self unselectedButtonBg:self.btn_B4];
+            [self unselectedButtonBg:self.btn_B6];
+           isCaught=NO;
+            self.btn_B6.userInteractionEnabled =YES;
+            self.btn_B4.userInteractionEnabled= YES;
+
             selectedwickettype = nil;
             
             isWicketSelected = NO;
@@ -2708,6 +2800,7 @@ EndInnings *endInnings;
             self.view_defensive.hidden = YES;
             self.view_bowlType.hidden = YES;
             self.view_fastBowl.hidden = YES;
+            
             [self unselectedButtonBg:selectBtnTag];
             
         }else{
@@ -2715,6 +2808,8 @@ EndInnings *endInnings;
             _WicketTypeArray=[[NSMutableArray alloc]init];
             NSMutableArray *tempWickettypeArray  =[DBManager RetrieveWicketType];
             
+            
+
             
             if(self.ballEventRecord.objIssix.intValue == 1){
                 
@@ -5009,7 +5104,12 @@ EndInnings *endInnings;
         extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide", nil];
     }else if(self.ballEventRecord.objIssix.integerValue == 1){//if B6 enable
         extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall", nil];
-    }else{// Default
+    }
+    else if (isWicketSelected==YES && isCaught==YES)
+    {
+        extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide", nil];
+    }
+    else{// Default
         extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
     }
     
@@ -5048,6 +5148,7 @@ EndInnings *endInnings;
         extrasTableView.allowsMultipleSelection = YES;
         extrasTableView.dataSource = self;
         extrasTableView.delegate = self;
+        extrasTableView.allowsMultipleSelection=NO;
         [self.commonleftrightview addSubview:extrasTableView];
         [extrasTableView reloadData];
         
@@ -5333,7 +5434,12 @@ EndInnings *endInnings;
         } else{
             self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Typical",@"Strong",@"Medium", nil];
             
+             [self disableButtonBg:self.btn_B6];
+             [self disableButtonBg:self.btn_B4];
+            isCaught=YES;
             
+            self.btn_B6.userInteractionEnabled =NO;
+            self.btn_B4.userInteractionEnabled= NO;
             isWicketSelected = YES;
             wicketOption = 3;
             
@@ -5530,7 +5636,29 @@ EndInnings *endInnings;
         
         if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"NoBall"]){//No ball
             
-            
+            if(isWicketSelected ==YES)
+            {
+                _WicketTypeArray=[[NSMutableArray alloc]init];
+                NSMutableArray *tempWickettypeArray  =[DBManager RetrieveWicketType];
+                
+                for(int i=0;i<tempWickettypeArray.count;i++){
+                    WicketTypeRecord *wicketTypeRecord =[tempWickettypeArray objectAtIndex:i];
+                    if([wicketTypeRecord.metasubcode isEqual:@"MSC097"]||[wicketTypeRecord.metasubcode isEqual:@"MSC100"]||[wicketTypeRecord.metasubcode isEqual:@"MSC103" ]||[wicketTypeRecord.metasubcode isEqual:@"MSC106"]){
+                        [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
+                    }
+                    
+                }
+                self.view_aggressiveShot.hidden = YES;
+                self.view_defensive.hidden = YES;
+                self.view_bowlType.hidden = YES;
+                self.view_fastBowl.hidden = NO;
+                isWicketSelected =YES;
+                wicketOption = 1;
+                [self.tbl_fastBowl reloadData];
+            }
+            //B6
+            else{
+
             //Wide
             self.ballEventRecord.objWide = [NSNumber numberWithInt:0];
             // NSIndexPath *wideIndexPath = [NSIndexPath indexPathForRow:1 inSection:0];
@@ -5538,7 +5666,7 @@ EndInnings *endInnings;
             
             //Recreate list
             //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
-            self.extrasOptionArray=[self getExtrasOptionArray];
+           self.extrasOptionArray=[self getExtrasOptionArray];
             [extrasTableView reloadData];
             
             //B6
@@ -5578,10 +5706,34 @@ EndInnings *endInnings;
                 NSIndexPath *legbyesIndexPath = [NSIndexPath indexPathForRow:3 inSection:0];
                 [extrasTableView selectRowAtIndexPath:legbyesIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
             }
+            }
             
         }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"Wide"]){//Wide
             
+            if(isWicketSelected ==YES)
+            {
+                _WicketTypeArray=[[NSMutableArray alloc]init];
+                NSMutableArray *tempWickettypeArray  =[DBManager RetrieveWicketType];
+                
+                for(int i=0;i<tempWickettypeArray.count;i++){
+                    WicketTypeRecord *wicketTypeRecord =[tempWickettypeArray objectAtIndex:i];
+                    if([wicketTypeRecord.metasubcode isEqual:@"MSC097"] ||[wicketTypeRecord.metasubcode isEqual:@"MSC104"]||[wicketTypeRecord.metasubcode isEqual:@"MSC099"]||[wicketTypeRecord.metasubcode isEqual:@"MSC106"]){
+                        [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
+                    }
+                    
+                }
+                self.view_aggressiveShot.hidden = YES;
+                self.view_defensive.hidden = YES;
+                self.view_bowlType.hidden = YES;
+                self.view_fastBowl.hidden = NO;
+                isWicketSelected =YES;
+                wicketOption = 1;
+                [self.tbl_fastBowl reloadData];
+            }
             //B6
+            else{
+
+            
             self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
             if(!isMoreRunSelected){
                 [self disableButtonBg:self.btn_B6];
@@ -5610,11 +5762,34 @@ EndInnings *endInnings;
             //Wide Selector
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
             [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-            
+            }
             
             
         }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"Byes"]){//Byes
             //B6
+            if(isWicketSelected ==YES)
+            {
+                _WicketTypeArray=[[NSMutableArray alloc]init];
+                NSMutableArray *tempWickettypeArray  =[DBManager RetrieveWicketType];
+                
+                for(int i=0;i<tempWickettypeArray.count;i++){
+                    WicketTypeRecord *wicketTypeRecord =[tempWickettypeArray objectAtIndex:i];
+                    if([wicketTypeRecord.metasubcode isEqual:@"MSC097"]){
+                        [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
+                    }
+                    
+                }
+                self.view_aggressiveShot.hidden = YES;
+                self.view_defensive.hidden = YES;
+                self.view_bowlType.hidden = YES;
+                self.view_fastBowl.hidden = NO;
+                isWicketSelected =YES;
+                wicketOption = 1;
+                [self.tbl_fastBowl reloadData];
+            }
+            //B6
+            else{
+
             self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
             if(!isMoreRunSelected){
                 [self disableButtonBg:self.btn_B6];
@@ -5627,10 +5802,34 @@ EndInnings *endInnings;
             
             //Byes
             self.ballEventRecord.objByes = [NSNumber numberWithInt:1];
+            }
             
             
         }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"LegByes"]){//Legbyes
             //B6
+            if(isWicketSelected ==YES)
+            {
+                _WicketTypeArray=[[NSMutableArray alloc]init];
+                NSMutableArray *tempWickettypeArray  =[DBManager RetrieveWicketType];
+                
+                for(int i=0;i<tempWickettypeArray.count;i++){
+                    WicketTypeRecord *wicketTypeRecord =[tempWickettypeArray objectAtIndex:i];
+                    if([wicketTypeRecord.metasubcode isEqual:@"MSC097"]){
+                        [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
+                    }
+                    
+                }
+                self.view_aggressiveShot.hidden = YES;
+                self.view_defensive.hidden = YES;
+                self.view_bowlType.hidden = YES;
+                self.view_fastBowl.hidden = NO;
+                isWicketSelected =YES;
+                wicketOption = 1;
+                [self.tbl_fastBowl reloadData];
+            }
+            //B6
+            else{
+
             self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
             if(!isMoreRunSelected){
                 [self disableButtonBg:self.btn_B6];
@@ -5645,7 +5844,7 @@ EndInnings *endInnings;
             
             //Legbyes
             self.ballEventRecord.objLegByes = [NSNumber numberWithInt:1];
-            
+            }
             
         }
     }else if(tableView == overThrowTableView){//Over throw table view
@@ -6067,70 +6266,72 @@ EndInnings *endInnings;
 }
 -(void) matchInfoEdit
 {
-
+   
+    
+    NSMutableArray *getPlayerRecord = [DBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS] BALLNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVRBALLS] ];
+    
     NewMatchSetUpVC *detail = [[NewMatchSetUpVC alloc]init];
     
     detail =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
-    
+    FixturesRecord *objFixtureRecord=(FixturesRecord*)[self.matchSetUp objectAtIndex:0];
+
     NSString*teamAcode = fetchSEPageLoadRecord.TEAMACODE;
     NSString*teamBcode = fetchSEPageLoadRecord.TEAMBCODE;
     
     NSString*teamA =  fetchSEPageLoadRecord.BATTEAMNAME;
     NSString*teamB = fetchSEPageLoadRecord.BOWLTEAMNAME;
-    NSString*matchType = fetchSEPageLoadRecord.MATCHTYPE;
+    NSString*matchType = objFixtureRecord.matchTypeName;
     NSString*matchCode = self.matchCode;
     NSString*competitionCode = self.competitionCode;
-    NSString*matchTypeCode = @"";
-    NSString*overs = [NSString stringWithFormat:@"%@", fetchSEPageLoadRecord.BATTEAMOVERS];
-    NSString *MatchStatus = @"";
+    NSString*matchTypeCode = objFixtureRecord.matchTypeCode;
+    NSString*overs = objFixtureRecord.overs;
+    NSString *MatchStatus = objFixtureRecord.MatchStatus;
     
     
-//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-//        
-//        NSDate *date = [formatter dateFromString:objFixtureRecord.matchdate];
-//        [formatter setDateFormat:@"dd"];
-//        NSString *newDate = [formatter stringFromDate:date];
-//        
-//        
-//        
-//        
-//        //NSDate *monthYY = [formatter dateFromString:objFixtureRecord.matchdate];
-//        [formatter setDateFormat:@"MMM ''yy"];
-//        NSString*newMonth = [formatter stringFromDate:date];
-//        
-//        
-//        
-//        // NSDate *time = [formatter dateFromString:objFixtureRecord.matchdate];
-//        [formatter setDateFormat:@"hh:mm a"];
-//        NSString *newTime = [formatter stringFromDate:date];
-//        
-//        
-//        
-//        NSString*matchVenu = objFixtureRecord.city;
-    
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+        
+        NSDate *date = [formatter dateFromString:objFixtureRecord.matchdate];
+        [formatter setDateFormat:@"dd"];
+        NSString *newDate = [formatter stringFromDate:date];
         
         
-       // detail.matchSetUp = mSetUp;
+        
+        
+        //NSDate *monthYY = [formatter dateFromString:objFixtureRecord.matchdate];
+        [formatter setDateFormat:@"MMM ''yy"];
+        NSString*newMonth = [formatter stringFromDate:date];
+        
+        
+        
+        // NSDate *time = [formatter dateFromString:objFixtureRecord.matchdate];
+        [formatter setDateFormat:@"hh:mm a"];
+        NSString *newTime = [formatter stringFromDate:date];
+        
+        
+        
+        NSString*matchVenu = objFixtureRecord.city;
+    
+    
+        
+        detail.matchSetUp = self.matchSetUp;
         detail.teamA = teamA;
         detail.teamB = teamB;
-      //  detail.date = newDate;
-      //  detail.matchVenu = matchVenu;
+        detail.date = newDate;
+        detail.matchVenu = matchVenu;
         detail.matchType = matchType;
         detail.overs = overs;
-      //  detail.month = newMonth;
-      //  detail.time = newTime;
+        detail.month = newMonth;
+        detail.time = newTime;
         detail.matchCode = matchCode;
         detail.competitionCode = competitionCode;
         detail.matchTypeCode = matchTypeCode;
         detail.teamAcode = teamAcode;
         detail.teamBcode = teamBcode;
-        
-        
-        //    [detail setModalPresentationStyle:UIModalPresentationFullScreen];
-        //    [self presentViewController:detail animated:NO completion:nil];
+        detail.isEdit = YES;
+        detail.playingXIPlayers = getPlayerRecord;
+    
         [self.navigationController pushViewController:detail animated:YES];
-    //    NSLog(@"indexframe=%@",selectedIndexPath);
     
 }
 
@@ -6219,10 +6420,12 @@ EndInnings *endInnings;
 }
 -(void)OtherWicket
 {
-    otherwicketvc = [[OtherWicketVC alloc]initWithNibName:@"OtherWicketVC" bundle:nil];
-    otherwicketvc.competitioncode=self.competitionCode;
-    otherwicketvc.matchcode =self.matchCode;
-  //  otherwicketvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    otherwicketvc = [[Other_WicketVC alloc]initWithNibName:@"Other_WicketVC" bundle:nil];
+    otherwicketvc.COMPETITIONCODE=self.competitionCode;
+    otherwicketvc.MATCHCODE =self.matchCode;
+ otherwicketvc.INNINGSNO =fetchSEPageLoadRecord.INNINGSNO;
+    otherwicketvc.TEAMCODE=fetchSEPageLoadRecord.TEAMCODE;
+  //  otherwicketvc.PLAYERNAME=
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];

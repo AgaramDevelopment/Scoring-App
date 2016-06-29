@@ -10,8 +10,7 @@
 #import "TorunamentVC.h"
 #import "MatchOfficalsVC.h"
 @interface TossDetailsVC : UIViewController<UITableViewDataSource,UITableViewDataSource>
-
-
+@property (strong,nonatomic) NSMutableArray *matchSetUp;
 
 @property (strong, nonatomic) IBOutlet UIView *view_Wonby;
 @property (strong, nonatomic) IBOutlet UITableView *Wonby_table;

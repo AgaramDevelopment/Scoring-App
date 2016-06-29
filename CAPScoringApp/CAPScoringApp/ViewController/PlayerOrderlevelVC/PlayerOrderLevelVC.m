@@ -13,6 +13,9 @@
 #import "DBManager.h"
 #import "NewMatchSetUpVC.h"
 #import "CapitainWicketKeeperRecord.h"
+#import "Reachability.h"
+#import "AppDelegate.h"
+#import "Utitliy.h"
 
 @interface PlayerOrderLevelVC ()<UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate>
 {
@@ -259,6 +262,73 @@
     {
         SelectPlayerRecord *playerorderRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:i];
         [DBManager updatePlayerorder:self.matchCode :self.TeamCode PlayerCode:playerorderRecord.playerCode PlayerOrder:playerorderRecord.playerOrder];
+        
+        if(self.checkInternetConnection){
+           
+            
+            _matchCode = _matchCode == nil ?@"NULL":_matchCode;
+            _TeamCode = _TeamCode == nil ?@"NULL":_TeamCode;
+            NSString*PlayerCode = playerorderRecord.playerCode == nil ?@"NULL":playerorderRecord.playerCode;
+             NSString*PlayerOrder = playerorderRecord.playerOrder == nil ?@"NULL":playerorderRecord.playerOrder;
+            
+            AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+            
+            //Show indicator
+            [delegate showLoading];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                
+                
+                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHTEAMPLAYERORDER/%@/%@/%@/%@",[Utitliy getIPPORT],_matchCode,_TeamCode,PlayerCode,PlayerOrder];
+                NSLog(@"-%@",baseURL);
+                
+                
+                NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                
+                NSURLRequest *request = [NSURLRequest requestWithURL:url];
+                NSURLResponse *response;
+                NSError *error;
+                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+                
+                
+                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+                
+                if(rootArray !=nil && rootArray.count>0){
+                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                    NSString *success = [valueDict valueForKey:@"DataItem"];
+                    if([success isEqual:@"Success"]){
+                        
+                    }
+                }else{
+                    
+                }
+                //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
+                //            NSLog(@"%@",errorCode);
+                //
+                //
+                //            if([errorCode boolValue] == YES)
+                //            {
+                //
+                //                BOOL isUserLogin = YES;
+                //
+                //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+                //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+                //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+                //                [[NSUserDefaults standardUserDefaults] synchronize];
+                //
+                //                [self openContentView];
+                //
+                //            }else{
+                //
+                //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+                //            }
+                [delegate hideLoading];
+            });
+            
+            //[delegate hideLoading];
+        }
+
+        
+        
         
     }
     
@@ -597,5 +667,14 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
 
 @end

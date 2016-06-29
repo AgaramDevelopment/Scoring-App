@@ -180,6 +180,8 @@
         detail.matchTypeCode = matchTypeCode;
         detail.teamAcode = teamAcode;
         detail.teamBcode = teamBcode;
+        detail.isEdit = NO;
+
         
         
         //    [detail setModalPresentationStyle:UIModalPresentationFullScreen];
@@ -194,6 +196,7 @@
         ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
         
         scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+        scoreEngine.matchSetUp = mSetUp;
         scoreEngine.matchCode=matchCode;
         scoreEngine.competitionCode=competitionCode;
         [self.navigationController pushViewController:scoreEngine animated:YES];

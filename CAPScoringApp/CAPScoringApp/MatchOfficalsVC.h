@@ -22,6 +22,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_matchreferee;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_scorer1;
 
+@property (strong,nonatomic) NSMutableArray *matchSetUp;
+
 
 @property(strong,nonatomic)NSString*Matchcode;
 @property(strong,nonatomic)NSString*competitionCode;
