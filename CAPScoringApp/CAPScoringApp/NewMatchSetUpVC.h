@@ -27,6 +27,7 @@
 @property(strong,nonatomic)NSString *teamAcode;
 @property(strong,nonatomic)NSString *teamBcode;
 
+@property(assign,nonatomic) BOOL isEdit;
 
 
 @property (weak, nonatomic) IBOutlet UIView *view_overs;
@@ -60,5 +61,6 @@
 - (IBAction)btn_edit:(id)sender;
 - (IBAction)btn_proceed:(id)sender;
 - (IBAction)btn_back:(id)sender;
+@property(nonatomic,strong) NSMutableArray *playingXIPlayers;
 
 @end

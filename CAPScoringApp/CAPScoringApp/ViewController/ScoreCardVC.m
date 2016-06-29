@@ -122,6 +122,7 @@ int bowlerPostion = 0;
     
 }
 
+
 - (IBAction)btn_back:(id)sender {
     
     [self.navigationController popViewControllerAnimated:YES];

@@ -99,7 +99,8 @@
        // UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
        TossDetailsVC *tossvc =[[TossDetailsVC alloc]init];
         tossvc =  (TossDetailsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"TossDetails"];
-    tossvc.MATCHCODE=Matchcode;
+    tossvc.matchSetUp = self.matchSetUp;
+    tossvc.MATCHCODE = Matchcode;
     tossvc.CompetitionCode=competitionCode;
     tossvc.matchTypeCode = self.matchTypeCode;
      [self.navigationController pushViewController:tossvc animated:YES];

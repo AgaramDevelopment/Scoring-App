@@ -236,6 +236,8 @@
     //selectvc.teamAcode=teamAcode;
    // selectvc.teamBcode=teamBcode;
     
+
+    
     selectvc.teamA = self.teamA;
     selectvc.teamB = self.teamB;
     selectvc.matchType = self.matchType;
@@ -250,6 +252,10 @@
     selectvc.competitionCode=competitionCode;
     selectvc.matchTypeCode=_matchTypeCode;
     selectvc.chooseTeam   =selectTeam;
+    selectvc.isEdit = self.isEdit;
+    
+    selectvc.playingXIPlayers = self.playingXIPlayers;
+
     
     
     [self.navigationController pushViewController:selectvc animated:YES];
