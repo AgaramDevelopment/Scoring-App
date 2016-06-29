@@ -205,6 +205,6 @@
 
 +(BOOL) GetSessionNoForDeleteEndInninges:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) OLDINNINGSNO;
 
-
++(NSNumber *) GetBowlerCountFormanageOverDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) OVERNO;
 
 @end

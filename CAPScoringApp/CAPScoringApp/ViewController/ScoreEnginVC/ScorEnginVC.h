@@ -10,6 +10,8 @@
 
 @interface ScorEnginVC : UIViewController<UIGestureRecognizerDelegate>
 
+@property (strong,nonatomic) NSMutableArray *matchSetUp;
+
 @property(nonatomic,strong) IBOutlet NSLayoutConstraint * sideviewXposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewXposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewwidthposition;
@@ -268,7 +270,9 @@
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamASecIngsOvs;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsScore;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsOvs;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_runs_required;
 
+@property (weak, nonatomic) IBOutlet UILabel *lbl_target;
 @property (strong,nonatomic)UIView *objcommonRemarkview;
 @property (strong,nonatomic)UITextView *txt_Remark;
 - (IBAction)btn_revisetarget:(id)sender;
@@ -279,4 +283,7 @@
 
 - (IBAction)btn_penality:(id)sender;
 @property (strong,nonatomic)NSString *matchTypeCode;
+
+@property (assign,nonatomic) BOOL isEditMode;
+@property (strong,nonatomic) NSString *editBallCode;
 @end

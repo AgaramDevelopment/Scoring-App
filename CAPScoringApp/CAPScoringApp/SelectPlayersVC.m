@@ -35,31 +35,31 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [self customnavigationmethod];
     
-    NSMutableArray *playersCode = [[NSMutableArray alloc]init];
-    
-    [playersCode addObject:@"PYC0000001"];
-    [playersCode addObject:@"PYC0000002"];
-    [playersCode addObject:@"PYC0000003"];
-    [playersCode addObject:@"PYC0000004"];
-    [playersCode addObject:@"PYC0000005"];
-    [playersCode addObject:@"PYC0000006"];
-    
-    [playersCode addObject:@"PYC0000050"];
-    [playersCode addObject:@"PYC0000051"];
-    [playersCode addObject:@"PYC0000052"];
-    [playersCode addObject:@"PYC0000053"];
-    
-    [playersCode addObject:@"PYC0000065"];
-    [playersCode addObject:@"PYC0000066"];
-    [playersCode addObject:@"PYC0000067"];
-    [playersCode addObject:@"PYC0000068"];
-    [playersCode addObject:@"PYC0000069"];
-    [playersCode addObject:@"PYC0000070"];
-    
-    
-    for(int i=0;i<[playersCode count];i++){
-        [self addImageInAppDocumentLocation:[playersCode objectAtIndex:i]];
-    }
+//    NSMutableArray *playersCode = [[NSMutableArray alloc]init];
+//    
+//    [playersCode addObject:@"PYC0000001"];
+//    [playersCode addObject:@"PYC0000002"];
+//    [playersCode addObject:@"PYC0000003"];
+//    [playersCode addObject:@"PYC0000004"];
+//    [playersCode addObject:@"PYC0000005"];
+//    [playersCode addObject:@"PYC0000006"];
+//    
+//    [playersCode addObject:@"PYC0000050"];
+//    [playersCode addObject:@"PYC0000051"];
+//    [playersCode addObject:@"PYC0000052"];
+//    [playersCode addObject:@"PYC0000053"];
+//    
+//    [playersCode addObject:@"PYC0000065"];
+//    [playersCode addObject:@"PYC0000066"];
+//    [playersCode addObject:@"PYC0000067"];
+//    [playersCode addObject:@"PYC0000068"];
+//    [playersCode addObject:@"PYC0000069"];
+//    [playersCode addObject:@"PYC0000070"];
+//    
+//    
+//    for(int i=0;i<[playersCode count];i++){
+//        [self addImageInAppDocumentLocation:[playersCode objectAtIndex:i]];
+//    }
     
    // self.teamCode = @"TEA0000001";
     //self.matchCode= @"IMSC0221C6F6595E95A00002";
@@ -90,29 +90,29 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 
--(void) addImageInAppDocumentLocation:(NSString*) fileName{
-    
-    BOOL success = [self checkFileExist:fileName];
-    
-    if(!success) {//If file not exist
-        
-        UIImage  *newImage = [UIImage imageNamed:fileName];
-        NSData *imageData = UIImagePNGRepresentation(newImage);
-        
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        
-        NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]];
-        
-        if (![imageData writeToFile:imagePath atomically:NO])
-        {
-            NSLog((@"Failed to cache image data to disk"));
-        }else
-        {
-            NSLog(@"the cachedImagedPath is %@",imagePath);
-        }
-    }
-}
+//-(void) addImageInAppDocumentLocation:(NSString*) fileName{
+//    
+//    BOOL success = [self checkFileExist:fileName];
+//    
+//    if(!success) {//If file not exist
+//        
+//        UIImage  *newImage = [UIImage imageNamed:fileName];
+//        NSData *imageData = UIImagePNGRepresentation(newImage);
+//        
+//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+//        NSString *documentsDirectory = [paths objectAtIndex:0];
+//        
+//        NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]];
+//        
+//        if (![imageData writeToFile:imagePath atomically:NO])
+//        {
+//            NSLog((@"Failed to cache image data to disk"));
+//        }else
+//        {
+//            NSLog(@"the cachedImagedPath is %@",imagePath);
+//        }
+//    }
+//}
 
 //Check given file name exist in document directory
 - (BOOL) checkFileExist:(NSString*) fileName{
@@ -223,8 +223,12 @@ static NSString * const reuseIdentifier = @"Cell";
         if([[selectedPlayerMainRecord playerCode] isEqualToString:[selectedPlayerFilterRecord playerCode]]){
             //Swap value
             if([[selectedPlayerFilterRecord isSelected] boolValue]){
-                selectedPlayerMainRecord.isSelected = [NSNumber numberWithInteger:0];
-                selectedPlayerFilterRecord.isSelected = [NSNumber numberWithInteger:0];
+                
+                if([self checkIsEditDeselect:selectedPlayerMainRecord.playerCode]){//Check for edit mode
+                    selectedPlayerMainRecord.isSelected = [NSNumber numberWithInteger:0];
+                    selectedPlayerFilterRecord.isSelected = [NSNumber numberWithInteger:0];
+                }
+                
             }else{
                 selectedPlayerMainRecord.isSelected = [NSNumber numberWithInteger:1];
                 selectedPlayerFilterRecord.isSelected = [NSNumber numberWithInteger:1];
@@ -238,6 +242,25 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [self setSelectCount];
     
+    return YES;
+}
+
+//Edit mode check
+-(BOOL) checkIsEditDeselect:(NSString *)selectedPlayerCode {
+    
+    SelectPlayerRecord *objSelectPlayerRecord ;
+    if(self.isEdit){
+        for (int i =0; i<self.playingXIPlayers.count; i++)
+        {
+            objSelectPlayerRecord=[self.selectedPlayerArray objectAtIndex:i];
+            NSString * objStr =[objSelectPlayerRecord valueForKey:@"playerCode"];
+            if(objStr == selectedPlayerCode)
+            {
+                [self showDialog:@"Can not modify this player." andTitle:@""];
+                return NO;
+            }
+        }
+    }
     return YES;
 }
 
@@ -271,7 +294,7 @@ static NSString * const reuseIdentifier = @"Cell";
             
         }
         PlayerOrderLevelVC *objPlayerOrderLevelVC = [[PlayerOrderLevelVC alloc] init];
-         objPlayerOrderLevelVC =  (PlayerOrderLevelVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"PlayerOrderLevelVC"];
+        objPlayerOrderLevelVC =  (PlayerOrderLevelVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"PlayerOrderLevelVC"];
         objPlayerOrderLevelVC.objSelectplayerList_Array=self.selectedPlayerArray;
         objPlayerOrderLevelVC.TeamCode=self.SelectTeamCode;
         objPlayerOrderLevelVC.matchCode= self.matchCode;

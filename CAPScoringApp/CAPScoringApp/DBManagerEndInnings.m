@@ -1433,9 +1433,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT COUNT(1) as COUNT  FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@') > 0 ",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT COUNT(1) as COUNT  FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+            
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
@@ -1566,12 +1567,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT CASE WHEN (ISNULL(SUM(TOTALRUNS+NOBALL+WIDE),0) = 0) THEN 1 ELSE 0 END  as MAIDENOVERS FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = '%@'group by ballno  HAVING MAX(BALLNO) > 4 ",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT CASE WHEN (IFNULL(SUM(TOTALRUNS+NOBALL+WIDE),0) = 0) THEN 1 ELSE 0 END  as MAIDENOVERS FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = '%@'group by ballno  HAVING MAX(BALLNO) > 4 ",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
-                while(sqlite3_step(statement)==SQLITE_ROW){
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
                     NSString *MAIDENOVERS =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -1602,8 +1602,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         NSString *updateSQL = [NSString stringWithFormat:@" SELECT BOWLERCODE  FROM BOWLEROVERDETAILS  WHERE COMPETITIONCODE = '%@'  AND MATCHCODE = '%@'  AND INNINGSNO = '%@'   AND OVERNO = '%@' ",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
@@ -1671,8 +1670,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT BOWLERCODE FROM BOWLEROVERDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
