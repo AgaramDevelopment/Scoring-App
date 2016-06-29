@@ -6237,28 +6237,27 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"DELETE INNINGSBREAKEVENTS WHERE COMPETITIONCODE ='%@' AND MATCHCODE='%@' AND INNINGSNO ='%@' AND BREAKNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,BREAKNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM INNINGSBREAKEVENTS WHERE COMPETITIONCODE ='%@' AND MATCHCODE='%@' AND INNINGSNO ='%@' AND BREAKNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,BREAKNO];
         
         const char *update_stmt = [updateSQL UTF8String];
-        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
+        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_finalize(statement);
-                sqlite3_close(dataBase);
-                
-                
-                return YES;
-            }
+            sqlite3_close(dataBase);
+            return YES;
             
         }
         else {
             sqlite3_reset(statement);
-            
+            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
             return NO;
         }
+        
     }
-    sqlite3_reset(statement);
-    return NO;
+    return YES;
+    
+
 }
 
 
