@@ -51,6 +51,8 @@
 #import "Batsmancell.h"
 #import "AppealBatsmenRecord.h"
 #import "DeclareInnings.h"
+#import "OtherWicketVC.h"
+#import "NewMatchSetUpVC.h"
 
 
 
