@@ -6152,7 +6152,7 @@ EndInnings *endInnings;
 {
    
     
-    NSMutableArray *getPlayerRecord = [DBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:[NSString stringWithFormat:@"%@",fetchSEPageLoadRecord.BATTEAMOVERS] BALLNO:[NSString stringWithFormat:@"%@",fetchSEPageLoadRecord.BATTEAMOVRBALLS] ];
+    NSMutableArray *getPlayerRecord = [DBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS] BALLNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVRBALLS] ];
     
     NewMatchSetUpVC *detail = [[NewMatchSetUpVC alloc]init];
     

@@ -246,11 +246,16 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 //Edit mode check
--(BOOL) checkIsEditDeselect:(NSString *)selectedPlayerCode{
+-(BOOL) checkIsEditDeselect:(NSString *)selectedPlayerCode {
+    
+    SelectPlayerRecord *objSelectPlayerRecord ;
     if(self.isEdit){
-        for (int i =0; i>self.playingXIPlayers.count; i++) {
-            SelectPlayerRecord *selectPlr = [self.playingXIPlayers objectAtIndex:i];
-            if([selectedPlayerCode isEqual:selectPlr.playerCode]){
+        for (int i =0; i<self.playingXIPlayers.count; i++)
+        {
+            objSelectPlayerRecord=[self.selectedPlayerArray objectAtIndex:i];
+            NSString * objStr =[objSelectPlayerRecord valueForKey:@"playerCode"];
+            if(objStr == selectedPlayerCode)
+            {
                 [self showDialog:@"Can not modify this player." andTitle:@""];
                 return NO;
             }
