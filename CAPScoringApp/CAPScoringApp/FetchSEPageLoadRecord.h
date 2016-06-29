@@ -70,6 +70,8 @@
 @property(strong,nonatomic)NSString *TEAMCODE;
 
 @property(nonatomic,assign)NSInteger *BATTEAMRUNS;
+@property(nonatomic,assign) NSInteger ISOVERCOMPLETE;
+@property(nonatomic,strong) NSNumber *ISFREEHIT;
 @property(nonatomic,assign)NSNumber *RUNSREQUIRED;
 
 
@@ -119,7 +121,7 @@
 
 
 @property(nonatomic,assign)NSInteger *BATTEAMWICKETS;
-@property(nonatomic,assign)NSInteger *BATTEAMOVERS;
+@property(nonatomic,assign)NSInteger BATTEAMOVERS;
 @property(nonatomic,assign)NSInteger *BATTEAMOVRBALLS;
 @property(nonatomic,assign)NSNumber *BATTEAMRUNRATE;
 
