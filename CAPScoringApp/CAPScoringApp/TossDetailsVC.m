@@ -754,8 +754,9 @@ if (buttonIndex == 0 && alertView.tag == 1)
             ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
             
             scoreEngine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
-                       scoreEngine.matchCode=self.MATCHCODE;
-                      scoreEngine.competitionCode=self.CompetitionCode;
+            scoreEngine.matchSetUp = self.matchSetUp;
+            scoreEngine.matchCode=self.MATCHCODE;
+            scoreEngine.competitionCode=self.CompetitionCode;
             scoreEngine.matchTypeCode = self.matchTypeCode;
             
             [self.navigationController pushViewController:scoreEngine animated:YES];

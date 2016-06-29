@@ -10,6 +10,8 @@
 
 @interface ScorEnginVC : UIViewController<UIGestureRecognizerDelegate>
 
+@property (strong,nonatomic) NSMutableArray *matchSetUp;
+
 @property(nonatomic,strong) IBOutlet NSLayoutConstraint * sideviewXposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewXposition;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * commonViewwidthposition;

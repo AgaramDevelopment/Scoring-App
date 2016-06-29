@@ -35,14 +35,13 @@
 @property(strong,nonatomic)NSString *teamBcode;
 
 
-
-
-
+@property(nonatomic,strong) NSMutableArray *playingXIPlayers;
 
 @property (strong,nonatomic) NSString *SelectTeamCode;
 
 @property(strong,nonatomic) NSString *chooseTeam;
 //@property (strong,nonatomic) NSString *matchCode;
+@property(assign,nonatomic) BOOL isEdit;
 
 
 
