@@ -147,9 +147,11 @@
 @property (strong, nonatomic) IBOutlet UIView *view_umpireName;
 - (IBAction)btn_umpireName:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_umpirename;
+@property (strong, nonatomic) IBOutlet UILabel *Lbl_umpirename2;
 @property (strong, nonatomic) IBOutlet UIView *view_batsmen;
 - (IBAction)btn_batsmen:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_batsmen;
+@property (strong, nonatomic) IBOutlet UILabel *Lbl_batsmen;
 - (IBAction)btn_AppealSave:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextField *comments_txt;
 
@@ -276,7 +278,5 @@
 - (IBAction)btn_show_scorecard:(id)sender;
 
 - (IBAction)btn_penality:(id)sender;
-@property (strong, nonatomic) IBOutlet UILabel *Lbl_umpirename2;
-@property (strong, nonatomic) IBOutlet UILabel *Lbl_batsmen;
-
+@property (strong,nonatomic)NSString *matchTypeCode;
 @end

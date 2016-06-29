@@ -1584,4 +1584,183 @@ return YES;
 }
 
 
+
+//Metadata
+
+
++(BOOL) CheckMetaData:METASUBCODE{
+
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT METASUBCODE FROM METADATA WHERE METASUBCODE ='%@'",METASUBCODE];
+    
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            
+            
+            return YES;
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return NO;
+    
+
+
+
+}
+
+
++(BOOL)InsertMetaData:(NSString*)METASUBCODE:(NSString*)METADATATYPECODE:(NSString*)METADATATYPEDESCRIPTION:(NSString*)METASUBCODEDESCRIPTION
+{
+
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO METADATA(METASUBCODE,METADATATYPECODE,METADATATYPEDESCRIPTION,METASUBCODEDESCRIPTION,issync)VALUES('%@','%@','%@','%@','1')",METASUBCODE,METADATATYPECODE,METADATATYPEDESCRIPTION,METASUBCODEDESCRIPTION];
+        
+        
+        const char *update_stmt = [INSERTSQL UTF8String];
+        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
+        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
+        }
+        
+    }
+    return YES;
+    
+    
+
+
+
+
+}
+
+
+
+//PowerplayType
++(BOOL)  CheckPowerplayType:POWERPLAYTYPECODE
+{
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYTYPECODE FROM POWERPLAYTYPE WHERE POWERPLAYTYPECODE ='%@'",POWERPLAYTYPECODE];
+    
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            
+            
+            return YES;
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return NO;
+
+
+}
++(BOOL)InsertPowerplayType:(NSString*)POWERPLAYTYPECODE:(NSString*)POWERPLAYTYPENAME:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE:(NSString*)ISSYSTEMREFERENCE{
+    
+    
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO POWERPLAYTYPE(POWERPLAYTYPECODE,POWERPLAYTYPENAME,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE,ISSYSTEMREFERENCE,issync)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','1')",POWERPLAYTYPECODE,POWERPLAYTYPENAME,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE,ISSYSTEMREFERENCE];
+        
+        
+        const char *update_stmt = [INSERTSQL UTF8String];
+        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
+        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
+        }
+        
+    }
+    return YES;
+    
+ }
+
++(BOOL)UpdatePowerplayType:(NSString*)POWERPLAYTYPECODE:(NSString*)POWERPLAYTYPENAME:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE:(NSString*)ISSYSTEMREFERENCE{
+
+
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *UPDATESQL = [NSString stringWithFormat:@"UPDATE POWERPLAYTYPE SET POWERPLAYTYPENAME='%@',RECORDSTATUS='%@', issync='1' WHERE POWERPLAYTYPECODE ='%@'",POWERPLAYTYPENAME,RECORDSTATUS,POWERPLAYTYPECODE];
+        
+        
+        const char *update_stmt = [UPDATESQL UTF8String];
+        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
+        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
+        }
+        
+    }
+    return YES;
+    
+
+
+}
+
+
 @end

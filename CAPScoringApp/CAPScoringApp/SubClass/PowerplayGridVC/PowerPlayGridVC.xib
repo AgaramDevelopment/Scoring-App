@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="RAJDHANI-BOLD.TTF">
+            <string>Rajdhani-Bold</string>
+        </mutableArray>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PowerPlayGridVC">
+            <connections>
+                <outlet property="tbl_powerplay" destination="Y4k-dx-ri6" id="JTr-cb-K8S"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gIN-im-H5V">
+                    <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="PsG-0o-O9X">
+                            <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
+                        </imageView>
+                        <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gA-Zc-iMW">
+                            <rect key="frame" x="0.0" y="0.0" width="550" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="Bf6-Kh-v3n"/>
+                            </constraints>
+                            <color key="barTintColor" red="0.1764705882" green="0.23529411759999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <textAttributes key="titleTextAttributes">
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </textAttributes>
+                            <items>
+                                <navigationItem title="POWER PLAY" id="PKj-Re-XV0">
+                                    <barButtonItem key="rightBarButtonItem" style="plain" id="u53-NN-cSY">
+                                        <view key="customView" contentMode="scaleToFill" id="7Tg-eL-Pbf">
+                                            <rect key="frame" x="427" y="9" width="103" height="26"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HGd-qJ-UOD">
+                                                    <rect key="frame" x="28" y="0.0" width="75" height="26"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tsj-9T-Ney">
+                                                            <rect key="frame" x="0.0" y="0.0" width="75" height="26"/>
+                                                            <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="12"/>
+                                                            <state key="normal" title="Add PowerPlay">
+                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="btn_addppowerplay:" destination="-1" eventType="touchUpInside" id="sVY-Me-V09"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" secondItem="tsj-9T-Ney" secondAttribute="bottom" id="0Oy-RH-WDD"/>
+                                                        <constraint firstItem="tsj-9T-Ney" firstAttribute="leading" secondItem="HGd-qJ-UOD" secondAttribute="leading" id="5It-iO-cvs"/>
+                                                        <constraint firstItem="tsj-9T-Ney" firstAttribute="top" secondItem="HGd-qJ-UOD" secondAttribute="top" id="I8S-Ao-Eqh"/>
+                                                    </constraints>
+                                                </view>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstItem="HGd-qJ-UOD" firstAttribute="top" secondItem="7Tg-eL-Pbf" secondAttribute="top" id="bXB-s3-wwc"/>
+                                                <constraint firstItem="HGd-qJ-UOD" firstAttribute="leading" secondItem="7Tg-eL-Pbf" secondAttribute="leading" constant="28" id="fX7-f7-WBi"/>
+                                                <constraint firstAttribute="trailing" secondItem="HGd-qJ-UOD" secondAttribute="trailing" id="uRu-Ts-Xft"/>
+                                                <constraint firstAttribute="bottom" secondItem="HGd-qJ-UOD" secondAttribute="bottom" id="xIN-3j-0p0"/>
+                                            </constraints>
+                                        </view>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-add" translatesAutoresizingMaskIntoConstraints="NO" id="Ycq-0V-2Vo">
+                            <rect key="frame" x="430" y="12" width="20" height="20"/>
+                        </imageView>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Y4k-dx-ri6">
+                            <rect key="frame" x="0.0" y="50" width="550" height="550"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="s67-QY-efO"/>
+                                <outlet property="delegate" destination="-1" id="KVP-2S-eof"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="1gA-Zc-iMW" firstAttribute="trailing" secondItem="PsG-0o-O9X" secondAttribute="trailing" id="2gh-HB-tnL"/>
+                        <constraint firstAttribute="bottom" secondItem="PsG-0o-O9X" secondAttribute="bottom" id="Bhp-bD-doA"/>
+                        <constraint firstAttribute="trailing" secondItem="Y4k-dx-ri6" secondAttribute="trailing" id="HQD-g2-5Yt"/>
+                        <constraint firstItem="PsG-0o-O9X" firstAttribute="top" secondItem="gIN-im-H5V" secondAttribute="top" id="Kig-yk-mSp"/>
+                        <constraint firstAttribute="trailing" secondItem="PsG-0o-O9X" secondAttribute="trailing" id="LB5-kx-Lxc"/>
+                        <constraint firstItem="Ycq-0V-2Vo" firstAttribute="leading" secondItem="gIN-im-H5V" secondAttribute="leading" constant="430" id="N7h-qg-rd0"/>
+                        <constraint firstAttribute="bottom" secondItem="Y4k-dx-ri6" secondAttribute="bottom" id="Nhi-OR-jQd"/>
+                        <constraint firstItem="Y4k-dx-ri6" firstAttribute="top" secondItem="1gA-Zc-iMW" secondAttribute="bottom" constant="6" id="a2U-J6-0Kv"/>
+                        <constraint firstItem="Ycq-0V-2Vo" firstAttribute="top" secondItem="gIN-im-H5V" secondAttribute="top" constant="12" id="bzX-sQ-IL0"/>
+                        <constraint firstAttribute="trailing" secondItem="Ycq-0V-2Vo" secondAttribute="trailing" constant="100" id="dMP-rz-0XY"/>
+                        <constraint firstItem="1gA-Zc-iMW" firstAttribute="top" secondItem="PsG-0o-O9X" secondAttribute="top" id="eeZ-Ig-BDb"/>
+                        <constraint firstItem="PsG-0o-O9X" firstAttribute="leading" secondItem="gIN-im-H5V" secondAttribute="leading" id="m4H-2K-2uK"/>
+                        <constraint firstItem="1gA-Zc-iMW" firstAttribute="centerY" secondItem="Ycq-0V-2Vo" secondAttribute="centerY" id="spE-TQ-jtN"/>
+                        <constraint firstItem="1gA-Zc-iMW" firstAttribute="leading" secondItem="Y4k-dx-ri6" secondAttribute="leading" id="tHS-ts-Zh4"/>
+                        <constraint firstItem="Y4k-dx-ri6" firstAttribute="leading" secondItem="gIN-im-H5V" secondAttribute="leading" id="zHB-hf-cWk"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="gIN-im-H5V" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Ost-wR-agd"/>
+                <constraint firstAttribute="trailing" secondItem="gIN-im-H5V" secondAttribute="trailing" id="QSl-1H-VhK"/>
+                <constraint firstItem="gIN-im-H5V" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Vvx-Ph-9yv"/>
+                <constraint firstAttribute="bottom" secondItem="gIN-im-H5V" secondAttribute="bottom" id="aZK-Y8-lNs"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="BackgroundImg" width="2048" height="2732"/>
+        <image name="ico-add" width="32" height="32"/>
+    </resources>
+</document>

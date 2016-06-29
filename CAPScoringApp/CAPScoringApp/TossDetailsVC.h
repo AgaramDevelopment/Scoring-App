@@ -56,6 +56,7 @@ IBOutlet UIView *nonStriker;
 @property (strong, nonatomic) IBOutlet UIButton *outlet_btn_proceed;
 @property(nonatomic,strong)NSString*MATCHCODE;
 @property(nonatomic,strong) NSString * CompetitionCode;
+@property(nonatomic,strong) NSString * matchTypeCode;
 
 -(IBAction)Back_BtnAction:(id)sender;
 

@@ -432,11 +432,15 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 
 
 //Revised overs
-+(NSMutableArray *) RetrieveRevisedOverData:(NSString*)matchcode competitionCode:(NSString*) competitionCode;
++(NSMutableArray *) RetrieveRevisedOverData:(NSString*)matchcode competitionCode:(NSString*) competitionCode recordstatus:(NSString*) recordstatus;
 +(BOOL)updateRevisedOvers:(NSString*)overs comments:(NSString*)comments matchCode:(NSString*) matchCode competitionCode:(NSString*)competitionCode ;
+
+
 //Revised Target
 +(BOOL)updateRevisedTarget:(NSString*)overs runs:(NSString*)runs comments:(NSString*)comments matchCode:(NSString*) matchCode competitionCode:(NSString*)competitionCode;
+
 +(NSMutableArray *) RetrieveRevisedTargetData:(NSString*)matchcode competitionCode:(NSString*) competitionCode;
++(NSNumber *) SetMatchRegistrationTarget:(NSString*)matchcode competitionCode:(NSString*) competitionCode;
 
 + (NSMutableArray *)getBowlerOversorder :(NSString *) Competitioncode :(NSString *) Matchcode :(NSString *) inningsno;
 
@@ -446,8 +450,20 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 +(NSMutableArray *) GetPenaltyDetailsForPageLoadPenalty:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 +(NSMutableArray *) SetPenaltyDetailsForInsert:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 +(NSMutableArray *) GetPenaltyDetailsForUpdate:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) PENALTYCODE;
++(BOOL) GetUpdatePenaltyDetails:(NSString*) AWARDEDTOTEAMCODE:(NSNumber*) PENALTYRUNS:(NSString*) PENALTYTYPECODE :(NSString*) PENALTYREASONCODE:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO:(NSString*) PENALTYCODE;
 
-+(NSMutableArray *) GetMatchResultTypeAndCodeForFetchMatchResult;
+
+//powerplay
++(BOOL) SetPowerPlayDetails:(NSString*) POWERPLAYCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) STARTOVER:(NSString*) ENDOVER:(NSString*) POWERPLAYTYPE:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE;
+
++(NSMutableArray *)fetchpowerplaytype;
++(NSMutableArray *) SetPowerPlayDetailsForInsert:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
+
++(BOOL) UpdatePowerPlay:(NSString*) INNINGSNO:(NSString*) STARTOVER:(NSString*) ENDOVER:(NSString*) MATCHDATE:(NSString*)POWERPLAYTYPE:(NSString*) RECORDSTATUS:(NSString*) MODIFIEDBY:(NSString*) POWERPLAYCODE:(NSString*) MATCHCODE;
++(NSNumber *) SetMatchRegistration:(NSString*) MATCHCODE;
+
+
+
 // END OVER STATUS
 
 //get overStatus
@@ -457,6 +473,6 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 +(NSMutableArray *)GETUMPIRE :(NSString *)Competitioncode :(NSString *) MatchCode;
 
 
-
++(NSMutableArray *) getPlayedPlayersForPlayerXI:(NSString*)MATCHCODE COMPETITIOMCODE:(NSString*) COMPETITIOMCODE  OVERNO:(NSString*) OVERNO BALLNO:(NSString*) BALLNO;
 
 @end

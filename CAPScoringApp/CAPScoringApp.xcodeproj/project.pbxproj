@@ -13,6 +13,12 @@
 		0468B38F1D12872E00B98576 /* PenalityTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0468B38D1D12872E00B98576 /* PenalityTVC.xib */; };
 		0468B3921D12AD2100B98576 /* MetaDataRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0468B3911D12AD2100B98576 /* MetaDataRecord.m */; };
 		047669DD1D14229600572E39 /* PenaltyDetailsRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */; };
+		0481DCFF1D213B250084BFF7 /* PowerPlayGridTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCF21D213B250084BFF7 /* PowerPlayGridTVC.m */; };
+		0481DD031D213B250084BFF7 /* PowerPlayRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCF81D213B250084BFF7 /* PowerPlayRecord.m */; };
+		0481DD041D213B250084BFF7 /* PowerPlayTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCFA1D213B250084BFF7 /* PowerPlayTVCell.m */; };
+		0481DD051D213B250084BFF7 /* PowerPlayTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCFB1D213B250084BFF7 /* PowerPlayTVCell.xib */; };
+		0481DD061D213B250084BFF7 /* PowerPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCFD1D213B250084BFF7 /* PowerPlayVC.m */; };
+		0481DD071D213B250084BFF7 /* PowerPlayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCFE1D213B250084BFF7 /* PowerPlayVC.xib */; };
 		048B5A9E1D0AF1A7009F12B8 /* WicketTypeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */; };
 		048F6F591CFFFEE600F2C5F5 /* FieldingFactorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048F6F581CFFFEE600F2C5F5 /* FieldingFactorCell.m */; };
 		1837AA8C1CFF125B00B7259C /* BowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA8B1CFF125B00B7259C /* BowlTypeCell.m */; };
@@ -20,7 +26,7 @@
 		18674AC31D1A4F9600DB7C71 /* MatchResultListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18674AC11D1A4F9600DB7C71 /* MatchResultListVC.m */; };
 		18674AC41D1A4F9600DB7C71 /* MatchResultListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18674AC21D1A4F9600DB7C71 /* MatchResultListVC.xib */; };
 		186DC7F81D1E56DC00293B7F /* Utitliy.m in Sources */ = {isa = PBXBuildFile; fileRef = 186DC7F71D1E56DC00293B7F /* Utitliy.m */; };
-		186DC8001D1EAA9B00293B7F /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 186DC7FF1D1EAA9B00293B7F /* TNCA_DATABASE.sqlite */; };
+		186DC8191D21451500293B7F /* EndDayTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1876211D1D1D625A006E160F /* EndDayTVC.m */; };
 		18704ED21D1954E100996BF3 /* FetchMatchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704ED11D1954E100996BF3 /* FetchMatchResult.m */; };
 		18704ED51D19560C00996BF3 /* DBManagerMatchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704ED41D19560C00996BF3 /* DBManagerMatchResult.m */; };
 		18704ED81D19590000996BF3 /* GetMatchResultTypeAndCodeDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704ED71D19590000996BF3 /* GetMatchResultTypeAndCodeDetails.m */; };
@@ -62,6 +68,10 @@
 		187625231D1544CD009374F8 /* MatchOverandBallDetailsForScoreBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1876251A1D1544CD009374F8 /* MatchOverandBallDetailsForScoreBoard.m */; };
 		187625241D1544CD009374F8 /* MatchRegistrationDetailsForScoreBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1876251C1D1544CD009374F8 /* MatchRegistrationDetailsForScoreBoard.m */; };
 		187625291D154548009374F8 /* EditModeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187625281D154548009374F8 /* EditModeCell.m */; };
+		1877776D1D2232FA002F31E5 /* Batsmancell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187777661D2232FA002F31E5 /* Batsmancell.m */; };
+		1877776E1D2232FA002F31E5 /* DBManagerEndBall.m in Sources */ = {isa = PBXBuildFile; fileRef = 187777681D2232FA002F31E5 /* DBManagerEndBall.m */; };
+		1877776F1D2232FA002F31E5 /* getimageRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1877776A1D2232FA002F31E5 /* getimageRecord.m */; };
+		187777701D2232FA002F31E5 /* umpiretablecell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1877776C1D2232FA002F31E5 /* umpiretablecell.m */; };
 		18785EE51D16630500A09AEC /* LastBolwerDetailRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 18785EE41D16630500A09AEC /* LastBolwerDetailRecord.m */; };
 		18785EEA1D1667A900A09AEC /* FetchLastBowler.m in Sources */ = {isa = PBXBuildFile; fileRef = 18785EE91D1667A900A09AEC /* FetchLastBowler.m */; };
 		1878CD911D11101600A80BEE /* InitializeInningsScoreBoardRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1878CD901D11101600A80BEE /* InitializeInningsScoreBoardRecord.m */; };
@@ -74,7 +84,9 @@
 		1881304E1D0C725100908F65 /* Breaks.m in Sources */ = {isa = PBXBuildFile; fileRef = 1881304D1D0C725100908F65 /* Breaks.m */; };
 		1881E0851D103FFC003DEA09 /* FetchLastBallBowledPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 1881E0841D103FFC003DEA09 /* FetchLastBallBowledPlayer.m */; };
 		1886718A1CFFF77E004DEDA0 /* AggressiveShotTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */; };
-		245E31871D1DB536009FE70F /* DBManagerEndBall.m in Sources */ = {isa = PBXBuildFile; fileRef = 245E31861D1DB536009FE70F /* DBManagerEndBall.m */; };
+		243F8E3F1D2236CF00333AD8 /* AppealBatsmenRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 243F8E3D1D2236CF00333AD8 /* AppealBatsmenRecord.m */; };
+		243F8E441D2237D600333AD8 /* PowerPlayGridVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243F8E411D2237D600333AD8 /* PowerPlayGridVC.xib */; };
+		243F8E451D2237D600333AD8 /* PowerPlayGridVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 243F8E421D2237D600333AD8 /* PowerPlayGridVC.m */; };
 		245E9F161D0143C200D7C07A /* PlayerLevelCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 245E9F151D0143C200D7C07A /* PlayerLevelCell.m */; };
 		246124F61D13C429004B85E7 /* EndInnings.m in Sources */ = {isa = PBXBuildFile; fileRef = 246124F51D13C429004B85E7 /* EndInnings.m */; };
 		246124F91D13C460004B85E7 /* InningsBowlerDetailsRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 246124F81D13C460004B85E7 /* InningsBowlerDetailsRecord.m */; };
@@ -158,11 +170,6 @@
 		CEC858B21D155D36007F5384 /* intialBreakVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC858B01D155D36007F5384 /* intialBreakVC.m */; };
 		CEC858B31D155D36007F5384 /* intialBreakVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC858B11D155D36007F5384 /* intialBreakVC.xib */; };
 		CED03D261D1AAE3B00522B89 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */; };
-		CEE1A1131D1E62E3004E775D /* umpiretablecell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE1A1121D1E62E3004E775D /* umpiretablecell.m */; };
-		CEE1A1161D1E6300004E775D /* Batsmancell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE1A1151D1E6300004E775D /* Batsmancell.m */; };
-		CEE1A1191D1E8718004E775D /* AppealBatsmenRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE1A1181D1E8718004E775D /* AppealBatsmenRecord.m */; };
-		CEE1A11C1D1E91CE004E775D /* getimageRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEE1A11B1D1E91CE004E775D /* getimageRecord.m */; };
-		CEE1A11E1D1EB227004E775D /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = CEE1A11D1D1EB227004E775D /* TNCA_DATABASE.sqlite */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -193,6 +200,17 @@
 		0468B3911D12AD2100B98576 /* MetaDataRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaDataRecord.m; sourceTree = "<group>"; };
 		047669DB1D14229600572E39 /* PenaltyDetailsRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PenaltyDetailsRecord.h; sourceTree = "<group>"; };
 		047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenaltyDetailsRecord.m; sourceTree = "<group>"; };
+		0481DCF11D213B250084BFF7 /* PowerPlayGridTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerPlayGridTVC.h; sourceTree = "<group>"; };
+		0481DCF21D213B250084BFF7 /* PowerPlayGridTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerPlayGridTVC.m; sourceTree = "<group>"; };
+		0481DCF31D213B250084BFF7 /* PowerPlayGridTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PowerPlayGridTVC.xib; sourceTree = "<group>"; };
+		0481DCF71D213B250084BFF7 /* PowerPlayRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerPlayRecord.h; sourceTree = "<group>"; };
+		0481DCF81D213B250084BFF7 /* PowerPlayRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerPlayRecord.m; sourceTree = "<group>"; };
+		0481DCF91D213B250084BFF7 /* PowerPlayTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerPlayTVCell.h; sourceTree = "<group>"; };
+		0481DCFA1D213B250084BFF7 /* PowerPlayTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerPlayTVCell.m; sourceTree = "<group>"; };
+		0481DCFB1D213B250084BFF7 /* PowerPlayTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PowerPlayTVCell.xib; sourceTree = "<group>"; };
+		0481DCFC1D213B250084BFF7 /* PowerPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerPlayVC.h; sourceTree = "<group>"; };
+		0481DCFD1D213B250084BFF7 /* PowerPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerPlayVC.m; sourceTree = "<group>"; };
+		0481DCFE1D213B250084BFF7 /* PowerPlayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PowerPlayVC.xib; sourceTree = "<group>"; };
 		048B5A9C1D0AF1A7009F12B8 /* WicketTypeRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WicketTypeRecord.h; sourceTree = "<group>"; };
 		048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WicketTypeRecord.m; sourceTree = "<group>"; };
 		048F6F571CFFFEE600F2C5F5 /* FieldingFactorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldingFactorCell.h; sourceTree = "<group>"; };
@@ -206,7 +224,6 @@
 		18674AC21D1A4F9600DB7C71 /* MatchResultListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchResultListVC.xib; sourceTree = "<group>"; };
 		186DC7F61D1E56DC00293B7F /* Utitliy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Utitliy.h; sourceTree = "<group>"; };
 		186DC7F71D1E56DC00293B7F /* Utitliy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Utitliy.m; sourceTree = "<group>"; };
-		186DC7FF1D1EAA9B00293B7F /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = "../../../../Backup/Sathish 30-May-2016/TNCA_DATABASE.sqlite"; sourceTree = "<group>"; };
 		18704ED01D1954E100996BF3 /* FetchMatchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchMatchResult.h; sourceTree = "<group>"; };
 		18704ED11D1954E100996BF3 /* FetchMatchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchMatchResult.m; sourceTree = "<group>"; };
 		18704ED31D19560C00996BF3 /* DBManagerMatchResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerMatchResult.h; sourceTree = "<group>"; };
@@ -283,6 +300,14 @@
 		1876251C1D1544CD009374F8 /* MatchRegistrationDetailsForScoreBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchRegistrationDetailsForScoreBoard.m; sourceTree = "<group>"; };
 		187625271D154548009374F8 /* EditModeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditModeCell.h; path = SubClass/EditModeCell/EditModeCell.h; sourceTree = "<group>"; };
 		187625281D154548009374F8 /* EditModeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditModeCell.m; path = SubClass/EditModeCell/EditModeCell.m; sourceTree = "<group>"; };
+		187777651D2232FA002F31E5 /* Batsmancell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Batsmancell.h; sourceTree = "<group>"; };
+		187777661D2232FA002F31E5 /* Batsmancell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Batsmancell.m; sourceTree = "<group>"; };
+		187777671D2232FA002F31E5 /* DBManagerEndBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerEndBall.h; sourceTree = "<group>"; };
+		187777681D2232FA002F31E5 /* DBManagerEndBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerEndBall.m; sourceTree = "<group>"; };
+		187777691D2232FA002F31E5 /* getimageRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getimageRecord.h; sourceTree = "<group>"; };
+		1877776A1D2232FA002F31E5 /* getimageRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getimageRecord.m; sourceTree = "<group>"; };
+		1877776B1D2232FA002F31E5 /* umpiretablecell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = umpiretablecell.h; sourceTree = "<group>"; };
+		1877776C1D2232FA002F31E5 /* umpiretablecell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = umpiretablecell.m; sourceTree = "<group>"; };
 		18785EE31D16630500A09AEC /* LastBolwerDetailRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LastBolwerDetailRecord.h; sourceTree = "<group>"; };
 		18785EE41D16630500A09AEC /* LastBolwerDetailRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LastBolwerDetailRecord.m; sourceTree = "<group>"; };
 		18785EE81D1667A900A09AEC /* FetchLastBowler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchLastBowler.h; sourceTree = "<group>"; };
@@ -307,8 +332,11 @@
 		1881E0841D103FFC003DEA09 /* FetchLastBallBowledPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FetchLastBallBowledPlayer.m; sourceTree = "<group>"; };
 		188671881CFFF77E004DEDA0 /* AggressiveShotTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AggressiveShotTypeCell.h; sourceTree = "<group>"; };
 		188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggressiveShotTypeCell.m; sourceTree = "<group>"; };
-		245E31851D1DB536009FE70F /* DBManagerEndBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerEndBall.h; sourceTree = "<group>"; };
-		245E31861D1DB536009FE70F /* DBManagerEndBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerEndBall.m; sourceTree = "<group>"; };
+		243F8E3D1D2236CF00333AD8 /* AppealBatsmenRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppealBatsmenRecord.m; path = Resource/AppealBatsmenRecord/AppealBatsmenRecord.m; sourceTree = "<group>"; };
+		243F8E3E1D2236CF00333AD8 /* AppealBatsmenRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppealBatsmenRecord.h; path = Resource/AppealBatsmenRecord/AppealBatsmenRecord.h; sourceTree = "<group>"; };
+		243F8E411D2237D600333AD8 /* PowerPlayGridVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PowerPlayGridVC.xib; path = SubClass/PowerplayGridVC/PowerPlayGridVC.xib; sourceTree = "<group>"; };
+		243F8E421D2237D600333AD8 /* PowerPlayGridVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PowerPlayGridVC.m; path = SubClass/PowerplayGridVC/PowerPlayGridVC.m; sourceTree = "<group>"; };
+		243F8E431D2237D600333AD8 /* PowerPlayGridVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PowerPlayGridVC.h; path = SubClass/PowerplayGridVC/PowerPlayGridVC.h; sourceTree = "<group>"; };
 		245E9F141D0143C200D7C07A /* PlayerLevelCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerLevelCell.h; path = SubClass/PlayerLevelCell/PlayerLevelCell.h; sourceTree = "<group>"; };
 		245E9F151D0143C200D7C07A /* PlayerLevelCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerLevelCell.m; path = SubClass/PlayerLevelCell/PlayerLevelCell.m; sourceTree = "<group>"; };
 		246124F41D13C429004B85E7 /* EndInnings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndInnings.h; sourceTree = "<group>"; };
@@ -440,6 +468,15 @@
 		CE7463AB1D16942200D69CD9 /* UpdateBreaksArrayDetails.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBreaksArrayDetails.m; sourceTree = "<group>"; };
 		CE7463B11D16B03800D69CD9 /* DeleteEventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeleteEventRecord.h; sourceTree = "<group>"; };
 		CE7463B21D16B03800D69CD9 /* DeleteEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeleteEventRecord.m; sourceTree = "<group>"; };
+		CEBA5CA51D22343800CE2472 /* Batsmancell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Batsmancell.h; sourceTree = "<group>"; };
+		CEBA5CA61D22343800CE2472 /* Batsmancell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Batsmancell.m; sourceTree = "<group>"; };
+		CEBA5CA71D22343800CE2472 /* DBManagerEndBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerEndBall.h; sourceTree = "<group>"; };
+		CEBA5CA81D22343800CE2472 /* DBManagerEndBall.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerEndBall.m; sourceTree = "<group>"; };
+		CEBA5CA91D22343800CE2472 /* getimageRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getimageRecord.h; sourceTree = "<group>"; };
+		CEBA5CAA1D22343800CE2472 /* getimageRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getimageRecord.m; sourceTree = "<group>"; };
+		CEBA5CAB1D22343800CE2472 /* umpiretablecell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = umpiretablecell.h; sourceTree = "<group>"; };
+		CEBA5CAC1D22343800CE2472 /* umpiretablecell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = umpiretablecell.m; sourceTree = "<group>"; };
+		CEBA5CB21D22578C00CE2472 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		CEC3057F1D014C3400301ED3 /* AppealSystemRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealSystemRecords.h; sourceTree = "<group>"; };
 		CEC305801D014C3400301ED3 /* AppealSystemRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppealSystemRecords.m; sourceTree = "<group>"; };
 		CEC305821D01566100301ED3 /* AppealComponentRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealComponentRecord.h; sourceTree = "<group>"; };
@@ -456,15 +493,6 @@
 		CEC858B11D155D36007F5384 /* intialBreakVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = intialBreakVC.xib; sourceTree = "<group>"; };
 		CED03D241D1AAE3B00522B89 /* DBMANAGERSYNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMANAGERSYNC.h; sourceTree = "<group>"; };
 		CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMANAGERSYNC.m; sourceTree = "<group>"; };
-		CEE1A1111D1E62E3004E775D /* umpiretablecell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = umpiretablecell.h; sourceTree = "<group>"; };
-		CEE1A1121D1E62E3004E775D /* umpiretablecell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = umpiretablecell.m; sourceTree = "<group>"; };
-		CEE1A1141D1E6300004E775D /* Batsmancell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Batsmancell.h; sourceTree = "<group>"; };
-		CEE1A1151D1E6300004E775D /* Batsmancell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Batsmancell.m; sourceTree = "<group>"; };
-		CEE1A1171D1E8718004E775D /* AppealBatsmenRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealBatsmenRecord.h; sourceTree = "<group>"; };
-		CEE1A1181D1E8718004E775D /* AppealBatsmenRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppealBatsmenRecord.m; sourceTree = "<group>"; };
-		CEE1A11A1D1E91CE004E775D /* getimageRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getimageRecord.h; sourceTree = "<group>"; };
-		CEE1A11B1D1E91CE004E775D /* getimageRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = getimageRecord.m; sourceTree = "<group>"; };
-		CEE1A11D1D1EB227004E775D /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -499,18 +527,46 @@
 				0468B3851D12743900B98576 /* PenalityVC.h */,
 				0468B3861D12743900B98576 /* PenalityVC.m */,
 				0468B3871D12743900B98576 /* PenalityVC.xib */,
+				0468B38B1D12872E00B98576 /* PenalityTVC.h */,
+				0468B38C1D12872E00B98576 /* PenalityTVC.m */,
+				0468B38D1D12872E00B98576 /* PenalityTVC.xib */,
+				246465101D17255C0078A446 /* PenaltyGridTVC.h */,
+				246465111D17255C0078A446 /* PenaltyGridTVC.m */,
+				246465121D17255C0078A446 /* PenaltyGridTVC.xib */,
+				246465131D17255C0078A446 /* PenaltygridVC.h */,
+				246465141D17255C0078A446 /* PenaltygridVC.m */,
+				246465151D17255C0078A446 /* PenaltygridVC.xib */,
 			);
 			name = Penality;
 			sourceTree = "<group>";
 		};
-		0468B38A1D1286EA00B98576 /* Penality Cell */ = {
+		0481DCF01D213AE30084BFF7 /* Power Play */ = {
 			isa = PBXGroup;
 			children = (
-				0468B38B1D12872E00B98576 /* PenalityTVC.h */,
-				0468B38C1D12872E00B98576 /* PenalityTVC.m */,
-				0468B38D1D12872E00B98576 /* PenalityTVC.xib */,
+				243F8E401D2237B400333AD8 /* PowerPlatGridVC */,
+				0481DCF11D213B250084BFF7 /* PowerPlayGridTVC.h */,
+				0481DCF21D213B250084BFF7 /* PowerPlayGridTVC.m */,
+				0481DCF31D213B250084BFF7 /* PowerPlayGridTVC.xib */,
+				0481DCF71D213B250084BFF7 /* PowerPlayRecord.h */,
+				0481DCF81D213B250084BFF7 /* PowerPlayRecord.m */,
+				0481DCF91D213B250084BFF7 /* PowerPlayTVCell.h */,
+				0481DCFA1D213B250084BFF7 /* PowerPlayTVCell.m */,
+				0481DCFB1D213B250084BFF7 /* PowerPlayTVCell.xib */,
+				0481DCFC1D213B250084BFF7 /* PowerPlayVC.h */,
+				0481DCFD1D213B250084BFF7 /* PowerPlayVC.m */,
+				0481DCFE1D213B250084BFF7 /* PowerPlayVC.xib */,
 			);
-			name = "Penality Cell";
+			name = "Power Play";
+			sourceTree = "<group>";
+		};
+		0481DD081D213FCC0084BFF7 /* RevicedOver */ = {
+			isa = PBXGroup;
+			children = (
+				187625021D154495009374F8 /* RevicedOverVC.h */,
+				187625031D154495009374F8 /* RevicedOverVC.m */,
+				187625041D154495009374F8 /* RevicedOverVC.xib */,
+			);
+			name = RevicedOver;
 			sourceTree = "<group>";
 		};
 		186DC7F21D1E4B6400293B7F /* Utility */ = {
@@ -666,11 +722,28 @@
 			name = MatchResult;
 			sourceTree = "<group>";
 		};
+		243F8E3C1D2236A300333AD8 /* AppealBatsmenRecord */ = {
+			isa = PBXGroup;
+			children = (
+				243F8E3D1D2236CF00333AD8 /* AppealBatsmenRecord.m */,
+				243F8E3E1D2236CF00333AD8 /* AppealBatsmenRecord.h */,
+			);
+			name = AppealBatsmenRecord;
+			sourceTree = "<group>";
+		};
+		243F8E401D2237B400333AD8 /* PowerPlatGridVC */ = {
+			isa = PBXGroup;
+			children = (
+				243F8E411D2237D600333AD8 /* PowerPlayGridVC.xib */,
+				243F8E421D2237D600333AD8 /* PowerPlayGridVC.m */,
+				243F8E431D2237D600333AD8 /* PowerPlayGridVC.h */,
+			);
+			name = PowerPlatGridVC;
+			sourceTree = "<group>";
+		};
 		245E31841D1DB4E3009FE70F /* DBManagerEndBall */ = {
 			isa = PBXGroup;
 			children = (
-				245E31851D1DB536009FE70F /* DBManagerEndBall.h */,
-				245E31861D1DB536009FE70F /* DBManagerEndBall.m */,
 			);
 			name = DBManagerEndBall;
 			sourceTree = "<group>";
@@ -809,6 +882,14 @@
 		CE0017FD1CF42FA500668D8B /* CAPScoringApp */ = {
 			isa = PBXGroup;
 			children = (
+				CEBA5CA51D22343800CE2472 /* Batsmancell.h */,
+				CEBA5CA61D22343800CE2472 /* Batsmancell.m */,
+				CEBA5CA71D22343800CE2472 /* DBManagerEndBall.h */,
+				CEBA5CA81D22343800CE2472 /* DBManagerEndBall.m */,
+				CEBA5CA91D22343800CE2472 /* getimageRecord.h */,
+				CEBA5CAA1D22343800CE2472 /* getimageRecord.m */,
+				CEBA5CAB1D22343800CE2472 /* umpiretablecell.h */,
+				CEBA5CAC1D22343800CE2472 /* umpiretablecell.m */,
 				186DC7F21D1E4B6400293B7F /* Utility */,
 				187621291D1D7967006E160F /* InningsDetailsRecord */,
 				CE0018481CF460C900668D8B /* Fonts */,
@@ -856,7 +937,8 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
-				CEE1A11D1D1EB227004E775D /* TNCA_DATABASE.sqlite */,
+				CEBA5CB21D22578C00CE2472 /* TNCA_DATABASE.sqlite */,
+				243F8E3C1D2236A300333AD8 /* AppealBatsmenRecord */,
 				2469625C1D1E99DE00CC30D0 /* UpdateScoreengineRecord */,
 				245E31841D1DB4E3009FE70F /* DBManagerEndBall */,
 				246464FD1D17255C0078A446 /* DBManagerEndInnings.h */,
@@ -878,12 +960,6 @@
 				2464650D1D17255C0078A446 /* OtherWicketVC.h */,
 				2464650E1D17255C0078A446 /* OtherWicketVC.m */,
 				2464650F1D17255C0078A446 /* OtherWicketVC.xib */,
-				246465101D17255C0078A446 /* PenaltyGridTVC.h */,
-				246465111D17255C0078A446 /* PenaltyGridTVC.m */,
-				246465121D17255C0078A446 /* PenaltyGridTVC.xib */,
-				246465131D17255C0078A446 /* PenaltygridVC.h */,
-				246465141D17255C0078A446 /* PenaltygridVC.m */,
-				246465151D17255C0078A446 /* PenaltygridVC.xib */,
 				18785EE61D16677A00A09AEC /* StoreProcedure */,
 				1876250D1D1544CD009374F8 /* BatPlayerDetailsForScoreBoard.h */,
 				1876250E1D1544CD009374F8 /* BatPlayerDetailsForScoreBoard.m */,
@@ -924,8 +1000,6 @@
 				CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */,
 				187620FC1D1D0126006E160F /* DBManagerEndDay.h */,
 				187620FD1D1D0126006E160F /* DBManagerEndDay.m */,
-				CEE1A11A1D1E91CE004E775D /* getimageRecord.h */,
-				CEE1A11B1D1E91CE004E775D /* getimageRecord.m */,
 			);
 			name = ReSource;
 			sourceTree = "<group>";
@@ -979,18 +1053,24 @@
 		CE0018371CF4308C00668D8B /* SubClass */ = {
 			isa = PBXGroup;
 			children = (
+				187777651D2232FA002F31E5 /* Batsmancell.h */,
+				187777661D2232FA002F31E5 /* Batsmancell.m */,
+				187777671D2232FA002F31E5 /* DBManagerEndBall.h */,
+				187777681D2232FA002F31E5 /* DBManagerEndBall.m */,
+				187777691D2232FA002F31E5 /* getimageRecord.h */,
+				1877776A1D2232FA002F31E5 /* getimageRecord.m */,
+				1877776B1D2232FA002F31E5 /* umpiretablecell.h */,
+				1877776C1D2232FA002F31E5 /* umpiretablecell.m */,
+				0481DD081D213FCC0084BFF7 /* RevicedOver */,
+				0481DCF01D213AE30084BFF7 /* Power Play */,
 				1876210B1D1D53D5006E160F /* End day */,
 				187625271D154548009374F8 /* EditModeCell.h */,
 				187625281D154548009374F8 /* EditModeCell.m */,
 				187625001D154495009374F8 /* BreakEventRecords.h */,
 				187625011D154495009374F8 /* BreakEventRecords.m */,
-				187625021D154495009374F8 /* RevicedOverVC.h */,
-				187625031D154495009374F8 /* RevicedOverVC.m */,
-				187625041D154495009374F8 /* RevicedOverVC.xib */,
 				187625051D154495009374F8 /* ScoreCardCellTVCell.h */,
 				187625061D154495009374F8 /* ScoreCardCellTVCell.m */,
 				187625071D154495009374F8 /* ScoreCardCellTVCell.xib */,
-				0468B38A1D1286EA00B98576 /* Penality Cell */,
 				0468B3841D126F9100B98576 /* Penality */,
 				24622DBF1D0AE2150057A08A /* Archive Cell */,
 				245E9F0E1D01404C00D7C07A /* playerlevelCell */,
@@ -1010,10 +1090,6 @@
 				1837AA941CFF264A00B7259C /* FastBowlTypeCell.m */,
 				188671881CFFF77E004DEDA0 /* AggressiveShotTypeCell.h */,
 				188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */,
-				CEE1A1111D1E62E3004E775D /* umpiretablecell.h */,
-				CEE1A1121D1E62E3004E775D /* umpiretablecell.m */,
-				CEE1A1141D1E6300004E775D /* Batsmancell.h */,
-				CEE1A1151D1E6300004E775D /* Batsmancell.m */,
 			);
 			name = SubClass;
 			sourceTree = "<group>";
@@ -1072,8 +1148,6 @@
 				047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */,
 				CE7463B11D16B03800D69CD9 /* DeleteEventRecord.h */,
 				CE7463B21D16B03800D69CD9 /* DeleteEventRecord.m */,
-				CEE1A1171D1E8718004E775D /* AppealBatsmenRecord.h */,
-				CEE1A1181D1E8718004E775D /* AppealBatsmenRecord.m */,
 			);
 			name = Records;
 			sourceTree = "<group>";
@@ -1213,6 +1287,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				246465191D17255C0078A446 /* EndInningsTVC.xib in Resources */,
+				243F8E441D2237D600333AD8 /* PowerPlayGridVC.xib in Resources */,
 				CE0018511CF460DE00668D8B /* RAJDHANI-REGULAR.TTF in Resources */,
 				2461251E1D13C931004B85E7 /* RevisedTarget.xib in Resources */,
 				2464651F1D17255C0078A446 /* OtherWicketTVC.xib in Resources */,
@@ -1221,12 +1296,13 @@
 				246465211D17255C0078A446 /* OtherWicketVC.xib in Resources */,
 				187621261D1D644C006E160F /* EndInningsVC.xib in Resources */,
 				0468B38F1D12872E00B98576 /* PenalityTVC.xib in Resources */,
+				0481DD051D213B250084BFF7 /* PowerPlayTVCell.xib in Resources */,
 				CE00184F1CF460DE00668D8B /* RAJDHANI-LIGHT.TTF in Resources */,
 				18674AC41D1A4F9600DB7C71 /* MatchResultListVC.xib in Resources */,
 				CEC858AE1D1557F6007F5384 /* BreakTableViewCell.xib in Resources */,
-				CEE1A11E1D1EB227004E775D /* TNCA_DATABASE.sqlite in Resources */,
 				246465231D17255C0078A446 /* PenaltyGridTVC.xib in Resources */,
 				CE00180E1CF42FA500668D8B /* LaunchScreen.storyboard in Resources */,
+				0481DD071D213B250084BFF7 /* PowerPlayVC.xib in Resources */,
 				0468B3891D12743900B98576 /* PenalityVC.xib in Resources */,
 				CE00180B1CF42FA500668D8B /* Assets.xcassets in Resources */,
 				1876250A1D154495009374F8 /* RevicedOverVC.xib in Resources */,
@@ -1269,6 +1345,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186DC8191D21451500293B7F /* EndDayTVC.m in Sources */,
 				187620FE1D1D0126006E160F /* DBManagerEndDay.m in Sources */,
 				187625091D154495009374F8 /* RevicedOverVC.m in Sources */,
 				246125191D13C85E004B85E7 /* Reachability.m in Sources */,
@@ -1280,8 +1357,8 @@
 				1878CD9A1D1167D700A80BEE /* DBManagerScoreCard.m in Sources */,
 				18704EEB1D197E4F00996BF3 /* InsertUpdateMatchResult.m in Sources */,
 				CE1FBF581CF96EDB00A9B6FE /* TossDeatilsEvent.m in Sources */,
-				CEE1A1161D1E6300004E775D /* Batsmancell.m in Sources */,
 				187625221D1544CD009374F8 /* InningsSummaryDetailsForScoreBoard.m in Sources */,
+				1877776E1D2232FA002F31E5 /* DBManagerEndBall.m in Sources */,
 				1876251D1D1544CD009374F8 /* BatPlayerDetailsForScoreBoard.m in Sources */,
 				18785EE51D16630500A09AEC /* LastBolwerDetailRecord.m in Sources */,
 				CE0F19C91CF6C2CC0030FFA2 /* TossDetailsVC.m in Sources */,
@@ -1309,6 +1386,7 @@
 				2479C3E31CFC3FD300A3CCA2 /* BallEventRecord.m in Sources */,
 				245E9F161D0143C200D7C07A /* PlayerLevelCell.m in Sources */,
 				CE22AF261CFD584D0026E0DA /* AppealCell.m in Sources */,
+				243F8E3F1D2236CF00333AD8 /* AppealBatsmenRecord.m in Sources */,
 				CE0162E51D000EDB0066B683 /* MatcheventRecord.m in Sources */,
 				CEC305841D01566100301ED3 /* AppealComponentRecord.m in Sources */,
 				187620F81D1D0076006E160F /* InsertEndDay.m in Sources */,
@@ -1316,6 +1394,8 @@
 				246465241D17255C0078A446 /* PenaltygridVC.m in Sources */,
 				0468B3881D12743900B98576 /* PenalityVC.m in Sources */,
 				CE3DD41C1CFBFA7000D93A55 /* SelectPlayerRecord.m in Sources */,
+				1877776F1D2232FA002F31E5 /* getimageRecord.m in Sources */,
+				0481DD061D213B250084BFF7 /* PowerPlayVC.m in Sources */,
 				18704EDB1D19591F00996BF3 /* GetTeamANameDetails.m in Sources */,
 				1876251E1D1544CD009374F8 /* BattingSummaryDetailsForScoreBoard.m in Sources */,
 				188130401D0BF3ED00908F65 /* FetchSEPageLoadRecord.m in Sources */,
@@ -1325,17 +1405,15 @@
 				24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */,
 				CE1FBF6A1CF9A17500A9B6FE /* MatchOfficalsVC.m in Sources */,
 				1878CD911D11101600A80BEE /* InitializeInningsScoreBoardRecord.m in Sources */,
-				CEE1A11C1D1E91CE004E775D /* getimageRecord.m in Sources */,
 				246124F61D13C429004B85E7 /* EndInnings.m in Sources */,
 				2487FD251D06ABD40039CFB2 /* CapitainWicketKeeperRecord.m in Sources */,
-				245E31871D1DB536009FE70F /* DBManagerEndBall.m in Sources */,
 				CEC305871D015BB900301ED3 /* AppealUmpireRecord.m in Sources */,
-				CEE1A1131D1E62E3004E775D /* umpiretablecell.m in Sources */,
 				187625201D1544CD009374F8 /* BowlingSummaryElseDetailsForScoreBoard.m in Sources */,
 				187621011D1D0BC8006E160F /* FetchEndDay.m in Sources */,
 				0468B38E1D12872E00B98576 /* PenalityTVC.m in Sources */,
 				246465221D17255C0078A446 /* PenaltyGridTVC.m in Sources */,
 				CE1FBF671CF9A05B00A9B6FE /* OfficialMasterRecord.m in Sources */,
+				1877776D1D2232FA002F31E5 /* Batsmancell.m in Sources */,
 				246125021D13C4FC004B85E7 /* OversorderRecord.m in Sources */,
 				CE22AF291CFD58720026E0DA /* AppealRecord.m in Sources */,
 				187620FB1D1D00A3006E160F /* UpdateEndDay.m in Sources */,
@@ -1346,7 +1424,9 @@
 				CE1FBF611CF997FB00A9B6FE /* FixturesVC.m in Sources */,
 				246465181D17255C0078A446 /* EndInningsTVC.m in Sources */,
 				246125071D13C5D1004B85E7 /* RightSlideVC.m in Sources */,
+				187777701D2232FA002F31E5 /* umpiretablecell.m in Sources */,
 				1876251F1D1544CD009374F8 /* BowlingSummaryDetailsForScoreBoard.m in Sources */,
+				243F8E451D2237D600333AD8 /* PowerPlayGridVC.m in Sources */,
 				CEC858B21D155D36007F5384 /* intialBreakVC.m in Sources */,
 				187625231D1544CD009374F8 /* MatchOverandBallDetailsForScoreBoard.m in Sources */,
 				187229281D12665600CC168F /* AddBreakVC.m in Sources */,
@@ -1374,19 +1454,21 @@
 				187621251D1D644C006E160F /* EndInningsVC.m in Sources */,
 				CE1FBF5E1CF992C900A9B6FE /* FixturesCell.m in Sources */,
 				187952321D02A410001A1224 /* BowlAndShotTypeRecords.m in Sources */,
+				0481DD041D213B250084BFF7 /* PowerPlayTVCell.m in Sources */,
 				186DC7F81D1E56DC00293B7F /* Utitliy.m in Sources */,
 				246465171D17255C0078A446 /* DBMangerOtherWicket.m in Sources */,
 				1872292D1D12667200CC168F /* BreakVC.m in Sources */,
 				CE3DD4251CFBFDD400D93A55 /* TeamLogoRecords.m in Sources */,
 				CE7463A81D166F8200D69CD9 /* UpdateBreakVC.m in Sources */,
 				CED03D261D1AAE3B00522B89 /* DBMANAGERSYNC.m in Sources */,
-				CEE1A1191D1E8718004E775D /* AppealBatsmenRecord.m in Sources */,
 				246465161D17255C0078A446 /* DBManagerEndInnings.m in Sources */,
 				CE7463B31D16B03800D69CD9 /* DeleteEventRecord.m in Sources */,
 				CE0018001CF42FA500668D8B /* main.m in Sources */,
+				0481DCFF1D213B250084BFF7 /* PowerPlayGridTVC.m in Sources */,
 				CE7463AC1D16942200D69CD9 /* UpdateBreaksArrayDetails.m in Sources */,
 				048B5A9E1D0AF1A7009F12B8 /* WicketTypeRecord.m in Sources */,
 				18704ED51D19560C00996BF3 /* DBManagerMatchResult.m in Sources */,
+				0481DD031D213B250084BFF7 /* PowerPlayRecord.m in Sources */,
 				24D24CE21CFEC71800CD75D2 /* PlayerOrderLevelVC.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

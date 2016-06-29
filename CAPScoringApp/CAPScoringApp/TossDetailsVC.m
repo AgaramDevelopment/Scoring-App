@@ -14,6 +14,9 @@
 #import "BowlerEvent.h"
 #import "ScorEnginVC.h"
 #import "CustomNavigationVC.h"
+#import "Reachability.h"
+#import "AppDelegate.h"
+#import "Utitliy.h"
 @interface TossDetailsVC ()
 {
     BOOL isEnableTbl;
@@ -45,6 +48,7 @@
     
     NSString *selectBowler;
     NSString*selectBowlerCode;
+    
     NSString *teamaCode;
     NSString *teambCode;
     
@@ -714,6 +718,7 @@ return 1;
    //  BowlingEnd=@"MSC150";
     [DBManager inserMaxInningsEvent:CompetitionCode :MATCHCODE :teamaCode :maxInnNo :StrikerCode:NonStrikerCode :selectBowlerCode :StrikerCode :NonStrikerCode :selectBowlerCode :teamaCode :inningsstatus:BowlingEnd];
     [DBManager updateProcced:CompetitionCode :MATCHCODE];
+     [self startService:@"DONE"];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
                                                    message: @"Please confirm to start the match"
@@ -751,6 +756,8 @@ if (buttonIndex == 0 && alertView.tag == 1)
             scoreEngine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
                        scoreEngine.matchCode=self.MATCHCODE;
                       scoreEngine.competitionCode=self.CompetitionCode;
+            scoreEngine.matchTypeCode = self.matchTypeCode;
+            
             [self.navigationController pushViewController:scoreEngine animated:YES];
            // NSLog(@"user pressed Button Indexed 0");
 //                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -790,6 +797,89 @@ if (buttonIndex == 0 && alertView.tag == 1)
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
+
+
+//Check internet connection
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
+
+-(void) startService:(NSString *)OPERATIONTYPE{
+    if(self.checkInternetConnection){
+        
+       MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
+       CompetitionCode = CompetitionCode == nil ?@"NULL":CompetitionCode;
+        selectTeamcode= selectTeamcode == nil ?@"NULL":selectTeamcode;
+        electedcode = electedcode == nil ?@"NULL":electedcode;
+        StrikerCode = StrikerCode == nil ?@"":StrikerCode;
+        NonStrikerCode= NonStrikerCode == nil ?@"NULL":NonStrikerCode;
+        BowlingEnd = BowlingEnd == nil ?@"NULL":BowlingEnd;
+     
+        
+        
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        //Show indicator
+        [delegate showLoading];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/TOSSEVENTS/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], CompetitionCode,MATCHCODE,selectTeamcode,electedcode,StrikerCode,NonStrikerCode,BowlingEnd,OPERATIONTYPE];
+            NSLog(@"-%@",baseURL);
+            
+            
+            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURLResponse *response;
+            NSError *error;
+            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+            
+            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+            
+            if(rootArray !=nil && rootArray.count>0){
+                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                NSString *success = [valueDict valueForKey:@"DataItem"];
+                if([success isEqual:@"Success"]){
+                    
+                }
+            }else{
+                
+            }
+            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
+            //            NSLog(@"%@",errorCode);
+            //
+            //
+            //            if([errorCode boolValue] == YES)
+            //            {
+            //
+            //                BOOL isUserLogin = YES;
+            //
+            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+            //                [[NSUserDefaults standardUserDefaults] synchronize];
+            //
+            //                [self openContentView];
+            //
+            //            }else{
+            //
+            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+            //            }
+            [delegate hideLoading];
+        });
+        
+        //[delegate hideLoading];
+    }
+}
+
 
 
 @end

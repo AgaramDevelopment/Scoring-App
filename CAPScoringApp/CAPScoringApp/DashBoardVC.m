@@ -13,6 +13,9 @@
 #import "EndInningsVC.h"
 #import "DBManager.h"
 #import "DBMANAGERSYNC.h"
+#import "Reachability.h"
+#import "AppDelegate.h"
+#import "Utitliy.h"
 
 @interface DashBoardVC ()
 
@@ -46,10 +49,14 @@
     _img_synData.image = [UIImage imageNamed:@"ico-sync-data02.png"];
     
     _view_syn_data.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
+     if(self.checkInternetConnection){
+         AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+         
+         //Show indicator
+         [delegate showLoading];
+         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     
-    
-    
-    NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.39:8096/CAPMobilityService.svc/PULLSCORERDATAFROMSERVER/0x0100000088F0BDA6134BA1A808FA82837D998FD8C45AC41C001C2762A27AC7C22D0961149CE3F7B7D0EB9047"];
+    NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/PULLSCORERDATAFROMSERVER/0x0100000088F0BDA6134BA1A808FA82837D998FD8C45AC41C001C2762A27AC7C22D0961149CE3F7B7D0EB9047",[Utitliy getSyncIPPORT]];
     NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLResponse *response;
@@ -183,7 +190,18 @@
                 NSString *COMPETITIONCODE=[test3 objectForKey:@"Competitioncode"];
                 NSString *MATCHOVERS=[test3 objectForKey:@"Matchovers"];
                 NSString*MATCHOVERCOMMENTS=[test3 objectForKey:@"Matchovercomments"];
-                NSString *MATCHDATE=[test3 objectForKey:@"Matchdate"];
+                NSString *MATCHDATE1=[test3 objectForKey:@"Matchdate"];
+                
+                NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];
+             //   6/23/2016 5:45:00 PM
+                [dateFmt setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+                NSDate *date = [dateFmt dateFromString:MATCHDATE1];
+                NSLog(@"date:",date);
+                
+                [dateFmt setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+                NSString *MATCHDATE = [dateFmt stringFromDate:date];
+                NSLog(@"dateString:",MATCHDATE);
+                
                 NSString *ISDAYNIGHT=[test3 objectForKey:@"Isdaynight"];
                 NSString *ISNEUTRALVENUE=[test3 objectForKey:@"Isneutralvenue"];
                 NSString*GROUNDCODE=[test3 objectForKey:@"Groundcode"];
@@ -593,11 +611,66 @@
                 }
                 
             }
+            
+            
+            //MetaData
+            
+            NSArray *temp15=   [serviceResponse objectForKey:@"Metadata"];
+            
+            int B;
+            for (B=0; B<[temp15 count]; B++) {
+                NSDictionary*test15=[temp15 objectAtIndex:B];
+                NSString*METASUBCODE=[test15 objectForKey:@"Metasubcode"];
+                NSString *METADATATYPECODE=[test15 objectForKey:@"Metadatatypecode"];
+                NSString *METADATATYPEDESCRIPTION=[test15 objectForKey:@"Metadatatypedescription"];
+                NSString *METASUBCODEDESCRIPTION=[test15 objectForKey:@"Metasubcodedescription"];
+              
+                
+                bool CheckStatus1=[DBMANAGERSYNC CheckMetaData:METASUBCODE];
+                
+                if (CheckStatus1==NO) {
+                      [DBMANAGERSYNC InsertMetaData:METASUBCODE:METADATATYPECODE:METADATATYPEDESCRIPTION:METASUBCODEDESCRIPTION];
+                }
 
+                
+            }
+
+            
+       //PowerplayType
+            NSArray *temp16=   [serviceResponse objectForKey:@"PowerplayType"];
+            
+            int G;
+            for (G=0; G<[temp16 count]; G++) {
+                NSDictionary*test16=[temp16 objectAtIndex:G];
+                NSString*POWERPLAYTYPECODE=[test16 objectForKey:@"Powerplaytypecode"];
+                NSString *POWERPLAYTYPENAME=[test16 objectForKey:@"Powerplaytypename"];
+                NSString *RECORDSTATUS=[test16 objectForKey:@"Recordstatus"];
+                NSString *CREATEDBY=[test16 objectForKey:@"Createdby"];
+                NSString *CREATEDDATE=[test16 objectForKey:@"Createddate"];
+                NSString *MODIFIEDBY=[test16 objectForKey:@"Modifiedby"];
+                NSString *MODIFIEDDATE=[test16 objectForKey:@"Modifieddate"];
+                NSString *ISSYSTEMREFERENCE=[test16 objectForKey:@"Issystemreference"];
+                
+                
+                bool CheckStatus1=[DBMANAGERSYNC CheckPowerplayType:POWERPLAYTYPECODE];
+                
+                if (CheckStatus1==YES) {
+                    [DBMANAGERSYNC  UpdatePowerplayType:POWERPLAYTYPECODE:POWERPLAYTYPENAME:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:ISSYSTEMREFERENCE];
+                }
+                else{
+                    [DBMANAGERSYNC InsertPowerplayType:POWERPLAYTYPECODE:POWERPLAYTYPENAME:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:ISSYSTEMREFERENCE];
+                }
+                
+            }
+
+            
+            
             
             [self playercodeimage];
             [self officialcodeimage];
             [self groundcodeimage];
+            
+            
             
             }
             
@@ -621,9 +694,10 @@
     }
     
     
-    }
+    }        [delegate hideLoading];
+         });
     
-    
+     }
     
 }
 
@@ -745,7 +819,7 @@
      {
           NSDictionary*test=[playercode objectAtIndex:i];
          NSString *playercodestr=[test valueForKey:@"playercodeimage"];
-     NSString *ImgeURL1 = [NSString stringWithFormat:@"http://192.168.1.39:8096/CAPMobilityService.svc/GETIMAGE/%@",playercodestr];
+     NSString *ImgeURL1 = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETIMAGE/%@",[Utitliy getSyncIPPORT],playercodestr];
          
          
          UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgeURL1]]];
@@ -784,7 +858,7 @@ for (i=0; i<[officialscode count]; i++)
 {
     NSDictionary*test=[officialscode objectAtIndex:i];
     NSString *officialscodestr=[test valueForKey:@"officialscodeimage"];
-    NSString *ImgeURL1 = [NSString stringWithFormat:@"http://192.168.1.39:8096/CAPMobilityService.svc/GETIMAGE/%@",officialscodestr];
+    NSString *ImgeURL1 = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETIMAGE/%@",[Utitliy getSyncIPPORT],officialscodestr];
     
     
     UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgeURL1]]];
@@ -813,7 +887,7 @@ for (i=0; i<[officialscode count]; i++)
     {
         NSDictionary*test=[groundcode objectAtIndex:i];
         NSString *groundcodestr=[test valueForKey:@"groundcodeimage"];
-        NSString *ImgeURL1 = [NSString stringWithFormat:@"http://192.168.1.39:8096/CAPMobilityService.svc/GETIMAGE/%@",groundcodestr];
+        NSString *ImgeURL1 = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETIMAGE/%@",[Utitliy getSyncIPPORT],groundcodestr];
         
         
         UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgeURL1]]];
@@ -832,5 +906,13 @@ for (i=0; i<[officialscode count]; i++)
     }
 }
 
+
+
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
 
 @end

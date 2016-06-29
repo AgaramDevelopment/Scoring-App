@@ -674,6 +674,7 @@
                                                         <constraint firstAttribute="height" constant="38" id="4Tn-At-UX9"/>
                                                         <constraint firstAttribute="width" constant="281" id="rR7-ca-sS1"/>
                                                     </constraints>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                     <variation key="default">
