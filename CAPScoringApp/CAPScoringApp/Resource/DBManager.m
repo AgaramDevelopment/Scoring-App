@@ -9105,6 +9105,38 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
 }
 
 
++(NSMutableArray *) getPlayedPlayersForPlayerXI:(NSString*)MATCHCODE COMPETITIOMCODE:(NSString*) COMPETITIOMCODE  OVERNO:(NSString*) OVERNO BALLNO:(NSString*) BALLNO{
+    NSMutableArray *arrayResult = [[NSMutableArray alloc]init];
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT STRIKERCODE AS PLAYERCODE,PM.PLAYERNAME FROM(SELECT STRIKERCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND OVERNO=%@ AND BALLNO=%@ GROUP BY STRIKERCODE UNION ALL SELECT NONSTRIKERCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND OVERNO=%@ AND BALLNO=%@ GROUP BY NONSTRIKERCODE UNION ALL SELECT  WICKETPLAYER AS STRIKERCODE FROM WICKETEVENTS WHERE MATCHCODE=@MATCHCODE GROUP BY WICKETPLAYER) AS FIN INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=FIN.STRIKERCODE GROUP BY STRIKERCODE,PM.PLAYERNAME",MATCHCODE,COMPETITIOMCODE,OVERNO,BALLNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                SelectPlayerRecord *selectedPlayerRec = [[SelectPlayerRecord alloc]init];
+                selectedPlayerRec.playerCode =  [self getValueByNull:statement :0];
+                selectedPlayerRec.playerName =  [self getValueByNull:statement :1];
+                
+            }
+            
+        }
+        else {
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return arrayResult;
+        }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return arrayResult;
+}
 
 
 

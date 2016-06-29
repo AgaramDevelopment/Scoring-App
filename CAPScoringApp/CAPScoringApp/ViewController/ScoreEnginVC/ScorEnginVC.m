@@ -29,6 +29,7 @@
 #import "FetchLastBallBowledPlayer.h"
 #import "InitializeInningsScoreBoardRecord.h"
 #import "AppealBatsmenRecord.h"
+
 #import "BreakVC.h"
 #import "EndInnings.h"
 #import "RevicedOverVC.h"
@@ -43,12 +44,13 @@
 #import "MatchResultListVC.h"
 #import "EndDayVC.h"
 #import "DBManagerEndDay.h"
+#import "PowerPlayGridVC.h"
 #import "PenaltygridVC.h"
 #import "AppealRecord.h"
 #import "umpiretablecell.h"
 #import "Batsmancell.h"
-#import "OtherWicketVC.h"
-#import "PowerPlayGridVC.h"
+#import "AppealBatsmenRecord.h"
+#import "DeclareInnings.h"
 
 
 
@@ -395,7 +397,7 @@ EndInnings *endInnings;
         tableView.dataSource = self;
         tableView.delegate = self;
     
-    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI A EDIT",@"PLAYING XI B EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     
     
     
@@ -5067,39 +5069,35 @@ EndInnings *endInnings;
         else if(indexPath.row == 7)
         {
             NSLog(@"8");
-            [self PlayingXIAEdit];
-        }else if(indexPath.row == 8)
-        {
-            NSLog(@"8");
-            [self PlayingXIBEdit];
+            [self matchInfoEdit];
         }
-        else if(indexPath.row == 9)
+        else if(indexPath.row == 8)
         {
             NSLog(@"9");
             [self MatchResult];
         }
-        else if(indexPath.row == 10)
+        else if(indexPath.row == 9)
         {
             NSLog(@"10");
             [self OtherWicket];
         }
-        else if(indexPath.row == 11)
+        else if(indexPath.row == 10)
         {
             NSLog(@"11");
             [self Penalty];
         }
 
-        else if(indexPath.row == 12)
+        else if(indexPath.row == 11)
         {
             NSLog(@"12");
             [self PowerPlay];
         }
-        else if(indexPath.row == 13)
+        else if(indexPath.row == 12)
         {
             NSLog(@"13");
             [self revisedoverview];
         }
-        else if(indexPath.row == 14)
+        else if(indexPath.row == 13)
         {
             NSLog(@"14");
             [self revisiedTarget];
@@ -5175,7 +5173,7 @@ EndInnings *endInnings;
       objAppealBatsmenEventRecord=(AppealBatsmenRecord*)[AppealBatsmenArray objectAtIndex:indexPath.row];
         
         self.lbl_batsmen.text =objAppealBatsmenEventRecord.strikerbatsmenname;
-       // self.Lbl_batsmen.text=objAppealBatsmenEventRecord.nonstrikerbatsmenname;
+       self.Lbl_batsmen.text=objAppealBatsmenEventRecord.nonstrikerbatsmenname;
 
         // selectTeam=self.Wonby_lbl.text;
        // AppealComponentSelectCode=fetchSEPageLoadRecord.strickerPlayerCode;
@@ -5899,8 +5897,9 @@ EndInnings *endInnings;
      }
                      completion:nil];
     
+
     
-    [endInning fetchPageload:fetchSEPageLoadRecord:self.competitionCode:self.matchCode];
+    [endInning fetchPageload:fetchSEPageLoadRecord :self.competitionCode :self.matchCode];
 }
 -(void)ENDDAY
 {
@@ -5948,16 +5947,119 @@ EndInnings *endInnings;
 {
     
 }
--(void)PlayingXIAEdit
+-(void) matchInfoEdit
 {
+
+    NewMatchSetUpVC *detail = [[NewMatchSetUpVC alloc]init];
+    
+    detail =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
+    
+    NSString*teamAcode = fetchSEPageLoadRecord.TEAMACODE;
+    NSString*teamBcode = fetchSEPageLoadRecord.TEAMBCODE;
+    
+    NSString*teamA =  fetchSEPageLoadRecord.BATTEAMNAME;
+    NSString*teamB = fetchSEPageLoadRecord.BOWLTEAMNAME;
+    NSString*matchType = fetchSEPageLoadRecord.MATCHTYPE;
+    NSString*matchCode = self.matchCode;
+    NSString*competitionCode = self.competitionCode;
+    NSString*matchTypeCode = @"";
+    NSString*overs = [NSString stringWithFormat:@"%@", fetchSEPageLoadRecord.BATTEAMOVERS];
+    NSString *MatchStatus = @"";
+    
+    
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+//        
+//        NSDate *date = [formatter dateFromString:objFixtureRecord.matchdate];
+//        [formatter setDateFormat:@"dd"];
+//        NSString *newDate = [formatter stringFromDate:date];
+//        
+//        
+//        
+//        
+//        //NSDate *monthYY = [formatter dateFromString:objFixtureRecord.matchdate];
+//        [formatter setDateFormat:@"MMM ''yy"];
+//        NSString*newMonth = [formatter stringFromDate:date];
+//        
+//        
+//        
+//        // NSDate *time = [formatter dateFromString:objFixtureRecord.matchdate];
+//        [formatter setDateFormat:@"hh:mm a"];
+//        NSString *newTime = [formatter stringFromDate:date];
+//        
+//        
+//        
+//        NSString*matchVenu = objFixtureRecord.city;
+    
+        
+        
+       // detail.matchSetUp = mSetUp;
+        detail.teamA = teamA;
+        detail.teamB = teamB;
+      //  detail.date = newDate;
+      //  detail.matchVenu = matchVenu;
+        detail.matchType = matchType;
+        detail.overs = overs;
+      //  detail.month = newMonth;
+      //  detail.time = newTime;
+        detail.matchCode = matchCode;
+        detail.competitionCode = competitionCode;
+        detail.matchTypeCode = matchTypeCode;
+        detail.teamAcode = teamAcode;
+        detail.teamBcode = teamBcode;
+        
+        
+        //    [detail setModalPresentationStyle:UIModalPresentationFullScreen];
+        //    [self presentViewController:detail animated:NO completion:nil];
+        [self.navigationController pushViewController:detail animated:YES];
+    //    NSLog(@"indexframe=%@",selectedIndexPath);
     
 }
--(void)PlayingXIBEdit
-{
-    
-}
+
 -(void)DeclearINNINGS
 {
+    
+    
+    DeclareInnings *declareInning = [[DeclareInnings alloc]initWithNibName:@"DeclareInnings" bundle:nil];
+    declareInning.COMPETITIONCODE = self.competitionCode;
+    declareInning.MATCHCODE = self.matchCode;
+    declareInning.INNINGSNO = fetchSEPageLoadRecord.INNINGSNO;
+    declareInning.TEAMNAME = fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    declareInning.BOWLINGTEAMCODE = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+    declareInning.ISDECLARE = @"1";
+    
+
+    
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    //fullview.alpha=0.9;
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:revisedTarget.view];
+    
+    
+    //vc2 *viewController = [[vc2 alloc]init];
+    [self addChildViewController:declareInning];
+    declareInning.view.frame =CGRectMake(90, 200, declareInning.view.frame.size.width, declareInning.view.frame.size.height);
+    
+    
+    [fullview addSubview:declareInning.view];
+    declareInning.view.alpha = 0;
+    [declareInning didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         declareInning.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
+    
+    
+    
     
 }
 -(void)MatchResult
