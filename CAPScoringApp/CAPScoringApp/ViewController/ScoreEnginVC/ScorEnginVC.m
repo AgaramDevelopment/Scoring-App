@@ -53,6 +53,8 @@
 #import "DeclareInnings.h"
 #import "OtherWicketVC.h"
 #import "NewMatchSetUpVC.h"
+#import "FETCHSEBALLCODEDETAILS.h"
+#import "ScoreEnginEditRecord.h"
 
 
 
@@ -253,10 +255,122 @@
 
 FetchLastBowler *fetchLastBowler;
 FetchSEPageLoadRecord *fetchSEPageLoadRecord;
+FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
 EndInnings *endInnings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    if(self.isEditMode){
+         fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
+        [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode :self.editBallCode];
+        
+        
+        GetBallDetailsForBallEventsBE *getBallDetailsForBallEventsBE =[fetchSeBallCodeDetails.GetBallDetailsForBallEventsArray objectAtIndex:0];
+        
+        
+        self.ballEventRecord = [[BallEventRecord alloc] init];
+        self.ballEventRecord.objOverno=getBallDetailsForBallEventsBE.OVERNO;
+        self.ballEventRecord.objBallno=getBallDetailsForBallEventsBE.BALLNO;
+        self.ballEventRecord.objOverBallcount = getBallDetailsForBallEventsBE.BALLCOUNT;
+        self.ballEventRecord.objBallcount=getBallDetailsForBallEventsBE.BALLCOUNT;;
+        self.ballEventRecord.objBowlercode = getBallDetailsForBallEventsBE.BOWLERCODE;
+        self.ballEventRecord.objStrikercode = getBallDetailsForBallEventsBE.STRIKERCODE;
+        self.ballEventRecord.objNonstrikercode = getBallDetailsForBallEventsBE.NONSTRIKERCODE;
+        
+        self.ballEventRecord.objRbw =getBallDetailsForBallEventsBE.RBW;
+        self.ballEventRecord.objIswtb=getBallDetailsForBallEventsBE.ISWTB;
+        self.ballEventRecord.objIsuncomfort=getBallDetailsForBallEventsBE.ISUNCOMFORT;
+        self.ballEventRecord.objIsreleaseshot=getBallDetailsForBallEventsBE.ISRELEASESHOT;
+        self.ballEventRecord.objIsbeaten=getBallDetailsForBallEventsBE.ISBEATEN;
+        self.ballEventRecord.objPMlengthcode=getBallDetailsForBallEventsBE.PMLENGTHCODE;
+        self.ballEventRecord.objPMlinecode =getBallDetailsForBallEventsBE.PMLINECODE;
+        self.ballEventRecord.objPMX1=getBallDetailsForBallEventsBE.PMX1;
+        self.ballEventRecord.objPMY1=getBallDetailsForBallEventsBE.PMY1;
+        self.ballEventRecord.objPMX2=getBallDetailsForBallEventsBE.PMX2;
+        self.ballEventRecord.objPMY2=getBallDetailsForBallEventsBE.PMY2;
+        self.ballEventRecord.objcompetitioncode =getBallDetailsForBallEventsBE.COMPETITIONCODE;
+        
+        self.ballEventRecord.objmatchcode =getBallDetailsForBallEventsBE.MATCHCODE;
+        self.ballEventRecord.objTeamcode =getBallDetailsForBallEventsBE.TEAMCODE;
+        self.ballEventRecord.objcompetitioncode =getBallDetailsForBallEventsBE.COMPETITIONCODE;
+        self.ballEventRecord.objcompetitioncode =getBallDetailsForBallEventsBE.COMPETITIONCODE;
+        
+        
+//        
+//        
+//        record.TEAMCODE=[self getValueByNull:statement :4];
+//        record.INNINGSNO=[self getValueByNull:statement :5];
+//        record.OVERNO=[self getValueByNull:statement :6];
+//        record.BALLNO=[self getValueByNull:statement :7];
+//        record.BALLCOUNT=[self getValueByNull:statement :8];
+//        record.SESSIONNO=[self getValueByNull:statement :9];
+//        record.STRIKERCODE =[self getValueByNull:statement :10];
+//        record.NONSTRIKERCODE  =[self getValueByNull:statement :11];
+//        record.BOWLERCODE        =[self getValueByNull:statement :12];
+//        record.WICKETKEEPERCODE  =[self getValueByNull:statement :13];
+//        record.UMPIRE1CODE       =[self getValueByNull:statement :14];
+//        record.UMPIRE2CODE       =[self getValueByNull:statement :15];
+//        record.ATWOROTW          =[self getValueByNull:statement :16];
+//        record.BOWLINGEND        =[self getValueByNull:statement :17];
+//        record.BOWLTYPECODE=[self getValueByNull:statement :18];
+//        record.BOWLTYPE             =[self getValueByNull:statement :19];
+//        record.BOWLERTYPE           =[self getValueByNull:statement :20];
+//        record.SHOTCODE    =[self getValueByNull:statement :21];
+//        record.SHOTNAME             =[self getValueByNull:statement :22];
+//        record.SHOTTYPE             =[self getValueByNull:statement :23];
+//        record.SHOTTYPECATEGORY        =[self getValueByNull:statement :24];
+//        record.ISLEGALBALL   =[self getValueByNull:statement :25];
+//        record.ISFOUR        =[self getValueByNull:statement :26];
+//        record.ISSIX         =[self getValueByNull:statement :27];
+//        record.RUNS         =[self getValueByNull:statement :28];
+//        record.OVERTHROW     =[self getValueByNull:statement :29];
+//        record.TOTALRUNS     =[self getValueByNull:statement :30];
+//        record.WIDE          =[self getValueByNull:statement :31];
+//        record.NOBALL        =[self getValueByNull:statement :32];
+//        record.BYES          =[self getValueByNull:statement :33];
+//        record.LEGBYES       =[self getValueByNull:statement :34];
+//        record.PENALTY       =[self getValueByNull:statement :35];
+//        record.TOTALEXTRAS   =[self getValueByNull:statement :36];
+//        record.GRANDTOTAL    =[self getValueByNull:statement :37];
+//        record.RBW           =[self getValueByNull:statement :38];
+//        record.PMLINECODE   =[self getValueByNull:statement :39];
+//        record.PMLENGTHCODE  =[self getValueByNull:statement :40];
+//        record.PMSTRIKEPOINT =[self getValueByNull:statement :41];
+//        record.PMSTRIKEPOINTLINECODE   =[self getValueByNull:statement :42];
+//        record.PMX1                    =[self getValueByNull:statement :43];
+//        record.PMY1                    =[self getValueByNull:statement :44];
+//        record.PMX2                    =[self getValueByNull:statement :45];
+//        record.PMY2                    =[self getValueByNull:statement :46];
+//        record.PMX3                    =[self getValueByNull:statement :47];
+//        record.PMY3                    =[self getValueByNull:statement :48];
+//        record.WWREGION                =[self getValueByNull:statement :49];
+//        record.REGIONNAME              =[self getValueByNull:statement :50];
+//        record.WWX1                    =[self getValueByNull:statement :51];
+//        record.WWY1                    =[self getValueByNull:statement :52];
+//        record.WWX2                    =[self getValueByNull:statement :53];
+//        record.WWY2                    =[self getValueByNull:statement :54];
+//        record.BALLDURATION            =[self getValueByNull:statement :55];
+//        record.ISAPPEAL                =[self getValueByNull:statement :56];
+//        record.ISBEATEN                =[self getValueByNull:statement :57];
+//        record.ISUNCOMFORT             =[self getValueByNull:statement :58];
+//        record.UNCOMFORTCLASSIFCATION  =[self getValueByNull:statement :59];
+//        record.ISWTB                   =[self getValueByNull:statement :60];
+//        record.ISRELEASESHOT           =[self getValueByNull:statement :61];
+//        record.MARKEDFOREDIT           =[self getValueByNull:statement :62];
+//        record.REMARKS                 =[self getValueByNull:statement :63];
+//        record.BALLSPEED               =[self getValueByNull:statement :64];
+//        record.BALLSPEEDTYPE           =[self getValueByNull:statement :65];
+//        record.BALLSPEEDCODE           =[self getValueByNull:statement :66];
+//        record.UNCOMFORTCLASSIFICATION =[self getValueByNull:statement :67];
+//        record.UNCOMFORTCLASSIFICATIONCODE    =[self getValueByNull:statement :68];
+//        record.UNCOMFORTCLASSIFICATIONSUBCODE =[self getValueByNull:statement :69];
+//        
+        
+    }else{
+        [self reloadBowlerTeamBatsmanDetails];
+    }
+    
     //GetMatchTypeForInserTEnd
     //objDBManagerEndDay=[[DBManagerEndDay alloc]init];
     
@@ -264,7 +378,6 @@ EndInnings *endInnings;
 
      ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
     
-    [self reloadBowlerTeamBatsmanDetails];
 
    // [self resetBallObject];
     
@@ -1430,6 +1543,7 @@ EndInnings *endInnings;
 {
     NSLog(@"btnname=%@",self.btn_StartBall.currentTitle);
     
+    if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){
     
     if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
     {
@@ -1493,7 +1607,10 @@ EndInnings *endInnings;
         [self reloadBowlerTeamBatsmanDetails];
        // [ self AssignControlValues :YES:@""];
         
+        [self resetBallEventObject];
+        [self resetAllButtonOnEndBall];
         
+    }
     }
 }
 
@@ -1974,7 +2091,6 @@ EndInnings *endInnings;
    
 //    int Startoveroverno = fetchSEPageLoadRecord.BATTEAMOVERS;
     
-    
     if([self.btn_StartOver.currentTitle isEqualToString:@"START OVER"])
     {
         [self overEVENT];
@@ -2119,7 +2235,7 @@ EndInnings *endInnings;
                 }else{
                     overStatus = @"0";
                     
-                    [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]];
+                    [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code :[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode];
                     
                                     }
             }
@@ -2168,7 +2284,7 @@ EndInnings *endInnings;
                             [self.btn_StartBall sendActionsForControlEvents:UIControlEventTouchUpInside];
                         }
                         overStatus=@"1";
-                        [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]];
+                        [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code :[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode];
                         [self reloadBowlerTeamBatsmanDetails];
                         if(![ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&[MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
                         {
@@ -2269,7 +2385,7 @@ EndInnings *endInnings;
             else{
                 overStatus=@"0";
                 
-                [endInnings manageSeOverDetails: self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]];
+                [endInnings manageSeOverDetails: self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode:fetchSEPageLoadRecord.nonstrickerPlayerCode];
             }
         }
         else if(alertView.tag == 1007)
@@ -2280,7 +2396,7 @@ EndInnings *endInnings;
                     [self.btn_StartBall sendActionsForControlEvents:UIControlEventTouchUpInside];
                 }
                 overStatus=@"1";
-            [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]];
+            [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode:fetchSEPageLoadRecord.nonstrickerPlayerCode];
                 [self reloadBowlerTeamBatsmanDetails];
                 if(![ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&[MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
                 {
@@ -2338,7 +2454,7 @@ EndInnings *endInnings;
             else{
                 overStatus=@"0";
                 
-                [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO:self.ballEventRecord:overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]];
+                [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO:self.ballEventRecord:overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode:fetchSEPageLoadRecord.nonstrickerPlayerCode];
                 
             }
             

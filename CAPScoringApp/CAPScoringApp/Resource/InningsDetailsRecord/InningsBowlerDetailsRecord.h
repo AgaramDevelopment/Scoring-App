@@ -35,7 +35,7 @@
 @property (strong,nonatomic) NSString * penaltyRuns;
 @property (strong,nonatomic) NSString * penaltytypeCode;
 
-
+@property (strong,nonatomic) NSString * ballCode;
 
 
 @property (strong,nonatomic) NSString * OverballCount;
