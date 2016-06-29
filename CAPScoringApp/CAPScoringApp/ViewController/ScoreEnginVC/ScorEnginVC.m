@@ -51,7 +51,7 @@
 #import "Batsmancell.h"
 #import "AppealBatsmenRecord.h"
 #import "DeclareInnings.h"
-#import "OtherWicketVC.h"
+#import "Other_WicketVC.h"
 #import "NewMatchSetUpVC.h"
 
 
@@ -172,7 +172,7 @@
     
 
     PowerPlayGridVC *powerplaygridvc;
-    OtherWicketVC *otherwicketvc;
+    Other_WicketVC *otherwicketvc;
     RevicedOverVC * revicedOverVc ;
     RevisedTarget  *revisedTarget;
     PenalityVC *penalityVc;
@@ -6103,10 +6103,12 @@ EndInnings *endInnings;
 }
 -(void)OtherWicket
 {
-    otherwicketvc = [[OtherWicketVC alloc]initWithNibName:@"OtherWicketVC" bundle:nil];
-    otherwicketvc.competitioncode=self.competitionCode;
-    otherwicketvc.matchcode =self.matchCode;
-  //  otherwicketvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    otherwicketvc = [[Other_WicketVC alloc]initWithNibName:@"Other_WicketVC" bundle:nil];
+    otherwicketvc.COMPETITIONCODE=self.competitionCode;
+    otherwicketvc.MATCHCODE =self.matchCode;
+ otherwicketvc.INNINGSNO =fetchSEPageLoadRecord.INNINGSNO;
+    otherwicketvc.TEAMCODE=fetchSEPageLoadRecord.TEAMCODE;
+  //  otherwicketvc.PLAYERNAME=
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
