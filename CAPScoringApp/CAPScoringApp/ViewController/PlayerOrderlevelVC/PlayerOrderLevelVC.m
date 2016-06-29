@@ -266,7 +266,7 @@
         if(self.checkInternetConnection){
            
             
-            _matchCode = matchCode == nil ?@"NULL":_matchCode;
+            _matchCode = _matchCode == nil ?@"NULL":_matchCode;
             _TeamCode = _TeamCode == nil ?@"NULL":_TeamCode;
             NSString*PlayerCode = playerorderRecord.playerCode == nil ?@"NULL":playerorderRecord.playerCode;
              NSString*PlayerOrder = playerorderRecord.playerOrder == nil ?@"NULL":playerorderRecord.playerOrder;
