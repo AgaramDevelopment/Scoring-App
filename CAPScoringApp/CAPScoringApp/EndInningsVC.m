@@ -43,11 +43,6 @@ BOOL IsBack;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
-  
-
-    
-
    
 }
 -(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE{

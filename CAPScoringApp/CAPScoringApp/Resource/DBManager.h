@@ -472,6 +472,8 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 
 +(NSMutableArray *)GETUMPIRE :(NSString *)Competitioncode :(NSString *) MatchCode;
 
++(NSMutableArray *)getMatchType :(NSString*)competitioncode :(NSString*)matchcode;
+
 
 +(NSMutableArray *) getPlayedPlayersForPlayerXI:(NSString*)MATCHCODE COMPETITIOMCODE:(NSString*) COMPETITIOMCODE  OVERNO:(NSString*) OVERNO BALLNO:(NSString*) BALLNO;
 

@@ -190,7 +190,18 @@
                 NSString *COMPETITIONCODE=[test3 objectForKey:@"Competitioncode"];
                 NSString *MATCHOVERS=[test3 objectForKey:@"Matchovers"];
                 NSString*MATCHOVERCOMMENTS=[test3 objectForKey:@"Matchovercomments"];
-                NSString *MATCHDATE=[test3 objectForKey:@"Matchdate"];
+                NSString *MATCHDATE1=[test3 objectForKey:@"Matchdate"];
+                
+                NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];
+             //   6/23/2016 5:45:00 PM
+                [dateFmt setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+                NSDate *date = [dateFmt dateFromString:MATCHDATE1];
+                NSLog(@"date:",date);
+                
+                [dateFmt setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+                NSString *MATCHDATE = [dateFmt stringFromDate:date];
+                NSLog(@"dateString:",MATCHDATE);
+                
                 NSString *ISDAYNIGHT=[test3 objectForKey:@"Isdaynight"];
                 NSString *ISNEUTRALVENUE=[test3 objectForKey:@"Isneutralvenue"];
                 NSString*GROUNDCODE=[test3 objectForKey:@"Groundcode"];

@@ -270,7 +270,9 @@
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamASecIngsOvs;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsScore;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsOvs;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_runs_required;
 
+@property (weak, nonatomic) IBOutlet UILabel *lbl_target;
 @property (strong,nonatomic)UIView *objcommonRemarkview;
 @property (strong,nonatomic)UITextView *txt_Remark;
 - (IBAction)btn_revisetarget:(id)sender;
