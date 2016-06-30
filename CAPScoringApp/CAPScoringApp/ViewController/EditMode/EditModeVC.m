@@ -303,8 +303,8 @@
     {
         if (byes > 0)
         {
-            int* objbyesValues = byes+(noBall==0?0:noBall-1);
-            NSString *byesValues=[NSString stringWithFormat:@"%@",objbyesValues];
+            int objbyesValues = byes+(noBall==0?0:noBall-1);
+            NSString *byesValues=[NSString stringWithFormat:@"%d",objbyesValues];
             [dicAddbowlerdetails removeObjectForKey:@"RUNS"];
             [dicAddbowlerdetails setValue:byesValues forKey:@"RUNS"];
 
