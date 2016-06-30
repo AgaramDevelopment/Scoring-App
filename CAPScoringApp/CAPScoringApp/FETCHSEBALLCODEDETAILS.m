@@ -9,27 +9,91 @@
 #import "FETCHSEBALLCODEDETAILS.h"
 #import "DBManagerEditScoreEngine.h"
 #import "ScoreEnginEditRecord.h"
+#import "FetchSEPageLoadRecord.h"
+#import "DBManager.h"
+
 @implementation FETCHSEBALLCODEDETAILS
+
+@synthesize   TEAMACODE;
+@synthesize   TEAMBCODE;
+@synthesize   BATTINGTEAMCODE;
+@synthesize   BOWLINGTEAMCODE;
+@synthesize   INNINGSNO;
+@synthesize   INNINGSSTATUS;
+@synthesize   SESSIONNO;
+@synthesize   DAYNO;
+@synthesize   BATTEAMSHORTNAME;
+@synthesize   BOWLTEAMSHORTNAME;
+@synthesize   BATTEAMNAME;
+@synthesize   BOWLTEAMNAME;
+@synthesize   MATCHOVERS;
+@synthesize   BATTEAMLOGO;
+@synthesize   BOWLTEAMLOGO;
+@synthesize   MATCHTYPE;
+@synthesize   ISOTHERSMATCHTYPE;
+
+
+@synthesize   BATTEAMRUNS;;
+@synthesize   BATTEAMWICKETS;
+@synthesize   BATTEAMOVERS;
+@synthesize   BATTEAMOVRBALLS;
+@synthesize   BATTEAMRUNRATE;
+@synthesize   ISOVERCOMPLETE;
+@synthesize   ISPREVIOUSLEGALBALL;
+@synthesize   BATTEAMOVRBALLSCNT;
+@synthesize   BOWLERCODE;
+@synthesize   TOTALBATTEAMRUNS;
+@synthesize   TOTALBOWLTEAMRUNS;
+@synthesize   REQRUNRATE;
+@synthesize   RUNSREQUIRED;
+@synthesize   REMBALLS;
+@synthesize   T_ATWOROTW;
+@synthesize   T_BOWLINGEND;
+@synthesize   STRIKERCODE;
+@synthesize   NONSTRIKERCODE;
+@synthesize   STRIKERBALLS;
+@synthesize   NONSTRIKERBALLS;
+@synthesize   T_TOTALRUNS;
+@synthesize   T_OVERSTATUS	;
+@synthesize   T_WICKETPLAYER;
+@synthesize   WICKETS;
+@synthesize MAIDENS;
+
+//all innings record for team A and team B
+@synthesize MATCHDATE;
+@synthesize FIRSTINNINGSTOTAL;
+@synthesize SECONDINNINGSTOTAL;
+@synthesize THIRDINNINGSTOTAL;
+@synthesize FOURTHINNINGSTOTAL;
+@synthesize FIRSTINNINGSWICKET;
+@synthesize SECONDINNINGSWICKET;
+@synthesize THIRDINNINGSWICKET;
+@synthesize FOURTHINNINGSWICKET;
+@synthesize FIRSTINNINGSSCORE;
+@synthesize SECONDINNINGSSCORE;
+@synthesize THIRDINNINGSSCORE;
+@synthesize FOURTHINNINGSSCORE;
+@synthesize FIRSTINNINGSOVERS;
+@synthesize SECONDINNINGSOVERS;
+@synthesize THIRDINNINGSOVERS;
+@synthesize FOURTHINNINGSOVERS;
+@synthesize FIRSTINNINGSSHORTNAME;
+@synthesize SECONDINNINGSSHORTNAME;
+@synthesize THIRDINNINGSSHORTNAME;
+@synthesize FOURTHINNINGSSHORTNAME;
+@synthesize AA;
+@synthesize BB;
+@synthesize AAWIC;
+@synthesize BBWIC;
+@synthesize ISFREEHIT;
+
+
+
+
 //SP_FETCHSEBALLCODEDETAILS
 -(void) FetchSEBallCodeDetails:(NSString *)COMPETITIONCODE :(NSString *)MATCHCODE :(NSString*)BALLCODE
 {
-    NSString* TEAMACODE=[[NSString alloc ]init];
-    NSString* TEAMBCODE=[[NSString alloc ]init];
-    NSString* BATTINGTEAMCODE=[[NSString alloc ]init];
-    NSString* BOWLINGTEAMCODE=[[NSString alloc ]init];
-    NSNumber* INNINGSNO= [[NSNumber alloc] init];
-    NSNumber* INNINGSSTATUS= [[NSNumber alloc] init];
-    NSNumber* SESSIONNO= [[NSNumber alloc] init];
-    NSNumber* DAYNO= [[NSNumber alloc] init];
-    NSString* BATTEAMSHORTNAME=[[NSString alloc ]init];
-    NSString* BOWLTEAMSHORTNAME=[[NSString alloc ]init];
-    NSString* BATTEAMNAME=[[NSString alloc ]init];
-    NSString* BOWLTEAMNAME=[[NSString alloc ]init];
-    NSNumber* MATCHOVERS= [[NSNumber alloc] init];
-    NSString* BATTEAMLOGO=[[NSString alloc ]init];
-    NSString* BOWLTEAMLOGO=[[NSString alloc ]init];
-    NSString* MATCHTYPE=[[NSString alloc ]init];
-    NSString* ISOTHERSMATCHTYPE=[[NSString alloc ]init];
+    
     
     
     NSMutableArray *GetTeamDetailsArray=[DBManagerEditScoreEngine GetTeamDetailsForMatchRegistration :  COMPETITIONCODE:  MATCHCODE ];
@@ -129,30 +193,7 @@
     
     NSMutableArray *GetShotTypeArray=[ DBManagerEditScoreEngine GetShotTypeForBallCodeDetails];
     
-    NSNumber* BATTEAMRUNS= [[NSNumber alloc] init];;
-    NSNumber* BATTEAMWICKETS= [[NSNumber alloc] init];
-    NSNumber* BATTEAMOVERS= [[NSNumber alloc] init];
-    NSNumber* BATTEAMOVRBALLS= [[NSNumber alloc] init];
-    NSNumber* BATTEAMRUNRATE= [[NSNumber alloc] init];
-    NSNumber* ISOVERCOMPLETE= [[NSNumber alloc] init];
-    NSNumber* ISPREVIOUSLEGALBALL= [[NSNumber alloc] init];
-    NSNumber* BATTEAMOVRBALLSCNT= [[NSNumber alloc] init];
-    NSString* BOWLERCODE= [[NSString alloc] init];
-    NSNumber* TOTALBATTEAMRUNS= [[NSNumber alloc] init];
-    NSNumber* TOTALBOWLTEAMRUNS= [[NSNumber alloc] init];
-    NSNumber* REQRUNRATE= [[NSNumber alloc] init];
-    NSNumber* RUNSREQUIRED= [[NSNumber alloc] init];
-    NSNumber* REMBALLS= [[NSNumber alloc] init];
-    NSString* T_ATWOROTW= [[NSString alloc] init];
-    NSString* T_BOWLINGEND= [[NSString alloc] init];
-    NSString* STRIKERCODE= [[NSString alloc] init];
-    NSString* NONSTRIKERCODE= [[NSString alloc] init];
-    NSNumber* STRIKERBALLS= [[NSNumber alloc] init];
-    NSNumber* NONSTRIKERBALLS= [[NSNumber alloc] init];
-    NSNumber* T_TOTALRUNS= [[NSNumber alloc] init];
-    NSNumber* T_OVERSTATUS	= [[NSNumber alloc] init];
-    NSNumber* T_WICKETPLAYER= [[NSNumber alloc] init];
-    NSNumber* WICKETS= [[NSNumber alloc] init];
+   
     
     
 	   NSMutableArray *GetBallCodeArray=[ DBManagerEditScoreEngine GetBallCodeForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BALLCODE  ];
@@ -253,7 +294,7 @@
         REQRUNRATE = REMBALLS.intValue == 0 ? [NSNumber numberWithInt:0] : [NSNumber numberWithInt: (( RUNSREQUIRED.intValue /  REMBALLS.intValue) * (REMBALLS.intValue < 6 ? 1 : 6)) ];
     }
     
-        NSNumber* ISFREEHIT= [[NSNumber alloc] init];
+        ISFREEHIT= [[NSNumber alloc] init];
         
         if( ![[DBManagerEditScoreEngine GetFreeHitDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ] isEqual:@""])
         {
@@ -266,35 +307,32 @@
         
         
         
-        if([ DBManagerEditScoreEngine GetStrikerDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO :   STRIKERCODE : BATTEAMOVERS:  BATTEAMOVRBALLS:  BATTEAMOVRBALLSCNT ]  !=0)
+        if(![[ DBManagerEditScoreEngine GetStrikerDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO :   STRIKERCODE : BATTEAMOVERS:  BATTEAMOVRBALLS:  BATTEAMOVRBALLSCNT ]  isEqual:@""])
         {
             
             
 
-            NSMutableArray *GetStrikerDetailsArray=[ DBManagerEditScoreEngine GetStrikerDetailsForSEBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO :  BATTEAMOVERS :BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT: STRIKERCODE:STRIKERBALLS ];
+            self.currentStrickerDetail=[ DBManagerEditScoreEngine GetStrikerDetailsForSEBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO :  BATTEAMOVERS :BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT: STRIKERCODE:STRIKERBALLS ];
             
         }
         else
         {
             
-            NSMutableArray *GetStrikerDetailsForPlayersArray=[ DBManagerEditScoreEngine GetStrikerDetailsForPlayerMaster : STRIKERCODE ];
+           self.currentStrickerDetail=[ DBManagerEditScoreEngine GetStrikerDetailsForPlayerMaster : STRIKERCODE ];
             
             
             
         }
         NONSTRIKERBALLS =[ DBManagerEditScoreEngine GetNonStrikerBallForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE :INNINGSNO: NONSTRIKERCODE :   BATTEAMOVERS :  BATTEAMOVRBALLS :  BATTEAMOVRBALLSCNT];
         
-        if(  [ DBManagerEditScoreEngine GetNonStrikerDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE :INNINGSNO :NONSTRIKERCODE :      BATTEAMOVERS :  BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT] !=0)
+        if(  ![[ DBManagerEditScoreEngine GetNonStrikerDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE :INNINGSNO :NONSTRIKERCODE :      BATTEAMOVERS :  BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT] isEqual:@""])
         {
             
-            
-            
-            
-            NSMutableArray *GetNonStrikerDetailsArray=[ DBManagerEditScoreEngine GetNonStrikerDetailsForSEBallEvents :COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO:BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT: NONSTRIKERCODE:STRIKERBALLS ];
+            self.currentNonStrickerDetail=[ DBManagerEditScoreEngine GetNonStrikerDetailsForSEBallEvents :COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO:BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT: NONSTRIKERCODE:STRIKERBALLS ];
         }
         else
         {
-            NSMutableArray *GetNonStrikerDetailsForPlayersArray=[ DBManagerEditScoreEngine GetNonStrikerDetailsForPlayerMaster :  NONSTRIKERCODE];
+            self.currentNonStrickerDetail=[ DBManagerEditScoreEngine GetNonStrikerDetailsForPlayerMaster :  NONSTRIKERCODE];
             
         }
         
@@ -308,7 +346,7 @@
         
         
         NSNumber* TOTALBALLSBOWL= [[NSNumber alloc] init];
-        NSNumber* MAIDENS= [[NSNumber alloc] init];
+        MAIDENS= [[NSNumber alloc] init];
         NSNumber* BOWLERRUNS= [[NSNumber alloc] init];
         NSNumber* ISPARTIALOVER= [[NSNumber alloc] init];
         
@@ -341,9 +379,18 @@
 						  
 						  BOWLERSPELL=[DBManagerEditScoreEngine GetBowlerSpellForBallEvents :COMPETITIONCODE:MATCHCODE: INNINGSNO: BOWLERCODE: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT ];
 						  
-						  NSMutableArray *GetBowlerDetailsArray=[ DBManagerEditScoreEngine GetBowlerDetailsForBallEventsDetails : ISPARTIALOVER: TOTALBALLSBOWL: BATTEAMOVRBALLS: BOWLERRUNS: COMPETITIONCODE: MATCHCODE: INNINGSNO: BOWLERCODE: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT];
-						  
-						  
+						  self.currentbowlerDetail=[ DBManagerEditScoreEngine GetBowlerDetailsForBallEventsDetails : ISPARTIALOVER: TOTALBALLSBOWL: BATTEAMOVRBALLS: BOWLERRUNS: COMPETITIONCODE: MATCHCODE: INNINGSNO: BOWLERCODE: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT];
+    
+                            if(self.currentbowlerDetail.count>0){
+                                GetSEBowlerDetailsForBallEvents *record = [self.currentbowlerDetail objectAtIndex:0];
+                                
+                                record.BOWLERSPELL=BOWLERSPELL;
+                                record.TOTALRUNS= BOWLERRUNS;
+                                record.ATWOROTW=T_ATWOROTW;
+
+                            }
+    
+    
 						  NSMutableArray *GetMatchUmpireDetailsArray=[ DBManagerEditScoreEngine GetMatchUmpireDetailsForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO:BALLCODE];
 						  
         NSNumber* ISINNINGSLASTOVER= [[NSNumber alloc] init];
@@ -367,10 +414,42 @@
 						  
         
         
-        //ADD TWO SP
-        //[ SP_FETCHSEFIELDINGEVENTSPAGELOAD :  COMPETITIONCODE,MATCHCODE,BOWLINGTEAMCODE];
-						  
-        //[FETCHSEALLINNINGSSCOREDETAILS : COMPETITIONCODE, MATCHCODE;];
+    [DBManager GETFIELDINGFACTORSDETAILS];
+    
+    
+    //ALL INNINGS SCORE DETAILS
+    NSMutableArray *inningsArray = [[NSMutableArray alloc]init];
+    inningsArray = [DBManager FETCHSEALLINNINGSSCOREDETAILS:COMPETITIONCODE MATCHCODE:MATCHCODE];
+    
+    if([inningsArray count]>0){
+        FetchSEPageLoadRecord *inningsDetails = (FetchSEPageLoadRecord*)[inningsArray objectAtIndex:0];
+        MATCHDATE = inningsDetails.MATCHDATE;
+        FIRSTINNINGSTOTAL = inningsDetails.FIRSTINNINGSTOTAL;
+        SECONDINNINGSTOTAL = inningsDetails.SECONDINNINGSTOTAL;
+        THIRDINNINGSTOTAL = inningsDetails.THIRDINNINGSTOTAL;
+        FOURTHINNINGSTOTAL = inningsDetails.FOURTHINNINGSTOTAL;
+        FIRSTINNINGSWICKET = inningsDetails.FIRSTINNINGSWICKET;
+        SECONDINNINGSWICKET = inningsDetails.SECONDINNINGSWICKET;
+        THIRDINNINGSWICKET = inningsDetails.THIRDINNINGSWICKET;
+        FOURTHINNINGSWICKET = inningsDetails.FOURTHINNINGSWICKET;
+        FIRSTINNINGSSCORE = inningsDetails.FIRSTINNINGSOVERS;
+        SECONDINNINGSSCORE = inningsDetails.SECONDINNINGSSCORE;
+        THIRDINNINGSSCORE = inningsDetails.THIRDINNINGSSCORE;
+        FOURTHINNINGSSCORE = inningsDetails.FOURTHINNINGSSCORE;
+        FIRSTINNINGSOVERS = inningsDetails.FIRSTINNINGSOVERS;
+        SECONDINNINGSOVERS = inningsDetails.SECONDINNINGSOVERS;
+        THIRDINNINGSOVERS = inningsDetails.THIRDINNINGSOVERS;
+        FOURTHINNINGSOVERS = inningsDetails.FOURTHINNINGSOVERS;
+        FIRSTINNINGSSHORTNAME = inningsDetails.FIRSTINNINGSSHORTNAME;
+        SECONDINNINGSSHORTNAME = inningsDetails.SECONDINNINGSSHORTNAME;
+        THIRDINNINGSSHORTNAME = inningsDetails.THIRDINNINGSSHORTNAME;
+        FOURTHINNINGSSHORTNAME = inningsDetails.FOURTHINNINGSSHORTNAME;
+        AA = inningsDetails.AA;
+        BB = inningsDetails.BB;
+        AAWIC = inningsDetails.AAWIC;
+        BBWIC = inningsDetails.BBWIC;
+        
+    }
 						  
         NSMutableArray *GetSpinSpeedBallDetailsForMetadataArray=[ DBManagerEditScoreEngine GetSpinSpeedBallDetailsForMetadata];
 						  

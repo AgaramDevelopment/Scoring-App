@@ -18,4 +18,6 @@
 
 +(NSMutableArray*) GetNotOutAndOutBatsManForFetchOtherwicket:(NSString*) MATCHCODE:(NSString*) TEAMCODE;
 
++(NSMutableArray *)RetrieveOtherWicketType;
+
 @end
