@@ -53,7 +53,10 @@
 #import "DeclareInnings.h"
 #import "OtherWicketVC.h"
 #import "PowerPlayGridVC.h"
+#import "Other_WicketVC.h"
 #import "NewMatchSetUpVC.h"
+#import "FETCHSEBALLCODEDETAILS.h"
+#import "ScoreEnginEditRecord.h"
 
 
 
