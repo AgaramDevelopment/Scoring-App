@@ -9,6 +9,9 @@
 #import "DBManagerEditScoreEngine.h"
 
 #import "ScoreEnginEditRecord.h"
+#import "SelectPlayerRecord.h"
+#import "BowlerEvent.h"
+
 
 @implementation DBManagerEditScoreEngine
 //SP_FETCHSEBALLCODEDETAILS
@@ -522,10 +525,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                GetSEDetailsForBattingTeamPlayers *record=[[GetSEDetailsForBattingTeamPlayers alloc]init];
-                record.PLAYERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                record.PLAYERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.BATTINGSTYLE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                SelectPlayerRecord *record = [[SelectPlayerRecord alloc]init];
+
+               // GetSEDetailsForBattingTeamPlayers *record=[[GetSEDetailsForBattingTeamPlayers alloc]init];
+                record.playerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.playerName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record.battingStyle=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
                 
                 
                 
@@ -650,12 +655,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                GetSEDetailsForBowlingTeamPlayers *record=[[GetSEDetailsForBowlingTeamPlayers alloc]init];
-                record.PLAYERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                record.PLAYERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.BOWLINGTYPE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                record.BOWLINGSTYLE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                record.PENULTIMATEBOWLERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                
+                BowlerEvent *record = [[BowlerEvent alloc]init];
+                
+              //  GetSEDetailsForBowlingTeamPlayers *record=[[GetSEDetailsForBowlingTeamPlayers alloc]init];
+                record.BowlerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.BowlerName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record.bowlingType=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record.bowlingStyle=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+              //  record.PENULTIMATEBOWLERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
                 
                 [GetBowlingTeamPlayersArray addObject:record];
             }
@@ -1411,75 +1419,75 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 GetBallDetailsForBallEventsBE *record=[[GetBallDetailsForBallEventsBE alloc]init];
                 record.BALLCODE=[self getValueByNull:statement :0];
                 
-                record.COMPETITIONCODE =[self getValueByNull:statement :2];
+                record.COMPETITIONCODE =[self getValueByNull:statement :1];
                 
-                record.MATCHCODE=[self getValueByNull:statement :3];
-                record.TEAMCODE=[self getValueByNull:statement :4];
-                record.INNINGSNO=[self getValueByNull:statement :5];
-                record.OVERNO=[self getValueByNull:statement :6];
-                record.BALLNO=[self getValueByNull:statement :7];
-                record.BALLCOUNT=[self getValueByNull:statement :8];
-                record.SESSIONNO=[self getValueByNull:statement :9];
-                record.STRIKERCODE =[self getValueByNull:statement :10];
-                record.NONSTRIKERCODE  =[self getValueByNull:statement :11];
-                record.BOWLERCODE        =[self getValueByNull:statement :12];
-                record.WICKETKEEPERCODE  =[self getValueByNull:statement :13];
-                record.UMPIRE1CODE       =[self getValueByNull:statement :14];
-                record.UMPIRE2CODE       =[self getValueByNull:statement :15];
-                record.ATWOROTW          =[self getValueByNull:statement :16];
-                record.BOWLINGEND        =[self getValueByNull:statement :17];
-                record.BOWLTYPECODE=[self getValueByNull:statement :18];
-                record.BOWLTYPE             =[self getValueByNull:statement :19];
-                record.BOWLERTYPE           =[self getValueByNull:statement :20];
-                record.SHOTCODE    =[self getValueByNull:statement :21];
-                record.SHOTNAME             =[self getValueByNull:statement :22];
-                record.SHOTTYPE             =[self getValueByNull:statement :23];
-                record.SHOTTYPECATEGORY        =[self getValueByNull:statement :24];
-                record.ISLEGALBALL   =[self getValueByNull:statement :25];
-                record.ISFOUR        =[self getValueByNull:statement :26];
-                record.ISSIX         =[self getValueByNull:statement :27];
-                record.RUNS         =[self getValueByNull:statement :28];
-                record.OVERTHROW     =[self getValueByNull:statement :29];
-                record.TOTALRUNS     =[self getValueByNull:statement :30];
-                record.WIDE          =[self getValueByNull:statement :31];
-                record.NOBALL        =[self getValueByNull:statement :32];
-                record.BYES          =[self getValueByNull:statement :33];
-                record.LEGBYES       =[self getValueByNull:statement :34];
-                record.PENALTY       =[self getValueByNull:statement :35];
-                record.TOTALEXTRAS   =[self getValueByNull:statement :36];
-                record.GRANDTOTAL    =[self getValueByNull:statement :37];
-                record.RBW           =[self getValueByNull:statement :38];
-                record.PMLINECODE   =[self getValueByNull:statement :39];
-                record.PMLENGTHCODE  =[self getValueByNull:statement :40];
-                record.PMSTRIKEPOINT =[self getValueByNull:statement :41];
-                record.PMSTRIKEPOINTLINECODE   =[self getValueByNull:statement :42];
-                record.PMX1                    =[self getValueByNull:statement :43];
-                record.PMY1                    =[self getValueByNull:statement :44];
-                record.PMX2                    =[self getValueByNull:statement :45];
-                record.PMY2                    =[self getValueByNull:statement :46];
-                record.PMX3                    =[self getValueByNull:statement :47];
-                record.PMY3                    =[self getValueByNull:statement :48];
-                record.WWREGION                =[self getValueByNull:statement :49];
-                record.REGIONNAME              =[self getValueByNull:statement :50];
-                record.WWX1                    =[self getValueByNull:statement :51];
-                record.WWY1                    =[self getValueByNull:statement :52];
-                record.WWX2                    =[self getValueByNull:statement :53];
-                record.WWY2                    =[self getValueByNull:statement :54];
-                record.BALLDURATION            =[self getValueByNull:statement :55];
-                record.ISAPPEAL                =[self getValueByNull:statement :56];
-                record.ISBEATEN                =[self getValueByNull:statement :57];
-                record.ISUNCOMFORT             =[self getValueByNull:statement :58];
-                record.UNCOMFORTCLASSIFCATION  =[self getValueByNull:statement :59];
-                record.ISWTB                   =[self getValueByNull:statement :60];
-                record.ISRELEASESHOT           =[self getValueByNull:statement :61];
-                record.MARKEDFOREDIT           =[self getValueByNull:statement :62];
-                record.REMARKS                 =[self getValueByNull:statement :63];
-                record.BALLSPEED               =[self getValueByNull:statement :64];
-                record.BALLSPEEDTYPE           =[self getValueByNull:statement :65];
-                record.BALLSPEEDCODE           =[self getValueByNull:statement :66];
-                record.UNCOMFORTCLASSIFICATION =[self getValueByNull:statement :67];
-                record.UNCOMFORTCLASSIFICATIONCODE    =[self getValueByNull:statement :68];
-                record.UNCOMFORTCLASSIFICATIONSUBCODE =[self getValueByNull:statement :69];
+                record.MATCHCODE=[self getValueByNull:statement :2];
+                record.TEAMCODE=[self getValueByNull:statement :3];
+                record.INNINGSNO=[self getValueByNull:statement :4];
+                record.OVERNO=[self getValueByNull:statement :5];
+                record.BALLNO=[self getValueByNull:statement :6];
+                record.BALLCOUNT=[self getValueByNull:statement :7];
+                record.SESSIONNO=[self getValueByNull:statement :8];
+                record.STRIKERCODE =[self getValueByNull:statement :9];
+                record.NONSTRIKERCODE  =[self getValueByNull:statement :10];
+                record.BOWLERCODE        =[self getValueByNull:statement :11];
+                record.WICKETKEEPERCODE  =[self getValueByNull:statement :12];
+                record.UMPIRE1CODE       =[self getValueByNull:statement :13];
+                record.UMPIRE2CODE       =[self getValueByNull:statement :14];
+                record.ATWOROTW          =[self getValueByNull:statement :15];
+                record.BOWLINGEND        =[self getValueByNull:statement :16];
+                record.BOWLTYPECODE=[self getValueByNull:statement :17];
+                record.BOWLTYPE             =[self getValueByNull:statement :18];
+                record.BOWLERTYPE           =[self getValueByNull:statement :19];
+                record.SHOTCODE    =[self getValueByNull:statement :20];
+                record.SHOTNAME             =[self getValueByNull:statement :21];
+                record.SHOTTYPE             =[self getValueByNull:statement :22];
+                record.SHOTTYPECATEGORY        =[self getValueByNull:statement :23];
+                record.ISLEGALBALL   =[self getValueByNull:statement :24];
+                record.ISFOUR        =[self getValueByNull:statement :25];
+                record.ISSIX         =[self getValueByNull:statement :26];
+                record.RUNS         =[self getValueByNull:statement :27];
+                record.OVERTHROW     =[self getValueByNull:statement :28];
+                record.TOTALRUNS     =[self getValueByNull:statement :29];
+                record.WIDE          =[self getValueByNull:statement :30];
+                record.NOBALL        =[self getValueByNull:statement :31];
+                record.BYES          =[self getValueByNull:statement :32];
+                record.LEGBYES       =[self getValueByNull:statement :33];
+                record.PENALTY       =[self getValueByNull:statement :34];
+                record.TOTALEXTRAS   =[self getValueByNull:statement :35];
+                record.GRANDTOTAL    =[self getValueByNull:statement :36];
+                record.RBW           =[self getValueByNull:statement :37];
+                record.PMLINECODE   =[self getValueByNull:statement :38];
+                record.PMLENGTHCODE  =[self getValueByNull:statement :39];
+                record.PMSTRIKEPOINT =[self getValueByNull:statement :40];
+                record.PMSTRIKEPOINTLINECODE   =[self getValueByNull:statement :41];
+                record.PMX1                    =[self getValueByNull:statement :42];
+                record.PMY1                    =[self getValueByNull:statement :43];
+                record.PMX2                    =[self getValueByNull:statement :44];
+                record.PMY2                    =[self getValueByNull:statement :45];
+                record.PMX3                    =[self getValueByNull:statement :46];
+                record.PMY3                    =[self getValueByNull:statement :47];
+                record.WWREGION                =[self getValueByNull:statement :48];
+                record.REGIONNAME              =[self getValueByNull:statement :49];
+                record.WWX1                    =[self getValueByNull:statement :50];
+                record.WWY1                    =[self getValueByNull:statement :51];
+                record.WWX2                    =[self getValueByNull:statement :52];
+                record.WWY2                    =[self getValueByNull:statement :53];
+                record.BALLDURATION            =[self getValueByNull:statement :54];
+                record.ISAPPEAL                =[self getValueByNull:statement :55];
+                record.ISBEATEN                =[self getValueByNull:statement :56];
+                record.ISUNCOMFORT             =[self getValueByNull:statement :57];
+                record.UNCOMFORTCLASSIFCATION  =[self getValueByNull:statement :58];
+                record.ISWTB                   =[self getValueByNull:statement :59];
+                record.ISRELEASESHOT           =[self getValueByNull:statement :60];
+                record.MARKEDFOREDIT           =[self getValueByNull:statement :61];
+                record.REMARKS                 =[self getValueByNull:statement :62];
+                record.BALLSPEED               =[self getValueByNull:statement :63];
+                record.BALLSPEEDTYPE           =[self getValueByNull:statement :64];
+                record.BALLSPEEDCODE           =[self getValueByNull:statement :65];
+                record.UNCOMFORTCLASSIFICATION =[self getValueByNull:statement :66];
+                record.UNCOMFORTCLASSIFICATIONCODE    =[self getValueByNull:statement :67];
+                record.UNCOMFORTCLASSIFICATIONSUBCODE =[self getValueByNull:statement :68];
                 
                 [GetBallDetailsForBallEventsArray addObject:record];
             }

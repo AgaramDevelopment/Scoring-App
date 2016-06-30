@@ -221,7 +221,7 @@
 //    NSMutableArray *GetRetiredHurtChangesArray=[ DBManagerEditScoreEngine GetRetiredHurtChangesForBallevents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO ];
     
 
-    NSMutableArray *GetBattingTeamPlayersArray=[ DBManagerEditScoreEngine GetBattingTeamPlayersForMatchRegistration :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ];
+    self.GetBattingTeamPlayersArray=[ DBManagerEditScoreEngine GetBattingTeamPlayersForMatchRegistration :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ];
     
 
     
@@ -246,7 +246,7 @@
     BATTEAMRUNRATE = TOTALBALLS == 0 ? [NSNumber numberWithInt:0]: [NSNumber numberWithInt:(BATTEAMRUNS.intValue / TOTALBALLS.intValue) * 6] ;
     
     
-    NSMutableArray *GetBowlingTeamPlayersArray=[ DBManagerEditScoreEngine GetBowlingTeamPlayersForMatchRegistration :  MATCHCODE : BOWLINGTEAMCODE: COMPETITIONCODE : BATTINGTEAMCODE :  INNINGSNO :BATTEAMOVERS];
+    self.GetBowlingTeamPlayersArray=[ DBManagerEditScoreEngine GetBowlingTeamPlayersForMatchRegistration :  MATCHCODE : BOWLINGTEAMCODE: COMPETITIONCODE : BATTINGTEAMCODE :  INNINGSNO :BATTEAMOVERS];
     
     if(INNINGSNO.intValue > 0 && (INNINGSNO.intValue % 2) == 0 )
     {

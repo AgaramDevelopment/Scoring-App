@@ -126,7 +126,7 @@
 		24E7B4BF1D23D18B00EF0D55 /* FETCHSEBALLCODEDETAILS.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E7B4BE1D23D18B00EF0D55 /* FETCHSEBALLCODEDETAILS.m */; };
 		24E7B4C21D23D21700EF0D55 /* DBManagerEditScoreEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E7B4C11D23D21700EF0D55 /* DBManagerEditScoreEngine.m */; };
 		24E7B4EB1D23D4C800EF0D55 /* ScoreEnginEditRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E7B4EA1D23D4C800EF0D55 /* ScoreEnginEditRecord.m */; };
-		24E9E7DD1D25179700CF5BF8 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 24E9E7DC1D25179700CF5BF8 /* TNCA_DATABASE.sqlite */; };
+		24E9E7DF1D25713800CF5BF8 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 24E9E7DE1D25713800CF5BF8 /* TNCA_DATABASE.sqlite */; };
 		CE0018001CF42FA500668D8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0017FF1CF42FA500668D8B /* main.m */; };
 		CE0018031CF42FA500668D8B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018021CF42FA500668D8B /* AppDelegate.m */; };
 		CE0018091CF42FA500668D8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0018071CF42FA500668D8B /* Main.storyboard */; };
@@ -416,7 +416,7 @@
 		24E7B4C11D23D21700EF0D55 /* DBManagerEditScoreEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerEditScoreEngine.m; sourceTree = "<group>"; };
 		24E7B4E91D23D4C800EF0D55 /* ScoreEnginEditRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScoreEnginEditRecord.h; sourceTree = "<group>"; };
 		24E7B4EA1D23D4C800EF0D55 /* ScoreEnginEditRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScoreEnginEditRecord.m; sourceTree = "<group>"; };
-		24E9E7DC1D25179700CF5BF8 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = "../../../../Desktop/Sathish TNCA SQLITE/12/TNCA_DATABASE.sqlite"; sourceTree = "<group>"; };
+		24E9E7DE1D25713800CF5BF8 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = "../../../../Desktop/Sathish TNCA SQLITE/Empty Data base/TNCA_DATABASE.sqlite"; sourceTree = "<group>"; };
 		CE0017FB1CF42FA500668D8B /* CAPScoringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CAPScoringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0017FF1CF42FA500668D8B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE0018011CF42FA500668D8B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -1005,7 +1005,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
-				24E9E7DC1D25179700CF5BF8 /* TNCA_DATABASE.sqlite */,
+				24E9E7DE1D25713800CF5BF8 /* TNCA_DATABASE.sqlite */,
 				24E7B4B41D23893800EF0D55 /* DBManagerDeclarInnings */,
 				243F8E3C1D2236A300333AD8 /* AppealBatsmenRecord */,
 				2469625C1D1E99DE00CC30D0 /* UpdateScoreengineRecord */,
@@ -1392,7 +1392,7 @@
 				CE00184F1CF460DE00668D8B /* RAJDHANI-LIGHT.TTF in Resources */,
 				18674AC41D1A4F9600DB7C71 /* MatchResultListVC.xib in Resources */,
 				CEC858AE1D1557F6007F5384 /* BreakTableViewCell.xib in Resources */,
-				24E9E7DD1D25179700CF5BF8 /* TNCA_DATABASE.sqlite in Resources */,
+				24E9E7DF1D25713800CF5BF8 /* TNCA_DATABASE.sqlite in Resources */,
 				246465231D17255C0078A446 /* PenaltyGridTVC.xib in Resources */,
 				24E7B4B31D23884200EF0D55 /* DeclareInnings.xib in Resources */,
 				CE00180E1CF42FA500668D8B /* LaunchScreen.storyboard in Resources */,

@@ -93,6 +93,7 @@
 @property(strong,nonatomic)NSString *BBWIC;
 @property(strong,nonatomic)NSNumber* MAIDENS;
 
-
+@property(strong,nonatomic)NSMutableArray *GetBattingTeamPlayersArray;
+@property(strong,nonatomic)NSMutableArray *GetBowlingTeamPlayersArray;
 
 @end
