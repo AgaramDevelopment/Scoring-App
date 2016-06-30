@@ -9,8 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface GetPlayerDetail : NSObject
-@property(strong,nonatomic)NSString *WICKETNO;
-@property(strong,nonatomic)NSString *PLAYERCODE;
-@property(strong,nonatomic)NSString *PLAYERNAME;
+@property(strong,nonatomic)NSString *PLAYERCODE	;
+@property(strong,nonatomic)NSString *PLAYERNAME	;
 
 @end
