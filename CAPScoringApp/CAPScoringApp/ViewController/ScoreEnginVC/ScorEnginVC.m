@@ -51,10 +51,9 @@
 #import "Batsmancell.h"
 #import "AppealBatsmenRecord.h"
 #import "DeclareInnings.h"
-#import "Other_WicketVC.h"
+#import "OtherWicketVC.h"
+#import "PowerPlayGridVC.h"
 #import "NewMatchSetUpVC.h"
-#import "FETCHSEBALLCODEDETAILS.h"
-#import "ScoreEnginEditRecord.h"
 
 
 
