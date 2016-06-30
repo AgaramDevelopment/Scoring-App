@@ -43,8 +43,10 @@
    
     if(self.checkInternetConnection)
     {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
         UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-        refreshControl.tintColor = [UIColor blueColor];
+        refreshControl.tintColor = [UIColor greenColor];
         refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
         
         
@@ -62,42 +64,42 @@
             }
             //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
         }
-        
+         [self.tableView addSubview:refresh];
         
         [self.tableView reloadData];
         
-        [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:2.5];
-        [refreshControl endRefreshing];
+         [refreshControl endRefreshing];
         
-        [self.tableView addSubview:refresh];
+         });
     }
+    
 }
 
 
 
--(void)crunchNumbers
-{
-    resultArray=[[NSMutableArray alloc]init];
-    NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
-    for(int i=0; i < [FetchCompitionArray count]; i++)
-    {
-        
-        EventRecord *objEventRecord=(EventRecord*)[FetchCompitionArray objectAtIndex:i];
-        NSLog(@"%@",objEventRecord.recordstatus);
-        NSString *matchStatus=objEventRecord.recordstatus;
-        if([matchStatus isEqualToString:@"MSC001"])
-        {
-            [resultArray addObject:objEventRecord];
-        }
-        //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
-    }
-    
-    
-    [self.tableView reloadData];
-    
-    [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:2.5];
-
-}
+//-(void)crunchNumbers
+//{
+//    resultArray=[[NSMutableArray alloc]init];
+//    NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
+//    for(int i=0; i < [FetchCompitionArray count]; i++)
+//    {
+//        
+//        EventRecord *objEventRecord=(EventRecord*)[FetchCompitionArray objectAtIndex:i];
+//        NSLog(@"%@",objEventRecord.recordstatus);
+//        NSString *matchStatus=objEventRecord.recordstatus;
+//        if([matchStatus isEqualToString:@"MSC001"])
+//        {
+//            [resultArray addObject:objEventRecord];
+//        }
+//        //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
+//    }
+//    
+//    
+//    [self.tableView reloadData];
+//    
+//    [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:2.5];
+//
+//}
 
 
 - (void)stopRefresh
