@@ -6577,7 +6577,9 @@ EndInnings *endInnings;
     otherwicketvc.COMPETITIONCODE=self.competitionCode;
     otherwicketvc.MATCHCODE =self.matchCode;
  otherwicketvc.INNINGSNO =fetchSEPageLoadRecord.INNINGSNO;
-    otherwicketvc.TEAMCODE=fetchSEPageLoadRecord.TEAMCODE;
+    otherwicketvc.TEAMCODE=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    otherwicketvc.STRIKERCODE=fetchSEPageLoadRecord.strickerPlayerCode;
+    otherwicketvc.NONSTRIKERCODE=fetchSEPageLoadRecord.nonstrickerPlayerCode;
   //  otherwicketvc.PLAYERNAME=
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
