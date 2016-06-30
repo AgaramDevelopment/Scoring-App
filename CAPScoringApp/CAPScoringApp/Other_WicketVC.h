@@ -23,12 +23,18 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *button_touch;
 
-@property (strong, nonatomic) IBOutlet UIButton *btn_touchplayer;
+
+- (IBAction)check:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *selectplayer_lbl;
 
 @property (strong, nonatomic) IBOutlet UITableView *tbl_playername;
+@property (strong, nonatomic) IBOutlet UIView *Player_view;
 
 @property(strong,nonatomic)NSString*MATCHCODE;
 @property(strong,nonatomic)NSString*COMPETITIONCODE;
-@property(strong,nonatomic)NSString*INNINGSNO;
+@property(strong,nonatomic)NSNumber*INNINGSNO;
 @property(strong,nonatomic)NSString*TEAMCODE;
+@property(strong,nonatomic)NSString*STRIKERCODE;
+@property(strong,nonatomic)NSString*NONSTRIKERCODE;
+
 @end

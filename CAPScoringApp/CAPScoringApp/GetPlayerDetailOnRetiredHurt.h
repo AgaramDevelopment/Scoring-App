@@ -1,14 +1,14 @@
 //
-//  GetNotOutOutBatsManPlayerDetail.h
+//  GetPlayerDetailOnRetiredHurt.h
 //  CAPScoringApp
 //
-//  Created by Lexicon on 29/06/16.
+//  Created by Ramas Mac Book on 6/30/16.
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface GetNotOutOutBatsManPlayerDetail : NSObject
+@interface GetPlayerDetailOnRetiredHurt : NSObject
 @property(strong,nonatomic)NSString *PLAYERCODE;
 @property(strong,nonatomic)NSString *PLAYERNAME;
 

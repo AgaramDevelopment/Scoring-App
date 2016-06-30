@@ -9,7 +9,7 @@
 #import "GetPlayerDetail.h"
 
 @implementation GetPlayerDetail
-@synthesize WICKETNO;
+
 @synthesize PLAYERCODE;
 @synthesize PLAYERNAME;
 @end
