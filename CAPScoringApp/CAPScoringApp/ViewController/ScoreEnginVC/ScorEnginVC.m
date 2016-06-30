@@ -57,6 +57,7 @@
 #import "Other_WicketVC.h"
 #import "FETCHSEBALLCODEDETAILS.h"
 #import "ScoreEnginEditRecord.h"
+#import "FetchLastBowler.h" 
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
