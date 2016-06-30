@@ -161,15 +161,15 @@
     {
         
         
-        Wicketselectindexarray=[[NSMutableArray alloc]init];
-        objEventRecord=(WicketTypeRecord*)[WICKETARRAY objectAtIndex:indexPath.row];
-        self.Wicket_lbl.text =objEventRecord.metasubcodedescription;
-        METASUBCODE=self.Wicket_lbl.text;
-        METASUBCODE=objEventRecord.metasubcode;
-        [Wicketselectindexarray addObject:objEventRecord];
-        
-        self.Wicket_tableview.hidden=YES;
-        isEnableTbl=YES;
+//        Wicketselectindexarray=[[NSMutableArray alloc]init];
+//        objEventRecord=(WicketTypeRecord*)[WICKETARRAY objectAtIndex:indexPath.row];
+//        self.Wicket_lbl.text =objEventRecord.metasubcodedescription;
+//        METASUBCODE=self.Wicket_lbl.text;
+//        METASUBCODE=objEventRecord.metasubcode;
+//        [Wicketselectindexarray addObject:objEventRecord];
+//        
+//        self.Wicket_tableview.hidden=YES;
+//        isEnableTbl=YES;
     }
 
     
