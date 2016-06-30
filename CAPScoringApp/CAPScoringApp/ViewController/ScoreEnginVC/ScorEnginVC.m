@@ -185,7 +185,7 @@
     
     NSString * alterviewSelect;
     DBManagerEndDay *objDBManagerEndDay;
-    BOOL isEditMode;
+    //BOOL isEditMode;
     BOOL isFreeHitBall;
     NSArray *ValidedMatchType;
 
@@ -257,120 +257,17 @@
 
 FetchLastBowler *fetchLastBowler;
 FetchSEPageLoadRecord *fetchSEPageLoadRecord;
-FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
 EndInnings *endInnings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     if(self.isEditMode){
-         fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
-        [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode :self.editBallCode];
-        
-        
-        GetBallDetailsForBallEventsBE *getBallDetailsForBallEventsBE =[fetchSeBallCodeDetails.GetBallDetailsForBallEventsArray objectAtIndex:0];
-        
-        
-        self.ballEventRecord = [[BallEventRecord alloc] init];
-        self.ballEventRecord.objOverno=getBallDetailsForBallEventsBE.OVERNO;
-        self.ballEventRecord.objBallno=getBallDetailsForBallEventsBE.BALLNO;
-        self.ballEventRecord.objOverBallcount = getBallDetailsForBallEventsBE.BALLCOUNT;
-        self.ballEventRecord.objBallcount=getBallDetailsForBallEventsBE.BALLCOUNT;;
-        self.ballEventRecord.objBowlercode = getBallDetailsForBallEventsBE.BOWLERCODE;
-        self.ballEventRecord.objStrikercode = getBallDetailsForBallEventsBE.STRIKERCODE;
-        self.ballEventRecord.objNonstrikercode = getBallDetailsForBallEventsBE.NONSTRIKERCODE;
-        
-        self.ballEventRecord.objRbw =getBallDetailsForBallEventsBE.RBW;
-        self.ballEventRecord.objIswtb=getBallDetailsForBallEventsBE.ISWTB;
-        self.ballEventRecord.objIsuncomfort=getBallDetailsForBallEventsBE.ISUNCOMFORT;
-        self.ballEventRecord.objIsreleaseshot=getBallDetailsForBallEventsBE.ISRELEASESHOT;
-        self.ballEventRecord.objIsbeaten=getBallDetailsForBallEventsBE.ISBEATEN;
-        self.ballEventRecord.objPMlengthcode=getBallDetailsForBallEventsBE.PMLENGTHCODE;
-        self.ballEventRecord.objPMlinecode =getBallDetailsForBallEventsBE.PMLINECODE;
-        self.ballEventRecord.objPMX1=getBallDetailsForBallEventsBE.PMX1;
-        self.ballEventRecord.objPMY1=getBallDetailsForBallEventsBE.PMY1;
-        self.ballEventRecord.objPMX2=getBallDetailsForBallEventsBE.PMX2;
-        self.ballEventRecord.objPMY2=getBallDetailsForBallEventsBE.PMY2;
-        self.ballEventRecord.objcompetitioncode =getBallDetailsForBallEventsBE.COMPETITIONCODE;
-        
-        self.ballEventRecord.objmatchcode =getBallDetailsForBallEventsBE.MATCHCODE;
-        self.ballEventRecord.objTeamcode =getBallDetailsForBallEventsBE.TEAMCODE;
-        self.ballEventRecord.objcompetitioncode =getBallDetailsForBallEventsBE.COMPETITIONCODE;
-        self.ballEventRecord.objcompetitioncode =getBallDetailsForBallEventsBE.COMPETITIONCODE;
-        
-        
-//        
-//        
-//        record.TEAMCODE=[self getValueByNull:statement :4];
-//        record.INNINGSNO=[self getValueByNull:statement :5];
-//        record.OVERNO=[self getValueByNull:statement :6];
-//        record.BALLNO=[self getValueByNull:statement :7];
-//        record.BALLCOUNT=[self getValueByNull:statement :8];
-//        record.SESSIONNO=[self getValueByNull:statement :9];
-//        record.STRIKERCODE =[self getValueByNull:statement :10];
-//        record.NONSTRIKERCODE  =[self getValueByNull:statement :11];
-//        record.BOWLERCODE        =[self getValueByNull:statement :12];
-//        record.WICKETKEEPERCODE  =[self getValueByNull:statement :13];
-//        record.UMPIRE1CODE       =[self getValueByNull:statement :14];
-//        record.UMPIRE2CODE       =[self getValueByNull:statement :15];
-//        record.ATWOROTW          =[self getValueByNull:statement :16];
-//        record.BOWLINGEND        =[self getValueByNull:statement :17];
-//        record.BOWLTYPECODE=[self getValueByNull:statement :18];
-//        record.BOWLTYPE             =[self getValueByNull:statement :19];
-//        record.BOWLERTYPE           =[self getValueByNull:statement :20];
-//        record.SHOTCODE    =[self getValueByNull:statement :21];
-//        record.SHOTNAME             =[self getValueByNull:statement :22];
-//        record.SHOTTYPE             =[self getValueByNull:statement :23];
-//        record.SHOTTYPECATEGORY        =[self getValueByNull:statement :24];
-//        record.ISLEGALBALL   =[self getValueByNull:statement :25];
-//        record.ISFOUR        =[self getValueByNull:statement :26];
-//        record.ISSIX         =[self getValueByNull:statement :27];
-//        record.RUNS         =[self getValueByNull:statement :28];
-//        record.OVERTHROW     =[self getValueByNull:statement :29];
-//        record.TOTALRUNS     =[self getValueByNull:statement :30];
-//        record.WIDE          =[self getValueByNull:statement :31];
-//        record.NOBALL        =[self getValueByNull:statement :32];
-//        record.BYES          =[self getValueByNull:statement :33];
-//        record.LEGBYES       =[self getValueByNull:statement :34];
-//        record.PENALTY       =[self getValueByNull:statement :35];
-//        record.TOTALEXTRAS   =[self getValueByNull:statement :36];
-//        record.GRANDTOTAL    =[self getValueByNull:statement :37];
-//        record.RBW           =[self getValueByNull:statement :38];
-//        record.PMLINECODE   =[self getValueByNull:statement :39];
-//        record.PMLENGTHCODE  =[self getValueByNull:statement :40];
-//        record.PMSTRIKEPOINT =[self getValueByNull:statement :41];
-//        record.PMSTRIKEPOINTLINECODE   =[self getValueByNull:statement :42];
-//        record.PMX1                    =[self getValueByNull:statement :43];
-//        record.PMY1                    =[self getValueByNull:statement :44];
-//        record.PMX2                    =[self getValueByNull:statement :45];
-//        record.PMY2                    =[self getValueByNull:statement :46];
-//        record.PMX3                    =[self getValueByNull:statement :47];
-//        record.PMY3                    =[self getValueByNull:statement :48];
-//        record.WWREGION                =[self getValueByNull:statement :49];
-//        record.REGIONNAME              =[self getValueByNull:statement :50];
-//        record.WWX1                    =[self getValueByNull:statement :51];
-//        record.WWY1                    =[self getValueByNull:statement :52];
-//        record.WWX2                    =[self getValueByNull:statement :53];
-//        record.WWY2                    =[self getValueByNull:statement :54];
-//        record.BALLDURATION            =[self getValueByNull:statement :55];
-//        record.ISAPPEAL                =[self getValueByNull:statement :56];
-//        record.ISBEATEN                =[self getValueByNull:statement :57];
-//        record.ISUNCOMFORT             =[self getValueByNull:statement :58];
-//        record.UNCOMFORTCLASSIFCATION  =[self getValueByNull:statement :59];
-//        record.ISWTB                   =[self getValueByNull:statement :60];
-//        record.ISRELEASESHOT           =[self getValueByNull:statement :61];
-//        record.MARKEDFOREDIT           =[self getValueByNull:statement :62];
-//        record.REMARKS                 =[self getValueByNull:statement :63];
-//        record.BALLSPEED               =[self getValueByNull:statement :64];
-//        record.BALLSPEEDTYPE           =[self getValueByNull:statement :65];
-//        record.BALLSPEEDCODE           =[self getValueByNull:statement :66];
-//        record.UNCOMFORTCLASSIFICATION =[self getValueByNull:statement :67];
-//        record.UNCOMFORTCLASSIFICATIONCODE    =[self getValueByNull:statement :68];
-//        record.UNCOMFORTCLASSIFICATIONSUBCODE =[self getValueByNull:statement :69];
-//        
-        
+        [self loadViewOnEditMode];
+    
     }else{
         [self reloadBowlerTeamBatsmanDetails];
+        
     }
     
     //GetMatchTypeForInserTEnd
@@ -535,46 +432,6 @@ EndInnings *endInnings;
     
     
     
-    self.ballEventRecord = [[BallEventRecord alloc] init];
-    self.ballEventRecord.objOverno=[NSNumber numberWithInt:fetchSEPageLoadRecord.BATTEAMOVERS];
-    self.ballEventRecord.objBallno=[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
-    self.ballEventRecord.objOverBallcount = [NSNumber numberWithInteger: 0 ];
-    self.ballEventRecord.objBallcount=@1;
-    self.ballEventRecord.objBowlercode = fetchSEPageLoadRecord.currentBowlerPlayerCode;
-    self.ballEventRecord.objStrikercode = fetchSEPageLoadRecord.strickerPlayerCode;
-    self.ballEventRecord.objNonstrikercode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
-
-    self.ballEventRecord.objRbw =[NSNumber numberWithInt:0];
-    self.ballEventRecord.objIswtb=[NSNumber numberWithInt:0];
-    self.ballEventRecord.objIsuncomfort=[NSNumber numberWithInt:0];
-    self.ballEventRecord.objIsreleaseshot=[NSNumber numberWithInt:0];
-    self.ballEventRecord.objIsbeaten=[NSNumber numberWithInt:0];
-    self.ballEventRecord.objPMlengthcode=@"";
-    self.ballEventRecord.objPMlinecode =@"";
-    self.ballEventRecord.objPMX1=@1;
-    self.ballEventRecord.objPMY1=@1;
-    self.ballEventRecord.objPMX2=@1;
-    self.ballEventRecord.objPMY2=@1;
-    if (IS_IPAD_PRO) {
-        _ballEventRecord.objWWX1=@(221);
-        _ballEventRecord.objWWY1=@(186);
-        _ballEventRecord.objWWX2=@(221);
-        _ballEventRecord.objWWY2=@(186);
-    }
-    else{
-        
-        _ballEventRecord.objWWX1=@(172);
-        _ballEventRecord.objWWY1=@(145);
-        _ballEventRecord.objWWX2=@(172);
-        _ballEventRecord.objWWY2=@(145);
-        
-    }
-
-    self.ballEventRecord.objWWREGION=@"";
-   // self.ballEventRecord.objOverno=fetchSEPageLoadRecord.MATCHOVERS;
-    self.ballEventRecord.objBowlercode=fetchSEPageLoadRecord.currentBowlerPlayerCode;
-
-    
     isRBWSelected = NO;
     ismiscFilters = NO;
     isFieldingSelected = NO;
@@ -640,6 +497,245 @@ EndInnings *endInnings;
 }
 
 
+-(void) loadViewOnEditMode{
+    
+    FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
+    fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
+    [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode :self.editBallCode];
+    
+    
+    //Set data for Fetch SE page load
+    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+    
+    NSMutableArray *strickerArray = fetchSeBallCodeDetails.currentStrickerDetail;
+    NSMutableArray *nonstrickerArray = fetchSeBallCodeDetails.currentNonStrickerDetail;
+    NSMutableArray *bowlerArray = fetchSeBallCodeDetails.currentbowlerDetail;
+    
+    //Current Stricker
+    
+    
+    if(strickerArray.count>0){
+        GetSEStrikerDetailsForBallEvents *record = [strickerArray objectAtIndex:0];
+    fetchSEPageLoadRecord.strickerPlayerName = record.PLAYERNAME;
+     fetchSEPageLoadRecord.strickerTotalRuns = record.TOTALRUNS;
+        fetchSEPageLoadRecord.strickerTotalBalls = fetchSeBallCodeDetails.STRIKERBALLS;
+     fetchSEPageLoadRecord.strickerSixes = record.SIXES;
+     fetchSEPageLoadRecord.strickerStrickRate = record.STRIKERATE;
+     fetchSEPageLoadRecord.strickerFours = record.FOURS;
+    
+    }
+    
+    
+    if(nonstrickerArray.count>0){
+        
+        
+        GetSENonStrikerDetailsForBallEvents *record = [nonstrickerArray objectAtIndex:0];
+        
+        //Non Stricker Details
+         fetchSEPageLoadRecord.nonstrickerPlayerName = record.PLAYERNAME;
+        fetchSEPageLoadRecord.nonstrickerTotalRuns= record.TOTALRUNS;
+        fetchSEPageLoadRecord.nonstrickerTotalBalls= fetchSeBallCodeDetails.NONSTRIKERBALLS;
+        fetchSEPageLoadRecord.nonstrickerFours= record.FOURS;
+        fetchSEPageLoadRecord.nonstrickerSixes= record.SIXES;
+        fetchSEPageLoadRecord.nonstrickerStrickRate= record.STRIKERATE;
+        
+    }
+    
+    if(bowlerArray.count>0){
+        GetSEBowlerDetailsForBallEvents *record = [bowlerArray objectAtIndex:0];
+
+        fetchSEPageLoadRecord.currentBowlerPlayerName = record.BOWLERNAME;
+         fetchSEPageLoadRecord.currentBowlerOver = record.OVERS;
+         fetchSEPageLoadRecord.currentBowlerMaidan = fetchSeBallCodeDetails.MAIDENS;
+         fetchSEPageLoadRecord.currentBowlerRuns = record.TOTALRUNS;
+         fetchSEPageLoadRecord.currentBowlerWicket = fetchSeBallCodeDetails.WICKETS;
+         fetchSEPageLoadRecord.currentBowlerEcoRate = record.ECONOMY;
+        
+    }
+    
+    
+    //team score details display
+      fetchSEPageLoadRecord.BATTEAMSHORTNAME = fetchSeBallCodeDetails.BATTEAMSHORTNAME;
+      fetchSEPageLoadRecord.BOWLTEAMSHORTNAME = fetchSeBallCodeDetails.BOWLTEAMSHORTNAME;
+    
+    fetchSEPageLoadRecord.BATTEAMRUNS =fetchSeBallCodeDetails.BATTEAMRUNS.integerValue;
+    fetchSEPageLoadRecord.BATTEAMWICKETS =fetchSeBallCodeDetails.BATTEAMWICKETS.integerValue;
+    
+    fetchSEPageLoadRecord.BATTEAMOVERS =fetchSeBallCodeDetails.BATTEAMOVERS.integerValue;
+    fetchSEPageLoadRecord.BATTEAMOVRBALLS =fetchSeBallCodeDetails.BATTEAMOVRBALLS.integerValue;
+    
+    fetchSEPageLoadRecord.BATTEAMRUNRATE  =fetchSeBallCodeDetails.BATTEAMRUNRATE;
+    fetchSEPageLoadRecord.RUNSREQUIRED =fetchSeBallCodeDetails.RUNSREQUIRED;
+    
+    
+    //ALL Innings Details
+    fetchSEPageLoadRecord.MATCHDATE = fetchSeBallCodeDetails.MATCHDATE;
+    fetchSEPageLoadRecord.FIRSTINNINGSTOTAL = fetchSeBallCodeDetails.FIRSTINNINGSTOTAL;
+    fetchSEPageLoadRecord.SECONDINNINGSTOTAL = fetchSeBallCodeDetails.SECONDINNINGSTOTAL;
+    fetchSEPageLoadRecord.THIRDINNINGSTOTAL = fetchSeBallCodeDetails.THIRDINNINGSTOTAL;
+    fetchSEPageLoadRecord.FOURTHINNINGSTOTAL = fetchSeBallCodeDetails.FOURTHINNINGSTOTAL;
+    fetchSEPageLoadRecord.FIRSTINNINGSWICKET = fetchSeBallCodeDetails.FIRSTINNINGSWICKET;
+    fetchSEPageLoadRecord.SECONDINNINGSWICKET = fetchSeBallCodeDetails.SECONDINNINGSWICKET;
+    fetchSEPageLoadRecord.THIRDINNINGSWICKET = fetchSeBallCodeDetails.THIRDINNINGSWICKET;
+    fetchSEPageLoadRecord.FOURTHINNINGSWICKET = fetchSeBallCodeDetails.FOURTHINNINGSWICKET;
+    fetchSEPageLoadRecord.FIRSTINNINGSSCORE = fetchSeBallCodeDetails.FIRSTINNINGSOVERS;
+    fetchSEPageLoadRecord.SECONDINNINGSSCORE = fetchSeBallCodeDetails.SECONDINNINGSSCORE;
+    fetchSEPageLoadRecord.THIRDINNINGSSCORE = fetchSeBallCodeDetails.THIRDINNINGSSCORE;
+    fetchSEPageLoadRecord.FOURTHINNINGSSCORE = fetchSeBallCodeDetails.FOURTHINNINGSSCORE;
+    fetchSEPageLoadRecord.FIRSTINNINGSOVERS = fetchSeBallCodeDetails.FIRSTINNINGSOVERS;
+    fetchSEPageLoadRecord.SECONDINNINGSOVERS = fetchSeBallCodeDetails.SECONDINNINGSOVERS;
+    fetchSEPageLoadRecord.THIRDINNINGSOVERS = fetchSeBallCodeDetails.THIRDINNINGSOVERS;
+    fetchSEPageLoadRecord.FOURTHINNINGSOVERS = fetchSeBallCodeDetails.FOURTHINNINGSOVERS;
+    fetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME = fetchSeBallCodeDetails.FIRSTINNINGSSHORTNAME;
+    fetchSEPageLoadRecord.SECONDINNINGSSHORTNAME = fetchSeBallCodeDetails.SECONDINNINGSSHORTNAME;
+    fetchSEPageLoadRecord.THIRDINNINGSSHORTNAME = fetchSeBallCodeDetails.THIRDINNINGSSHORTNAME;
+    fetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME = fetchSeBallCodeDetails.FOURTHINNINGSSHORTNAME;
+    fetchSEPageLoadRecord.AA = fetchSeBallCodeDetails.AA;
+    fetchSEPageLoadRecord.BB = fetchSeBallCodeDetails.BB;
+    fetchSEPageLoadRecord.AAWIC = fetchSeBallCodeDetails.AAWIC;
+    fetchSEPageLoadRecord.BBWIC = fetchSeBallCodeDetails.BBWIC;
+    
+    
+    
+    GetBallDetailsForBallEventsBE *getBallDetailsForBallEventsBE =[fetchSeBallCodeDetails.GetBallDetailsForBallEventsArray objectAtIndex:0];
+    
+    
+    self.ballEventRecord = [[BallEventRecord alloc] init];
+    self.ballEventRecord.objTeamcode =getBallDetailsForBallEventsBE.TEAMCODE;
+
+    self.ballEventRecord.objOverno=getBallDetailsForBallEventsBE.OVERNO;
+    self.ballEventRecord.objBallno=getBallDetailsForBallEventsBE.BALLNO;
+    self.ballEventRecord.objOverBallcount = getBallDetailsForBallEventsBE.BALLCOUNT;
+    self.ballEventRecord.objBallcount=getBallDetailsForBallEventsBE.BALLCOUNT;;
+    self.ballEventRecord.objBowlercode = getBallDetailsForBallEventsBE.BOWLERCODE;
+    self.ballEventRecord.objStrikercode = getBallDetailsForBallEventsBE.STRIKERCODE;
+    self.ballEventRecord.objNonstrikercode = getBallDetailsForBallEventsBE.NONSTRIKERCODE;
+    self.ballEventRecord.objRbw =getBallDetailsForBallEventsBE.RBW;
+    self.ballEventRecord.objIswtb=getBallDetailsForBallEventsBE.ISWTB;
+    self.ballEventRecord.objIsuncomfort=getBallDetailsForBallEventsBE.ISUNCOMFORT;
+    self.ballEventRecord.objIsreleaseshot=getBallDetailsForBallEventsBE.ISRELEASESHOT;
+    self.ballEventRecord.objIsbeaten=getBallDetailsForBallEventsBE.ISBEATEN;
+    self.ballEventRecord.objPMlengthcode=getBallDetailsForBallEventsBE.PMLENGTHCODE;
+    self.ballEventRecord.objPMlinecode =getBallDetailsForBallEventsBE.PMLINECODE;
+    self.ballEventRecord.objPMX1=getBallDetailsForBallEventsBE.PMX1;
+    self.ballEventRecord.objPMY1=getBallDetailsForBallEventsBE.PMY1;
+    self.ballEventRecord.objPMX2=getBallDetailsForBallEventsBE.PMX2;
+    self.ballEventRecord.objPMY2=getBallDetailsForBallEventsBE.PMY2;
+    self.ballEventRecord.objcompetitioncode =getBallDetailsForBallEventsBE.COMPETITIONCODE;
+    
+    self.ballEventRecord.objmatchcode =getBallDetailsForBallEventsBE.MATCHCODE;
+    self.ballEventRecord.objInningsno =getBallDetailsForBallEventsBE.INNINGSNO;
+    self.ballEventRecord.objSessionno =getBallDetailsForBallEventsBE.SESSIONNO;
+    
+    self.ballEventRecord.objWicketkeepercode =getBallDetailsForBallEventsBE.WICKETKEEPERCODE;
+    self.ballEventRecord.objUmpire1code =getBallDetailsForBallEventsBE.UMPIRE1CODE;
+    self.ballEventRecord.objUmpire2code =getBallDetailsForBallEventsBE.UMPIRE2CODE;
+    self.ballEventRecord.objAtworotw =getBallDetailsForBallEventsBE.ATWOROTW;
+    self.ballEventRecord.objBowlingEnd =getBallDetailsForBallEventsBE.BOWLINGEND;
+    //self.ballEventRecord.bow =getBallDetailsForBallEventsBE.BOWLTYPECODE;
+    
+    self.ballEventRecord.objBowltype =getBallDetailsForBallEventsBE.BOWLTYPE;
+    //self.ballEventRecord.bow =getBallDetailsForBallEventsBE.BOWLERTYPE;
+    //self.ballEventRecord.objShottype =getBallDetailsForBallEventsBE.SHOTCODE;
+    //self.ballEventRecord.objInningsno =getBallDetailsForBallEventsBE.SHOTNAME;
+    self.ballEventRecord.objShottype =getBallDetailsForBallEventsBE.SHOTTYPE;
+    self.ballEventRecord.objShorttypecategory =getBallDetailsForBallEventsBE.SHOTTYPECATEGORY;
+    self.ballEventRecord.objIslegalball =getBallDetailsForBallEventsBE.ISLEGALBALL;
+    self.ballEventRecord.objIsFour =getBallDetailsForBallEventsBE.ISFOUR;
+    
+    self.ballEventRecord.objIssix =getBallDetailsForBallEventsBE.ISSIX;
+    self.ballEventRecord.objRuns =getBallDetailsForBallEventsBE.RUNS;
+    self.ballEventRecord.objOverthrow =getBallDetailsForBallEventsBE.OVERTHROW;
+    self.ballEventRecord.objTotalruns =getBallDetailsForBallEventsBE.TOTALRUNS;
+    self.ballEventRecord.objWide =getBallDetailsForBallEventsBE.WIDE;
+    self.ballEventRecord.objNoball =getBallDetailsForBallEventsBE.NOBALL;
+    self.ballEventRecord.objByes =getBallDetailsForBallEventsBE.BYES;
+    self.ballEventRecord.objLegByes =getBallDetailsForBallEventsBE.LEGBYES;
+    self.ballEventRecord.objPenalty =getBallDetailsForBallEventsBE.PENALTY;
+    self.ballEventRecord.objTotalextras =getBallDetailsForBallEventsBE.TOTALEXTRAS;
+    self.ballEventRecord.objGrandtotal =getBallDetailsForBallEventsBE.GRANDTOTAL;
+    self.ballEventRecord.objPMStrikepoint =getBallDetailsForBallEventsBE.PMSTRIKEPOINT;
+    self.ballEventRecord.objPMStrikepointlinecode =getBallDetailsForBallEventsBE.PMSTRIKEPOINTLINECODE;
+    self.ballEventRecord.objWWREGION =getBallDetailsForBallEventsBE.WWREGION;
+    //self.ballEventRecord. =getBallDetailsForBallEventsBE.REGIONNAME;
+    self.ballEventRecord.objWWX1 =getBallDetailsForBallEventsBE.WWX1;
+    self.ballEventRecord.objWWY1 =getBallDetailsForBallEventsBE.WWY1;
+    self.ballEventRecord.objWWX2 =getBallDetailsForBallEventsBE.WWX2;
+    self.ballEventRecord.objWWY2 =getBallDetailsForBallEventsBE.WWY2;
+    self.ballEventRecord.objballduration =getBallDetailsForBallEventsBE.BALLDURATION;
+    self.ballEventRecord.objIsappeal =getBallDetailsForBallEventsBE.ISAPPEAL;
+    self.ballEventRecord.objUncomfortclassification =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFCATION;
+    self.ballEventRecord.objMarkedforedit =getBallDetailsForBallEventsBE.MARKEDFOREDIT;
+    self.ballEventRecord.objRemark =getBallDetailsForBallEventsBE.REMARKS;
+    self.ballEventRecord.objBallspeed =getBallDetailsForBallEventsBE.BALLSPEED;
+    //self.ballEventRecord. =getBallDetailsForBallEventsBE.BALLSPEEDTYPE;
+    //self.ballEventRecord. =getBallDetailsForBallEventsBE.BALLSPEEDCODE;
+    self.ballEventRecord.objUncomfortclassification =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATION;
+    //self.ballEventRecord. =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATIONCODE;
+    //self.ballEventRecord. =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATIONSUBCODE;
+    
+    
+    
+    
+    //Stricker Details
+    self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
+    self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
+    self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
+    self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
+    self.lbl_stricker_strickrate.text = fetchSEPageLoadRecord.strickerStrickRate;
+    self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
+    
+    //Non Stricker Details
+    self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
+    self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
+    self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
+    self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
+    self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
+    self.lbl_nonstricker_strickrate.text = fetchSEPageLoadRecord.nonstrickerStrickRate;
+    
+    //Bowler
+    
+    self.lbl_bowler_name.text = fetchSEPageLoadRecord.currentBowlerPlayerName;
+    self.lbl_bowler_runs.text = fetchSEPageLoadRecord.currentBowlerOver;
+    self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
+    self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
+    self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
+    self.lbl_bowler_strickrate.text = fetchSEPageLoadRecord.currentBowlerEcoRate;
+    
+    
+    
+    //team score details display
+    _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+    _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
+    
+    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
+    
+    _lbl_overs.text = [NSString stringWithFormat:@"%d.%d OVS" ,fetchSEPageLoadRecord.BATTEAMOVERS,fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+    
+    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+    
+    
+    
+    //all innings details for team A and team B
+    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
+    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
+    
+    
+    _lbl_teamASecIngsScore.text = @"";
+    _lbl_teamASecIngsOvs.text = @"";
+    
+    
+    _lbl_teamBSecIngsScore.text =@"";
+    _lbl_teamBSecIngsOvs.text =@"";
+    
+    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+    
+    
+}
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
    // self.btn_StartBall.userInteractionEnabled=NO;
@@ -679,6 +775,9 @@ EndInnings *endInnings;
 //    self.lbl_Batsmen2Name.text=objEvent1.PlaerNameStrike_nonStrike;
     
 }
+
+
+
 
 
 -(void)displaystrickerdetailsmethod
@@ -783,6 +882,7 @@ EndInnings *endInnings;
     
     _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
     _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+    
 }
 -(void)SaveBallEventREcordvalue
 {
@@ -1545,7 +1645,9 @@ EndInnings *endInnings;
 {
     NSLog(@"btnname=%@",self.btn_StartBall.currentTitle);
     
-    if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){
+    if(self.isEditMode){
+        [self.navigationController popViewControllerAnimated:YES];
+    }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){
     
     if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
     {
@@ -4566,6 +4668,47 @@ EndInnings *endInnings;
     self.ballEventRecord.objTotalextras = [NSNumber numberWithInt:0];;
     self.ballEventRecord.objGrandtotal = [NSNumber numberWithInt:0];
     
+    
+    
+    self.ballEventRecord.objOverno=[NSNumber numberWithInt:fetchSEPageLoadRecord.BATTEAMOVERS];
+    self.ballEventRecord.objBallno=[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
+    self.ballEventRecord.objOverBallcount = [NSNumber numberWithInteger: 0 ];
+    self.ballEventRecord.objBallcount=@1;
+    self.ballEventRecord.objBowlercode = fetchSEPageLoadRecord.currentBowlerPlayerCode;
+    self.ballEventRecord.objStrikercode = fetchSEPageLoadRecord.strickerPlayerCode;
+    self.ballEventRecord.objNonstrikercode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
+    
+    self.ballEventRecord.objRbw =[NSNumber numberWithInt:0];
+    self.ballEventRecord.objIswtb=[NSNumber numberWithInt:0];
+    self.ballEventRecord.objIsuncomfort=[NSNumber numberWithInt:0];
+    self.ballEventRecord.objIsreleaseshot=[NSNumber numberWithInt:0];
+    self.ballEventRecord.objIsbeaten=[NSNumber numberWithInt:0];
+    self.ballEventRecord.objPMlengthcode=@"";
+    self.ballEventRecord.objPMlinecode =@"";
+    self.ballEventRecord.objPMX1=@1;
+    self.ballEventRecord.objPMY1=@1;
+    self.ballEventRecord.objPMX2=@1;
+    self.ballEventRecord.objPMY2=@1;
+    if (IS_IPAD_PRO) {
+        _ballEventRecord.objWWX1=@(221);
+        _ballEventRecord.objWWY1=@(186);
+        _ballEventRecord.objWWX2=@(221);
+        _ballEventRecord.objWWY2=@(186);
+    }
+    else{
+        
+        _ballEventRecord.objWWX1=@(172);
+        _ballEventRecord.objWWY1=@(145);
+        _ballEventRecord.objWWX2=@(172);
+        _ballEventRecord.objWWY2=@(145);
+        
+    }
+    
+    self.ballEventRecord.objWWREGION=@"";
+    // self.ballEventRecord.objOverno=fetchSEPageLoadRecord.MATCHOVERS;
+    self.ballEventRecord.objBowlercode=fetchSEPageLoadRecord.currentBowlerPlayerCode;
+    
+    
     isMoreRunSelected = NO;
     isExtrasSelected = NO;
     isOverthrowSelected = NO;
@@ -7073,19 +7216,38 @@ EndInnings *endInnings;
     
     
     //all innings details for team A and team B
-    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET];
-    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS];
+//    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET];
+//    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS];
+//    
+//    
+//    // _lbl_teamASecIngsScore.text =
+//    //_lbl_teamASecIngsOvs.text =
+//    
+//    
+//    //  _lbl_teamBSecIngsScore.text =
+//    //    _lbl_teamBSecIngsOvs.text =
+//    
+//    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+//    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+//    
     
     
-    // _lbl_teamASecIngsScore.text =
-    //_lbl_teamASecIngsOvs.text =
+    //all innings details for team A and team B
+    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
+    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
     
-    //  _lbl_teamBSecIngsScore.text =
-    //    _lbl_teamBSecIngsOvs.text =
+    _lbl_teamASecIngsScore.text = @"";
+    _lbl_teamASecIngsOvs.text = @"";
     
-    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
-    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+    
+    _lbl_teamBSecIngsScore.text =@"";
+    _lbl_teamBSecIngsOvs.text =@"";
+    
+    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+
+    
     
     if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
         
@@ -7123,7 +7285,7 @@ EndInnings *endInnings;
         
         _lbl_runs_required.text = runsReqForBalls;
         
-        if(!isEditMode)
+        if(!self.isEditMode)
         {
             if((int)fetchSEPageLoadRecord.ISOVERCOMPLETE ==0)
             {
@@ -7137,7 +7299,8 @@ EndInnings *endInnings;
             else{
                 
                 [self.btn_StartOver setTitle:@"START OVER" forState:UIControlStateNormal];
-                self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+                
+                self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
                 self.btn_StartOver.userInteractionEnabled=YES;
 
             }
