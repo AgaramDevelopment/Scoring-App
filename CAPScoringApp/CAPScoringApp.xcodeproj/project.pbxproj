@@ -54,7 +54,6 @@
 		187621201D1D625A006E160F /* EndDayTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1876211E1D1D625A006E160F /* EndDayTVC.xib */; };
 		187621251D1D644C006E160F /* EndInningsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187621231D1D644C006E160F /* EndInningsVC.m */; };
 		187621261D1D644C006E160F /* EndInningsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187621241D1D644C006E160F /* EndInningsVC.xib */; };
-		1876212A1D1D7967006E160F /* InningsDetailsRecord in Resources */ = {isa = PBXBuildFile; fileRef = 187621291D1D7967006E160F /* InningsDetailsRecord */; };
 		187625081D154495009374F8 /* BreakEventRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 187625011D154495009374F8 /* BreakEventRecords.m */; };
 		187625091D154495009374F8 /* RevicedOverVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187625031D154495009374F8 /* RevicedOverVC.m */; };
 		1876250A1D154495009374F8 /* RevicedOverVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187625041D154495009374F8 /* RevicedOverVC.xib */; };
@@ -150,6 +149,7 @@
 		CE0F19C01CF5D3D60030FFA2 /* UserRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0F19BF1CF5D3D60030FFA2 /* UserRecord.m */; };
 		CE0F19C31CF5D81D0030FFA2 /* DashBoardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0F19C21CF5D81D0030FFA2 /* DashBoardVC.m */; };
 		CE0F19C91CF6C2CC0030FFA2 /* TossDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0F19C81CF6C2CC0030FFA2 /* TossDetailsVC.m */; };
+		CE147A891D24F3530099990D /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = CE147A881D24F3530099990D /* TNCA_DATABASE.sqlite */; };
 		CE1FBF581CF96EDB00A9B6FE /* TossDeatilsEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1FBF571CF96EDB00A9B6FE /* TossDeatilsEvent.m */; };
 		CE1FBF5B1CF96FE400A9B6FE /* BowlerEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1FBF5A1CF96FE400A9B6FE /* BowlerEvent.m */; };
 		CE1FBF5E1CF992C900A9B6FE /* FixturesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1FBF5D1CF992C900A9B6FE /* FixturesCell.m */; };
@@ -287,7 +287,6 @@
 		187621221D1D644C006E160F /* EndInningsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndInningsVC.h; sourceTree = "<group>"; };
 		187621231D1D644C006E160F /* EndInningsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndInningsVC.m; sourceTree = "<group>"; };
 		187621241D1D644C006E160F /* EndInningsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EndInningsVC.xib; sourceTree = "<group>"; };
-		187621291D1D7967006E160F /* InningsDetailsRecord */ = {isa = PBXFileReference; lastKnownFileType = folder; name = InningsDetailsRecord; path = Resource/InningsDetailsRecord; sourceTree = "<group>"; };
 		187625001D154495009374F8 /* BreakEventRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakEventRecords.h; sourceTree = "<group>"; };
 		187625011D154495009374F8 /* BreakEventRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakEventRecords.m; sourceTree = "<group>"; };
 		187625021D154495009374F8 /* RevicedOverVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RevicedOverVC.h; sourceTree = "<group>"; };
@@ -459,6 +458,7 @@
 		CE0F19C21CF5D81D0030FFA2 /* DashBoardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DashBoardVC.m; sourceTree = "<group>"; };
 		CE0F19C71CF6C2CC0030FFA2 /* TossDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TossDetailsVC.h; sourceTree = "<group>"; };
 		CE0F19C81CF6C2CC0030FFA2 /* TossDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TossDetailsVC.m; sourceTree = "<group>"; };
+		CE147A881D24F3530099990D /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		CE1FBF561CF96EDB00A9B6FE /* TossDeatilsEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TossDeatilsEvent.h; sourceTree = "<group>"; };
 		CE1FBF571CF96EDB00A9B6FE /* TossDeatilsEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TossDeatilsEvent.m; sourceTree = "<group>"; };
 		CE1FBF591CF96FE400A9B6FE /* BowlerEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlerEvent.h; sourceTree = "<group>"; };
@@ -962,7 +962,6 @@
 				CEBA5CAB1D22343800CE2472 /* umpiretablecell.h */,
 				CEBA5CAC1D22343800CE2472 /* umpiretablecell.m */,
 				186DC7F21D1E4B6400293B7F /* Utility */,
-				187621291D1D7967006E160F /* InningsDetailsRecord */,
 				CE0018481CF460C900668D8B /* Fonts */,
 				CE0018371CF4308C00668D8B /* SubClass */,
 				CE0018361CF4308000668D8B /* ViewController */,
@@ -1395,6 +1394,7 @@
 				CE00184F1CF460DE00668D8B /* RAJDHANI-LIGHT.TTF in Resources */,
 				18674AC41D1A4F9600DB7C71 /* MatchResultListVC.xib in Resources */,
 				CEC858AE1D1557F6007F5384 /* BreakTableViewCell.xib in Resources */,
+				CE147A891D24F3530099990D /* TNCA_DATABASE.sqlite in Resources */,
 				246465231D17255C0078A446 /* PenaltyGridTVC.xib in Resources */,
 				24E7B4B31D23884200EF0D55 /* DeclareInnings.xib in Resources */,
 				CE00180E1CF42FA500668D8B /* LaunchScreen.storyboard in Resources */,
