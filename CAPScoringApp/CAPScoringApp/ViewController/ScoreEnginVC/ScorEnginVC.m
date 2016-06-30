@@ -263,11 +263,12 @@ EndInnings *endInnings;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    if(self.isEditMode){
+    if(self.isEditMode){//Edit
         [self loadViewOnEditMode];
     
-    }else{
+    }else{//Live
         [self reloadBowlerTeamBatsmanDetails];
+          [self AllBtndisableMethod];
         
     }
     
@@ -500,6 +501,14 @@ EndInnings *endInnings;
 
 -(void) loadViewOnEditMode{
     
+    self.btn_StartOver.userInteractionEnabled = NO;
+    self.btn_StartBall.userInteractionEnabled = YES;
+    
+    [self.btn_StartBall setTitle:@"END BALL" forState:UIControlStateNormal];
+    self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
+    
+    [self disableButtonBg:self.btn_StartOver];
+    
     FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
     fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
     [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode :self.editBallCode];
@@ -513,27 +522,23 @@ EndInnings *endInnings;
     NSMutableArray *bowlerArray = fetchSeBallCodeDetails.currentbowlerDetail;
     
     //Current Stricker
-    
-    
     if(strickerArray.count>0){
         GetSEStrikerDetailsForBallEvents *record = [strickerArray objectAtIndex:0];
-    fetchSEPageLoadRecord.strickerPlayerName = record.PLAYERNAME;
-     fetchSEPageLoadRecord.strickerTotalRuns = record.TOTALRUNS;
+        fetchSEPageLoadRecord.strickerPlayerName = record.PLAYERNAME;
+        fetchSEPageLoadRecord.strickerTotalRuns = record.TOTALRUNS;
         fetchSEPageLoadRecord.strickerTotalBalls = fetchSeBallCodeDetails.STRIKERBALLS;
-     fetchSEPageLoadRecord.strickerSixes = record.SIXES;
-     fetchSEPageLoadRecord.strickerStrickRate = record.STRIKERATE;
-     fetchSEPageLoadRecord.strickerFours = record.FOURS;
+        fetchSEPageLoadRecord.strickerSixes = record.SIXES;
+        fetchSEPageLoadRecord.strickerStrickRate = record.STRIKERATE;
+        fetchSEPageLoadRecord.strickerFours = record.FOURS;
     
     }
     
-    
+    //Non Stricker Details
     if(nonstrickerArray.count>0){
         
         
         GetSENonStrikerDetailsForBallEvents *record = [nonstrickerArray objectAtIndex:0];
-        
-        //Non Stricker Details
-         fetchSEPageLoadRecord.nonstrickerPlayerName = record.PLAYERNAME;
+        fetchSEPageLoadRecord.nonstrickerPlayerName = record.PLAYERNAME;
         fetchSEPageLoadRecord.nonstrickerTotalRuns= record.TOTALRUNS;
         fetchSEPageLoadRecord.nonstrickerTotalBalls= fetchSeBallCodeDetails.NONSTRIKERBALLS;
         fetchSEPageLoadRecord.nonstrickerFours= record.FOURS;
@@ -543,9 +548,9 @@ EndInnings *endInnings;
     }
     
     if(bowlerArray.count>0){
-        GetSEBowlerDetailsForBallEvents *record = [bowlerArray objectAtIndex:0];
+         GetSEBowlerDetailsForBallEvents *record = [bowlerArray objectAtIndex:0];
 
-        fetchSEPageLoadRecord.currentBowlerPlayerName = record.BOWLERNAME;
+         fetchSEPageLoadRecord.currentBowlerPlayerName = record.BOWLERNAME;
          fetchSEPageLoadRecord.currentBowlerOver = record.OVERS;
          fetchSEPageLoadRecord.currentBowlerMaidan = fetchSeBallCodeDetails.MAIDENS;
          fetchSEPageLoadRecord.currentBowlerRuns = record.TOTALRUNS;
@@ -677,6 +682,9 @@ EndInnings *endInnings;
     
     
     
+    //OTW and RTW
+    
+    
     
     //Stricker Details
     self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
@@ -740,7 +748,7 @@ EndInnings *endInnings;
 -(void)viewWillAppear:(BOOL)animated
 {
    // self.btn_StartBall.userInteractionEnabled=NO;
-    [self AllBtndisableMethod];
+  
     
     
     
