@@ -57,6 +57,7 @@
 #import "NewMatchSetUpVC.h"
 #import "FETCHSEBALLCODEDETAILS.h"
 #import "ScoreEnginEditRecord.h"
+#import "InsertSEScoreEngine.h"
 
 
 
@@ -1685,6 +1686,7 @@ EndInnings *endInnings;
     else
     {
          [self calculateRunsOnEndBall];
+        [self EndBallMethod];
         
         [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
@@ -1790,14 +1792,13 @@ EndInnings *endInnings;
                             
                             
                         }
+                        else if ([alterviewSelect isEqualToString:@"NO"])
+                        {
+                            // btboverclickaction
+                        }
                     //}
                     
                 }
-                else if ([alterviewSelect isEqualToString:@"NO"])
-                {
-                    // btboverclickaction
-                }
-
                 }
             
         }
@@ -1836,6 +1837,28 @@ EndInnings *endInnings;
 
 -(void)insertBallDetails :(NSString*) BallCode :(NSString *) insertType
 {
+    [self calculateRunsOnEndBall];
+    
+    if(_isEditMode && [insertType isEqualToString:@""])
+    {
+        self.ballEventRecord.objBallcode = self.editBallCode;
+        //Update Score Engine SP Call
+    }
+    else
+    {
+        InsertSEScoreEngine* _InsertSEScoreEngine = [[InsertSEScoreEngine alloc] init];
+//        [_InsertSEScoreEngine InsertScoreEngine:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE :(NSString*) TEAMCODE :(NSNumber*) INNINGSNO: (NSNumber*) BALLCODE : (NSNumber*) OVERNO : (NSNumber*) BALLNO:
+//         (NSNumber*) BALLCOUNT:(NSNumber*) DAYNO :(NSNumber*) SESSIONNO : (NSString *)STRIKERCODE:(NSString *)NONSTRIKERCODE:(NSString *)BOWLERCODE:(NSString *)WICKETKEEPERCODE:(NSString *)UMPIRE1CODE:
+//         (NSString *)UMPIRE2CODE:(NSString *)ATWOROTW:(NSString *)BOWLINGEND:(NSString *)BOWLTYPE :(NSString *)SHOTTYPE:(NSString *)SHOTTYPECATEGORY:(NSString *)ISLEGALBALL:(NSString *)ISFOUR:
+//         (NSString *)ISSIX:(NSNumber*)RUNS:(NSNumber *)OVERTHROW:(NSNumber *)TOTALRUNS:(NSNumber *)WIDE:(NSNumber *)NOBALL:(NSNumber *)BYES:(NSNumber *)LEGBYES:(NSNumber *)PENALTY:(NSNumber *)TOTALEXTRAS:
+//         (NSNumber *)GRANDTOTAL:(NSNumber *)RBW:(NSNumber *)PMLINECODE:(NSNumber *)PMLENGTHCODE:(NSNumber *)PMSTRIKEPOINT:(NSString *)PMX1:(NSNumber *)PMY1:
+//         (NSNumber *)PMX2:(NSNumber *)PMY2:(NSNumber *)PMX3:(NSNumber *)PMY3:(NSNumber *)WWREGION:(NSNumber *)WWX1:(NSNumber *)WWY1:(NSNumber *)WWX2:
+//         (NSNumber *)WWY2:(NSNumber *)BALLDURATION:(NSNumber *)ISAPPEAL:(NSNumber *)ISBEATEN:(NSNumber *)ISUNCOMFORT:(NSNumber *)ISWTB:
+//         (NSNumber *)ISRELEASESHOT:(NSNumber *)MARKEDFOREDIT:(NSNumber *)REMARKS:(NSString *)VIDEOFILENAME:(NSNumber *)ISWICKET:(NSString *)WICKETTYPE:(NSString *)WICKETPLAYER:
+//         (NSString *)FIELDINGPLAYER:(NSString *)INSERTTYPE:(NSString *)AWARDEDTOTEAMCODE:(NSNumber *)PENALTYRUNS:(NSString *)PENALTYTYPECODE:(NSString *)PENALTYTYPECODE:(NSString *)PENALTYREASONCODE:
+//         (NSString *)BALLSPEED:(NSString *)UNCOMFORTCLASSIFCATION:(NSString *)WICKETEVENT];
+        //Insert Score Engine SP Call
+    }
     if([self.ballEventRecord.objIslegalball intValue] == 0)
     {
         if([self.ballEventRecord.objWide intValue] !=0)
@@ -1904,16 +1927,6 @@ EndInnings *endInnings;
     else{
         wicketkeepercode =@"";
     }
-    
-    
-    self.ballEventRecord.objAtworotw =(self.ballEventRecord.objAtworotw== nil)?@"":self.ballEventRecord.objAtworotw;
-    self.ballEventRecord.objBowlingEnd =(self.ballEventRecord.objBowlingEnd== nil)?@"":self.ballEventRecord.objBowlingEnd;
-    self.ballEventRecord.objBallspeed=@"";
-    self.ballEventRecord.objShorttypecategory=@"";
-    self.ballEventRecord.objPMStrikepoint=@"";
-    self.ballEventRecord.objPMStrikepointlinecode=@"";
-    
-    
 }
 -(UIColor*)colorWithHexString:(NSString*)hex
 {
