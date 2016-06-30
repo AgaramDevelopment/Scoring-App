@@ -12,7 +12,7 @@
 #import "InningsBowlerDetailsRecord.h"
 #import "EditModeCell.h"
 #import "OversorderRecord.h"
-
+#import "ScorEnginVC.h"
 
 
 @interface EditModeVC ()
@@ -36,6 +36,7 @@
     NSMutableArray * objwicketType;
     int EachoverWicketCount;
     UIButton *btn_Run;
+    NSInteger ballCodeIndex;
 }
 
 @end
@@ -468,7 +469,7 @@
         [view_addedit removeFromSuperview];
     }
      UIButton * btn_add = (UIButton *)sender;
-    
+   ballCodeIndex= btn_add.tag;
     
 
    EditModeCell *cell = (EditModeCell*)[sender superview];
@@ -527,7 +528,16 @@
 
 -(IBAction)didClickEditrotation:(id)sender
 {
+ 
+    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
+    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
     
+    scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+    scoreEngine.matchCode=self.matchCode;
+    scoreEngine.competitionCode=self.Comptitioncode;
+    scoreEngine.isEditMode = YES;
+    scoreEngine.editBallCode = objInningsBowlerDetailsRecord.ballCode;
+    [self.navigationController pushViewController:scoreEngine animated:YES];
 }
 -(IBAction)didClickCancelrotation:(id)sender
 {

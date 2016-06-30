@@ -7625,7 +7625,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                     while(sqlite3_step(statement)==SQLITE_ROW){
                         
                         InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=[[InningsBowlerDetailsRecord alloc]init];
-                        objInningsBowlerDetailsRecord.BowlerCode=[self getValueByNull:statement :0];
+                        objInningsBowlerDetailsRecord.ballCode=[self getValueByNull:statement :0];
                         objInningsBowlerDetailsRecord.Playername=[self getValueByNull:statement :1];
                         
                         objInningsBowlerDetailsRecord.Striker=[self getValueByNull:statement :2];

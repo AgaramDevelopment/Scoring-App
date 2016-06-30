@@ -283,4 +283,7 @@
 
 - (IBAction)btn_penality:(id)sender;
 @property (strong,nonatomic)NSString *matchTypeCode;
+
+@property (assign,nonatomic) BOOL isEditMode;
+@property (strong,nonatomic) NSString *editBallCode;
 @end
