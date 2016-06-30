@@ -54,7 +54,9 @@
 #import "OtherWicketVC.h"
 #import "PowerPlayGridVC.h"
 #import "NewMatchSetUpVC.h"
-
+#import "Other_WicketVC.h"
+#import "FETCHSEBALLCODEDETAILS.h"
+#import "ScoreEnginEditRecord.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
