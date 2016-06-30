@@ -57,7 +57,7 @@
 #import "Other_WicketVC.h"
 #import "FETCHSEBALLCODEDETAILS.h"
 #import "ScoreEnginEditRecord.h"
-
+#import "ChanceTeamVC.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -6175,7 +6175,32 @@ EndInnings *endInnings;
 
 -(void)ChangeTeam
 {
+    ChanceTeamVC *objChanceTeamVC =[[ChanceTeamVC alloc]initWithNibName:@"ChanceTeamVC" bundle:nil];
+    objChanceTeamVC.compitionCode=self.competitionCode;
+    objChanceTeamVC.MatchCode   =self.matchCode;
     
+
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    //fullview.alpha=0.9;
+    
+       objChanceTeamVC.view.alpha = 0;
+        [objChanceTeamVC didMoveToParentViewController:self];
+     objChanceTeamVC.view.frame =CGRectMake(90, 200, objChanceTeamVC.view.frame.size.width, objChanceTeamVC.view.frame.size.height);
+    [fullview addSubview:Btn_Fullview];
+    [self.view addSubview:fullview];
+
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         objChanceTeamVC.view.alpha = 1;
+     }
+                     completion:nil];
+    [self addChildViewController:objChanceTeamVC];
+[fullview addSubview:objChanceTeamVC.view];
+
 }
 -(void)ENDINNINGS
 {
