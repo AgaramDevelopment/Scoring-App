@@ -187,6 +187,10 @@
 @property (weak, nonatomic) IBOutlet UITableView *tbl_defensive;
 @property (weak, nonatomic) IBOutlet UIView *view_defensive;
 @property (strong, nonatomic) IBOutlet UIView *view_Rbw;
+@property (weak, nonatomic) IBOutlet UIView *view_remark;
+@property (weak, nonatomic) IBOutlet UIView *view_medit;
+@property (weak, nonatomic) IBOutlet UIView *view_appeal;
+@property (weak, nonatomic) IBOutlet UIView *view_last_instant;
 
 @property (weak, nonatomic) IBOutlet UIView *view_otw;
 @property (weak, nonatomic) IBOutlet UIView *view_rtw;
