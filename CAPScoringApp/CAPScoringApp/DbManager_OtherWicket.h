@@ -10,13 +10,20 @@
 
 @interface DbManager_OtherWicket : NSObject
 
-+(NSMutableArray*) GetPlayerDetailForFetchOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE;
++(NSMutableArray*) GetStrickerNonStrickerCodeForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
 
-+(NSMutableArray*) GetWicketEventDetailsForFetchOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
++(NSMutableArray*) GetPlayerDetailForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
 
-+(NSString*) GetWicketNoForFetchOtherwicket:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO;
++(NSMutableArray*) GetPlayerDetailOnRetiredHurtForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
 
-+(NSMutableArray*) GetNotOutAndOutBatsManForFetchOtherwicket:(NSString*) MATCHCODE:(NSString*) TEAMCODE;
++(NSMutableArray*) GetPlayerDetailOnAbsentHurtForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
+
++(NSMutableArray*) GetPlayerDetailOnTimeOutForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
+
++(NSMutableArray*) GetPlayerDetailOnRetiredHurt2ForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
+
++(NSMutableArray*) GetPlayerDetailOnRetiredHurtOnMSC108ForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
+
 
 +(NSMutableArray *)RetrieveOtherWicketType;
 

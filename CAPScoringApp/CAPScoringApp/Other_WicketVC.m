@@ -17,7 +17,7 @@
     BOOL isEnableTbl;
 }
 @property(nonatomic,strong)NSMutableArray *WICKETARRAY;
-@property(nonatomic,strong)NSString *METASUBCODE;
+@property(nonatomic,strong)NSString *WICKETTYPE;
 
 
 
@@ -29,38 +29,22 @@
 @synthesize MATCHCODE;
 @synthesize INNINGSNO;
 @synthesize TEAMCODE;
+@synthesize STRIKERCODE;
+@synthesize NONSTRIKERCODE;
 @synthesize Wicket_lbl;
 @synthesize Wicket_tableview;
 @synthesize WICKETARRAY;
-@synthesize METASUBCODE;
+@synthesize WICKETTYPE;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view from its nib.
-    
-    //    NSMutableArray *GetPlayerDeatilsFetchWicket=[DbManager_OtherWicket GetPlayerDetailForFetchOtherwicket:COMPETITIONCODE:MATCHCODE:TEAMCODE];
-    //
-    //    NSMutableArray *GetWicketEvenUpadteOtherWicket=[DbManager_OtherWicket GetWicketEventDetailsForFetchOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO];
-    //
-    //    [DbManager_OtherWicket GetWicketNoForFetchOtherwicket :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
-    //
-    //    NSMutableArray *GetNotOutAndOutBats=[DbManager_OtherWicket GetNotOutAndOutBatsManForFetchOtherwicket:MATCHCODE:TEAMCODE];
+   
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -107,7 +91,7 @@
         objEventRecord=(WicketTypeRecord*)[WICKETARRAY objectAtIndex:indexPath.row];
         
         cell.textLabel.text =objEventRecord.metasubcodedescription;
-        METASUBCODE=objEventRecord.metasubcode;
+        WICKETTYPE=objEventRecord.metasubcode;
         
         return cell;
     }
@@ -127,7 +111,7 @@
         objEventRecord=(WicketTypeRecord*)[WICKETARRAY objectAtIndex:indexPath.row];
         
         cell.textLabel.text =objEventRecord.metasubcodedescription;
-        METASUBCODE=objEventRecord.metasubcode;
+        WICKETTYPE=objEventRecord.metasubcode;
         
         return cell;
     }
@@ -150,8 +134,8 @@
         Wicketselectindexarray=[[NSMutableArray alloc]init];
         objEventRecord=(WicketTypeRecord*)[WICKETARRAY objectAtIndex:indexPath.row];
         self.Wicket_lbl.text =objEventRecord.metasubcodedescription;
-        METASUBCODE=self.Wicket_lbl.text;
-        METASUBCODE=objEventRecord.metasubcode;
+        WICKETTYPE=self.Wicket_lbl.text;
+        WICKETTYPE=objEventRecord.metasubcode;
         [Wicketselectindexarray addObject:objEventRecord];
         
         self.Wicket_tableview.hidden=YES;
@@ -188,10 +172,7 @@
 
 
 
--(IBAction)didclicktouchplayer:(id)sender{
-    self.tbl_playername.hidden=YES;
-    
-}
+
 
 
 
@@ -217,4 +198,63 @@
     
 }
 
+
+
+   -(void)FetchOtherwickets:COMPETITIONCODE: MATCHCODE : TEAMCODE : INNINGSNO :WICKETTYPE: STRIKERCODE :NONSTRIKERCODE;
+
+{
+    
+    
+    if(![ DbManager_OtherWicket GetStrickerNonStrickerCodeForFetchOtherwicketPlayerDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO])
+    {
+        if([WICKETTYPE isEqual:@"MSC133"])
+        {
+            
+            NSMutableArray *GetPlayerDetail=[ DbManager_OtherWicket GetPlayerDetailForFetchOtherwicketPlayerDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE : INNINGSNO];
+        }
+        else if([WICKETTYPE isEqual:@"MSC101"] || [WICKETTYPE isEqual:@"MSC108"])
+        {
+            NSMutableArray *GetPlayerDetail=[ DbManager_OtherWicket GetPlayerDetailForFetchOtherwicketPlayerDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE : INNINGSNO];
+        }
+        else if([WICKETTYPE isEqual:@"MSC102"])
+        {
+            NSMutableArray *GetPlayerDetailsOnRetiredHurt=[ DbManager_OtherWicket GetPlayerDetailOnRetiredHurtForFetchOtherwicketPlayerDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+        }
+        
+        
+    }
+    else
+    {
+        if([WICKETTYPE isEqual:@"MSC133"])
+        {
+            NSMutableArray *GetPlayerDetailsOnAbsentHurt=[ DbManager_OtherWicket GetPlayerDetailOnAbsentHurtForFetchOtherwicketPlayerDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+        }
+        else if([WICKETTYPE isEqual:@"MSC101"])
+        {
+            NSMutableArray *GetPlayerDetailsOnTimeOut=[ DbManager_OtherWicket GetPlayerDetailOnTimeOutForFetchOtherwicketPlayerDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+        }
+        else if([WICKETTYPE isEqual:@"MSC102"])
+        {
+            NSMutableArray *GetPlayerDetailOnRetiredHurt2=[ DbManager_OtherWicket GetPlayerDetailOnRetiredHurt2ForFetchOtherwicketPlayerDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+        }
+        else if([WICKETTYPE isEqual:@"MSC108"])
+        {
+            NSMutableArray *GetPlayerDetailsOnRetiredHurtOnMSC108=[ DbManager_OtherWicket GetPlayerDetailOnRetiredHurtOnMSC108ForFetchOtherwicketPlayerDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+        }
+    }
+    
+    
+}
+
+
+
+
+
+- (IBAction)didclicktouchplayer:(id)sender {
+    
+     [self FetchOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : WICKETTYPE:STRIKERCODE:NONSTRIKERCODE];
+}
+- (IBAction)check:(id)sender {
+     [self FetchOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : WICKETTYPE:STRIKERCODE:NONSTRIKERCODE];
+}
 @end

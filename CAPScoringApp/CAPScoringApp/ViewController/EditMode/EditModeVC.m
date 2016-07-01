@@ -270,7 +270,7 @@
     {
         if (wide > 0)
         {
-             NSString* wideValues = [NSString stringWithFormat:@"%@", wide-1];
+             NSString* wideValues = [NSString stringWithFormat:@"%d", wide-1];
              [dicAddbowlerdetails removeObjectForKey:@"RUNS"];
              [dicAddbowlerdetails setValue:wideValues forKey:@"RUNS"];
         }
@@ -469,6 +469,9 @@
         [view_addedit removeFromSuperview];
     }
      UIButton * btn_add = (UIButton *)sender;
+    
+    
+    
    ballCodeIndex= btn_add.tag;
     
 
@@ -482,6 +485,10 @@
     [cell addSubview:leftrotation];
     [leftrotation addTarget:self action:@selector(didClickLeftRotation:) forControlEvents:UIControlEventTouchUpInside];
     
+    
+//    NSIndexPath* pathOfTheCell = [self.tbl_innnings indexPathForCell:buttonCell];
+//    NSInteger rowOfTheCell = [pathOfTheCell row];
+
     
     
     UIButton * Editrotation=[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.origin.x+leftrotation.frame.size.width+8, leftrotation.frame.origin.y, 25, 25)];
