@@ -172,6 +172,7 @@
 		CE3DD41F1CFBFB4F00D93A55 /* SelectPlayerCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD41E1CFBFB4F00D93A55 /* SelectPlayerCVCell.m */; };
 		CE3DD4221CFBFD4400D93A55 /* NewMatchSetUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD4211CFBFD4400D93A55 /* NewMatchSetUpVC.m */; };
 		CE3DD4251CFBFDD400D93A55 /* TeamLogoRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD4241CFBFDD400D93A55 /* TeamLogoRecords.m */; };
+		CE4745711D263DC4007A49B8 /* LoginDBmanager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4745701D263DC4007A49B8 /* LoginDBmanager.m */; };
 		CE7463A81D166F8200D69CD9 /* UpdateBreakVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463A61D166F8200D69CD9 /* UpdateBreakVC.m */; };
 		CE7463A91D166F8200D69CD9 /* UpdateBreakVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */; };
 		CE7463AC1D16942200D69CD9 /* UpdateBreaksArrayDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463AB1D16942200D69CD9 /* UpdateBreaksArrayDetails.m */; };
@@ -524,6 +525,8 @@
 		CE3DD4211CFBFD4400D93A55 /* NewMatchSetUpVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMatchSetUpVC.m; sourceTree = "<group>"; };
 		CE3DD4231CFBFDD400D93A55 /* TeamLogoRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeamLogoRecords.h; sourceTree = "<group>"; };
 		CE3DD4241CFBFDD400D93A55 /* TeamLogoRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamLogoRecords.m; sourceTree = "<group>"; };
+		CE47456F1D263DC4007A49B8 /* LoginDBmanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDBmanager.h; sourceTree = "<group>"; };
+		CE4745701D263DC4007A49B8 /* LoginDBmanager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDBmanager.m; sourceTree = "<group>"; };
 		CE7463A51D166F8200D69CD9 /* UpdateBreakVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateBreakVC.h; sourceTree = "<group>"; };
 		CE7463A61D166F8200D69CD9 /* UpdateBreakVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBreakVC.m; sourceTree = "<group>"; };
 		CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateBreakVC.xib; sourceTree = "<group>"; };
@@ -1158,6 +1161,8 @@
 				CE7C6DD51D23E14A00B694D5 /* DbManager_OtherWicket.m */,
 				24E7B4C01D23D21700EF0D55 /* DBManagerEditScoreEngine.h */,
 				24E7B4C11D23D21700EF0D55 /* DBManagerEditScoreEngine.m */,
+				CE47456F1D263DC4007A49B8 /* LoginDBmanager.h */,
+				CE4745701D263DC4007A49B8 /* LoginDBmanager.m */,
 			);
 			name = ReSource;
 			sourceTree = "<group>";
@@ -1604,6 +1609,7 @@
 				2464651E1D17255C0078A446 /* OtherWicketTVC.m in Sources */,
 				CEC858AD1D1557F6007F5384 /* BreakTableViewCell.m in Sources */,
 				18704EE71D197D6B00996BF3 /* DBManagerInsertUpdateMatchResult.m in Sources */,
+				CE4745711D263DC4007A49B8 /* LoginDBmanager.m in Sources */,
 				DC2710581D257E050011C7B0 /* InsertSEScoreEngine.m in Sources */,
 				2468C0E11D1177D7007C68AA /* Archive.m in Sources */,
 				DC27105E1D2582060011C7B0 /* DBManagerInsertScoreEngine.m in Sources */,

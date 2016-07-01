@@ -13,8 +13,13 @@
 #import "CustomNavigationVC.h"
 #import "ScorEnginVC.h"
 #import "DBManager.h"
+#import "Reachability.h"
+#import "Utitliy.h"
+
 
 @interface FixturesVC ()
+{    UIRefreshControl *refreshControl;
+}
 
 @property (nonatomic,strong)NSMutableArray *FetchCompitionArray;
 //@property (nonatomic,strong)NSString *Updatefixturecomments;
@@ -28,11 +33,77 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if(self.checkInternetConnection)
+    {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+            refreshControl.tintColor = [UIColor greenColor];
+            refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+       
+            
+            
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETCOMPETITONFIXTURES/0x0100000088F0BDA6134BA1A808FA82837D998FD8C45AC41C001C2762A27AC7C22D0961149CE3F7B7D0EB9047/%@",[Utitliy getSyncIPPORT],CompitionCode];
+            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURLResponse *response;
+            NSError *error;
+            
+            NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            if (responseData != nil) {
+                
+                NSMutableArray *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+                NSDictionary*CheckErrorItem=[serviceResponse valueForKey:@"lstErrorItem"];
+                  NSMutableArray * ErrorNoDict =[CheckErrorItem objectForKey:@"ErrorNo"];
+                NSString *ErrorNoStr=[ErrorNoDict valueForKey:@"ErrorNo"];
+                NSString *message=[ErrorNoDict valueForKey:@"DataItem"];
+                NSString *CompareErrorno=@"MOB0005";
+                if ([ErrorNoStr isEqualToString:CompareErrorno])
+                {
+                
+                }
+
+                    //Competition
+//                    NSMutableArray *CompetitionMatchArry =   [serviceResponse objectForKey:@"lstCompetitionMatch"];
+//                    //[CompitisionArray removeAllObjects];
+//                    //CompitisionArray = [NSMutableArray new];
+//                    int i;
+//                    for (i=0; i<[CompetitionMatchArry count]; i++) {
+//                        NSDictionary*test=[temp objectAtIndex:i];
+//                        NSString*COMPETITIONCODE=[test objectForKey:@"MatchDate"];
+//                        NSString *COMPETITIONNAME=[test objectForKey:@"TeamAName"];
+//                        NSString *SEASON=[test objectForKey:@"TeamBName"];
+//                        NSString *TROPHY=[test objectForKey:@"GroundName"];
+//                        NSString *STARTDATE=[test objectForKey:@"City"];
+                
+                
+                }
+           
+            
+            [self.FixtureTVC addSubview:refresh];
+            
+            [self.FixtureTVC reloadData];
+            
+            [refreshControl endRefreshing];
+            
+        });
+    }
+    
     _FetchCompitionArray=[[NSMutableArray alloc]init];
     _FetchCompitionArray =[DBManager RetrieveFixturesData:CompitionCode];
     self.popView.hidden=YES;
     [self customnavigationmethod];
 }
+
+
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
