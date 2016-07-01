@@ -497,6 +497,9 @@ EndInnings *endInnings;
                                                               blue:0
                                                              alpha:0.36]];
     
+    
+
+    
 }
 
 
@@ -759,6 +762,7 @@ EndInnings *endInnings;
         {
             [Img_ball removeFromSuperview];
         }
+        
             Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(self.ballEventRecord.objPMX2.floatValue,self.ballEventRecord.objPMY2.floatValue,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
@@ -949,9 +953,33 @@ isExtrasSelected = YES;
         
     }
     //RBW
-    if(self.ballEventRecord.objRbw.integerValue>0){
+    if(self.ballEventRecord.objRbw.integerValue!=0){
         [self selectedViewBg:_view_Rbw];
     }
+    
+    //Spin
+    if ([getBallDetailsForBallEventsBE.BOWLERTYPE isEqual: @"MSC015"])//Fast
+    {
+       [self selectedViewBg:_view_fast];
+    }
+    else if ([getBallDetailsForBallEventsBE.BOWLERTYPE isEqual: @"MSC016"])//Spin
+    {
+      [self selectedViewBg:_view_spin];
+    }
+
+    
+    if ([getBallDetailsForBallEventsBE.SHOTTYPE isEqual: @"MSC005"])//Aggressive
+    {
+        [self selectedViewBg:_view_aggressive];
+
+    }
+    else if ([getBallDetailsForBallEventsBE.SHOTTYPE isEqual: @"MSC006"])//Defensive
+    {
+        [self selectedViewBg:_view_defensive];
+
+    }
+    
+    
     
     //Free hit dialog
     if(fetchSeBallCodeDetails.ISFREEHIT.intValue ==1){
@@ -5050,6 +5078,18 @@ isExtrasSelected = YES;
     //[self unselectedViewBg: self.view_edit];
     //[self unselectedViewBg: self.View_Appeal);
     //[self unselectedViewBg: self.view_lastinstance];
+    
+    if(Img_ball != nil)
+    {
+        [Img_ball removeFromSuperview];
+    }
+    for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
+        if ([layer.name isEqualToString:@"DrawLine"]) {
+            [layer removeFromSuperlayer];
+            break;
+        }
+    }
+
     
   }
 
