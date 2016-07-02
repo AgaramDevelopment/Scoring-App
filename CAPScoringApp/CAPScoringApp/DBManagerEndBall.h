@@ -163,30 +163,35 @@
 :(NSString*) INNINGSNO;
 
 
-
 //Remove Unused Batsman from Batting Scorecard
-+(BOOL)  DeleteRemoveUnusedBatFBSUpdateScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BOWLERCODE :(NSString*) TEAMCODE :(NSString*) INNINGSNO;
++(BOOL)  DeleteRemoveUnusedBatFBSUpdateScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSString*) INNINGSNO;
 
 //Remove Unused Bowler from Bowling Scorecard
-+(BOOL)  DeleteRemoveUnusedBowFBSUpdateScoreEngine : (NSString*) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*) BOWLERCODE :(NSString*)INNINGSNO;
++(BOOL)  DeleteRemoveUnusedBowFBSUpdateScoreEngine : (NSString*) COMPETITIONCODE:(NSString*)MATCHCODE :(NSString*)INNINGSNO : (NSString*) BOWLINGTEAMCODE;
 
 //PENALTY
-+(BOOL) GetPenaltyBallCodeUpdateScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO:(NSString*) BALLCODE;
-
++(BOOL)  GetPenaltyBallCodeUpdateScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO :(NSString*) BALLCODE;
 
 //UpdatePenalty
-+(BOOL)  UpdatePenaltyScoreEngine : (NSString*) MATCHCODE:(NSString*) TEAMCODE:(NSString*) BALLCODE;
++(BOOL)  UpdatePenaltyScoreEngine : (NSString*)AWARDEDTOTEAMCODE : (NSString*)PENALTYRUNS: (NSString*)PENALTYTYPECODE: (NSString*) PENALTYREASONCODE : (NSString*)COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) BALLCODE;
+
+
 //MaxID
 +(NSString*) GetMaxidUpdateScoreEngine;
 //insertPENALTYDETAILS
-+(BOOL)  InsertPenaltyScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) BALLCODE;
+
+
+
+
++(BOOL)  InsertPenaltyScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) BALLCODE :(NSString*) PENALTYCODE : (NSString *) AWARDEDTOTEAMCODE : (NSString *) PENALTYRUNS : (NSString *) PENALTYTYPECODE : (NSString *) PENALTYREASONCODE;
 //UpdateBallEvents
-+(BOOL)  UpdateBallPlusoneScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSString*) INNINGSNO:(NSString*) BALLCODE;
++(BOOL)  UpdateBallPlusoneScoreEngine :(NSString*) BALLCNT: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSString*) INNINGSNO:(NSString*)OVERNO:(NSString*) BALLCODE;
+
 //UpdateBallMinusone
-+(BOOL)  UpdateBallMinusoneScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE :(NSString*) INNINGSNO:(NSString*) BALLCODE ;
++(BOOL)  UpdateBallMinusoneScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE :(NSString*) INNINGSNO:(NSString*) OVERNO :(NSString*) BALLNO;
 
 //(ILLEGAL BALL -> LEGAL BALL) = INCREMENT BALL NO FOR FURTHER DELIVERY OF THAT OVER
-+(BOOL)LegalBallByOverNoUpdateScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSString*) INNINGSNO;
++(BOOL)  LegalBallByOverNoUpdateScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE :(NSString*) INNINGSNO : (NSString*)OVERNO : (NSString*)BALLNO;
 
 
 //(ILLEGAL BALL -> LEGAL BALL) = INCREMENT BALL NO FOR FURTHER DELIVERY OF THAT OVER
@@ -197,9 +202,10 @@
 
 +(NSString*) OverStatusUPSE :  (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO  :(NSString*) OVERNO;
 //INNINGSEVENTS
-+(BOOL)InningEveUpdateScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
++(BOOL)  InningEveUpdateScoreEngine : (NSString*) T_STRIKERCODE: (NSString*) T_NONSTRIKERCODE: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE: (NSString *) INNINGSNO;
 
-+(NSString*) BallCodeUPSE :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) OVERNO:(NSString*) OLDBOWLERCODE;
+
++(BOOL)  BallCodeUPSE :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) OVERNO:(NSString*) OLDBOWLERCODE;
 
 
 
@@ -216,12 +222,11 @@
 +(NSString*) IsOverCompleteUPSE :(NSNumber*) COMPETITIONCODE:(NSNumber*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) OVERNO:(NSString*) BOWLERCODE ;
 +(BOOL)  BowMadienSummUPSE :(NSNumber*) COMPETITIONCODE:(NSNumber*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) BOWLERCODE :(NSString*) OVERNO ;
 
-+(BOOL)  BowSummaryOverplusoneUPSE : COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BOWLINGTEAMCODE:(NSString*) INNINGSNO :(NSString*) OTHERBOWLER;
++(BOOL)  BowSummaryOverplusoneUPSE : (NSString*) OTHERBOWLEROVERBALLCNT : (NSString*) BOWLERMAIDEN : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BOWLINGTEAMCODE:(NSString*) INNINGSNO :(NSString*) OTHERBOWLER;
 
++(BOOL)  BowSummaryUPSE : (NSString*)OTHERBOWLEROVERBALLCNT: (NSString*)U_BOWLERMAIDENS:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BOWLINGTEAMCODE:(NSString*) INNINGSNO :(NSString*) OTHERBOWLER;
 
-+(BOOL)  BowSummaryUPSE : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BOWLINGTEAMCODE:(NSString*) INNINGSNO :(NSString*) OTHERBOWLER;
-
-+(BOOL)  UPDATEWICKETOVERNOUPSE : (NSNumber*) COMPETITIONCODE:(NSNumber*) MATCHCODE:(NSString*) INNINGSNO ;
++(BOOL)  UPDATEWICKETOVERNOUPSE : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO ;
 
 
 +(void) UpdateScoreBoard:(NSString *) BALLCODE:(NSString *) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSNumber*)INNINGSNO :(NSString *)BATSMANCODE:(NSNumber *) ISFOUR:(NSNumber*)ISSIX:(NSNumber*)RUNS:(NSNumber*)OVERTHROW:(NSNumber*)ISWICKET :(NSString *)WICKETTYPE:(NSString *)WICKETPLAYER:(NSString*)BOWLERCODE:(NSString*)OVERNO:(NSNumber*)BALLNO:(NSNumber*)WICKETSCORE :(NSNumber *)WIDE:(NSNumber *)NOBALL:(NSNumber*)BYES	:(NSNumber*)LEGBYES:(NSNumber*)PENALTY:(NSNumber*)ISDELETE :(NSNumber *)ISWICKETUNDO:(NSNumber *)F_ISWICKETCOUNTABLE:(NSNumber*)F_ISWICKET :(NSNumber*)F_WICKETTYPE;
@@ -231,4 +236,5 @@
 
 +(BOOL)  getInningNo : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO;
 +(BOOL)  UpdateInningsSummary : (NSString*) PENALTYRUNS:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*)INNINGSNO;
+
 @end
