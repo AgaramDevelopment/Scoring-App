@@ -12,4 +12,9 @@
 
 @synthesize PLAYERCODE;
 @synthesize PLAYERNAME;
+
+
+
+
+
 @end

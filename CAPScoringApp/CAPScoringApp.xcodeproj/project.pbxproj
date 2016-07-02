@@ -13,6 +13,12 @@
 		0468B38F1D12872E00B98576 /* PenalityTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0468B38D1D12872E00B98576 /* PenalityTVC.xib */; };
 		0468B3921D12AD2100B98576 /* MetaDataRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0468B3911D12AD2100B98576 /* MetaDataRecord.m */; };
 		047669DD1D14229600572E39 /* PenaltyDetailsRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */; };
+		047E52E01D279E8D00D4CAC6 /* GetWicketDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52DF1D279E8D00D4CAC6 /* GetWicketDetail.m */; };
+		047E52E31D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52E21D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m */; };
+		047E52EC1D27D71F00D4CAC6 /* Other_WicketgridVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52EA1D27D71F00D4CAC6 /* Other_WicketgridVC.m */; };
+		047E52ED1D27D71F00D4CAC6 /* Other_WicketgridVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047E52EB1D27D71F00D4CAC6 /* Other_WicketgridVC.xib */; };
+		047E52F11D27D84B00D4CAC6 /* Other_WicketgridTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52EF1D27D84B00D4CAC6 /* Other_WicketgridTVC.m */; };
+		047E52F21D27D84B00D4CAC6 /* Other_WicketgridTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 047E52F01D27D84B00D4CAC6 /* Other_WicketgridTVC.xib */; };
 		0481DCFF1D213B250084BFF7 /* PowerPlayGridTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCF21D213B250084BFF7 /* PowerPlayGridTVC.m */; };
 		0481DD031D213B250084BFF7 /* PowerPlayRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCF81D213B250084BFF7 /* PowerPlayRecord.m */; };
 		0481DD041D213B250084BFF7 /* PowerPlayTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCFA1D213B250084BFF7 /* PowerPlayTVCell.m */; };
@@ -235,6 +241,16 @@
 		0468B3911D12AD2100B98576 /* MetaDataRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaDataRecord.m; sourceTree = "<group>"; };
 		047669DB1D14229600572E39 /* PenaltyDetailsRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PenaltyDetailsRecord.h; sourceTree = "<group>"; };
 		047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenaltyDetailsRecord.m; sourceTree = "<group>"; };
+		047E52DE1D279E8D00D4CAC6 /* GetWicketDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetWicketDetail.h; sourceTree = "<group>"; };
+		047E52DF1D279E8D00D4CAC6 /* GetWicketDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetWicketDetail.m; sourceTree = "<group>"; };
+		047E52E11D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetWicketEventsPlayerDetail.h; sourceTree = "<group>"; };
+		047E52E21D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetWicketEventsPlayerDetail.m; sourceTree = "<group>"; };
+		047E52E91D27D71F00D4CAC6 /* Other_WicketgridVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Other_WicketgridVC.h; sourceTree = "<group>"; };
+		047E52EA1D27D71F00D4CAC6 /* Other_WicketgridVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Other_WicketgridVC.m; sourceTree = "<group>"; };
+		047E52EB1D27D71F00D4CAC6 /* Other_WicketgridVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Other_WicketgridVC.xib; sourceTree = "<group>"; };
+		047E52EE1D27D84B00D4CAC6 /* Other_WicketgridTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Other_WicketgridTVC.h; sourceTree = "<group>"; };
+		047E52EF1D27D84B00D4CAC6 /* Other_WicketgridTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Other_WicketgridTVC.m; sourceTree = "<group>"; };
+		047E52F01D27D84B00D4CAC6 /* Other_WicketgridTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Other_WicketgridTVC.xib; sourceTree = "<group>"; };
 		0481DCF11D213B250084BFF7 /* PowerPlayGridTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerPlayGridTVC.h; sourceTree = "<group>"; };
 		0481DCF21D213B250084BFF7 /* PowerPlayGridTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerPlayGridTVC.m; sourceTree = "<group>"; };
 		0481DCF31D213B250084BFF7 /* PowerPlayGridTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PowerPlayGridTVC.xib; sourceTree = "<group>"; };
@@ -1345,6 +1361,10 @@
 				04B5CBA51D253C4D0004754C /* GetPlayerDetailOnRetiredHurt2.m */,
 				04B5CBA71D253D710004754C /* GetPlayerDetailOnRetiredHurtOnMSC108.h */,
 				04B5CBA81D253D710004754C /* GetPlayerDetailOnRetiredHurtOnMSC108.m */,
+				047E52DE1D279E8D00D4CAC6 /* GetWicketDetail.h */,
+				047E52DF1D279E8D00D4CAC6 /* GetWicketDetail.m */,
+				047E52E11D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.h */,
+				047E52E21D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m */,
 			);
 			name = Records;
 			sourceTree = "<group>";
@@ -1385,6 +1405,12 @@
 				CE7C6DCF1D23CE5300B694D5 /* Other_WicketVC.h */,
 				CE7C6DD01D23CE5300B694D5 /* Other_WicketVC.m */,
 				CE7C6DD11D23CE5300B694D5 /* Other_WicketVC.xib */,
+				047E52E91D27D71F00D4CAC6 /* Other_WicketgridVC.h */,
+				047E52EA1D27D71F00D4CAC6 /* Other_WicketgridVC.m */,
+				047E52EB1D27D71F00D4CAC6 /* Other_WicketgridVC.xib */,
+				047E52EE1D27D84B00D4CAC6 /* Other_WicketgridTVC.h */,
+				047E52EF1D27D84B00D4CAC6 /* Other_WicketgridTVC.m */,
+				047E52F01D27D84B00D4CAC6 /* Other_WicketgridTVC.xib */,
 			);
 			name = Other_WicketVC;
 			sourceTree = "<group>";
@@ -1493,12 +1519,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				047E52ED1D27D71F00D4CAC6 /* Other_WicketgridVC.xib in Resources */,
 				246465191D17255C0078A446 /* EndInningsTVC.xib in Resources */,
 				DC27107C1D25B9A40011C7B0 /* FollowOn.xib in Resources */,
 				243F8E441D2237D600333AD8 /* PowerPlayGridVC.xib in Resources */,
 				DC2710771D25B9A40011C7B0 /* EndSession.xib in Resources */,
 				CE0018511CF460DE00668D8B /* RAJDHANI-REGULAR.TTF in Resources */,
 				2461251E1D13C931004B85E7 /* RevisedTarget.xib in Resources */,
+				047E52F21D27D84B00D4CAC6 /* Other_WicketgridTVC.xib in Resources */,
 				2464651F1D17255C0078A446 /* OtherWicketTVC.xib in Resources */,
 				24D24CF01CFEF50000CD75D2 /* CustomNavigationVC.xib in Resources */,
 				2464651B1D17255C0078A446 /* OtherWicketPlayerlistTVC.xib in Resources */,
@@ -1609,6 +1637,7 @@
 				DC27105E1D2582060011C7B0 /* DBManagerInsertScoreEngine.m in Sources */,
 				CE3DD41F1CFBFB4F00D93A55 /* SelectPlayerCVCell.m in Sources */,
 				CE1FBF641CF9984B00A9B6FE /* FixturesRecord.m in Sources */,
+				047E52EC1D27D71F00D4CAC6 /* Other_WicketgridVC.m in Sources */,
 				18704ED81D19590000996BF3 /* GetMatchResultTypeAndCodeDetails.m in Sources */,
 				04B5CBA01D253B8B0004754C /* GetPlayerDetailOnAbsentHurt.m in Sources */,
 				04B5CBA91D253D710004754C /* GetPlayerDetailOnRetiredHurtOnMSC108.m in Sources */,
@@ -1629,8 +1658,10 @@
 				1876251E1D1544CD009374F8 /* BattingSummaryDetailsForScoreBoard.m in Sources */,
 				188130401D0BF3ED00908F65 /* FetchSEPageLoadRecord.m in Sources */,
 				DC2710741D25B9A40011C7B0 /* DBManagerEndSession.m in Sources */,
+				047E52F11D27D84B00D4CAC6 /* Other_WicketgridTVC.m in Sources */,
 				2464651A1D17255C0078A446 /* OtherWicketPlayerlistTVC.m in Sources */,
 				CEC305811D014C3400301ED3 /* AppealSystemRecords.m in Sources */,
+				047E52E31D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m in Sources */,
 				CE1FBF5B1CF96FE400A9B6FE /* BowlerEvent.m in Sources */,
 				24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */,
 				CE1FBF6A1CF9A17500A9B6FE /* MatchOfficalsVC.m in Sources */,
@@ -1691,6 +1722,7 @@
 				18785EEA1D1667A900A09AEC /* FetchLastBowler.m in Sources */,
 				18674AC31D1A4F9600DB7C71 /* MatchResultListVC.m in Sources */,
 				CE3DD4191CFBFA1600D93A55 /* SelectPlayersVC.m in Sources */,
+				047E52E01D279E8D00D4CAC6 /* GetWicketDetail.m in Sources */,
 				CE0F19C31CF5D81D0030FFA2 /* DashBoardVC.m in Sources */,
 				187621251D1D644C006E160F /* EndInningsVC.m in Sources */,
 				CE1FBF5E1CF992C900A9B6FE /* FixturesCell.m in Sources */,
