@@ -57,8 +57,10 @@
 #import "NewMatchSetUpVC.h"
 #import "FETCHSEBALLCODEDETAILS.h"
 #import "ScoreEnginEditRecord.h"
-#import "ChanceTeamVC.h"
+#import "ChangeTeamVC.h"
 #import "InsertSEScoreEngine.h"
+#import "ArchivesVC.h"
+#import "ChangeTossVC.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -67,7 +69,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -414,9 +416,15 @@ EndInnings *endInnings;
         tableView.dataSource = self;
         tableView.delegate = self;
     
+    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
+    if(inningsno < 1)
+    {
     _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     
-    
+    }
+    else{
+         _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    }
     
     _View_Appeal.hidden=YES;
     _view_table_select.hidden=YES;
@@ -6624,9 +6632,13 @@ isExtrasSelected = YES;
 
 -(void)ChangeTeam
 {
-    ChanceTeamVC *objChanceTeamVC =[[ChanceTeamVC alloc]initWithNibName:@"ChanceTeamVC" bundle:nil];
+    int inningsNo=[fetchSEPageLoadRecord.INNINGSNO intValue ];
+    if(inningsNo >1)
+    {
+    ChangeTeamVC *objChanceTeamVC =[[ChangeTeamVC alloc]initWithNibName:@"ChangeTeamVC" bundle:nil];
     objChanceTeamVC.compitionCode=self.competitionCode;
     objChanceTeamVC.MatchCode   =self.matchCode;
+    objChanceTeamVC.delegate =self;
     
 
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -6648,7 +6660,40 @@ isExtrasSelected = YES;
      }
                      completion:nil];
     [self addChildViewController:objChanceTeamVC];
-[fullview addSubview:objChanceTeamVC.view];
+     [fullview addSubview:objChanceTeamVC.view];
+    }
+    else{
+        int ballcount =fetchSEPageLoadRecord.BATTEAMOVRBALLS;
+        if(ballcount < 1)
+        {
+        ChangeTossVC*objChangeTossVC =[[ChangeTossVC alloc]initWithNibName:@"ChangeTossVC" bundle:nil];
+        objChangeTossVC.CompitisonCode=self.competitionCode;
+       objChangeTossVC.MatchCode   =self.matchCode;
+        objChangeTossVC.delegate =self;
+        
+        
+        fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+        fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+        UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+        
+        [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+        //fullview.alpha=0.9;
+        
+        objChangeTossVC.view.alpha = 0;
+        [objChangeTossVC didMoveToParentViewController:self];
+        objChangeTossVC.view.frame =CGRectMake(90, 200, objChangeTossVC.view.frame.size.width, objChangeTossVC.view.frame.size.height);
+        [fullview addSubview:Btn_Fullview];
+        [self.view addSubview:fullview];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             objChangeTossVC.view.alpha = 1;
+         }
+                         completion:nil];
+        [self addChildViewController:objChangeTossVC];
+        [fullview addSubview:objChangeTossVC.view];
+        }
+    }
 
 }
 -(void)ENDINNINGS
@@ -10973,6 +11018,18 @@ if(self.checkInternetConnection){
     [self penalityview];
 
 }
-
-
+-(void)processSuccessful
+{
+            fullview.hidden=YES;
+            ArchivesVC * objArchiveVC=[[ArchivesVC alloc]init];
+            objArchiveVC=(ArchivesVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    
+            objArchiveVC.CompitionCode=self.competitionCode;
+            [self.navigationController pushViewController:objArchiveVC animated:YES];
+}
+-(void)RedirectScorEngin
+{
+     fullview.hidden=YES;
+    //[self reloadBowlerTeamBatsmanDetails];
+}
 @end

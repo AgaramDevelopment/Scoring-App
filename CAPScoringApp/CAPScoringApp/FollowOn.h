@@ -9,10 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @interface FollowOn : UIViewController
-@property (weak, nonatomic) IBOutlet UIView *view_teamName;
+@property (strong, nonatomic) IBOutlet UIView *view_teamName;
 
-@property (weak, nonatomic) IBOutlet UIView *view_striker;
+@property (strong, nonatomic) IBOutlet UIView *view_striker;
 
-@property (weak, nonatomic) IBOutlet UIView *view_nonStriker;
+@property (strong, nonatomic) IBOutlet UIView *view_nonStriker;
 
+@property (strong, nonatomic) IBOutlet UIView *view_Bowler;
+
+@property (strong, nonatomic) IBOutlet UIButton *btn_Striker;
+
+@property (strong, nonatomic) IBOutlet UIButton *btn_nonStriker;
+
+@property (strong, nonatomic) IBOutlet UIButton *btn_Bowler;
+
+@property (strong, nonatomic) IBOutlet UILabel *lbl_nonStriker;
 @end

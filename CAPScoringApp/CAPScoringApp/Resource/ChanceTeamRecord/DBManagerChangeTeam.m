@@ -6,13 +6,13 @@
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
-#import "DBManagerChanceTeam.h"
-#import "ChanceTeamRecord.h"
+#import "DBManagerChangeTeam.h"
+#import "ChangeTeamRecord.h"
 #import <sqlite3.h>
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
-@implementation DBManagerChanceTeam
+@implementation DBManagerChangeTeam
 
 -(NSString *) getDBPath
 {
@@ -254,7 +254,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                                
                                {
                                    while(sqlite3_step(statement)==SQLITE_ROW){
-                                       ChanceTeamRecord *record=[[ChanceTeamRecord alloc]init];
+                                       ChangeTeamRecord *record=[[ChangeTeamRecord alloc]init];
                                        record.TEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                                        record.TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                                        record.INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
@@ -291,7 +291,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                                       
                                        {
                                            while(sqlite3_step(statement)==SQLITE_ROW){
-                                               ChanceTeamRecord *record=[[ChanceTeamRecord alloc]init];
+                                               ChangeTeamRecord *record=[[ChangeTeamRecord alloc]init];
                                                record.TEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                                                record.TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                                                
@@ -319,7 +319,7 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT PM.PLAYERCODE PLAYERCO
     
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
-            ChanceTeamRecord *record=[[ChanceTeamRecord alloc]init];
+            ChangeTeamRecord *record=[[ChangeTeamRecord alloc]init];
             record.TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
             record.TEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
             [GetStickerNonStrickerDetails addObject:record];
@@ -348,7 +348,7 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT PM.PLAYERCODE PLAYERCO
                 
                 {
                     while(sqlite3_step(statement)==SQLITE_ROW){
-                    ChanceTeamRecord *record=[[ChanceTeamRecord alloc]init];
+                    ChangeTeamRecord *record=[[ChangeTeamRecord alloc]init];
                     record.TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                     record.TEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                     [GetBowlingTDetails addObject:record];

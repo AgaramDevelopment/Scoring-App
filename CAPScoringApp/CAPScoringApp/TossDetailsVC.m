@@ -502,7 +502,7 @@ return 1;
         
         StrikerArray=[[NSMutableArray alloc]init];
       
-        NSMutableArray * FetchstrikerArray =[DBManager StrikerNonstriker:MATCHCODE:teamaCode];
+        NSMutableArray * FetchstrikerArray =[DBManager StrikerNonstriker : MATCHCODE:teamaCode];
         for(int i=0; i < [FetchstrikerArray count]; i++)
         {
        objTossDeatilsRecord=(TossDeatilsEvent*)[FetchstrikerArray objectAtIndex:i];
@@ -649,12 +649,15 @@ return 1;
     //radio buttons
    
     [self.radiobutton1 setTag:0];
-   [self.radiobutton1 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
-    [self.radiobutton1 setBackgroundImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateSelected];
+    [self.radiobutton1 setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+   //[self.radiobutton1 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+    BowlingEnd=@"MSC150";
+    //[self.radiobutton1 setBackgroundImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateSelected];
  [self.radiobutton1 addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
    
     [self.radiobutton2 setTag:1];
-    [self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];[self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateSelected];
+    [self.radiobutton1 setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+   // [self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];[self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateSelected];
   [self.radiobutton2 addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
       //[self.view addSubview:self.radiobutton2];
       //[self.view addSubview:self.radiobutton2];
