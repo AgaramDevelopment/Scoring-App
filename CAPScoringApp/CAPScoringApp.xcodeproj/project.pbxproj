@@ -100,6 +100,7 @@
 		18892C031D24E09C0008C8BD /* ChangeTeamVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18892C021D24E09C0008C8BD /* ChangeTeamVC.xib */; };
 		18892C0D1D24F3F20008C8BD /* ChangeTossVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18892C0B1D24F3F20008C8BD /* ChangeTossVC.m */; };
 		18892C0E1D24F3F20008C8BD /* ChangeTossVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18892C0C1D24F3F20008C8BD /* ChangeTossVC.xib */; };
+		18BA7C3F1D27F6FE00E95799 /* FollowOn.m in Sources */ = {isa = PBXBuildFile; fileRef = DC27106F1D25B9A40011C7B0 /* FollowOn.m */; };
 		18F8FED01D277B11007A16A9 /* DBManagerEndBall.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBA5CA81D22343800CE2472 /* DBManagerEndBall.m */; };
 		243F8E3F1D2236CF00333AD8 /* AppealBatsmenRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 243F8E3D1D2236CF00333AD8 /* AppealBatsmenRecord.m */; };
 		243F8E441D2237D600333AD8 /* PowerPlayGridVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243F8E411D2237D600333AD8 /* PowerPlayGridVC.xib */; };
@@ -137,8 +138,6 @@
 		24A93A4D1D2631DF00E02DAE /* EndSession.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A93A4B1D2631DF00E02DAE /* EndSession.xib */; };
 		24A93A521D26336000E02DAE /* EndSessionRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A4F1D26336000E02DAE /* EndSessionRecords.m */; };
 		24A93A531D26336000E02DAE /* FollowOnRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A511D26336000E02DAE /* FollowOnRecords.m */; };
-		24A93A571D26338D00E02DAE /* FollowOn.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A551D26338D00E02DAE /* FollowOn.m */; };
-		24A93A581D26338D00E02DAE /* FollowOn.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A93A561D26338D00E02DAE /* FollowOn.xib */; };
 		24A93A5C1D26344400E02DAE /* EndSessionTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A5A1D26344400E02DAE /* EndSessionTVC.m */; };
 		24A93A5D1D26344400E02DAE /* EndSessionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A93A5B1D26344400E02DAE /* EndSessionTVC.xib */; };
 		24A93A6A1D26365D00E02DAE /* GetPlayerDetailOnAbsentHurt.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A5F1D26365D00E02DAE /* GetPlayerDetailOnAbsentHurt.m */; };
@@ -458,9 +457,6 @@
 		24A93A4F1D26336000E02DAE /* EndSessionRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndSessionRecords.m; sourceTree = "<group>"; };
 		24A93A501D26336000E02DAE /* FollowOnRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowOnRecords.h; sourceTree = "<group>"; };
 		24A93A511D26336000E02DAE /* FollowOnRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowOnRecords.m; sourceTree = "<group>"; };
-		24A93A541D26338D00E02DAE /* FollowOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowOn.h; sourceTree = "<group>"; };
-		24A93A551D26338D00E02DAE /* FollowOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowOn.m; sourceTree = "<group>"; };
-		24A93A561D26338D00E02DAE /* FollowOn.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowOn.xib; sourceTree = "<group>"; };
 		24A93A591D26344400E02DAE /* EndSessionTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndSessionTVC.h; sourceTree = "<group>"; };
 		24A93A5A1D26344400E02DAE /* EndSessionTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EndSessionTVC.m; sourceTree = "<group>"; };
 		24A93A5B1D26344400E02DAE /* EndSessionTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EndSessionTVC.xib; sourceTree = "<group>"; };
@@ -1284,9 +1280,6 @@
 			children = (
 				187AC2931D26641C00DC2A9E /* InsertSEScoreEngine.h */,
 				187AC2941D26641C00DC2A9E /* InsertSEScoreEngine.m */,
-				24A93A541D26338D00E02DAE /* FollowOn.h */,
-				24A93A551D26338D00E02DAE /* FollowOn.m */,
-				24A93A561D26338D00E02DAE /* FollowOn.xib */,
 				1883DFED1D27D94700854814 /* FollowOnVC */,
 				DC27107E1D25B9D80011C7B0 /* DBManagerChangeTeam.h */,
 				DC27107F1D25B9D80011C7B0 /* DBManagerChangeTeam.m */,
@@ -1649,7 +1642,6 @@
 				1876210A1D1D3749006E160F /* EndDayVC.xib in Resources */,
 				CE0018521CF460DE00668D8B /* RAJDHANI-SEMIBOLD.TTF in Resources */,
 				1876250C1D154495009374F8 /* ScoreCardCellTVCell.xib in Resources */,
-				24A93A581D26338D00E02DAE /* FollowOn.xib in Resources */,
 				24A93A4D1D2631DF00E02DAE /* EndSession.xib in Resources */,
 				1872292E1D12667200CC168F /* BreakVC.xib in Resources */,
 				CE0018091CF42FA500668D8B /* Main.storyboard in Resources */,
@@ -1680,6 +1672,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18BA7C3F1D27F6FE00E95799 /* FollowOn.m in Sources */,
 				1883DFF11D27EFA100854814 /* LoginDBmanager.m in Sources */,
 				1883DFF01D27EF7200854814 /* DBManagerFollowOn.m in Sources */,
 				1883DFEF1D27EF4D00854814 /* DBManagerEndSession.m in Sources */,
@@ -1825,7 +1818,6 @@
 				0481DD041D213B250084BFF7 /* PowerPlayTVCell.m in Sources */,
 				24E7B4BF1D23D18B00EF0D55 /* FETCHSEBALLCODEDETAILS.m in Sources */,
 				186DC7F81D1E56DC00293B7F /* Utitliy.m in Sources */,
-				24A93A571D26338D00E02DAE /* FollowOn.m in Sources */,
 				246465171D17255C0078A446 /* DBMangerOtherWicket.m in Sources */,
 				1872292D1D12667200CC168F /* BreakVC.m in Sources */,
 				CE3DD4251CFBFDD400D93A55 /* TeamLogoRecords.m in Sources */,

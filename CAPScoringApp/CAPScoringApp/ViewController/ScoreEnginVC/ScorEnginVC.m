@@ -62,6 +62,7 @@
 #import "UpdateScoreEngine.h"
 #import "ArchivesVC.h"
 #import "ChangeTossVC.h"
+#import "FollowOn.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -70,7 +71,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -6990,7 +6991,42 @@ isExtrasSelected = YES;
 }
 -(void)FollowOn
 {
+    if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
+    {
+        int inningscount =fetchSEPageLoadRecord.INNINGSNO;
+        if(inningscount > 2)
+       {
+    FollowOn *objFollowOn =[[FollowOn alloc]initWithNibName:@"FollowOn" bundle:nil];
+    objFollowOn.compitionCode=self.competitionCode;
+    objFollowOn.MatchCode   =self.matchCode;
+    objFollowOn.battingTeamName =fetchSEPageLoadRecord.BATTEAMNAME;
+    objFollowOn.battingTeamCode =fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    objFollowOn.BowlingTeamCode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+    objFollowOn.delegate =self;
     
+    
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    //fullview.alpha=0.9;
+    
+    objFollowOn.view.alpha = 0;
+    [objFollowOn didMoveToParentViewController:self];
+    objFollowOn.view.frame =CGRectMake(90, 200, objFollowOn.view.frame.size.width, objFollowOn.view.frame.size.height);
+    [fullview addSubview:Btn_Fullview];
+    [self.view addSubview:fullview];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         objFollowOn.view.alpha = 1;
+     }
+                     completion:nil];
+    [self addChildViewController:objFollowOn];
+    [fullview addSubview:objFollowOn.view];
+}
+    }
 }
 -(void) matchInfoEdit
 {
@@ -11238,6 +11274,11 @@ if(self.checkInternetConnection){
 -(void)RedirectScorEngin
 {
      fullview.hidden=YES;
+   // [self reloadBowlerTeamBatsmanDetails];
+}
+-(void) RedirectFollowOnPage
+{
+   fullview.hidden=YES;
     //[self reloadBowlerTeamBatsmanDetails];
 }
 @end
