@@ -7,6 +7,7 @@
 //
 
 #import "DBManagerInsertScoreEngine.h"
+
 #import <sqlite3.h>
 
 @implementation DBManagerInsertScoreEngine

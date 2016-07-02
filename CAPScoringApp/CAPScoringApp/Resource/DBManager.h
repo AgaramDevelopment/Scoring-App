@@ -19,7 +19,7 @@
 //login
 +(NSMutableArray *)checkUserLogin: (NSString *) userName password: (NSString *) password;
 +(BOOL)checkExpiryDate: (NSString *) userId;
-
++(BOOL)checkSecurityExpiryDate: (NSString *) USERCODE;
 //toss details
 +(NSMutableArray *)checkTossDetailsWonby: (NSString *) MATCHCODE;
 +(NSMutableArray *)Electedto;

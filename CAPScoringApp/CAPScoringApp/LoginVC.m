@@ -13,9 +13,12 @@
 #import "DBManager.h"
 #import "UserRecord.h"
 #import "Utitliy.h"
+#import "LoginDBmanager.h"
 
 @interface LoginVC ()
-
+{
+  NSString*USERNAME;
+}
 @end
 
 @implementation LoginVC
@@ -71,6 +74,11 @@
                 NSMutableArray *errorItemArray = [rootDictionary objectForKey: @"lstErrorItem"];
                 NSMutableDictionary  *errorItemObj = [errorItemArray objectAtIndex:0];
                 
+//                
+//                NSMutableArray *errorItemArray = [rootDictionary objectForKey: @"UserDetails"];
+                
+                
+                
                 if([[errorItemObj objectForKey:@"ErrorNo"] isEqual:@"MOB0005"]){
                     BOOL isUserLogin = YES;
                     
@@ -81,12 +89,86 @@
                     [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
                     [[NSUserDefaults standardUserDefaults] setObject:secureId forKey:[Utitliy SecureId]];
                     [[NSUserDefaults standardUserDefaults] synchronize];
+                    
+                    
+                    NSArray *temp =   [rootDictionary objectForKey:@"UserDetails"];
+                    
+                    int i;
+                    for (i=0; i<[temp count]; i++) {
+                        NSDictionary*test=[temp objectAtIndex:i];
+                        NSString*USERCODE=[test objectForKey:@"Usercode"];
+                        NSString *USERROLEID=[test objectForKey:@"Userroleid"];
+                        NSString *LOGINID=[test objectForKey:@"Loginid"];
+                        NSString *PASSWORD=[test objectForKey:@"Password"];
+                        NSString *REMEMBERME=[test objectForKey:@"Rememberme"];
+                        NSString *REMENTDATE=[test objectForKey:@"Rementdate"];
+                        NSString *USERFULLNAME=[test objectForKey:@"Userfullname"];
+                        NSString *MACHINEID=[test objectForKey:@"Machineid"];
+                        NSString*LICENSEUPTO=[test objectForKey:@"Licenseupto"];
+                        NSString*CREATEDBY =[test objectForKey:@"Createdby"];
+                        NSString*CREATEDDATE=[test objectForKey:@"Createddate"];
+                        NSString*MODIFIEDBY=[test objectForKey:@"Modifiedby"];
+                        NSString*MODIFIEDDATE=[test objectForKey:@"Modifieddate"];
+                        NSString*RECORDSTATUS=[test objectForKey:@"Recordstatus"];
+                        
+                        bool CheckStatus=[LoginDBmanager CheckUserDetails:LOGINID:PASSWORD];
+                        if (CheckStatus==YES)
+                        {
+                            [LoginDBmanager UPDATEUSERDETAILS:LOGINID:PASSWORD:LICENSEUPTO];
+                        }
+                        
+                        else
+                        {
+                            [LoginDBmanager INSERTUSERDETAILS:USERCODE: USERROLEID:LOGINID: PASSWORD:REMEMBERME:REMENTDATE:USERFULLNAME:MACHINEID : LICENSEUPTO: CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
+                            
+                        }
+                      
+                    }
+                    
+                    
+                    
+                    
+                    NSArray *temp1 =   [rootDictionary objectForKey:@"SecureIdDetails"];
+                    
+                    int j;
+                    for (j=0; j<[temp1 count]; j++) {
+                        NSDictionary*test1=[temp1 objectAtIndex:j];
+                      USERNAME=[test1 objectForKey:@"Username"];
+                        NSString *SECUREID=[test1 objectForKey:@"Secureid"];
+                        NSString *STARTDATE=[test1 objectForKey:@"Startdate"];
+                        NSString *ENDDATE=[test1 objectForKey:@"Enddate"];
+                        NSString *CREATEDBY=[test1 objectForKey:@"Createdby"];
+                        NSString *CREATEDDATE=[test1 objectForKey:@"Createddate"];
+                        NSString *MODIFIEDBY=[test1 objectForKey:@"Modifiedby"];
+                        NSString *MODIFIEDDATE=[test1 objectForKey:@"Modifieddate"];
+                        NSString*RECORDSTATUS=[test1 objectForKey:@"Recordstatus"];
+                      
+                        
+                        bool CheckStatus=[LoginDBmanager CheckSecureIdDetails:USERNAME];
+                        if (CheckStatus==YES)
+                        {
+                            [LoginDBmanager UPDATESECUREIDDETAILS:USERNAME:SECUREID:STARTDATE:ENDDATE:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
+                        }
+                        
+                        else
+                        {
+                            [LoginDBmanager INSERTSECUREIDDETAILS:USERNAME:SECUREID:STARTDATE:ENDDATE:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
+
+                            
+                        }
+                        
+                        
+                    }
+                    
+                    
                                         
                     [self openContentView];
                 }else{
                     
                     [self showDialog:[errorItemObj objectForKey:@"DataItem"] andTitle:@"Login failed"];
                 }
+                
+                
                 
 //                NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"lstErrorItem"];
 //                NSLog(@"%@",errorCode);
@@ -118,13 +200,22 @@
                 UserRecord *userRecode = [userMutableArray objectAtIndex:0];
                 
                 if([DBManager checkExpiryDate:[userRecode userCode]]){
-                    
+                  
+                     if ([DBManager checkSecurityExpiryDate:USERNAME])
+                     {
                     BOOL isUserLogin = YES;
                     NSString *userCode = [userRecode userCode];
                     [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
                     [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+                     [[NSUserDefaults standardUserDefaults] setObject:USERNAME forKey:@"USERNAME"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     [self openContentView];
+                         
+                     }
+                     else{
+                         [self showDialog:@"SecurityId expired" andTitle:@""];
+                     }
+                    
                 }else{
                     [self showDialog:@"Login expired" andTitle:@""];
                 }

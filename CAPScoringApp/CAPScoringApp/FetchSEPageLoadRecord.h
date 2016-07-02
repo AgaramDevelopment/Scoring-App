@@ -163,4 +163,11 @@
 
 
 @property(nonatomic,assign)NSInteger *BATTEAMOVRBALLSCNT;
+
+//Umpire Details
+@property(strong,nonatomic)NSString *UMPIRE1CODE;
+@property(strong,nonatomic)NSString *UMPIRE2CODE;
+@property(strong,nonatomic)NSString *UMPIRE1NAME;
+@property(strong,nonatomic)NSString *UMPIRE2NAME;
+
 @end

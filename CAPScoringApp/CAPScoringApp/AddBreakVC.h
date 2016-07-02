@@ -41,5 +41,6 @@
 @property(strong,nonatomic)NSString*MATCHCODE;
 @property(strong,nonatomic)NSString*COMPETITIONCODE;
 @property(strong,nonatomic)NSString*INNINGSNO;
+@property(strong,nonatomic)NSString*MATCHDATE;
 
 @end

@@ -138,6 +138,12 @@
 @synthesize ISOVERCOMPLETE;
 @synthesize ISFREEHIT;
 
+//Umpire Details
+@synthesize UMPIRE1CODE;
+@synthesize UMPIRE2CODE;
+@synthesize UMPIRE1NAME;
+@synthesize UMPIRE2NAME;
+
 
 BOOL overNo;
 BOOL  getOverStatus;
@@ -761,8 +767,6 @@ BOOL  getOverStatus;
     NSString *T_WICKETPLAYER;
     NSString *T_WICKETTYPE;
     NSString *BOWLERCODE;
-    NSString *UMPIRE1CODE;
-    NSString *UMPIRE2CODE;
     
     NSString *ISOVERCOMPLETEDATA = [NSString stringWithFormat: @"%d", (long)ISOVERCOMPLETE];
     
@@ -1020,9 +1024,10 @@ BOOL  getOverStatus;
     
     if ([umpiresByMatchReg count]>0) {
         
-        
         UMPIRE1CODE = [umpiresByMatchReg objectAtIndex:0];
         UMPIRE2CODE = [umpiresByMatchReg objectAtIndex:1];
+        UMPIRE1NAME = [umpiresByMatchReg objectAtIndex:2];
+        UMPIRE2NAME = [umpiresByMatchReg objectAtIndex:3];
         
     }
     //
