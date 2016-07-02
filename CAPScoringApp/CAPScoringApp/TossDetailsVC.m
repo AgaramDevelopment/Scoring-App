@@ -17,6 +17,11 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "Utitliy.h"
+#import "DBManagerChangeToss.h"
+//#import "ChangeTossVC.h"
+#import "TossDetailRecord.h"
+#import "TossTeamDetailRecord.h"
+
 @interface TossDetailsVC ()
 {
     BOOL isEnableTbl;
@@ -710,17 +715,22 @@ return 1;
 - (IBAction)Btn_Proceed:(id)sender {
     
     //save option
-   NSString *count =[DBManager TossSaveDetails:MATCHCODE :CompetitionCode];
-    if([count isEqualToString:@"0"]){
-        [DBManager insertMatchEvent:CompetitionCode :MATCHCODE :selectTeamcode :electedcode :teamaCode :teambCode];
-    }
+//   NSString *count =[DBManager TossSaveDetails:MATCHCODE :CompetitionCode];
+//    if([count isEqualToString:@"0"]){
+//        [DBManager insertMatchEvent:CompetitionCode :MATCHCODE :selectTeamcode :electedcode :teamaCode :teambCode];
+//    }
+//    
+//    NSString *maxInnNo = [DBManager getMaxInningsNumber:CompetitionCode :MATCHCODE];
+//  
+//    NSString*inningsstatus=@"0";
+//   //  BowlingEnd=@"MSC150";
+//    [DBManager inserMaxInningsEvent:CompetitionCode :MATCHCODE :teamaCode :maxInnNo :StrikerCode:NonStrikerCode :selectBowlerCode :StrikerCode :NonStrikerCode :selectBowlerCode :teamaCode :inningsstatus:BowlingEnd];
+//    [DBManager updateProcced:CompetitionCode :MATCHCODE];
     
-    NSString *maxInnNo = [DBManager getMaxInningsNumber:CompetitionCode :MATCHCODE];
-  
-    NSString*inningsstatus=@"0";
-   //  BowlingEnd=@"MSC150";
-    [DBManager inserMaxInningsEvent:CompetitionCode :MATCHCODE :teamaCode :maxInnNo :StrikerCode:NonStrikerCode :selectBowlerCode :StrikerCode :NonStrikerCode :selectBowlerCode :teamaCode :inningsstatus:BowlingEnd];
-    [DBManager updateProcced:CompetitionCode :MATCHCODE];
+//   // DBManagerChangeToss *changetoss=[[ChangeTossVC alloc]init];
+//    changetoss.
+    [self InsertTossDetails:self.CompetitionCode :self.MATCHCODE:selectTeamcode :electedcode :StrikerCode :NonStrikerCode :selectBowlerCode :BowlingEnd];
+    
      [self startService:@"DONE"];
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
@@ -883,6 +893,68 @@ if (buttonIndex == 0 && alertView.tag == 1)
         //[delegate hideLoading];
     }
 }
+
+
+-(void) InsertTossDetails:(NSString*) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *) TOSSWONTEAMCODE:(NSString *) ELECTEDTO:(NSString *) STRIKERCODE:(NSString *) NONSTRIKERCODE:(NSString *)BOWLERCODE:(NSString *)BOWLINGEND
+{
+    NSString* BOWLINGTEAMCODE ;
+    NSString* BATTINGTEAMCODE ;
+    NSString* MAXINNINGSNO ;
+    
+    if(ELECTEDTO.length>0 && ![ELECTEDTO.uppercaseString isEqual: @"SELECT"])
+    {
+        if([ELECTEDTO isEqual:@"MSC017"])
+        {
+            NSMutableArray *TossDetailsArray=[DBManagerChangeToss GetTossDetailsForBattingTeam : TOSSWONTEAMCODE : COMPETITIONCODE : MATCHCODE];
+            TossTeamDetailRecord * objTossteam;
+            if(TossDetailsArray.count > 0)
+            {
+                objTossteam=(TossTeamDetailRecord *)[TossDetailsArray objectAtIndex:0];
+                BATTINGTEAMCODE=objTossteam.BattingTeamcode;
+                
+                BOWLINGTEAMCODE=objTossteam.BowlingTeamCode;
+            }
+        }
+        else
+        {
+            NSMutableArray *TossWonTeamDetailsArray=[DBManagerChangeToss GetTossDetailsForBowlingTeam : TOSSWONTEAMCODE : COMPETITIONCODE : MATCHCODE];
+            TossTeamDetailRecord * objTossteam;
+            if(TossWonTeamDetailsArray.count>0)
+            {
+                objTossteam=(TossTeamDetailRecord *)[TossWonTeamDetailsArray objectAtIndex:0];
+                BATTINGTEAMCODE=objTossteam.BattingTeamcode;
+                
+                BOWLINGTEAMCODE=objTossteam.BowlingTeamCode;
+                
+            }
+        }
+    }
+    else
+    {
+        NSMutableArray *TossWonTeamArray=[DBManagerChangeToss GetTossDetailsForTeam : TOSSWONTEAMCODE : COMPETITIONCODE : MATCHCODE];
+        TossTeamDetailRecord * objTossteam;
+        if(TossWonTeamArray > 0)
+        {
+            objTossteam=(TossTeamDetailRecord *)[TossWonTeamArray objectAtIndex:0];
+            BATTINGTEAMCODE=objTossteam.BattingTeamcode;
+            BOWLINGTEAMCODE=objTossteam.BowlingTeamCode;
+        }
+    }
+    if(![DBManagerChangeToss GetMatchEventsForTossDetails : COMPETITIONCODE : MATCHCODE])
+    {
+        [DBManagerChangeToss SetMatchEventsForToss : COMPETITIONCODE : MATCHCODE : TOSSWONTEAMCODE : ELECTEDTO : BATTINGTEAMCODE : BOWLINGTEAMCODE];
+    }
+    MAXINNINGSNO = [DBManagerChangeToss GetMaxInningsNoForTossDetails : COMPETITIONCODE : MATCHCODE];
+    
+    [DBManagerChangeToss SetInningsEventsForToss : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : STRIKERCODE : NONSTRIKERCODE: BOWLERCODE : BOWLINGEND];
+    
+    [DBManagerChangeToss UpdateMatchStatusForToss : COMPETITIONCODE : MATCHCODE];
+    
+    //EXEC [SP_INITIALIZEINNINGSSCOREBOARD]
+    
+    
+}
+
 
 
 
