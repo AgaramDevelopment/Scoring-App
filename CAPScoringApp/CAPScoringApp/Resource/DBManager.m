@@ -123,7 +123,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([dbPath UTF8String], &dataBase);
     if(retVal ==0){
         
-        NSString *query=[NSString stringWithFormat:@"SELECT  *  FROM Userdetails WHERE  strftime('%%Y-%%m-%%d-', EXPIRYDATE) >= CURRENT_DATE AND USERCODE = '%@'",userId];
+        NSString *query=[NSString stringWithFormat:@"SELECT  *  FROM Userdetails WHERE  strftime('%%YYYY-%%mm-%%dd %%hh:%%mm:%%ss', LICENSEUPTO) >= datetime('now') AND USERCODE = '%@'",userId];
         NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -144,6 +144,39 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return NO;
 }
 
+
+
++(BOOL)checkSecurityExpiryDate: (NSString *) USERNAME{
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT  *  FROM SECUREIDDETAILS WHERE  strftime('%%YYYY-%%mm-%%dd %%hh:%%mm:%%ss', ENDDATE) >= datetime('now') AND USERNAME = '%@'",USERNAME];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                return YES;
+                
+            }
+        }
+        
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return NO;
+}
+
+
 +(NSMutableArray *)checkUserLogin: (NSString *) userName password: (NSString *) password{
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
     int retVal;
@@ -154,7 +187,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([dbPath UTF8String], &dataBase);
     if(retVal ==0){
         
-        NSString *query=[NSString stringWithFormat:@"SELECT USERCODE,USERNAME  FROM Userdetails WHERE  USERNAME = '%@' AND PASSWORD = '%@' AND RECORDSTATUS = 'MSC001'",userName,password];
+        NSString *query=[NSString stringWithFormat:@"SELECT USERCODE,LOGINID  FROM Userdetails WHERE  LOGINID = '%@' AND PASSWORD = '%@' AND RECORDSTATUS = 'MSC001'",userName,password];
         NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)

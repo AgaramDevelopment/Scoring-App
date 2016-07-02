@@ -6706,6 +6706,7 @@ isExtrasSelected = YES;
     breakvc.MATCHCODE=self.matchCode;
     breakvc.COMPETITIONCODE=self.competitionCode;
     breakvc.INNINGSNO=fetchSEPageLoadRecord.INNINGSNO;
+    breakvc.MATCHDATE=fetchSEPageLoadRecord.MATCHDATE;
     
     
     [self.view addSubview:fullview];
