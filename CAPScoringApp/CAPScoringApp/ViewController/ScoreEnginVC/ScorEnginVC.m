@@ -73,6 +73,7 @@
     NSMutableArray * AppealSystemSelectionArray;
     NSString*AppealSystemSelectCode;
     AppealSystemRecords *objAppealSystemEventRecord;
+    NSMutableDictionary *appealEventDict;
     
     //AppealComponent
     NSMutableArray * AppealComponentSelectionArray;
@@ -148,6 +149,7 @@
     int wicketOption;
     WicketTypeRecord *selectedwickettype;
     NSString *selectedStrikernonstriker;
+    NSString *selectedWicketPlayerCode;
     NSString *selectedWicketEvent;
     BowlerEvent *selectedwicketBowlerlist;
     
@@ -523,21 +525,53 @@ EndInnings *endInnings;
     if(getWickets.count>0){
         [self selectedViewBg:_btn_wkts];
         
+        GetSEWicketDetailsForWicketEvents *record = [getWickets objectAtIndex:0];
+        selectedWicketEvent = record.WICKETEVENT;
+        
+        
+         selectedwickettype = [[WicketTypeRecord alloc]init];
+        selectedwickettype.metasubcode = record.WICKETTYPE;
+        
+         selectedWicketPlayerCode = record.WICKETPLAYER;
+         selectedwicketBowlerlist = [[BowlerEvent alloc]init];
+        selectedwicketBowlerlist.BowlerCode = record.FIELDINGPLAYER;
+        
+        
+        
     }
     
-    GetSEWicketDetailsForWicketEvents
     //Appeals
     NSMutableArray *getAppealArray = [fetchSeBallCodeDetails GetAppealDetailsForAppealEventsArray];
     if(getAppealArray.count>0){
+        GetSEAppealDetailsForAppealEvents *record = [[GetSEAppealDetailsForAppealEvents alloc]init];
+        appealEventDict = [NSMutableDictionary dictionary];
+        [appealEventDict setValue:record.APPEALSYSTEMCODE forKey:@"AppealSystemSelct"];
+        [appealEventDict setValue:record.APPEALCOMPONENTCODE forKey:@"AppealComponentSelct"];
+        [appealEventDict setValue:record.UMPIRECODE forKey:@"AppealUmpireSelct"];
+        [appealEventDict setValue:record.BATSMANCODE forKey:@"AppealBatsmenSelct"];
+        [appealEventDict setValue:record.BOWLERNAME forKey:@"AppealBowlerSelect"];
+        [appealEventDict setValue:record.APPEALCOMMENTS forKey:@"Commenttext"];
+        [appealEventDict setValue:record.APPEALTYPECODE forKey:@"AppealTypeCode"];
+        
         
     }
-    GetSEAppealDetailsForAppealEvents
+   // GetSEAppealDetailsForAppealEvents
     //Penalty
     //GetSEPenaltyDetailsForPenaltyEvents
     
     //Fielding
     NSMutableArray *fieldingFactorArray = [fetchSeBallCodeDetails getFieldingFactorArray];
     if(fieldingFactorArray.count>0){
+        
+        
+        selectedNRS = [fieldingFactorArray objectAtIndex:4];
+        
+        selectedfieldPlayer = [[BowlerEvent alloc]init];
+        selectedfieldPlayer.BowlerCode =  [fieldingFactorArray objectAtIndex:0];
+        selectedfieldPlayer.BowlerName =  [fieldingFactorArray objectAtIndex:1];
+
+        selectedfieldFactor = [[FieldingFactorRecord alloc]init];
+        selectedfieldFactor.fieldingfactorcode = [fieldingFactorArray objectAtIndex:3];
         
     }
     
@@ -1937,7 +1971,7 @@ EndInnings *endInnings;
         
         objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
         
-        
+    //upirename pass
         cell.umpirename1_lbl.text=objAppealUmpireEventRecord.AppealUmpireName1;
         cell.umirename2_lbl.text=objAppealUmpireEventRecord.AppealUmpireName2;
         
@@ -5845,7 +5879,15 @@ EndInnings *endInnings;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    _view_table_select.hidden=NO;
+    if(tableView == table_Appeal){
+        if(appealEventDict==nil){
+            appealEventDict = [NSMutableDictionary dictionary];
+        }
+        AppealComponentRecord *appealRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
+        [appealEventDict setValue:appealRecord.AppealComponentMetaSubCode forKey:@"AppealTypeCode"];
+
+        _view_table_select.hidden=NO;
+    }
     
     if(breakvc.view != nil)
     {
@@ -6237,7 +6279,7 @@ EndInnings *endInnings;
         isFieldingSelected = NO;
     }
     
-    _view_table_select.hidden=NO;
+   // _view_table_select.hidden=NO;
     NSLog(@"Index Path %d",indexPath.row);
     
     if(tableView == extrasTableView){//Extras table view
@@ -7371,14 +7413,18 @@ EndInnings *endInnings;
     
     // UIColor colorWithRed:84 green:106 blue:126 alpha:0
     NSString *commentText =[NSString stringWithFormat:@"%@",[_comments_txt text]];
-    NSMutableDictionary *dic = [NSMutableDictionary dictionary];
-    [dic setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
-    [dic setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
-    [dic setValue:AppealUmpireSelectCode forKey:@"AppealUmpireSelct"];
-    [dic setValue:AppealBatsmenSelectCode forKey:@"AppealBatsmenSelct"];
+    if(appealEventDict==nil){
+        appealEventDict = [NSMutableDictionary dictionary];
+    }
+    
+    [appealEventDict setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
+    [appealEventDict setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
+    [appealEventDict setValue:AppealUmpireSelectCode forKey:@"AppealUmpireSelct"];
+    [appealEventDict setValue:AppealBatsmenSelectCode forKey:@"AppealBatsmenSelct"];
     NSString*AppealBowlercode=fetchSEPageLoadRecord.currentBowlerPlayerCode;
-    [dic setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
-    [dic setValue:commentText forKey:@"Commenttext"];
+    [appealEventDict setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
+    [appealEventDict setValue:commentText forKey:@"Commenttext"];
+    
     
     [self.View_Appeal setHidden:YES];
 }
