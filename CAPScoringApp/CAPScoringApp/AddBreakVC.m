@@ -74,6 +74,13 @@
      NSDate *dateFromString = [[NSDate alloc] init];
         NSDate *dateFromString1 = [[NSDate alloc] init];
     
+    _Text_BreakStart.text=_MATCHDATE;
+    
+    _text_EndBreak.text=_MATCHDATE;
+    
+    [self DurationCalculation];
+
+    
     //[self DurationCalculation1];
 }
 //
@@ -97,7 +104,7 @@
 
 - (IBAction)StartBreack_btn:(id)sender {
     
-_Text_BreakStart.text=@"";
+_Text_BreakStart.text=_MATCHDATE;
     [_datePicker_View setHidden:NO];
      [_date_picker1 setHidden:YES];
     [_date_picker setHidden:NO];
@@ -106,12 +113,15 @@ _Text_BreakStart.text=@"";
       [_date_picker addTarget:self
                     action:@selector(BreakStart:)forControlEvents:UIControlEventValueChanged];
     
-  formatter=[[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:s"];
-    //set date too your lable here
-   // =[formate stringFromDate:_date_picker.date];
-    
-    
+//  formatter=[[NSDateFormatter alloc]init];
+//    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+//    //set date too your lable here
+//   // =[formate stringFromDate:_date_picker.date];
+//    
+//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+//    NSDate *date = [dateFormat dateFromString:_MATCHDATE];
+//    [_date_picker setDate:date];
 
     
    
@@ -119,11 +129,17 @@ _Text_BreakStart.text=@"";
 
 -(void)BreakStart:(id)sender
 {
-    NSLog(@"date is %@",_date_picker.date);
-    NSDateFormatter *formate=[[NSDateFormatter alloc]init];
-    [formate setDateFormat:@"yyyy-MM-dd hh:mm:s"];
-    _Text_BreakStart.text=[formate stringFromDate:_date_picker.date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+    NSDate *date = [dateFormat dateFromString:_MATCHDATE];
+    [_date_picker setDate:date];
+    
+    
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    _Text_BreakStart.text = [dateFormat stringFromDate:date];
     BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
+    
+    
     
 }
 
@@ -133,7 +149,7 @@ _Text_BreakStart.text=@"";
 - (IBAction)EndBreak_btn:(id)sender {
     
     
-    _text_EndBreak.text=@"";
+    _text_EndBreak.text=_MATCHDATE;
     [_datePicker_View setHidden:NO];
     [_date_picker setHidden:YES];
      [_date_picker1 setHidden:NO];
@@ -141,8 +157,8 @@ _Text_BreakStart.text=@"";
     [_date_picker1 addTarget:self
                      action:@selector(BreakEnd:)forControlEvents:UIControlEventValueChanged];
     
-    formatter1=[[NSDateFormatter alloc]init];
-    [formatter1 setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+//    formatter1=[[NSDateFormatter alloc]init];
+//    [formatter1 setDateFormat:@"yyyy-MM-dd hh:mm:s"];
 
 //
     
@@ -158,7 +174,7 @@ _Text_BreakStart.text=@"";
     dateFromString1 = [formatter1 dateFromString:BREAKENDTIME];
     
     NSTimeInterval timeDifference = [dateFromString1 timeIntervalSinceDate:dateFromString];
-    double days = timeDifference / 60;
+    int days = timeDifference / 60;
     NSString *Duration = [NSString stringWithFormat:@"%f", days];
    _lbl_Duration.text =[NSString stringWithFormat:@"%@", Duration];
     Durationtime=_lbl_Duration.text;
@@ -168,19 +184,31 @@ _Text_BreakStart.text=@"";
 
 -(void)BreakEnd:(id)sender
 {
-    NSLog(@"date is %@",_date_picker1.date);
-    NSDateFormatter *formate=[[NSDateFormatter alloc]init];
-    [formate setDateFormat:@"yyyy-MM-dd hh:mm:s"];
-    _text_EndBreak.text=[formate stringFromDate:_date_picker1.date];
+//    NSLog(@"date is %@",_date_picker1.date);
+//    NSDateFormatter *formate=[[NSDateFormatter alloc]init];
+//    [formate setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+//    _text_EndBreak.text=[formate stringFromDate:_date_picker1.date];
+//    BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
+//    
+    
+    
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+    NSDate *date = [dateFormat dateFromString:_MATCHDATE];
+    [_date_picker1 setDate:date];
+    
+    
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    _text_EndBreak.text = [dateFormat stringFromDate:date];
     BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
     
-    
+
    
 }
 
 
 - (IBAction)Switch_minuts:(id)sender {
-    [self DurationCalculation];
     
 
 
@@ -253,6 +281,7 @@ _Text_BreakStart.text=@"";
     add.MATCHCODE=MATCHCODE;
     add.COMPETITIONCODE=COMPETITIONCODE;
     add.INNINGSNO=INNINGSNO;
+    add.MATCHDATE=_MATCHDATE;
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
     add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
@@ -272,8 +301,10 @@ _Text_BreakStart.text=@"";
 }
 
 - (IBAction)hidepickerbtn:(id)sender {
-    
+      [self DurationCalculation];
       [_datePicker_View setHidden:YES];
+  
+
 }
 
 - (IBAction)back_btn:(id)sender {
@@ -285,7 +316,7 @@ _Text_BreakStart.text=@"";
     add.COMPETITIONCODE=self.COMPETITIONCODE;
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
-    
+    add.MATCHDATE=self.MATCHDATE;
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
     add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
