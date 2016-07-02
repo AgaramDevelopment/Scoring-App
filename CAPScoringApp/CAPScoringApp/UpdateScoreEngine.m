@@ -344,9 +344,16 @@ EndInnings *insertScoreBoard;
             //ADDING PENALTY RUNS FOR INNINGSSUMMARY (SCOREBOARD)
             if (BALLCODE == nil || [BALLCODE isEqualToString: @""]) {
                 
-                if ([DBManagerEndBall getInningNo:COMPETITIONCODE :MATCHCODE :INNINGSNO]) {
+                //ADDING PENALTY RUNS FOR INNINGSSUMMARY (SCOREBOARD)
+                if (BALLCODE == nil || [BALLCODE isEqualToString: @""]) {
                     
-                    [DBManagerEndBall UpdateInningsSummary:PENALTYRUNS :COMPETITIONCODE :MATCHCODE :INNINGSNO];
+                    if ([DBManagerEndBall getInningNo:COMPETITIONCODE :MATCHCODE :INNINGSNO]) {
+                        
+                        [DBManagerEndBall UpdateInningsSummary:PENALTYRUNS :COMPETITIONCODE :MATCHCODE :INNINGSNO];
+                        
+                    }
+                    
+                    
                     
                 }
                 

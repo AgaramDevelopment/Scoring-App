@@ -182,6 +182,37 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
+
++(BOOL) DELETECompetitionCodeTeamCode:(NSString *)COMPETITIONCODE:(NSString *)TEAMCODE{
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"DELETE COMPETITIONCODE,TEAMCODE FROM COMPETITIONTEAMDETAILS WHERE COMPETITIONCODE ='%@' AND TEAMCODE ='%@'",COMPETITIONCODE,TEAMCODE];
+    
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            
+            
+            return YES;
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return NO;
+}
+
+
 +(BOOL) InsertCompetitionTeamDetails:(NSString*) COMPETITIONTEAMCODE:(NSString*) COMPETITIONCODE:(NSString*) TEAMCODE:(NSString*) RECORDSTATUS
 {
     NSString *databasePath = [self getDBPath];

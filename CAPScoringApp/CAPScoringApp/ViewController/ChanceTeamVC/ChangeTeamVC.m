@@ -6,15 +6,15 @@
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
-#import "ChanceTeamVC.h"
+#import "ChangeTeamVC.h"
 #import <QuartzCore/QuartzCore.h>
-#import "ArchivesVC.h"
-#import "DBManagerChanceTeam.h"
-#import "ChanceTeamRecord.h"
-@interface ChanceTeamVC ()
+#import "DBManagerChangeTeam.h"
+#import "ChangeTeamRecord.h"
+#import "DBManagerChangeTeamInsert.h"
+@interface ChangeTeamVC ()
 {
     NSMutableArray *catagory;
-    DBManagerChanceTeam * objDBManagerChanceTeam;
+    DBManagerChangeTeam * objDBManagerChanceTeam;
     NSString * BattingTeamCode ;
     NSString * maximumInnings;
     NSString * Bowlingteamcode;
@@ -29,7 +29,7 @@
 
 @end
 
-@implementation ChanceTeamVC
+@implementation ChangeTeamVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -65,7 +65,7 @@
     self.tbl_strikerlist.hidden=YES;
     [self.view_Bowler layoutIfNeeded ];
     catagory=[[NSMutableArray alloc]init];
-    objDBManagerChanceTeam=[[DBManagerChanceTeam alloc]init];
+    objDBManagerChanceTeam=[[DBManagerChangeTeam alloc]init];
     maximumInnings =[objDBManagerChanceTeam GetMatchmaxInningsForFetchChangeTeam:self.compitionCode :self.MatchCode];
     
     BattingTeamCode =[objDBManagerChanceTeam GetBattingTeamCodeForFetchChangeTeam:self.compitionCode :self.MatchCode :maximumInnings];
@@ -79,7 +79,7 @@
    
     NSMutableArray * objBattingTeamName=[objDBManagerChanceTeam GetBattingteamAndBowlteamForFetchChangeTeam:BattingTeamCode];
     
-    ChanceTeamRecord * objChanceTeamRecord=[objBattingTeamName objectAtIndex:0];
+    ChangeTeamRecord * objChanceTeamRecord=[objBattingTeamName objectAtIndex:0];
     self.lbl_SelectTeamName.text=objChanceTeamRecord.TEAMNAME;
     self.lbl_ChangeInnings.text =maximumInnings;
    
@@ -142,12 +142,11 @@
         [self ShowAlterView:@"Please Select Bowler"];
     }
     else{
-        ArchivesVC * objArchiveVC=[[ArchivesVC alloc]init];
-        objArchiveVC=(ArchivesVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
-       
-        objArchiveVC.CompitionCode=self.compitionCode;
-        [self.navigationController pushViewController:objArchiveVC animated:YES];
+        [self InsertChangeTeam:self.compitionCode :self.MatchCode :BattingTeamCode :[NSNumber numberWithInt:maximumInnings.intValue] :_lbl_StrikerName.text :_lbl_NonStrikerName.text :_lbl_BowlerName.text :[NSNumber numberWithInt:maximumInnings.intValue] :BattingTeamCode :@"" :@""];
+        [self.delegate processSuccessful];
+
     }
+   
 }
 
 -(void)ShowAlterView:(NSString *) alterMsg
@@ -186,7 +185,7 @@
                                        reuseIdentifier:MyIdentifier];
     }
     
-    ChanceTeamRecord *objChanceTeamRecord=(ChanceTeamRecord *)[catagory objectAtIndex:indexPath.row];
+    ChangeTeamRecord *objChanceTeamRecord=(ChangeTeamRecord *)[catagory objectAtIndex:indexPath.row];
    
     cell.textLabel.text = objChanceTeamRecord.TEAMNAME;
     return cell;
@@ -194,7 +193,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     self.tbl_strikerlist.hidden=YES;
-    ChanceTeamRecord* objChanceTeamRecord=[catagory objectAtIndex:indexPath.row];
+    ChangeTeamRecord* objChanceTeamRecord=[catagory objectAtIndex:indexPath.row];
     if(IsStricker== YES)
     {
         self.lbl_StrikerName.text=objChanceTeamRecord.TEAMNAME;
@@ -221,4 +220,75 @@
     }
     
 }
-@end
+
+// insertChanceTeam
+-(void) InsertChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSNumber*) INNINGSNO:(NSString*) STRIKERCODE:(NSString*) NONSTRIKERCODE:(NSString*) BOWLERCODE:(NSNumber*) CURRENTINNINGSNO:(NSString*) CURRENTBATTINGTEAM:(NSString*) ELECTEDTO:(NSString*) BOWLINGEND
+{
+    if(![DBManagerChangeTeamInsert SetBallCodeForChangeTeam : COMPETITIONCODE : MATCHCODE : CURRENTBATTINGTEAM : CURRENTINNINGSNO] )
+       {
+           if(INNINGSNO.intValue ==1 && CURRENTINNINGSNO.intValue ==1)
+           {
+               if(![DBManagerChangeTeamInsert SetBallCodeForInsertChangeTeam : COMPETITIONCODE : MATCHCODE : CURRENTINNINGSNO])
+                  {
+                      [DBManagerChangeTeamInsert DeleteInningsBreaksEventsForChangeTeam : COMPETITIONCODE :MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteBallEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteBattingSummaryForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteOverEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteBowlingSummaryForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteBowlingMaidenSummaryForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteBowlerOverDetailsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteFieldingEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteDayEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteSessionEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteAppealEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteWicketEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeletePowerplayForChangeTeam : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeletePlayerInOutTimeForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeletePenaltyDetailsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteMatchEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteInningsSummaryForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                      [DBManagerChangeTeamInsert DeleteInningsEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                      
+                     // [DBManagerChanceTeamInsert InsertTossDetails : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : ELECTEDTO : STRIKER : NONSTRIKERCODE : BOWLERCODE : BOWLINGEND];
+                      
+                  }
+                  else
+                  {
+                      
+                      [DBManagerChangeTeamInsert UpadateInningsEventsForChangeTeam : self.lbl_StrikerName.text : NONSTRIKERCODE : BOWLERCODE : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO];
+                      
+                      [DBManagerChangeTeamInsert DeleteInningsEventsForInsertChangeTeam : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+                      
+                      NSNumber*INNINGSSCORECARD=[[NSNumber alloc]init];
+                      
+                      INNINGSSCORECARD=[NSNumber numberWithInt:INNINGSNO.intValue + 1];
+                      
+                     // [DBManagerChanceTeamInsert InitializeInningsScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSSCORECARD];
+                      
+            }
+
+                  }
+                  
+                  }
+                  
+                  }
+                  
+                  
+                  @end

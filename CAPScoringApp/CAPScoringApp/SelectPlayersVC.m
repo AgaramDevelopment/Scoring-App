@@ -182,7 +182,9 @@ static NSString * const reuseIdentifier = @"Cell";
     UIImage *img;
     if(isFileExist){
         img = [UIImage imageWithContentsOfFile:pngFilePath];
-    }else{
+    }
+    
+    if(!isFileExist || img ==nil){
         img  = [UIImage imageNamed: @"no_image.png"];
     }
     

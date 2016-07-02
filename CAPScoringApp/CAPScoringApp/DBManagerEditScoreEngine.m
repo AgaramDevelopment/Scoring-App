@@ -1600,6 +1600,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
                 GetSEPenaltyDetailsForPenaltyEvents *record=[[GetSEPenaltyDetailsForPenaltyEvents alloc]init];
                 record.COMPETITIONCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.MATCHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
@@ -1695,6 +1696,43 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_close(dataBase);
     return GetFastSpeedBallDetailsForMetadataArray;
 }
+
+
+
++(NSMutableArray *) getFieldingFactorDetails:(NSString*) COMPETITIONCODE :(NSString*) MATCHCODE :(NSString*) TEAMCODE :(NSString*) BALLCODE{
+    NSMutableArray *fieldingFactorArray =[[NSMutableArray alloc]init];
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        
+        //FE.BALLCODE,BE.OVERNO,BE.BALLNO,(CONVERT(NVARCHAR,BE.OVERNO)+'.'+CONVERT(NVARCHAR,BE.BALLNO)) AS [OVER],
+        
+        NSString *updateSQL =[NSString stringWithFormat:@"SELECT FE.FIELDERCODE, PM.PLAYERNAME AS FIELDERNAME,FE.FIELDINGFACTORCODE AS FIELDINGEVENTSCODE,FF.FIELDINGFACTOR AS FIELDINGEVENTS,FE.NRS AS NETRUNS, 'F' AS FLAG FROM FIELDINGEVENTS FE INNER JOIN BALLEVENTS BE ON FE.BALLCODE = BE.BALLCODE INNER JOIN FIELDINGFACTOR FF ON FE.FIELDINGFACTORCODE = FF.FIELDINGFACTORCODE INNER JOIN PLAYERMASTER PM ON FE.FIELDERCODE = PM.PLAYERCODE WHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@' AND BE.TEAMCODE = '%@' AND BE.BALLCODE = '%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,BALLCODE];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                [fieldingFactorArray addObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
+                [fieldingFactorArray addObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)]];
+                [fieldingFactorArray addObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)]];
+                [fieldingFactorArray addObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)]];
+                [fieldingFactorArray addObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)]];
+                
+            }
+            
+        }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return fieldingFactorArray;
+}
+
+
+
 
 
 @end

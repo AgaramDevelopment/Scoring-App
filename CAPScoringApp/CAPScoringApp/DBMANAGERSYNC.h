@@ -23,7 +23,7 @@
 ///competitionteamdetails
 +(BOOL) CheckCompetitionCodeTeamCode:(NSString *)COMPETITIONCODE:(NSString *)TEAMCODE;
 +(BOOL) InsertCompetitionTeamDetails:(NSString*) COMPETITIONTEAMCODE:(NSString*) COMPETITIONCODE:(NSString*) TEAMCODE:(NSString*) RECORDSTATUS;
-
++(BOOL) DELETECompetitionCodeTeamCode:(NSString *)COMPETITIONCODE:(NSString *)TEAMCODE;
 
 
 
