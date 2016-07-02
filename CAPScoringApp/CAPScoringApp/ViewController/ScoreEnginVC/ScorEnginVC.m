@@ -57,9 +57,12 @@
 #import "NewMatchSetUpVC.h"
 #import "FETCHSEBALLCODEDETAILS.h"
 #import "ScoreEnginEditRecord.h"
-#import "ChanceTeamVC.h"
+#import "ChangeTeamVC.h"
 #import "InsertSEScoreEngine.h"
 #import "UpdateScoreEngine.h"
+#import "ArchivesVC.h"
+#import "ChangeTossVC.h"
+#import "FollowOn.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -68,7 +71,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -417,9 +420,15 @@ EndInnings *endInnings;
         tableView.dataSource = self;
         tableView.delegate = self;
     
+    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
+    if(inningsno < 1)
+    {
     _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     
-    
+    }
+    else{
+         _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    }
     
     _View_Appeal.hidden=YES;
     _view_table_select.hidden=YES;
@@ -2164,14 +2173,14 @@ EndInnings *endInnings;
     }
     else
     {
-         [self calculateRunsOnEndBall];
+        [self calculateRunsOnEndBall];
         [self EndBallMethod];
         
         [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
         self.btn_StartOver.userInteractionEnabled=YES;
         //        self.btn_StartBall.userInteractionEnabled=NO;
-        [self SaveBallEventREcordvalue];
+//        [self SaveBallEventREcordvalue];
       
         [self AllBtndisableMethod];
         
@@ -2192,12 +2201,12 @@ EndInnings *endInnings;
         
        
         
-        [DBManager saveBallEventData:self.ballEventRecord];
-        [DBManager insertBallCodeAppealEvent:self.ballEventRecord];
-        [DBManager insertBallCodeFieldEvent: self.ballEventRecord bowlerEvent:selectedfieldPlayer fieldingFactor: selectedfieldFactor nrs :selectedNRS];
-        [DBManager insertBallCodeWicketEvent:self.ballEventRecord];
-        [DBManager GetBallDetails :_competitionCode :_matchCode];
-        
+//        [DBManager saveBallEventData:self.ballEventRecord];
+//        [DBManager insertBallCodeAppealEvent:self.ballEventRecord];
+//        [DBManager insertBallCodeFieldEvent: self.ballEventRecord bowlerEvent:selectedfieldPlayer fieldingFactor: selectedfieldFactor nrs :selectedNRS];
+//        [DBManager insertBallCodeWicketEvent:self.ballEventRecord];
+//        [DBManager GetBallDetails :_competitionCode :_matchCode];
+//        
         [self reloadBowlerTeamBatsmanDetails];
        // [ self AssignControlValues :YES:@""];
         
@@ -2338,16 +2347,82 @@ EndInnings *endInnings;
     else
     {
         InsertSEScoreEngine* _InsertSEScoreEngine = [[InsertSEScoreEngine alloc] init];
-//        [_InsertSEScoreEngine InsertScoreEngine:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE :(NSString*) TEAMCODE :(NSNumber*) INNINGSNO: (NSNumber*) BALLCODE : (NSNumber*) OVERNO : (NSNumber*) BALLNO:
-//         (NSNumber*) BALLCOUNT:(NSNumber*) DAYNO :(NSNumber*) SESSIONNO : (NSString *)STRIKERCODE:(NSString *)NONSTRIKERCODE:(NSString *)BOWLERCODE:(NSString *)WICKETKEEPERCODE:(NSString *)UMPIRE1CODE:
-//         (NSString *)UMPIRE2CODE:(NSString *)ATWOROTW:(NSString *)BOWLINGEND:(NSString *)BOWLTYPE :(NSString *)SHOTTYPE:(NSString *)SHOTTYPECATEGORY:(NSString *)ISLEGALBALL:(NSString *)ISFOUR:
-//         (NSString *)ISSIX:(NSNumber*)RUNS:(NSNumber *)OVERTHROW:(NSNumber *)TOTALRUNS:(NSNumber *)WIDE:(NSNumber *)NOBALL:(NSNumber *)BYES:(NSNumber *)LEGBYES:(NSNumber *)PENALTY:(NSNumber *)TOTALEXTRAS:
-//         (NSNumber *)GRANDTOTAL:(NSNumber *)RBW:(NSNumber *)PMLINECODE:(NSNumber *)PMLENGTHCODE:(NSNumber *)PMSTRIKEPOINT:(NSString *)PMX1:(NSNumber *)PMY1:
-//         (NSNumber *)PMX2:(NSNumber *)PMY2:(NSNumber *)PMX3:(NSNumber *)PMY3:(NSNumber *)WWREGION:(NSNumber *)WWX1:(NSNumber *)WWY1:(NSNumber *)WWX2:
-//         (NSNumber *)WWY2:(NSNumber *)BALLDURATION:(NSNumber *)ISAPPEAL:(NSNumber *)ISBEATEN:(NSNumber *)ISUNCOMFORT:(NSNumber *)ISWTB:
-//         (NSNumber *)ISRELEASESHOT:(NSNumber *)MARKEDFOREDIT:(NSNumber *)REMARKS:(NSString *)VIDEOFILENAME:(NSNumber *)ISWICKET:(NSString *)WICKETTYPE:(NSString *)WICKETPLAYER:
-//         (NSString *)FIELDINGPLAYER:(NSString *)INSERTTYPE:(NSString *)AWARDEDTOTEAMCODE:(NSNumber *)PENALTYRUNS:(NSString *)PENALTYTYPECODE:(NSString *)PENALTYTYPECODE:(NSString *)PENALTYREASONCODE:
-//         (NSString *)BALLSPEED:(NSString *)UNCOMFORTCLASSIFCATION:(NSString *)WICKETEVENT];
+        [_InsertSEScoreEngine InsertScoreEngine :
+         self.competitionCode :
+         self.matchCode  :
+         fetchSEPageLoadRecord.BATTINGTEAMCODE :
+         [NSNumber numberWithInt : fetchSEPageLoadRecord.INNINGSNO.intValue] :
+         BallCode :
+         [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] :
+         [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLS] :
+         [NSNumber numberWithInt:1] : //default BALLCOUNT for Live mode
+         [NSNumber numberWithInteger: fetchSEPageLoadRecord.DAYNO] :
+         [NSNumber numberWithInteger: fetchSEPageLoadRecord.SESSIONNO] :
+         fetchSEPageLoadRecord.strickerPlayerCode:
+         fetchSEPageLoadRecord.nonstrickerPlayerCode:
+         fetchSEPageLoadRecord.currentBowlerPlayerCode:
+         
+         ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString :
+         fetchSEPageLoadRecord.TEAMACODE] ?
+         fetchSEPageLoadRecord.TEAMAWICKETKEEPER :
+         fetchSEPageLoadRecord.TEAMBWICKETKEEPER):
+         
+         fetchSEPageLoadRecord.UMPIRE1CODE :
+         fetchSEPageLoadRecord.UMPIRE2CODE :
+         self.ballEventRecord.objAtworotw :
+         self.ballEventRecord.objBowlingEnd :
+         self.ballEventRecord.objBowltype :
+         self.ballEventRecord.objShottype:
+         self.ballEventRecord.objShorttypecategory :
+         self.ballEventRecord.objIslegalball:
+         self.ballEventRecord.objIsFour :
+         self.ballEventRecord.objIssix :
+         self.ballEventRecord.objRuns :
+         self.ballEventRecord.objOverthrow :
+         self.ballEventRecord.objTotalruns :
+         self.ballEventRecord.objWide :
+         self.ballEventRecord.objNoball :
+         self.ballEventRecord.objByes:
+         self.ballEventRecord.objLegByes:
+         self.ballEventRecord.objPenalty:
+         self.ballEventRecord.objTotalextras:
+         self.ballEventRecord.objGrandtotal:
+         self.ballEventRecord.objRbw:
+         self.ballEventRecord.objPMlinecode:
+         self.ballEventRecord.objPMlengthcode:
+         self.ballEventRecord.objPMStrikepoint:
+         self.ballEventRecord.objPMX1:
+         self.ballEventRecord.objPMY1:
+         self.ballEventRecord.objPMX2:
+         self.ballEventRecord.objPMY2:
+         self.ballEventRecord.objPMX3:
+         self.ballEventRecord.objPMY3:
+         self.ballEventRecord.objWWREGION:
+         self.ballEventRecord.objWWX1:
+         self.ballEventRecord.objWWY1:
+         self.ballEventRecord.objWWX2:
+         self.ballEventRecord.objWWY2:
+         self.ballEventRecord.objballduration:
+         self.ballEventRecord.objIsappeal:
+         self.ballEventRecord.objIsbeaten:
+         self.ballEventRecord.objIsuncomfort:
+         self.ballEventRecord.objIswtb:
+         self.ballEventRecord.objIsreleaseshot:
+         self.ballEventRecord.objMarkedforedit:
+         self.ballEventRecord.objRemark:
+         self.ballEventRecord.objVideoFile:
+         isWicketSelected == YES ? [NSNumber numberWithInt:1] : [NSNumber numberWithInt:0]:
+         selectedwickettype.metasubcode:
+         (selectedStrikernonstriker.length <= 0 ? fetchSEPageLoadRecord.strickerPlayerCode : selectedStrikernonstriker):
+         @""://(NSString *)FIELDINGPLAYER:
+         insertType:
+         @""://Awarded Team:
+         self.ballEventRecord.objPenalty:
+         self.ballEventRecord.objPenaltytypecode:
+         @""://(NSString *)PENALTYREASONCODE:
+         @""://(NSString *)BALLSPEED:
+         @""://(NSString *)UNCOMFORTCLASSIFCATION:
+         selectedWicketEvent];
         //Insert Score Engine SP Call
     }
     if([self.ballEventRecord.objIslegalball intValue] == 0)
@@ -6935,9 +7010,13 @@ EndInnings *endInnings;
 
 -(void)ChangeTeam
 {
-    ChanceTeamVC *objChanceTeamVC =[[ChanceTeamVC alloc]initWithNibName:@"ChanceTeamVC" bundle:nil];
+    int inningsNo=[fetchSEPageLoadRecord.INNINGSNO intValue ];
+    if(inningsNo >1)
+    {
+    ChangeTeamVC *objChanceTeamVC =[[ChangeTeamVC alloc]initWithNibName:@"ChangeTeamVC" bundle:nil];
     objChanceTeamVC.compitionCode=self.competitionCode;
     objChanceTeamVC.MatchCode   =self.matchCode;
+    objChanceTeamVC.delegate =self;
     
 
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -6959,7 +7038,40 @@ EndInnings *endInnings;
      }
                      completion:nil];
     [self addChildViewController:objChanceTeamVC];
-[fullview addSubview:objChanceTeamVC.view];
+     [fullview addSubview:objChanceTeamVC.view];
+    }
+    else{
+        int ballcount =fetchSEPageLoadRecord.BATTEAMOVRBALLS;
+        if(ballcount < 1)
+        {
+        ChangeTossVC*objChangeTossVC =[[ChangeTossVC alloc]initWithNibName:@"ChangeTossVC" bundle:nil];
+        objChangeTossVC.CompitisonCode=self.competitionCode;
+       objChangeTossVC.MatchCode   =self.matchCode;
+        objChangeTossVC.delegate =self;
+        
+        
+        fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+        fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+        UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+        
+        [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+        //fullview.alpha=0.9;
+        
+        objChangeTossVC.view.alpha = 0;
+        [objChangeTossVC didMoveToParentViewController:self];
+        objChangeTossVC.view.frame =CGRectMake(90, 200, objChangeTossVC.view.frame.size.width, objChangeTossVC.view.frame.size.height);
+        [fullview addSubview:Btn_Fullview];
+        [self.view addSubview:fullview];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             objChangeTossVC.view.alpha = 1;
+         }
+                         completion:nil];
+        [self addChildViewController:objChangeTossVC];
+        [fullview addSubview:objChangeTossVC.view];
+        }
+    }
 
 }
 -(void)ENDINNINGS
@@ -7048,7 +7160,42 @@ EndInnings *endInnings;
 }
 -(void)FollowOn
 {
+    if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
+    {
+        int inningscount =fetchSEPageLoadRecord.INNINGSNO;
+        if(inningscount > 2)
+       {
+    FollowOn *objFollowOn =[[FollowOn alloc]initWithNibName:@"FollowOn" bundle:nil];
+    objFollowOn.compitionCode=self.competitionCode;
+    objFollowOn.MatchCode   =self.matchCode;
+    objFollowOn.battingTeamName =fetchSEPageLoadRecord.BATTEAMNAME;
+    objFollowOn.battingTeamCode =fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    objFollowOn.BowlingTeamCode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+    objFollowOn.delegate =self;
     
+    
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    //fullview.alpha=0.9;
+    
+    objFollowOn.view.alpha = 0;
+    [objFollowOn didMoveToParentViewController:self];
+    objFollowOn.view.frame =CGRectMake(90, 200, objFollowOn.view.frame.size.width, objFollowOn.view.frame.size.height);
+    [fullview addSubview:Btn_Fullview];
+    [self.view addSubview:fullview];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         objFollowOn.view.alpha = 1;
+     }
+                     completion:nil];
+    [self addChildViewController:objFollowOn];
+    [fullview addSubview:objFollowOn.view];
+}
+    }
 }
 -(void) matchInfoEdit
 {
@@ -11288,6 +11435,23 @@ if(self.checkInternetConnection){
     [self penalityview];
 
 }
-
-
+-(void)processSuccessful
+{
+            fullview.hidden=YES;
+            ArchivesVC * objArchiveVC=[[ArchivesVC alloc]init];
+            objArchiveVC=(ArchivesVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    
+            objArchiveVC.CompitionCode=self.competitionCode;
+            [self.navigationController pushViewController:objArchiveVC animated:YES];
+}
+-(void)RedirectScorEngin
+{
+     fullview.hidden=YES;
+   // [self reloadBowlerTeamBatsmanDetails];
+}
+-(void) RedirectFollowOnPage
+{
+   fullview.hidden=YES;
+    //[self reloadBowlerTeamBatsmanDetails];
+}
 @end

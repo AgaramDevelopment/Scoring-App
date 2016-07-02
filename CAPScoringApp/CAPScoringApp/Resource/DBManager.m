@@ -3636,10 +3636,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             NSString *UMPIRE1CODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
             NSString *UMPIRE2CODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
             
+            NSString *UMPIRE1NAME = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+            NSString *UMPIRE2NAME = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+            
             [result addObject:UMPIRE1CODE];
             [result addObject:UMPIRE2CODE];
-            
-            
+            [result addObject:UMPIRE1NAME];
+            [result addObject:UMPIRE2NAME];
         }
     }
     

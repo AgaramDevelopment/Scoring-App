@@ -97,14 +97,16 @@
 {
     static NSString *CellIdentifier = @"EditModeCell";
     
-    NSInteger currentRow = indexPath.row;
+     currentRow = indexPath.row;
     EditModeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     OversorderRecord *objOversorderRecord=(OversorderRecord *)[OversorderArray objectAtIndex:indexPath.row];
      InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:indexPath.row];
     cell.lbl_playername.text =objOversorderRecord.BowlerName;
    
     cell.lbl_overs.text= objOversorderRecord.OversOrder;
+    
     NSString *strCurrentRow=[NSString stringWithFormat:@"%d",currentRow];
+   
      objoverballCount =[[NSMutableArray alloc]init];
      eachoverRun =[[NSMutableArray alloc]init];
     objOverrthrow =[[NSMutableArray alloc]init];
@@ -171,7 +173,7 @@
                         nameLabel.textColor=[UIColor whiteColor];
                
                  //nameLabel .text=@"";
-               //UIButton *btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((j*40.0)+25,30.0,30.0, 30.0)];
+//               UIButton *btn_Run = [[UIButton alloc] initWithFrame:CGRectMake(cell.frame.origin.x,30.0,cell.frame.size.width,cell.frame.size.height-30)];
                
                 //[btn_Run setBackgroundColor:[UIColor clearColor]];
                /// [btn_Run setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -180,9 +182,10 @@
                 //btn_Run.layer.borderWidth=2;
                // btn_Run.layer.borderColor= [UIColor redColor].CGColor;
                //btn_Run.layer.masksToBounds=YES;
-                //[btn_Run addTarget:self action:@selector(didClickEditAction:) forControlEvents:UIControlEventTouchUpInside];
+               // [btn_Run addTarget:self action:@selector(GetCellIndexPath:) forControlEvents:UIControlEventTouchUpInside];
                
                 //[cell.view_main addSubview:btn_Run];
+              
 
 
        }
@@ -425,6 +428,7 @@
     [btn_Run addTarget:self action:@selector(didClickEditAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [cell.view_main addSubview:btn_Run];
+    
     content = content == @"0 W" ? @"W" : content;
     content = content == @"0 NB" ? @"NB" : content;
     content = content == @"0 WD" ? @"WD" : content;
@@ -465,19 +469,54 @@
 }
 
 
-
+-(IBAction)GetCellIndexPath:(id)sender
+{
+    UIButton *senderButton = (UIButton *)sender;
+    EditModeCell *buttonCell = (EditModeCell *)[senderButton superview];
+    
+    NSIndexPath* pathOfTheCell = [self.tbl_innnings indexPathForCell:buttonCell];
+    NSInteger rowOfTheCell = [pathOfTheCell row];
+    NSLog(@"rowofthecell %d", rowOfTheCell);
+    objSelectBallCodeArray=[[NSMutableArray alloc]init];
+    OversorderRecord *objOversorderRecord=(OversorderRecord *)[OversorderArray objectAtIndex:rowOfTheCell];
+    
+    NSString *overNo=objOversorderRecord.OversOrder;
+    
+    
+    
+    
+    for(int i=0; i < [inningsDetail count]; i++)
+    {
+        InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:i];
+        NSString *objoverNo= objInningsBowlerDetailsRecord.OverNo;
+        
+        if([overNo isEqualToString:objoverNo])
+        {
+            
+            NSString * objballcode =objInningsBowlerDetailsRecord.ballCode;
+            NSLog(@"ballcode =%@",objballcode);
+            [objSelectBallCodeArray addObject:objballcode];
+           
+        }
+       
+    }
+   [self MoveEditToScore:seleBtnIndex];
+}
 
 
 -(IBAction)didClickEditAction:(id)sender
 {
-    
+   
     if(view_addedit != nil)
     {
         [view_addedit removeFromSuperview];
     }
      UIButton * btn_add = (UIButton *)sender;
     
+    int objIndex =btn_add.tag;
+    seleBtnIndex =[NSString stringWithFormat:@"%d",objIndex];
     
+
     
    ballCodeIndex= btn_add.tag;
     
@@ -513,7 +552,10 @@
     [Rightrotation setImage:[UIImage imageNamed:@"RightRotation"] forState:UIControlStateNormal];
     [cell addSubview:Rightrotation];
     [Rightrotation addTarget:self action:@selector(didClickRightrotation:) forControlEvents:UIControlEventTouchUpInside];
-
+    Btn_Indexpath = [[UIButton alloc] initWithFrame:CGRectMake(cell.frame.origin.x,0.0,cell.frame.size.width,40)];
+    [Btn_Indexpath addTarget:self action:@selector(GetCellIndexPath:) forControlEvents:UIControlEventTouchUpInside];
+    Btn_Indexpath.tag=1;
+    [cell addSubview:Btn_Indexpath];
 }
 
 -(IBAction)didClickLeftRotation:(id)sender
@@ -544,7 +586,7 @@
     }
 }
 
--(IBAction)didClickEditrotation:(id)sender
+-(void)MoveEditToScore:(NSString*)selectIndex
 {
    
 //
@@ -558,8 +600,16 @@
     scoreEngine.matchCode=self.matchCode;
     scoreEngine.competitionCode=self.Comptitioncode;
     scoreEngine.isEditMode = YES;
-    scoreEngine.editBallCode = objInningsBowlerDetailsRecord.ballCode;
+    scoreEngine.editBallCode =[NSString stringWithFormat:@"%@",SelectBallCode];
     [self.navigationController pushViewController:scoreEngine animated:YES];
+}
+-(IBAction)didClickEditrotation:(id)sender
+{
+    
+    
+  [Btn_Indexpath sendActionsForControlEvents: UIControlEventTouchUpInside];
+    
+   
 }
 -(IBAction)didClickCancelrotation:(id)sender
 {
