@@ -1817,6 +1817,40 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return NO;
 }
 
+
+
++(BOOL)  LegalBallByOverNoUpdateScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE :(NSString*) INNINGSNO : (NSString*)OVERNO : (NSString*)BALLNO : (NSString *) BALLCOUNT
+
+{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BALLEVENTS SET BALLNO = BALLNO + 1, BALLCOUNT = BALLCOUNT - '%@' WHERE COMPETITIONCODE   =	'%@' AND   MATCHCODE  =	'%@' AND   TEAMCODE =	'%@' AND   INNINGSNO =	'%@' AND   OVERNO    =	'%@' AND   BALLNO =	'%@' AND	  BALLCOUNT >   '%@'",BALLCOUNT,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BALLNO,BALLCOUNT];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
+            return NO;
+        }
+    }
+    sqlite3_reset(statement);
+    return NO;
+}
+
+
+                               
 +(BOOL)  LegalBallCountUpdateScoreEngine : (NSString*) COMPETITIONCODE :(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSString*) INNINGSNO
 
 {
@@ -1858,7 +1892,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
-    NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS BE WHERE (BE.OVERNO + '.' + BE.BALLNO + BE.BALLCOUNT) = (SELECT MAX((BALL.OVERNO + '.' + BALL.BALLNO) + BALL.BALLCOUNT) FROM BALLEVENTS BALL WHERE BALL.MATCHCODE = '%@' AND BALL.INNINGSNO = '%@') AND BE.MATCHCODE = '%@' AND BE.INNINGSNO = '%@'",MATCHCODE,INNINGSNO,MATCHCODE,INNINGSNO];
+    NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS BE WHERE (BE.OVERNO || '.' || BE.BALLNO || BE.BALLCOUNT) = (SELECT MAX((BALL.OVERNO || '.' || BALL.BALLNO) || BALL.BALLCOUNT) FROM BALLEVENTS BALL WHERE BALL.MATCHCODE = '%@' AND BALL.INNINGSNO = '%@') AND BE.MATCHCODE = '%@' AND BE.INNINGSNO = '%@'",MATCHCODE,INNINGSNO,MATCHCODE,INNINGSNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
@@ -2252,6 +2286,38 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BS SET WICKETOVERNO=BE.OVERNO,WICKETBALLNO=BE.BALLNO,WICKETSCORE=(SELECT SUM(GRANDTOTAL) FROM BALLEVENTS BES WHERE BES.COMPETITIONCODE= '%@' AND BES.MATCHCODE= '%@' AND BES.INNINGSNO= '%@' AND (( CAST(CAST(BES.OVERNO AS NVARCHAR(MAX))+'.'+CAST(BES.BALLNO AS NVARCHAR(MAX)) AS FLOAT)) BETWEEN 0.0 AND  CAST(CAST(BE.OVERNO AS NVARCHAR(MAX))+'.'+CAST(BE.BALLNO AS NVARCHAR(MAX)) AS FLOAT))) FROM BATTINGSUMMARY BS INNER JOIN WICKETEVENTS WE ON WE.COMPETITIONCODE=BS.COMPETITIONCODE AND WE.MATCHCODE=BS.MATCHCODE AND WE.INNINGSNO=BS.INNINGSNO AND WE.WICKETPLAYER=BS.BATSMANCODE AND BS.WICKETTYPE IS NOT NULL INNER JOIN BALLEVENTS BE ON BE.BALLCODE =WE.BALLCODE WHERE BS.COMPETITIONCODE='%@' AND BS.MATCHCODE='%@' AND BS.INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
+            return NO;
+        }
+    }
+    sqlite3_reset(statement);
+    return NO;
+}
+
+
+
++(BOOL) UPDATEBALLEVENT : (NSString*) BALLCODE:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSNumber*)OVERNO:(NSNumber*)BALLNO:(NSNumber*)BALLCOUNT:(NSNumber*)SESSIONNO:(NSString*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)WICKETKEEPERCODE:(NSString*)UMPIRE1CODE:(NSString*)UMPIRE2CODE:(NSString*)ATWOROTW:(NSString*)BOWLINGEN:(NSString*)BOWLTYPE:(NSString*)SHOTTYPE:(NSString*)SHOTTYPECATEGORY:(NSString*)ISLEGALBALL:(NSString*)ISFOUR:(NSString*)ISSIX:(NSString*)RUNS:(NSNumber*)OVERTHROW:(NSNumber*)TOTALRUNS:(NSNumber*)WIDE:(NSNumber*)NOBALL:(NSNumber*)BYES:(NSNumber*)LEGBYES:(NSNumber*)PENALTY:(NSNumber*)TOTALEXTRAS:(NSNumber*)GRANDTOTAL:(NSNumber*)RBW:(NSString*)PMLINECODE:(NSString*)PMLENGTHCODE:(NSString*)PMSTRIKEPOINT:(NSString*)PMSTRIKEPOINTLINECODE:(NSNumber*)PMX1:(NSNumber*)PMY1:(NSNumber*)PMX2:(NSNumber*)PMY2:(NSNumber*)PMX3:(NSNumber*)PMY3:(NSString*)WWREGION:(NSNumber*)WWX1:(NSNumber*)WWY1:(NSNumber*)WWX2:(NSNumber*)WWY2:(NSNumber*)BALLDURATION:(NSString*)ISAPPEAL:(NSString*)ISBEATEN:(NSString*)ISUNCOMFORT:(NSString*)ISWTB:(NSString*)ISRELEASESHOT:(NSString*)MARKEDFOREDIT:(NSString*)REMARKS:(NSNumber*)ISWICKET:(NSString*)WICKETTYPE:(NSString*)WICKETPLAYER:(NSString*)FIELDINGPLAYER:(NSNumber*)ISWICKETUNDO:(NSString*)AWARDEDTOTEAMCODE:(NSNumber*)PENALTYRUNS:(NSString*)PENALTYTYPECODE:(NSString*)PENALTYREASONCODE:(NSString*)BALLSPEED:(NSString*)UNCOMFORTCLASSIFCATION:(NSString*)WICKETEVENT:(NSString*) BOWLINGEND
+{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BALLEVENTS SET STRIKERCODE  =	'%@', NONSTRIKERCODE =	'%@', BOWLERCODE  =	'%@', WICKETKEEPERCODE   = '%@', UMPIRE1CODE  =	'%@', UMPIRE2CODE  =	'%@', ATWOROTW  =	'%@', BOWLINGEND   =	'%@', BOWLTYPE   =	'%@', SHOTTYPE            =	'%@', SHOTTYPECATEGORY	=	'%@', ISLEGALBALL  =	'%@', ISFOUR  =	'%@', ISSIX =	'%@', RUNS  =	'%@', OVERTHROW  =	'%@', TOTALRUNS   =	'%@', WIDE  =	'%@', NOBALL =	'%@', BYES  =	'%@', LEGBYES  =	'%@', PENALTY   = '%@', TOTALEXTRAS  = '%@', GRANDTOTAL  =	'%@', RBW =	'%@', PMLINECODE   =	'%@', PMLENGTHCODE =	'%@', PMSTRIKEPOINT =	'%@', PMSTRIKEPOINTLINECODE = '%@' , PMX1  =	'%@',PMY1 = '%@',PMX2  =	'%@',PMY2  = '%@', PMX3   =	'%@', PMY3  =	'%@', WWREGION  =	'%@', WWX1  =	'%@', WWY1 = '%@', WWX2 =	'%@', WWY2  =	'%@', BALLDURATION  =	'%@', ISAPPEAL  =	'%@', ISBEATEN  =	'%@', ISUNCOMFORT  =	'%@', ISWTB =	'%@', ISRELEASESHOT  =	'%@', MARKEDFOREDIT   =	'%@', REMARKS	 =	'%@', BALLSPEED =   '%@', UNCOMFORTCLASSIFCATION	=	'%@' WHERE COMPETITIONCODE   =	'%@' AND   MATCHCODE   =	'%@' AND   TEAMCODE  =	'%@' AND   INNINGSNO =	'%@' AND   BALLCODE =	'%@'",STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE,UMPIRE2CODE,ATWOROTW,BOWLINGEND,BOWLTYPE,SHOTTYPE,SHOTTYPECATEGORY,ISLEGALBALL,ISFOUR,ISSIX,RUNS,OVERTHROW,TOTALRUNS,WIDE,NOBALL,BYES,LEGBYES,PENALTY,TOTALEXTRAS,GRANDTOTAL,RBW,PMLINECODE,PMLENGTHCODE,PMSTRIKEPOINT,PMSTRIKEPOINTLINECODE,PMX1,PMY1,PMX2,PMY2,PMX3,PMY3,WWREGION,WWX1,WWY1,WWX2,WWY2,BALLDURATION,ISAPPEAL,ISBEATEN,ISUNCOMFORT,ISWTB,ISRELEASESHOT,MARKEDFOREDIT,REMARKS,BALLSPEED,UNCOMFORTCLASSIFCATION,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,BALLCODE];
+        
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE)

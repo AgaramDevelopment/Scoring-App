@@ -242,27 +242,29 @@
        [DBManagerEndBall UpdateScoreBoard : BALLCODE :COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : BOWLINGTEAMCODE : INNINGSNO : STRIKERCODE :ISFOUR : ISSIX : RUNS : OVERTHROW : ISWICKET : WICKETTYPE : WICKETPLAYER : BOWLERCODE : OVERNO : BALLNO : 0 : WIDE : NOBALL : BYES :LEGBYES : 0 : 0 : ISWICKETUNDO : F_ISWICKETCOUNTABLE : F_ISWICKET : F_WICKETTYPE];
     }
     
-    if( STRIKERCODE != OLDSTRIKERCODE || NONSTRIKERCODE != OLDNONSTRIKERCODE)
+    if( ![STRIKERCODE isEqual: OLDSTRIKERCODE] || ![NONSTRIKERCODE isEqual: OLDNONSTRIKERCODE])
     {
         [DBManagerEndBall UpdateBattingOrderUpdateScoreEngine : MATCHCODE: TEAMCODE : INNINGSNO];
         
-        
-        
+    }
+    
+    //Update Bowling Order sequence in Bowling Card when the bowler is changed or deleted.
+        if (![BOWLERCODE isEqual: OLDBOWLERCODE]){
         [DBManagerEndBall UpdateBowlingOrderUpdateScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO];
-        
-        
-        
-        [DBManagerEndBall DeleteRemoveUnusedBatFBSUpdateScoreEngine : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
-        
-        [DBManagerEndBall DeleteRemoveUnusedBowFBSUpdateScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO : BOWLINGTEAMCODE];
-        
-        
-        
+    }
+    
+    [DBManagerEndBall UPDATEBALLEVENT :  BALLCODE:COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:OVERNO:BALLNO:BALLCOUNT:SESSIONNO:STRIKERCODE:NONSTRIKERCODE:BOWLERCODE:WICKETKEEPERCODE:UMPIRE1CODE:UMPIRE2CODE:ATWOROTW:BOWLINGEN:BOWLTYPE:SHOTTYPE:SHOTTYPECATEGORY:ISLEGALBALL:ISFOUR:ISSIX:RUNS:OVERTHROW:TOTALRUNS:WIDE:NOBALL:BYES:LEGBYES:PENALTY:TOTALEXTRAS:GRANDTOTAL:RBW:PMLINECODE:PMLENGTHCODE:PMSTRIKEPOINT:PMSTRIKEPOINTLINECODE:PMX1:PMY1:PMX2:PMY2:PMX3:PMY3:WWREGION:WWX1:WWY1:WWX2:WWY2:BALLDURATION:ISAPPEAL:ISBEATEN:ISUNCOMFORT:ISWTB:ISRELEASESHOT:MARKEDFOREDIT:REMARKS:ISWICKET:WICKETTYPE:WICKETPLAYER:FIELDINGPLAYER:ISWICKETUNDO:AWARDEDTOTEAMCODE:PENALTYRUNS:PENALTYTYPECODE:PENALTYREASONCODE:BALLSPEED:UNCOMFORTCLASSIFCATION:WICKETEVENT: BOWLINGEND];
+    
+    
+    // Remove Unused Batsman from Batting Scorecard
+    [DBManagerEndBall DeleteRemoveUnusedBatFBSUpdateScoreEngine : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+    
+    // Remove Unused Bowler from Bowling Scorecard
+    [DBManagerEndBall DeleteRemoveUnusedBowFBSUpdateScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO : BOWLINGTEAMCODE];
+    
         if(AWARDEDTOTEAMCODE.length > 0)
         {
             if([DBManagerEndBall GetPenaltyBallCodeUpdateScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO :BALLCODE])
-                
-                
             {
                 [DBManagerEndBall UpdatePenaltyScoreEngine:AWARDEDTOTEAMCODE :PENALTYRUNS :PENALTYTYPECODE :PENALTYREASONCODE :COMPETITIONCODE :MATCHCODE :INNINGSNO :BALLCODE ];
 
@@ -277,21 +279,25 @@
                 
                 [DBManagerEndBall InsertPenaltyScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO :BALLCODE :PENALTYCODE :AWARDEDTOTEAMCODE :PENALTYRUNS :PENALTYTYPECODE :PENALTYREASONCODE];
                 
-
-            }
-            
-            
-            if (BALLCODE == nil || [BALLCODE isEqualToString: @""]) {
                 
-                if ([DBManagerEndBall getInningNo:COMPETITIONCODE :MATCHCODE :INNINGSNO]) {
+                //ADDING PENALTY RUNS FOR INNINGSSUMMARY (SCOREBOARD)
+                if (BALLCODE == nil || [BALLCODE isEqualToString: @""]) {
                     
-                    [DBManagerEndBall UpdateInningsSummary:PENALTYRUNS :COMPETITIONCODE :MATCHCODE :INNINGSNO];
+                    if ([DBManagerEndBall getInningNo:COMPETITIONCODE :MATCHCODE :INNINGSNO]) {
+                        
+                        [DBManagerEndBall UpdateInningsSummary:PENALTYRUNS :COMPETITIONCODE :MATCHCODE :INNINGSNO];
+                        
+                    }
+                    
+                    
                     
                 }
 
-          
-                
             }
+            
+        }
+    
+            
             if(OLDISLEGALBALL.intValue == 1 && ISLEGALBALL.intValue == 0)
             {
                 [DBManagerEndBall UpdateBallPlusoneScoreEngine:BALLCOUNT :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :OVERNO :BALLCODE];
@@ -308,12 +314,12 @@
                 
                 [DBManagerEndBall LegalBallByOverNoUpdateScoreEngine:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : OVERNO :BALLNO];
         
-                
+                [DBManagerEndBall LegalBallByOverNoUpdateScoreEngine :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : OVERNO :BALLNO: BALLCOUNT];
             }
       
             
             LASTBALLCODE = [DBManagerEndBall LastBallCodeUPSE: MATCHCODE : INNINGSNO];
-            if(BALLCODE = LASTBALLCODE)
+            if([BALLCODE isEqual: LASTBALLCODE])
             {
              
             OVERSTATUS =  [DBManagerEndBall OverStatusUPSE:COMPETITIONCODE : MATCHCODE :INNINGSNO :OVERNO];
@@ -361,37 +367,41 @@
                  ISMAIDENOVER =  [DBManagerEndBall IsMaidenOverUPSE  :  COMPETITIONCODE :MATCHCODE:INNINGSNO:OVERNO:BOWLERCODE];
                     
                    ISOVERCOMPLETE = [DBManagerEndBall IsOverCompleteUPSE  :  COMPETITIONCODE :MATCHCODE:INNINGSNO:OVERNO:BOWLERCODE];
+                    
+                    if(ISMAIDENOVER.intValue == 1 && ISOVERCOMPLETE.intValue == 1)
+                    {
+                        [DBManagerEndBall BowMadienSummUPSE  :  COMPETITIONCODE :MATCHCODE:INNINGSNO:OVERNO:BOWLERCODE];
+                        
+                        U_BOWLERMAIDENS = [NSNumber numberWithInt: 1];
+                    }
+                    
+                    
+                    if(ISOVERCOMPLETE.intValue == 1)
+                    {
+                        [DBManagerEndBall BowSummaryOverplusoneUPSE:OTHERBOWLEROVERBALLCNT :U_BOWLERMAIDENS :COMPETITIONCODE :MATCHCODE :BOWLINGTEAMCODE :INNINGSNO :OTHERBOWLER];
+                        
+                        
+                    }
+                    else
+                    {
+                        [DBManagerEndBall BowSummaryUPSE:OTHERBOWLEROVERBALLCNT :U_BOWLERMAIDENS :COMPETITIONCODE :MATCHCODE :BOWLINGTEAMCODE :INNINGSNO :OTHERBOWLER];
+                        
+                        
+                        
+                    }
+                    
                 }
                 
               
                 
                 
-                if(ISMAIDENOVER.intValue == 1 && ISOVERCOMPLETE.intValue == 1)
-                {
-                    [DBManagerEndBall BowMadienSummUPSE  :  COMPETITIONCODE :MATCHCODE:INNINGSNO:OVERNO:BOWLERCODE];
-                    
-                    U_BOWLERMAIDENS = [NSNumber numberWithInt: 1];
-                }
-                if(ISOVERCOMPLETE.intValue == 1)
-                {
-                    [DBManagerEndBall BowSummaryOverplusoneUPSE:OTHERBOWLEROVERBALLCNT :U_BOWLERMAIDENS :COMPETITIONCODE :MATCHCODE :BOWLINGTEAMCODE :INNINGSNO :OTHERBOWLER];
-                    
-                 
-                }
-                else
-                {
-                    [DBManagerEndBall BowSummaryUPSE:OTHERBOWLEROVERBALLCNT :U_BOWLERMAIDENS :COMPETITIONCODE :MATCHCODE :BOWLINGTEAMCODE :INNINGSNO :OTHERBOWLER];
-                
-                    
-                    
-                }
                 
                 [DBManagerEndBall UPDATEWICKETOVERNOUPSE : COMPETITIONCODE :MATCHCODE : INNINGSNO];
                 
                 
-            }		
+            		
         }
-    }
+    
 }
 
 

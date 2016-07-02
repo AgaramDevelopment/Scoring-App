@@ -797,9 +797,13 @@ EndInnings *endInnings;
 
     }
     
+      
     //Wagon wheel
     
-    if(self.ballEventRecord.objWWX1 !=nil && self.ballEventRecord.objWWX2 !=nil && self.ballEventRecord.objWWY1 !=nil && self.ballEventRecord.objWWY2 !=nil){
+    if(!(self.ballEventRecord.objWWX1.intValue ==221 && self.ballEventRecord.objWWX2.intValue ==221 && self.ballEventRecord.objWWY1.intValue ==186 && self.ballEventRecord.objWWY2.intValue ==186) && !(self.ballEventRecord.objWWX1.intValue ==172 && self.ballEventRecord.objWWX2.intValue ==172 && self.ballEventRecord.objWWY1.intValue ==145 && self.ballEventRecord.objWWY2.intValue ==145)){
+        
+        [self selectedViewBg:_btn_wagonwheel];
+        
     for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
         if ([layer.name isEqualToString:@"DrawLine"]) {
             [layer removeFromSuperlayer];
@@ -826,7 +830,8 @@ EndInnings *endInnings;
     
     //Pitch map
     
-    if(self.ballEventRecord.objPMX2 != nil && self.ballEventRecord.objPMY2 !=nil){
+    if(!(self.ballEventRecord.objPMX2.intValue == 1 && self.ballEventRecord.objPMY2.intValue ==1)){
+        [self selectedViewBg:_btn_pichmap];
         if(Img_ball != nil)
         {
             [Img_ball removeFromSuperview];
@@ -837,6 +842,9 @@ EndInnings *endInnings;
             [self.img_pichmap addSubview:Img_ball];
         self.img_pichmap.hidden = YES;
     }
+    
+    
+    
     
     
 //    //Short type
@@ -2042,6 +2050,7 @@ EndInnings *endInnings;
     NSLog(@"btnname=%@",self.btn_StartBall.currentTitle);
     
     if(self.isEditMode){
+        [self calculateRunsOnEndBall];
         
         UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
   
@@ -2093,7 +2102,7 @@ EndInnings *endInnings;
          self.ballEventRecord.objPMY3 :
          self.ballEventRecord.objWWREGION :
          self.ballEventRecord.objWWX1 :
-         self.ballEventRecord.objWWY2 :
+         self.ballEventRecord.objWWY1 :
          self.ballEventRecord.objWWX2 :
          self.ballEventRecord.objWWY2 :
          self.ballEventRecord.objballduration :
