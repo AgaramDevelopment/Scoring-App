@@ -1273,35 +1273,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(BOOL) UPDATEBALLEVENT : (NSString*) BALLCODE:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSNumber*)OVERNO:(NSNumber*)BALLNO:(NSNumber*)BALLCOUNT:(NSNumber*)SESSIONNO:(NSString*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)WICKETKEEPERCODE:(NSString*)UMPIRE1CODE:(NSString*)UMPIRE2CODE:(NSString*)ATWOROTW:(NSString*)BOWLINGEN:(NSString*)BOWLTYPE:(NSString*)SHOTTYPE:(NSString*)SHOTTYPECATEGORY:(NSString*)ISLEGALBALL:(NSString*)ISFOUR:(NSString*)ISSIX:(NSString*)RUNS:(NSNumber*)OVERTHROW:(NSNumber*)TOTALRUNS:(NSNumber*)WIDE:(NSNumber*)NOBALL:(NSNumber*)BYES:(NSNumber*)LEGBYES:(NSNumber*)PENALTY:(NSNumber*)TOTALEXTRAS:(NSNumber*)GRANDTOTAL:(NSNumber*)RBW:(NSString*)PMLINECODE:(NSString*)PMLENGTHCODE:(NSString*)PMSTRIKEPOINT:(NSString*)PMSTRIKEPOINTLINECODE:(NSNumber*)PMX1:(NSNumber*)PMY1:(NSNumber*)PMX2:(NSNumber*)PMY2:(NSNumber*)PMX3:(NSNumber*)PMY3:(NSString*)WWREGION:(NSNumber*)WWX1:(NSNumber*)WWY1:(NSNumber*)WWX2:(NSNumber*)WWY2:(NSNumber*)BALLDURATION:(NSString*)ISAPPEAL:(NSString*)ISBEATEN:(NSString*)ISUNCOMFORT:(NSString*)ISWTB:(NSString*)ISRELEASESHOT:(NSString*)MARKEDFOREDIT:(NSString*)REMARKS:(NSNumber*)ISWICKET:(NSString*)WICKETTYPE:(NSString*)WICKETPLAYER:(NSString*)FIELDINGPLAYER:(NSNumber*)ISWICKETUNDO:(NSString*)AWARDEDTOTEAMCODE:(NSNumber*)PENALTYRUNS:(NSString*)PENALTYTYPECODE:(NSString*)PENALTYREASONCODE:(NSString*)BALLSPEED:(NSString*)UNCOMFORTCLASSIFCATION:(NSString*)WICKETEVENT:(NSString*) BOWLINGEND
-{
-    
-    NSString *databasePath = [self getDBPath];
-    sqlite3_stmt *statement;
-    sqlite3 *dataBase;
-    const char *dbPath = [databasePath UTF8String];
-    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
-    {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BALLEVENTS SET STRIKERCODE  =	'%@', NONSTRIKERCODE =	'%@', BOWLERCODE  =	'%@', WICKETKEEPERCODE   = '%@', UMPIRE1CODE  =	'%@', UMPIRE2CODE  =	'%@', ATWOROTW  =	'%@', BOWLINGEND   =	'%@', BOWLTYPE   =	'%@', SHOTTYPE            =	'%@', SHOTTYPECATEGORY	=	'%@', ISLEGALBALL  =	'%@', ISFOUR  =	'%@', ISSIX =	'%@', RUNS  =	'%@', OVERTHROW  =	'%@', TOTALRUNS   =	'%@', WIDE  =	'%@', NOBALL =	'%@', BYES  =	'%@', LEGBYES  =	'%@', PENALTY   = '%@', TOTALEXTRAS  = '%@', GRANDTOTAL  =	'%@', RBW =	'%@', PMLINECODE   =	'%@', PMLENGTHCODE =	'%@', PMSTRIKEPOINT =	'%@', PMSTRIKEPOINTLINECODE = '%@' , PMX1  =	'%@',PMY1 = '%@',PMX2  =	'%@',PMY2  = '%@', PMX3   =	'%@', PMY3  =	'%@', WWREGION  =	'%@', WWX1  =	'%@', WWY1 = '%@', WWX2 =	'%@', WWY2  =	'%@', BALLDURATION  =	'%@', ISAPPEAL  =	'%@', ISBEATEN  =	'%@', ISUNCOMFORT  =	'%@', ISWTB =	'%@', ISRELEASESHOT  =	'%@', MARKEDFOREDIT   =	'%@', REMARKS	 =	'%@', BALLSPEED =   '%@', UNCOMFORTCLASSIFCATION	=	'%@' WHERE COMPETITIONCODE   =	'%@' AND   MATCHCODE   =	'%@' AND   TEAMCODE  =	'%@' AND   INNINGSNO =	'%@' AND   BALLCODE =	'%@'",STRIKERCODE,NONSTRIKERCODE,BOWLERCODE,WICKETKEEPERCODE,UMPIRE1CODE,UMPIRE2CODE,ATWOROTW,BOWLINGEND,BOWLTYPE,SHOTTYPE,SHOTTYPECATEGORY,ISLEGALBALL,ISFOUR,ISSIX,RUNS,OVERTHROW,TOTALRUNS,WIDE,NOBALL,BYES,LEGBYES,PENALTY,TOTALEXTRAS,GRANDTOTAL,RBW,PMLINECODE,PMLENGTHCODE,PMSTRIKEPOINT,PMSTRIKEPOINTLINECODE,PMX1,PMY1,PMX2,PMY2,PMX3,PMY3,WWREGION,WWX1,WWY1,WWX2,WWY2,BALLDURATION,ISAPPEAL,ISBEATEN,ISUNCOMFORT,ISWTB,ISRELEASESHOT,MARKEDFOREDIT,REMARKS,BALLSPEED,UNCOMFORTCLASSIFCATION,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,BALLCODE];
-        
-        const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
-            sqlite3_reset(statement);
-            
-            return YES;
-            
-        }
-        else {
-            sqlite3_reset(statement);
-            NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
-            return NO;
-        }
-    }
-    sqlite3_reset(statement);
-    return NO;
-}
 
 
 +(BOOL)  DeleteRemoveUnusedBatFBSUpdateScoreEngine : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSString*) INNINGSNO

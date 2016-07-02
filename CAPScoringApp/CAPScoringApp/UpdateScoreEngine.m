@@ -266,7 +266,7 @@ EndInnings *insertScoreBoard;
     
     F_WICKETTYPE = [ DBManagerEndBall GetWicTypeUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
     
-    ISWICKET =  [NSNumber numberWithInt:1];
+   
     if(ISWICKET.intValue == 1)
     {
         
@@ -285,7 +285,8 @@ EndInnings *insertScoreBoard;
         
         WICKETPLAYER =[ DBManagerEndBall GetWicPlayersUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO : BALLCODE ];
         
-        ISWICKETUNDO = [NSNumber numberWithInt:1];
+       
+        
         if(ISWICKETUNDO.intValue == 1)
         {
             WICKETNO = [ DBManagerEndBall GetWicketNoUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO : BALLCODE];
