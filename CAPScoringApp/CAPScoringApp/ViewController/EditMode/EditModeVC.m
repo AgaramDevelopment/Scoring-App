@@ -37,6 +37,7 @@
     int EachoverWicketCount;
     UIButton *btn_Run;
     NSInteger ballCodeIndex;
+    int indexCount ;
 }
 
 @end
@@ -44,6 +45,7 @@
 @implementation EditModeVC
 
 - (void)viewDidLoad {
+     indexCount = 0;
     [super viewDidLoad];
     [self customnavigationmethod];
     inningsDetail =[[NSMutableArray alloc]init];
@@ -414,7 +416,12 @@
     btn_Run.layer.borderWidth=2;
     btn_Run.layer.borderColor= [UIColor redColor].CGColor;
     btn_Run.layer.masksToBounds=YES;
-    btn_Run.tag =currentindex;
+    //btn_Run.tag =currentindex;
+    indexCount++;
+
+    btn_Run.tag = indexCount;
+    
+    
     [btn_Run addTarget:self action:@selector(didClickEditAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [cell.view_main addSubview:btn_Run];
@@ -524,6 +531,10 @@
         if ([classStr isEqualToString:@"UIButton"]) {
             
             UIButton *button = (UIButton*)obj;
+            
+//            int overIndex = ((senderButton.tag-30000)%10000)/10;
+//            int ballIndex = ((senderButton.tag-(overIndex*10))-30000)/10000;
+//            
             if(btn_Run.tag == button.tag)
             {
                button.layer.borderWidth = 2.0;
@@ -535,8 +546,12 @@
 
 -(IBAction)didClickEditrotation:(id)sender
 {
- 
-    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
+   
+//
+//    int overIndex = ((senderButton.tag-30000)%10000)/10;
+//    int ballIndex = ((senderButton.tag-(overIndex*10))-30000)/10000;
+// 
+    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
     ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
     
     scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];

@@ -90,7 +90,7 @@
 +(NSMutableArray *)getAggressiveShotType;
 +(NSMutableArray *)getDefenceShotType;
 +(NSMutableArray *)RetrieveFieldingFactorData;
-+(NSMutableArray *)RetrieveFieldingPlayerData;
++(NSMutableArray *)RetrieveFieldingPlayerData : (NSString *) MATCHCODE : (NSString *) TEAMCODE ;
 
 
 // playerOrderlevel
@@ -102,7 +102,8 @@
 
 //Wicket type
 +(NSMutableArray *)RetrieveWicketType;
-+(NSMutableArray *)RetrievePlayerData;
+//+(NSMutableArray *)RetrievePlayerData;
++(NSMutableArray *)RetrievePlayerData: (NSString *) MATCHCODE :(NSString *) TeamCODE;
 
 
 

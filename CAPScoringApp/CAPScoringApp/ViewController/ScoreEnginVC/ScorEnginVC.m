@@ -515,6 +515,30 @@ EndInnings *endInnings;
     [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode :self.editBallCode];
     
     
+    //Wicket
+    NSMutableArray *getWickets = [fetchSeBallCodeDetails GetWicketEventDetailsArray];
+    if(getWickets.count>0){
+        [self selectedViewBg:_btn_wkts];
+        
+    }
+    
+    GetSEWicketDetailsForWicketEvents
+    //Appeals
+    NSMutableArray *getAppealArray = [fetchSeBallCodeDetails GetAppealDetailsForAppealEventsArray];
+    if(getAppealArray.count>0){
+        
+    }
+    GetSEAppealDetailsForAppealEvents
+    //Penalty
+    //GetSEPenaltyDetailsForPenaltyEvents
+    
+    //Fielding
+    NSMutableArray *fieldingFactorArray = [fetchSeBallCodeDetails getFieldingFactorArray];
+    if(fieldingFactorArray.count>0){
+        
+    }
+    
+    
     //Set data for Fetch SE page load
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     
@@ -648,11 +672,11 @@ EndInnings *endInnings;
     self.ballEventRecord.objBowlingEnd =getBallDetailsForBallEventsBE.BOWLINGEND;
     //self.ballEventRecord.bow =getBallDetailsForBallEventsBE.BOWLTYPECODE;
     
-    self.ballEventRecord.objBowltype =getBallDetailsForBallEventsBE.BOWLTYPE;
+    self.ballEventRecord.objBowltype =getBallDetailsForBallEventsBE.BOWLTYPECODE;
     //self.ballEventRecord.bow =getBallDetailsForBallEventsBE.BOWLERTYPE;
     //self.ballEventRecord.objShottype =getBallDetailsForBallEventsBE.SHOTCODE;
     //self.ballEventRecord.objInningsno =getBallDetailsForBallEventsBE.SHOTNAME;
-    self.ballEventRecord.objShottype =getBallDetailsForBallEventsBE.SHOTTYPE;
+    self.ballEventRecord.objShottype =getBallDetailsForBallEventsBE.SHOTCODE;
     self.ballEventRecord.objShorttypecategory =getBallDetailsForBallEventsBE.SHOTTYPECATEGORY;
     self.ballEventRecord.objIslegalball =getBallDetailsForBallEventsBE.ISLEGALBALL;
     self.ballEventRecord.objIsFour =getBallDetailsForBallEventsBE.ISFOUR;
@@ -710,12 +734,12 @@ EndInnings *endInnings;
     
     //Appeal
     if(self.ballEventRecord.objIsappeal.intValue == 1){
-        [self selectedViewBg:_View_Appeal];
+        [self selectedViewBg:_view_appeal];
     }
     
     //Remark
     if(self.ballEventRecord.objRemark!=nil && ![self.ballEventRecord.objRemark isEqual:@""]){
-        //[self selectedViewBg:_View_remark];
+        [self selectedViewBg:_view_remark];
     }
     
     //Overthrow
@@ -767,36 +791,38 @@ EndInnings *endInnings;
     }
     
     
-    //Short type
-    
-    if ([ self.ballEventRecord.objShottype isEqual: @"MSC005"])//Aggressive
-    {
-        [self selectedViewBg:_view_aggressive];
-    }
-    else if ([ self.ballEventRecord.objShottype isEqual:  @"MSC006"])//Defensive
-    {
-        [self selectedViewBg:_view_defensive];
-    }
-    
-    
-    //Bowl type
-    if ([ self.ballEventRecord.objBowltype isEqual: @"MSC015"])//Fast
-    {
-       [self selectedViewBg:_view_fast];
-    }
-    else if ([ self.ballEventRecord.objBowltype isEqual: @"MSC016"])//Spin
-    {
-       [self selectedViewBg:_view_spin];
-    }
+//    //Short type
+//    
+//    if ([ getBallDetailsForBallEventsBE.BOWLERTYPE isEqual: @"MSC005"])//Aggressive
+//    {
+//        [self selectedViewBg:_view_aggressive];
+//    }
+//    else if ([ self.ballEventRecord.objShottype isEqual:  @"MSC006"])//Defensive
+//    {
+//        [self selectedViewBg:_view_defensive];
+//    }
+//    
+//    
+//    //Bowl type
+//    if ([ self.ballEventRecord.objBowltype isEqual: @"MSC015"])//Fast
+//    {
+//       [self selectedViewBg:_view_fast];
+//    }
+//    else if ([ self.ballEventRecord.objBowltype isEqual: @"MSC016"])//Spin
+//    {
+//       [self selectedViewBg:_view_spin];
+//    }
 
     
     
     //Mark for edit
     if(self.ballEventRecord.objMarkedforedit.integerValue == 1){
-        
+         [self selectedViewBg:_view_medit];
     }
     
     //Runs
+    
+    int runs =0;
     
         if (self.ballEventRecord.objNoball.intValue !=0)
         {
@@ -809,16 +835,17 @@ EndInnings *endInnings;
                       [self selectedViewBg:_btn_run2];
                 else if (self.ballEventRecord.objNoball.intValue  - 1 == 3)
                       [self selectedViewBg:_btn_run3];
-                self.ballEventRecord.objRuns = [NSNumber numberWithInt: self.ballEventRecord.objNoball.intValue  - 1];
+                //self.ballEventRecord.objRuns = [NSNumber numberWithInt: self.ballEventRecord.objNoball.intValue  - 1];
+               runs = self.ballEventRecord.objNoball.intValue  - 1;
             }
             [self selectedViewBg:_btn_extras];
-            isExtrasSelected = YES;
+            //isExtrasSelected = YES;
             self.ballEventRecord.objIslegalball = [NSNumber numberWithInt: 0];
         }
         if (self.ballEventRecord.objWide.intValue !=0)
         {
             [self selectedViewBg: _btn_extras];
-            isExtrasSelected = YES;
+           // isExtrasSelected = YES;
             self.ballEventRecord.objIslegalball = [NSNumber numberWithInt: 0];
             
             if (self.ballEventRecord.objWide.intValue  > 1 && self.ballEventRecord.objRuns.intValue == 0)
@@ -830,7 +857,8 @@ EndInnings *endInnings;
                     [self selectedViewBg:_btn_run2];
                 else if (self.ballEventRecord.objWide.intValue  - 1 == 3)
                     [self selectedViewBg:_btn_run3];
-                self.ballEventRecord.objRuns = [NSNumber numberWithInt: self.ballEventRecord.objWide.intValue  - 1];
+                //self.ballEventRecord.objRuns = [NSNumber numberWithInt: self.ballEventRecord.objWide.intValue  - 1];
+                runs = self.ballEventRecord.objWide.intValue  - 1;
             }
             
             
@@ -846,15 +874,16 @@ EndInnings *endInnings;
         if (self.ballEventRecord.objLegByes.intValue !=0)
         {
             [self selectedViewBg: _btn_extras];
-isExtrasSelected = YES;
+//isExtrasSelected = YES;
             if (self.ballEventRecord.objLegByes.intValue  > 0 && self.ballEventRecord.objRuns.intValue  == 0)
             {
-                self.ballEventRecord.objRuns = [NSNumber numberWithInt:self.ballEventRecord.objLegByes.intValue - self.ballEventRecord.objOverthrow.intValue];
-                if (self.ballEventRecord.objRuns.intValue == 1)
+               // self.ballEventRecord.objRuns = [NSNumber numberWithInt:self.ballEventRecord.objLegByes.intValue - self.ballEventRecord.objOverthrow.intValue];
+                 runs =  self.ballEventRecord.objLegByes.intValue - self.ballEventRecord.objOverthrow.intValue;
+                if (runs == 1)
                     [self selectedViewBg:_btn_run1];
-                else if (self.ballEventRecord.objRuns.intValue == 2)
+                else if (runs == 2)
                     [self selectedViewBg:_btn_run2];
-                else if (self.ballEventRecord.objRuns.intValue == 3)
+                else if (runs == 3)
                     [self selectedViewBg:_btn_run3];
             }
             [self disableButtonBg :_btn_B6];
@@ -865,15 +894,16 @@ isExtrasSelected = YES;
         if (self.ballEventRecord.objByes.intValue !=0)
         {
             [self selectedViewBg: _btn_extras];
-            isExtrasSelected = YES;
+           // isExtrasSelected = YES;
             if (self.ballEventRecord.objByes.intValue > 0 && self.ballEventRecord.objRuns.intValue == 0)
             {
-                self.ballEventRecord.objRuns = [NSNumber numberWithInt: self.ballEventRecord.objByes.intValue - self.ballEventRecord.objOverthrow.intValue];
-                if (self.ballEventRecord.objRuns.intValue == 1)
+                //self.ballEventRecord.objRuns = [NSNumber numberWithInt: self.ballEventRecord.objByes.intValue - self.ballEventRecord.objOverthrow.intValue];
+                runs = self.ballEventRecord.objByes.intValue - self.ballEventRecord.objOverthrow.intValue;
+                if (runs == 1)
                     [self selectedViewBg:_btn_run1];
-                else if (self.ballEventRecord.objRuns.intValue == 2)
+                else if (runs == 2)
                     [self selectedViewBg:_btn_run2];
-                else if (self.ballEventRecord.objRuns.intValue == 3)
+                else if (runs == 3)
                     [self selectedViewBg:_btn_run3];
             }
             [self disableButtonBg :_btn_B6];
@@ -895,7 +925,7 @@ isExtrasSelected = YES;
     {
         
         [self selectedViewBg: _btn_B6];
-        isExtrasSelected = YES;
+        //isExtrasSelected = YES;
         
         self.ballEventRecord.objIssix = [NSNumber numberWithInt: 1];
         
@@ -918,9 +948,9 @@ isExtrasSelected = YES;
         else if (self.ballEventRecord.objRuns.intValue == 3)
             [self selectedViewBg:_btn_run3];
         
-        self.ballEventRecord.objRuns = [NSNumber numberWithInt:self.ballEventRecord.objRuns.intValue + self.ballEventRecord.objRuns.intValue];
+        runs = runs + self.ballEventRecord.objRuns.intValue;
         
-        if (self.ballEventRecord.objRuns.intValue > 3)
+        if (runs > 3)
         {
             
             //Set down toggle image
@@ -935,20 +965,23 @@ isExtrasSelected = YES;
             [self.btn_B4 setTitle:@"7" forState:UIControlStateNormal];
             [self.btn_B6 setTitle:@"8" forState:UIControlStateNormal];
             
-            if (self.ballEventRecord.objRuns.intValue == 4)
+            if (runs == 4)
                 [self selectedViewBg:_btn_run1];
-            else if (self.ballEventRecord.objRuns.intValue == 5)
+            else if (runs == 5)
                 [self selectedViewBg:_btn_run2];
-            else if (self.ballEventRecord.objRuns.intValue == 6)
+            else if (runs == 6)
                 [self selectedViewBg:_btn_run3];
-            else if (self.ballEventRecord.objRuns.intValue == 7)
+            else if (runs == 7)
                 [self selectedViewBg:_btn_B4];
-            else if (self.ballEventRecord.objRuns.intValue == 8)
+            else if (runs == 8)
                 [self selectedViewBg:_btn_B6];
             
         }
         
     }
+    self.ballEventRecord.objRuns = [NSNumber numberWithInt:runs];
+    
+    
     //RBW
     if(self.ballEventRecord.objRbw.integerValue!=0){
         [self selectedViewBg:_view_Rbw];
@@ -958,21 +991,25 @@ isExtrasSelected = YES;
     if ([getBallDetailsForBallEventsBE.BOWLERTYPE isEqual: @"MSC015"])//Fast
     {
        [self selectedViewBg:_view_fast];
+        isFastSelected = YES;
     }
     else if ([getBallDetailsForBallEventsBE.BOWLERTYPE isEqual: @"MSC016"])//Spin
     {
       [self selectedViewBg:_view_spin];
+        isSpinSelected = YES;
     }
 
     
     if ([getBallDetailsForBallEventsBE.SHOTTYPE isEqual: @"MSC005"])//Aggressive
     {
         [self selectedViewBg:_view_aggressive];
+        isAggressiveSelected = YES;
 
     }
     else if ([getBallDetailsForBallEventsBE.SHOTTYPE isEqual: @"MSC006"])//Defensive
     {
-        [self selectedViewBg:_view_defensive];
+        [self selectedViewBg:_view_defense];
+        isDefensiveSelected = YES;
 
     }
     
@@ -3019,6 +3056,8 @@ isExtrasSelected = YES;
     self.img_pichmap.hidden=YES;
     self.PichMapTittle.hidden=YES;
     self.view_Wagon_wheel.hidden=YES;
+    self.objcommonRemarkview.hidden=YES;
+
     
     //    if(extrasTableView !=nil){
     //        [extrasTableView removeFromSuperview];
@@ -4468,6 +4507,8 @@ isExtrasSelected = YES;
     self.img_pichmap.hidden=YES;
     self.PichMapTittle.hidden=YES;
     self.view_Wagon_wheel.hidden=YES;
+    self.objcommonRemarkview.hidden=YES;
+
     
     if(isExtrasSelected && selectBtnTag.tag!=106){//Already open state
         
@@ -4565,13 +4606,32 @@ isExtrasSelected = YES;
         
         if(isSpinSelected){
             
-            NSInteger position = [self.bowlTypeArray indexOfObject:self.ballEventRecord.objBowltype];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
-            [tbl_bowlType selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+           // NSInteger position = [self.bowlTypeArray indexOfObject:self.ballEventRecord.objBowltype];
             
-            [tbl_bowlType scrollToRowAtIndexPath:indexPath
+            
+            
+            int indx=0;
+            int selectePosition = -1;
+            for (BowlAndShotTypeRecords *record in self.bowlTypeArray)
+            {
+                bool chk = ([[record BowlTypeCode] isEqualToString:self.ballEventRecord.objBowltype]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    break;
+                }
+                indx ++;
+            }
+            
+            if(selectePosition!=-1){
+            
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+                [tbl_bowlType selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            
+                [tbl_bowlType scrollToRowAtIndexPath:indexPath
                                 atScrollPosition:UITableViewScrollPositionTop
                                         animated:YES];
+            }
         }else{
             self.ballEventRecord.objBowltype = nil;
             [tbl_bowlType reloadData];
@@ -4595,16 +4655,31 @@ isExtrasSelected = YES;
         
         if(isFastSelected){
             
-            NSInteger position = [self.bowlTypeArray indexOfObject:self.ballEventRecord.objBowltype];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
-            [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
             
-            [tbl_fastBowl scrollToRowAtIndexPath:indexPath
+            int indx=0;
+            int selectePosition = -1;
+            for (BowlAndShotTypeRecords *record in self.bowlTypeArray)
+            {
+                bool chk = ([[record BowlTypeCode] isEqualToString:self.ballEventRecord.objBowltype]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    break;
+                }
+                indx ++;
+            }
+            
+            if(selectePosition!=-1){
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+                [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+            
+                [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                 atScrollPosition:UITableViewScrollPositionTop
                                         animated:YES];
+            }
         }else{
             self.ballEventRecord.objBowltype = nil;
-            [tbl_bowlType reloadData];
+            [tbl_fastBowl reloadData];
         }
         
         //View
@@ -4624,13 +4699,29 @@ isExtrasSelected = YES;
         
         if(isAggressiveSelected){
             
-            NSInteger position = [self.aggressiveShotTypeArray indexOfObject:self.ballEventRecord.objShottype];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
+            int indx=0;
+            int selectePosition = -1;
+            for (BowlAndShotTypeRecords *record in self.aggressiveShotTypeArray)
+            {
+                bool chk = ([[record ShotType] isEqualToString:self.ballEventRecord.objShottype]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    break;
+                }
+                indx ++;
+            }
+            
+            if(selectePosition!=-1){
+            
+         //   NSInteger position = [self.aggressiveShotTypeArray indexOfObject:self.ballEventRecord.objShottype];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
             [tbl_aggressiveShot selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
             
             [tbl_aggressiveShot scrollToRowAtIndexPath:indexPath
                                       atScrollPosition:UITableViewScrollPositionTop
                                               animated:YES];
+            }
         }else{
             self.ballEventRecord.objShottype = nil;
             [tbl_aggressiveShot reloadData];
@@ -4645,7 +4736,7 @@ isExtrasSelected = YES;
         
         
     }
-    else if(selectBtnTag.tag==117)
+    else if(selectBtnTag.tag==117)//Defensive
     {
         //[self selectBtncolor_Action:@"117" :nil :206];
         self.view_defensive.hidden = NO;
@@ -4655,13 +4746,29 @@ isExtrasSelected = YES;
         
         if(isDefensiveSelected){
             
-            NSInteger position = [self.defensiveShotTypeArray indexOfObject:self.ballEventRecord.objShottype];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
+            int indx=0;
+            int selectePosition = -1;
+            for (BowlAndShotTypeRecords *record in self.defensiveShotTypeArray)
+            {
+                bool chk = ([[record ShotType] isEqualToString:self.ballEventRecord.objShottype]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    break;
+                }
+                indx ++;
+            }
+            
+            if(selectePosition!=-1){
+
+          //  NSInteger position = [self.defensiveShotTypeArray indexOfObject:self.ballEventRecord.objShottype];
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
             [_tbl_defensive selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
             
             [_tbl_defensive scrollToRowAtIndexPath:indexPath
                                   atScrollPosition:UITableViewScrollPositionTop
                                           animated:YES];
+            }
         }else{
             self.ballEventRecord.objShottype = nil;
             [_tbl_defensive reloadData];
@@ -4772,12 +4879,19 @@ isExtrasSelected = YES;
                 NSInteger position = [self.rbwOptionArray indexOfObject:self.ballEventRecord.objRbw];
                 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
                 [rbwTableview selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                [rbwTableview scrollToRowAtIndexPath:indexPath
+                                      atScrollPosition:UITableViewScrollPositionTop
+                                              animated:YES];
+
             }
         }
     }
     else if(selectBtnTag.tag==120)
     {
        //  [self selectBtncolor_Action:@"120" :nil :209];
+        
+        
+        [self selectedViewBg: _view_remark];
          [self RemarkMethode];
         
     }
@@ -4794,6 +4908,7 @@ isExtrasSelected = YES;
         self.view_defensive.hidden = YES;
         self.view_bowlType.hidden = YES;
         self.view_fastBowl.hidden = YES;
+        [self selectedViewBg:_view_appeal];
         
     }
     else if(selectBtnTag.tag==123)
@@ -4998,6 +5113,8 @@ isExtrasSelected = YES;
     self.ballEventRecord.objPenalty = [NSNumber numberWithInt:0];;
     self.ballEventRecord.objTotalextras = [NSNumber numberWithInt:0];;
     self.ballEventRecord.objGrandtotal = [NSNumber numberWithInt:0];
+    
+    self.ballEventRecord.objRemark = @"";
     
     
     
@@ -5899,7 +6016,7 @@ isExtrasSelected = YES;
         selectedwickettype = [self.WicketTypeArray objectAtIndex:indexPath.row];
         if([selectedwickettype.metasubcode isEqualToString:@"MSC097"]|| [selectedwickettype.metasubcode isEqualToString:@"MSC106"])
         {
-            self.StrikerandNonStrikerArray=[[NSMutableArray alloc]initWithObjects:@"ABHINAV MUKHUND",@"APARAJITH BABA", nil];
+            self.StrikerandNonStrikerArray=[[NSMutableArray alloc]initWithObjects:fetchSEPageLoadRecord.strickerPlayerName,fetchSEPageLoadRecord.nonstrickerPlayerName, nil];
             isWicketSelected = YES;
             wicketOption = 2;
             
@@ -5977,7 +6094,8 @@ isExtrasSelected = YES;
             if([selectedwickettype.metasubcode isEqualToString:@"MSC097"]|| [selectedwickettype.metasubcode isEqualToString:@"MSC095"])
             {
         _PlayerlistArray=[[NSMutableArray alloc]init];
-        _PlayerlistArray =[DBManager RetrievePlayerData];
+               // _PlayerlistArray =[DBManager RetrievePlayerData:self.ma];
+                 _PlayerlistArray=[DBManager RetrievePlayerData:self.matchCode :fetchSEPageLoadRecord.BOWLINGTEAMCODE];
         
         isWicketSelected = YES;
         wicketOption = 4;
@@ -6044,8 +6162,8 @@ isExtrasSelected = YES;
         selectedfieldFactor = [self.fieldingfactorArray objectAtIndex:indexPath.row];
         
         _fieldingPlayerArray=[[NSMutableArray alloc]init];
-        _fieldingPlayerArray =[DBManager RetrieveFieldingPlayerData];
-        
+        _fieldingPlayerArray =[DBManager RetrieveFieldingPlayerData:self.matchCode:fetchSEPageLoadRecord.BATTINGTEAMCODE];
+
         isFieldingSelected = YES;
         fieldingOption = 2;
         
