@@ -922,9 +922,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "501"
-            endingLineNumber = "501"
-            landmarkName = "-UpdateScoreBoard::::::::::::::::::::::::::::"
-            landmarkType = "5">
+            endingLineNumber = "501">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -938,9 +936,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "477"
-            endingLineNumber = "477"
-            landmarkName = "-UpdateScoreBoard::::::::::::::::::::::::::::"
-            landmarkType = "5">
+            endingLineNumber = "477">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -954,9 +950,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "234"
-            endingLineNumber = "234"
-            landmarkName = "-UpdateScoreEngine:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-            landmarkType = "5">
+            endingLineNumber = "234">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -970,9 +964,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "269"
-            endingLineNumber = "269"
-            landmarkName = "-UpdateScoreEngine:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-            landmarkType = "5">
+            endingLineNumber = "269">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -986,9 +978,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "303"
-            endingLineNumber = "303"
-            landmarkName = "-UpdateScoreEngine:::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::"
-            landmarkType = "5">
+            endingLineNumber = "303">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1002,9 +992,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "538"
-            endingLineNumber = "538"
-            landmarkName = "-UpdateScoreBoard::::::::::::::::::::::::::::"
-            landmarkType = "5">
+            endingLineNumber = "538">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1018,9 +1006,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "591"
-            endingLineNumber = "591"
-            landmarkName = "-UpdateScoreBoard::::::::::::::::::::::::::::"
-            landmarkType = "5">
+            endingLineNumber = "591">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1066,9 +1052,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "672"
-            endingLineNumber = "672"
-            landmarkName = "-UpdateScoreBoard::::::::::::::::::::::::::::"
-            landmarkType = "5">
+            endingLineNumber = "672">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
