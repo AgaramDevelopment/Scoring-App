@@ -59,10 +59,7 @@
 #import "ScoreEnginEditRecord.h"
 #import "ChangeTeamVC.h"
 #import "InsertSEScoreEngine.h"
-#import "UpdateScoreEngine.h"
-#import "ArchivesVC.h"
-#import "ChangeTossVC.h"
-#import "FollowOn.h"
+#import "Other_WicketgridVC.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -185,6 +182,7 @@
 
     PowerPlayGridVC *powerplaygridvc;
     Other_WicketVC *otherwicketvc;
+    Other_WicketgridVC *otherwikcetgricvc;
     RevicedOverVC * revicedOverVc ;
     RevisedTarget  *revisedTarget;
     PenalityVC *penalityVc;
@@ -6266,7 +6264,7 @@ EndInnings *endInnings;
             }
  
         } else{
-            self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Typical",@"Strong",@"Medium", nil];
+            self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Tough",@"Strong",@"Medium", nil];
             
              [self disableButtonBg:self.btn_B6];
              [self disableButtonBg:self.btn_B4];
@@ -7353,13 +7351,20 @@ EndInnings *endInnings;
 }
 -(void)OtherWicket
 {
-    otherwicketvc = [[Other_WicketVC alloc]initWithNibName:@"Other_WicketVC" bundle:nil];
-    otherwicketvc.COMPETITIONCODE=self.competitionCode;
-    otherwicketvc.MATCHCODE =self.matchCode;
- otherwicketvc.INNINGSNO =fetchSEPageLoadRecord.INNINGSNO;
-    otherwicketvc.TEAMCODE=fetchSEPageLoadRecord.BATTINGTEAMCODE;
-    otherwicketvc.STRIKERCODE=fetchSEPageLoadRecord.strickerPlayerCode;
-    otherwicketvc.NONSTRIKERCODE=fetchSEPageLoadRecord.nonstrickerPlayerCode;
+    otherwikcetgricvc = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
+    otherwikcetgricvc.COMPETITIONCODE=self.competitionCode;
+    otherwikcetgricvc.MATCHCODE =self.matchCode;
+    otherwikcetgricvc.INNINGSNO =fetchSEPageLoadRecord.INNINGSNO;
+    otherwikcetgricvc.TEAMCODE=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    otherwikcetgricvc.STRIKERCODE=fetchSEPageLoadRecord.strickerPlayerCode;
+    otherwikcetgricvc.NONSTRIKERCODE=fetchSEPageLoadRecord.nonstrickerPlayerCode;
+    otherwikcetgricvc.MAXOVER=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS];
+    otherwikcetgricvc.MAXBALL=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+    otherwikcetgricvc.BALLCOUNT=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
+    otherwikcetgricvc.N_WICKETNO=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMWICKETS];
+    otherwikcetgricvc.BALLCODE=fetchSEPageLoadRecord.BOWLTYPECODE;
+    
+    
   //  otherwicketvc.PLAYERNAME=
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
@@ -7368,16 +7373,16 @@ EndInnings *endInnings;
     [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:fullview];
-    [fullview addSubview:otherwicketvc.view];
+    [fullview addSubview:otherwikcetgricvc.view];
     
-    otherwicketvc.view.frame =CGRectMake(90, 200, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
+    otherwikcetgricvc.view.frame =CGRectMake(90, 200, otherwikcetgricvc.view.frame.size.width, otherwikcetgricvc.view.frame.size.height);
     
-    otherwicketvc.view.alpha = 0;
-    [otherwicketvc didMoveToParentViewController:self];
+    otherwikcetgricvc.view.alpha = 0;
+    [otherwikcetgricvc didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
      {
-         otherwicketvc.view.alpha = 1;
+         otherwikcetgricvc.view.alpha = 1;
      }
                      completion:nil];
     
@@ -7385,26 +7390,26 @@ EndInnings *endInnings;
     
     if (IS_IPAD_PRO) {
         
-        otherwicketvc.view.frame =CGRectMake(250, 500, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
-        otherwicketvc.view.alpha = 0;
-        [otherwicketvc didMoveToParentViewController:self];
+        otherwikcetgricvc.view.frame =CGRectMake(250, 500, otherwikcetgricvc.view.frame.size.width, otherwikcetgricvc.view.frame.size.height);
+        otherwikcetgricvc.view.alpha = 0;
+        [otherwikcetgricvc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             otherwicketvc.view.alpha = 1;
+             otherwikcetgricvc.view.alpha = 1;
          }
                          completion:nil];
     }
     
     
     else{
-        otherwicketvc.view.frame =CGRectMake(100, 200, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
-        otherwicketvc.view.alpha = 0;
-        [otherwicketvc didMoveToParentViewController:self];
+        otherwikcetgricvc.view.frame =CGRectMake(100, 200, otherwikcetgricvc.view.frame.size.width, otherwikcetgricvc.view.frame.size.height);
+        otherwikcetgricvc.view.alpha = 0;
+        [otherwikcetgricvc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             otherwicketvc.view.alpha = 1;
+             otherwikcetgricvc.view.alpha = 1;
          }
                          completion:nil];
     }
