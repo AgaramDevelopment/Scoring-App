@@ -109,7 +109,7 @@
 +(NSMutableArray *) GetSpinSpeedBallDetailsForMetadata;
 
 +(NSMutableArray *) GetFastSpeedBallDetailsForMetadata;
-
++(NSMutableArray *) getFieldingFactorDetails:(NSString*) COMPETITIONCODE :(NSString*) MATCHCODE :(NSString*) TEAMCODE :(NSString*) BALLCODE;
 
 
 @end

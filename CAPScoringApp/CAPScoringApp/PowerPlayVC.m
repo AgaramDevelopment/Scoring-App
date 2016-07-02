@@ -12,6 +12,8 @@
 #import "PowerPlayGridVC.h"
 #import "DBManager.h"
 #import "Reachability.h"
+#import "AppDelegate.h"
+#import "Utitliy.h"
 
 
 @interface PowerPlayVC ()<UITableViewDataSource,UITableViewDelegate>
@@ -42,38 +44,42 @@ NSString *matchover;
 @synthesize powerplaystartover;
 @synthesize powerplayendover;
 @synthesize powerplaytyp;
+@synthesize powerplaycode;
+@synthesize recordstatus;
+@synthesize userid;
+@synthesize operationtype;
 
 
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-      matchover=[DBManager SetMatchRegistration:self.matchCode];
+    // matchover=[DBManager SetMatchRegistration:self.matchCode];
     if(powerplaystartover != nil){
-    
-       txt_startover.text = powerplaystartover;
-       txt_endover.text = powerplayendover;
-       self.lbl_setpowerplay.text = powerplaytyp;
- 
-    [self.btn_submit setTitle:@"Update" forState:UIControlStateNormal];
+        
+        txt_startover.text = powerplaystartover;
+        txt_endover.text = powerplayendover;
+        self.lbl_setpowerplay.text = powerplaytyp;
+        
+        [self.btn_submit setTitle:@"Update" forState:UIControlStateNormal];
     }
     
-  
-   
+    
+    
     
     [self.txt_startover.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
-     self.txt_startover.layer.borderWidth=2;
+    self.txt_startover.layer.borderWidth=2;
     
     [self.txt_endover.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
-     self.txt_endover.layer.borderWidth=2;
+    self.txt_endover.layer.borderWidth=2;
     
     [self.view_powerplaytype.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
-     self.view_powerplaytype.layer.borderWidth=2;
+    self.view_powerplaytype.layer.borderWidth=2;
     
     self.tbl_powerplaytype.hidden=YES;
     
-     PowerPlayData = [DBManager fetchpowerplaytype];
-  
+    PowerPlayData = [DBManager fetchpowerplaytype];
+    
 }
 
 
@@ -116,16 +122,16 @@ NSString *matchover;
     
     
     return cell;
-
+    
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//    powerplayvalue=[PowerPlayData objectAtIndex:indexPath.row];
-//    self.lbl_setpowerplay.text =powerplayvalue;
-//
-//    self.tbl_powerplaytype.hidden=YES;
+    //    powerplayvalue=[PowerPlayData objectAtIndex:indexPath.row];
+    //    self.lbl_setpowerplay.text =powerplayvalue;
+    //
+    //    self.tbl_powerplaytype.hidden=YES;
     
     selectindexarray=[[NSMutableArray alloc]init];
     powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
@@ -187,40 +193,44 @@ NSString *matchover;
     
     if(powerplaystartover == nil){
         if([self formValidation]){
-       
-    PowerPlayRecord *powerplayrecord =[[PowerPlayRecord alloc]init];
-    
-    powerplayrecord.startover= txt_startover.text;
-    powerplayrecord.endover= txt_endover.text;
-    powerplayrecord.powerplaytypecode= powerplaytype;
-
-    
-    [DBManager SetPowerPlayDetails:@"PPC0000059":self.matchCode :self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.powerplaytypecode :@"MSC001" :@"user" :@"2016-06-22 16:37:00":@"user": @"2016-06-22 16:37:00"];
-    
-    [DBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
-    
-    PowerPlayGridVC *add = [[PowerPlayGridVC alloc]initWithNibName:@"PowerPlayGridVC" bundle:nil];
-    add.resultarray=powerplayarray;
-    
-    add.competitionCode=competitionCode;
-    add.matchCode=matchCode;
-    add.inningsNo=inningsNo;
-
-    [self addChildViewController:add];
-    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-    [self.view addSubview:add.view];
-    add.view.alpha = 0;
-    [add didMoveToParentViewController:self];
-    
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         add.view.alpha = 1;
-     }
-                     completion:nil];
+            
+            [self startService];
+            
+            PowerPlayRecord *powerplayrecord =[[PowerPlayRecord alloc]init];
+            
+            powerplayrecord.startover= txt_startover.text;
+            powerplayrecord.endover= txt_endover.text;
+            powerplayrecord.powerplaytypecode= powerplaytype;
+            
+            
+            [DBManager SetPowerPlayDetails:@"PPC0000059":self.matchCode :self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.powerplaytypecode :@"MSC001" :@"user" :@"2016-06-22 16:37:00":@"user": @"2016-06-22 16:37:00"];
+            
+            [DBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
+            
+            PowerPlayGridVC *add = [[PowerPlayGridVC alloc]initWithNibName:@"PowerPlayGridVC" bundle:nil];
+            add.resultarray=powerplayarray;
+            
+            add.competitionCode=competitionCode;
+            add.matchCode=matchCode;
+            add.inningsNo=inningsNo;
+            
+            [self addChildViewController:add];
+            add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+            [self.view addSubview:add.view];
+            add.view.alpha = 0;
+            [add didMoveToParentViewController:self];
+            
+            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+             {
+                 add.view.alpha = 1;
+             }
+                             completion:nil];
         }
-    
+        
     }else
     {
+        [self updateService];
+        
         PowerPlayRecord *powerplayrecord =[[PowerPlayRecord alloc]init];
         
         powerplayrecord.startover= txt_startover.text;
@@ -228,7 +238,7 @@ NSString *matchover;
         powerplayrecord.powerplaytype= powerplaytype;
         
         [DBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover  :powerplayrecord.endover :@"2016-06-25 16:37:00" :powerplayrecord.powerplaytype :@"MSC001" :@"user" :@"PPC0000059":self.matchCode];
-
+        
         [DBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
         
         PowerPlayGridVC *add = [[PowerPlayGridVC alloc]initWithNibName:@"PowerPlayGridVC" bundle:nil];
@@ -250,18 +260,16 @@ NSString *matchover;
          }
                          completion:nil];
     }
-
+    
 }
 
 - (IBAction)btn_delete:(id)sender {
+    [self DeleteService];
     PowerPlayRecord *powerplayrecord =[[PowerPlayRecord alloc]init];
     
     powerplayrecord.startover= txt_startover.text;
     powerplayrecord.endover= txt_endover.text;
     powerplayrecord.powerplaytype= powerplaytype;
-    
-    
-    //        [DBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover :powerplayrecord.endover : powerplayrecord.powerplaytype  :@"MSC001" :@"user" :@"PPC0000057" :self.matchCode];
     
     [DBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover  :powerplayrecord.endover :@"2016-06-25 16:37:00" :powerplayrecord.powerplaytype :@"MSC002" :@"user" :@"PPC0000059":self.matchCode];
     
@@ -285,9 +293,205 @@ NSString *matchover;
          add.view.alpha = 1;
      }
                      completion:nil];
-
-
+    
+    
 }
+
+//Check internet connection
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
+
+-(void) startService{
+    if(self.checkInternetConnection){
+        
+        
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        //Show indicator
+        [delegate showLoading];
+        //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        
+        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETPOWERPLAY/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],self.matchCode,self.inningsNo,txt_startover.text,txt_endover.text,powerplaytype,recordstatus,userid,powerplaycode,operationtype];
+        NSLog(@"-%@",baseURL);
+        
+        
+        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSURLResponse *response;
+        NSError *error;
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        
+        NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+        
+        if(rootArray !=nil && rootArray.count>0){
+            NSDictionary *valueDict = [rootArray objectAtIndex:0];
+            NSString *success = [valueDict valueForKey:@"DataItem"];
+            if([success isEqual:@"Success"]){
+                
+            }
+        }else{
+            
+        }
+        //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
+        //            NSLog(@"%@",errorCode);
+        //
+        //
+        //            if([errorCode boolValue] == YES)
+        //            {
+        //
+        //                BOOL isUserLogin = YES;
+        //
+        //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+        //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+        //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+        //                [[NSUserDefaults standardUserDefaults] synchronize];
+        //
+        //                [self openContentView];
+        //
+        //            }else{
+        //
+        //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+        //            }
+        [delegate hideLoading];
+        //});
+        
+        //[delegate hideLoading];
+    }
+}
+
+-(void) updateService{
+    if(self.checkInternetConnection){
+        
+        
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        //Show indicator
+        [delegate showLoading];
+        //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        
+        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETPOWERPLAY/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],self.matchCode,self.inningsNo,txt_startover.text,txt_endover.text,powerplaytype,recordstatus,userid,powerplaycode,operationtype];
+        NSLog(@"-%@",baseURL);
+        
+        
+        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSURLResponse *response;
+        NSError *error;
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        
+        NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+        
+        if(rootArray !=nil && rootArray.count>0){
+            NSDictionary *valueDict = [rootArray objectAtIndex:0];
+            NSString *success = [valueDict valueForKey:@"DataItem"];
+            if([success isEqual:@"Success"]){
+                
+            }
+        }else{
+            
+        }
+        //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
+        //            NSLog(@"%@",errorCode);
+        //
+        //
+        //            if([errorCode boolValue] == YES)
+        //            {
+        //
+        //                BOOL isUserLogin = YES;
+        //
+        //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+        //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+        //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+        //                [[NSUserDefaults standardUserDefaults] synchronize];
+        //
+        //                [self openContentView];
+        //
+        //            }else{
+        //
+        //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+        //            }
+        [delegate hideLoading];
+        //});
+        
+        //[delegate hideLoading];
+    }
+}
+
+
+
+
+-(void) DeleteService{
+    if(self.checkInternetConnection){
+        
+        
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        //Show indicator
+        [delegate showLoading];
+        //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        
+        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETPOWERPLAY/%@/%@/%@/%@/%@/@'MSC002'/%@/%@/%@",[Utitliy getIPPORT],self.matchCode,self.inningsNo,txt_startover.text,txt_endover.text,powerplaytype,recordstatus,userid,powerplaycode,operationtype];
+        NSLog(@"-%@",baseURL);
+        
+        
+        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        NSURLResponse *response;
+        NSError *error;
+        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        
+        NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+        
+        if(rootArray !=nil && rootArray.count>0){
+            NSDictionary *valueDict = [rootArray objectAtIndex:0];
+            NSString *success = [valueDict valueForKey:@"DataItem"];
+            if([success isEqual:@"Success"]){
+                
+            }
+        }else{
+            
+        }
+        //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
+        //            NSLog(@"%@",errorCode);
+        //
+        //
+        //            if([errorCode boolValue] == YES)
+        //            {
+        //
+        //                BOOL isUserLogin = YES;
+        //
+        //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+        //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+        //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+        //                [[NSUserDefaults standardUserDefaults] synchronize];
+        //
+        //                [self openContentView];
+        //
+        //            }else{
+        //
+        //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+        //            }
+        [delegate hideLoading];
+        //});
+        
+        //[delegate hideLoading];
+    }
+}
+
 
 
 - (IBAction)btn_back:(id)sender {

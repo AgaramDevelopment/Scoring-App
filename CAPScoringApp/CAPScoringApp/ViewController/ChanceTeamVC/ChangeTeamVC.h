@@ -7,8 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol ChangeTeamDelegate <NSObject>
+@required
+- (void) processSuccessful;
+@end
+@interface ChangeTeamVC : UIViewController
 
-@interface ChanceTeamVC : UIViewController
+@property(nonatomic,strong) id <ChangeTeamDelegate> delegate;
+
+
 @property(nonatomic,strong) NSString * compitionCode;
 @property(nonatomic,strong) NSString * MatchCode;
 

@@ -143,6 +143,11 @@
                 if (CheckStatus1==NO) {
                    [DBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
                 }
+                
+                else{ [DBMANAGERSYNC DELETECompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+                    [DBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
+                    
+                }
 
             
             }
@@ -172,6 +177,8 @@
                 if (CheckStatus1==NO) {
                  [DBMANAGERSYNC  InsertCompetitionTeamPlayer:COMPETITIONCODE:TEAMCODE:PLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
+                
+                
              
             }
             

@@ -14,6 +14,9 @@
 #import "CustomNavigationVC.h"
 #import "ArchivesVC.h"
 #import "Reachability.h"
+#import "AppDelegate.h"
+#import "Utitliy.h"
+#import "DBMANAGERSYNC.h"
 
 @interface TorunamentVC ()
 {
@@ -41,37 +44,37 @@
     [self.selectmatchTittleview.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.selectmatchTittleview .layer setMasksToBounds:YES];
    
-    if(self.checkInternetConnection)
-    {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        
-        UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-        refreshControl.tintColor = [UIColor greenColor];
-        refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
-        
-        
-        resultArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
-        for(int i=0; i < [FetchCompitionArray count]; i++)
-        {
-            
-            EventRecord *objEventRecord=(EventRecord*)[FetchCompitionArray objectAtIndex:i];
-            NSLog(@"%@",objEventRecord.recordstatus);
-            NSString *matchStatus=objEventRecord.recordstatus;
-            if([matchStatus isEqualToString:@"MSC001"])
-            {
-                [resultArray addObject:objEventRecord];
-            }
-            //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
-        }
-         [self.tableView addSubview:refresh];
-        
-        [self.tableView reloadData];
-        
-         [refreshControl endRefreshing];
-        
-         });
-    }
+//    if(self.checkInternetConnection)
+//    {
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//        
+//        UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+//        refreshControl.tintColor = [UIColor greenColor];
+//        refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+//        
+//        
+//        resultArray=[[NSMutableArray alloc]init];
+//        NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
+//        for(int i=0; i < [FetchCompitionArray count]; i++)
+//        {
+//            
+//            EventRecord *objEventRecord=(EventRecord*)[FetchCompitionArray objectAtIndex:i];
+//            NSLog(@"%@",objEventRecord.recordstatus);
+//            NSString *matchStatus=objEventRecord.recordstatus;
+//            if([matchStatus isEqualToString:@"MSC001"])
+//            {
+//                [resultArray addObject:objEventRecord];
+//            }
+//            //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
+//        }
+//         [self.tableView addSubview:refresh];
+//        
+//        [self.tableView reloadData];
+//        
+//         [refreshControl endRefreshing];
+//        
+//         });
+//    }
     
 }
 
@@ -188,8 +191,10 @@
 
 
 - (IBAction)Btn_touch:(id)sender {
+    
     if(isEnableTbl==YES)
     {
+        [self startService:@"DONE"];
         resultArray=[[NSMutableArray alloc]init];
         NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
         for(int i=0; i < [FetchCompitionArray count]; i++)
@@ -243,6 +248,116 @@ else{
     return networkStatus != NotReachable;
 }
 
+
+
+
+-(void) startService:(NSString *)OPERATIONTYPE{
+    if(self.checkInternetConnection){
+        
+              
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+            refreshControl.tintColor = [UIColor greenColor];
+            refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+            
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETACTIVECOMPETITION/0x0100000097280E95538D80384EE91904DFFEB95A342DCDBACE69FD7C182B75CE88068B18CB4CE5B1321EEBAF",[Utitliy getSyncIPPORT]];
+            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURLResponse *response;
+            NSError *error;
+            
+            NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            if (responseData != nil) {
+                
+                NSDictionary *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+              NSMutableArray *checkErrorItem=[serviceResponse objectForKey:@"lstErrorItem"];
+                
+                NSDictionary * ErrorNoDict =[checkErrorItem objectAtIndex:0];
+                
+                NSString *ErrorNoStr=[ErrorNoDict valueForKey:@"ErrorNo"];
+                NSString *message=[ErrorNoDict valueForKey:@"DataItem"];
+                NSString *CompareErrorno=@"MOB0005";
+                if ([ErrorNoStr isEqualToString:CompareErrorno]) {
+                    
+                  //Cometititon
+                    NSArray *temp =   [serviceResponse objectForKey:@"lstCompetition"];
+                     int i;
+                    for (i=0; i<[temp count]; i++) {
+                        NSDictionary*test=[temp objectAtIndex:i];
+                        NSString*COMPETITIONCODE=[test objectForKey:@"Competitioncode"];
+                        NSString *COMPETITIONNAME=[test objectForKey:@"Competitionname"];
+                        NSString *SEASON=[test objectForKey:@"Season"];
+                        NSString *TROPHY=[test objectForKey:@"Trophy"];
+                        NSString *STARTDATE=[test objectForKey:@"Startdate"];
+                        NSString *ENDDATE=[test objectForKey:@"Enddate"];
+                        NSString *MATCHTYPE=[test objectForKey:@"Matchtype"];
+                        NSString *ISOTHERSMATCHTYPE=[test objectForKey:@"Isothersmatchtype"];
+                        NSString*MANOFTHESERIESCODE=[test objectForKey:@"Manoftheseriescode"];
+                        NSString*BESTBATSMANCODE =[test objectForKey:@"Bestbatsmancode"];
+                        NSString*BESTBOWLERCODE=[test objectForKey:@"Bestbowlercode"];
+                        NSString*BESTALLROUNDERCODE=[test objectForKey:@"Bestallroundercode"];
+                        NSString*MOSTVALUABLEPLAYERCODE=[test objectForKey:@"Mostvaluableplayercode"];
+                        NSString*RECORDSTATUS=[test objectForKey:@"Recordstatus"];
+                        NSString*CREATEDBY=[test objectForKey:@"Createdby"];
+                        NSString*CREATEDDATE=[test objectForKey:@"Createddate"];
+                        NSString*MODIFIEDBY=[test objectForKey:@"Modifiedby"];
+                        NSString*MODIFIEDDATE=[test objectForKey:@"Modifieddate"];
+                        
+                        
+                        
+                        
+                        
+                        bool CheckStatus=[DBMANAGERSYNC CheckCompetitionCode:COMPETITIONCODE];
+                        if (CheckStatus==YES) {
+                            [DBMANAGERSYNC UPDATECOMPETITION:COMPETITIONCODE: COMPETITIONNAME:SEASON: TROPHY:STARTDATE:ENDDATE:MATCHTYPE:ISOTHERSMATCHTYPE : MODIFIEDBY: MODIFIEDDATE];
+                        }
+                        
+                        else
+                        {
+                            [DBMANAGERSYNC  InsertMASTEREvents:COMPETITIONCODE:COMPETITIONNAME:SEASON:TROPHY:STARTDATE:ENDDATE:MATCHTYPE: ISOTHERSMATCHTYPE :MANOFTHESERIESCODE:BESTBATSMANCODE : BESTBOWLERCODE:BESTALLROUNDERCODE:MOSTVALUABLEPLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                            
+                        }
+                         }
+                    
+                    //  Competitionteamdetails
+                    
+                    NSArray *temp1 =   [serviceResponse objectForKey:@"Competitionteamdetails"];
+                     int j;
+                    for (j=0; j<[temp1 count]; j++) {
+                        NSDictionary*test1=[temp1 objectAtIndex:j];
+                        NSString*COMPETITIONTEAMCODE=[test1 objectForKey:@"Competitionteamcode"];
+                        NSString *COMPETITIONCODE=[test1 objectForKey:@"Competitioncode"];
+                        NSString *TEAMCODE=[test1 objectForKey:@"Teamcode"];
+                        NSString *RECORDSTATUS=[test1 objectForKey:@"Recordstatus"];
+                        
+                        
+                        bool CheckStatus1=[DBMANAGERSYNC CheckCompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+                        if (CheckStatus1==NO) {
+                            [DBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
+                        }
+                else{ [DBMANAGERSYNC DELETECompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+                    [DBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
+                        
+                        }
+                        
+                    }
+            
+                }
+            }
+            
+            [self.tableView addSubview:refresh];
+            
+            [self.tableView reloadData];
+            
+            [refreshControl endRefreshing];
+      
+      
+        });
+        
+        //[delegate hideLoading];
+    }
+}
 @end
 
 

@@ -123,7 +123,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([dbPath UTF8String], &dataBase);
     if(retVal ==0){
         
-        NSString *query=[NSString stringWithFormat:@"SELECT  *  FROM Userdetails WHERE  strftime('%%Y-%%m-%%d-', EXPIRYDATE) >= CURRENT_DATE AND USERCODE = '%@'",userId];
+        NSString *query=[NSString stringWithFormat:@"SELECT  *  FROM Userdetails WHERE  strftime('%%YYYY-%%mm-%%dd %%hh:%%mm:%%ss', LICENSEUPTO) >= datetime('now') AND USERCODE = '%@'",userId];
         NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -144,6 +144,39 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return NO;
 }
 
+
+
++(BOOL)checkSecurityExpiryDate: (NSString *) USERNAME{
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT  *  FROM SECUREIDDETAILS WHERE  strftime('%%YYYY-%%mm-%%dd %%hh:%%mm:%%ss', ENDDATE) >= datetime('now') AND USERNAME = '%@'",USERNAME];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                return YES;
+                
+            }
+        }
+        
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return NO;
+}
+
+
 +(NSMutableArray *)checkUserLogin: (NSString *) userName password: (NSString *) password{
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
     int retVal;
@@ -154,7 +187,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([dbPath UTF8String], &dataBase);
     if(retVal ==0){
         
-        NSString *query=[NSString stringWithFormat:@"SELECT USERCODE,USERNAME  FROM Userdetails WHERE  USERNAME = '%@' AND PASSWORD = '%@' AND RECORDSTATUS = 'MSC001'",userName,password];
+        NSString *query=[NSString stringWithFormat:@"SELECT USERCODE,LOGINID  FROM Userdetails WHERE  LOGINID = '%@' AND PASSWORD = '%@' AND RECORDSTATUS = 'MSC001'",userName,password];
         NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1156,7 +1189,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
-+(NSMutableArray *)RetrieveFieldingPlayerData{
++(NSMutableArray *)RetrieveFieldingPlayerData : (NSString *) MATCHCODE : (NSString *) TEAMCODE {
     NSMutableArray *BowlerEventArray=[[NSMutableArray alloc]init];
     int retVal;
     NSString *dbPath = [self getDBPath];
@@ -1166,7 +1199,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([dbPath UTF8String], &dataBase);
     if(retVal ==0){
         
-        NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE INNER JOIN MATCHREGISTRATION MR ON MR.MATCHCODE=MTP.MATCHCODE WHERE MTP.MATCHCODE='IMSC0221C6F6595E95A00001'AND MTP.TEAMCODE=(CASE WHEN MR.TEAMACODE='TEA0000006' THEN MR.TEAMBCODE=''ELSE MR.TEAMACODE END)"];
+        NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE INNER JOIN MATCHREGISTRATION MR ON MR.MATCHCODE=MTP.MATCHCODE WHERE MTP.MATCHCODE='%@'AND MTP.TEAMCODE=(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)",MATCHCODE,TEAMCODE];
         NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1692,7 +1725,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 //wicket bowler detail
-+(NSMutableArray *)RetrievePlayerData{
++(NSMutableArray *)RetrievePlayerData: (NSString *) MATCHCODE :(NSString *) TeamCODE{
     NSMutableArray *BowlerEventArray=[[NSMutableArray alloc]init];
     int retVal;
     NSString *dbPath = [self getDBPath];
@@ -1701,8 +1734,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     retVal=sqlite3_open([dbPath UTF8String], &dataBase);
     if(retVal ==0){
+        //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
+        NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE INNER JOIN MATCHREGISTRATION MR ON MR.MATCHCODE=MTP.MATCHCODE WHERE MTP.MATCHCODE='%@'  AND MTP.TEAMCODE='%@'", MATCHCODE,TeamCODE];
         
-        NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE INNER JOIN MATCHREGISTRATION MR ON MR.MATCHCODE=MTP.MATCHCODE WHERE MTP.MATCHCODE='IMSC0221C6F6595E95A00001'AND MTP.TEAMCODE=(CASE WHEN MR.TEAMACODE='TEA0000006' THEN MR.TEAMBCODE=''ELSE MR.TEAMACODE END)"];
+        
         NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1715,7 +1750,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.BowlerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.BowlerName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 
-                
+                //TEAMCODE_TOSSWONBY
                 [BowlerEventArray addObject:record];
                 
                 
@@ -3601,10 +3636,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             NSString *UMPIRE1CODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
             NSString *UMPIRE2CODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
             
+            NSString *UMPIRE1NAME = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+            NSString *UMPIRE2NAME = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+            
             [result addObject:UMPIRE1CODE];
             [result addObject:UMPIRE2CODE];
-            
-            
+            [result addObject:UMPIRE1NAME];
+            [result addObject:UMPIRE2NAME];
         }
     }
     

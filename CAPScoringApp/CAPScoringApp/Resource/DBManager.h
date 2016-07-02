@@ -19,7 +19,7 @@
 //login
 +(NSMutableArray *)checkUserLogin: (NSString *) userName password: (NSString *) password;
 +(BOOL)checkExpiryDate: (NSString *) userId;
-
++(BOOL)checkSecurityExpiryDate: (NSString *) USERCODE;
 //toss details
 +(NSMutableArray *)checkTossDetailsWonby: (NSString *) MATCHCODE;
 +(NSMutableArray *)Electedto;
@@ -90,7 +90,7 @@
 +(NSMutableArray *)getAggressiveShotType;
 +(NSMutableArray *)getDefenceShotType;
 +(NSMutableArray *)RetrieveFieldingFactorData;
-+(NSMutableArray *)RetrieveFieldingPlayerData;
++(NSMutableArray *)RetrieveFieldingPlayerData : (NSString *) MATCHCODE : (NSString *) TEAMCODE ;
 
 
 // playerOrderlevel
@@ -102,7 +102,8 @@
 
 //Wicket type
 +(NSMutableArray *)RetrieveWicketType;
-+(NSMutableArray *)RetrievePlayerData;
+//+(NSMutableArray *)RetrievePlayerData;
++(NSMutableArray *)RetrievePlayerData: (NSString *) MATCHCODE :(NSString *) TeamCODE;
 
 
 
