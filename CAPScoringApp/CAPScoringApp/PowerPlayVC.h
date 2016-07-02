@@ -39,6 +39,12 @@
 @property(nonatomic,strong) NSString *powerplaystartover;
 @property(nonatomic,strong) NSString *powerplayendover;
 @property(nonatomic,strong) NSString *powerplaytyp;
+@property(nonatomic,strong) NSString *powerplaycode;
+@property(nonatomic,strong) NSString *recordstatus;
+@property(nonatomic,strong) NSString *userid;
+@property(nonatomic,strong) NSString *operationtype;
+
+
 - (IBAction)btn_back:(id)sender;
 
 
