@@ -60,6 +60,10 @@
 #import "ChangeTeamVC.h"
 #import "InsertSEScoreEngine.h"
 #import "Other_WicketgridVC.h"
+#import "FollowOn.h"
+#import "ChangeTossVC.h"
+#import "UpdateScoreEngine.h"
+#import "ArchivesVC.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -2422,6 +2426,7 @@ EndInnings *endInnings;
          @""://(NSString *)UNCOMFORTCLASSIFCATION:
          selectedWicketEvent];
         //Insert Score Engine SP Call
+        [self reloadBowlerTeamBatsmanDetails];
     }
     if([self.ballEventRecord.objIslegalball intValue] == 0)
     {
@@ -7969,7 +7974,7 @@ EndInnings *endInnings;
     self.commonViewwidthposition.constant =self.view.frame.size.width;
 }
 -(void) reloadBowlerTeamBatsmanDetails{
-    [self EndBallMethod];
+    //[self EndBallMethod];
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     

@@ -31,7 +31,23 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "710"
             endingLineNumber = "710"
-            landmarkName = "-Btn_Proceed:"
+            landmarkName = "-didReceiveMemoryWarning"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+            timestampString = "489210424.071679"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "7983"
+            endingLineNumber = "7983"
+            landmarkName = "-reloadBowlerTeamBatsmanDetails"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
