@@ -2325,7 +2325,7 @@ isExtrasSelected = YES;
          isWicketSelected == YES ? [NSNumber numberWithInt:1] : [NSNumber numberWithInt:0]:
          selectedwickettype.metasubcode:
          (selectedStrikernonstriker.length <= 0 ? fetchSEPageLoadRecord.strickerPlayerCode : selectedStrikernonstriker):
-         @""://(NSString *)FIELDINGPLAYER:
+         selectedwicketBowlerlist.BowlerCode:
          insertType:
          @""://Awarded Team:
          self.ballEventRecord.objPenalty:

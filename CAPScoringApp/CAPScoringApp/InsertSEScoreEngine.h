@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "DBManagerInsertScoreEngine.h"
+#import "InsertSEScoreEngineRecord.h"
 @interface InsertSEScoreEngine : NSObject
 -(void) InsertScoreEngine:
 (NSString *)COMPETITIONCODE:
