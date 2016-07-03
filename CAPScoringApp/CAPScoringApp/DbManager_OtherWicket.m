@@ -61,8 +61,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-
+//-----------
 //wicket Type
+//-----------
 +(NSMutableArray *)RetrieveOtherWicketType{
     NSMutableArray *WicketTypeArray=[[NSMutableArray alloc]init];
     int retVal;
@@ -101,7 +102,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
-
+//--------------
+//WICKET PLAYER
+//---------------
 
 +(NSMutableArray *)  GetStrickerNonStrickerCodeForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
 {
@@ -131,7 +134,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
               return arraylist;
              }
                                
-                               
+ //ABSENT HURT
  +(NSMutableArray *)   GetPlayerDetailForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO;
                                {
           NSMutableArray *arraylist1=[[NSMutableArray alloc]init];
