@@ -9,6 +9,7 @@
 #import "InitializeInningsScoreBoardRecord.h"
 #import "DBManager.h"
 
+
 @implementation InitializeInningsScoreBoardRecord
 
 @synthesize COMPETITIONCODE;

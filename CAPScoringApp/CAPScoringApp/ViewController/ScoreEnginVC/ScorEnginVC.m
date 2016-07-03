@@ -64,6 +64,7 @@
 #import "ChangeTossVC.h"
 #import "UpdateScoreEngine.h"
 #import "ArchivesVC.h"
+#import "PushSyncDBMANAGER.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -7166,7 +7167,7 @@ EndInnings *endInnings;
     if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
     {
         int inningscount =fetchSEPageLoadRecord.INNINGSNO;
-        if(inningscount > 2)
+       if(inningscount > 2)
        {
     FollowOn *objFollowOn =[[FollowOn alloc]initWithNibName:@"FollowOn" bundle:nil];
     objFollowOn.compitionCode=self.competitionCode;
@@ -7174,6 +7175,8 @@ EndInnings *endInnings;
     objFollowOn.battingTeamName =fetchSEPageLoadRecord.BATTEAMNAME;
     objFollowOn.battingTeamCode =fetchSEPageLoadRecord.BATTINGTEAMCODE;
     objFollowOn.BowlingTeamCode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+    objFollowOn.inningsno       = fetchSEPageLoadRecord.INNINGSNO;
+    
     objFollowOn.delegate =self;
     
     
@@ -7186,7 +7189,7 @@ EndInnings *endInnings;
     
     objFollowOn.view.alpha = 0;
     [objFollowOn didMoveToParentViewController:self];
-    objFollowOn.view.frame =CGRectMake(90, 200, objFollowOn.view.frame.size.width, objFollowOn.view.frame.size.height);
+    objFollowOn.view.frame =CGRectMake(90, 300, objFollowOn.view.frame.size.width, objFollowOn.view.frame.size.height);
     [fullview addSubview:Btn_Fullview];
     [self.view addSubview:fullview];
     
@@ -7198,7 +7201,7 @@ EndInnings *endInnings;
     [self addChildViewController:objFollowOn];
     [fullview addSubview:objFollowOn.view];
 }
-    }
+}
 }
 -(void) matchInfoEdit
 {
@@ -11463,5 +11466,16 @@ if(self.checkInternetConnection){
 {
    fullview.hidden=YES;
     //[self reloadBowlerTeamBatsmanDetails];
+}
+- (IBAction)SyncData_btn:(id)sender {
+    
+ NSMutableArray*MatcRegistraionGetArray=[PushSyncDBMANAGER RetrieveMATCHREGISTRATIONData:_competitionCode :_matchCode];
+    
+  NSMutableArray*MatchTeamplayerDetailsGetArray=[PushSyncDBMANAGER RetrieveMATCHTEAMPLAYERDETAILSData:_matchCode];
+     NSMutableArray*MatchresultGetArray=[PushSyncDBMANAGER RetrieveMATCHRESULTData:_competitionCode :_matchCode];
+     NSMutableArray*MatchEventGetArray=[PushSyncDBMANAGER RetrieveMATCHEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*InningsSummeryGetArray= [PushSyncDBMANAGER RetrieveINNINGSSUMMARYData:_competitionCode :_matchCode]  ;
+    
+    
 }
 @end

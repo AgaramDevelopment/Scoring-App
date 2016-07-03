@@ -23,7 +23,10 @@
 - (IBAction)electedTo_btn:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *electedTo_lbl;
 
-
+@property (nonatomic,strong) NSNumber * ISINNINGSREVERT;
+@property(nonatomic,assign)NSNumber *STRIKERPOSITIONNO;
+@property(nonatomic,assign)NSNumber *NONSTRIKERPOSITIONNO;
+@property(nonatomic,assign)NSNumber *BOWLERPOSITIONNO;
 
 
 @property (strong, nonatomic) IBOutlet UIView *view_Striker;
