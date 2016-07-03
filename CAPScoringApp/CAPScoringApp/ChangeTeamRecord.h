@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface ChanceTeamRecord : NSObject
+@interface ChangeTeamRecord : NSObject
 
 @property(strong,nonatomic)NSString *TEAMNAME;
 @property(strong,nonatomic)NSString *TEAMCODE;

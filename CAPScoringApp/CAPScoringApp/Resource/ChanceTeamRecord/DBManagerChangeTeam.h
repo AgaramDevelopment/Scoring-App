@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface DBManagerChanceTeam : NSObject
+@interface DBManagerChangeTeam : NSObject
 
 
 -(NSString*)  GetMatchmaxInningsForFetchChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE ;

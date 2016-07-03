@@ -96,4 +96,14 @@
 @property(strong,nonatomic)NSMutableArray *GetBattingTeamPlayersArray;
 @property(strong,nonatomic)NSMutableArray *GetBowlingTeamPlayersArray;
 
+@property(strong,nonatomic)NSMutableArray *GetMatchUmpireDetailsArray;
+
+@property(strong,nonatomic)NSMutableArray *GetWicketEventDetailsArray;
+
+@property(strong,nonatomic)NSMutableArray *GetAppealDetailsForAppealEventsArray;
+
+@property(strong,nonatomic)NSMutableArray *GetPenaltyDetailsForPenaltyEventsArray;
+
+@property(strong,nonatomic)NSMutableArray *getFieldingFactorArray;
+
 @end
