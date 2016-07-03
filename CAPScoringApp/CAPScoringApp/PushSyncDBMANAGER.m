@@ -407,14 +407,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. WICKETBALLNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
                 record. WICKETSCORE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 20)];
                 
-                
-                
-                
-                
                 [BATTINGSUMMARYArray addObject:record];
-                
-                
-                
+            
             }
         }
         sqlite3_finalize(statement);
@@ -453,12 +447,47 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. ISINCLUDEINPLAYERDURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
                 record. BREAKCOMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
                 record. issync=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                
-                
-                
-
-                
                 [INNINGSBREAKEVENTSArray addObject:record];
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
+    }
+    return INNINGSBREAKEVENTSArray;
+}
+//OVEREVENTS
+
++(NSMutableArray *)RetrieveOVEREVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE{
+    NSMutableArray *OVEREVENTSArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
+        NSString *query=[NSString stringWithFormat:@"SELECT * FROM OVEREVENTS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'", COMPETITIONCODE,MATCHCODE];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                
+                OVEREVENTSPushRecord *record=[[OVEREVENTSPushRecord alloc]init];
+                
+                record.COMPETITIONCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.MATCHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record. TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record. INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record. OVERNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record. OVERSTATUS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                
+                
+                [OVEREVENTSArray addObject:record];
+                
+                
                 
                 
                 
@@ -467,7 +496,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_finalize(statement);
         sqlite3_close(dataBase);
     }
-    return INNINGSBREAKEVENTSArray;
+    return OVEREVENTSArray;
 }
 //BALLEVENTS
 +(NSMutableArray *)RetrieveBALLEVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE{
@@ -554,17 +583,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. PMSTRIKEPOINTLINECODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 59)];
                 record. BALLSPEED=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 60)];
                 record. UNCOMFORTCLASSIFCATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 61)];
-
-
-
-                
-                
-                
-                
-                
                 [BALLEVENTSArray addObject:record];
-                
-                
                 
             }
         }
@@ -576,48 +595,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-//OVEREVENTS
 
-+(NSMutableArray *)RetrieveOVEREVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE{
-    NSMutableArray *OVEREVENTSArray=[[NSMutableArray alloc]init];
-    int retVal;
-    NSString *dbPath = [self getDBPath];
-    sqlite3 *dataBase;
-    const char *stmt;
-    sqlite3_stmt *statement;
-    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
-    if(retVal ==0){
-        //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
-        NSString *query=[NSString stringWithFormat:@"SELECT * FROM OVEREVENTS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'", COMPETITIONCODE,MATCHCODE];
-        NSLog(@"%@",query);
-        stmt=[query UTF8String];
-        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
-        {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
-                
-                OVEREVENTSPushRecord *record=[[OVEREVENTSPushRecord alloc]init];
-                
-                record.COMPETITIONCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                record.MATCHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record. TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                record. INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                record. OVERNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
-                record. OVERSTATUS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
-                
-                
-                [OVEREVENTSArray addObject:record];
-                
-                
-                
-                
-                
-            }
-        }
-        sqlite3_finalize(statement);
-        sqlite3_close(dataBase);
-    }
-    return OVEREVENTSArray;
-}
 
 @end
