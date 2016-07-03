@@ -244,6 +244,7 @@ NSString *DURATION;
     add.COMPETITIONCODE=self.COMPETITIONCODE;
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
+    add.MATCHDATE=self.MATCHDATE;
     
     
     //vc2 *viewController = [[vc2 alloc]init];
@@ -338,6 +339,7 @@ NSString *DURATION;
     add.COMPETITIONCODE=self.COMPETITIONCODE;
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
+    add.MATCHDATE=self.MATCHDATE;
     
     [self startService:@"DELETE"];
     
@@ -367,7 +369,7 @@ NSString *DURATION;
     add.COMPETITIONCODE=self.COMPETITIONCODE;
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
-    
+    add.MATCHDATE=self.MATCHDATE;
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
     add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);

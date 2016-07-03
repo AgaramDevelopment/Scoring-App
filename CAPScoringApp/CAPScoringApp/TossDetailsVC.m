@@ -21,6 +21,7 @@
 #import "DBManagerChangeToss.h"
 #import "TossDetailRecord.h"
 #import "TossTeamDetailRecord.h"
+#import "InitializeInningsScoreBoardRecord.h"
 
 @interface TossDetailsVC ()
 {

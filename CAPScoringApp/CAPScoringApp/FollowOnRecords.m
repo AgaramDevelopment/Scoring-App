@@ -41,7 +41,7 @@
 @synthesize INNINGSSCORECARD;
 
 //SP_FETCHFOLLOWON
--(void) FetchFollowOn:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMNAME:(NSNumber*)INNINGSNO
+-(void) FetchFollowOn:(NSString *) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*) TEAMCODE:(NSNumber*)INNINGSNO
 
 {
     
@@ -78,66 +78,6 @@
     
 }
 
-////SP_UPDATEFOLLOWON
-//-(void) UpdateFollowOn:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSNumber*)INNINGSNO:(NSString*)TEAMNAME : (NSString*)STRIKER : (NSString*)NONSTRIKER : (NSString*)BOWLER
-//
-//{
-//    
-//    if(INNINGSNO = @2)
-//    {
-//        if([DBManagerFollowOn GetBallCodeForUpdateFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO ]!=0)
-//        {
-//            
-//            TEAMCODE=[DBManagerFollowOn GetTeamNamesForUpdateFollowOn:    TEAMNAME ];
-//            
-//            TOTALRUNS=[DBManagerFollowOn GetTotalRunsForUpdateFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO];
-//            
-//            OVERNO=[DBManagerFollowOn GetOverNoForUpdateFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO];
-//            
-//            BALLNO=[DBManagerFollowOn GetBallNoForUpdateFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMNAME : OVERNO :INNINGSNO];
-//            
-//            
-//            OVERSTATUS=[DBManagerFollowOn GetOverStatusForUpdateFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO: OVERNO];
-//            
-//            BOWLINGTEAMCODE=[DBManagerFollowOn GetBowlingTeamCodeForUpdateFollowOn: TEAMNAME: COMPETITIONCODE:  MATCHCODE];
-//            
-//            
-//            if(OVERSTATUS = @"1")
-//            {
-//                
-//                OVERBALLNO=  [NSString stringWithFormat:@"%d",OVERNO.intValue +1];
-//            }
-//            else
-//            {
-//                
-//                OVERBALLNO = [NSString stringWithFormat:@"%@.%@" ,OVERNO,BALLNO];
-//              
-//            }
-//            
-//            WICKETS=[DBManagerFollowOn GetWicketForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMCODE INNINGSNO: OVERNO];
-//            
-//            [DBManagerFollowOn UpdateInningsEventForInsertScoreBoard:TEAMNAME: TOTALRUN : OVERBALLNO: WICKETS : COMPETITIONCODE: MATCHCODE: INNINGSNO: TEAMCODE];
-//            
-//            if([DBManagerFollowOn GetTeamCodeForUpdateFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMCODE :INNINGSNO ])
-//            {
-//                
-//                [DBManagerFollowOn InsertInningsEventForInsertScoreBoard : COMPETITIONCODE : MATCHCODE :TEAMCODE :INNINGSNO :STRIKER :NONSTRIKER :BOWLER];
-//                
-//                INNINGSSCORECARD = [NSString stringWithFormat:@"%d",INNINGSNO.intValue +1];
-//            }
-//            EXEC SP_INITIALIZEINNINGSSCOREBOARD
-//            else
-//            {
-//                [DBManagerFollowOn UpdateInningsEventInStrickerForInsertScoreBoard: COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : STRIKER : NONSTRIKER : BOWLER];
-//                
-//            }
-//        } 
-//        
-//    }
-//    
-//    
-//    
-//}
 
 
 

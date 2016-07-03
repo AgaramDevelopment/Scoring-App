@@ -1207,37 +1207,133 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-
 +(BOOL) UpdateBattingOrderUpdateScoreEngine : (NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSString*) INNINGSNO
 
 {
     
+    NSMutableArray *battingSummaryArray = [[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BS SET BS.BATTINGPOSITIONNO = ALLM.ORDR FROM [BATTINGSUMMARY] BS INNER JOIN (SELECT MATCHCODE,INNINGSNO,PLAYERNAME,STRIKERCODE,ROW_NUMBER()OVER(PARTITION BY MATCHCODE,INNINGSNO ORDER BY MIN(ORDR)) ORDR FROM(SELECT BE.MATCHCODE,INNINGSNO,PLAYERMASTER.PLAYERNAME, STRIKERCODE,MIN(CONVERT( NUMERIC(10,5),(CONVERT(NVARCHAR,BE.OVERNO) || '.' || CONVERT(NVARCHAR,BE.BALLNO) + CONVERT(NVARCHAR,BE.BALLCOUNT))))-0.01 ORDR 	FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PLAYERMASTER ON PLAYERMASTER.PLAYERCODE = BE.STRIKERCODE	WHERE BE.MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO = '%@' GROUP BY BE.MATCHCODE,INNINGSNO, STRIKERCODE, PLAYERMASTER.PLAYERNAME UNION ALL	SELECT BE.MATCHCODE,INNINGSNO,PLAYERMASTER1.PLAYERNAME, NONSTRIKERCODE,MIN(CONVERT( NUMERIC(10,5),( CONVERT(NVARCHAR,BE.OVERNO) + '.' + CONVERT(NVARCHAR,BE.BALLNO) + CONVERT(NVARCHAR,BE.BALLCOUNT)))) FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PLAYERMASTER1 ON PLAYERMASTER1.PLAYERCODE = BE.NONSTRIKERCODE WHERE BE.MATCHCODE = '%@' AND TEAMCODE =	'%@' AND INNINGSNO = '%@' GROUP BY BE.MATCHCODE,INNINGSNO, PLAYERMASTER1.PLAYERNAME, NONSTRIKERCODE) SAM GROUP BY MATCHCODE,INNINGSNO,PLAYERNAME,STRIKERCODE ) ALLM ON BS.MATCHCODE = ALLM.MATCHCODE AND BS.INNINGSNO = ALLM.INNINGSNO	AND BS.BATSMANCODE = ALLM.STRIKERCODE", MATCHCODE,TEAMCODE,INNINGSNO, MATCHCODE,TEAMCODE,INNINGSNO];
-
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BS.COMPETITIONCODE, BS.MATCHCODE, BS.BATTINGTEAMCODE, BS.INNINGSNO, BS.BATSMANCODE, BS.RUNS, BS.BALLS, BS.ONES, BS.TWOS, BS.THREES, BS.FOURS, BS.SIXES, BS.DOTBALLS, BS.WICKETNO, BS.WICKETTYPE, BS.FIELDERCODE, BS.BOWLERCODE, BS.WICKETOVERNO, BS.WICKETBALLNO, BS.WICKETSCORE,(SELECT COUNT(1) FROM(SELECT BE.MATCHCODE,INNINGSNO,PLAYERMASTER.PLAYERNAME, STRIKERCODE, (MIN(BE.OVERNO || '.' || BE.BALLNO || BE.BALLCOUNT) - 0.01) OVERBALL FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PLAYERMASTER ON PLAYERMASTER.PLAYERCODE = BE.STRIKERCODE WHERE BE.MATCHCODE = '%@' AND TEAMCODE =	'%@' AND INNINGSNO = '%@' GROUP BY BE.MATCHCODE,INNINGSNO, STRIKERCODE, PLAYERMASTER.PLAYERNAME UNION SELECT BE.MATCHCODE,INNINGSNO,PLAYERMASTER.PLAYERNAME, STRIKERCODE, (MIN(BE.OVERNO || '.' || BE.BALLNO || BE.BALLCOUNT) - 0.01) OVERBALL FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PLAYERMASTER ON PLAYERMASTER.PLAYERCODE = BE.STRIKERCODE WHERE BE.MATCHCODE = '%@' AND TEAMCODE =	'%@' AND INNINGSNO = '%@' GROUP BY BE.MATCHCODE,INNINGSNO, STRIKERCODE, PLAYERMASTER.PLAYERNAME) SAMSUB WHERE SAMSUB.MATCHCODE = SAM.MATCHCODE AND SAMSUB.INNINGSNO = SAM.INNINGSNO AND SAMSUB.OVERBALL<= SAM.OVERBALL) BATTINGPOSITIONNO FROM(SELECT BE.MATCHCODE,INNINGSNO,PLAYERMASTER.PLAYERNAME, STRIKERCODE, (MIN(BE.OVERNO || '.' || BE.BALLNO || BE.BALLCOUNT) - 0.01) OVERBALL FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PLAYERMASTER ON PLAYERMASTER.PLAYERCODE = BE.STRIKERCODE WHERE BE.MATCHCODE = '%@' AND TEAMCODE =	'%@' AND INNINGSNO = %@ GROUP BY BE.MATCHCODE,INNINGSNO, STRIKERCODE, PLAYERMASTER.PLAYERNAME UNION SELECT BE.MATCHCODE,INNINGSNO,PLAYERMASTER.PLAYERNAME, STRIKERCODE, (MIN(BE.OVERNO || '.' || BE.BALLNO || BE.BALLCOUNT) - 0.01) OVERBALL FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PLAYERMASTER ON PLAYERMASTER.PLAYERCODE = BE.STRIKERCODE WHERE BE.MATCHCODE = '%@' AND TEAMCODE =	'%@' AND INNINGSNO = %@ GROUP BY BE.MATCHCODE,INNINGSNO, STRIKERCODE, PLAYERMASTER.PLAYERNAME) SAM INNER JOIN BATTINGSUMMARY BS ON SAM.MATCHCODE = BS.MATCHCODE AND SAM.INNINGSNO = BS.INNINGSNO AND SAM.STRIKERCODE = BS.BATSMANCODE", MATCHCODE,TEAMCODE,INNINGSNO, MATCHCODE,TEAMCODE,INNINGSNO,MATCHCODE,TEAMCODE,INNINGSNO,MATCHCODE,TEAMCODE,INNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                
+                BattingSummaryRecord *record = [[BattingSummaryRecord alloc]init];
+                
+                record.COMPETITIONCODE = [self getValueByNull: statement:0];
+                record.MATCHCODE = [self getValueByNull: statement:1];
+                record.BATTINGTEAMCODE = [self getValueByNull: statement:2];
+                record.INNINGSNO = [self getValueByNull: statement:3];
+                record.BATSMANCODE = [self getValueByNull: statement:4];
+                record.RUNS = [self getValueByNull: statement:5];
+                record.BALLS = [self getValueByNull: statement:6];
+                record.ONES = [self getValueByNull: statement:7];
+                record.TWOS = [self getValueByNull: statement:8];
+                record.THREES = [self getValueByNull: statement:9];
+                record.FOURS = [self getValueByNull: statement:10];
+                record.SIXES = [self getValueByNull: statement:0];
+                record.DOTBALLS = [self getValueByNull: statement:0];
+                record.WICKETNO = [self getValueByNull: statement:0];
+                record.WICKETTYPE = [self getValueByNull: statement:0];
+                record.FIELDERCODE = [self getValueByNull: statement:0];
+                record.BOWLERCODE = [self getValueByNull: statement:0];
+                record.WICKETOVERNO = [self getValueByNull: statement:0];
+                record.WICKETBALLNO = [self getValueByNull: statement:0];
+                record.WICKETSCORE = [self getValueByNull: statement:0];
+                record.BATTINGPOSITIONNO = [self getValueByNull: statement:0];
+                
+                [battingSummaryArray addObject:record];
+                
+            }
+        }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    
+    
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM BATTINGSUMMARY WHERE MATCHCODE = '%@' AND BATTINGTEAMCODE =	'%@' AND INNINGSNO = '%@' ", MATCHCODE,TEAMCODE,INNINGSNO];
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            sqlite3_reset(statement);
-            
-            return YES;
-            
+            //Deleted
         }
-        else {
-            sqlite3_reset(statement);
-            NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
-            return NO;
-        }
+       
     }
-    sqlite3_reset(statement);
-    return NO;
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    
+    
+    for(int i =0;i<battingSummaryArray.count;i++){
+    
+        BattingSummaryRecord *record = [battingSummaryArray objectAtIndex:i];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BATTINGSUMMARY (COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTINGPOSITIONNO,BATSMANCODE,RUNS,BALLS,ONES,TWOS,THREES,FOURS,SIXES,DOTBALLS,WICKETNO,WICKETTYPE,FIELDERCODE,BOWLERCODE,WICKETOVERNO,WICKETBALLNO,WICKETSCORE) VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')", record.COMPETITIONCODE,record.MATCHCODE,record.BATTINGTEAMCODE,record.INNINGSNO,record.BATTINGPOSITIONNO,record.BATSMANCODE,record.RUNS,record.BALLS,record.ONES,record.TWOS,record.THREES,record.FOURS,record.SIXES,record.DOTBALLS,record.WICKETNO,record.WICKETTYPE,record.FIELDERCODE,record.BOWLERCODE,record.WICKETOVERNO,record.WICKETBALLNO,record.WICKETSCORE];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            //ADDED
+        }
+        
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    }
+    
+    return  YES;
 }
+
+
++(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
+    return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
+}
+
+
+
+
+//+(BOOL) UpdateBattingOrderUpdateScoreEngine : (NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSString*) INNINGSNO
+//
+//{
+//    
+//    NSString *databasePath = [self getDBPath];
+//    sqlite3_stmt *statement;
+//    sqlite3 *dataBase;
+//    const char *dbPath = [databasePath UTF8String];
+//    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+//    {
+//        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BS SET BS.BATTINGPOSITIONNO = ALLM.ORDR FROM [BATTINGSUMMARY] BS INNER JOIN (SELECT MATCHCODE,INNINGSNO,PLAYERNAME,STRIKERCODE,ROW_NUMBER()OVER(PARTITION BY MATCHCODE,INNINGSNO ORDER BY MIN(ORDR)) ORDR FROM(SELECT BE.MATCHCODE,INNINGSNO,PLAYERMASTER.PLAYERNAME, STRIKERCODE,MIN(CONVERT( NUMERIC(10,5),(CONVERT(NVARCHAR,BE.OVERNO) || '.' || CONVERT(NVARCHAR,BE.BALLNO) + CONVERT(NVARCHAR,BE.BALLCOUNT))))-0.01 ORDR 	FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PLAYERMASTER ON PLAYERMASTER.PLAYERCODE = BE.STRIKERCODE	WHERE BE.MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO = '%@' GROUP BY BE.MATCHCODE,INNINGSNO, STRIKERCODE, PLAYERMASTER.PLAYERNAME UNION ALL	SELECT BE.MATCHCODE,INNINGSNO,PLAYERMASTER1.PLAYERNAME, NONSTRIKERCODE,MIN(CONVERT( NUMERIC(10,5),( CONVERT(NVARCHAR,BE.OVERNO) + '.' + CONVERT(NVARCHAR,BE.BALLNO) + CONVERT(NVARCHAR,BE.BALLCOUNT)))) FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PLAYERMASTER1 ON PLAYERMASTER1.PLAYERCODE = BE.NONSTRIKERCODE WHERE BE.MATCHCODE = '%@' AND TEAMCODE =	'%@' AND INNINGSNO = '%@' GROUP BY BE.MATCHCODE,INNINGSNO, PLAYERMASTER1.PLAYERNAME, NONSTRIKERCODE) SAM GROUP BY MATCHCODE,INNINGSNO,PLAYERNAME,STRIKERCODE ) ALLM ON BS.MATCHCODE = ALLM.MATCHCODE AND BS.INNINGSNO = ALLM.INNINGSNO	AND BS.BATSMANCODE = ALLM.STRIKERCODE", MATCHCODE,TEAMCODE,INNINGSNO, MATCHCODE,TEAMCODE,INNINGSNO];
+//
+//        const char *update_stmt = [updateSQL UTF8String];
+//        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+//        if (sqlite3_step(statement) == SQLITE_DONE)
+//        {
+//            sqlite3_reset(statement);
+//            
+//            return YES;
+//            
+//        }
+//        else {
+//            sqlite3_reset(statement);
+//            NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
+//            return NO;
+//        }
+//    }
+//    sqlite3_reset(statement);
+//    return NO;
+//}
 
                                
 
