@@ -244,5 +244,5 @@
 //-(void)manageSeOverDetails:(NSObject *) balleventRecord;
 
 -(void)manageSeOverDetails:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO :(NSObject *) balleventRecord:(NSString *) OverStatus :(NSString *)umpire1code :(NSString *) umpire2code:(NSString *) overNo:(NSString *) strickerCode:(NSString *) nonStrickerCode;
-
+-(void)insertScordBoard:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO;
 @end
