@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -3894,12 +3894,12 @@
                                             </mask>
                                             <mask key="constraints">
                                                 <exclude reference="CZx-PZ-Wvr"/>
+                                                <exclude reference="UDq-D4-anA"/>
+                                                <exclude reference="YvI-5C-2vJ"/>
+                                                <exclude reference="bUF-iT-XqH"/>
                                                 <exclude reference="8ub-kW-EsH"/>
                                                 <exclude reference="O4h-oz-rRf"/>
                                                 <exclude reference="bxg-ai-lUD"/>
-                                                <exclude reference="bUF-iT-XqH"/>
-                                                <exclude reference="UDq-D4-anA"/>
-                                                <exclude reference="YvI-5C-2vJ"/>
                                                 <exclude reference="Cc3-KZ-tul"/>
                                                 <exclude reference="KSx-Q5-EwK"/>
                                                 <exclude reference="u3J-wz-6vJ"/>
@@ -3919,12 +3919,12 @@
                                             </mask>
                                             <mask key="constraints">
                                                 <include reference="CZx-PZ-Wvr"/>
+                                                <include reference="UDq-D4-anA"/>
+                                                <include reference="YvI-5C-2vJ"/>
+                                                <include reference="bUF-iT-XqH"/>
                                                 <include reference="8ub-kW-EsH"/>
                                                 <include reference="O4h-oz-rRf"/>
                                                 <include reference="bxg-ai-lUD"/>
-                                                <include reference="bUF-iT-XqH"/>
-                                                <include reference="UDq-D4-anA"/>
-                                                <include reference="YvI-5C-2vJ"/>
                                                 <include reference="Cc3-KZ-tul"/>
                                                 <include reference="KSx-Q5-EwK"/>
                                                 <include reference="u3J-wz-6vJ"/>
@@ -5726,6 +5726,9 @@
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="160" y="1" width="440" height="114"/>
+                                                </variation>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBk-zT-YMj">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -5744,7 +5747,8 @@
                                                         <exclude reference="cIY-gc-wL3"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=regular">
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="1" width="150" height="114"/>
                                                     <mask key="constraints">
                                                         <include reference="cIY-gc-wL3"/>
                                                     </mask>

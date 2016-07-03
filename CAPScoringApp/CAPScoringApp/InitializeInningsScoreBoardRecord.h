@@ -19,7 +19,7 @@
 @property(strong,nonatomic)NSString *STRIKERCODE;
 @property(strong,nonatomic)NSString *NONSTRIKERCODE;
 @property(strong,nonatomic)NSString *BOWLERCODE;
-@property(nonatomic,assign)NSNumber *ISINNINGSREVERT;
+@property (nonatomic,strong) NSNumber * ISINNINGSREVERT;
 @property(nonatomic,assign)NSNumber *STRIKERPOSITIONNO;
 @property(nonatomic,assign)NSNumber *NONSTRIKERPOSITIONNO;
 @property(nonatomic,assign)NSNumber *BOWLERPOSITIONNO;

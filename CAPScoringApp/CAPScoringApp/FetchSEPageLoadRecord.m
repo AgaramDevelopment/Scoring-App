@@ -394,7 +394,7 @@ BOOL  getOverStatus;
         BATTINGTEAMCODE = [DBManager batsManteamCode:MATCHCODE :COMPETITIONCODE];
         
         
-        BOWLINGTEAMCODE = (TEAMACODE == BATTINGTEAMCODE) ?TEAMBCODE: TEAMACODE ;
+        BOWLINGTEAMCODE = ([TEAMACODE isEqual: BATTINGTEAMCODE]) ?TEAMBCODE: TEAMACODE ;
         
     }else{
         NSMutableArray *dataInnings= [DBManager getMaxInningsNo: COMPETITIONCODE :MATCHCODE];
@@ -419,7 +419,7 @@ BOOL  getOverStatus;
                 
                 BOWLINGTEAMCODE = [DBManager getTeamCode:COMPETITIONCODE :MATCHCODE :INNINGSNO];
                 
-                BATTINGTEAMCODE = TEAMACODE == BOWLINGTEAMCODE ? TEAMBCODE : TEAMACODE;
+                BATTINGTEAMCODE = ([TEAMACODE isEqual: BOWLINGTEAMCODE]) ? TEAMBCODE : TEAMACODE;
             }
         }
     }
@@ -440,7 +440,7 @@ BOOL  getOverStatus;
         ;
         
         
-        BOWLINGTEAMCODE =  TEAMACODE == BATTINGTEAMCODE ? TEAMBCODE : TEAMACODE;
+        BOWLINGTEAMCODE =  ([TEAMACODE isEqual: BATTINGTEAMCODE]) ? TEAMBCODE : TEAMACODE;
         
     }
     
