@@ -56,7 +56,11 @@
          [delegate showLoading];
          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     
-    NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/PULLSCORERDATAFROMSERVER/0x0100000088F0BDA6134BA1A808FA82837D998FD8C45AC41C001C2762A27AC7C22D0961149CE3F7B7D0EB9047",[Utitliy getSyncIPPORT]];
+             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+             NSString *secureId = [defaults stringForKey:[Utitliy SecureId]];
+        
+             
+    NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/PULLSCORERDATAFROMSERVER/%@",[Utitliy getSyncIPPORT],secureId];
     NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLResponse *response;

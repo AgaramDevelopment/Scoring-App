@@ -2428,74 +2428,74 @@ EndInnings *endInnings;
         //Insert Score Engine SP Call
         [self reloadBowlerTeamBatsmanDetails];
     }
-    if([self.ballEventRecord.objIslegalball intValue] == 0)
-    {
-        if([self.ballEventRecord.objWide intValue] !=0)
-        {
-            int wide =[self.ballEventRecord.objRuns intValue]+[self.ballEventRecord.objOverthrow intValue]+1;
-            self.ballEventRecord.objWide=[NSString stringWithFormat:@"%d",wide];
-            self.ballEventRecord.objRuns=@"0";
-        }
-        else if ([self.ballEventRecord.objNoball intValue] !=0)
-        {
-            if([self.ballEventRecord.objByes intValue] !=0 || [self.ballEventRecord.objLegByes intValue] !=0)
-            {
-                self.ballEventRecord.objNoball =@"1";
-                int byes;
-                int LegByes;
-               byes=([self.ballEventRecord.objByes intValue] >0)?([self.ballEventRecord.objRuns intValue]+[self.ballEventRecord.objOverthrow intValue]):[self.ballEventRecord.objByes intValue];
-                self.ballEventRecord.objByes=[NSString stringWithFormat:@"%d",byes];
-                
-                LegByes=([self.ballEventRecord.objLegByes intValue] >0)?([self.ballEventRecord.objRuns intValue]+[self.ballEventRecord.objOverthrow intValue]):[self.ballEventRecord.objLegByes intValue];
-                 self.ballEventRecord.objLegByes=[NSString stringWithFormat:@"%d",LegByes];
-                self.ballEventRecord.objRuns=@"0";
-                
-            }
-            else{
-                self.ballEventRecord.objNoball=@"1";
-            }
-        }
-    }
-    else{
-        if([self.ballEventRecord.objByes intValue] !=0 || [self.ballEventRecord.objLegByes intValue] !=0)
-        {
-            int byes;
-            int LegByes;
-            byes=([self.ballEventRecord.objByes intValue] >0)?([self.ballEventRecord.objRuns intValue]+[self.ballEventRecord.objOverthrow intValue]):[self.ballEventRecord.objByes intValue];
-            self.ballEventRecord.objByes=[NSString stringWithFormat:@"%d",byes];
-            
-            LegByes=([self.ballEventRecord.objLegByes intValue] >0)?([self.ballEventRecord.objRuns intValue]+[self.ballEventRecord.objOverthrow intValue]):[self.ballEventRecord.objLegByes intValue];
-            self.ballEventRecord.objLegByes=[NSString stringWithFormat:@"%d",LegByes];
-            self.ballEventRecord.objRuns=@"0";
-        }
-        
-        else{
-//            [DBManagerEndBall UpdateScoreEngine:self.ballEventRecord.objBallcode :self.ballEventRecord.objcompetitioncode:self.ballEventRecord.objmatchcode :self.ballEventRecord.objTeamcode :self.ballEventRecord.objInningsno :self.ballEventRecord.objOverno :self.ballEventRecord.objBallno :self.ballEventRecord.objBallcount :self.ballEventRecord.objSessionno :self.ballEventRecord.objStrikercode :self.ballEventRecord.objNonstrikercode :self.ballEventRecord.objBowlercode :self.ballEventRecord.objWicketkeepercode :self.ballEventRecord.objUmpire1code :self.ballEventRecord.objUmpire2code :self.ballEventRecord.objAtworotw :self.ballEventRecord.objBowlingEnd :self.ballEventRecord.objBowltype :self.ballEventRecord.objShottype :self.ballEventRecord.objShorttypecategory :self.ballEventRecord.objIslegalball :self.ballEventRecord.objIsFour :self.ballEventRecord.objIssix :self.ballEventRecord.objRuns :self.ballEventRecord.objOverthrow :self.ballEventRecord.objTotalruns :self.ballEventRecord.objWide :self.ballEventRecord.objNoball :self.ballEventRecord.objByes :self.ballEventRecord.objLegByes :self.ballEventRecord.objPenalty :self.ballEventRecord.objTotalextras :self.ballEventRecord.objGrandtotal :self.ballEventRecord.objRbw :self.ballEventRecord.objPMlinecode :self.ballEventRecord.objPMlengthcode: self.ballEventRecord.objPMStrikepoint:self.ballEventRecord.objPMStrikepointlinecode :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objballduration :self.ballEventRecord.objIsappeal :self.ballEventRecord.objIsbeaten :self.ballEventRecord.objIsuncomfort :self.ballEventRecord.objIswtb :self.ballEventRecord.objIsreleaseshot :self.ballEventRecord.objMarkedforedit :self.ballEventRecord.objRemark :self.ballEventRecord.objWicketno :self.ballEventRecord.objWicketType :self.ballEventRecord.objWicketkeepercode : @"":@"" :@"" :@"":@"":@"" :@"" :@"" :@"" :@"":self.ballEventRecord.objPenalty :self.ballEventRecord.objPenaltytypecode :@"" :self.ballEventRecord.objBallspeed :self.ballEventRecord.objUncomfortclassification :@""];
-       
-        }
-        
-    }
-    NSMutableArray * objUmpireArray =[DBManager GETUMPIRE:self.competitionCode :self.matchCode ];
-    Umpire1Code =[objUmpireArray objectAtIndex:0];
-    umpire2Code =[objUmpireArray objectAtIndex:1];
-    TEAMAWICKETKEEPER =[objUmpireArray objectAtIndex:2];
-    TEAMBWICKETKEEPER=[objUmpireArray objectAtIndex:3];
-    NSString * wicketkeepercode ;
-    NSString * battingTeamCode =fetchSEPageLoadRecord.BATTINGTEAMCODE;
-    NSString * teamAcode       =fetchSEPageLoadRecord.TEAMACODE;
-    NSString * teamBcode       =fetchSEPageLoadRecord.TEAMBCODE;
-   // Matchtype       =fetchSEPageLoadRecord.MATCHTYPE;
-    if([battingTeamCode isEqualToString:teamAcode])
-    {
-        wicketkeepercode=TEAMAWICKETKEEPER;
-    }
-    else if([battingTeamCode isEqualToString:teamBcode])
-    {
-        wicketkeepercode=TEAMBWICKETKEEPER;
-    }
-    else{
-        wicketkeepercode =@"";
-    }
+//    if([self.ballEventRecord.objIslegalball intValue] == 0)
+//    {
+//        if([self.ballEventRecord.objWide intValue] !=0)
+//        {
+//            int wide =[self.ballEventRecord.objRuns intValue]+[self.ballEventRecord.objOverthrow intValue]+1;
+//            self.ballEventRecord.objWide=[NSString stringWithFormat:@"%d",wide];
+//            self.ballEventRecord.objRuns=@"0";
+//        }
+//        else if ([self.ballEventRecord.objNoball intValue] !=0)
+//        {
+//            if([self.ballEventRecord.objByes intValue] !=0 || [self.ballEventRecord.objLegByes intValue] !=0)
+//            {
+//                self.ballEventRecord.objNoball =@"1";
+//                int byes;
+//                int LegByes;
+//               byes=([self.ballEventRecord.objByes intValue] >0)?([self.ballEventRecord.objRuns intValue]+[self.ballEventRecord.objOverthrow intValue]):[self.ballEventRecord.objByes intValue];
+//                self.ballEventRecord.objByes=[NSString stringWithFormat:@"%d",byes];
+//                
+//                LegByes=([self.ballEventRecord.objLegByes intValue] >0)?([self.ballEventRecord.objRuns intValue]+[self.ballEventRecord.objOverthrow intValue]):[self.ballEventRecord.objLegByes intValue];
+//                 self.ballEventRecord.objLegByes=[NSString stringWithFormat:@"%d",LegByes];
+//                self.ballEventRecord.objRuns=@"0";
+//                
+//            }
+//            else{
+//                self.ballEventRecord.objNoball=@"1";
+//            }
+//        }
+//    }
+//    else{
+//        if([self.ballEventRecord.objByes intValue] !=0 || [self.ballEventRecord.objLegByes intValue] !=0)
+//        {
+//            int byes;
+//            int LegByes;
+//            byes=([self.ballEventRecord.objByes intValue] >0)?([self.ballEventRecord.objRuns intValue]+[self.ballEventRecord.objOverthrow intValue]):[self.ballEventRecord.objByes intValue];
+//            self.ballEventRecord.objByes=[NSString stringWithFormat:@"%d",byes];
+//            
+//            LegByes=([self.ballEventRecord.objLegByes intValue] >0)?([self.ballEventRecord.objRuns intValue]+[self.ballEventRecord.objOverthrow intValue]):[self.ballEventRecord.objLegByes intValue];
+//            self.ballEventRecord.objLegByes=[NSString stringWithFormat:@"%d",LegByes];
+//            self.ballEventRecord.objRuns=@"0";
+//        }
+//        
+//        else{
+////            [DBManagerEndBall UpdateScoreEngine:self.ballEventRecord.objBallcode :self.ballEventRecord.objcompetitioncode:self.ballEventRecord.objmatchcode :self.ballEventRecord.objTeamcode :self.ballEventRecord.objInningsno :self.ballEventRecord.objOverno :self.ballEventRecord.objBallno :self.ballEventRecord.objBallcount :self.ballEventRecord.objSessionno :self.ballEventRecord.objStrikercode :self.ballEventRecord.objNonstrikercode :self.ballEventRecord.objBowlercode :self.ballEventRecord.objWicketkeepercode :self.ballEventRecord.objUmpire1code :self.ballEventRecord.objUmpire2code :self.ballEventRecord.objAtworotw :self.ballEventRecord.objBowlingEnd :self.ballEventRecord.objBowltype :self.ballEventRecord.objShottype :self.ballEventRecord.objShorttypecategory :self.ballEventRecord.objIslegalball :self.ballEventRecord.objIsFour :self.ballEventRecord.objIssix :self.ballEventRecord.objRuns :self.ballEventRecord.objOverthrow :self.ballEventRecord.objTotalruns :self.ballEventRecord.objWide :self.ballEventRecord.objNoball :self.ballEventRecord.objByes :self.ballEventRecord.objLegByes :self.ballEventRecord.objPenalty :self.ballEventRecord.objTotalextras :self.ballEventRecord.objGrandtotal :self.ballEventRecord.objRbw :self.ballEventRecord.objPMlinecode :self.ballEventRecord.objPMlengthcode: self.ballEventRecord.objPMStrikepoint:self.ballEventRecord.objPMStrikepointlinecode :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objballduration :self.ballEventRecord.objIsappeal :self.ballEventRecord.objIsbeaten :self.ballEventRecord.objIsuncomfort :self.ballEventRecord.objIswtb :self.ballEventRecord.objIsreleaseshot :self.ballEventRecord.objMarkedforedit :self.ballEventRecord.objRemark :self.ballEventRecord.objWicketno :self.ballEventRecord.objWicketType :self.ballEventRecord.objWicketkeepercode : @"":@"" :@"" :@"":@"":@"" :@"" :@"" :@"" :@"":self.ballEventRecord.objPenalty :self.ballEventRecord.objPenaltytypecode :@"" :self.ballEventRecord.objBallspeed :self.ballEventRecord.objUncomfortclassification :@""];
+//       
+//        }
+//        
+//    }
+//    NSMutableArray * objUmpireArray =[DBManager GETUMPIRE:self.competitionCode :self.matchCode ];
+//    Umpire1Code =[objUmpireArray objectAtIndex:0];
+//    umpire2Code =[objUmpireArray objectAtIndex:1];
+//    TEAMAWICKETKEEPER =[objUmpireArray objectAtIndex:2];
+//    TEAMBWICKETKEEPER=[objUmpireArray objectAtIndex:3];
+//    NSString * wicketkeepercode ;
+//    NSString * battingTeamCode =fetchSEPageLoadRecord.BATTINGTEAMCODE;
+//    NSString * teamAcode       =fetchSEPageLoadRecord.TEAMACODE;
+//    NSString * teamBcode       =fetchSEPageLoadRecord.TEAMBCODE;
+//   // Matchtype       =fetchSEPageLoadRecord.MATCHTYPE;
+//    if([battingTeamCode isEqualToString:teamAcode])
+//    {
+//        wicketkeepercode=TEAMAWICKETKEEPER;
+//    }
+//    else if([battingTeamCode isEqualToString:teamBcode])
+//    {
+//        wicketkeepercode=TEAMBWICKETKEEPER;
+//    }
+//    else{
+//        wicketkeepercode =@"";
+//    }
 }
 -(UIColor*)colorWithHexString:(NSString*)hex
 {
