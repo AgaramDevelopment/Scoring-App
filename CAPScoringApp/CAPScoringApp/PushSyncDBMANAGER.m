@@ -13,6 +13,7 @@
 #import "MatchResultPushRecord.h"
 #import "MatchEventPushRecord.h"
 #import "InningsSummeryPushRecord.h"
+#import "SessionEventPushRecord.h"
 
 @implementation PushSyncDBMANAGER
 
@@ -302,6 +303,60 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return INNINGSSUMMARYArray;
+}
+
+
+
+
+//SESSIONEVENTS
+
+
++(NSMutableArray *)RetrieveSESSIONEVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE{
+    NSMutableArray *SESSIONEVENTSArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
+        NSString *query=[NSString stringWithFormat:@"SELECT * FROM SESSIONEVENTS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'", COMPETITIONCODE,MATCHCODE];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                
+                SessionEventPushRecord *record=[[SessionEventPushRecord alloc]init];
+                
+                record.COMPETITIONCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.MATCHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record. INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record. DAYNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record. SESSIONNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record. SESSIONSTARTTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                record. SESSIONENDTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                record. BATTINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record.  STARTOVER=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                record.  ENDOVER=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                record.  TOTALRUNS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                record.  TOTALWICKETS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                record.  DOMINANTTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
+                record. SESSIONSTATUS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
+                record. ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
+               
+                [SESSIONEVENTSArray addObject:record];
+                
+                
+                
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
+    }
+    return SESSIONEVENTSArray;
 }
 
 @end

@@ -193,6 +193,7 @@
 		CEC25E031D2907B6009D99F0 /* MatchResultPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC25E021D2907B6009D99F0 /* MatchResultPushRecord.m */; };
 		CEC25E061D290B04009D99F0 /* MatchEventPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC25E051D290B04009D99F0 /* MatchEventPushRecord.m */; };
 		CEC25E091D290DE4009D99F0 /* InningsSummeryPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC25E081D290DE4009D99F0 /* InningsSummeryPushRecord.m */; };
+		CEC25E0C1D291A26009D99F0 /* SessionEventPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC25E0B1D291A26009D99F0 /* SessionEventPushRecord.m */; };
 		CEC305811D014C3400301ED3 /* AppealSystemRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305801D014C3400301ED3 /* AppealSystemRecords.m */; };
 		CEC305841D01566100301ED3 /* AppealComponentRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305831D01566100301ED3 /* AppealComponentRecord.m */; };
 		CEC305871D015BB900301ED3 /* AppealUmpireRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC305861D015BB800301ED3 /* AppealUmpireRecord.m */; };
@@ -608,6 +609,8 @@
 		CEC25E051D290B04009D99F0 /* MatchEventPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchEventPushRecord.m; sourceTree = "<group>"; };
 		CEC25E071D290DE4009D99F0 /* InningsSummeryPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InningsSummeryPushRecord.h; sourceTree = "<group>"; };
 		CEC25E081D290DE4009D99F0 /* InningsSummeryPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InningsSummeryPushRecord.m; sourceTree = "<group>"; };
+		CEC25E0A1D291A26009D99F0 /* SessionEventPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SessionEventPushRecord.h; sourceTree = "<group>"; };
+		CEC25E0B1D291A26009D99F0 /* SessionEventPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SessionEventPushRecord.m; sourceTree = "<group>"; };
 		CEC3057F1D014C3400301ED3 /* AppealSystemRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealSystemRecords.h; sourceTree = "<group>"; };
 		CEC305801D014C3400301ED3 /* AppealSystemRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppealSystemRecords.m; sourceTree = "<group>"; };
 		CEC305821D01566100301ED3 /* AppealComponentRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealComponentRecord.h; sourceTree = "<group>"; };
@@ -1258,6 +1261,8 @@
 				2469625C1D1E99DE00CC30D0 /* UpdateScoreengineRecord */,
 				CEC25DF81D28F8A2009D99F0 /* PushSyncDBMANAGER.h */,
 				CEC25DF91D28F8A2009D99F0 /* PushSyncDBMANAGER.m */,
+				CEC25E0A1D291A26009D99F0 /* SessionEventPushRecord.h */,
+				CEC25E0B1D291A26009D99F0 /* SessionEventPushRecord.m */,
 			);
 			name = ReSource;
 			sourceTree = "<group>";
@@ -1751,6 +1756,7 @@
 				CEC25E061D290B04009D99F0 /* MatchEventPushRecord.m in Sources */,
 				246465241D17255C0078A446 /* PenaltygridVC.m in Sources */,
 				0468B3881D12743900B98576 /* PenalityVC.m in Sources */,
+				CEC25E0C1D291A26009D99F0 /* SessionEventPushRecord.m in Sources */,
 				CE3DD41C1CFBFA7000D93A55 /* SelectPlayerRecord.m in Sources */,
 				1877776F1D2232FA002F31E5 /* getimageRecord.m in Sources */,
 				0481DD061D213B250084BFF7 /* PowerPlayVC.m in Sources */,

@@ -11475,5 +11475,6 @@ if(self.checkInternetConnection){
     NSMutableArray*InningsSummeryGetArray= [PushSyncDBMANAGER RetrieveINNINGSSUMMARYData:_competitionCode :_matchCode]  ;
     
     
+     NSMutableArray*SessionEventGetArray= [PushSyncDBMANAGER RetrieveSESSIONEVENTSData:_competitionCode :_matchCode]  ;
 }
 @end
