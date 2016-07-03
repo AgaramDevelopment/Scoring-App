@@ -20,4 +20,5 @@
 +(NSMutableArray *)RetrieveBALLEVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
 +(NSMutableArray *)RetrieveBATTINGSUMMARYData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
 +(NSMutableArray *)RetrieveOVEREVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
++(NSMutableArray *)RetrieveSESSIONEVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
 @end
