@@ -7167,7 +7167,7 @@ EndInnings *endInnings;
     if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
     {
         int inningscount =fetchSEPageLoadRecord.INNINGSNO;
-        if(inningscount > 2)
+       if(inningscount > 2)
        {
     FollowOn *objFollowOn =[[FollowOn alloc]initWithNibName:@"FollowOn" bundle:nil];
     objFollowOn.compitionCode=self.competitionCode;
@@ -7175,6 +7175,8 @@ EndInnings *endInnings;
     objFollowOn.battingTeamName =fetchSEPageLoadRecord.BATTEAMNAME;
     objFollowOn.battingTeamCode =fetchSEPageLoadRecord.BATTINGTEAMCODE;
     objFollowOn.BowlingTeamCode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+    objFollowOn.inningsno       = fetchSEPageLoadRecord.INNINGSNO;
+    
     objFollowOn.delegate =self;
     
     
@@ -7187,7 +7189,7 @@ EndInnings *endInnings;
     
     objFollowOn.view.alpha = 0;
     [objFollowOn didMoveToParentViewController:self];
-    objFollowOn.view.frame =CGRectMake(90, 200, objFollowOn.view.frame.size.width, objFollowOn.view.frame.size.height);
+    objFollowOn.view.frame =CGRectMake(90, 300, objFollowOn.view.frame.size.width, objFollowOn.view.frame.size.height);
     [fullview addSubview:Btn_Fullview];
     [self.view addSubview:fullview];
     
@@ -7199,7 +7201,7 @@ EndInnings *endInnings;
     [self addChildViewController:objFollowOn];
     [fullview addSubview:objFollowOn.view];
 }
-    }
+}
 }
 -(void) matchInfoEdit
 {

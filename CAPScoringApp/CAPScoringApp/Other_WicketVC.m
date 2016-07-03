@@ -347,6 +347,7 @@
     add.COMPETITIONCODE=self.COMPETITIONCODE;
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
+    add.TEAMCODE=self.TEAMCODE;
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
@@ -368,12 +369,48 @@
     
     
     if(_ISEDITMODE){
-        [self UpdateOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :WICKETTYPE :PlayerCode :N_WICKETNO :VIDEOLOCATION :TOTALRUNS];
+        [self UpdateOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :WICKETTYPE :PlayerCode :WICKETNO :VIDEOLOCATION :TOTALRUNS];
+        Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
+        add.COMPETITIONCODE=self.COMPETITIONCODE;
+        add.MATCHCODE=self.MATCHCODE;
+        add.INNINGSNO=self.INNINGSNO;
+        add.TEAMCODE=self.TEAMCODE;
+        
+        [self addChildViewController:add];
+        add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+        [self.view addSubview:add.view];
+        add.view.alpha = 0;
+        [add didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             add.view.alpha = 1;
+         }
+                         completion:nil];
         
         
        
     }else{
-        [self InsertOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :PlayerCode :WICKETTYPE : N_WICKETNO :VIDEOLOCATION :TOTALRUNS];
+        [self InsertOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :PlayerCode :WICKETTYPE : WICKETNO :VIDEOLOCATION :TOTALRUNS];
+        
+        Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
+        add.COMPETITIONCODE=self.COMPETITIONCODE;
+        add.MATCHCODE=self.MATCHCODE;
+        add.INNINGSNO=self.INNINGSNO;
+        add.TEAMCODE=self.TEAMCODE;
+        
+        [self addChildViewController:add];
+        add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+        [self.view addSubview:add.view];
+        add.view.alpha = 0;
+        [add didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             add.view.alpha = 1;
+         }
+                         completion:nil];
+
     }
     
     

@@ -39,7 +39,7 @@
 
 @property(strong,nonatomic)NSString*WICKETTYPE;
 @property(strong,nonatomic)NSString*WICKETPLAYER;
-@property(strong,nonatomic)NSString*WICKETNO;
+@property(strong,nonatomic)NSNumber*WICKETNO;
 @property(assign,nonatomic)BOOL ISEDITMODE;
 
 
