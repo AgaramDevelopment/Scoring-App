@@ -290,4 +290,5 @@
 
 @property (assign,nonatomic) BOOL isEditMode;
 @property (strong,nonatomic) NSString *editBallCode;
+- (IBAction)SyncData_btn:(id)sender;
 @end
