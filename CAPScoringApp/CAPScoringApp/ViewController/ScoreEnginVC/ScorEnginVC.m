@@ -11464,4 +11464,6 @@ if(self.checkInternetConnection){
    fullview.hidden=YES;
     //[self reloadBowlerTeamBatsmanDetails];
 }
+- (IBAction)SyncData_btn:(id)sender {
+}
 @end
