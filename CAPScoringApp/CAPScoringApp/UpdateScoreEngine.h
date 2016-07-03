@@ -171,8 +171,70 @@
 @property(strong,nonatomic)NSString* N_RUNS;
 
 
+@property(strong,nonatomic)NSString *BATSMANCODE;
+@property(nonatomic,assign)NSNumber *ISDELETE;
+
+
+@property(nonatomic,assign)NSNumber* F_BOWLEROVERS;
+@property(nonatomic,assign)NSNumber* F_BOWLERBALLS;
+@property(nonatomic,assign)NSNumber* F_BOWLERRUNS;
+@property(nonatomic,assign)NSNumber* F_BOWLERPARTIALOVERBALLS;
+@property(nonatomic,assign)NSNumber* F_BOWLERMAIDENS;
+@property(nonatomic,assign)NSNumber* F_BOWLERWICKETS;
+@property(nonatomic,assign)NSNumber* F_BOWLERNOBALLS;
+@property(nonatomic,assign)NSNumber* F_BOWLERWIDES;
+@property(nonatomic,assign)NSNumber* F_BOWLERDOTBALLS;
+@property(nonatomic,assign)NSNumber* F_BOWLERFOURS;
+@property(nonatomic,assign)NSNumber* F_BOWLERSIXES;
+
+
+@property(nonatomic,assign)NSNumber* U_BOWLEROVERS;
+@property(nonatomic,assign)NSNumber* U_BOWLERBALLS;
+@property(nonatomic,assign)NSNumber* U_BOWLERPARTIALOVERBALLS;
+@property(nonatomic,assign)NSNumber* U_BOWLERRUNS;
+@property(nonatomic,assign)NSNumber* U_BOWLERWICKETS;
+@property(nonatomic,assign)NSNumber* U_BOWLERNOBALLS;
+@property(nonatomic,assign)NSNumber* U_BOWLERWIDES;
+@property(nonatomic,assign)NSNumber* U_BOWLERDOTBALLS;
+@property(nonatomic,assign)NSNumber* U_BOWLERFOURS;
+@property(nonatomic,assign)NSNumber* U_BOWLERSIXES;
+@property(nonatomic,assign)NSNumber* BOWLERCOUNT;
+
+
+
+
+@property(strong,nonatomic)NSString *F_OVERNO;
+@property(strong,nonatomic)NSString *OVERS;
+@property(strong,nonatomic)NSString *O_WICKETNO;
+@property(strong,nonatomic)NSString *U_BOWLERCODE;
+
+@property(nonatomic,assign)NSNumber* ISBALLEXISTS;
+@property(nonatomic,assign)NSNumber* ISBOWLERCHANGED;
+
+
 @property(strong,nonatomic)NSMutableArray *getDataArray;
+@property(strong,nonatomic)NSMutableArray *getPlayerArray;
+@property(strong,nonatomic)NSMutableArray *getOverArray;
+@property(strong,nonatomic)NSString  *SMAIDENOVER;
+
+@property(nonatomic,assign)NSNumber* ISWKTDTLSUPDATE ;
+@property(nonatomic,assign)NSNumber* BOWLEROVERBALLCNT ;
+@property(nonatomic,assign)NSNumber* BOWLEROVERBALLCN;
+
+
+@property(strong,nonatomic)NSString *BALLS;
+@property(strong,nonatomic)NSString *PARTIALOVERBALLS;
+@property(strong,nonatomic)NSString *WICKETS;
+@property(strong,nonatomic)NSString *MAIDENS;
+@property(strong,nonatomic)NSString *NOBALLS;
+@property(strong,nonatomic)NSString *WIDES;
+@property(strong,nonatomic)NSString *DOTBALLS;
+@property(strong,nonatomic)NSString *FOURS;
+@property(strong,nonatomic)NSString *SIXES;
+
 
 -(void) UpdateScoreEngine:(NSString *)BALLCODE:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSNumber*)OVERNO:(NSNumber*)BALLNO:(NSNumber*)BALLCOUNT:(NSNumber*)SESSIONNO:(NSString*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)WICKETKEEPERCODE:(NSString*)UMPIRE1CODE:(NSString*)UMPIRE2CODE:(NSString*)ATWOROTW:(NSString*)BOWLINGEN:(NSString*)BOWLTYPE:(NSString*)SHOTTYPE:(NSString*)SHOTTYPECATEGORY:(NSString*)ISLEGALBALL:(NSString*)ISFOUR:(NSString*)ISSIX:(NSString*)RUNS:(NSNumber*)OVERTHROW:(NSNumber*)TOTALRUNS:(NSNumber*)WIDE:(NSNumber*)NOBALL:(NSNumber*)BYES:(NSNumber*)LEGBYES:(NSNumber*)PENALTY:(NSNumber*)TOTALEXTRAS:(NSNumber*)GRANDTOTAL:(NSNumber*)RBW:(NSString*)PMLINECODE:(NSString*)PMLENGTHCODE:(NSString*)PMSTRIKEPOINT:(NSString*)PMSTRIKEPOINTLINECODE:(NSNumber*)PMX1:(NSNumber*)PMY1:(NSNumber*)PMX2:(NSNumber*)PMY2:(NSNumber*)PMX3:(NSNumber*)PMY3:(NSString*)WWREGION:(NSNumber*)WWX1:(NSNumber*)WWY1:(NSNumber*)WWX2:(NSNumber*)WWY2:(NSNumber*)BALLDURATION:(NSString*)ISAPPEAL:(NSString*)ISBEATEN:(NSString*)ISUNCOMFORT:(NSString*)ISWTB:(NSString*)ISRELEASESHOT:(NSString*)MARKEDFOREDIT:(NSString*)REMARKS:(NSNumber*)ISWICKET:(NSString*)WICKETTYPE:(NSString*)WICKETPLAYER:(NSString*)FIELDINGPLAYER:(NSNumber*)ISWICKETUNDO:(NSString*)AWARDEDTOTEAMCODE:(NSNumber*)PENALTYRUNS:(NSString*)PENALTYTYPECODE:(NSString*)PENALTYREASONCODE:(NSString*)BALLSPEED:(NSString*)UNCOMFORTCLASSIFCATION:(NSString*)WICKETEVENT;
+
+-(void) UpdateScoreBoard:(NSString *) BALLCODE:(NSString *) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSNumber*)INNINGSNO :(NSString *)BATSMANCODE:(NSNumber *) ISFOUR:(NSNumber*)ISSIX:(NSNumber*)RUNS:(NSNumber*)OVERTHROW:(NSNumber*)ISWICKET :(NSString *)WICKETTYPE:(NSString *)WICKETPLAYER:(NSString*)BOWLERCODE:(NSString*)OVERNO:(NSNumber*)BALLNO:(NSNumber*)WICKETSCORE :(NSNumber *)WIDE:(NSNumber *)NOBALL:(NSNumber*)BYES	:(NSNumber*)LEGBYES:(NSNumber*)PENALTY:(NSNumber*)ISDELETE :(NSNumber *)ISWICKETUNDO:(NSNumber *)F_ISWICKETCOUNTABLE:(NSNumber*)F_ISWICKET :(NSNumber*)F_WICKETTYPE;
 
 @end

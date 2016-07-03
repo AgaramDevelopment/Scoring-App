@@ -391,7 +391,7 @@
                             }
     
     
-						  NSMutableArray *GetMatchUmpireDetailsArray=[ DBManagerEditScoreEngine GetMatchUmpireDetailsForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO:BALLCODE];
+						   self.GetMatchUmpireDetailsArray=[ DBManagerEditScoreEngine GetMatchUmpireDetailsForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO:BALLCODE];
 						  
         NSNumber* ISINNINGSLASTOVER= [[NSNumber alloc] init];
         
@@ -406,14 +406,14 @@
 						  
 						   self.GetBallDetailsForBallEventsArray=[ DBManagerEditScoreEngine GetBallDetailsForBallEvents : COMPETITIONCODE: MATCHCODE : BALLCODE];
 						  
-						  NSMutableArray *GetWicketEventDetailsArray=[ DBManagerEditScoreEngine GetWicketEventDetailsForWicketEvents : COMPETITIONCODE: MATCHCODE :BATTINGTEAMCODE : INNINGSNO: BALLCODE];
+						   self.GetWicketEventDetailsArray=[ DBManagerEditScoreEngine GetWicketEventDetailsForWicketEvents : COMPETITIONCODE: MATCHCODE :BATTINGTEAMCODE : INNINGSNO: BALLCODE];
 						  
-						  NSMutableArray *GetAppealDetailsForAppealEventsArray=[ DBManagerEditScoreEngine GetAppealDetailsForAppealEvents :  BALLCODE];
+						  self.GetAppealDetailsForAppealEventsArray=[ DBManagerEditScoreEngine GetAppealDetailsForAppealEvents :  BALLCODE];
 						  
-						  NSMutableArray *GetPenaltyDetailsForPenaltyEventsArray=[ DBManagerEditScoreEngine GetPenaltyDetailsForPenaltyEvents :  COMPETITIONCODE: MATCHCODE : INNINGSNO: BALLCODE];
+						  self.GetPenaltyDetailsForPenaltyEventsArray=[ DBManagerEditScoreEngine GetPenaltyDetailsForPenaltyEvents :  COMPETITIONCODE: MATCHCODE : INNINGSNO: BALLCODE];
 						  
-        
-        
+                        self.getFieldingFactorArray=[ DBManagerEditScoreEngine getFieldingFactorDetails :  COMPETITIONCODE: MATCHCODE : BATTINGTEAMCODE: BALLCODE];
+    
     [DBManager GETFIELDINGFACTORSDETAILS];
     
     
