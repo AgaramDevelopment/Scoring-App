@@ -31,4 +31,10 @@
 +(NSMutableArray *)RetrieveBOWLEROVERDETAILSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
 +(NSMutableArray *)RetrieveFIELDINGEVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
 +(NSMutableArray *)RetrieveDAYEVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
++(NSMutableArray *)RetrieveAPPEALEVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
++(NSMutableArray *)RetrieveWICKETEVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
++(NSMutableArray *)RetrievePOWERPLAYData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
++(NSMutableArray *)RetrievePENALTYDETAILSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
++(NSMutableArray *)RetrievePLAYERINOUTTIMEData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
++(NSMutableArray *)RetrieveCAPTRANSACTIONSLOGENTRYData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
 @end

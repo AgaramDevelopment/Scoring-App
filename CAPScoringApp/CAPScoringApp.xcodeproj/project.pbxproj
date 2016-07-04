@@ -1533,6 +1533,12 @@
 				0485A53B1D2A297D0059990F /* FIELDINGEVENTSPushRecord.m */,
 				0485A53D1D2A2D240059990F /* DAYEVENTSPushRecord.h */,
 				0485A53E1D2A2D240059990F /* DAYEVENTSPushRecord.m */,
+				CEA275131D2A20FB007F6A28 /* WicketEventsPushRecord.h */,
+				CEA275141D2A20FB007F6A28 /* WicketEventsPushRecord.m */,
+				CEA275161D2A244B007F6A28 /* PowerPlayPushRecord.h */,
+				CEA275171D2A244B007F6A28 /* PowerPlayPushRecord.m */,
+				CEA275191D2A25DE007F6A28 /* PlayerInOutPushRecord.h */,
+				CEA2751A1D2A25DE007F6A28 /* PlayerInOutPushRecord.m */,
 			);
 			name = Records;
 			sourceTree = "<group>";
