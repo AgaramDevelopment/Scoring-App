@@ -2343,13 +2343,19 @@ EndInnings *endInnings;
         //
         //    -(void) UpdateScoreEngine:(NSString *)BALLCODE:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSNumber*)OVERNO:(NSNumber*)BALLNO:(NSNumber*)BALLCOUNT:(NSNumber*)SESSIONNO:(NSString*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)WICKETKEEPERCODE:(NSString*)UMPIRE1CODE:(NSString*)UMPIRE2CODE:(NSString*)ATWOROTW:(NSString*)BOWLINGEN:(NSString*)BOWLTYPE:(NSString*)SHOTTYPE:(NSString*)SHOTTYPECATEGORY:(NSString*)ISLEGALBALL:(NSString*)ISFOUR:(NSString*)ISSIX:(NSString*)RUNS:(NSNumber*)OVERTHROW:(NSNumber*)TOTALRUNS:(NSNumber*)WIDE:(NSNumber*)NOBALL:(NSNumber*)BYES:(NSNumber*)LEGBYES:(NSNumber*)PENALTY:(NSNumber*)TOTALEXTRAS:(NSNumber*)GRANDTOTAL:(NSNumber*)RBW:(NSString*)PMLINECODE:(NSString*)PMLENGTHCODE:(NSString*)PMSTRIKEPOINT:(NSString*)PMSTRIKEPOINTLINECODE:(NSNumber*)PMX1:(NSNumber*)PMY1:(NSNumber*)PMX2:(NSNumber*)PMY2:(NSNumber*)PMX3:(NSNumber*)PMY3:(NSString*)WWREGION:(NSNumber*)WWX1:(NSNumber*)WWY1:(NSNumber*)WWX2:(NSNumber*)WWY2:(NSNumber*)BALLDURATION:(NSString*)ISAPPEAL:(NSString*)ISBEATEN:(NSString*)ISUNCOMFORT:(NSString*)ISWTB:(NSString*)ISRELEASESHOT:(NSString*)MARKEDFOREDIT:(NSString*)REMARKS:(NSNumber*)ISWICKET:(NSString*)WICKETTYPE:(NSString*)WICKETPLAYER:(NSString*)FIELDINGPLAYER:(NSNumber*)ISWICKETUNDO:(NSString*)AWARDEDTOTEAMCODE:(NSNumber*)PENALTYRUNS:(NSString*)PENALTYTYPECODE:(NSString*)PENALTYREASONCODE:(NSString*)BALLSPEED:(NSString*)UNCOMFORTCLASSIFCATION:(NSString*)WICKETEVENT;
         
+        
+        
         [updatescore UpdateScoreEngine :self.editBallCode :self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLS]  :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT] :fetchSEPageLoadRecord.SESSIONNO :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode : ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString : fetchSEPageLoadRecord.TEAMACODE] ?fetchSEPageLoadRecord.TEAMAWICKETKEEPER : fetchSEPageLoadRecord.TEAMBWICKETKEEPER) :@"":@"": self.ballEventRecord.objAtworotw :self.ballEventRecord.objBowlingEnd :self.ballEventRecord.objBowltype :self.ballEventRecord.objShottype :self.ballEventRecord.objShorttypecategory :self.ballEventRecord.objIslegalball : self.ballEventRecord.objIsFour :  self.ballEventRecord.objIssix :self.ballEventRecord.objRuns :self.ballEventRecord.objOverthrow :self.ballEventRecord.objTotalruns :self.ballEventRecord.objWide : self.ballEventRecord.objNoball :self.ballEventRecord.objByes : self.ballEventRecord.objLegByes : self.ballEventRecord.objPenalty :self.ballEventRecord.objTotalextras :self.ballEventRecord.objGrandtotal :self.ballEventRecord.objRbw :self.ballEventRecord.objPMlinecode :self.ballEventRecord.objPMlengthcode :self.ballEventRecord.objPMStrikepoint :self.ballEventRecord.objPMStrikepointlinecode :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objPMX2 :self.ballEventRecord.objPMY2 : self.ballEventRecord.objPMX3 :self.ballEventRecord.objPMY3 :self.ballEventRecord.objWWREGION :self.ballEventRecord.objWWX1 :self.ballEventRecord.objWWY2 :self.ballEventRecord.objWWX2 :self.ballEventRecord.objWWY2 :self.ballEventRecord.objballduration :self.ballEventRecord.objIsbeaten :self.ballEventRecord.objIsuncomfort :self.ballEventRecord.objIswtb :self.ballEventRecord.objIsreleaseshot :self.ballEventRecord.objMarkedforedit :self.ballEventRecord.objRemark :@"" : self.ballEventRecord.objWicketType :@"" :@"" :@"" :@"" :@"" : self.ballEventRecord.objPenaltytypecode :@"" : self.ballEventRecord.objBallspeed :self.ballEventRecord.objUncomfortclassification :@"" :@"" :@""];
 
         
     }
     else
     {
+      
+        int ballCount = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
         InsertSEScoreEngine* _InsertSEScoreEngine = [[InsertSEScoreEngine alloc] init];
+        _InsertSEScoreEngine.BOWLINGTEAMCODE = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+        
         [_InsertSEScoreEngine InsertScoreEngine :
          self.competitionCode :
          self.matchCode  :
@@ -2357,7 +2363,7 @@ EndInnings *endInnings;
          [NSNumber numberWithInt : fetchSEPageLoadRecord.INNINGSNO.intValue] :
          BallCode :
          [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] :
-         [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLS] :
+         [NSNumber numberWithInt: ballCount] :
          [NSNumber numberWithInt:1] : //default BALLCOUNT for Live mode
          [NSNumber numberWithInteger: fetchSEPageLoadRecord.DAYNO] :
          [NSNumber numberWithInteger: fetchSEPageLoadRecord.SESSIONNO] :

@@ -140,8 +140,8 @@
 
 +(NSMutableArray*)  GetWicKetAssignVarForInsertScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE :(NSNumber*) INNINGSNO :(NSString*) WICKETPLAYER;
 
-+(BOOL) UpdatebattingSummaryInWiCketForInsertScoreBoard:(NSString*) N_WICKETNO:(NSString*) N_WICKETTYPE: (NSString*) N_FIELDERCODE:(NSString*) N_BOWLERCODE:(NSString*) WICKETOVERNO :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE :(NSNumber*) INNINGSNO :(NSString*) WICKETPLAYER;
-
+//+(BOOL) UpdatebattingSummaryInWiCketForInsertScoreBoard:(NSString*) N_WICKETNO:(NSString*) N_WICKETTYPE: (NSString*) N_FIELDERCODE:(NSString*) N_BOWLERCODE:(NSString*) WICKETOVERNO :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE :(NSNumber*) INNINGSNO :(NSString*) WICKETPLAYER;
++(BOOL) UpdatebattingSummaryInWiCketForInsertScoreBoard:(NSString*) N_WICKETNO:(NSString*) N_WICKETTYPE: (NSString*) N_FIELDERCODE:(NSString*) N_BOWLERCODE:(NSString*) WICKETOVERNO :(NSString*)WICKETBALLNO:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE :(NSNumber*) INNINGSNO :(NSString*) WICKETPLAYER;
 
 +(NSString*) GetBateamCodeForInsertScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE :(NSNumber*) INNINGSNO;
 

@@ -608,6 +608,7 @@ EndInningsVC *save;
 
 -(void)insertScordBoard:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO
 {
+    
 
     ISWKTDTLSUPDATE.intValue == 1;
     ISBOWLERCHANGED.intValue == 0;
@@ -685,7 +686,7 @@ EndInningsVC *save;
     
     
     
-    if(![DBManagerEndInnings GetBatsmanCodeForInsertScoreBoard:COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:BATSMANCODE])
+    if(![DBManagerEndInnings GetBatsmanCodeForInsertScoreBoard  :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:BATSMANCODE])
     {
         NSMutableArray *GetOScoreBoardDetails=[DBManagerEndInnings GetO_AssignValueForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:BATSMANCODE ];
         
@@ -754,7 +755,7 @@ EndInningsVC *save;
 
 			 
     
-    if(UPDATEFLAGBAT=0)
+    if(UPDATEFLAGBAT.intValue==0)
     {
         [ DBManagerEndInnings InsertbattingSummaryForInsertScoreBoard: COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:INNINGSNO: N_BATTINGPOSITIONNO :BATSMANCODE: N_RUNS: N_BALLS: N_ONES: N_TWOS : N_THREES: N_FOURS:N_SIXES: N_DOTBALLS ];
     }
@@ -785,9 +786,10 @@ EndInningsVC *save;
             N_FIELDERCODE = O_FIELDERCODE;
             N_BOWLERCODE = O_BOWLERCODE;
         }
+        
         if(ISWKTDTLSUPDATE.intValue == 1)
         {
-            [DBManagerEndInnings UpdatebattingSummaryInWiCketForInsertScoreBoard: N_WICKETNO: N_WICKETTYPE: N_FIELDERCODE: N_BOWLERCODE: WICKETOVERNO : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE : INNINGSNO : WICKETPLAYER];
+            [DBManagerEndInnings UpdatebattingSummaryInWiCketForInsertScoreBoard : N_WICKETNO: N_WICKETTYPE: N_FIELDERCODE: N_BOWLERCODE: WICKETOVERNO: WICKETBALLNO: COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE : INNINGSNO : WICKETPLAYER];
         }
         if([DBManagerEndInnings GetBateamCodeForInsertScoreBoard : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO]!=0)
         {

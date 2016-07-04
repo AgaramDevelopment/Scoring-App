@@ -61,3 +61,16 @@
 @property(nonatomic,strong) NSString *BOWLINGPOSITIONNO;
 
 @end
+
+
+@interface BallEventSummaryRecord : NSObject
+@property(nonatomic,strong) NSString *BALLCODE;
+@property(nonatomic,strong) NSString *COMPETITIONCODE;
+@property(nonatomic,strong) NSString *MATCHCODE;
+@property(nonatomic,strong) NSString *TEAMCODE;
+@property(nonatomic,strong) NSString *INNINGSNO;
+@property(nonatomic,strong) NSString *OVERNO;
+@property(nonatomic,strong) NSString *BALLNO;
+@property(nonatomic,strong) NSString *BALLCOUNT;
+@property(nonatomic,strong) NSString *OVERBALLCOUNT;
+@end

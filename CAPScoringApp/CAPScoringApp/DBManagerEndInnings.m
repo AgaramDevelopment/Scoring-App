@@ -52,7 +52,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 +(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
     return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
 }
-
+    
 //SP_INSERTENDINNINGS---------------------------------------------------------------------------
 +(NSString*) GetMatchTypeUsingCompetition:(NSString*) COMPETITIONCODE
 {
@@ -1790,8 +1790,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         NSString *updateSQL = [NSString stringWithFormat:@" SELECT BATSMANCODE  FROM BATTINGSUMMARY   WHERE COMPETITIONCODE = '%@'  AND MATCHCODE =  '%@'   AND BATTINGTEAMCODE =  '%@' AND INNINGSNO = '%@' AND BATSMANCODE =  '%@' ",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATSMANCODE];
         const char *update_stmt = [updateSQL UTF8String];
-        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)== SQLITE_OK)
-            
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
@@ -1829,10 +1828,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 NSString *updateSQL = [NSString stringWithFormat:@"SELECT BATTINGPOSITIONNO, RUNS,  BALLS,  ONES, TWOS  , THREES, FOURS, SIXES, DOTBALLS , WICKETNO , WICKETTYPE, FIELDERCODE, BOWLERCODE    FROM BATTINGSUMMARY    WHERE COMPETITIONCODE = '%@'  AND MATCHCODE = '%@'  AND BATTINGTEAMCODE ='%@'  AND INNINGSNO = '%@'  AND BATSMANCODE = '%@'",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATSMANCODE];
                                
             const char *update_stmt = [updateSQL UTF8String];
-            if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
-                               
-                               {
-                                   while(sqlite3_step(statement)==SQLITE_ROW){
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
                                        EndInnings *record=[[EndInnings alloc]init];
                                        record.BATTINGPOSITIONNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                                        record.RUNS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
@@ -2021,6 +2019,8 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT BATTINGPOSITIONNO, RUN
     sqlite3_close(dataBase);
     return GetWicketSDetails;
 }
+
+
 
 
 +(BOOL) UpdatebattingSummaryInWiCketForInsertScoreBoard:(NSString*) N_WICKETNO:(NSString*) N_WICKETTYPE: (NSString*) N_FIELDERCODE:(NSString*) N_BOWLERCODE:(NSString*) WICKETOVERNO :(NSString*)WICKETBALLNO:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE :(NSNumber*) INNINGSNO :(NSString*) WICKETPLAYER

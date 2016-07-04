@@ -11,6 +11,8 @@
 #import "InsertSEScoreEngineRecord.h"
 
 @interface InsertSEScoreEngine : NSObject
+
+@property (strong,nonatomic) NSString *BOWLINGTEAMCODE;
 -(void) InsertScoreEngine:
 (NSString *)COMPETITIONCODE:
 (NSString*)MATCHCODE :
