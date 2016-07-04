@@ -368,6 +368,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return SESSIONEVENTSArray;
 }
 
+
+//INNINGSEVENTS
 +(NSMutableArray *)RetrieveINNINGSEVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE{
     NSMutableArray *INNINGSEVENTSArray=[[NSMutableArray alloc]init];
     int retVal;
@@ -556,6 +558,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return OVEREVENTSArray;
 }
+
+
+
 //BALLEVENTS
 +(NSMutableArray *)RetrieveBALLEVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE{
     NSMutableArray *BALLEVENTSArray=[[NSMutableArray alloc]init];

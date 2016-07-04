@@ -208,7 +208,7 @@
     NSString*overs = objFixtureRecord.overs;
     NSString *MatchStatus = objFixtureRecord.MatchStatus;
     
-    if([MatchStatus  isEqual: @"MSC123"])
+    if([MatchStatus  isEqual: @"MSC123"] || [MatchStatus  isEqual: @"MSC281"])
     {
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
