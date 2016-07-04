@@ -30,5 +30,6 @@
 @synthesize WICKETOVERNO;
 @synthesize WICKETBALLNO;
 @synthesize WICKETSCORE;
+@synthesize ISSYNC;
 
 @end

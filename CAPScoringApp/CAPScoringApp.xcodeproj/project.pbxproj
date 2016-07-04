@@ -203,6 +203,7 @@
 		CEA2751B1D2A25DE007F6A28 /* PlayerInOutPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA2751A1D2A25DE007F6A28 /* PlayerInOutPushRecord.m */; };
 		CEA2751E1D2A2755007F6A28 /* PenalityDetailsPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA2751D1D2A2755007F6A28 /* PenalityDetailsPushRecord.m */; };
 		CEA275211D2A298E007F6A28 /* CapTransactionslogentryPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA275201D2A298E007F6A28 /* CapTransactionslogentryPushRecord.m */; };
+		CEA275241D2A5CBB007F6A28 /* BowlingSummeryPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA275231D2A5CBB007F6A28 /* BowlingSummeryPushRecord.m */; };
 		CEC25DFA1D28F8A2009D99F0 /* PushSyncDBMANAGER.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC25DF91D28F8A2009D99F0 /* PushSyncDBMANAGER.m */; };
 		CEC25DFD1D28F8F0009D99F0 /* MatchRegistrationPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC25DFC1D28F8F0009D99F0 /* MatchRegistrationPushRecord.m */; };
 		CEC25E001D28FE1B009D99F0 /* MatchTeamPlayerDetailsPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC25DFF1D28FE1B009D99F0 /* MatchTeamPlayerDetailsPushRecord.m */; };
@@ -635,6 +636,8 @@
 		CEA2751D1D2A2755007F6A28 /* PenalityDetailsPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenalityDetailsPushRecord.m; sourceTree = "<group>"; };
 		CEA2751F1D2A298E007F6A28 /* CapTransactionslogentryPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapTransactionslogentryPushRecord.h; sourceTree = "<group>"; };
 		CEA275201D2A298E007F6A28 /* CapTransactionslogentryPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapTransactionslogentryPushRecord.m; sourceTree = "<group>"; };
+		CEA275221D2A5CBB007F6A28 /* BowlingSummeryPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlingSummeryPushRecord.h; sourceTree = "<group>"; };
+		CEA275231D2A5CBB007F6A28 /* BowlingSummeryPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlingSummeryPushRecord.m; sourceTree = "<group>"; };
 		CEBA5CA51D22343800CE2472 /* Batsmancell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Batsmancell.h; sourceTree = "<group>"; };
 		CEBA5CA61D22343800CE2472 /* Batsmancell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Batsmancell.m; sourceTree = "<group>"; };
 		CEBA5CA71D22343800CE2472 /* DBManagerEndBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerEndBall.h; sourceTree = "<group>"; };
@@ -1315,6 +1318,8 @@
 				CEC25DF91D28F8A2009D99F0 /* PushSyncDBMANAGER.m */,
 				CEC25E0A1D291A26009D99F0 /* SessionEventPushRecord.h */,
 				CEC25E0B1D291A26009D99F0 /* SessionEventPushRecord.m */,
+				CEA275221D2A5CBB007F6A28 /* BowlingSummeryPushRecord.h */,
+				CEA275231D2A5CBB007F6A28 /* BowlingSummeryPushRecord.m */,
 			);
 			name = ReSource;
 			sourceTree = "<group>";
@@ -1893,6 +1898,7 @@
 				187229281D12665600CC168F /* AddBreakVC.m in Sources */,
 				DCEFC86D1D28B79300451485 /* DBManagerChangeTeam.m in Sources */,
 				DCF6773C1D27D17600B98749 /* DBManagerEndSession.m in Sources */,
+				CEA275241D2A5CBB007F6A28 /* BowlingSummeryPushRecord.m in Sources */,
 				187952331D02A410001A1224 /* FieldingEventRecord.m in Sources */,
 				1886718A1CFFF77E004DEDA0 /* AggressiveShotTypeCell.m in Sources */,
 				0468B3921D12AD2100B98576 /* MetaDataRecord.m in Sources */,

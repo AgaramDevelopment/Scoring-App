@@ -12,11 +12,11 @@
 
 @property(nonatomic,strong)NSString *COMPETITIONCODE;
 @property(nonatomic,strong)NSString *MATCHCODE;
-@property(nonatomic,strong)NSString *INNINGSNO;
+@property(nonatomic,strong)NSNumber *INNINGSNO;
 @property(nonatomic,strong)NSString *BALLCODE;
 @property(nonatomic,strong)NSString *PENALTYCODE;
 @property(nonatomic,strong)NSString *AWARDEDTOTEAMCODE;
-@property(nonatomic,strong)NSString *PENALTYRUNS;
+@property(nonatomic,strong)NSNumber *PENALTYRUNS;
 @property(nonatomic,strong)NSString *PENALTYTYPECODE;
 @property(nonatomic,strong)NSString *PENALTYREASONCODE;
 @property(nonatomic,strong)NSString *ISSYNC;

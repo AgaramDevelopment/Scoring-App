@@ -74,6 +74,6 @@
 @synthesize PMSTRIKEPOINTLINECODE;
 @synthesize BALLSPEED;
 @synthesize UNCOMFORTCLASSIFCATION;
-
+@synthesize ISSYNC;
 
 @end
