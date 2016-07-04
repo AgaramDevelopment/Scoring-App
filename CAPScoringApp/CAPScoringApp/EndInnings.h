@@ -133,6 +133,7 @@
 @property(strong,nonatomic)NSString *OVERS;
 @property(strong,nonatomic)NSString *PARTIALOVERBALLS;
 @property(strong,nonatomic)NSString *MAIDENS;
+@property(strong,nonatomic)NSString *BALLCODE;
 
 
 @property(strong,nonatomic)NSString *BATSMANCODE;

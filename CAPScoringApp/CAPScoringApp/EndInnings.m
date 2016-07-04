@@ -12,7 +12,11 @@
 #import "EndInningsVC.h"
 #import "BallEventRecord.h"
 #import "EndInningsVC.h"
+#import "DBManagerInsertScoreEngine.h"
+
 @implementation EndInnings
+
+@synthesize  BALLCODE;
 
 @synthesize COMPETITIONCODE;
 @synthesize MATCHCODE;
@@ -506,10 +510,12 @@ EndInningsVC *save;
             
             
                                    // BALLCODENO = MATCHCODE + RIGHT(REPLICATE('0',10)+ MAXID,10);
+
                                         
+                                        BALLCODE = [DBManagerInsertScoreEngine GetMaxIdForInsertScoreEngine:MATCHCODE];
                                     
             
-            [DBManagerEndInnings  InsertBallEventsFormanageOverDetails :@"": COMPETITIONCODE: MATCHCODE:TEAMCODE: INNINGSNO : objBallEventRecord.objDayno:overNo :[NSString stringWithFormat:@"%d",objBallEventRecord.objOverBallcount]:objBallEventRecord.objSessionno:objBallEventRecord.objStrikercode:objBallEventRecord.objNonstrikercode :objBallEventRecord.objBowlercode:objBallEventRecord.objWicketkeepercode:umpire1code:umpire2code:@"":@""];
+            [DBManagerEndInnings  InsertBallEventsFormanageOverDetails :BALLCODE: COMPETITIONCODE: MATCHCODE:TEAMCODE: INNINGSNO : objBallEventRecord.objDayno:overNo :[NSString stringWithFormat:@"%d",objBallEventRecord.objOverBallcount]:objBallEventRecord.objSessionno:objBallEventRecord.objStrikercode:objBallEventRecord.objNonstrikercode :objBallEventRecord.objBowlercode:objBallEventRecord.objWicketkeepercode:umpire1code:umpire2code:@"":@""];
             
         
             //EXEC SP_INSERTSCOREBOARD

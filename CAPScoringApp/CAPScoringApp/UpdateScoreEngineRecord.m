@@ -38,7 +38,54 @@
 @synthesize BATTINGPOSITIONNO;
 @end
 
-@implementation BallEventSummaryRecord
+//@implementation BowlingSummaryRecord
+//@synthesize BALLCODE;
+//@synthesize COMPETITIONCODE;
+//@synthesize MATCHCODE;
+//@synthesize TEAMCODE;
+//@synthesize INNINGSNO;
+//@synthesize OVERNO;
+//@synthesize BALLNO;
+//@synthesize BALLCOUNT;
+//@synthesize OVERBALLCOUNT;
+//@end
+//
+//@implementation BowlingSummaryRecord
+//@synthesize BALLCODE;
+//@synthesize COMPETITIONCODE;
+//@synthesize MATCHCODE;
+//@synthesize TEAMCODE;
+//@synthesize INNINGSNO;
+//@synthesize OVERNO;
+//@synthesize BALLNO;
+//@synthesize BALLCOUNT;
+//@synthesize OVERBALLCOUNT;
+//@end
+
+
+
+@implementation BowlingSummaryRecord
+@synthesize COMPETITIONCODE;
+@synthesize MATCHCODE;
+@synthesize BOWLINGTEAMCODE;
+@synthesize INNINGSNO;
+@synthesize BOWLERCODE;
+@synthesize OVERS;
+@synthesize BALLS;
+@synthesize PARTIALOVERBALLS;
+@synthesize RUNS;
+@synthesize WICKETS;
+@synthesize NOBALLS;
+@synthesize WIDES;
+@synthesize DOTBALLS;
+@synthesize FOURS;
+@synthesize SIXES;
+@synthesize BOWLINGPOSITIONNO;
+@synthesize MAIDENS;
+@end
+
+
+@implementation BallEventSummaryRecord : NSObject
 @synthesize BALLCODE;
 @synthesize COMPETITIONCODE;
 @synthesize MATCHCODE;
@@ -49,16 +96,3 @@
 @synthesize BALLCOUNT;
 @synthesize OVERBALLCOUNT;
 @end
-
-@implementation BallEventSummaryRecord
-@synthesize BALLCODE;
-@synthesize COMPETITIONCODE;
-@synthesize MATCHCODE;
-@synthesize TEAMCODE;
-@synthesize INNINGSNO;
-@synthesize OVERNO;
-@synthesize BALLNO;
-@synthesize BALLCOUNT;
-@synthesize OVERBALLCOUNT;
-@end
-

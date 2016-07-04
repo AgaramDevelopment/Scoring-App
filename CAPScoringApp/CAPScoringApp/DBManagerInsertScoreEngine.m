@@ -7,7 +7,9 @@
 //
 
 #import "DBManagerInsertScoreEngine.h"
+#import "OverBallCountRecord.h"
 #import "UpdateScoreEngineRecord.h"
+
 
 #import <sqlite3.h>
 
@@ -408,6 +410,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
+
     
     
     
@@ -416,7 +419,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         BallEventSummaryRecord *record = [ballEventArray objectAtIndex:i];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
-            NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BALLEVENTS SET OVERBALLCOUNT = '%@' 	 WHERE BALLCODE = '%@' AND COMPETITIONCODE = '%@' AND MATCHCODE = '%@ AND INNINGSNO = '%@' AND TEAMCODE = '%@' AND OVERNO = '%@' AND BALL",record.OVERBALLCOUNT,record.BALLCODE, record.COMPETITIONCODE,record.MATCHCODE,record.INNINGSNO, record.TEAMCODE ,record.OVERNO];
+            NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BALLEVENTS SET OVERBALLCOUNT = '%@' 	 WHERE BALLCODE = '%@' AND COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND TEAMCODE = '%@' AND OVERNO = '%@'",record.OVERBALLCOUNT,record.BALLCODE, record.COMPETITIONCODE,record.MATCHCODE,record.INNINGSNO, record.TEAMCODE ,record.OVERNO];
             const char *update_stmt = [updateSQL UTF8String];
             sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
             if (sqlite3_step(statement) == SQLITE_DONE)
@@ -433,6 +436,29 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return  YES;
 }
 
+
+//    NSString *databasePath = [self getDBPath];
+//    sqlite3_stmt *statement;
+//    sqlite3 *dataBase;
+//    const char *dbPath = [databasePath UTF8String];
+//    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+//    {
+//        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BALLEVENTS SET OVERBALLCOUNT = SEQNO 	FROM 	(SELECT ROW_NUMBER() OVER (ORDER BY BALLNO, BALLCOUNT) SEQNO, BALLCODE AS BALLID FROM BALLEVENTS BE WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND TEAMCODE = '%@'	AND OVERNO = '%@') AS BALL WHERE BALLCODE = BALL.BALLID AND COMPETITIONCODE = '%@' AND MATCHCODE = '%@ AND INNINGSNO = '%@' AND TEAMCODE = '%@' AND OVERNO = '%@'",COMPETITIONCODE, MATCHCODE,INNINGSNO,TEAMCODE, T_OVERNO ,COMPETITIONCODE, MATCHCODE,INNINGSNO,TEAMCODE, T_OVERNO ];
+//        
+//        const char *selectStmt = [updateSQL UTF8String];
+//        
+//        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+//        {
+//            while(sqlite3_step(statement)==SQLITE_DONE){
+//                sqlite3_reset(statement);
+//                return YES;
+//            }
+//        }
+//    }
+//    sqlite3_reset(statement);
+//    return NO;
+
+//}
 
 +(BOOL)  UpdateBEForInsertScoreEngine:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO : (NSNumber*) T_OVERNO{
     
@@ -547,6 +573,42 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 +(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
     return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
 }
+
++(NSMutableArray *) getOverBallCountDetails :(NSString *) CommpitionCode :(NSString *) matchCode:(NSString*) overNo :(NSString *) Inningsno
+{
+    NSMutableArray *GetInsertTypeGreaterthanZeroDetails=[[NSMutableArray alloc]init];
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"select rowid,ballcode, runs, ballno,ballcount,overballcount from ballevents where competitioncode  = '%@'  and matchcode = '%@' and overno = '%@' and inningsno = '%@' ",CommpitionCode, matchCode,overNo,Inningsno ];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if( sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+            
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                OverBallCountRecord *objOverBallCountRecord=[[OverBallCountRecord alloc]init];
+                objOverBallCountRecord.objRowid=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                objOverBallCountRecord.objBallCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                objOverBallCountRecord.objRun=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                objOverBallCountRecord.objBallno=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                objOverBallCountRecord.objBallCount=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                objOverBallCountRecord.objoverBallCount=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                
+                
+                [GetInsertTypeGreaterthanZeroDetails addObject:objOverBallCountRecord];
+            }
+            
+        }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return GetInsertTypeGreaterthanZeroDetails;
+}
+
 //Duplicate
 //+(NSString*) GetPrevoiusBallCodeForInsertScoreEngine : (NSNumber*) OVERNO: (NSNumber*) BALLNO:(NSNumber*) BALLCOUNT : (NSString*) MATCHCODE : (NSString*) INNINGSNO{
 //                                                                  NSString *databasePath = [self getDBPath];
@@ -578,7 +640,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  sqlite3_reset(statement);
 //                                                                  return @"";
 //                                                              }
-+(NSNumber*) GetBallcodeInBallEventForInsertScoreEngine : (NSString*) PREVIOUSBALLCODE: (NSString*) BOWLERCODE;{
+    
+    +(NSNumber*) GetBallcodeInBallEventForInsertScoreEngine : (NSString*) PREVIOUSBALLCODE: (NSString*) BOWLERCODE{
+
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -3461,11 +3525,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               return GetBallDetails;
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               }
 
-
-
-+(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
-    return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
-}
 
 
 @end

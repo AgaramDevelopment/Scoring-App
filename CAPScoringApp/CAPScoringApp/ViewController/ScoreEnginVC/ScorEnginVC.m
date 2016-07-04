@@ -67,6 +67,7 @@
 #import "ArchivesVC.h"
 #import "PushSyncDBMANAGER.h"
 #import "EndSession.h"
+#import "EditModeVC.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)

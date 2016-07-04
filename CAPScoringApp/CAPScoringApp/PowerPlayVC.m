@@ -191,6 +191,7 @@ NSString *matchover;
 
 - (IBAction)btn_submit:(id)sender {
     
+    
     if(powerplaystartover == nil){
         if([self formValidation]){
             
@@ -203,7 +204,18 @@ NSString *matchover;
             powerplayrecord.powerplaytypecode= powerplaytype;
             
             
-            [DBManager SetPowerPlayDetails:@"PPC0000059":self.matchCode :self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.powerplaytypecode :@"MSC001" :@"user" :@"2016-06-22 16:37:00":@"user": @"2016-06-22 16:37:00"];
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *username=[defaults stringForKey :@"UserFullname"];
+            
+            NSString *maxid= [DBManager getMAXIDPOWERPLAY];
+            
+            
+            NSString *paddingString = [[NSString string] stringByPaddingToLength: (7-maxid.length) withString: @"0" startingAtIndex: 0];
+            NSString *powerplayCode = [NSString stringWithFormat:@"PPT%@%@",paddingString,maxid] ;
+            
+            
+            
+            [DBManager SetPowerPlayDetails :powerplayCode:self.matchCode :self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.powerplaytypecode :@"MSC001" :username :powerplayrecord.crateddate:username : powerplayrecord.modifydate];
             
             [DBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
             

@@ -7,6 +7,8 @@
 //
 
 #import "InsertSEScoreEngine.h"
+#import "InningsBowlerDetailsRecord.h"
+#import "OverBallCountRecord.h"
 #import "EndInnings.h"
 
 @implementation InsertSEScoreEngine
@@ -121,6 +123,7 @@
     NSNumber* BATTEAMRUNS =[[NSNumber alloc ] init];
 
     
+    objoverballCount=[[NSMutableArray alloc]init];
     
     BATTINGTEAMCODE = TEAMCODE;
     SB_STRIKERCODE = STRIKERCODE;
