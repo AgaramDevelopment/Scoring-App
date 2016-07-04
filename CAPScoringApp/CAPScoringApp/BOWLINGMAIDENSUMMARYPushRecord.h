@@ -11,8 +11,9 @@
 @interface BOWLINGMAIDENSUMMARYPushRecord : NSObject
 @property(nonatomic,strong)NSString *COMPETITIONCODE;
 @property(nonatomic,strong)NSString *MATCHCODE;
-@property(nonatomic,strong)NSString *INNINGSNO;
+@property(nonatomic,strong)NSNumber *INNINGSNO;
 @property(nonatomic,strong)NSString *BOWLERCODE;
-@property(nonatomic,strong)NSString *OVERS;
+@property(nonatomic,strong)NSNumber *OVERS;
+@property(nonatomic,strong)NSString *ISSYNC;
 
 @end

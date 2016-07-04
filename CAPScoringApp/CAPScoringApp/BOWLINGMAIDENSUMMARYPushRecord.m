@@ -18,7 +18,7 @@
 @synthesize INNINGSNO;
 @synthesize BOWLERCODE;
 @synthesize OVERS;
-
+@synthesize ISSYNC;
 
 
 

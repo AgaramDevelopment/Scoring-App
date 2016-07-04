@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol EditmodeDelegate <NSObject>
+@required
+-(void) insertBallDetails :(NSString*) BallCode :(NSString *) insertType;
+@end
+
 @interface EditModeVC : UIViewController
+
+@property(nonatomic,strong) id <EditmodeDelegate> delegate;
+
+
 
 @property (nonatomic,strong) NSString *Comptitioncode;
 @property (nonatomic,strong) NSString *matchCode;

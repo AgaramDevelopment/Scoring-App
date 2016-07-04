@@ -12,16 +12,17 @@
 
 @property(nonatomic,strong) NSString *COMPETITIONCODE;
 @property(nonatomic,strong) NSString *MATCHCODE;
-@property(nonatomic,strong) NSString *INNINGSNO;
-@property(nonatomic,strong) NSString *DAYNO;
+@property(nonatomic,strong) NSNumber *INNINGSNO;
+@property(nonatomic,strong) NSNumber *DAYNO;
 @property(nonatomic,strong) NSString *STARTTIME;
 @property(nonatomic,strong) NSString *ENDTIME;
 @property(nonatomic,strong) NSString *BATTINGTEAMCODE;
-@property(nonatomic,strong) NSString *TOTALOVERS;
-@property(nonatomic,strong) NSString *TOTALRUNS;
-@property(nonatomic,strong) NSString *TOTALWICKETS;
+@property(nonatomic,strong) NSNumber *TOTALOVERS;
+@property(nonatomic,strong) NSNumber *TOTALRUNS;
+@property(nonatomic,strong) NSNumber *TOTALWICKETS;
 @property(nonatomic,strong) NSString *COMMENTS;
-@property(nonatomic,strong) NSString *DAYSTATUS;
+@property(nonatomic,strong) NSNumber *DAYSTATUS;
+@property(nonatomic,strong) NSString *ISSYNC;
 
 
 

@@ -17,6 +17,6 @@
 @property(nonatomic,strong)NSString *USERID;
 @property(nonatomic,strong)NSString *LOGDATETIME;
 @property(nonatomic,strong)NSString *SCRIPTSTATUS;
-@property(nonatomic,strong)NSString *SEQNO;
+@property(nonatomic,strong)NSNumber *SEQNO;
 @property(nonatomic,strong)NSString *ISSYNC;
 @end

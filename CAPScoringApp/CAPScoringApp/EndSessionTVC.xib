@@ -28,7 +28,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="450" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rK8-dD-R9k">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rK8-dD-R9k">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="43"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>

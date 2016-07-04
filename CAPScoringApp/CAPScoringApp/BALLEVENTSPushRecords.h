@@ -137,11 +137,8 @@
 
 @property(nonatomic,strong) NSString * UNCOMFORTCLASSIFCATION;
 
-//@property(nonatomic,strong) NSNumber * objWicketno;
-//
-//@property(nonatomic,strong) NSString * objWicketType;
-//
-//@property(nonatomic,strong) NSString * objPenaltytypecode;
+@property(nonatomic,strong) NSString * ISSYNC;
+
 
 
 

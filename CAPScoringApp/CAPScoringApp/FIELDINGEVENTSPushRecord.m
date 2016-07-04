@@ -19,5 +19,6 @@
 @synthesize MATCHCODE;
 @synthesize TEAMCODE;
 @synthesize INNINGSNO;
+@synthesize ISSYNC;
 
 @end

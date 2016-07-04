@@ -14,11 +14,11 @@
 @property(nonatomic,strong) NSString *FIELDERCODE;
 @property(nonatomic,strong) NSString *ISSUBSTITUTE;
 @property(nonatomic,strong) NSString *FIELDINGFACTORCODE;
-@property(nonatomic,strong) NSString *NRS;
+@property(nonatomic,strong) NSNumber *NRS;
 @property(nonatomic,strong) NSString *COMPETITIONCODE;
 @property(nonatomic,strong) NSString *MATCHCODE;
 @property(nonatomic,strong) NSString *TEAMCODE;
-@property(nonatomic,strong) NSString *INNINGSNO;
-
+@property(nonatomic,strong) NSNumber *INNINGSNO;
+@property(nonatomic,strong) NSString *ISSYNC;
 
 @end

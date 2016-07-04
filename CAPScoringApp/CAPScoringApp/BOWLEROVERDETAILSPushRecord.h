@@ -12,10 +12,11 @@
 @property(nonatomic,strong) NSString *COMPETITIONCODE;
 @property(nonatomic,strong) NSString *MATCHCODE;
 @property(nonatomic,strong) NSString *TEAMCODE;
-@property(nonatomic,strong) NSString *INNINGSNO;
-@property(nonatomic,strong) NSString *OVERNO;
+@property(nonatomic,strong) NSNumber *INNINGSNO;
+@property(nonatomic,strong) NSNumber *OVERNO;
 @property(nonatomic,strong) NSString *BOWLERCODE;
 @property(nonatomic,strong) NSString *STARTTIME;
 @property(nonatomic,strong) NSString *ENDTIME;
+@property(nonatomic,strong) NSString *ISSYNC;
 
 @end

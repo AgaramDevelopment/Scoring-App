@@ -7,6 +7,8 @@
 //
 
 #import "InsertSEScoreEngine.h"
+#import "InningsBowlerDetailsRecord.h"
+#import "OverBallCountRecord.h"
 
 @implementation InsertSEScoreEngine
 
@@ -83,37 +85,37 @@
 (NSString *)WICKETEVENT
 {
     NSString* BATTINGTEAMCODE;
-    NSString* BOWLINGTEAMCODE =[[NSString alloc ] init];
-    NSString* BATTEAMSHORTNAME =[[NSString alloc ] init];
-    NSString* BOWLTEAMSHORTNAME =[[NSString alloc ] init];
-    NSString* BATTEAMNAME =[[NSString alloc ] init];
-    NSString* BOWLTEAMNAME =[[NSString alloc ] init];
-    NSString* MATCHOVERS =[[NSString alloc ] init];
-    NSString* BATTEAMLOGO =[[NSString alloc ] init];
-    NSString* BOWLTEAMLOGO =[[NSString alloc ] init];
-    NSString* MATCHTYPE =[[NSString alloc ] init];
-    NSString* INNINGSSTATUS =[[NSString alloc ] init];
-    NSString* BALLCODENO =[[NSString alloc ] init];
-    NSString* MAXID =[[NSString alloc ] init];
-    NSString* SB_STRIKERCODE =[[NSString alloc ] init];
-    NSString* SB_BOWLERCODE =[[NSString alloc ] init];
-    NSNumber* N_OVERNO =[[NSNumber alloc ] init];
-    NSNumber* N_BALLNO =[[NSNumber alloc ] init];
-    NSNumber* N_BALLCOUNT =[[NSNumber alloc ] init];
-    NSNumber* OVERBALLCOUNT =[[NSNumber alloc ] init];
-    NSNumber* T_OVERNO =[[NSNumber alloc ] init];
-    NSNumber* T_BALLNO =[[NSNumber alloc ] init];
-    NSNumber* T_BALLCOUNT =[[NSNumber alloc ] init];
-    NSNumber* T_ISLEGALBALL =[[NSNumber alloc ] init];
-    NSString* MAXPENALTYID =[[NSString alloc ] init];
-    NSString* PENALTYCODE =[[NSString alloc ] init];
-    NSString* PREVIOUSBALLCODE =[[NSString alloc ] init];
-    NSString* PREVIOUSBOWLERCODE =[[NSString alloc ] init];
-    NSNumber* T_TOTALRUNS =[[NSNumber alloc ] init];
-    NSString* T_STRIKERCODE =[[NSString alloc ] init];
-    NSString* T_NONSTRIKERCODE =[[NSString alloc ] init];
+    NSString* BOWLINGTEAMCODE ;
+    NSString* BATTEAMSHORTNAME ;
+    NSString* BOWLTEAMSHORTNAME ;
+    NSString* BATTEAMNAME ;
+    NSString* BOWLTEAMNAME;
+    NSString* MATCHOVERS ;
+    NSString* BATTEAMLOGO;
+    NSString* BOWLTEAMLOGO;
+    NSString* MATCHTYPE;
+    NSString* INNINGSSTATUS ;
+    NSString* BALLCODENO ;
+    NSString* MAXID ;
+    NSString* SB_STRIKERCODE ;
+    NSString* SB_BOWLERCODE ;
+    NSNumber* N_OVERNO ;
+    NSNumber* N_BALLNO ;
+    NSNumber* N_BALLCOUNT ;
+    NSNumber* OVERBALLCOUNT ;
+    NSNumber* T_OVERNO ;
+    NSNumber* T_BALLNO ;
+    NSNumber* T_BALLCOUNT ;
+    NSNumber* T_ISLEGALBALL ;
+    NSString* MAXPENALTYID ;
+    NSString* PENALTYCODE ;
+    NSString* PREVIOUSBALLCODE ;
+    NSString* PREVIOUSBOWLERCODE ;
+    NSNumber* T_TOTALRUNS ;
+    NSString* T_STRIKERCODE ;
+    NSString* T_NONSTRIKERCODE ;
     
-    
+    objoverballCount=[[NSMutableArray alloc]init];
     
     SB_STRIKERCODE = STRIKERCODE;
     SB_BOWLERCODE = BOWLERCODE;
@@ -121,15 +123,18 @@
     if([DBManagerInsertScoreEngine GetBallCodeForInsertScoreEngine : COMPETITIONCODE :MATCHCODE].length != 0)
     {
         BOOL SqlStatus = [DBManagerInsertScoreEngine UpdateMatchStatusForInsertScoreEngine : COMPETITIONCODE :MATCHCODE ];
-        NSLog(@"%@ - status",SqlStatus);
+       
         
     }
     BALLCOUNT=[DBManagerInsertScoreEngine GetBallCountForInsertScoreEngine : COMPETITIONCODE :MATCHCODE :TEAMCODE: INNINGSNO:OVERNO: BALLNO ];
     
     
-    if([DBManagerInsertScoreEngine GetBallCodesForInsertScoreEngine : COMPETITIONCODE :MATCHCODE :TEAMCODE: INNINGSNO:OVERNO: BALLNO : BALLCOUNT ].length != 0)
+    if([DBManagerInsertScoreEngine GetBallCodesForInsertScoreEngine : COMPETITIONCODE :MATCHCODE :TEAMCODE: INNINGSNO:OVERNO: BALLNO : BALLCOUNT ].length <= 0)
     {
-        BALLCODENO=[DBManagerInsertScoreEngine GetMaxIdForInsertScoreEngine :MATCHCODE ];
+        if(BALLCODE.length == 0)
+        {
+            BALLCODENO=[DBManagerInsertScoreEngine GetMaxIdForInsertScoreEngine :MATCHCODE ];
+        }
         
         if(INSERTTYPE.length >0)
         {
@@ -190,8 +195,28 @@
                 }
             }
             [DBManagerInsertScoreEngine InsertBallEventForInsertScoreEngine :BALLCODENO:N_BALLNO:N_BALLCOUNT:BALLSPEED:UNCOMFORTCLASSIFCATION:COMPETITIONCODE: MATCHCODE:INNINGSNO:TEAMCODE: BALLCODE];
-            [DBManagerInsertScoreEngine UpdateOverBallCountInBallEventtForInsertScoreEngine :COMPETITIONCODE: MATCHCODE:INNINGSNO:TEAMCODE: T_OVERNO];
-            [DBManagerInsertScoreEngine UpdateBEForInsertScoreEngine : MATCHCODE:INNINGSNO: T_OVERNO];
+           NSMutableArray * inningsDetail= [DBManagerInsertScoreEngine getOverBallCountDetails :COMPETITIONCODE : MATCHCODE: T_OVERNO : INNINGSNO];
+//            if(INSERTTYPE ==@"AFTER")
+//            {
+//                for(int i=0; i<inningsDetail.count; i++)
+//                {
+//                    OverBallCountRecord *objRecord =(OverBallCountRecord *)[inningsDetail objectAtIndex:i];
+//                    if(BALLCODE == objRecord.objBallCode)
+//                    {
+//                        
+//                    }
+//                }
+//            }
+//            else if (INSERTTYPE ==@"BEFORE")
+//            {
+//                
+//            }
+//           
+            
+            
+            
+            [DBManagerInsertScoreEngine UpdateOverBallCountInBallEventtForInsertScoreEngine :COMPETITIONCODE: MATCHCODE:TEAMCODE:INNINGSNO: T_OVERNO];
+           // [DBManagerInsertScoreEngine UpdateBEForInsertScoreEngine : MATCHCODE:INNINGSNO: T_OVERNO];
         }
         else
         {
@@ -234,7 +259,7 @@
             OVERBALLCOUNT= [DBManagerInsertScoreEngine GetOverBallCountForInsertScoreEngine :COMPETITIONCODE: MATCHCODE:TEAMCODE:INNINGSNO: OVERNO];
             
             
-            [DBManagerInsertScoreEngine InsertBallEventsForInsertScoreEngine :  BALLCODENO   : COMPETITIONCODE    : MATCHCODE       : TEAMCODE       : INNINGSNO       : DAYNO       : OVERNO       : BALLNO       : BALLCOUNT       : OVERBALLCOUNT       : SESSIONNO       : STRIKERCODE       : NONSTRIKERCODE       : BOWLERCODE       : WICKETKEEPERCODE       : UMPIRE1CODE       : UMPIRE2CODE       : ATWOROTW       : BOWLINGEND       : BOWLTYPE       : SHOTTYPE       : SHOTTYPECATEGORY       : ISLEGALBALL       : ISFOUR       : ISSIX       : RUNS       : OVERTHROW       : TOTALRUNS       : WIDE       : NOBALL       : BYES       : LEGBYES       : PENALTY       : TOTALEXTRAS       : GRANDTOTAL       : RBW       : PMLINECODE       : PMLENGTHCODE       : PMSTRIKEPOINT       : @""       : PMX1       : PMY1       : PMX2       : PMY2       : PMX3       : PMY3       : WWREGION       : WWX1       : WWY1       : WWX2       : WWY2       : BALLDURATION       : ISAPPEAL       : ISBEATEN       : ISUNCOMFORT       : ISWTB       : ISRELEASESHOT       : MARKEDFOREDIT       : REMARKS       : VIDEOFILENAME       : BALLSPEED       : UNCOMFORTCLASSIFCATION  ];
+            [DBManagerInsertScoreEngine InsertBallEventsForInsertScoreEngine :  BALLCODENO   :COMPETITIONCODE    : MATCHCODE       : TEAMCODE       : INNINGSNO       : DAYNO       : OVERNO       : BALLNO       : BALLCOUNT       : OVERBALLCOUNT       : SESSIONNO       : STRIKERCODE       : NONSTRIKERCODE       : BOWLERCODE       : WICKETKEEPERCODE       : UMPIRE1CODE       : UMPIRE2CODE       : ATWOROTW       : BOWLINGEND       : BOWLTYPE       : SHOTTYPE       : SHOTTYPECATEGORY       : ISLEGALBALL       : ISFOUR       : ISSIX       : RUNS       : OVERTHROW       : TOTALRUNS       : WIDE       : NOBALL       : BYES       : LEGBYES       : PENALTY       : TOTALEXTRAS       : GRANDTOTAL       : RBW       : PMLINECODE       : PMLENGTHCODE       : PMSTRIKEPOINT       : @""       : PMX1       : PMY1       : PMX2       : PMY2       : PMX3       : PMY3       : WWREGION       : WWX1       : WWY1       : WWX2       : WWY2       : BALLDURATION       : ISAPPEAL       : ISBEATEN       : ISUNCOMFORT       : ISWTB       : ISRELEASESHOT       : MARKEDFOREDIT       : REMARKS       : VIDEOFILENAME       : BALLSPEED       : UNCOMFORTCLASSIFCATION  ];
             
             T_TOTALRUNS=0;
             //T_TOTALRUNS=(TOTALRUNS + (CASE WHEN WIDE > 0 THEN WIDE-1 ELSE WIDE END) +                 (CASE WHEN NOBALL > 0 THEN NOBALL-1 ELSE NOBALL END) + LEGBYES + BYES + (CASE WHEN (BYES > 0 || LEGBYES > 0) THEN OVERTHROW ELSE 0 END));

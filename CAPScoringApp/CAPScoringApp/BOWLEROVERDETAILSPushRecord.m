@@ -17,6 +17,7 @@
 @synthesize BOWLERCODE;
 @synthesize STARTTIME;
 @synthesize ENDTIME;
+@synthesize ISSYNC;
 
 
 

@@ -12,11 +12,11 @@
 
 @property(nonatomic,strong)NSString *COMPETITIONCODE;
 @property(nonatomic,strong)NSString *MATCHCODE;
-@property(nonatomic,strong)NSString *INNINGSNO;
-@property(nonatomic,strong)NSString *BREAKNO;
+@property(nonatomic,strong)NSNumber *INNINGSNO;
+@property(nonatomic,strong)NSNumber *BREAKNO;
 @property(nonatomic,strong)NSString *BREAKSTARTTIME;
 @property(nonatomic,strong)NSString *BREAKENDTIME;
-@property(nonatomic,strong)NSString *ISINCLUDEINPLAYERDURATION;
+@property(nonatomic,strong)NSNumber *ISINCLUDEINPLAYERDURATION;
 @property(nonatomic,strong)NSString *BREAKCOMMENTS;
 @property(nonatomic,strong)NSString *issync;
 

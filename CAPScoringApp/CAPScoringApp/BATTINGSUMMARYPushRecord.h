@@ -12,23 +12,23 @@
 @property(nonatomic,strong) NSString *COMPETITIONCODE;
 @property(nonatomic,strong) NSString *MATCHCODE;
 @property(nonatomic,strong) NSString *BATTINGTEAMCODE;
-@property(nonatomic,strong) NSString *INNINGSNO;
-@property(nonatomic,strong) NSString *BATTINGPOSITIONNO;
+@property(nonatomic,strong) NSNumber *INNINGSNO;
+@property(nonatomic,strong) NSNumber *BATTINGPOSITIONNO;
 @property(nonatomic,strong) NSString *BATSMANCODE;
-@property(nonatomic,strong) NSString *RUNS;
-@property(nonatomic,strong) NSString *BALLS;
-@property(nonatomic,strong) NSString *ONES;
-@property(nonatomic,strong) NSString *TWOS;
-@property(nonatomic,strong) NSString *THREES;
-@property(nonatomic,strong) NSString *FOURS;
-@property(nonatomic,strong) NSString *SIXES;
-@property(nonatomic,strong) NSString *DOTBALLS;
-@property(nonatomic,strong) NSString *WICKETNO;
+@property(nonatomic,strong) NSNumber *RUNS;
+@property(nonatomic,strong) NSNumber *BALLS;
+@property(nonatomic,strong) NSNumber *ONES;
+@property(nonatomic,strong) NSNumber *TWOS;
+@property(nonatomic,strong) NSNumber *THREES;
+@property(nonatomic,strong) NSNumber *FOURS;
+@property(nonatomic,strong) NSNumber *SIXES;
+@property(nonatomic,strong) NSNumber *DOTBALLS;
+@property(nonatomic,strong) NSNumber *WICKETNO;
 @property(nonatomic,strong) NSString *WICKETTYPE;
 @property(nonatomic,strong) NSString *FIELDERCODE;
 @property(nonatomic,strong) NSString *BOWLERCODE;
-@property(nonatomic,strong) NSString *WICKETOVERNO;
-@property(nonatomic,strong) NSString *WICKETBALLNO;
-@property(nonatomic,strong) NSString *WICKETSCORE;
-
+@property(nonatomic,strong) NSNumber *WICKETOVERNO;
+@property(nonatomic,strong) NSNumber *WICKETBALLNO;
+@property(nonatomic,strong) NSNumber *WICKETSCORE;
+@property(nonatomic,strong)NSString*ISSYNC;
 @end

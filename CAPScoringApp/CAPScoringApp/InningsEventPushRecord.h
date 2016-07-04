@@ -12,7 +12,7 @@
 @property(nonatomic,strong)NSString *COMPETITIONCODE;
 @property(nonatomic,strong)NSString *MATCHCODE;
 @property(nonatomic,strong)NSString *TEAMCODE;
-@property(nonatomic,strong)NSString *INNINGSNO;
+@property(nonatomic,strong)NSNumber *INNINGSNO;
 @property(nonatomic,strong)NSString *INNINGSSTARTTIME;
 @property(nonatomic,strong)NSString *INNINGSENDTIME;
 @property(nonatomic,strong)NSString *STRIKERCODE;
@@ -22,12 +22,12 @@
 @property(nonatomic,strong)NSString *CURRENTSTRIKERCODE;
 @property(nonatomic,strong)NSString *CURRENTNONSTRIKERCODE;
 @property(nonatomic,strong)NSString *CURRENTBOWLERCODE;
-@property(nonatomic,strong)NSString *TOTALRUNS;
-@property(nonatomic,strong)NSString *TOTALOVERS;
-@property(nonatomic,strong)NSString *TOTALWICKETS;
-@property(nonatomic,strong)NSString *ISDECLARE;
-@property(nonatomic,strong)NSString *ISFOLLOWON;
-@property(nonatomic,strong)NSString *INNINGSSTATUS;
+@property(nonatomic,strong)NSNumber *TOTALRUNS;
+@property(nonatomic,strong)NSNumber *TOTALOVERS;
+@property(nonatomic,strong)NSNumber *TOTALWICKETS;
+@property(nonatomic,strong)NSNumber *ISDECLARE;
+@property(nonatomic,strong)NSNumber *ISFOLLOWON;
+@property(nonatomic,strong)NSNumber *INNINGSSTATUS;
 @property(nonatomic,strong)NSString *BOWLINGEND;
 @property(nonatomic,strong)NSString *issync;
 
