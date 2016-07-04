@@ -39,3 +39,25 @@
 @property(nonatomic,strong) NSString *WICKETSCORE;
 @property(nonatomic,strong) NSString *BATTINGPOSITIONNO;
 @end
+
+
+@interface BowlingSummaryRecord : NSObject
+@property(nonatomic,strong) NSString *COMPETITIONCODE;
+@property(nonatomic,strong) NSString *MATCHCODE;
+@property(nonatomic,strong) NSString *BOWLINGTEAMCODE;
+@property(nonatomic,strong) NSString *INNINGSNO;
+@property(nonatomic,strong) NSString *BOWLERCODE;
+@property(nonatomic,strong) NSString *OVERS;
+@property(nonatomic,strong) NSString *BALLS;
+@property(nonatomic,strong) NSString *PARTIALOVERBALLS;
+@property(nonatomic,strong) NSString *MAIDENS;
+@property(nonatomic,strong) NSString *RUNS;
+@property(nonatomic,strong) NSString *WICKETS;
+@property(nonatomic,strong) NSString *NOBALLS;
+@property(nonatomic,strong) NSString *WIDES;
+@property(nonatomic,strong) NSString *DOTBALLS;
+@property(nonatomic,strong) NSString *FOURS;
+@property(nonatomic,strong) NSString *SIXES;
+@property(nonatomic,strong) NSString *BOWLINGPOSITIONNO;
+
+@end

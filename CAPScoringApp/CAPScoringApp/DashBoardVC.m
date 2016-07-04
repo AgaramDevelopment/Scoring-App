@@ -737,8 +737,6 @@
     
     _view_reports.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
     
-
-    
 }
 
 
@@ -750,11 +748,6 @@
     [removeUDCode removeObjectForKey:@"userCode"];
     [[NSUserDefaults standardUserDefaults]synchronize ];
     
-    
-    
-    
-
-
     
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
@@ -817,6 +810,17 @@
     _img_newMatch.image = [UIImage imageNamed:@"ico-new-mach01.png"];
     _view_new_Match.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:(0.3f)];
 
+    
+    _img_synData.image = [UIImage imageNamed:@"ico-sync-data01.png"];
+    _view_syn_data.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:(0.3f)];
+
+    
+    _img_archives.image = [UIImage imageNamed:@"ico-archives01.png"];
+    _view_archives.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:(0.3f)];
+    
+    _img_reports.image = [UIImage imageNamed:@"ico-reports01.png"];
+    _view_reports.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:(0.3f)];
+   
     
 }
 
