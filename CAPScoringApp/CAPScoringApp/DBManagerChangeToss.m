@@ -580,7 +580,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             BOWLINGTEAMCODE=objTossteam.BowlingTeamCode;
         }
     }
-    if(![DBManagerChangeToss GetMatchEventsForTossDetails : COMPETITIONCODE : MATCHCODE])
+    if([DBManagerChangeToss GetMatchEventsForTossDetails : COMPETITIONCODE : MATCHCODE].length<=0)
     {
         [DBManagerChangeToss SetMatchEventsForToss : COMPETITIONCODE : MATCHCODE : TOSSWONTEAMCODE : ELECTEDTO : BATTINGTEAMCODE : BOWLINGTEAMCODE];
     }
