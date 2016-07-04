@@ -56,7 +56,11 @@
          [delegate showLoading];
          dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     
-    NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/PULLSCORERDATAFROMSERVER/0x0100000088F0BDA6134BA1A808FA82837D998FD8C45AC41C001C2762A27AC7C22D0961149CE3F7B7D0EB9047",[Utitliy getSyncIPPORT]];
+             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+             NSString *secureId = [defaults stringForKey:[Utitliy SecureId]];
+        
+             
+    NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/PULLSCORERDATAFROMSERVER/%@",[Utitliy getSyncIPPORT],secureId];
     NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     NSURLResponse *response;
@@ -733,8 +737,6 @@
     
     _view_reports.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
     
-
-    
 }
 
 
@@ -746,11 +748,6 @@
     [removeUDCode removeObjectForKey:@"userCode"];
     [[NSUserDefaults standardUserDefaults]synchronize ];
     
-    
-    
-    
-
-
     
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
@@ -813,6 +810,17 @@
     _img_newMatch.image = [UIImage imageNamed:@"ico-new-mach01.png"];
     _view_new_Match.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:(0.3f)];
 
+    
+    _img_synData.image = [UIImage imageNamed:@"ico-sync-data01.png"];
+    _view_syn_data.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:(0.3f)];
+
+    
+    _img_archives.image = [UIImage imageNamed:@"ico-archives01.png"];
+    _view_archives.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:(0.3f)];
+    
+    _img_reports.image = [UIImage imageNamed:@"ico-reports01.png"];
+    _view_reports.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:(0.3f)];
+   
     
 }
 

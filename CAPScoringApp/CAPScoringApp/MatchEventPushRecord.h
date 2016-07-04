@@ -15,8 +15,8 @@
 @property(nonatomic,strong)NSString *ELECTEDTO;
 @property(nonatomic,strong)NSString *BATTINGTEAMCODE;
 @property(nonatomic,strong)NSString *BOWLINGTEAMCODE;
-@property(nonatomic,strong)NSString *TARGETRUNS;
-@property(nonatomic,strong)NSString *TARGETOVERS;
+@property(nonatomic,strong)NSNumber *TARGETRUNS;
+@property(nonatomic,strong)NSNumber *TARGETOVERS;
 @property(nonatomic,strong)NSString *TARGETCOMMENTS;
 @property(nonatomic,strong)NSString *BOWLCOMPUTESHOW;
 @property(nonatomic,strong)NSString *ISSYNC;

@@ -13,14 +13,14 @@
 @property(nonatomic,strong)NSString *COMPETITIONCODE;
 @property(nonatomic,strong)NSString *MATCHCODE;
 @property(nonatomic,strong)NSString *BATTINGTEAMCODE;
-@property(nonatomic,strong)NSString *INNINGSNO;
-@property(nonatomic,strong)NSString *BYES;
-@property(nonatomic,strong)NSString *LEGBYES;
-@property(nonatomic,strong)NSString *NOBALLS;
-@property(nonatomic,strong)NSString *WIDES;
-@property(nonatomic,strong)NSString *PENALTIES;
-@property(nonatomic,strong)NSString *INNINGSTOTAL;
-@property(nonatomic,strong)NSString *INNINGSTOTALWICKETS;
+@property(nonatomic,strong)NSNumber *INNINGSNO;
+@property(nonatomic,strong)NSNumber *BYES;
+@property(nonatomic,strong)NSNumber *LEGBYES;
+@property(nonatomic,strong)NSNumber *NOBALLS;
+@property(nonatomic,strong)NSNumber *WIDES;
+@property(nonatomic,strong)NSNumber *PENALTIES;
+@property(nonatomic,strong)NSNumber *INNINGSTOTAL;
+@property(nonatomic,strong)NSNumber *INNINGSTOTALWICKETS;
 @property(nonatomic,strong)NSString *ISSYNC;
 
 @end

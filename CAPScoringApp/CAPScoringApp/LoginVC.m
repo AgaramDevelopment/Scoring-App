@@ -86,9 +86,9 @@
                     NSString *secureId = [rootDictionary valueForKey:@"SecureId"];
 
                     [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
-                    [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
-                    [[NSUserDefaults standardUserDefaults] setObject:secureId forKey:[Utitliy SecureId]];
-                    [[NSUserDefaults standardUserDefaults] synchronize];
+//                    [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+//                    [[NSUserDefaults standardUserDefaults] setObject:secureId forKey:[Utitliy SecureId]];
+//                    [[NSUserDefaults standardUserDefaults] synchronize];
                     
                     
                     NSArray *temp =   [rootDictionary objectForKey:@"UserDetails"];
@@ -97,6 +97,7 @@
                     for (i=0; i<[temp count]; i++) {
                         NSDictionary*test=[temp objectAtIndex:i];
                         NSString*USERCODE=[test objectForKey:@"Usercode"];
+                        [[NSUserDefaults standardUserDefaults] setObject:USERCODE forKey:@"userCode"];
                         NSString *USERROLEID=[test objectForKey:@"Userroleid"];
                         NSString *LOGINID=[test objectForKey:@"Loginid"];
                         NSString *PASSWORD=[test objectForKey:@"Password"];
@@ -135,6 +136,7 @@
                         NSDictionary*test1=[temp1 objectAtIndex:j];
                       USERNAME=[test1 objectForKey:@"Username"];
                         NSString *SECUREID=[test1 objectForKey:@"Secureid"];
+                        [[NSUserDefaults standardUserDefaults] setObject:SECUREID forKey:[Utitliy SecureId]];
                         NSString *STARTDATE=[test1 objectForKey:@"Startdate"];
                         NSString *ENDDATE=[test1 objectForKey:@"Enddate"];
                         NSString *CREATEDBY=[test1 objectForKey:@"Createdby"];
@@ -159,6 +161,7 @@
                         
                         
                     }
+                    [[NSUserDefaults standardUserDefaults] synchronize];
                     
                     
                                         

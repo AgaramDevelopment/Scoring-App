@@ -288,6 +288,7 @@
 - (IBAction)btn_penality:(id)sender;
 @property (strong,nonatomic)NSString *matchTypeCode;
 
+- (IBAction)Exit_btn:(id)sender;
 @property (assign,nonatomic) BOOL isEditMode;
 @property (strong,nonatomic) NSString *editBallCode;
 - (IBAction)SyncData_btn:(id)sender;

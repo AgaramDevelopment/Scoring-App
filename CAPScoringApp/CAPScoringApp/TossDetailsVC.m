@@ -18,7 +18,7 @@
 #import "AppDelegate.h"
 #import "Utitliy.h"
 #import "DBManagerChangeToss.h"
-//#import "ChangeTossVC.h"
+#import "DBManagerChangeToss.h"
 #import "TossDetailRecord.h"
 #import "TossTeamDetailRecord.h"
 #import "InitializeInningsScoreBoardRecord.h"
@@ -27,12 +27,12 @@
 {
     BOOL isEnableTbl;
     NSMutableArray * TossWonByselectindexarray;
-     NSMutableArray * Electedselectindexarray;
+    NSMutableArray * Electedselectindexarray;
     NSMutableArray *Strikerselectindexarray;
     NSMutableArray *NonStrikerselectindexarray;
     NSMutableArray *BowlerselectionIndexArray;
     
-     CustomNavigationVC *objCustomNavigation;
+    CustomNavigationVC *objCustomNavigation;
     
     
     EventRecord *objEventRecord;
@@ -62,7 +62,7 @@
     int selectTeamindex;
     
     NSString* BowlingEnd;
-   }
+}
 @property (nonatomic,strong)NSMutableArray*WonTossArray;
 @property (nonatomic,strong)NSMutableArray*ElectedToArray;
 @property (nonatomic,strong)NSMutableArray*StrikerArray;
@@ -89,20 +89,20 @@
     
     
     [self customnavigationmethod];
-
+    
     
     [self.view_Striker setUserInteractionEnabled:NO];
-     [self.nonStriker setUserInteractionEnabled:NO];
-     [self.view_Bowler setUserInteractionEnabled:NO];
-   // self.outlet_btn_proceed.enabled = NO;
-
+    [self.nonStriker setUserInteractionEnabled:NO];
+    [self.view_Bowler setUserInteractionEnabled:NO];
+    // self.outlet_btn_proceed.enabled = NO;
     
-//    self.radiobutton1 = [[RadioButton alloc] initWithGroupId:@"first group" index:0];
-//    RadioButton *rb2 = [[RadioButton alloc] initWithGroupId:@"first group" index:1];
-     // self.outlet_btn_proceed.enabled = YES;
+    
+    //    self.radiobutton1 = [[RadioButton alloc] initWithGroupId:@"first group" index:0];
+    //    RadioButton *rb2 = [[RadioButton alloc] initWithGroupId:@"first group" index:1];
+    // self.outlet_btn_proceed.enabled = YES;
     
     // Do any additional setup after loading the view.
-// _MATCHCODE=@"IMSC0221C6F6595E95A00001";
+    // _MATCHCODE=@"IMSC0221C6F6595E95A00001";
     [self.view_Wonby.layer setBorderWidth:2.0];
     [self.view_Wonby.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Wonby .layer setMasksToBounds:YES];
@@ -131,7 +131,7 @@
     [self.view_Bowler.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Bowler .layer setMasksToBounds:YES];
     [_Bowler_table setHidden:YES];
- 
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -180,10 +180,10 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-  if (tableView == self.Wonby_table)
-  {
-    return [WonTossArray count];
-  }
+    if (tableView == self.Wonby_table)
+    {
+        return [WonTossArray count];
+    }
     if (tableView == self.electedTo_table)
     {
         return [ElectedToArray count];
@@ -204,9 +204,9 @@
         return [BowleArray count];
     }
     
-else
-return 1;
-  //count number of row from counting array hear cataGorry is An Array
+    else
+        return 1;
+    //count number of row from counting array hear cataGorry is An Array
 }
 
 
@@ -215,19 +215,19 @@ return 1;
 {
     if (tableView == self.Wonby_table)
     {
-    static NSString *MyIdentifier = @"MyIdentifier";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    
-    if (cell == nil)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:MyIdentifier];
-    }
-     objEventRecord=(EventRecord*)[WonTossArray objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text =objEventRecord.TEAMNAME_TOSSWONBY;
-    return cell;
+        static NSString *MyIdentifier = @"MyIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:MyIdentifier];
+        }
+        objEventRecord=(EventRecord*)[WonTossArray objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text =objEventRecord.TEAMNAME_TOSSWONBY;
+        return cell;
     }
     
     
@@ -242,7 +242,7 @@ return 1;
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                           reuseIdentifier:MyIdentifier1];
         }
-    objUserRecord=(UserRecord*)[ElectedToArray objectAtIndex:indexPath.row];
+        objUserRecord=(UserRecord*)[ElectedToArray objectAtIndex:indexPath.row];
         
         cell.textLabel.text =objUserRecord.electedTo;
         return cell;
@@ -261,7 +261,7 @@ return 1;
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                           reuseIdentifier:MyIdentifier2];
         }
-       objTossDeatilsRecord=(TossDeatilsEvent*)[StrikerArray objectAtIndex:indexPath.row];
+        objTossDeatilsRecord=(TossDeatilsEvent*)[StrikerArray objectAtIndex:indexPath.row];
         
         cell.textLabel.text =objTossDeatilsRecord.PlaerNameStrike_nonStrike;
         return cell;
@@ -289,7 +289,7 @@ return 1;
         
     }
     
-
+    
     
     
     if (tableView == self.Bowler_table)
@@ -309,7 +309,7 @@ return 1;
         return cell;
     }
     
-
+    
     
     
     return 0;
@@ -318,32 +318,32 @@ return 1;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-   
+    
     if (tableView == self.Wonby_table)
     {
         
         
-    TossWonByselectindexarray=[[NSMutableArray alloc]init];
-    objEventRecord=(EventRecord*)[WonTossArray objectAtIndex:indexPath.row];
-      
+        TossWonByselectindexarray=[[NSMutableArray alloc]init];
+        objEventRecord=(EventRecord*)[WonTossArray objectAtIndex:indexPath.row];
+        
         NSInteger selectindex = indexPath.row;
-       selectTeamindex= (int) selectindex;
-    self.Wonby_lbl.text =objEventRecord.TEAMNAME_TOSSWONBY;
-    selectTeam=self.Wonby_lbl.text;
+        selectTeamindex= (int) selectindex;
+        self.Wonby_lbl.text =objEventRecord.TEAMNAME_TOSSWONBY;
+        selectTeam=self.Wonby_lbl.text;
         selectTeamcode=objEventRecord.TEAMCODE_TOSSWONBY;
-    [TossWonByselectindexarray addObject:objEventRecord];
-    
-    self.Wonby_table.hidden=YES;
-    isEnableTbl=YES;
+        [TossWonByselectindexarray addObject:objEventRecord];
+        
+        self.Wonby_table.hidden=YES;
+        isEnableTbl=YES;
     }
     
     
     if (tableView == self.electedTo_table)
     {
         Electedselectindexarray=[[NSMutableArray alloc]init];
-       objUserRecord=(UserRecord*)[ElectedToArray objectAtIndex:indexPath.row];
+        objUserRecord=(UserRecord*)[ElectedToArray objectAtIndex:indexPath.row];
         self.electedTo_lbl.text =objUserRecord.electedTo;
-      selectedElected=self.electedTo_lbl.text;
+        selectedElected=self.electedTo_lbl.text;
         electedcode=objUserRecord.MasterSubCode;
         
         [Electedselectindexarray addObject:objUserRecord];
@@ -355,7 +355,7 @@ return 1;
     if (tableView == self.Striker_table)
     {
         Strikerselectindexarray=[[NSMutableArray alloc]init];
-      objTossDeatilsRecord=(TossDeatilsEvent*)[StrikerArray objectAtIndex:indexPath.row];
+        objTossDeatilsRecord=(TossDeatilsEvent*)[StrikerArray objectAtIndex:indexPath.row];
         self.Striker_lbl.text =objTossDeatilsRecord.PlaerNameStrike_nonStrike;
         selectStriker=self.Striker_lbl.text;
         StrikerCode=objTossDeatilsRecord.PlaercodeStrike_nonStrike;
@@ -423,10 +423,10 @@ return 1;
         for(int i=0; i < [FetchTossWonArray count]; i++)
         {
             
-        objEventRecord=(EventRecord*)[FetchTossWonArray objectAtIndex:i];
-       
-        [WonTossArray addObject:objEventRecord];
-           
+            objEventRecord=(EventRecord*)[FetchTossWonArray objectAtIndex:i];
+            
+            [WonTossArray addObject:objEventRecord];
+            
             
         }
         
@@ -435,24 +435,24 @@ return 1;
         self.Wonby_table.hidden=NO;
         isEnableTbl=NO;
     }
-
     
-
-
+    
+    
+    
 }
 
 
 
 - (IBAction)electedTo_btn:(id)sender{
-
+    
     
     
     
     if(isEnableTbl==YES)
     {
-          _Striker_lbl.text = @"";
-          _nonStriker_lbl.text = @"";
-          _Bowler_lbl.text = @"";
+        _Striker_lbl.text = @"";
+        _nonStriker_lbl.text = @"";
+        _Bowler_lbl.text = @"";
         ElectedToArray=[[NSMutableArray alloc]init];
         NSMutableArray * FetchElectedToArray =[DBManager Electedto];
         for(int i=0; i < [FetchElectedToArray count]; i++)
@@ -474,7 +474,7 @@ return 1;
         [self.nonStriker setUserInteractionEnabled:YES];
         [self.view_Bowler setUserInteractionEnabled:YES];
     }
-
+    
 }
 
 
@@ -496,7 +496,7 @@ return 1;
         else{
             if(selectTeamindex==0)
             {
-             teamaCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+                teamaCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
             }
             if(selectTeamindex==1)
             {
@@ -507,11 +507,11 @@ return 1;
         
         
         StrikerArray=[[NSMutableArray alloc]init];
-      
+        
         NSMutableArray * FetchstrikerArray =[DBManager StrikerNonstriker : MATCHCODE:teamaCode];
         for(int i=0; i < [FetchstrikerArray count]; i++)
         {
-       objTossDeatilsRecord=(TossDeatilsEvent*)[FetchstrikerArray objectAtIndex:i];
+            objTossDeatilsRecord=(TossDeatilsEvent*)[FetchstrikerArray objectAtIndex:i];
             
             [StrikerArray addObject:objTossDeatilsRecord];
             
@@ -529,8 +529,8 @@ return 1;
     }
     
     
-
-
+    
+    
 }
 
 
@@ -539,7 +539,7 @@ return 1;
     if(isEnableTbl==YES)
     {
         _nonStriker_lbl.text = @"";
-      //  NSString *teamCode;
+        //  NSString *teamCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
             
@@ -554,7 +554,7 @@ return 1;
         {
             teamaCode=[[WonTossArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
         }
-
+        
         
         
         nonStrikerArray=[[NSMutableArray alloc]init];
@@ -579,14 +579,14 @@ return 1;
         
     }
     
-
-
+    
+    
 }
 
 
 
 - (IBAction)Bowler_btn:(id)sender{
-
+    
     if(isEnableTbl==YES)
     {
         _Bowler_lbl.text = @"";
@@ -594,7 +594,7 @@ return 1;
         if([selectedElected isEqualToString:@"Bat"])
         {
             
-           // teambCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
+            // teambCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
             
             if(selectTeamindex==0)
             {
@@ -609,15 +609,15 @@ return 1;
         }
         else{
             teambCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
-//            if(selectTeamindex==0)
-//            {
-//                teambCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
-//            }
-//            if(selectTeamindex==1)
-//            {
-//                teambCode=[[WonTossArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
-//            }
-
+            //            if(selectTeamindex==0)
+            //            {
+            //                teambCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+            //            }
+            //            if(selectTeamindex==1)
+            //            {
+            //                teambCode=[[WonTossArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+            //            }
+            
         }
         
         
@@ -640,33 +640,33 @@ return 1;
         [self.Bowler_table reloadData];
         self.Bowler_table.hidden=NO;
         isEnableTbl=NO;
-          self.outlet_btn_proceed.enabled = YES;
+        self.outlet_btn_proceed.enabled = YES;
         
     }
-
-
-
-
+    
+    
+    
+    
 }
 
 -(void)viewDidAppear:(BOOL)animated
 {
     
     //radio buttons
-   
+    
     [self.radiobutton1 setTag:0];
     [self.radiobutton1 setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
-   //[self.radiobutton1 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+    //[self.radiobutton1 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
     BowlingEnd=@"MSC150";
     //[self.radiobutton1 setBackgroundImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateSelected];
- [self.radiobutton1 addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
-   
+    [self.radiobutton1 addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
+    
     [self.radiobutton2 setTag:1];
     [self.radiobutton1 setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
-   // [self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];[self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateSelected];
-  [self.radiobutton2 addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
-      //[self.view addSubview:self.radiobutton2];
-      //[self.view addSubview:self.radiobutton2];
+    // [self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];[self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateSelected];
+    [self.radiobutton2 addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
+    //[self.view addSubview:self.radiobutton2];
+    //[self.view addSubview:self.radiobutton2];
 }
 
 
@@ -675,7 +675,7 @@ return 1;
     switch ([sender tag]) {
         case 0:
             if([self.radiobutton1 isSelected]==YES)
-            
+                
             {   BowlingEnd=@"MSC151";
                 [self.radiobutton1 setSelected:NO];
                 [self.radiobutton2 setSelected:YES];
@@ -689,14 +689,14 @@ return 1;
             break;
         case 1:
             if([self.radiobutton2 isSelected]==YES)
-           
+                
             {   BowlingEnd=@"MSC150";
                 [self.radiobutton2 setSelected:NO];
                 [self.radiobutton1 setSelected:YES];
                 
             }
             else{
-               BowlingEnd=@"MSC151";
+                BowlingEnd=@"MSC151";
                 [self.radiobutton2 setSelected:YES];
                 [self.radiobutton1 setSelected:NO];
             }
@@ -716,23 +716,20 @@ return 1;
 - (IBAction)Btn_Proceed:(id)sender {
     
     //save option
-//   NSString *count =[DBManager TossSaveDetails:MATCHCODE :CompetitionCode];
-//    if([count isEqualToString:@"0"]){
-//        [DBManager insertMatchEvent:CompetitionCode :MATCHCODE :selectTeamcode :electedcode :teamaCode :teambCode];
-//    }
-//    
-//    NSString *maxInnNo = [DBManager getMaxInningsNumber:CompetitionCode :MATCHCODE];
-//  
-//    NSString*inningsstatus=@"0";
-//   //  BowlingEnd=@"MSC150";
-//    [DBManager inserMaxInningsEvent:CompetitionCode :MATCHCODE :teamaCode :maxInnNo :StrikerCode:NonStrikerCode :selectBowlerCode :StrikerCode :NonStrikerCode :selectBowlerCode :teamaCode :inningsstatus:BowlingEnd];
-//    [DBManager updateProcced:CompetitionCode :MATCHCODE];
+    //   NSString *count =[DBManager TossSaveDetails:MATCHCODE :CompetitionCode];
+    //    if([count isEqualToString:@"0"]){
+    //        [DBManager insertMatchEvent:CompetitionCode :MATCHCODE :selectTeamcode :electedcode :teamaCode :teambCode];
+    //    }
+    //
+    //    NSString *maxInnNo = [DBManager getMaxInningsNumber:CompetitionCode :MATCHCODE];
+    //
+    //    NSString*inningsstatus=@"0";
+    //   //  BowlingEnd=@"MSC150";
+    //    [DBManager inserMaxInningsEvent:CompetitionCode :MATCHCODE :teamaCode :maxInnNo :StrikerCode:NonStrikerCode :selectBowlerCode :StrikerCode :NonStrikerCode :selectBowlerCode :teamaCode :inningsstatus:BowlingEnd];
+    //    [DBManager updateProcced:CompetitionCode :MATCHCODE];
     
-//   // DBManagerChangeToss *changetoss=[[ChangeTossVC alloc]init];
-//    changetoss.
-    [self InsertTossDetails:self.CompetitionCode :self.MATCHCODE:selectTeamcode :electedcode :StrikerCode :NonStrikerCode :selectBowlerCode :BowlingEnd];
-    
-     [self startService:@"DONE"];
+    //   // DBManagerChangeToss *changetoss=[[ChangeTossVC alloc]init];
+    //    changetoss.
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
                                                    message: @"Please confirm to start the match"
@@ -740,19 +737,19 @@ return 1;
                                          cancelButtonTitle:@"Start match"
                                          otherButtonTitles:@"Cancel",nil];
     
-  
-      alert.tag =1;
-  
+    
+    alert.tag =1;
+    
     [alert show];
     
     
     
-//    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    
-//    ScorEnginVC *scoreEngine =(ScorEnginVC*) [storyBoard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
-//    //Fixvc.CompitionCode=selectindexarray;
-//    [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
-//    [self presentViewController:scoreEngine animated:NO completion:nil];
+    //    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    //
+    //    ScorEnginVC *scoreEngine =(ScorEnginVC*) [storyBoard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+    //    //Fixvc.CompitionCode=selectindexarray;
+    //    [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
+    //    [self presentViewController:scoreEngine animated:NO completion:nil];
 }
 
 
@@ -761,42 +758,44 @@ return 1;
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     //if (alertView.tag == 1) { // UIAlertView with tag 1 detected
-if (buttonIndex == 0 && alertView.tag == 1)
-        {
-            
-            
-            ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
-            
-            scoreEngine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
-            scoreEngine.matchSetUp = self.matchSetUp;
-            scoreEngine.matchCode=self.MATCHCODE;
-            scoreEngine.competitionCode=self.CompetitionCode;
-            scoreEngine.matchTypeCode = self.matchTypeCode;
-            
-            [self.navigationController pushViewController:scoreEngine animated:YES];
-           // NSLog(@"user pressed Button Indexed 0");
-//                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//            
-//                ScorEnginVC *scoreEngine =(ScorEnginVC*) [storyBoard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
-//               scoreEngine.matchCode=self.MATCHCODE;
-//               scoreEngine.competitionCode=self.CompetitionCode;
-//              // scoreEngine.strikerArray  =Strikerselectindexarray;
-//            //scoreEngine.non_StrikerArray =NonStrikerselectindexarray;
-//                //Fixvc.CompitionCode=selectindexarray;
-//                [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
-//                [self presentViewController:scoreEngine animated:NO completion:nil];
-        }
-//        else
-//        {
-//            NSLog(@"user pressed Button Indexed 1");
-//            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//            
-//            TossDetailsVC *toss =(TossDetailsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"TossDetails"];
-//            //Fixvc.CompitionCode=selectindexarray;
-//            [toss setModalPresentationStyle:UIModalPresentationFullScreen];
-//            [self presentViewController:toss animated:NO completion:nil];
-//        }
+    if (buttonIndex == 0 && alertView.tag == 1)
+    {
+        [DBManagerChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE:selectTeamcode : electedcode : StrikerCode : NonStrikerCode : selectBowlerCode :BowlingEnd];
+        
+        [self startService:@"DONE"];
+        
+        ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
+        
+        scoreEngine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+        scoreEngine.matchSetUp = self.matchSetUp;
+        scoreEngine.matchCode=self.MATCHCODE;
+        scoreEngine.competitionCode=self.CompetitionCode;
+        scoreEngine.matchTypeCode = self.matchTypeCode;
+        
+        [self.navigationController pushViewController:scoreEngine animated:YES];
+        // NSLog(@"user pressed Button Indexed 0");
+        //                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        //
+        //                ScorEnginVC *scoreEngine =(ScorEnginVC*) [storyBoard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+        //               scoreEngine.matchCode=self.MATCHCODE;
+        //               scoreEngine.competitionCode=self.CompetitionCode;
+        //              // scoreEngine.strikerArray  =Strikerselectindexarray;
+        //            //scoreEngine.non_StrikerArray =NonStrikerselectindexarray;
+        //                //Fixvc.CompitionCode=selectindexarray;
+        //                [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
+        //                [self presentViewController:scoreEngine animated:NO completion:nil];
     }
+    //        else
+    //        {
+    //            NSLog(@"user pressed Button Indexed 1");
+    //            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    //
+    //            TossDetailsVC *toss =(TossDetailsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"TossDetails"];
+    //            //Fixvc.CompitionCode=selectindexarray;
+    //            [toss setModalPresentationStyle:UIModalPresentationFullScreen];
+    //            [self presentViewController:toss animated:NO completion:nil];
+    //        }
+}
 
 
 -(void)customnavigationmethod
@@ -828,14 +827,14 @@ if (buttonIndex == 0 && alertView.tag == 1)
 -(void) startService:(NSString *)OPERATIONTYPE{
     if(self.checkInternetConnection){
         
-       MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
-       CompetitionCode = CompetitionCode == nil ?@"NULL":CompetitionCode;
+        MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
+        CompetitionCode = CompetitionCode == nil ?@"NULL":CompetitionCode;
         selectTeamcode= selectTeamcode == nil ?@"NULL":selectTeamcode;
         electedcode = electedcode == nil ?@"NULL":electedcode;
         StrikerCode = StrikerCode == nil ?@"":StrikerCode;
         NonStrikerCode= NonStrikerCode == nil ?@"NULL":NonStrikerCode;
         BowlingEnd = BowlingEnd == nil ?@"NULL":BowlingEnd;
-     
+        
         
         
         AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -893,146 +892,6 @@ if (buttonIndex == 0 && alertView.tag == 1)
         
         //[delegate hideLoading];
     }
-}
-
-
--(void) InsertTossDetails:(NSString*) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *) TOSSWONTEAMCODE:(NSString *) ELECTEDTO:(NSString *) STRIKERCODE:(NSString *) NONSTRIKERCODE:(NSString *)BOWLERCODE:(NSString *)BOWLINGEND
-{
-    NSString* BOWLINGTEAMCODE ;
-    NSString* BATTINGTEAMCODE ;
-    NSString* MAXINNINGSNO ;
-    
-    if(ELECTEDTO.length>0 && ![ELECTEDTO.uppercaseString isEqual: @"SELECT"])
-    {
-        if([ELECTEDTO isEqual:@"MSC017"])
-        {
-            NSMutableArray *TossDetailsArray=[DBManagerChangeToss GetTossDetailsForBattingTeam : TOSSWONTEAMCODE : COMPETITIONCODE : MATCHCODE];
-            TossTeamDetailRecord * objTossteam;
-            if(TossDetailsArray.count > 0)
-            {
-                objTossteam=(TossTeamDetailRecord *)[TossDetailsArray objectAtIndex:0];
-                BATTINGTEAMCODE=objTossteam.BattingTeamcode;
-                
-                BOWLINGTEAMCODE=objTossteam.BowlingTeamCode;
-            }
-        }
-        else
-        {
-            NSMutableArray *TossWonTeamDetailsArray=[DBManagerChangeToss GetTossDetailsForBowlingTeam : TOSSWONTEAMCODE : COMPETITIONCODE : MATCHCODE];
-            TossTeamDetailRecord * objTossteam;
-            if(TossWonTeamDetailsArray.count>0)
-            {
-                objTossteam=(TossTeamDetailRecord *)[TossWonTeamDetailsArray objectAtIndex:0];
-                BATTINGTEAMCODE=objTossteam.BattingTeamcode;
-                
-                BOWLINGTEAMCODE=objTossteam.BowlingTeamCode;
-                
-            }
-        }
-    }
-    else
-    {
-        NSMutableArray *TossWonTeamArray=[DBManagerChangeToss GetTossDetailsForTeam : TOSSWONTEAMCODE : COMPETITIONCODE : MATCHCODE];
-        TossTeamDetailRecord * objTossteam;
-        if(TossWonTeamArray > 0)
-        {
-            objTossteam=(TossTeamDetailRecord *)[TossWonTeamArray objectAtIndex:0];
-            BATTINGTEAMCODE=objTossteam.BattingTeamcode;
-            BOWLINGTEAMCODE=objTossteam.BowlingTeamCode;
-        }
-    }
-    if(![DBManagerChangeToss GetMatchEventsForTossDetails : COMPETITIONCODE : MATCHCODE])
-    {
-        [DBManagerChangeToss SetMatchEventsForToss : COMPETITIONCODE : MATCHCODE : TOSSWONTEAMCODE : ELECTEDTO : BATTINGTEAMCODE : BOWLINGTEAMCODE];
-    }
-    MAXINNINGSNO = [DBManagerChangeToss GetMaxInningsNoForTossDetails : COMPETITIONCODE : MATCHCODE];
-    
-    [DBManagerChangeToss SetInningsEventsForToss : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : STRIKERCODE : NONSTRIKERCODE: BOWLERCODE : BOWLINGEND];
-    
-    [DBManagerChangeToss UpdateMatchStatusForToss : COMPETITIONCODE : MATCHCODE];
-    
-    //EXEC [SP_INITIALIZEINNINGSSCOREBOARD]
-    
-    [self UpdatePlayers:COMPETITIONCODE :MATCHCODE :MAXINNINGSNO :BATTINGTEAMCODE :BOWLINGTEAMCODE :StrikerCode :NonStrikerCode :selectBowlerCode];
-}
-
-
--(void) UpdatePlayers:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)INNINGSNO:(NSString*)BATTINGTEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSString *)STRIKERCODE:(NSString *)NONSTRIKERCODE:(NSString *)BOWLERCODE
-{
-    
-    if(![DBManager GetBallCodeForUpdatePlayers:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO] && ![DBManager GetWicketTypeForUpdatePlayers:COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO])
-    {
-        [DBManager deleteBattingSummary:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO];
-        
-        [DBManager deleteInningsSummary:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO];
-        
-        [DBManager deleteBowlingSummary:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO];
-        
-        
-        if (_ISINNINGSREVERT == 0) {
-            
-            [DBManager insertBattingSummary:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO STRIKERCODE:STRIKERCODE];
-            
-            [DBManager insertBattingSummaryNonStricker:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO NONSTRIKERCODE:NONSTRIKERCODE];
-            
-            
-            [DBManager insertInningsSummary:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO];
-            
-            [DBManager insertBowlingSummary:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO BOWLERCODE:BOWLERCODE];
-            
-        }
-        
-    }
-    else
-    {
-        [DBManager DeleteBattingSummaryForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO];
-        
-        [DBManager DeleteBowlingSummaryForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BOWLINGTEAMCODE:INNINGSNO];
-        
-        
-        if(![DBManager GetStrikerDetailBallCodeForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO: STRIKERCODE: NONSTRIKERCODE])
-        {
-            
-            _STRIKERPOSITIONNO = [DBManager GetStrikerDetailsBattingSummaryForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO];
-            
-            [DBManager InsertBattingSummaryForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO : _STRIKERPOSITIONNO :STRIKERCODE];
-            
-            
-        }else{
-            
-            if ([DBManager GetBatsmanCodeForUpdatePlayers:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO :STRIKERCODE :NONSTRIKERCODE]) {
-                
-                [DBManager UpdateBattingSummaryInStrickerDetailsForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO : STRIKERCODE : NONSTRIKERCODE ];
-            }
-            
-        }
-        
-        
-        if([DBManager GetBatsmanCodeInUpdateBattingSummaryForUpdatePlayers:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO :STRIKERCODE :NONSTRIKERCODE])
-        {
-            [DBManager UpdateBattingSummaryAndWicketEventInStrickerDetailsForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO : STRIKERCODE : NONSTRIKERCODE];
-            
-        }
-        
-        if(![DBManager GetNonStrikerDetailsForBallCode : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO: NONSTRIKERCODE])
-        {
-            _NONSTRIKERPOSITIONNO=[DBManager GetNonStrikerDetailsForBattingSummary:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO];
-            
-            [DBManager InsertBattingSummaryForPlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO : _NONSTRIKERPOSITIONNO: NONSTRIKERCODE];
-        }
-        if(![DBManager GetBowlerDetailsForBallCode :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO: BOWLERCODE ])
-        {
-            _BOWLERPOSITIONNO=[DBManager GetBowlerDetailsForBowlingSummary:COMPETITIONCODE:MATCHCODE:BOWLINGTEAMCODE:INNINGSNO];
-            
-            [DBManager InsertBowlingSummaryForPlayers :COMPETITIONCODE:MATCHCODE:BOWLINGTEAMCODE:INNINGSNO : _BOWLERPOSITIONNO: BOWLERCODE];
-            
-        }
-        
-        
-    }
-    
-    [DBManager UpdateInningsEventsForPlayers :STRIKERCODE : NONSTRIKERCODE : BOWLERCODE: COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO];
-    
 }
 
 @end
