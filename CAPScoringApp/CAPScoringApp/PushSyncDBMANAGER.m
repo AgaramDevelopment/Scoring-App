@@ -19,6 +19,10 @@
 #import "BATTINGSUMMARYPushRecord.h"
 #import "OVEREVENTSPushRecord.h"
 #import "SessionEventPushRecord.h"
+#import "BOWLINGMAIDENSUMMARYPushRecord.h"
+#import "BOWLEROVERDETAILSPushRecord.h"
+#import "FIELDINGEVENTSPushRecord.h"
+#import "DAYEVENTSPushRecord.h"
 
 @implementation PushSyncDBMANAGER
 
@@ -572,15 +576,18 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 NSLog(@"Success");
                 
                 BALLEVENTSPushRecords *record=[[BALLEVENTSPushRecords alloc]init];
+                NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+                f.numberStyle = NSNumberFormatterDecimalStyle;
+             
                 
                 record.BALLCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.COMPETITIONCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 record. MATCHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
                 record. TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                record. DAYNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record. DAYNO=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)]];
                 record. INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
-                record. OVERNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
-                record. BALLNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record. OVERNO=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)]];
+                record. BALLNO=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)]];
                 record. BALLCOUNT=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
                 record.OVERBALLCOUNT=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
                 record.SESSIONNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
@@ -594,40 +601,40 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.BOWLINGEND=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
                 record.BOWLTYPE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
                 record. SHOTTYPE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 20)];
-                record. ISLEGALBALL=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 21)];
-                record. ISFOUR=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 22)];
-                record. ISSIX=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)];
-                record. RUNS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 24)];
-                record. OVERTHROW=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 25)];
-                record. TOTALRUNS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 26)];
-                record.WIDE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 27)];
-                record.NOBALL=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 28)];
-                record. BYES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 29)];
-                record. LEGBYES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 30)];
-                record. PENALTY=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 31)];
-                record. TOTALEXTRAS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 32)];
-                record. GRANDTOTAL=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 33)];
-                record. RBW=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 34)];
+                record. ISLEGALBALL=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 21)]];
+                record. ISFOUR=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 22)]];
+                record. ISSIX=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)]];
+                record. RUNS=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 24)]];
+                record. OVERTHROW=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 25)]];
+                record. TOTALRUNS=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 26)]];
+                record.WIDE=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 27)]];
+                record.NOBALL=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 28)]];
+                record. BYES=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 29)]];
+                record. LEGBYES=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 30)]];
+                record. PENALTY=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 31)]];
+                record. TOTALEXTRAS=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 32)]];
+                record. GRANDTOTAL=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 33)]];
+                record. RBW=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 34)]];
                 record. PMLINECODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 35)];
                 
                 record. PMLENGTHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 36)];
-                record.PMX1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 37)];
-                record.PMY1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 38)];
-                record. PMX2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 39)];
-                record. PMY2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 40)];
-                record. PMX3=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 41)];
-                record. PMY3=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 42)];
+                record. PMX1=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 37)]];
+                record. PMY1=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 38) ]];
+                record. PMX2=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 39)]];
+                record. PMY2=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 40)]];
+                record. PMX3=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 41)]];
+                record. PMY3=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 42)]];
                 record. WWREGION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 43)];
-                record. WWX1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 44)];
-                record. WWY1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 45)];
-                record.WWX2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 46)];
-                record.WWY2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 47)];
-                record. BALLDURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 48)];
-                record. ISAPPEAL=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 49)];
-                record. ISBEATEN=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 50)];
-                record. ISUNCOMFORT=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 51)];
-                record. ISWTB=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 52)];
-                record. ISRELEASESHOT=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 53)];
+                record. WWX1=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 44)]];
+                record. WWY1=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 45)]];
+                record.WWX2=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 46)]];
+                record.WWY2=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 47)]];
+                record. BALLDURATION=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 48)]];
+                record. ISAPPEAL=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 49)]];
+                record. ISBEATEN=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 50)]];
+                record. ISUNCOMFORT=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 51)]];
+                record. ISWTB=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 52)]];
+                record. ISRELEASESHOT=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 53)]];
                 record. MARKEDFOREDIT=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 54)];
                 
                 record.REMARKS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 55)];
@@ -646,6 +653,193 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return BALLEVENTSArray;
 }
+
+//BOWLINGMAIDENSUMMARY
++(NSMutableArray *)RetrieveBOWLINGMAIDENSUMMARYData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE{
+    NSMutableArray *BOWLINGMAIDENSUMMARYArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
+        NSString *query=[NSString stringWithFormat:@"SELECT * FROM BOWLINGMAIDENSUMMARY  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'", COMPETITIONCODE,MATCHCODE];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                
+                BOWLINGMAIDENSUMMARYPushRecord *record=[[BOWLINGMAIDENSUMMARYPushRecord alloc]init];
+                
+                record.COMPETITIONCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.MATCHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record. INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record. BOWLERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record. OVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                
+                
+                
+                [BOWLINGMAIDENSUMMARYArray addObject:record];
+                
+                                
+                
+                
+                
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
+    }
+    return BOWLINGMAIDENSUMMARYArray;
+}
+
+//BOWLEROVERDETAILS
+
++(NSMutableArray *)RetrieveBOWLEROVERDETAILSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE{
+    NSMutableArray *BOWLEROVERDETAILSArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
+        NSString *query=[NSString stringWithFormat:@"SELECT * FROM BOWLEROVERDETAILS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'", COMPETITIONCODE,MATCHCODE];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                
+                BOWLEROVERDETAILSPushRecord *record=[[BOWLEROVERDETAILSPushRecord alloc]init];
+                
+                record.COMPETITIONCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.MATCHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record. TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record. INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record. OVERNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                 record. BOWLERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                 record. STARTTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                record. ENDTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                
+                
+                [BOWLEROVERDETAILSArray addObject:record];
+                
+                
+                
+                
+                
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
+    }
+    return BOWLEROVERDETAILSArray;
+}
+
+
+//FIELDINGEVENTS
++(NSMutableArray *)RetrieveFIELDINGEVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE{
+    NSMutableArray *FIELDINGEVENTSArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
+        NSString *query=[NSString stringWithFormat:@"SELECT * FROM FIELDINGEVENTS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'", COMPETITIONCODE,MATCHCODE];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                
+                FIELDINGEVENTSPushRecord *record=[[FIELDINGEVENTSPushRecord alloc]init];
+                
+                record.BALLCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.FIELDERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record. ISSUBSTITUTE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record. FIELDINGFACTORCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record. NRS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record. COMPETITIONCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                record. MATCHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                record. TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record. INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                
+                
+                [FIELDINGEVENTSArray addObject:record];
+                
+             
+                
+                
+                
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
+    }
+    return FIELDINGEVENTSArray;
+}
+
+//DAYEVENTS
++(NSMutableArray *)RetrieveDAYEVENTSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE{
+    NSMutableArray *DAYEVENTSArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
+        NSString *query=[NSString stringWithFormat:@"SELECT * FROM DAYEVENTS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'", COMPETITIONCODE,MATCHCODE];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                
+                DAYEVENTSPushRecord *record=[[DAYEVENTSPushRecord alloc]init];
+                
+                record.COMPETITIONCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.MATCHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record. INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record. DAYNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record. STARTTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record. ENDTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                record. BATTINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                record. TOTALOVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record. TOTALWICKETS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                record. COMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                record. DAYSTATUS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                
+                
+                
+                [DAYEVENTSArray addObject:record];
+                
+                
+                
+                
+                
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
+    }
+    return DAYEVENTSArray;
+}
+
+
 
 
 @end

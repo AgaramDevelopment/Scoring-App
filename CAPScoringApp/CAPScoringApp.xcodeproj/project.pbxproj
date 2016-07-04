@@ -25,6 +25,10 @@
 		0481DD051D213B250084BFF7 /* PowerPlayTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCFB1D213B250084BFF7 /* PowerPlayTVCell.xib */; };
 		0481DD061D213B250084BFF7 /* PowerPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCFD1D213B250084BFF7 /* PowerPlayVC.m */; };
 		0481DD071D213B250084BFF7 /* PowerPlayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCFE1D213B250084BFF7 /* PowerPlayVC.xib */; };
+		0485A5361D2A23E00059990F /* BOWLINGMAIDENSUMMARYPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A5351D2A23E00059990F /* BOWLINGMAIDENSUMMARYPushRecord.m */; };
+		0485A5391D2A25D70059990F /* BOWLEROVERDETAILSPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A5381D2A25D70059990F /* BOWLEROVERDETAILSPushRecord.m */; };
+		0485A53C1D2A297D0059990F /* FIELDINGEVENTSPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A53B1D2A297D0059990F /* FIELDINGEVENTSPushRecord.m */; };
+		0485A53F1D2A2D240059990F /* DAYEVENTSPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A53E1D2A2D240059990F /* DAYEVENTSPushRecord.m */; };
 		048B5A9E1D0AF1A7009F12B8 /* WicketTypeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */; };
 		048F6F591CFFFEE600F2C5F5 /* FieldingFactorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048F6F581CFFFEE600F2C5F5 /* FieldingFactorCell.m */; };
 		04EC77881D2956A5005B2608 /* BALLEVENTSPushRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC77871D2956A5005B2608 /* BALLEVENTSPushRecords.m */; };
@@ -282,6 +286,14 @@
 		0481DCFC1D213B250084BFF7 /* PowerPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerPlayVC.h; sourceTree = "<group>"; };
 		0481DCFD1D213B250084BFF7 /* PowerPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerPlayVC.m; sourceTree = "<group>"; };
 		0481DCFE1D213B250084BFF7 /* PowerPlayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PowerPlayVC.xib; sourceTree = "<group>"; };
+		0485A5341D2A23E00059990F /* BOWLINGMAIDENSUMMARYPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOWLINGMAIDENSUMMARYPushRecord.h; sourceTree = "<group>"; };
+		0485A5351D2A23E00059990F /* BOWLINGMAIDENSUMMARYPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOWLINGMAIDENSUMMARYPushRecord.m; sourceTree = "<group>"; };
+		0485A5371D2A25D70059990F /* BOWLEROVERDETAILSPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOWLEROVERDETAILSPushRecord.h; sourceTree = "<group>"; };
+		0485A5381D2A25D70059990F /* BOWLEROVERDETAILSPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOWLEROVERDETAILSPushRecord.m; sourceTree = "<group>"; };
+		0485A53A1D2A297D0059990F /* FIELDINGEVENTSPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FIELDINGEVENTSPushRecord.h; sourceTree = "<group>"; };
+		0485A53B1D2A297D0059990F /* FIELDINGEVENTSPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIELDINGEVENTSPushRecord.m; sourceTree = "<group>"; };
+		0485A53D1D2A2D240059990F /* DAYEVENTSPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYEVENTSPushRecord.h; sourceTree = "<group>"; };
+		0485A53E1D2A2D240059990F /* DAYEVENTSPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYEVENTSPushRecord.m; sourceTree = "<group>"; };
 		048B5A9C1D0AF1A7009F12B8 /* WicketTypeRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WicketTypeRecord.h; sourceTree = "<group>"; };
 		048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WicketTypeRecord.m; sourceTree = "<group>"; };
 		048F6F571CFFFEE600F2C5F5 /* FieldingFactorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldingFactorCell.h; sourceTree = "<group>"; };
@@ -1489,6 +1501,14 @@
 				047E52E21D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m */,
 				CEC25DFE1D28FE1B009D99F0 /* MatchTeamPlayerDetailsPushRecord.h */,
 				CEC25DFF1D28FE1B009D99F0 /* MatchTeamPlayerDetailsPushRecord.m */,
+				0485A5341D2A23E00059990F /* BOWLINGMAIDENSUMMARYPushRecord.h */,
+				0485A5351D2A23E00059990F /* BOWLINGMAIDENSUMMARYPushRecord.m */,
+				0485A5371D2A25D70059990F /* BOWLEROVERDETAILSPushRecord.h */,
+				0485A5381D2A25D70059990F /* BOWLEROVERDETAILSPushRecord.m */,
+				0485A53A1D2A297D0059990F /* FIELDINGEVENTSPushRecord.h */,
+				0485A53B1D2A297D0059990F /* FIELDINGEVENTSPushRecord.m */,
+				0485A53D1D2A2D240059990F /* DAYEVENTSPushRecord.h */,
+				0485A53E1D2A2D240059990F /* DAYEVENTSPushRecord.m */,
 			);
 			name = Records;
 			sourceTree = "<group>";
@@ -1834,6 +1854,7 @@
 				187777701D2232FA002F31E5 /* umpiretablecell.m in Sources */,
 				1876251F1D1544CD009374F8 /* BowlingSummaryDetailsForScoreBoard.m in Sources */,
 				243F8E451D2237D600333AD8 /* PowerPlayGridVC.m in Sources */,
+				0485A53C1D2A297D0059990F /* FIELDINGEVENTSPushRecord.m in Sources */,
 				CEC858B21D155D36007F5384 /* intialBreakVC.m in Sources */,
 				187625231D1544CD009374F8 /* MatchOverandBallDetailsForScoreBoard.m in Sources */,
 				187229281D12665600CC168F /* AddBreakVC.m in Sources */,
@@ -1874,13 +1895,16 @@
 				DCEFC8731D28B7C300451485 /* InsertSEScoreEngine.m in Sources */,
 				186DC7F81D1E56DC00293B7F /* Utitliy.m in Sources */,
 				246465171D17255C0078A446 /* DBMangerOtherWicket.m in Sources */,
+				0485A5391D2A25D70059990F /* BOWLEROVERDETAILSPushRecord.m in Sources */,
 				1872292D1D12667200CC168F /* BreakVC.m in Sources */,
+				0485A53F1D2A2D240059990F /* DAYEVENTSPushRecord.m in Sources */,
 				CE3DD4251CFBFDD400D93A55 /* TeamLogoRecords.m in Sources */,
 				CE7463A81D166F8200D69CD9 /* UpdateBreakVC.m in Sources */,
 				CED03D261D1AAE3B00522B89 /* DBMANAGERSYNC.m in Sources */,
 				CE7463B31D16B03800D69CD9 /* DeleteEventRecord.m in Sources */,
 				CE0018001CF42FA500668D8B /* main.m in Sources */,
 				0481DCFF1D213B250084BFF7 /* PowerPlayGridTVC.m in Sources */,
+				0485A5361D2A23E00059990F /* BOWLINGMAIDENSUMMARYPushRecord.m in Sources */,
 				CEC25E031D2907B6009D99F0 /* MatchResultPushRecord.m in Sources */,
 				CE7463AC1D16942200D69CD9 /* UpdateBreaksArrayDetails.m in Sources */,
 				048B5A9E1D0AF1A7009F12B8 /* WicketTypeRecord.m in Sources */,
