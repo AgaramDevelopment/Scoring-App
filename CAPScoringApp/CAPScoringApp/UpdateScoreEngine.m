@@ -465,7 +465,7 @@ EndInnings *insertScoreBoard;
         
         
     
-        [DBManagerEndBall UPDATEWICKETOVERNOUPSE : COMPETITIONCODE :MATCHCODE : INNINGSNO];
+        [DBManagerEndBall UPDATEWICKETOVERNOUPSE : MATCHCODE :BATTINGTEAMCODE : INNINGSNO];
         
         
         

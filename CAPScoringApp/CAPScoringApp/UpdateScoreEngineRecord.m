@@ -37,3 +37,26 @@
 @synthesize WICKETSCORE;
 @synthesize BATTINGPOSITIONNO;
 @end
+
+
+
+@implementation BowlingSummaryRecord
+@synthesize COMPETITIONCODE;
+@synthesize MATCHCODE;
+@synthesize BOWLINGTEAMCODE;
+@synthesize INNINGSNO;
+@synthesize BOWLERCODE;
+@synthesize OVERS;
+@synthesize BALLS;
+@synthesize PARTIALOVERBALLS;
+@synthesize MAIDENS;
+@synthesize RUNS;
+@synthesize WICKETS;
+@synthesize NOBALLS;
+@synthesize WIDES;
+@synthesize DOTBALLS;
+@synthesize FOURS;
+@synthesize SIXES;
+@synthesize BOWLINGPOSITIONNO;
+@end
+
