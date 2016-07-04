@@ -40,11 +40,11 @@
 @property(nonatomic,strong) NSString *BATTINGPOSITIONNO;
 @end
 
-
-@interface BowlingSummaryRecord : NSObject
+@interface BallEventSummaryRecord : NSObject
+@property(nonatomic,strong) NSString *BALLCODE;
 @property(nonatomic,strong) NSString *COMPETITIONCODE;
 @property(nonatomic,strong) NSString *MATCHCODE;
-@property(nonatomic,strong) NSString *BOWLINGTEAMCODE;
+@property(nonatomic,strong) NSString *TEAMCODE;
 @property(nonatomic,strong) NSString *INNINGSNO;
 @property(nonatomic,strong) NSString *BOWLERCODE;
 @property(nonatomic,strong) NSString *OVERS;

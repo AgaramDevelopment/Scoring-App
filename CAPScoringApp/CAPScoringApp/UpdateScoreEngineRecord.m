@@ -38,26 +38,16 @@
 @synthesize BATTINGPOSITIONNO;
 @end
 
-
-
-@implementation BowlingSummaryRecord
+@implementation BallEventSummaryRecord
+@synthesize BALLCODE;
 @synthesize COMPETITIONCODE;
 @synthesize MATCHCODE;
-@synthesize BOWLINGTEAMCODE;
+@synthesize TEAMCODE;
 @synthesize INNINGSNO;
-@synthesize BOWLERCODE;
-@synthesize OVERS;
-@synthesize BALLS;
-@synthesize PARTIALOVERBALLS;
-@synthesize MAIDENS;
-@synthesize RUNS;
-@synthesize WICKETS;
-@synthesize NOBALLS;
-@synthesize WIDES;
-@synthesize DOTBALLS;
-@synthesize FOURS;
-@synthesize SIXES;
-@synthesize BOWLINGPOSITIONNO;
+@synthesize OVERNO;
+@synthesize BALLNO;
+@synthesize BALLCOUNT;
+@synthesize OVERBALLCOUNT;
 @end
 
 @implementation BallEventSummaryRecord

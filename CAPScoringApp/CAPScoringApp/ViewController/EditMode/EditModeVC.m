@@ -518,30 +518,16 @@
 
 -(IBAction)didClickLeftRotation:(id)sender
 {
-    UIButton *senderButton = (UIButton *)sender;
-    EditModeCell *buttonCell = (EditModeCell *)[senderButton superview];
+    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
+    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+    scoreEngine.competitionCode=self.Comptitioncode;
+    scoreEngine.matchCode      = self.matchCode;
+    [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"BEFORE"];
+    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
     
-    NSIndexPath* pathOfTheCell = [self.tbl_innnings indexPathForCell:buttonCell];
-    NSInteger rowOfTheCell = [pathOfTheCell row];
-    NSLog(@"rowofthecell %d", rowOfTheCell);
-    for (id obj in buttonCell.subviews) {
-        
-        NSString *classStr = NSStringFromClass([obj class]);
-        
-        if ([classStr isEqualToString:@"UIButton"]) {
-            
-            UIButton *button = (UIButton*)obj;
-            
-            //            int overIndex = ((senderButton.tag-30000)%10000)/10;
-            //            int ballIndex = ((senderButton.tag-(overIndex*10))-30000)/10000;
-            //
-            if(btn_Run.tag == button.tag)
-            {
-                button.layer.borderWidth = 2.0;
-                button.layer.borderColor = [UIColor greenColor].CGColor;
-            }
-        }
-    }
+    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+    [self.tbl_innnings reloadData];
+          
 }
 
 -(IBAction)didClickEditrotation:(id)sender
@@ -567,7 +553,14 @@
 }
 -(IBAction)didClickRightrotation:(id)sender
 {
-    
+    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
+    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+    scoreEngine.competitionCode=self.Comptitioncode;
+    scoreEngine.matchCode      = self.matchCode;
+    [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"AFTER"];
+    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+    [self.tbl_innnings reloadData];
 }
 
 -(IBAction)didClickInnings1team1:(id)sender

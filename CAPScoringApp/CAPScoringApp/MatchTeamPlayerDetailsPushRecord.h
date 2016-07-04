@@ -14,7 +14,7 @@
 @property(nonatomic,strong)NSString *MATCHCODE;
 @property(nonatomic,strong)NSString *TEAMCODE;
 @property(nonatomic,strong)NSString *PLAYERCODE;
-@property(nonatomic,strong)NSString *PLAYINGORDER;
+@property(nonatomic,strong)NSNumber *PLAYINGORDER;
 @property(nonatomic,strong)NSString *RECORDSTATUS;
 @property(nonatomic,strong)NSString *ISSYNC;
 

@@ -11,7 +11,7 @@
 @interface PlayerInOutPushRecord : NSObject
 @property(nonatomic,strong)NSString *COMPETITIONCODE;
 @property(nonatomic,strong)NSString *MATCHCODE;
-@property(nonatomic,strong)NSString *INNINGSNO;
+@property(nonatomic,strong)NSNumber *INNINGSNO;
 @property(nonatomic,strong)NSString *TEAMCODE;
 @property(nonatomic,strong)NSString *PLAYERCODE;
 @property(nonatomic,strong)NSString *INTIME;

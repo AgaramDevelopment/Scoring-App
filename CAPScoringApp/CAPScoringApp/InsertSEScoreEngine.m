@@ -137,7 +137,10 @@
     
     if([DBManagerInsertScoreEngine GetBallCodesForInsertScoreEngine : COMPETITIONCODE :MATCHCODE :TEAMCODE: INNINGSNO:OVERNO: BALLNO : BALLCOUNT ].length == 0)
     {
-        BALLCODENO=[DBManagerInsertScoreEngine GetMaxIdForInsertScoreEngine :MATCHCODE ];
+        if(BALLCODE.length == 0)
+        {
+            BALLCODENO=[DBManagerInsertScoreEngine GetMaxIdForInsertScoreEngine :MATCHCODE ];
+        }
         
         if(INSERTTYPE.length >0)
         {
@@ -198,8 +201,28 @@
                 }
             }
             [DBManagerInsertScoreEngine InsertBallEventForInsertScoreEngine :BALLCODENO:N_BALLNO:N_BALLCOUNT:BALLSPEED:UNCOMFORTCLASSIFCATION:COMPETITIONCODE: MATCHCODE:INNINGSNO:TEAMCODE: BALLCODE];
-            [DBManagerInsertScoreEngine UpdateOverBallCountInBallEventtForInsertScoreEngine :COMPETITIONCODE: MATCHCODE:INNINGSNO:TEAMCODE: T_OVERNO];
-            [DBManagerInsertScoreEngine UpdateBEForInsertScoreEngine : MATCHCODE:INNINGSNO: T_OVERNO];
+           NSMutableArray * inningsDetail= [DBManagerInsertScoreEngine getOverBallCountDetails :COMPETITIONCODE : MATCHCODE: T_OVERNO : INNINGSNO];
+//            if(INSERTTYPE ==@"AFTER")
+//            {
+//                for(int i=0; i<inningsDetail.count; i++)
+//                {
+//                    OverBallCountRecord *objRecord =(OverBallCountRecord *)[inningsDetail objectAtIndex:i];
+//                    if(BALLCODE == objRecord.objBallCode)
+//                    {
+//                        
+//                    }
+//                }
+//            }
+//            else if (INSERTTYPE ==@"BEFORE")
+//            {
+//                
+//            }
+//           
+            
+            
+            
+            [DBManagerInsertScoreEngine UpdateOverBallCountInBallEventtForInsertScoreEngine :COMPETITIONCODE: MATCHCODE:TEAMCODE:INNINGSNO: T_OVERNO];
+           // [DBManagerInsertScoreEngine UpdateBEForInsertScoreEngine : MATCHCODE:INNINGSNO: T_OVERNO];
         }
         else
         {
@@ -242,7 +265,7 @@
             OVERBALLCOUNT= [DBManagerInsertScoreEngine GetOverBallCountForInsertScoreEngine :COMPETITIONCODE: MATCHCODE:TEAMCODE:INNINGSNO: OVERNO];
             
             
-            [DBManagerInsertScoreEngine InsertBallEventsForInsertScoreEngine :  BALLCODENO   : COMPETITIONCODE    : MATCHCODE       : TEAMCODE       : INNINGSNO       : DAYNO       : OVERNO       : BALLNO       : BALLCOUNT       : OVERBALLCOUNT       : SESSIONNO       : STRIKERCODE       : NONSTRIKERCODE       : BOWLERCODE       : WICKETKEEPERCODE       : UMPIRE1CODE       : UMPIRE2CODE       : ATWOROTW       : BOWLINGEND       : BOWLTYPE       : SHOTTYPE       : SHOTTYPECATEGORY       : ISLEGALBALL       : ISFOUR       : ISSIX       : RUNS       : OVERTHROW       : TOTALRUNS       : WIDE       : NOBALL       : BYES       : LEGBYES       : PENALTY       : TOTALEXTRAS       : GRANDTOTAL       : RBW       : PMLINECODE       : PMLENGTHCODE       : PMSTRIKEPOINT       : @""       : PMX1       : PMY1       : PMX2       : PMY2       : PMX3       : PMY3       : WWREGION       : WWX1       : WWY1       : WWX2       : WWY2       : BALLDURATION       : ISAPPEAL       : ISBEATEN       : ISUNCOMFORT       : ISWTB       : ISRELEASESHOT       : MARKEDFOREDIT       : REMARKS       : VIDEOFILENAME       : BALLSPEED       : UNCOMFORTCLASSIFCATION  ];
+            [DBManagerInsertScoreEngine InsertBallEventsForInsertScoreEngine :  BALLCODENO   :COMPETITIONCODE    : MATCHCODE       : TEAMCODE       : INNINGSNO       : DAYNO       : OVERNO       : BALLNO       : BALLCOUNT       : OVERBALLCOUNT       : SESSIONNO       : STRIKERCODE       : NONSTRIKERCODE       : BOWLERCODE       : WICKETKEEPERCODE       : UMPIRE1CODE       : UMPIRE2CODE       : ATWOROTW       : BOWLINGEND       : BOWLTYPE       : SHOTTYPE       : SHOTTYPECATEGORY       : ISLEGALBALL       : ISFOUR       : ISSIX       : RUNS       : OVERTHROW       : TOTALRUNS       : WIDE       : NOBALL       : BYES       : LEGBYES       : PENALTY       : TOTALEXTRAS       : GRANDTOTAL       : RBW       : PMLINECODE       : PMLENGTHCODE       : PMSTRIKEPOINT       : @""       : PMX1       : PMY1       : PMX2       : PMY2       : PMX3       : PMY3       : WWREGION       : WWX1       : WWY1       : WWX2       : WWY2       : BALLDURATION       : ISAPPEAL       : ISBEATEN       : ISUNCOMFORT       : ISWTB       : ISRELEASESHOT       : MARKEDFOREDIT       : REMARKS       : VIDEOFILENAME       : BALLSPEED       : UNCOMFORTCLASSIFCATION  ];
             
             T_TOTALRUNS=[NSNumber numberWithInt:0];
            // T_TOTALRUNS=

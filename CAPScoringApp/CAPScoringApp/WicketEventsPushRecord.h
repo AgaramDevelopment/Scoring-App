@@ -13,9 +13,9 @@
 @property(nonatomic,strong)NSString *COMPETITIONCODE;
 @property(nonatomic,strong)NSString *MATCHCODE;
 @property(nonatomic,strong)NSString *TEAMCODE;
-@property(nonatomic,strong)NSString *INNINGSNO;
-@property(nonatomic,strong)NSString *ISWICKET;
-@property(nonatomic,strong)NSString *WICKETNO;
+@property(nonatomic,strong)NSNumber *INNINGSNO;
+@property(nonatomic,strong)NSNumber *ISWICKET;
+@property(nonatomic,strong)NSNumber *WICKETNO;
 @property(nonatomic,strong)NSString *WICKETTYPE;
 @property(nonatomic,strong)NSString *WICKETPLAYER;
 @property(nonatomic,strong)NSString *FIELDINGPLAYER;

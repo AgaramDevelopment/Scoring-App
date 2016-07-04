@@ -14,8 +14,8 @@
 @property(nonatomic,strong)NSString *MATCHCODE;
 @property(nonatomic,strong)NSString *MATCHRESULTCODE;
 @property(nonatomic,strong)NSString *MATCHWONTEAMCODE;
-@property(nonatomic,strong)NSString *TEAMAPOINTS;
-@property(nonatomic,strong)NSString *TEAMBPOINTS;
+@property(nonatomic,strong)NSNumber *TEAMAPOINTS;
+@property(nonatomic,strong)NSNumber *TEAMBPOINTS;
 @property(nonatomic,strong)NSString *MANOFTHEMATCHCODE;
 @property(nonatomic,strong)NSString *COMMENTS;
 @property(nonatomic,strong)NSString *ISSYNC;

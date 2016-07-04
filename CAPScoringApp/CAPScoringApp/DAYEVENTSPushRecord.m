@@ -21,5 +21,6 @@
 @synthesize TOTALWICKETS;
 @synthesize COMMENTS;
 @synthesize DAYSTATUS;
+@synthesize ISSYNC;
 
 @end

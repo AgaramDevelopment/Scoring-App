@@ -218,8 +218,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT INNINGSNO, TEAMCODE, OVERNO,  BALLNO, BALLCOUNT,ISLEGALBALL, STRIKERCODE,BOWLERCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BALLCODE = '%@' ",COMPETITIONCODE, MATCHCODE,BALLCODE ];
         
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+       if( sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+       
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 GetInsertTypeGreaterthanZeroDetail *record=[[GetInsertTypeGreaterthanZeroDetail alloc]init];
@@ -443,7 +443,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BE  SET VIDEOFILENAME = (UPPER(MR.MATCHNAME + '-' + TM.SHORTTEAMNAME	+ '-INN' + CAST(BE.INNINGSNO AS NVARCHAR)+ '-OVER'+ CAST((BE.OVERNO + 1) AS NVARCHAR) 				+ '-BALL'+CAST(BE.OVERBALLCOUNT AS NVARCHAR)))				+ '.' + (SELECT TOP 1 LOWER(VIDEOFORMAT) FROM VIDEOSETTINGS)		FROM BALLEVENTS BE		INNER JOIN MATCHREGISTRATION MR		ON BE.COMPETITIONCODE = MR.COMPETITIONCODE		AND BE.MATCHCODE = MR.MATCHCODE		INNER JOIN TEAMMASTER TM		ON BE.TEAMCODE = TM.TEAMCODE		WHERE BE.MATCHCODE = '%@' 		AND INNINGSNO = '%@' 		AND OVERNO = '%@'", MATCHCODE,INNINGSNO,T_OVERNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BE  SET VIDEOFILENAME = (UPPER(MR.MATCHNAME + '-' + TM.SHORTTEAMNAME	+ '-INN' + CAST(BE.INNINGSNO AS NVARCHAR)+ '-OVER'+ CAST((BE.OVERNO + 1) AS NVARCHAR) + '-BALL'+CAST(BE.OVERBALLCOUNT AS NVARCHAR)))	+ '.' + (SELECT TOP 1 LOWER(VIDEOFORMAT) FROM VIDEOSETTINGS) FROM BALLEVENTS BE INNER JOIN MATCHREGISTRATION MR ON BE.COMPETITIONCODE = MR.COMPETITIONCODE AND BE.MATCHCODE = MR.MATCHCODE	INNER JOIN TEAMMASTER TM ON BE.TEAMCODE = TM.TEAMCODE WHERE BE.MATCHCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = '%@'", MATCHCODE,INNINGSNO,T_OVERNO];
         
         const char *selectStmt = [updateSQL UTF8String];
         
@@ -498,7 +498,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO PENALTYDETAILS 	(COMPETITIONCODE,MATCHCODE,INNINGSNO,BALLCODE,PENALTYCODE,AWARDEDTOTEAMCODE,PENALTYRUNS,PENALTYTYPECODE,PENALTYREASONCODE		)			VALUES			(				'%@',				'%@',				'%@',				'%@',				'%@',				'%@',				'%@',				'%@',				'%@'			)",COMPETITIONCODE, MATCHCODE,INNINGSNO,BALLCODENO,PENALTYCODE,AWARDEDTOTEAMCODE,PENALTYRUNS,PENALTYTYPECODE,PENALTYREASONCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO PENALTYDETAILS 	(COMPETITIONCODE,MATCHCODE,INNINGSNO,BALLCODE,PENALTYCODE,AWARDEDTOTEAMCODE,PENALTYRUNS,PENALTYTYPECODE,PENALTYREASONCODE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@')",COMPETITIONCODE, MATCHCODE,INNINGSNO,BALLCODENO,PENALTYCODE,AWARDEDTOTEAMCODE,PENALTYRUNS,PENALTYTYPECODE,PENALTYREASONCODE];
         
         const char *selectStmt = [updateSQL UTF8String];
         
@@ -521,7 +521,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT  BALLCODE FROM BALLEVENTS WHERE OVERNO = '%@'   AND BALLNO = (CASE WHEN '%@' > 1 THEN '%@' ELSE '%@' - 1 END)    AND BALLCOUNT = (CASE WHEN '%@' > 1 THEN '%@' - 1 ELSE '%@' END)      AND MATCHCODE='%@' AND INNINGSNO='%@'",OVERNO,BALLCOUNT,BALLNO,BALLNO,BALLCOUNT,BALLCOUNT,BALLCOUNT,MATCHCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT  BALLCODE FROM BALLEVENTS WHERE OVERNO = '%@' AND BALLNO = (CASE WHEN '%@' > 1 THEN '%@' ELSE '%@' - 1 END) AND BALLCOUNT = (CASE WHEN '%@' > 1 THEN '%@' - 1 ELSE '%@' END) AND MATCHCODE='%@' AND INNINGSNO='%@'",OVERNO,BALLCOUNT,BALLNO,BALLNO,BALLCOUNT,BALLCOUNT,BALLCOUNT,MATCHCODE,INNINGSNO];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -650,7 +650,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BOWLEROVERDETAILS SET ENDTIME = GETDATE()   WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'     AND INNINGSNO='%@'  AND OVERNO='%@'    AND BOWLERCODE = '%@'",COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,PREVIOUSBOWLERCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BOWLEROVERDETAILS SET ENDTIME = GETDATE()   WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@' AND OVERNO='%@' AND BOWLERCODE = '%@'",COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,PREVIOUSBOWLERCODE];
         
         const char *selectStmt = [updateSQL UTF8String];
         
@@ -676,7 +676,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BOWLINGSUMMARY   SET BALLS = 0  , PARTIALOVERBALLS = PARTIALOVERBALLS + BALLS      WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'       AND INNINGSNO='%@' AND BOWLERCODE = '%@'",COMPETITIONCODE, MATCHCODE,INNINGSNO,PREVIOUSBOWLERCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BOWLINGSUMMARY   SET BALLS = 0  , PARTIALOVERBALLS = PARTIALOVERBALLS + BALLS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'       AND INNINGSNO='%@' AND BOWLERCODE = '%@'",COMPETITIONCODE, MATCHCODE,INNINGSNO,PREVIOUSBOWLERCODE];
         
         const char *selectStmt = [updateSQL UTF8String];
         
@@ -758,7 +758,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *selectQry = [NSString stringWithFormat:@"UPDATE BOWLEROVERDETAILS SET BOWLERCODE = '%@'    WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'      AND INNINGSNO='%@'  AND OVERNO='%@'",BOWLERCODE,COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO,OVERNO];
+        NSString *selectQry = [NSString stringWithFormat:@"UPDATE BOWLEROVERDETAILS SET BOWLERCODE = '%@'    WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'  AND OVERNO='%@'",BOWLERCODE,COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO,OVERNO];
         
         const char *selectStmt = [selectQry UTF8String];
         
@@ -785,7 +785,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
-    NSString *updateSQL = [NSString stringWithFormat:@"SELECT  IFNULL(MAX(OVERBALLCOUNT),0) + 1  as OVERBALLCOUNT   FROM BALLEVENTS    WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'      AND INNINGSNO='%@'  AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO];
+    NSString *updateSQL = [NSString stringWithFormat:@"SELECT  IFNULL(MAX(OVERBALLCOUNT),0) + 1  as OVERBALLCOUNT FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'      AND INNINGSNO='%@' AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO];
     
     stmt=[updateSQL UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -3463,6 +3463,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
++(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
+    return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
+}
 
 
 @end

@@ -12,8 +12,8 @@
 @property(nonatomic,strong)NSString *POWERPLAYCODE;
 @property(nonatomic,strong)NSString *MATCHCODE;
 @property(nonatomic,strong)NSString *INNINGSNO;
-@property(nonatomic,strong)NSString *STARTOVER;
-@property(nonatomic,strong)NSString *ENDOVER;
+@property(nonatomic,strong)NSNumber *STARTOVER;
+@property(nonatomic,strong)NSNumber *ENDOVER;
 @property(nonatomic,strong)NSString *POWERPLAYTYPE;
 @property(nonatomic,strong)NSString *RECORDSTATUS;
 @property(nonatomic,strong)NSString *CREATEDBY;

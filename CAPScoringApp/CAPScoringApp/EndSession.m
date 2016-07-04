@@ -21,6 +21,7 @@
     NSString *competitioncode;
     NSString *matchcode;
     NSObject *fetchEndSession;
+    UITableView *objDrobDowntbl;
     
 }
 
@@ -36,7 +37,8 @@ NSMutableArray *battingBowlingArray;
 EndSessionRecords *sessionRecords;
 FetchSEPageLoadRecord *fetchSeRecord;
 BOOL back;
-UITableView *popTable;
+BOOL IsDropDown;
+
 
 int POS_TEAM_TYPE = 1;
 
@@ -46,7 +48,7 @@ int POS_TEAM_TYPE = 1;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    
+
     
     
 }
@@ -164,6 +166,7 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
     
     
 }
+
 -(void)datePicker{
     
     datePicker =[[UIDatePicker alloc]init];
@@ -277,7 +280,25 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
 (NSIndexPath *)indexPath
 {
     
+    if(tableView== objDrobDowntbl)
+    {
+        static NSString *CellIdentifier = @"row";
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                           reuseIdentifier:CellIdentifier];
+        }
+        EndSessionRecords *end=(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
+        cell.textLabel.text = end.BATTINGTEAMNAME;
+        return cell;
+        
     
+ 
+    }
+    else
+    {
     static NSString *CellIdentifier = @"row";
     EndSessionTVC *cell = (EndSessionTVC *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
@@ -298,12 +319,26 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
     
     
     return cell;
+    }
+    return 0;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    if(tableView== objDrobDowntbl)
+    {
+        EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
+        if (IsDropDown == YES) {
+            
+            self.lbl_sessionDominant.text = obj.BATTINGTEAMNAME;
+            
+            IsDropDown = NO;
+            
+        }
+    }
+    else
+    {
     EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
     
     NSString*startInningsTime = obj.SESSIONSTARTTIME;
@@ -339,9 +374,11 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
     self.tbl_session.hidden = YES;
     self.view_allControls.hidden = NO;
     
+   
+    
 }
 
-
+}
 //Check internet connection
 - (BOOL)checkInternetConnection
 {
@@ -541,31 +578,29 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
 
 
 
--(void) openPopTableView: (CGFloat) yValue{
-        popTable=[[UITableView alloc]initWithFrame:CGRectMake(275, yValue,285,200)];
-        popTable.scrollEnabled = YES;
-        popTable.userInteractionEnabled = YES;
-        popTable.backgroundColor = [UIColor whiteColor];
-        popTable.dataSource = self;
-        popTable.delegate = self;
-        [self.scroll_EndSession addSubview:popTable];
-        [popTable reloadData];
-        self.scroll_EndSession.scrollEnabled = NO;
-    
-}
+
 
 - (IBAction)btn_dropDown:(id)sender {
     
     [self.view layoutIfNeeded];
     
-    UITableView* objtbl=[[UITableView alloc]initWithFrame:CGRectMake(self.view_sessionDominant.frame.origin.x, self.view_sessionDominant.frame.origin.y+self.view_sessionDominant.frame.size.height+5, 280, 300)];
-//    objtbl.dataSource=self;
-//    objtbl.delegate=self;
+    IsDropDown = YES;
+    
+    objDrobDowntbl=[[UITableView alloc]initWithFrame:CGRectMake(self.view_sessionDominant.frame.origin.x, self.view_sessionDominant.frame.origin.y+self.view_sessionDominant.frame.size.height+5, 280, 300)];
+    objDrobDowntbl.dataSource=self;
+    objDrobDowntbl.delegate=self;
     
     
-    [self.view_allControls addSubview:objtbl];
+    [self.view_allControls addSubview:objDrobDowntbl];
     self.scroll_EndSession.scrollEnabled = NO;
-
+    
+    NSMutableArray *teamArray = [DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE];
+    
+    endSessionArray = teamArray;
+    
+    
+    [objDrobDowntbl reloadData];
+    
 
     
 }

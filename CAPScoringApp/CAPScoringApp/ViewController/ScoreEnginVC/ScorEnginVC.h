@@ -74,7 +74,7 @@
 @property(nonatomic,strong) IBOutlet UILabel* lbl_Bowler16s;
 @property(nonatomic,strong) IBOutlet UILabel* lbl_Bowler1SR;
 
-
+-(void)insertBallDetails :(NSString*) BallCode :(NSString *) insertType;
 
 @property(nonatomic,strong) IBOutlet UIView * Bowler2ScoreView;
 @property(nonatomic,strong) IBOutlet UILabel* lbl_Bowler2Name;
@@ -288,6 +288,7 @@
 - (IBAction)btn_penality:(id)sender;
 @property (strong,nonatomic)NSString *matchTypeCode;
 
+- (IBAction)Exit_btn:(id)sender;
 @property (assign,nonatomic) BOOL isEditMode;
 @property (strong,nonatomic) NSString *editBallCode;
 - (IBAction)SyncData_btn:(id)sender;

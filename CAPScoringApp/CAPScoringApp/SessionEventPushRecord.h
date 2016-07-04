@@ -11,18 +11,18 @@
 @interface SessionEventPushRecord : NSObject
 @property(nonatomic,strong)NSString *COMPETITIONCODE;
 @property(nonatomic,strong)NSString *MATCHCODE;
-@property(nonatomic,strong)NSString *INNINGSNO;
-@property(nonatomic,strong)NSString *DAYNO;
-@property(nonatomic,strong)NSString *SESSIONNO;
+@property(nonatomic,strong)NSNumber *INNINGSNO;
+@property(nonatomic,strong)NSNumber *DAYNO;
+@property(nonatomic,strong)NSNumber *SESSIONNO;
 @property(nonatomic,strong)NSString *SESSIONSTARTTIME;
 @property(nonatomic,strong)NSString *SESSIONENDTIME;
 @property(nonatomic,strong)NSString *BATTINGTEAMCODE;
-@property(nonatomic,strong)NSString *STARTOVER;
-@property(nonatomic,strong)NSString *ENDOVER;
-@property(nonatomic,strong)NSString *TOTALRUNS;
-@property(nonatomic,strong)NSString *TOTALWICKETS;
+@property(nonatomic,strong)NSNumber *STARTOVER;
+@property(nonatomic,strong)NSNumber *ENDOVER;
+@property(nonatomic,strong)NSNumber *TOTALRUNS;
+@property(nonatomic,strong)NSNumber *TOTALWICKETS;
 @property(nonatomic,strong)NSString *DOMINANTTEAMCODE;
-@property(nonatomic,strong)NSString *SESSIONSTATUS;
+@property(nonatomic,strong)NSNumber *SESSIONSTATUS;
 @property(nonatomic,strong)NSString *ISSYNC;
 
 

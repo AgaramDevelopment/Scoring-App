@@ -16,5 +16,6 @@
 @synthesize INNINGSNO;
 @synthesize OVERNO;
 @synthesize OVERSTATUS;
+@synthesize ISSYNC;
 
 @end
