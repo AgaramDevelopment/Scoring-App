@@ -25,13 +25,14 @@
     GetPlayerDetailOnTimeOut*objTimedOut;
     GetPlayerDetailOnRetiredHurtOnMSC108 *objretriedOut;
     
-    NSString *PlayerCode;
+    NSString *WICKETPLAYER;
     
     NSMutableArray *Wicketselectindexarray;
     NSMutableArray *PlayerselectindexarrayAH;
     NSMutableArray *PlayerselectindexarrayTO;
     NSMutableArray *PlayerselectindexarrayRH;
     NSMutableArray *PlayerselectindexarrayRO;
+    NSMutableArray *PlayerselectindexarrayMK;
     
     NSMutableArray *GetPlayerDetailArray;
     NSMutableArray *GetPlayerDetailsOnAbsentHurtArray;
@@ -278,6 +279,7 @@
         
         self.Wicket_tableview.hidden=YES;
         isEnableTbl=YES;
+        self.selectplayer_lbl.text=@"select";
     }
     if (tableView == self.tbl_playername)
     {
@@ -286,8 +288,8 @@
         PlayerselectindexarrayAH=[[NSMutableArray alloc]init];
         objAbsentHurt=(GetPlayerDetailOnAbsentHurt*)[GetPlayerDetailsOnAbsentHurtArray objectAtIndex:indexPath.row];
         self.selectplayer_lbl.text =objAbsentHurt.PLAYERNAME;
-            PlayerCode=self.selectplayer_lbl.text;
-            PlayerCode=objAbsentHurt.PLAYERCODE;
+            WICKETPLAYER=self.selectplayer_lbl.text;
+            WICKETPLAYER=objAbsentHurt.PLAYERCODE;
 
         [PlayerselectindexarrayAH addObject:objAbsentHurt];
         
@@ -299,8 +301,8 @@
             PlayerselectindexarrayTO=[[NSMutableArray alloc]init];
             objTimedOut=(GetPlayerDetailOnTimeOut*)[GetPlayerDetailsOnTimeOutArray objectAtIndex:indexPath.row];
             self.selectplayer_lbl.text =objTimedOut.PLAYERNAME;
-                PlayerCode=self.selectplayer_lbl.text;
-                  PlayerCode=objTimedOut.PLAYERCODE;
+            WICKETPLAYER=self.selectplayer_lbl.text;
+            WICKETPLAYER=objTimedOut.PLAYERCODE;
             [PlayerselectindexarrayTO addObject:objTimedOut];
             
             self.tbl_playername.hidden=YES;
@@ -310,8 +312,8 @@
             PlayerselectindexarrayRO=[[NSMutableArray alloc]init];
             objretriedOut=(GetPlayerDetailOnRetiredHurtOnMSC108*)[GetPlayerDetailsOnRetiredHurtOnMSC108Array objectAtIndex:indexPath.row];
             self.selectplayer_lbl.text =objretriedOut.PLAYERNAME;
-            PlayerCode=self.selectplayer_lbl.text;
-            PlayerCode=objTimedOut.PLAYERCODE;
+            WICKETPLAYER=self.selectplayer_lbl.text;
+            WICKETPLAYER=objretriedOut.PLAYERCODE;
             [PlayerselectindexarrayRO addObject:objretriedOut];
             
             self.tbl_playername.hidden=YES;
@@ -322,14 +324,26 @@
             PlayerselectindexarrayRH=[[NSMutableArray alloc]init];
             objRetriedHurt=(GetPlayerDetailOnRetiredHurt*)[GetPlayerDetailOnRetiredHurt2Array objectAtIndex:indexPath.row];
             self.selectplayer_lbl.text =objRetriedHurt.PLAYERNAME;
-            PlayerCode=self.selectplayer_lbl.text;
-            PlayerCode=objTimedOut.PLAYERCODE;
+            WICKETPLAYER=self.selectplayer_lbl.text;
+            WICKETPLAYER=objRetriedHurt.PLAYERCODE;
             [PlayerselectindexarrayRH addObject:objRetriedHurt];
             
             self.tbl_playername.hidden=YES;
             isEnableTbl=YES;
             
         }
+//        else if([WICKETTYPE isEqual:@"MSC107"]){
+//            PlayerselectindexarrayMK=[[NSMutableArray alloc]init];
+////            objRetriedHurt=(GetPlayerDetailOnRetiredHurt*)[GetPlayerDetailOnRetiredHurt2Array objectAtIndex:indexPath.row];
+//            self.selectplayer_lbl.text =objRetriedHurt.PLAYERNAME;
+//            WICKETPLAYER=self.selectplayer_lbl.text;
+//            WICKETPLAYER=objRetriedHurt.PLAYERCODE;
+//            [PlayerselectindexarrayRH addObject:objRetriedHurt];
+//            
+//            self.tbl_playername.hidden=YES;
+//            isEnableTbl=YES;
+//            
+//        }
     }
 
     
@@ -369,7 +383,7 @@
     
     
     if(_ISEDITMODE){
-        [self UpdateOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :WICKETTYPE :PlayerCode :WICKETNO :VIDEOLOCATION :TOTALRUNS];
+        [self UpdateOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :WICKETTYPE :WICKETPLAYER :WICKETNO :VIDEOLOCATION :TOTALRUNS];
         Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
         add.COMPETITIONCODE=self.COMPETITIONCODE;
         add.MATCHCODE=self.MATCHCODE;
@@ -391,7 +405,7 @@
         
        
     }else{
-        [self InsertOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :PlayerCode :WICKETTYPE : WICKETNO :VIDEOLOCATION :TOTALRUNS];
+        [self InsertOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETPLAYER :WICKETTYPE : WICKETNO :VIDEOLOCATION :TOTALRUNS];
         
         Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
         add.COMPETITIONCODE=self.COMPETITIONCODE;
@@ -452,7 +466,25 @@
 
 -(IBAction)didclickdelete:(id)sender{
     
-    [self DeleteOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :N_WICKETNO];
+    [self DeleteOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETNO];
+    
+    Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
+    add.COMPETITIONCODE=self.COMPETITIONCODE;
+    add.MATCHCODE=self.MATCHCODE;
+    add.INNINGSNO=self.INNINGSNO;
+    add.TEAMCODE=self.TEAMCODE;
+    
+    [self addChildViewController:add];
+    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+    [self.view addSubview:add.view];
+    add.view.alpha = 0;
+    [add didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         add.view.alpha = 1;
+     }
+                     completion:nil];
     
     
 }

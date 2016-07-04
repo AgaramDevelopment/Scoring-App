@@ -13,6 +13,7 @@
 #import "FixturesRecord.h"
 #import "FetchSEPageLoadRecord.h"
 #import "EditModeVC.h"
+#import "ScorEnginVC.h"
 
 @interface ArchivesVC ()<SwipeableCellDelegate>
 {
@@ -97,12 +98,6 @@
     cell.innings1teamname1.text=objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME;
     cell.innings1team1runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FIRSTINNINGSTOTAL,objfetchSEPageLoadRecord.FIRSTINNINGSWICKET];
     cell.innings1team1overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FIRSTINNINGSOVERS];
-    
-    
-    
-    
-    
-    
     cell.innings2teamname2.text=objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
     cell.innings2team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
     cell.innings2team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
@@ -163,6 +158,21 @@
 - (void)RightsideResumeBtnAction
 {
     // [self showDetailWithText:[NSString stringWithFormat:@"Clicked button two for %@", itemText]];
+//    EditModeVC *buttonCell = (EditModeCell *)[senderButton superview];
+//    
+//    NSIndexPath* pathOfTheCell = [self.tbl_archive indexPathForCell:buttonCell];
+//    FixturesRecord *objFixtureRecord=(FixturesRecord*)[FetchCompitionArray objectAtIndex:pathOfTheCell.row];
+//    
+//    NSMutableArray *mSetUp = [[NSMutableArray alloc]init];
+//    [mSetUp addObject:objFixtureRecord];
+
+    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+    
+    scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+    //scoreEngine.matchSetUp = mSetUp;
+    scoreEngine.matchCode=matchCode;
+    scoreEngine.competitionCode=self.CompitionCode;
+    [self.navigationController pushViewController:scoreEngine animated:YES];
 }
 
 

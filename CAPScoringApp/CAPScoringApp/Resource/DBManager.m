@@ -6611,7 +6611,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                   
                                   // Delete Batting Summary
                                   +(BOOL) deleteBattingSummary:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
-                                  INNINGSNO:(NSString *)INNINGSNO{
+                                  INNINGSNO:(NSNumber *)INNINGSNO{
                                       
                                       NSString *databasePath = [self getDBPath];
                                       sqlite3_stmt *statement;
@@ -6630,18 +6630,18 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                           else {
                                               sqlite3_reset(statement);
                                               
-                                              return @"";
+                                              return NO;
                                           }
                                       }
                                       sqlite3_reset(statement);
-                                      return @"";
+                                      return NO;
                                   }
                                   
                                   
                                   //	-- Clear Innings Summary for Particular Innings of the Match
                                   
                                   +(BOOL) deleteInningsSummary:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
-                                  INNINGSNO:(NSString *)INNINGSNO{
+                                  INNINGSNO:(NSNumber *)INNINGSNO{
                                       
                                       NSString *databasePath = [self getDBPath];
                                       sqlite3_stmt *statement;
@@ -6674,7 +6674,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                   
                                   //Clear Bowling Card for Particular Innings of the Match
                                   +(BOOL) deleteBowlingSummary:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
-                                  INNINGSNO:(NSString *)INNINGSNO{
+                                  INNINGSNO:(NSNumber *)INNINGSNO{
                                       
                                       NSString *databasePath = [self getDBPath];
                                       sqlite3_stmt *statement;
@@ -6708,7 +6708,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                   
                                   +(BOOL) insertBattingSummary:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
                                   BATTINGTEAMCODE:(NSString *)BATTINGTEAMCODE
-                                  INNINGSNO:(NSString *)INNINGSNO
+                                  INNINGSNO:(NSNumber *)INNINGSNO
                                   STRIKERCODE:(NSString *)STRIKERCODE
         {
             
@@ -6744,7 +6744,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                   
                                   +(BOOL) insertBattingSummaryNonStricker:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
                                   BATTINGTEAMCODE:(NSString *)BATTINGTEAMCODE
-                                  INNINGSNO:(NSString *)INNINGSNO
+                                  INNINGSNO:(NSNumber *)INNINGSNO
                                   NONSTRIKERCODE:(NSString *)NONSTRIKERCODE
         {
             
@@ -6783,7 +6783,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                   
                                   +(BOOL) insertInningsSummary:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
                                   BATTINGTEAMCODE:(NSString *)BATTINGTEAMCODE
-                                  INNINGSNO:(NSString *)INNINGSNO
+                                  INNINGSNO:(NSNumber *)INNINGSNO
                                   
         {
             
@@ -6821,7 +6821,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                   //-- Add Bowler details in Bowling Card
                                   +(BOOL) insertBowlingSummary:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
                                   BATTINGTEAMCODE:(NSString *)BATTINGTEAMCODE
-                                  INNINGSNO:(NSString *)INNINGSNO
+                                  INNINGSNO:(NSNumber *)INNINGSNO
                                   BOWLERCODE:(NSString *)BOWLERCODE
         {
             
@@ -9174,7 +9174,6 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     sqlite3_close(dataBase);
     return arrayResult;
 }
-
 
 
 @end

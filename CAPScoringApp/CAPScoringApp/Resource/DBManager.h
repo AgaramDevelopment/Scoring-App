@@ -350,31 +350,31 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 //SP_INITIALIZEINNINGSSCOREBOARD
 
 // Delete Batting Summary
-+(BOOL) deleteBattingSummary:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
-                   INNINGSNO:(NSString *)INNINGSNO;
++(BOOL) deleteBattingSummary: (NSString *) COMPETITIONCODE  MATCHCODE :(NSString *) MATCHCODE
+                            INNINGSNO : (NSNumber *) INNINGSNO;
 
-+(BOOL) deleteInningsSummary:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
-                   INNINGSNO:(NSString *)INNINGSNO;
++(BOOL) deleteInningsSummary:(NSString *) COMPETITIONCODE MATCHCODE:(NSString *) MATCHCODE
+                   INNINGSNO:(NSNumber *) INNINGSNO;
 
-+(BOOL) deleteBowlingSummary:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
-                   INNINGSNO:(NSString *)INNINGSNO;
-+(BOOL) insertBattingSummary:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
-             BATTINGTEAMCODE:(NSString *)BATTINGTEAMCODE
-                   INNINGSNO:(NSString *)INNINGSNO
-                 STRIKERCODE:(NSString *)STRIKERCODE;
++(BOOL) deleteBowlingSummary: (NSString *) COMPETITIONCODE MATCHCODE:(NSString *) MATCHCODE
+                   INNINGSNO: (NSNumber *) INNINGSNO;
++(BOOL) insertBattingSummary:(NSString *) COMPETITIONCODE MATCHCODE:(NSString *) MATCHCODE
+             BATTINGTEAMCODE:(NSString *) BATTINGTEAMCODE
+                   INNINGSNO:(NSNumber *) INNINGSNO
+                 STRIKERCODE:(NSString *) STRIKERCODE;
 
 +(BOOL) insertBattingSummaryNonStricker:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
                         BATTINGTEAMCODE:(NSString *)BATTINGTEAMCODE
-                              INNINGSNO:(NSString *)INNINGSNO
+                              INNINGSNO:(NSNumber *)INNINGSNO
                          NONSTRIKERCODE:(NSString *)NONSTRIKERCODE;
 
 +(BOOL) insertInningsSummary:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
              BATTINGTEAMCODE:(NSString *)BATTINGTEAMCODE
-                   INNINGSNO:(NSString *)INNINGSNO;
+                   INNINGSNO:(NSNumber *)INNINGSNO;
 
 +(BOOL) insertBowlingSummary:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE
              BATTINGTEAMCODE:(NSString *)BATTINGTEAMCODE
-                   INNINGSNO:(NSString *)INNINGSNO
+                   INNINGSNO:(NSNumber *)INNINGSNO
                   BOWLERCODE:(NSString *)BOWLERCODE;
 
 
