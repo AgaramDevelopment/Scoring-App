@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -29,7 +28,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="450" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rK8-dD-R9k">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rK8-dD-R9k">
                         <rect key="frame" x="0.0" y="0.0" width="450" height="43"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -187,6 +186,23 @@
                         <exclude reference="qQv-wK-B4O"/>
                     </mask>
                     <mask key="constraints">
+                        <exclude reference="08V-MC-sB3"/>
+                        <exclude reference="Nym-Z5-0s9"/>
+                        <exclude reference="ZGe-pd-613"/>
+                        <exclude reference="nrj-xQ-r56"/>
+                        <exclude reference="1AO-qy-bbm"/>
+                        <exclude reference="XoO-Wi-u01"/>
+                        <exclude reference="b3w-cx-n09"/>
+                        <exclude reference="t4e-Je-qRA"/>
+                        <exclude reference="CbN-TL-NEG"/>
+                        <exclude reference="iey-4A-5Pt"/>
+                        <exclude reference="fBT-8U-cl5"/>
+                        <exclude reference="xF5-HU-DQy"/>
+                        <exclude reference="xMd-ZP-qDm"/>
+                        <exclude reference="xYk-oM-lY6"/>
+                        <exclude reference="B7p-Zk-p1k"/>
+                        <exclude reference="u4m-uV-6Xb"/>
+                        <exclude reference="vn6-nT-ud6"/>
                         <exclude reference="Clu-gO-Arg"/>
                         <exclude reference="RH1-nt-LIn"/>
                         <exclude reference="Uyf-te-lFJ"/>
@@ -195,23 +211,6 @@
                         <exclude reference="JfT-56-XhK"/>
                         <exclude reference="Uvc-Va-Ilr"/>
                         <exclude reference="wQd-oa-fXa"/>
-                        <exclude reference="1AO-qy-bbm"/>
-                        <exclude reference="XoO-Wi-u01"/>
-                        <exclude reference="b3w-cx-n09"/>
-                        <exclude reference="t4e-Je-qRA"/>
-                        <exclude reference="08V-MC-sB3"/>
-                        <exclude reference="Nym-Z5-0s9"/>
-                        <exclude reference="ZGe-pd-613"/>
-                        <exclude reference="nrj-xQ-r56"/>
-                        <exclude reference="fBT-8U-cl5"/>
-                        <exclude reference="xF5-HU-DQy"/>
-                        <exclude reference="xMd-ZP-qDm"/>
-                        <exclude reference="xYk-oM-lY6"/>
-                        <exclude reference="B7p-Zk-p1k"/>
-                        <exclude reference="u4m-uV-6Xb"/>
-                        <exclude reference="vn6-nT-ud6"/>
-                        <exclude reference="CbN-TL-NEG"/>
-                        <exclude reference="iey-4A-5Pt"/>
                     </mask>
                 </variation>
                 <variation key="heightClass=regular-widthClass=regular">
@@ -224,6 +223,23 @@
                         <include reference="qQv-wK-B4O"/>
                     </mask>
                     <mask key="constraints">
+                        <include reference="08V-MC-sB3"/>
+                        <include reference="Nym-Z5-0s9"/>
+                        <include reference="ZGe-pd-613"/>
+                        <include reference="nrj-xQ-r56"/>
+                        <include reference="1AO-qy-bbm"/>
+                        <include reference="XoO-Wi-u01"/>
+                        <include reference="b3w-cx-n09"/>
+                        <include reference="t4e-Je-qRA"/>
+                        <include reference="CbN-TL-NEG"/>
+                        <include reference="iey-4A-5Pt"/>
+                        <include reference="fBT-8U-cl5"/>
+                        <include reference="xF5-HU-DQy"/>
+                        <include reference="xMd-ZP-qDm"/>
+                        <include reference="xYk-oM-lY6"/>
+                        <include reference="B7p-Zk-p1k"/>
+                        <include reference="u4m-uV-6Xb"/>
+                        <include reference="vn6-nT-ud6"/>
                         <include reference="Clu-gO-Arg"/>
                         <include reference="RH1-nt-LIn"/>
                         <include reference="Uyf-te-lFJ"/>
@@ -232,23 +248,6 @@
                         <include reference="JfT-56-XhK"/>
                         <include reference="Uvc-Va-Ilr"/>
                         <include reference="wQd-oa-fXa"/>
-                        <include reference="1AO-qy-bbm"/>
-                        <include reference="XoO-Wi-u01"/>
-                        <include reference="b3w-cx-n09"/>
-                        <include reference="t4e-Je-qRA"/>
-                        <include reference="08V-MC-sB3"/>
-                        <include reference="Nym-Z5-0s9"/>
-                        <include reference="ZGe-pd-613"/>
-                        <include reference="nrj-xQ-r56"/>
-                        <include reference="fBT-8U-cl5"/>
-                        <include reference="xF5-HU-DQy"/>
-                        <include reference="xMd-ZP-qDm"/>
-                        <include reference="xYk-oM-lY6"/>
-                        <include reference="B7p-Zk-p1k"/>
-                        <include reference="u4m-uV-6Xb"/>
-                        <include reference="vn6-nT-ud6"/>
-                        <include reference="CbN-TL-NEG"/>
-                        <include reference="iey-4A-5Pt"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

@@ -65,6 +65,8 @@
 #import "UpdateScoreEngine.h"
 #import "ArchivesVC.h"
 #import "PushSyncDBMANAGER.h"
+#import "EditModeVC.h"
+
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -73,7 +75,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -273,6 +275,8 @@ EndInnings *endInnings;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    EditModeVC * objEditModeVc=[[EditModeVC alloc]init];
+    objEditModeVc.delegate=self;
     if(self.isEditMode){//Edit
         [self loadViewOnEditMode];
     
@@ -2350,15 +2354,9 @@ EndInnings *endInnings;
     else
     {
         InsertSEScoreEngine* _InsertSEScoreEngine = [[InsertSEScoreEngine alloc] init];
-        [_InsertSEScoreEngine InsertScoreEngine :
-         self.competitionCode :
-         self.matchCode  :
-         fetchSEPageLoadRecord.BATTINGTEAMCODE :
-         [NSNumber numberWithInt : fetchSEPageLoadRecord.INNINGSNO.intValue] :
-         BallCode :
-         [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] :
-         [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLS] :
-         [NSNumber numberWithInt:1] : //default BALLCOUNT for Live mode
+          fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+        [_InsertSEScoreEngine InsertScoreEngine :self.competitionCode :self.matchCode  :
+         fetchSEPageLoadRecord.BATTINGTEAMCODE :[NSNumber numberWithInt : fetchSEPageLoadRecord.INNINGSNO.intValue] :BallCode :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLS] :[NSNumber numberWithInt:1] : //default BALLCOUNT for Live mode
          [NSNumber numberWithInteger: fetchSEPageLoadRecord.DAYNO] :
          [NSNumber numberWithInteger: fetchSEPageLoadRecord.SESSIONNO] :
          fetchSEPageLoadRecord.strickerPlayerCode:
@@ -2427,7 +2425,9 @@ EndInnings *endInnings;
          @""://(NSString *)UNCOMFORTCLASSIFCATION:
          selectedWicketEvent];
         //Insert Score Engine SP Call
-        [self reloadBowlerTeamBatsmanDetails];
+        
+            [self reloadBowlerTeamBatsmanDetails];
+        
     }
     if([self.ballEventRecord.objIslegalball intValue] == 0)
     {
@@ -2476,6 +2476,7 @@ EndInnings *endInnings;
         }
         
     }
+    
     NSMutableArray * objUmpireArray =[DBManager GETUMPIRE:self.competitionCode :self.matchCode ];
     Umpire1Code =[objUmpireArray objectAtIndex:0];
     umpire2Code =[objUmpireArray objectAtIndex:1];
@@ -2497,6 +2498,7 @@ EndInnings *endInnings;
     else{
         wicketkeepercode =@"";
     }
+    
 }
 -(UIColor*)colorWithHexString:(NSString*)hex
 {

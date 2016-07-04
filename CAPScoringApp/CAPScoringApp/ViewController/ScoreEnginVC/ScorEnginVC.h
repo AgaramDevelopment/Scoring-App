@@ -74,7 +74,7 @@
 @property(nonatomic,strong) IBOutlet UILabel* lbl_Bowler16s;
 @property(nonatomic,strong) IBOutlet UILabel* lbl_Bowler1SR;
 
-
+-(void)insertBallDetails :(NSString*) BallCode :(NSString *) insertType;
 
 @property(nonatomic,strong) IBOutlet UIView * Bowler2ScoreView;
 @property(nonatomic,strong) IBOutlet UILabel* lbl_Bowler2Name;

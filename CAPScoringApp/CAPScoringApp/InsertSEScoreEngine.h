@@ -11,16 +11,10 @@
 #import "InsertSEScoreEngineRecord.h"
 
 @interface InsertSEScoreEngine : NSObject
--(void) InsertScoreEngine:
-(NSString *)COMPETITIONCODE:
-(NSString*)MATCHCODE :
-(NSString*) TEAMCODE :
-(NSNumber*) INNINGSNO:
-(NSString*) BALLCODE :
-(NSNumber*) OVERNO :
-(NSNumber*) BALLNO:
-(NSNumber*) BALLCOUNT:
-(NSNumber*) DAYNO :
+{
+    NSMutableArray * objoverballCount;
+}
+-(void) InsertScoreEngine:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE :(NSString*) TEAMCODE :(NSNumber*) INNINGSNO:(NSString*) BALLCODE :(NSNumber*) OVERNO :(NSNumber*) BALLNO:(NSNumber*) BALLCOUNT:(NSNumber*) DAYNO :
 (NSNumber*) SESSIONNO :
 (NSString *)STRIKERCODE:
 (NSString *)NONSTRIKERCODE:

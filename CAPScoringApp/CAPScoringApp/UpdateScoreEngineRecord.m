@@ -37,3 +37,16 @@
 @synthesize WICKETSCORE;
 @synthesize BATTINGPOSITIONNO;
 @end
+
+@implementation BallEventSummaryRecord
+@synthesize BALLCODE;
+@synthesize COMPETITIONCODE;
+@synthesize MATCHCODE;
+@synthesize TEAMCODE;
+@synthesize INNINGSNO;
+@synthesize OVERNO;
+@synthesize BALLNO;
+@synthesize BALLCOUNT;
+@synthesize OVERBALLCOUNT;
+@end
+
