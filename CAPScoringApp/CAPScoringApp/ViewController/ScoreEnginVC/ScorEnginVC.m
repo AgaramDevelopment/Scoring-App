@@ -65,6 +65,7 @@
 #import "UpdateScoreEngine.h"
 #import "ArchivesVC.h"
 #import "PushSyncDBMANAGER.h"
+#import "EndSession.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -7160,6 +7161,45 @@ EndInnings *endInnings;
 }
 -(void)ENDSession
 {
+    
+    EndSession *endSession = [[EndSession alloc]initWithNibName:@"EndSession" bundle:nil];
+    endSession.view.frame =CGRectMake(90, 200, endSession.view.frame.size.width, endSession.view.frame.size.height);
+    
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    [fullview addSubview:Btn_Fullview];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    //fullview.alpha=0.9;
+    
+    [self.view addSubview:fullview];
+    [fullview addSubview:endSession.view];
+    
+    
+    
+    [self addChildViewController:endSession];
+    
+    
+    
+    //    [fullview addSubview:endSession.view];
+    endSession.view.alpha = 0;
+    //    [endSession didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         endSession.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    [endSession.btn_dropDown addTarget:self action:@selector(btn_dropDown:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [endSession fetchPageEndSession:fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
+    
+    
+    
+    
+    
     
 }
 -(void)FollowOn

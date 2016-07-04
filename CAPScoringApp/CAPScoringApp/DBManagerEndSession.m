@@ -701,6 +701,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_close(dataBase);
     return GetBattingTeamDetails;
 }
+
 +(NSMutableArray*) GetMetaSubCode
 {
     NSMutableArray *GetBattingTeamDetails=[[NSMutableArray alloc]init];

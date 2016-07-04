@@ -368,7 +368,7 @@ if(![DBManagerEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCO
             if(![DBManagerEndSession GetSessionNoWithAddDayNoForDeleteEndSession:COMPETITIONCODE :MATCHCODE :INNINGSNOS :DAYNO])
             {
              
-                [DBManagerEndSession DeleteSessionEventsForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO ];
+            [DBManagerEndSession DeleteSessionEventsForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO];
             }
             
         }
