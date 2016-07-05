@@ -113,6 +113,9 @@
     [self.Btn_Nearend setTag:0];
     [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
     
+    
+    
+    
    // [self.Btn_Nearend setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
     BowlingEnd=@"MSC150";
     [self.Btn_Nearend addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
@@ -124,38 +127,20 @@
 
 }
 -(void)radiobuttonSelected:(id)sender{
-    switch ([sender tag]) {
-        case 0:
-            if([self.Btn_Nearend isSelected]==YES)
-                
-            {   BowlingEnd=@"MSC151";
-                [self.Btn_Nearend setSelected:NO];
-                [self.Btn_FairEnd setSelected:YES];
-            }
-            else{
-                BowlingEnd=@"MSC150";
-                [self.Btn_Nearend setSelected:YES];
-                [self.Btn_FairEnd setSelected:NO];
-            }
-            
-            break;
-        case 1:
-            if([self.Btn_FairEnd isSelected]==YES)
-                
-            {   BowlingEnd=@"MSC150";
-                [self.Btn_FairEnd setSelected:NO];
-                [self.Btn_Nearend setSelected:YES];
-                
-            }
-            else{
-                BowlingEnd=@"MSC151";
-                [self.Btn_FairEnd setSelected:YES];
-                [self.Btn_Nearend setSelected:NO];
-            }
-            
-            break;
-        default:
-            break;
+    
+    if([self.Btn_Nearend.currentImage isEqual: [UIImage imageNamed:@"Radio.on.png"]])
+        
+    {           BowlingEnd=@"MSC151";
+        [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+        [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+        
+        
+    }
+    else{
+        BowlingEnd=@"MSC150";
+        [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+        [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+        
     }
     
 }
@@ -314,19 +299,19 @@
 {
         if([self.lbl_Tosswon.text isEqualToString:@""] || self.lbl_Tosswon.text==nil)
         {
-            [self ShowAlterView:@"Please Select Stricker"];
+            [self ShowAlterView:@"Please Select Team"];
         }
         else if([self.lbl_ElectedTo.text isEqualToString:@""] || self.lbl_ElectedTo.text==nil)
         {
-            [self ShowAlterView:@"Please Select NonStricker"];
+            [self ShowAlterView:@"Please Select ElectedTo"];
         }
         else if([self.lbl_Stricker.text isEqualToString:@""] || self.lbl_Stricker.text==nil)
         {
-            [self ShowAlterView:@"Please Select Bowler"];
+            [self ShowAlterView:@"Please Select Stricker"];
         }
         else if([self.lbl_NonStricker.text isEqualToString:@""] || self.lbl_NonStricker.text==nil)
         {
-            [self ShowAlterView:@"Please Select Bowler"];
+            [self ShowAlterView:@"Please Select NonStricker"];
         }
         else if([self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)
         {
@@ -338,6 +323,11 @@
             
         }
     
+}
+
+-(IBAction)didClickBackBtnAction:(id)sender
+{
+    [self.delegate ChangeVCBackBtnAction];
 }
 
 -(void)ShowAlterView:(NSString *) alterMsg

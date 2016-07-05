@@ -672,38 +672,21 @@
 
 
 -(void)radiobuttonSelected:(id)sender{
-    switch ([sender tag]) {
-        case 0:
-            if([self.radiobutton1 isSelected]==YES)
-                
-            {   BowlingEnd=@"MSC151";
-                [self.radiobutton1 setSelected:NO];
-                [self.radiobutton2 setSelected:YES];
-            }
-            else{
-                BowlingEnd=@"MSC150";
-                [self.radiobutton1 setSelected:YES];
-                [self.radiobutton2 setSelected:NO];
-            }
-            
-            break;
-        case 1:
-            if([self.radiobutton2 isSelected]==YES)
-                
-            {   BowlingEnd=@"MSC150";
-                [self.radiobutton2 setSelected:NO];
-                [self.radiobutton1 setSelected:YES];
-                
-            }
-            else{
-                BowlingEnd=@"MSC151";
-                [self.radiobutton2 setSelected:YES];
-                [self.radiobutton1 setSelected:NO];
-            }
-            
-            break;
-        default:
-            break;
+    
+   
+    if([self.radiobutton1.currentImage isEqual: [UIImage imageNamed:@"Radio.on.png"]])
+        
+    {           BowlingEnd=@"MSC151";
+        [self.radiobutton1 setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+        [self.radiobutton2 setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+        
+        
+    }
+    else{
+        BowlingEnd=@"MSC150";
+        [self.radiobutton1 setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+        [self.radiobutton2 setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+        
     }
     
 }
@@ -742,19 +725,19 @@
     
     if([self.Wonby_lbl.text isEqualToString:@""] || self.Wonby_lbl.text==nil)
     {
-        [self ShowAlterView:@"Please Select Stricker"];
+        [self ShowAlterView:@"Please Select Team"];
     }
     else if([self.electedTo_lbl.text isEqualToString:@""] || self.electedTo_lbl.text==nil)
     {
-        [self ShowAlterView:@"Please Select NonStricker"];
+        [self ShowAlterView:@"Please Select ElectedTo"];
     }
     else if([self.Striker_lbl.text isEqualToString:@""] || self.Striker_lbl.text==nil)
     {
-        [self ShowAlterView:@"Please Select Bowler"];
+        [self ShowAlterView:@"Please Select Stricker"];
     }
     else if([self.nonStriker_lbl.text isEqualToString:@""] || self.nonStriker_lbl.text==nil)
     {
-        [self ShowAlterView:@"Please Select Bowler"];
+        [self ShowAlterView:@"Please Select NonStriker"];
     }
     else if([self.Bowler_lbl.text isEqualToString:@""] || self.Bowler_lbl.text==nil)
     {

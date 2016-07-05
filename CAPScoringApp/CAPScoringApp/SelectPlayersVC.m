@@ -77,7 +77,9 @@ static NSString * const reuseIdentifier = @"Cell";
     
     
 }
-
+-(void)dismissKeyboard {
+    [self.txt_search resignFirstResponder];
+}
 
 -(void)customnavigationmethod
 {
@@ -198,7 +200,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     
     //Set data
-    cell.lbl_player_code.text =  selectedPlayer.playerCode;
+   // cell.lbl_player_code.text =  selectedPlayer.playerCode;
     cell.lbl_player_name.text = selectedPlayer.playerName;
     
     //Swap image
@@ -283,6 +285,15 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (IBAction)btn_cancel:(id)sender {
+    
+    self.selectedPlayerArray = [DBManager getSelectingPlayerArray:self.SelectTeamCode matchCode:self.matchCode];
+    self.selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: self.selectedPlayerArray ];
+    
+    [self setSelectCount];
+    [self.collectionView reloadData];
+    
+    
+    
 }
 
 - (IBAction)btn_select:(id)sender {
@@ -325,6 +336,8 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 - (IBAction)btn_search:(id)sender {
     
+    
+    
     if([[self.txt_search text] isEqual:@""]){
         [self.selectedPlayerFilterArray removeAllObjects];
         self.selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: self.selectedPlayerArray ];
@@ -348,6 +361,13 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     //Relaod view
     [self.collectionView reloadData];
+//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+//                                   initWithTarget:self
+//                                   action:@selector(dismissKeyboard)];
+//    
+//    [self.view addGestureRecognizer:tap];
+    self.dismissKeyboard;
+
 }
 
 - (IBAction)btn_back:(id)sender {

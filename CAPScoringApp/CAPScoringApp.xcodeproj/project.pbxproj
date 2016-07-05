@@ -36,6 +36,7 @@
 		04EC778E1D2956C2005B2608 /* InningsEventPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC778C1D2956C2005B2608 /* InningsEventPushRecord.m */; };
 		04EC77911D2956F0005B2608 /* OVEREVENTSPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC77901D2956F0005B2608 /* OVEREVENTSPushRecord.m */; };
 		04EC77941D29570F005B2608 /* BATTINGSUMMARYPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC77931D29570F005B2608 /* BATTINGSUMMARYPushRecord.m */; };
+		1812956C1D2BC9C000A89BB8 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 1812956B1D2BC9C000A89BB8 /* TNCA_DATABASE.sqlite */; };
 		1837AA8C1CFF125B00B7259C /* BowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA8B1CFF125B00B7259C /* BowlTypeCell.m */; };
 		185060561D0300190030E3E2 /* FastBowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA941CFF264A00B7259C /* FastBowlTypeCell.m */; };
 		18674AC31D1A4F9600DB7C71 /* MatchResultListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18674AC11D1A4F9600DB7C71 /* MatchResultListVC.m */; };
@@ -317,6 +318,7 @@
 		04EC77901D2956F0005B2608 /* OVEREVENTSPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVEREVENTSPushRecord.m; sourceTree = "<group>"; };
 		04EC77921D29570F005B2608 /* BATTINGSUMMARYPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BATTINGSUMMARYPushRecord.h; sourceTree = "<group>"; };
 		04EC77931D29570F005B2608 /* BATTINGSUMMARYPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BATTINGSUMMARYPushRecord.m; sourceTree = "<group>"; };
+		1812956B1D2BC9C000A89BB8 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		1837AA8A1CFF125B00B7259C /* BowlTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlTypeCell.h; sourceTree = "<group>"; };
 		1837AA8B1CFF125B00B7259C /* BowlTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlTypeCell.m; sourceTree = "<group>"; };
 		1837AA931CFF264A00B7259C /* FastBowlTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastBowlTypeCell.h; sourceTree = "<group>"; };
