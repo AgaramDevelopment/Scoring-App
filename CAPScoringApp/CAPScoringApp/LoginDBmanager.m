@@ -122,7 +122,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE USERDETAILS SET  LICENSEUPTO='%@',issync='1',WHERE LOGINID ='%@' AND PASSWORD ='%@'",LICENSEUPTO,LOGINID,PASSWORD];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE USERDETAILS SET  LICENSEUPTO='%@',issync='1' WHERE LOGINID ='%@' AND PASSWORD ='%@'",LICENSEUPTO,LOGINID,PASSWORD];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -159,7 +159,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
-    NSString *query=[NSString stringWithFormat:@"SELECT USERNAME FROM SECUREIDETAILS WHERE USERNAME ='%@'",USERNAME];
+    NSString *query=[NSString stringWithFormat:@"SELECT USERNAME FROM SECUREIDDETAILS WHERE USERNAME ='%@'",USERNAME];
     
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -220,7 +220,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE SECUREIDDETAILS SET  SECUREID='%@',STARTDATE='%@',ENDDATE='%@',CREATEDBY='%@',CREATEDDATE='%@',MODIFIEDBY='%@',MODIFIEDDATE='%@',RECORDSTATUS='%@',issync='1',WHERE USERNAME ='%@'",SECUREID,STARTDATE,ENDDATE,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE,RECORDSTATUS,USERNAME];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE SECUREIDDETAILS SET  SECUREID='%@',STARTDATE='%@',ENDDATE='%@',CREATEDBY='%@',CREATEDDATE='%@',MODIFIEDBY='%@',MODIFIEDDATE='%@',RECORDSTATUS='%@',issync='1' WHERE USERNAME ='%@'",SECUREID,STARTDATE,ENDDATE,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE,RECORDSTATUS,USERNAME];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
