@@ -742,19 +742,19 @@
     
     if([self.Wonby_lbl.text isEqualToString:@""] || self.Wonby_lbl.text==nil)
     {
-        [self ShowAlterView:@"Please Select Stricker"];
+        [self ShowAlterView:@"Please Select Team"];
     }
     else if([self.electedTo_lbl.text isEqualToString:@""] || self.electedTo_lbl.text==nil)
     {
-        [self ShowAlterView:@"Please Select NonStricker"];
+        [self ShowAlterView:@"Please Select ElectedTo"];
     }
     else if([self.Striker_lbl.text isEqualToString:@""] || self.Striker_lbl.text==nil)
     {
-        [self ShowAlterView:@"Please Select Bowler"];
+        [self ShowAlterView:@"Please Select Stricker"];
     }
     else if([self.nonStriker_lbl.text isEqualToString:@""] || self.nonStriker_lbl.text==nil)
     {
-        [self ShowAlterView:@"Please Select Bowler"];
+        [self ShowAlterView:@"Please Select NonStriker"];
     }
     else if([self.Bowler_lbl.text isEqualToString:@""] || self.Bowler_lbl.text==nil)
     {
