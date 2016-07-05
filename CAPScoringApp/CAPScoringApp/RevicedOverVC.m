@@ -11,7 +11,7 @@
 #import "DBManager.h"
 #import "FixturesRecord.h"
 #import "Reachability.h"
-
+#import "Utitliy.h"
 @interface RevicedOverVC ()<UITextFieldDelegate>
 {
     NSString *strovers;
@@ -95,7 +95,7 @@
 -(IBAction)btn_submit:(id)sender
 {
     if(self.checkInternetConnection){
-        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.39:8096/CAPMobilityService.svc/REVISEOVER/%@/%@/%@/%@/%@/%@",self.competitionCode,self.matchCode,self.inningsNo,strovers,strcomments];
+        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/REVISEOVER/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],self.competitionCode,self.matchCode,self.inningsNo,strovers,strcomments];
         
         NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         

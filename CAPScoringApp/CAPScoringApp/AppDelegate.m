@@ -53,8 +53,6 @@
 
         }
     
-    initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
-
 
     navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
