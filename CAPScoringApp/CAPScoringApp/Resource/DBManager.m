@@ -379,7 +379,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     //
-    NSString *query=[NSString stringWithFormat:@"SELECT MR.MATCHCODE,MR.MATCHNAME,MR.COMPETITIONCODE,MR.MATCHOVERCOMMENTS,MR.MATCHDATE,MR.GROUNDCODE,GM.GROUNDNAME,GM.CITY,MR.TEAMACODE,MR.TEAMBCODE ,TM.SHORTTEAMNAME AS TEAMANAME,TM1.SHORTTEAMNAME AS TEAMBNAME,MR.MATCHOVERS,MD.METASUBCODEDESCRIPTION AS MATCHTYPENAME, CP.MATCHTYPE AS MATCHTYPECODE, MR.MATCHSTATUS FROM MATCHREGISTRATION MR INNER JOIN TEAMMASTER TM ON TM.TEAMCODE = MR.TEAMACODE INNER JOIN TEAMMASTER TM1 ON TM1.TEAMCODE = MR.TEAMBCODE INNER JOIN GROUNDMASTER GM ON GM.GROUNDCODE = MR.GROUNDCODE INNER JOIN COMPETITION CP ON CP.COMPETITIONCODE = MR.COMPETITIONCODE INNER JOIN METADATA MD ON CP.MATCHTYPE = MD.METASUBCODE WHERE MR.COMPETITIONCODE='%@'" ,competitionCode];
+    NSString *query=[NSString stringWithFormat:@"SELECT MR.MATCHCODE,MR.MATCHNAME,MR.COMPETITIONCODE,MR.MATCHOVERCOMMENTS,MR.MATCHDATE,MR.GROUNDCODE,GM.GROUNDNAME,GM.CITY,MR.TEAMACODE,MR.TEAMBCODE ,TM.SHORTTEAMNAME AS TEAMANAME,TM1.SHORTTEAMNAME AS TEAMBNAME,MR.MATCHOVERS,MD.METASUBCODEDESCRIPTION AS MATCHTYPENAME, CP.MATCHTYPE AS MATCHTYPECODE, MR.MATCHSTATUS FROM MATCHREGISTRATION MR INNER JOIN TEAMMASTER TM ON TM.TEAMCODE = MR.TEAMACODE INNER JOIN TEAMMASTER TM1 ON TM1.TEAMCODE = MR.TEAMBCODE INNER JOIN GROUNDMASTER GM ON GM.GROUNDCODE = MR.GROUNDCODE INNER JOIN COMPETITION CP ON CP.COMPETITIONCODE = MR.COMPETITIONCODE INNER JOIN METADATA MD ON CP.MATCHTYPE = MD.METASUBCODE WHERE MR.COMPETITIONCODE='%@'AND MR.MATCHSTATUS in ('MSC123','MSC281') ORDER BY MATCHDATE ASC" ,competitionCode];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         
@@ -399,8 +399,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             record.groundcode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
             record.groundname=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
             record.city=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-            record.teamBcode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-            record.teamAcode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+            record.teamAcode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+            record.teamBcode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
             record.teamAname=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
             record.teamBname=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
             record.overs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
