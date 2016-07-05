@@ -76,7 +76,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -98,6 +98,9 @@
     NSMutableArray *AppealBatsmenSelectionArray;
     NSArray*AppealBatsmenSelectCode;
     AppealBatsmenRecord *objAppealBatsmenEventRecord;
+    
+    NSString *StrikerPlayer;
+    NSString *NonStrikerPlayer;
     
     //Remark
     NSString *remarks;
@@ -1847,7 +1850,7 @@ EndInnings *endInnings;
     if(tableView == self.sideviewtable)
     {
         cell.textLabel.text = [self.rightSlideArray objectAtIndex:indexPath.row];
-        cell.textLabel.textColor=[UIColor blackColor];
+        cell.textLabel.textColor=[UIColor whiteColor];
         return cell;
     }
     
@@ -2059,9 +2062,12 @@ EndInnings *endInnings;
        if(indexPath.row==0)
        {
         cell.Batsman1_lbl.text=[dict valueForKey:@"AppealStrickerPlayerName"];
+        StrikerPlayer=cell.Batsman1_lbl.text;
+           
        }
         if (indexPath.row==1) {
-          cell.Batsman2_lbl.text=[dict valueForKey:@"AppealNonStrickerPlayerName"];
+          cell.Batsman1_lbl.text=[dict valueForKey:@"AppealNonStrickerPlayerName"];
+            NonStrikerPlayer=cell.Batsman1_lbl.text;
         }
         
     }
@@ -6265,14 +6271,12 @@ EndInnings *endInnings;
         NSDictionary *dict=[AppealBatsmenArray objectAtIndex:indexPath.row];
         
         
-        
-//        
-//        cell.Batsman1_lbl.text=[dict valueForKey:@"AppealStrickerPlayerName"];
-//        cell.Batsman2_lbl.text=[dict valueForKey:@"AppealNonStrickerPlayerName"];
+
 
         
-        self.lbl_batsmen.text =[dict valueForKey:@"AppealStrickerPlayerName"];
-        self.Lbl_batsmen.text=[dict valueForKey:@"AppealNonStrickerPlayerName"];
+        self.lbl_batsmen.text =StrikerPlayer;
+        
+        self.lbl_batsmen.text=NonStrikerPlayer;
         
         // selectTeam=self.Wonby_lbl.text;
         // AppealComponentSelectCode=fetchSEPageLoadRecord.strickerPlayerCode;
@@ -6989,6 +6993,7 @@ EndInnings *endInnings;
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    
     [fullview addSubview:Btn_Fullview];
     [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     //fullview.alpha=0.9;
@@ -6997,7 +7002,7 @@ EndInnings *endInnings;
     breakvc.COMPETITIONCODE=self.competitionCode;
     breakvc.INNINGSNO=fetchSEPageLoadRecord.INNINGSNO;
     breakvc.MATCHDATE=fetchSEPageLoadRecord.MATCHDATE;
-    
+     breakvc.delegate =self;
     
     [self.view addSubview:fullview];
     //     BreakVC = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
@@ -7006,7 +7011,7 @@ EndInnings *endInnings;
     
     [self addChildViewController:breakvc];
     breakvc.view.frame =CGRectMake(90, 200, breakvc.view.frame.size.width, breakvc.view.frame.size.height);
-    [breakvc.Back_btn addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     
     
     

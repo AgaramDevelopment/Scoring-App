@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -1788,6 +1788,7 @@
                                             <constraint firstAttribute="width" constant="30" id="l04-Sw-hAe"/>
                                             <constraint firstAttribute="height" constant="30" id="t2z-gw-wLB"/>
                                         </constraints>
+                                        <state key="normal" image="Radio.on"/>
                                         <state key="disabled" image="Radio.off"/>
                                         <state key="selected" image="Radio.on"/>
                                         <state key="highlighted" image="Radio.off"/>
@@ -1833,6 +1834,7 @@
                                             <constraint firstAttribute="height" constant="30" id="C6S-LT-aQ3"/>
                                             <constraint firstAttribute="width" constant="29" id="cSL-5m-vyp"/>
                                         </constraints>
+                                        <state key="normal" image="Radio.off"/>
                                         <state key="selected" image="Radio.on"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -2251,6 +2253,8 @@
                     <connections>
                         <outlet property="Bowler_lbl" destination="1gr-Q2-mNs" id="pbP-76-Z3E"/>
                         <outlet property="Bowler_table" destination="eWG-8w-V74" id="2CT-vj-0UI"/>
+                        <outlet property="Btn_FairEnd" destination="NU1-ae-JDS" id="283-gD-ECY"/>
+                        <outlet property="Btn_Nearend" destination="xPd-J0-vzd" id="Xdx-Y7-7pn"/>
                         <outlet property="Striker_lbl" destination="KeR-aj-iid" id="p5u-20-bOi"/>
                         <outlet property="Striker_table" destination="olQ-CF-mtl" id="iYq-3c-R01"/>
                         <outlet property="Wonby_lbl" destination="aMp-L4-anj" id="DWT-Vs-mHN"/>
@@ -2261,8 +2265,6 @@
                         <outlet property="nonStriker_lbl" destination="cmX-Yc-Cc4" id="jRO-9a-3V0"/>
                         <outlet property="nonStriker_table" destination="dLg-vH-awG" id="8Qg-Io-Xge"/>
                         <outlet property="outlet_btn_proceed" destination="QeG-1x-x0d" id="9lp-h1-5po"/>
-                        <outlet property="radiobutton1" destination="xPd-J0-vzd" id="4M5-7F-QUb"/>
-                        <outlet property="radiobutton2" destination="NU1-ae-JDS" id="ywa-Dq-WLA"/>
                         <outlet property="view_Bowler" destination="b9d-c0-oqI" id="jRu-Id-ScA"/>
                         <outlet property="view_Electedto" destination="QzF-SL-R0B" id="Vw2-c8-MHi"/>
                         <outlet property="view_Striker" destination="Lyd-4b-jov" id="yJt-bf-8KG"/>
@@ -2572,7 +2574,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="lFX-Ru-mui">
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kES-qL-JGQ">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kES-qL-JGQ">
                                         <rect key="frame" x="44" y="121" width="680" height="49"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Umpire 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHz-1O-plr">
@@ -5728,9 +5730,6 @@
                                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="160" y="1" width="440" height="114"/>
-                                                </variation>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBk-zT-YMj">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -5749,8 +5748,7 @@
                                                         <exclude reference="cIY-gc-wL3"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="1" width="150" height="114"/>
+                                                <variation key="heightClass=regular-widthClass=regular">
                                                     <mask key="constraints">
                                                         <include reference="cIY-gc-wL3"/>
                                                     </mask>
@@ -9404,8 +9402,9 @@
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IPR-0I-ohj">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="uQF-Xu-t2R" id="3Fg-7P-ZFz"/>
                                             <outlet property="delegate" destination="uQF-Xu-t2R" id="nvU-RT-oMZ"/>
@@ -11523,7 +11522,7 @@
                                                             <constraint firstAttribute="width" constant="80" id="qNJ-Gc-MUq"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TNCA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VX7-j8-5mn">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TNCA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VX7-j8-5mn">
                                                         <rect key="frame" x="96" y="16" width="75" height="35"/>
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="35"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -11532,7 +11531,7 @@
                                                             <rect key="frame" x="96" y="16" width="94" height="41"/>
                                                         </variation>
                                                     </label>
-                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7hN-f2-TjW" userLabel="View_SelectedA">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7hN-f2-TjW" userLabel="View_SelectedA">
                                                         <rect key="frame" x="96" y="59" width="217" height="37"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-add" translatesAutoresizingMaskIntoConstraints="NO" id="v5S-bd-7Yg">
@@ -11599,7 +11598,7 @@
                                                             <constraint firstAttribute="width" constant="80" id="X00-Vj-Ji5"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="KSCA" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CuD-nj-Z9R">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KSCA" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CuD-nj-Z9R">
                                                         <rect key="frame" x="140" y="16" width="77" height="41"/>
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="35"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -11751,7 +11750,7 @@
                                                         </constraints>
                                                         <color key="textColor" red="0.96740599869999999" green="1" blue="0.9659818671" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="27"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="NWT-7q-8da" id="62L-j5-SPd"/>
                                                         </connections>
@@ -11841,7 +11840,7 @@
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="MAY, 26" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1e-Ah-1Vh">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAY, 26" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1e-Ah-1Vh">
                                                         <rect key="frame" x="22" y="69" width="56" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="PH2-Hw-2by"/>
@@ -13790,7 +13789,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9xK-kW-1xe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2088" y="1395.75"/>
+            <point key="canvasLocation" x="2129.25" y="2123.25"/>
         </scene>
     </scenes>
     <resources>

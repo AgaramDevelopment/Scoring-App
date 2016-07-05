@@ -9,17 +9,26 @@
 #import <UIKit/UIKit.h>
 #import "BreakTableViewCell.h"
 #import "ScorEnginVC.h"
-@interface BreakVC : UIViewController
+
+@protocol BreakVCDelagate <NSObject>
+@required
+
+- (void) ChangeVCBackBtnAction;
+@end
+@interface BreakVC : UIViewController<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tablView;
 - (IBAction)addbreak_btn:(id)sender;
 @property(nonatomic,strong)NSMutableArray*resultarray;
 @property (strong, nonatomic) IBOutlet BreakTableViewCell *GridBreakcell;
 
-- (IBAction)Back_btn:(id)sender;
+
 
 @property(strong,nonatomic)NSString*MATCHCODE;
 @property(strong,nonatomic)NSString*COMPETITIONCODE;
 @property(strong,nonatomic)NSString*INNINGSNO;
 @property(strong,nonatomic)NSString*MATCHDATE;
-@property (strong, nonatomic) IBOutlet UIButton *Back_btn;
+
+@property(nonatomic,strong) id <BreakVCDelagate> delegate;
+- (IBAction)backbtn:(id)sender;
+
 @end

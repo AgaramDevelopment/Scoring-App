@@ -22,17 +22,21 @@
 @property (nonatomic,strong)NSMutableArray *FetchCompitionArray;
 @property (nonatomic,strong) NSMutableArray *selectedPlayerArray;
 @property (nonatomic,strong) NSMutableArray *selectedPlayerFilterArray;
-@property(nonatomic,strong)NSMutableArray *countTeam;
+@property (nonatomic,strong)NSMutableArray *countTeam;
 @property (nonatomic,strong)NSMutableArray *countTeamB;
 
 @end
 
+BOOL IsResult;
+
+NSRegularExpression *isMatchedByRegex;
 
 @implementation NewMatchSetUpVC
 @synthesize  matchCode;
 @synthesize teamAcode;
 @synthesize teamBcode;
 @synthesize competitionCode;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -124,6 +128,11 @@
         imgB  = [UIImage imageNamed: @"no_image.png"];
         _img_teamBLogo.image = imgB;
     }
+    
+    
+    self.txt_overs.keyboardType = UIKeyboardTypeNumberPad;
+    
+    [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector: @selector(check) userInfo:nil repeats : YES ];
 }
 
 
@@ -202,7 +211,7 @@
     
     //to change selected team players B color after selected 7 players
     
-    NSMutableArray *countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
+    NSMutableArray *countTeamB = [DBManager SelectTeamPlayers :self.matchCode teamCode :self.teamBcode];
     
     
     
@@ -312,6 +321,8 @@
     
 }
 
+
+
 - (IBAction)btn_proceed:(id)sender {
    
     
@@ -338,10 +349,23 @@
     [alertDialog show];
 }
 
+
+
+
+-(void)check{
+    
+    if([self.txt_overs.text length] >= 4){
+        
+        self.txt_overs.text = [self.txt_overs.text substringWithRange:NSMakeRange(0, 4) ];
+    }
+}
+
+
+
 //Validation for over update validation
 -(BOOL) overValidation{
     
-    
+
     _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
     _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
     
@@ -360,10 +384,10 @@
     
     if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){
         if(twentyText > 20){
-            [self showDialog:@"Please enter below 20 overs" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Below 20 Overs" andTitle:@"Error"];
         }else if (twentyText == 0){
             
-            [self showDialog:@"Please enter overs" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Overs" andTitle:@"Error"];
         }
         
         
@@ -380,7 +404,7 @@
             [self.navigationController pushViewController:matchvc animated:YES];
         }else{
             
-            [self showDialog:@"Please select minimum seven players" andTitle:@"Error"];
+            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Error"];
 
         }
         return NO;
@@ -388,10 +412,10 @@
     }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){
         if(OdiText > 50){
             
-            [self showDialog:@"Please enter below 50 overs" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Below 50 Overs" andTitle:@"Error"];
         }else if (twentyText == 0){
             
-            [self showDialog:@"Please enter overs" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Evers" andTitle:@"Error"];
         }
         
         else {
