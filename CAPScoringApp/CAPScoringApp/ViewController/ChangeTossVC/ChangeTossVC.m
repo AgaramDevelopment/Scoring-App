@@ -127,38 +127,20 @@
 
 }
 -(void)radiobuttonSelected:(id)sender{
-    switch ([sender tag]) {
-        case 0:
-            if([self.Btn_Nearend isSelected]==YES)
-                
-            {   BowlingEnd=@"MSC151";
-                [self.Btn_Nearend setSelected:NO];
-                [self.Btn_FairEnd setSelected:YES];
-            }
-            else{
-                BowlingEnd=@"MSC150";
-                [self.Btn_Nearend setSelected:YES];
-                [self.Btn_FairEnd setSelected:NO];
-            }
-            
-            break;
-        case 1:
-            if([self.Btn_FairEnd isSelected]==YES)
-                
-            {   BowlingEnd=@"MSC150";
-                [self.Btn_FairEnd setSelected:NO];
-                [self.Btn_Nearend setSelected:YES];
-                
-            }
-            else{
-                BowlingEnd=@"MSC151";
-                [self.Btn_FairEnd setSelected:YES];
-                [self.Btn_Nearend setSelected:NO];
-            }
-            
-            break;
-        default:
-            break;
+    
+    if([self.Btn_Nearend.currentImage isEqual: [UIImage imageNamed:@"Radio.on.png"]])
+        
+    {           BowlingEnd=@"MSC151";
+        [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+        [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+        
+        
+    }
+    else{
+        BowlingEnd=@"MSC150";
+        [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+        [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+        
     }
     
 }
