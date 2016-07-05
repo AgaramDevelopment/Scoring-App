@@ -1850,7 +1850,7 @@ EndInnings *endInnings;
     if(tableView == self.sideviewtable)
     {
         cell.textLabel.text = [self.rightSlideArray objectAtIndex:indexPath.row];
-        cell.textLabel.textColor=[UIColor blackColor];
+        cell.textLabel.textColor=[UIColor whiteColor];
         return cell;
     }
     
@@ -6993,6 +6993,7 @@ EndInnings *endInnings;
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    
     [fullview addSubview:Btn_Fullview];
     [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     //fullview.alpha=0.9;
