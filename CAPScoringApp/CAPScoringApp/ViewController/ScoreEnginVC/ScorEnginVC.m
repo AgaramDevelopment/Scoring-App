@@ -11619,20 +11619,10 @@ EndInnings *endInnings;
     [PushDict setObject:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
     
     
-//    
-//    
-//    
-//    NSDictionary *parameters = @{
-//                                 @"call": @"messages-getModuleMessages",
-//                                 @"accessSecret": FB_API_KEY,
-//                                 @"authToken": [FBUserManager sharedUserManager].authToken,
-//                                 @"format": @"json",
-//                                 @"inbox":@"callType"
-//                                 };
     
     NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.fretbay.com/fr/private/api/rest-server.php?"]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://url"]];
     [request setHTTPMethod:@"POST"];
     [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
     
