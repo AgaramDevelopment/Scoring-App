@@ -87,26 +87,6 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lDH-jY-CLk">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVB-uf-G9J">
-                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="30" id="FLC-iZ-x8I"/>
-                                    </constraints>
-                                    <state key="normal" image="ico-back-btn"/>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="FLC-iZ-x8I"/>
-                                        </mask>
-                                    </variation>
-                                    <variation key="heightClass=regular-widthClass=regular">
-                                        <mask key="constraints">
-                                            <include reference="FLC-iZ-x8I"/>
-                                        </mask>
-                                    </variation>
-                                    <connections>
-                                        <action selector="btn_back:" destination="-1" eventType="touchUpInside" id="Avf-XS-v1z"/>
-                                    </connections>
-                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="END SESSION" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMJ-Zi-DpA">
                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                     <constraints>
@@ -240,26 +220,55 @@
                                         </mask>
                                     </variation>
                                 </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OVB-uf-G9J">
+                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="40" id="4gD-LP-i4L"/>
+                                        <constraint firstAttribute="height" constant="30" id="FLC-iZ-x8I">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="45"/>
+                                        </constraint>
+                                    </constraints>
+                                    <state key="normal" image="ico-back-btn"/>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="4gD-LP-i4L"/>
+                                            <exclude reference="FLC-iZ-x8I"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="heightClass=regular-widthClass=regular">
+                                        <mask key="constraints">
+                                            <include reference="4gD-LP-i4L"/>
+                                            <include reference="FLC-iZ-x8I"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <action selector="btn_back:" destination="-1" eventType="touchUpInside" id="Avf-XS-v1z"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.1803921568627451" green="0.24313725490196078" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="ubw-zI-ARj" secondAttribute="trailing" constant="138" id="8uH-hO-bBu"/>
-                                <constraint firstAttribute="bottom" secondItem="OVB-uf-G9J" secondAttribute="bottom" constant="24" id="Amz-ps-eX7"/>
+                                <constraint firstAttribute="bottom" secondItem="OVB-uf-G9J" secondAttribute="bottom" constant="24" id="Amz-ps-eX7">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                                </constraint>
                                 <constraint firstItem="OMJ-Zi-DpA" firstAttribute="top" secondItem="lDH-jY-CLk" secondAttribute="top" constant="24" id="BOK-OF-BgF"/>
                                 <constraint firstItem="OVB-uf-G9J" firstAttribute="leading" secondItem="lDH-jY-CLk" secondAttribute="leading" constant="13" id="NhA-Bm-Dl2"/>
                                 <constraint firstAttribute="trailing" secondItem="thm-dX-28N" secondAttribute="trailing" constant="4" id="PeD-X9-73Z"/>
                                 <constraint firstAttribute="height" constant="75" id="V0V-7y-yEu"/>
-                                <constraint firstItem="OVB-uf-G9J" firstAttribute="top" secondItem="lDH-jY-CLk" secondAttribute="top" constant="21" id="cLT-sw-NWY"/>
+                                <constraint firstItem="OVB-uf-G9J" firstAttribute="top" secondItem="lDH-jY-CLk" secondAttribute="top" constant="21" id="cLT-sw-NWY">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                                </constraint>
                                 <constraint firstItem="thm-dX-28N" firstAttribute="top" secondItem="lDH-jY-CLk" secondAttribute="top" constant="21" id="tLt-Yl-nSS"/>
                                 <constraint firstItem="ubw-zI-ARj" firstAttribute="top" secondItem="lDH-jY-CLk" secondAttribute="top" constant="26" id="uGL-a7-VVJ"/>
                                 <constraint firstItem="OMJ-Zi-DpA" firstAttribute="centerX" secondItem="lDH-jY-CLk" secondAttribute="centerX" id="y7z-xZ-TdM"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="subviews">
-                                    <exclude reference="OVB-uf-G9J"/>
                                     <exclude reference="OMJ-Zi-DpA"/>
                                     <exclude reference="thm-dX-28N"/>
                                     <exclude reference="ubw-zI-ARj"/>
+                                    <exclude reference="OVB-uf-G9J"/>
                                 </mask>
                                 <mask key="constraints">
                                     <exclude reference="V0V-7y-yEu"/>
@@ -276,10 +285,10 @@
                             </variation>
                             <variation key="heightClass=regular-widthClass=regular">
                                 <mask key="subviews">
-                                    <include reference="OVB-uf-G9J"/>
                                     <include reference="OMJ-Zi-DpA"/>
                                     <include reference="thm-dX-28N"/>
                                     <include reference="ubw-zI-ARj"/>
+                                    <include reference="OVB-uf-G9J"/>
                                 </mask>
                                 <mask key="constraints">
                                     <include reference="V0V-7y-yEu"/>

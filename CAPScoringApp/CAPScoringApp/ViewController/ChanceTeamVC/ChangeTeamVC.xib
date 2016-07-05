@@ -92,6 +92,9 @@
                                             <include reference="wfS-f3-8o1"/>
                                         </mask>
                                     </variation>
+                                    <connections>
+                                        <action selector="didClickBackBtnAction:" destination="-1" eventType="touchUpInside" id="ltZ-Yf-RQs"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHANGE TEAM" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="671-Ys-K1m">
                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>

@@ -343,6 +343,11 @@
     
 }
 
+-(IBAction)didClickBackBtnAction:(id)sender
+{
+    [self.delegate ChangeVCBackBtnAction];
+}
+
 -(void)ShowAlterView:(NSString *) alterMsg
 {
     UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
