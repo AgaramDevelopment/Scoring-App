@@ -321,17 +321,43 @@ NSRegularExpression *isMatchedByRegex;
     
 }
 
-
+//alphabet validation
+-(BOOL)textValidation:(NSString*) validation{
+    
+    NSCharacterSet *charcter =[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+    NSString *filtered;
+    
+    filtered = [[validation componentsSeparatedByCharactersInSet:charcter] componentsJoinedByString:@""];
+    return [validation isEqualToString:filtered];
+    
+    
+ 
+    
+    
+}
 
 - (IBAction)btn_proceed:(id)sender {
    
+    if (![self textValidation:self.txt_overs.text]) {
+        
+
+        [self showDialog:@"Please Enter Valid Overs" andTitle:@"Error"];
+        
+    }else{
+        
+
+        
+        [self overValidation];
+        [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
+        
+        [self startService:@"MATCHUPDATEOVER"];
+        
+    }
+   
     
-    [self overValidation];
     
-    
-    [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
-    
-     [self startService:@"MATCHUPDATEOVER"];
+  
+  
     
 }
 
@@ -365,7 +391,8 @@ NSRegularExpression *isMatchedByRegex;
 //Validation for over update validation
 -(BOOL) overValidation{
     
-
+    
+    
     _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
     _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
     
