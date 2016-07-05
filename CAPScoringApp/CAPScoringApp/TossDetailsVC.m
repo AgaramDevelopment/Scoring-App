@@ -672,38 +672,21 @@
 
 
 -(void)radiobuttonSelected:(id)sender{
-    switch ([sender tag]) {
-        case 0:
-            if([self.radiobutton1 isSelected]==YES)
-                
-            {   BowlingEnd=@"MSC151";
-                [self.radiobutton1 setSelected:NO];
-                [self.radiobutton2 setSelected:YES];
-            }
-            else{
-                BowlingEnd=@"MSC150";
-                [self.radiobutton1 setSelected:YES];
-                [self.radiobutton2 setSelected:NO];
-            }
-            
-            break;
-        case 1:
-            if([self.radiobutton2 isSelected]==YES)
-                
-            {   BowlingEnd=@"MSC150";
-                [self.radiobutton2 setSelected:NO];
-                [self.radiobutton1 setSelected:YES];
-                
-            }
-            else{
-                BowlingEnd=@"MSC151";
-                [self.radiobutton2 setSelected:YES];
-                [self.radiobutton1 setSelected:NO];
-            }
-            
-            break;
-        default:
-            break;
+    
+   
+    if([self.radiobutton1.currentImage isEqual: [UIImage imageNamed:@"Radio.on.png"]])
+        
+    {           BowlingEnd=@"MSC151";
+        [self.radiobutton1 setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+        [self.radiobutton2 setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+        
+        
+    }
+    else{
+        BowlingEnd=@"MSC150";
+        [self.radiobutton1 setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+        [self.radiobutton2 setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+        
     }
     
 }
