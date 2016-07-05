@@ -11618,6 +11618,31 @@ EndInnings *endInnings;
     [PushDict setObject:PenalitydetailsGetArray forKey:@"Penalitydetails"];
     [PushDict setObject:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
     
+    
+//    
+//    
+//    
+//    NSDictionary *parameters = @{
+//                                 @"call": @"messages-getModuleMessages",
+//                                 @"accessSecret": FB_API_KEY,
+//                                 @"authToken": [FBUserManager sharedUserManager].authToken,
+//                                 @"format": @"json",
+//                                 @"inbox":@"callType"
+//                                 };
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.fretbay.com/fr/private/api/rest-server.php?"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSURLSessionUploadTask *dataTask = [session uploadTaskWithRequest: request
+                                                             fromData: data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                                                 NSLog(@"%@", json);
+                                                             }];
+    
 }
 - (IBAction)Exit_btn:(id)sender {
     

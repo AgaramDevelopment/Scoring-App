@@ -713,6 +713,13 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)ShowAlterView:(NSString *) alterMsg
+{
+    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [objAlter show];
+}
+
 - (IBAction)Btn_Proceed:(id)sender {
     
     //save option
@@ -730,6 +737,29 @@
     
     //   // DBManagerChangeToss *changetoss=[[ChangeTossVC alloc]init];
     //    changetoss.
+    
+    
+    
+    if([self.Wonby_lbl.text isEqualToString:@""] || self.Wonby_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Stricker"];
+    }
+    else if([self.electedTo_lbl.text isEqualToString:@""] || self.electedTo_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please Select NonStricker"];
+    }
+    else if([self.Striker_lbl.text isEqualToString:@""] || self.Striker_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Bowler"];
+    }
+    else if([self.nonStriker_lbl.text isEqualToString:@""] || self.nonStriker_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Bowler"];
+    }
+    else if([self.Bowler_lbl.text isEqualToString:@""] || self.Bowler_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Bowler"];
+    }
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
                                                    message: @"Please confirm to start the match"
