@@ -80,8 +80,7 @@
 @synthesize BowleArray;
 @synthesize MATCHCODE;
 @synthesize CompetitionCode;
-@synthesize radiobutton1;
-@synthesize radiobutton2;
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -94,15 +93,10 @@
     [self.view_Striker setUserInteractionEnabled:NO];
     [self.nonStriker setUserInteractionEnabled:NO];
     [self.view_Bowler setUserInteractionEnabled:NO];
-    // self.outlet_btn_proceed.enabled = NO;
+   
     
     
-    //    self.radiobutton1 = [[RadioButton alloc] initWithGroupId:@"first group" index:0];
-    //    RadioButton *rb2 = [[RadioButton alloc] initWithGroupId:@"first group" index:1];
-    // self.outlet_btn_proceed.enabled = YES;
-    
-    // Do any additional setup after loading the view.
-    // _MATCHCODE=@"IMSC0221C6F6595E95A00001";
+  
     [self.view_Wonby.layer setBorderWidth:2.0];
     [self.view_Wonby.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Wonby .layer setMasksToBounds:YES];
@@ -132,11 +126,27 @@
     [self.view_Bowler .layer setMasksToBounds:YES];
     [_Bowler_table setHidden:YES];
     
+
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    [super viewWillAppear:animated];
+    [self.Btn_Nearend setTag:0];
+//    [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+    
+   
+    BowlingEnd=@"MSC150";
+    [self.Btn_Nearend addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    [self.Btn_FairEnd setTag:1];
+//    [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+    
+    [self.Btn_FairEnd addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
     [self.view_Wonby.layer setBorderWidth:2.0];
     [self.view_Wonby.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Wonby .layer setMasksToBounds:YES];
@@ -167,7 +177,39 @@
     [_Bowler_table setHidden:YES];
     isEnableTbl=YES;
     
+   
+    
+    
+    
+   
 }
+
+
+
+
+-(void)radiobuttonSelected:(id)sender{
+    
+    if([self.Btn_FairEnd.currentImage isEqual:[UIImage imageNamed:@"Radio.on.png"]])
+        
+    {           BowlingEnd=@"MSC151";
+        [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+        [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+        
+        
+    }
+    else{
+        BowlingEnd=@"MSC150";
+        [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+        [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+        
+    }
+
+    
+}
+
+
+
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {  if (tableView == self.Wonby_table)
@@ -649,107 +691,68 @@
     
 }
 
--(void)viewDidAppear:(BOOL)animated
-{
-    
-    //radio buttons
-    
-    [self.radiobutton1 setTag:0];
-    [self.radiobutton1 setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
-    //[self.radiobutton1 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
-    BowlingEnd=@"MSC150";
-    //[self.radiobutton1 setBackgroundImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateSelected];
-    [self.radiobutton1 addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
-    
-    [self.radiobutton2 setTag:1];
-    [self.radiobutton1 setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
-    // [self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];[self.radiobutton2 setBackgroundImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateSelected];
-    [self.radiobutton2 addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
-    //[self.view addSubview:self.radiobutton2];
-    //[self.view addSubview:self.radiobutton2];
-}
-
-
-
--(void)radiobuttonSelected:(id)sender{
-    switch ([sender tag]) {
-        case 0:
-            if([self.radiobutton1 isSelected]==YES)
-                
-            {   BowlingEnd=@"MSC151";
-                [self.radiobutton1 setSelected:NO];
-                [self.radiobutton2 setSelected:YES];
-            }
-            else{
-                BowlingEnd=@"MSC150";
-                [self.radiobutton1 setSelected:YES];
-                [self.radiobutton2 setSelected:NO];
-            }
-            
-            break;
-        case 1:
-            if([self.radiobutton2 isSelected]==YES)
-                
-            {   BowlingEnd=@"MSC150";
-                [self.radiobutton2 setSelected:NO];
-                [self.radiobutton1 setSelected:YES];
-                
-            }
-            else{
-                BowlingEnd=@"MSC151";
-                [self.radiobutton2 setSelected:YES];
-                [self.radiobutton1 setSelected:NO];
-            }
-            
-            break;
-        default:
-            break;
-    }
-    
-}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void)ShowAlterView:(NSString *) alterMsg
+{
+    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [objAlter show];
+}
+
 - (IBAction)Btn_Proceed:(id)sender {
     
-    //save option
-    //   NSString *count =[DBManager TossSaveDetails:MATCHCODE :CompetitionCode];
-    //    if([count isEqualToString:@"0"]){
-    //        [DBManager insertMatchEvent:CompetitionCode :MATCHCODE :selectTeamcode :electedcode :teamaCode :teambCode];
-    //    }
-    //
-    //    NSString *maxInnNo = [DBManager getMaxInningsNumber:CompetitionCode :MATCHCODE];
-    //
-    //    NSString*inningsstatus=@"0";
-    //   //  BowlingEnd=@"MSC150";
-    //    [DBManager inserMaxInningsEvent:CompetitionCode :MATCHCODE :teamaCode :maxInnNo :StrikerCode:NonStrikerCode :selectBowlerCode :StrikerCode :NonStrikerCode :selectBowlerCode :teamaCode :inningsstatus:BowlingEnd];
-    //    [DBManager updateProcced:CompetitionCode :MATCHCODE];
-    
-    //   // DBManagerChangeToss *changetoss=[[ChangeTossVC alloc]init];
-    //    changetoss.
-    
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
-                                                   message: @"Please confirm to start the match"
-                                                  delegate: self
-                                         cancelButtonTitle:@"Start match"
-                                         otherButtonTitles:@"Cancel",nil];
-    
-    
-    alert.tag =1;
-    
-    [alert show];
     
     
     
-    //    UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    //
-    //    ScorEnginVC *scoreEngine =(ScorEnginVC*) [storyBoard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
-    //    //Fixvc.CompitionCode=selectindexarray;
-    //    [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
-    //    [self presentViewController:scoreEngine animated:NO completion:nil];
+    if([self.Wonby_lbl.text isEqualToString:@""] || self.Wonby_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Team"];
+    }
+    else if([self.electedTo_lbl.text isEqualToString:@""] || self.electedTo_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please Select ElectedTo"];
+    }
+    else if([self.Striker_lbl.text isEqualToString:@""] || self.Striker_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Stricker"];
+    }
+    else if([self.nonStriker_lbl.text isEqualToString:@""] || self.nonStriker_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please Select NonStriker"];
+    }
+    else if([self.Bowler_lbl.text isEqualToString:@""] || self.Bowler_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Bowler"];
+    }
+    
+    else{
+        [DBManagerChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE:selectTeamcode : electedcode : StrikerCode : NonStrikerCode : selectBowlerCode :BowlingEnd];
+        
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+                                                       message: @"Please confirm to start the match"
+                                                      delegate: self
+                                             cancelButtonTitle:@"Start match"
+                                             otherButtonTitles:@"Cancel",nil];
+        
+        
+        alert.tag =1;
+        
+        [alert show];
+        
+         [self startService:@"DONE"];
+
+     }
+    
+   
+    
+
+    
+    
 }
 
 
@@ -762,7 +765,7 @@
     {
         [DBManagerChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : electedcode : StrikerCode : NonStrikerCode : selectBowlerCode :BowlingEnd];
         
-        [self startService:@"DONE"];
+        
         
         ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
         

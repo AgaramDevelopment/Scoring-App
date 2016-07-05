@@ -9,10 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "EndSessionTVC.h"
 
+@protocol EndSedsessionDelegate <NSObject>
+@required
+
+- (void) ChangeVCBackBtnAction;
+@end
+
+
+
+
+
 @interface EndSession : UIViewController{
     UIDatePicker *datePicker;
 }
 
+
+@property(nonatomic,strong) id <EndSedsessionDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIScrollView *scroll_EndSession;
 
 @property (weak, nonatomic) IBOutlet UIView *view_Allcontrols;

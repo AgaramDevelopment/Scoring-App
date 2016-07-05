@@ -60,7 +60,7 @@
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
                 
-                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETAUTHORIZATIONDETAILS/%@/%@/admin",[Utitliy getIPPORT] ,userNameLbl,passwordLbl];
+                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETAUTHORIZATIONDETAILS/%@/%@/admin",[Utitliy getSyncIPPORT] ,userNameLbl,passwordLbl];
                 NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                 
                 NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -82,14 +82,9 @@
                 if([[errorItemObj objectForKey:@"ErrorNo"] isEqual:@"MOB0005"]){
                     BOOL isUserLogin = YES;
                     
-                    NSString *userCode = [rootDictionary valueForKey:@"UserFullname"];
-                    NSString *secureId = [rootDictionary valueForKey:@"SecureId"];
-
+                  
                     [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
-//                    [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
-//                    [[NSUserDefaults standardUserDefaults] setObject:secureId forKey:[Utitliy SecureId]];
-//                    [[NSUserDefaults standardUserDefaults] synchronize];
-                    
+
                     
                     NSArray *temp =   [rootDictionary objectForKey:@"UserDetails"];
                     
@@ -112,7 +107,19 @@
                         NSString*MODIFIEDDATE=[test objectForKey:@"Modifieddate"];
                         NSString*RECORDSTATUS=[test objectForKey:@"Recordstatus"];
                         
-                        bool CheckStatus=[LoginDBmanager CheckUserDetails:LOGINID:PASSWORD];
+                        
+                        NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];
+                        //   6/23/2016 5:45:00 PM
+                        [dateFmt setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+                        NSDate *date = [dateFmt dateFromString:LICENSEUPTO];
+                        NSLog(@"date:",date);
+                        
+                        [dateFmt setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+                        LICENSEUPTO = [dateFmt stringFromDate:date];
+                        NSLog(@"dateString:",LICENSEUPTO);
+                        
+                        
+                        bool CheckStatus=[LoginDBmanager CheckUserDetails : LOGINID:PASSWORD];
                         if (CheckStatus==YES)
                         {
                             [LoginDBmanager UPDATEUSERDETAILS:LOGINID:PASSWORD:LICENSEUPTO];
@@ -120,7 +127,7 @@
                         
                         else
                         {
-                            [LoginDBmanager INSERTUSERDETAILS:USERCODE: USERROLEID:LOGINID: PASSWORD:REMEMBERME:REMENTDATE:USERFULLNAME:MACHINEID : LICENSEUPTO: CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
+                            [LoginDBmanager INSERTUSERDETAILS :USERCODE: USERROLEID:LOGINID: PASSWORD:REMEMBERME:REMENTDATE:USERFULLNAME:MACHINEID : LICENSEUPTO: CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
                             
                         }
                       
@@ -137,6 +144,8 @@
                       USERNAME=[test1 objectForKey:@"Username"];
                         NSString *SECUREID=[test1 objectForKey:@"Secureid"];
                         [[NSUserDefaults standardUserDefaults] setObject:SECUREID forKey:[Utitliy SecureId]];
+                        [[NSUserDefaults standardUserDefaults] setObject:USERNAME forKey:@"USERNAME"];
+
                         NSString *STARTDATE=[test1 objectForKey:@"Startdate"];
                         NSString *ENDDATE=[test1 objectForKey:@"Enddate"];
                         NSString *CREATEDBY=[test1 objectForKey:@"Createdby"];
@@ -146,10 +155,30 @@
                         NSString*RECORDSTATUS=[test1 objectForKey:@"Recordstatus"];
                       
                         
-                        bool CheckStatus=[LoginDBmanager CheckSecureIdDetails:USERNAME];
+                        NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];
+                        //   6/23/2016 5:45:00 PM
+                        [dateFmt setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+                        NSDate *date = [dateFmt dateFromString:STARTDATE];
+                        NSLog(@"date:",date);
+                        
+                        [dateFmt setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+                        STARTDATE = [dateFmt stringFromDate:date];
+                        NSLog(@"dateString:",STARTDATE);
+                        
+                        
+                        [dateFmt setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+                         date = [dateFmt dateFromString:ENDDATE];
+                        NSLog(@"date:",date);
+                        
+                        [dateFmt setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+                        ENDDATE = [dateFmt stringFromDate:date];
+                        NSLog(@"dateString:",ENDDATE);
+                        
+                        
+                        bool CheckStatus= [LoginDBmanager CheckSecureIdDetails :USERNAME];
                         if (CheckStatus==YES)
                         {
-                            [LoginDBmanager UPDATESECUREIDDETAILS:USERNAME:SECUREID:STARTDATE:ENDDATE:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
+                            [LoginDBmanager UPDATESECUREIDDETAILS : USERNAME:SECUREID:STARTDATE:ENDDATE:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
                         }
                         
                         else
@@ -196,21 +225,22 @@
                 [delegate hideLoading];
             });
             
+
             //[delegate hideLoading];
         }else{
-            NSMutableArray *userMutableArray = [DBManager checkUserLogin:userNameLbl password:passwordLbl];
+            NSMutableArray *userMutableArray = [DBManager checkUserLogin : userNameLbl password:passwordLbl];
             if([userMutableArray count]!=0){
                 UserRecord *userRecode = [userMutableArray objectAtIndex:0];
                 
                 if([DBManager checkExpiryDate:[userRecode userCode]]){
                   
-                     if ([DBManager checkSecurityExpiryDate:USERNAME])
+                     if ([DBManager checkSecurityExpiryDate :userRecode.userName ])
                      {
                     BOOL isUserLogin = YES;
                     NSString *userCode = [userRecode userCode];
                     [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
                     [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
-                     [[NSUserDefaults standardUserDefaults] setObject:USERNAME forKey:@"USERNAME"];
+                     [[NSUserDefaults standardUserDefaults] setObject:userRecode.userName forKey:@"USERNAME"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                     [self openContentView];
                          
@@ -278,10 +308,10 @@
     NSString *userNameTxtf = self.txt_user_name.text;
     NSString *passwordTxtf = self.txt_password.text;
     if([userNameTxtf isEqual:@""]){
-        [self showDialog:@"Please enter User Name." andTitle:@""];
+        [self showDialog:@"Please Enter User Name." andTitle:@""];
         return NO;
     }else if([passwordTxtf isEqual:@""]){
-        [self showDialog:@"Please enter password" andTitle:@""];
+        [self showDialog:@"Please Enter Password" andTitle:@""];
         return NO;
     }
     

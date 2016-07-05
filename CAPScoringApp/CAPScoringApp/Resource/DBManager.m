@@ -123,7 +123,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([dbPath UTF8String], &dataBase);
     if(retVal ==0){
         
-        NSString *query=[NSString stringWithFormat:@"SELECT  *  FROM Userdetails WHERE  strftime('%%YYYY-%%mm-%%dd %%hh:%%mm:%%ss', LICENSEUPTO) >= datetime('now') AND USERCODE = '%@'",userId];
+        NSString *query=[NSString stringWithFormat:@"SELECT  *  FROM Userdetails WHERE  strftime('%%Y-%%m-%%d %%H:%%M:%%S', LICENSEUPTO) >= datetime('now') AND USERCODE = '%@'",userId];
         NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -155,7 +155,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([dbPath UTF8String], &dataBase);
     if(retVal ==0){
         
-        NSString *query=[NSString stringWithFormat:@"SELECT  *  FROM SECUREIDDETAILS WHERE  strftime('%%YYYY-%%mm-%%dd %%hh:%%mm:%%ss', ENDDATE) >= datetime('now') AND USERNAME = '%@'",USERNAME];
+        NSString *query=[NSString stringWithFormat:@"SELECT  *  FROM SECUREIDDETAILS WHERE  strftime('%%Y-%%m-%%d %%H:%%M:%%S', ENDDATE) >= datetime('now') AND USERNAME = '%@'",USERNAME];
         NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -296,7 +296,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([dbPath UTF8String], &dataBase);
     if(retVal ==0){
         
-        NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME,PM.BATTINGSTYLE FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE WHERE MTP.MATCHCODE='%@'  AND MTP.TEAMCODE='%@'", MATCHCODE,TeamCODE];
+        NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME,PM.BATTINGSTYLE FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE  AND MTP.RECORDSTATUS='MSC001' WHERE MTP.MATCHCODE='%@'  AND MTP.TEAMCODE='%@'", MATCHCODE,TeamCODE];
         NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -335,7 +335,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([dbPath UTF8String], &dataBase);
     if(retVal ==0){
         //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
-        NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE INNER JOIN MATCHREGISTRATION MR ON MR.MATCHCODE=MTP.MATCHCODE WHERE MTP.MATCHCODE='%@'  AND MTP.TEAMCODE='%@'", MATCHCODE,TeamCODE];
+        NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE INNER JOIN MATCHREGISTRATION MR ON MR.MATCHCODE=MTP.MATCHCODE AND MTP.RECORDSTATUS='MSC001' WHERE MTP.MATCHCODE='%@'  AND MTP.TEAMCODE='%@'", MATCHCODE,TeamCODE];
         NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)

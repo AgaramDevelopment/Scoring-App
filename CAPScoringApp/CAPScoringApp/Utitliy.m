@@ -11,7 +11,7 @@
 @implementation Utitliy
 
 +(NSString *)getIPPORT{
-    return  @"192.168.1.39:8096";
+    return  @"192.168.1.139:8100";
 }
 
 

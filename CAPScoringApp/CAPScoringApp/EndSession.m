@@ -48,7 +48,7 @@ int POS_TEAM_TYPE = 1;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-
+   
     
     
 }
@@ -68,7 +68,7 @@ int POS_TEAM_TYPE = 1;
     
     sessionRecords = [[EndSessionRecords alloc]init];
     
-    back = NO;
+    back = YES;
    
     
    battingTeamArray = [[NSMutableArray alloc]init];
@@ -243,20 +243,17 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
     self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
     
 }
+
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -391,6 +388,7 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
 - (IBAction)btn_addEndSession:(id)sender {
     self.view_allControls.hidden = NO;
     self.tbl_session.hidden = YES;
+    back=NO;
     
 }
 
@@ -621,6 +619,9 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
         //
         //        dashVC =  (DashBoardVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
         
+        
+        [self.delegate ChangeVCBackBtnAction];
+
         back = NO;
     }
     
