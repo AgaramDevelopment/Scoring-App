@@ -10,6 +10,7 @@
 @protocol ChangeTossDelegate <NSObject>
 @required
 - (void) RedirectScorEngin;
+- (void) ChangeVCBackBtnAction;
 @end
 
 
