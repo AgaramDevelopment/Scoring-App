@@ -1788,6 +1788,7 @@
                                             <constraint firstAttribute="width" constant="30" id="l04-Sw-hAe"/>
                                             <constraint firstAttribute="height" constant="30" id="t2z-gw-wLB"/>
                                         </constraints>
+                                        <state key="normal" image="Radio.on"/>
                                         <state key="disabled" image="Radio.off"/>
                                         <state key="selected" image="Radio.on"/>
                                         <state key="highlighted" image="Radio.off"/>
@@ -1833,6 +1834,7 @@
                                             <constraint firstAttribute="height" constant="30" id="C6S-LT-aQ3"/>
                                             <constraint firstAttribute="width" constant="29" id="cSL-5m-vyp"/>
                                         </constraints>
+                                        <state key="normal" image="Radio.off"/>
                                         <state key="selected" image="Radio.on"/>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -2251,6 +2253,8 @@
                     <connections>
                         <outlet property="Bowler_lbl" destination="1gr-Q2-mNs" id="pbP-76-Z3E"/>
                         <outlet property="Bowler_table" destination="eWG-8w-V74" id="2CT-vj-0UI"/>
+                        <outlet property="Btn_FairEnd" destination="NU1-ae-JDS" id="283-gD-ECY"/>
+                        <outlet property="Btn_Nearend" destination="xPd-J0-vzd" id="Xdx-Y7-7pn"/>
                         <outlet property="Striker_lbl" destination="KeR-aj-iid" id="p5u-20-bOi"/>
                         <outlet property="Striker_table" destination="olQ-CF-mtl" id="iYq-3c-R01"/>
                         <outlet property="Wonby_lbl" destination="aMp-L4-anj" id="DWT-Vs-mHN"/>
@@ -2261,8 +2265,6 @@
                         <outlet property="nonStriker_lbl" destination="cmX-Yc-Cc4" id="jRO-9a-3V0"/>
                         <outlet property="nonStriker_table" destination="dLg-vH-awG" id="8Qg-Io-Xge"/>
                         <outlet property="outlet_btn_proceed" destination="QeG-1x-x0d" id="9lp-h1-5po"/>
-                        <outlet property="radiobutton1" destination="xPd-J0-vzd" id="4M5-7F-QUb"/>
-                        <outlet property="radiobutton2" destination="NU1-ae-JDS" id="ywa-Dq-WLA"/>
                         <outlet property="view_Bowler" destination="b9d-c0-oqI" id="jRu-Id-ScA"/>
                         <outlet property="view_Electedto" destination="QzF-SL-R0B" id="Vw2-c8-MHi"/>
                         <outlet property="view_Striker" destination="Lyd-4b-jov" id="yJt-bf-8KG"/>
@@ -13787,7 +13789,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9xK-kW-1xe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2088" y="1395.75"/>
+            <point key="canvasLocation" x="2129.25" y="2123.25"/>
         </scene>
     </scenes>
     <resources>
