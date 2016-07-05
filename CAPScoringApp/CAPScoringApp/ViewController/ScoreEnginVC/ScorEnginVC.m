@@ -11620,6 +11620,21 @@ EndInnings *endInnings;
     [PushDict setObject:PenalitydetailsGetArray forKey:@"Penalitydetails"];
     [PushDict setObject:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
     
+    
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://url"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSURLSessionUploadTask *dataTask = [session uploadTaskWithRequest: request
+                                                             fromData: data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                                                 NSLog(@"%@", json);
+                                                             }];
+    
 }
 - (IBAction)Exit_btn:(id)sender {
     

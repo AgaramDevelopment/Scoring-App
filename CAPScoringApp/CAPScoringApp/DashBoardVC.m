@@ -751,7 +751,7 @@
     
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
-                                                   message: @"Are sure you want to signout?"
+                                                   message: @"Are You Sure Want to Signout?"
                                                   delegate: self
                                          cancelButtonTitle:@"Signout"
                                          otherButtonTitles:@"Cancel",nil];
