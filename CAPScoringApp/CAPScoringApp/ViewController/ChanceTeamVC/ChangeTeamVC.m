@@ -220,6 +220,10 @@
     }
     
 }
+-(IBAction)didClickBackBtnAction:(id)sender
+{
+    [self.delegate ChangeVCBackBtnAction];
+}
 
 // insertChanceTeam
 -(void) InsertChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSNumber*) INNINGSNO:(NSString*) STRIKERCODE:(NSString*) NONSTRIKERCODE:(NSString*) BOWLERCODE:(NSNumber*) CURRENTINNINGSNO:(NSString*) CURRENTBATTINGTEAM:(NSString*) ELECTEDTO:(NSString*) BOWLINGEND

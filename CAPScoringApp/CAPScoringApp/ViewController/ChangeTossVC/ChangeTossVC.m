@@ -113,6 +113,9 @@
     [self.Btn_Nearend setTag:0];
     [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
     
+    
+    
+    
    // [self.Btn_Nearend setBackgroundImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
     BowlingEnd=@"MSC150";
     [self.Btn_Nearend addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
@@ -338,6 +341,11 @@
             
         }
     
+}
+
+-(IBAction)didClickBackBtnAction:(id)sender
+{
+    [self.delegate ChangeVCBackBtnAction];
 }
 
 -(void)ShowAlterView:(NSString *) alterMsg

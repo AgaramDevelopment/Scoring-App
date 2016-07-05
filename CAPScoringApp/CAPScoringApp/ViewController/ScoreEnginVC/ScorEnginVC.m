@@ -76,7 +76,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -7202,7 +7202,9 @@ EndInnings *endInnings;
 }
 -(void)ENDSession
 {
-    
+   if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
+   {
+
     EndSession *endSession = [[EndSession alloc]initWithNibName:@"EndSession" bundle:nil];
     endSession.view.frame =CGRectMake(90, 200, endSession.view.frame.size.width, endSession.view.frame.size.height);
     
@@ -7236,9 +7238,9 @@ EndInnings *endInnings;
     
     
     [endSession fetchPageEndSession:fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
+    endSession.delegate=self;
     
-    
-    
+    }
     
     
     
@@ -11618,6 +11620,21 @@ EndInnings *endInnings;
     [PushDict setObject:PenalitydetailsGetArray forKey:@"Penalitydetails"];
     [PushDict setObject:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
     
+    
+    
+    NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://url"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSURLSessionUploadTask *dataTask = [session uploadTaskWithRequest: request
+                                                             fromData: data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                                                 NSLog(@"%@", json);
+                                                             }];
+    
 }
 - (IBAction)Exit_btn:(id)sender {
     
@@ -11627,5 +11644,10 @@ EndInnings *endInnings;
    // Archivevc.matchCode=self.matchCode;
     Archivevc.CompitionCode=self.competitionCode;
     [self.navigationController pushViewController:Archivevc animated:YES];
+}
+
+- (void) ChangeVCBackBtnAction
+{
+    [fullview removeFromSuperview];
 }
 @end

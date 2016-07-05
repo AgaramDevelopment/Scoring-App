@@ -10,6 +10,7 @@
 @protocol ChangeTeamDelegate <NSObject>
 @required
 - (void) processSuccessful;
+- (void) ChangeVCBackBtnAction;
 @end
 @interface ChangeTeamVC : UIViewController
 
