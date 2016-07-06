@@ -191,14 +191,14 @@
     
     if([self.Btn_FairEnd.currentImage isEqual:[UIImage imageNamed:@"Radio.on.png"]])
         
-    {           BowlingEnd=@"MSC151";
+    {     BowlingEnd=@"MSC150";
         [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
         [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
         
         
     }
     else{
-        BowlingEnd=@"MSC150";
+        BowlingEnd=@"MSC151";
         [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
         [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
         

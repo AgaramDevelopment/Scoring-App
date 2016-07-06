@@ -3721,16 +3721,16 @@ EndInnings *endInnings;
             self.width.constant=450;
         }
         else{
-            self.height.constant=350;
+            self.height.constant=350;  
             self.width.constant=350;
         }
         
-        if([self.BatmenStyle isEqualToString:@"MSC012"])
+        if([self.BatmenStyle isEqualToString:@"MSC013"])
         {
-            [self.img_WagonWheel setImage:[UIImage imageNamed:@"LHWagon"]];
+            [self.img_WagonWheel setImage:[UIImage imageNamed:@"RHWagon"]];
         }
         else{
-            [self.img_WagonWheel setImage:[UIImage imageNamed:@"RHWagon"]];
+            [self.img_WagonWheel setImage:[UIImage imageNamed:@"LHWagon"]];
         }
         
         if (IS_IPAD_PRO) {
