@@ -62,7 +62,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *INNINGSNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *INNINGSNO =  [self getValueByNull:statement :0];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return INNINGSNO;
@@ -94,7 +94,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *TEAMCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *TEAMCODE =  [self getValueByNull:statement :0];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return TEAMCODE;
@@ -127,7 +127,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *BOWLINGTEAM =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *BOWLINGTEAM =  [self getValueByNull:statement :0];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return BOWLINGTEAM;
@@ -158,7 +158,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *OVERNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *OVERNO =  [self getValueByNull:statement :0];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return OVERNO;
@@ -189,7 +189,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *BALLNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *BALLNO =  [self getValueByNull:statement :0];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return BALLNO;
@@ -220,7 +220,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *BALLCOUNT =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *BALLCOUNT =  [self getValueByNull:statement :0];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return BALLCOUNT;
@@ -292,8 +292,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                                        {
                                            while(sqlite3_step(statement)==SQLITE_ROW){
                                                ChangeTeamRecord *record=[[ChangeTeamRecord alloc]init];
-                                               record.TEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                                               record.TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                                               record.TEAMNAME=[self getValueByNull:statement :0];
+                                               record.TEAMCODE=[self getValueByNull:statement :1];
                                                
                                                [GetBatAndBowlTeamdetailsDetails addObject:record];
                                            }
@@ -359,5 +359,10 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT PM.PLAYERCODE PLAYERCO
         sqlite3_close(dataBase);
         return GetBowlingTDetails;
     }
+
+-(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
+    return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
+}
+
 
 @end

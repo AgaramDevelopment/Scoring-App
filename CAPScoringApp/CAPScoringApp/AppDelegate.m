@@ -71,7 +71,7 @@
 -(void)showLoading {
     indicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     indicator.transform = CGAffineTransformMakeScale(1.5, 1.5);
-    indicator.color=[UIColor blueColor];
+    indicator.color=[UIColor whiteColor];
     indicator.center = self.window.center;
     indicator.hidesWhenStopped = YES;
     [self.window addSubview:indicator];

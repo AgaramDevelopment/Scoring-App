@@ -278,6 +278,10 @@ EndInnings *endInnings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //Initialize Matchtype Dictionary
+    MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
+    ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
+    
     AppealBatsmenArray=[[NSMutableArray alloc]init];
     
     EditModeVC * objEditModeVc=[[EditModeVC alloc]init];
@@ -289,23 +293,7 @@ EndInnings *endInnings;
         [self reloadBowlerTeamBatsmanDetails];
         [self AllBtndisableMethod];
         
-    }
-    
-    //GetMatchTypeForInserTEnd
-    //objDBManagerEndDay=[[DBManagerEndDay alloc]init];
-    
-    MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
-    
-    ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
-    
-    
-    // [self resetBallObject];
-    
-    
-    //    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-    //   [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
-    //
-    [self hideLabelBasedOnMatchType];
+    }    [self hideLabelBasedOnMatchType];
     
     //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
@@ -352,17 +340,19 @@ EndInnings *endInnings;
    NSString*Playernonstickername=fetchSEPageLoadRecord.nonstrickerPlayerName;
     
     NSMutableDictionary *Dict1=[[NSMutableDictionary alloc]init];
-    [Dict1 setValue:Playerstickercode forKey:@"AppealStrickerPlayerCode"];
-    [Dict1 setValue:PlayerstickerName forKey:@"AppealStrickerPlayerName"];
+    [Dict1 setValue:Playerstickercode forKey:@"AppealBatsmenPlayerCode"];
+    [Dict1 setValue:PlayerstickerName forKey:@"AppealBatsmenPlayerName"];
 
     
    NSMutableDictionary *Dict2=[[NSMutableDictionary alloc]init];
-        [Dict2 setValue:Playernonstickercode forKey:@"AppealNonStrickerPlayerCode"];
-    [Dict2 setValue:Playernonstickername forKey:@"AppealNonStrickerPlayerName"];
+        [Dict2 setValue:Playernonstickercode forKey:@"AppealBatsmenPlayerCode"];
+    [Dict2 setValue:Playernonstickername forKey:@"AppealBatsmenPlayerName"];
 //
-    [AppealBatsmenArray addObject:Dict1];
-    [AppealBatsmenArray addObject:Dict2];
+//    [AppealBatsmenArray addObject:Dict1];
+//    [AppealBatsmenArray addObject:Dict2];
     
+    
+    AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:Dict1,Dict2 ,nil];
     
 //   [fetchLastBallBowledPlayer getLastBallBowlerPlayer:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO OVERNO:data BATTINGTEAMCODE:fetchSEPageLoadRecord.BATTINGTEAMCODE];
     
@@ -406,7 +396,7 @@ EndInnings *endInnings;
     
     self.View_Appeal.hidden = YES;
     
-    
+     isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue<=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]==4)?YES:NO;
     
     self.sideBar = [[CDRTranslucentSideBar alloc] init];
     self.sideBar.sideBarWidth = 200;
@@ -523,7 +513,7 @@ EndInnings *endInnings;
     [self.view_batsmen .layer setMasksToBounds:YES];
     [_table_BatsmenName setHidden:YES];
     
-    //  AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
+    // AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     
     self.view_bowlType.hidden = YES;
     self.view_fastBowl.hidden = YES;
@@ -2050,33 +2040,24 @@ EndInnings *endInnings;
     
     
     
-    
     if (tableView == self.table_BatsmenName)
     {
         static NSString *CellIdentifier = @"Batsmancell";
         Batsmancell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                                             forIndexPath:indexPath];
         
-      NSDictionary *dict=[AppealBatsmenArray objectAtIndex:indexPath.row];
+        NSDictionary *test=[AppealBatsmenArray objectAtIndex:indexPath.row];
         
         
-       if(indexPath.row==0)
-       {
-        cell.Batsman1_lbl.text=[dict valueForKey:@"AppealStrickerPlayerName"];
-        StrikerPlayer=cell.Batsman1_lbl.text;
-           
-       }
-        if (indexPath.row==1) {
-          cell.Batsman1_lbl.text=[dict valueForKey:@"AppealNonStrickerPlayerName"];
-            NonStrikerPlayer=cell.Batsman1_lbl.text;
-        }
+        cell.textLabel.text =[test valueForKey:@"AppealBatsmenPlayerName"];
+        
+        StrikerPlayer=cell.textLabel.text;
+        StrikerPlayer=[test valueForKey:@"AppealBatsmenPlayerCode"];
+        return cell;
         
     }
-    
-    
-    
-    
-    return cell;
+
+ return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -2211,8 +2192,8 @@ EndInnings *endInnings;
             [self calculateRunsOnEndBall];
             [self EndBallMethod];
             
-            [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
-            self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+           // [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
+           // self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
             self.btn_StartOver.userInteractionEnabled=YES;
             //        self.btn_StartBall.userInteractionEnabled=NO;
             //        [self SaveBallEventREcordvalue];
@@ -2884,7 +2865,7 @@ EndInnings *endInnings;
     // NSArray * MuliteDayMatchtype ;
     NSArray  * ValidedMatchType;
     NSString *matchoversvalue= fetchSEPageLoadRecord.MATCHTYPE;
-    NSInteger currentover =[fetchSEPageLoadRecord.MATCHOVERS intValue];
+    NSInteger currentover =fetchSEPageLoadRecord.BATTEAMOVERS;
     int overNoint =(int)currentover;
     
     NSMutableArray * objUmpireArray =[DBManager GETUMPIRE:self.competitionCode :self.matchCode ];
@@ -3739,16 +3720,16 @@ EndInnings *endInnings;
             self.width.constant=450;
         }
         else{
-            self.height.constant=350;
+            self.height.constant=350;  
             self.width.constant=350;
         }
         
-        if([self.BatmenStyle isEqualToString:@"MSC012"])
+        if([self.BatmenStyle isEqualToString:@"MSC013"])
         {
-            [self.img_WagonWheel setImage:[UIImage imageNamed:@"LHWagon"]];
+            [self.img_WagonWheel setImage:[UIImage imageNamed:@"RHWagon"]];
         }
         else{
-            [self.img_WagonWheel setImage:[UIImage imageNamed:@"RHWagon"]];
+            [self.img_WagonWheel setImage:[UIImage imageNamed:@"LHWagon"]];
         }
         
         if (IS_IPAD_PRO) {
@@ -6274,10 +6255,10 @@ EndInnings *endInnings;
         objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
         
         self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName1;
-        [self.Lbl_umpirename2 setHighlighted:YES];
+        [self.Lbl_umpirename2 setHidden:YES];
         
         self.Lbl_umpirename2.text =objAppealUmpireEventRecord.AppealUmpireName2;
-        [self.Lbl_umpirename2 setHighlighted:YES];
+        [self.Lbl_umpirename2 setHidden:YES];
         
         // selectTeam=self.Wonby_lbl.text;
         AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode1;
@@ -6290,23 +6271,11 @@ EndInnings *endInnings;
     
     if (tableView == self.table_BatsmenName)
     {
-        
-        
-        AppealBatsmenSelectionArray=[[NSMutableArray alloc]init];
-        NSDictionary *dict=[AppealBatsmenArray objectAtIndex:indexPath.row];
-        
+        Batsmancell *cell = (Batsmancell *)[tableView cellForRowAtIndexPath:indexPath];
+       self.lbl_batsmen.text =cell.textLabel.text;
         
 
-
-        
-        self.lbl_batsmen.text =StrikerPlayer;
-        
-        self.lbl_batsmen.text=NonStrikerPlayer;
-        
-        // selectTeam=self.Wonby_lbl.text;
-        // AppealComponentSelectCode=fetchSEPageLoadRecord.strickerPlayerCode;
-        ;
-        //   [AppealComponentSelectionArray addObject:objAppealComponentEventRecord];
+        StrikerPlayer=self.lbl_batsmen.text;
         
         self.table_BatsmenName.hidden=YES;
         isEnableTbl=YES;
@@ -7092,7 +7061,15 @@ EndInnings *endInnings;
 -(void)ChangeTeam
 {
     int inningsNo=[fetchSEPageLoadRecord.INNINGSNO intValue ];
-    if(inningsNo >1)
+     int ballcount =fetchSEPageLoadRecord.BATTEAMOVRBALLS ;
+    
+    if(ballcount == 0 && fetchSEPageLoadRecord.BATTEAMRUNS==0 && fetchSEPageLoadRecord.BATTEAMWICKETS==0)
+    {
+        
+    
+    
+    
+    if(inningsNo > 1)
     {
         ChangeTeamVC *objChanceTeamVC =[[ChangeTeamVC alloc]initWithNibName:@"ChangeTeamVC" bundle:nil];
         objChanceTeamVC.compitionCode=self.competitionCode;
@@ -7121,8 +7098,8 @@ EndInnings *endInnings;
         [self addChildViewController:objChanceTeamVC];
         [fullview addSubview:objChanceTeamVC.view];
     }
-    else{
-        int ballcount =fetchSEPageLoadRecord.BATTEAMOVRBALLS;
+    else if (inningsNo == 1){
+       
         if(ballcount < 1)
         {
             ChangeTossVC*objChangeTossVC =[[ChangeTossVC alloc]initWithNibName:@"ChangeTossVC" bundle:nil];
@@ -7152,6 +7129,7 @@ EndInnings *endInnings;
             [self addChildViewController:objChangeTossVC];
             [fullview addSubview:objChangeTossVC.view];
         }
+    }
     }
     
 }
@@ -7809,7 +7787,7 @@ EndInnings *endInnings;
     [appealEventDict setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
     [appealEventDict setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
     [appealEventDict setValue:AppealUmpireSelectCode forKey:@"AppealUmpireSelct"];
-    [appealEventDict setValue:AppealBatsmenSelectCode forKey:@"AppealBatsmenSelct"];
+    [appealEventDict setValue:StrikerPlayer forKey:@"AppealBatsmenSelct"];
     NSString*AppealBowlercode=fetchSEPageLoadRecord.currentBowlerPlayerCode;
     [appealEventDict setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
     [appealEventDict setValue:commentText forKey:@"Commenttext"];
@@ -8195,7 +8173,8 @@ EndInnings *endInnings;
         NSString *runsReqForBalls = fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? (isTargetReached ? @"Target achieved" : ([NSString stringWithFormat:@"%@ runs to win",fetchSEPageLoadRecord.RUNSREQUIRED])) : @"Required run rate:";
         _lbl_runs_required.text = runsReqForBalls;
     }else{
-        isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue<=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]>1)?YES:NO;
+        
+        isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue <=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]>1)?YES:NO;
         
         NSString *targetLeftValue = @"";
         NSString *targetRightValue = @"";

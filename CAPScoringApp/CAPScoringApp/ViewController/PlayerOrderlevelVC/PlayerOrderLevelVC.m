@@ -85,13 +85,14 @@
     
     self.txt_search.font = [UIFont systemFontOfSize:40];
     self.txt_search.adjustsFontSizeToFitWidth = YES;
+    self.txt_search.userInteractionEnabled=YES;
+
     self.txt_search.backgroundColor=[UIColor clearColor];
     
     self.txt_search.textColor = [UIColor whiteColor];
     self.txt_search.keyboardType = UIKeyboardTypeAlphabet;
     self.txt_search.returnKeyType = UIReturnKeyDone;
-    self.txt_search.clearButtonMode = UITextFieldViewModeWhileEditing;
-    
+    self.txt_search.enabled=YES;
     self.txt_search.delegate = self;
     
     
@@ -192,6 +193,7 @@
         [self.Btn_objSearch setImage:[UIImage imageNamed:@"ico-search"] forState:UIControlStateNormal];
         [self.selectedPlayerFilterArray removeAllObjects];
         self.selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: self.objSelectplayerList_Array ];
+        [self.txt_search resignFirstResponder];
         
         
     }else{
@@ -244,7 +246,7 @@
         return YES;
     }
     else {
-        return NO;
+        return YES;
     }
 }
 - (BOOL)textFieldShouldClear:(UITextField *)textField{
@@ -292,8 +294,8 @@
         if(self.checkInternetConnection){
            
             
-            _matchCode = _matchCode == nil ?@"NULL":_matchCode;
-            _TeamCode = _TeamCode == nil ?@"NULL":_TeamCode;
+            _matchCode = (self.matchCode == nil) ?@"NULL":_matchCode;
+            _TeamCode = (_TeamCode == nil) ?@"NULL":_TeamCode;
             NSString*PlayerCode = playerorderRecord.playerCode == nil ?@"NULL":playerorderRecord.playerCode;
              NSString*PlayerOrder = playerorderRecord.playerOrder == nil ?@"NULL":playerorderRecord.playerOrder;
             
@@ -301,8 +303,7 @@
             
             //Show indicator
             [delegate showLoading];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
+            
                 
                 NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHTEAMPLAYERORDER/%@/%@/%@/%@",[Utitliy getIPPORT],_matchCode,_TeamCode,PlayerCode,PlayerOrder];
                 NSLog(@"-%@",baseURL);
@@ -315,7 +316,8 @@
                 NSError *error;
                 NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
                 
-                
+                if(responseData !=nil)
+                {
                 NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
                 
                 if(rootArray !=nil && rootArray.count>0){
@@ -326,6 +328,7 @@
                     }
                 }else{
                     
+                }
                 }
                 //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
                 //            NSLog(@"%@",errorCode);
@@ -348,17 +351,20 @@
                 //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
                 //            }
                 [delegate hideLoading];
-            });
+        
             
             //[delegate hideLoading];
         }
-
-        
+else
+{
+     [DBManager updateCapitainWicketkeeper:self.competitionCode :self.matchCode capitainAteam:objCapitainWicketKeeper.objTeamACapitain capitainBteam:objCapitainWicketKeeper.objTeamBCapitain wicketkeeperAteam:objCapitainWicketKeeper.objTeamAWicketKeeper wicketkeeperBteam:  objCapitainWicketKeeper.objTeamBWicketKeeper];
+}
+    
         
         
     }
     
-        [DBManager updateCapitainWicketkeeper:self.competitionCode :self.matchCode capitainAteam:objCapitainWicketKeeper.objTeamACapitain capitainBteam:objCapitainWicketKeeper.objTeamBCapitain wicketkeeperAteam:objCapitainWicketKeeper.objTeamAWicketKeeper wicketkeeperBteam:  objCapitainWicketKeeper.objTeamBWicketKeeper];
+//        [DBManager updateCapitainWicketkeeper:self.competitionCode :self.matchCode capitainAteam:objCapitainWicketKeeper.objTeamACapitain capitainBteam:objCapitainWicketKeeper.objTeamBCapitain wicketkeeperAteam:objCapitainWicketKeeper.objTeamAWicketKeeper wicketkeeperBteam:  objCapitainWicketKeeper.objTeamBWicketKeeper];
     
     
     NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
