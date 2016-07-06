@@ -43,6 +43,12 @@
     [self.selectmatchTittleview .layer setBorderWidth:2.0];
     [self.selectmatchTittleview.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.selectmatchTittleview .layer setMasksToBounds:YES];
+    
+    refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
+    refreshControl.tintColor = [UIColor greenColor];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
+    [self.tableView addSubview:refreshControl];
    
 //    if(self.checkInternetConnection)
 //    {
@@ -78,42 +84,27 @@
     
 }
 
-
-
-//-(void)crunchNumbers
-//{
-//    resultArray=[[NSMutableArray alloc]init];
-//    NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
-//    for(int i=0; i < [FetchCompitionArray count]; i++)
-//    {
-//        
-//        EventRecord *objEventRecord=(EventRecord*)[FetchCompitionArray objectAtIndex:i];
-//        NSLog(@"%@",objEventRecord.recordstatus);
-//        NSString *matchStatus=objEventRecord.recordstatus;
-//        if([matchStatus isEqualToString:@"MSC001"])
-//        {
-//            [resultArray addObject:objEventRecord];
-//        }
-//        //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
-//    }
-//    
-//    
-//    [self.tableView reloadData];
-//    
-//    [self performSelector:@selector(stopRefresh) withObject:nil afterDelay:2.5];
-//
-//}
-
-
-- (void)stopRefresh
-
-{
+- (void)refresh:(UIRefreshControl *)refreshControl {
+    [self startService:@"DONE"];
     
+    resultArray=[[NSMutableArray alloc]init];
+    NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
+    for(int i=0; i < [FetchCompitionArray count]; i++)
+    {
+        
+        EventRecord *objEventRecord=(EventRecord*)[FetchCompitionArray objectAtIndex:i];
+        NSLog(@"%@",objEventRecord.recordstatus);
+        NSString *matchStatus=objEventRecord.recordstatus;
+        if([matchStatus isEqualToString:@"MSC001"])
+        {
+            [resultArray addObject:objEventRecord];
+        }
+        //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
+    }
+
+    // Do your job, when done:
     [refreshControl endRefreshing];
-    
 }
-
-
 
 -(void)customnavigationmethod
 {
@@ -194,7 +185,6 @@
     
     if(isEnableTbl==YES)
     {
-        [self startService:@"DONE"];
         resultArray=[[NSMutableArray alloc]init];
         NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
         for(int i=0; i < [FetchCompitionArray count]; i++)
@@ -262,11 +252,7 @@ else{
               
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-            refreshControl.tintColor = [UIColor greenColor];
-            refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
-            
-            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETACTIVECOMPETITION/0x0100000097280E95538D80384EE91904DFFEB95A342DCDBACE69FD7C182B75CE88068B18CB4CE5B1321EEBAF",[Utitliy getSyncIPPORT]];
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETACTIVECOMPETITION/%@",[Utitliy getSyncIPPORT],[Utitliy SecureId]];
             NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
             NSURLResponse *response;
@@ -350,14 +336,6 @@ else{
             
                 }
             }
-            
-            [self.tableView addSubview:refresh];
-            
-            [self.tableView reloadData];
-            
-            [refreshControl endRefreshing];
-      
-      
         });
         
         //[delegate hideLoading];

@@ -278,6 +278,10 @@ EndInnings *endInnings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //Initialize Matchtype Dictionary
+    MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
+    ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
+    
     AppealBatsmenArray=[[NSMutableArray alloc]init];
     
     EditModeVC * objEditModeVc=[[EditModeVC alloc]init];
@@ -289,23 +293,7 @@ EndInnings *endInnings;
         [self reloadBowlerTeamBatsmanDetails];
         [self AllBtndisableMethod];
         
-    }
-    
-    //GetMatchTypeForInserTEnd
-    //objDBManagerEndDay=[[DBManagerEndDay alloc]init];
-    
-    MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
-    
-    ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
-    
-    
-    // [self resetBallObject];
-    
-    
-    //    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-    //   [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
-    //
-    [self hideLabelBasedOnMatchType];
+    }    [self hideLabelBasedOnMatchType];
     
     //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
@@ -3733,16 +3721,16 @@ EndInnings *endInnings;
             self.width.constant=450;
         }
         else{
-            self.height.constant=350;
+            self.height.constant=350;  
             self.width.constant=350;
         }
         
-        if([self.BatmenStyle isEqualToString:@"MSC012"])
+        if([self.BatmenStyle isEqualToString:@"MSC013"])
         {
-            [self.img_WagonWheel setImage:[UIImage imageNamed:@"LHWagon"]];
+            [self.img_WagonWheel setImage:[UIImage imageNamed:@"RHWagon"]];
         }
         else{
-            [self.img_WagonWheel setImage:[UIImage imageNamed:@"RHWagon"]];
+            [self.img_WagonWheel setImage:[UIImage imageNamed:@"LHWagon"]];
         }
         
         if (IS_IPAD_PRO) {
