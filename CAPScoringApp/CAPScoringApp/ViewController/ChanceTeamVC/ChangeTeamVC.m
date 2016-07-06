@@ -78,10 +78,12 @@
     objlastballCount =[objDBManagerChanceTeam GetLastBallCountForFetchChangeTeam:self.compitionCode :self.MatchCode :BattingTeamCode :maximumInnings :lastOverFetchChangeTeam :objLastballFetchChanceTeam];
    
     NSMutableArray * objBattingTeamName=[objDBManagerChanceTeam GetBattingteamAndBowlteamForFetchChangeTeam:BattingTeamCode];
-    
+    if(objBattingTeamName.count >0)
+    {
     ChangeTeamRecord * objChanceTeamRecord=[objBattingTeamName objectAtIndex:0];
     self.lbl_SelectTeamName.text=objChanceTeamRecord.TEAMNAME;
     self.lbl_ChangeInnings.text =maximumInnings;
+    }
    
 }
 
