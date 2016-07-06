@@ -133,6 +133,7 @@
     
     FixturesRecord *objFixtureRecord=(FixturesRecord*)[_FetchCompitionArray objectAtIndex:indexPath.row];
     
+
     
     cell.lbl_teamA.text=objFixtureRecord.teamAname;
     cell.lbl_teamB.text=objFixtureRecord.teamBname;
@@ -170,12 +171,13 @@
     cell.viewborder.layer.masksToBounds=YES;
     return cell;
     
+    
+    
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    
     
     NSMutableArray *mSetUp = [[NSMutableArray alloc]init];
     

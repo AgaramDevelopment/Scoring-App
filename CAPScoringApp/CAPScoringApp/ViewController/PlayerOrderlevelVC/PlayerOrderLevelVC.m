@@ -61,8 +61,9 @@
     
     slecteplayerlist=[[NSMutableArray alloc]init];
     objPreviousorderList=[[NSMutableArray alloc]init];
-    slecteplayerlist=self.objSelectplayerList_Array;
-    objPreviousorderList=slecteplayerlist;
+    [self selectplayfilterArray ];
+    //slecteplayerlist=self.objSelectplayerList_Array;
+   
     UIImageView *bg_img=[[UIImageView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,objCustomNavigation.view.frame.origin.y+objCustomNavigation.view.frame.size.height,self.view.frame.size.width,self.view.frame.size.height)];
     bg_img.image=[UIImage imageNamed:@"BackgroundImg"];
     [self.view addSubview:bg_img];
@@ -154,6 +155,19 @@
     
    capitainWicketkeeperarray=  [DBManager getTeamCaptainandTeamwicketkeeper:self.competitionCode :self.matchCode];
     
+}
+-(void)selectplayfilterArray
+{
+    for(int i=0; i< self.objSelectplayerList_Array.count; i++)
+    {
+         SelectPlayerRecord *selectedPlayerFilterRecord = [self.objSelectplayerList_Array objectAtIndex:i];
+        if( [[selectedPlayerFilterRecord isSelected]boolValue])
+        {
+            [slecteplayerlist addObject:selectedPlayerFilterRecord];
+             //[objPreviousorderList addObject:selectedPlayerFilterRecord];
+            
+        }
+    }
 }
 - (void)setEditing:(BOOL)editing animated:(BOOL)animated {
     // Move this asignment to the method/action that
@@ -250,13 +264,25 @@
 }
 -(IBAction)didClickDeleteplayer:(id)sender
 {
+    for(int i=0; i< self.objSelectplayerList_Array.count; i++)
+    {
+        SelectPlayerRecord *selectedPlayerFilterRecord = [self.objSelectplayerList_Array objectAtIndex:i];
+        if( [[selectedPlayerFilterRecord isSelected]boolValue])
+        {
+            //[slecteplayerlist addObject:selectedPlayerFilterRecord];
+            [objPreviousorderList addObject:selectedPlayerFilterRecord];
+            
+        }
+    }
+
     slecteplayerlist=objPreviousorderList;
     [self.tbl_playerSelectList reloadData];
 }
 
 -(IBAction)didClickSaveplayer:(id)sender
 {
-   if(objCapitainWicketKeeper.objTeamACapitain!=nil && objCapitainWicketKeeper.objTeamBCapitain!= nil && objCapitainWicketKeeper.objTeamAWicketKeeper!=nil && objCapitainWicketKeeper.objTeamBWicketKeeper!=nil)
+//   if(objCapitainWicketKeeper.objTeamACapitain!=nil && objCapitainWicketKeeper.objTeamBCapitain!= nil && objCapitainWicketKeeper.objTeamAWicketKeeper!=nil && objCapitainWicketKeeper.objTeamBWicketKeeper!=nil)
+    if(isSelectCaptainType == YES && isSelectWKTKeeperType ==YES)
    {
     for(int i=0;  i < slecteplayerlist.count; i++)
     {
@@ -266,8 +292,8 @@
         if(self.checkInternetConnection){
            
             
-            _matchCode = _matchCode == nil ?@"NULL":_matchCode;
-            _TeamCode = _TeamCode == nil ?@"NULL":_TeamCode;
+            _matchCode = (self.matchCode == nil) ?@"NULL":_matchCode;
+            _TeamCode = (_TeamCode == nil) ?@"NULL":_TeamCode;
             NSString*PlayerCode = playerorderRecord.playerCode == nil ?@"NULL":playerorderRecord.playerCode;
              NSString*PlayerOrder = playerorderRecord.playerOrder == nil ?@"NULL":playerorderRecord.playerOrder;
             
@@ -275,8 +301,7 @@
             
             //Show indicator
             [delegate showLoading];
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
+            
                 
                 NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHTEAMPLAYERORDER/%@/%@/%@/%@",[Utitliy getIPPORT],_matchCode,_TeamCode,PlayerCode,PlayerOrder];
                 NSLog(@"-%@",baseURL);
@@ -289,7 +314,8 @@
                 NSError *error;
                 NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
                 
-                
+                if(responseData !=nil)
+                {
                 NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
                 
                 if(rootArray !=nil && rootArray.count>0){
@@ -300,6 +326,7 @@
                     }
                 }else{
                     
+                }
                 }
                 //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
                 //            NSLog(@"%@",errorCode);
@@ -322,17 +349,20 @@
                 //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
                 //            }
                 [delegate hideLoading];
-            });
+        
             
             //[delegate hideLoading];
         }
-
-        
+else
+{
+     [DBManager updateCapitainWicketkeeper:self.competitionCode :self.matchCode capitainAteam:objCapitainWicketKeeper.objTeamACapitain capitainBteam:objCapitainWicketKeeper.objTeamBCapitain wicketkeeperAteam:objCapitainWicketKeeper.objTeamAWicketKeeper wicketkeeperBteam:  objCapitainWicketKeeper.objTeamBWicketKeeper];
+}
+    
         
         
     }
     
-        [DBManager updateCapitainWicketkeeper:self.competitionCode :self.matchCode capitainAteam:objCapitainWicketKeeper.objTeamACapitain capitainBteam:objCapitainWicketKeeper.objTeamBCapitain wicketkeeperAteam:objCapitainWicketKeeper.objTeamAWicketKeeper wicketkeeperBteam:  objCapitainWicketKeeper.objTeamBWicketKeeper];
+//        [DBManager updateCapitainWicketkeeper:self.competitionCode :self.matchCode capitainAteam:objCapitainWicketKeeper.objTeamACapitain capitainBteam:objCapitainWicketKeeper.objTeamBCapitain wicketkeeperAteam:objCapitainWicketKeeper.objTeamAWicketKeeper wicketkeeperBteam:  objCapitainWicketKeeper.objTeamBWicketKeeper];
     
     
     NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
@@ -410,7 +440,7 @@
     if(self.selectedPlayerFilterArray > 0)
     {
         objSelectPlayerRecord=(SelectPlayerRecord*)[self.selectedPlayerFilterArray objectAtIndex:indexPath.row];
-        objCapitainWicketRecord=(CapitainWicketKeeperRecord*)[self.selectedPlayerFilterArray objectAtIndex:indexPath.row];
+        objCapitainWicketRecord=(CapitainWicketKeeperRecord*)[capitainWicketkeeperarray objectAtIndex:0];
     }
     else
     {
@@ -420,9 +450,9 @@
     }
     NSString *captainATeam=objCapitainWicketRecord.objTeamACapitain;
     NSString *captainBTeam=objCapitainWicketRecord.objTeamBCapitain;
-    NSLog(@"capitainWicketkeeperarrayA = %@",captainATeam);
-    NSLog(@"capitainWicketkeeperarrayB = %@",captainBTeam);
-    NSLog(@"SelectPlayerRecord = %@",objSelectPlayerRecord.playerCode);
+//    NSLog(@"capitainWicketkeeperarrayA = %@",captainATeam);
+//    NSLog(@"capitainWicketkeeperarrayB = %@",captainBTeam);
+//    NSLog(@"SelectPlayerRecord = %@",objSelectPlayerRecord.playerCode);
 
 
     if([objSelectPlayerRecord.playerCode isEqualToString:captainATeam] || [objSelectPlayerRecord.playerCode isEqualToString:captainBTeam])
@@ -433,7 +463,7 @@
         [playercell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
         objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
         objSelectPlayerRecord.isSelectCapten=@"YES";
-          //isSelectCaptainType=YES;
+          isSelectCaptainType=YES;
     }
     else{
         playercell.IMg_captain.image=[UIImage imageNamed:@""];

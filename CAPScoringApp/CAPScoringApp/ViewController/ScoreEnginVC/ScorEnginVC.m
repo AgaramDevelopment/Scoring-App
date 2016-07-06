@@ -2883,7 +2883,7 @@ EndInnings *endInnings;
     // NSArray * MuliteDayMatchtype ;
     NSArray  * ValidedMatchType;
     NSString *matchoversvalue= fetchSEPageLoadRecord.MATCHTYPE;
-    NSInteger currentover =[fetchSEPageLoadRecord.MATCHOVERS intValue];
+    NSInteger currentover =fetchSEPageLoadRecord.BATTEAMOVERS;
     int overNoint =(int)currentover;
     
     NSMutableArray * objUmpireArray =[DBManager GETUMPIRE:self.competitionCode :self.matchCode ];
@@ -7062,7 +7062,15 @@ EndInnings *endInnings;
 -(void)ChangeTeam
 {
     int inningsNo=[fetchSEPageLoadRecord.INNINGSNO intValue ];
-    if(inningsNo >1)
+     int ballcount =fetchSEPageLoadRecord.BATTEAMOVRBALLS ;
+    
+    if(ballcount == 0 && fetchSEPageLoadRecord.BATTEAMRUNS==0 && fetchSEPageLoadRecord.BATTEAMWICKETS==0)
+    {
+        
+    
+    
+    
+    if(inningsNo > 1)
     {
         ChangeTeamVC *objChanceTeamVC =[[ChangeTeamVC alloc]initWithNibName:@"ChangeTeamVC" bundle:nil];
         objChanceTeamVC.compitionCode=self.competitionCode;
@@ -7091,8 +7099,8 @@ EndInnings *endInnings;
         [self addChildViewController:objChanceTeamVC];
         [fullview addSubview:objChanceTeamVC.view];
     }
-    else{
-        int ballcount =fetchSEPageLoadRecord.BATTEAMOVRBALLS;
+    else if (inningsNo == 1){
+       
         if(ballcount < 1)
         {
             ChangeTossVC*objChangeTossVC =[[ChangeTossVC alloc]initWithNibName:@"ChangeTossVC" bundle:nil];
@@ -7122,6 +7130,7 @@ EndInnings *endInnings;
             [self addChildViewController:objChangeTossVC];
             [fullview addSubview:objChangeTossVC.view];
         }
+    }
     }
     
 }

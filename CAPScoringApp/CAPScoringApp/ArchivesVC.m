@@ -31,7 +31,7 @@
     [super viewDidLoad];
     FetchCompitionArray=[[NSMutableArray alloc]init];
     self.cellsCurrentlyEditing = [NSMutableArray array];
-    FetchCompitionArray =[DBManager RetrieveFixturesData:self.CompitionCode];
+    FetchCompitionArray =[DBManager ArchivesFixturesData:self.CompitionCode];
     [self customnavigationmethod];
 }
 -(void)customnavigationmethod

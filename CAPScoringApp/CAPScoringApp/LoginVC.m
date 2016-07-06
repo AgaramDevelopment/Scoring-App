@@ -69,6 +69,12 @@
                 NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
                 
                 
+                if ([responseData length] >0 && error == nil)
+                {
+               
+
+                
+                
                 NSMutableDictionary *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
                 
                 NSMutableArray *errorItemArray = [rootDictionary objectForKey: @"lstErrorItem"];
@@ -200,7 +206,18 @@
                     [self showDialog:[errorItemObj objectForKey:@"DataItem"] andTitle:@"Login failed"];
                 }
                 
-                
+                    
+                    
+                }
+                else if ([responseData length] == 0 && error == nil)
+                {
+                    [self showDialog:@"Server error please try again" andTitle:@""];
+
+                }
+                else if (responseData != nil){
+                    [self showDialog:@"Server error please try again" andTitle:@""];
+
+                }
                 
 //                NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"lstErrorItem"];
 //                NSLog(@"%@",errorCode);

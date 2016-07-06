@@ -11750,7 +11750,7 @@
                                                         </constraints>
                                                         <color key="textColor" red="0.96740599869999999" green="1" blue="0.9659818671" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="27"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="NWT-7q-8da" id="62L-j5-SPd"/>
                                                         </connections>

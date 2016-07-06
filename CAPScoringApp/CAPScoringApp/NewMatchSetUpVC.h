@@ -62,5 +62,6 @@
 - (IBAction)btn_proceed:(id)sender;
 - (IBAction)btn_back:(id)sender;
 @property(nonatomic,strong) NSMutableArray *playingXIPlayers;
+-(BOOL)textValidation:(NSString*) validation;
 
 @end
