@@ -25,22 +25,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/DashBoardVC.m"
-            timestampString = "489226831.500565"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
-            landmarkName = "-btn_syn_Data:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/FixturesVC.m"
             timestampString = "489227796.550085"
             startingColumnNumber = "9223372036854775807"
@@ -73,13 +57,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/LoginVC.m"
-            timestampString = "489234165.080155"
+            filePath = "CAPScoringApp/DBManagerChangeToss.m"
+            timestampString = "489249718.057057"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "-btn_login:"
+            startingLineNumber = "542"
+            endingLineNumber = "542"
+            landmarkName = "+InsertTossDetails::::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -89,13 +73,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/DBManagerChangeToss.m"
-            timestampString = "489249718.057057"
+            filePath = "CAPScoringApp/TorunamentVC.m"
+            timestampString = "489489258.01974"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "542"
-            endingLineNumber = "542"
-            landmarkName = "+InsertTossDetails::::::::"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "-startService:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
