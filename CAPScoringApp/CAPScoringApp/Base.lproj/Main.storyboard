@@ -158,6 +158,7 @@
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-MEDIUM.TTF">
             <string>Rajdhani-Medium</string>
@@ -227,7 +228,6 @@
             <string>Rajdhani-Medium</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-REGULAR.TTF">
-            <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
@@ -7431,7 +7431,7 @@
                                                                                     <constraint firstAttribute="width" constant="150" id="kYk-S0-gxd"/>
                                                                                     <constraint firstAttribute="height" constant="27" id="nDY-RW-5YS"/>
                                                                                 </constraints>
-                                                                                <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="17"/>
+                                                                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                                                 <nil key="highlightedColor"/>
                                                                                 <variation key="default">
@@ -7947,92 +7947,11 @@
                                                                             <constraint firstAttribute="height" constant="48" id="u7u-AS-Tg2"/>
                                                                         </constraints>
                                                                         <prototypes>
-                                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Batsmancell" id="uSY-h3-YtT" customClass="Batsmancell">
+                                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Batsmancell" id="QlR-5o-0iL" customClass="Batsmancell">
                                                                                 <autoresizingMask key="autoresizingMask"/>
-                                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uSY-h3-YtT" id="FIK-k8-GP9">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="43"/>
+                                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QlR-5o-0iL" id="Rqd-II-ZqV">
                                                                                     <autoresizingMask key="autoresizingMask"/>
-                                                                                    <subviews>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KB7-Dg-fG6">
-                                                                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                                                            <constraints>
-                                                                                                <constraint firstAttribute="width" constant="173" id="0pC-VX-Nff"/>
-                                                                                                <constraint firstAttribute="height" constant="21" id="4qg-nr-k9L"/>
-                                                                                            </constraints>
-                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                            <nil key="highlightedColor"/>
-                                                                                            <variation key="default">
-                                                                                                <mask key="constraints">
-                                                                                                    <exclude reference="0pC-VX-Nff"/>
-                                                                                                    <exclude reference="4qg-nr-k9L"/>
-                                                                                                </mask>
-                                                                                            </variation>
-                                                                                            <variation key="heightClass=regular-widthClass=regular">
-                                                                                                <mask key="constraints">
-                                                                                                    <include reference="0pC-VX-Nff"/>
-                                                                                                    <include reference="4qg-nr-k9L"/>
-                                                                                                </mask>
-                                                                                            </variation>
-                                                                                        </label>
-                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KvW-6J-ZWX">
-                                                                                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                                                            <constraints>
-                                                                                                <constraint firstAttribute="width" constant="173" id="ZLC-b8-Ctl"/>
-                                                                                                <constraint firstAttribute="height" constant="21" id="zdw-Q6-Knt"/>
-                                                                                            </constraints>
-                                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                                                            <nil key="highlightedColor"/>
-                                                                                            <variation key="default">
-                                                                                                <mask key="constraints">
-                                                                                                    <exclude reference="ZLC-b8-Ctl"/>
-                                                                                                    <exclude reference="zdw-Q6-Knt"/>
-                                                                                                </mask>
-                                                                                            </variation>
-                                                                                            <variation key="heightClass=regular-widthClass=regular">
-                                                                                                <mask key="constraints">
-                                                                                                    <include reference="ZLC-b8-Ctl"/>
-                                                                                                    <include reference="zdw-Q6-Knt"/>
-                                                                                                </mask>
-                                                                                            </variation>
-                                                                                        </label>
-                                                                                    </subviews>
-                                                                                    <constraints>
-                                                                                        <constraint firstItem="KB7-Dg-fG6" firstAttribute="top" secondItem="KvW-6J-ZWX" secondAttribute="bottom" constant="3" id="Ufg-2A-4sE"/>
-                                                                                        <constraint firstItem="KB7-Dg-fG6" firstAttribute="leading" secondItem="FIK-k8-GP9" secondAttribute="leading" id="VIb-Aq-R1v"/>
-                                                                                        <constraint firstItem="KvW-6J-ZWX" firstAttribute="leading" secondItem="FIK-k8-GP9" secondAttribute="leading" id="qQu-N2-sW8"/>
-                                                                                        <constraint firstItem="KvW-6J-ZWX" firstAttribute="top" secondItem="FIK-k8-GP9" secondAttribute="top" constant="3" id="vrk-pf-owd"/>
-                                                                                    </constraints>
-                                                                                    <variation key="default">
-                                                                                        <mask key="subviews">
-                                                                                            <exclude reference="KB7-Dg-fG6"/>
-                                                                                            <exclude reference="KvW-6J-ZWX"/>
-                                                                                        </mask>
-                                                                                        <mask key="constraints">
-                                                                                            <exclude reference="Ufg-2A-4sE"/>
-                                                                                            <exclude reference="VIb-Aq-R1v"/>
-                                                                                            <exclude reference="qQu-N2-sW8"/>
-                                                                                            <exclude reference="vrk-pf-owd"/>
-                                                                                        </mask>
-                                                                                    </variation>
-                                                                                    <variation key="heightClass=regular-widthClass=regular">
-                                                                                        <mask key="subviews">
-                                                                                            <include reference="KB7-Dg-fG6"/>
-                                                                                            <include reference="KvW-6J-ZWX"/>
-                                                                                        </mask>
-                                                                                        <mask key="constraints">
-                                                                                            <include reference="Ufg-2A-4sE"/>
-                                                                                            <include reference="VIb-Aq-R1v"/>
-                                                                                            <include reference="qQu-N2-sW8"/>
-                                                                                            <include reference="vrk-pf-owd"/>
-                                                                                        </mask>
-                                                                                    </variation>
                                                                                 </tableViewCellContentView>
-                                                                                <connections>
-                                                                                    <outlet property="Batsman1_lbl" destination="KB7-Dg-fG6" id="gda-Jb-Tc4"/>
-                                                                                    <outlet property="Batsman2_lbl" destination="KvW-6J-ZWX" id="AXL-oA-kUm"/>
-                                                                                </connections>
                                                                             </tableViewCell>
                                                                         </prototypes>
                                                                         <variation key="default">

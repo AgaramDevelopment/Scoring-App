@@ -340,17 +340,19 @@ EndInnings *endInnings;
    NSString*Playernonstickername=fetchSEPageLoadRecord.nonstrickerPlayerName;
     
     NSMutableDictionary *Dict1=[[NSMutableDictionary alloc]init];
-    [Dict1 setValue:Playerstickercode forKey:@"AppealStrickerPlayerCode"];
-    [Dict1 setValue:PlayerstickerName forKey:@"AppealStrickerPlayerName"];
+    [Dict1 setValue:Playerstickercode forKey:@"AppealBatsmenPlayerCode"];
+    [Dict1 setValue:PlayerstickerName forKey:@"AppealBatsmenPlayerName"];
 
     
    NSMutableDictionary *Dict2=[[NSMutableDictionary alloc]init];
-        [Dict2 setValue:Playernonstickercode forKey:@"AppealNonStrickerPlayerCode"];
-    [Dict2 setValue:Playernonstickername forKey:@"AppealNonStrickerPlayerName"];
+        [Dict2 setValue:Playernonstickercode forKey:@"AppealBatsmenPlayerCode"];
+    [Dict2 setValue:Playernonstickername forKey:@"AppealBatsmenPlayerName"];
 //
-    [AppealBatsmenArray addObject:Dict1];
-    [AppealBatsmenArray addObject:Dict2];
+//    [AppealBatsmenArray addObject:Dict1];
+//    [AppealBatsmenArray addObject:Dict2];
     
+    
+    AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:Dict1,Dict2 ,nil];
     
 //   [fetchLastBallBowledPlayer getLastBallBowlerPlayer:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO OVERNO:data BATTINGTEAMCODE:fetchSEPageLoadRecord.BATTINGTEAMCODE];
     
@@ -511,7 +513,7 @@ EndInnings *endInnings;
     [self.view_batsmen .layer setMasksToBounds:YES];
     [_table_BatsmenName setHidden:YES];
     
-    //  AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
+    // AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     
     self.view_bowlType.hidden = YES;
     self.view_fastBowl.hidden = YES;
@@ -2037,39 +2039,24 @@ EndInnings *endInnings;
     
     
     
-    
     if (tableView == self.table_BatsmenName)
     {
-        static NSString *MyIdentifier = @"MyIdentifier";
+        static NSString *CellIdentifier = @"Batsmancell";
+        Batsmancell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
+                                                            forIndexPath:indexPath];
         
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-        
-        if (cell == nil)
-        {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                          reuseIdentifier:MyIdentifier];
-        }
-        
-      NSDictionary *dict=[AppealBatsmenArray objectAtIndex:indexPath.row];
+        NSDictionary *test=[AppealBatsmenArray objectAtIndex:indexPath.row];
         
         
-       if(indexPath.row==0)
-       {
-        cell.textLabel.text=[dict valueForKey:@"AppealStrickerPlayerName"];
-        StrikerPlayer= cell.textLabel.text;
-           
-       }
-        if (indexPath.row==1) {
-          cell.textLabel.text=[dict valueForKey:@"AppealNonStrickerPlayerName"];
-            NonStrikerPlayer= cell.textLabel.text;
-        }
+        cell.textLabel.text =[test valueForKey:@"AppealBatsmenPlayerName"];
+        
+        StrikerPlayer=cell.textLabel.text;
+        StrikerPlayer=[test valueForKey:@"AppealBatsmenPlayerCode"];
+        return cell;
         
     }
-    
-    
-    
-    
-    return cell;
+
+ return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -6243,10 +6230,10 @@ EndInnings *endInnings;
         objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
         
         self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName1;
-        [self.Lbl_umpirename2 setHighlighted:YES];
+        [self.Lbl_umpirename2 setHidden:YES];
         
         self.Lbl_umpirename2.text =objAppealUmpireEventRecord.AppealUmpireName2;
-        [self.Lbl_umpirename2 setHighlighted:YES];
+        [self.Lbl_umpirename2 setHidden:YES];
         
         // selectTeam=self.Wonby_lbl.text;
         AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode1;
@@ -6259,23 +6246,11 @@ EndInnings *endInnings;
     
     if (tableView == self.table_BatsmenName)
     {
-        
-        
-        AppealBatsmenSelectionArray=[[NSMutableArray alloc]init];
-        NSDictionary *dict=[AppealBatsmenArray objectAtIndex:indexPath.row];
-        
+        Batsmancell *cell = (Batsmancell *)[tableView cellForRowAtIndexPath:indexPath];
+       self.lbl_batsmen.text =cell.textLabel.text;
         
 
-
-        
-        self.lbl_batsmen.text =StrikerPlayer;
-        
-        self.lbl_batsmen.text=NonStrikerPlayer;
-        
-        // selectTeam=self.Wonby_lbl.text;
-        // AppealComponentSelectCode=fetchSEPageLoadRecord.strickerPlayerCode;
-        ;
-        //   [AppealComponentSelectionArray addObject:objAppealComponentEventRecord];
+        StrikerPlayer=self.lbl_batsmen.text;
         
         self.table_BatsmenName.hidden=YES;
         isEnableTbl=YES;
@@ -7782,7 +7757,7 @@ EndInnings *endInnings;
     [appealEventDict setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
     [appealEventDict setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
     [appealEventDict setValue:AppealUmpireSelectCode forKey:@"AppealUmpireSelct"];
-    [appealEventDict setValue:AppealBatsmenSelectCode forKey:@"AppealBatsmenSelct"];
+    [appealEventDict setValue:StrikerPlayer forKey:@"AppealBatsmenSelct"];
     NSString*AppealBowlercode=fetchSEPageLoadRecord.currentBowlerPlayerCode;
     [appealEventDict setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
     [appealEventDict setValue:commentText forKey:@"Commenttext"];
