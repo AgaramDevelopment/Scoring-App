@@ -215,6 +215,7 @@ BOOL  getOverStatus;
     }else{
         INNINGSPROGRESS = 0;
     }
+    
     //getInningsNo
     NSMutableArray *innArray = [DBManager getInningsNo:COMPETITIONCODE :MATCHCODE];
     FetchSEPageLoadRecord *inns = [[FetchSEPageLoadRecord alloc]init];

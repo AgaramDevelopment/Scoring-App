@@ -278,6 +278,10 @@ EndInnings *endInnings;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //Initialize Matchtype Dictionary
+    MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
+    ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
+    
     AppealBatsmenArray=[[NSMutableArray alloc]init];
     
     EditModeVC * objEditModeVc=[[EditModeVC alloc]init];
@@ -289,23 +293,7 @@ EndInnings *endInnings;
         [self reloadBowlerTeamBatsmanDetails];
         [self AllBtndisableMethod];
         
-    }
-    
-    //GetMatchTypeForInserTEnd
-    //objDBManagerEndDay=[[DBManagerEndDay alloc]init];
-    
-    MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
-    
-    ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
-    
-    
-    // [self resetBallObject];
-    
-    
-    //    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-    //   [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
-    //
-    [self hideLabelBasedOnMatchType];
+    }    [self hideLabelBasedOnMatchType];
     
     //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
@@ -406,7 +394,7 @@ EndInnings *endInnings;
     
     self.View_Appeal.hidden = YES;
     
-    
+     isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue<=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]==4)?YES:NO;
     
     self.sideBar = [[CDRTranslucentSideBar alloc] init];
     self.sideBar.sideBarWidth = 200;
@@ -2216,8 +2204,8 @@ EndInnings *endInnings;
             [self calculateRunsOnEndBall];
             [self EndBallMethod];
             
-            [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
-            self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+           // [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
+           // self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
             self.btn_StartOver.userInteractionEnabled=YES;
             //        self.btn_StartBall.userInteractionEnabled=NO;
             //        [self SaveBallEventREcordvalue];
@@ -8180,7 +8168,8 @@ EndInnings *endInnings;
         NSString *runsReqForBalls = fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? (isTargetReached ? @"Target achieved" : ([NSString stringWithFormat:@"%@ runs to win",fetchSEPageLoadRecord.RUNSREQUIRED])) : @"Required run rate:";
         _lbl_runs_required.text = runsReqForBalls;
     }else{
-        isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue<=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]>1)?YES:NO;
+        
+        isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue <=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]>1)?YES:NO;
         
         NSString *targetLeftValue = @"";
         NSString *targetRightValue = @"";

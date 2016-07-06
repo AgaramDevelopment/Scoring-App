@@ -93,10 +93,10 @@
     [self.view_Striker setUserInteractionEnabled:NO];
     [self.nonStriker setUserInteractionEnabled:NO];
     [self.view_Bowler setUserInteractionEnabled:NO];
-   
     
     
-  
+    
+    
     [self.view_Wonby.layer setBorderWidth:2.0];
     [self.view_Wonby.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_Wonby .layer setMasksToBounds:YES];
@@ -126,22 +126,22 @@
     [self.view_Bowler .layer setMasksToBounds:YES];
     [_Bowler_table setHidden:YES];
     
-
+    
     
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
     [self.Btn_Nearend setTag:0];
-//    [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
+    //    [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
     
-   
+    
     BowlingEnd=@"MSC150";
     [self.Btn_Nearend addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
     
     
     [self.Btn_FairEnd setTag:1];
-//    [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
+    //    [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
     
     [self.Btn_FairEnd addTarget:self action:@selector(radiobuttonSelected:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -177,11 +177,11 @@
     [_Bowler_table setHidden:YES];
     isEnableTbl=YES;
     
-   
     
     
     
-   
+    
+    
 }
 
 
@@ -203,7 +203,7 @@
         [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
         
     }
-
+    
     
 }
 
@@ -731,28 +731,18 @@
     }
     
     else{
-        [DBManagerChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE:selectTeamcode : electedcode : StrikerCode : NonStrikerCode : selectBowlerCode :BowlingEnd];
-        
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
                                                        message: @"Please confirm to start the match"
                                                       delegate: self
                                              cancelButtonTitle:@"Start match"
                                              otherButtonTitles:@"Cancel",nil];
-        
-        
         alert.tag =1;
         
         [alert show];
         
-         [self startService:@"DONE"];
-
-     }
-    
-   
-    
-
-    
-    
+        [self startService:@"DONE"];
+        
+    }
 }
 
 
