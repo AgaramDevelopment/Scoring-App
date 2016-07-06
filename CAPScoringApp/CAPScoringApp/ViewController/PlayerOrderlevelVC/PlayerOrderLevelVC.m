@@ -85,13 +85,14 @@
     
     self.txt_search.font = [UIFont systemFontOfSize:40];
     self.txt_search.adjustsFontSizeToFitWidth = YES;
+    self.txt_search.userInteractionEnabled=YES;
+
     self.txt_search.backgroundColor=[UIColor clearColor];
     
     self.txt_search.textColor = [UIColor whiteColor];
     self.txt_search.keyboardType = UIKeyboardTypeAlphabet;
     self.txt_search.returnKeyType = UIReturnKeyDone;
-    self.txt_search.clearButtonMode = UITextFieldViewModeWhileEditing;
-    
+    self.txt_search.enabled=YES;
     self.txt_search.delegate = self;
     
     
@@ -192,6 +193,7 @@
         [self.Btn_objSearch setImage:[UIImage imageNamed:@"ico-search"] forState:UIControlStateNormal];
         [self.selectedPlayerFilterArray removeAllObjects];
         self.selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: self.objSelectplayerList_Array ];
+        [self.txt_search resignFirstResponder];
         
         
     }else{
@@ -244,7 +246,7 @@
         return YES;
     }
     else {
-        return NO;
+        return YES;
     }
 }
 - (BOOL)textFieldShouldClear:(UITextField *)textField{

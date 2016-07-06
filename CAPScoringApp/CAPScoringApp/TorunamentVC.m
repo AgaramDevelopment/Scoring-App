@@ -204,7 +204,12 @@
         [self.tableView reloadData];
         self.tableView.hidden=NO;
         isEnableTbl=NO;
+        self.tableviewheight.constant =self.tableView.contentSize.height;
         self.Nextbtn_outlet.enabled = YES;
+    }
+    else{
+         self.tableView.hidden=YES;
+        isEnableTbl=YES;
     }
 }
 

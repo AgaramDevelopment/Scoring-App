@@ -9,7 +9,7 @@
 #import "AppealBatsmenRecord.h"
 
 @implementation AppealBatsmenRecord
-@synthesize strikerbatsmenname;
-@synthesize nonstrikerbatsmenname;
+@synthesize batsmanName;
+@synthesize Batsmancode;
 
 @end

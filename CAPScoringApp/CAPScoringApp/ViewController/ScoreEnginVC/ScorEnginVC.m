@@ -340,17 +340,19 @@ EndInnings *endInnings;
    NSString*Playernonstickername=fetchSEPageLoadRecord.nonstrickerPlayerName;
     
     NSMutableDictionary *Dict1=[[NSMutableDictionary alloc]init];
-    [Dict1 setValue:Playerstickercode forKey:@"AppealStrickerPlayerCode"];
-    [Dict1 setValue:PlayerstickerName forKey:@"AppealStrickerPlayerName"];
+    [Dict1 setValue:Playerstickercode forKey:@"AppealBatsmenPlayerCode"];
+    [Dict1 setValue:PlayerstickerName forKey:@"AppealBatsmenPlayerName"];
 
     
    NSMutableDictionary *Dict2=[[NSMutableDictionary alloc]init];
-        [Dict2 setValue:Playernonstickercode forKey:@"AppealNonStrickerPlayerCode"];
-    [Dict2 setValue:Playernonstickername forKey:@"AppealNonStrickerPlayerName"];
+        [Dict2 setValue:Playernonstickercode forKey:@"AppealBatsmenPlayerCode"];
+    [Dict2 setValue:Playernonstickername forKey:@"AppealBatsmenPlayerName"];
 //
-    [AppealBatsmenArray addObject:Dict1];
-    [AppealBatsmenArray addObject:Dict2];
+//    [AppealBatsmenArray addObject:Dict1];
+//    [AppealBatsmenArray addObject:Dict2];
     
+    
+    AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:Dict1,Dict2 ,nil];
     
 //   [fetchLastBallBowledPlayer getLastBallBowlerPlayer:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO OVERNO:data BATTINGTEAMCODE:fetchSEPageLoadRecord.BATTINGTEAMCODE];
     
@@ -394,7 +396,7 @@ EndInnings *endInnings;
     
     self.View_Appeal.hidden = YES;
     
-    
+     isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue<=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]==4)?YES:NO;
     
     self.sideBar = [[CDRTranslucentSideBar alloc] init];
     self.sideBar.sideBarWidth = 200;
@@ -511,7 +513,7 @@ EndInnings *endInnings;
     [self.view_batsmen .layer setMasksToBounds:YES];
     [_table_BatsmenName setHidden:YES];
     
-    //  AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
+    // AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     
     self.view_bowlType.hidden = YES;
     self.view_fastBowl.hidden = YES;
@@ -1904,6 +1906,7 @@ EndInnings *endInnings;
         
         fastBowlCell.lbl_fastBowl.text = objBowlRecord.BowlType;
         
+        
         // this is where you set your color view
         UIView *customColorView = [[UIView alloc] init];
         customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
@@ -2037,33 +2040,24 @@ EndInnings *endInnings;
     
     
     
-    
     if (tableView == self.table_BatsmenName)
     {
         static NSString *CellIdentifier = @"Batsmancell";
         Batsmancell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                                             forIndexPath:indexPath];
         
-      NSDictionary *dict=[AppealBatsmenArray objectAtIndex:indexPath.row];
+        NSDictionary *test=[AppealBatsmenArray objectAtIndex:indexPath.row];
         
         
-       if(indexPath.row==0)
-       {
-        cell.Batsman1_lbl.text=[dict valueForKey:@"AppealStrickerPlayerName"];
-        StrikerPlayer=cell.Batsman1_lbl.text;
-           
-       }
-        if (indexPath.row==1) {
-          cell.Batsman1_lbl.text=[dict valueForKey:@"AppealNonStrickerPlayerName"];
-            NonStrikerPlayer=cell.Batsman1_lbl.text;
-        }
+        cell.textLabel.text =[test valueForKey:@"AppealBatsmenPlayerName"];
+        
+        StrikerPlayer=cell.textLabel.text;
+        StrikerPlayer=[test valueForKey:@"AppealBatsmenPlayerCode"];
+        return cell;
         
     }
-    
-    
-    
-    
-    return cell;
+
+ return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -2198,8 +2192,8 @@ EndInnings *endInnings;
             [self calculateRunsOnEndBall];
             [self EndBallMethod];
             
-            [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
-            self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+           // [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
+           // self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
             self.btn_StartOver.userInteractionEnabled=YES;
             //        self.btn_StartBall.userInteractionEnabled=NO;
             //        [self SaveBallEventREcordvalue];
@@ -3380,14 +3374,19 @@ EndInnings *endInnings;
         isRBWSelected = NO;
     }
     
-    if (ismiscFilters) {
-        if(self.ballEventRecord.objIsbeaten.integerValue ==0 && self.ballEventRecord.objIswtb.integerValue ==0 && self.ballEventRecord.objIsuncomfort.integerValue ==0 && self.ballEventRecord.objIsreleaseshot.integerValue ==0){
-            self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Black
+    if (ismiscFilters && selectBtnTag.tag!=109 ) {
+        
+        
+        if(self.ballEventRecord.objIsbeaten.integerValue ==0 && self.ballEventRecord.objIswtb.integerValue ==0 && self.ballEventRecord.objIsuncomfort.integerValue ==0 && self.ballEventRecord.objIsreleaseshot.integerValue ==0)
+        {
+
+             self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Black
             
             
         }else{
             
-            self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Green
+                       self.btn_miscFilter.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Green
+            
         }
         [miscFiltersTableview removeFromSuperview];
         
@@ -4852,7 +4851,8 @@ EndInnings *endInnings;
     }
     else if(selectBtnTag.tag==114)
     {
-        //  [self selectBtncolor_Action:@"114" :nil :203];
+        //[self selectBtncolor_Action:@"114"];
+     
         
         self.view_bowlType.hidden = NO;
         self.view_fastBowl.hidden = YES;
@@ -4907,6 +4907,9 @@ EndInnings *endInnings;
         self.view_bowlType.hidden = YES;
         self.view_fastBowl.hidden = NO;
         self.view_defensive.hidden = YES;
+        
+        self.lbl_fast.text=@"Fast";
+        [tbl_fastBowl reloadData];
         
         if(isFastSelected){
             
@@ -4998,9 +5001,9 @@ EndInnings *endInnings;
         self.view_aggressiveShot.hidden = YES;
         self.view_fastBowl.hidden = YES;
         self.view_bowlType.hidden = YES;
-        
+       
         if(isDefensiveSelected){
-            
+              
             int indx=0;
             int selectePosition = -1;
             for (BowlAndShotTypeRecords *record in self.defensiveShotTypeArray)
@@ -5013,8 +5016,7 @@ EndInnings *endInnings;
                 }
                 indx ++;
             }
-            
-            if(selectePosition!=-1){
+                       if(selectePosition!=-1){
                 
                 //  NSInteger position = [self.defensiveShotTypeArray indexOfObject:self.ballEventRecord.objShottype];
                 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
@@ -5023,10 +5025,16 @@ EndInnings *endInnings;
                 [_tbl_defensive scrollToRowAtIndexPath:indexPath
                                       atScrollPosition:UITableViewScrollPositionTop
                                               animated:YES];
+                
+
             }
         }else{
+            
             self.ballEventRecord.objShottype = nil;
-            [_tbl_defensive reloadData];
+           
+            
+           [_tbl_defensive reloadData];
+           
         }
         
         //View
@@ -5088,13 +5096,14 @@ EndInnings *endInnings;
                     }
                     indx ++;
                 }
-                
+                if(selectePosition >=0){
                 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
                 [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
                 
                 [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
+                }
                 
             }
         }
@@ -5428,6 +5437,7 @@ EndInnings *endInnings;
     [self unselectedButtonBg: self.btn_B4];
     [self unselectedButtonBg: self.btn_B6];
     [self unselectedButtonBg: self.btn_extras];
+    [extrasTableView removeFromSuperview ];
     [self unselectedButtonBg: self.btn_wkts];
     [self unselectedButtonBg: self.btn_overthrow];
     [self unselectedButtonBg: self.btn_miscFilter];
@@ -5438,14 +5448,22 @@ EndInnings *endInnings;
     [self unselectedViewBg: self.view_otw];
     [self unselectedViewBg: self.view_rtw];
     [self unselectedViewBg: self.view_spin];
+    [self.tbl_bowlType reloadData];
     [self unselectedViewBg: self.view_fast];
+    [self.tbl_fastBowl reloadData];
     [self unselectedViewBg: self.view_aggressive];
-    [self unselectedViewBg: self.view_defensive];
-    [self unselectedViewBg: self.view_fielding_factor];
-    [self unselectedViewBg: self.view_Rbw];
-    //[self unselectedViewBg: self.view_remark]; need to set reference
-    //[self unselectedViewBg: self.view_edit];
-    //[self unselectedViewBg: self.View_Appeal);
+    [self.tbl_aggressiveShot reloadData];
+    [self unselectedViewBg:self.view_defense];
+    [_tbl_defensive reloadData];
+   [self unselectedViewBg: self.view_fielding_factor];
+  
+       selectedfieldFactor = [[FieldingFactorRecord alloc]init];
+     [self unselectedViewBg: self.view_Rbw];
+    [self unselectedViewBg: self.view_remark];
+    //[self unselectedViewBg: self.view_edit];need to set reference
+    
+    [self unselectedViewBg:self.view_appeal];
+   //  [self unselectedViewBg: self.View_Appeal];
     //[self unselectedViewBg: self.view_lastinstance];
     
     if(Img_ball != nil)
@@ -6237,10 +6255,10 @@ EndInnings *endInnings;
         objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
         
         self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName1;
-        [self.Lbl_umpirename2 setHighlighted:YES];
+        [self.Lbl_umpirename2 setHidden:YES];
         
         self.Lbl_umpirename2.text =objAppealUmpireEventRecord.AppealUmpireName2;
-        [self.Lbl_umpirename2 setHighlighted:YES];
+        [self.Lbl_umpirename2 setHidden:YES];
         
         // selectTeam=self.Wonby_lbl.text;
         AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode1;
@@ -6253,23 +6271,11 @@ EndInnings *endInnings;
     
     if (tableView == self.table_BatsmenName)
     {
-        
-        
-        AppealBatsmenSelectionArray=[[NSMutableArray alloc]init];
-        NSDictionary *dict=[AppealBatsmenArray objectAtIndex:indexPath.row];
-        
+        Batsmancell *cell = (Batsmancell *)[tableView cellForRowAtIndexPath:indexPath];
+       self.lbl_batsmen.text =cell.textLabel.text;
         
 
-
-        
-        self.lbl_batsmen.text =StrikerPlayer;
-        
-        self.lbl_batsmen.text=NonStrikerPlayer;
-        
-        // selectTeam=self.Wonby_lbl.text;
-        // AppealComponentSelectCode=fetchSEPageLoadRecord.strickerPlayerCode;
-        ;
-        //   [AppealComponentSelectionArray addObject:objAppealComponentEventRecord];
+        StrikerPlayer=self.lbl_batsmen.text;
         
         self.table_BatsmenName.hidden=YES;
         isEnableTbl=YES;
@@ -6294,7 +6300,9 @@ EndInnings *endInnings;
             [self.tbl_fastBowl reloadData];
             
             if(selectedStrikernonstriker!=nil){
+                
                 NSInteger position = [self.StrikerandNonStrikerArray indexOfObject:selectedStrikernonstriker];
+                
                 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
                 [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
                 
@@ -6387,14 +6395,14 @@ EndInnings *endInnings;
                     }
                     indx ++;
                 }
-                
-                //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
+                                //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
                 NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
                 [tbl_fastBowl selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
                 
                 [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
+                
             }
         }else{
             wicketOption = 0;
@@ -6810,13 +6818,16 @@ EndInnings *endInnings;
         
         self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
     }else if (_tbl_defensive == tableView){
+        
+
         isDefensiveSelected = YES;
         isAggressiveSelected = NO;
-        
+       
         
         BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.defensiveShotTypeArray objectAtIndex:indexPath.row];
         
         self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+        
         
     }else if(tableView == currentBowlersTableView){
         
@@ -7776,7 +7787,7 @@ EndInnings *endInnings;
     [appealEventDict setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
     [appealEventDict setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
     [appealEventDict setValue:AppealUmpireSelectCode forKey:@"AppealUmpireSelct"];
-    [appealEventDict setValue:AppealBatsmenSelectCode forKey:@"AppealBatsmenSelct"];
+    [appealEventDict setValue:StrikerPlayer forKey:@"AppealBatsmenSelct"];
     NSString*AppealBowlercode=fetchSEPageLoadRecord.currentBowlerPlayerCode;
     [appealEventDict setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
     [appealEventDict setValue:commentText forKey:@"Commenttext"];
@@ -8162,7 +8173,8 @@ EndInnings *endInnings;
         NSString *runsReqForBalls = fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? (isTargetReached ? @"Target achieved" : ([NSString stringWithFormat:@"%@ runs to win",fetchSEPageLoadRecord.RUNSREQUIRED])) : @"Required run rate:";
         _lbl_runs_required.text = runsReqForBalls;
     }else{
-        isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue<=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]>1)?YES:NO;
+        
+        isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue <=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]>1)?YES:NO;
         
         NSString *targetLeftValue = @"";
         NSString *targetRightValue = @"";
