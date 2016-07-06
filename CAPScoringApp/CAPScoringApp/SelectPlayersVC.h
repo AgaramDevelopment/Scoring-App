@@ -15,7 +15,7 @@
 - (IBAction)btn_cancel:(id)sender;
 - (IBAction)btn_select:(id)sender;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_select_count;
-@property (weak, nonatomic) IBOutlet UITextField *txt_search;
+@property (strong, nonatomic) IBOutlet UITextField *txt_search;
 
 - (IBAction)btn_search:(id)sender;
 - (IBAction)btn_back:(id)sender;

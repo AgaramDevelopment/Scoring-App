@@ -514,6 +514,7 @@
                         <outlet property="selectMatchName" destination="JX9-v8-msE" id="Fb1-nc-jlo"/>
                         <outlet property="selectmatchTittleview" destination="PWz-hf-VY3" id="5R7-tt-OEL"/>
                         <outlet property="tableView" destination="Jtr-eb-xJO" id="f41-Et-2Py"/>
+                        <outlet property="tableviewheight" destination="yhN-c7-1w0" id="Grd-x8-l4C"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
