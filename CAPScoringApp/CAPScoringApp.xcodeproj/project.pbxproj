@@ -225,7 +225,6 @@
 		CED03D261D1AAE3B00522B89 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */; };
 		DC2710771D25B9A40011C7B0 /* EndSession.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC2710681D25B9A40011C7B0 /* EndSession.xib */; };
 		DC27107D1D25B9A40011C7B0 /* FollowOnRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2710721D25B9A40011C7B0 /* FollowOnRecords.m */; };
-		DCEC1AB61D2CE2490086F99D /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = DCEC1AB51D2CE2490086F99D /* TNCA_DATABASE.sqlite */; };
 		DCEFC8601D28B6CF00451485 /* DBManagerChangeToss.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEFC85F1D28B6CF00451485 /* DBManagerChangeToss.m */; };
 		DCEFC8641D28B72C00451485 /* ChangeTossVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEFC8621D28B72C00451485 /* ChangeTossVC.m */; };
 		DCEFC8651D28B72C00451485 /* ChangeTossVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCEFC8631D28B72C00451485 /* ChangeTossVC.xib */; };
@@ -689,7 +688,6 @@
 		DC2710701D25B9A40011C7B0 /* FollowOn.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowOn.xib; sourceTree = "<group>"; };
 		DC2710711D25B9A40011C7B0 /* FollowOnRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowOnRecords.h; sourceTree = "<group>"; };
 		DC2710721D25B9A40011C7B0 /* FollowOnRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowOnRecords.m; sourceTree = "<group>"; };
-		DCEC1AB51D2CE2490086F99D /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		DCEFC85E1D28B6CF00451485 /* DBManagerChangeToss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerChangeToss.h; sourceTree = "<group>"; };
 		DCEFC85F1D28B6CF00451485 /* DBManagerChangeToss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerChangeToss.m; sourceTree = "<group>"; };
 		DCEFC8611D28B72C00451485 /* ChangeTossVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeTossVC.h; path = ViewController/ChangeTossVC/ChangeTossVC.h; sourceTree = "<group>"; };
@@ -1223,7 +1221,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
-				DCEC1AB51D2CE2490086F99D /* TNCA_DATABASE.sqlite */,
+				187708771D2CD168000CF52F /* TNCA_DATABASE.sqlite */,
 				DCEFC8771D28B84200451485 /* DBManagerDeclareInnings.h */,
 				DCEFC8781D28B84200451485 /* DBManagerDeclareInnings.m */,
 				DCEFC8741D28B82600451485 /* DBManagerChangeTeamInsert.h */,
@@ -1704,7 +1702,7 @@
 				2461251E1D13C931004B85E7 /* RevisedTarget.xib in Resources */,
 				047E52F21D27D84B00D4CAC6 /* Other_WicketgridTVC.xib in Resources */,
 				2464651F1D17255C0078A446 /* OtherWicketTVC.xib in Resources */,
-				DCEC1AB61D2CE2490086F99D /* TNCA_DATABASE.sqlite in Resources */,
+				187708781D2CD168000CF52F /* TNCA_DATABASE.sqlite in Resources */,
 				24D24CF01CFEF50000CD75D2 /* CustomNavigationVC.xib in Resources */,
 				2464651B1D17255C0078A446 /* OtherWicketPlayerlistTVC.xib in Resources */,
 				246465211D17255C0078A446 /* OtherWicketVC.xib in Resources */,
@@ -1729,6 +1727,7 @@
 				187229291D12665600CC168F /* AddBreakVC.xib in Resources */,
 				246125081D13C5D1004B85E7 /* RightSlideVC.xib in Resources */,
 				187621201D1D625A006E160F /* EndDayTVC.xib in Resources */,
+				18FF7E521D2BFFDD00B99592 /* TNCA_DATABASE.sqlite in Resources */,
 				1876210A1D1D3749006E160F /* EndDayVC.xib in Resources */,
 				DCEFC86A1D28B75300451485 /* ChangeTeamVC.xib in Resources */,
 				CE0018521CF460DE00668D8B /* RAJDHANI-SEMIBOLD.TTF in Resources */,
