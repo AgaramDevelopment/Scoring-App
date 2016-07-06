@@ -196,6 +196,9 @@
 -(IBAction)Back_BtnAction:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
+    
+    
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

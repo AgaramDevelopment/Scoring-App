@@ -2052,22 +2052,28 @@ EndInnings *endInnings;
     
     if (tableView == self.table_BatsmenName)
     {
-        static NSString *CellIdentifier = @"Batsmancell";
-        Batsmancell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
-                                                            forIndexPath:indexPath];
+        static NSString *MyIdentifier = @"MyIdentifier";
+        
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+        
+        if (cell == nil)
+        {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:MyIdentifier];
+        }
         
       NSDictionary *dict=[AppealBatsmenArray objectAtIndex:indexPath.row];
         
         
        if(indexPath.row==0)
        {
-        cell.Batsman1_lbl.text=[dict valueForKey:@"AppealStrickerPlayerName"];
-        StrikerPlayer=cell.Batsman1_lbl.text;
+        cell.textLabel.text=[dict valueForKey:@"AppealStrickerPlayerName"];
+        StrikerPlayer= cell.textLabel.text;
            
        }
         if (indexPath.row==1) {
-          cell.Batsman1_lbl.text=[dict valueForKey:@"AppealNonStrickerPlayerName"];
-            NonStrikerPlayer=cell.Batsman1_lbl.text;
+          cell.textLabel.text=[dict valueForKey:@"AppealNonStrickerPlayerName"];
+            NonStrikerPlayer= cell.textLabel.text;
         }
         
     }
