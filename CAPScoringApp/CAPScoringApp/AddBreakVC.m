@@ -74,11 +74,11 @@
      NSDate *dateFromString = [[NSDate alloc] init];
         NSDate *dateFromString1 = [[NSDate alloc] init];
     
-    _Text_BreakStart.text=_MATCHDATE;
+    //_Text_BreakStart.text=_MATCHDATE;
     
-    _text_EndBreak.text=_MATCHDATE;
+  //  _text_EndBreak.text=_MATCHDATE;
     
-    [self DurationCalculation];
+ //   [self DurationCalculation];
 
     
     //[self DurationCalculation1];
@@ -104,24 +104,22 @@
 
 - (IBAction)StartBreack_btn:(id)sender {
     
-_Text_BreakStart.text=_MATCHDATE;
+    _Text_BreakStart.text=@"";
     [_datePicker_View setHidden:NO];
-     [_date_picker1 setHidden:YES];
+    [_date_picker1 setHidden:YES];
     [_date_picker setHidden:NO];
     
     _date_picker.datePickerMode = UIDatePickerModeDateAndTime;
-      [_date_picker addTarget:self
-                    action:@selector(BreakStart:)forControlEvents:UIControlEventValueChanged];
+    [_date_picker addTarget:self
+                     action:@selector(BreakStart:)forControlEvents:UIControlEventValueChanged];
     
-//  formatter=[[NSDateFormatter alloc]init];
-//    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:s"];
-//    //set date too your lable here
-//   // =[formate stringFromDate:_date_picker.date];
-//    
-//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-//    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:s"];
-//    NSDate *date = [dateFormat dateFromString:_MATCHDATE];
-//    [_date_picker setDate:date];
+    formatter=[[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+    //set date too your lable here
+    // =[formate stringFromDate:_date_picker.date];
+    
+    
+
 
     
    
@@ -129,17 +127,13 @@ _Text_BreakStart.text=_MATCHDATE;
 
 -(void)BreakStart:(id)sender
 {
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:s"];
-    NSDate *date = [dateFormat dateFromString:_MATCHDATE];
-    [_date_picker setDate:date];
-    
-    
-    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-    _Text_BreakStart.text = [dateFormat stringFromDate:date];
+
+    NSLog(@"date is %@",_date_picker.date);
+    NSDateFormatter *formate=[[NSDateFormatter alloc]init];
+    [formate setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+    _Text_BreakStart.text=[formate stringFromDate:_date_picker.date];
     BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
-    
-    
+
     
 }
 
@@ -148,20 +142,17 @@ _Text_BreakStart.text=_MATCHDATE;
 
 - (IBAction)EndBreak_btn:(id)sender {
     
-    
-    _text_EndBreak.text=_MATCHDATE;
+    _text_EndBreak.text=@"";
     [_datePicker_View setHidden:NO];
     [_date_picker setHidden:YES];
-     [_date_picker1 setHidden:NO];
+    [_date_picker1 setHidden:NO];
     _date_picker1.datePickerMode = UIDatePickerModeDateAndTime;
     [_date_picker1 addTarget:self
-                     action:@selector(BreakEnd:)forControlEvents:UIControlEventValueChanged];
+                      action:@selector(BreakEnd:)forControlEvents:UIControlEventValueChanged];
     
-//    formatter1=[[NSDateFormatter alloc]init];
-//    [formatter1 setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+    formatter1=[[NSDateFormatter alloc]init];
+    [formatter1 setDateFormat:@"yyyy-MM-dd hh:mm:s"];
 
-//
-    
 }
 
 
@@ -184,24 +175,25 @@ _Text_BreakStart.text=_MATCHDATE;
 
 -(void)BreakEnd:(id)sender
 {
-//    NSLog(@"date is %@",_date_picker1.date);
-//    NSDateFormatter *formate=[[NSDateFormatter alloc]init];
-//    [formate setDateFormat:@"yyyy-MM-dd hh:mm:s"];
-//    _text_EndBreak.text=[formate stringFromDate:_date_picker1.date];
-//    BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
-//    
-    
-    
-    
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:s"];
-    NSDate *date = [dateFormat dateFromString:_MATCHDATE];
-    [_date_picker1 setDate:date];
-    
-    
-    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-    _text_EndBreak.text = [dateFormat stringFromDate:date];
+    NSLog(@"date is %@",_date_picker1.date);
+    NSDateFormatter *formate=[[NSDateFormatter alloc]init];
+    [formate setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+    _text_EndBreak.text=[formate stringFromDate:_date_picker1.date];
     BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
+    
+    
+    
+//    
+//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//    [dateFormat setDateFormat:@"hh:mm:ss"];
+//  //  NSDate *date = [dateFormat dateFromString:_MATCHDATE];
+//     // [dateFormat setDateFormat:@"hh:mm:ss"];
+//   // [_date_picker1 setDate:date];
+//   //[_date_picker1 setMinimumDate:date];
+//    
+//  
+//    NSString *Time = [dateFormat stringFromDate:date];
+//    BREAKENDTIME =[NSString stringWithFormat:@"%@ %@" ,[_text_EndBreak text],Time];
     
 
    
@@ -246,7 +238,7 @@ _Text_BreakStart.text=_MATCHDATE;
    [self InsertBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
     
     
-    [self startService:@"INSERT"];
+   // [self startService:@"INSERT"];
     
     
     
@@ -301,9 +293,9 @@ _Text_BreakStart.text=_MATCHDATE;
 }
 
 - (IBAction)hidepickerbtn:(id)sender {
-      [self DurationCalculation];
+    
       [_datePicker_View setHidden:YES];
-  
+   [self DurationCalculation];
 
 }
 
@@ -338,83 +330,83 @@ _Text_BreakStart.text=_MATCHDATE;
 
 
 
-- (BOOL)checkInternetConnection
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-    return networkStatus != NotReachable;
-}
+//- (BOOL)checkInternetConnection
+//{
+//    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+//    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+//    return networkStatus != NotReachable;
+//}
 
 
--(void) startService:(NSString *)OPERATIONTYPE{
-    if(self.checkInternetConnection){
-        
-        MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
-        COMPETITIONCODE = COMPETITIONCODE == nil ?@"NULL":COMPETITIONCODE;
-        INNINGSNO= INNINGSNO == nil ?@"NULL":INNINGSNO;
-        BREAKSTARTTIME = BREAKSTARTTIME == nil ?@"NULL":BREAKSTARTTIME;
-        BREAKENDTIME = BREAKENDTIME == nil ?@"":BREAKENDTIME;
-        BREAKCOMMENTS= BREAKCOMMENTS == nil ?@"NULL":BREAKCOMMENTS;
-        ISINCLUDEDURATION = ISINCLUDEDURATION == nil ?@"NULL":ISINCLUDEDURATION;
-        BREAKNO = BREAKNO == nil ?@"NULL":BREAKNO;
-        
-        
-        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        //Show indicator
-        [delegate showLoading];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            
-            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETBREAK/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], COMPETITIONCODE,INNINGSNO,MATCHCODE,BREAKSTARTTIME,BREAKENDTIME,BREAKCOMMENTS,ISINCLUDEDURATION,BREAKNO,OPERATIONTYPE];
-            NSLog(@"-%@",baseURL);
-            
-            
-            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            NSURLResponse *response;
-            NSError *error;
-            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            
-            
-            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-            
-            if(rootArray !=nil && rootArray.count>0){
-                NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                NSString *success = [valueDict valueForKey:@"DataItem"];
-                if([success isEqual:@"Success"]){
-                    
-                }
-            }else{
-                
-            }
-            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
-            //            NSLog(@"%@",errorCode);
-            //
-            //
-            //            if([errorCode boolValue] == YES)
-            //            {
-            //
-            //                BOOL isUserLogin = YES;
-            //
-            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
-            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
-            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
-            //                [[NSUserDefaults standardUserDefaults] synchronize];
-            //
-            //                [self openContentView];
-            //
-            //            }else{
-            //
-            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
-            //            }
-            [delegate hideLoading];
-        });
-        
-        //[delegate hideLoading];
-    }
-}
+//-(void) startService:(NSString *)OPERATIONTYPE{
+//    if(self.checkInternetConnection){
+//        
+//        MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
+//        COMPETITIONCODE = COMPETITIONCODE == nil ?@"NULL":COMPETITIONCODE;
+//        INNINGSNO= INNINGSNO == nil ?@"NULL":INNINGSNO;
+//        BREAKSTARTTIME = BREAKSTARTTIME == nil ?@"NULL":BREAKSTARTTIME;
+//        BREAKENDTIME = BREAKENDTIME == nil ?@"":BREAKENDTIME;
+//        BREAKCOMMENTS= BREAKCOMMENTS == nil ?@"NULL":BREAKCOMMENTS;
+//        ISINCLUDEDURATION = ISINCLUDEDURATION == nil ?@"NULL":ISINCLUDEDURATION;
+//        BREAKNO = BREAKNO == nil ?@"NULL":BREAKNO;
+//        
+//        
+//        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//        
+//        //Show indicator
+//        [delegate showLoading];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            
+//            
+//            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETBREAK/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], COMPETITIONCODE,INNINGSNO,MATCHCODE,BREAKSTARTTIME,BREAKENDTIME,BREAKCOMMENTS,ISINCLUDEDURATION,BREAKNO,OPERATIONTYPE];
+//            NSLog(@"-%@",baseURL);
+//            
+//            
+//            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//            
+//            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//            NSURLResponse *response;
+//            NSError *error;
+//            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//            
+//            
+//            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//            
+//            if(rootArray !=nil && rootArray.count>0){
+//                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                NSString *success = [valueDict valueForKey:@"DataItem"];
+//                if([success isEqual:@"Success"]){
+//                    
+//                }
+//            }else{
+//                
+//            }
+//            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
+//            //            NSLog(@"%@",errorCode);
+//            //
+//            //
+//            //            if([errorCode boolValue] == YES)
+//            //            {
+//            //
+//            //                BOOL isUserLogin = YES;
+//            //
+//            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+//            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+//            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+//            //                [[NSUserDefaults standardUserDefaults] synchronize];
+//            //
+//            //                [self openContentView];
+//            //
+//            //            }else{
+//            //
+//            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+//            //            }
+//            [delegate hideLoading];
+//        });
+//        
+//        //[delegate hideLoading];
+//    }
+//}
 
 
 
