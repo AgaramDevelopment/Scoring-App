@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="RAJDHANI-BOLD.TTF">
@@ -96,26 +96,12 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1H-MF-USR">
-                                    <rect key="frame" x="17" y="16" width="35" height="35"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="35" id="b3n-H3-LwJ"/>
-                                        <constraint firstAttribute="width" constant="35" id="wvS-v9-gz2"/>
-                                    </constraints>
-                                    <state key="normal" image="ico-back-btn"/>
-                                    <connections>
-                                        <action selector="backbtn:" destination="-1" eventType="touchUpInside" id="T4t-ta-h5K"/>
-                                    </connections>
-                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.17254901959999999" green="0.23921568630000001" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="3Fh-Oe-scr" firstAttribute="leading" secondItem="B1H-MF-USR" secondAttribute="trailing" constant="145" id="672-dp-aQp"/>
                                 <constraint firstItem="d3y-cX-in1" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="top" constant="16" id="Q29-OI-zJ1"/>
-                                <constraint firstItem="B1H-MF-USR" firstAttribute="leading" secondItem="jeN-GQ-Y6N" secondAttribute="leading" constant="17" id="QVL-BY-1q6"/>
                                 <constraint firstAttribute="bottom" secondItem="d3y-cX-in1" secondAttribute="bottom" constant="8" id="XjA-XU-hCe"/>
                                 <constraint firstAttribute="trailing" secondItem="d3y-cX-in1" secondAttribute="trailing" constant="6" id="b2M-3A-g45"/>
-                                <constraint firstItem="B1H-MF-USR" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="top" constant="16" id="ca8-n6-5Sf"/>
                                 <constraint firstItem="3Fh-Oe-scr" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="top" constant="23" id="ha1-IC-aYn"/>
                                 <constraint firstItem="d3y-cX-in1" firstAttribute="leading" secondItem="3Fh-Oe-scr" secondAttribute="trailing" constant="38" id="xCL-9M-5VZ"/>
                             </constraints>
@@ -148,6 +134,5 @@
     </objects>
     <resources>
         <image name="ico-add" width="32" height="32"/>
-        <image name="ico-back-btn" width="30" height="30"/>
     </resources>
 </document>

@@ -5455,16 +5455,14 @@ EndInnings *endInnings;
     [self.tbl_aggressiveShot reloadData];
     [self unselectedViewBg:self.view_defense];
     [_tbl_defensive reloadData];
-   [self unselectedViewBg: self.view_fielding_factor];
-  
-       selectedfieldFactor = [[FieldingFactorRecord alloc]init];
-     [self unselectedViewBg: self.view_Rbw];
+    [self unselectedViewBg: self.view_fielding_factor];
+     selectedfieldFactor = [[FieldingFactorRecord alloc]init];
+    [self unselectedViewBg: self.view_Rbw];
     [self unselectedViewBg: self.view_remark];
-    //[self unselectedViewBg: self.view_edit];need to set reference
-    
+  //[self unselectedViewBg: self.view_edit];   need to set reference
     [self unselectedViewBg:self.view_appeal];
-   //  [self unselectedViewBg: self.View_Appeal];
-    //[self unselectedViewBg: self.view_lastinstance];
+  //[self unselectedViewBg: self.View_Appeal];
+  //[self unselectedViewBg: self.view_lastinstance];
     
     if(Img_ball != nil)
     {

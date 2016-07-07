@@ -105,6 +105,7 @@
                         NSString *REMEMBERME=[test objectForKey:@"Rememberme"];
                         NSString *REMENTDATE=[test objectForKey:@"Rementdate"];
                         NSString *USERFULLNAME=[test objectForKey:@"Userfullname"];
+                      [[NSUserDefaults standardUserDefaults] setObject:USERFULLNAME forKey:@"UserFullname"];
                         NSString *MACHINEID=[test objectForKey:@"Machineid"];
                         NSString*LICENSEUPTO=[test objectForKey:@"Licenseupto"];
                         NSString*CREATEDBY =[test objectForKey:@"Createdby"];
