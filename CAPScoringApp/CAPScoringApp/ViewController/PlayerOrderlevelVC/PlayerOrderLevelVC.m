@@ -295,50 +295,52 @@
 //   if(objCapitainWicketKeeper.objTeamACapitain!=nil && objCapitainWicketKeeper.objTeamBCapitain!= nil && objCapitainWicketKeeper.objTeamAWicketKeeper!=nil && objCapitainWicketKeeper.objTeamBWicketKeeper!=nil)
     if(isSelectCaptainType == YES && isSelectWKTKeeperType ==YES)
    {
+       AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+       
+       
+       [delegate showLoading];
     for(int i=0;  i < slecteplayerlist.count; i++)
     {
         SelectPlayerRecord *playerorderRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:i];
         [DBManager updatePlayerorder:self.matchCode :self.TeamCode PlayerCode:playerorderRecord.playerCode PlayerOrder:playerorderRecord.playerOrder];
         
-//        if(self.checkInternetConnection){
-//           
+        if(self.checkInternetConnection){
+              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//
 //            
 //            _matchCode = (self.matchCode == nil) ?@"NULL":_matchCode;
 //            _TeamCode = (_TeamCode == nil) ?@"NULL":_TeamCode;
 //            NSString*PlayerCode = playerorderRecord.playerCode == nil ?@"NULL":playerorderRecord.playerCode;
 //             NSString*PlayerOrder = playerorderRecord.playerOrder == nil ?@"NULL":playerorderRecord.playerOrder;
 //            
-//            AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//            
-//            //Show indicator
-//            [delegate showLoading];
-//            
-//                
-//                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHTEAMPLAYERORDER/%@/%@/%@/%@",[Utitliy getIPPORT],_matchCode,_TeamCode,PlayerCode,PlayerOrder];
-//                NSLog(@"-%@",baseURL);
-//                
-//                
-//                NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//                
-//                NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//                NSURLResponse *response;
-//                NSError *error;
-//                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//                
-//                if(responseData !=nil)
-//                {
-//                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-//                
-//                if(rootArray !=nil && rootArray.count>0){
-//                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
-//                    NSString *success = [valueDict valueForKey:@"DataItem"];
-//                    if([success isEqual:@"Success"]){
-//                        
-//                    }
-//                }else{
-//                    
-//                }
-//                }
+           
+            
+            
+                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHTEAMPLAYERORDER/%@/%@/%@/%@",[Utitliy getSyncIPPORT],_matchCode,_TeamCode,playerorderRecord.playerCode ,playerorderRecord.playerOrder];
+                NSLog(@"-%@",baseURL);
+            
+            
+                NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+                NSURLRequest *request = [NSURLRequest requestWithURL:url];
+                NSURLResponse *response;
+                NSError *error;
+                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+                if(responseData !=nil)
+                {
+                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+                
+                if(rootArray !=nil && rootArray.count>0){
+                   NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                   NSString *success = [valueDict valueForKey:@"DataItem"];
+                   if([success isEqual:@"Success"]){
+                       
+                    }
+               }else{
+    
+                }
+                }
 //                //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
 //                //            NSLog(@"%@",errorCode);
 //                //
@@ -359,21 +361,16 @@
 //                //
 //                //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
 //                //            }
-//                [delegate hideLoading];
+                
 //        
-//            
-//            //[delegate hideLoading];
-//        }
-//else
-//{
-     [DBManager updateCapitainWicketkeeper:self.competitionCode :self.matchCode capitainAteam:objCapitainWicketKeeper.objTeamACapitain capitainBteam:objCapitainWicketKeeper.objTeamBCapitain wicketkeeperAteam:objCapitainWicketKeeper.objTeamAWicketKeeper wicketkeeperBteam:  objCapitainWicketKeeper.objTeamBWicketKeeper];
-//}
-    
-       
+});
+            
+        }
+                             
         
     }
-    
-//        [DBManager updateCapitainWicketkeeper:self.competitionCode :self.matchCode capitainAteam:objCapitainWicketKeeper.objTeamACapitain capitainBteam:objCapitainWicketKeeper.objTeamBCapitain wicketkeeperAteam:objCapitainWicketKeeper.objTeamAWicketKeeper wicketkeeperBteam:  objCapitainWicketKeeper.objTeamBWicketKeeper];
+       [delegate hideLoading];
+    [DBManager updateCapitainWicketkeeper:self.competitionCode :self.matchCode capitainAteam:objCapitainWicketKeeper.objTeamACapitain capitainBteam:objCapitainWicketKeeper.objTeamBCapitain wicketkeeperAteam:objCapitainWicketKeeper.objTeamAWicketKeeper wicketkeeperBteam:  objCapitainWicketKeeper.objTeamBWicketKeeper];
        NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
        objNewMatchSetUp =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
        objNewMatchSetUp.matchCode=self.matchCode;
@@ -470,10 +467,10 @@
 
     if([objSelectPlayerRecord.playerCode isEqualToString:captainATeam] || [objSelectPlayerRecord.playerCode isEqualToString:captainBTeam])
     {
-        //playercell.IMg_captain.frame=CGRectMake(playercell.contentView.frame.size.width-155, 15,50, 50);
-        //playercell.Btn_Captain.frame=CGRectMake(playercell.contentView.frame.size.width-155, 15,50, 50);
+       
+       
         playercell.IMg_captain.image=[UIImage imageNamed:@"Img_Captain"];
-        //[playercell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+        [playercell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
         objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
         objSelectPlayerRecord.isSelectCapten=@"YES";
           isSelectCaptainType=YES;
@@ -481,8 +478,7 @@
     else{
         playercell.IMg_captain.image=[UIImage imageNamed:@""];
         [playercell.IMg_captain setBackgroundColor:[UIColor clearColor]];
-       // playercell.IMg_captain.frame=CGRectMake(playercell.contentView.frame.size.width-180, 15,50, 50);
-        //playercell.Btn_Captain.frame=CGRectMake(playercell.contentView.frame.size.width-190, 15,50, 50);
+       
         objSelectPlayerRecord.isSelectCapten=nil;
     }
     
@@ -631,8 +627,8 @@
     {
         Cell.IMg_captain.image=[UIImage imageNamed:@""];
         [Cell.IMg_captain setBackgroundColor:[UIColor clearColor]];
-        Cell.IMg_captain.frame=CGRectMake(Cell.contentView.frame.size.width-180, 15,50, 50);
-        Cell.Btn_Captain.frame=CGRectMake(Cell.contentView.frame.size.width-190, 15,50, 50);
+       // Cell.IMg_captain.frame=CGRectMake(Cell.contentView.frame.size.width-180, 15,50, 50);
+       // Cell.Btn_Captain.frame=CGRectMake(Cell.contentView.frame.size.width-190, 15,50, 50);
         isSelectCaptainType=NO;
         objSelectPlayerRecord.isSelectCapten=nil;
         if([self.chooseTeam isEqualToString:@"SelectTeamA"])
@@ -657,7 +653,16 @@
         [Cell.Img_wktkeeper setBackgroundColor:[UIColor clearColor]];
         objSelectPlayerRecord.isSelectWKTKeeper=nil;
         isSelectWKTKeeperType=NO;
-        if([self.chooseTeam isEqualToString:@"SelectTeamA"])
+        if([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])
+        {
+            Cell.IMg_captain.image =[UIImage imageNamed:@""];
+            [Cell.IMg_captain setBackgroundColor:[UIColor clearColor]];
+           Cell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_Captain"];
+            [Cell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+            
+            
+        }
+        else if([self.chooseTeam isEqualToString:@"SelectTeamA"])
         {
             objCapitainWicketKeeper.objTeamAWicketKeeper=nil;
         }

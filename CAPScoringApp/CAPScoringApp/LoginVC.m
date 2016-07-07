@@ -36,7 +36,8 @@
     [self.view_user_name.layer setBorderWidth:2.0];
     [self.view_user_name.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_user_name.layer setMasksToBounds:YES];
-    
+   
+
 }
 
 - (void)didReceiveMemoryWarning {
