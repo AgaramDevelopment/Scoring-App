@@ -339,8 +339,7 @@
                                                 <exclude reference="hae-Ak-JGy"/>
                                             </mask>
                                         </variation>
-                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                            <rect key="frame" x="5" y="10" width="430" height="45"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
                                             <mask key="constraints">
                                                 <include reference="hae-Ak-JGy"/>
                                             </mask>
