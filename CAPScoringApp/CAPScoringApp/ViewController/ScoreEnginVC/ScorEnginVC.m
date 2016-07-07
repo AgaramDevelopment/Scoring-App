@@ -609,6 +609,7 @@ EndInnings *endInnings;
     
     NSMutableArray *strickerArray = fetchSeBallCodeDetails.currentStrickerDetail;
     NSMutableArray *nonstrickerArray = fetchSeBallCodeDetails.currentNonStrickerDetail;
+    
     NSMutableArray *bowlerArray = fetchSeBallCodeDetails.currentbowlerDetail;
     
     //Current Stricker

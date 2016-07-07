@@ -3962,7 +3962,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
-    NSString *teamOverSQL = [NSString stringWithFormat:@"SELECT COUNT(1) FROM INNINGSEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSSTATUS = 0;",competitioncode,matchcode];
+    NSString *teamOverSQL = [NSString stringWithFormat:@"SELECT COUNT(1) FROM INNINGSEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSSTATUS = 0",competitioncode,matchcode];
     stmt=[teamOverSQL UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         
@@ -4301,7 +4301,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
-    NSString *teamOverSQL = [NSString stringWithFormat:@"SELECT SHORTTEAMNAME, TEAMNAME ,TEAMLOGO FROM TEAMMASTER WHERE TEAMCODE = '%@';",BATTINGTEAMCODE];
+    NSString *teamOverSQL = [NSString stringWithFormat:@"SELECT SHORTTEAMNAME, TEAMNAME ,TEAMLOGO FROM TEAMMASTER WHERE TEAMCODE = '%@'",BATTINGTEAMCODE];
     stmt=[teamOverSQL UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         
@@ -5426,7 +5426,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 //OVERNUMBERBYOVEREVENTS
-+(BOOL)GETOVERNUMBERBYOVEREVENTS:(NSString *)COMPETITIONCODE :(NSString *)MATCHCODE :(NSString *)INNINGSNO :(NSString *)BATTINGTEAMCODE :(NSString *)BATTEAMOVERS {
+
++(BOOL)GETOVERNUMBERBYOVEREVENTS:(NSString *)COMPETITIONCODE :(NSString *)MATCHCODE :(NSString *)INNINGSNO :(NSString *)BATTINGTEAMCODE :(NSString *)BATTEAMOVERS{
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -5435,18 +5436,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT OVR.OVERNO FROM OVEREVENTS OVR WHERE OVR.COMPETITIONCODE = '%@' AND OVR.MATCHCODE = '%@' AND OVR.TEAMCODE = '%@' AND OVR.INNINGSNO = '%@' AND OVR.OVERNO = '%@'",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTEAMOVERS];
-        
-        
-        
         const char *update_stmt = [updateSQL UTF8String];
-        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-            sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
             
-            return YES;
-            
-        }
         }
         else {
             sqlite3_reset(statement);
@@ -5456,12 +5454,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     sqlite3_reset(statement);
     return NO;
-    
 }
 
 
+
+
+
 //OVERNUMBERBYOVERSTATUS0
-+(BOOL)GETOVERNUMBERBYOVERSTATUS0:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE INNINGSNO:(NSString *)INNINGSNO  BATTINGTEAMCODE:(NSString *)BATTINGTEAMCODE  BATTEAMOVERS:(NSString *)BATTEAMOVERS {
++(BOOL)GETOVERNUMBERBYOVERSTATUS0:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE INNINGSNO:(NSString *)INNINGSNO  BATTINGTEAMCODE:(NSString *)BATTINGTEAMCODE  BATTEAMOVERS:(NSString *)BATTEAMOVERS{
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -5470,16 +5470,16 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT OVR.OVERNO FROM OVEREVENTS OVR WHERE OVR.COMPETITIONCODE = '%@' AND OVR.MATCHCODE = '%@' AND OVR.TEAMCODE = '%@' AND OVR.INNINGSNO = '%@' AND OVR.OVERNO = '%@' AND OVR.OVERSTATUS = 0",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTEAMOVERS];
-        
         const char *update_stmt = [updateSQL UTF8String];
-        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-            sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
             
-            return YES;
-            
-            }}
+        }
         else {
             sqlite3_reset(statement);
             
@@ -5488,8 +5488,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     sqlite3_reset(statement);
     return NO;
-    
 }
+
 
 // get is leagal ball
 +(NSString *) getLegalBall:(NSString*)LASTBALLCODE{
