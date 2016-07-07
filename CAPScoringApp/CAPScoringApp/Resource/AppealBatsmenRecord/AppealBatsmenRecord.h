@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @interface AppealBatsmenRecord : NSObject
-@property(nonatomic,strong)NSString *strikerbatsmenname;
-@property(nonatomic,strong)NSString*nonstrikerbatsmenname;
+@property(nonatomic,strong)NSString *batsmanName;
+@property(nonatomic,strong)NSString*Batsmancode;
 @end
