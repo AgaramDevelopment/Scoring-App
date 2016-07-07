@@ -36,7 +36,8 @@
     [self.view_user_name.layer setBorderWidth:2.0];
     [self.view_user_name.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_user_name.layer setMasksToBounds:YES];
-    
+   
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -105,6 +106,7 @@
                         NSString *REMEMBERME=[test objectForKey:@"Rememberme"];
                         NSString *REMENTDATE=[test objectForKey:@"Rementdate"];
                         NSString *USERFULLNAME=[test objectForKey:@"Userfullname"];
+                      [[NSUserDefaults standardUserDefaults] setObject:USERFULLNAME forKey:@"UserFullname"];
                         NSString *MACHINEID=[test objectForKey:@"Machineid"];
                         NSString*LICENSEUPTO=[test objectForKey:@"Licenseupto"];
                         NSString*CREATEDBY =[test objectForKey:@"Createdby"];

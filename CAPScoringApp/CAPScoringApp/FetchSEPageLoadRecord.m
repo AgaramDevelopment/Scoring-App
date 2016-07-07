@@ -337,36 +337,33 @@ BOOL  getOverStatus;
     
     //batting team name
     NSMutableArray *battingTeamName = [DBManager getBattingTeamName:BATTINGTEAMCODE];
-    FetchSEPageLoadRecord *battingTeam = [battingTeamName objectAtIndex:0];
+    if(battingTeamName.count > 0)
+    {
+    FetchSEPageLoadRecord *battingTeam =[battingTeamName objectAtIndex:0];
     BATTEAMNAME = battingTeam.BATTEAMNAME;
     BATTEAMSHORTNAME = battingTeam.BATTEAMSHORTNAME;
-    
+    }
     
     //bowling team name
     NSMutableArray *bowlingTeamName = [DBManager getBowlingTeamName:BOWLINGTEAMCODE];
-    FetchSEPageLoadRecord *bowlingTeam =  [bowlingTeamName objectAtIndex:0];
-    BOWLTEAMNAME = bowlingTeam.BOWLTEAMNAME;
-    BOWLTEAMSHORTNAME = bowlingTeam.BOWLTEAMSHORTNAME;
-    
+    if(bowlingTeamName.count > 0)
+    {
+      FetchSEPageLoadRecord *bowlingTeam =  [bowlingTeamName objectAtIndex:0];
+      BOWLTEAMNAME = bowlingTeam.BOWLTEAMNAME;
+      BOWLTEAMSHORTNAME = bowlingTeam.BOWLTEAMSHORTNAME;
+    }
     
     //total runs and total overs
     NSMutableArray *totalOvers = [DBManager getTargetRunsOvers:COMPETITIONCODE :MATCHCODE];
     
-    FetchSEPageLoadRecord *totRun = (FetchSEPageLoadRecord*)[totalOvers objectAtIndex:0];
+    if(totalOvers.count >0)
+    {
+    FetchSEPageLoadRecord *totRun =(FetchSEPageLoadRecord*)[totalOvers objectAtIndex:0];
     
-    if (T_TARGETRUNS == nil) {
-        
-        T_TARGETRUNS = [NSNumber numberWithInt:0];
-        T_TARGETOVERS = [NSNumber numberWithInt:0];
-    }else{
-        
-        T_TARGETRUNS = totRun.T_TARGETRUNS;
-        T_TARGETOVERS = totRun.T_TARGETOVERS;
-         MATCHOVERS  = T_TARGETRUNS.intValue > 0 ? [T_TARGETOVERS stringValue] : MATCHOVERS;
+    T_TARGETRUNS = totRun.T_TARGETRUNS;
+    T_TARGETOVERS = totRun.T_TARGETOVERS;
     }
-    
-    
-   
+    MATCHOVERS  = T_TARGETRUNS.intValue > 0 ? [T_TARGETOVERS stringValue] : MATCHOVERS;
     
     //Batting team player
     getBattingTeamPlayers =[DBManager GETWICKETDETAILS:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE COMPETITIONCODE:COMPETITIONCODE INNINGSNO:INNINGSNO];

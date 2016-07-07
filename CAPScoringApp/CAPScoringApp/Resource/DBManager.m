@@ -8947,7 +8947,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO POWERPLAY(POWERPLAYCODE,MATCHCODE,INNINGSNO,STARTOVER,ENDOVER,POWERPLAYTYPE,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",POWERPLAYCODE,MATCHCODE,INNINGSNO,STARTOVER,ENDOVER,POWERPLAYTYPE,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE];
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO POWERPLAY(POWERPLAYCODE,MATCHCODE,INNINGSNO,STARTOVER,ENDOVER,POWERPLAYTYPE,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@', current_timestamp,'%@', current_timestamp)",POWERPLAYCODE,MATCHCODE,INNINGSNO,STARTOVER,ENDOVER,POWERPLAYTYPE,RECORDSTATUS,CREATEDBY,MODIFIEDBY];
         
         //const char *insert_stmt = [SetPenaltyDetails UTF8String];
         const char *selectStmt = [updateSQL UTF8String];
@@ -9057,7 +9057,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE POWERPLAY SET INNINGSNO='%@',STARTOVER='%@',ENDOVER='%@',POWERPLAYTYPE='%@',RECORDSTATUS='%@',MODIFIEDBY='%@',MODIFIEDDATE='%@' WHERE POWERPLAYCODE='%@' AND MATCHCODE='%@'",INNINGSNO,STARTOVER,ENDOVER,POWERPLAYTYPE,RECORDSTATUS,MODIFIEDBY,MATCHDATE,POWERPLAYCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE POWERPLAY SET INNINGSNO='%@',STARTOVER='%@',ENDOVER='%@',POWERPLAYTYPE='%@',RECORDSTATUS='%@',MODIFIEDBY='%@',MODIFIEDDATE= current_timestamp WHERE POWERPLAYCODE='%@' AND MATCHCODE='%@'",INNINGSNO,STARTOVER,ENDOVER,POWERPLAYTYPE,RECORDSTATUS,MODIFIEDBY,POWERPLAYCODE,MATCHCODE];
         
         
         const char *update_stmt = [updateSQL UTF8String];
@@ -9184,7 +9184,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT (IFNULL(MAX(SUBSTR(POWERPLAYTYPECODE,4,10)),0) +1)MAXID  FROM POWERPLAYTYPE"];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT (IFNULL(MAX(SUBSTR(POWERPLAYCODE,4,10)),0)+1)MAXID  FROM POWERPLAY"];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)

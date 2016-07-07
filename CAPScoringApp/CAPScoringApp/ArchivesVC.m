@@ -157,15 +157,7 @@
 
 - (void)RightsideResumeBtnAction
 {
-    // [self showDetailWithText:[NSString stringWithFormat:@"Clicked button two for %@", itemText]];
-//    EditModeVC *buttonCell = (EditModeCell *)[senderButton superview];
-//    
-//    NSIndexPath* pathOfTheCell = [self.tbl_archive indexPathForCell:buttonCell];
-//    FixturesRecord *objFixtureRecord=(FixturesRecord*)[FetchCompitionArray objectAtIndex:pathOfTheCell.row];
-//    
-//    NSMutableArray *mSetUp = [[NSMutableArray alloc]init];
-//    [mSetUp addObject:objFixtureRecord];
-
+  
     ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
     
     scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];

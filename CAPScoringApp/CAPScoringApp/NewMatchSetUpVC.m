@@ -542,7 +542,15 @@ NSRegularExpression *isMatchedByRegex;
 
 
 -(void) startService:(NSString *)OPERATIONTYPE{
+    
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    //Show indicator
+    [delegate showLoading];
     if(self.checkInternetConnection){
+        
+       
+        
           NSString*OVER=self.txt_overs.text;
         
         matchCode = matchCode == nil ?@"NULL":matchCode;
@@ -550,14 +558,11 @@ NSRegularExpression *isMatchedByRegex;
         OVER= OVER == nil ?@"NULL":OVER;
         
         
-        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         
-        //Show indicator
-        [delegate showLoading];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             
-            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHUPDATEOVER/%@/%@/%@",[Utitliy getIPPORT], competitionCode,matchCode,OVER];
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHUPDATEOVER/%@/%@/%@",[Utitliy getSyncIPPORT], competitionCode,matchCode,OVER];
             NSLog(@"-%@",baseURL);
             
             
@@ -568,7 +573,8 @@ NSRegularExpression *isMatchedByRegex;
             NSError *error;
             NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
             
-            
+            if(responseData != nil)
+            {
             NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
             
             if(rootArray !=nil && rootArray.count>0){
@@ -579,6 +585,7 @@ NSRegularExpression *isMatchedByRegex;
                 }
             }else{
                 
+            }
             }
             //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
             //            NSLog(@"%@",errorCode);
@@ -600,10 +607,11 @@ NSRegularExpression *isMatchedByRegex;
             //
             //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
             //            }
-            [delegate hideLoading];
+            
         });
         
-        //[delegate hideLoading];
+       
     }
+     [delegate hideLoading];
 }
 @end
