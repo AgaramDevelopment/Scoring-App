@@ -170,6 +170,7 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     self.txt_startInnings.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
     [self.txt_startInnings resignFirstResponder];
+    [self duration];
     
 }
 
@@ -196,19 +197,25 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     self.txt_endInnings.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
     [self.txt_endInnings resignFirstResponder];
+    [self duration];
     
 }
 
 -(void)duration{
     
-NSDate *date1 = [formatter dateFromString:self.txt_startInnings];
-NSDate *date2 = [formatter dateFromString:self.txt_endInnings];
-
-NSTimeInterval timeDifference = [date1 timeIntervalSinceDate:date2];
-double days = timeDifference / 1440;
-NSString *Duration = [NSString stringWithFormat:@"%.20f", days];
-
-self.lbl_duration.text=[NSString stringWithFormat:@"%.20f", Duration];
+    formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *startDateTF = self.txt_startInnings.text;
+    NSString *startEndTF = self.txt_endInnings.text;
+    
+    NSDate *date1 = [formatter dateFromString:startDateTF];
+    NSDate *date2 = [formatter dateFromString:startEndTF];
+    
+    NSTimeInterval timeDifference = [date2 timeIntervalSinceDate:date1];
+    int days = timeDifference / 60;
+    NSString *Duration = [NSString stringWithFormat:@"%d", days];
+    
+    self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
 
 }
 - (void)didReceiveMemoryWarning {

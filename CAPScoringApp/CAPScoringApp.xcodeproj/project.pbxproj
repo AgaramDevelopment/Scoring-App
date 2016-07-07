@@ -12,6 +12,7 @@
 		0468B38E1D12872E00B98576 /* PenalityTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0468B38C1D12872E00B98576 /* PenalityTVC.m */; };
 		0468B38F1D12872E00B98576 /* PenalityTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0468B38D1D12872E00B98576 /* PenalityTVC.xib */; };
 		0468B3921D12AD2100B98576 /* MetaDataRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0468B3911D12AD2100B98576 /* MetaDataRecord.m */; };
+		047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCF31D213B250084BFF7 /* PowerPlayGridTVC.xib */; };
 		047669DD1D14229600572E39 /* PenaltyDetailsRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */; };
 		047E52E01D279E8D00D4CAC6 /* GetWicketDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52DF1D279E8D00D4CAC6 /* GetWicketDetail.m */; };
 		047E52E31D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52E21D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m */; };
@@ -101,6 +102,7 @@
 		1883DFEC1D27C43E00854814 /* TossTeamDetailRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883DFEB1D27C43E00854814 /* TossTeamDetailRecord.m */; };
 		1883E4901D2A3C85000A279C /* OverBallCountRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883E48F1D2A3C85000A279C /* OverBallCountRecord.m */; };
 		1886718A1CFFF77E004DEDA0 /* AggressiveShotTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */; };
+		18A4F0891D2E4EF90019975E /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 18A4F0881D2E4EF90019975E /* TNCA_DATABASE.sqlite */; };
 		18AB07CF1D2A75C100AEEB1B /* EndSessionTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A5A1D26344400E02DAE /* EndSessionTVC.m */; };
 		18AB07D01D2A75C100AEEB1B /* EndSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2710671D25B9A40011C7B0 /* EndSession.m */; };
 		18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A93A5B1D26344400E02DAE /* EndSessionTVC.xib */; };
@@ -441,6 +443,7 @@
 		1883E48F1D2A3C85000A279C /* OverBallCountRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverBallCountRecord.m; sourceTree = "<group>"; };
 		188671881CFFF77E004DEDA0 /* AggressiveShotTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AggressiveShotTypeCell.h; sourceTree = "<group>"; };
 		188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggressiveShotTypeCell.m; sourceTree = "<group>"; };
+		18A4F0881D2E4EF90019975E /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = "../../../../5july2016/Empty Database/TNCA_DATABASE.sqlite"; sourceTree = "<group>"; };
 		243F8E3D1D2236CF00333AD8 /* AppealBatsmenRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppealBatsmenRecord.m; path = Resource/AppealBatsmenRecord/AppealBatsmenRecord.m; sourceTree = "<group>"; };
 		243F8E3E1D2236CF00333AD8 /* AppealBatsmenRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppealBatsmenRecord.h; path = Resource/AppealBatsmenRecord/AppealBatsmenRecord.h; sourceTree = "<group>"; };
 		243F8E411D2237D600333AD8 /* PowerPlayGridVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PowerPlayGridVC.xib; path = SubClass/PowerplayGridVC/PowerPlayGridVC.xib; sourceTree = "<group>"; };
@@ -1145,6 +1148,7 @@
 		CE0017F21CF42FA500668D8B = {
 			isa = PBXGroup;
 			children = (
+				18A4F0881D2E4EF90019975E /* TNCA_DATABASE.sqlite */,
 				CE0017FD1CF42FA500668D8B /* CAPScoringApp */,
 				CE0018171CF42FA500668D8B /* CAPScoringAppTests */,
 				CE0018221CF42FA500668D8B /* CAPScoringAppUITests */,
@@ -1692,6 +1696,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */,
 				18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */,
 				187CA6AA1D28CD7A005E3DCF /* FollowOn.xib in Resources */,
 				047E52ED1D27D71F00D4CAC6 /* Other_WicketgridVC.xib in Resources */,

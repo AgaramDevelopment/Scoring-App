@@ -22,7 +22,8 @@
 @property (strong, nonatomic) IBOutlet UITableView *tbl_powerplay;
 
 @property(nonatomic,strong)PowerPlayRecord *powerplayrecord;
-@property (strong, nonatomic) IBOutlet PowerPlayGridTVC *POWERPLAY_CELL;
+//@property (strong, nonatomic) IBOutlet PowerPlayGridTVC *POWERPLAY_CELL;
+@property (strong, nonatomic) IBOutlet PowerPlayGridTVC *powerplay_cell;
 
 @property(nonatomic,strong) NSString *powerplaystartover;
 @property(nonatomic,strong) NSString *powerplayendover;
