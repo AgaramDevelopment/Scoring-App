@@ -60,14 +60,15 @@
 - (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    static NSString *myidentifier = @"powerplaycell";
+    static NSString *myidentifier = @"powerplaygridcell";
     
     
     PowerPlayGridTVC *cell = (PowerPlayGridTVC *)[tableView dequeueReusableCellWithIdentifier:myidentifier];
     if (cell == nil) {
         [[NSBundle mainBundle] loadNibNamed:@"PowerPlayGridTVC" owner:self options:nil];
-        cell = self.POWERPLAY_CELL;
-        self.POWERPLAY_CELL = nil;
+        
+        cell=self.powerplay_cell;
+        self.powerplay_cell=nil;
     }
     PowerPlayRecord *veb=(PowerPlayRecord*)[_resultarray objectAtIndex:indexPath.row];
     
@@ -104,6 +105,7 @@
     add.powerplaystartover=veb.startover;
     add.powerplayendover=veb.endover;
     add.powerplaytyp=veb.powerplaytypename;
+    add.powerplaycode=veb.powerplaycode;
     
 
     

@@ -69,7 +69,7 @@
 
 @property(strong,nonatomic)NSString *TEAMCODE;
 
-@property(nonatomic,assign)NSInteger *BATTEAMRUNS;
+@property(nonatomic,assign)NSInteger BATTEAMRUNS;
 @property(nonatomic,assign) NSInteger ISOVERCOMPLETE;
 @property(nonatomic,strong) NSNumber *ISFREEHIT;
 @property(nonatomic,assign)NSNumber *RUNSREQUIRED;
@@ -120,9 +120,9 @@
 @property(strong,nonatomic)NSString *lastBowlerEcoRate;
 
 
-@property(nonatomic,assign)NSInteger *BATTEAMWICKETS;
+@property(nonatomic,assign)NSInteger BATTEAMWICKETS;
 @property(nonatomic,assign)NSInteger BATTEAMOVERS;
-@property(nonatomic,assign)NSInteger *BATTEAMOVRBALLS;
+@property(nonatomic,assign)NSInteger BATTEAMOVRBALLS;
 @property(nonatomic,assign)NSNumber *BATTEAMRUNRATE;
 
 //Bowlers List
@@ -162,7 +162,7 @@
 @property(strong,nonatomic)NSString *BBWIC;
 
 
-@property(nonatomic,assign)NSInteger *BATTEAMOVRBALLSCNT;
+@property(nonatomic,assign)NSInteger BATTEAMOVRBALLSCNT;
 
 //Umpire Details
 @property(strong,nonatomic)NSString *UMPIRE1CODE;

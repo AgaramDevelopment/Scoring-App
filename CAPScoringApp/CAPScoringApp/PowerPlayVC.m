@@ -27,6 +27,8 @@ NSArray *PowerPlayData;
 NSString *powerplayvalue;
 NSString *setpowerplaytype;
 NSMutableArray *powerplayarray;
+NSString *powerplayCode;
+
 
 PowerPlayVC *powerplayvc;
 PowerPlayRecord *powerplayrecord;
@@ -60,6 +62,7 @@ NSString *matchover;
         txt_startover.text = powerplaystartover;
         txt_endover.text = powerplayendover;
         self.lbl_setpowerplay.text = powerplaytyp;
+        powerplaycode=powerplaycode;
         
         [self.btn_submit setTitle:@"Update" forState:UIControlStateNormal];
     }
@@ -211,7 +214,7 @@ NSString *matchover;
             
             
             NSString *paddingString = [[NSString string] stringByPaddingToLength: (7-maxid.length) withString: @"0" startingAtIndex: 0];
-            NSString *powerplayCode = [NSString stringWithFormat:@"PPT%@%@",paddingString,maxid] ;
+             powerplayCode = [NSString stringWithFormat:@"PPC%@%@",paddingString,maxid] ;
             
             
             
@@ -243,13 +246,24 @@ NSString *matchover;
     {
         [self updateService];
         
+      
+        
         PowerPlayRecord *powerplayrecord =[[PowerPlayRecord alloc]init];
         
         powerplayrecord.startover= txt_startover.text;
         powerplayrecord.endover= txt_endover.text;
-        powerplayrecord.powerplaytype= powerplaytype;
+        powerplayrecord.powerplaytypecode= powerplaytype;
+       
         
-        [DBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover  :powerplayrecord.endover :@"2016-06-25 16:37:00" :powerplayrecord.powerplaytype :@"MSC001" :@"user" :@"PPC0000059":self.matchCode];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *username=[defaults stringForKey :@"UserFullname"];
+        
+          [DBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC001" :username :powerplaycode :self.matchCode];
+
+       
+        
+        [DBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC001" :username :powerplaycode :self.matchCode];
+        
         
         [DBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
         
@@ -277,13 +291,23 @@ NSString *matchover;
 
 - (IBAction)btn_delete:(id)sender {
     [self DeleteService];
+    
+
     PowerPlayRecord *powerplayrecord =[[PowerPlayRecord alloc]init];
     
     powerplayrecord.startover= txt_startover.text;
     powerplayrecord.endover= txt_endover.text;
-    powerplayrecord.powerplaytype= powerplaytype;
+    powerplayrecord.powerplaytypecode= powerplaytype;
     
-    [DBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover  :powerplayrecord.endover :@"2016-06-25 16:37:00" :powerplayrecord.powerplaytype :@"MSC002" :@"user" :@"PPC0000059":self.matchCode];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *username=[defaults stringForKey :@"UserFullname"];
+    
+        [DBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC001" :username :powerplaycode :self.matchCode];
+    
+    
+    
+    [DBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC002" :username :powerplaycode :self.matchCode];
     
     [DBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
     
@@ -338,7 +362,9 @@ NSString *matchover;
         NSURLRequest *request = [NSURLRequest requestWithURL:url];
         NSURLResponse *response;
         NSError *error;
-        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        if (responseData != nil) {
         
         
         NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
@@ -372,6 +398,7 @@ NSString *matchover;
         //
         //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
         //            }
+        }
         [delegate hideLoading];
         //});
         

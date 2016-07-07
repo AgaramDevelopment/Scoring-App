@@ -15,27 +15,28 @@
 
 @property(strong,nonatomic)NSMutableArray *BattingSummaryForScoreBoard;
 @property(strong,nonatomic)NSMutableArray *BowlingSummaryForScoreBoard;
+@property(strong,nonatomic)NSMutableArray *MatchRegistrationForScoreBoardArray;
 //
-//@property(strong,nonatomic)NSString *MATCHCODE;
-//@property(strong,nonatomic)NSString *MATCHNAME;
-//@property(strong,nonatomic)NSString *MATCHDATE;
-//@property(strong,nonatomic)NSString *MATCHOVERS;
-//@property(strong,nonatomic)NSString *UMPIRE1CODE;
-//@property(strong,nonatomic)NSString *UMPIRE1NAME;
-//@property(strong,nonatomic)NSString *UMPIRE2CODE;
-//@property(strong,nonatomic)NSString *UMPIRE2NAME;
-//@property(strong,nonatomic)NSString *MATCHREFEREECODE;
-//@property(strong,nonatomic)NSString *MATCHREFEREENAME;
-//@property(strong,nonatomic)NSString *TOSSWONTEAMCODE;
-//@property(strong,nonatomic)NSString *TOSSWONTEAMNAME;
-//@property(strong,nonatomic)NSString *ELECTEDTO;
-//@property(strong,nonatomic)NSString *ELECTEDTODESCRIPTION;
-//@property(strong,nonatomic)NSString *BATTINGTEAMCODE;
-//@property(strong,nonatomic)NSString *BATTINGTEAMNAME;
-//@property(strong,nonatomic)NSString *BATTINGTEAMLOGO;
-//@property(strong,nonatomic)NSString *BOWLINGTEAMCODE;
-//@property(strong,nonatomic)NSString *BOWLINGTEAMNAME;
-//@property(strong,nonatomic)NSString *BOWLINGTEAMLOGO;
+@property(strong,nonatomic)NSString *CURRENTMATCHCODE;
+@property(strong,nonatomic)NSString *MATCHNAME;
+@property(strong,nonatomic)NSString *MATCHDATE;
+@property(strong,nonatomic)NSString *CURRENTMATCHOVERS;
+@property(strong,nonatomic)NSString *UMPIRE1CODE;
+@property(strong,nonatomic)NSString *UMPIRE1NAME;
+@property(strong,nonatomic)NSString *UMPIRE2CODE;
+@property(strong,nonatomic)NSString *UMPIRE2NAME;
+@property(strong,nonatomic)NSString *MATCHREFEREECODE;
+@property(strong,nonatomic)NSString *MATCHREFEREENAME;
+@property(strong,nonatomic)NSString *TOSSWONTEAMCODE;
+@property(strong,nonatomic)NSString *TOSSWONTEAMNAME;
+@property(strong,nonatomic)NSString *ELECTEDTO;
+@property(strong,nonatomic)NSString *ELECTEDTODESCRIPTION;
+@property(strong,nonatomic)NSString *CURRENTBATTINGTEAMCODE;
+@property(strong,nonatomic)NSString *BATTINGTEAMNAME;
+@property(strong,nonatomic)NSString *BATTINGTEAMLOGO;
+@property(strong,nonatomic)NSString *CURRENTBOWLINGTEAMCODE;
+@property(strong,nonatomic)NSString *BOWLINGTEAMNAME;
+@property(strong,nonatomic)NSString *BOWLINGTEAMLOGO;
 //
 //
 //
