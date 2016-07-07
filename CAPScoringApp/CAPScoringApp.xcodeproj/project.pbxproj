@@ -83,7 +83,6 @@
 		187625231D1544CD009374F8 /* MatchOverandBallDetailsForScoreBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1876251A1D1544CD009374F8 /* MatchOverandBallDetailsForScoreBoard.m */; };
 		187625241D1544CD009374F8 /* MatchRegistrationDetailsForScoreBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1876251C1D1544CD009374F8 /* MatchRegistrationDetailsForScoreBoard.m */; };
 		187625291D154548009374F8 /* EditModeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187625281D154548009374F8 /* EditModeCell.m */; };
-		187708781D2CD168000CF52F /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 187708771D2CD168000CF52F /* TNCA_DATABASE.sqlite */; };
 		1877776D1D2232FA002F31E5 /* Batsmancell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187777661D2232FA002F31E5 /* Batsmancell.m */; };
 		1877776F1D2232FA002F31E5 /* getimageRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1877776A1D2232FA002F31E5 /* getimageRecord.m */; };
 		187777701D2232FA002F31E5 /* umpiretablecell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1877776C1D2232FA002F31E5 /* umpiretablecell.m */; };
@@ -103,6 +102,7 @@
 		1883DFEC1D27C43E00854814 /* TossTeamDetailRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883DFEB1D27C43E00854814 /* TossTeamDetailRecord.m */; };
 		1883E4901D2A3C85000A279C /* OverBallCountRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883E48F1D2A3C85000A279C /* OverBallCountRecord.m */; };
 		1886718A1CFFF77E004DEDA0 /* AggressiveShotTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */; };
+		18A4F0891D2E4EF90019975E /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 18A4F0881D2E4EF90019975E /* TNCA_DATABASE.sqlite */; };
 		18AB07CF1D2A75C100AEEB1B /* EndSessionTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A5A1D26344400E02DAE /* EndSessionTVC.m */; };
 		18AB07D01D2A75C100AEEB1B /* EndSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2710671D25B9A40011C7B0 /* EndSession.m */; };
 		18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A93A5B1D26344400E02DAE /* EndSessionTVC.xib */; };
@@ -401,7 +401,6 @@
 		1876251C1D1544CD009374F8 /* MatchRegistrationDetailsForScoreBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchRegistrationDetailsForScoreBoard.m; sourceTree = "<group>"; };
 		187625271D154548009374F8 /* EditModeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditModeCell.h; path = SubClass/EditModeCell/EditModeCell.h; sourceTree = "<group>"; };
 		187625281D154548009374F8 /* EditModeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditModeCell.m; path = SubClass/EditModeCell/EditModeCell.m; sourceTree = "<group>"; };
-		187708771D2CD168000CF52F /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		187777651D2232FA002F31E5 /* Batsmancell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Batsmancell.h; sourceTree = "<group>"; };
 		187777661D2232FA002F31E5 /* Batsmancell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Batsmancell.m; sourceTree = "<group>"; };
 		187777691D2232FA002F31E5 /* getimageRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = getimageRecord.h; sourceTree = "<group>"; };
@@ -443,6 +442,7 @@
 		1883E48F1D2A3C85000A279C /* OverBallCountRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverBallCountRecord.m; sourceTree = "<group>"; };
 		188671881CFFF77E004DEDA0 /* AggressiveShotTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AggressiveShotTypeCell.h; sourceTree = "<group>"; };
 		188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggressiveShotTypeCell.m; sourceTree = "<group>"; };
+		18A4F0881D2E4EF90019975E /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = "../../../../5july2016/Empty Database/TNCA_DATABASE.sqlite"; sourceTree = "<group>"; };
 		243F8E3D1D2236CF00333AD8 /* AppealBatsmenRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppealBatsmenRecord.m; path = Resource/AppealBatsmenRecord/AppealBatsmenRecord.m; sourceTree = "<group>"; };
 		243F8E3E1D2236CF00333AD8 /* AppealBatsmenRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppealBatsmenRecord.h; path = Resource/AppealBatsmenRecord/AppealBatsmenRecord.h; sourceTree = "<group>"; };
 		243F8E411D2237D600333AD8 /* PowerPlayGridVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PowerPlayGridVC.xib; path = SubClass/PowerplayGridVC/PowerPlayGridVC.xib; sourceTree = "<group>"; };
@@ -1146,6 +1146,7 @@
 		CE0017F21CF42FA500668D8B = {
 			isa = PBXGroup;
 			children = (
+				18A4F0881D2E4EF90019975E /* TNCA_DATABASE.sqlite */,
 				CE0017FD1CF42FA500668D8B /* CAPScoringApp */,
 				CE0018171CF42FA500668D8B /* CAPScoringAppTests */,
 				CE0018221CF42FA500668D8B /* CAPScoringAppUITests */,

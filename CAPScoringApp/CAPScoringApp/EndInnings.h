@@ -17,6 +17,10 @@
 
 
 @property (strong,nonatomic)NSMutableArray *fetchEndInningsArray;
+@property (strong,nonatomic)NSMutableArray *GetOScoreBoardDetails;
+@property (strong,nonatomic)NSMutableArray  *GetWicketSDetails;
+@property (strong,nonatomic)NSMutableArray *GetInningsSummaryDetails;
+@property (strong,nonatomic)NSMutableArray *GetBowlingDetailsForAssignDetails;
 
 @property(strong,nonatomic)NSString *COMPETITIONCODE;
 @property(strong,nonatomic)NSString *MATCHCODE;
