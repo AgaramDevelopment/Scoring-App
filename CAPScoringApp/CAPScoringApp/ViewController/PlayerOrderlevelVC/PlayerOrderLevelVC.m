@@ -300,74 +300,74 @@
         SelectPlayerRecord *playerorderRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:i];
         [DBManager updatePlayerorder:self.matchCode :self.TeamCode PlayerCode:playerorderRecord.playerCode PlayerOrder:playerorderRecord.playerOrder];
         
-        if(self.checkInternetConnection){
-           
-            
-            _matchCode = (self.matchCode == nil) ?@"NULL":_matchCode;
-            _TeamCode = (_TeamCode == nil) ?@"NULL":_TeamCode;
-            NSString*PlayerCode = playerorderRecord.playerCode == nil ?@"NULL":playerorderRecord.playerCode;
-             NSString*PlayerOrder = playerorderRecord.playerOrder == nil ?@"NULL":playerorderRecord.playerOrder;
-            
-            AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-            
-            //Show indicator
-            [delegate showLoading];
-            
-                
-                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHTEAMPLAYERORDER/%@/%@/%@/%@",[Utitliy getIPPORT],_matchCode,_TeamCode,PlayerCode,PlayerOrder];
-                NSLog(@"-%@",baseURL);
-                
-                
-                NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                
-                NSURLRequest *request = [NSURLRequest requestWithURL:url];
-                NSURLResponse *response;
-                NSError *error;
-                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-                
-                if(responseData !=nil)
-                {
-                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-                
-                if(rootArray !=nil && rootArray.count>0){
-                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                    NSString *success = [valueDict valueForKey:@"DataItem"];
-                    if([success isEqual:@"Success"]){
-                        
-                    }
-                }else{
-                    
-                }
-                }
-                //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
-                //            NSLog(@"%@",errorCode);
-                //
-                //
-                //            if([errorCode boolValue] == YES)
-                //            {
-                //
-                //                BOOL isUserLogin = YES;
-                //
-                //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
-                //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
-                //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
-                //                [[NSUserDefaults standardUserDefaults] synchronize];
-                //
-                //                [self openContentView];
-                //
-                //            }else{
-                //
-                //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
-                //            }
-                [delegate hideLoading];
-        
-            
-            //[delegate hideLoading];
-        }
-else
-{
+//        if(self.checkInternetConnection){
+//           
+//            
+//            _matchCode = (self.matchCode == nil) ?@"NULL":_matchCode;
+//            _TeamCode = (_TeamCode == nil) ?@"NULL":_TeamCode;
+//            NSString*PlayerCode = playerorderRecord.playerCode == nil ?@"NULL":playerorderRecord.playerCode;
+//             NSString*PlayerOrder = playerorderRecord.playerOrder == nil ?@"NULL":playerorderRecord.playerOrder;
+//            
+//            AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//            
+//            //Show indicator
+//            [delegate showLoading];
+//            
+//                
+//                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHTEAMPLAYERORDER/%@/%@/%@/%@",[Utitliy getIPPORT],_matchCode,_TeamCode,PlayerCode,PlayerOrder];
+//                NSLog(@"-%@",baseURL);
+//                
+//                
+//                NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//                
+//                NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//                NSURLResponse *response;
+//                NSError *error;
+//                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//                
+//                if(responseData !=nil)
+//                {
+//                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//                
+//                if(rootArray !=nil && rootArray.count>0){
+//                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                    NSString *success = [valueDict valueForKey:@"DataItem"];
+//                    if([success isEqual:@"Success"]){
+//                        
+//                    }
+//                }else{
+//                    
+//                }
+//                }
+//                //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
+//                //            NSLog(@"%@",errorCode);
+//                //
+//                //
+//                //            if([errorCode boolValue] == YES)
+//                //            {
+//                //
+//                //                BOOL isUserLogin = YES;
+//                //
+//                //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+//                //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+//                //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+//                //                [[NSUserDefaults standardUserDefaults] synchronize];
+//                //
+//                //                [self openContentView];
+//                //
+//                //            }else{
+//                //
+//                //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+//                //            }
+//                [delegate hideLoading];
+//        
+//            
+//            //[delegate hideLoading];
+//        }
+//else
+//{
      [DBManager updateCapitainWicketkeeper:self.competitionCode :self.matchCode capitainAteam:objCapitainWicketKeeper.objTeamACapitain capitainBteam:objCapitainWicketKeeper.objTeamBCapitain wicketkeeperAteam:objCapitainWicketKeeper.objTeamAWicketKeeper wicketkeeperBteam:  objCapitainWicketKeeper.objTeamBWicketKeeper];
-}
+//}
     
        
         
@@ -564,10 +564,14 @@ else
     
     if(isSelectCaptainType==NO)
     {
+        
+        playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_Captain"];
+        
+        
         //playercell.IMg_captain.frame=CGRectMake(playercell.contentView.frame.size.width-130, 15,50, 50);
         //playercell.Btn_Captain.frame=CGRectMake(playercell.contentView.frame.size.width-130, 15,50, 50);
-        playercell.IMg_captain.image=[UIImage imageNamed:@"Img_Captain"];
-        [playercell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+        //playercell.IMg_captain.image=[UIImage imageNamed:@"Img_Captain"];
+        [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
                objSelectPlayerRecord.isSelectCapten=@"YES";
        
 
@@ -582,23 +586,25 @@ else
         }
     }
     else{
-        if(isSelectWKTKeeperType== NO)
+       if(isSelectWKTKeeperType== NO)
         {
             //objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
            
             if([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])
             {
-                //playercell.IMg_captain.frame=CGRectMake(playercell.contentView.frame.size.width-180, 15,50, 50);
-               // playercell.Btn_Captain.frame=CGRectMake(playercell.contentView.frame.size.width-190, 15,50, 50);
+                playercell.IMg_captain.image =[UIImage imageNamed:@"Img_Captain"];
+                 playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
+                [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+                [playercell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
             }
             else{
-               // playercell.IMg_captain.frame=CGRectMake(playercell.contentView.frame.size.width-180, 15,50, 50);
-                //playercell.Btn_Captain.frame=CGRectMake(playercell.contentView.frame.size.width-190, 15,50, 50);
+               playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
+                [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
             }
-            playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
+//            playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
              objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
             objSelectPlayerRecord.isSelectWKTKeeper=@"YES";
-            [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+            //[playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
             isSelectWKTKeeperType=YES;
             if([self.chooseTeam isEqualToString:@"SelectTeamA"])
             {
@@ -659,6 +665,13 @@ else
         {
             objCapitainWicketKeeper.objTeamBWicketKeeper=nil;
         }
+    }
+    else if ([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])
+    {
+        Cell.Img_wktkeeper.image=[UIImage imageNamed:@""];
+        [Cell.Img_wktkeeper setBackgroundColor:[UIColor clearColor]];
+        objSelectPlayerRecord.isSelectCapten=nil;
+        isSelectCaptainType = NO;
     }
 }
 
