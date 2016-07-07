@@ -915,7 +915,7 @@ EndInningsVC *save;
     
     
     
-    if([DBManagerEndInnings GetBowlerCodeForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO  :BOWLERCODE])
+    if([DBManagerEndInnings GetBowlerCodeForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BOWLINGTEAMCODE: INNINGSNO  :BOWLERCODE])
     {
         UPDATEFLAGBOWL = [NSNumber numberWithInt:1];
         
