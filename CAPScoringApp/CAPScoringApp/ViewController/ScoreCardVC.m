@@ -24,6 +24,7 @@
 @synthesize competitionCode;
 @synthesize matchCode;
 @synthesize inningsNo;
+@synthesize RunRate;
 FetchScorecard *fetchScorecard ;
 FetchSEPageLoadRecord *fetchSEpage;
 
@@ -46,7 +47,12 @@ int bowlerPostion = 0;
     fetchScorecard = [[FetchScorecard alloc]init];
     [fetchScorecard FetchScoreBoard:competitionCode :matchCode :inningsNo];
     
+    
+    
      fetchSEpage = [[FetchSEPageLoadRecord alloc]init];
+    [fetchSEpage fetchSEPageLoadDetails:competitionCode :matchCode];
+    
+
     
     //Set Table Cell Position
     batsmanHeaderPosition = 0;
@@ -59,11 +65,12 @@ int bowlerPostion = 0;
     _lbl_firstIngsTeamName.text = _BATTEAMSHORTNAME;
     _lbl_secIngsTeamName.text = _BOWLTEAMSHORTNAME;
     
-    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)_BATTEAMRUNS,(unsigned long)_BATTEAMWICKETS];
+    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)_BATTEAMRUNS,(unsigned long)fetchSEpage.BATTEAMWICKETS];
     
     _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld OVS" ,(unsigned long)_BATTEAMOVERS,(unsigned long)_BATTEAMOVRBALLS];
     
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEpage.BATTEAMRUNRATE floatValue], [_RUNSREQUIRED floatValue]];
+    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEpage.BATTEAMRUNRATE floatValue], [fetchSEpage.RUNSREQUIRED floatValue]];
+    
     _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", _SECONDINNINGSTOTAL,_SECONDINNINGSWICKET];
     _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",_SECONDINNINGSOVERS];
     
@@ -172,7 +179,7 @@ int bowlerPostion = 0;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return fetchScorecard.BowlingSummaryForScoreBoard.count+ fetchScorecard.BattingSummaryForScoreBoard.count+2;    //count number of row from counting array hear cataGorry is An Array
+    return fetchScorecard.BattingSummaryForScoreBoard.count+ fetchScorecard. BowlingSummaryForScoreBoard.count;    //count number of row from counting array hear cataGorry is An Array
 }
 
 

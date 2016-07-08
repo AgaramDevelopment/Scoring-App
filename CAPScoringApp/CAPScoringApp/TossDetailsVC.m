@@ -740,8 +740,6 @@
         
         [alert show];
         
-        [self startService:@"DONE"];
-        
     }
 }
 
@@ -755,7 +753,7 @@
     {
         [DBManagerChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : electedcode : StrikerCode : NonStrikerCode : selectBowlerCode :BowlingEnd];
         
-        
+        [self startService:@"DONE"];
         
         ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
         
@@ -837,7 +835,7 @@
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             
-            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/TOSSEVENTS/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], CompetitionCode,MATCHCODE,selectTeamcode,electedcode,StrikerCode,NonStrikerCode,BowlingEnd,OPERATIONTYPE];
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/TOSSEVENTS/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getSyncIPPORT], CompetitionCode,MATCHCODE,selectTeamcode,electedcode,StrikerCode,NonStrikerCode,BowlingEnd,OPERATIONTYPE];
             NSLog(@"-%@",baseURL);
             
             
@@ -846,8 +844,10 @@
             NSURLRequest *request = [NSURLRequest requestWithURL:url];
             NSURLResponse *response;
             NSError *error;
-            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
             
+            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            if(responseData != nil)
+            {
             
             NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
             
@@ -859,6 +859,7 @@
                 }
             }else{
                 
+            }
             }
             //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
             //            NSLog(@"%@",errorCode);

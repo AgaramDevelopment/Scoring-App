@@ -337,22 +337,28 @@ BOOL  getOverStatus;
     
     //batting team name
     NSMutableArray *battingTeamName = [DBManager getBattingTeamName:BATTINGTEAMCODE];
-    FetchSEPageLoadRecord *battingTeam = [battingTeamName objectAtIndex:0];
+    if(battingTeamName.count > 0)
+    {
+    FetchSEPageLoadRecord *battingTeam =[battingTeamName objectAtIndex:0];
     BATTEAMNAME = battingTeam.BATTEAMNAME;
     BATTEAMSHORTNAME = battingTeam.BATTEAMSHORTNAME;
-    
+    }
     
     //bowling team name
     NSMutableArray *bowlingTeamName = [DBManager getBowlingTeamName:BOWLINGTEAMCODE];
-    FetchSEPageLoadRecord *bowlingTeam =  [bowlingTeamName objectAtIndex:0];
-    BOWLTEAMNAME = bowlingTeam.BOWLTEAMNAME;
-    BOWLTEAMSHORTNAME = bowlingTeam.BOWLTEAMSHORTNAME;
-    
+    if(bowlingTeamName.count > 0)
+    {
+      FetchSEPageLoadRecord *bowlingTeam =  [bowlingTeamName objectAtIndex:0];
+      BOWLTEAMNAME = bowlingTeam.BOWLTEAMNAME;
+      BOWLTEAMSHORTNAME = bowlingTeam.BOWLTEAMSHORTNAME;
+    }
     
     //total runs and total overs
     NSMutableArray *totalOvers = [DBManager getTargetRunsOvers:COMPETITIONCODE :MATCHCODE];
     
-    FetchSEPageLoadRecord *totRun = (FetchSEPageLoadRecord*)[totalOvers objectAtIndex:0];
+    if(totalOvers.count >0)
+    {
+    FetchSEPageLoadRecord *totRun =(FetchSEPageLoadRecord*)[totalOvers objectAtIndex:0];
     
     if (T_TARGETRUNS == nil) {
         
@@ -365,6 +371,7 @@ BOOL  getOverStatus;
          MATCHOVERS  = T_TARGETRUNS.intValue > 0 ? [T_TARGETOVERS stringValue] : MATCHOVERS;
     }
     
+    MATCHOVERS  = T_TARGETRUNS.intValue > 0 ? [T_TARGETOVERS stringValue] : MATCHOVERS;
     
    
     
@@ -696,9 +703,11 @@ BOOL  getOverStatus;
     NSString *lastvalueData = LASTBALLCODE;
     
     //TO GET LAST BALL ATWOROTW AND BOWLING END DETAILS.
-    NSMutableArray *atwRtw = [DBManager getT_BOWLINGEND:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO ISOVERCOMPLETE:isOverComplete LASTBALLCODE:lastvalueData];
+    NSMutableArray *atwRtw = [DBManager getT_BOWLINGEND:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO ISOVERCOMPLETE:isOverComplete LASTBALLCODE:lastvalueData:[NSString stringWithFormat:@"%d",BATTEAMOVERS]];
     if([atwRtw count]>0){
+        
         T_BOWLINGEND =[atwRtw objectAtIndex:0];
+        
         //ISOVERCOMPLETE =[atwRtw objectAtIndex:1];
         
     }
@@ -760,9 +769,6 @@ BOOL  getOverStatus;
     }
     
     [DBManager getScoreingDetails:BATTEAMSHORTNAME BOWLTEAMSHORTNAME:BOWLTEAMSHORTNAME BATTEAMNAME:BATTEAMNAME BOWLTEAMNAME:BOWLTEAMNAME BATTEAMLOGO:BATTEAMLOGO BOWLTEAMLOGO:BOWLTEAMLOGO BATTEAMRUNS:BATTEAMRUNSDATA BATTEAMWICKETS:BATTEAMWICKETSDATA ISOVERCOMPLETE:ISOVERCOMPLETEDATA BATTEAMOVERS:BATTEAMOVERSDATA BATTEAMOVRBALLS:BATTEAMOVRBALLSDATA BATTEAMRUNRATE:BATTEAMRUNRATE  TARGETRUNS:TARGETRUNS REQRUNRATE:REQRUNRATE RUNSREQUIRED:RUNSREQUIRED REMBALLS:REMBALLS ISPREVIOUSLEGALBALL:ISPREVIOUSLEGALBALLDATA T_ATWOROTW:T_ATWOROTW T_BOWLINGEND:T_BOWLINGEND ISFREEHIT:ISFREEHIT];
-    
-    
-    
     
     NSNumber *balls = [DBManager getBallEventCount:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO];
     if(balls > 0)
@@ -1075,6 +1081,6 @@ BOOL  getOverStatus;
     
     
 }
+}
+    @end
 
-
-@end

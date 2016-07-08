@@ -14,6 +14,42 @@
 #import "OversorderRecord.h"
 #import "ScorEnginVC.h"
 
+// Border Brushes
+#define runBrushBDR [UIColor colorWithRed:(82.0/255.0) green:(131.0/255.0) blue:(174.0/255.0) alpha:1.0]
+#define extrasBrushBDR [UIColor colorWithRed:(255.0/255.0) green:(77.0/255.0) blue:(166.0/255.0) alpha:1.0]
+#define fourBrushBDR [UIColor colorWithRed:(1.0/255.0) green:(126.0/255.0) blue:(254.0/255.0) alpha:1.0]
+#define sixBrushBDR [UIColor colorWithRed:(148.0/255.0) green:(52.0/255.0) blue:(227.0/255.0) alpha:1.0]
+
+#define wicketBrushBDR [UIColor colorWithRed:(251.0/255.0) green:(53.0/255.0) blue:(54.0/255.0) alpha:1.0]
+#define markedForEditBrushBDR [UIColor colorWithRed:(237.0/255.0) green:(192.0/255.0) blue:(60.0/255.0) alpha:1.0]
+
+
+// Background Brushes
+
+#define runBrushBG [UIColor clearColor]
+#define extrasBrushBG [UIColor colorWithRed:(255.0/255.0) green:(77.0/255.0) blue:(166.0/255.0) alpha:1.0]
+#define fourBrushBG [UIColor colorWithRed:(1.0/255.0) green:(126.0/255.0) blue:(254.0/255.0) alpha:1.0]
+
+#define fourBrushBG [UIColor colorWithRed:(1.0/255.0) green:(126.0/255.0) blue:(254.0/255.0) alpha:1.0]
+
+#define sixBrushBG [UIColor colorWithRed:(148.0/255.0) green:(52.0/255.0) blue:(227.0/255.0) alpha:1.0]
+
+#define wicketBrushBG [UIColor colorWithRed:(251.0/255.0) green:(53.0/255.0) blue:(54.0/255.0) alpha:1.0]
+#define brushFGNormal [UIColor colorWithRed:(82.0/255.0) green:(131.0/255.0) blue:(174.0/255.0) alpha:1.0]
+
+#define brushFGSplEvents [UIColor colorWithRed:(255.0/255.0) green:(255.0/255.0) blue:(255.0/255.0) alpha:1.0]
+
+
+//UIColor *runBrushBG = [UIColor clearColor];
+//UIColor *extrasBrushBG = [self colorWithHexString : @"#FF4DA6"];
+//UIColor *fourBrushBG = [self colorWithHexString : @"#017EFE"];
+//UIColor *sixBrushBG = [self colorWithHexString : @"#9434E3"];
+//UIColor *wicketBrushBG = [self colorWithHexString : @"#FB3536"];
+
+// Foreground Brushes
+//UIColor *brushFGNormal = [self colorWithHexString : @"#5283AE"];
+//UIColor *brushFGSplEvents = [UIColor whiteColor];
+
 
 @interface EditModeVC ()
 {
@@ -22,6 +58,11 @@
     NSMutableArray * OversorderArray;
     
     UIView * view_addedit;
+    UIButton * Editrotation;
+    UIButton * Cancelrotation;
+    UIButton * Rightrotation;
+    UIButton * leftrotation;
+    
     int  totalRun;
     NSMutableArray * objoverballCount;
     NSMutableArray * eachoverRun;
@@ -38,6 +79,7 @@
     UIButton *btn_Run;
     NSInteger ballCodeIndex;
     int indexCount ;
+    BOOL isEdit;
 }
 
 @end
@@ -45,22 +87,37 @@
 @implementation EditModeVC
 
 - (void)viewDidLoad {
-    indexCount = 0;
+    //indexCount = 0;
     [super viewDidLoad];
     [self customnavigationmethod];
-    inningsDetail =[[NSMutableArray alloc]init];
-    OversorderArray =[[NSMutableArray alloc]init];
+    isEdit=NO;
     //CGFloat totalwidth =1200;
     
     [self.view layoutIfNeeded];
     
+  
     self.Btn_innings1team1.frame= CGRectMake(self.Btn_innings1team1.frame.origin.x, self.Btn_innings1team1.frame.origin.y, 400, self.Btn_innings1team1.frame.size.height);
-    
     
     //self.inningsviewWidth.constant =totalwidth;
     //self.btn_innings1Widthposition.constant=400;
     //self.btn_innings2xposition.constant     =self.btn_innings1Widthposition.constant+10;
     // self.inningButtonView.constant = totalwidth;
+//    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+//    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+//    
+//    if ([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] ||
+//        [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) {
+//        // self.btn_third_inns_id.hidden = YES;
+//        // self.btn_fourth_inns_id.hidden = YES;
+//    }
+    // Do any additional setup after loading the view.
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+     indexCount = 0;
+    inningsDetail =[[NSMutableArray alloc]init];
+    OversorderArray =[[NSMutableArray alloc]init];
+    
     OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
     inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
     
@@ -69,7 +126,11 @@
         // self.btn_third_inns_id.hidden = YES;
         // self.btn_fourth_inns_id.hidden = YES;
     }
-    // Do any additional setup after loading the view.
+    if(isEdit==YES)
+    {
+        [self.tbl_innnings reloadData];
+    }
+  
 }
 -(void)customnavigationmethod
 {
@@ -159,7 +220,7 @@
         {
             
             
-            UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake((j*40.0)+5,30.0, 30.0, 15.0)];
+            UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake((j*40.0)+15,50.0, 30.0, 15.0)];
             [nameLabel setBackgroundColor:[UIColor clearColor]]; // transparent label background
             [nameLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
             nameLabel.textAlignment=NSTextAlignmentCenter;
@@ -169,21 +230,6 @@
             
             nameLabel .text=[NSString stringWithFormat:@"%@.%@",[@(currentRow) stringValue],[@(j+1) stringValue]];
             nameLabel.textColor=[UIColor whiteColor];
-            
-            //nameLabel .text=@"";
-            //UIButton *btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((j*40.0)+25,30.0,30.0, 30.0)];
-            
-            //[btn_Run setBackgroundColor:[UIColor clearColor]];
-            /// [btn_Run setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            // [btn_Run setTitle:@"1" forState:UIControlStateNormal];
-            //btn_Run .layer. cornerRadius=15;
-            //btn_Run.layer.borderWidth=2;
-            // btn_Run.layer.borderColor= [UIColor redColor].CGColor;
-            //btn_Run.layer.masksToBounds=YES;
-            //[btn_Run addTarget:self action:@selector(didClickEditAction:) forControlEvents:UIControlEventTouchUpInside];
-            
-            //[cell.view_main addSubview:btn_Run];
-            
             
         }
         
@@ -203,7 +249,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return 90;
+    return 110;
     
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -233,7 +279,7 @@
         NSMutableDictionary * dicAddbowlerdetails=[[NSMutableDictionary alloc]init];
         int overThrow = [objoverThrow intValue];
         int runs      = [objRuns intValue]+overThrow;
-        int noBall    = [objnoball intValue];
+       unsigned int noBall  = [objnoball integerValue];
         int wide      = [objWidevalue intValue];
         int legalbyes = [objLegbyes intValue];
         int byes      = [objByesvalue intValue];
@@ -253,13 +299,16 @@
             [dicAddbowlerdetails setValue:runValue forKey:@"RUNS"];
         }
         
-        if (noBall != 0)//Ball ticker for no balls.
+        if (noBall!=0)//Ball ticker for no balls.
         {
-            if (noBall > 0)
+            int obj =noBall;
+            if (obj>0)
             {
-                noBall =noBall-1;
                 
-                int  noBall = noBall+runs;
+                
+                obj =obj--;
+                
+                int  noBall = obj+runs;
                 NSString* noballValues = [NSString stringWithFormat:@"%d",noBall];
                 [dicAddbowlerdetails removeObjectForKey:@"RUNS"];
                 [dicAddbowlerdetails setValue:noballValues forKey:@"RUNS"];
@@ -377,11 +426,13 @@
                 content = [dicAddbowlerdetails valueForKey:@"RUNS" ];
             else
             {
+                
                 runvalue=[dicAddbowlerdetails valueForKey:@"RUNS"];
                 
                 
                 NSString * extraValue =(![kvpItem isEqualToString:@"RUNS"])? [dicAddbowlerdetails valueForKey:kvpItem]:@"";
-                content =[runvalue stringByAppendingString:extraValue];
+                //content =[runvalue stringByAppendingString:extraValue];
+                content =[content stringByAppendingString: [[dicAddbowlerdetails objectForKey:kvpItem] stringByAppendingString:@""]];
             }   //kvpItem.Value + " ";
         }
         if(runvalue != @"")
@@ -404,15 +455,15 @@
 -(void)CreateBallTickerInstance:(NSString *)content :(BOOL ) isextra: (BOOL) isspecialevent :(NSString *)ballno :(EditModeCell *) cell: (int) currentindex;
 {
     
-    btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((currentindex*40.0)+5,2.0,33.0, 35.0)];
+    btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((currentindex*40.0)+15,5.0,35.0, 35.0)];
     // NSString *objeachRunsValue =[eachoverRun objectAtIndex:i];
     [btn_Run setBackgroundColor:[UIColor clearColor]];
     [btn_Run setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
     [btn_Run setTitle:[NSString stringWithFormat:content] forState:UIControlStateNormal];
     btn_Run.font=[UIFont fontWithName:@"Rajdhani-Bold" size:10];
-    [btn_Run sizeToFit];
-    btn_Run .layer. cornerRadius=11;
+    //[btn_Run sizeToFit];
+    btn_Run .layer. cornerRadius=17;
     btn_Run.layer.borderWidth=2;
     btn_Run.layer.borderColor= [UIColor redColor].CGColor;
     btn_Run.layer.masksToBounds=YES;
@@ -440,25 +491,27 @@
     
     if([content isEqualToString:@"4"])
     {
-        [btn_Run setBackgroundColor:[UIColor colorWithRed:(0.0/255.0f) green:(176.0/255.0f) blue:(191.0/255.0f) alpha:1.0f]];
-        btn_Run.layer.borderColor= [UIColor clearColor].CGColor;
+        [btn_Run setBackgroundColor: ((isspecialevent) ? fourBrushBDR : ((isextra) ? extrasBrushBG : runBrushBG))];
+        btn_Run.layer.borderColor= ((isspecialevent) ? fourBrushBDR : runBrushBDR).CGColor;
     }
     else if([content isEqualToString :@"6" ])
     {
-        [btn_Run setBackgroundColor: [UIColor colorWithRed:(0.0/255.0f) green:(161.0/255.0f) blue:(90.0/255.0f) alpha:1.0f]];
+        [btn_Run setBackgroundColor: ((isspecialevent) ? sixBrushBDR : ((isextra) ? extrasBrushBG : runBrushBG))];
         
-        btn_Run.layer.borderColor= [UIColor clearColor].CGColor;
+        btn_Run.layer.borderColor= ((isspecialevent) ? sixBrushBDR : runBrushBDR).CGColor;
     }
     
     else if([content isEqualToString :@"W"])
     {
-        [btn_Run setBackgroundColor:[UIColor colorWithRed:(196.0/255.0f) green:(40.0/255.0f) blue:(38.0/255.0f) alpha:1.0f]];
-        btn_Run.layer.borderColor= [UIColor clearColor].CGColor;
+        [btn_Run setBackgroundColor:wicketBrushBG.CGColor];
+        btn_Run.layer.borderColor= wicketBrushBDR.CGColor;
         
     }
     else
     {
-        btn_Run.layer.borderColor= [UIColor colorWithRed:(231.0/255.0f) green:(211.0/255.0f) blue:(76.0/255.0f) alpha:1.0f].CGColor;
+        btn_Run.layer.borderColor=  ((isextra) ? extrasBrushBDR : runBrushBDR).CGColor;
+        btn_Run.layer.backgroundColor =((isextra) ? extrasBrushBG : runBrushBG).CGColor;
+
     }
     
     
@@ -474,6 +527,10 @@
     if(view_addedit != nil)
     {
         [view_addedit removeFromSuperview];
+        [leftrotation removeFromSuperview];
+        [Rightrotation removeFromSuperview];
+        [Cancelrotation removeFromSuperview];
+        [Editrotation removeFromSuperview];
     }
     UIButton * btn_add = (UIButton *)sender;
     
@@ -484,10 +541,10 @@
     
     EditModeCell *cell = (EditModeCell*)[sender superview];
     NSIndexPath* indexPath = [self.tbl_innnings indexPathForCell:cell];
-    view_addedit=[[UIView alloc]initWithFrame:CGRectMake(btn_add.frame.origin.x-20,btn_add.frame.origin.y+30,130, 50)];
+    view_addedit=[[UIView alloc]initWithFrame:CGRectMake(btn_add.frame.origin.x-20,btn_add.frame.origin.y+40,130, 50)];
     [view_addedit setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
     [cell addSubview:view_addedit];
-    UIButton * leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(view_addedit.frame.origin.x, view_addedit.frame.origin.y, 25, 25)];
+    leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(view_addedit.frame.origin.x, view_addedit.frame.origin.y+3, 25, 25)];
     [leftrotation setImage:[UIImage imageNamed:@"LeftRotation"] forState:UIControlStateNormal];
     [cell addSubview:leftrotation];
     [leftrotation addTarget:self action:@selector(didClickLeftRotation:) forControlEvents:UIControlEventTouchUpInside];
@@ -498,18 +555,18 @@
     
     
     
-    UIButton * Editrotation=[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.origin.x+leftrotation.frame.size.width+8, leftrotation.frame.origin.y, 25, 25)];
+    Editrotation=[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.origin.x+leftrotation.frame.size.width+8, leftrotation.frame.origin.y, 25, 25)];
     [Editrotation setImage:[UIImage imageNamed:@"ArchiveEdit"] forState:UIControlStateNormal];
     [cell addSubview:Editrotation];
     
     [Editrotation addTarget:self action:@selector(didClickEditrotation:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton * Cancelrotation=[[UIButton alloc]initWithFrame:CGRectMake(Editrotation.frame.origin.x+Editrotation.frame.size.width+8, Editrotation.frame.origin.y, 25, 25)];
+     Cancelrotation=[[UIButton alloc]initWithFrame:CGRectMake(Editrotation.frame.origin.x+Editrotation.frame.size.width+8, Editrotation.frame.origin.y, 25, 25)];
     [Cancelrotation setImage:[UIImage imageNamed:@"ArchiveCancel"] forState:UIControlStateNormal];
     [cell addSubview:Cancelrotation];
     [Cancelrotation addTarget:self action:@selector(didClickCancelrotation:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIButton * Rightrotation=[[UIButton alloc]initWithFrame:CGRectMake(Cancelrotation.frame.origin.x+Cancelrotation.frame.size.width+8, Cancelrotation.frame.origin.y, 25, 25)];
+     Rightrotation=[[UIButton alloc]initWithFrame:CGRectMake(Cancelrotation.frame.origin.x+Cancelrotation.frame.size.width+8, Cancelrotation.frame.origin.y, 25, 25)];
     [Rightrotation setImage:[UIImage imageNamed:@"RightRotation"] forState:UIControlStateNormal];
     [cell addSubview:Rightrotation];
     [Rightrotation addTarget:self action:@selector(didClickRightrotation:) forControlEvents:UIControlEventTouchUpInside];
@@ -518,16 +575,16 @@
 
 -(IBAction)didClickLeftRotation:(id)sender
 {
-    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
-    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
-    scoreEngine.competitionCode=self.Comptitioncode;
-    scoreEngine.matchCode      = self.matchCode;
-    [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"BEFORE"];
-    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+//    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
+//    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+//    scoreEngine.competitionCode=self.Comptitioncode;
+//    scoreEngine.matchCode      = self.matchCode;
+//    [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"BEFORE"];
+//    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+//    
+//    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+//    [self.tbl_innnings reloadData];
     
-    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
-    [self.tbl_innnings reloadData];
-          
 }
 
 -(IBAction)didClickEditrotation:(id)sender
@@ -537,6 +594,7 @@
     //    int overIndex = ((senderButton.tag-30000)%10000)/10;
     //    int ballIndex = ((senderButton.tag-(overIndex*10))-30000)/10000;
     //
+    isEdit=YES;
     InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
     ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
     
@@ -553,14 +611,14 @@
 }
 -(IBAction)didClickRightrotation:(id)sender
 {
-    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
-    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
-    scoreEngine.competitionCode=self.Comptitioncode;
-    scoreEngine.matchCode      = self.matchCode;
-    [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"AFTER"];
-    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
-    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
-    [self.tbl_innnings reloadData];
+//    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
+//    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+//    scoreEngine.competitionCode=self.Comptitioncode;
+//    scoreEngine.matchCode      = self.matchCode;
+//    [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"AFTER"];
+//    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+//    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+//    [self.tbl_innnings reloadData];
 }
 
 -(IBAction)didClickInnings1team1:(id)sender
@@ -597,6 +655,37 @@
 {
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    //-----------------------------------------
+    // Convert hex string to an integer
+    //-----------------------------------------
+    unsigned int hexint = 0;
+    
+    // Create scanner
+    NSScanner *scanner = [NSScanner scannerWithString:hex];
+    
+    // Tell scanner to skip the # character
+    [scanner setCharactersToBeSkipped:[NSCharacterSet
+                                       characterSetWithCharactersInString:@"#"]];
+    [scanner scanHexInt:&hexint];
+    
+    //-----------------------------------------
+    // Create color object, specifying alpha
+    //-----------------------------------------
+    UIColor *color =
+    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
+                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
+                     blue:((CGFloat) (hexint & 0xFF))/255
+                    alpha:1.0f];
+    
+    return color;
+}
+
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

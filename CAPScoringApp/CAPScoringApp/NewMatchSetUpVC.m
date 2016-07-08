@@ -44,11 +44,11 @@ NSRegularExpression *isMatchedByRegex;
     //fetch data from fixture screen and display in controls
     
     
-
+    
     
     [self customnavigationmethod];
     
-   [self colorChange];
+    [self colorChange];
     
     _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
     _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
@@ -243,9 +243,9 @@ NSRegularExpression *isMatchedByRegex;
     selectvc.SelectTeamCode=selectteamcode;
     selectvc.matchCode = matchCode;
     //selectvc.teamAcode=teamAcode;
-   // selectvc.teamBcode=teamBcode;
+    // selectvc.teamBcode=teamBcode;
     
-
+    
     
     selectvc.teamA = self.teamA;
     selectvc.teamB = self.teamB;
@@ -264,7 +264,7 @@ NSRegularExpression *isMatchedByRegex;
     selectvc.isEdit = self.isEdit;
     
     selectvc.playingXIPlayers = self.playingXIPlayers;
-
+    
     
     
     [self.navigationController pushViewController:selectvc animated:YES];
@@ -281,7 +281,7 @@ NSRegularExpression *isMatchedByRegex;
     
     
     NSUInteger teamCountA = [fixture.count integerValue];
-
+    
     
     
     if(teamCountA >= 7){
@@ -298,14 +298,14 @@ NSRegularExpression *isMatchedByRegex;
     NSLog(@"COUNT = %@",_countTeam);
     
     [self RedirectSelectPlayerVC:@"SelectTeamA" :teamAcode];
-//    SelectPlayersVC * selectvc = [[SelectPlayersVC alloc]init];
-//    
-//    selectvc =  (SelectPlayersVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
-//    
-//    selectvc.SelectTeamCode=teamAcode;
-//    selectvc.matchCode = matchCode;
-//    
-//    [self.navigationController pushViewController:selectvc animated:YES];
+    //    SelectPlayersVC * selectvc = [[SelectPlayersVC alloc]init];
+    //
+    //    selectvc =  (SelectPlayersVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"SelectPlayers"];
+    //
+    //    selectvc.SelectTeamCode=teamAcode;
+    //    selectvc.matchCode = matchCode;
+    //
+    //    [self.navigationController pushViewController:selectvc animated:YES];
     
     
     
@@ -331,34 +331,26 @@ NSRegularExpression *isMatchedByRegex;
     return [validation isEqualToString:filtered];
     
     
- 
+    
     
     
 }
 
 - (IBAction)btn_proceed:(id)sender {
-   
+    //    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    //
+    //    //Show indicator
+    //    [delegate showLoading];
     if (![self textValidation:self.txt_overs.text]) {
         
-
+        
         [self showDialog:@"Please Enter Valid Overs" andTitle:@"Error"];
         
     }else{
-        
-
-        
         [self overValidation];
-        [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
-        
-        [self startService:@"MATCHUPDATEOVER"];
         
     }
-   
-    
-    
-  
-  
-    
+    //    [delegate hideLoading];
 }
 
 - (IBAction)btn_back:(id)sender {
@@ -391,23 +383,21 @@ NSRegularExpression *isMatchedByRegex;
 //Validation for over update validation
 -(BOOL) overValidation{
     
-    
-    
     _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
     _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
     
     FixturesRecord *fixture = (FixturesRecord*) [_countTeam objectAtIndex:0];
-        FixturesRecord *fixtureB = (FixturesRecord*) [_countTeamB objectAtIndex:0];
+    FixturesRecord *fixtureB = (FixturesRecord*) [_countTeamB objectAtIndex:0];
     
     NSString *oversTxt = self.txt_overs.text;
-  
+    
     NSInteger twentyText = [oversTxt intValue];
     NSInteger OdiText = [oversTxt intValue];
     
     NSUInteger teamCountA = [fixture.count integerValue];
     NSUInteger teamCountB = [fixtureB.count integerValue];
-
-  
+    
+    
     
     if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){
         if(twentyText > 20){
@@ -417,9 +407,8 @@ NSRegularExpression *isMatchedByRegex;
             [self showDialog:@"Please Enter Overs" andTitle:@"Error"];
         }
         
-        
-        
         else if (teamCountA >= 7 && teamCountB >= 7){
+            [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
             
             MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
             
@@ -429,10 +418,11 @@ NSRegularExpression *isMatchedByRegex;
             matchvc.competitionCode = competitionCode;
             
             [self.navigationController pushViewController:matchvc animated:YES];
+            [self startService:@"MATCHUPDATEOVER"];
         }else{
             
             [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Error"];
-
+            
         }
         return NO;
         
@@ -445,7 +435,9 @@ NSRegularExpression *isMatchedByRegex;
             [self showDialog:@"Please Enter Evers" andTitle:@"Error"];
         }
         
-        else {
+        else if (teamCountA >= 7 && teamCountB >= 7){
+            [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
+            
             MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
             
             matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
@@ -454,61 +446,68 @@ NSRegularExpression *isMatchedByRegex;
             matchvc.competitionCode = competitionCode;
             
             [self.navigationController pushViewController:matchvc animated:YES];
+            [self startService:@"MATCHUPDATEOVER"];
+        }else{
+            
+            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Error"];
             
         }
         return NO;
         
     }else if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){
-       
         
+        
+        if (teamCountA >= 7 && teamCountB >= 7){
+            [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
+            
             MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
             
             matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
             
             matchvc.Matchcode = matchCode;
             matchvc.competitionCode = competitionCode;
-            matchvc.matchTypeCode = self.matchTypeCode;
-            [self.navigationController pushViewController:matchvc animated:YES];
             
+            [self.navigationController pushViewController:matchvc animated:YES];
+            [self startService:@"MATCHUPDATEOVER"];
+        }else{
+            
+            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Error"];
+            
+        }
+        
         return NO;
         
     }
-  return YES;
-    
+    return YES;
     
 }
 
 -(void)colorChange{
     
     
-    
     _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
-     _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
+    _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
     
     
     FixturesRecord *fixture = (FixturesRecord*) [_countTeam objectAtIndex:0];
-     FixturesRecord *fixtureB = (FixturesRecord*) [_countTeamB objectAtIndex:0];
-  
+    FixturesRecord *fixtureB = (FixturesRecord*) [_countTeamB objectAtIndex:0];
+    
     
     NSUInteger teamCountA = [fixture.count integerValue];
     NSUInteger teamCountB = [fixtureB.count integerValue];
-
+    
     if (teamCountA >= 7) {
         
         //grey color
         _view_teamA.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
-        
-        
         
     }else{
         
         //orange color
         _view_teamA.backgroundColor = [UIColor colorWithRed:(228/255.0f) green:(98/255.0f) blue:(58/255.0f) alpha:(1)];
         
-      
-        
     }
-        
+    
     if (teamCountB >= 7) {
         
         
@@ -517,7 +516,7 @@ NSRegularExpression *isMatchedByRegex;
     }else{
         
         //orange color
-
+        
         
         _view_teamB.backgroundColor = [UIColor colorWithRed:(228/255.0f) green:(98/255.0f) blue:(58/255.0f) alpha:(1)];
         
@@ -542,22 +541,24 @@ NSRegularExpression *isMatchedByRegex;
 
 
 -(void) startService:(NSString *)OPERATIONTYPE{
+    
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    //Show indicator
+    [delegate showLoading];
     if(self.checkInternetConnection){
-          NSString*OVER=self.txt_overs.text;
+        NSString*OVER=self.txt_overs.text;
         
         matchCode = matchCode == nil ?@"NULL":matchCode;
         competitionCode = competitionCode == nil ?@"NULL":competitionCode;
-        OVER= OVER == nil ?@"NULL":OVER;
+        OVER = OVER == nil ?@"NULL":OVER;
         
         
-        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         
-        //Show indicator
-        [delegate showLoading];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             
-            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHUPDATEOVER/%@/%@/%@",[Utitliy getIPPORT], competitionCode,matchCode,OVER];
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHUPDATEOVER/%@/%@/%@",[Utitliy getSyncIPPORT], competitionCode,matchCode,OVER];
             NSLog(@"-%@",baseURL);
             
             
@@ -568,42 +569,22 @@ NSRegularExpression *isMatchedByRegex;
             NSError *error;
             NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
             
-            
-            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-            
-            if(rootArray !=nil && rootArray.count>0){
-                NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                NSString *success = [valueDict valueForKey:@"DataItem"];
-                if([success isEqual:@"Success"]){
+            if(responseData != nil)
+            {
+                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+                
+                if(rootArray !=nil && rootArray.count>0){
+                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                    NSString *success = [valueDict valueForKey:@"DataItem"];
+                    if([success isEqual:@"Success"]){
+                        
+                    }
+                }else{
                     
                 }
-            }else{
-                
             }
-            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
-            //            NSLog(@"%@",errorCode);
-            //
-            //
-            //            if([errorCode boolValue] == YES)
-            //            {
-            //
-            //                BOOL isUserLogin = YES;
-            //
-            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
-            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
-            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
-            //                [[NSUserDefaults standardUserDefaults] synchronize];
-            //
-            //                [self openContentView];
-            //
-            //            }else{
-            //
-            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
-            //            }
-            [delegate hideLoading];
         });
-        
-        //[delegate hideLoading];
     }
+    [delegate hideLoading];
 }
 @end

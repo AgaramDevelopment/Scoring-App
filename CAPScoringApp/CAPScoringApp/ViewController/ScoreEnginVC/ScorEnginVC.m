@@ -1872,6 +1872,13 @@ EndInnings *endInnings;
         
         
         cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
+        
+        UIView *customColorView = [[UIView alloc] init];
+        customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                          green:161/255.0
+                                                           blue:79/255.0
+                                                          alpha:0.5];
+        cell.selectedBackgroundView = customColorView;
         return cell;
         
     } else if(tableView == tbl_bowlType){
@@ -2193,8 +2200,8 @@ EndInnings *endInnings;
             [self calculateRunsOnEndBall];
             [self EndBallMethod];
             
-           // [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
-           // self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+            [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
+            self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
             self.btn_StartOver.userInteractionEnabled=YES;
             //        self.btn_StartBall.userInteractionEnabled=NO;
             //        [self SaveBallEventREcordvalue];
@@ -7770,7 +7777,7 @@ EndInnings *endInnings;
     [appealEventDict setValue:commentText forKey:@"Commenttext"];
     
     
-    [self.View_Appeal setHidden:YES];
+    [self.view_table_select setHidden:YES];
 }
 
 
@@ -11413,12 +11420,17 @@ EndInnings *endInnings;
         scoreCardVC.BATTEAMWICKETS= fetchSEPageLoadRecord.BATTEAMWICKETS;
         scoreCardVC.BATTEAMOVERS= fetchSEPageLoadRecord.BATTEAMOVERS;
         scoreCardVC.BATTEAMOVRBALLS= fetchSEPageLoadRecord.BATTEAMOVRBALLS;
-        //  scoreCardVC.BATTEAMRUNRATE= fetchSEPageLoadRecord.BATTEAMRUNRATE;
+        //scoreCardVC.BATTEAMRUNRATE= fetchSEPageLoadRecord.BATTEAMRUNRATE;
         
+     // NSString *Runrate = [NSString stringWithFormat:@"RR %.02f",fetchSEPageLoadRecord.BATTEAMRUNRATE];
+     
+        
+        //scoreCardVC.RunRate = [fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue];
         
         scoreCardVC.BATTEAMRUNS= fetchSEPageLoadRecord.BATTEAMRUNS;
+        
         //    scoreCardVC.RUNSREQUIRED= fetchSEPageLoadRecord.RUNSREQUIRED;
-        scoreCardVC.RUNSREQUIRED= @"0.0";
+       // scoreCardVC.RUNSREQUIRED= @"0.0";
         
         
         scoreCardVC.competitionCode= self.competitionCode;
@@ -11613,18 +11625,18 @@ EndInnings *endInnings;
     
     
     
-    NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://url"]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURLSessionUploadTask *dataTask = [session uploadTaskWithRequest: request
-                                                             fromData: data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                                                                 NSLog(@"%@", json);
-                                                             }];
+//    NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
+//    
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://url"]];
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
+//    
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+//    NSURLSessionUploadTask *dataTask = [session uploadTaskWithRequest: request
+//                                                             fromData: data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//                                                                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//                                                                 NSLog(@"%@", json);
+//                                                             }];
     
 }
 - (IBAction)Exit_btn:(id)sender {
