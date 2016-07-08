@@ -19,6 +19,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tablView;
 - (IBAction)addbreak_btn:(id)sender;
 @property(nonatomic,strong)NSMutableArray*resultarray;
+//@property(nonatomic,strong)NSMutableArray*UpdateBreaksArray;
 @property (strong, nonatomic) IBOutlet BreakTableViewCell *GridBreakcell;
 
 

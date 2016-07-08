@@ -32,8 +32,8 @@
 @property (strong, nonatomic) IBOutlet UIDatePicker *date_picker;
 @property (strong, nonatomic) IBOutlet UIDatePicker *date_picker1;
 
-@property (strong, nonatomic) IBOutlet UIButton *back_btn;
-
+//@property (strong, nonatomic) IBOutlet UIButton *back_btn;
+@property(nonatomic,strong) id delegate;
 
 - (IBAction)hidepickerbtn:(id)sender;
 - (IBAction)back_btn:(id)sender;
@@ -42,5 +42,7 @@
 @property(strong,nonatomic)NSString*COMPETITIONCODE;
 @property(strong,nonatomic)NSString*INNINGSNO;
 @property(strong,nonatomic)NSString*MATCHDATE;
+
+@property(strong,nonatomic)NSDictionary *test;
 
 @end

@@ -27,6 +27,8 @@ NSDateFormatter *formatter1;
 NSDate *dateFromString;
 NSDate *dateFromString1;
 NSString *DURATION;
+    NSMutableArray*UpdateBreaksArray;
+    NSMutableArray*DeleteBreaksArray;
 }
 
 @end
@@ -39,7 +41,8 @@ NSString *DURATION;
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+    UpdateBreaksArray=[[NSMutableArray alloc]init];
+    DeleteBreaksArray=[[NSMutableArray alloc]init];
     
     _Text_BreakStart.text = [test valueForKey:@"BREAKSTARTTIME"];
     
@@ -245,7 +248,7 @@ NSString *DURATION;
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
     add.MATCHDATE=self.MATCHDATE;
-    
+     add.resultarray=UpdateBreaksArray;
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
@@ -283,7 +286,7 @@ NSString *DURATION;
         }
     }
     
-    NSMutableArray*UpdateBreaksArray=[DBManager GetInningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+   UpdateBreaksArray=[DBManager GetInningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     
     BREAKNO =[DBManager GetMaxBreakNoForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
 }
@@ -314,7 +317,7 @@ NSString *DURATION;
         [DBManager DeleteInningsEvents : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
     }
     
-    NSMutableArray*DeleteBreaksArray=[DBManager InningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+   DeleteBreaksArray=[DBManager InningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
   //  BREAKNO =[DBManager GetMaxBreakNoForDeleteBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
 }
 
@@ -340,7 +343,8 @@ NSString *DURATION;
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
     add.MATCHDATE=self.MATCHDATE;
-    
+  //  add.test=self.test;
+    add.resultarray=DeleteBreaksArray;
  //   [self startService:@"DELETE"];
     
     //vc2 *viewController = [[vc2 alloc]init];
@@ -363,12 +367,13 @@ NSString *DURATION;
 - (IBAction)bck_btn:(id)sender {
     
     
-    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
+    AddBreakVC*add = [[AddBreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
     
 
     add.COMPETITIONCODE=self.COMPETITIONCODE;
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
+     add.test=self.test;
     add.MATCHDATE=self.MATCHDATE;
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
@@ -389,84 +394,118 @@ NSString *DURATION;
 
 
 
-//- (BOOL)checkInternetConnection
-//{
-//    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-//    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-//    return networkStatus != NotReachable;
-//}
-//
-//
-//-(void) startService:(NSString *)OPERATIONTYPE{
-//    if(self.checkInternetConnection){
-//        
-//        MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
-//        COMPETITIONCODE = COMPETITIONCODE == nil ?@"NULL":COMPETITIONCODE;
-//        INNINGSNO= INNINGSNO == nil ?@"NULL":INNINGSNO;
-//        BREAKSTARTTIME = BREAKSTARTTIME == nil ?@"NULL":BREAKSTARTTIME;
-//        BREAKENDTIME = BREAKENDTIME == nil ?@"":BREAKENDTIME;
-//        BREAKCOMMENTS= BREAKCOMMENTS == nil ?@"NULL":BREAKCOMMENTS;
-//        ISINCLUDEDURATION = ISINCLUDEDURATION == nil ?@"NULL":ISINCLUDEDURATION;
-//        BREAKNO = BREAKNO == nil ?@"NULL":BREAKNO;
-//        
-//        
-//        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//        
-//        //Show indicator
-//        [delegate showLoading];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            
-//            
-//            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETBREAK/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], COMPETITIONCODE,INNINGSNO,MATCHCODE,BREAKSTARTTIME,BREAKENDTIME,BREAKCOMMENTS,ISINCLUDEDURATION,BREAKNO,OPERATIONTYPE];
-//            NSLog(@"-%@",baseURL);
-//            
-//            
-//            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//            
-//            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//            NSURLResponse *response;
-//            NSError *error;
-//            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//            
-//            
-//            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-//            
-//            if(rootArray !=nil && rootArray.count>0){
-//                NSDictionary *valueDict = [rootArray objectAtIndex:0];
-//                NSString *success = [valueDict valueForKey:@"DataItem"];
-//                if([success isEqual:@"Success"]){
-//                    
-//                }
-//            }else{
-//                
-//            }
-//            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
-//            //            NSLog(@"%@",errorCode);
-//            //
-//            //
-//            //            if([errorCode boolValue] == YES)
-//            //            {
-//            //
-//            //                BOOL isUserLogin = YES;
-//            //
-//            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
-//            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
-//            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
-//            //                [[NSUserDefaults standardUserDefaults] synchronize];
-//            //
-//            //                [self openContentView];
-//            //
-//            //            }else{
-//            //
-//            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
-//            //            }
-//            [delegate hideLoading];
-//        });
-//        
-//        //[delegate hideLoading];
-//    }
-//}
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
 
 
+-(void) startService:(NSString *)OPERATIONTYPE{
+    if(self.checkInternetConnection){
+        
+        
+        NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];
+        [dateFmt setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+        NSDate *date = [dateFmt dateFromString:BREAKSTARTTIME];
+        NSLog(@"date:",date);
+        
+        [dateFmt setDateFormat:@"yyyy-MM-dd"];
+        NSString *BREAKSTARTTIME1 = [dateFmt stringFromDate:date];
+        NSLog(@"dateString:",BREAKSTARTTIME1);
+        
+        
+        NSDateFormatter *dateFmt1 = [[NSDateFormatter alloc] init];
+        [dateFmt1 setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+        NSDate *date1= [dateFmt1 dateFromString:BREAKENDTIME];
+        NSLog(@"date:",date1);
+        
+        [dateFmt1 setDateFormat:@"yyyy-MM-dd"];
+        NSString *BREAKENDTIME1 = [dateFmt1 stringFromDate:date1];
+        NSLog(@"dateString:",BREAKENDTIME1);
+
+        
+        
+        
+        MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
+        COMPETITIONCODE = COMPETITIONCODE == nil ?@"NULL":COMPETITIONCODE;
+        INNINGSNO= INNINGSNO == nil ?@"NULL":INNINGSNO;
+        BREAKSTARTTIME1 = BREAKSTARTTIME1 == nil ?@"NULL":BREAKSTARTTIME1;
+        BREAKENDTIME1 = BREAKENDTIME1 == nil ?@"":BREAKENDTIME1;
+        BREAKCOMMENTS= BREAKCOMMENTS == nil ?@"NULL":BREAKCOMMENTS;
+        ISINCLUDEDURATION = ISINCLUDEDURATION == nil ?@"NULL":ISINCLUDEDURATION;
+        BREAKNO = BREAKNO == nil ?@"NULL":BREAKNO;
+        
+        
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        //Show indicator
+        [delegate showLoading];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETBREAK/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], COMPETITIONCODE,INNINGSNO,MATCHCODE,BREAKSTARTTIME1,BREAKENDTIME1,BREAKCOMMENTS,ISINCLUDEDURATION,BREAKNO,OPERATIONTYPE];
+            NSLog(@"-%@",baseURL);
+            
+            
+            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURLResponse *response;
+            NSError *error;
+            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            if (responseData != nil) {
+
+            
+            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+            
+            if(rootArray !=nil && rootArray.count>0){
+                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                NSString *success = [valueDict valueForKey:@"DataItem"];
+                if([success isEqual:@"Success"]){
+                    
+                }
+            }else{
+                
+            }
+            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
+            //            NSLog(@"%@",errorCode);
+            //
+            //
+            //            if([errorCode boolValue] == YES)
+            //            {
+            //
+            //                BOOL isUserLogin = YES;
+            //
+            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+            //                [[NSUserDefaults standardUserDefaults] synchronize];
+            //
+            //                [self openContentView];
+            //
+            //            }else{
+            //
+            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+            //            }
+            [delegate hideLoading];
+            }
+        });
+        
+        //[delegate hideLoading];
+    }
+    else{
+        
+     [self showDialog:@"Network Error" andTitle:@""];
+    
+    }
+}
+
+-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
 
 @end

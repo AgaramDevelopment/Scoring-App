@@ -11,7 +11,6 @@
 #import "BallEventRecord.h"
 #import "FetchSEPageLoadRecord.h"
 #import "BreakVC.h"
-#import "intialBreakVC.h"
 #import "Reachability.h"
 #import "Utitliy.h"
 #import "AppDelegate.h"
@@ -82,6 +81,10 @@
 
     
     //[self DurationCalculation1];
+    
+   // [self BreakStart];
+   // [self BreakEnd];
+    [self DurationCalculation];
 }
 //
 //
@@ -134,7 +137,7 @@
     _Text_BreakStart.text=[formate stringFromDate:_date_picker.date];
     BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
 
-    
+      [self DurationCalculation];
 }
 
 
@@ -158,17 +161,33 @@
 
 -(void)DurationCalculation
 {
-   
-       dateFromString = [formatter dateFromString:BREAKSTARTTIME];
-   
-
-    dateFromString1 = [formatter1 dateFromString:BREAKENDTIME];
     
-    NSTimeInterval timeDifference = [dateFromString1 timeIntervalSinceDate:dateFromString];
+    formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *startDateTF = self.Text_BreakStart.text;
+    NSString *startEndTF = self.text_EndBreak.text;
+    
+    NSDate *date1 = [formatter dateFromString:startDateTF];
+    NSDate *date2 = [formatter dateFromString:startEndTF];
+    
+    NSTimeInterval timeDifference = [date2 timeIntervalSinceDate:date1];
     int days = timeDifference / 60;
-    NSString *Duration = [NSString stringWithFormat:@"%f", days];
-   _lbl_Duration.text =[NSString stringWithFormat:@"%@", Duration];
-    Durationtime=_lbl_Duration.text;
+    NSString *Duration = [NSString stringWithFormat:@"%d", days];
+    
+    self.lbl_Duration.text=[NSString stringWithFormat:@"%@", Duration];
+    
+    
+//   
+//       dateFromString = [formatter dateFromString:BREAKSTARTTIME];
+//   
+//
+//    dateFromString1 = [formatter1 dateFromString:BREAKENDTIME];
+//    
+//    NSTimeInterval timeDifference = [dateFromString1 timeIntervalSinceDate:dateFromString];
+//    int days = timeDifference / 60;
+//    NSString *Duration = [NSString stringWithFormat:@"%f", days];
+//   _lbl_Duration.text =[NSString stringWithFormat:@"%@", Duration];
+//    Durationtime=_lbl_Duration.text;
     
 }
 
@@ -181,7 +200,7 @@
     _text_EndBreak.text=[formate stringFromDate:_date_picker1.date];
     BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
     
-    
+      [self DurationCalculation];
     
 //    
 //    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -218,27 +237,19 @@
 }
 
 - (IBAction)Finish_btn:(id)sender {
-    
+      [self DurationCalculation];
          BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
-//    MATCHCODE=@"IMSC02214DDA97AF2FD00004";
-//    COMPETITIONCODE=@"UCC0000004";
-//    INNINGSNO=@"2";
     
     NSString *BREAKNO1 =[DBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
     
     
     BREAKNO=  [NSString stringWithFormat:@"%d", [BREAKNO1 integerValue] + 1];
-//    int i=5;
-//    
-//    for (i=0; i< BREAKNO ; i++) {
-//     
-//    }
-//   
+
     
    [self InsertBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
     
     
-   // [self startService:@"INSERT"];
+ [self startService:@"INSERT"];
     
     
     
@@ -295,7 +306,7 @@
 - (IBAction)hidepickerbtn:(id)sender {
     
       [_datePicker_View setHidden:YES];
-   [self DurationCalculation];
+ 
 
 }
 
@@ -330,84 +341,96 @@
 
 
 
-//- (BOOL)checkInternetConnection
-//{
-//    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-//    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-//    return networkStatus != NotReachable;
-//}
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
 
 
-//-(void) startService:(NSString *)OPERATIONTYPE{
-//    if(self.checkInternetConnection){
-//        
-//        MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
-//        COMPETITIONCODE = COMPETITIONCODE == nil ?@"NULL":COMPETITIONCODE;
-//        INNINGSNO= INNINGSNO == nil ?@"NULL":INNINGSNO;
-//        BREAKSTARTTIME = BREAKSTARTTIME == nil ?@"NULL":BREAKSTARTTIME;
-//        BREAKENDTIME = BREAKENDTIME == nil ?@"":BREAKENDTIME;
-//        BREAKCOMMENTS= BREAKCOMMENTS == nil ?@"NULL":BREAKCOMMENTS;
-//        ISINCLUDEDURATION = ISINCLUDEDURATION == nil ?@"NULL":ISINCLUDEDURATION;
-//        BREAKNO = BREAKNO == nil ?@"NULL":BREAKNO;
-//        
-//        
-//        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//        
-//        //Show indicator
-//        [delegate showLoading];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            
-//            
-//            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETBREAK/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], COMPETITIONCODE,INNINGSNO,MATCHCODE,BREAKSTARTTIME,BREAKENDTIME,BREAKCOMMENTS,ISINCLUDEDURATION,BREAKNO,OPERATIONTYPE];
-//            NSLog(@"-%@",baseURL);
-//            
-//            
-//            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//            
-//            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//            NSURLResponse *response;
-//            NSError *error;
-//            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//            
-//            
-//            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-//            
-//            if(rootArray !=nil && rootArray.count>0){
-//                NSDictionary *valueDict = [rootArray objectAtIndex:0];
-//                NSString *success = [valueDict valueForKey:@"DataItem"];
-//                if([success isEqual:@"Success"]){
-//                    
-//                }
-//            }else{
-//                
-//            }
-//            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
-//            //            NSLog(@"%@",errorCode);
-//            //
-//            //
-//            //            if([errorCode boolValue] == YES)
-//            //            {
-//            //
-//            //                BOOL isUserLogin = YES;
-//            //
-//            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
-//            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
-//            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
-//            //                [[NSUserDefaults standardUserDefaults] synchronize];
-//            //
-//            //                [self openContentView];
-//            //
-//            //            }else{
-//            //
-//            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
-//            //            }
-//            [delegate hideLoading];
-//        });
-//        
-//        //[delegate hideLoading];
-//    }
-//}
-
+-(void) startService:(NSString *)OPERATIONTYPE{
+    if(self.checkInternetConnection){
+           NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];
+        [dateFmt setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+        NSDate *date = [dateFmt dateFromString:BREAKSTARTTIME];
+        NSLog(@"date:",date);
+        
+        [dateFmt setDateFormat:@"yyyy-MM-dd"];
+        NSString *BREAKSTARTTIME1 = [dateFmt stringFromDate:date];
+        NSLog(@"dateString:",BREAKSTARTTIME1);
+        
+        
+           NSDateFormatter *dateFmt1 = [[NSDateFormatter alloc] init];
+        [dateFmt1 setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+        NSDate *date1= [dateFmt1 dateFromString:BREAKENDTIME];
+        NSLog(@"date:",date1);
+        
+        [dateFmt1 setDateFormat:@"yyyy-MM-dd"];
+        NSString *BREAKENDTIME1 = [dateFmt1 stringFromDate:date1];
+        NSLog(@"dateString:",BREAKENDTIME1);
+        
+        
+        MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
+        COMPETITIONCODE = COMPETITIONCODE == nil ?@"NULL":COMPETITIONCODE;
+        INNINGSNO= INNINGSNO == nil ?@"NULL":INNINGSNO;
+        
+        
+        BREAKSTARTTIME1 = BREAKSTARTTIME1 == nil ?@"NULL":BREAKSTARTTIME1;
+        BREAKENDTIME1 = BREAKENDTIME1 == nil ?@"":BREAKENDTIME1;
+        BREAKCOMMENTS= BREAKCOMMENTS == nil ?@"NULL":BREAKCOMMENTS;
+        ISINCLUDEDURATION = ISINCLUDEDURATION == nil ?@"NULL":ISINCLUDEDURATION;
+        BREAKNO = BREAKNO == nil ?@"NULL":BREAKNO;
+        
+        
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        //Show indicator
+        [delegate showLoading];
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETBREAK/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], COMPETITIONCODE,INNINGSNO,MATCHCODE,BREAKSTARTTIME1,BREAKENDTIME1,BREAKCOMMENTS,ISINCLUDEDURATION,BREAKNO,OPERATIONTYPE];
+            NSLog(@"-%@",baseURL);
+            
+            
+            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURLResponse *response;
+            NSError *error;
+            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            if (responseData != nil) {
+            
+            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+            
+            if(rootArray !=nil && rootArray.count>0){
+                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                NSString *success = [valueDict valueForKey:@"DataItem"];
+                if([success isEqual:@"Success"]){
+                    
+                }
+            }else{
+                
+            }
+           
+            [delegate hideLoading];
+            }
+        });
+        
+        //[delegate hideLoading];
+    }
+    
+    else{
+    
+      [self showDialog:@"Network Error" andTitle:@""];
+    }
+}
+-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
 
 
 
