@@ -438,7 +438,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS BE WHERE (SELECT MAX(BALL.OVERNO + '.' + BALL.BALLNO + BALL.BALLCOUNT)FROM BALLEVENTS BALL WHERE BALL.MATCHCODE = '%@' AND BALL.INNINGSNO = '%@')AND BE.MATCHCODE = '%@' AND BE.INNINGSNO = '%@'",MATCHCODE,OLDINNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT  BALLCODE FROM BALLEVENTS BE WHERE  (BE.OVERNO || '.' || BE.BALLNO || BE.BALLCOUNT) = (SELECT MAX(BALL.OVERNO || '.' || BALL.BALLNO || BALL.BALLCOUNT) FROM BALLEVENTS BALL WHERE BALL.MATCHCODE = '%@' AND BALL.INNINGSNO = '%@') AND BE.MATCHCODE = '%@' AND BE.INNINGSNO = '%@'",MATCHCODE,OLDINNINGSNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)

@@ -299,7 +299,7 @@ BOOL IsBack;
     
     NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
     BtnurrentTittle = @"INSERT";
-    [innings InsertEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :@"2015-10-15" :@"2015-10-16" :OVERNO :TOTALRUNS :WICKETS :BtnurrentTittle];
+    [innings InsertEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS :BtnurrentTittle];
     
     innings = [[EndInnings alloc]init];
     
@@ -314,7 +314,7 @@ BOOL IsBack;
         //dispatch_get_main_queue(), ^
         {
             
-            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],CompetitionCode,MatchCode,fetchSePageLoad.BOWLINGTEAMCODE,fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO ,@"2015-10-15",@"2015-10-16",OVERNO,TOTALRUNS,WICKETS,BtnurrentTittle];
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],CompetitionCode,MatchCode,fetchSePageLoad.BOWLINGTEAMCODE,fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO ,_txt_startInnings.text,_txt_endInnings.text,OVERNO,TOTALRUNS,WICKETS,BtnurrentTittle];
             
             
             NSLog(@"%@",baseURL);

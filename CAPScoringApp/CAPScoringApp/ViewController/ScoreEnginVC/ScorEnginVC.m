@@ -2394,8 +2394,8 @@ EndInnings *endInnings;
          [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] :
          [NSNumber numberWithInt: ballCount] :
          [NSNumber numberWithInt:1] : //default BALLCOUNT for Live mode
-         [NSNumber numberWithInteger: fetchSEPageLoadRecord.DAYNO] :
-         [NSNumber numberWithInteger: fetchSEPageLoadRecord.SESSIONNO] :
+          fetchSEPageLoadRecord.DAYNO :
+         fetchSEPageLoadRecord.SESSIONNO :
          fetchSEPageLoadRecord.strickerPlayerCode:
          fetchSEPageLoadRecord.nonstrickerPlayerCode:
          fetchSEPageLoadRecord.currentBowlerPlayerCode:
