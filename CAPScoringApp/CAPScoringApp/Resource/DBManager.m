@@ -9266,5 +9266,38 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     
 }
 
+//MAXID POWERPLAY
++(NSString *) getMAXIDPENALTY{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT (IFNULL(MAX(SUBSTR(PENALTYCODE,4,10)),0)+1)MAXID  FROM PENALTYDETAILS"];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSString *maxid=[self getValueByNull:statement :0];
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return maxid;
+            }
+            
+        }
+        else {
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return @"0";
+        }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return @"0";
+}
+
+
 
 @end

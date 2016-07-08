@@ -885,14 +885,14 @@ EndInnings *endInnings;
     //
     //
     //    //Bowl type
-    //    if ([ self.ballEventRecord.objBowltype isEqual: @"MSC015"])//Fast
-    //    {
-    //       [self selectedViewBg:_view_fast];
-    //    }
-    //    else if ([ self.ballEventRecord.objBowltype isEqual: @"MSC016"])//Spin
-    //    {
-    //       [self selectedViewBg:_view_spin];
-    //    }
+//        if ([ self.ballEventRecord.objBowltype isEqual: @"MSC015"])//Fast
+//        {
+//           [self selectedViewBg:_view_fast];
+//        }
+//        else if ([ self.ballEventRecord.objBowltype isEqual: @"MSC016"])//Spin
+//        {
+//           [self selectedViewBg:_view_spin];
+//        }
     
     
     
@@ -3396,78 +3396,34 @@ EndInnings *endInnings;
     
     if(selectBtnTag.tag==100)//Run one
     {
-        if(isWicketSelected == YES)
+        if([self checkRunOut])
         {
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                            message:@"Run not possible"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            
-            
-        }
-        else{
-            [self calculateRuns:selectBtnTag.tag];
+     [self calculateRuns:selectBtnTag.tag];
         }
         
     }
     else if(selectBtnTag.tag==101)// Run two
     {
-        if(isWicketSelected == YES)
+        if([self checkRunOut])
         {
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                            message:@"Run not possible"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            
-            
-        }
-        else{
             [self calculateRuns:selectBtnTag.tag];
         }
         
     }
     else if(selectBtnTag.tag==102)// Run three
     {
-        if(isWicketSelected == YES)
+        if([self checkRunOut])
         {
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                            message:@"Run not possible"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            
-            
-        }
-        else{
             [self calculateRuns:selectBtnTag.tag];
         }
     }
     else if(selectBtnTag.tag==103)//More Runs
     {
-        if(isWicketSelected == YES)
+        if([self checkRunOut])
         {
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                            message:@"Run not possible"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            
-            
-        }
-        else{
             [self calculateRuns:selectBtnTag.tag];
         }
-        
+    
     }
     else if(selectBtnTag.tag==104)// B4
     {
@@ -6410,7 +6366,7 @@ EndInnings *endInnings;
             self.view_aggressiveShot.hidden = YES;
             self.view_defensive.hidden =YES;
             
-            isWicketSelected = NO;
+         //   isWicketSelected = NO;
         }
         
     }else if(isWicketSelected && wicketOption == 4)
@@ -6424,7 +6380,7 @@ EndInnings *endInnings;
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden =YES;
         
-        isWicketSelected = NO;
+        //isWicketSelected = NO;
     }
     
     
@@ -6886,6 +6842,28 @@ EndInnings *endInnings;
     //    }
     //  rowcount = count;
 }
+
+-(BOOL) checkRunOut{
+    if(isWicketSelected  && ![selectedwickettype.metasubcode isEqualToString:@"MSC097"]){
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                        message:@"Run not possible"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+
+    
+        return NO;
+    
+    }
+
+    
+    return YES;
+}
+
+
+
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"D Index Path %d",indexPath.row);
@@ -7385,13 +7363,13 @@ EndInnings *endInnings;
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,250)];
     [fullview addSubview:Btn_Fullview];
     [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     //fullview.alpha=0.9;
     
     [self.view addSubview:fullview];
-    [fullview addSubview:revisedTarget.view];
+   // [fullview addSubview:revisedTarget.view];
     
     
     //vc2 *viewController = [[vc2 alloc]init];
@@ -7430,7 +7408,7 @@ EndInnings *endInnings;
     //fullview.alpha=0.9;
     
     [self.view addSubview:fullview];
-    [fullview addSubview:revisedTarget.view];
+   // [fullview addSubview:revisedTarget.view];
     
     
     //vc2 *viewController = [[vc2 alloc]init];
