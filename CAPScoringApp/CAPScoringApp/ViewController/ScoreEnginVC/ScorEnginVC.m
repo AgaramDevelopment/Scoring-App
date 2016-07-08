@@ -4988,7 +4988,9 @@ EndInnings *endInnings;
         self.view_fastBowl.hidden = YES;
         self.view_bowlType.hidden = YES;
        
-        if(isDefensiveSelected){
+        if(isDefensiveSelected && self.ballEventRecord.objShottype != nil){
+            
+            [self selectedViewBg:_view_defense];
               
             int indx=0;
             int selectePosition = -1;
@@ -5014,19 +5016,29 @@ EndInnings *endInnings;
                 
 
             }
+        }else if(isDefensiveSelected && self.ballEventRecord.objShottype == nil){
+            
+            [self unselectedViewBg:_view_defense];
+            self.view_defensive.hidden = YES;
+            isDefensiveSelected = NO;
+
         }else{
             
             self.ballEventRecord.objShottype = nil;
+            isDefensiveSelected = YES;
+            isAggressiveSelected = NO;
            
-            
+            [self selectedViewBg:_view_defense];
            [_tbl_defensive reloadData];
            
         }
         
-        //View
-        _view_defense.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        [self unselectedViewBg:_view_aggressive];
         
-        _view_aggressive.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
+        //View
+        //_view_defense.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        
+      //  _view_aggressive.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         
         
         
@@ -6808,14 +6820,32 @@ EndInnings *endInnings;
         self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
     }else if (_tbl_defensive == tableView){
         
-
-        isDefensiveSelected = YES;
-        isAggressiveSelected = NO;
-       
-        
         BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.defensiveShotTypeArray objectAtIndex:indexPath.row];
+
+//        isDefensiveSelected = YES;
+//        isAggressiveSelected = NO;
+//        
+        if(!isDefensiveSelected && self.ballEventRecord.objShottype==nil){
+            isDefensiveSelected = YES;
+            isAggressiveSelected = NO;
+            self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+
+        }else if(isDefensiveSelected && self.ballEventRecord.objShottype!=nil && self.ballEventRecord.objShottype == bowlAndShortTypeRecord.ShotTypeCode){
+            isDefensiveSelected = NO;
+            self.ballEventRecord.objShottype = nil;
+            [self unselectedViewBg:_view_defense];
+            
+        }
+        else{
+            isDefensiveSelected = YES;
+            isAggressiveSelected = NO;
+            self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+        }
         
-        self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+
+       
+        self.view_defensive.hidden = YES;
+        
         
         
     }else if(tableView == currentBowlersTableView){
