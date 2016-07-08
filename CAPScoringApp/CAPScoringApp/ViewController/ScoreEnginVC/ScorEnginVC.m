@@ -283,6 +283,8 @@ EndInnings *endInnings;
     MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
     ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
     
+    NSLog(@"%@",self.matchTypeCode);
+    
     AppealBatsmenArray=[[NSMutableArray alloc]init];
     
     EditModeVC * objEditModeVc=[[EditModeVC alloc]init];
@@ -1113,6 +1115,7 @@ EndInnings *endInnings;
     self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
     self.lbl_stricker_strickrate.text = fetchSEPageLoadRecord.strickerStrickRate;
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
+    self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
     //Non Stricker Details
     self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
@@ -1259,6 +1262,7 @@ EndInnings *endInnings;
     self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
     
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
+    self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
     //Non Stricker Details
     self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
@@ -2079,11 +2083,30 @@ EndInnings *endInnings;
     tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 }
 
+-(BOOL) checkRunsByLB_B{
+    
+    if(_ballEventRecord.objLegByes.intValue == 1 && _ballEventRecord.objRuns.intValue == 0 && _ballEventRecord.objOverthrow.intValue == 0){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Legbyes is not possible with out runs" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:10100];
+        return NO;
+    }else if(_ballEventRecord.objByes.intValue == 1 && _ballEventRecord.objRuns.intValue == 0 && _ballEventRecord.objOverthrow.intValue == 0){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Byes is not possible with out runs" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:10101];
+        return NO;
+    }
+    
+    return YES;
+}
+
 -(IBAction)DidClickStartBall:(id)sender
 {
     NSLog(@"btnname=%@",self.btn_StartBall.currentTitle);
     
     if(self.isEditMode){ //Edit Mode
+        
+        if([self checkRunsByLB_B]){
         [self calculateRunsOnEndBall];
         
         UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
@@ -2163,6 +2186,7 @@ EndInnings *endInnings;
         
         
         [self.navigationController popViewControllerAnimated:YES];
+        }
     }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){ // Check Is Over started
         
         if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
@@ -2206,6 +2230,8 @@ EndInnings *endInnings;
         }
         else
         {
+            
+            if([self checkRunsByLB_B]){ // Check before end ball
            // [self calculateRunsOnEndBall];
             [self EndBallMethod];
             
@@ -2245,6 +2271,7 @@ EndInnings *endInnings;
             
             [self resetBallEventObject];
             [self resetAllButtonOnEndBall];
+            }
             
         }
     }
@@ -3666,7 +3693,7 @@ EndInnings *endInnings;
         [self selectedButtonBg:selectBtnTag];
         
         // [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
-        if([self.BatmenStyle isEqualToString:@"MSC013"])
+        if([self.BatmbaenStyle isEqualToString:@"MSC013"])
         {
             [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
         }
@@ -4846,11 +4873,8 @@ EndInnings *endInnings;
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
         
-        if(isSpinSelected){
-            
-            // NSInteger position = [self.bowlTypeArray indexOfObject:self.ballEventRecord.objBowltype];
-            
-            
+        if(isSpinSelected && self.ballEventRecord.objBowltype != nil){
+            [self selectedViewBg:_view_spin];
             
             int indx=0;
             int selectePosition = -1;
@@ -4874,16 +4898,24 @@ EndInnings *endInnings;
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
             }
+        }else if(isSpinSelected && self.ballEventRecord.objBowltype == nil){
+            
+            [self unselectedViewBg:_view_spin];
+            self.view_bowlType.hidden = YES;
+            isSpinSelected = NO;
+            
         }else{
+            
             self.ballEventRecord.objBowltype = nil;
+            isSpinSelected = YES;
+            isFastSelected = NO;
+            
+            [self selectedViewBg:_view_spin];
             [tbl_bowlType reloadData];
+            
         }
         
-        //View
-        _view_spin.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
-        
-        _view_fast.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
-        
+        [self unselectedViewBg:_view_fast];
         
         
     }
@@ -4896,10 +4928,10 @@ EndInnings *endInnings;
         self.view_defensive.hidden = YES;
         
         self.lbl_fast.text=@"Fast";
-        [tbl_fastBowl reloadData];
+        //[tbl_fastBowl reloadData];
         
-        if(isFastSelected){
-            
+        if(isFastSelected && self.ballEventRecord.objBowltype != nil){
+            [self selectedViewBg:_view_fast];
             
             int indx=0;
             int selectePosition = -1;
@@ -4922,15 +4954,35 @@ EndInnings *endInnings;
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
             }
+        }
+        else if(isFastSelected && self.ballEventRecord.objBowltype == nil){
+            
+            [self unselectedViewBg:_view_fast];
+            self.view_fastBowl.hidden = YES;
+            isFastSelected = NO;
+            
         }else{
+            
             self.ballEventRecord.objBowltype = nil;
+            isFastSelected = YES;
+            isSpinSelected = NO;
+            
+            [self selectedViewBg:_view_fast];
             [tbl_fastBowl reloadData];
+            
         }
         
-        //View
-        _view_fast.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
-        
-        _view_spin.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
+        [self unselectedViewBg:_view_spin];
+
+//        }else{
+//            self.ballEventRecord.objBowltype = nil;
+//            [tbl_fastBowl reloadData];
+//        }
+//        
+//        //View
+//        _view_fast.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+//        
+//        _view_spin.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         
         
     }
@@ -4942,8 +4994,8 @@ EndInnings *endInnings;
         self.view_bowlType.hidden = YES;
         self.view_defensive.hidden = YES;
         
-        if(isAggressiveSelected){
-            
+        if(isAggressiveSelected && self.ballEventRecord.objShottype != nil){
+            [self selectedViewBg:_view_aggressive];
             int indx=0;
             int selectePosition = -1;
             for (BowlAndShotTypeRecords *record in self.aggressiveShotTypeArray)
@@ -4967,17 +5019,24 @@ EndInnings *endInnings;
                                           atScrollPosition:UITableViewScrollPositionTop
                                                   animated:YES];
             }
+        }else if(isAggressiveSelected && self.ballEventRecord.objShottype == nil){
+            
+            [self unselectedViewBg:_view_aggressive];
+            self.view_aggressiveShot.hidden = YES;
+            isAggressiveSelected = NO;
+            
         }else{
+            
             self.ballEventRecord.objShottype = nil;
+            isAggressiveSelected = YES;
+            isDefensiveSelected = NO;
+            
+            [self selectedViewBg:_view_aggressive];
             [tbl_aggressiveShot reloadData];
+            
         }
         
-        //View
-        _view_aggressive.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
-        
-        _view_defense.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
-        
-        
+        [self unselectedViewBg:_view_defense];
         
         
     }
@@ -4989,7 +5048,9 @@ EndInnings *endInnings;
         self.view_fastBowl.hidden = YES;
         self.view_bowlType.hidden = YES;
        
-        if(isDefensiveSelected){
+        if(isDefensiveSelected && self.ballEventRecord.objShottype != nil){
+            
+            [self selectedViewBg:_view_defense];
               
             int indx=0;
             int selectePosition = -1;
@@ -5015,19 +5076,29 @@ EndInnings *endInnings;
                 
 
             }
+        }else if(isDefensiveSelected && self.ballEventRecord.objShottype == nil){
+            
+            [self unselectedViewBg:_view_defense];
+            self.view_defensive.hidden = YES;
+            isDefensiveSelected = NO;
+
         }else{
             
             self.ballEventRecord.objShottype = nil;
+            isDefensiveSelected = YES;
+            isAggressiveSelected = NO;
            
-            
+            [self selectedViewBg:_view_defense];
            [_tbl_defensive reloadData];
            
         }
         
-        //View
-        _view_defense.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        [self unselectedViewBg:_view_aggressive];
         
-        _view_aggressive.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
+        //View
+        //_view_defense.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        
+      //  _view_aggressive.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         
         
         
@@ -6790,11 +6861,38 @@ EndInnings *endInnings;
         }
     }else if(tbl_bowlType == tableView){
         
-        isSpinSelected = YES;
-        isFastSelected = NO;
+//        isSpinSelected = YES;
+//        isFastSelected = NO;
         
         BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.bowlTypeArray objectAtIndex:indexPath.row];
-        self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+       // self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        
+        if(!isSpinSelected && self.ballEventRecord.objBowltype==nil){
+            isSpinSelected = YES;
+            isFastSelected = NO;
+            self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+            
+        }else if(isSpinSelected && self.ballEventRecord.objBowltype!=nil && self.ballEventRecord.objBowltype == bowlAndShortTypeRecord.BowlTypeCode){
+            isSpinSelected = NO;
+            self.ballEventRecord.objBowltype = nil;
+            [self unselectedViewBg:_view_spin];
+            
+        }
+        else{
+            isSpinSelected = YES;
+            isFastSelected = NO;
+            self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        }
+        
+        
+        
+        self.view_bowlType.hidden = YES;
+        
+        
+
+        
+        
+        
         
         //        if([bowlAndShortTypeRecord.BowlTypeCode  isEqualToString:objBalleventRecord.objBowltype])
         //        {
@@ -6805,30 +6903,95 @@ EndInnings *endInnings;
         
     }else if (tbl_fastBowl == tableView){
         
-        isFastSelected = YES;
-        isSpinSelected = NO;
+//        isFastSelected = YES;
+//        isSpinSelected = NO;
         
         BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.fastBowlTypeArray objectAtIndex:indexPath.row];
-        self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        //self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        if(!isFastSelected && self.ballEventRecord.objBowltype==nil){
+            isFastSelected = YES;
+            isSpinSelected = NO;
+            self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+            
+        }else if(isFastSelected && self.ballEventRecord.objBowltype!=nil && self.ballEventRecord.objBowltype == bowlAndShortTypeRecord.BowlTypeCode){
+            isFastSelected = NO;
+            self.ballEventRecord.objBowltype = nil;
+            [self unselectedViewBg:_view_fast];
+            
+        }
+        else{
+            isFastSelected = YES;
+            isSpinSelected = NO;
+            self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        }
+        
+        
+        
+        self.view_fastBowl.hidden = YES;
+
         
         
     }else if (tbl_aggressiveShot == tableView){
-        isAggressiveSelected = YES;
-        isDefensiveSelected = NO;
+        
+        
+//        isAggressiveSelected = YES;
+//        isDefensiveSelected = NO;
         
         BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.aggressiveShotTypeArray objectAtIndex:indexPath.row];
         
-        self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+        //self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+        
+        if(!isAggressiveSelected && self.ballEventRecord.objShottype==nil){
+            isAggressiveSelected = YES;
+            isDefensiveSelected = NO;
+            self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+            
+        }else if(isAggressiveSelected && self.ballEventRecord.objShottype!=nil && self.ballEventRecord.objShottype == bowlAndShortTypeRecord.ShotTypeCode){
+            isAggressiveSelected = NO;
+            self.ballEventRecord.objShottype = nil;
+            [self unselectedViewBg:_view_aggressive];
+            
+        }
+        else{
+            isAggressiveSelected = YES;
+            isDefensiveSelected = NO;
+            self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+        }
+        
+        
+        
+        self.view_aggressiveShot.hidden = YES;
+        
+        
+        
     }else if (_tbl_defensive == tableView){
         
-
-        isDefensiveSelected = YES;
-        isAggressiveSelected = NO;
-       
-        
         BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.defensiveShotTypeArray objectAtIndex:indexPath.row];
+
+//        isDefensiveSelected = YES;
+//        isAggressiveSelected = NO;
+//        
+        if(!isDefensiveSelected && self.ballEventRecord.objShottype==nil){
+            isDefensiveSelected = YES;
+            isAggressiveSelected = NO;
+            self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+
+        }else if(isDefensiveSelected && self.ballEventRecord.objShottype!=nil && self.ballEventRecord.objShottype == bowlAndShortTypeRecord.ShotTypeCode){
+            isDefensiveSelected = NO;
+            self.ballEventRecord.objShottype = nil;
+            [self unselectedViewBg:_view_defense];
+            
+        }
+        else{
+            isDefensiveSelected = YES;
+            isAggressiveSelected = NO;
+            self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+        }
         
-        self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+
+       
+        self.view_defensive.hidden = YES;
+        
         
         
     }else if(tableView == currentBowlersTableView){
@@ -7241,41 +7404,97 @@ EndInnings *endInnings;
 {
    if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
    {
+       fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+       fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+       UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+       [fullview addSubview:Btn_Fullview];
+       [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+       //fullview.alpha=0.9;
+       
+       [self.view addSubview:fullview];
+       EndSession *endSession = [[EndSession alloc]initWithNibName:@"EndSession" bundle:nil];
+       endSession.matchcode =self.matchCode;
+        endSession.compitionCode =self.competitionCode;
+        endSession.fetchpagedetail=fetchSEPageLoadRecord;
+       endSession.delegate=self;
+       
+       
+       if (IS_IPAD_PRO) {
+           endSession.view.frame =CGRectMake(250, 500, endSession.view.frame.size.width, endSession.view.frame.size.height);
+           //[fullview addSubview:endSession.view];
+           endSession.view.alpha = 0;
+           [endSession didMoveToParentViewController:self];
+           
+           [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+            {
+                endSession.view.alpha = 1;
+            }
+                            completion:nil];
+       }
+       
+       
+       else{
+           
+           endSession.view.frame =CGRectMake(100, 200, endSession.view.frame.size.width, endSession.view.frame.size.height);
+           //endSession.view.alpha = 0;
+           //[endSession didMoveToParentViewController:self];
+           
+           [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+            {
+              //  endSession.view.alpha = 1;
+            }
+                            completion:nil];
+       }
+       
+       [self addChildViewController:endSession];
+        [fullview addSubview:endSession.view];
+       
+       [endSession fetchPageEndSession:fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
+       
+       
+       
+       
+       
+       
+       
+       
+//       
+//    EndSession *endSession = [[EndSession alloc]initWithNibName:@"EndSession" bundle:nil];
+//       endSession.matchcode =self.matchCode;
+//       endSession.compitionCode =self.competitionCode;
+//       endSession.fetchpagedetail=fetchSEPageLoadRecord;
+//       //endSession.bowlingCode    = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+//    endSession.view.frame =CGRectMake(90, 200, endSession.view.frame.size.width, endSession.view.frame.size.height);
+//       endSession.delegate=self;
+//    
+//    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+//    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+//    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+//    [fullview addSubview:Btn_Fullview];
+//    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+//    //fullview.alpha=0.9;
+//    
+//    [self.view addSubview:fullview];
+//    
+//
+//    //    [fullview addSubview:endSession.view];
+//    endSession.view.alpha = 0;
+//    //    [endSession didMoveToParentViewController:self];
+//    
+//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//     {
+//         endSession.view.alpha = 1;
+//     }
+//                     completion:nil];
+//    
+//    [endSession.btn_dropDown addTarget:self action:@selector(btn_dropDown:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    
+//       [self addChildViewController:endSession];
+//       
+//       [fullview addSubview:endSession.view];
 
-    EndSession *endSession = [[EndSession alloc]initWithNibName:@"EndSession" bundle:nil];
-    endSession.view.frame =CGRectMake(90, 200, endSession.view.frame.size.width, endSession.view.frame.size.height);
     
-    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-    //fullview.alpha=0.9;
-    
-    [self.view addSubview:fullview];
-    [fullview addSubview:endSession.view];
-    
-    
-    
-    [self addChildViewController:endSession];
-    
-    
-    
-    //    [fullview addSubview:endSession.view];
-    endSession.view.alpha = 0;
-    //    [endSession didMoveToParentViewController:self];
-    
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         endSession.view.alpha = 1;
-     }
-                     completion:nil];
-    
-    [endSession.btn_dropDown addTarget:self action:@selector(btn_dropDown:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    [endSession fetchPageEndSession:fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
-    endSession.delegate=self;
     
     }
     
@@ -8109,6 +8328,7 @@ EndInnings *endInnings;
     self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
     self.lbl_stricker_strickrate.text = fetchSEPageLoadRecord.strickerStrickRate;
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
+    self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
     //Non Stricker Details
     self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;

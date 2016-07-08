@@ -334,7 +334,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *endOver = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *endOver = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -370,7 +370,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *endOver = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *endOver = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -404,7 +404,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *maxOver = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *maxOver = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -438,7 +438,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *maxBallNo = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *maxBallNo = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -472,7 +472,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *overStatusNo = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *overStatusNo = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -507,7 +507,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *teamName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *teamName = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -543,7 +543,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *teamName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *teamName = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -576,7 +576,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *teamName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *teamName = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -612,7 +612,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *teamName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *teamName = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -667,7 +667,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return GetBattingTeamDetails;
 }
 
-+(NSMutableArray*) GetBattingTeamUsingBowlingCode:(NSString*) BOWLINGTEAMCODE
++(NSMutableArray *) GetBattingTeamUsingBowlingCode:(NSString*) BOWLINGTEAMCODE
 {
     NSMutableArray *GetBattingTeamDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
@@ -803,7 +803,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *teamName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *teamName = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -915,7 +915,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *matchType = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *matchType = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -951,7 +951,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *wicket = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *wicket = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -985,7 +985,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *penalty = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *penalty = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -1021,7 +1021,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *grandTotal = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *grandTotal = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -1055,7 +1055,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *maxOver = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *maxOver =[self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -1088,7 +1088,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *maxOver = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *maxOver = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -1122,7 +1122,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *maxOver = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *maxOver = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -1156,7 +1156,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *maxOver = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *maxOver = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);

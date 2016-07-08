@@ -150,7 +150,14 @@
 		24EFE77E1D2823A40073DE5C /* ChangeTeamRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EFE7771D2823A40073DE5C /* ChangeTeamRecord.m */; };
 		24EFE77F1D2823A40073DE5C /* FetchBattingTeamTossRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EFE7791D2823A40073DE5C /* FetchBattingTeamTossRecord.m */; };
 		24EFE7801D2823A40073DE5C /* TossDetailRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EFE77B1D2823A40073DE5C /* TossDetailRecord.m */; };
-		24F96F781D2F743700798A9D /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 24F96F771D2F743700798A9D /* TNCA_DATABASE.sqlite */; };
+		24F96F851D2FC90500798A9D /* PenalityTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F96F7A1D2FC90500798A9D /* PenalityTVC.m */; };
+		24F96F861D2FC90500798A9D /* PenalityTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F96F7B1D2FC90500798A9D /* PenalityTVC.xib */; };
+		24F96F871D2FC90500798A9D /* PenalityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F96F7D1D2FC90500798A9D /* PenalityVC.m */; };
+		24F96F881D2FC90500798A9D /* PenalityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F96F7E1D2FC90500798A9D /* PenalityVC.xib */; };
+		24F96F891D2FC90500798A9D /* PenaltyGridTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F96F801D2FC90500798A9D /* PenaltyGridTVC.m */; };
+		24F96F8A1D2FC90500798A9D /* PenaltyGridTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F96F811D2FC90500798A9D /* PenaltyGridTVC.xib */; };
+		24F96F8B1D2FC90500798A9D /* PenaltygridVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F96F831D2FC90500798A9D /* PenaltygridVC.m */; };
+		24F96F8C1D2FC90500798A9D /* PenaltygridVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F96F841D2FC90500798A9D /* PenaltygridVC.xib */; };
 		CE0018001CF42FA500668D8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0017FF1CF42FA500668D8B /* main.m */; };
 		CE0018031CF42FA500668D8B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018021CF42FA500668D8B /* AppDelegate.m */; };
 		CE0018091CF42FA500668D8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0018071CF42FA500668D8B /* Main.storyboard */; };
@@ -218,14 +225,6 @@
 		CED03D261D1AAE3B00522B89 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */; };
 		DC2710771D25B9A40011C7B0 /* EndSession.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC2710681D25B9A40011C7B0 /* EndSession.xib */; };
 		DC27107D1D25B9A40011C7B0 /* FollowOnRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2710721D25B9A40011C7B0 /* FollowOnRecords.m */; };
-		DCEF93191D2FCED2008C5070 /* PenalityTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEF930E1D2FCED2008C5070 /* PenalityTVC.m */; };
-		DCEF931A1D2FCED2008C5070 /* PenalityTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCEF930F1D2FCED2008C5070 /* PenalityTVC.xib */; };
-		DCEF931B1D2FCED2008C5070 /* PenalityVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEF93111D2FCED2008C5070 /* PenalityVC.m */; };
-		DCEF931C1D2FCED2008C5070 /* PenalityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCEF93121D2FCED2008C5070 /* PenalityVC.xib */; };
-		DCEF931D1D2FCED2008C5070 /* PenaltyGridTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEF93141D2FCED2008C5070 /* PenaltyGridTVC.m */; };
-		DCEF931E1D2FCED2008C5070 /* PenaltyGridTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCEF93151D2FCED2008C5070 /* PenaltyGridTVC.xib */; };
-		DCEF931F1D2FCED2008C5070 /* PenaltygridVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEF93171D2FCED2008C5070 /* PenaltygridVC.m */; };
-		DCEF93201D2FCED2008C5070 /* PenaltygridVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCEF93181D2FCED2008C5070 /* PenaltygridVC.xib */; };
 		DCEFC8601D28B6CF00451485 /* DBManagerChangeToss.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEFC85F1D28B6CF00451485 /* DBManagerChangeToss.m */; };
 		DCEFC8641D28B72C00451485 /* ChangeTossVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEFC8621D28B72C00451485 /* ChangeTossVC.m */; };
 		DCEFC8651D28B72C00451485 /* ChangeTossVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCEFC8631D28B72C00451485 /* ChangeTossVC.xib */; };
@@ -535,6 +534,18 @@
 		24EFE77C1D2823A40073DE5C /* UmpireDetailRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UmpireDetailRecord.h; sourceTree = "<group>"; };
 		24EFE77D1D2823A40073DE5C /* UmpireDetailRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UmpireDetailRecord.m; sourceTree = "<group>"; };
 		24F96F771D2F743700798A9D /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
+		24F96F791D2FC90500798A9D /* PenalityTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PenalityTVC.h; sourceTree = "<group>"; };
+		24F96F7A1D2FC90500798A9D /* PenalityTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenalityTVC.m; sourceTree = "<group>"; };
+		24F96F7B1D2FC90500798A9D /* PenalityTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PenalityTVC.xib; sourceTree = "<group>"; };
+		24F96F7C1D2FC90500798A9D /* PenalityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PenalityVC.h; sourceTree = "<group>"; };
+		24F96F7D1D2FC90500798A9D /* PenalityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenalityVC.m; sourceTree = "<group>"; };
+		24F96F7E1D2FC90500798A9D /* PenalityVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PenalityVC.xib; sourceTree = "<group>"; };
+		24F96F7F1D2FC90500798A9D /* PenaltyGridTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PenaltyGridTVC.h; sourceTree = "<group>"; };
+		24F96F801D2FC90500798A9D /* PenaltyGridTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenaltyGridTVC.m; sourceTree = "<group>"; };
+		24F96F811D2FC90500798A9D /* PenaltyGridTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PenaltyGridTVC.xib; sourceTree = "<group>"; };
+		24F96F821D2FC90500798A9D /* PenaltygridVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PenaltygridVC.h; sourceTree = "<group>"; };
+		24F96F831D2FC90500798A9D /* PenaltygridVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenaltygridVC.m; sourceTree = "<group>"; };
+		24F96F841D2FC90500798A9D /* PenaltygridVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PenaltygridVC.xib; sourceTree = "<group>"; };
 		CE0017FB1CF42FA500668D8B /* CAPScoringApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CAPScoringApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE0017FF1CF42FA500668D8B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CE0018011CF42FA500668D8B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -677,18 +688,6 @@
 		DC2710701D25B9A40011C7B0 /* FollowOn.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowOn.xib; sourceTree = "<group>"; };
 		DC2710711D25B9A40011C7B0 /* FollowOnRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowOnRecords.h; sourceTree = "<group>"; };
 		DC2710721D25B9A40011C7B0 /* FollowOnRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowOnRecords.m; sourceTree = "<group>"; };
-		DCEF930D1D2FCED2008C5070 /* PenalityTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PenalityTVC.h; sourceTree = "<group>"; };
-		DCEF930E1D2FCED2008C5070 /* PenalityTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenalityTVC.m; sourceTree = "<group>"; };
-		DCEF930F1D2FCED2008C5070 /* PenalityTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PenalityTVC.xib; sourceTree = "<group>"; };
-		DCEF93101D2FCED2008C5070 /* PenalityVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PenalityVC.h; sourceTree = "<group>"; };
-		DCEF93111D2FCED2008C5070 /* PenalityVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenalityVC.m; sourceTree = "<group>"; };
-		DCEF93121D2FCED2008C5070 /* PenalityVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PenalityVC.xib; sourceTree = "<group>"; };
-		DCEF93131D2FCED2008C5070 /* PenaltyGridTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PenaltyGridTVC.h; sourceTree = "<group>"; };
-		DCEF93141D2FCED2008C5070 /* PenaltyGridTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenaltyGridTVC.m; sourceTree = "<group>"; };
-		DCEF93151D2FCED2008C5070 /* PenaltyGridTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PenaltyGridTVC.xib; sourceTree = "<group>"; };
-		DCEF93161D2FCED2008C5070 /* PenaltygridVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PenaltygridVC.h; sourceTree = "<group>"; };
-		DCEF93171D2FCED2008C5070 /* PenaltygridVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenaltygridVC.m; sourceTree = "<group>"; };
-		DCEF93181D2FCED2008C5070 /* PenaltygridVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PenaltygridVC.xib; sourceTree = "<group>"; };
 		DCEFC85E1D28B6CF00451485 /* DBManagerChangeToss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerChangeToss.h; sourceTree = "<group>"; };
 		DCEFC85F1D28B6CF00451485 /* DBManagerChangeToss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerChangeToss.m; sourceTree = "<group>"; };
 		DCEFC8611D28B72C00451485 /* ChangeTossVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeTossVC.h; path = ViewController/ChangeTossVC/ChangeTossVC.h; sourceTree = "<group>"; };
@@ -741,18 +740,18 @@
 		0468B3841D126F9100B98576 /* Penality */ = {
 			isa = PBXGroup;
 			children = (
-				DCEF930D1D2FCED2008C5070 /* PenalityTVC.h */,
-				DCEF930E1D2FCED2008C5070 /* PenalityTVC.m */,
-				DCEF930F1D2FCED2008C5070 /* PenalityTVC.xib */,
-				DCEF93101D2FCED2008C5070 /* PenalityVC.h */,
-				DCEF93111D2FCED2008C5070 /* PenalityVC.m */,
-				DCEF93121D2FCED2008C5070 /* PenalityVC.xib */,
-				DCEF93131D2FCED2008C5070 /* PenaltyGridTVC.h */,
-				DCEF93141D2FCED2008C5070 /* PenaltyGridTVC.m */,
-				DCEF93151D2FCED2008C5070 /* PenaltyGridTVC.xib */,
-				DCEF93161D2FCED2008C5070 /* PenaltygridVC.h */,
-				DCEF93171D2FCED2008C5070 /* PenaltygridVC.m */,
-				DCEF93181D2FCED2008C5070 /* PenaltygridVC.xib */,
+				24F96F791D2FC90500798A9D /* PenalityTVC.h */,
+				24F96F7A1D2FC90500798A9D /* PenalityTVC.m */,
+				24F96F7B1D2FC90500798A9D /* PenalityTVC.xib */,
+				24F96F7C1D2FC90500798A9D /* PenalityVC.h */,
+				24F96F7D1D2FC90500798A9D /* PenalityVC.m */,
+				24F96F7E1D2FC90500798A9D /* PenalityVC.xib */,
+				24F96F7F1D2FC90500798A9D /* PenaltyGridTVC.h */,
+				24F96F801D2FC90500798A9D /* PenaltyGridTVC.m */,
+				24F96F811D2FC90500798A9D /* PenaltyGridTVC.xib */,
+				24F96F821D2FC90500798A9D /* PenaltygridVC.h */,
+				24F96F831D2FC90500798A9D /* PenaltygridVC.m */,
+				24F96F841D2FC90500798A9D /* PenaltygridVC.xib */,
 			);
 			name = Penality;
 			sourceTree = "<group>";
@@ -1695,6 +1694,7 @@
 			files = (
 				047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */,
 				18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */,
+				24F96F881D2FC90500798A9D /* PenalityVC.xib in Resources */,
 				187CA6AA1D28CD7A005E3DCF /* FollowOn.xib in Resources */,
 				047E52ED1D27D71F00D4CAC6 /* Other_WicketgridVC.xib in Resources */,
 				246465191D17255C0078A446 /* EndInningsTVC.xib in Resources */,
@@ -1706,9 +1706,9 @@
 				2464651F1D17255C0078A446 /* OtherWicketTVC.xib in Resources */,
 				24D24CF01CFEF50000CD75D2 /* CustomNavigationVC.xib in Resources */,
 				2464651B1D17255C0078A446 /* OtherWicketPlayerlistTVC.xib in Resources */,
+				24F96F8C1D2FC90500798A9D /* PenaltygridVC.xib in Resources */,
 				246465211D17255C0078A446 /* OtherWicketVC.xib in Resources */,
 				CE7C6DD31D23CE5300B694D5 /* Other_WicketVC.xib in Resources */,
-				DCEF93201D2FCED2008C5070 /* PenaltygridVC.xib in Resources */,
 				187621261D1D644C006E160F /* EndInningsVC.xib in Resources */,
 				0481DD051D213B250084BFF7 /* PowerPlayTVCell.xib in Resources */,
 				CE00184F1CF460DE00668D8B /* RAJDHANI-LIGHT.TTF in Resources */,
@@ -1722,20 +1722,18 @@
 				1876250A1D154495009374F8 /* RevicedOverVC.xib in Resources */,
 				CEC858B31D155D36007F5384 /* intialBreakVC.xib in Resources */,
 				CE0018501CF460DE00668D8B /* RAJDHANI-MEDIUM.TTF in Resources */,
+				24F96F861D2FC90500798A9D /* PenalityTVC.xib in Resources */,
 				CE00184E1CF460DE00668D8B /* RAJDHANI-BOLD.TTF in Resources */,
 				187229291D12665600CC168F /* AddBreakVC.xib in Resources */,
 				246125081D13C5D1004B85E7 /* RightSlideVC.xib in Resources */,
 				187621201D1D625A006E160F /* EndDayTVC.xib in Resources */,
-				24F96F781D2F743700798A9D /* TNCA_DATABASE.sqlite in Resources */,
-				DCEF931A1D2FCED2008C5070 /* PenalityTVC.xib in Resources */,
 				1876210A1D1D3749006E160F /* EndDayVC.xib in Resources */,
-				DCEF931E1D2FCED2008C5070 /* PenaltyGridTVC.xib in Resources */,
 				DCEFC86A1D28B75300451485 /* ChangeTeamVC.xib in Resources */,
 				CE0018521CF460DE00668D8B /* RAJDHANI-SEMIBOLD.TTF in Resources */,
 				1876250C1D154495009374F8 /* ScoreCardCellTVCell.xib in Resources */,
-				DCEF931C1D2FCED2008C5070 /* PenalityVC.xib in Resources */,
 				1872292E1D12667200CC168F /* BreakVC.xib in Resources */,
 				CE0018091CF42FA500668D8B /* Main.storyboard in Resources */,
+				24F96F8A1D2FC90500798A9D /* PenaltyGridTVC.xib in Resources */,
 				CE7463A91D166F8200D69CD9 /* UpdateBreakVC.xib in Resources */,
 				2464651D1D17255C0078A446 /* OtherWicketPlayerlistVC.xib in Resources */,
 			);
@@ -1770,7 +1768,7 @@
 				DCEFC87D1D28BC0500451485 /* FollowOn.m in Sources */,
 				DCEFC87C1D28BBF400451485 /* EndSessionRecords.m in Sources */,
 				DCEFC87A1D28BBD400451485 /* DBManagerInsertScoreEngine.m in Sources */,
-				DCEF931F1D2FCED2008C5070 /* PenaltygridVC.m in Sources */,
+				24F96F8B1D2FC90500798A9D /* PenaltygridVC.m in Sources */,
 				DCEFC87B1D28BBD400451485 /* InsertSEScoreEngineRecord.m in Sources */,
 				DCF677421D27D61A00B98749 /* LoginDBmanager.m in Sources */,
 				18F8FED01D277B11007A16A9 /* DBManagerEndBall.m in Sources */,
@@ -1815,7 +1813,7 @@
 				18803C791D2579EC00849850 /* UpdateScoreEngine.m in Sources */,
 				CE0F19C01CF5D3D60030FFA2 /* UserRecord.m in Sources */,
 				24E7B4B21D23884200EF0D55 /* DeclareInnings.m in Sources */,
-				DCEF931D1D2FCED2008C5070 /* PenaltyGridTVC.m in Sources */,
+				24F96F891D2FC90500798A9D /* PenaltyGridTVC.m in Sources */,
 				18704EDE1D19594D00996BF3 /* GetTeamBNameDetails.m in Sources */,
 				18704ED21D1954E100996BF3 /* FetchMatchResult.m in Sources */,
 				2464651E1D17255C0078A446 /* OtherWicketTVC.m in Sources */,
@@ -1838,7 +1836,7 @@
 				24A93A6C1D26365D00E02DAE /* GetPlayerDetailOnRetiredHurt2.m in Sources */,
 				187620F81D1D0076006E160F /* InsertEndDay.m in Sources */,
 				CE00185C1CF4667400668D8B /* CDRTranslucentSideBar.m in Sources */,
-				DCEF931B1D2FCED2008C5070 /* PenalityVC.m in Sources */,
+				24F96F871D2FC90500798A9D /* PenalityVC.m in Sources */,
 				CEC25E061D290B04009D99F0 /* MatchEventPushRecord.m in Sources */,
 				CE3DD41C1CFBFA7000D93A55 /* SelectPlayerRecord.m in Sources */,
 				1877776F1D2232FA002F31E5 /* getimageRecord.m in Sources */,
@@ -1914,7 +1912,7 @@
 				CE0018031CF42FA500668D8B /* AppDelegate.m in Sources */,
 				24A93A6B1D26365D00E02DAE /* GetPlayerDetailOnRetiredHurt.m in Sources */,
 				2464651C1D17255C0078A446 /* OtherWicketPlayerlistVC.m in Sources */,
-				DCEF93191D2FCED2008C5070 /* PenalityTVC.m in Sources */,
+				24F96F851D2FC90500798A9D /* PenalityTVC.m in Sources */,
 				18704EE11D19598C00996BF3 /* GetMatchResultDetail.m in Sources */,
 				04EC778D1D2956C2005B2608 /* INNINGSBREAKEVENTSPushRecord.m in Sources */,
 				246124F91D13C460004B85E7 /* InningsBowlerDetailsRecord.m in Sources */,
