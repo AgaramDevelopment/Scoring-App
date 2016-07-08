@@ -282,6 +282,8 @@ EndInnings *endInnings;
     MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
     ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
     
+    NSLog(@"%@",self.matchTypeCode);
+    
     AppealBatsmenArray=[[NSMutableArray alloc]init];
     
     EditModeVC * objEditModeVc=[[EditModeVC alloc]init];
@@ -7216,41 +7218,97 @@ EndInnings *endInnings;
 {
    if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
    {
+       fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+       fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+       UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+       [fullview addSubview:Btn_Fullview];
+       [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+       //fullview.alpha=0.9;
+       
+       [self.view addSubview:fullview];
+       EndSession *endSession = [[EndSession alloc]initWithNibName:@"EndSession" bundle:nil];
+       endSession.matchcode =self.matchCode;
+        endSession.compitionCode =self.competitionCode;
+        endSession.fetchpagedetail=fetchSEPageLoadRecord;
+       endSession.delegate=self;
+       
+       
+       if (IS_IPAD_PRO) {
+           endSession.view.frame =CGRectMake(250, 500, endSession.view.frame.size.width, endSession.view.frame.size.height);
+           //[fullview addSubview:endSession.view];
+           endSession.view.alpha = 0;
+           [endSession didMoveToParentViewController:self];
+           
+           [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+            {
+                endSession.view.alpha = 1;
+            }
+                            completion:nil];
+       }
+       
+       
+       else{
+           
+           endSession.view.frame =CGRectMake(100, 200, endSession.view.frame.size.width, endSession.view.frame.size.height);
+           //endSession.view.alpha = 0;
+           //[endSession didMoveToParentViewController:self];
+           
+           [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+            {
+              //  endSession.view.alpha = 1;
+            }
+                            completion:nil];
+       }
+       
+       [self addChildViewController:endSession];
+        [fullview addSubview:endSession.view];
+       
+       [endSession fetchPageEndSession:fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
+       
+       
+       
+       
+       
+       
+       
+       
+//       
+//    EndSession *endSession = [[EndSession alloc]initWithNibName:@"EndSession" bundle:nil];
+//       endSession.matchcode =self.matchCode;
+//       endSession.compitionCode =self.competitionCode;
+//       endSession.fetchpagedetail=fetchSEPageLoadRecord;
+//       //endSession.bowlingCode    = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+//    endSession.view.frame =CGRectMake(90, 200, endSession.view.frame.size.width, endSession.view.frame.size.height);
+//       endSession.delegate=self;
+//    
+//    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+//    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+//    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+//    [fullview addSubview:Btn_Fullview];
+//    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+//    //fullview.alpha=0.9;
+//    
+//    [self.view addSubview:fullview];
+//    
+//
+//    //    [fullview addSubview:endSession.view];
+//    endSession.view.alpha = 0;
+//    //    [endSession didMoveToParentViewController:self];
+//    
+//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//     {
+//         endSession.view.alpha = 1;
+//     }
+//                     completion:nil];
+//    
+//    [endSession.btn_dropDown addTarget:self action:@selector(btn_dropDown:) forControlEvents:UIControlEventTouchUpInside];
+//    
+//    
+//       [self addChildViewController:endSession];
+//       
+//       [fullview addSubview:endSession.view];
 
-    EndSession *endSession = [[EndSession alloc]initWithNibName:@"EndSession" bundle:nil];
-    endSession.view.frame =CGRectMake(90, 200, endSession.view.frame.size.width, endSession.view.frame.size.height);
     
-    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-    //fullview.alpha=0.9;
-    
-    [self.view addSubview:fullview];
-    [fullview addSubview:endSession.view];
-    
-    
-    
-    [self addChildViewController:endSession];
-    
-    
-    
-    //    [fullview addSubview:endSession.view];
-    endSession.view.alpha = 0;
-    //    [endSession didMoveToParentViewController:self];
-    
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         endSession.view.alpha = 1;
-     }
-                     completion:nil];
-    
-    [endSession.btn_dropDown addTarget:self action:@selector(btn_dropDown:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    [endSession fetchPageEndSession:fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
-    endSession.delegate=self;
     
     }
     
