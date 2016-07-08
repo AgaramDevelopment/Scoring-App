@@ -2193,8 +2193,8 @@ EndInnings *endInnings;
             [self calculateRunsOnEndBall];
             [self EndBallMethod];
             
-           // [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
-           // self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+            [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
+            self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
             self.btn_StartOver.userInteractionEnabled=YES;
             //        self.btn_StartBall.userInteractionEnabled=NO;
             //        [self SaveBallEventREcordvalue];
@@ -11435,12 +11435,17 @@ EndInnings *endInnings;
         scoreCardVC.BATTEAMWICKETS= fetchSEPageLoadRecord.BATTEAMWICKETS;
         scoreCardVC.BATTEAMOVERS= fetchSEPageLoadRecord.BATTEAMOVERS;
         scoreCardVC.BATTEAMOVRBALLS= fetchSEPageLoadRecord.BATTEAMOVRBALLS;
-        //  scoreCardVC.BATTEAMRUNRATE= fetchSEPageLoadRecord.BATTEAMRUNRATE;
+        //scoreCardVC.BATTEAMRUNRATE= fetchSEPageLoadRecord.BATTEAMRUNRATE;
         
+     // NSString *Runrate = [NSString stringWithFormat:@"RR %.02f",fetchSEPageLoadRecord.BATTEAMRUNRATE];
+     
+        
+        //scoreCardVC.RunRate = [fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue];
         
         scoreCardVC.BATTEAMRUNS= fetchSEPageLoadRecord.BATTEAMRUNS;
+        
         //    scoreCardVC.RUNSREQUIRED= fetchSEPageLoadRecord.RUNSREQUIRED;
-        scoreCardVC.RUNSREQUIRED= @"0.0";
+       // scoreCardVC.RUNSREQUIRED= @"0.0";
         
         
         scoreCardVC.competitionCode= self.competitionCode;

@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btn_tab_third_inns;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btn_tab_fourth_inns;
 
+@property(nonatomic,assign)NSInteger  *RunRate;
 
 @property (strong, nonatomic) IBOutlet UIButton *btn_fst_inns_id;
 - (IBAction)btn_fst_inns_action:(id)sender;
