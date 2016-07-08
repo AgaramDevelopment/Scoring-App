@@ -609,7 +609,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT case when TEAMACODE = '%@' then TEAMACODE else TEAMBCODE End AS BATTINGTEAMCODE,case when TEAMACODE != '%@' then TEAMACODE else TEAMBCODE End AS BOWLINGTEAMCODE FROM MATCHREGISTRATION WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'",TOSSWONTEAMCODE,TOSSWONTEAMCODE,COMPETITIONCODE,MATCHCODE];
         
         const char *update_stmt = [updateSQL UTF8String];
-        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL) ==SQLITE_OK);
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL) ==SQLITE_OK)
         
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
@@ -635,7 +635,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT case when TEAMACODE = '%@' then TEAMACODE else TEAMBCODE End AS BATTINGTEAMCODE,case when TEAMACODE != '%@' then TEAMACODE else TEAMBCODE End AS BOWLINGTEAMCODE FROM MATCHREGISTRATION WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'",TOSSWONTEAMCODE,TOSSWONTEAMCODE,COMPETITIONCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT case when TEAMACODE != '%@' then TEAMACODE else TEAMBCODE End AS BATTINGTEAMCODE,case when TEAMACODE = '%@' then TEAMACODE else TEAMBCODE End AS BOWLINGTEAMCODE FROM MATCHREGISTRATION WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'",TOSSWONTEAMCODE,TOSSWONTEAMCODE,COMPETITIONCODE,MATCHCODE];
         
         const char *update_stmt = [updateSQL UTF8String];
         if( sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL) == SQLITE_OK)
