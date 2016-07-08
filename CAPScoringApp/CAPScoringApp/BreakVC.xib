@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="RAJDHANI-BOLD.TTF">
@@ -96,13 +96,26 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FL-fc-A4h">
+                                    <rect key="frame" x="16" y="16" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="Q2P-hV-2Rd"/>
+                                        <constraint firstAttribute="height" constant="30" id="Wb3-9n-j7X"/>
+                                    </constraints>
+                                    <state key="normal" image="ico-back-btn"/>
+                                    <connections>
+                                        <action selector="backbtn:" destination="-1" eventType="touchUpInside" id="q1d-t6-r0V"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.17254901959999999" green="0.23921568630000001" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstItem="3FL-fc-A4h" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="top" constant="16" id="48W-aV-vKW"/>
                                 <constraint firstItem="d3y-cX-in1" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="top" constant="16" id="Q29-OI-zJ1"/>
                                 <constraint firstAttribute="bottom" secondItem="d3y-cX-in1" secondAttribute="bottom" constant="8" id="XjA-XU-hCe"/>
                                 <constraint firstAttribute="trailing" secondItem="d3y-cX-in1" secondAttribute="trailing" constant="6" id="b2M-3A-g45"/>
                                 <constraint firstItem="3Fh-Oe-scr" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="top" constant="23" id="ha1-IC-aYn"/>
+                                <constraint firstItem="3FL-fc-A4h" firstAttribute="leading" secondItem="jeN-GQ-Y6N" secondAttribute="leading" constant="16" id="lw0-Io-tcZ"/>
                                 <constraint firstItem="d3y-cX-in1" firstAttribute="leading" secondItem="3Fh-Oe-scr" secondAttribute="trailing" constant="38" id="xCL-9M-5VZ"/>
                             </constraints>
                         </view>
@@ -134,5 +147,6 @@
     </objects>
     <resources>
         <image name="ico-add" width="32" height="32"/>
+        <image name="ico-back-btn" width="30" height="30"/>
     </resources>
 </document>

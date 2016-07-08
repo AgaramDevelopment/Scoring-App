@@ -887,14 +887,14 @@ EndInnings *endInnings;
     //
     //
     //    //Bowl type
-    //    if ([ self.ballEventRecord.objBowltype isEqual: @"MSC015"])//Fast
-    //    {
-    //       [self selectedViewBg:_view_fast];
-    //    }
-    //    else if ([ self.ballEventRecord.objBowltype isEqual: @"MSC016"])//Spin
-    //    {
-    //       [self selectedViewBg:_view_spin];
-    //    }
+//        if ([ self.ballEventRecord.objBowltype isEqual: @"MSC015"])//Fast
+//        {
+//           [self selectedViewBg:_view_fast];
+//        }
+//        else if ([ self.ballEventRecord.objBowltype isEqual: @"MSC016"])//Spin
+//        {
+//           [self selectedViewBg:_view_spin];
+//        }
     
     
     
@@ -1874,6 +1874,13 @@ EndInnings *endInnings;
         
         
         cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
+        
+        UIView *customColorView = [[UIView alloc] init];
+        customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                          green:161/255.0
+                                                           blue:79/255.0
+                                                          alpha:0.5];
+        cell.selectedBackgroundView = customColorView;
         return cell;
         
     } else if(tableView == tbl_bowlType){
@@ -2073,11 +2080,30 @@ EndInnings *endInnings;
     tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 }
 
+-(BOOL) checkRunsByLB_B{
+    
+    if(_ballEventRecord.objLegByes.intValue == 1 && _ballEventRecord.objRuns.intValue == 0 && _ballEventRecord.objOverthrow.intValue == 0){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Legbyes is not possible with out runs" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:10100];
+        return NO;
+    }else if(_ballEventRecord.objByes.intValue == 1 && _ballEventRecord.objRuns.intValue == 0 && _ballEventRecord.objOverthrow.intValue == 0){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Byes is not possible with out runs" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:10101];
+        return NO;
+    }
+    
+    return YES;
+}
+
 -(IBAction)DidClickStartBall:(id)sender
 {
     NSLog(@"btnname=%@",self.btn_StartBall.currentTitle);
     
-    if(self.isEditMode){
+    if(self.isEditMode){ //Edit Mode
+        
+        if([self checkRunsByLB_B]){
         [self calculateRunsOnEndBall];
         
         UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
@@ -2157,7 +2183,8 @@ EndInnings *endInnings;
         
         
         [self.navigationController popViewControllerAnimated:YES];
-    }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){
+        }
+    }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){ // Check Is Over started
         
         if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
         {
@@ -2166,6 +2193,14 @@ EndInnings *endInnings;
                 UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select bowler" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alter show];
                 [alter setTag:10001];
+            }else if(fetchSEPageLoadRecord.strickerPlayerName==nil){
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select stricker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alter show];
+                [alter setTag:10002];
+            }else if(fetchSEPageLoadRecord.nonstrickerPlayerName==nil){
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select non stricker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alter show];
+                [alter setTag:10003];
             }else{
                 
                 startBallTime = [NSDate date];
@@ -2192,7 +2227,9 @@ EndInnings *endInnings;
         }
         else
         {
-            [self calculateRunsOnEndBall];
+            
+            if([self checkRunsByLB_B]){ // Check before end ball
+           // [self calculateRunsOnEndBall];
             [self EndBallMethod];
             
             [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
@@ -2231,6 +2268,7 @@ EndInnings *endInnings;
             
             [self resetBallEventObject];
             [self resetAllButtonOnEndBall];
+            }
             
         }
     }
@@ -2367,7 +2405,7 @@ EndInnings *endInnings;
     }
     else
     {
-      
+
         int ballCount = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
         InsertSEScoreEngine* _InsertSEScoreEngine = [[InsertSEScoreEngine alloc] init];
         _InsertSEScoreEngine.BOWLINGTEAMCODE = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
@@ -2381,8 +2419,8 @@ EndInnings *endInnings;
          [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] :
          [NSNumber numberWithInt: ballCount] :
          [NSNumber numberWithInt:1] : //default BALLCOUNT for Live mode
-         [NSNumber numberWithInteger: fetchSEPageLoadRecord.DAYNO] :
-         [NSNumber numberWithInteger: fetchSEPageLoadRecord.SESSIONNO] :
+          fetchSEPageLoadRecord.DAYNO :
+         fetchSEPageLoadRecord.SESSIONNO :
          fetchSEPageLoadRecord.strickerPlayerCode:
          fetchSEPageLoadRecord.nonstrickerPlayerCode:
          fetchSEPageLoadRecord.currentBowlerPlayerCode:
@@ -2815,14 +2853,28 @@ EndInnings *endInnings;
     
     if([self.btn_StartOver.currentTitle isEqualToString:@"START OVER"])
     {
-        [self overEVENT];
-        self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
-        [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
-        if(![self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
-            [self DidClickStartBall : self.btn_StartBall];
-        self.btn_StartBall.userInteractionEnabled=YES;
         
         
+        if(fetchSEPageLoadRecord.currentBowlerPlayerName==nil){
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select bowler" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alter show];
+            [alter setTag:10001];
+        }else if(fetchSEPageLoadRecord.strickerPlayerName==nil){
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select stricker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alter show];
+            [alter setTag:10002];
+        }else if(fetchSEPageLoadRecord.nonstrickerPlayerName==nil){
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select non stricker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alter show];
+            [alter setTag:10003];
+        }else{
+            [self overEVENT];
+            self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
+            [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
+            if(![self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
+                [self DidClickStartBall : self.btn_StartBall];
+            self.btn_StartBall.userInteractionEnabled=YES;
+        }
         
     }
     else
@@ -3398,78 +3450,34 @@ EndInnings *endInnings;
     
     if(selectBtnTag.tag==100)//Run one
     {
-        if(isWicketSelected == YES)
+        if([self checkRunOut])
         {
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                            message:@"Run not possible"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            
-            
-        }
-        else{
-            [self calculateRuns:selectBtnTag.tag];
+     [self calculateRuns:selectBtnTag.tag];
         }
         
     }
     else if(selectBtnTag.tag==101)// Run two
     {
-        if(isWicketSelected == YES)
+        if([self checkRunOut])
         {
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                            message:@"Run not possible"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            
-            
-        }
-        else{
             [self calculateRuns:selectBtnTag.tag];
         }
         
     }
     else if(selectBtnTag.tag==102)// Run three
     {
-        if(isWicketSelected == YES)
+        if([self checkRunOut])
         {
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                            message:@"Run not possible"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            
-            
-        }
-        else{
             [self calculateRuns:selectBtnTag.tag];
         }
     }
     else if(selectBtnTag.tag==103)//More Runs
     {
-        if(isWicketSelected == YES)
+        if([self checkRunOut])
         {
-            
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                            message:@"Run not possible"
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"OK"
-                                                  otherButtonTitles:nil];
-            [alert show];
-            
-            
-        }
-        else{
             [self calculateRuns:selectBtnTag.tag];
         }
-        
+    
     }
     else if(selectBtnTag.tag==104)// B4
     {
@@ -5005,7 +5013,9 @@ EndInnings *endInnings;
         self.view_fastBowl.hidden = YES;
         self.view_bowlType.hidden = YES;
        
-        if(isDefensiveSelected){
+        if(isDefensiveSelected && self.ballEventRecord.objShottype != nil){
+            
+            [self selectedViewBg:_view_defense];
               
             int indx=0;
             int selectePosition = -1;
@@ -5031,19 +5041,29 @@ EndInnings *endInnings;
                 
 
             }
+        }else if(isDefensiveSelected && self.ballEventRecord.objShottype == nil){
+            
+            [self unselectedViewBg:_view_defense];
+            self.view_defensive.hidden = YES;
+            isDefensiveSelected = NO;
+
         }else{
             
             self.ballEventRecord.objShottype = nil;
+            isDefensiveSelected = YES;
+            isAggressiveSelected = NO;
            
-            
+            [self selectedViewBg:_view_defense];
            [_tbl_defensive reloadData];
            
         }
         
-        //View
-        _view_defense.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        [self unselectedViewBg:_view_aggressive];
         
-        _view_aggressive.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
+        //View
+        //_view_defense.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+        
+      //  _view_aggressive.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         
         
         
@@ -5363,9 +5383,9 @@ EndInnings *endInnings;
 
 -(void) resetBallEventObject{
     self.ballEventRecord = [[BallEventRecord alloc] init];
-    self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];;
-    self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];;
-    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];;
+    self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];
+    self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
+    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
     
     
     self.ballEventRecord.objByes = [NSNumber numberWithInt:0];;
@@ -5427,6 +5447,11 @@ EndInnings *endInnings;
     isMoreRunSelected = NO;
     isExtrasSelected = NO;
     isOverthrowSelected = NO;
+    
+    //Wicket
+    
+    isWicketSelected = NO;
+    
 }
 
 
@@ -6412,7 +6437,7 @@ EndInnings *endInnings;
             self.view_aggressiveShot.hidden = YES;
             self.view_defensive.hidden =YES;
             
-            isWicketSelected = NO;
+           // isWicketSelected = NO;
         }
         
     }else if(isWicketSelected && wicketOption == 4)
@@ -6426,7 +6451,7 @@ EndInnings *endInnings;
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden =YES;
         
-        isWicketSelected = NO;
+      //  isWicketSelected = NO;
     }
     
     
@@ -6820,14 +6845,32 @@ EndInnings *endInnings;
         self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
     }else if (_tbl_defensive == tableView){
         
-
-        isDefensiveSelected = YES;
-        isAggressiveSelected = NO;
-       
-        
         BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.defensiveShotTypeArray objectAtIndex:indexPath.row];
+
+//        isDefensiveSelected = YES;
+//        isAggressiveSelected = NO;
+//        
+        if(!isDefensiveSelected && self.ballEventRecord.objShottype==nil){
+            isDefensiveSelected = YES;
+            isAggressiveSelected = NO;
+            self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+
+        }else if(isDefensiveSelected && self.ballEventRecord.objShottype!=nil && self.ballEventRecord.objShottype == bowlAndShortTypeRecord.ShotTypeCode){
+            isDefensiveSelected = NO;
+            self.ballEventRecord.objShottype = nil;
+            [self unselectedViewBg:_view_defense];
+            
+        }
+        else{
+            isDefensiveSelected = YES;
+            isAggressiveSelected = NO;
+            self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+        }
         
-        self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+
+       
+        self.view_defensive.hidden = YES;
+        
         
         
     }else if(tableView == currentBowlersTableView){
@@ -6888,6 +6931,28 @@ EndInnings *endInnings;
     //    }
     //  rowcount = count;
 }
+
+-(BOOL) checkRunOut{
+    if(isWicketSelected  && ![selectedwickettype.metasubcode isEqualToString:@"MSC097"]){
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                                                        message:@"Run not possible"
+                                                       delegate:nil
+                                              cancelButtonTitle:@"OK"
+                                              otherButtonTitles:nil];
+        [alert show];
+
+    
+        return NO;
+    
+    }
+
+    
+    return YES;
+}
+
+
+
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
     NSLog(@"D Index Path %d",indexPath.row);
@@ -7443,13 +7508,13 @@ EndInnings *endInnings;
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,250)];
     [fullview addSubview:Btn_Fullview];
     [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     //fullview.alpha=0.9;
     
     [self.view addSubview:fullview];
-    [fullview addSubview:revisedTarget.view];
+   // [fullview addSubview:revisedTarget.view];
     
     
     //vc2 *viewController = [[vc2 alloc]init];
@@ -7488,7 +7553,7 @@ EndInnings *endInnings;
     //fullview.alpha=0.9;
     
     [self.view addSubview:fullview];
-    [fullview addSubview:revisedTarget.view];
+   // [fullview addSubview:revisedTarget.view];
     
     
     //vc2 *viewController = [[vc2 alloc]init];
@@ -7778,7 +7843,7 @@ EndInnings *endInnings;
         if (self.ballEventRecord.objWide.integerValue != 0)
         {
             self.ballEventRecord.objWide = [NSNumber numberWithInt: (self.ballEventRecord.objRuns.intValue + self.ballEventRecord.objOverthrow.intValue) + 1];
-            self.ballEventRecord.objRuns = 0;
+            self.ballEventRecord.objRuns =  [NSNumber numberWithInt:0];
         }
         else if (self.ballEventRecord.objNoball.integerValue != 0)
         {
@@ -7850,7 +7915,7 @@ EndInnings *endInnings;
     [appealEventDict setValue:commentText forKey:@"Commenttext"];
     
     
-    [self.View_Appeal setHidden:YES];
+    [self.view_table_select setHidden:YES];
 }
 
 
@@ -11698,18 +11763,18 @@ EndInnings *endInnings;
     
     
     
-    NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://url"]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURLSessionUploadTask *dataTask = [session uploadTaskWithRequest: request
-                                                             fromData: data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                                                                 NSLog(@"%@", json);
-                                                             }];
+//    NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
+//    
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://url"]];
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
+//    
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+//    NSURLSessionUploadTask *dataTask = [session uploadTaskWithRequest: request
+//                                                             fromData: data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//                                                                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//                                                                 NSLog(@"%@", json);
+//                                                             }];
     
 }
 - (IBAction)Exit_btn:(id)sender {

@@ -18,6 +18,7 @@
 #import "FetchSEPageLoadRecord.h"
 #import "DBManagerEndInnings.h"
 #import "MatchResultListVC.h"
+#import "Utitliy.h"
 @interface EndInningsVC ()
 {
     NSDateFormatter *formatter;
@@ -43,18 +44,16 @@ BOOL IsBack;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-   
 }
 -(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE{
     if (fetchRecord !=0 ) {
         fetchSePageLoad = [[FetchSEPageLoadRecord alloc]init];
-
+        
         CompetitionCode = COMPETITIONCODE;
         MatchCode = MATCHCODE;
         
         //fetchSePageLoad = fetchRecord;
         fetchEndinnings = fetchRecord;
-        
         
         NSString *SAVE = self.btn_save;
         
@@ -77,11 +76,7 @@ BOOL IsBack;
         
         //self.view_allControls.hidden = YES;
         
-        
-        
         [innings fetchEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO ];
-        
-        
         
         self.lbl_teamName.text = innings.TEAMNAME;
         self.lbl_runScored.text = [NSString stringWithFormat:@"%@", innings.TOTALRUNS];
@@ -153,7 +148,7 @@ BOOL IsBack;
     UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
     [toolbar setTintColor:[UIColor grayColor]];
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
-style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
+                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
     
     
     UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
@@ -161,8 +156,8 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
     [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
     
     [self.txt_startInnings setInputAccessoryView:toolbar];
-
-
+    
+    
 }
 -(void)showSelecteddate{
     
@@ -183,7 +178,6 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
     [toolbar setTintColor:[UIColor grayColor]];
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
                                                                style:UIBarButtonItemStylePlain target:self action:@selector(showEndDatePicker)];
-    
     
     UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
@@ -216,7 +210,7 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
     NSString *Duration = [NSString stringWithFormat:@"%d", days];
     
     self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
-
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -224,14 +218,14 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
 }
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 - (IBAction)btn_addInnings:(id)sender {
     
@@ -239,12 +233,7 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
     self.view_allControls.hidden = NO;
     self.tbl_endInnings.hidden = YES;
     
-    
 }
-
-
-
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;
@@ -255,8 +244,6 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
 (NSInteger)section
 {
-    
-    
     return [endInningsArray count];
 }
 
@@ -267,9 +254,9 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
 {
     
     EndInnings *endInnings = [[EndInnings alloc]init];
-   static NSString *CellIdentifier = @"row";
+    static NSString *CellIdentifier = @"row";
     
-
+    
     EndInningsTVC *cell = (EndInningsTVC *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
@@ -290,9 +277,6 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-  
-
     EndInnings *obj =(EndInnings*)[endInningsArray objectAtIndex:indexPath.row];
     
     NSString*startInningsTime = obj.STARTTIME;
@@ -302,52 +286,24 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
     NSString*totalOvers = obj.TOTALOVERS;
     NSNumber *totalWickets = obj.TOTALWICKETS;
     
-
-    
     self.txt_startInnings.text = startInningsTime;
     self.txt_endInnings.text = endInningsTime;
     self.lbl_teamName.text = teamName;
     //self.lbl_runScored.text = [NSString stringWithFormat:@"%@",totalRuns];
     self.lbl_wktLost.text = [NSString stringWithFormat:@"%@", totalWickets];
-
-  
-
     self.tbl_endInnings.hidden = YES;
     self.view_allControls.hidden = NO;
     
-    
-    
-
-    
 }
-
-
-
-
 - (IBAction)btn_save:(id)sender {
-
+    
     NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
     BtnurrentTittle = @"INSERT";
+    [innings InsertEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS :BtnurrentTittle];
     
+    innings = [[EndInnings alloc]init];
     
-        innings = [[EndInnings alloc]init];
-    
-
     if(self.checkInternetConnection){
-        
-        //        NSString *MANOFTHESERIESCODE = selectedManOfTheSeries == nil ?@"NULL":selectedManOfTheSeries.playerCode;
-        //        NSString *BESTBATSMANCODE = selectedBestBatsman == nil ?@"NULL":selectedBestBatsman.playerCode;
-        //        NSString *BESTBOWLERCODE = selectedBestBowler == nil ?@"NULL":selectedBestBowler.playerCode;
-        //        NSString *BESTALLROUNDERCODE = selectedBestAllRounder == nil ?@"NULL":selectedBestAllRounder.playerCode;
-        //        NSString *MOSTVALUABLEPLAYERCODE = selectedMostValuPlayer == nil ?@"":selectedMostValuPlayer.playerCode;
-        //        NSString *MATCHRESULTCODE = selectedResultType == nil ?@"NULL":selectedResultType.RESULTCODE;
-        //        NSString *MATCHWONTEAMCODE = selectedTeam == nil ?@"NULL":selectedTeam.TEAMACODE;
-        //        NSNumber *TEAMAPOINTS = [NSNumber numberWithInteger: [_txtf_team_a_point.text integerValue]]  ;
-        //        NSString *TEAMBPOINTS = [_txtf_team_b_point.text isEqual: @""] ?@"NULL":_txtf_team_b_point.text;
-        //        NSString *MANOFTHEMATCHCODE =selectedManOfTheMatch == nil ?@"NULL":selectedManOfTheMatch.playerCode;
-        //        NSString *COMMENTS = [_txtf_comments.text isEqual: @""] ?@"NULL":_txtf_comments.text;
-        //        NSString *TEAMNAME = @"NULL";
-        
         
         AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         
@@ -358,9 +314,8 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
         //dispatch_get_main_queue(), ^
         {
             
-        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",CompetitionCode,MatchCode,fetchSePageLoad.BOWLINGTEAMCODE,fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO ,@"2015-10-15",@"2015-10-16",OVERNO,TOTALRUNS,WICKETS,BtnurrentTittle];
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],CompetitionCode,MatchCode,fetchSePageLoad.BOWLINGTEAMCODE,fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO ,_txt_startInnings.text,_txt_endInnings.text,OVERNO,TOTALRUNS,WICKETS,BtnurrentTittle];
             
-
             
             NSLog(@"%@",baseURL);
             
@@ -371,41 +326,26 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
             NSError *error;
             NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
             
-            
-            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-            
-            if(rootArray !=nil && rootArray.count>0){
-                NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                NSString *success = [valueDict valueForKey:@"DataItem"];
-                if([success isEqual:@"Success"]){
+            if(responseData != nil)
+            {
+                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+                
+                if(rootArray !=nil && rootArray.count>0){
+                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                    NSString *success = [valueDict valueForKey:@"DataItem"];
+                    if([success isEqual:@"Success"]){
+                        
+                    }
+                }else{
                     
                 }
-            }else{
-                
             }
-            
             [delegate hideLoading];
         }
-        
-        
-    }else{
-        
-        
-        
     }
-    
-    
-    [innings InsertEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :@"2015-10-15" :@"2015-10-16" :OVERNO :TOTALRUNS :WICKETS :BtnurrentTittle];
-     
-    
-   
-    
-
-    
 }
 - (IBAction)btn_back:(id)sender {
     
-   
     if (IsBack == NO) {
         
         self.view_allControls.hidden = YES;
@@ -415,16 +355,12 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
         
     }else if (IsBack == YES){
         
-       
         DashBoardVC * dashVC = [[DashBoardVC alloc]init];
         
         dashVC =  (DashBoardVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
-    
-         IsBack = NO;
+        
+        IsBack = NO;
     }
-        
-        
-    
 }
 
 //Check internet connection
@@ -436,22 +372,22 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
 }
 
 - (IBAction)btn_delete:(id)sender {
+    innings = [[EndInnings alloc]init];
     
+    [innings DeleteEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO];
     
     if(self.checkInternetConnection){
-        
-        
         
         AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         
         //Show indicator
         [delegate showLoading];
-//      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+        //      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
         
         //dispatch_get_main_queue(), ^
         {
-            NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",CompetitionCode,MatchCode,@"NULL",fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO,@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"DELETE"];
-     
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],CompetitionCode,MatchCode,@"NULL",fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO,@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"DELETE"];
+            
             NSLog(@"%@",baseURL);
             
             NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -461,36 +397,25 @@ style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
             NSError *error;
             NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
             
-            
-            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-            
-            if(rootArray !=nil && rootArray.count>0){
-                NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                NSString *success = [valueDict valueForKey:@"DataItem"];
-                if([success isEqual:@"Success"]){
+            if(responseData != nil)
+            {
+                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+                
+                if(rootArray !=nil && rootArray.count>0){
+                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                    NSString *success = [valueDict valueForKey:@"DataItem"];
+                    if([success isEqual:@"Success"]){
+                        
+                    }
+                }else{
                     
                 }
-            }else{
-                
-        }
+            }
             
             [delegate hideLoading];
         }
         
-        
-    }else{
-        
-        
-        
     }
-    
-    innings = [[EndInnings alloc]init];
-    
-    [innings DeleteEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO];
-
-    
-
-    
 }
 
 

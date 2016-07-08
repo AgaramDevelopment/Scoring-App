@@ -740,8 +740,6 @@
         
         [alert show];
         
-        [self startService:@"DONE"];
-        
     }
 }
 
@@ -755,7 +753,7 @@
     {
         [DBManagerChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : electedcode : StrikerCode : NonStrikerCode : selectBowlerCode :BowlingEnd];
         
-        
+        [self startService:@"DONE"];
         
         ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
         

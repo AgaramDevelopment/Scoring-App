@@ -198,26 +198,27 @@
 EndInningsVC *save;
 
 -(void) InsertEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO:(NSString*)INNINGSSTARTTIME:(NSString*)INNINGSENDTIME:(NSString*)ENDOVER:(NSString*)TOTALRUNS:(NSString*)TOTALWICKETS:(NSString*)BUTTONNAME
+
 {
+    
+    MATCHTYPE = [DBManagerEndInnings GetMatchTypeUsingCompetition:COMPETITIONCODE];
+    
+    NSInteger totalRuns = [TOTALRUNS integerValue];
+    
+    if(totalRuns == nil){
+        
+        totalRuns = 0;
+    }
+    if (ENDOVER.intValue == nil) {
+        
+        ENDOVER = @"0.0";
+    }
+    if (TOTALWICKETS == nil) {
+        
+        TOTALWICKETS.intValue == 0;
+    }
+    
     {
-        
-        
-        
-        
-        MATCHTYPE = [DBManagerEndInnings GetMatchTypeUsingCompetition:COMPETITIONCODE];
-        
-        NSUInteger totalRuns = [TOTALRUNS integerValue];
-        
-        if(totalRuns == nil){
-            
-            totalRuns == 0;
-        }
-        if (ENDOVER == nil) {
-            ENDOVER = @"0.0";
-        }
-        if (TOTALWICKETS == nil) {
-            TOTALWICKETS.intValue == 0;
-        }
         
         //SESSION WISE
         if([DBManagerEndInnings GetDayNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE])
@@ -234,7 +235,7 @@ EndInningsVC *save;
         }
         
         //SESSION NO
-        SESSIONNO = [DBManagerEndInnings GetSessionNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO:@"1"];
+        SESSIONNO = [DBManagerEndInnings GetSessionNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO:DAYNO];
         
         if(SESSIONNO == nil)
         {
@@ -242,7 +243,7 @@ EndInningsVC *save;
             
         }
         //STARTOVERNO
-        STARTOVERNO = [DBManagerEndInnings GetStartoverNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: @"1": OLDINNINGSNO: @"1"];
+        STARTOVERNO = [DBManagerEndInnings GetStartoverNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO: DAYNO];
         
         
         if(STARTOVERNO == nil)
@@ -303,7 +304,6 @@ EndInningsVC *save;
                 if(charIndex.length >=6)
                     
                     // if (CONVERT(int,SUBSTRING(ENDOVER), CHARINDEX('.',ENDOVER,0) + 1,length(ENDOVER))) >= 6)
-                    
                 {
                     
                     LASTBALLCODE = [DBManagerEndInnings GetLastBallCodeForInsertEndInninges : MATCHCODE: OLDINNINGSNO];
@@ -431,7 +431,6 @@ EndInningsVC *save;
     
     
 }
-
 
 //FETCH ENDINNINGS--------------------------------------------------------------
 

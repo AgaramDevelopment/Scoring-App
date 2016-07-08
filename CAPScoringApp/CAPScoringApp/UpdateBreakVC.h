@@ -11,7 +11,7 @@
 @interface UpdateBreakVC : UIViewController
 @property(strong,nonatomic)NSDictionary *test;
 
-
+@property(strong,nonatomic)NSMutableArray*resultarray;
 @property (strong, nonatomic) IBOutlet UIView *View_BreakStart;
 @property (strong, nonatomic) IBOutlet UITextField *Text_BreakStart;
 - (IBAction)StartBreack_btn:(id)sender;

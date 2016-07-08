@@ -30,12 +30,12 @@
     
 
     
-  
+    _resultarray=[[NSMutableArray alloc]init];
     
 //    UINib *nib = [UINib nibWithNibName:@"BreakTableViewCell" bundle:nil];
 //    [[self tablView] registerNib:nib forCellReuseIdentifier:@"BreakTableViewCell"];
     
-    [self.tablView reloadData];
+    //[self.tablView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -52,7 +52,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [_resultarray count];    //count number of row from counting array hear cataGorry is An Array
+    return [_resultarray count];
+    //count number of row from counting array hear cataGorry is An Array
 }
 
 
@@ -97,6 +98,7 @@
      add.test=sample;
     
     add.COMPETITIONCODE=COMPETITIONCODE;
+    add.resultarray=_resultarray;
     add.MATCHCODE=MATCHCODE;
     add.INNINGSNO=INNINGSNO;
     add.MATCHDATE=_MATCHDATE;
@@ -131,6 +133,7 @@
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
     add.MATCHDATE=self.MATCHDATE;
+    add.delegate =self.delegate;
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
     add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
