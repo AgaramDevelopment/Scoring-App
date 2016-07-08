@@ -272,6 +272,7 @@
         scoreEngine.matchSetUp = mSetUp;
         scoreEngine.matchCode=matchCode;
         scoreEngine.competitionCode=competitionCode;
+        scoreEngine.matchTypeCode=matchTypeCode;
         [self.navigationController pushViewController:scoreEngine animated:YES];
        // [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
         //[self presentViewController:scoreEngine animated:NO completion:nil];

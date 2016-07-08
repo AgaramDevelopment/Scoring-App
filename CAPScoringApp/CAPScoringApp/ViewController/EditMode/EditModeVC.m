@@ -125,6 +125,7 @@
         [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) {
         // self.btn_third_inns_id.hidden = YES;
         // self.btn_fourth_inns_id.hidden = YES;
+         [self.tbl_innnings reloadData];
     }
     if(isEdit==YES)
     {

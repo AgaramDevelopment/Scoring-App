@@ -3733,7 +3733,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //team code
 +(NSString *) batsManteamCode:(NSString*) MATCHCODE:(NSString*)COMPETITIONCODE{
     
-    NSString *batsmanCode = [[NSString alloc]init];
+    NSString *batsmanCode ;
     int retVal;
     NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
@@ -3750,14 +3750,16 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             batsmanCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return batsmanCode;
         }
     }
     
     
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
-    return batsmanCode;
+    return @"";
     
 }
 
@@ -4100,9 +4102,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
-+(NSMutableArray *)getTeamCode:(NSString*) competitioncode :(NSString*) matchcode :(NSString*)inningsNo
++(NSString *)getTeamCode:(NSString*) competitioncode :(NSString*) matchcode :(NSString*)inningsNo
 {
-    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    NSString *bolwingTeamcode;
     
     
     int retVal;
@@ -4123,16 +4125,18 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            FetchSEPageLoadRecord *record = [[FetchSEPageLoadRecord alloc]init];
-            record.BOWLINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            [eventArray addObject:record];
-            
+            //FetchSEPageLoadRecord *record = [[FetchSEPageLoadRecord alloc]init];
+            bolwingTeamcode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            //[eventArray addObject:record];
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return bolwingTeamcode;
         }
     }
     
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
-    return eventArray;
+    return @"";
     
 }
 

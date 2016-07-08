@@ -20,7 +20,7 @@
     NSDateFormatter *formatter;
     NSString *competitioncode;
     NSString *matchcode;
-    NSObject *fetchEndSession;
+   // NSObject *fetchEndSession;
     UITableView *objDrobDowntbl;
     
 }
@@ -48,23 +48,23 @@ int POS_TEAM_TYPE = 1;
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-   
-    
+    //self.view.frame =CGRectMake(0,0, [[UIScreen mainScreen] bounds].size.width, 100);
+ 
     
 }
 
 
 
 
--(void)fetchPageEndSession:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE
+-(void)fetchPageEndSession:(NSObject *) fetchRecord:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE
 {
     fetchSeRecord = [[FetchSEPageLoadRecord alloc]init];
     
     competitioncode = COMPETITIONCODE;
     matchcode = MATCHCODE;
-    fetchEndSession = fetchRecord;
+   // fetchEndSession = fetchRecord;
     
-    fetchSeRecord = fetchEndSession;
+    fetchSeRecord = fetchRecord;
     
     sessionRecords = [[EndSessionRecords alloc]init];
     
@@ -333,6 +333,7 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
             IsDropDown = NO;
             
         }
+        objDrobDowntbl.hidden=YES;
     }
     else
     {
@@ -589,7 +590,7 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
     objDrobDowntbl.delegate=self;
     
     
-    [self.view_allControls addSubview:objDrobDowntbl];
+    [self.scroll_EndSession addSubview:objDrobDowntbl];
     self.scroll_EndSession.scrollEnabled = NO;
     
     NSMutableArray *teamArray = [DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE];

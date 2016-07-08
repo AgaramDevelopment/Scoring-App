@@ -25,6 +25,14 @@
 
 
 @property(nonatomic,strong) id <EndSedsessionDelegate> delegate;
+
+@property (nonatomic,strong) NSString * compitionCode;
+@property (nonatomic,strong) NSString * matchcode;
+@property (nonatomic,strong) NSString * bowlingCode;
+
+@property (nonatomic,strong) NSObject * fetchpagedetail;
+
+
 @property (weak, nonatomic) IBOutlet UIScrollView *scroll_EndSession;
 
 @property (weak, nonatomic) IBOutlet UIView *view_Allcontrols;

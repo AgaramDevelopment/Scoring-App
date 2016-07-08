@@ -164,6 +164,7 @@
     //scoreEngine.matchSetUp = mSetUp;
     scoreEngine.matchCode=matchCode;
     scoreEngine.competitionCode=self.CompitionCode;
+    scoreEngine.matchTypeCode=matchTypeCode;
     [self.navigationController pushViewController:scoreEngine animated:YES];
 }
 
