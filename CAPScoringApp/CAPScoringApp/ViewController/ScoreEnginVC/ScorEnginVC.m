@@ -2078,11 +2078,30 @@ EndInnings *endInnings;
     tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
 }
 
+-(BOOL) checkRunsByLB_B{
+    
+    if(_ballEventRecord.objLegByes.intValue == 1 && _ballEventRecord.objRuns.intValue == 0 && _ballEventRecord.objOverthrow.intValue == 0){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Legbyes is not possible with out runs" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:10100];
+        return NO;
+    }else if(_ballEventRecord.objByes.intValue == 1 && _ballEventRecord.objRuns.intValue == 0 && _ballEventRecord.objOverthrow.intValue == 0){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Byes is not possible with out runs" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:10101];
+        return NO;
+    }
+    
+    return YES;
+}
+
 -(IBAction)DidClickStartBall:(id)sender
 {
     NSLog(@"btnname=%@",self.btn_StartBall.currentTitle);
     
     if(self.isEditMode){ //Edit Mode
+        
+        if([self checkRunsByLB_B]){
         [self calculateRunsOnEndBall];
         
         UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
@@ -2162,6 +2181,7 @@ EndInnings *endInnings;
         
         
         [self.navigationController popViewControllerAnimated:YES];
+        }
     }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){ // Check Is Over started
         
         if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
@@ -2205,6 +2225,8 @@ EndInnings *endInnings;
         }
         else
         {
+            
+            if([self checkRunsByLB_B]){ // Check before end ball
            // [self calculateRunsOnEndBall];
             [self EndBallMethod];
             
@@ -2244,6 +2266,7 @@ EndInnings *endInnings;
             
             [self resetBallEventObject];
             [self resetAllButtonOnEndBall];
+            }
             
         }
     }
