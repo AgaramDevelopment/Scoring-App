@@ -88,6 +88,8 @@
 @property(strong,nonatomic)NSString *strickerSixes ;
 @property(strong,nonatomic)NSString *strickerTotalBalls;
 @property(strong,nonatomic)NSString *strickerStrickRate ;
+@property(strong,nonatomic)NSString *strickerBattingStyle;
+
 
 
 //Non Stricker Details

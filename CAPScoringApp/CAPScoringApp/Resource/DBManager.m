@@ -2276,6 +2276,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             
             NSString *totalBalls = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
             NSString *strickRate = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+            NSString *battingStyle = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+
             
             [result addObject:playerCode];
             [result addObject:playerName];
@@ -2284,7 +2286,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             [result addObject:sixes];
             [result addObject:totalBalls];
             [result addObject:strickRate];
-            
+            [result addObject:battingStyle];
         }
     }
     
@@ -2324,6 +2326,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             
             NSString *totalBalls = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
             NSString *strickRate = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+            NSString *battingStyle = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+
             
             [result addObject:playerCode];
             [result addObject:playerName];
@@ -2332,6 +2336,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             [result addObject:sixes];
             [result addObject:totalBalls];
             [result addObject:strickRate];
+            [result addObject:battingStyle];
             
         }
     }
