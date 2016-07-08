@@ -242,7 +242,6 @@
 		DCEFC87E1D28BC4E00451485 /* GetPlayerDetailOnAbsentHurt.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A5F1D26365D00E02DAE /* GetPlayerDetailOnAbsentHurt.m */; };
 		DCEFC87F1D28BC6800451485 /* GetStrickerNonStrickerPlayerCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A691D26365D00E02DAE /* GetStrickerNonStrickerPlayerCode.m */; };
 		DCEFC8801D28BC8800451485 /* UmpireDetailRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 24EFE77D1D2823A40073DE5C /* UmpireDetailRecord.m */; };
-		DCF4F6E31D2E6396009C7D07 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = DCF4F6E21D2E6395009C7D07 /* TNCA_DATABASE.sqlite */; };
 		DCF6773C1D27D17600B98749 /* DBManagerEndSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF677391D27D17600B98749 /* DBManagerEndSession.m */; };
 		DCF6773D1D27D17600B98749 /* DBManagerFollowOn.m in Sources */ = {isa = PBXBuildFile; fileRef = DCF6773B1D27D17600B98749 /* DBManagerFollowOn.m */; };
 		DCF677421D27D61A00B98749 /* LoginDBmanager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE4745701D263DC4007A49B8 /* LoginDBmanager.m */; };
@@ -708,7 +707,6 @@
 		DCEFC8751D28B82600451485 /* DBManagerChangeTeamInsert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManagerChangeTeamInsert.m; path = Resource/DBManagerChanceTeamInsert/DBManagerChangeTeamInsert.m; sourceTree = "<group>"; };
 		DCEFC8771D28B84200451485 /* DBManagerDeclareInnings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManagerDeclareInnings.h; path = Resource/DBManagerDeclarInnings/DBManagerDeclareInnings.h; sourceTree = "<group>"; };
 		DCEFC8781D28B84200451485 /* DBManagerDeclareInnings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManagerDeclareInnings.m; path = Resource/DBManagerDeclarInnings/DBManagerDeclareInnings.m; sourceTree = "<group>"; };
-		DCF4F6E21D2E6395009C7D07 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		DCF677391D27D17600B98749 /* DBManagerEndSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerEndSession.m; sourceTree = "<group>"; };
 		DCF6773A1D27D17600B98749 /* DBManagerFollowOn.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerFollowOn.h; sourceTree = "<group>"; };
 		DCF6773B1D27D17600B98749 /* DBManagerFollowOn.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerFollowOn.m; sourceTree = "<group>"; };
@@ -1224,7 +1222,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
-				DCF4F6E21D2E6395009C7D07 /* TNCA_DATABASE.sqlite */,
+				1879B1591D2E1F5C00096198 /* TNCA_DATABASE.sqlite */,
 				DCEFC8771D28B84200451485 /* DBManagerDeclareInnings.h */,
 				DCEFC8781D28B84200451485 /* DBManagerDeclareInnings.m */,
 				DCEFC8741D28B82600451485 /* DBManagerChangeTeamInsert.h */,
@@ -1706,6 +1704,7 @@
 				2461251E1D13C931004B85E7 /* RevisedTarget.xib in Resources */,
 				047E52F21D27D84B00D4CAC6 /* Other_WicketgridTVC.xib in Resources */,
 				2464651F1D17255C0078A446 /* OtherWicketTVC.xib in Resources */,
+				1879B15A1D2E1F5C00096198 /* TNCA_DATABASE.sqlite in Resources */,
 				24D24CF01CFEF50000CD75D2 /* CustomNavigationVC.xib in Resources */,
 				2464651B1D17255C0078A446 /* OtherWicketPlayerlistTVC.xib in Resources */,
 				246465211D17255C0078A446 /* OtherWicketVC.xib in Resources */,
@@ -1730,7 +1729,6 @@
 				187229291D12665600CC168F /* AddBreakVC.xib in Resources */,
 				246125081D13C5D1004B85E7 /* RightSlideVC.xib in Resources */,
 				187621201D1D625A006E160F /* EndDayTVC.xib in Resources */,
-				DCF4F6E31D2E6396009C7D07 /* TNCA_DATABASE.sqlite in Resources */,
 				1876210A1D1D3749006E160F /* EndDayVC.xib in Resources */,
 				DCEFC86A1D28B75300451485 /* ChangeTeamVC.xib in Resources */,
 				CE0018521CF460DE00668D8B /* RAJDHANI-SEMIBOLD.TTF in Resources */,

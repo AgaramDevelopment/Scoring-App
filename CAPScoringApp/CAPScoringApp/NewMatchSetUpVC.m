@@ -459,7 +459,7 @@ NSRegularExpression *isMatchedByRegex;
         
         if (teamCountA >= 7 && teamCountB >= 7){
             [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
-
+            
             MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
             
             matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
@@ -551,7 +551,9 @@ NSRegularExpression *isMatchedByRegex;
         
         matchCode = matchCode == nil ?@"NULL":matchCode;
         competitionCode = competitionCode == nil ?@"NULL":competitionCode;
-        OVER= OVER == nil ?@"NULL":OVER;
+        OVER = OVER == nil ?@"NULL":OVER;
+        
+        
         
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
@@ -582,9 +584,7 @@ NSRegularExpression *isMatchedByRegex;
                 }
             }
         });
-        
-       
     }
-     [delegate hideLoading];
+    [delegate hideLoading];
 }
 @end
