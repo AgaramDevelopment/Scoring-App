@@ -2082,7 +2082,7 @@ EndInnings *endInnings;
 {
     NSLog(@"btnname=%@",self.btn_StartBall.currentTitle);
     
-    if(self.isEditMode){
+    if(self.isEditMode){ //Edit Mode
         [self calculateRunsOnEndBall];
         
         UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
@@ -2162,7 +2162,7 @@ EndInnings *endInnings;
         
         
         [self.navigationController popViewControllerAnimated:YES];
-    }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){
+    }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){ // Check Is Over started
         
         if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
         {
@@ -2171,6 +2171,14 @@ EndInnings *endInnings;
                 UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select bowler" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alter show];
                 [alter setTag:10001];
+            }else if(fetchSEPageLoadRecord.strickerPlayerName==nil){
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select stricker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alter show];
+                [alter setTag:10002];
+            }else if(fetchSEPageLoadRecord.nonstrickerPlayerName==nil){
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select non stricker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alter show];
+                [alter setTag:10003];
             }else{
                 
                 startBallTime = [NSDate date];
@@ -2197,7 +2205,7 @@ EndInnings *endInnings;
         }
         else
         {
-            [self calculateRunsOnEndBall];
+           // [self calculateRunsOnEndBall];
             [self EndBallMethod];
             
             [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
@@ -2372,7 +2380,7 @@ EndInnings *endInnings;
     }
     else
     {
-      
+
         int ballCount = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
         InsertSEScoreEngine* _InsertSEScoreEngine = [[InsertSEScoreEngine alloc] init];
         _InsertSEScoreEngine.BOWLINGTEAMCODE = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
@@ -2820,14 +2828,28 @@ EndInnings *endInnings;
     
     if([self.btn_StartOver.currentTitle isEqualToString:@"START OVER"])
     {
-        [self overEVENT];
-        self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
-        [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
-        if(![self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
-            [self DidClickStartBall : self.btn_StartBall];
-        self.btn_StartBall.userInteractionEnabled=YES;
         
         
+        if(fetchSEPageLoadRecord.currentBowlerPlayerName==nil){
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select bowler" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alter show];
+            [alter setTag:10001];
+        }else if(fetchSEPageLoadRecord.strickerPlayerName==nil){
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select stricker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alter show];
+            [alter setTag:10002];
+        }else if(fetchSEPageLoadRecord.nonstrickerPlayerName==nil){
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select non stricker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alter show];
+            [alter setTag:10003];
+        }else{
+            [self overEVENT];
+            self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
+            [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
+            if(![self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
+                [self DidClickStartBall : self.btn_StartBall];
+            self.btn_StartBall.userInteractionEnabled=YES;
+        }
         
     }
     else
@@ -5368,9 +5390,9 @@ EndInnings *endInnings;
 
 -(void) resetBallEventObject{
     self.ballEventRecord = [[BallEventRecord alloc] init];
-    self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];;
-    self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];;
-    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];;
+    self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];
+    self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
+    self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
     
     
     self.ballEventRecord.objByes = [NSNumber numberWithInt:0];;
@@ -5432,6 +5454,11 @@ EndInnings *endInnings;
     isMoreRunSelected = NO;
     isExtrasSelected = NO;
     isOverthrowSelected = NO;
+    
+    //Wicket
+    
+    isWicketSelected = NO;
+    
 }
 
 
@@ -6417,7 +6444,7 @@ EndInnings *endInnings;
             self.view_aggressiveShot.hidden = YES;
             self.view_defensive.hidden =YES;
             
-            isWicketSelected = NO;
+           // isWicketSelected = NO;
         }
         
     }else if(isWicketSelected && wicketOption == 4)
@@ -6431,7 +6458,7 @@ EndInnings *endInnings;
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden =YES;
         
-        isWicketSelected = NO;
+      //  isWicketSelected = NO;
     }
     
     
@@ -7727,7 +7754,7 @@ EndInnings *endInnings;
         if (self.ballEventRecord.objWide.integerValue != 0)
         {
             self.ballEventRecord.objWide = [NSNumber numberWithInt: (self.ballEventRecord.objRuns.intValue + self.ballEventRecord.objOverthrow.intValue) + 1];
-            self.ballEventRecord.objRuns = 0;
+            self.ballEventRecord.objRuns =  [NSNumber numberWithInt:0];
         }
         else if (self.ballEventRecord.objNoball.integerValue != 0)
         {
