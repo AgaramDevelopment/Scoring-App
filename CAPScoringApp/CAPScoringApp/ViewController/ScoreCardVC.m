@@ -179,7 +179,7 @@ int bowlerPostion = 0;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return fetchScorecard.BattingSummaryForScoreBoard.count+ fetchScorecard. BowlingSummaryForScoreBoard.count;    //count number of row from counting array hear cataGorry is An Array
+    return fetchScorecard.BowlingSummaryForScoreBoard.count+ fetchScorecard.BattingSummaryForScoreBoard .count+2;    //count number of row from counting array hear cataGorry is An Array
 }
 
 

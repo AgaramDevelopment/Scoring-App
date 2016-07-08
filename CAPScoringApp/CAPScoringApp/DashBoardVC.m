@@ -268,7 +268,7 @@
                 NSString *RECORDSTATUS=[test4 objectForKey:@"Recordstatus"];
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckMatchteamplayerdetails:MATCHCODE:TEAMCODE:PLAYERCODE];
+                bool CheckStatus1=[DBMANAGERSYNC CheckMatchteamplayerdetails :MATCHCODE :TEAMCODE :PLAYERCODE];
                 if (CheckStatus1==NO) {
                   [DBMANAGERSYNC InsertMatchteamplayerdetails:MATCHTEAMPLAYERCODE:MATCHCODE:TEAMCODE:PLAYERCODE:PLAYINGORDER:RECORDSTATUS];
                 }
