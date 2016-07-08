@@ -20,6 +20,7 @@
 @implementation PenaltygridVC
 @synthesize matchCode;
 @synthesize competitionCode;
+@synthesize teamcode;
 @synthesize inningsNo;
 
 
@@ -85,7 +86,6 @@
 {
     
     
-    
     PenalityVC *add = [[PenalityVC alloc]initWithNibName:@"PenalityVC" bundle:nil];
     
     NSDictionary *sample=[[NSDictionary alloc]init];
@@ -96,8 +96,7 @@
     add.competitionCode=competitionCode;
     add.matchCode=matchCode;
     add.inningsNo=inningsNo;
-  
-  
+    
     [self addChildViewController:add];
     add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
     [self.view addSubview:add.view];
@@ -112,7 +111,6 @@
     
     
     
-    
 }
 
 
@@ -123,8 +121,9 @@
     penaltyvc.matchCode=self.matchCode;
     penaltyvc.competitionCode=self.competitionCode;
     penaltyvc.inningsNo=self.inningsNo;
+    penaltyvc.teamcode =self.teamcode;
     
-      
+    
     [self.view addSubview:penaltyvc.view];
     [self addChildViewController:penaltyvc];
     penaltyvc.view.frame =CGRectMake(0, 0, penaltyvc.view.frame.size.width, penaltyvc.view.frame.size.height);
