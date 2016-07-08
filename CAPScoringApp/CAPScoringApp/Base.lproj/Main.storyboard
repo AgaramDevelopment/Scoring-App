@@ -1721,7 +1721,6 @@
                                         <state key="normal" image="Radio.on"/>
                                         <state key="disabled" image="Radio.off"/>
                                         <state key="selected" image="Radio.on"/>
-                                        <state key="highlighted" image="Radio.off"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="l04-Sw-hAe"/>
@@ -12339,7 +12338,8 @@
                                                                     <exclude reference="4mc-ux-3rn"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                                <rect key="frame" x="0.0" y="0.0" width="153" height="30"/>
                                                                 <mask key="constraints">
                                                                     <include reference="4mc-ux-3rn"/>
                                                                 </mask>
@@ -12356,7 +12356,8 @@
                                                                     <exclude reference="nXv-Ok-WgY"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                                <rect key="frame" x="0.0" y="30" width="152" height="90"/>
                                                                 <mask key="constraints">
                                                                     <include reference="nXv-Ok-WgY"/>
                                                                 </mask>
@@ -12441,7 +12442,8 @@
                                                                     <exclude reference="uel-vf-muo"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=regular">
+                                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                                <rect key="frame" x="157" y="0.0" width="80" height="100"/>
                                                                 <mask key="subviews">
                                                                     <include reference="5D1-OJ-s4M"/>
                                                                     <include reference="JNs-Il-zWy"/>
