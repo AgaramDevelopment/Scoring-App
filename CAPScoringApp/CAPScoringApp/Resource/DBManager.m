@@ -1983,8 +1983,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
             f.numberStyle = NSNumberFormatterDecimalStyle;
-            NSString *ATWOROTW = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            NSString *T_BOWLINGEND = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            NSString *ATWOROTW = [self getValueByNull:statement :0];
+            NSString *T_BOWLINGEND = [self getValueByNull:statement :1];
             
             [result addObject:ATWOROTW];
             [result addObject:T_BOWLINGEND];
@@ -2135,10 +2135,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
             f.numberStyle = NSNumberFormatterDecimalStyle;
-            NSString *T_TOTALRUNS = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            NSString *T_OVERSTATUS = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-            NSString *T_WICKETPLAYER = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-            NSString *T_WICKETTYPE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+            NSString *T_TOTALRUNS = [self getValueByNull:statement :0];
+            NSString *T_OVERSTATUS = [self getValueByNull:statement :1];
+            NSString *T_WICKETPLAYER = [self getValueByNull:statement :2];
+            NSString *T_WICKETTYPE = [self getValueByNull:statement :3];
             
             [result addObject:T_TOTALRUNS];
             [result addObject:T_OVERSTATUS];
@@ -2154,7 +2154,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
-+(NSString *) getWICKETPLAYER:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE INNINGSNO:(NSString *)INNINGSNO{
++(NSMutableArray *) getWICKETPLAYER:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE INNINGSNO:(NSString *)INNINGSNO{
+    NSMutableArray *wicketPlayers = [[NSMutableArray alloc]init];
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -2171,15 +2172,17 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *WICKETPLAYER = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return WICKETPLAYER;
+            
+            [wicketPlayers addObject:WICKETPLAYER];
+//            sqlite3_finalize(statement);
+//            sqlite3_close(dataBase);
+//            return WICKETPLAYER;
         }
     }
     
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
-    return @"";
+    return wicketPlayers;
 }
 
 
