@@ -1114,6 +1114,7 @@ EndInnings *endInnings;
     self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
     self.lbl_stricker_strickrate.text = fetchSEPageLoadRecord.strickerStrickRate;
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
+    self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
     //Non Stricker Details
     self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
@@ -1260,6 +1261,7 @@ EndInnings *endInnings;
     self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
     
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
+    self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
     //Non Stricker Details
     self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
@@ -3690,7 +3692,7 @@ EndInnings *endInnings;
         [self selectedButtonBg:selectBtnTag];
         
         // [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
-        if([self.BatmenStyle isEqualToString:@"MSC013"])
+        if([self.BatmbaenStyle isEqualToString:@"MSC013"])
         {
             [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
         }
@@ -8313,6 +8315,7 @@ EndInnings *endInnings;
     self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
     self.lbl_stricker_strickrate.text = fetchSEPageLoadRecord.strickerStrickRate;
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
+    self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
     //Non Stricker Details
     self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
