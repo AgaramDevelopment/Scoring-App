@@ -1872,6 +1872,13 @@ EndInnings *endInnings;
         
         
         cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
+        
+        UIView *customColorView = [[UIView alloc] init];
+        customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                          green:161/255.0
+                                                           blue:79/255.0
+                                                          alpha:0.5];
+        cell.selectedBackgroundView = customColorView;
         return cell;
         
     } else if(tableView == tbl_bowlType){
@@ -7792,7 +7799,7 @@ EndInnings *endInnings;
     [appealEventDict setValue:commentText forKey:@"Commenttext"];
     
     
-    [self.View_Appeal setHidden:YES];
+    [self.view_table_select setHidden:YES];
 }
 
 
@@ -11640,18 +11647,18 @@ EndInnings *endInnings;
     
     
     
-    NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
-    
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://url"]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
-    
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURLSessionUploadTask *dataTask = [session uploadTaskWithRequest: request
-                                                             fromData: data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                                                                 NSLog(@"%@", json);
-                                                             }];
+//    NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
+//    
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://url"]];
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
+//    
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+//    NSURLSessionUploadTask *dataTask = [session uploadTaskWithRequest: request
+//                                                             fromData: data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//                                                                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+//                                                                 NSLog(@"%@", json);
+//                                                             }];
     
 }
 - (IBAction)Exit_btn:(id)sender {
