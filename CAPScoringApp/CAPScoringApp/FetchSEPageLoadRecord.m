@@ -360,10 +360,20 @@ BOOL  getOverStatus;
     {
     FetchSEPageLoadRecord *totRun =(FetchSEPageLoadRecord*)[totalOvers objectAtIndex:0];
     
-    T_TARGETRUNS = totRun.T_TARGETRUNS;
-    T_TARGETOVERS = totRun.T_TARGETOVERS;
+    if (T_TARGETRUNS == nil) {
+        
+        T_TARGETRUNS = [NSNumber numberWithInt:0];
+        T_TARGETOVERS = [NSNumber numberWithInt:0];
+    }else{
+        
+        T_TARGETRUNS = totRun.T_TARGETRUNS;
+        T_TARGETOVERS = totRun.T_TARGETOVERS;
+         MATCHOVERS  = T_TARGETRUNS.intValue > 0 ? [T_TARGETOVERS stringValue] : MATCHOVERS;
     }
+    
     MATCHOVERS  = T_TARGETRUNS.intValue > 0 ? [T_TARGETOVERS stringValue] : MATCHOVERS;
+    
+   
     
     //Batting team player
     getBattingTeamPlayers =[DBManager GETWICKETDETAILS:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE COMPETITIONCODE:COMPETITIONCODE INNINGSNO:INNINGSNO];
@@ -1072,6 +1082,6 @@ BOOL  getOverStatus;
     
     
 }
+}
+    @end
 
-
-@end
