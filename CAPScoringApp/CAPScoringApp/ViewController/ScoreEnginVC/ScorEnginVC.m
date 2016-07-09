@@ -1484,10 +1484,8 @@ EndInnings *endInnings;
     [self.sideviewtable reloadData];
     
     
-    
-    
-    
 }
+
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
     
     if(leftSlideSwipe ==NO)
@@ -1819,13 +1817,19 @@ EndInnings *endInnings;
         static NSString *CellIdentifier = @"Cell";
         AppealCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                                            forIndexPath:indexPath];
+    
         
         AppealRecord *objAppealrecord=(AppealRecord*)[self.AppealValuesArray objectAtIndex:indexPath.row];
         
         
         cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
         
-   
+        UIView *customColorView = [[UIView alloc] init];
+        customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                          green:161/255.0
+                                                           blue:79/255.0
+                                                          alpha:0.5];
+        cell.selectedBackgroundView =  customColorView;
         return cell;
         
    
@@ -5486,6 +5490,17 @@ EndInnings *endInnings;
     }
     
     
+    //More option
+    //Set up toggle image
+    [self.btn_highRun setImage:[UIImage imageNamed:@"moreRuns"] forState:UIControlStateNormal];
+    
+    //Set run button values
+    [self.btn_run1 setTitle:@"1" forState:UIControlStateNormal];
+    [self.btn_run2 setTitle:@"2" forState:UIControlStateNormal];
+    [self.btn_run3 setTitle:@"3" forState:UIControlStateNormal];
+    [self.btn_B4 setTitle:@"B4" forState:UIControlStateNormal];
+    [self.btn_B6 setTitle:@"B6" forState:UIControlStateNormal];
+    
 }
 
 
@@ -6420,14 +6435,7 @@ EndInnings *endInnings;
         self.view_defensive.hidden =YES;
         
       //  isWicketSelected = NO;
-    }
-    
-    
-    
-    
-    
-    //Fielding Factor
-    if(isFieldingSelected && fieldingOption == 1)
+    }else if(isFieldingSelected && fieldingOption == 1) //Fielding Factor
     {
         selectedfieldFactor = [self.fieldingfactorArray objectAtIndex:indexPath.row];
         
@@ -6502,6 +6510,36 @@ EndInnings *endInnings;
         self.view_defensive.hidden =YES;
         
         isFieldingSelected = NO;
+    }else if (tbl_fastBowl == tableView){ // Fast bowling
+        
+        //        isFastSelected = YES;
+        //        isSpinSelected = NO;
+        
+        BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.fastBowlTypeArray objectAtIndex:indexPath.row];
+        //self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        if(!isFastSelected && self.ballEventRecord.objBowltype==nil){
+            isFastSelected = YES;
+            isSpinSelected = NO;
+            self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+            
+        }else if(isFastSelected && self.ballEventRecord.objBowltype!=nil && self.ballEventRecord.objBowltype == bowlAndShortTypeRecord.BowlTypeCode){
+            isFastSelected = NO;
+            self.ballEventRecord.objBowltype = nil;
+            [self unselectedViewBg:_view_fast];
+            
+        }
+        else{
+            isFastSelected = YES;
+            isSpinSelected = NO;
+            self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        }
+        
+        
+        
+        self.view_fastBowl.hidden = YES;
+        
+        
+        
     }
     
     // _view_table_select.hidden=NO;
@@ -6820,36 +6858,6 @@ EndInnings *endInnings;
         //            objBalleventRecord.objBowltype = nil;
         //            [tbl_bowlType reloadData];
         //        }
-        
-        
-    }else if (tbl_fastBowl == tableView){
-        
-//        isFastSelected = YES;
-//        isSpinSelected = NO;
-        
-        BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.fastBowlTypeArray objectAtIndex:indexPath.row];
-        //self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
-        if(!isFastSelected && self.ballEventRecord.objBowltype==nil){
-            isFastSelected = YES;
-            isSpinSelected = NO;
-            self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
-            
-        }else if(isFastSelected && self.ballEventRecord.objBowltype!=nil && self.ballEventRecord.objBowltype == bowlAndShortTypeRecord.BowlTypeCode){
-            isFastSelected = NO;
-            self.ballEventRecord.objBowltype = nil;
-            [self unselectedViewBg:_view_fast];
-            
-        }
-        else{
-            isFastSelected = YES;
-            isSpinSelected = NO;
-            self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
-        }
-        
-        
-        
-        self.view_fastBowl.hidden = YES;
-
         
         
     }else if (tbl_aggressiveShot == tableView){
@@ -8104,28 +8112,29 @@ EndInnings *endInnings;
             bool chkNonStricker = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.nonstrickerPlayerCode]);
             if(!chkNonStricker){
                 [strickerList addObject:record];
+                
+                bool chk = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.strickerPlayerCode]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    //   break;
+                }
+                indx ++;
             }
             
-            bool chk = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.strickerPlayerCode]);
-            if (chk)
-            {
-                selectePosition = indx;
-                // break;
-            }
-            indx ++;
+           
         }
         
         [strickerTableView reloadData];
         
         if(selectePosition!=-1){
             
+        
             //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
             [strickerTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
             
-            [strickerTableView scrollToRowAtIndexPath:indexPath
-                                     atScrollPosition:UITableViewScrollPositionTop
-                                             animated:YES];
+            [strickerTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }
     }else{
         isStrickerOpen = NO;
@@ -8156,15 +8165,17 @@ EndInnings *endInnings;
             bool chkStricker = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.strickerPlayerCode]);
             if(!chkStricker){
                 [nonStrickerList addObject:record];
+                
+                bool chk = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.nonstrickerPlayerCode]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    //    break;
+                }
+                indx ++;
             }
             
-            bool chk = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.nonstrickerPlayerCode]);
-            if (chk)
-            {
-                selectePosition = indx;
-                // break;
-            }
-            indx ++;
+        
         }
         [nonstrickerTableView reloadData];
         //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
@@ -8333,7 +8344,10 @@ EndInnings *endInnings;
         
         targetRightValue =  fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? fetchSEPageLoadRecord.T_TARGETRUNS : (fetchSEPageLoadRecord.RUNSREQUIRED.intValue == 0 ? @"" : fetchSEPageLoadRecord.RUNSREQUIRED);
         
+        //if(fetchSEPageLoadRecord.INNINGSNO>1)
+       // {
         _lbl_target.text = [NSString stringWithFormat:@"%@ %@",targetLeftValue,targetRightValue];
+      //  }
         
         NSString *runsReqForBalls = fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? (isTargetReached ? @"Target achieved" : ([NSString stringWithFormat:@"%@ runs to win",fetchSEPageLoadRecord.RUNSREQUIRED])) : @"Required run rate:";
         _lbl_runs_required.text = runsReqForBalls;

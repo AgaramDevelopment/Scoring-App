@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 @protocol SwipeableCellDelegate <NSObject>
-- (void)RightSideEditBtnAction;
+- (void)RightSideEditBtnAction:(UIButton*)sender;
 - (void)RightsideResumeBtnAction:(UIButton*)sender;
 - (void)cellDidOpen:(UITableViewCell *)cell;
 - (void)cellDidClose:(UITableViewCell *)cell;
@@ -23,6 +23,7 @@
 @property(nonatomic,strong) IBOutlet UILabel * lbl_displaydate;
 
 
+@property(nonatomic,strong) IBOutlet UIButton * Btn_Edit;
 
 @property(nonatomic,strong) IBOutlet UIButton * Btn_Resume;
 @property(strong,nonatomic) IBOutlet UILabel * innings1teamname1;
