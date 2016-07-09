@@ -525,7 +525,7 @@
     }
     MAXINNINGSNO = [DBManagerChangeToss GetMaxInningsNoForTossDetails : COMPETITIONCODE : MATCHCODE];
     
-    [DBManagerChangeToss SetInningsEventsForToss : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : STRIKERCODE : NONSTRIKERCODE: BOWLERCODE : BOWLINGEND];
+    [DBManagerChangeToss SetInningsEventsForToss:self.CompitisonCode :self.matchCode :BATTINGTEAMCODE :MAXINNINGSNO :STRIKERCODE :NONSTRIKERCODE :BOWLERCODE :BOWLINGEND];
     
     [DBManagerChangeToss UpdateMatchStatusForToss : COMPETITIONCODE : MATCHCODE];
     

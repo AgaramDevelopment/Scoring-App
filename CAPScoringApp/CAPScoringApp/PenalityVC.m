@@ -14,6 +14,8 @@
 #import "PenaltyGridTVC.h"
 #import "PenaltygridVC.h"
 #import "Reachability.h"
+#import "AppDelegate.h"
+#import "Utitliy.h"
 
 
 @interface PenalityVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
@@ -31,6 +33,7 @@
 
 NSString *btnbatting;
 NSString *penaltytypereasons;
+NSString *penaltycode;
 
  NSMutableArray *penaltyarray;
 PenaltyGridTVC *penaltygridTVC;
@@ -41,11 +44,14 @@ PenaltyGridTVC *penaltygridTVC;
 @synthesize metasubcode;
 @synthesize inningsNo;
 @synthesize competitionCode;
+@synthesize ballcode;
+@synthesize teamcode;
 @synthesize txt_penalityruns;
 @synthesize  test;
 
 PenaltyDetailsRecord *penaltyrecord;
 MetaDataRecord *objMetaDataRecord;
+
 
 
 
@@ -168,24 +174,23 @@ NSString *penaltytypereasons;
 -(IBAction)didClickBatting:(id)sender
 {
     btnbatting=@"MSC134";
-  
-        self.lbl_penaltytype.text=@"Choose Penalty Type";
+    
+    self.lbl_penaltytype.text=@"Choose Penalty Type";
     self.tbl_penality.hidden=YES;
-        _FetchPenalityArray=[DBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT030"];
-        for(int i=0; i < [_FetchPenalityArray count]; i++)
+    _FetchPenalityArray=[DBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT030"];
+    for(int i=0; i < [_FetchPenalityArray count]; i++)
+    {
+        MetaDataRecord *objmetadataRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:i];
+        NSLog(@"%@",objmetadataRecord.metasubcodedescription);
+        NSString *metastatus=objmetadataRecord.metasubcodedescription;
+        if([metastatus isEqualToString:@"MDT030"])
         {
-            MetaDataRecord *objmetadataRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:i];
-            NSLog(@"%@",objmetadataRecord.metasubcodedescription);
-            NSString *metastatus=objmetadataRecord.metasubcodedescription;
-            if([metastatus isEqualToString:@"MDT030"])
-            {
-                [_FetchPenalityArray addObject:objmetadataRecord];
-            }
-           penaltyrecord.penaltytypedescription=@"MSC134";
-
+            [_FetchPenalityArray addObject:objmetadataRecord];
         }
-        [self.tbl_penality reloadData];
-
+        penaltyrecord.penaltytypedescription=@"MSC134";
+        
+    }
+    [self.tbl_penality reloadData];
     
     self.btn_batting.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
     
@@ -264,87 +269,79 @@ NSString *penaltytypereasons;
 }
 
 
-//-(void) startService:(NSString *)OPERATIONTYPE{
-//    if(self.checkInternetConnection){
-//        
-////        NSString *MANOFTHESERIESCODE = selectedManOfTheSeries == nil ?@"NULL":selectedManOfTheSeries.playerCode;
-////        NSString *BESTBATSMANCODE = selectedBestBatsman == nil ?@"NULL":selectedBestBatsman.playerCode;
-////        NSString *BESTBOWLERCODE = selectedBestBowler == nil ?@"NULL":selectedBestBowler.playerCode;
-////        NSString *BESTALLROUNDERCODE = selectedBestAllRounder == nil ?@"NULL":selectedBestAllRounder.playerCode;
-////        NSString *MOSTVALUABLEPLAYERCODE = selectedMostValuPlayer == nil ?@"":selectedMostValuPlayer.playerCode;
-////        NSString *MATCHRESULTCODE = selectedResultType == nil ?@"NULL":selectedResultType.RESULTCODE;
-////        NSString *MATCHWONTEAMCODE = selectedTeam == nil ?@"NULL":selectedTeam.TEAMACODE;
-////        NSNumber *TEAMAPOINTS = [NSNumber numberWithInteger: [_txtf_team_a_point.text integerValue]]  ;
-////        NSString *TEAMBPOINTS = [_txtf_team_b_point.text isEqual: @""] ?@"NULL":_txtf_team_b_point.text;
-////        NSString *MANOFTHEMATCHCODE =selectedManOfTheMatch == nil ?@"NULL":selectedManOfTheMatch.playerCode;
-//        NSString *COMMENTS = [_txtf_comments.text isEqual: @""] ?@"NULL":_txtf_comments.text;
-//        NSString *TEAMNAME = @"NULL";
-//        
-//        
-//        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-//        
-//        //Show indicator
-//        [delegate showLoading];
+-(void) startService{
+    if(self.checkInternetConnection){
+        
+//        NSString *txt_penalityruns = selectedpenaltyruns == nil ?@"NULL":selectedpenaltyruns.penaltyruns;
+//        NSString *penalty_type = selectedpenaltytype == nil ?@"NULL":selectedpenaltytype.penaltytypecode;
+//        NSString *penalty_reason = selectedpenaltyreason == nil ?@"NULL":selectedpenaltyreason.penaltyreasoncode;
+    
+        
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        //Show indicator
+        [delegate showLoading];
 //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//            
-//            
-//            NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.39:8096/CAPMobilityService.svc/SETPENALTY/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], self.competitionCode,self.matchCode,self.inningsNo,txt_penalityruns.text,btnbatting,penaltytypereasons];
-//            NSLog(@"-%@",baseURL);
-//            
-//            
-//            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//            
-//            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//            NSURLResponse *response;
-//            NSError *error;
-//            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//            
-//            
-//            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-//            
-//            if(rootArray !=nil && rootArray.count>0){
-//                NSDictionary *valueDict = [rootArray objectAtIndex:0];
-//                NSString *success = [valueDict valueForKey:@"DataItem"];
-//                if([success isEqual:@"Success"]){
-//                    
-//                }
-//            }else{
-//                
-//            }
-//            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
-//            //            NSLog(@"%@",errorCode);
-//            //
-//            //
-//            //            if([errorCode boolValue] == YES)
-//            //            {
-//            //
-//            //                BOOL isUserLogin = YES;
-//            //
-//            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
-//            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
-//            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
-//            //                [[NSUserDefaults standardUserDefaults] synchronize];
-//            //
-//            //                [self openContentView];
-//            //
-//            //            }else{
-//            //
-//            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
-//            //            }
-//            [delegate hideLoading];
-//        });
-//        
-//        //[delegate hideLoading];
-//    }
-//}
-//
+        
+            
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETPENALTY/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], self.competitionCode,self.matchCode,self.inningsNo,self.ballcode,self.teamcode,txt_penalityruns.text,btnbatting,penaltyrecord.penaltyreasoncode];
+            NSLog(@"-%@",baseURL);
+            
+            
+            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURLResponse *response;
+            NSError *error;
+            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+            
+            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+            
+            if(rootArray !=nil && rootArray.count>0){
+                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                NSString *success = [valueDict valueForKey:@"DataItem"];
+                if([success isEqual:@"Success"]){
+                    
+                }
+            }else{
+                
+            }
+            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
+            //            NSLog(@"%@",errorCode);
+            //
+            //
+            //            if([errorCode boolValue] == YES)
+            //            {
+            //
+            //                BOOL isUserLogin = YES;
+            //
+            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+            //                [[NSUserDefaults standardUserDefaults] synchronize];
+            //
+            //                [self openContentView];
+            //
+            //            }else{
+            //
+            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+            //            }
+            [delegate hideLoading];
+        //});
+        
+        //[delegate hideLoading];
+    }
+}
+
 
 
 -(IBAction)didclicksubmit:(id)sender{
     
+    
     if(_penaltyDetailsRecord == nil){
         
-        
+        [self startService];
         
         PenaltyDetailsRecord *penaltyrecord = [[PenaltyDetailsRecord alloc]init];
         objMetaDataRecord=[[MetaDataRecord alloc]init];
@@ -355,7 +352,17 @@ NSString *penaltytypereasons;
             int penaltyRunsData = [penaltyrecord.penaltyruns intValue];
             if(penaltyRunsData >= 0 && penaltyRunsData <=10){
                 
-                [DBManager SetPenaltyDetails:self.competitionCode :self.matchCode :self.inningsNo :@"17259" :@"PNT0000007" :@"TEA0000006" :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                NSString *username=[defaults stringForKey :@"UserFullname"];
+                
+                NSString *maxid= [DBManager getMAXIDPENALTY];
+                NSString *paddingString = [[NSString string] stringByPaddingToLength: (7-maxid.length) withString: @"0" startingAtIndex: 0];
+                penaltycode = [NSString stringWithFormat:@"PNT%@%@",paddingString,maxid] ;
+                
+                
+                [DBManager SetPenaltyDetails:self.competitionCode :self.matchCode :self.inningsNo :self.ballcode :penaltycode :self.teamcode :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
+                
+                
                 
                 penaltyarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
                 

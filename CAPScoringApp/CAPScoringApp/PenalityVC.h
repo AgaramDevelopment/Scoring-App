@@ -41,6 +41,8 @@
 
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;
+@property(nonatomic,strong) NSString *teamcode;
+@property(nonatomic,strong) NSString *ballcode;
 @property(nonatomic,strong) NSString *inningsNo;
 @property(nonatomic,strong) NSString *metasubcode;
 @property (nonatomic,strong)NSDictionary *test;
