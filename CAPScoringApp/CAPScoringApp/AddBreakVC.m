@@ -421,16 +421,16 @@
         //[delegate hideLoading];
     }
     
-    else{
-    
-      [self showDialog:@"Network Error" andTitle:@""];
-    }
+//    else{
+//    
+//      [self showDialog:@"Network Error" andTitle:@""];
+//    }
 }
--(void) showDialog:(NSString*) message andTitle:(NSString*) title{
-    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
-    
-    [alertDialog show];
-}
+//-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+//    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+//    
+//    [alertDialog show];
+//}
 
 
 

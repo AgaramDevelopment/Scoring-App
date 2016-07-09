@@ -7129,7 +7129,7 @@
                                                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <color key="sectionIndexTrackingBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <prototypes>
-                                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="47" id="my8-G3-PdY" customClass="AppealCell">
+                                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="47" id="my8-G3-PdY" customClass="AppealCell">
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="my8-G3-PdY" id="yzF-ob-8uq">
                                                                             <rect key="frame" x="0.0" y="0.0" width="240" height="47"/>
@@ -7183,6 +7183,7 @@
                                                                             </variation>
                                                                         </tableViewCellContentView>
                                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                                         <connections>
                                                                             <outlet property="AppealName_lbl" destination="4T9-MU-sOI" id="Lb3-51-mP8"/>
                                                                         </connections>
@@ -8036,7 +8037,7 @@
                                                             <constraint firstAttribute="trailing" secondItem="YuY-c8-SjD" secondAttribute="trailing" id="pfg-Y5-MTD"/>
                                                             <constraint firstItem="YuY-c8-SjD" firstAttribute="top" secondItem="f9Y-Ya-Sje" secondAttribute="top" constant="39" id="qJr-MN-9Ci"/>
                                                             <constraint firstItem="lEx-sg-lbA" firstAttribute="leading" secondItem="f9Y-Ya-Sje" secondAttribute="leading" constant="8" id="ySu-VL-63Y">
-                                                                <variation key="heightClass=regular-widthClass=regular" constant="8"/>
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                                             </constraint>
                                                         </constraints>
                                                         <variation key="default">

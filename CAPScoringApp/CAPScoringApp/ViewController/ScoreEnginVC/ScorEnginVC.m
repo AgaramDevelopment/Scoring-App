@@ -1825,13 +1825,10 @@ EndInnings *endInnings;
         
         cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
         
-        UIView *customColorView = [[UIView alloc] init];
-        customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
-                                                          green:161/255.0
-                                                           blue:79/255.0
-                                                          alpha:0.5];
-        cell.selectedBackgroundView = customColorView;
+   
         return cell;
+        
+   
         
     } else if(tableView == tbl_bowlType){
         static NSString *CellIdentifier = @"cell";
@@ -5158,7 +5155,17 @@ EndInnings *endInnings;
     else if(selectBtnTag.tag==122)//Appels
     {
         //  [self selectBtncolor_Action:@"122" :nil :211];
-        _View_Appeal.hidden=NO;
+        
+//        if( _view_appeal.hidden) {
+//            _View_Appeal.hidden = false;
+//        } else {
+//            _View_Appeal.hidden = true;
+//        }
+//        
+        
+    _View_Appeal.hidden=NO;
+        
+        
         
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
