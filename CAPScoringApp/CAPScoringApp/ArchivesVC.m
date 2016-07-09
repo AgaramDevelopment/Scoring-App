@@ -62,10 +62,11 @@
     
     
     Archive *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-    
+    cell.Btn_Resume.tag=indexPath.row;
     cell.delegate = self;
     if ([self.cellsCurrentlyEditing containsObject:indexPath]) {
         [cell openCell];
+        
     }
     
     
@@ -155,14 +156,22 @@
     [self.navigationController pushViewController:objEditModeVC animated:YES];
 }
 
-- (void)RightsideResumeBtnAction
+- (void)RightsideResumeBtnAction:(UIButton *)sender
 {
   
+   
+    UIButton *button = (UIButton *)sender;
+    
+    
+    NSLog(@"the butto, on cell number... %d", button.tag);
+    
+    FixturesRecord *objFixtureRecord=(FixturesRecord*)[FetchCompitionArray objectAtIndex:button.tag];
+    
     ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
     
     scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
     //scoreEngine.matchSetUp = mSetUp;
-    scoreEngine.matchCode=matchCode;
+    scoreEngine.matchCode=objFixtureRecord.matchcode;
     scoreEngine.competitionCode=self.CompitionCode;
     scoreEngine.matchTypeCode=matchTypeCode;
     [self.navigationController pushViewController:scoreEngine animated:YES];

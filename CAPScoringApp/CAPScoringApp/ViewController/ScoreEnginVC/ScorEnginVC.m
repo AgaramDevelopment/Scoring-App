@@ -100,7 +100,7 @@
     AppealBatsmenRecord *objAppealBatsmenEventRecord;
     
     NSString *StrikerPlayer;
-    NSString *NonStrikerPlayer;
+    NSString *UmpireSelect;
     
     //Remark
     NSString *remarks;
@@ -273,6 +273,7 @@
 @synthesize AppealUmpireArray;
 @synthesize AppealBatsmenArray;
 
+
 FetchLastBowler *fetchLastBowler;
 FetchSEPageLoadRecord *fetchSEPageLoadRecord;
 EndInnings *endInnings;
@@ -286,6 +287,8 @@ EndInnings *endInnings;
     NSLog(@"%@",self.matchTypeCode);
     
     AppealBatsmenArray=[[NSMutableArray alloc]init];
+    
+    AppealUmpireArray=[[NSMutableArray alloc]init];
     
     EditModeVC * objEditModeVc=[[EditModeVC alloc]init];
     objEditModeVc.delegate=self;
@@ -350,19 +353,26 @@ EndInnings *endInnings;
    NSMutableDictionary *Dict2=[[NSMutableDictionary alloc]init];
         [Dict2 setValue:Playernonstickercode forKey:@"AppealBatsmenPlayerCode"];
     [Dict2 setValue:Playernonstickername forKey:@"AppealBatsmenPlayerName"];
-//
-//    [AppealBatsmenArray addObject:Dict1];
-//    [AppealBatsmenArray addObject:Dict2];
+
     
     
     AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:Dict1,Dict2 ,nil];
     
-//   [fetchLastBallBowledPlayer getLastBallBowlerPlayer:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO OVERNO:data BATTINGTEAMCODE:fetchSEPageLoadRecord.BATTINGTEAMCODE];
+    NSString*umpire1code=fetchSEPageLoadRecord.UMPIRE1CODE;
+    NSString*umpire1Name=fetchSEPageLoadRecord.UMPIRE1NAME;
+    NSString*umpire2code=fetchSEPageLoadRecord.UMPIRE2CODE;
+    NSString*umpire2name=fetchSEPageLoadRecord.UMPIRE2NAME;
+    
+    NSMutableDictionary *UmpireDict1=[[NSMutableDictionary alloc]init];
+    [UmpireDict1 setValue:umpire1code forKey:@"AppealumpireCode"];
+    [UmpireDict1 setValue:umpire1Name forKey:@"AppealumpireName"];
     
     
-    //[converstion fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    NSMutableDictionary *UmpireDict2=[[NSMutableDictionary alloc]init];
+    [UmpireDict2 setValue:umpire2code forKey:@"AppealumpireCode"];
+    [UmpireDict2 setValue:umpire2name forKey:@"AppealumpireName"];
     
-    
+      AppealUmpireArray=[[NSMutableArray alloc]initWithObjects:UmpireDict1,UmpireDict2 ,nil];
     
     
     _view_Wagon_wheel.hidden=YES;
@@ -811,6 +821,9 @@ EndInnings *endInnings;
     //Appeal
     if(self.ballEventRecord.objIsappeal.intValue == 1){
         [self selectedViewBg:_view_appeal];
+        
+        
+        
     }
     
     //Remark
@@ -1492,76 +1505,10 @@ EndInnings *endInnings;
         leftSlideSwipe = NO;
     }
     
-    //if you have left and right sidebar, you can control the pan gesture by start point.
-    //        if (recognizer.state == UIGestureRecognizerStateBegan) {
-    //            CGPoint startPoint = [recognizer locationInView:self.view];
-    //
-    //            // Left SideBar
-    //            if (startPoint.x < self.view.bounds.size.width / 2.0) {
-    //                self.sideBar.isCurrentPanGestureTarget = YES;
-    ////                self.sideviewXposition.constant =0;
-    ////                self.commonViewXposition.constant=300;
-    ////                self.commonViewwidthposition.constant =768;
-    ////                self.CommonviewRightsideposition.constant =self.view.frame.size.width+300;
-    //                leftSlideSwipe = YES;
-    //
-    //
-    //            }
-    //            // Right SideBar
-    //            else {
-    //                self.rightSideBar.isCurrentPanGestureTarget = YES;
-    //            }
-    //        }
-    //
-    //        [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
-    //        [self.rightSideBar handlePanGestureToShow:recognizer inViewController:self];
-    //
-    //     //if you have only one sidebar, do like following
-    //
-    //     self.sideBar.isCurrentPanGestureTarget = YES;
-    //    [self.sideBar handlePanGestureToShow:recognizer inView:self.view];
+ 
 }
 
-//#pragma mark - CDRTranslucentSideBarDelegate
-//- (void)sideBar:(CDRTranslucentSideBar *)sideBar didAppear:(BOOL)animated {
-//    if (sideBar.tag == 0) {
-//        NSLog(@"Left SideBar did appear");
-//    }
-//
-//    if (sideBar.tag == 1) {
-//        NSLog(@"Right SideBar did appear");
-//    }
-//}
-//
-//- (void)sideBar:(CDRTranslucentSideBar *)sideBar willAppear:(BOOL)animated {
-//    if (sideBar.tag == 0) {
-//        NSLog(@"Left SideBar will appear");
-//    }
-//
-//    if (sideBar.tag == 1) {
-//        NSLog(@"Right SideBar will appear");
-//    }
-//}
-//
-//- (void)sideBar:(CDRTranslucentSideBar *)sideBar didDisappear:(BOOL)animated {
-//    if (sideBar.tag == 0) {
-//        NSLog(@"Left SideBar did disappear");
-//    }
-//
-//    if (sideBar.tag == 1) {
-//        NSLog(@"Right SideBar did disappear");
-//    }
-//}
-//
-//- (void)sideBar:(CDRTranslucentSideBar *)sideBar willDisappear:(BOOL)animated {
-//    if (sideBar.tag == 0) {
-//        NSLog(@"Left SideBar will disappear");
-//    }
-//
-//    if (sideBar.tag == 1) {
-//        NSLog(@"Right SideBar will disappear");
-//    }
-//}
+
 
 // This is just a sample for tableview menu
 #pragma mark - UITableViewDataSource
@@ -2027,27 +1974,14 @@ EndInnings *endInnings;
         umpiretablecell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                                                 forIndexPath:indexPath];
         
-        objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
         
-        //upirename pass
-        cell.umpirename1_lbl.text=objAppealUmpireEventRecord.AppealUmpireName1;
-        cell.umirename2_lbl.text=objAppealUmpireEventRecord.AppealUmpireName2;
+        NSDictionary *test=[AppealUmpireArray objectAtIndex:indexPath.row];
         
-        //        static NSString *MyIdentifier = @"MyIdentifier";
-        //
-        //        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-        //
-        //        if (cell == nil)
-        //        {
-        //            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-        //                                          reuseIdentifier:MyIdentifier];
-        //        }
-        //
-        //        objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
-        //
-        //
-        //        cell.textLabel.text =objAppealUmpireEventRecord.AppealUmpireName1;
-        //        //cell.textLabel.text =objAppealUmpireEventRecord.AppealUmpireName2;
+        
+        cell.textLabel.text =[test valueForKey:@"AppealumpireName"];
+        
+        UmpireSelect=cell.textLabel.text;
+        UmpireSelect=[test valueForKey:@"AppealumpireCode"];
         return cell;
     }
     
@@ -3693,7 +3627,7 @@ EndInnings *endInnings;
         [self selectedButtonBg:selectBtnTag];
         
         // [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
-        if([self.BatmbaenStyle isEqualToString:@"MSC013"])
+        if([self.BatmenStyle isEqualToString:@"MSC013"])
         {
             [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
         }
@@ -5616,28 +5550,17 @@ EndInnings *endInnings;
 }
 - (IBAction)btn_umpireName:(id)sender {
     
-    
-    if(isEnableTbl==YES)
-    {
-        AppealUmpireArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchAppealumpireArray =[DBManager AppealUmpireRetrieveEventData:_competitionCode :_matchCode];
-        for(int i=0; i < [FetchAppealumpireArray count]; i++)
-        {
-            
-            objAppealUmpireEventRecord=(AppealUmpireRecord*)[FetchAppealumpireArray objectAtIndex:i];
-            
-            [AppealUmpireArray addObject:objAppealUmpireEventRecord];
-            
-            
-        }
+    if (self.tanle_umpirename.hidden ==YES) {
         
-        
-        [self.tanle_umpirename reloadData];
         self.tanle_umpirename.hidden=NO;
-        isEnableTbl=NO;
+        
     }
-    
+    else
+        self.tanle_umpirename.hidden=YES;
+
 }
+
+
 - (IBAction)btn_batsmen:(id)sender {
     if (self.table_BatsmenName.hidden ==YES) {
         
@@ -6317,20 +6240,11 @@ EndInnings *endInnings;
     if (tableView == self.tanle_umpirename)
     {
         
+        umpiretablecell *cell = (umpiretablecell *)[tableView cellForRowAtIndexPath:indexPath];
+        self.lbl_umpirename.text =cell.textLabel.text;
         
-        AppealUmpireSelectionArray=[[NSMutableArray alloc]init];
-        objAppealUmpireEventRecord=(AppealUmpireRecord*)[AppealUmpireArray objectAtIndex:indexPath.row];
         
-        self.lbl_umpirename.text =objAppealUmpireEventRecord.AppealUmpireName1;
-        [self.Lbl_umpirename2 setHidden:YES];
-        
-        self.Lbl_umpirename2.text =objAppealUmpireEventRecord.AppealUmpireName2;
-        [self.Lbl_umpirename2 setHidden:YES];
-        
-        // selectTeam=self.Wonby_lbl.text;
-        AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode1;
-        AppealUmpireSelectCode=objAppealUmpireEventRecord.AppealUmpireCode2;
-        [AppealUmpireSelectionArray addObject:objAppealUmpireEventRecord];
+        UmpireSelect=self.lbl_umpirename.text;
         
         self.tanle_umpirename.hidden=YES;
         isEnableTbl=YES;
@@ -8029,7 +7943,7 @@ EndInnings *endInnings;
     
     [appealEventDict setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
     [appealEventDict setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
-    [appealEventDict setValue:AppealUmpireSelectCode forKey:@"AppealUmpireSelct"];
+    [appealEventDict setValue:UmpireSelect forKey:@"AppealUmpireSelct"];
     [appealEventDict setValue:StrikerPlayer forKey:@"AppealBatsmenSelct"];
     NSString*AppealBowlercode=fetchSEPageLoadRecord.currentBowlerPlayerCode;
     [appealEventDict setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
