@@ -161,6 +161,7 @@
     int wicketOption;
     WicketTypeRecord *selectedwickettype;
     NSString *selectedStrikernonstriker;
+    NSString *selectedStrikernonstrikerCode;
     NSString *selectedWicketPlayerCode;
     NSString *selectedWicketEvent;
     BowlerEvent *selectedwicketBowlerlist;
@@ -1483,10 +1484,8 @@ EndInnings *endInnings;
     [self.sideviewtable reloadData];
     
     
-    
-    
-    
 }
+
 - (void)handlePanGesture:(UIPanGestureRecognizer *)recognizer {
     
     if(leftSlideSwipe ==NO)
@@ -1818,6 +1817,7 @@ EndInnings *endInnings;
         static NSString *CellIdentifier = @"Cell";
         AppealCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                                            forIndexPath:indexPath];
+    
         
         AppealRecord *objAppealrecord=(AppealRecord*)[self.AppealValuesArray objectAtIndex:indexPath.row];
         
@@ -1829,8 +1829,10 @@ EndInnings *endInnings;
                                                           green:161/255.0
                                                            blue:79/255.0
                                                           alpha:0.5];
-        cell.selectedBackgroundView = customColorView;
+        cell.selectedBackgroundView =  customColorView;
         return cell;
+        
+   
         
     } else if(tableView == tbl_bowlType){
         static NSString *CellIdentifier = @"cell";
@@ -2412,7 +2414,7 @@ EndInnings *endInnings;
          self.ballEventRecord.objVideoFile:
          isWicketSelected == YES ? [NSNumber numberWithInt:1] : [NSNumber numberWithInt:0]:
          selectedwickettype.metasubcode:
-         (selectedStrikernonstriker.length <= 0 ? fetchSEPageLoadRecord.strickerPlayerCode : selectedStrikernonstriker):
+         (selectedStrikernonstrikerCode.length <= 0 ? fetchSEPageLoadRecord.strickerPlayerCode : selectedStrikernonstrikerCode):
          selectedwicketBowlerlist.BowlerCode:
                                       insertType:
          @""://Awarded Team:
@@ -5158,14 +5160,14 @@ EndInnings *endInnings;
     {
         //  [self selectBtncolor_Action:@"122" :nil :211];
         
-        if( _view_appeal.hidden) {
-            _View_Appeal.hidden = false;
-        } else {
-            _View_Appeal.hidden = true;
-        }
+//        if( _view_appeal.hidden) {
+//            _View_Appeal.hidden = false;
+//        } else {
+//            _View_Appeal.hidden = true;
+//        }
+//        
         
-        
-        //_View_Appeal.hidden=NO;
+    _View_Appeal.hidden=NO;
         
         
         
@@ -5427,8 +5429,14 @@ EndInnings *endInnings;
     isOverthrowSelected = NO;
     
     //Wicket
-    
     isWicketSelected = NO;
+    selectedStrikernonstriker = nil;
+    selectedStrikernonstrikerCode = nil;
+    wicketOption = 0;
+    selectedwickettype =nil;
+    selectedWicketPlayerCode = nil;
+    selectedWicketEvent = nil;
+    selectedwicketBowlerlist=nil;
     
 }
 
@@ -6329,6 +6337,12 @@ EndInnings *endInnings;
     }else if(isWicketSelected && wicketOption == 2)
     {
         selectedStrikernonstriker = [self.StrikerandNonStrikerArray objectAtIndex:indexPath.row];
+        
+        if([selectedStrikernonstriker isEqual:fetchSEPageLoadRecord.strickerPlayerName]){
+            selectedStrikernonstrikerCode = fetchSEPageLoadRecord.strickerPlayerCode;
+        }else{
+            selectedStrikernonstrikerCode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
+        }
         
         self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Typical",@"Strong",@"Medium", nil];
         isWicketSelected = YES;

@@ -13,7 +13,7 @@
 #import "TossTeamDetailRecord.h"
 #import "InitializeInningsScoreBoardRecord.h"
 #import "DBManager.h"
-
+#import "DBManagerChangeToss.h"
 
 @interface ChangeTossVC ()
 {
@@ -318,7 +318,7 @@
             [self ShowAlterView:@"Please Select Bowler"];
         }
         else{
-            [self InsertTossDetails:self.CompitisonCode :self.matchCode:selectTeamcode :electedcode :StrikerCode :NonStrikerCode :selectBowlerCode :BowlingEnd];
+            [DBManagerChangeToss InsertTossDetails:self.CompitisonCode :self.matchCode:selectTeamcode :electedcode :StrikerCode :NonStrikerCode :selectBowlerCode :BowlingEnd];
             [self.delegate RedirectScorEngin];
             
         }
@@ -473,146 +473,6 @@
     }
     
 }
-
--(void) InsertTossDetails:(NSString*) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *) TOSSWONTEAMCODE:(NSString *) ELECTEDTO:(NSString *) STRIKERCODE:(NSString *) NONSTRIKERCODE:(NSString *)BOWLERCODE:(NSString *)BOWLINGEND
-{
-    NSString* BOWLINGTEAMCODE ;
-    NSString* BATTINGTEAMCODE ;
-    NSString* MAXINNINGSNO ;
-    
-    if(ELECTEDTO.length>0 && ![ELECTEDTO.uppercaseString isEqual: @"SELECT"])
-    {
-        if([ELECTEDTO isEqual:@"MSC017"])
-        {
-            NSMutableArray *TossDetailsArray=[DBManagerChangeToss GetTossDetailsForBattingTeam : TOSSWONTEAMCODE : COMPETITIONCODE : MATCHCODE];
-            TossTeamDetailRecord * objTossteam;
-            if(TossDetailsArray.count > 0)
-            {
-                objTossteam=(TossTeamDetailRecord *)[TossDetailsArray objectAtIndex:0];
-                BATTINGTEAMCODE=objTossteam.BattingTeamcode;
-               
-                BOWLINGTEAMCODE=objTossteam.BowlingTeamCode;
-            }
-        }
-        else
-        {
-            NSMutableArray *TossWonTeamDetailsArray=[DBManagerChangeToss GetTossDetailsForBowlingTeam : TOSSWONTEAMCODE : COMPETITIONCODE : MATCHCODE];
-            TossTeamDetailRecord * objTossteam;
-            if(TossWonTeamDetailsArray.count>0)
-            {
-                objTossteam=(TossTeamDetailRecord *)[TossWonTeamDetailsArray objectAtIndex:0];
-                BATTINGTEAMCODE=objTossteam.BattingTeamcode;
-               
-                BOWLINGTEAMCODE=objTossteam.BowlingTeamCode;
-
-            }
-        }
-    }
-    else
-    {
-        NSMutableArray *TossWonTeamArray=[DBManagerChangeToss GetTossDetailsForTeam : TOSSWONTEAMCODE : COMPETITIONCODE : MATCHCODE];
-         TossTeamDetailRecord * objTossteam;
-        if(TossWonTeamArray > 0)
-        {
-            objTossteam=(TossTeamDetailRecord *)[TossWonTeamArray objectAtIndex:0];
-            BATTINGTEAMCODE=objTossteam.BattingTeamcode;
-            BOWLINGTEAMCODE=objTossteam.BowlingTeamCode;
-        }
-    }
-    if(![DBManagerChangeToss GetMatchEventsForTossDetails : COMPETITIONCODE : MATCHCODE])
-    {
-        [DBManagerChangeToss SetMatchEventsForToss : COMPETITIONCODE : MATCHCODE : TOSSWONTEAMCODE : ELECTEDTO : BATTINGTEAMCODE : BOWLINGTEAMCODE];
-    }
-    MAXINNINGSNO = [DBManagerChangeToss GetMaxInningsNoForTossDetails : COMPETITIONCODE : MATCHCODE];
-    
-    [DBManagerChangeToss SetInningsEventsForToss:self.CompitisonCode :self.matchCode :BATTINGTEAMCODE :MAXINNINGSNO :STRIKERCODE :NONSTRIKERCODE :BOWLERCODE :BOWLINGEND];
-    
-    [DBManagerChangeToss UpdateMatchStatusForToss : COMPETITIONCODE : MATCHCODE];
-    
-    //EXEC [SP_INITIALIZEINNINGSSCOREBOARD]
-     [self UpdatePlayers:self.CompitisonCode :self.matchCode :MAXINNINGSNO :BATTINGTEAMCODE :BOWLINGTEAMCODE :StrikerCode :NonStrikerCode :selectBowlerCode];
-    
-}
-
-
--(void) UpdatePlayers:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)INNINGSNO:(NSString*)BATTINGTEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSString *)STRIKERCODE:(NSString *)NONSTRIKERCODE:(NSString *)BOWLERCODE
-{
-    
-    if(![DBManager GetBallCodeForUpdatePlayers:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO] && ![DBManager GetWicketTypeForUpdatePlayers:COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO])
-    {
-        [DBManager deleteBattingSummary:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO];
-        
-        [DBManager deleteInningsSummary:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO];
-        
-        [DBManager deleteBowlingSummary:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO];
-        
-        
-        if (_ISINNINGSREVERT == 0) {
-            
-            [DBManager insertBattingSummary:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO STRIKERCODE:STRIKERCODE];
-            
-            [DBManager insertBattingSummaryNonStricker:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO NONSTRIKERCODE:NONSTRIKERCODE];
-            
-            
-            [DBManager insertInningsSummary:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO];
-            
-            [DBManager insertBowlingSummary:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO BOWLERCODE:BOWLERCODE];
-            
-        }
-        
-    }
-    else
-    {
-        [DBManager DeleteBattingSummaryForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO];
-        
-        [DBManager DeleteBowlingSummaryForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BOWLINGTEAMCODE:INNINGSNO];
-        
-        
-        if(![DBManager GetStrikerDetailBallCodeForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO: STRIKERCODE: NONSTRIKERCODE])
-        {
-            
-            _STRIKERPOSITIONNO = [DBManager GetStrikerDetailsBattingSummaryForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO];
-            
-            [DBManager InsertBattingSummaryForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO : _STRIKERPOSITIONNO :STRIKERCODE];
-            
-            
-        }else{
-            
-            if ([DBManager GetBatsmanCodeForUpdatePlayers:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO :STRIKERCODE :NONSTRIKERCODE]) {
-                
-                [DBManager UpdateBattingSummaryInStrickerDetailsForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO : STRIKERCODE : NONSTRIKERCODE ];
-            }
-            
-        }
-        
-        
-        if([DBManager GetBatsmanCodeInUpdateBattingSummaryForUpdatePlayers:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO :STRIKERCODE :NONSTRIKERCODE])
-        {
-            [DBManager UpdateBattingSummaryAndWicketEventInStrickerDetailsForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO : STRIKERCODE : NONSTRIKERCODE];
-            
-        }
-        
-        if(![DBManager GetNonStrikerDetailsForBallCode : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO: NONSTRIKERCODE])
-        {
-            _NONSTRIKERPOSITIONNO=[DBManager GetNonStrikerDetailsForBattingSummary:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO];
-            
-            [DBManager InsertBattingSummaryForPlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO : _NONSTRIKERPOSITIONNO: NONSTRIKERCODE];
-        }
-        if(![DBManager GetBowlerDetailsForBallCode :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO: BOWLERCODE ])
-        {
-            _BOWLERPOSITIONNO=[DBManager GetBowlerDetailsForBowlingSummary:COMPETITIONCODE:MATCHCODE:BOWLINGTEAMCODE:INNINGSNO];
-            
-            [DBManager InsertBowlingSummaryForPlayers :COMPETITIONCODE:MATCHCODE:BOWLINGTEAMCODE:INNINGSNO : _BOWLERPOSITIONNO: BOWLERCODE];
-            
-        }
-        
-        
-    }
-    
-    [DBManager UpdateInningsEventsForPlayers :STRIKERCODE : NONSTRIKERCODE : BOWLERCODE: COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO];
-    
-}
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
