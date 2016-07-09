@@ -356,7 +356,7 @@
                 
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckPlayermaster:PLAYERCODE];
+                bool CheckStatus1=[DBMANAGERSYNC CheckPlayermaster :PLAYERCODE];
                 if (CheckStatus1==YES) {
                     [DBMANAGERSYNC UpdatePlayermaster:PLAYERCODE:PLAYERNAME:PLAYERDOB:PLAYERPHOTO: BATTINGSTYLE: BATTINGORDER: BOWLINGSTYLE:BOWLINGTYPE:BOWLINGSPECIALIZATION:PLAYERROLE: PLAYERREMARKS: RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:BALLTYPECODE:SHOTTYPE: SHOTCODE:PMLENGTHCODE:PMLINECODE:PMXVALUE:PMYVALUE:ATWOROTW];
                }
@@ -383,13 +383,13 @@
                 NSString *TEAMCODE=[test7 objectForKey:@"Teamcode"];
                 NSString *RECORDSTATUS=[test7 objectForKey:@"Recordstatus"];
                 
-                  bool CheckStatus1=[DBMANAGERSYNC CheckPlayerTeamDetails:PLAYERCODE :TEAMCODE];
+                  bool CheckStatus1=[DBMANAGERSYNC CheckPlayerTeamDetails :PLAYERCODE :TEAMCODE];
                 
                 if (CheckStatus1==YES) {
-                 [DBMANAGERSYNC  UpdatePlayerTeamDetails:PLAYERCODE:TEAMCODE:RECORDSTATUS];
+                 [DBMANAGERSYNC  UpdatePlayerTeamDetails :PLAYERCODE:TEAMCODE:RECORDSTATUS];
                 }
                 else{
-                    [DBMANAGERSYNC InsertPlayerTeamDetails:PLAYERCODE:TEAMCODE:RECORDSTATUS];
+                    [DBMANAGERSYNC InsertPlayerTeamDetails :PLAYERCODE:TEAMCODE:RECORDSTATUS];
                 }
 
             }
