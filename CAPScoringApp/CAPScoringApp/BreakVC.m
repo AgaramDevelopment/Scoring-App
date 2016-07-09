@@ -30,8 +30,7 @@
     
 
     
-    _resultarray=[[NSMutableArray alloc]init];
-    
+       
 //    UINib *nib = [UINib nibWithNibName:@"BreakTableViewCell" bundle:nil];
 //    [[self tablView] registerNib:nib forCellReuseIdentifier:@"BreakTableViewCell"];
     

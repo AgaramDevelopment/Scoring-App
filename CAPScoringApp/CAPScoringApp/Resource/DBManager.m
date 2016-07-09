@@ -5888,7 +5888,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            NSLog(@"check", sqlite3_errmsg(dataBase));
             return NO;
         }
     }
@@ -5953,7 +5953,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         }
         else {
             sqlite3_reset(statement);
-            
+            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
             return NO;
         }
 
