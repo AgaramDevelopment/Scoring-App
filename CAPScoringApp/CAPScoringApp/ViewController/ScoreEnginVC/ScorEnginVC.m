@@ -5157,7 +5157,17 @@ EndInnings *endInnings;
     else if(selectBtnTag.tag==122)//Appels
     {
         //  [self selectBtncolor_Action:@"122" :nil :211];
-        _View_Appeal.hidden=NO;
+        
+        if( _view_appeal.hidden) {
+            _View_Appeal.hidden = false;
+        } else {
+            _View_Appeal.hidden = true;
+        }
+        
+        
+        //_View_Appeal.hidden=NO;
+        
+        
         
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
