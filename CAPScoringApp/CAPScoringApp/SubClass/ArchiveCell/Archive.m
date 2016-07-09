@@ -265,7 +265,7 @@ static CGFloat const kBounceValue = 20.0f;
 }
 -(IBAction)didClickRightsideEditBtnAction:(id)sender
 {
-    [self.delegate RightSideEditBtnAction];
+    [self.delegate RightSideEditBtnAction:sender];
     
 
 }
