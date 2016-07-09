@@ -8101,28 +8101,29 @@ EndInnings *endInnings;
             bool chkNonStricker = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.nonstrickerPlayerCode]);
             if(!chkNonStricker){
                 [strickerList addObject:record];
+                
+                bool chk = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.strickerPlayerCode]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    //   break;
+                }
+                indx ++;
             }
             
-            bool chk = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.strickerPlayerCode]);
-            if (chk)
-            {
-                selectePosition = indx;
-                // break;
-            }
-            indx ++;
+           
         }
         
         [strickerTableView reloadData];
         
         if(selectePosition!=-1){
             
+        
             //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
             NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
             [strickerTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
             
-            [strickerTableView scrollToRowAtIndexPath:indexPath
-                                     atScrollPosition:UITableViewScrollPositionTop
-                                             animated:YES];
+            [strickerTableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }
     }else{
         isStrickerOpen = NO;
@@ -8153,15 +8154,17 @@ EndInnings *endInnings;
             bool chkStricker = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.strickerPlayerCode]);
             if(!chkStricker){
                 [nonStrickerList addObject:record];
+                
+                bool chk = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.nonstrickerPlayerCode]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    //    break;
+                }
+                indx ++;
             }
             
-            bool chk = ([[record playerCode] isEqualToString:fetchSEPageLoadRecord.nonstrickerPlayerCode]);
-            if (chk)
-            {
-                selectePosition = indx;
-                // break;
-            }
-            indx ++;
+        
         }
         [nonstrickerTableView reloadData];
         //NSInteger position = [self.fieldingPlayerArray indexOfObject:selectedfieldPlayer];
