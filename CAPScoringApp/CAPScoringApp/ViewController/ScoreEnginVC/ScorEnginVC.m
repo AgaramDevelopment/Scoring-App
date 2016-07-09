@@ -3692,7 +3692,7 @@ EndInnings *endInnings;
         [self selectedButtonBg:selectBtnTag];
         
         // [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
-        if([self.BatmbaenStyle isEqualToString:@"MSC013"])
+        if([self.BatmenStyle isEqualToString:@"MSC013"])
         {
             [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
         }
