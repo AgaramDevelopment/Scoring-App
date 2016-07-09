@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 @protocol SwipeableCellDelegate <NSObject>
 - (void)RightSideEditBtnAction;
-- (void)RightsideResumeBtnAction;
+- (void)RightsideResumeBtnAction:(UIButton*)sender;
 - (void)cellDidOpen:(UITableViewCell *)cell;
 - (void)cellDidClose:(UITableViewCell *)cell;
 @end
@@ -24,6 +24,7 @@
 
 
 
+@property(nonatomic,strong) IBOutlet UIButton * Btn_Resume;
 @property(strong,nonatomic) IBOutlet UILabel * innings1teamname1;
 @property(strong,nonatomic) IBOutlet UILabel * innings1teamname2;
 @property(strong,nonatomic) IBOutlet UILabel * innings1team1runs;
