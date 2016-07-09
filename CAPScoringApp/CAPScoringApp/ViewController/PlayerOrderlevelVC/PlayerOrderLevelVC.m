@@ -60,7 +60,7 @@
     [self customnavigationmethod];
     
     slecteplayerlist=[[NSMutableArray alloc]init];
-    objPreviousorderList=[[NSMutableArray alloc]init];
+    
     [self selectplayfilterArray ];
     //slecteplayerlist=self.objSelectplayerList_Array;
    
@@ -275,6 +275,7 @@
 }
 -(IBAction)didClickDeleteplayer:(id)sender
 {
+    objPreviousorderList=[[NSMutableArray alloc]init];
     for(int i=0; i< self.objSelectplayerList_Array.count; i++)
     {
         SelectPlayerRecord *selectedPlayerFilterRecord = [self.objSelectplayerList_Array objectAtIndex:i];

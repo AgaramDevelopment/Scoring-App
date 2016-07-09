@@ -161,6 +161,7 @@
     int wicketOption;
     WicketTypeRecord *selectedwickettype;
     NSString *selectedStrikernonstriker;
+    NSString *selectedStrikernonstrikerCode;
     NSString *selectedWicketPlayerCode;
     NSString *selectedWicketEvent;
     BowlerEvent *selectedwicketBowlerlist;
@@ -2413,7 +2414,7 @@ EndInnings *endInnings;
          self.ballEventRecord.objVideoFile:
          isWicketSelected == YES ? [NSNumber numberWithInt:1] : [NSNumber numberWithInt:0]:
          selectedwickettype.metasubcode:
-         (selectedStrikernonstriker.length <= 0 ? fetchSEPageLoadRecord.strickerPlayerCode : selectedStrikernonstriker):
+         (selectedStrikernonstrikerCode.length <= 0 ? fetchSEPageLoadRecord.strickerPlayerCode : selectedStrikernonstrikerCode):
          selectedwicketBowlerlist.BowlerCode:
                                       insertType:
          @""://Awarded Team:
@@ -5428,8 +5429,14 @@ EndInnings *endInnings;
     isOverthrowSelected = NO;
     
     //Wicket
-    
     isWicketSelected = NO;
+    selectedStrikernonstriker = nil;
+    selectedStrikernonstrikerCode = nil;
+    wicketOption = 0;
+    selectedwickettype =nil;
+    selectedWicketPlayerCode = nil;
+    selectedWicketEvent = nil;
+    selectedwicketBowlerlist=nil;
     
 }
 
@@ -6330,6 +6337,12 @@ EndInnings *endInnings;
     }else if(isWicketSelected && wicketOption == 2)
     {
         selectedStrikernonstriker = [self.StrikerandNonStrikerArray objectAtIndex:indexPath.row];
+        
+        if([selectedStrikernonstriker isEqual:fetchSEPageLoadRecord.strickerPlayerName]){
+            selectedStrikernonstrikerCode = fetchSEPageLoadRecord.strickerPlayerCode;
+        }else{
+            selectedStrikernonstrikerCode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
+        }
         
         self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Typical",@"Strong",@"Medium", nil];
         isWicketSelected = YES;
