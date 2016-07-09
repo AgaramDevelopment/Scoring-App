@@ -602,7 +602,7 @@
             
             int Q;
             for (Q=0; Q<[temp14 count]; Q++) {
-                NSDictionary*test14=[temp14 objectAtIndex:R];
+                NSDictionary*test14=[temp14 objectAtIndex:Q];
                 NSString*FIELDINGFACTORCODE=[test14 objectForKey:@"Fieldingfactorcode"];
                 NSString *FIELDINGFACTOR=[test14 objectForKey:@"FieldingfactorS"];
                 NSString *DISPLAYORDER=[test14 objectForKey:@"Displayorder"];
