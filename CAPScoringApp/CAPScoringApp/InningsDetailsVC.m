@@ -34,4 +34,12 @@
 }
 */
 
+- (IBAction)btn_Striker:(id)sender {
+}
+- (IBAction)btn_Nonstriker:(id)sender {
+}
+- (IBAction)btn_Bowler:(id)sender {
+}
+- (IBAction)Finish_btn:(id)sender {
+}
 @end
