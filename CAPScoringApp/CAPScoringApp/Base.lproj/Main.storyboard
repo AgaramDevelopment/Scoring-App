@@ -5660,7 +5660,7 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="160" y="1" width="440" height="114"/>
+                                                    <rect key="frame" x="160" y="1" width="440" height="110"/>
                                                 </variation>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBk-zT-YMj">
@@ -5681,7 +5681,7 @@
                                                     </mask>
                                                 </variation>
                                                 <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="0.0" y="1" width="150" height="114"/>
+                                                    <rect key="frame" x="0.0" y="1" width="150" height="110"/>
                                                     <mask key="constraints">
                                                         <include reference="cIY-gc-wL3"/>
                                                     </mask>
@@ -13495,6 +13495,7 @@
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" red="1" green="0.44770115539999999" blue="0.40635159840000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
+                                                    <outlet property="Btn_Resume" destination="2NP-IN-y8d" id="ei4-66-Pk7"/>
                                                     <outlet property="Btn_swipebutton" destination="9UM-J2-vvb" id="fby-Wz-T9c"/>
                                                     <outlet property="button1" destination="T1f-pQ-FjC" id="lhN-4U-CoR"/>
                                                     <outlet property="button2" destination="78w-w0-W3k" id="yAN-MA-Ive"/>
