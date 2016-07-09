@@ -6424,14 +6424,7 @@ EndInnings *endInnings;
         self.view_defensive.hidden =YES;
         
       //  isWicketSelected = NO;
-    }
-    
-    
-    
-    
-    
-    //Fielding Factor
-    if(isFieldingSelected && fieldingOption == 1)
+    }else if(isFieldingSelected && fieldingOption == 1) //Fielding Factor
     {
         selectedfieldFactor = [self.fieldingfactorArray objectAtIndex:indexPath.row];
         
@@ -6506,6 +6499,36 @@ EndInnings *endInnings;
         self.view_defensive.hidden =YES;
         
         isFieldingSelected = NO;
+    }else if (tbl_fastBowl == tableView){ // Fast bowling
+        
+        //        isFastSelected = YES;
+        //        isSpinSelected = NO;
+        
+        BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.fastBowlTypeArray objectAtIndex:indexPath.row];
+        //self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        if(!isFastSelected && self.ballEventRecord.objBowltype==nil){
+            isFastSelected = YES;
+            isSpinSelected = NO;
+            self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+            
+        }else if(isFastSelected && self.ballEventRecord.objBowltype!=nil && self.ballEventRecord.objBowltype == bowlAndShortTypeRecord.BowlTypeCode){
+            isFastSelected = NO;
+            self.ballEventRecord.objBowltype = nil;
+            [self unselectedViewBg:_view_fast];
+            
+        }
+        else{
+            isFastSelected = YES;
+            isSpinSelected = NO;
+            self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+        }
+        
+        
+        
+        self.view_fastBowl.hidden = YES;
+        
+        
+        
     }
     
     // _view_table_select.hidden=NO;
@@ -6824,36 +6847,6 @@ EndInnings *endInnings;
         //            objBalleventRecord.objBowltype = nil;
         //            [tbl_bowlType reloadData];
         //        }
-        
-        
-    }else if (tbl_fastBowl == tableView){
-        
-//        isFastSelected = YES;
-//        isSpinSelected = NO;
-        
-        BowlAndShotTypeRecords *bowlAndShortTypeRecord = [self.fastBowlTypeArray objectAtIndex:indexPath.row];
-        //self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
-        if(!isFastSelected && self.ballEventRecord.objBowltype==nil){
-            isFastSelected = YES;
-            isSpinSelected = NO;
-            self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
-            
-        }else if(isFastSelected && self.ballEventRecord.objBowltype!=nil && self.ballEventRecord.objBowltype == bowlAndShortTypeRecord.BowlTypeCode){
-            isFastSelected = NO;
-            self.ballEventRecord.objBowltype = nil;
-            [self unselectedViewBg:_view_fast];
-            
-        }
-        else{
-            isFastSelected = YES;
-            isSpinSelected = NO;
-            self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
-        }
-        
-        
-        
-        self.view_fastBowl.hidden = YES;
-
         
         
     }else if (tbl_aggressiveShot == tableView){
