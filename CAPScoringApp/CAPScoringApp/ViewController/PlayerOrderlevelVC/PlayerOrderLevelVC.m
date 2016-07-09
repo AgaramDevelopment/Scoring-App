@@ -191,13 +191,17 @@
     if([self.Btn_objSearch.currentImage  isEqual: [UIImage imageNamed:@"ico-cancel"]]){
         self.txt_search.text =@"";
         [self.Btn_objSearch setImage:[UIImage imageNamed:@"ico-search"] forState:UIControlStateNormal];
-        [self.selectedPlayerFilterArray removeAllObjects];
+        self.selectedPlayerFilterArray=[[NSMutableArray alloc]init];
+        
+        self.selectedPlayerFilterArray =nil;
+        [slecteplayerlist removeAllObjects];
+        
         for(int i=0; i< self.objSelectplayerList_Array.count; i++)
         {
             SelectPlayerRecord *selectedPlayerFilterRecord = [self.objSelectplayerList_Array objectAtIndex:i];
             if( [[selectedPlayerFilterRecord isSelected]boolValue])
             {
-                [self.selectedPlayerFilterArray addObject:selectedPlayerFilterRecord];
+                [slecteplayerlist addObject:selectedPlayerFilterRecord];
                 //[objPreviousorderList addObject:selectedPlayerFilterRecord];
                 
             }
@@ -207,17 +211,7 @@
         
     }else{
         
-//        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",self.txt_search.text];
-//        
-//        NSArray *filtedPlayerArray =  [self.objSelectplayerList_Array filteredArrayUsingPredicate:resultPredicate];
-//        
-//        // NSLog(@"count %lu",(unsigned long)[self.selectedPlayerArray count]);
-//        
-//        [self.selectedPlayerFilterArray removeAllObjects];
-//        
-//        //    NSLog(@"count2 %lu",(unsigned long)[self.selectedPlayerArray count]);
-//        
-//        self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
+
         
         
     }
@@ -232,7 +226,15 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
-    [self.Btn_objSearch setImage:[UIImage imageNamed:@"ico-cancel"] forState:UIControlStateNormal];
+    if([self.Btn_objSearch.currentImage  isEqual: [UIImage imageNamed:@"ico-cancel"]])
+    {
+        [self.Btn_objSearch setImage:[UIImage imageNamed:@"ico-search"] forState:UIControlStateNormal];
+        
+    }
+    else
+    {
+      [self.Btn_objSearch setImage:[UIImage imageNamed:@"ico-cancel"] forState:UIControlStateNormal];
+    }
     NSLog(@"textFieldDidBeginEditing");
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{

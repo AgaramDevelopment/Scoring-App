@@ -1694,7 +1694,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				187E9A5E1D31020C00370003 /* TNCA_DATABASE.sqlite in Resources */,
+				CE8100091D30DDFE0065D56D /* TNCA_DATABASE.sqlite in Resources */,
 				047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */,
 				18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */,
 				24F96F881D2FC90500798A9D /* PenalityVC.xib in Resources */,
