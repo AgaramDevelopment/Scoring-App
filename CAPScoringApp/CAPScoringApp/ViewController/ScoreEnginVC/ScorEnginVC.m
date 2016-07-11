@@ -526,6 +526,13 @@ EndInnings *endInnings;
     [self.view_batsmen .layer setMasksToBounds:YES];
     [_table_BatsmenName setHidden:YES];
     
+    
+    
+    
+    [self.comments_txt.layer setBorderWidth:2.0];
+    [self.comments_txt.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    [self.comments_txt .layer setMasksToBounds:YES];
+    //[_tanle_umpirename setHidden:YES];
     // AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     
     self.view_bowlType.hidden = YES;
@@ -6271,9 +6278,9 @@ EndInnings *endInnings;
         umpiretablecell *cell = (umpiretablecell *)[tableView cellForRowAtIndexPath:indexPath];
         self.lbl_umpirename.text =cell.textLabel.text;
         
-        
-        UmpireSelect=self.lbl_umpirename.text;
-        
+        NSString *umpirename=self.lbl_umpirename.text;
+      //  UmpireSelect=umpirename;
+      
         self.tanle_umpirename.hidden=YES;
         isEnableTbl=YES;
     }

@@ -527,7 +527,7 @@
     
     if(isEnableTbl==YES)
     {
-        _Striker_lbl.text = @"";
+      
         //NSString *teamCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
@@ -580,7 +580,7 @@
 - (IBAction)nonStriker_btn:(id)sender{
     if(isEnableTbl==YES)
     {
-        _nonStriker_lbl.text = @"";
+       
         //  NSString *teamCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
@@ -631,7 +631,7 @@
     
     if(isEnableTbl==YES)
     {
-        _Bowler_lbl.text = @"";
+       
         //NSString *teambCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
