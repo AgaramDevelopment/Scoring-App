@@ -57,9 +57,9 @@
     // Do any additional setup after loading the view from its nib.
     [self customnavigationmethod];
     
-    [self.Striker_View setUserInteractionEnabled:NO];
-    [self.NonStriker_View setUserInteractionEnabled:NO];
-    [self.Bowler_View setUserInteractionEnabled:NO];
+    [self.Striker_View setUserInteractionEnabled:YES];
+    [self.NonStriker_View setUserInteractionEnabled:YES];
+    [self.Bowler_View setUserInteractionEnabled:YES];
     
     //striker
     [self.Striker_View .layer setBorderWidth:2.0];
@@ -80,7 +80,7 @@
     self.Bowler_tableview.hidden=YES;
     isEnableTbl=YES;
     
-    NSMutableDictionary *FetchInningsDetails = [DBManagerChangeToss FetchTossDetailsForInnings:CompetitionCode : MATCHCODE];
+    NSMutableDictionary *FetchInningsDetails = [DBManagerChangeToss FetchTossDetailsForInnings: MATCHCODE : CompetitionCode];
     StrikerArray = [[NSMutableArray alloc] init];
     StrikerArray = [FetchInningsDetails objectForKey:@"battingplayers"];
     nonStrikerArray = [[NSMutableArray alloc] init];
@@ -91,8 +91,9 @@
     TeamDetails =[FetchInningsDetails objectForKey:@"teamdetails"];
     if(TeamDetails.count>1)
     {
-        selectTeam = [TeamDetails objectAtIndex:1];
-        selectTeamcode = [TeamDetails objectAtIndex:2];
+        selectTeam = [TeamDetails objectAtIndex:0];
+        selectTeamcode = [TeamDetails objectAtIndex:1];
+        self.lbl_Team.text = selectTeam;
     }
 }
 

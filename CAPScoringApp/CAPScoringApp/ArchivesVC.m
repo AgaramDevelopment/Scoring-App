@@ -176,12 +176,11 @@
     NSMutableArray *mSetUp = [[NSMutableArray alloc]init];
     [mSetUp addObject:objFixtureRecord];
     
-    if([objFixtureRecord.MatchStatus isEqualToString:@"MSC124"],[objFixtureRecord.MatchStatus isEqualToString:@"MSC240"])
+    if([objFixtureRecord.MatchStatus isEqualToString:@"MSC124"]||[objFixtureRecord.MatchStatus isEqualToString:@"MSC240"])
     {
         if([objFixtureRecord.InningsStatus isEqualToString:@"1"])
         {
             InningsDetailsVC *_InningsDetailsVC = [[InningsDetailsVC alloc]initWithNibName:@"InningsDetailsVC" bundle:nil];
-            _InningsDetailsVC =(InningsDetailsVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
             _InningsDetailsVC.matchSetUp = mSetUp;
             _InningsDetailsVC.MATCHCODE=objFixtureRecord.matchcode;
             _InningsDetailsVC.competitionCode=self.CompitionCode;

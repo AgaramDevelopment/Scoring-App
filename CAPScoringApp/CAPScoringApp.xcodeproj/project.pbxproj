@@ -695,7 +695,6 @@
 		DC2710701D25B9A40011C7B0 /* FollowOn.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowOn.xib; sourceTree = "<group>"; };
 		DC2710711D25B9A40011C7B0 /* FollowOnRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowOnRecords.h; sourceTree = "<group>"; };
 		DC2710721D25B9A40011C7B0 /* FollowOnRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowOnRecords.m; sourceTree = "<group>"; };
-		DCA67D4C1D34055200982EF5 /* CAPScoringApp */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CAPScoringApp; sourceTree = "<group>"; };
 		DCA67D4E1D34056A00982EF5 /* InningsDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InningsDetailsVC.h; sourceTree = "<group>"; };
 		DCA67D4F1D34056A00982EF5 /* InningsDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InningsDetailsVC.m; sourceTree = "<group>"; };
 		DCA67D501D34056A00982EF5 /* InningsDetailsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InningsDetailsVC.xib; sourceTree = "<group>"; };
@@ -1346,7 +1345,6 @@
 				DCA67D4E1D34056A00982EF5 /* InningsDetailsVC.h */,
 				DCA67D4F1D34056A00982EF5 /* InningsDetailsVC.m */,
 				DCA67D501D34056A00982EF5 /* InningsDetailsVC.xib */,
-				DCA67D4C1D34055200982EF5 /* CAPScoringApp */,
 				DC2710661D25B9A40011C7B0 /* EndSession.h */,
 				DC2710671D25B9A40011C7B0 /* EndSession.m */,
 				DC2710681D25B9A40011C7B0 /* EndSession.xib */,
