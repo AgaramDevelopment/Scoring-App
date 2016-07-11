@@ -2092,8 +2092,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT BYES, LEGBYES, NOBALLS, WIDES, PENALTIES, INNINGSTOTAL, INNINGSTOTALWICKETS FROM INNINGSSUMMARY WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@' AND INNINGSNO = @INNINGSNO", COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
                                
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)== SQLITE_OK);
+        
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 EndInnings *record=[[EndInnings alloc]init];

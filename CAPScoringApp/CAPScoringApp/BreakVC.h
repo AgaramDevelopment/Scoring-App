@@ -30,7 +30,7 @@
 @property(strong,nonatomic)NSString*INNINGSNO;
 @property(strong,nonatomic)NSString*MATCHDATE;
 
-@property(nonatomic,strong) id <BreakVCDelagate> delegate;
+@property(strong,nonatomic) id <BreakVCDelagate> delegate;
 - (IBAction)backbtn:(id)sender;
 
 @end

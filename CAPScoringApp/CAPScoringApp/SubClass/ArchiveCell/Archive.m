@@ -35,6 +35,7 @@ static CGFloat const kBounceValue = 20.0f;
     self.panRecognizer.delegate = self;
     [self.myContentView addGestureRecognizer:self.panRecognizer];
     
+    
 }
 
 - (void)prepareForReuse
@@ -259,11 +260,12 @@ static CGFloat const kBounceValue = 20.0f;
 }
 -(IBAction)didClickRightsideResumebtnAction:(id)sender
 {
-    [self.delegate RightsideResumeBtnAction];
+    
+    [self.delegate RightsideResumeBtnAction:sender];
 }
 -(IBAction)didClickRightsideEditBtnAction:(id)sender
 {
-    [self.delegate RightSideEditBtnAction];
+    [self.delegate RightSideEditBtnAction:sender];
     
 
 }

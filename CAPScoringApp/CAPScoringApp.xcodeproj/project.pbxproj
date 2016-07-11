@@ -205,6 +205,7 @@
 		CE7C6DD31D23CE5300B694D5 /* Other_WicketVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7C6DD11D23CE5300B694D5 /* Other_WicketVC.xib */; };
 		CE7C6DD61D23E14A00B694D5 /* DbManager_OtherWicket.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7C6DD51D23E14A00B694D5 /* DbManager_OtherWicket.m */; };
 		CE7C6DDC1D23E73D00B694D5 /* GetPlayerDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7C6DDB1D23E73D00B694D5 /* GetPlayerDetail.m */; };
+		CE8100091D30DDFE0065D56D /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 24F96F771D2F743700798A9D /* TNCA_DATABASE.sqlite */; };
 		CEA275121D2A1E47007F6A28 /* AppealEventPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA275111D2A1E47007F6A28 /* AppealEventPushRecord.m */; };
 		CEA275151D2A20FB007F6A28 /* WicketEventsPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA275141D2A20FB007F6A28 /* WicketEventsPushRecord.m */; };
 		CEA275181D2A244B007F6A28 /* PowerPlayPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA275171D2A244B007F6A28 /* PowerPlayPushRecord.m */; };
@@ -1341,6 +1342,9 @@
 		CE0018361CF4308000668D8B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DC35FDEC1D31108500935F6D /* InningsDetailsVC.h */,
+				DC35FDED1D31108500935F6D /* InningsDetailsVC.m */,
+				DC35FDEE1D31108500935F6D /* InningsDetailsVC.xib */,
 				DC2710661D25B9A40011C7B0 /* EndSession.h */,
 				DC2710671D25B9A40011C7B0 /* EndSession.m */,
 				DC2710681D25B9A40011C7B0 /* EndSession.xib */,
@@ -1705,6 +1709,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC35FDF01D31108500935F6D /* InningsDetailsVC.xib in Resources */,
+				CE8100091D30DDFE0065D56D /* TNCA_DATABASE.sqlite in Resources */,
 				047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */,
 				18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */,
 				24F96F881D2FC90500798A9D /* PenalityVC.xib in Resources */,
@@ -1790,6 +1796,7 @@
 				186DC8191D21451500293B7F /* EndDayTVC.m in Sources */,
 				187620FE1D1D0126006E160F /* DBManagerEndDay.m in Sources */,
 				CE7C6DD61D23E14A00B694D5 /* DbManager_OtherWicket.m in Sources */,
+				DC35FDEF1D31108500935F6D /* InningsDetailsVC.m in Sources */,
 				187625091D154495009374F8 /* RevicedOverVC.m in Sources */,
 				246125191D13C85E004B85E7 /* Reachability.m in Sources */,
 				185060561D0300190030E3E2 /* FastBowlTypeCell.m in Sources */,

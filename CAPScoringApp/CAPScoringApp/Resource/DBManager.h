@@ -302,7 +302,7 @@
 
 +(BOOL) UpdateInningsEvents:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) BREAKCOMMENTS:(NSString*) ISINCLUDEDURATION : (NSString*) COMPETITIONCODE : (NSString*) MATCHCODE : (NSString*) INNINGSNO : (NSString*) BREAKNO;
 
-+(NSMutableArray*) GetInningsBreakDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
++(NSMutableArray *) GetInningsBreakDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 
 +(NSString*) GetMaxBreakNoForUpdateBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 
@@ -315,7 +315,7 @@
 
 +(NSString*) GetMaxBreakNoForDeleteBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 
-+(void *) InsertBreaks:(NSString *)COMPETITIONCODE:(NSString*)INNINGSNO:(NSString*)MATCHCODE:(NSString*)BREAKSTARTTIME:(NSString*)BREAKENDTIME:
++(void ) InsertBreaks:(NSString *)COMPETITIONCODE:(NSString*)INNINGSNO:(NSString*)MATCHCODE:(NSString*)BREAKSTARTTIME:(NSString*)BREAKENDTIME:
 (NSString*)COMMENTS:(NSString*)ISINCLUDEDURATION:(NSString*)BREAKNO;
 
 +(void) DeleteBreaks:(NSString *)COMPETITIONCODE:(NSString*)INNINGSNO:(NSString*)MATCHCODE:(NSString*)COMMENTS:(NSString*)BREAKNO;
@@ -381,32 +381,32 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 //--------------------------------------------------------------------------------------------------------------------------------------
 //SP_SBUPDATEPLAYERS
 
-+(BOOL*)  GetBallCodeForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO;
++(BOOL)  GetBallCodeForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO;
 
-+(BOOL*)  GetWicketTypeForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO;
++(BOOL)  GetWicketTypeForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO;
 
-+(BOOL*) DeleteBattingSummaryForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO;
++(BOOL) DeleteBattingSummaryForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO;
 
-+(BOOL*)  DeleteBowlingSummaryForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BOWLINGTEAMCODE :(NSString*) INNINGSNO;
++(BOOL)  DeleteBowlingSummaryForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BOWLINGTEAMCODE :(NSString*) INNINGSNO;
 
-+(BOOL*) GetStrikerDetailBallCodeForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO : (NSString*) STRIKERCODE : (NSString*) NONSTRIKERCODE;
++(BOOL) GetStrikerDetailBallCodeForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO : (NSString*) STRIKERCODE : (NSString*) NONSTRIKERCODE;
 
 
 +(NSString*) GetStrikerDetailsBattingSummaryForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO;
 
-+(BOOL*)  InsertBattingSummaryForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO :(NSString*) STRIKERPOSITIONNO : (NSString*) STRIKERCODE;
++(BOOL)  InsertBattingSummaryForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO :(NSString*) STRIKERPOSITIONNO : (NSString*) STRIKERCODE;
 
 
-+(BOOL*)  GetBatsmanCodeForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO: (NSString*) STRIKERCODE : (NSString*) NONSTRIKERCODE;
++(BOOL)  GetBatsmanCodeForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO: (NSString*) STRIKERCODE : (NSString*) NONSTRIKERCODE;
 
 
 
-+(BOOL*) UpdateBattingSummaryInStrickerDetailsForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO: (NSString*) STRIKERCODE : (NSString*) NONSTRIKERCODE;
++(BOOL ) UpdateBattingSummaryInStrickerDetailsForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO: (NSString*) STRIKERCODE : (NSString*) NONSTRIKERCODE;
 
 
-+(BOOL*)  GetBatsmanCodeInUpdateBattingSummaryForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO: (NSString*) STRIKERCODE : (NSString*) NONSTRIKERCODE;
++(BOOL )  GetBatsmanCodeInUpdateBattingSummaryForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO: (NSString*) STRIKERCODE : (NSString*) NONSTRIKERCODE;
 
-+(BOOL*) UpdateBattingSummaryAndWicketEventInStrickerDetailsForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*)
++(BOOL) UpdateBattingSummaryAndWicketEventInStrickerDetailsForUpdatePlayers:(NSString*) COMPETITIONCODE:(NSString*)
                                                                   MATCHCODE :(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO: (NSString*) STRIKERCODE : (NSString*) NONSTRIKERCODE;
 
 +(BOOL) UpdateInningsEventsForPlayers:(NSString*) STRIKERCODE:(NSString*) NONSTRIKERCODE:(NSString*) BOWLERCODE:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*) INNINGSNO;
@@ -414,16 +414,16 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 +(BOOL) InsertBowlingSummaryForPlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BOWLINGTEAMCODE:(NSString*) INNINGSNO:(NSString*) BOWLERPOSITIONNO:(NSString*) BOWLERCODE;
 
 
-+(NSString*) GetBowlerDetailsForBowlingSummary:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BOWLINGTEAMCODE:(NSString*) INNINGSNO;
++(NSString *) GetBowlerDetailsForBowlingSummary:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BOWLINGTEAMCODE:(NSString*) INNINGSNO;
 
-+(BOOL*) GetBowlerDetailsForBallCode:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*) INNINGSNO:(NSString*) BOWLERCODE;
++(BOOL) GetBowlerDetailsForBallCode:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*) INNINGSNO:(NSString*) BOWLERCODE;
 
 +(BOOL) InsertBattingSummaryForPlayers:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*) INNINGSNO:(NSString*) NONSTRIKERPOSITIONNO:(NSString*) NONSTRIKERCODE;
 
 +(NSString*) GetNonStrikerDetailsForBattingSummary:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*) INNINGSNO;
 
 
-+(BOOL*) GetNonStrikerDetailsForBallCode:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*) INNINGSNO:(NSString*) NONSTRIKERCODE;
++(BOOL) GetNonStrikerDetailsForBallCode:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*) INNINGSNO:(NSString*) NONSTRIKERCODE;
 
 +(NSMutableArray *)GetBolwerDetailsonEdit:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *) INNINGSNO;
 

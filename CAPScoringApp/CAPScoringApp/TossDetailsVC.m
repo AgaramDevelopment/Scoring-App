@@ -707,9 +707,13 @@
 - (IBAction)Btn_Proceed:(id)sender {
     
     
+   if([self.Wonby_lbl.text isEqualToString:@""],[self.electedTo_lbl.text isEqualToString:@""],[self.Striker_lbl.text isEqualToString:@""],[self.nonStriker_lbl.text isEqualToString:@""],[self.Bowler_lbl.text isEqualToString:@""])
+       
+   {  [self ShowAlterView:@"Please Select Team\n Please Select ElectedTo Please Select Stricker Please Select NonStriker Please Select Bowler"];
+       
+   }
     
-    
-    if([self.Wonby_lbl.text isEqualToString:@""] || self.Wonby_lbl.text==nil)
+     else if([self.Wonby_lbl.text isEqualToString:@""] || self.Wonby_lbl.text==nil)
     {
         [self ShowAlterView:@"Please Select Team"];
     }

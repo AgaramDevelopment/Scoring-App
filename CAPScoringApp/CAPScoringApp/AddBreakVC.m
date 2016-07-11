@@ -265,13 +265,13 @@
     
     if([DBManager GetMatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE])
     {
-        if(![DBManager GetCompetitionCodeForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : ISINCLUDEDURATION : BREAKNO:BREAKCOMMENTS])
-        {
-            if(![DBManager MatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE : INNINGSNO])
-            {
+//        if(![DBManager GetCompetitionCodeForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : ISINCLUDEDURATION : BREAKNO:BREAKCOMMENTS])
+//        {
+//            if(![DBManager MatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE : INNINGSNO])
+//            {
                 [DBManager InsertInningsEvents : COMPETITIONCODE : INNINGSNO : MATCHCODE : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : BREAKNO : ISINCLUDEDURATION];
-            }
-        }
+          //  }
+       // }
     }
     
     NSMutableArray*BreaksArray=[DBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
@@ -421,16 +421,16 @@
         //[delegate hideLoading];
     }
     
-    else{
-    
-      [self showDialog:@"Network Error" andTitle:@""];
-    }
+//    else{
+//    
+//      [self showDialog:@"Network Error" andTitle:@""];
+//    }
 }
--(void) showDialog:(NSString*) message andTitle:(NSString*) title{
-    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
-    
-    [alertDialog show];
-}
+//-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+//    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+//    
+//    [alertDialog show];
+//}
 
 
 

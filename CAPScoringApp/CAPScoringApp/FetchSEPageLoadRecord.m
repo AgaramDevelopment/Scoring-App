@@ -71,6 +71,7 @@
 @synthesize strickerSixes ;
 @synthesize strickerTotalBalls;
 @synthesize strickerStrickRate ;
+@synthesize strickerBattingStyle;
 
 
 //Non Stricker Details
@@ -824,6 +825,7 @@ BOOL  getOverStatus;
         strickerSixes = [strickerDetaailsArray objectAtIndex:4];
         strickerTotalBalls = [strickerDetaailsArray objectAtIndex:5];
         strickerStrickRate = [strickerDetaailsArray objectAtIndex:6];
+        strickerBattingStyle = [strickerDetaailsArray objectAtIndex:7];
         
     }
     
