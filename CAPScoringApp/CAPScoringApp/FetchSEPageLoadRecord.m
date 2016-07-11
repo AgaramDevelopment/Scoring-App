@@ -714,10 +714,10 @@ BOOL  getOverStatus;
         
     }
     //FREE HIT
-    ISFREEHIT = 0;
+    ISFREEHIT =[NSNumber numberWithInt:0];
     
     if(ISPREVIOUSLEGALBALL == 1){
-        ISFREEHIT = 0;
+        ISFREEHIT =[NSNumber numberWithInt:0];
     }else{
         
         NSString *BATTEAMOVERSDATA = [NSString stringWithFormat: @"%d", (long)BATTEAMOVERS];
@@ -727,7 +727,7 @@ BOOL  getOverStatus;
         NSNumber *noBall = [DBManager getNOBALL:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO BATTEAMOVERS:BATTEAMOVERSDATA  BATTEAMOVRWITHEXTRASBALLS:BATTEAMOVRWITHEXTRASBALLSDATA];
         
         if(noBall.intValue > 0){
-            ISFREEHIT = @1;
+            ISFREEHIT = [NSNumber numberWithInt:1];
         }
         
     }

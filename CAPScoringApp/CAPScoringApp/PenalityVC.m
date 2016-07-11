@@ -397,10 +397,11 @@ NSString *penaltytypereasons;
         penaltyrecord.penaltytypecode=btnbatting;
         penaltyrecord.penaltyreasoncode=penaltytypereasons;
         
+        
         int penaltyRunsData = [penaltyrecord.penaltyruns intValue];
         if(penaltyRunsData >= 0 && penaltyRunsData <=10 ){
             
-            [DBManager GetUpdatePenaltyDetails:@"TEA0000006" :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode :self.competitionCode :self.matchCode :self.inningsNo :@"PNT0000007"];
+            [DBManager GetUpdatePenaltyDetails:self.teamcode :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode :self.competitionCode :self.matchCode :self.inningsNo :penaltycode];
             
             penaltyarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
             
