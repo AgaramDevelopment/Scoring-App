@@ -278,7 +278,7 @@
 FetchLastBowler *fetchLastBowler;
 FetchSEPageLoadRecord *fetchSEPageLoadRecord;
 EndInnings *endInnings;
-
+EditModeVC * objEditModeVc;
 - (void)viewDidLoad {
     [super viewDidLoad];
     //Initialize Matchtype Dictionary
@@ -291,7 +291,10 @@ EndInnings *endInnings;
     
     AppealUmpireArray=[[NSMutableArray alloc]init];
     
-    EditModeVC * objEditModeVc=[[EditModeVC alloc]init];
+    
+    objEditModeVc=[[EditModeVC alloc]init];
+   
+     
     objEditModeVc.delegate=self;
     if(self.isEditMode){//Edit
         [self loadViewOnEditMode];
@@ -545,9 +548,13 @@ EndInnings *endInnings;
                                                               blue:0
                                                              alpha:0.36]];
     
-    
+//    FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
+//    fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
+//    [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode :self.editBallCode];
     
 }
+
+
 
 
 -(void) loadViewOnEditMode{
@@ -2383,11 +2390,16 @@ EndInnings *endInnings;
     }
     else
     {
-
-        fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+        if(_isEditMode){
         
-        [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
-
+    [objEditModeVc insertAfterAndBeforeMode :self.editBallCode];
+            fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+            
+            [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+            
+        }
+        
+        
         NSNumber *temp = [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS];
 
         
@@ -11942,6 +11954,7 @@ EndInnings *endInnings;
 }
 - (IBAction)Exit_btn:(id)sender {
     
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
     
     ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
     Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];

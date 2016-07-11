@@ -2670,7 +2670,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
-            NSString *MATCHRESULTSTATUS = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *MATCHRESULTSTATUS = [self getValueByNull:statement :0];
             
             
             sqlite3_finalize(statement);
@@ -2857,28 +2857,28 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             BallEventRecord *record=[[BallEventRecord alloc]init];
-            record.objBallcode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            record.objBallno=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            record.objBallcode=[self getValueByNull:statement :0];
+            record.objBallno=[self getValueByNull:statement :1];
             record.objBowltype=[self getValueByNull:statement :5];
             //[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)]
             record.objShottype=[self getValueByNull:statement :6];
             //[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
             
-            record.objTotalruns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-            record.objTotalextras=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-            record.objOverno=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
-            record.objBallcount=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
-            record.objIslegalball=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
-            record.objIsFour=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
-            record.objIssix=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
-            record.objRuns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
-            record.objOverthrow=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
+            record.objTotalruns=[self getValueByNull:statement :7];
+            record.objTotalextras=[self getValueByNull:statement :8];
+            record.objOverno=[self getValueByNull:statement :9];
+            record.objBallcount=[self getValueByNull:statement :10];
+            record.objIslegalball=[self getValueByNull:statement :11];
+            record.objIsFour=[self getValueByNull:statement :12];
+            record.objIssix=[self getValueByNull:statement :13];
+            record.objRuns=[self getValueByNull:statement :14];
+            record.objOverthrow=[self getValueByNull:statement :15];
             
-            record.objWide=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
-            record.objNoball=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
-            record.objByes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
-            record.objLegByes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
-            record.objGrandtotal=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 20)];
+            record.objWide=[self getValueByNull:statement :16];
+            record.objNoball=[self getValueByNull:statement :17];
+            record.objByes=[self getValueByNull:statement :18];
+            record.objLegByes=[self getValueByNull:statement :19];
+            record.objGrandtotal=[self getValueByNull:statement :20];
             //record.objWicketno=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 21)];
             //  record.objWicketType=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 22)];
             //  record.objMarkedforedit=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)];
@@ -3246,16 +3246,16 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 
-                NSString *playerCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                NSString *playerName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                NSString *totalRuns = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                NSString *playerCode = [self getValueByNull:statement :0];
+                NSString *playerName = [self getValueByNull:statement :1];
+                NSString *totalRuns = [self getValueByNull:statement :3];
                 
                 NSString *overs = [self getValueByNull:statement :5];
                 
-                NSString *maidan = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                NSString *maidan = [self getValueByNull:statement :6];
                 
-                NSString *wicket = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-                NSString *ecoRate = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                NSString *wicket = [self getValueByNull:statement :7];
+                NSString *ecoRate = [self getValueByNull:statement :8];
                 
                 [result addObject:playerCode];
                 [result addObject:playerName];
@@ -3275,7 +3275,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
     }
     sqlite3_reset(statement);
-
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return result;
     
 }
@@ -3328,6 +3329,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -3350,18 +3353,23 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 NSString *BALLCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_reset(statement);
-            
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return BALLCODE.length>0;
             }
             
         }
         else {
-            sqlite3_reset(statement);
             
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -3427,8 +3435,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
             f.numberStyle = NSNumberFormatterDecimalStyle;
-            NSString *UMPIRE1CODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            NSString *UMPIRE2CODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            NSString *UMPIRE1CODE = [self getValueByNull:statement :0];
+            NSString *UMPIRE2CODE = [self getValueByNull:statement :1];
             
             [result addObject:UMPIRE1CODE];
             [result addObject:UMPIRE2CODE];
@@ -3577,10 +3585,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
         sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
     }
     
     return NO;
@@ -3642,11 +3653,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
-            NSString *UMPIRE1CODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            NSString *UMPIRE2CODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            NSString *UMPIRE1CODE = [self getValueByNull:statement :0];
+            NSString *UMPIRE2CODE = [self getValueByNull:statement :1];
             
-            NSString *UMPIRE1NAME = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-            NSString *UMPIRE2NAME = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+            NSString *UMPIRE1NAME = [self getValueByNull:statement :2];
+            NSString *UMPIRE2NAME = [self getValueByNull:statement :3];
             
             [result addObject:UMPIRE1CODE];
             [result addObject:UMPIRE2CODE];
@@ -5600,6 +5611,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return bowlerCodeArray;
     
 }
@@ -5621,17 +5634,21 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return YES;
             
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -5651,17 +5668,21 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return YES;
             
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -5682,17 +5703,21 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return YES;
             
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }

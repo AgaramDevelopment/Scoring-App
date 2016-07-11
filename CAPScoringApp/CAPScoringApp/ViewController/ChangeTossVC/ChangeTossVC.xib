@@ -147,11 +147,11 @@
                                     <rect key="frame" x="295" y="40" width="240" height="35"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="if5-yb-bW9">
-                                            <rect key="frame" x="200" y="0.0" width="40" height="35"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="35"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="BJm-vi-ivm"/>
-                                                <constraint firstAttribute="height" constant="35" id="fZO-Dq-MzA"/>
+                                                <constraint firstAttribute="height" constant="35" id="4xZ-HC-MgQ"/>
                                             </constraints>
+                                            <inset key="imageEdgeInsets" minX="200" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="dropDown"/>
                                             <connections>
                                                 <action selector="didClickTossWonSelection:" destination="-1" eventType="touchUpInside" id="mT3-uj-tsQ"/>
@@ -171,15 +171,14 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="jtg-dP-p2Q" firstAttribute="leading" secondItem="gnd-cX-Krx" secondAttribute="leading" id="1l1-9K-aX0"/>
-                                        <constraint firstAttribute="trailing" secondItem="if5-yb-bW9" secondAttribute="trailing" id="6wh-7D-IIz"/>
                                         <constraint firstItem="jtg-dP-p2Q" firstAttribute="top" secondItem="gnd-cX-Krx" secondAttribute="top" id="AjB-tS-JPg"/>
-                                        <constraint firstItem="if5-yb-bW9" firstAttribute="top" secondItem="gnd-cX-Krx" secondAttribute="top" id="BZ4-OM-nim"/>
                                         <constraint firstAttribute="width" constant="240" id="E3y-no-cpB"/>
                                         <constraint firstAttribute="bottom" secondItem="jtg-dP-p2Q" secondAttribute="bottom" id="EeF-tU-5cS"/>
-                                        <constraint firstItem="if5-yb-bW9" firstAttribute="leading" secondItem="jtg-dP-p2Q" secondAttribute="trailing" id="EwB-VJ-xDU"/>
-                                        <constraint firstAttribute="bottom" secondItem="if5-yb-bW9" secondAttribute="bottom" id="PTY-3p-jpW"/>
+                                        <constraint firstAttribute="trailing" secondItem="if5-yb-bW9" secondAttribute="trailing" id="KGq-YC-Oha"/>
                                         <constraint firstAttribute="height" constant="35" id="hjJ-b1-nIY"/>
-                                        <constraint firstItem="if5-yb-bW9" firstAttribute="leading" secondItem="jtg-dP-p2Q" secondAttribute="trailing" id="rmr-aw-eCR"/>
+                                        <constraint firstItem="if5-yb-bW9" firstAttribute="leading" secondItem="gnd-cX-Krx" secondAttribute="leading" id="qsY-M8-F8s"/>
+                                        <constraint firstAttribute="bottom" secondItem="if5-yb-bW9" secondAttribute="bottom" id="xj5-mL-1ld"/>
+                                        <constraint firstItem="if5-yb-bW9" firstAttribute="top" secondItem="gnd-cX-Krx" secondAttribute="top" id="zzY-TO-zr8"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="div-KQ-nnn">
@@ -196,11 +195,11 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xPv-vm-4lb">
-                                            <rect key="frame" x="200" y="0.0" width="40" height="35"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="35"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="LnS-WO-KgO"/>
-                                                <constraint firstAttribute="height" constant="35" id="jx4-TW-p3S"/>
+                                                <constraint firstAttribute="height" constant="35" id="ob1-au-9C2"/>
                                             </constraints>
+                                            <inset key="imageEdgeInsets" minX="200" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="dropDown"/>
                                             <connections>
                                                 <action selector="didClickElectedToSelection:" destination="-1" eventType="touchUpInside" id="VEl-Mp-SlP"/>
@@ -210,15 +209,14 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstItem="8kQ-pE-rez" firstAttribute="leading" secondItem="div-KQ-nnn" secondAttribute="leading" id="1Mb-tY-7W3"/>
-                                        <constraint firstAttribute="bottom" secondItem="xPv-vm-4lb" secondAttribute="bottom" id="JEF-r6-awR"/>
-                                        <constraint firstAttribute="trailing" secondItem="xPv-vm-4lb" secondAttribute="trailing" id="MmP-Aw-Kck"/>
+                                        <constraint firstAttribute="bottom" secondItem="xPv-vm-4lb" secondAttribute="bottom" id="7Tu-1i-9O2"/>
+                                        <constraint firstItem="xPv-vm-4lb" firstAttribute="top" secondItem="div-KQ-nnn" secondAttribute="top" id="Iop-PJ-AEx"/>
                                         <constraint firstAttribute="height" constant="35" id="Y07-me-Njd"/>
-                                        <constraint firstItem="xPv-vm-4lb" firstAttribute="top" secondItem="div-KQ-nnn" secondAttribute="top" id="eDZ-ru-EkQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="xPv-vm-4lb" secondAttribute="trailing" id="g9M-ac-BV6"/>
                                         <constraint firstAttribute="width" constant="240" id="kW0-vs-hmP"/>
                                         <constraint firstItem="8kQ-pE-rez" firstAttribute="top" secondItem="div-KQ-nnn" secondAttribute="top" id="l2g-eA-wTx"/>
                                         <constraint firstAttribute="bottom" secondItem="8kQ-pE-rez" secondAttribute="bottom" id="tDR-f8-Fq3"/>
-                                        <constraint firstItem="xPv-vm-4lb" firstAttribute="leading" secondItem="8kQ-pE-rez" secondAttribute="trailing" id="txY-69-Z1z"/>
-                                        <constraint firstItem="xPv-vm-4lb" firstAttribute="leading" secondItem="8kQ-pE-rez" secondAttribute="trailing" id="x4b-eL-5Pc"/>
+                                        <constraint firstItem="xPv-vm-4lb" firstAttribute="leading" secondItem="div-KQ-nnn" secondAttribute="leading" id="thR-e2-yqU"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1NQ-Rc-Hao">
@@ -235,10 +233,9 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Be-v2-fmO">
-                                            <rect key="frame" x="200" y="0.0" width="40" height="35"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="35"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="40" id="WZ5-nc-gyy"/>
-                                                <constraint firstAttribute="height" constant="35" id="kNr-fk-fip"/>
+                                                <constraint firstAttribute="height" constant="35" id="oJ1-Wc-aw3"/>
                                             </constraints>
                                             <state key="normal" image="dropDown"/>
                                             <connections>
@@ -248,16 +245,15 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="0Be-v2-fmO" firstAttribute="top" secondItem="1NQ-Rc-Hao" secondAttribute="top" id="F1O-OT-jac"/>
+                                        <constraint firstItem="0Be-v2-fmO" firstAttribute="leading" secondItem="1NQ-Rc-Hao" secondAttribute="leading" id="FLM-gd-VPi"/>
                                         <constraint firstAttribute="height" constant="35" id="Ipw-yF-hnq"/>
                                         <constraint firstItem="Gpr-aS-j1a" firstAttribute="top" secondItem="1NQ-Rc-Hao" secondAttribute="top" id="L0r-by-5Sd"/>
-                                        <constraint firstAttribute="trailing" secondItem="0Be-v2-fmO" secondAttribute="trailing" id="Tq2-h8-9d2"/>
                                         <constraint firstAttribute="width" constant="240" id="Uyu-iE-gLL"/>
-                                        <constraint firstItem="0Be-v2-fmO" firstAttribute="leading" secondItem="Gpr-aS-j1a" secondAttribute="trailing" id="Wog-QC-Ypn"/>
                                         <constraint firstItem="Gpr-aS-j1a" firstAttribute="leading" secondItem="1NQ-Rc-Hao" secondAttribute="leading" id="Xvc-bD-3il"/>
-                                        <constraint firstItem="0Be-v2-fmO" firstAttribute="leading" secondItem="Gpr-aS-j1a" secondAttribute="trailing" id="Zya-lF-HDL"/>
                                         <constraint firstAttribute="bottom" secondItem="Gpr-aS-j1a" secondAttribute="bottom" id="cBi-C8-ay7"/>
-                                        <constraint firstAttribute="bottom" secondItem="0Be-v2-fmO" secondAttribute="bottom" id="sLx-2t-UOb"/>
-                                        <constraint firstItem="0Be-v2-fmO" firstAttribute="top" secondItem="1NQ-Rc-Hao" secondAttribute="top" id="zFr-eU-2sM"/>
+                                        <constraint firstAttribute="trailing" secondItem="0Be-v2-fmO" secondAttribute="trailing" id="iOF-pT-6am"/>
+                                        <constraint firstAttribute="bottom" secondItem="0Be-v2-fmO" secondAttribute="bottom" id="soa-qs-xuK"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aha-tP-Iaw">
@@ -269,8 +265,12 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2rh-PH-fbq">
-                                            <rect key="frame" x="200" y="0.0" width="40" height="35"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2rh-PH-fbq">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="35" id="5nx-hY-SBt"/>
+                                            </constraints>
+                                            <inset key="imageEdgeInsets" minX="200" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" title="Button" image="dropDown"/>
                                             <connections>
                                                 <action selector="didClickNonStrikerSelection:" destination="-1" eventType="touchUpInside" id="46b-Of-Fb3"/>
@@ -281,6 +281,10 @@
                                     <constraints>
                                         <constraint firstAttribute="height" constant="35" id="Tm3-ZB-huQ"/>
                                         <constraint firstAttribute="width" constant="240" id="gAe-Z3-sne"/>
+                                        <constraint firstAttribute="trailing" secondItem="2rh-PH-fbq" secondAttribute="trailing" id="gs3-4u-hy0"/>
+                                        <constraint firstAttribute="bottom" secondItem="2rh-PH-fbq" secondAttribute="bottom" id="k4l-a5-DJH"/>
+                                        <constraint firstItem="2rh-PH-fbq" firstAttribute="top" secondItem="aha-tP-Iaw" secondAttribute="top" id="mqF-ez-VBJ"/>
+                                        <constraint firstItem="2rh-PH-fbq" firstAttribute="leading" secondItem="aha-tP-Iaw" secondAttribute="leading" id="xXH-fN-usX"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C9w-XP-9dg">
@@ -292,8 +296,12 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTo-Um-QHA">
-                                            <rect key="frame" x="200" y="0.0" width="40" height="35"/>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTo-Um-QHA">
+                                            <rect key="frame" x="0.0" y="0.0" width="240" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="35" id="heS-5j-T7q"/>
+                                            </constraints>
+                                            <inset key="imageEdgeInsets" minX="200" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="dropDown"/>
                                             <connections>
                                                 <action selector="didClickBowlerSelection:" destination="-1" eventType="touchUpInside" id="oWy-gX-AwL"/>
@@ -302,7 +310,11 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="zTo-Um-QHA" firstAttribute="top" secondItem="C9w-XP-9dg" secondAttribute="top" id="8fD-DO-3B4"/>
+                                        <constraint firstAttribute="bottom" secondItem="zTo-Um-QHA" secondAttribute="bottom" id="BCd-Ue-15I"/>
+                                        <constraint firstItem="zTo-Um-QHA" firstAttribute="leading" secondItem="C9w-XP-9dg" secondAttribute="leading" id="Ej5-aU-VSH"/>
                                         <constraint firstAttribute="width" constant="240" id="iVz-TT-qtz"/>
+                                        <constraint firstAttribute="trailing" secondItem="zTo-Um-QHA" secondAttribute="trailing" id="peW-fL-1tO"/>
                                         <constraint firstAttribute="height" constant="35" id="xhq-ev-coU"/>
                                     </constraints>
                                 </view>

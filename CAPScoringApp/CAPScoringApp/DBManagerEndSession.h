@@ -32,7 +32,7 @@
 +(NSString*) GetRunsScoredForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSNumber*) INNINGSNO: (NSString*) DAYNO;
 
 +(NSString*) GetWicketLoftForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO: (NSString*) SESSIONNO: (NSString*) DAYNO;
-+(NSMutableArray*) GetBattingTeamForFetchEndSession:(NSString*) BATTINGTEAMCODE;
++(NSMutableArray*) GetBattingTeamForFetchEndSession:(NSString*) BATTINGTEAMCODE :(NSString *) BOWLINGTEAMCODE;
 +(NSMutableArray*) GetSessionEventsForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 +(NSString*) GetStartDateForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 +(NSMutableArray*)GetDateDayWiseForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
