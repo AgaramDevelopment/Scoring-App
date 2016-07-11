@@ -329,6 +329,7 @@
         insertEndInnings.O_ISLEGALBALL = @1;
         
         
+        
         [insertEndInnings insertScordBoard:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO];
         
         
