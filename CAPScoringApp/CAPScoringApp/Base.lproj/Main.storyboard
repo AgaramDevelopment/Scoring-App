@@ -1206,7 +1206,7 @@
                                             <constraint firstItem="r06-Gv-sHw" firstAttribute="leading" secondItem="nbW-m8-Zu2" secondAttribute="leading" id="ZJ1-dl-YNW"/>
                                             <constraint firstItem="r06-Gv-sHw" firstAttribute="top" secondItem="nbW-m8-Zu2" secondAttribute="top" constant="1" id="gi8-88-nHU"/>
                                             <constraint firstItem="aMp-L4-anj" firstAttribute="top" secondItem="nbW-m8-Zu2" secondAttribute="top" constant="2" id="scR-pF-fDa">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="7"/>
+                                                <variation key="heightClass=regular-widthClass=regular" constant="14"/>
                                             </constraint>
                                         </constraints>
                                         <variation key="default">
