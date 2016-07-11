@@ -1166,7 +1166,13 @@ EndInnings *endInnings;
     
     _lbl_overs.text = [NSString stringWithFormat:@"%d.%d OVS" ,fetchSEPageLoadRecord.BATTEAMOVERS,fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+//    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+//    
+    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+    }else{
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
+    }
     
     
     
@@ -1318,7 +1324,13 @@ EndInnings *endInnings;
     
     _lbl_overs.text = [NSString stringWithFormat:@"%d.%d OVS" ,fetchSEPageLoadRecord.BATTEAMOVERS ,fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+//    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+    
+    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+    }else{
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
+    }
     
     
     
@@ -8381,8 +8393,11 @@ EndInnings *endInnings;
     
     _lbl_overs.text = [NSString stringWithFormat:@"%d.%d OVS" ,fetchSEPageLoadRecord.BATTEAMOVERS,fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
-    
+    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+    }else{
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
+    }
     
     
     

@@ -579,7 +579,7 @@ BOOL  getOverStatus;
     TOTALBALLS = [NSNumber numberWithInt:totalBallData];
     
     
-    float batteamRunRateData = (TOTALBALLS.intValue == 0) ? 0 :((int)BATTEAMRUNS/TOTALBALLS.intValue)*6;
+    float batteamRunRateData = (TOTALBALLS.intValue == 0) ? 0 :((float)((int)BATTEAMRUNS)/(float)TOTALBALLS.intValue)*6;
     
     BATTEAMRUNRATE  = [NSNumber numberWithFloat:batteamRunRateData];
     
