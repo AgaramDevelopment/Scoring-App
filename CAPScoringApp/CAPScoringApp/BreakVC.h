@@ -14,6 +14,7 @@
 @required
 
 - (void) ChangeVCBackBtnAction;
+
 @end
 @interface BreakVC : UIViewController<UITableViewDelegate,UITableViewDataSource>
 @property (strong, nonatomic) IBOutlet UITableView *tablView;

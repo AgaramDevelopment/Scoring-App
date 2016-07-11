@@ -38,10 +38,8 @@ int bowlerPostion = 0;
     
     [self customnavigationmethod];
     
-    //    competitionCode = @"UCC0000004";
-    //    matchCode = @"IMSC02200224DB2663B00002";
-    //    inningsNo = @"1";
-    self.matchTypeCode = @"MSC115";
+ 
+    //self.matchTypeCode = @"MSC115";
     
     
     fetchScorecard = [[FetchScorecard alloc]init];
@@ -179,7 +177,7 @@ int bowlerPostion = 0;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return fetchScorecard.BattingSummaryForScoreBoard.count+ fetchScorecard. BowlingSummaryForScoreBoard.count;    //count number of row from counting array hear cataGorry is An Array
+ return fetchScorecard.BowlingSummaryForScoreBoard.count+ fetchScorecard.BattingSummaryForScoreBoard.count+2;   //count number of row from counting array hear cataGorry is An Array
 }
 
 
@@ -203,7 +201,7 @@ int bowlerPostion = 0;
         
         return cell;
     }else if(batsmanPostion <= indexPath.row && bowlerHeaderPosition>indexPath.row){
-        BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row-1];
+        BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
         
         ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:batsmanCell];
         if (cell == nil) {

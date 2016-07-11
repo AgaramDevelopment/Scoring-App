@@ -324,7 +324,7 @@ NSRegularExpression *isMatchedByRegex;
 //alphabet validation
 -(BOOL)textValidation:(NSString*) validation{
     
-    NSCharacterSet *charcter =[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+    NSCharacterSet *charcter =[[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
     NSString *filtered;
     
     filtered = [[validation componentsSeparatedByCharactersInSet:charcter] componentsJoinedByString:@""];
@@ -432,7 +432,7 @@ NSRegularExpression *isMatchedByRegex;
             [self showDialog:@"Please Enter Below 50 Overs" andTitle:@"Error"];
         }else if (twentyText == 0){
             
-            [self showDialog:@"Please Enter Evers" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Overs" andTitle:@"Error"];
         }
         
         else if (teamCountA >= 7 && teamCountB >= 7){

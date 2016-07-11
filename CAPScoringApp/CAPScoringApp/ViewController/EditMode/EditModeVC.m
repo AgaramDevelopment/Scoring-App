@@ -575,15 +575,17 @@
 
 -(IBAction)didClickLeftRotation:(id)sender
 {
-//    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
-//    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
-//    scoreEngine.competitionCode=self.Comptitioncode;
-//    scoreEngine.matchCode      = self.matchCode;
-//    [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"BEFORE"];
-//    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
-//    
-//    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
-//    [self.tbl_innnings reloadData];
+    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
+    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+    scoreEngine.competitionCode=self.Comptitioncode;
+    scoreEngine.matchCode = self.matchCode;
+    
+    [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"BEFORE"];
+    [self.tbl_innnings reloadData];
+    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+    
+    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+    
     
 }
 
