@@ -453,6 +453,7 @@
 }
 
 - (IBAction)Wonbytouch_btn:(id)sender {
+    self.wonbyTbl_height.constant=self.Wonby_table.contentSize.height;
     
     if(isEnableTbl==YES)
     {
@@ -477,6 +478,11 @@
         self.Wonby_table.hidden=NO;
         isEnableTbl=NO;
     }
+    else
+    {
+        self.Wonby_table.hidden=YES;
+        isEnableTbl=YES;
+    }
     
     
     
@@ -487,9 +493,7 @@
 
 - (IBAction)electedTo_btn:(id)sender{
     
-    
-    
-    
+    self.electedTbl_height.constant =self.electedTo_table.contentSize.height;
     if(isEnableTbl==YES)
     {
         _Striker_lbl.text = @"";
@@ -516,6 +520,10 @@
         [self.nonStriker setUserInteractionEnabled:YES];
         [self.view_Bowler setUserInteractionEnabled:YES];
     }
+    else{
+        self.electedTo_table.hidden=YES;
+        isEnableTbl=YES;
+    }
     
 }
 
@@ -524,10 +532,12 @@
 
 - (IBAction)Striker_btn:(id)sender{
     
+    CGFloat contentSize =self.Striker_table.contentSize.height;
+    self.strikerTbl_height.constant =(contentSize >45)?150:contentSize;
     
     if(isEnableTbl==YES)
     {
-        _Striker_lbl.text = @"";
+      
         //NSString *teamCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
@@ -569,18 +579,22 @@
         isEnableTbl=NO;
         
     }
-    
-    
-    
+    else{
+        self.Striker_table.hidden=YES;
+        isEnableTbl=YES;
+    }
     
 }
 
 
 
 - (IBAction)nonStriker_btn:(id)sender{
+    
+    CGFloat contentSize =self.nonStriker_table.contentSize.height;
+    self.nonStrikerTbl_height.constant =(contentSize >45)?150:contentSize;
     if(isEnableTbl==YES)
     {
-        _nonStriker_lbl.text = @"";
+       
         //  NSString *teamCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
@@ -620,18 +634,23 @@
         isEnableTbl=NO;
         
     }
-    
-    
-    
+    else
+    {
+        self.nonStriker_table.hidden=YES;
+        isEnableTbl=YES;
+    }
+
 }
 
 
 
 - (IBAction)Bowler_btn:(id)sender{
     
+    CGFloat contentSize =self.Bowler_table.contentSize.height;
+    self.bowlerTbl_height.constant =(contentSize >45)?150:contentSize;
     if(isEnableTbl==YES)
     {
-        _Bowler_lbl.text = @"";
+       
         //NSString *teambCode;
         if([selectedElected isEqualToString:@"Bat"])
         {
@@ -685,7 +704,11 @@
         self.outlet_btn_proceed.enabled = YES;
         
     }
-    
+    else
+    {
+        self.Bowler_table.hidden=YES;
+        isEnableTbl=YES;
+    }
     
     
     

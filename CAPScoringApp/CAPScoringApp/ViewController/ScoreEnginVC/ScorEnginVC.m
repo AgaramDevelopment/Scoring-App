@@ -247,7 +247,8 @@
 @property (nonatomic,strong)NSMutableArray*AppealUmpireArray;
 @property(nonatomic,strong) NSMutableArray *AppealBatsmenArray;
 @property(nonatomic,strong) NSMutableArray *AppealValuesArray;
-
+@property(nonatomic,strong)NSDictionary *test;
+@property(nonatomic,strong)NSDictionary *test1;
 //wicketType
 @property (nonatomic,strong)NSMutableArray *WicketTypeArray;
 @property (nonatomic,strong)NSMutableArray *StrikerandNonStrikerArray;
@@ -526,6 +527,13 @@ EndInnings *endInnings;
     [self.view_batsmen .layer setMasksToBounds:YES];
     [_table_BatsmenName setHidden:YES];
     
+    
+    
+    
+    [self.comments_txt.layer setBorderWidth:2.0];
+    [self.comments_txt.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    [self.comments_txt .layer setMasksToBounds:YES];
+    //[_tanle_umpirename setHidden:YES];
     // AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     
     self.view_bowlType.hidden = YES;
@@ -1976,13 +1984,13 @@ EndInnings *endInnings;
                                                                 forIndexPath:indexPath];
         
         
-        NSDictionary *test=[AppealUmpireArray objectAtIndex:indexPath.row];
+       _test=[AppealUmpireArray objectAtIndex:indexPath.row];
         
         
-        cell.textLabel.text =[test valueForKey:@"AppealumpireName"];
+        cell.textLabel.text =[_test valueForKey:@"AppealumpireName"];
         
         UmpireSelect=cell.textLabel.text;
-        UmpireSelect=[test valueForKey:@"AppealumpireCode"];
+        UmpireSelect=[_test valueForKey:@"AppealumpireCode"];
         return cell;
     }
     
@@ -1994,13 +2002,13 @@ EndInnings *endInnings;
         Batsmancell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                                             forIndexPath:indexPath];
         
-        NSDictionary *test=[AppealBatsmenArray objectAtIndex:indexPath.row];
+        _test1=[AppealBatsmenArray objectAtIndex:indexPath.row];
         
         
-        cell.textLabel.text =[test valueForKey:@"AppealBatsmenPlayerName"];
+        cell.textLabel.text =[_test1 valueForKey:@"AppealBatsmenPlayerName"];
         
         StrikerPlayer=cell.textLabel.text;
-        StrikerPlayer=[test valueForKey:@"AppealBatsmenPlayerCode"];
+        StrikerPlayer=[_test1 valueForKey:@"AppealBatsmenPlayerCode"];
         return cell;
         
     }
@@ -6315,10 +6323,12 @@ EndInnings *endInnings;
         
         umpiretablecell *cell = (umpiretablecell *)[tableView cellForRowAtIndexPath:indexPath];
         self.lbl_umpirename.text =cell.textLabel.text;
+          _test=[AppealUmpireArray objectAtIndex:indexPath.row];
+        UmpireSelect=  self.lbl_umpirename.text;
         
+      UmpireSelect=[_test valueForKey:@"AppealumpireCode"];
         
-        UmpireSelect=self.lbl_umpirename.text;
-        
+      
         self.tanle_umpirename.hidden=YES;
         isEnableTbl=YES;
     }
@@ -6328,11 +6338,19 @@ EndInnings *endInnings;
         Batsmancell *cell = (Batsmancell *)[tableView cellForRowAtIndexPath:indexPath];
        self.lbl_batsmen.text =cell.textLabel.text;
         
-
-        StrikerPlayer=self.lbl_batsmen.text;
+        _test1=[AppealBatsmenArray objectAtIndex:indexPath.row];
+      StrikerPlayer=self.lbl_batsmen.text;
+        
+        StrikerPlayer=[_test1 valueForKey:@"AppealBatsmenPlayerCode"];
+       
         
         self.table_BatsmenName.hidden=YES;
         isEnableTbl=YES;
+        
+        
+        
+        
+        
     }
     
     

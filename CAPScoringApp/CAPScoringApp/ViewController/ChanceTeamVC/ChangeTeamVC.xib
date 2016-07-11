@@ -17,6 +17,7 @@
                 <outlet property="lbl_NonStrikerName" destination="cqa-eR-pzJ" id="SEU-77-bmn"/>
                 <outlet property="lbl_SelectTeamName" destination="i0d-Eq-Llb" id="RG1-Dt-aZV"/>
                 <outlet property="lbl_StrikerName" destination="YxA-Mc-37c" id="zLz-LD-27E"/>
+                <outlet property="tblHeight" destination="nnK-sU-5fl" id="DQo-nq-zHL"/>
                 <outlet property="tbl_strikerlist" destination="z2S-h2-8ZO" id="BG2-tS-859"/>
                 <outlet property="tbl_yposition" destination="RuU-QI-Uek" id="8bE-I4-aWb"/>
                 <outlet property="view" destination="iN0-l3-epB" id="Ik0-pX-AZ6"/>

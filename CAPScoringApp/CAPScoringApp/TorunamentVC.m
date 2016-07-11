@@ -23,6 +23,7 @@
     BOOL isEnableTbl;
     NSMutableArray * selectindexarray;
     UIRefreshControl *refreshControl;
+    int selectePosition;
    }
 @property (nonatomic,strong)NSMutableArray*resultArray;
 @property(nonatomic,weak) IBOutlet UIView *selectmatchTittleview;
@@ -50,37 +51,7 @@
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
     [self.tableView addSubview:refreshControl];
    
-//    if(self.checkInternetConnection)
-//    {
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        
-//        UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-//        refreshControl.tintColor = [UIColor greenColor];
-//        refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
-//        
-//        
-//        resultArray=[[NSMutableArray alloc]init];
-//        NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
-//        for(int i=0; i < [FetchCompitionArray count]; i++)
-//        {
-//            
-//            EventRecord *objEventRecord=(EventRecord*)[FetchCompitionArray objectAtIndex:i];
-//            NSLog(@"%@",objEventRecord.recordstatus);
-//            NSString *matchStatus=objEventRecord.recordstatus;
-//            if([matchStatus isEqualToString:@"MSC001"])
-//            {
-//                [resultArray addObject:objEventRecord];
-//            }
-//            //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
-//        }
-//         [self.tableView addSubview:refresh];
-//        
-//        [self.tableView reloadData];
-//        
-//         [refreshControl endRefreshing];
-//        
-//         });
-//    }
+
     
 }
 
@@ -157,6 +128,8 @@
     EventRecord *objEventRecord=(EventRecord*)[resultArray objectAtIndex:indexPath.row];
     
     cell.textLabel.text =objEventRecord.competitionname;
+   
+    //cell.selectionStyle=UITableViewCellSelectionStyleBlue;
     return cell;
 }
 
@@ -200,17 +173,49 @@
             //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
         }
         
-        
+        for(int i=0; i < [resultArray count]; i++)
+        {
+            EventRecord *objEventRecord=(EventRecord*)[resultArray objectAtIndex:i];
+            
+            if([objEventRecord.competitionname isEqualToString:self.selectMatchName.text])
+            {
+                selectePosition= i;
+            }
+            
+            
+        }
         [self.tableView reloadData];
+        if(selectePosition!=nil)
+        {
+           NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+          [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+          [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+             _tableView.sectionIndexBackgroundColor = [UIColor greenColor];
+            UITableViewCell *cell = (UITableViewCell *)[self.tableView cellForRowAtIndexPath:0];
+            UIView *customColorView = [[UIView alloc] init];
+            customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+                                                              green:161/255.0
+                                                               blue:79/255.0
+                                                              alpha:0.5];
+            cell.selectedBackgroundView =  customColorView;
+
+        }
+       
+     
+        
+        
         self.tableView.hidden=NO;
         isEnableTbl=NO;
-        self.tableviewheight.constant =self.tableView.contentSize.height;
+        CGFloat contensizeheight =self.tableView.contentSize.height;
+        self.tableviewheight.constant =(contensizeheight>44)?150:contensizeheight;   //self.tableView.contentSize.height;
         self.Nextbtn_outlet.enabled = YES;
     }
     else{
          self.tableView.hidden=YES;
-        isEnableTbl=YES;
+        
+         isEnableTbl=YES;
     }
+
 }
 
 -(IBAction)didClickNextBtnAction:(id)sender

@@ -45,6 +45,7 @@
 
 
 @property(nonatomic,strong) IBOutlet NSLayoutConstraint * tbl_tossYposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * tbl_tossHeight;
 
 
 @end
