@@ -2190,16 +2190,21 @@
                         <outlet property="Striker_table" destination="olQ-CF-mtl" id="iYq-3c-R01"/>
                         <outlet property="Wonby_lbl" destination="aMp-L4-anj" id="DWT-Vs-mHN"/>
                         <outlet property="Wonby_table" destination="2sV-xD-WMY" id="tDv-jo-ZBv"/>
+                        <outlet property="bowlerTbl_height" destination="8Nt-NN-MqD" id="bkk-mh-GO4"/>
+                        <outlet property="electedTbl_height" destination="kAs-zP-pgN" id="waR-5p-q3M"/>
                         <outlet property="electedTo_lbl" destination="5aC-QF-csX" id="2ZW-fo-HhN"/>
                         <outlet property="electedTo_table" destination="EGh-fh-3ic" id="Xpc-4e-pM2"/>
                         <outlet property="nonStriker" destination="zdh-SW-PL3" id="bXp-2N-Boa"/>
+                        <outlet property="nonStrikerTbl_height" destination="lja-CD-37G" id="fG0-OA-4Jg"/>
                         <outlet property="nonStriker_lbl" destination="cmX-Yc-Cc4" id="jRO-9a-3V0"/>
                         <outlet property="nonStriker_table" destination="dLg-vH-awG" id="8Qg-Io-Xge"/>
                         <outlet property="outlet_btn_proceed" destination="QeG-1x-x0d" id="9lp-h1-5po"/>
+                        <outlet property="strikerTbl_height" destination="6xm-9s-WNt" id="QBF-UH-Zly"/>
                         <outlet property="view_Bowler" destination="b9d-c0-oqI" id="jRu-Id-ScA"/>
                         <outlet property="view_Electedto" destination="QzF-SL-R0B" id="Vw2-c8-MHi"/>
                         <outlet property="view_Striker" destination="Lyd-4b-jov" id="yJt-bf-8KG"/>
                         <outlet property="view_Wonby" destination="nbW-m8-Zu2" id="WvL-vJ-EUr"/>
+                        <outlet property="wonbyTbl_height" destination="olq-of-DA0" id="59s-Zl-CZu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vlJ-D7-bPy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5661,6 +5666,9 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="160" y="1" width="440" height="102"/>
+                                                </variation>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBk-zT-YMj">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -5679,7 +5687,8 @@
                                                         <exclude reference="cIY-gc-wL3"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=regular">
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="1" width="150" height="106"/>
                                                     <mask key="constraints">
                                                         <include reference="cIY-gc-wL3"/>
                                                     </mask>
