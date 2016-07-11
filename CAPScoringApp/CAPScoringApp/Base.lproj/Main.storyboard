@@ -1736,7 +1736,7 @@
                                             </mask>
                                         </variation>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAR END" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evO-mg-NiS">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAR END" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evO-mg-NiS">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="TXF-l6-Kub"/>
@@ -1886,7 +1886,9 @@
                                     <constraint firstItem="QzF-SL-R0B" firstAttribute="top" secondItem="jIe-Sp-Wm0" secondAttribute="bottom" constant="5" id="OD8-Hg-X4D">
                                         <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                     </constraint>
-                                    <constraint firstItem="evO-mg-NiS" firstAttribute="leading" secondItem="NU1-ae-JDS" secondAttribute="trailing" constant="7" id="OhX-BG-2tF"/>
+                                    <constraint firstItem="evO-mg-NiS" firstAttribute="leading" secondItem="NU1-ae-JDS" secondAttribute="trailing" constant="7" id="OhX-BG-2tF">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-168"/>
+                                    </constraint>
                                     <constraint firstItem="2sV-xD-WMY" firstAttribute="top" secondItem="nbW-m8-Zu2" secondAttribute="bottom" constant="2" id="Qli-5y-WCZ">
                                         <variation key="heightClass=regular-widthClass=regular" constant="1"/>
                                     </constraint>
@@ -1955,7 +1957,9 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="15"/>
                                     </constraint>
                                     <constraint firstItem="2sV-xD-WMY" firstAttribute="leading" secondItem="aff-hj-tjT" secondAttribute="leading" constant="100" id="mmy-LP-0B1"/>
-                                    <constraint firstAttribute="trailing" secondItem="evO-mg-NiS" secondAttribute="trailing" constant="240" id="mwi-O4-6n3"/>
+                                    <constraint firstAttribute="trailing" secondItem="evO-mg-NiS" secondAttribute="trailing" constant="240" id="mwi-O4-6n3">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="291"/>
+                                    </constraint>
                                     <constraint firstItem="dLg-vH-awG" firstAttribute="leading" secondItem="aff-hj-tjT" secondAttribute="leading" constant="100" id="pVG-b9-0XM"/>
                                     <constraint firstItem="MH6-LN-3aR" firstAttribute="leading" secondItem="aff-hj-tjT" secondAttribute="leading" constant="100" id="r1c-b1-2Ws"/>
                                     <constraint firstItem="zdh-SW-PL3" firstAttribute="top" secondItem="d81-wx-SZ6" secondAttribute="bottom" id="sOT-iA-8dl">
