@@ -2160,6 +2160,14 @@ EndInnings *endInnings;
                 
                 [self resetBallEventObject];
                 [self resetAllButtonOnEndBall];
+                //show free hit
+                
+                if(fetchSEPageLoadRecord.ISFREEHIT.intValue==1){
+                    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Alert", nil];
+                    [alter show];
+                    [alter setTag:10200];
+                    
+                }
             }
             
         }
@@ -5260,12 +5268,15 @@ EndInnings *endInnings;
     [btn_save addTarget:self action:@selector(didClickRemarkSave_Action:) forControlEvents:UIControlEventTouchUpInside];
     [self.objcommonRemarkview addSubview:btn_save];
     self.objcommonRemarkview.hidden=NO;
+    
     UIButton *btn_Cancel=[[UIButton alloc]initWithFrame:CGRectMake(self.objcommonRemarkview.frame.size.width-90,self.objcommonRemarkview.frame.size.height-50,60,50)];
     [btn_Cancel setTitle:@"Cancel" forState:UIControlStateNormal];
     //[btn_Cancel setBackgroundColor:[UIColor whiteColor]];
     [btn_Cancel addTarget:self action:@selector(didClickRemarkCancel_Action:) forControlEvents:UIControlEventTouchUpInside];
     [self.objcommonRemarkview addSubview:btn_Cancel];
     btn_Cancel.userInteractionEnabled=YES;
+   
+    
 }
 -(IBAction)didClickRemarkSave_Action:(id)sender
 {
@@ -5456,7 +5467,10 @@ EndInnings *endInnings;
     [self unselectedButtonBg: self.btn_overthrow];
     [self unselectedButtonBg: self.btn_miscFilter];
     [self unselectedButtonBg: self.btn_pichmap];
+    self.img_pichmap.hidden=YES;
+    self.PichMapTittle.hidden=YES;
     [self unselectedButtonBg: self.btn_wagonwheel];
+    self.view_Wagon_wheel.hidden=YES;
     
     //Right buttons
     [self unselectedViewBg: self.view_otw];
@@ -5467,14 +5481,21 @@ EndInnings *endInnings;
     [self.tbl_fastBowl reloadData];
     [self unselectedViewBg: self.view_aggressive];
     [self.tbl_aggressiveShot reloadData];
+    self.view_aggressiveShot.hidden=YES;
+    isAggressiveSelected=NO;
     [self unselectedViewBg:self.view_defense];
     [_tbl_defensive reloadData];
+    self.view_defensive.hidden=YES;
+    isDefensiveSelected=NO;
     [self unselectedViewBg: self.view_fielding_factor];
      selectedfieldFactor = [[FieldingFactorRecord alloc]init];
     [self unselectedViewBg: self.view_Rbw];
     [self unselectedViewBg: self.view_remark];
+    self.objcommonRemarkview.hidden=YES;
   //[self unselectedViewBg: self.view_edit];   need to set reference
     [self unselectedViewBg:self.view_appeal];
+    self.View_Appeal.hidden=YES;
+    isEnableTbl=NO;
   //[self unselectedViewBg: self.View_Appeal];
   //[self unselectedViewBg: self.view_lastinstance];
     
@@ -7698,6 +7719,7 @@ EndInnings *endInnings;
     penaltygridvc.competitionCode=self.competitionCode;
     penaltygridvc.matchCode =self.matchCode;
     penaltygridvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+   penaltygridvc.teamcode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];

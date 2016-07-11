@@ -54,11 +54,15 @@
         
         OfficialMasterRecord *objMatchofficalRecord = [self.FetchOfficalMasterArray objectAtIndex:0];
         
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *username=[defaults stringForKey :@"UserFullname"];
+        
         self.lbl_umpire1.text=objMatchofficalRecord.umpire1name;
         self.lbl_umpire2.text=objMatchofficalRecord.umpire2name;
         self.lbl_umpire3.text=objMatchofficalRecord.umpire3name;
         self.lbl_matchreferee.text=objMatchofficalRecord.matchrefereename;
-        //self.lbl_scorer1.text=objMatchofficalRecord.umpire1name;
+        self.lbl_scorer1.text=username;
+        self.lbl_scorer2.text=@"-";
         //self.lbl_scorer2.text=objMatchofficalRecord.umpire1name;
     }
 }
@@ -83,7 +87,7 @@
 {
     CustomNavigationVC *objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
     [self.view addSubview:objCustomNavigation.view];
-    objCustomNavigation.lbl_titleName.text=@"MATCH OFFICALS";
+    objCustomNavigation.lbl_titleName.text=@"MATCH OFFICIALS";
     [objCustomNavigation.Btn_Back addTarget:self action:@selector(btn_back:) forControlEvents:UIControlEventTouchUpInside];
     
 }
