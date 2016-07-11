@@ -496,7 +496,7 @@ BOOL  getOverStatus;
     NSInteger teamOvsBall = [teamOverBall integerValue];
     
     //team over extra ball
-    NSString *teamExtraBall = [DBManager getTeamExtraBall:COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE: INNINGSNO:batTeamOver];
+    NSString *teamExtraBall = [DBManager getTeamExtraBall :COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE: INNINGSNO:batTeamOver];
     NSInteger teamExtBall = [teamOverBall integerValue];
     
     
@@ -529,7 +529,8 @@ BOOL  getOverStatus;
     
     _BATTEAMOVRBALLSCNT = batBallCnt;
     
-    NSString *getLastBallCode = [DBManager getLastBallCode:COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE: INNINGSNO:batTeamOver:batTeamOvrwithExtrasBalls:batTeamOverBallsCnt];
+    NSString *getLastBallCode = [DBManager getLastBallCode :COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE: INNINGSNO:batTeamOver:batTeamOvrwithExtrasBalls:batTeamOverBallsCnt];
+        
     NSString *lastBallCode = getLastBallCode;
     
     if (lastBallCode.length>0) {

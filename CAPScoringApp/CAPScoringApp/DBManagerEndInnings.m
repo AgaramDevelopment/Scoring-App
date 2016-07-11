@@ -2079,7 +2079,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+ (NSMutableArray*) GetInningsSummaryAssignForInsertScoreBoard: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO
++(NSMutableArray*)GetInningsSummaryAssignForInsertScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE :(NSString*) INNINGSNO
 
 {
     NSMutableArray *GetInningsSummaryDetails=[[NSMutableArray alloc]init];
@@ -2090,7 +2090,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT BYES, LEGBYES, NOBALLS, WIDES, PENALTIES, INNINGSTOTAL, INNINGSTOTALWICKETS FROM INNINGSSUMMARY WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@' AND INNINGSNO = @INNINGSNO", COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
-        
+                               
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)== SQLITE_OK);
         

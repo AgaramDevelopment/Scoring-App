@@ -76,7 +76,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -526,6 +526,13 @@ EndInnings *endInnings;
     [self.view_batsmen .layer setMasksToBounds:YES];
     [_table_BatsmenName setHidden:YES];
     
+    
+    
+    
+    [self.comments_txt.layer setBorderWidth:2.0];
+    [self.comments_txt.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    [self.comments_txt .layer setMasksToBounds:YES];
+    //[_tanle_umpirename setHidden:YES];
     // AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:@"ADITYA TARE" ,nil];
     
     self.view_bowlType.hidden = YES;
@@ -2344,11 +2351,19 @@ EndInnings *endInnings;
     else
     {
 
-        int ballCount = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
-        InsertSEScoreEngine* _InsertSEScoreEngine = [[InsertSEScoreEngine alloc] init];
-        _InsertSEScoreEngine.BOWLINGTEAMCODE = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+        fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
         
-        [_InsertSEScoreEngine InsertScoreEngine :
+        [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+
+        NSNumber *temp = [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+
+        
+        int ballCount = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
+        
+        //InsertSEScoreEngine* _InsertSEScoreEngine = [[InsertSEScoreEngine alloc] init];
+        //_InsertSEScoreEngine.BOWLINGTEAMCODE = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+        
+        [InsertSEScoreEngine InsertScoreEngine :
          self.competitionCode :
          self.matchCode  :
          fetchSEPageLoadRecord.BATTINGTEAMCODE :
@@ -2363,10 +2378,7 @@ EndInnings *endInnings;
          fetchSEPageLoadRecord.nonstrickerPlayerCode:
          fetchSEPageLoadRecord.currentBowlerPlayerCode:
          
-         ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString :
-           fetchSEPageLoadRecord.TEAMACODE] ?
-          fetchSEPageLoadRecord.TEAMAWICKETKEEPER :
-          fetchSEPageLoadRecord.TEAMBWICKETKEEPER):
+         fetchSEPageLoadRecord.BATTINGTEAMCODE :
          
          fetchSEPageLoadRecord.UMPIRE1CODE :
          fetchSEPageLoadRecord.UMPIRE2CODE :
@@ -2471,6 +2483,7 @@ EndInnings *endInnings;
         }
         
         else{
+            
 //            [DBManagerEndBall UpdateScoreEngine:self.ballEventRecord.objBallcode :self.ballEventRecord.objcompetitioncode:self.ballEventRecord.objmatchcode :self.ballEventRecord.objTeamcode :self.ballEventRecord.objInningsno :self.ballEventRecord.objOverno :self.ballEventRecord.objBallno :self.ballEventRecord.objBallcount :self.ballEventRecord.objSessionno :self.ballEventRecord.objStrikercode :self.ballEventRecord.objNonstrikercode :self.ballEventRecord.objBowlercode :self.ballEventRecord.objWicketkeepercode :self.ballEventRecord.objUmpire1code :self.ballEventRecord.objUmpire2code :self.ballEventRecord.objAtworotw :self.ballEventRecord.objBowlingEnd :self.ballEventRecord.objBowltype :self.ballEventRecord.objShottype :self.ballEventRecord.objShorttypecategory :self.ballEventRecord.objIslegalball :self.ballEventRecord.objIsFour :self.ballEventRecord.objIssix :self.ballEventRecord.objRuns :self.ballEventRecord.objOverthrow :self.ballEventRecord.objTotalruns :self.ballEventRecord.objWide :self.ballEventRecord.objNoball :self.ballEventRecord.objByes :self.ballEventRecord.objLegByes :self.ballEventRecord.objPenalty :self.ballEventRecord.objTotalextras :self.ballEventRecord.objGrandtotal :self.ballEventRecord.objRbw :self.ballEventRecord.objPMlinecode :self.ballEventRecord.objPMlengthcode: self.ballEventRecord.objPMStrikepoint:self.ballEventRecord.objPMStrikepointlinecode :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objballduration :self.ballEventRecord.objIsappeal :self.ballEventRecord.objIsbeaten :self.ballEventRecord.objIsuncomfort :self.ballEventRecord.objIswtb :self.ballEventRecord.objIsreleaseshot :self.ballEventRecord.objMarkedforedit :self.ballEventRecord.objRemark :self.ballEventRecord.objWicketno :self.ballEventRecord.objWicketType :self.ballEventRecord.objWicketkeepercode : @"":@"" :@"" :@"":@"":@"" :@"" :@"" :@"" :@"":self.ballEventRecord.objPenalty :self.ballEventRecord.objPenaltytypecode :@"" :self.ballEventRecord.objBallspeed :self.ballEventRecord.objUncomfortclassification :@""];
        
         }
@@ -5490,6 +5503,17 @@ EndInnings *endInnings;
     }
     
     
+    //More option
+    //Set up toggle image
+    [self.btn_highRun setImage:[UIImage imageNamed:@"moreRuns"] forState:UIControlStateNormal];
+    
+    //Set run button values
+    [self.btn_run1 setTitle:@"1" forState:UIControlStateNormal];
+    [self.btn_run2 setTitle:@"2" forState:UIControlStateNormal];
+    [self.btn_run3 setTitle:@"3" forState:UIControlStateNormal];
+    [self.btn_B4 setTitle:@"B4" forState:UIControlStateNormal];
+    [self.btn_B6 setTitle:@"B6" forState:UIControlStateNormal];
+    
 }
 
 
@@ -6254,9 +6278,9 @@ EndInnings *endInnings;
         umpiretablecell *cell = (umpiretablecell *)[tableView cellForRowAtIndexPath:indexPath];
         self.lbl_umpirename.text =cell.textLabel.text;
         
-        
-        UmpireSelect=self.lbl_umpirename.text;
-        
+        NSString *umpirename=self.lbl_umpirename.text;
+      //  UmpireSelect=umpirename;
+      
         self.tanle_umpirename.hidden=YES;
         isEnableTbl=YES;
     }
@@ -7245,7 +7269,7 @@ EndInnings *endInnings;
     
     EndInningsVC *endInning = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
     
-    
+    endInning.delegate =self;
     // endInnings = [[EndInnings alloc]init];
     
     //[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
@@ -11835,6 +11859,11 @@ EndInnings *endInnings;
 
 - (void) ChangeVCBackBtnAction
 {
+    [fullview removeFromSuperview];
+}
+
+-(void) EndInningsBackBtnAction{
+    
     [fullview removeFromSuperview];
 }
 @end

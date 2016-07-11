@@ -800,8 +800,7 @@ EndInningsVC *save;
         
         GetInningsSummaryDetails = [[NSMutableArray alloc]init];
         
-        GetInningsSummaryDetails =[DBManagerEndInnings GetInningsSummaryAssignForInsertScoreBoard:COMPETITIONCODE :MATCHCODE :INNINGSNO :WICKETPLAYER];
-        //[DBManagerEndInnings GetInningsSummaryAssignForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:WICKETPLAYER];  //bowercode not display
+        GetInningsSummaryDetails = [DBManagerEndInnings GetInningsSummaryAssignForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO];
         
         if(GetInningsSummaryDetails.count>0)
         {
