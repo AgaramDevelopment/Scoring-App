@@ -141,10 +141,9 @@
     
     if([DBManagerInsertScoreEngine GetBallCodesForInsertScoreEngine : COMPETITIONCODE :MATCHCODE :TEAMCODE: INNINGSNO:OVERNO: BALLNO : BALLCOUNT ].length == 0)
     {
-        if(BALLCODE.length == 0)
-        {
-            BALLCODENO=[DBManagerInsertScoreEngine GetMaxIdForInsertScoreEngine :MATCHCODE ];
-        }
+       
+            BALLCODENO=[DBManagerInsertScoreEngine GetMaxIdForInsertScoreEngine :MATCHCODE];
+        
         
         if(INSERTTYPE.length >0)
         {
@@ -168,7 +167,7 @@
             {
                 N_BALLNO = T_BALLNO;
                 N_BALLCOUNT = T_BALLCOUNT;
-                if(T_BALLCOUNT == [NSNumber numberWithInt:1])
+                if(T_BALLCOUNT.intValue  == 1)
                 {
                     [DBManagerInsertScoreEngine UpdateBallEventtableForInsertScoreEngine : COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :TEAMCODE: T_OVERNO : T_BALLNO];
                 }
@@ -204,7 +203,11 @@
                     }
                 }
             }
-            [DBManagerInsertScoreEngine InsertBallEventForInsertScoreEngine :BALLCODENO:N_BALLNO:N_BALLCOUNT:BALLSPEED:UNCOMFORTCLASSIFCATION:COMPETITIONCODE: MATCHCODE:INNINGSNO:TEAMCODE: BALLCODE];
+            
+       
+            [DBManagerInsertScoreEngine InsertBallEventForInsertScoreEngine:BALLCODENO :N_BALLNO :N_BALLCOUNT :BALLSPEED :UNCOMFORTCLASSIFCATION :COMPETITIONCODE :MATCHCODE :INNINGSNO :TEAMCODE :BALLCODE];
+ 
+            
            NSMutableArray * inningsDetail= [DBManagerInsertScoreEngine getOverBallCountDetails :COMPETITIONCODE : MATCHCODE: T_OVERNO : INNINGSNO];
 //            if(INSERTTYPE ==@"AFTER")
 //            {
