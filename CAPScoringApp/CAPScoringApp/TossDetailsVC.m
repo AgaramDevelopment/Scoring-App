@@ -453,7 +453,7 @@
 }
 
 - (IBAction)Wonbytouch_btn:(id)sender {
-    self.wonbyTbl_height.constant=self.Wonby_table.contentSize.height;
+  //  self.wonbyTbl_height.constant=self.Wonby_table.contentSize.height;
     
     if(isEnableTbl==YES)
     {
@@ -493,7 +493,7 @@
 
 - (IBAction)electedTo_btn:(id)sender{
     
-    self.electedTbl_height.constant =self.electedTo_table.contentSize.height;
+    //self.electedTbl_height.constant =self.electedTo_table.contentSize.height;
     if(isEnableTbl==YES)
     {
         _Striker_lbl.text = @"";
@@ -532,8 +532,8 @@
 
 - (IBAction)Striker_btn:(id)sender{
     
-    CGFloat contentSize =self.Striker_table.contentSize.height;
-    self.strikerTbl_height.constant =(contentSize >45)?150:contentSize;
+   // CGFloat contentSize =self.Striker_table.contentSize.height;
+  //  self.strikerTbl_height.constant =(contentSize >45)?150:contentSize;
     
     if(isEnableTbl==YES)
     {
@@ -590,8 +590,8 @@
 
 - (IBAction)nonStriker_btn:(id)sender{
     
-    CGFloat contentSize =self.nonStriker_table.contentSize.height;
-    self.nonStrikerTbl_height.constant =(contentSize >45)?150:contentSize;
+   // CGFloat contentSize =self.nonStriker_table.contentSize.height;
+   // self.nonStrikerTbl_height.constant =(contentSize >45)?150:contentSize;
     if(isEnableTbl==YES)
     {
        
@@ -646,8 +646,8 @@
 
 - (IBAction)Bowler_btn:(id)sender{
     
-    CGFloat contentSize =self.Bowler_table.contentSize.height;
-    self.bowlerTbl_height.constant =(contentSize >45)?150:contentSize;
+ //   CGFloat contentSize =self.Bowler_table.contentSize.height;
+//    self.bowlerTbl_height.constant =(contentSize >45)?150:contentSize;
     if(isEnableTbl==YES)
     {
        
