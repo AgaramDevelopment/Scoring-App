@@ -50,37 +50,7 @@
     refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
     [self.tableView addSubview:refreshControl];
    
-//    if(self.checkInternetConnection)
-//    {
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//        
-//        UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
-//        refreshControl.tintColor = [UIColor greenColor];
-//        refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to Refresh"];
-//        
-//        
-//        resultArray=[[NSMutableArray alloc]init];
-//        NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
-//        for(int i=0; i < [FetchCompitionArray count]; i++)
-//        {
-//            
-//            EventRecord *objEventRecord=(EventRecord*)[FetchCompitionArray objectAtIndex:i];
-//            NSLog(@"%@",objEventRecord.recordstatus);
-//            NSString *matchStatus=objEventRecord.recordstatus;
-//            if([matchStatus isEqualToString:@"MSC001"])
-//            {
-//                [resultArray addObject:objEventRecord];
-//            }
-//            //NSString * matchStatus=[FetchCompitionArray valueForKey:@""];
-//        }
-//         [self.tableView addSubview:refresh];
-//        
-//        [self.tableView reloadData];
-//        
-//         [refreshControl endRefreshing];
-//        
-//         });
-//    }
+
     
 }
 
