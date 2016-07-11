@@ -14,6 +14,7 @@
 #import "FetchSEPageLoadRecord.h"
 #import "EditModeVC.h"
 #import "ScorEnginVC.h"
+#import "TorunamentVC.h"
 #import "InningsDetailsVC.h"
 
 @interface ArchivesVC ()<SwipeableCellDelegate>

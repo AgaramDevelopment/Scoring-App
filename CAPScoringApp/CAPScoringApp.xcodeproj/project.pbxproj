@@ -226,8 +226,8 @@
 		CED03D261D1AAE3B00522B89 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */; };
 		DC2710771D25B9A40011C7B0 /* EndSession.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC2710681D25B9A40011C7B0 /* EndSession.xib */; };
 		DC27107D1D25B9A40011C7B0 /* FollowOnRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2710721D25B9A40011C7B0 /* FollowOnRecords.m */; };
-		DC35FDEF1D31108500935F6D /* InningsDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DC35FDED1D31108500935F6D /* InningsDetailsVC.m */; };
-		DC35FDF01D31108500935F6D /* InningsDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC35FDEE1D31108500935F6D /* InningsDetailsVC.xib */; };
+		DCA67D511D34056A00982EF5 /* InningsDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA67D4F1D34056A00982EF5 /* InningsDetailsVC.m */; };
+		DCA67D521D34056A00982EF5 /* InningsDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCA67D501D34056A00982EF5 /* InningsDetailsVC.xib */; };
 		DCEFC8601D28B6CF00451485 /* DBManagerChangeToss.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEFC85F1D28B6CF00451485 /* DBManagerChangeToss.m */; };
 		DCEFC8641D28B72C00451485 /* ChangeTossVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEFC8621D28B72C00451485 /* ChangeTossVC.m */; };
 		DCEFC8651D28B72C00451485 /* ChangeTossVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCEFC8631D28B72C00451485 /* ChangeTossVC.xib */; };
@@ -695,9 +695,10 @@
 		DC2710701D25B9A40011C7B0 /* FollowOn.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FollowOn.xib; sourceTree = "<group>"; };
 		DC2710711D25B9A40011C7B0 /* FollowOnRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FollowOnRecords.h; sourceTree = "<group>"; };
 		DC2710721D25B9A40011C7B0 /* FollowOnRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FollowOnRecords.m; sourceTree = "<group>"; };
-		DC35FDEC1D31108500935F6D /* InningsDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InningsDetailsVC.h; sourceTree = "<group>"; };
-		DC35FDED1D31108500935F6D /* InningsDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InningsDetailsVC.m; sourceTree = "<group>"; };
-		DC35FDEE1D31108500935F6D /* InningsDetailsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InningsDetailsVC.xib; sourceTree = "<group>"; };
+		DCA67D4C1D34055200982EF5 /* CAPScoringApp */ = {isa = PBXFileReference; lastKnownFileType = folder; name = CAPScoringApp; sourceTree = "<group>"; };
+		DCA67D4E1D34056A00982EF5 /* InningsDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InningsDetailsVC.h; sourceTree = "<group>"; };
+		DCA67D4F1D34056A00982EF5 /* InningsDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InningsDetailsVC.m; sourceTree = "<group>"; };
+		DCA67D501D34056A00982EF5 /* InningsDetailsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InningsDetailsVC.xib; sourceTree = "<group>"; };
 		DCEFC85E1D28B6CF00451485 /* DBManagerChangeToss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerChangeToss.h; sourceTree = "<group>"; };
 		DCEFC85F1D28B6CF00451485 /* DBManagerChangeToss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerChangeToss.m; sourceTree = "<group>"; };
 		DCEFC8611D28B72C00451485 /* ChangeTossVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeTossVC.h; path = ViewController/ChangeTossVC/ChangeTossVC.h; sourceTree = "<group>"; };
@@ -1342,6 +1343,10 @@
 		CE0018361CF4308000668D8B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				DCA67D4E1D34056A00982EF5 /* InningsDetailsVC.h */,
+				DCA67D4F1D34056A00982EF5 /* InningsDetailsVC.m */,
+				DCA67D501D34056A00982EF5 /* InningsDetailsVC.xib */,
+				DCA67D4C1D34055200982EF5 /* CAPScoringApp */,
 				DC2710661D25B9A40011C7B0 /* EndSession.h */,
 				DC2710671D25B9A40011C7B0 /* EndSession.m */,
 				DC2710681D25B9A40011C7B0 /* EndSession.xib */,
@@ -1706,6 +1711,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DCA67D521D34056A00982EF5 /* InningsDetailsVC.xib in Resources */,
 				CE8100091D30DDFE0065D56D /* TNCA_DATABASE.sqlite in Resources */,
 				047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */,
 				18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */,
@@ -1791,6 +1797,7 @@
 				186DC8191D21451500293B7F /* EndDayTVC.m in Sources */,
 				187620FE1D1D0126006E160F /* DBManagerEndDay.m in Sources */,
 				CE7C6DD61D23E14A00B694D5 /* DbManager_OtherWicket.m in Sources */,
+				DCA67D511D34056A00982EF5 /* InningsDetailsVC.m in Sources */,
 				187625091D154495009374F8 /* RevicedOverVC.m in Sources */,
 				246125191D13C85E004B85E7 /* Reachability.m in Sources */,
 				185060561D0300190030E3E2 /* FastBowlTypeCell.m in Sources */,
