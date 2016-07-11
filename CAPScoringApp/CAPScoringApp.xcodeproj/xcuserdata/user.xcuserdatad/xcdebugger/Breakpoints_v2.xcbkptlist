@@ -217,8 +217,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "492"
             endingLineNumber = "492"
-            landmarkName = "-electedTo_btn:"
-            landmarkType = "5">
+            landmarkName = "@implementation TossDetailsVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

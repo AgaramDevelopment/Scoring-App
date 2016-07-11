@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -533,7 +533,7 @@
                                                 <rect key="frame" x="70" y="19" width="426" height="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="28"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -582,7 +582,7 @@
                                                 <rect key="frame" x="70" y="19" width="426" height="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="28"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1738,7 +1738,7 @@
                                             </mask>
                                         </variation>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAR END" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evO-mg-NiS">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAR END" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evO-mg-NiS">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="TXF-l6-Kub"/>
@@ -1890,7 +1890,9 @@
                                     <constraint firstItem="QzF-SL-R0B" firstAttribute="top" secondItem="jIe-Sp-Wm0" secondAttribute="bottom" constant="5" id="OD8-Hg-X4D">
                                         <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                     </constraint>
-                                    <constraint firstItem="evO-mg-NiS" firstAttribute="leading" secondItem="NU1-ae-JDS" secondAttribute="trailing" constant="7" id="OhX-BG-2tF"/>
+                                    <constraint firstItem="evO-mg-NiS" firstAttribute="leading" secondItem="NU1-ae-JDS" secondAttribute="trailing" constant="7" id="OhX-BG-2tF">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-168"/>
+                                    </constraint>
                                     <constraint firstItem="2sV-xD-WMY" firstAttribute="top" secondItem="nbW-m8-Zu2" secondAttribute="bottom" constant="2" id="Qli-5y-WCZ">
                                         <variation key="heightClass=regular-widthClass=regular" constant="1"/>
                                     </constraint>
@@ -1959,7 +1961,9 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="15"/>
                                     </constraint>
                                     <constraint firstItem="2sV-xD-WMY" firstAttribute="leading" secondItem="aff-hj-tjT" secondAttribute="leading" constant="100" id="mmy-LP-0B1"/>
-                                    <constraint firstAttribute="trailing" secondItem="evO-mg-NiS" secondAttribute="trailing" constant="240" id="mwi-O4-6n3"/>
+                                    <constraint firstAttribute="trailing" secondItem="evO-mg-NiS" secondAttribute="trailing" constant="240" id="mwi-O4-6n3">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="291"/>
+                                    </constraint>
                                     <constraint firstItem="dLg-vH-awG" firstAttribute="leading" secondItem="aff-hj-tjT" secondAttribute="leading" constant="100" id="pVG-b9-0XM"/>
                                     <constraint firstItem="MH6-LN-3aR" firstAttribute="leading" secondItem="aff-hj-tjT" secondAttribute="leading" constant="100" id="r1c-b1-2Ws"/>
                                     <constraint firstItem="zdh-SW-PL3" firstAttribute="top" secondItem="d81-wx-SZ6" secondAttribute="bottom" id="sOT-iA-8dl">
@@ -5074,7 +5078,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcp-qF-AKJ">
                                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="70" id="XrR-ZL-ZIp"/>
+                                                            <constraint firstAttribute="width" constant="70" id="XrR-ZL-ZIp">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                                                            </constraint>
                                                             <constraint firstAttribute="height" constant="30" id="mct-sB-ce5"/>
                                                         </constraints>
                                                         <variation key="default">

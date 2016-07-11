@@ -238,7 +238,27 @@
 
 - (IBAction)Finish_btn:(id)sender {
       [self DurationCalculation];
-         BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
+    
+     BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
+    
+    if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Start Time"];
+    }
+    else if([self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil)
+    {
+        [self ShowAlterView:@"Please Select End Time"];
+    }
+    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)
+    {
+        [self ShowAlterView:@"Duration Not Calculated"];
+    }
+    else if([self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
+    {
+        [self ShowAlterView:@"Please Add Comments"];
+    }
+   
+    else{
     
     NSString *BREAKNO1 =[DBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
     
@@ -251,12 +271,16 @@
     
  [self startService:@"INSERT"];
     
-    
+    }
     
 }
 
 
-
+-(void)ShowAlterView:(NSString *) alterMsg
+{
+    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [objAlter show];
+}
 
 
 
