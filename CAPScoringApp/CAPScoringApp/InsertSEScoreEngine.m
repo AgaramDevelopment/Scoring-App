@@ -13,9 +13,9 @@
 
 @implementation InsertSEScoreEngine
 
-@synthesize BOWLINGTEAMCODE;
+//@synthesize BOWLINGTEAMCODE;
 
--(void) InsertScoreEngine:
++(void) InsertScoreEngine:
 (NSString *)COMPETITIONCODE:
 (NSString*)MATCHCODE :
 (NSString*) TEAMCODE :
@@ -89,8 +89,9 @@
 {
     
     
-    
+    NSString* BOWLINGTEAMCODE;
     NSString* BATTINGTEAMCODE;
+    NSMutableArray *objoverballCount;
    // NSString* BOWLINGTEAMCODE =[[NSString alloc ] init];
     NSString* BATTEAMSHORTNAME =[[NSString alloc ] init];
     NSString* BOWLTEAMSHORTNAME =[[NSString alloc ] init];
@@ -271,7 +272,7 @@
             [DBManagerInsertScoreEngine InsertBallEventsForInsertScoreEngine :  BALLCODENO   :COMPETITIONCODE    : MATCHCODE       : TEAMCODE       : INNINGSNO       : DAYNO       : OVERNO       : BALLNO       : BALLCOUNT       : OVERBALLCOUNT       : SESSIONNO       : STRIKERCODE       : NONSTRIKERCODE       : BOWLERCODE       : WICKETKEEPERCODE       : UMPIRE1CODE       : UMPIRE2CODE       : ATWOROTW       : BOWLINGEND       : BOWLTYPE       : SHOTTYPE       : SHOTTYPECATEGORY       : ISLEGALBALL       : ISFOUR       : ISSIX       : RUNS       : OVERTHROW       : TOTALRUNS       : WIDE       : NOBALL       : BYES       : LEGBYES       : PENALTY       : TOTALEXTRAS       : GRANDTOTAL       : RBW       : PMLINECODE       : PMLENGTHCODE       : PMSTRIKEPOINT       : @""       : PMX1       : PMY1       : PMX2       : PMY2       : PMX3       : PMY3       : WWREGION       : WWX1       : WWY1       : WWX2       : WWY2       : BALLDURATION       : ISAPPEAL       : ISBEATEN       : ISUNCOMFORT       : ISWTB       : ISRELEASESHOT       : MARKEDFOREDIT       : REMARKS       : VIDEOFILENAME       : BALLSPEED       : UNCOMFORTCLASSIFCATION  ];
             
             T_TOTALRUNS=[NSNumber numberWithInt:0];
-           // T_TOTALRUNS=
+
             
             int calcRun = (TOTALRUNS.intValue + (  WIDE.intValue > 0 ? WIDE.intValue-1 : WIDE.intValue) +( NOBALL.intValue > 0 ? NOBALL.intValue-1 : NOBALL.intValue) + LEGBYES.intValue + BYES.intValue + ((BYES.intValue > 0 || LEGBYES.intValue > 0) ? OVERTHROW.intValue : 0 ));
             T_TOTALRUNS= [NSNumber numberWithInt:calcRun];
@@ -296,12 +297,9 @@
             [DBManagerInsertScoreEngine InsertWicketEventsForInsertScoreEngine :  BALLCODENO:  COMPETITIONCODE:  MATCHCODE: TEAMCODE :  INNINGSNO:ISWICKET : WICKETTYPE : WICKETPLAYER : FIELDINGPLAYER : WICKETEVENT];
         }
         
+       BATTEAMRUNS = [DBManagerInsertScoreEngine GetbatTeamRunsForInsertScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO :BATTINGTEAMCODE];
         
-        
-
-        
-        
-        BATTEAMRUNS = [DBManagerInsertScoreEngine GetbatTeamRunsForInsertScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO :BATTINGTEAMCODE];
+         BOWLINGTEAMCODE = [DBManagerInsertScoreEngine getBowlingCode:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE];
         
         EndInnings *insertEndInnings = [[EndInnings alloc]init];
         
@@ -331,6 +329,7 @@
         insertEndInnings.O_ISLEGALBALL = @1;
         
         
+        
         [insertEndInnings insertScordBoard:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO];
         
         
@@ -338,6 +337,7 @@
         
         //     [INSERTSCOREBOARD  :	 COMPETITIONCODE: 	 MATCHCODE: 	 BATTINGTEAMCODE: 	 BOWLINGTEAMCODE: 	 INNINGSNO: 	 SB_STRIKERCODE: 	 ISFOUR: 	 ISSIX: 	 RUNS: 	 OVERTHROW: 	 ISWICKET: 	 WICKETTYPE: 	 WICKETPLAYER: 	 SB_BOWLERCODE: 	 N_OVERNO: 	 N_BALLNO: 	 BATTEAMRUNS: 	 WIDE: 	 NOBALL: 	 BYES: 	 LEGBYES: 	0:: 	1:	0:	0:	1];
         [DBManagerInsertScoreEngine UpdateBSForInsertScoreEngine : COMPETITIONCODE:  MATCHCODE : INNINGSNO];
+        
         //        BATTINGTEAMCODE =TEAMCODE;
         //
         //        BOWLINGTEAMCODE=[DBManagerInsertScoreEngine    ];

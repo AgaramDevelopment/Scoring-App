@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1206,7 +1206,7 @@
                                             <constraint firstItem="r06-Gv-sHw" firstAttribute="leading" secondItem="nbW-m8-Zu2" secondAttribute="leading" id="ZJ1-dl-YNW"/>
                                             <constraint firstItem="r06-Gv-sHw" firstAttribute="top" secondItem="nbW-m8-Zu2" secondAttribute="top" constant="1" id="gi8-88-nHU"/>
                                             <constraint firstItem="aMp-L4-anj" firstAttribute="top" secondItem="nbW-m8-Zu2" secondAttribute="top" constant="2" id="scR-pF-fDa">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="7"/>
+                                                <variation key="heightClass=regular-widthClass=regular" constant="14"/>
                                             </constraint>
                                         </constraints>
                                         <variation key="default">
@@ -1736,7 +1736,7 @@
                                             </mask>
                                         </variation>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAR END" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evO-mg-NiS">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAR END" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evO-mg-NiS">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="128" id="TXF-l6-Kub"/>
@@ -1886,7 +1886,9 @@
                                     <constraint firstItem="QzF-SL-R0B" firstAttribute="top" secondItem="jIe-Sp-Wm0" secondAttribute="bottom" constant="5" id="OD8-Hg-X4D">
                                         <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                     </constraint>
-                                    <constraint firstItem="evO-mg-NiS" firstAttribute="leading" secondItem="NU1-ae-JDS" secondAttribute="trailing" constant="7" id="OhX-BG-2tF"/>
+                                    <constraint firstItem="evO-mg-NiS" firstAttribute="leading" secondItem="NU1-ae-JDS" secondAttribute="trailing" constant="7" id="OhX-BG-2tF">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-168"/>
+                                    </constraint>
                                     <constraint firstItem="2sV-xD-WMY" firstAttribute="top" secondItem="nbW-m8-Zu2" secondAttribute="bottom" constant="2" id="Qli-5y-WCZ">
                                         <variation key="heightClass=regular-widthClass=regular" constant="1"/>
                                     </constraint>
@@ -1955,7 +1957,9 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="15"/>
                                     </constraint>
                                     <constraint firstItem="2sV-xD-WMY" firstAttribute="leading" secondItem="aff-hj-tjT" secondAttribute="leading" constant="100" id="mmy-LP-0B1"/>
-                                    <constraint firstAttribute="trailing" secondItem="evO-mg-NiS" secondAttribute="trailing" constant="240" id="mwi-O4-6n3"/>
+                                    <constraint firstAttribute="trailing" secondItem="evO-mg-NiS" secondAttribute="trailing" constant="240" id="mwi-O4-6n3">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="291"/>
+                                    </constraint>
                                     <constraint firstItem="dLg-vH-awG" firstAttribute="leading" secondItem="aff-hj-tjT" secondAttribute="leading" constant="100" id="pVG-b9-0XM"/>
                                     <constraint firstItem="MH6-LN-3aR" firstAttribute="leading" secondItem="aff-hj-tjT" secondAttribute="leading" constant="100" id="r1c-b1-2Ws"/>
                                     <constraint firstItem="zdh-SW-PL3" firstAttribute="top" secondItem="d81-wx-SZ6" secondAttribute="bottom" id="sOT-iA-8dl">
@@ -2190,16 +2194,21 @@
                         <outlet property="Striker_table" destination="olQ-CF-mtl" id="iYq-3c-R01"/>
                         <outlet property="Wonby_lbl" destination="aMp-L4-anj" id="DWT-Vs-mHN"/>
                         <outlet property="Wonby_table" destination="2sV-xD-WMY" id="tDv-jo-ZBv"/>
+                        <outlet property="bowlerTbl_height" destination="8Nt-NN-MqD" id="bkk-mh-GO4"/>
+                        <outlet property="electedTbl_height" destination="kAs-zP-pgN" id="waR-5p-q3M"/>
                         <outlet property="electedTo_lbl" destination="5aC-QF-csX" id="2ZW-fo-HhN"/>
                         <outlet property="electedTo_table" destination="EGh-fh-3ic" id="Xpc-4e-pM2"/>
                         <outlet property="nonStriker" destination="zdh-SW-PL3" id="bXp-2N-Boa"/>
+                        <outlet property="nonStrikerTbl_height" destination="lja-CD-37G" id="fG0-OA-4Jg"/>
                         <outlet property="nonStriker_lbl" destination="cmX-Yc-Cc4" id="jRO-9a-3V0"/>
                         <outlet property="nonStriker_table" destination="dLg-vH-awG" id="8Qg-Io-Xge"/>
                         <outlet property="outlet_btn_proceed" destination="QeG-1x-x0d" id="9lp-h1-5po"/>
+                        <outlet property="strikerTbl_height" destination="6xm-9s-WNt" id="QBF-UH-Zly"/>
                         <outlet property="view_Bowler" destination="b9d-c0-oqI" id="jRu-Id-ScA"/>
                         <outlet property="view_Electedto" destination="QzF-SL-R0B" id="Vw2-c8-MHi"/>
                         <outlet property="view_Striker" destination="Lyd-4b-jov" id="yJt-bf-8KG"/>
                         <outlet property="view_Wonby" destination="nbW-m8-Zu2" id="WvL-vJ-EUr"/>
+                        <outlet property="wonbyTbl_height" destination="olq-of-DA0" id="59s-Zl-CZu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vlJ-D7-bPy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -5662,7 +5671,7 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                    <rect key="frame" x="160" y="1" width="440" height="106"/>
+                                                    <rect key="frame" x="160" y="1" width="440" height="102"/>
                                                 </variation>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBk-zT-YMj">
@@ -5721,7 +5730,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="pve-fs-UQQ" firstAttribute="centerY" secondItem="HBk-zT-YMj" secondAttribute="centerY" id="AP9-W4-Qmq">
-                                                <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                                <variation key="heightClass=regular-widthClass=regular" constant="-2"/>
                                             </constraint>
                                             <constraint firstItem="HBk-zT-YMj" firstAttribute="top" secondItem="pDR-Ao-xxS" secondAttribute="top" id="DBa-GX-f4S">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="1"/>
@@ -7711,7 +7720,9 @@
                                                                             <constraint firstAttribute="height" constant="91" id="VU3-qo-ZCp">
                                                                                 <variation key="heightClass=regular-widthClass=regular" constant="70"/>
                                                                             </constraint>
-                                                                            <constraint firstAttribute="height" constant="128" id="ksu-2V-fmc"/>
+                                                                            <constraint firstAttribute="height" constant="128" id="ksu-2V-fmc">
+                                                                                <variation key="heightClass=regular-widthClass=regular" constant="79"/>
+                                                                            </constraint>
                                                                         </constraints>
                                                                         <prototypes>
                                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="umpirecell" id="eJv-3F-JIt" customClass="umpiretablecell">
@@ -7793,6 +7804,7 @@
                                                                     </label>
                                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Jz-hR-Frv">
                                                                         <rect key="frame" x="-25" y="-30" width="97" height="30"/>
+                                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="height" constant="40" id="6Vj-wO-0SF">
                                                                                 <variation key="heightClass=regular-widthClass=regular" constant="65"/>
@@ -7801,6 +7813,7 @@
                                                                                 <variation key="heightClass=regular-widthClass=regular" constant="276"/>
                                                                             </constraint>
                                                                         </constraints>
+                                                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                                                         <textInputTraits key="textInputTraits"/>
                                                                         <variation key="default">
@@ -7821,7 +7834,9 @@
                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <constraints>
                                                                             <constraint firstAttribute="width" constant="214" id="Q6Q-aV-dUz"/>
-                                                                            <constraint firstAttribute="height" constant="48" id="u7u-AS-Tg2"/>
+                                                                            <constraint firstAttribute="height" constant="48" id="u7u-AS-Tg2">
+                                                                                <variation key="heightClass=regular-widthClass=regular" constant="74"/>
+                                                                            </constraint>
                                                                         </constraints>
                                                                         <prototypes>
                                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Batsmancell" id="QlR-5o-0iL" customClass="Batsmancell">
@@ -7913,7 +7928,7 @@
                                                                     </constraint>
                                                                     <constraint firstItem="d81-0y-fn4" firstAttribute="top" secondItem="YuY-c8-SjD" secondAttribute="top" constant="35" id="3nz-eW-QOW"/>
                                                                     <constraint firstItem="4Dt-t5-uzc" firstAttribute="top" secondItem="T8h-Mk-hso" secondAttribute="bottom" constant="33" id="6q5-0d-IIu">
-                                                                        <variation key="heightClass=regular-widthClass=regular" constant="108"/>
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="147"/>
                                                                     </constraint>
                                                                     <constraint firstItem="HUX-DN-wqd" firstAttribute="leading" secondItem="YuY-c8-SjD" secondAttribute="leading" constant="18" id="7sP-Ef-IZN"/>
                                                                     <constraint firstItem="NBA-gd-NAq" firstAttribute="top" secondItem="T9G-hC-PbK" secondAttribute="bottom" constant="36" id="96X-8a-gn0"/>
@@ -7926,7 +7941,7 @@
                                                                     <constraint firstAttribute="trailing" secondItem="0Jz-hR-Frv" secondAttribute="trailing" constant="8" id="SVG-gu-RMU"/>
                                                                     <constraint firstItem="JZ9-ku-83d" firstAttribute="top" secondItem="d81-0y-fn4" secondAttribute="bottom" constant="26" id="SYe-uF-S3p"/>
                                                                     <constraint firstItem="tNw-fg-57g" firstAttribute="top" secondItem="HUX-DN-wqd" secondAttribute="bottom" constant="15" id="TYa-2F-6Dy">
-                                                                        <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="70"/>
                                                                     </constraint>
                                                                     <constraint firstAttribute="trailing" secondItem="NBA-gd-NAq" secondAttribute="trailing" constant="7" id="UHp-tF-Yzu">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="8"/>
@@ -7949,7 +7964,7 @@
                                                                     <constraint firstItem="T8h-Mk-hso" firstAttribute="top" secondItem="KjS-Gv-1mB" secondAttribute="bottom" constant="9" id="mrP-yC-lF5"/>
                                                                     <constraint firstAttribute="trailing" secondItem="KjS-Gv-1mB" secondAttribute="trailing" constant="8" id="opP-fz-Wub"/>
                                                                     <constraint firstItem="0Jz-hR-Frv" firstAttribute="top" secondItem="T8h-Mk-hso" secondAttribute="bottom" constant="12" id="pVI-nL-XFM">
-                                                                        <variation key="heightClass=regular-widthClass=regular" constant="35"/>
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="52"/>
                                                                     </constraint>
                                                                     <constraint firstItem="cAc-7a-goC" firstAttribute="top" secondItem="imA-E4-9Bk" secondAttribute="bottom" constant="21" id="u4o-P0-75d"/>
                                                                     <constraint firstItem="04e-JY-eUX" firstAttribute="top" secondItem="T9G-hC-PbK" secondAttribute="bottom" constant="9" id="uD1-hX-qCv"/>

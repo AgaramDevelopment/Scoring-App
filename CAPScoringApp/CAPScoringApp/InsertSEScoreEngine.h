@@ -14,9 +14,10 @@
 {
     NSMutableArray * objoverballCount;
 }
-@property (strong,nonatomic) NSString *BOWLINGTEAMCODE;
 
--(void) InsertScoreEngine:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE :(NSString*) TEAMCODE :(NSNumber*) INNINGSNO:(NSString*) BALLCODE :(NSNumber*) OVERNO :(NSNumber*) BALLNO:(NSNumber*) BALLCOUNT:(NSNumber*) DAYNO :
+//@property (strong,nonatomic) NSString *BOWLINGTEAMCODE;
+
++(void) InsertScoreEngine:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE :(NSString*) TEAMCODE :(NSNumber*) INNINGSNO:(NSString*) BALLCODE :(NSNumber*) OVERNO :(NSNumber*) BALLNO:(NSNumber*) BALLCOUNT:(NSNumber*) DAYNO :
 (NSNumber*) SESSIONNO :
 (NSString *)STRIKERCODE:
 (NSString *)NONSTRIKERCODE:

@@ -12,6 +12,8 @@
 
 @interface DBManagerInsertScoreEngine : NSObject
 
++(NSString*)getBowlingCode:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*)TEAMCODE;
+
 +(NSString*) GetBallCodeForInsertScoreEngine:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 
 +(BOOL)  UpdateMatchStatusForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE;

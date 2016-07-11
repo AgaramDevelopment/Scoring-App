@@ -89,6 +89,10 @@
 
 -(IBAction)didClickStrickerSelection:(id)sender
 {
+    CGFloat contentSize =self.tbl_strikerlist.contentSize.height;
+    self.tblHeight.constant =(contentSize>44)?128:contentSize;
+    if(IsStricker == NO)
+    {
     IsStricker =YES;
     IsNonStricker =NO;
     IsBowler =NO;
@@ -98,10 +102,20 @@
     self.tbl_strikerlist.hidden=NO;
     self.tbl_yposition.constant=self.view_striker.frame.origin.y-130;
     [_tbl_strikerlist reloadData];
+    }
+    else
+    {
+         self.tbl_strikerlist.hidden=YES;
+        IsStricker =NO;
+    }
    
 }
 -(IBAction)didClickNonStrickerSelection:(id)sender
 {
+    CGFloat contentSize =self.tbl_strikerlist.contentSize.height;
+    self.tblHeight.constant =(contentSize>44)?128:contentSize;
+    if(IsNonStricker == YES)
+    {
     IsStricker =NO;
     IsNonStricker =YES;
     IsBowler =NO;
@@ -111,10 +125,20 @@
     self.tbl_strikerlist.hidden=NO;
      self.tbl_yposition.constant=self.view_nonstriker.frame.origin.y-130;
      [_tbl_strikerlist reloadData];
+    }
+    else
+    {
+        self.tbl_strikerlist.hidden=YES;
+        IsNonStricker=NO;
+    }
 }
 
 -(IBAction)didClickBowlerSelection:(id)sender
 {
+    CGFloat contentSize =self.tbl_strikerlist.contentSize.height;
+    self.tblHeight.constant =(contentSize>44)?128:contentSize;
+    if(IsBowler==NO)
+    {
     IsStricker =NO;
     IsNonStricker =NO;
     IsBowler =YES;
@@ -123,6 +147,12 @@
     self.tbl_strikerlist.hidden=NO;
      self.tbl_yposition.constant=self.view_Bowler.frame.origin.y-130;
      [_tbl_strikerlist reloadData];
+    }
+    else
+    {
+        self.tbl_strikerlist.hidden=YES;
+        IsBowler=NO;
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

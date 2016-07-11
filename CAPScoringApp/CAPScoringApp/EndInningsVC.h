@@ -8,14 +8,22 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol EndInningsVCDelagate <NSObject>
+@required
+
+- (void) EndInningsBackBtnAction;
+
+@end
+
 @interface EndInningsVC : UIViewController
 
 {
     UIDatePicker *datePicker;
 }
 
-@property (strong,nonatomic) NSString *MATCHCODE;
+@property(nonatomic,strong) id <EndInningsVCDelagate> delegate;
 
+@property (strong,nonatomic) NSString *MATCHCODE;
 
 @property (weak, nonatomic) IBOutlet UIView *view_allControls;
 
@@ -70,4 +78,9 @@
 - (IBAction)btn_delete:(id)sender;
 
 -(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE;
+
+
+
+
+
 @end
