@@ -243,7 +243,7 @@
     
     TOTALBALLS = [NSNumber numberWithInt:totalBallsDataConv];
     
-    BATTEAMRUNRATE = TOTALBALLS == 0 ? [NSNumber numberWithInt:0]: [NSNumber numberWithInt:(BATTEAMRUNS.intValue / TOTALBALLS.intValue) * 6] ;
+    BATTEAMRUNRATE = TOTALBALLS.intValue == 0 ? [NSNumber numberWithInt:0]: [NSNumber numberWithInt:(BATTEAMRUNS.intValue / TOTALBALLS.intValue) * 6] ;
     
     
     self.GetBowlingTeamPlayersArray=[ DBManagerEditScoreEngine GetBowlingTeamPlayersForMatchRegistration :  MATCHCODE : BOWLINGTEAMCODE: COMPETITIONCODE : BATTINGTEAMCODE :  INNINGSNO :BATTEAMOVERS];

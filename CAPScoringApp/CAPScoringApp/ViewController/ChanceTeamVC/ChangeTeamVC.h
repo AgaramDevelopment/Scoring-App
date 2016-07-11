@@ -33,6 +33,7 @@
 @property(nonatomic,strong) IBOutlet UIView * view_ChangeInnings;
 @property(nonatomic,strong) IBOutlet UITableView * tbl_strikerlist;
 @property(nonatomic,strong) IBOutlet NSLayoutConstraint *tbl_yposition;
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint *tblHeight;
 
 
 @end

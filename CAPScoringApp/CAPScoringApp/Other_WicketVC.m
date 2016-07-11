@@ -121,6 +121,15 @@
     [super viewDidLoad];
     self.tbl_playername.hidden=YES;
     
+    
+    [self.WICKET_VIEW.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    self.WICKET_VIEW.layer.borderWidth = 2;
+    
+    [self.Player_view.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    self.Player_view.layer.borderWidth = 2;
+    
+    
+    
     if(_ISEDITMODE){
         self.Wicket_lbl.text=WICKETTYPE;
         self.selectplayer_lbl.text=WICKETPLAYER;

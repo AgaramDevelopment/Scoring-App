@@ -89,6 +89,9 @@
 
 -(IBAction)didClickStrickerSelection:(id)sender
 {
+   
+    if(IsStricker == NO)
+    {
     IsStricker =YES;
     IsNonStricker =NO;
     IsBowler =NO;
@@ -98,10 +101,19 @@
     self.tbl_strikerlist.hidden=NO;
     self.tbl_yposition.constant=self.view_striker.frame.origin.y-130;
     [_tbl_strikerlist reloadData];
+    }
+    else
+    {
+         self.tbl_strikerlist.hidden=YES;
+        IsStricker =NO;
+    }
    
 }
 -(IBAction)didClickNonStrickerSelection:(id)sender
 {
+   
+    if(IsNonStricker == YES)
+    {
     IsStricker =NO;
     IsNonStricker =YES;
     IsBowler =NO;
@@ -111,10 +123,18 @@
     self.tbl_strikerlist.hidden=NO;
      self.tbl_yposition.constant=self.view_nonstriker.frame.origin.y-130;
      [_tbl_strikerlist reloadData];
+    }
+    else
+    {
+        self.tbl_strikerlist.hidden=YES;
+        IsNonStricker=NO;
+    }
 }
 
 -(IBAction)didClickBowlerSelection:(id)sender
 {
+    if(IsBowler==NO)
+    {
     IsStricker =NO;
     IsNonStricker =NO;
     IsBowler =YES;
@@ -123,6 +143,12 @@
     self.tbl_strikerlist.hidden=NO;
      self.tbl_yposition.constant=self.view_Bowler.frame.origin.y-130;
      [_tbl_strikerlist reloadData];
+    }
+    else
+    {
+        self.tbl_strikerlist.hidden=YES;
+        IsBowler=NO;
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

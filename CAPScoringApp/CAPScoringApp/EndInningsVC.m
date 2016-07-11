@@ -279,6 +279,21 @@ BOOL IsBack;
 {
     EndInnings *obj =(EndInnings*)[endInningsArray objectAtIndex:indexPath.row];
     
+    formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *startDateTF = obj.STARTTIME;
+    NSString *startEndTF = obj.ENDTIME;
+    
+    NSDate *date1 = [formatter dateFromString:startDateTF];
+    NSDate *date2 = [formatter dateFromString:startEndTF];
+    
+    NSTimeInterval timeDifference = [date2 timeIntervalSinceDate:date1];
+    int days = timeDifference / 60;
+    NSString *Duration = [NSString stringWithFormat:@"%d", days];
+    
+    
+    
+    
     NSString*startInningsTime = obj.STARTTIME;
     NSString*endInningsTime  = obj.ENDTIME;
     NSString*teamName = obj.TEAMNAME;
@@ -288,6 +303,7 @@ BOOL IsBack;
     
     self.txt_startInnings.text = startInningsTime;
     self.txt_endInnings.text = endInningsTime;
+    self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
     self.lbl_teamName.text = teamName;
     //self.lbl_runScored.text = [NSString stringWithFormat:@"%@",totalRuns];
     self.lbl_wktLost.text = [NSString stringWithFormat:@"%@", totalWickets];
@@ -346,21 +362,24 @@ BOOL IsBack;
 }
 - (IBAction)btn_back:(id)sender {
     
+    
+
     if (IsBack == NO) {
         
         self.view_allControls.hidden = YES;
         self.tbl_endInnings.hidden = NO;
         
         IsBack = YES;
-        
+    
     }else if (IsBack == YES){
         
-        DashBoardVC * dashVC = [[DashBoardVC alloc]init];
-        
-        dashVC =  (DashBoardVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+        [self.delegate EndInningsBackBtnAction];
+
         
         IsBack = NO;
     }
+    
+    
 }
 
 //Check internet connection

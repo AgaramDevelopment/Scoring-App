@@ -13,6 +13,11 @@
 #import "EditModeCell.h"
 #import "OversorderRecord.h"
 #import "ScorEnginVC.h"
+#import "FETCHSEBALLCODEDETAILS.h"
+#import "BallEventRecord.h"
+#import "ScoreEnginEditRecord.h"
+#import "InsertSEScoreEngine.h"
+#import "FetchSEPageLoadRecord.h"
 
 // Border Brushes
 #define runBrushBDR [UIColor colorWithRed:(82.0/255.0) green:(131.0/255.0) blue:(174.0/255.0) alpha:1.0]
@@ -50,7 +55,8 @@
 //UIColor *brushFGNormal = [self colorWithHexString : @"#5283AE"];
 //UIColor *brushFGSplEvents = [UIColor whiteColor];
 
-
+FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
+BOOL isWicketSelected;
 @interface EditModeVC ()
 {
     CustomNavigationVC * objCustomNavigation;
@@ -80,7 +86,11 @@
     NSInteger ballCodeIndex;
     int indexCount ;
     BOOL isEdit;
+    
+
+    
 }
+@property (strong,nonatomic) BallEventRecord *ballEventRecord;
 
 @end
 
@@ -91,6 +101,7 @@
     [super viewDidLoad];
     [self customnavigationmethod];
     isEdit=NO;
+      isWicketSelected=NO;
     //CGFloat totalwidth =1200;
     
     [self.view layoutIfNeeded];
@@ -111,7 +122,101 @@
 //        // self.btn_fourth_inns_id.hidden = YES;
 //    }
     // Do any additional setup after loading the view.
+
+    
+ 
+    
+   }
+
+-(void)insertAfterAndBeforeMode:(NSString*)BALLCODE {
+    
+    fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
+    [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.Comptitioncode :self.matchCode :BALLCODE];
+
+    GetBallDetailsForBallEventsBE *getBallDetailsForBallEventsBE =[fetchSeBallCodeDetails.GetBallDetailsForBallEventsArray objectAtIndex:0];
+    
+    
+    self.ballEventRecord = [[BallEventRecord alloc] init];
+    self.ballEventRecord.objTeamcode =getBallDetailsForBallEventsBE.TEAMCODE;
+    
+    self.ballEventRecord.objOverno=getBallDetailsForBallEventsBE.OVERNO;
+    self.ballEventRecord.objBallno=getBallDetailsForBallEventsBE.BALLNO;
+    self.ballEventRecord.objOverBallcount = getBallDetailsForBallEventsBE.BALLCOUNT;
+    self.ballEventRecord.objBallcount=getBallDetailsForBallEventsBE.BALLCOUNT;;
+    self.ballEventRecord.objBowlercode = getBallDetailsForBallEventsBE.BOWLERCODE;
+    self.ballEventRecord.objStrikercode = getBallDetailsForBallEventsBE.STRIKERCODE;
+    self.ballEventRecord.objNonstrikercode = getBallDetailsForBallEventsBE.NONSTRIKERCODE;
+    self.ballEventRecord.objRbw =getBallDetailsForBallEventsBE.RBW;
+    self.ballEventRecord.objIswtb=getBallDetailsForBallEventsBE.ISWTB;
+    self.ballEventRecord.objIsuncomfort=getBallDetailsForBallEventsBE.ISUNCOMFORT;
+    self.ballEventRecord.objIsreleaseshot=getBallDetailsForBallEventsBE.ISRELEASESHOT;
+    self.ballEventRecord.objIsbeaten=getBallDetailsForBallEventsBE.ISBEATEN;
+    self.ballEventRecord.objPMlengthcode=getBallDetailsForBallEventsBE.PMLENGTHCODE;
+    self.ballEventRecord.objPMlinecode =getBallDetailsForBallEventsBE.PMLINECODE;
+    self.ballEventRecord.objPMX1=getBallDetailsForBallEventsBE.PMX1;
+    self.ballEventRecord.objPMY1=getBallDetailsForBallEventsBE.PMY1;
+    self.ballEventRecord.objPMX2=getBallDetailsForBallEventsBE.PMX2;
+    self.ballEventRecord.objPMY2=getBallDetailsForBallEventsBE.PMY2;
+    self.ballEventRecord.objcompetitioncode =getBallDetailsForBallEventsBE.COMPETITIONCODE;
+    
+    self.ballEventRecord.objmatchcode =getBallDetailsForBallEventsBE.MATCHCODE;
+    self.ballEventRecord.objInningsno =getBallDetailsForBallEventsBE.INNINGSNO;
+    self.ballEventRecord.objSessionno =getBallDetailsForBallEventsBE.SESSIONNO;
+    
+    self.ballEventRecord.objWicketkeepercode =getBallDetailsForBallEventsBE.WICKETKEEPERCODE;
+    self.ballEventRecord.objUmpire1code =getBallDetailsForBallEventsBE.UMPIRE1CODE;
+    self.ballEventRecord.objUmpire2code =getBallDetailsForBallEventsBE.UMPIRE2CODE;
+    self.ballEventRecord.objAtworotw =getBallDetailsForBallEventsBE.ATWOROTW;
+    self.ballEventRecord.objBowlingEnd =getBallDetailsForBallEventsBE.BOWLINGEND;
+    //self.ballEventRecord.bow =getBallDetailsForBallEventsBE.BOWLTYPECODE;
+    
+    self.ballEventRecord.objBowltype =getBallDetailsForBallEventsBE.BOWLTYPECODE;
+    //self.ballEventRecord.bow =getBallDetailsForBallEventsBE.BOWLERTYPE;
+    //self.ballEventRecord.objShottype =getBallDetailsForBallEventsBE.SHOTCODE;
+    //self.ballEventRecord.objInningsno =getBallDetailsForBallEventsBE.SHOTNAME;
+    self.ballEventRecord.objShottype =getBallDetailsForBallEventsBE.SHOTCODE;
+    self.ballEventRecord.objShorttypecategory =getBallDetailsForBallEventsBE.SHOTTYPECATEGORY;
+    self.ballEventRecord.objIslegalball =getBallDetailsForBallEventsBE.ISLEGALBALL;
+    self.ballEventRecord.objIsFour =getBallDetailsForBallEventsBE.ISFOUR;
+    
+    self.ballEventRecord.objIssix =getBallDetailsForBallEventsBE.ISSIX;
+    self.ballEventRecord.objRuns =getBallDetailsForBallEventsBE.RUNS;
+    self.ballEventRecord.objOverthrow =getBallDetailsForBallEventsBE.OVERTHROW;
+    self.ballEventRecord.objTotalruns =getBallDetailsForBallEventsBE.TOTALRUNS;
+    self.ballEventRecord.objWide =getBallDetailsForBallEventsBE.WIDE;
+    self.ballEventRecord.objNoball =getBallDetailsForBallEventsBE.NOBALL;
+    self.ballEventRecord.objByes =getBallDetailsForBallEventsBE.BYES;
+    self.ballEventRecord.objLegByes =getBallDetailsForBallEventsBE.LEGBYES;
+    self.ballEventRecord.objPenalty =getBallDetailsForBallEventsBE.PENALTY;
+    self.ballEventRecord.objTotalextras =getBallDetailsForBallEventsBE.TOTALEXTRAS;
+    self.ballEventRecord.objGrandtotal =getBallDetailsForBallEventsBE.GRANDTOTAL;
+    self.ballEventRecord.objPMStrikepoint =getBallDetailsForBallEventsBE.PMSTRIKEPOINT;
+    self.ballEventRecord.objPMStrikepointlinecode =getBallDetailsForBallEventsBE.PMSTRIKEPOINTLINECODE;
+    self.ballEventRecord.objWWREGION =getBallDetailsForBallEventsBE.WWREGION;
+    //self.ballEventRecord. =getBallDetailsForBallEventsBE.REGIONNAME;
+    self.ballEventRecord.objWWX1 =getBallDetailsForBallEventsBE.WWX1;
+    self.ballEventRecord.objWWY1 =getBallDetailsForBallEventsBE.WWY1;
+    self.ballEventRecord.objWWX2 =getBallDetailsForBallEventsBE.WWX2;
+    self.ballEventRecord.objWWY2 =getBallDetailsForBallEventsBE.WWY2;
+    self.ballEventRecord.objballduration =getBallDetailsForBallEventsBE.BALLDURATION;
+    self.ballEventRecord.objIsappeal =getBallDetailsForBallEventsBE.ISAPPEAL;
+    self.ballEventRecord.objUncomfortclassification =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFCATION;
+    self.ballEventRecord.objMarkedforedit =getBallDetailsForBallEventsBE.MARKEDFOREDIT;
+    self.ballEventRecord.objRemark =getBallDetailsForBallEventsBE.REMARKS;
+    self.ballEventRecord.objBallspeed =getBallDetailsForBallEventsBE.BALLSPEED;
+    //self.ballEventRecord. =getBallDetailsForBallEventsBE.BALLSPEEDTYPE;
+    //self.ballEventRecord. =getBallDetailsForBallEventsBE.BALLSPEEDCODE;
+    self.ballEventRecord.objUncomfortclassification =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATION;
+    //self.ballEventRecord. =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATIONCODE;
+    //self.ballEventRecord. =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATIONSUBCODE;
+    
+    
 }
+
+
+
+
+
 -(void)viewWillAppear:(BOOL)animated
 {
      indexCount = 0;
@@ -576,15 +681,21 @@
 
 -(IBAction)didClickLeftRotation:(id)sender
 {
-//    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
-//    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
-//    scoreEngine.competitionCode=self.Comptitioncode;
-//    scoreEngine.matchCode      = self.matchCode;
-//    [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"BEFORE"];
-//    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
-//    
-//    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
-//    [self.tbl_innnings reloadData];
+    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
+    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+    scoreEngine.competitionCode=self.Comptitioncode;
+    scoreEngine.matchCode = self.matchCode;
+    scoreEngine.isEditMode = YES;
+    scoreEngine.editBallCode = objInningsBowlerDetailsRecord.ballCode;
+    [self insertAfterAndBeforeMode:objInningsBowlerDetailsRecord.ballCode];
+    
+    [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"BEFORE"];
+    indexCount = 0;
+    [self.tbl_innnings reloadData];
+    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+    
+    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+    
     
 }
 
@@ -612,14 +723,21 @@
 }
 -(IBAction)didClickRightrotation:(id)sender
 {
-//    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
-//    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
-//    scoreEngine.competitionCode=self.Comptitioncode;
-//    scoreEngine.matchCode      = self.matchCode;
-//    [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"AFTER"];
-//    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
-//    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
-//    [self.tbl_innnings reloadData];
+    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
+    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+    scoreEngine.competitionCode=self.Comptitioncode;
+    scoreEngine.matchCode = self.matchCode;
+    scoreEngine.isEditMode = YES;
+    scoreEngine.editBallCode = objInningsBowlerDetailsRecord.ballCode;
+    [self insertAfterAndBeforeMode:objInningsBowlerDetailsRecord.ballCode];
+    
+    [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"AFTER"];
+    indexCount = 0;
+
+    [self.tbl_innnings reloadData];
+    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+    
+    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
 }
 
 -(IBAction)didClickInnings1team1:(id)sender

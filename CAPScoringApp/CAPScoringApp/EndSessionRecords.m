@@ -202,9 +202,9 @@
        //FETCHDOMINANT
     
     
-    GetBattingTeamDetails = [[NSMutableArray alloc]init];
+    //GetBattingTeamDetails = [[NSMutableArray alloc]init];
     
-         GetBattingTeamDetails=[DBManagerEndSession GetBattingTeamForFetchEndSession:BATTINGTEAMCODE];
+         //GetBattingTeamDetails=[DBManagerEndSession GetBattingTeamForFetchEndSession:BATTINGTEAMCODE];
     
     getBattingTeamUsingBowlingCode = [[NSMutableArray alloc]init];
     

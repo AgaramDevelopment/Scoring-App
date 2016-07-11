@@ -147,6 +147,10 @@
 
 -(IBAction)didClickTossWonSelection:(id)sender
 {
+    CGFloat contentSize=self.Tbl_toss.contentSize.height;
+    self.tbl_tossHeight.constant=(contentSize > 44)?90:contentSize;
+    if(isTossWon ==NO)
+    {
      isTossWon=YES;
      isElectedTo=NO;
      isStricker=NO;
@@ -158,10 +162,20 @@
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_TossWon.frame.origin.y-30;
     [self.Tbl_toss reloadData];
+    }
+    else
+    {
+        self.Tbl_toss.hidden=YES;
+        isTossWon=NO;
+    }
     
 }
 -(IBAction)didClickElectedToSelection:(id)sender
 {
+    CGFloat contentSize=self.Tbl_toss.contentSize.height;
+    self.tbl_tossHeight.constant=(contentSize > 44)?90:contentSize;
+    if(isElectedTo==NO)
+    {
     isTossWon=NO;
     isElectedTo=YES;
     isStricker=NO;
@@ -173,11 +187,19 @@
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_ElectedTo.frame.origin.y-30;
     [self.Tbl_toss reloadData];
+    }
+    else
+    {
+         self.Tbl_toss.hidden=YES;
+         isElectedTo=NO;
+    }
 }
 
 -(IBAction)didClickStrikerSelection:(id)sender
 {
-    
+   
+    if(isStricker == NO)
+    {
     isTossWon=NO;
     isElectedTo=NO;
     isStricker=YES;
@@ -211,10 +233,19 @@
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_Stricker.frame.origin.y-30;
     [self.Tbl_toss reloadData];
+    }
+    else
+    {
+         self.Tbl_toss.hidden=YES;
+         isStricker=NO;
+    }
 }
 
 -(IBAction)didClickNonStrikerSelection:(id)sender
 {
+
+    if(isNonStricker == NO)
+    {
     isTossWon=NO;
     isElectedTo=NO;
     isStricker=NO;
@@ -248,10 +279,18 @@
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_NonStricker.frame.origin.y-30;
     [self.Tbl_toss reloadData];
+    }
+    else
+    {
+        self.Tbl_toss.hidden=YES;
+        isNonStricker=NO;
+    }
 }
 -(IBAction)didClickBowlerSelection:(id)sender
 {
     
+    if(isBowler==NO)
+    {
     isTossWon=NO;
     isElectedTo=NO;
     isStricker=NO;
@@ -293,6 +332,11 @@
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_Bowler.frame.origin.y-30;
     [self.Tbl_toss reloadData];
+    }
+    else{
+       self.Tbl_toss.hidden=YES;
+        isBowler=NO;
+    }
 }
 
 -(IBAction)didClickChangeToss:(id)sender

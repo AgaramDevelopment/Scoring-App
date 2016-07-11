@@ -676,7 +676,7 @@ EndInningsVC *save;
                            //                           O_WICKETNO = endInnings.WICKETNO;
                            //                           O_WICKETTYPE = endInnings.WICKETTYPE;
                            //                           O_FIELDERCODE = endInnings.FIELDERCODE;
-                           //                           O_BOWLERCODE = endInnings.BOWLERCODE;
+                           O_BOWLERCODE = endInnings.BOWLERCODE;
                            
                        }
         
@@ -749,9 +749,10 @@ EndInningsVC *save;
             EndInnings *endInnings = [GetWicketSDetails objectAtIndex:0];
             
             N_WICKETNO = [NSNumber numberWithInt:[endInnings.WICKETNO intValue]];
-            N_WICKETTYPE = [NSNumber numberWithInt:[endInnings.WICKETTYPE intValue]];
-            N_FIELDERCODE = [NSNumber numberWithInt:[endInnings.FIELDINGPLAYER intValue]];
-            N_BOWLERCODE = [NSNumber numberWithInt:[endInnings.BOWLERCODE intValue]];
+            N_WICKETTYPE = endInnings.WICKETTYPE;
+            N_FIELDERCODE = endInnings.FIELDINGPLAYER;
+            //N_BOWLERCODE = [NSNumber numberWithInt:[endInnings.BOWLERCODE intValue]];
+            N_BOWLERCODE = BOWLERCODE;
             
             
             
@@ -800,8 +801,7 @@ EndInningsVC *save;
         
         GetInningsSummaryDetails = [[NSMutableArray alloc]init];
         
-        GetInningsSummaryDetails =[DBManagerEndInnings GetInningsSummaryAssignForInsertScoreBoard:COMPETITIONCODE :MATCHCODE :INNINGSNO :WICKETPLAYER];
-        //[DBManagerEndInnings GetInningsSummaryAssignForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:WICKETPLAYER];  //bowercode not display
+        GetInningsSummaryDetails = [DBManagerEndInnings GetInningsSummaryAssignForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO];
         
         if(GetInningsSummaryDetails.count>0)
         {
