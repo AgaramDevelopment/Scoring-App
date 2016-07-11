@@ -1341,7 +1341,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="128" id="olq-of-DA0"/>
+                                            <constraint firstAttribute="height" constant="128" id="olq-of-DA0">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -1829,7 +1831,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="108" id="kAs-zP-pgN"/>
+                                            <constraint firstAttribute="height" constant="108" id="kAs-zP-pgN">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -1856,7 +1860,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="4"/>
                                     </constraint>
                                     <constraint firstItem="EfR-pe-kA8" firstAttribute="top" secondItem="EGh-fh-3ic" secondAttribute="bottom" constant="15" id="4UR-HA-wxD">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-53"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-45"/>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="b9d-c0-oqI" secondAttribute="trailing" constant="100" id="5wy-MF-oM2"/>
                                     <constraint firstAttribute="bottom" secondItem="b94-9v-duC" secondAttribute="bottom" id="6Qn-jd-Eb2"/>
@@ -1895,7 +1899,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="1"/>
                                     </constraint>
                                     <constraint firstItem="jIe-Sp-Wm0" firstAttribute="top" secondItem="2sV-xD-WMY" secondAttribute="bottom" constant="16" id="S1J-wz-KNt">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-78"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-50"/>
                                     </constraint>
                                     <constraint firstItem="xPd-J0-vzd" firstAttribute="top" secondItem="4DH-lB-7pf" secondAttribute="bottom" constant="43" id="T30-WY-BgY">
                                         <variation key="heightClass=regular-widthClass=regular" constant="115"/>
@@ -1933,10 +1937,10 @@
                                     </constraint>
                                     <constraint firstItem="b9d-c0-oqI" firstAttribute="leading" secondItem="aff-hj-tjT" secondAttribute="leading" constant="100" id="fBS-lk-JtV"/>
                                     <constraint firstItem="EfR-pe-kA8" firstAttribute="top" secondItem="EGh-fh-3ic" secondAttribute="bottom" constant="15" id="fDJ-3G-iSW">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-53"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-45"/>
                                     </constraint>
                                     <constraint firstItem="jIe-Sp-Wm0" firstAttribute="top" secondItem="2sV-xD-WMY" secondAttribute="bottom" constant="16" id="ftk-5L-YDN">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-78"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-50"/>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="dLg-vH-awG" secondAttribute="trailing" constant="100" id="gqy-tD-Wid"/>
                                     <constraint firstItem="U38-R7-q2U" firstAttribute="top" secondItem="b9d-c0-oqI" secondAttribute="bottom" id="hcT-J1-bDg">

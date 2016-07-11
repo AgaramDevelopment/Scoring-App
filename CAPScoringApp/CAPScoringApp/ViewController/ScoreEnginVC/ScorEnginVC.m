@@ -11860,6 +11860,7 @@ EndInnings *endInnings;
 }
 - (IBAction)Exit_btn:(id)sender {
     
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
     
     ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
     Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];

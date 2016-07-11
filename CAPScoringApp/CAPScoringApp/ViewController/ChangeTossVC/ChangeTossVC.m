@@ -148,7 +148,7 @@
 -(IBAction)didClickTossWonSelection:(id)sender
 {
     CGFloat contentSize=self.Tbl_toss.contentSize.height;
-    self.tbl_tossHeight.constant=(contentSize > 44)?130:contentSize;
+    self.tbl_tossHeight.constant=(contentSize > 44)?90:contentSize;
     if(isTossWon ==NO)
     {
      isTossWon=YES;
@@ -173,7 +173,7 @@
 -(IBAction)didClickElectedToSelection:(id)sender
 {
     CGFloat contentSize=self.Tbl_toss.contentSize.height;
-    self.tbl_tossHeight.constant=(contentSize > 44)?130:contentSize;
+    self.tbl_tossHeight.constant=(contentSize > 44)?90:contentSize;
     if(isElectedTo==NO)
     {
     isTossWon=NO;
@@ -197,8 +197,7 @@
 
 -(IBAction)didClickStrikerSelection:(id)sender
 {
-    CGFloat contentSize=self.Tbl_toss.contentSize.height;
-    self.tbl_tossHeight.constant=(contentSize > 44)?130:contentSize;
+   
     if(isStricker == NO)
     {
     isTossWon=NO;
@@ -244,8 +243,7 @@
 
 -(IBAction)didClickNonStrikerSelection:(id)sender
 {
-    CGFloat contentSize=self.Tbl_toss.contentSize.height;
-    self.tbl_tossHeight.constant=(contentSize > 44)?130:contentSize;
+
     if(isNonStricker == NO)
     {
     isTossWon=NO;
@@ -290,8 +288,7 @@
 }
 -(IBAction)didClickBowlerSelection:(id)sender
 {
-    CGFloat contentSize=self.Tbl_toss.contentSize.height;
-    self.tbl_tossHeight.constant=(contentSize > 44)?130:contentSize;
+    
     if(isBowler==NO)
     {
     isTossWon=NO;

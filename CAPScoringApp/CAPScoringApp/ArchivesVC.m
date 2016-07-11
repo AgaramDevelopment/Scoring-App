@@ -14,6 +14,7 @@
 #import "FetchSEPageLoadRecord.h"
 #import "EditModeVC.h"
 #import "ScorEnginVC.h"
+#import "TorunamentVC.h"
 
 @interface ArchivesVC ()<SwipeableCellDelegate>
 {
@@ -184,10 +185,6 @@
 
 
 //4
-- (void)closeModal
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
 
 - (void)cellDidOpen:(UITableViewCell *)cell
 {
@@ -202,8 +199,19 @@
 
 -(IBAction)Back_BtnAction:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
-    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"]) {
+        NSLog(@"yes");
+         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ScoreEnginExit"];
+        TorunamentVC*tournmentVc = [[TorunamentVC alloc]init];
+        
+        tournmentVc =  (TorunamentVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"tornmentid"];
+        //tournmentVc.selectDashBoard=selectType;
+        [self.navigationController pushViewController:tournmentVc animated:YES];
+        
+    } else {
+        NSLog(@"no");
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
     
 }
