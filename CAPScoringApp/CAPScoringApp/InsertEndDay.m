@@ -14,19 +14,19 @@
 -(void) InsertEndDay:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)INNINGSNO:(NSString*)STARTTIME:(NSString*)ENDTIME:(NSString*)DAYNO:(NSString*)BATTINGTEAMCODE:(NSString*)TOTALRUNS:(NSString*)TOTALOVERS:(NSString*)TOTALWICKETS:(NSString*)COMMENTS:(NSString*)STARTTIMEFORMAT:(NSString*)ENDTIMEFORMAT
 {
     
-    NSString* STARTDATE = [[NSString alloc] init];
-    NSString* ENDDATE = [[NSString alloc] init];
-    NSString* MATCHTYPE = [[NSString alloc] init];
-    NSNumber* STARTOVERNO = [[NSNumber alloc] init];
-    NSNumber* STARTBALLNO = [[NSNumber alloc] init];
-    NSNumber* ENDBALLNO = [[NSNumber alloc] init];
-    NSString* STARTOVERBALLNO = [[NSString alloc] init];
-    NSNumber* ENDOVERNO = [[NSNumber alloc] init];
-    NSString* ENDOVERBALLNO = [[NSString alloc] init];
-    NSNumber* RUNSSCORED = [[NSNumber alloc] init];
-    NSString* WICKETLOST = [[NSString alloc] init];
-    NSString* OVERSTATUS = [[NSString alloc] init];
-    NSString* SESSIONNO = [[NSString alloc] init];
+    NSString* STARTDATE ;
+    NSString* ENDDATE ;
+    NSString* MATCHTYPE ;
+    NSNumber* STARTOVERNO ;
+    NSNumber* STARTBALLNO ;
+    NSNumber* ENDBALLNO ;
+    NSString* STARTOVERBALLNO ;
+    NSNumber* ENDOVERNO ;
+    NSString* ENDOVERBALLNO ;
+    NSNumber* RUNSSCORED ;
+    NSString* WICKETLOST ;
+    NSString* OVERSTATUS ;
+    NSString* SESSIONNO ;
     
     MATCHTYPE=[DBManagerEndDay GetMatchTypeForInserTEndDay : COMPETITIONCODE];
     

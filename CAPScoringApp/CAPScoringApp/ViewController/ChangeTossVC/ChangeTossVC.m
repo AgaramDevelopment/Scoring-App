@@ -147,8 +147,8 @@
 
 -(IBAction)didClickTossWonSelection:(id)sender
 {
-    CGFloat contentSize=self.Tbl_toss.contentSize.height;
-    self.tbl_tossHeight.constant=(contentSize > 44)?90:contentSize;
+//    CGFloat contentSize=self.Tbl_toss.contentSize.height;
+   
     if(isTossWon ==NO)
     {
      isTossWon=YES;
@@ -161,6 +161,7 @@
     
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_TossWon.frame.origin.y-30;
+    self.tbl_tossHeight.constant=80;
     [self.Tbl_toss reloadData];
     }
     else
@@ -172,8 +173,8 @@
 }
 -(IBAction)didClickElectedToSelection:(id)sender
 {
-    CGFloat contentSize=self.Tbl_toss.contentSize.height;
-    self.tbl_tossHeight.constant=(contentSize > 44)?90:contentSize;
+   
+   
     if(isElectedTo==NO)
     {
     isTossWon=NO;
@@ -186,6 +187,7 @@
     
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_ElectedTo.frame.origin.y-30;
+    self.tbl_tossHeight.constant=80;
     [self.Tbl_toss reloadData];
     }
     else
@@ -362,7 +364,7 @@
             [self ShowAlterView:@"Please Select Bowler"];
         }
         else{
-            [DBManagerChangeToss InsertTossDetails:self.CompitisonCode :self.matchCode:selectTeamcode :electedcode :StrikerCode :NonStrikerCode :selectBowlerCode :BowlingEnd];
+            [DBManagerChangeToss InsertTossDetails :self.CompitisonCode :self.matchCode:selectTeamcode :electedcode :StrikerCode :NonStrikerCode :selectBowlerCode :BowlingEnd];
             [self.delegate RedirectScorEngin];
             
         }

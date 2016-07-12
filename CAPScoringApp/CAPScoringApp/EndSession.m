@@ -312,11 +312,11 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
     cell.lbl_startSessionTime.text = end.SESSIONSTARTTIME;
     cell.lbl_endSessionTime.text = end.SESSIONENDTIME;
     cell.lbl_teamName.text = end.SHORTTEAMNAME;
-    int sessionno = [end.SESSIONNO intValue];
+    //int sessionno = [end.SESSIONNO intValue];
         
-
-   cell.lbl_sessionNo.text = [NSString stringWithFormat:@"%d",sessionno];//[end.SESSIONNO stringValue];
-    cell.lbl_dayNo.text = end.DAYNO;
+        NSString * str= [NSString stringWithFormat:@"%d",[end.SESSIONNO integerValue]];
+        cell.lbl_sessionNo.text =str;//[end.SESSIONNO stringValue];
+        cell.lbl_dayNo.text = end.DAYNO;
     
     
     return cell;
@@ -586,9 +586,12 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
     
     
     
-       // [endSessionArray removeLastObject];
+        [endSessionArray removeLastObject];
         [self.tbl_session reloadData];
-        [self.Btn_back sendActionsForControlEvents:UIControlEventTouchUpInside];
+        self.tbl_session.hidden = NO;
+        self.view_allControls.hidden = YES;
+
+        //[self.Btn_back sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 }
 

@@ -386,9 +386,12 @@ NSDateFormatter *formatter;
             
             DeleteEndDay *deleteEndDay = [[DeleteEndDay alloc]init];
             [deleteEndDay DeleteEndDay:self.COMPETITIONCODE :self.MATCHCODE :[NSString  stringWithFormat:@"%@",self.INNINGSNO] :_lbl_day_no.text];
+            
     
             [self startService:@"DELETE"];
-            
+            self.view_allControls.hidden = YES;
+            self.tbl_endday.hidden = NO;
+            [self.tbl_endday reloadData];
         }
         else
         {

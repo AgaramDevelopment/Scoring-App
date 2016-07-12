@@ -591,9 +591,9 @@ EndInningsVC *save;
             
             if(BOWLERCOUNT.intValue ==1)
             {
-                CURRENTBOWLER==[DBManagerEndInnings GetCurrentBowlerCountFormanageOverDetails: COMPETITIONCODE: MATCHCODE: INNINGSNO :overNo];
+                CURRENTBOWLER=[DBManagerEndInnings GetCurrentBowlerCountFormanageOverDetails : COMPETITIONCODE: MATCHCODE: INNINGSNO :overNo];
                 
-                [DBManagerEndInnings UpdateBowlingSummaryFormanageOverDetails: BOWLERCOUNT: ISMAIDENOVER : COMPETITIONCODE: MATCHCODE:  INNINGSNO: CURRENTBOWLER ];
+                [DBManagerEndInnings UpdateBowlingSummaryFormanageOverDetails : BOWLERCOUNT: ISMAIDENOVER : COMPETITIONCODE: MATCHCODE:  INNINGSNO: CURRENTBOWLER ];
                 
                 
             }
@@ -617,6 +617,8 @@ EndInningsVC *save;
 
 -(void)insertScordBoard:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO
 {
+    
+    
     
     
     ISWKTDTLSUPDATE = [NSNumber numberWithInt:1];
@@ -896,7 +898,8 @@ EndInningsVC *save;
     
     BOWLERCOUNT = [NSNumber numberWithInt:1];
     
-    if([DBManagerEndInnings GetBowlerForInsertScoreBoard:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO])
+    
+    if([DBManagerEndInnings GetBowlerForInsertScoreBoard:COMPETITIONCODE :MATCHCODE :INNINGSNO :WICKETOVERNO])
     {
         
         BOWLERCOUNT=[DBManagerEndInnings GetBowlerCountForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: INNINGSNO :WICKETOVERNO];
@@ -922,7 +925,7 @@ EndInningsVC *save;
         
         GetBowlingDetailsForAssignDetails = [[NSMutableArray alloc]init];
         
-        GetBowlingDetailsForAssignDetails = [DBManagerEndInnings GetBowlingDetailsForassignvarForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:BOWLERCODE];
+        GetBowlingDetailsForAssignDetails = [DBManagerEndInnings GetBowlingDetailsForassignvarForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BOWLINGTEAMCODE:INNINGSNO:BOWLERCODE];
         
         if(GetBowlingDetailsForAssignDetails.count>0)
         {
