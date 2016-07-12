@@ -125,7 +125,7 @@
 @property(nonatomic,assign)NSInteger BATTEAMWICKETS;
 @property(nonatomic,assign)NSInteger BATTEAMOVERS;
 @property(nonatomic,assign)NSInteger BATTEAMOVRBALLS;
-@property(nonatomic,assign)NSNumber *BATTEAMRUNRATE;
+@property(nonatomic,assign)NSString *BATTEAMRUNRATE;
 
 //Bowlers List
 @property(strong,nonatomic) NSMutableArray* getBowlingTeamPlayers;

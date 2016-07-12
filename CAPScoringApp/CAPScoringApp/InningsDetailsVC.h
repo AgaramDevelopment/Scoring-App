@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface InningsDetailsVC : UIViewController
+@property (strong,nonatomic) NSMutableArray *matchSetUp;
 @property (strong, nonatomic) IBOutlet UIView *Team_View;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_Team;
 
@@ -20,6 +21,9 @@
 @property (strong, nonatomic) IBOutlet UIView *NonStriker_View;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_NonStriker;
 - (IBAction)btn_Nonstriker:(id)sender;
+@property (strong, nonatomic) IBOutlet UITableView *Bowler_tableview;
+@property (strong, nonatomic) IBOutlet UITableView *NonStriker_tableview;
+@property (strong, nonatomic) IBOutlet UITableView *Striker_tableview;
 
 @property (strong, nonatomic) IBOutlet UIView *Bowler_View;
 
@@ -29,4 +33,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *Far_btn;
 - (IBAction)Finish_btn:(id)sender;
 
+@property(nonatomic,strong)NSString*MATCHCODE;
+@property(nonatomic,strong) NSString * CompetitionCode;
+@property(nonatomic,strong) NSString * matchTypeCode;
 @end

@@ -12,6 +12,8 @@
 
 @interface DBManagerInsertScoreEngine : NSObject
 
+
+
 +(NSString*)getBowlingCode:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*)TEAMCODE;
 
 +(NSString*) GetBallCodeForInsertScoreEngine:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
@@ -32,8 +34,8 @@
 
 +(BOOL)  UpdateBallEventtablesInAddBallNoForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) TEAMCODE: (NSNumber*) T_OVERNO : (NSNumber*) T_BALLNO:(NSNumber*) T_BALLCOUNT;
 
-+(BOOL)  InsertBallEventForInsertScoreEngine:(NSNumber*) BALLCODENO: (NSNumber*) N_BALLNO: (NSNumber*) N_BALLCOUNT: (NSNumber*) BALLSPEED: (NSNumber*) UNCOMFORTCLASSIFCATION:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO : (NSNumber*) TEAMCODE: (NSNumber*) BALLCODE;
 
++(BOOL)   InsertBallEventForInsertScoreEngine:(NSString*) BALLCODENO:(NSNumber*) N_BALLNO: (NSNumber*) N_BALLCOUNT: (NSNumber*) BALLSPEED: (NSNumber*) UNCOMFORTCLASSIFCATION:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) INNINGSNO : (NSString*) TEAMCODE:(NSString*) BALLCODE;
 
 +(BOOL)  UpdateOverBallCountInBallEventtForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) T_OVERNO;
 

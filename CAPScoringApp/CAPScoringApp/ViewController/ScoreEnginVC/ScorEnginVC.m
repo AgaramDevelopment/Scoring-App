@@ -278,7 +278,7 @@
 FetchLastBowler *fetchLastBowler;
 FetchSEPageLoadRecord *fetchSEPageLoadRecord;
 EndInnings *endInnings;
-
+EditModeVC * objEditModeVc;
 - (void)viewDidLoad {
     [super viewDidLoad];
     //Initialize Matchtype Dictionary
@@ -291,7 +291,10 @@ EndInnings *endInnings;
     
     AppealUmpireArray=[[NSMutableArray alloc]init];
     
-    EditModeVC * objEditModeVc=[[EditModeVC alloc]init];
+    
+    objEditModeVc=[[EditModeVC alloc]init];
+   
+     
     objEditModeVc.delegate=self;
     if(self.isEditMode){//Edit
         [self loadViewOnEditMode];
@@ -545,9 +548,13 @@ EndInnings *endInnings;
                                                               blue:0
                                                              alpha:0.36]];
     
-    
+//    FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
+//    fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
+//    [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode :self.editBallCode];
     
 }
+
+
 
 
 -(void) loadViewOnEditMode{
@@ -1166,7 +1173,13 @@ EndInnings *endInnings;
     
     _lbl_overs.text = [NSString stringWithFormat:@"%d.%d OVS" ,fetchSEPageLoadRecord.BATTEAMOVERS,fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+//    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+//    
+    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+    }else{
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
+    }
     
     
     
@@ -1318,7 +1331,13 @@ EndInnings *endInnings;
     
     _lbl_overs.text = [NSString stringWithFormat:@"%d.%d OVS" ,fetchSEPageLoadRecord.BATTEAMOVERS ,fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+//    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+    
+    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+    }else{
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
+    }
     
     
     
@@ -2371,11 +2390,16 @@ EndInnings *endInnings;
     }
     else
     {
-
-        fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+        if(_isEditMode){
         
-        [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
-
+    [objEditModeVc insertAfterAndBeforeMode :self.editBallCode];
+            fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+            
+            [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+            
+        }
+        
+        
         NSNumber *temp = [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS];
 
         
@@ -3702,7 +3726,7 @@ EndInnings *endInnings;
         [self.img_pichmap addGestureRecognizer:tapRecognizer];
         [self.img_pichmap setUserInteractionEnabled:YES];
         self.PichMapTittle =[[UILabel alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.origin.x-20,self.Allvaluedisplayview.frame.origin.y-75,self.Allvaluedisplayview.frame.size.width, 35)];
-        self.PichMapTittle.text=@"PICHMAP";
+        self.PichMapTittle.text=@"PITCHMAP";
         self.PichMapTittle.font=[UIFont fontWithName:@"RAJDHANI-MEDIUM" size:20];
         self.PichMapTittle.textColor=[UIColor whiteColor];
         self.PichMapTittle.textAlignment=NSTextAlignmentCenter;
@@ -8381,8 +8405,11 @@ EndInnings *endInnings;
     
     _lbl_overs.text = [NSString stringWithFormat:@"%d.%d OVS" ,fetchSEPageLoadRecord.BATTEAMOVERS,fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
-    
+    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+    }else{
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
+    }
     
     
     
@@ -11925,6 +11952,7 @@ EndInnings *endInnings;
 }
 - (IBAction)Exit_btn:(id)sender {
     
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
     
     ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
     Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];

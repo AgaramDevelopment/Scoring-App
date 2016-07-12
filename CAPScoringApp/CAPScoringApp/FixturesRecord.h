@@ -26,4 +26,5 @@
 @property(strong,nonatomic)NSString *matchTypeCode;
 @property(strong,nonatomic)NSString *count;
 @property(strong,nonatomic)NSString *MatchStatus;
+@property(strong,nonatomic)NSString *InningsStatus;
 @end

@@ -171,7 +171,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 //SP_FETCHTOSSDETAILSFORINNINGS
 
-+(NSString*) GetMaxInningsNoForInningsEvents:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
++(NSNumber*) GetMaxInningsNoForInningsEvents:(NSString*) COMPETITIONCODE : (NSString*) MATCHCODE{
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -184,8 +184,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                
-                NSString *MAXINNINGSNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+                f.numberStyle = NSNumberFormatterDecimalStyle;
+                NSNumber *MAXINNINGSNO = [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 
@@ -196,14 +197,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         else {
             sqlite3_reset(statement);
             
-            return @"";
+            return 0;
         }
     }
     sqlite3_reset(statement);
-    return @"";
+    return 0;
 }
 
-+(NSString *) GetBowlingTeamCodeForInningsEvents:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *) MAXINNINGSNO{
++(NSString *) GetBowlingTeamCodeForInningsEvents: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE : (NSNumber *) MAXINNINGSNO{
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -277,16 +278,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT TEAMNAME,TEAMCODE FROM TEAMMASTER WHERE TEAMCODE = '%@'",BATTINGTEAMCODE];
-        
         const char *update_stmt = [updateSQL UTF8String];
         if( sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
-            
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                FetchBattingTeamTossRecord *InningsDetailsForToss=[[FetchBattingTeamTossRecord alloc]init];
-                InningsDetailsForToss.playerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                InningsDetailsForToss.playerName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                [InningsDetailsForTossArray addObject:InningsDetailsForToss];
+                [InningsDetailsForTossArray addObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
+                [InningsDetailsForTossArray addObject:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)]];
             }
             
         }
@@ -334,7 +331,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT PM.PLAYERCODE PLAYERCODE,PM.PLAYERNAME PLAYERNAME,MPD.RECORDSTATUS FROM MATCHREGISTRATION MR INNER JOIN MATCHTEAMPLAYERDETAILS MPD ON MPD.MATCHCODE = MR.MATCHCODE ANDMPD.TEAMCODE = '%@' INNER JOIN COMPETITION COM ON COM.COMPETITIONCODE = MR.COMPETITIONCODE INNER JOIN PLAYERMASTER PM ON MPD.PLAYERCODE = PM.PLAYERCODE WHERE (COM.ISOTHERSMATCHTYPE = 'MSC117' Or (MPD.PLAYINGORDER <= 11)) AND PM.BOWLINGSTYLE IN ('MSC131','MSC132')AND MPD.RECORDSTATUS = 'MSC001' AND MR.MATCHCODE = '%@' ORDER BY MPD.PLAYINGORDER",BOWLINGTEAMCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT PM.PLAYERCODE PLAYERCODE,PM.PLAYERNAME PLAYERNAME,MPD.RECORDSTATUS FROM MATCHREGISTRATION MR INNER JOIN MATCHTEAMPLAYERDETAILS MPD ON MPD.MATCHCODE = MR.MATCHCODE AND MPD.TEAMCODE = '%@' INNER JOIN COMPETITION COM ON COM.COMPETITIONCODE = MR.COMPETITIONCODE INNER JOIN PLAYERMASTER PM ON MPD.PLAYERCODE = PM.PLAYERCODE WHERE (COM.ISOTHERSMATCHTYPE = 'MSC117' Or (MPD.PLAYINGORDER <= 11)) AND PM.BOWLINGSTYLE IN ('MSC131','MSC132')AND MPD.RECORDSTATUS = 'MSC001' AND MR.MATCHCODE = '%@' ORDER BY MPD.PLAYINGORDER",BOWLINGTEAMCODE,MATCHCODE];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
@@ -823,5 +820,35 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return NO;
 }
 
+//SP_FETCHTOSSDETAILSFORINNINGS
++(NSMutableDictionary *) FetchTossDetailsForInnings: (NSString*) MATCHCODE : (NSString*) COMPETITIONCODE
+{
+    NSString* BOWLINGTEAMCODE = [[NSString alloc] init];
+    NSString* BATTINGTEAMCODE = [[NSString alloc] init];
+    NSNumber* MAXINNINGSNOForInningsInit = [[NSNumber alloc] init];
+    NSMutableDictionary *TossDetailsForInningsDic=[[NSMutableDictionary alloc] init];
+    
+    MAXINNINGSNOForInningsInit = [DBManagerChangeToss GetMaxInningsNoForInningsEvents : COMPETITIONCODE : MATCHCODE];
+    
+    BOWLINGTEAMCODE=[DBManagerChangeToss GetBowlingTeamCodeForInningsEvents : COMPETITIONCODE : MATCHCODE : MAXINNINGSNOForInningsInit];
+    
+    BATTINGTEAMCODE=[DBManagerChangeToss GetBattingTeamCodeForInningsEvents : BOWLINGTEAMCODE : MATCHCODE : COMPETITIONCODE];
+    NSMutableArray *InningsTeamDetailsForInningsInit =[DBManagerChangeToss GetTeamCodeForInnings : BATTINGTEAMCODE];
+    [TossDetailsForInningsDic setObject:InningsTeamDetailsForInningsInit forKey:@"teamdetails"];
+    
+    NSMutableArray *BattingPlayersArrayForInningsInit=[DBManagerChangeToss GetBattingTeamPlayersForToss : BATTINGTEAMCODE : MATCHCODE];
+    [TossDetailsForInningsDic setObject:BattingPlayersArrayForInningsInit forKey:@"battingplayers"];
+    
+    NSMutableArray *BowlingPlayersArrayForInningsInit=[DBManagerChangeToss GetBowlingTeamPlayersForToss : BOWLINGTEAMCODE : MATCHCODE];
+    [TossDetailsForInningsDic setObject:BowlingPlayersArrayForInningsInit forKey:@"bowlingplayers"];
+    
+    NSMutableArray *UmpireDetailsArrayForInningsInit=[DBManagerChangeToss UmpireDetailsForToss : MATCHCODE];
+    [TossDetailsForInningsDic setObject:UmpireDetailsArrayForInningsInit forKey:@"UmpireDetails"];
+    
+    NSMutableArray *InningsEventsArrayForInningsInit=[DBManagerChangeToss GetInningsForTossDetails : COMPETITIONCODE : MATCHCODE];
+    [TossDetailsForInningsDic setObject:InningsEventsArrayForInningsInit forKey:@"InningsEventsPlayers"];
+    
+    return TossDetailsForInningsDic;
+}
 
 @end

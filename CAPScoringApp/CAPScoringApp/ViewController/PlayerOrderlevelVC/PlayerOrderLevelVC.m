@@ -398,7 +398,7 @@
 
 }
    else{
-       UIAlertView *alter=[[UIAlertView alloc]initWithTitle:nil message:@"Please select Capitain and Wicketkeeper" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+       UIAlertView *alter=[[UIAlertView alloc]initWithTitle:nil message:@"Please Select Captain and Wicketkeeper" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
        [alter show];
    }
 }
