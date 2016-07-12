@@ -397,16 +397,10 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
             [delegate hideLoading];
         }
     }
-        
     }
-    
-    [self.delegate EndInningsSaveBtnAction];
-    
-    ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
-    Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
-    // Archivevc.matchCode=self.matchCode;
-    Archivevc.CompitionCode=CompetitionCode;
-    [self.navigationController pushViewController:Archivevc animated:YES];
+     [self.tbl_endInnings reloadData];
+    self.tbl_endInnings.hidden = NO;
+    self.view_allControls.hidden = YES;
 }
 - (IBAction)btn_back:(id)sender {
     
@@ -483,6 +477,10 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         }
         
     }
+    [endInningsArray removeLastObject];
+    [self.tbl_endInnings reloadData];
+    self.tbl_endInnings.hidden = NO;
+    self.view_allControls.hidden = YES;
 }
 
 

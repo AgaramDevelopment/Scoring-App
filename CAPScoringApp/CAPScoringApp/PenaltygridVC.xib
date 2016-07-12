@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="RAJDHANI-BOLD.TTF">
+            <string>Rajdhani-Bold</string>
+        </mutableArray>
+        <mutableArray key="RAJDHANI-REGULAR.TTF">
+            <string>Rajdhani-Regular</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PenaltygridVC">
             <connections>
@@ -22,68 +30,39 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="KbH-Oc-8Nv">
                             <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
                         </imageView>
-                        <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="js5-CO-JEc">
-                            <rect key="frame" x="0.0" y="0.0" width="550" height="44"/>
-                            <color key="barTintColor" red="0.17254901960784313" green="0.23921568627450979" blue="0.5725490196078431" alpha="1" colorSpace="calibratedRGB"/>
-                            <textAttributes key="titleTextAttributes">
-                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </textAttributes>
-                            <items>
-                                <navigationItem title="PENALTY" id="rC8-Gi-mdo">
-                                    <barButtonItem key="leftBarButtonItem" style="plain" id="o6X-4T-LCt">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="wSC-XM-vDN">
-                                            <rect key="frame" x="20" y="7" width="84" height="30"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <state key="normal" image="ico-back-btn"/>
-                                            <connections>
-                                                <action selector="btn_back:" destination="-1" eventType="touchUpInside" id="brJ-b1-KLk"/>
-                                            </connections>
-                                        </button>
-                                    </barButtonItem>
-                                    <barButtonItem key="rightBarButtonItem" style="plain" id="gXS-hM-5D5">
-                                        <view key="customView" contentMode="scaleToFill" id="Yxk-hI-nwJ">
-                                            <rect key="frame" x="427" y="9" width="103" height="26"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-add" translatesAutoresizingMaskIntoConstraints="NO" id="0Ex-f0-FAK">
-                                                    <rect key="frame" x="4" y="2" width="20" height="20"/>
-                                                </imageView>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bT0-Gf-3hR">
-                                                    <rect key="frame" x="30" y="0.0" width="75" height="26"/>
-                                                    <subviews>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zTo-ML-e1a">
-                                                            <rect key="frame" x="0.0" y="0.0" width="75" height="26"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                                            <state key="normal" title="ADD PENALTY">
-                                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            </state>
-                                                            <connections>
-                                                                <action selector="btn_addpenalty:" destination="-1" eventType="touchUpInside" id="hwI-ff-VTR"/>
-                                                            </connections>
-                                                        </button>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                </view>
-                                            </subviews>
-                                            <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
-                                            <constraints>
-                                                <constraint firstItem="0Ex-f0-FAK" firstAttribute="top" secondItem="Yxk-hI-nwJ" secondAttribute="top" constant="2" id="1ZT-dk-PBZ"/>
-                                                <constraint firstAttribute="bottom" secondItem="bT0-Gf-3hR" secondAttribute="bottom" id="3zI-ep-rKV"/>
-                                                <constraint firstItem="bT0-Gf-3hR" firstAttribute="leading" secondItem="Yxk-hI-nwJ" secondAttribute="leading" constant="30" id="8je-MH-hWD"/>
-                                                <constraint firstAttribute="trailing" secondItem="bT0-Gf-3hR" secondAttribute="trailing" constant="-2" id="BvX-Tg-TQo"/>
-                                                <constraint firstAttribute="bottom" secondItem="0Ex-f0-FAK" secondAttribute="bottom" constant="4" id="E0g-Q3-dhc"/>
-                                                <constraint firstItem="0Ex-f0-FAK" firstAttribute="leading" secondItem="Yxk-hI-nwJ" secondAttribute="leading" constant="4" id="M9D-fa-099"/>
-                                                <constraint firstItem="bT0-Gf-3hR" firstAttribute="leading" secondItem="0Ex-f0-FAK" secondAttribute="trailing" constant="6" id="TR0-nV-4XS"/>
-                                                <constraint firstItem="bT0-Gf-3hR" firstAttribute="top" secondItem="Yxk-hI-nwJ" secondAttribute="top" id="h4k-2T-HCG"/>
-                                            </constraints>
-                                        </view>
-                                    </barButtonItem>
-                                </navigationItem>
-                            </items>
-                        </navigationBar>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DUQ-FW-6LU">
+                            <rect key="frame" x="0.0" y="0.0" width="550" height="75"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v29-kk-nta">
+                                    <rect key="frame" x="10" y="10" width="55" height="55"/>
+                                    <state key="normal" image="ico-back-btn"/>
+                                    <connections>
+                                        <action selector="btn_back:" destination="-1" eventType="touchUpInside" id="xv4-8i-uFl"/>
+                                    </connections>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PENALITY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IZt-Kc-p5x">
+                                    <rect key="frame" x="178" y="15" width="200" height="45"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vdO-3o-rzc">
+                                    <rect key="frame" x="389" y="22" width="157" height="32"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="17"/>
+                                    <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="2"/>
+                                    <state key="normal" title="ADD PENALITY" image="ico-add"/>
+                                    <connections>
+                                        <action selector="btn_addpenalty:" destination="-1" eventType="touchUpInside" id="pry-pF-37e"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.18039215689999999" green="0.24313725489999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="75" id="H1M-iM-feO"/>
+                            </constraints>
+                        </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QJ8-UJ-RvT">
-                            <rect key="frame" x="0.0" y="44" width="550" height="548"/>
+                            <rect key="frame" x="0.0" y="75" width="550" height="524"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="zuM-mX-ZDL"/>
@@ -93,13 +72,13 @@
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="js5-CO-JEc" firstAttribute="top" secondItem="gzg-bf-cOV" secondAttribute="top" id="4OQ-SW-xPR"/>
-                        <constraint firstAttribute="trailing" secondItem="js5-CO-JEc" secondAttribute="trailing" id="GkG-Ie-NgZ"/>
-                        <constraint firstAttribute="trailing" secondItem="QJ8-UJ-RvT" secondAttribute="trailing" id="Omn-6G-8Qd"/>
-                        <constraint firstItem="QJ8-UJ-RvT" firstAttribute="leading" secondItem="gzg-bf-cOV" secondAttribute="leading" id="Yu3-zS-0Zi"/>
-                        <constraint firstItem="js5-CO-JEc" firstAttribute="leading" secondItem="gzg-bf-cOV" secondAttribute="leading" id="bkx-W0-4to"/>
-                        <constraint firstAttribute="bottom" secondItem="QJ8-UJ-RvT" secondAttribute="bottom" constant="8" id="kga-Gn-3Jv"/>
-                        <constraint firstItem="QJ8-UJ-RvT" firstAttribute="top" secondItem="js5-CO-JEc" secondAttribute="bottom" id="lmG-db-u49"/>
+                        <constraint firstItem="QJ8-UJ-RvT" firstAttribute="leading" secondItem="gzg-bf-cOV" secondAttribute="leading" id="VD0-Rb-ZgN"/>
+                        <constraint firstItem="DUQ-FW-6LU" firstAttribute="leading" secondItem="gzg-bf-cOV" secondAttribute="leading" id="XEF-zB-sdZ"/>
+                        <constraint firstAttribute="bottom" secondItem="QJ8-UJ-RvT" secondAttribute="bottom" constant="1" id="YOI-Nk-EZp"/>
+                        <constraint firstItem="DUQ-FW-6LU" firstAttribute="top" secondItem="gzg-bf-cOV" secondAttribute="top" id="daa-qR-ag0"/>
+                        <constraint firstAttribute="trailing" secondItem="QJ8-UJ-RvT" secondAttribute="trailing" id="egb-aC-UGt"/>
+                        <constraint firstItem="QJ8-UJ-RvT" firstAttribute="top" secondItem="DUQ-FW-6LU" secondAttribute="bottom" id="tVu-ya-hSx"/>
+                        <constraint firstAttribute="trailing" secondItem="DUQ-FW-6LU" secondAttribute="trailing" id="yfe-rL-HqU"/>
                     </constraints>
                 </view>
             </subviews>

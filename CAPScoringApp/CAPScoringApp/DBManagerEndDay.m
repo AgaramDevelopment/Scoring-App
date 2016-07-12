@@ -185,11 +185,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -208,11 +211,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
             }
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -232,19 +239,23 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return YES;
             
         }
         else {
             NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -265,17 +276,17 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 DeleteEndDay *SetDeleteEndDay=[[DeleteEndDay alloc]init];
-                SetDeleteEndDay.STARTTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                SetDeleteEndDay.ENDTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                SetDeleteEndDay.DURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                SetDeleteEndDay.TEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                SetDeleteEndDay.DAYNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
-                SetDeleteEndDay.INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
-                SetDeleteEndDay.TOTALRUNS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
-                SetDeleteEndDay.TOTALOVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-                SetDeleteEndDay.TOTALWICKETS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                SetDeleteEndDay.COMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
-                SetDeleteEndDay.BATTINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                SetDeleteEndDay.STARTTIME=[self getValueByNull:statement :0];
+                SetDeleteEndDay.ENDTIME=[self getValueByNull:statement :1];
+                SetDeleteEndDay.DURATION=[self getValueByNull:statement :2];
+                SetDeleteEndDay.TEAMNAME=[self getValueByNull:statement :3];
+                SetDeleteEndDay.DAYNO=[self getValueByNull:statement :4];
+                SetDeleteEndDay.INNINGSNO=[self getValueByNull:statement :5];
+                SetDeleteEndDay.TOTALRUNS=[self getValueByNull:statement :6];
+                SetDeleteEndDay.TOTALOVERS=[self getValueByNull:statement :7];
+                SetDeleteEndDay.TOTALWICKETS=[self getValueByNull:statement :8];
+                SetDeleteEndDay.COMMENTS=[self getValueByNull:statement :9];
+                SetDeleteEndDay.BATTINGTEAMCODE=[self getValueByNull:statement :10];
                 [DeleteEndDayArray addObject:SetDeleteEndDay];
             }
             
@@ -709,17 +720,17 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 FetchEndDay *SetFetchEndDay=[[FetchEndDay alloc]init];
-                SetFetchEndDay.STARTTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                SetFetchEndDay.ENDTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                SetFetchEndDay.DURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                SetFetchEndDay.TEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                SetFetchEndDay.DAYNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
-                SetFetchEndDay.INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
-                SetFetchEndDay.TOTALRUNS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
-                SetFetchEndDay.TOTALOVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-                SetFetchEndDay.TOTALWICKETS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                SetFetchEndDay.COMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
-                SetFetchEndDay.BATTINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                SetFetchEndDay.STARTTIME=[self getValueByNull:statement :0];
+                SetFetchEndDay.ENDTIME=[self getValueByNull:statement :1];
+                SetFetchEndDay.DURATION=[self getValueByNull:statement :2];
+                SetFetchEndDay.TEAMNAME=[self getValueByNull:statement :3];
+                SetFetchEndDay.DAYNO=[self getValueByNull:statement :4];
+                SetFetchEndDay.INNINGSNO=[self getValueByNull:statement :5];
+                SetFetchEndDay.TOTALRUNS=[self getValueByNull:statement :6];
+                SetFetchEndDay.TOTALOVERS=[self getValueByNull:statement :7];
+                SetFetchEndDay.TOTALWICKETS=[self getValueByNull:statement :8];
+                SetFetchEndDay.COMMENTS=[self getValueByNull:statement :9];
+                SetFetchEndDay.BATTINGTEAMCODE=[self getValueByNull:statement :10];
                 [FetchEndDayArray addObject:SetFetchEndDay];
             }
             
@@ -845,11 +856,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -876,11 +890,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -906,11 +923,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -1002,11 +1022,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -1033,11 +1056,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -1064,11 +1090,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -1097,11 +1126,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -1120,19 +1152,23 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return YES;
             
         }
         else {
             NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
@@ -1214,17 +1250,17 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 InsertEndDay *SetInsertEndDay=[[InsertEndDay alloc]init];
-                SetInsertEndDay.STARTTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                SetInsertEndDay.ENDTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                SetInsertEndDay.DURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                SetInsertEndDay.TEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                SetInsertEndDay.DAYNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
-                SetInsertEndDay.INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
-                SetInsertEndDay.TOTALRUNS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
-                SetInsertEndDay.TOTALOVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-                SetInsertEndDay.TOTALWICKETS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                SetInsertEndDay.COMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
-                SetInsertEndDay.BATTINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                SetInsertEndDay.STARTTIME=[self getValueByNull:statement :0];
+                SetInsertEndDay.ENDTIME=[self getValueByNull:statement :1];
+                SetInsertEndDay.DURATION=[self getValueByNull:statement :2];
+                SetInsertEndDay.TEAMNAME=[self getValueByNull:statement :3];
+                SetInsertEndDay.DAYNO=[self getValueByNull:statement :4];
+                SetInsertEndDay.INNINGSNO=[self getValueByNull:statement :5];
+                SetInsertEndDay.TOTALRUNS=[self getValueByNull:statement :6];
+                SetInsertEndDay.TOTALOVERS=[self getValueByNull:statement :7];
+                SetInsertEndDay.TOTALWICKETS=[self getValueByNull:statement :8];
+                SetInsertEndDay.COMMENTS=[self getValueByNull:statement :9];
+                SetInsertEndDay.BATTINGTEAMCODE=[self getValueByNull:statement :10];
                 [InsertEndDayArray addObject:SetInsertEndDay];
             }
             
