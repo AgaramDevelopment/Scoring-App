@@ -50,7 +50,7 @@
     
     MatchRegistrationForScoreBoardArray = [[NSMutableArray alloc]init];
     
- MatchRegistrationForScoreBoardArray = [ DBManagerScoreCard GetMatchRegistrationForScoreBoard :  COMPETITIONCODE : MATCHCODE : INNINGSNO ];
+    MatchRegistrationForScoreBoardArray = [ DBManagerScoreCard GetMatchRegistrationForScoreBoard :  COMPETITIONCODE : MATCHCODE : INNINGSNO ];
     
     
     if(MatchRegistrationForScoreBoardArray.count>0)

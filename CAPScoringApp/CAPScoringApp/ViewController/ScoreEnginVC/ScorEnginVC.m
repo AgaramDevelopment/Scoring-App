@@ -2292,6 +2292,13 @@ EditModeVC * objEditModeVc;
                 }
                 NSLog(@"Open Endinnings");
             }
+            if(fetchSEPageLoadRecord.BATTEAMOVRBALLS > 5)
+            {
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Six legitimate balls already bowled.\nDo you want to continue?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+                [altert show];
+                [altert setTag:2003];
+            }
+
             else if(fetchSEPageLoadRecord.INNINGSSTATUS== 1)
             {
                 UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"All Innings has been Completed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
@@ -5585,6 +5592,8 @@ EditModeVC * objEditModeVc;
     isMoreRunSelected = NO;
     isExtrasSelected = NO;
     isOverthrowSelected = NO;
+    
+   
     
     //Wicket
     isWicketSelected = NO;
