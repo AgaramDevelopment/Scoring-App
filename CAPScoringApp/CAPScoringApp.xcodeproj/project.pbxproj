@@ -49,7 +49,6 @@
 		18704EE71D197D6B00996BF3 /* DBManagerInsertUpdateMatchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704EE61D197D6B00996BF3 /* DBManagerInsertUpdateMatchResult.m */; };
 		18704EEB1D197E4F00996BF3 /* InsertUpdateMatchResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 18704EEA1D197E4F00996BF3 /* InsertUpdateMatchResult.m */; };
 		18705DC51D165D1800AED30D /* DBManagerLastBowler.m in Sources */ = {isa = PBXBuildFile; fileRef = 18705DC41D165D1800AED30D /* DBManagerLastBowler.m */; };
-		18720D5A1D35209300223CEC /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 18720D591D35209300223CEC /* TNCA_DATABASE.sqlite */; };
 		187229151D1264AE00CC168F /* EditModeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187229141D1264AE00CC168F /* EditModeVC.m */; };
 		187229281D12665600CC168F /* AddBreakVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 187229261D12665600CC168F /* AddBreakVC.m */; };
 		187229291D12665600CC168F /* AddBreakVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 187229271D12665600CC168F /* AddBreakVC.xib */; };
@@ -228,6 +227,7 @@
 		DC27107D1D25B9A40011C7B0 /* FollowOnRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2710721D25B9A40011C7B0 /* FollowOnRecords.m */; };
 		DCA67D511D34056A00982EF5 /* InningsDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA67D4F1D34056A00982EF5 /* InningsDetailsVC.m */; };
 		DCA67D521D34056A00982EF5 /* InningsDetailsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCA67D501D34056A00982EF5 /* InningsDetailsVC.xib */; };
+		DCB2E7A01D3557D80047CDBF /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = DCB2E79F1D3557D80047CDBF /* TNCA_DATABASE.sqlite */; };
 		DCEFC8601D28B6CF00451485 /* DBManagerChangeToss.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEFC85F1D28B6CF00451485 /* DBManagerChangeToss.m */; };
 		DCEFC8641D28B72C00451485 /* ChangeTossVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCEFC8621D28B72C00451485 /* ChangeTossVC.m */; };
 		DCEFC8651D28B72C00451485 /* ChangeTossVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = DCEFC8631D28B72C00451485 /* ChangeTossVC.xib */; };
@@ -342,7 +342,6 @@
 		18704EEA1D197E4F00996BF3 /* InsertUpdateMatchResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InsertUpdateMatchResult.m; sourceTree = "<group>"; };
 		18705DC31D165D1800AED30D /* DBManagerLastBowler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerLastBowler.h; sourceTree = "<group>"; };
 		18705DC41D165D1800AED30D /* DBManagerLastBowler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerLastBowler.m; sourceTree = "<group>"; };
-		18720D591D35209300223CEC /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = CAPScoringApp/Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		187229131D1264AE00CC168F /* EditModeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EditModeVC.h; path = ViewController/EditMode/EditModeVC.h; sourceTree = "<group>"; };
 		187229141D1264AE00CC168F /* EditModeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EditModeVC.m; path = ViewController/EditMode/EditModeVC.m; sourceTree = "<group>"; };
 		187229251D12665600CC168F /* AddBreakVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddBreakVC.h; sourceTree = "<group>"; };
@@ -698,6 +697,7 @@
 		DCA67D4E1D34056A00982EF5 /* InningsDetailsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InningsDetailsVC.h; sourceTree = "<group>"; };
 		DCA67D4F1D34056A00982EF5 /* InningsDetailsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InningsDetailsVC.m; sourceTree = "<group>"; };
 		DCA67D501D34056A00982EF5 /* InningsDetailsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InningsDetailsVC.xib; sourceTree = "<group>"; };
+		DCB2E79F1D3557D80047CDBF /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		DCEFC85E1D28B6CF00451485 /* DBManagerChangeToss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerChangeToss.h; sourceTree = "<group>"; };
 		DCEFC85F1D28B6CF00451485 /* DBManagerChangeToss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerChangeToss.m; sourceTree = "<group>"; };
 		DCEFC8611D28B72C00451485 /* ChangeTossVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ChangeTossVC.h; path = ViewController/ChangeTossVC/ChangeTossVC.h; sourceTree = "<group>"; };
@@ -1157,7 +1157,6 @@
 		CE0017F21CF42FA500668D8B = {
 			isa = PBXGroup;
 			children = (
-				18720D591D35209300223CEC /* TNCA_DATABASE.sqlite */,
 				CE0017FD1CF42FA500668D8B /* CAPScoringApp */,
 				CE0018171CF42FA500668D8B /* CAPScoringAppTests */,
 				CE0018221CF42FA500668D8B /* CAPScoringAppUITests */,
@@ -1234,6 +1233,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				DCB2E79F1D3557D80047CDBF /* TNCA_DATABASE.sqlite */,
 				DCEFC8771D28B84200451485 /* DBManagerDeclareInnings.h */,
 				DCEFC8781D28B84200451485 /* DBManagerDeclareInnings.m */,
 				DCEFC8741D28B82600451485 /* DBManagerChangeTeamInsert.h */,
@@ -1723,7 +1723,7 @@
 				047E52F21D27D84B00D4CAC6 /* Other_WicketgridTVC.xib in Resources */,
 				2464651F1D17255C0078A446 /* OtherWicketTVC.xib in Resources */,
 				24D24CF01CFEF50000CD75D2 /* CustomNavigationVC.xib in Resources */,
-				18720D5A1D35209300223CEC /* TNCA_DATABASE.sqlite in Resources */,
+				DCB2E7A01D3557D80047CDBF /* TNCA_DATABASE.sqlite in Resources */,
 				2464651B1D17255C0078A446 /* OtherWicketPlayerlistTVC.xib in Resources */,
 				24F96F8C1D2FC90500798A9D /* PenaltygridVC.xib in Resources */,
 				246465211D17255C0078A446 /* OtherWicketVC.xib in Resources */,
