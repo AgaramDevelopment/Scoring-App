@@ -19,6 +19,7 @@
 #import "DBManagerEndInnings.h"
 #import "MatchResultListVC.h"
 #import "Utitliy.h"
+#import "ArchivesVC.h"
 @interface EndInningsVC ()
 {
     NSDateFormatter *formatter;
@@ -80,7 +81,9 @@ BOOL IsBack;
         
         self.lbl_teamName.text = innings.TEAMNAME;
         self.lbl_runScored.text = [NSString stringWithFormat:@"%@", innings.TOTALRUNS];
-        self.lbl_overPlayed.text = innings.OVERNO;
+        
+        self.lbl_overPlayed.text = [NSString stringWithFormat:@"%@.%@" ,innings.OVERNO,innings.BALLNO];
+        
         self.lbl_wktLost.text = innings.WICKETS;
         self.lbl_innings.text = fetchSePageLoad.INNINGSNO;
         
@@ -311,13 +314,41 @@ BOOL IsBack;
     self.view_allControls.hidden = NO;
     
 }
+/**
+ * Show message for given title and content
+ */
+-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
+-(BOOL) checkValidation{
+    
+    if([_txt_startInnings.text isEqual:@""]){
+        [self showDialog:@"Please Select Start Time." andTitle:@""];
+        return NO;
+    }else if ([_txt_endInnings.text isEqual:@""]){
+        [self showDialog:@"Please Select End Time." andTitle:@""];
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (IBAction)btn_save:(id)sender {
     
-    NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
-    BtnurrentTittle = @"INSERT";
-    [innings InsertEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS :BtnurrentTittle];
     
-    innings = [[EndInnings alloc]init];
+    
+    if ([self checkValidation]) {
+        
+        NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
+        BtnurrentTittle = @"INSERT";
+        [innings InsertEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS :BtnurrentTittle];
+         innings = [[EndInnings alloc]init];
+   
+
+    
+   
     
     if(self.checkInternetConnection){
         
@@ -359,6 +390,16 @@ BOOL IsBack;
             [delegate hideLoading];
         }
     }
+        
+    }
+    
+    [self.delegate EndInningsSaveBtnAction];
+    
+    ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
+    Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    // Archivevc.matchCode=self.matchCode;
+    Archivevc.CompitionCode=CompetitionCode;
+    [self.navigationController pushViewController:Archivevc animated:YES];
 }
 - (IBAction)btn_back:(id)sender {
     

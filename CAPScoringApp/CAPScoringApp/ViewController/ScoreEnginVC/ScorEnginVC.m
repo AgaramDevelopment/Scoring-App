@@ -11970,4 +11970,14 @@ EditModeVC * objEditModeVc;
     
     [fullview removeFromSuperview];
 }
+
+-(void) EndInningsSaveBtnAction{
+    
+    [fullview removeFromSuperview];
+    ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
+    Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    // Archivevc.matchCode=self.matchCode;
+    Archivevc.CompitionCode=self.competitionCode;
+    [self.navigationController pushViewController:Archivevc animated:YES];
+}
 @end
