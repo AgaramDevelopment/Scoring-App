@@ -8462,11 +8462,9 @@ EditModeVC * objEditModeVc;
         
         targetRightValue =  fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? fetchSEPageLoadRecord.T_TARGETRUNS : (fetchSEPageLoadRecord.RUNSREQUIRED.intValue == 0 ? @"" : fetchSEPageLoadRecord.RUNSREQUIRED);
         
-        //if(fetchSEPageLoadRecord.INNINGSNO>1)
-       // {
+ 
         _lbl_target.text = [NSString stringWithFormat:@"%@ %@",targetLeftValue,targetRightValue];
-      //  }
-        
+
         NSString *runsReqForBalls = fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? (isTargetReached ? @"Target achieved" : ([NSString stringWithFormat:@"%@ runs to win",fetchSEPageLoadRecord.RUNSREQUIRED])) : @"Required run rate:";
         _lbl_runs_required.text = runsReqForBalls;
     }else{
