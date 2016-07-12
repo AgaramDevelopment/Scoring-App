@@ -210,9 +210,7 @@ SelectPlayerRecord *selectedMostValuPlayer;
         
     }else{
         [self.btn_revert_id.layer setBackgroundColor:[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:(1)].CGColor];
-        
-        [_btn_submit_id setTitle:@"DONE" forState:UIControlStateNormal];
-        _btn_revert_id.userInteractionEnabled = NO;
+      
     }
     
     if([ fetchMatchResult.GetBestPlayerDetails count]>0){

@@ -206,6 +206,7 @@
     //BOOL isEditMode;
     BOOL isFreeHitBall;
     NSArray *ValidedMatchType;
+      FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
     
 }
 
@@ -2391,13 +2392,15 @@ EditModeVC * objEditModeVc;
     else
     {
         if(_isEditMode){
-        
-    [objEditModeVc insertAfterAndBeforeMode :self.editBallCode];
-            fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-            
-            [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
             
         }
+        
+           // [objEditModeVc insertAfterAndBeforeMode :self.editBallCode];
+            
+//            fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
+//            [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode:self.editBallCode];
+            
+        
         
         
         NSNumber *temp = [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS];
@@ -2423,7 +2426,10 @@ EditModeVC * objEditModeVc;
          fetchSEPageLoadRecord.nonstrickerPlayerCode:
          fetchSEPageLoadRecord.currentBowlerPlayerCode:
          
-         fetchSEPageLoadRecord.BATTINGTEAMCODE :
+         ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString :
+           fetchSEPageLoadRecord.TEAMACODE] ?
+          fetchSEPageLoadRecord.TEAMAWICKETKEEPER :
+          fetchSEPageLoadRecord.TEAMBWICKETKEEPER):
          
          fetchSEPageLoadRecord.UMPIRE1CODE :
          fetchSEPageLoadRecord.UMPIRE2CODE :

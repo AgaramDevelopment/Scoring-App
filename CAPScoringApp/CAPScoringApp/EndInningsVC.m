@@ -62,6 +62,8 @@ BOOL IsBack;
         
         [self.btn_save addTarget:self action:@selector(btn_save:) forControlEvents:UIControlEventTouchUpInside];
         
+         [self.btn_delete addTarget:self action:@selector(btn_delete:) forControlEvents:UIControlEventTouchUpInside];
+        
         self.lbl_thirdnFourthInnings.hidden = YES;
         
         //fetchSePageLoad = [[FetchSEPageLoadRecord alloc]init];
@@ -138,7 +140,9 @@ BOOL IsBack;
         OVERNO=[DBManagerEndInnings GetOverNoForFetchEndInnings : CompetitionCode: MatchCode :fetchSePageLoad.BATTINGTEAMCODE: fetchSePageLoad.INNINGSNO ];
         
         WICKETS=[DBManagerEndInnings GetWicketForFetchEndInnings : CompetitionCode: MatchCode :fetchSePageLoad.BATTINGTEAMCODE: fetchSePageLoad.INNINGSNO];
-        
+
+self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:1.0f];
+        [_btn_delete setUserInteractionEnabled:NO];
     }
 }
 -(void)datePicker{
@@ -312,6 +316,9 @@ BOOL IsBack;
     self.lbl_wktLost.text = [NSString stringWithFormat:@"%@", totalWickets];
     self.tbl_endInnings.hidden = YES;
     self.view_allControls.hidden = NO;
+    
+self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f];
+    [_btn_delete setUserInteractionEnabled:YES];
     
 }
 /**

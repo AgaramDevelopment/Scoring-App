@@ -14,6 +14,7 @@
 @end
 
 @interface EditModeVC : UIViewController
+
 -(void)insertAfterAndBeforeMode:(NSString*)BALLCODE;
 
 

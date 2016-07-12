@@ -691,6 +691,7 @@ BOOL isWicketSelected;
     [self insertAfterAndBeforeMode:objInningsBowlerDetailsRecord.ballCode];
     
     [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"BEFORE"];
+    
     indexCount = 0;
     [self.tbl_innnings reloadData];
     OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];

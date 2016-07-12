@@ -73,6 +73,7 @@
 - (IBAction)btn_save:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIButton *btn_save;
+@property (weak, nonatomic) IBOutlet UIButton *btn_delete;
 
 - (IBAction)btn_back:(id)sender;
 
