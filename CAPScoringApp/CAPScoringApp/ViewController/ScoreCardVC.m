@@ -116,6 +116,13 @@ int bowlerPostion = 0;
         [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) {
         self.btn_third_inns_id.hidden = YES;
         self.btn_fourth_inns_id.hidden = YES;
+        self.lbl_third_div.hidden = YES;
+        
+        
+    }else{ // Test Match
+        [self.btn_third_inns_id setTitle:[NSString stringWithFormat:@"%@ 2nd INNS",fetchScorecard.BATTINGTEAMNAME] forState: UIControlStateNormal];
+        
+        [self.btn_fourth_inns_id setTitle: [NSString stringWithFormat:@"%@ 2nd INNS",fetchScorecard.BOWLINGTEAMNAME] forState: UIControlStateNormal];
     }
 }
 

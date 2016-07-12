@@ -3472,13 +3472,13 @@ EditModeVC * objEditModeVc;
     
     if(selectBtnTag.tag==100)//Run one
     {
-        if([self checkRunOut])
+        if([self checkRunOut] && [self checkBeatenOnRuns])
         {
      [self calculateRuns:selectBtnTag.tag];
         }
         
     }
-    else if(selectBtnTag.tag==101)// Run two
+    else if(selectBtnTag.tag==101 && [self checkBeatenOnRuns])// Run two
     {
         if([self checkRunOut])
         {
@@ -3486,14 +3486,14 @@ EditModeVC * objEditModeVc;
         }
         
     }
-    else if(selectBtnTag.tag==102)// Run three
+    else if(selectBtnTag.tag==102 && [self checkBeatenOnRuns])// Run three
     {
         if([self checkRunOut])
         {
             [self calculateRuns:selectBtnTag.tag];
         }
     }
-    else if(selectBtnTag.tag==103)//More Runs
+    else if(selectBtnTag.tag==103 && [self checkBeatenOnRuns])//More Runs
     {
         if([self checkRunOut])
         {
@@ -3503,6 +3503,8 @@ EditModeVC * objEditModeVc;
     }
     else if(selectBtnTag.tag==104)// B4
     {
+        
+        if([self checkBeatenOnRuns]){
         if(isWicketSelected == YES)
         {
             
@@ -3518,10 +3520,13 @@ EditModeVC * objEditModeVc;
         else{
             
             [self calculateRuns:selectBtnTag.tag];
+        }
         }
     }
     else if(selectBtnTag.tag==105)// B6
     {
+        if([self checkBeatenOnRuns]){
+
         if(isWicketSelected == YES)
         {
             
@@ -3537,6 +3542,7 @@ EditModeVC * objEditModeVc;
         else{
             
             [self calculateRuns:selectBtnTag.tag];
+        }
         }
     }
     else if(selectBtnTag.tag==106)//Extras
@@ -5535,6 +5541,9 @@ EditModeVC * objEditModeVc;
 }
 
 
+
+
+
 -(void) resetAllButtonOnEndBall{
     
     //Left buttons
@@ -6833,6 +6842,22 @@ EditModeVC * objEditModeVc;
             
             
         }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"LegByes"]){//Legbyes
+            
+            
+            if (_ballEventRecord.objIsbeaten.intValue == 1)// Check beaten selected
+            {
+                
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Legbyes is not possible with Beaten. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [altert show];
+                [altert setTag:10402];
+                
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+                [extrasTableView deselectRowAtIndexPath:indexPath animated:NO];
+                
+            }
+            else{
+            
+            
             //B6
             if(isWicketSelected ==YES)
             {
@@ -6871,6 +6896,7 @@ EditModeVC * objEditModeVc;
                 
                 //Legbyes
                 self.ballEventRecord.objLegByes = [NSNumber numberWithInt:1];
+            }
             }
             
         }
@@ -6924,7 +6950,14 @@ EditModeVC * objEditModeVc;
             self.ballEventRecord.objIsuncomfort = [NSNumber numberWithInt:1];
             
         }else if([[self.miscfiltersOptionArray objectAtIndex:indexPath.row]  isEqual: @"Beaten"]){
-            self.ballEventRecord.objIsbeaten = [NSNumber numberWithInt:1];
+            
+            if([self checkBeatenOnSelect]){ //Check run is selected
+                self.ballEventRecord.objIsbeaten = [NSNumber numberWithInt:1];
+            }else{
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+                [miscFiltersTableview deselectRowAtIndexPath:indexPath animated:NO];
+                
+            }
             
         }else if([[self.miscfiltersOptionArray objectAtIndex:indexPath.row]  isEqual: @"Release Shot"]){
             self.ballEventRecord.objIsreleaseshot = [NSNumber numberWithInt:1];
@@ -7182,6 +7215,38 @@ EditModeVC * objEditModeVc;
             
             //Wide
             self.ballEventRecord.objByes = [NSNumber numberWithInt:0];
+            
+            if(self.ballEventRecord.objIsbeaten.intValue == 1){
+                
+                self.ballEventRecord.objOverthrow = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objRuns  = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objIssix  = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objLegByes = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objNoball = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objRbw = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objWide = [NSNumber numberWithInt:0];
+                
+                
+                
+                [self unselectedButtonBg: self.btn_run1];
+                [self unselectedButtonBg: self.btn_run2];
+                [self unselectedButtonBg: self.btn_run3];
+                [self unselectedButtonBg: self.btn_B4];
+                [self unselectedButtonBg: self.btn_B6];
+                [self unselectedViewBg:self.view_Rbw];
+               // [self unselectedButtonBg: self.btn_extras];
+               // btnMarkForEdit.Background = blueBrush;
+                
+                [extrasTableView reloadData];
+                [self unselectedButtonBg: self.btn_overthrow];
+                
+//                isExtrasSelected = NO;
+                isOverthrowSelected = NO;
+                isRBWSelected = NO;
+
+                
+            }
             
             
         }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"LegByes"]){
@@ -11747,7 +11812,7 @@ EditModeVC * objEditModeVc;
         scoreCardVC.competitionCode= self.competitionCode;
         scoreCardVC.matchCode = self.matchCode;
         
-        scoreCardVC.matchTypeCode;
+        scoreCardVC.matchTypeCode = fetchSEPageLoadRecord.MATCHTYPE;
         
         
         scoreCardVC.inningsNo = fetchSEPageLoadRecord.INNINGSNO;
@@ -11780,6 +11845,7 @@ EditModeVC * objEditModeVc;
         
         scoreCardVC.THIRDINNINGSSHORTNAME = fetchSEPageLoadRecord.THIRDINNINGSSHORTNAME;
         scoreCardVC.FOURTHINNINGSSHORTNAME = fetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME;
+        
         
         
     }
@@ -11980,4 +12046,57 @@ EditModeVC * objEditModeVc;
     Archivevc.CompitionCode=self.competitionCode;
     [self.navigationController pushViewController:Archivevc animated:YES];
 }
+
+-(BOOL) checkBeatenOnSelect{
+
+        if (_ballEventRecord.objIsbeaten.intValue == 0)
+        {
+            if (_ballEventRecord.objByes.intValue == 0)
+            {
+                if ((_ballEventRecord.objRuns.intValue + _ballEventRecord.objOverthrow.intValue) > 0)
+                {
+                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Beaten is not possible with Runs. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [altert show];
+                    [altert setTag:10400];
+                    
+                    
+                    return NO;
+                }
+                else if (_ballEventRecord.objLegByes.intValue > 0)
+                {
+                    
+                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Beaten is not possible with Legbyes. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [altert show];
+                    [altert setTag:10401];
+                    
+                    return NO;
+                }
+            }
+        }
+    return YES;
+}
+
+-(BOOL) checkBeatenOnRuns{
+    
+    
+    //string[] Ids = { "btnNB", "btnWD", "btnLB", "btnB" };
+   
+        if (_ballEventRecord.objIsbeaten.intValue == 1 && _ballEventRecord.objByes.intValue == 0)
+        {
+            
+            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Runs are not possible with Beaten. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [altert show];
+            [altert setTag:10403];
+            
+            return NO;
+        }
+    
+    
+
+    return YES;
+}
+
+
+
+
 @end
