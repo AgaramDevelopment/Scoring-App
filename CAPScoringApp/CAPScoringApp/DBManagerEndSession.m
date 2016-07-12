@@ -1548,11 +1548,16 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+
     return NO;
 }
 
@@ -1589,7 +1594,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     return NO;
 }
 
-+(BOOL)GetSessionNoWithAddDayNoForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO:(NSString*) DAYNO{
++(BOOL)GetSessionNoWithAddDayNoForDeleteEndSession: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO:(NSString*) DAYNO{
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;

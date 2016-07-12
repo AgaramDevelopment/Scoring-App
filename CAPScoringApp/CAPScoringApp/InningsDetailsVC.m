@@ -355,7 +355,7 @@
 {
     if (buttonIndex == 0 && alertView.tag == 1)
     {
-        [DBManagerChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : @"" : StrikerCode : NonStrikerCode : selectBowlerCode : BowlingEnd];
+      // [DBManagerChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : @"" : StrikerCode : NonStrikerCode : selectBowlerCode : BowlingEnd];
         
         //[self startService:@"DONE"];
         

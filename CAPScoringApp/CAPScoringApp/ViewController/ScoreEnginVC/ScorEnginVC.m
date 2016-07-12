@@ -285,7 +285,7 @@ EditModeVC * objEditModeVc;
     MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
     ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
     
-    NSLog(@"%@",self.matchTypeCode);
+    NSLog(@"self.matchTypeCode%@",self.matchTypeCode);
     
     AppealBatsmenArray=[[NSMutableArray alloc]init];
     
@@ -7456,9 +7456,9 @@ EditModeVC * objEditModeVc;
        
        [self.view addSubview:fullview];
        EndSession *endSession = [[EndSession alloc]initWithNibName:@"EndSession" bundle:nil];
-       endSession.matchcode =self.matchCode;
-        endSession.compitionCode =self.competitionCode;
-        endSession.fetchpagedetail=fetchSEPageLoadRecord;
+//       endSession.matchcode =self.matchCode;
+//        endSession.compitionCode =self.competitionCode;
+//        endSession.fetchpagedetail=fetchSEPageLoadRecord;
        endSession.delegate=self;
        
        
@@ -11859,6 +11859,11 @@ EditModeVC * objEditModeVc;
 -(void)RedirectScorEngin
 {
     fullview.hidden=YES;
+    ArchivesVC * objArchiveVC=[[ArchivesVC alloc]init];
+    objArchiveVC=(ArchivesVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    
+    objArchiveVC.CompitionCode=self.competitionCode;
+    [self.navigationController pushViewController:objArchiveVC animated:YES];
     // [self reloadBowlerTeamBatsmanDetails];
 }
 -(void) RedirectFollowOnPage

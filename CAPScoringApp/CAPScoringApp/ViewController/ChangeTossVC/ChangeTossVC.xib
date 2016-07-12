@@ -237,6 +237,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="35" id="oJ1-Wc-aw3"/>
                                             </constraints>
+                                            <inset key="imageEdgeInsets" minX="200" minY="0.0" maxX="0.0" maxY="0.0"/>
                                             <state key="normal" image="dropDown"/>
                                             <connections>
                                                 <action selector="didClickStrikerSelection:" destination="-1" eventType="touchUpInside" id="XbW-A3-sBZ"/>
@@ -271,7 +272,7 @@
                                                 <constraint firstAttribute="height" constant="35" id="5nx-hY-SBt"/>
                                             </constraints>
                                             <inset key="imageEdgeInsets" minX="200" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                            <state key="normal" title="Button" image="dropDown"/>
+                                            <state key="normal" image="dropDown"/>
                                             <connections>
                                                 <action selector="didClickNonStrikerSelection:" destination="-1" eventType="touchUpInside" id="46b-Of-Fb3"/>
                                             </connections>

@@ -355,7 +355,7 @@
 
 //SP_DELETEENDSESSION---------------------------------------------------------------------------
 
--(void) DeleteEndSession:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)INNINGSNO:(NSString*)DAYNO:(NSString*)SESSIONNO
+-(void) DeleteEndSession:(NSString *)COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) DAYNO:(NSString*) SESSIONNO
 
 {
    
@@ -365,7 +365,7 @@ if(![DBManagerEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCO
         
         if(![DBManagerEndSession GetSessionNoForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO ])
         {
-            if(![DBManagerEndSession GetSessionNoWithAddDayNoForDeleteEndSession:COMPETITIONCODE :MATCHCODE :INNINGSNOS :DAYNO])
+            if(![DBManagerEndSession GetSessionNoWithAddDayNoForDeleteEndSession: COMPETITIONCODE :MATCHCODE :INNINGSNOS :DAYNO])
             {
              
             [DBManagerEndSession DeleteSessionEventsForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO];
