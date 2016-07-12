@@ -359,7 +359,9 @@ BOOL IsBack;
             [delegate hideLoading];
         }
     }
-    
+     [self.tbl_endInnings reloadData];
+    self.tbl_endInnings.hidden = NO;
+    self.view_allControls.hidden = YES;
 }
 - (IBAction)btn_back:(id)sender {
     
@@ -436,6 +438,10 @@ BOOL IsBack;
         }
         
     }
+    [endInningsArray removeLastObject];
+    [self.tbl_endInnings reloadData];
+    self.tbl_endInnings.hidden = NO;
+    self.view_allControls.hidden = YES;
 }
 
 

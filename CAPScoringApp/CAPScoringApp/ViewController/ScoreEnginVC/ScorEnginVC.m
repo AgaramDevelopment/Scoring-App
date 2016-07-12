@@ -7297,8 +7297,6 @@ EditModeVC * objEditModeVc;
     {
         
     
-    
-    
     if(inningsNo > 1)
     {
         ChangeTeamVC *objChanceTeamVC =[[ChangeTeamVC alloc]initWithNibName:@"ChangeTeamVC" bundle:nil];
