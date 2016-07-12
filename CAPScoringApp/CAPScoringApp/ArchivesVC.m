@@ -15,6 +15,7 @@
 #import "EditModeVC.h"
 #import "ScorEnginVC.h"
 #import "TorunamentVC.h"
+#import "InningsDetailsVC.h"
 
 @interface ArchivesVC ()<SwipeableCellDelegate>
 {
@@ -172,15 +173,31 @@
     NSLog(@"the butto, on cell number... %d", button.tag);
     
     FixturesRecord *objFixtureRecord=(FixturesRecord*)[FetchCompitionArray objectAtIndex:button.tag];
+    NSMutableArray *mSetUp = [[NSMutableArray alloc]init];
+    [mSetUp addObject:objFixtureRecord];
     
-    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
-    
-    scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
-    //scoreEngine.matchSetUp = mSetUp;
-    scoreEngine.matchCode=objFixtureRecord.matchcode;
-    scoreEngine.competitionCode=self.CompitionCode;
-    scoreEngine.matchTypeCode=matchTypeCode;
-    [self.navigationController pushViewController:scoreEngine animated:YES];
+    if([objFixtureRecord.MatchStatus isEqualToString:@"MSC124"]||[objFixtureRecord.MatchStatus isEqualToString:@"MSC240"])
+    {
+        if([objFixtureRecord.InningsStatus isEqualToString:@"1"])
+        {
+            InningsDetailsVC *_InningsDetailsVC = [[InningsDetailsVC alloc]initWithNibName:@"InningsDetailsVC" bundle:nil];
+            _InningsDetailsVC.matchSetUp = mSetUp;
+            _InningsDetailsVC.MATCHCODE=objFixtureRecord.matchcode;
+            _InningsDetailsVC.competitionCode=self.CompitionCode;
+            _InningsDetailsVC.matchTypeCode=matchTypeCode;
+            [self.navigationController pushViewController:_InningsDetailsVC animated:YES];
+        }
+        else
+        {
+            ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+            scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+            scoreEngine.matchSetUp = mSetUp;
+            scoreEngine.matchCode=objFixtureRecord.matchcode;
+            scoreEngine.competitionCode=self.CompitionCode;
+            scoreEngine.matchTypeCode=matchTypeCode;
+            [self.navigationController pushViewController:scoreEngine animated:YES];
+        }
+    }
 }
 
 

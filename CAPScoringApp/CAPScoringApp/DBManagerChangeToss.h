@@ -10,11 +10,12 @@
 
 @interface DBManagerChangeToss : NSObject
 
+
 -(NSMutableArray *) GetBattingTeamPlayers:(NSString *) TEAMCODE:(NSString *) MATCHCODE;
 +(NSMutableArray *) GetBowlingTeamPlayers:(NSString *) TEAMCODE:(NSString *) MATCHCODE;
 -(NSMutableArray *) BattingTeamPlayersForToss:(NSString*) TEAMCODE:(NSString*) MATCHCODE;
 -(NSMutableArray *) BowlingTeamPlayersForToss:(NSString*) TEAMCODE:(NSString*) MATCHCODE;
--(NSString *) GetBowlingTeamCodeForInningsEvents:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *) MAXINNINGSNO;
+-(NSString *) GetBowlingTeamCodeForInningsEvents:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE:(NSNumber *) MAXINNINGSNO;
 -(NSString*) GetBattingTeamCodeForInningsEvents:(NSString *) BOWLINGTEAMCODE:(NSString *) MATCHCODE:(NSString*) COMPETITIONCODE;
 -(NSMutableArray *) GetUmpireDetailsForToss:(NSString*) MATCHCODE;
 +(NSMutableArray *) GetTossDetails;
@@ -33,8 +34,8 @@
 +(BOOL) SetMatchEventsForToss:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TOSSWONTEAMCODE:(NSString*) ELECTEDTO:(NSString*) BATTINGTEAMCODE:(NSString*) BOWLINGTEAMCODE;
 +(NSString*) GetMaxInningsNoForTossDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 
-//+(BOOL) SetInningsEventsForToss : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSString*) STRIKERCODE:(NSString*) NONSTRIKERCODE:(NSString*) BOWLERCODE:(NSString*) BOWLINGEND;
 +(BOOL) UpdateMatchStatusForToss:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 
 +(void) InsertTossDetails:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TOSSWONTEAMCODE:(NSString*)ELECTEDTO:(NSString*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)BOWLINGEND;
++(NSMutableDictionary *) FetchTossDetailsForInnings: (NSString*)MATCHCODE : (NSString*)COMPETITIONCODE;
 @end
