@@ -64,6 +64,7 @@
 @property(nonatomic,strong)NSNumber *BATTINGPOSITIONNO;
 
 
+@property (strong, nonatomic) IBOutlet UILabel *WICKET_NO_LBL;
 
 
 @end

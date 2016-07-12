@@ -260,10 +260,10 @@
    
     else{
     
-    NSString *BREAKNO1 =[DBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
+    BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
     
     
-    BREAKNO=  [NSString stringWithFormat:@"%d", [BREAKNO1 integerValue] + 1];
+
 
     
    [self InsertBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];

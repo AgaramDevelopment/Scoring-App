@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "43"
             endingLineNumber = "43"
-            landmarkName = "nonStriker_table"
+            landmarkName = "nonStriker"
             landmarkType = "19">
          </BreakpointContent>
       </BreakpointProxy>
@@ -311,8 +311,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "57"
             endingLineNumber = "57"
-            landmarkName = "-Btn_Proceed:"
-            landmarkType = "4">
+            landmarkName = "Bowler_table"
+            landmarkType = "19">
             <Locations>
                <Location
                   shouldBeEnabled = "No"
@@ -418,13 +418,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/MatchOfficalsVC.m"
-            timestampString = "489905244.127914"
+            timestampString = "489927327.680214"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
-            landmarkName = "-customnavigationmethod"
-            landmarkType = "5">
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "@implementation MatchOfficalsVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -754,6 +754,22 @@
             startingLineNumber = "192"
             endingLineNumber = "192"
             landmarkName = "-radiobuttonSelected:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/Other_WicketVC.m"
+            timestampString = "489932881.52104"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
+            landmarkName = "-viewDidLoad"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

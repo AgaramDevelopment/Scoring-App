@@ -6005,30 +6005,31 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT IFNULL(MAX(BREAKNO),0) AS MAXBREAKNO FROM  INNINGSBREAKEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT (IFNULL(MAX(BREAKNO),0)+1) AS MAXBREAKNO FROM  INNINGSBREAKEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
         
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSString *BREAKNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *BREAKNO=[self getValueByNull:statement :0];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                
                 return BREAKNO;
             }
             
         }
         else {
-            sqlite3_reset(statement);
-            
-            return @"";
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return @"0";
         }
     }
-    sqlite3_reset(statement);
-    return @"";
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return @"0";
 }
+        
+
 
 //UPDATE BREAK DETAILS
 
