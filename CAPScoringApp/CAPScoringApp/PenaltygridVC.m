@@ -138,4 +138,8 @@
                      completion:nil];
 
 }
+-(IBAction)btn_back:(id)sender
+{
+    [self.delegate ChangeVCBackBtnAction];
+}
 @end

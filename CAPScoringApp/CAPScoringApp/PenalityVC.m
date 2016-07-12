@@ -158,7 +158,18 @@ NSString *penaltytypereasons;
        return cell;
     
 }
-
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    PenalityTVC *cell =(PenalityTVC *)[tableView indexPathForCell:indexPath];
+    MetaDataRecord *objmetaRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:indexPath.row];
+    CGSize constraint = CGSizeMake(cell.frame.size.width, 20000.0f);
+    
+    //CGSize size =  //[cell.lbl_penalitycell.text sizeWithFont:[UIFont systemFontOfSize:17]      constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+    NSString *obj =cell.lbl_penalitycell.text;
+    CGFloat height =objmetaRecord.metasubcodedescription.length ;
+    
+    return height;
+}
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
@@ -236,7 +247,14 @@ NSString *penaltytypereasons;
 //drop down button
 -(IBAction)didclicktouch:(id)sender{
     
-   self.tbl_penality.hidden=NO;
+    if(self.tbl_penality.hidden==YES)
+    {
+      self.tbl_penality.hidden=NO;
+    }
+    else
+    {
+        self.tbl_penality.hidden=YES;
+    }
     
 }
 
@@ -341,7 +359,7 @@ NSString *penaltytypereasons;
     
     if(_penaltyDetailsRecord == nil){
         
-        [self startService];
+       
         
         PenaltyDetailsRecord *penaltyrecord = [[PenaltyDetailsRecord alloc]init];
         objMetaDataRecord=[[MetaDataRecord alloc]init];
@@ -352,19 +370,21 @@ NSString *penaltytypereasons;
             int penaltyRunsData = [penaltyrecord.penaltyruns intValue];
             if(penaltyRunsData >= 0 && penaltyRunsData <=10){
                 
-                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                NSString *username=[defaults stringForKey :@"UserFullname"];
+               // NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                //NSString *username=[defaults stringForKey :@"UserFullname"];
                 
                 NSString *maxid= [DBManager getMAXIDPENALTY];
                 NSString *paddingString = [[NSString string] stringByPaddingToLength: (7-maxid.length) withString: @"0" startingAtIndex: 0];
                 penaltycode = [NSString stringWithFormat:@"PNT%@%@",paddingString,maxid] ;
                 
                 
-                [DBManager SetPenaltyDetails:self.competitionCode :self.matchCode :self.inningsNo :self.ballcode :penaltycode :self.teamcode :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
+                [DBManager SetPenaltyDetails:self.competitionCode :self.matchCode :self.inningsNo :self.ballcode :penaltycode :self.teamcode : penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
                 
                 
                 
                 penaltyarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
+                
+                 [self startService];
                 
                 PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
                 add.resultarray=penaltyarray;
@@ -374,7 +394,7 @@ NSString *penaltytypereasons;
                 //vc2 *viewController = [[vc2 alloc]init];
                 [self addChildViewController:add];
                 add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-                [self.view addSubview:add.view];
+                //[self.view addSubview:add.view];
                 add.view.alpha = 0;
                 [add didMoveToParentViewController:self];
                 
@@ -413,7 +433,7 @@ NSString *penaltytypereasons;
             //vc2 *viewController = [[vc2 alloc]init];
             [self addChildViewController:add];
             add.view.frame =CGRectMake(0, 0, add.view.frame.size.width-50, add.view.frame.size.height);
-            [self.view addSubview:add.view];
+           // [self.view addSubview:add.view];
             add.view.alpha = 0;
             [add didMoveToParentViewController:self];
             
@@ -434,6 +454,7 @@ NSString *penaltytypereasons;
 
 - (IBAction)btn_back:(id)sender {
     
+    //self.view.hidden=YES;
     PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
     add.resultarray=penaltyarray;
     add.competitionCode=competitionCode;
