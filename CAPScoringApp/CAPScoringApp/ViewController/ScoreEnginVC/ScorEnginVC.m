@@ -1656,6 +1656,7 @@ EditModeVC * objEditModeVc;
     
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+   
     
     
     if (cell == nil) {
@@ -1685,7 +1686,8 @@ EditModeVC * objEditModeVc;
                                                                blue:79/255.0
                                                               alpha:0.5];
             wicketTypeCell.selectedBackgroundView =  customColorView;
-            
+            self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
+             [tbl_fastBowl setSeparatorColor:[UIColor blackColor]];
             return wicketTypeCell;
             
             
@@ -1706,6 +1708,7 @@ EditModeVC * objEditModeVc;
                                                                blue:79/255.0
                                                               alpha:0.5];
             strikerNonstrikerCell.selectedBackgroundView =  customColorView;
+            self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
             return strikerNonstrikerCell;
             
             
@@ -1726,6 +1729,7 @@ EditModeVC * objEditModeVc;
                                                                blue:79/255.0
                                                               alpha:0.5];
             wicketEventCell.selectedBackgroundView =  customColorView;
+            self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
             return wicketEventCell;
             
             
@@ -1747,6 +1751,7 @@ EditModeVC * objEditModeVc;
                                                                blue:79/255.0
                                                               alpha:0.5];
             playerlistCell.selectedBackgroundView =  customColorView;
+            self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
             
             return playerlistCell;
             
@@ -1903,6 +1908,7 @@ EditModeVC * objEditModeVc;
                                                            blue:79/255.0
                                                           alpha:0.5];
         fastBowlCell.selectedBackgroundView =  customColorView;
+        self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         return fastBowlCell;
         
@@ -2063,13 +2069,24 @@ EditModeVC * objEditModeVc;
     return YES;
 }
 
+-(BOOL)iswicketPending{
+    if(wicketOption !=0){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please complete wicket Option" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:10102];
+        return NO;
+        
+    }
+    return YES;
+}
+
 -(IBAction)DidClickStartBall:(id)sender
 {
     NSLog(@"btnname=%@",self.btn_StartBall.currentTitle);
     
     if(self.isEditMode){ //Edit Mode
         
-        if([self checkRunsByLB_B]){
+        if([self checkRunsByLB_B] && [self iswicketPending]){
         [self calculateRunsOnEndBall];
         
         UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
@@ -2202,7 +2219,7 @@ EditModeVC * objEditModeVc;
         else
         {
             
-            if([self checkRunsByLB_B]){ // Check before end ball
+            if([self checkRunsByLB_B] && [self iswicketPending]){// Check before end ball
            // [self calculateRunsOnEndBall];
             [self EndBallMethod];
             
@@ -3400,6 +3417,19 @@ EditModeVC * objEditModeVc;
     //    }
     UIButton *selectBtnTag=(UIButton*)sender;
     
+    //wicket
+    if(isWicketSelected && selectBtnTag.tag != 107 && wicketOption !=0){
+        
+        isWicketSelected= NO;
+        selectedwickettype = nil;
+        selectedWicketEvent = nil;
+        selectedStrikernonstriker = nil;
+        selectedwicketBowlerlist =nil;
+        [self unselectedButtonBg:self.btn_wkts];
+    
+        
+    }
+    
     if(isExtrasSelected && selectBtnTag.tag!=106){//Already open state
         
         
@@ -3579,6 +3609,10 @@ EditModeVC * objEditModeVc;
             self.view_defensive.hidden = YES;
             self.view_bowlType.hidden = YES;
             self.view_fastBowl.hidden = YES;
+            selectedwickettype = nil;
+            selectedWicketEvent = nil;
+            selectedStrikernonstriker = nil;
+            selectedwicketBowlerlist =nil;
             
             [self unselectedButtonBg:selectBtnTag];
             
@@ -3692,7 +3726,8 @@ EditModeVC * objEditModeVc;
             
             miscFiltersTableview=[[UITableView alloc]initWithFrame:CGRectMake(selectBtnTag.frame.origin.x+selectBtnTag.frame.size.width+10, selectBtnTag.frame.origin.y-50,150,200)];
             miscFiltersTableview.backgroundColor=[UIColor whiteColor];
-            
+            miscFiltersTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+             [miscFiltersTableview setSeparatorColor:[UIColor whiteColor]];
             miscFiltersTableview.dataSource = self;
             miscFiltersTableview.delegate = self;
             [self.commonleftrightview addSubview:miscFiltersTableview];
@@ -4809,6 +4844,20 @@ EditModeVC * objEditModeVc;
     self.objcommonRemarkview.hidden=YES;
     
     
+    //wicket
+    if(isWicketSelected && selectBtnTag.tag != 107 && wicketOption !=0){
+        
+        isWicketSelected= NO;
+        selectedwickettype = nil;
+        selectedWicketEvent = nil;
+        selectedStrikernonstriker = nil;
+        selectedwicketBowlerlist =nil;
+        [self unselectedButtonBg:self.btn_wkts];
+        
+        
+    }
+    
+    
     if(isExtrasSelected && selectBtnTag.tag!=106){//Already open state
         
         
@@ -5228,6 +5277,9 @@ EditModeVC * objEditModeVc;
             
             rbwTableview=[[UITableView alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.size.width-180, self.btn_RBW.frame.origin.y-80,100,250)];
             rbwTableview.backgroundColor=[UIColor whiteColor];
+            rbwTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+             [rbwTableview setSeparatorColor:[UIColor whiteColor]];
+            
             
             rbwTableview.dataSource = self;
             rbwTableview.delegate = self;
@@ -6441,10 +6493,13 @@ EditModeVC * objEditModeVc;
                 [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
-            }
+               
+                
+                
+                }
             
         } else{
-            self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Tough",@"Strong",@"Medium", nil];
+            self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Tough",@"Medium",@"Easy", nil];
             
             [self disableButtonBg:self.btn_B6];
             [self disableButtonBg:self.btn_B4];
@@ -6468,6 +6523,8 @@ EditModeVC * objEditModeVc;
                 [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
+                
+               
             }
             
             
@@ -6484,7 +6541,7 @@ EditModeVC * objEditModeVc;
             selectedStrikernonstrikerCode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
         }
         
-        self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Typical",@"Strong",@"Medium", nil];
+        self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Tough",@"Medium",@"Easy", nil];
         isWicketSelected = YES;
         wicketOption = 3;
         
@@ -6501,7 +6558,8 @@ EditModeVC * objEditModeVc;
             [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                 atScrollPosition:UITableViewScrollPositionTop
                                         animated:YES];
-        }
+            
+                    }
         
     }else if(isWicketSelected && wicketOption == 3){
         selectedWicketEvent = [self.WicketEventArray objectAtIndex:indexPath.row];
@@ -6540,6 +6598,8 @@ EditModeVC * objEditModeVc;
                 [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
+                
+               
                 
             }
         }else{
@@ -6601,6 +6661,8 @@ EditModeVC * objEditModeVc;
             [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                 atScrollPosition:UITableViewScrollPositionTop
                                         animated:YES];
+            
+            
         }
         
         
@@ -6626,6 +6688,7 @@ EditModeVC * objEditModeVc;
             [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                 atScrollPosition:UITableViewScrollPositionTop
                                         animated:YES];
+           
         }
     }else if(isFieldingSelected && fieldingOption == 3)
     {

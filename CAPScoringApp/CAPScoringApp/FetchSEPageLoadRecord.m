@@ -185,8 +185,7 @@ BOOL  getOverStatus;
     NSString *isOverComplete = [NSString stringWithFormat:@"%d",ISOVERCOMPLETE];
     NSString *batTeamOver = [NSString stringWithFormat:@"%d",BATTEAMOVERS];
     NSString *preOverWithExtraBalls = [NSString stringWithFormat:@"%d",PREVOVRWITHEXTRASBALLS];
-    NSString *batTeamOvrwithExtrasBalls = [NSString stringWithFormat:@"%d",BATTEAMOVRWITHEXTRASBALLS];
-    NSString *batTeamOverBallsCnt = [NSString stringWithFormat:@"%d",_BATTEAMOVRBALLSCNT];
+  
     NSString *preOverBallcnt = [NSString stringWithFormat:@"%d",PREVOVRBALLSCNT];
     
     
@@ -503,7 +502,9 @@ BOOL  getOverStatus;
     BATTEAMWICKETS = battingsWickets;
     BATTEAMOVERS = teamOvers;
     BATTEAMOVRBALLS = teamOvsBall;
-    BATTEAMOVRWITHEXTRASBALLS = teamExtBall;
+    BATTEAMOVRWITHEXTRASBALLS = [teamExtraBall integerValue];
+        
+          NSString *batTeamOvrwithExtrasBalls = [NSString stringWithFormat:@"%d",BATTEAMOVRWITHEXTRASBALLS];
     
     if (BATTEAMOVRBALLS == 0) {
         //get previous ball
@@ -528,6 +529,8 @@ BOOL  getOverStatus;
     NSInteger batBallCnt = [batTeamBalCnt integerValue];
     
     _BATTEAMOVRBALLSCNT = batBallCnt;
+        NSString *batTeamOverBallsCnt = [NSString stringWithFormat:@"%d",_BATTEAMOVRBALLSCNT];
+        
     
     NSString *getLastBallCode = [DBManager getLastBallCode :COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE: INNINGSNO:batTeamOver:batTeamOvrwithExtrasBalls:batTeamOverBallsCnt];
         
