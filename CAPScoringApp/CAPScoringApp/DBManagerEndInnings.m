@@ -2091,7 +2091,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BYES, LEGBYES, NOBALLS, WIDES, PENALTIES, INNINGSTOTAL, INNINGSTOTALWICKETS FROM INNINGSSUMMARY WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@' AND INNINGSNO = @INNINGSNO", COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BYES, LEGBYES, NOBALLS, WIDES, PENALTIES, INNINGSTOTAL, INNINGSTOTALWICKETS FROM INNINGSSUMMARY WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@' AND INNINGSNO = '%@'", COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
                                
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)== SQLITE_OK);
@@ -2328,7 +2328,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BOWLEROVERDETAILS(COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BOWLERCODE,STARTTIME,ENDTIME) 	VALUES('%@','%@','%@','%@','%@','%@',GETDATE(),'')", COMPETITIONCODE, MATCHCODE, BATTINGTEAMCODE, INNINGSNO,WICKETOVERNO,BOWLERCODE ];
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BOWLEROVERDETAILS(COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BOWLERCODE,STARTTIME,ENDTIME) 	VALUES('%@','%@','%@','%@','%@','%@',current_timestamp,'')", COMPETITIONCODE, MATCHCODE, BATTINGTEAMCODE, INNINGSNO,WICKETOVERNO,BOWLERCODE ];
         
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
