@@ -3726,7 +3726,7 @@ EditModeVC * objEditModeVc;
         [self.img_pichmap addGestureRecognizer:tapRecognizer];
         [self.img_pichmap setUserInteractionEnabled:YES];
         self.PichMapTittle =[[UILabel alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.origin.x-20,self.Allvaluedisplayview.frame.origin.y-75,self.Allvaluedisplayview.frame.size.width, 35)];
-        self.PichMapTittle.text=@"PICHMAP";
+        self.PichMapTittle.text=@"PITCHMAP";
         self.PichMapTittle.font=[UIFont fontWithName:@"RAJDHANI-MEDIUM" size:20];
         self.PichMapTittle.textColor=[UIColor whiteColor];
         self.PichMapTittle.textAlignment=NSTextAlignmentCenter;
