@@ -2392,10 +2392,10 @@ EditModeVC * objEditModeVc;
     {
         if(_isEditMode){
         
-    [objEditModeVc insertAfterAndBeforeMode :self.editBallCode];
-            fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-            
-            [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+//    [objEditModeVc insertAfterAndBeforeMode :self.editBallCode];
+//            fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+//            
+//            [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
             
         }
         
