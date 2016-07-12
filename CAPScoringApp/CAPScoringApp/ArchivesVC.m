@@ -17,7 +17,7 @@
 #import "TorunamentVC.h"
 #import "InningsDetailsVC.h"
 
-@interface ArchivesVC ()<SwipeableCellDelegate>
+@interface ArchivesVC ()<SwipeableCellDelegate,InningsDetailsDelegate>
 {
     CustomNavigationVC * objCustomNavigation;
     NSString * matchCode;
@@ -181,6 +181,7 @@
         if([objFixtureRecord.InningsStatus isEqualToString:@"1"])
         {
             InningsDetailsVC *_InningsDetailsVC = [[InningsDetailsVC alloc]initWithNibName:@"InningsDetailsVC" bundle:nil];
+            _InningsDetailsVC.delegate = self;
             _InningsDetailsVC.matchSetUp = mSetUp;
             _InningsDetailsVC.MATCHCODE=objFixtureRecord.matchcode;
             _InningsDetailsVC.competitionCode=self.CompitionCode;
@@ -236,7 +237,18 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+-(void)StartInningsprocessSuccessful : (NSString *)CompetitionCode : (NSString *)MATCHCODE : (NSString *)matchTypeCode : (NSMutableArray *)matchSetUp
+{
+    ScorEnginVC *scoreengine = [[ScorEnginVC alloc] init];
+    
+    scoreengine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+    scoreengine.matchSetUp = matchSetUp;
+    scoreengine.matchCode = MATCHCODE;
+    scoreengine.competitionCode = CompetitionCode;
+    scoreengine.matchTypeCode = matchTypeCode;
+    
+    [self.navigationController pushViewController:scoreengine animated:YES];
+}
 
 
 @end
