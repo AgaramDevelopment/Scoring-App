@@ -206,6 +206,7 @@
     //BOOL isEditMode;
     BOOL isFreeHitBall;
     NSArray *ValidedMatchType;
+      FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
     
 }
 
@@ -2391,13 +2392,15 @@ EditModeVC * objEditModeVc;
     else
     {
         if(_isEditMode){
-        
-    [objEditModeVc insertAfterAndBeforeMode :self.editBallCode];
-            fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-            
-            [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
             
         }
+        
+           // [objEditModeVc insertAfterAndBeforeMode :self.editBallCode];
+            
+//            fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
+//            [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode:self.editBallCode];
+            
+        
         
         
         NSNumber *temp = [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS];
@@ -2423,7 +2426,10 @@ EditModeVC * objEditModeVc;
          fetchSEPageLoadRecord.nonstrickerPlayerCode:
          fetchSEPageLoadRecord.currentBowlerPlayerCode:
          
-         fetchSEPageLoadRecord.BATTINGTEAMCODE :
+         ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString :
+           fetchSEPageLoadRecord.TEAMACODE] ?
+          fetchSEPageLoadRecord.TEAMAWICKETKEEPER :
+          fetchSEPageLoadRecord.TEAMBWICKETKEEPER):
          
          fetchSEPageLoadRecord.UMPIRE1CODE :
          fetchSEPageLoadRecord.UMPIRE2CODE :
@@ -8461,11 +8467,9 @@ EditModeVC * objEditModeVc;
         
         targetRightValue =  fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? fetchSEPageLoadRecord.T_TARGETRUNS : (fetchSEPageLoadRecord.RUNSREQUIRED.intValue == 0 ? @"" : fetchSEPageLoadRecord.RUNSREQUIRED);
         
-        //if(fetchSEPageLoadRecord.INNINGSNO>1)
-       // {
+ 
         _lbl_target.text = [NSString stringWithFormat:@"%@ %@",targetLeftValue,targetRightValue];
-      //  }
-        
+
         NSString *runsReqForBalls = fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? (isTargetReached ? @"Target achieved" : ([NSString stringWithFormat:@"%@ runs to win",fetchSEPageLoadRecord.RUNSREQUIRED])) : @"Required run rate:";
         _lbl_runs_required.text = runsReqForBalls;
     }else{
@@ -11975,5 +11979,15 @@ EditModeVC * objEditModeVc;
 -(void) EndInningsBackBtnAction{
     
     [fullview removeFromSuperview];
+}
+
+-(void) EndInningsSaveBtnAction{
+    
+    [fullview removeFromSuperview];
+    ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
+    Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    // Archivevc.matchCode=self.matchCode;
+    Archivevc.CompitionCode=self.competitionCode;
+    [self.navigationController pushViewController:Archivevc animated:YES];
 }
 @end

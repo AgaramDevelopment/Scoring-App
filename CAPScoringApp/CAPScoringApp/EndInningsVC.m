@@ -19,6 +19,7 @@
 #import "DBManagerEndInnings.h"
 #import "MatchResultListVC.h"
 #import "Utitliy.h"
+#import "ArchivesVC.h"
 @interface EndInningsVC ()
 {
     NSDateFormatter *formatter;
@@ -61,6 +62,8 @@ BOOL IsBack;
         
         [self.btn_save addTarget:self action:@selector(btn_save:) forControlEvents:UIControlEventTouchUpInside];
         
+         [self.btn_delete addTarget:self action:@selector(btn_delete:) forControlEvents:UIControlEventTouchUpInside];
+        
         self.lbl_thirdnFourthInnings.hidden = YES;
         
         //fetchSePageLoad = [[FetchSEPageLoadRecord alloc]init];
@@ -80,7 +83,9 @@ BOOL IsBack;
         
         self.lbl_teamName.text = innings.TEAMNAME;
         self.lbl_runScored.text = [NSString stringWithFormat:@"%@", innings.TOTALRUNS];
-        self.lbl_overPlayed.text = innings.OVERNO;
+        
+        self.lbl_overPlayed.text = [NSString stringWithFormat:@"%@.%@" ,innings.OVERNO,innings.BALLNO];
+        
         self.lbl_wktLost.text = innings.WICKETS;
         self.lbl_innings.text = fetchSePageLoad.INNINGSNO;
         
@@ -135,7 +140,9 @@ BOOL IsBack;
         OVERNO=[DBManagerEndInnings GetOverNoForFetchEndInnings : CompetitionCode: MatchCode :fetchSePageLoad.BATTINGTEAMCODE: fetchSePageLoad.INNINGSNO ];
         
         WICKETS=[DBManagerEndInnings GetWicketForFetchEndInnings : CompetitionCode: MatchCode :fetchSePageLoad.BATTINGTEAMCODE: fetchSePageLoad.INNINGSNO];
-        
+
+self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:1.0f];
+        [_btn_delete setUserInteractionEnabled:NO];
     }
 }
 -(void)datePicker{
@@ -310,14 +317,45 @@ BOOL IsBack;
     self.tbl_endInnings.hidden = YES;
     self.view_allControls.hidden = NO;
     
+self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f];
+    [_btn_delete setUserInteractionEnabled:YES];
+    
 }
+/**
+ * Show message for given title and content
+ */
+-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
+-(BOOL) checkValidation{
+    
+    if([_txt_startInnings.text isEqual:@""]){
+        [self showDialog:@"Please Select Start Time." andTitle:@""];
+        return NO;
+    }else if ([_txt_endInnings.text isEqual:@""]){
+        [self showDialog:@"Please Select End Time." andTitle:@""];
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (IBAction)btn_save:(id)sender {
     
-    NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
-    BtnurrentTittle = @"INSERT";
-    [innings InsertEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS :BtnurrentTittle];
     
-    innings = [[EndInnings alloc]init];
+    
+    if ([self checkValidation]) {
+        
+        NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
+        BtnurrentTittle = @"INSERT";
+        [innings InsertEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS :BtnurrentTittle];
+         innings = [[EndInnings alloc]init];
+   
+
+    
+   
     
     if(self.checkInternetConnection){
         

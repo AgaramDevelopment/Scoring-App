@@ -685,11 +685,13 @@ BOOL isWicketSelected;
     ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
     scoreEngine.competitionCode=self.Comptitioncode;
     scoreEngine.matchCode = self.matchCode;
+    
     scoreEngine.isEditMode = YES;
     scoreEngine.editBallCode = objInningsBowlerDetailsRecord.ballCode;
     [self insertAfterAndBeforeMode:objInningsBowlerDetailsRecord.ballCode];
     
     [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"BEFORE"];
+    
     indexCount = 0;
     [self.tbl_innnings reloadData];
     OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];

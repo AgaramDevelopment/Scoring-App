@@ -832,14 +832,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
   }
 
 
- +(NSString*)  GetWicketNoForInsertOtherwicket:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO{
+ +(NSNumber*)  GetWicketNoForInsertOtherwicket:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO{
                                                    NSString *databasePath = [self getDBPath];
                                                    sqlite3_stmt *statement;
                                                    sqlite3 *dataBase;
                                                    const char *dbPath = [databasePath UTF8String];
                                                    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                                    {
-  NSString *updateSQL = [NSString stringWithFormat:@"SELECT MAX(WE.WICKETNO)+1 AS WICKETNO FROM WICKETEVENTS WE WHERE WE.COMPETITIONCODE='%@' AND WE.MATCHCODE='%@' AND WE.TEAMCODE='%@' AND WE.INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
+  NSString *updateSQL = [NSString stringWithFormat:@"SELECT (IFNULL(MAX(WE.WICKETNO),0)+1) WICKETNO FROM WICKETEVENTS WE WHERE WE.COMPETITIONCODE='%@' AND WE.MATCHCODE='%@' AND WE.TEAMCODE='%@' AND WE.INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
                                                        const char *update_stmt = [updateSQL UTF8String];
                                                        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
                                                        {

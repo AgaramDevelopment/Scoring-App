@@ -358,16 +358,6 @@
       // [DBManagerChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : @"" : StrikerCode : NonStrikerCode : selectBowlerCode : BowlingEnd];
         
         //[self startService:@"DONE"];
-        
-        ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
-        
-        scoreEngine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
-        scoreEngine.matchSetUp = self.matchSetUp;
-        scoreEngine.matchCode=self.MATCHCODE;
-        scoreEngine.competitionCode=self.CompetitionCode;
-        scoreEngine.matchTypeCode = self.matchTypeCode;
-        
-        [self.navigationController pushViewController:scoreEngine animated:YES];
     }
 }
 
