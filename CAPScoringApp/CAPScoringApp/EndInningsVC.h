@@ -12,6 +12,7 @@
 @required
 
 - (void) EndInningsBackBtnAction;
+- (void) EndInningsSaveBtnAction;
 
 @end
 
