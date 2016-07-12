@@ -26,7 +26,7 @@
     GetPlayerDetailOnRetiredHurtOnMSC108 *objretriedOut;
     
     NSString *WICKETPLAYER;
-    
+    NSString *WicketStingValues;
     NSMutableArray *Wicketselectindexarray;
     NSMutableArray *PlayerselectindexarrayAH;
     NSMutableArray *PlayerselectindexarrayTO;
@@ -128,6 +128,14 @@
     [self.Player_view.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.Player_view.layer.borderWidth = 2;
     
+    [self.WICKET_NO_LBL.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    self.WICKET_NO_LBL.layer.borderWidth = 2;
+    
+    WICKETNO =[DbManager_OtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
+    
+    WicketStingValues = [NSString stringWithFormat:@"%@", WICKETNO];
+    
+ self.WICKET_NO_LBL.text=WicketStingValues;
     
     
     if(_ISEDITMODE){
@@ -135,6 +143,10 @@
         self.selectplayer_lbl.text=WICKETPLAYER;
         
         [self.btn_save setTitle:@"Update" forState:UIControlStateNormal];
+        
+      
+        
+
     }
     
     
@@ -393,6 +405,8 @@
     
     if(_ISEDITMODE){
         [self UpdateOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :WICKETTYPE :WICKETPLAYER :WICKETNO :VIDEOLOCATION :TOTALRUNS];
+        
+        
         Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
         add.COMPETITIONCODE=self.COMPETITIONCODE;
         add.MATCHCODE=self.MATCHCODE;
@@ -414,7 +428,12 @@
         
        
     }else{
+       
+        
+       
+      
         [self InsertOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETPLAYER :WICKETTYPE : WICKETNO :VIDEOLOCATION :TOTALRUNS];
+        
         
         Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
         add.COMPETITIONCODE=self.COMPETITIONCODE;

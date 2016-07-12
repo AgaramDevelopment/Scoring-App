@@ -89,8 +89,7 @@
 
 -(IBAction)didClickStrickerSelection:(id)sender
 {
-    CGFloat contentSize =self.tbl_strikerlist.contentSize.height;
-    self.tblHeight.constant =(contentSize>44)?128:contentSize;
+   
     if(IsStricker == NO)
     {
     IsStricker =YES;
@@ -112,8 +111,7 @@
 }
 -(IBAction)didClickNonStrickerSelection:(id)sender
 {
-    CGFloat contentSize =self.tbl_strikerlist.contentSize.height;
-    self.tblHeight.constant =(contentSize>44)?128:contentSize;
+   
     if(IsNonStricker == YES)
     {
     IsStricker =NO;
@@ -135,8 +133,6 @@
 
 -(IBAction)didClickBowlerSelection:(id)sender
 {
-    CGFloat contentSize =self.tbl_strikerlist.contentSize.height;
-    self.tblHeight.constant =(contentSize>44)?128:contentSize;
     if(IsBowler==NO)
     {
     IsStricker =NO;

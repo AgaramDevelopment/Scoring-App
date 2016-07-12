@@ -1,4 +1,4 @@
-//
+///
 //  EndSession.m
 //  CAPScoringApp
 //
@@ -22,6 +22,7 @@
     NSString *matchcode;
    // NSObject *fetchEndSession;
     UITableView *objDrobDowntbl;
+    NSString  * Dominate;
     
 }
 
@@ -72,7 +73,7 @@ int POS_TEAM_TYPE = 1;
    
     
    battingTeamArray = [[NSMutableArray alloc]init];
-battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE];
+battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
     
     bowlingTeamArray = [[NSMutableArray alloc]init];
     bowlingTeamArray = [DBManagerEndSession GetBattingTeamUsingBowlingCode:fetchSeRecord.BOWLINGTEAMCODE];
@@ -311,7 +312,10 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
     cell.lbl_startSessionTime.text = end.SESSIONSTARTTIME;
     cell.lbl_endSessionTime.text = end.SESSIONENDTIME;
     cell.lbl_teamName.text = end.SHORTTEAMNAME;
-    cell.lbl_sessionNo.text = [NSString stringWithFormat:@"%@",end.SESSIONNO];
+    int sessionno = [end.SESSIONNO intValue];
+        
+
+   cell.lbl_sessionNo.text = [NSString stringWithFormat:@"%d",sessionno];//[end.SESSIONNO stringValue];
     cell.lbl_dayNo.text = end.DAYNO;
     
     
@@ -329,7 +333,7 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
         if (IsDropDown == YES) {
             
             self.lbl_sessionDominant.text = obj.BATTINGTEAMNAME;
-            
+            Dominate  =obj.BATTINGTEAMCODE;
             IsDropDown = NO;
             
         }
@@ -406,6 +410,14 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
     
     if ([BtnurrentTittle isEqualToString:@"INSERT"]) {
         
+        int SESSIONNO =[sessionRecords.SESSIONNO intValue];
+        int STARTOVERNO  = [sessionRecords.STARTOVERNO intValue];
+        int ENDOVERNO   =[sessionRecords.ENDOVERNO intValue];
+        int  RUNSSCORED =[sessionRecords.RUNSSCORED intValue];
+        
+        
+        [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :fetchSeRecord.DAYNO :[NSString stringWithFormat:@"%d",SESSIONNO] :_txt_startTime.text :_txt_endTime.text :[NSString stringWithFormat:@"%d",STARTOVERNO]: [NSString stringWithFormat:@"%d",ENDOVERNO] :[NSString stringWithFormat:@"%d" ,RUNSSCORED] :[NSString stringWithFormat:@"%d",fetchSeRecord.BATTEAMWICKETS] :Dominate];
+        
         if(self.checkInternetConnection){
             
             
@@ -455,7 +467,7 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
         }
         
         
-  [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :sessionRecords.DAYNO :[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO] :_txt_startTime.text :_txt_endTime.text :[NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO]: [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO] :[NSString stringWithFormat:@"%@" ,sessionRecords.RUNSSCORED] :sessionRecords.WICKETLOST :@"(null)"];
+  
         
         
     }else{
@@ -524,6 +536,8 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
 - (IBAction)btn_delete:(id)sender {
     
     {
+        [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :sessionRecords.DAYNO :[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO]];
+        
         
         if(self.checkInternetConnection){
             
@@ -568,10 +582,13 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
         
         
     
-    sessionRecords = [[EndSessionRecords alloc]init];
+    //sessionRecords = [[EndSessionRecords alloc]init];
     
-    [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :sessionRecords.DAYNO :[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO]];
     
+    
+       // [endSessionArray removeLastObject];
+        [self.tbl_session reloadData];
+        [self.Btn_back sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 }
 
@@ -582,24 +599,29 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
 - (IBAction)btn_dropDown:(id)sender {
     
     [self.view layoutIfNeeded];
-    
+    if(IsDropDown ==NO)
+    {
     IsDropDown = YES;
     
     objDrobDowntbl=[[UITableView alloc]initWithFrame:CGRectMake(self.view_sessionDominant.frame.origin.x, self.view_sessionDominant.frame.origin.y+self.view_sessionDominant.frame.size.height+5, 280, 300)];
     objDrobDowntbl.dataSource=self;
     objDrobDowntbl.delegate=self;
-    
+        objDrobDowntbl.hidden=NO;
     
     [self.scroll_EndSession addSubview:objDrobDowntbl];
     self.scroll_EndSession.scrollEnabled = NO;
     
-    NSMutableArray *teamArray = [DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE];
+        NSMutableArray *teamArray = [DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE:fetchSeRecord.BOWLINGTEAMCODE];
     
     endSessionArray = teamArray;
     
     
     [objDrobDowntbl reloadData];
-    
+    }
+    else{
+        IsDropDown = NO;
+         objDrobDowntbl.hidden=YES;
+    }
 
     
 }

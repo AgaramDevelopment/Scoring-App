@@ -533,7 +533,7 @@
                                                 <rect key="frame" x="70" y="19" width="426" height="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="28"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -582,7 +582,7 @@
                                                 <rect key="frame" x="70" y="19" width="426" height="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="28"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -1341,7 +1341,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="128" id="olq-of-DA0"/>
+                                            <constraint firstAttribute="height" constant="128" id="olq-of-DA0">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -1829,7 +1831,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="108" id="kAs-zP-pgN"/>
+                                            <constraint firstAttribute="height" constant="108" id="kAs-zP-pgN">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -1856,7 +1860,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="4"/>
                                     </constraint>
                                     <constraint firstItem="EfR-pe-kA8" firstAttribute="top" secondItem="EGh-fh-3ic" secondAttribute="bottom" constant="15" id="4UR-HA-wxD">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-53"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-45"/>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="b9d-c0-oqI" secondAttribute="trailing" constant="100" id="5wy-MF-oM2"/>
                                     <constraint firstAttribute="bottom" secondItem="b94-9v-duC" secondAttribute="bottom" id="6Qn-jd-Eb2"/>
@@ -1897,7 +1901,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="1"/>
                                     </constraint>
                                     <constraint firstItem="jIe-Sp-Wm0" firstAttribute="top" secondItem="2sV-xD-WMY" secondAttribute="bottom" constant="16" id="S1J-wz-KNt">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-78"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-50"/>
                                     </constraint>
                                     <constraint firstItem="xPd-J0-vzd" firstAttribute="top" secondItem="4DH-lB-7pf" secondAttribute="bottom" constant="43" id="T30-WY-BgY">
                                         <variation key="heightClass=regular-widthClass=regular" constant="115"/>
@@ -1935,10 +1939,10 @@
                                     </constraint>
                                     <constraint firstItem="b9d-c0-oqI" firstAttribute="leading" secondItem="aff-hj-tjT" secondAttribute="leading" constant="100" id="fBS-lk-JtV"/>
                                     <constraint firstItem="EfR-pe-kA8" firstAttribute="top" secondItem="EGh-fh-3ic" secondAttribute="bottom" constant="15" id="fDJ-3G-iSW">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-53"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-45"/>
                                     </constraint>
                                     <constraint firstItem="jIe-Sp-Wm0" firstAttribute="top" secondItem="2sV-xD-WMY" secondAttribute="bottom" constant="16" id="ftk-5L-YDN">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-78"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="-50"/>
                                     </constraint>
                                     <constraint firstAttribute="trailing" secondItem="dLg-vH-awG" secondAttribute="trailing" constant="100" id="gqy-tD-Wid"/>
                                     <constraint firstItem="U38-R7-q2U" firstAttribute="top" secondItem="b9d-c0-oqI" secondAttribute="bottom" id="hcT-J1-bDg">
@@ -5074,7 +5078,9 @@
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jcp-qF-AKJ">
                                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="70" id="XrR-ZL-ZIp"/>
+                                                            <constraint firstAttribute="width" constant="70" id="XrR-ZL-ZIp">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="100"/>
+                                                            </constraint>
                                                             <constraint firstAttribute="height" constant="30" id="mct-sB-ce5"/>
                                                         </constraints>
                                                         <variation key="default">
@@ -5947,7 +5953,7 @@
                                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.35621675530000002" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
-                                                        <state key="normal" title="PICH MAP">
+                                                        <state key="normal" title="PITCH  MAP">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
                                                         <connections>

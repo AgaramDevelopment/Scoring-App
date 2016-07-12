@@ -26,4 +26,5 @@
 @synthesize matchTypeCode;
 @synthesize count;
 @synthesize MatchStatus;
+@synthesize InningsStatus;
 @end
