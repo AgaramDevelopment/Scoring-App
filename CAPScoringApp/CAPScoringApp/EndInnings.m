@@ -619,6 +619,8 @@ EndInningsVC *save;
 {
     
     
+    
+    
     ISWKTDTLSUPDATE = [NSNumber numberWithInt:1];
     ISBOWLERCHANGED = [NSNumber numberWithInt:0];
     ISUPDATE = [NSNumber numberWithInt:0];
@@ -896,7 +898,8 @@ EndInningsVC *save;
     
     BOWLERCOUNT = [NSNumber numberWithInt:1];
     
-    if([DBManagerEndInnings GetBowlerForInsertScoreBoard:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO])
+    
+    if([DBManagerEndInnings GetBowlerForInsertScoreBoard:COMPETITIONCODE :MATCHCODE :INNINGSNO :WICKETOVERNO])
     {
         
         BOWLERCOUNT=[DBManagerEndInnings GetBowlerCountForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: INNINGSNO :WICKETOVERNO];
@@ -922,7 +925,7 @@ EndInningsVC *save;
         
         GetBowlingDetailsForAssignDetails = [[NSMutableArray alloc]init];
         
-        GetBowlingDetailsForAssignDetails = [DBManagerEndInnings GetBowlingDetailsForassignvarForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:BOWLERCODE];
+        GetBowlingDetailsForAssignDetails = [DBManagerEndInnings GetBowlingDetailsForassignvarForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BOWLINGTEAMCODE:INNINGSNO:BOWLERCODE];
         
         if(GetBowlingDetailsForAssignDetails.count>0)
         {
