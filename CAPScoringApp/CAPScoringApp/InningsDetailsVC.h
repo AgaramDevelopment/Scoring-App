@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol InningsDetailsDelegate <NSObject>
+@required
+- (void)StartInningsprocessSuccessful : (NSString *)CompetitionCode : (NSString *)MATCHCODE : (NSString *)matchTypeCode : (NSMutableArray *)matchSetUp;
+@end
 @interface InningsDetailsVC : UIViewController
+@property(nonatomic,strong) id <InningsDetailsDelegate> delegate;
 @property (strong,nonatomic) NSMutableArray *matchSetUp;
 @property (strong, nonatomic) IBOutlet UIView *Team_View;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_Team;
