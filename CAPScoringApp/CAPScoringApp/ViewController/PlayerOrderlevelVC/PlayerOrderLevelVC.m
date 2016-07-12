@@ -240,14 +240,14 @@
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
 
     if (![string isEqualToString:@""]) {
+        [self.selectedPlayerFilterArray removeAllObjects];
+        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName beginswith[c] %@",self.txt_search.text];
         
-        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",self.txt_search.text];
-        
-        NSArray *filtedPlayerArray =  [self.objSelectplayerList_Array filteredArrayUsingPredicate:resultPredicate];
+        NSArray *filtedPlayerArray =  [self.selectedPlayerFilterArray filteredArrayUsingPredicate:resultPredicate];
         
         // NSLog(@"count %lu",(unsigned long)[self.selectedPlayerArray count]);
         
-        [self.selectedPlayerFilterArray removeAllObjects];
+        
         
         //    NSLog(@"count2 %lu",(unsigned long)[self.selectedPlayerArray count]);
         
@@ -398,11 +398,22 @@
 
 }
    else{
-       UIAlertView *alter=[[UIAlertView alloc]initWithTitle:nil message:@"Please Select Captain and Wicketkeeper" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-       [alter show];
+       if(isSelectCaptainType == NO)
+       {
+           [self AlterviewMethod:@"Please Select Captain"];
+       }
+       else if(isSelectWKTKeeperType == NO)
+       {
+           [self AlterviewMethod:@"Please Select Wicketkeeper"];
+       }
    }
 }
-
+-(void) AlterviewMethod:(NSString *) AlterMsg
+{
+    
+    UIAlertView *alter=[[UIAlertView alloc]initWithTitle:nil message:AlterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alter show];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {

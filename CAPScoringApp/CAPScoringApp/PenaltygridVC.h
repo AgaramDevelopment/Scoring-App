@@ -9,7 +9,23 @@
 #import <UIKit/UIKit.h>
 #import "PenaltyGridTVC.h"
 #import "PenalityVC.h"
+
+@protocol PenaltygridVCDelegate <NSObject>
+@required
+
+- (void) ChangeVCBackBtnAction;
+@end
+
+
+
+
+
+
 @interface PenaltygridVC : UIViewController
+
+@property(nonatomic,strong) id <PenaltygridVCDelegate> delegate;
+
+
 
 @property (strong, nonatomic) IBOutlet PenaltyGridTVC *penalty_gridCell;
 

@@ -76,7 +76,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -206,6 +206,7 @@
     //BOOL isEditMode;
     BOOL isFreeHitBall;
     NSArray *ValidedMatchType;
+      FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
     
 }
 
@@ -285,7 +286,7 @@ EditModeVC * objEditModeVc;
     MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
     ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
     
-    NSLog(@"%@",self.matchTypeCode);
+    NSLog(@"self.matchTypeCode%@",self.matchTypeCode);
     
     AppealBatsmenArray=[[NSMutableArray alloc]init];
     
@@ -2391,13 +2392,15 @@ EditModeVC * objEditModeVc;
     else
     {
         if(_isEditMode){
-        
-//    [objEditModeVc insertAfterAndBeforeMode :self.editBallCode];
-//            fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-//            
-//            [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
             
         }
+        
+           // [objEditModeVc insertAfterAndBeforeMode :self.editBallCode];
+            
+//            fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
+//            [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode:self.editBallCode];
+            
+        
         
         
         NSNumber *temp = [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS];
@@ -2423,7 +2426,10 @@ EditModeVC * objEditModeVc;
          fetchSEPageLoadRecord.nonstrickerPlayerCode:
          fetchSEPageLoadRecord.currentBowlerPlayerCode:
          
-         fetchSEPageLoadRecord.BATTINGTEAMCODE :
+         ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString :
+           fetchSEPageLoadRecord.TEAMACODE] ?
+          fetchSEPageLoadRecord.TEAMAWICKETKEEPER :
+          fetchSEPageLoadRecord.TEAMBWICKETKEEPER):
          
          fetchSEPageLoadRecord.UMPIRE1CODE :
          fetchSEPageLoadRecord.UMPIRE2CODE :
@@ -7362,8 +7368,6 @@ EditModeVC * objEditModeVc;
     {
         
     
-    
-    
     if(inningsNo > 1)
     {
         ChangeTeamVC *objChanceTeamVC =[[ChangeTeamVC alloc]initWithNibName:@"ChangeTeamVC" bundle:nil];
@@ -7521,9 +7525,9 @@ EditModeVC * objEditModeVc;
        
        [self.view addSubview:fullview];
        EndSession *endSession = [[EndSession alloc]initWithNibName:@"EndSession" bundle:nil];
-       endSession.matchcode =self.matchCode;
-        endSession.compitionCode =self.competitionCode;
-        endSession.fetchpagedetail=fetchSEPageLoadRecord;
+//       endSession.matchcode =self.matchCode;
+//        endSession.compitionCode =self.competitionCode;
+//        endSession.fetchpagedetail=fetchSEPageLoadRecord;
        endSession.delegate=self;
        
        
@@ -7878,6 +7882,7 @@ EditModeVC * objEditModeVc;
     penaltygridvc.matchCode =self.matchCode;
     penaltygridvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
    penaltygridvc.teamcode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    penaltygridvc.delegate=self;
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -11923,6 +11928,11 @@ EditModeVC * objEditModeVc;
 -(void)RedirectScorEngin
 {
     fullview.hidden=YES;
+    ArchivesVC * objArchiveVC=[[ArchivesVC alloc]init];
+    objArchiveVC=(ArchivesVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    
+    objArchiveVC.CompitionCode=self.competitionCode;
+    [self.navigationController pushViewController:objArchiveVC animated:YES];
     // [self reloadBowlerTeamBatsmanDetails];
 }
 -(void) RedirectFollowOnPage

@@ -34,7 +34,7 @@
 
 
 @property(nonatomic,assign)NSNumber *INNINGSNOS;
-@property(nonatomic,assign)NSNumber *SESSIONNO;
+@property(nonatomic,retain)NSNumber *SESSIONNO;
 @property(nonatomic,assign)NSNumber *STARTOVERNO;
 
 @property(nonatomic,assign)NSNumber *NEWSTARTOVERNO;

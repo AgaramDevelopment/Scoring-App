@@ -36,6 +36,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EndInningsVC">
             <connections>
+                <outlet property="btn_delete" destination="f9i-Rv-zQ9" id="3dY-8S-4gy"/>
                 <outlet property="btn_save" destination="hpq-Gy-OqZ" id="cMx-sI-01f"/>
                 <outlet property="lbl_duration" destination="7Lh-04-QMq" id="1iS-pi-iCn"/>
                 <outlet property="lbl_innings" destination="4ns-Ui-PCA" id="NnI-tZ-EJI"/>
@@ -1337,9 +1338,6 @@
                                     <include reference="loq-Yn-QJp"/>
                                 </mask>
                             </variation>
-                            <connections>
-                                <action selector="btn_delete:" destination="-1" eventType="touchUpInside" id="fWY-GQ-HhU"/>
-                            </connections>
                         </button>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vw3-Zx-yTi">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>

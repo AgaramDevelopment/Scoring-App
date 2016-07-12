@@ -215,7 +215,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *SESSIONNO = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *SESSIONNO = [self getValueByNull:statement :0];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return SESSIONNO;
