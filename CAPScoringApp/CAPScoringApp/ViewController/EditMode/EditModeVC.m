@@ -685,6 +685,7 @@ BOOL isWicketSelected;
     ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
     scoreEngine.competitionCode=self.Comptitioncode;
     scoreEngine.matchCode = self.matchCode;
+    
     scoreEngine.isEditMode = YES;
     scoreEngine.editBallCode = objInningsBowlerDetailsRecord.ballCode;
     [self insertAfterAndBeforeMode:objInningsBowlerDetailsRecord.ballCode];
