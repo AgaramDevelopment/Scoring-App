@@ -34,7 +34,9 @@
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;
 @property(nonatomic,strong) NSString *teamcode;
+@property(nonatomic,strong) NSString *bowlingTeamCode;
 @property(nonatomic,strong) NSString *inningsNo;
+@property(nonatomic,strong) NSString *penaltyCode;
 @property(nonatomic,strong) NSMutableArray *resultarray;
 @property(nonatomic,strong)NSMutableArray *penaltyDetailsRecord;
 

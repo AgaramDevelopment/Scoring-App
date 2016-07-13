@@ -40,8 +40,8 @@
     
           [self.btn_revert addTarget:self action:@selector(btn_revert:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.btn_revert.backgroundColor=[UIColor colorWithRed:(109/255.0f) green:(91/255.0f) blue:(52/255.0f) alpha:1.0f];
-    [_btn_revert setUserInteractionEnabled:NO];
+//    self.btn_revert.backgroundColor=[UIColor colorWithRed:(109/255.0f) green:(91/255.0f) blue:(52/255.0f) alpha:1.0f];
+//    [_btn_revert setUserInteractionEnabled:NO];
     
 }
 
@@ -62,8 +62,9 @@
 
 - (IBAction)btn_revert:(id)sender {
     
-    [self UpdateDeclareInnings:COMPETITIONCODE :MATCHCODE :TEAMCODE :BOWLINGTEAMCODE :INNINGSNO :ISDECLARE];
-
+    [self UpdateDeclareInnings:COMPETITIONCODE :MATCHCODE :TEAMCODE :BOWLINGTEAMCODE :INNINGSNO :@"0"];
+    [self.delegate declareRevertBtnAction];
+    
 }
 
 - (IBAction)btn_back:(id)sender {
@@ -75,12 +76,14 @@
     
     
    
-    [self UpdateDeclareInnings:COMPETITIONCODE :MATCHCODE :TEAMCODE :BOWLINGTEAMCODE :INNINGSNO :ISDECLARE];
+    [self UpdateDeclareInnings:COMPETITIONCODE :MATCHCODE :TEAMCODE :BOWLINGTEAMCODE :INNINGSNO :@"1"];
       [self.delegate declareSaveBtnAction];
 
     
 
 }
+
+
 
 
 

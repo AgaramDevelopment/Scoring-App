@@ -8948,6 +8948,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     return UpdatePenaltyArray;
 }
 
+
 +(BOOL) GetUpdatePenaltyDetails:(NSString*) AWARDEDTOTEAMCODE:(NSNumber*) PENALTYRUNS:(NSString*) PENALTYTYPECODE :(NSString*) PENALTYREASONCODE:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO:(NSString*) PENALTYCODE{
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
