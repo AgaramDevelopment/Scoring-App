@@ -76,7 +76,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -453,15 +453,6 @@ EditModeVC * objEditModeVc;
     tableView.dataSource = self;
     tableView.delegate = self;
     
-    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    if(inningsno < 1)
-    {
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-        
-    }
-    else{
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-    }
     
     _View_Appeal.hidden=YES;
     _view_table_select.hidden=YES;
@@ -548,6 +539,17 @@ EditModeVC * objEditModeVc;
                                                              green:0
                                                               blue:0
                                                              alpha:0.36]];
+    
+    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
+    if(inningsno > 1)
+    {
+        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+        
+    }
+    else{
+        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    }
+
     
 //    FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
 //    fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
@@ -641,7 +643,7 @@ EditModeVC * objEditModeVc;
     
     NSMutableArray *bowlerArray = fetchSeBallCodeDetails.currentbowlerDetail;
     
-    //Current Stricker
+    //Current Striker
     if(strickerArray.count>0){
         GetSEStrikerDetailsForBallEvents *record = [strickerArray objectAtIndex:0];
         fetchSEPageLoadRecord.strickerPlayerName = record.PLAYERNAME;
@@ -654,7 +656,7 @@ EditModeVC * objEditModeVc;
         
     }
     
-    //Non Stricker Details
+    //Non Striker Details
     if(nonstrickerArray.count>0){
         
         
@@ -1137,7 +1139,7 @@ EditModeVC * objEditModeVc;
     }
     
     
-    //Stricker Details
+    //Striker Details
     self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
     self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
     self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
@@ -1146,7 +1148,7 @@ EditModeVC * objEditModeVc;
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
-    //Non Stricker Details
+    //Non Striker Details
     self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
     self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
     self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
@@ -1289,7 +1291,7 @@ EditModeVC * objEditModeVc;
     
     
     
-    //Stricker Details
+    //Striker Details
     self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
     self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
     self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
@@ -1299,7 +1301,7 @@ EditModeVC * objEditModeVc;
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
-    //Non Stricker Details
+    //Non Striker Details
     self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
     self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
     self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
@@ -2177,11 +2179,11 @@ EditModeVC * objEditModeVc;
                 [alter show];
                 [alter setTag:10001];
             }else if(fetchSEPageLoadRecord.strickerPlayerName==nil){
-                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select stricker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alter show];
                 [alter setTag:10002];
             }else if(fetchSEPageLoadRecord.nonstrickerPlayerName==nil){
-                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select non stricker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select non Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alter show];
                 [alter setTag:10003];
             }else{
@@ -2259,7 +2261,7 @@ EditModeVC * objEditModeVc;
             // [ self AssignControlValues :YES:@""];
                 
                 
-            //Check for stricker, non stricker and bower present
+            //Check for Striker, non Striker and bower present
                 
                 if(fetchSEPageLoadRecord.strickerPlayerName == nil){
                     [self btn_stricker_names:0];
@@ -2323,13 +2325,13 @@ EditModeVC * objEditModeVc;
                     {
                         if([self.lbl_stricker_name.text isEqualToString:@""] )
                         {
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Stricker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                             [altert show];
                             [alter setTag:2004];
                         }
                         else if ([self.lbl_nonstricker_name.text isEqualToString:@""])
                         {
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select nonStricker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select nonStriker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                             [altert show];
                             [alter setTag:2005];
                         }
@@ -2361,7 +2363,7 @@ EditModeVC * objEditModeVc;
         else {
             if([self.lbl_stricker_name.text isEqualToString:@""] )
             {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Stricker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                 [altert show];
                 [altert setTag:2007];
             }
@@ -2887,11 +2889,11 @@ EditModeVC * objEditModeVc;
             [alter show];
             [alter setTag:10001];
         }else if(fetchSEPageLoadRecord.strickerPlayerName==nil){
-            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select stricker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             [alter setTag:10002];
         }else if(fetchSEPageLoadRecord.nonstrickerPlayerName==nil){
-            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select non stricker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select non Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             [alter setTag:10003];
         }else{
@@ -2908,7 +2910,7 @@ EditModeVC * objEditModeVc;
     {
         [self overEVENT];
         
-        //Check for stricker, non stricker and bower present
+        //Check for Striker, non Striker and bower present
         
         if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
             [self btn_bowler_name:0];
@@ -3066,13 +3068,13 @@ EditModeVC * objEditModeVc;
             else{
                 if([self.lbl_stricker_name.text isEqualToString:@""] ||self.lbl_stricker_name.text == nil)
                 {
-                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Stricker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                     [altert show];
                     [altert setTag:1004];
                 }
                 else if ([self.lbl_nonstricker_name.text isEqualToString:@""])
                 {
-                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStricker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStriker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                     [altert show];
                     [altert setTag:1005];
                 }
@@ -7810,10 +7812,10 @@ EditModeVC * objEditModeVc;
     declareInning.COMPETITIONCODE = self.competitionCode;
     declareInning.MATCHCODE = self.matchCode;
     declareInning.INNINGSNO = fetchSEPageLoadRecord.INNINGSNO;
-    declareInning.TEAMNAME = fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    declareInning.TEAMCODE = fetchSEPageLoadRecord.BATTINGTEAMCODE;
     declareInning.BOWLINGTEAMCODE = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
     declareInning.ISDECLARE = @"1";
-    
+     declareInning.delegate =self;
     
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -8515,7 +8517,7 @@ EditModeVC * objEditModeVc;
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
     
-    //Stricker Details
+    //Striker Details
     self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
     self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
     self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
@@ -8524,7 +8526,7 @@ EditModeVC * objEditModeVc;
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
-    //Non Stricker Details
+    //Non Striker Details
     self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
     self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
     self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
@@ -12134,6 +12136,20 @@ EditModeVC * objEditModeVc;
     // Archivevc.matchCode=self.matchCode;
     Archivevc.CompitionCode=self.competitionCode;
     [self.navigationController pushViewController:Archivevc animated:YES];
+}
+
+-(void)declareSaveBtnAction{
+    [fullview removeFromSuperview];
+    ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
+    Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    // Archivevc.matchCode=self.matchCode;
+    Archivevc.CompitionCode=self.competitionCode;
+    [self.navigationController pushViewController:Archivevc animated:YES];
+}
+
+-(void)declareBackBtnAction{
+    
+    [fullview removeFromSuperview];
 }
 
 -(BOOL) checkBeatenOnSelect{

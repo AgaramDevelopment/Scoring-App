@@ -268,7 +268,7 @@ NSString *penaltytypereasons;
     NSString *penaltyTxtf = self.txt_penalityruns.text;
     NSString *penaltyreasonTxtf = self.lbl_penaltytype.text;
     if([penaltyTxtf isEqual:@""]){
-        [self showDialog:@"Please enter Penalty Runs." andTitle:@""];
+        [self showDialog:@"Please Enter Penalty Runs." andTitle:@""];
         return NO;
     }else if([penaltyreasonTxtf isEqual:@"Choose Penalty Type"]){
         [self showDialog:@"Please Choose  Penalty Type" andTitle:@""];
@@ -403,9 +403,10 @@ NSString *penaltytypereasons;
                      add.view.alpha = 1;
                  }
                                  completion:nil];
+                
             }
             else {
-                [self showDialog:@"Please enter Runs between 0 to 10" andTitle:@"Error"];
+                [self showDialog:@"Please Enter Runs Between 0 to 10" andTitle:@"Error"];
             }
         }
         
@@ -444,7 +445,7 @@ NSString *penaltytypereasons;
                              completion:nil];
             
         }else{
-            [self showDialog:@"Please enter Runs between 0 to 10" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Runs Between 0 to 10" andTitle:@"Error"];
         }
     }
 

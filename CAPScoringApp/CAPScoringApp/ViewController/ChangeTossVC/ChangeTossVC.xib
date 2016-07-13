@@ -19,8 +19,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ChangeTossVC">
             <connections>
+                <outlet property="Btn_Bowler" destination="zTo-Um-QHA" id="2di-zi-c9B"/>
                 <outlet property="Btn_FairEnd" destination="U5N-YY-3Tk" id="Iqi-HH-Ogs"/>
                 <outlet property="Btn_Nearend" destination="rV7-yY-CSb" id="R4d-Nh-1DS"/>
+                <outlet property="Btn_NonStriker" destination="2rh-PH-fbq" id="OcW-Kc-MFZ"/>
+                <outlet property="Btn_Striker" destination="0Be-v2-fmO" id="7sd-A8-49I"/>
                 <outlet property="Tbl_toss" destination="MT9-yW-UXu" id="KQj-8a-jlU"/>
                 <outlet property="lbl_Bowler" destination="rlB-DQ-sw6" id="Kog-ba-I1a"/>
                 <outlet property="lbl_ElectedTo" destination="8kQ-pE-rez" id="bRk-L9-3fW"/>
@@ -62,7 +65,7 @@
                                         <action selector="didClickBackBtnAction:" destination="-1" eventType="touchUpInside" id="VCc-Ml-CEG"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chance Toss" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYn-eM-rjK">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Toss" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kYn-eM-rjK">
                                     <rect key="frame" x="100" y="15" width="400" height="45"/>
                                     <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="30"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
