@@ -12,6 +12,7 @@
 
 - (void) declareBackBtnAction;
 - (void) declareSaveBtnAction;
+- (void) declareRevertBtnAction;
 
 @end
 

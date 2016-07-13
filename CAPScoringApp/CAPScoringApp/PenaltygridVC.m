@@ -22,6 +22,7 @@
 @synthesize competitionCode;
 @synthesize teamcode;
 @synthesize inningsNo;
+@synthesize penaltyCode;
 
 
 
@@ -96,6 +97,8 @@
     add.competitionCode=competitionCode;
     add.matchCode=matchCode;
     add.inningsNo=inningsNo;
+    add.penaltyCode = penaltyCode;
+    
     
     [self addChildViewController:add];
     add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);

@@ -7515,7 +7515,6 @@ EditModeVC * objEditModeVc;
 {
     
     
-    
     EndInningsVC *endInning = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
     endInning.MATCHCODE=self.matchCode;
     endInning.delegate =self;
@@ -7814,7 +7813,7 @@ EditModeVC * objEditModeVc;
     declareInning.INNINGSNO = fetchSEPageLoadRecord.INNINGSNO;
     declareInning.TEAMCODE = fetchSEPageLoadRecord.BATTINGTEAMCODE;
     declareInning.BOWLINGTEAMCODE = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
-    declareInning.ISDECLARE = @"1";
+
      declareInning.delegate =self;
     
     
@@ -7957,10 +7956,13 @@ EditModeVC * objEditModeVc;
 -(void)Penalty
 {
     penaltygridvc = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
+   
     penaltygridvc.competitionCode=self.competitionCode;
     penaltygridvc.matchCode =self.matchCode;
     penaltygridvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
-   penaltygridvc.teamcode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    penaltygridvc.teamcode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    penaltygridvc.bowlingTeamCode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+    
     penaltygridvc.delegate=self;
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
@@ -11952,7 +11954,8 @@ EditModeVC * objEditModeVc;
     
     penalityVc.matchCode=self.matchCode;
     penalityVc.competitionCode=self.competitionCode;
-    
+    penalityVc.teamcode = fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    penalityVc.bowlingTeamCode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
     [self.view addSubview:penalityVc.view];
     
     
@@ -12162,6 +12165,14 @@ EditModeVC * objEditModeVc;
     [fullview removeFromSuperview];
 }
 
+-(void)declareRevertBtnAction{
+    [fullview removeFromSuperview];
+    ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
+    Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    // Archivevc.matchCode=self.matchCode;
+    Archivevc.CompitionCode=self.competitionCode;
+    [self.navigationController pushViewController:Archivevc animated:YES];
+}
 -(BOOL) checkBeatenOnSelect{
 
         if (_ballEventRecord.objIsbeaten.intValue == 0)
