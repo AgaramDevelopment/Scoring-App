@@ -590,7 +590,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     [DBManagerChangeToss UpdateMatchStatusForToss : COMPETITIONCODE : MATCHCODE];
     
-    [InitializeInningsScoreBoardRecord InitializeInningsScoreBoard :COMPETITIONCODE : MATCHCODE :BATTINGTEAMCODE :BOWLINGTEAMCODE : MaxInningsNumber : STRIKERCODE : NONSTRIKERCODE :
+    
+[InitializeInningsScoreBoardRecord InitializeInningsScoreBoard :COMPETITIONCODE : MATCHCODE :BATTINGTEAMCODE :BOWLINGTEAMCODE : MaxInningsNumber : STRIKERCODE : NONSTRIKERCODE :
      BOWLERCODE : [NSNumber numberWithInt:0]];
 }
 //SP_INSERTTOSSDETAILS

@@ -7694,7 +7694,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
             const char *dbPath = [databasePath UTF8String];
             if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
             {
-                NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALL.BALLCODE,BWLR.PLAYERNAME BOWLER, STRKR.PLAYERNAME STRIKER, NSTRKR.PLAYERNAME NONSTRIKER,BT.BOWLTYPE BOWLTYPE, ST.SHOTNAME AS SHOTTYPE, BALL.TOTALRUNS, BALL.TOTALEXTRAS,BALL.OVERNO,BALL.BALLNO,BALL.BALLCOUNT,BALL.ISLEGALBALL,BALL.ISFOUR,BALL.ISSIX,BALL.RUNS,BALL.OVERTHROW,BALL.TOTALRUNS,BALL.WIDE,BALL.NOBALL,BALL.BYES,BALL.LEGBYES,BALL.TOTALEXTRAS,WE.WICKETNO,WE.WICKETTYPE, PTY.PENALTYRUNS, PTY.PENALTYTYPECODE FROM BALLEVENTS BALL INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE = BALL.COMPETITIONCODE AND MR.MATCHCODE = BALL.MATCHCODE INNER JOIN TEAMMASTER TM ON BALL.TEAMCODE = TM.TEAMCODE INNER JOIN PLAYERMASTER BWLR ON BALL.BOWLERCODE=BWLR.PLAYERCODE INNER JOIN PLAYERMASTER STRKR ON BALL.STRIKERCODE = STRKR.PLAYERCODE INNER JOIN PLAYERMASTER NSTRKR ON BALL.NONSTRIKERCODE = NSTRKR.PLAYERCODE LEFT JOIN BOWLTYPE BT ON BALL.BOWLTYPE = BT.BOWLTYPECODE LEFT JOIN SHOTTYPE ST ON BALL.SHOTTYPE = ST.SHOTCODE LEFT JOIN WICKETEVENTS WE ON BALL.BALLCODE = WE.BALLCODE AND WE.ISWICKET = 1 LEFT JOIN PENALTYDETAILS PTY ON BALL.BALLCODE = PTY.BALLCODE WHERE  BALL.COMPETITIONCODE='%@'AND BALL.MATCHCODE='%@'AND BALL.INNINGSNO='%@'ORDER BY BALL.COMPETITIONCODE,BALL.MATCHCODE,BALL.INNINGSNO, BALL.OVERNO, BALL.BALLNO, BALL.BALLCOUNT",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+                NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALL.BALLCODE,BWLR.PLAYERNAME BOWLER, STRKR.PLAYERNAME STRIKER, NSTRKR.PLAYERNAME NONSTRIKER,BT.BOWLTYPE BOWLTYPE, ST.SHOTNAME AS SHOTTYPE, BALL.TOTALRUNS, BALL.TOTALEXTRAS,BALL.OVERNO,BALL.BALLNO,BALL.BALLCOUNT,BALL.ISLEGALBALL,BALL.ISFOUR,BALL.ISSIX,BALL.RUNS,BALL.OVERTHROW,BALL.TOTALRUNS,BALL.WIDE,BALL.NOBALL,BALL.BYES,BALL.LEGBYES,IFNULL(WE.WICKETNO,0),WE.WICKETTYPE, PTY.PENALTYRUNS, PTY.PENALTYTYPECODE,BALL.GRANDTOTAL FROM BALLEVENTS BALL INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE = BALL.COMPETITIONCODE AND MR.MATCHCODE = BALL.MATCHCODE INNER JOIN TEAMMASTER TM ON BALL.TEAMCODE = TM.TEAMCODE INNER JOIN PLAYERMASTER BWLR ON BALL.BOWLERCODE=BWLR.PLAYERCODE INNER JOIN PLAYERMASTER STRKR ON BALL.STRIKERCODE = STRKR.PLAYERCODE INNER JOIN PLAYERMASTER NSTRKR ON BALL.NONSTRIKERCODE = NSTRKR.PLAYERCODE LEFT JOIN BOWLTYPE BT ON BALL.BOWLTYPE = BT.BOWLTYPECODE LEFT JOIN SHOTTYPE ST ON BALL.SHOTTYPE = ST.SHOTCODE LEFT JOIN WICKETEVENTS WE ON BALL.BALLCODE = WE.BALLCODE AND WE.ISWICKET = 1 LEFT JOIN PENALTYDETAILS PTY ON BALL.BALLCODE = PTY.BALLCODE WHERE  BALL.COMPETITIONCODE='%@'AND BALL.MATCHCODE='%@'AND BALL.INNINGSNO='%@'ORDER BY BALL.COMPETITIONCODE,BALL.MATCHCODE,BALL.INNINGSNO, BALL.OVERNO, BALL.BALLNO, BALL.BALLCOUNT",COMPETITIONCODE,MATCHCODE,INNINGSNO];
                 
                 const char *update_stmt = [updateSQL UTF8String];
                 sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
@@ -7729,6 +7729,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                         objInningsBowlerDetailsRecord.WicketType=[self getValueByNull:statement :22];
                         objInningsBowlerDetailsRecord.penaltyRuns=[self getValueByNull:statement :23];
                         objInningsBowlerDetailsRecord.penaltytypeCode=[self getValueByNull:statement :24];
+                        objInningsBowlerDetailsRecord.grandTotal=[self getValueByNull:statement :25];
                         
                         [BOWLERDETAILS addObject:objInningsBowlerDetailsRecord];
                     }
@@ -9339,6 +9340,155 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     return @"0";
 }
 
+
++(BOOL)checkpowerplay: (NSString *) STARTOVER ENDOVER:(NSString*) ENDOVER MATCHCODE:(NSString*) MATCHCODE INNINGSNO:(NSString*) INNINGSNO{
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYCODE FROM POWERPLAY WHERE (('%@'<= STARTOVER AND '%@' >= STARTOVER) OR ('%@'<= ENDOVER AND '%@'>= ENDOVER) OR ('%@'>=STARTOVER AND '%@'<= ENDOVER))AND  MATCHCODE='%@' AND INNINGSNO='%@'  AND RECORDSTATUS='MSC001' ",STARTOVER,ENDOVER,STARTOVER,ENDOVER,STARTOVER,ENDOVER,MATCHCODE,INNINGSNO];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                return YES;
+                
+            }
+        }
+        
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return NO;
+}
+
++(BOOL)getpowerplaytype:(NSString*) MATCHCODE INNINGSNO:(NSString*) INNINGSNO POWERPLAYTYPE:(NSString*) POWERPLAYTYPE{
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYTYPE FROM POWERPLAY  WHERE MATCHCODE='%@' AND INNINGSNO='%@' AND POWERPLAYTYPE='%@' AND RECORDSTATUS ='MSC001'",MATCHCODE,INNINGSNO,POWERPLAYTYPE];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                return YES;
+                
+            }
+        }
+        
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return NO;
+}
+
+//+(NSMutableArray *)getpowerplaytype:(NSString*) MATCHCODE INNINGSNO:(NSString*) INNINGSNO POWERPLAYTYPE:(NSString*) POWERPLAYTYPE{
+//    NSMutableArray *powerplayArray=[[NSMutableArray alloc]init];
+//    int retVal;
+//    NSString *dbPath = [self getDBPath];
+//    sqlite3 *dataBase;
+//    const char *stmt;
+//    sqlite3_stmt *statement;
+//    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+//    if(retVal !=0){
+//    }
+//    
+//    NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYTYPE FROM POWERPLAY  WHERE MATCHODE='%@' AND INNINGSNO='%@' AND POWERPLAYTYPE='%@ AND'RECORDSTATUS ='MSC001'",MATCHCODE,INNINGSNO,POWERPLAYTYPE];
+//    stmt=[query UTF8String];
+//    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+//    {
+//        while(sqlite3_step(statement)==SQLITE_ROW){
+//            PowerPlayRecord *record=[[PowerPlayRecord alloc]init];
+//            //            record.id=(int)sqlite3_column_int(statement, 0);
+//            record.powerplaytype=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+//            [powerplayArray addObject:record];
+//            
+//        }
+//    }
+//    
+//    
+//    sqlite3_finalize(statement);
+//    sqlite3_close(dataBase);
+//    return powerplayArray;
+//    
+//}
++(BOOL)checkpowerplayforupdate: (NSString *) STARTOVER ENDOVER:(NSString*) ENDOVER MATCHCODE:(NSString*) MATCHCODE INNINGSNO:(NSString*) INNINGSNO POWERPLAYCODE:(NSString*) POWERPLAYCODE{
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT * FROM POWERPLAY WHERE (('%@'<= STARTOVER AND '%@' >= STARTOVER) OR ('%@'<= ENDOVER AND '%@'>= ENDOVER) OR ('%@'>=STARTOVER AND '%@'<= ENDOVER))AND  MATCHCODE='%@' AND INNINGSNO='%@'AND POWERPLAYCODE<>'%@'  AND RECORDSTATUS='MSC001' ",STARTOVER,ENDOVER,STARTOVER,ENDOVER,STARTOVER,ENDOVER,MATCHCODE,INNINGSNO,POWERPLAYCODE];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                return YES;
+                
+            }
+        }
+        
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return NO;
+}
++(NSMutableArray *)getpowerplaytypeforupdate:(NSString*) MATCHCODE INNINGSNO:(NSString*) INNINGSNO POWERPLAYTYPE:(NSString*) POWERPLAYTYPE POWERPLAYCODE:(NSString*) POWERPLAYCODE{
+    NSMutableArray *powerplayArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYTYPE FROM POWERPLAY  WHERE MATCHCODE='%@' AND INNINGSNO='%@' AND POWERPLAYTYPE='%@' AND POWERPLAYCODE<>'%@' AND RECORDSTATUS ='MSC001'",MATCHCODE,INNINGSNO,POWERPLAYTYPE,POWERPLAYCODE];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            PowerPlayRecord *record=[[PowerPlayRecord alloc]init];
+            record.powerplaytype=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            [powerplayArray addObject:record];
+            
+        }
+    }
+    
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return powerplayArray;
+    
+}
 
 
 @end

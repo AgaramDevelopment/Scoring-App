@@ -40,6 +40,7 @@
 
 @property (strong,nonatomic) NSString * OverballCount;
 
+@property (strong,nonatomic) NSString * grandTotal;
 
 
 

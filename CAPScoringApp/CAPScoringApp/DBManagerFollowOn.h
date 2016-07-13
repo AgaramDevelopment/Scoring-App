@@ -29,25 +29,25 @@
 
 
 //SP_UPDATEFOLLOWON----------------------------------------------------------------------
-+(NSString*)  GetBallCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO;
++(BOOL)  GetBallCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO;
 
 +(NSString*) GetTeamNamesForUpdateFollowOn:(NSNumber*) TEAMNAME;
 
-+(NSString*) GetTotalRunsForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO;
++(NSString*) GetTotalRunsForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO;
 
-+(NSString*)  GetOverNoForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO;
++(NSString*)  GetOverNoForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO;
 
 +(NSString *) GetOverStatusForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO:(NSString*) OVERNO;
 
 +(NSString *) GetBowlingTeamCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE:(NSString*) TEAMNAME: (NSString*) MATCHCODE;
 
-+(NSString*)  GetWicketForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO;
++(NSString*)  GetWicketForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO;
 
 +(BOOL) UpdatInningsEventForInsertScoreBoard:(NSString*) TEAMNAME:(NSString*) TOTALRUN :(NSNumber*) OVERBALLNO	:(NSString*) WICKETS : (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO :(NSString*) TEAMNAME;
 
-+(NSString*) GetTeamCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO;
++(BOOL) GetTeamCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO;
 
-+(BOOL) InsertInningsEventForInsertScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO :(NSString*) STRIKER:(NSString*) NONSTRIKER :(NSString*) BOWLER;
++(BOOL) InsertInningsEventForInsertScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO :(NSString*) STRIKER:(NSString*) NONSTRIKER :(NSString*) BOWLER;
 
 +(BOOL)UpdateInningsEventInStrickerForInsertScoreBoard:(NSString*) STRIKER:(NSString*) NONSTRIKER :(NSString*) BOWLERCODE:(NSString*) TEAMCODE: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO;
 
@@ -55,5 +55,5 @@
 
 +(BOOL) UpdateInningsEventForDeleteFollowOn: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO;
 +(BOOL) DeleteInningsEventForDeleteFollowOn: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO;
-
++(BOOL)UpdateInningsEventForInsertScoreBoard:(NSString*) TEAMCODE:(NSString *)TOTALRUNS:(NSString*)TOTALOVERS:(NSString *)TOTALWICKETS:(NSString *) INNINGSSTATUS:(NSString*) ISFOLLOWON:(NSString *)COMPETITIONCODE:(NSString *)MATCHCODE:(NSString*)INNINGSNO;
 @end

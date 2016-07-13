@@ -11,26 +11,26 @@
 @interface InitializeInningsScoreBoardRecord : NSObject
 
 
-@property(strong,nonatomic)NSString *COMPETITIONCODE;
-@property(strong,nonatomic)NSString *MATCHCODE;
-@property(strong,nonatomic)NSString *BATTINGTEAMCODE;
-@property(strong,nonatomic)NSString *BOWLINGTEAMCODE;
-@property(nonatomic,assign)NSNumber *INNINGSNO;
-@property(strong,nonatomic)NSString *STRIKERCODE;
-@property(strong,nonatomic)NSString *NONSTRIKERCODE;
-@property(strong,nonatomic)NSString *BOWLERCODE;
+@property(strong,nonatomic)  NSString *COMPETITIONCODE;
+@property(strong,nonatomic)  NSString *MATCHCODE;
+@property(strong,nonatomic)  NSString *BATTINGTEAMCODE;
+@property(strong,nonatomic)  NSString *BOWLINGTEAMCODE;
+@property(nonatomic,assign)  NSNumber *INNINGSNO;
+@property(strong,nonatomic)  NSString *STRIKERCODE;
+@property(strong,nonatomic)  NSString *NONSTRIKERCODE;
+@property(strong,nonatomic)  NSString *BOWLERCODE;
 @property (nonatomic,strong) NSNumber * ISINNINGSREVERT;
-@property(nonatomic,assign)NSNumber *STRIKERPOSITIONNO;
-@property(nonatomic,assign)NSNumber *NONSTRIKERPOSITIONNO;
-@property(nonatomic,assign)NSNumber *BOWLERPOSITIONNO;
+@property(nonatomic,assign)  NSNumber *STRIKERPOSITIONNO;
+@property(nonatomic,assign)  NSNumber *NONSTRIKERPOSITIONNO;
+@property(nonatomic,assign  )NSNumber *BOWLERPOSITIONNO;
 
 
 
 
 
--(void) UpdatePlayers:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)INNINGSNO:(NSString*)BATTINGTEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSString *)STRIKERCODE:(NSString *)NONSTRIKERCODE:(NSString *)BOWLERCODE;
++(void) UpdatePlayers:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)INNINGSNO:(NSString*)BATTINGTEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSString *)STRIKERCODE:(NSString *)NONSTRIKERCODE:(NSString *)BOWLERCODE;
 
-+(void) InitializeInningsScoreBoard:(NSString *)COMPETITIONCODE :(NSString*)MATCHCODE :(NSString*)BATTINGTEAMCODE :(NSString*)BOWLINGTEAMCODE : (NSNumber*)INNINGSNO : (NSString*)STRIKERCODE : 	(NSString*)NONSTRIKERCODE :
++(void) InitializeInningsScoreBoard :(NSString *) COMPETITIONCODE :(NSString*)MATCHCODE :(NSString*)BATTINGTEAMCODE :(NSString*)BOWLINGTEAMCODE : (NSNumber*)INNINGSNO : (NSString*)STRIKERCODE : 	(NSString*)NONSTRIKERCODE :
 (NSString*)BOWLERCODE : (NSNumber*) ISINNINGSREVERT;
 
 @end

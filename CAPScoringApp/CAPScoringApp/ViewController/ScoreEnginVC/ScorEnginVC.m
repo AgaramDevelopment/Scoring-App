@@ -2210,7 +2210,8 @@ EditModeVC * objEditModeVc;
                 //show free hit
                 
                 if(fetchSEPageLoadRecord.ISFREEHIT.intValue==1){
-                    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Alert", nil];
+                     UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit Ball" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Alert", nil];
                     [alter show];
                     [alter setTag:10200];
                     
@@ -2958,7 +2959,7 @@ EditModeVC * objEditModeVc;
     NSLog(@"matchtype=%@",self.matchTypeCode);
     NSString * Matchtype;
     // NSArray * MuliteDayMatchtype ;
-    NSArray  * ValidedMatchType;
+    //NSArray  * ValidedMatchType;
     NSString *matchoversvalue= fetchSEPageLoadRecord.MATCHTYPE;
     NSInteger currentover =fetchSEPageLoadRecord.BATTEAMOVERS;
     int overNoint =(int)currentover;
@@ -3100,7 +3101,9 @@ EditModeVC * objEditModeVc;
                             overStatus=@"1";
                             [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code :[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode];
                             [self reloadBowlerTeamBatsmanDetails];
-                            if(![ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&[MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
+//                            if(![ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&[MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
+//                                
+                            if(![fetchSEPageLoadRecord.ISOTHERSMATCHTYPE isEqual:@"MSC117"] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
                             {
                                 UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings Completed " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                                 [altert show];
@@ -7153,9 +7156,9 @@ EditModeVC * objEditModeVc;
     }else if(tableView == currentBowlersTableView){
         
         BowlerEvent *bowlEvent = [fetchSEPageLoadRecord.getBowlingTeamPlayers objectAtIndex:indexPath.row];
-        InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
+        //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
         
-        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode :bowlEvent.BowlerCode];
+        [InitializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode :bowlEvent.BowlerCode];
         
         //        [DBManager updateBOWLERCODE:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO BOWLERCODE:bowlEvent.BowlerCode];
         //
@@ -7167,10 +7170,10 @@ EditModeVC * objEditModeVc;
         
     }else if(tableView == nonstrickerTableView){
         SelectPlayerRecord *selectPlayer = [nonStrickerList objectAtIndex:indexPath.row];
-        InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
+        //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
         
         
-        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE : fetchSEPageLoadRecord.strickerPlayerCode:selectPlayer.playerCode   :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+        [InitializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE : fetchSEPageLoadRecord.strickerPlayerCode:selectPlayer.playerCode   :fetchSEPageLoadRecord.currentBowlerPlayerCode];
         //        [DBManager updateNONSTRIKERCODE:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO NONSTRIKERCODE:selectPlayer.playerCode];
         isBowlerOpen = NO;
         isNONStrickerOpen = NO;
@@ -7180,9 +7183,9 @@ EditModeVC * objEditModeVc;
         
     }else if(tableView == strickerTableView){
         SelectPlayerRecord *selectPlayer = [strickerList objectAtIndex:indexPath.row];
-        InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
+        //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
         
-        [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :selectPlayer.playerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+        [InitializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :selectPlayer.playerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode];
         
         
         
@@ -7513,7 +7516,7 @@ EditModeVC * objEditModeVc;
     
     
     EndInningsVC *endInning = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
-    
+    endInning.MATCHCODE=self.matchCode;
     endInning.delegate =self;
     // endInnings = [[EndInnings alloc]init];
     
@@ -7692,8 +7695,8 @@ EditModeVC * objEditModeVc;
 {
     if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
     {
-        int inningscount =fetchSEPageLoadRecord.INNINGSNO;
-        if(inningscount > 2)
+        int inningscount =[fetchSEPageLoadRecord.INNINGSNO intValue];
+        if(inningscount > 1)
         {
             FollowOn *objFollowOn =[[FollowOn alloc]initWithNibName:@"FollowOn" bundle:nil];
             objFollowOn.compitionCode=self.competitionCode;
@@ -7702,7 +7705,7 @@ EditModeVC * objEditModeVc;
             objFollowOn.battingTeamCode =fetchSEPageLoadRecord.BATTINGTEAMCODE;
             objFollowOn.BowlingTeamCode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
             objFollowOn.inningsno       = fetchSEPageLoadRecord.INNINGSNO;
-            
+            objFollowOn. inningsStatus      =fetchSEPageLoadRecord.INNINGSSTATUS;
             objFollowOn.delegate =self;
             
             
@@ -8594,6 +8597,27 @@ EditModeVC * objEditModeVc;
     _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
     
     
+    if(!self.isEditMode)
+    {
+        if((int)fetchSEPageLoadRecord.ISOVERCOMPLETE ==0)
+        {
+            [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
+            self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
+            
+            self.btn_StartBall.userInteractionEnabled=YES;
+            
+            
+        }
+        else{
+            
+            [self.btn_StartOver setTitle:@"START OVER" forState:UIControlStateNormal];
+            
+            self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+            self.btn_StartOver.userInteractionEnabled=YES;
+            
+        }
+    }
+    
     
     if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
         
@@ -8633,26 +8657,7 @@ EditModeVC * objEditModeVc;
         
         _lbl_runs_required.text = runsReqForBalls;
         
-        if(!self.isEditMode)
-        {
-            if((int)fetchSEPageLoadRecord.ISOVERCOMPLETE ==0)
-            {
-                [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
-                self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
-                
-                self.btn_StartBall.userInteractionEnabled=YES;
-                
-                
-            }
-            else{
-                
-                [self.btn_StartOver setTitle:@"START OVER" forState:UIControlStateNormal];
-                
-                self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
-                self.btn_StartOver.userInteractionEnabled=YES;
-                
-            }
-        }
+        
         if(self.img_firstIngsTeamName.image !=@"") //battingteamlogo
         {
             [self teamLogo];
@@ -8693,10 +8698,10 @@ EditModeVC * objEditModeVc;
     
 }
 - (IBAction)btn_swap:(id)sender {
-    InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
+    //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
     
     
-    [initializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.strickerPlayerCode  :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+    [InitializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.strickerPlayerCode  :fetchSEPageLoadRecord.currentBowlerPlayerCode];
     
     isBowlerOpen = NO;
     isNONStrickerOpen = NO;
@@ -12017,7 +12022,7 @@ EditModeVC * objEditModeVc;
 -(void) RedirectFollowOnPage
 {
     fullview.hidden=YES;
-    //[self reloadBowlerTeamBatsmanDetails];
+   [self reloadBowlerTeamBatsmanDetails];
 }
 - (IBAction)SyncData_btn:(id)sender {
     
@@ -12124,6 +12129,16 @@ EditModeVC * objEditModeVc;
 -(void) EndInningsBackBtnAction{
     
     [fullview removeFromSuperview];
+    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
+    if(inningsno > 1)
+    {
+        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+        
+    }
+    else{
+        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    }
+    [self.sideviewtable reloadData];
 }
 
 -(void) EndInningsSaveBtnAction{
