@@ -2957,7 +2957,7 @@ EditModeVC * objEditModeVc;
     NSLog(@"matchtype=%@",self.matchTypeCode);
     NSString * Matchtype;
     // NSArray * MuliteDayMatchtype ;
-    NSArray  * ValidedMatchType;
+    //NSArray  * ValidedMatchType;
     NSString *matchoversvalue= fetchSEPageLoadRecord.MATCHTYPE;
     NSInteger currentover =fetchSEPageLoadRecord.BATTEAMOVERS;
     int overNoint =(int)currentover;
@@ -3099,7 +3099,9 @@ EditModeVC * objEditModeVc;
                             overStatus=@"1";
                             [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code :[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode];
                             [self reloadBowlerTeamBatsmanDetails];
-                            if(![ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&[MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
+//                            if(![ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&[MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
+//                                
+                            if(![fetchSEPageLoadRecord.ISOTHERSMATCHTYPE isEqual:@"MSC117"] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
                             {
                                 UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings Completed " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                                 [altert show];
@@ -8591,6 +8593,27 @@ EditModeVC * objEditModeVc;
     _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
     
     
+    if(!self.isEditMode)
+    {
+        if((int)fetchSEPageLoadRecord.ISOVERCOMPLETE ==0)
+        {
+            [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
+            self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
+            
+            self.btn_StartBall.userInteractionEnabled=YES;
+            
+            
+        }
+        else{
+            
+            [self.btn_StartOver setTitle:@"START OVER" forState:UIControlStateNormal];
+            
+            self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+            self.btn_StartOver.userInteractionEnabled=YES;
+            
+        }
+    }
+    
     
     if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
         
@@ -8630,26 +8653,7 @@ EditModeVC * objEditModeVc;
         
         _lbl_runs_required.text = runsReqForBalls;
         
-        if(!self.isEditMode)
-        {
-            if((int)fetchSEPageLoadRecord.ISOVERCOMPLETE ==0)
-            {
-                [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
-                self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
-                
-                self.btn_StartBall.userInteractionEnabled=YES;
-                
-                
-            }
-            else{
-                
-                [self.btn_StartOver setTitle:@"START OVER" forState:UIControlStateNormal];
-                
-                self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
-                self.btn_StartOver.userInteractionEnabled=YES;
-                
-            }
-        }
+        
         if(self.img_firstIngsTeamName.image !=@"") //battingteamlogo
         {
             [self teamLogo];

@@ -81,6 +81,9 @@ BOOL isWicketSelected;
     NSMutableArray * objissix;
     NSMutableArray * objWicketno;
     NSMutableArray * objwicketType;
+    NSMutableArray * objGrandTotal;
+    NSMutableArray * objBallNo;
+    
     int EachoverWicketCount;
     UIButton *btn_Run;
     NSInteger ballCodeIndex;
@@ -271,7 +274,7 @@ BOOL isWicketSelected;
     cell.lbl_playername.text =objOversorderRecord.BowlerName;
     
    // cell.lbl_overs.text= objOversorderRecord.OversOrder;
-    cell.lbl_overs.text = [NSString stringWithFormat:@"%d",[objInningsBowlerDetailsRecord.OverNo intValue]+1];
+    cell.lbl_overs.text = [NSString stringWithFormat:@"%d",[objOversorderRecord.OversOrder intValue]+1];
     NSString *strCurrentRow=[NSString stringWithFormat:@"%d",currentRow];
     objoverballCount =[[NSMutableArray alloc]init];
     eachoverRun =[[NSMutableArray alloc]init];
@@ -285,6 +288,10 @@ BOOL isWicketSelected;
     objWicketno     =[[NSMutableArray alloc]init];
     objwicketType     =[[NSMutableArray alloc]init];
     objnoballArray   =[[NSMutableArray alloc]init];
+    objGrandTotal   =[[NSMutableArray alloc]init];
+    objBallNo   =[[NSMutableArray alloc]init];
+
+
     if (cell != nil) {
         
         
@@ -303,6 +310,8 @@ BOOL isWicketSelected;
             NSString * objWicketNo =objInningsBowlerDetailsRecord.WicketNo;
             NSString * objWicketType =objInningsBowlerDetailsRecord.WicketType;
             NSString  * objNoBall    =objInningsBowlerDetailsRecord.noBall;
+            NSString  * grandTotal    =objInningsBowlerDetailsRecord.grandTotal;
+            NSString  * ballNo    =objInningsBowlerDetailsRecord.ballNo;
             
             if([strCurrentRow isEqualToString:objInningsBowlerDetailsRecord.OverNo])
             {
@@ -317,6 +326,9 @@ BOOL isWicketSelected;
                 [objWicketno addObject:objWicketNo];
                 [objwicketType addObject:objWicketType];
                 [objnoballArray addObject:objNoBall];
+                [objGrandTotal addObject:grandTotal];
+                [objBallNo addObject:ballNo];
+                
             }
         }
         for (UILabel *view in cell.view_main.subviews) {
@@ -336,7 +348,7 @@ BOOL isWicketSelected;
             InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:j];
             
 //            nameLabel .text=[NSString stringWithFormat:@"%@.%@",[@(currentRow) stringValue],[@(j+1) stringValue]];
-            nameLabel .text=[NSString stringWithFormat:@"%@.%@",objInningsBowlerDetailsRecord.OverNo,objInningsBowlerDetailsRecord.ballNo];
+            nameLabel .text=[NSString stringWithFormat:@"%@.%@",objOversorderRecord.OversOrder,[objBallNo objectAtIndex:j]];
             
             nameLabel.textColor=[UIColor whiteColor];
             
@@ -384,6 +396,8 @@ BOOL isWicketSelected;
         NSString * objisSix =[objissix objectAtIndex:i];
         NSString * objWicketNo =[objWicketno objectAtIndex:i];
         NSString * objWicketType =[objwicketType objectAtIndex:i];
+        NSString * grandTotal =[objGrandTotal objectAtIndex:i];
+        
         
         NSMutableDictionary * dicAddbowlerdetails=[[NSMutableDictionary alloc]init];
         int overThrow = [objoverThrow intValue];
@@ -544,7 +558,7 @@ BOOL isWicketSelected;
                 content =[content stringByAppendingString: [[dicAddbowlerdetails objectForKey:kvpItem] stringByAppendingString:@""]];
             }   //kvpItem.Value + " ";
         }
-        totalRun  =[objInningsBowlerDetailsRecord.grandTotal intValue]+totalRun;
+        totalRun  =[grandTotal intValue]+totalRun;
         
 //        if(runvalue != @"")
 //        {
