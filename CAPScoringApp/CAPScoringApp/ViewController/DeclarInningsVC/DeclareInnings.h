@@ -7,19 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@protocol DeclarInningsDelegate <NSObject>
+@protocol DeclareInningsVCDelagate <NSObject>
 @required
-- (void) ChangeVCBackBtnAction;
+
+- (void) declareBackBtnAction;
+- (void) declareSaveBtnAction;
+
 @end
 
 
 @interface DeclareInnings : UIViewController
 
-@property(nonatomic,strong) id <DeclarInningsDelegate> delegate;
-
-
-
+@property(nonatomic,strong) id <DeclareInningsVCDelagate> delegate;
 @property (strong,nonatomic) NSString *TEAMNAME;
 @property (strong,nonatomic) NSString *OVERNO;
 @property (strong,nonatomic) NSString *BALLNO;
@@ -38,8 +37,18 @@
 
 @property (strong,nonatomic) IBOutlet UIButton *Btn_back;
 
+@property (weak, nonatomic) IBOutlet UIButton *btn_revert;
+
+
+- (IBAction)btn_revert:(id)sender;
+
+- (IBAction)btn_back:(id)sender;
+
 - (IBAction)btn_yes:(id)sender;
 
 -(void) UpdateDeclareInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE :(NSString*)TEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)INNINGSNO:(NSString*)ISDECLARE;
+
+
+
 
 @end
