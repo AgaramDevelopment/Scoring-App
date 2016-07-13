@@ -7331,6 +7331,7 @@ EditModeVC * objEditModeVc;
                          completion:nil];
         [self addChildViewController:objChanceTeamVC];
         [fullview addSubview:objChanceTeamVC.view];
+        
     }
     else if (inningsNo == 1){
        
@@ -7362,6 +7363,7 @@ EditModeVC * objEditModeVc;
                              completion:nil];
             [self addChildViewController:objChangeTossVC];
             [fullview addSubview:objChangeTossVC.view];
+            
         }
     }
     }
@@ -11867,7 +11869,7 @@ EditModeVC * objEditModeVc;
     
     objArchiveVC.CompitionCode=self.competitionCode;
     [self.navigationController pushViewController:objArchiveVC animated:YES];
-    // [self reloadBowlerTeamBatsmanDetails];
+    [self reloadBowlerTeamBatsmanDetails];
 }
 -(void) RedirectFollowOnPage
 {
