@@ -17,6 +17,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DeclareInnings">
             <connections>
+                <outlet property="Btn_back" destination="aep-C2-R8X" id="g96-mT-phV"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -248,6 +249,9 @@
                                     <include reference="SZd-9M-tLD"/>
                                 </mask>
                             </variation>
+                            <connections>
+                                <action selector="didClickBackButtonAction:" destination="-1" eventType="touchUpInside" id="BeP-zk-MpQ"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.1960784314" green="0.27058823529999998" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -323,9 +327,6 @@
                     <exclude reference="Mdx-TW-gth"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="AYz-bN-vZ8"/>
-                    <exclude reference="aFT-6X-jsn"/>
-                    <exclude reference="ipt-OS-pvM"/>
                     <exclude reference="5bF-JO-jMp"/>
                     <exclude reference="HFY-mp-asb"/>
                     <exclude reference="NLF-iA-woT"/>
@@ -335,6 +336,9 @@
                     <exclude reference="jFP-BL-cxd"/>
                     <exclude reference="rD0-za-Xcn"/>
                     <exclude reference="veU-PS-EtW"/>
+                    <exclude reference="AYz-bN-vZ8"/>
+                    <exclude reference="aFT-6X-jsn"/>
+                    <exclude reference="ipt-OS-pvM"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
@@ -343,9 +347,6 @@
                     <include reference="Mdx-TW-gth"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="AYz-bN-vZ8"/>
-                    <include reference="aFT-6X-jsn"/>
-                    <include reference="ipt-OS-pvM"/>
                     <exclude reference="5bF-JO-jMp"/>
                     <include reference="HFY-mp-asb"/>
                     <exclude reference="NLF-iA-woT"/>
@@ -355,11 +356,14 @@
                     <include reference="jFP-BL-cxd"/>
                     <include reference="rD0-za-Xcn"/>
                     <include reference="veU-PS-EtW"/>
+                    <include reference="AYz-bN-vZ8"/>
+                    <include reference="aFT-6X-jsn"/>
+                    <include reference="ipt-OS-pvM"/>
                 </mask>
             </variation>
         </view>
         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="c48-Lu-E1a">
-            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <state key="normal" title="Button"/>
             <point key="canvasLocation" x="251" y="408"/>

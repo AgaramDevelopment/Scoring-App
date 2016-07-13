@@ -402,6 +402,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
     self.tbl_endInnings.hidden = NO;
     self.view_allControls.hidden = YES;
 }
+    
 - (IBAction)btn_back:(id)sender {
     
     

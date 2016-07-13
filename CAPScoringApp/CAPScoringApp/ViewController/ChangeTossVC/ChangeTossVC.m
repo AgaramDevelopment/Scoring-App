@@ -105,7 +105,9 @@
     objBowlingTeamdetail =[[NSMutableArray alloc]init];
     TossDetailArray=[[NSMutableArray alloc]init];
     TossDetailArray=[DBManagerChangeToss GetTossDetails];
-    
+    self.Btn_Bowler.userInteractionEnabled=NO;
+    self.Btn_Striker.userInteractionEnabled=NO;
+    self.Btn_NonStriker.userInteractionEnabled=NO;
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -163,6 +165,12 @@
     self.tbl_tossYposition.constant=self.view_TossWon.frame.origin.y-30;
     self.tbl_tossHeight.constant=80;
     [self.Tbl_toss reloadData];
+    self.Btn_Bowler.userInteractionEnabled=YES;
+    self.Btn_Striker.userInteractionEnabled=YES;
+    self.Btn_NonStriker.userInteractionEnabled=YES;
+    self.lbl_Stricker.text=@"";
+    self.lbl_NonStricker.text=@"";
+    self.lbl_Bowler.text=@"";
     }
     else
     {
@@ -189,6 +197,10 @@
     self.tbl_tossYposition.constant=self.view_ElectedTo.frame.origin.y-30;
     self.tbl_tossHeight.constant=80;
     [self.Tbl_toss reloadData];
+    self.lbl_Stricker.text=@"";
+    self.lbl_NonStricker.text=@"";
+    self.lbl_Bowler.text=@"";
+
     }
     else
     {

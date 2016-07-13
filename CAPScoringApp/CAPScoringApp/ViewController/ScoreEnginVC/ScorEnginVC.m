@@ -76,7 +76,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclarInningsDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -453,15 +453,6 @@ EditModeVC * objEditModeVc;
     tableView.dataSource = self;
     tableView.delegate = self;
     
-    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    if(inningsno < 1)
-    {
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-        
-    }
-    else{
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-    }
     
     _View_Appeal.hidden=YES;
     _view_table_select.hidden=YES;
@@ -548,6 +539,17 @@ EditModeVC * objEditModeVc;
                                                              green:0
                                                               blue:0
                                                              alpha:0.36]];
+    
+    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
+    if(inningsno > 1)
+    {
+        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+        
+    }
+    else{
+        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    }
+
     
 //    FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
 //    fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
@@ -2292,6 +2294,13 @@ EditModeVC * objEditModeVc;
                 }
                 NSLog(@"Open Endinnings");
             }
+            if(fetchSEPageLoadRecord.BATTEAMOVRBALLS > 5)
+            {
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Six legitimate balls already bowled.\nDo you want to continue?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+                [altert show];
+                [altert setTag:2003];
+            }
+
             else if(fetchSEPageLoadRecord.INNINGSSTATUS== 1)
             {
                 UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"All Innings has been Completed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
@@ -5586,6 +5595,8 @@ EditModeVC * objEditModeVc;
     isExtrasSelected = NO;
     isOverthrowSelected = NO;
     
+   
+    
     //Wicket
     isWicketSelected = NO;
     selectedStrikernonstriker = nil;
@@ -7459,6 +7470,7 @@ EditModeVC * objEditModeVc;
                          completion:nil];
         [self addChildViewController:objChanceTeamVC];
         [fullview addSubview:objChanceTeamVC.view];
+        
     }
     else if (inningsNo == 1){
        
@@ -7490,6 +7502,7 @@ EditModeVC * objEditModeVc;
                              completion:nil];
             [self addChildViewController:objChangeTossVC];
             [fullview addSubview:objChangeTossVC.view];
+            
         }
     }
     }
@@ -7799,7 +7812,7 @@ EditModeVC * objEditModeVc;
     declareInning.TEAMNAME = fetchSEPageLoadRecord.BATTINGTEAMCODE;
     declareInning.BOWLINGTEAMCODE = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
     declareInning.ISDECLARE = @"1";
-    
+    declareInning.delegate=self;
     
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -11996,7 +12009,7 @@ EditModeVC * objEditModeVc;
     
     objArchiveVC.CompitionCode=self.competitionCode;
     [self.navigationController pushViewController:objArchiveVC animated:YES];
-    // [self reloadBowlerTeamBatsmanDetails];
+    [self reloadBowlerTeamBatsmanDetails];
 }
 -(void) RedirectFollowOnPage
 {
