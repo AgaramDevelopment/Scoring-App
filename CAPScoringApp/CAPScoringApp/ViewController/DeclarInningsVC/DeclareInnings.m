@@ -46,7 +46,7 @@
     [self UpdateDeclareInnings:COMPETITIONCODE :MATCHCODE :TEAMCODE :BOWLINGTEAMCODE :INNINGSNO :ISDECLARE];
     
     
-    
+
 }
 
 -(void) UpdateDeclareInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE :(NSString*)TEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)INNINGSNO:(NSString*)ISDECLARE
