@@ -26,6 +26,7 @@
 @synthesize powerplaystartover;
 @synthesize powerplayendover;
 @synthesize powerplaytyp;
+@synthesize powerplayCode;
 
 - (void)viewDidLoad {
     [super viewDidLoad];

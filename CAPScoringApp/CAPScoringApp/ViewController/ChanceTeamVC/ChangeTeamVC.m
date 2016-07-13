@@ -232,6 +232,8 @@
     ChangeTeamRecord* objChanceTeamRecord=[catagory objectAtIndex:indexPath.row];
     if(IsStricker== YES)
     {
+        if(![self.lbl_NonStrikerName.text isEqualToString:objChanceTeamRecord.TEAMNAME])
+        {
         self.lbl_StrikerName.text=objChanceTeamRecord.TEAMNAME;
         selectStrikercode=objChanceTeamRecord.TEAMCODE;
     }

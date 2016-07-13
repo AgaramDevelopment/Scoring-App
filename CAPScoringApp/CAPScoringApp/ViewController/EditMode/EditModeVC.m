@@ -81,6 +81,9 @@ BOOL isWicketSelected;
     NSMutableArray * objissix;
     NSMutableArray * objWicketno;
     NSMutableArray * objwicketType;
+    NSMutableArray * objGrandTotal;
+    NSMutableArray * objBallNo;
+    
     int EachoverWicketCount;
     UIButton *btn_Run;
     NSInteger ballCodeIndex;
@@ -270,7 +273,8 @@ BOOL isWicketSelected;
     InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:indexPath.row];
     cell.lbl_playername.text =objOversorderRecord.BowlerName;
     
-    cell.lbl_overs.text= objOversorderRecord.OversOrder;
+   // cell.lbl_overs.text= objOversorderRecord.OversOrder;
+    cell.lbl_overs.text = [NSString stringWithFormat:@"%d",[objOversorderRecord.OversOrder intValue]+1];
     NSString *strCurrentRow=[NSString stringWithFormat:@"%d",currentRow];
     objoverballCount =[[NSMutableArray alloc]init];
     eachoverRun =[[NSMutableArray alloc]init];
@@ -284,6 +288,10 @@ BOOL isWicketSelected;
     objWicketno     =[[NSMutableArray alloc]init];
     objwicketType     =[[NSMutableArray alloc]init];
     objnoballArray   =[[NSMutableArray alloc]init];
+    objGrandTotal   =[[NSMutableArray alloc]init];
+    objBallNo   =[[NSMutableArray alloc]init];
+
+
     if (cell != nil) {
         
         
@@ -302,6 +310,8 @@ BOOL isWicketSelected;
             NSString * objWicketNo =objInningsBowlerDetailsRecord.WicketNo;
             NSString * objWicketType =objInningsBowlerDetailsRecord.WicketType;
             NSString  * objNoBall    =objInningsBowlerDetailsRecord.noBall;
+            NSString  * grandTotal    =objInningsBowlerDetailsRecord.grandTotal;
+            NSString  * ballNo    =objInningsBowlerDetailsRecord.ballNo;
             
             if([strCurrentRow isEqualToString:objInningsBowlerDetailsRecord.OverNo])
             {
@@ -316,6 +326,9 @@ BOOL isWicketSelected;
                 [objWicketno addObject:objWicketNo];
                 [objwicketType addObject:objWicketType];
                 [objnoballArray addObject:objNoBall];
+                [objGrandTotal addObject:grandTotal];
+                [objBallNo addObject:ballNo];
+                
             }
         }
         for (UILabel *view in cell.view_main.subviews) {
@@ -332,9 +345,11 @@ BOOL isWicketSelected;
             nameLabel.textAlignment=NSTextAlignmentCenter;
             
             [cell.view_main addSubview:nameLabel];
-            InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:indexPath.row];
+            InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:j];
             
-            nameLabel .text=[NSString stringWithFormat:@"%@.%@",[@(currentRow) stringValue],[@(j+1) stringValue]];
+//            nameLabel .text=[NSString stringWithFormat:@"%@.%@",[@(currentRow) stringValue],[@(j+1) stringValue]];
+            nameLabel .text=[NSString stringWithFormat:@"%@.%@",objOversorderRecord.OversOrder,[objBallNo objectAtIndex:j]];
+            
             nameLabel.textColor=[UIColor whiteColor];
             
         }
@@ -381,6 +396,8 @@ BOOL isWicketSelected;
         NSString * objisSix =[objissix objectAtIndex:i];
         NSString * objWicketNo =[objWicketno objectAtIndex:i];
         NSString * objWicketType =[objwicketType objectAtIndex:i];
+        NSString * grandTotal =[objGrandTotal objectAtIndex:i];
+        
         
         NSMutableDictionary * dicAddbowlerdetails=[[NSMutableDictionary alloc]init];
         int overThrow = [objoverThrow intValue];
@@ -412,7 +429,7 @@ BOOL isWicketSelected;
             {
                 
                 
-                obj =obj--;
+                obj =--obj;
                 
                 int  noBall = obj+runs;
                 NSString* noballValues = [NSString stringWithFormat:@"%d",noBall];
@@ -516,7 +533,7 @@ BOOL isWicketSelected;
         bool isSix =[objisSix isEqualToString:@"1"]? YES: NO;
         bool isFour =[objisFour isEqualToString:@"1"]? YES:NO;
         bool isSpecialEvents;
-        if(isFour == YES || isSix == YES || ![objWicketNo isEqualToString:@""])
+        if(isFour == YES || isSix == YES || ![objWicketNo isEqualToString:@"0"])
         {
             isSpecialEvents=YES;
         }
@@ -541,10 +558,12 @@ BOOL isWicketSelected;
                 content =[content stringByAppendingString: [[dicAddbowlerdetails objectForKey:kvpItem] stringByAppendingString:@""]];
             }   //kvpItem.Value + " ";
         }
-        if(runvalue != @"")
-        {
-            totalRun  =[runvalue intValue]+totalRun;
-        }
+        totalRun  =[grandTotal intValue]+totalRun;
+        
+//        if(runvalue != @"")
+//        {
+//            totalRun  =[runvalue intValue]+totalRun;
+//        }
         
         
         [self CreateBallTickerInstance:content :isExtras :isSpecialEvents :objnoball :cell :indexpath];
@@ -566,7 +585,7 @@ BOOL isWicketSelected;
     [btn_Run setBackgroundColor:[UIColor clearColor]];
     [btn_Run setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    [btn_Run setTitle:[NSString stringWithFormat:content] forState:UIControlStateNormal];
+//    [btn_Run setTitle:[NSString stringWithFormat:content] forState:UIControlStateNormal];
     btn_Run.font=[UIFont fontWithName:@"Rajdhani-Bold" size:10];
     //[btn_Run sizeToFit];
     btn_Run .layer. cornerRadius=17;
@@ -582,10 +601,10 @@ BOOL isWicketSelected;
     [btn_Run addTarget:self action:@selector(didClickEditAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [cell.view_main addSubview:btn_Run];
-    content = content == @"0 W" ? @"W" : content;
-    content = content == @"0 NB" ? @"NB" : content;
-    content = content == @"0 WD" ? @"WD" : content;
-    content = content == @"0 RH" ? @"RH" : content;
+    content = [content isEqual: @"0W"] ? @"W" : content;
+    content = [content isEqual: @"0NB" ]? @"NB" : content;
+    content = [content isEqual: @"0WD"] ? @"WD" : content;
+    content = [content isEqual: @"0RH"] ? @"RH" : content;
     double singleInstanceWidth = isextra ? 55 : 30;
     double totalWidth = singleInstanceWidth;
     if (content.length > 5)
@@ -609,7 +628,7 @@ BOOL isWicketSelected;
     
     else if([content isEqualToString :@"W"])
     {
-        [btn_Run setBackgroundColor:wicketBrushBG.CGColor];
+        [btn_Run setBackgroundColor:wicketBrushBG];
         btn_Run.layer.borderColor= wicketBrushBDR.CGColor;
         
     }
@@ -620,6 +639,8 @@ BOOL isWicketSelected;
 
     }
     
+    [btn_Run setTitle:[NSString stringWithFormat:content] forState:UIControlStateNormal];
+
     
 }
 

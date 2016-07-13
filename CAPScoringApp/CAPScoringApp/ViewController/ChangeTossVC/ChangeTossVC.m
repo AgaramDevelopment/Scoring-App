@@ -529,7 +529,6 @@
         {
             self.lbl_NonStricker.text =objChangeTossRecord.playerName;
             selectNonStriker=self.lbl_NonStricker.text;
-            
             NonStrikerCode=objChangeTossRecord.playerCode;
            
         }

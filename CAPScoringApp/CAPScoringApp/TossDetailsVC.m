@@ -398,11 +398,22 @@
     {
         Strikerselectindexarray=[[NSMutableArray alloc]init];
         objTossDeatilsRecord=(TossDeatilsEvent*)[StrikerArray objectAtIndex:indexPath.row];
+        if(![NonStrikerCode isEqualToString: objTossDeatilsRecord.PlaercodeStrike_nonStrike])
+        {
         self.Striker_lbl.text =objTossDeatilsRecord.PlaerNameStrike_nonStrike;
         selectStriker=self.Striker_lbl.text;
         StrikerCode=objTossDeatilsRecord.PlaercodeStrike_nonStrike;
         [Strikerselectindexarray addObject:objTossDeatilsRecord];
-        
+        }
+        else
+        {
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+                                                            message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
+                                                           delegate: self
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+            [alert1 show];
+        }
         self.Striker_table.hidden=YES;
         isEnableTbl=YES;
     }
