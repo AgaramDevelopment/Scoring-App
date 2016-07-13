@@ -591,9 +591,9 @@ EndInningsVC *save;
             
             if(BOWLERCOUNT.intValue ==1)
             {
-                CURRENTBOWLER==[DBManagerEndInnings GetCurrentBowlerCountFormanageOverDetails: COMPETITIONCODE: MATCHCODE: INNINGSNO :overNo];
+            CURRENTBOWLER=[DBManagerEndInnings GetCurrentBowlerCountFormanageOverDetails : COMPETITIONCODE: MATCHCODE: INNINGSNO :overNo];
                 
-                [DBManagerEndInnings UpdateBowlingSummaryFormanageOverDetails: BOWLERCOUNT: ISMAIDENOVER : COMPETITIONCODE: MATCHCODE:  INNINGSNO: CURRENTBOWLER ];
+                [DBManagerEndInnings UpdateBowlingSummaryFormanageOverDetails : BOWLERCOUNT: ISMAIDENOVER : COMPETITIONCODE: MATCHCODE:  INNINGSNO: CURRENTBOWLER ];
                 
                 
             }

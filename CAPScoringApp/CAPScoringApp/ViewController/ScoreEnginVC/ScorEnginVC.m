@@ -1656,6 +1656,7 @@ EditModeVC * objEditModeVc;
     
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+   
     
     
     if (cell == nil) {
@@ -1685,7 +1686,8 @@ EditModeVC * objEditModeVc;
                                                                blue:79/255.0
                                                               alpha:0.5];
             wicketTypeCell.selectedBackgroundView =  customColorView;
-            
+            self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
+             [tbl_fastBowl setSeparatorColor:[UIColor blackColor]];
             return wicketTypeCell;
             
             
@@ -1706,6 +1708,7 @@ EditModeVC * objEditModeVc;
                                                                blue:79/255.0
                                                               alpha:0.5];
             strikerNonstrikerCell.selectedBackgroundView =  customColorView;
+            self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
             return strikerNonstrikerCell;
             
             
@@ -1726,6 +1729,7 @@ EditModeVC * objEditModeVc;
                                                                blue:79/255.0
                                                               alpha:0.5];
             wicketEventCell.selectedBackgroundView =  customColorView;
+            self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
             return wicketEventCell;
             
             
@@ -1747,6 +1751,7 @@ EditModeVC * objEditModeVc;
                                                                blue:79/255.0
                                                               alpha:0.5];
             playerlistCell.selectedBackgroundView =  customColorView;
+            self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
             
             return playerlistCell;
             
@@ -1903,6 +1908,7 @@ EditModeVC * objEditModeVc;
                                                            blue:79/255.0
                                                           alpha:0.5];
         fastBowlCell.selectedBackgroundView =  customColorView;
+        self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
         
         return fastBowlCell;
         
@@ -2063,13 +2069,24 @@ EditModeVC * objEditModeVc;
     return YES;
 }
 
+-(BOOL)iswicketPending{
+    if(wicketOption !=0){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please complete wicket Option" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:10102];
+        return NO;
+        
+    }
+    return YES;
+}
+
 -(IBAction)DidClickStartBall:(id)sender
 {
     NSLog(@"btnname=%@",self.btn_StartBall.currentTitle);
     
     if(self.isEditMode){ //Edit Mode
         
-        if([self checkRunsByLB_B]){
+        if([self checkRunsByLB_B] && [self iswicketPending]){
         [self calculateRunsOnEndBall];
         
         UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
@@ -2202,7 +2219,7 @@ EditModeVC * objEditModeVc;
         else
         {
             
-            if([self checkRunsByLB_B]){ // Check before end ball
+            if([self checkRunsByLB_B] && [self iswicketPending]){// Check before end ball
            // [self calculateRunsOnEndBall];
             [self EndBallMethod];
             
@@ -2275,6 +2292,13 @@ EditModeVC * objEditModeVc;
                 }
                 NSLog(@"Open Endinnings");
             }
+            if(fetchSEPageLoadRecord.BATTEAMOVRBALLS > 5)
+            {
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Six legitimate balls already bowled.\nDo you want to continue?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+                [altert show];
+                [altert setTag:2003];
+            }
+
             else if(fetchSEPageLoadRecord.INNINGSSTATUS== 1)
             {
                 UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"All Innings has been Completed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
@@ -3400,6 +3424,19 @@ EditModeVC * objEditModeVc;
     //    }
     UIButton *selectBtnTag=(UIButton*)sender;
     
+    //wicket
+    if(isWicketSelected && selectBtnTag.tag != 107 && wicketOption !=0){
+        
+        isWicketSelected= NO;
+        selectedwickettype = nil;
+        selectedWicketEvent = nil;
+        selectedStrikernonstriker = nil;
+        selectedwicketBowlerlist =nil;
+        [self unselectedButtonBg:self.btn_wkts];
+    
+        
+    }
+    
     if(isExtrasSelected && selectBtnTag.tag!=106){//Already open state
         
         
@@ -3478,13 +3515,13 @@ EditModeVC * objEditModeVc;
     
     if(selectBtnTag.tag==100)//Run one
     {
-        if([self checkRunOut])
+        if([self checkRunOut] && [self checkBeatenOnRuns])
         {
      [self calculateRuns:selectBtnTag.tag];
         }
         
     }
-    else if(selectBtnTag.tag==101)// Run two
+    else if(selectBtnTag.tag==101 && [self checkBeatenOnRuns])// Run two
     {
         if([self checkRunOut])
         {
@@ -3492,14 +3529,14 @@ EditModeVC * objEditModeVc;
         }
         
     }
-    else if(selectBtnTag.tag==102)// Run three
+    else if(selectBtnTag.tag==102 && [self checkBeatenOnRuns])// Run three
     {
         if([self checkRunOut])
         {
             [self calculateRuns:selectBtnTag.tag];
         }
     }
-    else if(selectBtnTag.tag==103)//More Runs
+    else if(selectBtnTag.tag==103 && [self checkBeatenOnRuns])//More Runs
     {
         if([self checkRunOut])
         {
@@ -3509,6 +3546,8 @@ EditModeVC * objEditModeVc;
     }
     else if(selectBtnTag.tag==104)// B4
     {
+        
+        if([self checkBeatenOnRuns]){
         if(isWicketSelected == YES)
         {
             
@@ -3524,10 +3563,13 @@ EditModeVC * objEditModeVc;
         else{
             
             [self calculateRuns:selectBtnTag.tag];
+        }
         }
     }
     else if(selectBtnTag.tag==105)// B6
     {
+        if([self checkBeatenOnRuns]){
+
         if(isWicketSelected == YES)
         {
             
@@ -3543,6 +3585,7 @@ EditModeVC * objEditModeVc;
         else{
             
             [self calculateRuns:selectBtnTag.tag];
+        }
         }
     }
     else if(selectBtnTag.tag==106)//Extras
@@ -3573,6 +3616,10 @@ EditModeVC * objEditModeVc;
             self.view_defensive.hidden = YES;
             self.view_bowlType.hidden = YES;
             self.view_fastBowl.hidden = YES;
+            selectedwickettype = nil;
+            selectedWicketEvent = nil;
+            selectedStrikernonstriker = nil;
+            selectedwicketBowlerlist =nil;
             
             [self unselectedButtonBg:selectBtnTag];
             
@@ -3686,7 +3733,8 @@ EditModeVC * objEditModeVc;
             
             miscFiltersTableview=[[UITableView alloc]initWithFrame:CGRectMake(selectBtnTag.frame.origin.x+selectBtnTag.frame.size.width+10, selectBtnTag.frame.origin.y-50,150,200)];
             miscFiltersTableview.backgroundColor=[UIColor whiteColor];
-            
+            miscFiltersTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+             [miscFiltersTableview setSeparatorColor:[UIColor whiteColor]];
             miscFiltersTableview.dataSource = self;
             miscFiltersTableview.delegate = self;
             [self.commonleftrightview addSubview:miscFiltersTableview];
@@ -4803,6 +4851,20 @@ EditModeVC * objEditModeVc;
     self.objcommonRemarkview.hidden=YES;
     
     
+    //wicket
+    if(isWicketSelected && selectBtnTag.tag != 107 && wicketOption !=0){
+        
+        isWicketSelected= NO;
+        selectedwickettype = nil;
+        selectedWicketEvent = nil;
+        selectedStrikernonstriker = nil;
+        selectedwicketBowlerlist =nil;
+        [self unselectedButtonBg:self.btn_wkts];
+        
+        
+    }
+    
+    
     if(isExtrasSelected && selectBtnTag.tag!=106){//Already open state
         
         
@@ -5222,6 +5284,9 @@ EditModeVC * objEditModeVc;
             
             rbwTableview=[[UITableView alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.size.width-180, self.btn_RBW.frame.origin.y-80,100,250)];
             rbwTableview.backgroundColor=[UIColor whiteColor];
+            rbwTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+             [rbwTableview setSeparatorColor:[UIColor whiteColor]];
+            
             
             rbwTableview.dataSource = self;
             rbwTableview.delegate = self;
@@ -5528,6 +5593,8 @@ EditModeVC * objEditModeVc;
     isExtrasSelected = NO;
     isOverthrowSelected = NO;
     
+   
+    
     //Wicket
     isWicketSelected = NO;
     selectedStrikernonstriker = nil;
@@ -5539,6 +5606,9 @@ EditModeVC * objEditModeVc;
     selectedwicketBowlerlist=nil;
     
 }
+
+
+
 
 
 -(void) resetAllButtonOnEndBall{
@@ -6432,10 +6502,13 @@ EditModeVC * objEditModeVc;
                 [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
-            }
+               
+                
+                
+                }
             
         } else{
-            self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Tough",@"Strong",@"Medium", nil];
+            self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Tough",@"Medium",@"Easy", nil];
             
             [self disableButtonBg:self.btn_B6];
             [self disableButtonBg:self.btn_B4];
@@ -6459,6 +6532,8 @@ EditModeVC * objEditModeVc;
                 [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
+                
+               
             }
             
             
@@ -6475,7 +6550,7 @@ EditModeVC * objEditModeVc;
             selectedStrikernonstrikerCode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
         }
         
-        self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Typical",@"Strong",@"Medium", nil];
+        self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Tough",@"Medium",@"Easy", nil];
         isWicketSelected = YES;
         wicketOption = 3;
         
@@ -6492,7 +6567,8 @@ EditModeVC * objEditModeVc;
             [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                 atScrollPosition:UITableViewScrollPositionTop
                                         animated:YES];
-        }
+            
+                    }
         
     }else if(isWicketSelected && wicketOption == 3){
         selectedWicketEvent = [self.WicketEventArray objectAtIndex:indexPath.row];
@@ -6531,6 +6607,8 @@ EditModeVC * objEditModeVc;
                 [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
+                
+               
                 
             }
         }else{
@@ -6592,6 +6670,8 @@ EditModeVC * objEditModeVc;
             [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                 atScrollPosition:UITableViewScrollPositionTop
                                         animated:YES];
+            
+            
         }
         
         
@@ -6617,6 +6697,7 @@ EditModeVC * objEditModeVc;
             [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                 atScrollPosition:UITableViewScrollPositionTop
                                         animated:YES];
+           
         }
     }else if(isFieldingSelected && fieldingOption == 3)
     {
@@ -6839,6 +6920,22 @@ EditModeVC * objEditModeVc;
             
             
         }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"LegByes"]){//Legbyes
+            
+            
+            if (_ballEventRecord.objIsbeaten.intValue == 1)// Check beaten selected
+            {
+                
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Legbyes is not possible with Beaten. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [altert show];
+                [altert setTag:10402];
+                
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:3 inSection:0];
+                [extrasTableView deselectRowAtIndexPath:indexPath animated:NO];
+                
+            }
+            else{
+            
+            
             //B6
             if(isWicketSelected ==YES)
             {
@@ -6877,6 +6974,7 @@ EditModeVC * objEditModeVc;
                 
                 //Legbyes
                 self.ballEventRecord.objLegByes = [NSNumber numberWithInt:1];
+            }
             }
             
         }
@@ -6930,7 +7028,14 @@ EditModeVC * objEditModeVc;
             self.ballEventRecord.objIsuncomfort = [NSNumber numberWithInt:1];
             
         }else if([[self.miscfiltersOptionArray objectAtIndex:indexPath.row]  isEqual: @"Beaten"]){
-            self.ballEventRecord.objIsbeaten = [NSNumber numberWithInt:1];
+            
+            if([self checkBeatenOnSelect]){ //Check run is selected
+                self.ballEventRecord.objIsbeaten = [NSNumber numberWithInt:1];
+            }else{
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
+                [miscFiltersTableview deselectRowAtIndexPath:indexPath animated:NO];
+                
+            }
             
         }else if([[self.miscfiltersOptionArray objectAtIndex:indexPath.row]  isEqual: @"Release Shot"]){
             self.ballEventRecord.objIsreleaseshot = [NSNumber numberWithInt:1];
@@ -7188,6 +7293,38 @@ EditModeVC * objEditModeVc;
             
             //Wide
             self.ballEventRecord.objByes = [NSNumber numberWithInt:0];
+            
+            if(self.ballEventRecord.objIsbeaten.intValue == 1){
+                
+                self.ballEventRecord.objOverthrow = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objRuns  = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objIssix  = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objLegByes = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objNoball = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objRbw = [NSNumber numberWithInt:0];
+                self.ballEventRecord.objWide = [NSNumber numberWithInt:0];
+                
+                
+                
+                [self unselectedButtonBg: self.btn_run1];
+                [self unselectedButtonBg: self.btn_run2];
+                [self unselectedButtonBg: self.btn_run3];
+                [self unselectedButtonBg: self.btn_B4];
+                [self unselectedButtonBg: self.btn_B6];
+                [self unselectedViewBg:self.view_Rbw];
+               // [self unselectedButtonBg: self.btn_extras];
+               // btnMarkForEdit.Background = blueBrush;
+                
+                [extrasTableView reloadData];
+                [self unselectedButtonBg: self.btn_overthrow];
+                
+//                isExtrasSelected = NO;
+                isOverthrowSelected = NO;
+                isRBWSelected = NO;
+
+                
+            }
             
             
         }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"LegByes"]){
@@ -11754,7 +11891,7 @@ EditModeVC * objEditModeVc;
         scoreCardVC.competitionCode= self.competitionCode;
         scoreCardVC.matchCode = self.matchCode;
         
-        scoreCardVC.matchTypeCode;
+        scoreCardVC.matchTypeCode = fetchSEPageLoadRecord.MATCHTYPE;
         
         
         scoreCardVC.inningsNo = fetchSEPageLoadRecord.INNINGSNO;
@@ -11787,6 +11924,7 @@ EditModeVC * objEditModeVc;
         
         scoreCardVC.THIRDINNINGSSHORTNAME = fetchSEPageLoadRecord.THIRDINNINGSSHORTNAME;
         scoreCardVC.FOURTHINNINGSSHORTNAME = fetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME;
+        
         
         
     }
@@ -11992,4 +12130,57 @@ EditModeVC * objEditModeVc;
     Archivevc.CompitionCode=self.competitionCode;
     [self.navigationController pushViewController:Archivevc animated:YES];
 }
+
+-(BOOL) checkBeatenOnSelect{
+
+        if (_ballEventRecord.objIsbeaten.intValue == 0)
+        {
+            if (_ballEventRecord.objByes.intValue == 0)
+            {
+                if ((_ballEventRecord.objRuns.intValue + _ballEventRecord.objOverthrow.intValue) > 0)
+                {
+                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Beaten is not possible with Runs. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [altert show];
+                    [altert setTag:10400];
+                    
+                    
+                    return NO;
+                }
+                else if (_ballEventRecord.objLegByes.intValue > 0)
+                {
+                    
+                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Beaten is not possible with Legbyes. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    [altert show];
+                    [altert setTag:10401];
+                    
+                    return NO;
+                }
+            }
+        }
+    return YES;
+}
+
+-(BOOL) checkBeatenOnRuns{
+    
+    
+    //string[] Ids = { "btnNB", "btnWD", "btnLB", "btnB" };
+   
+        if (_ballEventRecord.objIsbeaten.intValue == 1 && _ballEventRecord.objByes.intValue == 0)
+        {
+            
+            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Runs are not possible with Beaten. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [altert show];
+            [altert setTag:10403];
+            
+            return NO;
+        }
+    
+    
+
+    return YES;
+}
+
+
+
+
 @end
