@@ -139,15 +139,7 @@
     
 }
 }
--(IBAction)didClickBackButtonAction:(id)sender
-{
-    [self.delegate ChangeVCBackBtnAction];
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 
 @end

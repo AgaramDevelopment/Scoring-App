@@ -15,9 +15,6 @@
 
 @end
 
-@property(nonatomic,strong) id <DeclarInningsDelegate> delegate;
-
-
 
 @interface DeclareInnings : UIViewController
 
@@ -38,6 +35,7 @@
 @property (strong,nonatomic) NSString *INNINGSNO;
 @property (strong,nonatomic) NSString *ISDECLARE;
 
+@property (strong,nonatomic) IBOutlet UIButton *Btn_back;
 
 @property (weak, nonatomic) IBOutlet UIButton *btn_revert;
 
