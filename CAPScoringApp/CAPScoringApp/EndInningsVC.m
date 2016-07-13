@@ -141,7 +141,7 @@ BOOL IsBack;
         
         WICKETS=[DBManagerEndInnings GetWicketForFetchEndInnings : CompetitionCode: MatchCode :fetchSePageLoad.BATTINGTEAMCODE: fetchSePageLoad.INNINGSNO];
 
-self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:1.0f];
+        self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:1.0f];
         [_btn_delete setUserInteractionEnabled:NO];
     }
 }

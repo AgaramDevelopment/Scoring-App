@@ -13,7 +13,7 @@
 
 @interface DeclareInnings ()
 {
-    NSInteger *overNo;
+    NSInteger overNo;
 }
 
 @end
@@ -37,6 +37,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+          [self.btn_revert addTarget:self action:@selector(btn_revert:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.btn_revert.backgroundColor=[UIColor colorWithRed:(109/255.0f) green:(91/255.0f) blue:(52/255.0f) alpha:1.0f];
+    [_btn_revert setUserInteractionEnabled:NO];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -54,15 +60,28 @@
 }
 */
 
+- (IBAction)btn_revert:(id)sender {
+    
+    [self UpdateDeclareInnings:COMPETITIONCODE :MATCHCODE :TEAMCODE :BOWLINGTEAMCODE :INNINGSNO :ISDECLARE];
+
+}
+
+- (IBAction)btn_back:(id)sender {
+    
+    [self.delegate declareBackBtnAction];
+}
+
 - (IBAction)btn_yes:(id)sender {
     
     
    
     [self UpdateDeclareInnings:COMPETITIONCODE :MATCHCODE :TEAMCODE :BOWLINGTEAMCODE :INNINGSNO :ISDECLARE];
-    
+      [self.delegate declareSaveBtnAction];
 
     
 }
+
+
 
 -(void) UpdateDeclareInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE :(NSString*)TEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)INNINGSNO:(NSString*)ISDECLARE
 
