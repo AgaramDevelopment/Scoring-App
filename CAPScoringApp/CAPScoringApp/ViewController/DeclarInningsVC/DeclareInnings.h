@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol DeclarInningsDelegate <NSObject>
+@required
+- (void) ChangeVCBackBtnAction;
+@end
+
+
 @interface DeclareInnings : UIViewController
+
+@property(nonatomic,strong) id <DeclarInningsDelegate> delegate;
+
 
 
 @property (strong,nonatomic) NSString *TEAMNAME;
@@ -27,7 +36,7 @@
 @property (strong,nonatomic) NSString *INNINGSNO;
 @property (strong,nonatomic) NSString *ISDECLARE;
 
-
+@property (strong,nonatomic) IBOutlet UIButton *Btn_back;
 
 - (IBAction)btn_yes:(id)sender;
 

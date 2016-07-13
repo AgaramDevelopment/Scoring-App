@@ -101,6 +101,8 @@
     self.tbl_strikerlist.hidden=NO;
     self.tbl_yposition.constant=self.view_striker.frame.origin.y-130;
     [_tbl_strikerlist reloadData];
+    
+
     }
     else
     {
@@ -112,7 +114,7 @@
 -(IBAction)didClickNonStrickerSelection:(id)sender
 {
    
-    if(IsNonStricker == YES)
+    if(IsNonStricker == NO)
     {
     IsStricker =NO;
     IsNonStricker =YES;
@@ -120,9 +122,10 @@
     NSMutableArray *objStrickernonstrickerdetail=[objDBManagerChanceTeam GetStickerNonStrickerNamesdetailsDetails:self.compitionCode :self.MatchCode :BattingTeamCode :maximumInnings];
     catagory =objStrickernonstrickerdetail;
 
-    self.tbl_strikerlist.hidden=NO;
-     self.tbl_yposition.constant=self.view_nonstriker.frame.origin.y-130;
-     [_tbl_strikerlist reloadData];
+        self.tbl_strikerlist.hidden=NO;
+        self.tbl_yposition.constant=self.view_nonstriker.frame.origin.y-130;
+        [_tbl_strikerlist reloadData];
+        
     }
     else
     {
