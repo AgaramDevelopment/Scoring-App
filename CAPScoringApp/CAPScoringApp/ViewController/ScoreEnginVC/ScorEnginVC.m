@@ -2208,7 +2208,8 @@ EditModeVC * objEditModeVc;
                 //show free hit
                 
                 if(fetchSEPageLoadRecord.ISFREEHIT.intValue==1){
-                    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Alert", nil];
+                     UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit Ball" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Alert", nil];
                     [alter show];
                     [alter setTag:10200];
                     
