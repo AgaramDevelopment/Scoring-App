@@ -25,7 +25,7 @@
 
 @property(nonatomic,strong) id <EndInningsVCDelagate> delegate;
 
-@property (strong,nonatomic) NSString *MATCHCODE;
+@property (strong,nonatomic) NSString * MATCHCODE;
 
 @property (weak, nonatomic) IBOutlet UIView *view_allControls;
 

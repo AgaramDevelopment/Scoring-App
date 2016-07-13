@@ -8,7 +8,7 @@
 
 #import "ChangeTossVC.h"
 #import "FetchBattingTeamTossRecord.h"
-#import "DBManagerChangeToss.h"
+#import "DBManagerChangeTeam.h"
 #import "TossDetailRecord.h"
 #import "TossTeamDetailRecord.h"
 #import "InitializeInningsScoreBoardRecord.h"
@@ -227,20 +227,21 @@
      teamaCode= objFetchBattingTeamTossRecord.TEAMCODE_TOSSWONBY ;
         //PlayerCode =objEventRecord.TEAMCODE_TOSSWONBY;
     }
-    else if(selectTeamindex==0)
-    {
+    else{
+        if(selectTeamindex==0)
+      {
         //teamaCode=[[TossDetailArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
         objFetchBattingTeamTossRecord = (FetchBattingTeamTossRecord *)[TeamDetailTossWon objectAtIndex:selectTeamindex+1];
         
         teamaCode= objFetchBattingTeamTossRecord.TEAMCODE_TOSSWONBY ;
-    }
+      }
     if(selectTeamindex==1)
     {
         objFetchBattingTeamTossRecord = (FetchBattingTeamTossRecord *)[TeamDetailTossWon objectAtIndex:selectTeamindex-1];
         teamaCode= objFetchBattingTeamTossRecord.TEAMCODE_TOSSWONBY ;
         //teamaCode=[[TossDetailArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
     }
-
+    }
    objStrickerdetail =[DBManagerChangeToss StrikerNonstriker:self.matchCode :teamaCode ];
 
     catagory=objStrickerdetail;
@@ -274,19 +275,21 @@
         //teamaCode=[[TossDetailArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
         //PlayerCode =objEventRecord.TEAMCODE_TOSSWONBY;
     }
-    else if(selectTeamindex==0)
-    {
+    else{
+         if(selectTeamindex==0)
+        {
         objFetchBattingTeamTossRecord = (FetchBattingTeamTossRecord *)[TeamDetailTossWon objectAtIndex:selectTeamindex+1];
         
         teamaCode= objFetchBattingTeamTossRecord.TEAMCODE_TOSSWONBY ;
         //teamaCode=[[TossDetailArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
-    }
-    if(selectTeamindex==1)
-    {
+          }
+        if(selectTeamindex==1)
+        {
         objFetchBattingTeamTossRecord = (FetchBattingTeamTossRecord *)[TeamDetailTossWon objectAtIndex:selectTeamindex-1];
         
         teamaCode= objFetchBattingTeamTossRecord.TEAMCODE_TOSSWONBY ;
        // teamaCode=[[TossDetailArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+    }
     }
     objNonStrikerdetail =[DBManagerChangeToss StrikerNonstriker:self.matchCode :teamaCode];
     catagory=objNonStrikerdetail;
@@ -376,7 +379,8 @@
             [self ShowAlterView:@"Please Select Bowler"];
         }
         else{
-            [DBManagerChangeToss InsertTossDetails :self.CompitisonCode :self.matchCode:selectTeamcode :electedcode :StrikerCode :NonStrikerCode :selectBowlerCode :BowlingEnd];
+            //[DBManagerChangeToss InsertTossDetails :self.CompitisonCode :self.matchCode:selectTeamcode :electedcode :StrikerCode :NonStrikerCode :selectBowlerCode :BowlingEnd];
+            [DBManagerChangeTeam InsertChangeTeam:self.CompitisonCode :self.matchCode :selectTeamcode :[NSNumber numberWithInt:1] :StrikerCode :NonStrikerCode :selectBowlerCode :[NSNumber numberWithInt:1] :selectTeamcode :electedcode:BowlingEnd];
             [self.delegate RedirectScorEngin];
             
         }
@@ -484,6 +488,8 @@
         self.lbl_Tosswon.text=objChangeTossRecord.TEAMNAME_TOSSWONBY;
         selectTeam= self.lbl_Tosswon.text;
         selectTeamcode=objChangeTossRecord.TEAMCODE_TOSSWONBY;
+        NSInteger selectindex = indexPath.row;
+        selectTeamindex= (int) selectindex;
     }
     else if(isElectedTo== YES)
     {
@@ -494,10 +500,27 @@
     }
     else if(isStricker== YES)
     {
-        self.lbl_Stricker.text=objChangeTossRecord.playerName;
         
-        selectStriker=self.lbl_Stricker.text;
-        StrikerCode=objChangeTossRecord.playerCode;
+        
+        if(![self.lbl_NonStricker.text isEqualToString: objChangeTossRecord.playerName])
+        {
+            self.lbl_Stricker.text=objChangeTossRecord.playerName;
+            
+            selectStriker=self.lbl_Stricker.text;
+            StrikerCode=objChangeTossRecord.playerCode;
+            
+        }
+        else
+        {
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+                                                            message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
+                                                           delegate: self
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+            [alert1 show];
+        }
+
+        
     }
     else if(isNonStricker== YES)
     {
