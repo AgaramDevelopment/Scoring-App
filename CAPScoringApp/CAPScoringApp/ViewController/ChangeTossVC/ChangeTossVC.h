@@ -40,6 +40,9 @@
 @property(nonatomic,strong) IBOutlet UIView *view_NonStricker;
 @property(nonatomic,strong) IBOutlet UIView *view_Bowler;
 
+@property(nonatomic,strong) IBOutlet UIButton *Btn_Striker;
+@property(nonatomic,strong) IBOutlet UIButton *Btn_NonStriker;
+@property(nonatomic,strong) IBOutlet UIButton *Btn_Bowler;
 @property(nonatomic,strong) IBOutlet UIButton *Btn_Nearend;
 @property(nonatomic,strong) IBOutlet UIButton *Btn_FairEnd;
 

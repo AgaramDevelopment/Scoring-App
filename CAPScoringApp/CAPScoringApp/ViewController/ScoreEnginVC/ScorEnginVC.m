@@ -453,15 +453,6 @@ EditModeVC * objEditModeVc;
     tableView.dataSource = self;
     tableView.delegate = self;
     
-    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    if(inningsno < 1)
-    {
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-        
-    }
-    else{
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-    }
     
     _View_Appeal.hidden=YES;
     _view_table_select.hidden=YES;
@@ -548,6 +539,17 @@ EditModeVC * objEditModeVc;
                                                              green:0
                                                               blue:0
                                                              alpha:0.36]];
+    
+    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
+    if(inningsno > 1)
+    {
+        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+        
+    }
+    else{
+        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    }
+
     
 //    FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
 //    fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
@@ -7468,6 +7470,7 @@ EditModeVC * objEditModeVc;
                          completion:nil];
         [self addChildViewController:objChanceTeamVC];
         [fullview addSubview:objChanceTeamVC.view];
+        
     }
     else if (inningsNo == 1){
        
@@ -7499,6 +7502,7 @@ EditModeVC * objEditModeVc;
                              completion:nil];
             [self addChildViewController:objChangeTossVC];
             [fullview addSubview:objChangeTossVC.view];
+            
         }
     }
     }
@@ -12005,7 +12009,7 @@ EditModeVC * objEditModeVc;
     
     objArchiveVC.CompitionCode=self.competitionCode;
     [self.navigationController pushViewController:objArchiveVC animated:YES];
-    // [self reloadBowlerTeamBatsmanDetails];
+    [self reloadBowlerTeamBatsmanDetails];
 }
 -(void) RedirectFollowOnPage
 {

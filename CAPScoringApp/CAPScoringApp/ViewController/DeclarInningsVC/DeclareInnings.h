@@ -15,6 +15,9 @@
 
 @end
 
+@property(nonatomic,strong) id <DeclarInningsDelegate> delegate;
+
+
 
 @interface DeclareInnings : UIViewController
 

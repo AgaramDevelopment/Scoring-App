@@ -481,7 +481,7 @@
                                                 </mask>
                                             </variation>
                                             <connections>
-                                                <action selector="didClickNonStrickerSelection:" destination="-1" eventType="touchUpInside" id="6mB-hO-8Hc"/>
+                                                <action selector="didClickNonStrickerSelection:" destination="-1" eventType="touchUpInside" id="I3I-Du-Swd"/>
                                             </connections>
                                         </button>
                                     </subviews>
