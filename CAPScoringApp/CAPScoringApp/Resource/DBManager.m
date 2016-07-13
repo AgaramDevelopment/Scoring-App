@@ -9338,5 +9338,154 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
 }
 
 
++(BOOL)checkpowerplay: (NSString *) STARTOVER ENDOVER:(NSString*) ENDOVER MATCHCODE:(NSString*) MATCHCODE INNINGSNO:(NSString*) INNINGSNO{
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYCODE FROM POWERPLAY WHERE (('%@'<= STARTOVER AND '%@' >= STARTOVER) OR ('%@'<= ENDOVER AND '%@'>= ENDOVER) OR ('%@'>=STARTOVER AND '%@'<= ENDOVER))AND  MATCHCODE='%@' AND INNINGSNO='%@'  AND RECORDSTATUS='MSC001' ",STARTOVER,ENDOVER,STARTOVER,ENDOVER,STARTOVER,ENDOVER,MATCHCODE,INNINGSNO];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                return YES;
+                
+            }
+        }
+        
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return NO;
+}
+
++(BOOL)getpowerplaytype:(NSString*) MATCHCODE INNINGSNO:(NSString*) INNINGSNO POWERPLAYTYPE:(NSString*) POWERPLAYTYPE{
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYTYPE FROM POWERPLAY  WHERE MATCHCODE='%@' AND INNINGSNO='%@' AND POWERPLAYTYPE='%@' AND RECORDSTATUS ='MSC001'",MATCHCODE,INNINGSNO,POWERPLAYTYPE];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                return YES;
+                
+            }
+        }
+        
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return NO;
+}
+
+//+(NSMutableArray *)getpowerplaytype:(NSString*) MATCHCODE INNINGSNO:(NSString*) INNINGSNO POWERPLAYTYPE:(NSString*) POWERPLAYTYPE{
+//    NSMutableArray *powerplayArray=[[NSMutableArray alloc]init];
+//    int retVal;
+//    NSString *dbPath = [self getDBPath];
+//    sqlite3 *dataBase;
+//    const char *stmt;
+//    sqlite3_stmt *statement;
+//    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+//    if(retVal !=0){
+//    }
+//    
+//    NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYTYPE FROM POWERPLAY  WHERE MATCHODE='%@' AND INNINGSNO='%@' AND POWERPLAYTYPE='%@ AND'RECORDSTATUS ='MSC001'",MATCHCODE,INNINGSNO,POWERPLAYTYPE];
+//    stmt=[query UTF8String];
+//    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+//    {
+//        while(sqlite3_step(statement)==SQLITE_ROW){
+//            PowerPlayRecord *record=[[PowerPlayRecord alloc]init];
+//            //            record.id=(int)sqlite3_column_int(statement, 0);
+//            record.powerplaytype=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+//            [powerplayArray addObject:record];
+//            
+//        }
+//    }
+//    
+//    
+//    sqlite3_finalize(statement);
+//    sqlite3_close(dataBase);
+//    return powerplayArray;
+//    
+//}
++(BOOL)checkpowerplayforupdate: (NSString *) STARTOVER ENDOVER:(NSString*) ENDOVER MATCHCODE:(NSString*) MATCHCODE INNINGSNO:(NSString*) INNINGSNO POWERPLAYCODE:(NSString*) POWERPLAYCODE{
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal ==0){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT * FROM POWERPLAY WHERE (('%@'<= STARTOVER AND '%@' >= STARTOVER) OR ('%@'<= ENDOVER AND '%@'>= ENDOVER) OR ('%@'>=STARTOVER AND '%@'<= ENDOVER))AND  MATCHCODE='%@' AND INNINGSNO='%@'AND POWERPLAYCODE<>'%@'  AND RECORDSTATUS='MSC001' ",STARTOVER,ENDOVER,STARTOVER,ENDOVER,STARTOVER,ENDOVER,MATCHCODE,INNINGSNO,POWERPLAYCODE];
+        NSLog(@"%@",query);
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSLog(@"Success");
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                return YES;
+                
+            }
+        }
+        
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return NO;
+}
++(NSMutableArray *)getpowerplaytypeforupdate:(NSString*) MATCHCODE INNINGSNO:(NSString*) INNINGSNO POWERPLAYTYPE:(NSString*) POWERPLAYTYPE POWERPLAYCODE:(NSString*) POWERPLAYCODE{
+    NSMutableArray *powerplayArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYTYPE FROM POWERPLAY  WHERE MATCHCODE='%@' AND INNINGSNO='%@' AND POWERPLAYTYPE='%@' AND POWERPLAYCODE<>'%@' AND RECORDSTATUS ='MSC001'",MATCHCODE,INNINGSNO,POWERPLAYTYPE,POWERPLAYCODE];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            PowerPlayRecord *record=[[PowerPlayRecord alloc]init];
+            record.powerplaytype=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            [powerplayArray addObject:record];
+            
+        }
+    }
+    
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return powerplayArray;
+    
+}
+
 
 @end

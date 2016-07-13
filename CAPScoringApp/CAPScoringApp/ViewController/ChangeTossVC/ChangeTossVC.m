@@ -494,10 +494,22 @@
     }
     else if(isStricker== YES)
     {
+        if(![self.lbl_NonStricker.text isEqualToString: objChangeTossRecord.playerName])
+        {
+
         self.lbl_Stricker.text=objChangeTossRecord.playerName;
-        
         selectStriker=self.lbl_Stricker.text;
         StrikerCode=objChangeTossRecord.playerCode;
+        }
+        else
+        {
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+                                                            message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
+                                                           delegate: self
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+            [alert1 show];
+        }
     }
     else if(isNonStricker== YES)
     {
@@ -506,7 +518,6 @@
         {
             self.lbl_NonStricker.text =objChangeTossRecord.playerName;
             selectNonStriker=self.lbl_NonStricker.text;
-            
             NonStrikerCode=objChangeTossRecord.playerCode;
            
         }

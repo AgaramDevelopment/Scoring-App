@@ -227,7 +227,16 @@
     ChangeTeamRecord* objChanceTeamRecord=[catagory objectAtIndex:indexPath.row];
     if(IsStricker== YES)
     {
+        if(![self.lbl_NonStrikerName.text isEqualToString:objChanceTeamRecord.TEAMNAME])
+        {
         self.lbl_StrikerName.text=objChanceTeamRecord.TEAMNAME;
+        }
+        UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+                                                        message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
+                                                       delegate: self
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+        [alert1 show];
     }
     else if(IsNonStricker== YES)
     {
