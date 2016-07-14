@@ -15,6 +15,8 @@
 #import "GetPlayerDetailOnTimeOut.h"
 #import "GetPlayerDetailOnRetiredHurtOnMSC108.h"
 #import "Other_WicketgridVC.h"
+#import "DBManagerInsertScoreEngine.h"
+#import "GetWicketDetail.h"
 
 @interface Other_WicketVC ()
 {
@@ -118,10 +120,11 @@
 
 
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.tbl_playername.hidden=YES;
     
+    self.tbl_playername.hidden=YES;
     
     [self.WICKET_VIEW.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.WICKET_VIEW.layer.borderWidth = 2;
@@ -131,12 +134,16 @@
     
     [self.WICKET_NO_LBL.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.WICKET_NO_LBL.layer.borderWidth = 2;
+   
     
-    WICKETNO =[DbManager_OtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
+  
     
+    
+ 
     WicketStingValues = [NSString stringWithFormat:@"%@", WICKETNO];
     
  self.WICKET_NO_LBL.text=WicketStingValues;
+    
     
     
     if(_ISEDITMODE){
@@ -273,6 +280,9 @@
             cell.textLabel.text =objRetriedHurt.PLAYERNAME;
              
         }
+//        else if([WICKETTYPE isEqual:@"MSC107"]){
+//            
+//        }
         return cell;
         
     }
@@ -354,18 +364,14 @@
             isEnableTbl=YES;
             
         }
-//        else if([WICKETTYPE isEqual:@"MSC107"]){
-//            PlayerselectindexarrayMK=[[NSMutableArray alloc]init];
-////            objRetriedHurt=(GetPlayerDetailOnRetiredHurt*)[GetPlayerDetailOnRetiredHurt2Array objectAtIndex:indexPath.row];
-//            self.selectplayer_lbl.text =objRetriedHurt.PLAYERNAME;
-//            WICKETPLAYER=self.selectplayer_lbl.text;
-//            WICKETPLAYER=objRetriedHurt.PLAYERCODE;
-//            [PlayerselectindexarrayRH addObject:objRetriedHurt];
-//            
-//            self.tbl_playername.hidden=YES;
-//            isEnableTbl=YES;
-//            
-//        }
+        else if([WICKETTYPE isEqual:@"MSC107"]){
+            
+            
+            
+            self.tbl_playername.hidden=YES;
+            isEnableTbl=YES;
+            
+        }
     }
 
     
@@ -664,9 +670,9 @@
         
         MAXBALL=[DbManager_OtherWicket GetMaxBallForInsertOtherwicket : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : MAXOVER ];
         
-        MAXBALL=[DbManager_OtherWicket GetMaxBallCountForInsertOtherwicket : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : MAXOVER : MAXBALL ];
+        BALLCOUNT=[DbManager_OtherWicket GetMaxBallCountForInsertOtherwicket : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : MAXOVER : MAXBALL ];
         
-        if([DbManager_OtherWicket GetBallCodeOnExistsForInsertOtherwicket : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : MAXOVER : MAXBALL: BALLCOUNT ]!=0)
+        if(![[DbManager_OtherWicket GetBallCodeOnExistsForInsertOtherwicket : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : MAXOVER : MAXBALL: BALLCOUNT ]isEqual:@""])
         {
             BALLCODE=[DbManager_OtherWicket GetBallCodeForAssignForInsertOtherwicket : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : MAXOVER : MAXBALL: BALLCOUNT ];
             
@@ -676,8 +682,11 @@
             
             MAXID=[DbManager_OtherWicket GetMaxIdForInsertOtherwicket : MATCHCODE ];
             
+            BALLCODE=[DBManagerInsertScoreEngine GetMaxIdForInsertScoreEngine:MATCHCODE];
+            
             //BALLCODE = MATCHCODE + RIGHT(REPLICATE('0':10)+CAST(MAXID AS VARCHAR(10)):10);
         }
+        
      [DbManager_OtherWicket InsertWicketEventForInsertOtherwicket : BALLCODE:COMPETITIONCODE: MATCHCODE:TEAMCODE:INNINGSNO:WICKETNO:WICKETTYPE:WICKETPLAYER:VIDEOLOCATION ];
         
         
@@ -692,7 +701,7 @@
                            N_FIELDERCODE = [GetWicketDetails objectAtIndex:2];
                            
                        }
-        if([ DbManager_OtherWicket GetBatsManCodeForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER ]!=0)
+        if(![[ DbManager_OtherWicket GetBatsManCodeForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER ]isEqual:@""])
         {
            [ DbManager_OtherWicket UpdateBattingSummaryForInsertOtherwicket:N_WICKETNO :N_FIELDERCODE :N_FIELDERCODE :TOTALRUNS :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETPLAYER];
             
@@ -713,12 +722,15 @@
             
             [ DbManager_OtherWicket InsertInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
         }
-        
+       
         
     }
     NSMutableArray *GetPlayerDetails=[ DbManager_OtherWicket GetPlayerDetailForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE];
     
     NSMutableArray *GetWicketEventsPlayerDetails=[ DbManager_OtherWicket GetWicketEventDetailsForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+    
+    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Other Wicket Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alter show];
     
     [ DbManager_OtherWicket GetWicketNoForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
     
@@ -754,40 +766,52 @@
 
 -(void) UpdateOtherwickets:(NSString *)COMPETITIONCODE: (NSString *)  MATCHCODE : (NSString *) TEAMCODE : (NSNumber *)INNINGSNO : (NSString*)WICKETTYPE : (NSString*)WICKETPLAYER : 	(NSNumber*)WICKETNO :(NSString*)VIDEOLOCATIONNAME: (NSString*)TOTALRUNS
 {
-    
+   
     if([[DbManager_OtherWicket GetBallCodeForUpdateOtherwicket : COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER:WICKETNO:WICKETTYPE] isEqual:@""])
     {
         
         [DbManager_OtherWicket UpdateWicKetEventUpdateOtherwicket :WICKETTYPE:WICKETPLAYER:VIDEOLOCATION:COMPETITIONCODE: MATCHCODE:TEAMCODE:INNINGSNO:WICKETNO];
         
         
-        NSMutableArray *GetWicketOnAssignDetails=[ DbManager_OtherWicket GetWicketOnAssignForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER ];
+ //   NSMutableArray *GetWicketOnAssignDetails=[ DbManager_OtherWicket GetWicketOnAssignForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER ];
         
+//        
+//					   if(GetWicketOnAssignDetails.count>0)
+//                       {
+//                           
+////                           N_WICKETNO =[GetWicketOnAssignDetails objectAtIndex:0];
+////                           N_WICKETTYPE = [GetWicketOnAssignDetails objectAtIndex:1];
+////                           N_FIELDERCODE = [GetWicketOnAssignDetails objectAtIndex:2];
+//                           
+//                       }
+        NSMutableArray *GetWicketDetailsArray= [DbManager_OtherWicket GetwicketForUpdateOtherwicket:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETPLAYER];
+       
+                            if(GetWicketDetailsArray.count>0)
+                              {
+                               GetWicketDetail *wicketdetailss =[GetWicketDetailsArray objectAtIndex:0];
+                                
+                        
+                                  N_WICKETNO =  wicketdetailss.WICKETNO;
+                                  N_WICKETTYPE =wicketdetailss.WICKETTYPE;
+                                  N_FIELDERCODE =wicketdetailss.FIELDINGPLAYER;
+                                  
+                                   }
         
-					   if(GetWicketOnAssignDetails.count>0)
-                       {
-                           
-//                           N_WICKETNO =[GetWicketOnAssignDetails objectAtIndex:0];
-//                           N_WICKETTYPE = [GetWicketOnAssignDetails objectAtIndex:1];
-//                           N_FIELDERCODE = [GetWicketOnAssignDetails objectAtIndex:2];
-                           
-                       }
-    }else{
+   
         [DbManager_OtherWicket UpdateBattingSummaryForUpdateOtherwicket :  WICKETNO: WICKETTYPE: N_FIELDERCODE : TOTALRUNS:COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO: WICKETPLAYER];
+
         
+       // NSMutableArray *GetWicketEventsPlayerDetails=[ DbManager_OtherWicket GetWicketEventDetailsForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
         
-        
-        NSMutableArray *GetPlayerDetails=[ DbManager_OtherWicket GetPlayerDetailForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE];
-        
-        NSMutableArray *GetWicketEventsPlayerDetails=[ DbManager_OtherWicket GetWicketEventDetailsForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
-        
-        [ DbManager_OtherWicket GetWicketNoForUpdateOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+      
         
         
         
         
         
     }
+    NSMutableArray *GetPlayerDetails=[ DbManager_OtherWicket GetPlayerDetailForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE];
+      [ DbManager_OtherWicket GetWicketNoForUpdateOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
     
 }
 
@@ -798,8 +822,8 @@
 
 -(void) DeleteOtherwickets:(NSString *)COMPETITIONCODE: (NSString *)  MATCHCODE : (NSString *) TEAMCODE : (NSNumber *)INNINGSNO : (NSNumber*)WICKETNO
 {
-   
-    
+   if(![[DbManager_OtherWicket GetBallCodeForDeleteOtherwicket:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :WICKETNO]isEqual:@""])
+   {
     NSMutableArray *GetWicketPlayerandtypePlayerDetails=[ DbManager_OtherWicket GetWicketPlayerandTypeForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETNO ];
     
     if(GetWicketPlayerandtypePlayerDetails.count>0)
@@ -814,14 +838,16 @@
     if (N_WICKETTYPE = @"MSC107" )
     {
 						  
-						  [ DbManager_OtherWicket UpdateBattingSummaryForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER ];
+	[ DbManager_OtherWicket UpdateBattingSummaryForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER ];
     }
     else
     {
-        [ DbManager_OtherWicket DeleteBattingSummaryForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER ];
+        
+    [DbManager_OtherWicket DeleteBattingSummaryForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER];
+        
     }
     
-    [ DbManager_OtherWicket UpdateBattingSummaryDetailForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETNO ];
+    [DbManager_OtherWicket UpdateBattingSummaryDetailForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETNO];
     
     [ DbManager_OtherWicket UpdateInningsSummaryDetailForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO ];
     
@@ -829,11 +855,11 @@
     
     [ DbManager_OtherWicket UpdateWicketEventsForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETNO ];
     
-    
+   }
 				
     NSMutableArray *GetPlayerDetailForDeleteOtherwicket=[ DbManager_OtherWicket GetPlayerDetailForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE];
     
-    NSMutableArray *GetWicketEventDetailsForDeleteOtherwicket=[ DbManager_OtherWicket GetWicketEventDetailsForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+  //  NSMutableArray *GetWicketEventDetailsForDeleteOtherwicket=[ DbManager_OtherWicket GetWicketEventDetailsForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
     
     [DbManager_OtherWicket GetWicketNoForDeleteOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
 }

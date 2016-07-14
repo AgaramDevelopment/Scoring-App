@@ -13,7 +13,6 @@
 @interface Other_WicketgridVC ()
 
 @end
-
 @implementation Other_WicketgridVC
 @synthesize COMPETITIONCODE;
 @synthesize MATCHCODE;
@@ -148,8 +147,10 @@
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
     add.TEAMCODE=self.TEAMCODE;
-    add.WICKETNO = [NSString stringWithFormat:@"%@",self.N_WICKETNO];
+   // add.WICKETNO = [NSString stringWithFormat:@"%@",self.N_WICKETNO];
+    add.WICKETNO=[DbManager_OtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
     add.ISEDITMODE=NO;
+ //    WICKETNO =[DbManager_OtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];

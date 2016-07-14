@@ -23,9 +23,10 @@
 @property(strong,nonatomic)NSString*COMPETITIONCODE;
 @property(strong,nonatomic)NSNumber*INNINGSNO;
 
-@property(strong,nonatomic)NSString*TEAMCODE;
-@property(strong,nonatomic)NSString*STRIKERCODE;
-@property(strong,nonatomic)NSString*NONSTRIKERCODE;
+@property(strong,nonatomic)NSString *TEAMCODE;
+@property(strong,nonatomic)NSString *STRIKERCODE;
+@property(strong,nonatomic)NSString *NONSTRIKERCODE;
+
 
 @property(nonatomic,strong)NSString *MAXOVER;
 @property(nonatomic,strong)NSString *MAXBALL;

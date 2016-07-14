@@ -92,6 +92,8 @@
 +(NSMutableArray*) GetWicketEventDetailsForUpdateOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
 
 +(NSString*) GetWicketNoForUpdateOtherwicket:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO;
++(NSMutableArray*)  GetwicketForUpdateOtherwicket: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO: (NSString*) WICKETPLAYER;
+
 
 
 //------------------------
@@ -118,6 +120,8 @@
 
 +(NSString*) GetWicketNoForDeleteOtherwicket:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO;
 
-
++(NSString*)  GetBallCodeForDeleteOtherwicket: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO :(NSNumber*) WICKETNO;
 
 @end
+
+
