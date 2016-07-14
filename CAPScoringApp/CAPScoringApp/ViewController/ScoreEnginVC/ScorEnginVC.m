@@ -1180,8 +1180,8 @@ EditModeVC * objEditModeVc;
     
 //    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
 //    
-    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
-        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
+    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
     }else{
         _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
     }
@@ -1338,8 +1338,8 @@ EditModeVC * objEditModeVc;
     
 //    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
     
-    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
-        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
+    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
     }else{
         _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
     }
@@ -8617,7 +8617,7 @@ EditModeVC * objEditModeVc;
     
     _lbl_overs.text = [NSString stringWithFormat:@"%d.%d OVS" ,fetchSEPageLoadRecord.BATTEAMOVERS,fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
-    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
+    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
         _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
     }else{
         _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
@@ -8700,7 +8700,7 @@ EditModeVC * objEditModeVc;
  
         _lbl_target.text = [NSString stringWithFormat:@"%@ %@",targetLeftValue,targetRightValue];
 
-        NSString *runsReqForBalls = fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? (isTargetReached ? @"Target achieved" : ([NSString stringWithFormat:@"%@ runs to win",fetchSEPageLoadRecord.RUNSREQUIRED])) : @"Required run rate:";
+        NSString *runsReqForBalls = fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? (isTargetReached ? @"Target achieved" : ([NSString stringWithFormat:@"%@ runs to win",fetchSEPageLoadRecord.RUNSREQUIRED])) : @"";
         _lbl_runs_required.text = runsReqForBalls;
     }else{// ODI / T20
         
