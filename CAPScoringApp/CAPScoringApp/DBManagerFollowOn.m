@@ -259,40 +259,40 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
 
 
 //SP_UPDATEFOLLOWON----------------------------------------------------------------------
-
-+(NSString*)  GetBallCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO {
++(BOOL) GetBallCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO{
     
-    int retVal;
-    NSString *databasePath =[self getDBPath];
-    sqlite3 *dataBase;
-    const char *stmt;
+    NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMNAME,INNINGSNO];
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
-            
-            NSString *teamCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return teamCode;
-            
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMNAME,INNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                //                NSString *COMPETITIONCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
             
         }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
+        }
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
-    return 0;
-    
-    
+    sqlite3_reset(statement);
+    return NO;
 }
+
+
+
 
 
 +(NSString*) GetTeamNamesForUpdateFollowOn :(NSNumber*) TEAMNAME {
@@ -329,7 +329,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
     
 }
 
-+(NSString*) GetTotalRunsForUpdateFollowOn :(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO {
++(NSString*) GetTotalRunsForUpdateFollowOn :(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO {
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -363,7 +363,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
     
 }
 
-+(NSString*)  GetOverNoForUpdateFollowOn :(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO{
++(NSString*)  GetOverNoForUpdateFollowOn :(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO{
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -467,7 +467,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
 }
 
 
-+(NSString*)  GetWicketForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO{
++(NSString*)  GetWicketForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO{
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -532,42 +532,12 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
 
 
 
-+(NSString*) GetTeamCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO{
-    
-    int retVal;
-    NSString *databasePath =[self getDBPath];
-    sqlite3 *dataBase;
-    const char *stmt;
-    sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT TEAMCODE FROM INNINGSEVENTS WHERE COMPETITIONCODE='%@' and MATCHCODE='%@' AND TEAMCODE='%@'  AND INNINGSNO='%@'+1 AND ISFOLLOWON='1'",COMPETITIONCODE,MATCHCODE,TEAMNAME,INNINGSNO];
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
-    {
-        while(sqlite3_step(statement)==SQLITE_ROW){
-            
-            NSString *teamCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return teamCode;
-            
-            
-        }
-    }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
-    return 0;
-    
-    
-}
 
 
-+(BOOL) InsertInningsEventForInsertScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO :(NSString*) STRIKER:(NSString*) NONSTRIKER :(NSString*) BOWLER{
+
+
+
++(BOOL) GetTeamCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO{
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -575,7 +545,71 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO INNINGSEVENTS (COMPETITIONCODE,  MATCHCODE, TEAMCODE, INNINGSNO, INNINGSSTARTTIME, INNINGSENDTIME, STRIKERCODE,  NONSTRIKERCODE, BOWLERCODE, CURRENTSTRIKERCODE, CURRENTNONSTRIKERCODE, CURRENTBOWLERCODE,   BATTINGTEAMCODE, TOTALRUNS, TOTALOVERS, TOTALWICKETS, ISDECLARE, ISFOLLOWON,   INNINGSSTATUS)   VALUES ('%@', '%@','%@', '%@'+1,'','','%@','%@', '%@', '%@','%@','%@', '%@','', '', '',0,1,   0 ) ",COMPETITIONCODE, MATCHCODE,TEAMNAME,INNINGSNO,STRIKER,NONSTRIKER,BOWLER,STRIKER,NONSTRIKER,BOWLER,TEAMNAME];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT TEAMCODE FROM INNINGSEVENTS WHERE COMPETITIONCODE='%@' and MATCHCODE='%@' AND TEAMCODE='%@'  AND INNINGSNO=%@+1 AND ISFOLLOWON='1'",COMPETITIONCODE,MATCHCODE,TEAMNAME,INNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                //                NSString *COMPETITIONCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            
+            return NO;
+        }
+    }
+    sqlite3_reset(statement);
+    return NO;
+}
+
+
+
++(BOOL) InsertInningsEventForInsertScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO :(NSString*) STRIKER:(NSString*) NONSTRIKER :(NSString*) BOWLER{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO INNINGSEVENTS (COMPETITIONCODE,  MATCHCODE, TEAMCODE, INNINGSNO, INNINGSSTARTTIME, INNINGSENDTIME, STRIKERCODE,  NONSTRIKERCODE, BOWLERCODE, CURRENTSTRIKERCODE, CURRENTNONSTRIKERCODE, CURRENTBOWLERCODE,   BATTINGTEAMCODE, TOTALRUNS, TOTALOVERS, TOTALWICKETS, ISDECLARE, ISFOLLOWON,   INNINGSSTATUS)   VALUES ('%@', '%@','%@',  %@+1,'','','%@','%@', '%@', '%@','%@','%@', '%@','', '', '',0,1,   0 ) ",COMPETITIONCODE, MATCHCODE,TEAMNAME,INNINGSNO,STRIKER,NONSTRIKER,BOWLER,STRIKER,NONSTRIKER,BOWLER,TEAMNAME];
+        const char *update_stmt = [updateSQL UTF8String];
+        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            sqlite3_reset(statement);
+            
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
+            return NO;
+        }
+    }
+    sqlite3_reset(statement);
+    return NO;
+}
+
+
+
++(BOOL)UpdateInningsEventForInsertScoreBoard:(NSString*) TEAMCODE:(NSString *)TOTALRUNS:(NSString*)TOTALOVERS:(NSString *)TOTALWICKETS:(NSString *) INNINGSSTATUS:(NSString*) ISFOLLOWON:(NSString *)COMPETITIONCODE:(NSString *)MATCHCODE:(NSString*)INNINGSNO{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS SET BATTINGTEAMCODE='%@', TOTALRUNS='%@', TOTALOVERS='%@', TOTALWICKETS='%@',INNINGSSTATUS ='%@',ISFOLLOWON='%@' WHERE COMPETITIONCODE ='%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND TEAMCODE  = '%@'",TEAMCODE,TOTALRUNS, TOTALOVERS,TOTALWICKETS,INNINGSSTATUS,ISFOLLOWON,COMPETITIONCODE,MATCHCODE,INNINGSNO,TEAMCODE];
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE)
@@ -605,7 +639,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS SET STRIKERCODE='%@',   NONSTRIKERCODE='%@',BOWLERCODE='%@',CURRENTSTRIKERCODE='%@', CURRENTNONSTRIKERCODE='%@',   CURRENTBOWLERCODE='%@', BATTINGTEAMCODE='%@' WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@'+1 AND TEAMCODE  = '%@'",STRIKER,NONSTRIKER,BOWLERCODE,STRIKER,NONSTRIKER,BOWLERCODE,TEAMCODE,COMPETITIONCODE, MATCHCODE,INNINGSNO,TEAMCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS SET STRIKERCODE='%@',   NONSTRIKERCODE='%@',BOWLERCODE='%@',CURRENTSTRIKERCODE='%@', CURRENTNONSTRIKERCODE='%@',   CURRENTBOWLERCODE='%@', BATTINGTEAMCODE='%@' WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %@+1 AND TEAMCODE  = '%@'",STRIKER,NONSTRIKER,BOWLERCODE,STRIKER,NONSTRIKER,BOWLERCODE,TEAMCODE,COMPETITIONCODE, MATCHCODE,INNINGSNO,TEAMCODE];
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE)

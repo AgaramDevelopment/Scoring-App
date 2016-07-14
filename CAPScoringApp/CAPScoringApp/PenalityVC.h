@@ -39,9 +39,12 @@
 @property (strong, nonatomic) IBOutlet PenalityTVC *penality_cell;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_penaltytype;
 
+@property(nonatomic,strong) NSString *penaltyCode;
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;
+@property(nonatomic,strong) NSString *awardedToteam;
 @property(nonatomic,strong) NSString *teamcode;
+@property(nonatomic,strong) NSString *bowlingTeamCode;
 @property(nonatomic,strong) NSString *ballcode;
 @property(nonatomic,strong) NSString *inningsNo;
 @property(nonatomic,strong) NSString *metasubcode;

@@ -18,6 +18,7 @@
    BOOL IsNonStricker;
    BOOL IsBowler ;
     NSMutableArray *CommonArry;
+    NSString *followon;
 }
 
 @end
@@ -56,10 +57,40 @@
     self.TEAMCODE =self.battingTeamCode;
     self.Tbl_Followon.hidden=YES;
     CommonArry =[[NSMutableArray alloc]init];
+   
+    followon=[DBManager getFollowOn:self.matchCode :self.compitionCode :self.inningsno];
+    if([self.inningsno isEqualToString:@"2"] || [self.inningsno isEqualToString:@"3"])
+    {
+        if([followon isEqualToString:@"1"])
+        {
+            
+        [self.btn_Proceed setBackgroundColor:[UIColor grayColor]];
+        self.btn_Proceed.userInteractionEnabled=NO;
+        [self.btn_Revert setBackgroundColor:[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f]];
+        self.btn_Revert.userInteractionEnabled=YES;
+        }
+        else
+        {
+            [self.btn_Proceed setBackgroundColor:[UIColor colorWithRed:(16/255.0f) green:(210/255.0f) blue:(158/255.0f) alpha:1.0f]];
+            self.btn_Proceed.userInteractionEnabled=YES;
+            [self.btn_Revert setBackgroundColor:[UIColor grayColor]];
+            self.btn_Revert.userInteractionEnabled=NO;
+        }
+
+    }
+    else
+    {
+        [self.btn_Proceed setBackgroundColor:[UIColor grayColor]];
+        self.btn_Proceed.userInteractionEnabled=NO;
+        [self.btn_Revert setBackgroundColor:[UIColor grayColor]];
+         self.btn_Revert.userInteractionEnabled=NO;
+    }
     
 }
 -(IBAction)didClickStrickerSelection:(id)sender
 {
+    if(IsStricker==NO)
+    {
     IsStricker =YES;
     IsNonStricker =NO;
     IsBowler =NO;
@@ -69,10 +100,18 @@
     self.Tbl_Followon.hidden=NO;
     self.tbl_FollowonYposition.constant=self.view_striker.frame.origin.y-130;
     [self.Tbl_Followon reloadData];
+    }
+    else
+    {
+        self.Tbl_Followon.hidden=YES;
+        IsStricker=NO;
+    }
     
 }
 -(IBAction)didClickNonStrickerSelection:(id)sender
 {
+    if(IsNonStricker==NO)
+    {
     IsStricker =NO;
     IsNonStricker =YES;
     IsBowler =NO;
@@ -82,10 +121,18 @@
     self.Tbl_Followon.hidden=NO;
     self.tbl_FollowonYposition.constant=self.view_nonStriker.frame.origin.y-130;
     [self.Tbl_Followon reloadData];
+    }
+    else
+    {
+       self.Tbl_Followon.hidden=YES;
+        IsNonStricker =NO;
+    }
 }
 
 -(IBAction)didClickBowlerSelection:(id)sender
 {
+    if(IsBowler== NO)
+    {
     IsStricker =NO;
     IsNonStricker =NO;
     IsBowler =YES;
@@ -94,6 +141,12 @@
     self.Tbl_Followon.hidden=NO;
     self.tbl_FollowonYposition.constant=self.view_Bowler.frame.origin.y-130;
     [self.Tbl_Followon reloadData];
+    }
+    else
+    {
+         self.Tbl_Followon.hidden=YES;
+          IsBowler =NO;
+    }
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -102,6 +155,7 @@
 
 -(IBAction)didClickProcessInnings:(id)sender
 {
+    
     if([self.lbl_Striker.text isEqualToString:@""] || self.lbl_Striker.text==nil)
     {
         [self ShowAlterView:@"Please Select Stricker"];
@@ -116,7 +170,10 @@
     }
     else{
         [self UpdateFollowOn:self.compitionCode :self.matchCode :self.inningsno :TEAMCODE :self.strickerCode :self.nonStrickerCode :self.bowlingPlayercode];
-        [self.delegate RedirectFollowOnPage];
+        UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:@"DO You Want To Enfourced Follow on" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"CANCEL", nil];
+        [objAlter show];
+        objAlter.tag = 100;
+        
        
     }
     
@@ -138,13 +195,46 @@
     }
     else{
         [self DeleteFollowOn:self.compitionCode :self.matchCode :self.inningsno :TEAMCODE];
-        [self.delegate RedirectFollowOnPage];
+        UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:@"DO You Want To Revert Follow on" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"CANCEL", nil];
+        [objAlter show];
+        objAlter.tag = 102;
+        //[self.delegate RedirectFollowOnPage];
         
     }
     
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        if(alertView.tag==100)
+        {
+            UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:@"Follow on has been Enfourced Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [objAlter show];
+            objAlter.tag = 101;
+        }
+        else if (alertView.tag==101)
+        {
+            [self.delegate RedirectFollowOnPage];
+        }
+        else if(alertView.tag==102)
+        {
+            UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:@"Follow on has been Revert Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [objAlter show];
+            objAlter.tag = 103;
+        }
+        else if (alertView.tag==103)
+        {
+           //[self.delegate RedirectFollowOnPage];
+        }
 
+    }
+    else if (buttonIndex == 1)
+    {
+       
+    }
+}
 -(void)ShowAlterView:(NSString *) alterMsg
 {
     UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -192,8 +282,20 @@
     FollowOnRecords* objFollowOnRecords=[CommonArry objectAtIndex:indexPath.row];
     if(IsStricker== YES)
     {
-        self.lbl_Striker.text=objFollowOnRecords.PLAYERNAME;
-        self.strickerCode=objFollowOnRecords.PLAYERCODE;
+        if(![self.lbl_nonStriker.text isEqualToString:objFollowOnRecords.PLAYERNAME])
+        {
+            self.lbl_Striker.text=objFollowOnRecords.PLAYERNAME;
+            self.strickerCode=objFollowOnRecords.PLAYERCODE;
+        }
+        else{
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+                                                            message: @"Striker and Striker cannot be same.\nPlease Select different Player"
+                                                           delegate: self
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+            [alert1 show];
+
+    }
     }
     else if(IsNonStricker== YES)
     {
@@ -221,13 +323,13 @@
 }
 
 //SP_UPDATEFOLLOWON
--(void) UpdateFollowOn:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE:(NSNumber *) INNINGSNO :(NSString *) TEAMNAME : (NSString *) STRIKER : (NSString *) NONSTRIKER : (NSString *) BOWLER
+-(void) UpdateFollowOn:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *) INNINGSNO :(NSString *) TEAMNAME : (NSString *) STRIKER : (NSString *) NONSTRIKER : (NSString *) BOWLER
 
 {
     
-    if(INNINGSNO == [NSNumber numberWithInt:2])
+    if([INNINGSNO isEqualToString:@"2"])
     {
-        if([DBManagerFollowOn GetBallCodeForUpdateFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO ]!=0)
+        if([DBManagerFollowOn GetBallCodeForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO ])
         {
             
             TEAMCODE=[DBManagerFollowOn GetTeamNamesForUpdateFollowOn:TEAMNAME];
@@ -241,7 +343,7 @@
             
             OVERSTATUS=[DBManagerFollowOn GetOverStatusForUpdateFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO: OVERNO];
             
-            BOWLINGTEAMCODE=[DBManagerFollowOn GetBowlingTeamCodeForUpdateFollowOn: TEAMNAME: COMPETITIONCODE:  MATCHCODE];
+            BOWLINGTEAMCODE=[DBManagerFollowOn GetBowlingTeamCodeForUpdateFollowOn: COMPETITIONCODE:TEAMNAME :  MATCHCODE];
             
             
             if([OVERSTATUS isEqualToString: @"1"])
@@ -256,26 +358,33 @@
                 
             }
             
-           // WICKETS=[DBManagerFollowOn GetWicketForUpdateFollowOn : self.compitionCode:  self.matchCode: TEAMCODE: INNINGSNO: OVERNO];
+            WICKETS=[DBManagerFollowOn GetWicketForUpdateFollowOn:COMPETITIONCODE :MATCHCODE :TEAMNAME :INNINGSNO];
             
-          //  [DBManagerFollowOn UpdateInningsEventForInsertScoreBoard:TEAMNAME: TOTALRUN : OVERBALLNO: WICKETS : COMPETITIONCODE: MATCHCODE: INNINGSNO: TEAMCODE];
+         
+            [DBManagerFollowOn UpdateInningsEventForInsertScoreBoard:TEAMNAME :TOTALRUNS :OVERNO :WICKETS :self.inningsStatus :followon :COMPETITIONCODE :MATCHCODE :INNINGSNO];
             
-            if([DBManagerFollowOn GetTeamCodeForUpdateFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMCODE :INNINGSNO ])
+            if(![DBManagerFollowOn GetTeamCodeForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMNAME :INNINGSNO])
             {
                 
                 [DBManagerFollowOn InsertInningsEventForInsertScoreBoard : COMPETITIONCODE : MATCHCODE :TEAMCODE :INNINGSNO :STRIKER :NONSTRIKER :BOWLER];
                 
                 INNINGSSCORECARD = [NSString stringWithFormat:@"%d",INNINGSNO.intValue +1];
-            }
-                [self UpdatePlayers:self.compitionCode :self.matchCode :INNINGSNO :self.battingTeamCode :self.BowlingTeamCode :self.strickerCode :self.nonStrickerCode :self.bowlingPlayercode];
-           
-            //EXEC SP_INITIALIZEINNINGSSCOREBOARD
-    
-             if(![DBManagerFollowOn GetTeamCodeForUpdateFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMCODE :INNINGSNO ])
-            {
-                [DBManagerFollowOn UpdateInningsEventInStrickerForInsertScoreBoard: COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : STRIKER : NONSTRIKER : BOWLER];
+                
+                
+                //EXEC SP_INITIALIZEINNINGSSCOREBOARD
+                [InitializeInningsScoreBoardRecord InitializeInningsScoreBoard : COMPETITIONCODE : MATCHCODE :_battingTeamCode :BOWLINGTEAMCODE :INNINGSNO :_strickerCode :_nonStrickerCode : _BowlingTeamCode : [NSNumber numberWithInt:0]];
+                
+
+               
+                
+            }else{
+                    [DBManagerFollowOn UpdateInningsEventInStrickerForInsertScoreBoard: COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : STRIKER : NONSTRIKER : BOWLER];
                 
             }
+//                [self UpdatePlayers:self.compitionCode :self.matchCode :INNINGSNO :self.battingTeamCode :self.BowlingTeamCode :self.strickerCode :self.nonStrickerCode :self.bowlingPlayercode];
+           
+            
+          
            
         }
         
@@ -299,6 +408,8 @@
             
             
             //EXEC  SP_INITIALIZEINNINGSSCOREBOARD
+            
+            
             [self UpdatePlayers:self.compitionCode :self.matchCode :self.inningsno :self.battingTeamCode :self.BowlingTeamCode :self.strickerCode :self.nonStrickerCode :self.bowlingPlayercode];
             
         }
@@ -309,7 +420,7 @@
 -(void) UpdatePlayers:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)INNINGSNO:(NSString*)BATTINGTEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSString *)STRIKERCODE:(NSString *)NONSTRIKERCODE:(NSString *)BOWLERCODE
 {
     
-    if(![DBManager GetBallCodeForUpdatePlayers:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO] && ![DBManager GetWicketTypeForUpdatePlayers:COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO])
+    if(![DBManager GetBallCodeForUpdatePlayers:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO] && ![DBManager GetWicketTypeForUpdatePlayers :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO])
     {
         [DBManager deleteBattingSummary:COMPETITIONCODE MATCHCODE:MATCHCODE INNINGSNO:INNINGSNO];
         

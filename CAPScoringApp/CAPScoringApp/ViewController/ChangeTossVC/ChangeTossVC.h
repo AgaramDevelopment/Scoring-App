@@ -23,9 +23,9 @@
 
 
 @property (nonatomic,strong) NSNumber * ISINNINGSREVERT;
-@property(nonatomic,assign)NSNumber *STRIKERPOSITIONNO;
-@property(nonatomic,assign)NSNumber *NONSTRIKERPOSITIONNO;
-@property(nonatomic,assign)NSNumber *BOWLERPOSITIONNO;
+@property(nonatomic,assign)  NSNumber *STRIKERPOSITIONNO;
+@property(nonatomic,assign)  NSNumber *NONSTRIKERPOSITIONNO;
+@property(nonatomic,assign)  NSNumber *BOWLERPOSITIONNO;
 
 @property(nonatomic,strong) IBOutlet UILabel *lbl_Tosswon;
 @property (nonatomic,strong) IBOutlet UILabel *lbl_ElectedTo;

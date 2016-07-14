@@ -8,6 +8,9 @@
 
 #import "DBManagerChangeTeam.h"
 #import "ChangeTeamRecord.h"
+#import "DBManagerChangeTeamInsert.h"
+#import "InitializeInningsScoreBoardRecord.h"
+#import "DBManagerChangeToss.h"
 #import <sqlite3.h>
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
@@ -363,6 +366,76 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT PM.PLAYERCODE PLAYERCO
 -(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
     return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
 }
++(void) InsertChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSNumber*) INNINGSNO:(NSString*) STRIKERCODE:(NSString*) NONSTRIKERCODE:(NSString*) BOWLERCODE:(NSNumber*) CURRENTINNINGSNO:(NSString*) CURRENTBATTINGTEAM:(NSString*) ELECTEDTO:(NSString*) BOWLINGEND
+{
+    if(![DBManagerChangeTeamInsert SetBallCodeForChangeTeam : COMPETITIONCODE : MATCHCODE : CURRENTBATTINGTEAM : CURRENTINNINGSNO] )
+    {
+        if(INNINGSNO.intValue ==1 && CURRENTINNINGSNO.intValue ==1)
+        {
+            if(![DBManagerChangeTeamInsert SetBallCodeForInsertChangeTeam : COMPETITIONCODE : MATCHCODE : CURRENTINNINGSNO])
+            {
+                [DBManagerChangeTeamInsert DeleteInningsBreaksEventsForChangeTeam : COMPETITIONCODE :MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteBallEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteBattingSummaryForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteOverEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteBowlingSummaryForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteBowlingMaidenSummaryForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteBowlerOverDetailsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteFieldingEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteDayEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteSessionEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteAppealEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteWicketEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeletePowerplayForChangeTeam : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeletePlayerInOutTimeForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeletePenaltyDetailsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteMatchEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteInningsSummaryForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                [DBManagerChangeTeamInsert DeleteInningsEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
+                
+                
+                 [DBManagerChangeToss InsertTossDetails : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : ELECTEDTO : STRIKERCODE : NONSTRIKERCODE : BOWLERCODE : BOWLINGEND];
+                
+            }
+            else
+            {
+                
+                [DBManagerChangeTeamInsert UpadateInningsEventsForChangeTeam : STRIKERCODE : NONSTRIKERCODE : BOWLERCODE : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO];
+                
+                [DBManagerChangeTeamInsert DeleteInningsEventsForInsertChangeTeam : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+                
+                NSNumber*INNINGSSCORECARD=[[NSNumber alloc]init];
+                
+                INNINGSSCORECARD=[NSNumber numberWithInt:INNINGSNO.intValue + 1];
+                
+                [InitializeInningsScoreBoardRecord InitializeInningsScoreBoard :COMPETITIONCODE : MATCHCODE :@"" :@"" : [NSNumber numberWithInt:INNINGSNO.intValue+1] : @"" :@"" :@"" : [NSNumber numberWithInt:1]];
+                
+                
+            }
+            
+        }
+        
+    }
+    
+}
+
 
 
 @end

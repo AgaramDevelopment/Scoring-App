@@ -25,7 +25,8 @@
 @property (nonatomic,strong) NSString * bowlingPlayercode;
 @property (nonatomic,strong) NSString * strickerCode;
 @property (nonatomic,strong) NSString * nonStrickerCode;
-@property (nonatomic,strong) NSNumber * inningsno;
+@property (nonatomic,strong) NSString * inningsno;
+@property (nonatomic,assign) NSString * inningsStatus;
 
 
 @property (nonatomic,strong) NSNumber * ISINNINGSREVERT;
@@ -60,6 +61,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *btn_nonStriker;
 
 @property (strong, nonatomic) IBOutlet UIButton *btn_Bowler;
+
+@property (strong, nonatomic) IBOutlet UIButton *btn_Proceed;
+
+@property (strong, nonatomic) IBOutlet UIButton *btn_Revert;
 
 @property (nonatomic,strong) IBOutlet UILabel *lbl_Teamname;
 

@@ -16,6 +16,7 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "Utitliy.h"
+#import "FetchSEPageLoadRecord.h"
 
 
 @interface PenalityVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
@@ -48,11 +49,12 @@ PenaltyGridTVC *penaltygridTVC;
 @synthesize teamcode;
 @synthesize txt_penalityruns;
 @synthesize  test;
-
+@synthesize penaltyCode;
+@synthesize awardedToteam;
 PenaltyDetailsRecord *penaltyrecord;
 MetaDataRecord *objMetaDataRecord;
-
-
+FetchSEPageLoadRecord *fetchSePage;
+BOOL isSelected;
 
 
 NSString *btnbatting;
@@ -64,7 +66,17 @@ NSString *penaltytypereasons;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
+    
+    isSelected = NO;
+    
     NSLog(@"test %@",self.penaltyDetailsRecord == nil ? @"-": _penaltyDetailsRecord.penaltyruns);
+     [self.btn_bowling addTarget:self action:@selector(btn_bowling:) forControlEvents:UIControlEventTouchUpInside];
+    
+      [self.btn_batting addTarget:self action:@selector(btn_batting:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    self.btn_batting.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
     
     if(_penaltyDetailsRecord != nil){
         txt_penalityruns.text = _penaltyDetailsRecord.penaltyruns;
@@ -84,17 +96,14 @@ NSString *penaltytypereasons;
             
         }else{
             _FetchPenalityArray=[DBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT031"];
-            self.btn_bowling.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+ 
             
-            self.btn_batting.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
-            
+           
             isbtnbattingselected=NO;
         }
     }else{
         _FetchPenalityArray=[DBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT030"];
-        self.btn_batting.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
-        
-        self.btn_bowling.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
+
         isbtnbattingselected=YES;
     }
     
@@ -122,10 +131,42 @@ NSString *penaltytypereasons;
     penalty_runs =self.txt_penalityruns.text;
     NSLog(@"penaltyruns:%@",penalty_runs);
 
-    
+    awardedToteam = self.teamcode;
     
 }
 
+- (IBAction)btn_bowling:(id)sender {
+    
+    self.btn_bowling.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+    
+    self.btn_batting.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
+    if (isSelected == NO) {
+        
+        awardedToteam = self.bowlingTeamCode;
+        isSelected = YES;
+    }else{
+        
+        isSelected = YES;
+    }
+    
+}
+
+- (IBAction)btn_batting:(id)sender {
+    
+    self.btn_batting.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+    
+    self.btn_bowling.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
+    
+    if (isSelected == YES) {
+        
+        awardedToteam = self.teamcode;
+        
+        isSelected = NO;
+    }else{
+        isSelected = NO;
+    }
+    
+}
 
 //penality tableview
 
@@ -391,6 +432,7 @@ NSString *penaltytypereasons;
                 add.competitionCode=competitionCode;
                 add.matchCode=matchCode;
                 add.inningsNo=inningsNo;
+                
                 //vc2 *viewController = [[vc2 alloc]init];
                 [self addChildViewController:add];
                 add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
@@ -422,9 +464,24 @@ NSString *penaltytypereasons;
         int penaltyRunsData = [penaltyrecord.penaltyruns intValue];
         if(penaltyRunsData >= 0 && penaltyRunsData <=10 ){
             
-            [DBManager GetUpdatePenaltyDetails:self.teamcode :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode :self.competitionCode :self.matchCode :self.inningsNo :penaltycode];
             
-            penaltyarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
+            
+         penaltyarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
+            
+            if (penaltyarray.count >0) {
+                
+                PenaltyDetailsRecord *penalty = [penaltyarray objectAtIndex:0];
+                penaltyCode = penalty.penaltycode;
+                
+                
+            }
+           
+            
+            [DBManager GetUpdatePenaltyDetails:awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode :self.competitionCode :self.matchCode :self.inningsNo :penaltyCode];
+            
+            
+            
+            
             
             PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
             add.resultarray=penaltyarray;
