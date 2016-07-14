@@ -346,8 +346,6 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
 
 - (IBAction)btn_save:(id)sender {
     
-    
-    
     if ([self checkValidation]) {
         
         NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
@@ -401,11 +399,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         self.view_allControls.hidden = YES;
     }
 
-    self.tbl_endInnings.hidden = NO;
-    self.view_allControls.hidden = YES;
-    
-    [self.tbl_endInnings reloadData];
-    
+
 }
     
 - (IBAction)btn_back:(id)sender {
