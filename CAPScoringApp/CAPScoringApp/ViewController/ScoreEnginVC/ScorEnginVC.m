@@ -2224,61 +2224,70 @@ EditModeVC * objEditModeVc;
         else
         {
             
-            if([self checkRunsByLB_B] && [self iswicketPending]){// Check before end ball
-           // [self calculateRunsOnEndBall];
-            [self EndBallMethod];
-            
-            [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
-            self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
-            self.btn_StartOver.userInteractionEnabled=YES;
-            //        self.btn_StartBall.userInteractionEnabled=NO;
-            //        [self SaveBallEventREcordvalue];
-            
-            [self AllBtndisableMethod];
-            
-            
-            [self timeLeftSinceDate:startBallTime];
-            NSLog(@"DidClickStartBall batteamover=%d",fetchSEPageLoadRecord.BATTEAMOVERS);
-            int overNo = ((int)fetchSEPageLoadRecord.BATTEAMOVERS);
-            int ballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;//Check isillegal ball for pervious ball
-            int overballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
-            
-            self.ballEventRecord.objOverno=[NSNumber numberWithInt:fetchSEPageLoadRecord.BATTEAMOVERS];
-            self.ballEventRecord.objBallno=[NSNumber numberWithInt:ballNo];
-            self.ballEventRecord.objOverBallcount = [NSNumber numberWithInt:overballNo];
-            self.ballEventRecord.objBallcount=@1;
-            self.ballEventRecord.objBowlercode = fetchSEPageLoadRecord.currentBowlerPlayerCode;
-            self.ballEventRecord.objStrikercode = fetchSEPageLoadRecord.strickerPlayerCode;
-            self.ballEventRecord.objNonstrikercode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
-            
-            
-            
-            //        [DBManager saveBallEventData:self.ballEventRecord];
-            //        [DBManager insertBallCodeAppealEvent:self.ballEventRecord];
-            //        [DBManager insertBallCodeFieldEvent: self.ballEventRecord bowlerEvent:selectedfieldPlayer fieldingFactor: selectedfieldFactor nrs :selectedNRS];
-            //        [DBManager insertBallCodeWicketEvent:self.ballEventRecord];
-            //        [DBManager GetBallDetails :_competitionCode :_matchCode];
-            //
-            [self reloadBowlerTeamBatsmanDetails];
-            // [ self AssignControlValues :YES:@""];
+            if([self checkRunsByLB_B] && [self iswicketPending]&&[self checkValidation]){
                 
+                [self StartBall];
                 
-            //Check for Striker, non Striker and bower present
-                
-                if(fetchSEPageLoadRecord.strickerPlayerName == nil){
-                    [self btn_stricker_names:0];
-                }else if(fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
-                    [self btn_nonstricker_name:0];
-                }else if(fetchSEPageLoadRecord.currentBowlerPlayerName == nil){
-                    [self btn_bowler_name:0];
-                }
-                
-             
-            [self resetBallEventObject];
-            [self resetAllButtonOnEndBall];
             }
             
         }
+    }
+}
+
+
+-(void)StartBall{
+    {// Check before end ball
+        // [self calculateRunsOnEndBall];
+        [self EndBallMethod];
+        
+        [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
+        self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+        self.btn_StartOver.userInteractionEnabled=YES;
+        //        self.btn_StartBall.userInteractionEnabled=NO;
+        //        [self SaveBallEventREcordvalue];
+        
+        [self AllBtndisableMethod];
+        
+        
+        [self timeLeftSinceDate:startBallTime];
+        NSLog(@"DidClickStartBall batteamover=%d",fetchSEPageLoadRecord.BATTEAMOVERS);
+        int overNo = ((int)fetchSEPageLoadRecord.BATTEAMOVERS);
+        int ballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;//Check isillegal ball for pervious ball
+        int overballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
+        
+        self.ballEventRecord.objOverno=[NSNumber numberWithInt:fetchSEPageLoadRecord.BATTEAMOVERS];
+        self.ballEventRecord.objBallno=[NSNumber numberWithInt:ballNo];
+        self.ballEventRecord.objOverBallcount = [NSNumber numberWithInt:overballNo];
+        self.ballEventRecord.objBallcount=@1;
+        self.ballEventRecord.objBowlercode = fetchSEPageLoadRecord.currentBowlerPlayerCode;
+        self.ballEventRecord.objStrikercode = fetchSEPageLoadRecord.strickerPlayerCode;
+        self.ballEventRecord.objNonstrikercode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
+        
+        
+        
+        //        [DBManager saveBallEventData:self.ballEventRecord];
+        //        [DBManager insertBallCodeAppealEvent:self.ballEventRecord];
+        //        [DBManager insertBallCodeFieldEvent: self.ballEventRecord bowlerEvent:selectedfieldPlayer fieldingFactor: selectedfieldFactor nrs :selectedNRS];
+        //        [DBManager insertBallCodeWicketEvent:self.ballEventRecord];
+        //        [DBManager GetBallDetails :_competitionCode :_matchCode];
+        //
+        [self reloadBowlerTeamBatsmanDetails];
+        // [ self AssignControlValues :YES:@""];
+        
+        
+        //Check for Striker, non Striker and bower present
+        
+        if(fetchSEPageLoadRecord.strickerPlayerName == nil){
+            [self btn_stricker_names:0];
+        }else if(fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
+            [self btn_nonstricker_name:0];
+        }else if(fetchSEPageLoadRecord.currentBowlerPlayerName == nil){
+            [self btn_bowler_name:0];
+        }
+        
+        
+        [self resetBallEventObject];
+        [self resetAllButtonOnEndBall];
     }
 }
 
@@ -2297,13 +2306,8 @@ EditModeVC * objEditModeVc;
                 }
                 NSLog(@"Open Endinnings");
             }
-            if(fetchSEPageLoadRecord.BATTEAMOVRBALLS > 5)
-            {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Six legitimate balls already bowled.\nDo you want to continue?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
-                [altert show];
-                [altert setTag:2003];
-            }
-
+            
+            
             else if(fetchSEPageLoadRecord.INNINGSSTATUS== 1)
             {
                 UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"All Innings has been Completed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
@@ -2361,8 +2365,12 @@ EditModeVC * objEditModeVc;
                 }
             }
             
+           
+            
         }
         else {
+            
+            
             if([self.lbl_stricker_name.text isEqualToString:@""] )
             {
                 UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
@@ -2393,6 +2401,13 @@ EditModeVC * objEditModeVc;
         [altert show];
         
     }
+    if(fetchSEPageLoadRecord.BATTEAMOVRBALLS > 5)
+    {
+        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Six legitimate balls already bowled.\nDo you want to continue?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        [altert show];
+        [altert setTag:3001];
+    }
+    
 }
 
 -(void)insertBallDetails :(NSString*) BallCode :(NSString *) insertType
@@ -2934,13 +2949,6 @@ EditModeVC * objEditModeVc;
     
     
     
-    
-    
-    
-    
-    
-    
-    
     //NSMutableArray * objUmpireArray =[DBManager GETUMPIRE:self.competitionCode :self.matchCode ];
     
     
@@ -2954,6 +2962,8 @@ EditModeVC * objEditModeVc;
     //    [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord :[NSString stringWithFormat:@"%d",getOverStatus] :Umpire1Code :umpire2Code];
     
 }
+
+
 -(void)overEVENT
 {
     
@@ -3123,13 +3133,12 @@ EditModeVC * objEditModeVc;
                                     //bowerbtn
                                 }
                             }
+                            
+
                         }
                     }
                     
-                    
-                    
-                    
-                    
+
                     //ballticker clear
                     
                     if(![ValidedMatchType containsObject: [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.MATCHTYPE]] &&[self.ballEventRecord.objOverno intValue] >= fetchSEPageLoadRecord.MATCHTYPE && ![MuliteDayMatchtype containsObject: [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.MATCHTYPE]])
@@ -3300,12 +3309,22 @@ EditModeVC * objEditModeVc;
         //            [altert show];
         //        }
         //do something
-    }
-    else if(buttonIndex == 1)//Annul button pressed.
+        if (alertView.tag == 3000 ) {
+            [self StartBall];
+            
+        }if (alertView.tag == 3001) {
+            
+        }
+        
+    }    else if(buttonIndex == 1)//Annul button pressed.
     {
         if(alertView.tag == 1001)
         {
             
+        }
+        if (alertView.tag == 3001) {
+            
+            [self DidClickStartOver:self.btn_StartOver];
         }
         if(alertView.tag == 1003)
         {
@@ -5657,6 +5676,7 @@ EditModeVC * objEditModeVc;
     [self unselectedButtonBg: self.btn_B6];
     [self unselectedButtonBg: self.btn_extras];
     [extrasTableView removeFromSuperview ];
+    [miscFiltersTableview removeFromSuperview];
     [self unselectedButtonBg: self.btn_wkts];
     [self unselectedButtonBg: self.btn_overthrow];
     [self unselectedButtonBg: self.btn_miscFilter];
@@ -11972,9 +11992,6 @@ EditModeVC * objEditModeVc;
     }
     
     
-    
-    
-    
     [self.navigationController pushViewController:scoreCardVC animated:YES];
     
     
@@ -12255,6 +12272,26 @@ EditModeVC * objEditModeVc;
     return YES;
 }
 
+
+-(BOOL) checkValidation {
+    
+    if (self.ballEventRecord.objWWREGION == @"" &&
+        self.ballEventRecord.objRuns.intValue > 0 &&
+        self.ballEventRecord.objByes.intValue == 0 &&
+        self.ballEventRecord.objLegByes.intValue == 0 &&
+        self.ballEventRecord.objWide.intValue == 0)
+    {
+        
+        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Wagon Wheel Point is not Selected.\n Do you want to continue ?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        [altert show];
+        [altert setTag:3000];
+        
+        return NO;
+    }
+    
+    return YES;
+    
+}
 
 
 
