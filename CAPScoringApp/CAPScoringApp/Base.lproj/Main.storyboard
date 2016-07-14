@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -2881,7 +2881,9 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tqg-Ip-yys">
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="A8x-Ye-cj5"/>
+                                                    <constraint firstAttribute="width" constant="100" id="A8x-Ye-cj5">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="200"/>
+                                                    </constraint>
                                                     <constraint firstAttribute="height" constant="21" id="Vaa-zm-5mF"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="15"/>
@@ -2903,7 +2905,9 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rHD-9H-9dt">
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="100" id="bIn-03-0p4"/>
+                                                    <constraint firstAttribute="width" constant="100" id="bIn-03-0p4">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="200"/>
+                                                    </constraint>
                                                     <constraint firstAttribute="height" constant="21" id="hvG-y4-FdM"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="15"/>
@@ -2994,8 +2998,12 @@
                                                     <constraint firstItem="X7O-bx-rHR" firstAttribute="top" secondItem="F7j-7W-uaP" secondAttribute="top" constant="10" id="RmS-Ic-xxz"/>
                                                     <constraint firstItem="MnM-VB-f5c" firstAttribute="leading" secondItem="F7j-7W-uaP" secondAttribute="leading" constant="5" id="a6v-dW-kZ3"/>
                                                     <constraint firstAttribute="bottom" secondItem="Q4H-g0-kTh" secondAttribute="bottom" constant="7" id="clw-8Y-Gjh"/>
-                                                    <constraint firstItem="cW5-P2-qy3" firstAttribute="top" secondItem="F7j-7W-uaP" secondAttribute="top" constant="50" id="ggT-8c-mgJ"/>
-                                                    <constraint firstItem="cW5-P2-qy3" firstAttribute="leading" secondItem="0vV-14-AWt" secondAttribute="trailing" constant="8" id="guf-4I-3gO"/>
+                                                    <constraint firstItem="cW5-P2-qy3" firstAttribute="top" secondItem="F7j-7W-uaP" secondAttribute="top" constant="50" id="ggT-8c-mgJ">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                                    </constraint>
+                                                    <constraint firstItem="cW5-P2-qy3" firstAttribute="leading" secondItem="0vV-14-AWt" secondAttribute="trailing" constant="8" id="guf-4I-3gO">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="18"/>
+                                                    </constraint>
                                                     <constraint firstItem="Q4H-g0-kTh" firstAttribute="top" secondItem="0vV-14-AWt" secondAttribute="bottom" constant="1" id="k3V-35-jDV"/>
                                                     <constraint firstAttribute="trailing" secondItem="Q4H-g0-kTh" secondAttribute="trailing" constant="95" id="lxA-WP-qxN"/>
                                                     <constraint firstItem="Q4H-g0-kTh" firstAttribute="leading" secondItem="F7j-7W-uaP" secondAttribute="leading" constant="5" id="rhx-03-iZu"/>
@@ -3815,9 +3823,15 @@
                                             <constraint firstItem="F7j-7W-uaP" firstAttribute="leading" secondItem="TW7-ig-sej" secondAttribute="leading" constant="10" id="O4h-oz-rRf">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                             </constraint>
-                                            <constraint firstItem="rHD-9H-9dt" firstAttribute="leading" secondItem="tqg-Ip-yys" secondAttribute="trailing" constant="30" id="UDq-D4-anA"/>
-                                            <constraint firstItem="rHD-9H-9dt" firstAttribute="top" secondItem="TW7-ig-sej" secondAttribute="top" constant="90" id="YvI-5C-2vJ"/>
-                                            <constraint firstItem="tqg-Ip-yys" firstAttribute="top" secondItem="TW7-ig-sej" secondAttribute="top" constant="90" id="bUF-iT-XqH"/>
+                                            <constraint firstItem="rHD-9H-9dt" firstAttribute="leading" secondItem="tqg-Ip-yys" secondAttribute="trailing" constant="30" id="UDq-D4-anA">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="-200"/>
+                                            </constraint>
+                                            <constraint firstItem="rHD-9H-9dt" firstAttribute="top" secondItem="TW7-ig-sej" secondAttribute="top" constant="90" id="YvI-5C-2vJ">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                            </constraint>
+                                            <constraint firstItem="tqg-Ip-yys" firstAttribute="top" secondItem="TW7-ig-sej" secondAttribute="top" constant="90" id="bUF-iT-XqH">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="97"/>
+                                            </constraint>
                                             <constraint firstItem="F7j-7W-uaP" firstAttribute="top" secondItem="TW7-ig-sej" secondAttribute="top" constant="10" id="bxg-ai-lUD">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                             </constraint>
@@ -3830,7 +3844,9 @@
                                             <constraint firstAttribute="bottom" secondItem="zHh-YV-JmC" secondAttribute="bottom" constant="10" id="gRb-F9-9Il">
                                                 <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                             </constraint>
-                                            <constraint firstItem="coO-av-0F1" firstAttribute="leading" secondItem="rHD-9H-9dt" secondAttribute="trailing" constant="19" id="u3J-wz-6vJ"/>
+                                            <constraint firstItem="coO-av-0F1" firstAttribute="leading" secondItem="rHD-9H-9dt" secondAttribute="trailing" constant="19" id="u3J-wz-6vJ">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="39"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="subviews">
