@@ -18,6 +18,7 @@
 
 @interface Other_WicketVC ()
 {
+
     WicketTypeRecord*objEventRecord;
     SelectPlayerRecord *objPlayerRecord;
     GetPlayerDetailOnAbsentHurt *objAbsentHurt;
