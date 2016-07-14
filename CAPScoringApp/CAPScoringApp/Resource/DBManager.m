@@ -1878,7 +1878,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
-    NSString *query=[NSString stringWithFormat:@"(SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO <= @INNINGSNO AND (AWARDEDTOTEAMCODE = '%@') AND (BALLCODE IS NULL OR PENALTYTYPECODE = 'MSC135'))",COMPETITIONCODE,MATCHCODE,BOWLINGTEAMCODE];
+    NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO <= @INNINGSNO AND (AWARDEDTOTEAMCODE = '%@') AND (BALLCODE IS NULL OR PENALTYTYPECODE = 'MSC135')",COMPETITIONCODE,MATCHCODE,BOWLINGTEAMCODE];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
@@ -1893,7 +1893,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
-    return 0;
+    return @"0";
     
 }
 
@@ -1909,7 +1909,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
-    NSString *query=[NSString stringWithFormat:@"(SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO < '%@' - 1 AND AWARDEDTOTEAMCODE = '%@' AND ((INNINGSNO = @INNINGSNO AND BALLCODE IS NULL) OR ((INNINGSNO < @INNINGSNO - 1 AND BALLCODE IS NULL) OR PENALTYTYPECODE = 'MSC135')))",COMPETITIONCODE,MATCHCODE,INNINGSNO,BATTINGTEAMCODE];
+    NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO < '%@' - 1 AND AWARDEDTOTEAMCODE = '%@' AND ((INNINGSNO = @INNINGSNO AND BALLCODE IS NULL) OR ((INNINGSNO < @INNINGSNO - 1 AND BALLCODE IS NULL) OR PENALTYTYPECODE = 'MSC135'))",COMPETITIONCODE,MATCHCODE,INNINGSNO,BATTINGTEAMCODE];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
@@ -1924,7 +1924,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
-    return 0;
+    return @"0";
     
 }
 
@@ -1941,7 +1941,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
-    NSString *query=[NSString stringWithFormat:@"((SELECT IFNULL(SUM(GRANDTOTAL),0)FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO < '%@')",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
+    NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(GRANDTOTAL),0)FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO < %@",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
@@ -1959,7 +1959,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
-    return 0;
+    return @"0";
     
 }
 

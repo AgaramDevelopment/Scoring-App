@@ -30,6 +30,10 @@
 @property(strong,nonatomic)NSString *BOWLTEAMLOGO;
 @property(strong,nonatomic)NSString *MATCHTYPE;
 @property(strong,nonatomic)NSString *ISOTHERSMATCHTYPE;
+@property(strong,nonatomic)NSString *REQRUNRATE;
+@property(strong,nonatomic)NSNumber *TARGETRUNS;
+@property(strong,nonatomic)NSNumber *REMBALLS;
+
 
 
 
