@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -584,10 +584,23 @@
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nLm-Re-OGb">
                                                     <rect key="frame" x="374" y="5" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="310" id="VnU-em-zSY"/>
+                                                        <constraint firstAttribute="height" constant="54" id="fuB-6Y-fJK"/>
+                                                    </constraints>
                                                     <inset key="contentEdgeInsets" minX="260" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" image="dropDown"/>
-                                                    <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                                        <rect key="frame" x="0.0" y="0.0" width="310" height="54"/>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="VnU-em-zSY"/>
+                                                            <exclude reference="fuB-6Y-fJK"/>
+                                                        </mask>
+                                                    </variation>
+                                                    <variation key="heightClass=regular-widthClass=regular">
+                                                        <mask key="constraints">
+                                                            <include reference="VnU-em-zSY"/>
+                                                            <include reference="fuB-6Y-fJK"/>
+                                                        </mask>
                                                     </variation>
                                                     <connections>
                                                         <action selector="btn_man_of_the_match:" destination="-1" eventType="touchUpInside" id="45X-mF-aCP"/>
@@ -596,50 +609,62 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5j6-Lp-IE1">
                                                     <rect key="frame" x="8" y="0.0" width="363" height="50"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="250" id="Afd-58-2H3"/>
-                                                        <constraint firstAttribute="height" constant="50" id="g8e-LJ-5OZ"/>
+                                                        <constraint firstAttribute="width" constant="250" id="8n9-DK-gbS"/>
+                                                        <constraint firstAttribute="height" constant="50" id="veC-5Z-h2l"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="22"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
                                                         <mask key="constraints">
-                                                            <exclude reference="Afd-58-2H3"/>
-                                                            <exclude reference="g8e-LJ-5OZ"/>
+                                                            <exclude reference="8n9-DK-gbS"/>
+                                                            <exclude reference="veC-5Z-h2l"/>
                                                         </mask>
                                                     </variation>
                                                     <variation key="heightClass=regular-widthClass=regular">
                                                         <mask key="constraints">
-                                                            <include reference="Afd-58-2H3"/>
-                                                            <include reference="g8e-LJ-5OZ"/>
+                                                            <include reference="8n9-DK-gbS"/>
+                                                            <include reference="veC-5Z-h2l"/>
                                                         </mask>
                                                     </variation>
                                                 </label>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="5j6-Lp-IE1" firstAttribute="leading" secondItem="Co6-1X-G2C" secondAttribute="leading" constant="8" id="0iF-KD-qkY"/>
-                                                <constraint firstAttribute="bottom" secondItem="5j6-Lp-IE1" secondAttribute="bottom" id="8uc-Wq-pkI"/>
-                                                <constraint firstItem="5j6-Lp-IE1" firstAttribute="top" secondItem="Co6-1X-G2C" secondAttribute="top" id="EZq-HV-fdz"/>
+                                                <constraint firstItem="5j6-Lp-IE1" firstAttribute="leading" secondItem="Co6-1X-G2C" secondAttribute="leading" constant="8" id="2Hv-q6-9g7"/>
+                                                <constraint firstItem="nLm-Re-OGb" firstAttribute="top" secondItem="Co6-1X-G2C" secondAttribute="top" id="6Q6-ti-jbT"/>
                                                 <constraint firstAttribute="width" constant="310" id="JWr-QG-7Lo"/>
                                                 <constraint firstAttribute="height" constant="50" id="ZEj-dL-ehJ"/>
+                                                <constraint firstAttribute="trailing" secondItem="5j6-Lp-IE1" secondAttribute="trailing" constant="52" id="gh8-bn-kRQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="5j6-Lp-IE1" secondAttribute="bottom" id="h9M-YP-5xE"/>
+                                                <constraint firstItem="5j6-Lp-IE1" firstAttribute="top" secondItem="Co6-1X-G2C" secondAttribute="top" id="hny-zC-Coe"/>
+                                                <constraint firstAttribute="bottom" secondItem="nLm-Re-OGb" secondAttribute="bottom" constant="-4" id="kcT-FI-EU7"/>
+                                                <constraint firstAttribute="trailing" secondItem="nLm-Re-OGb" secondAttribute="trailing" id="nGD-b9-Uck"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
                                                     <exclude reference="JWr-QG-7Lo"/>
                                                     <exclude reference="ZEj-dL-ehJ"/>
-                                                    <exclude reference="0iF-KD-qkY"/>
-                                                    <exclude reference="8uc-Wq-pkI"/>
-                                                    <exclude reference="EZq-HV-fdz"/>
+                                                    <exclude reference="6Q6-ti-jbT"/>
+                                                    <exclude reference="kcT-FI-EU7"/>
+                                                    <exclude reference="nGD-b9-Uck"/>
+                                                    <exclude reference="2Hv-q6-9g7"/>
+                                                    <exclude reference="gh8-bn-kRQ"/>
+                                                    <exclude reference="h9M-YP-5xE"/>
+                                                    <exclude reference="hny-zC-Coe"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=regular">
                                                 <mask key="constraints">
                                                     <include reference="JWr-QG-7Lo"/>
                                                     <include reference="ZEj-dL-ehJ"/>
-                                                    <include reference="0iF-KD-qkY"/>
-                                                    <include reference="8uc-Wq-pkI"/>
-                                                    <include reference="EZq-HV-fdz"/>
+                                                    <include reference="6Q6-ti-jbT"/>
+                                                    <include reference="kcT-FI-EU7"/>
+                                                    <include reference="nGD-b9-Uck"/>
+                                                    <include reference="2Hv-q6-9g7"/>
+                                                    <include reference="gh8-bn-kRQ"/>
+                                                    <include reference="h9M-YP-5xE"/>
+                                                    <include reference="hny-zC-Coe"/>
                                                 </mask>
                                             </variation>
                                         </view>
