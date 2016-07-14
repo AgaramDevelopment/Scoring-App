@@ -260,6 +260,7 @@
         selectBowlercode=objChanceTeamRecord.TEAMCODE;
     }
     
+    }
 }
 -(IBAction)didClickBackBtnAction:(id)sender
 {
@@ -267,5 +268,5 @@
 }
 
 // insertChanceTeam
-      
-                  @end
+    
+    @end

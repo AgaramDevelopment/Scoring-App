@@ -151,6 +151,7 @@ BOOL IsBack;
     
     datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     
+
     [self.txt_startInnings setInputView:datePicker];
     UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
     [toolbar setTintColor:[UIColor grayColor]];
@@ -163,6 +164,7 @@ BOOL IsBack;
     [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
     
     [self.txt_startInnings setInputAccessoryView:toolbar];
+ 
     
     
 }
