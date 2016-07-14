@@ -187,8 +187,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "5552"
             endingLineNumber = "5552"
-            landmarkName = "-resetBallEventObject"
-            landmarkType = "5">
+            landmarkName = "@implementation ScorEnginVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1931,7 +1931,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12153"
             endingLineNumber = "12153"
-            landmarkName = "-EndInningsBackBtnAction"
+            landmarkName = "-SyncData_btn:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2251,7 +2251,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3194"
             endingLineNumber = "3194"
-            landmarkName = "-alertView:clickedButtonAtIndex:"
+            landmarkName = "-IsTeamALLOUT"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
