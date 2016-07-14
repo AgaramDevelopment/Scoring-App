@@ -7,6 +7,7 @@
     <customFonts key="customFonts">
         <mutableArray key="RAJDHANI-BOLD.TTF">
             <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-REGULAR.TTF">
             <string>Rajdhani-Regular</string>
@@ -38,6 +39,37 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="EFZ-zz-mRQ">
                             <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
                         </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enf-DN-FPk">
+                            <rect key="frame" x="0.0" y="0.0" width="550" height="75"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REVISED TARGET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDa-Vk-toL">
+                                    <rect key="frame" x="175" y="15" width="200" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="kWb-sL-9Dk"/>
+                                        <constraint firstAttribute="width" constant="200" id="pEG-g7-Pd8"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOU-NK-97y">
+                                    <rect key="frame" x="15" y="15" width="45" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="Grc-bG-64d"/>
+                                        <constraint firstAttribute="width" constant="45" id="keQ-Qp-YE3"/>
+                                    </constraints>
+                                    <state key="normal" image="ico-back-btn"/>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" red="0.1647058824" green="0.24313725489999999" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="ZDa-Vk-toL" firstAttribute="centerX" secondItem="enf-DN-FPk" secondAttribute="centerX" id="0iK-5X-8xt"/>
+                                <constraint firstItem="VOU-NK-97y" firstAttribute="leading" secondItem="enf-DN-FPk" secondAttribute="leading" constant="15" id="8rk-iH-IuX"/>
+                                <constraint firstAttribute="height" constant="75" id="UuV-ix-Hlg"/>
+                                <constraint firstItem="VOU-NK-97y" firstAttribute="top" secondItem="enf-DN-FPk" secondAttribute="top" constant="15" id="vLy-N6-MOf"/>
+                                <constraint firstItem="ZDa-Vk-toL" firstAttribute="top" secondItem="enf-DN-FPk" secondAttribute="top" constant="15" id="wb4-wU-gd8"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sxn-ye-yWI">
                             <rect key="frame" x="55" y="154" width="440" height="50"/>
                             <subviews>
@@ -147,25 +179,17 @@
                                 <action selector="btn_targetok:" destination="-1" eventType="touchUpInside" id="7hx-1f-oZ8"/>
                             </connections>
                         </button>
-                        <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="meg-ck-Huq">
-                            <rect key="frame" x="0.0" y="0.0" width="550" height="44"/>
-                            <color key="barTintColor" red="0.17254901959999999" green="0.23921568630000001" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
-                            <textAttributes key="titleTextAttributes">
-                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </textAttributes>
-                            <items>
-                                <navigationItem title="REVICED TARGET" id="Tx5-R0-D4o"/>
-                            </items>
-                        </navigationBar>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="enf-DN-FPk" firstAttribute="leading" secondItem="89m-U6-pjj" secondAttribute="leading" id="37M-oK-60J"/>
                         <constraint firstItem="i6w-ze-Y8z" firstAttribute="top" secondItem="o5l-gs-5aj" secondAttribute="bottom" constant="16" id="3hI-sg-bab"/>
                         <constraint firstItem="EFZ-zz-mRQ" firstAttribute="top" secondItem="89m-U6-pjj" secondAttribute="top" id="6FY-mz-Ryf"/>
                         <constraint firstItem="sxn-ye-yWI" firstAttribute="leading" secondItem="89m-U6-pjj" secondAttribute="leading" constant="55" id="931-S1-Kpf"/>
+                        <constraint firstItem="enf-DN-FPk" firstAttribute="top" secondItem="89m-U6-pjj" secondAttribute="top" id="9RI-Ep-seH"/>
                         <constraint firstAttribute="bottom" secondItem="F2i-8l-LWa" secondAttribute="bottom" constant="49" id="9Xb-GC-0m8"/>
                         <constraint firstAttribute="trailing" secondItem="o5l-gs-5aj" secondAttribute="trailing" constant="56" id="ERk-xL-nnf"/>
+                        <constraint firstAttribute="trailing" secondItem="enf-DN-FPk" secondAttribute="trailing" id="FBb-3Y-J1A"/>
                         <constraint firstItem="sxn-ye-yWI" firstAttribute="top" secondItem="89m-U6-pjj" secondAttribute="top" constant="154" id="Fn9-gh-pY8"/>
                         <constraint firstItem="i6w-ze-Y8z" firstAttribute="top" secondItem="o5l-gs-5aj" secondAttribute="bottom" constant="16" id="MDR-xI-AAK"/>
                         <constraint firstItem="o5l-gs-5aj" firstAttribute="top" secondItem="sxn-ye-yWI" secondAttribute="bottom" constant="14" id="MM2-j0-GfH"/>
@@ -197,5 +221,6 @@
     </objects>
     <resources>
         <image name="BackgroundImg" width="2048" height="2732"/>
+        <image name="ico-back-btn" width="30" height="30"/>
     </resources>
 </document>

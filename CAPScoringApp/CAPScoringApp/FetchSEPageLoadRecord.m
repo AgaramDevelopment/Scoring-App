@@ -148,19 +148,21 @@
 
 BOOL overNo;
 BOOL  getOverStatus;
+@synthesize REQRUNRATE;
+@synthesize TARGETRUNS;
+@synthesize REMBALLS;
 
 
 -(void) fetchSEPageLoadDetails :(NSString*) COMPETITIONCODE :(NSString *)MATCHCODE{
     
     NSNumber *TOTALBATTEAMRUNS;
     NSNumber *TOTALBOWLTEAMRUNS;
-    NSNumber *REQRUNRATE;
     
-    NSNumber *REMBALLS;
+    //NSNumber *REMBALLS;
     NSString *T_ATWOROTW;
     NSString *T_BOWLINGEND;
     NSNumber *COMPLETEDINNINGS;
-    NSNumber *TARGETRUNS;
+   // NSNumber *TARGETRUNS;
     
     NSString *selectedNRS;
     NSInteger TEMPBATTEAMPENALTY;
@@ -614,8 +616,9 @@ BOOL  getOverStatus;
     TOTALBOWLTEAMRUNS = [[NSNumber alloc] init];
     TOTALBOWLTEAMRUNS =[NSNumber numberWithInt:0];
     
-    REQRUNRATE = [[NSNumber alloc] init];
-    REQRUNRATE = [NSNumber numberWithInt:0];
+        REQRUNRATE = @"0";
+//    REQRUNRATE = [[NSNumber alloc] init];
+//    REQRUNRATE = [NSNumber numberWithInt:0];
     
     RUNSREQUIRED = [[NSNumber alloc] init];
     RUNSREQUIRED = [NSNumber numberWithInt:0];
@@ -688,15 +691,16 @@ BOOL  getOverStatus;
             TOTALBOWLTEAMRUNS =  [NSNumber numberWithInt: TOTALBOWLTEAMRUNS.intValue + 1];
         }else if(matchInningsNOTEqual){
             TOTALBOWLTEAMRUNS =  [NSNumber numberWithInt: TOTALBOWLTEAMRUNS.intValue + 1];
-        }else{
-            TOTALBATTEAMRUNS = TOTALBOWLTEAMRUNS;
         }
+//        else{
+//            TOTALBOWLTEAMRUNS = TOTALBOWLTEAMRUNS;
+//        }
         
-        TARGETRUNS = T_TARGETRUNS > 0 ? T_TARGETRUNS : TARGETRUNS;
+        TARGETRUNS = T_TARGETRUNS.intValue > 0 ? T_TARGETRUNS : TARGETRUNS;
         
-        TOTALBOWLTEAMRUNS =  T_TARGETRUNS > 0 ? T_TARGETRUNS : TOTALBOWLTEAMRUNS;
+        TOTALBOWLTEAMRUNS =  T_TARGETRUNS.intValue > 0 ? T_TARGETRUNS : TOTALBOWLTEAMRUNS;
         
-        TOTALBOWLTEAMRUNS = (TOTALBOWLTEAMRUNS.intValue == @0 ?  @1 : TOTALBOWLTEAMRUNS);
+        TOTALBOWLTEAMRUNS = (TOTALBOWLTEAMRUNS.intValue == 0 ?  [NSNumber numberWithInt:1] : TOTALBOWLTEAMRUNS);
         
         int runReq = TOTALBOWLTEAMRUNS.intValue - TOTALBATTEAMRUNS.intValue;
         
@@ -707,9 +711,12 @@ BOOL  getOverStatus;
         
         REMBALLS = [NSNumber numberWithInt:remBallsData];
         
-        float reqRunRateData = (int)REMBALLS == 0 ? 0 :((int)RUNSREQUIRED / (int)REMBALLS) * ((int)REMBALLS < 6 ? 1 : 6);
+        float reqRunRateData = REMBALLS.intValue == 0 ? 0 :
+        (RUNSREQUIRED.floatValue / REMBALLS.floatValue) * (REMBALLS.intValue < 6 ? 1 : 6);
         
-        REQRUNRATE = [NSNumber numberWithFloat:reqRunRateData];
+        
+        
+        REQRUNRATE = [NSString  stringWithFormat:@"%f",reqRunRateData];
     }
     
     NSString *lastvalueData = LASTBALLCODE;

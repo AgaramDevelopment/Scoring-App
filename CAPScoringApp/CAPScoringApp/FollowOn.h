@@ -27,6 +27,7 @@
 @property (nonatomic,strong) NSString * nonStrickerCode;
 @property (nonatomic,strong) NSString * inningsno;
 @property (nonatomic,assign) NSString * inningsStatus;
+@property (nonatomic,strong) NSMutableArray *objBowlingTeamdetail;
 
 
 @property (nonatomic,strong) NSNumber * ISINNINGSREVERT;

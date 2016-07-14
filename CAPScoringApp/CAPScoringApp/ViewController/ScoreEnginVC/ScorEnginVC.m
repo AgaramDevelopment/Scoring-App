@@ -140,6 +140,8 @@
     BOOL isBowlerOpen;
     BOOL leftSlideSwipe;
     BOOL isCaught;
+    BOOL isPitchmap;
+    BOOL ispichmapSelectValue;
     
     NSMutableArray *strickerList;
     NSMutableArray *nonStrickerList;
@@ -1179,7 +1181,7 @@ EditModeVC * objEditModeVc;
 //    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
 //    
     if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
-        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
     }else{
         _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
     }
@@ -1337,7 +1339,7 @@ EditModeVC * objEditModeVc;
 //    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
     
     if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
-        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
     }else{
         _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
     }
@@ -3427,6 +3429,18 @@ EditModeVC * objEditModeVc;
     {
         [objextras removeFromSuperview];
     }
+    else if(ispichmapSelectValue==NO)
+    {
+          [self unselectedButtonBg:self.btn_pichmap];
+           
+    }
+        
+    else if(ispichmapSelectValue==YES)
+    {
+        [self selectedButtonBg:self.btn_pichmap];
+        
+    }
+    
     
     _View_Appeal.hidden=YES;
     self.view_bowlType.hidden = YES;
@@ -3787,6 +3801,8 @@ EditModeVC * objEditModeVc;
     }
     else if(selectBtnTag.tag==110)
     {
+        if(isPitchmap==NO)
+        {
         [self selectedButtonBg:selectBtnTag];
         
         // [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
@@ -3814,8 +3830,16 @@ EditModeVC * objEditModeVc;
         
         
         self.img_pichmap.hidden=NO;
+            isPitchmap=YES;
         
-        
+        }
+        else
+        {
+            [self unselectedButtonBg:self.btn_pichmap];
+             self.PichMapTittle.hidden=YES;
+            self.img_pichmap.hidden=YES;
+            isPitchmap=NO;
+        }
     }
     else if(selectBtnTag.tag==111)
     {
@@ -3936,7 +3960,7 @@ EditModeVC * objEditModeVc;
     {
         [Img_ball removeFromSuperview];
     }
-    
+    ispichmapSelectValue=YES;
     CGPoint p = [pichmapGesture locationInView:self.img_pichmap];
     NSLog(@"pointx=%f,pointY=%f",p.x,p.y);
     float Xposition = p.x-10;
@@ -4862,7 +4886,9 @@ EditModeVC * objEditModeVc;
 
 -(IBAction)didClickRightSideBtn_Action:(id)sender
 {
+    
     UIButton *selectBtnTag=(UIButton*)sender;
+    
     
     _View_Appeal.hidden=YES;
     self.view_bowlType.hidden = YES;
@@ -4874,7 +4900,11 @@ EditModeVC * objEditModeVc;
     self.view_Wagon_wheel.hidden=YES;
     self.objcommonRemarkview.hidden=YES;
     
-    
+    if (ispichmapSelectValue== NO)
+    {
+        [self unselectedButtonBg:self.btn_pichmap];
+    }
+
     //wicket
     if(isWicketSelected && selectBtnTag.tag != 107 && wicketOption !=0){
         
@@ -5680,6 +5710,7 @@ EditModeVC * objEditModeVc;
     [self unselectedViewBg:self.view_appeal];
     self.View_Appeal.hidden=YES;
     isEnableTbl=NO;
+    isPitchmap =NO;
   //[self unselectedViewBg: self.View_Appeal];
   //[self unselectedViewBg: self.view_lastinstance];
     
@@ -7726,6 +7757,7 @@ EditModeVC * objEditModeVc;
             objFollowOn.BowlingTeamCode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
             objFollowOn.inningsno       = fetchSEPageLoadRecord.INNINGSNO;
             objFollowOn. inningsStatus      =fetchSEPageLoadRecord.INNINGSSTATUS;
+            objFollowOn.objBowlingTeamdetail =fetchSEPageLoadRecord.getBowlingTeamPlayers;
             objFollowOn.delegate =self;
             
             
@@ -8577,7 +8609,7 @@ EditModeVC * objEditModeVc;
     _lbl_overs.text = [NSString stringWithFormat:@"%d.%d OVS" ,fetchSEPageLoadRecord.BATTEAMOVERS,fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
     if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
-        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
     }else{
         _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
     }
@@ -8666,14 +8698,16 @@ EditModeVC * objEditModeVc;
         NSString *targetLeftValue = @"";
         NSString *targetRightValue = @"";
         targetLeftValue = @"Target:";
-        targetRightValue =   fetchSEPageLoadRecord.T_TARGETRUNS;
+        //targetRightValue =   fetchSEPageLoadRecord.T_TARGETRUNS;
+        targetRightValue =   fetchSEPageLoadRecord.RUNSREQUIRED;
+        
         
         _lbl_target.text = [NSString stringWithFormat:@"%@ %@",targetLeftValue,targetRightValue];
         
-        NSString * remainingBalls = @"1";
+       // NSString * remainingBalls = @"1";
         
         
-        NSString *runsReqForBalls =  [NSString  stringWithFormat:@"Runs required %@ in %@ balls",fetchSEPageLoadRecord.RUNSREQUIRED,remainingBalls];
+        NSString *runsReqForBalls =  [NSString  stringWithFormat:@"Runs required %@ in %@ balls",fetchSEPageLoadRecord.RUNSREQUIRED,fetchSEPageLoadRecord.REMBALLS];
         
         _lbl_runs_required.text = runsReqForBalls;
         

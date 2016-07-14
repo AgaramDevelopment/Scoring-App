@@ -11,7 +11,7 @@
 #import "FollowOnRecords.h"
 #import "InitializeInningsScoreBoardRecord.h"
 #import "DBManager.h"
-
+#import "BowlerEvent.h"
 @interface FollowOn ()
 {
    BOOL IsStricker ;
@@ -136,8 +136,8 @@
     IsStricker =NO;
     IsNonStricker =NO;
     IsBowler =YES;
-    NSMutableArray *objBowlingTeamdetail =[DBManagerFollowOn GetSelectionBattingTeamForFetchTeamNameSelectionChanged:self.matchCode :self.BowlingTeamCode];
-    CommonArry=objBowlingTeamdetail;
+//    NSMutableArray *objBowlingTeamdetail =[DBManagerFollowOn GetSelectionBattingTeamForFetchTeamNameSelectionChanged:self.matchCode :self.BowlingTeamCode];
+    CommonArry=self.objBowlingTeamdetail;
     self.Tbl_Followon.hidden=NO;
     self.tbl_FollowonYposition.constant=self.view_Bowler.frame.origin.y-130;
     [self.Tbl_Followon reloadData];
@@ -271,17 +271,27 @@
                                       reuseIdentifier:MyIdentifier];
     }
     
+    if(IsBowler==YES)
+    {
+        BowlerEvent *objBowlerEventRecords=(BowlerEvent *)[CommonArry objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text = objBowlerEventRecords.BowlerName;
+    }
+    else
+    {
     FollowOnRecords *objFollowOnRecords=(FollowOnRecords *)[CommonArry objectAtIndex:indexPath.row];
     
     cell.textLabel.text = objFollowOnRecords.PLAYERNAME;
+    }
     return cell;
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
     self.Tbl_Followon.hidden=YES;
-    FollowOnRecords* objFollowOnRecords=[CommonArry objectAtIndex:indexPath.row];
+    
     if(IsStricker== YES)
     {
+        FollowOnRecords* objFollowOnRecords=[CommonArry objectAtIndex:indexPath.row];
         if(![self.lbl_nonStriker.text isEqualToString:objFollowOnRecords.PLAYERNAME])
         {
             self.lbl_Striker.text=objFollowOnRecords.PLAYERNAME;
@@ -299,6 +309,7 @@
     }
     else if(IsNonStricker== YES)
     {
+        FollowOnRecords* objFollowOnRecords=[CommonArry objectAtIndex:indexPath.row];
         if(![self.lbl_Striker.text isEqualToString:objFollowOnRecords.PLAYERNAME])
         {
             self.lbl_nonStriker.text=objFollowOnRecords.PLAYERNAME;
@@ -316,10 +327,13 @@
     }
     else if(IsBowler== YES)
     {
-        self.lbl_Bowler.text=objFollowOnRecords.PLAYERNAME;
-        self.bowlingPlayercode=objFollowOnRecords.PLAYERCODE;
+        
+        BowlerEvent *objBowlerEventRecords=(BowlerEvent *)[CommonArry objectAtIndex:indexPath.row];
+            
+        self.lbl_Bowler.text = objBowlerEventRecords.BowlerName;
+        self.bowlingPlayercode=objBowlerEventRecords.BowlerCode;
     }
-    
+ 
 }
 
 //SP_UPDATEFOLLOWON
