@@ -49,12 +49,12 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x0K-QQ-a5s">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WOULD YOU LIKE TO ENFORCE FOLLOW ON" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-lu-fw9">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WOULD YOU LIKE TO ENFORCE FOLLOW ON" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BTG-lu-fw9">
                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="55" id="qr7-cD-tfc"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
@@ -71,10 +71,14 @@
                             </subviews>
                             <color key="backgroundColor" red="0.23529411759999999" green="0.37647058820000001" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="BTG-lu-fw9" firstAttribute="leading" secondItem="x0K-QQ-a5s" secondAttribute="leading" constant="111" id="7br-oa-xNB"/>
+                                <constraint firstItem="BTG-lu-fw9" firstAttribute="leading" secondItem="x0K-QQ-a5s" secondAttribute="leading" constant="111" id="7br-oa-xNB">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="77"/>
+                                </constraint>
                                 <constraint firstAttribute="height" constant="55" id="C1k-Xf-JwF"/>
                                 <constraint firstItem="BTG-lu-fw9" firstAttribute="top" secondItem="x0K-QQ-a5s" secondAttribute="top" id="eyl-zp-WF2"/>
-                                <constraint firstAttribute="trailing" secondItem="BTG-lu-fw9" secondAttribute="trailing" constant="111" id="ylY-yR-OHm"/>
+                                <constraint firstAttribute="trailing" secondItem="BTG-lu-fw9" secondAttribute="trailing" constant="111" id="ylY-yR-OHm">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="77"/>
+                                </constraint>
                             </constraints>
                             <variation key="default">
                                 <mask key="subviews">

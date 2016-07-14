@@ -406,6 +406,10 @@
        {
            [self AlterviewMethod:@"Please Select Wicketkeeper"];
        }
+       else if (isSelectCaptainType == NO && isSelectWKTKeeperType == NO )
+       {
+           [self AlterviewMethod:@"Please Select Captain And Wicketkeeper"];
+       }
    }
 }
 -(void) AlterviewMethod:(NSString *) AlterMsg

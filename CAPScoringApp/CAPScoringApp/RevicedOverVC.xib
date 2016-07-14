@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="RAJDHANI-BOLD.TTF">
+            <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-REGULAR.TTF">
@@ -37,6 +38,37 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="AOr-HM-ybG">
                             <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
                         </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="coG-yR-hrt">
+                            <rect key="frame" x="0.0" y="0.0" width="550" height="75"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjP-5M-yVE">
+                                    <rect key="frame" x="15" y="15" width="45" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="45" id="DaZ-7t-Bih"/>
+                                        <constraint firstAttribute="height" constant="45" id="frv-ek-1nr"/>
+                                    </constraints>
+                                    <state key="normal" image="ico-back-btn"/>
+                                </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REVICED OVER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggp-hZ-ycA">
+                                    <rect key="frame" x="175" y="15" width="200" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="EP1-Cp-t6o"/>
+                                        <constraint firstAttribute="width" constant="200" id="EaY-wZ-pzI"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" red="0.1647058824" green="0.24313725489999999" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="Ggp-hZ-ycA" firstAttribute="top" secondItem="coG-yR-hrt" secondAttribute="top" constant="15" id="1Sn-Ol-tAV"/>
+                                <constraint firstAttribute="height" constant="75" id="LiB-il-fVt"/>
+                                <constraint firstItem="fjP-5M-yVE" firstAttribute="leading" secondItem="coG-yR-hrt" secondAttribute="leading" constant="15" id="gAt-T2-n44"/>
+                                <constraint firstItem="fjP-5M-yVE" firstAttribute="top" secondItem="coG-yR-hrt" secondAttribute="top" constant="15" id="pfD-8o-Vu3"/>
+                                <constraint firstItem="Ggp-hZ-ycA" firstAttribute="centerX" secondItem="coG-yR-hrt" secondAttribute="centerX" id="s08-yA-mI6"/>
+                            </constraints>
+                        </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gfo-t7-KGN">
                             <rect key="frame" x="54" y="133" width="440" height="50"/>
                             <subviews>
@@ -131,29 +163,21 @@
                                 <action selector="btn_submit:" destination="-1" eventType="touchUpInside" id="wcP-Ke-oha"/>
                             </connections>
                         </button>
-                        <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qAK-Yh-XGm">
-                            <rect key="frame" x="0.0" y="0.0" width="550" height="44"/>
-                            <color key="barTintColor" red="0.17254901959999999" green="0.23921568630000001" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
-                            <textAttributes key="titleTextAttributes">
-                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </textAttributes>
-                            <items>
-                                <navigationItem title="REVICED OVER" id="WMT-gd-ccZ"/>
-                            </items>
-                        </navigationBar>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="Cqv-KU-huN" firstAttribute="leading" secondItem="Fgj-a3-8H4" secondAttribute="leading" constant="54" id="1Dk-IA-AO1"/>
                         <constraint firstItem="plE-TY-XgS" firstAttribute="leading" secondItem="Fgj-a3-8H4" secondAttribute="leading" constant="54" id="25p-5R-goG"/>
+                        <constraint firstAttribute="trailing" secondItem="coG-yR-hrt" secondAttribute="trailing" id="4BX-Zz-QXL"/>
                         <constraint firstItem="plE-TY-XgS" firstAttribute="top" secondItem="Cqv-KU-huN" secondAttribute="bottom" constant="36" id="8Vw-P3-QTM"/>
                         <constraint firstItem="Gfo-t7-KGN" firstAttribute="leading" secondItem="Fgj-a3-8H4" secondAttribute="leading" constant="54" id="9OU-9c-q5F"/>
                         <constraint firstItem="AOr-HM-ybG" firstAttribute="top" secondItem="Fgj-a3-8H4" secondAttribute="top" id="F14-Hd-U6t"/>
                         <constraint firstAttribute="trailing" secondItem="Gfo-t7-KGN" secondAttribute="trailing" constant="56" id="FgI-bX-d0o"/>
+                        <constraint firstItem="coG-yR-hrt" firstAttribute="leading" secondItem="Fgj-a3-8H4" secondAttribute="leading" id="QBH-fe-wBb"/>
                         <constraint firstItem="AOr-HM-ybG" firstAttribute="leading" secondItem="Fgj-a3-8H4" secondAttribute="leading" id="SKI-Ic-98B"/>
                         <constraint firstItem="Gfo-t7-KGN" firstAttribute="top" secondItem="Fgj-a3-8H4" secondAttribute="top" constant="133" id="Sjp-x7-zjO"/>
                         <constraint firstAttribute="trailing" secondItem="plE-TY-XgS" secondAttribute="trailing" constant="64" id="Vyu-6T-46r"/>
+                        <constraint firstItem="coG-yR-hrt" firstAttribute="top" secondItem="Fgj-a3-8H4" secondAttribute="top" id="cNs-MO-HTo"/>
                         <constraint firstAttribute="trailing" secondItem="Cqv-KU-huN" secondAttribute="trailing" constant="56" id="ga7-uv-mya"/>
                         <constraint firstAttribute="bottom" secondItem="AOr-HM-ybG" secondAttribute="bottom" id="hGk-pg-Qm9"/>
                         <constraint firstItem="plE-TY-XgS" firstAttribute="top" secondItem="Cqv-KU-huN" secondAttribute="bottom" constant="36" id="lSn-2S-Ddb"/>
@@ -175,5 +199,6 @@
     </objects>
     <resources>
         <image name="BackgroundImg" width="2048" height="2732"/>
+        <image name="ico-back-btn" width="30" height="30"/>
     </resources>
 </document>

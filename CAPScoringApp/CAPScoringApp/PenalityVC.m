@@ -283,9 +283,22 @@ NSString *penaltytypereasons;
     isbtnbattingselected=YES;
 }
 
-
-
-//drop down button
+- (BOOL)textField:(UITextField *)theTextField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (string.length == 0) {
+        return YES;
+    }
+    NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    for (int i = 0; i < [string length]; i++) {
+        unichar c = [string characterAtIndex:i];
+        if ([myCharSet characterIsMember:c]) {
+            return YES;
+        }
+    }
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Invalid Input" message:@"Only numbers are allowed for participant number." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+    return NO;
+}//drop down button
 -(IBAction)didclicktouch:(id)sender{
     
     if(self.tbl_penality.hidden==YES)

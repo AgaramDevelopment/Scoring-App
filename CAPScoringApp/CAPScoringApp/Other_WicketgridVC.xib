@@ -8,6 +8,9 @@
         <mutableArray key="RAJDHANI-BOLD.TTF">
             <string>Rajdhani-Bold</string>
         </mutableArray>
+        <mutableArray key="RAJDHANI-REGULAR.TTF">
+            <string>Rajdhani-Regular</string>
+        </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Other_WicketgridVC">
@@ -27,44 +30,61 @@
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="owf-ab-pbL">
                             <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
                         </imageView>
-                        <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8SX-W3-lao">
-                            <rect key="frame" x="0.0" y="0.0" width="550" height="44"/>
-                            <color key="barTintColor" red="0.17254901959999999" green="0.23921568630000001" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
-                            <textAttributes key="titleTextAttributes">
-                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </textAttributes>
-                            <items>
-                                <navigationItem title="OTHER WICKETS" id="EDZ-bZ-T1j"/>
-                            </items>
-                        </navigationBar>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j2u-dD-HVg">
-                            <rect key="frame" x="360" y="10" width="180" height="30"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UeC-DR-nVA">
+                            <rect key="frame" x="0.0" y="0.0" width="550" height="75"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVh-jj-c41">
-                                    <rect key="frame" x="0.0" y="0.0" width="186" height="30"/>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="13"/>
-                                    <state key="normal" title="ADD OTHER WICKETS">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="btn_addotherwickets:" destination="-1" eventType="touchUpInside" id="mdM-30-C5N"/>
-                                    </connections>
-                                </button>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j2u-dD-HVg">
+                                    <rect key="frame" x="375" y="15" width="175" height="45"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UVh-jj-c41">
+                                            <rect key="frame" x="0.0" y="0.0" width="175" height="45"/>
+                                            <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="17"/>
+                                            <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                            <state key="normal" title="ADD OTHER WICKETS">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="btn_addotherwickets:" destination="-1" eventType="touchUpInside" id="mdM-30-C5N"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.12549019610000001" green="0.17254901959999999" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="45" id="d30-Ql-W6n"/>
+                                        <constraint firstAttribute="width" constant="175" id="kpZ-de-04m"/>
+                                    </constraints>
+                                </view>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-add" translatesAutoresizingMaskIntoConstraints="NO" id="Wtk-q0-fbU">
+                                    <rect key="frame" x="376" y="26" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="3ds-Cc-bac"/>
+                                        <constraint firstAttribute="height" constant="20" id="Agd-rb-hCT"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OTHER WICKET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZAG-jy-eei">
+                                    <rect key="frame" x="175" y="15" width="200" height="45"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="200" id="4by-Iq-Z8U"/>
+                                        <constraint firstAttribute="height" constant="45" id="6oE-Gc-ELy"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.12549019610000001" green="0.17254901959999999" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.1647058824" green="0.24313725489999999" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="UVh-jj-c41" firstAttribute="leading" secondItem="j2u-dD-HVg" secondAttribute="leading" id="Abw-1y-2yb"/>
-                                <constraint firstAttribute="bottom" secondItem="UVh-jj-c41" secondAttribute="bottom" id="NPh-N4-BcK"/>
-                                <constraint firstItem="UVh-jj-c41" firstAttribute="top" secondItem="j2u-dD-HVg" secondAttribute="top" id="Nu7-5E-K5w"/>
-                                <constraint firstAttribute="trailing" secondItem="UVh-jj-c41" secondAttribute="trailing" constant="-6" id="m1K-VI-ntY"/>
+                                <constraint firstAttribute="height" constant="75" id="5uj-L7-pAR"/>
+                                <constraint firstItem="Wtk-q0-fbU" firstAttribute="top" secondItem="UeC-DR-nVA" secondAttribute="top" constant="26" id="7UD-TU-VHV"/>
+                                <constraint firstItem="Wtk-q0-fbU" firstAttribute="leading" secondItem="ZAG-jy-eei" secondAttribute="trailing" constant="1" id="G6d-hv-mu4"/>
+                                <constraint firstAttribute="trailing" secondItem="j2u-dD-HVg" secondAttribute="trailing" id="OCD-0F-xSe"/>
+                                <constraint firstItem="ZAG-jy-eei" firstAttribute="centerX" secondItem="UeC-DR-nVA" secondAttribute="centerX" id="VLE-P1-IHy"/>
+                                <constraint firstItem="ZAG-jy-eei" firstAttribute="top" secondItem="UeC-DR-nVA" secondAttribute="top" constant="15" id="ilv-sM-Wpj"/>
+                                <constraint firstItem="j2u-dD-HVg" firstAttribute="top" secondItem="UeC-DR-nVA" secondAttribute="top" constant="15" id="zRz-8p-IAD"/>
                             </constraints>
                         </view>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-add" translatesAutoresizingMaskIntoConstraints="NO" id="Wtk-q0-fbU">
-                            <rect key="frame" x="367" y="15" width="20" height="20"/>
-                        </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SSx-Pr-r4X">
-                            <rect key="frame" x="0.0" y="44" width="550" height="50"/>
+                            <rect key="frame" x="0.0" y="75" width="550" height="50"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="247" verticalHuggingPriority="251" text="WICKET TYPE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aw-gp-flH">
                                     <rect key="frame" x="15" y="14" width="153" height="21"/>
@@ -102,10 +122,10 @@
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hsB-e9-otO">
-                            <rect key="frame" x="0.0" y="93" width="550" height="483"/>
+                            <rect key="frame" x="0.0" y="125" width="550" height="475"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="483" id="fxd-Df-0Fo"/>
+                                <constraint firstAttribute="height" constant="475" id="fxd-Df-0Fo"/>
                             </constraints>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="Nqv-A5-BlA"/>
@@ -114,27 +134,17 @@
                         </tableView>
                     </subviews>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="8SX-W3-lao" secondAttribute="trailing" id="0wz-wB-OZZ"/>
-                        <constraint firstItem="8SX-W3-lao" firstAttribute="leading" secondItem="icy-wV-vv5" secondAttribute="leading" id="5Gc-Zr-3Mp"/>
-                        <constraint firstItem="hsB-e9-otO" firstAttribute="bottom" secondItem="owf-ab-pbL" secondAttribute="bottom" constant="-24" id="DNU-Z7-Mnm"/>
-                        <constraint firstAttribute="bottom" secondItem="Wtk-q0-fbU" secondAttribute="bottom" constant="565" id="IBm-My-ZRr"/>
-                        <constraint firstItem="hsB-e9-otO" firstAttribute="top" secondItem="SSx-Pr-r4X" secondAttribute="bottom" constant="-1" id="JcJ-xp-zMl"/>
-                        <constraint firstItem="Wtk-q0-fbU" firstAttribute="leading" secondItem="icy-wV-vv5" secondAttribute="leading" constant="367" id="MKn-M9-mLf"/>
-                        <constraint firstItem="Wtk-q0-fbU" firstAttribute="top" secondItem="icy-wV-vv5" secondAttribute="top" constant="15" id="P36-TU-dg6"/>
-                        <constraint firstItem="j2u-dD-HVg" firstAttribute="top" secondItem="icy-wV-vv5" secondAttribute="top" constant="10" id="UEn-EM-lvA"/>
+                        <constraint firstAttribute="trailing" secondItem="UeC-DR-nVA" secondAttribute="trailing" id="2cm-Xd-lWG"/>
+                        <constraint firstItem="hsB-e9-otO" firstAttribute="bottom" secondItem="owf-ab-pbL" secondAttribute="bottom" id="DNU-Z7-Mnm"/>
+                        <constraint firstItem="hsB-e9-otO" firstAttribute="top" secondItem="SSx-Pr-r4X" secondAttribute="bottom" id="JcJ-xp-zMl"/>
                         <constraint firstItem="hsB-e9-otO" firstAttribute="trailing" secondItem="SSx-Pr-r4X" secondAttribute="trailing" id="VNq-c9-MXB"/>
                         <constraint firstAttribute="trailing" secondItem="SSx-Pr-r4X" secondAttribute="trailing" id="WPW-Xc-iuV"/>
                         <constraint firstAttribute="trailing" secondItem="owf-ab-pbL" secondAttribute="trailing" id="Y6Z-DO-Bz4"/>
-                        <constraint firstAttribute="bottom" secondItem="j2u-dD-HVg" secondAttribute="bottom" constant="560" id="aSq-7o-W1F"/>
+                        <constraint firstItem="UeC-DR-nVA" firstAttribute="top" secondItem="icy-wV-vv5" secondAttribute="top" id="aQb-Fb-gth"/>
                         <constraint firstItem="hsB-e9-otO" firstAttribute="leading" secondItem="SSx-Pr-r4X" secondAttribute="leading" id="apo-eP-1kc"/>
                         <constraint firstItem="owf-ab-pbL" firstAttribute="leading" secondItem="icy-wV-vv5" secondAttribute="leading" id="h4C-OT-oGn"/>
-                        <constraint firstItem="j2u-dD-HVg" firstAttribute="leading" secondItem="icy-wV-vv5" secondAttribute="leading" constant="360" id="jI2-fT-26x"/>
+                        <constraint firstItem="UeC-DR-nVA" firstAttribute="leading" secondItem="icy-wV-vv5" secondAttribute="leading" id="hsV-su-JlX"/>
                         <constraint firstAttribute="bottom" secondItem="owf-ab-pbL" secondAttribute="bottom" id="jLx-bl-fy5"/>
-                        <constraint firstItem="SSx-Pr-r4X" firstAttribute="top" secondItem="8SX-W3-lao" secondAttribute="bottom" id="mDH-DA-Wtx"/>
-                        <constraint firstAttribute="bottom" secondItem="8SX-W3-lao" secondAttribute="bottom" constant="556" id="nuc-ma-gCP"/>
-                        <constraint firstAttribute="trailing" secondItem="Wtk-q0-fbU" secondAttribute="trailing" constant="163" id="pvC-6B-dPs"/>
-                        <constraint firstAttribute="trailing" secondItem="j2u-dD-HVg" secondAttribute="trailing" constant="10" id="thr-vW-6AF"/>
-                        <constraint firstItem="8SX-W3-lao" firstAttribute="top" secondItem="icy-wV-vv5" secondAttribute="top" id="uSc-Nu-TcC"/>
                         <constraint firstItem="SSx-Pr-r4X" firstAttribute="leading" secondItem="icy-wV-vv5" secondAttribute="leading" id="uqk-EF-co2"/>
                         <constraint firstItem="owf-ab-pbL" firstAttribute="top" secondItem="icy-wV-vv5" secondAttribute="top" id="yGO-wM-4wC"/>
                     </constraints>

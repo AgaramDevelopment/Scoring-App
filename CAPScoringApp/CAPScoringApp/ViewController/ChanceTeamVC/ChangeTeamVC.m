@@ -260,10 +260,13 @@
         selectBowlercode=objChanceTeamRecord.TEAMCODE;
     }
     
- }
+    }
 }
 -(IBAction)didClickBackBtnAction:(id)sender
 {
     [self.delegate ChangeVCBackBtnAction];
 }
-@end
+
+// insertChanceTeam
+    
+    @end
