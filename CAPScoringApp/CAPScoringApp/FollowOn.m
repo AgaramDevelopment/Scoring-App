@@ -68,6 +68,13 @@
         self.btn_Proceed.userInteractionEnabled=NO;
         [self.btn_Revert setBackgroundColor:[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f]];
         self.btn_Revert.userInteractionEnabled=YES;
+            self.lbl_Striker.text=self.strikerName;
+            self.lbl_nonStriker.text=self.nonStrikerName;
+            self.lbl_Bowler.text =self.bowlerName;
+            [self.btn_Striker setHidden:YES];
+            [self.btn_nonStriker setHidden:YES];
+            [self.btn_Bowler setHidden:YES];
+            
         }
         else
         {
@@ -75,6 +82,9 @@
             self.btn_Proceed.userInteractionEnabled=YES;
             [self.btn_Revert setBackgroundColor:[UIColor grayColor]];
             self.btn_Revert.userInteractionEnabled=NO;
+            [self.btn_Striker setHidden:NO];
+            [self.btn_nonStriker setHidden:NO];
+            [self.btn_Bowler setHidden:NO];
         }
 
     }
@@ -194,7 +204,7 @@
         [self ShowAlterView:@"Please Select Bowler"];
     }
     else{
-        [self DeleteFollowOn:self.compitionCode :self.matchCode :self.inningsno :TEAMCODE];
+        [self DeleteFollowOn:self.compitionCode :self.matchCode :TEAMCODE :self.inningsno];
         UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:@"DO You Want To Revert Follow on" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"CANCEL", nil];
         [objAlter show];
         objAlter.tag = 102;
@@ -226,7 +236,7 @@
         }
         else if (alertView.tag==103)
         {
-           //[self.delegate RedirectFollowOnPage];
+           [self.delegate RedirectFollowOnPage];
         }
 
     }

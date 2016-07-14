@@ -178,7 +178,7 @@
     }
     else{
         
-        [DBManagerChangeTeam InsertChangeTeam:self.compitionCode :self.MatchCode :BattingTeamCode :[NSNumber numberWithInt:maximumInnings.intValue] :selectStrikercode :selectnonStrikercode :selectBowlercode :[NSNumber numberWithInt:maximumInnings.intValue] :BattingTeamCode :@"" :@""];
+        [DBManagerChangeTeam InsertChangeTeam:self.compitionCode :self.MatchCode :BattingTeamCode :[NSNumber numberWithInt:maximumInnings.intValue] :selectStrikercode :selectnonStrikercode :selectBowlercode :[NSNumber numberWithInt:self.inningsno.intValue] :self.currentBattingTeamCode :@"" :@""];
         [self.delegate processSuccessful];
 
     }
@@ -234,8 +234,19 @@
     {
         if(![self.lbl_NonStrikerName.text isEqualToString:objChanceTeamRecord.TEAMNAME])
         {
-        self.lbl_StrikerName.text=objChanceTeamRecord.TEAMNAME;
-        selectStrikercode=objChanceTeamRecord.TEAMCODE;
+            self.lbl_StrikerName.text=objChanceTeamRecord.TEAMNAME;
+            selectStrikercode=objChanceTeamRecord.TEAMCODE;
+        }
+        else{
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+                                                            message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
+                                                           delegate: self
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+            [alert1 show];
+            
+        }
+
     }
     else if(IsNonStricker== YES)
     {
@@ -261,7 +272,7 @@
     }
     
  }
-}
+
 -(IBAction)didClickBackBtnAction:(id)sender
 {
     [self.delegate ChangeVCBackBtnAction];

@@ -11994,7 +11994,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="aMo-yo-urg"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
-                                                <state key="normal" title="TNCA 1st INNS">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <variation key="default">
@@ -12044,7 +12044,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="nPu-fb-KBa"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
-                                                <state key="normal" title="KSCA 1st INNS">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <variation key="default">
@@ -12094,7 +12094,7 @@
                                                     <constraint firstAttribute="width" constant="185" id="NlI-wV-UP7"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
-                                                <state key="normal" title="TNCA 2nd INNS">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <variation key="default">
@@ -12144,7 +12144,7 @@
                                                     <constraint firstAttribute="height" constant="50" id="wNK-K1-nTE"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
-                                                <state key="normal" title="KSCA 2nd INNS">
+                                                <state key="normal">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <variation key="default">

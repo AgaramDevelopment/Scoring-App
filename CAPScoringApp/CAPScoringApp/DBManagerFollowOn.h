@@ -29,7 +29,7 @@
 
 
 //SP_UPDATEFOLLOWON----------------------------------------------------------------------
-+(BOOL)  GetBallCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO;
++(BOOL)  GetBallCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO;
 
 +(NSString*) GetTeamNamesForUpdateFollowOn:(NSNumber*) TEAMNAME;
 
@@ -54,6 +54,6 @@
 +(NSString *)  GetBallCodeForDeleteFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO ;
 
 +(BOOL) UpdateInningsEventForDeleteFollowOn: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO;
-+(BOOL) DeleteInningsEventForDeleteFollowOn: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO;
++(BOOL) DeleteInningsEventForDeleteFollowOn: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 +(BOOL)UpdateInningsEventForInsertScoreBoard:(NSString*) TEAMCODE:(NSString *)TOTALRUNS:(NSString*)TOTALOVERS:(NSString *)TOTALWICKETS:(NSString *) INNINGSSTATUS:(NSString*) ISFOLLOWON:(NSString *)COMPETITIONCODE:(NSString *)MATCHCODE:(NSString*)INNINGSNO;
 @end

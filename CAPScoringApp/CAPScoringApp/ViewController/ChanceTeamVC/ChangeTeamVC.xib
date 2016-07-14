@@ -41,7 +41,7 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ho9-F9-dvF">
                             <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.062745098040000002" green="0.82352941180000006" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="200" id="4rI-l3-m0k"/>
                                 <constraint firstAttribute="height" constant="50" id="iJ2-tE-b40"/>
@@ -49,7 +49,7 @@
                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <state key="normal" title="Resume Innings">
-                                <color key="titleColor" red="0.043137254899999998" green="0.094117647060000004" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
                             <state key="selected" title="Resume  Innings">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -104,7 +104,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.1647058824" green="0.24313725489999999" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="671-Ys-K1m" firstAttribute="top" secondItem="xWa-2C-J4Q" secondAttribute="top" constant="15" id="79C-o0-H8F"/>
                                 <constraint firstItem="nsC-Mx-GsF" firstAttribute="top" secondItem="xWa-2C-J4Q" secondAttribute="top" constant="13" id="Cde-Za-xnu"/>
@@ -689,7 +689,7 @@
                                 <constraint firstAttribute="trailing" secondItem="z2S-h2-8ZO" secondAttribute="trailing" constant="80" id="U2h-g0-4OO"/>
                                 <constraint firstItem="rUY-Cx-qC4" firstAttribute="top" secondItem="edq-LT-fTn" secondAttribute="bottom" constant="15" id="WK7-pY-Nea"/>
                                 <constraint firstAttribute="bottom" secondItem="Xc8-iK-UmW" secondAttribute="bottom" constant="13" id="X7t-ac-rLE">
-                                    <variation key="heightClass=regular-widthClass=regular" constant="55"/>
+                                    <variation key="heightClass=regular-widthClass=regular" constant="110"/>
                                 </constraint>
                                 <constraint firstItem="Xc8-iK-UmW" firstAttribute="top" secondItem="Kxb-qL-cWU" secondAttribute="bottom" constant="15" id="XEQ-xj-Op8"/>
                                 <constraint firstItem="UiS-TC-d67" firstAttribute="leading" secondItem="UbY-3m-dfM" secondAttribute="trailing" constant="30" id="Ybd-ZE-hiH"/>
@@ -803,13 +803,13 @@
                         <constraint firstAttribute="bottom" secondItem="MTK-Hk-cRr" secondAttribute="bottom" id="UGJ-pD-d1r"/>
                         <constraint firstItem="xWa-2C-J4Q" firstAttribute="leading" secondItem="cMF-ZR-BO0" secondAttribute="leading" id="Zli-ik-aal"/>
                         <constraint firstAttribute="bottom" secondItem="ho9-F9-dvF" secondAttribute="bottom" constant="150" id="kRs-i9-EWv">
-                            <variation key="heightClass=regular-widthClass=regular" constant="110"/>
+                            <variation key="heightClass=regular-widthClass=regular" constant="70"/>
                         </constraint>
                         <constraint firstAttribute="trailing" secondItem="MTK-Hk-cRr" secondAttribute="trailing" id="kZr-Y6-XOj"/>
                         <constraint firstItem="IfM-Ur-lgf" firstAttribute="leading" secondItem="cMF-ZR-BO0" secondAttribute="leading" id="lKA-uZ-xAT"/>
                         <constraint firstItem="MTK-Hk-cRr" firstAttribute="top" secondItem="cMF-ZR-BO0" secondAttribute="top" id="rds-YU-px9"/>
                         <constraint firstItem="ho9-F9-dvF" firstAttribute="top" secondItem="IfM-Ur-lgf" secondAttribute="bottom" constant="32" id="vQF-Q1-I2f">
-                            <variation key="heightClass=regular-widthClass=regular" constant="30"/>
+                            <variation key="heightClass=regular-widthClass=regular" constant="15"/>
                         </constraint>
                     </constraints>
                     <variation key="default">

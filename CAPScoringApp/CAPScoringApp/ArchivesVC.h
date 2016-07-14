@@ -11,6 +11,7 @@
 @interface ArchivesVC : UIViewController
 @property(nonatomic,strong) IBOutlet UITableView *tbl_archive;
 @property(nonatomic,strong) NSString *CompitionCode;
+@property(nonatomic,strong) NSString * inningsNo;
 
 
 

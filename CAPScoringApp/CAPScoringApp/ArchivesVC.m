@@ -160,6 +160,7 @@
     objEditModeVC.Comptitioncode =self.CompitionCode;
     objEditModeVC.matchCode = objFixtureRecord.matchcode;
     objEditModeVC.matchTypeCode=matchTypeCode;
+    
     [self.navigationController pushViewController:objEditModeVC animated:YES];
 }
 

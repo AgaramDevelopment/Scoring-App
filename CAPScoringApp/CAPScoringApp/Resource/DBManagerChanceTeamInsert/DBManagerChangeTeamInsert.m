@@ -50,7 +50,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,CURRENTBATTINGTEAM,CURRENTINNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO=%@",COMPETITIONCODE,MATCHCODE,CURRENTBATTINGTEAM,CURRENTINNINGSNO];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
@@ -63,11 +63,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
