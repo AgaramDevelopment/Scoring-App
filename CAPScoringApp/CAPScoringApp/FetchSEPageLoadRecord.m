@@ -706,7 +706,7 @@ BOOL  getOverStatus;
         
         RUNSREQUIRED = [NSNumber numberWithInt:runReq];
         
-        int  remBallsData = ([MATCHOVERS integerValue] * 6) - ((int)ISOVERCOMPLETE == 1 ? (int)BATTEAMOVERS + 1 : (int)BATTEAMOVERS  * 6) + (int)BATTEAMOVRBALLS;
+        int  remBallsData = (MATCHOVERS.intValue * 6) - (((int)ISOVERCOMPLETE == 1 ? (int)BATTEAMOVERS + 1 : (int)BATTEAMOVERS)  * 6 + (int)BATTEAMOVRBALLS);
         
         
         REMBALLS = [NSNumber numberWithInt:remBallsData];
