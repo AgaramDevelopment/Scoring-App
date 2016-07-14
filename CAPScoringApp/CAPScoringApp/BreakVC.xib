@@ -8,8 +8,8 @@
         <mutableArray key="RAJDHANI-BOLD.TTF">
             <string>Rajdhani-Bold</string>
         </mutableArray>
-        <mutableArray key="RAJDHANI-SEMIBOLD.TTF">
-            <string>Rajdhani-Semibold</string>
+        <mutableArray key="RAJDHANI-REGULAR.TTF">
+            <string>Rajdhani-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -56,33 +56,33 @@
                                             </connections>
                                         </button>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-add" translatesAutoresizingMaskIntoConstraints="NO" id="9au-A1-V00">
-                                            <rect key="frame" x="13" y="5" width="27" height="27"/>
+                                            <rect key="frame" x="5" y="5" width="27" height="27"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="27" id="E1v-Yk-gk8"/>
                                                 <constraint firstAttribute="height" constant="27" id="deV-wM-Rmw"/>
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADD BREAK " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHz-La-AVF">
-                                            <rect key="frame" x="42" y="7" width="110" height="25"/>
+                                            <rect key="frame" x="40" y="7" width="110" height="25"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="110" id="eQw-x9-B9Q"/>
                                                 <constraint firstAttribute="height" constant="25" id="udm-MA-b8Z"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="21"/>
+                                            <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <color key="backgroundColor" red="0.1333333333" green="0.1764705882" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="sHz-La-AVF" secondAttribute="trailing" constant="11" id="Adp-f7-LRb"/>
+                                        <constraint firstAttribute="trailing" secondItem="sHz-La-AVF" secondAttribute="trailing" constant="13" id="Adp-f7-LRb"/>
                                         <constraint firstItem="9au-A1-V00" firstAttribute="top" secondItem="d3y-cX-in1" secondAttribute="top" constant="5" id="ENt-Sf-N6S"/>
                                         <constraint firstAttribute="trailing" secondItem="COZ-Ih-087" secondAttribute="trailing" id="GtV-ri-iBt"/>
-                                        <constraint firstItem="9au-A1-V00" firstAttribute="leading" secondItem="d3y-cX-in1" secondAttribute="leading" constant="13" id="Ota-Ik-165"/>
+                                        <constraint firstItem="9au-A1-V00" firstAttribute="leading" secondItem="d3y-cX-in1" secondAttribute="leading" constant="5" id="Ota-Ik-165"/>
                                         <constraint firstItem="COZ-Ih-087" firstAttribute="top" secondItem="d3y-cX-in1" secondAttribute="top" id="PfC-CE-JHR"/>
                                         <constraint firstAttribute="bottom" secondItem="COZ-Ih-087" secondAttribute="bottom" id="TGh-5o-TJN"/>
                                         <constraint firstItem="COZ-Ih-087" firstAttribute="leading" secondItem="d3y-cX-in1" secondAttribute="leading" id="Uk4-L7-M6R"/>
-                                        <constraint firstItem="sHz-La-AVF" firstAttribute="leading" secondItem="9au-A1-V00" secondAttribute="trailing" constant="2" id="fwZ-wB-BYC"/>
+                                        <constraint firstItem="sHz-La-AVF" firstAttribute="leading" secondItem="9au-A1-V00" secondAttribute="trailing" constant="8" id="fwZ-wB-BYC"/>
                                         <constraint firstItem="sHz-La-AVF" firstAttribute="top" secondItem="d3y-cX-in1" secondAttribute="top" constant="7" id="uaa-6N-wON"/>
                                     </constraints>
                                 </view>

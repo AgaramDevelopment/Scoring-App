@@ -79,7 +79,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wa1-g2-4Ws">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="END DAY" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0d-IJ-Vp6">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="END DAY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r0d-IJ-Vp6">
                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="172" id="GKK-Ho-i25">
@@ -261,7 +261,7 @@
                                     <variation key="heightClass=regular-widthClass=regular" constant="21"/>
                                 </constraint>
                                 <constraint firstItem="r0d-IJ-Vp6" firstAttribute="centerX" secondItem="wa1-g2-4Ws" secondAttribute="centerX" id="T26-0V-SO1">
-                                    <variation key="heightClass=regular-widthClass=regular" constant="-23"/>
+                                    <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                 </constraint>
                                 <constraint firstAttribute="height" constant="75" id="VxM-7E-6dg"/>
                                 <constraint firstItem="I2I-SF-3D2" firstAttribute="top" secondItem="wa1-g2-4Ws" secondAttribute="top" constant="15" id="Wc4-L4-nPo">

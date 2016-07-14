@@ -83,7 +83,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Q65-Zg-nVn">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match Result" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pz3-Aq-LnO">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Match Result" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pz3-Aq-LnO">
                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="33" id="Lcy-e8-P65"/>
@@ -174,7 +174,7 @@
                                     <variation key="heightClass=regular-widthClass=regular" constant="21"/>
                                 </constraint>
                                 <constraint firstItem="pz3-Aq-LnO" firstAttribute="centerX" secondItem="Q65-Zg-nVn" secondAttribute="centerX" id="ZpZ-be-Js2">
-                                    <variation key="heightClass=regular-widthClass=regular" constant="-23"/>
+                                    <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
                                 </constraint>
                                 <constraint firstItem="flY-GY-DIH" firstAttribute="leading" secondItem="Q65-Zg-nVn" secondAttribute="leading" constant="14" id="bqS-fh-MZQ">
                                     <variation key="heightClass=regular-widthClass=regular" constant="13"/>

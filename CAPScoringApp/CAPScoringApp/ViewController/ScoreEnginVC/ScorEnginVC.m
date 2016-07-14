@@ -140,6 +140,8 @@
     BOOL isBowlerOpen;
     BOOL leftSlideSwipe;
     BOOL isCaught;
+    BOOL isPitchmap;
+    BOOL ispichmapSelectValue;
     
     NSMutableArray *strickerList;
     NSMutableArray *nonStrickerList;
@@ -3408,6 +3410,18 @@ EditModeVC * objEditModeVc;
     {
         [objextras removeFromSuperview];
     }
+    else if(ispichmapSelectValue==NO)
+    {
+          [self unselectedButtonBg:self.btn_pichmap];
+           
+    }
+        
+    else if(ispichmapSelectValue==YES)
+    {
+        [self selectedButtonBg:self.btn_pichmap];
+        
+    }
+    
     
     _View_Appeal.hidden=YES;
     self.view_bowlType.hidden = YES;
@@ -3768,6 +3782,8 @@ EditModeVC * objEditModeVc;
     }
     else if(selectBtnTag.tag==110)
     {
+        if(isPitchmap==NO)
+        {
         [self selectedButtonBg:selectBtnTag];
         
         // [self selectBtncolor_Action:@"110" :self.btn_pichmap :0];
@@ -3795,8 +3811,16 @@ EditModeVC * objEditModeVc;
         
         
         self.img_pichmap.hidden=NO;
+            isPitchmap=YES;
         
-        
+        }
+        else
+        {
+            [self unselectedButtonBg:self.btn_pichmap];
+             self.PichMapTittle.hidden=YES;
+            self.img_pichmap.hidden=YES;
+            isPitchmap=NO;
+        }
     }
     else if(selectBtnTag.tag==111)
     {
@@ -3917,7 +3941,7 @@ EditModeVC * objEditModeVc;
     {
         [Img_ball removeFromSuperview];
     }
-    
+    ispichmapSelectValue=YES;
     CGPoint p = [pichmapGesture locationInView:self.img_pichmap];
     NSLog(@"pointx=%f,pointY=%f",p.x,p.y);
     float Xposition = p.x-10;
@@ -4843,7 +4867,9 @@ EditModeVC * objEditModeVc;
 
 -(IBAction)didClickRightSideBtn_Action:(id)sender
 {
+    
     UIButton *selectBtnTag=(UIButton*)sender;
+    
     
     _View_Appeal.hidden=YES;
     self.view_bowlType.hidden = YES;
@@ -4855,7 +4881,11 @@ EditModeVC * objEditModeVc;
     self.view_Wagon_wheel.hidden=YES;
     self.objcommonRemarkview.hidden=YES;
     
-    
+    if (ispichmapSelectValue== NO)
+    {
+        [self unselectedButtonBg:self.btn_pichmap];
+    }
+
     //wicket
     if(isWicketSelected && selectBtnTag.tag != 107 && wicketOption !=0){
         
@@ -5660,6 +5690,7 @@ EditModeVC * objEditModeVc;
     [self unselectedViewBg:self.view_appeal];
     self.View_Appeal.hidden=YES;
     isEnableTbl=NO;
+    isPitchmap =NO;
   //[self unselectedViewBg: self.View_Appeal];
   //[self unselectedViewBg: self.view_lastinstance];
     
@@ -7706,6 +7737,7 @@ EditModeVC * objEditModeVc;
             objFollowOn.BowlingTeamCode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
             objFollowOn.inningsno       = fetchSEPageLoadRecord.INNINGSNO;
             objFollowOn. inningsStatus      =fetchSEPageLoadRecord.INNINGSSTATUS;
+            objFollowOn.objBowlingTeamdetail =fetchSEPageLoadRecord.getBowlingTeamPlayers;
             objFollowOn.delegate =self;
             
             

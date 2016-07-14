@@ -124,7 +124,7 @@
                                 <constraint firstAttribute="width" constant="226" id="r0K-Lc-7TS"/>
                                 <constraint firstAttribute="height" constant="40" id="rhJ-0q-WBb"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="22"/>
+                            <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
