@@ -102,9 +102,9 @@
 
 +(NSMutableArray*) GetWicketPlayerandTypeForDeleteOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO : (NSNumber*) WICKETNO ;
 
-+(BOOL)   UpdateBattingSummaryForDeleteOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO : (NSString*) N_WICKETPLAYER;
++(BOOL)   UpdateBattingSummaryForDeleteOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO : (NSString*) WICKETPLAYER;
 
-+(BOOL)   DeleteBattingSummaryForDeleteOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO : (NSString*) N_WICKETPLAYER;
++(BOOL)   DeleteBattingSummaryForDeleteOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO : (NSString*) WICKETPLAYER;
 
 +(BOOL)   UpdateBattingSummaryDetailForDeleteOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO : (NSNumber*) WICKETNO;
 

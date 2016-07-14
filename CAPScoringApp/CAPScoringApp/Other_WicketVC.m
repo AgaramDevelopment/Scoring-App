@@ -17,6 +17,7 @@
 #import "Other_WicketgridVC.h"
 #import "DBManagerInsertScoreEngine.h"
 #import "GetWicketDetail.h"
+#import "GetWicketEventsPlayerDetail.h"
 
 @interface Other_WicketVC ()
 {
@@ -134,11 +135,6 @@
     
     [self.WICKET_NO_LBL.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.WICKET_NO_LBL.layer.borderWidth = 2;
-   
-    
-  
-    
-    
  
     WicketStingValues = [NSString stringWithFormat:@"%@", WICKETNO];
     
@@ -151,9 +147,6 @@
         self.selectplayer_lbl.text=WICKETPLAYER;
         
         [self.btn_save setTitle:@"Update" forState:UIControlStateNormal];
-        
-      
-        
 
     }
     
@@ -280,9 +273,7 @@
             cell.textLabel.text =objRetriedHurt.PLAYERNAME;
              
         }
-//        else if([WICKETTYPE isEqual:@"MSC107"]){
-//            
-//        }
+        
         return cell;
         
     }
@@ -364,15 +355,7 @@
             isEnableTbl=YES;
             
         }
-        else if([WICKETTYPE isEqual:@"MSC107"]){
-            
-            
-            
-            self.tbl_playername.hidden=YES;
-            isEnableTbl=YES;
-            
-        }
-    }
+           }
 
     
 }
@@ -407,9 +390,29 @@
     
 }
 
+-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
+
+- (BOOL) formValidation{
+    
+    if([ Wicket_lbl.text isEqual:@"Select"]){
+        [self showDialog:@"Please Select Wicket Type" andTitle:@""];
+        return NO;
+    }else if([self.selectplayer_lbl.text isEqual:@"Select"]){
+        [self showDialog:@"Please enter End Over." andTitle:@""];
+        return NO;
+        
+    }
+    return YES;
+}
+
+
 -(IBAction)didclicksave:(id)sender{
-    
-    
+    if([self formValidation]){
+ 
     if(_ISEDITMODE){
         [self UpdateOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :WICKETTYPE :WICKETPLAYER :WICKETNO :VIDEOLOCATION :TOTALRUNS];
         
@@ -436,11 +439,10 @@
        
     }else{
        
-        
        
       
         [self InsertOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETPLAYER :WICKETTYPE : WICKETNO :VIDEOLOCATION :TOTALRUNS];
-        
+    
         
         Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
         add.COMPETITIONCODE=self.COMPETITIONCODE;
@@ -462,8 +464,7 @@
 
     }
     
-    
-    
+    }
    
 }
 
@@ -501,6 +502,8 @@
 
 -(IBAction)didclickdelete:(id)sender{
     
+    if(WICKETTYPE != nil){
+    
     [self DeleteOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETNO];
     
     Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
@@ -520,7 +523,12 @@
          add.view.alpha = 1;
      }
                      completion:nil];
-    
+    }
+    else{
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No Record selected" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+
+    }
     
 }
 
@@ -823,29 +831,40 @@
 //---------------------
 
 -(void) DeleteOtherwickets:(NSString *)COMPETITIONCODE: (NSString *)  MATCHCODE : (NSString *) TEAMCODE : (NSNumber *)INNINGSNO : (NSNumber*)WICKETNO
+
+
 {
    if(![[DbManager_OtherWicket GetBallCodeForDeleteOtherwicket:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :WICKETNO]isEqual:@""])
    {
     NSMutableArray *GetWicketPlayerandtypePlayerDetails=[ DbManager_OtherWicket GetWicketPlayerandTypeForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETNO ];
     
-    if(GetWicketPlayerandtypePlayerDetails.count>0)
-    {
-        
-        WICKETPLAYER = [GetWicketPlayerandtypePlayerDetails objectAtIndex:0];
-							 N_WICKETTYPE = [GetWicketPlayerandtypePlayerDetails objectAtIndex:1];
-        
-        
-    }
+//    if(GetWicketPlayerandtypePlayerDetails.count>0)
+//    {
+//        
+//        WICKETPLAYER = [GetWicketPlayerandtypePlayerDetails objectAtIndex:0];
+//							 N_WICKETTYPE = [GetWicketPlayerandtypePlayerDetails objectAtIndex:1];
+//        
+//        
+//    }
+       
+       if(GetWicketPlayerandtypePlayerDetails.count>0)
+       {
+           GetWicketEventsPlayerDetail *deletewicketdetailss =[GetWicketPlayerandtypePlayerDetails objectAtIndex:0];
+           
+            N_FIELDERCODE =deletewicketdetailss.WICKETPLAYER;
+            N_WICKETTYPE =deletewicketdetailss.WICKETTYPE;
+           
+       }
     
     if (N_WICKETTYPE = @"MSC107" )
     {
 						  
-	[ DbManager_OtherWicket UpdateBattingSummaryForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER ];
+	[ DbManager_OtherWicket UpdateBattingSummaryForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:N_FIELDERCODE ];
     }
     else
     {
         
-    [DbManager_OtherWicket DeleteBattingSummaryForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER];
+    [DbManager_OtherWicket DeleteBattingSummaryForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:N_FIELDERCODE];
         
     }
     
@@ -864,6 +883,9 @@
   //  NSMutableArray *GetWicketEventDetailsForDeleteOtherwicket=[ DbManager_OtherWicket GetWicketEventDetailsForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
     
     [DbManager_OtherWicket GetWicketNoForDeleteOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+    
+    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Other Wicket Deleted Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alter show];
 }
 
 
