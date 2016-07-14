@@ -1132,7 +1132,7 @@ EditModeVC * objEditModeVc;
     
     
     //Free hit dialog
-    if(fetchSeBallCodeDetails.ISFREEHIT.intValue ==1){
+    if(fetchSeBallCodeDetails.ISFREEHIT.intValue ==1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
         
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit Ball" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
@@ -2329,19 +2329,19 @@ EditModeVC * objEditModeVc;
                     {
                         if([self.lbl_stricker_name.text isEqualToString:@""] )
                         {
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                             [altert show];
                             [alter setTag:2004];
                         }
                         else if ([self.lbl_nonstricker_name.text isEqualToString:@""])
                         {
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select nonStriker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStriker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                             [altert show];
                             [alter setTag:2005];
                         }
                         else if ([self.lbl_bowler_name.text isEqualToString:@""])
                         {
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Bowler " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Bowler " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                             [altert show];
                             [alter setTag:2006];
                         }
@@ -2371,19 +2371,19 @@ EditModeVC * objEditModeVc;
             
             if([self.lbl_stricker_name.text isEqualToString:@""] )
             {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                 [altert show];
                 [altert setTag:2007];
             }
             else if ([self.lbl_nonstricker_name.text isEqualToString:@""])
             {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select nonStricker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStricker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                 [altert show];
                 [altert setTag:2008];
             }
             else if ([self.lbl_bowler_name.text isEqualToString:@""])
             {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Bowler " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Bowler " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                 [altert show];
                 [altert setTag:2009];
             }
@@ -3484,6 +3484,7 @@ EditModeVC * objEditModeVc;
         selectedWicketEvent = nil;
         selectedStrikernonstriker = nil;
         selectedwicketBowlerlist =nil;
+        wicketOption=0;
         [self unselectedButtonBg:self.btn_wkts];
     
         
@@ -3734,7 +3735,14 @@ EditModeVC * objEditModeVc;
                         [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
                     }
                 }
-            }else{
+            }else if(isFreeHitBall != 0){
+                for(int i=0;i<tempWickettypeArray.count;i++){
+                    WicketTypeRecord *wicketTypeRecord  = [tempWickettypeArray objectAtIndex:i];
+                    if([wicketTypeRecord.metasubcode isEqual: @"MSC097"]){
+                        [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
+                    }
+                }
+            } else{
                 _WicketTypeArray  = [[NSMutableArray alloc]initWithArray:tempWickettypeArray];
                 
             }
@@ -4927,6 +4935,7 @@ EditModeVC * objEditModeVc;
         selectedWicketEvent = nil;
         selectedStrikernonstriker = nil;
         selectedwicketBowlerlist =nil;
+        wicketOption=0;
         [self unselectedButtonBg:self.btn_wkts];
         
         
