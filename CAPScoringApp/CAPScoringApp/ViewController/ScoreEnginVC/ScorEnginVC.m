@@ -308,36 +308,9 @@ EditModeVC * objEditModeVc;
         
     }    [self hideLabelBasedOnMatchType];
     
-    //    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
-    
-    
-    //Get Last bowler details
-    fetchLastBowler = [[FetchLastBowler alloc]init];
-    [fetchLastBowler LastBowlerDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS] :[NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT]];
-    NSLog(@"viewdidload batteamover=%d",fetchSEPageLoadRecord.BATTEAMOVERS);
-    
-    if(fetchLastBowler.GetLastBolwerDetails.count!=0){
-        LastBolwerDetailRecord *lastBowlerDetailRecord = [fetchLastBowler.GetLastBolwerDetails objectAtIndex:0];
-        
-        
-        self.lbl_last_bowler_name.text = lastBowlerDetailRecord.BOWLERNAME;
-        self.lbl_last_bowler_runs.text = lastBowlerDetailRecord.OVERS;
-        self.lbl_last_bowler_balls.text = lastBowlerDetailRecord.MAIDENOVERS;
-        self.lbl_last_bowler_fours.text = lastBowlerDetailRecord.TOTALRUNS;
-        self.lbl_last_bowler_sixs.text = lastBowlerDetailRecord.WICKETS;
-        self.lbl_last_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[lastBowlerDetailRecord.ECONOMY floatValue]];
-        
-    }else{
-        self.lbl_last_bowler_name.text = @"-";
-        self.lbl_last_bowler_runs.text = @"-";
-        self.lbl_last_bowler_balls.text = @"-";
-        self.lbl_last_bowler_fours.text = @"-";
-        self.lbl_last_bowler_sixs.text = @"-";
-        self.lbl_last_bowler_strickrate.text = @"-";
-    }
-    
-    
-    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+   
+
+    //FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
     
     endInnings = [[EndInnings alloc]init];
@@ -552,14 +525,40 @@ EditModeVC * objEditModeVc;
         _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     }
 
-    
+    [self getLastBowlerDetails];
 //    FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
 //    fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
 //    [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode :self.editBallCode];
     
 }
 
-
+-(void)getLastBowlerDetails{
+    //Get Last bowler details
+    fetchLastBowler = [[FetchLastBowler alloc]init];
+    [fetchLastBowler LastBowlerDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS] :[NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT]];
+    
+    NSLog(@"viewdidload batteamover=%d",fetchSEPageLoadRecord.BATTEAMOVERS);
+    
+    if(fetchLastBowler.GetLastBolwerDetails.count!=0){
+        LastBolwerDetailRecord *lastBowlerDetailRecord = [fetchLastBowler.GetLastBolwerDetails objectAtIndex:0];
+        
+        
+        self.lbl_last_bowler_name.text = lastBowlerDetailRecord.BOWLERNAME;
+        self.lbl_last_bowler_runs.text = lastBowlerDetailRecord.OVERS;
+        self.lbl_last_bowler_balls.text = lastBowlerDetailRecord.MAIDENOVERS;
+        self.lbl_last_bowler_fours.text = lastBowlerDetailRecord.TOTALRUNS;
+        self.lbl_last_bowler_sixs.text = lastBowlerDetailRecord.WICKETS;
+        self.lbl_last_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[lastBowlerDetailRecord.ECONOMY floatValue]];
+        
+    }else{
+        self.lbl_last_bowler_name.text = @"-";
+        self.lbl_last_bowler_runs.text = @"-";
+        self.lbl_last_bowler_balls.text = @"-";
+        self.lbl_last_bowler_fours.text = @"-";
+        self.lbl_last_bowler_sixs.text = @"-";
+        self.lbl_last_bowler_strickrate.text = @"-";
+    }
+}
 
 
 -(void) loadViewOnEditMode{
@@ -1133,7 +1132,7 @@ EditModeVC * objEditModeVc;
     
     
     //Free hit dialog
-    if(fetchSeBallCodeDetails.ISFREEHIT.intValue ==1){
+    if(fetchSeBallCodeDetails.ISFREEHIT.intValue ==1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
         
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit Ball" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
@@ -1180,12 +1179,14 @@ EditModeVC * objEditModeVc;
     
 //    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
 //    
-    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
-        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
+    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
     }else{
         _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
     }
     
+    
+   
     
     
     //all innings details for team A and team B
@@ -1193,16 +1194,19 @@ EditModeVC * objEditModeVc;
     _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
     
-    _lbl_teamASecIngsScore.text = @"";
-    _lbl_teamASecIngsOvs.text = @"";
     
-    
-    _lbl_teamBSecIngsScore.text =@"";
-    _lbl_teamBSecIngsOvs.text =@"";
     
     _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
     _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
     
+    
+    if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
+        _lbl_teamASecIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.THIRDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.THIRDINNINGSTOTAL,fetchSEPageLoadRecord.THIRDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.THIRDINNINGSWICKET];
+        _lbl_teamASecIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.THIRDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.THIRDINNINGSOVERS];
+        
+        _lbl_teamBSecIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.FOURTHINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FOURTHINNINGSTOTAL,fetchSEPageLoadRecord.FOURTHINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FOURTHINNINGSWICKET];
+        _lbl_teamBSecIngsOvs.text =[NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FOURTHINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FOURTHINNINGSOVERS];
+    }
     
 }
 
@@ -1288,7 +1292,7 @@ EditModeVC * objEditModeVc;
     }
     
     
-    FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
+  //  FetchLastBallBowledPlayer *fetchLastBallBowledPlayer = [[FetchLastBallBowledPlayer alloc]init];
     
     
     
@@ -1338,8 +1342,8 @@ EditModeVC * objEditModeVc;
     
 //    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.RUNSREQUIRED floatValue]];
     
-    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
-        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
+    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
     }else{
         _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
     }
@@ -2224,61 +2228,70 @@ EditModeVC * objEditModeVc;
         else
         {
             
-            if([self checkRunsByLB_B] && [self iswicketPending]){// Check before end ball
-           // [self calculateRunsOnEndBall];
-            [self EndBallMethod];
-            
-            [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
-            self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
-            self.btn_StartOver.userInteractionEnabled=YES;
-            //        self.btn_StartBall.userInteractionEnabled=NO;
-            //        [self SaveBallEventREcordvalue];
-            
-            [self AllBtndisableMethod];
-            
-            
-            [self timeLeftSinceDate:startBallTime];
-            NSLog(@"DidClickStartBall batteamover=%d",fetchSEPageLoadRecord.BATTEAMOVERS);
-            int overNo = ((int)fetchSEPageLoadRecord.BATTEAMOVERS);
-            int ballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;//Check isillegal ball for pervious ball
-            int overballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
-            
-            self.ballEventRecord.objOverno=[NSNumber numberWithInt:fetchSEPageLoadRecord.BATTEAMOVERS];
-            self.ballEventRecord.objBallno=[NSNumber numberWithInt:ballNo];
-            self.ballEventRecord.objOverBallcount = [NSNumber numberWithInt:overballNo];
-            self.ballEventRecord.objBallcount=@1;
-            self.ballEventRecord.objBowlercode = fetchSEPageLoadRecord.currentBowlerPlayerCode;
-            self.ballEventRecord.objStrikercode = fetchSEPageLoadRecord.strickerPlayerCode;
-            self.ballEventRecord.objNonstrikercode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
-            
-            
-            
-            //        [DBManager saveBallEventData:self.ballEventRecord];
-            //        [DBManager insertBallCodeAppealEvent:self.ballEventRecord];
-            //        [DBManager insertBallCodeFieldEvent: self.ballEventRecord bowlerEvent:selectedfieldPlayer fieldingFactor: selectedfieldFactor nrs :selectedNRS];
-            //        [DBManager insertBallCodeWicketEvent:self.ballEventRecord];
-            //        [DBManager GetBallDetails :_competitionCode :_matchCode];
-            //
-            [self reloadBowlerTeamBatsmanDetails];
-            // [ self AssignControlValues :YES:@""];
+            if([self checkRunsByLB_B] && [self iswicketPending]&&[self checkValidation]){
                 
+                [self StartBall];
                 
-            //Check for Striker, non Striker and bower present
-                
-                if(fetchSEPageLoadRecord.strickerPlayerName == nil){
-                    [self btn_stricker_names:0];
-                }else if(fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
-                    [self btn_nonstricker_name:0];
-                }else if(fetchSEPageLoadRecord.currentBowlerPlayerName == nil){
-                    [self btn_bowler_name:0];
-                }
-                
-             
-            [self resetBallEventObject];
-            [self resetAllButtonOnEndBall];
             }
             
         }
+    }
+}
+
+
+-(void)StartBall{
+    {// Check before end ball
+        // [self calculateRunsOnEndBall];
+        [self EndBallMethod];
+        
+        [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
+        self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+        self.btn_StartOver.userInteractionEnabled=YES;
+        //        self.btn_StartBall.userInteractionEnabled=NO;
+        //        [self SaveBallEventREcordvalue];
+        
+        [self AllBtndisableMethod];
+        
+        
+        [self timeLeftSinceDate:startBallTime];
+        NSLog(@"DidClickStartBall batteamover=%d",fetchSEPageLoadRecord.BATTEAMOVERS);
+        int overNo = ((int)fetchSEPageLoadRecord.BATTEAMOVERS);
+        int ballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;//Check isillegal ball for pervious ball
+        int overballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
+        
+        self.ballEventRecord.objOverno=[NSNumber numberWithInt:fetchSEPageLoadRecord.BATTEAMOVERS];
+        self.ballEventRecord.objBallno=[NSNumber numberWithInt:ballNo];
+        self.ballEventRecord.objOverBallcount = [NSNumber numberWithInt:overballNo];
+        self.ballEventRecord.objBallcount=@1;
+        self.ballEventRecord.objBowlercode = fetchSEPageLoadRecord.currentBowlerPlayerCode;
+        self.ballEventRecord.objStrikercode = fetchSEPageLoadRecord.strickerPlayerCode;
+        self.ballEventRecord.objNonstrikercode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
+        
+        
+        
+        //        [DBManager saveBallEventData:self.ballEventRecord];
+        //        [DBManager insertBallCodeAppealEvent:self.ballEventRecord];
+        //        [DBManager insertBallCodeFieldEvent: self.ballEventRecord bowlerEvent:selectedfieldPlayer fieldingFactor: selectedfieldFactor nrs :selectedNRS];
+        //        [DBManager insertBallCodeWicketEvent:self.ballEventRecord];
+        //        [DBManager GetBallDetails :_competitionCode :_matchCode];
+        //
+        [self reloadBowlerTeamBatsmanDetails];
+        // [ self AssignControlValues :YES:@""];
+        
+        
+        //Check for Striker, non Striker and bower present
+        
+        if(fetchSEPageLoadRecord.strickerPlayerName == nil){
+            [self btn_stricker_names:0];
+        }else if(fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
+            [self btn_nonstricker_name:0];
+        }else if(fetchSEPageLoadRecord.currentBowlerPlayerName == nil){
+            [self btn_bowler_name:0];
+        }
+        
+        
+        [self resetBallEventObject];
+        [self resetAllButtonOnEndBall];
     }
 }
 
@@ -2297,13 +2310,8 @@ EditModeVC * objEditModeVc;
                 }
                 NSLog(@"Open Endinnings");
             }
-            if(fetchSEPageLoadRecord.BATTEAMOVRBALLS > 5)
-            {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Six legitimate balls already bowled.\nDo you want to continue?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
-                [altert show];
-                [altert setTag:2003];
-            }
-
+            
+            
             else if(fetchSEPageLoadRecord.INNINGSSTATUS== 1)
             {
                 UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"All Innings has been Completed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
@@ -2312,34 +2320,33 @@ EditModeVC * objEditModeVc;
             }
             else if (isTargetReached)
             {
-                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Target achieved do you want to continue?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Target achieved do you want to continue?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
                 [alter show];
                 [alter setTag:2002];
                 
-                //                if([alterviewSelect isEqualToString:@"YES"])
-                //                {
+      
                 if([self.ballEventRecord.objBallno intValue] > 6)
                 {
-                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Six legitimate balls already bowled.\nDo you want to continue?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Six legitimate balls already bowled.\nDo you want to continue?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
                     [altert show];
                     [alter setTag:2003];
                     if([alterviewSelect isEqualToString:@"YES"])
                     {
                         if([self.lbl_stricker_name.text isEqualToString:@""] )
                         {
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                             [altert show];
                             [alter setTag:2004];
                         }
                         else if ([self.lbl_nonstricker_name.text isEqualToString:@""])
                         {
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select nonStriker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStriker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                             [altert show];
                             [alter setTag:2005];
                         }
                         else if ([self.lbl_bowler_name.text isEqualToString:@""])
                         {
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Bowler " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Bowler " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                             [altert show];
                             [alter setTag:2006];
                         }
@@ -2361,23 +2368,27 @@ EditModeVC * objEditModeVc;
                 }
             }
             
+           
+            
         }
         else {
+            
+            
             if([self.lbl_stricker_name.text isEqualToString:@""] )
             {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                 [altert show];
                 [altert setTag:2007];
             }
             else if ([self.lbl_nonstricker_name.text isEqualToString:@""])
             {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select nonStricker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStricker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                 [altert show];
                 [altert setTag:2008];
             }
             else if ([self.lbl_bowler_name.text isEqualToString:@""])
             {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Select Bowler " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Bowler " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
                 [altert show];
                 [altert setTag:2009];
             }
@@ -2389,10 +2400,18 @@ EditModeVC * objEditModeVc;
         }
     }
     else{
-        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score ENgin" message:@"Already three sessions has been completed for the particular day. Please proceed after resuming the third session or complete the particular day. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Already three sessions has been completed for the particular day. Please proceed after resuming the third session or complete the particular day. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
         [altert show];
         
     }
+    if(fetchSEPageLoadRecord.BATTEAMOVRBALLS > 5)
+    {
+        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Six legitimate balls already bowled.\nDo you want to continue?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        [altert show];
+        [altert setTag:3001];
+    }
+    
+     [self getLastBowlerDetails];
 }
 
 -(void)insertBallDetails :(NSString*) BallCode :(NSString *) insertType
@@ -2549,26 +2568,34 @@ EditModeVC * objEditModeVc;
             }
         }
     }
-    else{
-        if([self.ballEventRecord.objByes intValue] !=0 || [self.ballEventRecord.objLegByes intValue] !=0)
-        {
-            int byes;
-            int LegByes;
-            byes=([self.ballEventRecord.objByes intValue] >0)?([self.ballEventRecord.objRuns intValue]+[self.ballEventRecord.objOverthrow intValue]):[self.ballEventRecord.objByes intValue];
-            self.ballEventRecord.objByes=[NSString stringWithFormat:@"%d",byes];
-            
-            LegByes=([self.ballEventRecord.objLegByes intValue] >0)?([self.ballEventRecord.objRuns intValue]+[self.ballEventRecord.objOverthrow intValue]):[self.ballEventRecord.objLegByes intValue];
-            self.ballEventRecord.objLegByes=[NSString stringWithFormat:@"%d",LegByes];
-            self.ballEventRecord.objRuns=@"0";
-        }
-        
-        else{
-            
-//            [DBManagerEndBall UpdateScoreEngine:self.ballEventRecord.objBallcode :self.ballEventRecord.objcompetitioncode:self.ballEventRecord.objmatchcode :self.ballEventRecord.objTeamcode :self.ballEventRecord.objInningsno :self.ballEventRecord.objOverno :self.ballEventRecord.objBallno :self.ballEventRecord.objBallcount :self.ballEventRecord.objSessionno :self.ballEventRecord.objStrikercode :self.ballEventRecord.objNonstrikercode :self.ballEventRecord.objBowlercode :self.ballEventRecord.objWicketkeepercode :self.ballEventRecord.objUmpire1code :self.ballEventRecord.objUmpire2code :self.ballEventRecord.objAtworotw :self.ballEventRecord.objBowlingEnd :self.ballEventRecord.objBowltype :self.ballEventRecord.objShottype :self.ballEventRecord.objShorttypecategory :self.ballEventRecord.objIslegalball :self.ballEventRecord.objIsFour :self.ballEventRecord.objIssix :self.ballEventRecord.objRuns :self.ballEventRecord.objOverthrow :self.ballEventRecord.objTotalruns :self.ballEventRecord.objWide :self.ballEventRecord.objNoball :self.ballEventRecord.objByes :self.ballEventRecord.objLegByes :self.ballEventRecord.objPenalty :self.ballEventRecord.objTotalextras :self.ballEventRecord.objGrandtotal :self.ballEventRecord.objRbw :self.ballEventRecord.objPMlinecode :self.ballEventRecord.objPMlengthcode: self.ballEventRecord.objPMStrikepoint:self.ballEventRecord.objPMStrikepointlinecode :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objballduration :self.ballEventRecord.objIsappeal :self.ballEventRecord.objIsbeaten :self.ballEventRecord.objIsuncomfort :self.ballEventRecord.objIswtb :self.ballEventRecord.objIsreleaseshot :self.ballEventRecord.objMarkedforedit :self.ballEventRecord.objRemark :self.ballEventRecord.objWicketno :self.ballEventRecord.objWicketType :self.ballEventRecord.objWicketkeepercode : @"":@"" :@"" :@"":@"":@"" :@"" :@"" :@"" :@"":self.ballEventRecord.objPenalty :self.ballEventRecord.objPenaltytypecode :@"" :self.ballEventRecord.objBallspeed :self.ballEventRecord.objUncomfortclassification :@""];
-       
-        }
-        
-    }
+//    if(fetchSEPageLoadRecord.BATTEAMOVRBALLS > 5)
+//    {
+//        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Six legitimate balls already bowled.\nDo you want to continue?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+//        [altert show];
+//        [altert setTag:3001];
+//    }
+//
+//    if (IsTeamAllOut(true))
+//    {
+//        OpenMatchEvent("ENDINNINGS");//If all the wickets are fallen end innings screen will be launched.
+//    }
+//    if (isTargetReached)
+//    {
+//        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Target achieved do you want to continue?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+//        [alter show];
+//        [alter setTag:2002];
+//    
+//        else
+//        {
+//            IsAllowed = false;
+//            //IsShowPrompt = false;
+//            //MatchRegistration mReg = new MatchRegistration();
+//            //mReg.Show();
+//            //this.Close();
+//            //IsShowPrompt = true;
+//            OpenMatchEvent("MATCHRESULTS");//If target is achieved then match result screen will be launched.
+//        }
+//    }
     
     NSMutableArray * objUmpireArray =[DBManager GETUMPIRE:self.competitionCode :self.matchCode ];
     Umpire1Code =[objUmpireArray objectAtIndex:0];
@@ -2934,13 +2961,6 @@ EditModeVC * objEditModeVc;
     
     
     
-    
-    
-    
-    
-    
-    
-    
     //NSMutableArray * objUmpireArray =[DBManager GETUMPIRE:self.competitionCode :self.matchCode ];
     
     
@@ -2954,6 +2974,8 @@ EditModeVC * objEditModeVc;
     //    [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord :[NSString stringWithFormat:@"%d",getOverStatus] :Umpire1Code :umpire2Code];
     
 }
+
+
 -(void)overEVENT
 {
     
@@ -3123,13 +3145,12 @@ EditModeVC * objEditModeVc;
                                     //bowerbtn
                                 }
                             }
+                            
+
                         }
                     }
                     
-                    
-                    
-                    
-                    
+
                     //ballticker clear
                     
                     if(![ValidedMatchType containsObject: [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.MATCHTYPE]] &&[self.ballEventRecord.objOverno intValue] >= fetchSEPageLoadRecord.MATCHTYPE && ![MuliteDayMatchtype containsObject: [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.MATCHTYPE]])
@@ -3300,11 +3321,28 @@ EditModeVC * objEditModeVc;
         //            [altert show];
         //        }
         //do something
-    }
-    else if(buttonIndex == 1)//Annul button pressed.
+        if (alertView.tag == 3000 ) {
+            [self StartBall];
+            
+        }if (alertView.tag == 3001) {
+            
+        }if (alertView.tag == 2002) {
+            
+        }
+        
+    }    else if(buttonIndex == 1)//Annul button pressed.
     {
         if(alertView.tag == 1001)
         {
+            
+        }
+        if (alertView.tag == 3001) {
+            
+            [self DidClickStartOver:self.btn_StartOver];
+        }
+        if (alertView.tag == 2002) {
+            
+            [self MatchResult];
             
         }
         if(alertView.tag == 1003)
@@ -3451,6 +3489,7 @@ EditModeVC * objEditModeVc;
         selectedWicketEvent = nil;
         selectedStrikernonstriker = nil;
         selectedwicketBowlerlist =nil;
+        wicketOption=0;
         [self unselectedButtonBg:self.btn_wkts];
     
         
@@ -3701,7 +3740,14 @@ EditModeVC * objEditModeVc;
                         [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
                     }
                 }
-            }else{
+            }else if(isFreeHitBall != 0){
+                for(int i=0;i<tempWickettypeArray.count;i++){
+                    WicketTypeRecord *wicketTypeRecord  = [tempWickettypeArray objectAtIndex:i];
+                    if([wicketTypeRecord.metasubcode isEqual: @"MSC097"]){
+                        [_WicketTypeArray addObject:[tempWickettypeArray objectAtIndex:i]];
+                    }
+                }
+            } else{
                 _WicketTypeArray  = [[NSMutableArray alloc]initWithArray:tempWickettypeArray];
                 
             }
@@ -4894,6 +4940,7 @@ EditModeVC * objEditModeVc;
         selectedWicketEvent = nil;
         selectedStrikernonstriker = nil;
         selectedwicketBowlerlist =nil;
+        wicketOption=0;
         [self unselectedButtonBg:self.btn_wkts];
         
         
@@ -5657,6 +5704,7 @@ EditModeVC * objEditModeVc;
     [self unselectedButtonBg: self.btn_B6];
     [self unselectedButtonBg: self.btn_extras];
     [extrasTableView removeFromSuperview ];
+    [miscFiltersTableview removeFromSuperview];
     [self unselectedButtonBg: self.btn_wkts];
     [self unselectedButtonBg: self.btn_overthrow];
     [self unselectedButtonBg: self.btn_miscFilter];
@@ -8599,8 +8647,8 @@ EditModeVC * objEditModeVc;
     
     _lbl_overs.text = [NSString stringWithFormat:@"%d.%d OVS" ,fetchSEPageLoadRecord.BATTEAMOVERS,fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     
-    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1){
-        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
+    if(fetchSEPageLoadRecord.INNINGSNO.intValue>1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue], [fetchSEPageLoadRecord.REQRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEPageLoadRecord.REQRUNRATE floatValue]];
     }else{
         _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEPageLoadRecord.BATTEAMRUNRATE floatValue]];
     }
@@ -8629,16 +8677,17 @@ EditModeVC * objEditModeVc;
     _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
     
-    _lbl_teamASecIngsScore.text = @"";
-    _lbl_teamASecIngsOvs.text = @"";
-    
-    
-    _lbl_teamBSecIngsScore.text =@"";
-    _lbl_teamBSecIngsOvs.text =@"";
     
     _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
     _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
     
+    if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
+        _lbl_teamASecIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.THIRDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.THIRDINNINGSTOTAL,fetchSEPageLoadRecord.THIRDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.THIRDINNINGSWICKET];
+        _lbl_teamASecIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.THIRDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.THIRDINNINGSOVERS];
+        
+        _lbl_teamBSecIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.FOURTHINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FOURTHINNINGSTOTAL,fetchSEPageLoadRecord.FOURTHINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FOURTHINNINGSWICKET];
+        _lbl_teamBSecIngsOvs.text =[NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FOURTHINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FOURTHINNINGSOVERS];
+    }
     
     if(!self.isEditMode)
     {
@@ -8662,7 +8711,9 @@ EditModeVC * objEditModeVc;
     }
     
     
-    if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
+    if([fetchSEPageLoadRecord INNINGSNO].intValue>1){
+    
+    if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){//Multi day
         
         isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue<=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]==4)?YES:NO;
         
@@ -8675,34 +8726,33 @@ EditModeVC * objEditModeVc;
             targetLeftValue = fetchSEPageLoadRecord.RUNSREQUIRED.intValue > 0 ? @"Trail By":(fetchSEPageLoadRecord.RUNSREQUIRED.intValue <0 ? @"Lead by:":@"Score level");
         }
         
-        targetRightValue =  fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? fetchSEPageLoadRecord.T_TARGETRUNS : (fetchSEPageLoadRecord.RUNSREQUIRED.intValue == 0 ? @"" : fetchSEPageLoadRecord.RUNSREQUIRED);
+        targetRightValue =  fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? fetchSEPageLoadRecord.TARGETRUNS : (fetchSEPageLoadRecord.RUNSREQUIRED.intValue == 0 ? @"" : [NSString stringWithFormat:@"%d", abs(fetchSEPageLoadRecord.RUNSREQUIRED.intValue) ]);
         
  
         _lbl_target.text = [NSString stringWithFormat:@"%@ %@",targetLeftValue,targetRightValue];
 
-        NSString *runsReqForBalls = fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? (isTargetReached ? @"Target achieved" : ([NSString stringWithFormat:@"%@ runs to win",fetchSEPageLoadRecord.RUNSREQUIRED])) : @"Required run rate:";
+        NSString *runsReqForBalls = fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? (isTargetReached ? @"Target achieved" : ([NSString stringWithFormat:@"%@ runs to win",fetchSEPageLoadRecord.RUNSREQUIRED])) : @"";
         _lbl_runs_required.text = runsReqForBalls;
-    }else{
+    }else{// ODI / T20
         
         isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue <=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]>1)?YES:NO;
         
         NSString *targetLeftValue = @"";
         NSString *targetRightValue = @"";
         targetLeftValue = @"Target:";
-        //targetRightValue =   fetchSEPageLoadRecord.T_TARGETRUNS;
-        targetRightValue =   fetchSEPageLoadRecord.RUNSREQUIRED;
+        targetRightValue =   fetchSEPageLoadRecord.TARGETRUNS;
         
         
         _lbl_target.text = [NSString stringWithFormat:@"%@ %@",targetLeftValue,targetRightValue];
         
-       // NSString * remainingBalls = @"1";
         
-        
-        NSString *runsReqForBalls =  [NSString  stringWithFormat:@"Runs required %@ in %@ balls",fetchSEPageLoadRecord.RUNSREQUIRED,fetchSEPageLoadRecord.REMBALLS];
+        NSString *runsReqForBalls =  [NSString  stringWithFormat:@"Runs required %@ in %@ balls",fetchSEPageLoadRecord.RUNSREQUIRED.intValue<0?@"0":fetchSEPageLoadRecord.RUNSREQUIRED,fetchSEPageLoadRecord.REMBALLS.intValue<0?@"0":fetchSEPageLoadRecord.REMBALLS];
         
         _lbl_runs_required.text = runsReqForBalls;
-        
-        
+    }
+    }
+    
+    
         if(self.img_firstIngsTeamName.image !=@"") //battingteamlogo
         {
             [self teamLogo];
@@ -8738,9 +8788,9 @@ EditModeVC * objEditModeVc;
             //change green color rbFearend
         }
         isFreeHitBall = ((fetchSEPageLoadRecord.ISFREEHIT == @1) && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE ])? YES:NO;
-    }
-    
-    
+    //Last Bowler Details
+     [self getLastBowlerDetails];
+   
 }
 - (IBAction)btn_swap:(id)sender {
     //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
@@ -11984,9 +12034,6 @@ EditModeVC * objEditModeVc;
     }
     
     
-    
-    
-    
     [self.navigationController pushViewController:scoreCardVC animated:YES];
     
     
@@ -12272,6 +12319,26 @@ EditModeVC * objEditModeVc;
     return YES;
 }
 
+
+-(BOOL) checkValidation {
+    
+    if (self.ballEventRecord.objWWREGION == @"" &&
+        self.ballEventRecord.objRuns.intValue > 0 &&
+        self.ballEventRecord.objByes.intValue == 0 &&
+        self.ballEventRecord.objLegByes.intValue == 0 &&
+        self.ballEventRecord.objWide.intValue == 0)
+    {
+        
+        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Wagon Wheel Point is not Selected.\n Do you want to continue ?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        [altert show];
+        [altert setTag:3000];
+        
+        return NO;
+    }
+    
+    return YES;
+    
+}
 
 
 
