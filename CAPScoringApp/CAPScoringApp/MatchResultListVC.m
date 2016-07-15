@@ -761,25 +761,39 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
 
 -(BOOL) checkValidation{
     
+    BOOL flag = YES;
+    
+    NSString *errorMessage = @"";
+    
     if(selectedResultType==nil){
-        [self showDialog:@"Please select Result type." andTitle:@""];
-        return NO;
+        errorMessage = [NSString stringWithFormat:@"%@",@"Please select Result type.\n"];
+        flag = NO;
 
     }
-    else if([_txtf_comments.text isEqual:@""]){
-        [self showDialog:@"Please enter comments." andTitle:@""];
-        return NO;
-    }else if(([selectedResultType.RESULTTYPE isEqual:@"Win"] || [selectedResultType.RESULTTYPE isEqual:@"Match Awarded"]) &&  selectedTeam==nil){
-        [self showDialog:@"Please select team." andTitle:@""];
-        return NO;
-    }else if(![_txtf_team_a_point.text isEqual:@""] && ([_txtf_team_a_point.text intValue]<0 || [_txtf_team_a_point.text intValue]>9)){
-        [self showDialog:@"Please enter point between 0 to 9." andTitle:@""];
-        return NO;
-    }else if(![_txtf_team_b_point.text isEqual:@""] && ([_txtf_team_b_point.text intValue]<0 || [_txtf_team_b_point.text intValue]>9)){
-        [self showDialog:@"Please enter point between 0 to 9." andTitle:@""];
-        return NO;
+    
+    if([_txtf_comments.text isEqual:@""]){
+        errorMessage = [NSString stringWithFormat:@"%@%@",@"Please enter comments.\n",errorMessage];
+        flag = NO;
     }
-    return YES;
+    
+    if(([selectedResultType.RESULTTYPE isEqual:@"Win"] || [selectedResultType.RESULTTYPE isEqual:@"Match Awarded"]) ||  selectedResultType==nil){
+        errorMessage = [NSString stringWithFormat:@"%@%@",@"Please select team.\n",errorMessage];
+        flag = NO;
+    }
+    
+    if(![_txtf_team_a_point.text isEqual:@""] && ([_txtf_team_a_point.text intValue]<0 || [_txtf_team_a_point.text intValue]>9)){
+        errorMessage = [NSString stringWithFormat:@"%@%@",@"Please enter A point between 0 to 9.\n",errorMessage];
+        flag = NO;
+    }else if(![_txtf_team_b_point.text isEqual:@""] && ([_txtf_team_b_point.text intValue]<0 || [_txtf_team_b_point.text intValue]>9)){
+        errorMessage = [NSString stringWithFormat:@"%@%@",@"Please enter point between 0 to 9.\n",errorMessage];
+        flag = NO;
+    }
+    
+    if(![errorMessage isEqual:@""]){
+        [self showDialog:errorMessage andTitle:@""];
+    }
+    
+    return flag;
 }
 
 /**

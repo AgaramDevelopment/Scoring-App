@@ -3974,7 +3974,8 @@ EditModeVC * objEditModeVc;
     {
         Shottype =self.ballEventRecord.objShottype;
     }
-    self.txt_Commantry.text=[NSString stringWithFormat:@" %@ %@ %@ %@ %@ %@ %@ %@",runSix,runFour,Extras,Wicket,overthrow,unComfort,beaten,Shottype];
+    //Comment is in hold
+  //  self.txt_Commantry.text=[NSString stringWithFormat:@" %@ %@ %@ %@ %@ %@ %@ %@",runSix,runFour,Extras,Wicket,overthrow,unComfort,beaten,Shottype];
 }
 
 
@@ -5888,7 +5889,8 @@ EditModeVC * objEditModeVc;
                     [self unselectedButtonBg: self.btn_run1];
                 }
                 NSString * run1value =[NSString stringWithFormat:@" RUN FOR %@",self.ballEventRecord.objRuns];
-                self.txt_Commantry.text =run1value;
+                //Comment is in hold
+                //   self.txt_Commantry.text =run1value;
                 
             }else if(self.ballEventRecord.objRuns.integerValue == 4){// If runs has four
                 [self resetRunsBoundriesValue];
@@ -5901,7 +5903,8 @@ EditModeVC * objEditModeVc;
                     [self unselectedButtonBg: self.btn_run1];
                 }
                 NSString * run1value =[NSString stringWithFormat:@" RUN FOR %@",self.ballEventRecord.objRuns];
-                self.txt_Commantry.text =run1value;
+                //Comment is in hold
+                //   self.txt_Commantry.text =run1value;
                 
                 
             }else{//Other run selected
@@ -5909,7 +5912,8 @@ EditModeVC * objEditModeVc;
                 self.ballEventRecord.objRuns = [NSNumber numberWithInt:isMoreRunSelected?4:1];
                 [self selectedButtonBg: self.btn_run1];
                 NSString * run1value =[NSString stringWithFormat:@"RUN FOR %@",self.ballEventRecord.objRuns];
-                self.txt_Commantry.text =run1value;
+                //Comment is in hold
+                // self.txt_Commantry.text =run1value;
                 NSLog(@"%@",run1value);
                 
                 
@@ -5931,7 +5935,8 @@ EditModeVC * objEditModeVc;
                     [self unselectedButtonBg: self.btn_run2];
                 }
                 NSString * run2value =[NSString stringWithFormat:@" RUN FOR %@",self.ballEventRecord.objRuns];
-                self.txt_Commantry.text =run2value;
+                //Comment is in hold
+                //self.txt_Commantry.text =run2value;
                 
             }else if(self.ballEventRecord.objRuns.integerValue == 5){// If runs has five
                 [self resetRunsBoundriesValue];
