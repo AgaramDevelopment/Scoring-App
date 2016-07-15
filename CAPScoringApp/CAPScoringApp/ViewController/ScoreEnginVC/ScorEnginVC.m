@@ -582,6 +582,7 @@ EditModeVC * objEditModeVc;
         self.lbl_last_bowler_sixs.text = @"-";
         self.lbl_last_bowler_strickrate.text = @"-";
     }
+    self.sideviewtable.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 
@@ -7572,6 +7573,9 @@ EditModeVC * objEditModeVc;
             ChangeTossVC*objChangeTossVC =[[ChangeTossVC alloc]initWithNibName:@"ChangeTossVC" bundle:nil];
             objChangeTossVC.CompitisonCode=self.competitionCode;
             objChangeTossVC.MatchCode   =self.matchCode;
+            objChangeTossVC.objStrickerdetailArray=fetchSEPageLoadRecord.getBattingTeamPlayers;
+            objChangeTossVC.objNonStrikerdetail =fetchSEPageLoadRecord.getBattingTeamPlayers;
+            objChangeTossVC.objBowlingTeamdetail=fetchSEPageLoadRecord.getBowlingTeamPlayers;
             objChangeTossVC.delegate =self;
             
             
@@ -7843,8 +7847,8 @@ EditModeVC * objEditModeVc;
     detail =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
     FixturesRecord *objFixtureRecord=(FixturesRecord*)[self.matchSetUp objectAtIndex:0];
     
-    NSString*teamAcode = fetchSEPageLoadRecord.TEAMACODE;
-    NSString*teamBcode = fetchSEPageLoadRecord.TEAMBCODE;
+    NSString*teamAcode = fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    NSString*teamBcode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
     
     NSString*teamA =  fetchSEPageLoadRecord.BATTEAMNAME;
     NSString*teamB = fetchSEPageLoadRecord.BOWLTEAMNAME;
@@ -7854,6 +7858,7 @@ EditModeVC * objEditModeVc;
     NSString*matchTypeCode = objFixtureRecord.matchTypeCode;
     NSString*overs = objFixtureRecord.overs;
     NSString *MatchStatus = objFixtureRecord.MatchStatus;
+    
     
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -8175,6 +8180,8 @@ EditModeVC * objEditModeVc;
 
 -(void) revisiedTarget
 {
+    if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
+    {
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -8214,6 +8221,7 @@ EditModeVC * objEditModeVc;
              revisedTarget.view.alpha = 1;
          }
                          completion:nil];
+    }
     }
     
 }
@@ -11751,6 +11759,8 @@ EditModeVC * objEditModeVc;
 ////Revised overs
 //
 -(void) revisedoverview{
+    if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
+    {
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -11808,6 +11818,7 @@ EditModeVC * objEditModeVc;
              revicedOverVc.view.alpha = 1;
          }
                          completion:nil];
+    }
     }
 }
 //

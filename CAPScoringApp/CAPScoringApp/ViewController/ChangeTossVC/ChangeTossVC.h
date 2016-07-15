@@ -26,6 +26,9 @@
 @property(nonatomic,assign)  NSNumber *STRIKERPOSITIONNO;
 @property(nonatomic,assign)  NSNumber *NONSTRIKERPOSITIONNO;
 @property(nonatomic,assign)  NSNumber *BOWLERPOSITIONNO;
+@property (nonatomic,strong) NSMutableArray * objStrickerdetailArray;
+@property (nonatomic,strong) NSMutableArray * objNonStrikerdetail;
+@property (nonatomic,strong) NSMutableArray * objBowlingTeamdetail;
 
 @property(nonatomic,strong) IBOutlet UILabel *lbl_Tosswon;
 @property (nonatomic,strong) IBOutlet UILabel *lbl_ElectedTo;
