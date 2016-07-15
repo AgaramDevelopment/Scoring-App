@@ -5762,6 +5762,15 @@ EditModeVC * objEditModeVc;
   //[self unselectedViewBg: self.view_edit];   need to set reference
     [self unselectedViewBg:self.view_appeal];
     self.View_Appeal.hidden=YES;
+    [self.table_Appeal reloadData];
+    
+//   self.view_table_select.hidden=YES;
+//    [self.table_AppealSystem reloadData];
+//    [self.table_AppealComponent reloadData];
+//    [self.tanle_umpirename reloadData];
+//    [self.table_BatsmenName reloadData];
+//   // self.comments_txt=@"";
+
     isEnableTbl=NO;
     isPitchmap =NO;
   //[self unselectedViewBg: self.View_Appeal];
