@@ -8468,7 +8468,7 @@ EditModeVC * objEditModeVc;
         strickerTableView.backgroundColor=[UIColor whiteColor];
         strickerTableView.dataSource = self;
         strickerTableView.delegate = self;
-        [self.view addSubview:strickerTableView];
+        [self.CommonView addSubview:strickerTableView];
         
         strickerList = [[NSMutableArray alloc]init];
         int indx=0;
@@ -8520,7 +8520,7 @@ EditModeVC * objEditModeVc;
         nonstrickerTableView.backgroundColor=[UIColor whiteColor];
         nonstrickerTableView.dataSource = self;
         nonstrickerTableView.delegate = self;
-        [self.view addSubview:nonstrickerTableView];
+        [self.CommonView addSubview:nonstrickerTableView];
         
         
         nonStrickerList = [[NSMutableArray alloc]init];
@@ -8572,7 +8572,7 @@ EditModeVC * objEditModeVc;
         currentBowlersTableView.backgroundColor=[UIColor whiteColor];
         currentBowlersTableView.dataSource = self;
         currentBowlersTableView.delegate = self;
-        [self.view addSubview:currentBowlersTableView];
+        [self.CommonView addSubview:currentBowlersTableView];
         [currentBowlersTableView reloadData];
         
         
