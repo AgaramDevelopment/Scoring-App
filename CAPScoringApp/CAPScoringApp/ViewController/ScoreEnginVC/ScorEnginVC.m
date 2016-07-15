@@ -292,6 +292,30 @@ EditModeVC * objEditModeVc;
     
     NSLog(@"self.matchTypeCode%@",self.matchTypeCode);
     
+    
+    AppealSystemArray=[[NSMutableArray alloc]init];
+    NSMutableArray * FetchAppealSystemArray =[DBManager AppealSystemRetrieveEventData];
+    for(int i=0; i < [FetchAppealSystemArray count]; i++)
+    {
+        
+        objAppealSystemEventRecord=(AppealSystemRecords*)[FetchAppealSystemArray objectAtIndex:i];
+        
+        [AppealSystemArray addObject:objAppealSystemEventRecord];
+    }
+
+    
+    AppealComponentArray=[[NSMutableArray alloc]init];
+    NSMutableArray * FetchAppealComponentArray =[DBManager AppealComponentRetrieveEventData];
+    for(int i=0; i < [FetchAppealComponentArray count]; i++)
+    {
+        
+        objAppealComponentEventRecord=(AppealComponentRecord*)[FetchAppealComponentArray objectAtIndex:i];
+        
+        [AppealComponentArray addObject:objAppealComponentEventRecord];
+        
+        
+    }
+    
     AppealBatsmenArray=[[NSMutableArray alloc]init];
     
     AppealUmpireArray=[[NSMutableArray alloc]init];
@@ -3200,7 +3224,7 @@ EditModeVC * objEditModeVc;
     NoofWickets =[objs intValue];
     if(NoofWickets >=10)
     {
-        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"No More Wicket to play " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"No More Wicket to play " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [altert show];
         return YES;
     }
@@ -3346,6 +3370,9 @@ EditModeVC * objEditModeVc;
             
             [self MatchResult];
             
+        }if (alertView.tag == 3000 ) {
+            
+           
         }
         if(alertView.tag == 1003)
         {
@@ -3356,7 +3383,7 @@ EditModeVC * objEditModeVc;
         {
             NSLog(@"vhdgdfgd");
         }
-        
+
         
         alterviewSelect=@"NO";
         //do something
@@ -3986,7 +4013,8 @@ EditModeVC * objEditModeVc;
     {
         Shottype =self.ballEventRecord.objShottype;
     }
-    self.txt_Commantry.text=[NSString stringWithFormat:@" %@ %@ %@ %@ %@ %@ %@ %@",runSix,runFour,Extras,Wicket,overthrow,unComfort,beaten,Shottype];
+    //Comment is in hold
+  //  self.txt_Commantry.text=[NSString stringWithFormat:@" %@ %@ %@ %@ %@ %@ %@ %@",runSix,runFour,Extras,Wicket,overthrow,unComfort,beaten,Shottype];
 }
 
 
@@ -5749,6 +5777,15 @@ EditModeVC * objEditModeVc;
   //[self unselectedViewBg: self.view_edit];   need to set reference
     [self unselectedViewBg:self.view_appeal];
     self.View_Appeal.hidden=YES;
+    [self.table_Appeal reloadData];
+    
+//   self.view_table_select.hidden=YES;
+//    [self.table_AppealSystem reloadData];
+//    [self.table_AppealComponent reloadData];
+//    [self.tanle_umpirename reloadData];
+//    [self.table_BatsmenName reloadData];
+//   // self.comments_txt=@"";
+
     isEnableTbl=NO;
     isPitchmap =NO;
     isWagonwheel=NO;
@@ -5805,50 +5842,30 @@ EditModeVC * objEditModeVc;
 
 
 - (IBAction)appeal_btn:(id)sender {
-    if(isEnableTbl==YES)
-    {
-        AppealSystemArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchAppealSystemArray =[DBManager AppealSystemRetrieveEventData];
-        for(int i=0; i < [FetchAppealSystemArray count]; i++)
-        {
-            
-            objAppealSystemEventRecord=(AppealSystemRecords*)[FetchAppealSystemArray objectAtIndex:i];
-            
-            [AppealSystemArray addObject:objAppealSystemEventRecord];
-            
-            
-        }
+    
+    if (self.table_AppealSystem.hidden ==YES) {
         
-        
-        [self.table_AppealSystem reloadData];
         self.table_AppealSystem.hidden=NO;
-        isEnableTbl=NO;
+        
     }
+    else
+        self.table_AppealSystem.hidden=YES;
     
     
 }
+
 - (IBAction)btn_AppealComponent:(id)sender {
     
-    if(isEnableTbl==YES)
-    {
-        AppealComponentArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchAppealComponentArray =[DBManager AppealComponentRetrieveEventData];
-        for(int i=0; i < [FetchAppealComponentArray count]; i++)
-        {
-            
-            objAppealComponentEventRecord=(AppealComponentRecord*)[FetchAppealComponentArray objectAtIndex:i];
-            
-            [AppealComponentArray addObject:objAppealComponentEventRecord];
-            
-            
-        }
+    if (self.table_AppealComponent.hidden ==YES) {
         
-        
-        [self.table_AppealComponent reloadData];
         self.table_AppealComponent.hidden=NO;
-        isEnableTbl=NO;
+        
     }
-}
+    else
+        self.table_AppealComponent.hidden=YES;
+ }
+
+
 - (IBAction)btn_umpireName:(id)sender {
     
     if (self.tanle_umpirename.hidden ==YES) {
@@ -5903,7 +5920,8 @@ EditModeVC * objEditModeVc;
                     [self unselectedButtonBg: self.btn_run1];
                 }
                 NSString * run1value =[NSString stringWithFormat:@" RUN FOR %@",self.ballEventRecord.objRuns];
-                self.txt_Commantry.text =run1value;
+                //Comment is in hold
+                //   self.txt_Commantry.text =run1value;
                 
             }else if(self.ballEventRecord.objRuns.integerValue == 4){// If runs has four
                 [self resetRunsBoundriesValue];
@@ -5916,7 +5934,8 @@ EditModeVC * objEditModeVc;
                     [self unselectedButtonBg: self.btn_run1];
                 }
                 NSString * run1value =[NSString stringWithFormat:@" RUN FOR %@",self.ballEventRecord.objRuns];
-                self.txt_Commantry.text =run1value;
+                //Comment is in hold
+                //   self.txt_Commantry.text =run1value;
                 
                 
             }else{//Other run selected
@@ -5924,7 +5943,8 @@ EditModeVC * objEditModeVc;
                 self.ballEventRecord.objRuns = [NSNumber numberWithInt:isMoreRunSelected?4:1];
                 [self selectedButtonBg: self.btn_run1];
                 NSString * run1value =[NSString stringWithFormat:@"RUN FOR %@",self.ballEventRecord.objRuns];
-                self.txt_Commantry.text =run1value;
+                //Comment is in hold
+                // self.txt_Commantry.text =run1value;
                 NSLog(@"%@",run1value);
                 
                 
@@ -5946,7 +5966,8 @@ EditModeVC * objEditModeVc;
                     [self unselectedButtonBg: self.btn_run2];
                 }
                 NSString * run2value =[NSString stringWithFormat:@" RUN FOR %@",self.ballEventRecord.objRuns];
-                self.txt_Commantry.text =run2value;
+                //Comment is in hold
+                //self.txt_Commantry.text =run2value;
                 
             }else if(self.ballEventRecord.objRuns.integerValue == 5){// If runs has five
                 [self resetRunsBoundriesValue];
@@ -6407,11 +6428,11 @@ EditModeVC * objEditModeVc;
     
     
     if(tableView == table_Appeal){
-        if(appealEventDict==nil){
-            appealEventDict = [NSMutableDictionary dictionary];
-        }
-        AppealComponentRecord *appealRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
-        [appealEventDict setValue:appealRecord.AppealComponentMetaSubCode forKey:@"AppealTypeCode"];
+//        if(appealEventDict==nil){
+//            appealEventDict = [NSMutableDictionary dictionary];
+//        }
+//        AppealComponentRecord *appealRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
+//        [appealEventDict setValue:appealRecord.AppealComponentMetaSubCode forKey:@"AppealTypeCode"];
         
         _view_table_select.hidden=NO;
     }
@@ -8477,7 +8498,7 @@ EditModeVC * objEditModeVc;
         strickerTableView.backgroundColor=[UIColor whiteColor];
         strickerTableView.dataSource = self;
         strickerTableView.delegate = self;
-        [self.view addSubview:strickerTableView];
+        [self.CommonView addSubview:strickerTableView];
         
         strickerList = [[NSMutableArray alloc]init];
         int indx=0;
@@ -8529,7 +8550,7 @@ EditModeVC * objEditModeVc;
         nonstrickerTableView.backgroundColor=[UIColor whiteColor];
         nonstrickerTableView.dataSource = self;
         nonstrickerTableView.delegate = self;
-        [self.view addSubview:nonstrickerTableView];
+        [self.CommonView addSubview:nonstrickerTableView];
         
         
         nonStrickerList = [[NSMutableArray alloc]init];
@@ -8581,7 +8602,7 @@ EditModeVC * objEditModeVc;
         currentBowlersTableView.backgroundColor=[UIColor whiteColor];
         currentBowlersTableView.dataSource = self;
         currentBowlersTableView.delegate = self;
-        [self.view addSubview:currentBowlersTableView];
+        [self.CommonView addSubview:currentBowlersTableView];
         [currentBowlersTableView reloadData];
         
         

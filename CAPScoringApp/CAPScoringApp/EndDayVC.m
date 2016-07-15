@@ -37,6 +37,7 @@ NSDateFormatter *formatter;
     self.view_allControls.hidden = YES;
     self.tbl_endday.hidden = NO;
 
+    
     fetchEndDayDetails = [[FetchEndDayDetails alloc]init];
     [fetchEndDayDetails FetchEndDay:_COMPETITIONCODE :_MATCHCODE :_TEAMCODE :_INNINGSNO];
     
@@ -389,9 +390,15 @@ NSDateFormatter *formatter;
             
     
             [self startService:@"DELETE"];
+            
+            fetchEndDayDetails = [[FetchEndDayDetails alloc]init];
+            [fetchEndDayDetails FetchEndDay:_COMPETITIONCODE :_MATCHCODE :_TEAMCODE :_INNINGSNO];
+
+            [self.tbl_endday reloadData];
+            
             self.view_allControls.hidden = YES;
             self.tbl_endday.hidden = NO;
-            [self.tbl_endday reloadData];
+            
         }
         else
         {

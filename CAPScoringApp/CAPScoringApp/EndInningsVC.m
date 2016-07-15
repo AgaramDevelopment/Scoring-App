@@ -133,8 +133,6 @@ BOOL IsBack;
         [self duration];
         
         
-        
-        
         TOTALRUNS=[DBManagerEndInnings GetTotalRunsForFetchEndInnings : CompetitionCode: MatchCode :fetchSePageLoad.BATTINGTEAMCODE: fetchSePageLoad.INNINGSNO ];
         
         OVERNO=[DBManagerEndInnings GetOverNoForFetchEndInnings : CompetitionCode: MatchCode :fetchSePageLoad.BATTINGTEAMCODE: fetchSePageLoad.INNINGSNO ];
@@ -143,8 +141,10 @@ BOOL IsBack;
 
         self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:1.0f];
         [_btn_delete setUserInteractionEnabled:NO];
+       
     }
 }
+
 -(void)datePicker{
     
     datePicker =[[UIDatePicker alloc]init];
@@ -158,22 +158,27 @@ BOOL IsBack;
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
                                                                style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
     
+ 
+
     
     UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
     
     [self.txt_startInnings setInputAccessoryView:toolbar];
- 
-    
+   
     
 }
+
 -(void)showSelecteddate{
+
     
+
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     self.txt_startInnings.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
-    [self.txt_startInnings resignFirstResponder];
+   // [self.txt_startInnings resignFirstResponder];
+  //  self.txt_startInnings =[NSString stringWithFormat:@"%@",[_txt_startInnings text]];
     [self duration];
     
 }
@@ -199,7 +204,7 @@ BOOL IsBack;
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     self.txt_endInnings.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
-    [self.txt_endInnings resignFirstResponder];
+    //[self.txt_endInnings resignFirstResponder];
     [self duration];
     
 }
@@ -306,22 +311,24 @@ BOOL IsBack;
     NSString*startInningsTime = obj.STARTTIME;
     NSString*endInningsTime  = obj.ENDTIME;
     NSString*teamName = obj.TEAMNAME;
-    //NSNumber*totalRuns =  obj.TOTALRUNS;
+   //NSString*totalRuns =  obj.TOTALRUNS;
     NSString*totalOvers = obj.TOTALOVERS;
     NSNumber *totalWickets = obj.TOTALWICKETS;
+    NSString *innings = obj.INNINGSNO;
     
     self.txt_startInnings.text = startInningsTime;
     self.txt_endInnings.text = endInningsTime;
     self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
     self.lbl_teamName.text = teamName;
-    //self.lbl_runScored.text = [NSString stringWithFormat:@"%@",totalRuns];
+    //self.lbl_runScored.text = totalRuns;
     self.lbl_wktLost.text = [NSString stringWithFormat:@"%@", totalWickets];
+    self.lbl_innings.text = innings;
     self.tbl_endInnings.hidden = YES;
     self.view_allControls.hidden = NO;
     
 self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f];
     [_btn_delete setUserInteractionEnabled:YES];
-    
+
 }
 /**
  * Show message for given title and content
@@ -404,8 +411,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
     
 - (IBAction)btn_back:(id)sender {
     
-    
-
+   
     if (IsBack == NO) {
         
         self.view_allControls.hidden = YES;
