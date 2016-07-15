@@ -460,10 +460,6 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
             }
             
             
-        }else{
-            
-            
-            
         }
         
         
@@ -471,6 +467,10 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
         
         
     }else{
+        
+        [sessionRecords UpdateEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :sessionRecords.DAYNO :[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO] :_txt_startTime.text :_txt_endTime.text :@""];
+        
+
         
         if(self.checkInternetConnection){
             
@@ -515,17 +515,7 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
             }
             
             
-        }else{
-            
-            
-            
         }
-        
-        
-        [sessionRecords UpdateEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :sessionRecords.DAYNO :[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO] :_txt_startTime.text :_txt_endTime.text :@""];
-        
-
-
         
     }
         
