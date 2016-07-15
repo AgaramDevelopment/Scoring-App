@@ -591,7 +591,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         
-        NSString *query=[NSString stringWithFormat:@"SELECT PM.PLAYERCODE, PM.PLAYERNAME,MTPD.RECORDSTATUS,MTPD.PLAYINGORDER  FROM PLAYERTEAMDETAILS AS PTD INNER JOIN PLAYERMASTER AS PM ON PTD.PLAYERCODE = PM.PLAYERCODE INNER JOIN MATCHTEAMPLAYERDETAILS MTPD ON MTPD.PLAYERCODE = PTD.PLAYERCODE  WHERE PM.RECORDSTATUS = 'MSC001' AND PTD.RECORDSTATUS = 'MSC001'  AND PTD.TEAMCODE = '%@' AND MTPD.MATCHCODE = '%@'  ORDER BY MTPD.RECORDSTATUS",teamCode,matchCode];
+        NSString *query=[NSString stringWithFormat:@"SELECT PM.PLAYERCODE, PM.PLAYERNAME,MTPD.RECORDSTATUS,MTPD.PLAYINGORDER  FROM PLAYERTEAMDETAILS AS PTD INNER JOIN PLAYERMASTER AS PM ON PTD.PLAYERCODE = PM.PLAYERCODE INNER JOIN MATCHTEAMPLAYERDETAILS MTPD ON MTPD.PLAYERCODE = PTD.PLAYERCODE  WHERE PM.RECORDSTATUS = 'MSC001' AND PTD.RECORDSTATUS = 'MSC001'  AND PTD.TEAMCODE = '%@' AND MTPD.MATCHCODE = '%@'  ORDER BY MTPD.PLAYINGORDER",teamCode,matchCode];
         NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1535,13 +1535,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return YES;
             
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
@@ -1572,13 +1574,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return YES;
             
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
@@ -2059,7 +2063,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             NSString *T_STRIKERCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
             NSString *T_NONSTRIKERCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
             NSString *BOWLERCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
-            NSString *T_BOWLINGEND = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+            NSString *T_BOWLINGEND = [self getValueByNull:statement :5];
             
             [result addObject:STRIKERCODE];
             [result addObject:NONSTRIKERCODE];
@@ -5506,11 +5510,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -5732,7 +5739,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"WITH WICKETDETAILS(ROWNUM,WICKETPLAYER,WICKETTYPE,BALLCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO) AS ( SELECT (SELECT COUNT(*) FROM WICKETEVENTS AS t2 WHERE t2.MATCHCODE <= WKT.MATCHCODE) AS ROWNUM,WKT.WICKETPLAYER, WKT.WICKETTYPE, WKT.BALLCODE, WKT.COMPETITIONCODE, WKT.MATCHCODE, WKT.TEAMCODE, WKT.INNINGSNO FROM WICKETEVENTS WKT WHERE WKT.COMPETITIONCODE = '%@' AND WKT.MATCHCODE =   '%@' AND	WKT.TEAMCODE =   '%@' AND WKT.INNINGSNO = '%@')SELECT PM.PLAYERCODE PLAYERCODE, PM.PLAYERNAME PLAYERNAME, PM.BATTINGSTYLE FROM MATCHREGISTRATION MR INNER JOIN MATCHTEAMPLAYERDETAILS MPD ON MR.MATCHCODE = MPD.MATCHCODE INNER JOIN COMPETITION COM ON COM.COMPETITIONCODE = MR.COMPETITIONCODE INNER JOIN TEAMMASTER TMA ON MPD.MATCHCODE = '%@' AND	MPD.TEAMCODE = '%@' AND MPD.TEAMCODE = TMA.TEAMCODE INNER JOIN PLAYERMASTER PM ON MPD.PLAYERCODE = PM.PLAYERCODE WHERE PM.PLAYERCODE NOT IN ( SELECT X.WICKETPLAYER AS WICKETPLAYER  FROM WICKETDETAILS AS X LEFT JOIN WICKETDETAILS nex ON nex.rownum = X.rownum + 1 WHERE  (X.WICKETTYPE  != 'MSC102' OR NEX.WICKETPLAYER IS NULL) AND X.COMPETITIONCODE = '%@' AND X.MATCHCODE = '%@' AND	X.TEAMCODE = '%@' AND X.INNINGSNO = '%@'  ) AND (COM.ISOTHERSMATCHTYPE = 'MSC117' Or (MPD.PLAYINGORDER <= 11)) ORDER BY MPD.PLAYINGORDER",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,MATCHCODE,BATTINGTEAMCODE,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"WITH WICKETDETAILS(ROWNUM,WICKETPLAYER,WICKETTYPE,BALLCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO) AS ( SELECT (SELECT COUNT(*) FROM WICKETEVENTS AS t2 WHERE t2.MATCHCODE <= WKT.MATCHCODE) AS ROWNUM,WKT.WICKETPLAYER, WKT.WICKETTYPE, WKT.BALLCODE, WKT.COMPETITIONCODE, WKT.MATCHCODE, WKT.TEAMCODE, WKT.INNINGSNO FROM WICKETEVENTS WKT WHERE WKT.COMPETITIONCODE = '%@' AND WKT.MATCHCODE =   '%@' AND	WKT.TEAMCODE =   '%@' AND WKT.INNINGSNO = '%@')SELECT PM.PLAYERCODE PLAYERCODE, PM.PLAYERNAME PLAYERNAME, PM.BATTINGSTYLE FROM MATCHREGISTRATION MR INNER JOIN MATCHTEAMPLAYERDETAILS MPD ON MR.MATCHCODE = MPD.MATCHCODE AND MPD.RECORDSTATUS='MSC001' INNER JOIN COMPETITION COM ON COM.COMPETITIONCODE = MR.COMPETITIONCODE INNER JOIN TEAMMASTER TMA ON MPD.MATCHCODE = '%@' AND	MPD.TEAMCODE = '%@' AND MPD.TEAMCODE = TMA.TEAMCODE INNER JOIN PLAYERMASTER PM ON MPD.PLAYERCODE = PM.PLAYERCODE WHERE PM.PLAYERCODE NOT IN ( SELECT X.WICKETPLAYER AS WICKETPLAYER  FROM WICKETDETAILS AS X LEFT JOIN WICKETDETAILS nex ON nex.rownum = X.rownum + 1 WHERE  (X.WICKETTYPE  != 'MSC102' OR NEX.WICKETPLAYER IS NULL) AND X.COMPETITIONCODE = '%@' AND X.MATCHCODE = '%@' AND	X.TEAMCODE = '%@' AND X.INNINGSNO = '%@'  ) AND (COM.ISOTHERSMATCHTYPE = 'MSC117' Or (MPD.PLAYINGORDER <= 11)) ORDER BY MPD.PLAYINGORDER",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,MATCHCODE,BATTINGTEAMCODE,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -6665,15 +6672,20 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                           if (sqlite3_step(statement) == SQLITE_DONE)
                                           {
                                               sqlite3_reset(statement);
+                                              sqlite3_finalize(statement);
+                                              sqlite3_close(dataBase);
                                               return YES;
                                           }
                                           else {
                                               sqlite3_reset(statement);
-                                              
+                                              sqlite3_finalize(statement);
+                                              sqlite3_close(dataBase);
                                               return NO;
                                           }
                                       }
                                       sqlite3_reset(statement);
+                                       sqlite3_finalize(statement);
+                                      sqlite3_close(dataBase);
                                       return NO;
                                   }
                                   
@@ -6695,17 +6707,21 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                           if (sqlite3_step(statement) == SQLITE_DONE)
                                           {
                                               sqlite3_reset(statement);
-                                              
+                                              sqlite3_finalize(statement);
+                                              sqlite3_close(dataBase);
                                               return YES;
                                               
                                           }
                                           else {
                                               sqlite3_reset(statement);
-                                              
+                                              sqlite3_finalize(statement);
+                                              sqlite3_close(dataBase);
                                               return NO;
                                           }
                                       }
                                       sqlite3_reset(statement);
+                                       sqlite3_finalize(statement);
+                                        sqlite3_close(dataBase);
                                       return NO;
                                       
                                   }
@@ -6728,17 +6744,21 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                           if (sqlite3_step(statement) == SQLITE_DONE)
                                           {
                                               sqlite3_reset(statement);
-                                              
+                                              sqlite3_finalize(statement);
+                                              sqlite3_close(dataBase);
                                               return YES;
                                               
                                           }
                                           else {
                                               sqlite3_reset(statement);
-                                              
+                                              sqlite3_finalize(statement);
+                                              sqlite3_close(dataBase);
                                               return NO;
                                           }
                                       }
                                       sqlite3_reset(statement);
+                                      sqlite3_finalize(statement);
+                                      sqlite3_close(dataBase);
                                       return NO;
                                       
                                   }
@@ -6764,17 +6784,21 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                 if (sqlite3_step(statement) == SQLITE_DONE)
                 {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return YES;
                     
                 }
                 else {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return NO;
                 }
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
             
         }
@@ -6800,17 +6824,21 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                 if (sqlite3_step(statement) == SQLITE_DONE)
                 {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return YES;
                     
                 }
                 else {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return NO;
                 }
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
             
         }
@@ -6839,17 +6867,21 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                 if (sqlite3_step(statement) == SQLITE_DONE)
                 {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return YES;
                     
                 }
                 else {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return NO;
                 }
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
             
         }
@@ -6877,17 +6909,21 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                 if (sqlite3_step(statement) == SQLITE_DONE)
                 {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return YES;
                     
                 }
                 else {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return NO;
                 }
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
             
         }

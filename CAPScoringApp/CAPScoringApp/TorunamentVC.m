@@ -17,7 +17,8 @@
 #import "AppDelegate.h"
 #import "Utitliy.h"
 #import "DBMANAGERSYNC.h"
-
+#import "DashBoardVC.h"
+#import "ScorEnginVC.h"
 @interface TorunamentVC ()
 {
     BOOL isEnableTbl;
@@ -88,7 +89,20 @@
 
 -(IBAction)Back_BtnAction:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"]) {
+        NSLog(@"yes");
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ScoreEnginExit"];
+        DashBoardVC*loginVC = [[DashBoardVC alloc]init];
+        
+        loginVC =  (DashBoardVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+        //tournmentVc.selectDashBoard=selectType;
+        [self.navigationController pushViewController:loginVC animated:YES];
+        
+    } else {
+        NSLog(@"no");
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+
 }
 
 -(void)viewWillAppear:(BOOL)animated

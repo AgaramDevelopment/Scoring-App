@@ -7,6 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BreakVC.h"
+
+@protocol AddBreakVCDelagate <NSObject>
+@required
+
+- (void) ChangeVCBackBtnAction;
+
+@end
 
 @interface AddBreakVC : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource>
 
@@ -42,7 +50,7 @@
 @property(strong,nonatomic)NSString*COMPETITIONCODE;
 @property(strong,nonatomic)NSString*INNINGSNO;
 @property(strong,nonatomic)NSString*MATCHDATE;
-
+@property(strong,nonatomic)NSString*Duration;
 @property(strong,nonatomic)NSDictionary *test;
 
 @end

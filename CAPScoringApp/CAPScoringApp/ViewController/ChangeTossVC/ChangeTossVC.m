@@ -360,7 +360,7 @@
 {
     if([self.lbl_Tosswon.text isEqualToString:@""] || self.lbl_Tosswon.text==nil && [self.lbl_ElectedTo.text isEqualToString:@""] || self.lbl_ElectedTo.text==nil && [self.lbl_Stricker.text isEqualToString:@""] || self.lbl_Stricker.text==nil && [self.lbl_NonStricker.text isEqualToString:@""] || self.lbl_NonStricker.text==nil && [self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)
     {
-        [self ShowAlterView:@"Please Select Team,ElectedTo,Stricker,NonStricker And Bowler"];
+        [self ShowAlterView:@"Please Select Team,ElectedTo,Striker,NonStriker And Bowler"];
     }
        else if([self.lbl_Tosswon.text isEqualToString:@""] || self.lbl_Tosswon.text==nil)
         {
@@ -372,11 +372,11 @@
         }
         else if([self.lbl_Stricker.text isEqualToString:@""] || self.lbl_Stricker.text==nil)
         {
-            [self ShowAlterView:@"Please Select Stricker"];
+            [self ShowAlterView:@"Please Select Striker"];
         }
         else if([self.lbl_NonStricker.text isEqualToString:@""] || self.lbl_NonStricker.text==nil)
         {
-            [self ShowAlterView:@"Please Select NonStricker"];
+            [self ShowAlterView:@"Please Select NonStriker"];
         }
         else if([self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)
         {

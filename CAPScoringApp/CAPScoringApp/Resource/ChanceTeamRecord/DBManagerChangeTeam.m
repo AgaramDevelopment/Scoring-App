@@ -59,7 +59,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MAX(INNINGSNO) AS INNINGSNO  FROM INNINGSEVENTS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND INNINGSSTATUS='1'",COMPETITIONCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MAX(INNINGSNO) AS INNINGSNO  FROM INNINGSEVENTS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND INNINGSSTATUS=1",COMPETITIONCODE,MATCHCODE];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)== SQLITE_OK)
         {
@@ -414,21 +414,20 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT PM.PLAYERCODE PLAYERCO
                  [DBManagerChangeToss InsertTossDetails : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : ELECTEDTO : STRIKERCODE : NONSTRIKERCODE : BOWLERCODE : BOWLINGEND];
                 
             }
-            else
-            {
-                
-                [DBManagerChangeTeamInsert UpadateInningsEventsForChangeTeam : STRIKERCODE : NONSTRIKERCODE : BOWLERCODE : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO];
-                
-                [DBManagerChangeTeamInsert DeleteInningsEventsForInsertChangeTeam : COMPETITIONCODE : MATCHCODE : INNINGSNO];
-                
-                NSNumber*INNINGSSCORECARD=[[NSNumber alloc]init];
-                
-                INNINGSSCORECARD=[NSNumber numberWithInt:INNINGSNO.intValue + 1];
-                
-                [InitializeInningsScoreBoardRecord InitializeInningsScoreBoard :COMPETITIONCODE : MATCHCODE :@"" :@"" : [NSNumber numberWithInt:INNINGSNO.intValue+1] : @"" :@"" :@"" : [NSNumber numberWithInt:1]];
-                
-                
-            }
+        }
+        else
+        {
+            
+            [DBManagerChangeTeamInsert UpadateInningsEventsForChangeTeam : STRIKERCODE : NONSTRIKERCODE : BOWLERCODE : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO];
+            
+            [DBManagerChangeTeamInsert DeleteInningsEventsForInsertChangeTeam : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+            
+            NSNumber*INNINGSSCORECARD=[[NSNumber alloc]init];
+            
+            INNINGSSCORECARD=[NSNumber numberWithInt:INNINGSNO.intValue + 1];
+            
+            [InitializeInningsScoreBoardRecord InitializeInningsScoreBoard :COMPETITIONCODE : MATCHCODE :@"" :@"" : [NSNumber numberWithInt:INNINGSNO.intValue+1] : @"" :@"" :@"" : [NSNumber numberWithInt:1]];
+            
             
         }
         

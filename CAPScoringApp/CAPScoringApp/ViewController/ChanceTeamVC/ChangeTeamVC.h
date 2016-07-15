@@ -19,6 +19,8 @@
 
 @property(nonatomic,strong) NSString * compitionCode;
 @property(nonatomic,strong) NSString * MatchCode;
+@property (nonatomic,strong) NSString * currentBattingTeamCode;
+@property (nonatomic,strong) NSString * inningsno;
 
 
 @property(nonatomic,strong) IBOutlet UILabel *lbl_SelectTeamName;

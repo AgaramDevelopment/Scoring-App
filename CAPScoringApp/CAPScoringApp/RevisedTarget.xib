@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="RAJDHANI-BOLD.TTF">
@@ -10,6 +11,7 @@
             <string>Rajdhani-Bold</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-REGULAR.TTF">
+            <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
@@ -144,13 +146,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i6w-ze-Y8z">
                             <rect key="frame" x="54" y="284" width="440" height="191"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Comments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFV-bn-QSy">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Comments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFV-bn-QSy">
                                     <rect key="frame" x="8" y="8" width="116" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="116" id="DPY-Z3-Ibh"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="25"/>
                                     <color key="textColor" red="0.99108743320000003" green="1" blue="0.98888242749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" tag="25" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aan-09-l5c">
+                                <textField opaque="NO" clipsSubviews="YES" tag="25" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Aan-09-l5c">
                                     <rect key="frame" x="8" y="33" width="432" height="150"/>
                                     <color key="textColor" red="0.99108743320000003" green="1" blue="0.98888242749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
@@ -159,10 +164,27 @@
                                         <outlet property="delegate" destination="-1" id="WhR-Ua-5g5"/>
                                     </connections>
                                 </textField>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="R2F-U1-pEj">
+                                    <rect key="frame" x="8" y="33" width="432" height="150"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="DFV-bn-QSy" firstAttribute="leading" secondItem="Aan-09-l5c" secondAttribute="leading" id="4ta-OK-sHr"/>
+                                <constraint firstItem="Aan-09-l5c" firstAttribute="bottom" secondItem="R2F-U1-pEj" secondAttribute="bottom" id="7Ep-vs-pxR"/>
+                                <constraint firstItem="R2F-U1-pEj" firstAttribute="top" secondItem="DFV-bn-QSy" secondAttribute="bottom" id="A6q-S0-Chp"/>
+                                <constraint firstItem="DFV-bn-QSy" firstAttribute="leading" secondItem="R2F-U1-pEj" secondAttribute="leading" id="Iqx-dU-o6F"/>
+                                <constraint firstAttribute="trailing" secondItem="R2F-U1-pEj" secondAttribute="trailing" id="PnB-Q7-Hwo"/>
                                 <constraint firstAttribute="height" constant="191" id="TfA-cx-2ok"/>
+                                <constraint firstAttribute="bottom" secondItem="R2F-U1-pEj" secondAttribute="bottom" constant="8" id="WP2-qo-bwt"/>
+                                <constraint firstItem="R2F-U1-pEj" firstAttribute="leading" secondItem="i6w-ze-Y8z" secondAttribute="leading" constant="8" id="dqc-I5-fQF"/>
+                                <constraint firstItem="Aan-09-l5c" firstAttribute="trailing" secondItem="R2F-U1-pEj" secondAttribute="trailing" id="fWV-Bl-ZES"/>
+                                <constraint firstItem="DFV-bn-QSy" firstAttribute="top" secondItem="i6w-ze-Y8z" secondAttribute="topMargin" id="pxw-6j-Wi0"/>
+                                <constraint firstItem="Aan-09-l5c" firstAttribute="top" secondItem="R2F-U1-pEj" secondAttribute="top" id="zmj-rQ-U7r"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F2i-8l-LWa">

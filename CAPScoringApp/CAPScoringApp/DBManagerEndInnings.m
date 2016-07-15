@@ -2283,11 +2283,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
