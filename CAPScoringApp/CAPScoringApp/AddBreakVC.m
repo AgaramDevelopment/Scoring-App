@@ -32,7 +32,7 @@
     NSDateFormatter *formatter1;
     NSDate *dateFromString;
     NSDate *dateFromString1;
-    NSString*Durationtime;
+    NSString*Duration;
     
     //objInningsno;
     BallEventRecord*obj;
@@ -44,6 +44,7 @@
 @synthesize COMPETITIONCODE;
 @synthesize MATCHCODE;
 @synthesize INNINGSNO;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
   
@@ -68,30 +69,14 @@
      NSDate *dateFromString = [[NSDate alloc] init];
         NSDate *dateFromString1 = [[NSDate alloc] init];
   
-    [self DurationCalculation];
+   // [self DurationCalculation];
 }
-//
-//
-//
-////Another Dte Picker Tool for Toate Picker
-//-(void) ShowSelectedDate1
-//{  formatter1=[[NSDateFormatter alloc]init];
-//    [formatter1 setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    self.text_EndBreak.text=[NSString stringWithFormat:@"%@",[formatter1 stringFromDate:_date_picker.date]];
-//    [self.text_EndBreak resignFirstResponder];
-//}
-
-
-
-
-
-
 
 
 
 - (IBAction)StartBreack_btn:(id)sender {
     
-    _Text_BreakStart.text=@"";
+    _Text_BreakStart.text=_MATCHDATE;
     [_datePicker_View setHidden:NO];
     [_date_picker1 setHidden:YES];
     [_date_picker setHidden:NO];
@@ -99,28 +84,36 @@
     _date_picker.datePickerMode = UIDatePickerModeDateAndTime;
     [_date_picker addTarget:self
                      action:@selector(BreakStart:)forControlEvents:UIControlEventValueChanged];
-    
-    formatter=[[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:s"];
-    //set date too your lable here
-    // =[formate stringFromDate:_date_picker.date];
+    self.Text_BreakStart.inputView =_date_picker;
     
     
-
-
-    
-   
 }
 
 -(void)BreakStart:(id)sender
 {
 
-    NSLog(@"date is %@",_date_picker.date);
-    NSDateFormatter *formate=[[NSDateFormatter alloc]init];
-    [formate setDateFormat:@"yyyy-MM-dd hh:mm:s"];
-    _Text_BreakStart.text=[formate stringFromDate:_date_picker.date];
-    BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
-
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+ //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSDate *matchdate = [dateFormat dateFromString:_MATCHDATE];
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+     // for minimum date
+    [_date_picker setMinimumDate:matchdate];
+    
+    // for maximumDate
+    int daysToAdd = 1;
+    NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
+    
+    [_date_picker setMaximumDate:newDate1];
+    
+    
+    
+    NSString *minimumdateStr = [dateFormat stringFromDate:matchdate];
+    NSString*maxmimumdateStr=[dateFormat stringFromDate:newDate1];
+    
+    _Text_BreakStart.text=[dateFormat stringFromDate:_date_picker.date];
+   NSLog(@"check: %@",_Text_BreakStart.text);
+     BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
       [self DurationCalculation];
 }
 
@@ -129,7 +122,7 @@
 
 - (IBAction)EndBreak_btn:(id)sender {
     
-    _text_EndBreak.text=@"";
+    _text_EndBreak.text=_MATCHDATE;
     [_datePicker_View setHidden:NO];
     [_date_picker setHidden:YES];
     [_date_picker1 setHidden:NO];
@@ -137,8 +130,7 @@
     [_date_picker1 addTarget:self
                       action:@selector(BreakEnd:)forControlEvents:UIControlEventValueChanged];
     
-    formatter1=[[NSDateFormatter alloc]init];
-    [formatter1 setDateFormat:@"yyyy-MM-dd hh:mm:s"];
+    self.text_EndBreak.inputView =_date_picker1;
 
 }
 
@@ -156,7 +148,7 @@
     
     NSTimeInterval timeDifference = [date2 timeIntervalSinceDate:date1];
     int days = timeDifference / 60;
-    NSString *Duration = [NSString stringWithFormat:@"%d", days];
+ NSString *Duration = [NSString stringWithFormat:@"%d", days];
     
     self.lbl_Duration.text=[NSString stringWithFormat:@"%@", Duration];
     
@@ -169,26 +161,33 @@
 -(void)BreakEnd:(id)sender
 {
     NSLog(@"date is %@",_date_picker1.date);
-    NSDateFormatter *formate=[[NSDateFormatter alloc]init];
-    [formate setDateFormat:@"yyyy-MM-dd hh:mm:s"];
-    _text_EndBreak.text=[formate stringFromDate:_date_picker1.date];
+  NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSDate *matchdate = [dateFormat dateFromString:_MATCHDATE];
+    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    
+    // for minimum date
+    [_date_picker1 setMinimumDate:matchdate];
+    
+    // for maximumDate
+    int daysToAdd = 1;
+    NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
+    
+    [_date_picker1 setMaximumDate:newDate1];
+   
+    NSString *minimumdateStr = [dateFormat stringFromDate:matchdate];
+    NSString*maxmimumdateStr=[dateFormat stringFromDate:newDate1];
+    
+  _text_EndBreak.text=[dateFormat stringFromDate:_date_picker1.date];
+     BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
+    
+    NSLog(@"check: %@",_text_EndBreak.text);
     BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
+
     
       [self DurationCalculation];
     
-//    
-//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-//    [dateFormat setDateFormat:@"hh:mm:ss"];
-//  //  NSDate *date = [dateFormat dateFromString:_MATCHDATE];
-//     // [dateFormat setDateFormat:@"hh:mm:ss"];
-//   // [_date_picker1 setDate:date];
-//   //[_date_picker1 setMinimumDate:date];
-//    
-//  
-//    NSString *Time = [dateFormat stringFromDate:date];
-//    BREAKENDTIME =[NSString stringWithFormat:@"%@ %@" ,[_text_EndBreak text],Time];
-    
-
    
 }
 
@@ -214,6 +213,8 @@
       [self DurationCalculation];
     
      BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
+     BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
+       BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
     
     if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil)
     {
@@ -223,10 +224,13 @@
     {
         [self ShowAlterView:@"Please Select End Time"];
     }
-    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)
-    {
-        [self ShowAlterView:@"Duration Not Calculated"];
-    }
+   else if([self.lbl_Duration.text integerValue]<0){
+        [self ShowAlterView:@"Duration should be greated than zero"];
+   }
+//    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)
+//    {
+//        [self ShowAlterView:@"Duration Not Calculated"];
+//    }
     else if([self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
     {
         [self ShowAlterView:@"Please Add Comments"];
@@ -258,11 +262,11 @@
 
 
 
--(void) InsertBreaks:(NSString *)COMPETITIONCODE:(NSString*)INNINGSNO:(NSString*)MATCHCODE:(NSString*)BREAKSTARTTIME:(NSString*)BREAKENDTIME:(NSString*)BREAKCOMMENTS:(NSString*)ISINCLUDEDURATION:(NSString*)BREAKNO
+-(void) InsertBreaks:COMPETITIONCODE:INNINGSNO:MATCHCODE:BREAKSTARTTIME:BREAKENDTIME:BREAKCOMMENTS:ISINCLUDEDURATION:BREAKNO
 {
     
-    if([DBManager GetMatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE])
-    {
+//    if([DBManager GetMatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE])
+//    {
 //        if(![DBManager GetCompetitionCodeForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : ISINCLUDEDURATION : BREAKNO:BREAKCOMMENTS])
 //        {
 //            if(![DBManager MatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE : INNINGSNO])
@@ -270,19 +274,20 @@
                 [DBManager InsertInningsEvents : COMPETITIONCODE : INNINGSNO : MATCHCODE : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : BREAKNO : ISINCLUDEDURATION];
           //  }
        // }
-    }
+   // }
     
     NSMutableArray*BreaksArray=[DBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     //BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     
     
     BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
-    
+   
     add.resultarray=BreaksArray;
     add.MATCHCODE=MATCHCODE;
     add.COMPETITIONCODE=COMPETITIONCODE;
     add.INNINGSNO=INNINGSNO;
     add.MATCHDATE=_MATCHDATE;
+    add.Duration= self.lbl_Duration.text;
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
     add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
@@ -414,22 +419,11 @@
             }
 
         
-        //[delegate hideLoading];
+       
     }
     
-//    else{
-//    
-//      [self showDialog:@"Network Error" andTitle:@""];
-//    }
+
 }
-//-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
-//    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
-//    
-//    [alertDialog show];
-//}
-
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

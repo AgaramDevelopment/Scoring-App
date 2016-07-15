@@ -29,7 +29,7 @@
 @property(strong,nonatomic)NSString*COMPETITIONCODE;
 @property(strong,nonatomic)NSString*INNINGSNO;
 @property(strong,nonatomic)NSString*MATCHDATE;
-
+@property(strong,nonatomic)NSString*Duration;
 @property(strong,nonatomic) id <BreakVCDelagate> delegate;
 - (IBAction)backbtn:(id)sender;
 

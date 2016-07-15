@@ -63,7 +63,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
    // self.teamCode = @"TEA0000001";
     //self.matchCode= @"IMSC0221C6F6595E95A00002";
-    self.selectedPlayerArray = [DBManager getSelectingPlayerArray:self.SelectTeamCode matchCode:self.matchCode];
+    self.selectedPlayerArray = [DBManager getSelectingPlayerArray :self.SelectTeamCode matchCode:self.matchCode];
     self.selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: self.selectedPlayerArray ];
     
     [self setSelectCount];

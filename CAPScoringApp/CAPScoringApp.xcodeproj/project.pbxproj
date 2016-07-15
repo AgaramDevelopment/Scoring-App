@@ -220,8 +220,6 @@
 		CEC858A91D154AEF007F5384 /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC858A81D154AEF007F5384 /* testViewController.m */; };
 		CEC858AD1D1557F6007F5384 /* BreakTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC858AB1D1557F6007F5384 /* BreakTableViewCell.m */; };
 		CEC858AE1D1557F6007F5384 /* BreakTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC858AC1D1557F6007F5384 /* BreakTableViewCell.xib */; };
-		CEC858B21D155D36007F5384 /* intialBreakVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC858B01D155D36007F5384 /* intialBreakVC.m */; };
-		CEC858B31D155D36007F5384 /* intialBreakVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC858B11D155D36007F5384 /* intialBreakVC.xib */; };
 		CED03D261D1AAE3B00522B89 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */; };
 		DC2710771D25B9A40011C7B0 /* EndSession.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC2710681D25B9A40011C7B0 /* EndSession.xib */; };
 		DC27107D1D25B9A40011C7B0 /* FollowOnRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2710721D25B9A40011C7B0 /* FollowOnRecords.m */; };
@@ -679,9 +677,6 @@
 		CEC858AA1D1557F6007F5384 /* BreakTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakTableViewCell.h; sourceTree = "<group>"; };
 		CEC858AB1D1557F6007F5384 /* BreakTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakTableViewCell.m; sourceTree = "<group>"; };
 		CEC858AC1D1557F6007F5384 /* BreakTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BreakTableViewCell.xib; sourceTree = "<group>"; };
-		CEC858AF1D155D36007F5384 /* intialBreakVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intialBreakVC.h; sourceTree = "<group>"; };
-		CEC858B01D155D36007F5384 /* intialBreakVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = intialBreakVC.m; sourceTree = "<group>"; };
-		CEC858B11D155D36007F5384 /* intialBreakVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = intialBreakVC.xib; sourceTree = "<group>"; };
 		CED03D241D1AAE3B00522B89 /* DBMANAGERSYNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMANAGERSYNC.h; sourceTree = "<group>"; };
 		CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMANAGERSYNC.m; sourceTree = "<group>"; };
 		DC2710661D25B9A40011C7B0 /* EndSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndSession.h; sourceTree = "<group>"; };
@@ -853,9 +848,6 @@
 				CEC858AA1D1557F6007F5384 /* BreakTableViewCell.h */,
 				CEC858AB1D1557F6007F5384 /* BreakTableViewCell.m */,
 				CEC858AC1D1557F6007F5384 /* BreakTableViewCell.xib */,
-				CEC858AF1D155D36007F5384 /* intialBreakVC.h */,
-				CEC858B01D155D36007F5384 /* intialBreakVC.m */,
-				CEC858B11D155D36007F5384 /* intialBreakVC.xib */,
 				CE7463A51D166F8200D69CD9 /* UpdateBreakVC.h */,
 				CE7463A61D166F8200D69CD9 /* UpdateBreakVC.m */,
 				CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */,
@@ -1739,7 +1731,6 @@
 				0481DD071D213B250084BFF7 /* PowerPlayVC.xib in Resources */,
 				CE00180B1CF42FA500668D8B /* Assets.xcassets in Resources */,
 				1876250A1D154495009374F8 /* RevicedOverVC.xib in Resources */,
-				CEC858B31D155D36007F5384 /* intialBreakVC.xib in Resources */,
 				CE0018501CF460DE00668D8B /* RAJDHANI-MEDIUM.TTF in Resources */,
 				24F96F861D2FC90500798A9D /* PenalityTVC.xib in Resources */,
 				CE00184E1CF460DE00668D8B /* RAJDHANI-BOLD.TTF in Resources */,
@@ -1907,7 +1898,6 @@
 				1876251F1D1544CD009374F8 /* BowlingSummaryDetailsForScoreBoard.m in Sources */,
 				243F8E451D2237D600333AD8 /* PowerPlayGridVC.m in Sources */,
 				0485A53C1D2A297D0059990F /* FIELDINGEVENTSPushRecord.m in Sources */,
-				CEC858B21D155D36007F5384 /* intialBreakVC.m in Sources */,
 				187625231D1544CD009374F8 /* MatchOverandBallDetailsForScoreBoard.m in Sources */,
 				187229281D12665600CC168F /* AddBreakVC.m in Sources */,
 				2483771D1D2ABE8900FAC40D /* BowlingSummeryPushRecord.m in Sources */,
