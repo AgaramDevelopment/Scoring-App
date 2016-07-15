@@ -3998,7 +3998,8 @@ EditModeVC * objEditModeVc;
     {
         Shottype =self.ballEventRecord.objShottype;
     }
-    self.txt_Commantry.text=[NSString stringWithFormat:@" %@ %@ %@ %@ %@ %@ %@ %@",runSix,runFour,Extras,Wicket,overthrow,unComfort,beaten,Shottype];
+    //Comment is in hold
+  //  self.txt_Commantry.text=[NSString stringWithFormat:@" %@ %@ %@ %@ %@ %@ %@ %@",runSix,runFour,Extras,Wicket,overthrow,unComfort,beaten,Shottype];
 }
 
 
@@ -5892,7 +5893,8 @@ EditModeVC * objEditModeVc;
                     [self unselectedButtonBg: self.btn_run1];
                 }
                 NSString * run1value =[NSString stringWithFormat:@" RUN FOR %@",self.ballEventRecord.objRuns];
-                self.txt_Commantry.text =run1value;
+                //Comment is in hold
+                //   self.txt_Commantry.text =run1value;
                 
             }else if(self.ballEventRecord.objRuns.integerValue == 4){// If runs has four
                 [self resetRunsBoundriesValue];
@@ -5905,7 +5907,8 @@ EditModeVC * objEditModeVc;
                     [self unselectedButtonBg: self.btn_run1];
                 }
                 NSString * run1value =[NSString stringWithFormat:@" RUN FOR %@",self.ballEventRecord.objRuns];
-                self.txt_Commantry.text =run1value;
+                //Comment is in hold
+                //   self.txt_Commantry.text =run1value;
                 
                 
             }else{//Other run selected
@@ -5913,7 +5916,8 @@ EditModeVC * objEditModeVc;
                 self.ballEventRecord.objRuns = [NSNumber numberWithInt:isMoreRunSelected?4:1];
                 [self selectedButtonBg: self.btn_run1];
                 NSString * run1value =[NSString stringWithFormat:@"RUN FOR %@",self.ballEventRecord.objRuns];
-                self.txt_Commantry.text =run1value;
+                //Comment is in hold
+                // self.txt_Commantry.text =run1value;
                 NSLog(@"%@",run1value);
                 
                 
@@ -5935,7 +5939,8 @@ EditModeVC * objEditModeVc;
                     [self unselectedButtonBg: self.btn_run2];
                 }
                 NSString * run2value =[NSString stringWithFormat:@" RUN FOR %@",self.ballEventRecord.objRuns];
-                self.txt_Commantry.text =run2value;
+                //Comment is in hold
+                //self.txt_Commantry.text =run2value;
                 
             }else if(self.ballEventRecord.objRuns.integerValue == 5){// If runs has five
                 [self resetRunsBoundriesValue];
@@ -8463,7 +8468,7 @@ EditModeVC * objEditModeVc;
         strickerTableView.backgroundColor=[UIColor whiteColor];
         strickerTableView.dataSource = self;
         strickerTableView.delegate = self;
-        [self.view addSubview:strickerTableView];
+        [self.CommonView addSubview:strickerTableView];
         
         strickerList = [[NSMutableArray alloc]init];
         int indx=0;
@@ -8515,7 +8520,7 @@ EditModeVC * objEditModeVc;
         nonstrickerTableView.backgroundColor=[UIColor whiteColor];
         nonstrickerTableView.dataSource = self;
         nonstrickerTableView.delegate = self;
-        [self.view addSubview:nonstrickerTableView];
+        [self.CommonView addSubview:nonstrickerTableView];
         
         
         nonStrickerList = [[NSMutableArray alloc]init];
@@ -8567,7 +8572,7 @@ EditModeVC * objEditModeVc;
         currentBowlersTableView.backgroundColor=[UIColor whiteColor];
         currentBowlersTableView.dataSource = self;
         currentBowlersTableView.delegate = self;
-        [self.view addSubview:currentBowlersTableView];
+        [self.CommonView addSubview:currentBowlersTableView];
         [currentBowlersTableView reloadData];
         
         
