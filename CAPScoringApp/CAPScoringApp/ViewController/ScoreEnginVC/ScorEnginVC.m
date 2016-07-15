@@ -2722,19 +2722,18 @@ EditModeVC * objEditModeVc;
     content = [content  isEqual: @"0 NB"] ? @"NB" : content;
     content = [content  isEqual: @"0 WD"] ? @"WD" : content;
     content = [content  isEqual: @"0 RH"] ? @"RH" : content;
-    double singleInstanceWidth = isExtras ? 70 : 47;
+    double singleInstanceWidth = isExtras ? 60 : 40;
     double totalWidth = singleInstanceWidth;
     if (content.length > 5)
         totalWidth = 15 * content.length;
     
-    UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(xposition, 0, totalWidth, 57)];
+    UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(xposition, 0, totalWidth, 50)];
     
     // Border Control
-    UIButton *btnborder = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnborder.frame     = CGRectMake(0, 0, BallTicker.frame.size.width, 47);
+    UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, BallTicker.frame.size.width, 40)];
     btnborder.layer.cornerRadius = btnborder.frame.size.width / 2; // this value vary as per your desire
     btnborder.clipsToBounds = NO;
-    btnborder.layer.borderWidth = 4.5;
+    btnborder.layer.borderWidth = 3.5;
     btnborder.layer.borderColor = [UIColor greenColor].CGColor;
     btnborder.layer.masksToBounds = YES;
     
@@ -2767,10 +2766,10 @@ EditModeVC * objEditModeVc;
     [btnborder setTitleColor:brushFGSplEvents forState:UIControlStateNormal] ;
     btnborder.titleLabel.font = [UIFont systemFontOfSize:20 weight:12];
     
-    UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0, 53, totalWidth, 10)];
+    UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, totalWidth, 10)];
     BallTickerNo.textAlignment = NSTextAlignmentCenter;
     BallTickerNo.font = [UIFont systemFontOfSize:15 weight:10];
-    [BallTickerNo setText:content];
+    [BallTickerNo setText:ballno];
     [BallTickerNo setTextColor:brushFGSplEvents];
     
     
@@ -2783,7 +2782,7 @@ EditModeVC * objEditModeVc;
 - (void) CreateBallTickers: (NSMutableArray *) arrayBallDetails
 {
     [self.view_BallTicker.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    UIScrollView *ScrollViewer = [[UIScrollView alloc] init];
+    UIScrollView *ScrollViewer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [self.view_BallTicker bounds].size.width, 50)];
     CGFloat xposition = 0;
     for (BallEventRecord *drballdetails in arrayBallDetails)
     {
@@ -2893,14 +2892,16 @@ EditModeVC * objEditModeVc;
                                       :isExtras
                                       :isSpecialEvents
                                       :(int)drballdetails.objMarkedforedit == 1
-                                      :[NSString stringWithFormat:@"%i", (int)drballdetails.objBallno]
+                                      :drballdetails.objBallno
                                       :xposition] atIndex:0];
         if (content.length > 5)
             xposition = xposition + 7 + (15 * content.length);
         else
-            xposition = xposition + (isExtras ? 77 : 55);
+            xposition = xposition + (isExtras ? 67 : 47);
     }
+    [ScrollViewer setFrame:CGRectMake(0, 0, xposition, [ScrollViewer bounds].size.height)];
     [ScrollViewer setContentSize:CGSizeMake(xposition, [ScrollViewer bounds].size.height)];
+    [self.view_BallTicker addSubview:ScrollViewer];
 }
 
 -(NSMutableString*) timeLeftSinceDate: (NSDate *) dateT{
@@ -8852,7 +8853,8 @@ EditModeVC * objEditModeVc;
         isFreeHitBall = ((fetchSEPageLoadRecord.ISFREEHIT == @1) && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE ])? YES:NO;
     //Last Bowler Details
      [self getLastBowlerDetails];
-   
+   //Generate Ball Ticker
+    [self CreateBallTickers : fetchSEPageLoadRecord.BallGridDetails];
 }
 - (IBAction)btn_swap:(id)sender {
     //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
