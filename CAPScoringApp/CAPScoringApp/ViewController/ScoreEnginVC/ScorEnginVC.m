@@ -8658,8 +8658,8 @@ EditModeVC * objEditModeVc;
     
     //team score details display
     _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
-    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
-    _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
+    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME;
+        _lbl_secIngsTeamName.text = [fetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@""]?fetchSEPageLoadRecord.BOWLTEAMSHORTNAME:fetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
     
     _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
     
@@ -8691,13 +8691,13 @@ EditModeVC * objEditModeVc;
     
     
     //all innings details for team A and team B
-    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
-    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
+    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
+    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
     
     
-    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
-    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
     
     if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
         _lbl_teamASecIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.THIRDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.THIRDINNINGSTOTAL,fetchSEPageLoadRecord.THIRDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.THIRDINNINGSWICKET];
