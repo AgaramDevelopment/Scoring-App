@@ -16,6 +16,7 @@
 {
     NSString *strovers;
     NSString * strcomments;
+    NSString * OldOvers;
 }
 @property(nonatomic,strong)NSMutableArray*selectOvers;
 
@@ -23,7 +24,9 @@
 @end
 
 @implementation RevicedOverVC
-@synthesize btn_submit,txt_overs,txt_comments;
+@synthesize btn_submit;
+@synthesize txt_overs;
+@synthesize txt_commentss;
 
 
 - (void)viewDidLoad {
@@ -31,11 +34,16 @@
 
     _selectOvers = [DBManager RetrieveRevisedOverData:self.matchCode competitionCode:self.competitionCode recordstatus:@"MSC001"];
     
+    
     FixturesRecord *objrevisedoverRecord = [self.selectOvers objectAtIndex:0];
     
-    self.txt_overs.text=objrevisedoverRecord.overs;
-    self.txt_comments.text=objrevisedoverRecord.matchovercomments;
+    [self.txt_commentss.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    self.txt_commentss.layer.borderWidth = 2;
+
     
+    self.txt_overs.text=objrevisedoverRecord.overs;
+    OldOvers=objrevisedoverRecord.overs;
+    self.txt_commentss.text=objrevisedoverRecord.matchovercomments;
     strovers=objrevisedoverRecord.overs;
     strcomments=objrevisedoverRecord.matchovercomments;
     
@@ -84,6 +92,31 @@
     return YES;
 }
 
+
+
+-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
+
+- (BOOL) formValidation{
+    
+    if([OldOvers intValue] < [txt_overs.text intValue]){
+        [self showDialog:@"The Revised Over is not possible when the data exist for this innings." andTitle:@""];
+        return NO;
+    }else if([txt_overs.text isEqual:@""]){
+        [self showDialog:@"Please enter Revised Over." andTitle:@""];
+                return NO;
+    }else if([txt_commentss.text isEqual:@""]){
+        [self showDialog:@"Please enter Comments." andTitle:@""];
+        return NO;
+    }
+    return YES;
+}
+
+
+
 //Check internet connection
 - (BOOL)checkInternetConnection
 {
@@ -94,6 +127,7 @@
 
 -(IBAction)btn_submit:(id)sender
 {
+    if([self formValidation]){
     if(self.checkInternetConnection){
         NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/REVISEOVER/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],self.competitionCode,self.matchCode,self.inningsNo,strovers,strcomments];
         
@@ -110,9 +144,11 @@
         
     }
     
-    [DBManager updateRevisedOvers:strovers comments:strcomments matchCode:self.matchCode competitionCode:self.competitionCode];
+    [DBManager updateRevisedOvers:txt_overs.text comments:txt_commentss.text matchCode:self.matchCode competitionCode:self.competitionCode];
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Revised Over Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
 }
-
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

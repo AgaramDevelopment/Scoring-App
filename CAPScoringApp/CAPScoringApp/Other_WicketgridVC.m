@@ -20,6 +20,7 @@
 @synthesize TEAMCODE;
 @synthesize STRIKERCODE;
 @synthesize NONSTRIKERCODE;
+@synthesize NONSTRIKERNAME;
 
 
 @synthesize MAXOVER;
@@ -106,6 +107,7 @@
     add.WICKETPLAYER=veb.WICKETPLAYER;
     add.WICKETNO=veb.WICKETNO;
     add.TEAMCODE = TEAMCODE;
+    add.NONSTRIKERCODE=NONSTRIKERCODE;
     add.ISEDITMODE =YES;
     
     
@@ -147,6 +149,8 @@
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
     add.TEAMCODE=self.TEAMCODE;
+    add.NONSTRIKERNAME=self.NONSTRIKERNAME;
+    add.NONSTRIKERCODE=self.NONSTRIKERCODE;
    // add.WICKETNO = [NSString stringWithFormat:@"%@",self.N_WICKETNO];
     add.WICKETNO=[DbManager_OtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
     add.ISEDITMODE=NO;

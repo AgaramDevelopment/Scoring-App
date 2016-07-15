@@ -143,6 +143,8 @@
     BOOL isPitchmap;
     BOOL ispichmapSelectValue;
     
+    BOOL isWagonwheel;
+    
     NSMutableArray *strickerList;
     NSMutableArray *nonStrickerList;
     
@@ -3870,6 +3872,7 @@ EditModeVC * objEditModeVc;
     }
     else if(selectBtnTag.tag==111)
     {
+        if(isWagonwheel == NO){
         [self selectedButtonBg:selectBtnTag];
         // [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
         //[self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
@@ -3914,10 +3917,19 @@ EditModeVC * objEditModeVc;
         self.view_fastBowl.hidden = YES;
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
-        
-        
+    
+        [self DisplayCommentmethod];
+        self.img_WagonWheel.hidden=NO;
+        isWagonwheel=YES;
+        }else{
+            [self unselectedButtonBg:self.btn_wagonwheel];
+            self.img_WagonWheel.hidden=YES;
+            isWagonwheel=NO;
+            
+        }
+
     }
-    [self DisplayCommentmethod];
+    
 }
 
 -(void)DisplayCommentmethod
@@ -5739,6 +5751,9 @@ EditModeVC * objEditModeVc;
     self.View_Appeal.hidden=YES;
     isEnableTbl=NO;
     isPitchmap =NO;
+    isWagonwheel=NO;
+   
+   
   //[self unselectedViewBg: self.View_Appeal];
   //[self unselectedViewBg: self.view_lastinstance];
     
@@ -7986,6 +8001,7 @@ EditModeVC * objEditModeVc;
     otherwikcetgricvc.TEAMCODE=fetchSEPageLoadRecord.BATTINGTEAMCODE;
     otherwikcetgricvc.STRIKERCODE=fetchSEPageLoadRecord.strickerPlayerCode;
     otherwikcetgricvc.NONSTRIKERCODE=fetchSEPageLoadRecord.nonstrickerPlayerCode;
+    otherwikcetgricvc.NONSTRIKERNAME=fetchSEPageLoadRecord.nonstrickerPlayerName;
     otherwikcetgricvc.MAXOVER=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS];
     otherwikcetgricvc.MAXBALL=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     otherwikcetgricvc.BALLCOUNT=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
@@ -8177,6 +8193,8 @@ EditModeVC * objEditModeVc;
     revisedTarget = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
     revisedTarget.competitionCode=self.competitionCode;
     revisedTarget.matchCode =self.matchCode;
+    revisedTarget.teamCode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    revisedTarget.inningsno=fetchSEPageLoadRecord.INNINGSNO;
     [fullview addSubview:revisedTarget.view];
     
     

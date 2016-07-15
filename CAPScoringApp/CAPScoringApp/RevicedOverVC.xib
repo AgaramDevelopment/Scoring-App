@@ -15,14 +15,13 @@
             <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
-            <string>Rajdhani-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RevicedOverVC">
             <connections>
                 <outlet property="btn_submit" destination="plE-TY-XgS" id="Ps5-gs-iPx"/>
-                <outlet property="txt_comments" destination="Mso-qU-5sL" id="yV9-rA-qWN"/>
+                <outlet property="txt_commentss" destination="MVv-aj-SXA" id="8Ta-S9-cm1"/>
                 <outlet property="txt_overs" destination="6sO-UV-2v2" id="l2Z-Yf-ehw"/>
                 <outlet property="view" destination="iN0-l3-epB" id="wKD-a7-404"/>
             </connections>
@@ -124,20 +123,8 @@
                                     <color key="textColor" red="0.99108743320000003" green="1" blue="0.98888242749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" tag="22" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mso-qU-5sL">
-                                    <rect key="frame" x="8" y="33" width="432" height="150"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="150" id="sXI-mh-HJe"/>
-                                    </constraints>
-                                    <color key="textColor" red="0.99108743320000003" green="1" blue="0.98888242749999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                    <connections>
-                                        <outlet property="delegate" destination="-1" id="YWS-xv-GWB"/>
-                                    </connections>
-                                </textField>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="tbI-r8-bPQ">
-                                    <rect key="frame" x="8" y="32" width="432" height="151"/>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="MVv-aj-SXA">
+                                    <rect key="frame" x="8" y="33" width="424" height="150"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -147,13 +134,12 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="XeD-0l-CTo" firstAttribute="leading" secondItem="Cqv-KU-huN" secondAttribute="leading" constant="8" id="1Ze-hl-hty"/>
+                                <constraint firstAttribute="bottom" secondItem="MVv-aj-SXA" secondAttribute="bottom" constant="8" id="O6X-97-rrO"/>
                                 <constraint firstAttribute="height" constant="191" id="Wzv-1V-yGl"/>
-                                <constraint firstAttribute="bottom" secondItem="Mso-qU-5sL" secondAttribute="bottom" constant="8" id="mkU-2N-b3k"/>
-                                <constraint firstAttribute="trailing" secondItem="Mso-qU-5sL" secondAttribute="trailing" id="s2m-zL-DFT"/>
-                                <constraint firstItem="Mso-qU-5sL" firstAttribute="top" secondItem="XeD-0l-CTo" secondAttribute="bottom" constant="8" id="tcm-Jc-BdL"/>
-                                <constraint firstItem="Mso-qU-5sL" firstAttribute="top" secondItem="XeD-0l-CTo" secondAttribute="bottom" constant="8" id="w3L-vi-QIy"/>
+                                <constraint firstItem="MVv-aj-SXA" firstAttribute="top" secondItem="XeD-0l-CTo" secondAttribute="bottom" constant="8" id="jRv-Jr-oHP"/>
+                                <constraint firstItem="MVv-aj-SXA" firstAttribute="leading" secondItem="Cqv-KU-huN" secondAttribute="leading" constant="8" id="pnt-bF-BhM"/>
+                                <constraint firstAttribute="trailing" secondItem="MVv-aj-SXA" secondAttribute="trailing" constant="8" id="rxE-i2-SMl"/>
                                 <constraint firstItem="XeD-0l-CTo" firstAttribute="top" secondItem="Cqv-KU-huN" secondAttribute="top" id="wzr-y7-rlR"/>
-                                <constraint firstItem="Mso-qU-5sL" firstAttribute="leading" secondItem="Cqv-KU-huN" secondAttribute="leading" constant="8" id="z0H-CQ-ebv"/>
                             </constraints>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="plE-TY-XgS">
