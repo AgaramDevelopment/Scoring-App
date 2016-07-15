@@ -542,20 +542,35 @@ EditModeVC * objEditModeVc;
                                                              alpha:0.36]];
     
     int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    if(inningsno > 1)
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
     {
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-        
+        if(inningsno > 1)
+        {
+            [_rightSlideArray insertObject:@"CHANGE TEAM" atIndex : 1];
+        }
+        else
+        {
+            [_rightSlideArray insertObject:@"CHANGE TOSS" atIndex : 1];
+        }
     }
-    else{
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    if(![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
+    {
+        [_rightSlideArray removeObjectsInArray:[[NSArray alloc] initWithObjects:@"DECLARE INNINGS",@"END DAY",@"END SESSION",@"FOLLOW ON", nil]];
+        if(inningsno == 2)
+            [_rightSlideArray removeObject : @"REVISED OVERS"];
+        else if(inningsno == 1)
+            [_rightSlideArray removeObject : @"REVISED TARGET"];
     }
-
+    else
+    {
+        [_rightSlideArray removeObjectsInArray:[[NSArray alloc] initWithObjects:@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil]];
+        if (fetchSEPageLoadRecord.BATTEAMWICKETS >= 10)
+            [_rightSlideArray removeObject : @"DECLARE INNINGS"];
+        if (inningsno != 2 || inningsno != 3)
+            [_rightSlideArray removeObject : @"FOLLOW ON"];
+    }
     [self getLastBowlerDetails];
-//    FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
-//    fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
-//    [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode :self.editBallCode];
-    
 }
 
 -(void)getLastBowlerDetails{
@@ -12276,16 +12291,16 @@ EditModeVC * objEditModeVc;
 -(void) EndInningsBackBtnAction{
     
     [fullview removeFromSuperview];
-    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    if(inningsno > 1)
-    {
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-        
-    }
-    else{
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-    }
-    [self.sideviewtable reloadData];
+//    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
+//    if(inningsno > 1)
+//    {
+//        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+//        
+//    }
+//    else{
+//        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+//    }
+//    [self.sideviewtable reloadData];
 }
 
 -(void) EndInningsSaveBtnAction{
