@@ -168,6 +168,7 @@ NSString *matchover;
     
     if([powerplaystartovertxt isEqual:@""]){
         [self showDialog:@"Please enter Start Over." andTitle:@""];
+        
         return NO;
     }else if([powerplayendovertxt isEqual:@""]){
         [self showDialog:@"Please enter End Over." andTitle:@""];
