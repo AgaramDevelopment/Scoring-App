@@ -47,12 +47,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
   
-        //fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-//        INNINGSNO= fetchSEPageLoadRecord.INNINGSNO;
-//        COMPETITIONCODE=fetchSEPageLoadRecord.COMPETITIONCODE;
-//   INNINGSNO= fetchSEPageLoadRecord.INNINGSNO;
-//    COMPETITIONCODE=fetchSEPageLoadRecord.COMPETITIONCODE;
-//    MATCHCODE=fetchSEPageLoadRecord.MATCHCODE;
+
     
      [_datePicker_View setHidden:YES];
     [self.View_BreakStart.layer setBorderWidth:2.0];
@@ -72,18 +67,7 @@
     [self.View_Comments.layer setMasksToBounds:YES];
      NSDate *dateFromString = [[NSDate alloc] init];
         NSDate *dateFromString1 = [[NSDate alloc] init];
-    
-    //_Text_BreakStart.text=_MATCHDATE;
-    
-  //  _text_EndBreak.text=_MATCHDATE;
-    
- //   [self DurationCalculation];
-
-    
-    //[self DurationCalculation1];
-    
-   // [self BreakStart];
-   // [self BreakEnd];
+  
     [self DurationCalculation];
 }
 //
@@ -177,17 +161,7 @@
     self.lbl_Duration.text=[NSString stringWithFormat:@"%@", Duration];
     
     
-//   
-//       dateFromString = [formatter dateFromString:BREAKSTARTTIME];
-//   
-//
-//    dateFromString1 = [formatter1 dateFromString:BREAKENDTIME];
-//    
-//    NSTimeInterval timeDifference = [dateFromString1 timeIntervalSinceDate:dateFromString];
-//    int days = timeDifference / 60;
-//    NSString *Duration = [NSString stringWithFormat:@"%f", days];
-//   _lbl_Duration.text =[NSString stringWithFormat:@"%@", Duration];
-//    Durationtime=_lbl_Duration.text;
+
     
 }
 
@@ -411,9 +385,7 @@
         
         //Show indicator
         [delegate showLoading];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            
+                  
             NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETBREAK/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], COMPETITIONCODE,INNINGSNO,MATCHCODE,BREAKSTARTTIME1,BREAKENDTIME1,BREAKCOMMENTS,ISINCLUDEDURATION,BREAKNO,OPERATIONTYPE];
             NSLog(@"-%@",baseURL);
             
@@ -440,7 +412,7 @@
            
             [delegate hideLoading];
             }
-        });
+
         
         //[delegate hideLoading];
     }
