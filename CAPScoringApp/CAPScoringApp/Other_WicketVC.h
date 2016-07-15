@@ -36,6 +36,7 @@
 @property(strong,nonatomic)NSString*TEAMCODE;
 @property(strong,nonatomic)NSString*STRIKERCODE;
 @property(strong,nonatomic)NSString*NONSTRIKERCODE;
+@property(strong,nonatomic)NSString*NONSTRIKERNAME;
 
 @property(strong,nonatomic)NSString*WICKETTYPE;
 @property(strong,nonatomic)NSString*WICKETPLAYER;

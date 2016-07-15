@@ -83,6 +83,7 @@
 -(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE;
 
 
+- (IBAction)btn_start:(id)sender;
 
 
 

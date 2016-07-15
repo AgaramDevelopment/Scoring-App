@@ -14,6 +14,7 @@
 @interface DeclareInnings ()
 {
     NSInteger overNo;
+    NSInteger ballNo;
 }
 
 @end
@@ -38,10 +39,39 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-          [self.btn_revert addTarget:self action:@selector(btn_revert:) forControlEvents:UIControlEventTouchUpInside];
     
-//    self.btn_revert.backgroundColor=[UIColor colorWithRed:(109/255.0f) green:(91/255.0f) blue:(52/255.0f) alpha:1.0f];
-//    [_btn_revert setUserInteractionEnabled:NO];
+    
+    
+[self.btn_revert addTarget:self action:@selector(btn_revert:) forControlEvents:UIControlEventTouchUpInside];
+[self.btn_yes addTarget:self action:@selector(btn_yes:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+     OVERNO=[DBManagerDeclareInnings  GetOverNoForUpdateDeclareInnings  : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+   
+     BALLNO=[DBManagerDeclareInnings GetBallNoForUpdateDeclareInnings  : COMPETITIONCODE : MATCHCODE : TEAMCODE : OVERNO: INNINGSNO];
+    
+    
+   ballNo = [BALLNO integerValue];
+    
+    if (ballNo > 0) {
+        
+        self.btn_revert.backgroundColor=[UIColor colorWithRed:(112/255.0f) green:(94/255.0f) blue:(54/255.0f) alpha:1.0f];
+        [_btn_revert setUserInteractionEnabled:NO];
+        
+        self.btn_yes.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(210/255.0f) blue:(158/255.0f) alpha:1.0f];
+        [_btn_yes setUserInteractionEnabled:YES];
+        
+    }else{
+    
+        
+    self.btn_yes.backgroundColor=[UIColor colorWithRed:(2/255.0f) green:(104/255.0f) blue:(88/255.0f) alpha:1.0f];
+        [_btn_yes setUserInteractionEnabled:NO];
+        
+        self.btn_revert.backgroundColor=[UIColor colorWithRed:(227/255.0f) green:(177/255.0f) blue:(7/255.0f) alpha:1.0f];
+        [_btn_revert setUserInteractionEnabled:YES];
+
+    
+    }
     
 }
 
@@ -141,6 +171,7 @@
     
     
 }
+    
 }
 
 

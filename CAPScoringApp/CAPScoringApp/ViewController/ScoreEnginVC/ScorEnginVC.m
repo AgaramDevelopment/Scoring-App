@@ -143,6 +143,8 @@
     BOOL isPitchmap;
     BOOL ispichmapSelectValue;
     
+    BOOL isWagonwheel;
+    
     NSMutableArray *strickerList;
     NSMutableArray *nonStrickerList;
     
@@ -3223,7 +3225,7 @@ EditModeVC * objEditModeVc;
     NoofWickets =[objs intValue];
     if(NoofWickets >=10)
     {
-        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"No More Wicket to play " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"No More Wicket to play " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [altert show];
         return YES;
     }
@@ -3369,6 +3371,9 @@ EditModeVC * objEditModeVc;
             
             [self MatchResult];
             
+        }if (alertView.tag == 3000 ) {
+            
+           
         }
         if(alertView.tag == 1003)
         {
@@ -3379,7 +3384,7 @@ EditModeVC * objEditModeVc;
         {
             NSLog(@"vhdgdfgd");
         }
-        
+
         
         alterviewSelect=@"NO";
         //do something
@@ -3895,6 +3900,7 @@ EditModeVC * objEditModeVc;
     }
     else if(selectBtnTag.tag==111)
     {
+        if(isWagonwheel == NO){
         [self selectedButtonBg:selectBtnTag];
         // [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
         //[self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
@@ -3939,10 +3945,19 @@ EditModeVC * objEditModeVc;
         self.view_fastBowl.hidden = YES;
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
-        
-        
+    
+        [self DisplayCommentmethod];
+        self.img_WagonWheel.hidden=NO;
+        isWagonwheel=YES;
+        }else{
+            [self unselectedButtonBg:self.btn_wagonwheel];
+            self.img_WagonWheel.hidden=YES;
+            isWagonwheel=NO;
+            
+        }
+
     }
-    [self DisplayCommentmethod];
+    
 }
 
 -(void)DisplayCommentmethod
@@ -5763,8 +5778,20 @@ EditModeVC * objEditModeVc;
   //[self unselectedViewBg: self.view_edit];   need to set reference
     [self unselectedViewBg:self.view_appeal];
     self.View_Appeal.hidden=YES;
+    [self.table_Appeal reloadData];
+    
+//   self.view_table_select.hidden=YES;
+//    [self.table_AppealSystem reloadData];
+//    [self.table_AppealComponent reloadData];
+//    [self.tanle_umpirename reloadData];
+//    [self.table_BatsmenName reloadData];
+//   // self.comments_txt=@"";
+
     isEnableTbl=NO;
     isPitchmap =NO;
+    isWagonwheel=NO;
+   
+   
   //[self unselectedViewBg: self.View_Appeal];
   //[self unselectedViewBg: self.view_lastinstance];
     
@@ -8000,6 +8027,7 @@ EditModeVC * objEditModeVc;
     otherwikcetgricvc.TEAMCODE=fetchSEPageLoadRecord.BATTINGTEAMCODE;
     otherwikcetgricvc.STRIKERCODE=fetchSEPageLoadRecord.strickerPlayerCode;
     otherwikcetgricvc.NONSTRIKERCODE=fetchSEPageLoadRecord.nonstrickerPlayerCode;
+    otherwikcetgricvc.NONSTRIKERNAME=fetchSEPageLoadRecord.nonstrickerPlayerName;
     otherwikcetgricvc.MAXOVER=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS];
     otherwikcetgricvc.MAXBALL=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     otherwikcetgricvc.BALLCOUNT=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
@@ -8193,6 +8221,8 @@ EditModeVC * objEditModeVc;
     revisedTarget = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
     revisedTarget.competitionCode=self.competitionCode;
     revisedTarget.matchCode =self.matchCode;
+    revisedTarget.teamCode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    revisedTarget.inningsno=fetchSEPageLoadRecord.INNINGSNO;
     [fullview addSubview:revisedTarget.view];
     
     
@@ -8657,8 +8687,8 @@ EditModeVC * objEditModeVc;
     
     //team score details display
     _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
-    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
-    _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
+    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME;
+        _lbl_secIngsTeamName.text = [fetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@""]?fetchSEPageLoadRecord.BOWLTEAMSHORTNAME:fetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
     
     _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
     
@@ -8690,13 +8720,13 @@ EditModeVC * objEditModeVc;
     
     
     //all innings details for team A and team B
-    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
-    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
+    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
+    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
     
     
-    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
-    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
     
     if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
         _lbl_teamASecIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.THIRDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.THIRDINNINGSTOTAL,fetchSEPageLoadRecord.THIRDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.THIRDINNINGSWICKET];

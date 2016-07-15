@@ -234,18 +234,19 @@
     {
         if(![self.lbl_NonStrikerName.text isEqualToString:objChanceTeamRecord.TEAMNAME])
         {
-        self.lbl_StrikerName.text=objChanceTeamRecord.TEAMNAME;
-        selectStrikercode=objChanceTeamRecord.TEAMCODE;
-    
-    }else{
-        UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
-                                                        message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
-                                                       delegate: self
-                                              cancelButtonTitle:@"Ok"
-                                              otherButtonTitles:nil];
-        [alert1 show];
-        
-    }
+            self.lbl_StrikerName.text=objChanceTeamRecord.TEAMNAME;
+            selectStrikercode=objChanceTeamRecord.TEAMCODE;
+        }
+        else{
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+                                                            message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
+                                                           delegate: self
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+            [alert1 show];
+            
+        }
+
     }
 
     else if(IsNonStricker== YES)
@@ -271,7 +272,7 @@
         selectBowlercode=objChanceTeamRecord.TEAMCODE;
     }
     
-    }
+ }
 
 -(IBAction)didClickBackBtnAction:(id)sender
 {

@@ -645,26 +645,26 @@
                                                 <mask key="constraints">
                                                     <exclude reference="JWr-QG-7Lo"/>
                                                     <exclude reference="ZEj-dL-ehJ"/>
-                                                    <exclude reference="6Q6-ti-jbT"/>
-                                                    <exclude reference="kcT-FI-EU7"/>
-                                                    <exclude reference="nGD-b9-Uck"/>
                                                     <exclude reference="2Hv-q6-9g7"/>
                                                     <exclude reference="gh8-bn-kRQ"/>
                                                     <exclude reference="h9M-YP-5xE"/>
                                                     <exclude reference="hny-zC-Coe"/>
+                                                    <exclude reference="6Q6-ti-jbT"/>
+                                                    <exclude reference="kcT-FI-EU7"/>
+                                                    <exclude reference="nGD-b9-Uck"/>
                                                 </mask>
                                             </variation>
                                             <variation key="heightClass=regular-widthClass=regular">
                                                 <mask key="constraints">
                                                     <include reference="JWr-QG-7Lo"/>
                                                     <include reference="ZEj-dL-ehJ"/>
-                                                    <include reference="6Q6-ti-jbT"/>
-                                                    <include reference="kcT-FI-EU7"/>
-                                                    <include reference="nGD-b9-Uck"/>
                                                     <include reference="2Hv-q6-9g7"/>
                                                     <include reference="gh8-bn-kRQ"/>
                                                     <include reference="h9M-YP-5xE"/>
                                                     <include reference="hny-zC-Coe"/>
+                                                    <include reference="6Q6-ti-jbT"/>
+                                                    <include reference="kcT-FI-EU7"/>
+                                                    <include reference="nGD-b9-Uck"/>
                                                 </mask>
                                             </variation>
                                         </view>

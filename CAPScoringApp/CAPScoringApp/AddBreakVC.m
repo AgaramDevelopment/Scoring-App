@@ -224,10 +224,13 @@
     {
         [self ShowAlterView:@"Please Select End Time"];
     }
-    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)
-    {
-        [self ShowAlterView:@"Duration Not Calculated"];
-    }
+   else if([self.lbl_Duration.text integerValue]<0){
+        [self ShowAlterView:@"Duration should be greated than zero"];
+   }
+//    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)
+//    {
+//        [self ShowAlterView:@"Duration Not Calculated"];
+//    }
     else if([self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
     {
         [self ShowAlterView:@"Please Add Comments"];
