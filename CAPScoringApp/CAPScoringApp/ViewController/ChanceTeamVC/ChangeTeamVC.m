@@ -236,7 +236,18 @@
         {
         self.lbl_StrikerName.text=objChanceTeamRecord.TEAMNAME;
         selectStrikercode=objChanceTeamRecord.TEAMCODE;
+    
+    }else{
+        UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+                                                        message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
+                                                       delegate: self
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles:nil];
+        [alert1 show];
+        
     }
+    }
+
     else if(IsNonStricker== YES)
     {
         if(![self.lbl_StrikerName.text isEqualToString:objChanceTeamRecord.TEAMNAME])
@@ -261,7 +272,7 @@
     }
     
     }
-}
+
 -(IBAction)didClickBackBtnAction:(id)sender
 {
     [self.delegate ChangeVCBackBtnAction];
