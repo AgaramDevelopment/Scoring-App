@@ -220,7 +220,7 @@
 {
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"]) {
         NSLog(@"yes");
-         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ScoreEnginExit"];
+         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
         TorunamentVC*tournmentVc = [[TorunamentVC alloc]init];
         
         tournmentVc =  (TorunamentVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"tornmentid"];
