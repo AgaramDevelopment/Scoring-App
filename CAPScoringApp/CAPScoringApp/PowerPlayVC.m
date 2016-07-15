@@ -160,32 +160,107 @@ NSString *matchover;
     [alertDialog show];
 }
 
+//- (BOOL) formValidation{
+//    
+//    BOOL flag = YES;
+//    
+//    NSString *errorMessage = @"";
+//
+//    
+//    NSString *powerplaystartovertxt = self.txt_startover.text;
+//    NSString *powerplayendovertxt =self.txt_endover.text;
+//    NSString *powerplaytypetxt = self.lbl_setpowerplay.text;
+//    
+//     if([powerplaystartovertxt isEqual:@""]){
+//       // [self showDialog:@"Please enter Start Over." andTitle:@""];
+//         errorMessage = [NSString stringWithFormat:@"%@",@"Please enter Start Over.\n"];
+//         flag = NO;
+//       // return NO;
+//    }
+//    if([powerplayendovertxt isEqual:@""]){
+//      //  [self showDialog:@"Please enter End Over." andTitle:@""];
+//        errorMessage = [NSString stringWithFormat:@"%@%@",@"Please enter End Over.\n",errorMessage];
+//        flag = NO;
+//      //  return NO;
+//        
+//    }
+//    if([powerplaytypetxt isEqual:@"Select Power Play"]){
+//     //   [self showDialog:@"Please Choose  Power Play Type" andTitle:@""];
+//         errorMessage = [NSString stringWithFormat:@"%@%@",@"Please Choose  Power Play Type.\n",errorMessage];
+//        flag = NO;
+//     //   return NO;
+//    }
+//    if([powerplaystartovertxt intValue]  >= [powerplayendovertxt intValue]){
+//      //  [self showDialog:@"End Over Should be greater than Start Over." andTitle:@""];
+//        errorMessage = [NSString stringWithFormat:@"%@%@",@"End Over Should be greater than Start Over.\n",errorMessage];
+//        flag = NO;
+//     //   return NO;
+//        
+//    }
+//    if([matchover intValue] < [powerplaystartovertxt intValue]){
+//      //  [self showDialog:@"Start Over Should not exceed Maximum Over." andTitle:@""];
+//        errorMessage = [NSString stringWithFormat:@"%@%@",@"Start Over Should not exceed Maximum Over.\n",errorMessage];
+//        flag = NO;
+//     //   return NO;
+//        
+//    }
+//    if([matchover intValue] < [powerplayendovertxt intValue]){
+//       // [self showDialog:@"End Over Should not exceed Maximum Over." andTitle:@""];
+//        errorMessage = [NSString stringWithFormat:@"%@%@",@"End Over Should not exceed Maximum Over.\n",errorMessage];
+//        flag = NO;
+//       // return NO;
+//    }
+//    
+//    return YES;
+//}
+
+
+
 - (BOOL) formValidation{
-    
+
+
     NSString *powerplaystartovertxt = self.txt_startover.text;
     NSString *powerplayendovertxt =self.txt_endover.text;
     NSString *powerplaytypetxt = self.lbl_setpowerplay.text;
     
-    if([powerplaystartovertxt isEqual:@""]){
-        [self showDialog:@"Please enter Start Over." andTitle:@""];
-        
+    if([powerplaystartovertxt isEqual:@""] && [powerplayendovertxt isEqual:@""] && [powerplaytypetxt isEqual:@"Select Power Play"]){
+         [self showDialog:@"Please enter Start Over,End Over and Powerplaytype." andTitle:@""];
         return NO;
-    }else if([powerplayendovertxt isEqual:@""]){
+    }else if([powerplayendovertxt isEqual:@""] && [powerplaytypetxt isEqual:@"Select Power Play"]){
+        [self showDialog:@"Please enter End Over and Powerplaytype." andTitle:@""];
+        return NO;
+    }else if([powerplaystartovertxt isEqual:@""] && [powerplaytypetxt isEqual:@"Select Power Play"]){
+        [self showDialog:@"Please enter start Over and Powerplaytype." andTitle:@""];
+        return NO;
+    }else if([powerplaystartovertxt isEqual:@""] && [powerplayendovertxt isEqual:@""]){
+        [self showDialog:@"Please enter start Over and End Over." andTitle:@""];
+        return NO;
+    }else
+
+     if([powerplaystartovertxt isEqual:@""]){
+        [self showDialog:@"Please enter Start Over." andTitle:@""];
+        return NO;
+    }
+    else if([powerplayendovertxt isEqual:@""]){
         [self showDialog:@"Please enter End Over." andTitle:@""];
         return NO;
-        
-    }else if([powerplaytypetxt isEqual:@"Select Power Play"]){
+
+    }
+    else if([powerplaytypetxt isEqual:@"Select Power Play"]){
         [self showDialog:@"Please Choose  Power Play Type" andTitle:@""];
         return NO;
-    }else if([powerplaystartovertxt intValue]  >= [powerplayendovertxt intValue]){
+    }
+    else if([powerplaystartovertxt intValue]  >= [powerplayendovertxt intValue]){
         [self showDialog:@"End Over Should be greater than Start Over." andTitle:@""];
         return NO;
-        
-    }else if([matchover intValue] < [powerplaystartovertxt intValue]){
+
+    }
+   else  if([matchover intValue] < [powerplaystartovertxt intValue]){
         [self showDialog:@"Start Over Should not exceed Maximum Over." andTitle:@""];
         return NO;
-        
-    }else if([matchover intValue] < [powerplayendovertxt intValue]){
+
+    }
+    else if([matchover intValue] < [powerplayendovertxt intValue]){
         [self showDialog:@"End Over Should not exceed Maximum Over." andTitle:@""];
         return NO;
     }
@@ -194,13 +269,15 @@ NSString *matchover;
 }
 
 
+
+
 - (IBAction)btn_submit:(id)sender {
     
     
-        
+         if([self formValidation]){
         
     if(powerplaystartover == nil){
-        if([self formValidation]){
+       
             
             [self startService];
             [self insertpowerplay];
@@ -249,7 +326,7 @@ NSString *matchover;
     
     
     
-    }
+    
     else
     {
         if([self formValidation]){
@@ -298,7 +375,8 @@ NSString *matchover;
 //                         completion:nil];
     }
     }
-    
+}
+
 }
 
 - (IBAction)btn_delete:(id)sender {
@@ -550,6 +628,9 @@ NSString *matchover;
 }
 
     -(BOOL)insertpowerplay{
+       
+        
+        
         
         if(![DBManager checkpowerplay:txt_startover.text ENDOVER:txt_endover.text MATCHCODE:self.matchCode INNINGSNO:self.inningsNo])
         {
@@ -598,15 +679,15 @@ NSString *matchover;
                 
                 
             }
-        }
-        else{
+        }else{
             UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Given Over details has been exist in Powerplay details" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             return NO;
         }
-    }
 
+            }
 
+    
 
 
 -(BOOL)updatepowerplay{

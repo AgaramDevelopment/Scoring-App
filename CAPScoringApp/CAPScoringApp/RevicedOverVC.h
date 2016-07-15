@@ -12,8 +12,11 @@
 @interface RevicedOverVC : UIViewController
 
 @property (strong, nonatomic) IBOutlet UITextField *txt_overs;
-@property (strong, nonatomic) IBOutlet UITextField *txt_comments;
+//@property (strong, nonatomic) IBOutlet UITextField *txt_comments;
 @property(strong,nonatomic) IBOutlet UIButton * btn_submit;
+
+@property (strong, nonatomic) IBOutlet UITextView *txt_commentss;
+
 
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;

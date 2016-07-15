@@ -287,7 +287,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BALLEVENTS SET BALLNO = BALLNO + 1 WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@'			AND TEAMCODE = '%@' AND OVERNO = '%@' AND BALLNO >= '%@'",COMPETITIONCODE, MATCHCODE,INNINGSNO,TEAMCODE , T_OVERNO , T_BALLNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BALLEVENTS SET BALLNO = BALLNO + 1 WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND TEAMCODE = '%@' AND OVERNO = '%@' AND BALLNO >= '%@'",COMPETITIONCODE, MATCHCODE,INNINGSNO,TEAMCODE , T_OVERNO , T_BALLNO];
         
         const char *selectStmt = [updateSQL UTF8String];
         

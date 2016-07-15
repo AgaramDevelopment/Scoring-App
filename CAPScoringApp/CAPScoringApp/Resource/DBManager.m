@@ -7660,7 +7660,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"update MATCHEVENTS Set TARGETRUNS ='%@', TARGETOVERS = '%@',TARGETCOMMENTS = '%@' WHERE MATCHCODE='%@' AND COMPETITIONCODE='%@'",targetovers,targetruns,targetcomments,matchCode,competitionCode];
+        NSString *updateSQL = [NSString stringWithFormat:@"update MATCHEVENTS Set TARGETRUNS ='%@', TARGETOVERS = '%@',TARGETCOMMENTS = '%@' WHERE MATCHCODE='%@' AND COMPETITIONCODE='%@'",targetruns,targetovers,targetcomments,matchCode,competitionCode];
         const char *insert_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, insert_stmt,-1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE)

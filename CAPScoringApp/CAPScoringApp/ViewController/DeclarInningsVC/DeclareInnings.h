@@ -40,6 +40,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btn_revert;
 
+@property (weak, nonatomic) IBOutlet UIButton *btn_yes;
 
 - (IBAction)btn_revert:(id)sender;
 
