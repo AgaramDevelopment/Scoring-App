@@ -2059,7 +2059,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             NSString *T_STRIKERCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
             NSString *T_NONSTRIKERCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
             NSString *BOWLERCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
-            NSString *T_BOWLINGEND = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+            NSString *T_BOWLINGEND = [self getValueByNull:statement :5];
             
             [result addObject:STRIKERCODE];
             [result addObject:NONSTRIKERCODE];
@@ -5506,11 +5506,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -6665,15 +6668,20 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                           if (sqlite3_step(statement) == SQLITE_DONE)
                                           {
                                               sqlite3_reset(statement);
+                                              sqlite3_finalize(statement);
+                                              sqlite3_close(dataBase);
                                               return YES;
                                           }
                                           else {
                                               sqlite3_reset(statement);
-                                              
+                                              sqlite3_finalize(statement);
+                                              sqlite3_close(dataBase);
                                               return NO;
                                           }
                                       }
                                       sqlite3_reset(statement);
+                                       sqlite3_finalize(statement);
+                                      sqlite3_close(dataBase);
                                       return NO;
                                   }
                                   
@@ -6695,17 +6703,21 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                           if (sqlite3_step(statement) == SQLITE_DONE)
                                           {
                                               sqlite3_reset(statement);
-                                              
+                                              sqlite3_finalize(statement);
+                                              sqlite3_close(dataBase);
                                               return YES;
                                               
                                           }
                                           else {
                                               sqlite3_reset(statement);
-                                              
+                                              sqlite3_finalize(statement);
+                                              sqlite3_close(dataBase);
                                               return NO;
                                           }
                                       }
                                       sqlite3_reset(statement);
+                                       sqlite3_finalize(statement);
+                                        sqlite3_close(dataBase);
                                       return NO;
                                       
                                   }
@@ -6728,17 +6740,21 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                                           if (sqlite3_step(statement) == SQLITE_DONE)
                                           {
                                               sqlite3_reset(statement);
-                                              
+                                              sqlite3_finalize(statement);
+                                              sqlite3_close(dataBase);
                                               return YES;
                                               
                                           }
                                           else {
                                               sqlite3_reset(statement);
-                                              
+                                              sqlite3_finalize(statement);
+                                              sqlite3_close(dataBase);
                                               return NO;
                                           }
                                       }
                                       sqlite3_reset(statement);
+                                      sqlite3_finalize(statement);
+                                      sqlite3_close(dataBase);
                                       return NO;
                                       
                                   }
@@ -6764,17 +6780,21 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                 if (sqlite3_step(statement) == SQLITE_DONE)
                 {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return YES;
                     
                 }
                 else {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return NO;
                 }
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
             
         }
@@ -6800,17 +6820,21 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                 if (sqlite3_step(statement) == SQLITE_DONE)
                 {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return YES;
                     
                 }
                 else {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return NO;
                 }
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
             
         }
@@ -6839,17 +6863,21 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                 if (sqlite3_step(statement) == SQLITE_DONE)
                 {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return YES;
                     
                 }
                 else {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return NO;
                 }
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
             
         }
@@ -6877,17 +6905,21 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
                 if (sqlite3_step(statement) == SQLITE_DONE)
                 {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return YES;
                     
                 }
                 else {
                     sqlite3_reset(statement);
-                    
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
                     return NO;
                 }
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
             
         }

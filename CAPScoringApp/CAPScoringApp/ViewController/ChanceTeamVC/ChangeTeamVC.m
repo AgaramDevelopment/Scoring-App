@@ -178,7 +178,7 @@
     }
     else{
         
-        [DBManagerChangeTeam InsertChangeTeam:self.compitionCode :self.MatchCode :BattingTeamCode :[NSNumber numberWithInt:maximumInnings.intValue] :selectStrikercode :selectnonStrikercode :selectBowlercode :[NSNumber numberWithInt:maximumInnings.intValue] :BattingTeamCode :@"" :@""];
+        [DBManagerChangeTeam InsertChangeTeam:self.compitionCode :self.MatchCode :BattingTeamCode :[NSNumber numberWithInt:maximumInnings.intValue] :selectStrikercode :selectnonStrikercode :selectBowlercode :[NSNumber numberWithInt:self.inningsno.intValue] :self.currentBattingTeamCode :@"" :@""];
         [self.delegate processSuccessful];
 
     }

@@ -7529,6 +7529,8 @@ EditModeVC * objEditModeVc;
         ChangeTeamVC *objChanceTeamVC =[[ChangeTeamVC alloc]initWithNibName:@"ChangeTeamVC" bundle:nil];
         objChanceTeamVC.compitionCode=self.competitionCode;
         objChanceTeamVC.MatchCode   =self.matchCode;
+        objChanceTeamVC.currentBattingTeamCode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+        objChanceTeamVC.inningsno  =fetchSEPageLoadRecord.INNINGSNO;
         objChanceTeamVC.delegate =self;
         
         
@@ -7785,6 +7787,15 @@ EditModeVC * objEditModeVc;
             objFollowOn.BowlingTeamCode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
             objFollowOn.inningsno       = fetchSEPageLoadRecord.INNINGSNO;
             objFollowOn. inningsStatus      =fetchSEPageLoadRecord.INNINGSSTATUS;
+            
+            objFollowOn .Revertstrikercode   =fetchSEPageLoadRecord.strickerPlayerCode;
+            objFollowOn.RevertnonStrikercode =fetchSEPageLoadRecord.nonstrickerPlayerCode;
+            objFollowOn.Revertbowlercode     =fetchSEPageLoadRecord.currentBowlerPlayerCode;
+            objFollowOn.strikerName          =fetchSEPageLoadRecord.strickerPlayerName;
+            objFollowOn.nonStrikerName       =fetchSEPageLoadRecord.nonstrickerPlayerName;
+            objFollowOn.bowlerName           =fetchSEPageLoadRecord.currentBowlerPlayerName;
+            
+            
             objFollowOn.objBowlingTeamdetail =fetchSEPageLoadRecord.getBowlingTeamPlayers;
             objFollowOn.delegate =self;
             
@@ -12103,7 +12114,12 @@ EditModeVC * objEditModeVc;
 -(void) RedirectFollowOnPage
 {
     fullview.hidden=YES;
-   [self reloadBowlerTeamBatsmanDetails];
+    ArchivesVC * objArchiveVC=[[ArchivesVC alloc]init];
+    objArchiveVC=(ArchivesVC *)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    
+    objArchiveVC.CompitionCode=self.competitionCode;
+    [self.navigationController pushViewController:objArchiveVC animated:YES];
+   //[self reloadBowlerTeamBatsmanDetails];
 }
 - (IBAction)SyncData_btn:(id)sender {
     

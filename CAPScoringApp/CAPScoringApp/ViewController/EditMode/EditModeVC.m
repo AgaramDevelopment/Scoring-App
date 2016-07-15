@@ -18,6 +18,7 @@
 #import "ScoreEnginEditRecord.h"
 #import "InsertSEScoreEngine.h"
 #import "FetchSEPageLoadRecord.h"
+#import "FetchScorecard.h"
 
 // Border Brushes
 #define runBrushBDR [UIColor colorWithRed:(82.0/255.0) green:(131.0/255.0) blue:(174.0/255.0) alpha:1.0]
@@ -89,6 +90,7 @@ BOOL isWicketSelected;
     NSInteger ballCodeIndex;
     int indexCount ;
     BOOL isEdit;
+    FetchScorecard*fetchScorecard;
     
 
     
@@ -108,10 +110,20 @@ BOOL isWicketSelected;
     //CGFloat totalwidth =1200;
     
     [self.view layoutIfNeeded];
-    
+    FetchSEPageLoadRecord *objfetchSEPageLoadRecord;
   
     self.Btn_innings1team1.frame= CGRectMake(self.Btn_innings1team1.frame.origin.x, self.Btn_innings1team1.frame.origin.y, 400, self.Btn_innings1team1.frame.size.height);
     
+    
+    NSMutableArray* objInniningsarray=[DBManager FETCHSEALLINNINGSSCOREDETAILS:self.Comptitioncode MATCHCODE:self.matchCode];
+    
+    if(objInniningsarray.count>0){
+    objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
+    }
+    [self.Btn_innings1team1 setTitle:[NSString stringWithFormat:@"%@ 1st INNS",objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME] forState: UIControlStateNormal];
+    
+    [self.Btn_innings1team2 setTitle: [NSString stringWithFormat:@"%@ 1st INNS",objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME] forState: UIControlStateNormal];
+
     //self.inningsviewWidth.constant =totalwidth;
     //self.btn_innings1Widthposition.constant=400;
     //self.btn_innings2xposition.constant     =self.btn_innings1Widthposition.constant+10;

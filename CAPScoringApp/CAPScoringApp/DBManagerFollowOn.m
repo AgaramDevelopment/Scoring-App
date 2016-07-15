@@ -259,7 +259,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
 
 
 //SP_UPDATEFOLLOWON----------------------------------------------------------------------
-+(BOOL) GetBallCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO{
++(BOOL) GetBallCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO{
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -267,7 +267,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMNAME,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO=%@",COMPETITIONCODE,MATCHCODE,TEAMNAME,INNINGSNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
@@ -283,11 +283,14 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -340,13 +343,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
     if(retVal !=0){
     }
     
-    NSString *query=[NSString stringWithFormat:@"SELECT SUM(GRANDTOTAL) AS TOTAL FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMNAME,INNINGSNO];
+    NSString *query=[NSString stringWithFormat:@"SELECT SUM(GRANDTOTAL) AS TOTAL FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO=%@",COMPETITIONCODE,MATCHCODE,TEAMNAME,INNINGSNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
-            NSString *teamCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            NSString *teamCode = [self getValueByNull:statement :0];
             
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
@@ -478,7 +481,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
     if(retVal !=0){
     }
     
-    NSString *query=[NSString stringWithFormat:@"SELECT COUNT(BALLCODE) AS EXTRAWICKETCOUNT  FROM   WICKETEVENTS  WHERE COMPETITIONCODE='%@' AND MATCHCODE'%@' AND TEAMCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMNAME,INNINGSNO];
+    NSString *query=[NSString stringWithFormat:@"SELECT COUNT(BALLCODE) AS EXTRAWICKETCOUNT  FROM   WICKETEVENTS  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO=%@",COMPETITIONCODE,MATCHCODE,TEAMNAME,INNINGSNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
@@ -561,11 +564,14 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -585,17 +591,22 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return YES;
             
         }
         else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -615,17 +626,22 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return YES;
             
         }
         else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
             return NO;
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -683,11 +699,14 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return @"";
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return @"";
 }
 
@@ -709,16 +728,20 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
             }
         }
     }
     sqlite3_reset(statement);
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
     return NO;
     
 }
 
-+(BOOL) DeleteInningsEventForDeleteFollowOn: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO {
++(BOOL) DeleteInningsEventForDeleteFollowOn: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO {
     
     
     NSString *databasePath = [self getDBPath];
