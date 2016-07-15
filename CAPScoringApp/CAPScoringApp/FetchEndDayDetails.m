@@ -67,7 +67,7 @@
     
     NSString* OVERS =TOTALOVERS;
     
-   OVERS = [ NSString stringWithFormat:@"%d.%d",[OVERS intValue]/6,[OVERS intValue]%6];
+   OVERS = [ NSString stringWithFormat:@"%d.%d",[OVERS intValue]/6,[BALLNO intValue]%6];
     
     
     OVERBALLNO=OVERS;

@@ -3198,7 +3198,7 @@ EditModeVC * objEditModeVc;
     NoofWickets =[objs intValue];
     if(NoofWickets >=10)
     {
-        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"No More Wicket to play " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"No More Wicket to play " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [altert show];
         return YES;
     }
@@ -3344,6 +3344,9 @@ EditModeVC * objEditModeVc;
             
             [self MatchResult];
             
+        }if (alertView.tag == 3000 ) {
+            
+           
         }
         if(alertView.tag == 1003)
         {
@@ -3354,7 +3357,7 @@ EditModeVC * objEditModeVc;
         {
             NSLog(@"vhdgdfgd");
         }
-        
+
         
         alterviewSelect=@"NO";
         //do something
