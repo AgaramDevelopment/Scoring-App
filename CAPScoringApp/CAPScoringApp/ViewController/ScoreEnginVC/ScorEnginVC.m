@@ -290,6 +290,30 @@ EditModeVC * objEditModeVc;
     
     NSLog(@"self.matchTypeCode%@",self.matchTypeCode);
     
+    
+    AppealSystemArray=[[NSMutableArray alloc]init];
+    NSMutableArray * FetchAppealSystemArray =[DBManager AppealSystemRetrieveEventData];
+    for(int i=0; i < [FetchAppealSystemArray count]; i++)
+    {
+        
+        objAppealSystemEventRecord=(AppealSystemRecords*)[FetchAppealSystemArray objectAtIndex:i];
+        
+        [AppealSystemArray addObject:objAppealSystemEventRecord];
+    }
+
+    
+    AppealComponentArray=[[NSMutableArray alloc]init];
+    NSMutableArray * FetchAppealComponentArray =[DBManager AppealComponentRetrieveEventData];
+    for(int i=0; i < [FetchAppealComponentArray count]; i++)
+    {
+        
+        objAppealComponentEventRecord=(AppealComponentRecord*)[FetchAppealComponentArray objectAtIndex:i];
+        
+        [AppealComponentArray addObject:objAppealComponentEventRecord];
+        
+        
+    }
+    
     AppealBatsmenArray=[[NSMutableArray alloc]init];
     
     AppealUmpireArray=[[NSMutableArray alloc]init];
@@ -5791,50 +5815,30 @@ EditModeVC * objEditModeVc;
 
 
 - (IBAction)appeal_btn:(id)sender {
-    if(isEnableTbl==YES)
-    {
-        AppealSystemArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchAppealSystemArray =[DBManager AppealSystemRetrieveEventData];
-        for(int i=0; i < [FetchAppealSystemArray count]; i++)
-        {
-            
-            objAppealSystemEventRecord=(AppealSystemRecords*)[FetchAppealSystemArray objectAtIndex:i];
-            
-            [AppealSystemArray addObject:objAppealSystemEventRecord];
-            
-            
-        }
+    
+    if (self.table_AppealSystem.hidden ==YES) {
         
-        
-        [self.table_AppealSystem reloadData];
         self.table_AppealSystem.hidden=NO;
-        isEnableTbl=NO;
+        
     }
+    else
+        self.table_AppealSystem.hidden=YES;
     
     
 }
+
 - (IBAction)btn_AppealComponent:(id)sender {
     
-    if(isEnableTbl==YES)
-    {
-        AppealComponentArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchAppealComponentArray =[DBManager AppealComponentRetrieveEventData];
-        for(int i=0; i < [FetchAppealComponentArray count]; i++)
-        {
-            
-            objAppealComponentEventRecord=(AppealComponentRecord*)[FetchAppealComponentArray objectAtIndex:i];
-            
-            [AppealComponentArray addObject:objAppealComponentEventRecord];
-            
-            
-        }
+    if (self.table_AppealComponent.hidden ==YES) {
         
-        
-        [self.table_AppealComponent reloadData];
         self.table_AppealComponent.hidden=NO;
-        isEnableTbl=NO;
+        
     }
-}
+    else
+        self.table_AppealComponent.hidden=YES;
+ }
+
+
 - (IBAction)btn_umpireName:(id)sender {
     
     if (self.tanle_umpirename.hidden ==YES) {
@@ -6397,11 +6401,11 @@ EditModeVC * objEditModeVc;
     
     
     if(tableView == table_Appeal){
-        if(appealEventDict==nil){
-            appealEventDict = [NSMutableDictionary dictionary];
-        }
-        AppealComponentRecord *appealRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
-        [appealEventDict setValue:appealRecord.AppealComponentMetaSubCode forKey:@"AppealTypeCode"];
+//        if(appealEventDict==nil){
+//            appealEventDict = [NSMutableDictionary dictionary];
+//        }
+//        AppealComponentRecord *appealRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
+//        [appealEventDict setValue:appealRecord.AppealComponentMetaSubCode forKey:@"AppealTypeCode"];
         
         _view_table_select.hidden=NO;
     }

@@ -7,6 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BreakVC.h"
+
+@protocol AddBreakVCDelagate <NSObject>
+@required
+
+- (void) ChangeVCBackBtnAction;
+
+@end
 
 @interface AddBreakVC : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource>
 
