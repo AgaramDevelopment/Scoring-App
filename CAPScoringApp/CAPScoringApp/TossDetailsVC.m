@@ -739,6 +739,23 @@
     {
         [self ShowAlterView:@"Please Select Team,ElectedTo,Striker,NonStriker And Bowler"];
     }
+    
+ else if([self.electedTo_lbl.text isEqualToString:@""] || self.electedTo_lbl.text==nil && [self.Striker_lbl.text isEqualToString:@""] || self.Striker_lbl.text==nil && [self.nonStriker_lbl.text isEqualToString:@""] || self.nonStriker_lbl.text==nil && [self.Bowler_lbl.text isEqualToString:@""] || self.Bowler_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please ElectedTo,Striker,NonStriker And Bowler"];
+    }
+    
+    
+ else if([self.Striker_lbl.text isEqualToString:@""] || self.Striker_lbl.text==nil && [self.nonStriker_lbl.text isEqualToString:@""] || self.nonStriker_lbl.text==nil && [self.Bowler_lbl.text isEqualToString:@""] || self.Bowler_lbl.text==nil)
+ {
+     [self ShowAlterView:@"Please Striker,NonStriker And Bowler"];
+ }
+    
+ else if([self.nonStriker_lbl.text isEqualToString:@""] || self.nonStriker_lbl.text==nil && [self.Bowler_lbl.text isEqualToString:@""] || self.Bowler_lbl.text==nil)
+ {
+     [self ShowAlterView:@"Please NonStriker And Bowler"];
+ }
+    
     else if([self.Wonby_lbl.text isEqualToString:@""] || self.Wonby_lbl.text==nil)
     {
         [self ShowAlterView:@"Please Select Team"];
