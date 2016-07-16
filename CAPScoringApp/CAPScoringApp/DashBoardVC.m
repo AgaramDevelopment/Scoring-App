@@ -681,7 +681,7 @@
             [self officialcodeimage];
             [self groundcodeimage];
             
-            
+        [self showDialog:@"SYNC DATA COMPLETED" andTitle:@""];
             
             }
             
@@ -769,15 +769,15 @@
                                          cancelButtonTitle:@"Signout"
                                          otherButtonTitles:@"Cancel",nil];
     
-    
+    alert.tag =1;
     [alert show];
-
+   
     
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    //if (alertView.tag == 1) { // UIAlertView with tag 1 detected
+   if (alertView.tag == 1) { // UIAlertView with tag 1 detected
     if (buttonIndex == 0)
     {
         
@@ -802,6 +802,7 @@
         [self.navigationController pushViewController:dashBoard animated:YES];
         //Fixvc.CompitionCode=selectindexarray;
             }
+}
 }
 
 

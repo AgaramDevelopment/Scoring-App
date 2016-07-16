@@ -174,5 +174,7 @@
     
 }
 - (IBAction)back_btn:(id)sender {
+    
+     [self.delegate ChangeVCBackBtnAction];
 }
 @end

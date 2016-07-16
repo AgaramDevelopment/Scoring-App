@@ -10,6 +10,15 @@
 #import "Other_WicketgridTVC.h"
 #import "Other_WicketVC.h"
 
+#import "ScorEnginVC.h"
+
+@protocol Other_WicketgridVCDelagate <NSObject>
+@required
+
+- (void) ChangeVCBackBtnAction;
+
+@end
+
 @interface Other_WicketgridVC : UIViewController
 @property (strong, nonatomic) IBOutlet Other_WicketgridTVC *Other_WicketCell;
 @property (strong, nonatomic) IBOutlet UITableView *tbl_otherwicketgrid;
@@ -38,7 +47,7 @@
 @property(nonatomic,strong)NSString *N_WICKETTYPE;
 @property(nonatomic,strong)NSNumber *N_FIELDERCODE;
 @property(nonatomic,strong)NSNumber *BATTINGPOSITIONNO;
-
+@property(strong,nonatomic) id <Other_WicketgridVCDelagate> delegate;
 
 - (IBAction)back_btn:(id)sender;
 
