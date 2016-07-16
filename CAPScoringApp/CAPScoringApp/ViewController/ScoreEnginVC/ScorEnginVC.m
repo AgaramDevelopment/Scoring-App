@@ -144,6 +144,7 @@
     BOOL ispichmapSelectValue;
     
     BOOL isWagonwheel;
+    BOOL isAppeal;
     
     NSMutableArray *strickerList;
     NSMutableArray *nonStrickerList;
@@ -5459,26 +5460,31 @@ EditModeVC * objEditModeVc;
     }
     else if(selectBtnTag.tag==122)//Appels
     {
-        //  [self selectBtncolor_Action:@"122" :nil :211];
         
-//        if( _view_appeal.hidden) {
-//            _View_Appeal.hidden = false;
-//        } else {
-//            _View_Appeal.hidden = true;
-//        }
-//        
-        
-    _View_Appeal.hidden=NO;
-        
-        
-        
-        self.view_aggressiveShot.hidden = YES;
-        self.view_defensive.hidden = YES;
-        self.view_bowlType.hidden = YES;
-        self.view_fastBowl.hidden = YES;
-        [self selectedViewBg:_view_appeal];
-        
-    }
+//[self selectedViewBg:_view_appeal];
+       if(isAppeal==NO)
+            {
+               [self selectedViewBg:_view_appeal];
+                _View_Appeal.hidden=NO;
+                
+                
+                
+                self.view_aggressiveShot.hidden = YES;
+                self.view_defensive.hidden = YES;
+                self.view_bowlType.hidden = YES;
+                self.view_fastBowl.hidden = YES;
+                isAppeal=YES;
+                
+            }
+            else
+            {
+                [self unselectedButtonBg:_view_appeal];
+                  _View_Appeal.hidden=YES;
+               
+                isAppeal=NO;
+            }
+        }
+  
     else if(selectBtnTag.tag==123)
     {
         //  [self selectBtncolor_Action:@"123" :nil :212];
@@ -5796,13 +5802,17 @@ EditModeVC * objEditModeVc;
     self.View_Appeal.hidden=YES;
     [self.table_Appeal reloadData];
     
-//   self.view_table_select.hidden=YES;
+   self.view_table_select.hidden=YES;
 //    [self.table_AppealSystem reloadData];
 //    [self.table_AppealComponent reloadData];
 //    [self.tanle_umpirename reloadData];
 //    [self.table_BatsmenName reloadData];
-//   // self.comments_txt=@"";
-
+ self.comments_txt.text=@"";
+   self.lbl_appealsystem.text=@"";
+     self.lbl_appealComponent.text=@"";
+self.lbl_umpirename.text=@"";
+   self.lbl_batsmen.text=@"";
+    
     isEnableTbl=NO;
     isPitchmap =NO;
     isWagonwheel=NO;
@@ -6450,7 +6460,11 @@ EditModeVC * objEditModeVc;
 //        }
 //        AppealComponentRecord *appealRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
 //        [appealEventDict setValue:appealRecord.AppealComponentMetaSubCode forKey:@"AppealTypeCode"];
-        
+        self.comments_txt.text=@"";
+        self.lbl_appealsystem.text=@"";
+        self.lbl_appealComponent.text=@"";
+        self.lbl_umpirename.text=@"";
+        self.lbl_batsmen.text=@"";
         _view_table_select.hidden=NO;
     }
     
