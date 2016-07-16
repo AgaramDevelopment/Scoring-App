@@ -20,7 +20,7 @@
 #import "MatchResultListVC.h"
 #import "Utitliy.h"
 #import "ArchivesVC.h"
-@interface EndInningsVC ()
+@interface EndInningsVC ()<UITextFieldDelegate>
 {
     NSDateFormatter *formatter;
     NSObject *fetchEndinnings;
@@ -128,9 +128,9 @@ BOOL IsBack;
         [self.view_innings.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
         self.view_innings.layer.borderWidth = 2;
         
-        [self datePicker];
-        [self endDatePicker];
-        [self duration];
+        //[self datePicker];
+       // [self endDatePicker];
+        
         
         
         TOTALRUNS=[DBManagerEndInnings GetTotalRunsForFetchEndInnings : CompetitionCode: MatchCode :fetchSePageLoad.BATTINGTEAMCODE: fetchSePageLoad.INNINGSNO ];
@@ -147,7 +147,7 @@ BOOL IsBack;
 
 -(void)datePicker{
     
-    datePicker =[[UIDatePicker alloc]init];
+    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_startInnings.frame.origin.x,self.txt_startInnings.frame.origin.y+30,self.view.frame.size.width,200)];
     
     datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     
@@ -156,7 +156,7 @@ BOOL IsBack;
     UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
     [toolbar setTintColor:[UIColor grayColor]];
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
-                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
+                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate:)];
     
  
 
@@ -170,21 +170,26 @@ BOOL IsBack;
     
 }
 
--(void)showSelecteddate{
+-(IBAction)showSelecteddate:(id)sender{
 
     
 
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    self.txt_startInnings.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
-   // [self.txt_startInnings resignFirstResponder];
-  //  self.txt_startInnings =[NSString stringWithFormat:@"%@",[_txt_startInnings text]];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+    
+    NSDate *selectedDate = [datePicker date];
+    NSString *recordDate = [formatter stringFromDate:selectedDate];
+    
+    
+    self.txt_startInnings.text=recordDate;
+    [self.txt_startInnings resignFirstResponder];
+    //self.txt_startInnings =[NSString stringWithFormat:@"%@",[_txt_startInnings text]];
     [self duration];
     
 }
 
 -(void)endDatePicker{
-    datePicker =[[UIDatePicker alloc]init];
+    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_endInnings.frame.origin.x,self.txt_endInnings.frame.origin.y+30,self.view.frame.size.width,200)];
     datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     
     [self.txt_endInnings setInputView:datePicker];
@@ -202,9 +207,11 @@ BOOL IsBack;
 -(void)showEndDatePicker{
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    self.txt_endInnings.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
-    //[self.txt_endInnings resignFirstResponder];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+    NSDate *selectedDate = [datePicker date];
+    NSString *recordDate = [formatter stringFromDate:selectedDate];
+    self.txt_endInnings.text=recordDate;
+    [self.txt_endInnings resignFirstResponder];
     [self duration];
     
 }
@@ -212,7 +219,7 @@ BOOL IsBack;
 -(void)duration{
     
     formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
     NSString *startDateTF = self.txt_startInnings.text;
     NSString *startEndTF = self.txt_endInnings.text;
     
@@ -231,15 +238,17 @@ BOOL IsBack;
     // Dispose of any resources that can be recreated.
 }
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
+ - (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if(textField.tag == 1)
+    {
+         [self datePicker];
+    }
+    else if (textField.tag == 2)
+    {
+         [self endDatePicker];
+    }
+}
 
 - (IBAction)btn_addInnings:(id)sender {
     
