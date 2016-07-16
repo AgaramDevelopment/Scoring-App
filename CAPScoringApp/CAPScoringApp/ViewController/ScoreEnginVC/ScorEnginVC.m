@@ -70,6 +70,7 @@
 #import "EditModeVC.h"
 
 
+
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
@@ -8240,8 +8241,6 @@ self.lbl_umpirename.text=@"";
 
 -(void) revisiedTarget
 {
-    if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
-    {
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -8284,8 +8283,6 @@ self.lbl_umpirename.text=@"";
          }
                          completion:nil];
     }
-    }
-    
 }
 -(IBAction)FullviewHideMethod:(id)sender
 {

@@ -7,6 +7,10 @@
     <customFonts key="customFonts">
         <mutableArray key="RAJDHANI-BOLD.TTF">
             <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-REGULAR.TTF">
             <string>Rajdhani-Regular</string>
@@ -28,10 +32,10 @@
                     <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
                     <subviews>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1eu-Vn-lqc">
-                            <rect key="frame" x="0.0" y="60" width="550" height="532"/>
+                            <rect key="frame" x="0.0" y="115" width="550" height="477"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="532" id="0S2-xh-Dwd"/>
+                                <constraint firstAttribute="height" constant="477" id="0S2-xh-Dwd"/>
                             </constraints>
                             <color key="separatorColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -119,10 +123,70 @@
                                 <constraint firstItem="d3y-cX-in1" firstAttribute="leading" secondItem="3Fh-Oe-scr" secondAttribute="trailing" constant="38" id="xCL-9M-5VZ"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jy3-eR-BTx">
+                            <rect key="frame" x="0.0" y="61" width="550" height="55"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="COMMENTS" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnd-C2-Gdu">
+                                    <rect key="frame" x="3" y="14" width="103" height="31"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="103" id="KUr-B0-kuU"/>
+                                        <constraint firstAttribute="height" constant="31" id="vsh-Zt-K8Y"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="19"/>
+                                    <color key="textColor" red="0.047058823530000002" green="0.1019607843" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="END TIME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="irL-eM-Ql4">
+                                    <rect key="frame" x="286" y="14" width="136" height="31"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="31" id="SSz-G5-7h8"/>
+                                        <constraint firstAttribute="width" constant="136" id="uSN-he-WYC"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="19"/>
+                                    <color key="textColor" red="0.047058823530000002" green="0.1019607843" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DURATION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gPS-qZ-qvU">
+                                    <rect key="frame" x="439" y="14" width="103" height="31"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="103" id="6DW-4K-1tW"/>
+                                        <constraint firstAttribute="height" constant="31" id="uag-ec-GDj"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="19"/>
+                                    <color key="textColor" red="0.047058823530000002" green="0.1019607843" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="START TIME" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uzz-iT-0Vu">
+                                    <rect key="frame" x="133" y="14" width="143" height="31"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="31" id="0qI-HH-KjE"/>
+                                        <constraint firstAttribute="width" constant="143" id="H5w-oD-52q"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="19"/>
+                                    <color key="textColor" red="0.047058823530000002" green="0.1019607843" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="vnd-C2-Gdu" firstAttribute="top" secondItem="Jy3-eR-BTx" secondAttribute="top" constant="14" id="1dq-MY-hPf"/>
+                                <constraint firstItem="uzz-iT-0Vu" firstAttribute="top" secondItem="Jy3-eR-BTx" secondAttribute="top" constant="14" id="55V-cU-rPL"/>
+                                <constraint firstAttribute="height" constant="55" id="FRC-A6-3Q5"/>
+                                <constraint firstItem="irL-eM-Ql4" firstAttribute="top" secondItem="Jy3-eR-BTx" secondAttribute="top" constant="14" id="OSd-0u-GXl"/>
+                                <constraint firstItem="irL-eM-Ql4" firstAttribute="leading" secondItem="uzz-iT-0Vu" secondAttribute="trailing" constant="10" id="PRD-U2-eDg"/>
+                                <constraint firstItem="vnd-C2-Gdu" firstAttribute="leading" secondItem="Jy3-eR-BTx" secondAttribute="leading" constant="3" id="RHa-1l-kVF"/>
+                                <constraint firstItem="gPS-qZ-qvU" firstAttribute="top" secondItem="Jy3-eR-BTx" secondAttribute="top" constant="14" id="V9K-mo-9Ff"/>
+                                <constraint firstAttribute="trailing" secondItem="gPS-qZ-qvU" secondAttribute="trailing" constant="8" id="aid-en-24o"/>
+                                <constraint firstAttribute="width" constant="550" id="nTF-DO-8jf"/>
+                                <constraint firstItem="uzz-iT-0Vu" firstAttribute="leading" secondItem="vnd-C2-Gdu" secondAttribute="trailing" constant="27" id="pic-hY-X1N"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.10980392156862745" green="0.13725490196078433" blue="0.15686274509803921" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstItem="1eu-Vn-lqc" firstAttribute="top" secondItem="jjX-CP-veN" secondAttribute="top" constant="60" id="Gny-Fy-EDA"/>
+                        <constraint firstItem="Jy3-eR-BTx" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="bottom" constant="1" id="Ac8-1b-z4r"/>
+                        <constraint firstItem="Jy3-eR-BTx" firstAttribute="leading" secondItem="jjX-CP-veN" secondAttribute="leading" id="Fb0-Bh-zwV"/>
+                        <constraint firstItem="1eu-Vn-lqc" firstAttribute="top" secondItem="jjX-CP-veN" secondAttribute="top" constant="115" id="Gny-Fy-EDA"/>
                         <constraint firstAttribute="trailing" secondItem="jeN-GQ-Y6N" secondAttribute="trailing" id="Jkx-JE-i4r"/>
                         <constraint firstItem="jeN-GQ-Y6N" firstAttribute="top" secondItem="jjX-CP-veN" secondAttribute="top" id="KvN-rw-2sr"/>
                         <constraint firstItem="jeN-GQ-Y6N" firstAttribute="leading" secondItem="jjX-CP-veN" secondAttribute="leading" id="fjL-dL-8Pa"/>
@@ -131,6 +195,7 @@
                         <constraint firstItem="1eu-Vn-lqc" firstAttribute="trailing" secondItem="jeN-GQ-Y6N" secondAttribute="trailing" id="mFb-X2-WOz"/>
                         <constraint firstAttribute="bottom" secondItem="jeN-GQ-Y6N" secondAttribute="bottom" constant="540" id="nQe-Aa-BWO"/>
                         <constraint firstItem="1eu-Vn-lqc" firstAttribute="leading" secondItem="jjX-CP-veN" secondAttribute="leading" id="qX9-GB-z07"/>
+                        <constraint firstAttribute="trailing" secondItem="Jy3-eR-BTx" secondAttribute="trailing" id="who-Dg-7Oo"/>
                     </constraints>
                 </view>
             </subviews>
