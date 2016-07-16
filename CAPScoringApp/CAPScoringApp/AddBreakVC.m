@@ -216,7 +216,11 @@
      BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
        BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
     
-    if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil)
+    if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil && [self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil && [self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Start Time\nPlease Select End Time\nPlease Add Comments"];
+    }
+    else if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil)
     {
         [self ShowAlterView:@"Please Select Start Time"];
     }
@@ -224,7 +228,7 @@
     {
         [self ShowAlterView:@"Please Select End Time"];
     }
-   else if([self.lbl_Duration.text integerValue]<0){
+   else if([self.lbl_Duration.text integerValue]>0){
         [self ShowAlterView:@"Duration should be greated than zero"];
    }
 //    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)

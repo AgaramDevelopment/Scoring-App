@@ -681,7 +681,7 @@
             [self officialcodeimage];
             [self groundcodeimage];
             
-        [self showDialog:@"SYNC DATA COMPLETED" andTitle:@""];
+        [self showDialog1:@"SYNC DATA COMPLETED" andTitle:@""];
             
             }
             
@@ -715,6 +715,13 @@
      }
     
 }
+
+-(void) showDialog1:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
+
 
 -(void) showDialog:(NSString*) message andTitle:(NSString*) title{
     UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
