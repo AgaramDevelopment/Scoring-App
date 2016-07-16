@@ -199,6 +199,14 @@
             scoreEngine.matchTypeCode=matchTypeCode;
             [self.navigationController pushViewController:scoreEngine animated:YES];
         }
+    }else if([objFixtureRecord.MatchStatus isEqualToString:@"MSC125"]){
+        ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+        scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+        scoreEngine.matchSetUp = mSetUp;
+        scoreEngine.matchCode=objFixtureRecord.matchcode;
+        scoreEngine.competitionCode=self.CompitionCode;
+        scoreEngine.matchTypeCode=matchTypeCode;
+        [self.navigationController pushViewController:scoreEngine animated:YES];
     }
 }
 
