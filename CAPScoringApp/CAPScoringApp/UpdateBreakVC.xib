@@ -35,7 +35,7 @@
                 <outlet property="date_picker" destination="gQu-UC-3ro" id="bpC-Xs-CVe"/>
                 <outlet property="date_picker1" destination="c74-TN-rib" id="HEs-id-BMH"/>
                 <outlet property="lbl_Duration" destination="13U-rU-Uhd" id="13Z-co-diQ"/>
-                <outlet property="text_Comments" destination="bhY-f6-bKU" id="1Bj-Fm-7jc"/>
+                <outlet property="text_Comments" destination="zif-Tv-pqu" id="bX3-JN-9mz"/>
                 <outlet property="text_EndBreak" destination="lgl-O3-8WF" id="pqf-Ep-6sB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="view_breakMinutes" destination="aGk-D7-kyv" id="xPv-1d-hNR"/>
@@ -183,24 +183,26 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qh0-eh-v0J">
                             <rect key="frame" x="226" y="328" width="282" height="78"/>
                             <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="bhY-f6-bKU">
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zif-Tv-pqu">
                                     <rect key="frame" x="0.0" y="0.0" width="282" height="78"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="78" id="wby-TB-azY"/>
+                                        <constraint firstAttribute="height" constant="78" id="AsX-yj-vOV"/>
+                                        <constraint firstAttribute="width" constant="282" id="ONL-b9-oKd"/>
                                     </constraints>
-                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="19"/>
-                                    <textInputTraits key="textInputTraits"/>
-                                </textField>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="282" id="2QL-hs-3Pn"/>
-                                <constraint firstAttribute="trailing" secondItem="bhY-f6-bKU" secondAttribute="trailing" id="CEZ-GY-sKJ"/>
-                                <constraint firstItem="bhY-f6-bKU" firstAttribute="top" secondItem="Qh0-eh-v0J" secondAttribute="top" id="YLn-RU-CrB"/>
-                                <constraint firstItem="bhY-f6-bKU" firstAttribute="leading" secondItem="Qh0-eh-v0J" secondAttribute="leading" id="eIv-3O-zSD"/>
+                                <constraint firstAttribute="trailing" secondItem="zif-Tv-pqu" secondAttribute="trailing" id="Ysg-aZ-CBl"/>
+                                <constraint firstAttribute="bottom" secondItem="zif-Tv-pqu" secondAttribute="bottom" id="gXO-rL-NBo"/>
                                 <constraint firstAttribute="height" constant="78" id="ms5-Cr-JNe"/>
-                                <constraint firstAttribute="bottom" secondItem="bhY-f6-bKU" secondAttribute="bottom" id="pox-rU-4zf"/>
+                                <constraint firstItem="zif-Tv-pqu" firstAttribute="top" secondItem="Qh0-eh-v0J" secondAttribute="top" id="nJY-4r-3Uh"/>
+                                <constraint firstItem="zif-Tv-pqu" firstAttribute="leading" secondItem="Qh0-eh-v0J" secondAttribute="leading" id="yPm-ZF-MEJ"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aGk-D7-kyv">

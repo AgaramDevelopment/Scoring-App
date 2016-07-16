@@ -22,7 +22,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_Duration;
 @property (strong, nonatomic) IBOutlet UIView *View_Comments;
 
-@property (strong, nonatomic) IBOutlet UITextField *text_Comments;
+
 @property (strong, nonatomic) IBOutlet UIView *view_breakMinutes;
 - (IBAction)Switch_minuts:(id)sender;
 - (IBAction)Finish_btn:(id)sender;
@@ -42,4 +42,5 @@
 - (IBAction)bck_btn:(id)sender;
 
 - (IBAction)hidepickerbtn:(id)sender;
+@property (strong, nonatomic) IBOutlet UITextView *text_Comments;
 @end

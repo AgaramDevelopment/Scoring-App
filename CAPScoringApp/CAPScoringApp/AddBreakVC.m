@@ -228,7 +228,7 @@
     {
         [self ShowAlterView:@"Please Select End Time"];
     }
-   else if([self.lbl_Duration.text integerValue]>0){
+   else if([self.lbl_Duration.text integerValue]<0){
         [self ShowAlterView:@"Duration should be greated than zero"];
    }
 //    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)
