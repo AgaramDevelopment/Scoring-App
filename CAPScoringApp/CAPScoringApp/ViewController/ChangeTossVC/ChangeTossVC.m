@@ -243,8 +243,7 @@
         //teamaCode=[[TossDetailArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
     }
     }
-         StrickerdetailArry=self.objStrickerdetailArray ;
-
+        StrickerdetailArry =[DBManagerChangeToss StrikerNonstriker:self.matchCode :teamaCode ];
     catagory=StrickerdetailArry;
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_Stricker.frame.origin.y-30;
@@ -292,7 +291,7 @@
        // teamaCode=[[TossDetailArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
     }
     }
-    NonStrikerdetailArray=self.objNonStrikerdetail ;
+    NonStrikerdetailArray =[DBManagerChangeToss StrikerNonstriker:self.matchCode :teamaCode];
     catagory=NonStrikerdetailArray;
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_NonStricker.frame.origin.y-30;
@@ -345,7 +344,7 @@
         
     }
 
-    BowlingTeamdetailArray= self.objBowlingTeamdetail ;
+    BowlingTeamdetailArray= [DBManagerChangeToss StrikerNonstriker:self.matchCode :teamaCode] ;
     catagory=BowlingTeamdetailArray;
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_Bowler.frame.origin.y-30;
@@ -478,8 +477,8 @@
     }
     else if (isBowler ==YES)
     {
-        BowlerEvent *objChanceTeamRecord=(BowlerEvent *)[catagory objectAtIndex:indexPath.row];
-        cell.textLabel.text = objChanceTeamRecord.BowlerName;
+        FetchBattingTeamTossRecord *objChanceTeamRecord=(FetchBattingTeamTossRecord *)[catagory objectAtIndex:indexPath.row];
+        cell.textLabel.text = objChanceTeamRecord.playerName;
     }
     return cell;
 }
@@ -550,11 +549,10 @@
     }
     else if(isBowler== YES)
     {
-        BowlerEvent *objChanceTeamRecord=(BowlerEvent *)[catagory objectAtIndex:indexPath.row];
-        self.lbl_Bowler.text =objChanceTeamRecord.BowlerName;
+        self.lbl_Bowler.text =objChangeTossRecord.playerName;
         selectBowler=self.lbl_Bowler.text;
         
-        selectBowlerCode=objChanceTeamRecord.BowlerCode;
+        selectBowlerCode=objChangeTossRecord.playerCode;
        
     }
     

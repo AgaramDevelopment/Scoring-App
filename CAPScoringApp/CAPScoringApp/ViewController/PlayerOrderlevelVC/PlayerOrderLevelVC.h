@@ -30,8 +30,15 @@
 @property(strong,nonatomic)NSString *matchTypeCode;
 @property(strong,nonatomic)NSString *teamAcode;
 @property(strong,nonatomic)NSString *teamBcode;
+@property (strong,nonatomic) NSMutableArray *captainWKTArray;
 
 @property(nonatomic,strong) NSString *chooseTeam;
+
+@property (nonatomic,strong) NSString *captainAcode;
+@property (nonatomic,strong) NSString *captainBcode;
+@property (nonatomic,strong) NSString *WKTkeeperAcode;
+@property (nonatomic,strong) NSString *WKTkeeperBcode;
+
 
 
 @end
