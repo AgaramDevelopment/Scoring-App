@@ -14,6 +14,7 @@
 #import "GetPlayerDetailOnRetiredHurt.h"
 #import "GetPlayerDetailOnTimeOut.h"
 #import "GetPlayerDetailOnRetiredHurtOnMSC108.h"
+#import "GetStrickerNonStrickerPlayerCode.h"
 #import "Other_WicketgridVC.h"
 #import "DBManagerInsertScoreEngine.h"
 #import "GetWicketDetail.h"
@@ -27,6 +28,8 @@
     GetPlayerDetailOnAbsentHurt *objAbsentHurt;
     GetPlayerDetailOnRetiredHurt *objRetriedHurt;
     GetPlayerDetailOnTimeOut*objTimedOut;
+    GetStrickerNonStrickerPlayerCode *objMankading;
+    
     GetPlayerDetailOnRetiredHurtOnMSC108 *objretriedOut;
     
     NSString *WICKETPLAYER;
@@ -44,6 +47,7 @@
     NSMutableArray *GetPlayerDetailOnRetiredHurt2Array;
     NSMutableArray *GetPlayerDetailsOnRetiredHurtOnMSC108Array;
     NSMutableArray *GetPlayerDetailsOnRetiredHurtArray;
+    NSMutableArray *GetStrikerandnonstrikerArray;
     BOOL isEnableTbl;
     
     
@@ -86,6 +90,8 @@
 @synthesize TEAMCODE;
 @synthesize STRIKERCODE;
 @synthesize NONSTRIKERCODE;
+@synthesize NONSTRIKERNAME;
+
 
 
 @synthesize Wicket_lbl;
@@ -196,6 +202,7 @@
     {
         return [GetPlayerDetailOnRetiredHurt2Array count];
     }
+
         return 0;
     }
     
@@ -271,8 +278,8 @@
             objRetriedHurt =(GetPlayerDetailOnRetiredHurt*)[GetPlayerDetailOnRetiredHurt2Array objectAtIndex:indexPath.row];
             
             cell.textLabel.text =objRetriedHurt.PLAYERNAME;
-             
-        }
+       }
+        
         
         return cell;
         
@@ -304,6 +311,8 @@
         isEnableTbl=YES;
         self.selectplayer_lbl.text=@"select";
     }
+    
+   
     if (tableView == self.tbl_playername)
     {
         if([WICKETTYPE isEqual:@"MSC133"]){
@@ -354,10 +363,15 @@
             self.tbl_playername.hidden=YES;
             isEnableTbl=YES;
             
-        }
-           }
+        }     }
 
-    
+    if([WICKETTYPE isEqual:@"MSC107"]){
+        self.selectplayer_lbl.text= self.NONSTRIKERNAME;
+       WICKETPLAYER=self.NONSTRIKERCODE;
+
+        
+    }
+
 }
 
 
@@ -398,15 +412,23 @@
 
 - (BOOL) formValidation{
     
+    BOOL flag = YES;
+    
+    NSString *errorMessage = @"";
+    
     if([ Wicket_lbl.text isEqual:@"Select"]){
-        [self showDialog:@"Please Select Wicket Type" andTitle:@""];
-        return NO;
-    }else if([self.selectplayer_lbl.text isEqual:@"Select"]){
-        [self showDialog:@"Please enter End Over." andTitle:@""];
-        return NO;
+      //  [self showDialog:@"Please Select Wicket Type" andTitle:@""];
+       errorMessage = [NSString stringWithFormat:@"%@",@"Please select Wicket Type.\n"];
+        flag = NO;
+    }
+    
+    if([self.selectplayer_lbl.text isEqual:@"Select"]){
+        //[self showDialog:@"Please enter End Over." andTitle:@""];
+        errorMessage = [NSString stringWithFormat:@"%@%@",@"Please Select Player Name.\n",errorMessage];
+        flag = NO;
         
     }
-    return YES;
+    return flag;
 }
 
 

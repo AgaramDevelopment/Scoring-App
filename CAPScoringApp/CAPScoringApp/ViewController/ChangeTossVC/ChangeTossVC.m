@@ -14,6 +14,7 @@
 #import "InitializeInningsScoreBoardRecord.h"
 #import "DBManager.h"
 #import "DBManagerChangeToss.h"
+#import "BowlerEvent.h"
 
 @interface ChangeTossVC ()
 {
@@ -55,9 +56,9 @@
     
     NSMutableArray *TeamDetailTossWon;
     NSMutableArray *objElectedTodetailArray;
-    NSMutableArray *objStrickerdetail;
-    NSMutableArray *objNonStrikerdetail;
-    NSMutableArray *objBowlingTeamdetail;
+    NSMutableArray *StrickerdetailArry;
+    NSMutableArray *NonStrikerdetailArray;
+    NSMutableArray *BowlingTeamdetailArray;
 
 }
 
@@ -100,9 +101,9 @@
     catagory =[[NSMutableArray alloc]init];
     TeamDetailTossWon =[[NSMutableArray alloc]init];
     objElectedTodetailArray=[[NSMutableArray alloc]init];
-    objStrickerdetail =[[NSMutableArray alloc]init];
-    objNonStrikerdetail=[[NSMutableArray alloc]init];
-    objBowlingTeamdetail =[[NSMutableArray alloc]init];
+    StrickerdetailArry =[[NSMutableArray alloc]init];
+    NonStrikerdetailArray=[[NSMutableArray alloc]init];
+    BowlingTeamdetailArray =[[NSMutableArray alloc]init];
     TossDetailArray=[[NSMutableArray alloc]init];
     TossDetailArray=[DBManagerChangeToss GetTossDetails];
     self.Btn_Bowler.userInteractionEnabled=NO;
@@ -242,9 +243,9 @@
         //teamaCode=[[TossDetailArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
     }
     }
-   objStrickerdetail =[DBManagerChangeToss StrikerNonstriker:self.matchCode :teamaCode ];
+         StrickerdetailArry=self.objStrickerdetailArray ;
 
-    catagory=objStrickerdetail;
+    catagory=StrickerdetailArry;
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_Stricker.frame.origin.y-30;
     [self.Tbl_toss reloadData];
@@ -291,8 +292,8 @@
        // teamaCode=[[TossDetailArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
     }
     }
-    objNonStrikerdetail =[DBManagerChangeToss StrikerNonstriker:self.matchCode :teamaCode];
-    catagory=objNonStrikerdetail;
+    NonStrikerdetailArray=self.objNonStrikerdetail ;
+    catagory=NonStrikerdetailArray;
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_NonStricker.frame.origin.y-30;
     [self.Tbl_toss reloadData];
@@ -344,8 +345,8 @@
         
     }
 
-    objBowlingTeamdetail =[DBManagerChangeToss StrikerNonstriker:self.matchCode :teamaCode];
-    catagory=objBowlingTeamdetail;
+    BowlingTeamdetailArray= self.objBowlingTeamdetail ;
+    catagory=BowlingTeamdetailArray;
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_Bowler.frame.origin.y-30;
     [self.Tbl_toss reloadData];
@@ -423,15 +424,15 @@
     }
     else if (isStricker == YES)
     {
-        return [objStrickerdetail count];
+        return [StrickerdetailArry count];
     }
     else if (isNonStricker == YES)
     {
-        return [objNonStrikerdetail count];
+        return [NonStrikerdetailArray count];
     }
     else if (isBowler == YES)
     {
-        return [objBowlingTeamdetail count];
+        return [BowlingTeamdetailArray count];
     }
 
     return NO;
@@ -477,8 +478,8 @@
     }
     else if (isBowler ==YES)
     {
-        FetchBattingTeamTossRecord *objChanceTeamRecord=(FetchBattingTeamTossRecord *)[catagory objectAtIndex:indexPath.row];
-        cell.textLabel.text = objChanceTeamRecord.playerName;
+        BowlerEvent *objChanceTeamRecord=(BowlerEvent *)[catagory objectAtIndex:indexPath.row];
+        cell.textLabel.text = objChanceTeamRecord.BowlerName;
     }
     return cell;
 }
@@ -549,10 +550,11 @@
     }
     else if(isBowler== YES)
     {
-        self.lbl_Bowler.text =objChangeTossRecord.playerName;
+        BowlerEvent *objChanceTeamRecord=(BowlerEvent *)[catagory objectAtIndex:indexPath.row];
+        self.lbl_Bowler.text =objChanceTeamRecord.BowlerName;
         selectBowler=self.lbl_Bowler.text;
         
-        selectBowlerCode=objChangeTossRecord.playerCode;
+        selectBowlerCode=objChanceTeamRecord.BowlerCode;
        
     }
     

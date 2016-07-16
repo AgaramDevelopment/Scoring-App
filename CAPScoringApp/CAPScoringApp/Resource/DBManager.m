@@ -2854,7 +2854,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
-    NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT BALL.BALLCODE, (BALL.OVERNO+'.'+ BALL.BALLNO) AS BALLNO, BWLR.PLAYERNAME BOWLER, STRKR.PLAYERNAME STRIKER, NSTRKR.PLAYERNAME NONSTRIKER,  BT.BOWLTYPE BOWLTYPE, ST.SHOTNAME AS SHOTTYPE, BALL.TOTALRUNS, BALL.TOTALEXTRAS, BALL.OVERNO,BALL.BALLCOUNT,BALL.ISLEGALBALL,BALL.ISFOUR,BALL.ISSIX,BALL.RUNS,BALL.OVERTHROW, BALL.WIDE,BALL.NOBALL,BALL.BYES,BALL.LEGBYES,BALL.GRANDTOTAL,WE.WICKETNO,WE.WICKETTYPE,BALL.MARKEDFOREDIT, PTY.PENALTYRUNS, PTY.PENALTYTYPECODE, %@ AS ISINNINGSLASTOVER, (MR.VIDEOLOCATION + '\' + BALL.VIDEOFILENAME) VIDEOFILEPATH FROM BALLEVENTS BALL INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE = BALL.COMPETITIONCODE AND MR.MATCHCODE = BALL.MATCHCODE INNER JOIN TEAMMASTER TM ON BALL.TEAMCODE = TM.TEAMCODE INNER JOIN PLAYERMASTER BWLR ON BALL.BOWLERCODE=BWLR.PLAYERCODE INNER JOIN PLAYERMASTER STRKR ON BALL.STRIKERCODE = STRKR.PLAYERCODE INNER JOIN PLAYERMASTER NSTRKR ON BALL.NONSTRIKERCODE = NSTRKR.PLAYERCODE LEFT JOIN BOWLTYPE BT ON BALL.BOWLTYPE = BT.BOWLTYPECODE LEFT JOIN SHOTTYPE ST ON BALL.SHOTTYPE = ST.SHOTCODE LEFT JOIN WICKETEVENTS WE ON BALL.BALLCODE = WE.BALLCODE AND WE.ISWICKET = 1 LEFT JOIN PENALTYDETAILS PTY ON BALL.BALLCODE = PTY.BALLCODE WHERE  BALL.COMPETITIONCODE='%@'  AND BALL.MATCHCODE='%@' AND BALL.TEAMCODE='%@' AND BALL.INNINGSNO='%@' AND BALL.OVERNO =(CASE WHEN '%@'  = 1 THEN %@+1 ELSE %@ END) ORDER BY BALL.OVERNO, BALL.BALLNO, BALL.BALLCOUNT;",ISINNINGSLASTOVER,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,ISOVERCOMPLETE,BATTEAMOVERS,BATTEAMOVERS];
+    NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT BALL.BALLCODE, (BALL.OVERNO||'.'|| BALL.BALLNO) AS BALLNO, BWLR.PLAYERNAME BOWLER, STRKR.PLAYERNAME STRIKER, NSTRKR.PLAYERNAME NONSTRIKER,  BT.BOWLTYPE BOWLTYPE, ST.SHOTNAME AS SHOTTYPE, BALL.TOTALRUNS, BALL.TOTALEXTRAS, BALL.OVERNO,BALL.BALLCOUNT,BALL.ISLEGALBALL,BALL.ISFOUR,BALL.ISSIX,BALL.RUNS,BALL.OVERTHROW, BALL.WIDE,BALL.NOBALL,BALL.BYES,BALL.LEGBYES,BALL.GRANDTOTAL,WE.WICKETNO,WE.WICKETTYPE,BALL.MARKEDFOREDIT, PTY.PENALTYRUNS, PTY.PENALTYTYPECODE, %@ AS ISINNINGSLASTOVER, (MR.VIDEOLOCATION || '\' || BALL.VIDEOFILENAME) VIDEOFILEPATH FROM BALLEVENTS BALL INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE = BALL.COMPETITIONCODE AND MR.MATCHCODE = BALL.MATCHCODE INNER JOIN TEAMMASTER TM ON BALL.TEAMCODE = TM.TEAMCODE INNER JOIN PLAYERMASTER BWLR ON BALL.BOWLERCODE=BWLR.PLAYERCODE INNER JOIN PLAYERMASTER STRKR ON BALL.STRIKERCODE = STRKR.PLAYERCODE INNER JOIN PLAYERMASTER NSTRKR ON BALL.NONSTRIKERCODE = NSTRKR.PLAYERCODE LEFT JOIN BOWLTYPE BT ON BALL.BOWLTYPE = BT.BOWLTYPECODE LEFT JOIN SHOTTYPE ST ON BALL.SHOTTYPE = ST.SHOTCODE LEFT JOIN WICKETEVENTS WE ON BALL.BALLCODE = WE.BALLCODE AND WE.ISWICKET = 1 LEFT JOIN PENALTYDETAILS PTY ON BALL.BALLCODE = PTY.BALLCODE WHERE  BALL.COMPETITIONCODE='%@'  AND BALL.MATCHCODE='%@' AND BALL.TEAMCODE='%@' AND BALL.INNINGSNO=%@ AND BALL.OVERNO =(CASE WHEN %@  = 1 THEN %@+1 ELSE %@ END) ORDER BY BALL.OVERNO, BALL.BALLNO, BALL.BALLCOUNT;",ISINNINGSLASTOVER,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,ISOVERCOMPLETE,BATTEAMOVERS,BATTEAMOVERS];
     stmt=[selectPlayersSQL UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         
@@ -2877,20 +2877,17 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             record.objIssix=[self getValueByNull:statement :13];
             record.objRuns=[self getValueByNull:statement :14];
             record.objOverthrow=[self getValueByNull:statement :15];
-            
             record.objWide=[self getValueByNull:statement :16];
             record.objNoball=[self getValueByNull:statement :17];
             record.objByes=[self getValueByNull:statement :18];
             record.objLegByes=[self getValueByNull:statement :19];
             record.objGrandtotal=[self getValueByNull:statement :20];
-            //record.objWicketno=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 21)];
-            //  record.objWicketType=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 22)];
-            //  record.objMarkedforedit=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)];
-            // record.objPenalty=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 24)];
-            
-            // record.objPenaltytypecode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 25)];
-            
-            // record.objVideoFile=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 26)];
+            record.objWicketno=[self getValueByNull:statement :21];
+            record.objWicketType=[self getValueByNull:statement : 22];
+            record.objMarkedforedit=[self getValueByNull:statement : 23];
+            record.objPenalty=[self getValueByNull:statement : 24];
+            record.objPenaltytypecode=[self getValueByNull:statement : 25];
+            record.objVideoFile=[self getValueByNull:statement : 26];
             [eventArray addObject:record];
             
         }
@@ -7660,7 +7657,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"update MATCHEVENTS Set TARGETRUNS ='%@', TARGETOVERS = '%@',TARGETCOMMENTS = '%@' WHERE MATCHCODE='%@' AND COMPETITIONCODE='%@'",targetovers,targetruns,targetcomments,matchCode,competitionCode];
+        NSString *updateSQL = [NSString stringWithFormat:@"update MATCHEVENTS Set TARGETRUNS ='%@', TARGETOVERS = '%@',TARGETCOMMENTS = '%@' WHERE MATCHCODE='%@' AND COMPETITIONCODE='%@'",targetruns,targetovers,targetcomments,matchCode,competitionCode];
         const char *insert_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, insert_stmt,-1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE)

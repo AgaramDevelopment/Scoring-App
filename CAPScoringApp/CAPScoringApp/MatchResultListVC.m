@@ -776,7 +776,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
         flag = NO;
     }
     
-    if(([selectedResultType.RESULTTYPE isEqual:@"Win"] || [selectedResultType.RESULTTYPE isEqual:@"Match Awarded"]) ||  selectedResultType==nil){
+    if(([selectedResultType.RESULTTYPE isEqual:@"Win"] || [selectedResultType.RESULTTYPE isEqual:@"Match Awarded"]) &&  selectedTeam==nil){
         errorMessage = [NSString stringWithFormat:@"%@%@",@"Please select team.\n",errorMessage];
         flag = NO;
     }

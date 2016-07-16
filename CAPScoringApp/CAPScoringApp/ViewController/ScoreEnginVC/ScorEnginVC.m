@@ -143,6 +143,8 @@
     BOOL isPitchmap;
     BOOL ispichmapSelectValue;
     
+    BOOL isWagonwheel;
+    
     NSMutableArray *strickerList;
     NSMutableArray *nonStrickerList;
     
@@ -540,20 +542,35 @@ EditModeVC * objEditModeVc;
                                                              alpha:0.36]];
     
     int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    if(inningsno > 1)
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
     {
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-        
+        if(inningsno > 1)
+        {
+            [_rightSlideArray insertObject:@"CHANGE TEAM" atIndex : 1];
+        }
+        else
+        {
+            [_rightSlideArray insertObject:@"CHANGE TOSS" atIndex : 1];
+        }
     }
-    else{
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    if(![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
+    {
+        [_rightSlideArray removeObjectsInArray:[[NSArray alloc] initWithObjects:@"DECLARE INNINGS",@"END DAY",@"END SESSION",@"FOLLOW ON", nil]];
+        if(inningsno == 2)
+            [_rightSlideArray removeObject : @"REVISED OVERS"];
+        else if(inningsno == 1)
+            [_rightSlideArray removeObject : @"REVISED TARGET"];
     }
-
+    else
+    {
+        [_rightSlideArray removeObjectsInArray:[[NSArray alloc] initWithObjects:@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil]];
+        if (fetchSEPageLoadRecord.BATTEAMWICKETS >= 10)
+            [_rightSlideArray removeObject : @"DECLARE INNINGS"];
+        if (inningsno != 2 || inningsno != 3)
+            [_rightSlideArray removeObject : @"FOLLOW ON"];
+    }
     [self getLastBowlerDetails];
-//    FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
-//    fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
-//    [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode :self.editBallCode];
-    
 }
 
 -(void)getLastBowlerDetails{
@@ -582,6 +599,7 @@ EditModeVC * objEditModeVc;
         self.lbl_last_bowler_sixs.text = @"-";
         self.lbl_last_bowler_strickrate.text = @"-";
     }
+    self.sideviewtable.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 
@@ -2704,19 +2722,18 @@ EditModeVC * objEditModeVc;
     content = [content  isEqual: @"0 NB"] ? @"NB" : content;
     content = [content  isEqual: @"0 WD"] ? @"WD" : content;
     content = [content  isEqual: @"0 RH"] ? @"RH" : content;
-    double singleInstanceWidth = isExtras ? 70 : 47;
+    double singleInstanceWidth = isExtras ? 60 : 40;
     double totalWidth = singleInstanceWidth;
     if (content.length > 5)
         totalWidth = 15 * content.length;
     
-    UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(xposition, 0, totalWidth, 57)];
+    UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(xposition, 0, totalWidth, 50)];
     
     // Border Control
-    UIButton *btnborder = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnborder.frame     = CGRectMake(0, 0, BallTicker.frame.size.width, 47);
+    UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, BallTicker.frame.size.width, 40)];
     btnborder.layer.cornerRadius = btnborder.frame.size.width / 2; // this value vary as per your desire
     btnborder.clipsToBounds = NO;
-    btnborder.layer.borderWidth = 4.5;
+    btnborder.layer.borderWidth = 3.5;
     btnborder.layer.borderColor = [UIColor greenColor].CGColor;
     btnborder.layer.masksToBounds = YES;
     
@@ -2749,10 +2766,10 @@ EditModeVC * objEditModeVc;
     [btnborder setTitleColor:brushFGSplEvents forState:UIControlStateNormal] ;
     btnborder.titleLabel.font = [UIFont systemFontOfSize:20 weight:12];
     
-    UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0, 53, totalWidth, 10)];
+    UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, totalWidth, 10)];
     BallTickerNo.textAlignment = NSTextAlignmentCenter;
     BallTickerNo.font = [UIFont systemFontOfSize:15 weight:10];
-    [BallTickerNo setText:content];
+    [BallTickerNo setText:ballno];
     [BallTickerNo setTextColor:brushFGSplEvents];
     
     
@@ -2765,7 +2782,7 @@ EditModeVC * objEditModeVc;
 - (void) CreateBallTickers: (NSMutableArray *) arrayBallDetails
 {
     [self.view_BallTicker.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    UIScrollView *ScrollViewer = [[UIScrollView alloc] init];
+    UIScrollView *ScrollViewer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [self.view_BallTicker bounds].size.width, 50)];
     CGFloat xposition = 0;
     for (BallEventRecord *drballdetails in arrayBallDetails)
     {
@@ -2875,14 +2892,16 @@ EditModeVC * objEditModeVc;
                                       :isExtras
                                       :isSpecialEvents
                                       :(int)drballdetails.objMarkedforedit == 1
-                                      :[NSString stringWithFormat:@"%i", (int)drballdetails.objBallno]
+                                      :drballdetails.objBallno
                                       :xposition] atIndex:0];
         if (content.length > 5)
             xposition = xposition + 7 + (15 * content.length);
         else
-            xposition = xposition + (isExtras ? 77 : 55);
+            xposition = xposition + (isExtras ? 67 : 47);
     }
+    [ScrollViewer setFrame:CGRectMake(0, 0, xposition, [ScrollViewer bounds].size.height)];
     [ScrollViewer setContentSize:CGSizeMake(xposition, [ScrollViewer bounds].size.height)];
+    [self.view_BallTicker addSubview:ScrollViewer];
 }
 
 -(NSMutableString*) timeLeftSinceDate: (NSDate *) dateT{
@@ -3897,6 +3916,7 @@ EditModeVC * objEditModeVc;
     }
     else if(selectBtnTag.tag==111)
     {
+        if(isWagonwheel == NO){
         [self selectedButtonBg:selectBtnTag];
         // [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
         //[self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
@@ -3941,10 +3961,19 @@ EditModeVC * objEditModeVc;
         self.view_fastBowl.hidden = YES;
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
-        
-        
+    
+        [self DisplayCommentmethod];
+        self.img_WagonWheel.hidden=NO;
+        isWagonwheel=YES;
+        }else{
+            [self unselectedButtonBg:self.btn_wagonwheel];
+            self.img_WagonWheel.hidden=YES;
+            isWagonwheel=NO;
+            
+        }
+
     }
-    [self DisplayCommentmethod];
+    
 }
 
 -(void)DisplayCommentmethod
@@ -5776,6 +5805,9 @@ EditModeVC * objEditModeVc;
 
     isEnableTbl=NO;
     isPitchmap =NO;
+    isWagonwheel=NO;
+   
+   
   //[self unselectedViewBg: self.View_Appeal];
   //[self unselectedViewBg: self.view_lastinstance];
     
@@ -7584,6 +7616,9 @@ EditModeVC * objEditModeVc;
             ChangeTossVC*objChangeTossVC =[[ChangeTossVC alloc]initWithNibName:@"ChangeTossVC" bundle:nil];
             objChangeTossVC.CompitisonCode=self.competitionCode;
             objChangeTossVC.MatchCode   =self.matchCode;
+            objChangeTossVC.objStrickerdetailArray=fetchSEPageLoadRecord.getBattingTeamPlayers;
+            objChangeTossVC.objNonStrikerdetail =fetchSEPageLoadRecord.getBattingTeamPlayers;
+            objChangeTossVC.objBowlingTeamdetail=fetchSEPageLoadRecord.getBowlingTeamPlayers;
             objChangeTossVC.delegate =self;
             
             
@@ -7855,8 +7890,8 @@ EditModeVC * objEditModeVc;
     detail =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
     FixturesRecord *objFixtureRecord=(FixturesRecord*)[self.matchSetUp objectAtIndex:0];
     
-    NSString*teamAcode = fetchSEPageLoadRecord.TEAMACODE;
-    NSString*teamBcode = fetchSEPageLoadRecord.TEAMBCODE;
+    NSString*teamAcode = fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    NSString*teamBcode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
     
     NSString*teamA =  fetchSEPageLoadRecord.BATTEAMNAME;
     NSString*teamB = fetchSEPageLoadRecord.BOWLTEAMNAME;
@@ -7866,6 +7901,7 @@ EditModeVC * objEditModeVc;
     NSString*matchTypeCode = objFixtureRecord.matchTypeCode;
     NSString*overs = objFixtureRecord.overs;
     NSString *MatchStatus = objFixtureRecord.MatchStatus;
+    
     
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -8007,6 +8043,7 @@ EditModeVC * objEditModeVc;
     otherwikcetgricvc.TEAMCODE=fetchSEPageLoadRecord.BATTINGTEAMCODE;
     otherwikcetgricvc.STRIKERCODE=fetchSEPageLoadRecord.strickerPlayerCode;
     otherwikcetgricvc.NONSTRIKERCODE=fetchSEPageLoadRecord.nonstrickerPlayerCode;
+    otherwikcetgricvc.NONSTRIKERNAME=fetchSEPageLoadRecord.nonstrickerPlayerName;
     otherwikcetgricvc.MAXOVER=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS];
     otherwikcetgricvc.MAXBALL=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     otherwikcetgricvc.BALLCOUNT=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
@@ -8187,6 +8224,8 @@ EditModeVC * objEditModeVc;
 
 -(void) revisiedTarget
 {
+    if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
+    {
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -8198,6 +8237,8 @@ EditModeVC * objEditModeVc;
     revisedTarget = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
     revisedTarget.competitionCode=self.competitionCode;
     revisedTarget.matchCode =self.matchCode;
+    revisedTarget.teamCode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    revisedTarget.inningsno=fetchSEPageLoadRecord.INNINGSNO;
     [fullview addSubview:revisedTarget.view];
     
     
@@ -8226,6 +8267,7 @@ EditModeVC * objEditModeVc;
              revisedTarget.view.alpha = 1;
          }
                          completion:nil];
+    }
     }
     
 }
@@ -8661,8 +8703,8 @@ EditModeVC * objEditModeVc;
     
     //team score details display
     _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
-    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
-    _lbl_secIngsTeamName.text = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
+    _lbl_firstIngsTeamName.text = fetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME;
+        _lbl_secIngsTeamName.text = [fetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@""]?fetchSEPageLoadRecord.BOWLTEAMSHORTNAME:fetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
     
     _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)fetchSEPageLoadRecord.BATTEAMRUNS,(unsigned long)fetchSEPageLoadRecord.BATTEAMWICKETS];
     
@@ -8694,13 +8736,13 @@ EditModeVC * objEditModeVc;
     
     
     //all innings details for team A and team B
-    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
-    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
+    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
+    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
     
     
-    _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
-    _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+    _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+    _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
     
     if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
         _lbl_teamASecIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.THIRDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.THIRDINNINGSTOTAL,fetchSEPageLoadRecord.THIRDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.THIRDINNINGSWICKET];
@@ -8811,7 +8853,8 @@ EditModeVC * objEditModeVc;
         isFreeHitBall = ((fetchSEPageLoadRecord.ISFREEHIT == @1) && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE ])? YES:NO;
     //Last Bowler Details
      [self getLastBowlerDetails];
-   
+   //Generate Ball Ticker
+    [self CreateBallTickers : fetchSEPageLoadRecord.BallGridDetails];
 }
 - (IBAction)btn_swap:(id)sender {
     //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
@@ -11763,6 +11806,8 @@ EditModeVC * objEditModeVc;
 ////Revised overs
 //
 -(void) revisedoverview{
+    if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
+    {
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -11820,6 +11865,7 @@ EditModeVC * objEditModeVc;
              revicedOverVc.view.alpha = 1;
          }
                          completion:nil];
+    }
     }
 }
 //
@@ -12247,16 +12293,16 @@ EditModeVC * objEditModeVc;
 -(void) EndInningsBackBtnAction{
     
     [fullview removeFromSuperview];
-    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    if(inningsno > 1)
-    {
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-        
-    }
-    else{
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-    }
-    [self.sideviewtable reloadData];
+//    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
+//    if(inningsno > 1)
+//    {
+//        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+//        
+//    }
+//    else{
+//        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+//    }
+//    [self.sideviewtable reloadData];
 }
 
 -(void) EndInningsSaveBtnAction{

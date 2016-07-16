@@ -176,4 +176,6 @@
 @property(strong,nonatomic)NSString *UMPIRE1NAME;
 @property(strong,nonatomic)NSString *UMPIRE2NAME;
 
+@property(strong,nonatomic)NSMutableArray *BallGridDetails;
+
 @end

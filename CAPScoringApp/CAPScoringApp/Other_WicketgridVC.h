@@ -26,6 +26,7 @@
 @property(strong,nonatomic)NSString *TEAMCODE;
 @property(strong,nonatomic)NSString *STRIKERCODE;
 @property(strong,nonatomic)NSString *NONSTRIKERCODE;
+@property(strong,nonatomic)NSString *NONSTRIKERNAME;
 
 
 @property(nonatomic,strong)NSString *MAXOVER;
