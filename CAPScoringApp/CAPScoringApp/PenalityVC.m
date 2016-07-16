@@ -295,7 +295,7 @@ NSString *penaltytypereasons;
             return YES;
         }
     }
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Invalid Input" message:@"Only numbers are allowed for participant number." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Invalid Input" message:@"Only Numbers Are Allowed For Participant Number." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [av show];
     return NO;
 }//drop down button
