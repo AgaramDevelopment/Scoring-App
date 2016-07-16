@@ -40,6 +40,7 @@
 @property(nonatomic,strong)NSNumber *BATTINGPOSITIONNO;
 
 
+- (IBAction)back_btn:(id)sender;
 
 
 
