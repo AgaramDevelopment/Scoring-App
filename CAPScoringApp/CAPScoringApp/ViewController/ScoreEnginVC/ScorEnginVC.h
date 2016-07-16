@@ -155,7 +155,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_batsmen;
 @property (strong, nonatomic) IBOutlet UILabel *Lbl_batsmen;
 - (IBAction)btn_AppealSave:(id)sender;
-@property (strong, nonatomic) IBOutlet UITextField *comments_txt;
+//@property (strong, nonatomic) IBOutlet UITextField *comments_txt;
 
 @property(nonatomic,strong) IBOutlet UITextView * txt_Commantry;
 
@@ -163,6 +163,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tbl_bowlType;
 @property (weak, nonatomic) IBOutlet UIView *view_bowlType;
 
+@property (strong, nonatomic) IBOutlet UITextView *comments_txt;
 
 
 //fast bowl type

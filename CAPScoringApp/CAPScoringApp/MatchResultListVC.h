@@ -7,11 +7,19 @@
 //
 
 #import <UIKit/UIKit.h>
+@protocol MatchResultListVCDelagate <NSObject>
+@required
+
+- (void) MatchResultFinishBtnAction;
+
+
+@end
 
 @interface MatchResultListVC : UIViewController
 
 
 
+@property(nonatomic,strong) id <MatchResultListVCDelagate> delegate;
 - (IBAction)btn_back:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_result_type;
 - (IBAction)btn_result_type:(id)sender;
