@@ -6277,7 +6277,7 @@
                                                                     <rect key="frame" x="8" y="5" width="54" height="55"/>
                                                                 </variation>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubm-A6-sWI">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SPIN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ubm-A6-sWI">
                                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                                 <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -6344,10 +6344,10 @@
                                                                     <rect key="frame" x="8" y="5" width="54" height="55"/>
                                                                 </variation>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Aggressive" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaV-4Z-GGF">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AGGRESSIVE" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FaV-4Z-GGF">
                                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="16"/>
+                                                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="14"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
@@ -6540,7 +6540,7 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="appeal" translatesAutoresizingMaskIntoConstraints="NO" id="o36-iY-HxU">
                                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                                 <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                                                    <rect key="frame" x="8" y="5" width="54" height="55"/>
+                                                                    <rect key="frame" x="8" y="0.0" width="54" height="55"/>
                                                                 </variation>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="APPEALS" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L41-Wm-5GM">
@@ -6549,7 +6549,7 @@
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                                                    <rect key="frame" x="0.0" y="60" width="70" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="55" width="70" height="21"/>
                                                                 </variation>
                                                             </label>
                                                         </subviews>
@@ -6573,16 +6573,16 @@
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="lastInstance" translatesAutoresizingMaskIntoConstraints="NO" id="aJC-ox-akr">
                                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                                 <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                                                    <rect key="frame" x="8" y="5" width="54" height="55"/>
+                                                                    <rect key="frame" x="8" y="0.0" width="54" height="53"/>
                                                                 </variation>
                                                             </imageView>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAST INSTANCE" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ps1-5g-d9S">
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LAST INSTANCE" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ps1-5g-d9S">
                                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
-                                                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="13"/>
+                                                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="14"/>
                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <variation key="heightClass=regular-widthClass=regular" fixedFrame="YES">
-                                                                    <rect key="frame" x="0.0" y="60" width="70" height="21"/>
+                                                                    <rect key="frame" x="0.0" y="51" width="70" height="25"/>
                                                                 </variation>
                                                             </label>
                                                         </subviews>
@@ -9271,6 +9271,7 @@
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="IPR-0I-ohj">
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>

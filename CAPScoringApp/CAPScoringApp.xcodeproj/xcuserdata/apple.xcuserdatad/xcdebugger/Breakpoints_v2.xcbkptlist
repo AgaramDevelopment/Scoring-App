@@ -671,7 +671,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "7680"
             endingLineNumber = "7680"
-            landmarkName = "-ENDDAY"
+            landmarkName = "-ENDINNINGS"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -831,7 +831,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "7557"
             endingLineNumber = "7557"
-            landmarkName = "-ChangeTeam"
+            landmarkName = "-BreakviewMethod"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
