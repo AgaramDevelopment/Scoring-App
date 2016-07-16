@@ -16,6 +16,7 @@
 
 @interface ScoreCardVC (){
     CustomNavigationVC *objCustomNavigation;
+    
 }
 @end
 
@@ -25,6 +26,9 @@
 @synthesize matchCode;
 @synthesize inningsNo;
 @synthesize RunRate;
+@synthesize selectedPlayerFilterArray;
+@synthesize selectedPlayerArray;
+
 FetchScorecard *fetchScorecard ;
 FetchSEPageLoadRecord *fetchSEpage;
 
@@ -109,7 +113,7 @@ int bowlerPostion = 0;
     
 [self.btn_sec_inns_id setTitle: [NSString stringWithFormat:@"%@ 1st INNS",fetchScorecard.BOWLINGTEAMNAME] forState: UIControlStateNormal];
     
-    
+    [self teamLogo];
 }
 
 -(void) setInitView{
@@ -342,8 +346,9 @@ int bowlerPostion = 0;
     return 70;
 }
 
-//-(void)teamLogo{
-//    //logo image
+-(void)teamLogo{
+    //logo image
+    
 //    NSMutableArray *teamCode = [[NSMutableArray alloc]init];
 //
 //    [teamCode addObject:@"TEA0000005"];
@@ -356,47 +361,48 @@ int bowlerPostion = 0;
 //        [self addImageInAppDocumentLocation:[teamCode objectAtIndex:i]];
 //    }
 //
-//
-//
-//    NSMutableArray *mTeam = [[NSMutableArray alloc]init];
-//    [mTeam addObject:self.matchCode];
-//    [mTeam addObject:self.teamAcode];
-//
-//
-//    self.selectedTeamFilterArray = [[NSMutableArray alloc]initWithArray: self.selectedTeamArray];
-//
-//
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir,self.teamAcode];
-//
-//
-//    BOOL isFileExist = [fileManager fileExistsAtPath:pngFilePath];
-//    UIImage *img;
-//    if(isFileExist){
-//        img = [UIImage imageWithContentsOfFile:pngFilePath];
-//        self.img_firstIngsTeamName.image = img;
-//    }else{
-//        img  = [UIImage imageNamed: @"no_image.png"];
-//        _img_firstIngsTeamName.image = img;
-//    }
-//
-//
-//
-//
-//    NSFileManager *fileManagerB = [NSFileManager defaultManager];
-//    NSString *docDirB = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-//    NSString *pngFilePathB = [NSString stringWithFormat:@"%@/%@.png", docDirB,self.teamBcode];
-//    BOOL isFileExistB = [fileManagerB fileExistsAtPath:pngFilePathB];
-//    UIImage *imgB;
-//    if(isFileExistB){
-//        imgB = [UIImage imageWithContentsOfFile:pngFilePathB];
-//        _img_secIngsTeamName.image = imgB;
-//    }else{
-//        imgB  = [UIImage imageNamed: @"no_image.png"];
-//        _img_secIngsTeamName.image = imgB;
-//    }
-//}
+
+
+    NSMutableArray *mTeam = [[NSMutableArray alloc]init];
+    [mTeam addObject:self.matchCode];
+    [mTeam addObject:fetchScorecard.CURRENTBATTINGTEAMCODE];
+
+
+    selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: selectedPlayerArray];
+
+
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir,fetchScorecard.CURRENTBATTINGTEAMCODE];
+
+
+    BOOL isFileExist = [fileManager fileExistsAtPath:pngFilePath];
+    UIImage *img;
+    if(isFileExist){
+        img = [UIImage imageWithContentsOfFile:pngFilePath];
+        self.img_firstIngsTeamName.image = img;
+    }else{
+        img  = [UIImage imageNamed: @"no_image.png"];
+        _img_firstIngsTeamName.image = img;
+    }
+
+
+
+    NSFileManager *fileManagerB = [NSFileManager defaultManager];
+    NSString *docDirB = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *pngFilePathB = [NSString stringWithFormat:@"%@/%@.png", docDirB,fetchScorecard.CURRENTBOWLINGTEAMCODE];
+    BOOL isFileExistB = [fileManagerB fileExistsAtPath:pngFilePathB];
+    UIImage *imgB;
+    if(isFileExistB){
+        imgB = [UIImage imageWithContentsOfFile:pngFilePathB];
+        _img_secIngsTeamName.image = imgB;
+    }else{
+        imgB  = [UIImage imageNamed: @"no_image.png"];
+        _img_secIngsTeamName.image = imgB;
+    }
+}
+
+
 //-(void) addImageInAppDocumentLocation:(NSString*) fileName{
 //
 //    BOOL success = [self checkFileExist:fileName];
@@ -420,15 +426,17 @@ int bowlerPostion = 0;
 //        }
 //    }
 //}
-//
-////Check given file name exist in document directory
-//- (BOOL) checkFileExist:(NSString*) fileName{
-//    NSFileManager *fileManager = [NSFileManager defaultManager];
-//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
-//    NSString *documentsDir = [paths objectAtIndex:0];
-//    NSString *filePath = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]];
-//    return [fileManager fileExistsAtPath:filePath];
-//}
+
+
+//Check given file name exist in document directory
+- (BOOL) checkFileExist:(NSString*) fileName{
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
+    NSString *documentsDir = [paths objectAtIndex:0];
+    NSString *filePath = [documentsDir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]];
+    return [fileManager fileExistsAtPath:filePath];
+}
+
 
 - (IBAction)btn_fst_inns_action:(id)sender {
     self.lbl_strip.constant=0;

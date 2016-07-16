@@ -323,7 +323,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                           reuseIdentifier:MyIdentifier3];
         }
-        objTossDeatilsRecord=(TossDeatilsEvent*)[StrikerArray objectAtIndex:indexPath.row];
+        objTossDeatilsRecord=(TossDeatilsEvent*)[nonStrikerArray objectAtIndex:indexPath.row];
         
         cell.textLabel.text =objTossDeatilsRecord.PlaerNameStrike_nonStrike;
         return cell;
@@ -423,7 +423,7 @@
     if (tableView == self.nonStriker_table)
     {
         NonStrikerselectindexarray=[[NSMutableArray alloc]init];
-        objTossDeatilsRecord=(TossDeatilsEvent*)[StrikerArray objectAtIndex:indexPath.row];
+        objTossDeatilsRecord=(TossDeatilsEvent*)[nonStrikerArray objectAtIndex:indexPath.row];
         if(![StrikerCode isEqualToString: objTossDeatilsRecord.PlaercodeStrike_nonStrike])
         {
             self.nonStriker_lbl.text =objTossDeatilsRecord.PlaerNameStrike_nonStrike;
@@ -735,13 +735,11 @@
 - (IBAction)Btn_Proceed:(id)sender {
     
     
-   if([self.Wonby_lbl.text isEqualToString:@""],[self.electedTo_lbl.text isEqualToString:@""],[self.Striker_lbl.text isEqualToString:@""],[self.nonStriker_lbl.text isEqualToString:@""],[self.Bowler_lbl.text isEqualToString:@""])
-       
-   {  [self ShowAlterView:@"Please Select Team\n Please Select ElectedTo Please Select Stricker Please Select NonStriker Please Select Bowler"];
-       
-   }
-    
-     else if([self.Wonby_lbl.text isEqualToString:@""] || self.Wonby_lbl.text==nil)
+    if([self.Wonby_lbl.text isEqualToString:@""] || self.Wonby_lbl.text==nil && [self.electedTo_lbl.text isEqualToString:@""] || self.electedTo_lbl.text==nil && [self.Striker_lbl.text isEqualToString:@""] || self.Striker_lbl.text==nil && [self.nonStriker_lbl.text isEqualToString:@""] || self.nonStriker_lbl.text==nil && [self.Bowler_lbl.text isEqualToString:@""] || self.Bowler_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Team,ElectedTo,Striker,NonStriker And Bowler"];
+    }
+    else if([self.Wonby_lbl.text isEqualToString:@""] || self.Wonby_lbl.text==nil)
     {
         [self ShowAlterView:@"Please Select Team"];
     }
@@ -751,7 +749,7 @@
     }
     else if([self.Striker_lbl.text isEqualToString:@""] || self.Striker_lbl.text==nil)
     {
-        [self ShowAlterView:@"Please Select Stricker"];
+        [self ShowAlterView:@"Please Select Striker"];
     }
     else if([self.nonStriker_lbl.text isEqualToString:@""] || self.nonStriker_lbl.text==nil)
     {
@@ -796,28 +794,9 @@
         scoreEngine.matchTypeCode = self.matchTypeCode;
         
         [self.navigationController pushViewController:scoreEngine animated:YES];
-        // NSLog(@"user pressed Button Indexed 0");
-        //                UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        //
-        //                ScorEnginVC *scoreEngine =(ScorEnginVC*) [storyBoard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
-        //               scoreEngine.matchCode=self.MATCHCODE;
-        //               scoreEngine.competitionCode=self.CompetitionCode;
-        //              // scoreEngine.strikerArray  =Strikerselectindexarray;
-        //            //scoreEngine.non_StrikerArray =NonStrikerselectindexarray;
-        //                //Fixvc.CompitionCode=selectindexarray;
-        //                [scoreEngine setModalPresentationStyle:UIModalPresentationFullScreen];
-        //                [self presentViewController:scoreEngine animated:NO completion:nil];
+       
     }
-    //        else
-    //        {
-    //            NSLog(@"user pressed Button Indexed 1");
-    //            UIStoryboard *storyBoard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    //
-    //            TossDetailsVC *toss =(TossDetailsVC*) [storyBoard instantiateViewControllerWithIdentifier:@"TossDetails"];
-    //            //Fixvc.CompitionCode=selectindexarray;
-    //            [toss setModalPresentationStyle:UIModalPresentationFullScreen];
-    //            [self presentViewController:toss animated:NO completion:nil];
-    //        }
+   
 }
 
 
