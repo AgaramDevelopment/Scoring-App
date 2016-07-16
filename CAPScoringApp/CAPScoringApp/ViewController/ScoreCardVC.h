@@ -121,6 +121,8 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btn_sec_inn_x;
 - (IBAction)btn_back:(id)sender;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btn_fst_inn_width;
+@property (nonatomic,strong) NSMutableArray *selectedPlayerFilterArray;
+@property (nonatomic,strong) NSMutableArray *selectedPlayerArray;
 
 
 @end
