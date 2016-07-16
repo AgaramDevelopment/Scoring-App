@@ -7893,8 +7893,8 @@ EditModeVC * objEditModeVc;
     NSString*teamAcode = fetchSEPageLoadRecord.BATTINGTEAMCODE;
     NSString*teamBcode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
     
-    NSString*teamA =  fetchSEPageLoadRecord.BATTEAMNAME;
-    NSString*teamB = fetchSEPageLoadRecord.BOWLTEAMNAME;
+    NSString*teamA =  fetchSEPageLoadRecord.BATTEAMSHORTNAME;
+    NSString*teamB = fetchSEPageLoadRecord.BOWLTEAMSHORTNAME;
     NSString*matchType = objFixtureRecord.matchTypeName;
     NSString*matchCode = self.matchCode;
     NSString*competitionCode = self.competitionCode;
