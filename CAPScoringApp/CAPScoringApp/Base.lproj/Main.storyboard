@@ -7167,7 +7167,7 @@
                                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Cell" rowHeight="47" id="my8-G3-PdY" customClass="AppealCell">
                                                                         <autoresizingMask key="autoresizingMask"/>
                                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="my8-G3-PdY" id="yzF-ob-8uq">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="47"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="240" height="46"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4T9-MU-sOI">
@@ -7603,7 +7603,7 @@
                                                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="width" constant="150" id="CSa-KK-MP2">
-                                                                                        <variation key="heightClass=regular-widthClass=regular" constant="168"/>
+                                                                                        <variation key="heightClass=regular-widthClass=regular" constant="175"/>
                                                                                     </constraint>
                                                                                     <constraint firstAttribute="height" constant="27" id="p31-E3-4yk"/>
                                                                                 </constraints>
@@ -7628,7 +7628,7 @@
                                                                                 <constraints>
                                                                                     <constraint firstAttribute="height" constant="27" id="8of-az-2oP"/>
                                                                                     <constraint firstAttribute="width" constant="150" id="NTH-Ce-LxG">
-                                                                                        <variation key="heightClass=regular-widthClass=regular" constant="163"/>
+                                                                                        <variation key="heightClass=regular-widthClass=regular" constant="171"/>
                                                                                     </constraint>
                                                                                 </constraints>
                                                                                 <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
