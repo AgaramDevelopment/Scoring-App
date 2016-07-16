@@ -11820,8 +11820,7 @@ self.lbl_umpirename.text=@"";
 ////Revised overs
 //
 -(void) revisedoverview{
-    if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])
-    {
+    
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -11836,39 +11835,17 @@ self.lbl_umpirename.text=@"";
     // revicedOverVc.inningsNo = self.;
     [fullview addSubview:revicedOverVc.view];
     
-    //[revicedOverVc.btn_submit addTarget:self action:@selector(btn_submit:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
     if (IS_IPAD_PRO) {
-        
-        
-        
-        
-        //vc2 *viewController = [[vc2 alloc]init];
-        
-        
         revicedOverVc.view.frame =CGRectMake(250, 500, revicedOverVc.view.frame.size.width, revicedOverVc.view.frame.size.height);
-        //[self.view addSubview:BreakVC.view];
         revicedOverVc.view.alpha = 0;
-        
         [revicedOverVc didMoveToParentViewController:self];
-        
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
              revicedOverVc.view.alpha = 1;
          }
                          completion:nil];
     }
-    
-    
     else{
-        //intialBreakVC *add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
-        
-        
-        
-        //vc2 *viewController = [[vc2 alloc]init];
-        // [self addChildViewController:add];
-        
         revicedOverVc.view.frame =CGRectMake(100, 200, revicedOverVc.view.frame.size.width, revicedOverVc.view.frame.size.height);
         //[self.view addSubview:add.view];
         revicedOverVc.view.alpha = 0;
@@ -11879,7 +11856,6 @@ self.lbl_umpirename.text=@"";
              revicedOverVc.view.alpha = 1;
          }
                          completion:nil];
-    }
     }
 }
 //
