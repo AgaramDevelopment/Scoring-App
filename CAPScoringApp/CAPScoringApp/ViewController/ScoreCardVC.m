@@ -47,7 +47,7 @@ int bowlerPostion = 0;
     
     
     fetchScorecard = [[FetchScorecard alloc]init];
-    [fetchScorecard FetchScoreBoard:competitionCode :matchCode :inningsNo];
+    [fetchScorecard FetchScoreBoard:competitionCode :matchCode :@"1"];
     
     
     
@@ -106,6 +106,9 @@ int bowlerPostion = 0;
 [self.btn_sec_inns_id setTitle: [NSString stringWithFormat:@"%@ 1st INNS",fetchScorecard.BOWLINGTEAMNAME] forState: UIControlStateNormal];
     
     [self teamLogo];
+    
+    
+
 }
 
 -(void) setInitView{
@@ -336,20 +339,6 @@ int bowlerPostion = 0;
 }
 
 -(void)teamLogo{
-    //logo image
-    
-//    NSMutableArray *teamCode = [[NSMutableArray alloc]init];
-//
-//    [teamCode addObject:@"TEA0000005"];
-//    [teamCode addObject:@"TEA0000006"];
-//    [teamCode addObject:@"TEA0000008"];
-//
-//
-//    for(int i=0;i<[teamCode count];i++){
-//
-//        [self addImageInAppDocumentLocation:[teamCode objectAtIndex:i]];
-//    }
-//
 
 
     NSMutableArray *mTeam = [[NSMutableArray alloc]init];
@@ -391,30 +380,6 @@ int bowlerPostion = 0;
     }
 }
 
-
-//-(void) addImageInAppDocumentLocation:(NSString*) fileName{
-//
-//    BOOL success = [self checkFileExist:fileName];
-//
-//    if(!success) {//If file not exist
-//
-//        UIImage  *newImage = [UIImage imageNamed:fileName];
-//        NSData *imageData = UIImagePNGRepresentation(newImage);
-//
-//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSString *documentsDirectory = [paths objectAtIndex:0];
-//
-//        NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]];
-//
-//        if (![imageData writeToFile:imagePath atomically:NO])
-//        {
-//            NSLog((@"Failed to cache image data to disk"));
-//        }else
-//        {
-//            NSLog(@"the cachedImagedPath is %@",imagePath);
-//        }
-//    }
-//}
 
 
 //Check given file name exist in document directory

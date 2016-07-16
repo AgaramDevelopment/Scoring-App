@@ -12321,12 +12321,21 @@ self.lbl_umpirename.text=@"";
 
 -(void) EndInningsSaveBtnAction{
     
-    [fullview removeFromSuperview];
-    ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
-    Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
-    // Archivevc.matchCode=self.matchCode;
-    Archivevc.CompitionCode=self.competitionCode;
-    [self.navigationController pushViewController:Archivevc animated:YES];
+ 
+    if ([_matchTypeCode isEqualToString:@"MSC022"] || [_matchTypeCode isEqualToString:@"MSC024"] || [_matchTypeCode isEqualToString:@"MSC116"] || [_matchTypeCode isEqualToString:@"MSC115"] && [fetchSEPageLoadRecord.INNINGSNO isEqualToString:@"2"]) {
+        
+        [self MatchResult];
+         [fullview removeFromSuperview];
+        
+    }else{
+        
+        [fullview removeFromSuperview];
+        ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
+        Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+        // Archivevc.matchCode=self.matchCode;
+        Archivevc.CompitionCode=self.competitionCode;
+        [self.navigationController pushViewController:Archivevc animated:YES];
+    }
 }
 
 -(void)declareSaveBtnAction{
