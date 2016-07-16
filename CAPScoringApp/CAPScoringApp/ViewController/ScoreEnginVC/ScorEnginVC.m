@@ -542,20 +542,35 @@ EditModeVC * objEditModeVc;
                                                              alpha:0.36]];
     
     int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    if(inningsno > 1)
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
     {
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-        
+        if(inningsno > 1)
+        {
+            [_rightSlideArray insertObject:@"CHANGE TEAM" atIndex : 1];
+        }
+        else
+        {
+            [_rightSlideArray insertObject:@"CHANGE TOSS" atIndex : 1];
+        }
     }
-    else{
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    if(![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
+    {
+        [_rightSlideArray removeObjectsInArray:[[NSArray alloc] initWithObjects:@"DECLARE INNINGS",@"END DAY",@"END SESSION",@"FOLLOW ON", nil]];
+        if(inningsno == 2)
+            [_rightSlideArray removeObject : @"REVISED OVERS"];
+        else if(inningsno == 1)
+            [_rightSlideArray removeObject : @"REVISED TARGET"];
     }
-
+    else
+    {
+        [_rightSlideArray removeObjectsInArray:[[NSArray alloc] initWithObjects:@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil]];
+        if (fetchSEPageLoadRecord.BATTEAMWICKETS >= 10)
+            [_rightSlideArray removeObject : @"DECLARE INNINGS"];
+        if (inningsno != 2 || inningsno != 3)
+            [_rightSlideArray removeObject : @"FOLLOW ON"];
+    }
     [self getLastBowlerDetails];
-//    FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
-//    fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
-//    [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode :self.editBallCode];
-    
 }
 
 -(void)getLastBowlerDetails{
@@ -2707,19 +2722,18 @@ EditModeVC * objEditModeVc;
     content = [content  isEqual: @"0 NB"] ? @"NB" : content;
     content = [content  isEqual: @"0 WD"] ? @"WD" : content;
     content = [content  isEqual: @"0 RH"] ? @"RH" : content;
-    double singleInstanceWidth = isExtras ? 70 : 47;
+    double singleInstanceWidth = isExtras ? 60 : 40;
     double totalWidth = singleInstanceWidth;
     if (content.length > 5)
         totalWidth = 15 * content.length;
     
-    UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(xposition, 0, totalWidth, 57)];
+    UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(xposition, 0, totalWidth, 50)];
     
     // Border Control
-    UIButton *btnborder = [UIButton buttonWithType:UIButtonTypeCustom];
-    btnborder.frame     = CGRectMake(0, 0, BallTicker.frame.size.width, 47);
+    UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, BallTicker.frame.size.width, 40)];
     btnborder.layer.cornerRadius = btnborder.frame.size.width / 2; // this value vary as per your desire
     btnborder.clipsToBounds = NO;
-    btnborder.layer.borderWidth = 4.5;
+    btnborder.layer.borderWidth = 3.5;
     btnborder.layer.borderColor = [UIColor greenColor].CGColor;
     btnborder.layer.masksToBounds = YES;
     
@@ -2752,10 +2766,10 @@ EditModeVC * objEditModeVc;
     [btnborder setTitleColor:brushFGSplEvents forState:UIControlStateNormal] ;
     btnborder.titleLabel.font = [UIFont systemFontOfSize:20 weight:12];
     
-    UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0, 53, totalWidth, 10)];
+    UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, totalWidth, 10)];
     BallTickerNo.textAlignment = NSTextAlignmentCenter;
     BallTickerNo.font = [UIFont systemFontOfSize:15 weight:10];
-    [BallTickerNo setText:content];
+    [BallTickerNo setText:ballno];
     [BallTickerNo setTextColor:brushFGSplEvents];
     
     
@@ -2768,7 +2782,7 @@ EditModeVC * objEditModeVc;
 - (void) CreateBallTickers: (NSMutableArray *) arrayBallDetails
 {
     [self.view_BallTicker.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    UIScrollView *ScrollViewer = [[UIScrollView alloc] init];
+    UIScrollView *ScrollViewer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [self.view_BallTicker bounds].size.width, 50)];
     CGFloat xposition = 0;
     for (BallEventRecord *drballdetails in arrayBallDetails)
     {
@@ -2878,14 +2892,16 @@ EditModeVC * objEditModeVc;
                                       :isExtras
                                       :isSpecialEvents
                                       :(int)drballdetails.objMarkedforedit == 1
-                                      :[NSString stringWithFormat:@"%i", (int)drballdetails.objBallno]
+                                      :drballdetails.objBallno
                                       :xposition] atIndex:0];
         if (content.length > 5)
             xposition = xposition + 7 + (15 * content.length);
         else
-            xposition = xposition + (isExtras ? 77 : 55);
+            xposition = xposition + (isExtras ? 67 : 47);
     }
+    [ScrollViewer setFrame:CGRectMake(0, 0, xposition, [ScrollViewer bounds].size.height)];
     [ScrollViewer setContentSize:CGSizeMake(xposition, [ScrollViewer bounds].size.height)];
+    [self.view_BallTicker addSubview:ScrollViewer];
 }
 
 -(NSMutableString*) timeLeftSinceDate: (NSDate *) dateT{
@@ -8837,7 +8853,8 @@ EditModeVC * objEditModeVc;
         isFreeHitBall = ((fetchSEPageLoadRecord.ISFREEHIT == @1) && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE ])? YES:NO;
     //Last Bowler Details
      [self getLastBowlerDetails];
-   
+   //Generate Ball Ticker
+    [self CreateBallTickers : fetchSEPageLoadRecord.BallGridDetails];
 }
 - (IBAction)btn_swap:(id)sender {
     //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
@@ -12276,16 +12293,16 @@ EditModeVC * objEditModeVc;
 -(void) EndInningsBackBtnAction{
     
     [fullview removeFromSuperview];
-    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    if(inningsno > 1)
-    {
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-        
-    }
-    else{
-        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
-    }
-    [self.sideviewtable reloadData];
+//    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
+//    if(inningsno > 1)
+//    {
+//        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TEAM",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+//        
+//    }
+//    else{
+//        _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"CHANGE TOSS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+//    }
+//    [self.sideviewtable reloadData];
 }
 
 -(void) EndInningsSaveBtnAction{
