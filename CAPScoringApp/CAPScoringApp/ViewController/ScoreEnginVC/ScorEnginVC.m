@@ -6462,75 +6462,75 @@ EditModeVC * objEditModeVc;
     
     
     if(leftSlideSwipe == YES){
-        
-        if(indexPath.row == 0)
+     NSString *SelectedMatchEvent = (NSString*)[_rightSlideArray objectAtIndex:indexPath.row];
+        if([SelectedMatchEvent isEqualToString : @"BREAK"])
         {
             NSLog(@"1");
             
             [self BreakviewMethod];
         }
-        else if(indexPath.row == 1)
+        else if([SelectedMatchEvent isEqualToString : @"CHANGE TEAM"] || [SelectedMatchEvent isEqualToString : @"CHANGE TOSS"])
         {
             NSLog(@"2");
             [self ChangeTeam];
         }
-        else if(indexPath.row == 2)
+        else if([SelectedMatchEvent isEqualToString : @"DECLARE INNINGS"])
         {
             NSLog(@"3");
             [self DeclearINNINGS];
         }
-        else if(indexPath.row == 3)
+        else if([SelectedMatchEvent isEqualToString : @"END DAY"])
         {
             NSLog(@"4");
             [self ENDDAY];
         }
-        else if(indexPath.row == 4)
+        else if([SelectedMatchEvent isEqualToString : @"END INNINGS"])
         {
             NSLog(@"5");
             [self ENDINNINGS];
         }
-        else if(indexPath.row == 5)
+        else if([SelectedMatchEvent isEqualToString : @"END SESSION"])
         {
             NSLog(@"6");
             [self ENDSession];
         }
-        else if(indexPath.row == 6)
+        else if([SelectedMatchEvent isEqualToString : @"FOLLOW ON"])
         {
             NSLog(@"7");
             [self FollowOn];
         }
-        else if(indexPath.row == 7)
+        else if([SelectedMatchEvent isEqualToString : @"PLAYING XI EDIT"])
         {
             NSLog(@"8");
             [self matchInfoEdit];
         }
-        else if(indexPath.row == 8)
+        else if([SelectedMatchEvent isEqualToString : @"MATCH RESULTS"])
         {
             NSLog(@"9");
             [self MatchResult];
         }
-        else if(indexPath.row == 9)
+        else if([SelectedMatchEvent isEqualToString : @"OTHER WICKETS"])
         {
             NSLog(@"10");
             [self OtherWicket];
         }
-        else if(indexPath.row == 10)
+        else if([SelectedMatchEvent isEqualToString : @"PENALTY"])
         {
             NSLog(@"11");
             [self Penalty];
         }
         
-        else if(indexPath.row == 11)
+        else if([SelectedMatchEvent isEqualToString : @"POWER PLAY"])
         {
             NSLog(@"12");
             [self PowerPlay];
         }
-        else if(indexPath.row == 12)
+        else if([SelectedMatchEvent isEqualToString : @"REVISED OVERS"])
         {
             NSLog(@"13");
             [self revisedoverview];
         }
-        else if(indexPath.row == 13)
+        else if([SelectedMatchEvent isEqualToString : @"REVISED TARGET"])
         {
             NSLog(@"14");
             [self revisiedTarget];
