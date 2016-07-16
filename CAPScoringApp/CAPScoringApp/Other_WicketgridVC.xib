@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1713" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="RAJDHANI-BOLD.TTF">
@@ -71,15 +71,28 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uwc-Av-XjV">
+                                    <rect key="frame" x="8" y="8" width="75" height="52"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="75" id="c9v-e4-DX1"/>
+                                        <constraint firstAttribute="height" constant="52" id="ge2-1g-MCR"/>
+                                    </constraints>
+                                    <state key="normal" image="ico-back-btn"/>
+                                    <connections>
+                                        <action selector="back_btn:" destination="-1" eventType="touchUpInside" id="3To-ar-2lg"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" red="0.1647058824" green="0.24313725489999999" blue="0.62745098040000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="75" id="5uj-L7-pAR"/>
                                 <constraint firstItem="Wtk-q0-fbU" firstAttribute="top" secondItem="UeC-DR-nVA" secondAttribute="top" constant="26" id="7UD-TU-VHV"/>
                                 <constraint firstItem="Wtk-q0-fbU" firstAttribute="leading" secondItem="ZAG-jy-eei" secondAttribute="trailing" constant="1" id="G6d-hv-mu4"/>
+                                <constraint firstItem="uwc-Av-XjV" firstAttribute="top" secondItem="UeC-DR-nVA" secondAttribute="top" constant="8" id="Hv0-dL-6bj"/>
                                 <constraint firstAttribute="trailing" secondItem="j2u-dD-HVg" secondAttribute="trailing" id="OCD-0F-xSe"/>
                                 <constraint firstItem="ZAG-jy-eei" firstAttribute="centerX" secondItem="UeC-DR-nVA" secondAttribute="centerX" id="VLE-P1-IHy"/>
                                 <constraint firstItem="ZAG-jy-eei" firstAttribute="top" secondItem="UeC-DR-nVA" secondAttribute="top" constant="15" id="ilv-sM-Wpj"/>
+                                <constraint firstItem="uwc-Av-XjV" firstAttribute="leading" secondItem="UeC-DR-nVA" secondAttribute="leading" constant="8" id="jBL-DM-yRo"/>
                                 <constraint firstItem="j2u-dD-HVg" firstAttribute="top" secondItem="UeC-DR-nVA" secondAttribute="top" constant="15" id="zRz-8p-IAD"/>
                             </constraints>
                         </view>
@@ -163,5 +176,6 @@
     <resources>
         <image name="BackgroundImg" width="2048" height="2732"/>
         <image name="ico-add" width="32" height="32"/>
+        <image name="ico-back-btn" width="30" height="30"/>
     </resources>
 </document>

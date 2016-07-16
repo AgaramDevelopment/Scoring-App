@@ -61,6 +61,16 @@ SelectPlayerRecord *selectedMostValuPlayer;
     [self.view layoutIfNeeded];
     self.scroll_view.contentSize = CGSizeMake(self.view.frame.size.width, 850);
     
+//    selectedResultType = nil;
+//    selectedTeam = nil;
+//     selectedManOfTheMatch = nil;
+//     selectedManOfTheSeries = nil;
+//     selectedBestBatsman = nil;
+//     selectedBestBowler = nil;
+//     selectedBestAllRounder = nil;
+//     selectedMostValuPlayer = nil;
+//
+//    
     _scroll_view.scrollEnabled = YES;
     selectedTablePostition = 0;
 //    isTableOpen = NO;
@@ -206,65 +216,66 @@ SelectPlayerRecord *selectedMostValuPlayer;
         [self.btn_revert_id.layer setBackgroundColor:[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:(1)].CGColor];
                 _btn_revert_id.userInteractionEnabled = YES;
 
-        
-        
-    }else{
-        [self.btn_revert_id.layer setBackgroundColor:[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:(1)].CGColor];
-      
-    }
-    
-    if([ fetchMatchResult.GetBestPlayerDetails count]>0){
-        GetBestPlayerDetail *playerDetail = [fetchMatchResult.GetBestPlayerDetails objectAtIndex:0];
-        
-        _lbl_man_of_the_series.text = [playerDetail.MANOFTHESERIES  isEqual: @""]?@"Select":playerDetail.MANOFTHESERIES;
-        _lbl_select_best_batsman.text = [playerDetail.BESTBATSMAN  isEqual: @""]?@"Select":playerDetail.BESTBATSMAN;
-        _lbl_select_best_bowler.text = [playerDetail.BESTBOWLER isEqual: @""]?@"Select":playerDetail.BESTBOWLER;
-        _lbl_select_allrounder.text = [playerDetail.BESTALLROUNDER isEqual: @""]?@"Select":playerDetail.BESTALLROUNDER;
-        _lbl_select_most_valu_player.text = [playerDetail.MOSTVALUABLEPLAYER isEqual: @""]?@"Select":playerDetail.MOSTVALUABLEPLAYER;
-        
-        
-        for(int i=0;i<[fetchMatchResult.GetManOfTheSeriesDetails count];i++){
-            SelectPlayerRecord *data = [fetchMatchResult.GetManOfTheSeriesDetails objectAtIndex:i];
-            if([playerDetail.MANOFTHESERIES isEqual:data.playerName]){
-                selectedManOfTheSeries = data;
-                break;
+        if([ fetchMatchResult.GetBestPlayerDetails count]>0){
+            GetBestPlayerDetail *playerDetail = [fetchMatchResult.GetBestPlayerDetails objectAtIndex:0];
+            
+            _lbl_man_of_the_series.text = [playerDetail.MANOFTHESERIES  isEqual: @""]?@"Select":playerDetail.MANOFTHESERIES;
+            _lbl_select_best_batsman.text = [playerDetail.BESTBATSMAN  isEqual: @""]?@"Select":playerDetail.BESTBATSMAN;
+            _lbl_select_best_bowler.text = [playerDetail.BESTBOWLER isEqual: @""]?@"Select":playerDetail.BESTBOWLER;
+            _lbl_select_allrounder.text = [playerDetail.BESTALLROUNDER isEqual: @""]?@"Select":playerDetail.BESTALLROUNDER;
+            _lbl_select_most_valu_player.text = [playerDetail.MOSTVALUABLEPLAYER isEqual: @""]?@"Select":playerDetail.MOSTVALUABLEPLAYER;
+            
+            
+            for(int i=0;i<[fetchMatchResult.GetManOfTheSeriesDetails count];i++){
+                SelectPlayerRecord *data = [fetchMatchResult.GetManOfTheSeriesDetails objectAtIndex:i];
+                if([playerDetail.MANOFTHESERIES isEqual:data.playerName]){
+                    selectedManOfTheSeries = data;
+                    break;
+                }
+                
             }
+            
+            for(int i=0;i<[fetchMatchResult.GetBestBatsManDetails count];i++){
+                SelectPlayerRecord *data = [fetchMatchResult.GetBestBatsManDetails objectAtIndex:i];
+                if([playerDetail.BESTBATSMAN isEqual:data.playerName]){
+                    selectedBestBatsman = data;
+                    break;
+                }
+            }
+            
+            for(int i=0;i<[fetchMatchResult.GetBestBowlerDetails count];i++){
+                SelectPlayerRecord *data = [fetchMatchResult.GetBestBowlerDetails objectAtIndex:i];
+                if([playerDetail.BESTBOWLER isEqual:data.playerName]){
+                    selectedBestBowler = data;
+                    break;
+                }
+            }
+            for(int i=0;i<[fetchMatchResult.GetManOfTheSeriesDetails count];i++){
+                SelectPlayerRecord *data = [fetchMatchResult.GetManOfTheSeriesDetails objectAtIndex:i];
+                if([playerDetail.BESTALLROUNDER isEqual:data.playerName]){
+                    selectedBestAllRounder = data;
+                    break;
+                }
+            }
+            
+            for(int i=0;i<[fetchMatchResult.GetManOfTheSeriesDetails count];i++){
+                SelectPlayerRecord *data = [fetchMatchResult.GetManOfTheSeriesDetails objectAtIndex:i];
+                if([playerDetail.MOSTVALUABLEPLAYER isEqual:data.playerName]){
+                    selectedMostValuPlayer = data;
+                    break;
+                }
+            }
+            
             
         }
         
-        for(int i=0;i<[fetchMatchResult.GetBestBatsManDetails count];i++){
-            SelectPlayerRecord *data = [fetchMatchResult.GetBestBatsManDetails objectAtIndex:i];
-            if([playerDetail.BESTBATSMAN isEqual:data.playerName]){
-                selectedBestBatsman = data;
-                break;
-            }
-        }
-        
-        for(int i=0;i<[fetchMatchResult.GetBestBowlerDetails count];i++){
-            SelectPlayerRecord *data = [fetchMatchResult.GetBestBowlerDetails objectAtIndex:i];
-            if([playerDetail.BESTBOWLER isEqual:data.playerName]){
-                selectedBestBowler = data;
-                break;
-            }
-        }
-        for(int i=0;i<[fetchMatchResult.GetManOfTheSeriesDetails count];i++){
-            SelectPlayerRecord *data = [fetchMatchResult.GetManOfTheSeriesDetails objectAtIndex:i];
-            if([playerDetail.BESTALLROUNDER isEqual:data.playerName]){
-                selectedBestAllRounder = data;
-                break;
-            }
-        }
-        
-        for(int i=0;i<[fetchMatchResult.GetManOfTheSeriesDetails count];i++){
-            SelectPlayerRecord *data = [fetchMatchResult.GetManOfTheSeriesDetails objectAtIndex:i];
-            if([playerDetail.MOSTVALUABLEPLAYER isEqual:data.playerName]){
-                selectedMostValuPlayer = data;
-                break;
-            }
-        }
-        
-        
+    }else{
+        [self.btn_revert_id.layer setBackgroundColor:[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:(1)].CGColor];
+        _btn_revert_id.userInteractionEnabled = NO;
+
     }
+    
+
     
 }
 
@@ -532,7 +543,13 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
 {
     
     //Table view
-    popTableView=[[UITableView alloc]initWithFrame:CGRectMake(275, yValue,285,200)];
+    if(selectedTablePostition == POS_TEAM){
+        popTableView=[[UITableView alloc]initWithFrame:CGRectMake(275, yValue,285,95)];
+
+    }else{
+        popTableView=[[UITableView alloc]initWithFrame:CGRectMake(275, yValue,285,200)];
+
+    }
     popTableView.scrollEnabled = YES;
     popTableView.userInteractionEnabled = YES;
     popTableView.backgroundColor = [UIColor whiteColor];
@@ -598,6 +615,8 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
         [self resetPage];
         
         [self startService:@"DONE"];
+        
+        [self.delegate MatchResultFinishBtnAction];
 
     }
     
@@ -649,6 +668,8 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
         [self resetPage];
         
         [self startService:@"REVERT"];
+        [self.delegate MatchResultFinishBtnAction];
+
         
     }
     else
@@ -772,20 +793,23 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
     }
     
     if([_txtf_comments.text isEqual:@""]){
-        errorMessage = [NSString stringWithFormat:@"%@%@",@"Please enter comments.\n",errorMessage];
+        errorMessage = [NSString stringWithFormat:@"%@%@",errorMessage,@"Please enter comments.\n"];
         flag = NO;
     }
     
-    if(([selectedResultType.RESULTTYPE isEqual:@"Win"] || [selectedResultType.RESULTTYPE isEqual:@"Match Awarded"]) &&  selectedTeam==nil){
-        errorMessage = [NSString stringWithFormat:@"%@%@",@"Please select team.\n",errorMessage];
+    if( selectedResultType==nil&&  selectedTeam==nil){
+        errorMessage = [NSString stringWithFormat:@"%@%@",errorMessage,@"Please select team.\n"];
+        flag = NO;
+    }else if(([selectedResultType.RESULTTYPE isEqual:@"Win"] || [selectedResultType.RESULTTYPE isEqual:@"Match Awarded"]) &&  selectedTeam==nil){
+        errorMessage = [NSString stringWithFormat:@"%@%@",errorMessage,@"Please select team.\n"];
         flag = NO;
     }
     
     if(![_txtf_team_a_point.text isEqual:@""] && ([_txtf_team_a_point.text intValue]<0 || [_txtf_team_a_point.text intValue]>9)){
-        errorMessage = [NSString stringWithFormat:@"%@%@",@"Please enter A point between 0 to 9.\n",errorMessage];
+        errorMessage = [NSString stringWithFormat:@"%@%@",errorMessage,@"Please enter A point between 0 to 9.\n"];
         flag = NO;
     }else if(![_txtf_team_b_point.text isEqual:@""] && ([_txtf_team_b_point.text intValue]<0 || [_txtf_team_b_point.text intValue]>9)){
-        errorMessage = [NSString stringWithFormat:@"%@%@",@"Please enter point between 0 to 9.\n",errorMessage];
+        errorMessage = [NSString stringWithFormat:@"%@%@",errorMessage,@"Please enter point between 0 to 9.\n"];
         flag = NO;
     }
     

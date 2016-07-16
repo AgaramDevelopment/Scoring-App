@@ -218,10 +218,12 @@ BOOL IsBack;
 
 -(void)duration{
     
-    formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+    
     NSString *startDateTF = self.txt_startInnings.text;
     NSString *startEndTF = self.txt_endInnings.text;
+    
+    formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
     
     NSDate *date1 = [formatter dateFromString:startDateTF];
     NSDate *date2 = [formatter dateFromString:startEndTF];

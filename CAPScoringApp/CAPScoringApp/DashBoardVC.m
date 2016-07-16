@@ -681,7 +681,7 @@
             [self officialcodeimage];
             [self groundcodeimage];
             
-            
+        [self showDialog1:@"SYNC DATA COMPLETED" andTitle:@""];
             
             }
             
@@ -715,6 +715,13 @@
      }
     
 }
+
+-(void) showDialog1:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
+
 
 -(void) showDialog:(NSString*) message andTitle:(NSString*) title{
     UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
@@ -769,15 +776,15 @@
                                          cancelButtonTitle:@"Signout"
                                          otherButtonTitles:@"Cancel",nil];
     
-    
+    alert.tag =1;
     [alert show];
-
+   
     
 }
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    //if (alertView.tag == 1) { // UIAlertView with tag 1 detected
+   if (alertView.tag == 1) { // UIAlertView with tag 1 detected
     if (buttonIndex == 0)
     {
         
@@ -802,6 +809,7 @@
         [self.navigationController pushViewController:dashBoard animated:YES];
         //Fixvc.CompitionCode=selectindexarray;
             }
+}
 }
 
 
