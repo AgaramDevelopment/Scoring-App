@@ -2518,7 +2518,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="lFX-Ru-mui">
                                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kES-qL-JGQ">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kES-qL-JGQ">
                                         <rect key="frame" x="44" y="121" width="680" height="49"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Umpire 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHz-1O-plr">
@@ -6713,7 +6713,7 @@
                                                     <button opaque="NO" tag="122" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ktm-lh-b0d">
                                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="15"/>
+                                                        <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="10"/>
                                                         <state key="normal">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
@@ -8014,37 +8014,37 @@
                                                                     </mask>
                                                                     <mask key="constraints">
                                                                         <exclude reference="gAh-3N-tiV"/>
+                                                                        <exclude reference="1p8-HH-fhe"/>
+                                                                        <exclude reference="6q5-0d-IIu"/>
+                                                                        <exclude reference="cYU-Du-Kg2"/>
+                                                                        <exclude reference="7sP-Ef-IZN"/>
+                                                                        <exclude reference="ddH-V0-0Tq"/>
+                                                                        <exclude reference="moL-eI-KOe"/>
+                                                                        <exclude reference="u4o-P0-75d"/>
                                                                         <exclude reference="Dok-CM-1Z1"/>
                                                                         <exclude reference="W51-fG-p0e"/>
                                                                         <exclude reference="Qqh-v6-bom"/>
                                                                         <exclude reference="ZFE-cK-nhF"/>
-                                                                        <exclude reference="moL-eI-KOe"/>
-                                                                        <exclude reference="u4o-P0-75d"/>
-                                                                        <exclude reference="7sP-Ef-IZN"/>
-                                                                        <exclude reference="ddH-V0-0Tq"/>
+                                                                        <exclude reference="IM8-QM-q8b"/>
+                                                                        <exclude reference="TYa-2F-6Dy"/>
+                                                                        <exclude reference="Dyu-9X-J2b"/>
+                                                                        <exclude reference="uD1-hX-qCv"/>
+                                                                        <exclude reference="SYe-uF-S3p"/>
+                                                                        <exclude reference="yrq-Hj-sO1"/>
+                                                                        <exclude reference="dFh-mb-Uiu"/>
+                                                                        <exclude reference="opP-fz-Wub"/>
+                                                                        <exclude reference="96X-8a-gn0"/>
+                                                                        <exclude reference="UHp-tF-Yzu"/>
+                                                                        <exclude reference="EcX-rB-9jA"/>
+                                                                        <exclude reference="mrP-yC-lF5"/>
                                                                         <exclude reference="HY1-l8-AuK"/>
                                                                         <exclude reference="UiQ-7b-Iej"/>
                                                                         <exclude reference="3nz-eW-QOW"/>
                                                                         <exclude reference="laR-SL-YWM"/>
-                                                                        <exclude reference="Dyu-9X-J2b"/>
-                                                                        <exclude reference="uD1-hX-qCv"/>
-                                                                        <exclude reference="96X-8a-gn0"/>
-                                                                        <exclude reference="UHp-tF-Yzu"/>
-                                                                        <exclude reference="dFh-mb-Uiu"/>
-                                                                        <exclude reference="opP-fz-Wub"/>
-                                                                        <exclude reference="IM8-QM-q8b"/>
-                                                                        <exclude reference="TYa-2F-6Dy"/>
-                                                                        <exclude reference="SYe-uF-S3p"/>
-                                                                        <exclude reference="yrq-Hj-sO1"/>
-                                                                        <exclude reference="EcX-rB-9jA"/>
-                                                                        <exclude reference="mrP-yC-lF5"/>
-                                                                        <exclude reference="eWX-kl-FHu"/>
-                                                                        <exclude reference="fFx-7q-RaV"/>
                                                                         <exclude reference="0QT-f5-cKj"/>
                                                                         <exclude reference="0UG-oa-ix0"/>
-                                                                        <exclude reference="1p8-HH-fhe"/>
-                                                                        <exclude reference="6q5-0d-IIu"/>
-                                                                        <exclude reference="cYU-Du-Kg2"/>
+                                                                        <exclude reference="eWX-kl-FHu"/>
+                                                                        <exclude reference="fFx-7q-RaV"/>
                                                                     </mask>
                                                                 </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
@@ -8067,37 +8067,37 @@
                                                                     </mask>
                                                                     <mask key="constraints">
                                                                         <include reference="gAh-3N-tiV"/>
+                                                                        <include reference="1p8-HH-fhe"/>
+                                                                        <include reference="6q5-0d-IIu"/>
+                                                                        <include reference="cYU-Du-Kg2"/>
+                                                                        <include reference="7sP-Ef-IZN"/>
+                                                                        <include reference="ddH-V0-0Tq"/>
+                                                                        <include reference="moL-eI-KOe"/>
+                                                                        <include reference="u4o-P0-75d"/>
                                                                         <include reference="Dok-CM-1Z1"/>
                                                                         <include reference="W51-fG-p0e"/>
                                                                         <include reference="Qqh-v6-bom"/>
                                                                         <include reference="ZFE-cK-nhF"/>
-                                                                        <include reference="moL-eI-KOe"/>
-                                                                        <include reference="u4o-P0-75d"/>
-                                                                        <include reference="7sP-Ef-IZN"/>
-                                                                        <include reference="ddH-V0-0Tq"/>
+                                                                        <include reference="IM8-QM-q8b"/>
+                                                                        <include reference="TYa-2F-6Dy"/>
+                                                                        <include reference="Dyu-9X-J2b"/>
+                                                                        <include reference="uD1-hX-qCv"/>
+                                                                        <include reference="SYe-uF-S3p"/>
+                                                                        <include reference="yrq-Hj-sO1"/>
+                                                                        <include reference="dFh-mb-Uiu"/>
+                                                                        <include reference="opP-fz-Wub"/>
+                                                                        <include reference="96X-8a-gn0"/>
+                                                                        <include reference="UHp-tF-Yzu"/>
+                                                                        <include reference="EcX-rB-9jA"/>
+                                                                        <include reference="mrP-yC-lF5"/>
                                                                         <include reference="HY1-l8-AuK"/>
                                                                         <include reference="UiQ-7b-Iej"/>
                                                                         <include reference="3nz-eW-QOW"/>
                                                                         <include reference="laR-SL-YWM"/>
-                                                                        <include reference="Dyu-9X-J2b"/>
-                                                                        <include reference="uD1-hX-qCv"/>
-                                                                        <include reference="96X-8a-gn0"/>
-                                                                        <include reference="UHp-tF-Yzu"/>
-                                                                        <include reference="dFh-mb-Uiu"/>
-                                                                        <include reference="opP-fz-Wub"/>
-                                                                        <include reference="IM8-QM-q8b"/>
-                                                                        <include reference="TYa-2F-6Dy"/>
-                                                                        <include reference="SYe-uF-S3p"/>
-                                                                        <include reference="yrq-Hj-sO1"/>
-                                                                        <include reference="EcX-rB-9jA"/>
-                                                                        <include reference="mrP-yC-lF5"/>
-                                                                        <include reference="eWX-kl-FHu"/>
-                                                                        <include reference="fFx-7q-RaV"/>
                                                                         <include reference="0QT-f5-cKj"/>
                                                                         <include reference="0UG-oa-ix0"/>
-                                                                        <include reference="1p8-HH-fhe"/>
-                                                                        <include reference="6q5-0d-IIu"/>
-                                                                        <include reference="cYU-Du-Kg2"/>
+                                                                        <include reference="eWX-kl-FHu"/>
+                                                                        <include reference="fFx-7q-RaV"/>
                                                                     </mask>
                                                                 </variation>
                                                             </view>
@@ -11389,7 +11389,7 @@
                                                             <constraint firstAttribute="width" constant="80" id="qNJ-Gc-MUq"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TNCA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VX7-j8-5mn">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="TNCA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VX7-j8-5mn">
                                                         <rect key="frame" x="96" y="16" width="75" height="35"/>
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="35"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -11398,7 +11398,7 @@
                                                             <rect key="frame" x="96" y="16" width="94" height="41"/>
                                                         </variation>
                                                     </label>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7hN-f2-TjW" userLabel="View_SelectedA">
+                                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7hN-f2-TjW" userLabel="View_SelectedA">
                                                         <rect key="frame" x="96" y="59" width="217" height="37"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-add" translatesAutoresizingMaskIntoConstraints="NO" id="v5S-bd-7Yg">
@@ -11465,7 +11465,7 @@
                                                             <constraint firstAttribute="width" constant="80" id="X00-Vj-Ji5"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="KSCA" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CuD-nj-Z9R">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="KSCA" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CuD-nj-Z9R">
                                                         <rect key="frame" x="140" y="16" width="77" height="41"/>
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="35"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -11707,7 +11707,7 @@
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MAY, 26" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1e-Ah-1Vh">
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="MAY, 26" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r1e-Ah-1Vh">
                                                         <rect key="frame" x="22" y="69" width="56" height="21"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="21" id="PH2-Hw-2by"/>
