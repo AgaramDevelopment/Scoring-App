@@ -45,12 +45,16 @@
 
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamAfirstIngsScore;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamAfirstIngsOvs;
+
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBfirstIngsScore;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBfirstIngsOvs;
+
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamAsecIngsHeading;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBsecIngsHeading;
+
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamASecIngsScore;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamASecIngsOvs;
+
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsScore;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsOvs;
 

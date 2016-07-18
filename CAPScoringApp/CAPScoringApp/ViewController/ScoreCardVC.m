@@ -111,7 +111,7 @@ int bowlerPostion = 0;
     
 [self.btn_fst_inns_id setTitle:[NSString stringWithFormat:@"%@ 1st INNS",fetchScorecard.BATTINGTEAMNAME] forState: UIControlStateNormal];
     
-[self.btn_sec_inns_id setTitle: [NSString stringWithFormat:@"%@ 1st INNS",fetchScorecard.BOWLINGTEAMNAME] forState: UIControlStateNormal];
+[self.btn_fourth_inns_id setTitle: [NSString stringWithFormat:@"%@ 1st INNS",fetchScorecard.BOWLINGTEAMNAME] forState: UIControlStateNormal];
     
     [self teamLogo];
     
@@ -132,6 +132,7 @@ int bowlerPostion = 0;
     }
     if ([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] ||
         [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) {
+        
         self.btn_third_inns_id.hidden = YES;
         self.btn_fourth_inns_id.hidden = YES;
         self.lbl_third_div.hidden = YES;
@@ -152,7 +153,7 @@ int bowlerPostion = 0;
         
         [self.btn_third_inns_id setTitle:[NSString stringWithFormat:@"%@ 2nd INNS",fetchScorecard.BATTINGTEAMNAME] forState: UIControlStateNormal];
         
-        [self.btn_fourth_inns_id setTitle: [NSString stringWithFormat:@"%@ 2nd INNS",fetchScorecard.BOWLINGTEAMNAME] forState: UIControlStateNormal];
+        [self.btn_sec_inns_id setTitle: [NSString stringWithFormat:@"%@ 2nd INNS",fetchScorecard.BOWLINGTEAMNAME] forState: UIControlStateNormal];
     }
 }
 
@@ -185,12 +186,16 @@ int bowlerPostion = 0;
         
         
         _lbl_teamAsecIngsHeading.hidden = YES;
-        _lbl_teamBsecIngsHeading.hidden = YES;
-        
         _lbl_teamASecIngsScore.hidden = YES;
         _lbl_teamASecIngsOvs.hidden = YES;
-        _lbl_teamBSecIngsScore.hidden = YES;
-        _lbl_teamBSecIngsOvs.hidden = YES;
+
+        
+        _lbl_teamBfirstIngsScore.hidden = YES;
+        _lbl_teamBfirstIngsOvs.hidden = YES;
+        _lbl_teamBsecIngsHeading.hidden = YES;
+        
+        
+        
         
     }else{
         _lbl_teamAsecIngsHeading.hidden = NO;
@@ -198,8 +203,8 @@ int bowlerPostion = 0;
         
         _lbl_teamASecIngsScore.hidden = NO;
         _lbl_teamASecIngsOvs.hidden = NO;
-        _lbl_teamBSecIngsScore.hidden = NO;
-        _lbl_teamBSecIngsOvs.hidden = NO;
+        _lbl_teamBfirstIngsScore.hidden = NO;
+        _lbl_teamBfirstIngsOvs.hidden = NO;
         
     }
     

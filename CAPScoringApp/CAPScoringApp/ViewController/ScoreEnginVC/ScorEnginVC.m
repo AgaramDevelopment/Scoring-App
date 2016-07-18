@@ -2224,7 +2224,12 @@ EditModeVC * objEditModeVc;
         if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
         {
             
-            if(fetchSEPageLoadRecord.currentBowlerPlayerName==nil){
+             if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alter show];
+                [alter setTag:10004];
+            }
+             else if(fetchSEPageLoadRecord.currentBowlerPlayerName==nil){
                 UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select bowler" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alter show];
                 [alter setTag:10001];
@@ -2236,7 +2241,7 @@ EditModeVC * objEditModeVc;
                 UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select non Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alter show];
                 [alter setTag:10003];
-            }else{
+            }            else{
                 
                 startBallTime = [NSDate date];
                 
@@ -2970,6 +2975,10 @@ EditModeVC * objEditModeVc;
             UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select non Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             [alter setTag:10003];
+        }else if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alter show];
+            [alter setTag:10004];
         }else{
             [self overEVENT];
             self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
@@ -2982,6 +2991,12 @@ EditModeVC * objEditModeVc;
     }
     else
     {
+        
+         if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alter show];
+            [alter setTag:10004];
+         }else{
         [self overEVENT];
         
         //Check for Striker, non Striker and bower present
@@ -2995,6 +3010,7 @@ EditModeVC * objEditModeVc;
             [self btn_nonstricker_name:0];
 
         }
+         }
         
         //        [self.btn_StartOver setTitle:@"START OVER" forState:UIControlStateNormal];
         //        self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
@@ -3373,6 +3389,10 @@ EditModeVC * objEditModeVc;
             
         }if (alertView.tag == 2002) {
             
+        }
+        
+        if(alertView.tag == 10004){
+            [self ENDINNINGS];
         }
         
     }    else if(buttonIndex == 1)//Annul button pressed.
@@ -8869,6 +8889,13 @@ self.lbl_umpirename.text=@"";
      [self getLastBowlerDetails];
    //Generate Ball Ticker
     [self CreateBallTickers : fetchSEPageLoadRecord.BallGridDetails];
+    
+    //CHECK Wickets
+    if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alter show];
+            [alter setTag:10004];
+        }
 }
 - (IBAction)btn_swap:(id)sender {
     //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
