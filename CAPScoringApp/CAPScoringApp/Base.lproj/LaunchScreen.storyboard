@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -16,12 +17,48 @@
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Launch_Image" translatesAutoresizingMaskIntoConstraints="NO" id="yzo-JI-5yZ">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yzo-JI-5yZ" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leadingMargin" constant="-20" id="HbL-er-4ly"/>
+                            <constraint firstItem="xb3-aO-Qok" firstAttribute="top" secondItem="yzo-JI-5yZ" secondAttribute="bottom" id="dLF-9L-314"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="yzo-JI-5yZ" secondAttribute="trailing" constant="-20" id="jxo-iH-6is"/>
+                            <constraint firstItem="yzo-JI-5yZ" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="topMargin" id="xCg-3U-cbP"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="yzo-JI-5yZ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="HbL-er-4ly"/>
+                                <exclude reference="jxo-iH-6is"/>
+                                <exclude reference="xCg-3U-cbP"/>
+                                <exclude reference="dLF-9L-314"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="yzo-JI-5yZ"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="HbL-er-4ly"/>
+                                <include reference="jxo-iH-6is"/>
+                                <include reference="xCg-3U-cbP"/>
+                                <include reference="dLF-9L-314"/>
+                            </mask>
+                        </variation>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53" y="375"/>
+            <point key="canvasLocation" x="52.5" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Launch_Image" width="1536" height="2049"/>
+    </resources>
 </document>
