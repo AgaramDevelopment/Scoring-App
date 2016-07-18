@@ -102,7 +102,7 @@ NSString *DURATION;
                      action:@selector(BreakStart:)forControlEvents:UIControlEventValueChanged];
    self.Text_BreakStart.inputView =_date_picker;
     
-    
+     [self DurationCalculation];
     
     
     
@@ -156,7 +156,7 @@ NSString *DURATION;
     
     
     self.text_EndBreak.inputView =_date_picker1;
-    
+     [self DurationCalculation];
     
     
 }
@@ -164,11 +164,11 @@ NSString *DURATION;
 
 -(void)DurationCalculation
 {
-    
-    formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *startDateTF = self.Text_BreakStart.text;
     NSString *startEndTF = self.text_EndBreak.text;
+    
+    formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
     
     NSDate *date1 = [formatter dateFromString:startDateTF];
     NSDate *date2 = [formatter dateFromString:startEndTF];
@@ -306,9 +306,9 @@ BREAKCOMMENTS:ISINCLUDEDURATION:BREAKNO;
 
 
 - (IBAction)hidepickerbtn:(id)sender {
-
+[self DurationCalculation];
     [_datePicker_View setHidden:YES];
-     [self DurationCalculation];
+    
 }
 
 
