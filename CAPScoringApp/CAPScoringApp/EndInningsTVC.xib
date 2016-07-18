@@ -31,52 +31,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="43"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundWithoutIcon" translatesAutoresizingMaskIntoConstraints="NO" id="dv6-Ts-504">
-                        <rect key="frame" x="0.0" y="0.0" width="450" height="43"/>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVM-ue-8t1">
                         <rect key="frame" x="4" y="0.0" width="193" height="43"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="193" id="czV-BC-P8E"/>
+                            <constraint firstAttribute="width" constant="193" id="wFM-Km-bMZ"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.10980392160000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oEh-D7-5J6">
-                        <rect key="frame" x="190" y="0.0" width="129" height="43"/>
+                        <rect key="frame" x="212" y="0.0" width="129" height="43"/>
                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7eA-tR-Uw3">
-                        <rect key="frame" x="292" y="0.0" width="129" height="43"/>
+                        <rect key="frame" x="322" y="0.0" width="129" height="43"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="129" id="GiW-km-Bu4"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="5jc-bz-GPN" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="6zM-BA-gKI"/>
-                    <constraint firstItem="7eA-tR-Uw3" firstAttribute="baseline" secondItem="yVM-ue-8t1" secondAttribute="baseline" id="7xr-Vy-TmR"/>
-                    <constraint firstAttribute="bottom" secondItem="dv6-Ts-504" secondAttribute="bottom" id="9E8-li-NYt"/>
                     <constraint firstAttribute="bottom" secondItem="5jc-bz-GPN" secondAttribute="bottom" id="IWv-XK-afh"/>
-                    <constraint firstAttribute="trailing" secondItem="dv6-Ts-504" secondAttribute="trailing" id="Qf0-Hx-Ckb"/>
-                    <constraint firstItem="dv6-Ts-504" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ULk-wr-FYn"/>
-                    <constraint firstItem="dv6-Ts-504" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="VhD-Gj-tX8"/>
-                    <constraint firstItem="yVM-ue-8t1" firstAttribute="leading" secondItem="5jc-bz-GPN" secondAttribute="leading" constant="4" id="Vsl-QV-t1d"/>
+                    <constraint firstItem="oEh-D7-5J6" firstAttribute="leading" secondItem="yVM-ue-8t1" secondAttribute="trailing" constant="15" id="IrC-v1-2IU"/>
+                    <constraint firstItem="yVM-ue-8t1" firstAttribute="bottom" secondItem="5jc-bz-GPN" secondAttribute="bottom" id="VBW-D4-bb8"/>
                     <constraint firstItem="5jc-bz-GPN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="XfE-Ne-InR"/>
-                    <constraint firstItem="oEh-D7-5J6" firstAttribute="leading" secondItem="yVM-ue-8t1" secondAttribute="trailing" constant="-7" id="Zax-AJ-shm"/>
-                    <constraint firstItem="yVM-ue-8t1" firstAttribute="top" secondItem="dv6-Ts-504" secondAttribute="top" id="aHM-A2-sbB"/>
                     <constraint firstItem="oEh-D7-5J6" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="dcW-LF-BS5"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="7eA-tR-Uw3" secondAttribute="trailing" constant="21" id="eAK-FL-PeL"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="7eA-tR-Uw3" secondAttribute="trailing" constant="-9" id="eAK-FL-PeL"/>
                     <constraint firstItem="7eA-tR-Uw3" firstAttribute="baseline" secondItem="oEh-D7-5J6" secondAttribute="baseline" id="evD-y4-X6a"/>
-                    <constraint firstItem="yVM-ue-8t1" firstAttribute="bottom" secondItem="5jc-bz-GPN" secondAttribute="bottom" id="lqz-bQ-E8R"/>
+                    <constraint firstItem="yVM-ue-8t1" firstAttribute="baseline" secondItem="oEh-D7-5J6" secondAttribute="baseline" id="fGI-RY-WdK"/>
+                    <constraint firstItem="yVM-ue-8t1" firstAttribute="firstBaseline" secondItem="oEh-D7-5J6" secondAttribute="firstBaseline" id="g1X-2k-6he"/>
+                    <constraint firstItem="yVM-ue-8t1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-4" id="n67-vd-K0U"/>
                     <constraint firstAttribute="trailing" secondItem="5jc-bz-GPN" secondAttribute="trailing" id="pE4-hC-Ua2"/>
-                    <constraint firstItem="7eA-tR-Uw3" firstAttribute="leading" secondItem="oEh-D7-5J6" secondAttribute="trailing" constant="-27" id="uGj-9v-kSI"/>
+                    <constraint firstItem="7eA-tR-Uw3" firstAttribute="leading" secondItem="oEh-D7-5J6" secondAttribute="trailing" constant="-19" id="uGj-9v-kSI"/>
                     <constraint firstItem="7eA-tR-Uw3" firstAttribute="firstBaseline" secondItem="oEh-D7-5J6" secondAttribute="firstBaseline" id="vvo-vN-lfx"/>
                 </constraints>
             </tableViewCellContentView>
@@ -87,7 +78,4 @@
             </connections>
         </tableViewCell>
     </objects>
-    <resources>
-        <image name="backgroundWithoutIcon" width="2048" height="2732"/>
-    </resources>
 </document>

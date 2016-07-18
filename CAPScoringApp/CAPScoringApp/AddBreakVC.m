@@ -69,12 +69,13 @@
      NSDate *dateFromString = [[NSDate alloc] init];
         NSDate *dateFromString1 = [[NSDate alloc] init];
   
-   // [self DurationCalculation];
+  
 }
 
 
 
 - (IBAction)StartBreack_btn:(id)sender {
+      [_date_picker setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_FR"]];
     
     _Text_BreakStart.text=_MATCHDATE;
     [_datePicker_View setHidden:NO];
@@ -86,6 +87,14 @@
                      action:@selector(BreakStart:)forControlEvents:UIControlEventValueChanged];
     self.Text_BreakStart.inputView =_date_picker;
     
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *matchdate = [dateFormat dateFromString:_MATCHDATE];
+    
+   
+    self.date_picker.date = matchdate;
+   [self DurationCalculation];
     
 }
 
@@ -94,9 +103,9 @@
 
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
  //   2016-06-25 12:00:00
-    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *matchdate = [dateFormat dateFromString:_MATCHDATE];
-    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
      // for minimum date
     [_date_picker setMinimumDate:matchdate];
     
@@ -121,40 +130,49 @@
 
 
 - (IBAction)EndBreak_btn:(id)sender {
-    
-    _text_EndBreak.text=_MATCHDATE;
+      [_date_picker1 setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_FR"]];
+   
     [_datePicker_View setHidden:NO];
     [_date_picker setHidden:YES];
     [_date_picker1 setHidden:NO];
     _date_picker1.datePickerMode = UIDatePickerModeDateAndTime;
     [_date_picker1 addTarget:self
                       action:@selector(BreakEnd:)forControlEvents:UIControlEventValueChanged];
-    
+  
     self.text_EndBreak.inputView =_date_picker1;
-
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *matchdate = [dateFormat dateFromString:_MATCHDATE];
+    
+    
+    self.date_picker1.date = matchdate;
+    
+    
+   [self DurationCalculation];
 }
 
 
 -(void)DurationCalculation
 {
     
-    formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *startDateTF = self.Text_BreakStart.text;
     NSString *startEndTF = self.text_EndBreak.text;
+    
+    formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     NSDate *date1 = [formatter dateFromString:startDateTF];
     NSDate *date2 = [formatter dateFromString:startEndTF];
     
     NSTimeInterval timeDifference = [date2 timeIntervalSinceDate:date1];
     int days = timeDifference / 60;
- NSString *Duration = [NSString stringWithFormat:@"%d", days];
+    NSString *Duration = [NSString stringWithFormat:@"%d", days];
     
     self.lbl_Duration.text=[NSString stringWithFormat:@"%@", Duration];
     
-    
 
-    
 }
 
 
@@ -163,9 +181,9 @@
     NSLog(@"date is %@",_date_picker1.date);
   NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //   2016-06-25 12:00:00
-    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *matchdate = [dateFormat dateFromString:_MATCHDATE];
-    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     // for minimum date
     [_date_picker1 setMinimumDate:matchdate];
@@ -311,7 +329,7 @@
 }
 
 - (IBAction)hidepickerbtn:(id)sender {
-    
+    [self DurationCalculation];
       [_datePicker_View setHidden:YES];
  
 
