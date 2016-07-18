@@ -32,6 +32,8 @@
 FetchScorecard *fetchScorecard ;
 FetchSEPageLoadRecord *fetchSEpage;
 
+NSArray *muliteDayMatchtype;
+
 int batsmanHeaderPosition = 0;
 int batsmanPostion = 0;
 int bowlerHeaderPosition = 0;
@@ -39,6 +41,8 @@ int bowlerPostion = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    muliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
+
     
     [self customnavigationmethod];
     
@@ -74,7 +78,16 @@ int bowlerPostion = 0;
     
     _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld OVS" ,(unsigned long)_BATTEAMOVERS,(unsigned long)_BATTEAMOVRBALLS];
     
-    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEpage.BATTEAMRUNRATE floatValue], [fetchSEpage.RUNSREQUIRED floatValue]];
+//    _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEpage.BATTEAMRUNRATE floatValue], [fetchSEpage.RUNSREQUIRED floatValue]];
+//    
+    
+    if(inningsNo.intValue>1 && ![muliteDayMatchtype containsObject:_matchTypeCode]){
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f | RRR %.02f",[fetchSEpage.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEpage.BATTEAMRUNRATE floatValue], [fetchSEpage.REQRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEpage.REQRUNRATE floatValue]];
+    }else{
+        _lbl_runRate.text = [NSString stringWithFormat:@"RR %.02f",[fetchSEpage.BATTEAMRUNRATE floatValue]];
+    }
+    
+    
     
     _lbl_teamBSecIngsScore.text = [NSString stringWithFormat:@"%@ / %@", _SECONDINNINGSTOTAL,_SECONDINNINGSWICKET];
     _lbl_teamBSecIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",_SECONDINNINGSOVERS];
