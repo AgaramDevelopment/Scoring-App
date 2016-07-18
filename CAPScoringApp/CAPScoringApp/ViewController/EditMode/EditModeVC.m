@@ -552,33 +552,22 @@ BOOL isWicketSelected;
         else{
             isSpecialEvents=NO;
         }
-        NSString * runvalue;
         for(NSString * kvpItem in dicAddbowlerdetails)
         {
-            isExtras = [[dicAddbowlerdetails valueForKey:kvpItem ] isEqualToString:@"WD"] || [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"NB"] || [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"B"] || [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"LB"] || [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"PENALTY"];
-            NSString * dicRunValue =[dicAddbowlerdetails valueForKey:kvpItem];
-            if ([kvpItem isEqualToString:@"RUNS"] && [dicRunValue isEqualToString:@"0"] &&  dicAddbowlerdetails.count > 1)
-                content = [dicAddbowlerdetails valueForKey:@"RUNS" ];
+            isExtras = [[dicAddbowlerdetails valueForKey:kvpItem ] isEqualToString:@"WD"] ||
+            [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"NB"] ||
+            [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"B"] ||
+            [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"LB"] ||
+            [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"PENALTY"];
+            
+            if ([kvpItem isEqual: @"RUNS"] && [[dicAddbowlerdetails objectForKey:kvpItem] isEqual : @"0"] && dicAddbowlerdetails.count > 1)
+                content = [[[dicAddbowlerdetails objectForKey:kvpItem] stringByAppendingString:@" "] stringByAppendingString: content];
             else
-            {
-                
-                runvalue=[dicAddbowlerdetails valueForKey:@"RUNS"];
-                
-                
-                NSString * extraValue =(![kvpItem isEqualToString:@"RUNS"])? [dicAddbowlerdetails valueForKey:kvpItem]:@"";
-                //content =[runvalue stringByAppendingString:extraValue];
-                content =[content stringByAppendingString: [[dicAddbowlerdetails objectForKey:kvpItem] stringByAppendingString:@""]];
-            }   //kvpItem.Value + " ";
+                content =
+                [[[dicAddbowlerdetails objectForKey:kvpItem] stringByAppendingString:@" "] stringByAppendingString: [content stringByAppendingString:@" "]];
         }
         totalRun  =[grandTotal intValue]+totalRun;
-        
-//        if(runvalue != @"")
-//        {
-//            totalRun  =[runvalue intValue]+totalRun;
-//        }
-        
-        
-        [self CreateBallTickerInstance:content :isExtras :isSpecialEvents :objnoball :cell :indexpath];
+        [self CreateBallTickerInstance: [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] :isExtras :isSpecialEvents :objnoball :cell :indexpath];
         
     }
     
@@ -613,10 +602,10 @@ BOOL isWicketSelected;
     [btn_Run addTarget:self action:@selector(didClickEditAction:) forControlEvents:UIControlEventTouchUpInside];
     
     [cell.view_main addSubview:btn_Run];
-    content = [content isEqual: @"0W"] ? @"W" : content;
-    content = [content isEqual: @"0NB" ]? @"NB" : content;
-    content = [content isEqual: @"0WD"] ? @"WD" : content;
-    content = [content isEqual: @"0RH"] ? @"RH" : content;
+    content = [content isEqual: @"0 W"] ? @"W" : content;
+    content = [content isEqual: @"0 NB" ]? @"NB" : content;
+    content = [content isEqual: @"0 WD"] ? @"WD" : content;
+    content = [content isEqual: @"0 RH"] ? @"RH" : content;
     double singleInstanceWidth = isextra ? 55 : 30;
     double totalWidth = singleInstanceWidth;
     if (content.length > 5)

@@ -2887,10 +2887,10 @@ EditModeVC * objEditModeVc;
             [[dicBall objectForKey:kvpItem] isEqual : @"PENALTY"];
             
             if ([kvpItem isEqual: @"RUNS"] && [[dicBall objectForKey:kvpItem] isEqual : @"0"] && dicBall.count > 1)
-                content = [content stringByAppendingString: content];
+                content = [[[dicBall objectForKey:kvpItem] stringByAppendingString:@" "] stringByAppendingString: content];
             else
                 content =
-                [content stringByAppendingString: [[dicBall objectForKey:kvpItem] stringByAppendingString:@" "]];
+                [[[dicBall objectForKey:kvpItem] stringByAppendingString:@" "] stringByAppendingString: [content stringByAppendingString:@" "]];
         }
         
         //To Create ball tiker for each row.
