@@ -14,9 +14,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "327"
-            endingLineNumber = "327"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            endingLineNumber = "327">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -206,9 +204,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "7445"
-            endingLineNumber = "7445"
-            landmarkName = "-tableView:didDeselectRowAtIndexPath:"
-            landmarkType = "5">
+            endingLineNumber = "7445">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -254,9 +250,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "11920"
-            endingLineNumber = "11920"
-            landmarkName = "@implementation ScorEnginVC"
-            landmarkType = "3">
+            endingLineNumber = "11920">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -350,9 +344,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3820"
-            endingLineNumber = "3820"
-            landmarkName = "-didClickLeftSideBtn_Action:"
-            landmarkType = "5">
+            endingLineNumber = "3820">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -542,9 +534,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12079"
-            endingLineNumber = "12079"
-            landmarkName = "-btn_show_scorecard:"
-            landmarkType = "5">
+            endingLineNumber = "12079">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -622,9 +612,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "7841"
-            endingLineNumber = "7841"
-            landmarkName = "-ENDSession"
-            landmarkType = "5">
+            endingLineNumber = "7841">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -638,9 +626,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "7888"
-            endingLineNumber = "7888"
-            landmarkName = "-FollowOn"
-            landmarkType = "5">
+            endingLineNumber = "7888">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
@@ -701,9 +687,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "7557"
-            endingLineNumber = "7557"
-            landmarkName = "-BreakviewMethod"
-            landmarkType = "5">
+            endingLineNumber = "7557">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -813,9 +797,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "426"
-            endingLineNumber = "426"
-            landmarkName = "-btn_back:"
-            landmarkType = "5">
+            endingLineNumber = "426">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -829,9 +811,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12281"
-            endingLineNumber = "12281"
-            landmarkName = "-EndInningsBackBtnAction"
-            landmarkType = "5">
+            endingLineNumber = "12281">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -845,9 +825,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "610"
-            endingLineNumber = "610"
-            landmarkName = "-loadViewOnEditMode"
-            landmarkType = "5">
+            endingLineNumber = "610">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -861,9 +839,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "748"
-            endingLineNumber = "748"
-            landmarkName = "-loadViewOnEditMode"
-            landmarkType = "5">
+            endingLineNumber = "748">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -909,9 +885,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "305"
-            endingLineNumber = "305"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            endingLineNumber = "305">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
