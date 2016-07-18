@@ -7689,6 +7689,8 @@ self.lbl_umpirename.text=@"";
     
     EndInningsVC *endInning = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
     endInning.MATCHCODE=self.matchCode;
+    endInning.MATCHTYPECODE = self.matchTypeCode;
+    
     endInning.delegate =self;
     // endInnings = [[EndInnings alloc]init];
     
@@ -7702,7 +7704,7 @@ self.lbl_umpirename.text=@"";
     //fullview.alpha=0.9;
     
     [self.view addSubview:fullview];
-    
+        
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:endInning];

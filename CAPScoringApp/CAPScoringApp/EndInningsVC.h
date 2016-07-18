@@ -25,7 +25,8 @@
 
 @property(nonatomic,strong) id <EndInningsVCDelagate> delegate;
 
-@property (strong,nonatomic) NSString * MATCHCODE;
+@property (strong,nonatomic) NSString *MATCHCODE;
+@property (strong,nonatomic) NSString *MATCHTYPECODE;
 
 @property (weak, nonatomic) IBOutlet UIView *view_allControls;
 
@@ -68,6 +69,7 @@
 - (IBAction)btn_addInnings:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UITableView *tbl_endInnings;
+@property (weak, nonatomic) IBOutlet UIView *view_Header;
 
 @property (strong, nonatomic) IBOutlet EndInningsVC *GridRowCell;
 
