@@ -417,6 +417,7 @@ NSDateFormatter *formatter;
         
     }else if (IsBack == YES){
         
+        [self.delegate ChangeVCBackBtnAction];
         IsBack = NO;
         
 //        

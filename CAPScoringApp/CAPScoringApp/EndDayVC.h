@@ -9,10 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "EndDayTVC.h"
 
+@protocol EnddayDelegate <NSObject>
+@required
+
+- (void) ChangeVCBackBtnAction;
+@end
+
+
+
 @interface EndDayVC : UIViewController
 {
     UIDatePicker *datePicker;
 }
+
+@property(nonatomic,strong) id <EnddayDelegate> delegate;
+
 
 @property (strong,nonatomic) NSString *MATCHCODE;
 @property (strong,nonatomic) NSString *COMPETITIONCODE;
