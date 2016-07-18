@@ -112,10 +112,16 @@ NSArray *MuliteDayMatchtype;
     cell.innings1team1runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FIRSTINNINGSTOTAL,objfetchSEPageLoadRecord.FIRSTINNINGSWICKET];
     cell.innings1team1overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FIRSTINNINGSOVERS];
         
+        if(![objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@""]){
     cell.innings2teamname2.text=objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
     cell.innings2team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
     cell.innings2team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
-    
+        }else{
+            cell.innings2teamname2.text=@"";
+            cell.innings2team2runs.text=@"";
+            cell.innings2team2overs.text=@"";
+            
+        }
        
         if([MuliteDayMatchtype containsObject:objFixtureRecord.matchTypeCode]){
         cell.innings1teamname2.text=objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME;
