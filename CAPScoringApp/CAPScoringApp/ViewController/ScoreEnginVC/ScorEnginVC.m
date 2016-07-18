@@ -12325,10 +12325,14 @@ self.lbl_umpirename.text=@"";
 -(void) EndInningsSaveBtnAction{
     
  
-    if ([_matchTypeCode isEqualToString:@"MSC022"] || [_matchTypeCode isEqualToString:@"MSC024"] || [_matchTypeCode isEqualToString:@"MSC116"] || [_matchTypeCode isEqualToString:@"MSC115"] && [fetchSEPageLoadRecord.INNINGSNO isEqualToString:@"2"]) {
+    if (([_matchTypeCode isEqualToString:@"MSC022"] || [_matchTypeCode isEqualToString:@"MSC024"] || [_matchTypeCode isEqualToString:@"MSC116"] || [_matchTypeCode isEqualToString:@"MSC115"]) && [fetchSEPageLoadRecord.INNINGSNO isEqualToString:@"2"]) {
+        
+        
+        [fullview removeFromSuperview];
         
         [self MatchResult];
-         [fullview removeFromSuperview];
+        
+        
         
     }else{
         
