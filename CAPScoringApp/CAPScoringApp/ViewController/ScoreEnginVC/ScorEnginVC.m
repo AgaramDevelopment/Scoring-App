@@ -77,7 +77,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate,EnddayDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -7692,9 +7692,6 @@ self.lbl_umpirename.text=@"";
     endInning.MATCHTYPECODE = self.matchTypeCode;
     
     endInning.delegate =self;
-    // endInnings = [[EndInnings alloc]init];
-    
-    //[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
@@ -7704,7 +7701,8 @@ self.lbl_umpirename.text=@"";
     //fullview.alpha=0.9;
     
     [self.view addSubview:fullview];
-        
+   
+    
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:endInning];
@@ -7734,6 +7732,7 @@ self.lbl_umpirename.text=@"";
     endDayVC.MATCHCODE = self.matchCode;
     endDayVC.TEAMCODE = fetchSEPageLoadRecord.BATTINGTEAMCODE;
     endDayVC.INNINGSNO = fetchSEPageLoadRecord.INNINGSNO;
+    endDayVC.delegate =self;
     
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -12277,18 +12276,18 @@ self.lbl_umpirename.text=@"";
     
     
     
-//    NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
-//    
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://url"]];
-//    [request setHTTPMethod:@"POST"];
-//    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
-//    
-//    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-//    NSURLSessionUploadTask *dataTask = [session uploadTaskWithRequest: request
-//                                                             fromData: data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-//                                                                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-//                                                                 NSLog(@"%@", json);
-//                                                             }];
+    NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
+    
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://url"]];
+    [request setHTTPMethod:@"POST"];
+    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
+    
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
+    NSURLSessionUploadTask *dataTask = [session uploadTaskWithRequest: request
+                                                             fromData: data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+                                                                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+                                                                 NSLog(@"%@", json);
+                                                             }];
     
 }
 - (IBAction)Exit_btn:(id)sender {
@@ -12325,10 +12324,14 @@ self.lbl_umpirename.text=@"";
 -(void) EndInningsSaveBtnAction{
     
  
-    if ([_matchTypeCode isEqualToString:@"MSC022"] || [_matchTypeCode isEqualToString:@"MSC024"] || [_matchTypeCode isEqualToString:@"MSC116"] || [_matchTypeCode isEqualToString:@"MSC115"] && [fetchSEPageLoadRecord.INNINGSNO isEqualToString:@"2"]) {
+    if (([_matchTypeCode isEqualToString:@"MSC022"] || [_matchTypeCode isEqualToString:@"MSC024"] || [_matchTypeCode isEqualToString:@"MSC116"] || [_matchTypeCode isEqualToString:@"MSC115"]) && [fetchSEPageLoadRecord.INNINGSNO isEqualToString:@"2"]) {
+        
+        
+        [fullview removeFromSuperview];
         
         [self MatchResult];
-         [fullview removeFromSuperview];
+        
+        
         
     }else{
         

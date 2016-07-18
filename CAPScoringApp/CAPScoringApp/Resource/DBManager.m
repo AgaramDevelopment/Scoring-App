@@ -633,13 +633,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return YES;
             
         }
         else {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return NO;
         }
     }
@@ -6001,7 +6003,7 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BREAKNO,BREAKSTARTTIME,BREAKENDTIME,( BREAKSTARTTIME-BREAKENDTIME) AS DURATION,ISINCLUDEINPLAYERDURATION,BREAKCOMMENTS FROM INNINGSBREAKEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"select BREAKNO,BREAKSTARTTIME,BREAKENDTIME,(strftime('%%s', BREAKENDTIME) - strftime('%%s', BREAKSTARTTIME)) / 60 AS DURATION,ISINCLUDEINPLAYERDURATION,BREAKCOMMENTS from INNINGSBREAKEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
       
  
         const char *update_stmt = [updateSQL UTF8String];

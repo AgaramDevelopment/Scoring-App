@@ -17,6 +17,9 @@
 
 
 @interface PowerPlayVC ()<UITableViewDataSource,UITableViewDelegate>
+{
+    BOOL isPowerplay_Tbl;
+}
 
 @property (nonatomic,strong)NSMutableArray *FetchPowerPlayArray;
 @end
@@ -80,6 +83,7 @@ NSString *matchover;
     self.view_powerplaytype.layer.borderWidth=2;
     
     self.tbl_powerplaytype.hidden=YES;
+    
     
     matchover=[DBManager SetMatchRegistration:self.matchCode];
     PowerPlayData = [DBManager fetchpowerplaytype];
@@ -150,7 +154,15 @@ NSString *matchover;
 
 - (IBAction)btn_touch:(id)sender {
     
-    self.tbl_powerplaytype.hidden=NO;
+    if(isPowerplay_Tbl == NO)
+    {
+       self.tbl_powerplaytype.hidden=NO;
+        isPowerplay_Tbl=YES;
+    }
+    else{
+        self.tbl_powerplaytype.hidden=YES;
+        isPowerplay_Tbl=NO;
+    }
     
     
 }
