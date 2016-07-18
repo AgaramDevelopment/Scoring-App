@@ -86,7 +86,14 @@
     [_date_picker addTarget:self
                      action:@selector(BreakStart:)forControlEvents:UIControlEventValueChanged];
     self.Text_BreakStart.inputView =_date_picker;
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *matchdate = [dateFormat dateFromString:_MATCHDATE];
+    
    
+    self.date_picker.date = matchdate;
    [self DurationCalculation];
     
 }
@@ -133,6 +140,16 @@
                       action:@selector(BreakEnd:)forControlEvents:UIControlEventValueChanged];
   
     self.text_EndBreak.inputView =_date_picker1;
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *matchdate = [dateFormat dateFromString:_MATCHDATE];
+    
+    
+    self.date_picker1.date = matchdate;
+    
+    
    [self DurationCalculation];
 }
 
