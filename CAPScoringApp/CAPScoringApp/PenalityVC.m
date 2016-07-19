@@ -26,18 +26,25 @@
     NSString *penalty_type;
     NSString *penalty_reason;
     BOOL isbtnbattingselected;
+    NSString *btnbatting;
+    NSString *penaltytypereasons;
+    NSString *penaltycode;
+    
+    NSMutableArray *penaltyarray;
+    PenaltyGridTVC *penaltygridTVC;
+    
+    PenaltyDetailsRecord *penaltyrecord;
+    MetaDataRecord *objMetaDataRecord;
+    FetchSEPageLoadRecord *fetchSePage;
+    BOOL isSelected;
+    BOOL isShow_penaltyrecordTbl;
     
    
 }
 @property (nonatomic,strong)NSMutableArray *FetchPenalityArray;
 @end
 
-NSString *btnbatting;
-NSString *penaltytypereasons;
-NSString *penaltycode;
 
- NSMutableArray *penaltyarray;
-PenaltyGridTVC *penaltygridTVC;
 
 @implementation PenalityVC
 @synthesize metadatatypecode;
@@ -51,14 +58,7 @@ PenaltyGridTVC *penaltygridTVC;
 @synthesize  test;
 @synthesize penaltyCode;
 @synthesize awardedToteam;
-PenaltyDetailsRecord *penaltyrecord;
-MetaDataRecord *objMetaDataRecord;
-FetchSEPageLoadRecord *fetchSePage;
-BOOL isSelected;
 
-
-NSString *btnbatting;
-NSString *penaltytypereasons;
 
 
 
@@ -133,6 +133,15 @@ NSString *penaltytypereasons;
 
     awardedToteam = self.teamcode;
     
+    self.tbl_penaltyrecord .hidden= NO;
+    self.Btn_Add.hidden =NO;
+    isShow_penaltyrecordTbl=YES;
+    
+    self.resultarray =[[NSMutableArray alloc]init];
+    
+    _resultarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
+  
+    
 }
 
 - (IBAction)btn_bowling:(id)sender {
@@ -175,28 +184,61 @@ NSString *penaltytypereasons;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_FetchPenalityArray count];
+    if(isShow_penaltyrecordTbl== YES)
+    {
+         return [_resultarray count];
+    }
+    else
+    {
+         return [_FetchPenalityArray count];
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
    {
-       static NSString *MyIdentifier = @"Penalitycell";
-       PenalityTVC *cell = (PenalityTVC *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
-       if (cell == nil) {
-           [[NSBundle mainBundle] loadNibNamed:@"PenalityTVC" owner:self options:nil];
-           cell = self.penality_cell;
-           self.penality_cell = nil;
+       if(isShow_penaltyrecordTbl== YES)
+       {
+           static NSString *myidentifier = @"penaltygridCell";
+           
+           
+           PenaltyGridTVC *cell = (PenaltyGridTVC *)[tableView dequeueReusableCellWithIdentifier:myidentifier];
+           if (cell == nil) {
+               [[NSBundle mainBundle] loadNibNamed:@"PenaltyGridTVC" owner:self options:nil];
+               cell = self.penalty_gridCell;
+               self.penalty_gridCell = nil;
+           }
+           PenaltyDetailsRecord *veb=(PenaltyDetailsRecord*)[_resultarray objectAtIndex:indexPath.row];
+           
+           
+           cell.lbl_awardedto.text=veb.penaltytypedescription;
+           cell.lbl_penaltyruns.text=veb.penaltyruns;
+           cell.lbl_penaltytype.text=veb.penaltyreasondescription;
+           
+           
+           return cell;
+
        }
+       else
+       {
+            static NSString *MyIdentifier = @"Penalitycell";
+            PenalityTVC *cell = (PenalityTVC *)[tableView dequeueReusableCellWithIdentifier:MyIdentifier];
+            if (cell == nil)
+            {
+                [[NSBundle mainBundle] loadNibNamed:@"PenalityTVC" owner:self options:nil];
+                 cell = self.penality_cell;
+                 self.penality_cell = nil;
+             }
        
-       MetaDataRecord *objmetaRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:indexPath.row];
+           MetaDataRecord *objmetaRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:indexPath.row];
        
-       cell.lbl_penalitycell.text = objmetaRecord.metasubcodedescription;
+           cell.lbl_penalitycell.text = objmetaRecord.metasubcodedescription;
        
-       [cell setBackgroundColor:[UIColor clearColor]];
+           [cell setBackgroundColor:[UIColor clearColor]];
        
        
-       return cell;
+           return cell;
+       }
     
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -303,11 +345,15 @@ NSString *penaltytypereasons;
     
     if(self.tbl_penality.hidden==YES)
     {
-      self.tbl_penality.hidden=NO;
+        self.tbl_penality.hidden=NO;
+        isShow_penaltyrecordTbl=NO;
+        [self.tbl_penality reloadData];
+       
     }
     else
     {
         self.tbl_penality.hidden=YES;
+         isShow_penaltyrecordTbl=YES;
     }
     
 }
@@ -431,33 +477,41 @@ NSString *penaltytypereasons;
                 NSString *paddingString = [[NSString string] stringByPaddingToLength: (7-maxid.length) withString: @"0" startingAtIndex: 0];
                 penaltycode = [NSString stringWithFormat:@"PNT%@%@",paddingString,maxid] ;
                 
+                if([self.selectStartBallStatus isEqualToString:@"No"])
+                {
+                   [DBManager SetPenaltyDetails:self.competitionCode :self.matchCode :self.inningsNo :self.ballcode :penaltycode :self.teamcode : penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
                 
-                [DBManager SetPenaltyDetails:self.competitionCode :self.matchCode :self.inningsNo :self.ballcode :penaltycode :self.teamcode : penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
+                }
+                else
+                {
+                    [self.delegate InsertPenaltyMethod:self.teamcode :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
+                }
                 
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Penalty Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alter show];
+                alter.tag =10;
                 
-                
-                penaltyarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
                 
                  [self startService];
                 
-                PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
-                add.resultarray=penaltyarray;
-                add.competitionCode=competitionCode;
-                add.matchCode=matchCode;
-                add.inningsNo=inningsNo;
-                
-                //vc2 *viewController = [[vc2 alloc]init];
-                [self addChildViewController:add];
-                add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-                //[self.view addSubview:add.view];
-                add.view.alpha = 0;
-                [add didMoveToParentViewController:self];
-                
-                [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-                 {
-                     add.view.alpha = 1;
-                 }
-                                 completion:nil];
+//                PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
+//                add.resultarray=penaltyarray;
+//                add.competitionCode=competitionCode;
+//                add.matchCode=matchCode;
+//                add.inningsNo=inningsNo;
+//                
+//                //vc2 *viewController = [[vc2 alloc]init];
+//                [self addChildViewController:add];
+//                add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//                //[self.view addSubview:add.view];
+//                add.view.alpha = 0;
+//                [add didMoveToParentViewController:self];
+//                
+//                [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//                 {
+//                     add.view.alpha = 1;
+//                 }
+//                                 completion:nil];
                 
             }
             else {
@@ -496,23 +550,23 @@ NSString *penaltytypereasons;
             
             
             
-            PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
-            add.resultarray=penaltyarray;
-            add.competitionCode=competitionCode;
-            add.matchCode=matchCode;
-            add.inningsNo=inningsNo;
-            //vc2 *viewController = [[vc2 alloc]init];
-            [self addChildViewController:add];
-            add.view.frame =CGRectMake(0, 0, add.view.frame.size.width-50, add.view.frame.size.height);
-           // [self.view addSubview:add.view];
-            add.view.alpha = 0;
-            [add didMoveToParentViewController:self];
-            
-            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-             {
-                 add.view.alpha = 1;
-             }
-                             completion:nil];
+//            PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
+//            add.resultarray=penaltyarray;
+//            add.competitionCode=competitionCode;
+//            add.matchCode=matchCode;
+//            add.inningsNo=inningsNo;
+//            //vc2 *viewController = [[vc2 alloc]init];
+//            [self addChildViewController:add];
+//            add.view.frame =CGRectMake(0, 0, add.view.frame.size.width-50, add.view.frame.size.height);
+//           // [self.view addSubview:add.view];
+//            add.view.alpha = 0;
+//            [add didMoveToParentViewController:self];
+//            
+//            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//             {
+//                 add.view.alpha = 1;
+//             }
+//                             completion:nil];
             
         }else{
             [self showDialog:@"Please Enter Runs Between 0 to 10" andTitle:@"Error"];
@@ -525,28 +579,70 @@ NSString *penaltytypereasons;
 
 - (IBAction)btn_back:(id)sender {
     
-    //self.view.hidden=YES;
-    PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
-    add.resultarray=penaltyarray;
-    add.competitionCode=competitionCode;
-    add.matchCode=matchCode;
-    add.inningsNo=inningsNo;
-    //vc2 *viewController = [[vc2 alloc]init];
-    [self addChildViewController:add];
-    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-    [self.view addSubview:add.view];
-    add.view.alpha = 0;
-    [add didMoveToParentViewController:self];
-    
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         add.view.alpha = 1;
-     }
-                     completion:nil];
+    if(isShow_penaltyrecordTbl == YES)
+    {
+        [self.delegate ChangeVCBackBtnAction];
+//        self.tbl_penaltyrecord.hidden=NO;
+//        isShow_penaltyrecordTbl=NO;
+//        self.Btn_Add.hidden =NO;
+//        [self.tbl_penaltyrecord reloadData];
+    }
+    else
+    {
+        self.tbl_penaltyrecord.hidden=NO;
+        isShow_penaltyrecordTbl= YES;
+        self.Btn_Add.hidden =NO;
+    }
     
 }
 
+- (IBAction)btn_addpenalty:(id)sender {
+    
+    
+    if(isShow_penaltyrecordTbl == YES)
+    {
+        self.tbl_penaltyrecord.hidden=YES;
+        isShow_penaltyrecordTbl= NO;
+        self.Btn_Add.hidden =YES;
+    }
+    else
+    {
+        self.tbl_penaltyrecord.hidden=YES;
+        isShow_penaltyrecordTbl= YES;
+        self.Btn_Add.hidden =YES;
+    }
 
+    
+
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if(buttonIndex == 0)//OK button pressed
+    {
+        if(alertView.tag == 10)
+        {
+             if([self.selectStartBallStatus isEqualToString:@"No"])
+             {
+                self.tbl_penaltyrecord.hidden=NO;
+                isShow_penaltyrecordTbl= YES;
+                self.Btn_Add.hidden = NO;
+                self.resultarray =[[NSMutableArray alloc]init];
+            
+                _resultarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
+                [self.tbl_penaltyrecord reloadData];
+             }
+            else
+            {
+                [self.delegate ChangeVCBackBtnAction];
+            }
+        }
+    }
+    else if(buttonIndex == 1)//Annul button pressed.
+    {
+        //do something
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

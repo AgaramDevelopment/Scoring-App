@@ -9,7 +9,17 @@
 #import <UIKit/UIKit.h>
 
 
+@protocol RevisedoverDelegate <NSObject>
+@required
+
+- (void) ChangeVCBackBtnAction;
+@end
+
+
 @interface RevicedOverVC : UIViewController
+
+@property(nonatomic,strong) id <RevisedoverDelegate> delegate;
+
 
 @property (strong, nonatomic) IBOutlet UITextField *txt_overs;
 //@property (strong, nonatomic) IBOutlet UITextField *txt_comments;
