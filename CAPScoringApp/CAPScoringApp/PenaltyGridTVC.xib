@@ -4,12 +4,13 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="RAJDHANI-REGULAR.TTF">
-            <string>Rajdhani-Regular</string>
-            <string>Rajdhani-Regular</string>
-            <string>Rajdhani-Regular</string>
+        <mutableArray key="RAJDHANI-MEDIUM.TTF">
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -26,46 +27,43 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLH-lx-MYm">
-                        <rect key="frame" x="10" y="11" width="62" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="dWK-Tq-lZe"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="18"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLH-lx-MYm">
+                        <rect key="frame" x="10" y="2" width="62" height="40"/>
+                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbh-LA-zRu">
-                        <rect key="frame" x="80" y="11" width="22" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbh-LA-zRu">
+                        <rect key="frame" x="82" y="2" width="25" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="22" id="Ukl-OI-Cem"/>
+                            <constraint firstAttribute="width" constant="25" id="NP1-JM-w4X"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLr-av-brS">
-                        <rect key="frame" x="117" y="11" width="195" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLr-av-brS">
+                        <rect key="frame" x="120" y="2" width="195" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="21" id="QxQ-DI-f5P"/>
+                            <constraint firstAttribute="height" constant="40" id="kYD-nw-mOx"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
-                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="SLr-av-brS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="0Zl-F2-3hc"/>
-                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="baseline" secondItem="KLH-lx-MYm" secondAttribute="baseline" id="7T4-jW-QxI"/>
-                    <constraint firstAttribute="bottom" secondItem="SLr-av-brS" secondAttribute="bottom" constant="11" id="BAM-JP-EeZ"/>
-                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="80" id="IAm-no-olO"/>
-                    <constraint firstAttribute="bottom" secondItem="KLH-lx-MYm" secondAttribute="bottom" constant="11" id="P2q-sZ-Afj"/>
-                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="firstBaseline" secondItem="SLr-av-brS" secondAttribute="firstBaseline" id="TxR-dv-I3o"/>
-                    <constraint firstAttribute="trailing" secondItem="SLr-av-brS" secondAttribute="trailing" constant="8" id="az2-wC-5XA"/>
-                    <constraint firstItem="KLH-lx-MYm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="b8q-Nk-8sv"/>
-                    <constraint firstItem="KLH-lx-MYm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="11" id="blq-ea-g9M"/>
-                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="leading" secondItem="KLH-lx-MYm" secondAttribute="trailing" constant="8" symbolic="YES" id="vNy-2S-seQ"/>
-                    <constraint firstItem="SLr-av-brS" firstAttribute="leading" secondItem="Wbh-LA-zRu" secondAttribute="trailing" constant="15" id="wkT-tv-pKg"/>
+                    <constraint firstItem="KLH-lx-MYm" firstAttribute="top" secondItem="Wbh-LA-zRu" secondAttribute="top" id="4eK-9E-6rt"/>
+                    <constraint firstItem="KLH-lx-MYm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="L8W-ah-QNg"/>
+                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="leading" secondItem="KLH-lx-MYm" secondAttribute="trailing" constant="10" id="O60-dZ-e2r"/>
+                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="firstBaseline" secondItem="SLr-av-brS" secondAttribute="firstBaseline" id="SyM-Wb-owk"/>
+                    <constraint firstItem="SLr-av-brS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="Yog-gw-t62"/>
+                    <constraint firstItem="KLH-lx-MYm" firstAttribute="baseline" secondItem="Wbh-LA-zRu" secondAttribute="baseline" id="aCp-4H-MrH"/>
+                    <constraint firstAttribute="bottom" secondItem="SLr-av-brS" secondAttribute="bottom" constant="1" id="aOu-BQ-9V8"/>
+                    <constraint firstItem="SLr-av-brS" firstAttribute="leading" secondItem="Wbh-LA-zRu" secondAttribute="trailing" constant="13" id="gQ6-qn-pGl"/>
+                    <constraint firstAttribute="trailing" secondItem="SLr-av-brS" secondAttribute="trailing" constant="5" id="jyf-oR-UHe"/>
+                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="82" id="tVj-fT-d9h"/>
+                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="baseline" secondItem="SLr-av-brS" secondAttribute="baseline" id="wam-Nv-ZoJ"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -165,6 +165,11 @@
     
    if([self formValidation]){
     
+       [self Insertrevisedtarget:self.competitionCode :self.matchCode :self.teamCode :txt_target.text :txt_overs.text :txt_commentss.text :self.inningsno];
+       
+       UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Revised Target Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+       [alter show];
+       
     if(self.checkInternetConnection){
         NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/REVISEOVER/%@/%@/TEA0000013/1/%@/%@",self.competitionCode,self.matchCode,strovers,strcomments];
         
@@ -178,15 +183,9 @@
         
         NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
         
-        
     }
-    
-    [self Insertrevisedtarget:self.competitionCode :self.matchCode :self.teamCode :txt_target.text :txt_overs.text :txt_commentss.text :self.inningsno];
- 
-        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Revised Target Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alter show];
+       
     }
-
 }
 
 

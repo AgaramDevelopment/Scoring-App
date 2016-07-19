@@ -253,7 +253,7 @@
         else
         {
             UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
-                                                            message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
+                                                            message: @"Non Striker cannot be same.\nPlease Select different Player"
                                                            delegate: self
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil];
