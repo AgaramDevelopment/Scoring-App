@@ -115,10 +115,12 @@
                                 </mask>
                             </variation>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="STRIKER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUq-n8-RyB">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STRIKER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUq-n8-RyB">
                             <rect key="frame" x="154" y="284" width="101" height="21"/>
                             <constraints>
+                                <constraint firstAttribute="width" constant="101" id="2bM-fg-GfK"/>
                                 <constraint firstAttribute="height" constant="21" id="ADU-8s-fec"/>
+                                <constraint firstAttribute="height" constant="21" id="QpF-OW-nPs"/>
                                 <constraint firstAttribute="width" constant="101" id="tqT-Nh-5TH"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
@@ -687,6 +689,7 @@
                         <constraint firstAttribute="trailing" secondItem="Svn-NI-w55" secondAttribute="trailing" constant="120" id="7wV-Mi-eRO"/>
                         <constraint firstAttribute="trailing" secondItem="NEf-d4-lwo" secondAttribute="trailing" constant="120" id="8Tn-CX-d0S"/>
                         <constraint firstItem="q5L-uC-ycK" firstAttribute="leading" secondItem="j8J-A1-mGa" secondAttribute="leading" constant="154" id="DDV-Ed-1Cc"/>
+                        <constraint firstItem="rUq-n8-RyB" firstAttribute="top" secondItem="qgU-4K-9eY" secondAttribute="bottom" constant="84" id="ETL-Cc-dcn"/>
                         <constraint firstItem="tm6-f1-tig" firstAttribute="centerY" secondItem="rUq-n8-RyB" secondAttribute="centerY" id="IGs-nc-pXQ">
                             <variation key="heightClass=regular-widthClass=regular" constant="0.5"/>
                         </constraint>
@@ -707,6 +710,7 @@
                         <constraint firstItem="4Hb-jG-lll" firstAttribute="top" secondItem="lf8-od-qg6" secondAttribute="bottom" constant="40" id="aLA-S4-8Og"/>
                         <constraint firstItem="bbW-lC-jmg" firstAttribute="top" secondItem="tm6-f1-tig" secondAttribute="bottom" constant="33" id="b1L-xf-4xb"/>
                         <constraint firstItem="WDQ-ue-eL4" firstAttribute="top" secondItem="bbW-lC-jmg" secondAttribute="bottom" id="bKK-fP-vxL"/>
+                        <constraint firstItem="rUq-n8-RyB" firstAttribute="leading" secondItem="qgU-4K-9eY" secondAttribute="leading" id="c0U-Oc-m1m"/>
                         <constraint firstAttribute="trailing" secondItem="WDQ-ue-eL4" secondAttribute="trailing" constant="120" id="dW7-Ya-ykK"/>
                         <constraint firstItem="W66-Vu-Wf4" firstAttribute="leading" secondItem="4Hb-jG-lll" secondAttribute="trailing" constant="13" id="eaN-Cx-qFS"/>
                         <constraint firstAttribute="bottom" secondItem="Gbn-pS-J0F" secondAttribute="bottom" id="ghd-k9-8ds"/>

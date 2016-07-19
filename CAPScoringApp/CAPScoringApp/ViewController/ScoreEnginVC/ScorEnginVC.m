@@ -2732,16 +2732,16 @@ EditModeVC * objEditModeVc;
     content = [content  isEqual: @"0 NB"] ? @"NB" : content;
     content = [content  isEqual: @"0 WD"] ? @"WD" : content;
     content = [content  isEqual: @"0 RH"] ? @"RH" : content;
-    double singleInstanceWidth = isExtras ? 60 : 40;
+    double singleInstanceWidth = isExtras ? 50 : 40;
     double totalWidth = singleInstanceWidth;
-    if (content.length > 5)
+    if (content.length >= 5)
         totalWidth = 15 * content.length;
     
     UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(xposition, 0, totalWidth, 50)];
     
     // Border Control
     UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, BallTicker.frame.size.width, 40)];
-    btnborder.layer.cornerRadius = btnborder.frame.size.width / 2; // this value vary as per your desire
+    btnborder.layer.cornerRadius = isExtras ? (content.length >= 5 ? btnborder.frame.size.width / 3.5 : btnborder.frame.size.width / 2.5) : btnborder.frame.size.width / 2;
     btnborder.clipsToBounds = NO;
     btnborder.layer.borderWidth = 3.5;
     btnborder.layer.borderColor = [UIColor greenColor].CGColor;
@@ -2774,11 +2774,11 @@ EditModeVC * objEditModeVc;
     //for showing different color in ballticker text based on event
     //    [btnborder setTitleColor:(isSpecialEvents || isExtras) ? ((content.length > 1 && !isExtras) ? brushFGNormal : brushFGSplEvents) : brushFGNormal forState:UIControlStateNormal] ;
     [btnborder setTitleColor:brushFGSplEvents forState:UIControlStateNormal] ;
-    btnborder.titleLabel.font = [UIFont systemFontOfSize:20 weight:12];
+    btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20];
     
     UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, totalWidth, 10)];
     BallTickerNo.textAlignment = NSTextAlignmentCenter;
-    BallTickerNo.font = [UIFont systemFontOfSize:15 weight:10];
+    BallTickerNo.font = [UIFont fontWithName:@"Rajdhani-Bold" size:15];
     [BallTickerNo setText:ballno];
     [BallTickerNo setTextColor:brushFGSplEvents];
     
@@ -2796,6 +2796,7 @@ EditModeVC * objEditModeVc;
     CGFloat xposition = 0;
     for (BallEventRecord *drballdetails in arrayBallDetails)
     {
+        NSMutableArray* dicBallKeysArray = [[NSMutableArray alloc] init];
         NSMutableDictionary *dicBall = [[NSMutableDictionary alloc] init];
         int _overthrow = [drballdetails.objOverthrow intValue];
         int _runs = [drballdetails.objRuns intValue] + _overthrow;
@@ -2812,7 +2813,7 @@ EditModeVC * objEditModeVc;
             [dicBall setValue:@"6" forKey: @"RUNS"];
         else
             [dicBall setValue:[NSString stringWithFormat:@"%i", _runs] forKey: @"RUNS"];
-        
+        [dicBallKeysArray addObject:@"RUNS"];
         if (_noball != 0)//Ball ticker for no balls.
         {
             if (_noball > 0)
@@ -2821,6 +2822,7 @@ EditModeVC * objEditModeVc;
                 [dicBall setValue:[NSString stringWithFormat:@"%i", (_runs + _noball - 1)] forKey: @"RUNS"];
             }
             [dicBall setValue:@"NB" forKey: @"EXTRAS-NB"];
+            [dicBallKeysArray addObject:@"EXTRAS-NB"];
         }
         
         if (_wide != 0)//Ball ticker for wide balls.
@@ -2831,6 +2833,7 @@ EditModeVC * objEditModeVc;
                 [dicBall setValue:[NSString stringWithFormat:@"%i", (_wide - 1)] forKey: @"RUNS"];
             }
             [dicBall setValue:@"WD" forKey: @"EXTRAS"];
+            [dicBallKeysArray addObject:@"EXTRAS"];
         }
         
         if (_legbyes != 0)//Ball ticker for leg byes.
@@ -2841,7 +2844,10 @@ EditModeVC * objEditModeVc;
                 [dicBall setValue:[NSString stringWithFormat:@"%i", (_legbyes + /*_overthrow +*/ (_noball == 0 ? 0 : _noball - 1))] forKey: @"RUNS"];
             }
             if (_noball == 0)
+            {
                 [dicBall setValue:@"LB" forKey: @"EXTRAS"];
+                [dicBallKeysArray addObject:@"EXTRAS"];
+            }
         }
         
         if (_byes != 0)//Ball ticker for byes.
@@ -2852,7 +2858,10 @@ EditModeVC * objEditModeVc;
                 [dicBall setValue:[NSString stringWithFormat:@"%i", (_byes + /*_overthrow +*/ (_noball == 0 ? 0 : _noball - 1))] forKey: @"RUNS"];
             }
             if (_noball == 0)
+            {
                 [dicBall setValue:@"B" forKey: @"EXTRAS"];
+                [dicBallKeysArray addObject:@"EXTRAS"];
+            }
         }
         if ([drballdetails.objWicketno intValue] > 0)
         {
@@ -2860,6 +2869,7 @@ EditModeVC * objEditModeVc;
                 [dicBall setValue:@"RH" forKey: @"WICKETS"];
             else
                 [dicBall setValue:@"W" forKey: @"WICKETS"];
+            [dicBallKeysArray addObject:@"WICKETS"];
         }
         //MSC134 - BATTING, MSC135 - BOWLING
         int _penalty;
@@ -2873,6 +2883,7 @@ EditModeVC * objEditModeVc;
              ([@"FP " stringByAppendingString: [NSString stringWithFormat:@"%i", _penalty]]) :
              @"");
             [dicBall setValue:_penaltyLabel forKey: @"PENALTY"];
+            [dicBallKeysArray addObject:@"PENALTY"];
         }
         
         NSString* content = [[NSString alloc] init];
@@ -2881,33 +2892,34 @@ EditModeVC * objEditModeVc;
         bool isFour = [drballdetails.objIsFour intValue] == 1;
         bool isSpecialEvents = isFour || isSix || !([[NSString stringWithFormat:@"%i",[drballdetails.objWicketno intValue]]  isEqual: @"0"]);
         
-        for (NSString* kvpItem in dicBall)
+        for(int i = 0; i < dicBallKeysArray.count; i++)
         {
-            isExtras = [[dicBall objectForKey:kvpItem] isEqual : @"WD"] ||
-            [[dicBall objectForKey:kvpItem] isEqual : @"NB"] ||
-            [[dicBall objectForKey:kvpItem] isEqual : @"B"] ||
-            [[dicBall objectForKey:kvpItem] isEqual : @"LB"] ||
-            [[dicBall objectForKey:kvpItem] isEqual : @"PENALTY"];
+            NSString *dicBallKey = [dicBallKeysArray objectAtIndex:i];
+            isExtras = [[dicBall objectForKey:dicBallKey] isEqual : @"WD"] ||
+            [[dicBall objectForKey:dicBallKey] isEqual : @"NB"] ||
+            [[dicBall objectForKey:dicBallKey] isEqual : @"B"] ||
+            [[dicBall objectForKey:dicBallKey] isEqual : @"LB"] ||
+            [[dicBall objectForKey:dicBallKey] isEqual : @"PENALTY"];
             
-            if ([kvpItem isEqual: @"RUNS"] && [[dicBall objectForKey:kvpItem] isEqual : @"0"] && dicBall.count > 1)
-                content = [[[dicBall objectForKey:kvpItem] stringByAppendingString:@" "] stringByAppendingString: content];
+            if ([dicBallKey isEqual: @"RUNS"] && [[dicBall objectForKey:dicBallKey] isEqual : @"0"] && dicBall.count > 1)
+                content = [content stringByAppendingString: [dicBall objectForKey:dicBallKey]];
             else
-                content =
-                [[[dicBall objectForKey:kvpItem] stringByAppendingString:@" "] stringByAppendingString: [content stringByAppendingString:@" "]];
+                content = [content stringByAppendingString: [dicBall objectForKey:dicBallKey]];
+            content = [content stringByAppendingString:@" "];
         }
-        
+        content = [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         //To Create ball tiker for each row.
         [ScrollViewer insertSubview: [self CreateBallTickerInstance
-                                      :[content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]
+                                      :content
                                       :isExtras
                                       :isSpecialEvents
                                       :(int)drballdetails.objMarkedforedit == 1
                                       :drballdetails.objBallno
                                       :xposition] atIndex:0];
-        if (content.length > 5)
+        if (content.length >= 5)
             xposition = xposition + 7 + (15 * content.length);
         else
-            xposition = xposition + (isExtras ? 67 : 47);
+            xposition = xposition + (isExtras ? 57 : 47);
     }
     [ScrollViewer setFrame:CGRectMake(0, 0, xposition, [ScrollViewer bounds].size.height)];
     [ScrollViewer setContentSize:CGSizeMake(xposition, [ScrollViewer bounds].size.height)];
