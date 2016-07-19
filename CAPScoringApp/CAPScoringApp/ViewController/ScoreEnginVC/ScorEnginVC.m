@@ -2722,12 +2722,14 @@ EditModeVC * objEditModeVc;
     double totalWidth = singleInstanceWidth;
     if (content.length >= 5)
         totalWidth = 15 * content.length;
+    else if (content.length >= 3)
+        totalWidth = 13 * content.length;
     
     UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(xposition, 0, totalWidth, 50)];
     
     // Border Control
     UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, BallTicker.frame.size.width, 40)];
-    btnborder.layer.cornerRadius = isExtras ? (content.length >= 5 ? btnborder.frame.size.width / 3.5 : btnborder.frame.size.width / 2.5) : btnborder.frame.size.width / 2;
+    btnborder.layer.cornerRadius = isExtras ? (content.length >= 5 ? btnborder.frame.size.width / 3.5 : btnborder.frame.size.width / 2.5) : (content.length >= 3 ? btnborder.frame.size.width / 2.5 : btnborder.frame.size.width / 2);
     btnborder.clipsToBounds = NO;
     btnborder.layer.borderWidth = 3.5;
     btnborder.layer.borderColor = [UIColor greenColor].CGColor;
@@ -2764,7 +2766,7 @@ EditModeVC * objEditModeVc;
     
     UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, totalWidth, 10)];
     BallTickerNo.textAlignment = NSTextAlignmentCenter;
-    BallTickerNo.font = [UIFont fontWithName:@"Rajdhani-Bold" size:15];
+    BallTickerNo.font = [UIFont fontWithName:@"RAJDHANI-REGULAR" size:13];
     [BallTickerNo setText:ballno];
     [BallTickerNo setTextColor:brushFGSplEvents];
     
@@ -2861,7 +2863,7 @@ EditModeVC * objEditModeVc;
         int _penalty;
         NSString* _penaltyLabel = drballdetails.objPenaltytypecode;
         _penalty = [drballdetails.objPenalty intValue];
-        if (_penaltyLabel.length && _penalty > 0)
+        if (_penaltyLabel.length > 0 && _penalty > 0)
         {
             _penaltyLabel = [_penaltyLabel isEqual: @"MSC134"] ?
             ([@"BP " stringByAppendingString: [NSString stringWithFormat:@"%i", _penalty]]) :
@@ -2888,10 +2890,9 @@ EditModeVC * objEditModeVc;
             [[dicBall objectForKey:dicBallKey] isEqual : @"PENALTY"];
             
             if ([dicBallKey isEqual: @"RUNS"] && [[dicBall objectForKey:dicBallKey] isEqual : @"0"] && dicBall.count > 1)
-                content = [content stringByAppendingString: [dicBall objectForKey:dicBallKey]];
+                content = [content stringByAppendingString: content];
             else
-                content = [content stringByAppendingString: [dicBall objectForKey:dicBallKey]];
-            content = [content stringByAppendingString:@" "];
+                content = [content stringByAppendingString: [[dicBall objectForKey:dicBallKey] stringByAppendingString:@" " ]];
         }
         content = [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         //To Create ball tiker for each row.
@@ -2904,6 +2905,8 @@ EditModeVC * objEditModeVc;
                                       :xposition] atIndex:0];
         if (content.length >= 5)
             xposition = xposition + 7 + (15 * content.length);
+        else if (content.length >= 3)
+            xposition = xposition + 7 + (13 * content.length);
         else
             xposition = xposition + (isExtras ? 57 : 47);
     }
