@@ -766,6 +766,7 @@ BOOL isWicketSelected;
 
 -(IBAction)didClickInnings1team1:(id)sender
 {
+    indexCount = 0;
     self.highlightbtnxposition.constant=0;
     OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
     inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
@@ -774,6 +775,7 @@ BOOL isWicketSelected;
 }
 -(IBAction)didClickInnings1team2:(id)sender
 {
+    indexCount = 0;
     self.highlightbtnxposition.constant=self.Btn_innings1team2.frame.origin.x;
     OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"2"];
     inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"2"];
@@ -782,6 +784,7 @@ BOOL isWicketSelected;
 }
 -(IBAction)didClickInnings2team1:(id)sender
 {
+    indexCount = 0;
     self.highlightbtnxposition.constant=self.Btn_inning2steam1.frame.origin.x;
     OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"3"];
     inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"3"];
