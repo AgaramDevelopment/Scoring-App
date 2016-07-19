@@ -93,8 +93,12 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LY3-sR-cmO">
-                                    <rect key="frame" x="390" y="5" width="40" height="40"/>
-                                    <state key="normal" title="Button" image="dropDown"/>
+                                    <rect key="frame" x="0.0" y="5" width="430" height="40"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="Shq-n7-a5G"/>
+                                    </constraints>
+                                    <inset key="imageEdgeInsets" minX="386" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <state key="normal" image="dropDown"/>
                                     <connections>
                                         <action selector="btn_touch:" destination="-1" eventType="touchUpInside" id="Jvg-P5-NVQ"/>
                                     </connections>
@@ -102,14 +106,14 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="LY3-sR-cmO" secondAttribute="trailing" constant="10" id="2EF-xg-SxP"/>
                                 <constraint firstAttribute="trailing" secondItem="FOa-4n-14u" secondAttribute="trailing" constant="90" id="5Xn-ob-9Mm"/>
                                 <constraint firstItem="FOa-4n-14u" firstAttribute="leading" secondItem="aJZ-Xh-mzD" secondAttribute="leading" constant="43" id="6C8-JP-rxS"/>
+                                <constraint firstAttribute="trailing" secondItem="LY3-sR-cmO" secondAttribute="trailing" constant="10" id="6b7-8I-Jpr"/>
                                 <constraint firstItem="FOa-4n-14u" firstAttribute="top" secondItem="aJZ-Xh-mzD" secondAttribute="top" constant="14" id="Ffr-4a-4Es"/>
-                                <constraint firstItem="LY3-sR-cmO" firstAttribute="top" secondItem="aJZ-Xh-mzD" secondAttribute="top" constant="5" id="Ojt-YV-8gO"/>
+                                <constraint firstAttribute="bottom" secondItem="LY3-sR-cmO" secondAttribute="bottom" constant="5" id="IN1-3B-Sow"/>
                                 <constraint firstAttribute="bottom" secondItem="FOa-4n-14u" secondAttribute="bottom" constant="15" id="ba8-zm-66b"/>
-                                <constraint firstAttribute="bottom" secondItem="LY3-sR-cmO" secondAttribute="bottom" constant="5" id="vMc-Sv-E8e"/>
-                                <constraint firstItem="LY3-sR-cmO" firstAttribute="leading" secondItem="FOa-4n-14u" secondAttribute="trailing" constant="40" id="ze6-6S-ezP"/>
+                                <constraint firstItem="LY3-sR-cmO" firstAttribute="top" secondItem="aJZ-Xh-mzD" secondAttribute="top" constant="5" id="jNR-EI-jRf"/>
+                                <constraint firstItem="LY3-sR-cmO" firstAttribute="leading" secondItem="aJZ-Xh-mzD" secondAttribute="leading" id="qGx-15-sq4"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KZa-wc-dMp">

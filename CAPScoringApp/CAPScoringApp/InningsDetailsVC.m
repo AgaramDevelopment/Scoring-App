@@ -291,6 +291,11 @@
         self.Striker_tableview.hidden=NO;
         isEnableTbl=NO;
     }
+    else
+    {
+        self.Striker_tableview.hidden=YES;
+        isEnableTbl=YES;
+    }
 }
 
 - (IBAction)btn_Nonstriker:(id)sender {
@@ -301,6 +306,11 @@
         self.NonStriker_tableview.hidden=NO;
         isEnableTbl=NO;
     }
+    else
+    {
+        self.NonStriker_tableview.hidden=YES;
+        isEnableTbl=YES;
+    }
 }
 
 - (IBAction)btn_Bowler:(id)sender {
@@ -310,6 +320,11 @@
         [self.Bowler_tableview reloadData];
         self.Bowler_tableview.hidden=NO;
         isEnableTbl=NO;
+    }
+    else
+    {
+        self.Bowler_tableview.hidden=YES;
+        isEnableTbl=YES;
     }
 }
 

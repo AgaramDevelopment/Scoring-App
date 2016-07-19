@@ -77,7 +77,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate,EnddayDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -2887,10 +2887,10 @@ EditModeVC * objEditModeVc;
             [[dicBall objectForKey:kvpItem] isEqual : @"PENALTY"];
             
             if ([kvpItem isEqual: @"RUNS"] && [[dicBall objectForKey:kvpItem] isEqual : @"0"] && dicBall.count > 1)
-                content = [content stringByAppendingString: content];
+                content = [[[dicBall objectForKey:kvpItem] stringByAppendingString:@" "] stringByAppendingString: content];
             else
                 content =
-                [content stringByAppendingString: [[dicBall objectForKey:kvpItem] stringByAppendingString:@" "]];
+                [[[dicBall objectForKey:kvpItem] stringByAppendingString:@" "] stringByAppendingString: [content stringByAppendingString:@" "]];
         }
         
         //To Create ball tiker for each row.
@@ -7692,9 +7692,6 @@ self.lbl_umpirename.text=@"";
     endInning.MATCHTYPECODE = self.matchTypeCode;
     
     endInning.delegate =self;
-    // endInnings = [[EndInnings alloc]init];
-    
-    //[endInnings fetchEndInnings:self.competitionCode :self.matchCode :@"TEA0000024":@"1"];
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
@@ -7704,7 +7701,8 @@ self.lbl_umpirename.text=@"";
     //fullview.alpha=0.9;
     
     [self.view addSubview:fullview];
-        
+   
+    
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:endInning];
@@ -7734,6 +7732,7 @@ self.lbl_umpirename.text=@"";
     endDayVC.MATCHCODE = self.matchCode;
     endDayVC.TEAMCODE = fetchSEPageLoadRecord.BATTINGTEAMCODE;
     endDayVC.INNINGSNO = fetchSEPageLoadRecord.INNINGSNO;
+    endDayVC.delegate =self;
     
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
