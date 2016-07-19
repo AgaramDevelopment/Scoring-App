@@ -326,7 +326,7 @@ NSRegularExpression *isMatchedByRegex;
 //alphabet validation
 -(BOOL)textValidation:(NSString*) validation{
     
-    NSCharacterSet *charcter =[[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
+    NSCharacterSet *charcter =[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
     NSString *filtered;
     
     filtered = [[validation componentsSeparatedByCharactersInSet:charcter] componentsJoinedByString:@""];

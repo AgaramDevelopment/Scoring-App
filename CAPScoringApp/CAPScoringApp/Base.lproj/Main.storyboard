@@ -10,9 +10,6 @@
     <customFonts key="customFonts">
         <mutableArray key="BebasNeue Bold.ttf">
             <string>BebasNeueBold</string>
-            <string>BebasNeueBold</string>
-            <string>BebasNeueBold</string>
-            <string>BebasNeueBold</string>
         </mutableArray>
         <mutableArray key="BebasNeue Book.otf">
             <string>BebasNeueBook</string>
@@ -28,6 +25,9 @@
             <string>BebasNeueRegular</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-BOLD.TTF">
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
@@ -526,29 +526,39 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-user" translatesAutoresizingMaskIntoConstraints="NO" id="yN6-iK-ubv">
                                                 <rect key="frame" x="8" y="8" width="50" height="49"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="wcL-Nq-AF3"/>
+                                                    <constraint firstAttribute="width" constant="50" id="wcL-Nq-AF3">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                    </constraint>
                                                 </constraints>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="UserName" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Zwe-13-oVx">
                                                 <rect key="frame" x="70" y="19" width="426" height="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="28"/>
+                                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="28"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
-                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="value" red="0.67843137254901964" green="0.67843137254901964" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.27125538789999998" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="yN6-iK-ubv" secondAttribute="bottom" constant="8" id="0dr-tl-rZl"/>
-                                            <constraint firstAttribute="trailing" secondItem="Zwe-13-oVx" secondAttribute="trailing" constant="72" id="3Kf-1u-wBw"/>
+                                            <constraint firstAttribute="bottom" secondItem="yN6-iK-ubv" secondAttribute="bottom" constant="8" id="0dr-tl-rZl">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="13"/>
+                                            </constraint>
+                                            <constraint firstAttribute="trailing" secondItem="Zwe-13-oVx" secondAttribute="trailing" constant="72" id="3Kf-1u-wBw">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="8"/>
+                                            </constraint>
                                             <constraint firstItem="Zwe-13-oVx" firstAttribute="top" secondItem="rzr-Ak-Im1" secondAttribute="top" constant="19" id="6IR-fE-9Q9"/>
-                                            <constraint firstItem="yN6-iK-ubv" firstAttribute="top" secondItem="rzr-Ak-Im1" secondAttribute="top" constant="8" id="Bsv-mn-nF0"/>
+                                            <constraint firstItem="yN6-iK-ubv" firstAttribute="top" secondItem="rzr-Ak-Im1" secondAttribute="top" constant="8" id="Bsv-mn-nF0">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="12"/>
+                                            </constraint>
                                             <constraint firstAttribute="bottom" secondItem="Zwe-13-oVx" secondAttribute="bottom" constant="16" id="bn1-lq-K4H"/>
-                                            <constraint firstItem="Zwe-13-oVx" firstAttribute="leading" secondItem="yN6-iK-ubv" secondAttribute="trailing" constant="12" id="ee2-6D-DIc"/>
+                                            <constraint firstItem="Zwe-13-oVx" firstAttribute="leading" secondItem="yN6-iK-ubv" secondAttribute="trailing" constant="12" id="ee2-6D-DIc">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="22"/>
+                                            </constraint>
                                             <constraint firstAttribute="height" constant="65" id="gRK-1t-NxK"/>
                                             <constraint firstItem="yN6-iK-ubv" firstAttribute="leading" secondItem="rzr-Ak-Im1" secondAttribute="leading" constant="8" id="y90-eR-HRK"/>
                                         </constraints>
@@ -559,7 +569,9 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-pwd" translatesAutoresizingMaskIntoConstraints="NO" id="TEl-gQ-BdI">
                                                 <rect key="frame" x="8" y="8" width="50" height="49"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="50" id="hUi-Je-cN1"/>
+                                                    <constraint firstAttribute="width" constant="50" id="hUi-Je-cN1">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                                                    </constraint>
                                                 </constraints>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico-show-pwd" translatesAutoresizingMaskIntoConstraints="NO" id="qSa-aQ-KsK">
@@ -581,25 +593,31 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Nz-Cx-akk">
                                                 <rect key="frame" x="70" y="19" width="426" height="30"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="28"/>
+                                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="28"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
-                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="value" red="0.67843137254901964" green="0.67843137254901964" blue="0.67843137254901964" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </textField>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.27494612070000002" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstItem="6Nz-Cx-akk" firstAttribute="leading" secondItem="TEl-gQ-BdI" secondAttribute="trailing" constant="12" id="89a-yJ-T8A"/>
+                                            <constraint firstItem="6Nz-Cx-akk" firstAttribute="leading" secondItem="TEl-gQ-BdI" secondAttribute="trailing" constant="12" id="89a-yJ-T8A">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="22"/>
+                                            </constraint>
                                             <constraint firstAttribute="bottom" secondItem="fIU-kN-usl" secondAttribute="bottom" id="BVZ-Oz-aPt"/>
                                             <constraint firstAttribute="trailing" secondItem="qSa-aQ-KsK" secondAttribute="trailing" constant="8" id="JH4-cm-S9Q"/>
                                             <constraint firstAttribute="bottom" secondItem="qSa-aQ-KsK" secondAttribute="bottom" constant="8" id="NiP-Yo-e8X"/>
                                             <constraint firstAttribute="bottom" secondItem="6Nz-Cx-akk" secondAttribute="bottom" constant="16" id="PpC-TZ-RDC"/>
                                             <constraint firstAttribute="height" constant="65" id="ZaM-5G-bXJ"/>
-                                            <constraint firstAttribute="bottom" secondItem="TEl-gQ-BdI" secondAttribute="bottom" constant="8" id="cnF-Pm-XqU"/>
-                                            <constraint firstItem="TEl-gQ-BdI" firstAttribute="top" secondItem="Yve-kx-dY5" secondAttribute="top" constant="8" id="f0h-Bu-tDd"/>
+                                            <constraint firstAttribute="bottom" secondItem="TEl-gQ-BdI" secondAttribute="bottom" constant="8" id="cnF-Pm-XqU">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="13"/>
+                                            </constraint>
+                                            <constraint firstItem="TEl-gQ-BdI" firstAttribute="top" secondItem="Yve-kx-dY5" secondAttribute="top" constant="8" id="f0h-Bu-tDd">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="12"/>
+                                            </constraint>
                                             <constraint firstItem="TEl-gQ-BdI" firstAttribute="leading" secondItem="Yve-kx-dY5" secondAttribute="leading" constant="8" id="hxC-dg-oMv"/>
                                             <constraint firstItem="6Nz-Cx-akk" firstAttribute="top" secondItem="Yve-kx-dY5" secondAttribute="top" constant="19" id="j5i-ne-gW1"/>
                                             <constraint firstItem="fIU-kN-usl" firstAttribute="top" secondItem="Yve-kx-dY5" secondAttribute="top" id="swF-5C-gg2"/>
@@ -614,7 +632,7 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="65" id="FjL-Wz-pch"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" name="BebasNeueBold" family="Bebas Neue" pointSize="28"/>
+                                        <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="28"/>
                                         <state key="normal" title="LOGIN">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -5696,6 +5714,9 @@
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="16"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="160" y="1" width="440" height="102"/>
+                                                </variation>
                                             </textView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HBk-zT-YMj">
                                                 <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -5714,7 +5735,8 @@
                                                         <exclude reference="cIY-gc-wL3"/>
                                                     </mask>
                                                 </variation>
-                                                <variation key="heightClass=regular-widthClass=regular">
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="1" width="150" height="106"/>
                                                     <mask key="constraints">
                                                         <include reference="cIY-gc-wL3"/>
                                                     </mask>

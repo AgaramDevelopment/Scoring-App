@@ -13,6 +13,7 @@
 
 - (void) EndInningsBackBtnAction;
 - (void) EndInningsSaveBtnAction;
+- (void) EndInningsDeleteBtnAction;
 
 
 @end

@@ -3193,7 +3193,7 @@ EditModeVC * objEditModeVc;
 //                                
                             if(![fetchSEPageLoadRecord.ISOTHERSMATCHTYPE isEqual:@"MSC117"] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
                             {
-                                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings Completed " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                                 [altert show];
                                 if((![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.INNINGSNO ==2) ||([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.INNINGSNO ==4))
                                 {
@@ -3318,7 +3318,7 @@ EditModeVC * objEditModeVc;
             
             if(![ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&[MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
             {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings Completed " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [altert show];
                 if((![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.INNINGSNO ==2) ||([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.INNINGSNO ==4))
                 {
@@ -3525,11 +3525,11 @@ EditModeVC * objEditModeVc;
            
     }
         
-    else if(ispichmapSelectValue==YES)
-    {
-        [self selectedButtonBg:self.btn_pichmap];
-        
-    }
+//    else if(ispichmapSelectValue==YES)
+//    {
+//        [self selectedButtonBg:self.btn_pichmap];
+//        
+//    }
     
     
     _View_Appeal.hidden=YES;
@@ -12353,6 +12353,19 @@ self.lbl_umpirename.text=@"";
         Archivevc.CompitionCode=self.competitionCode;
         [self.navigationController pushViewController:Archivevc animated:YES];
     }
+}
+
+
+-(void) EndInningsDeleteBtnAction{
+    
+    [fullview removeFromSuperview];
+    ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
+    Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    // Archivevc.matchCode=self.matchCode;
+    Archivevc.CompitionCode=self.competitionCode;
+    [self.navigationController pushViewController:Archivevc animated:YES];
+
+    
 }
 
 -(void) MatchResultFinishBtnAction{
