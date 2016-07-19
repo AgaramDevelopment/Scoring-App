@@ -145,8 +145,8 @@ BOOL IsBack;
         [_btn_delete setUserInteractionEnabled:NO];
        
         
-        if ([MATCHTYPECODE isEqualToString:@"MSC022"] || [MATCHTYPECODE isEqualToString:@"MSC024"] ||
-            [MATCHTYPECODE isEqualToString:@"MSC116"] || [MATCHTYPECODE isEqualToString:@"MSC115"]) {
+        if ([fetchSePageLoad.MATCHTYPE isEqualToString:@"MSC022"] || [fetchSePageLoad.MATCHTYPE isEqualToString:@"MSC024"] ||
+            [fetchSePageLoad.MATCHTYPE isEqualToString:@"MSC116"] || [fetchSePageLoad.MATCHTYPE isEqualToString:@"MSC115"]) {
             
              self.lbl_thirdnFourthInnings.hidden = YES;
         }else{
