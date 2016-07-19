@@ -7561,11 +7561,6 @@ self.lbl_umpirename.text=@"";
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-    //fullview.alpha=0.9;
     
     breakvc.MATCHCODE=self.matchCode;
     breakvc.COMPETITIONCODE=self.competitionCode;
@@ -7580,10 +7575,6 @@ self.lbl_umpirename.text=@"";
     
     [self addChildViewController:breakvc];
     breakvc.view.frame =CGRectMake(90, 200, breakvc.view.frame.size.width, breakvc.view.frame.size.height);
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
-    
     [fullview addSubview:breakvc.view];
     breakvc.view.alpha = 0;
     [breakvc didMoveToParentViewController:self];
@@ -7649,15 +7640,9 @@ self.lbl_umpirename.text=@"";
         
         fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
         fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-        UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-        
-        [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-        //fullview.alpha=0.9;
-        
         objChanceTeamVC.view.alpha = 0;
         [objChanceTeamVC didMoveToParentViewController:self];
         objChanceTeamVC.view.frame =CGRectMake(90, 200, objChanceTeamVC.view.frame.size.width, objChanceTeamVC.view.frame.size.height);
-        [fullview addSubview:Btn_Fullview];
         [self.view addSubview:fullview];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
@@ -7684,15 +7669,10 @@ self.lbl_umpirename.text=@"";
             
             fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
             fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-            UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-            
-            [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-            //fullview.alpha=0.9;
             
             objChangeTossVC.view.alpha = 0;
             [objChangeTossVC didMoveToParentViewController:self];
             objChangeTossVC.view.frame =CGRectMake(90, 200, objChangeTossVC.view.frame.size.width, objChangeTossVC.view.frame.size.height);
-            [fullview addSubview:Btn_Fullview];
             [self.view addSubview:fullview];
             
             [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
@@ -7720,10 +7700,6 @@ self.lbl_umpirename.text=@"";
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-    //fullview.alpha=0.9;
     
     [self.view addSubview:fullview];
    
@@ -7762,10 +7738,6 @@ self.lbl_umpirename.text=@"";
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-    //fullview.alpha=0.9;
     
     [self.view addSubview:fullview];
     [fullview addSubview:revisedTarget.view];
@@ -7793,10 +7765,6 @@ self.lbl_umpirename.text=@"";
    {
        fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
        fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-       UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-       [fullview addSubview:Btn_Fullview];
-       [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-       //fullview.alpha=0.9;
        
        [self.view addSubview:fullview];
        EndSession *endSession = [[EndSession alloc]initWithNibName:@"EndSession" bundle:nil];
@@ -7838,51 +7806,6 @@ self.lbl_umpirename.text=@"";
        
        [endSession fetchPageEndSession:fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
        
-       
-       
-       
-       
-       
-       
-       
-//       
-//    EndSession *endSession = [[EndSession alloc]initWithNibName:@"EndSession" bundle:nil];
-//       endSession.matchcode =self.matchCode;
-//       endSession.compitionCode =self.competitionCode;
-//       endSession.fetchpagedetail=fetchSEPageLoadRecord;
-//       //endSession.bowlingCode    = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
-//    endSession.view.frame =CGRectMake(90, 200, endSession.view.frame.size.width, endSession.view.frame.size.height);
-//       endSession.delegate=self;
-//    
-//    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-//    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-//    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-//    [fullview addSubview:Btn_Fullview];
-//    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-//    //fullview.alpha=0.9;
-//    
-//    [self.view addSubview:fullview];
-//    
-//
-//    //    [fullview addSubview:endSession.view];
-//    endSession.view.alpha = 0;
-//    //    [endSession didMoveToParentViewController:self];
-//    
-//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-//     {
-//         endSession.view.alpha = 1;
-//     }
-//                     completion:nil];
-//    
-//    [endSession.btn_dropDown addTarget:self action:@selector(btn_dropDown:) forControlEvents:UIControlEventTouchUpInside];
-//    
-//    
-//       [self addChildViewController:endSession];
-//       
-//       [fullview addSubview:endSession.view];
-
-    
-    
     }
     
     
@@ -7918,15 +7841,10 @@ self.lbl_umpirename.text=@"";
             
             fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
             fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-            UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-            
-            [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-            //fullview.alpha=0.9;
             
             objFollowOn.view.alpha = 0;
             [objFollowOn didMoveToParentViewController:self];
             objFollowOn.view.frame =CGRectMake(90, 300, objFollowOn.view.frame.size.width, objFollowOn.view.frame.size.height);
-            [fullview addSubview:Btn_Fullview];
             [self.view addSubview:fullview];
             
             [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
@@ -8027,10 +7945,6 @@ self.lbl_umpirename.text=@"";
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,250)];
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-    //fullview.alpha=0.9;
     
     [self.view addSubview:fullview];
    // [fullview addSubview:revisedTarget.view];
@@ -8050,12 +7964,6 @@ self.lbl_umpirename.text=@"";
          declareInning.view.alpha = 1;
      }
                      completion:nil];
-    
-    
-    
-    
-    
-    
 }
 -(void)MatchResult
 {
@@ -8068,10 +7976,6 @@ self.lbl_umpirename.text=@"";
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-    //fullview.alpha=0.9;
     
     [self.view addSubview:fullview];
    // [fullview addSubview:revisedTarget.view];
@@ -8116,9 +8020,6 @@ self.lbl_umpirename.text=@"";
     //  otherwicketvc.PLAYERNAME=
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:fullview];
     [fullview addSubview:otherwikcetgricvc.view];
@@ -8178,10 +8079,6 @@ self.lbl_umpirename.text=@"";
     penalityVc.selectStartBallStatus=([self.btn_StartBall.currentTitle isEqualToString:@"END BALL"])? @"Yes":@"No";
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.view addSubview:fullview];
     [fullview addSubview:penalityVc.view];
     
@@ -8233,9 +8130,6 @@ self.lbl_umpirename.text=@"";
     powerplaygridvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:fullview];
     [fullview addSubview:powerplaygridvc.view];
@@ -8287,10 +8181,6 @@ self.lbl_umpirename.text=@"";
 {
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-    //fullview.alpha=0.9;
     
     [self.view addSubview:fullview];
     revisedTarget = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
@@ -8748,6 +8638,8 @@ self.lbl_umpirename.text=@"";
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
+    self.lbl_bowler_strickrate.adjustsFontSizeToFitWidth = YES;
+    
     //Non Striker Details
     self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
     self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
@@ -8755,7 +8647,7 @@ self.lbl_umpirename.text=@"";
     self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
     self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
     self.lbl_nonstricker_strickrate.text = fetchSEPageLoadRecord.nonstrickerStrickRate;
-    
+    self.lbl_nonstricker_strickrate.adjustsFontSizeToFitWidth = YES;
     //Bowler
     
     self.lbl_bowler_name.text = fetchSEPageLoadRecord.currentBowlerPlayerName;
@@ -8764,7 +8656,8 @@ self.lbl_umpirename.text=@"";
     self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
     self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
     self.lbl_bowler_strickrate.text = fetchSEPageLoadRecord.currentBowlerEcoRate;
-    
+    self.lbl_bowler_strickrate.adjustsFontSizeToFitWidth = YES;
+
     
     
     //team score details display
@@ -11882,11 +11775,6 @@ self.lbl_umpirename.text=@"";
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
-    
-    
     [self.view addSubview:fullview];
     revicedOverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
     revicedOverVc.matchCode=self.matchCode;
@@ -12240,10 +12128,13 @@ self.lbl_umpirename.text=@"";
 - (IBAction)SyncData_btn:(id)sender {
     
     NSMutableArray*MatcRegistraionGetArray=[PushSyncDBMANAGER RetrieveMATCHREGISTRATIONData:_competitionCode :_matchCode];
-    
+ 
     NSMutableArray*MatchTeamplayerDetailsGetArray=[PushSyncDBMANAGER RetrieveMATCHTEAMPLAYERDETAILSData:_matchCode];
+    
     NSMutableArray*MatchresultGetArray=[PushSyncDBMANAGER RetrieveMATCHRESULTData:_competitionCode :_matchCode];
+    
     NSMutableArray*MatchEventGetArray=[PushSyncDBMANAGER RetrieveMATCHEVENTSData:_competitionCode :_matchCode];
+    
     NSMutableArray*InningsSummeryGetArray= [PushSyncDBMANAGER RetrieveINNINGSSUMMARYData:_competitionCode :_matchCode];
     
     NSMutableArray*InningsEventGetArray= [PushSyncDBMANAGER RetrieveINNINGSEVENTSData:_competitionCode :_matchCode];
@@ -12270,7 +12161,7 @@ self.lbl_umpirename.text=@"";
     NSMutableArray*SessionEventGetArray= [PushSyncDBMANAGER RetrieveSESSIONEVENTSData:_competitionCode :_matchCode];
     
     NSMutableArray*AppealEventGetArray= [PushSyncDBMANAGER RetrieveAPPEALEVENTSData:_competitionCode :_matchCode];
-    
+
     NSMutableArray*WicketEventGetArray= [PushSyncDBMANAGER RetrieveWICKETEVENTSData:_competitionCode :_matchCode];
     
     NSMutableArray*PowerPlayGetArray= [PushSyncDBMANAGER RetrievePOWERPLAYData:_competitionCode :_matchCode];
@@ -12284,43 +12175,107 @@ self.lbl_umpirename.text=@"";
     
     
     NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
-    [PushDict setObject:MatcRegistraionGetArray forKey:@"MatcRegistraion"];
-    [PushDict setObject:MatchTeamplayerDetailsGetArray forKey:@"MatchTeamplayerDetails"];
-     [PushDict setObject:MatchresultGetArray forKey:@"Matchresult"];
-     [PushDict setObject:MatchEventGetArray forKey:@"MatchEvent"];
-     [PushDict setObject:InningsSummeryGetArray forKey:@"InningsSummery"];
-     [PushDict setObject:InningsEventGetArray forKey:@"InningsEvent"];
-     [PushDict setObject:InningsBreakEventGetArray forKey:@"InningsBreakEvent"];
-     [PushDict setObject:BallEventGetArray forKey:@"BallEvent"];
-     [PushDict setObject:BattingSummeryGetArray forKey:@"BattingSummery"];
-     [PushDict setObject:OverEventGetArray forKey:@"OverEvent"];
-     [PushDict setObject:BowlingSummeryGetArray forKey:@"BowlingSummery"];
-     [PushDict setObject:BowlingMaidenSummeryGetArray forKey:@"BowlingMaidenSummery"];
-     [PushDict setObject:BowlingOverDetailsGetArray forKey:@"BowlingOverDetails"];
-     [PushDict setObject:FieldingEventGetArray forKey:@"FieldingEvent"];
-     [PushDict setObject:DayEventGetArray forKey:@"DayEvent"];
-     [PushDict setObject:SessionEventGetArray forKey:@"SessionEvent"];
-    [PushDict setObject:AppealEventGetArray forKey:@"AppealEvent"];
-    [PushDict setObject:WicketEventGetArray forKey:@"WicketEvent"];
-    [PushDict setObject:PowerPlayGetArray forKey:@"PowerPlay"];
-    [PushDict setObject:PlayerInOutTimeGetArray forKey:@"PlayerInOutTime"];
-    [PushDict setObject:PenalitydetailsGetArray forKey:@"Penalitydetails"];
-    [PushDict setObject:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
+   [PushDict setValue :MatcRegistraionGetArray forKey:@"MatcRegistraion"];
+    
+     NSMutableDictionary *PushDict1 =[[NSMutableDictionary alloc]init];
+    [PushDict1 setValue:MatchTeamplayerDetailsGetArray forKey:@"MatchTeamplayerDetails"];
+    
+     NSMutableDictionary *PushDict2 =[[NSMutableDictionary alloc]init];
+     [PushDict2 setValue:MatchresultGetArray forKey:@"Matchresult"];
+    
+     NSMutableDictionary *PushDict3 =[[NSMutableDictionary alloc]init];
+     [PushDict3 setValue:MatchEventGetArray forKey:@"MatchEvent"];
+    
+     NSMutableDictionary *PushDict4 =[[NSMutableDictionary alloc]init];
+     [PushDict4 setValue:InningsSummeryGetArray forKey:@"InningsSummery"];
+    
+    
+     NSMutableDictionary *PushDict5 =[[NSMutableDictionary alloc]init];
+     [PushDict5 setValue:InningsEventGetArray forKey:@"InningsEvent"];
+    
+     NSMutableDictionary *PushDict6 =[[NSMutableDictionary alloc]init];
+     [PushDict6 setValue:InningsBreakEventGetArray forKey:@"InningsBreakEvent"];
+    
+     NSMutableDictionary *PushDict7 =[[NSMutableDictionary alloc]init];
+     [PushDict7 setValue:BallEventGetArray forKey:@"BallEvent"];
+    
+     NSMutableDictionary *PushDict8 =[[NSMutableDictionary alloc]init];
+     [PushDict8 setValue:BattingSummeryGetArray forKey:@"BattingSummery"];
+    
+     NSMutableDictionary *PushDict9 =[[NSMutableDictionary alloc]init];
+     [PushDict9 setValue:OverEventGetArray forKey:@"OverEvent"];
+    
+     NSMutableDictionary *PushDict10 =[[NSMutableDictionary alloc]init];
+     [PushDict10 setValue:BowlingSummeryGetArray forKey:@"BowlingSummery"];
+    
+    
+     NSMutableDictionary *PushDict11 =[[NSMutableDictionary alloc]init];
+     [PushDict11 setValue:BowlingMaidenSummeryGetArray forKey:@"BowlingMaidenSummery"];
+    
+     NSMutableDictionary *PushDict12 =[[NSMutableDictionary alloc]init];
+     [PushDict12 setValue:BowlingOverDetailsGetArray forKey:@"BowlingOverDetails"];
+    
+     NSMutableDictionary *PushDict13 =[[NSMutableDictionary alloc]init];
+     [PushDict13 setValue:FieldingEventGetArray forKey:@"FieldingEvent"];
+    
+     NSMutableDictionary *PushDict14 =[[NSMutableDictionary alloc]init];
+     [PushDict14 setValue:DayEventGetArray forKey:@"DayEvent"];
+    
+     NSMutableDictionary *PushDict15 =[[NSMutableDictionary alloc]init];
+     [PushDict15 setValue:SessionEventGetArray forKey:@"SessionEvent"];
+    
+     NSMutableDictionary *PushDict16 =[[NSMutableDictionary alloc]init];
+    [PushDict16 setValue:AppealEventGetArray forKey:@"AppealEvent"];
+    
+     NSMutableDictionary *PushDict17 =[[NSMutableDictionary alloc]init];
+    [PushDict17 setValue:WicketEventGetArray forKey:@"WicketEvent"];
+    
+     NSMutableDictionary *PushDict18 =[[NSMutableDictionary alloc]init];
+    [PushDict18 setValue:PowerPlayGetArray forKey:@"PowerPlay"];
+    
+     NSMutableDictionary *PushDict19 =[[NSMutableDictionary alloc]init];
+    [PushDict19 setValue:PlayerInOutTimeGetArray forKey:@"PlayerInOutTime"];
+    
+     NSMutableDictionary *PushDict20 =[[NSMutableDictionary alloc]init];
+    [PushDict20 setValue:PenalitydetailsGetArray forKey:@"Penalitydetails"];
+    
+     NSMutableDictionary *PushDict21=[[NSMutableDictionary alloc]init];
+    [PushDict21 setValue:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
+    
+    NSArray *sendarray=[[NSArray alloc]initWithObjects:PushDict,PushDict1,PushDict2,PushDict3,PushDict4,PushDict5,PushDict6,PushDict7,PushDict8,PushDict9,PushDict10,PushDict11,PushDict12,PushDict13,PushDict14,PushDict15,PushDict16,PushDict17,PushDict18,PushDict19,PushDict20,PushDict21,nil];
     
     
     
-    NSData *data = [NSJSONSerialization dataWithJSONObject:PushDict options:0 error:nil];
     
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://url"]];
-    [request setHTTPMethod:@"POST"];
-    [request setValue:@"application/json;charset=UTF-8" forHTTPHeaderField:@"content-type"];
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sendarray
+                                                       options:0
+                                                         error:nil];
+    if (!jsonData) {
+        NSLog(@"error");
+    } else {
+        NSString *JSONString = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",JSONString);
+    }
     
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:[NSURLSessionConfiguration defaultSessionConfiguration]];
-    NSURLSessionUploadTask *dataTask = [session uploadTaskWithRequest: request
-                                                             fromData: data completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
-                                                                 NSDictionary *json = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
-                                                                 NSLog(@"%@", json);
-                                                             }];
+//    NSURLResponse *response;
+//    NSError *error;
+//    
+//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sendarray options:NSJSONWritingPrettyPrinted error:&error];
+//    
+//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
+//                                    [NSURL URLWithString:@"http://192.168.1.39:8096/CAPMobilityService.svc/PUSHDATATOSERVER"]];
+//    
+//    [request setHTTPMethod:@"POST"];
+//    [request setHTTPBody: jsonData];
+//    
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
+//    
+//    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//    NSString *serverResponse = (NSString *)[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    
+    
     
 }
 - (IBAction)Exit_btn:(id)sender {
