@@ -47,7 +47,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="550" height="60"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d3y-cX-in1">
-                                    <rect key="frame" x="381" y="16" width="163" height="36"/>
+                                    <rect key="frame" x="381" y="13" width="163" height="36"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COZ-Ih-087">
                                             <rect key="frame" x="0.0" y="0.0" width="163" height="36"/>
@@ -91,20 +91,20 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BREAK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Fh-Oe-scr">
-                                    <rect key="frame" x="197" y="23" width="146" height="23"/>
+                                    <rect key="frame" x="197" y="13" width="146" height="34"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="146" id="UQg-cB-Mv0"/>
-                                        <constraint firstAttribute="height" constant="23" id="gNW-HX-keM"/>
+                                        <constraint firstAttribute="height" constant="34" id="gNW-HX-keM"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3FL-fc-A4h">
-                                    <rect key="frame" x="16" y="16" width="30" height="30"/>
+                                    <rect key="frame" x="16" y="7" width="45" height="45"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="30" id="Q2P-hV-2Rd"/>
-                                        <constraint firstAttribute="height" constant="30" id="Wb3-9n-j7X"/>
+                                        <constraint firstAttribute="width" constant="45" id="Q2P-hV-2Rd"/>
+                                        <constraint firstAttribute="height" constant="45" id="Wb3-9n-j7X"/>
                                     </constraints>
                                     <state key="normal" image="ico-back-btn"/>
                                     <connections>
@@ -114,11 +114,11 @@
                             </subviews>
                             <color key="backgroundColor" red="0.17254901959999999" green="0.23921568630000001" blue="0.57254901960000004" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="3FL-fc-A4h" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="top" constant="16" id="48W-aV-vKW"/>
-                                <constraint firstItem="d3y-cX-in1" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="top" constant="16" id="Q29-OI-zJ1"/>
-                                <constraint firstAttribute="bottom" secondItem="d3y-cX-in1" secondAttribute="bottom" constant="8" id="XjA-XU-hCe"/>
+                                <constraint firstItem="3FL-fc-A4h" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="top" constant="7" id="48W-aV-vKW"/>
+                                <constraint firstItem="d3y-cX-in1" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="top" constant="13" id="Q29-OI-zJ1"/>
+                                <constraint firstAttribute="bottom" secondItem="d3y-cX-in1" secondAttribute="bottom" constant="11" id="XjA-XU-hCe"/>
                                 <constraint firstAttribute="trailing" secondItem="d3y-cX-in1" secondAttribute="trailing" constant="6" id="b2M-3A-g45"/>
-                                <constraint firstItem="3Fh-Oe-scr" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="top" constant="23" id="ha1-IC-aYn"/>
+                                <constraint firstItem="3Fh-Oe-scr" firstAttribute="top" secondItem="jeN-GQ-Y6N" secondAttribute="top" constant="13" id="ha1-IC-aYn"/>
                                 <constraint firstItem="3FL-fc-A4h" firstAttribute="leading" secondItem="jeN-GQ-Y6N" secondAttribute="leading" constant="16" id="lw0-Io-tcZ"/>
                                 <constraint firstItem="d3y-cX-in1" firstAttribute="leading" secondItem="3Fh-Oe-scr" secondAttribute="trailing" constant="38" id="xCL-9M-5VZ"/>
                             </constraints>
@@ -132,7 +132,7 @@
                                         <constraint firstAttribute="width" constant="103" id="KUr-B0-kuU"/>
                                         <constraint firstAttribute="height" constant="31" id="vsh-Zt-K8Y"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="19"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <color key="textColor" red="0.047058823530000002" green="0.1019607843" blue="0.16862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>

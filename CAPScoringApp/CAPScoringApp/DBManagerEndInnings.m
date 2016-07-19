@@ -1847,7 +1847,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.THREES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
                 record.FOURS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
                 record.SIXES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-                //                                       record.DOTBALLS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                record.DOTBALLS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
                 //                                       record.WICKETNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
                 //                                       record.WICKETTYPE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
                 //                                       record.FIELDERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
@@ -3618,8 +3618,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.INNINGSNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
                 record.BATTINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
                 record.DAYDURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                record.INNINGSDURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
-                record.DURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+//                record.INNINGSDURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+//                record.DURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
                 [InningsArrayForDelete addObject:record];
             }
             

@@ -10,6 +10,7 @@
 #import "InningsBowlerDetailsRecord.h"
 #import "OverBallCountRecord.h"
 #import "EndInnings.h"
+#import "DBManagerEndBall.h"
 
 @implementation InsertSEScoreEngine
 
@@ -336,10 +337,10 @@
         [insertEndInnings insertScordBoard:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO];
         
         
-        
+        [DBManagerEndBall UPDATEWICKETOVERNOUPSE : COMPETITIONCODE:  MATCHCODE : INNINGSNO];
         
         //     [INSERTSCOREBOARD  :	 COMPETITIONCODE: 	 MATCHCODE: 	 BATTINGTEAMCODE: 	 BOWLINGTEAMCODE: 	 INNINGSNO: 	 SB_STRIKERCODE: 	 ISFOUR: 	 ISSIX: 	 RUNS: 	 OVERTHROW: 	 ISWICKET: 	 WICKETTYPE: 	 WICKETPLAYER: 	 SB_BOWLERCODE: 	 N_OVERNO: 	 N_BALLNO: 	 BATTEAMRUNS: 	 WIDE: 	 NOBALL: 	 BYES: 	 LEGBYES: 	0:: 	1:	0:	0:	1];
-        [DBManagerInsertScoreEngine UpdateBSForInsertScoreEngine : COMPETITIONCODE:  MATCHCODE : INNINGSNO];
+       // [DBManagerInsertScoreEngine UpdateBSForInsertScoreEngine : COMPETITIONCODE:  MATCHCODE : INNINGSNO];
         
         //        BATTINGTEAMCODE =TEAMCODE;
         //

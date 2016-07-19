@@ -410,7 +410,7 @@ BOOL isWicketSelected;
         NSString * objWicketType =[objwicketType objectAtIndex:i];
         NSString * grandTotal =[objGrandTotal objectAtIndex:i];
         
-        
+        NSMutableArray* dicBallKeysArray = [[NSMutableArray alloc] init];
         NSMutableDictionary * dicAddbowlerdetails=[[NSMutableDictionary alloc]init];
         int overThrow = [objoverThrow intValue];
         int runs      = [objRuns intValue]+overThrow;
@@ -433,7 +433,7 @@ BOOL isWicketSelected;
             NSString* runValue = [NSString stringWithFormat:@"%i", runs];
             [dicAddbowlerdetails setValue:runValue forKey:@"RUNS"];
         }
-        
+        [dicBallKeysArray addObject:@"RUNS"];
         if (noBall!=0)//Ball ticker for no balls.
         {
             int obj =noBall;
@@ -450,6 +450,7 @@ BOOL isWicketSelected;
                 
             }
             [dicAddbowlerdetails setObject:@"NB" forKey:@"EXTRAS-NB"];
+            [dicBallKeysArray addObject:@"EXTRAS-NB"];
             
         }
         if (wide != 0)//Ball ticker for wide balls.
@@ -460,7 +461,8 @@ BOOL isWicketSelected;
                 [dicAddbowlerdetails removeObjectForKey:@"RUNS"];
                 [dicAddbowlerdetails setValue:wideValues forKey:@"RUNS"];
             }
-            [dicAddbowlerdetails setObject:@"WD" forKey:@"EXTRAS-NB"];
+            [dicAddbowlerdetails setObject:@"WD" forKey:@"EXTRAS"];
+            [dicBallKeysArray addObject:@"EXTRAS"];
             
         }
         
@@ -482,7 +484,10 @@ BOOL isWicketSelected;
                 
             }
             if (noBall == 0)
+            {
                 [dicAddbowlerdetails setValue:@"LB" forKey:@"EXTRAS"];
+                [dicBallKeysArray addObject:@"EXTRAS"];
+            }
         }
         
         if (byes != 0)//Ball ticker for byes.
@@ -496,7 +501,10 @@ BOOL isWicketSelected;
                 
             }
             if (noBall == 0)
+            {
                 [dicAddbowlerdetails setValue:@"B" forKey:@"EXTRAS"];
+                [dicBallKeysArray addObject:@"EXTRAS"];
+            }
         }
         // MessageBox.Show(drballdetails["WICKETNO"].ToString());
         if (![objWicketNo isEqualToString:@"0"])
@@ -513,7 +521,7 @@ BOOL isWicketSelected;
                     EachoverWicketCount =1+EachoverWicketCount;
                 }
             }
-            
+            [dicBallKeysArray addObject:@"WICKETS"];
             //dicBall.Add("WICKETS", "W");
         }
         
@@ -537,6 +545,7 @@ BOOL isWicketSelected;
             //  penaltyLabel = [penaltyLabel isEqualToString:@"MSC134"] ? ("BP " + penalty) : [penaltyLabel isEqualToString @"MSC135" ] ? ("FP " + penalty) : "";
             
             [dicAddbowlerdetails setValue:penaltyLabel forKey:@"PENALTY"];
+            [dicBallKeysArray addObject:@"PENALTY"];
             
         }
         
@@ -552,22 +561,23 @@ BOOL isWicketSelected;
         else{
             isSpecialEvents=NO;
         }
-        for(NSString * kvpItem in dicAddbowlerdetails)
+        for(int i = 0; i < dicBallKeysArray.count; i++)
         {
-            isExtras = [[dicAddbowlerdetails valueForKey:kvpItem ] isEqualToString:@"WD"] ||
-            [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"NB"] ||
-            [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"B"] ||
-            [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"LB"] ||
-            [[dicAddbowlerdetails valueForKey:kvpItem] isEqualToString:@"PENALTY"];
+            NSString *dicBallKey = [dicBallKeysArray objectAtIndex:i];
+            isExtras = [[dicAddbowlerdetails valueForKey:dicBallKey ] isEqualToString:@"WD"] ||
+            [[dicAddbowlerdetails valueForKey:dicBallKey] isEqualToString:@"NB"] ||
+            [[dicAddbowlerdetails valueForKey:dicBallKey] isEqualToString:@"B"] ||
+            [[dicAddbowlerdetails valueForKey:dicBallKey] isEqualToString:@"LB"] ||
+            [[dicAddbowlerdetails valueForKey:dicBallKey] isEqualToString:@"PENALTY"];
             
-            if ([kvpItem isEqual: @"RUNS"] && [[dicAddbowlerdetails objectForKey:kvpItem] isEqual : @"0"] && dicAddbowlerdetails.count > 1)
-                content = [[[dicAddbowlerdetails objectForKey:kvpItem] stringByAppendingString:@" "] stringByAppendingString: content];
+            if ([dicBallKey isEqual: @"RUNS"] && [[dicAddbowlerdetails objectForKey:dicBallKey] isEqual : @"0"] && dicAddbowlerdetails.count > 1)
+                content = [content stringByAppendingString: [dicAddbowlerdetails objectForKey:dicBallKey]];
             else
-                content =
-                [[[dicAddbowlerdetails objectForKey:kvpItem] stringByAppendingString:@" "] stringByAppendingString: [content stringByAppendingString:@" "]];
+                content = [content stringByAppendingString: [dicAddbowlerdetails objectForKey:dicBallKey]];
+            content = [content stringByAppendingString:@" "];
         }
         totalRun  =[grandTotal intValue]+totalRun;
-        [self CreateBallTickerInstance: [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]] :isExtras :isSpecialEvents :objnoball :cell :indexpath];
+        [self CreateBallTickerInstance: [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] :isExtras :isSpecialEvents :objnoball :cell :indexpath];
         
     }
     
@@ -766,6 +776,7 @@ BOOL isWicketSelected;
 
 -(IBAction)didClickInnings1team1:(id)sender
 {
+    indexCount = 0;
     self.highlightbtnxposition.constant=0;
     OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
     inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
@@ -774,6 +785,7 @@ BOOL isWicketSelected;
 }
 -(IBAction)didClickInnings1team2:(id)sender
 {
+    indexCount = 0;
     self.highlightbtnxposition.constant=self.Btn_innings1team2.frame.origin.x;
     OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"2"];
     inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"2"];
@@ -782,6 +794,7 @@ BOOL isWicketSelected;
 }
 -(IBAction)didClickInnings2team1:(id)sender
 {
+    indexCount = 0;
     self.highlightbtnxposition.constant=self.Btn_inning2steam1.frame.origin.x;
     OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"3"];
     inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"3"];

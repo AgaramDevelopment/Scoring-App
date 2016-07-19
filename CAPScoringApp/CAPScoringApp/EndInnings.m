@@ -674,7 +674,7 @@ EndInningsVC *save;
                            O_THREES = endInnings.THREES;
                            O_FOURS = endInnings.FOURS;
                            O_SIXES = endInnings.SIXES;
-                           //                           O_DOTBALLS = endInnings.DOTBALLS;
+                           O_DOTBALLS = endInnings.DOTBALLS;
                            //                           O_WICKETNO = endInnings.WICKETNO;
                            //                           O_WICKETTYPE = endInnings.WICKETTYPE;
                            //                           O_FIELDERCODE = endInnings.FIELDERCODE;
@@ -689,7 +689,7 @@ EndInningsVC *save;
         
         UPDATEFLAGBAT = [NSNumber numberWithInt:0];
         
-        [DBManagerEndInnings GetOBattingPositionNoForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO];
+       O_BATTINGPOSITIONNO = [DBManagerEndInnings GetOBattingPositionNoForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO];
 					   
         
     }
@@ -737,6 +737,7 @@ EndInningsVC *save;
         [DBManagerEndInnings UpdatebattingSummaryForInsertScoreBoard : N_BATTINGPOSITIONNO : N_RUNS: N_BALLS: N_ONES:N_TWOS :N_THREES : N_FOURS : N_SIXES : N_DOTBALLS:COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO : BATSMANCODE];
         
     }
+    
     if([DBManagerEndInnings  GetWicKetTypeForInsertScoreBoard : COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE :INNINGSNO :WICKETPLAYER])
     {
         
@@ -1123,7 +1124,7 @@ EndInningsVC *save;
                 
                 
                 
-                if ([MATCHTYPE isEqualToString:@"MSC022"] || [ MATCHTYPE isEqualToString:@"MSC024"]||[ MATCHTYPE isEqualToString:@"MSC115"]||[ MATCHTYPE isEqualToString:@"MSC116"] && INNINGSCOUNT > 1)
+                if (([MATCHTYPE isEqualToString:@"MSC022"] || [ MATCHTYPE isEqualToString:@"MSC024"]||[ MATCHTYPE isEqualToString:@"MSC115"]||[ MATCHTYPE isEqualToString:@"MSC116"]) && INNINGSCOUNT > 1)
                     
                     
                     
@@ -1133,6 +1134,7 @@ EndInningsVC *save;
                 }
                 
             }
+            
             NSMutableArray *InningsArrayForDelete=[DBManagerEndInnings GetInningsDetailsForDeleteEndInnings: MATCHCODE];
         }
         
