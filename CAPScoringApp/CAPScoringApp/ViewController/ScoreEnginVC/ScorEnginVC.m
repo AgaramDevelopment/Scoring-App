@@ -679,6 +679,10 @@ EditModeVC * objEditModeVc;
     //Set data for Fetch SE page load
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     
+    
+    //MatchType
+    fetchSEPageLoadRecord.MATCHTYPE = fetchSeBallCodeDetails.MATCHTYPE;
+    
     //Batting and bowling players
     fetchSEPageLoadRecord.getBattingTeamPlayers = fetchSeBallCodeDetails.GetBattingTeamPlayersArray;
     fetchSEPageLoadRecord.getBowlingTeamPlayers = fetchSeBallCodeDetails.GetBowlingTeamPlayersArray;
@@ -1253,6 +1257,12 @@ EditModeVC * objEditModeVc;
         
         _lbl_teamBSecIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.FOURTHINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FOURTHINNINGSTOTAL,fetchSEPageLoadRecord.FOURTHINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FOURTHINNINGSWICKET];
         _lbl_teamBSecIngsOvs.text =[NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FOURTHINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FOURTHINNINGSOVERS];
+        
+        
+        
+        
+        
+        
     }
     
 }
