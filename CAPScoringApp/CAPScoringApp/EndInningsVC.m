@@ -29,7 +29,9 @@
     NSString *TOTALRUNS;
     NSString *OVERNO;
     NSString *WICKETS;
-    
+    NSString * BtnurrentTittle;
+    NSString *OldTeamCode;
+    NSString *OldInningsNo;
     
 }
 @end
@@ -67,7 +69,8 @@ BOOL IsBack;
         
          [self.btn_delete addTarget:self action:@selector(btn_delete:) forControlEvents:UIControlEventTouchUpInside];
         
-       
+     
+        
         
         //fetchSePageLoad = [[FetchSEPageLoadRecord alloc]init];
         
@@ -264,6 +267,8 @@ BOOL IsBack;
 
 - (IBAction)btn_addInnings:(id)sender {
     
+    BtnurrentTittle =[NSString stringWithFormat:self.btn_save.currentTitle];
+    BtnurrentTittle = @"INSERT";
     
     self.view_allControls.hidden = NO;
     self.tbl_endInnings.hidden = YES;
@@ -327,6 +332,8 @@ BOOL IsBack;
     int days = timeDifference / 60;
     NSString *Duration = [NSString stringWithFormat:@"%d", days];
     
+   BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
+    BtnurrentTittle = @"UPDATE";
     
    TOTALRUNS=[DBManagerEndInnings GetTotalRunsForFetchEndInnings : CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
     
@@ -337,17 +344,19 @@ BOOL IsBack;
     NSString*startInningsTime = obj.STARTTIME;
     NSString*endInningsTime  = obj.ENDTIME;
     NSString*teamName = obj.TEAMNAME;
-    NSString *totalRuns = TOTALRUNS;
-    NSString*totalOvers = OVERNO;
-    NSNumber *totalWickets = WICKETS;
+    int totalRuns = [NSNumber numberWithInt:obj.TOTALRUNS];
+    NSString*totalOvers = obj.TOTALOVERS;
+    NSNumber *totalWickets = obj.TOTALWICKETS;
     NSString *innings = obj.INNINGSNO;
+    
+    OldTeamCode = obj.BATTINGTEAMCODE;
+    OldInningsNo = obj.INNINGSNO;
     
     self.txt_startInnings.text = startInningsTime;
     self.txt_endInnings.text = endInningsTime;
     self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
     self.lbl_teamName.text = teamName;
-    self.lbl_runScored.text = [NSString stringWithFormat:@"%@", totalRuns];
-    self.lbl_overPlayed.text = totalOvers;
+    self.lbl_runScored.text = [NSString stringWithFormat:@"%d", totalRuns];
     self.lbl_wktLost.text = [NSString stringWithFormat:@"%@", totalWickets];
     self.lbl_innings.text = innings;
     self.tbl_endInnings.hidden = YES;
@@ -383,11 +392,17 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
     
     if ([self checkValidation]) {
         
-        NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
-        BtnurrentTittle = @"INSERT";
-        [innings InsertEndInnings: CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS: BtnurrentTittle];
+      
+        if ([BtnurrentTittle isEqualToString:@"INSERT"]) {
+
+             [innings InsertEndInnings: CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS: BtnurrentTittle];
+        }else{
+            
+            [innings InsertEndInnings : CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :OldTeamCode :OldInningsNo  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS: BtnurrentTittle];
+        }
         
-    
+        
+        
     if(self.checkInternetConnection){
         
         AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -428,8 +443,10 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
             [delegate hideLoading];
         }
     }
-        [self.delegate EndInningsSaveBtnAction];
+        
         [self.tbl_endInnings reloadData];
+        [self.delegate EndInningsSaveBtnAction];
+        
         self.tbl_endInnings.hidden = NO;
          self.view_Header.hidden = NO;
         self.view_allControls.hidden = YES;

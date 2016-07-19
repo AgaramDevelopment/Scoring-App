@@ -49,7 +49,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             NSAssert1(0, @"Failed to create writable database file with message '%@'.", [error localizedDescription]);
     }
 }
-
++(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
+    return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
+}
 
 +(NSMutableArray *) GetBattingTeamPlayers:(NSString*) TEAMCODE:(NSString*) MATCHCODE{
     NSMutableArray *GetBattingTeamPlayersArray=[[NSMutableArray alloc]init];
@@ -186,7 +188,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
                 f.numberStyle = NSNumberFormatterDecimalStyle;
-                NSNumber *MAXINNINGSNO = [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
+                NSString * maxNo= [self getValueByNull:statement :0];
+                NSNumber *MAXINNINGSNO = [f numberFromString:maxNo];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 

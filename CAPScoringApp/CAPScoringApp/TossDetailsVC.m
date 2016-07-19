@@ -530,6 +530,15 @@
         [self.view_Striker setUserInteractionEnabled:YES];
         [self.nonStriker setUserInteractionEnabled:YES];
         [self.view_Bowler setUserInteractionEnabled:YES];
+        
+        self.Striker_table.hidden=YES;
+        isEnableTbl=YES;
+        
+        self.nonStriker_table.hidden=YES;
+        isEnableTbl=YES;
+        
+        self.Bowler_table.hidden=YES;
+        isEnableTbl=YES;
     }
     else{
         self.electedTo_table.hidden=YES;
@@ -675,14 +684,6 @@
         }
         else{
             teambCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
-            //            if(selectTeamindex==0)
-            //            {
-            //                teambCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
-            //            }
-            //            if(selectTeamindex==1)
-            //            {
-            //                teambCode=[[WonTossArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
-            //            }
             
         }
         
