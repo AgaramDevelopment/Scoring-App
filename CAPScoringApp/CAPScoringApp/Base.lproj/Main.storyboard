@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -4350,7 +4350,9 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZb-Cm-pDs">
                                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="35" id="oNu-io-mDh"/>
+                                                            <constraint firstAttribute="width" constant="35" id="oNu-io-mDh">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="48"/>
+                                                            </constraint>
                                                             <constraint firstAttribute="height" constant="21" id="qx7-QA-IFS"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="16"/>
@@ -4412,7 +4414,7 @@
                                                     <constraint firstItem="5pe-eI-xRP" firstAttribute="top" secondItem="lBe-SW-h6P" secondAttribute="top" constant="10" id="nOU-1a-OYn"/>
                                                     <constraint firstAttribute="bottom" secondItem="pNf-OW-LBS" secondAttribute="bottom" constant="5" id="ppr-F2-tnA"/>
                                                     <constraint firstAttribute="trailing" secondItem="fZb-Cm-pDs" secondAttribute="trailing" constant="10" id="xzk-WH-Oxd">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="21"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="8"/>
                                                     </constraint>
                                                 </constraints>
                                                 <variation key="default">
@@ -4620,7 +4622,9 @@
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BuD-64-Ps6">
                                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="width" constant="35" id="aFX-sn-Iq6"/>
+                                                            <constraint firstAttribute="width" constant="35" id="aFX-sn-Iq6">
+                                                                <variation key="heightClass=regular-widthClass=regular" constant="47"/>
+                                                            </constraint>
                                                             <constraint firstAttribute="height" constant="21" id="gU5-Ec-naG"/>
                                                         </constraints>
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="16"/>
@@ -4650,7 +4654,7 @@
                                                     <constraint firstItem="vWx-SH-kcB" firstAttribute="leading" secondItem="qyc-re-Ihf" secondAttribute="trailing" constant="5" id="KJ4-GK-jbR"/>
                                                     <constraint firstAttribute="bottom" secondItem="WLp-ri-q4l" secondAttribute="bottom" constant="5" id="OGa-tb-TSX"/>
                                                     <constraint firstAttribute="trailing" secondItem="BuD-64-Ps6" secondAttribute="trailing" constant="10" id="WHr-8M-8Hl">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="8"/>
                                                     </constraint>
                                                     <constraint firstItem="qyc-re-Ihf" firstAttribute="leading" secondItem="0HW-Do-Smd" secondAttribute="trailing" constant="5" id="WTY-pm-yRA"/>
                                                     <constraint firstItem="WLp-ri-q4l" firstAttribute="leading" secondItem="AwK-4T-gxd" secondAttribute="leading" constant="8" id="Woy-YU-6Rz"/>

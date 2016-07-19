@@ -32,6 +32,7 @@
     NSString * BtnurrentTittle;
     NSString *OldTeamCode;
     NSString *OldInningsNo;
+    NSString *ballNo;
     
 }
 @end
@@ -95,6 +96,7 @@ BOOL IsBack;
         self.lbl_wktLost.text = innings.WICKETS;
         self.lbl_innings.text = fetchSePageLoad.INNINGSNO;
         
+       
         
         // Do any additional setup after loading the view from its nib.
         //self.view.frame =CGRectMake(0,0, [[UIScreen mainScreen] bounds].size.width, 100);
@@ -318,6 +320,8 @@ BOOL IsBack;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
     EndInnings *obj =(EndInnings*)[endInningsArray objectAtIndex:indexPath.row];
     
     formatter = [[NSDateFormatter alloc]init];
@@ -344,6 +348,8 @@ BOOL IsBack;
     
     OVERNO=[DBManagerEndInnings GetOverNoForFetchEndInnings : CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
     
+    ballNo = [DBManagerEndInnings GetBallNoForFetchEndInnings:CompetitionCode :MatchCode :obj.BATTINGTEAMCODE :OVERNO :obj.INNINGSNO];
+    
     WICKETS=[DBManagerEndInnings GetWicketForFetchEndInnings : CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
     
     NSString*startInningsTime = obj.STARTTIME;
@@ -362,6 +368,8 @@ BOOL IsBack;
     self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
     self.lbl_teamName.text = teamName;
     self.lbl_runScored.text = TOTALRUNS;
+    self.lbl_overPlayed.text = [NSString stringWithFormat:@"%@.%@" ,OVERNO,ballNo];
+
     self.lbl_wktLost.text = totalWickets;
     self.lbl_innings.text = innings;
     self.tbl_endInnings.hidden = YES;
