@@ -804,8 +804,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. WICKETNO=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)]];
                 record. WICKETTYPE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
                 record. WICKETPLAYER=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                record. FIELDINGPLAYER=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
-                record.  WICKETEVENT=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                record. FIELDINGPLAYER=[self getValueByNull :statement:9];
+                record.  WICKETEVENT=[self getValueByNull :statement:11];
                 record.  ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
                
                 
