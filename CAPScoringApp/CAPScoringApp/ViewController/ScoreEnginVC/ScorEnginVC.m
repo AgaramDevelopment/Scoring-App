@@ -12344,6 +12344,19 @@ self.lbl_umpirename.text=@"";
     }
 }
 
+
+-(void) EndInningsDeleteBtnAction{
+    
+    [fullview removeFromSuperview];
+    ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
+    Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
+    // Archivevc.matchCode=self.matchCode;
+    Archivevc.CompitionCode=self.competitionCode;
+    [self.navigationController pushViewController:Archivevc animated:YES];
+
+    
+}
+
 -(void) MatchResultFinishBtnAction{
     
     [fullview removeFromSuperview];

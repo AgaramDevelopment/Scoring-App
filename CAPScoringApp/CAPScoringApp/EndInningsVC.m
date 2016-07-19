@@ -145,8 +145,8 @@ BOOL IsBack;
         [_btn_delete setUserInteractionEnabled:NO];
        
         
-        if ([MATCHTYPECODE isEqualToString:@"MSC022"] || [MATCHTYPECODE isEqualToString:@"MSC024"] ||
-            [MATCHTYPECODE isEqualToString:@"MSC116"] || [MATCHTYPECODE isEqualToString:@"MSC115"]) {
+        if ([fetchSePageLoad.MATCHTYPE isEqualToString:@"MSC022"] || [fetchSePageLoad.MATCHTYPE isEqualToString:@"MSC024"] ||
+            [fetchSePageLoad.MATCHTYPE isEqualToString:@"MSC116"] || [fetchSePageLoad.MATCHTYPE isEqualToString:@"MSC115"]) {
             
              self.lbl_thirdnFourthInnings.hidden = YES;
         }else{
@@ -337,7 +337,10 @@ BOOL IsBack;
     
     [self.btn_save setTitle: @"UPDATE" forState: UIControlStateNormal];
     
-   TOTALRUNS=[DBManagerEndInnings GetTotalRunsForFetchEndInnings : CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
+    
+    NSNumber  *total = [DBManagerEndInnings GetTotalRunsForFetchEndInnings : CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
+
+    TOTALRUNS = [NSString stringWithFormat:@"%@",total];
     
     OVERNO=[DBManagerEndInnings GetOverNoForFetchEndInnings : CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
     
@@ -346,9 +349,9 @@ BOOL IsBack;
     NSString*startInningsTime = obj.STARTTIME;
     NSString*endInningsTime  = obj.ENDTIME;
     NSString*teamName = obj.TEAMNAME;
-    int totalRuns = [NSNumber numberWithInt:obj.TOTALRUNS];
+   // int totalRuns = [NSNumber numberWithInt:obj.TOTALRUNS];
     NSString*totalOvers = obj.TOTALOVERS;
-    NSNumber *totalWickets = obj.TOTALWICKETS;
+    NSString *totalWickets = WICKETS;
     NSString *innings = obj.INNINGSNO;
     
     OldTeamCode = obj.BATTINGTEAMCODE;
@@ -358,8 +361,8 @@ BOOL IsBack;
     self.txt_endInnings.text = endInningsTime;
     self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
     self.lbl_teamName.text = teamName;
-    self.lbl_runScored.text = [NSString stringWithFormat:@"%d", totalRuns];
-    self.lbl_wktLost.text = [NSString stringWithFormat:@"%@", totalWickets];
+    self.lbl_runScored.text = TOTALRUNS;
+    self.lbl_wktLost.text = totalWickets;
     self.lbl_innings.text = innings;
     self.tbl_endInnings.hidden = YES;
     self.view_Header.hidden = YES;
@@ -541,7 +544,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         
     }
     [endInningsArray removeLastObject];
-    
+    [self.delegate EndInningsDeleteBtnAction];
     [self fetchPageload:fetchEndinnings :CompetitionCode :MatchCode];
     [self.tbl_endInnings reloadData];
     
