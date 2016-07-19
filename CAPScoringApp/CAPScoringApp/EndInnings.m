@@ -1123,7 +1123,7 @@ EndInningsVC *save;
                 
                 
                 
-                if ([MATCHTYPE isEqualToString:@"MSC022"] || [ MATCHTYPE isEqualToString:@"MSC024"]||[ MATCHTYPE isEqualToString:@"MSC115"]||[ MATCHTYPE isEqualToString:@"MSC116"] && INNINGSCOUNT > 1)
+                if (([MATCHTYPE isEqualToString:@"MSC022"] || [ MATCHTYPE isEqualToString:@"MSC024"]||[ MATCHTYPE isEqualToString:@"MSC115"]||[ MATCHTYPE isEqualToString:@"MSC116"]) && INNINGSCOUNT > 1)
                     
                     
                     
@@ -1133,6 +1133,7 @@ EndInningsVC *save;
                 }
                 
             }
+            
             NSMutableArray *InningsArrayForDelete=[DBManagerEndInnings GetInningsDetailsForDeleteEndInnings: MATCHCODE];
         }
         
