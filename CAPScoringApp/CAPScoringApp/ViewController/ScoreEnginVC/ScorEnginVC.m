@@ -77,7 +77,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate,EnddayDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -855,6 +855,9 @@ EditModeVC * objEditModeVc;
     //self.ballEventRecord. =getBallDetailsForBallEventsBE.BALLSPEEDTYPE;
     //self.ballEventRecord. =getBallDetailsForBallEventsBE.BALLSPEEDCODE;
     self.ballEventRecord.objUncomfortclassification =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATION;
+   
+    self.ballEventRecord.AwardedTeam =@"";
+    self.ballEventRecord.objPenaltyreasoncode=@"";
     //self.ballEventRecord. =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATIONCODE;
     //self.ballEventRecord. =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATIONSUBCODE;
     
@@ -2208,9 +2211,9 @@ EditModeVC * objEditModeVc;
          @"" :
          @"" :
          @"1" :
-         @"" :
+         self.ballEventRecord.objPenalty :
          self.ballEventRecord.objPenaltytypecode :
-         @"" :
+         self.ballEventRecord.objPenaltyreasoncode :
          self.ballEventRecord.objBallspeed :
          self.ballEventRecord.objUncomfortclassification :
          @""];
@@ -2482,7 +2485,7 @@ EditModeVC * objEditModeVc;
         
         
         
-        [updatescore UpdateScoreEngine :self.editBallCode :self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLS]  :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT] :fetchSEPageLoadRecord.SESSIONNO :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode : ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString : fetchSEPageLoadRecord.TEAMACODE] ?fetchSEPageLoadRecord.TEAMAWICKETKEEPER : fetchSEPageLoadRecord.TEAMBWICKETKEEPER) :@"":@"": self.ballEventRecord.objAtworotw :self.ballEventRecord.objBowlingEnd :self.ballEventRecord.objBowltype :self.ballEventRecord.objShottype :self.ballEventRecord.objShorttypecategory :self.ballEventRecord.objIslegalball : self.ballEventRecord.objIsFour :  self.ballEventRecord.objIssix :self.ballEventRecord.objRuns :self.ballEventRecord.objOverthrow :self.ballEventRecord.objTotalruns :self.ballEventRecord.objWide : self.ballEventRecord.objNoball :self.ballEventRecord.objByes : self.ballEventRecord.objLegByes : self.ballEventRecord.objPenalty :self.ballEventRecord.objTotalextras :self.ballEventRecord.objGrandtotal :self.ballEventRecord.objRbw :self.ballEventRecord.objPMlinecode :self.ballEventRecord.objPMlengthcode :self.ballEventRecord.objPMStrikepoint :self.ballEventRecord.objPMStrikepointlinecode :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objPMX2 :self.ballEventRecord.objPMY2 : self.ballEventRecord.objPMX3 :self.ballEventRecord.objPMY3 :self.ballEventRecord.objWWREGION :self.ballEventRecord.objWWX1 :self.ballEventRecord.objWWY2 :self.ballEventRecord.objWWX2 :self.ballEventRecord.objWWY2 :self.ballEventRecord.objballduration :self.ballEventRecord.objIsbeaten :self.ballEventRecord.objIsuncomfort :self.ballEventRecord.objIswtb :self.ballEventRecord.objIsreleaseshot :self.ballEventRecord.objMarkedforedit :self.ballEventRecord.objRemark :@"" : self.ballEventRecord.objWicketType :@"" :@"" :@"" :@"" :@"" : self.ballEventRecord.objPenaltytypecode :@"" : self.ballEventRecord.objBallspeed :self.ballEventRecord.objUncomfortclassification :@"" :@"" :@""];
+        [updatescore UpdateScoreEngine :self.editBallCode :self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLS]  :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT] :fetchSEPageLoadRecord.SESSIONNO :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode : ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString : fetchSEPageLoadRecord.TEAMACODE] ?fetchSEPageLoadRecord.TEAMAWICKETKEEPER : fetchSEPageLoadRecord.TEAMBWICKETKEEPER) :@"":@"": self.ballEventRecord.objAtworotw :self.ballEventRecord.objBowlingEnd :self.ballEventRecord.objBowltype :self.ballEventRecord.objShottype :self.ballEventRecord.objShorttypecategory :self.ballEventRecord.objIslegalball : self.ballEventRecord.objIsFour :  self.ballEventRecord.objIssix :self.ballEventRecord.objRuns :self.ballEventRecord.objOverthrow :self.ballEventRecord.objTotalruns :self.ballEventRecord.objWide : self.ballEventRecord.objNoball :self.ballEventRecord.objByes : self.ballEventRecord.objLegByes : self.ballEventRecord.objPenalty :self.ballEventRecord.objTotalextras :self.ballEventRecord.objGrandtotal :self.ballEventRecord.objRbw :self.ballEventRecord.objPMlinecode :self.ballEventRecord.objPMlengthcode :self.ballEventRecord.objPMStrikepoint :self.ballEventRecord.objPMStrikepointlinecode :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objPMX2 :self.ballEventRecord.objPMY2 : self.ballEventRecord.objPMX3 :self.ballEventRecord.objPMY3 :self.ballEventRecord.objWWREGION :self.ballEventRecord.objWWX1 :self.ballEventRecord.objWWY2 :self.ballEventRecord.objWWX2 :self.ballEventRecord.objWWY2 :self.ballEventRecord.objballduration :self.ballEventRecord.objIsbeaten :self.ballEventRecord.objIsuncomfort :self.ballEventRecord.objIswtb :self.ballEventRecord.objIsreleaseshot :self.ballEventRecord.objMarkedforedit :self.ballEventRecord.objRemark :@"" : self.ballEventRecord.objWicketType :@"" :@"" :@"" :self.ballEventRecord.AwardedTeam :self.ballEventRecord.objPenalty : self.ballEventRecord.objPenaltytypecode :self.ballEventRecord.objPenaltyreasoncode : self.ballEventRecord.objBallspeed :self.ballEventRecord.objUncomfortclassification :@"" :@"" :@""];
         
         
     }
@@ -2577,10 +2580,10 @@ EditModeVC * objEditModeVc;
          (selectedStrikernonstrikerCode.length <= 0 ? fetchSEPageLoadRecord.strickerPlayerCode : selectedStrikernonstrikerCode):
          selectedwicketBowlerlist.BowlerCode:
                                       insertType:
-         @""://Awarded Team:
+         self.ballEventRecord.AwardedTeam://Awarded Team:
          self.ballEventRecord.objPenalty:
          self.ballEventRecord.objPenaltytypecode:
-         @""://(NSString *)PENALTYREASONCODE:
+         self.ballEventRecord.objPenaltyreasoncode://(NSString *)PENALTYREASONCODE:
          @""://(NSString *)BALLSPEED:
          @""://(NSString *)UNCOMFORTCLASSIFCATION:
          selectedWicketEvent];
@@ -8141,15 +8144,16 @@ self.lbl_umpirename.text=@"";
 }
 -(void)Penalty
 {
-    penaltygridvc = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
+    penalityVc = [[PenalityVC alloc]initWithNibName:@"PenalityVC" bundle:nil];
    
-    penaltygridvc.competitionCode=self.competitionCode;
-    penaltygridvc.matchCode =self.matchCode;
-    penaltygridvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
-    penaltygridvc.teamcode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
-    penaltygridvc.bowlingTeamCode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+    penalityVc.competitionCode=self.competitionCode;
+    penalityVc.matchCode =self.matchCode;
+    penalityVc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    penalityVc.teamcode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    penalityVc.bowlingTeamCode = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
     
-    penaltygridvc.delegate=self;
+    penalityVc.delegate=self;
+    penalityVc.selectStartBallStatus=([self.btn_StartBall.currentTitle isEqualToString:@"END BALL"])? @"Yes":@"No";
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -8157,16 +8161,16 @@ self.lbl_umpirename.text=@"";
     [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:fullview];
-    [fullview addSubview:penaltygridvc.view];
+    [fullview addSubview:penalityVc.view];
     
-    penaltygridvc.view.frame =CGRectMake(90, 200, penaltygridvc.view.frame.size.width, penaltygridvc.view.frame.size.height);
+    penalityVc.view.frame =CGRectMake(90, 200, penalityVc.view.frame.size.width, penalityVc.view.frame.size.height);
     
-    penaltygridvc.view.alpha = 0;
-    [penaltygridvc didMoveToParentViewController:self];
+    penalityVc.view.alpha = 0;
+    [penalityVc didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
      {
-         penaltygridvc.view.alpha = 1;
+         penalityVc.view.alpha = 1;
      }
                      completion:nil];
     
@@ -8174,31 +8178,29 @@ self.lbl_umpirename.text=@"";
     
     if (IS_IPAD_PRO) {
         
-        penaltygridvc.view.frame =CGRectMake(250, 500, penaltygridvc.view.frame.size.width, penaltygridvc.view.frame.size.height);
-        penaltygridvc.view.alpha = 0;
-        [penaltygridvc didMoveToParentViewController:self];
+        penalityVc.view.frame =CGRectMake(250, 500, penalityVc.view.frame.size.width, penalityVc.view.frame.size.height);
+        penalityVc.view.alpha = 0;
+        [penalityVc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             penaltygridvc.view.alpha = 1;
+             penalityVc.view.alpha = 1;
          }
                          completion:nil];
     }
     
     
     else{
-        penaltygridvc.view.frame =CGRectMake(100, 200, penaltygridvc.view.frame.size.width, penaltygridvc.view.frame.size.height);
-        penaltygridvc.view.alpha = 0;
-        [penaltygridvc didMoveToParentViewController:self];
+        penalityVc.view.frame =CGRectMake(100, 200, penalityVc.view.frame.size.width, penalityVc.view.frame.size.height);
+        penalityVc.view.alpha = 0;
+        [penalityVc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             penaltygridvc.view.alpha = 1;
+             penalityVc.view.alpha = 1;
          }
                          completion:nil];
     }
-    
-    
     
 }
 -(void)PowerPlay
@@ -8303,6 +8305,15 @@ self.lbl_umpirename.text=@"";
          }
                          completion:nil];
     }
+}
+
+-(void)InsertPenaltyMethod :(NSString *)AwardedTeam :(NSString *)penaltyRun :(NSString *)penaltyTypecode :(NSString *)penaltyreasoncode
+{
+    
+    self.ballEventRecord.AwardedTeam =AwardedTeam;
+    self.ballEventRecord.objPenalty = penaltyRun;
+    self.ballEventRecord.objPenaltytypecode= penaltyTypecode;
+    self.ballEventRecord.objPenaltyreasoncode = penaltyreasoncode;
 }
 -(IBAction)FullviewHideMethod:(id)sender
 {
@@ -11858,7 +11869,7 @@ self.lbl_umpirename.text=@"";
     revicedOverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
     revicedOverVc.matchCode=self.matchCode;
     revicedOverVc.competitionCode =self.competitionCode;
-    // revicedOverVc.inningsNo = self.;
+    revicedOverVc.delegate=self;
     [fullview addSubview:revicedOverVc.view];
     
     if (IS_IPAD_PRO) {

@@ -140,4 +140,7 @@
 
 @property(nonatomic,strong) NSString * objPenaltytypecode;
 
+@property(nonatomic,strong) NSString * objPenaltyreasoncode;
+
+@property(nonatomic,strong) NSString * AwardedTeam;
 @end

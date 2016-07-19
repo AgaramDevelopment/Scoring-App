@@ -9,16 +9,21 @@
 #import <UIKit/UIKit.h>
 #import "PenalityTVC.h"
 #import "PenaltyDetailsRecord.h"
+#import "PenaltyGridTVC.h"
 
-//@protocol penalityDelegate <NSObject>
-//- (void)RightSideEditBtnAction;
-//
-//@end
+@protocol penalityDelegate <NSObject>
+- (void)ChangeVCBackBtnAction;
+- (void)InsertPenaltyMethod:(NSString *) AwardedTeam :(NSString *) penaltyRun :(NSString *)penaltyTypecode :(NSString *)penaltyreasoncode;
+
+@end
 
 @interface PenalityVC : UIViewController
 
-//@property (nonatomic, weak) id <penalityDelegate> delegate;
+@property (nonatomic, weak) id <penalityDelegate> delegate;
 
+
+
+@property (strong, nonatomic) NSString * selectStartBallStatus;
 @property (strong, nonatomic) IBOutlet UITextField *txt_penalityruns;
 @property (strong, nonatomic) IBOutlet UIView *view_batting;
 @property (strong, nonatomic) IBOutlet UIView *view_bowling;
@@ -28,6 +33,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *btn_touch;
 @property (strong, nonatomic) IBOutlet UIButton *btn_submitpenality;
 @property (strong, nonatomic) IBOutlet UITableView *tbl_penality;
+
+
 
 - (IBAction)btn_batting:(id)sender;
 - (IBAction)btn_bowling:(id)sender;
@@ -54,6 +61,11 @@
 @property(nonatomic,strong)PenaltyDetailsRecord *penaltyDetailsRecord;
 
 - (IBAction)btn_back:(id)sender;
+@property (strong, nonatomic) IBOutlet UITableView *tbl_penaltyrecord;
 
+@property (strong,nonatomic) IBOutlet UIButton * Btn_Add;
+
+@property(nonatomic,strong) NSMutableArray *resultarray;
+@property (strong, nonatomic) IBOutlet PenaltyGridTVC *penalty_gridCell;
 
 @end

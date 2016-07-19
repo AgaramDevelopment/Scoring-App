@@ -16,17 +16,20 @@
             <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
+            <string>Rajdhani-Regular</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PenalityVC">
             <connections>
+                <outlet property="Btn_Add" destination="Ohe-N0-Js9" id="SB5-a6-D5M"/>
                 <outlet property="btn_batting" destination="RCl-oD-ymS" id="xF8-zT-PkG"/>
                 <outlet property="btn_bowling" destination="UIx-et-fxG" id="Y60-oE-OMU"/>
                 <outlet property="btn_submitpenality" destination="oSg-io-tgk" id="EAH-Ti-KYL"/>
                 <outlet property="btn_touch" destination="wY1-bo-qGb" id="ajZ-5s-JLF"/>
                 <outlet property="lbl_penaltytype" destination="NR5-Kf-wHb" id="37U-6e-pgl"/>
                 <outlet property="tbl_penality" destination="lfP-0L-EcM" id="8xM-fb-kIr"/>
+                <outlet property="tbl_penaltyrecord" destination="uYa-Cg-H5y" id="z2i-iM-ovN"/>
                 <outlet property="txt_penalityruns" destination="pxV-PS-xaS" id="vBw-w6-ZQ0"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="view_batting" destination="mnz-C8-jiG" id="fib-7P-1Nv"/>
@@ -43,11 +46,25 @@
                     <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="87E-cS-evs">
-                            <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
+                            <rect key="frame" x="0.0" y="70" width="550" height="530"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ohy-p3-Mky">
                             <rect key="frame" x="0.0" y="0.0" width="550" height="75"/>
                             <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ohe-N0-Js9">
+                                    <rect key="frame" x="390" y="22" width="157" height="32"/>
+                                    <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="32" id="iBJ-Zr-Sbf"/>
+                                        <constraint firstAttribute="width" constant="157" id="wGm-00-L2d"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="17"/>
+                                    <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="2"/>
+                                    <state key="normal" title="ADD PENALTY" image="ico-add"/>
+                                    <connections>
+                                        <action selector="btn_addpenalty:" destination="-1" eventType="touchUpInside" id="S2o-3Q-8bj"/>
+                                    </connections>
+                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ReI-Hg-kYc">
                                     <rect key="frame" x="10" y="10" width="55" height="55"/>
                                     <constraints>
@@ -76,7 +93,10 @@
                                 <constraint firstItem="3gl-y1-RzQ" firstAttribute="centerX" secondItem="Ohy-p3-Mky" secondAttribute="centerX" id="8oc-eW-Tsi"/>
                                 <constraint firstAttribute="bottom" secondItem="ReI-Hg-kYc" secondAttribute="bottom" constant="10" id="BL3-Rp-gsM"/>
                                 <constraint firstItem="ReI-Hg-kYc" firstAttribute="leading" secondItem="Ohy-p3-Mky" secondAttribute="leading" constant="10" id="EWf-P3-Kj2"/>
+                                <constraint firstAttribute="trailing" secondItem="Ohe-N0-Js9" secondAttribute="trailing" constant="3" id="M7z-ED-0ry"/>
                                 <constraint firstItem="ReI-Hg-kYc" firstAttribute="top" secondItem="Ohy-p3-Mky" secondAttribute="top" constant="10" id="VX3-5s-pbg"/>
+                                <constraint firstAttribute="bottom" secondItem="Ohe-N0-Js9" secondAttribute="bottom" constant="21" id="WtA-jx-TIm"/>
+                                <constraint firstItem="Ohe-N0-Js9" firstAttribute="top" secondItem="Ohy-p3-Mky" secondAttribute="top" constant="22" id="lqw-iR-cXc"/>
                                 <constraint firstItem="3gl-y1-RzQ" firstAttribute="top" secondItem="Ohy-p3-Mky" secondAttribute="top" constant="15" id="nfU-JK-0xO"/>
                             </constraints>
                         </view>
@@ -218,24 +238,35 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uYa-Cg-H5y">
+                            <rect key="frame" x="0.0" y="70" width="550" height="530"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="4G1-FL-k5w"/>
+                                <outlet property="delegate" destination="-1" id="svl-DQ-lmH"/>
+                            </connections>
+                        </tableView>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="lfP-0L-EcM" firstAttribute="leading" secondItem="poV-4y-jP4" secondAttribute="leading" id="3xd-Lo-Nbc"/>
                         <constraint firstAttribute="trailing" secondItem="87E-cS-evs" secondAttribute="trailing" id="6rg-BQ-Lfs"/>
+                        <constraint firstAttribute="bottom" secondItem="uYa-Cg-H5y" secondAttribute="bottom" id="6s4-IP-j1t"/>
                         <constraint firstItem="lfP-0L-EcM" firstAttribute="top" secondItem="poV-4y-jP4" secondAttribute="bottom" constant="8" id="70x-no-tmN"/>
                         <constraint firstAttribute="trailing" secondItem="Ohy-p3-Mky" secondAttribute="trailing" id="8gm-Jk-vsH"/>
                         <constraint firstItem="lfP-0L-EcM" firstAttribute="leading" secondItem="S6O-hy-Hce" secondAttribute="leading" constant="54" id="9ox-HC-zSA"/>
-                        <constraint firstItem="87E-cS-evs" firstAttribute="top" secondItem="S6O-hy-Hce" secondAttribute="top" id="AaK-8F-FXF"/>
+                        <constraint firstItem="87E-cS-evs" firstAttribute="top" secondItem="S6O-hy-Hce" secondAttribute="top" constant="70" id="AaK-8F-FXF"/>
+                        <constraint firstItem="uYa-Cg-H5y" firstAttribute="top" secondItem="S6O-hy-Hce" secondAttribute="top" constant="70" id="KCi-JS-oCY"/>
                         <constraint firstItem="87E-cS-evs" firstAttribute="leading" secondItem="S6O-hy-Hce" secondAttribute="leading" id="M7E-b1-OsD"/>
                         <constraint firstAttribute="bottom" secondItem="87E-cS-evs" secondAttribute="bottom" id="Ney-OX-lXu"/>
-                        <constraint firstItem="Wjy-SU-g1d" firstAttribute="centerY" secondItem="87E-cS-evs" secondAttribute="centerY" id="Pd7-Uo-vuK"/>
+                        <constraint firstItem="Wjy-SU-g1d" firstAttribute="centerY" secondItem="87E-cS-evs" secondAttribute="centerY" constant="-35" id="Pd7-Uo-vuK"/>
                         <constraint firstItem="lfP-0L-EcM" firstAttribute="trailing" secondItem="3PM-Jx-xqt" secondAttribute="trailing" id="UdA-kV-Eo8"/>
                         <constraint firstAttribute="trailing" secondItem="Wjy-SU-g1d" secondAttribute="trailing" constant="63" id="V8e-FG-KH6"/>
                         <constraint firstItem="lfP-0L-EcM" firstAttribute="top" secondItem="poV-4y-jP4" secondAttribute="bottom" constant="8" id="VQ3-3e-vxk"/>
                         <constraint firstItem="lfP-0L-EcM" firstAttribute="top" secondItem="poV-4y-jP4" secondAttribute="bottom" constant="8" symbolic="YES" id="WRI-hQ-DfL"/>
                         <constraint firstItem="Wjy-SU-g1d" firstAttribute="top" secondItem="3PM-Jx-xqt" secondAttribute="bottom" constant="71" id="XPK-WU-doY"/>
                         <constraint firstItem="poV-4y-jP4" firstAttribute="top" secondItem="Wjy-SU-g1d" secondAttribute="bottom" constant="57" id="YdN-Nh-GFr"/>
+                        <constraint firstAttribute="trailing" secondItem="uYa-Cg-H5y" secondAttribute="trailing" id="aMm-vc-9fW"/>
                         <constraint firstItem="poV-4y-jP4" firstAttribute="top" secondItem="Wjy-SU-g1d" secondAttribute="bottom" constant="57" id="cfc-cW-Mig"/>
                         <constraint firstAttribute="bottom" secondItem="lfP-0L-EcM" secondAttribute="bottom" constant="-18" id="eEy-TE-mNb"/>
                         <constraint firstItem="lfP-0L-EcM" firstAttribute="trailing" secondItem="oSg-io-tgk" secondAttribute="trailing" id="fMP-RN-A0T"/>
@@ -244,6 +275,7 @@
                         <constraint firstItem="oSg-io-tgk" firstAttribute="top" secondItem="poV-4y-jP4" secondAttribute="bottom" constant="65" id="heY-KN-i2X"/>
                         <constraint firstItem="3PM-Jx-xqt" firstAttribute="top" secondItem="Ohy-p3-Mky" secondAttribute="bottom" constant="79" id="hvL-qV-pMU"/>
                         <constraint firstItem="Ohy-p3-Mky" firstAttribute="top" secondItem="S6O-hy-Hce" secondAttribute="top" id="j4O-gs-3sw"/>
+                        <constraint firstItem="uYa-Cg-H5y" firstAttribute="centerX" secondItem="S6O-hy-Hce" secondAttribute="centerX" id="kNG-kh-GbF"/>
                         <constraint firstItem="Wjy-SU-g1d" firstAttribute="top" secondItem="3PM-Jx-xqt" secondAttribute="bottom" constant="71" id="kZx-9A-wzC"/>
                         <constraint firstItem="lfP-0L-EcM" firstAttribute="leading" secondItem="3PM-Jx-xqt" secondAttribute="leading" id="lpG-f9-9KK"/>
                         <constraint firstItem="Ohy-p3-Mky" firstAttribute="leading" secondItem="S6O-hy-Hce" secondAttribute="leading" id="lxt-CP-UC6"/>
@@ -254,6 +286,7 @@
                         <constraint firstItem="lfP-0L-EcM" firstAttribute="leading" secondItem="oSg-io-tgk" secondAttribute="leading" id="rTy-nz-Win"/>
                         <constraint firstItem="Wjy-SU-g1d" firstAttribute="top" secondItem="mnz-C8-jiG" secondAttribute="top" id="rWK-lC-oWe"/>
                         <constraint firstItem="lfP-0L-EcM" firstAttribute="top" secondItem="poV-4y-jP4" secondAttribute="bottom" constant="8" id="uBs-eb-gz8"/>
+                        <constraint firstItem="uYa-Cg-H5y" firstAttribute="leading" secondItem="S6O-hy-Hce" secondAttribute="leading" id="xom-lG-DPQ"/>
                     </constraints>
                 </view>
             </subviews>
@@ -270,6 +303,7 @@
     <resources>
         <image name="BackgroundImg" width="2048" height="2732"/>
         <image name="dropDown" width="54" height="54"/>
+        <image name="ico-add" width="32" height="32"/>
         <image name="ico-back-btn" width="30" height="30"/>
     </resources>
 </document>

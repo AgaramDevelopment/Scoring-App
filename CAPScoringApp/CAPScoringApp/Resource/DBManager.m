@@ -3268,6 +3268,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 [result addObject:wicket];
                 [result addObject:ecoRate];
                 
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 
@@ -8820,12 +8821,15 @@ if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             return YES;
             
         }
         else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
             NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
             return NO;
         }
