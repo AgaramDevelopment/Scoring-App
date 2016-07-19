@@ -113,6 +113,7 @@
     
     
     
+    
     [self addChildViewController:add];
     add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
     [self.view addSubview:add.view];
