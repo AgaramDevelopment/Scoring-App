@@ -234,9 +234,23 @@
     if (tableView == self.Striker_tableview)
     {
         fetchBattingTeamTossRecord=(FetchBattingTeamTossRecord*)[StrikerArray objectAtIndex:indexPath.row];
-        self.lbl_Striker.text =fetchBattingTeamTossRecord.playerName;
-        selectStriker=self.lbl_Striker.text;
-        StrikerCode=fetchBattingTeamTossRecord.playerCode;
+        
+        if(![NonStrikerCode isEqualToString: fetchBattingTeamTossRecord.playerCode])
+        {
+            self.lbl_Striker.text =fetchBattingTeamTossRecord.playerName;
+            selectStriker=self.lbl_Striker.text;
+            StrikerCode=fetchBattingTeamTossRecord.playerCode;
+        }
+        else
+        {
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+                                                            message: @"Striker cannot be same.\nPlease Select different Player"
+                                                           delegate: self
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+            [alert1 show];
+        }
+
         
         self.Striker_tableview.hidden=YES;
         isEnableTbl=YES;
@@ -335,11 +349,11 @@
 }
 
 - (IBAction)Finish_btn:(id)sender {
-    if([self.lbl_Striker.text isEqualToString:@""],[self.lbl_NonStriker.text isEqualToString:@""],[self.lbl_Bowler.text isEqualToString:@""])
-    {  [self ShowAlterView:@"Please Select Stricker\nPlease Select NonStriker\nPlease Select Bowler"];
-        
-    }
-    else if([self.lbl_Striker.text isEqualToString:@""] || self.lbl_Striker.text==nil)
+//    if([self.lbl_Striker.text isEqualToString:@""],[self.lbl_NonStriker.text isEqualToString:@""],[self.lbl_Bowler.text isEqualToString:@""])
+//    {  [self ShowAlterView:@"Please Select Stricker\nPlease Select NonStriker\nPlease Select Bowler"];
+//        
+//    }
+     if([self.lbl_Striker.text isEqualToString:@""] || self.lbl_Striker.text==nil)
     {
         [self ShowAlterView:@"Please Select Stricker"];
     }

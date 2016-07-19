@@ -8726,6 +8726,8 @@ self.lbl_umpirename.text=@"";
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
+    self.lbl_bowler_strickrate.adjustsFontSizeToFitWidth = YES;
+    
     //Non Striker Details
     self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
     self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
@@ -8733,7 +8735,7 @@ self.lbl_umpirename.text=@"";
     self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
     self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
     self.lbl_nonstricker_strickrate.text = fetchSEPageLoadRecord.nonstrickerStrickRate;
-    
+    self.lbl_nonstricker_strickrate.adjustsFontSizeToFitWidth = YES;
     //Bowler
     
     self.lbl_bowler_name.text = fetchSEPageLoadRecord.currentBowlerPlayerName;
@@ -8742,7 +8744,8 @@ self.lbl_umpirename.text=@"";
     self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
     self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
     self.lbl_bowler_strickrate.text = fetchSEPageLoadRecord.currentBowlerEcoRate;
-    
+    self.lbl_bowler_strickrate.adjustsFontSizeToFitWidth = YES;
+
     
     
     //team score details display
