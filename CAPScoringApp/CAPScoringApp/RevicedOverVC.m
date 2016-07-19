@@ -128,6 +128,11 @@
 -(IBAction)btn_submit:(id)sender
 {
     if([self formValidation]){
+        [DBManager updateRevisedOvers:txt_overs.text comments:txt_commentss.text matchCode:self.matchCode competitionCode:self.competitionCode];
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Revised Over Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        alter.tag =100;
+
     if(self.checkInternetConnection){
         NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/REVISEOVER/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],self.competitionCode,self.matchCode,self.inningsNo,strovers,strcomments];
         
@@ -144,12 +149,23 @@
         
     }
     
-    [DBManager updateRevisedOvers:txt_overs.text comments:txt_commentss.text matchCode:self.matchCode competitionCode:self.competitionCode];
-        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Revised Over Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alter show];
-}
+    }
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if(buttonIndex == 0)//OK button pressed
+    {
+       if(alertView.tag == 100)
+       {
+           [self.delegate ChangeVCBackBtnAction];
+       }
+    }
+    else if(buttonIndex == 1)//Annul button pressed.
+    {
+        //do something
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

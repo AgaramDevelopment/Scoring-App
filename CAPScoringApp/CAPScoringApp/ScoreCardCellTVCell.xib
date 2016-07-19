@@ -144,10 +144,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lkk-ob-g8W">
-                                <rect key="frame" x="360" y="17" width="50" height="21"/>
+                                <rect key="frame" x="360" y="17" width="64" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="eRz-kf-j1b"/>
-                                    <constraint firstAttribute="width" constant="50" id="viR-df-CPj"/>
+                                    <constraint firstAttribute="width" constant="64" id="viR-df-CPj"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="18"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -208,7 +208,7 @@
                             <constraint firstItem="BFN-5M-1cL" firstAttribute="leading" secondItem="NFl-eJ-sP6" secondAttribute="trailing" constant="8" id="bgp-Sc-qrg"/>
                             <constraint firstItem="oTx-Gi-qm7" firstAttribute="top" secondItem="USq-o0-SF2" secondAttribute="bottom" constant="8" id="c8Y-k6-ktr"/>
                             <constraint firstItem="Uhe-WC-Nh2" firstAttribute="top" secondItem="4uc-3x-WB3" secondAttribute="top" constant="11" id="cDU-hx-j3m"/>
-                            <constraint firstItem="NFl-eJ-sP6" firstAttribute="leading" secondItem="Lkk-ob-g8W" secondAttribute="trailing" constant="8" id="cGK-N0-KZR"/>
+                            <constraint firstItem="NFl-eJ-sP6" firstAttribute="leading" secondItem="Lkk-ob-g8W" secondAttribute="trailing" constant="-6" id="cGK-N0-KZR"/>
                             <constraint firstAttribute="bottom" secondItem="mqG-Wd-zvw" secondAttribute="bottom" constant="25" id="cGi-Sd-7Bd"/>
                             <constraint firstItem="OfG-yN-skh" firstAttribute="leading" secondItem="fwU-St-eV4" secondAttribute="trailing" constant="8" id="el7-lt-OcR"/>
                             <constraint firstAttribute="bottom" secondItem="aua-io-kRV" secondAttribute="bottom" constant="25" id="eyJ-cb-Rr3"/>
