@@ -273,7 +273,7 @@ BOOL IsBack;
     self.view_allControls.hidden = NO;
     self.tbl_endInnings.hidden = YES;
     self.view_Header.hidden = YES;
-    
+    [self.btn_save setTitle: @"SAVE" forState: UIControlStateNormal];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -332,8 +332,10 @@ BOOL IsBack;
     int days = timeDifference / 60;
     NSString *Duration = [NSString stringWithFormat:@"%d", days];
     
-   BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
+   BtnurrentTittle = [NSString stringWithFormat:self.btn_save.currentTitle];
     BtnurrentTittle = @"UPDATE";
+    
+    [self.btn_save setTitle: @"UPDATE" forState: UIControlStateNormal];
     
    TOTALRUNS=[DBManagerEndInnings GetTotalRunsForFetchEndInnings : CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
     
@@ -366,6 +368,7 @@ BOOL IsBack;
     
 self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f];
     [_btn_delete setUserInteractionEnabled:YES];
+     [self.tbl_endInnings reloadData];
 
 }
 /**
@@ -397,13 +400,19 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         if ([BtnurrentTittle isEqualToString:@"INSERT"]) {
 
              [innings InsertEndInnings: CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS: BtnurrentTittle];
+            
+            [self.delegate EndInningsSaveBtnAction];
+            
         }else{
             
             [innings InsertEndInnings : CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :OldTeamCode :OldInningsNo  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS: BtnurrentTittle];
+            
+            
         }
         
         
-        
+     
+
     if(self.checkInternetConnection){
         
         AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -444,14 +453,15 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
             [delegate hideLoading];
         }
     }
-        
         [self.tbl_endInnings reloadData];
-        [self.delegate EndInningsSaveBtnAction];
+        [self fetchPageload:fetchEndinnings :CompetitionCode :MatchCode];
+        
         
         self.tbl_endInnings.hidden = NO;
-         self.view_Header.hidden = NO;
+        self.view_Header.hidden = NO;
         self.view_allControls.hidden = YES;
-    }
+        
+            }
 
 
 }
@@ -461,6 +471,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
    
     if (IsBack == NO) {
         
+         [self.tbl_endInnings reloadData];
         self.view_allControls.hidden = YES;
         self.tbl_endInnings.hidden = NO;
          self.view_Header.hidden = NO;
@@ -488,7 +499,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
 - (IBAction)btn_delete:(id)sender {
     innings = [[EndInnings alloc]init];
     
-    [innings DeleteEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO];
+    [innings DeleteEndInnings:CompetitionCode :MatchCode :OldTeamCode :OldInningsNo];
     
     if(self.checkInternetConnection){
         
@@ -531,7 +542,10 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         
     }
     [endInningsArray removeLastObject];
+    
+    [self fetchPageload:fetchEndinnings :CompetitionCode :MatchCode];
     [self.tbl_endInnings reloadData];
+    
     self.tbl_endInnings.hidden = NO;
      self.view_Header.hidden = NO;
     self.view_allControls.hidden = YES;
