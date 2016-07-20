@@ -56,17 +56,35 @@
 }
 
 // This method is called once we complete editing
+
+#define ACCEPTABLE_CHARECTERS @"0123456789"
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
     
     if(textField.tag == 21)
     {
-        
-        if (![string isEqualToString:@""]) {
-            strovers=[textField.text stringByAppendingString:string];
-            return YES;
+        if (![string isEqualToString:@""])
+        {
+            NSCharacterSet *cs = [[NSCharacterSet characterSetWithCharactersInString:ACCEPTABLE_CHARECTERS] invertedSet];
             
+            NSString *filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+            if(![filtered isEqualToString:@""])
+            {
+                strovers=[textField.text stringByAppendingString:filtered];
+                 return YES;
+            }
+            else
+            {
+                UIAlertView * objalterview =[[UIAlertView alloc]initWithTitle:nil message:@"Please Enter Number Only" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [objalterview show];
+            }
+            return NO;
         }
+        return YES;//        if (![string isEqualToString:@""]) {
+//            strovers=[textField.text stringByAppendingString:string];
+//            return YES;
+//            
+//        }
     }
     else if (textField.tag == 22)
     {

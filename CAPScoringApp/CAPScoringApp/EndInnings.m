@@ -1082,7 +1082,7 @@ EndInningsVC *save;
 
 //SP_DELETEENDINNINGS---------------------------------------------------------------------------
 
--(void) DeleteEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO
+-(BOOL) DeleteEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO
 {
     
     
@@ -1121,8 +1121,7 @@ EndInningsVC *save;
                 
                 INNINGSCOUNT = [inningsCount integerValue];
                 
-                
-                
+
                 
                 if (([MATCHTYPE isEqualToString:@"MSC022"] || [ MATCHTYPE isEqualToString:@"MSC024"]||[ MATCHTYPE isEqualToString:@"MSC115"]||[ MATCHTYPE isEqualToString:@"MSC116"]) && INNINGSCOUNT > 1)
                     
@@ -1134,12 +1133,23 @@ EndInningsVC *save;
                 }
                 
             }
-            
             NSMutableArray *InningsArrayForDelete=[DBManagerEndInnings GetInningsDetailsForDeleteEndInnings: MATCHCODE];
         }
         
+        
+    }else{
+        
+        [self showDialog:@"Delete Innings is not possible when the data exist for future Innings" andTitle:@"Error"];
+        return NO;
     }
+
     
+    return YES;
 }
 
+-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
 @end

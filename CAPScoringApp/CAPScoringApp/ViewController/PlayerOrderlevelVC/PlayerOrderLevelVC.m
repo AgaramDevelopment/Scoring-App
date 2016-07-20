@@ -96,7 +96,7 @@
     [self.view addSubview:self.txt_search];
     
     
-    NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"SEARCH PLAYER" attributes:@{ NSForegroundColorAttributeName : [UIColor whiteColor] ,NSFontAttributeName : [UIFont systemFontOfSize:35]}];
+    NSAttributedString *str = [[NSAttributedString alloc] initWithString:@"SEARCH PLAYER" attributes:@{ NSForegroundColorAttributeName : [UIColor lightTextColor] ,NSFontAttributeName : [UIFont systemFontOfSize:35]}];
    
      self.txt_search.attributedPlaceholder = str;
     //lastName.placeholder = @"Enter your last name here";
@@ -284,7 +284,7 @@
         NSString *appStr=[textField.text stringByAppendingString:string];
         
         [self.selectedPlayerFilterArray removeAllObjects];
-        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[cd] %@",appStr];
+        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",appStr];
         
         NSArray *filtedPlayerArray =  [slecteplayerlist filteredArrayUsingPredicate:resultPredicate];
         
@@ -541,18 +541,18 @@
 //    [playercell addGestureRecognizer: self.longPress];
     
     
-//    if(self.selectedPlayerFilterArray > 0)
-//    {
-//        objSelectPlayerRecord=(SelectPlayerRecord*)[self.selectedPlayerFilterArray objectAtIndex:indexPath.row];
-//        //objCapitainWicketRecord=(CapitainWicketKeeperRecord*)[capitainWicketkeeperarray objectAtIndex:indexPath.r];
-//    }
-//    else
-//    {
+    if(self.selectedPlayerFilterArray > 0)
+    {
+        objSelectPlayerRecord=(SelectPlayerRecord*)[self.selectedPlayerFilterArray objectAtIndex:indexPath.row];
+        //objCapitainWicketRecord=(CapitainWicketKeeperRecord*)[capitainWicketkeeperarray objectAtIndex:indexPath.r];
+    }
+    else
+    {
        objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
        // objCapitainWicketRecord=(CapitainWicketKeeperRecord*)[capitainWicketkeeperarray objectAtIndex:0];
       
         
-   // }
+    }
    
 
     if([objSelectPlayerRecord.playerCode isEqualToString:self.captainAcode] || [objSelectPlayerRecord.playerCode isEqualToString:self.captainBcode])
