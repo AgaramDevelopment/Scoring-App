@@ -241,9 +241,8 @@
             if ((AWARDEDTOTEAMCODE).length > 0 && (PENALTYREASONCODE).length > 0)
             {
                 MAXPENALTYID= [DBManagerInsertScoreEngine GetmaxPenaltyIdForInsertScoreEngine];
-                
-                //PENALTYCODE = 'PNT' + RIGHT(REPLICATE('0',7)+CAST(MAXPENALTYID AS VARCHAR(7)),7)
-                
+                NSString *paddingString = [[NSString string] stringByPaddingToLength: (7-MAXPENALTYID.length) withString: @"0" startingAtIndex: 0];
+                PENALTYCODE = [NSString stringWithFormat:@"PNT%@%@",paddingString,MAXPENALTYID];
                 [DBManagerInsertScoreEngine InsertPenaltyDetailsForInsertScoreEngine :COMPETITIONCODE: MATCHCODE:INNINGSNO:BALLCODENO:PENALTYCODE:AWARDEDTOTEAMCODE:PENALTYRUNS:PENALTYTYPECODE:PENALTYREASONCODE];
                 if (AWARDEDTOTEAMCODE != TEAMCODE)
                 {

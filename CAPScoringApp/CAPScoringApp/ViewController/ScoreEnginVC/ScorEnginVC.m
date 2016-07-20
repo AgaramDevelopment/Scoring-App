@@ -2484,17 +2484,7 @@ EditModeVC * objEditModeVc;
     {
         self.ballEventRecord.objBallcode = self.editBallCode;
         //Update Score Engine SP Call
-        
-        //(NSNumber*)ISWICKET:(NSString*)WICKETTYPE:(NSString*)WICKETPLAYER:(NSString*)FIELDINGPLAYER:(NSNumber*)ISWICKETUNDO:(NSString*)AWARDEDTOTEAMCODE:(NSNumber*)PENALTYRUNS:(NSString*)PENALTYTYPECODE:(NSString*)PENALTYREASONCODE:(NSString*)BALLSPEED:(NSString*)UNCOMFORTCLASSIFCATION:(NSString*)WICKETEVENT;
-        
-        
         UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
-        
-        //
-        //    -(void) UpdateScoreEngine:(NSString *)BALLCODE:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSNumber*)OVERNO:(NSNumber*)BALLNO:(NSNumber*)BALLCOUNT:(NSNumber*)SESSIONNO:(NSString*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)WICKETKEEPERCODE:(NSString*)UMPIRE1CODE:(NSString*)UMPIRE2CODE:(NSString*)ATWOROTW:(NSString*)BOWLINGEN:(NSString*)BOWLTYPE:(NSString*)SHOTTYPE:(NSString*)SHOTTYPECATEGORY:(NSString*)ISLEGALBALL:(NSString*)ISFOUR:(NSString*)ISSIX:(NSString*)RUNS:(NSNumber*)OVERTHROW:(NSNumber*)TOTALRUNS:(NSNumber*)WIDE:(NSNumber*)NOBALL:(NSNumber*)BYES:(NSNumber*)LEGBYES:(NSNumber*)PENALTY:(NSNumber*)TOTALEXTRAS:(NSNumber*)GRANDTOTAL:(NSNumber*)RBW:(NSString*)PMLINECODE:(NSString*)PMLENGTHCODE:(NSString*)PMSTRIKEPOINT:(NSString*)PMSTRIKEPOINTLINECODE:(NSNumber*)PMX1:(NSNumber*)PMY1:(NSNumber*)PMX2:(NSNumber*)PMY2:(NSNumber*)PMX3:(NSNumber*)PMY3:(NSString*)WWREGION:(NSNumber*)WWX1:(NSNumber*)WWY1:(NSNumber*)WWX2:(NSNumber*)WWY2:(NSNumber*)BALLDURATION:(NSString*)ISAPPEAL:(NSString*)ISBEATEN:(NSString*)ISUNCOMFORT:(NSString*)ISWTB:(NSString*)ISRELEASESHOT:(NSString*)MARKEDFOREDIT:(NSString*)REMARKS:(NSNumber*)ISWICKET:(NSString*)WICKETTYPE:(NSString*)WICKETPLAYER:(NSString*)FIELDINGPLAYER:(NSNumber*)ISWICKETUNDO:(NSString*)AWARDEDTOTEAMCODE:(NSNumber*)PENALTYRUNS:(NSString*)PENALTYTYPECODE:(NSString*)PENALTYREASONCODE:(NSString*)BALLSPEED:(NSString*)UNCOMFORTCLASSIFCATION:(NSString*)WICKETEVENT;
-        
-        
-        
         [updatescore UpdateScoreEngine :self.editBallCode :self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLS]  :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT] :fetchSEPageLoadRecord.SESSIONNO :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode : ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString : fetchSEPageLoadRecord.TEAMACODE] ?fetchSEPageLoadRecord.TEAMAWICKETKEEPER : fetchSEPageLoadRecord.TEAMBWICKETKEEPER) :@"":@"": self.ballEventRecord.objAtworotw :self.ballEventRecord.objBowlingEnd :self.ballEventRecord.objBowltype :self.ballEventRecord.objShottype :self.ballEventRecord.objShorttypecategory :self.ballEventRecord.objIslegalball : self.ballEventRecord.objIsFour :  self.ballEventRecord.objIssix :self.ballEventRecord.objRuns :self.ballEventRecord.objOverthrow :self.ballEventRecord.objTotalruns :self.ballEventRecord.objWide : self.ballEventRecord.objNoball :self.ballEventRecord.objByes : self.ballEventRecord.objLegByes : self.ballEventRecord.objPenalty :self.ballEventRecord.objTotalextras :self.ballEventRecord.objGrandtotal :self.ballEventRecord.objRbw :self.ballEventRecord.objPMlinecode :self.ballEventRecord.objPMlengthcode :self.ballEventRecord.objPMStrikepoint :self.ballEventRecord.objPMStrikepointlinecode :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objPMX2 :self.ballEventRecord.objPMY2 : self.ballEventRecord.objPMX3 :self.ballEventRecord.objPMY3 :self.ballEventRecord.objWWREGION :self.ballEventRecord.objWWX1 :self.ballEventRecord.objWWY2 :self.ballEventRecord.objWWX2 :self.ballEventRecord.objWWY2 :self.ballEventRecord.objballduration :self.ballEventRecord.objIsbeaten :self.ballEventRecord.objIsuncomfort :self.ballEventRecord.objIswtb :self.ballEventRecord.objIsreleaseshot :self.ballEventRecord.objMarkedforedit :self.ballEventRecord.objRemark :@"" : self.ballEventRecord.objWicketType :@"" :@"" :@"" :self.ballEventRecord.AwardedTeam :self.ballEventRecord.objPenalty : self.ballEventRecord.objPenaltytypecode :self.ballEventRecord.objPenaltyreasoncode : self.ballEventRecord.objBallspeed :self.ballEventRecord.objUncomfortclassification :@"" :@"" :@""];
         
         
@@ -2504,22 +2494,8 @@ EditModeVC * objEditModeVc;
         if(_isEditMode){
             
         }
-        
-           // [objEditModeVc insertAfterAndBeforeMode :self.editBallCode];
-            
-//            fetchSeBallCodeDetails = [[FETCHSEBALLCODEDETAILS alloc]init];
-//            [fetchSeBallCodeDetails FetchSEBallCodeDetails:self.competitionCode :self.matchCode:self.editBallCode];
-            
-        
-        
-        
         NSNumber *temp = [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS];
-
-        
         int ballCount = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
-        
-        //InsertSEScoreEngine* _InsertSEScoreEngine = [[InsertSEScoreEngine alloc] init];
-        //_InsertSEScoreEngine.BOWLINGTEAMCODE = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
         
         [InsertSEScoreEngine InsertScoreEngine :
          self.competitionCode :
@@ -2538,8 +2514,8 @@ EditModeVC * objEditModeVc;
          
          ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString :
            fetchSEPageLoadRecord.TEAMACODE] ?
-          fetchSEPageLoadRecord.TEAMAWICKETKEEPER :
-          fetchSEPageLoadRecord.TEAMBWICKETKEEPER):
+          fetchSEPageLoadRecord.TEAMBWICKETKEEPER :
+          fetchSEPageLoadRecord.TEAMAWICKETKEEPER):
          
          fetchSEPageLoadRecord.UMPIRE1CODE :
          fetchSEPageLoadRecord.UMPIRE2CODE :
@@ -2746,12 +2722,14 @@ EditModeVC * objEditModeVc;
     double totalWidth = singleInstanceWidth;
     if (content.length >= 5)
         totalWidth = 15 * content.length;
+    else if (content.length >= 3)
+        totalWidth = 13 * content.length;
     
     UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(xposition, 0, totalWidth, 50)];
     
     // Border Control
     UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, BallTicker.frame.size.width, 40)];
-    btnborder.layer.cornerRadius = isExtras ? (content.length >= 5 ? btnborder.frame.size.width / 3.5 : btnborder.frame.size.width / 2.5) : btnborder.frame.size.width / 2;
+    btnborder.layer.cornerRadius = isExtras ? (content.length >= 5 ? btnborder.frame.size.width / 3.5 : btnborder.frame.size.width / 2.5) : (content.length >= 3 ? btnborder.frame.size.width / 2.5 : btnborder.frame.size.width / 2);
     btnborder.clipsToBounds = NO;
     btnborder.layer.borderWidth = 3.5;
     btnborder.layer.borderColor = [UIColor greenColor].CGColor;
@@ -2788,7 +2766,7 @@ EditModeVC * objEditModeVc;
     
     UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, totalWidth, 10)];
     BallTickerNo.textAlignment = NSTextAlignmentCenter;
-    BallTickerNo.font = [UIFont fontWithName:@"Rajdhani-Bold" size:15];
+    BallTickerNo.font = [UIFont fontWithName:@"RAJDHANI-REGULAR" size:13];
     [BallTickerNo setText:ballno];
     [BallTickerNo setTextColor:brushFGSplEvents];
     
@@ -2885,7 +2863,7 @@ EditModeVC * objEditModeVc;
         int _penalty;
         NSString* _penaltyLabel = drballdetails.objPenaltytypecode;
         _penalty = [drballdetails.objPenalty intValue];
-        if (_penaltyLabel.length && _penalty > 0)
+        if (_penaltyLabel.length > 0 && _penalty > 0)
         {
             _penaltyLabel = [_penaltyLabel isEqual: @"MSC134"] ?
             ([@"BP " stringByAppendingString: [NSString stringWithFormat:@"%i", _penalty]]) :
@@ -2912,10 +2890,9 @@ EditModeVC * objEditModeVc;
             [[dicBall objectForKey:dicBallKey] isEqual : @"PENALTY"];
             
             if ([dicBallKey isEqual: @"RUNS"] && [[dicBall objectForKey:dicBallKey] isEqual : @"0"] && dicBall.count > 1)
-                content = [content stringByAppendingString: [dicBall objectForKey:dicBallKey]];
+                content = [content stringByAppendingString: content];
             else
-                content = [content stringByAppendingString: [dicBall objectForKey:dicBallKey]];
-            content = [content stringByAppendingString:@" "];
+                content = [content stringByAppendingString: [[dicBall objectForKey:dicBallKey] stringByAppendingString:@" " ]];
         }
         content = [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         //To Create ball tiker for each row.
@@ -2928,6 +2905,8 @@ EditModeVC * objEditModeVc;
                                       :xposition] atIndex:0];
         if (content.length >= 5)
             xposition = xposition + 7 + (15 * content.length);
+        else if (content.length >= 3)
+            xposition = xposition + 7 + (13 * content.length);
         else
             xposition = xposition + (isExtras ? 57 : 47);
     }
@@ -6808,7 +6787,13 @@ self.lbl_umpirename.text=@"";
                
                 
             }
-        }else{
+        }
+        else{
+            if([selectedwickettype.metasubcode isEqualToString:@"MSC104"])
+            {
+                selectedwicketBowlerlist = [[BowlerEvent alloc]init];
+                selectedwicketBowlerlist.BowlerCode = ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString : fetchSEPageLoadRecord.TEAMACODE] ? fetchSEPageLoadRecord.TEAMBWICKETKEEPER : fetchSEPageLoadRecord.TEAMAWICKETKEEPER);
+            }
             wicketOption = 0;
             self.view_bowlType.hidden = YES;
             self.view_fastBowl.hidden = YES;

@@ -541,18 +541,18 @@
 //    [playercell addGestureRecognizer: self.longPress];
     
     
-//    if(self.selectedPlayerFilterArray > 0)
-//    {
-//        objSelectPlayerRecord=(SelectPlayerRecord*)[self.selectedPlayerFilterArray objectAtIndex:indexPath.row];
-//        //objCapitainWicketRecord=(CapitainWicketKeeperRecord*)[capitainWicketkeeperarray objectAtIndex:indexPath.r];
-//    }
-//    else
-//    {
+    if(self.selectedPlayerFilterArray > 0)
+    {
+        objSelectPlayerRecord=(SelectPlayerRecord*)[self.selectedPlayerFilterArray objectAtIndex:indexPath.row];
+        //objCapitainWicketRecord=(CapitainWicketKeeperRecord*)[capitainWicketkeeperarray objectAtIndex:indexPath.r];
+    }
+    else
+    {
        objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
        // objCapitainWicketRecord=(CapitainWicketKeeperRecord*)[capitainWicketkeeperarray objectAtIndex:0];
       
         
-   // }
+    }
    
 
     if([objSelectPlayerRecord.playerCode isEqualToString:self.captainAcode] || [objSelectPlayerRecord.playerCode isEqualToString:self.captainBcode])

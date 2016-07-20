@@ -528,22 +528,20 @@ BOOL isWicketSelected;
         //MSC134 - BATTING, MSC135 - BOWLING
         int  penalty ;
         NSString * penaltyLabel = objInningsBowlerDetailsRecord.penaltytypeCode;
-        // int.TryParse(drballdetails["PENALTYRUNS"].ToString(), out _penalty);
-        if (![penaltyLabel isEqualToString:@""] && penalty > 0)
+        penalty = [objInningsBowlerDetailsRecord.penaltyRuns intValue];
+        if ((![penaltyLabel isEqualToString: @""]) && penalty > 0)
         {
             if([penaltyLabel isEqualToString:@"MSC134"])
             {
-                penaltyLabel=[NSString stringWithFormat:@"BP +%d",penalty];
+                penaltyLabel=[NSString stringWithFormat:@"BP %i",penalty];
             }
             else if ([penaltyLabel isEqualToString:@"MSC135"])
             {
-                penaltyLabel =[NSString stringWithFormat:@"FP + %@",penalty];
+                penaltyLabel =[NSString stringWithFormat:@"FP %i",penalty];
             }
             else{
                 penaltyLabel=@"";
             }
-            //  penaltyLabel = [penaltyLabel isEqualToString:@"MSC134"] ? ("BP " + penalty) : [penaltyLabel isEqualToString @"MSC135" ] ? ("FP " + penalty) : "";
-            
             [dicAddbowlerdetails setValue:penaltyLabel forKey:@"PENALTY"];
             [dicBallKeysArray addObject:@"PENALTY"];
             
@@ -571,10 +569,9 @@ BOOL isWicketSelected;
             [[dicAddbowlerdetails valueForKey:dicBallKey] isEqualToString:@"PENALTY"];
             
             if ([dicBallKey isEqual: @"RUNS"] && [[dicAddbowlerdetails objectForKey:dicBallKey] isEqual : @"0"] && dicAddbowlerdetails.count > 1)
-                content = [content stringByAppendingString: [dicAddbowlerdetails objectForKey:dicBallKey]];
+                content = [content stringByAppendingString: content];
             else
-                content = [content stringByAppendingString: [dicAddbowlerdetails objectForKey:dicBallKey]];
-            content = [content stringByAppendingString:@" "];
+                content = [content stringByAppendingString: [[dicAddbowlerdetails objectForKey:dicBallKey] stringByAppendingString:@" "]];
         }
         totalRun  =[grandTotal intValue]+totalRun;
         [self CreateBallTickerInstance: [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] :isExtras :isSpecialEvents :objnoball :cell :indexpath];
