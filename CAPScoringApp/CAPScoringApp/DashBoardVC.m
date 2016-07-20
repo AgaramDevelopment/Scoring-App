@@ -855,11 +855,15 @@
 
 -(void) tournmentView :(NSString *) selectType{
     
-    TorunamentVC*tournmentVc = [[TorunamentVC alloc]init];
+    TorunamentVC*TETS =  (TorunamentVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"tornmentid"];
+    TETS.selectDashBoard=selectType;
+    [self.navigationController pushViewController:TETS animated:YES];
     
-    tournmentVc =  (TorunamentVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"tornmentid"];
-    tournmentVc.selectDashBoard=selectType;
- [self.navigationController pushViewController:tournmentVc animated:YES];
+//    TorunamentVC*tournmentVc = [[TorunamentVC alloc]init];
+//    
+//    tournmentVc =  (TorunamentVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"tornmentid"];
+//    tournmentVc.selectDashBoard=selectType;
+// [self.navigationController pushViewController:tournmentVc animated:YES];
 
     
 }

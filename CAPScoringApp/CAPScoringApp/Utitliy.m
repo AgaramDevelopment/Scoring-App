@@ -7,6 +7,22 @@
 //
 
 #import "Utitliy.h"
+////Public IP host
+//@implementation Utitliy
+//
+//+(NSString *)getIPPORT{
+//    return  @"182.74.23.197:8102";
+//}
+//
+//
+//+(NSString *)getSyncIPPORT{
+//    return  @"182.74.23.197:8102";
+//}
+//
+//+(NSString *)SecureId{
+//    return  @"SecureId";
+//}
+//@end
 
 @implementation Utitliy
 

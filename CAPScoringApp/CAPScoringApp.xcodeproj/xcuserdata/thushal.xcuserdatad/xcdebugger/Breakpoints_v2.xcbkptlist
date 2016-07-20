@@ -1083,7 +1083,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "7839"
             endingLineNumber = "7839"
-            landmarkName = "-ENDSession"
+            landmarkName = "-FollowOn"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1446,7 +1446,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/thushal/Desktop/Deepak%20source/18july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/DBManagerEditScoreEngine.m"
-                  timestampString = "490632656.656457"
+                  timestampString = "490683428.068986"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1217"
@@ -1461,7 +1461,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/thushal/Desktop/Deepak%20source/18july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/DBManagerEditScoreEngine.m"
-                  timestampString = "490632656.656598"
+                  timestampString = "490683428.069198"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1217"
@@ -1547,7 +1547,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12183"
             endingLineNumber = "12183"
-            landmarkName = "-textField:shouldChangeCharactersInRange:replacementString:"
+            landmarkName = "-SyncData_btn:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1595,7 +1595,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "7851"
             endingLineNumber = "7851"
-            landmarkName = "-ENDSession"
+            landmarkName = "-FollowOn"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1739,8 +1739,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "11995"
             endingLineNumber = "11995"
-            landmarkName = "@implementation ScorEnginVC"
-            landmarkType = "3">
+            landmarkName = "-btn_show_scorecard:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1755,7 +1755,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "8003"
             endingLineNumber = "8003"
-            landmarkName = "-matchInfoEdit"
+            landmarkName = "-OtherWicket"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2043,7 +2043,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "7985"
             endingLineNumber = "7985"
-            landmarkName = "-matchInfoEdit"
+            landmarkName = "-MatchResult"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2299,7 +2299,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12336"
             endingLineNumber = "12336"
-            landmarkName = "-ChangeVCBackBtnAction"
+            landmarkName = "-EndInningsDeleteBtnAction"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2347,7 +2347,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12308"
             endingLineNumber = "12308"
-            landmarkName = "-SyncData_btn:"
+            landmarkName = "-EndInningsBackBtnAction"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2427,8 +2427,55 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "8049"
             endingLineNumber = "8049"
-            landmarkName = "-DeclearINNINGS"
+            landmarkName = "-OtherWicket"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__26-[ScorEnginVC OtherWicket]_block_invoke.2316"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/18july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+                  timestampString = "490683428.092594"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "8049"
+                  endingLineNumber = "8049"
+                  offsetFromSymbolStart = "116">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_.2317"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/18july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+                  timestampString = "490683428.092729"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "8049"
+                  endingLineNumber = "8049"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.2318"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/18july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+                  timestampString = "490683428.092858"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "8049"
+                  endingLineNumber = "8049"
+                  offsetFromSymbolStart = "39">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2742,7 +2789,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/thushal/Desktop/Deepak%20source/18july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "490632656.701801"
+                  timestampString = "490683428.10109"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "7363"
@@ -2757,7 +2804,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/thushal/Desktop/Deepak%20source/18july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "490632656.70198"
+                  timestampString = "490683428.101223"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "7363"

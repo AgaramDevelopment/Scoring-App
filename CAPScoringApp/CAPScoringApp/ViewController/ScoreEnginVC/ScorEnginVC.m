@@ -53,7 +53,7 @@
 #import "AppealBatsmenRecord.h"
 #import "DeclareInnings.h"
 #import "OtherWicketVC.h"
-#import "PowerPlayGridVC.h"
+
 #import "Other_WicketVC.h"
 #import "NewMatchSetUpVC.h"
 #import "FETCHSEBALLCODEDETAILS.h"
@@ -68,7 +68,7 @@
 #import "PushSyncDBMANAGER.h"
 #import "EndSession.h"
 #import "EditModeVC.h"
-
+#import "PowerPlayVC.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -77,7 +77,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -198,7 +198,7 @@
     NSString  *TEAMBWICKETKEEPER;
     
     
-    PowerPlayGridVC *powerplaygridvc;
+    PowerPlayVC *powerplayVc;
     Other_WicketVC *otherwicketvc;
     Other_WicketgridVC *otherwikcetgricvc;
     RevicedOverVC * revicedOverVc ;
@@ -8241,24 +8241,28 @@ self.lbl_umpirename.text=@"";
 }
 -(void)PowerPlay
 {
-    powerplaygridvc = [[PowerPlayGridVC alloc]initWithNibName:@"PowerPlayGridVC" bundle:nil];
-    powerplaygridvc.competitionCode=self.competitionCode;
-    powerplaygridvc.matchCode =self.matchCode;
-    powerplaygridvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    powerplayVc = [[PowerPlayVC alloc]initWithNibName:@"PowerPlayVC" bundle:nil];
+    powerplayVc.competitionCode=self.competitionCode;
+    powerplayVc.matchCode =self.matchCode;
+    powerplayVc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    powerplayVc.delegate =self;
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+//    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+//    [fullview addSubview:Btn_Fullview];
+//    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:fullview];
-    [fullview addSubview:powerplaygridvc.view];
+    [fullview addSubview:powerplayVc.view];
     
-    powerplaygridvc.view.frame =CGRectMake(90, 200, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
+    powerplayVc.view.frame =CGRectMake(90, 200, powerplayVc.view.frame.size.width, powerplayVc.view.frame.size.height);
     
-    powerplaygridvc.view.alpha = 0;
-    [powerplaygridvc didMoveToParentViewController:self];
+    powerplayVc.view.alpha = 0;
+    [powerplayVc didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
      {
-         powerplaygridvc.view.alpha = 1;
+         powerplayVc.view.alpha = 1;
      }
                      completion:nil];
     
@@ -8266,26 +8270,26 @@ self.lbl_umpirename.text=@"";
     
     if (IS_IPAD_PRO) {
         
-        powerplaygridvc.view.frame =CGRectMake(250, 500, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
-        powerplaygridvc.view.alpha = 0;
-        [powerplaygridvc didMoveToParentViewController:self];
+        powerplayVc.view.frame =CGRectMake(250, 500, powerplayVc.view.frame.size.width, powerplayVc.view.frame.size.height);
+        powerplayVc.view.alpha = 0;
+        [powerplayVc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             powerplaygridvc.view.alpha = 1;
+             powerplayVc.view.alpha = 1;
          }
                          completion:nil];
     }
     
     
     else{
-        powerplaygridvc.view.frame =CGRectMake(100, 200, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
-        powerplaygridvc.view.alpha = 0;
-        [powerplaygridvc didMoveToParentViewController:self];
+        powerplayVc.view.frame =CGRectMake(100, 200, powerplayVc.view.frame.size.width, powerplayVc.view.frame.size.height);
+        powerplayVc.view.alpha = 0;
+        [powerplayVc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             powerplaygridvc.view.alpha = 1;
+             powerplayVc.view.alpha = 1;
          }
                          completion:nil];
     }
@@ -12293,104 +12297,83 @@ self.lbl_umpirename.text=@"";
     
     NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
    [PushDict setValue :MatcRegistraionGetArray forKey:@"MatcRegistraion"];
+
+    [PushDict setValue:MatchTeamplayerDetailsGetArray forKey:@"MatchTeamplayerDetails"];
+
+     [PushDict setValue:MatchresultGetArray forKey:@"Matchresult"];
+
+     [PushDict setValue:MatchEventGetArray forKey:@"MatchEvent"];
+
+     [PushDict setValue:InningsSummeryGetArray forKey:@"InningsSummery"];
+
+     [PushDict setValue:InningsEventGetArray forKey:@"InningsEvent"];
+
+     [PushDict setValue:InningsBreakEventGetArray forKey:@"InningsBreakEvent"];
+
+     [PushDict setValue:BallEventGetArray forKey:@"BallEvent"];
+
+     [PushDict setValue:BattingSummeryGetArray forKey:@"BattingSummery"];
+
+     [PushDict setValue:OverEventGetArray forKey:@"OverEvent"];
+
+     [PushDict setValue:BowlingSummeryGetArray forKey:@"BowlingSummery"];
+
+     [PushDict setValue:BowlingMaidenSummeryGetArray forKey:@"BowlingMaidenSummery"];
+
+     [PushDict setValue:BowlingOverDetailsGetArray forKey:@"BowlingOverDetails"];
+
+     [PushDict setValue:FieldingEventGetArray forKey:@"FieldingEvent"];
+
+     [PushDict setValue:DayEventGetArray forKey:@"DayEvent"];
+
+     [PushDict setValue:SessionEventGetArray forKey:@"SessionEvent"];
+
+    [PushDict setValue:AppealEventGetArray forKey:@"AppealEvent"];
+
+    [PushDict setValue:WicketEventGetArray forKey:@"WicketEvent"];
+
+    [PushDict setValue:PowerPlayGetArray forKey:@"PowerPlay"];
+
+    [PushDict setValue:PlayerInOutTimeGetArray forKey:@"PlayerInOutTime"];
+
+    [PushDict setValue:PenalitydetailsGetArray forKey:@"Penalitydetails"];
+
+    [PushDict setValue:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
     
-     NSMutableDictionary *PushDict1 =[[NSMutableDictionary alloc]init];
-    [PushDict1 setValue:MatchTeamplayerDetailsGetArray forKey:@"MatchTeamplayerDetails"];
+
+//
+//    
+  //  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:PushDict options:NSJSONWritingPrettyPrinted error:nil];
+//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    NSLog(@"JSON String: %@",jsonString);
     
-     NSMutableDictionary *PushDict2 =[[NSMutableDictionary alloc]init];
-     [PushDict2 setValue:MatchresultGetArray forKey:@"Matchresult"];
+    NSData* responseData = nil;
+    NSString *urlString = @"http://192.168.1.39:8096/CAPMobilityService.svc/PUSHDATATOSERVER";
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    responseData = [NSMutableData data] ;
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
+    NSString *bodydata=[NSString stringWithFormat:@"%@",PushDict];
     
-     NSMutableDictionary *PushDict3 =[[NSMutableDictionary alloc]init];
-     [PushDict3 setValue:MatchEventGetArray forKey:@"MatchEvent"];
-    
-     NSMutableDictionary *PushDict4 =[[NSMutableDictionary alloc]init];
-     [PushDict4 setValue:InningsSummeryGetArray forKey:@"InningsSummery"];
-    
-    
-     NSMutableDictionary *PushDict5 =[[NSMutableDictionary alloc]init];
-     [PushDict5 setValue:InningsEventGetArray forKey:@"InningsEvent"];
-    
-     NSMutableDictionary *PushDict6 =[[NSMutableDictionary alloc]init];
-     [PushDict6 setValue:InningsBreakEventGetArray forKey:@"InningsBreakEvent"];
-    
-     NSMutableDictionary *PushDict7 =[[NSMutableDictionary alloc]init];
-     [PushDict7 setValue:BallEventGetArray forKey:@"BallEvent"];
-    
-     NSMutableDictionary *PushDict8 =[[NSMutableDictionary alloc]init];
-     [PushDict8 setValue:BattingSummeryGetArray forKey:@"BattingSummery"];
-    
-     NSMutableDictionary *PushDict9 =[[NSMutableDictionary alloc]init];
-     [PushDict9 setValue:OverEventGetArray forKey:@"OverEvent"];
-    
-     NSMutableDictionary *PushDict10 =[[NSMutableDictionary alloc]init];
-     [PushDict10 setValue:BowlingSummeryGetArray forKey:@"BowlingSummery"];
-    
-    
-     NSMutableDictionary *PushDict11 =[[NSMutableDictionary alloc]init];
-     [PushDict11 setValue:BowlingMaidenSummeryGetArray forKey:@"BowlingMaidenSummery"];
-    
-     NSMutableDictionary *PushDict12 =[[NSMutableDictionary alloc]init];
-     [PushDict12 setValue:BowlingOverDetailsGetArray forKey:@"BowlingOverDetails"];
-    
-     NSMutableDictionary *PushDict13 =[[NSMutableDictionary alloc]init];
-     [PushDict13 setValue:FieldingEventGetArray forKey:@"FieldingEvent"];
-    
-     NSMutableDictionary *PushDict14 =[[NSMutableDictionary alloc]init];
-     [PushDict14 setValue:DayEventGetArray forKey:@"DayEvent"];
-    
-     NSMutableDictionary *PushDict15 =[[NSMutableDictionary alloc]init];
-     [PushDict15 setValue:SessionEventGetArray forKey:@"SessionEvent"];
-    
-     NSMutableDictionary *PushDict16 =[[NSMutableDictionary alloc]init];
-    [PushDict16 setValue:AppealEventGetArray forKey:@"AppealEvent"];
-    
-     NSMutableDictionary *PushDict17 =[[NSMutableDictionary alloc]init];
-    [PushDict17 setValue:WicketEventGetArray forKey:@"WicketEvent"];
-    
-     NSMutableDictionary *PushDict18 =[[NSMutableDictionary alloc]init];
-    [PushDict18 setValue:PowerPlayGetArray forKey:@"PowerPlay"];
-    
-     NSMutableDictionary *PushDict19 =[[NSMutableDictionary alloc]init];
-    [PushDict19 setValue:PlayerInOutTimeGetArray forKey:@"PlayerInOutTime"];
-    
-     NSMutableDictionary *PushDict20 =[[NSMutableDictionary alloc]init];
-    [PushDict20 setValue:PenalitydetailsGetArray forKey:@"Penalitydetails"];
-    
-     NSMutableDictionary *PushDict21=[[NSMutableDictionary alloc]init];
-    [PushDict21 setValue:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
-    
-    NSArray *sendarray=[[NSArray alloc]initWithObjects:PushDict,PushDict1,PushDict2,PushDict3,PushDict4,PushDict5,PushDict6,PushDict7,PushDict8,PushDict9,PushDict10,PushDict11,PushDict12,PushDict13,PushDict14,PushDict15,PushDict16,PushDict17,PushDict18,PushDict19,PushDict20,PushDict21,nil];
-    
-    
-    
-    
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sendarray
-                                                       options:0
-                                                         error:nil];
-    if (!jsonData) {
-        NSLog(@"error");
-    } else {
-        NSString *JSONString = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
-        NSLog(@"%@",JSONString);
+    [request setHTTPMethod:@"POST"];
+    NSData *req=[NSData dataWithBytes:[bodydata UTF8String] length:[bodydata length]];
+    [request setHTTPBody:req];
+    NSURLResponse* response;
+    NSError* error = nil;
+    responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+   
+    if (error) {
+        //...handle the error
     }
+    else {
+       NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+       NSLog(@"the final output is:%@",responseString);
+    }
+ 
     
-//    NSURLResponse *response;
-//    NSError *error;
-//    
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sendarray options:NSJSONWritingPrettyPrinted error:&error];
-//    
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
-//                                    [NSURL URLWithString:@"http://192.168.1.39:8096/CAPMobilityService.svc/PUSHDATATOSERVER"]];
-//    
-//    [request setHTTPMethod:@"POST"];
-//    [request setHTTPBody: jsonData];
-//    
-//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//    [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
-//    
-//    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//    NSString *serverResponse = (NSString *)[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+   
+    
+    
+    
     
     
     

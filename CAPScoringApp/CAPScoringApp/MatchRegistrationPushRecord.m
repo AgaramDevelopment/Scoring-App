@@ -31,7 +31,7 @@
 @synthesize UMPIRE2CODE;
 @synthesize UMPIRE3CODE;
 @synthesize MATCHREFEREECODE;
-@synthesize VIDEOLOCATION;
+
 @synthesize MATCHRESULT;
 @synthesize MATCHRESULTTEAMCODE;
 @synthesize TEAMAPOINTS;
@@ -43,7 +43,7 @@
 @synthesize MODIFIEDBY;
 @synthesize MODIFIEDDATE;
 @synthesize ISDEFAULTORLASTINSTANCE;
-@synthesize RELATIVEVIDEOLOCATION;
+//@synthesize RELATIVEVIDEOLOCATION;
 @synthesize ISSYNC;
 
 @end

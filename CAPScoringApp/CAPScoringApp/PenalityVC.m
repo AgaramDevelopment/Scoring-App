@@ -255,12 +255,45 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
+    
+    if(isShow_penaltyrecordTbl== YES)
+    {
+        selectindexarray=[[NSMutableArray alloc]init];
+        objMetaDataRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:indexPath.row];
+        self.lbl_penaltytype.text =objMetaDataRecord.metasubcodedescription;
+        penaltytypereasons=objMetaDataRecord.metasubcode;
+        
+        [selectindexarray addObject:objMetaDataRecord];
+        _penaltyDetailsRecord=(PenaltyDetailsRecord*)[_resultarray objectAtIndex:indexPath.row];
+        txt_penalityruns.text = _penaltyDetailsRecord.penaltyruns;
+        
+        NSString * objpenaltyTypecode =_penaltyDetailsRecord.penaltytypecode;
+        if([objpenaltyTypecode isEqualToString:@"MSC134"])
+        {
+            [self.btn_batting sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        else
+        {
+            [self.btn_bowling sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        penaltytypereasons=_penaltyDetailsRecord.penaltyreasoncode;
+        self.lbl_penaltytype.text = _penaltyDetailsRecord.penaltyreasondescription;
+        self.tbl_penaltyrecord.hidden=YES;
+        self.Btn_Add.hidden=YES;
+        [self.btn_submitpenality setTitle:[NSString stringWithFormat:@"UPDATE"] forState:UIControlStateNormal];
+
+        
+    }
+    else{
     selectindexarray=[[NSMutableArray alloc]init];
     objMetaDataRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:indexPath.row];
     self.lbl_penaltytype.text =objMetaDataRecord.metasubcodedescription;
      penaltytypereasons=objMetaDataRecord.metasubcode;
+  
     [selectindexarray addObject:objMetaDataRecord];
-    self.tbl_penality.hidden=YES;
+        [self.tbl_penality setHidden:YES];
+
+    }
 }
 
 //batting button
@@ -492,6 +525,7 @@
                 
                 
                  [self startService];
+               
                 
 //                PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
 //                add.resultarray=penaltyarray;
@@ -545,8 +579,9 @@
             
             [DBManager GetUpdatePenaltyDetails:awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode :self.competitionCode :self.matchCode :self.inningsNo :penaltyCode];
             
-            
-            
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Penalty Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alter show];
+            alter.tag =10;
             
             
 //            PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
@@ -572,9 +607,8 @@
         }
     }
 
+    }
 
-
-}
 
 - (IBAction)btn_back:(id)sender {
     
@@ -603,6 +637,7 @@
         self.tbl_penaltyrecord.hidden=YES;
         isShow_penaltyrecordTbl= NO;
         self.Btn_Add.hidden =YES;
+        [self.btn_submitpenality setTitle:[NSString stringWithFormat:@"Submit"] forState:UIControlStateNormal];
     }
     else
     {
