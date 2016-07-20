@@ -509,7 +509,12 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
 - (IBAction)btn_delete:(id)sender {
     innings = [[EndInnings alloc]init];
     
-    [innings DeleteEndInnings:CompetitionCode :MatchCode :OldTeamCode :OldInningsNo];
+    
+    BOOL isSuccess = [innings DeleteEndInnings:CompetitionCode :MatchCode :OldTeamCode :OldInningsNo];
+    if(isSuccess){
+    [self.delegate EndInningsDeleteBtnAction];
+
+    
     
     if(self.checkInternetConnection){
         
@@ -552,13 +557,15 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         
     }
     [endInningsArray removeLastObject];
-    [self.delegate EndInningsDeleteBtnAction];
+    
     [self fetchPageload:fetchEndinnings :CompetitionCode :MatchCode];
     [self.tbl_endInnings reloadData];
     
     self.tbl_endInnings.hidden = NO;
      self.view_Header.hidden = NO;
     self.view_allControls.hidden = YES;
+    
+}
 }
 
 

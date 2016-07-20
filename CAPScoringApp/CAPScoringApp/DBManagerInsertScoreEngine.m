@@ -528,7 +528,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT  IFNULL(MAX(SUBSTRING(PENALTYCODE,4,7)),0)+1 as MAXPENALTYID  FROM PENALTYDETAILS "];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT  IFNULL(MAX(SUBSTR(PENALTYCODE,4,7)),0)+1 as MAXPENALTYID  FROM PENALTYDETAILS "];
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE)

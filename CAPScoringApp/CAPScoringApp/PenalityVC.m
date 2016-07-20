@@ -25,7 +25,6 @@
     NSString *penalty_runs;
     NSString *penalty_type;
     NSString *penalty_reason;
-    BOOL isbtnbattingselected;
     NSString *btnbatting;
     NSString *penaltytypereasons;
     NSString *penaltycode;
@@ -77,7 +76,7 @@
     
     
     self.btn_batting.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
-    
+    btnbatting=@"MSC134";
     if(_penaltyDetailsRecord != nil){
         txt_penalityruns.text = _penaltyDetailsRecord.penaltyruns;
         _lbl_penaltytype.text = _penaltyDetailsRecord.penaltyreasondescription;
@@ -92,19 +91,19 @@
             self.btn_batting.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
             
             self.btn_bowling.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
-            isbtnbattingselected=YES;
+//            isbtnbattingselected=YES;
             
         }else{
             _FetchPenalityArray=[DBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT031"];
  
             
            
-            isbtnbattingselected=NO;
+//            isbtnbattingselected=NO;
         }
     }else{
         _FetchPenalityArray=[DBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT030"];
 
-        isbtnbattingselected=YES;
+//        isbtnbattingselected=YES;
     }
     
     [DBManager GetPenaltyDetailsForPageLoadPenalty:self.competitionCode :self.matchCode :self.inningsNo];
@@ -323,7 +322,7 @@
     
     self.btn_bowling.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
     
-    isbtnbattingselected=YES;
+//    isbtnbattingselected=YES;
     
 }
 
@@ -355,7 +354,7 @@
     
     self.btn_batting.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
     
-    isbtnbattingselected=YES;
+//    isbtnbattingselected=YES;
 }
 
 - (BOOL)textField:(UITextField *)theTextField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

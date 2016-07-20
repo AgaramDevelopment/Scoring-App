@@ -387,6 +387,17 @@
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
     add.TEAMCODE=self.TEAMCODE;
+    add.STRIKERCODE=STRIKERCODE;
+    add.NONSTRIKERCODE=NONSTRIKERCODE;
+    add.NONSTRIKERNAME=NONSTRIKERNAME;
+    add.MAXOVER=MAXOVER;
+    add.MAXBALL=MAXBALL;
+    add.BALLCOUNT=BALLCOUNT;
+    add.N_WICKETNO=N_WICKETNO;
+    add.BALLCODE=BALLCODE;
+    
+    
+    
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
@@ -444,6 +455,14 @@
         add.MATCHCODE=self.MATCHCODE;
         add.INNINGSNO=self.INNINGSNO;
         add.TEAMCODE=self.TEAMCODE;
+        add.STRIKERCODE=STRIKERCODE;
+        add.NONSTRIKERCODE=NONSTRIKERCODE;
+        add.NONSTRIKERNAME=NONSTRIKERNAME;
+        add.MAXOVER=MAXOVER;
+        add.MAXBALL=MAXBALL;
+        add.BALLCOUNT=BALLCOUNT;
+        add.N_WICKETNO=N_WICKETNO;
+        add.BALLCODE=BALLCODE;
         
         [self addChildViewController:add];
         add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
@@ -471,6 +490,14 @@
         add.MATCHCODE=self.MATCHCODE;
         add.INNINGSNO=self.INNINGSNO;
         add.TEAMCODE=self.TEAMCODE;
+        add.STRIKERCODE=STRIKERCODE;
+        add.NONSTRIKERCODE=NONSTRIKERCODE;
+        add.NONSTRIKERNAME=NONSTRIKERNAME;
+        add.MAXOVER=MAXOVER;
+        add.MAXBALL=MAXBALL;
+        add.BALLCOUNT=BALLCOUNT;
+        add.N_WICKETNO=N_WICKETNO;
+        add.BALLCODE=BALLCODE;
         
         [self addChildViewController:add];
         add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
@@ -533,6 +560,14 @@
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
     add.TEAMCODE=self.TEAMCODE;
+        add.STRIKERCODE=STRIKERCODE;
+        add.NONSTRIKERCODE=NONSTRIKERCODE;
+        add.NONSTRIKERNAME=NONSTRIKERNAME;
+        add.MAXOVER=MAXOVER;
+        add.MAXBALL=MAXBALL;
+        add.BALLCOUNT=BALLCOUNT;
+        add.N_WICKETNO=N_WICKETNO;
+        add.BALLCODE=BALLCODE;
     
     [self addChildViewController:add];
     add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
