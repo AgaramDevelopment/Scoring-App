@@ -400,6 +400,40 @@ NSString *query=[NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENT
     
 }
 
++(NSString*)  GetBallNoForUpdateFollowOn : (NSString*) COMPETITIONCODE : (NSString*) MATCHCODE :(NSString*) TEAMNAME : (NSString*) INNINGSNO : (NSString*) OVERNO
+{
+    
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT MAX(BALLNO) AS BALLNO FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND OVERNO='%@' AND INNINGSNO=%@",COMPETITIONCODE,MATCHCODE,TEAMNAME,OVERNO,INNINGSNO];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            
+            NSString *teamCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return teamCode;
+            
+            
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return 0;
+    
+    
+}
 
 +(NSString *) GetOverStatusForUpdateFollowOn :(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO:(NSString*) OVERNO{
     

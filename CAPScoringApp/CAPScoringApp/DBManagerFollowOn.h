@@ -37,6 +37,8 @@
 
 +(NSString*)  GetOverNoForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO;
 
++(NSString*)  GetBallNoForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO : (NSString*) OVERNO;
+
 +(NSString *) GetOverStatusForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO:(NSString*) OVERNO;
 
 +(NSString *) GetBowlingTeamCodeForUpdateFollowOn:(NSString*) COMPETITIONCODE:(NSString*) TEAMNAME: (NSString*) MATCHCODE;

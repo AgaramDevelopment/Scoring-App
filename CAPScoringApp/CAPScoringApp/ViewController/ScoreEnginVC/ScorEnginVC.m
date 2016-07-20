@@ -569,7 +569,7 @@ EditModeVC * objEditModeVc;
         [_rightSlideArray removeObjectsInArray:[[NSArray alloc] initWithObjects:@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil]];
         if (fetchSEPageLoadRecord.BATTEAMWICKETS >= 10)
             [_rightSlideArray removeObject : @"DECLARE INNINGS"];
-        if (inningsno != 2 || inningsno != 3)
+        if (inningsno == 1 || inningsno == 4)
             [_rightSlideArray removeObject : @"FOLLOW ON"];
     }
     [self getLastBowlerDetails];
@@ -8801,7 +8801,7 @@ self.lbl_umpirename.text=@"";
     [self CreateBallTickers : fetchSEPageLoadRecord.BallGridDetails];
     
     //CHECK Wickets
-    if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
+    if(fetchSEPageLoadRecord.BATTEAMWICKETS==10 && (![fetchSEPageLoadRecord.INNINGSSTATUS isEqualToString:@"1"])){
             UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             [alter setTag:10004];
