@@ -1562,6 +1562,7 @@ EditModeVC * objEditModeVc;
         self.commonViewXposition.constant=0;
         self.commonViewwidthposition.constant =self.view.frame.size.width;
         leftSlideSwipe = NO;
+        self.CommonView.userInteractionEnabled= YES;
     } completion:^(BOOL finished){ }];
     
     
@@ -1574,6 +1575,7 @@ EditModeVC * objEditModeVc;
     self.commonViewwidthposition.constant =768;
     self.CommonviewRightsideposition.constant =self.view.frame.size.width+300;
     leftSlideSwipe = YES;
+    self.CommonView.userInteractionEnabled= NO;
     [self.sideviewtable reloadData];
     
     
