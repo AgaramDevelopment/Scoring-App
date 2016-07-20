@@ -9,8 +9,22 @@
 #import <UIKit/UIKit.h>
 #import "PowerPlayTVCell.h"
 #import "PowerPlayRecord.h"
+#import "PowerPlayGridTVC.h"
+
+
+@protocol PowerplayDelegate <NSObject>
+- (void)ChangeVCBackBtnAction;
+
+
+@end
+
+
 
 @interface PowerPlayVC : UIViewController
+
+
+@property (nonatomic, weak) id <PowerplayDelegate> delegate;
+
 @property (strong, nonatomic) IBOutlet UITextField *txt_startover;
 @property (strong, nonatomic) IBOutlet UITextField *txt_endover;
 
@@ -46,6 +60,15 @@
 
 
 - (IBAction)btn_back:(id)sender;
+
+@property (strong, nonatomic) IBOutlet UITableView *tbl_powerplay;
+@property (strong, nonatomic) IBOutlet UIView *view_powerplayover;
+@property (strong, nonatomic) IBOutlet UIView *view_powerplaygrid;
+@property (strong, nonatomic) IBOutlet UIView *view_powerplay;
+
+@property (strong, nonatomic) IBOutlet PowerPlayGridTVC *powerplay_cell;
+
+
 
 
 @end

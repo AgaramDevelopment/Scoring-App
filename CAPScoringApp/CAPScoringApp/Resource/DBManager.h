@@ -15,7 +15,7 @@
 
 @interface DBManager : NSObject
 //tournament
-+(NSMutableArray *)RetrieveEventData;
++(NSMutableArray *)RetrieveEventData: (NSString *) userCode;
 //login
 +(NSMutableArray *)checkUserLogin: (NSString *) userName password: (NSString *) password;
 +(BOOL)checkExpiryDate: (NSString *) userId;

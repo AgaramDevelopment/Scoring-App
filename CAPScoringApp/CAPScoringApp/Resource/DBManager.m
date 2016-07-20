@@ -78,7 +78,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(NSMutableArray *)RetrieveEventData{
++(NSMutableArray *)RetrieveEventData: (NSString *) userCode{
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
     int retVal;
     NSString *dbPath = [self getDBPath];
@@ -89,7 +89,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
-    NSString *query=[NSString stringWithFormat:@"select * FROM COMPETITION"];
+    NSString *query=[NSString stringWithFormat:@"select * FROM COMPETITION CP INNER JOIN  MATCHSCORERDETAILS MSD ON CP.COMPETITIONCODE = MSD.COMPETITIONCODE AND MSD.SCORERCODE = '%@' GROUP BY MSD.COMPETITIONCODE",userCode];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {

@@ -13,7 +13,7 @@
 @property(nonatomic,strong)NSString *MATCHCODE;
 @property(nonatomic,strong)NSString *MATCHNAME;
 @property(nonatomic,strong)NSString *COMPETITIONCODE;
-@property(nonatomic,strong)NSNumber *MATCHOVERS;
+@property(nonatomic,strong)NSString *MATCHOVERS;
 @property(nonatomic,strong)NSString *MATCHOVERCOMMENTS;
 @property(nonatomic,strong)NSString *MATCHDATE;
 @property(nonatomic,strong)NSString *ISDAYNIGHT;
@@ -32,8 +32,8 @@
 @property(nonatomic,strong)NSString *VIDEOLOCATION;
 @property(nonatomic,strong)NSString *MATCHRESULT;
 @property(nonatomic,strong)NSString *MATCHRESULTTEAMCODE;
-@property(nonatomic,strong)NSNumber *TEAMAPOINTS;
-@property(nonatomic,strong)NSNumber *TEAMBPOINTS;
+@property(nonatomic,strong)NSString *TEAMAPOINTS;
+@property(nonatomic,strong)NSString *TEAMBPOINTS;
 @property(nonatomic,strong)NSString *MATCHSTATUS;
 @property(nonatomic,strong)NSString *RECORDSTATUS;
 @property(nonatomic,strong)NSString *CREATEDBY;
@@ -41,7 +41,6 @@
 @property(nonatomic,strong)NSString *MODIFIEDBY;
 @property(nonatomic,strong)NSString *MODIFIEDDATE;
 @property(nonatomic,strong)NSString *ISDEFAULTORLASTINSTANCE;
-@property(nonatomic,strong)NSString *RELATIVEVIDEOLOCATION;
 @property(nonatomic,strong)NSString *ISSYNC;
 
 @end

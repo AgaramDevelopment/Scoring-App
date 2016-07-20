@@ -16,6 +16,7 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "Utitliy.h"
+#import "LoginDBmanager.h"
 
 @interface DashBoardVC ()
 
@@ -275,6 +276,44 @@
                 
                 
                           }
+            
+            
+            //Match Scorer Details
+            
+            NSArray *matchScorerDetailsArray =   [serviceResponse objectForKey:@"Matchscorerdetails"];
+            
+            
+            for (int k=0; k<[matchScorerDetailsArray count]; k++) {
+                NSDictionary*test1 =[matchScorerDetailsArray objectAtIndex:k];
+                
+                NSString *Competitioncode=[test1 objectForKey:@"Competitioncode"];
+                NSString *Matchcode=[test1 objectForKey:@"Matchcode"];
+                NSString *Scorercode=[test1 objectForKey:@"Scorercode"];
+                NSString *Recordstatus=[test1 objectForKey:@"Recordstatus"];
+                NSString *Createdby=[test1 objectForKey:@"Createdby"];
+                NSString *Createddate=[test1 objectForKey:@"Createddate"];
+                NSString *Modifiedby=[test1 objectForKey:@"Modifiedby"];
+                NSString*Modifieddate=[test1 objectForKey:@"Modifieddate"];
+                
+                
+                
+                
+                bool CheckStatus= [LoginDBmanager CheckMatchScorerDetails:Competitioncode :Matchcode :Scorercode ];
+                if (CheckStatus==YES)
+                {
+                    [LoginDBmanager UpdateMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
+                }
+                
+                else
+                {
+                    [LoginDBmanager InsertMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
+                    
+                    
+                }
+                
+                
+            }
+            
             
             
             
@@ -816,11 +855,15 @@
 
 -(void) tournmentView :(NSString *) selectType{
     
-    TorunamentVC*tournmentVc = [[TorunamentVC alloc]init];
+    TorunamentVC*TETS =  (TorunamentVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"tornmentid"];
+    TETS.selectDashBoard=selectType;
+    [self.navigationController pushViewController:TETS animated:YES];
     
-    tournmentVc =  (TorunamentVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"tornmentid"];
-    tournmentVc.selectDashBoard=selectType;
- [self.navigationController pushViewController:tournmentVc animated:YES];
+//    TorunamentVC*tournmentVc = [[TorunamentVC alloc]init];
+//    
+//    tournmentVc =  (TorunamentVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"tornmentid"];
+//    tournmentVc.selectDashBoard=selectType;
+// [self.navigationController pushViewController:tournmentVc animated:YES];
 
     
 }

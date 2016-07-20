@@ -26,6 +26,8 @@
 
 @implementation Utitliy
 
+//return  @"182.74.23.197:8102"; Live
+//return  @"192.168.1.39:8096"; Testing
 +(NSString *)getIPPORT{
     return  @"192.168.1.39:8096";
 }
