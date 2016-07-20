@@ -53,7 +53,7 @@
 #import "AppealBatsmenRecord.h"
 #import "DeclareInnings.h"
 #import "OtherWicketVC.h"
-#import "PowerPlayGridVC.h"
+
 #import "Other_WicketVC.h"
 #import "NewMatchSetUpVC.h"
 #import "FETCHSEBALLCODEDETAILS.h"
@@ -68,7 +68,7 @@
 #import "PushSyncDBMANAGER.h"
 #import "EndSession.h"
 #import "EditModeVC.h"
-
+#import "PowerPlayVC.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -77,7 +77,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -198,7 +198,7 @@
     NSString  *TEAMBWICKETKEEPER;
     
     
-    PowerPlayGridVC *powerplaygridvc;
+    PowerPlayVC *powerplayVc;
     Other_WicketVC *otherwicketvc;
     Other_WicketgridVC *otherwikcetgricvc;
     RevicedOverVC * revicedOverVc ;
@@ -8217,27 +8217,28 @@ self.lbl_umpirename.text=@"";
 }
 -(void)PowerPlay
 {
-    powerplaygridvc = [[PowerPlayGridVC alloc]initWithNibName:@"PowerPlayGridVC" bundle:nil];
-    powerplaygridvc.competitionCode=self.competitionCode;
-    powerplaygridvc.matchCode =self.matchCode;
-    powerplaygridvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    powerplayVc = [[PowerPlayVC alloc]initWithNibName:@"PowerPlayVC" bundle:nil];
+    powerplayVc.competitionCode=self.competitionCode;
+    powerplayVc.matchCode =self.matchCode;
+    powerplayVc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    powerplayVc.delegate =self;
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
-    [fullview addSubview:Btn_Fullview];
-    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+//    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+//    [fullview addSubview:Btn_Fullview];
+//    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:fullview];
-    [fullview addSubview:powerplaygridvc.view];
+    [fullview addSubview:powerplayVc.view];
     
-    powerplaygridvc.view.frame =CGRectMake(90, 200, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
+    powerplayVc.view.frame =CGRectMake(90, 200, powerplayVc.view.frame.size.width, powerplayVc.view.frame.size.height);
     
-    powerplaygridvc.view.alpha = 0;
-    [powerplaygridvc didMoveToParentViewController:self];
+    powerplayVc.view.alpha = 0;
+    [powerplayVc didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
      {
-         powerplaygridvc.view.alpha = 1;
+         powerplayVc.view.alpha = 1;
      }
                      completion:nil];
     
@@ -8245,26 +8246,26 @@ self.lbl_umpirename.text=@"";
     
     if (IS_IPAD_PRO) {
         
-        powerplaygridvc.view.frame =CGRectMake(250, 500, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
-        powerplaygridvc.view.alpha = 0;
-        [powerplaygridvc didMoveToParentViewController:self];
+        powerplayVc.view.frame =CGRectMake(250, 500, powerplayVc.view.frame.size.width, powerplayVc.view.frame.size.height);
+        powerplayVc.view.alpha = 0;
+        [powerplayVc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             powerplaygridvc.view.alpha = 1;
+             powerplayVc.view.alpha = 1;
          }
                          completion:nil];
     }
     
     
     else{
-        powerplaygridvc.view.frame =CGRectMake(100, 200, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
-        powerplaygridvc.view.alpha = 0;
-        [powerplaygridvc didMoveToParentViewController:self];
+        powerplayVc.view.frame =CGRectMake(100, 200, powerplayVc.view.frame.size.width, powerplayVc.view.frame.size.height);
+        powerplayVc.view.alpha = 0;
+        [powerplayVc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             powerplaygridvc.view.alpha = 1;
+             powerplayVc.view.alpha = 1;
          }
                          completion:nil];
     }

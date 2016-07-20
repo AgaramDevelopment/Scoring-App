@@ -10,7 +10,19 @@
 #import "PowerPlayGridTVC.h"
 #import "PowerPlayRecord.h"
 
+//
+//@protocol PowerplayDelegate <NSObject>
+//- (void)ChangeVCBackBtnAction;
+//
+//
+//@end
+
+
+
 @interface PowerPlayGridVC : UIViewController
+
+//@property (nonatomic, weak) id <PowerplayDelegate> delegate;
+
 
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;
