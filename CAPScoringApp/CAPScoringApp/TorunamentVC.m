@@ -59,8 +59,11 @@
 - (void)refresh:(UIRefreshControl *)refreshControl {
     [self startService:@"DONE"];
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userCode = [defaults objectForKey:@"userCode"];
+    
     resultArray=[[NSMutableArray alloc]init];
-    NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
+    NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData:userCode];
     for(int i=0; i < [FetchCompitionArray count]; i++)
     {
         
@@ -172,8 +175,14 @@
     
     if(isEnableTbl==YES)
     {
+        
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *userCode = [defaults objectForKey:@"userCode"];
+        
+        
         resultArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData];
+        NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData:userCode];
         for(int i=0; i < [FetchCompitionArray count]; i++)
         {
             

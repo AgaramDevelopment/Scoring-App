@@ -3522,11 +3522,8 @@ EditModeVC * objEditModeVc;
     {
         [objextras removeFromSuperview];
     }
-    else if(ispichmapSelectValue==NO)
-    {
-          [self unselectedButtonBg:self.btn_pichmap];
-           
-    }
+   
+    
         
 //    else if(ispichmapSelectValue==YES)
 //    {
@@ -3554,6 +3551,15 @@ EditModeVC * objEditModeVc;
     //        [overThrowTableView removeFromSuperview];
     //    }
     UIButton *selectBtnTag=(UIButton*)sender;
+    
+    
+    if(ispichmapSelectValue==NO && selectBtnTag.tag != 110)
+    {
+        [self unselectedButtonBg:self.btn_pichmap];
+        isPitchmap = NO;
+        
+    }
+    
     
     //wicket
     if(isWicketSelected && selectBtnTag.tag != 107 && wicketOption !=0){
@@ -3940,6 +3946,22 @@ EditModeVC * objEditModeVc;
              self.PichMapTittle.hidden=YES;
             self.img_pichmap.hidden=YES;
             isPitchmap=NO;
+            ispichmapSelectValue = NO;
+            
+            //Reset
+            self.ballEventRecord.objPMlengthcode=@"";
+            self.ballEventRecord.objPMlinecode =@"";
+            self.ballEventRecord.objPMX1=@1;
+            self.ballEventRecord.objPMY1=@1;
+            self.ballEventRecord.objPMX2=@1;
+            self.ballEventRecord.objPMY2=@1;
+            
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+
         }
     }
     else if(selectBtnTag.tag==111)
@@ -3997,6 +4019,31 @@ EditModeVC * objEditModeVc;
             [self unselectedButtonBg:self.btn_wagonwheel];
             self.img_WagonWheel.hidden=YES;
             isWagonwheel=NO;
+            
+            
+            for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
+                if ([layer.name isEqualToString:@"DrawLine"]) {
+                    [layer removeFromSuperlayer];
+                    break;
+                }
+            }
+            
+            
+            if (IS_IPAD_PRO) {
+                _ballEventRecord.objWWX1=@(221);
+                _ballEventRecord.objWWY1=@(186);
+                _ballEventRecord.objWWX2=@(221);
+                _ballEventRecord.objWWY2=@(186);
+            }
+            else{
+                
+                _ballEventRecord.objWWX1=@(172);
+                _ballEventRecord.objWWY1=@(145);
+                _ballEventRecord.objWWX2=@(172);
+                _ballEventRecord.objWWY2=@(145);
+                
+            }
+            
             
         }
 
@@ -4068,10 +4115,10 @@ EditModeVC * objEditModeVc;
 - (void)didClickPichmapTapAction:(UIGestureRecognizer *)pichmapGesture
 {
     
-    if(Img_ball != nil)
-    {
-        [Img_ball removeFromSuperview];
-    }
+//    if(Img_ball != nil)
+//    {
+//        [Img_ball removeFromSuperview];
+//    }
     ispichmapSelectValue=YES;
     CGPoint p = [pichmapGesture locationInView:self.img_pichmap];
     NSLog(@"pointx=%f,pointY=%f",p.x,p.y);
@@ -4080,7 +4127,7 @@ EditModeVC * objEditModeVc;
     
     if(IS_IPAD_PRO)
     {
-        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
+        //Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
         
         if(Xposition > 187 && Yposition > 85 && Xposition < 455 && Yposition < 200)
         {
@@ -4152,6 +4199,12 @@ EditModeVC * objEditModeVc;
                 }
             }
             
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             _ballEventRecord.objPMX1=@1;
@@ -4228,8 +4281,13 @@ EditModeVC * objEditModeVc;
                     self.ballEventRecord.objPMlinecode =@"MSC031";
                 }
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
             
-            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             _ballEventRecord.objPMX1=@1;
@@ -4307,7 +4365,13 @@ EditModeVC * objEditModeVc;
                 }
                 
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
             
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             _ballEventRecord.objPMX1=@1;
@@ -4384,6 +4448,14 @@ EditModeVC * objEditModeVc;
                 }
                 //NSLog(@"good wide 0.0");
             }
+            
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             _ballEventRecord.objPMX1=@1;
@@ -4459,6 +4531,13 @@ EditModeVC * objEditModeVc;
                 }
                 
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             _ballEventRecord.objPMX1=@1;
@@ -4534,6 +4613,14 @@ EditModeVC * objEditModeVc;
                 }
                 
             }
+            
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             _ballEventRecord.objPMX1=@1;
@@ -4543,7 +4630,7 @@ EditModeVC * objEditModeVc;
         }
     }
     else{
-        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,15, 15)];
+        //Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,15, 15)];
         
         //           if(Xposition > 103 && Yposition > -19 && Xposition < 243 && Yposition < 60)
         //           {
@@ -4619,6 +4706,13 @@ EditModeVC * objEditModeVc;
                 }
             }
             
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             self.ballEventRecord.objPMlengthcode=@"MSC037";
@@ -4693,6 +4787,13 @@ EditModeVC * objEditModeVc;
                 }
             }
             
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
         }
@@ -4763,6 +4864,13 @@ EditModeVC * objEditModeVc;
                     self.ballEventRecord.objPMlinecode =@"MSC031";
                 }
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
         }
@@ -4832,6 +4940,13 @@ EditModeVC * objEditModeVc;
                     self.ballEventRecord.objPMlinecode =@"MSC031";
                 }
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
         }
@@ -4904,6 +5019,13 @@ EditModeVC * objEditModeVc;
                 }
                 
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
         }
@@ -4974,6 +5096,13 @@ EditModeVC * objEditModeVc;
                     self.ballEventRecord.objPMlinecode =@"MSC031";
                 }
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
         }
@@ -5012,9 +5141,10 @@ EditModeVC * objEditModeVc;
     self.view_Wagon_wheel.hidden=YES;
     self.objcommonRemarkview.hidden=YES;
     
-    if (ispichmapSelectValue== NO)
+    if (ispichmapSelectValue== NO && selectBtnTag.tag != 110)
     {
         [self unselectedButtonBg:self.btn_pichmap];
+        isPitchmap = NO;
     }
 
     //wicket
@@ -5843,7 +5973,7 @@ self.lbl_umpirename.text=@"";
     isEnableTbl=NO;
     isPitchmap =NO;
     isWagonwheel=NO;
-   
+    ispichmapSelectValue = NO;
    
   //[self unselectedViewBg: self.View_Appeal];
   //[self unselectedViewBg: self.view_lastinstance];
