@@ -215,6 +215,7 @@
 @property(strong,nonatomic)NSMutableArray *getDataArray;
 @property(strong,nonatomic)NSMutableArray *getPlayerArray;
 @property(strong,nonatomic)NSMutableArray *getOverArray;
+@property(strong,nonatomic)NSMutableArray *getBowlingArray;
 @property(strong,nonatomic)NSString  *SMAIDENOVER;
 
 @property(nonatomic,assign)NSNumber* ISWKTDTLSUPDATE ;

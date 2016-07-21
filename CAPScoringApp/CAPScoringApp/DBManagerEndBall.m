@@ -133,7 +133,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET RUNS = CASE WHEN ('%@' = 0 AND '%@' = 0 AND '%@' = 0) THEN (RUNS - ('%@' + '%@')) ELSE (RUNS - '%@') END,BALLS = CASE WHEN '%@' = 0 THEN (BALLS - 1) ELSE BALLS END,ONES = CASE WHEN ('%@' + '%@' = 1) AND ('%@' = 0 AND '%@' = 0 AND '%@' = 0) THEN (ONES - 1) ELSE ONES END,TWOS = CASE WHEN ('%@' + '%@' = 2) AND ('%@' = 0 AND '%@' = 0 AND '%@' = 0) THEN (TWOS - 1) ELSE TWOS END,THREES = CASE WHEN ('%@' + '%@' = 3) AND ('%@' = 0 AND '%@' = 0 AND '%@' = 0) THEN (THREES - 1) ELSE THREES END,FOURS = CASE WHEN ('%@' = 1 AND '%@' = 0 AND '%@' = 0 AND '%@' = 0) THEN (FOURS - 1) ELSE FOURS END,SIXES = CASE WHEN ('%@' = 1 AND '%@' = 0 AND '%@' = 0 AND '%@' = 0) THEN (SIXES - 1) ELSE SIXES END,DOTBALLS = CASE WHEN ('%@' = 0 AND '%@' = 0) THEN (DOTBALLS - 1) ELSE DOTBALLS END  WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@' AND INNINGSNO = '%@' AND BATSMANCODE = '%@'",F_WIDE,F_BYES,F_LEGBYES,F_RUNS,F_OVERTHROW,F_RUNS,F_WIDE,F_RUNS,F_OVERTHROW,F_WIDE,F_BYES,F_LEGBYES,F_RUNS,F_OVERTHROW,F_WIDE,F_BYES,F_LEGBYES,F_RUNS,F_OVERTHROW,F_WIDE,F_BYES,F_LEGBYES,F_ISFOUR,F_WIDE,F_BYES,F_LEGBYES,F_ISSIX,F_WIDE,F_BYES,F_LEGBYES,F_RUNS,F_WIDE, COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,F_STRIKERCODE];
+  
+        
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET RUNS = CASE WHEN ('%@' = 0 AND '%@' = 0 AND '%@' = 0) THEN (RUNS - ('%@' + '%@')) ELSE (RUNS - '%@') END,BALLS = CASE WHEN %@ = 0 THEN (BALLS - 1) ELSE BALLS END,ONES = CASE WHEN ('%@' + '%@' = 1) AND ('%@' = 0 AND '%@' = 0 AND '%@' = 0) THEN (ONES - 1) ELSE ONES END,TWOS = CASE WHEN ('%@' + '%@' = 2) AND ('%@' = 0 AND '%@' = 0 AND '%@' = 0) THEN (TWOS - 1) ELSE TWOS END,THREES = CASE WHEN ('%@' + '%@' = 3) AND ('%@' = 0 AND '%@' = 0 AND '%@' = 0) THEN (THREES - 1) ELSE THREES END,FOURS = CASE WHEN ('%@' = 1 AND '%@' = 0 AND '%@' = 0 AND '%@' = 0) THEN (FOURS - 1) ELSE FOURS END,SIXES = CASE WHEN ('%@' = 1 AND '%@' = 0 AND '%@' = 0 AND '%@' = 0) THEN (SIXES - 1) ELSE SIXES END,DOTBALLS = CASE WHEN ('%@' = 0 AND '%@' = 0) THEN (DOTBALLS - 1) ELSE DOTBALLS END  WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@' AND INNINGSNO = '%@' AND BATSMANCODE = '%@'",F_WIDE,F_BYES,F_LEGBYES,F_RUNS,F_OVERTHROW,F_RUNS,F_WIDE,F_RUNS,F_OVERTHROW,F_WIDE,F_BYES,F_LEGBYES,F_RUNS,F_OVERTHROW,F_WIDE,F_BYES,F_LEGBYES,F_RUNS,F_OVERTHROW,F_WIDE,F_BYES,F_LEGBYES,F_ISFOUR,F_WIDE,F_BYES,F_LEGBYES,F_ISSIX,F_WIDE,F_BYES,F_LEGBYES,F_RUNS,F_WIDE, COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,F_STRIKERCODE];
 
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
@@ -164,7 +166,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET WICKETSCORE = WICKETSCORE - ('%@' - '%@')	WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@'	AND INNINGSNO = '%@' AND ((WICKETOVERNO + '%@' + WICKETBALLNO) >= ('%@' + '%@' +%@))",O_RUNS,N_RUNS,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,F_OVERS,F_BALLS,F_OVERS,F_BALLS];
+   
+        
+        
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET WICKETSCORE = WICKETSCORE - ('%@' - '%@')	WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@'	AND INNINGSNO = '%@' AND ((WICKETOVERNO || '.' || WICKETBALLNO) >= ('%@' || '.' || '%@'))",O_RUNS,N_RUNS,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,F_OVERS,F_BALLS];
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE)
@@ -801,6 +806,36 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_close(dataBase);
     return GetDataArrayUpdateScoreEngine;
     }
+
+
++(NSMutableArray*) getBowlingTeamCode: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE
+{
+    
+    
+    NSMutableArray *getBowlingCodeArray=[[NSMutableArray alloc]init];
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT (CASE WHEN TEAMACODE = '%@' THEN TEAMBCODE ELSE TEAMACODE END) AS BOWLINGTEAMCODE , MATCHOVERS FROM MATCHREGISTRATION WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'",TEAMCODE,COMPETITIONCODE,MATCHCODE];
+        const char *update_stmt = [updateSQL UTF8String];
+        if( sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                UpdateScoreEngineRecord *record=[[UpdateScoreEngineRecord alloc]init];
+                record.BOWLINGTEAMCODE =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.MATCHOVER=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                [getBowlingCodeArray addObject:record];
+            }
+        }
+    }
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return getBowlingCodeArray;
+}
+
 
 
 
