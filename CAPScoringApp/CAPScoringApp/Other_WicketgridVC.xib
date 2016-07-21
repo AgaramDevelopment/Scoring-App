@@ -102,24 +102,14 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SSx-Pr-r4X">
                             <rect key="frame" x="0.0" y="75" width="550" height="50"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="247" verticalHuggingPriority="251" text="WICKET TYPE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aw-gp-flH">
-                                    <rect key="frame" x="15" y="14" width="153" height="22"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="247" verticalHuggingPriority="251" text="DISMISSEL TYPE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7aw-gp-flH">
+                                    <rect key="frame" x="6" y="14" width="153" height="22"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="153" id="I1C-LO-k0e"/>
                                         <constraint firstAttribute="height" constant="22" id="lnD-OA-cNT"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="WICKET PLAYER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfU-VD-LAs">
-                                    <rect key="frame" x="200" y="14" width="135" height="22"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="135" id="MeR-bo-94l"/>
-                                        <constraint firstAttribute="height" constant="22" id="Qi3-Zf-vi6"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WICKET NO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ddI-Mv-Q1p">
@@ -129,30 +119,42 @@
                                         <constraint firstAttribute="width" constant="93" id="WS2-bh-Z9P"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="BATSMAN NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfU-VD-LAs">
+                                    <rect key="frame" x="193" y="14" width="174" height="22"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="174" id="MeR-bo-94l"/>
+                                        <constraint firstAttribute="height" constant="22" id="Qi3-Zf-vi6"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.070588235294117646" green="0.082352941176470587" blue="0.10196078431372549" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="7aw-gp-flH" firstAttribute="top" secondItem="SSx-Pr-r4X" secondAttribute="top" constant="14" id="3Oe-fs-cSA"/>
                                 <constraint firstAttribute="trailing" secondItem="ddI-Mv-Q1p" secondAttribute="trailing" constant="38" id="4YC-S7-SLG"/>
-                                <constraint firstItem="tfU-VD-LAs" firstAttribute="leading" secondItem="7aw-gp-flH" secondAttribute="trailing" constant="32" id="7jl-w5-KWD"/>
+                                <constraint firstItem="tfU-VD-LAs" firstAttribute="leading" secondItem="7aw-gp-flH" secondAttribute="trailing" constant="34" id="7jl-w5-KWD"/>
                                 <constraint firstAttribute="height" constant="50" id="B6b-2O-00V"/>
-                                <constraint firstItem="7aw-gp-flH" firstAttribute="leading" secondItem="SSx-Pr-r4X" secondAttribute="leading" constant="15" id="Eki-2w-sTC"/>
+                                <constraint firstItem="7aw-gp-flH" firstAttribute="leading" secondItem="SSx-Pr-r4X" secondAttribute="leading" constant="6" id="Eki-2w-sTC"/>
                                 <constraint firstItem="tfU-VD-LAs" firstAttribute="top" secondItem="SSx-Pr-r4X" secondAttribute="top" constant="14" id="ML4-Di-Hhk"/>
                                 <constraint firstItem="ddI-Mv-Q1p" firstAttribute="top" secondItem="SSx-Pr-r4X" secondAttribute="top" constant="14" id="uPn-YY-i1Z"/>
                             </constraints>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hsB-e9-otO">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hsB-e9-otO">
                             <rect key="frame" x="0.0" y="125" width="550" height="475"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.1058823529" green="0.1333333333" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="Nqv-A5-BlA"/>
                                 <outlet property="delegate" destination="-1" id="7kg-DR-xyu"/>
                             </connections>
                         </tableView>
                     </subviews>
+                    <color key="backgroundColor" red="0.10588235294117647" green="0.13333333333333333" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="UeC-DR-nVA" secondAttribute="trailing" id="2cm-Xd-lWG"/>
                         <constraint firstAttribute="trailing" secondItem="hsB-e9-otO" secondAttribute="trailing" id="3kp-rZ-G4k"/>

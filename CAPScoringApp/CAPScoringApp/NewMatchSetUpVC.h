@@ -26,6 +26,7 @@
 @property(strong,nonatomic)NSString *matchTypeCode;
 @property(strong,nonatomic)NSString *teamAcode;
 @property(strong,nonatomic)NSString *teamBcode;
+@property (strong,nonatomic) NSString *ballOver;
 
 @property(assign,nonatomic) BOOL isEdit;
 

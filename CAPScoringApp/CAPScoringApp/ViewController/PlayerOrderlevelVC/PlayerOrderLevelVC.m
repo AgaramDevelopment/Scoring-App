@@ -31,6 +31,7 @@
     CapitainWicketKeeperRecord* objCapitainWicketKeeper;
     BOOL  isCaptain;
     NSMutableArray * previousArray;
+    NSMutableArray * wickplayerlist;
     
 
 }
@@ -76,7 +77,10 @@
         
         
     }
+    wickplayerlist =[[NSMutableArray alloc]init];
+    wickplayerlist = [DBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:self.overs BALLNO:self.ballOver ];
     
+   
 
     
     [self selectplayfilterArray ];
@@ -249,11 +253,6 @@
         [self.txt_search resignFirstResponder];
          [_tbl_playerSelectList reloadData];
         
-    }else{
-        
-
-        
-        
     }
     //Relaod view
    
@@ -307,7 +306,26 @@
         
         if([newString isEqualToString:@""])
         {
-            [self didClickSearchplayer];
+            if([self.Btn_objSearch.currentImage  isEqual: [UIImage imageNamed:@"ico-cancel"]]){
+                self.txt_search.text =@"";
+                [self.Btn_objSearch setImage:[UIImage imageNamed:@"ico-search"] forState:UIControlStateNormal];
+                self.selectedPlayerFilterArray=[[NSMutableArray alloc]init];
+                
+                self.selectedPlayerFilterArray =nil;
+                //[slecteplayerlist removeAllObjects];
+                
+//                for(int i=0; i< self.objSelectplayerList_Array.count; i++)
+//                {
+//                    SelectPlayerRecord *selectedPlayerFilterRecord = [self.objSelectplayerList_Array objectAtIndex:i];
+//                    if( [[selectedPlayerFilterRecord isSelected]boolValue])
+//                    {
+//                        [slecteplayerlist addObject:selectedPlayerFilterRecord];
+//                        
+//                        
+//                    }
+              }
+                [self.txt_search resignFirstResponder];
+
         }
         [_tbl_playerSelectList reloadData];
         
@@ -441,7 +459,7 @@
         
     }
        [delegate hideLoading];
-    [DBManager updateCapitainWicketkeeper:self.competitionCode :self.matchCode capitainAteam:self.captainAcode capitainBteam:self.captainBcode wicketkeeperAteam:self.WKTkeeperAcode wicketkeeperBteam:self.WKTkeeperBcode];
+    [DBManager updateCapitainWicketkeeper :self.competitionCode :self.matchCode capitainAteam:self.captainAcode capitainBteam:self.captainBcode wicketkeeperAteam:self.WKTkeeperAcode wicketkeeperBteam:self.WKTkeeperBcode];
        NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
        objNewMatchSetUp =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
        objNewMatchSetUp.matchCode=self.matchCode;
@@ -599,8 +617,8 @@
     
      if ([objSelectPlayerRecord.playerCode isEqualToString:self.WKTkeeperAcode] || [objSelectPlayerRecord.playerCode isEqualToString:self.WKTkeeperBcode])
     {
-        //objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
-//        objSelectPlayerRecord.isSelectWKTKeeper=@"YES";
+        objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
+        objSelectPlayerRecord.isSelectWKTKeeper=@"YES";
 //        
 //        isSelectWKTKeeperType=YES;
         
@@ -752,7 +770,7 @@
                 [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
             }
 
-             objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
+             //objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
             objSelectPlayerRecord.isSelectWKTKeeper=@"YES";
            
             isSelectWKTKeeperType=YES;
@@ -883,6 +901,16 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 - (BOOL) tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
     return YES;
 }
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+     NSInteger proposedDestination = proposedDestinationIndexPath.row;
+    if (proposedDestination > 10)
+    {
+        return sourceIndexPath;
+    }
+    
+   return proposedDestinationIndexPath;
+}
 
 - (void) tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     NSMutableArray * changeplayerorderArray =[[NSMutableArray alloc]init];
@@ -892,53 +920,68 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     int newplayerorder =[changeIndexId intValue]-1;
     int orderno;
     SelectPlayerRecord*objRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:sourceRow];
-    objRecord.playerOrder =changeIndexId;
-    
-    id object = [slecteplayerlist objectAtIndex:sourceRow];
-    
-    [slecteplayerlist removeObjectAtIndex:sourceRow];
-   
-    [slecteplayerlist insertObject:object atIndex:destRow];
-    
-    for(int i=0; i < slecteplayerlist.count;i++)
+    for(int i=0; i<wickplayerlist.count; i++)
     {
-        SelectPlayerRecord * objRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:i];
-        if(newplayerorder > i)
+        SelectPlayerRecord*objWicket=(SelectPlayerRecord*)[wickplayerlist objectAtIndex:i];
+        NSString * objStr =objWicket.playerCode;
+        if([objRecord.playerCode isEqualToString:objStr])
         {
-            
-            if(i == 0)
+            if(destRow < 11)
             {
-                orderno = [objRecord.playerOrder intValue];
+                objRecord.playerOrder =changeIndexId;
                 
+                id object = [slecteplayerlist objectAtIndex:sourceRow];
+                
+                [slecteplayerlist removeObjectAtIndex:sourceRow];
+                
+                [slecteplayerlist insertObject:object atIndex:destRow];
+                
+                for(int i=0; i < slecteplayerlist.count;i++)
+                {
+                    SelectPlayerRecord * objRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:i];
+                    if(newplayerorder > i)
+                    {
+                        
+                        if(i == 0)
+                        {
+                            orderno = [objRecord.playerOrder intValue];
+                            
+                        }
+                        
+                        else
+                        {
+                            //[objRecord.playerOrder intValue]-1;
+                            orderno = orderno+1;
+                        }
+                        
+                        
+                        objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
+                    }
+                    else if (orderno==[objRecord.playerOrder intValue])
+                    {
+                        orderno = orderno+1;
+                        
+                        objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
+                    }
+                    else if(sourceRow < i)
+                    {
+                        //            int changeplayerorder=(i==0)? [objRecord.playerOrder intValue]:[objRecord.playerOrder intValue]+1;
+                        //            objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",changeplayerorder]];
+                    }
+                    
+                    [changeplayerorderArray addObject:objRecord];
+                }
+                slecteplayerlist=changeplayerorderArray;
+                playercell.editing=NO;
+                [self.tbl_playerSelectList setEditing:playercell.editing animated:YES];
+                [self.tbl_playerSelectList reloadData];
             }
-            
-            else
-            {
-               //[objRecord.playerOrder intValue]-1;
-               orderno = orderno+1;
+            else{
+                [self tableView:tableView targetIndexPathForMoveFromRowAtIndexPath:sourceIndexPath toProposedIndexPath:destinationIndexPath ];
             }
-            
-            
-            objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
         }
-        else if (orderno==[objRecord.playerOrder intValue])
-        {
-            orderno = orderno+1;
-            
-             objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
-        }
-        else if(sourceRow < i)
-        {
-//            int changeplayerorder=(i==0)? [objRecord.playerOrder intValue]:[objRecord.playerOrder intValue]+1;
-//            objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",changeplayerorder]];
-        }
-    
-        [changeplayerorderArray addObject:objRecord];
     }
-    slecteplayerlist=changeplayerorderArray;
-    playercell.editing=NO;
-    [self.tbl_playerSelectList setEditing:playercell.editing animated:YES];
-    [self.tbl_playerSelectList reloadData];
+    
     
 }
 

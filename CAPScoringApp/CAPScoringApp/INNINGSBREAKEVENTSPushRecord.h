@@ -19,6 +19,6 @@
 @property(nonatomic,strong)NSNumber *ISINCLUDEINPLAYERDURATION;
 @property(nonatomic,strong)NSString *BREAKCOMMENTS;
 @property(nonatomic,strong)NSString *issync;
-
+-(NSDictionary *)INNINGSBREAKEVENTSPushRecordDictionary;
 
 @end

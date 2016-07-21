@@ -137,7 +137,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
          
                 record.ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 32)];
         
-                [MATCHREGISTRATIONArray addObject:record];
+                [MATCHREGISTRATIONArray addObject:[record MatchRegistrationPushRecordDictionary]];
                 
                 
                 
@@ -184,7 +184,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
               
                 //TEAMCODE_TOSSWONBY
-                [MATCHTEAMPLAYERDETAILSArray addObject:record];
+                [MATCHTEAMPLAYERDETAILSArray addObject:[record MatchTeamPlayerDetailsPushRecordDictionary]];
                 
                 
                 
@@ -234,7 +234,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. COMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
                 record.ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
                 
-                [MATCHRESULTArray addObject:record];
+                [MATCHRESULTArray addObject:[record MatchResultPushRecordDictionary]];
                 
                 
                 
@@ -283,7 +283,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. BOWLCOMPUTESHOW=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
                 record.ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
                 
-                [MATCHEVENTSArray addObject:record];
+                [MATCHEVENTSArray addObject:[record MatchEventPushRecordDictionary]];
                 
                 
                 
@@ -333,7 +333,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                   record. INNINGSTOTALWICKETS=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)]];
                 record.ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
                 
-               [INNINGSSUMMARYArray addObject:record];
+               [INNINGSSUMMARYArray addObject:[record InningsSummeryPushRecordDictionary]];
                 
                 
                 
@@ -391,7 +391,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. SESSIONSTATUS=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)]];
                 record. ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
                
-                [SESSIONEVENTSArray addObject:record];
+                [SESSIONEVENTSArray addObject:[record SessionEventPushRecordDictionary]];
                 
                 
                 
@@ -451,7 +451,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.  BOWLINGEND=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
                 record.   issync=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 20)];
                 
-                [INNINGSEVENTSArray addObject:record];
+                [INNINGSEVENTSArray addObject:[record InningsEventPushRecordDictionary]];
                 
                 
                 
@@ -512,7 +512,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. WICKETSCORE=[self getNumberValueByNull :statement:20];
                  record. ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 21)];
                 
-                [BATTINGSUMMARYArray addObject:record];
+                [BATTINGSUMMARYArray addObject:[record BATTINGSUMMARYPushRecordDictionary]];
                 
             }
         }
@@ -556,7 +556,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. ISINCLUDEINPLAYERDURATION=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)]];
                 record. BREAKCOMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
                 record. issync=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                [INNINGSBREAKEVENTSArray addObject:record];
+                [INNINGSBREAKEVENTSArray addObject:[record INNINGSBREAKEVENTSPushRecordDictionary]];
             }
         }
         sqlite3_finalize(statement);
@@ -598,7 +598,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. OVERSTATUS=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)]];
                 record. ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
                 
-                [OVEREVENTSArray addObject:record];
+                [OVEREVENTSArray addObject:[record OVEREVENTSPushRecordDictionary]];
                 
                 
                 
@@ -703,7 +703,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. BALLSPEED=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 60)];
                 record. UNCOMFORTCLASSIFCATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 61)];
                  record. ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 62)];
-                [BALLEVENTSArray addObject:record];
+                [BALLEVENTSArray addObject:[record BALLEVENTSPushRecordsDictionary]];
                 
             }
         }
@@ -755,7 +755,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. INNINGSNO=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)]];
                 record. ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
                 
-                [APPEALEVENTSArray addObject:record];
+                [APPEALEVENTSArray addObject:[record AppealEventPushRecordDictionary]];
                 
                 
                 
@@ -809,7 +809,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.  ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
                
                 
-                [WICKETEVENTSArray addObject:record];
+                [WICKETEVENTSArray addObject:[record WicketEventsPushRecordDictionary]];
                 
                 
                 
@@ -864,7 +864,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.  ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
                 
                 
-                [POWERPLAYArray addObject:record];
+                [POWERPLAYArray addObject:[record PowerPlayPushRecordDictionary]];
                 
                 
                 
@@ -915,7 +915,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,7)];
                 
                 
-                [PLAYERINOUTTIMEArray addObject:record];
+                [PLAYERINOUTTIMEArray addObject:[record PlayerInOutPushRecordDictionary ]];
                 
                 
                 
@@ -965,7 +965,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,9)];
                 
                 
-                [PENALTYDETAILSArray addObject:record];
+                [PENALTYDETAILSArray addObject:[record PenalityDetailsPushRecordDictionary]];
                 
                 
                 
@@ -1015,7 +1015,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
               record. ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,8)];
                 
                 
-                [CAPTRANSACTIONSLOGENTRYArray addObject:record];
+                [CAPTRANSACTIONSLOGENTRYArray addObject:[record CapTransactionslogentryPushRecordDictionary]];
                 
                 
                 
@@ -1059,7 +1059,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                  record. ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,5)];
                 
-                [BOWLINGMAIDENSUMMARYArray addObject:record];
+                [BOWLINGMAIDENSUMMARYArray addObject:[record BOWLINGMAIDENSUMMARYPushRecordDictionary]];
                 
                 
                 
@@ -1109,7 +1109,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. ENDTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
                  record. ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
                 
-                [BOWLEROVERDETAILSArray addObject:record];
+                [BOWLEROVERDETAILSArray addObject:[record BOWLEROVERDETAILSPushRecordDictionary]];
                 
                 
                 
@@ -1159,7 +1159,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. INNINGSNO=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)]];
                   record.ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
                 
-                [FIELDINGEVENTSArray addObject:record];
+                [FIELDINGEVENTSArray addObject:[record FIELDINGEVENTSPushRecordDictionary]];
                 
                 
                 
@@ -1213,7 +1213,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                 
                 
-                [DAYEVENTSArray addObject:record];
+                [DAYEVENTSArray addObject:[record DAYEVENTSPushRecordDictionary]];
                 
                 
                 
@@ -1277,7 +1277,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                 
                 
-                [BOWLINGSUMMARYArray addObject:record];
+                [BOWLINGSUMMARYArray addObject:[record BowlingSummeryPushRecordDictionary]];
                 
                 
                 

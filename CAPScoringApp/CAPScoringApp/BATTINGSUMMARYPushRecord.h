@@ -31,4 +31,7 @@
 @property(nonatomic,strong) NSNumber *WICKETBALLNO;
 @property(nonatomic,strong) NSNumber *WICKETSCORE;
 @property(nonatomic,strong)NSString*ISSYNC;
+
+
+-(NSDictionary *)BATTINGSUMMARYPushRecordDictionary;
 @end

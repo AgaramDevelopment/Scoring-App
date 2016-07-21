@@ -188,6 +188,10 @@
     }
 }
 
+-(IBAction)didClickBackbtnAction:(id)sender
+{
+    [self.delegate ChangeVCBackBtnAction];
+}
 
 -(void)Insertrevisedtarget:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)TARGETRUNS:(NSString*)TARGETOVERS:(NSString*)TARGETCOMMENTS:(NSString*)INNINGSNO{
     

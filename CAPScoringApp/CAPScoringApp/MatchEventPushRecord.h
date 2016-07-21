@@ -20,5 +20,5 @@
 @property(nonatomic,strong)NSString *TARGETCOMMENTS;
 @property(nonatomic,strong)NSString *BOWLCOMPUTESHOW;
 @property(nonatomic,strong)NSString *ISSYNC;
-
+-(NSDictionary *)MatchEventPushRecordDictionary;
 @end

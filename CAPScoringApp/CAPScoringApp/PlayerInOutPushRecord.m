@@ -17,4 +17,10 @@
 @synthesize INTIME;
 @synthesize OUTTIME;
 @synthesize ISSYNC;
+
+
+
+-(NSDictionary *)PlayerInOutPushRecordDictionary {
+    return [NSDictionary dictionaryWithObjectsAndKeys:COMPETITIONCODE,@"COMPETITIONCODE",MATCHCODE,@"MATCHCODE", INNINGSNO,@"INNINGSNO",TEAMCODE,@"TEAMCODE", PLAYERCODE,@"PLAYERCODE", INTIME,@"INTIME",OUTTIME,@"OUTTIME",ISSYNC,@"ISSYNC",nil];
+}
 @end

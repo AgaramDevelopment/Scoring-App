@@ -24,6 +24,7 @@
 @property(strong,nonatomic) NSString *teamB;
 @property(strong,nonatomic) NSString *matchType;
 @property(strong,nonatomic) NSString *overs;
+@property(strong,nonatomic) NSString *ballOver;
 @property(strong,nonatomic) NSString *date;
 @property(strong,nonatomic) NSString *time;
 @property(strong,nonatomic) NSString *matchVenu;

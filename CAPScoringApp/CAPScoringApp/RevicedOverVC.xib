@@ -47,6 +47,9 @@
                                         <constraint firstAttribute="height" constant="45" id="frv-ek-1nr"/>
                                     </constraints>
                                     <state key="normal" image="ico-back-btn"/>
+                                    <connections>
+                                        <action selector="didClickBackBtnction:" destination="-1" eventType="touchUpInside" id="Wk7-yE-i5w"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REVISED OVER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ggp-hZ-ycA">
                                     <rect key="frame" x="175" y="15" width="200" height="45"/>

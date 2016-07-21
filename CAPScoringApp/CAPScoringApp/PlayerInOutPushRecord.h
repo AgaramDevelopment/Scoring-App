@@ -18,4 +18,5 @@
 @property(nonatomic,strong)NSString *OUTTIME;
 @property(nonatomic,strong)NSString *ISSYNC;
 
+-(NSDictionary *)PlayerInOutPushRecordDictionary ;
 @end

@@ -552,17 +552,15 @@ EndInnings *insertScoreBoard;
     O_RUNS = [NSString stringWithFormat:@"%d",O_RUNSvalue];
     N_RUNS = [NSString stringWithFormat:@"%d",N_RUNSvalue];
     
-    if(O_RUNS != N_RUNS)
+    if(![O_RUNS isEqual: N_RUNS])
     {
         [DBManagerEndBall UPDATEBATTINGSUMBYINNUPSC:O_RUNS :N_RUNS :F_OVERS :F_BALLS :COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO];
     }
-    else
-    {
-        
+    
         [DBManagerEndBall UPDATEINNINGSSUMMARYUPSC:F_NOBALL :F_BYES :F_NOBALL :F_LEGBYES :F_WIDE :F_PENALTY :F_RUNS :F_OVERTHROW :F_ISWICKET :F_WICKETTYPE :COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO];
         
 
-    }
+    
     
     F_BOWLEROVERS = [NSNumber numberWithInt:0];
     F_BOWLERBALLS = [NSNumber numberWithInt:0];
