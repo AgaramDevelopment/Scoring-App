@@ -7995,6 +7995,8 @@ self.lbl_umpirename.text=@"";
     NSString*competitionCode = self.competitionCode;
     NSString*matchTypeCode = objFixtureRecord.matchTypeCode;
     NSString*overs = objFixtureRecord.overs;
+    NSString * ballover =[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+    
     NSString *MatchStatus = objFixtureRecord.MatchStatus;
     
     
@@ -8039,6 +8041,7 @@ self.lbl_umpirename.text=@"";
     detail.matchTypeCode = matchTypeCode;
     detail.teamAcode = teamAcode;
     detail.teamBcode = teamBcode;
+    detail.ballOver  = ballover;
     detail.isEdit = YES;
     detail.playingXIPlayers = getPlayerRecord;
     

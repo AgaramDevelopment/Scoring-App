@@ -38,7 +38,7 @@
     BOOL isSelected;
     BOOL isShow_penaltyrecordTbl;
     
-   
+    int selectindex;
 }
 @property (nonatomic,strong)NSMutableArray *FetchPenalityArray;
 @end
@@ -260,6 +260,7 @@
     {
         selectindexarray=[[NSMutableArray alloc]init];
         objMetaDataRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:indexPath.row];
+        selectindex=indexPath.row;
         self.lbl_penaltytype.text =objMetaDataRecord.metasubcodedescription;
         penaltytypereasons=objMetaDataRecord.metasubcode;
         
@@ -281,7 +282,7 @@
         self.tbl_penaltyrecord.hidden=YES;
         self.Btn_Add.hidden=YES;
         [self.btn_submitpenality setTitle:[NSString stringWithFormat:@"UPDATE"] forState:UIControlStateNormal];
-
+        isShow_penaltyrecordTbl=NO;
         
     }
     else{
@@ -292,7 +293,7 @@
   
     [selectindexarray addObject:objMetaDataRecord];
         [self.tbl_penality setHidden:YES];
-
+   isShow_penaltyrecordTbl=YES;
     }
 }
 
@@ -347,7 +348,7 @@
     }
    penaltyrecord.penaltytypedescription=@"MSC135";
     
-    [self.tbl_penality reloadData];
+    //[self.tbl_penality reloadData];
     
     
     self.btn_bowling.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
@@ -560,7 +561,8 @@
         penaltyrecord.penaltytypecode=btnbatting;
         penaltyrecord.penaltyreasoncode=penaltytypereasons;
         
-        
+        if([self formValidation])
+        {
         int penaltyRunsData = [penaltyrecord.penaltyruns intValue];
         if(penaltyRunsData >= 0 && penaltyRunsData <=10 ){
             
@@ -570,7 +572,7 @@
             
             if (penaltyarray.count >0) {
                 
-                PenaltyDetailsRecord *penalty = [penaltyarray objectAtIndex:0];
+                PenaltyDetailsRecord *penalty = [penaltyarray objectAtIndex:selectindex];
                 penaltyCode = penalty.penaltycode;
                 
                 
@@ -582,7 +584,7 @@
             UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Penalty Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             alter.tag =10;
-            
+        
             
 //            PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
 //            add.resultarray=penaltyarray;
@@ -604,6 +606,7 @@
             
         }else{
             [self showDialog:@"Please Enter Runs Between 0 to 10" andTitle:@"Error"];
+        }
         }
     }
 
@@ -638,6 +641,9 @@
         isShow_penaltyrecordTbl= NO;
         self.Btn_Add.hidden =YES;
         [self.btn_submitpenality setTitle:[NSString stringWithFormat:@"Submit"] forState:UIControlStateNormal];
+        self.lbl_penaltytype.text=@"";
+        self.txt_penalityruns.text=@"";
+        
     }
     else
     {

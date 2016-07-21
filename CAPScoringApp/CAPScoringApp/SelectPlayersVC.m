@@ -68,13 +68,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [self setSelectCount];
     
-    //self.selectedPlayerPosition = [[NSMutableArray alloc]init];
-    
-    //    for(int i=0; i<[self.selectedPlayerFilterArray count];i++){
-    //        NSNumber selected
-    //        [self.selectedPlayerPosition addObject:YES];
-    //    }
-    
+        
     
 }
 -(void)dismissKeyboard {
@@ -92,29 +86,6 @@ static NSString * const reuseIdentifier = @"Cell";
 
 
 
-//-(void) addImageInAppDocumentLocation:(NSString*) fileName{
-//    
-//    BOOL success = [self checkFileExist:fileName];
-//    
-//    if(!success) {//If file not exist
-//        
-//        UIImage  *newImage = [UIImage imageNamed:fileName];
-//        NSData *imageData = UIImagePNGRepresentation(newImage);
-//        
-//        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//        NSString *documentsDirectory = [paths objectAtIndex:0];
-//        
-//        NSString *imagePath =[documentsDirectory stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",fileName]];
-//        
-//        if (![imageData writeToFile:imagePath atomically:NO])
-//        {
-//            NSLog((@"Failed to cache image data to disk"));
-//        }else
-//        {
-//            NSLog(@"the cachedImagedPath is %@",imagePath);
-//        }
-//    }
-//}
 
 //Check given file name exist in document directory
 - (BOOL) checkFileExist:(NSString*) fileName{
@@ -140,12 +111,6 @@ static NSString * const reuseIdentifier = @"Cell";
     int t =collectionView.frame.size.width/3.2;
     return CGSizeMake(235 , 273);
     
-//    CGRect screenRect = [[UIScreen mainScreen] bounds];
-//    CGFloat screenWidth = screenRect.size.width;
-//    float cellWidth = screenWidth / 3.0; //Replace the divisor with the column count requirement. Make sure to have it in float.
-//    CGSize size = CGSizeMake(cellWidth, cellWidth);
-//    
-//    return size;
 }
 
 
@@ -153,25 +118,10 @@ static NSString * const reuseIdentifier = @"Cell";
     return [self.selectedPlayerFilterArray count];
 }
 
-//-(NSString *)writeDataAsFile:(NSData *)imageData
-//{
-//
-//    NSArray * paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-//    NSString * documentsDirectory = [paths objectAtIndex:0];
-//    NSString * thumbNailFilename = [NSString stringWithFormat:@"%@.png",[self GetUUID]]; // Create unique iD
-//    NSString * thumbNailAppFile = [documentsDirectory stringByAppendingPathComponent:thumbNailFilename];
-//
-//    if ([imageData writeToFile:thumbNailAppFile atomically:YES])
-//    {
-//        return thumbNailFilename;
-//    }
-//
-//    return nil;
-//}
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    //  UIImage *thumbnailHomeImage = [UIImage imageWithContentsOfFile:[[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0] stringByAppendingPathComponent:@"%@",imageName]];
+   
     
     SelectPlayerCVCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
@@ -260,7 +210,8 @@ static NSString * const reuseIdentifier = @"Cell";
             NSString * objStr =[objSelectPlayerRecord valueForKey:@"playerCode"];
             if(objStr == selectedPlayerCode)
             {
-                [self showDialog:@"Can not modify this player." andTitle:@""];
+                NSString * Msg =[NSString stringWithFormat:@"Can not Remove %@ player.",objSelectPlayerRecord.playerName];
+                [self showDialog:Msg andTitle:@"Select Players"];
                 return NO;
             }
         }
@@ -323,6 +274,7 @@ static NSString * const reuseIdentifier = @"Cell";
         objPlayerOrderLevelVC.competitionCode=self.competitionCode;
         objPlayerOrderLevelVC.overs=self.overs;
         objPlayerOrderLevelVC.chooseTeam =self.chooseTeam;
+        objPlayerOrderLevelVC.ballOver  =self.ballOver;
         
         
         
@@ -331,7 +283,7 @@ static NSString * const reuseIdentifier = @"Cell";
         
     
 }else{
-            [self showDialog:@"Please select minimum seven players" andTitle:@""];
+            [self showDialog:@"Please select minimum seven players" andTitle:@"Select Players"];
         }
     
     

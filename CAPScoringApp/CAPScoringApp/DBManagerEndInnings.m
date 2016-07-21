@@ -1415,7 +1415,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *BALLCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *BALLCODE =  [self getValueByNull:statement :0];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return BALLCODE;
@@ -1424,15 +1424,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else {
             sqlite3_reset(statement);
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+            
             return @"";
         }
     }
     
     sqlite3_reset(statement);
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
+   
     return @"";
 }
 

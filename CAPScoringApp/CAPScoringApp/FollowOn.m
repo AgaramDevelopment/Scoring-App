@@ -351,7 +351,10 @@
     }
  
 }
-
+-(IBAction)didClickBackBtn:(id)sender
+{
+    [self.delegate ChangeVCBackBtnAction];
+}
 //SP_UPDATEFOLLOWON
 -(void) UpdateFollowOn:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *) INNINGSNO :(NSString *) TEAMNAME : (NSString *) STRIKER : (NSString *) NONSTRIKER : (NSString *) BOWLER
 

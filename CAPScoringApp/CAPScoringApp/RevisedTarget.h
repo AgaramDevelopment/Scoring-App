@@ -8,7 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol RevisedTargetDelegate <NSObject>
+@required
+
+- (void) ChangeVCBackBtnAction;
+@end
+
+
+
 @interface RevisedTarget : UIViewController
+
+
+@property(nonatomic,strong) id <RevisedTargetDelegate> delegate;
+
 @property (strong, nonatomic) IBOutlet UITextField *txt_overs;
 @property (strong, nonatomic) IBOutlet UITextField *txt_target;
 

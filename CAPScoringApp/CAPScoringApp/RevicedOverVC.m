@@ -190,6 +190,9 @@
 }
 
 
-
+-(IBAction)didClickBackBtnction:(id)sender
+{
+    [self.delegate ChangeVCBackBtnAction];
+}
 
 @end

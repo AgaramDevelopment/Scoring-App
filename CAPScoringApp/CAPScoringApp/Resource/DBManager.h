@@ -69,8 +69,8 @@
 
 
 //toss proceed Save
-+(NSString *) TossSaveDetails:(NSString*) MATCHCODE:(NSString*)COMPETITIONCODE;
-+ (BOOL) insertMatchEvent :(NSString*) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)selectTeamcode :(NSString*)electedcode:(NSString*)teamCode:(NSString*)teambCode;
++(NSString *) TossSaveDetails:(NSString *) MATCHCODE:(NSString *) COMPETITIONCODE;
++ (BOOL) insertMatchEvent :(NSString *) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) selectTeamcode :(NSString *) electedcode:(NSString*) teamCode:(NSString*)teambCode;
 
 +(NSString *) getMaxInningsNumber:(NSString*) MATCHCODE:(NSString*)COMPETITIONCODE;
 + (BOOL) inserMaxInningsEvent :(NSString*) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE :(NSString*)maxInnNo:(NSString*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)CURRENTSTRIKERCODE:(NSString*)CURRENTNONSTRIKERCODE:(NSString*)BATTINGTEAMCODE:(NSString*)INNINGSSTATUS:(NSString*)BOWLINGEND;
@@ -490,6 +490,8 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 
 +(NSMutableArray *) getPlayedPlayersForPlayerXI:(NSString*)MATCHCODE COMPETITIOMCODE:(NSString*) COMPETITIOMCODE  OVERNO:(NSString*) OVERNO BALLNO:(NSString*) BALLNO;
 
-+(NSMutableArray *)ArchivesFixturesData:(NSString*)competitionCode;
++(NSMutableArray *) ArchivesFixturesData:(NSString*)competitionCode;
+
+
 
 @end

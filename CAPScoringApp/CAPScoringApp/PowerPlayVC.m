@@ -424,7 +424,7 @@
 //                     completion:nil];
     }else{
         
-        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No Record selected" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Power Play" message:@"No Record selected" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
     }
     
@@ -681,14 +681,14 @@
                 
             }
             else{
-                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"The powerplay type already exist" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Power play" message:@"The powerplay type already exist" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alter show];
                 return  NO;
                 
                 
             }
         }else{
-            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Given Over details has been exist in Powerplay details" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Power Play" message:@"Given Over details has been exist in Powerplay details" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             return NO;
         }
@@ -740,7 +740,7 @@
             return YES;
         }
         else{
-            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"The powerplay type already exist" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Power Play" message:@"The powerplay type already exist" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             return  NO;
             
@@ -748,7 +748,7 @@
         }
     }
     else{
-        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Given Over details has been exist in Powerplay details" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Power Play" message:@"Given Over details has been exist in Powerplay details" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
         return NO;
     }

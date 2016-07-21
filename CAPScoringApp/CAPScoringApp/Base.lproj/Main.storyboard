@@ -227,6 +227,7 @@
             <string>Rajdhani-Medium</string>
             <string>Rajdhani-Medium</string>
             <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Medium</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-REGULAR.TTF">
             <string>Rajdhani-Regular</string>
@@ -10976,20 +10977,17 @@
                                                     <constraint firstAttribute="width" constant="40" id="Twn-st-zmD"/>
                                                 </constraints>
                                             </imageView>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="SEARCH PLAYER" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o88-ES-u5m">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="SEARCH PLAYER" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="o88-ES-u5m">
                                                 <rect key="frame" x="14" y="19" width="648" height="30"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <nil key="textColor"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="28"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="34"/>
                                                 <textInputTraits key="textInputTraits"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="_placeholderLabel.textColor">
                                                         <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
-                                                <variation key="heightClass=regular-widthClass=regular">
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                </variation>
                                             </textField>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyo-F9-4A5">
                                                 <rect key="frame" x="670" y="0.0" width="58" height="65"/>
@@ -11009,8 +11007,12 @@
                                             <constraint firstAttribute="bottom" secondItem="H7i-gN-jus" secondAttribute="bottom" constant="13" id="82s-pz-953"/>
                                             <constraint firstAttribute="trailing" secondItem="wyo-F9-4A5" secondAttribute="trailing" id="HqF-AK-0UJ"/>
                                             <constraint firstItem="wyo-F9-4A5" firstAttribute="top" secondItem="JyU-Wn-Goo" secondAttribute="top" id="IML-fE-bx0"/>
-                                            <constraint firstAttribute="bottom" secondItem="o88-ES-u5m" secondAttribute="bottom" constant="16" id="Iw4-LX-fG5"/>
-                                            <constraint firstItem="o88-ES-u5m" firstAttribute="top" secondItem="JyU-Wn-Goo" secondAttribute="top" constant="19" id="Lcj-em-jgE"/>
+                                            <constraint firstAttribute="bottom" secondItem="o88-ES-u5m" secondAttribute="bottom" constant="16" id="Iw4-LX-fG5">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="7"/>
+                                            </constraint>
+                                            <constraint firstItem="o88-ES-u5m" firstAttribute="top" secondItem="JyU-Wn-Goo" secondAttribute="top" constant="19" id="Lcj-em-jgE">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="8"/>
+                                            </constraint>
                                             <constraint firstAttribute="trailing" secondItem="H7i-gN-jus" secondAttribute="trailing" constant="13" id="RWf-DQ-M48"/>
                                             <constraint firstAttribute="bottom" secondItem="wyo-F9-4A5" secondAttribute="bottom" id="g5Y-yG-X4I"/>
                                             <constraint firstItem="H7i-gN-jus" firstAttribute="leading" secondItem="o88-ES-u5m" secondAttribute="trailing" constant="13" id="hXA-gf-Kfz"/>

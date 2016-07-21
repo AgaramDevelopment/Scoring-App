@@ -10,6 +10,7 @@
 @protocol FollowonDelegate <NSObject>
 @required
 - (void) RedirectFollowOnPage;
+- (void) ChangeVCBackBtnAction;
 @end
 
 @interface FollowOn : UIViewController
