@@ -620,6 +620,7 @@ EndInningsVC *save;
     
     
     
+   
     
     ISWKTDTLSUPDATE = [NSNumber numberWithInt:1];
     ISBOWLERCHANGED = [NSNumber numberWithInt:0];
@@ -1004,7 +1005,7 @@ EndInningsVC *save;
     N_BOWLERMAIDENS =  O_BOWLERMAIDENS;
     
     
-    
+ 
     int bowlRuns = (BYES.intValue == 0 && LEGBYES.intValue == 0) ? (O_BOWLERRUNS.intValue + RUNS.intValue + WIDE.intValue + NOBALL.intValue + (WIDE.intValue > 0 ? 0 : OVERTHROW.intValue)) : (O_BOWLERRUNS.intValue + WIDE.intValue + NOBALL.intValue);
     
     N_BOWLERRUNS = [NSNumber numberWithInt: bowlRuns];

@@ -27,6 +27,8 @@
 @property (nonatomic,strong) NSString *inningsNo;
 @property (nonatomic,strong) NSString *matchTypeCode;
 @property (nonatomic,strong) NSString *editBallCode;
+@property (nonatomic,strong) NSString *teamAShortName;
+@property (nonatomic,strong) NSString *teamBShortName;
 
 
 @property(nonatomic,strong) IBOutlet UILabel * selectbtnhighlight;

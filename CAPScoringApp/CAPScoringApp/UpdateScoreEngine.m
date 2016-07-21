@@ -145,6 +145,7 @@
 @synthesize getDataArray;
 
 
+
 //SCOREBOARD
 @synthesize F_STRIKERCODE;
 @synthesize F_BOWLERCODE;
@@ -223,23 +224,14 @@
 
 @synthesize getPlayerArray;
 @synthesize getOverArray;
+@synthesize getBowlingArray;
 
 EndInnings *insertScoreBoard;
 
 -(void) UpdateScoreEngine:(NSString *)BALLCODE:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSNumber*)OVERNO:(NSNumber*)BALLNO:(NSNumber*)BALLCOUNT:(NSNumber*)SESSIONNO:(NSString*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)WICKETKEEPERCODE:(NSString*)UMPIRE1CODE:(NSString*)UMPIRE2CODE:(NSString*)ATWOROTW:(NSString*)BOWLINGEN:(NSString*)BOWLTYPE:(NSString*)SHOTTYPE:(NSString*)SHOTTYPECATEGORY:(NSString*)ISLEGALBALL:(NSString*)ISFOUR:(NSString*)ISSIX:(NSString*)RUNS:(NSNumber*)OVERTHROW:(NSNumber*)TOTALRUNS:(NSNumber*)WIDE:(NSNumber*)NOBALL:(NSNumber*)BYES:(NSNumber*)LEGBYES:(NSNumber*)PENALTY:(NSNumber*)TOTALEXTRAS:(NSNumber*)GRANDTOTAL:(NSNumber*)RBW:(NSString*)PMLINECODE:(NSString*)PMLENGTHCODE:(NSString*)PMSTRIKEPOINT:(NSString*)PMSTRIKEPOINTLINECODE:(NSNumber*)PMX1:(NSNumber*)PMY1:(NSNumber*)PMX2:(NSNumber*)PMY2:(NSNumber*)PMX3:(NSNumber*)PMY3:(NSString*)WWREGION:(NSNumber*)WWX1:(NSNumber*)WWY1:(NSNumber*)WWX2:(NSNumber*)WWY2:(NSNumber*)BALLDURATION:(NSString*)ISAPPEAL:(NSString*)ISBEATEN:(NSString*)ISUNCOMFORT:(NSString*)ISWTB:(NSString*)ISRELEASESHOT:(NSString*)MARKEDFOREDIT:(NSString*)REMARKS:(NSNumber*)ISWICKET:(NSString*)WICKETTYPE:(NSString*)WICKETPLAYER:(NSString*)FIELDINGPLAYER:(NSNumber*)ISWICKETUNDO:(NSString*)AWARDEDTOTEAMCODE:(NSNumber*)PENALTYRUNS:(NSString*)PENALTYTYPECODE:(NSString*)PENALTYREASONCODE:(NSString*)BALLSPEED:(NSString*)UNCOMFORTCLASSIFCATION:(NSString*)WICKETEVENT
 {
   
-    
-    
-    F_ISWICKET = 0;
-    
-    F_ISWICKETCOUNTABLE = 0;
-    
-    U_BOWLERMAIDENS = 0;
-    
-    
-    
-    
+   
     getDataArray = [[NSMutableArray alloc]init];
     
     getDataArray = [DBManagerEndBall GetDataFromUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
@@ -260,6 +252,26 @@ EndInnings *insertScoreBoard;
     
     BATTINGTEAMCODE = TEAMCODE;
     
+    getBowlingArray = [[NSMutableArray alloc]init];
+    getBowlingArray = [DBManagerEndBall getBowlingTeamCode:COMPETITIONCODE :MATCHCODE :TEAMCODE];
+    
+    if (getBowlingArray.count>0) {
+        
+        UpdateScoreEngineRecord *bowlingCode = [getBowlingArray objectAtIndex:0];
+        
+        BOWLINGTEAMCODE = bowlingCode.BOWLINGTEAMCODE;
+        
+       // MATCHOVERS = bowlingCode.MATCHOVER;
+    }
+
+    
+    F_ISWICKET = 0;
+    F_ISWICKETCOUNTABLE = 0;
+    F_WICKETTYPE = @"";
+    
+  
+    
+    
     F_ISWICKETCOUNTABLE = [ DBManagerEndBall GetWicCountUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
     
     F_ISWICKET = [ DBManagerEndBall GetISWicCountUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
@@ -276,13 +288,12 @@ EndInnings *insertScoreBoard;
         }
         else
         {
-            
-            WICKETNO = [DBManagerEndBall GetWicketNoUpdateScoreEngine :COMPETITIONCODE :MATCHCODE : TEAMCODE : INNINGSNO : BALLCODE];
-            
-            [DBManagerEndBall InsertWicEventsUpdateScoreEngine : WICKETNO :BALLCODE :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :ISWICKET :WICKETTYPE :WICKETPLAYER :FIELDINGPLAYER :WICKETEVENT];
+
+        [DBManagerEndBall InsertWicEventsUpdateScoreEngine : WICKETNO :BALLCODE :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :ISWICKET :WICKETTYPE :WICKETPLAYER :FIELDINGPLAYER :WICKETEVENT];
             
         }
         
+    }
         WICKETPLAYER =[ DBManagerEndBall GetWicPlayersUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO : BALLCODE ];
         
        
@@ -299,10 +310,13 @@ EndInnings *insertScoreBoard;
             
             
         }
-        
+
         //UPDATESCOREBOARD
-        [self UpdateScoreBoard : BALLCODE :COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : BOWLINGTEAMCODE : INNINGSNO : STRIKERCODE :ISFOUR : ISSIX : RUNS : OVERTHROW : ISWICKET : WICKETTYPE : WICKETPLAYER : BOWLERCODE : OVERNO : BALLNO : 0 : WIDE : NOBALL : BYES :LEGBYES : 0 : 0 : ISWICKETUNDO : F_ISWICKETCOUNTABLE : F_ISWICKET : F_WICKETTYPE];
-    }
+        [self UpdateScoreBoard : BALLCODE :COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : BOWLINGTEAMCODE : INNINGSNO : STRIKERCODE :ISFOUR : ISSIX : RUNS : OVERTHROW : ISWICKET : WICKETTYPE : WICKETPLAYER : BOWLERCODE : OVERNO : BALLNO : [NSNumber numberWithInt:0] : WIDE : NOBALL : BYES :LEGBYES : [NSNumber numberWithInt:0] : [NSNumber numberWithInt:0] : ISWICKETUNDO : F_ISWICKETCOUNTABLE : F_ISWICKET : F_WICKETTYPE];
+    
+    
+     [DBManagerEndBall UPDATEBALLEVENT :  BALLCODE:COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:OVERNO:BALLNO:BALLCOUNT:SESSIONNO:STRIKERCODE:NONSTRIKERCODE:BOWLERCODE:WICKETKEEPERCODE:UMPIRE1CODE:UMPIRE2CODE:ATWOROTW:BOWLINGEN:BOWLTYPE:SHOTTYPE:SHOTTYPECATEGORY:ISLEGALBALL:ISFOUR:ISSIX:RUNS:OVERTHROW:TOTALRUNS:WIDE:NOBALL:BYES:LEGBYES:PENALTY:TOTALEXTRAS:GRANDTOTAL:RBW:PMLINECODE:PMLENGTHCODE:PMSTRIKEPOINT:PMSTRIKEPOINTLINECODE:PMX1:PMY1:PMX2:PMY2:PMX3:PMY3:WWREGION:WWX1:WWY1:WWX2:WWY2:BALLDURATION:ISAPPEAL:ISBEATEN:ISUNCOMFORT:ISWTB:ISRELEASESHOT:MARKEDFOREDIT:REMARKS:ISWICKET:WICKETTYPE:WICKETPLAYER:FIELDINGPLAYER:ISWICKETUNDO:AWARDEDTOTEAMCODE:PENALTYRUNS:PENALTYTYPECODE:PENALTYREASONCODE:BALLSPEED:UNCOMFORTCLASSIFCATION:WICKETEVENT: BOWLINGEND];
+    
     
     if( ![STRIKERCODE isEqual: OLDSTRIKERCODE] || ![NONSTRIKERCODE isEqual: OLDNONSTRIKERCODE])
     {
@@ -315,7 +329,7 @@ EndInnings *insertScoreBoard;
         [DBManagerEndBall UpdateBowlingOrderUpdateScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO];
     }
     
-    [DBManagerEndBall UPDATEBALLEVENT :  BALLCODE:COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:OVERNO:BALLNO:BALLCOUNT:SESSIONNO:STRIKERCODE:NONSTRIKERCODE:BOWLERCODE:WICKETKEEPERCODE:UMPIRE1CODE:UMPIRE2CODE:ATWOROTW:BOWLINGEN:BOWLTYPE:SHOTTYPE:SHOTTYPECATEGORY:ISLEGALBALL:ISFOUR:ISSIX:RUNS:OVERTHROW:TOTALRUNS:WIDE:NOBALL:BYES:LEGBYES:PENALTY:TOTALEXTRAS:GRANDTOTAL:RBW:PMLINECODE:PMLENGTHCODE:PMSTRIKEPOINT:PMSTRIKEPOINTLINECODE:PMX1:PMY1:PMX2:PMY2:PMX3:PMY3:WWREGION:WWX1:WWY1:WWX2:WWY2:BALLDURATION:ISAPPEAL:ISBEATEN:ISUNCOMFORT:ISWTB:ISRELEASESHOT:MARKEDFOREDIT:REMARKS:ISWICKET:WICKETTYPE:WICKETPLAYER:FIELDINGPLAYER:ISWICKETUNDO:AWARDEDTOTEAMCODE:PENALTYRUNS:PENALTYTYPECODE:PENALTYREASONCODE:BALLSPEED:UNCOMFORTCLASSIFCATION:WICKETEVENT: BOWLINGEND];
+   
     
     
     // Remove Unused Batsman from Batting Scorecard
@@ -324,6 +338,7 @@ EndInnings *insertScoreBoard;
     // Remove Unused Bowler from Bowling Scorecard
     [DBManagerEndBall DeleteRemoveUnusedBowFBSUpdateScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO : BOWLINGTEAMCODE];
     
+    //PENALTY
     if(AWARDEDTOTEAMCODE.length > 0)
     {
         if([DBManagerEndBall GetPenaltyBallCodeUpdateScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO :BALLCODE])
@@ -342,8 +357,7 @@ EndInnings *insertScoreBoard;
             [DBManagerEndBall InsertPenaltyScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO :BALLCODE :PENALTYCODE :AWARDEDTOTEAMCODE :PENALTYRUNS :PENALTYTYPECODE :PENALTYREASONCODE];
             
             
-            //ADDING PENALTY RUNS FOR INNINGSSUMMARY (SCOREBOARD)
-            if (BALLCODE == nil || [BALLCODE isEqualToString: @""]) {
+         
                 
                 //ADDING PENALTY RUNS FOR INNINGSSUMMARY (SCOREBOARD)
                 if (BALLCODE == nil || [BALLCODE isEqualToString: @""]) {
@@ -353,12 +367,7 @@ EndInnings *insertScoreBoard;
                         [DBManagerEndBall UpdateInningsSummary:PENALTYRUNS :COMPETITIONCODE :MATCHCODE :INNINGSNO];
                         
                     }
-                    
-                    
-                    
-                }
-                
-                
+
                 
             }
             
@@ -537,7 +546,7 @@ EndInnings *insertScoreBoard;
 
    int O_RUNSvalue = F_RUNS.intValue + F_OVERTHROW.intValue + F_BYES.intValue + F_LEGBYES.intValue + F_NOBALL.intValue + F_WIDE.intValue + F_PENALTY.intValue;
     
-  int N_RUNSvalue= RUNS.intValue + OVERTHROW.intValue + BYES.intValue + LEGBYES.intValue + NOBALL.intValue + WIDE.intValue + PENALTY.intValue;
+    int N_RUNSvalue= RUNS.intValue + OVERTHROW.intValue + BYES.intValue + LEGBYES.intValue + NOBALL.intValue + WIDE.intValue + PENALTY.intValue;
     
    
     O_RUNS = [NSString stringWithFormat:@"%d",O_RUNSvalue];
@@ -577,19 +586,19 @@ EndInnings *insertScoreBoard;
         
         UpdateScoreEngine *updateScoreEngRec = [getPlayerArray objectAtIndex:0];
         
-        F_BOWLEROVERS = updateScoreEngRec.OVERS;
-        F_BOWLERBALLS = updateScoreEngRec.BALLS;
-        F_BOWLERPARTIALOVERBALLS = updateScoreEngRec.PARTIALOVERBALLS;
+        F_BOWLEROVERS = [NSNumber numberWithInt:updateScoreEngRec.OVERS];
+        F_BOWLERBALLS = [NSNumber numberWithInt:updateScoreEngRec.BALLS];
+        F_BOWLERPARTIALOVERBALLS = [NSNumber numberWithInt:updateScoreEngRec.PARTIALOVERBALLS];
         F_BOWLERRUNS = updateScoreEngRec.RUNS;
         
-        F_BOWLERWICKETS = updateScoreEngRec.WICKETS;
-        F_BOWLERMAIDENS = updateScoreEngRec.MAIDENS;
-        F_BOWLERNOBALLS = updateScoreEngRec.NOBALLS;
-        F_BOWLERWIDES = updateScoreEngRec.WIDES;
+        F_BOWLERWICKETS = [NSNumber numberWithInt:updateScoreEngRec.WICKETS];
+        F_BOWLERMAIDENS = [NSNumber numberWithInt:updateScoreEngRec.MAIDENS];
+        F_BOWLERNOBALLS = [NSNumber numberWithInt:updateScoreEngRec.NOBALLS];
+        F_BOWLERWIDES = [NSNumber numberWithInt:updateScoreEngRec.WIDES];
         
-        F_BOWLERDOTBALLS = updateScoreEngRec.DOTBALLS;
-        F_BOWLERFOURS =  updateScoreEngRec.FOURS;
-        F_BOWLERSIXES =updateScoreEngRec.SIXES;
+        F_BOWLERDOTBALLS = [NSNumber numberWithInt:updateScoreEngRec.DOTBALLS];
+        F_BOWLERFOURS =  [NSNumber numberWithInt:updateScoreEngRec.FOURS];
+        F_BOWLERSIXES = [NSNumber numberWithInt:updateScoreEngRec.SIXES];
         
     }
     
@@ -656,8 +665,19 @@ EndInnings *insertScoreBoard;
         }
         U_BOWLEROVERS = F_BOWLEROVERS;
     }
+
     
-    U_BOWLERRUNS = ((F_BYES == 0) && (F_LEGBYES == 0))?([NSNumber numberWithInt:F_BOWLERRUNS.intValue -F_RUNS.intValue + F_WIDE.intValue + F_NOBALL.intValue +F_WIDE.intValue > 0]? 0 : F_OVERTHROW ): (([NSNumber numberWithInt:F_BOWLERRUNS.intValue -F_WIDE.intValue +F_NOBALL.intValue]));
+    
+//    
+//    SET @U_BOWLERRUNS = CASE WHEN (@F_BYES = 0 AND @F_LEGBYES = 0)
+//    THEN (@F_BOWLERRUNS - (@F_RUNS + @F_WIDE + @F_NOBALL + (CASE WHEN @F_WIDE > 0 THEN 0 ELSE @F_OVERTHROW END)))
+//    ELSE (@F_BOWLERRUNS - (@F_WIDE + @F_NOBALL))
+    
+    
+    U_BOWLERRUNS = [NSNumber numberWithInt: ((F_BYES.intValue == 0) && (F_LEGBYES.intValue == 0))? (F_BOWLERRUNS.intValue - (F_RUNS.intValue + F_WIDE.intValue + F_NOBALL.intValue + (F_WIDE.intValue > 0 ? 0 : F_OVERTHROW.intValue ))): (F_BOWLERRUNS.intValue - (F_WIDE.intValue +F_NOBALL.intValue))];
+                                                         
+                                                         
+    
     U_BOWLERWICKETS = (F_ISWICKETCOUNTABLE.intValue == 1) ? ([NSNumber numberWithInt:F_BOWLERWICKETS.intValue - 1]) : F_BOWLERWICKETS;
     U_BOWLERNOBALLS = ( F_NOBALL.intValue == 1) ? ([NSNumber numberWithInt:F_BOWLERNOBALLS.intValue - 1]) : F_BOWLERNOBALLS ;
     U_BOWLERWIDES = (F_WIDE.intValue > 0) ? [NSNumber numberWithInt:F_BOWLERWIDES.intValue - 1]: F_BOWLERWIDES ;
@@ -668,8 +688,9 @@ EndInnings *insertScoreBoard;
  
     ISMAIDENOVER = [NSNumber numberWithInt:0];
     
+  
     
-    if( [DBManagerEndBall BALLCOUNTUPSC : COMPETITIONCODE:MATCHCODE:INNINGSNO:OVERNO] > 5)
+    if( [DBManagerEndBall BALLCOUNTUPSC : COMPETITIONCODE:MATCHCODE:INNINGSNO:[NSString stringWithFormat:@"%@",F_OVERS]] > 5)
     
     {
         ISMAIDENOVER = [DBManagerEndBall SMAIDENOVER : COMPETITIONCODE:MATCHCODE:INNINGSNO:[NSString stringWithFormat:@"%@",F_OVERS]:BALLCODE];
@@ -681,7 +702,7 @@ EndInnings *insertScoreBoard;
         
     }
     
-    if([DBManagerEndBall GETOVERS : COMPETITIONCODE:MATCHCODE:INNINGSNO:[NSString stringWithFormat:OVERS]])
+    if([DBManagerEndBall GETOVERS : COMPETITIONCODE:MATCHCODE:INNINGSNO:[NSString stringWithFormat:@"%@",F_OVERS]])
     {
         if(ISMAIDENOVER.intValue == 0)
         {
@@ -746,8 +767,37 @@ EndInnings *insertScoreBoard;
          
           insertScoreBoard = [[EndInnings alloc]init];
             
-            [insertScoreBoard insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
+            insertScoreBoard.COMPETITIONCODE = COMPETITIONCODE;
+            insertScoreBoard.MATCHCODE = MATCHCODE;
+            insertScoreBoard.BATTINGTEAMCODE = BATTINGTEAMCODE;
+            insertScoreBoard.INNINGSNO = INNINGSNO;
+            insertScoreBoard.BATSMANCODE = BATSMANCODE;
+            insertScoreBoard.ISFOUR = ISFOUR;
+            insertScoreBoard.ISSIX = ISSIX;
+            insertScoreBoard.RUNS = RUNS;
+            insertScoreBoard.OVERTHROW = OVERTHROW;
+            insertScoreBoard.ISWICKET = ISWICKET;
+            insertScoreBoard.WICKETTYPE = WICKETTYPE;
+            insertScoreBoard.WICKETPLAYER = WICKETPLAYER;
+            insertScoreBoard.BOWLERCODE = U_BOWLERCODE;
+            insertScoreBoard.OVERNO = OVERNO;
+            insertScoreBoard.BALLNO = BALLNO;
+            insertScoreBoard.WICKETSCORE = WICKETSCORE;
+            insertScoreBoard.WIDE = WIDE;
+            insertScoreBoard.NOBALL = NOBALL;
+            insertScoreBoard.BYES = BYES;
+            insertScoreBoard.LEGBYES = LEGBYES;
+            insertScoreBoard.PENALTY = PENALTY;
+            insertScoreBoard.ISWKTDTLSUPDATE = ISWKTDTLSUPDATE;
+            insertScoreBoard.ISBOWLERCHANGED = ISBOWLERCHANGED;
+            [NSNumber numberWithInt:1];
+            insertScoreBoard.O_ISLEGALBALL = F_ISLEGALBALL;
+            insertScoreBoard.BOWLINGTEAMCODE = BOWLINGTEAMCODE;
             
+           
+         
+            [insertScoreBoard insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
+    
           
         
         }

@@ -1197,7 +1197,7 @@ EditModeVC * objEditModeVc;
     self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
     self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
     self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
-    self.lbl_stricker_strickrate.text = fetchSEPageLoadRecord.strickerStrickRate;
+    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
@@ -1207,7 +1207,7 @@ EditModeVC * objEditModeVc;
     self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
     self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
     self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
-    self.lbl_nonstricker_strickrate.text = fetchSEPageLoadRecord.nonstrickerStrickRate;
+    self.lbl_nonstricker_strickrate.text =[NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
     
     //Bowler
     
@@ -1218,7 +1218,8 @@ EditModeVC * objEditModeVc;
     self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
     self.lbl_bowler_strickrate.text = fetchSEPageLoadRecord.currentBowlerEcoRate;
     
-    
+        
+
     
     //team score details display
     _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
@@ -1242,14 +1243,16 @@ EditModeVC * objEditModeVc;
     
     
     //all innings details for team A and team B
+ 
     _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
     _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
     
-    
+
     
     _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
     _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+    
     
     
     if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
@@ -1360,7 +1363,7 @@ EditModeVC * objEditModeVc;
     self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
     self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
     self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
-    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
+    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
     
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
@@ -1371,7 +1374,7 @@ EditModeVC * objEditModeVc;
     self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
     self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
     self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
-    self.lbl_nonstricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
+    self.lbl_nonstricker_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
     //[formatter stringFromNumber:fetchSEPageLoadRecord.nonstrickerStrickRate];
     
     //Bowler
@@ -1381,7 +1384,7 @@ EditModeVC * objEditModeVc;
     self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
     self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
     self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
-    self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
+    self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
     
     //team score details display
     _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
@@ -2222,7 +2225,7 @@ EditModeVC * objEditModeVc;
          self.ballEventRecord.objWicketType :
          @"" :
          @"" :
-         @"" :
+         isWicketSelected == YES ? [NSNumber numberWithInt:1] : [NSNumber numberWithInt:0]:
          @"1" :
          self.ballEventRecord.objPenalty :
          self.ballEventRecord.objPenaltytypecode :
@@ -3298,6 +3301,8 @@ EditModeVC * objEditModeVc;
         }
         else if(alertView.tag == 1007)
         {
+            
+           
             NSLog(@"dfjbgb");
             if([self.btn_StartBall.currentTitle isEqualToString:@"END BALL"])
             {
@@ -8750,13 +8755,34 @@ self.lbl_umpirename.text=@"";
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
+    // team score color change based on innings wise
+    if ([fetchSEPageLoadRecord.INNINGSNO isEqualToString:@"1"] ) {
+        
+        self.lbl_teamAHeading.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        self.lbl_teamAfirstIngsScore.textColor=[UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        self.lbl_teamAfirstIngsOvs.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+
+        
+    }
+    
+    if ([fetchSEPageLoadRecord.INNINGSNO isEqualToString:@"2"] ) {
+        
+        self.lbl_teamBHeading.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        self.lbl_teamBfirstIngsScore.textColor=[UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        self.lbl_teamBfirstIngsOvs.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0) alpha:1.0f];
+        
+        
+    }
+    
     
     //Striker Details
     self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
     self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
     self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
     self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
-    self.lbl_stricker_strickrate.text = fetchSEPageLoadRecord.strickerStrickRate;
+    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
+    
+    //fetchSEPageLoadRecord.strickerStrickRate;
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
@@ -8768,7 +8794,8 @@ self.lbl_umpirename.text=@"";
     self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
     self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
     self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
-    self.lbl_nonstricker_strickrate.text = fetchSEPageLoadRecord.nonstrickerStrickRate;
+    self.lbl_nonstricker_strickrate.text =[NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
+    //fetchSEPageLoadRecord.nonstrickerStrickRate;
     self.lbl_nonstricker_strickrate.adjustsFontSizeToFitWidth = YES;
     //Bowler
     
@@ -8777,7 +8804,8 @@ self.lbl_umpirename.text=@"";
     self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
     self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
     self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
-    self.lbl_bowler_strickrate.text = fetchSEPageLoadRecord.currentBowlerEcoRate;
+    self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
+    //fetchSEPageLoadRecord.currentBowlerEcoRate;
     self.lbl_bowler_strickrate.adjustsFontSizeToFitWidth = YES;
 
     
