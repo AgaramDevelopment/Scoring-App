@@ -38,7 +38,11 @@ NSArray *MuliteDayMatchtype;
 
     FetchCompitionArray=[[NSMutableArray alloc]init];
     self.cellsCurrentlyEditing = [NSMutableArray array];
-    FetchCompitionArray =[DBManager ArchivesFixturesData:self.CompitionCode];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userCode = [defaults objectForKey:@"userCode"];
+    
+    FetchCompitionArray =[DBManager ArchivesFixturesData:self.CompitionCode:userCode];
     [self customnavigationmethod];
 }
 -(void)customnavigationmethod
@@ -210,6 +214,8 @@ NSArray *MuliteDayMatchtype;
     objEditModeVC.Comptitioncode =self.CompitionCode;
     objEditModeVC.matchCode = objFixtureRecord.matchcode;
     objEditModeVC.matchTypeCode=matchTypeCode;
+    objEditModeVC.teamAShortName = objFixtureRecord.teamAname;
+    objEditModeVC.teamBShortName = objFixtureRecord.teamBname;
     
     [self.navigationController pushViewController:objEditModeVC animated:YES];
 }

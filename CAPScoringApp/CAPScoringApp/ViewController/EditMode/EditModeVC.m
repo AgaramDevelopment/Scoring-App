@@ -122,7 +122,7 @@ BOOL isWicketSelected;
     }
     [self.Btn_innings1team1 setTitle:[NSString stringWithFormat:@"%@ 1st INNS",objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME] forState: UIControlStateNormal];
     
-    [self.Btn_innings1team2 setTitle: [NSString stringWithFormat:@"%@ 1st INNS",objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME] forState: UIControlStateNormal];
+    [self.Btn_innings1team2 setTitle: [NSString stringWithFormat:@"%@ 1st INNS",[objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@"" ]?[objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME isEqual:_teamAShortName]?_teamBShortName:_teamAShortName: objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME] forState: UIControlStateNormal];
 
     //self.inningsviewWidth.constant =totalwidth;
     //self.btn_innings1Widthposition.constant=400;
