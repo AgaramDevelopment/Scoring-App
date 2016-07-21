@@ -15,7 +15,7 @@
 
 @interface DBManager : NSObject
 //tournament
-+(NSMutableArray *)RetrieveEventData;
++(NSMutableArray *)RetrieveEventData: (NSString *) userCode;
 //login
 +(NSMutableArray *)checkUserLogin: (NSString *) userName password: (NSString *) password;
 +(BOOL)checkExpiryDate: (NSString *) userId;
@@ -25,8 +25,7 @@
 +(NSMutableArray *)Electedto;
 +(NSMutableArray *)StrikerNonstriker: (NSString *) MATCHCODE :(NSString *) TeamCODE;
 +(NSMutableArray *)Bowler: (NSString *) MATCHCODE :(NSString *) TeamCODE;
-+(NSMutableArray *)RetrieveFixturesData:(NSString*)competitionCode;
-
++(NSMutableArray *)RetrieveFixturesData:(NSString*)competitionCode :(NSString*)userCode;
 
 //fixtures&official
 
@@ -490,6 +489,5 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 
 +(NSMutableArray *) getPlayedPlayersForPlayerXI:(NSString*)MATCHCODE COMPETITIOMCODE:(NSString*) COMPETITIOMCODE  OVERNO:(NSString*) OVERNO BALLNO:(NSString*) BALLNO;
 
-+(NSMutableArray *)ArchivesFixturesData:(NSString*)competitionCode;
-
++(NSMutableArray *)ArchivesFixturesData:(NSString*)competitionCode:(NSString*)userCode ;
 @end

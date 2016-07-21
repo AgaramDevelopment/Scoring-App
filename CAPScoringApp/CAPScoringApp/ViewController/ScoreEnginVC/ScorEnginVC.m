@@ -53,7 +53,7 @@
 #import "AppealBatsmenRecord.h"
 #import "DeclareInnings.h"
 #import "OtherWicketVC.h"
-#import "PowerPlayGridVC.h"
+
 #import "Other_WicketVC.h"
 #import "NewMatchSetUpVC.h"
 #import "FETCHSEBALLCODEDETAILS.h"
@@ -68,7 +68,7 @@
 #import "PushSyncDBMANAGER.h"
 #import "EndSession.h"
 #import "EditModeVC.h"
-
+#import "PowerPlayVC.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -77,7 +77,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -198,7 +198,7 @@
     NSString  *TEAMBWICKETKEEPER;
     
     
-    PowerPlayGridVC *powerplaygridvc;
+    PowerPlayVC *powerplayVc;
     Other_WicketVC *otherwicketvc;
     Other_WicketgridVC *otherwikcetgricvc;
     RevicedOverVC * revicedOverVc ;
@@ -569,7 +569,7 @@ EditModeVC * objEditModeVc;
         [_rightSlideArray removeObjectsInArray:[[NSArray alloc] initWithObjects:@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil]];
         if (fetchSEPageLoadRecord.BATTEAMWICKETS >= 10)
             [_rightSlideArray removeObject : @"DECLARE INNINGS"];
-        if (inningsno != 2 || inningsno != 3)
+        if (inningsno == 1 || inningsno == 4)
             [_rightSlideArray removeObject : @"FOLLOW ON"];
     }
     [self getLastBowlerDetails];
@@ -1196,7 +1196,7 @@ EditModeVC * objEditModeVc;
     self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
     self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
     self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
-    self.lbl_stricker_strickrate.text = fetchSEPageLoadRecord.strickerStrickRate;
+    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
@@ -1206,7 +1206,7 @@ EditModeVC * objEditModeVc;
     self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
     self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
     self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
-    self.lbl_nonstricker_strickrate.text = fetchSEPageLoadRecord.nonstrickerStrickRate;
+    self.lbl_nonstricker_strickrate.text =[NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
     
     //Bowler
     
@@ -1362,7 +1362,7 @@ EditModeVC * objEditModeVc;
     self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
     self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
     self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
-    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
+    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
     
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
@@ -1373,7 +1373,7 @@ EditModeVC * objEditModeVc;
     self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
     self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
     self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
-    self.lbl_nonstricker_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
+    self.lbl_nonstricker_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
     //[formatter stringFromNumber:fetchSEPageLoadRecord.nonstrickerStrickRate];
     
     //Bowler
@@ -1383,7 +1383,7 @@ EditModeVC * objEditModeVc;
     self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
     self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
     self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
-    self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
+    self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
     
     //team score details display
     _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
@@ -1565,6 +1565,7 @@ EditModeVC * objEditModeVc;
         self.commonViewXposition.constant=0;
         self.commonViewwidthposition.constant =self.view.frame.size.width;
         leftSlideSwipe = NO;
+        self.CommonView.userInteractionEnabled= YES;
     } completion:^(BOOL finished){ }];
     
     
@@ -1577,6 +1578,7 @@ EditModeVC * objEditModeVc;
     self.commonViewwidthposition.constant =768;
     self.CommonviewRightsideposition.constant =self.view.frame.size.width+300;
     leftSlideSwipe = YES;
+    self.CommonView.userInteractionEnabled= NO;
     [self.sideviewtable reloadData];
     
     
@@ -3525,11 +3527,8 @@ EditModeVC * objEditModeVc;
     {
         [objextras removeFromSuperview];
     }
-    else if(ispichmapSelectValue==NO)
-    {
-          [self unselectedButtonBg:self.btn_pichmap];
-           
-    }
+   
+    
         
 //    else if(ispichmapSelectValue==YES)
 //    {
@@ -3557,6 +3556,15 @@ EditModeVC * objEditModeVc;
     //        [overThrowTableView removeFromSuperview];
     //    }
     UIButton *selectBtnTag=(UIButton*)sender;
+    
+    
+    if(ispichmapSelectValue==NO && selectBtnTag.tag != 110)
+    {
+        [self unselectedButtonBg:self.btn_pichmap];
+        isPitchmap = NO;
+        
+    }
+    
     
     //wicket
     if(isWicketSelected && selectBtnTag.tag != 107 && wicketOption !=0){
@@ -3943,6 +3951,22 @@ EditModeVC * objEditModeVc;
              self.PichMapTittle.hidden=YES;
             self.img_pichmap.hidden=YES;
             isPitchmap=NO;
+            ispichmapSelectValue = NO;
+            
+            //Reset
+            self.ballEventRecord.objPMlengthcode=@"";
+            self.ballEventRecord.objPMlinecode =@"";
+            self.ballEventRecord.objPMX1=@1;
+            self.ballEventRecord.objPMY1=@1;
+            self.ballEventRecord.objPMX2=@1;
+            self.ballEventRecord.objPMY2=@1;
+            
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+
         }
     }
     else if(selectBtnTag.tag==111)
@@ -4000,6 +4024,31 @@ EditModeVC * objEditModeVc;
             [self unselectedButtonBg:self.btn_wagonwheel];
             self.img_WagonWheel.hidden=YES;
             isWagonwheel=NO;
+            
+            
+            for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
+                if ([layer.name isEqualToString:@"DrawLine"]) {
+                    [layer removeFromSuperlayer];
+                    break;
+                }
+            }
+            
+            
+            if (IS_IPAD_PRO) {
+                _ballEventRecord.objWWX1=@(221);
+                _ballEventRecord.objWWY1=@(186);
+                _ballEventRecord.objWWX2=@(221);
+                _ballEventRecord.objWWY2=@(186);
+            }
+            else{
+                
+                _ballEventRecord.objWWX1=@(172);
+                _ballEventRecord.objWWY1=@(145);
+                _ballEventRecord.objWWX2=@(172);
+                _ballEventRecord.objWWY2=@(145);
+                
+            }
+            
             
         }
 
@@ -4071,10 +4120,10 @@ EditModeVC * objEditModeVc;
 - (void)didClickPichmapTapAction:(UIGestureRecognizer *)pichmapGesture
 {
     
-    if(Img_ball != nil)
-    {
-        [Img_ball removeFromSuperview];
-    }
+//    if(Img_ball != nil)
+//    {
+//        [Img_ball removeFromSuperview];
+//    }
     ispichmapSelectValue=YES;
     CGPoint p = [pichmapGesture locationInView:self.img_pichmap];
     NSLog(@"pointx=%f,pointY=%f",p.x,p.y);
@@ -4083,7 +4132,7 @@ EditModeVC * objEditModeVc;
     
     if(IS_IPAD_PRO)
     {
-        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
+        //Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
         
         if(Xposition > 187 && Yposition > 85 && Xposition < 455 && Yposition < 200)
         {
@@ -4155,6 +4204,12 @@ EditModeVC * objEditModeVc;
                 }
             }
             
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             _ballEventRecord.objPMX1=@1;
@@ -4231,8 +4286,13 @@ EditModeVC * objEditModeVc;
                     self.ballEventRecord.objPMlinecode =@"MSC031";
                 }
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
             
-            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             _ballEventRecord.objPMX1=@1;
@@ -4310,7 +4370,13 @@ EditModeVC * objEditModeVc;
                 }
                 
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
             
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             _ballEventRecord.objPMX1=@1;
@@ -4387,6 +4453,14 @@ EditModeVC * objEditModeVc;
                 }
                 //NSLog(@"good wide 0.0");
             }
+            
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             _ballEventRecord.objPMX1=@1;
@@ -4462,6 +4536,13 @@ EditModeVC * objEditModeVc;
                 }
                 
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             _ballEventRecord.objPMX1=@1;
@@ -4537,6 +4618,14 @@ EditModeVC * objEditModeVc;
                 }
                 
             }
+            
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             _ballEventRecord.objPMX1=@1;
@@ -4546,7 +4635,7 @@ EditModeVC * objEditModeVc;
         }
     }
     else{
-        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,15, 15)];
+        //Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,15, 15)];
         
         //           if(Xposition > 103 && Yposition > -19 && Xposition < 243 && Yposition < 60)
         //           {
@@ -4622,6 +4711,13 @@ EditModeVC * objEditModeVc;
                 }
             }
             
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
             self.ballEventRecord.objPMlengthcode=@"MSC037";
@@ -4696,6 +4792,13 @@ EditModeVC * objEditModeVc;
                 }
             }
             
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
         }
@@ -4766,6 +4869,13 @@ EditModeVC * objEditModeVc;
                     self.ballEventRecord.objPMlinecode =@"MSC031";
                 }
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
         }
@@ -4835,6 +4945,13 @@ EditModeVC * objEditModeVc;
                     self.ballEventRecord.objPMlinecode =@"MSC031";
                 }
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
         }
@@ -4907,6 +5024,13 @@ EditModeVC * objEditModeVc;
                 }
                 
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
         }
@@ -4977,6 +5101,13 @@ EditModeVC * objEditModeVc;
                     self.ballEventRecord.objPMlinecode =@"MSC031";
                 }
             }
+            //Clear ball
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
         }
@@ -5015,9 +5146,10 @@ EditModeVC * objEditModeVc;
     self.view_Wagon_wheel.hidden=YES;
     self.objcommonRemarkview.hidden=YES;
     
-    if (ispichmapSelectValue== NO)
+    if (ispichmapSelectValue== NO && selectBtnTag.tag != 110)
     {
         [self unselectedButtonBg:self.btn_pichmap];
+        isPitchmap = NO;
     }
 
     //wicket
@@ -5846,7 +5978,7 @@ self.lbl_umpirename.text=@"";
     isEnableTbl=NO;
     isPitchmap =NO;
     isWagonwheel=NO;
-   
+    ispichmapSelectValue = NO;
    
   //[self unselectedViewBg: self.View_Appeal];
   //[self unselectedViewBg: self.view_lastinstance];
@@ -8114,24 +8246,28 @@ self.lbl_umpirename.text=@"";
 }
 -(void)PowerPlay
 {
-    powerplaygridvc = [[PowerPlayGridVC alloc]initWithNibName:@"PowerPlayGridVC" bundle:nil];
-    powerplaygridvc.competitionCode=self.competitionCode;
-    powerplaygridvc.matchCode =self.matchCode;
-    powerplaygridvc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    powerplayVc = [[PowerPlayVC alloc]initWithNibName:@"PowerPlayVC" bundle:nil];
+    powerplayVc.competitionCode=self.competitionCode;
+    powerplayVc.matchCode =self.matchCode;
+    powerplayVc.inningsNo =fetchSEPageLoadRecord.INNINGSNO;
+    powerplayVc.delegate =self;
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+//    UIButton * Btn_Fullview=[[UIButton alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+//    [fullview addSubview:Btn_Fullview];
+//    [Btn_Fullview addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:fullview];
-    [fullview addSubview:powerplaygridvc.view];
+    [fullview addSubview:powerplayVc.view];
     
-    powerplaygridvc.view.frame =CGRectMake(90, 200, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
+    powerplayVc.view.frame =CGRectMake(90, 200, powerplayVc.view.frame.size.width, powerplayVc.view.frame.size.height);
     
-    powerplaygridvc.view.alpha = 0;
-    [powerplaygridvc didMoveToParentViewController:self];
+    powerplayVc.view.alpha = 0;
+    [powerplayVc didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
      {
-         powerplaygridvc.view.alpha = 1;
+         powerplayVc.view.alpha = 1;
      }
                      completion:nil];
     
@@ -8139,26 +8275,26 @@ self.lbl_umpirename.text=@"";
     
     if (IS_IPAD_PRO) {
         
-        powerplaygridvc.view.frame =CGRectMake(250, 500, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
-        powerplaygridvc.view.alpha = 0;
-        [powerplaygridvc didMoveToParentViewController:self];
+        powerplayVc.view.frame =CGRectMake(250, 500, powerplayVc.view.frame.size.width, powerplayVc.view.frame.size.height);
+        powerplayVc.view.alpha = 0;
+        [powerplayVc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             powerplaygridvc.view.alpha = 1;
+             powerplayVc.view.alpha = 1;
          }
                          completion:nil];
     }
     
     
     else{
-        powerplaygridvc.view.frame =CGRectMake(100, 200, powerplaygridvc.view.frame.size.width, powerplaygridvc.view.frame.size.height);
-        powerplaygridvc.view.alpha = 0;
-        [powerplaygridvc didMoveToParentViewController:self];
+        powerplayVc.view.frame =CGRectMake(100, 200, powerplayVc.view.frame.size.width, powerplayVc.view.frame.size.height);
+        powerplayVc.view.alpha = 0;
+        [powerplayVc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             powerplaygridvc.view.alpha = 1;
+             powerplayVc.view.alpha = 1;
          }
                          completion:nil];
     }
@@ -8643,7 +8779,9 @@ self.lbl_umpirename.text=@"";
     self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
     self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
     self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
-    self.lbl_stricker_strickrate.text = fetchSEPageLoadRecord.strickerStrickRate;
+    self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
+    
+    //fetchSEPageLoadRecord.strickerStrickRate;
     self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
     self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     
@@ -8655,7 +8793,8 @@ self.lbl_umpirename.text=@"";
     self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
     self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
     self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
-    self.lbl_nonstricker_strickrate.text = fetchSEPageLoadRecord.nonstrickerStrickRate;
+    self.lbl_nonstricker_strickrate.text =[NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
+    //fetchSEPageLoadRecord.nonstrickerStrickRate;
     self.lbl_nonstricker_strickrate.adjustsFontSizeToFitWidth = YES;
     //Bowler
     
@@ -8664,7 +8803,8 @@ self.lbl_umpirename.text=@"";
     self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
     self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
     self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
-    self.lbl_bowler_strickrate.text = fetchSEPageLoadRecord.currentBowlerEcoRate;
+    self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
+    //fetchSEPageLoadRecord.currentBowlerEcoRate;
     self.lbl_bowler_strickrate.adjustsFontSizeToFitWidth = YES;
 
     
@@ -8825,7 +8965,7 @@ self.lbl_umpirename.text=@"";
     [self CreateBallTickers : fetchSEPageLoadRecord.BallGridDetails];
     
     //CHECK Wickets
-    if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
+    if(fetchSEPageLoadRecord.BATTEAMWICKETS==10 && (![fetchSEPageLoadRecord.INNINGSSTATUS isEqualToString:@"1"])){
             UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             [alter setTag:10004];
@@ -12185,104 +12325,83 @@ self.lbl_umpirename.text=@"";
     
     NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
    [PushDict setValue :MatcRegistraionGetArray forKey:@"MatcRegistraion"];
+
+    [PushDict setValue:MatchTeamplayerDetailsGetArray forKey:@"MatchTeamplayerDetails"];
+
+     [PushDict setValue:MatchresultGetArray forKey:@"Matchresult"];
+
+     [PushDict setValue:MatchEventGetArray forKey:@"MatchEvent"];
+
+     [PushDict setValue:InningsSummeryGetArray forKey:@"InningsSummery"];
+
+     [PushDict setValue:InningsEventGetArray forKey:@"InningsEvent"];
+
+     [PushDict setValue:InningsBreakEventGetArray forKey:@"InningsBreakEvent"];
+
+     [PushDict setValue:BallEventGetArray forKey:@"BallEvent"];
+
+     [PushDict setValue:BattingSummeryGetArray forKey:@"BattingSummery"];
+
+     [PushDict setValue:OverEventGetArray forKey:@"OverEvent"];
+
+     [PushDict setValue:BowlingSummeryGetArray forKey:@"BowlingSummery"];
+
+     [PushDict setValue:BowlingMaidenSummeryGetArray forKey:@"BowlingMaidenSummery"];
+
+     [PushDict setValue:BowlingOverDetailsGetArray forKey:@"BowlingOverDetails"];
+
+     [PushDict setValue:FieldingEventGetArray forKey:@"FieldingEvent"];
+
+     [PushDict setValue:DayEventGetArray forKey:@"DayEvent"];
+
+     [PushDict setValue:SessionEventGetArray forKey:@"SessionEvent"];
+
+    [PushDict setValue:AppealEventGetArray forKey:@"AppealEvent"];
+
+    [PushDict setValue:WicketEventGetArray forKey:@"WicketEvent"];
+
+    [PushDict setValue:PowerPlayGetArray forKey:@"PowerPlay"];
+
+    [PushDict setValue:PlayerInOutTimeGetArray forKey:@"PlayerInOutTime"];
+
+    [PushDict setValue:PenalitydetailsGetArray forKey:@"Penalitydetails"];
+
+    [PushDict setValue:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
     
-     NSMutableDictionary *PushDict1 =[[NSMutableDictionary alloc]init];
-    [PushDict1 setValue:MatchTeamplayerDetailsGetArray forKey:@"MatchTeamplayerDetails"];
+
+//
+//    
+  //  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:PushDict options:NSJSONWritingPrettyPrinted error:nil];
+//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+//    NSLog(@"JSON String: %@",jsonString);
     
-     NSMutableDictionary *PushDict2 =[[NSMutableDictionary alloc]init];
-     [PushDict2 setValue:MatchresultGetArray forKey:@"Matchresult"];
+    NSData* responseData = nil;
+    NSString *urlString = @"http://192.168.1.39:8096/CAPMobilityService.svc/PUSHDATATOSERVER";
+    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    responseData = [NSMutableData data] ;
+    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
+    NSString *bodydata=[NSString stringWithFormat:@"%@",PushDict];
     
-     NSMutableDictionary *PushDict3 =[[NSMutableDictionary alloc]init];
-     [PushDict3 setValue:MatchEventGetArray forKey:@"MatchEvent"];
-    
-     NSMutableDictionary *PushDict4 =[[NSMutableDictionary alloc]init];
-     [PushDict4 setValue:InningsSummeryGetArray forKey:@"InningsSummery"];
-    
-    
-     NSMutableDictionary *PushDict5 =[[NSMutableDictionary alloc]init];
-     [PushDict5 setValue:InningsEventGetArray forKey:@"InningsEvent"];
-    
-     NSMutableDictionary *PushDict6 =[[NSMutableDictionary alloc]init];
-     [PushDict6 setValue:InningsBreakEventGetArray forKey:@"InningsBreakEvent"];
-    
-     NSMutableDictionary *PushDict7 =[[NSMutableDictionary alloc]init];
-     [PushDict7 setValue:BallEventGetArray forKey:@"BallEvent"];
-    
-     NSMutableDictionary *PushDict8 =[[NSMutableDictionary alloc]init];
-     [PushDict8 setValue:BattingSummeryGetArray forKey:@"BattingSummery"];
-    
-     NSMutableDictionary *PushDict9 =[[NSMutableDictionary alloc]init];
-     [PushDict9 setValue:OverEventGetArray forKey:@"OverEvent"];
-    
-     NSMutableDictionary *PushDict10 =[[NSMutableDictionary alloc]init];
-     [PushDict10 setValue:BowlingSummeryGetArray forKey:@"BowlingSummery"];
-    
-    
-     NSMutableDictionary *PushDict11 =[[NSMutableDictionary alloc]init];
-     [PushDict11 setValue:BowlingMaidenSummeryGetArray forKey:@"BowlingMaidenSummery"];
-    
-     NSMutableDictionary *PushDict12 =[[NSMutableDictionary alloc]init];
-     [PushDict12 setValue:BowlingOverDetailsGetArray forKey:@"BowlingOverDetails"];
-    
-     NSMutableDictionary *PushDict13 =[[NSMutableDictionary alloc]init];
-     [PushDict13 setValue:FieldingEventGetArray forKey:@"FieldingEvent"];
-    
-     NSMutableDictionary *PushDict14 =[[NSMutableDictionary alloc]init];
-     [PushDict14 setValue:DayEventGetArray forKey:@"DayEvent"];
-    
-     NSMutableDictionary *PushDict15 =[[NSMutableDictionary alloc]init];
-     [PushDict15 setValue:SessionEventGetArray forKey:@"SessionEvent"];
-    
-     NSMutableDictionary *PushDict16 =[[NSMutableDictionary alloc]init];
-    [PushDict16 setValue:AppealEventGetArray forKey:@"AppealEvent"];
-    
-     NSMutableDictionary *PushDict17 =[[NSMutableDictionary alloc]init];
-    [PushDict17 setValue:WicketEventGetArray forKey:@"WicketEvent"];
-    
-     NSMutableDictionary *PushDict18 =[[NSMutableDictionary alloc]init];
-    [PushDict18 setValue:PowerPlayGetArray forKey:@"PowerPlay"];
-    
-     NSMutableDictionary *PushDict19 =[[NSMutableDictionary alloc]init];
-    [PushDict19 setValue:PlayerInOutTimeGetArray forKey:@"PlayerInOutTime"];
-    
-     NSMutableDictionary *PushDict20 =[[NSMutableDictionary alloc]init];
-    [PushDict20 setValue:PenalitydetailsGetArray forKey:@"Penalitydetails"];
-    
-     NSMutableDictionary *PushDict21=[[NSMutableDictionary alloc]init];
-    [PushDict21 setValue:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
-    
-    NSArray *sendarray=[[NSArray alloc]initWithObjects:PushDict,PushDict1,PushDict2,PushDict3,PushDict4,PushDict5,PushDict6,PushDict7,PushDict8,PushDict9,PushDict10,PushDict11,PushDict12,PushDict13,PushDict14,PushDict15,PushDict16,PushDict17,PushDict18,PushDict19,PushDict20,PushDict21,nil];
-    
-    
-    
-    
-    NSError *error;
-    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sendarray
-                                                       options:0
-                                                         error:nil];
-    if (!jsonData) {
-        NSLog(@"error");
-    } else {
-        NSString *JSONString = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
-        NSLog(@"%@",JSONString);
+    [request setHTTPMethod:@"POST"];
+    NSData *req=[NSData dataWithBytes:[bodydata UTF8String] length:[bodydata length]];
+    [request setHTTPBody:req];
+    NSURLResponse* response;
+    NSError* error = nil;
+    responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+   
+    if (error) {
+        //...handle the error
     }
+    else {
+       NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+       NSLog(@"the final output is:%@",responseString);
+    }
+ 
     
-//    NSURLResponse *response;
-//    NSError *error;
-//    
-//    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:sendarray options:NSJSONWritingPrettyPrinted error:&error];
-//    
-//    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:
-//                                    [NSURL URLWithString:@"http://192.168.1.39:8096/CAPMobilityService.svc/PUSHDATATOSERVER"]];
-//    
-//    [request setHTTPMethod:@"POST"];
-//    [request setHTTPBody: jsonData];
-//    
-//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-//    [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField:@"Content-Length"];
-//    
-//    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//    NSString *serverResponse = (NSString *)[[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+   
+    
+    
+    
     
     
     

@@ -52,7 +52,7 @@
     
 
         }
-    
+
 
     navigationController = [[UINavigationController alloc] initWithRootViewController:initViewController];
     _window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
