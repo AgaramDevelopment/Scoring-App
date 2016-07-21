@@ -20,4 +20,8 @@
 @synthesize SEQNO;
 @synthesize ISSYNC;
 
+
+-(NSDictionary *)CapTransactionslogentryPushRecordDictionary {
+    return [NSDictionary dictionaryWithObjectsAndKeys:MATCHCODE,@"MATCHCODE",TABLENAME,@"TABLENAME", SCRIPTTYPE,@"SCRIPTTYPE",SCRIPTDATA,@"SCRIPTDATA", USERID,@"USERID", LOGDATETIME,@"LOGDATETIME",SCRIPTSTATUS,@"SCRIPTSTATUS", SEQNO,@"SEQNO",ISSYNC,@"ISSYNC", nil];
+}
 @end

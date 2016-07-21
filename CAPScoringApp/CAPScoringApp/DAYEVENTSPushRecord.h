@@ -23,7 +23,7 @@
 @property(nonatomic,strong) NSString *COMMENTS;
 @property(nonatomic,strong) NSNumber *DAYSTATUS;
 @property(nonatomic,strong) NSString *ISSYNC;
-
+-(NSDictionary *)DAYEVENTSPushRecordDictionary ;
 
 
 @end

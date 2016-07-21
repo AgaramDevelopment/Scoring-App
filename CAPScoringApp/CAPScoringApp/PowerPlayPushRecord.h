@@ -21,4 +21,6 @@
 @property(nonatomic,strong)NSString *MODIFIEDBY;
 @property(nonatomic,strong)NSString *MODIFIEDDATE;
 @property(nonatomic,strong)NSString *ISSYNC;
+
+-(NSDictionary *)PowerPlayPushRecordDictionary;
 @end

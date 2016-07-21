@@ -13,6 +13,8 @@
 @property(nonatomic,strong) NSString *OLDBOWLERCODE;
 @property(nonatomic,strong) NSString *OLDSTRIKERCODE;
 @property(nonatomic,strong) NSString *OLDNONSTRIKERCODE;
+@property(nonatomic,strong) NSString *BOWLINGTEAMCODE;
+@property(nonatomic,strong) NSString *MATCHOVER;
 @end
 
 

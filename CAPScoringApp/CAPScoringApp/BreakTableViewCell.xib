@@ -64,17 +64,6 @@
                             <constraint firstAttribute="height" constant="26" id="ccW-m6-aL5"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fLO-TH-4U5">
-                        <rect key="frame" x="0.0" y="44" width="550" height="3"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="3" id="OHj-5b-cz7"/>
-                            <constraint firstAttribute="width" constant="550" id="wgl-He-pIe"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dBD-vz-pCf">
                         <rect key="frame" x="249" y="8" width="43" height="26"/>
                         <constraints>
@@ -96,13 +85,10 @@
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
-                <color key="backgroundColor" red="0.10980392160000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.1058823529" green="0.1333333333" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
-                    <constraint firstItem="fLO-TH-4U5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="9zT-oc-kUt"/>
                     <constraint firstItem="NeX-hI-exh" firstAttribute="leading" secondItem="uNq-2e-uP1" secondAttribute="trailing" constant="10" id="Adx-Tg-Z0f"/>
                     <constraint firstItem="CqT-6X-xtT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="LSS-8c-IpC"/>
-                    <constraint firstItem="fLO-TH-4U5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="44" id="Mg6-Ju-xid"/>
-                    <constraint firstAttribute="trailing" secondItem="fLO-TH-4U5" secondAttribute="trailing" id="QRd-Cf-FgP"/>
                     <constraint firstItem="Cd0-iX-4oc" firstAttribute="leading" secondItem="hVg-ct-nXA" secondAttribute="trailing" constant="-12" id="Qn5-PU-FTF"/>
                     <constraint firstItem="dBD-vz-pCf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="Yp0-XC-aL6"/>
                     <constraint firstItem="uNq-2e-uP1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Yuf-7J-0as"/>
@@ -113,8 +99,6 @@
                     <constraint firstItem="hVg-ct-nXA" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kRl-0t-xHH"/>
                     <constraint firstItem="Cd0-iX-4oc" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="keF-kq-rvV"/>
                     <constraint firstItem="hVg-ct-nXA" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="ty8-5h-nrC"/>
-                    <constraint firstItem="fLO-TH-4U5" firstAttribute="top" secondItem="dBD-vz-pCf" secondAttribute="bottom" constant="10" id="uTl-yV-QXM"/>
-                    <constraint firstAttribute="bottom" secondItem="fLO-TH-4U5" secondAttribute="bottom" constant="12" id="vT2-9T-j0D"/>
                     <constraint firstItem="CqT-6X-xtT" firstAttribute="leading" secondItem="NeX-hI-exh" secondAttribute="trailing" constant="5" id="x02-bG-kGj"/>
                 </constraints>
             </tableViewCellContentView>

@@ -24,6 +24,6 @@
 @property(nonatomic,strong)NSString *DOMINANTTEAMCODE;
 @property(nonatomic,strong)NSNumber *SESSIONSTATUS;
 @property(nonatomic,strong)NSString *ISSYNC;
-
+-(NSDictionary *)SessionEventPushRecordDictionary;
 
 @end

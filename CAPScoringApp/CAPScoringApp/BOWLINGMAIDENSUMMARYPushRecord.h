@@ -15,5 +15,5 @@
 @property(nonatomic,strong)NSString *BOWLERCODE;
 @property(nonatomic,strong)NSNumber *OVERS;
 @property(nonatomic,strong)NSString *ISSYNC;
-
+-(NSDictionary *)BOWLINGMAIDENSUMMARYPushRecordDictionary;
 @end

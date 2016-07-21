@@ -19,4 +19,5 @@
 @property(nonatomic,strong)NSString *MANOFTHEMATCHCODE;
 @property(nonatomic,strong)NSString *COMMENTS;
 @property(nonatomic,strong)NSString *ISSYNC;
+-(NSDictionary *)MatchResultPushRecordDictionary;
 @end

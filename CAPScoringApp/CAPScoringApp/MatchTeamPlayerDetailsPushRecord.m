@@ -17,4 +17,9 @@
 @synthesize RECORDSTATUS;
 @synthesize ISSYNC;
 
+
+-(NSDictionary *)MatchTeamPlayerDetailsPushRecordDictionary {
+    return [NSDictionary dictionaryWithObjectsAndKeys:MATCHTEAMPLAYERCODE,@"MATCHTEAMPLAYERCODE",MATCHCODE,@"MATCHCODE", TEAMCODE,@"TEAMCODE",PLAYERCODE,@"PLAYERCODE", PLAYINGORDER,@"PLAYINGORDER", RECORDSTATUS,@"RECORDSTATUS",ISSYNC,@"ISSYNC",nil];
+}
+
 @end

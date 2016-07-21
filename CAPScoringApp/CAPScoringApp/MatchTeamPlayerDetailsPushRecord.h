@@ -17,5 +17,5 @@
 @property(nonatomic,strong)NSNumber *PLAYINGORDER;
 @property(nonatomic,strong)NSString *RECORDSTATUS;
 @property(nonatomic,strong)NSString *ISSYNC;
-
+-(NSDictionary *)MatchTeamPlayerDetailsPushRecordDictionary ;
 @end

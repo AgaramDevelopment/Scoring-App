@@ -25,8 +25,7 @@
 +(NSMutableArray *)Electedto;
 +(NSMutableArray *)StrikerNonstriker: (NSString *) MATCHCODE :(NSString *) TeamCODE;
 +(NSMutableArray *)Bowler: (NSString *) MATCHCODE :(NSString *) TeamCODE;
-+(NSMutableArray *)RetrieveFixturesData:(NSString*)competitionCode;
-
++(NSMutableArray *)RetrieveFixturesData:(NSString*)competitionCode :(NSString*)userCode;
 
 //fixtures&official
 

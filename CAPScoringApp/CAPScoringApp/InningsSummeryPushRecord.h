@@ -23,4 +23,5 @@
 @property(nonatomic,strong)NSNumber *INNINGSTOTALWICKETS;
 @property(nonatomic,strong)NSString *ISSYNC;
 
+-(NSDictionary *)InningsSummeryPushRecordDictionary;
 @end

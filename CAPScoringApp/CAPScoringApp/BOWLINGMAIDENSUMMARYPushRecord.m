@@ -21,6 +21,8 @@
 @synthesize ISSYNC;
 
 
-
+-(NSDictionary *)BOWLINGMAIDENSUMMARYPushRecordDictionary {
+    return [NSDictionary dictionaryWithObjectsAndKeys:COMPETITIONCODE,@"COMPETITIONCODE",MATCHCODE,@"MATCHCODE", INNINGSNO,@"INNINGSNO",BOWLERCODE,@"BOWLERCODE",OVERS,@"OVERS",ISSYNC,@"ISSYNC", nil];
+}
 
 @end

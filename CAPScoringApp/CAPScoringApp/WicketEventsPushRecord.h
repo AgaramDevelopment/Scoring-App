@@ -22,7 +22,7 @@
 @property(nonatomic,strong)NSString *WICKETEVENT;
 @property(nonatomic,strong)NSString *ISSYNC;
 
-
+-(NSDictionary *)WicketEventsPushRecordDictionary;
 
 
 @end
