@@ -42,5 +42,5 @@
 @property(nonatomic,strong)NSString *MODIFIEDDATE;
 @property(nonatomic,strong)NSString *ISDEFAULTORLASTINSTANCE;
 @property(nonatomic,strong)NSString *ISSYNC;
-
+-(NSDictionary *)MatchRegistrationPushRecordDictionary;
 @end

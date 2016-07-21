@@ -69,7 +69,7 @@
 #import "EndSession.h"
 #import "EditModeVC.h"
 #import "PowerPlayVC.h"
-
+#import "MatchRegistrationPushRecord.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -94,7 +94,7 @@
     NSMutableArray * AppealUmpireSelectionArray;
     NSString*AppealUmpireSelectCode;
     AppealUmpireRecord *objAppealUmpireEventRecord;
-    
+    NSMutableArray * PushArray;
     //AppealBatsmen
     NSMutableArray *AppealBatsmenSelectionArray;
     NSArray*AppealBatsmenSelectCode;
@@ -12248,7 +12248,7 @@ self.lbl_umpirename.text=@"";
 }
 - (IBAction)SyncData_btn:(id)sender {
     
-    NSMutableArray*MatcRegistraionGetArray=[PushSyncDBMANAGER RetrieveMATCHREGISTRATIONData:_competitionCode :_matchCode];
+    NSMutableArray*MatchRegistrationGetArray=[PushSyncDBMANAGER RetrieveMATCHREGISTRATIONData:_competitionCode :_matchCode];
  
     NSMutableArray*MatchTeamplayerDetailsGetArray=[PushSyncDBMANAGER RetrieveMATCHTEAMPLAYERDETAILSData:_matchCode];
     
@@ -12295,8 +12295,8 @@ self.lbl_umpirename.text=@"";
     NSMutableArray*CapTransactionLogEntryGetArray= [PushSyncDBMANAGER RetrieveCAPTRANSACTIONSLOGENTRYData:_competitionCode :_matchCode];
     
     
-    NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
-   [PushDict setValue :MatcRegistraionGetArray forKey:@"MatcRegistraion"];
+       NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
+     [PushDict setValue :MatchRegistrationGetArray forKey:@"MatchRegistration"];
 
     [PushDict setValue:MatchTeamplayerDetailsGetArray forKey:@"MatchTeamplayerDetails"];
 
@@ -12341,14 +12341,14 @@ self.lbl_umpirename.text=@"";
     [PushDict setValue:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
     
 
-//
-//    
-  //  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:PushDict options:NSJSONWritingPrettyPrinted error:nil];
-//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    NSLog(@"JSON String: %@",jsonString);
+
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:PushDict options:kNilOptions error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"JSON String: %@",jsonString);
     
     NSData* responseData = nil;
-    NSString *urlString = @"http://192.168.1.39:8096/CAPMobilityService.svc/PUSHDATATOSERVER";
+    NSString *urlString = @"http://192.168.1.49:8092/CAPMobilityService.svc/PUSHDATATOSERVER";
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     responseData = [NSMutableData data] ;
     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
@@ -12357,24 +12357,16 @@ self.lbl_umpirename.text=@"";
     [request setHTTPMethod:@"POST"];
     NSData *req=[NSData dataWithBytes:[bodydata UTF8String] length:[bodydata length]];
     [request setHTTPBody:req];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [req length]] forHTTPHeaderField:@"Content-Length"];
+  
     NSURLResponse* response;
     NSError* error = nil;
-    responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-   
-    if (error) {
-        //...handle the error
-    }
-    else {
-       NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-       NSLog(@"the final output is:%@",responseString);
-    }
- 
+    responseData = [NSURLConnection sendSynchronousRequest:request     returningResponse:&response error:&error];
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     
-   
-    
-    
-    
-    
+    NSLog(@"the final output is:%@",responseString);
     
     
 }

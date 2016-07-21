@@ -31,5 +31,5 @@
 @property(nonatomic,strong)NSString *BOWLINGEND;
 @property(nonatomic,strong)NSString *issync;
 
-
+-(NSDictionary *)InningsEventPushRecordDictionary ;
 @end

@@ -17,5 +17,5 @@
 @property (nonatomic,strong) NSNumber * OVERSTATUS;
 @property (nonatomic,strong) NSString * ISSYNC;
 
-
+-(NSDictionary *)OVEREVENTSPushRecordDictionary;
 @end

@@ -27,4 +27,6 @@
 @property(nonatomic,strong)NSNumber *FOURS;
 @property(nonatomic,strong)NSNumber *SIXES;
 @property(nonatomic,strong)NSString *ISSYNC;
+
+-(NSDictionary *)BowlingSummeryPushRecordDictionary;
 @end

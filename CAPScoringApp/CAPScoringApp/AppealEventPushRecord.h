@@ -25,5 +25,5 @@
 @property(nonatomic,strong)NSString *TEAMCODE;
 @property(nonatomic,strong)NSNumber *INNINGSNO;
 @property(nonatomic,strong)NSString *ISSYNC;
-
+-(NSDictionary *)AppealEventPushRecordDictionary;
 @end

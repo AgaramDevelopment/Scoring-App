@@ -625,7 +625,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1707"
             endingLineNumber = "1707"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -658,22 +658,6 @@
             startingLineNumber = "138"
             endingLineNumber = "138"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "490628478.680994"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "12328"
-            endingLineNumber = "12328"
-            landmarkName = "-SyncData_btn:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

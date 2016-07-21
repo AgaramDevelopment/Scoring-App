@@ -19,4 +19,5 @@
 @property(nonatomic,strong)NSString *SCRIPTSTATUS;
 @property(nonatomic,strong)NSNumber *SEQNO;
 @property(nonatomic,strong)NSString *ISSYNC;
+-(NSDictionary *)CapTransactionslogentryPushRecordDictionary ;
 @end

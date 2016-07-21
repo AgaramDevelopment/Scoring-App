@@ -20,5 +20,5 @@
 @property(nonatomic,strong)NSString *PENALTYTYPECODE;
 @property(nonatomic,strong)NSString *PENALTYREASONCODE;
 @property(nonatomic,strong)NSString *ISSYNC;
-
+-(NSDictionary *)PenalityDetailsPushRecordDictionary;
 @end

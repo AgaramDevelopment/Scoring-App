@@ -18,5 +18,5 @@
 @property(nonatomic,strong) NSString *STARTTIME;
 @property(nonatomic,strong) NSString *ENDTIME;
 @property(nonatomic,strong) NSString *ISSYNC;
-
+-(NSDictionary *)BOWLEROVERDETAILSPushRecordDictionary;
 @end
