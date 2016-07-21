@@ -33,6 +33,7 @@
     NSString *OldTeamCode;
     NSString *OldInningsNo;
     NSString *ballNo;
+    NSString *MatchDate;
     
 }
 @end
@@ -52,7 +53,12 @@ BOOL IsBack;
     
 }
 -(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE{
+    
+
     if (fetchRecord !=0 ) {
+        
+       MatchDate = [DBManagerEndInnings GetMatchDateForFetchEndInnings : COMPETITIONCODE: MATCHCODE];
+        
         fetchSePageLoad = [[FetchSEPageLoadRecord alloc]init];
         
         CompetitionCode = COMPETITIONCODE;

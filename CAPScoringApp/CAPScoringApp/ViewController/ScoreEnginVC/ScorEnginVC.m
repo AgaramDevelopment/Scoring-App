@@ -69,6 +69,7 @@
 #import "EndSession.h"
 #import "EditModeVC.h"
 #import "PowerPlayVC.h"
+#import "MatchRegistrationPushRecord.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -1231,7 +1232,10 @@ EditModeVC * objEditModeVc;
     self.lbl_bowler_balls.text = fetchSEPageLoadRecord.currentBowlerMaidan;
     self.lbl_bowler_fours.text = fetchSEPageLoadRecord.currentBowlerRuns;
     self.lbl_bowler_sixs.text = fetchSEPageLoadRecord.currentBowlerWicket;
-    self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
+    self.lbl_bowler_strickrate.text = fetchSEPageLoadRecord.currentBowlerEcoRate;
+    
+        
+
     
     //team score details display
     _lbl_battingShrtName.text = fetchSEPageLoadRecord.BATTEAMSHORTNAME;
@@ -1255,14 +1259,16 @@ EditModeVC * objEditModeVc;
     
     
     //all innings details for team A and team B
+ 
     _lbl_teamAfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.SECONDINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSTOTAL,fetchSEPageLoadRecord.SECONDINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSWICKET];
     _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.SECONDINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.SECONDINNINGSOVERS];
     
     
-    
+
     
     _lbl_teamBfirstIngsScore.text = [NSString stringWithFormat:@"%@ / %@",fetchSEPageLoadRecord.FIRSTINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSTOTAL,fetchSEPageLoadRecord.FIRSTINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSWICKET];
     _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+    
     
     
     if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
@@ -2235,7 +2241,7 @@ EditModeVC * objEditModeVc;
          self.ballEventRecord.objWicketType :
          @"" :
          @"" :
-         @"" :
+         isWicketSelected == YES ? [NSNumber numberWithInt:1] : [NSNumber numberWithInt:0]:
          @"1" :
          self.ballEventRecord.objPenalty :
          self.ballEventRecord.objPenaltytypecode :
@@ -2412,19 +2418,19 @@ EditModeVC * objEditModeVc;
                     {
                         if([self.lbl_stricker_name.text isEqualToString:@""] )
                         {
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                             [altert show];
                             [alter setTag:2004];
                         }
                         else if ([self.lbl_nonstricker_name.text isEqualToString:@""])
                         {
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStriker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStriker " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                             [altert show];
                             [alter setTag:2005];
                         }
                         else if ([self.lbl_bowler_name.text isEqualToString:@""])
                         {
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Bowler " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Bowler " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                             [altert show];
                             [alter setTag:2006];
                         }
@@ -2454,19 +2460,19 @@ EditModeVC * objEditModeVc;
             
             if([self.lbl_stricker_name.text isEqualToString:@""] )
             {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [altert show];
                 [altert setTag:2007];
             }
             else if ([self.lbl_nonstricker_name.text isEqualToString:@""])
             {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStricker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStricker " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [altert show];
                 [altert setTag:2008];
             }
             else if ([self.lbl_bowler_name.text isEqualToString:@""])
             {
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Bowler " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Bowler " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [altert show];
                 [altert setTag:2009];
             }
@@ -3155,7 +3161,7 @@ EditModeVC * objEditModeVc;
                     }else{
                         overStatus = @"0";
                         
-                        [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code :[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode];
+                        [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code :[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode:fetchSEPageLoadRecord.currentBowlerPlayerCode];
                         
                     }
                 }
@@ -3173,19 +3179,19 @@ EditModeVC * objEditModeVc;
             else{
                 if([self.lbl_stricker_name.text isEqualToString:@""] ||self.lbl_stricker_name.text == nil)
                 {
-                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [altert show];
                     [altert setTag:1004];
                 }
                 else if ([self.lbl_nonstricker_name.text isEqualToString:@""])
                 {
-                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStriker " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStriker " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [altert show];
                     [altert setTag:1005];
                 }
                 else if ([self.lbl_bowler_name.text isEqualToString:@""])
                 {
-                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Bowler " delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Bowler " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [altert show];
                     [altert setTag:1006];
                 }
@@ -3204,7 +3210,7 @@ EditModeVC * objEditModeVc;
                                 [self.btn_StartBall sendActionsForControlEvents:UIControlEventTouchUpInside];
                             }
                             overStatus=@"1";
-                            [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code :[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode];
+                            [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code :[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode:fetchSEPageLoadRecord.currentBowlerPlayerCode];
                             [self reloadBowlerTeamBatsmanDetails];
 //                            if(![ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&[MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
 //                                
@@ -3306,18 +3312,20 @@ EditModeVC * objEditModeVc;
             else{
                 overStatus=@"0";
                 
-                [endInnings manageSeOverDetails: self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode:fetchSEPageLoadRecord.nonstrickerPlayerCode];
+                [endInnings manageSeOverDetails: self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode:fetchSEPageLoadRecord.nonstrickerPlayerCode:fetchSEPageLoadRecord.currentBowlerPlayerCode];
             }
         }
         else if(alertView.tag == 1007)
         {
+            
+           
             NSLog(@"dfjbgb");
             if([self.btn_StartBall.currentTitle isEqualToString:@"END BALL"])
             {
                 [self.btn_StartBall sendActionsForControlEvents:UIControlEventTouchUpInside];
             }
             overStatus=@"1";
-            [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode:fetchSEPageLoadRecord.nonstrickerPlayerCode];
+            [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode:fetchSEPageLoadRecord.nonstrickerPlayerCode : fetchSEPageLoadRecord.currentBowlerPlayerCode];
             [self reloadBowlerTeamBatsmanDetails];
             
             
@@ -3389,7 +3397,7 @@ EditModeVC * objEditModeVc;
             else{
                 overStatus=@"0";
                 
-                [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO:self.ballEventRecord:overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode:fetchSEPageLoadRecord.nonstrickerPlayerCode];
+                [endInnings manageSeOverDetails:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO:self.ballEventRecord:overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode:fetchSEPageLoadRecord.nonstrickerPlayerCode:fetchSEPageLoadRecord.currentBowlerPlayerCode];
                 
             }
             
@@ -8781,6 +8789,25 @@ self.lbl_umpirename.text=@"";
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
+    // team score color change based on innings wise
+    if ([fetchSEPageLoadRecord.INNINGSNO isEqualToString:@"1"] ) {
+        
+        self.lbl_teamAHeading.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        self.lbl_teamAfirstIngsScore.textColor=[UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        self.lbl_teamAfirstIngsOvs.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+
+        
+    }
+    
+    if ([fetchSEPageLoadRecord.INNINGSNO isEqualToString:@"2"] ) {
+        
+        self.lbl_teamBHeading.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        self.lbl_teamBfirstIngsScore.textColor=[UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        self.lbl_teamBfirstIngsOvs.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0) alpha:1.0f];
+        
+        
+    }
+    
     
     //Striker Details
     self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
@@ -12285,106 +12312,234 @@ self.lbl_umpirename.text=@"";
 - (IBAction)SyncData_btn:(id)sender {
     
     NSMutableArray*MatcRegistraionGetArray=[PushSyncDBMANAGER RetrieveMATCHREGISTRATIONData:_competitionCode :_matchCode];
- 
-    NSMutableArray*MatchTeamplayerDetailsGetArray=[PushSyncDBMANAGER RetrieveMATCHTEAMPLAYERDETAILSData:_matchCode];
     
-    NSMutableArray*MatchresultGetArray=[PushSyncDBMANAGER RetrieveMATCHRESULTData:_competitionCode :_matchCode];
+//    NSMutableArray*MatchTeamplayerDetailsGetArray=[PushSyncDBMANAGER RetrieveMATCHTEAMPLAYERDETAILSData:_matchCode];
+//    
+//    NSMutableArray*MatchresultGetArray=[PushSyncDBMANAGER RetrieveMATCHRESULTData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*MatchEventGetArray=[PushSyncDBMANAGER RetrieveMATCHEVENTSData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*InningsSummeryGetArray= [PushSyncDBMANAGER RetrieveINNINGSSUMMARYData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*InningsEventGetArray= [PushSyncDBMANAGER RetrieveINNINGSEVENTSData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*InningsBreakEventGetArray= [PushSyncDBMANAGER RetrieveIINNINGSBREAKEVENTSData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*BallEventGetArray= [PushSyncDBMANAGER RetrieveBALLEVENTSData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*BattingSummeryGetArray= [PushSyncDBMANAGER RetrieveBATTINGSUMMARYData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*OverEventGetArray= [PushSyncDBMANAGER RetrieveOVEREVENTSData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*BowlingSummeryGetArray= [PushSyncDBMANAGER RetrieveBOWLINGSUMMARYData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*BowlingMaidenSummeryGetArray= [PushSyncDBMANAGER RetrieveBOWLINGMAIDENSUMMARYData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*BowlingOverDetailsGetArray= [PushSyncDBMANAGER RetrieveBOWLEROVERDETAILSData:_competitionCode :_matchCode];
+//    
+//    
+//    NSMutableArray*FieldingEventGetArray= [PushSyncDBMANAGER RetrieveFIELDINGEVENTSData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*DayEventGetArray= [PushSyncDBMANAGER RetrieveDAYEVENTSData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*SessionEventGetArray= [PushSyncDBMANAGER RetrieveSESSIONEVENTSData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*AppealEventGetArray= [PushSyncDBMANAGER RetrieveAPPEALEVENTSData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*WicketEventGetArray= [PushSyncDBMANAGER RetrieveWICKETEVENTSData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*PowerPlayGetArray= [PushSyncDBMANAGER RetrievePOWERPLAYData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*PlayerInOutTimeGetArray= [PushSyncDBMANAGER RetrievePLAYERINOUTTIMEData:_competitionCode :_matchCode];
+//    
+//    
+//    NSMutableArray*PenalitydetailsGetArray= [PushSyncDBMANAGER RetrievePENALTYDETAILSData:_competitionCode :_matchCode];
+//    
+//    NSMutableArray*CapTransactionLogEntryGetArray= [PushSyncDBMANAGER RetrieveCAPTRANSACTIONSLOGENTRYData:_competitionCode :_matchCode];
     
-    NSMutableArray*MatchEventGetArray=[PushSyncDBMANAGER RetrieveMATCHEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*InningsSummeryGetArray= [PushSyncDBMANAGER RetrieveINNINGSSUMMARYData:_competitionCode :_matchCode];
-    
-    NSMutableArray*InningsEventGetArray= [PushSyncDBMANAGER RetrieveINNINGSEVENTSData:_competitionCode :_matchCode];
-    
-    NSMutableArray*InningsBreakEventGetArray= [PushSyncDBMANAGER RetrieveIINNINGSBREAKEVENTSData:_competitionCode :_matchCode];
-    
-    NSMutableArray*BallEventGetArray= [PushSyncDBMANAGER RetrieveBALLEVENTSData:_competitionCode :_matchCode];
-    
-    NSMutableArray*BattingSummeryGetArray= [PushSyncDBMANAGER RetrieveBATTINGSUMMARYData:_competitionCode :_matchCode];
-    
-    NSMutableArray*OverEventGetArray= [PushSyncDBMANAGER RetrieveOVEREVENTSData:_competitionCode :_matchCode];
-    
-    NSMutableArray*BowlingSummeryGetArray= [PushSyncDBMANAGER RetrieveBOWLINGSUMMARYData:_competitionCode :_matchCode];
-    
-    NSMutableArray*BowlingMaidenSummeryGetArray= [PushSyncDBMANAGER RetrieveBOWLINGMAIDENSUMMARYData:_competitionCode :_matchCode];
-    
-    NSMutableArray*BowlingOverDetailsGetArray= [PushSyncDBMANAGER RetrieveBOWLEROVERDETAILSData:_competitionCode :_matchCode];
+    //    NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
+    //   [PushDict setValue :MatcRegistraionGetArray forKey:@"MatcRegistraion"];
     
     
-    NSMutableArray*FieldingEventGetArray= [PushSyncDBMANAGER RetrieveFIELDINGEVENTSData:_competitionCode :_matchCode];
+    //    [PushDict setValue:MatchTeamplayerDetailsGetArray forKey:@"MatchTeamplayerDetails"];
+    //
+    //     [PushDict setValue:MatchresultGetArray forKey:@"Matchresult"];
+    //
+    //     [PushDict setValue:MatchEventGetArray forKey:@"MatchEvent"];
+    //
+    //     [PushDict setValue:InningsSummeryGetArray forKey:@"InningsSummery"];
+    //
+    //     [PushDict setValue:InningsEventGetArray forKey:@"InningsEvent"];
+    //
+    //     [PushDict setValue:InningsBreakEventGetArray forKey:@"InningsBreakEvent"];
+    //
+    //     [PushDict setValue:BallEventGetArray forKey:@"BallEvent"];
+    //
+    //     [PushDict setValue:BattingSummeryGetArray forKey:@"BattingSummery"];
+    //
+    //     [PushDict setValue:OverEventGetArray forKey:@"OverEvent"];
+    //
+    //     [PushDict setValue:BowlingSummeryGetArray forKey:@"BowlingSummery"];
+    //
+    //     [PushDict setValue:BowlingMaidenSummeryGetArray forKey:@"BowlingMaidenSummery"];
+    //
+    //     [PushDict setValue:BowlingOverDetailsGetArray forKey:@"BowlingOverDetails"];
+    //
+    //     [PushDict setValue:FieldingEventGetArray forKey:@"FieldingEvent"];
+    //
+    //     [PushDict setValue:DayEventGetArray forKey:@"DayEvent"];
+    //
+    //     [PushDict setValue:SessionEventGetArray forKey:@"SessionEvent"];
+    //
+    //    [PushDict setValue:AppealEventGetArray forKey:@"AppealEvent"];
+    //
+    //    [PushDict setValue:WicketEventGetArray forKey:@"WicketEvent"];
+    //
+    //    [PushDict setValue:PowerPlayGetArray forKey:@"PowerPlay"];
+    //
+    //    [PushDict setValue:PlayerInOutTimeGetArray forKey:@"PlayerInOutTime"];
+    //
+    //    [PushDict setValue:PenalitydetailsGetArray forKey:@"Penalitydetails"];
+    //
+    //    [PushDict setValue:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
+    //
     
-    NSMutableArray*DayEventGetArray= [PushSyncDBMANAGER RetrieveDAYEVENTSData:_competitionCode :_matchCode];
+    //
+    //
+    NSMutableArray* PushArray=[[NSMutableArray alloc]init];
+    for (int i=0; i<[MatcRegistraionGetArray count]; i++) {
+        NSMutableDictionary *DictForPush=[[NSMutableDictionary alloc]init];
+        NSString *str1=[NSString stringWithFormat:@"MATCHCODE",i];
+        NSString *str2=[NSString stringWithFormat:@"MATCHNAME",i];
+        NSString *str3=[NSString stringWithFormat:@"COMPETITIONCODE",i];
+        NSString *str4=[NSString stringWithFormat:@"MATCHOVERS",i];
+        NSString *str5=[NSString stringWithFormat:@"MATCHOVERCOMMENTS",i];
+        NSString *str6=[NSString stringWithFormat:@"MATCHDATE",i];
+        NSString *str7=[NSString stringWithFormat:@"ISDAYNIGHT",i];
+        NSString *str8=[NSString stringWithFormat:@"ISNEUTRALVENUE",i];
+        NSString *str9=[NSString stringWithFormat:@"GROUNDCODE",i];
+        NSString *str10=[NSString stringWithFormat:@"TEAMACODE",i];
+        NSString *str11=[NSString stringWithFormat:@"TEAMBCODE",i];
+        NSString *str12=[NSString stringWithFormat:@"TEAMACAPTAIN",i];
+        NSString *str13=[NSString stringWithFormat:@"TEAMAWICKETKEEPER",i];
+        NSString *str14=[NSString stringWithFormat:@"TEAMBCAPTAIN",i];
+        NSString *str15=[NSString stringWithFormat:@"TEAMBWICKETKEEPER",i];
+        NSString *str16=[NSString stringWithFormat:@"UMPIRE1CODE",i];
+        NSString *str17=[NSString stringWithFormat:@"UMPIRE2CODE",i];
+        NSString *str18=[NSString stringWithFormat:@"UMPIRE3CODE",i];
+        NSString *str19=[NSString stringWithFormat:@"MATCHREFEREECODE",i];
+        NSString *str20=[NSString stringWithFormat:@"MATCHRESULT",i];
+        NSString *str21=[NSString stringWithFormat:@"MATCHRESULTTEAMCODE",i];
+        NSString *str22=[NSString stringWithFormat:@"TEAMAPOINTS",i];
+        NSString *str23=[NSString stringWithFormat:@"TEAMBPOINTS",i];
+        NSString *str24=[NSString stringWithFormat:@"MATCHSTATUS",i];
+        NSString *str25=[NSString stringWithFormat:@"RECORDSTATUS",i];
+        NSString *str26=[NSString stringWithFormat:@"CREATEDBY",i];
+        NSString *str27=[NSString stringWithFormat:@"CREATEDDATE",i];
+        NSString *str28=[NSString stringWithFormat:@"MODIFIEDBY",i];
+        NSString *str29=[NSString stringWithFormat:@"MODIFIEDDATE",i];
+        NSString *str30=[NSString stringWithFormat:@"ISDEFAULTORLASTINSTANCE",i];
+        NSString *str31=[NSString stringWithFormat:@"ISSYNC",i];
+        
+        MatchRegistrationPushRecord *objMatchregitrationrecord=[MatcRegistraionGetArray objectAtIndex:i];
+        [DictForPush setObject:objMatchregitrationrecord.MATCHCODE forKey:str1];
+        [DictForPush setObject:objMatchregitrationrecord.MATCHNAME forKey:str2];
+        [DictForPush setObject:objMatchregitrationrecord.COMPETITIONCODE forKey:str3];
+        [DictForPush setObject:objMatchregitrationrecord.MATCHOVERS forKey:str4];
+        [DictForPush setObject:objMatchregitrationrecord.MATCHOVERCOMMENTS forKey:str5];
+        [DictForPush setObject:objMatchregitrationrecord.MATCHDATE forKey:str6];
+        [DictForPush setObject:objMatchregitrationrecord.ISDAYNIGHT forKey:str7];
+        [DictForPush setObject:objMatchregitrationrecord.ISNEUTRALVENUE forKey:str8];
+        [DictForPush setObject:objMatchregitrationrecord.GROUNDCODE forKey:str9];
+        [DictForPush setObject:objMatchregitrationrecord.TEAMACODE forKey:str10];
+        [DictForPush setObject:objMatchregitrationrecord.TEAMBCODE forKey:str11];
+        [DictForPush setObject:objMatchregitrationrecord.TEAMACAPTAIN forKey:str12];
+        [DictForPush setObject:objMatchregitrationrecord.TEAMAWICKETKEEPER forKey:str13];
+        [DictForPush setObject:objMatchregitrationrecord.TEAMBCAPTAIN forKey:str14];
+        [DictForPush setObject:objMatchregitrationrecord.TEAMBWICKETKEEPER forKey:str15];
+        [DictForPush setObject:objMatchregitrationrecord.UMPIRE1CODE forKey:str16];
+        [DictForPush setObject:objMatchregitrationrecord.UMPIRE2CODE forKey:str17];
+        [DictForPush setObject:objMatchregitrationrecord.UMPIRE3CODE forKey:str18];
+        [DictForPush setObject:objMatchregitrationrecord.MATCHREFEREECODE forKey:str19];
+        [DictForPush setObject:objMatchregitrationrecord.MATCHRESULT forKey:str20];
+        [DictForPush setObject:objMatchregitrationrecord.MATCHRESULTTEAMCODE forKey:str21];
+        [DictForPush setObject:objMatchregitrationrecord.TEAMAPOINTS forKey:str22];
+        [DictForPush setObject:objMatchregitrationrecord.TEAMBPOINTS forKey:str23];
+        [DictForPush setObject:objMatchregitrationrecord.MATCHSTATUS forKey:str24];
+        [DictForPush setObject:objMatchregitrationrecord.RECORDSTATUS forKey:str25];
+        [DictForPush setObject:objMatchregitrationrecord.CREATEDBY forKey:str26];
+        [DictForPush setObject:objMatchregitrationrecord.CREATEDDATE forKey:str27];
+        [DictForPush setObject:objMatchregitrationrecord.MODIFIEDBY forKey:str28];
+        [DictForPush setObject:objMatchregitrationrecord.MODIFIEDDATE forKey:str29];
+        [DictForPush setObject:objMatchregitrationrecord.ISDEFAULTORLASTINSTANCE forKey:str30];
+        [DictForPush setObject:objMatchregitrationrecord.ISSYNC forKey:str31];
+        [PushArray addObject:DictForPush];
+    }
     
-    NSMutableArray*SessionEventGetArray= [PushSyncDBMANAGER RetrieveSESSIONEVENTSData:_competitionCode :_matchCode];
-    
-    NSMutableArray*AppealEventGetArray= [PushSyncDBMANAGER RetrieveAPPEALEVENTSData:_competitionCode :_matchCode];
-
-    NSMutableArray*WicketEventGetArray= [PushSyncDBMANAGER RetrieveWICKETEVENTSData:_competitionCode :_matchCode];
-    
-    NSMutableArray*PowerPlayGetArray= [PushSyncDBMANAGER RetrievePOWERPLAYData:_competitionCode :_matchCode];
-    
-    NSMutableArray*PlayerInOutTimeGetArray= [PushSyncDBMANAGER RetrievePLAYERINOUTTIMEData:_competitionCode :_matchCode];
-    
-    
-    NSMutableArray*PenalitydetailsGetArray= [PushSyncDBMANAGER RetrievePENALTYDETAILSData:_competitionCode :_matchCode];
-    
-    NSMutableArray*CapTransactionLogEntryGetArray= [PushSyncDBMANAGER RetrieveCAPTRANSACTIONSLOGENTRYData:_competitionCode :_matchCode];
     
     
     NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
-   [PushDict setValue :MatcRegistraionGetArray forKey:@"MatcRegistraion"];
-
-    [PushDict setValue:MatchTeamplayerDetailsGetArray forKey:@"MatchTeamplayerDetails"];
-
-     [PushDict setValue:MatchresultGetArray forKey:@"Matchresult"];
-
-     [PushDict setValue:MatchEventGetArray forKey:@"MatchEvent"];
-
-     [PushDict setValue:InningsSummeryGetArray forKey:@"InningsSummery"];
-
-     [PushDict setValue:InningsEventGetArray forKey:@"InningsEvent"];
-
-     [PushDict setValue:InningsBreakEventGetArray forKey:@"InningsBreakEvent"];
-
-     [PushDict setValue:BallEventGetArray forKey:@"BallEvent"];
-
-     [PushDict setValue:BattingSummeryGetArray forKey:@"BattingSummery"];
-
-     [PushDict setValue:OverEventGetArray forKey:@"OverEvent"];
-
-     [PushDict setValue:BowlingSummeryGetArray forKey:@"BowlingSummery"];
-
-     [PushDict setValue:BowlingMaidenSummeryGetArray forKey:@"BowlingMaidenSummery"];
-
-     [PushDict setValue:BowlingOverDetailsGetArray forKey:@"BowlingOverDetails"];
-
-     [PushDict setValue:FieldingEventGetArray forKey:@"FieldingEvent"];
-
-     [PushDict setValue:DayEventGetArray forKey:@"DayEvent"];
-
-     [PushDict setValue:SessionEventGetArray forKey:@"SessionEvent"];
-
-    [PushDict setValue:AppealEventGetArray forKey:@"AppealEvent"];
-
-    [PushDict setValue:WicketEventGetArray forKey:@"WicketEvent"];
-
-    [PushDict setValue:PowerPlayGetArray forKey:@"PowerPlay"];
-
-    [PushDict setValue:PlayerInOutTimeGetArray forKey:@"PlayerInOutTime"];
-
-    [PushDict setValue:PenalitydetailsGetArray forKey:@"Penalitydetails"];
-
-    [PushDict setValue:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
+    [PushDict setValue :PushArray forKey:@"MatcRegistraion"];
     
-
-//
-//    
-  //  NSData *jsonData = [NSJSONSerialization dataWithJSONObject:PushDict options:NSJSONWritingPrettyPrinted error:nil];
-//    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-//    NSLog(@"JSON String: %@",jsonString);
+    
+    //    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:DictForPush options:NSJSONWritingPrettyPrinted error:nil];
+    ////    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    ////    NSLog(@"JSON String: %@",jsonString);
+    //
+    //    NSData* responseData = nil;
+    //    NSString *urlString = @"http://192.168.1.49:8092/CAPMobilityService.svc/PUSHDATATOSERVER";
+    //    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    //    responseData = [NSMutableData data] ;
+    //    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
+    //    NSString *bodydata=[NSString stringWithFormat:@"%@",DictForPush];
+    //
+    //    [request setHTTPMethod:@"POST"];
+    //    NSData *req=[NSData dataWithBytes:[bodydata UTF8String] length:[bodydata length]];
+    //    [request setHTTPBody:req];
+    //    NSURLResponse* response;
+    //    NSError* error = nil;
+    //    responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    //
+    //    if (error) {
+    //        //...handle the error
+    //    }
+    //    else {
+    //       NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    //       NSLog(@"the final output is:%@",responseString);
+    //    }
+    //
+    //
+    //
+    //    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:DictForPush options:kNilOptions error:nil];
+    //    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    //    NSLog(@"JSON String: %@",jsonString);
+    //
+    //
+    //    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://192.168.1.49:8092/CAPMobilityService.svc/PUSHDATATOSERVER"]];
+    //    [request setValue:jsonString forHTTPHeaderField:@"json"];
+    //    [request setHTTPMethod:@"POST"];
+    //    [request setHTTPBody:jsonData];
+    //
+    //    NSError *errorReturned = nil;
+    //    NSURLResponse *theResponse =[[NSURLResponse alloc]init];
+    //    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&theResponse error:&errorReturned];
+    //    if (errorReturned) {
+    //        //...handle the error
+    //    }
+    //    else {
+    //        NSMutableString *retVal = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    //        //...do something with the returned value
+    //
+    //           }
+    
+    
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:PushDict options:kNilOptions error:nil];
+    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    NSLog(@"JSON String: %@",jsonString);
     
     NSData* responseData = nil;
-    NSString *urlString = @"http://192.168.1.39:8096/CAPMobilityService.svc/PUSHDATATOSERVER";
+    NSString *urlString = @"http://192.168.1.49:8092/CAPMobilityService.svc/PUSHDATATOSERVER";
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     responseData = [NSMutableData data] ;
     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
@@ -12393,26 +12548,16 @@ self.lbl_umpirename.text=@"";
     [request setHTTPMethod:@"POST"];
     NSData *req=[NSData dataWithBytes:[bodydata UTF8String] length:[bodydata length]];
     [request setHTTPBody:req];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+    [request setValue:[NSString stringWithFormat:@"%d", [req length]] forHTTPHeaderField:@"Content-Length"];
+    
     NSURLResponse* response;
     NSError* error = nil;
-    responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-   
-    if (error) {
-        //...handle the error
-    }
-    else {
-       NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-       NSLog(@"the final output is:%@",responseString);
-    }
- 
+    responseData = [NSURLConnection sendSynchronousRequest:request     returningResponse:&response error:&error];
+    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     
-   
-    
-    
-    
-    
-    
-    
+    NSLog(@"the final output is:%@",responseString);
 }
 - (IBAction)Exit_btn:(id)sender {
     

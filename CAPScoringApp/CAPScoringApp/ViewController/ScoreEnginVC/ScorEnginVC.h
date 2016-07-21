@@ -276,6 +276,8 @@
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsScore;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsOvs;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_runs_required;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_teamAHeading;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_teamBHeading;
 
 @property (weak, nonatomic) IBOutlet UILabel *lbl_target;
 @property (strong,nonatomic)UIView *objcommonRemarkview;
