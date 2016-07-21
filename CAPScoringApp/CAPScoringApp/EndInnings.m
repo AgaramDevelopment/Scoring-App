@@ -317,7 +317,7 @@ EndInningsVC *save;
                         
                         //[SP_MANAGESEOVERDETAILS]
                         
-                        [self manageSeOverDetails:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :objBallEventRecord :OVERSTATUS :UMPIRE1CODE :UMPIRE2CODE: OVERNO:@"":@""];
+                        [self manageSeOverDetails:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :objBallEventRecord :OVERSTATUS :UMPIRE1CODE :UMPIRE2CODE: OVERNO:@"":@"":@""];
                         
                         
                         
@@ -475,7 +475,7 @@ EndInningsVC *save;
 //SP_MANAGESEOVERDETAILS---------------------------------------------------------
 
 
--(void)manageSeOverDetails:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO :(NSObject *) balleventRecord:(NSString *) OverStatus :(NSString *)umpire1code :(NSString *) umpire2code:(NSString *) overNo:(NSString *) strickerCode:(NSString *) nonStrickerCode
+-(void)manageSeOverDetails:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO :(NSObject *) balleventRecord:(NSString *) OverStatus :(NSString *)umpire1code :(NSString *) umpire2code:(NSString *) overNo:(NSString *) strickerCode:(NSString *) nonStrickerCode : (NSString*) BowlerCode
 
 
 {
@@ -518,7 +518,7 @@ EndInningsVC *save;
                 BALLCODE = [DBManagerInsertScoreEngine GetMaxIdForInsertScoreEngine:MATCHCODE];
                 
                 
-                [DBManagerEndInnings  InsertBallEventsFormanageOverDetails :BALLCODE: COMPETITIONCODE: MATCHCODE:TEAMCODE: INNINGSNO : objBallEventRecord.objDayno:overNo :[NSString stringWithFormat:@"%d",objBallEventRecord.objOverBallcount]:objBallEventRecord.objSessionno:objBallEventRecord.objStrikercode:objBallEventRecord.objNonstrikercode :objBallEventRecord.objBowlercode:objBallEventRecord.objWicketkeepercode:umpire1code:umpire2code:@"":@""];
+            [DBManagerEndInnings  InsertBallEventsFormanageOverDetails : BALLCODE: COMPETITIONCODE: MATCHCODE:TEAMCODE: INNINGSNO : objBallEventRecord.objDayno:overNo :[NSString stringWithFormat:@"%d",ballNo]:objBallEventRecord.objSessionno:strickerCode:nonStrickerCode :BowlerCode:objBallEventRecord.objBowlercode:objBallEventRecord.objWicketkeepercode:umpire1code:umpire2code:@""];
                 
                 
                 //EXEC SP_INSERTSCOREBOARD
@@ -620,6 +620,7 @@ EndInningsVC *save;
     
     
     
+   
     
     ISWKTDTLSUPDATE = [NSNumber numberWithInt:1];
     ISBOWLERCHANGED = [NSNumber numberWithInt:0];
@@ -1004,7 +1005,7 @@ EndInningsVC *save;
     N_BOWLERMAIDENS =  O_BOWLERMAIDENS;
     
     
-    
+ 
     int bowlRuns = (BYES.intValue == 0 && LEGBYES.intValue == 0) ? (O_BOWLERRUNS.intValue + RUNS.intValue + WIDE.intValue + NOBALL.intValue + (WIDE.intValue > 0 ? 0 : OVERTHROW.intValue)) : (O_BOWLERRUNS.intValue + WIDE.intValue + NOBALL.intValue);
     
     N_BOWLERRUNS = [NSNumber numberWithInt: bowlRuns];
