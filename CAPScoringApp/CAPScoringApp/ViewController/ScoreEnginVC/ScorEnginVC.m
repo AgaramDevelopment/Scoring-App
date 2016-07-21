@@ -655,6 +655,9 @@ EditModeVC * objEditModeVc;
         
         
     }
+    
+   
+    
     // GetSEAppealDetailsForAppealEvents
     //Penalty
     //GetSEPenaltyDetailsForPenaltyEvents
@@ -680,8 +683,20 @@ EditModeVC * objEditModeVc;
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     
     
+    //Umpire
+    
+    if(fetchSeBallCodeDetails.GetMatchUmpireDetailsArray.count>0){
+        GetSEUmpireDetailsForBallEvents *record = [fetchSeBallCodeDetails.GetMatchUmpireDetailsArray objectAtIndex:0 ];
+        fetchSEPageLoadRecord.UMPIRE1CODE = record.UMPIRE1CODE;
+        fetchSEPageLoadRecord.UMPIRE1NAME = record.UMPIRE1NAME;
+        fetchSEPageLoadRecord.UMPIRE2CODE = record.UMPIRE2CODE;
+        fetchSEPageLoadRecord.UMPIRE2NAME = record.UMPIRE2NAME;
+    }
+    
+    
     //MatchType
     fetchSEPageLoadRecord.MATCHTYPE = fetchSeBallCodeDetails.MATCHTYPE;
+    
     
     //Batting and bowling players
     fetchSEPageLoadRecord.getBattingTeamPlayers = fetchSeBallCodeDetails.GetBattingTeamPlayersArray;
@@ -702,6 +717,7 @@ EditModeVC * objEditModeVc;
         fetchSEPageLoadRecord.strickerStrickRate = record.STRIKERATE;
         fetchSEPageLoadRecord.strickerFours = record.FOURS;
         fetchSEPageLoadRecord.strickerPlayerCode = record.PLAYERCODE;
+        fetchSEPageLoadRecord.strickerBattingStyle = record.BATTINGSTYLE;
         
     }
     
@@ -6813,7 +6829,7 @@ self.lbl_umpirename.text=@"";
                 
                 }
             
-        } else{
+        }else{
             self.WicketEventArray=[[NSMutableArray alloc]initWithObjects:@"Tough",@"Medium",@"Easy", nil];
             
             [self disableButtonBg:self.btn_B6];
@@ -6883,6 +6899,24 @@ self.lbl_umpirename.text=@"";
             _PlayerlistArray=[[NSMutableArray alloc]init];
             // _PlayerlistArray =[DBManager RetrievePlayerData:self.ma];
             _PlayerlistArray=[DBManager RetrievePlayerData:self.matchCode :fetchSEPageLoadRecord.BOWLINGTEAMCODE];
+            if([selectedwickettype.metasubcode isEqualToString:@"MSC095"]){ // Remove current bowler from list
+                int  index = 0;
+                int selectedindex = -1;
+
+                for (BowlerEvent *record in _PlayerlistArray)
+                {
+                    bool chk = ([[record BowlerCode] isEqualToString:fetchSEPageLoadRecord.currentBowlerPlayerCode]);
+                if (chk)
+                {
+                    selectedindex = index;
+                    break;
+                }
+                index ++;
+            }
+                if(selectedindex !=-1){
+                    [_PlayerlistArray removeObjectAtIndex:index];
+                }
+            }
             
             isWicketSelected = YES;
             wicketOption = 4;
