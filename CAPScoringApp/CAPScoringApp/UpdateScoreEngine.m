@@ -630,7 +630,8 @@ EndInnings *insertScoreBoard;
     
     
     
-    ISBOWLERCHANGED = (BOWLERCODE != F_BOWLERCODE) ? @1 : @0;
+    ISBOWLERCHANGED = (![BOWLERCODE isEqualToString: F_BOWLERCODE]) ? @1 : @0;
+    
     
     
     if([ISDELETE  isEqual: @1])
@@ -665,16 +666,10 @@ EndInnings *insertScoreBoard;
     }
 
     
-    
-//    
-//    SET @U_BOWLERRUNS = CASE WHEN (@F_BYES = 0 AND @F_LEGBYES = 0)
-//    THEN (@F_BOWLERRUNS - (@F_RUNS + @F_WIDE + @F_NOBALL + (CASE WHEN @F_WIDE > 0 THEN 0 ELSE @F_OVERTHROW END)))
-//    ELSE (@F_BOWLERRUNS - (@F_WIDE + @F_NOBALL))
-    
-    
+
     U_BOWLERRUNS = [NSNumber numberWithInt: ((F_BYES.intValue == 0) && (F_LEGBYES.intValue == 0))? (F_BOWLERRUNS.intValue - (F_RUNS.intValue + F_WIDE.intValue + F_NOBALL.intValue + (F_WIDE.intValue > 0 ? 0 : F_OVERTHROW.intValue ))): (F_BOWLERRUNS.intValue - (F_WIDE.intValue +F_NOBALL.intValue))];
                                                          
-                                                         
+    
     
     U_BOWLERWICKETS = (F_ISWICKETCOUNTABLE.intValue == 1) ? ([NSNumber numberWithInt:F_BOWLERWICKETS.intValue - 1]) : F_BOWLERWICKETS;
     U_BOWLERNOBALLS = ( F_NOBALL.intValue == 1) ? ([NSNumber numberWithInt:F_BOWLERNOBALLS.intValue - 1]) : F_BOWLERNOBALLS ;
@@ -684,19 +679,24 @@ EndInnings *insertScoreBoard;
     U_BOWLERSIXES = (F_ISSIX.intValue == 1 && F_WIDE.intValue == 0 && F_BYES.intValue == 0 && F_LEGBYES.intValue == 0) ? [NSNumber numberWithInt:F_BOWLERSIXES.intValue - 1] : F_BOWLERSIXES;
     
  
-    ISMAIDENOVER = [NSNumber numberWithInt:0];
+   
     
-  
+    NSString *bCount = [DBManagerEndBall BALLCOUNTUPSC : COMPETITIONCODE:MATCHCODE:INNINGSNO:[NSString stringWithFormat:@"%@",F_OVERS]];
     
-    if( [DBManagerEndBall BALLCOUNTUPSC : COMPETITIONCODE:MATCHCODE:INNINGSNO:[NSString stringWithFormat:@"%@",F_OVERS]] > 5)
+    NSNumber *ballCount = [NSNumber numberWithInt:bCount.intValue];
+    
+     ISMAIDENOVER = [NSNumber numberWithInt:0];
+    
+    if( ballCount.intValue  > 5)
     
     {
+        
         ISMAIDENOVER = [DBManagerEndBall SMAIDENOVER : COMPETITIONCODE:MATCHCODE:INNINGSNO:[NSString stringWithFormat:@"%@",F_OVERS]:BALLCODE];
         
-    
-    ISMAIDENOVER = (RUNS.intValue + (BYES.intValue == 0)  && (LEGBYES.intValue == 0)) ? OVERTHROW : 0; + (WIDE.intValue + NOBALL.intValue) > 0 ? 0 : ISMAIDENOVER ;
-        
-    ISMAIDENOVER = ( BOWLERCOUNT.intValue > 1 || ISBOWLERCHANGED.intValue == 1) ? 0 : ISMAIDENOVER ;
+        ISMAIDENOVER = [NSNumber numberWithInt:(RUNS.intValue + (BYES.intValue == 0 && LEGBYES.intValue == 0 ? OVERTHROW.intValue : 0) + WIDE.intValue + NOBALL.intValue) > 0 ? 0 : ISMAIDENOVER.intValue];
+
+        ISMAIDENOVER =  [NSNumber numberWithInt:BOWLERCOUNT.intValue > 1 || ISBOWLERCHANGED.intValue == 1 ? 0 : ISMAIDENOVER.intValue];
+  
         
     }
     

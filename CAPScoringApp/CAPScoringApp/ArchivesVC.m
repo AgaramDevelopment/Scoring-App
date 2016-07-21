@@ -42,7 +42,7 @@ NSArray *MuliteDayMatchtype;
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
     
-    FetchCompitionArray =[DBManager ArchivesFixturesData:self.CompitionCode:userCode];
+    FetchCompitionArray =[DBManager ArchivesFixturesData :self.CompitionCode:userCode];
     [self customnavigationmethod];
 }
 -(void)customnavigationmethod

@@ -461,7 +461,7 @@ EndInningsVC *save;
         
     }else{
         
-        OVERBALLNO = [NSString stringWithFormat:@"%@ . %@", OVERNO ,BALLNO];
+        OVERBALLNO = [NSString stringWithFormat:@"%@.%@", OVERNO ,BALLNO];
         
     }
     

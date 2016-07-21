@@ -90,14 +90,14 @@ BOOL IsBack;
         endInningsArray = [DBManagerEndInnings FetchEndInningsDetailsForFetchEndInnings: MATCHCODE];
         
         
-        //self.view_allControls.hidden = YES;
+        self.view_allControls.hidden = YES;
         
         [innings fetchEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO];
         
         self.lbl_teamName.text = innings.TEAMNAME;
         self.lbl_runScored.text = [NSString stringWithFormat:@"%@", innings.TOTALRUNS];
         
-        self.lbl_overPlayed.text = [NSString stringWithFormat:@"%@.%@" ,innings.OVERNO,innings.BALLNO];
+        self.lbl_overPlayed.text = innings.OVERBALLNO;
         
         self.lbl_wktLost.text = innings.WICKETS;
         self.lbl_innings.text = fetchSePageLoad.INNINGSNO;
@@ -281,6 +281,7 @@ BOOL IsBack;
     self.view_allControls.hidden = NO;
     self.tbl_endInnings.hidden = YES;
     self.view_Header.hidden = YES;
+    
     [self.btn_save setTitle: @"SAVE" forState: UIControlStateNormal];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
