@@ -7000,7 +7000,7 @@ self.lbl_umpirename.text=@"";
         self.view_fastBowl.hidden = NO;
         
         [self.tbl_fastBowl reloadData];
-        
+      
         if(selectedfieldPlayer!=nil){
             
             int indx=0;
