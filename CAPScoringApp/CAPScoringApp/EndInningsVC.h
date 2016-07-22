@@ -79,6 +79,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *btn_save;
 @property (weak, nonatomic) IBOutlet UIButton *btn_delete;
 
+@property (weak, nonatomic) IBOutlet UIView *view_addInnings;
+
+
 - (IBAction)btn_back:(id)sender;
 
 - (IBAction)btn_delete:(id)sender;
