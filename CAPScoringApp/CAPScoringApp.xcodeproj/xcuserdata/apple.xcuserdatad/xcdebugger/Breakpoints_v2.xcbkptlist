@@ -255,7 +255,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "11938"
             endingLineNumber = "11938"
-            landmarkName = "-btn_submit:"
+            landmarkName = "-didClickWagonWheelmapTapAction:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -415,7 +415,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "7844"
             endingLineNumber = "7844"
-            landmarkName = "-ENDDAY"
+            landmarkName = "-ChangeTeam"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -431,23 +431,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "7891"
             endingLineNumber = "7891"
-            landmarkName = "-ENDSession"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "490621266.413088"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "7560"
-            endingLineNumber = "7560"
-            landmarkName = "-tableView:didDeselectRowAtIndexPath:"
+            landmarkName = "-ENDDAY"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -527,7 +511,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12299"
             endingLineNumber = "12299"
-            landmarkName = "-SyncData_btn:"
+            landmarkName = "-RedirectScorEngin"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -639,40 +623,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "8316"
             endingLineNumber = "8316"
-            landmarkName = "-revisiedTarget"
+            landmarkName = "-PowerPlay"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ScorEnginVC revisiedTarget]"
-                  moduleName = "CAPScoringApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/new/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "490804791.999074"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "8318"
-                  endingLineNumber = "8318"
-                  offsetFromSymbolStart = "1877">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ScorEnginVC revisiedTarget]"
-                  moduleName = "CAPScoringApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/apple/Documents/new/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "490804791.999231"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "8318"
-                  endingLineNumber = "8318"
-                  offsetFromSymbolStart = "1891">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -687,7 +639,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2487"
             endingLineNumber = "2487"
-            landmarkName = "-insertBallDetails::"
+            landmarkName = "-EndBallMethod"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -489,8 +489,5 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 
 +(NSMutableArray *) getPlayedPlayersForPlayerXI:(NSString*)MATCHCODE COMPETITIOMCODE:(NSString*) COMPETITIOMCODE  OVERNO:(NSString*) OVERNO BALLNO:(NSString*) BALLNO;
 
-+(NSMutableArray *) ArchivesFixturesData:(NSString*)competitionCode;
-
-
-
++(NSMutableArray *)ArchivesFixturesData:(NSString*)competitionCode:(NSString*)userCode ;
 @end
