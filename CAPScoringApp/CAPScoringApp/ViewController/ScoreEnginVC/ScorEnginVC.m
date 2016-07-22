@@ -2358,7 +2358,7 @@ EditModeVC * objEditModeVc;
         //        [DBManager insertBallCodeWicketEvent:self.ballEventRecord];
         //        [DBManager GetBallDetails :_competitionCode :_matchCode];
         //
-        [self reloadBowlerTeamBatsmanDetails];
+       // [self reloadBowlerTeamBatsmanDetails];
         // [ self AssignControlValues :YES:@""];
         
         
@@ -8788,6 +8788,7 @@ self.lbl_umpirename.text=@"";
 }
 -(void) reloadBowlerTeamBatsmanDetails{
     //[self EndBallMethod];
+    
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
