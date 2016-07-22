@@ -214,8 +214,8 @@ EndInningsVC *save;
         ENDOVER = @"0.0";
     }
     if (TOTALWICKETS == nil) {
-        
-        TOTALWICKETS.intValue == 0;
+    
+        TOTALWICKETS = [NSNumber numberWithInt:0];
     }
     
     {
@@ -230,9 +230,9 @@ EndInningsVC *save;
             DAYNO = @"1";
         }
         if(DAYNO == nil)
-        {
+        
             DAYNO = @"1";
-        }
+        
         
         //SESSION NO
         SESSIONNO = [DBManagerEndInnings GetSessionNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO:DAYNO];
@@ -263,7 +263,8 @@ EndInningsVC *save;
         //STARTOVERBALLNO
         STARTOVERBALLNO = [NSString stringWithFormat:@"%@.%@", STARTOVERNO ,STARTBALLNO];
         
-    }
+    
+        }
     
     NSUInteger oldInningsNo = [OLDINNINGSNO integerValue];
     NSUInteger totalWickets = [TOTALWICKETS integerValue];
@@ -352,11 +353,13 @@ EndInningsVC *save;
             {
                 if(![DBManagerEndInnings GetMatchBasedSessionNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE :OLDINNINGSNO : DAYNO : SESSIONNO])
                 {
-                    [DBManagerEndInnings InsertSessionEventForInsertEndInnings :COMPETITIONCODE:MATCHCODE: OLDINNINGSNO: DAYNO:  SESSIONNO: OLDTEAMCODE:  STARTOVERBALLNO: ENDOVER: RUNSSCORED: TOTALWICKETS];
+                    [DBManagerEndInnings InsertSessionEventForInsertEndInnings :COMPETITIONCODE:MATCHCODE: OLDINNINGSNO: DAYNO:  OLDINNINGSNO: OLDTEAMCODE:  STARTOVERBALLNO: ENDOVER: RUNSSCORED: TOTALWICKETS];
                 }
                 if(![DBManagerEndInnings GetDayNoInDayEventForInsertEndInnings : COMPETITIONCODE : MATCHCODE :OLDINNINGSNO : DAYNO ])
                 {
-                    [DBManagerEndInnings InsertDayEventForInsertEndInnings:COMPETITIONCODE :MATCHCODE :OLDINNINGSNO :DAYNO :OLDTEAMCODE :TOTALRUNS :ENDOVER :TOTALWICKETS :SESSIONNO :STARTOVERBALLNO :RUNSSCORED];
+                    
+                    
+                    [DBManagerEndInnings InsertDayEventForInsertEndInnings:COMPETITIONCODE :MATCHCODE :OLDINNINGSNO :DAYNO :OLDTEAMCODE :TOTALRUNS :ENDOVER :TOTALWICKETS];
                     
                 }
                 
@@ -426,9 +429,6 @@ EndInningsVC *save;
             
         }
     }
-    
-    
-    
     
 }
 

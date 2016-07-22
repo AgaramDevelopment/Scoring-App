@@ -168,7 +168,11 @@ BOOL IsBack;
 
 -(void)datePicker{
     
+    
+[datePicker setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_FR"]];
+    
     datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_startInnings.frame.origin.x,self.txt_startInnings.frame.origin.y+30,self.view.frame.size.width,200)];
+    
     
     datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     
@@ -186,28 +190,70 @@ BOOL IsBack;
     
     [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
     
-    [self.txt_startInnings setInputAccessoryView:toolbar];
-   
+   [self.txt_startInnings setInputAccessoryView:toolbar];
+    
+
+    [datePicker addTarget:self
+                   action:@selector(showSelecteddate:)forControlEvents:UIControlEventValueChanged];
+
+    self.txt_startInnings.inputView = toolbar;
+//    
+//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+//    //   2016-06-25 12:00:00
+//    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//    NSDate *matchdate = [dateFormat dateFromString:MatchDate];
+    
+    
+    //datePicker.date = MatchDate;
+    [self duration];
+
     
 }
 
 -(IBAction)showSelecteddate:(id)sender{
 
     
-
-    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+//
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+//    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+//    
+//    NSDate *selectedDate = [datePicker date];
+//    NSString *recordDate = [formatter stringFromDate:selectedDate];
+//    
+//    
+//    self.txt_startInnings.text=recordDate;
+//    [self.txt_startInnings resignFirstResponder];
+//    //self.txt_startInnings =[NSString stringWithFormat:@"%@",[_txt_startInnings text]];
+//    [self duration];
     
-    NSDate *selectedDate = [datePicker date];
-    NSString *recordDate = [formatter stringFromDate:selectedDate];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *matchdate = [dateFormat dateFromString:MatchDate];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    // for minimum date
+    [datePicker setMinimumDate:matchdate];
+    
+    // for maximumDate
+    int daysToAdd = 1;
+    NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
+    
+    [datePicker setMaximumDate:newDate1];
     
     
-    self.txt_startInnings.text=recordDate;
-    [self.txt_startInnings resignFirstResponder];
-    //self.txt_startInnings =[NSString stringWithFormat:@"%@",[_txt_startInnings text]];
+    
+    NSString *minimumdateStr = [dateFormat stringFromDate:matchdate];
+    NSString*maxmimumdateStr=[dateFormat stringFromDate:newDate1];
+    
+    _txt_startInnings.text=[dateFormat stringFromDate:datePicker.date];
+    NSLog(@"check: %@",_txt_startInnings.text);
+    
+    //BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_txt_startInnings text]];
+    
     [self duration];
     
-}
+   }
 
 -(void)endDatePicker{
     datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_endInnings.frame.origin.x,self.txt_endInnings.frame.origin.y+30,self.view.frame.size.width,200)];
@@ -278,9 +324,13 @@ BOOL IsBack;
     BtnurrentTittle =[NSString stringWithFormat:self.btn_save.currentTitle];
     BtnurrentTittle = @"INSERT";
     
+    IsBack = NO;
+    
     self.view_allControls.hidden = NO;
     self.tbl_endInnings.hidden = YES;
     self.view_Header.hidden = YES;
+ 
+    
     
     [self.btn_save setTitle: @"SAVE" forState: UIControlStateNormal];
 }
@@ -348,23 +398,19 @@ BOOL IsBack;
     
     [self.btn_save setTitle: @"UPDATE" forState: UIControlStateNormal];
     
+    [obj fetchEndInnings :CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
     
     NSNumber  *total = [DBManagerEndInnings GetTotalRunsForFetchEndInnings : CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
 
     TOTALRUNS = [NSString stringWithFormat:@"%@",total];
     
-    OVERNO=[DBManagerEndInnings GetOverNoForFetchEndInnings : CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
-    
-    ballNo = [DBManagerEndInnings GetBallNoForFetchEndInnings:CompetitionCode :MatchCode :obj.BATTINGTEAMCODE :OVERNO :obj.INNINGSNO];
-    
-    WICKETS=[DBManagerEndInnings GetWicketForFetchEndInnings : CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
+  
     
     NSString*startInningsTime = obj.STARTTIME;
     NSString*endInningsTime  = obj.ENDTIME;
     NSString*teamName = obj.TEAMNAME;
-   // int totalRuns = [NSNumber numberWithInt:obj.TOTALRUNS];
-    NSString*totalOvers = obj.TOTALOVERS;
-    NSString *totalWickets = WICKETS;
+    NSString*totalOvers = obj.OVERBALLNO;
+    NSString *totalWickets = obj.WICKETS;
     NSString *innings = obj.INNINGSNO;
     
     OldTeamCode = obj.BATTINGTEAMCODE;
@@ -375,7 +421,7 @@ BOOL IsBack;
     self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
     self.lbl_teamName.text = teamName;
     self.lbl_runScored.text = TOTALRUNS;
-    self.lbl_overPlayed.text = [NSString stringWithFormat:@"%@.%@" ,OVERNO,ballNo];
+    self.lbl_overPlayed.text = obj.OVERBALLNO;
 
     self.lbl_wktLost.text = totalWickets;
     self.lbl_innings.text = innings;
@@ -396,27 +442,16 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
     
     [alertDialog show];
 }
--(BOOL) checkValidation{
-    
-    if([_txt_startInnings.text isEqual:@""]){
-        [self showDialog:@"Please Select Start Time." andTitle:@""];
-        return NO;
-    }else if ([_txt_endInnings.text isEqual:@""]){
-        [self showDialog:@"Please Select End Time." andTitle:@""];
-        return NO;
-    }
-    
-    return YES;
-}
+
 
 - (IBAction)btn_save:(id)sender {
     
-    if ([self checkValidation]) {
+    
         
       
         if ([BtnurrentTittle isEqualToString:@"INSERT"]) {
 
-             [innings InsertEndInnings: CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS: BtnurrentTittle];
+             [innings InsertEndInnings : CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS: BtnurrentTittle];
             
             [self.delegate EndInningsSaveBtnAction];
             
@@ -478,7 +513,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         self.view_Header.hidden = NO;
         self.view_allControls.hidden = YES;
         
-            }
+    
 
 
 }
@@ -495,6 +530,9 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         IsBack = YES;
     
     }else if (IsBack == YES){
+        
+        
+        self.view_allControls.hidden = YES;
         
         [self.delegate EndInningsBackBtnAction];
 
