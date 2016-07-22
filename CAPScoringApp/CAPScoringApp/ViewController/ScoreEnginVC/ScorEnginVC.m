@@ -12424,6 +12424,10 @@ self.lbl_umpirename.text=@"";
     
     NSLog(@"the final output is:%@",responseString);
 }
+
+- (IBAction)Appeal_Cancel_btn:(id)sender {
+    [self.view_table_select setHidden:YES];
+}
 - (IBAction)Exit_btn:(id)sender {
     
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
