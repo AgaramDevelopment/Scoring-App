@@ -40,7 +40,7 @@
     [self customnavigationmethod];
     // Do any additional setup after loading the view.
     [self.tableView setHidden:YES];
-    self.Nextbtn_outlet.enabled = NO;
+   // self.Nextbtn_outlet.enabled = NO;
     //[self didClickNextBtnAction setHidden:YES];
     [self.selectmatchTittleview .layer setBorderWidth:2.0];
     [self.selectmatchTittleview.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
@@ -126,6 +126,8 @@
     
     return [resultArray count];    //count number of row from counting array hear cataGorry is An Array
 }
+
+
 
 
 
@@ -231,7 +233,7 @@
         isEnableTbl=NO;
         CGFloat contensizeheight =self.tableView.contentSize.height;
         self.tableviewheight.constant =(contensizeheight>44)?200:contensizeheight;   //self.tableView.contentSize.height;
-        self.Nextbtn_outlet.enabled = YES;
+       // self.Nextbtn_outlet.enabled = YES;
     }
     else{
          self.tableView.hidden=YES;
@@ -242,6 +244,7 @@
 }
 
 -(IBAction)didClickNextBtnAction:(id)sender
+{  if([self formValidation])
 {
     if([self.selectDashBoard isEqualToString:@"Newmatch"])
     {
@@ -261,7 +264,7 @@ else{
         [self.navigationController pushViewController:objArchiveVC animated:YES];
     }
     
-}
+}}
 
 
 - (BOOL)checkInternetConnection
@@ -368,6 +371,26 @@ else{
         
         //[delegate hideLoading];
     }
+}
+
+
+
+- (BOOL) formValidation
+{
+    
+    if([ self.selectMatchName.text isEqualToString:@""] || self.selectMatchName.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Match"];
+        return NO;
+    }
+    return YES;
+}
+
+
+-(void)ShowAlterView:(NSString *) alterMsg
+{
+    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [objAlter show];
 }
 @end
 
