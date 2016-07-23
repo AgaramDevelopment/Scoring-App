@@ -37,6 +37,7 @@
                 <outlet property="lbl_Duration" destination="13U-rU-Uhd" id="13Z-co-diQ"/>
                 <outlet property="text_Comments" destination="zif-Tv-pqu" id="bX3-JN-9mz"/>
                 <outlet property="text_EndBreak" destination="lgl-O3-8WF" id="pqf-Ep-6sB"/>
+                <outlet property="updateSwitch" destination="wxP-hq-VIi" id="ozc-2V-n87"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="view_breakMinutes" destination="aGk-D7-kyv" id="xPv-1d-hNR"/>
             </connections>

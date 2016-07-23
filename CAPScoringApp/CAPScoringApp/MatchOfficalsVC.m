@@ -57,7 +57,7 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *username=[defaults stringForKey :@"UserFullname"];
         
-        
+        NSString *userCode=[defaults stringForKey:@"userCode"];
 
         self.lbl_umpire1.text=objMatchofficalRecord.umpire1name;
         self.lbl_umpire2.text=objMatchofficalRecord.umpire2name;

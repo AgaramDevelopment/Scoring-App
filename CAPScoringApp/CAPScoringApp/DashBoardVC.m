@@ -720,7 +720,7 @@
             [self officialcodeimage];
             [self groundcodeimage];
             
-        [self showDialog1:@"SYNC DATA COMPLETED" andTitle:@"info"];
+        [self showDialog1:@"SYNC DATA COMPLETED" andTitle:@"DashBorad"];
             
             }
             
