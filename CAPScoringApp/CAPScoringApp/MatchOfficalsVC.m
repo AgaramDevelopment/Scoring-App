@@ -61,7 +61,7 @@
         NSString *username=[defaults stringForKey :@"UserFullname"];
         
         NSString *userCode=[defaults stringForKey:@"userCode"];
-        NSMutableArray *scorearray=[DBManager RetrieveSCORE2:competitionCode:Matchcode:userCode];
+        NSMutableArray *scorearray=[objDBManager RetrieveSCORE2:competitionCode:Matchcode:userCode];
         self.lbl_umpire1.text=objMatchofficalRecord.umpire1name;
         self.lbl_umpire2.text=objMatchofficalRecord.umpire2name;
         self.lbl_umpire3.text=objMatchofficalRecord.umpire3name;

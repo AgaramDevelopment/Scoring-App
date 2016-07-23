@@ -124,6 +124,54 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
+
+
+
+
+
+
+-(NSMutableArray *)RetrieveEventData1: (NSString *) userCode{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
+    
+    
+    
+    
+    NSString *query=[NSString stringWithFormat:@"SELECT  COM.COMPETITIONCODE,COM.COMPETITIONNAME,COM.RECORDSTATUS FROM COMPETITION COM INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE=COM.COMPETITIONCODE AND MATCHSTATUS NOT IN ('MSC123','MSC281')  INNER JOIN MATCHSCORERDETAILS MATSC ON MR.COMPETITIONCODE=MATSC.COMPETITIONCODE AND MR.MATCHCODE=MATSC.MATCHCODE WHERE   MATSC.SCORERCODE='%@'",userCode];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            EventRecord *record=[[EventRecord alloc]init];
+            //            record.id=(int)sqlite3_column_int(statement, 0);
+            record.competitioncode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            record.competitionname=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            record.recordstatus=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+            [eventArray addObject:record];
+            
+        }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+        
+    }
+    
+    
+    sqlite3_close(dataBase);
+    }
+    return eventArray;
+    
+}
+
+
+
+
+
 -(BOOL)checkExpiryDate: (NSString *) userId{
     int retVal;
     NSString *dbPath = [self getDBPath];
@@ -468,7 +516,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(NSMutableArray *)RetrieveSCORE2:(NSString*)competitionCode :(NSString*)matchcode :(NSString*)userCode {
+-(NSMutableArray *)RetrieveSCORE2:(NSString*)competitionCode :(NSString*)matchcode :(NSString*)userCode {
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
     int retVal;
     
@@ -477,9 +525,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
     //
     NSString *query=[NSString stringWithFormat:@"SELECT SCORERCODE,USD.USERFULLNAME FROM MATCHSCORERDETAILS MAS INNER JOIN USERDETAILS USD ON USD.USERCODE=MAS.SCORERCODE WHERE MAS.COMPETITIONCODE='%@' AND MAS.MATCHCODE='%@' AND MAS.SCORERCODE!='%@' LIMIT 1" ,userCode,matchcode,competitionCode];
     stmt=[query UTF8String];
@@ -495,11 +542,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                        [eventArray addObject:record];
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+        
     }
     
     
-    sqlite3_finalize(statement);
     sqlite3_close(dataBase);
+    }
     return eventArray;
     
 }
