@@ -69,7 +69,7 @@
     
     NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
     if (responseData != nil) {
-        
+        DBMANAGERSYNC *objDBMANAGERSYNC = [[DBMANAGERSYNC alloc] init];
         NSDictionary *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
        checkErrorItem=[serviceResponse objectForKey:@"lstErrorItem"];
         
@@ -111,14 +111,14 @@
                     
                     
                     
-                    bool CheckStatus=[DBMANAGERSYNC CheckCompetitionCode:COMPETITIONCODE];
+                    bool CheckStatus=[objDBMANAGERSYNC CheckCompetitionCode:COMPETITIONCODE];
                     if (CheckStatus==YES) {
-                        [DBMANAGERSYNC UPDATECOMPETITION:COMPETITIONCODE: COMPETITIONNAME:SEASON: TROPHY:STARTDATE:ENDDATE:MATCHTYPE:ISOTHERSMATCHTYPE : MODIFIEDBY: MODIFIEDDATE];
+                        [objDBMANAGERSYNC UPDATECOMPETITION:COMPETITIONCODE: COMPETITIONNAME:SEASON: TROPHY:STARTDATE:ENDDATE:MATCHTYPE:ISOTHERSMATCHTYPE : MODIFIEDBY: MODIFIEDDATE];
                     }
                     
                     else
                     {
-                        [DBMANAGERSYNC  InsertMASTEREvents:COMPETITIONCODE:COMPETITIONNAME:SEASON:TROPHY:STARTDATE:ENDDATE:MATCHTYPE: ISOTHERSMATCHTYPE :MANOFTHESERIESCODE:BESTBATSMANCODE : BESTBOWLERCODE:BESTALLROUNDERCODE:MOSTVALUABLEPLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                        [objDBMANAGERSYNC  InsertMASTEREvents:COMPETITIONCODE:COMPETITIONNAME:SEASON:TROPHY:STARTDATE:ENDDATE:MATCHTYPE: ISOTHERSMATCHTYPE :MANOFTHESERIESCODE:BESTBATSMANCODE : BESTBOWLERCODE:BESTALLROUNDERCODE:MOSTVALUABLEPLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                     
                     }
                     
@@ -144,13 +144,13 @@
                 NSString *RECORDSTATUS=[test1 objectForKey:@"Recordstatus"];
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckCompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckCompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
                 if (CheckStatus1==NO) {
-                   [DBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
+                   [objDBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
                 }
                 
-                else{ [DBMANAGERSYNC DELETECompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
-                    [DBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
+                else{ [objDBMANAGERSYNC DELETECompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+                    [objDBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
                     
                 }
 
@@ -178,9 +178,9 @@
                 NSString *MODIFIEDDATE=[test2 objectForKey:@"Modifieddate"];
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckCompetitionteamplayer:COMPETITIONCODE :TEAMCODE :PLAYERCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckCompetitionteamplayer:COMPETITIONCODE :TEAMCODE :PLAYERCODE];
                 if (CheckStatus1==NO) {
-                 [DBMANAGERSYNC  InsertCompetitionTeamPlayer:COMPETITIONCODE:TEAMCODE:PLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                 [objDBMANAGERSYNC  InsertCompetitionTeamPlayer:COMPETITIONCODE:TEAMCODE:PLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 
                 
@@ -242,12 +242,12 @@
               
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC Matchregistration:MATCHCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC Matchregistration:MATCHCODE];
                 if (CheckStatus1==YES) {
-                    [DBMANAGERSYNC UpdateMatchregistration:MATCHCODE:MATCHNAME:COMPETITIONCODE:MATCHOVERS:MATCHOVERCOMMENTS:MATCHDATE:ISDAYNIGHT:ISNEUTRALVENUE:GROUNDCODE:TEAMACODE:TEAMBCODE:TEAMACAPTAIN:TEAMAWICKETKEEPER:TEAMBCAPTAIN:TEAMBWICKETKEEPER:UMPIRE1CODE:UMPIRE2CODE:UMPIRE3CODE:MATCHREFEREECODE:MATCHRESULT:MATCHRESULTTEAMCODE:TEAMAPOINTS:TEAMBPOINTS:MATCHSTATUS: RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:ISDEFAULTORLASTINSTANCE];
+                    [objDBMANAGERSYNC UpdateMatchregistration:MATCHCODE:MATCHNAME:COMPETITIONCODE:MATCHOVERS:MATCHOVERCOMMENTS:MATCHDATE:ISDAYNIGHT:ISNEUTRALVENUE:GROUNDCODE:TEAMACODE:TEAMBCODE:TEAMACAPTAIN:TEAMAWICKETKEEPER:TEAMBCAPTAIN:TEAMBWICKETKEEPER:UMPIRE1CODE:UMPIRE2CODE:UMPIRE3CODE:MATCHREFEREECODE:MATCHRESULT:MATCHRESULTTEAMCODE:TEAMAPOINTS:TEAMBPOINTS:MATCHSTATUS: RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:ISDEFAULTORLASTINSTANCE];
                 }
                 else{
-                    [DBMANAGERSYNC InsertMatchregistration:MATCHCODE: MATCHNAME:COMPETITIONCODE:MATCHOVERS: MATCHOVERCOMMENTS:MATCHDATE:ISDAYNIGHT: ISNEUTRALVENUE: GROUNDCODE:TEAMACODE:TEAMBCODE:TEAMACAPTAIN:TEAMAWICKETKEEPER:TEAMBCAPTAIN:TEAMBWICKETKEEPER: UMPIRE1CODE: UMPIRE2CODE:UMPIRE3CODE:MATCHREFEREECODE:MATCHRESULT: MATCHRESULTTEAMCODE: TEAMAPOINTS:TEAMBPOINTS:MATCHSTATUS:RECORDSTATUS:CREATEDBY:CREATEDDATE: MODIFIEDBY:MODIFIEDDATE:ISDEFAULTORLASTINSTANCE];
+                    [objDBMANAGERSYNC InsertMatchregistration:MATCHCODE: MATCHNAME:COMPETITIONCODE:MATCHOVERS: MATCHOVERCOMMENTS:MATCHDATE:ISDAYNIGHT: ISNEUTRALVENUE: GROUNDCODE:TEAMACODE:TEAMBCODE:TEAMACAPTAIN:TEAMAWICKETKEEPER:TEAMBCAPTAIN:TEAMBWICKETKEEPER: UMPIRE1CODE: UMPIRE2CODE:UMPIRE3CODE:MATCHREFEREECODE:MATCHRESULT: MATCHRESULTTEAMCODE: TEAMAPOINTS:TEAMBPOINTS:MATCHSTATUS:RECORDSTATUS:CREATEDBY:CREATEDDATE: MODIFIEDBY:MODIFIEDDATE:ISDEFAULTORLASTINSTANCE];
                 }
                
                 
@@ -269,9 +269,9 @@
                 NSString *RECORDSTATUS=[test4 objectForKey:@"Recordstatus"];
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckMatchteamplayerdetails :MATCHCODE :TEAMCODE :PLAYERCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckMatchteamplayerdetails :MATCHCODE :TEAMCODE :PLAYERCODE];
                 if (CheckStatus1==NO) {
-                  [DBMANAGERSYNC InsertMatchteamplayerdetails:MATCHTEAMPLAYERCODE:MATCHCODE:TEAMCODE:PLAYERCODE:PLAYINGORDER:RECORDSTATUS];
+                  [objDBMANAGERSYNC InsertMatchteamplayerdetails:MATCHTEAMPLAYERCODE:MATCHCODE:TEAMCODE:PLAYERCODE:PLAYINGORDER:RECORDSTATUS];
                 }
                 
                 
@@ -297,16 +297,16 @@
                 
                 
                 
-                
-                bool CheckStatus= [LoginDBmanager CheckMatchScorerDetails:Competitioncode :Matchcode :Scorercode ];
+                LoginDBmanager *objLoginDBmanager = [[LoginDBmanager alloc] init];
+                bool CheckStatus= [objLoginDBmanager CheckMatchScorerDetails:Competitioncode :Matchcode :Scorercode ];
                 if (CheckStatus==YES)
                 {
-                    [LoginDBmanager UpdateMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
+                    [objLoginDBmanager UpdateMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
                 }
                 
                 else
                 {
-                    [LoginDBmanager InsertMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
+                    [objLoginDBmanager InsertMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
                     
                     
                 }
@@ -340,14 +340,14 @@
                 
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckTeamMaster:TEAMCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckTeamMaster:TEAMCODE];
                 if (CheckStatus1==YES) {
                     
-                    [DBMANAGERSYNC UpdateTeamMaster:TEAMNAME:SHORTTEAMNAME:TEAMTYPE:TEAMLOGO:RECORDSTATUS: MODIFIEDBY:MODIFIEDDATE:TEAMCODE];
+                    [objDBMANAGERSYNC UpdateTeamMaster:TEAMNAME:SHORTTEAMNAME:TEAMTYPE:TEAMLOGO:RECORDSTATUS: MODIFIEDBY:MODIFIEDDATE:TEAMCODE];
 
                 }
                 else{
-                      [DBMANAGERSYNC InsertTeamMaster:TEAMCODE:TEAMNAME:SHORTTEAMNAME:TEAMTYPE:TEAMLOGO: RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                      [objDBMANAGERSYNC InsertTeamMaster:TEAMCODE:TEAMNAME:SHORTTEAMNAME:TEAMTYPE:TEAMLOGO: RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 
                 
@@ -395,12 +395,12 @@
                 
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckPlayermaster :PLAYERCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckPlayermaster :PLAYERCODE];
                 if (CheckStatus1==YES) {
-                    [DBMANAGERSYNC UpdatePlayermaster:PLAYERCODE:PLAYERNAME:PLAYERDOB:PLAYERPHOTO: BATTINGSTYLE: BATTINGORDER: BOWLINGSTYLE:BOWLINGTYPE:BOWLINGSPECIALIZATION:PLAYERROLE: PLAYERREMARKS: RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:BALLTYPECODE:SHOTTYPE: SHOTCODE:PMLENGTHCODE:PMLINECODE:PMXVALUE:PMYVALUE:ATWOROTW];
+                    [objDBMANAGERSYNC UpdatePlayermaster:PLAYERCODE:PLAYERNAME:PLAYERDOB:PLAYERPHOTO: BATTINGSTYLE: BATTINGORDER: BOWLINGSTYLE:BOWLINGTYPE:BOWLINGSPECIALIZATION:PLAYERROLE: PLAYERREMARKS: RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:BALLTYPECODE:SHOTTYPE: SHOTCODE:PMLENGTHCODE:PMLINECODE:PMXVALUE:PMYVALUE:ATWOROTW];
                }
                 else{
-                    [DBMANAGERSYNC InsertPlayermaster:PLAYERCODE:PLAYERNAME:PLAYERDOB:PLAYERPHOTO:BATTINGSTYLE:BATTINGORDER:BOWLINGSTYLE:BOWLINGTYPE:BOWLINGSPECIALIZATION:PLAYERROLE:PLAYERREMARKS: RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:BALLTYPECODE:SHOTTYPE:SHOTCODE:PMLENGTHCODE:PMLINECODE:PMXVALUE:PMYVALUE:ATWOROTW];
+                    [objDBMANAGERSYNC InsertPlayermaster:PLAYERCODE:PLAYERNAME:PLAYERDOB:PLAYERPHOTO:BATTINGSTYLE:BATTINGORDER:BOWLINGSTYLE:BOWLINGTYPE:BOWLINGSPECIALIZATION:PLAYERROLE:PLAYERREMARKS: RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:BALLTYPECODE:SHOTTYPE:SHOTCODE:PMLENGTHCODE:PMLINECODE:PMXVALUE:PMYVALUE:ATWOROTW];
                 }
                 
                 
@@ -422,13 +422,13 @@
                 NSString *TEAMCODE=[test7 objectForKey:@"Teamcode"];
                 NSString *RECORDSTATUS=[test7 objectForKey:@"Recordstatus"];
                 
-                  bool CheckStatus1=[DBMANAGERSYNC CheckPlayerTeamDetails :PLAYERCODE :TEAMCODE];
+                  bool CheckStatus1=[objDBMANAGERSYNC CheckPlayerTeamDetails :PLAYERCODE :TEAMCODE];
                 
                 if (CheckStatus1==YES) {
-                 [DBMANAGERSYNC  UpdatePlayerTeamDetails :PLAYERCODE:TEAMCODE:RECORDSTATUS];
+                 [objDBMANAGERSYNC  UpdatePlayerTeamDetails :PLAYERCODE:TEAMCODE:RECORDSTATUS];
                 }
                 else{
-                    [DBMANAGERSYNC InsertPlayerTeamDetails :PLAYERCODE:TEAMCODE:RECORDSTATUS];
+                    [objDBMANAGERSYNC InsertPlayerTeamDetails :PLAYERCODE:TEAMCODE:RECORDSTATUS];
                 }
 
             }
@@ -456,13 +456,13 @@
                 NSString *MODIFIEDBY=[test8 objectForKey:@"Modifiedby"];
                 NSString *MODIFIEDDATE=[test8 objectForKey:@"Modifieddate"];
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckOfficialsmaster:OFFICIALSCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckOfficialsmaster:OFFICIALSCODE];
                 
                 if (CheckStatus1==YES) {
-                    [DBMANAGERSYNC  UpdateOfficialsmaster:OFFICIALSCODE:NAME:ROLE:COUNTRY:STATE:CATEGORY:OFFICIALSCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC  UpdateOfficialsmaster:OFFICIALSCODE:NAME:ROLE:COUNTRY:STATE:CATEGORY:OFFICIALSCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 else{
-                    [DBMANAGERSYNC InsertOfficialsmaster:OFFICIALSCODE:NAME:ROLE:COUNTRY:STATE:CATEGORY:OFFICIALSCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC InsertOfficialsmaster:OFFICIALSCODE:NAME:ROLE:COUNTRY:STATE:CATEGORY:OFFICIALSCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 
             }
@@ -490,13 +490,13 @@
                 NSString *MODIFIEDDATE=[test9 objectForKey:@"Modifieddate"];
                
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckCoachmaster:COACHCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckCoachmaster:COACHCODE];
                 
                 if (CheckStatus1==YES) {
-                    [DBMANAGERSYNC  UpdateCoachmaster:COACHCODE:COACHNAME:COACHTEAMCODE:COACHSPECIALIZATION:COACHPHOTO:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC  UpdateCoachmaster:COACHCODE:COACHNAME:COACHTEAMCODE:COACHSPECIALIZATION:COACHPHOTO:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 else{
-                    [DBMANAGERSYNC InsertCoachmaster:COACHCODE:COACHNAME:COACHTEAMCODE:COACHSPECIALIZATION:COACHPHOTO:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC InsertCoachmaster:COACHCODE:COACHNAME:COACHTEAMCODE:COACHSPECIALIZATION:COACHPHOTO:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 
             }
@@ -527,13 +527,13 @@
                 
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckGroundmaster:GROUNDCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckGroundmaster:GROUNDCODE];
                 
                 if (CheckStatus1==YES) {
-                    [DBMANAGERSYNC  UpdateGroundmaster:GROUNDCODE:GROUNDNAME:COUNTRY:STATE:CITY:GROUNDPROFILE:GSTOPLEFT:GSTOPRIGHT:GSBOTTOMLEFT:GSBOTTOMRIGHT:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC  UpdateGroundmaster:GROUNDCODE:GROUNDNAME:COUNTRY:STATE:CITY:GROUNDPROFILE:GSTOPLEFT:GSTOPRIGHT:GSBOTTOMLEFT:GSBOTTOMRIGHT:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 else{
-                    [DBMANAGERSYNC InsertGroundmaster:GROUNDCODE:GROUNDNAME:COUNTRY:STATE:CITY:GROUNDPROFILE:GSTOPLEFT:GSTOPRIGHT:GSBOTTOMLEFT:GSBOTTOMRIGHT:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC InsertGroundmaster:GROUNDCODE:GROUNDNAME:COUNTRY:STATE:CITY:GROUNDPROFILE:GSTOPLEFT:GSTOPRIGHT:GSBOTTOMLEFT:GSBOTTOMRIGHT:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 
             }
@@ -558,13 +558,13 @@
            
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckShottype:SHOTCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckShottype:SHOTCODE];
                 
                 if (CheckStatus1==YES) {
-                    [DBMANAGERSYNC  UpdateShottype:SHOTCODE:SHOTNAME:SHOTTYPE:DISPLAYORDER:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC  UpdateShottype:SHOTCODE:SHOTNAME:SHOTTYPE:DISPLAYORDER:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 else{
-                    [DBMANAGERSYNC InsertShottype:SHOTCODE:SHOTNAME:SHOTTYPE:DISPLAYORDER:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC InsertShottype:SHOTCODE:SHOTNAME:SHOTTYPE:DISPLAYORDER:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 
             }
@@ -589,13 +589,13 @@
                 
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckBowltype:BOWLTYPECODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckBowltype:BOWLTYPECODE];
                 
                 if (CheckStatus1==YES) {
-                    [DBMANAGERSYNC  UpdateBowltype:BOWLTYPECODE:BOWLTYPE:BOWLERTYPE:DISPLAYORDER:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC  UpdateBowltype:BOWLTYPECODE:BOWLTYPE:BOWLERTYPE:DISPLAYORDER:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 else{
-                    [DBMANAGERSYNC InsertBowltype:BOWLTYPECODE:BOWLTYPE:BOWLERTYPE:DISPLAYORDER:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC InsertBowltype:BOWLTYPECODE:BOWLTYPE:BOWLERTYPE:DISPLAYORDER:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 
             }
@@ -621,13 +621,13 @@
                 
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckBowlerspecialization:BOWLERSPECIALIZATIONCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckBowlerspecialization:BOWLERSPECIALIZATIONCODE];
                 
                 if (CheckStatus1==YES) {
-                    [DBMANAGERSYNC  UpdateBowltype:BOWLERSPECIALIZATIONCODE:BOWLERSPECIALIZATION:BOWLERSTYLE:BOWLERTYPE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC  UpdateBowltype:BOWLERSPECIALIZATIONCODE:BOWLERSPECIALIZATION:BOWLERSTYLE:BOWLERTYPE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 else{
-                    [DBMANAGERSYNC InsertBowltype:BOWLERSPECIALIZATIONCODE:BOWLERSPECIALIZATION:BOWLERSTYLE:BOWLERTYPE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC InsertBowltype:BOWLERSPECIALIZATIONCODE:BOWLERSPECIALIZATION:BOWLERSTYLE:BOWLERTYPE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 
             }
@@ -651,13 +651,13 @@
                 NSString *MODIFIEDBY=[test14 objectForKey:@"Modifiedby"];
                 NSString *MODIFIEDDATE=[test14 objectForKey:@"Modifieddate"];
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckFieldingfactor:FIELDINGFACTORCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckFieldingfactor:FIELDINGFACTORCODE];
                 
                 if (CheckStatus1==YES) {
-                    [DBMANAGERSYNC  UpdateFieldingfactor:FIELDINGFACTORCODE:FIELDINGFACTOR:DISPLAYORDER:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC  UpdateFieldingfactor:FIELDINGFACTORCODE:FIELDINGFACTOR:DISPLAYORDER:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 else{
-                    [DBMANAGERSYNC InsertFieldingfactor:FIELDINGFACTORCODE:FIELDINGFACTOR:DISPLAYORDER:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                    [objDBMANAGERSYNC InsertFieldingfactor:FIELDINGFACTORCODE:FIELDINGFACTOR:DISPLAYORDER:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 
             }
@@ -676,10 +676,10 @@
                 NSString *METASUBCODEDESCRIPTION=[test15 objectForKey:@"Metasubcodedescription"];
               
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckMetaData:METASUBCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckMetaData:METASUBCODE];
                 
                 if (CheckStatus1==NO) {
-                      [DBMANAGERSYNC InsertMetaData:METASUBCODE:METADATATYPECODE:METADATATYPEDESCRIPTION:METASUBCODEDESCRIPTION];
+                      [objDBMANAGERSYNC InsertMetaData:METASUBCODE:METADATATYPECODE:METADATATYPEDESCRIPTION:METASUBCODEDESCRIPTION];
                 }
 
                 
@@ -702,13 +702,13 @@
                 NSString *ISSYSTEMREFERENCE=[test16 objectForKey:@"Issystemreference"];
                 
                 
-                bool CheckStatus1=[DBMANAGERSYNC CheckPowerplayType:POWERPLAYTYPECODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckPowerplayType:POWERPLAYTYPECODE];
                 
                 if (CheckStatus1==YES) {
-                    [DBMANAGERSYNC  UpdatePowerplayType:POWERPLAYTYPECODE:POWERPLAYTYPENAME:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:ISSYSTEMREFERENCE];
+                    [objDBMANAGERSYNC  UpdatePowerplayType:POWERPLAYTYPECODE:POWERPLAYTYPENAME:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:ISSYSTEMREFERENCE];
                 }
                 else{
-                    [DBMANAGERSYNC InsertPowerplayType:POWERPLAYTYPECODE:POWERPLAYTYPENAME:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:ISSYSTEMREFERENCE];
+                    [objDBMANAGERSYNC InsertPowerplayType:POWERPLAYTYPECODE:POWERPLAYTYPENAME:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:ISSYSTEMREFERENCE];
                 }
                 
             }
@@ -891,8 +891,8 @@
 
 -(void)playercodeimage
 {
-  
-    NSMutableArray*playercode=[DBMANAGERSYNC getPlayerCode];
+    DBMANAGERSYNC *objDBMANAGERSYNC = [[DBMANAGERSYNC alloc] init];
+    NSMutableArray*playercode=[objDBMANAGERSYNC getPlayerCode];
     int i;
     for (i=0; i<[playercode count]; i++)
      {
@@ -931,7 +931,8 @@
 
 
 -(void)officialcodeimage{
-NSMutableArray*officialscode=[DBMANAGERSYNC getofficailCode];
+    DBMANAGERSYNC *objDBMANAGERSYNC = [[DBMANAGERSYNC alloc] init];
+NSMutableArray*officialscode=[objDBMANAGERSYNC getofficailCode];
 int i;
 for (i=0; i<[officialscode count]; i++)
 {
@@ -960,7 +961,8 @@ for (i=0; i<[officialscode count]; i++)
 
 
 -(void)groundcodeimage{
-    NSMutableArray*groundcode=[DBMANAGERSYNC getgroundcode];
+    DBMANAGERSYNC *objDBMANAGERSYNC = [[DBMANAGERSYNC alloc] init];
+    NSMutableArray*groundcode=[objDBMANAGERSYNC getgroundcode];
     int i;
     for (i=0; i<[groundcode count]; i++)
     {

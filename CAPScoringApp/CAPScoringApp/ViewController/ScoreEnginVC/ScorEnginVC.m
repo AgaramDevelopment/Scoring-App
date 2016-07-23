@@ -12353,50 +12353,50 @@ self.lbl_umpirename.text=@"";
    //[self reloadBowlerTeamBatsmanDetails];
 }
 - (IBAction)SyncData_btn:(id)sender {
+    PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+    NSMutableArray*MatchRegistrationGetArray=[objPushSyncDBMANAGER RetrieveMATCHREGISTRATIONData:_competitionCode :_matchCode];
     
-    NSMutableArray*MatchRegistrationGetArray=[PushSyncDBMANAGER RetrieveMATCHREGISTRATIONData:_competitionCode :_matchCode];
+    NSMutableArray*MatchTeamplayerDetailsGetArray=[objPushSyncDBMANAGER RetrieveMATCHTEAMPLAYERDETAILSData:_matchCode];
     
-    NSMutableArray*MatchTeamplayerDetailsGetArray=[PushSyncDBMANAGER RetrieveMATCHTEAMPLAYERDETAILSData:_matchCode];
+    NSMutableArray*MatchresultGetArray=[objPushSyncDBMANAGER RetrieveMATCHRESULTData:_competitionCode :_matchCode];
     
-    NSMutableArray*MatchresultGetArray=[PushSyncDBMANAGER RetrieveMATCHRESULTData:_competitionCode :_matchCode];
+    NSMutableArray*MatchEventGetArray=[objPushSyncDBMANAGER RetrieveMATCHEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*MatchEventGetArray=[PushSyncDBMANAGER RetrieveMATCHEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*InningsSummeryGetArray= [objPushSyncDBMANAGER RetrieveINNINGSSUMMARYData:_competitionCode :_matchCode];
     
-    NSMutableArray*InningsSummeryGetArray= [PushSyncDBMANAGER RetrieveINNINGSSUMMARYData:_competitionCode :_matchCode];
+    NSMutableArray*InningsEventGetArray= [objPushSyncDBMANAGER RetrieveINNINGSEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*InningsEventGetArray= [PushSyncDBMANAGER RetrieveINNINGSEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*InningsBreakEventGetArray= [objPushSyncDBMANAGER RetrieveIINNINGSBREAKEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*InningsBreakEventGetArray= [PushSyncDBMANAGER RetrieveIINNINGSBREAKEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*BallEventGetArray= [objPushSyncDBMANAGER RetrieveBALLEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*BallEventGetArray= [PushSyncDBMANAGER RetrieveBALLEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*BattingSummeryGetArray= [objPushSyncDBMANAGER RetrieveBATTINGSUMMARYData:_competitionCode :_matchCode];
     
-    NSMutableArray*BattingSummeryGetArray= [PushSyncDBMANAGER RetrieveBATTINGSUMMARYData:_competitionCode :_matchCode];
+    NSMutableArray*OverEventGetArray= [objPushSyncDBMANAGER RetrieveOVEREVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*OverEventGetArray= [PushSyncDBMANAGER RetrieveOVEREVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*BowlingSummeryGetArray= [objPushSyncDBMANAGER RetrieveBOWLINGSUMMARYData:_competitionCode :_matchCode];
     
-    NSMutableArray*BowlingSummeryGetArray= [PushSyncDBMANAGER RetrieveBOWLINGSUMMARYData:_competitionCode :_matchCode];
+    NSMutableArray*BowlingMaidenSummeryGetArray= [objPushSyncDBMANAGER RetrieveBOWLINGMAIDENSUMMARYData:_competitionCode :_matchCode];
     
-    NSMutableArray*BowlingMaidenSummeryGetArray= [PushSyncDBMANAGER RetrieveBOWLINGMAIDENSUMMARYData:_competitionCode :_matchCode];
+    NSMutableArray*BowlingOverDetailsGetArray= [objPushSyncDBMANAGER RetrieveBOWLEROVERDETAILSData:_competitionCode :_matchCode];
     
-    NSMutableArray*BowlingOverDetailsGetArray= [PushSyncDBMANAGER RetrieveBOWLEROVERDETAILSData:_competitionCode :_matchCode];
+    NSMutableArray*FieldingEventGetArray= [objPushSyncDBMANAGER RetrieveFIELDINGEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*FieldingEventGetArray= [PushSyncDBMANAGER RetrieveFIELDINGEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*DayEventGetArray= [objPushSyncDBMANAGER RetrieveDAYEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*DayEventGetArray= [PushSyncDBMANAGER RetrieveDAYEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*SessionEventGetArray= [objPushSyncDBMANAGER RetrieveSESSIONEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*SessionEventGetArray= [PushSyncDBMANAGER RetrieveSESSIONEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*AppealEventGetArray= [objPushSyncDBMANAGER RetrieveAPPEALEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*AppealEventGetArray= [PushSyncDBMANAGER RetrieveAPPEALEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*WicketEventGetArray= [objPushSyncDBMANAGER RetrieveWICKETEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*WicketEventGetArray= [PushSyncDBMANAGER RetrieveWICKETEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*PowerPlayGetArray= [objPushSyncDBMANAGER RetrievePOWERPLAYData:_competitionCode :_matchCode];
     
-    NSMutableArray*PowerPlayGetArray= [PushSyncDBMANAGER RetrievePOWERPLAYData:_competitionCode :_matchCode];
+    NSMutableArray*PlayerInOutTimeGetArray= [objPushSyncDBMANAGER RetrievePLAYERINOUTTIMEData:_competitionCode :_matchCode];
     
-    NSMutableArray*PlayerInOutTimeGetArray= [PushSyncDBMANAGER RetrievePLAYERINOUTTIMEData:_competitionCode :_matchCode];
+    NSMutableArray*PenalitydetailsGetArray= [objPushSyncDBMANAGER RetrievePENALTYDETAILSData:_competitionCode :_matchCode];
     
-    NSMutableArray*PenalitydetailsGetArray= [PushSyncDBMANAGER RetrievePENALTYDETAILSData:_competitionCode :_matchCode];
-    
-    NSMutableArray*CapTransactionLogEntryGetArray= [PushSyncDBMANAGER RetrieveCAPTRANSACTIONSLOGENTRYData:_competitionCode :_matchCode];
+    NSMutableArray*CapTransactionLogEntryGetArray= [objPushSyncDBMANAGER RetrieveCAPTRANSACTIONSLOGENTRYData:_competitionCode :_matchCode];
     
     NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
     [PushDict setValue :MatchRegistrationGetArray forKey:@"MatchRegistration"];

@@ -10,23 +10,23 @@
 #import <sqlite3.h>
 
 @interface DBManagerMatchResult : NSObject
-+(NSMutableArray *) GetMatchResultTypeAndCodeForFetchMatchResult;
+-(NSMutableArray *) GetMatchResultTypeAndCodeForFetchMatchResult;
 
-+(NSMutableArray *) GetTeamANameDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE :(NSString*) MATCHCODE;
+-(NSMutableArray *) GetTeamANameDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE :(NSString*) MATCHCODE;
 
-+(NSMutableArray *) GetTeamBNameDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE :(NSString*) MATCHCODE;
+-(NSMutableArray *) GetTeamBNameDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE :(NSString*) MATCHCODE;
 
-+(NSMutableArray *) GetManOfTheMatchDetailsForFetchMatchResult :(NSString*) MATCHCODE;
+-(NSMutableArray *) GetManOfTheMatchDetailsForFetchMatchResult :(NSString*) MATCHCODE;
 
-+(NSMutableArray *) GetManOfTheSeriesDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE;
+-(NSMutableArray *) GetManOfTheSeriesDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE;
 
-+(NSMutableArray *) GetBestBatsManDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE;
+-(NSMutableArray *) GetBestBatsManDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE;
 
-+(NSMutableArray *) GetBestBowlerDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE;
+-(NSMutableArray *) GetBestBowlerDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE;
 
-+(NSMutableArray *) GetMatchresultDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE :(NSString*) MATCHCODE;
+-(NSMutableArray *) GetMatchresultDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE :(NSString*) MATCHCODE;
 
-+(NSMutableArray *) GetBestPlayerDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE;
+-(NSMutableArray *) GetBestPlayerDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE;
 
 
 @end

@@ -383,8 +383,8 @@
             [self ShowAlterView:@"Please Select Bowler"];
         }
         else{
-            //[DBManagerChangeToss InsertTossDetails :self.CompitisonCode :self.matchCode:selectTeamcode :electedcode :StrikerCode :NonStrikerCode :selectBowlerCode :BowlingEnd];
-            [DBManagerChangeTeam InsertChangeTeam:self.CompitisonCode :self.matchCode :selectTeamcode :[NSNumber numberWithInt:1] :StrikerCode :NonStrikerCode :selectBowlerCode :[NSNumber numberWithInt:1] :selectTeamcode :electedcode:BowlingEnd];
+            DBManagerChangeTeam *objDBManagerChangeTeam = [[DBManagerChangeTeam alloc] init];
+            [objDBManagerChangeTeam InsertChangeTeam:self.CompitisonCode :self.matchCode :selectTeamcode :[NSNumber numberWithInt:1] :StrikerCode :NonStrikerCode :selectBowlerCode :[NSNumber numberWithInt:1] :selectTeamcode :electedcode:BowlingEnd];
             [self.delegate RedirectScorEngin];
             
         }

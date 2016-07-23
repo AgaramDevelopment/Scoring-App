@@ -10,7 +10,7 @@
 
 @implementation DBManagerInsertUpdateMatchResult
 
-+(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
+-(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
     return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
 }
 
@@ -18,7 +18,7 @@
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 //Copy database to application document
-+ (void) copyDatabaseIfNotExist{
+-(void) copyDatabaseIfNotExist{
     
     //Using NSFileManager we can perform many file system operations.
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -42,7 +42,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 //Get database path
-+(NSString *) getDBPath
+-(NSString *) getDBPath
 {
     [self copyDatabaseIfNotExist];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
@@ -50,7 +50,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
 }
 
-+(BOOL)  UpdateCompetitionForInsertMatchResult:(NSString*) MANOFTHESERIESCODE:(NSString*) BESTBATSMANCODE:(NSString*) BESTBOWLERCODE:(NSString*) BESTALLROUNDERCODE:(NSString*) MOSTVALUABLEPLAYERCODE:(NSString*) COMPETITIONCODE{
+-(BOOL)  UpdateCompetitionForInsertMatchResult:(NSString*) MANOFTHESERIESCODE:(NSString*) BESTBATSMANCODE:(NSString*) BESTBOWLERCODE:(NSString*) BESTALLROUNDERCODE:(NSString*) MOSTVALUABLEPLAYERCODE:(NSString*) COMPETITIONCODE{
     
     
     NSString *databasePath = [self getDBPath];
@@ -62,29 +62,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE  COMPETITION SET MANOFTHESERIESCODE='%@', BESTBATSMANCODE='%@',  BESTBOWLERCODE='%@' ,BESTALLROUNDERCODE= '%@',MOSTVALUABLEPLAYERCODE='%@' WHERE	COMPETITIONCODE='%@'",MANOFTHESERIESCODE,BESTBATSMANCODE,BESTBOWLERCODE,BESTALLROUNDERCODE,MOSTVALUABLEPLAYERCODE,COMPETITIONCODE];
         const char *selectStmt = [updateSQL UTF8String];
         
-        sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL) == SQLITE_OK)
         {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return YES;
-            
+            sqlite3_finalize(statement);
         }
-        else {
-             NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
-            sqlite3_reset(statement);
-            
-            
-            return NO;
-        }
-        
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
     
 }
 
-+(NSString*)  GetMatchresultCodeForInsertMatchResult :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) BUTTONNAME {
+-(NSString*)  GetMatchresultCodeForInsertMatchResult :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) BUTTONNAME {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -98,23 +95,20 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *MATCHRESULTCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return MATCHRESULTCODE;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
-            
-            return @"";
+            sqlite3_finalize(statement);
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return @"";
 }
 
-+(BOOL) DeleteMatchResultForInsertMatchResult:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE  {
+-(BOOL) DeleteMatchResultForInsertMatchResult:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE  {
     
     
     NSString *databasePath = [self getDBPath];
@@ -130,16 +124,20 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
             }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
     
 }
 
-+(NSString*)  GetMatchresultCodeInElseIfForInsertMatchResult :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) BUTTONNAME {
+-(NSString*)  GetMatchresultCodeInElseIfForInsertMatchResult :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) BUTTONNAME {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -153,23 +151,20 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *MATCHRESULTCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return MATCHRESULTCODE;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
-            
-            return @"";
+            sqlite3_finalize(statement);
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return @"";
 }
 
-+(BOOL)  InsertMatchResultForInsertMatchResult:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) MATCHRESULTCODE : (NSString*) MATCHWONTEAMCODE : (NSString*) TEAMAPOINTS : (NSString*) TEAMBPOINTS :(NSString*) MANOFTHEMATCHCODE :(NSString*) COMMENTS;{
+-(BOOL)  InsertMatchResultForInsertMatchResult:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) MATCHRESULTCODE : (NSString*) MATCHWONTEAMCODE : (NSString*) TEAMAPOINTS : (NSString*) TEAMBPOINTS :(NSString*) MANOFTHEMATCHCODE :(NSString*) COMMENTS;{
     
     
     NSString *databasePath = [self getDBPath];
@@ -181,28 +176,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO MATCHRESULT   (  COMPETITIONCODE, 	MATCHCODE, 	MATCHRESULTCODE, 	MATCHWONTEAMCODE, 	TEAMAPOINTS,TEAMBPOINTS,	MANOFTHEMATCHCODE, 	COMMENTS) 	VALUES 	( 	'%@', 	'%@',  '%@','%@' , '%@' , '%@', '%@', '%@' )",COMPETITIONCODE,MATCHCODE,MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,TEAMBPOINTS,MANOFTHEMATCHCODE,COMMENTS];
         const char *selectStmt = [updateSQL UTF8String];
         
-        sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
         {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return YES;
-            
+            sqlite3_finalize(statement);
         }
-        else {
-            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
-            sqlite3_reset(statement);
-            
-            
-            return NO;
-        }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
     
 }
 
-+(BOOL)  UpdateMatchRegistrationForInsertMatchResult:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+-(BOOL)  UpdateMatchRegistrationForInsertMatchResult:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
     
     
     NSString *databasePath = [self getDBPath];
@@ -213,30 +206,27 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION  SET MATCHRESULT = '' ,MATCHRESULTTEAMCODE = '' ,[MATCHSTATUS] = 'MSC124'  ,MODIFIEDBY = 'USER'  ,MODIFIEDDATE = strftime('%%Y-%%m-%%d %%H-%%M-%%S','now') WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
         const char *selectStmt = [updateSQL UTF8String];
-        
-        sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
         {
+            
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return YES;
-            
+            sqlite3_finalize(statement);
         }
-        else {
-            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
-            sqlite3_reset(statement);
-            
-            
-            return NO;
-        }
-
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
     
 }
 
-+(BOOL) UpdatematchRegistrationElseifForInsertMatchResult:(NSString*) MATCHRESULTCODE : (NSString*) MATCHWONTEAMCODE : (NSString*) TEAMAPOINTS : (NSString*) TEAMBPOINTS : COMPETITIONCODE:(NSString*) MATCHCODE {
+-(BOOL) UpdatematchRegistrationElseifForInsertMatchResult:(NSString*) MATCHRESULTCODE : (NSString*) MATCHWONTEAMCODE : (NSString*) TEAMAPOINTS : (NSString*) TEAMBPOINTS : COMPETITIONCODE:(NSString*) MATCHCODE {
     
     
     NSString *databasePath = [self getDBPath];
@@ -248,28 +238,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION SET MATCHRESULT = '%@' ,MATCHRESULTTEAMCODE = '%@' ,TEAMAPOINTS = '%@' ,TEAMBPOINTS = '%@' ,MATCHSTATUS = 'MSC125'  ,MODIFIEDBY = 'USER'				  ,MODIFIEDDATE = strftime('%%Y-%%m-%%d %%H-%%M-%%S','now')			 WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,TEAMBPOINTS,COMPETITIONCODE,MATCHCODE];
         const char *selectStmt = [updateSQL UTF8String];
         
-        sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
         {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return YES;
-            
+            sqlite3_finalize(statement);
         }
-        else {
-            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
-            sqlite3_reset(statement);
-            
-            
-            return NO;
-        }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
     
 }
 
-+(BOOL) UpdatematchResultForInsertMatchResult:(NSString*) MATCHRESULTCODE : (NSString*) MATCHWONTEAMCODE : (NSString*) TEAMAPOINTS : (NSString*) TEAMBPOINTS :(NSString*) MANOFTHEMATCHCODE :(NSString*) COMMENTS : COMPETITIONCODE:(NSString*) MATCHCODE {
+-(BOOL) UpdatematchResultForInsertMatchResult:(NSString*) MATCHRESULTCODE : (NSString*) MATCHWONTEAMCODE : (NSString*) TEAMAPOINTS : (NSString*) TEAMBPOINTS :(NSString*) MANOFTHEMATCHCODE :(NSString*) COMMENTS : COMPETITIONCODE:(NSString*) MATCHCODE {
     
     
     NSString *databasePath = [self getDBPath];
@@ -281,28 +269,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE  MATCHRESULT 	SET MATCHRESULTCODE='%@',MATCHWONTEAMCODE='%@',TEAMAPOINTS='%@',TEAMBPOINTS= '%@',	MANOFTHEMATCHCODE='%@',	COMMENTS='%@'	WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,TEAMBPOINTS,MANOFTHEMATCHCODE,COMMENTS,COMPETITIONCODE,MATCHCODE];
         const char *selectStmt = [updateSQL UTF8String];
         
-        sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
         {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return YES;
-            
+            sqlite3_finalize(statement);
         }
-        else {
-            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
-            sqlite3_reset(statement);
-            
-            
-            return NO;
-        }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
     
 }
 
-+(BOOL) UpdatematchRegistrationinElseForInsertMatchResult:(NSString*) MATCHRESULTCODE : (NSString*) MATCHWONTEAMCODE : (NSString*) TEAMAPOINTS : (NSString*) TEAMBPOINTS: COMPETITIONCODE:(NSString*) MATCHCODE {
+-(BOOL) UpdatematchRegistrationinElseForInsertMatchResult:(NSString*) MATCHRESULTCODE : (NSString*) MATCHWONTEAMCODE : (NSString*) TEAMAPOINTS : (NSString*) TEAMBPOINTS: COMPETITIONCODE:(NSString*) MATCHCODE {
     
     
     NSString *databasePath = [self getDBPath];
@@ -315,24 +301,21 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         const char *selectStmt = [updateSQL UTF8String];
         
         
-        sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
         {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return YES;
-            
+            sqlite3_finalize(statement);
         }
-        else {
-            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
-            sqlite3_reset(statement);
-            
-            
-            return NO;
-        }
-
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
     
 }
