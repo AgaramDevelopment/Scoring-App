@@ -17,6 +17,7 @@
 
 - (IBAction)btn_login:(id)sender;
 - (IBAction)btn_show_pwd:(id)sender;
+@property (strong, nonatomic) IBOutlet UIImageView *eye_imgview;
 
 -(BOOL) formValidation;
 -(void) showDialog:(NSString*) message andTitle:(NSString*) title;

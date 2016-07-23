@@ -2355,7 +2355,7 @@ EditModeVC * objEditModeVc;
         //        [DBManager insertBallCodeWicketEvent:self.ballEventRecord];
         //        [DBManager GetBallDetails :_competitionCode :_matchCode];
         //
-        [self reloadBowlerTeamBatsmanDetails];
+       // [self reloadBowlerTeamBatsmanDetails];
         // [ self AssignControlValues :YES:@""];
         
         
@@ -6997,7 +6997,7 @@ self.lbl_umpirename.text=@"";
         self.view_fastBowl.hidden = NO;
         
         [self.tbl_fastBowl reloadData];
-        
+      
         if(selectedfieldPlayer!=nil){
             
             int indx=0;
@@ -8483,13 +8483,20 @@ self.lbl_umpirename.text=@"";
 }
 
 
-
+-(void)ShowAlterView:(NSString *) alterMsg
+{
+    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [objAlter show];
+}
 
 - (IBAction)btn_AppealSave:(id)sender {
     
+     if([self formValidation])
+     {
+    
     // UIColor colorWithRed:84 green:106 blue:126 alpha:0
     NSString *commentText =[NSString stringWithFormat:@"%@",[_comments_txt text]];
-    if(appealEventDict==nil){
+  if(appealEventDict==nil){
         appealEventDict = [NSMutableDictionary dictionary];
     }
     
@@ -8500,11 +8507,44 @@ self.lbl_umpirename.text=@"";
     NSString*AppealBowlercode=fetchSEPageLoadRecord.currentBowlerPlayerCode;
     [appealEventDict setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
     [appealEventDict setValue:commentText forKey:@"Commenttext"];
-    
-    
-    [self.view_table_select setHidden:YES];
+     [self.view_table_select setHidden:YES];
 }
 
+}
+
+
+
+
+- (BOOL) formValidation
+{
+   
+ if([self.lbl_appealsystem.text isEqualToString:@""] || self.lbl_appealsystem.text==nil)
+{
+    [self ShowAlterView:@"Please Select System"];
+    return NO;
+}
+ if([self.lbl_appealComponent.text isEqualToString:@""] || self.lbl_appealComponent.text==nil)
+{
+    [self ShowAlterView:@"Please Select Component"];
+    return NO;
+}
+ if([self.lbl_umpirename.text isEqualToString:@""] || self.lbl_umpirename.text==nil)
+{
+    [self ShowAlterView:@"Please Select Umpirename"];
+    return NO;
+}
+ if([self.lbl_batsmen.text isEqualToString:@""] || self.lbl_batsmen.text==nil)
+{
+    [self ShowAlterView:@"Please Select the Batsman"];
+    return NO;
+}
+ if([self.comments_txt.text isEqualToString:@""] || self.comments_txt.text==nil)
+{
+    [self ShowAlterView:@"Please Enter the Comments"];
+    return NO;
+}
+    return YES;
+}
 
 -(void)teamLogo{
     //logo image
@@ -8786,6 +8826,7 @@ self.lbl_umpirename.text=@"";
 }
 -(void) reloadBowlerTeamBatsmanDetails{
     //[self EndBallMethod];
+    
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
@@ -12421,6 +12462,10 @@ self.lbl_umpirename.text=@"";
     NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
     
     NSLog(@"the final output is:%@",responseString);
+}
+
+- (IBAction)Appeal_Cancel_btn:(id)sender {
+    [self.view_table_select setHidden:YES];
 }
 - (IBAction)Exit_btn:(id)sender {
     
