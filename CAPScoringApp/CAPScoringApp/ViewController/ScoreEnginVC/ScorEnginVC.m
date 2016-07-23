@@ -7960,7 +7960,7 @@ self.lbl_umpirename.text=@"";
        [self addChildViewController:endSession];
         [fullview addSubview:endSession.view];
        
-       [endSession fetchPageEndSession:fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
+       [endSession fetchPageEndSession :fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
        
     }
     
