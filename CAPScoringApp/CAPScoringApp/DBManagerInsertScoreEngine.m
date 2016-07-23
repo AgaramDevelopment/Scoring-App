@@ -19,7 +19,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 //Copy database to application document
-+ (void) copyDatabaseIfNotExist{
+- (void) copyDatabaseIfNotExist{
     
     //Using NSFileManager we can perform many file system operations.
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -43,7 +43,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 //Get database path
-+(NSString *) getDBPath
+-(NSString *) getDBPath
 {
     [self copyDatabaseIfNotExist];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
@@ -52,7 +52,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
-+(NSString*) GetBallCodeForInsertScoreEngine:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+-(NSString*) GetBallCodeForInsertScoreEngine:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -62,6 +62,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
+    if(sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'",COMPETITIONCODE,MATCHCODE];
     
     stmt=[updateSQL UTF8String];
@@ -70,21 +72,25 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *BALLCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             
             return BALLCODE;
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+    }
     return @"";
 }
 
 
-+(NSString*) getBowlingCode:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*)TEAMCODE{
+-(NSString*) getBowlingCode:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*)TEAMCODE{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -94,6 +100,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if(retVal !=0){
     }
     
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *updateSQL = [NSString stringWithFormat:@"SELECT CASE WHEN TEAMACODE = '%@' THEN TEAMBCODE ELSE TEAMACODE END  AS BOWLINGCODE FROM MATCHREGISTRATION WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'",TEAMCODE,COMPETITIONCODE,MATCHCODE];
     
     stmt=[updateSQL UTF8String];
@@ -102,23 +110,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *BALLCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             
             return BALLCODE;
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
-    
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+    }
     return @"";
 }
 
 
 
 
-+(BOOL)    UpdateMatchStatusForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE{
+-(BOOL) UpdateMatchStatusForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE{
     
     
     NSString *databasePath = [self getDBPath];
@@ -130,22 +141,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION SET MATCHSTATUS = 'MSC124' 	WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'",COMPETITIONCODE, MATCHCODE];
         
         const char *selectStmt = [updateSQL UTF8String];
-        
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
             }
         }
+        sqlite3_close(dataBase);
+        
     }
-    sqlite3_reset(statement);
-    return NO;
     
+    return NO;
 }
 
-
-+(NSNumber*) GetBallCountForInsertScoreEngine:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) TEAMCODE:(NSNumber*) INNINGSNO : (NSNumber*) OVERNO:(NSNumber*) BALLNO{
+-(NSNumber*) GetBallCountForInsertScoreEngine:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) TEAMCODE:(NSNumber*) INNINGSNO : (NSNumber*) OVERNO:(NSNumber*) BALLNO{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -154,7 +174,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *updateSQL = [NSString stringWithFormat:@"SELECT IFNULL(MAX(BALLCOUNT),0) + 1   as BALLCOUNT FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@' AND OVERNO='%@' AND BALLNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE, INNINGSNO, OVERNO,BALLNO];
     
     stmt=[updateSQL UTF8String];
@@ -165,19 +186,23 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
             f.numberStyle = NSNumberFormatterDecimalStyle;
             NSNumber *BALLCOUNT = [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             
             return BALLCOUNT;
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+    }
     return 0;
 }
-+(NSString*) GetBallCodesForInsertScoreEngine:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) TEAMCODE:(NSNumber*) INNINGSNO : (NSNumber*) OVERNO:(NSNumber*) BALLNO:(NSNumber*) BALLCOUNT{
+-(NSString*) GetBallCodesForInsertScoreEngine:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) TEAMCODE:(NSNumber*) INNINGSNO : (NSNumber*) OVERNO:(NSNumber*) BALLNO:(NSNumber*) BALLCOUNT{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -186,7 +211,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@' AND OVERNO='%@' AND BALLNO='%@' AND BALLCOUNT='%@' ",COMPETITIONCODE,MATCHCODE,TEAMCODE, INNINGSNO, OVERNO,BALLNO,BALLCOUNT];
     
     stmt=[updateSQL UTF8String];
@@ -195,22 +221,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *BALLCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             
             return BALLCODE;
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+    }
     return @"";
 }
 
 
 
-+(NSString*)  GetMaxIdForInsertScoreEngine:(NSString*) MATCHCODE{
+-(NSString*)  GetMaxIdForInsertScoreEngine:(NSString*) MATCHCODE{
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -222,28 +252,27 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                
-                
+
                 NSString *BallCodeNo =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return BallCodeNo;
             }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+
             
         }
-        else {
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return @"";
-        }
+                   sqlite3_close(dataBase);
+       
     }
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
+  
     return @"";
 }
 
 
-+(NSMutableArray*) GetInsertTypeGreaterthanZeroDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BALLCODE
+-(NSMutableArray*) GetInsertTypeGreaterthanZeroDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BALLCODE
 {
     NSMutableArray *GetInsertTypeGreaterthanZeroDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
@@ -271,14 +300,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                 [GetInsertTypeGreaterthanZeroDetails addObject:record];
             }
-            
+            sqlite3_reset(statement);
         }
     }
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
     return GetInsertTypeGreaterthanZeroDetails;
 }
-+(BOOL)  UpdateBallEventtableForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) TEAMCODE: (NSNumber*) T_OVERNO : (NSNumber*) T_BALLNO{
+-(BOOL)  UpdateBallEventtableForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) TEAMCODE: (NSNumber*) T_OVERNO : (NSNumber*) T_BALLNO{
     
     
     NSString *databasePath = [self getDBPath];
@@ -291,19 +320,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
             }
         }
+        sqlite3_close(dataBase);
+        
     }
-    sqlite3_reset(statement);
-    return NO;
     
+    return NO;
 }
-+(BOOL)  UpdateBallEventtablesForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) TEAMCODE: (NSNumber*) T_OVERNO : (NSNumber*) T_BALLNO:(NSNumber*) T_BALLCOUNT{
+
+-(BOOL)  UpdateBallEventtablesForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) TEAMCODE: (NSNumber*) T_OVERNO : (NSNumber*) T_BALLNO:(NSNumber*) T_BALLCOUNT{
     
     
     NSString *databasePath = [self getDBPath];
@@ -316,19 +357,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+       {
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return NO;
         }
     }
-    sqlite3_reset(statement);
+        sqlite3_close(dataBase);
+ 
+    }
+   
     return NO;
-    
 }
-+(BOOL)   UpdateBallEventtablesInAddBallNoForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) TEAMCODE: (NSNumber*) T_OVERNO : (NSNumber*) T_BALLNO:(NSNumber*) T_BALLCOUNT{
+
+-(BOOL)   UpdateBallEventtablesInAddBallNoForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) TEAMCODE: (NSNumber*) T_OVERNO : (NSNumber*) T_BALLNO:(NSNumber*) T_BALLCOUNT{
     
     
     NSString *databasePath = [self getDBPath];
@@ -341,19 +394,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+       {
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return NO;
         }
     }
-    sqlite3_reset(statement);
+        sqlite3_close(dataBase);
+ 
+    }
+   
     return NO;
-    
 }
-+(BOOL)   InsertBallEventForInsertScoreEngine:(NSString*) BALLCODENO:(NSNumber*) N_BALLNO: (NSNumber*) N_BALLCOUNT: (NSNumber*) BALLSPEED: (NSNumber*) UNCOMFORTCLASSIFCATION:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) INNINGSNO : (NSString*) TEAMCODE:(NSString*) BALLCODE {
+
+-(BOOL)   InsertBallEventForInsertScoreEngine:(NSString*) BALLCODENO:(NSNumber*) N_BALLNO: (NSNumber*) N_BALLCOUNT: (NSNumber*) BALLSPEED: (NSNumber*) UNCOMFORTCLASSIFCATION:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) INNINGSNO : (NSString*) TEAMCODE:(NSString*) BALLCODE {
     
     
     NSString *databasePath = [self getDBPath];
@@ -367,20 +432,30 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+       {
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return NO;
         }
     }
-    sqlite3_reset(statement);
+        sqlite3_close(dataBase);
+ 
+    }
+   
     return NO;
-    
 }
-
-//+(BOOL)  UpdateOverBallCountInBallEventtForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) T_OVERNO{
+//-(BOOL)  UpdateOverBallCountInBallEventtForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) T_OVERNO{
 //    
 //    
 //    NSString *databasePath = [self getDBPath];
@@ -407,7 +482,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //}
 
 
-+(BOOL)  UpdateOverBallCountInBallEventtForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) T_OVERNO
+-(BOOL)  UpdateOverBallCountInBallEventtForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) T_OVERNO
 
 {
     
@@ -496,7 +571,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 //}
 
-+(BOOL)  UpdateBEForInsertScoreEngine:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO : (NSNumber*) T_OVERNO{
+-(BOOL)  UpdateBEForInsertScoreEngine:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO : (NSNumber*) T_OVERNO{
     
     
     NSString *databasePath = [self getDBPath];
@@ -509,19 +584,32 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+       {
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return NO;
         }
     }
-    sqlite3_reset(statement);
+        sqlite3_close(dataBase);
+ 
+    }
+   
     return NO;
-    
 }
-+(NSString*) GetmaxPenaltyIdForInsertScoreEngine{
+
+
+-(NSString*) GetmaxPenaltyIdForInsertScoreEngine{
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -530,28 +618,29 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT  IFNULL(MAX(SUBSTR(PENALTYCODE,4,7)),0)+1 as MAXPENALTYID  FROM PENALTYDETAILS "];
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *MAXPENALTYID =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return MAXPENALTYID;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+
             
-            return @"";
         }
+        sqlite3_close(dataBase);
+        
     }
-    sqlite3_reset(statement);
+    
     return @"";
 }
-+(BOOL)  InsertPenaltyDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) INNINGSNO : (NSNumber*) BALLCODENO : (NSNumber*) PENALTYCODE: (NSNumber*) AWARDEDTOTEAMCODE: (NSNumber*) PENALTYRUNS: (NSNumber*) PENALTYTYPECODE: (NSNumber*) PENALTYREASONCODE{
+
+-(BOOL)  InsertPenaltyDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) INNINGSNO : (NSNumber*) BALLCODENO : (NSNumber*) PENALTYCODE: (NSNumber*) AWARDEDTOTEAMCODE: (NSNumber*) PENALTYRUNS: (NSNumber*) PENALTYTYPECODE: (NSNumber*) PENALTYREASONCODE{
     
     
     NSString *databasePath = [self getDBPath];
@@ -564,19 +653,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+       {
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return NO;
         }
     }
-    sqlite3_reset(statement);
+        sqlite3_close(dataBase);
+ 
+    }
+   
     return NO;
-    
 }
-+(NSString*) GetPrevoiusBallCodeForInsertScoreEngine : (NSNumber*) OVERNO: (NSNumber*) BALLNO:(NSNumber*) BALLCOUNT : (NSString*) MATCHCODE : (NSString*) INNINGSNO{
+
+-(NSString*) GetPrevoiusBallCodeForInsertScoreEngine : (NSNumber*) OVERNO: (NSNumber*) BALLNO:(NSNumber*) BALLCOUNT : (NSString*) MATCHCODE : (NSString*) INNINGSNO{
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -594,23 +695,22 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return BALLCODE;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+
             
-            return @"";
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
+
     return @"";
 }
 
-+(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
+-(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
     return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
 }
 
-+(NSMutableArray *) getOverBallCountDetails :(NSString *) CommpitionCode :(NSString *) matchCode:(NSString*) overNo :(NSString *) Inningsno
+-(NSMutableArray *) getOverBallCountDetails :(NSString *) CommpitionCode :(NSString *) matchCode:(NSString*) overNo :(NSString *) Inningsno
 {
     NSMutableArray *GetInsertTypeGreaterthanZeroDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
@@ -637,7 +737,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                 [GetInsertTypeGreaterthanZeroDetails addObject:objOverBallCountRecord];
             }
-            
+            sqlite3_reset(statement);
         }
     }
     sqlite3_finalize(statement);
@@ -646,7 +746,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 //Duplicate
-//+(NSString*) GetPrevoiusBallCodeForInsertScoreEngine : (NSNumber*) OVERNO: (NSNumber*) BALLNO:(NSNumber*) BALLCOUNT : (NSString*) MATCHCODE : (NSString*) INNINGSNO{
+//-(NSString*) GetPrevoiusBallCodeForInsertScoreEngine : (NSNumber*) OVERNO: (NSNumber*) BALLNO:(NSNumber*) BALLCOUNT : (NSString*) MATCHCODE : (NSString*) INNINGSNO{
 //                                                                  NSString *databasePath = [self getDBPath];
 //                                                                  sqlite3_stmt *statement;
 //                                                                  sqlite3 *dataBase;
@@ -677,7 +777,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  return @"";
 //                                                              }
     
-    +(NSNumber*) GetBallcodeInBallEventForInsertScoreEngine : (NSString*) PREVIOUSBALLCODE: (NSString*) BOWLERCODE{
+-(NSNumber*) GetBallcodeInBallEventForInsertScoreEngine : (NSString*) PREVIOUSBALLCODE: (NSString*) BOWLERCODE{
 
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -687,7 +787,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+        {
     NSString *updateSQL = [NSString stringWithFormat:@"SELECT COUNT(BALLCODE) FROM BALLEVENTS WHERE BALLCODE = '%@' AND BOWLERCODE != '%@'",PREVIOUSBALLCODE,BOWLERCODE];
     
     stmt=[updateSQL UTF8String];
@@ -698,50 +799,60 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
             f.numberStyle = NSNumberFormatterDecimalStyle;
             NSNumber *BALLCODE = [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             
             return BALLCODE;
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+        }
     return 0;
 }
-+(NSString*) GetPrevoiusBowlerCodeForInsertScoreEngine : (NSString*) PREVIOUSBALLCODE{
-    NSString *databasePath = [self getDBPath];
-    sqlite3_stmt *statement;
+
+-(NSString*) GetPrevoiusBowlerCodeForInsertScoreEngine : (NSString*) PREVIOUSBALLCODE{
+    int retVal;
+    NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *dbPath = [databasePath UTF8String];
-    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BOWLERCODE FROM BALLEVENTS WHERE BALLCODE = '%@'",PREVIOUSBALLCODE];
-        const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+    NSString *updateSQL = [NSString stringWithFormat:@"SELECT BOWLERCODE FROM BALLEVENTS WHERE BALLCODE = '%@'",PREVIOUSBALLCODE];
+
+        stmt=[updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *BOWLERCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return BOWLERCODE;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
-            
-            return @"";
+            sqlite3_finalize(statement);
+
         }
+        
+        
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
-    return @"";
+    return 0;
 }
 
-+(BOOL)  UpdateBolwerOverDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSString*) INNINGSNO : (NSNumber*) OVERNO : (NSString*) PREVIOUSBOWLERCODE{
+
+-(BOOL)  UpdateBolwerOverDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSString*) INNINGSNO : (NSNumber*) OVERNO : (NSString*) PREVIOUSBOWLERCODE{
     
     
     NSString *databasePath = [self getDBPath];
@@ -754,20 +865,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
             }
         }
+        sqlite3_close(dataBase);
+        
     }
-    sqlite3_reset(statement);
-    return NO;
     
+    return NO;
 }
 
-+(BOOL)  UpdateBolwlingSummaryForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) INNINGSNO : (NSString*) PREVIOUSBOWLERCODE{
+-(BOOL)  UpdateBolwlingSummaryForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) INNINGSNO : (NSString*) PREVIOUSBOWLERCODE{
     
     
     NSString *databasePath = [self getDBPath];
@@ -780,19 +902,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
             }
         }
+        sqlite3_close(dataBase);
+        
     }
-    sqlite3_reset(statement);
-    return NO;
     
+    return NO;
 }
-+(BOOL)  InsertBowlerOverDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO: (NSNumber*) OVERNO: (NSString*) BOWLERCODE{
+
+-(BOOL)  InsertBowlerOverDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO: (NSNumber*) OVERNO: (NSString*) BOWLERCODE{
     
     
     NSString *databasePath = [self getDBPath];
@@ -805,19 +939,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+       {
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return NO;
         }
     }
-    sqlite3_reset(statement);
+        sqlite3_close(dataBase);
+ 
+    }
+   
     return NO;
-    
 }
-+(NSNumber*) GetBallCodeForUpdateBowlerOverDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO  : (NSNumber*) OVERNO{
+
+-(NSNumber*) GetBallCodeForUpdateBowlerOverDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO  : (NSNumber*) OVERNO{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -826,7 +972,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *updateSQL = [NSString stringWithFormat:@"SELECT COUNT(BALLCODE) as BALLCODE FROM BALLEVENTS WHERE OVERNO = '%@' AND COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'       AND INNINGSNO='%@'",OVERNO,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
     
     stmt=[updateSQL UTF8String];
@@ -837,19 +984,23 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
             f.numberStyle = NSNumberFormatterDecimalStyle;
             NSNumber *BALLCODE = [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             
             return BALLCODE;
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
     sqlite3_close(dataBase);
+    }
     return 0;
 }
-+(BOOL)  UpdateBowlerDetailsForInsertScoreEngine:(NSString*) BOWLERCODE:  (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO: (NSNumber*) OVERNO{
+
+-(BOOL)  UpdateBowlerDetailsForInsertScoreEngine:(NSString*) BOWLERCODE:  (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO: (NSNumber*) OVERNO{
     
     
     NSString *databasePath = [self getDBPath];
@@ -862,20 +1013,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [selectQry UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+       {
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return NO;
         }
     }
-    sqlite3_reset(statement);
+        sqlite3_close(dataBase);
+ 
+    }
+   
     return NO;
-    
 }
 
-+(NSNumber*) GetOverBallCountForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) OVERNO{
+-(NSNumber*) GetOverBallCountForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) OVERNO{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -884,7 +1046,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *updateSQL = [NSString stringWithFormat:@"SELECT  IFNULL(MAX(OVERBALLCOUNT),0) + 1  as OVERBALLCOUNT FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'      AND INNINGSNO='%@' AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO];
     
     stmt=[updateSQL UTF8String];
@@ -895,20 +1058,25 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
             f.numberStyle = NSNumberFormatterDecimalStyle;
             NSNumber *OVERBALLCOUNT = [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             
             return OVERBALLCOUNT;
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
+        
     
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+    }
     return 0;
 }
 
-+(BOOL)  InsertBallEventsForInsertScoreEngine:(NSNumber*) BALLCODENO:  (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO: (NSNumber*) DAYNO:(NSNumber*) OVERNO:  (NSNumber*) BALLNO: (NSNumber*) BALLCOUNT: (NSNumber*) OVERBALLCOUNT : (NSString*) SESSIONNO: (NSString*) STRIKERCODE :(NSString*) NONSTRIKERCODE:  (NSString*) BOWLERCODE: (NSString*) WICKETKEEPERCODE: (NSString*) UMPIRE1CODE : (NSString*) UMPIRE2CODE: (NSString*) ATWOROTW:(NSString*) BOWLINGEND:  (NSString*) BOWLTYPE: (NSString*) SHOTTYPE: (NSString*) SHOTTYPECATEGORY : (NSNumber*) ISLEGALBALL: (NSNumber*) ISFOUR:(NSNumber*) ISSIX:  (NSNumber*) RUNS: (NSNumber*) OVERTHROW: (NSNumber*) TOTALRUNS : (NSNumber*) WIDE: (NSNumber*) NOBALL : (NSString*) BYES:  (NSString*) LEGBYES: (NSNumber*) PENALTY: (NSNumber*) TOTALEXTRAS : (NSNumber*) GRANDTOTAL: (NSNumber*) RBW:(NSString*) PMLINECODE:  (NSString*) PMLENGTHCODE: (NSNumber*) PMSTRIKEPOINT: (NSString*) PMSTRIKEPOINTLINECODE : (NSNumber*) PMX1: (NSNumber*) PMY1:(NSNumber*) PMX2:  (NSNumber*) PMY2: (NSNumber*) PMX3: (NSNumber*) PMY3 : (NSNumber*) WWREGION: (NSNumber*) WWX1:(NSNumber*) WWY1:  (NSNumber*) WWX2: (NSNumber*) WWY2: (NSString*) BALLDURATION : (NSString*) ISAPPEAL: (NSString*) ISBEATEN:(NSString*) ISUNCOMFORT:  (NSString*) ISWTB: (NSString*) ISRELEASESHOT: (NSString*) MARKEDFOREDIT : (NSString*) REMARKS: (NSString*) VIDEOFILENAME:(NSString*) BALLSPEED:  (NSString*) UNCOMFORTCLASSIFCATION{
+-(BOOL)  InsertBallEventsForInsertScoreEngine:(NSNumber*) BALLCODENO:  (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO: (NSNumber*) DAYNO:(NSNumber*) OVERNO:  (NSNumber*) BALLNO: (NSNumber*) BALLCOUNT: (NSNumber*) OVERBALLCOUNT : (NSString*) SESSIONNO: (NSString*) STRIKERCODE :(NSString*) NONSTRIKERCODE:  (NSString*) BOWLERCODE: (NSString*) WICKETKEEPERCODE: (NSString*) UMPIRE1CODE : (NSString*) UMPIRE2CODE: (NSString*) ATWOROTW:(NSString*) BOWLINGEND:  (NSString*) BOWLTYPE: (NSString*) SHOTTYPE: (NSString*) SHOTTYPECATEGORY : (NSNumber*) ISLEGALBALL: (NSNumber*) ISFOUR:(NSNumber*) ISSIX:  (NSNumber*) RUNS: (NSNumber*) OVERTHROW: (NSNumber*) TOTALRUNS : (NSNumber*) WIDE: (NSNumber*) NOBALL : (NSString*) BYES:  (NSString*) LEGBYES: (NSNumber*) PENALTY: (NSNumber*) TOTALEXTRAS : (NSNumber*) GRANDTOTAL: (NSNumber*) RBW:(NSString*) PMLINECODE:  (NSString*) PMLENGTHCODE: (NSNumber*) PMSTRIKEPOINT: (NSString*) PMSTRIKEPOINTLINECODE : (NSNumber*) PMX1: (NSNumber*) PMY1:(NSNumber*) PMX2:  (NSNumber*) PMY2: (NSNumber*) PMX3: (NSNumber*) PMY3 : (NSNumber*) WWREGION: (NSNumber*) WWX1:(NSNumber*) WWY1:  (NSNumber*) WWX2: (NSNumber*) WWY2: (NSString*) BALLDURATION : (NSString*) ISAPPEAL: (NSString*) ISBEATEN:(NSString*) ISUNCOMFORT:  (NSString*) ISWTB: (NSString*) ISRELEASESHOT: (NSString*) MARKEDFOREDIT : (NSString*) REMARKS: (NSString*) VIDEOFILENAME:(NSString*) BALLSPEED:  (NSString*) UNCOMFORTCLASSIFCATION{
     
     
     NSString *databasePath = [self getDBPath];
@@ -919,21 +1087,33 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         NSString *updateSQL = [NSString stringWithFormat:@" INSERT INTO BALLEVENTS      (     BALLCODE       ,COMPETITIONCODE       ,MATCHCODE       ,TEAMCODE       ,INNINGSNO       ,DAYNO       ,OVERNO       ,BALLNO       ,BALLCOUNT       ,OVERBALLCOUNT       ,SESSIONNO       ,STRIKERCODE       ,NONSTRIKERCODE       ,BOWLERCODE       ,WICKETKEEPERCODE       ,UMPIRE1CODE       ,UMPIRE2CODE       ,ATWOROTW       ,BOWLINGEND       ,BOWLTYPE       ,SHOTTYPE       ,SHOTTYPECATEGORY       ,ISLEGALBALL       ,ISFOUR       ,ISSIX       ,RUNS       ,OVERTHROW       ,TOTALRUNS       ,WIDE       ,NOBALL       ,BYES       ,LEGBYES       ,PENALTY       ,TOTALEXTRAS       ,GRANDTOTAL       ,RBW       ,PMLINECODE       ,PMLENGTHCODE       ,PMSTRIKEPOINT       ,PMSTRIKEPOINTLINECODE       ,PMX1       ,PMY1       ,PMX2       ,PMY2       ,PMX3       ,PMY3       ,WWREGION       ,WWX1       ,WWY1       ,WWX2       ,WWY2       ,BALLDURATION       ,ISAPPEAL       ,ISBEATEN       ,ISUNCOMFORT       ,ISWTB       ,ISRELEASESHOT       ,MARKEDFOREDIT       ,REMARKS       ,VIDEOFILENAME       ,BALLSPEED       ,UNCOMFORTCLASSIFCATION      )      VALUES      (          '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'       , '%@'     ) ",  BALLCODENO       , COMPETITIONCODE       , MATCHCODE       , TEAMCODE       , INNINGSNO       , DAYNO       , OVERNO       , BALLNO       , BALLCOUNT       , OVERBALLCOUNT       , SESSIONNO       , STRIKERCODE       , NONSTRIKERCODE       , BOWLERCODE       , WICKETKEEPERCODE       , UMPIRE1CODE       , UMPIRE2CODE       , ATWOROTW       , BOWLINGEND       , BOWLTYPE       , SHOTTYPE       , SHOTTYPECATEGORY       , ISLEGALBALL       , ISFOUR       , ISSIX       , RUNS       , OVERTHROW       , TOTALRUNS       , WIDE       , NOBALL       , BYES       , LEGBYES       , PENALTY       , TOTALEXTRAS       , GRANDTOTAL       , RBW       , PMLINECODE       , PMLENGTHCODE       , PMSTRIKEPOINT       , PMSTRIKEPOINTLINECODE       , PMX1       , PMY1       , PMX2       , PMY2       , PMX3       , PMY3       , WWREGION       , WWX1       , WWY1       , WWX2       , WWY2       , BALLDURATION       , ISAPPEAL       , ISBEATEN       , ISUNCOMFORT       , ISWTB       , ISRELEASESHOT       , MARKEDFOREDIT       , REMARKS       , VIDEOFILENAME       , BALLSPEED       , UNCOMFORTCLASSIFCATION ] ;
         
-        const char *selectStmt = [updateSQL UTF8String];
+
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+       {
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return NO;
         }
     }
-    sqlite3_reset(statement);
+        sqlite3_close(dataBase);
+ 
+    }
+   
     return NO;
-    
 }
-+(BOOL)  UpdateInningsEventEventsForInsertScoreEngine:(NSString*) T_STRIKERCODE:(NSString*) T_NONSTRIKERCODE: (NSString*) BOWLERCODE:   (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO{
+
+-(BOOL)  UpdateInningsEventEventsForInsertScoreEngine:(NSString*) T_STRIKERCODE:(NSString*) T_NONSTRIKERCODE: (NSString*) BOWLERCODE:   (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO{
     
     
     NSString *databasePath = [self getDBPath];
@@ -944,22 +1124,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS   SET CURRENTSTRIKERCODE = '%@',   CURRENTNONSTRIKERCODE = '%@',   CURRENTBOWLERCODE = '%@'   WHERE COMPETITIONCODE = '%@'    AND MATCHCODE = '%@'     AND TEAMCODE = '%@'     AND INNINGSNO = '%@'"      , T_STRIKERCODE       , T_NONSTRIKERCODE       , BOWLERCODE       , COMPETITIONCODE       , MATCHCODE,TEAMCODE, INNINGSNO ];
         
-        const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+       {
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return NO;
         }
     }
-    sqlite3_reset(statement);
+        sqlite3_close(dataBase);
+ 
+    }
+   
     return NO;
-    
 }
-
-+(BOOL)  InsertWicketEventsForInsertScoreEngine:(NSNumber*) BALLCODENO: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO:(NSString*) ISWICKET :(NSString*) WICKETTYPE :(NSString*) WICKETPLAYER :(NSString*) FIELDINGPLAYER :(NSString*) WICKETEVENT{
+-(BOOL)  InsertWicketEventsForInsertScoreEngine:(NSNumber*) BALLCODENO: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO:(NSString*) ISWICKET :(NSString*) WICKETTYPE :(NSString*) WICKETPLAYER :(NSString*) FIELDINGPLAYER :(NSString*) WICKETEVENT{
     
     
     NSString *databasePath = [self getDBPath];
@@ -970,34 +1159,48 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         NSString *updateSQL = [NSString stringWithFormat:@" INSERT INTO WICKETEVENTS  (    BALLCODE,   COMPETITIONCODE,   MATCHCODE,   TEAMCODE,  INNINGSNO,   ISWICKET,   WICKETNO,   WICKETTYPE,    WICKETPLAYER,     FIELDINGPLAYER,     VIDEOLOCATION,     WICKETEVENT     )    VALUES    (     '%@',     '%@',     '%@',     '%@',     '%@',     '%@',     (      SELECT IFNULL(COUNT(WKT.WICKETNO),0) + 1      FROM WICKETEVENTS WKT      WHERE WKT.COMPETITIONCODE = '%@'       AND WKT.MATCHCODE = '%@'      AND WKT.TEAMCODE = '%@'       AND WKT.INNINGSNO = '%@'      AND WKT.WICKETTYPE != 'MSC102'    ),     '%@',     '%@',     '%@',     '',     '%@'    )  "      , BALLCODENO, COMPETITIONCODE  , MATCHCODE,TEAMCODE, INNINGSNO,ISWICKET,COMPETITIONCODE  , MATCHCODE,TEAMCODE, INNINGSNO,WICKETTYPE, WICKETPLAYER,FIELDINGPLAYER,WICKETEVENT];
         
-        const char *selectStmt = [updateSQL UTF8String];
+
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+       {
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return NO;
         }
     }
-    sqlite3_reset(statement);
+        sqlite3_close(dataBase);
+ 
+    }
+   
     return NO;
-    
 }
-
 //Missing Bowling Team Select
 
-+(NSString*) GetmatchtypeForInsertScoreEngine : (NSString*) COMPETITIONCODE{
-    NSString *databasePath = [self getDBPath];
-    sqlite3_stmt *statement;
+-(NSString*) GetmatchtypeForInsertScoreEngine : (NSString*) COMPETITIONCODE{
+    int retVal;
+    NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *dbPath = [databasePath UTF8String];
-    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHTYPE FROM COMPETITION WHERE COMPETITIONCODE = '%@'",COMPETITIONCODE];
-        const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        
+        stmt=[updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
@@ -1006,86 +1209,95 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return MATCHTYPE;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
-            
-            return @"";
+            sqlite3_finalize(statement);
+
         }
+        
+        
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
-    return @"";
+    return 0;
 }
-+(NSString*) GetInningsStatusForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) INNINGSNO{
-    NSString *databasePath = [self getDBPath];
-    sqlite3_stmt *statement;
+
+
+
+
+-(NSString*) GetInningsStatusForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) INNINGSNO{
+    int retVal;
+    NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *dbPath = [databasePath UTF8String];
-    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT  INNINGSSTATUS FROM INNINGSEVENTS WHERE COMPETITIONCODE = '%@'  AND MATCHCODE = '%@' AND INNINGSNO = '%@' ",COMPETITIONCODE,MATCHCODE,INNINGSNO];
-        const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        stmt=[updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
                 
                 NSString *INNINGSSTATUS =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return INNINGSSTATUS;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
-            
-            return @"";
+            sqlite3_finalize(statement);
+
         }
+        
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
-    return @"";
+    return 0;
 }
 
 
-+(NSNumber*) GetbatTeamRunsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BATTINGTEAMCODE{
-                                       int retVal;
-                                       NSString *databasePath =[self getDBPath];
-                                       sqlite3 *dataBase;
-                                       const char *stmt;
-                                       sqlite3_stmt *statement;
-                                       retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-                                       if(retVal !=0){
-                                       }
-    
-                                       NSString *updateSQL = [NSString stringWithFormat:@"SELECT IFNULL(SUM(GRANDTOTAL),0) as  GRANDTOTAL  FROM BALLEVENTS  WHERE COMPETITIONCODE = '%@'   AND MATCHCODE = '%@'  AND TEAMCODE = '%@'    AND INNINGSNO = '%@'  ",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
-    
-                                       stmt=[updateSQL UTF8String];
-                                       if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
-                                       {
-                                           while(sqlite3_step(statement)==SQLITE_ROW){
-    
-                                               NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-                                               f.numberStyle = NSNumberFormatterDecimalStyle;
-                                               NSNumber *GRANDTOTAL = [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
-    
-                                               sqlite3_finalize(statement);
-                                               sqlite3_close(dataBase);
-    
-                                               return GRANDTOTAL;
-                                           }
-                                       }
-    
-                                       sqlite3_finalize(statement);
-                                       sqlite3_close(dataBase);
-                                       return 0;
-                                   }
+-(NSNumber*) GetbatTeamRunsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BATTINGTEAMCODE{
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT IFNULL(SUM(GRANDTOTAL),0) as  GRANDTOTAL  FROM BALLEVENTS  WHERE COMPETITIONCODE = '%@'   AND MATCHCODE = '%@'  AND TEAMCODE = '%@'    AND INNINGSNO = '%@'  ",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
+        
+        stmt=[updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+                f.numberStyle = NSNumberFormatterDecimalStyle;
+                NSNumber *GRANDTOTAL = [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                return GRANDTOTAL;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+
+        }
+        
+        sqlite3_close(dataBase);
+    }
+    return 0;
+}
 
 
 
 
-//+(NSMutableArray*) GetBattingShortnameForInsertScoreEngine: (NSString*) BATTINGTEAMCODE
+//-(NSMutableArray*) GetBattingShortnameForInsertScoreEngine: (NSString*) BATTINGTEAMCODE
 //
 //{
 //    NSMutableArray *GetBattingShortnameDetails=[[NSMutableArray alloc]init];
@@ -1119,7 +1331,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //    return GetBattingShortnameDetails;
 //}
 //
-//+(NSMutableArray*) GetBowlingShortnameForInsertScoreEngine: (NSString*) BOWLINGTEAMCODE;
+//-(NSMutableArray*) GetBowlingShortnameForInsertScoreEngine: (NSString*) BOWLINGTEAMCODE;
 //
 //{
 //    NSMutableArray *GetBowlingShortnameDetails=[[NSMutableArray alloc]init];
@@ -1153,7 +1365,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //    return GetBowlingShortnameDetails;
 //}
 
-//+(NSMutableArray*) GettargetDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE
+//-(NSMutableArray*) GettargetDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE
 //{
 //    NSMutableArray *GetTarGetDetails=[[NSMutableArray alloc]init];
 //    NSString *databasePath = [self getDBPath];
@@ -1185,7 +1397,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //    return GetTarGetDetails;
 //}
 //
-//+(NSMutableArray*) GetmatchDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE
+//-(NSMutableArray*) GetmatchDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE
 //{
 //    NSMutableArray *GetMatchDetails=[[NSMutableArray alloc]init];
 //    NSString *databasePath = [self getDBPath];
@@ -1222,7 +1434,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //    return GetMatchDetails;
 //}
 //
-//+(NSMutableArray*) GetBowltypeDetailsForInsertScoreEngine;
+//-(NSMutableArray*) GetBowltypeDetailsForInsertScoreEngine;
 //{
 //    NSMutableArray *GetBowlDetails=[[NSMutableArray alloc]init];
 //    NSString *databasePath = [self getDBPath];
@@ -1254,7 +1466,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //    sqlite3_close(dataBase);
 //    return GetBowlDetails;
 //}
-//+(NSMutableArray*) GetShotTypeDetailsForInsertScoreEngine;
+//-(NSMutableArray*) GetShotTypeDetailsForInsertScoreEngine;
 //{
 //    NSMutableArray *GetShotTypeDetails=[[NSMutableArray alloc]init];
 //    NSString *databasePath = [self getDBPath];
@@ -1287,7 +1499,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //    return GetShotTypeDetails;
 //}
 //
-//+(NSMutableArray*) GetRowNumberForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO
+//-(NSMutableArray*) GetRowNumberForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO
 //{
 //    NSMutableArray *GetRowNumberDetails=[[NSMutableArray alloc]init];
 //    NSString *databasePath = [self getDBPath];
@@ -1325,7 +1537,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //    return GetRowNumberDetails;
 //}
 //
-//+(NSMutableArray*)  GetPlayerDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO
+//-(NSMutableArray*)  GetPlayerDetailsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO
 //{
 //    NSMutableArray *GetPlayerDetails=[[NSMutableArray alloc]init];
 //    NSString *databasePath = [self getDBPath];
@@ -1360,7 +1572,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //
 
 //
-//                               +(NSNumber*) GetIsFollowOnForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO{
+//                               -(NSNumber*) GetIsFollowOnForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1393,7 +1605,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber*) GetIsFollowOnInElseIfForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO{
+//                               -(NSNumber*) GetIsFollowOnInElseIfForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1425,7 +1637,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   sqlite3_close(dataBase);
 //                                   return 0;
 //                               }
-//                               +(NSString*) GetTeamTeampenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) BATTINGTEAMCODE{
+//                               -(NSString*) GetTeamTeampenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) BATTINGTEAMCODE{
 //                                   NSString *databasePath = [self getDBPath];
 //                                   sqlite3_stmt *statement;
 //                                   sqlite3 *dataBase;
@@ -1456,7 +1668,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return @"";
 //                               }
 //
-//                               +(NSString*) GetTeamTeampenaltyInelseForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BATTINGTEAMCODE{
+//                               -(NSString*) GetTeamTeampenaltyInelseForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BATTINGTEAMCODE{
 //                                   NSString *databasePath = [self getDBPath];
 //                                   sqlite3_stmt *statement;
 //                                   sqlite3 *dataBase;
@@ -1486,7 +1698,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   sqlite3_reset(statement);
 //                                   return @"";
 //                               }
-//                               +(NSNumber*) GetbatTeamRunsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BATTINGTEAMCODE{
+//                               -(NSNumber*) GetbatTeamRunsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BATTINGTEAMCODE{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1519,7 +1731,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber*) GetbatTeampenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) BATTINGTEAMCODE{
+//                               -(NSNumber*) GetbatTeampenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) BATTINGTEAMCODE{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1553,7 +1765,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber * ) GetbatTeampenaltyInElseForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BATTINGTEAMCODE{
+//                               -(NSNumber * ) GetbatTeampenaltyInElseForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BATTINGTEAMCODE{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1587,7 +1799,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber * ) GetBowlingTeampenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BOWLINGTEAMCODE;{
+//                               -(NSNumber * ) GetBowlingTeampenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BOWLINGTEAMCODE;{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1621,7 +1833,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber * ) GetBowlingTeampenaltyInElseForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BOWLINGTEAMCODE{
+//                               -(NSNumber * ) GetBowlingTeampenaltyInElseForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BOWLINGTEAMCODE{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1656,7 +1868,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                               }
 //
 //
-//                               +(NSNumber*) GetIsFollowOnDetailForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO{
+//                               -(NSNumber*) GetIsFollowOnDetailForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1688,7 +1900,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   sqlite3_close(dataBase);
 //                                   return 0;
 //                               }
-//                               +(NSNumber*) GetBattingTeampenaltysForInsertScoreEngine	: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO{
+//                               -(NSNumber*) GetBattingTeampenaltysForInsertScoreEngine	: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1720,7 +1932,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   sqlite3_close(dataBase);
 //                                   return 0;
 //                               }
-//                               +(NSNumber*) GetBattingTeampenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO{
+//                               -(NSNumber*) GetBattingTeampenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1752,7 +1964,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   sqlite3_close(dataBase);
 //                                   return 0;
 //                               }
-//                               +(NSNumber*) GetBowlTeampenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO :  (NSString*) BOWLINGTEAMCODE{
+//                               -(NSNumber*) GetBowlTeampenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO :  (NSString*) BOWLINGTEAMCODE{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1785,7 +1997,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber*) GetBattingTeampenaltyInn4ForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) BATTINGTEAMCODE{
+//                               -(NSNumber*) GetBattingTeampenaltyInn4ForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) BATTINGTEAMCODE{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1818,7 +2030,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber*) GetbatTeampenaltyInn4InElseForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BATTINGTEAMCODE{
+//                               -(NSNumber*) GetbatTeampenaltyInn4InElseForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BATTINGTEAMCODE{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1851,7 +2063,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber*) GetBowlingTeampenaltyInn4ForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BOWLINGTEAMCODE{
+//                               -(NSNumber*) GetBowlingTeampenaltyInn4ForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO: (NSString*) BOWLINGTEAMCODE{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1883,7 +2095,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber * ) GetBatTeamWicketForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO{
+//                               -(NSNumber * ) GetBatTeamWicketForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1915,7 +2127,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber * ) GetBatTeamOverForInsertScoreEngine: (NSNumber*) BALLCODENO{
+//                               -(NSNumber * ) GetBatTeamOverForInsertScoreEngine: (NSNumber*) BALLCODENO{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1947,7 +2159,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber * ) GetBatTeamOverBallForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO: (NSNumber*) BATTEAMOVERS{
+//                               -(NSNumber * ) GetBatTeamOverBallForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO: (NSNumber*) BATTEAMOVERS{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -1979,7 +2191,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber * ) GetBatTeamOverWithExtraBallForInsertScoreEngine:  (NSNumber*) BALLCODENO{
+//                               -(NSNumber * ) GetBatTeamOverWithExtraBallForInsertScoreEngine:  (NSNumber*) BALLCODENO{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -2011,7 +2223,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber * ) GetBatTeamOverWithExtraBallCountForInsertScoreEngine:  (NSNumber*) BALLCODENO{
+//                               -(NSNumber * ) GetBatTeamOverWithExtraBallCountForInsertScoreEngine:  (NSNumber*) BALLCODENO{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -2043,7 +2255,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber * ) GetIslegalBallCountForInsertScoreEngine:  (NSNumber*) LASTBALLCODE{
+//                               -(NSNumber * ) GetIslegalBallCountForInsertScoreEngine:  (NSNumber*) LASTBALLCODE{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -2075,7 +2287,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSNumber * ) GetOverNoForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO:(NSString*) BATTEAMOVERS{
+//                               -(NSNumber * ) GetOverNoForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO:(NSString*) BATTEAMOVERS{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -2106,7 +2318,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   sqlite3_close(dataBase);
 //                                   return 0;
 //                               }
-//                               +(NSNumber * ) GetOverNosForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO:(NSString*) BATTEAMOVERS{
+//                               -(NSNumber * ) GetOverNosForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO:(NSString*) BATTEAMOVERS{
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
@@ -2138,7 +2350,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   return 0;
 //                               }
 //
-//                               +(NSString * ) GetBowlerCodeForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO:(NSString*) ISOVERCOMPLETE :(NSString*) BATTEAMOVERS{
+//                               -(NSString * ) GetBowlerCodeForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO:(NSString*) ISOVERCOMPLETE :(NSString*) BATTEAMOVERS{
 //                                   NSString *databasePath = [self getDBPath];
 //                                   sqlite3_stmt *statement;
 //                                   sqlite3 *dataBase;
@@ -2171,7 +2383,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //
 //
 //
-//                               +(NSMutableArray*) GetBowlingTeamPlayersForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO:(NSString*) ISOVERCOMPLETE :(NSString*) BATTEAMOVERS
+//                               -(NSMutableArray*) GetBowlingTeamPlayersForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE: (NSNumber*) INNINGSNO:(NSString*) ISOVERCOMPLETE :(NSString*) BATTEAMOVERS
 //                               {
 //                                   NSMutableArray *GetBowlPlayerDetails=[[NSMutableArray alloc]init];
 //                                   NSString *databasePath = [self getDBPath];
@@ -2207,7 +2419,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                              return GetBowlPlayerDetails;
 //                                                              }
 //
-//                                                              +(NSNumber * ) GetCompletedInningsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE{
+//                                                              -(NSNumber * ) GetCompletedInningsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE{
 //                                                                  int retVal;
 //                                                                  NSString *databasePath =[self getDBPath];
 //                                                                  sqlite3 *dataBase;
@@ -2238,7 +2450,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  sqlite3_close(dataBase);
 //                                                                  return 0;
 //                                                              }
-//                                                              +(NSNumber * ) GetTotalBatteamRunsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE{
+//                                                              -(NSNumber * ) GetTotalBatteamRunsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE{
 //                                                                  int retVal;
 //                                                                  NSString *databasePath =[self getDBPath];
 //                                                                  sqlite3 *dataBase;
@@ -2270,7 +2482,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  return 0;
 //                                                              }
 //
-//                                                              +(NSNumber * ) GetTotalBowlteamRunsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE :(NSString*) BOWLINGTEAMCODE{
+//                                                              -(NSNumber * ) GetTotalBowlteamRunsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE :(NSString*) BOWLINGTEAMCODE{
 //                                                                  int retVal;
 //                                                                  NSString *databasePath =[self getDBPath];
 //                                                                  sqlite3 *dataBase;
@@ -2302,7 +2514,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  return 0;
 //                                                              }
 //
-//                                                              +(NSNumber * ) GetTempBowlPenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BOWLINGTEAMCODE{
+//                                                              -(NSNumber * ) GetTempBowlPenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BOWLINGTEAMCODE{
 //                                                                  int retVal;
 //                                                                  NSString *databasePath =[self getDBPath];
 //                                                                  sqlite3 *dataBase;
@@ -2333,7 +2545,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  sqlite3_close(dataBase);
 //                                                                  return 0;
 //                                                              }
-//                                                              +(NSNumber * ) GetTempBatTeamPenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE{
+//                                                              -(NSNumber * ) GetTempBatTeamPenaltyForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE{
 //                                                                  int retVal;
 //                                                                  NSString *databasePath =[self getDBPath];
 //                                                                  sqlite3 *dataBase;
@@ -2364,7 +2576,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  sqlite3_close(dataBase);
 //                                                                  return 0;
 //                                                              }
-//                                                              +(NSNumber * )GetgrandtotalForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*)TEMPBATPENALTY{
+//                                                              -(NSNumber * )GetgrandtotalForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*)TEMPBATPENALTY{
 //                                                                  int retVal;
 //                                                                  NSString *databasePath =[self getDBPath];
 //                                                                  sqlite3 *dataBase;
@@ -2395,7 +2607,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  sqlite3_close(dataBase);
 //                                                                  return 0;
 //                                                              }
-//                                                              +(NSMutableArray*) GetLastBallATWOROTWForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) ISOVERCOMPLETE:(NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*)LASTBALLCODE
+//                                                              -(NSMutableArray*) GetLastBallATWOROTWForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) ISOVERCOMPLETE:(NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*)LASTBALLCODE
 //                                                              {
 //                                                                  NSMutableArray *GetlastBallDetails=[[NSMutableArray alloc]init];
 //                                                                  NSString *databasePath = [self getDBPath];
@@ -2427,7 +2639,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                             }
 //
 //
-//                                                                                             +(NSNumber * ) GetNoBallForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) BATTEAMOVERS  :(NSString*)BATTEAMOVRWITHEXTRASBALLS{
+//                                                                                             -(NSNumber * ) GetNoBallForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) BATTEAMOVERS  :(NSString*)BATTEAMOVRWITHEXTRASBALLS{
 //                                                                                                 int retVal;
 //                                                                                                 NSString *databasePath =[self getDBPath];
 //                                                                                                 sqlite3 *dataBase;
@@ -2459,7 +2671,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                 return 0;
 //                                                                                             }
 //
-//                                                                                             +(NSMutableArray*) GetWicketPlayerAndTypeForInsertScoreEngine: (NSString*) LASTBALLCODE;
+//                                                                                             -(NSMutableArray*) GetWicketPlayerAndTypeForInsertScoreEngine: (NSString*) LASTBALLCODE;
 //                                                                                             {
 //                                                                                                 NSMutableArray *GetWicketPlayerandTypeDetails=[[NSMutableArray alloc]init];
 //                                                                                                 NSString *databasePath = [self getDBPath];
@@ -2488,7 +2700,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                            return GetWicketPlayerandTypeDetails;
 //                                                                                                                            }
 //
-//                                                                                                                            +(NSMutableArray*) GetStrickerNonStrickerForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO;
+//                                                                                                                            -(NSMutableArray*) GetStrickerNonStrickerForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO;
 //                                                                                                                            {
 //                                                                                                                                NSMutableArray *GetStrickerNonStrickerDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                NSString *databasePath = [self getDBPath];
@@ -2517,7 +2729,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                           return GetStrickerNonStrickerDetails;
 //                                                                                                                                                           }
 //
-//                                                                                                                                                           +(NSString * ) GetWicketplayerForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO;{
+//                                                                                                                                                           -(NSString * ) GetWicketplayerForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO;{
 //                                                                                                                                                               NSString *databasePath = [self getDBPath];
 //                                                                                                                                                               sqlite3_stmt *statement;
 //                                                                                                                                                               sqlite3 *dataBase;
@@ -2547,7 +2759,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                               sqlite3_reset(statement);
 //                                                                                                                                                               return @"";
 //                                                                                                                                                           }
-//                                                                                                                                                           +(NSString * ) GetWicketplayerInNonStrickerForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO;{
+//                                                                                                                                                           -(NSString * ) GetWicketplayerInNonStrickerForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO;{
 //                                                                                                                                                               NSString *databasePath = [self getDBPath];
 //                                                                                                                                                               sqlite3_stmt *statement;
 //                                                                                                                                                               sqlite3 *dataBase;
@@ -2578,7 +2790,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                               return @"";
 //                                                                                                                                                           }
 //
-//                                                                                                                                                           +(NSString * ) GetStrickerBallsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) STRIKERCODE  {
+//                                                                                                                                                           -(NSString * ) GetStrickerBallsForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) STRIKERCODE  {
 //                                                                                                                                                               NSString *databasePath = [self getDBPath];
 //                                                                                                                                                               sqlite3_stmt *statement;
 //                                                                                                                                                               sqlite3 *dataBase;
@@ -2608,7 +2820,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                               sqlite3_reset(statement);
 //                                                                                                                                                               return @"";
 //                                                                                                                                                           }
-//                                                                                                                                                           +(NSString * ) GetStrickerCodeForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) STRIKERCODE {
+//                                                                                                                                                           -(NSString * ) GetStrickerCodeForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) STRIKERCODE {
 //                                                                                                                                                               NSString *databasePath = [self getDBPath];
 //                                                                                                                                                               sqlite3_stmt *statement;
 //                                                                                                                                                               sqlite3 *dataBase;
@@ -2639,7 +2851,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                               return @"";
 //                                                                                                                                                           }
 //
-//                                                                                                                                                           +(NSMutableArray*)  GetBallEventForInsertScoreEngine:(NSString*) STRIKERBALLS :  (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) STRIKERCODE  ;
+//                                                                                                                                                           -(NSMutableArray*)  GetBallEventForInsertScoreEngine:(NSString*) STRIKERBALLS :  (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) STRIKERCODE  ;
 //                                                                                                                                                           {
 //                                                                                                                                                               NSMutableArray *GetBallEventDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                                               NSString *databasePath = [self getDBPath];
@@ -2672,7 +2884,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                          return GetBallEventDetails;
 //                                                                                                                                                                                          }
 //
-//                                                                                                                                                                                          //Duplicate Method                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          +(NSMutableArray*)  GetBallEventForInsertScoreEngine:(NSString*) STRIKERBALLS :  (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) STRIKERCODE  ;
+//                                                                                                                                                                                          //Duplicate Method                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          -(NSMutableArray*)  GetBallEventForInsertScoreEngine:(NSString*) STRIKERBALLS :  (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) STRIKERCODE  ;
 //                                                                                                                                                                                          //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          {
 //                                                                                                                                                                                          //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              NSMutableArray *GetBallEventDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                                                                          //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              NSString *databasePath = [self getDBPath];
@@ -2704,7 +2916,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                          //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         sqlite3_close(dataBase);
 //                                                                                                                                                                                          //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         return GetBallEventDetails;
 //                                                                                                                                                                                          //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         }
-//                                                                                                                                                                                          +(NSMutableArray*) GetPlayermasterForInsertScoreEngine: (NSString*) STRIKERCODE ;
+//                                                                                                                                                                                          -(NSMutableArray*) GetPlayermasterForInsertScoreEngine: (NSString*) STRIKERCODE ;
 //                                                                                                                                                                                          {
 //                                                                                                                                                                                              NSMutableArray *GetPlayermasterDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                                                                              NSString *databasePath = [self getDBPath];
@@ -2737,7 +2949,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                         sqlite3_close(dataBase);
 //                                                                                                                                                                                                                         return GetPlayermasterDetails;
 //                                                                                                                                                                                                                         }
-//                                                                                                                                                                                                                         +(NSString * ) GetNonStrickerCodeForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) NONSTRIKERCODESTRIKERCODE  {
+//                                                                                                                                                                                                                         -(NSString * ) GetNonStrickerCodeForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) NONSTRIKERCODESTRIKERCODE  {
 //                                                                                                                                                                                                                             NSString *databasePath = [self getDBPath];
 //                                                                                                                                                                                                                             sqlite3_stmt *statement;
 //                                                                                                                                                                                                                             sqlite3 *dataBase;
@@ -2768,7 +2980,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                             return @"";
 //                                                                                                                                                                                                                         }
 //
-//                                                                                                                                                                                                                         +(NSString * ) GetStrickerCodeforNonStrickerForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) NONSTRIKERCODESTRIKERCODE  {
+//                                                                                                                                                                                                                         -(NSString * ) GetStrickerCodeforNonStrickerForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) NONSTRIKERCODESTRIKERCODE  {
 //                                                                                                                                                                                                                             NSString *databasePath = [self getDBPath];
 //                                                                                                                                                                                                                             sqlite3_stmt *statement;
 //                                                                                                                                                                                                                             sqlite3 *dataBase;
@@ -2801,7 +3013,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                         }
 //
 //
-//                                                                                                                                                                                                                         +(NSMutableArray*) GetBallEventforNonstrickerForInsertScoreEngine: (NSString*) NONSTRIKERBALLS : (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) NONSTRIKERCODE  ;
+//                                                                                                                                                                                                                         -(NSMutableArray*) GetBallEventforNonstrickerForInsertScoreEngine: (NSString*) NONSTRIKERBALLS : (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) NONSTRIKERCODE  ;
 //                                                                                                                                                                                                                         {
 //                                                                                                                                                                                                                             NSMutableArray *GetBallEventDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                                                                                                             NSString *databasePath = [self getDBPath];
@@ -2834,7 +3046,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                        return GetBallEventDetails;
 //                                                                                                                                                                                                                                                        }
 //
-//                                                                                                                                                                                                                                                        +(NSMutableArray*) GetPlayermasterInNonStrickerForInsertScoreEngine: (NSString*) NONSTRIKERCODE ;
+//                                                                                                                                                                                                                                                        -(NSMutableArray*) GetPlayermasterInNonStrickerForInsertScoreEngine: (NSString*) NONSTRIKERCODE ;
 //                                                                                                                                                                                                                                                        {
 //                                                                                                                                                                                                                                                            NSMutableArray *GetPlayermasterDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                                                                                                                                            NSString *databasePath = [self getDBPath];
@@ -2868,7 +3080,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                       return GetPlayermasterDetails;
 //                                                                                                                                                                                                                                                                                       }
 //
-//                                                                                                                                                                                                                                                                                       +(NSMutableArray*) GetpartneShiprunsandBallsForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) STRIKERCODE   :(NSString*) NONSTRIKERCODE;
+//                                                                                                                                                                                                                                                                                       -(NSMutableArray*) GetpartneShiprunsandBallsForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) STRIKERCODE   :(NSString*) NONSTRIKERCODE;
 //                                                                                                                                                                                                                                                                                       {
 //                                                                                                                                                                                                                                                                                           NSMutableArray *GetpartnerShipBallsandRunsDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                                                                                                                                                                           NSString *databasePath = [self getDBPath];
@@ -2895,7 +3107,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                      sqlite3_close(dataBase);
 //                                                                                                                                                                                                                                                                                                                      return GetpartnerShipBallsandRunsDetails;
 //                                                                                                                                                                                                                                                                                                                      }
-//                                                                                                                                                                                                                                                                                                                      +(NSString * ) GetBowlerCodeforassignForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) BATTEAMOVERS: (NSString*) BATTEAMOVRWITHEXTRASBALLS: (NSString*) BATTEAMOVRWITHEXTRASBALLCOUNT  {
+//                                                                                                                                                                                                                                                                                                                      -(NSString * ) GetBowlerCodeforassignForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) BATTEAMOVERS: (NSString*) BATTEAMOVRWITHEXTRASBALLS: (NSString*) BATTEAMOVRWITHEXTRASBALLCOUNT  {
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath = [self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
@@ -2927,7 +3139,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          return @"";
 //                                                                                                                                                                                                                                                                                                                      }
 //
-//                                                                                                                                                                                                                                                                                                                      +(NSString * ) GetWicketForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) BOWLERCODE{
+//                                                                                                                                                                                                                                                                                                                      -(NSString * ) GetWicketForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BATTINGTEAMCODE   :(NSString*) BOWLERCODE{
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath = [self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
@@ -2960,7 +3172,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                      }
 //
 //
-//                                                                                                                                                                                                                                                                                                                      +(NSNumber * ) GetLastBowlerOverNoForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) BOWLERCODE  {
+//                                                                                                                                                                                                                                                                                                                      -(NSNumber * ) GetLastBowlerOverNoForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) BOWLERCODE  {
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
@@ -2992,7 +3204,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          return 0;
 //                                                                                                                                                                                                                                                                                                                      }
 //
-//                                                                                                                                                                                                                                                                                                                      +(NSNumber * ) GetLastBowlerOverStatusForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) LASTBOWLEROVERNO  ;{
+//                                                                                                                                                                                                                                                                                                                      -(NSNumber * ) GetLastBowlerOverStatusForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) LASTBOWLEROVERNO  ;{
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
@@ -3024,7 +3236,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          return 0;
 //                                                                                                                                                                                                                                                                                                                      }
 //
-//                                                                                                                                                                                                                                                                                                                      +(NSNumber * ) GetLastBowlerOverBallNoStatusForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) LASTBOWLEROVERNO : (NSString*) BOWLERCODE  {
+//                                                                                                                                                                                                                                                                                                                      -(NSNumber * ) GetLastBowlerOverBallNoStatusForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) LASTBOWLEROVERNO : (NSString*) BOWLERCODE  {
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
@@ -3055,7 +3267,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          sqlite3_close(dataBase);
 //                                                                                                                                                                                                                                                                                                                          return 0;
 //                                                                                                                                                                                                                                                                                                                      }
-//                                                                                                                                                                                                                                                                                                                      +(NSNumber * ) GetLASTBOWLEROVERBALLNOWITHEXTRASForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) LASTBOWLEROVERNO : (NSString*) BOWLERCODE  {
+//                                                                                                                                                                                                                                                                                                                      -(NSNumber * ) GetLASTBOWLEROVERBALLNOWITHEXTRASForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) LASTBOWLEROVERNO : (NSString*) BOWLERCODE  {
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
@@ -3088,7 +3300,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          return 0;
 //                                                                                                                                                                                                                                                                                                                      }
 //
-//                                                                                                                                                                                                                                                                                                                      +(NSNumber * ) GetLASTBOWLEROVERBALLCOUNTForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) LASTBOWLEROVERNO : (NSString*) BOWLERCODE :(NSNumber*) LASTBOWLEROVERBALLNOWITHEXTRAS {
+//                                                                                                                                                                                                                                                                                                                      -(NSNumber * ) GetLASTBOWLEROVERBALLCOUNTForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) LASTBOWLEROVERNO : (NSString*) BOWLERCODE :(NSNumber*) LASTBOWLEROVERBALLNOWITHEXTRAS {
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
@@ -3121,7 +3333,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          return 0;
 //                                                                                                                                                                                                                                                                                                                      }
 //
-//                                                                                                                                                                                                                                                                                                                      +(NSNumber * ) GetATWOROTWForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) LASTBOWLEROVERNO : (NSString*) BOWLERCODE :(NSNumber*) LASTBOWLEROVERBALLNOWITHEXTRAS : (NSNumber*) LASTBOWLEROVERBALLCOUNT {
+//                                                                                                                                                                                                                                                                                                                      -(NSNumber * ) GetATWOROTWForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE   :(NSString*) LASTBOWLEROVERNO : (NSString*) BOWLERCODE :(NSNumber*) LASTBOWLEROVERBALLNOWITHEXTRAS : (NSNumber*) LASTBOWLEROVERBALLCOUNT {
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
@@ -3154,7 +3366,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          return 0;
 //                                                                                                                                                                                                                                                                                                                      }
 //
-//                                                                                                                                                                                                                                                                                                                      +(NSNumber * ) GetISPARTIALOVERForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE :(NSString*) BOWLERCODE:(NSString*) BATTEAMOVERS ;{
+//                                                                                                                                                                                                                                                                                                                      -(NSNumber * ) GetISPARTIALOVERForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE :(NSString*) BOWLERCODE:(NSString*) BATTEAMOVERS ;{
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
@@ -3188,7 +3400,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          return 0;
 //                                                                                                                                                                                                                                                                                                                      }
 //
-//                                                                                                                                                                                                                                                                                                                      +(NSNumber * ) GetISPARTIALOVERInBowlForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE :(NSString*) BOWLERCODE:(NSString*) BATTEAMOVERS ;{
+//                                                                                                                                                                                                                                                                                                                      -(NSNumber * ) GetISPARTIALOVERInBowlForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE :(NSString*) BOWLERCODE:(NSString*) BATTEAMOVERS ;{
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
@@ -3221,7 +3433,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          sqlite3_close(dataBase);
 //                                                                                                                                                                                                                                                                                                                          return 0;
 //                                                                                                                                                                                                                                                                                                                      }
-//                                                                                                                                                                                                                                                                                                                      +(NSMutableArray*) GetTotalBallsBowlForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) STRIKERCODE   :(NSString*) NONSTRIKERCODE;
+//                                                                                                                                                                                                                                                                                                                      -(NSMutableArray*) GetTotalBallsBowlForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) STRIKERCODE   :(NSString*) NONSTRIKERCODE;
 //                                                                                                                                                                                                                                                                                                                      {
 //                                                                                                                                                                                                                                                                                                                          NSMutableArray *GetTotalBallsBowlandmaidenandBowlRunDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath = [self getDBPath];
@@ -3249,7 +3461,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                                                     sqlite3_close(dataBase);
 //                                                                                                                                                                                                                                                                                                                                                     return GetTotalBallsBowlandmaidenandBowlRunDetails;
 //                                                                                                                                                                                                                                                                                                                                                     }
-//                                                                                                                                                                                                                                                                                                                                                     +(NSString*) GetBOWLERSPELLForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BOWLERCODE {
+//                                                                                                                                                                                                                                                                                                                                                     -(NSString*) GetBOWLERSPELLForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BOWLERCODE {
 //                                                                                                                                                                                                                                                                                                                                                         NSString *databasePath = [self getDBPath];
 //                                                                                                                                                                                                                                                                                                                                                         sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                                                         sqlite3 *dataBase;
@@ -3280,7 +3492,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                                                         sqlite3_reset(statement);
 //                                                                                                                                                                                                                                                                                                                                                         return @"";
 //                                                                                                                                                                                                                                                                                                                                                     }
-//                                                                                                                                                                                                                                                                                                                                                     +(NSMutableArray*) GetBowlerDetailsForInsertScoreEngine:(NSNumber*) ISPARTIALOVER :(NSNumber*)   LASTBOWLEROVERBALLNO : (NSNumber*)  BOWLERSPELL :(NSNumber*)  BOWLERRUNS :(NSNumber*)  S_ATWOROTW :(NSNumber*)  MAIDENS :(NSNumber*)  WICKETS :(NSNumber*) TOTALBALLSBOWL : (NSNumber*) LASTBOWLEROVERBALLNO:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BOWLERCODE;
+//                                                                                                                                                                                                                                                                                                                                                     -(NSMutableArray*) GetBowlerDetailsForInsertScoreEngine:(NSNumber*) ISPARTIALOVER :(NSNumber*)   LASTBOWLEROVERBALLNO : (NSNumber*)  BOWLERSPELL :(NSNumber*)  BOWLERRUNS :(NSNumber*)  S_ATWOROTW :(NSNumber*)  MAIDENS :(NSNumber*)  WICKETS :(NSNumber*) TOTALBALLSBOWL : (NSNumber*) LASTBOWLEROVERBALLNO:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO  :(NSString*) BOWLERCODE;
 //                                                                                                                                                                                                                                                                                                                                                     {
 //                                                                                                                                                                                                                                                                                                                                                         NSMutableArray *GetBolwerDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                                                                                                                                                                                                                                         NSString *databasePath = [self getDBPath];
@@ -3314,7 +3526,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                                                                                    sqlite3_close(dataBase);
 //                                                                                                                                                                                                                                                                                                                                                                                    return GetBolwerDetails;
 //                                                                                                                                                                                                                                                                                                                                                                                    }
-//                                                                                                                                                                                                                                                                                                                                                                                    +(NSNumber * ) GetOverNoInBowlForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE :(NSString*) BALLCODENO{
+//                                                                                                                                                                                                                                                                                                                                                                                    -(NSNumber * ) GetOverNoInBowlForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE :(NSString*) BALLCODENO{
 //                                                                                                                                                                                                                                                                                                                                                                                        int retVal;
 //                                                                                                                                                                                                                                                                                                                                                                                        NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                                                                                        sqlite3 *dataBase;
@@ -3348,7 +3560,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                                                                                        return 0;
 //                                                                                                                                                                                                                                                                                                                                                                                    }
 //
-//                                                                                                                                                                                                                                                                                                                                                                                    +(NSNumber * ) GetISINNINGSLASTOVERForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE :(NSNumber*) OVERNO{
+//                                                                                                                                                                                                                                                                                                                                                                                    -(NSNumber * ) GetISINNINGSLASTOVERForInsertScoreEngine: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE :(NSNumber*) OVERNO{
 //                                                                                                                                                                                                                                                                                                                                                                                        int retVal;
 //                                                                                                                                                                                                                                                                                                                                                                                        NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                                                                                        sqlite3 *dataBase;
@@ -3382,7 +3594,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                                                                                        return 0;
 //                                                                                                                                                                                                                                                                                                                                                                                    }
 //
-//                                                                                                                                                                                                                                                                                                                                                                                    +(NSMutableArray*) GetTeamDetailsForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE;
+//                                                                                                                                                                                                                                                                                                                                                                                    -(NSMutableArray*) GetTeamDetailsForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE;
 //                                                                                                                                                                                                                                                                                                                                                                                    {
 //                                                                                                                                                                                                                                                                                                                                                                                        NSMutableArray *GetteamDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                                                                                                                                                                                                                                                                        NSString *databasePath = [self getDBPath];
@@ -3411,7 +3623,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                                                                                                                   return GetteamDetails;
 //                                                                                                                                                                                                                                                                                                                                                                                                                   }
 //
-//                                                                                                                                                                                                                                                                                                                                                                                                                   +(NSMutableArray*) GetUmpireDetailsForInsertScoreEngine;
+//                                                                                                                                                                                                                                                                                                                                                                                                                   -(NSMutableArray*) GetUmpireDetailsForInsertScoreEngine;
 //                                                                                                                                                                                                                                                                                                                                                                                                                   {
 //                                                                                                                                                                                                                                                                                                                                                                                                                       NSMutableArray *GetUmpireDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                                                                                                                                                                                                                                                                                                       NSString *databasePath = [self getDBPath];
@@ -3440,7 +3652,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                  return GetUmpireDetails;
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                  }
 //
-//                                                                                                                                                                                                                                                                                                                                                                                                                                                  +(NSMutableArray*) GetFieldingEventDetailsForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) BOWLINGTEAMCODE ;
+//                                                                                                                                                                                                                                                                                                                                                                                                                                                  -(NSMutableArray*) GetFieldingEventDetailsForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) BOWLINGTEAMCODE ;
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                  {
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                      NSMutableArray *GetfieldingEventDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                      NSString *databasePath = [self getDBPath];
@@ -3477,7 +3689,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 return GetfieldingEventDetails;
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 }
 
-+(BOOL)  UpdateBSForInsertScoreEngine:  (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO;{
+-(BOOL)  UpdateBSForInsertScoreEngine:  (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSNumber*) INNINGSNO;{
     
     
     NSString *databasePath = [self getDBPath];
@@ -3490,20 +3702,30 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+       {
+        if (sqlite3_step(statement) == SQLITE_DONE)
         {
-            while(sqlite3_step(statement)==SQLITE_DONE){
-                sqlite3_reset(statement);
-                return YES;
-            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return YES;
+            
+        }
+        else {
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
+            return NO;
         }
     }
-    sqlite3_reset(statement);
+        sqlite3_close(dataBase);
+ 
+    }
+   
     return NO;
-    
 }
-
-//                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                +(NSMutableArray*) GetBallDetailsForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE :(NSNumber*) CURRENTOVER;
+//                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                -(NSMutableArray*) GetBallDetailsForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE :(NSNumber*) CURRENTOVER;
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                {
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    NSMutableArray *GetBallDetails=[[NSMutableArray alloc]init];
 //                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    NSString *databasePath = [self getDBPath];

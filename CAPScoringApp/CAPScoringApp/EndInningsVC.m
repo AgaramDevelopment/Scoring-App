@@ -54,10 +54,10 @@ BOOL IsBack;
 }
 -(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE{
     
-
+    DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
     if (fetchRecord !=0 ) {
         
-       MatchDate = [DBManagerEndInnings GetMatchDateForFetchEndInnings : COMPETITIONCODE: MATCHCODE];
+       MatchDate = [dbEndInnings GetMatchDateForFetchEndInnings : COMPETITIONCODE: MATCHCODE];
         
         fetchSePageLoad = [[FetchSEPageLoadRecord alloc]init];
         
@@ -87,7 +87,7 @@ BOOL IsBack;
         
         
         endInningsArray = [[NSMutableArray alloc]init];
-        endInningsArray = [DBManagerEndInnings FetchEndInningsDetailsForFetchEndInnings: MATCHCODE];
+        endInningsArray = [dbEndInnings FetchEndInningsDetailsForFetchEndInnings: MATCHCODE];
         
         
         self.view_allControls.hidden = YES;
@@ -400,9 +400,7 @@ BOOL IsBack;
     
     [obj fetchEndInnings :CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
     
-    NSNumber  *total = [DBManagerEndInnings GetTotalRunsForFetchEndInnings : CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
-
-    TOTALRUNS = [NSString stringWithFormat:@"%@",total];
+    
     
   
     
@@ -420,7 +418,7 @@ BOOL IsBack;
     self.txt_endInnings.text = endInningsTime;
     self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
     self.lbl_teamName.text = teamName;
-    self.lbl_runScored.text = TOTALRUNS;
+    self.lbl_runScored.text = [NSString stringWithFormat:@"%@",obj.TOTALRUNS];
     self.lbl_overPlayed.text = obj.OVERBALLNO;
 
     self.lbl_wktLost.text = totalWickets;

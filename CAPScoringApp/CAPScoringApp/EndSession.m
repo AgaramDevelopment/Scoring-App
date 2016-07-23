@@ -23,6 +23,7 @@
    // NSObject *fetchEndSession;
     UITableView *objDrobDowntbl;
     NSString  * Dominate;
+    DBManagerEndSession *dbEndSession;
     
 }
 
@@ -37,6 +38,7 @@ NSMutableArray *battingBowlingArray;
 
 EndSessionRecords *sessionRecords;
 FetchSEPageLoadRecord *fetchSeRecord;
+
 BOOL back;
 BOOL IsDropDown;
 
@@ -59,6 +61,7 @@ int POS_TEAM_TYPE = 1;
 
 -(void)fetchPageEndSession:(NSObject *) fetchRecord:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE
 {
+     dbEndSession = [[DBManagerEndSession alloc]init];
     fetchSeRecord = [[FetchSEPageLoadRecord alloc]init];
     
     competitioncode = COMPETITIONCODE;
@@ -73,13 +76,13 @@ int POS_TEAM_TYPE = 1;
    
     
    battingTeamArray = [[NSMutableArray alloc]init];
-battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
+battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
     
     bowlingTeamArray = [[NSMutableArray alloc]init];
-    bowlingTeamArray = [DBManagerEndSession GetBattingTeamUsingBowlingCode:fetchSeRecord.BOWLINGTEAMCODE];
+    bowlingTeamArray = [dbEndSession GetBattingTeamUsingBowlingCode:fetchSeRecord.BOWLINGTEAMCODE];
     
     metaCodeArray = [[NSMutableArray alloc]init];
-    metaCodeArray = [DBManagerEndSession GetMetaSubCode];
+    metaCodeArray = [dbEndSession GetMetaSubCode];
     
     
     battingBowlingArray = [[NSMutableArray alloc]init];
@@ -91,7 +94,7 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
     
     endSessionArray = [[NSMutableArray alloc]init];
     
-    endSessionArray = [DBManagerEndSession GetSessionEventsForFetchEndSession:competitioncode :matchcode ];
+    endSessionArray = [dbEndSession GetSessionEventsForFetchEndSession:competitioncode :matchcode ];
  
     
     
@@ -604,7 +607,7 @@ battingTeamArray =[DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeR
     [self.scroll_EndSession addSubview:objDrobDowntbl];
     self.scroll_EndSession.scrollEnabled = NO;
     
-        NSMutableArray *teamArray = [DBManagerEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE:fetchSeRecord.BOWLINGTEAMCODE];
+    NSMutableArray *teamArray = [dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE:fetchSeRecord.BOWLINGTEAMCODE];
     
     endSessionArray = teamArray;
     

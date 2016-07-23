@@ -36,9 +36,12 @@
 @synthesize BOWLINGTEAMLOGO;
 
 @synthesize MatchRegistrationForScoreBoardArray;
+DBManagerScoreCard *dbScoreCard;
 
 -(void ) FetchScoreBoard:(NSString *) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO
 {
+    dbScoreCard = [[DBManagerScoreCard alloc]init];
+    
     NSNumber* ISINNINGSCOMPLETE = [[NSNumber alloc] init];
     NSNumber* MATCHOVERS = [[NSNumber alloc] init];
     NSNumber* MATCHBALLS = [[NSNumber alloc] init];
@@ -50,7 +53,7 @@
     
     MatchRegistrationForScoreBoardArray = [[NSMutableArray alloc]init];
     
-    MatchRegistrationForScoreBoardArray = [ DBManagerScoreCard GetMatchRegistrationForScoreBoard :  COMPETITIONCODE : MATCHCODE : INNINGSNO ];
+    MatchRegistrationForScoreBoardArray = [ dbScoreCard GetMatchRegistrationForScoreBoard :  COMPETITIONCODE : MATCHCODE : INNINGSNO ];
     
     
     if(MatchRegistrationForScoreBoardArray.count>0)
@@ -86,11 +89,11 @@
     
     
     
-     self.BattingSummaryForScoreBoard=[ DBManagerScoreCard GetBattingSummaryForScoreBoard :  COMPETITIONCODE : MATCHCODE : INNINGSNO ];
+     self.BattingSummaryForScoreBoard=[ dbScoreCard GetBattingSummaryForScoreBoard :  COMPETITIONCODE : MATCHCODE : INNINGSNO ];
     
-    ISINNINGSCOMPLETE = [DBManagerScoreCard GetInningsStatusForScoreBoard : COMPETITIONCODE : MATCHCODE: INNINGSNO];
+    ISINNINGSCOMPLETE = [dbScoreCard GetInningsStatusForScoreBoard : COMPETITIONCODE : MATCHCODE: INNINGSNO];
     
-    NSMutableArray *MatchOverandBallForScoreBoard=[DBManagerScoreCard GetMatchOverForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO ];
+    NSMutableArray *MatchOverandBallForScoreBoard=[dbScoreCard GetMatchOverForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO ];
     
     if([MatchOverandBallForScoreBoard count]>0){
         
@@ -100,41 +103,41 @@
     }
 
     
-    FINALINNINGS=[DBManagerScoreCard GetFinalInningsForScoreBoard : COMPETITIONCODE : MATCHCODE];
+    FINALINNINGS=[dbScoreCard GetFinalInningsForScoreBoard : COMPETITIONCODE : MATCHCODE];
     
-    BATTINGTEAMCODE=[DBManagerScoreCard GetBattingteamCodeForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+    BATTINGTEAMCODE=[dbScoreCard GetBattingteamCodeForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     
-    BOWLINGTEAMCODE=[DBManagerScoreCard GetBowlingteamCodeForScoreBoard :BATTINGTEAMCODE:  COMPETITIONCODE : MATCHCODE];
-    ISFOLLOWON=[DBManagerScoreCard GetIsFollowOnForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO];
-  //  [DBManagerScoreCard GetIsFollowOnInMinusForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO] ;
+    BOWLINGTEAMCODE=[dbScoreCard GetBowlingteamCodeForScoreBoard :BATTINGTEAMCODE:  COMPETITIONCODE : MATCHCODE];
+    ISFOLLOWON=[dbScoreCard GetIsFollowOnForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+  //  [dbScoreCard GetIsFollowOnInMinusForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO] ;
     if([INNINGSNO isEqual:@"3"] && [ISFOLLOWON isEqual:@"1"])
     {
         TEMPBATTEAMPENALTY=@"0";
         
     }
-    else if([INNINGSNO isEqual:@"4"] && [[DBManagerScoreCard GetIsFollowOnInMinusForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO] isEqual:@"1"])
+    else if([INNINGSNO isEqual:@"4"] && [[dbScoreCard GetIsFollowOnInMinusForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO] isEqual:@"1"])
     {
-        TEMPBATTEAMPENALTY=[DBManagerScoreCard GetTempBatTeamPenaltyForScoreBoard : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE];
+        TEMPBATTEAMPENALTY=[dbScoreCard GetTempBatTeamPenaltyForScoreBoard : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE];
     }
     else
     {
-        TEMPBATTEAMPENALTY=[DBManagerScoreCard TempBatTeamPenaltyForScoreBoard : COMPETITIONCODE : MATCHCODE :  INNINGSNO: BATTINGTEAMCODE];
+        TEMPBATTEAMPENALTY=[dbScoreCard TempBatTeamPenaltyForScoreBoard : COMPETITIONCODE : MATCHCODE :  INNINGSNO: BATTINGTEAMCODE];
     }
     
-    NSMutableArray *InningsSummaryForScoreBoard=[DBManagerScoreCard GetInningsSummaryForScoreBoard :TEMPBATTEAMPENALTY:MATCHOVERS: MATCHBALLS: FINALINNINGS: COMPETITIONCODE: MATCHCODE : BATTINGTEAMCODE : INNINGSNO];
+    NSMutableArray *InningsSummaryForScoreBoard=[dbScoreCard GetInningsSummaryForScoreBoard :TEMPBATTEAMPENALTY:MATCHOVERS: MATCHBALLS: FINALINNINGS: COMPETITIONCODE: MATCHCODE : BATTINGTEAMCODE : INNINGSNO];
     
-    NSMutableArray *GetBatPlayerDetailsForScoreBoard=[DBManagerScoreCard GetBatPlayerForScoreBoard :  COMPETITIONCODE : MATCHCODE :BATTINGTEAMCODE: INNINGSNO ];
+    NSMutableArray *GetBatPlayerDetailsForScoreBoard=[dbScoreCard GetBatPlayerForScoreBoard :  COMPETITIONCODE : MATCHCODE :BATTINGTEAMCODE: INNINGSNO ];
     
-     ISTIMESHOW =[DBManagerScoreCard GetIsTimeShowForScoreBoard: COMPETITIONCODE : MATCHCODE];
+     ISTIMESHOW =[dbScoreCard GetIsTimeShowForScoreBoard: COMPETITIONCODE : MATCHCODE];
     
     if([ISTIMESHOW isEqual:@"1"])
     {
-         self.BowlingSummaryForScoreBoard=[DBManagerScoreCard GetBowlingSummaryForScoreBoard:  COMPETITIONCODE : MATCHCODE : INNINGSNO];
+         self.BowlingSummaryForScoreBoard=[dbScoreCard GetBowlingSummaryForScoreBoard:  COMPETITIONCODE : MATCHCODE : INNINGSNO];
         
     }
     else
     {
-        self.BowlingSummaryForScoreBoard=[DBManagerScoreCard GetBowlingSummaryInElseForScoreBoard:  COMPETITIONCODE : MATCHCODE : INNINGSNO];
+        self.BowlingSummaryForScoreBoard=[dbScoreCard GetBowlingSummaryInElseForScoreBoard:  COMPETITIONCODE : MATCHCODE : INNINGSNO];
         
     }
     

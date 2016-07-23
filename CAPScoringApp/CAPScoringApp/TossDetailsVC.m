@@ -755,10 +755,11 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    DBManagerChangeToss *dbChangeToss = [[DBManagerChangeToss alloc]init];
     //if (alertView.tag == 1) { // UIAlertView with tag 1 detected
     if (buttonIndex == 0 && alertView.tag == 1)
     {
-        [DBManagerChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : electedcode : StrikerCode : NonStrikerCode : selectBowlerCode :BowlingEnd];
+        [dbChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : electedcode : StrikerCode : NonStrikerCode : selectBowlerCode :BowlingEnd];
         
         [self startService:@"DONE"];
         

@@ -74,7 +74,7 @@
 @synthesize getMetaSubCode;
 @synthesize getBattingTeamUsingBowlingCode;
 
-
+DBManagerEndSession *dbEndSession;
 
 
 
@@ -83,18 +83,19 @@
 
 {
 
+    dbEndSession = [[DBManagerEndSession alloc]init];
     //CHECKDAYNIGHT
-    ISCHECKDAYNIGHT = [DBManagerEndSession GetIsDayNightForFetchEndSession : MATCHCODE];
+    ISCHECKDAYNIGHT = [dbEndSession GetIsDayNightForFetchEndSession : MATCHCODE];
     
     //DAYNO
-    if([DBManagerEndSession GetDayNoForFetchEndSession :COMPETITIONCODE: MATCHCODE])
+    if([dbEndSession GetDayNoForFetchEndSession :COMPETITIONCODE: MATCHCODE])
     {
         
-    DAYNO=[DBManagerEndSession  GetDayNoStatusForFetchEndSession :COMPETITIONCODE: MATCHCODE ];
+    DAYNO=[dbEndSession  GetDayNoStatusForFetchEndSession :COMPETITIONCODE: MATCHCODE ];
         
         if(DAYNO == nil)
         {
-        DAYNO=[DBManagerEndSession  GetDayNoStatusIn0ForFetchEndSession :COMPETITIONCODE: MATCHCODE];
+        DAYNO=[dbEndSession  GetDayNoStatusIn0ForFetchEndSession :COMPETITIONCODE: MATCHCODE];
             
         }
     }
@@ -105,11 +106,11 @@
     }
     
     //INNINGSNO
-    INNINGSNOS = [DBManagerEndSession  GetInningsNosForFetchEndSession :COMPETITIONCODE: MATCHCODE : BATTINGTEAMCODE];
+    INNINGSNOS = [dbEndSession  GetInningsNosForFetchEndSession :COMPETITIONCODE: MATCHCODE : BATTINGTEAMCODE];
     
     
     
-    SESSIONNO=[DBManagerEndSession  GetSessionNoForFetchEndSession :COMPETITIONCODE: MATCHCODE : DAYNO];
+    SESSIONNO=[dbEndSession  GetSessionNoForFetchEndSession :COMPETITIONCODE: MATCHCODE : DAYNO];
     
     if([SESSIONNO isEqual:@"0"])
     {
@@ -131,20 +132,20 @@
     }
     
     //STARTOVER
-    if([DBManagerEndSession GetOverNoForFetchEndSession :COMPETITIONCODE: MATCHCODE : SESSIONNO : INNINGSNO : DAYNO ])
+    if([dbEndSession GetOverNoForFetchEndSession :COMPETITIONCODE: MATCHCODE : SESSIONNO : INNINGSNO : DAYNO ])
     {
         
-        STARTOVERNO=[DBManagerEndSession GetStartOverNoForFetchEndSession :COMPETITIONCODE: MATCHCODE : SESSIONNO : INNINGSNO : DAYNO];
+        STARTOVERNO=[dbEndSession GetStartOverNoForFetchEndSession :COMPETITIONCODE: MATCHCODE : SESSIONNO : INNINGSNO : DAYNO];
     }
         else
             
         {
            
-           NEWSTARTOVERNO =  [DBManagerEndSession GetNewStartOverNoForFetchEndSession:COMPETITIONCODE :MATCHCODE :INNINGSNO];
+           NEWSTARTOVERNO =  [dbEndSession GetNewStartOverNoForFetchEndSession:COMPETITIONCODE :MATCHCODE :INNINGSNO];
             
         }
        //STARTBALLNO
-        STARTBALLNO=[DBManagerEndSession GetStartBallNoForFetchEndSession :COMPETITIONCODE: MATCHCODE : SESSIONNO :DAYNO: INNINGSNO :STARTOVERNO];
+        STARTBALLNO=[dbEndSession GetStartBallNoForFetchEndSession :COMPETITIONCODE: MATCHCODE : SESSIONNO :DAYNO: INNINGSNO :STARTOVERNO];
     
     
                       
@@ -159,16 +160,16 @@
 
 
 //ENDOVER
-    NSString *endOverNO = [DBManagerEndSession GetEndOverNoForFetchEndSession:COMPETITIONCODE :MATCHCODE :SESSIONNO :DAYNO :INNINGSNO];
+    NSString *endOverNO = [dbEndSession GetEndOverNoForFetchEndSession:COMPETITIONCODE :MATCHCODE :SESSIONNO :DAYNO :INNINGSNO];
 
    ENDOVERNO = [NSString stringWithFormat:@"%@",endOverNO];
     
     
     //ENDBALLNO
-    ENDBALLNO=[DBManagerEndSession GetEndBallNoForFetchEndSession :COMPETITIONCODE: MATCHCODE : SESSIONNO :DAYNO: INNINGSNO : ENDOVERNO ];
+    ENDBALLNO=[dbEndSession GetEndBallNoForFetchEndSession :COMPETITIONCODE: MATCHCODE : SESSIONNO :DAYNO: INNINGSNO : ENDOVERNO ];
     
     //OVERSTATUS
-    OVERSTATUS=[DBManagerEndSession GetOverStatusForFetchEndSession :COMPETITIONCODE: MATCHCODE : INNINGSNO : ENDOVERNO ];
+    OVERSTATUS=[dbEndSession GetOverStatusForFetchEndSession :COMPETITIONCODE: MATCHCODE : INNINGSNO : ENDOVERNO ];
     
     //ENDOVERBALLNO	BASED OVERSTATUS
     if(OVERSTATUS = @"1")
@@ -189,45 +190,45 @@
         }
     
     //TEAMNAME
-        TEAMNAMES=[DBManagerEndSession GetTeamNamesForFetchEndSession :BATTINGTEAMCODE ];
+        TEAMNAMES=[dbEndSession GetTeamNamesForFetchEndSession :BATTINGTEAMCODE ];
     
     //PENALITYRUNS
-        PENALITYRUNS=[DBManagerEndSession GetPenaltyRunsForFetchEndSession :COMPETITIONCODE: MATCHCODE : INNINGSNO : BATTINGTEAMCODE ];
+        PENALITYRUNS=[dbEndSession GetPenaltyRunsForFetchEndSession :COMPETITIONCODE: MATCHCODE : INNINGSNO : BATTINGTEAMCODE ];
     
     //RUNSSCORED
-        RUNSSCORED=[DBManagerEndSession GetRunsScoredForFetchEndSession :COMPETITIONCODE: MATCHCODE :SESSIONNO : INNINGSNO : DAYNO ];
+        RUNSSCORED=[dbEndSession GetRunsScoredForFetchEndSession :COMPETITIONCODE: MATCHCODE :SESSIONNO : INNINGSNO : DAYNO ];
     //TOTALWICKET
-        WICKETLOST=[DBManagerEndSession GetWicketLoftForFetchEndSession :COMPETITIONCODE: MATCHCODE :INNINGSNO :SESSIONNO  : DAYNO];
+        WICKETLOST=[dbEndSession GetWicketLoftForFetchEndSession :COMPETITIONCODE: MATCHCODE :INNINGSNO :SESSIONNO  : DAYNO];
         
        //FETCHDOMINANT
     
     
     //GetBattingTeamDetails = [[NSMutableArray alloc]init];
     
-         //GetBattingTeamDetails=[DBManagerEndSession GetBattingTeamForFetchEndSession:BATTINGTEAMCODE];
+         //GetBattingTeamDetails=[dbEndSession GetBattingTeamForFetchEndSession:BATTINGTEAMCODE];
     
     getBattingTeamUsingBowlingCode = [[NSMutableArray alloc]init];
     
-   getBattingTeamUsingBowlingCode = [DBManagerEndSession GetBattingTeamUsingBowlingCode:BOWLINGTEAMCODE];
+   getBattingTeamUsingBowlingCode = [dbEndSession GetBattingTeamUsingBowlingCode:BOWLINGTEAMCODE];
     getMetaSubCode = [[NSMutableArray alloc]init];
-   getMetaSubCode = [DBManagerEndSession GetMetaSubCode];
+   getMetaSubCode = [dbEndSession GetMetaSubCode];
 
 //FETCH
     
     GetSessionEventDetails = [[NSMutableArray alloc]init];
-         GetSessionEventDetails=[DBManagerEndSession GetSessionEventsForFetchEndSession : COMPETITIONCODE : MATCHCODE];
+         GetSessionEventDetails=[dbEndSession GetSessionEventsForFetchEndSession : COMPETITIONCODE : MATCHCODE];
         
 //START DATE AND END DATE
-        [DBManagerEndSession GetStartDateForFetchEndSession : COMPETITIONCODE : MATCHCODE];
+        [dbEndSession GetStartDateForFetchEndSession : COMPETITIONCODE : MATCHCODE];
     
   //DATEVALIDATION(SESSION WISE)
 
     getSessionArray = [[NSMutableArray alloc]init];
-   getSessionArray = [DBManagerEndSession getSessionDetails:COMPETITIONCODE :MATCHCODE];
+   getSessionArray = [dbEndSession getSessionDetails:COMPETITIONCODE :MATCHCODE];
 
         //DATEVALIDATION(DAY WISE)
     GetDateDayWiseDetails = [[NSMutableArray alloc]init];
-      GetDateDayWiseDetails=[DBManagerEndSession GetDateDayWiseForFetchEndSession : COMPETITIONCODE : MATCHCODE];
+      GetDateDayWiseDetails=[dbEndSession GetDateDayWiseForFetchEndSession : COMPETITIONCODE : MATCHCODE];
     
         
 }
@@ -247,19 +248,19 @@
     
     ENDTIME=SESSIONENDTIME;
     
-    MATCHTYPE=[DBManagerEndSession GetMatchTypeForInsertEndSession : COMPETITIONCODE];
+    MATCHTYPE=[dbEndSession GetMatchTypeForInsertEndSession : COMPETITIONCODE];
     
-    WICKETS=[DBManagerEndSession GetWicketsForInsertEndSession : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+    WICKETS=[dbEndSession GetWicketsForInsertEndSession : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
     
-    PENALITYRUNS=[DBManagerEndSession GetPenaltyRunsForInsertEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : TEAMCODE];
+    PENALITYRUNS=[dbEndSession GetPenaltyRunsForInsertEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : TEAMCODE];
     
-    RUNS=[DBManagerEndSession GetPenaltyRunsForInsertEndSession :INNINGSNO: COMPETITIONCODE : MATCHCODE : TEAMCODE];
+    RUNS=[dbEndSession GetPenaltyRunsForInsertEndSession :INNINGSNO: COMPETITIONCODE : MATCHCODE : TEAMCODE];
     
-    OVERNO=[DBManagerEndSession GetOverNoForInsertEndSession : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+    OVERNO=[dbEndSession GetOverNoForInsertEndSession : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
     
-    BALLNO=[DBManagerEndSession GetBallNoForInsertEndSession : COMPETITIONCODE : MATCHCODE : TEAMCODE : OVERNO: INNINGSNO];
+    BALLNO=[dbEndSession GetBallNoForInsertEndSession : COMPETITIONCODE : MATCHCODE : TEAMCODE : OVERNO: INNINGSNO];
     
-    OVERSTATUS=[DBManagerEndSession GetOverStatusForInsertEndSession : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : OVERNO];
+    OVERSTATUS=[dbEndSession GetOverStatusForInsertEndSession : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : OVERNO];
     
 	   if(OVERSTATUS = @"1")
        {
@@ -276,28 +277,28 @@
            OVERBALLNO = @"0.0";
        }
 	   
-	   OVERSPLAYED=[DBManagerEndSession GetOversPlayedForInsertEndSession :INNINGSNO: COMPETITIONCODE : MATCHCODE : TEAMCODE];
+	   OVERSPLAYED=[dbEndSession GetOversPlayedForInsertEndSession :INNINGSNO: COMPETITIONCODE : MATCHCODE : TEAMCODE];
 	   
     CHECKSTARTDATE = SESSIONSTARTTIME;
     
-    if(![DBManagerEndSession GetSessionStartTimeForInsertEndSession : DAYNO : MATCHCODE : CHECKSTARTDATE])
+    if(![dbEndSession GetSessionStartTimeForInsertEndSession : DAYNO : MATCHCODE : CHECKSTARTDATE])
     {
-        if([DBManagerEndSession GetCompetitionCodeForInsertEndSession :COMPETITIONCODE : MATCHCODE :INNINGSNO:  TEAMCODE ])
+        if([dbEndSession GetCompetitionCodeForInsertEndSession :COMPETITIONCODE : MATCHCODE :INNINGSNO:  TEAMCODE ])
         {
             
-            if(![DBManagerEndSession GetDayNoInNotExistsForInsertEndSession :SESSIONSTARTTIME: SESSIONENDTIME : COMPETITIONCODE : MATCHCODE :INNINGSNO :DAYNO ])
+            if(![dbEndSession GetDayNoInNotExistsForInsertEndSession :SESSIONSTARTTIME: SESSIONENDTIME : COMPETITIONCODE : MATCHCODE :INNINGSNO :DAYNO ])
             {
-                if(![DBManagerEndSession GetSessionNoForInsertEndSession :SESSIONSTARTTIME : SESSIONENDTIME : COMPETITIONCODE: MATCHCODE ])
+                if(![dbEndSession GetSessionNoForInsertEndSession :SESSIONSTARTTIME : SESSIONENDTIME : COMPETITIONCODE: MATCHCODE ])
                 {
-                    if(![DBManagerEndSession GetCompetitionCodeInNotExistsForInsertEndSession :COMPETITIONCODE:MATCHCODE:INNINGSNO:SESSIONNO:DAYNO ])
+                    if(![dbEndSession GetCompetitionCodeInNotExistsForInsertEndSession :COMPETITIONCODE:MATCHCODE:INNINGSNO:SESSIONNO:DAYNO ])
                     {
-                        [DBManagerEndSession InsertSessionEventForInsertEndSession : COMPETITIONCODE: MATCHCODE :  INNINGSNO : DAYNO  : SESSIONNO : STARTTIME  : ENDTIME :TEAMCODE: STARTOVER: ENDOVER : TOTALRUNS:TOTALWICKETS :DOMINANTTEAMCODE];
+                        [dbEndSession InsertSessionEventForInsertEndSession : COMPETITIONCODE: MATCHCODE :  INNINGSNO : DAYNO  : SESSIONNO : STARTTIME  : ENDTIME :TEAMCODE: STARTOVER: ENDOVER : TOTALRUNS:TOTALWICKETS :DOMINANTTEAMCODE];
                         
                         if(([MATCHTYPE isEqualToString:@"MSC023"] || [MATCHTYPE isEqualToString:@"MSC114"]) && (SESSIONNO = @3))
                         {
-                            if(![DBManagerEndSession GetDayNoForInsertEndSession :COMPETITIONCODE : MATCHCODE :INNINGSNO:  DAYNO  ])
+                            if(![dbEndSession GetDayNoForInsertEndSession :COMPETITIONCODE : MATCHCODE :INNINGSNO:  DAYNO  ])
                             {
-                                [DBManagerEndSession InsertDayEventForInsertEndSession :COMPETITIONCODE : MATCHCODE :INNINGSNO:  DAYNO : TEAMCODE : RUNS  : OVERBALLNO : WICKETS];
+                                [dbEndSession InsertDayEventForInsertEndSession :COMPETITIONCODE : MATCHCODE :INNINGSNO:  DAYNO : TEAMCODE : RUNS  : OVERBALLNO : WICKETS];
                                 
                                 
                                 
@@ -328,20 +329,20 @@
 	   
     CHECKSTARTDATE = SESSIONSTARTTIME;
     
-    if(![DBManagerEndSession GetSessionStartTimeForInsertEndSession : DAYNO : MATCHCODE : CHECKSTARTDATE])
+    if(![dbEndSession GetSessionStartTimeForInsertEndSession : DAYNO : MATCHCODE : CHECKSTARTDATE])
     {
-            if(![DBManagerEndSession GetDayNoInNotExistsForInsertEndSession :SESSIONSTARTTIME: SESSIONENDTIME : COMPETITIONCODE : MATCHCODE :INNINGSNO :DAYNO ])
+            if(![dbEndSession GetDayNoInNotExistsForInsertEndSession :SESSIONSTARTTIME: SESSIONENDTIME : COMPETITIONCODE : MATCHCODE :INNINGSNO :DAYNO ])
             {
-                if(![DBManagerEndSession GetSessionNoForInsertEndSession :SESSIONSTARTTIME : SESSIONENDTIME : COMPETITIONCODE: MATCHCODE ])
+                if(![dbEndSession GetSessionNoForInsertEndSession :SESSIONSTARTTIME : SESSIONENDTIME : COMPETITIONCODE: MATCHCODE ])
                 {
                     
-                    if([DBManagerEndSession GetMatchCodeInNotExists:COMPETITIONCODE :MATCHCODE])
+                    if([dbEndSession GetMatchCodeInNotExists:COMPETITIONCODE :MATCHCODE])
                     {
                     
-                    if([DBManagerEndSession GetCompetitionCodeInNotExistsForInsertEndSession :COMPETITIONCODE:MATCHCODE:INNINGSNO:SESSIONNO:DAYNO ])
+                    if([dbEndSession GetCompetitionCodeInNotExistsForInsertEndSession :COMPETITIONCODE:MATCHCODE:INNINGSNO:SESSIONNO:DAYNO ])
                     {
                         
-                        [DBManagerEndSession updateEndSession:STARTTIME :ENDTIME :DOMINANTTEAMCODE :DAYNO :COMPETITIONCODE :MATCHCODE :INNINGSNO :SESSIONNO];
+                        [dbEndSession updateEndSession:STARTTIME :ENDTIME :DOMINANTTEAMCODE :DAYNO :COMPETITIONCODE :MATCHCODE :INNINGSNO :SESSIONNO];
 
                     }
                 }
@@ -360,15 +361,15 @@
 {
    
     
-if(![DBManagerEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCODE :DAYNO :SESSIONNO] && ![DBManagerEndSession GetBallCodeWithAddDayNoForDeleteEndSession: COMPETITIONCODE : MATCHCODE : DAYNO ])
+if(![dbEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCODE :DAYNO :SESSIONNO] && ![dbEndSession GetBallCodeWithAddDayNoForDeleteEndSession: COMPETITIONCODE : MATCHCODE : DAYNO ])
     {
         
-        if(![DBManagerEndSession GetSessionNoForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO ])
+        if(![dbEndSession GetSessionNoForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO ])
         {
-            if(![DBManagerEndSession GetSessionNoWithAddDayNoForDeleteEndSession: COMPETITIONCODE :MATCHCODE :INNINGSNO :DAYNO])
+            if(![dbEndSession GetSessionNoWithAddDayNoForDeleteEndSession: COMPETITIONCODE :MATCHCODE :INNINGSNO :DAYNO])
             {
              
-            [DBManagerEndSession DeleteSessionEventsForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO];
+            [dbEndSession DeleteSessionEventsForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO];
             }
             
         }

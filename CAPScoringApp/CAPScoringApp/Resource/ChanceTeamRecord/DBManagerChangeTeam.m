@@ -368,6 +368,8 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT PM.PLAYERCODE PLAYERCO
 }
 +(void) InsertChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) BATTINGTEAMCODE:(NSNumber*) INNINGSNO:(NSString*) STRIKERCODE:(NSString*) NONSTRIKERCODE:(NSString*) BOWLERCODE:(NSNumber*) CURRENTINNINGSNO:(NSString*) CURRENTBATTINGTEAM:(NSString*) ELECTEDTO:(NSString*) BOWLINGEND
 {
+    
+    DBManagerChangeToss *dbChangeToss = [[DBManagerChangeToss alloc]init];
     if(![DBManagerChangeTeamInsert SetBallCodeForChangeTeam : COMPETITIONCODE : MATCHCODE : CURRENTBATTINGTEAM : CURRENTINNINGSNO] )
     {
         if(INNINGSNO.intValue ==1 && CURRENTINNINGSNO.intValue ==1)
@@ -411,7 +413,7 @@ NSString *updateSQL = [NSString stringWithFormat:@"SELECT PM.PLAYERCODE PLAYERCO
                 [DBManagerChangeTeamInsert DeleteInningsEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
                 
                 
-                 [DBManagerChangeToss InsertTossDetails : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : ELECTEDTO : STRIKERCODE : NONSTRIKERCODE : BOWLERCODE : BOWLINGEND];
+                 [dbChangeToss InsertTossDetails : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : ELECTEDTO : STRIKERCODE : NONSTRIKERCODE : BOWLERCODE : BOWLINGEND];
                 
             }
         }
