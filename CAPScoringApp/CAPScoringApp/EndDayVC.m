@@ -36,7 +36,7 @@ NSDateFormatter *formatter;
     
     self.view_allControls.hidden = YES;
     self.tbl_endday.hidden = NO;
-
+   self.gridHeaderView.hidden=NO;
     
     fetchEndDayDetails = [[FetchEndDayDetails alloc]init];
     [fetchEndDayDetails FetchEndDay:_COMPETITIONCODE :_MATCHCODE :_TEAMCODE :_INNINGSNO];
@@ -245,7 +245,7 @@ NSDateFormatter *formatter;
     
     self.tbl_endday.hidden = YES;
     self.view_allControls.hidden = NO;
-    
+    self.gridHeaderView.hidden=YES;
     
     [_btn_save setTitle:@"UPDATE" forState:UIControlStateNormal];
     
@@ -268,7 +268,7 @@ NSDateFormatter *formatter;
     
     self.view_allControls.hidden = NO;
     self.tbl_endday.hidden = YES;
-    
+    self.gridHeaderView.hidden=YES;
     IsBack = NO;
     IsEditMode =NO;
     
@@ -278,13 +278,7 @@ NSDateFormatter *formatter;
 
 -(BOOL) checkValidation{
  
-    if([self.txt_startTime.text isEqual:@""]){
-        [self showDialog:@"Please select start time." andTitle:@""];
-        return NO;
-    }else if([self.txt_endTime.text isEqual:@""]){
-        [self showDialog:@"Please select end time." andTitle:@""];
-        return NO;
-    }else if([self.lbl_duration.text integerValue]<0){
+    if([self.lbl_duration.text integerValue]<=0){
         [self showDialog:@"Duration should be greated than zero" andTitle:@""];
         return NO;
     }
@@ -366,7 +360,7 @@ NSDateFormatter *formatter;
         
         self.view_allControls.hidden = YES;
         self.tbl_endday.hidden = NO;
-        
+           self.gridHeaderView.hidden=NO;
         fetchEndDayDetails = [[FetchEndDayDetails alloc]init];
         [fetchEndDayDetails FetchEndDay:_COMPETITIONCODE :_MATCHCODE :_TEAMCODE :_INNINGSNO];
         
@@ -398,7 +392,7 @@ NSDateFormatter *formatter;
             
             self.view_allControls.hidden = YES;
             self.tbl_endday.hidden = NO;
-            
+               self.gridHeaderView.hidden=NO;
         }
         else
         {
@@ -412,7 +406,7 @@ NSDateFormatter *formatter;
         
         self.view_allControls.hidden = YES;
         self.tbl_endday.hidden = NO;
-        
+           self.gridHeaderView.hidden=NO;
         IsBack = YES;
         
     }else if (IsBack == YES){

@@ -85,7 +85,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zwH-io-SEd">
-                                <rect key="frame" x="298" y="11" width="33" height="21"/>
+                                <rect key="frame" x="292" y="11" width="33" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="dER-sH-lmH"/>
                                     <constraint firstAttribute="width" constant="33" id="jAX-vw-BdR"/>
@@ -105,7 +105,7 @@
                             <constraint firstAttribute="bottom" secondItem="NaI-BS-e88" secondAttribute="bottom" constant="11" id="Mrz-g9-r1u"/>
                             <constraint firstAttribute="bottom" secondItem="yWM-fS-VPU" secondAttribute="bottom" constant="11" id="RGZ-cG-1fi"/>
                             <constraint firstItem="NaI-BS-e88" firstAttribute="leading" secondItem="A3p-Ta-O2A" secondAttribute="trailing" constant="20" id="RGz-cr-yJ7"/>
-                            <constraint firstItem="yWM-fS-VPU" firstAttribute="leading" secondItem="zwH-io-SEd" secondAttribute="trailing" constant="20" id="SVb-6y-0Wr"/>
+                            <constraint firstItem="yWM-fS-VPU" firstAttribute="leading" secondItem="zwH-io-SEd" secondAttribute="trailing" constant="26" id="SVb-6y-0Wr"/>
                             <constraint firstAttribute="bottom" secondItem="A3p-Ta-O2A" secondAttribute="bottom" constant="11" id="WX6-0y-8dZ"/>
                             <constraint firstItem="O8Y-NE-X27" firstAttribute="top" secondItem="RiK-wF-mYl" secondAttribute="top" constant="11" id="apx-eT-FOm"/>
                             <constraint firstAttribute="trailing" secondItem="lAX-Dv-TeF" secondAttribute="trailing" id="eRh-a7-wgD"/>

@@ -6652,7 +6652,7 @@ self.lbl_umpirename.text=@"";
     
     if(leftSlideSwipe == YES){
      NSString *SelectedMatchEvent = (NSString*)[_rightSlideArray objectAtIndex:indexPath.row];
-        if([SelectedMatchEvent isEqualToString : @"BREAK"])
+        if([SelectedMatchEvent isEqualToString : @"BREAKS"])
         {
             NSLog(@"1");
             
@@ -7886,6 +7886,7 @@ self.lbl_umpirename.text=@"";
     endDayVC.MATCHCODE = self.matchCode;
     endDayVC.TEAMCODE = fetchSEPageLoadRecord.BATTINGTEAMCODE;
     endDayVC.INNINGSNO = fetchSEPageLoadRecord.INNINGSNO;
+    endDayVC.MATCHDATE = fetchSEPageLoadRecord.MATCHDATE;
     endDayVC.delegate =self;
     
     

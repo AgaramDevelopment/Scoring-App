@@ -25,6 +25,7 @@
     NSMutableArray * selectindexarray;
     UIRefreshControl *refreshControl;
     int selectePosition;
+    NSMutableArray * FetchArchiveCompitionArray;
    }
 @property (nonatomic,strong)NSMutableArray*resultArray;
 @property(nonatomic,weak) IBOutlet UIView *selectmatchTittleview;
@@ -46,6 +47,7 @@
     [self.selectmatchTittleview.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.selectmatchTittleview .layer setMasksToBounds:YES];
     
+//    NSMutabl
     refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     refreshControl.tintColor = [UIColor greenColor];
@@ -63,7 +65,17 @@
     NSString *userCode = [defaults objectForKey:@"userCode"];
     
     resultArray=[[NSMutableArray alloc]init];
-    NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData:userCode];
+    NSMutableArray * FetchCompitionArray =[[NSMutableArray alloc]init];
+    
+    if([self.selectDashBoard isEqualToString:@"Newmatch"])
+    {
+        FetchCompitionArray = [DBManager RetrieveEventData:userCode];
+    }
+    else{
+        FetchCompitionArray = [DBManager RetrieveEventData1:userCode];
+    }
+
+    
     for(int i=0; i < [FetchCompitionArray count]; i++)
     {
         

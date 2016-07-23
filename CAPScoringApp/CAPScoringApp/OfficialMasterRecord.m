@@ -17,4 +17,6 @@
 @synthesize umpire3name;
 @synthesize matchrefereecode;
 @synthesize matchrefereename;
+@synthesize scorecode;
+@synthesize scorename2;
 @end
