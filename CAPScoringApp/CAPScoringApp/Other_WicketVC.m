@@ -49,6 +49,8 @@
     NSMutableArray *GetPlayerDetailsOnRetiredHurtArray;
     NSMutableArray *GetStrikerandnonstrikerArray;
     BOOL isEnableTbl;
+    BOOL isAddWicket;
+    BOOL isWicketlist;
     
     
 //    NSString  *N_WICKETNO;
@@ -68,17 +70,8 @@
 
 @property(nonatomic,strong)NSString *PLAYERSCHECK;
 
-
-
 @property(nonatomic,strong)NSString *TOTALRUNS;
 @property(nonatomic,strong)NSString *VIDEOLOCATION;
-
-
-
-
-
-
-
 
 @end
 
@@ -125,9 +118,6 @@
 @synthesize WICKETNO;
 
 
-
-
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -156,10 +146,6 @@
 
     }
     
-    
-    
-
-  
 }
 
 - (void)didReceiveMemoryWarning {
@@ -169,10 +155,11 @@
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{  if (tableView == self.Wicket_tableview)
 {
+    if (tableView == self.Wicket_tableview)
+   {
     return 1;
-}//count of section
+   }//count of section
     return 1;
 }
 
@@ -207,7 +194,9 @@
     }
     
     else
+    {
         return 1;
+    }
     //count number of row from counting array hear cataGorry is An Array
 }
 
@@ -215,6 +204,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(isWicketlist == YES)
+    {
+        
+    }
+    else{
     if (tableView == self.Wicket_tableview)
     {
         static NSString *MyIdentifier = @"MyIdentifier";
@@ -284,10 +278,7 @@
         return cell;
         
     }
-    
-
-    
-    
+    }
     
     return 0;
 }
@@ -295,10 +286,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
     if (tableView == self.Wicket_tableview)
     {
-        
         
         Wicketselectindexarray=[[NSMutableArray alloc]init];
         objEventRecord=(WicketTypeRecord*)[WICKETARRAY objectAtIndex:indexPath.row];
@@ -374,43 +363,47 @@
 
 }
 
-
-
-- (IBAction)add_btn:(id)sender {
-}
-
-
-
 - (IBAction)back_btn:(id)sender {
-    Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
-    add.COMPETITIONCODE=self.COMPETITIONCODE;
-    add.MATCHCODE=self.MATCHCODE;
-    add.INNINGSNO=self.INNINGSNO;
-    add.TEAMCODE=self.TEAMCODE;
-    add.STRIKERCODE=STRIKERCODE;
-    add.NONSTRIKERCODE=NONSTRIKERCODE;
-    add.NONSTRIKERNAME=NONSTRIKERNAME;
-    add.MAXOVER=MAXOVER;
-    add.MAXBALL=MAXBALL;
-    add.BALLCOUNT=BALLCOUNT;
-    add.N_WICKETNO=N_WICKETNO;
-    add.BALLCODE=BALLCODE;
     
-    
-    
-    
-    //vc2 *viewController = [[vc2 alloc]init];
-    [self addChildViewController:add];
-    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-    [self.view addSubview:add.view];
-    add.view.alpha = 0;
-    [add didMoveToParentViewController:self];
-    
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         add.view.alpha = 1;
-     }
-                     completion:nil];
+    if(isAddWicket==YES)
+    {
+        self.WickAddview.hidden=NO;
+        isAddWicket=NO;
+    }
+    else
+    {
+        [self.delegate ChangeVCBackBtnAction];
+        isAddWicket=YES;
+    }
+//    Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
+//    add.COMPETITIONCODE=self.COMPETITIONCODE;
+//    add.MATCHCODE=self.MATCHCODE;
+//    add.INNINGSNO=self.INNINGSNO;
+//    add.TEAMCODE=self.TEAMCODE;
+//    add.STRIKERCODE=STRIKERCODE;
+//    add.NONSTRIKERCODE=NONSTRIKERCODE;
+//    add.NONSTRIKERNAME=NONSTRIKERNAME;
+//    add.MAXOVER=MAXOVER;
+//    add.MAXBALL=MAXBALL;
+//    add.BALLCOUNT=BALLCOUNT;
+//    add.N_WICKETNO=N_WICKETNO;
+//    add.BALLCODE=BALLCODE;
+//    
+//    
+//    
+//    
+//    //vc2 *viewController = [[vc2 alloc]init];
+//    [self addChildViewController:add];
+//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//    [self.view addSubview:add.view];
+//    add.view.alpha = 0;
+//    [add didMoveToParentViewController:self];
+//    
+//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//     {
+//         add.view.alpha = 1;
+//     }
+//                     completion:nil];
 
     
 }
@@ -539,7 +532,11 @@
     
 }
 
-
+-(IBAction)didClickAddBtnAction:(id)sender
+{
+    self.WickAddview.hidden =YES;
+    isAddWicket=YES;
+}
 - (IBAction)didclicktouchplayer:(id)sender {
      
     

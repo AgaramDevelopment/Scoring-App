@@ -133,7 +133,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(retVal !=0){
         }
         
-        NSString *query=[NSString stringWithFormat:@"SELECT (MAX(DAYNO)+1) AS DAYNO FROM   DAYEVENTS WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND DAYSTATUS='1'",COMPETITIONCODE,MATCHCODE];
+        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL((MAX(DAYNO)+1),0) AS DAYNO FROM   DAYEVENTS WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND DAYSTATUS='1'",COMPETITIONCODE,MATCHCODE];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {

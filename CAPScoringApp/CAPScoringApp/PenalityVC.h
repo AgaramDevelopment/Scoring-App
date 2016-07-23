@@ -33,6 +33,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *btn_touch;
 @property (strong, nonatomic) IBOutlet UIButton *btn_submitpenality;
 @property (strong, nonatomic) IBOutlet UITableView *tbl_penality;
+@property (strong, nonatomic) IBOutlet UIView  * view_penaltyTittle;
 
 
 

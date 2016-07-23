@@ -3,8 +3,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="RAJDHANI-MEDIUM.TTF">
@@ -21,49 +19,48 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="penaltygridCell" id="KGk-i7-Jjw" customClass="PenaltyGridTVC">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <rect key="frame" x="0.0" y="0.0" width="550" height="44"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="550" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLH-lx-MYm">
-                        <rect key="frame" x="10" y="2" width="62" height="40"/>
+                        <rect key="frame" x="10" y="2" width="160" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="160" id="iMq-1H-fK0"/>
+                        </constraints>
                         <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wbh-LA-zRu">
-                        <rect key="frame" x="82" y="2" width="25" height="40"/>
+                        <rect key="frame" x="185" y="2" width="160" height="40"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="25" id="NP1-JM-w4X"/>
+                            <constraint firstAttribute="width" constant="160" id="vr6-8O-ZXr"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLr-av-brS">
-                        <rect key="frame" x="120" y="2" width="195" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="40" id="kYD-nw-mOx"/>
-                        </constraints>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLr-av-brS">
+                        <rect key="frame" x="360" y="2" width="180" height="40"/>
                         <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="KLH-lx-MYm" firstAttribute="top" secondItem="Wbh-LA-zRu" secondAttribute="top" id="4eK-9E-6rt"/>
-                    <constraint firstItem="KLH-lx-MYm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="L8W-ah-QNg"/>
-                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="leading" secondItem="KLH-lx-MYm" secondAttribute="trailing" constant="10" id="O60-dZ-e2r"/>
-                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="firstBaseline" secondItem="SLr-av-brS" secondAttribute="firstBaseline" id="SyM-Wb-owk"/>
-                    <constraint firstItem="SLr-av-brS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="Yog-gw-t62"/>
-                    <constraint firstItem="KLH-lx-MYm" firstAttribute="baseline" secondItem="Wbh-LA-zRu" secondAttribute="baseline" id="aCp-4H-MrH"/>
-                    <constraint firstAttribute="bottom" secondItem="SLr-av-brS" secondAttribute="bottom" constant="1" id="aOu-BQ-9V8"/>
-                    <constraint firstItem="SLr-av-brS" firstAttribute="leading" secondItem="Wbh-LA-zRu" secondAttribute="trailing" constant="13" id="gQ6-qn-pGl"/>
-                    <constraint firstAttribute="trailing" secondItem="SLr-av-brS" secondAttribute="trailing" constant="5" id="jyf-oR-UHe"/>
-                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="82" id="tVj-fT-d9h"/>
-                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="baseline" secondItem="SLr-av-brS" secondAttribute="baseline" id="wam-Nv-ZoJ"/>
+                    <constraint firstAttribute="bottom" secondItem="Wbh-LA-zRu" secondAttribute="bottom" constant="1" id="CiY-cR-4k7"/>
+                    <constraint firstItem="SLr-av-brS" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="LFw-Zh-vbP"/>
+                    <constraint firstItem="KLH-lx-MYm" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="OAQ-7L-Pbo"/>
+                    <constraint firstAttribute="bottom" secondItem="SLr-av-brS" secondAttribute="bottom" constant="1" id="VO0-GZ-5SM"/>
+                    <constraint firstItem="KLH-lx-MYm" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="ZNy-du-xjd"/>
+                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="leading" secondItem="KLH-lx-MYm" secondAttribute="trailing" constant="15" id="bqb-xb-heJ"/>
+                    <constraint firstItem="Wbh-LA-zRu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="2" id="fwq-Ue-Ge5"/>
+                    <constraint firstItem="SLr-av-brS" firstAttribute="leading" secondItem="Wbh-LA-zRu" secondAttribute="trailing" constant="15" id="jOA-Y8-IxQ"/>
+                    <constraint firstAttribute="bottom" secondItem="KLH-lx-MYm" secondAttribute="bottom" constant="1" id="kqe-ih-Wcd"/>
+                    <constraint firstAttribute="trailing" secondItem="SLr-av-brS" secondAttribute="trailing" constant="10" id="wWK-fP-c6L"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
@@ -71,6 +68,7 @@
                 <outlet property="lbl_penaltyruns" destination="Wbh-LA-zRu" id="3d7-sN-bBi"/>
                 <outlet property="lbl_penaltytype" destination="SLr-av-brS" id="aub-BT-1WX"/>
             </connections>
+            <point key="canvasLocation" x="354" y="183"/>
         </tableViewCell>
     </objects>
 </document>
