@@ -36,7 +36,7 @@
     [self.view_user_name.layer setBorderWidth:2.0];
     [self.view_user_name.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_user_name.layer setMasksToBounds:YES];
-   
+    
 
 }
 
@@ -46,10 +46,25 @@
 
 
 - (IBAction)btn_login:(id)sender {
-    if([self formValidation]){
+    
+    if([self.txt_user_name.text isEqualToString:@""] || self.txt_user_name.text==nil && [self.txt_password.text isEqualToString:@""] || self.txt_password.text==nil)
+    {
+         [self showDialog:@"Please Enter User Name\nPlease Enter Password" andTitle:@""];
+    }
+    else if([self.txt_user_name.text isEqualToString:@""] || self.txt_user_name.text==nil)
+    {
+        [self showDialog:@"Please Enter User Name." andTitle:@""];
+
+    }
+    else if([self.txt_password.text isEqualToString:@""] || self.txt_password.text==nil)
+    {
+        [self showDialog:@"Please Enter Password." andTitle:@""];
+
+    }
+        else{
         NSString *userNameLbl = self.txt_user_name.text;
         NSString *passwordLbl = self.txt_password.text;
-        
+        //passwordLbl=[]
         if(self.checkInternetConnection){
             
             
@@ -107,6 +122,8 @@
                         NSString *REMENTDATE=[test objectForKey:@"Rementdate"];
                         NSString *USERFULLNAME=[test objectForKey:@"Userfullname"];
                       [[NSUserDefaults standardUserDefaults] setObject:USERFULLNAME forKey:@"UserFullname"];
+                        
+                        
                         NSString *MACHINEID=[test objectForKey:@"Machineid"];
                         NSString*LICENSEUPTO=[test objectForKey:@"Licenseupto"];
                         NSString*CREATEDBY =[test objectForKey:@"Createdby"];
@@ -324,10 +341,19 @@
 - (IBAction)btn_show_pwd:(id)sender {
     if (self.txt_password.secureTextEntry == YES) {
         self.txt_password.secureTextEntry = NO;
+      
+        _eye_imgview.image = [UIImage imageNamed:@"eyeImgSelect.png"];
+        self.txt_password.font= [UIFont fontWithName:@"Rajdhani-Bold" size:28];
     }
     else
     {
         self.txt_password.secureTextEntry = YES;
+            self.txt_password.clearsOnBeginEditing = NO;
+         _eye_imgview.image = [UIImage imageNamed:@"ico-show-pwd.png"];
+        self.txt_password.font= [UIFont fontWithName:@"Rajdhani-Bold" size:28];
+         self.txt_password.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20.0f];
+           self.txt_password.clearsOnBeginEditing = NO;
+        
     }
     
 }
@@ -367,11 +393,16 @@
 - (BOOL) formValidation{
     NSString *userNameTxtf = self.txt_user_name.text;
     NSString *passwordTxtf = self.txt_password.text;
-    if([userNameTxtf isEqual:@""]){
+   if([userNameTxtf isEqual:@""]||[passwordTxtf isEqual:@""])
+   {  [self showDialog:@"Please Enter User Name\nPlease Enter Password" andTitle:@""];
+         return NO;
+   }
+    
+    else if([userNameTxtf isEqual:@""]){
         [self showDialog:@"Please Enter User Name." andTitle:@""];
         return NO;
     }else if([passwordTxtf isEqual:@""]){
-        [self showDialog:@"Please Enter Password" andTitle:@""];
+        [self showDialog:@"Please Enter User Name." andTitle:@""];
         return NO;
     }
     
@@ -384,6 +415,12 @@
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return networkStatus != NotReachable;
+}
+
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+   _eye_imgview.image = [UIImage imageNamed:@"ico-show-pwd.png"];
 }
 
 

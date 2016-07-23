@@ -39,16 +39,17 @@
 @synthesize OVERSTATUS;
 @synthesize BOWLINGTEAMCODE;
 @synthesize INNINGSSCORECARD;
+DBManagerFollowOn *dbFollowOn;
 
 //SP_FETCHFOLLOWON
 -(void) FetchFollowOn:(NSString *) COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*) TEAMCODE:(NSNumber*)INNINGSNO
 
 {
-    
+    dbFollowOn = [[DBManagerFollowOn alloc]init];
     getTeamArray = [[NSMutableArray alloc]init];
-    getTeamArray = [DBManagerFollowOn GetteamDetailsForFetchFollowOn :  COMPETITIONCODE :  TEAMCODE];
+    getTeamArray = [dbFollowOn GetteamDetailsForFetchFollowOn :  COMPETITIONCODE :  TEAMCODE];
     
-    [DBManagerFollowOn GetFollowonForFetchFollowOn : MATCHCODE : INNINGSNO];
+    [dbFollowOn GetFollowonForFetchFollowOn : MATCHCODE : INNINGSNO];
 }
 
 //SP_FETCHTEAMNAMESELECTIONCHANGED
@@ -60,20 +61,20 @@
     
     
 
-    OPPOSITETEAMCODE=[DBManagerFollowOn  GetOppositeTeamCodeForFetchTeamNameSelectionChanged : MATCHCODE : TEAMNAME];
+    OPPOSITETEAMCODE=[dbFollowOn  GetOppositeTeamCodeForFetchTeamNameSelectionChanged : MATCHCODE : TEAMNAME];
 		  
     
     GetBattingteamDetail = [[NSMutableArray alloc]init];
-  GetBattingteamDetail=[DBManagerFollowOn GetSelectionBattingTeamForFetchTeamNameSelectionChanged :  COMPETITIONCODE :  TEAMNAME ];
+  GetBattingteamDetail=[dbFollowOn GetSelectionBattingTeamForFetchTeamNameSelectionChanged :  COMPETITIONCODE :  TEAMNAME ];
     
     
     
     GetOppositeBattingteamDetails = [[NSMutableArray alloc]init];
-    GetOppositeBattingteamDetails=[DBManagerFollowOn GetOppositeBowlingTeamForFetchTeamNameSelectionChanged :  COMPETITIONCODE :  TEAMNAME ];
+    GetOppositeBattingteamDetails=[dbFollowOn GetOppositeBowlingTeamForFetchTeamNameSelectionChanged :  COMPETITIONCODE :  TEAMNAME ];
     
    GetStrickerNonStrickerDetails = [[NSMutableArray alloc]init];
     
-     GetStrickerNonStrickerDetails=[DBManagerFollowOn GetStrickerDetailForFetchTeamNameSelectionChanged :  COMPETITIONCODE :MATCHCODE :  TEAMNAME: INNINGSNO ];
+     GetStrickerNonStrickerDetails=[dbFollowOn GetStrickerDetailForFetchTeamNameSelectionChanged :  COMPETITIONCODE :MATCHCODE :  TEAMNAME: INNINGSNO ];
     
     
 }

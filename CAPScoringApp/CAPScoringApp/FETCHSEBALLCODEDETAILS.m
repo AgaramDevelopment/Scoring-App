@@ -94,9 +94,9 @@
 -(void) FetchSEBallCodeDetails:(NSString *)COMPETITIONCODE :(NSString *)MATCHCODE :(NSString*)BALLCODE
 {
     
+    DBManagerEditScoreEngine *dbEditScoreEngine = [[DBManagerEditScoreEngine alloc]init];
     
-    
-    NSMutableArray *GetTeamDetailsArray=[DBManagerEditScoreEngine GetTeamDetailsForMatchRegistration :  COMPETITIONCODE:  MATCHCODE ];
+    NSMutableArray *GetTeamDetailsArray=[dbEditScoreEngine GetTeamDetailsForMatchRegistration :  COMPETITIONCODE:  MATCHCODE ];
     if(GetTeamDetailsArray.count>0)
     {
         
@@ -109,7 +109,7 @@
         
         
     }
-    NSMutableArray *GetTeamDetailsForCompetitionArray=[ DBManagerEditScoreEngine GetTeamDetailsForCompetition :  COMPETITIONCODE ];
+    NSMutableArray *GetTeamDetailsForCompetitionArray=[ dbEditScoreEngine GetTeamDetailsForCompetition :  COMPETITIONCODE ];
     if(GetTeamDetailsForCompetitionArray.count>0)
     {
         
@@ -127,7 +127,7 @@
 
 
     
-    NSMutableArray *GetTeamDetailsForBallEventsArray=[ DBManagerEditScoreEngine GetTeamDetailsForBallEvents :  TEAMACODE: BATTINGTEAMCODE:  TEAMBCODE: COMPETITIONCODE:  MATCHCODE: BALLCODE ];
+    NSMutableArray *GetTeamDetailsForBallEventsArray=[ dbEditScoreEngine GetTeamDetailsForBallEvents :  TEAMACODE: BATTINGTEAMCODE:  TEAMBCODE: COMPETITIONCODE:  MATCHCODE: BALLCODE ];
     if(GetTeamDetailsForBallEventsArray.count>0)
     {
         GetSEDetailsForBallEvents *record=[GetTeamDetailsForBallEventsArray objectAtIndex:0];
@@ -139,13 +139,13 @@
     }
     
     
-    SESSIONNO=[DBManagerEditScoreEngine GetSessionNoForSessionEvents : COMPETITIONCODE :MATCHCODE : INNINGSNO	];
+    SESSIONNO=[dbEditScoreEngine GetSessionNoForSessionEvents : COMPETITIONCODE :MATCHCODE : INNINGSNO	];
     
-    DAYNO =[DBManagerEditScoreEngine GetDayNoForSEDayEvents : COMPETITIONCODE :MATCHCODE : INNINGSNO	];
+    DAYNO =[dbEditScoreEngine GetDayNoForSEDayEvents : COMPETITIONCODE :MATCHCODE : INNINGSNO	];
     
-    INNINGSSTATUS =[DBManagerEditScoreEngine GetInningsStatusForSEInningsEvents : COMPETITIONCODE :MATCHCODE : INNINGSNO	];
+    INNINGSSTATUS =[dbEditScoreEngine GetInningsStatusForSEInningsEvents : COMPETITIONCODE :MATCHCODE : INNINGSNO	];
     
-    NSMutableArray *GetBattingTeamNamesArray=[ DBManagerEditScoreEngine GetBattingTeamNamesForTeamMaster :  BATTINGTEAMCODE ];
+    NSMutableArray *GetBattingTeamNamesArray=[ dbEditScoreEngine GetBattingTeamNamesForTeamMaster :  BATTINGTEAMCODE ];
     if(GetBattingTeamNamesArray.count>0)
     {
         GetSEDetailsForBattingTeamNames *record=[GetBattingTeamNamesArray objectAtIndex:0];
@@ -157,7 +157,7 @@
         
         
     }
-    NSMutableArray *GetBowlingTeamNamesArray=[ DBManagerEditScoreEngine GetBowlingTeamNamesForTeamMaster :  BOWLINGTEAMCODE ];
+    NSMutableArray *GetBowlingTeamNamesArray=[ dbEditScoreEngine GetBowlingTeamNamesForTeamMaster :  BOWLINGTEAMCODE ];
     if(GetBowlingTeamNamesArray.count>0)
     {
         GetSEDetailsForBowlingTeamNames *record=[GetBowlingTeamNamesArray objectAtIndex:0];
@@ -172,7 +172,7 @@
     }
 	   NSNumber* T_TARGETRUNS= [[NSNumber alloc] init];
     NSNumber* T_TARGETOVERS= [[NSNumber alloc] init];
-    NSMutableArray *GetRevisedTargetArray=[ DBManagerEditScoreEngine GetRevisedTargetForMatchEvents :  COMPETITIONCODE : MATCHCODE ];
+    NSMutableArray *GetRevisedTargetArray=[ dbEditScoreEngine GetRevisedTargetForMatchEvents :  COMPETITIONCODE : MATCHCODE ];
     if(GetRevisedTargetArray.count>0)
     {
         GetSEDetailsForMtachRevisedTarget  *record=[GetRevisedTargetArray objectAtIndex:0];
@@ -185,18 +185,18 @@
     }
     MATCHOVERS =  T_TARGETOVERS.intValue > 0 ? T_TARGETOVERS : MATCHOVERS;
     
-   // NSMutableArray *GetMatchDetailsArray=[ DBManagerEditScoreEngine GetMatchDetailsForSEMatchRegistration :  COMPETITIONCODE : MATCHCODE ];
+   // NSMutableArray *GetMatchDetailsArray=[ dbEditScoreEngine GetMatchDetailsForSEMatchRegistration :  COMPETITIONCODE : MATCHCODE ];
     
-    NSMutableArray *GetBowlTypeArray=[ DBManagerEditScoreEngine GetBowlTypeForBallCodeDetails  ];
+    NSMutableArray *GetBowlTypeArray=[ dbEditScoreEngine GetBowlTypeForBallCodeDetails  ];
     
     
     
-    NSMutableArray *GetShotTypeArray=[ DBManagerEditScoreEngine GetShotTypeForBallCodeDetails];
+    NSMutableArray *GetShotTypeArray=[ dbEditScoreEngine GetShotTypeForBallCodeDetails];
     
    
     
     
-	   NSMutableArray *GetBallCodeArray=[ DBManagerEditScoreEngine GetBallCodeForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BALLCODE  ];
+	   NSMutableArray *GetBallCodeArray=[ dbEditScoreEngine GetBallCodeForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BALLCODE  ];
     if(GetBallCodeArray.count>0)
     {
         
@@ -218,22 +218,22 @@
         
     }
     //X =
-//    NSMutableArray *GetRetiredHurtChangesArray=[ DBManagerEditScoreEngine GetRetiredHurtChangesForBallevents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO ];
+//    NSMutableArray *GetRetiredHurtChangesArray=[ dbEditScoreEngine GetRetiredHurtChangesForBallevents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO ];
     
 
-    self.GetBattingTeamPlayersArray=[ DBManagerEditScoreEngine GetBattingTeamPlayersForMatchRegistration :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ];
+    self.GetBattingTeamPlayersArray=[ dbEditScoreEngine GetBattingTeamPlayersForMatchRegistration :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ];
     
 
     
     
-    BATTEAMRUNS =[ DBManagerEditScoreEngine GetSEGrandTotalForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ];
+    BATTEAMRUNS =[ dbEditScoreEngine GetSEGrandTotalForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ];
     
-    int battingTeamRunsData = BATTEAMRUNS.intValue +[[ DBManagerEditScoreEngine GetPenaltyRunsForBallCodeDetails :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO ] intValue];
+    int battingTeamRunsData = BATTEAMRUNS.intValue +[[ dbEditScoreEngine GetPenaltyRunsForBallCodeDetails :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO ] intValue];
     
     BATTEAMRUNS =[NSNumber numberWithInt:battingTeamRunsData];
     
     
-    BATTEAMWICKETS =[ DBManagerEditScoreEngine GetWicketNoForBallCodeDetails :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ];
+    BATTEAMWICKETS =[ dbEditScoreEngine GetWicketNoForBallCodeDetails :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ];
     
     ISOVERCOMPLETE = [NSNumber numberWithInt:1];
     
@@ -246,17 +246,17 @@
     BATTEAMRUNRATE = TOTALBALLS.intValue == 0 ? [NSNumber numberWithInt:0]: [NSNumber numberWithInt:(BATTEAMRUNS.intValue / TOTALBALLS.intValue) * 6] ;
     
     
-    self.GetBowlingTeamPlayersArray=[ DBManagerEditScoreEngine GetBowlingTeamPlayersForMatchRegistration :  MATCHCODE : BOWLINGTEAMCODE: COMPETITIONCODE : BATTINGTEAMCODE :  INNINGSNO :BATTEAMOVERS];
+    self.GetBowlingTeamPlayersArray=[ dbEditScoreEngine GetBowlingTeamPlayersForMatchRegistration :  MATCHCODE : BOWLINGTEAMCODE: COMPETITIONCODE : BATTINGTEAMCODE :  INNINGSNO :BATTEAMOVERS];
     
     if(INNINGSNO.intValue > 0 && (INNINGSNO.intValue % 2) == 0 )
     {
-        TOTALBATTEAMRUNS =[ DBManagerEditScoreEngine GetTotalBatTeamOversForGrandTotal :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO  ];
+        TOTALBATTEAMRUNS =[ dbEditScoreEngine GetTotalBatTeamOversForGrandTotal :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO  ];
         
 
         
         TOTALBATTEAMRUNS = [NSNumber numberWithInt: TOTALBATTEAMRUNS.intValue + BATTEAMRUNS.intValue ];
         
-        TOTALBOWLTEAMRUNS = [ DBManagerEditScoreEngine GetTotalBowlTeamOversForGrandTotal :  COMPETITIONCODE : MATCHCODE: BOWLINGTEAMCODE : INNINGSNO  ];
+        TOTALBOWLTEAMRUNS = [ dbEditScoreEngine GetTotalBowlTeamOversForGrandTotal :  COMPETITIONCODE : MATCHCODE: BOWLINGTEAMCODE : INNINGSNO  ];
         
         
 //        TOTALBOWLTEAMRUNS =
@@ -296,53 +296,53 @@
     
         ISFREEHIT= [[NSNumber alloc] init];
         
-        if( ![[DBManagerEditScoreEngine GetFreeHitDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ] isEqual:@""])
+        if( ![[dbEditScoreEngine GetFreeHitDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ] isEqual:@""])
         {
             ISFREEHIT = [NSNumber numberWithInt:1];
         }
         
         
         
-        STRIKERBALLS = [ DBManagerEditScoreEngine GetStrikerBallForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO :  STRIKERCODE :BATTEAMOVERS :BATTEAMOVRBALLS :   BATTEAMOVRBALLSCNT];
+        STRIKERBALLS = [ dbEditScoreEngine GetStrikerBallForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO :  STRIKERCODE :BATTEAMOVERS :BATTEAMOVRBALLS :   BATTEAMOVRBALLSCNT];
         
         
         
-        if(![[ DBManagerEditScoreEngine GetStrikerDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO :   STRIKERCODE : BATTEAMOVERS:  BATTEAMOVRBALLS:  BATTEAMOVRBALLSCNT ]  isEqual:@""])
+        if(![[ dbEditScoreEngine GetStrikerDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO :   STRIKERCODE : BATTEAMOVERS:  BATTEAMOVRBALLS:  BATTEAMOVRBALLSCNT ]  isEqual:@""])
         {
             
             
 
-            self.currentStrickerDetail=[ DBManagerEditScoreEngine GetStrikerDetailsForSEBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO :  BATTEAMOVERS :BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT: STRIKERCODE:STRIKERBALLS ];
+            self.currentStrickerDetail=[ dbEditScoreEngine GetStrikerDetailsForSEBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO :  BATTEAMOVERS :BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT: STRIKERCODE:STRIKERBALLS ];
             
         }
         else
         {
             
-           self.currentStrickerDetail=[ DBManagerEditScoreEngine GetStrikerDetailsForPlayerMaster : STRIKERCODE ];
+           self.currentStrickerDetail=[ dbEditScoreEngine GetStrikerDetailsForPlayerMaster : STRIKERCODE ];
             
             
             
         }
-        NONSTRIKERBALLS =[ DBManagerEditScoreEngine GetNonStrikerBallForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE :INNINGSNO: NONSTRIKERCODE :   BATTEAMOVERS :  BATTEAMOVRBALLS :  BATTEAMOVRBALLSCNT];
+        NONSTRIKERBALLS =[ dbEditScoreEngine GetNonStrikerBallForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE :INNINGSNO: NONSTRIKERCODE :   BATTEAMOVERS :  BATTEAMOVRBALLS :  BATTEAMOVRBALLSCNT];
         
-        if(  ![[ DBManagerEditScoreEngine GetNonStrikerDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE :INNINGSNO :NONSTRIKERCODE :      BATTEAMOVERS :  BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT] isEqual:@""])
+        if(  ![[ dbEditScoreEngine GetNonStrikerDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE :INNINGSNO :NONSTRIKERCODE :      BATTEAMOVERS :  BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT] isEqual:@""])
         {
             
-            self.currentNonStrickerDetail=[ DBManagerEditScoreEngine GetNonStrikerDetailsForSEBallEvents :COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO:BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT: NONSTRIKERCODE:STRIKERBALLS ];
+            self.currentNonStrickerDetail=[ dbEditScoreEngine GetNonStrikerDetailsForSEBallEvents :COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO:BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT: NONSTRIKERCODE:STRIKERBALLS ];
         }
         else
         {
-            self.currentNonStrickerDetail=[ DBManagerEditScoreEngine GetNonStrikerDetailsForPlayerMaster :  NONSTRIKERCODE];
+            self.currentNonStrickerDetail=[ dbEditScoreEngine GetNonStrikerDetailsForPlayerMaster :  NONSTRIKERCODE];
             
         }
         
         
         
-        [DBManagerEditScoreEngine GetPartnershipDetailsForBallEvents :COMPETITIONCODE: MATCHCODE: INNINGSNO: STRIKERCODE: NONSTRIKERCODE: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT] ;
+        [dbEditScoreEngine GetPartnershipDetailsForBallEvents :COMPETITIONCODE: MATCHCODE: INNINGSNO: STRIKERCODE: NONSTRIKERCODE: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT] ;
         
        
         
-        WICKETS=[ DBManagerEditScoreEngine GetWicketsDetailsForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT: BOWLERCODE];
+        WICKETS=[ dbEditScoreEngine GetWicketsDetailsForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT: BOWLERCODE];
         
         
         NSNumber* TOTALBALLSBOWL= [[NSNumber alloc] init];
@@ -351,15 +351,15 @@
         NSNumber* ISPARTIALOVER= [[NSNumber alloc] init];
         
         
-        ISPARTIALOVER=[DBManagerEditScoreEngine GetBowlerCodeForBowlerOverDetails : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO: BOWLERCODE: BATTEAMOVERS];
+        ISPARTIALOVER=[dbEditScoreEngine GetBowlerCodeForBowlerOverDetails : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO: BOWLERCODE: BATTEAMOVERS];
         
         if(ISPARTIALOVER.intValue == 0)
         {
             
-            ISPARTIALOVER =[DBManagerEditScoreEngine GetIsPartialOverForBowlerOverDetails : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO: BOWLERCODE: BATTEAMOVERS];
+            ISPARTIALOVER =[dbEditScoreEngine GetIsPartialOverForBowlerOverDetails : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO: BOWLERCODE: BATTEAMOVERS];
         }
         
-        NSMutableArray *GetBallCountArray=[ DBManagerEditScoreEngine GetBallCountForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO: BOWLERCODE: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT];
+        NSMutableArray *GetBallCountArray=[ dbEditScoreEngine GetBallCountForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO: BOWLERCODE: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT];
 						  if(GetBallCountArray.count>0)
                           {
                               
@@ -377,9 +377,9 @@
 						  NSNumber* BOWLERSPELL= [[NSNumber alloc] init];
         NSNumber* V_SPELLNO= [[NSNumber alloc] init];
 						  
-						  BOWLERSPELL=[DBManagerEditScoreEngine GetBowlerSpellForBallEvents :COMPETITIONCODE:MATCHCODE: INNINGSNO: BOWLERCODE: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT ];
+						  BOWLERSPELL=[dbEditScoreEngine GetBowlerSpellForBallEvents :COMPETITIONCODE:MATCHCODE: INNINGSNO: BOWLERCODE: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT ];
 						  
-						  self.currentbowlerDetail=[ DBManagerEditScoreEngine GetBowlerDetailsForBallEventsDetails : ISPARTIALOVER: TOTALBALLSBOWL: BATTEAMOVRBALLS: BOWLERRUNS: COMPETITIONCODE: MATCHCODE: INNINGSNO: BOWLERCODE: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT];
+						  self.currentbowlerDetail=[ dbEditScoreEngine GetBowlerDetailsForBallEventsDetails : ISPARTIALOVER: TOTALBALLSBOWL: BATTEAMOVRBALLS: BOWLERRUNS: COMPETITIONCODE: MATCHCODE: INNINGSNO: BOWLERCODE: BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT];
     
                             if(self.currentbowlerDetail.count>0){
                                 GetSEBowlerDetailsForBallEvents *record = [self.currentbowlerDetail objectAtIndex:0];
@@ -391,28 +391,28 @@
                             }
     
     
-						   self.GetMatchUmpireDetailsArray=[ DBManagerEditScoreEngine GetMatchUmpireDetailsForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO:BALLCODE];
+						   self.GetMatchUmpireDetailsArray=[ dbEditScoreEngine GetMatchUmpireDetailsForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO:BALLCODE];
 						  
         NSNumber* ISINNINGSLASTOVER= [[NSNumber alloc] init];
         
         
-        ISINNINGSLASTOVER=[ DBManagerEditScoreEngine GetIsInningsLastOverForBallevents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO:BATTEAMOVERS];
+        ISINNINGSLASTOVER=[ dbEditScoreEngine GetIsInningsLastOverForBallevents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO:BATTEAMOVERS];
 						  
 						  
 						  
-						  NSMutableArray *GetBallCodeDetailsArray=[ DBManagerEditScoreEngine GetBallCodeDetailsForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO:BATTEAMOVERS];
+						  NSMutableArray *GetBallCodeDetailsArray=[ dbEditScoreEngine GetBallCodeDetailsForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO:BATTEAMOVERS];
 						  
-						  NSMutableArray *GetSETeamDetailsForBallEventsArray=[ DBManagerEditScoreEngine GetSETeamDetailsForBallEventsBE : COMPETITIONCODE: MATCHCODE];
+						  NSMutableArray *GetSETeamDetailsForBallEventsArray=[ dbEditScoreEngine GetSETeamDetailsForBallEventsBE : COMPETITIONCODE: MATCHCODE];
 						  
-						   self.GetBallDetailsForBallEventsArray=[ DBManagerEditScoreEngine GetBallDetailsForBallEvents : COMPETITIONCODE: MATCHCODE : BALLCODE];
+						   self.GetBallDetailsForBallEventsArray=[ dbEditScoreEngine GetBallDetailsForBallEvents : COMPETITIONCODE: MATCHCODE : BALLCODE];
 						  
-						   self.GetWicketEventDetailsArray=[ DBManagerEditScoreEngine GetWicketEventDetailsForWicketEvents : COMPETITIONCODE: MATCHCODE :BATTINGTEAMCODE : INNINGSNO: BALLCODE];
+						   self.GetWicketEventDetailsArray=[ dbEditScoreEngine GetWicketEventDetailsForWicketEvents : COMPETITIONCODE: MATCHCODE :BATTINGTEAMCODE : INNINGSNO: BALLCODE];
 						  
-						  self.GetAppealDetailsForAppealEventsArray=[ DBManagerEditScoreEngine GetAppealDetailsForAppealEvents :  BALLCODE];
+						  self.GetAppealDetailsForAppealEventsArray=[ dbEditScoreEngine GetAppealDetailsForAppealEvents :  BALLCODE];
 						  
-						  self.GetPenaltyDetailsForPenaltyEventsArray=[ DBManagerEditScoreEngine GetPenaltyDetailsForPenaltyEvents :  COMPETITIONCODE: MATCHCODE : INNINGSNO: BALLCODE];
+						  self.GetPenaltyDetailsForPenaltyEventsArray=[ dbEditScoreEngine GetPenaltyDetailsForPenaltyEvents :  COMPETITIONCODE: MATCHCODE : INNINGSNO: BALLCODE];
 						  
-                        self.getFieldingFactorArray=[ DBManagerEditScoreEngine getFieldingFactorDetails :  COMPETITIONCODE: MATCHCODE : BATTINGTEAMCODE: BALLCODE];
+                        self.getFieldingFactorArray=[ dbEditScoreEngine getFieldingFactorDetails :  COMPETITIONCODE: MATCHCODE : BATTINGTEAMCODE: BALLCODE];
     
     [DBManager GETFIELDINGFACTORSDETAILS];
     
@@ -451,9 +451,9 @@
         
     }
 						  
-        NSMutableArray *GetSpinSpeedBallDetailsForMetadataArray=[ DBManagerEditScoreEngine GetSpinSpeedBallDetailsForMetadata];
+        NSMutableArray *GetSpinSpeedBallDetailsForMetadataArray=[ dbEditScoreEngine GetSpinSpeedBallDetailsForMetadata];
 						  
-						  NSMutableArray *GetFastSpeedBallDetailsForMetadataArray=[ DBManagerEditScoreEngine GetFastSpeedBallDetailsForMetadata];
+						  NSMutableArray *GetFastSpeedBallDetailsForMetadataArray=[ dbEditScoreEngine GetFastSpeedBallDetailsForMetadata];
 						  
 						  
 						  

@@ -209,13 +209,22 @@
    
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+ 
+    BOOL test= [[NSUserDefaults standardUserDefaults] boolForKey:@"switch"];
+    NSLog(@"%@",test?@"YES":@"NO");
+   [_mySwitch setOn:test animated:YES];
+}
 
-- (IBAction)Switch_minuts:(id)sender {
+
+
+
+
+
+- (IBAction)Switch_minuts:(UISwitch*)sender {
     
-
-
-    if([sender isOn]){
-        
+ [[NSUserDefaults standardUserDefaults] setBool:sender.isOn forKey:@"switch"];
+    if([_mySwitch isOn]){
         NSString *checkoffon=@"1";
         [checkoffon isEqual:@"1"];
         ISINCLUDEDURATION=@"1";
@@ -225,6 +234,12 @@
         ISINCLUDEDURATION=@"0";
         NSLog(@"Switch is OFF 0");
     }
+}
+
+
+- (void)saveValue  {
+    [[NSUserDefaults standardUserDefaults] setBool:self.mySwitch.on forKey:@""];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (IBAction)Finish_btn:(id)sender {
@@ -246,7 +261,7 @@
     {
         [self ShowAlterView:@"Please Select End Time"];
     }
-   else if([self.lbl_Duration.text integerValue]<0){
+   else if([self.lbl_Duration.text integerValue]<=0){
         [self ShowAlterView:@"Duration should be greated than zero"];
    }
 //    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)

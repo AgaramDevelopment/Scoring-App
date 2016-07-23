@@ -22,6 +22,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_Duration;
 @property (strong, nonatomic) IBOutlet UIView *View_Comments;
 
+@property (strong, nonatomic) IBOutlet UISwitch *updateSwitch;
 
 @property (strong, nonatomic) IBOutlet UIView *view_breakMinutes;
 - (IBAction)Switch_minuts:(id)sender;

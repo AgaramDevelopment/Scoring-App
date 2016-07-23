@@ -32,6 +32,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_Duration;
 @property (strong, nonatomic) IBOutlet UIView *View_Comments;
 
+@property (strong, nonatomic) IBOutlet UISwitch *mySwitch;
 @property (strong, nonatomic) IBOutlet UITextView *text_Comments;
 //@property (strong, nonatomic) IBOutlet UITextField *text_Comments;
 @property (strong, nonatomic) IBOutlet UIView *view_breakMinutes;

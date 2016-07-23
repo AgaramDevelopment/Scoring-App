@@ -133,6 +133,7 @@
     awardedToteam = self.teamcode;
     
     self.tbl_penaltyrecord .hidden= NO;
+    self.view_penaltyTittle.hidden=NO;
     self.Btn_Add.hidden =NO;
     isShow_penaltyrecordTbl=YES;
     
@@ -185,7 +186,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(isShow_penaltyrecordTbl== YES)
     {
-         return [_resultarray count];
+         return [self.resultarray count];
     }
     else
     {
@@ -242,6 +243,20 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(isShow_penaltyrecordTbl== YES)
+    {
+        PenaltyGridTVC * cell =(PenaltyGridTVC *)[tableView indexPathForCell:indexPath];
+        PenaltyDetailsRecord *objmetaRecord=(PenaltyDetailsRecord*)[_resultarray objectAtIndex:indexPath.row];
+        CGSize constraint = CGSizeMake(cell.frame.size.width, 20000.0f);
+        
+        //CGSize size =  //[cell.lbl_penalitycell.text sizeWithFont:[UIFont systemFontOfSize:17]      constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
+        NSString *obj =cell.lbl_penaltytype.text;
+        CGFloat strheight =objmetaRecord.penaltyreasondescription.length ;
+        CGFloat height =(strheight > 40)? strheight:40;
+        return height;
+    }
+    else
+    {
     PenalityTVC *cell =(PenalityTVC *)[tableView indexPathForCell:indexPath];
     MetaDataRecord *objmetaRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:indexPath.row];
     CGSize constraint = CGSizeMake(cell.frame.size.width, 20000.0f);
@@ -251,6 +266,7 @@
     CGFloat height =objmetaRecord.metasubcodedescription.length ;
     
     return height;
+    }
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -258,14 +274,15 @@
     
     if(isShow_penaltyrecordTbl== YES)
     {
-        selectindexarray=[[NSMutableArray alloc]init];
-        objMetaDataRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:indexPath.row];
-        selectindex=indexPath.row;
-        self.lbl_penaltytype.text =objMetaDataRecord.metasubcodedescription;
-        penaltytypereasons=objMetaDataRecord.metasubcode;
+//        selectindexarray=[[NSMutableArray alloc]init];
+//        objMetaDataRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:indexPath.row];
+       
+//        self.lbl_penaltytype.text =objMetaDataRecord.metasubcodedescription;
+//        penaltytypereasons=objMetaDataRecord.metasubcode;
         
         [selectindexarray addObject:objMetaDataRecord];
         _penaltyDetailsRecord=(PenaltyDetailsRecord*)[_resultarray objectAtIndex:indexPath.row];
+         selectindex=indexPath.row;
         txt_penalityruns.text = _penaltyDetailsRecord.penaltyruns;
         
         NSString * objpenaltyTypecode =_penaltyDetailsRecord.penaltytypecode;
@@ -280,6 +297,7 @@
         penaltytypereasons=_penaltyDetailsRecord.penaltyreasoncode;
         self.lbl_penaltytype.text = _penaltyDetailsRecord.penaltyreasondescription;
         self.tbl_penaltyrecord.hidden=YES;
+        self.view_penaltyTittle.hidden=YES;
         self.Btn_Add.hidden=YES;
         [self.btn_submitpenality setTitle:[NSString stringWithFormat:@"UPDATE"] forState:UIControlStateNormal];
         isShow_penaltyrecordTbl=NO;
@@ -370,7 +388,7 @@
             return YES;
         }
     }
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Invalid Input" message:@"Only Numbers Are Allowed For Participant Number." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Penalty" message:@"Only Numbers Are Allowed For Participant Number." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [av show];
     return NO;
 }//drop down button
@@ -401,10 +419,10 @@
     NSString *penaltyTxtf = self.txt_penalityruns.text;
     NSString *penaltyreasonTxtf = self.lbl_penaltytype.text;
     if([penaltyTxtf isEqual:@""]){
-        [self showDialog:@"Please Enter Penalty Runs." andTitle:@""];
+        [self showDialog:@"Please Enter Penalty Runs." andTitle:@"Penalty"];
         return NO;
-    }else if([penaltyreasonTxtf isEqual:@"Choose Penalty Type"]){
-        [self showDialog:@"Please Choose  Penalty Type" andTitle:@""];
+    }else if([penaltyreasonTxtf isEqual:@"Choose Penalty Type"] || [penaltyreasonTxtf isEqualToString:@""]){
+        [self showDialog:@"Please Choose  Penalty Type" andTitle:@"Penalty"];
         return NO;
     }
     
@@ -503,9 +521,6 @@
             int penaltyRunsData = [penaltyrecord.penaltyruns intValue];
             if(penaltyRunsData >= 0 && penaltyRunsData <=10){
                 
-               // NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-                //NSString *username=[defaults stringForKey :@"UserFullname"];
-                
                 NSString *maxid= [DBManager getMAXIDPENALTY];
                 NSString *paddingString = [[NSString string] stringByPaddingToLength: (7-maxid.length) withString: @"0" startingAtIndex: 0];
                 penaltycode = [NSString stringWithFormat:@"PNT%@%@",paddingString,maxid] ;
@@ -520,36 +535,16 @@
                     [self.delegate InsertPenaltyMethod:self.teamcode :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
                 }
                 
-                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Penalty Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Penalty" message:@"Penalty Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alter show];
                 alter.tag =10;
                 
                 
                  [self startService];
                
-                
-//                PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
-//                add.resultarray=penaltyarray;
-//                add.competitionCode=competitionCode;
-//                add.matchCode=matchCode;
-//                add.inningsNo=inningsNo;
-//                
-//                //vc2 *viewController = [[vc2 alloc]init];
-//                [self addChildViewController:add];
-//                add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-//                //[self.view addSubview:add.view];
-//                add.view.alpha = 0;
-//                [add didMoveToParentViewController:self];
-//                
-//                [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-//                 {
-//                     add.view.alpha = 1;
-//                 }
-//                                 completion:nil];
-                
-            }
+                }
             else {
-                [self showDialog:@"Please Enter Runs Between 0 to 10" andTitle:@"Error"];
+                [self showDialog:@"Please Enter Runs Between 0 to 10" andTitle:@"Penalty"];
             }
         }
         
@@ -581,31 +576,14 @@
             
             [DBManager GetUpdatePenaltyDetails:awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode :self.competitionCode :self.matchCode :self.inningsNo :penaltyCode];
             
-            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Penalty Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Penalty" message:@"Penalty Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             alter.tag =10;
         
             
-//            PenaltygridVC *add = [[PenaltygridVC alloc]initWithNibName:@"PenaltygridVC" bundle:nil];
-//            add.resultarray=penaltyarray;
-//            add.competitionCode=competitionCode;
-//            add.matchCode=matchCode;
-//            add.inningsNo=inningsNo;
-//            //vc2 *viewController = [[vc2 alloc]init];
-//            [self addChildViewController:add];
-//            add.view.frame =CGRectMake(0, 0, add.view.frame.size.width-50, add.view.frame.size.height);
-//           // [self.view addSubview:add.view];
-//            add.view.alpha = 0;
-//            [add didMoveToParentViewController:self];
-//            
-//            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-//             {
-//                 add.view.alpha = 1;
-//             }
-//                             completion:nil];
             
         }else{
-            [self showDialog:@"Please Enter Runs Between 0 to 10" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Runs Between 0 to 10" andTitle:@"Penalty"];
         }
         }
     }
@@ -626,6 +604,7 @@
     else
     {
         self.tbl_penaltyrecord.hidden=NO;
+        self.view_penaltyTittle.hidden=NO;
         isShow_penaltyrecordTbl= YES;
         self.Btn_Add.hidden =NO;
     }
@@ -638,16 +617,21 @@
     if(isShow_penaltyrecordTbl == YES)
     {
         self.tbl_penaltyrecord.hidden=YES;
+        self.view_penaltyTittle.hidden=YES;
         isShow_penaltyrecordTbl= NO;
         self.Btn_Add.hidden =YES;
         [self.btn_submitpenality setTitle:[NSString stringWithFormat:@"Submit"] forState:UIControlStateNormal];
-        self.lbl_penaltytype.text=@"";
+        self.lbl_penaltytype.text=@"Choose Penalty Type";
         self.txt_penalityruns.text=@"";
+        [_resultarray lastObject];
+        int myCount = [_resultarray count];
+        selectindex= myCount-1;
         
     }
     else
     {
         self.tbl_penaltyrecord.hidden=YES;
+        self.view_penaltyTittle.hidden=YES;
         isShow_penaltyrecordTbl= YES;
         self.Btn_Add.hidden =YES;
     }
@@ -665,6 +649,7 @@
              if([self.selectStartBallStatus isEqualToString:@"No"])
              {
                 self.tbl_penaltyrecord.hidden=NO;
+                 self.view_penaltyTittle.hidden =NO;
                 isShow_penaltyrecordTbl= YES;
                 self.Btn_Add.hidden = NO;
                 self.resultarray =[[NSMutableArray alloc]init];

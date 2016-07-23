@@ -176,10 +176,10 @@
                                         <mask key="constraints">
                                             <exclude reference="xFj-4p-J98"/>
                                             <exclude reference="zY6-Z5-fqX"/>
+                                            <exclude reference="Crb-4Q-wFr"/>
                                             <exclude reference="I31-vE-WHn"/>
                                             <exclude reference="O5K-zN-LHX"/>
                                             <exclude reference="Pm7-Tu-9Z4"/>
-                                            <exclude reference="Crb-4Q-wFr"/>
                                         </mask>
                                     </variation>
                                     <variation key="heightClass=regular-widthClass=regular">
@@ -190,15 +190,16 @@
                                         <mask key="constraints">
                                             <include reference="xFj-4p-J98"/>
                                             <include reference="zY6-Z5-fqX"/>
+                                            <include reference="Crb-4Q-wFr"/>
                                             <include reference="I31-vE-WHn"/>
                                             <include reference="O5K-zN-LHX"/>
                                             <include reference="Pm7-Tu-9Z4"/>
-                                            <include reference="Crb-4Q-wFr"/>
                                         </mask>
                                     </variation>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7EP-6d-DFF">
                                     <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="240" id="Da9-WT-aHh">
                                             <variation key="heightClass=regular-widthClass=regular" constant="163"/>

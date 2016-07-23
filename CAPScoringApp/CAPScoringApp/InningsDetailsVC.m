@@ -39,6 +39,8 @@
     int selectTeamindex;
     
     NSString* BowlingEnd;
+    DBManagerChangeToss *dbChangeToss;
+    
 }
 @property (nonatomic,strong)NSMutableArray*StrikerArray;
 @property (nonatomic,strong)NSMutableArray*nonStrikerArray;
@@ -56,7 +58,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     [self customnavigationmethod];
-    
+    dbChangeToss = [[DBManagerChangeToss alloc]init];
     [self.Striker_View setUserInteractionEnabled:YES];
     [self.NonStriker_View setUserInteractionEnabled:YES];
     [self.Bowler_View setUserInteractionEnabled:YES];
@@ -80,7 +82,7 @@
     self.Bowler_tableview.hidden=YES;
     isEnableTbl=YES;
     
-    NSMutableDictionary *FetchInningsDetails = [DBManagerChangeToss FetchTossDetailsForInnings: MATCHCODE : CompetitionCode];
+    NSMutableDictionary *FetchInningsDetails = [dbChangeToss FetchTossDetailsForInnings: MATCHCODE : CompetitionCode];
     StrikerArray = [[NSMutableArray alloc] init];
     StrikerArray = [FetchInningsDetails objectForKey:@"battingplayers"];
     nonStrikerArray = [[NSMutableArray alloc] init];
@@ -344,15 +346,15 @@
 
 -(void)ShowAlterView:(NSString *) alterMsg
 {
-    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:@"Start Innings" message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [objAlter show];
 }
 
 - (IBAction)Finish_btn:(id)sender {
-    if([self.lbl_Striker.text isEqualToString:@""],[self.lbl_NonStriker.text isEqualToString:@""],[self.lbl_Bowler.text isEqualToString:@""])
-    {  [self ShowAlterView:@"Please Select Striker\nPlease Select NonStriker\nPlease Select Bowler"];
-   }
-    else if([self.lbl_Striker.text isEqualToString:@""] || self.lbl_Striker.text==nil)
+//    if([self.lbl_Striker.text isEqualToString:@""],[self.lbl_NonStriker.text isEqualToString:@""],[self.lbl_Bowler.text isEqualToString:@""])
+//    {  [self ShowAlterView:@"Please Select Striker\nPlease Select NonStriker\nPlease Select Bowler"];
+//   }
+    if([self.lbl_Striker.text isEqualToString:@""] || self.lbl_Striker.text==nil)
     {
         [self ShowAlterView:@"Please Select Striker"];
     }
@@ -366,7 +368,7 @@
     }
     
     else{
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Start Innings"
                                                        message: @"Please confirm to start Innings"
                                                       delegate: self
                                              cancelButtonTitle:@"Start Innings"
@@ -383,7 +385,7 @@
 {
     if (buttonIndex == 0 && alertView.tag == 1)
     {
-        [DBManagerChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : @"" : StrikerCode : NonStrikerCode : selectBowlerCode : BowlingEnd];
+        [dbChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : @"" : StrikerCode : NonStrikerCode : selectBowlerCode : BowlingEnd];
         
         [self.delegate StartInningsprocessSuccessful : self.CompetitionCode : self.MATCHCODE : self.matchTypeCode : self.matchSetUp];
         
