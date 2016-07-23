@@ -35,6 +35,7 @@
     PenaltyDetailsRecord *penaltyrecord;
     MetaDataRecord *objMetaDataRecord;
     FetchSEPageLoadRecord *fetchSePage;
+    DBManager *objDBManager;
     BOOL isSelected;
     BOOL isShow_penaltyrecordTbl;
     
@@ -65,7 +66,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    objDBManager = [[DBManager alloc]init];
     
     isSelected = NO;
     
@@ -87,26 +88,26 @@
         btnbatting=@"MSC134";
         
         if([_penaltyDetailsRecord.penaltytypecode isEqual:@"MSC134"]){
-            _FetchPenalityArray=[DBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT030"];
+            _FetchPenalityArray=[objDBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT030"];
             self.btn_batting.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
             
             self.btn_bowling.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
 //            isbtnbattingselected=YES;
             
         }else{
-            _FetchPenalityArray=[DBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT031"];
+            _FetchPenalityArray=[objDBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT031"];
  
             
            
 //            isbtnbattingselected=NO;
         }
     }else{
-        _FetchPenalityArray=[DBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT030"];
+        _FetchPenalityArray=[objDBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT030"];
 
 //        isbtnbattingselected=YES;
     }
     
-    [DBManager GetPenaltyDetailsForPageLoadPenalty:self.competitionCode :self.matchCode :self.inningsNo];
+    //[objDBManager GetPenaltyDetailsForPageLoadPenalty:self.competitionCode :self.matchCode :self.inningsNo];
     
     
     
@@ -138,7 +139,7 @@
     
     self.resultarray =[[NSMutableArray alloc]init];
     
-    _resultarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
+    _resultarray=[objDBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
   
     
 }
@@ -304,7 +305,7 @@
     
     self.lbl_penaltytype.text=@"Choose Penalty Type";
     self.tbl_penality.hidden=YES;
-    _FetchPenalityArray=[DBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT030"];
+    _FetchPenalityArray=[objDBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT030"];
     for(int i=0; i < [_FetchPenalityArray count]; i++)
     {
         MetaDataRecord *objmetadataRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:i];
@@ -333,7 +334,7 @@
  btnbatting=@"MSC135";
     self.lbl_penaltytype.text=@"Choose Penalty Type";
     self.tbl_penality.hidden=YES;
-    _FetchPenalityArray=[DBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT031"];
+    _FetchPenalityArray=[objDBManager GetPenaltyReasonForPenalty:metadatatypecode=@"MDT031"];
     for(int i=0; i < [_FetchPenalityArray count]; i++)
     {
         
@@ -506,13 +507,13 @@
                // NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 //NSString *username=[defaults stringForKey :@"UserFullname"];
                 
-                NSString *maxid= [DBManager getMAXIDPENALTY];
+                NSString *maxid= [objDBManager getMAXIDPENALTY];
                 NSString *paddingString = [[NSString string] stringByPaddingToLength: (7-maxid.length) withString: @"0" startingAtIndex: 0];
                 penaltycode = [NSString stringWithFormat:@"PNT%@%@",paddingString,maxid] ;
                 
                 if([self.selectStartBallStatus isEqualToString:@"No"])
                 {
-                   [DBManager SetPenaltyDetails:self.competitionCode :self.matchCode :self.inningsNo :self.ballcode :penaltycode :self.teamcode : penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
+                   [objDBManager SetPenaltyDetails:self.competitionCode :self.matchCode :self.inningsNo :self.ballcode :penaltycode :self.teamcode : penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
                 
                 }
                 else
@@ -568,7 +569,7 @@
             
             
             
-         penaltyarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
+         penaltyarray=[objDBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
             
             if (penaltyarray.count >0) {
                 
@@ -579,7 +580,7 @@
             }
            
             
-            [DBManager GetUpdatePenaltyDetails:awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode :self.competitionCode :self.matchCode :self.inningsNo :penaltyCode];
+            [objDBManager GetUpdatePenaltyDetails:awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode :self.competitionCode :self.matchCode :self.inningsNo :penaltyCode];
             
             UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Penalty Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
@@ -669,7 +670,7 @@
                 self.Btn_Add.hidden = NO;
                 self.resultarray =[[NSMutableArray alloc]init];
             
-                _resultarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
+                _resultarray=[objDBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
                 [self.tbl_penaltyrecord reloadData];
              }
             else

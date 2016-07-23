@@ -33,6 +33,7 @@
     NSMutableArray * previousArray;
     NSMutableArray * wickplayerlist;
     
+    DBManager *objDBManager;
 
 }
 @property (nonatomic, getter=isPseudoEditing) BOOL pseudoEdit;
@@ -55,17 +56,16 @@
 @implementation PlayerOrderLevelVC
 
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    objDBManager = [[DBManager alloc]init];
     [self customnavigationmethod];
     
     
     objPreviousorderList =[[NSMutableArray alloc]init];
          slecteplayerlist=[[NSMutableArray alloc]init];
-    capitainWicketkeeperarray=  [DBManager getTeamCaptainandTeamwicketkeeper :self.competitionCode :self.matchCode];
+    capitainWicketkeeperarray=  [objDBManager getTeamCaptainandTeamwicketkeeper :self.competitionCode :self.matchCode];
     if(capitainWicketkeeperarray.count > 0)
     {
         CapitainWicketKeeperRecord *captainWKTRecord=(CapitainWicketKeeperRecord *)[capitainWicketkeeperarray objectAtIndex:0];
@@ -78,7 +78,7 @@
         
     }
     wickplayerlist =[[NSMutableArray alloc]init];
-    wickplayerlist = [DBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:self.overs BALLNO:self.ballOver ];
+    wickplayerlist = [objDBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:self.overs BALLNO:self.ballOver ];
     
    
 
@@ -349,7 +349,7 @@
 }
 -(IBAction)didClickDeleteplayer:(id)sender
 {
-    capitainWicketkeeperarray=  [DBManager getTeamCaptainandTeamwicketkeeper :self.competitionCode :self.matchCode];
+    capitainWicketkeeperarray=  [objDBManager getTeamCaptainandTeamwicketkeeper :self.competitionCode :self.matchCode];
     if(capitainWicketkeeperarray.count > 0)
     {
         CapitainWicketKeeperRecord *captainWKTRecord=(CapitainWicketKeeperRecord *)[capitainWicketkeeperarray objectAtIndex:0];
@@ -364,7 +364,7 @@
     
 
     slecteplayerlist=[[NSMutableArray alloc]init];
-    objPreviousorderList=[DBManager getSelectingPlayerArray :self.TeamCode matchCode:self.matchCode];
+    objPreviousorderList=[objDBManager getSelectingPlayerArray :self.TeamCode matchCode:self.matchCode];
     for(int i=0; i< objPreviousorderList.count; i++)
     {
         SelectPlayerRecord *selectedPlayerFilterRecord = [objPreviousorderList objectAtIndex:i];
@@ -413,7 +413,7 @@
     for(int i=0;  i < slecteplayerlist.count; i++)
     {
         SelectPlayerRecord *playerorderRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:i];
-        [DBManager updatePlayerorder :self.matchCode :self.TeamCode PlayerCode:playerorderRecord.playerCode PlayerOrder:playerorderRecord.playerOrder];
+        [objDBManager updatePlayerorder :self.matchCode :self.TeamCode PlayerCode:playerorderRecord.playerCode PlayerOrder:playerorderRecord.playerOrder];
         
         if(self.checkInternetConnection){
               dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -459,7 +459,7 @@
         
     }
        [delegate hideLoading];
-    [DBManager updateCapitainWicketkeeper :self.competitionCode :self.matchCode capitainAteam:self.captainAcode capitainBteam:self.captainBcode wicketkeeperAteam:self.WKTkeeperAcode wicketkeeperBteam:self.WKTkeeperBcode];
+    [objDBManager updateCapitainWicketkeeper :self.competitionCode :self.matchCode capitainAteam:self.captainAcode capitainBteam:self.captainBcode wicketkeeperAteam:self.WKTkeeperAcode wicketkeeperBteam:self.WKTkeeperBcode];
        NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
        objNewMatchSetUp =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
        objNewMatchSetUp.matchCode=self.matchCode;

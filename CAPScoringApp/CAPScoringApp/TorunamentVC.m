@@ -25,6 +25,8 @@
     NSMutableArray * selectindexarray;
     UIRefreshControl *refreshControl;
     int selectePosition;
+    DBManager *objDBManager;
+
    }
 @property (nonatomic,strong)NSMutableArray*resultArray;
 @property(nonatomic,weak) IBOutlet UIView *selectmatchTittleview;
@@ -32,11 +34,12 @@
 
 
 @end
-
 @implementation TorunamentVC
 @synthesize resultArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    objDBManager = [[DBManager alloc]init];
+
     [self customnavigationmethod];
     // Do any additional setup after loading the view.
     [self.tableView setHidden:YES];
@@ -63,7 +66,7 @@
     NSString *userCode = [defaults objectForKey:@"userCode"];
     
     resultArray=[[NSMutableArray alloc]init];
-    NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData:userCode];
+    NSMutableArray * FetchCompitionArray =[objDBManager RetrieveEventData:userCode];
     for(int i=0; i < [FetchCompitionArray count]; i++)
     {
         
@@ -184,7 +187,7 @@
         
         
         resultArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData:userCode];
+        NSMutableArray * FetchCompitionArray =[objDBManager RetrieveEventData:userCode];
         for(int i=0; i < [FetchCompitionArray count]; i++)
         {
             

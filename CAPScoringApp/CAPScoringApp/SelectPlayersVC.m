@@ -16,6 +16,8 @@
 
 @interface SelectPlayersVC (){
     CustomNavigationVC *objCustomNavigation;
+    DBManager *objDBManager ;
+
 }
 
 @property (nonatomic,strong) NSMutableArray *selectedPlayerArray;
@@ -25,13 +27,15 @@
 
 @implementation SelectPlayersVC
 
-
 static NSString * const reuseIdentifier = @"Cell";
 
 - (void)viewDidLoad {
     
     
     [super viewDidLoad];
+    
+    objDBManager = [[DBManager alloc]init];
+
     
     [self customnavigationmethod];
     
@@ -63,7 +67,7 @@ static NSString * const reuseIdentifier = @"Cell";
     
    // self.teamCode = @"TEA0000001";
     //self.matchCode= @"IMSC0221C6F6595E95A00002";
-    self.selectedPlayerArray = [DBManager getSelectingPlayerArray :self.SelectTeamCode matchCode:self.matchCode];
+    self.selectedPlayerArray = [objDBManager getSelectingPlayerArray :self.SelectTeamCode matchCode:self.matchCode];
     self.selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: self.selectedPlayerArray ];
     
     [self setSelectCount];
@@ -237,7 +241,7 @@ static NSString * const reuseIdentifier = @"Cell";
 
 - (IBAction)btn_cancel:(id)sender {
     
-    self.selectedPlayerArray = [DBManager getSelectingPlayerArray:self.SelectTeamCode matchCode:self.matchCode];
+    self.selectedPlayerArray = [objDBManager getSelectingPlayerArray:self.SelectTeamCode matchCode:self.matchCode];
     self.selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: self.selectedPlayerArray ];
     
     [self setSelectCount];
@@ -254,7 +258,7 @@ static NSString * const reuseIdentifier = @"Cell";
         for(int i=0;i<[self.selectedPlayerArray count];i++){
             SelectPlayerRecord *selectedPlayerFilterRecord = [self.selectedPlayerArray objectAtIndex:i];
             NSString *recordStatus = [[selectedPlayerFilterRecord isSelected]boolValue]? @"MSC001":@"MSC002";
-            [DBManager updateSelectedPlayersResultCode:[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus];
+            [objDBManager updateSelectedPlayersResultCode:[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus];
             
         }
         PlayerOrderLevelVC *objPlayerOrderLevelVC = [[PlayerOrderLevelVC alloc] init];

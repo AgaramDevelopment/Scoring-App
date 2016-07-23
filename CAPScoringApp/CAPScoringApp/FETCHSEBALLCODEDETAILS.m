@@ -414,12 +414,12 @@
 						  
                         self.getFieldingFactorArray=[ DBManagerEditScoreEngine getFieldingFactorDetails :  COMPETITIONCODE: MATCHCODE : BATTINGTEAMCODE: BALLCODE];
     
-    [DBManager GETFIELDINGFACTORSDETAILS];
+    [[[DBManager alloc]init]  GETFIELDINGFACTORSDETAILS];
     
     
     //ALL INNINGS SCORE DETAILS
     NSMutableArray *inningsArray = [[NSMutableArray alloc]init];
-    inningsArray = [DBManager FETCHSEALLINNINGSSCOREDETAILS:COMPETITIONCODE MATCHCODE:MATCHCODE];
+    inningsArray = [[[DBManager alloc]init] FETCHSEALLINNINGSSCOREDETAILS:COMPETITIONCODE MATCHCODE:MATCHCODE];
     
     if([inningsArray count]>0){
         FetchSEPageLoadRecord *inningsDetails = (FetchSEPageLoadRecord*)[inningsArray objectAtIndex:0];

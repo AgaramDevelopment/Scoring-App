@@ -37,9 +37,10 @@
     //objInningsno;
     BallEventRecord*obj;
     FetchSEPageLoadRecord*fetchSEPageLoadRecord;
+    DBManager *objDBManager;
+
 }
 @end
-
 @implementation AddBreakVC
 @synthesize COMPETITIONCODE;
 @synthesize MATCHCODE;
@@ -47,7 +48,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-  
+    objDBManager = [[DBManager alloc]init];
+
 
     
      [_datePicker_View setHidden:YES];
@@ -260,7 +262,7 @@
    
     else{
     
-    BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
+    BREAKNO =[objDBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
     
     
 
@@ -293,12 +295,12 @@
 //        {
 //            if(![DBManager MatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE : INNINGSNO])
 //            {
-                [DBManager InsertInningsEvents : COMPETITIONCODE : INNINGSNO : MATCHCODE : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : BREAKNO : ISINCLUDEDURATION];
+                [objDBManager InsertInningsEvents : COMPETITIONCODE : INNINGSNO : MATCHCODE : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : BREAKNO : ISINCLUDEDURATION];
           //  }
        // }
    // }
     
-    NSMutableArray*BreaksArray=[DBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+    NSMutableArray*BreaksArray=[objDBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     //BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     
     

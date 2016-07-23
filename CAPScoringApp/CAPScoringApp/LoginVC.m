@@ -288,13 +288,15 @@
 
             //[delegate hideLoading];
         }else{
-            NSMutableArray *userMutableArray = [DBManager checkUserLogin : userNameLbl password:passwordLbl];
+            DBManager *objDBManager = [[DBManager alloc]init];
+
+            NSMutableArray *userMutableArray = [objDBManager checkUserLogin : userNameLbl password:passwordLbl];
             if([userMutableArray count]!=0){
                 UserRecord *userRecode = [userMutableArray objectAtIndex:0];
-                
-                if([DBManager checkExpiryDate:[userRecode userCode]]){
+
+                if([objDBManager checkExpiryDate:[userRecode userCode]]){
                   
-                     if ([DBManager checkSecurityExpiryDate :userRecode.userName ])
+                     if ([objDBManager checkSecurityExpiryDate :userRecode.userName ])
                      {
                     BOOL isUserLogin = YES;
                     NSString *userCode = [userRecode userCode];

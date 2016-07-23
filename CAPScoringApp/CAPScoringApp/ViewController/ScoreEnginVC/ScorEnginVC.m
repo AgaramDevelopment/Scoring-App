@@ -213,7 +213,14 @@
     BOOL isFreeHitBall;
     NSArray *ValidedMatchType;
       FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
+    DBManager *objDBManager;
     
+    FetchLastBowler *fetchLastBowler;
+    FetchSEPageLoadRecord *fetchSEPageLoadRecord;
+    EndInnings *endInnings;
+    EditModeVC * objEditModeVc;
+
+
 }
 
 
@@ -282,12 +289,11 @@
 @synthesize AppealBatsmenArray;
 
 
-FetchLastBowler *fetchLastBowler;
-FetchSEPageLoadRecord *fetchSEPageLoadRecord;
-EndInnings *endInnings;
-EditModeVC * objEditModeVc;
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    objDBManager = [[DBManager alloc]init];
+
     //Initialize Matchtype Dictionary
     MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
     ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
@@ -296,7 +302,7 @@ EditModeVC * objEditModeVc;
     
     
     AppealSystemArray=[[NSMutableArray alloc]init];
-    NSMutableArray * FetchAppealSystemArray =[DBManager AppealSystemRetrieveEventData];
+    NSMutableArray * FetchAppealSystemArray =[objDBManager AppealSystemRetrieveEventData];
     for(int i=0; i < [FetchAppealSystemArray count]; i++)
     {
         
@@ -307,7 +313,7 @@ EditModeVC * objEditModeVc;
 
     
     AppealComponentArray=[[NSMutableArray alloc]init];
-    NSMutableArray * FetchAppealComponentArray =[DBManager AppealComponentRetrieveEventData];
+    NSMutableArray * FetchAppealComponentArray =[objDBManager AppealComponentRetrieveEventData];
     for(int i=0; i < [FetchAppealComponentArray count]; i++)
     {
         
@@ -327,6 +333,10 @@ EditModeVC * objEditModeVc;
    
      
     objEditModeVc.delegate=self;
+    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    
+    
     if(self.isEditMode){//Edit
         [self loadViewOnEditMode];
         
@@ -386,7 +396,7 @@ EditModeVC * objEditModeVc;
     _view_Wagon_wheel.hidden=YES;
     //bowl type - spin array
     _bowlTypeArray=[[NSMutableArray alloc]init];
-    _bowlTypeArray =[DBManager getBowlType];
+    _bowlTypeArray =[objDBManager getBowlType];
     
     self.view_bowlType.hidden = YES;
     self.tbl_bowlType.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -395,7 +405,7 @@ EditModeVC * objEditModeVc;
     //fast bowl type
     
     _fastBowlTypeArray = [[NSMutableArray alloc]init];
-    _fastBowlTypeArray = [DBManager getBowlFastType];
+    _fastBowlTypeArray = [objDBManager getBowlFastType];
     
     self.view_fastBowl.hidden = YES;
     
@@ -405,14 +415,14 @@ EditModeVC * objEditModeVc;
     //aggressive shot type
     
     _aggressiveShotTypeArray = [[NSMutableArray alloc]init];
-    _aggressiveShotTypeArray =[DBManager getAggressiveShotType];
+    _aggressiveShotTypeArray =[objDBManager getAggressiveShotType];
     self.view_aggressiveShot.hidden = YES;
     
     
     
     //defensice shot type
     _defensiveShotTypeArray = [[NSMutableArray alloc]init];
-    _defensiveShotTypeArray = [DBManager getDefenceShotType];
+    _defensiveShotTypeArray = [objDBManager getDefenceShotType];
     self.view_defensive.hidden = YES;
     
     self.View_Appeal.hidden = YES;
@@ -460,13 +470,13 @@ EditModeVC * objEditModeVc;
     _View_Appeal.hidden=YES;
     _view_table_select.hidden=YES;
     _AppealValuesArray=[[NSMutableArray alloc]init];
-    _AppealValuesArray =[DBManager AppealRetrieveEventData];
+    _AppealValuesArray =[objDBManager AppealRetrieveEventData];
     //_rightSlideArray = rightSideVc.rightSlideArray;
     leftSlideSwipe = NO;
     
     //OTW and RTW
     _otwRtwArray = [[NSMutableArray alloc]init];
-    _otwRtwArray = [DBManager getOtwRtw];
+    _otwRtwArray = [objDBManager getOtwRtw];
     
     
     
@@ -491,7 +501,7 @@ EditModeVC * objEditModeVc;
     
     //Fielding Factor
     //_fieldingfactorArray=[[NSMutableArray alloc]init];
-    // _fieldingfactorArray =[DBManager RetrieveFieldingFactorData];
+    // _fieldingfactorArray =[objDBManager RetrieveFieldingFactorData];
     
     //    self.view_fieldingfactor.hidden = YES;
     //    self.view_fieldername.hidden = YES;
@@ -1447,14 +1457,14 @@ EditModeVC * objEditModeVc;
 {
     //self.ballEventRecord=[[BallEventRecord alloc]init];
     
-    NSMutableArray * teamCodeArray=[DBManager getTeamCodemethod];
+    NSMutableArray * teamCodeArray=[objDBManager getTeamCodemethod];
     if(teamCodeArray.count > 0 && teamCodeArray != NULL)
     {
         NSString * objTeamCode = [NSString stringWithFormat:@"%@",teamCodeArray.lastObject];
         self.ballEventRecord.objTeamcode =objTeamCode;
     }
     
-    NSMutableArray * inningsNoArray=[DBManager getInningsNomethod];
+    NSMutableArray * inningsNoArray=[objDBManager getInningsNomethod];
     if(inningsNoArray.count > 0 && inningsNoArray != NULL)
     {
         NSString * objInningsno = [NSString stringWithFormat:@"%@",inningsNoArray.lastObject];
@@ -1465,7 +1475,7 @@ EditModeVC * objEditModeVc;
     }
     
     [self getDayNOValue];
-    NSString * ballCodevalue=[DBManager getballcodemethod:self.matchCode];
+    NSString * ballCodevalue=[objDBManager getballcodemethod:self.matchCode];
     // NSLog(@"array : %@",[ballCodevalueArray lastObject]);
     if(![ballCodevalue isEqualToString: @""])
     {
@@ -1547,7 +1557,7 @@ EditModeVC * objEditModeVc;
 
 -(void)getDayNOValue
 {
-    NSMutableArray * DayNoArray=[DBManager getDayNomethod];
+    NSMutableArray * DayNoArray=[objDBManager getDayNomethod];
     NSString * objDayno;
     if(DayNoArray.count > 0 && DayNoArray != NULL)
     {
@@ -2656,7 +2666,7 @@ EditModeVC * objEditModeVc;
 //        }
 //    }
     
-    NSMutableArray * objUmpireArray =[DBManager GETUMPIRE:self.competitionCode :self.matchCode ];
+    NSMutableArray * objUmpireArray =[objDBManager GETUMPIRE:self.competitionCode :self.matchCode ];
     Umpire1Code =[objUmpireArray objectAtIndex:0];
     umpire2Code =[objUmpireArray objectAtIndex:1];
     TEAMAWICKETKEEPER =[objUmpireArray objectAtIndex:2];
@@ -3074,7 +3084,7 @@ EditModeVC * objEditModeVc;
     NSInteger currentover =fetchSEPageLoadRecord.BATTEAMOVERS;
     int overNoint =(int)currentover;
     
-    NSMutableArray * objUmpireArray =[DBManager GETUMPIRE:self.competitionCode :self.matchCode ];
+    NSMutableArray * objUmpireArray =[objDBManager GETUMPIRE:self.competitionCode :self.matchCode ];
     Umpire1Code =[objUmpireArray objectAtIndex:0];
     umpire2Code =[objUmpireArray objectAtIndex:1];
     TEAMAWICKETKEEPER =[objUmpireArray objectAtIndex:2];
@@ -3785,7 +3795,7 @@ EditModeVC * objEditModeVc;
         }else{
             
             _WicketTypeArray=[[NSMutableArray alloc]init];
-            NSMutableArray *tempWickettypeArray  =[DBManager RetrieveWicketType];
+            NSMutableArray *tempWickettypeArray  =[objDBManager RetrieveWicketType];
             
             
             
@@ -5531,7 +5541,7 @@ EditModeVC * objEditModeVc;
         }else{
             //Fielding Factor
             _fieldingfactorArray=[[NSMutableArray alloc]init];
-            _fieldingfactorArray =[DBManager RetrieveFieldingFactorData];
+            _fieldingfactorArray =[objDBManager RetrieveFieldingFactorData];
             
             _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
             
@@ -6905,7 +6915,7 @@ self.lbl_umpirename.text=@"";
         {
             _PlayerlistArray=[[NSMutableArray alloc]init];
             // _PlayerlistArray =[DBManager RetrievePlayerData:self.ma];
-            _PlayerlistArray=[DBManager RetrievePlayerData:self.matchCode :fetchSEPageLoadRecord.BOWLINGTEAMCODE];
+            _PlayerlistArray=[objDBManager RetrievePlayerData:self.matchCode :fetchSEPageLoadRecord.BOWLINGTEAMCODE];
             if([selectedwickettype.metasubcode isEqualToString:@"MSC095"]){ // Remove current bowler from list
                 int  index = 0;
                 int selectedindex = -1;
@@ -6991,7 +7001,7 @@ self.lbl_umpirename.text=@"";
         selectedfieldFactor = [self.fieldingfactorArray objectAtIndex:indexPath.row];
         
         _fieldingPlayerArray=[[NSMutableArray alloc]init];
-        _fieldingPlayerArray =[DBManager RetrieveFieldingPlayerData:self.matchCode:fetchSEPageLoadRecord.BATTINGTEAMCODE];
+        _fieldingPlayerArray =[objDBManager RetrieveFieldingPlayerData:self.matchCode:fetchSEPageLoadRecord.BATTINGTEAMCODE];
         
         isFieldingSelected = YES;
         fieldingOption = 2;
@@ -7106,7 +7116,7 @@ self.lbl_umpirename.text=@"";
             if(isWicketSelected ==YES)
             {
                 _WicketTypeArray=[[NSMutableArray alloc]init];
-                NSMutableArray *tempWickettypeArray  =[DBManager RetrieveWicketType];
+                NSMutableArray *tempWickettypeArray  =[objDBManager RetrieveWicketType];
                 
                 for(int i=0;i<tempWickettypeArray.count;i++){
                     WicketTypeRecord *wicketTypeRecord =[tempWickettypeArray objectAtIndex:i];
@@ -7180,7 +7190,7 @@ self.lbl_umpirename.text=@"";
             if(isWicketSelected ==YES)
             {
                 _WicketTypeArray=[[NSMutableArray alloc]init];
-                NSMutableArray *tempWickettypeArray  =[DBManager RetrieveWicketType];
+                NSMutableArray *tempWickettypeArray  =[objDBManager RetrieveWicketType];
                 
                 for(int i=0;i<tempWickettypeArray.count;i++){
                     WicketTypeRecord *wicketTypeRecord =[tempWickettypeArray objectAtIndex:i];
@@ -7237,7 +7247,7 @@ self.lbl_umpirename.text=@"";
             if(isWicketSelected ==YES)
             {
                 _WicketTypeArray=[[NSMutableArray alloc]init];
-                NSMutableArray *tempWickettypeArray  =[DBManager RetrieveWicketType];
+                NSMutableArray *tempWickettypeArray  =[objDBManager RetrieveWicketType];
                 
                 for(int i=0;i<tempWickettypeArray.count;i++){
                     WicketTypeRecord *wicketTypeRecord =[tempWickettypeArray objectAtIndex:i];
@@ -7293,7 +7303,7 @@ self.lbl_umpirename.text=@"";
             if(isWicketSelected ==YES)
             {
                 _WicketTypeArray=[[NSMutableArray alloc]init];
-                NSMutableArray *tempWickettypeArray  =[DBManager RetrieveWicketType];
+                NSMutableArray *tempWickettypeArray  =[objDBManager RetrieveWicketType];
                 
                 for(int i=0;i<tempWickettypeArray.count;i++){
                     WicketTypeRecord *wicketTypeRecord =[tempWickettypeArray objectAtIndex:i];
@@ -7537,7 +7547,7 @@ self.lbl_umpirename.text=@"";
         
         
         
-        [DBManager updateStricker:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO STRIKERCODE:selectPlayer.playerCode];
+        [objDBManager updateStricker:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO STRIKERCODE:selectPlayer.playerCode];
         isBowlerOpen = NO;
         isNONStrickerOpen = NO;
         isStrickerOpen = NO;
@@ -8017,7 +8027,7 @@ self.lbl_umpirename.text=@"";
 {
     
     
-    NSMutableArray *getPlayerRecord = [DBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS] BALLNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVRBALLS] ];
+    NSMutableArray *getPlayerRecord = [objDBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS] BALLNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVRBALLS] ];
     
     NewMatchSetUpVC *detail = [[NewMatchSetUpVC alloc]init];
     
@@ -8828,6 +8838,7 @@ self.lbl_umpirename.text=@"";
 }
 -(void) reloadBowlerTeamBatsmanDetails{
     //[self EndBallMethod];
+    
     
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
@@ -12051,7 +12062,7 @@ self.lbl_umpirename.text=@"";
         
     }else{
         
-        [DBManager updateRevisedOvers:strovers comments:strcomments matchCode:self.matchCode competitionCode:self.competitionCode];
+        [objDBManager updateRevisedOvers:strovers comments:strcomments matchCode:self.matchCode competitionCode:self.competitionCode];
     }
 }
 //

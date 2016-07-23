@@ -58,7 +58,7 @@
     self.Tbl_Followon.hidden=YES;
     CommonArry =[[NSMutableArray alloc]init];
    
-    followon=[DBManager getFollowOn:self.matchCode :self.compitionCode :self.inningsno];
+    followon=[[[DBManager alloc] init] getFollowOn:self.matchCode :self.compitionCode :self.inningsno];
     if([self.inningsno isEqualToString:@"2"] || [self.inningsno isEqualToString:@"3"])
     {
         if([followon isEqualToString:@"1"])

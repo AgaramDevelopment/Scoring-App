@@ -24,9 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    DBManager *objDBManager=[[DBManager alloc]init];
     //_FetchOfficalMasterArray=[[NSMutableArray alloc]init];
-    _FetchOfficalMasterArray =[DBManager RetrieveOfficalMasterData:Matchcode competitionCode:competitionCode];
+    _FetchOfficalMasterArray =[objDBManager RetrieveOfficalMasterData:Matchcode competitionCode:competitionCode];
     
     [self customnavigationmethod];
     
