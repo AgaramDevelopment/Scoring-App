@@ -329,41 +329,41 @@
                                             <action selector="Btn_touch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AoO-6e-gzt"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JX9-v8-msE">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JX9-v8-msE">
                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="hae-Ak-JGy"/>
+                                            <constraint firstAttribute="width" constant="314" id="5vF-8r-w1Z">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="409"/>
+                                            </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="25"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="hae-Ak-JGy"/>
+                                                <exclude reference="5vF-8r-w1Z"/>
                                             </mask>
                                         </variation>
                                         <variation key="heightClass=regular-widthClass=regular">
                                             <mask key="constraints">
-                                                <include reference="hae-Ak-JGy"/>
+                                                <include reference="5vF-8r-w1Z"/>
                                             </mask>
                                         </variation>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="JX9-v8-msE" firstAttribute="leading" secondItem="PWz-hf-VY3" secondAttribute="leading" constant="5" id="2kg-ks-lYg"/>
                                     <constraint firstAttribute="bottom" secondItem="Pm3-Qr-Ov5" secondAttribute="bottom" id="6ge-uC-X1i"/>
                                     <constraint firstItem="Pm3-Qr-Ov5" firstAttribute="leading" secondItem="PWz-hf-VY3" secondAttribute="leading" id="966-cb-hd0"/>
-                                    <constraint firstItem="JX9-v8-msE" firstAttribute="top" secondItem="PWz-hf-VY3" secondAttribute="top" id="DNZ-NO-Mbn">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="10"/>
-                                    </constraint>
-                                    <constraint firstAttribute="bottom" secondItem="JX9-v8-msE" secondAttribute="bottom" constant="2" id="Xs1-ur-pyb">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                    <constraint firstItem="JX9-v8-msE" firstAttribute="top" secondItem="PWz-hf-VY3" secondAttribute="topMargin" id="CWa-Wl-ra6"/>
+                                    <constraint firstItem="JX9-v8-msE" firstAttribute="leading" secondItem="Pm3-Qr-Ov5" secondAttribute="leading" id="DCr-u5-JtG">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="3"/>
                                     </constraint>
                                     <constraint firstAttribute="height" constant="47" id="a5F-pn-ZIg">
                                         <variation key="heightClass=regular-widthClass=regular" constant="65"/>
                                     </constraint>
                                     <constraint firstItem="Pm3-Qr-Ov5" firstAttribute="top" secondItem="PWz-hf-VY3" secondAttribute="top" id="cQo-le-CeS"/>
+                                    <constraint firstAttribute="bottom" secondItem="JX9-v8-msE" secondAttribute="bottom" constant="2" id="f6f-mQ-Peb"/>
                                     <constraint firstAttribute="width" constant="484" id="p7F-p4-wQY">
                                         <variation key="heightClass=regular-widthClass=regular" constant="568"/>
                                     </constraint>
@@ -381,9 +381,9 @@
                                         <exclude reference="966-cb-hd0"/>
                                         <exclude reference="cQo-le-CeS"/>
                                         <exclude reference="uEj-0q-CQc"/>
-                                        <exclude reference="2kg-ks-lYg"/>
-                                        <exclude reference="DNZ-NO-Mbn"/>
-                                        <exclude reference="Xs1-ur-pyb"/>
+                                        <exclude reference="CWa-Wl-ra6"/>
+                                        <exclude reference="DCr-u5-JtG"/>
+                                        <exclude reference="f6f-mQ-Peb"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular">
@@ -398,9 +398,9 @@
                                         <include reference="966-cb-hd0"/>
                                         <include reference="cQo-le-CeS"/>
                                         <include reference="uEj-0q-CQc"/>
-                                        <include reference="2kg-ks-lYg"/>
-                                        <include reference="DNZ-NO-Mbn"/>
-                                        <include reference="Xs1-ur-pyb"/>
+                                        <include reference="CWa-Wl-ra6"/>
+                                        <include reference="DCr-u5-JtG"/>
+                                        <include reference="f6f-mQ-Peb"/>
                                     </mask>
                                 </variation>
                             </view>

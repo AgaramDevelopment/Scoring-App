@@ -734,7 +734,7 @@
        
             UIAlertView *alert = [[UIAlertView alloc]
                                   initWithTitle:@"Alert"
-                                  message:message
+                                  message:@"Failed"
                                   delegate:nil //or self
                                   cancelButtonTitle:@"Failed"
                                   otherButtonTitles:nil];
