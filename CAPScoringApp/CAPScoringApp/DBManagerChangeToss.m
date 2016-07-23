@@ -180,7 +180,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MAX(INNINGSNO) AS MAXINNINGSNO from INNINGSEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSSTATUS = 1",COMPETITIONCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MAX(INNINGSNO) AS MAXINNINGSNO from INNINGSEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSSTATUS = '1'",COMPETITIONCODE,MATCHCODE];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
             
@@ -830,9 +830,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //SP_FETCHTOSSDETAILSFORINNINGS
 +(NSMutableDictionary *) FetchTossDetailsForInnings: (NSString*) MATCHCODE : (NSString*) COMPETITIONCODE
 {
-    NSString* BOWLINGTEAMCODE = [[NSString alloc] init];
-    NSString* BATTINGTEAMCODE = [[NSString alloc] init];
-    NSNumber* MAXINNINGSNOForInningsInit = [[NSNumber alloc] init];
+    NSString* BOWLINGTEAMCODE ;
+    NSString* BATTINGTEAMCODE ;
+    NSNumber* MAXINNINGSNOForInningsInit ;
     NSMutableDictionary *TossDetailsForInningsDic=[[NSMutableDictionary alloc] init];
     
     MAXINNINGSNOForInningsInit = [DBManagerChangeToss GetMaxInningsNoForInningsEvents : COMPETITIONCODE : MATCHCODE];
