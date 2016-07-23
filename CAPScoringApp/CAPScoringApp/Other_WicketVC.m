@@ -51,6 +51,7 @@
     BOOL isEnableTbl;
     BOOL isAddWicket;
     BOOL isWicketlist;
+    NSMutableArray * GetWicketEventsPlayerDetails;
     
     
 //    NSString  *N_WICKETNO;
@@ -120,6 +121,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self getWicketListMethod];
     
     self.tbl_playername.hidden=YES;
     
@@ -148,25 +150,31 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-    }
+-(void)getWicketListMethod
+{
+    GetWicketEventsPlayerDetails=[[NSMutableArray alloc]init];
+    GetWicketEventsPlayerDetails=[ DbManager_OtherWicket GetWicketEventDetailsForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+    WICKETNO =[ DbManager_OtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
+}
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (tableView == self.Wicket_tableview)
-   {
+    
+   
     return 1;
-   }//count of section
-    return 1;
+   
 }
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView == self.Wicket_tableview)
+    if(isWicketlist == NO)
+    {
+        return GetWicketEventsPlayerDetails.count;
+    }
+else
+{    if (tableView == self.Wicket_tableview)
     {
         return [WICKETARRAY count];
     }
@@ -197,6 +205,7 @@
     {
         return 1;
     }
+}
     //count number of row from counting array hear cataGorry is An Array
 }
 
@@ -204,9 +213,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(isWicketlist == YES)
+    if(isWicketlist == NO)
     {
+        static NSString *breakidentifier = @"otherwicketcell";
         
+        
+        Other_WicketgridTVC *cell = (Other_WicketgridTVC *)[tableView dequeueReusableCellWithIdentifier:breakidentifier];
+        if (cell == nil) {
+            [[NSBundle mainBundle] loadNibNamed:@"Other_WicketgridTVC" owner:self options:nil];
+            cell = self.Other_WicketCell;
+            self.Other_WicketCell = nil;
+        }
+        
+        GetWicketEventsPlayerDetail *veb =(GetWicketEventsPlayerDetail*)[GetWicketEventsPlayerDetails objectAtIndex:indexPath.row];
+        
+        cell.lbl_wickettype.text=veb.WICKETTYPE;
+        cell.lbl_playername.text=veb.WICKETPLAYER;
+        cell.lbl_wicketno.text=veb.WICKETNO;
+        return cell;
+
     }
     else{
     if (tableView == self.Wicket_tableview)
@@ -285,6 +310,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(isWicketlist == NO)
+    {
+        GetWicketEventsPlayerDetail *veb =(GetWicketEventsPlayerDetail*)[GetWicketEventsPlayerDetails objectAtIndex:indexPath.row];
+        self.Wicket_lbl.text=veb.WICKETTYPE;
+        self.selectplayer_lbl.text=veb.WICKETPLAYER;
+        self.WICKET_NO_LBL.text=veb.WICKETNO;
+        WICKETTYPE=veb.WICKETTYPE;
+        WICKETPLAYER=veb.WICKETPLAYER;
+        WICKETNO=veb.WICKETNO;
+        _ISEDITMODE =YES;
+        self.WickAddview.hidden=YES;
+        
+        self.Btn_Add.hidden =YES;
+
+  
+    }
+    else
+    {
     
     if (tableView == self.Wicket_tableview)
     {
@@ -360,6 +403,7 @@
 
         
     }
+    }
 
 }
 
@@ -368,6 +412,7 @@
     if(isAddWicket==YES)
     {
         self.WickAddview.hidden=NO;
+        self.Btn_Add.hidden =NO;
         isAddWicket=NO;
     }
     else
@@ -440,35 +485,35 @@
     if([self formValidation]){
  
     if(_ISEDITMODE){
-        [self UpdateOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :WICKETTYPE :WICKETPLAYER :WICKETNO :VIDEOLOCATION :TOTALRUNS];
+       [self UpdateOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :WICKETTYPE :WICKETPLAYER :WICKETNO :VIDEOLOCATION :TOTALRUNS];
         
-        
-        Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
-        add.COMPETITIONCODE=self.COMPETITIONCODE;
-        add.MATCHCODE=self.MATCHCODE;
-        add.INNINGSNO=self.INNINGSNO;
-        add.TEAMCODE=self.TEAMCODE;
-        add.STRIKERCODE=STRIKERCODE;
-        add.NONSTRIKERCODE=NONSTRIKERCODE;
-        add.NONSTRIKERNAME=NONSTRIKERNAME;
-        add.MAXOVER=MAXOVER;
-        add.MAXBALL=MAXBALL;
-        add.BALLCOUNT=BALLCOUNT;
-        add.N_WICKETNO=N_WICKETNO;
-        add.BALLCODE=BALLCODE;
-        
-        [self addChildViewController:add];
-        add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-        [self.view addSubview:add.view];
-        add.view.alpha = 0;
-        [add didMoveToParentViewController:self];
-        
-        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-         {
-             add.view.alpha = 1;
-         }
-                         completion:nil];
-        
+//        
+//        Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
+//        add.COMPETITIONCODE=self.COMPETITIONCODE;
+//        add.MATCHCODE=self.MATCHCODE;
+//        add.INNINGSNO=self.INNINGSNO;
+//        add.TEAMCODE=self.TEAMCODE;
+//        add.STRIKERCODE=STRIKERCODE;
+//        add.NONSTRIKERCODE=NONSTRIKERCODE;
+//        add.NONSTRIKERNAME=NONSTRIKERNAME;
+//        add.MAXOVER=MAXOVER;
+//        add.MAXBALL=MAXBALL;
+//        add.BALLCOUNT=BALLCOUNT;
+//        add.N_WICKETNO=N_WICKETNO;
+//        add.BALLCODE=BALLCODE;
+//        
+//        [self addChildViewController:add];
+//        add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//        [self.view addSubview:add.view];
+//        add.view.alpha = 0;
+//        [add didMoveToParentViewController:self];
+//        
+//        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//         {
+//             add.view.alpha = 1;
+//         }
+//                         completion:nil];
+//        
         
        
     }else{
@@ -477,33 +522,36 @@
       
         [self InsertOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETPLAYER :WICKETTYPE : WICKETNO :VIDEOLOCATION :TOTALRUNS];
     
+//        self.WickAddview.hidden=NO;
+//        isWicketlist=NO;
+//        [self.tbl_Wicketlist reloadData];
         
-        Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
-        add.COMPETITIONCODE=self.COMPETITIONCODE;
-        add.MATCHCODE=self.MATCHCODE;
-        add.INNINGSNO=self.INNINGSNO;
-        add.TEAMCODE=self.TEAMCODE;
-        add.STRIKERCODE=STRIKERCODE;
-        add.NONSTRIKERCODE=NONSTRIKERCODE;
-        add.NONSTRIKERNAME=NONSTRIKERNAME;
-        add.MAXOVER=MAXOVER;
-        add.MAXBALL=MAXBALL;
-        add.BALLCOUNT=BALLCOUNT;
-        add.N_WICKETNO=N_WICKETNO;
-        add.BALLCODE=BALLCODE;
-        
-        [self addChildViewController:add];
-        add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-        [self.view addSubview:add.view];
-        add.view.alpha = 0;
-        [add didMoveToParentViewController:self];
-        
-        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-         {
-             add.view.alpha = 1;
-         }
-                         completion:nil];
-
+//        Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
+//        add.COMPETITIONCODE=self.COMPETITIONCODE;
+//        add.MATCHCODE=self.MATCHCODE;
+//        add.INNINGSNO=self.INNINGSNO;
+//        add.TEAMCODE=self.TEAMCODE;
+//        add.STRIKERCODE=STRIKERCODE;
+//        add.NONSTRIKERCODE=NONSTRIKERCODE;
+//        add.NONSTRIKERNAME=NONSTRIKERNAME;
+//        add.MAXOVER=MAXOVER;
+//        add.MAXBALL=MAXBALL;
+//        add.BALLCOUNT=BALLCOUNT;
+//        add.N_WICKETNO=N_WICKETNO;
+//        add.BALLCODE=BALLCODE;
+//        
+//        [self addChildViewController:add];
+//        add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//        [self.view addSubview:add.view];
+//        add.view.alpha = 0;
+//        [add didMoveToParentViewController:self];
+//        
+//        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//         {
+//             add.view.alpha = 1;
+//         }
+//                         completion:nil];
+//
     }
     
     }
@@ -512,7 +560,7 @@
 
 -(IBAction)didclicktouch:(id)sender{
     
-   
+         isWicketlist=YES;
         WICKETARRAY=[[NSMutableArray alloc]init];
         NSMutableArray * FetchWicketArray =[DbManager_OtherWicket RetrieveOtherWicketType];
         for(int i=0; i < [FetchWicketArray count]; i++)
@@ -535,7 +583,9 @@
 -(IBAction)didClickAddBtnAction:(id)sender
 {
     self.WickAddview.hidden =YES;
+    self.Btn_Add.hidden=YES;
     isAddWicket=YES;
+    isWicketlist=YES;
 }
 - (IBAction)didclicktouchplayer:(id)sender {
      
@@ -551,32 +601,38 @@
     if(WICKETTYPE != nil){
     
     [self DeleteOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETNO];
+        
+        self.WickAddview.hidden=NO;
+        self.Btn_Add.hidden =NO;
+        isWicketlist=NO;
+        [self getWicketListMethod];
+        [self.tbl_Wicketlist reloadData];
     
-    Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
-    add.COMPETITIONCODE=self.COMPETITIONCODE;
-    add.MATCHCODE=self.MATCHCODE;
-    add.INNINGSNO=self.INNINGSNO;
-    add.TEAMCODE=self.TEAMCODE;
-        add.STRIKERCODE=STRIKERCODE;
-        add.NONSTRIKERCODE=NONSTRIKERCODE;
-        add.NONSTRIKERNAME=NONSTRIKERNAME;
-        add.MAXOVER=MAXOVER;
-        add.MAXBALL=MAXBALL;
-        add.BALLCOUNT=BALLCOUNT;
-        add.N_WICKETNO=N_WICKETNO;
-        add.BALLCODE=BALLCODE;
-    
-    [self addChildViewController:add];
-    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-    [self.view addSubview:add.view];
-    add.view.alpha = 0;
-    [add didMoveToParentViewController:self];
-    
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         add.view.alpha = 1;
-     }
-                     completion:nil];
+//    Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
+//    add.COMPETITIONCODE=self.COMPETITIONCODE;
+//    add.MATCHCODE=self.MATCHCODE;
+//    add.INNINGSNO=self.INNINGSNO;
+//    add.TEAMCODE=self.TEAMCODE;
+//        add.STRIKERCODE=STRIKERCODE;
+//        add.NONSTRIKERCODE=NONSTRIKERCODE;
+//        add.NONSTRIKERNAME=NONSTRIKERNAME;
+//        add.MAXOVER=MAXOVER;
+//        add.MAXBALL=MAXBALL;
+//        add.BALLCOUNT=BALLCOUNT;
+//        add.N_WICKETNO=N_WICKETNO;
+//        add.BALLCODE=BALLCODE;
+//    
+//    [self addChildViewController:add];
+//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//    [self.view addSubview:add.view];
+//    add.view.alpha = 0;
+//    [add didMoveToParentViewController:self];
+//
+//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//     {
+//         add.view.alpha = 1;
+//     }
+//                     completion:nil];
     }
     else{
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No Record selected" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -789,7 +845,7 @@
     }
     NSMutableArray *GetPlayerDetails=[ DbManager_OtherWicket GetPlayerDetailForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE];
     
-    NSMutableArray *GetWicketEventsPlayerDetails=[ DbManager_OtherWicket GetWicketEventDetailsForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+    NSMutableArray *GetWicketEventsDetails=[ DbManager_OtherWicket GetWicketEventDetailsForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
     
     UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Other Wicket Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alter show];
@@ -798,25 +854,39 @@
     
     
     
-    Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
+    self.WickAddview.hidden=NO;
+    self.Btn_Add.hidden =NO;
+    isWicketlist=NO;
+    GetWicketEventsPlayerDetails=[[NSMutableArray alloc]init];
+    GetWicketEventsPlayerDetails= GetWicketEventsDetails;
+    [self.tbl_Wicketlist reloadData];
+
     
-    add.GetWicketEventsPlayerDetails=GetWicketEventsPlayerDetails;
-    add.GetPlayerDetails=GetPlayerDetails;
-   //add.GetWicketDetails=GetWicketDetails;
- 
-    //vc2 *viewController = [[vc2 alloc]init];
-    [self addChildViewController:add];
-    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-    [self.view addSubview:add.view];
-    add.view.alpha = 0;
-    [add didMoveToParentViewController:self];
     
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         add.view.alpha = 1;
-     }
-                     completion:nil];
     
+//    Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
+//    
+//    GetWicketEventsPlayerDetails=GetWicketEventsPlayerDetails;
+//    self.WickAddview.hidden=NO;
+//    isWicketlist=NO;
+//    //[self getWicketListMethod];
+//    [self.tbl_Wicketlist reloadData];
+    //add.GetPlayerDetails=GetPlayerDetails;
+//   //add.GetWicketDetails=GetWicketDetails;
+// 
+//    //vc2 *viewController = [[vc2 alloc]init];
+//    [self addChildViewController:add];
+//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//    [self.view addSubview:add.view];
+//    add.view.alpha = 0;
+//    [add didMoveToParentViewController:self];
+//    
+//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//     {
+//         add.view.alpha = 1;
+//     }
+//                     completion:nil];
+//    
     
 
     
@@ -856,11 +926,28 @@
                                   N_WICKETNO =  wicketdetailss.WICKETNO;
                                   N_WICKETTYPE =wicketdetailss.WICKETTYPE;
                                   N_FIELDERCODE =wicketdetailss.FIELDINGPLAYER;
+//                                  for(int i ; i< GetWicketEventsPlayerDetails.count;i++)
+//                                  {
+//                                       GetWicketEventsPlayerDetail *veb =(GetWicketEventsPlayerDetail*)[GetWicketEventsPlayerDetails objectAtIndex:i];
+//                                      if(veb.WICKETNO == N_WICKETNO)
+//                                      {
+//                                          veb.WICKETTYPECODE=
+//                                      }
+//                                  }
                                   
                                    }
         
    
         [DbManager_OtherWicket UpdateBattingSummaryForUpdateOtherwicket :  WICKETNO: WICKETTYPE: N_FIELDERCODE : TOTALRUNS:COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO: WICKETPLAYER];
+        
+        self.WickAddview.hidden=NO;
+        self.Btn_Add.hidden =NO;
+        isWicketlist=NO;
+        GetWicketEventsPlayerDetails=[[NSMutableArray alloc]init];
+        //GetWicketEventsPlayerDetails= wicketdetailss;
+        //[self.tbl_Wicketlist reloadData];
+
+        
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Other Wicket Updated Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
 
