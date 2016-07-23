@@ -541,7 +541,7 @@ EditModeVC * objEditModeVc;
                                                              alpha:0.36]];
     
     int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAKS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
     {
         if(inningsno > 1)
@@ -6652,7 +6652,7 @@ self.lbl_umpirename.text=@"";
     
     if(leftSlideSwipe == YES){
      NSString *SelectedMatchEvent = (NSString*)[_rightSlideArray objectAtIndex:indexPath.row];
-        if([SelectedMatchEvent isEqualToString : @"BREAK"])
+        if([SelectedMatchEvent isEqualToString : @"BREAKS"])
         {
             NSLog(@"1");
             
@@ -7886,6 +7886,7 @@ self.lbl_umpirename.text=@"";
     endDayVC.MATCHCODE = self.matchCode;
     endDayVC.TEAMCODE = fetchSEPageLoadRecord.BATTINGTEAMCODE;
     endDayVC.INNINGSNO = fetchSEPageLoadRecord.INNINGSNO;
+    endDayVC.MATCHDATE = fetchSEPageLoadRecord.MATCHDATE;
     endDayVC.delegate =self;
     
     
@@ -8087,7 +8088,13 @@ self.lbl_umpirename.text=@"";
 
 -(void)DeclearINNINGS
 {
-    
+    if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
+    {
+        UIAlertView * objAlert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"No legitimate Balls Have Been Bowled" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [objAlert show];
+    }
+    else
+    {
     
     DeclareInnings *declareInning = [[DeclareInnings alloc]initWithNibName:@"DeclareInnings" bundle:nil];
     declareInning.COMPETITIONCODE = self.competitionCode;
@@ -8120,6 +8127,7 @@ self.lbl_umpirename.text=@"";
          declareInning.view.alpha = 1;
      }
                      completion:nil];
+    }
 }
 -(void)MatchResult
 {

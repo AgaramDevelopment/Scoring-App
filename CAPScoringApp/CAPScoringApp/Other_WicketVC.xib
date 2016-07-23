@@ -26,6 +26,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Other_WicketVC">
             <connections>
+                <outlet property="Btn_Add" destination="dH5-56-dAC" id="DSb-fR-Ovx"/>
                 <outlet property="Player_view" destination="VXH-Yk-PYh" id="MTe-zL-eh5"/>
                 <outlet property="WICKET_NO_LBL" destination="bgj-Nk-jJ3" id="ftl-X4-ioI"/>
                 <outlet property="WICKET_VIEW" destination="8Lx-wL-1eN" id="8gG-9r-cBO"/>
@@ -662,7 +663,13 @@
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="M5f-yU-eZP">
                                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="MJX-0Q-AzL"/>
+                                        <outlet property="delegate" destination="-1" id="5PN-k3-KMq"/>
+                                    </connections>
                                 </tableView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

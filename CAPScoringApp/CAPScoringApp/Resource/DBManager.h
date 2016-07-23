@@ -26,7 +26,8 @@
 +(NSMutableArray *)StrikerNonstriker: (NSString *) MATCHCODE :(NSString *) TeamCODE;
 +(NSMutableArray *)Bowler: (NSString *) MATCHCODE :(NSString *) TeamCODE;
 +(NSMutableArray *)RetrieveFixturesData:(NSString*)competitionCode :(NSString*)userCode;
-
++(NSMutableArray *)RetrieveSCORE2:(NSString*)competitionCode :(NSString*)matchcode :(NSString*)userCode ;
++(NSMutableArray *)RetrieveEventData1: (NSString *) userCode;
 //fixtures&official
 
 

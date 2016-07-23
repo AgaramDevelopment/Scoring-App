@@ -22,6 +22,7 @@
 }
 
 @property (nonatomic,strong)NSMutableArray *FetchCompitionArray;
+
 //@property (nonatomic,strong)NSString *Updatefixturecomments;
 
 
@@ -96,6 +97,8 @@
     _FetchCompitionArray =[DBManager RetrieveFixturesData:CompitionCode:userCode];
     self.popView.hidden=YES;
     [self customnavigationmethod];
+   
+    
 }
 
 

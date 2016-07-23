@@ -23,13 +23,14 @@
 }
 
 @property(nonatomic,strong) id <EnddayDelegate> delegate;
-
+@property (strong,nonatomic) NSString *MATCHDATE;
 
 @property (strong,nonatomic) NSString *MATCHCODE;
 @property (strong,nonatomic) NSString *COMPETITIONCODE;
 @property (strong,nonatomic) NSString *TEAMCODE;
 @property (strong,nonatomic) NSNumber *INNINGSNO;
 
+@property (strong, nonatomic) IBOutlet UIView *gridHeaderView;
 
 @property (weak, nonatomic) IBOutlet UIView *view_allControls;
 

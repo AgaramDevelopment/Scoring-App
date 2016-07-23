@@ -346,15 +346,15 @@
 
 -(void)ShowAlterView:(NSString *) alterMsg
 {
-    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:@"Start Innings" message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [objAlter show];
 }
 
 - (IBAction)Finish_btn:(id)sender {
-    if([self.lbl_Striker.text isEqualToString:@""],[self.lbl_NonStriker.text isEqualToString:@""],[self.lbl_Bowler.text isEqualToString:@""])
-    {  [self ShowAlterView:@"Please Select Striker\nPlease Select NonStriker\nPlease Select Bowler"];
-   }
-    else if([self.lbl_Striker.text isEqualToString:@""] || self.lbl_Striker.text==nil)
+//    if([self.lbl_Striker.text isEqualToString:@""],[self.lbl_NonStriker.text isEqualToString:@""],[self.lbl_Bowler.text isEqualToString:@""])
+//    {  [self ShowAlterView:@"Please Select Striker\nPlease Select NonStriker\nPlease Select Bowler"];
+//   }
+    if([self.lbl_Striker.text isEqualToString:@""] || self.lbl_Striker.text==nil)
     {
         [self ShowAlterView:@"Please Select Striker"];
     }
@@ -368,7 +368,7 @@
     }
     
     else{
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Start Innings"
                                                        message: @"Please confirm to start Innings"
                                                       delegate: self
                                              cancelButtonTitle:@"Start Innings"
