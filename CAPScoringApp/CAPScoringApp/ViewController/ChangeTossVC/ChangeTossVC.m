@@ -59,6 +59,8 @@
     NSMutableArray *StrickerdetailArry;
     NSMutableArray *NonStrikerdetailArray;
     NSMutableArray *BowlingTeamdetailArray;
+    
+    DBManagerChangeToss *dbChangeToss;
 
 }
 
@@ -105,7 +107,7 @@
     NonStrikerdetailArray=[[NSMutableArray alloc]init];
     BowlingTeamdetailArray =[[NSMutableArray alloc]init];
     TossDetailArray=[[NSMutableArray alloc]init];
-    TossDetailArray=[DBManagerChangeToss GetTossDetails];
+    TossDetailArray=[dbChangeToss GetTossDetails];
     self.Btn_Bowler.userInteractionEnabled=NO;
     self.Btn_Striker.userInteractionEnabled=NO;
     self.Btn_NonStriker.userInteractionEnabled=NO;
@@ -159,7 +161,7 @@
      isStricker=NO;
      isNonStricker=NO;
      isBowler=NO;
-    TeamDetailTossWon=[DBManagerChangeToss GetTeamDetailsForToss:self.matchCode];
+    TeamDetailTossWon=[dbChangeToss GetTeamDetailsForToss:self.matchCode];
     catagory =TeamDetailTossWon;
     
     self.Tbl_toss.hidden=NO;
@@ -191,7 +193,7 @@
     isStricker=NO;
     isNonStricker=NO;
     isBowler=NO;
-    objElectedTodetailArray =[DBManagerChangeToss GetTossDetails ];
+    objElectedTodetailArray =[dbChangeToss GetTossDetails ];
     catagory =objElectedTodetailArray;
     
     self.Tbl_toss.hidden=NO;
@@ -243,7 +245,7 @@
         //teamaCode=[[TossDetailArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
     }
     }
-        StrickerdetailArry =[DBManagerChangeToss StrikerNonstriker:self.matchCode :teamaCode ];
+        StrickerdetailArry =[dbChangeToss StrikerNonstriker:self.matchCode :teamaCode ];
     catagory=StrickerdetailArry;
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_Stricker.frame.origin.y-30;
@@ -291,7 +293,7 @@
        // teamaCode=[[TossDetailArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
     }
     }
-    NonStrikerdetailArray =[DBManagerChangeToss StrikerNonstriker:self.matchCode :teamaCode];
+    NonStrikerdetailArray =[dbChangeToss StrikerNonstriker:self.matchCode :teamaCode];
     catagory=NonStrikerdetailArray;
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_NonStricker.frame.origin.y-30;
@@ -344,7 +346,7 @@
         
     }
 
-    BowlingTeamdetailArray= [DBManagerChangeToss StrikerNonstriker:self.matchCode :teamaCode] ;
+    BowlingTeamdetailArray= [dbChangeToss StrikerNonstriker:self.matchCode :teamaCode] ;
     catagory=BowlingTeamdetailArray;
     self.Tbl_toss.hidden=NO;
     self.tbl_tossYposition.constant=self.view_Bowler.frame.origin.y-30;
@@ -383,8 +385,8 @@
             [self ShowAlterView:@"Please Select Bowler"];
         }
         else{
-            //[DBManagerChangeToss InsertTossDetails :self.CompitisonCode :self.matchCode:selectTeamcode :electedcode :StrikerCode :NonStrikerCode :selectBowlerCode :BowlingEnd];
-            [DBManagerChangeTeam InsertChangeTeam:self.CompitisonCode :self.matchCode :selectTeamcode :[NSNumber numberWithInt:1] :StrikerCode :NonStrikerCode :selectBowlerCode :[NSNumber numberWithInt:1] :selectTeamcode :electedcode:BowlingEnd];
+            DBManagerChangeTeam *objDBManagerChangeTeam = [[DBManagerChangeTeam alloc] init];
+            [objDBManagerChangeTeam InsertChangeTeam:self.CompitisonCode :self.matchCode :selectTeamcode :[NSNumber numberWithInt:1] :StrikerCode :NonStrikerCode :selectBowlerCode :[NSNumber numberWithInt:1] :selectTeamcode :electedcode:BowlingEnd];
             [self.delegate RedirectScorEngin];
             
         }
@@ -398,7 +400,7 @@
 
 -(void)ShowAlterView:(NSString *) alterMsg
 {
-    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:@"Change Toss" message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [objAlter show];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

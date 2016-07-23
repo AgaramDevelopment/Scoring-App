@@ -11,7 +11,9 @@
 #import "DbManager_OtherWicket.h"
 
 @interface Other_WicketgridVC ()
-
+{
+DbManager_OtherWicket *dbOtherWicket;
+}
 @end
 @implementation Other_WicketgridVC
 @synthesize COMPETITIONCODE;
@@ -38,7 +40,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    _GetWicketEventsPlayerDetails=[ DbManager_OtherWicket GetWicketEventDetailsForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+    dbOtherWicket = [[DbManager_OtherWicket alloc]init];
+    
+    _GetWicketEventsPlayerDetails=[ dbOtherWicket GetWicketEventDetailsForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -153,9 +157,9 @@
     add.NONSTRIKERNAME=self.NONSTRIKERNAME;
     add.NONSTRIKERCODE=self.NONSTRIKERCODE;
    // add.WICKETNO = [NSString stringWithFormat:@"%@",self.N_WICKETNO];
-    add.WICKETNO=[DbManager_OtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
+    add.WICKETNO=[dbOtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
     add.ISEDITMODE=NO;
- //    WICKETNO =[DbManager_OtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
+ //    WICKETNO =[dbOtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
     
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];

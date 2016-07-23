@@ -466,6 +466,45 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
 }
 
+
+
++(NSMutableArray *)RetrieveSCORE2:(NSString*)competitionCode :(NSString*)matchcode :(NSString*)userCode {
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    int retVal;
+    
+    NSString *dbPath = [self getDBPath];
+    
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    retVal=sqlite3_open([dbPath UTF8String], &dataBase);
+    if(retVal !=0){
+    }
+    //
+    NSString *query=[NSString stringWithFormat:@"SELECT SCORERCODE,USD.USERFULLNAME FROM MATCHSCORERDETAILS MAS INNER JOIN USERDETAILS USD ON USD.USERCODE=MAS.SCORERCODE WHERE MAS.COMPETITIONCODE='%@' AND MAS.MATCHCODE='%@' AND MAS.SCORERCODE!='%@' LIMIT 1" ,userCode,matchcode,competitionCode];
+    stmt=[query UTF8String];
+    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        
+    {
+        while(sqlite3_step(statement)==SQLITE_ROW){
+            OfficialMasterRecord *record=[[OfficialMasterRecord alloc]init];
+            //            record.id=(int)sqlite3_column_int(statement, 0);
+            
+            record.scorecode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+            record.scorename2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                       [eventArray addObject:record];
+            
+        }
+    }
+    
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(dataBase);
+    return eventArray;
+    
+}
+
+
 //Update match overs in match registration
 -(BOOL)updateOverInfo:(NSString*)overs matchCode:(NSString*) matchCode competitionCode:(NSString*)competitionCode  {
     

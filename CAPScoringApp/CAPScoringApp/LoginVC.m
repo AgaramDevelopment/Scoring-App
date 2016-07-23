@@ -36,7 +36,7 @@
     [self.view_user_name.layer setBorderWidth:2.0];
     [self.view_user_name.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.view_user_name.layer setMasksToBounds:YES];
-   
+    
 
 }
 
@@ -46,10 +46,25 @@
 
 
 - (IBAction)btn_login:(id)sender {
-    if([self formValidation]){
+    
+    if([self.txt_user_name.text isEqualToString:@""] || self.txt_user_name.text==nil && [self.txt_password.text isEqualToString:@""] || self.txt_password.text==nil)
+    {
+         [self showDialog:@"Please Enter User Name\nPlease Enter Password" andTitle:@""];
+    }
+    else if([self.txt_user_name.text isEqualToString:@""] || self.txt_user_name.text==nil)
+    {
+        [self showDialog:@"Please Enter User Name." andTitle:@""];
+
+    }
+    else if([self.txt_password.text isEqualToString:@""] || self.txt_password.text==nil)
+    {
+        [self showDialog:@"Please Enter Password." andTitle:@""];
+
+    }
+        else{
         NSString *userNameLbl = self.txt_user_name.text;
         NSString *passwordLbl = self.txt_password.text;
-        
+        //passwordLbl=[]
         if(self.checkInternetConnection){
             
             
@@ -89,7 +104,7 @@
                 if([[errorItemObj objectForKey:@"ErrorNo"] isEqual:@"MOB0005"]){
                     BOOL isUserLogin = YES;
                     
-                  
+                  LoginDBmanager *objLoginDBmanager = [[LoginDBmanager alloc] init];
                     [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
 
                     
@@ -107,6 +122,8 @@
                         NSString *REMENTDATE=[test objectForKey:@"Rementdate"];
                         NSString *USERFULLNAME=[test objectForKey:@"Userfullname"];
                       [[NSUserDefaults standardUserDefaults] setObject:USERFULLNAME forKey:@"UserFullname"];
+                        
+                        
                         NSString *MACHINEID=[test objectForKey:@"Machineid"];
                         NSString*LICENSEUPTO=[test objectForKey:@"Licenseupto"];
                         NSString*CREATEDBY =[test objectForKey:@"Createdby"];
@@ -127,15 +144,15 @@
                         NSLog(@"dateString:",LICENSEUPTO);
                         
                         
-                        bool CheckStatus=[LoginDBmanager CheckUserDetails : LOGINID:PASSWORD];
+                        bool CheckStatus=[objLoginDBmanager CheckUserDetails : LOGINID:PASSWORD];
                         if (CheckStatus==YES)
                         {
-                            [LoginDBmanager UPDATEUSERDETAILS:LOGINID:PASSWORD:LICENSEUPTO];
+                            [objLoginDBmanager UPDATEUSERDETAILS:LOGINID:PASSWORD:LICENSEUPTO];
                         }
                         
                         else
                         {
-                            [LoginDBmanager INSERTUSERDETAILS :USERCODE: USERROLEID:LOGINID: PASSWORD:REMEMBERME:REMENTDATE:USERFULLNAME:MACHINEID : LICENSEUPTO: CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
+                            [objLoginDBmanager INSERTUSERDETAILS :USERCODE: USERROLEID:LOGINID: PASSWORD:REMEMBERME:REMENTDATE:USERFULLNAME:MACHINEID : LICENSEUPTO: CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
                             
                         }
                       
@@ -183,15 +200,15 @@
                         NSLog(@"dateString:",ENDDATE);
                         
                         
-                        bool CheckStatus= [LoginDBmanager CheckSecureIdDetails :USERNAME];
+                        bool CheckStatus= [objLoginDBmanager CheckSecureIdDetails :USERNAME];
                         if (CheckStatus==YES)
                         {
-                            [LoginDBmanager UPDATESECUREIDDETAILS : USERNAME:SECUREID:STARTDATE:ENDDATE:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
+                            [objLoginDBmanager UPDATESECUREIDDETAILS : USERNAME:SECUREID:STARTDATE:ENDDATE:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
                         }
                         
                         else
                         {
-                            [LoginDBmanager INSERTSECUREIDDETAILS:USERNAME:SECUREID:STARTDATE:ENDDATE:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
+                            [objLoginDBmanager INSERTSECUREIDDETAILS:USERNAME:SECUREID:STARTDATE:ENDDATE:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
 
                             
                         }
@@ -220,15 +237,15 @@
                         
                         
                         
-                        bool CheckStatus= [LoginDBmanager CheckMatchScorerDetails:Competitioncode :Matchcode :Scorercode ];
+                        bool CheckStatus= [objLoginDBmanager CheckMatchScorerDetails:Competitioncode :Matchcode :Scorercode ];
                         if (CheckStatus==YES)
                         {
-                            [LoginDBmanager UpdateMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
+                            [objLoginDBmanager UpdateMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
                         }
                         
                         else
                         {
-                            [LoginDBmanager InsertMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
+                            [objLoginDBmanager InsertMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
                             
                             
                         }
@@ -326,10 +343,19 @@
 - (IBAction)btn_show_pwd:(id)sender {
     if (self.txt_password.secureTextEntry == YES) {
         self.txt_password.secureTextEntry = NO;
+      
+        _eye_imgview.image = [UIImage imageNamed:@"eyeImgSelect.png"];
+        self.txt_password.font= [UIFont fontWithName:@"Rajdhani-Bold" size:28];
     }
     else
     {
         self.txt_password.secureTextEntry = YES;
+            self.txt_password.clearsOnBeginEditing = NO;
+         _eye_imgview.image = [UIImage imageNamed:@"ico-show-pwd.png"];
+        self.txt_password.font= [UIFont fontWithName:@"Rajdhani-Bold" size:28];
+         self.txt_password.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20.0f];
+           self.txt_password.clearsOnBeginEditing = NO;
+        
     }
     
 }
@@ -369,11 +395,16 @@
 - (BOOL) formValidation{
     NSString *userNameTxtf = self.txt_user_name.text;
     NSString *passwordTxtf = self.txt_password.text;
-    if([userNameTxtf isEqual:@""]){
+   if([userNameTxtf isEqual:@""]||[passwordTxtf isEqual:@""])
+   {  [self showDialog:@"Please Enter User Name\nPlease Enter Password" andTitle:@""];
+         return NO;
+   }
+    
+    else if([userNameTxtf isEqual:@""]){
         [self showDialog:@"Please Enter User Name." andTitle:@""];
         return NO;
     }else if([passwordTxtf isEqual:@""]){
-        [self showDialog:@"Please Enter Password" andTitle:@""];
+        [self showDialog:@"Please Enter User Name." andTitle:@""];
         return NO;
     }
     
@@ -386,6 +417,12 @@
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return networkStatus != NotReachable;
+}
+
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+   _eye_imgview.image = [UIImage imageNamed:@"ico-show-pwd.png"];
 }
 
 

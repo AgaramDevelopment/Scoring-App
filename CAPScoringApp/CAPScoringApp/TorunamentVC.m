@@ -49,6 +49,7 @@
     [self.selectmatchTittleview.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.selectmatchTittleview .layer setMasksToBounds:YES];
     
+//    NSMutabl
     refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventValueChanged];
     refreshControl.tintColor = [UIColor greenColor];
@@ -294,7 +295,7 @@ else{
             
             NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
             if (responseData != nil) {
-                
+                DBMANAGERSYNC *objDBMANAGERSYNC = [[DBMANAGERSYNC alloc]init];
                 NSDictionary *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
               NSMutableArray *checkErrorItem=[serviceResponse objectForKey:@"lstErrorItem"];
                 
@@ -333,14 +334,14 @@ else{
                         
                         
                         
-                        bool CheckStatus=[DBMANAGERSYNC CheckCompetitionCode:COMPETITIONCODE];
+                        bool CheckStatus=[objDBMANAGERSYNC CheckCompetitionCode:COMPETITIONCODE];
                         if (CheckStatus==YES) {
-                            [DBMANAGERSYNC UPDATECOMPETITION:COMPETITIONCODE: COMPETITIONNAME:SEASON: TROPHY:STARTDATE:ENDDATE:MATCHTYPE:ISOTHERSMATCHTYPE : MODIFIEDBY: MODIFIEDDATE];
+                            [objDBMANAGERSYNC UPDATECOMPETITION:COMPETITIONCODE: COMPETITIONNAME:SEASON: TROPHY:STARTDATE:ENDDATE:MATCHTYPE:ISOTHERSMATCHTYPE : MODIFIEDBY: MODIFIEDDATE];
                         }
                         
                         else
                         {
-                            [DBMANAGERSYNC  InsertMASTEREvents:COMPETITIONCODE:COMPETITIONNAME:SEASON:TROPHY:STARTDATE:ENDDATE:MATCHTYPE: ISOTHERSMATCHTYPE :MANOFTHESERIESCODE:BESTBATSMANCODE : BESTBOWLERCODE:BESTALLROUNDERCODE:MOSTVALUABLEPLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                            [objDBMANAGERSYNC  InsertMASTEREvents:COMPETITIONCODE:COMPETITIONNAME:SEASON:TROPHY:STARTDATE:ENDDATE:MATCHTYPE: ISOTHERSMATCHTYPE :MANOFTHESERIESCODE:BESTBATSMANCODE : BESTBOWLERCODE:BESTALLROUNDERCODE:MOSTVALUABLEPLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                             
                         }
                          }
@@ -357,12 +358,12 @@ else{
                         NSString *RECORDSTATUS=[test1 objectForKey:@"Recordstatus"];
                         
                         
-                        bool CheckStatus1=[DBMANAGERSYNC CheckCompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+                        bool CheckStatus1=[objDBMANAGERSYNC CheckCompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
                         if (CheckStatus1==NO) {
-                            [DBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
+                            [objDBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
                         }
-                else{ [DBMANAGERSYNC DELETECompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
-                    [DBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
+                else{ [objDBMANAGERSYNC DELETECompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+                    [objDBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
                         
                         }
                         
@@ -383,7 +384,7 @@ else{
     
     if([ self.selectMatchName.text isEqualToString:@""] || self.selectMatchName.text==nil)
     {
-        [self ShowAlterView:@"Please Select Match"];
+        [self ShowAlterView:@"Please Select Any Tournament"];
         return NO;
     }
     return YES;

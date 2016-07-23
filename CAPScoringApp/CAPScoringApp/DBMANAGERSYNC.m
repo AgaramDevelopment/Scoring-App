@@ -16,7 +16,7 @@
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 //Copy database to application document
-+ (void) copyDatabaseIfNotExist{
+-(void) copyDatabaseIfNotExist{
     
     //Using NSFileManager we can perform many file system operations.
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -40,7 +40,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 //Get database path
-+(NSString *) getDBPath
+-(NSString *) getDBPath
 {
     [self copyDatabaseIfNotExist];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
@@ -50,32 +50,29 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 //competition insert&Update
 
-+(BOOL) CheckCompetitionCode:(NSString *)COMPETITIONCODE{
+-(BOOL) CheckCompetitionCode:(NSString *)COMPETITIONCODE{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT COMPETITIONCODE FROM COMPETITION WHERE COMPETITIONCODE ='%@'",COMPETITIONCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    if(sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        NSString *query=[NSString stringWithFormat:@"SELECT COMPETITIONCODE FROM COMPETITION WHERE COMPETITIONCODE ='%@'",COMPETITIONCODE];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
 }
 
@@ -83,7 +80,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(BOOL) InsertMASTEREvents:(NSString*) COMPETITIONCODE:(NSString*) COMPETITIONNAME:(NSString*) SEASON:(NSString*) TROPHY:(NSString*) STARTDATE:(NSString*) ENDDATE:(NSString*) MATCHTYPE:(NSString*) ISOTHERSMATCHTYPE :(NSString*) MANOFTHESERIESCODE:(NSString*) BESTBATSMANCODE :(NSString*) BESTBOWLERCODE:(NSString*) BESTALLROUNDERCODE:(NSString*) MOSTVALUABLEPLAYERCODE:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE
+-(BOOL) InsertMASTEREvents:(NSString*) COMPETITIONCODE:(NSString*) COMPETITIONNAME:(NSString*) SEASON:(NSString*) TROPHY:(NSString*) STARTDATE:(NSString*) ENDDATE:(NSString*) MATCHTYPE:(NSString*) ISOTHERSMATCHTYPE :(NSString*) MANOFTHESERIESCODE:(NSString*) BESTBATSMANCODE :(NSString*) BESTBOWLERCODE:(NSString*) BESTALLROUNDERCODE:(NSString*) MOSTVALUABLEPLAYERCODE:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -95,27 +92,27 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
 }
 
 
 
-+(BOOL ) UPDATECOMPETITION:(NSString*) COMPETITIONCODE:(NSString*) COMPETITIONNAME:(NSString*) SEASON:(NSString*) TROPHY:(NSString*) STARTDATE:(NSString*) ENDDATE:(NSString*) MATCHTYPE:(NSString*) ISOTHERSMATCHTYPE :(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE
+-(BOOL ) UPDATECOMPETITION:(NSString*) COMPETITIONCODE:(NSString*) COMPETITIONNAME:(NSString*) SEASON:(NSString*) TROPHY:(NSString*) STARTDATE:(NSString*) ENDDATE:(NSString*) MATCHTYPE:(NSString*) ISOTHERSMATCHTYPE :(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -127,22 +124,18 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
+            if(sqlite3_step(statement)==SQLITE_DONE){
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                
-                
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
             
-            return NO;
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
 }
 
@@ -152,68 +145,68 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(BOOL) CheckCompetitionCodeTeamCode:(NSString *)COMPETITIONCODE:(NSString *)TEAMCODE{
+-(BOOL) CheckCompetitionCodeTeamCode:(NSString *)COMPETITIONCODE:(NSString *)TEAMCODE{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
     
-    NSString *query=[NSString stringWithFormat:@"SELECT COMPETITIONCODE,TEAMCODE FROM COMPETITIONTEAMDETAILS WHERE COMPETITIONCODE ='%@' AND TEAMCODE ='%@'",COMPETITIONCODE,TEAMCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        NSString *query=[NSString stringWithFormat:@"SELECT COMPETITIONCODE,TEAMCODE FROM COMPETITIONTEAMDETAILS WHERE COMPETITIONCODE ='%@' AND TEAMCODE ='%@'",COMPETITIONCODE,TEAMCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
 }
 
 
 
-+(BOOL) DELETECompetitionCodeTeamCode:(NSString *)COMPETITIONCODE:(NSString *)TEAMCODE{
+-(BOOL) DELETECompetitionCodeTeamCode:(NSString *)COMPETITIONCODE:(NSString *)TEAMCODE{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"DELETE COMPETITIONCODE,TEAMCODE FROM COMPETITIONTEAMDETAILS WHERE COMPETITIONCODE ='%@' AND TEAMCODE ='%@'",COMPETITIONCODE,TEAMCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"DELETE COMPETITIONCODE,TEAMCODE FROM COMPETITIONTEAMDETAILS WHERE COMPETITIONCODE ='%@' AND TEAMCODE ='%@'",COMPETITIONCODE,TEAMCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_DONE){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
 }
 
 
-+(BOOL) InsertCompetitionTeamDetails:(NSString*) COMPETITIONTEAMCODE:(NSString*) COMPETITIONCODE:(NSString*) TEAMCODE:(NSString*) RECORDSTATUS
+-(BOOL) InsertCompetitionTeamDetails:(NSString*) COMPETITIONTEAMCODE:(NSString*) COMPETITIONCODE:(NSString*) TEAMCODE:(NSString*) RECORDSTATUS
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -225,22 +218,22 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
 }
 
 
@@ -250,37 +243,37 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(BOOL) CheckCompetitionteamplayer:(NSString *)COMPETITIONCODE:(NSString *)TEAMCODE:(NSString *)PLAYERCODE{
+-(BOOL) CheckCompetitionteamplayer:(NSString *)COMPETITIONCODE:(NSString *)TEAMCODE:(NSString *)PLAYERCODE{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT TEAMCODE,PLAYERCODE,COMPETITIONCODE FROM COMPETITIONTEAMPLAYER WHERE COMPETITIONCODE ='%@' AND TEAMCODE ='%@' AND PLAYERCODE ='%@'" ,COMPETITIONCODE,TEAMCODE,PLAYERCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT TEAMCODE,PLAYERCODE,COMPETITIONCODE FROM COMPETITIONTEAMPLAYER WHERE COMPETITIONCODE ='%@' AND TEAMCODE ='%@' AND PLAYERCODE ='%@'" ,COMPETITIONCODE,TEAMCODE,PLAYERCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
 }
 
 
-+(BOOL) InsertCompetitionTeamPlayer:(NSString*) COMPETITIONCODE:(NSString*) TEAMCODE:(NSString*) PLAYERCODE:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE
+-(BOOL) InsertCompetitionTeamPlayer:(NSString*) COMPETITIONCODE:(NSString*) TEAMCODE:(NSString*) PLAYERCODE:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -292,61 +285,61 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
+            sqlite3_close(dataBase);
         }
-        
     }
-    return YES;
+    return NO;
 }
 
 
 //Matchregistration
 
-+(BOOL) Matchregistration:(NSString *)MATCHCODE
+-(BOOL) Matchregistration:(NSString *)MATCHCODE
 {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE MATCHCODE ='%@'",MATCHCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE MATCHCODE ='%@'",MATCHCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
-
-
+    
+    
 }
 
 
-+(BOOL) InsertMatchregistration:(NSString*) MATCHCODE:(NSString*) MATCHNAME:(NSString*) COMPETITIONCODE:(NSString*) MATCHOVERS:(NSString*) MATCHOVERCOMMENTS:(NSString*) MATCHDATE:(NSString*) ISDAYNIGHT:(NSString*) ISNEUTRALVENUE:(NSString*) GROUNDCODE:(NSString*) TEAMACODE:(NSString*) TEAMBCODE:(NSString*) TEAMACAPTAIN:(NSString*) TEAMAWICKETKEEPER:(NSString*) TEAMBCAPTAIN:(NSString*) TEAMBWICKETKEEPER:(NSString*) UMPIRE1CODE:(NSString*) UMPIRE2CODE:(NSString*) UMPIRE3CODE:(NSString*) MATCHREFEREECODE:(NSString*) MATCHRESULT:(NSString*) MATCHRESULTTEAMCODE:(NSString*) TEAMAPOINTS:(NSString*) TEAMBPOINTS:(NSString*) MATCHSTATUS:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE:(NSString*) ISDEFAULTORLASTINSTANCE
+-(BOOL) InsertMatchregistration:(NSString*) MATCHCODE:(NSString*) MATCHNAME:(NSString*) COMPETITIONCODE:(NSString*) MATCHOVERS:(NSString*) MATCHOVERCOMMENTS:(NSString*) MATCHDATE:(NSString*) ISDAYNIGHT:(NSString*) ISNEUTRALVENUE:(NSString*) GROUNDCODE:(NSString*) TEAMACODE:(NSString*) TEAMBCODE:(NSString*) TEAMACAPTAIN:(NSString*) TEAMAWICKETKEEPER:(NSString*) TEAMBCAPTAIN:(NSString*) TEAMBWICKETKEEPER:(NSString*) UMPIRE1CODE:(NSString*) UMPIRE2CODE:(NSString*) UMPIRE3CODE:(NSString*) MATCHREFEREECODE:(NSString*) MATCHRESULT:(NSString*) MATCHRESULTTEAMCODE:(NSString*) TEAMAPOINTS:(NSString*) TEAMBPOINTS:(NSString*) MATCHSTATUS:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE:(NSString*) ISDEFAULTORLASTINSTANCE
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -358,27 +351,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL) == SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
 }
 
 
 
-+(BOOL) UpdateMatchregistration:(NSString*) MATCHCODE:(NSString*) MATCHNAME:(NSString*) COMPETITIONCODE:(NSString*) MATCHOVERS:(NSString*) MATCHOVERCOMMENTS:(NSString*) MATCHDATE:(NSString*) ISDAYNIGHT:(NSString*) ISNEUTRALVENUE:(NSString*) GROUNDCODE:(NSString*) TEAMACODE:(NSString*) TEAMBCODE:(NSString*) TEAMACAPTAIN:(NSString*) TEAMAWICKETKEEPER:(NSString*) TEAMBCAPTAIN:(NSString*) TEAMBWICKETKEEPER:(NSString*) UMPIRE1CODE:(NSString*) UMPIRE2CODE:(NSString*) UMPIRE3CODE:(NSString*) MATCHREFEREECODE:(NSString*) MATCHRESULT:(NSString*) MATCHRESULTTEAMCODE:(NSString*) TEAMAPOINTS:(NSString*) TEAMBPOINTS:(NSString*) MATCHSTATUS:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE:(NSString*) ISDEFAULTORLASTINSTANCE
+-(BOOL) UpdateMatchregistration:(NSString*) MATCHCODE:(NSString*) MATCHNAME:(NSString*) COMPETITIONCODE:(NSString*) MATCHOVERS:(NSString*) MATCHOVERCOMMENTS:(NSString*) MATCHDATE:(NSString*) ISDAYNIGHT:(NSString*) ISNEUTRALVENUE:(NSString*) GROUNDCODE:(NSString*) TEAMACODE:(NSString*) TEAMBCODE:(NSString*) TEAMACAPTAIN:(NSString*) TEAMAWICKETKEEPER:(NSString*) TEAMBCAPTAIN:(NSString*) TEAMBWICKETKEEPER:(NSString*) UMPIRE1CODE:(NSString*) UMPIRE2CODE:(NSString*) UMPIRE3CODE:(NSString*) MATCHREFEREECODE:(NSString*) MATCHRESULT:(NSString*) MATCHRESULTTEAMCODE:(NSString*) TEAMAPOINTS:(NSString*) TEAMBPOINTS:(NSString*) MATCHSTATUS:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE:(NSString*) ISDEFAULTORLASTINSTANCE
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -390,28 +382,27 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         const char *update_stmt = [UPDATESQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL) == SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
 }
 
 //Matchteamplayerdetails
 
 
-+(BOOL) CheckMatchteamplayerdetails:(NSString *)MATCHCODE:(NSString *)TEAMCODE:(NSString *)PLAYERCODE
+-(BOOL) CheckMatchteamplayerdetails:(NSString *)MATCHCODE:(NSString *)TEAMCODE:(NSString *)PLAYERCODE
 
 {
     int retVal;
@@ -419,31 +410,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT MATCHCODE,TEAMCODE,PLAYERCODE FROM MATCHTEAMPLAYERDETAILS WHERE MATCHCODE ='%@' AND PLAYERCODE ='%@' AND TEAMCODE ='%@'",MATCHCODE,PLAYERCODE,TEAMCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT MATCHCODE,TEAMCODE,PLAYERCODE FROM MATCHTEAMPLAYERDETAILS WHERE MATCHCODE ='%@' AND PLAYERCODE ='%@' AND TEAMCODE ='%@'",MATCHCODE,PLAYERCODE,TEAMCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
     
     
 }
-+(BOOL) InsertMatchteamplayerdetails:(NSString*) MATCHTEAMPLAYERCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE:(NSString*) PLAYERCODE:(NSString*)PLAYINGORDER:(NSString*) RECORDSTATUS{
+-(BOOL) InsertMatchteamplayerdetails:(NSString*) MATCHTEAMPLAYERCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE:(NSString*) PLAYERCODE:(NSString*)PLAYINGORDER:(NSString*) RECORDSTATUS{
     
     
     NSString *databasePath = [self getDBPath];
@@ -456,64 +447,61 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-                 NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
-
+    return NO;
+    
     
 }
 
 
 
 //TeamMaster
-+(BOOL) CheckTeamMaster:(NSString *)TEAMCODE{
+-(BOOL) CheckTeamMaster:(NSString *)TEAMCODE{
     
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT TEAMCODE FROM TEAMMASTER WHERE TEAMCODE ='%@'",TEAMCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT TEAMCODE FROM TEAMMASTER WHERE TEAMCODE ='%@'",TEAMCODE];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
-    
-
 }
 
 
 
-+(BOOL) InsertTeamMaster:(NSString*) TEAMCODE:(NSString*) TEAMNAME:(NSString*) SHORTTEAMNAME:(NSString*) TEAMTYPE:(NSString*)TEAMLOGO:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE{
+-(BOOL) InsertTeamMaster:(NSString*) TEAMCODE:(NSString*) TEAMNAME:(NSString*) SHORTTEAMNAME:(NSString*) TEAMTYPE:(NSString*)TEAMLOGO:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE{
     
     
     NSString *databasePath = [self getDBPath];
@@ -526,29 +514,29 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
     
     
 }
 
 
 
-+(BOOL )UpdateTeamMaster:(NSString*) TEAMNAME:(NSString*) SHORTTEAMNAME:(NSString*) TEAMTYPE:(NSString*) TEAMLOGO:(NSString*) RECORDSTATUS:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE:(NSString*) TEAMCODE
+-(BOOL )UpdateTeamMaster:(NSString*) TEAMNAME:(NSString*) SHORTTEAMNAME:(NSString*) TEAMTYPE:(NSString*) TEAMLOGO:(NSString*) RECORDSTATUS:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE:(NSString*) TEAMCODE
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -559,62 +547,62 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE TEAMMASTER SET TEAMNAME='%@', SHORTTEAMNAME='%@', TEAMTYPE='%@',RECORDSTATUS='%@', MODIFIEDBY='%@',MODIFIEDDATE='%@',issync='1' WHERE TEAMCODE='%@'",TEAMNAME,SHORTTEAMNAME,TEAMTYPE,RECORDSTATUS,MODIFIEDBY,MODIFIEDDATE,TEAMCODE];
         
         const char *update_stmt = [updateSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
     
 }
 
 //PlayerMaster
 
-+(BOOL )CheckPlayermaster:(NSString*) PLAYERCODE{
+-(BOOL )CheckPlayermaster:(NSString*) PLAYERCODE{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT PLAYERCODE FROM PLAYERMASTER WHERE PLAYERCODE ='%@'",PLAYERCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT PLAYERCODE FROM PLAYERMASTER WHERE PLAYERCODE ='%@'",PLAYERCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
-
-
+    
+    
 }
 
 
 
 
-+(BOOL ) InsertPlayermaster:(NSString*) PLAYERCODE:(NSString*) PLAYERNAME:(NSString*) PLAYERDOB:(NSString*) PLAYERPHOTO:(NSString*) BATTINGSTYLE:(NSString*) BATTINGORDER:(NSString*) BOWLINGSTYLE:(NSString*)BOWLINGTYPE:(NSString*) BOWLINGSPECIALIZATION:(NSString*) PLAYERROLE:(NSString*) PLAYERREMARKS:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE:(NSString*) BALLTYPECODE:(NSString*) SHOTTYPE:(NSString*) SHOTCODE:(NSString*)PMLENGTHCODE:(NSString*)PMLINECODE:(NSString*) PMXVALUE:(NSString*) PMYVALUE:(NSString*) ATWOROTW
+-(BOOL ) InsertPlayermaster:(NSString*) PLAYERCODE:(NSString*) PLAYERNAME:(NSString*) PLAYERDOB:(NSString*) PLAYERPHOTO:(NSString*) BATTINGSTYLE:(NSString*) BATTINGORDER:(NSString*) BOWLINGSTYLE:(NSString*)BOWLINGTYPE:(NSString*) BOWLINGSPECIALIZATION:(NSString*) PLAYERROLE:(NSString*) PLAYERREMARKS:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE:(NSString*) BALLTYPECODE:(NSString*) SHOTTYPE:(NSString*) SHOTCODE:(NSString*)PMLENGTHCODE:(NSString*)PMLINECODE:(NSString*) PMXVALUE:(NSString*) PMYVALUE:(NSString*) ATWOROTW
 {
     
     NSString *databasePath = [self getDBPath];
@@ -627,31 +615,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            NSLog(@"Error %s while preparing statement", sqlite3_errmsg(dataBase));
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
-
-
-
+    return NO;
+    
+    
+    
 }
 
 
 
 
-+(BOOL) UpdatePlayermaster:(NSString*) PLAYERCODE:(NSString*) PLAYERNAME:(NSString*) PLAYERDOB:(NSString*) PLAYERPHOTO:(NSString*) BATTINGSTYLE:(NSString*) BATTINGORDER:(NSString*) BOWLINGSTYLE:(NSString*)BOWLINGTYPE:(NSString*) BOWLINGSPECIALIZATION:(NSString*) PLAYERROLE:(NSString*) PLAYERREMARKS:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE:(NSString*) BALLTYPECODE:(NSString*) SHOTTYPE:(NSString*) SHOTCODE:(NSString*)PMLENGTHCODE:(NSString*)PMLINECODE:(NSString*) PMXVALUE:(NSString*) PMYVALUE:(NSString*) ATWOROTW
+-(BOOL) UpdatePlayermaster:(NSString*) PLAYERCODE:(NSString*) PLAYERNAME:(NSString*) PLAYERDOB:(NSString*) PLAYERPHOTO:(NSString*) BATTINGSTYLE:(NSString*) BATTINGORDER:(NSString*) BOWLINGSTYLE:(NSString*)BOWLINGTYPE:(NSString*) BOWLINGSPECIALIZATION:(NSString*) PLAYERROLE:(NSString*) PLAYERREMARKS:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE:(NSString*) BALLTYPECODE:(NSString*) SHOTTYPE:(NSString*) SHOTCODE:(NSString*)PMLENGTHCODE:(NSString*)PMLINECODE:(NSString*) PMXVALUE:(NSString*) PMYVALUE:(NSString*) ATWOROTW
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -664,21 +652,22 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *update_stmt = [UPDATESQL UTF8String];
         //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
 }
 
 
@@ -686,7 +675,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 //PLAYERTEAMDETAILS
 
-+(BOOL )CheckPlayerTeamDetails:(NSString*) PLAYERCODE:(NSString*) TEAMCODE
+-(BOOL )CheckPlayerTeamDetails:(NSString*) PLAYERCODE:(NSString*) TEAMCODE
 {
     
     int retVal;
@@ -694,33 +683,35 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT PLAYERCODE,TEAMCODE FROM PLAYERTEAMDETAILS WHERE PLAYERCODE ='%@' AND TEAMCODE ='%@'",PLAYERCODE,TEAMCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT PLAYERCODE,TEAMCODE FROM PLAYERTEAMDETAILS WHERE PLAYERCODE ='%@' AND TEAMCODE ='%@'",PLAYERCODE,TEAMCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
     
     
 }
 
 
-+(BOOL) InsertPlayerTeamDetails:(NSString*) PLAYERCODE:(NSString*) TEAMCODE:(NSString*) RECORDSTATUS
+-(BOOL) InsertPlayerTeamDetails:(NSString*) PLAYERCODE:(NSString*) TEAMCODE:(NSString*) RECORDSTATUS
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -732,93 +723,96 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
-    }
-    return YES;
-}
-
-
-+(BOOL) UpdatePlayerTeamDetails:(NSString*) PLAYERCODE:(NSString*) TEAMCODE:(NSString*) RECORDSTATUS
-{
-
-NSString *databasePath = [self getDBPath];
-sqlite3_stmt *statement;
-sqlite3 *dataBase;
-const char *dbPath = [databasePath UTF8String];
-if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
-{
-    NSString *UPDATESQL = [NSString stringWithFormat:@"UPDATE [PLAYERTEAMDETAILS] SET [RECORDSTATUS] = '%@' WHERE [PLAYERCODE] ='%@' AND [TEAMCODE] ='%@'AND issync='1' ",PLAYERCODE,TEAMCODE,RECORDSTATUS];
-    
-    
-    const char *update_stmt = [UPDATESQL UTF8String];
-      sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-    if (sqlite3_step(statement) == SQLITE_DONE)
-    {
         sqlite3_close(dataBase);
-        return YES;
-        
     }
-    else {
-        sqlite3_reset(statement);
-        
-        return NO;
-    }
-    
+    return NO;
 }
-return YES;
+
+
+-(BOOL) UpdatePlayerTeamDetails:(NSString*) PLAYERCODE:(NSString*) TEAMCODE:(NSString*) RECORDSTATUS
+{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *UPDATESQL = [NSString stringWithFormat:@"UPDATE [PLAYERTEAMDETAILS] SET [RECORDSTATUS] = '%@' WHERE [PLAYERCODE] ='%@' AND [TEAMCODE] ='%@'AND issync='1' ",PLAYERCODE,TEAMCODE,RECORDSTATUS];
+        
+        
+        const char *update_stmt = [UPDATESQL UTF8String];
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
 }
 
 
 
 //Officialsmaster
 
-+(BOOL )CheckOfficialsmaster:(NSString*)OFFICIALSCODE
+-(BOOL )CheckOfficialsmaster:(NSString*)OFFICIALSCODE
 {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT OFFICIALSCODE FROM OFFICIALSMASTER WHERE OFFICIALSCODE ='%@'",OFFICIALSCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT OFFICIALSCODE FROM OFFICIALSMASTER WHERE OFFICIALSCODE ='%@'",OFFICIALSCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
-
-
-
+    
+    
+    
 }
 
-+(BOOL) InsertOfficialsmaster:(NSString*) OFFICIALSCODE:(NSString*) NAME:(NSString*) ROLE:(NSString*) COUNTRY:(NSString*) STATE:(NSString*) CATEGORY:(NSString*) OFFICIALSPHOTO:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE{
+-(BOOL) InsertOfficialsmaster:(NSString*) OFFICIALSCODE:(NSString*) NAME:(NSString*) ROLE:(NSString*) COUNTRY:(NSString*) STATE:(NSString*) CATEGORY:(NSString*) OFFICIALSPHOTO:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE{
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -830,57 +824,57 @@ return YES;
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
-
-
-
+    return NO;
+    
+    
+    
 }
 
-+(BOOL) UpdateOfficialsmaster:(NSString*) OFFICIALSCODE:(NSString*) NAME:(NSString*) ROLE:(NSString*) COUNTRY:(NSString*) STATE:(NSString*) CATEGORY:(NSString*) OFFICIALSPHOTO:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE
+-(BOOL) UpdateOfficialsmaster:(NSString*) OFFICIALSCODE:(NSString*) NAME:(NSString*) ROLE:(NSString*) COUNTRY:(NSString*) STATE:(NSString*) CATEGORY:(NSString*) OFFICIALSPHOTO:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
-   {
-       NSString *UPDATESQL = [NSString stringWithFormat:@"UPDATE OFFICIALSMASTER SET NAME='%@',ROLE = '%@',COUNTRY ='%@',STATE='%@',CATEGORY ='%@',MODIFIEDBY ='%@',MODIFIEDDATE = '%@',issync='1'WHERE OFFICIALSCODE = '%@'",NAME,ROLE,COUNTRY,STATE,CATEGORY,MODIFIEDBY,MODIFIEDDATE,OFFICIALSCODE];
+    {
+        NSString *UPDATESQL = [NSString stringWithFormat:@"UPDATE OFFICIALSMASTER SET NAME='%@',ROLE = '%@',COUNTRY ='%@',STATE='%@',CATEGORY ='%@',MODIFIEDBY ='%@',MODIFIEDDATE = '%@',issync='1'WHERE OFFICIALSCODE = '%@'",NAME,ROLE,COUNTRY,STATE,CATEGORY,MODIFIEDBY,MODIFIEDDATE,OFFICIALSCODE];
         
         
         const char *update_stmt = [UPDATESQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
-
-
+    return NO;
+    
+    
 }
 
 
@@ -888,41 +882,43 @@ return YES;
 
 //Coachmaster
 
-+(BOOL )CheckCoachmaster:(NSString*)COACHCODE
+-(BOOL )CheckCoachmaster:(NSString*)COACHCODE
 { int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT COACHCODE FROM COACHMASTER WHERE COACHCODE ='%@'",COACHCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT COACHCODE FROM COACHMASTER WHERE COACHCODE ='%@'",COACHCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
 }
 
 
 
-+(BOOL) InsertCoachmaster:(NSString*) COACHCODE:(NSString*) COACHNAME:(NSString*) COACHTEAMCODE:(NSString*)COACHSPECIALIZATION:(NSString*) COACHPHOTO:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE
+-(BOOL) InsertCoachmaster:(NSString*) COACHCODE:(NSString*) COACHNAME:(NSString*) COACHTEAMCODE:(NSString*)COACHSPECIALIZATION:(NSString*) COACHPHOTO:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE
 
 {
-
+    
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -933,31 +929,31 @@ return YES;
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
     
-
-
+    
+    
 }
 
 
 
 
-+(BOOL) UpdateCoachmaster:(NSString*) COACHCODE:(NSString*) COACHNAME:(NSString*) COACHTEAMCODE:(NSString*)COACHSPECIALIZATION:(NSString*) COACHPHOTO:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE
+-(BOOL) UpdateCoachmaster:(NSString*) COACHCODE:(NSString*) COACHNAME:(NSString*) COACHTEAMCODE:(NSString*)COACHSPECIALIZATION:(NSString*) COACHPHOTO:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -969,64 +965,66 @@ return YES;
         
         
         const char *update_stmt = [UPDATESQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
-
-
-
-
+    return NO;
+    
+    
+    
+    
 }
 
 
 //Groundmaster
 
-+(BOOL )CheckGroundmaster:(NSString*)GROUNDCODE
+-(BOOL )CheckGroundmaster:(NSString*)GROUNDCODE
 {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT GROUNDCODE FROM GROUNDMASTER WHERE GROUNDCODE ='%@'",GROUNDCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT GROUNDCODE FROM GROUNDMASTER WHERE GROUNDCODE ='%@'",GROUNDCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
-
-
+    
+    
 }
 
-+(BOOL) InsertGroundmaster:(NSString*)GROUNDCODE:(NSString*)GROUNDNAME:(NSString*)COUNTRY:(NSString*)STATE:(NSString*)CITY:(NSString*)GROUNDPROFILE:(NSString*)GSTOPLEFT:(NSString*)GSTOPRIGHT:(NSString*)GSBOTTOMLEFT:(NSString*)GSBOTTOMRIGHT:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:MODIFIEDDATE
+-(BOOL) InsertGroundmaster:(NSString*)GROUNDCODE:(NSString*)GROUNDNAME:(NSString*)COUNTRY:(NSString*)STATE:(NSString*)CITY:(NSString*)GROUNDPROFILE:(NSString*)GSTOPLEFT:(NSString*)GSTOPRIGHT:(NSString*)GSBOTTOMLEFT:(NSString*)GSBOTTOMRIGHT:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:MODIFIEDDATE
 {
     
     NSString *databasePath = [self getDBPath];
@@ -1039,25 +1037,25 @@ return YES;
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
-   }
+    return NO;
+}
 
-+(BOOL) UpdateGroundmaster:(NSString*)GROUNDCODE:(NSString*)GROUNDNAME:(NSString*)COUNTRY:(NSString*)STATE:(NSString*)CITY:(NSString*)GROUNDPROFILE:(NSString*)GSTOPLEFT:(NSString*)GSTOPRIGHT:(NSString*)GSBOTTOMLEFT:(NSString*)GSBOTTOMRIGHT:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:MODIFIEDDATE
+-(BOOL) UpdateGroundmaster:(NSString*)GROUNDCODE:(NSString*)GROUNDNAME:(NSString*)COUNTRY:(NSString*)STATE:(NSString*)CITY:(NSString*)GROUNDPROFILE:(NSString*)GSTOPLEFT:(NSString*)GSTOPRIGHT:(NSString*)GSBOTTOMLEFT:(NSString*)GSBOTTOMRIGHT:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:MODIFIEDDATE
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1069,22 +1067,22 @@ return YES;
         
         
         const char *update_stmt = [UPDATESQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
     
     
     
@@ -1095,41 +1093,43 @@ return YES;
 
 //Shottype
 
-+(BOOL )CheckShottype:(NSString*)SHOTCODE
+-(BOOL )CheckShottype:(NSString*)SHOTCODE
 {
-
+    
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT SHOTCODE FROM SHOTTYPE WHERE SHOTCODE ='%@'",SHOTCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT SHOTCODE FROM SHOTTYPE WHERE SHOTCODE ='%@'",SHOTCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
     
-
-
+    
+    
 }
 
-+(BOOL) UpdateShottype:(NSString*)SHOTCODE:(NSString*)SHOTNAME:(NSString*)SHOTTYPE:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE
+-(BOOL) UpdateShottype:(NSString*)SHOTCODE:(NSString*)SHOTNAME:(NSString*)SHOTTYPE:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1141,22 +1141,22 @@ return YES;
         
         
         const char *update_stmt = [UPDATESQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
     
     
     
@@ -1164,36 +1164,36 @@ return YES;
 
 
 
-+(BOOL) InsertShottype:(NSString*)SHOTCODE:(NSString*)SHOTNAME:(NSString*)SHOTTYPE:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE
+-(BOOL) InsertShottype:(NSString*)SHOTCODE:(NSString*)SHOTNAME:(NSString*)SHOTTYPE:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE
 {
- 
-        NSString *databasePath = [self getDBPath];
-        sqlite3_stmt *statement;
-        sqlite3 *dataBase;
-        const char *dbPath = [databasePath UTF8String];
-        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO SHOTTYPE(SHOTCODE,SHOTNAME,SHOTTYPE,DISPLAYORDER,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE,issync)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','1')",SHOTCODE,SHOTNAME,SHOTTYPE,DISPLAYORDER,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE];
+        
+        
+        const char *update_stmt = [INSERTSQL UTF8String];
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO SHOTTYPE(SHOTCODE,SHOTNAME,SHOTTYPE,DISPLAYORDER,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE,issync)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','1')",SHOTCODE,SHOTNAME,SHOTTYPE,DISPLAYORDER,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE];
-            
-            
-            const char *update_stmt = [INSERTSQL UTF8String];
-            //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-            sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
                 
             }
-            else {
-                sqlite3_reset(statement);
-                
-                return NO;
-            }
-            
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
         }
-        return YES;
-
+        sqlite3_close(dataBase);
+    }
+    return NO;
+    
 }
 
 
@@ -1201,38 +1201,40 @@ return YES;
 
 
 //Bowltype
-+(BOOL )CheckBowltype:(NSString*)BOWLTYPECODE{
-
+-(BOOL )CheckBowltype:(NSString*)BOWLTYPECODE{
+    
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT BOWLTYPECODE FROM BOWLTYPE WHERE BOWLTYPECODE ='%@'",BOWLTYPECODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT BOWLTYPECODE FROM BOWLTYPE WHERE BOWLTYPECODE ='%@'",BOWLTYPECODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
-
+    
 }
 
-+(BOOL) UpdateBowltype:(NSString*)BOWLTYPECODE:(NSString*)BOWLTYPE:(NSString*)BOWLERTYPE:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE
+-(BOOL) UpdateBowltype:(NSString*)BOWLTYPECODE:(NSString*)BOWLTYPE:(NSString*)BOWLERTYPE:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1244,27 +1246,27 @@ return YES;
         
         
         const char *update_stmt = [UPDATESQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
- 
+    return NO;
+    
 }
 
 
-+(BOOL) InsertBowltype:(NSString*)BOWLTYPECODE:(NSString*)BOWLTYPE:(NSString*)BOWLERTYPE:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE
+-(BOOL) InsertBowltype:(NSString*)BOWLTYPECODE:(NSString*)BOWLTYPE:(NSString*)BOWLERTYPE:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE
 {
     
     NSString *databasePath = [self getDBPath];
@@ -1277,24 +1279,24 @@ return YES;
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
-
-
+    return NO;
+    
+    
 }
 
 
@@ -1302,40 +1304,42 @@ return YES;
 
 //Fieldingfactor
 
-+(BOOL) CheckFieldingfactor:(NSString*)FIELDINGFACTORCODE{
-
+-(BOOL) CheckFieldingfactor:(NSString*)FIELDINGFACTORCODE{
+    
     
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT FIELDINGFACTORCODE FROM FIELDINGFACTOR WHERE FIELDINGFACTORCODE ='%@'",FIELDINGFACTORCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT FIELDINGFACTORCODE FROM FIELDINGFACTOR WHERE FIELDINGFACTORCODE ='%@'",FIELDINGFACTORCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
     
-
+    
 }
 
-+(BOOL)UpdateFieldingfactor:(NSString*)FIELDINGFACTORCODE:(NSString*)FIELDINGFACTOR:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE{
+-(BOOL)UpdateFieldingfactor:(NSString*)FIELDINGFACTORCODE:(NSString*)FIELDINGFACTOR:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE{
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1346,26 +1350,26 @@ return YES;
         
         
         const char *update_stmt = [UPDATESQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
 }
 
 
-+(BOOL)InsertFieldingfactor:(NSString*)FIELDINGFACTORCODE:(NSString*)FIELDINGFACTOR:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE{
+-(BOOL)InsertFieldingfactor:(NSString*)FIELDINGFACTORCODE:(NSString*)FIELDINGFACTOR:(NSString*)DISPLAYORDER:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE{
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1377,65 +1381,68 @@ return YES;
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
     
-
-
+    
+    
 }
 
 //Bowlerspecialization
 
-+(BOOL)CheckBowlerspecialization:BOWLERSPECIALIZATIONCODE{
+-(BOOL)CheckBowlerspecialization:BOWLERSPECIALIZATIONCODE{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT BOWLERSPECIALIZATIONCODE FROM BOWLERSPECIALIZATION WHERE BOWLERSPECIALIZATIONCODE ='%@'",BOWLERSPECIALIZATIONCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT BOWLERSPECIALIZATIONCODE FROM BOWLERSPECIALIZATION WHERE BOWLERSPECIALIZATIONCODE ='%@'",BOWLERSPECIALIZATIONCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
     
-
-
-
-
+    
+    
+    
+    
 }
 
-+(BOOL)UpdateBowlerspecialization:(NSString*)BOWLERSPECIALIZATIONCODE:(NSString*)BOWLERSPECIALIZATION:(NSString*)BOWLERSTYLE:(NSString*)BOWLERTYPE:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:MODIFIEDDATE{
-
+-(BOOL)UpdateBowlerspecialization:(NSString*)BOWLERSPECIALIZATIONCODE:(NSString*)BOWLERSPECIALIZATION:(NSString*)BOWLERSTYLE:(NSString*)BOWLERTYPE:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:MODIFIEDDATE{
+    
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1447,29 +1454,29 @@ return YES;
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
     
-
-
+    
+    
 }
 
-+(BOOL) InsertBowlerspecialization:(NSString*)BOWLERSPECIALIZATIONCODE:(NSString*)BOWLERSPECIALIZATION:(NSString*)BOWLERSTYLE:(NSString*)BOWLERTYPE:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:MODIFIEDDATE{
-
+-(BOOL) InsertBowlerspecialization:(NSString*)BOWLERSPECIALIZATIONCODE:(NSString*)BOWLERSPECIALIZATION:(NSString*)BOWLERSTYLE:(NSString*)BOWLERTYPE:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:MODIFIEDDATE{
+    
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1480,60 +1487,61 @@ return YES;
         
         
         const char *update_stmt = [UPDATESQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+    
+    
+}
+
+
+
+
+-(NSMutableArray *)getPlayerCode
+{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    
+    // NSString *count = [[NSString alloc]init];
+    
+    int retVal;
+    
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT PLAYERCODE FROM PLAYERMASTER"];
+        stmt=[selectPlayersSQL UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
             
-            return NO;
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                getimageRecord *record=[[getimageRecord alloc]init];
+                record.playercodeimage=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                [eventArray addObject:record];
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
         }
         
+        sqlite3_close(dataBase);
     }
-    return YES;
-
-
-}
-
-
-
-
-+(NSMutableArray *)getPlayerCode
-{
-    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
-    
-    // NSString *count = [[NSString alloc]init];
-    
-    int retVal;
-    
-    
-    NSString *databasePath = [self getDBPath];
-    sqlite3 *dataBase;
-    const char *stmt;
-    sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT PLAYERCODE FROM PLAYERMASTER"];
-    stmt=[selectPlayersSQL UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
-        
-    {
-        while(sqlite3_step(statement)==SQLITE_ROW){
-            getimageRecord *record=[[getimageRecord alloc]init];
-            record.playercodeimage=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-         [eventArray addObject:record];
-        }
-    }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return eventArray;
     
     
@@ -1542,7 +1550,7 @@ return YES;
 
 
 
-+(NSMutableArray *)getofficailCode
+-(NSMutableArray *)getofficailCode
 {
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
     
@@ -1555,30 +1563,32 @@ return YES;
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT OFFICIALSCODE FROM OFFICIALSMASTER"];
-    stmt=[selectPlayersSQL UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
-        
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
-            getimageRecord *record=[[getimageRecord alloc]init];
-            record.officialscodeimage=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            [eventArray addObject:record];
+        
+        NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT OFFICIALSCODE FROM OFFICIALSMASTER"];
+        stmt=[selectPlayersSQL UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                getimageRecord *record=[[getimageRecord alloc]init];
+                record.officialscodeimage=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                [eventArray addObject:record];
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
         }
+        
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return eventArray;
     
     
 }
 
-+(NSMutableArray *)getgroundcode
+-(NSMutableArray *)getgroundcode
 {
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
     
@@ -1591,24 +1601,25 @@ return YES;
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT GROUNDCODE FROM GROUNDMASTER"];
-    stmt=[selectPlayersSQL UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
-        
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
-            getimageRecord *record=[[getimageRecord alloc]init];
-            record.groundcodeimage=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            [eventArray addObject:record];
+        
+        NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT GROUNDCODE FROM GROUNDMASTER"];
+        stmt=[selectPlayersSQL UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                getimageRecord *record=[[getimageRecord alloc]init];
+                record.groundcodeimage=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                [eventArray addObject:record];
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return eventArray;
     
     
@@ -1619,44 +1630,46 @@ return YES;
 //Metadata
 
 
-+(BOOL) CheckMetaData:METASUBCODE{
-
+-(BOOL) CheckMetaData:METASUBCODE{
+    
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT METASUBCODE FROM METADATA WHERE METASUBCODE ='%@'",METASUBCODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT METASUBCODE FROM METADATA WHERE METASUBCODE ='%@'",METASUBCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
     
-
-
-
+    
+    
+    
 }
 
 
-+(BOOL)InsertMetaData:(NSString*)METASUBCODE:(NSString*)METADATATYPECODE:(NSString*)METADATATYPEDESCRIPTION:(NSString*)METASUBCODEDESCRIPTION
+-(BOOL)InsertMetaData:(NSString*)METASUBCODE:(NSString*)METADATATYPECODE:(NSString*)METADATATYPEDESCRIPTION:(NSString*)METASUBCODEDESCRIPTION
 {
-
+    
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1668,65 +1681,68 @@ return YES;
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             
-        }
-        else {
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
     
     
-
-
-
-
+    
+    
+    
+    
 }
 
 
 
 //PowerplayType
-+(BOOL)  CheckPowerplayType:POWERPLAYTYPECODE
+-(BOOL)  CheckPowerplayType:POWERPLAYTYPECODE
 {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYTYPECODE FROM POWERPLAYTYPE WHERE POWERPLAYTYPECODE ='%@'",POWERPLAYTYPECODE];
-    
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYTYPECODE FROM POWERPLAYTYPE WHERE POWERPLAYTYPECODE ='%@'",POWERPLAYTYPECODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                
+                return YES;
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            
-            
-            return YES;
         }
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
-
-
+    
+    
 }
-+(BOOL)InsertPowerplayType:(NSString*)POWERPLAYTYPECODE:(NSString*)POWERPLAYTYPENAME:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE:(NSString*)ISSYSTEMREFERENCE{
+-(BOOL)InsertPowerplayType:(NSString*)POWERPLAYTYPECODE:(NSString*)POWERPLAYTYPENAME:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE:(NSString*)ISSYSTEMREFERENCE{
     
     
     
@@ -1740,28 +1756,28 @@ return YES;
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
     
- }
+}
 
-+(BOOL)UpdatePowerplayType:(NSString*)POWERPLAYTYPECODE:(NSString*)POWERPLAYTYPENAME:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE:(NSString*)ISSYSTEMREFERENCE{
-
-
+-(BOOL)UpdatePowerplayType:(NSString*)POWERPLAYTYPECODE:(NSString*)POWERPLAYTYPENAME:(NSString*)RECORDSTATUS:(NSString*)CREATEDBY:(NSString*)CREATEDDATE:(NSString*)MODIFIEDBY:(NSString*)MODIFIEDDATE:(NSString*)ISSYSTEMREFERENCE{
+    
+    
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1772,25 +1788,25 @@ return YES;
         
         
         const char *update_stmt = [UPDATESQL UTF8String];
-        //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_close(dataBase);
-            return YES;
-            
-        }
-        else {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
             sqlite3_reset(statement);
-            
-            return NO;
+            sqlite3_finalize(statement);
         }
-        
+        sqlite3_close(dataBase);
     }
-    return YES;
+    return NO;
     
-
-
+    
+    
 }
 
 

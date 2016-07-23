@@ -69,7 +69,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img_secIngsTeamName;
 
 
-@property(nonatomic,assign)NSInteger *BATTEAMWICKETS;
+@property(nonatomic,assign)NSInteger BATTEAMWICKETS;
 @property(nonatomic,assign)NSInteger *BATTEAMOVERS;
 @property(nonatomic,assign)NSInteger *BATTEAMOVRBALLS;
 @property(nonatomic,assign)NSNumber *BATTEAMRUNRATE;

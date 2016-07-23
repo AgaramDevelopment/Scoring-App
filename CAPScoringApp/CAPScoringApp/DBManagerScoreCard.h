@@ -10,38 +10,38 @@
 #import <sqlite3.h>
 
 @interface DBManagerScoreCard : NSObject
-+(NSMutableArray *) GetMatchRegistrationForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
+-(NSMutableArray *) GetMatchRegistrationForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
 
-+(NSMutableArray *) GetBattingSummaryForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
+-(NSMutableArray *) GetBattingSummaryForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
 
-+(NSNumber*) GetInningsStatusForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
+-(NSNumber*) GetInningsStatusForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
 
-+(NSNumber*) GetMatchOverForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
+-(NSNumber*) GetMatchOverForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
 
-+(NSNumber*) GetFinalInningsForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
+-(NSNumber*) GetFinalInningsForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 
-+(NSString*) GetBattingteamCodeForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
+-(NSString*) GetBattingteamCodeForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
 
-+(NSString*) GetBowlingteamCodeForScoreBoard:(NSString*) BATTINGTEAMCODE:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
-
-
-+(NSString*) GetIsFollowOnForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
-
-+(NSString*) GetIsFollowOnInMinusForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
-
-+(NSString*) GetTempBatTeamPenaltyForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE;
-
-+(NSString*) TempBatTeamPenaltyForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) INNINGSNO :(NSString*) BATTINGTEAMCODE;
+-(NSString*) GetBowlingteamCodeForScoreBoard:(NSString*) BATTINGTEAMCODE:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 
 
-+(NSMutableArray *) GetInningsSummaryForScoreBoard:(NSString*) TEMPBATTEAMPENALTY: (NSString*) MATCHOVERS: (NSString*) MATCHBALLS: (NSString*) FINALINNINGS: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) BATTINGTEAMCODE : (NSString*) INNINGSNO;
+-(NSString*) GetIsFollowOnForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
 
-+(NSMutableArray *) GetBatPlayerForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) BATTINGTEAMCODE : (NSString*) INNINGSNO;
+-(NSString*) GetIsFollowOnInMinusForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO;
 
-+(NSString*) GetIsTimeShowForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
+-(NSString*) GetTempBatTeamPenaltyForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE;
 
-+(NSMutableArray *) GetBowlingSummaryForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) INNINGSNO;
+-(NSString*) TempBatTeamPenaltyForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) INNINGSNO :(NSString*) BATTINGTEAMCODE;
 
-+(NSMutableArray *) GetBowlingSummaryInElseForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) INNINGSNO;
+
+-(NSMutableArray *) GetInningsSummaryForScoreBoard:(NSString*) TEMPBATTEAMPENALTY: (NSString*) MATCHOVERS: (NSString*) MATCHBALLS: (NSString*) FINALINNINGS: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) BATTINGTEAMCODE : (NSString*) INNINGSNO;
+
+-(NSMutableArray *) GetBatPlayerForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) BATTINGTEAMCODE : (NSString*) INNINGSNO;
+
+-(NSString*) GetIsTimeShowForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
+
+-(NSMutableArray *) GetBowlingSummaryForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) INNINGSNO;
+
+-(NSMutableArray *) GetBowlingSummaryInElseForScoreBoard:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) INNINGSNO;
 
 @end

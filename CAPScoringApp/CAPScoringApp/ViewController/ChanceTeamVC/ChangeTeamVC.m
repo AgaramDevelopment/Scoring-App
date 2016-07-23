@@ -177,8 +177,8 @@
         [self ShowAlterView:@"Please Select Bowler"];
     }
     else{
-        
-        [DBManagerChangeTeam InsertChangeTeam:self.compitionCode :self.MatchCode :BattingTeamCode :[NSNumber numberWithInt:maximumInnings.intValue] :selectStrikercode :selectnonStrikercode :selectBowlercode :[NSNumber numberWithInt:self.inningsno.intValue] :self.currentBattingTeamCode :@"" :@""];
+        DBManagerChangeTeam *objDBManagerChangeTeam = [[DBManagerChangeTeam alloc] init];
+        [objDBManagerChangeTeam InsertChangeTeam:self.compitionCode :self.MatchCode :BattingTeamCode :[NSNumber numberWithInt:maximumInnings.intValue] :selectStrikercode :selectnonStrikercode :selectBowlercode :[NSNumber numberWithInt:self.inningsno.intValue] :self.currentBattingTeamCode :@"" :@""];
         [self.delegate processSuccessful];
 
     }
@@ -187,7 +187,7 @@
 
 -(void)ShowAlterView:(NSString *) alterMsg
 {
-    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:@"Change Team" message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [objAlter show];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

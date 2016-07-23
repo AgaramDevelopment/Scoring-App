@@ -52,15 +52,12 @@
 #import "Batsmancell.h"
 #import "AppealBatsmenRecord.h"
 #import "DeclareInnings.h"
-#import "OtherWicketVC.h"
-
 #import "Other_WicketVC.h"
 #import "NewMatchSetUpVC.h"
 #import "FETCHSEBALLCODEDETAILS.h"
 #import "ScoreEnginEditRecord.h"
 #import "ChangeTeamVC.h"
 #import "InsertSEScoreEngine.h"
-#import "Other_WicketgridVC.h"
 #import "FollowOn.h"
 #import "ChangeTossVC.h"
 #import "UpdateScoreEngine.h"
@@ -77,7 +74,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate,Other_WicketDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -200,7 +197,7 @@
     
     PowerPlayVC *powerplayVc;
     Other_WicketVC *otherwicketvc;
-    Other_WicketgridVC *otherwikcetgricvc;
+   // Other_WicketgridVC *otherwikcetgricvc;
     RevicedOverVC * revicedOverVc ;
     RevisedTarget  *revisedTarget;
     PenalityVC *penalityVc;
@@ -554,7 +551,7 @@
                                                              alpha:0.36]];
     
     int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAKS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
     {
         if(inningsno > 1)
@@ -6665,7 +6662,7 @@ self.lbl_umpirename.text=@"";
     
     if(leftSlideSwipe == YES){
      NSString *SelectedMatchEvent = (NSString*)[_rightSlideArray objectAtIndex:indexPath.row];
-        if([SelectedMatchEvent isEqualToString : @"BREAK"])
+        if([SelectedMatchEvent isEqualToString : @"BREAKS"])
         {
             NSLog(@"1");
             
@@ -7899,6 +7896,7 @@ self.lbl_umpirename.text=@"";
     endDayVC.MATCHCODE = self.matchCode;
     endDayVC.TEAMCODE = fetchSEPageLoadRecord.BATTINGTEAMCODE;
     endDayVC.INNINGSNO = fetchSEPageLoadRecord.INNINGSNO;
+    endDayVC.MATCHDATE = fetchSEPageLoadRecord.MATCHDATE;
     endDayVC.delegate =self;
     
     
@@ -7970,7 +7968,7 @@ self.lbl_umpirename.text=@"";
        [self addChildViewController:endSession];
         [fullview addSubview:endSession.view];
        
-       [endSession fetchPageEndSession:fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
+       [endSession fetchPageEndSession :fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
        
     }
     
@@ -8100,7 +8098,13 @@ self.lbl_umpirename.text=@"";
 
 -(void)DeclearINNINGS
 {
-    
+    if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
+    {
+        UIAlertView * objAlert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"No legitimate Balls Have Been Bowled" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [objAlert show];
+    }
+    else
+    {
     
     DeclareInnings *declareInning = [[DeclareInnings alloc]initWithNibName:@"DeclareInnings" bundle:nil];
     declareInning.COMPETITIONCODE = self.competitionCode;
@@ -8133,6 +8137,7 @@ self.lbl_umpirename.text=@"";
          declareInning.view.alpha = 1;
      }
                      completion:nil];
+    }
 }
 -(void)MatchResult
 {
@@ -8171,19 +8176,20 @@ self.lbl_umpirename.text=@"";
 }
 -(void)OtherWicket
 {
-    otherwikcetgricvc = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
-    otherwikcetgricvc.COMPETITIONCODE=self.competitionCode;
-    otherwikcetgricvc.MATCHCODE =self.matchCode;
-    otherwikcetgricvc.INNINGSNO =fetchSEPageLoadRecord.INNINGSNO;
-    otherwikcetgricvc.TEAMCODE=fetchSEPageLoadRecord.BATTINGTEAMCODE;
-    otherwikcetgricvc.STRIKERCODE=fetchSEPageLoadRecord.strickerPlayerCode;
-    otherwikcetgricvc.NONSTRIKERCODE=fetchSEPageLoadRecord.nonstrickerPlayerCode;
-    otherwikcetgricvc.NONSTRIKERNAME=fetchSEPageLoadRecord.nonstrickerPlayerName;
-    otherwikcetgricvc.MAXOVER=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS];
-    otherwikcetgricvc.MAXBALL=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLS];
-    otherwikcetgricvc.BALLCOUNT=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
-    otherwikcetgricvc.N_WICKETNO=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMWICKETS];
-    otherwikcetgricvc.BALLCODE=fetchSEPageLoadRecord.BOWLTYPECODE;
+    otherwicketvc = [[Other_WicketVC alloc]initWithNibName:@"Other_WicketVC" bundle:nil];
+    otherwicketvc.COMPETITIONCODE=self.competitionCode;
+    otherwicketvc.MATCHCODE =self.matchCode;
+    otherwicketvc.INNINGSNO =fetchSEPageLoadRecord.INNINGSNO;
+    otherwicketvc.TEAMCODE=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    otherwicketvc.STRIKERCODE=fetchSEPageLoadRecord.strickerPlayerCode;
+    otherwicketvc.NONSTRIKERCODE=fetchSEPageLoadRecord.nonstrickerPlayerCode;
+    otherwicketvc.NONSTRIKERNAME=fetchSEPageLoadRecord.nonstrickerPlayerName;
+    otherwicketvc.MAXOVER=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS];
+    otherwicketvc.MAXBALL=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+    otherwicketvc.BALLCOUNT=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
+    otherwicketvc.N_WICKETNO=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMWICKETS];
+    otherwicketvc.BALLCODE=fetchSEPageLoadRecord.BOWLTYPECODE;
+    otherwicketvc.delegate=self;
     
     
     //  otherwicketvc.PLAYERNAME=
@@ -8191,16 +8197,16 @@ self.lbl_umpirename.text=@"";
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     
     [self.view addSubview:fullview];
-    [fullview addSubview:otherwikcetgricvc.view];
+    [fullview addSubview:otherwicketvc.view];
     
-    otherwikcetgricvc.view.frame =CGRectMake(90, 200, otherwikcetgricvc.view.frame.size.width, otherwikcetgricvc.view.frame.size.height);
+    otherwicketvc.view.frame =CGRectMake(90, 200, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
     
-    otherwikcetgricvc.view.alpha = 0;
-    [otherwikcetgricvc didMoveToParentViewController:self];
+    otherwicketvc.view.alpha = 0;
+    [otherwicketvc didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
      {
-         otherwikcetgricvc.view.alpha = 1;
+         otherwicketvc.view.alpha = 1;
      }
                      completion:nil];
     
@@ -8208,26 +8214,26 @@ self.lbl_umpirename.text=@"";
     
     if (IS_IPAD_PRO) {
         
-        otherwikcetgricvc.view.frame =CGRectMake(250, 500, otherwikcetgricvc.view.frame.size.width, otherwikcetgricvc.view.frame.size.height);
-        otherwikcetgricvc.view.alpha = 0;
-        [otherwikcetgricvc didMoveToParentViewController:self];
+        otherwicketvc.view.frame =CGRectMake(250, 500, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
+        otherwicketvc.view.alpha = 0;
+        [otherwicketvc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             otherwikcetgricvc.view.alpha = 1;
+             otherwicketvc.view.alpha = 1;
          }
                          completion:nil];
     }
     
     
     else{
-        otherwikcetgricvc.view.frame =CGRectMake(100, 200, otherwikcetgricvc.view.frame.size.width, otherwikcetgricvc.view.frame.size.height);
-        otherwikcetgricvc.view.alpha = 0;
-        [otherwikcetgricvc didMoveToParentViewController:self];
+        otherwicketvc.view.frame =CGRectMake(100, 200, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
+        otherwicketvc.view.alpha = 0;
+        [otherwicketvc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             otherwikcetgricvc.view.alpha = 1;
+             otherwicketvc.view.alpha = 1;
          }
                          completion:nil];
     }
@@ -12364,50 +12370,50 @@ self.lbl_umpirename.text=@"";
    //[self reloadBowlerTeamBatsmanDetails];
 }
 - (IBAction)SyncData_btn:(id)sender {
+    PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+    NSMutableArray*MatchRegistrationGetArray=[objPushSyncDBMANAGER RetrieveMATCHREGISTRATIONData:_competitionCode :_matchCode];
     
-    NSMutableArray*MatchRegistrationGetArray=[PushSyncDBMANAGER RetrieveMATCHREGISTRATIONData:_competitionCode :_matchCode];
+    NSMutableArray*MatchTeamplayerDetailsGetArray=[objPushSyncDBMANAGER RetrieveMATCHTEAMPLAYERDETAILSData:_matchCode];
     
-    NSMutableArray*MatchTeamplayerDetailsGetArray=[PushSyncDBMANAGER RetrieveMATCHTEAMPLAYERDETAILSData:_matchCode];
+    NSMutableArray*MatchresultGetArray=[objPushSyncDBMANAGER RetrieveMATCHRESULTData:_competitionCode :_matchCode];
     
-    NSMutableArray*MatchresultGetArray=[PushSyncDBMANAGER RetrieveMATCHRESULTData:_competitionCode :_matchCode];
+    NSMutableArray*MatchEventGetArray=[objPushSyncDBMANAGER RetrieveMATCHEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*MatchEventGetArray=[PushSyncDBMANAGER RetrieveMATCHEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*InningsSummeryGetArray= [objPushSyncDBMANAGER RetrieveINNINGSSUMMARYData:_competitionCode :_matchCode];
     
-    NSMutableArray*InningsSummeryGetArray= [PushSyncDBMANAGER RetrieveINNINGSSUMMARYData:_competitionCode :_matchCode];
+    NSMutableArray*InningsEventGetArray= [objPushSyncDBMANAGER RetrieveINNINGSEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*InningsEventGetArray= [PushSyncDBMANAGER RetrieveINNINGSEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*InningsBreakEventGetArray= [objPushSyncDBMANAGER RetrieveIINNINGSBREAKEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*InningsBreakEventGetArray= [PushSyncDBMANAGER RetrieveIINNINGSBREAKEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*BallEventGetArray= [objPushSyncDBMANAGER RetrieveBALLEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*BallEventGetArray= [PushSyncDBMANAGER RetrieveBALLEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*BattingSummeryGetArray= [objPushSyncDBMANAGER RetrieveBATTINGSUMMARYData:_competitionCode :_matchCode];
     
-    NSMutableArray*BattingSummeryGetArray= [PushSyncDBMANAGER RetrieveBATTINGSUMMARYData:_competitionCode :_matchCode];
+    NSMutableArray*OverEventGetArray= [objPushSyncDBMANAGER RetrieveOVEREVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*OverEventGetArray= [PushSyncDBMANAGER RetrieveOVEREVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*BowlingSummeryGetArray= [objPushSyncDBMANAGER RetrieveBOWLINGSUMMARYData:_competitionCode :_matchCode];
     
-    NSMutableArray*BowlingSummeryGetArray= [PushSyncDBMANAGER RetrieveBOWLINGSUMMARYData:_competitionCode :_matchCode];
+    NSMutableArray*BowlingMaidenSummeryGetArray= [objPushSyncDBMANAGER RetrieveBOWLINGMAIDENSUMMARYData:_competitionCode :_matchCode];
     
-    NSMutableArray*BowlingMaidenSummeryGetArray= [PushSyncDBMANAGER RetrieveBOWLINGMAIDENSUMMARYData:_competitionCode :_matchCode];
+    NSMutableArray*BowlingOverDetailsGetArray= [objPushSyncDBMANAGER RetrieveBOWLEROVERDETAILSData:_competitionCode :_matchCode];
     
-    NSMutableArray*BowlingOverDetailsGetArray= [PushSyncDBMANAGER RetrieveBOWLEROVERDETAILSData:_competitionCode :_matchCode];
+    NSMutableArray*FieldingEventGetArray= [objPushSyncDBMANAGER RetrieveFIELDINGEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*FieldingEventGetArray= [PushSyncDBMANAGER RetrieveFIELDINGEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*DayEventGetArray= [objPushSyncDBMANAGER RetrieveDAYEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*DayEventGetArray= [PushSyncDBMANAGER RetrieveDAYEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*SessionEventGetArray= [objPushSyncDBMANAGER RetrieveSESSIONEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*SessionEventGetArray= [PushSyncDBMANAGER RetrieveSESSIONEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*AppealEventGetArray= [objPushSyncDBMANAGER RetrieveAPPEALEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*AppealEventGetArray= [PushSyncDBMANAGER RetrieveAPPEALEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*WicketEventGetArray= [objPushSyncDBMANAGER RetrieveWICKETEVENTSData:_competitionCode :_matchCode];
     
-    NSMutableArray*WicketEventGetArray= [PushSyncDBMANAGER RetrieveWICKETEVENTSData:_competitionCode :_matchCode];
+    NSMutableArray*PowerPlayGetArray= [objPushSyncDBMANAGER RetrievePOWERPLAYData:_competitionCode :_matchCode];
     
-    NSMutableArray*PowerPlayGetArray= [PushSyncDBMANAGER RetrievePOWERPLAYData:_competitionCode :_matchCode];
+    NSMutableArray*PlayerInOutTimeGetArray= [objPushSyncDBMANAGER RetrievePLAYERINOUTTIMEData:_competitionCode :_matchCode];
     
-    NSMutableArray*PlayerInOutTimeGetArray= [PushSyncDBMANAGER RetrievePLAYERINOUTTIMEData:_competitionCode :_matchCode];
+    NSMutableArray*PenalitydetailsGetArray= [objPushSyncDBMANAGER RetrievePENALTYDETAILSData:_competitionCode :_matchCode];
     
-    NSMutableArray*PenalitydetailsGetArray= [PushSyncDBMANAGER RetrievePENALTYDETAILSData:_competitionCode :_matchCode];
-    
-    NSMutableArray*CapTransactionLogEntryGetArray= [PushSyncDBMANAGER RetrieveCAPTRANSACTIONSLOGENTRYData:_competitionCode :_matchCode];
+    NSMutableArray*CapTransactionLogEntryGetArray= [objPushSyncDBMANAGER RetrieveCAPTRANSACTIONSLOGENTRYData:_competitionCode :_matchCode];
     
     NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
     [PushDict setValue :MatchRegistrationGetArray forKey:@"MatchRegistration"];

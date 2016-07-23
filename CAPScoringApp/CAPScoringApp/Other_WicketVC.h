@@ -8,14 +8,27 @@
 
 #import <UIKit/UIKit.h>
 #import "ScorEnginVC.h"
+#import "Other_WicketgridVC.h"
+
+@protocol Other_WicketDelegate <NSObject>
+@required
+
+- (void) ChangeVCBackBtnAction;
+@end
+
+
+
 
 @interface Other_WicketVC : UIViewController
+
+@property(nonatomic,strong) id <Other_WicketDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UIView *WICKET_VIEW;
 
 @property (strong, nonatomic) IBOutlet UILabel *Wicket_lbl;
 @property (strong, nonatomic) IBOutlet UIButton *button_touch;
 @property (strong, nonatomic) IBOutlet UITableView *Wicket_tableview;
+@property (strong, nonatomic) IBOutlet UIButton * Btn_Add;
 
 
 - (IBAction)add_btn:(id)sender;
@@ -30,13 +43,13 @@
 
 
 
-@property(strong,nonatomic)NSString*MATCHCODE;
-@property(strong,nonatomic)NSString*COMPETITIONCODE;
-@property(strong,nonatomic)NSNumber*INNINGSNO;
-@property(strong,nonatomic)NSString*TEAMCODE;
-@property(strong,nonatomic)NSString*STRIKERCODE;
-@property(strong,nonatomic)NSString*NONSTRIKERCODE;
-@property(strong,nonatomic)NSString*NONSTRIKERNAME;
+@property(strong,nonatomic)NSString * MATCHCODE;
+@property(strong,nonatomic)NSString * COMPETITIONCODE;
+@property(strong,nonatomic)NSNumber * INNINGSNO;
+@property(strong,nonatomic)NSString * TEAMCODE;
+@property(strong,nonatomic)NSString * STRIKERCODE;
+@property(strong,nonatomic)NSString * NONSTRIKERCODE;
+@property(strong,nonatomic)NSString * NONSTRIKERNAME;
 
 @property(strong,nonatomic)NSString*WICKETTYPE;
 @property(strong,nonatomic)NSString*WICKETPLAYER;
@@ -66,6 +79,12 @@
 
 
 @property (strong, nonatomic) IBOutlet UILabel *WICKET_NO_LBL;
+
+@property (strong,nonatomic) IBOutlet UIView * WickAddview;
+
+@property (strong,nonatomic) IBOutlet UITableView * tbl_Wicketlist;
+
+@property (strong, nonatomic) IBOutlet Other_WicketgridTVC *Other_WicketCell;
 
 
 @end

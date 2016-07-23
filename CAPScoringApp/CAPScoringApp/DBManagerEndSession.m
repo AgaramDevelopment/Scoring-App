@@ -15,7 +15,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 //Copy database to application document
-+ (void) copyDatabaseIfNotExist{
+- (void) copyDatabaseIfNotExist{
     
     //Using NSFileManager we can perform many file system operations.
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -39,7 +39,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 //Get database path
-+(NSString *) getDBPath
+-(NSString *) getDBPath
 {
     [self copyDatabaseIfNotExist];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
@@ -49,14 +49,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
+-(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
     return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
 }
 
 
 //SP_FETCHPAGELOADENDSESSIONDETAILS----------------------------------------------------------
 
-+(NSString*)GetIsDayNightForFetchEndSession:(NSString*) MATCHCODE
+-(NSString*)GetIsDayNightForFetchEndSession:(NSString*) MATCHCODE
 
     {
         int retVal;
@@ -82,6 +82,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                 
             }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+
         }
         
         sqlite3_finalize(statement);
@@ -91,7 +94,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
 
 
-+(BOOL)GetDayNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
+-(BOOL)GetDayNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -104,24 +107,24 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
             
-            return NO;
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
 }
 
 
-+(NSString*)GetDayNoStatusForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
+
+-(NSString*)GetDayNoStatusForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
     
     
         int retVal;
@@ -132,31 +135,37 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         retVal=sqlite3_open([databasePath UTF8String], &dataBase);
         if(retVal !=0){
         }
-        
-        NSString *query=[NSString stringWithFormat:@"SELECT (MAX(DAYNO)+1) AS DAYNO FROM   DAYEVENTS WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND DAYSTATUS='1'",COMPETITIONCODE,MATCHCODE];
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL((MAX(DAYNO)+1),0) AS DAYNO FROM   DAYEVENTS WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND DAYSTATUS='1'",COMPETITIONCODE,MATCHCODE];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *DAYNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return DAYNO;
                 
                 
             }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+
         }
         
-        sqlite3_finalize(statement);
+        
         sqlite3_close(dataBase);
+    }
         return 0;
         
     }
     
 
 
-+(NSString*)GetDayNoStatusIn0ForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
+-(NSString*)GetDayNoStatusIn0ForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -171,23 +180,25 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *DAYNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return DAYNO;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+
             
-            return @"";
         }
+        
+        sqlite3_close(dataBase);
+       
     }
-    sqlite3_reset(statement);
+    
     return @"";
 }
 
-+(NSNumber*) GetInningsNosForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) BATTINGTEAMCODE{
+-(NSNumber*) GetInningsNosForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) BATTINGTEAMCODE{
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -197,7 +208,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(MAX(INNINGSNO),0) AS INNINGSNO  FROM   BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -205,23 +217,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *inningsNo = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return inningsNo;
             
-            
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+    }
     return 0;
     
     
 }
 
-+(NSNumber*)  GetSessionNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) DAYNO{
+-(NSNumber*)  GetSessionNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) DAYNO{
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -231,7 +246,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(MAX(SESSIONNO),0) AS SESSIONNO FROM SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND DAYNO='%@' AND SESSIONSTATUS='1'",COMPETITIONCODE,MATCHCODE,DAYNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -239,23 +255,27 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *sessionNo = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return sessionNo;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+    }
     return 0;
     
    
 }
 
-+(BOOL) GetOverNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSNumber*) INNINGSNO:(NSString*) DAYNO {
+-(BOOL) GetOverNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSNumber*) INNINGSNO:(NSString*) DAYNO {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -267,24 +287,24 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
             
-            return NO;
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
 }
 
 
-+(NSString*) GetStartOverNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSNumber*) INNINGSNO:(NSString*) DAYNO {
+
+-(NSString*) GetStartOverNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSNumber*) INNINGSNO:(NSString*) DAYNO {
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -294,7 +314,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT MIN(OVERNO) AS STARTOVER   FROM   BALLEVENTS   WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND SESSIONNO ='%@' AND INNINGSNO='%@' AND DAYNO='%@'",COMPETITIONCODE,MATCHCODE,SESSIONNO,INNINGSNO,DAYNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -302,22 +323,25 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *startOver = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return startOver;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
     sqlite3_close(dataBase);
+    }
     return 0;
     
 }
 
-+(NSString*) GetNewStartOverNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) INNINGSNO {
+-(NSString*) GetNewStartOverNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) INNINGSNO {
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -327,7 +351,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT MAX(ENDOVER) as ENDOVER  FROM	  SESSIONEVENTS  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -335,24 +360,27 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *endOver = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return endOver;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
     sqlite3_close(dataBase);
+    }
     return 0;
     
 
 }
 
 
-+(NSString*)  GetStartBallNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSString*) DAYNO:(NSNumber*) INNINGSNO: (NSString*) STARTOVERNO {
+-(NSString*)  GetStartBallNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSString*) DAYNO:(NSNumber*) INNINGSNO: (NSString*) STARTOVERNO {
    
     
     int retVal;
@@ -363,7 +391,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT MIN(BALLNO) AS STARTOVERBALLNO  FROM   BALLEVENTS  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND SESSIONNO='%@' AND DAYNO='%@' AND INNINGSNO='%@' AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,SESSIONNO,DAYNO,INNINGSNO,STARTOVERNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -371,23 +400,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *endOver = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return endOver;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
+        sqlite3_close(dataBase);
+    }
     return 0;
     
     
 }
 
-+(NSString*) GetEndOverNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSString*) DAYNO:(NSNumber*) INNINGSNO{
+-(NSString*) GetEndOverNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSString*) DAYNO:(NSNumber*) INNINGSNO{
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -397,7 +429,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT MAX(OVERNO) AS ENDOVER FROM   BALLEVENTS WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND SESSIONNO='%@' AND DAYNO='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,SESSIONNO,DAYNO,INNINGSNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -405,23 +438,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *maxOver = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return maxOver;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
     sqlite3_close(dataBase);
+}
     return 0;
     
 
     }
 
-+(NSString*) GetEndBallNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSString*) DAYNO:(NSNumber*) INNINGSNO :(NSString*) ENDOVERNO{
+-(NSString*) GetEndBallNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSString*) DAYNO:(NSNumber*) INNINGSNO :(NSString*) ENDOVERNO{
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -431,31 +467,35 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
-    NSString *query=[NSString stringWithFormat:@"SELECT MAX(BALLNO) AS STARTOVERBALLNO  FROM   BALLEVENTS   WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND SESSIONNO='%@' AND DAYNO='%@' AND INNINGSNO='%@' AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,SESSIONNO,DAYNO,INNINGSNO,ENDOVERNO];
-    stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
     {
-        while(sqlite3_step(statement)==SQLITE_ROW){
-            
-            NSString *maxBallNo = [self getValueByNull:statement :0];
-            
+        NSString *query=[NSString stringWithFormat:@"SELECT MAX(BALLNO) AS STARTOVERBALLNO  FROM   BALLEVENTS   WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND SESSIONNO='%@' AND DAYNO='%@' AND INNINGSNO='%@' AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,SESSIONNO,DAYNO,INNINGSNO,ENDOVERNO];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                NSString *maxBallNo = [self getValueByNull:statement :0];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return maxBallNo;
+                
+                
+            }
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return maxBallNo;
-            
-            
+
         }
+        
+        sqlite3_close(dataBase);
     }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return 0;
     
     
 }
 
-+(NSString*) GetOverStatusForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO :(NSString*) ENDOVERNO{
+-(NSString*) GetOverStatusForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO :(NSString*) ENDOVERNO{
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -465,7 +505,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT OVERSTATUS FROM   OVEREVENTS   WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND INNINGSNO='%@' AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,ENDOVERNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -473,24 +514,27 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *overStatusNo = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return overStatusNo;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
     sqlite3_close(dataBase);
+}
     return 0;
     
     
 }
 
 
-+(NSString*) GetTeamNamesForFetchEndSession:(NSString*) BATTINGTEAMCODE{
+-(NSString*) GetTeamNamesForFetchEndSession:(NSString*) BATTINGTEAMCODE{
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -500,7 +544,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT TEAMNAME FROM TEAMMASTER WHERE TEAMCODE='%@'",BATTINGTEAMCODE];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -508,17 +553,21 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *teamName = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return teamName;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+    
     sqlite3_close(dataBase);
+    }
     return 0;
     
     
@@ -527,7 +576,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(NSString*)GetPenaltyRunsForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE{
+-(NSString*)GetPenaltyRunsForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -536,7 +585,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)  as PENALTYRUNS FROM   PENALTYDETAILS WHERE  COMPETITIONCODE = '%@' AND MATCHCODE = '%@'  AND INNINGSNO IN ('%@', '%@' - 1) AND AWARDEDTOTEAMCODE = '%@' AND (BALLCODE IS NULL OR INNINGSNO < '%@')",COMPETITIONCODE,MATCHCODE,INNINGSNO,INNINGSNO,BATTINGTEAMCODE,INNINGSNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -544,21 +594,25 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *teamName = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return teamName;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
     sqlite3_close(dataBase);
+    }
     return 0;
     }
 
-+(NSString*) GetRunsScoredForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSNumber*) INNINGSNO: (NSString*) DAYNO {
+
+-(NSString*) GetRunsScoredForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSNumber*) INNINGSNO: (NSString*) DAYNO {
     
     
     int retVal;
@@ -569,7 +623,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT  IFNULL(SUM(GRANDTOTAL) ,0) AS RUNSSCORED FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND SESSIONNO='%@'  AND INNINGSNO='%@'  AND DAYNO='%@' ",COMPETITIONCODE,MATCHCODE,SESSIONNO,INNINGSNO,DAYNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -577,25 +632,25 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *teamName = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return teamName;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
     sqlite3_close(dataBase);
+    }
     return 0;
-    
-    
-    
     
 }
 
-+(NSString*) GetWicketLoftForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO: (NSString*) SESSIONNO: (NSString*) DAYNO {
+-(NSString*) GetWicketLoftForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO: (NSString*) SESSIONNO: (NSString*) DAYNO {
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -605,7 +660,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRAWICKETCOUNT FROM BALLEVENTS BALL LEFT JOIN WICKETEVENTS WKT ON BALL.COMPETITIONCODE = WKT.COMPETITIONCODE AND BALL.MATCHCODE = WKT.MATCHCODE AND BALL.INNINGSNO = WKT.INNINGSNO  AND BALL.TEAMCODE = WKT.TEAMCODE AND BALL.BALLCODE = WKT.BALLCODE INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE=WKT.COMPETITIONCODE AND MR.MATCHCODE=WKT.MATCHCODE  AND MR.RECORDSTATUS='MSC001' WHERE  BALL.COMPETITIONCODE='%@' AND BALL.MATCHCODE='%@'  AND BALL.INNINGSNO='%@' AND BALL.SESSIONNO = '%@' AND BALL.DAYNO='%@' ",COMPETITIONCODE,MATCHCODE,INNINGSNO,SESSIONNO,DAYNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -613,17 +669,21 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *teamName = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return teamName;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+    }
     return 0;
     
     
@@ -631,7 +691,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(NSMutableArray*) GetBattingTeamForFetchEndSession:(NSString *)BATTINGTEAMCODE :(NSString *)BOWLINGTEAMCODE
+-(NSMutableArray*) GetBattingTeamForFetchEndSession:(NSString *)BATTINGTEAMCODE :(NSString *)BOWLINGTEAMCODE
 {
     NSMutableArray *GetBattingTeamDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
@@ -659,7 +719,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                     
                     [GetBattingTeamDetails addObject:record];
                 }
-                
+                sqlite3_reset(statement);
             }
     }
     sqlite3_finalize(statement);
@@ -667,7 +727,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return GetBattingTeamDetails;
 }
 
-+(NSMutableArray *) GetBattingTeamUsingBowlingCode:(NSString*) BOWLINGTEAMCODE
+-(NSMutableArray *) GetBattingTeamUsingBowlingCode:(NSString*) BOWLINGTEAMCODE
 {
     NSMutableArray *GetBattingTeamDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
@@ -684,17 +744,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 EndSessionRecords *record=[[EndSessionRecords alloc]init];
-                
-                
                 record.BOWLINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.BOWLINGTEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                
-                
-                
-                
+
                 [GetBattingTeamDetails addObject:record];
             }
-            
+            sqlite3_reset(statement);
         }
     }
     sqlite3_finalize(statement);
@@ -702,7 +757,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return GetBattingTeamDetails;
 }
 
-+(NSMutableArray*) GetMetaSubCode
+-(NSMutableArray*) GetMetaSubCode
 {
     NSMutableArray *GetBattingTeamDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
@@ -723,13 +778,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                 record.METASUBCODE=[self getValueByNull:statement :0];
                 record.METADESCRIPTION=[self getValueByNull:statement :1];
-                
-                
-                
-                
+
                 [GetBattingTeamDetails addObject:record];
             }
-            
+            sqlite3_reset(statement);
         }
     }
     sqlite3_finalize(statement);
@@ -739,7 +791,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(NSMutableArray*) GetSessionEventsForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
+-(NSMutableArray*) GetSessionEventsForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
                         
             {
         NSMutableArray *GetSessionEventDetails=[[NSMutableArray alloc]init];
@@ -776,7 +828,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                         
                         [GetSessionEventDetails addObject:record];
                     }
-                        
+                        sqlite3_reset(statement);
                         }
                     }
                 sqlite3_finalize(statement);
@@ -785,7 +837,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
                                            
 
-+(NSString*) GetStartDateForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
+-(NSString*) GetStartDateForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
    
     
     int retVal;
@@ -796,7 +848,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT MATCHDATE AS STARTDATE FROM	MATCHREGISTRATION WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -804,17 +857,21 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *teamName = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return teamName;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+    }
     return 0;
     
     
@@ -824,7 +881,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-+(NSMutableArray*)getSessionDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
+-(NSMutableArray*)getSessionDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
 
 {
     NSMutableArray *getSession=[[NSMutableArray alloc]init];
@@ -849,18 +906,19 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                 [getSession addObject:record];
             }
-            
+            sqlite3_reset(statement);
         }
     }
     sqlite3_finalize(statement);
     sqlite3_close(dataBase);
+    
     return getSession;
 }
 
 
 
 
-+(NSMutableArray*)GetDateDayWiseForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
+-(NSMutableArray*)GetDateDayWiseForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
 
     {
         NSMutableArray *GetDateDayWiseDetails=[[NSMutableArray alloc]init];
@@ -887,7 +945,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                     
                     [GetDateDayWiseDetails addObject:record];
                 }
-                
+                sqlite3_reset(statement);
             }
         }
     sqlite3_finalize(statement);
@@ -898,7 +956,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
    
 //SP_INSERTENDSESSION----------------------------------------------------------------------
 
-+(NSString*)  GetMatchTypeForInsertEndSession :(NSString*) COMPETITIONCODE{
+-(NSString*)  GetMatchTypeForInsertEndSession :(NSString*) COMPETITIONCODE{
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -908,7 +966,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT MATCHTYPE FROM COMPETITION WHERE  COMPETITIONCODE = '%@'",COMPETITIONCODE];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -916,24 +975,27 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *matchType = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return matchType;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
-    
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+    }
     return 0;
     
     
 }
 
 
-+(NSString*)  GetWicketsForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE:(NSNumber*) INNINGSNO {
+-(NSString*)  GetWicketsForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE:(NSNumber*) INNINGSNO {
     
     
     int retVal;
@@ -944,7 +1006,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
 NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRAWICKETCOUNT FROM   BALLEVENTS BALL  LEFT JOIN WICKETEVENTS WKT ON BALL.COMPETITIONCODE = WKT.COMPETITIONCODE AND BALL.MATCHCODE = WKT.MATCHCODE AND BALL.INNINGSNO = WKT.INNINGSNO AND BALL.TEAMCODE = WKT.TEAMCODE AND BALL.BALLCODE = WKT.BALLCODE WHERE  BALL.COMPETITIONCODE='%@' AND BALL.MATCHCODE='%@' AND BALL.TEAMCODE='%@' AND BALL.INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -952,23 +1015,26 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *wicket = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return wicket;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
+        sqlite3_close(dataBase);
+    }
     return 0;
     
 }
 
 
-+(NSString*)  GetPenaltyRunsForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO:(NSString*) TEAMCODE {
+-(NSString*)  GetPenaltyRunsForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO:(NSString*) TEAMCODE {
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -978,7 +1044,8 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0) AS PENALTYRUNS  FROM PENALTYDETAILS  WHERE   COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO IN ('%@', '%@' - 1)  AND AWARDEDTOTEAMCODE = '%@' AND (BALLCODE IS NULL OR INNINGSNO < '%@')",COMPETITIONCODE,MATCHCODE,INNINGSNO,INNINGSNO,TEAMCODE,INNINGSNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -986,24 +1053,27 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *penalty = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return penalty;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
     sqlite3_close(dataBase);
+    }
     return 0;
     
 }
 
 
 
-+(NSString*)  GetRunsForInsertEndSession:(NSString*) INNINGSNO:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE {
+-(NSString*)  GetRunsForInsertEndSession:(NSString*) INNINGSNO:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE {
     
     
     int retVal;
@@ -1014,7 +1084,8 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(GRANDTOTAL) ,0) AS RUNS FROM   BALLEVENTS 	WHERE  INNINGSNO= '%@' AND COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'",INNINGSNO,COMPETITIONCODE,MATCHCODE,TEAMCODE];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1022,23 +1093,27 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *grandTotal = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return grandTotal;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+    }
     return 0;
     
    }
 
 
-+(NSString*)  GetOverNoForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE:(NSNumber*) INNINGSNO {
+-(NSString*)  GetOverNoForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE:(NSNumber*) INNINGSNO {
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -1048,7 +1123,8 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT MAX(OVERNO) AS MAXOVER FROM BALLEVENTS  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@' ",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1056,22 +1132,26 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *maxOver =[self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return maxOver;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+   
     sqlite3_close(dataBase);
+}
     return 0;
 }
 
 
-+(NSString*)  GetBallNoForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE:(NSString*) OVERNO:(NSNumber*) INNINGSNO {
+-(NSString*)  GetBallNoForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE:(NSString*) OVERNO:(NSNumber*) INNINGSNO {
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -1081,7 +1161,8 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT MAX(BALLNO) AS BALLNO FROM   BALLEVENTS  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND OVERNO='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,OVERNO,INNINGSNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1089,22 +1170,25 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *maxOver = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return maxOver;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
     sqlite3_close(dataBase);
+    }
     return 0;
 
 }
 
-+(NSString*) GetOverStatusForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE:(NSNumber*) INNINGSNO: (NSString*) OVERNO {
+-(NSString*) GetOverStatusForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE:(NSNumber*) INNINGSNO: (NSString*) OVERNO {
     
     
     int retVal;
@@ -1115,7 +1199,8 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT OVERSTATUS FROM   OVEREVENTS  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@' AND OVERNO='%@'  GROUP BY OVERSTATUS ",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1123,22 +1208,26 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *maxOver = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return maxOver;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
+    }
     return 0;
     
 }
 
-+(NSString*)  GetOversPlayedForInsertEndSession:(NSString*) INNINGSNO:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) TEAMCODE {
+-(NSString*)  GetOversPlayedForInsertEndSession:(NSString*) INNINGSNO:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) TEAMCODE {
     
     
     int retVal;
@@ -1149,7 +1238,8 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     retVal=sqlite3_open([databasePath UTF8String], &dataBase);
     if(retVal !=0){
     }
-    
+    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    {
     NSString *query=[NSString stringWithFormat:@"SELECT MAX(GRANDTOTAL) AS RUNS  FROM   BALLEVENTS  WHERE  INNINGSNO='%@' AND COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'",INNINGSNO,COMPETITIONCODE,MATCHCODE,TEAMCODE];
     stmt=[query UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1157,24 +1247,28 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         while(sqlite3_step(statement)==SQLITE_ROW){
             
             NSString *maxOver = [self getValueByNull:statement :0];
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
             return maxOver;
             
             
         }
+        sqlite3_reset(statement);
+        sqlite3_finalize(statement);
+
     }
     
-    sqlite3_finalize(statement);
+   
     sqlite3_close(dataBase);
+}
     return 0;
     
 
 }
 
 
-+(BOOL) GetSessionStartTimeForInsertEndSession:(NSString*) DAYNO:(NSString*) MATCHCODE: (NSString*) CHECKSTARTDATE {
+-(BOOL) GetSessionStartTimeForInsertEndSession:(NSString*) DAYNO:(NSString*) MATCHCODE: (NSString*) CHECKSTARTDATE {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1188,30 +1282,24 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
-           
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
             
-            return NO;
         }
+        sqlite3_close(dataBase);
     }
-   
-    sqlite3_reset(statement);
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
 }
 
 
-+(BOOL) GetCompetitionCodeForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO:(NSString*) TEAMCODE {
+
+-(BOOL) GetCompetitionCodeForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO:(NSString*) TEAMCODE {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1225,24 +1313,24 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
             
-            return NO;
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
 }
 
 
-+(BOOL) GetDayNoInNotExistsForInsertEndSession:(NSString*) SESSIONSTARTTIME:(NSString*) SESSIONENDTIME :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) DAYNO {
+
+-(BOOL) GetDayNoInNotExistsForInsertEndSession:(NSString*) SESSIONSTARTTIME:(NSString*) SESSIONENDTIME :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) DAYNO {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1256,26 +1344,23 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return NO;
+            
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
 }
 
-+(BOOL) GetSessionNoForInsertEndSession:(NSString*) SESSIONSTARTTIME:(NSString*) SESSIONENDTIME :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE  {
+
+-(BOOL) GetSessionNoForInsertEndSession:(NSString*) SESSIONSTARTTIME:(NSString*) SESSIONENDTIME :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE  {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1289,23 +1374,23 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
             
-            return NO;
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
 }
 
-+(BOOL)  GetCompetitionCodeInNotExistsForInsertEndSession:COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) SESSIONNO: (NSString*) DAYNO  {
+
+-(BOOL)  GetCompetitionCodeInNotExistsForInsertEndSession:COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) SESSIONNO: (NSString*) DAYNO  {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1319,25 +1404,25 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
             
-            return NO;
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
 }
 
 
 
-+(BOOL) InsertSessionEventForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) SESSIONNO:(NSString*) STARTTIME : (NSString*) ENDTIME:(NSString*) TEAMCODE: (NSString*) STARTOVER:(NSString*) ENDOVER :(NSString*) TOTALRUNS:(NSString*) TOTALWICKETS :(NSString*) DOMINANTTEAMCODE  {
+
+-(BOOL) InsertSessionEventForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) SESSIONNO:(NSString*) STARTTIME : (NSString*) ENDTIME:(NSString*) TEAMCODE: (NSString*) STARTOVER:(NSString*) ENDOVER :(NSString*) TOTALRUNS:(NSString*) TOTALWICKETS :(NSString*) DOMINANTTEAMCODE  {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1347,27 +1432,32 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO SESSIONEVENTS (COMPETITIONCODE,MATCHCODE, INNINGSNO, DAYNO, SESSIONNO, SESSIONSTARTTIME,SESSIONENDTIME,BATTINGTEAMCODE, STARTOVER, ENDOVER,TOTALRUNS, TOTALWICKETS, DOMINANTTEAMCODE, SESSIONSTATUS) VALUES ('%@', '%@','%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', '%@', 1)", COMPETITIONCODE,MATCHCODE, INNINGSNO,DAYNO ,SESSIONNO, STARTTIME , ENDTIME,TEAMCODE, STARTOVER, ENDOVER , TOTALRUNS,TOTALWICKETS ,DOMINANTTEAMCODE];
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_reset(statement);
-            
-            return YES;
-            
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
         }
-        else {
-            sqlite3_reset(statement);
-            NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
-            return NO;
-        }
+        sqlite3_close(dataBase);
+        
     }
-    sqlite3_reset(statement);
+    
     return NO;
 }
 
 
-
-+(BOOL) GetDayNoForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO {
+-(BOOL) GetDayNoForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1381,26 +1471,26 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
             
-            return NO;
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
 }
 
 
 
 
-+(BOOL) InsertDayEventForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) TEAMCODE:(NSString*) RUNS : (NSString*) OVERBALLNO:(NSString*) WICKETS {
+
+-(BOOL) InsertDayEventForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) TEAMCODE:(NSString*) RUNS : (NSString*) OVERBALLNO:(NSString*) WICKETS {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1410,27 +1500,33 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO DAYEVENTS (COMPETITIONCODE,MATCHCODE,INNINGSNO,STARTTIME,ENDTIME,DAYNO,BATTINGTEAMCODE,TOTALRUNS,TOTALOVERS,TOTALWICKETS,COMMENTS,DAYSTATUS)	VALUES		('%@',	'%@','%@','','','%@','%@','%@','%@','%@','',1)", COMPETITIONCODE,MATCHCODE, INNINGSNO,DAYNO ,TEAMCODE, RUNS , OVERBALLNO,WICKETS];
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_reset(statement);
-            
-            return YES;
-            
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
         }
-        else {
-            sqlite3_reset(statement);
-            NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
-            return NO;
-        }
+        sqlite3_close(dataBase);
+        
     }
-    sqlite3_reset(statement);
+    
     return NO;
 }
 
 //SP_UPDATEENDSESSION-------------------------------
 
-+(BOOL)  GetMatchCodeInNotExists:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE   {
+-(BOOL)  GetMatchCodeInNotExists:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE   {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1444,23 +1540,21 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
             
-            return NO;
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
     return NO;
 }
-
-+(BOOL)updateEndSession:(NSString*) STARTTIME:(NSString*) ENDTIME : (NSString*) DOMINANTTEAMCODE:(NSString*) DAYNO :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO:(NSString*) SESSIONNO
+-(BOOL)updateEndSession:(NSString*) STARTTIME:(NSString*) ENDTIME : (NSString*) DOMINANTTEAMCODE:(NSString*) DAYNO :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO:(NSString*) SESSIONNO
 {
     
     NSString *databasePath = [self getDBPath];
@@ -1471,29 +1565,33 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE SESSIONEVENTS SET SESSIONSTARTTIME = '%@', SESSIONENDTIME = '%@', DOMINANTTEAMCODE = '%@', DAYNO	= '%@' WHERE  COMPETITIONCODE='%@' AND	MATCHCODE='%@' AND INNINGSNO='%@' AND SESSIONNO='%@' AND DAYNO='%@'", STARTTIME,ENDTIME, DOMINANTTEAMCODE,DAYNO ,COMPETITIONCODE, MATCHCODE , INNINGSNO,SESSIONNO,DAYNO];
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_reset(statement);
-            
-            return YES;
-            
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
         }
-        else {
-            sqlite3_reset(statement);
-            NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
-            return NO;
-        }
+        sqlite3_close(dataBase);
+        
     }
-    sqlite3_reset(statement);
+    
     return NO;
 }
-
 //SP_DELETEENDSESSION-----------------------------------------------------------------------------
 
 
-
-+(BOOL) GetBallCodeForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) DAYNO: (NSString*) SESSIONNO   {
+-(BOOL) GetBallCodeForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) DAYNO: (NSString*) SESSIONNO   {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1503,30 +1601,25 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND DAYNO='%@' AND SESSIONNO='%@'+1",COMPETITIONCODE,MATCHCODE,DAYNO,SESSIONNO];
         
-        const char *update_stmt = [updateSQL UTF8String];
-        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return NO;
+            
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
 }
 
-+(BOOL) GetBallCodeWithAddDayNoForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) DAYNO{
+-(BOOL) GetBallCodeWithAddDayNoForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) DAYNO{
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1540,28 +1633,22 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-
-            return NO;
+            
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
-
     return NO;
 }
 
-+(BOOL) GetSessionNoForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) SESSIONNO{
+-(BOOL) GetSessionNoForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) SESSIONNO{
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1575,26 +1662,22 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return NO;
+            
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
 }
 
-+(BOOL)GetSessionNoWithAddDayNoForDeleteEndSession: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString *) INNINGSNO:(NSString*) DAYNO{
+-(BOOL)GetSessionNoWithAddDayNoForDeleteEndSession: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString *) INNINGSNO:(NSString*) DAYNO{
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1608,27 +1691,23 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
             }
-            
-        }
-        else {
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return NO;
+            
         }
+        sqlite3_close(dataBase);
     }
-    sqlite3_reset(statement);
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
     return NO;
 }
 
 
-+(BOOL)DeleteSessionEventsForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) SESSIONNO
+-(BOOL)DeleteSessionEventsForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) SESSIONNO
 {
     
     NSString *databasePath = [self getDBPath];
@@ -1639,30 +1718,29 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM  SESSIONEVENTS  WHERE    COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@' AND DAYNO='%@' AND SESSIONNO='%@' ", COMPETITIONCODE,MATCHCODE ,INNINGSNO,DAYNO, SESSIONNO];
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
-            sqlite3_reset(statement);
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return YES;
-            
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
         }
-        else {
-            sqlite3_reset(statement);
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
-            return NO;
-        }
+        sqlite3_close(dataBase);
+        
     }
-    sqlite3_reset(statement);
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
+    
     return NO;
 }
-
-
 
 
 
