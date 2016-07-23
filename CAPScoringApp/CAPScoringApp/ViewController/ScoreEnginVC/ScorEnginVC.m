@@ -52,15 +52,12 @@
 #import "Batsmancell.h"
 #import "AppealBatsmenRecord.h"
 #import "DeclareInnings.h"
-#import "OtherWicketVC.h"
-
 #import "Other_WicketVC.h"
 #import "NewMatchSetUpVC.h"
 #import "FETCHSEBALLCODEDETAILS.h"
 #import "ScoreEnginEditRecord.h"
 #import "ChangeTeamVC.h"
 #import "InsertSEScoreEngine.h"
-#import "Other_WicketgridVC.h"
 #import "FollowOn.h"
 #import "ChangeTossVC.h"
 #import "UpdateScoreEngine.h"
@@ -77,7 +74,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,Other_WicketgridVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate,Other_WicketDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -200,7 +197,7 @@
     
     PowerPlayVC *powerplayVc;
     Other_WicketVC *otherwicketvc;
-    Other_WicketgridVC *otherwikcetgricvc;
+   // Other_WicketgridVC *otherwikcetgricvc;
     RevicedOverVC * revicedOverVc ;
     RevisedTarget  *revisedTarget;
     PenalityVC *penalityVc;
@@ -8161,19 +8158,20 @@ self.lbl_umpirename.text=@"";
 }
 -(void)OtherWicket
 {
-    otherwikcetgricvc = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
-    otherwikcetgricvc.COMPETITIONCODE=self.competitionCode;
-    otherwikcetgricvc.MATCHCODE =self.matchCode;
-    otherwikcetgricvc.INNINGSNO =fetchSEPageLoadRecord.INNINGSNO;
-    otherwikcetgricvc.TEAMCODE=fetchSEPageLoadRecord.BATTINGTEAMCODE;
-    otherwikcetgricvc.STRIKERCODE=fetchSEPageLoadRecord.strickerPlayerCode;
-    otherwikcetgricvc.NONSTRIKERCODE=fetchSEPageLoadRecord.nonstrickerPlayerCode;
-    otherwikcetgricvc.NONSTRIKERNAME=fetchSEPageLoadRecord.nonstrickerPlayerName;
-    otherwikcetgricvc.MAXOVER=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS];
-    otherwikcetgricvc.MAXBALL=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLS];
-    otherwikcetgricvc.BALLCOUNT=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
-    otherwikcetgricvc.N_WICKETNO=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMWICKETS];
-    otherwikcetgricvc.BALLCODE=fetchSEPageLoadRecord.BOWLTYPECODE;
+    otherwicketvc = [[Other_WicketVC alloc]initWithNibName:@"Other_WicketVC" bundle:nil];
+    otherwicketvc.COMPETITIONCODE=self.competitionCode;
+    otherwicketvc.MATCHCODE =self.matchCode;
+    otherwicketvc.INNINGSNO =fetchSEPageLoadRecord.INNINGSNO;
+    otherwicketvc.TEAMCODE=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    otherwicketvc.STRIKERCODE=fetchSEPageLoadRecord.strickerPlayerCode;
+    otherwicketvc.NONSTRIKERCODE=fetchSEPageLoadRecord.nonstrickerPlayerCode;
+    otherwicketvc.NONSTRIKERNAME=fetchSEPageLoadRecord.nonstrickerPlayerName;
+    otherwicketvc.MAXOVER=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS];
+    otherwicketvc.MAXBALL=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+    otherwicketvc.BALLCOUNT=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
+    otherwicketvc.N_WICKETNO=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMWICKETS];
+    otherwicketvc.BALLCODE=fetchSEPageLoadRecord.BOWLTYPECODE;
+    otherwicketvc.delegate=self;
     
     
     //  otherwicketvc.PLAYERNAME=
@@ -8181,16 +8179,16 @@ self.lbl_umpirename.text=@"";
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
     
     [self.view addSubview:fullview];
-    [fullview addSubview:otherwikcetgricvc.view];
+    [fullview addSubview:otherwicketvc.view];
     
-    otherwikcetgricvc.view.frame =CGRectMake(90, 200, otherwikcetgricvc.view.frame.size.width, otherwikcetgricvc.view.frame.size.height);
+    otherwicketvc.view.frame =CGRectMake(90, 200, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
     
-    otherwikcetgricvc.view.alpha = 0;
-    [otherwikcetgricvc didMoveToParentViewController:self];
+    otherwicketvc.view.alpha = 0;
+    [otherwicketvc didMoveToParentViewController:self];
     
     [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
      {
-         otherwikcetgricvc.view.alpha = 1;
+         otherwicketvc.view.alpha = 1;
      }
                      completion:nil];
     
@@ -8198,26 +8196,26 @@ self.lbl_umpirename.text=@"";
     
     if (IS_IPAD_PRO) {
         
-        otherwikcetgricvc.view.frame =CGRectMake(250, 500, otherwikcetgricvc.view.frame.size.width, otherwikcetgricvc.view.frame.size.height);
-        otherwikcetgricvc.view.alpha = 0;
-        [otherwikcetgricvc didMoveToParentViewController:self];
+        otherwicketvc.view.frame =CGRectMake(250, 500, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
+        otherwicketvc.view.alpha = 0;
+        [otherwicketvc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             otherwikcetgricvc.view.alpha = 1;
+             otherwicketvc.view.alpha = 1;
          }
                          completion:nil];
     }
     
     
     else{
-        otherwikcetgricvc.view.frame =CGRectMake(100, 200, otherwikcetgricvc.view.frame.size.width, otherwikcetgricvc.view.frame.size.height);
-        otherwikcetgricvc.view.alpha = 0;
-        [otherwikcetgricvc didMoveToParentViewController:self];
+        otherwicketvc.view.frame =CGRectMake(100, 200, otherwicketvc.view.frame.size.width, otherwicketvc.view.frame.size.height);
+        otherwicketvc.view.alpha = 0;
+        [otherwicketvc didMoveToParentViewController:self];
         
         [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
          {
-             otherwikcetgricvc.view.alpha = 1;
+             otherwicketvc.view.alpha = 1;
          }
                          completion:nil];
     }
