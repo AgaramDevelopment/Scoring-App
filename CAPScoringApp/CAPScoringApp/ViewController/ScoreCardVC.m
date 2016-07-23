@@ -74,7 +74,7 @@ int bowlerPostion = 0;
     _lbl_firstIngsTeamName.text = _FIRSTINNINGSSHORTNAME;
     _lbl_secIngsTeamName.text =  [_SECONDINNINGSSHORTNAME isEqual:@""]?_BOWLTEAMSHORTNAME:_SECONDINNINGSSHORTNAME;
     
-    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)_BATTEAMRUNS,(unsigned long)fetchSEpage.BATTEAMWICKETS];
+    _lbl_battingScoreWkts.text = [NSString stringWithFormat:@"%ld / %ld",(unsigned long)_BATTEAMRUNS,(unsigned long) _BATTEAMWICKETS];
     
     _lbl_overs.text = [NSString stringWithFormat:@"%ld.%ld OVS" ,(unsigned long)_BATTEAMOVERS,(unsigned long)_BATTEAMOVRBALLS];
     
@@ -97,12 +97,7 @@ int bowlerPostion = 0;
     _lbl_teamAfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",_FIRSTINNINGSOVERS];
     
     
-    
-    
-    
-    
-    
-    
+
     
     [self setInitView];
     int btnSize =self.btn_sec_inns_id.frame.origin.x;
@@ -128,6 +123,12 @@ int bowlerPostion = 0;
     
     [self teamLogo];
     
+if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] || [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) &&[inningsNo isEqualToString:@"1"]) {
+    
+    
+        [self.btn_sec_inns_id setHidden:YES];
+        
+    }
     
 
 }
@@ -265,6 +266,7 @@ int bowlerPostion = 0;
             self.batsmanCell = nil;
             
         }
+        
         if ([battingSummaryDetailsForSB.WICKETDESCRIPTION isEqualToString:@"NOT OUT"]) {
         cell.lbl_player_name.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(115/255.0f) alpha:1.0f];
          cell.lbl_sr.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(115/255.0f) alpha:1.0f];
