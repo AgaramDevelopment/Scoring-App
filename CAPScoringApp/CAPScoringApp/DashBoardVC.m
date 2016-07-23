@@ -720,7 +720,7 @@
             [self officialcodeimage];
             [self groundcodeimage];
             
-        [self showDialog1:@"SYNC DATA COMPLETED" andTitle:@""];
+        [self showDialog1:@"SYNC DATA COMPLETED" andTitle:@"info"];
             
             }
             
@@ -750,7 +750,7 @@
      }
     
      else{
-          [self showDialog:@"Network Error" andTitle:@""];
+          [self showDialog:@"Network Error" andTitle:@"Alert"];
      }
     
 }
@@ -809,7 +809,7 @@
     
     
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Sign Out"
                                                    message: @"Are You Sure Want to Signout?"
                                                   delegate: self
                                          cancelButtonTitle:@"Signout"
