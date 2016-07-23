@@ -541,7 +541,7 @@ EditModeVC * objEditModeVc;
                                                              alpha:0.36]];
     
     int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAK",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAKS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
     {
         if(inningsno > 1)
@@ -7957,7 +7957,7 @@ self.lbl_umpirename.text=@"";
        [self addChildViewController:endSession];
         [fullview addSubview:endSession.view];
        
-       [endSession fetchPageEndSession:fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
+       [endSession fetchPageEndSession :fetchSEPageLoadRecord :self.competitionCode:self.matchCode];
        
     }
     

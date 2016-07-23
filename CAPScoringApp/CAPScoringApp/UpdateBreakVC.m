@@ -12,6 +12,7 @@
 #import "Reachability.h"
 #import "Utitliy.h"
 #import "AppDelegate.h"
+#import "BreakVC.h"
 
 @interface UpdateBreakVC ()
 {
@@ -87,6 +88,12 @@ NSString *DURATION;
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    
+    BOOL test= [[NSUserDefaults standardUserDefaults] boolForKey:@"switch"];
+    NSLog(@"%@",test?@"YES":@"NO");
+    [_updateSwitch setOn:test animated:YES];
+}
 
 
 
@@ -240,13 +247,28 @@ NSString *DURATION;
 
 
 
+//- (IBAction)Switch_minuts:(UISwitch*)sender {
+//    
+//    [[NSUserDefaults standardUserDefaults] setBool:sender.isOn forKey:@"switch"];
+//    if([_mySwitch isOn]){
+//        NSString *checkoffon=@"1";
+//        [checkoffon isEqual:@"1"];
+//        ISINCLUDEDURATION=@"1";
+//        NSLog(@"Switch is ON 1");
+//    } else{
+//        
+//        ISINCLUDEDURATION=@"0";
+//        NSLog(@"Switch is OFF 0");
+//    }
+//}
+//
 
 
 
-- (IBAction)Switch_minuts:(id)sender {
+- (IBAction)Switch_minuts:(UISwitch*)sender {
     
-    if([sender isOn]){
-        
+    [[NSUserDefaults standardUserDefaults] setBool:sender.isOn forKey:@"switch"];
+    if([_updateSwitch isOn]){
         NSString *checkoffon=@"1";
         [checkoffon isEqual:@"1"];
         ISINCLUDEDURATION=@"1";
@@ -262,7 +284,31 @@ NSString *DURATION;
     
     BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
 
-    
+    if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil && [self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil && [self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Start Time\nPlease Select End Time\nPlease Add Comments"];
+    }
+    else if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Start Time"];
+    }
+    else if([self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil)
+    {
+        [self ShowAlterView:@"Please Select End Time"];
+    }
+    else if([self.lbl_Duration.text integerValue]<=0){
+        [self ShowAlterView:@"Duration should be greated than zero"];
+    }
+    //    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)
+    //    {
+    //        [self ShowAlterView:@"Duration Not Calculated"];
+    //    }
+    else if([self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
+    {
+        [self ShowAlterView:@"Please Add Comments"];
+    }
+
+    else{
     [ self UpdateBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
     
     //  [self startService:@"UPDATE"];
@@ -290,10 +336,16 @@ NSString *DURATION;
                      completion:nil];
     
     
-    
+    }
     
 }
 
+
+-(void)ShowAlterView:(NSString *) alterMsg
+{
+    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [objAlter show];
+}
 
 
 
@@ -383,13 +435,13 @@ BREAKCOMMENTS:ISINCLUDEDURATION:BREAKNO;
 - (IBAction)bck_btn:(id)sender {
     
     
-    AddBreakVC*add = [[AddBreakVC alloc]initWithNibName:@"AddBreakVC" bundle:nil];
+    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
     
 
     add.COMPETITIONCODE=self.COMPETITIONCODE;
     add.MATCHCODE=self.MATCHCODE;
     add.INNINGSNO=self.INNINGSNO;
-     add.test=self.test;
+   //  add.test=self.test;
     add.MATCHDATE=self.MATCHDATE;
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];

@@ -34,6 +34,7 @@
                 <outlet property="date_picker" destination="2Ji-ua-MD8" id="ali-wY-Nqu"/>
                 <outlet property="date_picker1" destination="tFR-v9-se5" id="8tD-5M-2uS"/>
                 <outlet property="lbl_Duration" destination="Y5n-yS-jXa" id="sUt-so-0o3"/>
+                <outlet property="mySwitch" destination="79j-du-Ofq" id="gOR-Xb-Hpe"/>
                 <outlet property="text_Comments" destination="iLn-fs-VZQ" id="quD-Mt-t92"/>
                 <outlet property="text_EndBreak" destination="j5c-fG-Kaw" id="jwl-23-YSF"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
