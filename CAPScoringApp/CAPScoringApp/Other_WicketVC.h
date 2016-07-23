@@ -9,7 +9,19 @@
 #import <UIKit/UIKit.h>
 #import "ScorEnginVC.h"
 
+
+@protocol Other_WicketDelegate <NSObject>
+@required
+
+- (void) ChangeVCBackBtnAction;
+@end
+
+
+
+
 @interface Other_WicketVC : UIViewController
+
+@property(nonatomic,strong) id <Other_WicketDelegate> delegate;
 
 @property (strong, nonatomic) IBOutlet UIView *WICKET_VIEW;
 
@@ -66,6 +78,10 @@
 
 
 @property (strong, nonatomic) IBOutlet UILabel *WICKET_NO_LBL;
+
+@property (strong,nonatomic) IBOutlet UIView * WickAddview;
+
+@property (strong,nonatomic) IBOutlet UITableView * tbl_Wicketlist;
 
 
 @end
