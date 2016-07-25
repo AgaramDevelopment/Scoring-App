@@ -183,12 +183,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT  USERCODE  FROM Userdetails WHERE  strftime('%%Y-%%m-%%d %%H:%%M:%%S', LICENSEUPTO) >= datetime('now') AND USERCODE = '%@'",userId];
-        NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -221,12 +219,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT  USERNAME  FROM SECUREIDDETAILS WHERE  strftime('%%Y-%%m-%%d %%H:%%M:%%S', ENDDATE) >= datetime('now') AND USERNAME = '%@'",USERNAME];
-        NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -259,12 +255,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT USERCODE,LOGINID  FROM Userdetails WHERE  LOGINID = '%@' AND PASSWORD = '%@' AND RECORDSTATUS = 'MSC001'",userName,password];
-        NSLog(@"%@",query);
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
                 
                 UserRecord *record=[[UserRecord alloc]init];
                 record.userCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -301,12 +295,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         
         NSString *query=[NSString stringWithFormat:@"SELECT MR.TEAMACODE AS TEAMCODE,TMA.TEAMNAME AS TEAMNAME FROM MATCHREGISTRATION MR INNER JOIN TEAMMASTER TMA ON TMA.TEAMCODE = MR.TEAMACODE WHERE MR.MATCHCODE = '%@' UNION SELECT MR.TEAMBCODE AS TEAMCODE,TMB.TEAMNAME AS TEAMNAME  FROM MATCHREGISTRATION MR INNER JOIN TEAMMASTER TMB ON TMB.TEAMCODE = MR.TEAMBCODE WHERE MR.MATCHCODE = '%@'", MATCHCODE,MATCHCODE];
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
+                
                 
                 EventRecord *record=[[EventRecord alloc]init];
                 //need to edit
@@ -380,12 +374,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME,PM.BATTINGSTYLE FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE  AND MTP.RECORDSTATUS='MSC001' WHERE MTP.MATCHCODE='%@'  AND MTP.TEAMCODE='%@'", MATCHCODE,TeamCODE];
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
+                
                 
                 TossDeatilsEvent *record=[[TossDeatilsEvent alloc]init];
                 //need to edit
@@ -424,12 +418,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         //(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)
         NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE INNER JOIN MATCHREGISTRATION MR ON MR.MATCHCODE=MTP.MATCHCODE  AND MTP.PLAYERCODE!=MR.TEAMAWICKETKEEPER AND  MTP.PLAYERCODE!=MR.TEAMBWICKETKEEPER AND MTP.RECORDSTATUS='MSC001' WHERE MTP.MATCHCODE='%@'  AND MTP.TEAMCODE='%@'", MATCHCODE,TeamCODE];
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
+                
                 
                 BowlerEvent *record=[[BowlerEvent alloc]init];
                 //need to edit
@@ -744,12 +738,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT PM.PLAYERCODE, PM.PLAYERNAME,MTPD.RECORDSTATUS,MTPD.PLAYINGORDER  FROM PLAYERTEAMDETAILS AS PTD INNER JOIN PLAYERMASTER AS PM ON PTD.PLAYERCODE = PM.PLAYERCODE INNER JOIN MATCHTEAMPLAYERDETAILS MTPD ON MTPD.PLAYERCODE = PTD.PLAYERCODE  WHERE PM.RECORDSTATUS = 'MSC001' AND PTD.RECORDSTATUS = 'MSC001'  AND PTD.TEAMCODE = '%@' AND MTPD.MATCHCODE = '%@'  ORDER BY MTPD.PLAYINGORDER",teamCode,matchCode];
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
+                
                 
                 SelectPlayerRecord *record=[[SelectPlayerRecord alloc]init];
                 record.playerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -1217,12 +1211,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT BOWLTYPECODE,BOWLTYPE FROM BOWLTYPE WHERE BOWLERTYPE = 'MSC016' AND RECORDSTATUS = 'MSC001'"];
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
+                
                 
                 BowlAndShotTypeRecords *bowlTypeRecord = [[BowlAndShotTypeRecords alloc]init];
                 bowlTypeRecord.BowlTypeCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -1255,12 +1249,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT BOWLTYPECODE,BOWLTYPE FROM BOWLTYPE WHERE BOWLERTYPE = 'MSC015' AND RECORDSTATUS = 'MSC001'"];
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
+                
                 
                 BowlAndShotTypeRecords *bowlTypeRecord = [[BowlAndShotTypeRecords alloc]init];
                 bowlTypeRecord.BowlTypeCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -1292,12 +1286,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT SHOTCODE,SHOTNAME FROM SHOTTYPE WHERE SHOTTYPE = 'MSC005' AND RECORDSTATUS = 'MSC001'"];
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
+                
                 
                 BowlAndShotTypeRecords *shotTypeRecord = [[BowlAndShotTypeRecords alloc]init];
                 shotTypeRecord.ShotTypeCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -1330,12 +1324,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT SHOTCODE,SHOTNAME FROM SHOTTYPE WHERE SHOTTYPE = 'MSC006' AND RECORDSTATUS = 'MSC001'"];
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
+                
                 
                 BowlAndShotTypeRecords *shotTypeRecord = [[BowlAndShotTypeRecords alloc]init];
                 shotTypeRecord.ShotTypeCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -1410,12 +1404,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE INNER JOIN MATCHREGISTRATION MR ON MR.MATCHCODE=MTP.MATCHCODE WHERE MTP.MATCHCODE='%@'AND MTP.TEAMCODE=(CASE WHEN MR.TEAMACODE='%@' THEN MR.TEAMBCODE ELSE MR.TEAMACODE END)",MATCHCODE,TEAMCODE];
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
+                
                 
                 BowlerEvent *record=[[BowlerEvent alloc]init];
                 //need to edit
@@ -1957,12 +1951,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         NSString *query=[NSString stringWithFormat:@"SELECT METASUBCODE,METADATATYPECODE,METADATATYPEDESCRIPTION,METASUBCODEDESCRIPTION FROM METADATA WHERE METADATATYPECODE ='MDT021' AND (METASUBCODE !='MSC133'  AND METASUBCODE !='MSC108'  AND METASUBCODE !='MSC107'  AND METASUBCODE !='MSC102'  AND METASUBCODE !='MSC101')"];
         
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
+                
                 
                 WicketTypeRecord *record=[[WicketTypeRecord alloc]init];
                 
@@ -2000,12 +1994,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *query=[NSString stringWithFormat:@"SELECT MTP.PLAYERCODE ,PM.PLAYERNAME FROM MATCHTEAMPLAYERDETAILS  MTP INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE=MTP.PLAYERCODE INNER JOIN TEAMMASTER TM ON TM.TEAMCODE=MTP.TEAMCODE INNER JOIN MATCHREGISTRATION MR ON MR.MATCHCODE=MTP.MATCHCODE WHERE MTP.MATCHCODE='%@'  AND MTP.TEAMCODE='%@'", MATCHCODE,TeamCODE];
         
         
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSLog(@"Success");
+                
                 
                 BowlerEvent *record=[[BowlerEvent alloc]init];
                 //need to edit
@@ -9977,7 +9971,7 @@ return @"";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYCODE FROM POWERPLAY WHERE (('%@'<= STARTOVER AND '%@' >= STARTOVER) OR ('%@'<= ENDOVER AND '%@'>= ENDOVER) OR ('%@'>=STARTOVER AND '%@'<= ENDOVER))AND  MATCHCODE='%@' AND INNINGSNO='%@'  AND RECORDSTATUS='MSC001' ",STARTOVER,ENDOVER,STARTOVER,ENDOVER,STARTOVER,ENDOVER,MATCHCODE,INNINGSNO];
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -10010,7 +10004,7 @@ return @"";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT POWERPLAYTYPE FROM POWERPLAY  WHERE MATCHCODE='%@' AND INNINGSNO='%@' AND POWERPLAYTYPE='%@' AND RECORDSTATUS ='MSC001'",MATCHCODE,INNINGSNO,POWERPLAYTYPE];
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -10073,7 +10067,7 @@ return @"";
         
         
         NSString *query=[NSString stringWithFormat:@"SELECT * FROM POWERPLAY WHERE (('%@'<= STARTOVER AND '%@' >= STARTOVER) OR ('%@'<= ENDOVER AND '%@'>= ENDOVER) OR ('%@'>=STARTOVER AND '%@'<= ENDOVER))AND  MATCHCODE='%@' AND INNINGSNO='%@'AND POWERPLAYCODE<>'%@'  AND RECORDSTATUS='MSC001' ",STARTOVER,ENDOVER,STARTOVER,ENDOVER,STARTOVER,ENDOVER,MATCHCODE,INNINGSNO,POWERPLAYCODE];
-        NSLog(@"%@",query);
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
