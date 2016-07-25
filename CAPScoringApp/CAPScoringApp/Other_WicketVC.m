@@ -53,6 +53,9 @@
     BOOL isWicketlist;
     DBManagerInsertScoreEngine *dbInsertScoreEngine;
     DbManager_OtherWicket *dbOtherWicket;
+    NSMutableArray * GetWicketEventsPlayerDetails;
+    
+    
 //    NSString  *N_WICKETNO;
 //    NSString  *N_WICKETTYPE;
   //  NSString  *N_FIELDERCODE;
@@ -941,6 +944,15 @@ else
         
    
         [dbOtherWicket UpdateBattingSummaryForUpdateOtherwicket :  WICKETNO: WICKETTYPE: N_FIELDERCODE : TOTALRUNS:COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO: WICKETPLAYER];
+        
+        self.WickAddview.hidden=NO;
+        self.Btn_Add.hidden =NO;
+        isWicketlist=NO;
+        GetWicketEventsPlayerDetails=[[NSMutableArray alloc]init];
+        //GetWicketEventsPlayerDetails= wicketdetailss;
+        //[self.tbl_Wicketlist reloadData];
+
+        
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Other Wicket Updated Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
 
