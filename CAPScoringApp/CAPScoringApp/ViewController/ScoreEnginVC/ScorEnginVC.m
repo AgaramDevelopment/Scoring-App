@@ -801,7 +801,7 @@
     //Team Details
     
     fetchSEPageLoadRecord.BATTINGTEAMCODE = fetchSeBallCodeDetails.BATTINGTEAMCODE;
-    fetchSEPageLoadRecord.INNINGSNO = fetchSeBallCodeDetails.INNINGSNO;
+    fetchSEPageLoadRecord.INNINGSNO = [NSString stringWithFormat:@"%d",fetchSeBallCodeDetails.INNINGSNO.intValue];
     fetchSEPageLoadRecord.SESSIONNO = fetchSeBallCodeDetails.SESSIONNO;
     fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT = fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT;
     

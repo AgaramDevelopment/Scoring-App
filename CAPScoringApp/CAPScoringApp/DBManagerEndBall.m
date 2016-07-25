@@ -301,7 +301,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
     NSString *query=[NSString stringWithFormat:@"SELECT OVERSTATUS FROM OVEREVENTS WHERE COMPETITIONCODE= '%@'	AND MATCHCODE= '%@'	AND TEAMCODE= '%@' AND INNINGSNO= '%@' AND OVERNO= '%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,F_OVERS];
     stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
@@ -335,7 +335,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     NSString *query=[NSString stringWithFormat:@"SELECT COUNT(BOWLERCODE) AS BOWLERCOUNT FROM BOWLEROVERDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERS];
     stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+       if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
@@ -947,7 +947,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+       if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
 
     
@@ -984,7 +984,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+       if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
 
     
@@ -1023,7 +1023,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+       if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
 
     
@@ -1060,7 +1060,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+       if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
 
     
@@ -1169,7 +1169,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+       if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
 
     
@@ -1243,7 +1243,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+       if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
 
     
@@ -1278,7 +1278,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+       if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
 
     
@@ -1315,7 +1315,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+       if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
 
     
@@ -1857,7 +1857,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+       if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
 
     
@@ -2131,7 +2131,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+       if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
 
     
@@ -2166,7 +2166,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+   if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
 
     
@@ -2325,7 +2325,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     NSString *query=[NSString stringWithFormat:@"SELECT COUNT(1) AS OtheroverBallcnt FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO =  '%@' AND OVERNO = '%@' AND ISLEGALBALL = 1",COMPETITIONCODE,MATCHCODE,INNINGSNO, OVERNO];
     stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             
@@ -2396,7 +2396,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     NSString *query=[NSString stringWithFormat:@"SELECT CASE WHEN (IFNULL(SUM(TOTALRUNS+NOBALL+WIDE),0) = 0) THEN 1 ELSE 0 END AS IsMaidenOver	FROM BALLEVENTS	WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO, OVERNO];
     
     stmt=[query UTF8String];
-    if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+   if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
     {
         while(sqlite3_step(statement)==SQLITE_ROW){
             

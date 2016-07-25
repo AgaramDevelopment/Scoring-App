@@ -168,8 +168,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return SESSIONNO;
             }
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
         }
 
         sqlite3_close(dataBase);
@@ -197,8 +197,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return DAYNO;
             }
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
         }
         
         sqlite3_close(dataBase);
@@ -226,8 +226,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return INNINGSSTATUS;
             }
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
         }
         
         sqlite3_close(dataBase);
@@ -564,8 +564,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return GRANDTOTAL;
             }
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
         }
         
         sqlite3_close(dataBase);
@@ -594,8 +594,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return PENALTYRUNS;
             }
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
         }
         
         sqlite3_close(dataBase);
@@ -625,8 +625,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return WICKETNO;
             }
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
         }
 
         sqlite3_close(dataBase);
@@ -689,8 +689,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return GRANDTOTAL;
             }
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
         }
        
         sqlite3_close(dataBase);
@@ -718,8 +718,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return GRANDTOTAL;
             }
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
         }
     
         sqlite3_close(dataBase);
@@ -748,8 +748,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return NOBALL;
             }
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
         }
   
         sqlite3_close(dataBase);
@@ -778,8 +778,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return BALLCODE;
             }
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
         }
 
         sqlite3_close(dataBase);
@@ -807,8 +807,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return STRIKERCODE;
             }
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
         }
         
         sqlite3_close(dataBase);
@@ -910,8 +910,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return BALLCODE;
             }
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
         }
         
         sqlite3_close(dataBase);
@@ -939,12 +939,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 return STRIKERCODE;
             }
-            
+            sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+            
         }
     
-        sqlite3_finalize(statement);
         sqlite3_close(dataBase);
     }
    
@@ -1077,8 +1076,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 return WICKETNO;
             }
            
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
 
         }
         sqlite3_close(dataBase);
@@ -1108,8 +1107,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 return BOWLERCODE;
             }
  
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
 
         }
 
@@ -1139,8 +1138,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 return ISPARTIALOVER;
             }
    
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
 
         }
       
@@ -1200,8 +1199,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 return BOWLERSPELL;
             }
        
+             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
 
         }
        
@@ -1302,8 +1301,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 return ISINNINGSLASTOVER;
             }
        
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
+             sqlite3_reset(statement);
+                sqlite3_finalize(statement);
 
         }
        

@@ -1107,7 +1107,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS   SET CURRENTSTRIKERCODE = '%@',   CURRENTNONSTRIKERCODE = '%@',   CURRENTBOWLERCODE = '%@'   WHERE COMPETITIONCODE = '%@'    AND MATCHCODE = '%@'     AND TEAMCODE = '%@'     AND INNINGSNO = '%@'"      , T_STRIKERCODE       , T_NONSTRIKERCODE       , BOWLERCODE       , COMPETITIONCODE       , MATCHCODE,TEAMCODE, INNINGSNO ];
         const char *selectStmt = [updateSQL UTF8String];
 
-        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)       {
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+       
        {
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
@@ -1130,6 +1131,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
    
     return NO;
 }
+    
+    
 -(BOOL)  InsertWicketEventsForInsertScoreEngine:(NSNumber*) BALLCODENO: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSString*) TEAMCODE : (NSNumber*) INNINGSNO:(NSString*) ISWICKET :(NSString*) WICKETTYPE :(NSString*) WICKETPLAYER :(NSString*) FIELDINGPLAYER :(NSString*) WICKETEVENT{
     
     
