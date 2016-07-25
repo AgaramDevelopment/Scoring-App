@@ -3716,8 +3716,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS BALL WHERE BALL.COMPETITIONCODE = '%@' AND BALL.MATCHCODE = '%@' AND BALL.TEAMCODE = '%@' AND BALL.INNINGSNO = '%@' AND BALL.BALLCODE = '%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,BALLCODE];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
@@ -3942,7 +3941,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
 
-        if (sqlite3_step(statement) == SQLITE_DONE)
         {
             
             while(sqlite3_step(statement)==SQLITE_ROW){
@@ -3952,12 +3950,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             }
             
         }
-        else {
-            sqlite3_reset(statement);
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return NO;
-        }
+        
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
             
@@ -4955,8 +4948,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -4992,8 +4984,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *query = [NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO IN (2, 3) AND AWARDEDTOTEAMCODE = '%@'",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE];
         stmt=[query UTF8String];
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5029,8 +5020,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5066,8 +5056,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5104,8 +5093,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *query = [NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = 1 AND AWARDEDTOTEAMCODE = '%@' AND BALLCODE IS NULL",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE];
         stmt=[query UTF8String];
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5144,8 +5132,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5182,8 +5169,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *query = [NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' - 1 AND AWARDEDTOTEAMCODE = '%@' AND BALLCODE IS NULL",COMPETITIONCODE,MATCHCODE,INNINGSNO, BATTINGTEAMCODE];
         stmt=[query UTF8String];
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5222,8 +5208,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5259,8 +5244,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5296,8 +5280,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *query = [NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO <= '%@' AND AWARDEDTOTEAMCODE = '%@' AND ((INNINGSNO = '%@' AND BALLCODE IS NULL) OR ((INNINGSNO < '%@' AND BALLCODE IS NULL) OR PENALTYTYPECODE = 'MSC135'))",COMPETITIONCODE,MATCHCODE,INNINGSNO, BATTINGTEAMCODE,INNINGSNO,INNINGSNO];
         stmt=[query UTF8String];
        if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *COMPETITIONCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5336,8 +5319,7 @@ return @"";
         
     
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5378,8 +5360,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5416,8 +5397,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5454,8 +5434,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5493,8 +5472,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5530,8 +5508,6 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5541,7 +5517,7 @@ return @"";
                     return TOTAL;
                 }
                 
-            }
+            
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
         }
@@ -5570,8 +5546,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5609,8 +5584,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5646,8 +5620,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5684,8 +5657,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5723,8 +5695,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5762,8 +5733,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5799,8 +5769,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5837,8 +5806,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5876,8 +5844,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -5915,8 +5882,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -6016,8 +5982,7 @@ return @"";
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -6055,8 +6020,7 @@ return @"";
         
         stmt=[query UTF8String];
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -6127,19 +6091,13 @@ return @"";
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT FIELDINGFACTORCODE, FIELDINGFACTOR FROM FIELDINGFACTOR WHERE RECORDSTATUS = 'MSC001' ORDER BY DISPLAYORDER"];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
+            while(sqlite3_step(statement)==SQLITE_ROW)
             {
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
                 
-            }
-            else {
-                sqlite3_reset(statement);
-                sqlite3_finalize(statement);
-                sqlite3_close(dataBase);
-                return NO;
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
@@ -6165,20 +6123,15 @@ return @"";
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT PM.PLAYERCODE PLAYERCODE, PM.PLAYERNAME PLAYERNAME FROM MATCHTEAMPLAYERDETAILS MPD INNER JOIN TEAMMASTER TMA ON MPD.MATCHCODE = '%@' AND MPD.TEAMCODE = '%@' AND MPD.TEAMCODE = TMA.TEAMCODE INNER JOIN PLAYERMASTER PM ON MPD.PLAYERCODE = PM.PLAYERCODE",MATCHCODE,TEAMCODE];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
                 
             }
-            else {
-                sqlite3_reset(statement);
-                sqlite3_finalize(statement);
-                sqlite3_close(dataBase);
-                return NO;
-            }
+            
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
         }
@@ -6204,20 +6157,14 @@ return @"";
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT FE.BALLCODE,BE.OVERNO,BE.BALLNO,(CONVERT(NVARCHAR,BE.OVERNO)+'.'+CONVERT(NVARCHAR,BE.BALLNO)) AS [OVER], FE.FIELDERCODE, PM.PLAYERNAME AS FIELDERNAME,FE.FIELDINGFACTORCODE AS FIELDINGEVENTSCODE, UPPER(FF.FIELDINGFACTOR) AS FIELDINGEVENTS,FE.NRS AS NETRUNS, 'F' AS FLAG FROM FIELDINGEVENTS FE INNER JOIN BALLEVENTS BE ON FE.BALLCODE = BE.BALLCODE INNER JOIN FIELDINGFACTOR FF ON FE.FIELDINGFACTORCODE = FF.FIELDINGFACTORCODE INNER JOIN PLAYERMASTER PM ON FE.FIELDERCODE = PM.PLAYERCODE WHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@' AND BE.TEAMCODE <> '%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+            while(sqlite3_step(statement)==SQLITE_ROW){
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
                 
             }
-            else {
-                sqlite3_reset(statement);
-                sqlite3_finalize(statement);
-                sqlite3_close(dataBase);
-                return NO;
-            }
+           
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
         }
@@ -6351,20 +6298,15 @@ return @"";
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
                 
             }
-            else {
-                sqlite3_reset(statement);
-                sqlite3_finalize(statement);
-                sqlite3_close(dataBase);
-                return NO;
-            }
+            
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
         }
@@ -6420,8 +6362,7 @@ return @"";
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT COMPETITIONCODE FROM INNINGSBREAKEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE='%@' AND INNINGSNO = '%@' AND BREAKSTARTTIME='%@' AND BREAKENDTIME='%@' AND BREAKCOMMENTS ='%@' AND ISINCLUDEINPLAYERDURATION='%@' AND BREAKNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,BREAKSTARTTIME,BREAKENDTIME,BREAKCOMMENTS,ISINCLUDEDURATION,BREAKNO];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -6559,8 +6500,7 @@ return @"";
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -6776,8 +6716,7 @@ return @"";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
 
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *BREAKNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -6888,8 +6827,7 @@ return @"";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
 
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 DeleteEventRecord *record=[[DeleteEventRecord alloc]init];
                 record.BREAKNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -6925,8 +6863,7 @@ return @"";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
 
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *BREAKNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -7704,8 +7641,7 @@ return @"";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
 
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *BATSUMCOUNT =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -8416,8 +8352,7 @@ return @"";
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 NSString *COMPETITIONCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_reset(statement);
@@ -8452,8 +8387,7 @@ return @"";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
 
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 INNINGSCOUNT =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -8515,8 +8449,7 @@ return @"";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
 
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 NSString *SESSIONNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_reset(statement);
@@ -8588,8 +8521,7 @@ return @"";
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *DAYNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -8658,8 +8590,7 @@ return @"";
         
         const char *update_stmt = [updateSQL UTF8String];
     if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *COMPETITIONCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -8732,8 +8663,7 @@ return @"";
     
     
     if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *TEAMCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -8768,8 +8698,7 @@ return @"";
         const char *update_stmt = [updateSQL UTF8String];
         
     if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *TEAMCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -8804,8 +8733,7 @@ return @"";
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -8837,8 +8765,7 @@ return @"";
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -8873,8 +8800,7 @@ return @"";
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -8908,8 +8834,7 @@ return @"";
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-            if (sqlite3_step(statement) == SQLITE_DONE)
-            {
+                        {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
                     NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
@@ -9214,8 +9139,7 @@ return @"";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
 
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
+                {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 EndInnings *record=[[EndInnings alloc]init];
                 record.STARTTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
