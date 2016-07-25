@@ -853,8 +853,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
-        {
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)        {
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
                 sqlite3_reset(statement);
@@ -890,8 +889,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
-        {
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)        {
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
                 sqlite3_reset(statement);
@@ -927,8 +925,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
-       {
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)       {
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
@@ -999,8 +996,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [selectQry UTF8String];
         
-        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
-       {
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)       {
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             sqlite3_reset(statement);
@@ -1073,8 +1069,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
 
-        
-        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
        {
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
@@ -1112,9 +1107,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS   SET CURRENTSTRIKERCODE = '%@',   CURRENTNONSTRIKERCODE = '%@',   CURRENTBOWLERCODE = '%@'   WHERE COMPETITIONCODE = '%@'    AND MATCHCODE = '%@'     AND TEAMCODE = '%@'     AND INNINGSNO = '%@'"      , T_STRIKERCODE       , T_NONSTRIKERCODE       , BOWLERCODE       , COMPETITIONCODE       , MATCHCODE,TEAMCODE, INNINGSNO ];
         const char *selectStmt = [updateSQL UTF8String];
 
-        
-        
-        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)       {
        {
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
@@ -1148,10 +1141,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         NSString *updateSQL = [NSString stringWithFormat:@" INSERT INTO WICKETEVENTS  (    BALLCODE,   COMPETITIONCODE,   MATCHCODE,   TEAMCODE,  INNINGSNO,   ISWICKET,   WICKETNO,   WICKETTYPE,    WICKETPLAYER,     FIELDINGPLAYER,     VIDEOLOCATION,     WICKETEVENT     )    VALUES    (     '%@',     '%@',     '%@',     '%@',     '%@',     '%@',     (      SELECT IFNULL(COUNT(WKT.WICKETNO),0) + 1      FROM WICKETEVENTS WKT      WHERE WKT.COMPETITIONCODE = '%@'       AND WKT.MATCHCODE = '%@'      AND WKT.TEAMCODE = '%@'       AND WKT.INNINGSNO = '%@'      AND WKT.WICKETTYPE != 'MSC102'    ),     '%@',     '%@',     '%@',     '',     '%@'    )  "      , BALLCODENO, COMPETITIONCODE  , MATCHCODE,TEAMCODE, INNINGSNO,ISWICKET,COMPETITIONCODE  , MATCHCODE,TEAMCODE, INNINGSNO,WICKETTYPE, WICKETPLAYER,FIELDINGPLAYER,WICKETEVENT];
         
-        const char *selectStmt = [updateSQL UTF8String];
-
         
-        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
+        const char *selectStmt = [updateSQL UTF8String];
+        
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+        
        {
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
