@@ -70,6 +70,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    dbChangeToss = [[DBManagerChangeToss alloc]init];
     self.view_TossWon.layer.borderWidth = 1.0;
     self.view_TossWon.layer.borderColor = [UIColor colorWithRed:(48/255.0f) green:(62/255.0f) blue:(73/255.0f) alpha:1.0f].CGColor;
     
@@ -153,7 +154,7 @@
 -(IBAction)didClickTossWonSelection:(id)sender
 {
 //    CGFloat contentSize=self.Tbl_toss.contentSize.height;
-   
+    
     if(isTossWon ==NO)
     {
      isTossWon=YES;

@@ -94,7 +94,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSString*) GetFollowonForFetchFollowOn:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO {
     
-    int retVal;
+    
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -136,7 +136,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSString*)GetOppositeTeamCodeForFetchTeamNameSelectionChanged: (NSString*) MATCHCODE:(NSString*)TEAMNAME {
     
-    int retVal;
+    
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -299,7 +299,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSString*) GetTeamNamesForUpdateFollowOn :(NSNumber*) TEAMNAME {
     
-    int retVal;
+   
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -335,7 +335,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSString*) GetTotalRunsForUpdateFollowOn :(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO {
     
-    int retVal;
+    
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -371,7 +371,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSString*)  GetOverNoForUpdateFollowOn :(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO{
     
-    int retVal;
+    
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -409,7 +409,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 -(NSString*)  GetBallNoForUpdateFollowOn : (NSString*) COMPETITIONCODE : (NSString*) MATCHCODE :(NSString*) TEAMNAME : (NSString*) INNINGSNO : (NSString*) OVERNO
 {
     
-    int retVal;
+    
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -445,7 +445,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSString *) GetOverStatusForUpdateFollowOn :(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSNumber*) INNINGSNO:(NSString*) OVERNO{
     
-    int retVal;
+    
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -481,7 +481,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSString *) GetBowlingTeamCodeForUpdateFollowOn :(NSString*) COMPETITIONCODE:(NSString*) TEAMNAME: (NSString*) MATCHCODE{
     
-    int retVal;
+    
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -518,7 +518,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSString*)  GetWicketForUpdateFollowOn:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMNAME :(NSString*) INNINGSNO{
     
-    int retVal;
+    
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -776,8 +776,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS  SET   INNINGSSTATUS = 0  WHERE    COMPETITIONCODE = '%@'    AND MATCHCODE = '%@'     AND INNINGSNO = '%@'-1  ",COMPETITIONCODE, MATCHCODE,INNINGSNO];
-        const char *selectStmt = [databasePath UTF8String];
-        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+        const char *selectStmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
@@ -810,9 +810,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM INNINGSEVENTS   WHERE   COMPETITIONCODE = '%@'  AND MATCHCODE = '%@'   AND INNINGSNO = '%@'  ",COMPETITIONCODE, MATCHCODE,INNINGSNO];
-        const char *selectStmt = [databasePath UTF8String];
+        const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
             if (sqlite3_step(statement) == SQLITE_DONE)
             {

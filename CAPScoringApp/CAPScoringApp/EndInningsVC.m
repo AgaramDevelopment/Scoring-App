@@ -274,7 +274,7 @@ BOOL IsBack;
 -(void)showEndDatePicker{
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
     NSDate *selectedDate = [datePicker date];
     NSString *recordDate = [formatter stringFromDate:selectedDate];
     self.txt_endInnings.text=recordDate;
@@ -290,7 +290,7 @@ BOOL IsBack;
     NSString *startEndTF = self.txt_endInnings.text;
     
     formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
     
     NSDate *date1 = [formatter dateFromString:startDateTF];
     NSDate *date2 = [formatter dateFromString:startEndTF];
@@ -382,7 +382,7 @@ BOOL IsBack;
     EndInnings *obj =(EndInnings*)[endInningsArray objectAtIndex:indexPath.row];
     
     formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
     NSString *startDateTF = obj.STARTTIME;
     NSString *startEndTF = obj.ENDTIME;
     
