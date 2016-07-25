@@ -132,8 +132,8 @@
 @property(nonatomic,assign)NSString *BATTEAMRUNRATE;
 
 //Bowlers List
-@property(strong,nonatomic) NSMutableArray* getBowlingTeamPlayers;
-@property(strong,nonatomic) NSMutableArray* getBattingTeamPlayers;
+@property(retain,nonatomic) NSMutableArray* getBowlingTeamPlayers;
+@property(retain,nonatomic) NSMutableArray* getBattingTeamPlayers;
 
 
 

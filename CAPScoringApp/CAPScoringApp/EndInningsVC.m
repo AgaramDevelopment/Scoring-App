@@ -54,10 +54,10 @@ BOOL IsBack;
 }
 -(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE{
     
-
+    DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
     if (fetchRecord !=0 ) {
         
-       MatchDate = [DBManagerEndInnings GetMatchDateForFetchEndInnings : COMPETITIONCODE: MATCHCODE];
+       MatchDate = [dbEndInnings GetMatchDateForFetchEndInnings : COMPETITIONCODE: MATCHCODE];
         
         fetchSePageLoad = [[FetchSEPageLoadRecord alloc]init];
         
@@ -87,7 +87,7 @@ BOOL IsBack;
         
         
         endInningsArray = [[NSMutableArray alloc]init];
-        endInningsArray = [DBManagerEndInnings FetchEndInningsDetailsForFetchEndInnings: MATCHCODE];
+        endInningsArray = [dbEndInnings FetchEndInningsDetailsForFetchEndInnings: MATCHCODE];
         
         
         self.view_allControls.hidden = YES;
@@ -254,7 +254,7 @@ BOOL IsBack;
 -(void)showEndDatePicker{
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
     NSDate *selectedDate = [datePicker date];
     NSString *recordDate = [formatter stringFromDate:selectedDate];
     self.txt_endInnings.text=recordDate;
@@ -270,7 +270,7 @@ BOOL IsBack;
     NSString *startEndTF = self.txt_endInnings.text;
     
     formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
     
     NSDate *date1 = [formatter dateFromString:startDateTF];
     NSDate *date2 = [formatter dateFromString:startEndTF];
@@ -362,7 +362,7 @@ BOOL IsBack;
     EndInnings *obj =(EndInnings*)[endInningsArray objectAtIndex:indexPath.row];
     
     formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
     NSString *startDateTF = obj.STARTTIME;
     NSString *startEndTF = obj.ENDTIME;
     
@@ -380,9 +380,7 @@ BOOL IsBack;
     
     [obj fetchEndInnings :CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
     
-    NSNumber  *total = [DBManagerEndInnings GetTotalRunsForFetchEndInnings : CompetitionCode: MatchCode :obj.BATTINGTEAMCODE :obj.INNINGSNO];
-
-    TOTALRUNS = [NSString stringWithFormat:@"%@",total];
+    
     
   
     
@@ -400,7 +398,7 @@ BOOL IsBack;
     self.txt_endInnings.text = endInningsTime;
     self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
     self.lbl_teamName.text = teamName;
-    self.lbl_runScored.text = TOTALRUNS;
+    self.lbl_runScored.text = [NSString stringWithFormat:@"%@",obj.TOTALRUNS];
     self.lbl_overPlayed.text = obj.OVERBALLNO;
 
     self.lbl_wktLost.text = totalWickets;

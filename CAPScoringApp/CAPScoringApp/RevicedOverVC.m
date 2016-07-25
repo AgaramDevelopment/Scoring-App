@@ -31,8 +31,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    DBManager *objDBManager = [[DBManager alloc]init];
 
-    _selectOvers = [DBManager RetrieveRevisedOverData:self.matchCode competitionCode:self.competitionCode recordstatus:@"MSC001"];
+    _selectOvers = [objDBManager RetrieveRevisedOverData:self.matchCode competitionCode:self.competitionCode recordstatus:@"MSC001"];
     
     
     FixturesRecord *objrevisedoverRecord = [self.selectOvers objectAtIndex:0];
@@ -146,7 +147,9 @@
 -(IBAction)btn_submit:(id)sender
 {
     if([self formValidation]){
-        [DBManager updateRevisedOvers:txt_overs.text comments:txt_commentss.text matchCode:self.matchCode competitionCode:self.competitionCode];
+        DBManager *objDBManager = [[DBManager alloc]init];
+
+        [objDBManager updateRevisedOvers:txt_overs.text comments:txt_commentss.text matchCode:self.matchCode competitionCode:self.competitionCode];
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Revised Over Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
         alter.tag =100;

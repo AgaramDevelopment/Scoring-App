@@ -19,6 +19,8 @@
     NSString *strcomments;
    // NSString *setover;
     NSString *OldOvers;
+    DBManager *objDBManager;
+
 }
 
 @property(nonatomic,strong)NSMutableArray*selecttargets;
@@ -36,14 +38,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
+objDBManager = [[DBManager alloc]init];
    // setover= [DBManager SetMatchRegistrationTarget:self.matchCode competitionCode:self.competitionCode];
   //  [DBManager RetrieveRevisedTargetData:self.matchCode competitionCode:self.competitionCode];
     
     [self.txt_commentss.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.txt_commentss.layer.borderWidth = 2;
     
-   _selecttargets =[DBManager RetrieveRevisedTargetData:self.matchCode competitionCode:self.competitionCode];
+   _selecttargets =[objDBManager RetrieveRevisedTargetData:self.matchCode competitionCode:self.competitionCode];
     
     MatcheventRecord *objrevisedtarget =[self.selecttargets objectAtIndex:0];
     
@@ -196,10 +198,10 @@
 -(void)Insertrevisedtarget:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)TARGETRUNS:(NSString*)TARGETOVERS:(NSString*)TARGETCOMMENTS:(NSString*)INNINGSNO{
     
   //if(INNINGSNO.intValue == 2 || INNINGSNO.intValue == 4){
-         [DBManager updateRevisedTarget:strovers runs:txt_target.text comments:txt_commentss.text matchCode:   self.matchCode competitionCode:self.competitionCode];
+         [objDBManager updateRevisedTarget:strovers runs:txt_target.text comments:txt_commentss.text matchCode:   self.matchCode competitionCode:self.competitionCode];
         
  // }
-    [DBManager RetrieveRevisedTargetData:self.matchCode competitionCode:self.competitionCode];
+    [objDBManager RetrieveRevisedTargetData:self.matchCode competitionCode:self.competitionCode];
 }
    
 

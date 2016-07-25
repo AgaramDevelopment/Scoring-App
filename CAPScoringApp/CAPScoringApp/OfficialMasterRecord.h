@@ -17,4 +17,6 @@
 @property(strong,nonatomic)NSString *umpire3name;
 @property(strong,nonatomic)NSString *matchrefereecode;
 @property(strong,nonatomic)NSString *matchrefereename;
+@property(strong,nonatomic)NSString *scorename2;
+@property(strong,nonatomic)NSString *scorecode;
 @end

@@ -18,7 +18,9 @@
 #import "Utitliy.h"
 
 @interface NewMatchSetUpVC ()
-
+{
+    DBManager *objDBManager;
+}
 @property (nonatomic,strong)NSMutableArray *FetchCompitionArray;
 @property (nonatomic,strong) NSMutableArray *selectedPlayerArray;
 @property (nonatomic,strong) NSMutableArray *selectedPlayerFilterArray;
@@ -43,15 +45,15 @@ NSRegularExpression *isMatchedByRegex;
     
     //fetch data from fixture screen and display in controls
     
-    
+    objDBManager=[[DBManager alloc]init];
     
     
     [self customnavigationmethod];
     
     [self colorChange];
-    
-    _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
-    _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
+
+    _countTeam = [objDBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
+    _countTeamB = [objDBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
     
     self.lbl_teamA.text = self.teamA;
     self.lbl_teamB.text = self.teamB;
@@ -211,7 +213,7 @@ NSRegularExpression *isMatchedByRegex;
     
     //to change selected team players B color after selected 7 players
     
-    NSMutableArray *countTeamB = [DBManager SelectTeamPlayers :self.matchCode teamCode :self.teamBcode];
+    NSMutableArray *countTeamB = [objDBManager SelectTeamPlayers :self.matchCode teamCode :self.teamBcode];
     
     
     
@@ -273,7 +275,7 @@ NSRegularExpression *isMatchedByRegex;
 - (IBAction)btn_selectPlayersTeamA:(id)sender {
     
     //to change selected team players A color after selected 7 players
-    NSMutableArray *countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
+    NSMutableArray *countTeam = [objDBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
     
     
     
@@ -385,8 +387,8 @@ NSRegularExpression *isMatchedByRegex;
 //Validation for over update validation
 -(BOOL) overValidation{
     
-    _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
-    _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
+    _countTeam = [objDBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
+    _countTeamB = [objDBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
     
     FixturesRecord *fixture = (FixturesRecord*) [_countTeam objectAtIndex:0];
     FixturesRecord *fixtureB = (FixturesRecord*) [_countTeamB objectAtIndex:0];
@@ -410,7 +412,7 @@ NSRegularExpression *isMatchedByRegex;
         }
         
         else if (teamCountA >= 7 && teamCountB >= 7){
-            [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
+            [objDBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
             
             MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
             
@@ -438,7 +440,7 @@ NSRegularExpression *isMatchedByRegex;
         }
         
         else if (teamCountA >= 7 && teamCountB >= 7){
-            [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
+            [objDBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
             
             MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
             
@@ -460,7 +462,7 @@ NSRegularExpression *isMatchedByRegex;
         
         
         if (teamCountA >= 7 && teamCountB >= 7){
-            [DBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
+            [objDBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
             
             MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
             
@@ -487,8 +489,8 @@ NSRegularExpression *isMatchedByRegex;
 -(void)colorChange{
     
     
-    _countTeam = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
-    _countTeamB = [DBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
+    _countTeam = [objDBManager SelectTeamPlayers:self.matchCode teamCode:self.teamAcode];
+    _countTeamB = [objDBManager SelectTeamPlayers:self.matchCode teamCode:self.teamBcode];
     
     
     FixturesRecord *fixture = (FixturesRecord*) [_countTeam objectAtIndex:0];

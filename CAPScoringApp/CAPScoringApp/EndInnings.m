@@ -14,6 +14,7 @@
 #import "EndInningsVC.h"
 #import "DBManagerInsertScoreEngine.h"
 
+
 @implementation EndInnings
 
 @synthesize  BALLCODE;
@@ -197,11 +198,14 @@
 //@synthesize RESULTTYPE;
 EndInningsVC *save;
 
+
+
 -(void) InsertEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO:(NSString*)INNINGSSTARTTIME:(NSString*)INNINGSENDTIME:(NSString*)ENDOVER:(NSString*)TOTALRUNS:(NSString*)TOTALWICKETS:(NSString*)BUTTONNAME
 
 {
+    DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
     
-    MATCHTYPE = [DBManagerEndInnings GetMatchTypeUsingCompetition:COMPETITIONCODE];
+    MATCHTYPE = [dbEndInnings GetMatchTypeUsingCompetition:COMPETITIONCODE];
     
     NSInteger totalRuns = [TOTALRUNS integerValue];
     
@@ -221,9 +225,9 @@ EndInningsVC *save;
     {
         
         //SESSION WISE
-        if([DBManagerEndInnings GetDayNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE])
+        if([dbEndInnings GetDayNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE])
         {
-            DAYNO = [DBManagerEndInnings GetMaxDayNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
+            DAYNO = [dbEndInnings GetMaxDayNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
         }
         else
         {
@@ -235,7 +239,7 @@ EndInningsVC *save;
         
         
         //SESSION NO
-        SESSIONNO = [DBManagerEndInnings GetSessionNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO:DAYNO];
+        SESSIONNO = [dbEndInnings GetSessionNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO:DAYNO];
         
         if(SESSIONNO == nil)
         {
@@ -243,7 +247,7 @@ EndInningsVC *save;
             
         }
         //STARTOVERNO
-        STARTOVERNO = [DBManagerEndInnings GetStartoverNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO: DAYNO];
+        STARTOVERNO = [dbEndInnings GetStartoverNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO: DAYNO];
         
         
         if(STARTOVERNO == nil)
@@ -252,7 +256,7 @@ EndInningsVC *save;
         }
         
         //STARTBALLNO
-        STARTBALLNO = [DBManagerEndInnings GetBallNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO:STARTOVERNO];
+        STARTBALLNO = [dbEndInnings GetBallNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO:STARTOVERNO];
         
         
         if(STARTBALLNO == nil)
@@ -270,9 +274,9 @@ EndInningsVC *save;
     NSUInteger totalWickets = [TOTALWICKETS integerValue];
     
     //RUNSCORED
-    RUNSSCORED = [DBManagerEndInnings GetRunScoredForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO: DAYNO];
+    RUNSSCORED = [dbEndInnings GetRunScoredForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE: SESSIONNO: OLDINNINGSNO: DAYNO];
     
-    WICKETLOST = [DBManagerEndInnings GetWicketLostForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO: SESSIONNO ];
+    WICKETLOST = [dbEndInnings GetWicketLostForInsertEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO: SESSIONNO ];
     
     
     save = [[EndInningsVC alloc]initWithNibName:@"EndInningsVC" bundle:nil];
@@ -281,13 +285,13 @@ EndInningsVC *save;
     
     if([BUTTONNAME isEqualToString: @"INSERT"])
     {
-        if([DBManagerEndInnings GetCompetitioncodeForInsertEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO])
+        if([dbEndInnings GetCompetitioncodeForInsertEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO])
         {
             //MATCH TYPE BASED DECLARED INNINGS
             
             if(totalWickets < 10 && [MATCHTYPE isEqualToString:@"MSC023"] || [MATCHTYPE isEqualToString :@"MSC115"] && oldInningsNo < 4)
             {
-                [DBManagerEndInnings UpdateInningsEventForMatchTypeBasedInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO];
+                [dbEndInnings UpdateInningsEventForMatchTypeBasedInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO];
                 
             }
             
@@ -307,13 +311,13 @@ EndInningsVC *save;
                     // if (CONVERT(int,SUBSTRING(ENDOVER), CHARINDEX('.',ENDOVER,0) + 1,length(ENDOVER))) >= 6)
                 {
                     
-                    LASTBALLCODE = [DBManagerEndInnings GetLastBallCodeForInsertEndInninges : MATCHCODE: OLDINNINGSNO];
+                    LASTBALLCODE = [dbEndInnings GetLastBallCodeForInsertEndInninges : MATCHCODE: OLDINNINGSNO];
                     
                     if(LASTBALLCODE != nil)
                     {
                         
                         _BallEventArray = [[NSMutableArray alloc]init];
-                        _BallEventArray=[DBManagerEndInnings GetBallEventForInningsDetails:COMPETITIONCODE :MATCHCODE :LASTBALLCODE];
+                        _BallEventArray=[dbEndInnings GetBallEventForInningsDetails:COMPETITIONCODE :MATCHCODE :LASTBALLCODE];
                         
                         
                         //[SP_MANAGESEOVERDETAILS]
@@ -329,20 +333,20 @@ EndInningsVC *save;
             }
             
             
-            [DBManagerEndInnings UpdateInningsEventForInsertEndInninges :INNINGSSTARTTIME: INNINGSENDTIME :OLDTEAMCODE :TOTALRUNS: ENDOVER: TOTALWICKETS :COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO];
+            [dbEndInnings UpdateInningsEventForInsertEndInninges :INNINGSSTARTTIME: INNINGSENDTIME :OLDTEAMCODE :TOTALRUNS: ENDOVER: TOTALWICKETS :COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO];
             
-            if(![DBManagerEndInnings GetCompetitioncodeInAddOldInningsNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE : OLDTEAMCODE: OLDINNINGSNO])
+            if(![dbEndInnings GetCompetitioncodeInAddOldInningsNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE : OLDTEAMCODE: OLDINNINGSNO])
             {
                 
                 //NSString *inningsCount;
                 
-                NSString *inningsCount = [DBManagerEndInnings GetInningsCountForInsertEndInnings:MATCHCODE];
+                NSString *inningsCount = [dbEndInnings GetInningsCountForInsertEndInnings:MATCHCODE];
                 
                 INNINGSCOUNT = [inningsCount integerValue];
                 
                 if (([MATCHTYPE isEqualToString:@"MSC022"] || [MATCHTYPE isEqualToString:@"MSC024"] || [MATCHTYPE isEqualToString:@"MSC115"] || [MATCHTYPE isEqualToString:@"MSC116"])  && INNINGSCOUNT > 1)
                 {
-                    [DBManagerEndInnings UpdateMatchRegistrationForInsertEndInnings :COMPETITIONCODE : MATCHCODE];
+                    [dbEndInnings UpdateMatchRegistrationForInsertEndInnings :COMPETITIONCODE : MATCHCODE];
                     
                 }
             }
@@ -351,15 +355,15 @@ EndInningsVC *save;
             
             if([MATCHTYPE isEqualToString:@"MSC023" ] || [MATCHTYPE isEqualToString:@"MSC114" ])
             {
-                if(![DBManagerEndInnings GetMatchBasedSessionNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE :OLDINNINGSNO : DAYNO : SESSIONNO])
+                if(![dbEndInnings GetMatchBasedSessionNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE :OLDINNINGSNO : DAYNO : SESSIONNO])
                 {
-                    [DBManagerEndInnings InsertSessionEventForInsertEndInnings :COMPETITIONCODE:MATCHCODE: OLDINNINGSNO: DAYNO:  OLDINNINGSNO: OLDTEAMCODE:  STARTOVERBALLNO: ENDOVER: RUNSSCORED: TOTALWICKETS];
+                    [dbEndInnings InsertSessionEventForInsertEndInnings :COMPETITIONCODE:MATCHCODE: OLDINNINGSNO: DAYNO:  OLDINNINGSNO: OLDTEAMCODE:  STARTOVERBALLNO: ENDOVER: RUNSSCORED: TOTALWICKETS];
                 }
-                if(![DBManagerEndInnings GetDayNoInDayEventForInsertEndInnings : COMPETITIONCODE : MATCHCODE :OLDINNINGSNO : DAYNO ])
+                if(![dbEndInnings GetDayNoInDayEventForInsertEndInnings : COMPETITIONCODE : MATCHCODE :OLDINNINGSNO : DAYNO ])
                 {
                     
                     
-                    [DBManagerEndInnings InsertDayEventForInsertEndInnings:COMPETITIONCODE :MATCHCODE :OLDINNINGSNO :DAYNO :OLDTEAMCODE :TOTALRUNS :ENDOVER :TOTALWICKETS];
+                    [dbEndInnings InsertDayEventForInsertEndInnings:COMPETITIONCODE :MATCHCODE :OLDINNINGSNO :DAYNO :OLDTEAMCODE :TOTALRUNS :ENDOVER :TOTALWICKETS];
                     
                 }
                 
@@ -370,31 +374,31 @@ EndInningsVC *save;
     NSLog(@"btnname=%@",BUTTONNAME);
     if([BUTTONNAME isEqualToString:@"UPDATE"])
     {
-        if([DBManagerEndInnings GetCompetitioncodeInUpdateForInsertEndInnings : COMPETITIONCODE : MATCHCODE :OLDTEAMCODE :OLDINNINGSNO])
+        if([dbEndInnings GetCompetitioncodeInUpdateForInsertEndInnings : COMPETITIONCODE : MATCHCODE :OLDTEAMCODE :OLDINNINGSNO])
         {
             
-            [DBManagerEndInnings UpdateInningsEventInUpdateForInsertEndInninges:INNINGSSTARTTIME :INNINGSENDTIME :TOTALRUNS :ENDOVER :TOTALWICKETS :COMPETITIONCODE :MATCHCODE :OLDTEAMCODE :OLDINNINGSNO];
+            [dbEndInnings UpdateInningsEventInUpdateForInsertEndInninges:INNINGSSTARTTIME :INNINGSENDTIME :TOTALRUNS :ENDOVER :TOTALWICKETS :COMPETITIONCODE :MATCHCODE :OLDTEAMCODE :OLDINNINGSNO];
             
             
         }
         
     }
     
-    [DBManagerEndInnings GetInningsDetails: MATCHCODE];
+    [dbEndInnings GetInningsDetails: MATCHCODE];
     
     if(OLDINNINGSNO.intValue == 3)
     {
-        SECONDTEAMCODE = [DBManagerEndInnings GetSecondTeamCodeForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
+        SECONDTEAMCODE = [dbEndInnings GetSecondTeamCodeForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
         
-        THIRDTEAMCODE = [DBManagerEndInnings GetThirdTeamCodeForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
+        THIRDTEAMCODE = [dbEndInnings GetThirdTeamCodeForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
         
         if(SECONDTEAMCODE=THIRDTEAMCODE)
         {
             
             
-            SECONDTHIRDTOTAL = [DBManagerEndInnings GetSecondTotalForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
+            SECONDTHIRDTOTAL = [dbEndInnings GetSecondTotalForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
             
-            FIRSTTHIRDTOTAL= [DBManagerEndInnings GetFirstTotalForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
+            FIRSTTHIRDTOTAL= [dbEndInnings GetFirstTotalForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
             
             if(SECONDTHIRDTOTAL < FIRSTTHIRDTOTAL)
             {
@@ -411,8 +415,8 @@ EndInningsVC *save;
         }
         else if(SECONDTEAMCODE != THIRDTEAMCODE)
         {
-            SECONDTOTAL=[DBManagerEndInnings GetSecondTotalinSecondThirdTeamCodeForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
-            FIRSTTHIRDTOTAL=[DBManagerEndInnings GetFirstThirdTotalForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
+            SECONDTOTAL=[dbEndInnings GetSecondTotalinSecondThirdTeamCodeForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
+            FIRSTTHIRDTOTAL=[dbEndInnings GetFirstThirdTotalForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
             
             if(SECONDTOTAL > FIRSTTHIRDTOTAL)
             {
@@ -437,19 +441,20 @@ EndInningsVC *save;
 -(void) fetchEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO
 
 {
+    DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
     
-    TEAMNAME=[DBManagerEndInnings GetTeamNameForFetchEndInnings:TEAMCODE];
+    TEAMNAME=[dbEndInnings GetTeamNameForFetchEndInnings:TEAMCODE];
     
-    PENALITYRUNS=[DBManagerEndInnings GetpenaltyRunsForFetchEndInnings : COMPETITIONCODE: MATCHCODE : INNINGSNO :TEAMCODE];
+    PENALITYRUNS=[dbEndInnings GetpenaltyRunsForFetchEndInnings : COMPETITIONCODE: MATCHCODE : INNINGSNO :TEAMCODE];
     
-    TOTALRUNS=[DBManagerEndInnings GetTotalRunsForFetchEndInnings : COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO ];
+    TOTALRUNS=[dbEndInnings GetTotalRunsForFetchEndInnings : COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO ];
     
-    OVERNO=[DBManagerEndInnings GetOverNoForFetchEndInnings : COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO ];
+    OVERNO=[dbEndInnings GetOverNoForFetchEndInnings : COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO ];
     
-    BALLNO=[DBManagerEndInnings GetBallNoForFetchEndInnings:COMPETITIONCODE :MATCHCODE :TEAMCODE :OVERNO :INNINGSNO];
+    BALLNO=[dbEndInnings GetBallNoForFetchEndInnings:COMPETITIONCODE :MATCHCODE :TEAMCODE :OVERNO :INNINGSNO];
     
     
-    OVERSTATUS=[DBManagerEndInnings GetOverStatusForFetchEndInnings : COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO : OVERNO ];
+    OVERSTATUS=[dbEndInnings GetOverStatusForFetchEndInnings : COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO : OVERNO ];
     
     if([OVERSTATUS isEqualToString: @"1"])
     {
@@ -465,9 +470,9 @@ EndInningsVC *save;
         
     }
     
-    WICKETS=[DBManagerEndInnings GetWicketForFetchEndInnings : COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO ];
+    WICKETS=[dbEndInnings GetWicketForFetchEndInnings : COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO ];
     
-    [DBManagerEndInnings GetMatchDateForFetchEndInnings : COMPETITIONCODE: MATCHCODE];
+    [dbEndInnings GetMatchDateForFetchEndInnings : COMPETITIONCODE: MATCHCODE];
     
 }
 
@@ -479,6 +484,9 @@ EndInningsVC *save;
 
 
 {
+     DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
+    
+    DBManagerInsertScoreEngine *dbInsertScoreEngine = [[DBManagerInsertScoreEngine alloc]init];
     STRIKERCODE = strickerCode;
     NONSTRIKERCODE = nonStrickerCode;
     objBallEventRecord =[[BallEventRecord alloc]init];
@@ -488,18 +496,18 @@ EndInningsVC *save;
     ISMAIDENOVER  = [NSNumber numberWithInt:0];
     BOWLERCOUNT  = [NSNumber numberWithInt:1];
     
-    if(![DBManagerEndInnings GetOverNoFormanageOverDetails : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO :overNo])
+    if(![dbEndInnings GetOverNoFormanageOverDetails : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO :overNo])
     {
-        [DBManagerEndInnings  InsertOverEventFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO :overNo: OverStatus ];
-        [DBManagerEndInnings InsertBowlerOverDetailsFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO :overNo:objBallEventRecord.objBowlercode];
+        [dbEndInnings  InsertOverEventFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO :overNo: OverStatus ];
+        [dbEndInnings InsertBowlerOverDetailsFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO :overNo:objBallEventRecord.objBowlercode];
     }
     else
     {
-        if(![DBManagerEndInnings GetBallCodeFormanageOverDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO :overNo])
+        if(![dbEndInnings GetBallCodeFormanageOverDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO :overNo])
         {
-            BOWLINGTEAMCODE=[DBManagerEndInnings  GetBowlingTeamCodeFormanageOverDetails :TEAMCODE :COMPETITIONCODE: MATCHCODE];
+            BOWLINGTEAMCODE=[dbEndInnings  GetBowlingTeamCodeFormanageOverDetails :TEAMCODE :COMPETITIONCODE: MATCHCODE];
             
-            BATTEAMRUNS=[DBManagerEndInnings GetBatTeanRunsFormanageOverDetails :COMPETITIONCODE:MATCHCODE: TEAMCODE :INNINGSNO];
+            BATTEAMRUNS=[dbEndInnings GetBatTeanRunsFormanageOverDetails :COMPETITIONCODE:MATCHCODE: TEAMCODE :INNINGSNO];
             
             NSUInteger ballNo = [BALLNO integerValue];
             
@@ -509,16 +517,16 @@ EndInningsVC *save;
             
             while(ballNo >= 1 && ballNo <= 6)
             {
-                MAXID=[DBManagerEndInnings GetMaxidFormanageOverDetails :MATCHCODE];
+                MAXID=[dbEndInnings GetMaxidFormanageOverDetails :MATCHCODE];
                 
                 
                 // BALLCODENO = MATCHCODE + RIGHT(REPLICATE('0',10)+ MAXID,10);
                 
                 
-                BALLCODE = [DBManagerInsertScoreEngine GetMaxIdForInsertScoreEngine:MATCHCODE];
+                BALLCODE = [dbInsertScoreEngine GetMaxIdForInsertScoreEngine:MATCHCODE];
                 
                 
-            [DBManagerEndInnings  InsertBallEventsFormanageOverDetails : BALLCODE: COMPETITIONCODE: MATCHCODE:TEAMCODE: INNINGSNO : objBallEventRecord.objDayno:overNo :[NSString stringWithFormat:@"%d",ballNo]:objBallEventRecord.objSessionno:strickerCode:nonStrickerCode :BowlerCode:objBallEventRecord.objBowlercode:objBallEventRecord.objWicketkeepercode:umpire1code:umpire2code:@""];
+            [dbEndInnings  InsertBallEventsFormanageOverDetails : BALLCODE: COMPETITIONCODE: MATCHCODE:TEAMCODE: INNINGSNO : objBallEventRecord.objDayno:overNo :[NSString stringWithFormat:@"%d",ballNo]:objBallEventRecord.objSessionno:strickerCode:nonStrickerCode :BowlerCode:objBallEventRecord.objBowlercode:objBallEventRecord.objWicketkeepercode:umpire1code:umpire2code:@""];
                 
                 
                 //EXEC SP_INSERTSCOREBOARD
@@ -530,24 +538,24 @@ EndInningsVC *save;
         }
         
         
-        [DBManagerEndInnings  UpdateOverEventFormanageOverDetails :OverStatus :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO :overNo];
+        [dbEndInnings  UpdateOverEventFormanageOverDetails :OverStatus :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO :overNo];
         
-        [DBManagerEndInnings  UpdateBowlerOverDetailsFormanageOverDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO :overNo];
+        [dbEndInnings  UpdateBowlerOverDetailsFormanageOverDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO :overNo];
         
-        BATTEAMOVRWITHEXTRASBALLS=[DBManagerEndInnings  GetBattingteamOverwithExtraBallFormanageOverDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO :overNo];
+        BATTEAMOVRWITHEXTRASBALLS=[dbEndInnings  GetBattingteamOverwithExtraBallFormanageOverDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO :overNo];
         
         NSNumber * objBatteamwithextraball= [NSNumber numberWithInt:BATTEAMOVRWITHEXTRASBALLS.intValue];
         
-        BATTEAMOVRBALLSCNT=[DBManagerEndInnings  GetBattingteamOverBallCountFormanageOverDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO : overNo : BATTEAMOVRWITHEXTRASBALLS];
+        BATTEAMOVRBALLSCNT=[dbEndInnings  GetBattingteamOverBallCountFormanageOverDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO : overNo : BATTEAMOVRWITHEXTRASBALLS];
         
         NSNumber *objbatTeamOverballsCNT =[NSNumber numberWithInt:BATTEAMOVRBALLSCNT.intValue];
         
-        LASTBALLCODE=[DBManagerEndInnings  GetLastBallCodeFormanageOverDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO :overNo :objBatteamwithextraball : objbatTeamOverballsCNT];
+        LASTBALLCODE=[dbEndInnings  GetLastBallCodeFormanageOverDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO :overNo :objBatteamwithextraball : objbatTeamOverballsCNT];
         
-        if([[DBManagerEndInnings  GetBallEventCountFormanageOverDetails :COMPETITIONCODE:MATCHCODE:INNINGSNO ] intValue] >0 )
+        if([[dbEndInnings  GetBallEventCountFormanageOverDetails :COMPETITIONCODE:MATCHCODE:INNINGSNO ] intValue] >0 )
         {
             
-            NSMutableArray * GetStrickerNonStrickerDetails=[DBManagerEndInnings GetStrickerNonStrickerRunFormanageOverDetails : LASTBALLCODE];
+            NSMutableArray * GetStrickerNonStrickerDetails=[dbEndInnings GetStrickerNonStrickerRunFormanageOverDetails : LASTBALLCODE];
             
             if(GetStrickerNonStrickerDetails.count>0)
             {
@@ -570,41 +578,41 @@ EndInningsVC *save;
                 }
                 
             }
-            [DBManagerEndInnings  UpdateInningsEventFormanageOverDetails: T_STRIKERCODE : T_NONSTRIKERCODE : COMPETITIONCODE : MATCHCODE :  TEAMCODE : INNINGSNO];
+            [dbEndInnings  UpdateInningsEventFormanageOverDetails: T_STRIKERCODE : T_NONSTRIKERCODE : COMPETITIONCODE : MATCHCODE :  TEAMCODE : INNINGSNO];
             ISMAIDENOVER=0;
             
-            if([DBManagerEndInnings GetBallNoFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo].intValue!=0)
+            if([dbEndInnings GetBallNoFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo].intValue!=0)
             {
                 
                 
-                ISMAIDENOVER=[DBManagerEndInnings GetIsMaidenOverFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo];
+                ISMAIDENOVER=[dbEndInnings GetIsMaidenOverFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo];
                 
                 BOWLERCOUNT==1;
             }
-            if(![[DBManagerEndInnings GetBowlerCodeFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo]isEqual:@""])
+            if(![[dbEndInnings GetBowlerCodeFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo]isEqual:@""])
             {
                 
-                BOWLERCOUNT=[DBManagerEndInnings GetBowlerCountFormanageOverDetails:COMPETITIONCODE :MATCHCODE :INNINGSNO :overNo];
+                BOWLERCOUNT=[dbEndInnings GetBowlerCountFormanageOverDetails:COMPETITIONCODE :MATCHCODE :INNINGSNO :overNo];
                 
                 
             }
             
             if(BOWLERCOUNT.intValue ==1)
             {
-            CURRENTBOWLER=[DBManagerEndInnings GetCurrentBowlerCountFormanageOverDetails : COMPETITIONCODE: MATCHCODE: INNINGSNO :overNo];
+            CURRENTBOWLER=[dbEndInnings GetCurrentBowlerCountFormanageOverDetails : COMPETITIONCODE: MATCHCODE: INNINGSNO :overNo];
                 
-                [DBManagerEndInnings UpdateBowlingSummaryFormanageOverDetails : BOWLERCOUNT: ISMAIDENOVER : COMPETITIONCODE: MATCHCODE:  INNINGSNO: CURRENTBOWLER ];
+                [dbEndInnings UpdateBowlingSummaryFormanageOverDetails : BOWLERCOUNT: ISMAIDENOVER : COMPETITIONCODE: MATCHCODE:  INNINGSNO: CURRENTBOWLER ];
                 
                 
             }
             else
             {
-                [DBManagerEndInnings UpdateBowlingSummaryFormanageOverDetails: BOWLERCOUNT : ISMAIDENOVER : COMPETITIONCODE : MATCHCODE :   INNINGSNO : overNo];
+                [dbEndInnings UpdateBowlingSummaryFormanageOverDetails: BOWLERCOUNT : ISMAIDENOVER : COMPETITIONCODE : MATCHCODE :   INNINGSNO : overNo];
                 
             }
             if(ISMAIDENOVER.intValue ==1 && BOWLERCOUNT.intValue==1)
             {
-                [DBManagerEndInnings InsertBowlingMaidenSummaryInElseFormanageOverDetails: COMPETITIONCODE : MATCHCODE :  INNINGSNO : objBallEventRecord.objBowlercode :overNo];
+                [dbEndInnings InsertBowlingMaidenSummaryInElseFormanageOverDetails: COMPETITIONCODE : MATCHCODE :  INNINGSNO : objBallEventRecord.objBowlercode :overNo];
                 
             }
             
@@ -620,7 +628,7 @@ EndInningsVC *save;
     
     
     
-   
+    DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
     
     ISWKTDTLSUPDATE = [NSNumber numberWithInt:1];
     ISBOWLERCHANGED = [NSNumber numberWithInt:0];
@@ -653,14 +661,14 @@ EndInningsVC *save;
     
     
     
-    if([DBManagerEndInnings GetBatsmanCodeForInsertScoreBoard  :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:BATSMANCODE])
+    if([dbEndInnings GetBatsmanCodeForInsertScoreBoard  :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:BATSMANCODE])
     {
         
         UPDATEFLAGBAT= [NSNumber numberWithInt:1];
         
         GetOScoreBoardDetails = [[NSMutableArray alloc]init];
         
-        GetOScoreBoardDetails = [DBManagerEndInnings GetO_AssignValueForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:BATSMANCODE];
+        GetOScoreBoardDetails = [dbEndInnings GetO_AssignValueForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:BATSMANCODE];
         
         
 					   if(GetOScoreBoardDetails.count>0)
@@ -690,7 +698,7 @@ EndInningsVC *save;
         
         UPDATEFLAGBAT = [NSNumber numberWithInt:0];
         
-       O_BATTINGPOSITIONNO = [DBManagerEndInnings GetOBattingPositionNoForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO];
+       O_BATTINGPOSITIONNO = [dbEndInnings GetOBattingPositionNoForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO];
 					   
         
     }
@@ -731,20 +739,20 @@ EndInningsVC *save;
     
     if(UPDATEFLAGBAT.intValue == 0 )
     {
-        [ DBManagerEndInnings InsertbattingSummaryForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:INNINGSNO: N_BATTINGPOSITIONNO :BATSMANCODE: N_RUNS: N_BALLS: N_ONES: N_TWOS : N_THREES: N_FOURS:N_SIXES: N_DOTBALLS ];
+        [ dbEndInnings InsertbattingSummaryForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:INNINGSNO: N_BATTINGPOSITIONNO :BATSMANCODE: N_RUNS: N_BALLS: N_ONES: N_TWOS : N_THREES: N_FOURS:N_SIXES: N_DOTBALLS ];
     }
     else
     {
-        [DBManagerEndInnings UpdatebattingSummaryForInsertScoreBoard : N_BATTINGPOSITIONNO : N_RUNS: N_BALLS: N_ONES:N_TWOS :N_THREES : N_FOURS : N_SIXES : N_DOTBALLS:COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO : BATSMANCODE];
+        [dbEndInnings UpdatebattingSummaryForInsertScoreBoard : N_BATTINGPOSITIONNO : N_RUNS: N_BALLS: N_ONES:N_TWOS :N_THREES : N_FOURS : N_SIXES : N_DOTBALLS:COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO : BATSMANCODE];
         
     }
     
-    if([DBManagerEndInnings  GetWicKetTypeForInsertScoreBoard : COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE :INNINGSNO :WICKETPLAYER])
+    if([dbEndInnings  GetWicKetTypeForInsertScoreBoard : COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE :INNINGSNO :WICKETPLAYER])
     {
         
         GetWicketSDetails = [[NSMutableArray alloc]init];
         
-        GetWicketSDetails = [ DBManagerEndInnings GetWicKetAssignVarForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:WICKETPLAYER];
+        GetWicketSDetails = [ dbEndInnings GetWicKetAssignVarForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:WICKETPLAYER];
         
         
         if(GetWicketSDetails.count>0)
@@ -774,7 +782,7 @@ EndInningsVC *save;
     
     if(ISWKTDTLSUPDATE.intValue == 1)
     {
-        [DBManagerEndInnings UpdatebattingSummaryInWiCketForInsertScoreBoard : N_WICKETNO: N_WICKETTYPE: N_FIELDERCODE: N_BOWLERCODE: WICKETOVERNO: WICKETBALLNO: COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE : INNINGSNO : WICKETPLAYER];
+        [dbEndInnings UpdatebattingSummaryInWiCketForInsertScoreBoard : N_WICKETNO: N_WICKETTYPE: N_FIELDERCODE: N_BOWLERCODE: WICKETOVERNO: WICKETBALLNO: COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE : INNINGSNO : WICKETPLAYER];
     }
     
     
@@ -798,14 +806,14 @@ EndInningsVC *save;
     
     
     
-    if([DBManagerEndInnings GetBateamCodeForInsertScoreBoard : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO])
+    if([dbEndInnings GetBateamCodeForInsertScoreBoard : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO])
     {
         UPDATEFLAGINNS = [NSNumber numberWithInt:1];
         
         
         GetInningsSummaryDetails = [[NSMutableArray alloc]init];
         
-        GetInningsSummaryDetails = [DBManagerEndInnings GetInningsSummaryAssignForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO];
+        GetInningsSummaryDetails = [dbEndInnings GetInningsSummaryAssignForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO];
         
         if(GetInningsSummaryDetails.count>0)
         {
@@ -854,15 +862,15 @@ EndInningsVC *save;
     if (UPDATEFLAGINNS.intValue == 0)
     {
         
-        [DBManagerEndInnings InsertInningsSummaryForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO : N_BYES :N_LEGBYES:N_NOBALLS:N_WIDES:N_PENALTIES:N_INNINGSTOTAL:N_INNINGSTOTALWICKETS];
+        [dbEndInnings InsertInningsSummaryForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO : N_BYES :N_LEGBYES:N_NOBALLS:N_WIDES:N_PENALTIES:N_INNINGSTOTAL:N_INNINGSTOTALWICKETS];
     }
     else
     {
-        [ DBManagerEndInnings UpdateInningsSummaryForInsertScoreBoard :  N_BYES :N_LEGBYES:N_NOBALLS:N_WIDES:N_PENALTIES:N_INNINGSTOTAL:N_INNINGSTOTALWICKETS:COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO ];
+        [ dbEndInnings UpdateInningsSummaryForInsertScoreBoard :  N_BYES :N_LEGBYES:N_NOBALLS:N_WIDES:N_PENALTIES:N_INNINGSTOTAL:N_INNINGSTOTALWICKETS:COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO ];
         
     }
     
-    [DBManagerEndInnings UpdatebattingSummaryInWiCketScoreForInsertScoreBoard : N_INNINGSTOTAL:COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO :WICKETPLAYER];
+    [dbEndInnings UpdatebattingSummaryInWiCketScoreForInsertScoreBoard : N_INNINGSTOTAL:COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO :WICKETPLAYER];
     
     
     
@@ -896,22 +904,22 @@ EndInningsVC *save;
     ISWICKETCOUNTABLE = [NSNumber numberWithInt:0];
     
     
-    ISOVERCOMPLETE=[DBManagerEndInnings GetOverStatusForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO :WICKETOVERNO];
+    ISOVERCOMPLETE=[dbEndInnings GetOverStatusForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO :WICKETOVERNO];
     
     BOWLERCOUNT = [NSNumber numberWithInt:1];
     
     
-    if([DBManagerEndInnings GetBowlerForInsertScoreBoard:COMPETITIONCODE :MATCHCODE :INNINGSNO :WICKETOVERNO])
+    if([dbEndInnings GetBowlerForInsertScoreBoard:COMPETITIONCODE :MATCHCODE :INNINGSNO :WICKETOVERNO])
     {
         
-        BOWLERCOUNT=[DBManagerEndInnings GetBowlerCountForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: INNINGSNO :WICKETOVERNO];
+        BOWLERCOUNT=[dbEndInnings GetBowlerCountForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: INNINGSNO :WICKETOVERNO];
         
         
     }
     else
     {
         
-        [DBManagerEndInnings InsertBowlerOverDetailsForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO :WICKETOVERNO :BOWLERCODE];
+        [dbEndInnings InsertBowlerOverDetailsForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO :WICKETOVERNO :BOWLERCODE];
     }
     
     int isWicketCountAble = (ISWICKET.intValue == 1 &&  [N_WICKETTYPE isEqualToString:@"MSC105"]||[N_WICKETTYPE isEqualToString:@"MSC104"]||[N_WICKETTYPE isEqualToString:@"MSC099"]||[N_WICKETTYPE isEqualToString:@"MSC098"]||[N_WICKETTYPE isEqualToString:@"MSC096"]||[N_WICKETTYPE isEqualToString:@"MSC095"]) ? 1 : 0;
@@ -920,14 +928,14 @@ EndInningsVC *save;
     
     
     
-    if([DBManagerEndInnings GetBowlerCodeForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BOWLINGTEAMCODE: INNINGSNO  :BOWLERCODE])
+    if([dbEndInnings GetBowlerCodeForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BOWLINGTEAMCODE: INNINGSNO  :BOWLERCODE])
     {
         UPDATEFLAGBOWL = [NSNumber numberWithInt:1];
         
         
         GetBowlingDetailsForAssignDetails = [[NSMutableArray alloc]init];
         
-        GetBowlingDetailsForAssignDetails = [DBManagerEndInnings GetBowlingDetailsForassignvarForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BOWLINGTEAMCODE:INNINGSNO:BOWLERCODE];
+        GetBowlingDetailsForAssignDetails = [dbEndInnings GetBowlingDetailsForassignvarForInsertScoreBoard :COMPETITIONCODE:MATCHCODE:BOWLINGTEAMCODE:INNINGSNO:BOWLERCODE];
         
         if(GetBowlingDetailsForAssignDetails.count>0)
         {
@@ -955,7 +963,7 @@ EndInningsVC *save;
     {
         UPDATEFLAGBOWL = [NSNumber numberWithInt:0];
         
-        O_BOWLINGPOSITIONNO=[DBManagerEndInnings GetBowlingPositionCountForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO];
+        O_BOWLINGPOSITIONNO=[dbEndInnings GetBowlingPositionCountForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO];
         
         
     }
@@ -1027,18 +1035,18 @@ EndInningsVC *save;
     
     if (ISOVERCOMPLETE.intValue == 1 && ISUPDATE.intValue == 0)
     {
-        if( [DBManagerEndInnings GetBallCountForInsertScoreBoard : COMPETITIONCODE: MATCHCODE:  INNINGSNO : WICKETOVERNO]  > 4)
+        if( [dbEndInnings GetBallCountForInsertScoreBoard : COMPETITIONCODE: MATCHCODE:  INNINGSNO : WICKETOVERNO]  > 4)
         {
-            ISMAIDENOVER=[DBManagerEndInnings GetMaiDenOverForInsertScoreBoard : COMPETITIONCODE: MATCHCODE:  INNINGSNO : WICKETOVERNO];
+            ISMAIDENOVER=[dbEndInnings GetMaiDenOverForInsertScoreBoard : COMPETITIONCODE: MATCHCODE:  INNINGSNO : WICKETOVERNO];
             
             ISMAIDENOVER = [NSNumber numberWithInt: BOWLERCOUNT.intValue > 1 ? 0 : ISMAIDENOVER.intValue];
         }
-        if([DBManagerEndInnings GetOversForInsertScoreBoard : COMPETITIONCODE: MATCHCODE:  INNINGSNO : WICKETOVERNO])
+        if([dbEndInnings GetOversForInsertScoreBoard : COMPETITIONCODE: MATCHCODE:  INNINGSNO : WICKETOVERNO])
         {
             
             ISMAIDENOVER.intValue == 0;
             {
-                [DBManagerEndInnings DeletebattingSummaryForInsertScoreBoard : COMPETITIONCODE: MATCHCODE:  INNINGSNO : WICKETOVERNO];
+                [dbEndInnings DeletebattingSummaryForInsertScoreBoard : COMPETITIONCODE: MATCHCODE:  INNINGSNO : WICKETOVERNO];
                 
                 N_BOWLERMAIDENS = [NSNumber numberWithInt:O_BOWLERMAIDENS.intValue - 1];
             }
@@ -1050,7 +1058,7 @@ EndInningsVC *save;
             if (ISMAIDENOVER.intValue == 1 && ISOVERCOMPLETE.intValue == 1 )
             {
                 
-                [DBManagerEndInnings InsertBowlingMaidenSummaryForInsertScoreBoard : COMPETITIONCODE: MATCHCODE:  INNINGSNO : BOWLERCODE :WICKETOVERNO];
+                [dbEndInnings InsertBowlingMaidenSummaryForInsertScoreBoard : COMPETITIONCODE: MATCHCODE:  INNINGSNO : BOWLERCODE :WICKETOVERNO];
                 
                 N_BOWLERMAIDENS = [NSNumber numberWithInt:O_BOWLERMAIDENS .intValue+ 1];
             }
@@ -1069,10 +1077,10 @@ EndInningsVC *save;
     if(UPDATEFLAGBOWL.intValue == 0)
     {
         
-        [DBManagerEndInnings InsertBowlingSummaryForInsertScoreBoard :COMPETITIONCODE: MATCHCODE: BOWLINGTEAMCODE:INNINGSNO: N_BOWLINGPOSITIONNO: BOWLERCODE: N_BOWLEROVERS: N_BOWLERBALLS: N_BOWLERPARTIALOVERBALLS: N_BOWLERMAIDENS: N_BOWLERRUNS: N_BOWLERWICKETS: N_BOWLERNOBALLS: N_BOWLERWIDES: N_BOWLERDOTBALLS: N_BOWLERFOURS: N_BOWLERSIXES];
+        [dbEndInnings InsertBowlingSummaryForInsertScoreBoard :COMPETITIONCODE: MATCHCODE: BOWLINGTEAMCODE:INNINGSNO: N_BOWLINGPOSITIONNO: BOWLERCODE: N_BOWLEROVERS: N_BOWLERBALLS: N_BOWLERPARTIALOVERBALLS: N_BOWLERMAIDENS: N_BOWLERRUNS: N_BOWLERWICKETS: N_BOWLERNOBALLS: N_BOWLERWIDES: N_BOWLERDOTBALLS: N_BOWLERFOURS: N_BOWLERSIXES];
         
     }else{
-        [DBManagerEndInnings UpdateBowlingSummaryForInsertScoreBoard : N_BOWLINGPOSITIONNO:N_BOWLEROVERS : N_BOWLERBALLS: N_BOWLERPARTIALOVERBALLS :N_BOWLERMAIDENS:N_BOWLERRUNS: N_BOWLERWICKETS: N_BOWLERNOBALLS: N_BOWLERWIDES: N_BOWLERDOTBALLS: N_BOWLERFOURS:N_BOWLERSIXES: COMPETITIONCODE: MATCHCODE: BOWLINGTEAMCODE : INNINGSNO: BOWLERCODE];
+        [dbEndInnings UpdateBowlingSummaryForInsertScoreBoard : N_BOWLINGPOSITIONNO:N_BOWLEROVERS : N_BOWLERBALLS: N_BOWLERPARTIALOVERBALLS :N_BOWLERMAIDENS:N_BOWLERRUNS: N_BOWLERWICKETS: N_BOWLERNOBALLS: N_BOWLERWIDES: N_BOWLERDOTBALLS: N_BOWLERFOURS:N_BOWLERSIXES: COMPETITIONCODE: MATCHCODE: BOWLINGTEAMCODE : INNINGSNO: BOWLERCODE];
         
         NSLog(@"MADIDENS %@",N_BOWLERMAIDENS);
          
@@ -1088,40 +1096,40 @@ EndInningsVC *save;
 
 -(BOOL) DeleteEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO
 {
+     DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
     
+    MATCHTYPE = [dbEndInnings GetMatchTypeUsingCompetitionForDeleteEndInnings : COMPETITIONCODE];
     
-    MATCHTYPE = [DBManagerEndInnings GetMatchTypeUsingCompetitionForDeleteEndInnings : COMPETITIONCODE];
-    
-    if(![DBManagerEndInnings GetBallCodeForDeleteEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO] &&
-       ![DBManagerEndInnings GetInningsNoForDeleteEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO])
+    if(![dbEndInnings GetBallCodeForDeleteEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO] &&
+       ![dbEndInnings GetInningsNoForDeleteEndInnings : COMPETITIONCODE : MATCHCODE : OLDINNINGSNO])
     {
         
-        [DBManagerEndInnings UpdateInningsEventForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO];
+        [dbEndInnings UpdateInningsEventForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDTEAMCODE:OLDINNINGSNO];
         
-        [DBManagerEndInnings DeleteInningsEventForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+        [dbEndInnings DeleteInningsEventForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
         
-        [DBManagerEndInnings DeleteOverEventsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+        [dbEndInnings DeleteOverEventsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
         
-        [DBManagerEndInnings DeleteBowlerOverDetailsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+        [dbEndInnings DeleteBowlerOverDetailsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
         
-        [DBManagerEndInnings DeleteSessionEventsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+        [dbEndInnings DeleteSessionEventsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
         
-        if([DBManagerEndInnings GetSessionNoForDeleteEndInninges : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO])
+        if([dbEndInnings GetSessionNoForDeleteEndInninges : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO])
         {
             
-            [DBManagerEndInnings DeleteSessionEventsInInningsEntryForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+            [dbEndInnings DeleteSessionEventsInInningsEntryForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
             
-            [DBManagerEndInnings DeleteDayEventsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+            [dbEndInnings DeleteDayEventsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
             
-            if([DBManagerEndInnings GetDayNoForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO])
+            if([dbEndInnings GetDayNoForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO])
             {
                 
-                [DBManagerEndInnings DeleteDayEventsInInningsEntryForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+                [dbEndInnings DeleteDayEventsInInningsEntryForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
                 
-                [DBManagerEndInnings DeletePenaltyDetailsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
+                [dbEndInnings DeletePenaltyDetailsForDeleteEndInnings : COMPETITIONCODE : MATCHCODE: OLDINNINGSNO];
                 
                 
-                NSString *inningsCount = [DBManagerEndInnings GetInningsCountForDeleteEndInnings : MATCHCODE];
+                NSString *inningsCount = [dbEndInnings GetInningsCountForDeleteEndInnings : MATCHCODE];
                 
                 INNINGSCOUNT = [inningsCount integerValue];
                 
@@ -1132,12 +1140,12 @@ EndInningsVC *save;
                     
                     
                 {
-                    [DBManagerEndInnings UpdatematchRegistrationForDeleteEndInnings : COMPETITIONCODE : MATCHCODE];
+                    [dbEndInnings UpdatematchRegistrationForDeleteEndInnings : COMPETITIONCODE : MATCHCODE];
                     
                 }
                 
             }
-            NSMutableArray *InningsArrayForDelete=[DBManagerEndInnings GetInningsDetailsForDeleteEndInnings: MATCHCODE];
+            NSMutableArray *InningsArrayForDelete=[dbEndInnings GetInningsDetailsForDeleteEndInnings: MATCHCODE];
         }
         
         

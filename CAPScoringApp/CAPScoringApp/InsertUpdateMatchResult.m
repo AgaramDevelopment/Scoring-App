@@ -17,28 +17,28 @@
 -(void) InsertMatchResult:(NSString *)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)MANOFTHESERIESCODE : (NSString*)BESTBATSMANCODE : (NSString*)BESTBOWLERCODE :(NSString*)BESTALLROUNDERCODE : (NSString*)MOSTVALUABLEPLAYERCODE : (NSString*)MATCHRESULTCODE : (NSString*)MATCHWONTEAMCODE :(NSNumber*)TEAMAPOINTS :(NSString*)TEAMBPOINTS : (NSString*)MANOFTHEMATCHCODE : (NSString*)COMMENTS :(NSString*)TEAMNAME : (NSString*)BUTTONNAME
 
 {
+    DBManagerInsertUpdateMatchResult *objDBManagerInsertUpdateMatchResult = [[DBManagerInsertUpdateMatchResult alloc] init];
     
+    [objDBManagerInsertUpdateMatchResult UpdateCompetitionForInsertMatchResult : MANOFTHESERIESCODE : BESTBATSMANCODE : BESTBOWLERCODE : BESTALLROUNDERCODE : MOSTVALUABLEPLAYERCODE : COMPETITIONCODE];
     
-    [DBManagerInsertUpdateMatchResult UpdateCompetitionForInsertMatchResult : MANOFTHESERIESCODE : BESTBATSMANCODE : BESTBOWLERCODE : BESTALLROUNDERCODE : MOSTVALUABLEPLAYERCODE : COMPETITIONCODE];
-    
-    if(![[DBManagerInsertUpdateMatchResult GetMatchresultCodeForInsertMatchResult :COMPETITIONCODE : MATCHCODE: BUTTONNAME ] isEqual:@""])
+    if(![[objDBManagerInsertUpdateMatchResult GetMatchresultCodeForInsertMatchResult :COMPETITIONCODE : MATCHCODE: BUTTONNAME ] isEqual:@""])
     {
-        [DBManagerInsertUpdateMatchResult DeleteMatchResultForInsertMatchResult :COMPETITIONCODE : MATCHCODE  ];
+        [objDBManagerInsertUpdateMatchResult DeleteMatchResultForInsertMatchResult :COMPETITIONCODE : MATCHCODE  ];
         
-        [DBManagerInsertUpdateMatchResult UpdateMatchRegistrationForInsertMatchResult :COMPETITIONCODE : MATCHCODE  ];
+        [objDBManagerInsertUpdateMatchResult UpdateMatchRegistrationForInsertMatchResult :COMPETITIONCODE : MATCHCODE  ];
         
     }
-    else if([[DBManagerInsertUpdateMatchResult GetMatchresultCodeInElseIfForInsertMatchResult :COMPETITIONCODE : MATCHCODE : BUTTONNAME ] isEqual:@""])
+    else if([[objDBManagerInsertUpdateMatchResult GetMatchresultCodeInElseIfForInsertMatchResult :COMPETITIONCODE : MATCHCODE : BUTTONNAME ] isEqual:@""])
     {
-        [DBManagerInsertUpdateMatchResult InsertMatchResultForInsertMatchResult : COMPETITIONCODE : MATCHCODE : MATCHRESULTCODE : MATCHWONTEAMCODE : TEAMAPOINTS : TEAMBPOINTS : MANOFTHEMATCHCODE : COMMENTS];
+        [objDBManagerInsertUpdateMatchResult InsertMatchResultForInsertMatchResult : COMPETITIONCODE : MATCHCODE : MATCHRESULTCODE : MATCHWONTEAMCODE : TEAMAPOINTS : TEAMBPOINTS : MANOFTHEMATCHCODE : COMMENTS];
         
-        [DBManagerInsertUpdateMatchResult UpdatematchRegistrationElseifForInsertMatchResult : MATCHRESULTCODE : MATCHWONTEAMCODE : TEAMAPOINTS : TEAMBPOINTS : COMPETITIONCODE : MATCHCODE ];
+        [objDBManagerInsertUpdateMatchResult UpdatematchRegistrationElseifForInsertMatchResult : MATCHRESULTCODE : MATCHWONTEAMCODE : TEAMAPOINTS : TEAMBPOINTS : COMPETITIONCODE : MATCHCODE ];
     }
     else
     {
-        [DBManagerInsertUpdateMatchResult UpdatematchResultForInsertMatchResult : MATCHRESULTCODE : MATCHWONTEAMCODE : TEAMAPOINTS : TEAMBPOINTS : MANOFTHEMATCHCODE: COMMENTS :  COMPETITIONCODE :MATCHCODE ];
+        [objDBManagerInsertUpdateMatchResult UpdatematchResultForInsertMatchResult : MATCHRESULTCODE : MATCHWONTEAMCODE : TEAMAPOINTS : TEAMBPOINTS : MANOFTHEMATCHCODE: COMMENTS :  COMPETITIONCODE :MATCHCODE ];
         
-        [DBManagerInsertUpdateMatchResult UpdatematchRegistrationinElseForInsertMatchResult : MATCHRESULTCODE : MATCHWONTEAMCODE : TEAMAPOINTS : TEAMBPOINTS : COMPETITIONCODE :MATCHCODE ];
+        [objDBManagerInsertUpdateMatchResult UpdatematchRegistrationinElseForInsertMatchResult : MATCHRESULTCODE : MATCHWONTEAMCODE : TEAMAPOINTS : TEAMBPOINTS : COMPETITIONCODE :MATCHCODE ];
     }
     
     

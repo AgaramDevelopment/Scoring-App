@@ -131,6 +131,7 @@
 		24D24CE21CFEC71800CD75D2 /* PlayerOrderLevelVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D24CE11CFEC71800CD75D2 /* PlayerOrderLevelVC.m */; };
 		24D24CEE1CFEF4EE00CD75D2 /* CustomNavigationVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D24CED1CFEF4EE00CD75D2 /* CustomNavigationVC.m */; };
 		24D24CF01CFEF50000CD75D2 /* CustomNavigationVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24D24CEF1CFEF50000CD75D2 /* CustomNavigationVC.xib */; };
+		24D6493F1D426AEE007D1393 /* DatabaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 24D6493E1D426AEE007D1393 /* DatabaseViewController.m */; };
 		24E7B4B21D23884200EF0D55 /* DeclareInnings.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E7B4B01D23884200EF0D55 /* DeclareInnings.m */; };
 		24E7B4B31D23884200EF0D55 /* DeclareInnings.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24E7B4B11D23884200EF0D55 /* DeclareInnings.xib */; };
 		24E7B4B71D23895300EF0D55 /* DBManagerDeclareInnings.m in Sources */ = {isa = PBXBuildFile; fileRef = 24E7B4B61D23895300EF0D55 /* DBManagerDeclareInnings.m */; };
@@ -500,6 +501,8 @@
 		24D24CEC1CFEF4EE00CD75D2 /* CustomNavigationVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomNavigationVC.h; sourceTree = "<group>"; };
 		24D24CED1CFEF4EE00CD75D2 /* CustomNavigationVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomNavigationVC.m; sourceTree = "<group>"; };
 		24D24CEF1CFEF50000CD75D2 /* CustomNavigationVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomNavigationVC.xib; sourceTree = "<group>"; };
+		24D6493D1D426AEE007D1393 /* DatabaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatabaseViewController.h; sourceTree = "<group>"; };
+		24D6493E1D426AEE007D1393 /* DatabaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseViewController.m; sourceTree = "<group>"; };
 		24E7B4AF1D23884200EF0D55 /* DeclareInnings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeclareInnings.h; path = ViewController/DeclarInningsVC/DeclareInnings.h; sourceTree = "<group>"; };
 		24E7B4B01D23884200EF0D55 /* DeclareInnings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeclareInnings.m; path = ViewController/DeclarInningsVC/DeclareInnings.m; sourceTree = "<group>"; };
 		24E7B4B11D23884200EF0D55 /* DeclareInnings.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DeclareInnings.xib; path = ViewController/DeclarInningsVC/DeclareInnings.xib; sourceTree = "<group>"; };
@@ -1305,6 +1308,8 @@
 				1883E48F1D2A3C85000A279C /* OverBallCountRecord.m */,
 				187E5A481D30DA8A008470EB /* DeleteScoreEngine.h */,
 				187E5A491D30DA8A008470EB /* DeleteScoreEngine.m */,
+				24D6493D1D426AEE007D1393 /* DatabaseViewController.h */,
+				24D6493E1D426AEE007D1393 /* DatabaseViewController.m */,
 			);
 			name = ReSource;
 			sourceTree = "<group>";
@@ -1939,6 +1944,7 @@
 				24F96F851D2FC90500798A9D /* PenalityTVC.m in Sources */,
 				18704EE11D19598C00996BF3 /* GetMatchResultDetail.m in Sources */,
 				04EC778D1D2956C2005B2608 /* INNINGSBREAKEVENTSPushRecord.m in Sources */,
+				24D6493F1D426AEE007D1393 /* DatabaseViewController.m in Sources */,
 				246124F91D13C460004B85E7 /* InningsBowlerDetailsRecord.m in Sources */,
 				04EC77911D2956F0005B2608 /* OVEREVENTSPushRecord.m in Sources */,
 				1881E0851D103FFC003DEA09 /* FetchLastBallBowledPlayer.m in Sources */,

@@ -62,6 +62,8 @@
     int selectTeamindex;
     
     NSString* BowlingEnd;
+    DBManager *objDBManager;
+
 }
 @property (nonatomic,strong)NSMutableArray*WonTossArray;
 @property (nonatomic,strong)NSMutableArray*ElectedToArray;
@@ -81,11 +83,10 @@
 @synthesize MATCHCODE;
 @synthesize CompetitionCode;
 
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    objDBManager = [[DBManager alloc]init];
     
     [self customnavigationmethod];
     
@@ -473,7 +474,7 @@
         _Bowler_lbl.text = @"";
         
         WonTossArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchTossWonArray =[DBManager checkTossDetailsWonby:MATCHCODE];
+        NSMutableArray * FetchTossWonArray =[objDBManager checkTossDetailsWonby:MATCHCODE];
         for(int i=0; i < [FetchTossWonArray count]; i++)
         {
             
@@ -511,7 +512,7 @@
         _nonStriker_lbl.text = @"";
         _Bowler_lbl.text = @"";
         ElectedToArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchElectedToArray =[DBManager Electedto];
+        NSMutableArray * FetchElectedToArray =[objDBManager Electedto];
         for(int i=0; i < [FetchElectedToArray count]; i++)
         {
             
@@ -577,7 +578,7 @@
         
         StrikerArray=[[NSMutableArray alloc]init];
         
-        NSMutableArray * FetchstrikerArray =[DBManager StrikerNonstriker : MATCHCODE:teamaCode];
+        NSMutableArray * FetchstrikerArray =[objDBManager StrikerNonstriker : MATCHCODE:teamaCode];
         for(int i=0; i < [FetchstrikerArray count]; i++)
         {
             objTossDeatilsRecord=(TossDeatilsEvent*)[FetchstrikerArray objectAtIndex:i];
@@ -630,7 +631,7 @@
         
         nonStrikerArray=[[NSMutableArray alloc]init];
         
-        NSMutableArray * FetchnonstrikerArray =[DBManager StrikerNonstriker:MATCHCODE:teamaCode];
+        NSMutableArray * FetchnonstrikerArray =[objDBManager StrikerNonstriker:MATCHCODE:teamaCode];
         for(int i=0; i < [FetchnonstrikerArray count]; i++)
         {
             objTossDeatilsRecord=(TossDeatilsEvent*)[FetchnonstrikerArray objectAtIndex:i];
@@ -690,7 +691,7 @@
         
         BowleArray=[[NSMutableArray alloc]init];
         
-        NSMutableArray * FetchBowlerArray =[DBManager Bowler:MATCHCODE :teambCode];
+        NSMutableArray * FetchBowlerArray =[objDBManager Bowler:MATCHCODE :teambCode];
         for(int i=0; i < [FetchBowlerArray count]; i++)
         {
             objBowlerEventRecord=(BowlerEvent*)[FetchBowlerArray objectAtIndex:i];
@@ -755,10 +756,11 @@
 
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    DBManagerChangeToss *dbChangeToss = [[DBManagerChangeToss alloc]init];
     //if (alertView.tag == 1) { // UIAlertView with tag 1 detected
     if (buttonIndex == 0 && alertView.tag == 1)
     {
-        [DBManagerChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : electedcode : StrikerCode : NonStrikerCode : selectBowlerCode :BowlingEnd];
+        [dbChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : electedcode : StrikerCode : NonStrikerCode : selectBowlerCode :BowlingEnd];
         
         [self startService:@"DONE"];
         

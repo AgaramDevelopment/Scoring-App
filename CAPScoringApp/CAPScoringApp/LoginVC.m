@@ -104,7 +104,7 @@
                 if([[errorItemObj objectForKey:@"ErrorNo"] isEqual:@"MOB0005"]){
                     BOOL isUserLogin = YES;
                     
-                  
+                  LoginDBmanager *objLoginDBmanager = [[LoginDBmanager alloc] init];
                     [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
 
                     
@@ -144,15 +144,15 @@
                         NSLog(@"dateString:",LICENSEUPTO);
                         
                         
-                        bool CheckStatus=[LoginDBmanager CheckUserDetails : LOGINID:PASSWORD];
+                        bool CheckStatus=[objLoginDBmanager CheckUserDetails : LOGINID:PASSWORD];
                         if (CheckStatus==YES)
                         {
-                            [LoginDBmanager UPDATEUSERDETAILS:LOGINID:PASSWORD:LICENSEUPTO];
+                            [objLoginDBmanager UPDATEUSERDETAILS:LOGINID:PASSWORD:LICENSEUPTO];
                         }
                         
                         else
                         {
-                            [LoginDBmanager INSERTUSERDETAILS :USERCODE: USERROLEID:LOGINID: PASSWORD:REMEMBERME:REMENTDATE:USERFULLNAME:MACHINEID : LICENSEUPTO: CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
+                            [objLoginDBmanager INSERTUSERDETAILS :USERCODE: USERROLEID:LOGINID: PASSWORD:REMEMBERME:REMENTDATE:USERFULLNAME:MACHINEID : LICENSEUPTO: CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
                             
                         }
                       
@@ -200,15 +200,15 @@
                         NSLog(@"dateString:",ENDDATE);
                         
                         
-                        bool CheckStatus= [LoginDBmanager CheckSecureIdDetails :USERNAME];
+                        bool CheckStatus= [objLoginDBmanager CheckSecureIdDetails :USERNAME];
                         if (CheckStatus==YES)
                         {
-                            [LoginDBmanager UPDATESECUREIDDETAILS : USERNAME:SECUREID:STARTDATE:ENDDATE:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
+                            [objLoginDBmanager UPDATESECUREIDDETAILS : USERNAME:SECUREID:STARTDATE:ENDDATE:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
                         }
                         
                         else
                         {
-                            [LoginDBmanager INSERTSECUREIDDETAILS:USERNAME:SECUREID:STARTDATE:ENDDATE:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
+                            [objLoginDBmanager INSERTSECUREIDDETAILS:USERNAME:SECUREID:STARTDATE:ENDDATE:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:RECORDSTATUS];
 
                             
                         }
@@ -237,15 +237,15 @@
                         
                         
                         
-                        bool CheckStatus= [LoginDBmanager CheckMatchScorerDetails:Competitioncode :Matchcode :Scorercode ];
+                        bool CheckStatus= [objLoginDBmanager CheckMatchScorerDetails:Competitioncode :Matchcode :Scorercode ];
                         if (CheckStatus==YES)
                         {
-                            [LoginDBmanager UpdateMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
+                            [objLoginDBmanager UpdateMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
                         }
                         
                         else
                         {
-                            [LoginDBmanager InsertMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
+                            [objLoginDBmanager InsertMatchScorerDetails:Competitioncode :Matchcode :Scorercode :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
                             
                             
                         }
@@ -305,13 +305,15 @@
 
             //[delegate hideLoading];
         }else{
-            NSMutableArray *userMutableArray = [DBManager checkUserLogin : userNameLbl password:passwordLbl];
+            DBManager *objDBManager = [[DBManager alloc]init];
+
+            NSMutableArray *userMutableArray = [objDBManager checkUserLogin : userNameLbl password:passwordLbl];
             if([userMutableArray count]!=0){
                 UserRecord *userRecode = [userMutableArray objectAtIndex:0];
-                
-                if([DBManager checkExpiryDate:[userRecode userCode]]){
+
+                if([objDBManager checkExpiryDate:[userRecode userCode]]){
                   
-                     if ([DBManager checkSecurityExpiryDate :userRecode.userName ])
+                     if ([objDBManager checkSecurityExpiryDate :userRecode.userName ])
                      {
                     BOOL isUserLogin = YES;
                     NSString *userCode = [userRecode userCode];

@@ -30,8 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.resultarray =[[NSMutableArray alloc]init];
+    DBManager *objDBManager = [[DBManager alloc]init];
     
-    _resultarray=[DBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
+    _resultarray=[objDBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
 }
 
 

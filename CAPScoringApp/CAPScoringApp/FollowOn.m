@@ -19,9 +19,11 @@
    BOOL IsBowler ;
     NSMutableArray *CommonArry;
     NSString *followon;
+    DBManagerFollowOn *dbFollowOn;
 }
 
 @end
+
 
 @implementation FollowOn
 @synthesize TEAMCODE,TEAMNAME,TOTALRUN,TOTALRUNS,OVERNO,OVERBALLNO,OVERSTATUS,BALLNO,BOWLINGTEAMCODE,WICKETS,INNINGSSCORECARD;
@@ -29,7 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
+    dbFollowOn = [[DBManagerFollowOn alloc]init];
     self.view_teamName.layer.borderWidth = 1.0;
     self.view_teamName.layer.borderColor = [UIColor colorWithRed:(48/255.0f) green:(62/255.0f) blue:(73/255.0f) alpha:1.0f].CGColor;
     
@@ -58,7 +60,7 @@
     self.Tbl_Followon.hidden=YES;
     CommonArry =[[NSMutableArray alloc]init];
    
-    followon=[DBManager getFollowOn:self.matchCode :self.compitionCode :self.inningsno];
+    followon=[[[DBManager alloc] init] getFollowOn:self.matchCode :self.compitionCode :self.inningsno];
     if([self.inningsno isEqualToString:@"2"] || [self.inningsno isEqualToString:@"3"])
     {
         if([followon isEqualToString:@"1"])
@@ -104,7 +106,7 @@
     IsStricker =YES;
     IsNonStricker =NO;
     IsBowler =NO;
-    NSMutableArray *objStrickernonstrickerdetail=[DBManagerFollowOn GetSelectionBattingTeamForFetchTeamNameSelectionChanged:self.matchCode :self.battingTeamCode];
+    NSMutableArray *objStrickernonstrickerdetail=[dbFollowOn GetSelectionBattingTeamForFetchTeamNameSelectionChanged:self.matchCode :self.battingTeamCode];
     CommonArry =objStrickernonstrickerdetail;
     
     self.Tbl_Followon.hidden=NO;
@@ -125,7 +127,7 @@
     IsStricker =NO;
     IsNonStricker =YES;
     IsBowler =NO;
-    NSMutableArray *objStrickernonstrickerdetail=[DBManagerFollowOn GetSelectionBattingTeamForFetchTeamNameSelectionChanged:self.matchCode :self.battingTeamCode];
+    NSMutableArray *objStrickernonstrickerdetail=[dbFollowOn GetSelectionBattingTeamForFetchTeamNameSelectionChanged:self.matchCode :self.battingTeamCode];
     CommonArry =objStrickernonstrickerdetail;
     
     self.Tbl_Followon.hidden=NO;
@@ -146,7 +148,7 @@
     IsStricker =NO;
     IsNonStricker =NO;
     IsBowler =YES;
-//    NSMutableArray *objBowlingTeamdetail =[DBManagerFollowOn GetSelectionBattingTeamForFetchTeamNameSelectionChanged:self.matchCode :self.BowlingTeamCode];
+//    NSMutableArray *objBowlingTeamdetail =[dbFollowOn GetSelectionBattingTeamForFetchTeamNameSelectionChanged:self.matchCode :self.BowlingTeamCode];
     CommonArry=self.objBowlingTeamdetail;
     self.Tbl_Followon.hidden=NO;
     self.tbl_FollowonYposition.constant=self.view_Bowler.frame.origin.y-130;
@@ -362,18 +364,18 @@
     
     if([INNINGSNO isEqualToString:@"2"])
     {
-        if([DBManagerFollowOn GetBallCodeForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO ])
+        if([dbFollowOn GetBallCodeForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO ])
         {
-            TOTALRUNS=[DBManagerFollowOn GetTotalRunsForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO];
+            TOTALRUNS=[dbFollowOn GetTotalRunsForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO];
             
-            OVERNO=[DBManagerFollowOn GetOverNoForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO];
+            OVERNO=[dbFollowOn GetOverNoForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO];
             
-            BALLNO=[DBManagerFollowOn GetBallNoForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO : OVERNO];
+            BALLNO=[dbFollowOn GetBallNoForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO : OVERNO];
             
             
-            OVERSTATUS=[DBManagerFollowOn GetOverStatusForUpdateFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO: OVERNO];
+            OVERSTATUS=[dbFollowOn GetOverStatusForUpdateFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO: OVERNO];
             
-            BOWLINGTEAMCODE=[DBManagerFollowOn GetBowlingTeamCodeForUpdateFollowOn: COMPETITIONCODE:TEAMNAME :  MATCHCODE];
+            BOWLINGTEAMCODE=[dbFollowOn GetBowlingTeamCodeForUpdateFollowOn: COMPETITIONCODE:TEAMNAME :  MATCHCODE];
             
             
             if([OVERSTATUS isEqualToString: @"1"])
@@ -381,15 +383,15 @@
             else
                 OVERBALLNO = [NSString stringWithFormat:@"%@.%@" ,OVERNO,BALLNO];
             
-            WICKETS=[DBManagerFollowOn GetWicketForUpdateFollowOn:COMPETITIONCODE :MATCHCODE :TEAMNAME :INNINGSNO];
+            WICKETS=[dbFollowOn GetWicketForUpdateFollowOn:COMPETITIONCODE :MATCHCODE :TEAMNAME :INNINGSNO];
             
          
-            [DBManagerFollowOn UpdateInningsEventForInsertScoreBoard:TEAMNAME :TOTALRUNS :OVERNO :WICKETS :@"1" :@"0" :COMPETITIONCODE :MATCHCODE :INNINGSNO];
+            [dbFollowOn UpdateInningsEventForInsertScoreBoard:TEAMNAME :TOTALRUNS :OVERNO :WICKETS :@"1" :@"0" :COMPETITIONCODE :MATCHCODE :INNINGSNO];
             
-            if(![DBManagerFollowOn GetTeamCodeForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMNAME :INNINGSNO])
+            if(![dbFollowOn GetTeamCodeForUpdateFollowOn : COMPETITIONCODE:  MATCHCODE: TEAMNAME :INNINGSNO])
             {
                 
-                [DBManagerFollowOn InsertInningsEventForInsertScoreBoard : COMPETITIONCODE : MATCHCODE :TEAMNAME :INNINGSNO :STRIKER :NONSTRIKER :BOWLER];
+                [dbFollowOn InsertInningsEventForInsertScoreBoard : COMPETITIONCODE : MATCHCODE :TEAMNAME :INNINGSNO :STRIKER :NONSTRIKER :BOWLER];
                 
                 INNINGSSCORECARD = [NSString stringWithFormat:@"%d",INNINGSNO.intValue +1];
                 
@@ -397,7 +399,7 @@
                 //EXEC SP_INITIALIZEINNINGSSCOREBOARD
                 [InitializeInningsScoreBoardRecord InitializeInningsScoreBoard : COMPETITIONCODE : MATCHCODE :TEAMNAME :BOWLINGTEAMCODE :INNINGSSCORECARD :STRIKER :NONSTRIKER : BOWLER : [NSNumber numberWithInt:0]];
             }else{
-                    [DBManagerFollowOn UpdateInningsEventInStrickerForInsertScoreBoard: COMPETITIONCODE : MATCHCODE : TEAMNAME : INNINGSNO : STRIKER : NONSTRIKER : BOWLER];
+                    [dbFollowOn UpdateInningsEventInStrickerForInsertScoreBoard: COMPETITIONCODE : MATCHCODE : TEAMNAME : INNINGSNO : STRIKER : NONSTRIKER : BOWLER];
                 
             }
            
@@ -413,11 +415,11 @@
 {
     if(INNINGSNO.intValue ==3)
     {
-        if([DBManagerFollowOn GetBallCodeForDeleteFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO].length <= 0)
+        if([dbFollowOn GetBallCodeForDeleteFollowOn: COMPETITIONCODE:  MATCHCODE: TEAMNAME : INNINGSNO].length <= 0)
         {
-            [DBManagerFollowOn UpdateInningsEventForDeleteFollowOn: COMPETITIONCODE:  MATCHCODE: INNINGSNO ];
+            [dbFollowOn UpdateInningsEventForDeleteFollowOn: COMPETITIONCODE:  MATCHCODE: INNINGSNO ];
             
-            [DBManagerFollowOn DeleteInningsEventForDeleteFollowOn: COMPETITIONCODE:  MATCHCODE: INNINGSNO ];
+            [dbFollowOn DeleteInningsEventForDeleteFollowOn: COMPETITIONCODE:  MATCHCODE: INNINGSNO ];
             //EXEC SP_INITIALIZEINNINGSSCOREBOARD
             [InitializeInningsScoreBoardRecord InitializeInningsScoreBoard : COMPETITIONCODE : MATCHCODE :@"" :@"" :INNINGSNO :@"" :@"" : @"" : [NSNumber numberWithInt:1]];
             return YES;

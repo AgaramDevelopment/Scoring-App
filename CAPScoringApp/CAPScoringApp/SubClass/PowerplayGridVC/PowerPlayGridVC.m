@@ -31,8 +31,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.resultarray =[[NSMutableArray alloc]init];
-    
-    _resultarray= [DBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
+    DBManager *objDBManager = [[DBManager alloc]init];
+    _resultarray= [objDBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
 }
 
 

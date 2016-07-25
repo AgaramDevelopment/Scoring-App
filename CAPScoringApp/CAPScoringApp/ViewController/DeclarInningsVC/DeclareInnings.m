@@ -45,10 +45,10 @@
 [self.btn_revert addTarget:self action:@selector(btn_revert:) forControlEvents:UIControlEventTouchUpInside];
 [self.btn_yes addTarget:self action:@selector(btn_yes:) forControlEvents:UIControlEventTouchUpInside];
     
-    
-     OVERNO=[DBManagerDeclareInnings  GetOverNoForUpdateDeclareInnings  : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+    DBManagerDeclareInnings *objDBManagerDeclareInnings = [[DBManagerDeclareInnings alloc]init];
+     OVERNO=[objDBManagerDeclareInnings  GetOverNoForUpdateDeclareInnings  : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
    
-     BALLNO=[DBManagerDeclareInnings GetBallNoForUpdateDeclareInnings  : COMPETITIONCODE : MATCHCODE : TEAMCODE : OVERNO: INNINGSNO];
+     BALLNO=[objDBManagerDeclareInnings GetBallNoForUpdateDeclareInnings  : COMPETITIONCODE : MATCHCODE : TEAMCODE : OVERNO: INNINGSNO];
     
     
    ballNo = [BALLNO integerValue];
@@ -120,21 +120,22 @@
 -(void) UpdateDeclareInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE :(NSString*)TEAMCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)INNINGSNO:(NSString*)ISDECLARE
 
 {
+    DBManagerDeclareInnings *objDBManagerDeclareInnings = [[DBManagerDeclareInnings alloc]init];
     
     if(ISDECLARE.intValue == 1)
     {
         
-        if([DBManagerDeclareInnings GetBallCodeForUpdateDeclareInnings : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO])
+        if([objDBManagerDeclareInnings GetBallCodeForUpdateDeclareInnings : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO])
         {
-            TEAMNAME=[DBManagerDeclareInnings GetTeamNameForUpdateDeclareInnings : TEAMCODE];
+            TEAMNAME=[objDBManagerDeclareInnings GetTeamNameForUpdateDeclareInnings : TEAMCODE];
             
-            TOTALRUN=[DBManagerDeclareInnings GetTotalRunForUpdateDeclareInnings  : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+            TOTALRUN=[objDBManagerDeclareInnings GetTotalRunForUpdateDeclareInnings  : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
             
-            OVERNO=[DBManagerDeclareInnings  GetOverNoForUpdateDeclareInnings  : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+            OVERNO=[objDBManagerDeclareInnings  GetOverNoForUpdateDeclareInnings  : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
             
-            BALLNO=[DBManagerDeclareInnings GetBallNoForUpdateDeclareInnings  : COMPETITIONCODE : MATCHCODE : TEAMCODE : OVERNO: INNINGSNO];
+            BALLNO=[objDBManagerDeclareInnings GetBallNoForUpdateDeclareInnings  : COMPETITIONCODE : MATCHCODE : TEAMCODE : OVERNO: INNINGSNO];
             
-            OVERSTATUS=[DBManagerDeclareInnings GetOverStatusForUpdateDeclareInnings : COMPETITIONCODE : MATCHCODE : TEAMCODE : OVERNO: INNINGSNO];
+            OVERSTATUS=[objDBManagerDeclareInnings GetOverStatusForUpdateDeclareInnings : COMPETITIONCODE : MATCHCODE : TEAMCODE : OVERNO: INNINGSNO];
             
             if(OVERSTATUS.intValue == 1)
             {
@@ -151,22 +152,22 @@
                 OVERBALLNO = [NSString stringWithFormat:@"%d.@%d" ,overNo,BALLNO];
             }
             
-            WICKETS=[DBManagerDeclareInnings GetWicketForUpdateDeclareInnings : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+            WICKETS=[objDBManagerDeclareInnings GetWicketForUpdateDeclareInnings : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
             
-            [DBManagerDeclareInnings UpdateInningsEventForUpdateDeclareInnings:TEAMCODE :TOTALRUN :OVERBALLNO :WICKETS :ISDECLARE :COMPETITIONCODE :MATCHCODE :INNINGSNO];
+            [objDBManagerDeclareInnings UpdateInningsEventForUpdateDeclareInnings:TEAMCODE :TOTALRUN :OVERBALLNO :WICKETS :ISDECLARE :COMPETITIONCODE :MATCHCODE :INNINGSNO];
         }
     }
     
     else
     {
-        if(![DBManagerDeclareInnings GetBallCodeInRevertInningsForUpdateDeclareInnings : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO])
+        if(![objDBManagerDeclareInnings GetBallCodeInRevertInningsForUpdateDeclareInnings : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO])
    
     {
-        [DBManagerDeclareInnings UpdateInningsEventInRevertInningsForUpdateDeclareInnings: ISDECLARE: COMPETITIONCODE: MATCHCODE : INNINGSNO];
+        [objDBManagerDeclareInnings UpdateInningsEventInRevertInningsForUpdateDeclareInnings: ISDECLARE: COMPETITIONCODE: MATCHCODE : INNINGSNO];
         
-        [DBManagerDeclareInnings DeleteInningsEventForUpdateDeclareInnings: COMPETITIONCODE: MATCHCODE : INNINGSNO];
+        [objDBManagerDeclareInnings DeleteInningsEventForUpdateDeclareInnings: COMPETITIONCODE: MATCHCODE : INNINGSNO];
         
-        [DBManagerDeclareInnings DeleteMatchResultForUpdateDeclareInnings: COMPETITIONCODE: MATCHCODE];
+        [objDBManagerDeclareInnings DeleteMatchResultForUpdateDeclareInnings: COMPETITIONCODE: MATCHCODE];
     }
     
     

@@ -24,9 +24,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    DBManager *objDBManager=[[DBManager alloc]init];
     //_FetchOfficalMasterArray=[[NSMutableArray alloc]init];
-    _FetchOfficalMasterArray =[DBManager RetrieveOfficalMasterData:Matchcode competitionCode:competitionCode];
+    _FetchOfficalMasterArray =[objDBManager RetrieveOfficalMasterData:Matchcode competitionCode:competitionCode];
     
     [self customnavigationmethod];
     
@@ -51,6 +51,9 @@
     self.view_scorer2.layer.borderWidth = 2;
     
     
+    
+    
+    
     if([self.FetchOfficalMasterArray count]>0){
           OfficialMasterRecord *objMatchofficalRecord = [self.FetchOfficalMasterArray objectAtIndex:0];
         
@@ -58,13 +61,13 @@
         NSString *username=[defaults stringForKey :@"UserFullname"];
         
         NSString *userCode=[defaults stringForKey:@"userCode"];
-
+        NSMutableArray *scorearray=[objDBManager RetrieveSCORE2:competitionCode:Matchcode:userCode];
         self.lbl_umpire1.text=objMatchofficalRecord.umpire1name;
         self.lbl_umpire2.text=objMatchofficalRecord.umpire2name;
         self.lbl_umpire3.text=objMatchofficalRecord.umpire3name;
         self.lbl_matchreferee.text=objMatchofficalRecord.matchrefereename;
         self.lbl_scorer1.text=username;
-        self.lbl_scorer2.text=@"-";
+        self.lbl_scorer2.text=objMatchofficalRecord.scorename2;
         //self.lbl_scorer2.text=objMatchofficalRecord.umpire1name;
     }
 }
