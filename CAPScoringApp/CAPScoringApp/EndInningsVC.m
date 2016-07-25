@@ -20,7 +20,7 @@
 #import "MatchResultListVC.h"
 #import "Utitliy.h"
 #import "ArchivesVC.h"
-@interface EndInningsVC ()<UITextFieldDelegate>
+@interface EndInningsVC ()<UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 {
     NSDateFormatter *formatter;
     NSObject *fetchEndinnings;
@@ -34,6 +34,7 @@
     NSString *OldInningsNo;
     NSString *ballNo;
     NSString *MatchDate;
+    BOOL isEndDate;
     
 }
 @end
@@ -50,7 +51,7 @@ BOOL IsBack;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view_datepicker.hidden=YES;
 }
 -(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE{
     
@@ -167,45 +168,68 @@ BOOL IsBack;
 }
 
 -(void)datePicker{
+    self.view_datepicker.hidden=NO;
     
     
-[datePicker setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_FR"]];
-    
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_startInnings.frame.origin.x,self.txt_startInnings.frame.origin.y+30,self.view.frame.size.width,200)];
-    
-    
-    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-    
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate * currentDate = [dateFormat dateFromString:MatchDate];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+   // NSDate *currentDate = [NSDate date];
+     NSDateComponents *comps = [[NSDateComponents alloc] init];
+    if([self.MATCHTYPECODE isEqual:@"MSC114"] || [self.MATCHTYPECODE isEqual:@"MSC023"])
+    {
+        [comps setDay:5];
+       [comps setMonth:0];
+       [comps setYear:0];
+    }
+    else
+    {
+        [comps setDay:5];
+        [comps setMonth:0];
+        [comps setYear:0];
 
-    [self.txt_startInnings setInputView:datePicker];
-    UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
-    [toolbar setTintColor:[UIColor grayColor]];
-    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
-                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate:)];
+    }
     
- 
-
+   // self.timestamp = [[NSCalendar currentCalendar] dateFromComponents:comps];
     
-    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
+    NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+    //[comps setYear:-1];
+    [comps setDay:0];
+    [comps setMonth:0];
+    [comps setYear:0];
+    NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
     
-   [self.txt_startInnings setInputAccessoryView:toolbar];
+     datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_startInnings.frame.origin.x,self.txt_startInnings.frame.origin.y+30,self.view.frame.size.width,100)];
+    //[datePicker setMaximumDate:maxDate];
+    //[datePicker setMinimumDate:minDate];
+    [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
+    [datePicker setMinimumDate:minDate];
+    [datePicker setMaximumDate:maxDate];
+    [datePicker setDate:minDate animated:YES];
+    [datePicker reloadInputViews];
+    [self.view_datepicker addSubview:datePicker];
     
-
-    [datePicker addTarget:self
-                   action:@selector(showSelecteddate:)forControlEvents:UIControlEventValueChanged];
-
-    self.txt_startInnings.inputView = toolbar;
+//    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_startInnings.frame.origin.x,self.txt_startInnings.frame.origin.y+30,self.view.frame.size.width,200)];
+//    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
 //    
-//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-//    //   2016-06-25 12:00:00
-//    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    NSDate *matchdate = [dateFormat dateFromString:MatchDate];
-    
-    
-    //datePicker.date = MatchDate;
-    [self duration];
+//    [self.txt_startInnings setInputView:datePicker];
+//    UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
+//    [toolbar setTintColor:[UIColor grayColor]];
+//    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
+//                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
+//    
+//    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+//    
+//    [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
+//    
+//    [self.txt_startInnings setInputAccessoryView:toolbar];
+//
+//    
+//    [self duration];
 
     
 }
@@ -245,31 +269,44 @@ BOOL IsBack;
     
     NSString *minimumdateStr = [dateFormat stringFromDate:matchdate];
     NSString*maxmimumdateStr=[dateFormat stringFromDate:newDate1];
-    
-    _txt_startInnings.text=[dateFormat stringFromDate:datePicker.date];
+    if(isEndDate==YES)
+    {
+        _txt_endInnings.text=[dateFormat stringFromDate:datePicker.date];
+    }
+    else
+    {
+        _txt_startInnings.text=[dateFormat stringFromDate:datePicker.date];
+    }
     NSLog(@"check: %@",_txt_startInnings.text);
     
     //BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_txt_startInnings text]];
     
     [self duration];
+    [self.view_datepicker setHidden:YES];
     
    }
 
 -(void)endDatePicker{
-    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_endInnings.frame.origin.x,self.txt_endInnings.frame.origin.y+30,self.view.frame.size.width,200)];
-    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-    
-    [self.txt_endInnings setInputView:datePicker];
-    UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
-    [toolbar setTintColor:[UIColor grayColor]];
-    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
-                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showEndDatePicker)];
-    
-    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
-    
-    [self.txt_endInnings setInputAccessoryView:toolbar];
+    if(datePicker!= nil)
+    {
+        [datePicker removeFromSuperview];
+        [self datePicker];
+        
+    }
+//    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_endInnings.frame.origin.x,self.txt_endInnings.frame.origin.y+30,self.view.frame.size.width,200)];
+//    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
+//    
+//    [self.txt_endInnings setInputView:datePicker];
+//    UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
+//    [toolbar setTintColor:[UIColor grayColor]];
+//    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
+//                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showEndDatePicker)];
+//    
+//    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+//    
+//    [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
+//    
+//    [self.txt_endInnings setInputAccessoryView:toolbar];
 }
 -(void)showEndDatePicker{
     
@@ -311,10 +348,12 @@ BOOL IsBack;
 {
     if(textField.tag == 1)
     {
+        isEndDate=NO;
          [self datePicker];
     }
     else if (textField.tag == 2)
     {
+        isEndDate=YES;
          [self endDatePicker];
     }
 }
@@ -329,7 +368,7 @@ BOOL IsBack;
     self.view_allControls.hidden = NO;
     self.tbl_endInnings.hidden = YES;
     self.view_Header.hidden = YES;
- 
+    self.Btn_Add.hidden=YES;
     
     
     [self.btn_save setTitle: @"SAVE" forState: UIControlStateNormal];
@@ -377,6 +416,7 @@ BOOL IsBack;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.Btn_Add.hidden=YES;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
     EndInnings *obj =(EndInnings*)[endInningsArray objectAtIndex:indexPath.row];
@@ -525,6 +565,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         self.view_allControls.hidden = YES;
         self.tbl_endInnings.hidden = NO;
          self.view_Header.hidden = NO;
+        self.Btn_Add.hidden=NO;
         IsBack = YES;
     
     }else if (IsBack == YES){

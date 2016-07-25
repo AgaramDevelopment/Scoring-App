@@ -674,20 +674,24 @@
                             <exclude reference="WJd-Y3-X2E"/>
                         </mask>
                         <mask key="constraints">
+                            <exclude reference="0RC-PQ-RXa"/>
+                            <exclude reference="a99-WX-biM"/>
+                            <exclude reference="xBF-me-dEZ"/>
+                            <exclude reference="w0M-8e-Y9R"/>
+                            <exclude reference="dFO-Nk-xTS"/>
+                            <exclude reference="SJQ-Nu-txT"/>
+                            <exclude reference="k9m-gg-CPw"/>
+                            <exclude reference="vuW-mh-Ir1"/>
+                            <exclude reference="263-wa-IAQ"/>
+                            <exclude reference="GLy-R6-Kio"/>
+                            <exclude reference="H1O-U5-wvB"/>
+                            <exclude reference="0h1-HU-ic5"/>
+                            <exclude reference="aWF-ft-yFj"/>
+                            <exclude reference="jk1-O2-paT"/>
                             <exclude reference="E42-3u-hQc"/>
                             <exclude reference="gPC-Ch-dm7"/>
                             <exclude reference="hwL-4P-tNC"/>
                             <exclude reference="peB-ml-e30"/>
-                            <exclude reference="Yau-Os-yQV"/>
-                            <exclude reference="g8a-Np-x4D"/>
-                            <exclude reference="nbn-5G-4RQ"/>
-                            <exclude reference="SJQ-Nu-txT"/>
-                            <exclude reference="k9m-gg-CPw"/>
-                            <exclude reference="dFO-Nk-xTS"/>
-                            <exclude reference="vuW-mh-Ir1"/>
-                            <exclude reference="0h1-HU-ic5"/>
-                            <exclude reference="aWF-ft-yFj"/>
-                            <exclude reference="jk1-O2-paT"/>
                             <exclude reference="Ixf-go-63U"/>
                             <exclude reference="pBo-I7-2we"/>
                             <exclude reference="GR5-mL-Knc"/>
@@ -697,13 +701,9 @@
                             <exclude reference="kbV-dL-yLH"/>
                             <exclude reference="opq-ju-wLi"/>
                             <exclude reference="yUS-hT-Etf"/>
-                            <exclude reference="w0M-8e-Y9R"/>
-                            <exclude reference="263-wa-IAQ"/>
-                            <exclude reference="GLy-R6-Kio"/>
-                            <exclude reference="H1O-U5-wvB"/>
-                            <exclude reference="0RC-PQ-RXa"/>
-                            <exclude reference="a99-WX-biM"/>
-                            <exclude reference="xBF-me-dEZ"/>
+                            <exclude reference="Yau-Os-yQV"/>
+                            <exclude reference="g8a-Np-x4D"/>
+                            <exclude reference="nbn-5G-4RQ"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=regular">
@@ -723,20 +723,24 @@
                             <include reference="WJd-Y3-X2E"/>
                         </mask>
                         <mask key="constraints">
+                            <include reference="0RC-PQ-RXa"/>
+                            <include reference="a99-WX-biM"/>
+                            <include reference="xBF-me-dEZ"/>
+                            <include reference="w0M-8e-Y9R"/>
+                            <include reference="dFO-Nk-xTS"/>
+                            <include reference="SJQ-Nu-txT"/>
+                            <include reference="k9m-gg-CPw"/>
+                            <include reference="vuW-mh-Ir1"/>
+                            <include reference="263-wa-IAQ"/>
+                            <include reference="GLy-R6-Kio"/>
+                            <include reference="H1O-U5-wvB"/>
+                            <include reference="0h1-HU-ic5"/>
+                            <include reference="aWF-ft-yFj"/>
+                            <include reference="jk1-O2-paT"/>
                             <include reference="E42-3u-hQc"/>
                             <include reference="gPC-Ch-dm7"/>
                             <include reference="hwL-4P-tNC"/>
                             <include reference="peB-ml-e30"/>
-                            <include reference="Yau-Os-yQV"/>
-                            <include reference="g8a-Np-x4D"/>
-                            <include reference="nbn-5G-4RQ"/>
-                            <include reference="SJQ-Nu-txT"/>
-                            <include reference="k9m-gg-CPw"/>
-                            <include reference="dFO-Nk-xTS"/>
-                            <include reference="vuW-mh-Ir1"/>
-                            <include reference="0h1-HU-ic5"/>
-                            <include reference="aWF-ft-yFj"/>
-                            <include reference="jk1-O2-paT"/>
                             <include reference="Ixf-go-63U"/>
                             <include reference="pBo-I7-2we"/>
                             <include reference="GR5-mL-Knc"/>
@@ -746,13 +750,9 @@
                             <include reference="kbV-dL-yLH"/>
                             <include reference="opq-ju-wLi"/>
                             <include reference="yUS-hT-Etf"/>
-                            <include reference="w0M-8e-Y9R"/>
-                            <include reference="263-wa-IAQ"/>
-                            <include reference="GLy-R6-Kio"/>
-                            <include reference="H1O-U5-wvB"/>
-                            <include reference="0RC-PQ-RXa"/>
-                            <include reference="a99-WX-biM"/>
-                            <include reference="xBF-me-dEZ"/>
+                            <include reference="Yau-Os-yQV"/>
+                            <include reference="g8a-Np-x4D"/>
+                            <include reference="nbn-5G-4RQ"/>
                         </mask>
                     </variation>
                 </view>
