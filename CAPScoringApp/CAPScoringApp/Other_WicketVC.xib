@@ -549,7 +549,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IGi-Yt-DUN">
                                     <rect key="frame" x="0.0" y="75" width="550" height="50"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="247" verticalHuggingPriority="251" text="DISMISSEL TYPE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lti-EQ-lSH">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="247" verticalHuggingPriority="251" text="WICKET TYPE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lti-EQ-lSH">
                                             <rect key="frame" x="6" y="14" width="153" height="22"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="40" id="Od0-W4-tR9"/>
@@ -672,7 +672,7 @@
                                     </connections>
                                 </tableView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.10196078431372549" green="0.12941176470588234" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="M5f-yU-eZP" secondAttribute="bottom" id="3V9-6i-y7B"/>
                                 <constraint firstAttribute="bottom" secondItem="M5f-yU-eZP" secondAttribute="bottom" id="8B3-SS-WFz"/>

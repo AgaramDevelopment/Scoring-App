@@ -164,34 +164,60 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
--(NSMutableArray*) GetPlayerDetailOnRetiredHurtForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
+-(NSMutableArray*) GetPlayerDetailOnRetiredHurtForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO
 {
-    NSMutableArray *arraylist3=[[NSMutableArray alloc]init];
+    NSMutableArray *GetPlayerDetailsOnAbsentHurt=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
     const char *dbPath = [databasePath UTF8String];
-    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
-    {
-        NSString *updateSQL =[NSString stringWithFormat:@" SELECT PM.PLAYERCODE, PM.PLAYERNAME   FROM MATCHREGISTRATION MR    INNER JOIN MATCHTEAMPLAYERDETAILS MPD    ON MR.MATCHCODE = MPD.MATCHCODE    AND MR.COMPETITIONCODE = '%@'    AND MR.MATCHCODE = '%@'    AND MPD.TEAMCODE = '%@'    INNER JOIN COMPETITION COM     ON COM.COMPETITIONCODE = MR.COMPETITIONCODE    INNER JOIN PLAYERMASTER PM    ON MPD.PLAYERCODE = PM.PLAYERCODE    WHERE (PM.PLAYERCODE NOT IN     (     SELECT WKT.WICKETPLAYER     FROM WICKETEVENTS WKT      WHERE WKT.COMPETITIONCODE = @COMPETITIONCODE     AND WKT.MATCHCODE = @MATCHCODE     AND WKT.TEAMCODE = @TEAMCODE     AND WKT.INNINGSNO=@INNINGSNO    )    OR PM.PLAYERCODE IN    (     SELECT CURRENTSTRIKERCODE FROM INNINGSEVENTS     WHERE COMPETITIONCODE = @COMPETITIONCODE     AND MATCHCODE = @MATCHCODE     AND TEAMCODE = @TEAMCODE     AND INNINGSNO = @INNINGSNO     UNION ALL     SELECT CURRENTNONSTRIKERCODE FROM INNINGSEVENTS      WHERE COMPETITIONCODE = '%@'     AND MATCHCODE = '%@'     AND TEAMCODE = '%@'     AND INNINGSNO = '%@'    ))    AND (COM.ISOTHERSMATCHTYPE = 'MSC117' Or (MPD.PLAYINGORDER <= 11))   ORDER BY MPD.PLAYINGORDER",COMPETITIONCODE,MATCHCODE,TEAMCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
-        const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                GetPlayerDetailOnRetiredHurt *record=[[GetPlayerDetailOnRetiredHurt alloc]init];
-                record.PLAYERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                record.PLAYERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                [arraylist3 addObject:record];
-            }
-            sqlite3_reset(statement);
-        }
-    }
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
-    return arraylist3;
-}
+         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+             {
+                 NSString *updateSQL =[NSString stringWithFormat:@"SELECT PM.PLAYERCODE, PM.PLAYERNAME      FROM MATCHREGISTRATION MR      INNER JOIN MATCHTEAMPLAYERDETAILS MPD  ON MR.MATCHCODE = MPD.MATCHCODE      AND MR.COMPETITIONCODE = '%@'  AND MR.MATCHCODE = '%@'  AND MPD.TEAMCODE = '%@'  INNER JOIN COMPETITION COM  ON COM.COMPETITIONCODE = MR.COMPETITIONCODE  INNER JOIN PLAYERMASTER PM ON MPD.PLAYERCODE = PM.PLAYERCODE      WHERE PM.PLAYERCODE NOT IN  (SELECT WKT.WICKETPLAYER FROM WICKETEVENTS WKT        WHERE WKT.COMPETITIONCODE = '%@' AND WKT.MATCHCODE = '%@'  AND WKT.TEAMCODE = '%@' AND WKT.INNINGSNO='%@') AND PM.PLAYERCODE NOT IN (SELECT STRIKERCODE BATSMANCODE FROM (SELECT STRIKERCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'       GROUP BY STRIKERCODE UNION ALL SELECT NONSTRIKERCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND TEAMCODE='%@' AND INNINGSNO='%@' GROUP BY NONSTRIKERCODE) AS BATSMAN)AND (COM.ISOTHERSMATCHTYPE = 'MSC117' Or (MPD.PLAYINGORDER <= 11))ORDER BY MPD.PLAYINGORDER",COMPETITIONCODE,MATCHCODE,TEAMCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
+                 const char *update_stmt = [updateSQL UTF8String];
+                 if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+                 {
+                     while(sqlite3_step(statement)==SQLITE_ROW){
+                     GetPlayerDetailOnAbsentHurt *record=[[GetPlayerDetailOnAbsentHurt alloc]init];
+                    record.PLAYERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                       record.PLAYERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                      [GetPlayerDetailsOnAbsentHurt addObject:record];
+                       }
+                 }
+             }
+                                sqlite3_finalize(statement);
+                               sqlite3_close(dataBase);
+                            return GetPlayerDetailsOnAbsentHurt;
+                                  }
 
+
+-(NSMutableArray*) GetPlayerDetailOnTimeOutForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
+    {
+        NSMutableArray *arraylist4=[[NSMutableArray alloc]init];
+       NSString *databasePath = [self getDBPath];
+       sqlite3_stmt *statement;
+       sqlite3 *dataBase;
+       const char *dbPath = [databasePath UTF8String];
+       if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+       {
+           NSString *updateSQL =[NSString stringWithFormat:@"SELECT PM.PLAYERCODE, PM.PLAYERNAME   FROM MATCHREGISTRATION MR INNER JOIN MATCHTEAMPLAYERDETAILS MPD ON MR.MATCHCODE = MPD.MATCHCODE  AND MR.COMPETITIONCODE ='%@'   AND MR.MATCHCODE = '%@' AND MPD.TEAMCODE ='%@' AND MPD.RECORDSTATUS='MSC001' INNER JOIN COMPETITION COM  ON COM.COMPETITIONCODE = MR.COMPETITIONCODE   INNER JOIN PLAYERMASTER PM      ON MPD.PLAYERCODE = PM.PLAYERCODE WHERE PM.PLAYERCODE NOT IN (SELECT WKT.WICKETPLAYER   FROM WICKETEVENTS WKT  WHERE WKT.COMPETITIONCODE ='%@'  AND WKT.MATCHCODE = '%@' AND WKT.TEAMCODE ='%@'  AND WKT.INNINGSNO='%@' )   AND PM.PLAYERCODE NOT IN (  SELECT STRIKERCODE BATSMANCODE FROM (  SELECT STRIKERCODE FROM BALLEVENTS       WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'   AND TEAMCODE='%@' AND INNINGSNO='%@' GROUP BY STRIKERCODE   UNION ALL   SELECT NONSTRIKERCODE FROM  BALLEVENTS    WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'AND TEAMCODE='%@' AND INNINGSNO='%@'  GROUP BY NONSTRIKERCODE) AS BATSMAN  )  AND (COM.ISOTHERSMATCHTYPE = 'MSC117' Or (MPD.PLAYINGORDER <= 11))     ORDER BY MPD.PLAYINGORDER",COMPETITIONCODE,MATCHCODE,TEAMCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
+           const char *update_stmt = [updateSQL UTF8String];
+           if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+           {
+               while(sqlite3_step(statement)==SQLITE_ROW)
+               {
+             GetPlayerDetailOnAbsentHurt *record=[[GetPlayerDetailOnAbsentHurt alloc]init];
+           record.PLAYERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+             record.PLAYERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+            [arraylist4 addObject:record];
+         }
+           }
+       }
+      sqlite3_finalize(statement);
+      sqlite3_close(dataBase);
+     return arraylist4;
+        }
+    
 
 
 
@@ -222,31 +248,31 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
--(NSMutableArray*) GetPlayerDetailOnTimeOutForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
-{
-    NSMutableArray *arraylist4=[[NSMutableArray alloc]init];
-    NSString *databasePath = [self getDBPath];
-    sqlite3_stmt *statement;
-    sqlite3 *dataBase;
-    const char *dbPath = [databasePath UTF8String];
-    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
-    { NSString *updateSQL =[NSString stringWithFormat:@"SELECT PM.PLAYERCODE, PM.PLAYERNAME   FROM MATCHREGISTRATION MR INNER JOIN MATCHTEAMPLAYERDETAILS MPD ON MR.MATCHCODE = MPD.MATCHCODE  AND MR.COMPETITIONCODE ='%@'   AND MR.MATCHCODE = '%@' AND MPD.TEAMCODE ='%@' INNER JOIN COMPETITION COM  ON COM.COMPETITIONCODE = MR.COMPETITIONCODE   INNER JOIN PLAYERMASTER PM      ON MPD.PLAYERCODE = PM.PLAYERCODE WHERE PM.PLAYERCODE NOT IN (SELECT WKT.WICKETPLAYER   FROM WICKETEVENTS WKT  WHERE WKT.COMPETITIONCODE ='%@'  AND WKT.MATCHCODE = '%@' AND WKT.TEAMCODE ='%@'  AND WKT.INNINGSNO='%@' )   AND PM.PLAYERCODE NOT IN (  SELECT STRIKERCODE BATSMANCODE FROM (  SELECT STRIKERCODE FROM BALLEVENTS       WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'   AND TEAMCODE='%@' AND INNINGSNO='%@' GROUP BY STRIKERCODE   UNION ALL   SELECT NONSTRIKERCODE FROM  BALLEVENTS    WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'AND TEAMCODE='%@' AND INNINGSNO='%@'  GROUP BY NONSTRIKERCODE) AS BATSMAN  )  AND (COM.ISOTHERSMATCHTYPE = 'MSC117' Or (MPD.PLAYINGORDER <= 11))     ORDER BY MPD.PLAYINGORDER",COMPETITIONCODE,MATCHCODE,TEAMCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
-        const char *update_stmt = [updateSQL UTF8String];
-        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
-        {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                GetPlayerDetailOnAbsentHurt *record=[[GetPlayerDetailOnAbsentHurt alloc]init];
-                record.PLAYERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                record.PLAYERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                [arraylist4 addObject:record];
-            }
-            sqlite3_reset(statement);
-        }
-    }
-    sqlite3_finalize(statement);
-    sqlite3_close(dataBase);
-    return arraylist4;
-}
+//-(NSMutableArray*) GetPlayerDetailOnTimeOutForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO
+//{
+//    NSMutableArray *arraylist4=[[NSMutableArray alloc]init];
+//    NSString *databasePath = [self getDBPath];
+//    sqlite3_stmt *statement;
+//    sqlite3 *dataBase;
+//    const char *dbPath = [databasePath UTF8String];
+//    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+//    { NSString *updateSQL =[NSString stringWithFormat:@"SELECT PM.PLAYERCODE, PM.PLAYERNAME   FROM MATCHREGISTRATION MR INNER JOIN MATCHTEAMPLAYERDETAILS MPD ON MR.MATCHCODE = MPD.MATCHCODE  AND MR.COMPETITIONCODE ='%@'   AND MR.MATCHCODE = '%@' AND MPD.TEAMCODE ='%@' INNER JOIN COMPETITION COM  ON COM.COMPETITIONCODE = MR.COMPETITIONCODE   INNER JOIN PLAYERMASTER PM      ON MPD.PLAYERCODE = PM.PLAYERCODE WHERE PM.PLAYERCODE NOT IN (SELECT WKT.WICKETPLAYER   FROM WICKETEVENTS WKT  WHERE WKT.COMPETITIONCODE ='%@'  AND WKT.MATCHCODE = '%@' AND WKT.TEAMCODE ='%@'  AND WKT.INNINGSNO='%@' )   AND PM.PLAYERCODE NOT IN (  SELECT STRIKERCODE BATSMANCODE FROM (  SELECT STRIKERCODE FROM BALLEVENTS       WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'   AND TEAMCODE='%@' AND INNINGSNO='%@' GROUP BY STRIKERCODE   UNION ALL   SELECT NONSTRIKERCODE FROM  BALLEVENTS    WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'AND TEAMCODE='%@' AND INNINGSNO='%@'  GROUP BY NONSTRIKERCODE) AS BATSMAN  )  AND (COM.ISOTHERSMATCHTYPE = 'MSC117' Or (MPD.PLAYINGORDER <= 11))     ORDER BY MPD.PLAYINGORDER",COMPETITIONCODE,MATCHCODE,TEAMCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
+//        const char *update_stmt = [updateSQL UTF8String];
+//        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+//        {
+//            while(sqlite3_step(statement)==SQLITE_ROW){
+//                GetPlayerDetailOnAbsentHurt *record=[[GetPlayerDetailOnAbsentHurt alloc]init];
+//                record.PLAYERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+//                record.PLAYERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+//                [arraylist4 addObject:record];
+//            }
+//            sqlite3_reset(statement);
+//        }
+//    }
+//    sqlite3_finalize(statement);
+//    sqlite3_close(dataBase);
+//    return arraylist4;
+//}
 
 
 

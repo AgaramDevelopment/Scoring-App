@@ -185,29 +185,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/DBManagerEndInnings.m"
-            timestampString = "490965874.127523"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3157"
-            endingLineNumber = "3157"
-            landmarkName = "+FetchEndInningsDetailsForFetchEndInnings:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
             timestampString = "490971567.618913"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "8097"
             endingLineNumber = "8097"
-            landmarkName = "-DeclearINNINGS"
+            landmarkName = "-matchInfoEdit"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -234,12 +218,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/Other_WicketVC.m"
-            timestampString = "490978017.958694"
+            timestampString = "491120783.333873"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "486"
-            endingLineNumber = "486"
-            landmarkName = "-didclicksave:"
+            startingLineNumber = "865"
+            endingLineNumber = "865"
+            landmarkName = "-UpdateOtherwickets:::::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -250,12 +234,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/Other_WicketVC.m"
-            timestampString = "490978017.958694"
+            timestampString = "491120783.333873"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "856"
-            endingLineNumber = "856"
-            landmarkName = "-InsertOtherwickets:::::::::"
+            startingLineNumber = "869"
+            endingLineNumber = "869"
+            landmarkName = "-UpdateOtherwickets:::::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -266,12 +250,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/Other_WicketVC.m"
-            timestampString = "490977317.902413"
+            timestampString = "491120783.333873"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "315"
-            endingLineNumber = "315"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            startingLineNumber = "520"
+            endingLineNumber = "520"
+            landmarkName = "-didclicktouchplayer:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -282,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/Other_WicketVC.m"
-            timestampString = "490977995.752918"
+            timestampString = "491120783.333873"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "564"
-            endingLineNumber = "564"
+            startingLineNumber = "480"
+            endingLineNumber = "480"
             landmarkName = "-didclicktouch:"
             landmarkType = "5">
          </BreakpointContent>
@@ -298,12 +282,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/Other_WicketVC.m"
-            timestampString = "490978807.20328"
+            timestampString = "491120783.333873"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "920"
-            endingLineNumber = "920"
-            landmarkName = "-UpdateOtherwickets:::::::::"
+            startingLineNumber = "438"
+            endingLineNumber = "438"
+            landmarkName = "-formValidation"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -313,13 +297,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/Other_WicketVC.m"
-            timestampString = "490978816.074735"
+            filePath = "CAPScoringApp/EndInningsVC.m"
+            timestampString = "491149019.361915"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "924"
-            endingLineNumber = "924"
-            landmarkName = "-UpdateOtherwickets:::::::::"
+            startingLineNumber = "239"
+            endingLineNumber = "239"
+            landmarkName = "-showSelecteddate:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
