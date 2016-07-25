@@ -19,10 +19,11 @@
 @end
 
 @interface EndInningsVC : UIViewController
-
 {
     UIDatePicker *datePicker;
 }
+
+
 
 @property(nonatomic,strong) id <EndInningsVCDelagate> delegate;
 
@@ -30,6 +31,9 @@
 @property (strong,nonatomic) NSString *MATCHTYPECODE;
 
 @property (weak, nonatomic) IBOutlet UIView *view_allControls;
+
+
+@property (weak, nonatomic) IBOutlet UIView *Btn_Add;
 
 @property (weak, nonatomic) IBOutlet UIView *view_startInnings;
 @property (weak, nonatomic) IBOutlet UIView *view_endInnings;
