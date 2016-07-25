@@ -91,7 +91,7 @@ BOOL isWicketSelected;
     int indexCount ;
     BOOL isEdit;
     FetchScorecard*fetchScorecard;
-    
+    DBManager *objDBManager;
 
     
 }
@@ -105,6 +105,8 @@ BOOL isWicketSelected;
     //indexCount = 0;
     [super viewDidLoad];
     [self customnavigationmethod];
+    
+     objDBManager = [[DBManager alloc] init];
     isEdit=NO;
       isWicketSelected=NO;
     //CGFloat totalwidth =1200;
@@ -115,7 +117,7 @@ BOOL isWicketSelected;
     self.Btn_innings1team1.frame= CGRectMake(self.Btn_innings1team1.frame.origin.x, self.Btn_innings1team1.frame.origin.y, 400, self.Btn_innings1team1.frame.size.height);
     
     
-    NSMutableArray* objInniningsarray=[DBManager FETCHSEALLINNINGSSCOREDETAILS:self.Comptitioncode MATCHCODE:self.matchCode];
+    NSMutableArray* objInniningsarray=[objDBManager FETCHSEALLINNINGSSCOREDETAILS:self.Comptitioncode MATCHCODE:self.matchCode];
     
     if(objInniningsarray.count>0){
     objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
@@ -238,8 +240,8 @@ BOOL isWicketSelected;
     inningsDetail =[[NSMutableArray alloc]init];
     OversorderArray =[[NSMutableArray alloc]init];
     
-    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
-    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+    OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+    inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
     
     if ([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] ||
         [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) {
@@ -723,9 +725,9 @@ BOOL isWicketSelected;
     
     indexCount = 0;
     [self.tbl_innnings reloadData];
-    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+    OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
     
-    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+    inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
     
     
 }
@@ -766,17 +768,17 @@ BOOL isWicketSelected;
     indexCount = 0;
 
     [self.tbl_innnings reloadData];
-    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+    OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
     
-    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+    inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
 }
 
 -(IBAction)didClickInnings1team1:(id)sender
 {
     indexCount = 0;
     self.highlightbtnxposition.constant=0;
-    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
-    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+    OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+    inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
     [_tbl_innnings reloadData];
     
 }
@@ -784,8 +786,8 @@ BOOL isWicketSelected;
 {
     indexCount = 0;
     self.highlightbtnxposition.constant=self.Btn_innings1team2.frame.origin.x;
-    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"2"];
-    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"2"];
+    OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"2"];
+    inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"2"];
     [_tbl_innnings reloadData];
     
 }
@@ -793,15 +795,15 @@ BOOL isWicketSelected;
 {
     indexCount = 0;
     self.highlightbtnxposition.constant=self.Btn_inning2steam1.frame.origin.x;
-    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"3"];
-    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"3"];
+    OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"3"];
+    inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"3"];
     [_tbl_innnings reloadData];
 }
 -(IBAction)didClickInnings2team2:(id)sender
 {
     self.highlightbtnxposition.constant=self.Btn_innings2team2.frame.origin.x;
-    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"4"];
-    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"4"];
+    OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"4"];
+    inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"4"];
     [_tbl_innnings reloadData];
 }
 -(IBAction)Back_BtnAction:(id)sender

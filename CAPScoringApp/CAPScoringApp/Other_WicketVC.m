@@ -20,6 +20,7 @@
 #import "GetWicketDetail.h"
 #import "GetWicketEventsPlayerDetail.h"
 
+
 @interface Other_WicketVC ()
 {
 
@@ -61,7 +62,7 @@
   //  NSString  *N_FIELDERCODE;
     
   
-    
+    NSMutableArray *GetWicketEventsPlayerDetails;
 }
 
 @property(nonatomic,strong)NSMutableArray *WICKETARRAY;
@@ -157,9 +158,11 @@
 
 -(void)getWicketListMethod
 {
-    GetWicketEventsPlayerDetails=[[NSMutableArray alloc]init];
-    GetWicketEventsPlayerDetails=[ DbManager_OtherWicket GetWicketEventDetailsForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
-    WICKETNO =[ DbManager_OtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
+    GetWicketEventsPlayerDetails =[[NSMutableArray alloc]init];
+    
+    
+    GetWicketEventsPlayerDetails=[ dbOtherWicket GetWicketEventDetailsForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+    WICKETNO =[ dbOtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
 }
 
 
@@ -850,7 +853,7 @@ else
     }
     NSMutableArray *GetPlayerDetails=[ dbOtherWicket GetPlayerDetailForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE];
     
-    NSMutableArray *GetWicketEventsPlayerDetails=[ dbOtherWicket GetWicketEventDetailsForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+    NSMutableArray *GetWicketEventsDetails=[ dbOtherWicket GetWicketEventDetailsForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
     
     UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Other Wicket Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alter show];

@@ -19,6 +19,8 @@
 
 @interface FixturesVC ()
 {    UIRefreshControl *refreshControl;
+    DBManager *objDBManager;
+
 }
 
 @property (nonatomic,strong)NSMutableArray *FetchCompitionArray;
@@ -30,9 +32,9 @@
 
 @implementation FixturesVC
 @synthesize CompitionCode;
-
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
 //    if(self.checkInternetConnection)
 //    {
@@ -90,11 +92,13 @@
 //        });
 //    }
     
+    
+    objDBManager = [[DBManager alloc]init];
+
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
-    
-    _FetchCompitionArray=[[NSMutableArray alloc]init];
-    _FetchCompitionArray =[DBManager RetrieveFixturesData:CompitionCode:userCode];
+        _FetchCompitionArray=[[NSMutableArray alloc]init];
+    _FetchCompitionArray =[objDBManager RetrieveFixturesData:CompitionCode:userCode];
     self.popView.hidden=YES;
     [self customnavigationmethod];
    
@@ -363,7 +367,7 @@
     fixtureRecords.matchovercomments = self.txt_info.text;
 
     
-    [DBManager updateFixtureInfo:self.txt_info.text matchCode:fixtureRecords.matchcode competitionCode:fixtureRecords.competitioncode];
+    [objDBManager updateFixtureInfo:self.txt_info.text matchCode:fixtureRecords.matchcode competitionCode:fixtureRecords.competitioncode];
     
     
     self.popView.hidden =YES;

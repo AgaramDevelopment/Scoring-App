@@ -26,6 +26,8 @@
     UIRefreshControl *refreshControl;
     int selectePosition;
     NSMutableArray * FetchArchiveCompitionArray;
+    DBManager *objDBManager;
+
    }
 @property (nonatomic,strong)NSMutableArray*resultArray;
 @property(nonatomic,weak) IBOutlet UIView *selectmatchTittleview;
@@ -33,11 +35,12 @@
 
 
 @end
-
 @implementation TorunamentVC
 @synthesize resultArray;
 - (void)viewDidLoad {
     [super viewDidLoad];
+    objDBManager = [[DBManager alloc]init];
+
     [self customnavigationmethod];
     // Do any additional setup after loading the view.
     [self.tableView setHidden:YES];
@@ -69,10 +72,10 @@
     
     if([self.selectDashBoard isEqualToString:@"Newmatch"])
     {
-        FetchCompitionArray = [DBManager RetrieveEventData:userCode];
+        FetchCompitionArray = [objDBManager RetrieveEventData:userCode];
     }
     else{
-        FetchCompitionArray = [DBManager RetrieveEventData1:userCode];
+        FetchCompitionArray = [objDBManager RetrieveEventData1:userCode];
     }
 
     
@@ -196,7 +199,7 @@
         
         
         resultArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchCompitionArray =[DBManager RetrieveEventData:userCode];
+        NSMutableArray * FetchCompitionArray =[objDBManager RetrieveEventData:userCode];
         for(int i=0; i < [FetchCompitionArray count]; i++)
         {
             
@@ -303,7 +306,7 @@ else{
             
             NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
             if (responseData != nil) {
-                
+                DBMANAGERSYNC *objDBMANAGERSYNC = [[DBMANAGERSYNC alloc]init];
                 NSDictionary *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
               NSMutableArray *checkErrorItem=[serviceResponse objectForKey:@"lstErrorItem"];
                 
@@ -342,14 +345,14 @@ else{
                         
                         
                         
-                        bool CheckStatus=[DBMANAGERSYNC CheckCompetitionCode:COMPETITIONCODE];
+                        bool CheckStatus=[objDBMANAGERSYNC CheckCompetitionCode:COMPETITIONCODE];
                         if (CheckStatus==YES) {
-                            [DBMANAGERSYNC UPDATECOMPETITION:COMPETITIONCODE: COMPETITIONNAME:SEASON: TROPHY:STARTDATE:ENDDATE:MATCHTYPE:ISOTHERSMATCHTYPE : MODIFIEDBY: MODIFIEDDATE];
+                            [objDBMANAGERSYNC UPDATECOMPETITION:COMPETITIONCODE: COMPETITIONNAME:SEASON: TROPHY:STARTDATE:ENDDATE:MATCHTYPE:ISOTHERSMATCHTYPE : MODIFIEDBY: MODIFIEDDATE];
                         }
                         
                         else
                         {
-                            [DBMANAGERSYNC  InsertMASTEREvents:COMPETITIONCODE:COMPETITIONNAME:SEASON:TROPHY:STARTDATE:ENDDATE:MATCHTYPE: ISOTHERSMATCHTYPE :MANOFTHESERIESCODE:BESTBATSMANCODE : BESTBOWLERCODE:BESTALLROUNDERCODE:MOSTVALUABLEPLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                            [objDBMANAGERSYNC  InsertMASTEREvents:COMPETITIONCODE:COMPETITIONNAME:SEASON:TROPHY:STARTDATE:ENDDATE:MATCHTYPE: ISOTHERSMATCHTYPE :MANOFTHESERIESCODE:BESTBATSMANCODE : BESTBOWLERCODE:BESTALLROUNDERCODE:MOSTVALUABLEPLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                             
                         }
                          }
@@ -366,12 +369,12 @@ else{
                         NSString *RECORDSTATUS=[test1 objectForKey:@"Recordstatus"];
                         
                         
-                        bool CheckStatus1=[DBMANAGERSYNC CheckCompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+                        bool CheckStatus1=[objDBMANAGERSYNC CheckCompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
                         if (CheckStatus1==NO) {
-                            [DBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
+                            [objDBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
                         }
-                else{ [DBMANAGERSYNC DELETECompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
-                    [DBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
+                else{ [objDBMANAGERSYNC DELETECompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+                    [objDBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
                         
                         }
                         

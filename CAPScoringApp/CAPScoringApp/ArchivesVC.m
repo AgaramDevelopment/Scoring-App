@@ -41,8 +41,9 @@ NSArray *MuliteDayMatchtype;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
-    
-    FetchCompitionArray =[DBManager ArchivesFixturesData :self.CompitionCode:userCode];
+    DBManager *objDBManager = [[DBManager alloc]init];
+
+    FetchCompitionArray =[objDBManager ArchivesFixturesData :self.CompitionCode:userCode];
     [self customnavigationmethod];
 }
 -(void)customnavigationmethod
@@ -104,7 +105,7 @@ NSArray *MuliteDayMatchtype;
     [formatter setDateFormat:@"MMM ''yy"];
     newDate = [formatter stringFromDate:date];
     cell.lbl_displaydate.text=newDate;
-    NSMutableArray* objInniningsarray=[DBManager FETCHSEALLINNINGSSCOREDETAILS:objFixtureRecord.competitioncode MATCHCODE:objFixtureRecord.matchcode];
+    NSMutableArray* objInniningsarray=[[[DBManager alloc]init] FETCHSEALLINNINGSSCOREDETAILS:objFixtureRecord.competitioncode MATCHCODE:objFixtureRecord.matchcode];
     
     if(objInniningsarray.count>0){
         

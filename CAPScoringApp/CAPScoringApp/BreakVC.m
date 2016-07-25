@@ -29,8 +29,9 @@
    
    // self.view.frame =CGRectMake(100,350, [[UIScreen mainScreen] bounds].size.width/2, 500);
     
+    DBManager *objDBManager = [[DBManager alloc]init];
 
-    _resultarray=[DBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+    _resultarray=[objDBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
 
        
 //    UINib *nib = [UINib nibWithNibName:@"BreakTableViewCell" bundle:nil];

@@ -27,10 +27,10 @@
     NSString* WICKETLOST ;
     NSString* OVERSTATUS ;
     NSString* SESSIONNO ;
+    DBManagerEndDay *objDBManagerEndDay = [[DBManagerEndDay alloc] init];
+    MATCHTYPE=[objDBManagerEndDay GetMatchTypeForInserTEndDay : COMPETITIONCODE];
     
-    MATCHTYPE=[DBManagerEndDay GetMatchTypeForInserTEndDay : COMPETITIONCODE];
-    
-    SESSIONNO=[DBManagerEndDay GetMaxSessionNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO];
+    SESSIONNO=[objDBManagerEndDay GetMaxSessionNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO];
     
     if([SESSIONNO isEqual:@""])
     {
@@ -38,16 +38,16 @@
         
     }
     
-    STARTOVERNO=[DBManagerEndDay GetMinOverNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : SESSIONNO : INNINGSNO : DAYNO];
+    STARTOVERNO=[objDBManagerEndDay GetMinOverNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : SESSIONNO : INNINGSNO : DAYNO];
     
-    STARTBALLNO=[DBManagerEndDay GetMinBallNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : SESSIONNO : INNINGSNO : STARTOVERNO];
+    STARTBALLNO=[objDBManagerEndDay GetMinBallNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : SESSIONNO : INNINGSNO : STARTOVERNO];
     
     STARTOVERBALLNO= [NSString stringWithFormat:@"%@.%@",STARTOVERNO,STARTBALLNO];
     
-    ENDOVERNO=[DBManagerEndDay GetMaxOverNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : SESSIONNO : INNINGSNO];
+    ENDOVERNO=[objDBManagerEndDay GetMaxOverNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : SESSIONNO : INNINGSNO];
     
-    ENDBALLNO=[DBManagerEndDay GetMaxBallNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : SESSIONNO : INNINGSNO : ENDOVERNO];
-    OVERSTATUS=[DBManagerEndDay GetOverStatusForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO : ENDOVERNO];
+    ENDBALLNO=[objDBManagerEndDay GetMaxBallNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : SESSIONNO : INNINGSNO : ENDOVERNO];
+    OVERSTATUS=[objDBManagerEndDay GetOverStatusForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO : ENDOVERNO];
     
     if([OVERSTATUS isEqual: @"1"])
     {
@@ -58,15 +58,15 @@
         ENDOVERBALLNO=[NSString stringWithFormat:@"%@.%@",ENDOVERNO,ENDBALLNO];
     }
     
-    RUNSSCORED=[DBManagerEndDay GetRunsScoredForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : SESSIONNO : INNINGSNO : DAYNO];
-    WICKETLOST=[DBManagerEndDay GetWicketLostForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO : SESSIONNO];
+    RUNSSCORED=[objDBManagerEndDay GetRunsScoredForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : SESSIONNO : INNINGSNO : DAYNO];
+    WICKETLOST=[objDBManagerEndDay GetWicketLostForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO : SESSIONNO];
     
-    if([[DBManagerEndDay GetDayNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO : DAYNO] isEqual:@""])
+    if([[objDBManagerEndDay GetDayNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO : DAYNO] isEqual:@""])
     {
-        if([[DBManagerEndDay GetStartTimeForInsertEndDay : STARTTIMEFORMAT : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE] isEqual:@""])
+        if([[objDBManagerEndDay GetStartTimeForInsertEndDay : STARTTIMEFORMAT : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE] isEqual:@""])
         {
             
-            [DBManagerEndDay SetDayEventsForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : STARTTIME : ENDTIME : DAYNO : BATTINGTEAMCODE : TOTALRUNS : TOTALOVERS : TOTALWICKETS : COMMENTS];
+            [objDBManagerEndDay SetDayEventsForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : STARTTIME : ENDTIME : DAYNO : BATTINGTEAMCODE : TOTALRUNS : TOTALOVERS : TOTALWICKETS : COMMENTS];
             
             if([MATCHTYPE isEqual:@"MSC023"]|| [MATCHTYPE isEqual:@"MSC114"])
             {
@@ -78,7 +78,7 @@
                 
                 while(COUNT<=COUNTSESSION)
                 {
-                    if(![DBManagerEndDay GetSessionNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : COUNT])
+                    if(![objDBManagerEndDay GetSessionNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : COUNT])
                     {
                         if(STARTOVERBALLNO==nil)
                         {
@@ -110,7 +110,7 @@
                             TOTALOVERS=TOTALOVERS;
                             RUNSSCORED=0;
                         }
-                        [DBManagerEndDay SetSessionEventsForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO : BATTINGTEAMCODE : STARTOVERBALLNO : TOTALOVERS : RUNSSCORED : WICKETLOST];
+                        [objDBManagerEndDay SetSessionEventsForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO : BATTINGTEAMCODE : STARTOVERBALLNO : TOTALOVERS : RUNSSCORED : WICKETLOST];
                         
                     }
                     COUNT = [NSNumber numberWithInt:COUNT.intValue +1];
@@ -122,10 +122,10 @@
         }else{
            //Day already exist
         }
-            NSMutableArray *InsertEndDayArray=[DBManagerEndDay InsertEndDay : COMPETITIONCODE : MATCHCODE];
+            NSMutableArray *InsertEndDayArray=[objDBManagerEndDay InsertEndDay : COMPETITIONCODE : MATCHCODE];
             
             //NEXTDAYO=
-            [DBManagerEndDay GetMaxDayNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : BATTINGTEAMCODE];
+            [objDBManagerEndDay GetMaxDayNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : BATTINGTEAMCODE];
             
             
             

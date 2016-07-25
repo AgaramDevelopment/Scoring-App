@@ -13,12 +13,13 @@
 //SP_DELETEENDDAY
 -(void) DeleteEndDay:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)INNINGSNO:(NSString*)DAYNO
 {
+    DBManagerEndDay *objDBManagerEndDay = [[DBManagerEndDay alloc] init];
     // int R_INNINGSNO;
-    if([[DBManagerEndDay GetBallCodeForDeleteEndDay : COMPETITIONCODE : MATCHCODE : DAYNO] isEqual:@""] && ![DBManagerEndDay GetDayEventsForDeleteEndDay : COMPETITIONCODE : MATCHCODE : DAYNO])
+    if([[objDBManagerEndDay GetBallCodeForDeleteEndDay : COMPETITIONCODE : MATCHCODE : DAYNO] isEqual:@""] && ![objDBManagerEndDay GetDayEventsForDeleteEndDay : COMPETITIONCODE : MATCHCODE : DAYNO])
     {
-        [DBManagerEndDay DeleteDayEventsForDeleteEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO];
+        [objDBManagerEndDay DeleteDayEventsForDeleteEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO];
     }
-    NSMutableArray *DeleteEndDayArray=[DBManagerEndDay GetDeleteEndDay : COMPETITIONCODE : MATCHCODE];
+    NSMutableArray *DeleteEndDayArray=[objDBManagerEndDay GetDeleteEndDay : COMPETITIONCODE : MATCHCODE];
 }
 
 

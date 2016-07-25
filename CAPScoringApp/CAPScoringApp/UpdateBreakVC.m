@@ -30,10 +30,11 @@ NSDate *dateFromString1;
 NSString *DURATION;
     NSMutableArray*UpdateBreaksArray;
     NSMutableArray*DeleteBreaksArray;
+    DBManager *objDBManager ;
+
 }
 
 @end
-
 @implementation UpdateBreakVC
 @synthesize  test;
 @synthesize COMPETITIONCODE;
@@ -44,6 +45,8 @@ NSString *DURATION;
     // Do any additional setup after loading the view from its nib.
     UpdateBreaksArray=[[NSMutableArray alloc]init];
     DeleteBreaksArray=[[NSMutableArray alloc]init];
+    objDBManager = [[DBManager alloc]init];
+
     
     _Text_BreakStart.text = [test valueForKey:@"BREAKSTARTTIME"];
     
@@ -359,12 +362,12 @@ BREAKCOMMENTS:ISINCLUDEDURATION:BREAKNO;
 //        {
 //            if(![DBManager GetBreakNoForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKNO ])
 //            {
-                [DBManager UpdateInningsEvents : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
+                [objDBManager UpdateInningsEvents : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
 //            }
 //        }
 //    }
     
-   UpdateBreaksArray=[DBManager GetInningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+   UpdateBreaksArray=[objDBManager GetInningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     
 
 }
@@ -391,10 +394,10 @@ BREAKCOMMENTS:ISINCLUDEDURATION:BREAKNO;
     
 
         
-        [DBManager DeleteInningsEvents : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
+        [objDBManager DeleteInningsEvents : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
   
     
-   DeleteBreaksArray=[DBManager InningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+   DeleteBreaksArray=[objDBManager InningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
 }
 
 

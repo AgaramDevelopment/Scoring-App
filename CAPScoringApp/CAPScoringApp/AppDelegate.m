@@ -34,8 +34,10 @@
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if([defaults boolForKey:@"isUserLoggedin"]) {
             NSLog(@"Loged in");
-            if([DBManager checkExpiryDate:[defaults objectForKey:@"userCode"]]){
-                if ([DBManager checkSecurityExpiryDate: [defaults objectForKey:@"USERNAME"]]) {
+            DBManager *objDBManager = [[DBManager alloc]init];
+
+            if([objDBManager checkExpiryDate:[defaults objectForKey:@"userCode"]]){
+                if ([objDBManager checkSecurityExpiryDate: [defaults objectForKey:@"USERNAME"]]) {
                 
     
            initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];

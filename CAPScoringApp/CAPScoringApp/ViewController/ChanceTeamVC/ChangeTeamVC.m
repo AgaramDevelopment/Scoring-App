@@ -177,8 +177,8 @@
         [self ShowAlterView:@"Please Select Bowler"];
     }
     else{
-        
-        [DBManagerChangeTeam InsertChangeTeam:self.compitionCode :self.MatchCode :BattingTeamCode :[NSNumber numberWithInt:maximumInnings.intValue] :selectStrikercode :selectnonStrikercode :selectBowlercode :[NSNumber numberWithInt:self.inningsno.intValue] :self.currentBattingTeamCode :@"" :@""];
+        DBManagerChangeTeam *objDBManagerChangeTeam = [[DBManagerChangeTeam alloc] init];
+        [objDBManagerChangeTeam InsertChangeTeam:self.compitionCode :self.MatchCode :BattingTeamCode :[NSNumber numberWithInt:maximumInnings.intValue] :selectStrikercode :selectnonStrikercode :selectBowlercode :[NSNumber numberWithInt:self.inningsno.intValue] :self.currentBattingTeamCode :@"" :@""];
         [self.delegate processSuccessful];
 
     }
