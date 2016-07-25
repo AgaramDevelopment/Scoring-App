@@ -1529,6 +1529,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     }
     return NO;
 }
+
 -(BOOL)updateEndSession:(NSString*) STARTTIME:(NSString*) ENDTIME : (NSString*) DOMINANTTEAMCODE:(NSString*) DAYNO :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO:(NSString*) SESSIONNO
 {
     
@@ -1576,7 +1577,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND DAYNO='%@' AND SESSIONNO='%@'+1",COMPETITIONCODE,MATCHCODE,DAYNO,SESSIONNO];
         
-        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 

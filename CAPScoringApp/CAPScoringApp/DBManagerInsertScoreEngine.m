@@ -56,7 +56,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *stmt;
+    const char *stmt = [databasePath UTF8String];
     sqlite3_stmt *statement;
     
     
@@ -92,7 +92,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *stmt;
+       const char *stmt = [databasePath UTF8String];
     sqlite3_stmt *statement;
     
     
@@ -165,7 +165,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *stmt;
+       const char *stmt = [databasePath UTF8String];
     sqlite3_stmt *statement;
     
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
@@ -200,7 +200,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *stmt;
+       const char *stmt = [databasePath UTF8String];
     sqlite3_stmt *statement;
     
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
@@ -774,7 +774,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *stmt;
+       const char *stmt = [databasePath UTF8String];
     sqlite3_stmt *statement;
     
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
@@ -810,7 +810,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *stmt;
+       const char *stmt = [databasePath UTF8String];
     sqlite3_stmt *statement;
     
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
@@ -853,7 +853,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
         {
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
@@ -890,7 +890,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
         {
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
@@ -927,7 +927,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
        {
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
@@ -955,12 +955,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *stmt;
+       const char *stmt = [databasePath UTF8String];
     sqlite3_stmt *statement;
     
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-    NSString *updateSQL = [NSString stringWithFormat:@"SELECT COUNT(BALLCODE) as BALLCODE FROM BALLEVENTS WHERE OVERNO = '%@' AND COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'       AND INNINGSNO='%@'",OVERNO,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
+    NSString *updateSQL = [NSString stringWithFormat:@"SELECT COUNT(BALLCODE) as BALLCODE FROM BALLEVENTS WHERE OVERNO = '%@' AND COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'",OVERNO,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
     
     stmt=[updateSQL UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -999,7 +999,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [selectQry UTF8String];
         
-        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
        {
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
@@ -1027,7 +1027,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *stmt;
+       const char *stmt = [databasePath UTF8String];
     sqlite3_stmt *statement;
     
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
@@ -1073,7 +1073,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
 
         
-        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
        {
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
@@ -1109,7 +1109,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS   SET CURRENTSTRIKERCODE = '%@',   CURRENTNONSTRIKERCODE = '%@',   CURRENTBOWLERCODE = '%@'   WHERE COMPETITIONCODE = '%@'    AND MATCHCODE = '%@'     AND TEAMCODE = '%@'     AND INNINGSNO = '%@'"      , T_STRIKERCODE       , T_NONSTRIKERCODE       , BOWLERCODE       , COMPETITIONCODE       , MATCHCODE,TEAMCODE, INNINGSNO ];
         
         
-        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
        {
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
@@ -1145,7 +1145,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
 
         
-        if(sqlite3_prepare_v2(dataBase, dbPath,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, updateSQL,-1, &statement, NULL)==SQLITE_OK)
        {
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
@@ -1174,7 +1174,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *stmt;
+       const char *stmt = [databasePath UTF8String];
     sqlite3_stmt *statement;
     
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
@@ -1209,7 +1209,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *stmt;
+       const char *stmt = [databasePath UTF8String];
     sqlite3_stmt *statement;
     
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
@@ -1241,7 +1241,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
-    const char *stmt;
+       const char *stmt = [databasePath UTF8String];
     sqlite3_stmt *statement;
     
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
@@ -1554,7 +1554,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -1587,7 +1587,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -1680,7 +1680,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -1713,7 +1713,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -1747,7 +1747,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -1781,7 +1781,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -1815,7 +1815,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -1850,7 +1850,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -1882,7 +1882,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -1914,7 +1914,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -1946,7 +1946,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -1979,7 +1979,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -2012,7 +2012,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -2045,7 +2045,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -2077,7 +2077,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -2109,7 +2109,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -2141,7 +2141,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -2173,7 +2173,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -2205,7 +2205,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -2237,7 +2237,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -2269,7 +2269,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -2300,7 +2300,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                   int retVal;
 //                                   NSString *databasePath =[self getDBPath];
 //                                   sqlite3 *dataBase;
-//                                   const char *stmt;
+//                                      const char *stmt = [databasePath UTF8String];
 //                                   sqlite3_stmt *statement;
 //                                   retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                   if(retVal !=0){
@@ -2401,7 +2401,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  int retVal;
 //                                                                  NSString *databasePath =[self getDBPath];
 //                                                                  sqlite3 *dataBase;
-//                                                                  const char *stmt;
+//                                                                     const char *stmt = [databasePath UTF8String];
 //                                                                  sqlite3_stmt *statement;
 //                                                                  retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                  if(retVal !=0){
@@ -2432,7 +2432,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  int retVal;
 //                                                                  NSString *databasePath =[self getDBPath];
 //                                                                  sqlite3 *dataBase;
-//                                                                  const char *stmt;
+//                                                                     const char *stmt = [databasePath UTF8String];
 //                                                                  sqlite3_stmt *statement;
 //                                                                  retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                  if(retVal !=0){
@@ -2464,7 +2464,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  int retVal;
 //                                                                  NSString *databasePath =[self getDBPath];
 //                                                                  sqlite3 *dataBase;
-//                                                                  const char *stmt;
+//                                                                     const char *stmt = [databasePath UTF8String];
 //                                                                  sqlite3_stmt *statement;
 //                                                                  retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                  if(retVal !=0){
@@ -2496,7 +2496,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  int retVal;
 //                                                                  NSString *databasePath =[self getDBPath];
 //                                                                  sqlite3 *dataBase;
-//                                                                  const char *stmt;
+//                                                                     const char *stmt = [databasePath UTF8String];
 //                                                                  sqlite3_stmt *statement;
 //                                                                  retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                  if(retVal !=0){
@@ -2527,7 +2527,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  int retVal;
 //                                                                  NSString *databasePath =[self getDBPath];
 //                                                                  sqlite3 *dataBase;
-//                                                                  const char *stmt;
+//                                                                     const char *stmt = [databasePath UTF8String];
 //                                                                  sqlite3_stmt *statement;
 //                                                                  retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                  if(retVal !=0){
@@ -2558,7 +2558,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                  int retVal;
 //                                                                  NSString *databasePath =[self getDBPath];
 //                                                                  sqlite3 *dataBase;
-//                                                                  const char *stmt;
+//                                                                     const char *stmt = [databasePath UTF8String];
 //                                                                  sqlite3_stmt *statement;
 //                                                                  retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                  if(retVal !=0){
@@ -2621,7 +2621,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                 int retVal;
 //                                                                                                 NSString *databasePath =[self getDBPath];
 //                                                                                                 sqlite3 *dataBase;
-//                                                                                                 const char *stmt;
+//                                                                                                    const char *stmt = [databasePath UTF8String];
 //                                                                                                 sqlite3_stmt *statement;
 //                                                                                                 retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                                                 if(retVal !=0){
@@ -3154,7 +3154,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
-//                                                                                                                                                                                                                                                                                                                          const char *stmt;
+//                                                                                                                                                                                                                                                                                                                             const char *stmt = [databasePath UTF8String];
 //                                                                                                                                                                                                                                                                                                                          sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                          retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                                                                                                                                                                                                                                                                          if(retVal !=0){
@@ -3186,7 +3186,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
-//                                                                                                                                                                                                                                                                                                                          const char *stmt;
+//                                                                                                                                                                                                                                                                                                                             const char *stmt = [databasePath UTF8String];
 //                                                                                                                                                                                                                                                                                                                          sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                          retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                                                                                                                                                                                                                                                                          if(retVal !=0){
@@ -3218,7 +3218,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
-//                                                                                                                                                                                                                                                                                                                          const char *stmt;
+//                                                                                                                                                                                                                                                                                                                             const char *stmt = [databasePath UTF8String];
 //                                                                                                                                                                                                                                                                                                                          sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                          retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                                                                                                                                                                                                                                                                          if(retVal !=0){
@@ -3249,7 +3249,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
-//                                                                                                                                                                                                                                                                                                                          const char *stmt;
+//                                                                                                                                                                                                                                                                                                                             const char *stmt = [databasePath UTF8String];
 //                                                                                                                                                                                                                                                                                                                          sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                          retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                                                                                                                                                                                                                                                                          if(retVal !=0){
@@ -3282,7 +3282,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
-//                                                                                                                                                                                                                                                                                                                          const char *stmt;
+//                                                                                                                                                                                                                                                                                                                             const char *stmt = [databasePath UTF8String];
 //                                                                                                                                                                                                                                                                                                                          sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                          retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                                                                                                                                                                                                                                                                          if(retVal !=0){
@@ -3315,7 +3315,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
-//                                                                                                                                                                                                                                                                                                                          const char *stmt;
+//                                                                                                                                                                                                                                                                                                                             const char *stmt = [databasePath UTF8String];
 //                                                                                                                                                                                                                                                                                                                          sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                          retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                                                                                                                                                                                                                                                                          if(retVal !=0){
@@ -3348,7 +3348,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
-//                                                                                                                                                                                                                                                                                                                          const char *stmt;
+//                                                                                                                                                                                                                                                                                                                             const char *stmt = [databasePath UTF8String];
 //                                                                                                                                                                                                                                                                                                                          sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                          retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                                                                                                                                                                                                                                                                          if(retVal !=0){
@@ -3382,7 +3382,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                          int retVal;
 //                                                                                                                                                                                                                                                                                                                          NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                          sqlite3 *dataBase;
-//                                                                                                                                                                                                                                                                                                                          const char *stmt;
+//                                                                                                                                                                                                                                                                                                                             const char *stmt = [databasePath UTF8String];
 //                                                                                                                                                                                                                                                                                                                          sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                          retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                                                                                                                                                                                                                                                                          if(retVal !=0){
@@ -3508,7 +3508,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                                                                                        int retVal;
 //                                                                                                                                                                                                                                                                                                                                                                                        NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                                                                                        sqlite3 *dataBase;
-//                                                                                                                                                                                                                                                                                                                                                                                        const char *stmt;
+//                                                                                                                                                                                                                                                                                                                                                                                           const char *stmt = [databasePath UTF8String];
 //                                                                                                                                                                                                                                                                                                                                                                                        sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                                                                                        retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                                                                                                                                                                                                                                                                                                                                        if(retVal !=0){
@@ -3542,7 +3542,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //                                                                                                                                                                                                                                                                                                                                                                                        int retVal;
 //                                                                                                                                                                                                                                                                                                                                                                                        NSString *databasePath =[self getDBPath];
 //                                                                                                                                                                                                                                                                                                                                                                                        sqlite3 *dataBase;
-//                                                                                                                                                                                                                                                                                                                                                                                        const char *stmt;
+//                                                                                                                                                                                                                                                                                                                                                                                           const char *stmt = [databasePath UTF8String];
 //                                                                                                                                                                                                                                                                                                                                                                                        sqlite3_stmt *statement;
 //                                                                                                                                                                                                                                                                                                                                                                                        retVal=sqlite3_open([databasePath UTF8String], &dataBase);
 //                                                                                                                                                                                                                                                                                                                                                                                        if(retVal !=0){
