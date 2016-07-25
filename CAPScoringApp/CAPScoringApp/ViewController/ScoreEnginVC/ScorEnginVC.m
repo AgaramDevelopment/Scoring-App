@@ -210,7 +210,6 @@
     BOOL isFreeHitBall;
     NSArray *ValidedMatchType;
       FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
-    DBManager *objDBManager;
     
     FetchLastBowler *fetchLastBowler;
     FetchSEPageLoadRecord *fetchSEPageLoadRecord;
@@ -289,7 +288,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    objDBManager = [[DBManager alloc]init];
+    DBManager *objDBManager = [[DBManager alloc]init];
 
     //Initialize Matchtype Dictionary
     MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
@@ -330,8 +329,8 @@
    
      
     objEditModeVc.delegate=self;
-    fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
-    [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
+    //fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
+    //[fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
     
     if(self.isEditMode){//Edit
@@ -1450,130 +1449,133 @@
     _lbl_teamBfirstIngsOvs.text = [NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FIRSTINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FIRSTINNINGSOVERS];
     
 }
--(void)SaveBallEventREcordvalue
-{
-    //self.ballEventRecord=[[BallEventRecord alloc]init];
-    
-    NSMutableArray * teamCodeArray=[objDBManager getTeamCodemethod];
-    if(teamCodeArray.count > 0 && teamCodeArray != NULL)
-    {
-        NSString * objTeamCode = [NSString stringWithFormat:@"%@",teamCodeArray.lastObject];
-        self.ballEventRecord.objTeamcode =objTeamCode;
-    }
-    
-    NSMutableArray * inningsNoArray=[objDBManager getInningsNomethod];
-    if(inningsNoArray.count > 0 && inningsNoArray != NULL)
-    {
-        NSString * objInningsno = [NSString stringWithFormat:@"%@",inningsNoArray.lastObject];
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        f.numberStyle = NSNumberFormatterDecimalStyle;
-        self.ballEventRecord.objInningsno = [f numberFromString:objInningsno];
-        
-    }
-    
-    [self getDayNOValue];
-    NSString * ballCodevalue=[objDBManager getballcodemethod:self.matchCode];
-    // NSLog(@"array : %@",[ballCodevalueArray lastObject]);
-    if(![ballCodevalue isEqualToString: @""])
-    {
-        
-        NSString*ballcode= [NSString stringWithFormat:@"%@",ballCodevalue];
-        if([ballcode isEqualToString:@"(null)"])
-            
-        {
-            // [ballCodevalueArray removeLastObject];
-            ballcode=[NSString stringWithFormat:@"%@",ballCodevalue];
-            // [ballCodevalueArray removeLastObject];
-            ballcode=[NSString stringWithFormat:@"%@",ballCodevalue];
-        }
-        
-        
-        NSString *code = [ballcode substringFromIndex: [ballcode length] - 10];
-        
-        NSInteger add =[code intValue];
-        add = add+1;
-        
-        NSString *ballcodeValue = [NSString stringWithFormat:@"%010d",add];
-        //NSString * addCode=[NSString stringWithFormat:@"%d",add];
-        
-        //NSInteger sum = 1000000000;
-        
-        //sum += [addCode intValue];
-        //NSMutableString *addValue;
-        //NSString * matchcodeaddValue =[NSString stringWithFormat:@"%d",sum];
-        //       NSString* adds = nil;
-        //        if([matchcodeaddValue hasPrefix:@"1"]) {
-        //            adds = [matchcodeaddValue substringFromIndex:1];
-        //           addValue = [NSMutableString stringWithString:adds];
-        //            [addValue insertString:@"0" atIndex:1];
-        //        }
-        
-        //NSString* addValue = [matchcodeaddValue stringByReplacingOccurrencesOfString:@"1"
-        // withString:@"0"];
-        
-        
-        
-        //
-        //        NSString * myURL = [NSString stringWithFormat:@"1%@",code];
-        //        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        //        f.numberStyle = NSNumberFormatterDecimalStyle;
-        //        NSNumber * myNumber = [f numberFromString:myURL];
-        //        NSInteger value = [myNumber integerValue]+1;
-        //        NSString *addcode = [@(value) stringValue];
-        //
-        //        NSString * ballno = [addcode substringFromIndex:1];
-        
-        
-        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballcodeValue];
-        NSLog(@"array : %@",ballnoStr);
-        
-        
-    }
-    else{
-        
-        
-        NSString *ballcodeValue = [NSString stringWithFormat:@"%010d",1];
-        
-        //NSString * myURL = [NSString stringWithFormat:@"0000000001"];
-        //        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        //        f.numberStyle = NSNumberFormatterDecimalStyle;
-        //        NSNumber * myNumber = [f numberFromString:myURL];
-        //        NSInteger value = [myNumber integerValue];
-        //        NSString *ballno1 = [@(value) stringValue];
-        //NSString * ballno = [ballno1 substringFromIndex:1];
-        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballcodeValue];
-        NSLog(@"array : %@",ballnoStr);
-        
-    }
-    
-    
-    self.ballEventRecord.objBallcode   = ballnoStr;
-    self.ballEventRecord.objmatchcode=self.matchCode;
-    self.ballEventRecord.objcompetitioncode=self.competitionCode;
-}
+//-(void)SaveBallEventREcordvalue
+//{
+//    //self.ballEventRecord=[[BallEventRecord alloc]init];
+//    DBManager *objDBManager = [[DBManager alloc]init];
+//
+//    
+//    NSMutableArray * teamCodeArray=[objDBManager getTeamCodemethod];
+//    if(teamCodeArray.count > 0 && teamCodeArray != NULL)
+//    {
+//        NSString * objTeamCode = [NSString stringWithFormat:@"%@",teamCodeArray.lastObject];
+//        self.ballEventRecord.objTeamcode =objTeamCode;
+//    }
+//    
+//    NSMutableArray * inningsNoArray=[objDBManager getInningsNomethod];
+//    if(inningsNoArray.count > 0 && inningsNoArray != NULL)
+//    {
+//        NSString * objInningsno = [NSString stringWithFormat:@"%@",inningsNoArray.lastObject];
+//        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//        f.numberStyle = NSNumberFormatterDecimalStyle;
+//        self.ballEventRecord.objInningsno = [f numberFromString:objInningsno];
+//        
+//    }
+//    
+//    [self getDayNOValue];
+//    NSString * ballCodevalue=[objDBManager getballcodemethod:self.matchCode];
+//    // NSLog(@"array : %@",[ballCodevalueArray lastObject]);
+//    if(![ballCodevalue isEqualToString: @""])
+//    {
+//        
+//        NSString*ballcode= [NSString stringWithFormat:@"%@",ballCodevalue];
+//        if([ballcode isEqualToString:@"(null)"])
+//            
+//        {
+//            // [ballCodevalueArray removeLastObject];
+//            ballcode=[NSString stringWithFormat:@"%@",ballCodevalue];
+//            // [ballCodevalueArray removeLastObject];
+//            ballcode=[NSString stringWithFormat:@"%@",ballCodevalue];
+//        }
+//        
+//        
+//        NSString *code = [ballcode substringFromIndex: [ballcode length] - 10];
+//        
+//        NSInteger add =[code intValue];
+//        add = add+1;
+//        
+//        NSString *ballcodeValue = [NSString stringWithFormat:@"%010d",add];
+//        //NSString * addCode=[NSString stringWithFormat:@"%d",add];
+//        
+//        //NSInteger sum = 1000000000;
+//        
+//        //sum += [addCode intValue];
+//        //NSMutableString *addValue;
+//        //NSString * matchcodeaddValue =[NSString stringWithFormat:@"%d",sum];
+//        //       NSString* adds = nil;
+//        //        if([matchcodeaddValue hasPrefix:@"1"]) {
+//        //            adds = [matchcodeaddValue substringFromIndex:1];
+//        //           addValue = [NSMutableString stringWithString:adds];
+//        //            [addValue insertString:@"0" atIndex:1];
+//        //        }
+//        
+//        //NSString* addValue = [matchcodeaddValue stringByReplacingOccurrencesOfString:@"1"
+//        // withString:@"0"];
+//        
+//        
+//        
+//        //
+//        //        NSString * myURL = [NSString stringWithFormat:@"1%@",code];
+//        //        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//        //        f.numberStyle = NSNumberFormatterDecimalStyle;
+//        //        NSNumber * myNumber = [f numberFromString:myURL];
+//        //        NSInteger value = [myNumber integerValue]+1;
+//        //        NSString *addcode = [@(value) stringValue];
+//        //
+//        //        NSString * ballno = [addcode substringFromIndex:1];
+//        
+//        
+//        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballcodeValue];
+//        NSLog(@"array : %@",ballnoStr);
+//        
+//        
+//    }
+//    else{
+//        
+//        
+//        NSString *ballcodeValue = [NSString stringWithFormat:@"%010d",1];
+//        
+//        //NSString * myURL = [NSString stringWithFormat:@"0000000001"];
+//        //        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//        //        f.numberStyle = NSNumberFormatterDecimalStyle;
+//        //        NSNumber * myNumber = [f numberFromString:myURL];
+//        //        NSInteger value = [myNumber integerValue];
+//        //        NSString *ballno1 = [@(value) stringValue];
+//        //NSString * ballno = [ballno1 substringFromIndex:1];
+//        ballnoStr = [self.matchCode stringByAppendingFormat:@"%@",ballcodeValue];
+//        NSLog(@"array : %@",ballnoStr);
+//        
+//    }
+//    
+//    
+//    self.ballEventRecord.objBallcode   = ballnoStr;
+//    self.ballEventRecord.objmatchcode=self.matchCode;
+//    self.ballEventRecord.objcompetitioncode=self.competitionCode;
+//}
 
--(void)getDayNOValue
-{
-    NSMutableArray * DayNoArray=[objDBManager getDayNomethod];
-    NSString * objDayno;
-    if(DayNoArray.count > 0 && DayNoArray != NULL)
-    {
-        objDayno = [NSString stringWithFormat:@"%@",DayNoArray.lastObject];
-        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
-        f.numberStyle = NSNumberFormatterDecimalStyle;
-        NSNumber * myNumber = [f numberFromString:objDayno];
-        NSInteger value = [myNumber integerValue]+1;
-        self.ballEventRecord.objDayno = [NSNumber numberWithInteger:value];
-        self.ballEventRecord.objSessionno = [NSNumber numberWithInteger:value];
-    }
-    else{
-        objDayno = @"1";
-        self.ballEventRecord.objDayno=@1;
-        self.ballEventRecord.objSessionno=@1;
-    }
-    
-    
-}
+//-(void)getDayNOValue
+//{
+//    DBManager *objDBManager = [[DBManager alloc]init];
+//    NSMutableArray * DayNoArray=[objDBManager getDayNomethod];
+//    NSString * objDayno;
+//    if(DayNoArray.count > 0 && DayNoArray != NULL)
+//    {
+//        objDayno = [NSString stringWithFormat:@"%@",DayNoArray.lastObject];
+//        NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+//        f.numberStyle = NSNumberFormatterDecimalStyle;
+//        NSNumber * myNumber = [f numberFromString:objDayno];
+//        NSInteger value = [myNumber integerValue]+1;
+//        self.ballEventRecord.objDayno = [NSNumber numberWithInteger:value];
+//        self.ballEventRecord.objSessionno = [NSNumber numberWithInteger:value];
+//    }
+//    else{
+//        objDayno = @"1";
+//        self.ballEventRecord.objDayno=@1;
+//        self.ballEventRecord.objSessionno=@1;
+//    }
+//    
+//    
+//}
 
 // End ball process
 
@@ -1754,6 +1756,7 @@
     
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    }
         cell.backgroundColor = [UIColor clearColor];
         
         UIView *bgColorView = [[UIView alloc] init];
@@ -1913,7 +1916,7 @@
         
         
         
-    }
+    
     if(tableView == self.sideviewtable)
     {
         cell.textLabel.text = [self.rightSlideArray objectAtIndex:indexPath.row];
@@ -2662,7 +2665,7 @@
 //            OpenMatchEvent("MATCHRESULTS");//If target is achieved then match result screen will be launched.
 //        }
 //    }
-    
+    DBManager *objDBManager = [[DBManager alloc]init];
     NSMutableArray * objUmpireArray =[objDBManager GETUMPIRE:self.competitionCode :self.matchCode ];
     Umpire1Code =[objUmpireArray objectAtIndex:0];
     umpire2Code =[objUmpireArray objectAtIndex:1];
@@ -3071,7 +3074,7 @@
 
 -(void)overEVENT
 {
-    
+    DBManager *objDBManager = [[DBManager alloc]init];
     //endInnings=[[EndInnings alloc]init ];
     NSLog(@"matchtype=%@",self.matchTypeCode);
     NSString * Matchtype;
@@ -3790,8 +3793,10 @@
             [self unselectedButtonBg:selectBtnTag];
             
         }else{
-            
+            DBManager *objDBManager = [[DBManager alloc]init];
+
             _WicketTypeArray=[[NSMutableArray alloc]init];
+            
             NSMutableArray *tempWickettypeArray  =[objDBManager RetrieveWicketType];
             
             
@@ -5536,6 +5541,7 @@
             _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(4/255.0f) alpha:1.0f];//Normal
             
         }else{
+            DBManager *objDBManager = [[DBManager alloc]init];
             //Fielding Factor
             _fieldingfactorArray=[[NSMutableArray alloc]init];
             _fieldingfactorArray =[objDBManager RetrieveFieldingFactorData];
@@ -6638,7 +6644,7 @@ self.lbl_umpirename.text=@"";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    
+
     if(tableView == table_Appeal){
 //        if(appealEventDict==nil){
 //            appealEventDict = [NSMutableDictionary dictionary];
@@ -6910,6 +6916,8 @@ self.lbl_umpirename.text=@"";
         selectedWicketEvent = [self.WicketEventArray objectAtIndex:indexPath.row];
         if([selectedwickettype.metasubcode isEqualToString:@"MSC097"]|| [selectedwickettype.metasubcode isEqualToString:@"MSC095"])
         {
+            DBManager *objDBManager = [[DBManager alloc]init];
+
             _PlayerlistArray=[[NSMutableArray alloc]init];
             // _PlayerlistArray =[DBManager RetrievePlayerData:self.ma];
             _PlayerlistArray=[objDBManager RetrievePlayerData:self.matchCode :fetchSEPageLoadRecord.BOWLINGTEAMCODE];
@@ -6995,6 +7003,8 @@ self.lbl_umpirename.text=@"";
       //  isWicketSelected = NO;
     }else if(isFieldingSelected && fieldingOption == 1) //Fielding Factor
     {
+        DBManager *objDBManager = [[DBManager alloc]init];
+
         selectedfieldFactor = [self.fieldingfactorArray objectAtIndex:indexPath.row];
         
         _fieldingPlayerArray=[[NSMutableArray alloc]init];
@@ -7112,6 +7122,8 @@ self.lbl_umpirename.text=@"";
             
             if(isWicketSelected ==YES)
             {
+                DBManager *objDBManager = [[DBManager alloc]init];
+
                 _WicketTypeArray=[[NSMutableArray alloc]init];
                 NSMutableArray *tempWickettypeArray  =[objDBManager RetrieveWicketType];
                 
@@ -7186,6 +7198,8 @@ self.lbl_umpirename.text=@"";
             
             if(isWicketSelected ==YES)
             {
+                DBManager *objDBManager = [[DBManager alloc]init];
+
                 _WicketTypeArray=[[NSMutableArray alloc]init];
                 NSMutableArray *tempWickettypeArray  =[objDBManager RetrieveWicketType];
                 
@@ -7243,6 +7257,8 @@ self.lbl_umpirename.text=@"";
             //B6
             if(isWicketSelected ==YES)
             {
+                DBManager *objDBManager = [[DBManager alloc]init];
+
                 _WicketTypeArray=[[NSMutableArray alloc]init];
                 NSMutableArray *tempWickettypeArray  =[objDBManager RetrieveWicketType];
                 
@@ -7299,6 +7315,8 @@ self.lbl_umpirename.text=@"";
             //B6
             if(isWicketSelected ==YES)
             {
+                DBManager *objDBManager = [[DBManager alloc]init];
+
                 _WicketTypeArray=[[NSMutableArray alloc]init];
                 NSMutableArray *tempWickettypeArray  =[objDBManager RetrieveWicketType];
                 
@@ -7542,7 +7560,7 @@ self.lbl_umpirename.text=@"";
         
         [InitializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :selectPlayer.playerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode];
         
-        
+        DBManager *objDBManager = [[DBManager alloc]init];
         
         [objDBManager updateStricker:self.competitionCode MATCHCODE:self.matchCode INNINGSNO:fetchSEPageLoadRecord.INNINGSNO STRIKERCODE:selectPlayer.playerCode];
         isBowlerOpen = NO;
@@ -8023,7 +8041,8 @@ self.lbl_umpirename.text=@"";
 }
 -(void) matchInfoEdit
 {
-    
+    DBManager *objDBManager = [[DBManager alloc]init];
+
     
     NSMutableArray *getPlayerRecord = [objDBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS] BALLNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVRBALLS] ];
     
@@ -12067,6 +12086,7 @@ self.lbl_umpirename.text=@"";
         
         
     }else{
+        DBManager *objDBManager = [[DBManager alloc]init];
         
         [objDBManager updateRevisedOvers:strovers comments:strcomments matchCode:self.matchCode competitionCode:self.competitionCode];
     }
