@@ -91,10 +91,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-        if(retVal !=0){
-        }
-        if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+        if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
         {
     NSString *query=[NSString stringWithFormat:@"SELECT TEAMNAME FROM TEAMMASTER WHERE TEAMCODE= '%@' ",TEAMCODE];
         stmt=[query UTF8String];
