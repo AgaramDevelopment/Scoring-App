@@ -81,6 +81,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *view_addInnings;
 
+@property (strong,nonatomic) IBOutlet UIView * view_datepicker;
+
 
 - (IBAction)btn_back:(id)sender;
 

@@ -323,7 +323,9 @@ else
         self.WickAddview.hidden=YES;
         
         self.Btn_Add.hidden =YES;
-
+        [self.btn_delete setBackgroundColor:[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f]];
+        self.btn_delete.userInteractionEnabled=YES;
+        isAddWicket=YES;
   
     }
     else
@@ -414,41 +416,13 @@ else
         self.WickAddview.hidden=NO;
         self.Btn_Add.hidden =NO;
         isAddWicket=NO;
+        isWicketlist=NO;
     }
     else
     {
         [self.delegate ChangeVCBackBtnAction];
         isAddWicket=YES;
     }
-//    Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
-//    add.COMPETITIONCODE=self.COMPETITIONCODE;
-//    add.MATCHCODE=self.MATCHCODE;
-//    add.INNINGSNO=self.INNINGSNO;
-//    add.TEAMCODE=self.TEAMCODE;
-//    add.STRIKERCODE=STRIKERCODE;
-//    add.NONSTRIKERCODE=NONSTRIKERCODE;
-//    add.NONSTRIKERNAME=NONSTRIKERNAME;
-//    add.MAXOVER=MAXOVER;
-//    add.MAXBALL=MAXBALL;
-//    add.BALLCOUNT=BALLCOUNT;
-//    add.N_WICKETNO=N_WICKETNO;
-//    add.BALLCODE=BALLCODE;
-//    
-//    
-//    
-//    
-//    //vc2 *viewController = [[vc2 alloc]init];
-//    [self addChildViewController:add];
-//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-//    [self.view addSubview:add.view];
-//    add.view.alpha = 0;
-//    [add didMoveToParentViewController:self];
-//    
-//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-//     {
-//         add.view.alpha = 1;
-//     }
-//                     completion:nil];
 
     
 }
@@ -463,18 +437,19 @@ else
     
     BOOL flag = YES;
     
-    NSString *errorMessage = @"";
+   
     
-    if([ Wicket_lbl.text isEqual:@"Select"]){
-      //  [self showDialog:@"Please Select Wicket Type" andTitle:@""];
-       errorMessage = [NSString stringWithFormat:@"%@",@"Please select Wicket Type.\n"];
+    if([Wicket_lbl.text isEqual:@"Select"]){
+        [self showDialog:@"Please Select Wicket Type" andTitle:@"Other Wicket"];
+//       errorMessage = [NSString stringWithFormat:@"%@",@"Please select Wicket Type.\n"];
         flag = NO;
+        return flag;
     }
     
     if([self.selectplayer_lbl.text isEqual:@"Select"]){
-        //[self showDialog:@"Please enter End Over." andTitle:@""];
-        errorMessage = [NSString stringWithFormat:@"%@%@",@"Please Select Player Name.\n",errorMessage];
-        flag = NO;
+        [self showDialog:@"Please enter End Over." andTitle:@"Other Wicket"];
+       // errorMessage = [NSString stringWithFormat:@"%@%@",@"Please Select Player Name.\n",errorMessage];
+        return flag;
         
     }
     return flag;
@@ -487,33 +462,6 @@ else
     if(_ISEDITMODE){
        [self UpdateOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :WICKETTYPE :WICKETPLAYER :WICKETNO :VIDEOLOCATION :TOTALRUNS];
         
-//        
-//        Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
-//        add.COMPETITIONCODE=self.COMPETITIONCODE;
-//        add.MATCHCODE=self.MATCHCODE;
-//        add.INNINGSNO=self.INNINGSNO;
-//        add.TEAMCODE=self.TEAMCODE;
-//        add.STRIKERCODE=STRIKERCODE;
-//        add.NONSTRIKERCODE=NONSTRIKERCODE;
-//        add.NONSTRIKERNAME=NONSTRIKERNAME;
-//        add.MAXOVER=MAXOVER;
-//        add.MAXBALL=MAXBALL;
-//        add.BALLCOUNT=BALLCOUNT;
-//        add.N_WICKETNO=N_WICKETNO;
-//        add.BALLCODE=BALLCODE;
-//        
-//        [self addChildViewController:add];
-//        add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-//        [self.view addSubview:add.view];
-//        add.view.alpha = 0;
-//        [add didMoveToParentViewController:self];
-//        
-//        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-//         {
-//             add.view.alpha = 1;
-//         }
-//                         completion:nil];
-//        
         
        
     }else{
@@ -522,36 +470,6 @@ else
       
         [self InsertOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETPLAYER :WICKETTYPE : WICKETNO :VIDEOLOCATION :TOTALRUNS];
     
-//        self.WickAddview.hidden=NO;
-//        isWicketlist=NO;
-//        [self.tbl_Wicketlist reloadData];
-        
-//        Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
-//        add.COMPETITIONCODE=self.COMPETITIONCODE;
-//        add.MATCHCODE=self.MATCHCODE;
-//        add.INNINGSNO=self.INNINGSNO;
-//        add.TEAMCODE=self.TEAMCODE;
-//        add.STRIKERCODE=STRIKERCODE;
-//        add.NONSTRIKERCODE=NONSTRIKERCODE;
-//        add.NONSTRIKERNAME=NONSTRIKERNAME;
-//        add.MAXOVER=MAXOVER;
-//        add.MAXBALL=MAXBALL;
-//        add.BALLCOUNT=BALLCOUNT;
-//        add.N_WICKETNO=N_WICKETNO;
-//        add.BALLCODE=BALLCODE;
-//        
-//        [self addChildViewController:add];
-//        add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-//        [self.view addSubview:add.view];
-//        add.view.alpha = 0;
-//        [add didMoveToParentViewController:self];
-//        
-//        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-//         {
-//             add.view.alpha = 1;
-//         }
-//                         completion:nil];
-//
     }
     
     }
@@ -560,6 +478,8 @@ else
 
 -(IBAction)didclicktouch:(id)sender{
     
+    if(isEnableTbl==NO)
+    {
          isWicketlist=YES;
         WICKETARRAY=[[NSMutableArray alloc]init];
         NSMutableArray * FetchWicketArray =[DbManager_OtherWicket RetrieveOtherWicketType];
@@ -574,7 +494,13 @@ else
         
         [self.Wicket_tableview reloadData];
         self.Wicket_tableview.hidden=NO;
+        isEnableTbl=YES;
+    }
+    }
+    else
+    {
         isEnableTbl=NO;
+        self.Wicket_tableview.hidden=YES;
     }
     
     
@@ -586,13 +512,32 @@ else
     self.Btn_Add.hidden=YES;
     isAddWicket=YES;
     isWicketlist=YES;
+    [self.btn_delete setBackgroundColor:[UIColor grayColor]];
+    self.btn_delete.userInteractionEnabled=NO;
 }
 - (IBAction)didclicktouchplayer:(id)sender {
-     
     
+    if(![Wicket_lbl.text isEqualToString:@"Select"] && Wicket_lbl.text!=@"")
+    {
+    if(isEnableTbl ==NO)
+    {
      [self FetchOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : WICKETTYPE:STRIKERCODE:NONSTRIKERCODE];
+        isEnableTbl=YES;
+        self.tbl_playername.hidden=NO;
+         isWicketlist=YES;
+    }
+    else{
+        isEnableTbl=NO;
+        self.tbl_playername.hidden=YES;
+         isWicketlist=YES;
+    }
     
-    
+    }
+    else
+    {
+        UIAlertView * objAlter=[[UIAlertView alloc]initWithTitle:@"Other Wicket" message:@"Please select wicket type" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [objAlter show];
+    }
     
 }
 

@@ -20,7 +20,7 @@
 #import "MatchResultListVC.h"
 #import "Utitliy.h"
 #import "ArchivesVC.h"
-@interface EndInningsVC ()<UITextFieldDelegate>
+@interface EndInningsVC ()<UITextFieldDelegate,UIPickerViewDelegate,UIPickerViewDataSource>
 {
     NSDateFormatter *formatter;
     NSObject *fetchEndinnings;
@@ -50,7 +50,7 @@ BOOL IsBack;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    self.view_datepicker.hidden=YES;
 }
 -(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE{
     
@@ -169,42 +169,22 @@ BOOL IsBack;
 -(void)datePicker{
     
     
-[datePicker setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_FR"]];
-    
     datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_startInnings.frame.origin.x,self.txt_startInnings.frame.origin.y+30,self.view.frame.size.width,200)];
-    
-    
     datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     
-
     [self.txt_startInnings setInputView:datePicker];
     UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
     [toolbar setTintColor:[UIColor grayColor]];
     UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
-                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate:)];
-    
- 
-
+                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
     
     UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
     [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
     
-   [self.txt_startInnings setInputAccessoryView:toolbar];
-    
+    [self.txt_startInnings setInputAccessoryView:toolbar];
 
-    [datePicker addTarget:self
-                   action:@selector(showSelecteddate:)forControlEvents:UIControlEventValueChanged];
-
-    self.txt_startInnings.inputView = toolbar;
-//    
-//    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-//    //   2016-06-25 12:00:00
-//    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-//    NSDate *matchdate = [dateFormat dateFromString:MatchDate];
     
-    
-    //datePicker.date = MatchDate;
     [self duration];
 
     
