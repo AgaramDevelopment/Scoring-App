@@ -153,10 +153,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-//    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-//    if(retVal !=0){
-//    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *updateSQL = [NSString stringWithFormat:@"SELECT IFNULL(MAX(OVERNO),0) AS LASTBOWLEROVERNO FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND BOWLERCODE = '%@' AND OVERNO <= '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,PREVIOUSBOWLERCODE,OVERNO];
     
