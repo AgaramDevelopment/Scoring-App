@@ -61,8 +61,6 @@
 //    NSString  *N_WICKETTYPE;
   //  NSString  *N_FIELDERCODE;
     
-  
-    NSMutableArray *GetWicketEventsPlayerDetails;
 }
 
 @property(nonatomic,strong)NSMutableArray *WICKETARRAY;
