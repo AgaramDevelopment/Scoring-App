@@ -1916,7 +1916,7 @@
         
         
         
-
+    
     if(tableView == self.sideviewtable)
     {
         cell.textLabel.text = [self.rightSlideArray objectAtIndex:indexPath.row];

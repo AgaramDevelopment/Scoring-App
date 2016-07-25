@@ -586,21 +586,22 @@ EndInnings *insertScoreBoard;
     if(getOverArray.count>0)
     {
         
-        UpdateScoreEngine *updateScoreEngRec = [getPlayerArray objectAtIndex:0];
+        UpdateScoreEngine *updateScoreEngRec = [getOverArray objectAtIndex:0];
         
-        F_BOWLEROVERS = [NSNumber numberWithInt:updateScoreEngRec.OVERS];
-        F_BOWLERBALLS = [NSNumber numberWithInt:updateScoreEngRec.BALLS];
-        F_BOWLERPARTIALOVERBALLS = [NSNumber numberWithInt:updateScoreEngRec.PARTIALOVERBALLS];
+        F_BOWLEROVERS = updateScoreEngRec.OVERS;
+        F_BOWLERBALLS = [NSNumber numberWithInt:updateScoreEngRec.BALLS.intValue];
+        
+        F_BOWLERPARTIALOVERBALLS = [NSNumber numberWithInt:updateScoreEngRec.PARTIALOVERBALLS.intValue];
         F_BOWLERRUNS = updateScoreEngRec.RUNS;
         
-        F_BOWLERWICKETS = [NSNumber numberWithInt:updateScoreEngRec.WICKETS];
-        F_BOWLERMAIDENS = [NSNumber numberWithInt:updateScoreEngRec.MAIDENS];
-        F_BOWLERNOBALLS = [NSNumber numberWithInt:updateScoreEngRec.NOBALLS];
-        F_BOWLERWIDES = [NSNumber numberWithInt:updateScoreEngRec.WIDES];
+        F_BOWLERWICKETS = [NSNumber numberWithInt:updateScoreEngRec.WICKETS.intValue];
+        F_BOWLERMAIDENS = [NSNumber numberWithInt:updateScoreEngRec.MAIDENS.intValue];
+        F_BOWLERNOBALLS = [NSNumber numberWithInt:updateScoreEngRec.NOBALLS.intValue];
+        F_BOWLERWIDES = [NSNumber numberWithInt:updateScoreEngRec.WIDES.intValue];
         
-        F_BOWLERDOTBALLS = [NSNumber numberWithInt:updateScoreEngRec.DOTBALLS];
-        F_BOWLERFOURS =  [NSNumber numberWithInt:updateScoreEngRec.FOURS];
-        F_BOWLERSIXES = [NSNumber numberWithInt:updateScoreEngRec.SIXES];
+        F_BOWLERDOTBALLS = [NSNumber numberWithInt:updateScoreEngRec.DOTBALLS.intValue];
+        F_BOWLERFOURS =  [NSNumber numberWithInt:updateScoreEngRec.FOURS.intValue];
+        F_BOWLERSIXES = [NSNumber numberWithInt:updateScoreEngRec.SIXES.intValue];
         
     }
     
