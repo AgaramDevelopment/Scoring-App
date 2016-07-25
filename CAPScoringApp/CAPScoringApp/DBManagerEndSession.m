@@ -64,9 +64,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-        if(retVal !=0){
-        }
+         
         
         NSString *query=[NSString stringWithFormat:@"SELECT ISDAYNIGHT FROM MATCHREGISTRATION WHERE MATCHCODE='%@'",MATCHCODE];
         stmt=[query UTF8String];
@@ -132,10 +130,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3 *dataBase;
         const char *stmt;
         sqlite3_stmt *statement;
-        retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-        if(retVal !=0){
-        }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
         NSString *query=[NSString stringWithFormat:@"SELECT IFNULL((MAX(DAYNO)+1),0) AS DAYNO FROM   DAYEVENTS WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND DAYSTATUS='1'",COMPETITIONCODE,MATCHCODE];
         stmt=[query UTF8String];
@@ -205,10 +201,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(MAX(INNINGSNO),0) AS INNINGSNO  FROM   BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE];
     stmt=[query UTF8String];
@@ -243,10 +238,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(MAX(SESSIONNO),0) AS SESSIONNO FROM SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND DAYNO='%@' AND SESSIONSTATUS='1'",COMPETITIONCODE,MATCHCODE,DAYNO];
     stmt=[query UTF8String];
@@ -311,10 +305,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT MIN(OVERNO) AS STARTOVER   FROM   BALLEVENTS   WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND SESSIONNO ='%@' AND INNINGSNO='%@' AND DAYNO='%@'",COMPETITIONCODE,MATCHCODE,SESSIONNO,INNINGSNO,DAYNO];
     stmt=[query UTF8String];
@@ -348,10 +341,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT MAX(ENDOVER) as ENDOVER  FROM	  SESSIONEVENTS  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
     stmt=[query UTF8String];
@@ -388,10 +380,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT MIN(BALLNO) AS STARTOVERBALLNO  FROM   BALLEVENTS  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND SESSIONNO='%@' AND DAYNO='%@' AND INNINGSNO='%@' AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,SESSIONNO,DAYNO,INNINGSNO,STARTOVERNO];
     stmt=[query UTF8String];
@@ -426,10 +417,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT MAX(OVERNO) AS ENDOVER FROM   BALLEVENTS WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND SESSIONNO='%@' AND DAYNO='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,SESSIONNO,DAYNO,INNINGSNO];
     stmt=[query UTF8String];
@@ -464,10 +454,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
         NSString *query=[NSString stringWithFormat:@"SELECT MAX(BALLNO) AS STARTOVERBALLNO  FROM   BALLEVENTS   WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND SESSIONNO='%@' AND DAYNO='%@' AND INNINGSNO='%@' AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,SESSIONNO,DAYNO,INNINGSNO,ENDOVERNO];
         stmt=[query UTF8String];
@@ -502,10 +491,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT OVERSTATUS FROM   OVEREVENTS   WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@'  AND INNINGSNO='%@' AND OVERNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,ENDOVERNO];
     stmt=[query UTF8String];
@@ -541,10 +529,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT TEAMNAME FROM TEAMMASTER WHERE TEAMCODE='%@'",BATTINGTEAMCODE];
     stmt=[query UTF8String];
@@ -582,10 +569,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)  as PENALTYRUNS FROM   PENALTYDETAILS WHERE  COMPETITIONCODE = '%@' AND MATCHCODE = '%@'  AND INNINGSNO IN ('%@', '%@' - 1) AND AWARDEDTOTEAMCODE = '%@' AND (BALLCODE IS NULL OR INNINGSNO < '%@')",COMPETITIONCODE,MATCHCODE,INNINGSNO,INNINGSNO,BATTINGTEAMCODE,INNINGSNO];
     stmt=[query UTF8String];
@@ -620,10 +606,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT  IFNULL(SUM(GRANDTOTAL) ,0) AS RUNSSCORED FROM BALLEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND SESSIONNO='%@'  AND INNINGSNO='%@'  AND DAYNO='%@' ",COMPETITIONCODE,MATCHCODE,SESSIONNO,INNINGSNO,DAYNO];
     stmt=[query UTF8String];
@@ -657,10 +642,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRAWICKETCOUNT FROM BALLEVENTS BALL LEFT JOIN WICKETEVENTS WKT ON BALL.COMPETITIONCODE = WKT.COMPETITIONCODE AND BALL.MATCHCODE = WKT.MATCHCODE AND BALL.INNINGSNO = WKT.INNINGSNO  AND BALL.TEAMCODE = WKT.TEAMCODE AND BALL.BALLCODE = WKT.BALLCODE INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE=WKT.COMPETITIONCODE AND MR.MATCHCODE=WKT.MATCHCODE  AND MR.RECORDSTATUS='MSC001' WHERE  BALL.COMPETITIONCODE='%@' AND BALL.MATCHCODE='%@'  AND BALL.INNINGSNO='%@' AND BALL.SESSIONNO = '%@' AND BALL.DAYNO='%@' ",COMPETITIONCODE,MATCHCODE,INNINGSNO,SESSIONNO,DAYNO];
     stmt=[query UTF8String];
@@ -845,10 +829,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT MATCHDATE AS STARTDATE FROM	MATCHREGISTRATION WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
     stmt=[query UTF8String];
@@ -963,10 +946,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT MATCHTYPE FROM COMPETITION WHERE  COMPETITIONCODE = '%@'",COMPETITIONCODE];
     stmt=[query UTF8String];
@@ -1003,10 +985,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
 NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRAWICKETCOUNT FROM   BALLEVENTS BALL  LEFT JOIN WICKETEVENTS WKT ON BALL.COMPETITIONCODE = WKT.COMPETITIONCODE AND BALL.MATCHCODE = WKT.MATCHCODE AND BALL.INNINGSNO = WKT.INNINGSNO AND BALL.TEAMCODE = WKT.TEAMCODE AND BALL.BALLCODE = WKT.BALLCODE WHERE  BALL.COMPETITIONCODE='%@' AND BALL.MATCHCODE='%@' AND BALL.TEAMCODE='%@' AND BALL.INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
     stmt=[query UTF8String];
@@ -1041,10 +1022,9 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0) AS PENALTYRUNS  FROM PENALTYDETAILS  WHERE   COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO IN ('%@', '%@' - 1)  AND AWARDEDTOTEAMCODE = '%@' AND (BALLCODE IS NULL OR INNINGSNO < '%@')",COMPETITIONCODE,MATCHCODE,INNINGSNO,INNINGSNO,TEAMCODE,INNINGSNO];
     stmt=[query UTF8String];
@@ -1081,10 +1061,9 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(GRANDTOTAL) ,0) AS RUNS FROM   BALLEVENTS 	WHERE  INNINGSNO= '%@' AND COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'",INNINGSNO,COMPETITIONCODE,MATCHCODE,TEAMCODE];
     stmt=[query UTF8String];
@@ -1120,10 +1099,9 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT MAX(OVERNO) AS MAXOVER FROM BALLEVENTS  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@' ",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO];
     stmt=[query UTF8String];
@@ -1158,10 +1136,9 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT MAX(BALLNO) AS BALLNO FROM   BALLEVENTS  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND OVERNO='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,OVERNO,INNINGSNO];
     stmt=[query UTF8String];
@@ -1196,10 +1173,9 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT OVERSTATUS FROM   OVEREVENTS  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@' AND OVERNO='%@'  GROUP BY OVERSTATUS ",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO];
     stmt=[query UTF8String];
@@ -1235,10 +1211,9 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
-    retVal=sqlite3_open([databasePath UTF8String], &dataBase);
-    if(retVal !=0){
-    }
-    if (sqlite3_open(stmt, &dataBase) == SQLITE_OK)
+    
+         
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
     NSString *query=[NSString stringWithFormat:@"SELECT MAX(GRANDTOTAL) AS RUNS  FROM   BALLEVENTS  WHERE  INNINGSNO='%@' AND COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@'",INNINGSNO,COMPETITIONCODE,MATCHCODE,TEAMCODE];
     stmt=[query UTF8String];

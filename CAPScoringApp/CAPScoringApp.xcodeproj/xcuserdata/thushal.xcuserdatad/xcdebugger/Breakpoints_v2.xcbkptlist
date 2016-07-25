@@ -15,7 +15,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "492"
             endingLineNumber = "492"
-            landmarkName = "+updateFixtureInfo:matchCode:competitionCode:"
+            landmarkName = "-RetrieveFixturesData::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -31,7 +31,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "903"
             endingLineNumber = "903"
-            landmarkName = "+getInningsNomethod"
+            landmarkName = "-insertBallCodeFieldEvent:bowlerEvent:fieldingFactor:nrs:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -79,7 +79,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "523"
             endingLineNumber = "523"
-            landmarkName = "+RetrieveOfficalMasterData:competitionCode:"
+            landmarkName = "-RetrieveSCORE2:::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -251,8 +251,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "750"
             endingLineNumber = "750"
-            landmarkName = "-GetDayNoInDayEventForInsertEndInnings::::"
-            landmarkType = "5">
+            landmarkName = "@implementation DBManagerEndInnings"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -267,7 +267,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "820"
             endingLineNumber = "820"
-            landmarkName = "-GetCompetitioncodeInUpdateForInsertEndInnings::::"
+            landmarkName = "-UpdateInningsEventInUpdateForInsertEndInninges:::::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -283,7 +283,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "855"
             endingLineNumber = "855"
-            landmarkName = "-UpdateInningsEventInUpdateForInsertEndInninges:::::::::"
+            landmarkName = "-GetSecondTeamCodeForInsertEndInnings::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -299,7 +299,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "891"
             endingLineNumber = "891"
-            landmarkName = "-GetSecondTeamCodeForInsertEndInnings::"
+            landmarkName = "-GetThirdTeamCodeForInsertEndInnings::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -315,7 +315,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "926"
             endingLineNumber = "926"
-            landmarkName = "-GetThirdTeamCodeForInsertEndInnings::"
+            landmarkName = "-GetSecondTotalForInsertEndInnings::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -331,7 +331,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "963"
             endingLineNumber = "963"
-            landmarkName = "-GetSecondTotalForInsertEndInnings::"
+            landmarkName = "-GetFirstTotalForInsertEndInnings::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -347,7 +347,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1001"
             endingLineNumber = "1001"
-            landmarkName = "-GetFirstTotalForInsertEndInnings::"
+            landmarkName = "-GetSecondTotalinSecondThirdTeamCodeForInsertEndInnings::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -363,7 +363,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1037"
             endingLineNumber = "1037"
-            landmarkName = "-GetSecondTotalinSecondThirdTeamCodeForInsertEndInnings::"
+            landmarkName = "-GetFirstThirdTotalForInsertEndInnings::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -379,7 +379,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1075"
             endingLineNumber = "1075"
-            landmarkName = "-GetFirstThirdTotalForInsertEndInnings::"
+            landmarkName = "-InsertOverEventFormanageOverDetails::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -395,7 +395,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "740"
             endingLineNumber = "740"
-            landmarkName = "+insertBallCodeFieldEvent:bowlerEvent:fieldingFactor:nrs:"
+            landmarkName = "-getSelectingPlayerArray:matchCode:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -459,7 +459,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3497"
             endingLineNumber = "3497"
-            landmarkName = "-DeleteSessionEventsForDeleteEndInnings:::"
+            landmarkName = "-GetSessionNoForDeleteEndInnings:::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -797,6 +797,38 @@
             endingLineNumber = "11543"
             landmarkName = "-didClickWagonWheelmapTapAction:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ScorEnginVC didClickWagonWheelmapTapAction:]"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/23july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+                  timestampString = "491113796.558124"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11547"
+                  endingLineNumber = "11547"
+                  offsetFromSymbolStart = "78130">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ScorEnginVC didClickWagonWheelmapTapAction:]"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/23july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+                  timestampString = "491113796.558331"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "11547"
+                  endingLineNumber = "11547"
+                  offsetFromSymbolStart = "78144">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -925,6 +957,53 @@
             endingLineNumber = "7844"
             landmarkName = "-ChangeTeam"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__25-[ScorEnginVC ChangeTeam]_block_invoke.2178"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/23july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+                  timestampString = "491113796.566845"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7844"
+                  endingLineNumber = "7844"
+                  offsetFromSymbolStart = "107">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__copy_helper_block_.2179"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/23july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+                  timestampString = "491113796.567054"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7844"
+                  endingLineNumber = "7844"
+                  offsetFromSymbolStart = "51">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "__destroy_helper_block_.2180"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/23july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+                  timestampString = "491113796.567255"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7844"
+                  endingLineNumber = "7844"
+                  offsetFromSymbolStart = "39">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1243,7 +1322,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "5585"
             endingLineNumber = "5585"
-            landmarkName = "+getPENULTIMATEBOWLERCODE:MATCHCODE:INNINGSNO:BATTINGTEAMCODE:OVERNO:ISOVERCOMPLETE:BATTEAMOVERS:"
+            landmarkName = "-getTeamOverBall:::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1387,7 +1466,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "8956"
             endingLineNumber = "8956"
-            landmarkName = "+GetPenaltyDetailsForUpdate::::"
+            landmarkName = "-GetTeamNameForFetchEndInnings:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1437,53 +1516,6 @@
             endingLineNumber = "12019"
             landmarkName = "-revisedoverview"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__30-[ScorEnginVC revisedoverview]_block_invoke"
-                  moduleName = "CAPScoringApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/21july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "490959050.993384"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12019"
-                  endingLineNumber = "12019"
-                  offsetFromSymbolStart = "116">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__copy_helper_block_.2760"
-                  moduleName = "CAPScoringApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/21july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "490959050.993577"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12019"
-                  endingLineNumber = "12019"
-                  offsetFromSymbolStart = "51">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__destroy_helper_block_.2761"
-                  moduleName = "CAPScoringApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/21july2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "490959050.993856"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "12019"
-                  endingLineNumber = "12019"
-                  offsetFromSymbolStart = "39">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2010,8 +2042,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "156"
             endingLineNumber = "156"
-            landmarkName = "-GetInningsDetails:"
-            landmarkType = "5">
+            landmarkName = "@implementation DBManagerEndInnings"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2148,22 +2180,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/DBManagerEndInnings.m"
-            timestampString = "490885704.821101"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "2972"
-            endingLineNumber = "2972"
-            landmarkName = "-GetTotalRunsForFetchEndInnings::::"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
             timestampString = "490689427.027174"
             startingColumnNumber = "9223372036854775807"
@@ -2218,7 +2234,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2031"
             endingLineNumber = "2031"
-            landmarkName = "-InsertbattingSummaryForInsertScoreBoard::::::::::::::"
+            landmarkName = "-UpdatebattingSummaryForInsertScoreBoard::::::::::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2682,7 +2698,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1213"
             endingLineNumber = "1213"
-            landmarkName = "-GetBallCodeFormanageOverDetails:::::"
+            landmarkName = "-GetBatTeanRunsFormanageOverDetails::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2698,7 +2714,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1250"
             endingLineNumber = "1250"
-            landmarkName = "-GetBowlingTeamCodeFormanageOverDetails:::"
+            landmarkName = "-GetMaxidFormanageOverDetails:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2794,7 +2810,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "8735"
             endingLineNumber = "8735"
-            landmarkName = "+GETUMPIRE::"
+            landmarkName = "-GetSecondTeamCodeForInsertEndInnings::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2906,7 +2922,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2566"
             endingLineNumber = "2566"
-            landmarkName = "-GetBowlingDetailsForassignvarForInsertScoreBoard:::::"
+            landmarkName = "-GetBowlingPositionCountForInsertScoreBoard::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3066,7 +3082,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "787"
             endingLineNumber = "787"
-            landmarkName = "-InsertDayEventForInsertEndInnings::::::::"
+            landmarkName = "-GetCompetitioncodeInUpdateForInsertEndInnings::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3162,7 +3178,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "971"
             endingLineNumber = "971"
-            landmarkName = "-InsertWicketEventsForInsertScoreEngine::::::::::"
+            landmarkName = "-GetBallCodeForUpdateBowlerOverDetailsForInsertScoreEngine:::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3194,7 +3210,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2858"
             endingLineNumber = "2858"
-            landmarkName = "-UpdateBowlingSummaryForInsertScoreBoard:::::::::::::::::"
+            landmarkName = "-GetTeamNameForFetchEndInnings:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3274,7 +3290,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "939"
             endingLineNumber = "939"
-            landmarkName = "-GetBallCodeForUpdateBowlerOverDetailsForInsertScoreEngine:::::"
+            landmarkName = "-InsertBowlerOverDetailsForInsertScoreEngine::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3290,7 +3306,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1155"
             endingLineNumber = "1155"
-            landmarkName = "-GetmatchtypeForInsertScoreEngine:"
+            landmarkName = "-InsertWicketEventsForInsertScoreEngine::::::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
