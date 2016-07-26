@@ -207,7 +207,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                while(sqlite3_step(statement)==SQLITE_ROW)
                {
              GetPlayerDetailOnAbsentHurt *record=[[GetPlayerDetailOnAbsentHurt alloc]init];
-           record.PLAYERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+             record.PLAYERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
              record.PLAYERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
             [arraylist4 addObject:record];
          }
@@ -319,7 +319,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){    GetPlayerDetailOnRetiredHurtOnMSC108 *record=[[GetPlayerDetailOnRetiredHurtOnMSC108 alloc]init];
+            while(sqlite3_step(statement)==SQLITE_ROW)
+            {
+                GetPlayerDetailOnRetiredHurtOnMSC108 *record=[[GetPlayerDetailOnRetiredHurtOnMSC108 alloc]init];
                 record.PLAYERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.PLAYERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 [GetPlayerDetailsOnRetiredHurtOnMSC108 addObject:record];
@@ -1245,7 +1247,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 NSString *BALLCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                 sqlite3_reset(statement);
+                sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return BALLCODE;

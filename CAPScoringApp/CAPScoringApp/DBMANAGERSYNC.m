@@ -40,12 +40,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 //Get database path
--(NSString *) getDBPath
+//-(NSString *) getDBPath
+//{
+//    [self copyDatabaseIfNotExist];
+//    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
+//    NSString *documentsDir = [paths objectAtIndex:0];
+//    return [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
+//}
+
+- (id)init
 {
-    [self copyDatabaseIfNotExist];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
-    NSString *documentsDir = [paths objectAtIndex:0];
-    return [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
+    self = [super init];
+    if (self)
+    {
+        [self copyDatabaseIfNotExist];
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory , NSUserDomainMask, YES);
+        NSString *documentsDir = [paths objectAtIndex:0];
+        self.getDBPath = [documentsDir stringByAppendingPathComponent:SQLITE_FILE_NAME];
+        
+    }
+    return self;
 }
 
 //competition insert&Update

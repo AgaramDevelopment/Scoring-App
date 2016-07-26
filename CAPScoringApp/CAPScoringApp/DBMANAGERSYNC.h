@@ -155,4 +155,6 @@
 -(NSMutableArray *)getofficailCode;
 -(NSMutableArray *)getgroundcode;
 
+@property(nonatomic,strong) NSString *getDBPath;
+
 @end
