@@ -626,8 +626,10 @@ EndInnings *insertScoreBoard;
     
 
 
-    ISOVERCOMPLETE = [objDBManagerEndBall GETISOVERCOMPLETE : COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:F_OVERS ];
-    BOWLERCOUNT  = [objDBManagerEndBall GETBALLCOUNT : COMPETITIONCODE:MATCHCODE:INNINGSNO:OVERNO ];
+    ISOVERCOMPLETE = [objDBManagerEndBall GETISOVERCOMPLETE : COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:F_OVERS];
+    
+    
+    BOWLERCOUNT  = [NSNumber numberWithInt:[objDBManagerEndBall GETBALLCOUNT : COMPETITIONCODE:MATCHCODE:INNINGSNO:OVERNO].intValue];
     
     ISBALLEXISTS = [NSNumber numberWithInt:0];
     
@@ -641,7 +643,7 @@ EndInnings *insertScoreBoard;
     
     if([ISDELETE  isEqual: @1])
     {
-        if(ISOVERCOMPLETE == 0 || BOWLERCOUNT > [NSNumber numberWithInt:1])
+        if(ISOVERCOMPLETE == 0 || BOWLERCOUNT.intValue > [NSNumber numberWithInt:1])
         {
             U_BOWLERBALLS = ((F_NOBALL == 0) && (F_WIDE == 0) && [BOWLERCOUNT  isEqual: @"1"]) ? [NSNumber numberWithInt:F_BOWLERBALLS.intValue - 1 ]: F_BOWLERBALLS;
             U_BOWLERPARTIALOVERBALLS = (F_NOBALL == 0  && F_WIDE == 0 && BOWLERCOUNT > 1) ? ([NSNumber numberWithInt:F_BOWLERPARTIALOVERBALLS.intValue - 1]) :[NSNumber numberWithInt:F_BOWLERPARTIALOVERBALLS]  ;
@@ -796,7 +798,7 @@ EndInnings *insertScoreBoard;
             [NSNumber numberWithInt:1];
             insertScoreBoard.O_ISLEGALBALL = F_ISLEGALBALL;
             insertScoreBoard.BOWLINGTEAMCODE = BOWLINGTEAMCODE;
-            
+            insertScoreBoard.WICKETOVERNO = OVERNO;
            
          
             [insertScoreBoard insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
