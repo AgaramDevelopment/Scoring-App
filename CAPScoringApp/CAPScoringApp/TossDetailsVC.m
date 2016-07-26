@@ -287,7 +287,7 @@
         }
         objUserRecord=(UserRecord*)[ElectedToArray objectAtIndex:indexPath.row];
         
-        cell.textLabel.text =objUserRecord.electedTo;
+        cell.textLabel.text =[objUserRecord.electedTo uppercaseString];
         return cell;
     }
     
@@ -385,7 +385,7 @@
     {
         Electedselectindexarray=[[NSMutableArray alloc]init];
         objUserRecord=(UserRecord*)[ElectedToArray objectAtIndex:indexPath.row];
-        self.electedTo_lbl.text =objUserRecord.electedTo;
+        self.electedTo_lbl.text =[objUserRecord.electedTo uppercaseString];
         selectedElected=self.electedTo_lbl.text;
         electedcode=objUserRecord.MasterSubCode;
         
@@ -488,6 +488,10 @@
         
         [self.Wonby_table reloadData];
         self.Wonby_table.hidden=NO;
+        self.electedTo_table.hidden=YES;
+        self.Striker_table.hidden=YES;
+        self.nonStriker_table.hidden=YES;
+        self.Bowler_table.hidden=YES;
         isEnableTbl=NO;
     }
     else
@@ -594,6 +598,12 @@
         
         [self.Striker_table reloadData];
         self.Striker_table.hidden=NO;
+        self.Wonby_table.hidden=YES;
+        self.electedTo_table.hidden=YES;
+       
+        self.nonStriker_table.hidden=YES;
+        self.Bowler_table.hidden=YES;
+        
         isEnableTbl=NO;
         
     }
@@ -647,6 +657,10 @@
         
         [self.nonStriker_table reloadData];
         self.nonStriker_table.hidden=NO;
+        self.Striker_table.hidden=YES;
+        self.Wonby_table.hidden=YES;
+        self.electedTo_table.hidden=YES;
+        self.Bowler_table.hidden=YES;
         isEnableTbl=NO;
         
     }
@@ -707,6 +721,11 @@
         
         [self.Bowler_table reloadData];
         self.Bowler_table.hidden=NO;
+        self.nonStriker_table.hidden=YES;
+        self.Striker_table.hidden=YES;
+        self.Wonby_table.hidden=YES;
+        self.electedTo_table.hidden=YES;
+        
         isEnableTbl=NO;
         self.outlet_btn_proceed.enabled = YES;
         
@@ -730,7 +749,7 @@
 
 -(void)ShowAlterView:(NSString *) alterMsg
 {
-    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:@"Toss Details" message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [objAlter show];
 }
 
@@ -739,7 +758,7 @@
     
     if([self formValidation])
    {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Toss Details"
                                                        message: @"Please confirm to start the match"
                                                       delegate: self
                                              cancelButtonTitle:@"Start match"
