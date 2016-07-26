@@ -4938,7 +4938,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         
         
-        NSString *query = [NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE ='%@' AND INNINGSNO = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        NSString *query = [NSString stringWithFormat:@"SELECT ISFOLLOWON FROM INNINGSEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE ='%@' AND INNINGSNO = %@",COMPETITIONCODE,MATCHCODE,INNINGSNO];
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){

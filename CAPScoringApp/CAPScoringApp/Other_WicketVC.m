@@ -122,7 +122,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self getWicketListMethod];
+   
     
     dbInsertScoreEngine = [[DBManagerInsertScoreEngine alloc]init];
     dbOtherWicket = [[DbManager_OtherWicket alloc]init];
@@ -138,29 +138,34 @@
     [self.WICKET_NO_LBL.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.WICKET_NO_LBL.layer.borderWidth = 2;
  
-    WicketStingValues = [NSString stringWithFormat:@"%@", WICKETNO];
-    
- self.WICKET_NO_LBL.text=WicketStingValues;
-    
-    
-    
     if(_ISEDITMODE){
         self.Wicket_lbl.text=WICKETTYPE;
         self.selectplayer_lbl.text=WICKETPLAYER;
         
         [self.btn_save setTitle:@"Update" forState:UIControlStateNormal];
-
+        
     }
     
+    
+    
+    
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+     [self getWicketListMethod];
+    WicketStingValues = [NSString stringWithFormat:@"%@", WICKETNO];
+    
+    self.WICKET_NO_LBL.text=WicketStingValues;
+    
 
+}
 -(void)getWicketListMethod
 {
     GetWicketEventsPlayerDetails =[[NSMutableArray alloc]init];
     
     
     GetWicketEventsPlayerDetails=[ dbOtherWicket GetWicketEventDetailsForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
-    WICKETNO =[ dbOtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
+    WICKETNO =[ dbOtherWicket GetWicketNoForInsertOtherwicket :COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
 }
 
 
@@ -343,7 +348,7 @@ else
         Wicketselectindexarray=[[NSMutableArray alloc]init];
         objEventRecord=(WicketTypeRecord*)[WICKETARRAY objectAtIndex:indexPath.row];
         self.Wicket_lbl.text =objEventRecord.metasubcodedescription;
-        WICKETTYPE=self.Wicket_lbl.text;
+       // WICKETTYPE=self.Wicket_lbl.text;
         WICKETTYPE=objEventRecord.metasubcode;
         [Wicketselectindexarray addObject:objEventRecord];
         
@@ -360,7 +365,7 @@ else
         PlayerselectindexarrayAH=[[NSMutableArray alloc]init];
         objAbsentHurt=(GetPlayerDetailOnAbsentHurt*)[GetPlayerDetailsOnAbsentHurtArray objectAtIndex:indexPath.row];
         self.selectplayer_lbl.text =objAbsentHurt.PLAYERNAME;
-            WICKETPLAYER=self.selectplayer_lbl.text;
+           // WICKETPLAYER=self.selectplayer_lbl.text;
             WICKETPLAYER=objAbsentHurt.PLAYERCODE;
 
         [PlayerselectindexarrayAH addObject:objAbsentHurt];
@@ -373,7 +378,7 @@ else
             PlayerselectindexarrayTO=[[NSMutableArray alloc]init];
             objTimedOut=(GetPlayerDetailOnTimeOut*)[GetPlayerDetailsOnTimeOutArray objectAtIndex:indexPath.row];
             self.selectplayer_lbl.text =objTimedOut.PLAYERNAME;
-            WICKETPLAYER=self.selectplayer_lbl.text;
+           // WICKETPLAYER=self.selectplayer_lbl.text;
             WICKETPLAYER=objTimedOut.PLAYERCODE;
             [PlayerselectindexarrayTO addObject:objTimedOut];
             
@@ -384,7 +389,7 @@ else
             PlayerselectindexarrayRO=[[NSMutableArray alloc]init];
             objretriedOut=(GetPlayerDetailOnRetiredHurtOnMSC108*)[GetPlayerDetailsOnRetiredHurtOnMSC108Array objectAtIndex:indexPath.row];
             self.selectplayer_lbl.text =objretriedOut.PLAYERNAME;
-            WICKETPLAYER=self.selectplayer_lbl.text;
+            //WICKETPLAYER=self.selectplayer_lbl.text;
             WICKETPLAYER=objretriedOut.PLAYERCODE;
             [PlayerselectindexarrayRO addObject:objretriedOut];
             
@@ -396,7 +401,7 @@ else
             PlayerselectindexarrayRH=[[NSMutableArray alloc]init];
             objRetriedHurt=(GetPlayerDetailOnRetiredHurt*)[GetPlayerDetailOnRetiredHurt2Array objectAtIndex:indexPath.row];
             self.selectplayer_lbl.text =objRetriedHurt.PLAYERNAME;
-            WICKETPLAYER=self.selectplayer_lbl.text;
+           // WICKETPLAYER=self.selectplayer_lbl.text;
             WICKETPLAYER=objRetriedHurt.PLAYERCODE;
             [PlayerselectindexarrayRH addObject:objRetriedHurt];
             
@@ -423,6 +428,7 @@ else
         self.Btn_Add.hidden =NO;
         isAddWicket=NO;
         isWicketlist=NO;
+        [self.tbl_Wicketlist reloadData];
     }
     else
     {
@@ -452,10 +458,12 @@ else
         return flag;
     }
     
-    if([self.selectplayer_lbl.text isEqual:@"Select"]){
-        [self showDialog:@"Please enter End Over." andTitle:@"Other Wicket"];
+    if([self.selectplayer_lbl.text isEqual:@"select"]){
+        [self showDialog:@"Please enter Player Name." andTitle:@"Other Wicket"];
        // errorMessage = [NSString stringWithFormat:@"%@%@",@"Please Select Player Name.\n",errorMessage];
+        flag = NO;
         return flag;
+        
         
     }
     return flag;
@@ -514,10 +522,17 @@ else
 
 -(IBAction)didClickAddBtnAction:(id)sender
 {
+    [self getWicketListMethod];
+    WicketStingValues = [NSString stringWithFormat:@"%@", WICKETNO];
+    
+    self.WICKET_NO_LBL.text=WicketStingValues;
     self.WickAddview.hidden =YES;
     self.Btn_Add.hidden=YES;
     isAddWicket=YES;
     isWicketlist=YES;
+    self.selectplayer_lbl.text=@"select";
+    self. Wicket_lbl.text =@"Select";
+    
     [self.btn_delete setBackgroundColor:[UIColor grayColor]];
     self.btn_delete.userInteractionEnabled=NO;
 }
@@ -594,7 +609,7 @@ else
 }
 
 
--(void)FetchOtherwickets:COMPETITIONCODE: MATCHCODE : TEAMCODE : INNINGSNO :WICKETTYPE: STRIKERCODE :NONSTRIKERCODE
+-(void)FetchOtherwickets:COMPETITIONCODE: MATCHCODE : TEAMCODE : INNINGSNO : WICKETTYPE: STRIKERCODE :NONSTRIKERCODE
 
 {
     
@@ -765,14 +780,14 @@ else
 					   if(GetWicketDetails.count>0)
                        {
                            
-                           N_WICKETNO  = [GetWicketDetails objectAtIndex:0];
-                           N_WICKETTYPE = [GetWicketDetails objectAtIndex:1];
-                           N_FIELDERCODE = [GetWicketDetails objectAtIndex:2];
+                           N_WICKETNO  = [[GetWicketDetails valueForKey:@"WICKETNO"] objectAtIndex:0];
+                           N_WICKETTYPE = [[GetWicketDetails valueForKey:@"WICKETTYPE"] objectAtIndex:0];
+                           N_FIELDERCODE = [[GetWicketDetails valueForKey:@"FIELDINGPLAYER"] objectAtIndex:0];
                            
                        }
         if(![[ dbOtherWicket GetBatsManCodeForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER ]isEqual:@""])
         {
-           [ dbOtherWicket UpdateBattingSummaryForInsertOtherwicket:N_WICKETNO :N_FIELDERCODE :N_FIELDERCODE :TOTALRUNS :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETPLAYER];
+           [ dbOtherWicket UpdateBattingSummaryForInsertOtherwicket:N_WICKETNO :N_WICKETTYPE :N_FIELDERCODE :TOTALRUNS :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETPLAYER];
             
             
         }
@@ -982,8 +997,7 @@ else
 
 
 - (IBAction)check:(id)sender {
-     [self FetchOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : WICKETTYPE:STRIKERCODE:NONSTRIKERCODE];
+     [self FetchOtherwickets :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : WICKETTYPE:STRIKERCODE:NONSTRIKERCODE];
 }
-- (IBAction)btn_save:(id)sender {
-}
+
 @end
