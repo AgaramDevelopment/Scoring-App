@@ -391,18 +391,18 @@
     
     _view_Wagon_wheel.hidden=YES;
     //bowl type - spin array
-    _bowlTypeArray=[[NSMutableArray alloc]init];
-    _bowlTypeArray =[objDBManager getBowlType];
-    
+//    _bowlTypeArray=[[NSMutableArray alloc]init];
+//    _bowlTypeArray =[objDBManager getBowlType];
+//    
     self.view_bowlType.hidden = YES;
     self.tbl_bowlType.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     
     //fast bowl type
     
-    _fastBowlTypeArray = [[NSMutableArray alloc]init];
-    _fastBowlTypeArray = [objDBManager getBowlFastType];
-    
+//    _fastBowlTypeArray = [[NSMutableArray alloc]init];
+//    _fastBowlTypeArray = [objDBManager getBowlFastType];
+//    
     self.view_fastBowl.hidden = YES;
     
     
@@ -410,15 +410,15 @@
     
     //aggressive shot type
     
-    _aggressiveShotTypeArray = [[NSMutableArray alloc]init];
-    _aggressiveShotTypeArray =[objDBManager getAggressiveShotType];
+//    _aggressiveShotTypeArray = [[NSMutableArray alloc]init];
+//    _aggressiveShotTypeArray =[objDBManager getAggressiveShotType];
     self.view_aggressiveShot.hidden = YES;
     
     
     
     //defensice shot type
-    _defensiveShotTypeArray = [[NSMutableArray alloc]init];
-    _defensiveShotTypeArray = [objDBManager getDefenceShotType];
+//    _defensiveShotTypeArray = [[NSMutableArray alloc]init];
+//    _defensiveShotTypeArray = [objDBManager getDefenceShotType];
     self.view_defensive.hidden = YES;
     
     self.View_Appeal.hidden = YES;
@@ -465,8 +465,8 @@
     
     _View_Appeal.hidden=YES;
     _view_table_select.hidden=YES;
-    _AppealValuesArray=[[NSMutableArray alloc]init];
-    _AppealValuesArray =[objDBManager AppealRetrieveEventData];
+//    _AppealValuesArray=[[NSMutableArray alloc]init];
+//    _AppealValuesArray =[objDBManager AppealRetrieveEventData];
     //_rightSlideArray = rightSideVc.rightSlideArray;
     leftSlideSwipe = NO;
     
@@ -686,6 +686,7 @@
     
     
     //Set data for Fetch SE page load
+    fetchSEPageLoadRecord = nil;
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     
     
@@ -1339,6 +1340,7 @@
 
 -(void)displaystrickerdetailsmethod
 {
+    fetchSEPageLoadRecord = nil;
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
@@ -1750,18 +1752,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
    
-    
-    
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-    }
-        cell.backgroundColor = [UIColor clearColor];
-        
-        UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
-        cell.selectedBackgroundView = bgColorView;
         
         
         //wicket type
@@ -1914,32 +1905,6 @@
         }
         
         
-        
-        
-    
-    if(tableView == self.sideviewtable)
-    {
-        cell.textLabel.text = [self.rightSlideArray objectAtIndex:indexPath.row];
-        cell.textLabel.textColor=[UIColor whiteColor];
-        return cell;
-    }
-    
-    if(tableView == extrasTableView){
-        cell.textLabel.text = [self.extrasOptionArray objectAtIndex:indexPath.row];
-    }else if(tableView == overThrowTableView){
-        cell.textLabel.text = [self.overThrowOptionArray objectAtIndex:indexPath.row];
-    }else if(tableView == currentBowlersTableView){
-        BowlerEvent *bowlerEvent = [fetchSEPageLoadRecord.getBowlingTeamPlayers objectAtIndex:indexPath.row];
-        cell.textLabel.text = bowlerEvent.BowlerName;
-    }else if(tableView == nonstrickerTableView){
-        SelectPlayerRecord *battingEvent = [nonStrickerList objectAtIndex:indexPath.row];
-        cell.textLabel.text = battingEvent.playerName;
-    }else if(tableView == strickerTableView){
-        SelectPlayerRecord *battingEvent = [strickerList objectAtIndex:indexPath.row];
-        cell.textLabel.text = battingEvent.playerName;
-    }else {
-        cell.textLabel.text = [self.selectbtnvalueArray objectAtIndex:indexPath.row];
-    }
     
     if (tableView == table_Appeal) {
         
@@ -2055,11 +2020,7 @@
         return aggressiveCell;
     }
     
-    if(tableView == rbwTableview){
-        cell.textLabel.text = [self.rbwOptionArray objectAtIndex:indexPath.row];
-    }else if(tableView == miscFiltersTableview){
-        cell.textLabel.text = [self.miscfiltersOptionArray objectAtIndex:indexPath.row];
-    }
+   
     
     
     if (tableView == self.table_AppealSystem)
@@ -2134,6 +2095,48 @@
         return cell;
         
     }
+    
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+    }
+    cell.backgroundColor = [UIColor clearColor];
+    
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+    cell.selectedBackgroundView = bgColorView;
+    
+    
+    if(tableView == self.sideviewtable)
+    {
+        cell.textLabel.text = [self.rightSlideArray objectAtIndex:indexPath.row];
+        cell.textLabel.textColor=[UIColor whiteColor];
+        return cell;
+    }
+    
+    if(tableView == extrasTableView){
+        cell.textLabel.text = [self.extrasOptionArray objectAtIndex:indexPath.row];
+    }else if(tableView == overThrowTableView){
+        cell.textLabel.text = [self.overThrowOptionArray objectAtIndex:indexPath.row];
+    }else if(tableView == currentBowlersTableView){
+        BowlerEvent *bowlerEvent = [fetchSEPageLoadRecord.getBowlingTeamPlayers objectAtIndex:indexPath.row];
+        cell.textLabel.text = bowlerEvent.BowlerName;
+    }else if(tableView == nonstrickerTableView){
+        SelectPlayerRecord *battingEvent = [nonStrickerList objectAtIndex:indexPath.row];
+        cell.textLabel.text = battingEvent.playerName;
+    }else if(tableView == strickerTableView){
+        SelectPlayerRecord *battingEvent = [strickerList objectAtIndex:indexPath.row];
+        cell.textLabel.text = battingEvent.playerName;
+    }else if(tableView == rbwTableview){
+        cell.textLabel.text = [self.rbwOptionArray objectAtIndex:indexPath.row];
+    }else if(tableView == miscFiltersTableview){
+        cell.textLabel.text = [self.miscfiltersOptionArray objectAtIndex:indexPath.row];
+    }
+    //    else {
+    //        cell.textLabel.text = [self.selectbtnvalueArray objectAtIndex:indexPath.row];
+    //    }
+
 
  return cell;
 }
@@ -5322,6 +5325,10 @@
             isSpinSelected = NO;
             
         }else{
+            DBManager *objDBManager = [[DBManager alloc]init];
+
+            _bowlTypeArray=[[NSMutableArray alloc]init];
+            _bowlTypeArray =[objDBManager getBowlType];
             
             self.ballEventRecord.objBowltype = nil;
             isSpinSelected = YES;
@@ -5379,6 +5386,11 @@
             isFastSelected = NO;
             
         }else{
+            DBManager *objDBManager = [[DBManager alloc]init];
+
+            _fastBowlTypeArray = [[NSMutableArray alloc]init];
+            _fastBowlTypeArray = [objDBManager getBowlFastType];
+            
             
             self.ballEventRecord.objBowltype = nil;
             isFastSelected = YES;
@@ -5411,7 +5423,10 @@
         self.view_bowlType.hidden = YES;
         self.view_defensive.hidden = YES;
         
+        
+        
         if(isAggressiveSelected && self.ballEventRecord.objShottype != nil){
+            
             [self selectedViewBg:_view_aggressive];
             int indx=0;
             int selectePosition = -1;
@@ -5443,6 +5458,10 @@
             isAggressiveSelected = NO;
             
         }else{
+            DBManager *objDBManager = [[DBManager alloc]init];
+            self.aggressiveShotTypeArray = [[NSMutableArray alloc]init];
+            self.aggressiveShotTypeArray =[objDBManager getAggressiveShotType];
+            
             
             self.ballEventRecord.objShottype = nil;
             isAggressiveSelected = YES;
@@ -5466,6 +5485,7 @@
         self.view_bowlType.hidden = YES;
        
         if(isDefensiveSelected && self.ballEventRecord.objShottype != nil){
+            
             
             [self selectedViewBg:_view_defense];
               
@@ -5500,6 +5520,10 @@
             isDefensiveSelected = NO;
 
         }else{
+            DBManager *objDBManager = [[DBManager alloc]init];
+
+            _defensiveShotTypeArray = [[NSMutableArray alloc]init];
+            _defensiveShotTypeArray = [objDBManager getDefenceShotType];
             
             self.ballEventRecord.objShottype = nil;
             isDefensiveSelected = YES;
@@ -5656,9 +5680,12 @@
        if(isAppeal==NO)
             {
                [self selectedViewBg:_view_appeal];
+                DBManager *objDBManager = [[DBManager alloc]init];
+                _AppealValuesArray=[[NSMutableArray alloc]init];
+                _AppealValuesArray =[objDBManager AppealRetrieveEventData];
                 _View_Appeal.hidden=NO;
-                
-                
+                [table_Appeal reloadData];
+
                 
                 self.view_aggressiveShot.hidden = YES;
                 self.view_defensive.hidden = YES;
@@ -8862,9 +8889,12 @@ self.lbl_umpirename.text=@"";
     self.commonViewwidthposition.constant =self.view.frame.size.width;
 }
 -(void) reloadBowlerTeamBatsmanDetails{
+    
+    _AppealValuesArray = nil;
+    
     //[self EndBallMethod];
     
-    
+    fetchSEPageLoadRecord = nil;
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
@@ -12666,8 +12696,8 @@ self.lbl_umpirename.text=@"";
     {
         
         UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Wagon Wheel Point is not Selected.\n Do you want to continue ?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
-        [altert show];
         [altert setTag:3000];
+        [altert show];
         
         return NO;
     }
