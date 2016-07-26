@@ -41,7 +41,9 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *btn_fourth_inns_id;
 - (IBAction)btn_fourth_inns_action:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_teamBsecHeading;
 
+@property (strong, nonatomic) IBOutlet UILabel *lbl_teamAfirstIngsHeading;
 
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamAfirstIngsScore;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamAfirstIngsOvs;

@@ -1191,7 +1191,7 @@
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="178" id="AW8-fe-rem">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="361"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="475"/>
                                                     </constraint>
                                                     <constraint firstAttribute="height" constant="28" id="BEc-PQ-wlN"/>
                                                 </constraints>
@@ -1293,7 +1293,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="MbK-DA-DOf"/>
                                                     <constraint firstAttribute="width" constant="206" id="eUH-CE-Cyv">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="361"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="475"/>
                                                     </constraint>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="22"/>
@@ -1414,7 +1414,7 @@
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="236" id="BJz-BU-VJO">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="361"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="475"/>
                                                     </constraint>
                                                     <constraint firstAttribute="height" constant="33" id="OiZ-sC-dwJ"/>
                                                 </constraints>
@@ -1513,7 +1513,7 @@
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="212" id="0LT-Vn-VPU">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="361"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="475"/>
                                                     </constraint>
                                                     <constraint firstAttribute="height" constant="31" id="7Tb-Te-M8l"/>
                                                 </constraints>
@@ -1634,7 +1634,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="Ayz-LX-MZ5"/>
                                                     <constraint firstAttribute="width" constant="188" id="C4k-M4-8Ew">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="361"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="475"/>
                                                     </constraint>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
@@ -1817,7 +1817,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="170" id="8Nt-NN-MqD"/>
+                                            <constraint firstAttribute="height" constant="170" id="8Nt-NN-MqD">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="143"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -1903,7 +1905,7 @@
                                     </constraint>
                                     <constraint firstItem="b94-9v-duC" firstAttribute="top" secondItem="aff-hj-tjT" secondAttribute="top" id="EWu-RD-eZc"/>
                                     <constraint firstItem="QeG-1x-x0d" firstAttribute="top" secondItem="eWG-8w-V74" secondAttribute="bottom" constant="5" id="FJL-RE-o7W">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-23"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="2"/>
                                     </constraint>
                                     <constraint firstItem="NU1-ae-JDS" firstAttribute="top" secondItem="b9d-c0-oqI" secondAttribute="bottom" constant="8" id="FoH-cS-Uga">
                                         <variation key="heightClass=regular-widthClass=regular" constant="56"/>
@@ -1948,7 +1950,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="100"/>
                                     </constraint>
                                     <constraint firstItem="eWG-8w-V74" firstAttribute="top" secondItem="b9d-c0-oqI" secondAttribute="bottom" constant="3" id="ZXf-a8-zj8">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="2"/>
                                     </constraint>
                                     <constraint firstItem="QzF-SL-R0B" firstAttribute="top" secondItem="jIe-Sp-Wm0" secondAttribute="bottom" constant="5" id="ZjI-eU-u9i">
                                         <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
@@ -10986,6 +10988,7 @@
                         <outlet property="lbl_strip" destination="PIU-b0-FYN" id="TFe-KV-GVY"/>
                         <outlet property="lbl_teamASecIngsOvs" destination="pRj-ii-oFN" id="Xoo-uz-p8o"/>
                         <outlet property="lbl_teamASecIngsScore" destination="vOb-vG-yqg" id="H3a-3n-Vc5"/>
+                        <outlet property="lbl_teamAfirstIngsHeading" destination="e5b-uq-3TX" id="kZW-Hq-2A4"/>
                         <outlet property="lbl_teamAfirstIngsOvs" destination="mmQ-Wb-qcJ" id="E4t-bl-vQP"/>
                         <outlet property="lbl_teamAfirstIngsScore" destination="42K-VW-IwX" id="KaO-dB-pii"/>
                         <outlet property="lbl_teamAsecIngsHeading" destination="Euh-sV-B9L" id="jAE-br-OoL"/>
@@ -10993,6 +10996,7 @@
                         <outlet property="lbl_teamBSecIngsScore" destination="suv-uN-kcg" id="SR2-ag-0qm"/>
                         <outlet property="lbl_teamBfirstIngsOvs" destination="bAp-cO-za0" id="06D-r4-qUc"/>
                         <outlet property="lbl_teamBfirstIngsScore" destination="OEk-63-nC4" id="CFV-i5-hEy"/>
+                        <outlet property="lbl_teamBsecHeading" destination="INU-vK-HO0" id="Wgg-nq-lhq"/>
                         <outlet property="lbl_teamBsecIngsHeading" destination="dMK-Wx-LWq" id="oii-qx-nFj"/>
                         <outlet property="lbl_third_div" destination="GuY-uz-Zxx" id="Zev-Mw-tKR"/>
                         <outlet property="tbl_scorecard" destination="Qho-pK-tBa" id="HaD-NF-4fo"/>
