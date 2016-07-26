@@ -470,6 +470,7 @@ NSRegularExpression *isMatchedByRegex;
             
             matchvc.Matchcode = matchCode;
             matchvc.competitionCode = competitionCode;
+            matchvc.matchTypeCode =self.matchTypeCode;
             
             [self.navigationController pushViewController:matchvc animated:YES];
             [self startService:@"MATCHUPDATEOVER"];

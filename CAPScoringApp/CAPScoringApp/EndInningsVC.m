@@ -206,7 +206,7 @@ BOOL IsBack;
      datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_startInnings.frame.origin.x,self.txt_startInnings.frame.origin.y+30,self.view.frame.size.width,100)];
     //[datePicker setMaximumDate:maxDate];
     //[datePicker setMinimumDate:minDate];
-    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"da_DK"];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"];
     [datePicker setLocale:locale];
 
     [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
