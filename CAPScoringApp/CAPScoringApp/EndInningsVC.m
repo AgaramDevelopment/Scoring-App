@@ -105,10 +105,7 @@ BOOL IsBack;
         
        
         
-        // Do any additional setup after loading the view from its nib.
-        //self.view.frame =CGRectMake(0,0, [[UIScreen mainScreen] bounds].size.width, 100);
-        
-        //self.view.frame =CGRectMake(200,500, [[UIScreen mainScreen] bounds].size.width/2,500);
+       
         
         [self.view layoutIfNeeded];
         self.scroll_endInnings.contentSize = CGSizeMake(self.view.frame.size.width, 650);
@@ -170,14 +167,17 @@ BOOL IsBack;
 -(void)datePicker{
     self.view_datepicker.hidden=NO;
     
-    
+   //datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"];
+   
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate * currentDate = [dateFormat dateFromString:MatchDate];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-   // NSDate *currentDate = [NSDate date];
+   
+    
+    
      NSDateComponents *comps = [[NSDateComponents alloc] init];
     if([self.MATCHTYPECODE isEqual:@"MSC114"] || [self.MATCHTYPECODE isEqual:@"MSC023"])
     {
@@ -206,6 +206,9 @@ BOOL IsBack;
      datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_startInnings.frame.origin.x,self.txt_startInnings.frame.origin.y+30,self.view.frame.size.width,100)];
     //[datePicker setMaximumDate:maxDate];
     //[datePicker setMinimumDate:minDate];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"];
+    [datePicker setLocale:locale];
+
     [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
     [datePicker setMinimumDate:minDate];
     [datePicker setMaximumDate:maxDate];
@@ -213,23 +216,6 @@ BOOL IsBack;
     [datePicker reloadInputViews];
     [self.view_datepicker addSubview:datePicker];
     
-//    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_startInnings.frame.origin.x,self.txt_startInnings.frame.origin.y+30,self.view.frame.size.width,200)];
-//    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-//    
-//    [self.txt_startInnings setInputView:datePicker];
-//    UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
-//    [toolbar setTintColor:[UIColor grayColor]];
-//    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
-//                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
-//    
-//    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-//    
-//    [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
-//    
-//    [self.txt_startInnings setInputAccessoryView:toolbar];
-//
-//    
-//    [self duration];
 
     
 }
@@ -237,18 +223,6 @@ BOOL IsBack;
 -(IBAction)showSelecteddate:(id)sender{
 
     
-//
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-//    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss a"];
-//    
-//    NSDate *selectedDate = [datePicker date];
-//    NSString *recordDate = [formatter stringFromDate:selectedDate];
-//    
-//    
-//    self.txt_startInnings.text=recordDate;
-//    [self.txt_startInnings resignFirstResponder];
-//    //self.txt_startInnings =[NSString stringWithFormat:@"%@",[_txt_startInnings text]];
-//    [self duration];
     
     
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -293,25 +267,11 @@ BOOL IsBack;
         [self datePicker];
         
     }
-//    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_endInnings.frame.origin.x,self.txt_endInnings.frame.origin.y+30,self.view.frame.size.width,200)];
-//    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-//    
-//    [self.txt_endInnings setInputView:datePicker];
-//    UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
-//    [toolbar setTintColor:[UIColor grayColor]];
-//    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
-//                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showEndDatePicker)];
-//    
-//    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-//    
-//    [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
-//    
-//    [self.txt_endInnings setInputAccessoryView:toolbar];
 }
 -(void)showEndDatePicker{
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *selectedDate = [datePicker date];
     NSString *recordDate = [formatter stringFromDate:selectedDate];
     self.txt_endInnings.text=recordDate;
@@ -327,7 +287,7 @@ BOOL IsBack;
     NSString *startEndTF = self.txt_endInnings.text;
     
     formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     NSDate *date1 = [formatter dateFromString:startDateTF];
     NSDate *date2 = [formatter dateFromString:startEndTF];
@@ -422,7 +382,7 @@ BOOL IsBack;
     EndInnings *obj =(EndInnings*)[endInningsArray objectAtIndex:indexPath.row];
     
     formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSString *startDateTF = obj.STARTTIME;
     NSString *startEndTF = obj.ENDTIME;
     

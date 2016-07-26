@@ -25,34 +25,34 @@
                 <rect key="frame" x="0.0" y="0.0" width="550" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTl-gp-AP2">
-                        <rect key="frame" x="16" y="8" width="175" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RTl-gp-AP2">
+                        <rect key="frame" x="10" y="8" width="165" height="21"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="33Z-0I-prh"/>
-                            <constraint firstAttribute="width" constant="175" id="Gdy-9Z-6ym"/>
+                            <constraint firstAttribute="width" constant="165" id="Gdy-9Z-6ym"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="19"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDO-im-j44">
-                        <rect key="frame" x="458" y="8" width="65" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LDO-im-j44">
+                        <rect key="frame" x="455" y="8" width="85" height="21"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="65" id="Zdl-ky-cYv"/>
+                            <constraint firstAttribute="width" constant="85" id="Zdl-ky-cYv"/>
                             <constraint firstAttribute="height" constant="21" id="xYs-E0-Ng5"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="19"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9G-rC-W4z">
-                        <rect key="frame" x="202" y="8" width="230" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y9G-rC-W4z">
+                        <rect key="frame" x="200" y="8" width="215" height="21"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="ZK4-a9-FjL"/>
-                            <constraint firstAttribute="width" constant="230" id="bue-Ou-T4y"/>
+                            <constraint firstAttribute="width" constant="215" id="bue-Ou-T4y"/>
                         </constraints>
                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="19"/>
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -63,9 +63,9 @@
                 <constraints>
                     <constraint firstItem="RTl-gp-AP2" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="8md-FF-dKe"/>
                     <constraint firstItem="Y9G-rC-W4z" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="bGf-sR-O4t"/>
-                    <constraint firstItem="RTl-gp-AP2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="dMS-q0-TJE"/>
-                    <constraint firstAttribute="trailing" secondItem="LDO-im-j44" secondAttribute="trailing" constant="27" id="haJ-R2-vPS"/>
-                    <constraint firstItem="LDO-im-j44" firstAttribute="leading" secondItem="Y9G-rC-W4z" secondAttribute="trailing" constant="26" id="lnv-rQ-ce4"/>
+                    <constraint firstItem="RTl-gp-AP2" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="dMS-q0-TJE"/>
+                    <constraint firstAttribute="trailing" secondItem="LDO-im-j44" secondAttribute="trailing" constant="10" id="haJ-R2-vPS"/>
+                    <constraint firstItem="LDO-im-j44" firstAttribute="leading" secondItem="Y9G-rC-W4z" secondAttribute="trailing" constant="40" id="lnv-rQ-ce4"/>
                     <constraint firstItem="LDO-im-j44" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="qmC-Pi-oEK"/>
                 </constraints>
             </tableViewCellContentView>

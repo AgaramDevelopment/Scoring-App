@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1191,7 +1191,7 @@
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="178" id="AW8-fe-rem">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="361"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="475"/>
                                                     </constraint>
                                                     <constraint firstAttribute="height" constant="28" id="BEc-PQ-wlN"/>
                                                 </constraints>
@@ -1293,7 +1293,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="36" id="MbK-DA-DOf"/>
                                                     <constraint firstAttribute="width" constant="206" id="eUH-CE-Cyv">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="361"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="475"/>
                                                     </constraint>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="22"/>
@@ -1414,7 +1414,7 @@
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="236" id="BJz-BU-VJO">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="361"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="475"/>
                                                     </constraint>
                                                     <constraint firstAttribute="height" constant="33" id="OiZ-sC-dwJ"/>
                                                 </constraints>
@@ -1513,7 +1513,7 @@
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="212" id="0LT-Vn-VPU">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="361"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="475"/>
                                                     </constraint>
                                                     <constraint firstAttribute="height" constant="31" id="7Tb-Te-M8l"/>
                                                 </constraints>
@@ -1634,7 +1634,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="31" id="Ayz-LX-MZ5"/>
                                                     <constraint firstAttribute="width" constant="188" id="C4k-M4-8Ew">
-                                                        <variation key="heightClass=regular-widthClass=regular" constant="361"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="475"/>
                                                     </constraint>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
@@ -1817,7 +1817,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="170" id="8Nt-NN-MqD"/>
+                                            <constraint firstAttribute="height" constant="170" id="8Nt-NN-MqD">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="143"/>
+                                            </constraint>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -1903,7 +1905,7 @@
                                     </constraint>
                                     <constraint firstItem="b94-9v-duC" firstAttribute="top" secondItem="aff-hj-tjT" secondAttribute="top" id="EWu-RD-eZc"/>
                                     <constraint firstItem="QeG-1x-x0d" firstAttribute="top" secondItem="eWG-8w-V74" secondAttribute="bottom" constant="5" id="FJL-RE-o7W">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="-23"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="2"/>
                                     </constraint>
                                     <constraint firstItem="NU1-ae-JDS" firstAttribute="top" secondItem="b9d-c0-oqI" secondAttribute="bottom" constant="8" id="FoH-cS-Uga">
                                         <variation key="heightClass=regular-widthClass=regular" constant="56"/>
@@ -1948,7 +1950,7 @@
                                         <variation key="heightClass=regular-widthClass=regular" constant="100"/>
                                     </constraint>
                                     <constraint firstItem="eWG-8w-V74" firstAttribute="top" secondItem="b9d-c0-oqI" secondAttribute="bottom" constant="3" id="ZXf-a8-zj8">
-                                        <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                        <variation key="heightClass=regular-widthClass=regular" constant="2"/>
                                     </constraint>
                                     <constraint firstItem="QzF-SL-R0B" firstAttribute="top" secondItem="jIe-Sp-Wm0" secondAttribute="bottom" constant="5" id="ZjI-eU-u9i">
                                         <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
@@ -2566,6 +2568,9 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="558" y="20" width="98" height="24"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2578,6 +2583,9 @@
                                                 <variation key="heightClass=regular-widthClass=regular" constant="20"/>
                                             </constraint>
                                         </constraints>
+                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                            <rect key="frame" x="44" y="101" width="680" height="64"/>
+                                        </variation>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GmH-pL-2mo">
                                         <rect key="frame" x="44" y="360" width="680" height="50"/>
@@ -2596,6 +2604,9 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="573" y="20" width="84" height="21"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2626,6 +2637,9 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="499" y="20" width="155" height="21"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2656,6 +2670,9 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="498" y="20" width="157" height="21"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2686,6 +2703,9 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="534" y="20" width="122" height="21"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -2708,6 +2728,9 @@
                                                 <state key="normal" title="PROCEED">
                                                     <color key="titleColor" red="0.99108743320000003" green="1" blue="0.98888242749999999" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="0.0" y="15" width="680" height="45"/>
+                                                </variation>
                                                 <connections>
                                                     <action selector="btn_proceed:" destination="aP7-N0-MwG" eventType="touchUpInside" id="HeJ-I7-QQP"/>
                                                 </connections>
@@ -2766,6 +2789,9 @@
                                                 <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
+                                                <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                    <rect key="frame" x="540" y="20" width="119" height="21"/>
+                                                </variation>
                                             </label>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -10962,6 +10988,7 @@
                         <outlet property="lbl_strip" destination="PIU-b0-FYN" id="TFe-KV-GVY"/>
                         <outlet property="lbl_teamASecIngsOvs" destination="pRj-ii-oFN" id="Xoo-uz-p8o"/>
                         <outlet property="lbl_teamASecIngsScore" destination="vOb-vG-yqg" id="H3a-3n-Vc5"/>
+                        <outlet property="lbl_teamAfirstIngsHeading" destination="e5b-uq-3TX" id="kZW-Hq-2A4"/>
                         <outlet property="lbl_teamAfirstIngsOvs" destination="mmQ-Wb-qcJ" id="E4t-bl-vQP"/>
                         <outlet property="lbl_teamAfirstIngsScore" destination="42K-VW-IwX" id="KaO-dB-pii"/>
                         <outlet property="lbl_teamAsecIngsHeading" destination="Euh-sV-B9L" id="jAE-br-OoL"/>
@@ -10969,6 +10996,7 @@
                         <outlet property="lbl_teamBSecIngsScore" destination="suv-uN-kcg" id="SR2-ag-0qm"/>
                         <outlet property="lbl_teamBfirstIngsOvs" destination="bAp-cO-za0" id="06D-r4-qUc"/>
                         <outlet property="lbl_teamBfirstIngsScore" destination="OEk-63-nC4" id="CFV-i5-hEy"/>
+                        <outlet property="lbl_teamBsecHeading" destination="INU-vK-HO0" id="Wgg-nq-lhq"/>
                         <outlet property="lbl_teamBsecIngsHeading" destination="dMK-Wx-LWq" id="oii-qx-nFj"/>
                         <outlet property="lbl_third_div" destination="GuY-uz-Zxx" id="Zev-Mw-tKR"/>
                         <outlet property="tbl_scorecard" destination="Qho-pK-tBa" id="HaD-NF-4fo"/>
@@ -11450,6 +11478,9 @@
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="35"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                            <rect key="frame" x="96" y="16" width="94" height="41"/>
+                                                        </variation>
                                                     </label>
                                                     <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7hN-f2-TjW" userLabel="View_SelectedA">
                                                         <rect key="frame" x="96" y="59" width="217" height="37"/>
@@ -11490,6 +11521,9 @@
                                                             <constraint firstAttribute="height" constant="37" id="rGT-m9-Pgv"/>
                                                             <constraint firstAttribute="trailing" secondItem="cuY-Gj-zB4" secondAttribute="trailing" constant="8" id="ztN-pF-5Qd"/>
                                                         </constraints>
+                                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                            <rect key="frame" x="96" y="65" width="217" height="37"/>
+                                                        </variation>
                                                     </view>
                                                 </subviews>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -11520,6 +11554,9 @@
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="35"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                            <rect key="frame" x="123" y="16" width="94" height="41"/>
+                                                        </variation>
                                                     </label>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhu-HL-kMM" userLabel="View_SelectedB">
                                                         <rect key="frame" x="0.0" y="63" width="217" height="37"/>
@@ -11762,6 +11799,9 @@
                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
+                                                        <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                            <rect key="frame" x="22" y="69" width="62" height="21"/>
+                                                        </variation>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Qj-vi-EbN">
                                                         <rect key="frame" x="102" y="64" width="40" height="21"/>
