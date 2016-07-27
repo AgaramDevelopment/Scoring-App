@@ -277,17 +277,18 @@ EndInnings *insertScoreBoard;
     
     F_ISWICKETCOUNTABLE = [ objDBManagerEndBall GetWicCountUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
     
-    F_ISWICKET = [ objDBManagerEndBall GetISWicCountUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
+    F_ISWICKET = [ objDBManagerEndBall GetISWicCountUpdateScoreEngine :   MATCHCODE:COMPETITIONCODE: TEAMCODE : INNINGSNO: BALLCODE ];
     
-    F_WICKETTYPE = [ objDBManagerEndBall GetWicTypeUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
+    F_WICKETTYPE = [ objDBManagerEndBall GetWicTypeUpdateScoreEngine :  MATCHCODE:COMPETITIONCODE: TEAMCODE : INNINGSNO: BALLCODE ];
     
    
     if(ISWICKET.intValue == 1)
     {
         
-        if([objDBManagerEndBall GetBallCodeExistsUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ])
+        if([objDBManagerEndBall GetBallCodeExistsUpdateScoreEngine :  MATCHCODE: COMPETITIONCODE: TEAMCODE : INNINGSNO: BALLCODE ])
         {
-            [objDBManagerEndBall UpdateWicEventsUpdateScoreEngine : WICKETTYPE :WICKETPLAYER:FIELDINGPLAYER:WICKETEVENT:COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO: BALLCODE ];
+           
+                [objDBManagerEndBall UpdateWicEventsUpdateScoreEngine : WICKETTYPE :WICKETPLAYER:FIELDINGPLAYER:WICKETEVENT:  MATCHCODE:COMPETITIONCODE: TEAMCODE : INNINGSNO: BALLCODE ];
         }
         else
         {
