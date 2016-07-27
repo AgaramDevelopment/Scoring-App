@@ -12625,6 +12625,7 @@ self.lbl_umpirename.text=@"";
 - (void) ChangeVCBackBtnAction
 {
     [fullview removeFromSuperview];
+    
 }
 
 -(void) EndInningsBackBtnAction{
