@@ -511,8 +511,6 @@
     
     if(_penaltyDetailsRecord == nil){
         
-       
-        
         PenaltyDetailsRecord *penaltyrecord = [[PenaltyDetailsRecord alloc]init];
         objMetaDataRecord=[[MetaDataRecord alloc]init];
         penaltyrecord.penaltyruns=txt_penalityruns.text;
@@ -629,7 +627,7 @@
         self.txt_penalityruns.text=@"";
         [_resultarray lastObject];
         int myCount = [_resultarray count];
-        selectindex= myCount-1;
+        selectindex= myCount+1;
         
     }
     else

@@ -165,6 +165,11 @@ BOOL IsBack;
 }
 
 -(void)datePicker{
+    if(datePicker!= nil)
+    {
+        [datePicker removeFromSuperview];
+        
+    }
     self.view_datepicker.hidden=NO;
     
    //datePicker.locale = [NSLocale localeWithLocaleIdentifier:@"en_GB"];
@@ -264,9 +269,9 @@ BOOL IsBack;
     if(datePicker!= nil)
     {
         [datePicker removeFromSuperview];
-        [self datePicker];
         
     }
+    [self datePicker];
 }
 -(void)showEndDatePicker{
     
@@ -310,11 +315,13 @@ BOOL IsBack;
     {
         isEndDate=NO;
          [self datePicker];
+        [textField resignFirstResponder];
     }
     else if (textField.tag == 2)
     {
         isEndDate=YES;
          [self endDatePicker];
+         [textField resignFirstResponder];
     }
 }
 
