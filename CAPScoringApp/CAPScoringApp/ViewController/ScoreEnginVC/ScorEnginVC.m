@@ -7699,8 +7699,13 @@ self.lbl_umpirename.text=@"";
         isBowlerOpen = NO;
         isNONStrickerOpen = NO;
         isStrickerOpen = NO;
-        [self reloadBowlerTeamBatsmanDetails];
+
         
+        if(_isEditMode){
+            [self loadViewOnEditMode];
+        }else{
+            [self reloadBowlerTeamBatsmanDetails];
+        }
     }else if(tableView == nonstrickerTableView){
         SelectPlayerRecord *selectPlayer = [nonStrickerList objectAtIndex:indexPath.row];
         //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
@@ -7712,7 +7717,12 @@ self.lbl_umpirename.text=@"";
         isNONStrickerOpen = NO;
         isStrickerOpen = NO;
         [nonstrickerTableView removeFromSuperview];
-        [self reloadBowlerTeamBatsmanDetails];
+        
+        if(_isEditMode){
+            [self loadViewOnEditMode];
+        }else{
+            [self reloadBowlerTeamBatsmanDetails];
+        }
         
     }else if(tableView == strickerTableView){
         SelectPlayerRecord *selectPlayer = [strickerList objectAtIndex:indexPath.row];
@@ -7727,7 +7737,11 @@ self.lbl_umpirename.text=@"";
         isNONStrickerOpen = NO;
         isStrickerOpen = NO;
         [strickerTableView removeFromSuperview];
-        [self reloadBowlerTeamBatsmanDetails];
+        if(_isEditMode){
+            [self loadViewOnEditMode];
+        }else{
+            [self reloadBowlerTeamBatsmanDetails];
+        }
         
     }
     
@@ -9276,7 +9290,11 @@ self.lbl_umpirename.text=@"";
     [currentBowlersTableView removeFromSuperview];
     
     
-    [self reloadBowlerTeamBatsmanDetails];
+    if(_isEditMode){
+        [self loadViewOnEditMode];
+    }else{
+        [self reloadBowlerTeamBatsmanDetails];
+    }
 }
 
 
