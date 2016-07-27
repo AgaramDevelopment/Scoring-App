@@ -22,6 +22,7 @@
     CustomNavigationVC * objCustomNavigation;
     NSString * matchCode;
     NSString * matchTypeCode;
+    NSMutableArray *mSetUp ;
 }
 @property(nonatomic,strong) NSMutableArray* FetchCompitionArray;
 @property (nonatomic, strong) NSMutableArray *cellsCurrentlyEditing;
@@ -273,17 +274,31 @@ NSArray *MuliteDayMatchtype;
             [self.navigationController pushViewController:scoreEngine animated:YES];
         }
     }else if([objFixtureRecord.MatchStatus isEqualToString:@"MSC125"]){
-        ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
-        scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
-        scoreEngine.matchSetUp = mSetUp;
-        scoreEngine.matchCode=objFixtureRecord.matchcode;
-        scoreEngine.competitionCode=self.CompitionCode;
-        scoreEngine.matchTypeCode=matchTypeCode;
-        [self.navigationController pushViewController:scoreEngine animated:YES];
+        UIAlertView * objAlert =[[UIAlertView alloc]initWithTitle:@"Archives" message:@"The selected game is already updated with result do you want to proceed?" delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+        objAlert.tag =100;
+        [objAlert show];
+        
     }
 }
-
-
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 100) { // UIAlertView with tag 1 detected
+        if (buttonIndex == 0)
+        {
+            FixturesRecord *objFixtureRecord=(FixturesRecord*)[mSetUp objectAtIndex:0];
+            
+            ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+            scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+            scoreEngine.matchSetUp = mSetUp;
+            scoreEngine.matchCode=objFixtureRecord.matchcode;
+            scoreEngine.competitionCode=self.CompitionCode;
+            scoreEngine.matchTypeCode=matchTypeCode;
+            [self.navigationController pushViewController:scoreEngine animated:YES];
+            
+        }
+        
+    }
+}
 //4
 
 - (void)cellDidOpen:(UITableViewCell *)cell

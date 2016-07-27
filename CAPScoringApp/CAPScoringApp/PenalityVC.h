@@ -13,6 +13,7 @@
 
 @protocol penalityDelegate <NSObject>
 - (void)ChangeVCBackBtnAction;
+- (void) reloadScoreEnginOnOtherWicket;
 - (void)InsertPenaltyMethod:(NSString *) AwardedTeam :(NSString *) penaltyRun :(NSString *)penaltyTypecode :(NSString *)penaltyreasoncode;
 
 @end

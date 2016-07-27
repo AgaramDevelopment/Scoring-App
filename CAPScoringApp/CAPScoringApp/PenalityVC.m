@@ -598,6 +598,7 @@
     if(isShow_penaltyrecordTbl == YES)
     {
         [self.delegate ChangeVCBackBtnAction];
+        [self.delegate reloadScoreEnginOnOtherWicket];
 //        self.tbl_penaltyrecord.hidden=NO;
 //        isShow_penaltyrecordTbl=NO;
 //        self.Btn_Add.hidden =NO;
