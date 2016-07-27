@@ -14,6 +14,7 @@
 @required
 
 - (void) ChangeVCBackBtnAction;
+- (void) reloadScoreEnginOnOtherWicket;
 @end
 
 
