@@ -22,6 +22,7 @@
     CustomNavigationVC * objCustomNavigation;
     NSString * matchCode;
     NSString * matchTypeCode;
+    NSMutableArray *mSetUp ;
 }
 @property(nonatomic,strong) NSMutableArray* FetchCompitionArray;
 @property (nonatomic, strong) NSMutableArray *cellsCurrentlyEditing;
@@ -118,24 +119,40 @@ NSArray *MuliteDayMatchtype;
     cell.innings1team1overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FIRSTINNINGSOVERS];
         
         if(![objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@""]){
-    cell.innings2teamname2.text=objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
-    cell.innings2team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
-    cell.innings2team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
+    cell.innings1teamname2.text=objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
+    cell.innings1team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+    cell.innings1team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
         }else{
-            cell.innings2teamname2.text=@"";
-            cell.innings2team2runs.text=@"";
-            cell.innings2team2overs.text=@"";
+            cell.innings1teamname2.text=@"";
+            cell.innings1team2runs.text=@"";
+            cell.innings1team2overs.text=@"";
             
         }
        
         if([MuliteDayMatchtype containsObject:objFixtureRecord.matchTypeCode]){
-        cell.innings1teamname2.text=objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME;
-        cell.innings1team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.THIRDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
-        cell.innings1team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.THIRDINNINGSOVERS];
-    
-        cell.innings2teamname1.text=objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME;
-        cell.innings2team1runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FOURTHINNINGSTOTAL,objfetchSEPageLoadRecord.FOURTHINNINGSWICKET];
-        cell.innings2team1overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FOURTHINNINGSOVERS];
+            if(![objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqual:@""])
+            {
+            cell.innings2teamname1.text=objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME;
+            cell.innings2team1runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.THIRDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+           cell.innings2team1overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.THIRDINNINGSOVERS];
+            }
+            else
+            {
+                cell.innings2teamname1.text=@"";
+                cell.innings2team1runs.text=@"";
+                cell.innings2team1overs.text=@"";
+            }
+       if(![objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME isEqual:@""])
+      {
+        cell.innings2teamname2.text=objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME;
+        cell.innings2team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FOURTHINNINGSTOTAL,objfetchSEPageLoadRecord.FOURTHINNINGSWICKET];
+        cell.innings2team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FOURTHINNINGSOVERS];
+    }
+    else{
+        cell.innings2teamname2.text=@"";
+        cell.innings2team2runs.text=@"";
+        cell.innings2team2overs.text=@"";
+    }
         }
         
 //        
@@ -257,17 +274,31 @@ NSArray *MuliteDayMatchtype;
             [self.navigationController pushViewController:scoreEngine animated:YES];
         }
     }else if([objFixtureRecord.MatchStatus isEqualToString:@"MSC125"]){
-        ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
-        scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
-        scoreEngine.matchSetUp = mSetUp;
-        scoreEngine.matchCode=objFixtureRecord.matchcode;
-        scoreEngine.competitionCode=self.CompitionCode;
-        scoreEngine.matchTypeCode=matchTypeCode;
-        [self.navigationController pushViewController:scoreEngine animated:YES];
+        UIAlertView * objAlert =[[UIAlertView alloc]initWithTitle:@"Archives" message:@"The selected game is already updated with result do you want to proceed?" delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+        objAlert.tag =100;
+        [objAlert show];
+        
     }
 }
-
-
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 100) { // UIAlertView with tag 1 detected
+        if (buttonIndex == 0)
+        {
+            FixturesRecord *objFixtureRecord=(FixturesRecord*)[mSetUp objectAtIndex:0];
+            
+            ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+            scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+            scoreEngine.matchSetUp = mSetUp;
+            scoreEngine.matchCode=objFixtureRecord.matchcode;
+            scoreEngine.competitionCode=self.CompitionCode;
+            scoreEngine.matchTypeCode=matchTypeCode;
+            [self.navigationController pushViewController:scoreEngine animated:YES];
+            
+        }
+        
+    }
+}
 //4
 
 - (void)cellDidOpen:(UITableViewCell *)cell
