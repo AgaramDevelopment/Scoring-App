@@ -182,7 +182,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         
         
-        NSString *query=[NSString stringWithFormat:@"SELECT  USERCODE  FROM Userdetails WHERE  strftime('%%Y-%%m-%%d %%H:%%M:%%S', LICENSEUPTO) >= datetime('now') AND USERCODE = '%@'",userId];
+        NSString *query=[NSString stringWithFormat:@"SELECT  USERCODE  FROM Userdetails WHERE  strftime('%%Y-%%m-%%d %%H:%%M:%%S', LICENSEUPTO) >= datetime('now','localtime') AND USERCODE = '%@'",userId];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -218,7 +218,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         
         
-        NSString *query=[NSString stringWithFormat:@"SELECT  USERNAME  FROM SECUREIDDETAILS WHERE  strftime('%%Y-%%m-%%d %%H:%%M:%%S', ENDDATE) >= datetime('now') AND USERNAME = '%@'",USERNAME];
+        NSString *query=[NSString stringWithFormat:@"SELECT  USERNAME  FROM SECUREIDDETAILS WHERE  strftime('%%Y-%%m-%%d %%H:%%M:%%S', ENDDATE) >= datetime('now','localtime') AND USERNAME = '%@'",USERNAME];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {

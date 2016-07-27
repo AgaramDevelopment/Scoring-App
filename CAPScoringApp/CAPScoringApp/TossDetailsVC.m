@@ -408,8 +408,8 @@
         }
         else
         {
-            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
-                                                            message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Toss Details"
+                                                            message: @"Non Striker can be same.\nPlease Select different Player"
                                                            delegate: self
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil];
@@ -435,8 +435,8 @@
         }
         else
         {
-            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
-                                                            message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Toss Details"
+                                                            message: @"Striker can be same.\nPlease Select different Player"
                                                            delegate: self
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil];
@@ -561,7 +561,7 @@
     {
       
         //NSString *teamCode;
-        if([selectedElected isEqualToString:@"Bat"])
+        if([selectedElected isEqualToString:@"BAT"])
         {
             
             teamaCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
@@ -622,7 +622,7 @@
     {
        
         //  NSString *teamCode;
-        if([selectedElected isEqualToString:@"Bat"])
+        if([selectedElected isEqualToString:@"BAT"])
         {
             
             teamaCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
@@ -681,7 +681,7 @@
     {
        
         //NSString *teambCode;
-        if([selectedElected isEqualToString:@"Bat"])
+        if([selectedElected isEqualToString:@"BAT"])
         {
             
             // teambCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];

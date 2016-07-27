@@ -65,6 +65,7 @@
     
     objPreviousorderList =[[NSMutableArray alloc]init];
          slecteplayerlist=[[NSMutableArray alloc]init];
+    capitainWicketkeeperarray=[NSMutableArray alloc];
     capitainWicketkeeperarray=  [objDBManager getTeamCaptainandTeamwicketkeeper :self.competitionCode :self.matchCode];
     if(capitainWicketkeeperarray.count > 0)
     {
@@ -78,7 +79,7 @@
         
     }
     wickplayerlist =[[NSMutableArray alloc]init];
-    wickplayerlist = [objDBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:self.overs BALLNO:self.ballOver ];
+    wickplayerlist = [objDBManager getPlayedPlayersForPlayerXI :self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:self.overs BALLNO:self.ballOver ];
     
    
 
@@ -174,7 +175,7 @@
     _tbl_playerSelectList.delegate=self;
     _tbl_playerSelectList.dataSource=self;
     //tbl_playerSelectList.scrollEnabled=YES;
-   capitainWicketkeeperarray=[NSMutableArray alloc];
+  
     
     
     
@@ -276,6 +277,7 @@
     }
     NSLog(@"textFieldDidBeginEditing");
 }
+
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
 
     if (![string isEqualToString:@""]) {
@@ -403,7 +405,7 @@
 
 -(IBAction)didClickSaveplayer:(id)sender
 {
-//   if(objCapitainWicketKeeper.objTeamACapitain!=nil && objCapitainWicketKeeper.objTeamBCapitain!= nil && objCapitainWicketKeeper.objTeamAWicketKeeper!=nil && objCapitainWicketKeeper.objTeamBWicketKeeper!=nil)
+
     if(isSelectCaptainType == YES && isSelectWKTKeeperType ==YES)
    {
        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -577,7 +579,7 @@
     {
         //objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
         
-        if([objSelectPlayerRecord.isSelectWKTKeeper isEqualToString:@"YES"])
+        if([objSelectPlayerRecord.isSelectWKTKeeper isEqualToString:@"YES"] && [objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])
         {
             
             playercell.IMg_captain.image=[UIImage imageNamed:@"Img_Captain"];
@@ -617,18 +619,27 @@
     
      if ([objSelectPlayerRecord.playerCode isEqualToString:self.WKTkeeperAcode] || [objSelectPlayerRecord.playerCode isEqualToString:self.WKTkeeperBcode])
     {
-        objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
-        objSelectPlayerRecord.isSelectWKTKeeper=@"YES";
-//        
-//        isSelectWKTKeeperType=YES;
+        //objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
+       
         
-         if([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"] && [objSelectPlayerRecord.isSelectWKTKeeper isEqualToString:@"YES"])
+         if([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])
          {
-             playercell.IMg_captain.image=[UIImage imageNamed:@"Img_Captain"];
+             if([objSelectPlayerRecord.isSelectWKTKeeper isEqualToString:@"YES"])
+             {
+                 playercell.IMg_captain.image=[UIImage imageNamed:@"Img_Captain"];
              
-             [playercell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
-             playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
-             [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+                 [playercell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+                  playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
+                 [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+             //objSelectPlayerRecord.isSelectWKTKeeper=@"YES";
+             //
+                //isSelectWKTKeeperType=YES;
+             }
+             else
+             {
+                 playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_Captain"];
+                 [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+             }
          }
         
         else if([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])
@@ -642,6 +653,7 @@
         {
             playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
             [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+           // isSelectWKTKeeperType=YES;
         }
         
     }
@@ -920,6 +932,8 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     int newplayerorder =[changeIndexId intValue]-1;
     int orderno;
     SelectPlayerRecord*objRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:sourceRow];
+    if(wickplayerlist.count > 0)
+    {
     for(int i=0; i<wickplayerlist.count; i++)
     {
         SelectPlayerRecord*objWicket=(SelectPlayerRecord*)[wickplayerlist objectAtIndex:i];
@@ -965,8 +979,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
                     }
                     else if(sourceRow < i)
                     {
-                        //            int changeplayerorder=(i==0)? [objRecord.playerOrder intValue]:[objRecord.playerOrder intValue]+1;
-                        //            objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",changeplayerorder]];
+                        
                     }
                     
                     [changeplayerorderArray addObject:objRecord];
@@ -982,7 +995,25 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
         }
     }
     
-    
+    }
+    else
+    {
+//        NSInteger sourceRow = sourceIndexPath.row;
+//        NSInteger destRow = destinationIndexPath.row;
+//        NSString * changeIndexId=[NSString stringWithFormat:@"%ld",destRow+1];
+//        SelectPlayerRecord*objRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:sourceRow];
+//        objRecord.playerOrder =changeIndexId;
+        
+        id object = [slecteplayerlist objectAtIndex:sourceRow];
+        
+        [slecteplayerlist removeObjectAtIndex:sourceRow];
+        
+        [slecteplayerlist insertObject:object atIndex:destRow];
+        
+        playercell.editing=NO;
+        [self.tbl_playerSelectList setEditing:playercell.editing animated:YES];
+        [self.tbl_playerSelectList reloadData];
+    }
 }
 
 -(IBAction)Back_BtnAction:(id)sender
