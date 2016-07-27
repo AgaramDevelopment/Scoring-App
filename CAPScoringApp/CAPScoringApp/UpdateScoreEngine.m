@@ -611,7 +611,7 @@ EndInnings *insertScoreBoard;
     U_BOWLERBALLS = [NSNumber numberWithInt:0];
     U_BOWLERPARTIALOVERBALLS = [NSNumber numberWithInt:0];
     U_BOWLERRUNS = [NSNumber numberWithInt:0];
-    U_BOWLERMAIDENS = [NSNumber numberWithInt:0];
+    U_BOWLERMAIDENS = F_BOWLERMAIDENS;
     U_BOWLERWICKETS = [NSNumber numberWithInt:0];
     U_BOWLERNOBALLS = [NSNumber numberWithInt:0];
     U_BOWLERWIDES = [NSNumber numberWithInt:0];
@@ -711,7 +711,7 @@ EndInnings *insertScoreBoard;
     {
         if(ISMAIDENOVER.intValue == 0)
         {
-            [objDBManagerEndBall DELBOWLINGMAIDENSUMMARY : COMPETITIONCODE:MATCHCODE:INNINGSNO:F_OVERNO];
+            [objDBManagerEndBall DELBOWLINGMAIDENSUMMARY : COMPETITIONCODE:MATCHCODE:INNINGSNO:F_OVERS];
             U_BOWLERMAIDENS = [NSNumber numberWithInt:F_BOWLERMAIDENS.intValue - 1];
         }
         
@@ -795,7 +795,7 @@ EndInnings *insertScoreBoard;
             insertScoreBoard.PENALTY = PENALTY;
             insertScoreBoard.ISWKTDTLSUPDATE = ISWKTDTLSUPDATE;
             insertScoreBoard.ISBOWLERCHANGED = ISBOWLERCHANGED;
-            [NSNumber numberWithInt:1];
+            insertScoreBoard.ISUPDATE = [NSNumber numberWithInt:1];
             insertScoreBoard.O_ISLEGALBALL = F_ISLEGALBALL;
             insertScoreBoard.BOWLINGTEAMCODE = BOWLINGTEAMCODE;
             insertScoreBoard.WICKETOVERNO = OVERNO;

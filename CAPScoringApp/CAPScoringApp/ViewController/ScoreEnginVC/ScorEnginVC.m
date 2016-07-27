@@ -577,6 +577,9 @@
         if (inningsno == 1 || inningsno == 4)
             [_rightSlideArray removeObject : @"FOLLOW ON"];
     }
+    
+    
+    
     [self getLastBowlerDetails];
 }
 
@@ -8955,6 +8958,7 @@ self.lbl_umpirename.text=@"";
     self.commonViewwidthposition.constant =self.view.frame.size.width;
 }
 -(void) reloadBowlerTeamBatsmanDetails{
+    
     
     _AppealValuesArray = nil;
     
