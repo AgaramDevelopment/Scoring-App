@@ -156,7 +156,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-    NSString *updateSQL = [NSString stringWithFormat:@"SELECT IFNULL(MAX(OVERNO),0) AS LASTBOWLEROVERNO FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND BOWLERCODE = '%@' AND OVERNO <= '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,PREVIOUSBOWLERCODE,OVERNO];
+    NSString *updateSQL = [NSString stringWithFormat:@"SELECT IFNULL(MAX(OVERNO),0) AS LASTBOWLEROVERNO FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %@ AND BOWLERCODE = '%@' AND OVERNO <= %@",COMPETITIONCODE,MATCHCODE,INNINGSNO,PREVIOUSBOWLERCODE,OVERNO];
     
     stmt=[updateSQL UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -225,7 +225,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-    NSString *updateSQL = [NSString stringWithFormat:@"SELECT CASE WHEN COUNT(BOWLERCODE) > 1 THEN 1 ELSE 0 END AS ISPARTIALOVER FROM BOWLEROVERDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND OVERNO IN (SELECT OVERNO FROM BOWLEROVERDETAILS  WHERE COMPETITIONCODE = '%@' AND MATCHCODE =  '%@' AND INNINGSNO = '%@' AND BOWLERCODE = '%@' AND OVERNO < '%@')",COMPETITIONCODE,MATCHCODE,INNINGSNO,COMPETITIONCODE,MATCHCODE,INNINGSNO,PREVIOUSBOWLERCODE,BATTEAMOVERS];
+    NSString *updateSQL = [NSString stringWithFormat:@"SELECT CASE WHEN COUNT(BOWLERCODE) > 1 THEN 1 ELSE 0 END AS ISPARTIALOVER FROM BOWLEROVERDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %@ AND OVERNO IN (SELECT OVERNO FROM BOWLEROVERDETAILS  WHERE COMPETITIONCODE = '%@' AND MATCHCODE =  '%@' AND INNINGSNO = %@ AND BOWLERCODE = '%@' AND OVERNO < %@)",COMPETITIONCODE,MATCHCODE,INNINGSNO,COMPETITIONCODE,MATCHCODE,INNINGSNO,PREVIOUSBOWLERCODE,BATTEAMOVERS];
     
     stmt=[updateSQL UTF8String];
     if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -323,7 +323,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
--(NSNumber*) GetlastBowlerOverballNoForlastBowlDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSNumber*) PREVIOUSBOWLERCODE :(NSNumber*) LASTBOWLEROVERNO {
+-(NSNumber*) GetlastBowlerOverballNoForlastBowlDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) PREVIOUSBOWLERCODE :(NSNumber*) LASTBOWLEROVERNO {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -357,7 +357,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
--(NSNumber*) GetlastBowlerOverballNoWithExtraForlastBowlDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSNumber*) PREVIOUSBOWLERCODE :(NSNumber*) LASTBOWLEROVERNO {
+-(NSNumber*) GetlastBowlerOverballNoWithExtraForlastBowlDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) PREVIOUSBOWLERCODE :(NSNumber*) LASTBOWLEROVERNO {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -393,7 +393,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
--(NSNumber*) GetlastballCountForlastBowlDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSNumber*) PREVIOUSBOWLERCODE :(NSNumber*) LASTBOWLEROVERNO :(NSNumber*) LASTBOWLEROVERBALLNOWITHEXTRAS{
+-(NSNumber*) GetlastballCountForlastBowlDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) PREVIOUSBOWLERCODE :(NSNumber*) LASTBOWLEROVERNO :(NSNumber*) LASTBOWLEROVERBALLNOWITHEXTRAS{
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -428,7 +428,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
--(NSMutableArray*) GetBallEventForLastBowlerDetails: (NSNumber*)  BOWLERSPELL :(NSNumber*)  BOWLERRUNS :(NSNumber*)  ISPARTIALOVER :(NSNumber*)  TOTALBALLSBOWL : (NSNumber*) MAIDENS :(NSNumber*)  WICKETS:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) INNINGSNO: (NSNumber*) PREVIOUSBOWLERCODE: (NSNumber*) OVERNO:(NSNumber *)LASTBOWLEROVERBALLNO
+-(NSMutableArray*) GetBallEventForLastBowlerDetails: (NSNumber*)  BOWLERSPELL :(NSNumber*)  BOWLERRUNS :(NSNumber*)  ISPARTIALOVER :(NSNumber*)  TOTALBALLSBOWL : (NSNumber*) MAIDENS :(NSNumber*)  WICKETS:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) INNINGSNO: (NSString*) PREVIOUSBOWLERCODE: (NSNumber*) OVERNO:(NSNumber *)LASTBOWLEROVERBALLNO
 {
     NSMutableArray *GetLastBolwerDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
@@ -437,7 +437,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BOWLERCODE, BOWLERNAME, '%@' BOWLERSPELL, '%@' AS TOTALRUNS, 		CASE WHEN %@ > 0 THEN 	(CASE WHEN '%@' = 0 THEN '0' ELSE '%@' / 6 || '.' || '%@' %% 6 END) 		ELSE 		CASE WHEN OVERS!=0 THEN  OVERS-1 ELSE 0 END ||'.'|| '%@' 		END AS OVERS, 		'%@' AS MAIDENOVERS, '%@' AS WICKETS, (CASE WHEN '%@' = 0 THEN 0 ELSE ('%@' / '%@') * 6 END) AS ECONOMY 		FROM 		( 			SELECT BOWLERCODE,BOWLERNAME,SUM(CASE WHEN OVERSTATUS = 1 THEN 1 ELSE 0 END) OVERS 			FROM 			( 				SELECT BALL.BOWLERCODE AS BOWLERCODE,PM.PLAYERNAME BOWLERNAME,OE.OVERSTATUS 				FROM BALLEVENTS BALL 				INNER JOIN OVEREVENTS OE ON BALL.COMPETITIONCODE = OE.COMPETITIONCODE AND BALL.MATCHCODE = OE.MATCHCODE  				AND BALL.INNINGSNO = OE.INNINGSNO AND BALL.TEAMCODE = OE.TEAMCODE AND BALL.OVERNO = OE.OVERNO 				INNER JOIN PLAYERMASTER PM ON BALL.BOWLERCODE = PM.PLAYERCODE 				WHERE BALL.COMPETITIONCODE = '%@' AND BALL.MATCHCODE = '%@' 				AND BALL.INNINGSNO = '%@' AND BALL.BOWLERCODE = '%@' AND BALL.OVERNO <= '%@'  				GROUP BY BALL.BOWLERCODE,PM.PLAYERNAME,OE.OVERNO,OE.OVERSTATUS  			) OE 			GROUP BY BOWLERCODE,BOWLERNAME 		) BOWLDTLS",BOWLERSPELL, BOWLERRUNS, ISPARTIALOVER, TOTALBALLSBOWL, TOTALBALLSBOWL, TOTALBALLSBOWL, LASTBOWLEROVERBALLNO, MAIDENS, WICKETS, TOTALBALLSBOWL, BOWLERRUNS, TOTALBALLSBOWL, COMPETITIONCODE, MATCHCODE, INNINGSNO, PREVIOUSBOWLERCODE, OVERNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BOWLERCODE, BOWLERNAME, %@ BOWLERSPELL, %@ AS TOTALRUNS, 		CASE WHEN %@ > 0 THEN 	(CASE WHEN %@ = 0 THEN 0 ELSE %@ / 6 || '.' || %@ %% 6 END) 		ELSE 		CASE WHEN OVERS!=0 THEN  OVERS ELSE 0 END ||'.'|| %@ 	END AS OVERS, 		'%@' AS MAIDENOVERS, '%@' AS WICKETS, (CASE WHEN '%@' = 0 THEN 0 ELSE ('%@' / '%@') * 6 END) AS ECONOMY 		FROM 		( 			SELECT BOWLERCODE,BOWLERNAME,SUM(CASE WHEN OVERSTATUS = 1 THEN 1 ELSE 0 END) OVERS 			FROM 			( 				SELECT BALL.BOWLERCODE AS BOWLERCODE,PM.PLAYERNAME BOWLERNAME,OE.OVERSTATUS 				FROM BALLEVENTS BALL 				INNER JOIN OVEREVENTS OE ON BALL.COMPETITIONCODE = OE.COMPETITIONCODE AND BALL.MATCHCODE = OE.MATCHCODE  				AND BALL.INNINGSNO = OE.INNINGSNO AND BALL.TEAMCODE = OE.TEAMCODE AND BALL.OVERNO = OE.OVERNO 				INNER JOIN PLAYERMASTER PM ON BALL.BOWLERCODE = PM.PLAYERCODE 				WHERE BALL.COMPETITIONCODE = '%@' AND BALL.MATCHCODE = '%@' 				AND BALL.INNINGSNO = '%@' AND BALL.BOWLERCODE = '%@' AND BALL.OVERNO <= '%@'  				GROUP BY BALL.BOWLERCODE,PM.PLAYERNAME,OE.OVERNO,OE.OVERSTATUS  			) OE 			GROUP BY BOWLERCODE,BOWLERNAME 		) BOWLDTLS",BOWLERSPELL, BOWLERRUNS, ISPARTIALOVER, TOTALBALLSBOWL, TOTALBALLSBOWL, TOTALBALLSBOWL, LASTBOWLEROVERBALLNO, MAIDENS, WICKETS, TOTALBALLSBOWL, BOWLERRUNS, TOTALBALLSBOWL, COMPETITIONCODE, MATCHCODE, INNINGSNO, PREVIOUSBOWLERCODE, OVERNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -468,5 +468,38 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return GetLastBolwerDetails;
 }
 
+-(NSNumber*) GetlastOverStatusForlastBowlerDetails:(NSString*) COMPETITIONCODE :(NSString*) MATCHCODE :(NSString*) INNINGSNO :(NSNumber*) LASTBOWLEROVERNO {
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@" SELECT OVERSTATUS FROM OVEREVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'  AND INNINGSNO = %@ AND OVERNO = %@ ", COMPETITIONCODE,MATCHCODE,INNINGSNO,LASTBOWLEROVERNO];
+        
+        stmt=[updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+                f.numberStyle = NSNumberFormatterDecimalStyle;
+                NSNumber *BALLNO = [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                return BALLNO;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            
+        }
+        
+        sqlite3_close(dataBase);
+    }
+    return 0;
+}
 
 @end

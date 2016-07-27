@@ -46,14 +46,13 @@ int bowlerPostion = 0;
     
     [self customnavigationmethod];
     
+    [self scoreDetailsColorChange];
  
     //self.matchTypeCode = @"MSC115";
     
     
     fetchScorecard = [[FetchScorecard alloc]init];
-    [fetchScorecard FetchScoreBoard:competitionCode :matchCode :@"1"];
-    
-    
+    [fetchScorecard FetchScoreBoard:competitionCode :matchCode :inningsNo];
     
      fetchSEpage = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEpage fetchSEPageLoadDetails:competitionCode :matchCode];
@@ -152,11 +151,14 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     if([inningsNo isEqual:@"1"]){
         self.lbl_strip.constant=0;
     }else if([inningsNo isEqual:@"2"]){
-        self.lbl_strip.constant=self.btn_sec_inns_id.frame.origin.x;
+        self.lbl_strip.constant= 195;
+       
     }else if([inningsNo isEqual:@"3"]){
-        self.lbl_strip.constant=self.btn_third_inns_id.frame.origin.x;
+         self.lbl_strip.constant= 385;
+       
     }else if([inningsNo isEqual:@"4"]){
-        self.lbl_strip.constant=self.btn_fourth_inns_id.frame.origin.x;
+        self.lbl_strip.constant=580;
+       
     }
     if ([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] ||
         [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) {
@@ -201,6 +203,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
 -(void)hideLabelBasedOnMatchType{
     
     
@@ -222,6 +225,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
         
     }else{
+        
         _lbl_teamAsecIngsHeading.hidden = NO;
         _lbl_teamBsecIngsHeading.hidden = NO;
         
@@ -231,6 +235,47 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         _lbl_teamBfirstIngsOvs.hidden = NO;
         
     }
+    
+}
+-(void)scoreDetailsColorChange{
+    
+    
+    if ([inningsNo isEqualToString:@"1"]) {
+        
+       self.lbl_teamAfirstIngsHeading.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+       self.lbl_teamAfirstIngsScore.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        self.lbl_teamAfirstIngsOvs.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+
+    }else if ([inningsNo isEqualToString:@"2"]){
+        
+        _lbl_teamBsecHeading.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+       _lbl_teamBSecIngsScore.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        
+        _lbl_teamBSecIngsOvs.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        
+    }else if ([inningsNo isEqualToString:@"3"]){
+        
+        _lbl_teamAsecIngsHeading.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        self.lbl_teamASecIngsScore.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        self.lbl_teamASecIngsOvs.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        
+
+        
+    }else if ([inningsNo isEqualToString:@"4"]){
+        
+           _lbl_teamBsecIngsHeading.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+        _lbl_teamBfirstIngsScore.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+
+        _lbl_teamBfirstIngsOvs.textColor = [UIColor colorWithRed:(191/255.0f) green:(161/255.0f) blue:(68/255.0f) alpha:1.0f];
+
+        
+    }
+    
+
+    
+
+    
+    
     
 }
 

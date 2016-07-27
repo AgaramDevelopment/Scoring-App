@@ -11,7 +11,7 @@
 
 @interface FetchSEPageLoadRecord : NSObject
 
-
+@property(strong,nonatomic)NSString *S_ATWOROTW;
 @property(strong,nonatomic)NSString *INNINGSPROGRESS;
 @property(strong,nonatomic)NSString *TEAMACODE;
 @property(strong,nonatomic)NSString *TEAMBCODE;
