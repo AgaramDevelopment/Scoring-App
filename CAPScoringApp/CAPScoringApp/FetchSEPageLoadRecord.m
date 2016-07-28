@@ -363,19 +363,19 @@ BOOL  getOverStatus;
     {
     FetchSEPageLoadRecord *totRun =(FetchSEPageLoadRecord*)[totalOvers objectAtIndex:0];
     
-    if (T_TARGETRUNS == nil) {
-        
-        T_TARGETRUNS = [NSNumber numberWithInt:0];
-        T_TARGETOVERS = [NSNumber numberWithInt:0];
-    }else{
-        
+//    if (T_TARGETRUNS == nil) {
+//        
+//        T_TARGETRUNS = [NSNumber numberWithInt:0];
+//        T_TARGETOVERS = [NSNumber numberWithInt:0];
+//    }else{
+//        
+//        T_TARGETRUNS = totRun.T_TARGETRUNS;
+//        T_TARGETOVERS = totRun.T_TARGETOVERS;
+//         MATCHOVERS  = T_TARGETRUNS.intValue > 0 ? [T_TARGETOVERS stringValue] : MATCHOVERS;
+//    }
         T_TARGETRUNS = totRun.T_TARGETRUNS;
         T_TARGETOVERS = totRun.T_TARGETOVERS;
-         MATCHOVERS  = T_TARGETRUNS.intValue > 0 ? [T_TARGETOVERS stringValue] : MATCHOVERS;
-    }
-    
-    MATCHOVERS  = T_TARGETRUNS.intValue > 0 ? [T_TARGETOVERS stringValue] : MATCHOVERS;
-    
+        MATCHOVERS  = T_TARGETRUNS.intValue > 0 ? [T_TARGETOVERS stringValue] : MATCHOVERS;
    
     
     //Batting team player
@@ -432,13 +432,13 @@ BOOL  getOverStatus;
         
         if ([self.MATCHTYPE isEqualToString: @"MSC023"] || [self.MATCHTYPE isEqualToString: @"MSC114"]) {
             //penalty details bowler
-            NSString *b = [db getPenaltyDetailsBowling:COMPETITIONCODE :MATCHCODE : INNINGSNO :BATTINGTEAMCODE];
+            NSString *b = [db getPenaltyDetailsBowling:COMPETITIONCODE :MATCHCODE : INNINGSNO :BOWLINGTEAMCODE];
             NSInteger penaltyBowl = [b integerValue];
             BOWLTEAMPENALTY = penaltyBowl;
             
         }else{
             //penalty innings
-            NSString *penaltyInnings = [db getPenaltyInnings:COMPETITIONCODE :MATCHCODE : INNINGSNO :BATTINGTEAMCODE];
+            NSString *penaltyInnings = [db getPenaltyInnings:COMPETITIONCODE :MATCHCODE : INNINGSNO :BOWLINGTEAMCODE];
             NSInteger penaltyInns = [penaltyInnings integerValue];
             BOWLTEAMPENALTY = penaltyInns;
         }
@@ -460,7 +460,7 @@ BOOL  getOverStatus;
             BATTEAMPENALTY = penaltyInThre;
         }
         //bowling penalty inns
-        NSString *Bowlingpenalty = [db getBowlingPenaltyInnings:COMPETITIONCODE :MATCHCODE : INNINGSNO :BATTINGTEAMCODE];
+        NSString *Bowlingpenalty = [db getBowlingPenaltyInnings:COMPETITIONCODE :MATCHCODE : INNINGSNO :BOWLINGTEAMCODE];
         NSInteger BowlingPnty = [Bowlingpenalty integerValue];
         BOWLTEAMPENALTY = BowlingPnty;
     }
@@ -477,7 +477,7 @@ BOOL  getOverStatus;
             BATTEAMPENALTY = penaltyInThre;
         }
         // getBowlPnty
-        NSString *bowlPntyInnings = [db getBowlPnty:COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE: INNINGSNO];
+        NSString *bowlPntyInnings = [db getBowlPnty:COMPETITIONCODE :MATCHCODE:BOWLINGTEAMCODE: INNINGSNO];
         NSInteger bowlPtyInnings = [bowlPntyInnings integerValue];
         BOWLTEAMPENALTY = bowlPtyInnings;
     }
@@ -657,8 +657,8 @@ BOOL  getOverStatus;
             
             
             
-            NSString *TEMPBOWLPENALTY = [db getTEMPBOWLPENALTY:COMPETITIONCODE MATCHCODE:MATCHCODE BOWLINGTEAMCODE:BOWLINGTEAMCODE];
-            NSString *TEMPBATPENALTY = [db getTEMPBATPENALTY:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO];
+            TEMPBOWLPENALTY = [NSNumber numberWithInt: [db getTEMPBOWLPENALTY:COMPETITIONCODE MATCHCODE:MATCHCODE BOWLINGTEAMCODE:BOWLINGTEAMCODE INNINGSNO:INNINGSNO].intValue];
+            TEMPBATPENALTY = [NSNumber numberWithInt: [db getTEMPBATPENALTY:COMPETITIONCODE MATCHCODE:MATCHCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO].intValue];
             
             
         }
