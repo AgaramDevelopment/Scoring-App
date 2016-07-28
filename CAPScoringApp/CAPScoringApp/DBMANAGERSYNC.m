@@ -352,6 +352,40 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
 }
 
+-(BOOL) CheckAlreadySyncMatchregistration:(NSString *)MATCHCODE
+{
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE MATCHCODE ='%@' AND MATCHSTATUS NOT IN('MSC123','MSC281')",MATCHCODE];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+    
+    
+}
+
+
+
 
 -(BOOL) InsertMatchregistration:(NSString*) MATCHCODE:(NSString*) MATCHNAME:(NSString*) COMPETITIONCODE:(NSString*) MATCHOVERS:(NSString*) MATCHOVERCOMMENTS:(NSString*) MATCHDATE:(NSString*) ISDAYNIGHT:(NSString*) ISNEUTRALVENUE:(NSString*) GROUNDCODE:(NSString*) TEAMACODE:(NSString*) TEAMBCODE:(NSString*) TEAMACAPTAIN:(NSString*) TEAMAWICKETKEEPER:(NSString*) TEAMBCAPTAIN:(NSString*) TEAMBWICKETKEEPER:(NSString*) UMPIRE1CODE:(NSString*) UMPIRE2CODE:(NSString*) UMPIRE3CODE:(NSString*) MATCHREFEREECODE:(NSString*) MATCHRESULT:(NSString*) MATCHRESULTTEAMCODE:(NSString*) TEAMAPOINTS:(NSString*) TEAMBPOINTS:(NSString*) MATCHSTATUS:(NSString*) RECORDSTATUS:(NSString*) CREATEDBY:(NSString*) CREATEDDATE:(NSString*) MODIFIEDBY:(NSString*) MODIFIEDDATE:(NSString*) ISDEFAULTORLASTINSTANCE
 {
