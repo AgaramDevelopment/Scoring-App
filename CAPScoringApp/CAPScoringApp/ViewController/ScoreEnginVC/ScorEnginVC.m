@@ -2367,7 +2367,7 @@
                     [self selectedViewBg:_view_rtw];
                 }
                 
-                if(fetchSeBallCodeDetails.ISFREEHIT.intValue ==1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
+                if(fetchSEPageLoadRecord.ISFREEHIT.intValue ==1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
                      UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit Ball" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //                    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Alert", nil];
                     [alter show];
@@ -3084,12 +3084,14 @@
             [alter show];
             [alter setTag:10003];
         }else{
-            [self overEVENT];
-            self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
-            [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
-            if(![self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
-                [self DidClickStartBall : self.btn_StartBall];
-            self.btn_StartBall.userInteractionEnabled=YES;
+            BOOL isInningsCompleted = [self overEVENT];
+            if(!isInningsCompleted){
+                self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
+                [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
+                if(![self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
+                    [self DidClickStartBall : self.btn_StartBall];
+                self.btn_StartBall.userInteractionEnabled=YES;
+            }
         }
         
     }
@@ -3141,8 +3143,10 @@
 }
 
 
--(void)overEVENT
+-(BOOL)overEVENT
 {
+    
+    BOOL isInningsCompleted = NO;
     DBManager *objDBManager = [[DBManager alloc]init];
     //endInnings=[[EndInnings alloc]init ];
     NSLog(@"matchtype=%@",self.matchTypeCode);
@@ -3197,7 +3201,7 @@
             else if([ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.BATTEAMOVERS >=[fetchSEPageLoadRecord.MATCHOVERS intValue]  && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
             {
                 NSLog(@"%@",self.matchTypeCode);
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Inning is Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Inning is Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [altert setTag:1001];
                 [altert show];
                 
@@ -3205,11 +3209,14 @@
                 {
                     //NSLog(@"Match Result");
                     [self MatchResult];
+                    isInningsCompleted = YES;
+
                 }
                 else
                 {
                     //NSLog(@"ENNDings");
                     [self ENDINNINGS];
+                    isInningsCompleted = YES;
                 }
                 
             }
@@ -3350,7 +3357,7 @@
         [altert show];
     }
     
-    
+    return isInningsCompleted;
 }
 
 
@@ -7014,7 +7021,7 @@ self.lbl_umpirename.text=@"";
         }
         
         
-    }
+    }else{
     
     if (tableView == self.table_AppealSystem)
     {
@@ -7871,8 +7878,8 @@ self.lbl_umpirename.text=@"";
         
     }
     
-    
-    
+}
+
     
     NSLog(@"Index Path %d",indexPath.row);
     
@@ -8693,6 +8700,7 @@ self.lbl_umpirename.text=@"";
     revisedTarget.matchCode =self.matchCode;
     revisedTarget.teamCode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
     revisedTarget.inningsno=fetchSEPageLoadRecord.INNINGSNO;
+     revisedTarget.matchTypeCode=self.matchTypeCode;
     [fullview addSubview:revisedTarget.view];
     
     
@@ -12362,6 +12370,7 @@ self.lbl_umpirename.text=@"";
     revicedOverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
     revicedOverVc.matchCode=self.matchCode;
     revicedOverVc.competitionCode =self.competitionCode;
+    revicedOverVc.matchTypeCode=self.matchTypeCode;
     revicedOverVc.delegate=self;
     [fullview addSubview:revicedOverVc.view];
     

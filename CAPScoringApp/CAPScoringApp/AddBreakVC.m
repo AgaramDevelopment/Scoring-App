@@ -33,7 +33,7 @@
     NSDate *dateFromString;
     NSDate *dateFromString1;
     NSString*Duration;
-    
+    NSString*MATCHDATETIME;
     //objInningsno;
     BallEventRecord*obj;
     FetchSEPageLoadRecord*fetchSEPageLoadRecord;
@@ -68,10 +68,22 @@
     [self.View_Comments.layer setBorderWidth:2.0];
     [self.View_Comments.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     [self.View_Comments.layer setMasksToBounds:YES];
-     NSDate *dateFromString = [[NSDate alloc] init];
-        NSDate *dateFromString1 = [[NSDate alloc] init];
+    // NSDate *dateFromString = [[NSDate alloc] init];
+    //    NSDate *dateFromString1 = [[NSDate alloc] init];
+    
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSDate *date = [formatter dateFromString:_MATCHDATE];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *MATCHDATE1 = [formatter stringFromDate:date];
+    
+
+    
+    NSString *timeString=@"00:00:00";
   
-  
+  MATCHDATETIME=[NSString stringWithFormat:@"%@ %@",MATCHDATE1,timeString];
+    
 }
 
 
@@ -79,7 +91,9 @@
 - (IBAction)StartBreack_btn:(id)sender {
       [_date_picker setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_FR"]];
     
-    _Text_BreakStart.text=_MATCHDATE;
+    _Text_BreakStart.text=MATCHDATETIME;
+    
+    
     [_datePicker_View setHidden:NO];
     [_date_picker1 setHidden:YES];
     [_date_picker setHidden:NO];
@@ -92,7 +106,7 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *matchdate = [dateFormat dateFromString:_MATCHDATE];
+    NSDate *matchdate = [dateFormat dateFromString:MATCHDATETIME];
     
    
     self.date_picker.date = matchdate;
@@ -106,7 +120,7 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
  //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *matchdate = [dateFormat dateFromString:_MATCHDATE];
+    NSDate *matchdate = [dateFormat dateFromString:MATCHDATETIME];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
      // for minimum date
     [_date_picker setMinimumDate:matchdate];
@@ -146,7 +160,7 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *matchdate = [dateFormat dateFromString:_MATCHDATE];
+    NSDate *matchdate = [dateFormat dateFromString:MATCHDATETIME];
     
     
     self.date_picker1.date = matchdate;
@@ -184,7 +198,7 @@
   NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *matchdate = [dateFormat dateFromString:_MATCHDATE];
+    NSDate *matchdate = [dateFormat dateFromString:MATCHDATETIME];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     // for minimum date
@@ -325,7 +339,7 @@
     add.MATCHCODE=MATCHCODE;
     add.COMPETITIONCODE=COMPETITIONCODE;
     add.INNINGSNO=INNINGSNO;
-    add.MATCHDATE=_MATCHDATE;
+    add.MATCHDATE=MATCHDATETIME;
     add.Duration= self.lbl_Duration.text;
     //vc2 *viewController = [[vc2 alloc]init];
     [self addChildViewController:add];
