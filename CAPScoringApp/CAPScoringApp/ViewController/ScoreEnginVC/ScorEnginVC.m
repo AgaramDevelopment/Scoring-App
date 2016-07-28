@@ -549,6 +549,11 @@
                                                               blue:0
                                                              alpha:0.36]];
     
+      [self MatcheventMethod];
+    [self getLastBowlerDetails];
+}
+-(void)MatcheventMethod
+{
     int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
     _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAKS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
@@ -578,12 +583,7 @@
         if (inningsno == 1 || inningsno == 4)
             [_rightSlideArray removeObject : @"FOLLOW ON"];
     }
-    
-    
-    
-    [self getLastBowlerDetails];
 }
-
 -(void)getLastBowlerDetails{
     //Get Last bowler details
     fetchLastBowler = [[FetchLastBowler alloc]init];
@@ -1608,7 +1608,7 @@
 
 - (void)handleSwipeFromRightside:(UISwipeGestureRecognizer *)recognizer
 {
-    
+    //[self MatcheventMethod];
     [UIView animateWithDuration:5.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{ self.sideviewXposition.constant =-300;
         self.commonViewXposition.constant=0;
         self.commonViewwidthposition.constant =self.view.frame.size.width;
@@ -2298,6 +2298,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         }
     }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){ // Check Is Over started
+        
         
         if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
         {
