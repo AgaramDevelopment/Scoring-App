@@ -1579,32 +1579,33 @@ sqlite3_close(dataBase);
     return NO;
 }
 
--(NSString *)  GetBallNoFormanageOverDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) OVERNO{
+
+
+-(BOOL)  GetBallNoFormanageOverDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) OVERNO{
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLNO  FROM BALLEVENTS  WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = '%@' GROUP BY BALLNO HAVING MAX(BALLNO) > 4   ",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLNO  FROM BALLEVENTS  WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = '%@' GROUP BY BALLNO HAVING MAX(BALLNO) > 4",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSString *BALLNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                return BALLNO;
+                return YES;
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
         }
-                   sqlite3_close(dataBase);
-       
+        sqlite3_close(dataBase);
     }
-        return @"";
+    return NO;
 }
 
 
@@ -1638,37 +1639,34 @@ sqlite3_close(dataBase);
     return @"";
 }
 
--(NSString *)  GetBowlerCodeFormanageOverDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) OVERNO{
-    
+
+-(BOOL)  GetBowlerCodeFormanageOverDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) OVERNO{
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@" SELECT BOWLERCODE  FROM BOWLEROVERDETAILS  WHERE COMPETITIONCODE = '%@'  AND MATCHCODE = '%@'  AND INNINGSNO = '%@'   AND OVERNO = '%@' ",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BOWLERCODE  FROM BOWLEROVERDETAILS  WHERE COMPETITIONCODE = '%@'  AND MATCHCODE = '%@'  AND INNINGSNO = '%@'   AND OVERNO = '%@' ",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *BOWLERCODE =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                return BOWLERCODE;
+                return YES;
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
         }
-  
-            sqlite3_close(dataBase);
-        
+        sqlite3_close(dataBase);
     }
-
-    return @"";
+    return NO;
 }
+
 
 
 -(NSNumber *) GetBowlerCountFormanageOverDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) OVERNO{

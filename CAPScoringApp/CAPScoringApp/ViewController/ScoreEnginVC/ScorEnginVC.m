@@ -216,6 +216,7 @@
     EndInnings *endInnings;
     EditModeVC * objEditModeVc;
 
+    BOOL isRemarkOpen;
 
 }
 
@@ -491,9 +492,11 @@
     
     fieldingOption = 0;
     wicketOption = 0;
-    
     }
     
+    
+    isRemarkOpen = NO;
+
     
     //Fielding Factor
     //_fieldingfactorArray=[[NSMutableArray alloc]init];
@@ -2352,7 +2355,7 @@
                     [self selectedViewBg:_view_rtw];
                 }
                 
-                if(fetchSEPageLoadRecord.ISFREEHIT.intValue==1){
+                if(fetchSeBallCodeDetails.ISFREEHIT.intValue ==1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
                      UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit Ball" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //                    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Alert", nil];
                     [alter show];
@@ -2365,11 +2368,14 @@
         else
         {
             
-            if([self checkRunsByLB_B] && [self iswicketPending]&&[self checkValidation]){
+            
+            
+            
+                if([self checkRunsByLB_B] && [self iswicketPending]&&[self checkValidation]){
                 
-                [self StartBall];
-                
-            }
+                    [self StartBall];
+                }
+            
             
         }
     }
@@ -3727,6 +3733,42 @@
         ismiscFilters = NO;
     }
     
+    
+    //Reset
+    if(isAggressiveSelected && self.ballEventRecord.objShottype == nil && selectBtnTag.tag!=116)//aggressive
+    {
+        
+        [self unselectedViewBg:_view_aggressive];
+        self.view_aggressiveShot.hidden = YES;
+        isAggressiveSelected = NO;
+        
+    }
+    
+    if(isFastSelected && self.ballEventRecord.objBowltype == nil && !selectBtnTag.tag!=115){//Fast
+        
+        [self unselectedViewBg:_view_fast];
+        self.view_fastBowl.hidden = YES;
+        isFastSelected = NO;
+        
+    }
+    
+    if(isSpinSelected && self.ballEventRecord.objBowltype == nil && selectBtnTag.tag!=114){//Spin
+        
+        [self unselectedViewBg:_view_spin];
+        self.view_bowlType.hidden = YES;
+        isSpinSelected = NO;
+        
+    }
+    
+    if(isDefensiveSelected && self.ballEventRecord.objShottype == nil && selectBtnTag.tag!=116){//defensive
+        
+        [self unselectedViewBg:_view_defense];
+        self.view_defensive.hidden = YES;
+        isDefensiveSelected = NO;
+        
+    }
+    
+    
     if(selectBtnTag.tag==100)//Run one
     {
         if([self checkRunOut] && [self checkBeatenOnRuns])
@@ -3855,7 +3897,7 @@
             if(self.ballEventRecord.objIssix.intValue == 1){
                 
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                                message:@"wicket not possible in B6"
+                                                                message:@"Wicket not possible in B6"
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
@@ -3863,7 +3905,7 @@
                 
             }else if(self.ballEventRecord.objIsFour.intValue == 1){
                 UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
-                                                                message:@"wicket not possible in B4"
+                                                                message:@"Wicket not possible in B4"
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
                                                       otherButtonTitles:nil];
@@ -5347,6 +5389,41 @@
         ismiscFilters = NO;
     }
     
+    //Reset
+    if(isAggressiveSelected && self.ballEventRecord.objShottype == nil && selectBtnTag.tag!=116)//aggressive
+    {
+        
+        [self unselectedViewBg:_view_aggressive];
+        self.view_aggressiveShot.hidden = YES;
+        isAggressiveSelected = NO;
+        
+    }
+    
+    if(isFastSelected && self.ballEventRecord.objBowltype == nil && !selectBtnTag.tag!=115){//Fast
+        
+        [self unselectedViewBg:_view_fast];
+        self.view_fastBowl.hidden = YES;
+        isFastSelected = NO;
+        
+    }
+    
+    if(isSpinSelected && self.ballEventRecord.objBowltype == nil && selectBtnTag.tag!=114){//Spin
+        
+        [self unselectedViewBg:_view_spin];
+        self.view_bowlType.hidden = YES;
+        isSpinSelected = NO;
+        
+    }
+    
+    if(isDefensiveSelected && self.ballEventRecord.objShottype == nil && selectBtnTag.tag!=116){//defensive
+        
+        [self unselectedViewBg:_view_defense];
+        self.view_defensive.hidden = YES;
+        isDefensiveSelected = NO;
+        
+    }
+    
+    
     //isSelectleftview=NO;
     if(selectBtnTag.tag==112)//OTW
     {
@@ -5360,7 +5437,7 @@
         [self rtwSelectAndDeselect];
         
     }
-    else if(selectBtnTag.tag==114)
+    else if(selectBtnTag.tag==114) // Spin
     {
         //[self selectBtncolor_Action:@"114"];
         DBManager *objDBManager = [[DBManager alloc]init];
@@ -5758,9 +5835,23 @@
     {
         //  [self selectBtncolor_Action:@"120" :nil :209];
         
-        
-        [self selectedViewBg: _view_remark];
-        [self RemarkMethode];
+        if(isRemarkOpen){
+            
+            isRemarkOpen = NO;
+            self.objcommonRemarkview.hidden=YES;
+            
+            if(self.ballEventRecord.objRemark == nil || [self.ballEventRecord.objRemark isEqual:@""]){
+                [self unselectedViewBg:_view_remark];
+            }else{
+                [self selectedViewBg:_view_remark];
+            }
+        }
+        else{
+            isRemarkOpen = YES;
+            [self selectedViewBg: _view_remark];
+            [self RemarkMethode];
+            
+        }
         
     }
     else if(selectBtnTag.tag==121)
@@ -5895,11 +5986,27 @@
     self.ballEventRecord.objRemark=self.txt_Remark.text;
     NSLog(@"remarks : %@",remarks);
     self.objcommonRemarkview.hidden=YES;
+    
+    if(self.ballEventRecord.objRemark == nil || [self.ballEventRecord.objRemark isEqual:@""]){
+        [self unselectedViewBg:_view_remark];
+    }else{
+        [self selectedViewBg:_view_remark];
+    }
+    
+    isRemarkOpen = NO;
 }
 -(IBAction)didClickRemarkCancel_Action:(id)sender
 {
     
     self.objcommonRemarkview.hidden=YES;
+    
+    if(self.ballEventRecord.objRemark == nil || [self.ballEventRecord.objRemark isEqual:@""]){
+        [self unselectedViewBg:_view_remark];
+    }else{
+        [self selectedViewBg:_view_remark];
+    }
+    
+    isRemarkOpen = NO;
 }
 //
 //-(void)selectBtncolor_Action:(NSString*)select_Btntag :(UIButton *)select_BtnName :(NSInteger)selectview
@@ -12868,6 +12975,26 @@ self.lbl_umpirename.text=@"";
         [altert setTag:3000];
         [altert show];
         
+        return NO;
+    }else if(isDefensiveSelected && self.ballEventRecord.objShottype == nil){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please complete defensive option." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:3002];
+        return NO;
+    }else if(isAggressiveSelected && self.ballEventRecord.objShottype == nil){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please complete aggressive option." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:3003];
+        return NO;
+    }else if(isFastSelected && self.ballEventRecord.objBowltype == nil){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please complete fast option." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:3004];
+        return NO;
+    }else if(isSpinSelected && self.ballEventRecord.objBowltype == nil){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please complete spin option." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:3005];
         return NO;
     }
     
