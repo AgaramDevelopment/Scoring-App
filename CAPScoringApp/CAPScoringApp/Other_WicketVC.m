@@ -433,6 +433,7 @@ else
     else
     {
         [self.delegate ChangeVCBackBtnAction];
+        [self.delegate reloadScoreEnginOnOtherWicket];
         isAddWicket=YES;
     }
 
