@@ -336,7 +336,7 @@ DBManagerEndSession *dbEndSession;
                 if(![dbEndSession GetSessionNoForInsertEndSession :SESSIONSTARTTIME : SESSIONENDTIME : COMPETITIONCODE: MATCHCODE ])
                 {
                     
-                    if([dbEndSession GetMatchCodeInNotExists:COMPETITIONCODE :MATCHCODE])
+                    if([dbEndSession GetMatchCodeInNotExists:COMPETITIONCODE :MATCHCODE : SESSIONSTARTTIME : SESSIONENDTIME])
                     {
                     
                     if([dbEndSession GetCompetitionCodeInNotExistsForInsertEndSession :COMPETITIONCODE:MATCHCODE:INNINGSNO:SESSIONNO:DAYNO ])

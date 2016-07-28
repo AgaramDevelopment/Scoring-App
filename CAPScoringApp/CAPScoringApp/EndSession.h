@@ -91,6 +91,7 @@
 - (IBAction)btn_back:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *btn_dropDown;
 
+@property (weak, nonatomic) IBOutlet UIView *view_heading;
 
 
 @end
