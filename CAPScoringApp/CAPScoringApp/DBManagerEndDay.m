@@ -98,23 +98,30 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
                 return YES;
                 
             }
-            sqlite3_reset(statement);
-            sqlite3_finalize(statement);
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
         }
         sqlite3_close(dataBase);
+        
     }
-    return NO;
     
+    return NO;
 }
+
 
 -(NSMutableArray*) GetDayEventsForUpdateEndDay:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
     NSMutableArray *UpdateEndDayArray=[[NSMutableArray alloc]init];
@@ -232,13 +239,18 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 return YES;
                 
             }
-            sqlite3_reset(statement);
-            sqlite3_finalize(statement);
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
         }
         sqlite3_close(dataBase);
+        
     }
-    return NO;
     
+    return NO;
 }
 
 
@@ -1053,8 +1065,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO DAYEVENTS (COMPETITIONCODE,MATCHCODE,INNINGSNO,STARTTIME,ENDTIME,DAYNO,BATTINGTEAMCODE,TOTALRUNS,TOTALOVERS,TOTALWICKETS,COMMENTS,DAYSTATUS)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@',1)",COMPETITIONCODE,MATCHCODE,INNINGSNO,STARTTIME,ENDTIME,DAYNO,BATTINGTEAMCODE,TOTALRUNS,TOTALOVERS,TOTALWICKETS,COMMENTS];
         
         const char *selectStmt = [updateSQL UTF8String];
-        
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
@@ -1064,13 +1075,18 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 return YES;
                 
             }
-            sqlite3_reset(statement);
-            sqlite3_finalize(statement);
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
         }
         sqlite3_close(dataBase);
+        
     }
-    return NO;
     
+    return NO;
 }
 
 -(NSString*) GetSessionNoForInsertEndDay:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) DAYNO:(NSString*) COUNT{
@@ -1119,18 +1135,23 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                
                 return YES;
                 
             }
-            sqlite3_reset(statement);
-            sqlite3_finalize(statement);
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
         }
         sqlite3_close(dataBase);
+        
     }
-    return NO;
     
+    return NO;
 }
+
 
 -(NSMutableArray *) InsertEndDay:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
     NSMutableArray *InsertEndDayArray=[[NSMutableArray alloc]init];

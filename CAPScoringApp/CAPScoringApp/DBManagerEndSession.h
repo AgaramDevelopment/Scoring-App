@@ -80,8 +80,8 @@
 
 //SP_UPDATEENDSESSION-----------------------------------------------------------------------
 
--(BOOL)GetMatchCodeInNotExists:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE;
 -(BOOL)updateEndSession:(NSString*) STARTTIME:(NSString*) ENDTIME : (NSString*) DOMINANTTEAMCODE:(NSString*) DAYNO :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO:(NSString*) SESSIONNO;
+-(BOOL)  GetMatchCodeInNotExists:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*)STARTTIME :(NSString*)ENDTIME ;
 
 
 //SP_DELETEENDSESSION-------------------------------------------------------------------------

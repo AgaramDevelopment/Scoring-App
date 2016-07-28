@@ -708,9 +708,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                     [GetBattingTeamDetails addObject:record];
                 }
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
             }
     }
-    sqlite3_finalize(statement);
+    
     sqlite3_close(dataBase);
     return GetBattingTeamDetails;
 }
@@ -738,9 +739,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 [GetBattingTeamDetails addObject:record];
             }
             sqlite3_reset(statement);
+             sqlite3_finalize(statement);
         }
     }
-    sqlite3_finalize(statement);
+   
     sqlite3_close(dataBase);
     return GetBattingTeamDetails;
 }
@@ -770,9 +772,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 [GetBattingTeamDetails addObject:record];
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
         }
     }
-    sqlite3_finalize(statement);
+    
     sqlite3_close(dataBase);
     return GetBattingTeamDetails;
 }
@@ -817,9 +820,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                         [GetSessionEventDetails addObject:record];
                     }
                         sqlite3_reset(statement);
+                        sqlite3_finalize(statement);
                         }
                     }
-                sqlite3_finalize(statement);
+         
                 sqlite3_close(dataBase);
             return GetSessionEventDetails;
         }
@@ -894,9 +898,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 [getSession addObject:record];
             }
             sqlite3_reset(statement);
+             sqlite3_finalize(statement);
         }
     }
-    sqlite3_finalize(statement);
+   
     sqlite3_close(dataBase);
     
     return getSession;
@@ -933,9 +938,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                     [GetDateDayWiseDetails addObject:record];
                 }
                 sqlite3_reset(statement);
+                sqlite3_finalize(statement);
             }
         }
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
     return GetDateDayWiseDetails;
     }
@@ -1377,7 +1383,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT COMPETITIONCODE FROM SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@' AND SESSIONNO='%@' AND DAYNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,SESSIONNO,DAYNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT COMPETITIONCODE FROM SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
@@ -1505,7 +1511,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
 
 //SP_UPDATEENDSESSION-------------------------------
 
--(BOOL)  GetMatchCodeInNotExists:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE   {
+-(BOOL)  GetMatchCodeInNotExists:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*)STARTTIME :(NSString*)ENDTIME  {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1513,7 +1519,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE (((strftime('%%s',IFNULL(@SESSIONSTARTTIME,MATCHDATE)))>= MATCHDATE )) AND (strftime('%%s',IFNULL(@SESSIONENDTIME,MATCHDATE))>= MATCHDATE )  AND COMPETITIONCODE = '%@' AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE  COMPETITIONCODE = '%@' AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)

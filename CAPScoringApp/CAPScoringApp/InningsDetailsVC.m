@@ -246,7 +246,7 @@
         else
         {
             UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
-                                                            message: @"Striker cannot be same.\nPlease Select different Player"
+                                                            message: @"Striker and Non-Striker cannot be same.\nPlease Select different Player"
                                                            delegate: self
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil];
@@ -269,7 +269,7 @@
         else
         {
             UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
-                                                            message: @"Non Striker cannot be same.\nPlease Select different Player"
+                                                            message: @"Striker and Non-Striker cannot be same.\nPlease Select different Player"
                                                            delegate: self
                                                   cancelButtonTitle:@"Ok"
                                                   otherButtonTitles:nil];
@@ -302,7 +302,7 @@
 - (IBAction)btn_Striker:(id)sender {
     if(isEnableTbl==YES)
     {
-        _lbl_Striker.text = @"";
+      
         [self.Striker_tableview reloadData];
         self.Striker_tableview.hidden=NO;
         isEnableTbl=NO;
@@ -317,7 +317,7 @@
 - (IBAction)btn_Nonstriker:(id)sender {
     if(isEnableTbl==YES)
     {
-        _lbl_NonStriker.text = @"";
+     
         [self.NonStriker_tableview reloadData];
         self.NonStriker_tableview.hidden=NO;
         isEnableTbl=NO;
@@ -332,7 +332,7 @@
 - (IBAction)btn_Bowler:(id)sender {
     if(isEnableTbl==YES)
     {
-        _lbl_Bowler.text = @"";
+       
         [self.Bowler_tableview reloadData];
         self.Bowler_tableview.hidden=NO;
         isEnableTbl=NO;
