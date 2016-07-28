@@ -452,7 +452,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.OVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
                 record.MAIDENOVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
                 record.WICKETS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
-                record.ECONOMY=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record.ECONOMY=[self getValueByNull:statement: 7];
                 
                 
                 
@@ -500,6 +500,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return 0;
+}
+-(NSString *) getValueByNull: (sqlite3_stmt *) statement : (int) position{
+    return [ NSString stringWithFormat:@"%@",((const char*)sqlite3_column_text(statement, position)==nil)?@"":[NSString stringWithFormat:@"%s",(const char*)sqlite3_column_text(statement, position)]];
 }
 
 @end
