@@ -96,7 +96,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
     {
         
-        NSString *query=[NSString stringWithFormat:@"select * FROM COMPETITION CP INNER JOIN  MATCHSCORERDETAILS MSD ON CP.COMPETITIONCODE = MSD.COMPETITIONCODE AND MSD.SCORERCODE = '%@' GROUP BY MSD.COMPETITIONCODE",userCode];
+        NSString *query=[NSString stringWithFormat:@"SELECT  COM.COMPETITIONCODE,COM.COMPETITIONNAME,COM.RECORDSTATUS FROM COMPETITION COM INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE=COM.COMPETITIONCODE AND MATCHSTATUS IN('MSC123','MSC281')INNER JOIN MATCHSCORERDETAILS MATSC ON MR.COMPETITIONCODE=MATSC.COMPETITIONCODE AND MR.MATCHCODE=MATSC.MATCHCODE WHERE   MATSC.SCORERCODE='%@'",userCode];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -105,7 +105,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 //            record.id=(int)sqlite3_column_int(statement, 0);
                 record.competitioncode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.competitionname=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.recordstatus=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
+                record.recordstatus=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
                 [eventArray addObject:record];
                 
             }

@@ -25,8 +25,9 @@
     NSMutableArray * selectindexarray;
     UIRefreshControl *refreshControl;
     int selectePosition;
-    NSMutableArray * FetchArchiveCompitionArray;
+    //NSMutableArray * FetchArchiveCompitionArray;
     DBManager *objDBManager;
+    NSMutableArray * FetchCompitionArray;
 
    }
 @property (nonatomic,strong)NSMutableArray*resultArray;
@@ -68,7 +69,7 @@
     NSString *userCode = [defaults objectForKey:@"userCode"];
     
     resultArray=[[NSMutableArray alloc]init];
-    NSMutableArray * FetchCompitionArray =[[NSMutableArray alloc]init];
+    FetchCompitionArray =[[NSMutableArray alloc]init];
     
     if([self.selectDashBoard isEqualToString:@"Newmatch"])
     {
@@ -199,7 +200,18 @@
         
         
         resultArray=[[NSMutableArray alloc]init];
-        NSMutableArray * FetchCompitionArray =[objDBManager RetrieveEventData:userCode];
+        FetchCompitionArray =[[NSMutableArray alloc]init];
+        
+        if([self.selectDashBoard isEqualToString:@"Newmatch"])
+        {
+            FetchCompitionArray = [objDBManager RetrieveEventData:userCode];
+        }
+        else{
+            FetchCompitionArray = [objDBManager RetrieveEventData1:userCode];
+        }
+        
+        
+       // NSMutableArray * FetchCompitionArray =[objDBManager RetrieveEventData:userCode];
         for(int i=0; i < [FetchCompitionArray count]; i++)
         {
             
