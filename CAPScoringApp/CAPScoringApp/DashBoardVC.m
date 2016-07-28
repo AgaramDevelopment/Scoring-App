@@ -807,9 +807,6 @@
 - (IBAction)btn_signOut:(id)sender {
     
         
-    NSUserDefaults * removeUDCode = [NSUserDefaults standardUserDefaults];
-    [removeUDCode removeObjectForKey:@"userCode"];
-    [[NSUserDefaults standardUserDefaults]synchronize ];
     
     
     
@@ -819,9 +816,13 @@
                                          cancelButtonTitle:@"Signout"
                                          otherButtonTitles:@"Cancel",nil];
     
-    alert.tag =1;
+    
     [alert show];
-   
+   alert.tag =1;
+    
+    
+
+
     
 }
 
@@ -830,6 +831,9 @@
    if (alertView.tag == 1) { // UIAlertView with tag 1 detected
     if (buttonIndex == 0)
     {
+        NSUserDefaults * removeUDCode = [NSUserDefaults standardUserDefaults];
+        [removeUDCode removeObjectForKey:@"userCode"];
+        [[NSUserDefaults standardUserDefaults]synchronize ];
         
         NSUserDefaults * removeUD = [NSUserDefaults standardUserDefaults];
         [removeUD removeObjectForKey:@"isUserLoggedin"];
@@ -844,16 +848,16 @@
 
     }
    }
-    else
-    {
-        NSLog(@"user pressed Button Indexed 1");
-        
-        
-        DashBoardVC *dashBoard =(DashBoardVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
-        [self.navigationController pushViewController:dashBoard animated:YES];
-        //Fixvc.CompitionCode=selectindexarray;
-            }
-
+//    else
+//    {
+//        NSLog(@"user pressed Button Indexed 1");
+//        
+//        
+//        DashBoardVC *dashBoard =(DashBoardVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+//        [self.navigationController pushViewController:dashBoard animated:YES];
+//        //Fixvc.CompitionCode=selectindexarray;
+//            }
+//
 }
 
 

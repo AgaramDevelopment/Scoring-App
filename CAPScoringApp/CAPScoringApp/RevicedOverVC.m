@@ -168,16 +168,24 @@
 
 -(IBAction)btn_submit:(id)sender
 {
-    if([self formValidation]){
-        DBManager *objDBManager = [[DBManager alloc]init];
+if([self formValidation]){
+    DBManager *objDBManager = [[DBManager alloc]init];
+    
+    [objDBManager updateRevisedOvers:txt_overs.text comments:txt_commentss.text matchCode:self.matchCode competitionCode:self.competitionCode];
+    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Revised Over" message:@"Revised Over Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    [alter show];
+    alter.tag =100;
+    [self startService];
+}
+   
+    
 
-        [objDBManager updateRevisedOvers:txt_overs.text comments:txt_commentss.text matchCode:self.matchCode competitionCode:self.competitionCode];
-        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Revised Over" message:@"Revised Over Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alter show];
-        alter.tag =100;
+}
 
+
+-(void) startService{
     if(self.checkInternetConnection){
-        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/REVISEOVER/%@/%@/%@/%@/%@/%@",[Utitliy getSyncIPPORT],self.competitionCode,self.matchCode,self.inningsNo,strovers,strcomments];
+        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/REVISEOVER/%@/%@/%@/%@/%@",[Utitliy getIPPORT],self.competitionCode,self.matchCode,self.inningsNo,strovers,strcomments];
         
         NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
         
@@ -192,9 +200,7 @@
         
     }
     
-    }
 }
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     
     if(buttonIndex == 0)//OK button pressed
