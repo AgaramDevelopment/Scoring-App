@@ -405,7 +405,7 @@ else{
 - (BOOL) formValidation
 {
     
-    if([ self.selectMatchName.text isEqualToString:@""] || self.selectMatchName.text==nil)
+    if([ self.selectMatchName.text isEqualToString:@"Select"] || self.selectMatchName.text==nil)
     {
         [self ShowAlterView:@"Please Select Any Tournament"];
         return NO;
