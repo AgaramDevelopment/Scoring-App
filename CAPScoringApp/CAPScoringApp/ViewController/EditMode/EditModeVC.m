@@ -115,16 +115,54 @@ BOOL isWicketSelected;
     FetchSEPageLoadRecord *objfetchSEPageLoadRecord;
   
     self.Btn_innings1team1.frame= CGRectMake(self.Btn_innings1team1.frame.origin.x, self.Btn_innings1team1.frame.origin.y, 400, self.Btn_innings1team1.frame.size.height);
-    
+   self. Btn_innings1team2.userInteractionEnabled=NO;
+    _Btn_inning2steam1.userInteractionEnabled=NO;
+    _Btn_innings2team2.userInteractionEnabled=NO;
+    self.lbl_1stseprator.hidden=YES;
+    self.lbl_2seprator.hidden=YES;
+    self.lbl_3seprator.hidden=YES;
     
     NSMutableArray* objInniningsarray=[objDBManager FETCHSEALLINNINGSSCOREDETAILS:self.Comptitioncode MATCHCODE:self.matchCode];
     
     if(objInniningsarray.count>0){
     objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
     }
-    [self.Btn_innings1team1 setTitle:[NSString stringWithFormat:@"%@ 1st INNS",objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME] forState: UIControlStateNormal];
+    if(![objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME isEqualToString:@""])
+    {
+    [self.Btn_innings1team1 setTitle:[NSString stringWithFormat:@"1st INNS %@ ",objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME] forState: UIControlStateNormal];
+    }
     
-    [self.Btn_innings1team2 setTitle: [NSString stringWithFormat:@"%@ 1st INNS",[objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@"" ]?[objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME isEqual:_teamAShortName]?_teamBShortName:_teamAShortName: objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME] forState: UIControlStateNormal];
+    if(![objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqualToString:@""])
+    {
+       NSString *secondinningsTeamName=([objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqualToString:@""] || objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME == nil)?@"":[NSString stringWithFormat:@"2nd INNS %@",objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME];
+        [self.Btn_innings1team2 setTitle: [NSString stringWithFormat:secondinningsTeamName] forState: UIControlStateNormal];
+        self. Btn_innings1team2.userInteractionEnabled=YES;
+        self.lbl_1stseprator.hidden=NO;
+
+    }
+    
+    if(![objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqualToString:@""])
+    {
+     NSString *ThirdinningsTeamName=([objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqualToString:@""] || objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME == nil)?@"":[NSString stringWithFormat:@"3rd INNS %@",objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME];
+         [self.Btn_inning2steam1 setTitle: [NSString stringWithFormat:ThirdinningsTeamName] forState: UIControlStateNormal];
+        self. Btn_inning2steam1.userInteractionEnabled=YES;
+        self.lbl_2seprator.hidden=NO;
+    }
+    
+    if(![objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqualToString:@""])
+    {
+    NSString *FourinningsTeamName=([objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME isEqualToString:@""] || objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME == nil)?@"":[NSString stringWithFormat:@"4th INNS %@",objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME];
+        
+    [self.Btn_innings2team2 setTitle: [NSString stringWithFormat:FourinningsTeamName] forState: UIControlStateNormal];
+         self. Btn_innings2team2.userInteractionEnabled=YES;
+        self.lbl_3seprator.hidden=NO;
+    }
+    
+    
+    
+    
+    
+    
 
     //self.inningsviewWidth.constant =totalwidth;
     //self.btn_innings1Widthposition.constant=400;

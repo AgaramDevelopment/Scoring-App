@@ -143,6 +143,8 @@
     BOOL isWagonwheel;
     BOOL isAppeal;
     
+    BOOL isToss;
+    
     NSMutableArray *strickerList;
     NSMutableArray *nonStrickerList;
     
@@ -552,6 +554,11 @@
                                                               blue:0
                                                              alpha:0.36]];
     
+      [self MatcheventMethod];
+    [self getLastBowlerDetails];
+}
+-(void)MatcheventMethod
+{
     int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
     _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAKS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
@@ -581,12 +588,7 @@
         if (inningsno == 1 || inningsno == 4)
             [_rightSlideArray removeObject : @"FOLLOW ON"];
     }
-    
-    
-    
-    [self getLastBowlerDetails];
 }
-
 -(void)getLastBowlerDetails{
     //Get Last bowler details
     fetchLastBowler = [[FetchLastBowler alloc]init];
@@ -1611,6 +1613,7 @@
 
 - (void)handleSwipeFromRightside:(UISwipeGestureRecognizer *)recognizer
 {
+   
     
     [UIView animateWithDuration:5.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{ self.sideviewXposition.constant =-300;
         self.commonViewXposition.constant=0;
@@ -1623,7 +1626,13 @@
 }
 - (void)handleSwipeFromLeftside:(UISwipeGestureRecognizer *)recognizer
 {
-    
+    if(isToss==NO)
+    {
+   
+        [self MatcheventMethod];
+        [self.sideviewtable reloadData  ];
+        isToss=YES;
+    }
     self.sideviewXposition.constant =0;
     self.commonViewXposition.constant=300;
     self.commonViewwidthposition.constant =768;
@@ -2301,16 +2310,19 @@
         [self.navigationController popViewControllerAnimated:YES];
         }
     }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){ // Check Is Over started
+       
         
-        if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
+    if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
         {
             
-             if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
-                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                [alter show];
-                [alter setTag:10004];
-            }
-             else if(fetchSEPageLoadRecord.currentBowlerPlayerName==nil){
+//             if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
+//                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                [alter show];
+//                [alter setTag:10004];
+//            }
+//             else
+            
+                 if(fetchSEPageLoadRecord.currentBowlerPlayerName==nil){
                 UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select bowler" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alter show];
                 [alter setTag:10001];
@@ -2355,7 +2367,7 @@
                     [self selectedViewBg:_view_rtw];
                 }
                 
-                if(fetchSeBallCodeDetails.ISFREEHIT.intValue ==1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
+                if(fetchSEPageLoadRecord.ISFREEHIT.intValue ==1 && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){
                      UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit Ball" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //                    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Free Hit" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Alert", nil];
                     [alter show];
@@ -2397,7 +2409,12 @@
         
         
         [self timeLeftSinceDate:startBallTime];
-        NSLog(@"DidClickStartBall batteamover=%d",fetchSEPageLoadRecord.BATTEAMOVERS);
+        NSLog(@"DidClickStartBall batteamover=%@",fetchSEPageLoadRecord.FIRSTINNINGSOVERS);
+        if([fetchSEPageLoadRecord.FIRSTINNINGSOVERS isEqualToString:@"0.1"])
+        {
+            isToss =NO;
+        }
+
         int overNo = ((int)fetchSEPageLoadRecord.BATTEAMOVERS);
         int ballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;//Check isillegal ball for pervious ball
         int overballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
@@ -3048,6 +3065,12 @@
     {
         
         
+//        else if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
+//            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//            [alter show];
+//            [alter setTag:10004];
+//        }
+        
         if(fetchSEPageLoadRecord.currentBowlerPlayerName==nil){
             UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select bowler" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
@@ -3060,28 +3083,26 @@
             UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please select non Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             [alter setTag:10003];
-        }else if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
-            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alter show];
-            [alter setTag:10004];
         }else{
-            [self overEVENT];
-            self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
-            [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
-            if(![self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
-                [self DidClickStartBall : self.btn_StartBall];
-            self.btn_StartBall.userInteractionEnabled=YES;
+            BOOL isInningsCompleted = [self overEVENT];
+            if(!isInningsCompleted){
+                self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
+                [self.btn_StartOver setTitle:@"END OVER" forState:UIControlStateNormal];
+                if(![self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
+                    [self DidClickStartBall : self.btn_StartBall];
+                self.btn_StartBall.userInteractionEnabled=YES;
+            }
         }
         
     }
     else
     {
         
-         if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
-            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-            [alter show];
-            [alter setTag:10004];
-         }else{
+//         if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
+//            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//            [alter show];
+//            [alter setTag:10004];
+//         }else{
         [self overEVENT];
         
         //Check for Striker, non Striker and bower present
@@ -3095,7 +3116,7 @@
             [self btn_nonstricker_name:0];
 
         }
-         }
+         
         
         //        [self.btn_StartOver setTitle:@"START OVER" forState:UIControlStateNormal];
         //        self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
@@ -3122,8 +3143,10 @@
 }
 
 
--(void)overEVENT
+-(BOOL)overEVENT
 {
+    
+    BOOL isInningsCompleted = NO;
     DBManager *objDBManager = [[DBManager alloc]init];
     //endInnings=[[EndInnings alloc]init ];
     NSLog(@"matchtype=%@",self.matchTypeCode);
@@ -3178,7 +3201,7 @@
             else if([ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.BATTEAMOVERS >=[fetchSEPageLoadRecord.MATCHOVERS intValue]  && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
             {
                 NSLog(@"%@",self.matchTypeCode);
-                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Inning is Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Inning is Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [altert setTag:1001];
                 [altert show];
                 
@@ -3186,11 +3209,14 @@
                 {
                     //NSLog(@"Match Result");
                     [self MatchResult];
+                    isInningsCompleted = YES;
+
                 }
                 else
                 {
                     //NSLog(@"ENNDings");
                     [self ENDINNINGS];
+                    isInningsCompleted = YES;
                 }
                 
             }
@@ -3331,7 +3357,7 @@
         [altert show];
     }
     
-    
+    return isInningsCompleted;
 }
 
 
@@ -6995,7 +7021,7 @@ self.lbl_umpirename.text=@"";
         }
         
         
-    }
+    }else{
     
     if (tableView == self.table_AppealSystem)
     {
@@ -7905,8 +7931,8 @@ self.lbl_umpirename.text=@"";
         self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
     }
     
-    
-    
+}
+
     
     NSLog(@"Index Path %d",indexPath.row);
     
@@ -8727,6 +8753,7 @@ self.lbl_umpirename.text=@"";
     revisedTarget.matchCode =self.matchCode;
     revisedTarget.teamCode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
     revisedTarget.inningsno=fetchSEPageLoadRecord.INNINGSNO;
+     revisedTarget.matchTypeCode=self.matchTypeCode;
     [fullview addSubview:revisedTarget.view];
     
     
@@ -12396,6 +12423,7 @@ self.lbl_umpirename.text=@"";
     revicedOverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
     revicedOverVc.matchCode=self.matchCode;
     revicedOverVc.competitionCode =self.competitionCode;
+    revicedOverVc.matchTypeCode=self.matchTypeCode;
     revicedOverVc.delegate=self;
     [fullview addSubview:revicedOverVc.view];
     

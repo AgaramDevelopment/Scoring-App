@@ -26,7 +26,7 @@
 @property(strong,nonatomic) IBOutlet UIButton * btn_submit;
 
 @property (strong, nonatomic) IBOutlet UITextView *txt_commentss;
-
+@property(strong,nonatomic)NSString *matchTypeCode;
 
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;

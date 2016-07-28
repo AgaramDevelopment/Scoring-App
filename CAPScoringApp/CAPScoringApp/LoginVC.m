@@ -345,15 +345,17 @@
         self.txt_password.secureTextEntry = NO;
       
         _eye_imgview.image = [UIImage imageNamed:@"eyeImgSelect.png"];
-        self.txt_password.font= [UIFont fontWithName:@"Rajdhani-Bold" size:28];
+      //  self.txt_password.font= [UIFont fontWithName:@"Rajdhani-Bold" size:28];
+        self.txt_password.font= [UIFont fontWithName:@"Rajdhani-Bold" size:31];
+        self.txt_password.font = [UIFont fontWithName:@"Rajdhani-Bold" size:30.0f];
     }
     else
     {
         self.txt_password.secureTextEntry = YES;
             self.txt_password.clearsOnBeginEditing = NO;
          _eye_imgview.image = [UIImage imageNamed:@"ico-show-pwd.png"];
-        self.txt_password.font= [UIFont fontWithName:@"Rajdhani-Bold" size:28];
-         self.txt_password.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20.0f];
+        self.txt_password.font= [UIFont fontWithName:@"Rajdhani-Bold" size:31];
+        self.txt_password.font = [UIFont fontWithName:@"Rajdhani-Bold" size:30.0f];
            self.txt_password.clearsOnBeginEditing = NO;
         
     }
