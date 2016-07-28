@@ -348,7 +348,7 @@ NSRegularExpression *isMatchedByRegex;
     if (![self textValidation:self.txt_overs.text]) {
         
         
-        [self showDialog:@"Please Enter Valid Overs" andTitle:@"Error"];
+        [self showDialog:@"Please Enter Valid Overs" andTitle:@"Match Setup"];
         
     }else{
         [self overValidation];
@@ -366,7 +366,7 @@ NSRegularExpression *isMatchedByRegex;
  * Show message for given title and cntent
  */
 -(void) showDialog:(NSString*) message andTitle:(NSString*) title{
-    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     
     [alertDialog show];
 }
@@ -405,10 +405,10 @@ NSRegularExpression *isMatchedByRegex;
     
     if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){
         if(twentyText > 20){
-            [self showDialog:@"Please Enter Below 20 Overs" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Below 20 Overs" andTitle:@"Match Setup"];
         }else if (twentyText == 0){
             
-            [self showDialog:@"Please Enter Overs" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Overs" andTitle:@"Match Setup"];
         }
         
         else if (teamCountA >= 7 && teamCountB >= 7){

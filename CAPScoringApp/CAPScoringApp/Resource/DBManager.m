@@ -1,4 +1,4 @@
-//
+        //
 //  DBManager.m
 //  CAP
 //
@@ -96,7 +96,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
     {
         
-        NSString *query=[NSString stringWithFormat:@"select * FROM COMPETITION CP INNER JOIN  MATCHSCORERDETAILS MSD ON CP.COMPETITIONCODE = MSD.COMPETITIONCODE AND MSD.SCORERCODE = '%@' GROUP BY MSD.COMPETITIONCODE",userCode];
+        NSString *query=[NSString stringWithFormat:@"SELECT  COM.COMPETITIONCODE,COM.COMPETITIONNAME,COM.RECORDSTATUS FROM COMPETITION COM INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE=COM.COMPETITIONCODE AND MATCHSTATUS IN('MSC123','MSC281')INNER JOIN MATCHSCORERDETAILS MATSC ON MR.COMPETITIONCODE=MATSC.COMPETITIONCODE AND MR.MATCHCODE=MATSC.MATCHCODE WHERE   MATSC.SCORERCODE='%@'",userCode];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -105,7 +105,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 //            record.id=(int)sqlite3_column_int(statement, 0);
                 record.competitioncode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.competitionname=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.recordstatus=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
+                record.recordstatus=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
                 [eventArray addObject:record];
                 
             }
@@ -2131,7 +2131,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
 }
 
--(NSString *)getTEMPBOWLPENALTY:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE BOWLINGTEAMCODE:(NSString *)BOWLINGTEAMCODE{
+-(NSString *)getTEMPBOWLPENALTY:(NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE BOWLINGTEAMCODE:(NSString *)BOWLINGTEAMCODE INNINGSNO:(NSString *)INNINGSNO{
     int retVal;
     NSString *databasePath =[self getDBPath];
     //  const char *dbpath = [databasePath UTF8String];
@@ -2142,7 +2142,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
         
-        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO <= @INNINGSNO AND (AWARDEDTOTEAMCODE = '%@') AND (BALLCODE IS NULL OR PENALTYTYPECODE = 'MSC135')",COMPETITIONCODE,MATCHCODE,BOWLINGTEAMCODE];
+        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO <= '%@' AND (AWARDEDTOTEAMCODE = '%@') AND ((BALLCODE IS NULL OR BALLCODE = '(null)') OR PENALTYTYPECODE = 'MSC135')",COMPETITIONCODE,MATCHCODE,INNINGSNO,BOWLINGTEAMCODE];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -2175,7 +2175,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
         
-        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO < '%@' - 1 AND AWARDEDTOTEAMCODE = '%@' AND ((INNINGSNO = @INNINGSNO AND BALLCODE IS NULL) OR ((INNINGSNO < @INNINGSNO - 1 AND BALLCODE IS NULL) OR PENALTYTYPECODE = 'MSC135'))",COMPETITIONCODE,MATCHCODE,INNINGSNO,BATTINGTEAMCODE];
+        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO < '%@' - 1 AND AWARDEDTOTEAMCODE = '%@' AND ((INNINGSNO = '%@' AND BALLCODE IS NULL) OR ((INNINGSNO < '%@' - 1 AND (BALLCODE IS NULL OR BALLCODE = '(null)')) OR PENALTYTYPECODE = 'MSC135'))",COMPETITIONCODE,MATCHCODE,INNINGSNO,BATTINGTEAMCODE,INNINGSNO,INNINGSNO];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -4763,11 +4763,17 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
+                 FetchSEPageLoadRecord *record = [[FetchSEPageLoadRecord alloc]init];
+                NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+                f.numberStyle = NSNumberFormatterDecimalStyle;
+                record.T_TARGETRUNS = [f numberFromString:[self getValueByNull:statement :0]];
+                record.T_TARGETOVERS = [f numberFromString:[self getValueByNull:statement :1]];
+
                 
-                FetchSEPageLoadRecord *record = [[FetchSEPageLoadRecord alloc]init];
-                NSNumber  *targetRuns = [NSNumber numberWithInteger: [record.T_TARGETRUNS integerValue]];
-                NSNumber *targetOvers = [NSNumber numberWithInteger:[record.T_TARGETOVERS integerValue]];
-                //record.T_TARGETRUNS = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+//                FetchSEPageLoadRecord *record = [[FetchSEPageLoadRecord alloc]init];
+//                NSNumber  *targetRuns = [NSNumber numberWithInteger: [record.T_TARGETRUNS integerValue]];
+//                NSNumber *targetOvers = [NSNumber numberWithInteger:[record.T_TARGETOVERS integerValue]];
+//                //record.T_TARGETRUNS = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 [eventArray addObject:record];
                 
             }
@@ -5198,7 +5204,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
     {
         
-        NSString *query = [NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO <= '%@' AND AWARDEDTOTEAMCODE = '%@' AND (BALLCODE IS NULL OR PENALTYTYPECODE = 'MSC135')",COMPETITIONCODE,MATCHCODE,INNINGSNO, BATTINGTEAMCODE];
+        NSString *query = [NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0)FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO <= '%@' AND AWARDEDTOTEAMCODE = '%@' AND ((BALLCODE IS NULL OR BALLCODE = '(null)') OR PENALTYTYPECODE = 'MSC135')",COMPETITIONCODE,MATCHCODE,INNINGSNO, BATTINGTEAMCODE];
         stmt=[query UTF8String];
         
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
@@ -9208,7 +9214,7 @@ return @"";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BE.BOWLERCODE,PM.PLAYERNAME,BE.OVERNO FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE = BE.BOWLERCODE WHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@' AND BE.INNINGSNO = '%@' GROUP BY BE.BOWLERCODE,PM.PLAYERNAME,BE.OVERNO ORDER BY BE.OVERNO",Competitioncode,Matchcode,inningsno];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT group_concat(PLAYERNAME, ' + '),overno FROM (SELECT PM.PLAYERNAME,BE.OVERNO FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE = BE.BOWLERCODE WHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@' AND BE.INNINGSNO = '%@' GROUP BY PM.PLAYERNAME,BE.OVERNO)GROUP BY overno ORDER BY OVERNO;",Competitioncode,Matchcode,inningsno];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
@@ -9216,9 +9222,9 @@ return @"";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 OversorderRecord * objOversorderRecord=[[OversorderRecord alloc]init];
-                objOversorderRecord.BowlerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                objOversorderRecord.BowlerName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                objOversorderRecord.OversOrder=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+//                objOversorderRecord.BowlerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                objOversorderRecord.BowlerName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                objOversorderRecord.OversOrder=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 
                 [BOWLEROVERSORDER addObject:objOversorderRecord];
             }

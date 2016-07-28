@@ -23,6 +23,7 @@
     NSString * matchCode;
     NSString * matchTypeCode;
     NSMutableArray *mSetUp ;
+    BOOL isEdit;
 }
 @property(nonatomic,strong) NSMutableArray* FetchCompitionArray;
 @property (nonatomic, strong) NSMutableArray *cellsCurrentlyEditing;
@@ -36,16 +37,22 @@ NSArray *MuliteDayMatchtype;
 - (void)viewDidLoad {
     [super viewDidLoad];
     MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
-
+    
+    [self customnavigationmethod];
+    isEdit=NO;
+}
+-(void)viewWillAppear:(BOOL)animated
+{
     FetchCompitionArray=[[NSMutableArray alloc]init];
     self.cellsCurrentlyEditing = [NSMutableArray array];
-    
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
-    DBManager *objDBManager = [[DBManager alloc]init];
-
+     DBManager *objDBManager = [[DBManager alloc]init];
     FetchCompitionArray =[objDBManager ArchivesFixturesData :self.CompitionCode:userCode];
-    [self customnavigationmethod];
+    if(isEdit== YES)
+    {
+        [self.tbl_archive reloadData];
+    }
 }
 -(void)customnavigationmethod
 {
@@ -223,6 +230,7 @@ NSArray *MuliteDayMatchtype;
 #pragma mark - SwipeableCellDelegate
 - (void)RightSideEditBtnAction:(UIButton *)sender
 {
+    isEdit=YES;
     UIButton *button = (UIButton *)sender;
 
     FixturesRecord *objFixtureRecord=(FixturesRecord*)[FetchCompitionArray objectAtIndex:button.tag];
@@ -248,7 +256,7 @@ NSArray *MuliteDayMatchtype;
     NSLog(@"the butto, on cell number... %d", button.tag);
     
     FixturesRecord *objFixtureRecord=(FixturesRecord*)[FetchCompitionArray objectAtIndex:button.tag];
-    NSMutableArray *mSetUp = [[NSMutableArray alloc]init];
+     mSetUp = [[NSMutableArray alloc]init];
     [mSetUp addObject:objFixtureRecord];
     
     if([objFixtureRecord.MatchStatus isEqualToString:@"MSC124"]||[objFixtureRecord.MatchStatus isEqualToString:@"MSC240"])

@@ -586,7 +586,9 @@
                                                     <rect key="frame" x="374" y="5" width="40" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="310" id="VnU-em-zSY"/>
-                                                        <constraint firstAttribute="height" constant="54" id="fuB-6Y-fJK"/>
+                                                        <constraint firstAttribute="height" constant="54" id="fuB-6Y-fJK">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <inset key="contentEdgeInsets" minX="260" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" image="dropDown"/>
@@ -638,7 +640,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="5j6-Lp-IE1" secondAttribute="trailing" constant="52" id="gh8-bn-kRQ"/>
                                                 <constraint firstAttribute="bottom" secondItem="5j6-Lp-IE1" secondAttribute="bottom" id="h9M-YP-5xE"/>
                                                 <constraint firstItem="5j6-Lp-IE1" firstAttribute="top" secondItem="Co6-1X-G2C" secondAttribute="top" id="hny-zC-Coe"/>
-                                                <constraint firstAttribute="bottom" secondItem="nLm-Re-OGb" secondAttribute="bottom" constant="-4" id="kcT-FI-EU7"/>
+                                                <constraint firstAttribute="bottom" secondItem="nLm-Re-OGb" secondAttribute="bottom" constant="-4" id="kcT-FI-EU7">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                                </constraint>
                                                 <constraint firstAttribute="trailing" secondItem="nLm-Re-OGb" secondAttribute="trailing" id="nGD-b9-Uck"/>
                                             </constraints>
                                             <variation key="default">
@@ -744,7 +748,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tJf-7e-A2i">
                                                     <rect key="frame" x="374" y="5" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="54" id="8bh-pz-P6u"/>
+                                                        <constraint firstAttribute="height" constant="54" id="8bh-pz-P6u">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <inset key="imageEdgeInsets" minX="260" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" image="dropDown"/>
@@ -788,7 +794,9 @@
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                             <constraints>
                                                 <constraint firstItem="tJf-7e-A2i" firstAttribute="top" secondItem="R71-1f-LaM" secondAttribute="top" id="8Sz-b4-AUG"/>
-                                                <constraint firstAttribute="bottom" secondItem="tJf-7e-A2i" secondAttribute="bottom" constant="-4" id="9Q1-6H-Cum"/>
+                                                <constraint firstAttribute="bottom" secondItem="tJf-7e-A2i" secondAttribute="bottom" constant="-4" id="9Q1-6H-Cum">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                                </constraint>
                                                 <constraint firstAttribute="bottom" secondItem="bgG-Pn-Zy4" secondAttribute="bottom" id="bPL-3C-FeD"/>
                                                 <constraint firstItem="bgG-Pn-Zy4" firstAttribute="top" secondItem="R71-1f-LaM" secondAttribute="top" id="bd4-bZ-yRa"/>
                                                 <constraint firstAttribute="height" constant="50" id="j71-8i-Vdn"/>
@@ -894,7 +902,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k7B-Zh-NdQ">
                                                     <rect key="frame" x="374" y="5" width="40" height="40"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="54" id="2fu-VO-kma"/>
+                                                        <constraint firstAttribute="height" constant="54" id="2fu-VO-kma">
+                                                            <variation key="heightClass=regular-widthClass=regular" constant="50"/>
+                                                        </constraint>
                                                     </constraints>
                                                     <inset key="contentEdgeInsets" minX="260" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                     <state key="normal" image="dropDown"/>
@@ -942,7 +952,9 @@
                                                 <constraint firstAttribute="trailing" secondItem="k7B-Zh-NdQ" secondAttribute="trailing" id="BY3-51-YT2"/>
                                                 <constraint firstItem="k7B-Zh-NdQ" firstAttribute="leading" secondItem="wdm-tZ-Kch" secondAttribute="leading" id="CAx-as-Lop"/>
                                                 <constraint firstItem="tkY-NB-1uL" firstAttribute="leading" secondItem="wdm-tZ-Kch" secondAttribute="leading" constant="8" id="JEA-Fo-s1k"/>
-                                                <constraint firstAttribute="bottom" secondItem="k7B-Zh-NdQ" secondAttribute="bottom" constant="-4" id="Wtt-hH-cv4"/>
+                                                <constraint firstAttribute="bottom" secondItem="k7B-Zh-NdQ" secondAttribute="bottom" constant="-4" id="Wtt-hH-cv4">
+                                                    <variation key="heightClass=regular-widthClass=regular" constant="0.0"/>
+                                                </constraint>
                                                 <constraint firstAttribute="height" constant="50" id="fjI-YG-4Rf"/>
                                                 <constraint firstItem="tkY-NB-1uL" firstAttribute="top" secondItem="wdm-tZ-Kch" secondAttribute="top" id="pIU-ot-5Q3"/>
                                                 <constraint firstAttribute="width" constant="310" id="wGq-lH-LcJ"/>

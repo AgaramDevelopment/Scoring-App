@@ -361,29 +361,8 @@
 
 -(IBAction)didClickChangeToss:(id)sender
 {
-    if([self.lbl_Tosswon.text isEqualToString:@""] || self.lbl_Tosswon.text==nil && [self.lbl_ElectedTo.text isEqualToString:@""] || self.lbl_ElectedTo.text==nil && [self.lbl_Stricker.text isEqualToString:@""] || self.lbl_Stricker.text==nil && [self.lbl_NonStricker.text isEqualToString:@""] || self.lbl_NonStricker.text==nil && [self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)
+    if([self formValidation ])
     {
-        [self ShowAlterView:@"Please Select Team,ElectedTo,Striker,NonStriker And Bowler"];
-    }
-       else if([self.lbl_Tosswon.text isEqualToString:@""] || self.lbl_Tosswon.text==nil)
-        {
-            [self ShowAlterView:@"Please Select Team"];
-        }
-        else if([self.lbl_ElectedTo.text isEqualToString:@""] || self.lbl_ElectedTo.text==nil)
-        {
-            [self ShowAlterView:@"Please Select ElectedTo"];
-        }
-        else if([self.lbl_Stricker.text isEqualToString:@""] || self.lbl_Stricker.text==nil)
-        {
-            [self ShowAlterView:@"Please Select Striker"];
-        }
-        else if([self.lbl_NonStricker.text isEqualToString:@""] || self.lbl_NonStricker.text==nil)
-        {
-            [self ShowAlterView:@"Please Select NonStriker"];
-        }
-        else if([self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)
-        {
-            [self ShowAlterView:@"Please Select Bowler"];
         }
         else{
             DBManagerChangeTeam *objDBManagerChangeTeam = [[DBManagerChangeTeam alloc] init];
@@ -393,7 +372,27 @@
         }
     
 }
-
+- (BOOL) formValidation
+{
+    NSString *alterTosswon,*alterElectorto,*alterStricker,*alterNonstricker,*alterBowler;
+    
+    alterTosswon=([self.lbl_Tosswon.text isEqualToString:@""]||self.lbl_Tosswon.text == nil)? @"Team":@"";
+    alterElectorto=([self.lbl_ElectedTo.text isEqualToString:@""]||self.lbl_ElectedTo.text == nil)? @"ElectedTo":@"";
+    alterStricker=([self.lbl_Stricker.text isEqualToString:@""]||self.lbl_Stricker.text ==@"(null)")? @"Striker":@"";;
+    alterNonstricker=([self.lbl_NonStricker.text isEqualToString:@""]||self.lbl_NonStricker.text == @"(null)")? @"NonStriker":@"";
+    alterBowler=([self.lbl_Bowler.text isEqualToString:@""]||self.lbl_Bowler.text == nil)? @"Bowler":@"";
+    if([self.lbl_Tosswon.text isEqualToString:@""] || self.lbl_Tosswon.text==nil && [self.lbl_ElectedTo.text isEqualToString:@""] || self.lbl_ElectedTo.text==nil && [self.lbl_Stricker.text isEqualToString:@""] || self.lbl_Stricker.text==nil && [self.lbl_NonStricker.text isEqualToString:@""] || self.lbl_NonStricker.text==nil && [self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Team \n ElectedTo \n Striker \n NonStriker \n  Bowler"];
+        return YES;
+    }
+        else if (alterTosswon!=@""||alterElectorto!=@""||alterStricker!=@""||alterNonstricker!=@""||alterBowler!=@"")
+    {
+        [self ShowAlterView:[NSString stringWithFormat:@"Please Select %@\n%@\n%@\n%@\n%@",alterTosswon,alterElectorto,alterStricker,alterNonstricker,alterBowler]];
+        return YES;
+    }
+    return NO;
+}
 -(IBAction)didClickBackBtnAction:(id)sender
 {
     [self.delegate ChangeVCBackBtnAction];

@@ -278,7 +278,12 @@
             T_TOTALRUNS=[NSNumber numberWithInt:0];
 
             
-            int calcRun = (TOTALRUNS.intValue + (  WIDE.intValue > 0 ? WIDE.intValue-1 : WIDE.intValue) +( NOBALL.intValue > 0 ? NOBALL.intValue-1 : NOBALL.intValue) + LEGBYES.intValue + BYES.intValue + ((BYES.intValue > 0 || LEGBYES.intValue > 0) ? OVERTHROW.intValue : 0 ));
+            int calcRun = (TOTALRUNS.intValue +
+                          (NOBALL.intValue > 0 ? NOBALL.intValue-1 : NOBALL.intValue) +
+                          (OVERTHROW.intValue == 0 ?
+                           (WIDE.intValue > 0 ? WIDE.intValue - 1 : WIDE.intValue) + LEGBYES.intValue + BYES.intValue :
+                           ((WIDE.intValue > 0 ? WIDE.intValue - 1 : WIDE.intValue) + LEGBYES.intValue + BYES.intValue - OVERTHROW.intValue))
+                           + OVERTHROW.intValue);
             T_TOTALRUNS= [NSNumber numberWithInt:calcRun];
             
             T_STRIKERCODE  = STRIKERCODE;
@@ -289,8 +294,6 @@
             {
                 T_STRIKERCODE = NONSTRIKERCODE;
                 T_NONSTRIKERCODE = STRIKERCODE;
-                
-                
             }
             
             [dbInsertScoreEngine UpdateInningsEventEventsForInsertScoreEngine :  T_STRIKERCODE : T_NONSTRIKERCODE :BOWLERCODE  : COMPETITIONCODE    : MATCHCODE       : TEAMCODE       : INNINGSNO];

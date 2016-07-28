@@ -805,16 +805,16 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
         flag = NO;
     }
     
-    if(![_txtf_team_a_point.text isEqual:@""] && ([_txtf_team_a_point.text intValue]<0 || [_txtf_team_a_point.text intValue]>9)){
+    if(![self textValidation:_txtf_team_a_point.text] && ([_txtf_team_a_point.text intValue]<0 || [_txtf_team_a_point.text intValue]>9)){
         errorMessage = [NSString stringWithFormat:@"%@%@",errorMessage,@"Please enter A point between 0 to 9.\n"];
         flag = NO;
-    }else if(![_txtf_team_b_point.text isEqual:@""] && ([_txtf_team_b_point.text intValue]<0 || [_txtf_team_b_point.text intValue]>9)){
+    }else if(![self textValidation:_txtf_team_b_point.text] && ([_txtf_team_b_point.text intValue]<0 || [_txtf_team_b_point.text intValue]>9)){
         errorMessage = [NSString stringWithFormat:@"%@%@",errorMessage,@"Please enter point between 0 to 9.\n"];
         flag = NO;
     }
     
     if(![errorMessage isEqual:@""]){
-        [self showDialog:errorMessage andTitle:@""];
+        [self showDialog:errorMessage andTitle:@"MatchResult"];
     }
     
     return flag;
@@ -824,7 +824,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
  * Show message for given title and content
  */
 -(void) showDialog:(NSString*) message andTitle:(NSString*) title{
-    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     
     [alertDialog show];
 }
@@ -913,5 +913,19 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
     }
 }
 
+
+-(BOOL)textValidation:(NSString*) validation{
+    
+    NSCharacterSet *charcter =[[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+    NSString *filtered;
+    
+    filtered = [[validation componentsSeparatedByCharactersInSet:charcter] componentsJoinedByString:@""];
+    return [validation isEqualToString:filtered];
+    
+    
+    
+    
+    
+}
 
 @end

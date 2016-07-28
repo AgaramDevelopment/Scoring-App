@@ -1232,7 +1232,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.BOWLERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.BOWLERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 record.OVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                record.ECONOMY=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.ECONOMY=[self getValueByNull:statement :3];
              
                 //record.BOWLERSPELL=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
                 //record.TOTALRUNS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
