@@ -242,14 +242,18 @@
               
                 
                 
-                bool CheckStatus1=[objDBMANAGERSYNC Matchregistration:MATCHCODE];
+               
+                 bool CheckStatus2=[objDBMANAGERSYNC CheckAlreadySyncMatchregistration:MATCHCODE];
+                if (CheckStatus2==NO) {
+                   bool CheckStatus1=[objDBMANAGERSYNC Matchregistration:MATCHCODE];
+               
                 if (CheckStatus1==YES) {
                     [objDBMANAGERSYNC UpdateMatchregistration:MATCHCODE:MATCHNAME:COMPETITIONCODE:MATCHOVERS:MATCHOVERCOMMENTS:MATCHDATE:ISDAYNIGHT:ISNEUTRALVENUE:GROUNDCODE:TEAMACODE:TEAMBCODE:TEAMACAPTAIN:TEAMAWICKETKEEPER:TEAMBCAPTAIN:TEAMBWICKETKEEPER:UMPIRE1CODE:UMPIRE2CODE:UMPIRE3CODE:MATCHREFEREECODE:MATCHRESULT:MATCHRESULTTEAMCODE:TEAMAPOINTS:TEAMBPOINTS:MATCHSTATUS: RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE:ISDEFAULTORLASTINSTANCE];
                 }
                 else{
                     [objDBMANAGERSYNC InsertMatchregistration:MATCHCODE: MATCHNAME:COMPETITIONCODE:MATCHOVERS: MATCHOVERCOMMENTS:MATCHDATE:ISDAYNIGHT: ISNEUTRALVENUE: GROUNDCODE:TEAMACODE:TEAMBCODE:TEAMACAPTAIN:TEAMAWICKETKEEPER:TEAMBCAPTAIN:TEAMBWICKETKEEPER: UMPIRE1CODE: UMPIRE2CODE:UMPIRE3CODE:MATCHREFEREECODE:MATCHRESULT: MATCHRESULTTEAMCODE: TEAMAPOINTS:TEAMBPOINTS:MATCHSTATUS:RECORDSTATUS:CREATEDBY:CREATEDDATE: MODIFIEDBY:MODIFIEDDATE:ISDEFAULTORLASTINSTANCE];
                 }
-               
+                }
                 
             }
             
@@ -733,7 +737,7 @@
     
        
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:@"Alert"
+                                  initWithTitle:@"DashBorad"
                                   message:@"Failed"
                                   delegate:nil //or self
                                   cancelButtonTitle:@"Failed"
@@ -750,7 +754,7 @@
      }
     
      else{
-          [self showDialog:@"Network Error" andTitle:@"Alert"];
+          [self showDialog:@"Network Error" andTitle:@"DashBorad"];
      }
     
 }
@@ -839,6 +843,7 @@
         [self.navigationController pushViewController:loginVC animated:YES];
 
     }
+   }
     else
     {
         NSLog(@"user pressed Button Indexed 1");
@@ -848,7 +853,7 @@
         [self.navigationController pushViewController:dashBoard animated:YES];
         //Fixvc.CompitionCode=selectindexarray;
             }
-}
+
 }
 
 

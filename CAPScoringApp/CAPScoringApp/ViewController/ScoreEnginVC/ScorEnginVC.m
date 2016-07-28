@@ -12347,6 +12347,7 @@ self.lbl_umpirename.text=@"";
     revicedOverVc = [[RevicedOverVC alloc]initWithNibName:@"RevicedOverVC" bundle:nil];
     revicedOverVc.matchCode=self.matchCode;
     revicedOverVc.competitionCode =self.competitionCode;
+    revicedOverVc.matchTypeCode=self.matchTypeCode;
     revicedOverVc.delegate=self;
     [fullview addSubview:revicedOverVc.view];
     
