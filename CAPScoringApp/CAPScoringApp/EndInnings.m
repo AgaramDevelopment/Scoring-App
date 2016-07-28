@@ -197,6 +197,7 @@
 //@synthesize RESULTCODE;
 //@synthesize RESULTTYPE;
 EndInningsVC *save;
+EndInnings *insertScoreCard;
 
 
 
@@ -513,8 +514,7 @@ EndInningsVC *save;
             
             ballNo = 1;
             
-            
-            
+
             while(ballNo >= 1 && ballNo <= 6)
             {
                 MAXID=[dbEndInnings GetMaxidFormanageOverDetails :MATCHCODE];
@@ -530,9 +530,11 @@ EndInningsVC *save;
                 
                 
                 //EXEC SP_INSERTSCOREBOARD
+    
+                WICKETOVERNO = overNo;
                 
                 [self insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
-                
+               
                 ballNo = ballNo+1;
             }
         }
@@ -626,8 +628,7 @@ EndInningsVC *save;
 -(void)insertScordBoard:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO
 {
     
-    
-    
+
     DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
     
     ISWKTDTLSUPDATE = [NSNumber numberWithInt:1];
@@ -904,7 +905,7 @@ EndInningsVC *save;
     ISWICKETCOUNTABLE = [NSNumber numberWithInt:0];
     
     
-    ISOVERCOMPLETE=[dbEndInnings GetOverStatusForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO :WICKETOVERNO];
+    ISOVERCOMPLETE=[dbEndInnings GetOverStatusForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO :WICKETOVERNO];
     
     BOWLERCOUNT = [NSNumber numberWithInt:1];
     
