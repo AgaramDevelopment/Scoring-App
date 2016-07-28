@@ -500,7 +500,7 @@ EndInnings *insertScoreCard;
     if(![dbEndInnings GetOverNoFormanageOverDetails : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO :overNo])
     {
         [dbEndInnings  InsertOverEventFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO :overNo: OverStatus ];
-        [dbEndInnings InsertBowlerOverDetailsFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO :overNo:objBallEventRecord.objBowlercode];
+        [dbEndInnings InsertBowlerOverDetailsFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO :overNo:BowlerCode];
     }
     else
     {
@@ -554,7 +554,12 @@ EndInnings *insertScoreCard;
         
         LASTBALLCODE=[dbEndInnings  GetLastBallCodeFormanageOverDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO :overNo :objBatteamwithextraball : objbatTeamOverballsCNT];
         
-        if([[dbEndInnings  GetBallEventCountFormanageOverDetails :COMPETITIONCODE:MATCHCODE:INNINGSNO ] intValue] >0 )
+        NSString *ballCount = [dbEndInnings  GetBallEventCountFormanageOverDetails :COMPETITIONCODE:MATCHCODE:INNINGSNO];
+        
+        NSNumber *count = [NSNumber numberWithInt:ballCount.intValue];
+        NSLog(@"COUNT %@",count);
+        
+    if(count > 0)
         {
             
             NSMutableArray * GetStrickerNonStrickerDetails=[dbEndInnings GetStrickerNonStrickerRunFormanageOverDetails : LASTBALLCODE];
@@ -583,7 +588,7 @@ EndInnings *insertScoreCard;
             [dbEndInnings  UpdateInningsEventFormanageOverDetails: T_STRIKERCODE : T_NONSTRIKERCODE : COMPETITIONCODE : MATCHCODE :  TEAMCODE : INNINGSNO];
             ISMAIDENOVER=0;
             
-            if([dbEndInnings GetBallNoFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo].intValue!=0)
+            if([dbEndInnings GetBallNoFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo])
             {
                 
                 
@@ -591,7 +596,7 @@ EndInnings *insertScoreCard;
                 
                 BOWLERCOUNT==1;
             }
-            if(![[dbEndInnings GetBowlerCodeFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo]isEqual:@""])
+        if([dbEndInnings GetBowlerCodeFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo])
             {
                 
                 BOWLERCOUNT=[dbEndInnings GetBowlerCountFormanageOverDetails:COMPETITIONCODE :MATCHCODE :INNINGSNO :overNo];
