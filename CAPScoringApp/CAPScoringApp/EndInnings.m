@@ -197,6 +197,7 @@
 //@synthesize RESULTCODE;
 //@synthesize RESULTTYPE;
 EndInningsVC *save;
+EndInnings *insertScoreCard;
 
 
 
@@ -499,7 +500,7 @@ EndInningsVC *save;
     if(![dbEndInnings GetOverNoFormanageOverDetails : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO :overNo])
     {
         [dbEndInnings  InsertOverEventFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO :overNo: OverStatus ];
-        [dbEndInnings InsertBowlerOverDetailsFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO :overNo:objBallEventRecord.objBowlercode];
+        [dbEndInnings InsertBowlerOverDetailsFormanageOverDetails :COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO :overNo:BowlerCode];
     }
     else
     {
@@ -513,8 +514,7 @@ EndInningsVC *save;
             
             ballNo = 1;
             
-            
-            
+
             while(ballNo >= 1 && ballNo <= 6)
             {
                 MAXID=[dbEndInnings GetMaxidFormanageOverDetails :MATCHCODE];
@@ -530,9 +530,11 @@ EndInningsVC *save;
                 
                 
                 //EXEC SP_INSERTSCOREBOARD
+    
+                WICKETOVERNO = overNo;
                 
                 [self insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
-                
+               
                 ballNo = ballNo+1;
             }
         }
@@ -552,7 +554,12 @@ EndInningsVC *save;
         
         LASTBALLCODE=[dbEndInnings  GetLastBallCodeFormanageOverDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO :overNo :objBatteamwithextraball : objbatTeamOverballsCNT];
         
-        if([[dbEndInnings  GetBallEventCountFormanageOverDetails :COMPETITIONCODE:MATCHCODE:INNINGSNO ] intValue] >0 )
+        NSString *ballCount = [dbEndInnings  GetBallEventCountFormanageOverDetails :COMPETITIONCODE:MATCHCODE:INNINGSNO];
+        
+        NSNumber *count = [NSNumber numberWithInt:ballCount.intValue];
+        NSLog(@"COUNT %@",count);
+        
+    if(count > 0)
         {
             
             NSMutableArray * GetStrickerNonStrickerDetails=[dbEndInnings GetStrickerNonStrickerRunFormanageOverDetails : LASTBALLCODE];
@@ -581,7 +588,7 @@ EndInningsVC *save;
             [dbEndInnings  UpdateInningsEventFormanageOverDetails: T_STRIKERCODE : T_NONSTRIKERCODE : COMPETITIONCODE : MATCHCODE :  TEAMCODE : INNINGSNO];
             ISMAIDENOVER=0;
             
-            if([dbEndInnings GetBallNoFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo].intValue!=0)
+            if([dbEndInnings GetBallNoFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo])
             {
                 
                 
@@ -589,7 +596,7 @@ EndInningsVC *save;
                 
                 BOWLERCOUNT==1;
             }
-            if(![[dbEndInnings GetBowlerCodeFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo]isEqual:@""])
+        if([dbEndInnings GetBowlerCodeFormanageOverDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO :overNo])
             {
                 
                 BOWLERCOUNT=[dbEndInnings GetBowlerCountFormanageOverDetails:COMPETITIONCODE :MATCHCODE :INNINGSNO :overNo];
@@ -626,8 +633,7 @@ EndInningsVC *save;
 -(void)insertScordBoard:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO
 {
     
-    
-    
+
     DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
     
     ISWKTDTLSUPDATE = [NSNumber numberWithInt:1];
@@ -904,7 +910,7 @@ EndInningsVC *save;
     ISWICKETCOUNTABLE = [NSNumber numberWithInt:0];
     
     
-    ISOVERCOMPLETE=[dbEndInnings GetOverStatusForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO :WICKETOVERNO];
+    ISOVERCOMPLETE=[dbEndInnings GetOverStatusForInsertScoreBoard : COMPETITIONCODE: MATCHCODE: TEAMCODE: INNINGSNO :WICKETOVERNO];
     
     BOWLERCOUNT = [NSNumber numberWithInt:1];
     
