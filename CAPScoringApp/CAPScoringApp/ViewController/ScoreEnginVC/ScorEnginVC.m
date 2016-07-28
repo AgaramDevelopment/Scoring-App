@@ -143,6 +143,8 @@
     BOOL isWagonwheel;
     BOOL isAppeal;
     
+    BOOL isToss;
+    
     NSMutableArray *strickerList;
     NSMutableArray *nonStrickerList;
     
@@ -1611,7 +1613,8 @@
 
 - (void)handleSwipeFromRightside:(UISwipeGestureRecognizer *)recognizer
 {
-    //[self MatcheventMethod];
+   
+    
     [UIView animateWithDuration:5.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{ self.sideviewXposition.constant =-300;
         self.commonViewXposition.constant=0;
         self.commonViewwidthposition.constant =self.view.frame.size.width;
@@ -1623,7 +1626,13 @@
 }
 - (void)handleSwipeFromLeftside:(UISwipeGestureRecognizer *)recognizer
 {
-    
+    if(isToss==NO)
+    {
+   
+        [self MatcheventMethod];
+        [self.sideviewtable reloadData  ];
+        isToss=YES;
+    }
     self.sideviewXposition.constant =0;
     self.commonViewXposition.constant=300;
     self.commonViewwidthposition.constant =768;
@@ -2301,9 +2310,9 @@
         [self.navigationController popViewControllerAnimated:YES];
         }
     }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){ // Check Is Over started
+       
         
-        
-        if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
+    if([self.btn_StartBall.currentTitle isEqualToString:@"START BALL"])
         {
             
 //             if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
@@ -2400,7 +2409,12 @@
         
         
         [self timeLeftSinceDate:startBallTime];
-        NSLog(@"DidClickStartBall batteamover=%d",fetchSEPageLoadRecord.BATTEAMOVERS);
+        NSLog(@"DidClickStartBall batteamover=%@",fetchSEPageLoadRecord.FIRSTINNINGSOVERS);
+        if([fetchSEPageLoadRecord.FIRSTINNINGSOVERS isEqualToString:@"0.1"])
+        {
+            isToss =NO;
+        }
+
         int overNo = ((int)fetchSEPageLoadRecord.BATTEAMOVERS);
         int ballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;//Check isillegal ball for pervious ball
         int overballNo = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;

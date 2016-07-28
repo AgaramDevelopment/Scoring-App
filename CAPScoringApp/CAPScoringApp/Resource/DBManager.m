@@ -9208,7 +9208,7 @@ return @"";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BE.BOWLERCODE,PM.PLAYERNAME,BE.OVERNO FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE = BE.BOWLERCODE WHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@' AND BE.INNINGSNO = '%@' GROUP BY BE.BOWLERCODE,PM.PLAYERNAME,BE.OVERNO ORDER BY BE.OVERNO",Competitioncode,Matchcode,inningsno];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT group_concat(PLAYERNAME, ' + '),overno FROM (SELECT PM.PLAYERNAME,BE.OVERNO FROM BALLEVENTS BE INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE = BE.BOWLERCODE WHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@' AND BE.INNINGSNO = '%@' GROUP BY PM.PLAYERNAME,BE.OVERNO)GROUP BY overno ORDER BY OVERNO;",Competitioncode,Matchcode,inningsno];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
@@ -9216,9 +9216,9 @@ return @"";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 OversorderRecord * objOversorderRecord=[[OversorderRecord alloc]init];
-                objOversorderRecord.BowlerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                objOversorderRecord.BowlerName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                objOversorderRecord.OversOrder=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+//                objOversorderRecord.BowlerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                objOversorderRecord.BowlerName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                objOversorderRecord.OversOrder=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 
                 [BOWLEROVERSORDER addObject:objOversorderRecord];
             }
