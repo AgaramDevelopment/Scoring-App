@@ -383,6 +383,9 @@
     
     if (tableView == self.electedTo_table)
     {
+        _Striker_lbl.text = @"";
+        _nonStriker_lbl.text = @"";
+        _Bowler_lbl.text = @"";
         Electedselectindexarray=[[NSMutableArray alloc]init];
         objUserRecord=(UserRecord*)[ElectedToArray objectAtIndex:indexPath.row];
         self.electedTo_lbl.text =[objUserRecord.electedTo uppercaseString];
@@ -512,9 +515,7 @@
     //self.electedTbl_height.constant =self.electedTo_table.contentSize.height;
     if(isEnableTbl==YES)
     {
-        _Striker_lbl.text = @"";
-        _nonStriker_lbl.text = @"";
-        _Bowler_lbl.text = @"";
+        
         ElectedToArray=[[NSMutableArray alloc]init];
         NSMutableArray * FetchElectedToArray =[objDBManager Electedto];
         for(int i=0; i < [FetchElectedToArray count]; i++)

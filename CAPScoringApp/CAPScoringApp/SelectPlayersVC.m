@@ -39,6 +39,10 @@ static NSString * const reuseIdentifier = @"Cell";
     
     [self customnavigationmethod];
     
+    
+    
+    
+    
 //    NSMutableArray *playersCode = [[NSMutableArray alloc]init];
 //    
 //    [playersCode addObject:@"PYC0000001"];
@@ -210,9 +214,9 @@ static NSString * const reuseIdentifier = @"Cell";
     if(self.isEdit){
         for (int i =0; i<self.playingXIPlayers.count; i++)
         {
-            objSelectPlayerRecord=[self.selectedPlayerArray objectAtIndex:i];
-            NSString * objStr =[objSelectPlayerRecord valueForKey:@"playerCode"];
-            if(objStr == selectedPlayerCode)
+            objSelectPlayerRecord=[self.playingXIPlayers objectAtIndex:i];
+            NSString * objselet =[NSString stringWithFormat:@"%@",objSelectPlayerRecord.playerCode];
+            if([objSelectPlayerRecord.playerCode isEqualToString: selectedPlayerCode])
             {
                 NSString * Msg =[NSString stringWithFormat:@"Can not Remove %@ player.",objSelectPlayerRecord.playerName];
                 [self showDialog:Msg andTitle:@"Select Players"];
@@ -279,7 +283,7 @@ static NSString * const reuseIdentifier = @"Cell";
         objPlayerOrderLevelVC.overs=self.overs;
         objPlayerOrderLevelVC.chooseTeam =self.chooseTeam;
         objPlayerOrderLevelVC.ballOver  =self.ballOver;
-        
+        objPlayerOrderLevelVC.isEdit=self.isEdit;
         
         
         // push a new stack

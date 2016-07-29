@@ -585,7 +585,7 @@
         [_rightSlideArray removeObjectsInArray:[[NSArray alloc] initWithObjects:@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil]];
         if (fetchSEPageLoadRecord.BATTEAMWICKETS >= 10)
             [_rightSlideArray removeObject : @"DECLARE INNINGS"];
-        if (inningsno == 1 || inningsno == 4)
+        if (inningsno == 1 || inningsno == 4 || inningsno ==2)
             [_rightSlideArray removeObject : @"FOLLOW ON"];
     }
 }

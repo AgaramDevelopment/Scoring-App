@@ -114,8 +114,18 @@ NSRegularExpression *isMatchedByRegex;
         img  = [UIImage imageNamed: @"no_image.png"];
         _img_teamALogo.image = img;
     }
+     self.btnUpdateOutlet.userInteractionEnabled=YES;
     
+      [self.btnUpdateOutlet setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
     
+
+    if(self.isEdit==YES)
+    {
+        self.btnUpdateOutlet.userInteractionEnabled=NO;
+          self.btnUpdateOutlet.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
+        
+
+    }
     
     
     NSFileManager *fileManagerB = [NSFileManager defaultManager];
