@@ -220,6 +220,8 @@
 		CEC858AD1D1557F6007F5384 /* BreakTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC858AB1D1557F6007F5384 /* BreakTableViewCell.m */; };
 		CEC858AE1D1557F6007F5384 /* BreakTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC858AC1D1557F6007F5384 /* BreakTableViewCell.xib */; };
 		CED03D261D1AAE3B00522B89 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */; };
+		DC133E2B1D4AF35B00798DD6 /* DBManagerDeleteScoreEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 187E5A4C1D30DAB4008470EB /* DBManagerDeleteScoreEngine.m */; };
+		DC133E2C1D4AF35B00798DD6 /* DeleteScoreEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 187E5A491D30DA8A008470EB /* DeleteScoreEngine.m */; };
 		DC2710771D25B9A40011C7B0 /* EndSession.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC2710681D25B9A40011C7B0 /* EndSession.xib */; };
 		DC27107D1D25B9A40011C7B0 /* FollowOnRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2710721D25B9A40011C7B0 /* FollowOnRecords.m */; };
 		DCA67D511D34056A00982EF5 /* InningsDetailsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = DCA67D4F1D34056A00982EF5 /* InningsDetailsVC.m */; };
@@ -1787,6 +1789,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DC133E2B1D4AF35B00798DD6 /* DBManagerDeleteScoreEngine.m in Sources */,
+				DC133E2C1D4AF35B00798DD6 /* DeleteScoreEngine.m in Sources */,
 				18AB07CF1D2A75C100AEEB1B /* EndSessionTVC.m in Sources */,
 				18AB07D01D2A75C100AEEB1B /* EndSession.m in Sources */,
 				DCEFC8801D28BC8800451485 /* UmpireDetailRecord.m in Sources */,
