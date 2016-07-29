@@ -191,10 +191,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             }
             
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
         }
         
-        sqlite3_finalize(statement);
         sqlite3_close(dataBase);
     }
     return InningsArray;
@@ -302,11 +301,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
         }
-                    sqlite3_close(dataBase);
-               }
- 
+        sqlite3_close(dataBase);
+    }
+    
     return @"";
 }
 
@@ -334,12 +333,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
         }
         
-            sqlite3_close(dataBase);
-                }
-        return @"";
+        sqlite3_close(dataBase);
+    }
+    return @"";
 }
 
 -(NSString*) GetWicketLostForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) OLDTEAMCODE:(NSString*) OLDINNINGSNO:(NSString*) SESSIONNO{
@@ -365,11 +364,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
         }
-       
-sqlite3_close(dataBase);
-       
+        
+        sqlite3_close(dataBase);
+        
     }
     return @"";
 }
@@ -399,9 +398,9 @@ sqlite3_close(dataBase);
             sqlite3_finalize(statement);
             
         }
-                    sqlite3_close(dataBase);
-                }
-       return NO;
+        sqlite3_close(dataBase);
+    }
+    return NO;
 }
 
 -(BOOL) UpdateInningsEventForMatchTypeBasedInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) OLDTEAMCODE: (NSString*) OLDINNINGSNO{
@@ -416,25 +415,25 @@ sqlite3_close(dataBase);
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
-        if (sqlite3_step(statement) == SQLITE_DONE)
-        {
-            sqlite3_reset(statement);
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return YES;
-            
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
         }
-        else {
-            sqlite3_reset(statement);
-            sqlite3_finalize(statement);
-            sqlite3_close(dataBase);
-            return NO;
-        }
-    }
         sqlite3_close(dataBase);
- 
+        
     }
-   
+    
     return NO;
 }
 
@@ -461,12 +460,12 @@ sqlite3_close(dataBase);
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
         }
-      
-            sqlite3_close(dataBase);
-       }
-
+        
+        sqlite3_close(dataBase);
+    }
+    
     return @"";
 }
 
@@ -480,8 +479,6 @@ sqlite3_close(dataBase);
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT TEAMCODE,OVERNO, BOWLERCODE, STRIKERCODE,NONSTRIKERCODE, WICKETKEEPERCODE, UMPIRE1CODE, UMPIRE2CODE,ATWOROTW, BOWLINGEND FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BALLCODE = '%@';",COMPETITIONCODE, MATCHCODE,LASTBALLCODE];
-        
-        
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
@@ -502,9 +499,10 @@ sqlite3_close(dataBase);
                 [BallEventArray addObject:record];
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
         }
     }
-    sqlite3_finalize(statement);
+    
     sqlite3_close(dataBase);
     return BallEventArray;
 }
@@ -536,7 +534,7 @@ sqlite3_close(dataBase);
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
-            NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
+            NSLog(@"Error: Innings statement failed: %s.", sqlite3_errmsg(dataBase));
             return NO;
         }
     }
@@ -574,9 +572,9 @@ sqlite3_close(dataBase);
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
         }
-                    sqlite3_close(dataBase);
+        sqlite3_close(dataBase);
     }
-
+    
     return NO;
 }
 
@@ -606,12 +604,12 @@ sqlite3_close(dataBase);
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
         }
-                    sqlite3_close(dataBase);
+        sqlite3_close(dataBase);
         
     }
-       return @"";
+    return @"";
 }
 
 -(BOOL) UpdateMatchRegistrationForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
@@ -754,7 +752,7 @@ sqlite3_close(dataBase);
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO DAYEVENTS(COMPETITIONCODE,MATCHCODE,INNINGSNO,STARTTIME,ENDTIME,DAYNO,BATTINGTEAMCODE,TOTALRUNS,TOTALOVERS,TOTALWICKETS,COMMENTS,DAYSTATUS)VALUES('%@','%@','%@','','','@','@','%@','%@','%@','',0)",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO,DAYNO,OLDTEAMCODE,TOTALRUNS,ENDOVER,TOTALWICKETS];
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO DAYEVENTS(COMPETITIONCODE,MATCHCODE,INNINGSNO,STARTTIME,ENDTIME,DAYNO,BATTINGTEAMCODE,TOTALRUNS,TOTALOVERS,TOTALWICKETS,COMMENTS,DAYSTATUS) VALUES ('%@','%@','%@','','','%@','%@','%@','%@','%@','',0)",COMPETITIONCODE,MATCHCODE,OLDINNINGSNO,DAYNO,OLDTEAMCODE,TOTALRUNS,ENDOVER,TOTALWICKETS];
         
         const char *update_stmt = [updateSQL UTF8String];
         
@@ -805,12 +803,12 @@ sqlite3_close(dataBase);
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
         }
-                    sqlite3_close(dataBase);
+        sqlite3_close(dataBase);
         
     }
-  
+    
     return @"";
 }
 
@@ -825,21 +823,28 @@ sqlite3_close(dataBase);
         NSString *updateSQL = [NSString stringWithFormat:@"UPDATE  INNINGSEVENTS  SET	INNINGSSTARTTIME='%@',INNINGSENDTIME='%@',TOTALRUNS='%@',TOTALOVERS='%@',TOTALWICKETS='%@'  WHERE COMPETITIONCODE='%@' AND  MATCHCODE='%@' AND TEAMCODE='%@' AND  INNINGSNO='%@' ",INNINGSSTARTTIME,INNINGSENDTIME,TOTALRUNS,ENDOVER,TOTALWICKETS,COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,OLDINNINGSNO];
         
         const char *update_stmt = [updateSQL UTF8String];
+        
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
+                
             }
-            sqlite3_reset(statement);
-            sqlite3_finalize(statement);
-            
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
         }
         sqlite3_close(dataBase);
+        
     }
+    
     return NO;
 }
 
@@ -1190,12 +1195,12 @@ sqlite3_close(dataBase);
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
         }
-                    sqlite3_close(dataBase);
+        sqlite3_close(dataBase);
         
     }
-
+    
     return @"";
 }
 
@@ -1221,12 +1226,12 @@ sqlite3_close(dataBase);
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
         }
-                    sqlite3_close(dataBase);
+        sqlite3_close(dataBase);
         
     }
-        return @"";
+    return @"";
 }
 
 -(NSNumber*)GetMaxidFormanageOverDetails:(NSString*) MATCHCODE{
@@ -1466,14 +1471,14 @@ sqlite3_close(dataBase);
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
         }
         
-           sqlite3_close(dataBase);
+        sqlite3_close(dataBase);
         
     }
     
-   
+    
     return @"";
 }
 
@@ -1498,10 +1503,10 @@ sqlite3_close(dataBase);
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
             
         }
-                    sqlite3_close(dataBase);
+        sqlite3_close(dataBase);
         
     }
     
@@ -1535,10 +1540,10 @@ sqlite3_close(dataBase);
                 [getStrickerArray addObject:record];
             }
             sqlite3_reset(statement);
-            
+            sqlite3_finalize(statement);
         }
     }
-    sqlite3_finalize(statement);
+    
     sqlite3_close(dataBase);
     return getStrickerArray;
 }
@@ -1727,7 +1732,7 @@ sqlite3_close(dataBase);
             sqlite3_finalize(statement);
 
         }
-                   sqlite3_close(dataBase);
+            sqlite3_close(dataBase);
             }
 
     return @"";
@@ -1901,9 +1906,10 @@ sqlite3_close(dataBase);
                 [GetOScoreBoardDetails addObject:record];
             }
             sqlite3_reset(statement);
+             sqlite3_finalize(statement);
         }
     }
-    sqlite3_finalize(statement);
+   
     sqlite3_close(dataBase);
     return GetOScoreBoardDetails;
 }
@@ -2075,9 +2081,10 @@ sqlite3_close(dataBase);
                 [GetWicketSDetails addObject:record];
             }
             sqlite3_reset(statement);
+               sqlite3_finalize(statement);
         }
     }
-    sqlite3_finalize(statement);
+ 
     sqlite3_close(dataBase);
     return GetWicketSDetails;
 }
@@ -2164,7 +2171,7 @@ sqlite3_close(dataBase);
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT BYES, LEGBYES, NOBALLS, WIDES, PENALTIES, INNINGSTOTAL, INNINGSTOTALWICKETS FROM INNINGSSUMMARY WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@' AND INNINGSNO = '%@'", COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
-                               
+        
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)== SQLITE_OK);
         
@@ -2183,8 +2190,9 @@ sqlite3_close(dataBase);
                 [GetInningsSummaryDetails addObject:record];
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
         }                                                                                                                            }
-    sqlite3_finalize(statement);
+    
     sqlite3_close(dataBase);
     return GetInningsSummaryDetails;
 }
@@ -2510,9 +2518,10 @@ sqlite3_close(dataBase);
                 [getStrickerArray addObject:record];
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
         }
     }
-    sqlite3_finalize(statement);
+    
     sqlite3_close(dataBase);
     return getStrickerArray;
 }
@@ -2656,6 +2665,9 @@ sqlite3_close(dataBase);
                 sqlite3_close(dataBase);
                 return YES;
             }
+            
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
             
         }
         
@@ -3140,9 +3152,10 @@ sqlite3_close(dataBase);
                 [FetchEndInningsDetails addObject:record];
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
         }
     }
-    sqlite3_finalize(statement);
+    
     sqlite3_close(dataBase);
     return FetchEndInningsDetails;
 }
@@ -3215,13 +3228,13 @@ sqlite3_close(dataBase);
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
-
+            
             
         }
-                  sqlite3_close(dataBase);
-            
-               }
-  
+        sqlite3_close(dataBase);
+        
+    }
+    
     return @"";
     
 }
@@ -3570,8 +3583,7 @@ sqlite3_close(dataBase);
         
         
         const char *update_stmt = [updateSQL UTF8String];
-        sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
-        if (sqlite3_step(statement) == SQLITE_DONE)
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
@@ -3584,9 +3596,7 @@ sqlite3_close(dataBase);
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
 
-            
         }
-        
             sqlite3_close(dataBase);
         
     }
@@ -3616,6 +3626,8 @@ sqlite3_close(dataBase);
                 
             }
             else {
+                
+                NSLog(@"Error: update statement failed: %s.", sqlite3_errmsg(dataBase));
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -3766,9 +3778,10 @@ sqlite3_close(dataBase);
                 [InningsArrayForDelete addObject:record];
             }
             sqlite3_reset(statement);
+            sqlite3_finalize(statement);
         }
     }
-    sqlite3_finalize(statement);
+
     sqlite3_close(dataBase);
     return InningsArrayForDelete;
 }

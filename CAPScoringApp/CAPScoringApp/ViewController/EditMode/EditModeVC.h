@@ -21,6 +21,10 @@
 @property(nonatomic,strong) id <EditmodeDelegate> delegate;
 
 
+@property (strong, nonatomic) IBOutlet UILabel *lbl_1stseprator;
+
+@property (strong, nonatomic) IBOutlet UILabel *lbl_2seprator;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_3seprator;
 
 @property (nonatomic,strong) NSString *Comptitioncode;
 @property (nonatomic,strong) NSString *matchCode;

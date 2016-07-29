@@ -201,8 +201,9 @@ EndInnings *insertScoreCard;
 
 
 
--(void) InsertEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO:(NSString*)INNINGSSTARTTIME:(NSString*)INNINGSENDTIME:(NSString*)ENDOVER:(NSString*)TOTALRUNS:(NSString*)TOTALWICKETS:(NSString*)BUTTONNAME
+-(void) InsertEndInnings:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)BOWLINGTEAMCODE:(NSString*)OLDTEAMCODE:(NSString*)OLDINNINGSNO:(NSString*)INNINGSSTARTTIME:(NSString*)INNINGSENDTIME:(NSString*)ENDOVER:(NSNumber*)TOTALRUNS:(NSString*)TOTALWICKETS:(NSString*)BUTTONNAME
 
+    
 {
     DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
     
