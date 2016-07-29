@@ -425,7 +425,7 @@ NSRegularExpression *isMatchedByRegex;
             [self startService:@"MATCHUPDATEOVER"];
         }else{
             
-            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Error"];
+            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Match Setup"];
             
         }
         return NO;
@@ -433,10 +433,10 @@ NSRegularExpression *isMatchedByRegex;
     }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){
         if(OdiText > 50){
             
-            [self showDialog:@"Please Enter Below 50 Overs" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Below 50 Overs" andTitle:@"Match Setup"];
         }else if (twentyText == 0){
             
-            [self showDialog:@"Please Enter Overs" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Overs" andTitle:@"Match Setup"];
         }
         
         else if (teamCountA >= 7 && teamCountB >= 7){
@@ -453,7 +453,7 @@ NSRegularExpression *isMatchedByRegex;
             [self startService:@"MATCHUPDATEOVER"];
         }else{
             
-            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Error"];
+            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Match Setup"];
             
         }
         return NO;
@@ -476,7 +476,7 @@ NSRegularExpression *isMatchedByRegex;
             [self startService:@"MATCHUPDATEOVER"];
         }else{
             
-            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Error"];
+            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Match Setup"];
             
         }
         
