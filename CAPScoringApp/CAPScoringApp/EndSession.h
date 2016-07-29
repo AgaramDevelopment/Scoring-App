@@ -26,12 +26,14 @@
 
 @property(nonatomic,strong) id <EndSedsessionDelegate> delegate;
 
+@property (strong,nonatomic) NSString *MATCHTYPECODE;
 @property (nonatomic,strong) NSString * compitionCode;
 @property (nonatomic,strong) NSString * matchcode;
 @property (nonatomic,strong) NSString * bowlingCode;
 
 @property (nonatomic,strong) NSObject * fetchpagedetail;
 
+@property (strong,nonatomic) NSString *SESSIONNO;
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scroll_EndSession;
 
@@ -93,5 +95,8 @@
 
 @property (weak, nonatomic) IBOutlet UIView *view_heading;
 
+@property (weak, nonatomic) IBOutlet UIView *view_datePicker;
+
+- (IBAction)show_SelectedDate:(id)sender;
 
 @end

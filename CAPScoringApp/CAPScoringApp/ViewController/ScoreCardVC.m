@@ -61,7 +61,7 @@ int bowlerPostion = 0;
     
     //Set Table Cell Position
     batsmanHeaderPosition = 0;
-    batsmanPostion =fetchScorecard.BattingSummaryForScoreBoard.count > 0 ? 1 :0;
+    batsmanPostion = fetchScorecard.BattingSummaryForScoreBoard.count > 0 ? 1 :0;
     bowlerHeaderPosition =fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1; bowlerPostion = bowlerHeaderPosition+1;
    
     

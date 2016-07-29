@@ -231,8 +231,6 @@ BOOL IsBack;
 -(IBAction)showSelecteddate:(id)sender{
 
     
-    
-    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
@@ -268,6 +266,7 @@ BOOL IsBack;
     
    }
 
+
 -(void)endDatePicker{
     if(datePicker!= nil)
     {
@@ -276,6 +275,7 @@ BOOL IsBack;
     }
     [self datePicker];
 }
+
 -(void)showEndDatePicker{
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];

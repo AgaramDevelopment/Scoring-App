@@ -14,6 +14,8 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "Utitliy.h"
+#import "DBManagerEndInnings.h"
+
 @interface EndSession ()<UITableViewDelegate,UITableViewDataSource>
 
 {
@@ -24,6 +26,7 @@
    // NSObject *fetchEndSession;
     UITableView *objDrobDowntbl;
     NSString  * Dominate;
+    NSString *MatchDate;
     DBManagerEndSession *dbEndSession;
     
 }
@@ -42,11 +45,13 @@ FetchSEPageLoadRecord *fetchSeRecord;
 
 BOOL back;
 BOOL IsDropDown;
-
+BOOL isEndDate;
 
 int POS_TEAM_TYPE = 1;
 
 @implementation EndSession
+@synthesize MATCHTYPECODE;
+@synthesize SESSIONNO;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -76,8 +81,12 @@ int POS_TEAM_TYPE = 1;
     back = YES;
    
     
+    DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
+    
+    MatchDate = [dbEndInnings GetMatchDateForFetchEndInnings : COMPETITIONCODE :MATCHCODE];
+    
    battingTeamArray = [[NSMutableArray alloc]init];
-battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
+    battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
     
     bowlingTeamArray = [[NSMutableArray alloc]init];
     bowlingTeamArray = [dbEndSession GetBattingTeamUsingBowlingCode:fetchSeRecord.BOWLINGTEAMCODE];
@@ -95,11 +104,8 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
     
     endSessionArray = [[NSMutableArray alloc]init];
     
-    endSessionArray = [dbEndSession GetSessionEventsForFetchEndSession:competitioncode :matchcode ];
- 
-    
-    NSString *INSERT = self.btn_save;
-[self.btn_save addTarget:self action:@selector(btn_save:) forControlEvents:UIControlEventTouchUpInside];
+    endSessionArray = [dbEndSession GetSessionEventsForFetchEndSession:competitioncode :matchcode];
+
     
    // [self.btn_dropDown addTarget:self action:@selector(btn_dropDown:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -111,15 +117,20 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
     _lbl_InningsNo.text = [NSString stringWithFormat:@"%@",sessionRecords.INNINGSNOS];
     _lbl_teamBatting.text = sessionRecords.TEAMNAMES;
     _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO];
+    
     _lbl_sessionEndOver.text = [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO];
+    
     _lbl_runScored.text = [NSString stringWithFormat:@"%@",sessionRecords.RUNSSCORED];
     _lbl_wicketLost.text = [NSString stringWithFormat:@"%@",sessionRecords.WICKETLOST];
 
     
+    SESSIONNO = sessionRecords.SESSIONNO;
     
 
     [self.view layoutIfNeeded];
     self.scroll_EndSession.contentSize = CGSizeMake(self.view.frame.size.width, 1000);
+    
+    _scroll_EndSession.scrollEnabled = YES;
     
     [self.view_StartSession.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.view_StartSession.layer.borderWidth = 2;
@@ -161,71 +172,127 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
     self.view_sessionDominant.layer.borderWidth = 2;
     
     
-    [self datePicker];
-    [self endDatePicker];
+
     [self duration];
       self.view_allControls.hidden = YES;
-    
+    self.view_datePicker.hidden=YES;
 }
 
 -(void)datePicker{
+    
+    if(datePicker!= nil)
+    {
+        [datePicker removeFromSuperview];
+        
+    }
+    self.view_datePicker.hidden=NO;
     
     datePicker =[[UIDatePicker alloc]init];
     
     datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     
     [self.txt_startTime setInputView:datePicker];
-    UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
-    [toolbar setTintColor:[UIColor grayColor]];
-    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
-                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate * currentDate = [dateFormat dateFromString:MatchDate];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     
-    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    if([self.MATCHTYPECODE isEqual:@"MSC114"] || [self.MATCHTYPECODE isEqual:@"MSC023"])
+    {
+        [comps setDay:5];
+        [comps setMonth:0];
+        [comps setYear:0];
+    }
+    else
+    {
+        [comps setDay:5];
+        [comps setMonth:0];
+        [comps setYear:0];
+        
+    }
     
-    [self.txt_startTime setInputAccessoryView:toolbar];
+    // self.timestamp = [[NSCalendar currentCalendar] dateFromComponents:comps];
     
+    
+    NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+    //[comps setYear:-1];
+    [comps setDay:0];
+    [comps setMonth:0];
+    [comps setYear:0];
+    NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+    
+    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_startTime.frame.origin.x,self.txt_startTime.frame.origin.y+30,self.view.frame.size.width,100)];
+    //[datePicker setMaximumDate:maxDate];
+    //[datePicker setMinimumDate:minDate];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"];
+    [datePicker setLocale:locale];
+    
+    [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
+    [datePicker setMinimumDate:minDate];
+    [datePicker setMaximumDate:maxDate];
+    [datePicker setDate:minDate animated:YES];
+    [datePicker reloadInputViews];
+    [self.view_datePicker addSubview:datePicker];
+}
+
+
+-(void)endDatePicker{
+    
+    if(datePicker!= nil)
+    {
+        [datePicker removeFromSuperview];
+        
+    }
+    [self datePicker];
     
 }
+
 -(void)showSelecteddate{
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    self.txt_startTime.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
+    self.txt_startTime.text=[NSString stringWithFormat:@"%@",
+                             [formatter stringFromDate:datePicker.date]];
     [self.txt_startTime resignFirstResponder];
     [self duration];
     
 }
 
--(void)endDatePicker{
-    datePicker =[[UIDatePicker alloc]init];
-    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-    
-    [self.txt_endTime setInputView:datePicker];
-    UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
-    [toolbar setTintColor:[UIColor grayColor]];
-    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
-                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showEndDatePicker)];
-    
-    
-    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
-    
-    [self.txt_endTime setInputAccessoryView:toolbar];
-}
+
+
 -(void)showEndDatePicker{
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    self.txt_endTime.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
+    NSDate *selectedDate = [datePicker date];
+    NSString *recordDate = [formatter stringFromDate:selectedDate];
+    self.txt_endTime.text=recordDate;
     [self.txt_endTime resignFirstResponder];
     [self duration];
     
+    
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if(textField.tag == 1)
+    {
+        isEndDate=NO;
+        [self datePicker];
+        [textField resignFirstResponder];
+    }
+    else if (textField.tag == 2)
+    {
+        isEndDate=YES;
+        [self endDatePicker];
+        [textField resignFirstResponder];
+    }
+}
 
 
 -(void)duration{
@@ -328,6 +395,9 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
+    _scroll_EndSession.scrollEnabled = YES;
+    
     if(tableView== objDrobDowntbl)
     {
         EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
@@ -352,6 +422,7 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
     NSString *wickets=[dbEndSession GetWicketLoftForFetchEndSession :competitioncode: matchcode :obj.INNINGSNO :sessionRecords.SESSIONNO : obj.DAYNO];
         
     NSString *startOver =[dbEndSession GetStartOverNoForFetchEndSession :competitioncode :matchcode :sessionRecords.SESSIONNO : obj.INNINGSNO : obj.DAYNO];
+        
     NSString *endOverNO = [dbEndSession GetEndOverNoForFetchEndSession:competitioncode :matchcode :sessionRecords.SESSIONNO :obj.DAYNO :obj.INNINGSNO];
         
     NSString*startInningsTime = obj.SESSIONSTARTTIME;
@@ -418,7 +489,7 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
 
 - (IBAction)btn_save:(id)sender {
         
-       sessionRecords  = [[EndSessionRecords alloc]init];
+    [sessionRecords FetchEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
     
     
     if ([BtnurrentTittle isEqualToString:@"INSERT"]) {
@@ -429,7 +500,7 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
         int  RUNSSCORED =[sessionRecords.RUNSSCORED intValue];
         
         
-        [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :fetchSeRecord.DAYNO :[NSString stringWithFormat:@"%d",SESSIONNO] :_txt_startTime.text :_txt_endTime.text :[NSString stringWithFormat:@"%d",STARTOVERNO]: [NSString stringWithFormat:@"%d",ENDOVERNO] :[NSString stringWithFormat:@"%d" ,RUNSSCORED] :[NSString stringWithFormat:@"%d",fetchSeRecord.BATTEAMWICKETS] :Dominate];
+        [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :fetchSeRecord.DAYNO : sessionRecords.SESSIONNO :_txt_startTime.text :_txt_endTime.text :[NSString stringWithFormat:@"%d",STARTOVERNO]: [NSString stringWithFormat:@"%d",ENDOVERNO] :[NSString stringWithFormat:@"%d" ,RUNSSCORED] :[NSString stringWithFormat:@"%d",fetchSeRecord.BATTEAMWICKETS] :Dominate];
         
         if(self.checkInternetConnection){
             
@@ -479,7 +550,14 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
         
     }else{
         
-        [sessionRecords UpdateEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :sessionRecords.DAYNO :[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO] :_txt_startTime.text :_txt_endTime.text :Dominate];
+        
+        dbEndSession = [[DBManagerEndSession alloc]init];
+        
+        NSString *dayNO =  [dbEndSession getDayNo : competitioncode: matchcode];
+        
+        NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : dayNO];
+        
+        [sessionRecords UpdateEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :dayNO :sessionNo :_txt_startTime.text :_txt_endTime.text :Dominate];
         
 
         
@@ -529,18 +607,29 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
         }
         
     }
-        
-    [self.tbl_session reloadData];
+    
+    
+//    [sessionRecords FetchEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
+
     self.tbl_session.hidden = NO;
     self.view_allControls.hidden = YES;
-    [sessionRecords FetchEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
+    self.view_heading.hidden = NO;
+
     
 }
 
 - (IBAction)btn_delete:(id)sender {
     
     {
-        [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :sessionRecords.DAYNO :[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO]];
+        
+        dbEndSession = [[DBManagerEndSession alloc]init];
+    
+      NSString *dayNO =  [dbEndSession getDayNo : competitioncode: matchcode];
+        
+        NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : sessionNo];
+        
+        
+        [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO : sessionRecords.DAYNO : sessionRecords.SESSIONNO];
         
         
         if(self.checkInternetConnection){
@@ -591,8 +680,8 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
     
     
         [endSessionArray removeLastObject];
-        [self.tbl_session reloadData];
         self.tbl_session.hidden = NO;
+        self.view_heading.hidden = NO;
         self.view_allControls.hidden = YES;
 
         //[self.Btn_back sendActionsForControlEvents:UIControlEventTouchUpInside];
@@ -639,7 +728,7 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
         
         self.view_allControls.hidden = YES;
         self.tbl_session.hidden = NO;
-        
+        self.view_heading.hidden = NO;
         back = YES;
         
     }else if (back == YES){
@@ -656,5 +745,43 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
     }
     
 
+}
+- (IBAction)show_SelectedDate:(id)sender {
+    
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *matchdate = [dateFormat dateFromString:MatchDate];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    // for minimum date
+    [datePicker setMinimumDate:matchdate];
+    
+    // for maximumDate
+    int daysToAdd = 1;
+    NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
+    
+    [datePicker setMaximumDate:newDate1];
+    
+    
+    NSString *minimumdateStr = [dateFormat stringFromDate:matchdate];
+    NSString*maxmimumdateStr=[dateFormat stringFromDate:newDate1];
+    if(isEndDate==YES)
+    {
+        _txt_endTime.text=[dateFormat stringFromDate:datePicker.date];
+    }
+    else
+    {
+        _txt_startTime.text=[dateFormat stringFromDate:datePicker.date];
+    }
+    NSLog(@"check: %@",_txt_startTime.text);
+    
+    //BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_txt_startInnings text]];
+    
+    [self duration];
+    [self.view_datePicker setHidden:YES];
+
+    
+    
 }
 @end
