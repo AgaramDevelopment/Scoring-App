@@ -221,7 +221,7 @@
     if(isPowerplay_Tbl == NO)
     {
        self.tbl_powerplaytype.hidden=NO;
-        [self.tbl_powerplaytype reloadData];
+      //  [self.tbl_powerplaytype reloadData];
         isPowerplay_Tbl=YES;
         isPowerplay=YES;
     }
@@ -714,31 +714,50 @@
             [objDBManager UpdatePowerPlay:self.inningsNo :txt_startover.text :txt_endover.text :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC001" :username :powerplaycode :self.matchCode];
             
             
-            self.view_powerplaygrid.hidden=YES;
-            self.view_powerplay.hidden  =NO;
-            isPowerplay =NO;
+            //            self.view_powerplaygrid.hidden=YES;
+            //            self.view_powerplay.hidden  =NO;
+            //            isPowerplay =NO;
+            //
+            //Resultarray=powerplayarray;
+            //            [self.tbl_powerplay reloadData];
             
-            Resultarray=powerplayarray;
+            
+            
+            Resultarray =[[NSMutableArray alloc]init];
+            
+            Resultarray= [objDBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
+            
+            
+            
+            
+            self.view_powerplay.hidden=NO;
+            self.view_powerplaygrid.hidden=YES;
+            isPowerplay = NO;
             [self.tbl_powerplay reloadData];
-//            PowerPlayGridVC *add = [[PowerPlayGridVC alloc]initWithNibName:@"PowerPlayGridVC" bundle:nil];
-//            add.resultarray=powerplayarray;
-//            
-//            add.competitionCode=competitionCode;
-//            add.matchCode=matchCode;
-//            add.inningsNo=inningsNo;
-//           
-//            
-//            [self addChildViewController:add];
-//            add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-//            [self.view addSubview:add.view];
-//            add.view.alpha = 0;
-//            [add didMoveToParentViewController:self];
-//            
-//            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-//             {
-//                 add.view.alpha = 1;
-//             }
-//                             completion:nil];
+            
+            
+            
+            
+            
+            //            PowerPlayGridVC *add = [[PowerPlayGridVC alloc]initWithNibName:@"PowerPlayGridVC" bundle:nil];
+            //            add.resultarray=powerplayarray;
+            //
+            //            add.competitionCode=competitionCode;
+            //            add.matchCode=matchCode;
+            //            add.inningsNo=inningsNo;
+            //
+            //
+            //            [self addChildViewController:add];
+            //            add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+            //            [self.view addSubview:add.view];
+            //            add.view.alpha = 0;
+            //            [add didMoveToParentViewController:self];
+            //
+            //            [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+            //             {
+            //                 add.view.alpha = 1;
+            //             }
+            //                             completion:nil];
             
             return YES;
         }
@@ -755,7 +774,7 @@
         [alter show];
         return NO;
     }
-
+    
     
     
 }
@@ -766,6 +785,9 @@
     isPowerplay=YES;
     [self.tbl_powerplaytype reloadData];
     [self.btn_submit setTitle:@"Submit" forState:UIControlStateNormal];
+    txt_startover.text=@"";
+    txt_endover.text=@"";
+    _lbl_setpowerplay.text=@"Select powerplay";
 }
 
 - (IBAction)btn_back:(id)sender {

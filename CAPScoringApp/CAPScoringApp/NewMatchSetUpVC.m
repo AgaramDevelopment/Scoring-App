@@ -114,8 +114,18 @@ NSRegularExpression *isMatchedByRegex;
         img  = [UIImage imageNamed: @"no_image.png"];
         _img_teamALogo.image = img;
     }
+     self.btnUpdateOutlet.userInteractionEnabled=YES;
     
+      [self.btnUpdateOutlet setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
     
+
+    if(self.isEdit==YES)
+    {
+        self.btnUpdateOutlet.userInteractionEnabled=NO;
+          self.btnUpdateOutlet.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
+        
+
+    }
     
     
     NSFileManager *fileManagerB = [NSFileManager defaultManager];
@@ -425,7 +435,7 @@ NSRegularExpression *isMatchedByRegex;
             [self startService:@"MATCHUPDATEOVER"];
         }else{
             
-            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Error"];
+            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Match Setup"];
             
         }
         return NO;
@@ -433,10 +443,10 @@ NSRegularExpression *isMatchedByRegex;
     }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){
         if(OdiText > 50){
             
-            [self showDialog:@"Please Enter Below 50 Overs" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Below 50 Overs" andTitle:@"Match Setup"];
         }else if (twentyText == 0){
             
-            [self showDialog:@"Please Enter Overs" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Overs" andTitle:@"Match Setup"];
         }
         
         else if (teamCountA >= 7 && teamCountB >= 7){
@@ -453,7 +463,7 @@ NSRegularExpression *isMatchedByRegex;
             [self startService:@"MATCHUPDATEOVER"];
         }else{
             
-            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Error"];
+            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Match Setup"];
             
         }
         return NO;
@@ -476,7 +486,7 @@ NSRegularExpression *isMatchedByRegex;
             [self startService:@"MATCHUPDATEOVER"];
         }else{
             
-            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Error"];
+            [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Match Setup"];
             
         }
         

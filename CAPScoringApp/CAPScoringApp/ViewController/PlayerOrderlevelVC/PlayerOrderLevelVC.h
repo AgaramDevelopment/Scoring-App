@@ -40,6 +40,6 @@
 @property (nonatomic,strong) NSString *WKTkeeperAcode;
 @property (nonatomic,strong) NSString *WKTkeeperBcode;
 
-
+@property (nonatomic,assign) BOOL isEdit;
 
 @end
