@@ -11,6 +11,7 @@
 #import "DBManager.h"
 #import "MatcheventRecord.h"
 #import "Reachability.h"
+#import "FixturesRecord.h"
 
 @interface RevisedTarget ()<UITextFieldDelegate>
 {
@@ -24,7 +25,7 @@
 }
 
 @property(nonatomic,strong)NSMutableArray*selecttargets;
-
+@property(nonatomic,strong)NSMutableArray*selectOvers;
 @end
 
 @implementation RevisedTarget
@@ -42,6 +43,19 @@ objDBManager = [[DBManager alloc]init];
    // setover= [DBManager SetMatchRegistrationTarget:self.matchCode competitionCode:self.competitionCode];
   //  [DBManager RetrieveRevisedTargetData:self.matchCode competitionCode:self.competitionCode];
     
+    _selectOvers = [objDBManager RetrieveRevisedOverData:self.matchCode competitionCode:self.competitionCode recordstatus:@"MSC001"];
+    
+    
+    FixturesRecord *objrevisedoverRecord = [self.selectOvers objectAtIndex:0];
+    
+    [self.txt_commentss.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    self.txt_commentss.layer.borderWidth = 2;
+    
+    
+    self.txt_overs.text=objrevisedoverRecord.overs;
+
+    
+    
     [self.txt_commentss.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.txt_commentss.layer.borderWidth = 2;
     
@@ -56,7 +70,7 @@ objDBManager = [[DBManager alloc]init];
     strruns=objrevisedtarget.targetruns;
     strcomments=objrevisedtarget.targetcomments;
     
-        self.txt_overs.text =strovers;
+      //  self.txt_overs.text =strovers;
         self.txt_target.text =objrevisedtarget.targetruns;
         self.txt_commentss.text=objrevisedtarget.targetcomments;
     
@@ -154,16 +168,16 @@ objDBManager = [[DBManager alloc]init];
             return NO;
         }
     }
-    else if([OldOvers intValue] < [txt_overs.text intValue]){
+     if([OldOvers intValue] < [txt_overs.text intValue]){
         [self showDialog:@"The Revised Target is not possible when the data exist for this innings." andTitle:@"Revised Target"];
         return NO;
-    }else if([txt_overs.text isEqual:@""]){
+    } if([txt_overs.text isEqual:@""]){
         [self showDialog:@"Please enter Over." andTitle:@"Revised Target"];
         return NO;
-    }else if([txt_target.text isEqual:@""]){
+    } if([txt_target.text isEqual:@""]){
         [self showDialog:@"Please enter Targets." andTitle:@"Revised Target"];
         return NO;
-    }else if([txt_commentss.text isEqual:@""]){
+    } if([txt_commentss.text isEqual:@""]){
         [self showDialog:@"Please enter Comments." andTitle:@"Revised Target"];
         return NO;
     }
@@ -207,10 +221,14 @@ objDBManager = [[DBManager alloc]init];
     }
 }
 
--(IBAction)didClickBackbtnAction:(id)sender
-{
+- (IBAction)didClickBackbtnAction:(id)sender {
     [self.delegate ChangeVCBackBtnAction];
+
 }
+
+//-(IBAction)didClickBackbtnAction:(id)sender
+//{
+//   }
 
 -(void)Insertrevisedtarget:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)TARGETRUNS:(NSString*)TARGETOVERS:(NSString*)TARGETCOMMENTS:(NSString*)INNINGSNO{
     

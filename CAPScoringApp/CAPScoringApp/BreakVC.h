@@ -22,7 +22,9 @@
 @property(nonatomic,strong)NSMutableArray*resultarray;
 //@property(nonatomic,strong)NSMutableArray*UpdateBreaksArray;
 @property (strong, nonatomic) IBOutlet BreakTableViewCell *GridBreakcell;
+- (IBAction)btn_back:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UIButton *btn_back;
 
 
 @property(strong,nonatomic)NSString*MATCHCODE;
