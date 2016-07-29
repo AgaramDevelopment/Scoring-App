@@ -221,7 +221,7 @@
     if(isPowerplay_Tbl == NO)
     {
        self.tbl_powerplaytype.hidden=NO;
-        [self.tbl_powerplaytype reloadData];
+      //  [self.tbl_powerplaytype reloadData];
         isPowerplay_Tbl=YES;
         isPowerplay=YES;
     }

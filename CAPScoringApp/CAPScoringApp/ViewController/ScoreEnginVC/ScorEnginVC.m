@@ -8104,6 +8104,9 @@ self.lbl_umpirename.text=@"";
 
 -(void) BreakviewMethod
 {
+    
+     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
+    
     breakvc = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
     
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -8122,6 +8125,7 @@ self.lbl_umpirename.text=@"";
     
     [self addChildViewController:breakvc];
     breakvc.view.frame =CGRectMake(90, 200, breakvc.view.frame.size.width, breakvc.view.frame.size.height);
+      [breakvc.btn_back addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
     [fullview addSubview:breakvc.view];
     breakvc.view.alpha = 0;
     [breakvc didMoveToParentViewController:self];

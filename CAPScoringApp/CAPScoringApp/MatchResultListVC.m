@@ -61,16 +61,16 @@ SelectPlayerRecord *selectedMostValuPlayer;
     [self.view layoutIfNeeded];
     self.scroll_view.contentSize = CGSizeMake(self.view.frame.size.width, 850);
     
-//    selectedResultType = nil;
-//    selectedTeam = nil;
-//     selectedManOfTheMatch = nil;
-//     selectedManOfTheSeries = nil;
-//     selectedBestBatsman = nil;
-//     selectedBestBowler = nil;
-//     selectedBestAllRounder = nil;
-//     selectedMostValuPlayer = nil;
+    selectedResultType = nil;
+    selectedTeam = nil;
+     selectedManOfTheMatch = nil;
+     selectedManOfTheSeries = nil;
+     selectedBestBatsman = nil;
+     selectedBestBowler = nil;
+     selectedBestAllRounder = nil;
+     selectedMostValuPlayer = nil;
+
 //
-//    
     _scroll_view.scrollEnabled = YES;
     selectedTablePostition = 0;
 //    isTableOpen = NO;
