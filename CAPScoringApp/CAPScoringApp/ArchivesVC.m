@@ -256,7 +256,7 @@ NSArray *MuliteDayMatchtype;
     NSLog(@"the butto, on cell number... %d", button.tag);
     
     FixturesRecord *objFixtureRecord=(FixturesRecord*)[FetchCompitionArray objectAtIndex:button.tag];
-     mSetUp = [[NSMutableArray alloc]init];
+    mSetUp = [[NSMutableArray alloc]init];
     [mSetUp addObject:objFixtureRecord];
     
     if([objFixtureRecord.MatchStatus isEqualToString:@"MSC124"]||[objFixtureRecord.MatchStatus isEqualToString:@"MSC240"])
