@@ -95,6 +95,9 @@ BOOL IsBack;
         
         [innings fetchEndInnings:CompetitionCode :MatchCode :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO];
         
+        TOTALRUNS = innings.TOTALRUNS;
+        WICKETS = innings.WICKETS;
+        
         self.lbl_teamName.text = innings.TEAMNAME;
         self.lbl_runScored.text = [NSString stringWithFormat:@"%@", innings.TOTALRUNS];
         

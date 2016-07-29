@@ -17,6 +17,7 @@
 @interface EndSession ()<UITableViewDelegate,UITableViewDataSource>
 
 {
+    NSString * BtnurrentTittle;
     NSDateFormatter *formatter;
     NSString *competitioncode;
     NSString *matchcode;
@@ -97,10 +98,6 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
     endSessionArray = [dbEndSession GetSessionEventsForFetchEndSession:competitioncode :matchcode ];
  
     
-    
-    
-    
-    
     NSString *INSERT = self.btn_save;
 [self.btn_save addTarget:self action:@selector(btn_save:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -167,7 +164,7 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
     [self datePicker];
     [self endDatePicker];
     [self duration];
-    
+      self.view_allControls.hidden = YES;
     
 }
 
@@ -317,7 +314,8 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
     cell.lbl_teamName.text = end.SHORTTEAMNAME;
     //int sessionno = [end.SESSIONNO intValue];
         
-        NSString * str= [NSString stringWithFormat:@"%d",[end.SESSIONNO integerValue]];
+     
+        NSString * str= [NSString stringWithFormat:@"%d",[sessionRecords.SESSIONNO integerValue]];
         cell.lbl_sessionNo.text =str;//[end.SESSIONNO stringValue];
         cell.lbl_dayNo.text = end.DAYNO;
     
@@ -345,21 +343,31 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
     else
     {
     EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
-    
+        
+    dbEndSession = [[DBManagerEndSession alloc]init];
+        
+        //RUNSSCORED
+   NSString *run=[dbEndSession GetRunsScoredForFetchEndSession :competitioncode: matchcode :sessionRecords.SESSIONNO : obj.INNINGSNO : obj.DAYNO];
+        //TOTALWICKET
+    NSString *wickets=[dbEndSession GetWicketLoftForFetchEndSession :competitioncode: matchcode :obj.INNINGSNO :sessionRecords.SESSIONNO : obj.DAYNO];
+        
+    NSString *startOver =[dbEndSession GetStartOverNoForFetchEndSession :competitioncode :matchcode :sessionRecords.SESSIONNO : obj.INNINGSNO : obj.DAYNO];
+    NSString *endOverNO = [dbEndSession GetEndOverNoForFetchEndSession:competitioncode :matchcode :sessionRecords.SESSIONNO :obj.DAYNO :obj.INNINGSNO];
+        
     NSString*startInningsTime = obj.SESSIONSTARTTIME;
     NSString*endInningsTime  = obj.SESSIONENDTIME;
     NSString*teamName = obj.TEAMNAME;
     
     NSString*dayNo = obj.DAYNO;
+        
    //NSNumber *sessionNo = obj.SESSIONNO;
     NSNumber *inningsNo = obj.INNINGSNO;
-    NSNumber *startOver = obj.STARTOVER;
-    NSNumber *endOver = obj.ENDOVER;
-    NSNumber *runScored = obj.RUNSSCORED;
-    NSNumber *wicket = obj.WICKETLOST;
-    
-    
-
+  
+   
+        
+        BtnurrentTittle = [NSString stringWithFormat:self.btn_save.currentTitle];
+        //BtnurrentTittle = @"UPDATE";
+        [self.btn_save setTitle: @"UPDATE" forState: UIControlStateNormal];
     
     
     self.txt_startTime.text = startInningsTime;
@@ -371,11 +379,13 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
    // self.lbl_sessionNo.text = [NSString stringWithFormat:@"%@", sessionNo];
     self.lbl_InningsNo.text = [NSString stringWithFormat:@"%@",inningsNo];
     
-    _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",startOver];
-    _lbl_sessionEndOver.text = [NSString stringWithFormat:@"%@",endOver];
-    _lbl_runScored.text = [NSString stringWithFormat:@"%@",runScored];
-    _lbl_wicketLost.text = [NSString stringWithFormat:@"%@",wicket];
-    
+        _lbl_sessionStartOver.text = startOver;
+        _lbl_sessionEndOver.text = endOverNO;
+        _lbl_runScored.text = run;
+        _lbl_wicketLost.text = wickets;
+        _lbl_sessionDominant.text = obj.DOMINANTNAME;
+        
+         self.view_heading.hidden = YES;
     self.tbl_session.hidden = YES;
     self.view_allControls.hidden = NO;
     
@@ -394,6 +404,11 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
 }
 
 - (IBAction)btn_addEndSession:(id)sender {
+    
+    BtnurrentTittle = [NSString stringWithFormat:self.btn_save.currentTitle];
+    BtnurrentTittle = @"INSERT";
+    
+    self.view_heading.hidden = YES;
     self.view_allControls.hidden = NO;
     self.tbl_session.hidden = YES;
     back=NO;
@@ -402,14 +417,9 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
 
 
 - (IBAction)btn_save:(id)sender {
-    
-    
-        
-        NSString * BtnurrentTittle=[NSString stringWithFormat:self.btn_save.currentTitle];
-        BtnurrentTittle = @"INSERT";
-        
         
        sessionRecords  = [[EndSessionRecords alloc]init];
+    
     
     if ([BtnurrentTittle isEqualToString:@"INSERT"]) {
         
@@ -462,16 +472,14 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
                 [delegate hideLoading];
             }
             
+           
             
         }
         
         
-  
-        
-        
     }else{
         
-        [sessionRecords UpdateEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :sessionRecords.DAYNO :[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO] :_txt_startTime.text :_txt_endTime.text :@""];
+        [sessionRecords UpdateEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :sessionRecords.DAYNO :[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO] :_txt_startTime.text :_txt_endTime.text :Dominate];
         
 
         
@@ -522,7 +530,10 @@ battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.B
         
     }
         
-
+    [self.tbl_session reloadData];
+    self.tbl_session.hidden = NO;
+    self.view_allControls.hidden = YES;
+    [sessionRecords FetchEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
     
 }
 
