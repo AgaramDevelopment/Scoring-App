@@ -74,7 +74,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate,Other_WicketDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate,Other_WicketDelegate,RevisedTargetDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     NSMutableArray * AppealSystemSelectionArray;
@@ -8750,7 +8750,7 @@ self.lbl_umpirename.text=@"";
 {
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
     fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
-    
+ // didClickBackbtnAction
     [self.view addSubview:fullview];
     revisedTarget = [[RevisedTarget alloc]initWithNibName:@"RevisedTarget" bundle:nil];
     revisedTarget.competitionCode=self.competitionCode;
@@ -8759,6 +8759,20 @@ self.lbl_umpirename.text=@"";
     revisedTarget.inningsno=fetchSEPageLoadRecord.INNINGSNO;
      revisedTarget.matchTypeCode=self.matchTypeCode;
     [fullview addSubview:revisedTarget.view];
+ //   [fullview addSubview:breakvc.view];
+    
+    [self addChildViewController:revisedTarget];
+    revisedTarget.view.frame =CGRectMake(90, 200, revisedTarget.view.frame.size.width, revisedTarget.view.frame.size.height);
+    [revisedTarget.didClickBackbtnAction addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    [fullview addSubview:revisedTarget.view];
+    revisedTarget.view.alpha = 0;
+    [revisedTarget didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         revisedTarget.view.alpha = 1;
+     }
+                     completion:nil];
     
     
     if (IS_IPAD_PRO) {

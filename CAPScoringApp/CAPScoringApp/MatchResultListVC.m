@@ -61,15 +61,26 @@ SelectPlayerRecord *selectedMostValuPlayer;
     [self.view layoutIfNeeded];
     self.scroll_view.contentSize = CGSizeMake(self.view.frame.size.width, 850);
     
-    selectedResultType = nil;
-    selectedTeam = nil;
-     selectedManOfTheMatch = nil;
-     selectedManOfTheSeries = nil;
-     selectedBestBatsman = nil;
-     selectedBestBowler = nil;
-     selectedBestAllRounder = nil;
-     selectedMostValuPlayer = nil;
+//    selectedResultType = nil;
+//    selectedTeam = nil;
+//     selectedManOfTheMatch = nil;
+//     selectedManOfTheSeries = nil;
+//     selectedBestBatsman = nil;
+//     selectedBestBowler = nil;
+//     selectedBestAllRounder = nil;
+//     selectedMostValuPlayer = nil;
 
+    
+    _lbl_result_type.text=@"";
+    _lbl_team.text=@"";
+    _txtf_comments.text=@"";
+    _lbl_man_of_the_match.text=@"";
+    _lbl_man_of_the_series.text=@"";
+    _lbl_select_best_batsman.text=@"";
+    _lbl_select_best_bowler.text=@"";
+    _lbl_select_allrounder.text=@"";
+    _lbl_select_most_valu_player.text=@"";
+    
 //
     _scroll_view.scrollEnabled = YES;
     selectedTablePostition = 0;
@@ -83,19 +94,32 @@ SelectPlayerRecord *selectedMostValuPlayer;
 
 
 -(void) resetPage{
-    
-    _lbl_team.text = @"Select";
-    _lbl_result_type.text = @"Select";
-    _txtf_comments.text = @"";
-    _txtf_team_a_point.text = @"";
-    _txtf_team_b_point.text =@"";
-    _lbl_man_of_the_match.text = @"Select";
-    _lbl_man_of_the_series.text = @"Select";
-    _lbl_select_best_batsman.text = @"Select";
-    _lbl_select_best_bowler.text = @"Select";
-    _lbl_select_allrounder.text = @"Select";
-    _lbl_select_most_valu_player.text= @"Select";
+//    
+//    _lbl_team.text = @"Select";
+//    _lbl_result_type.text = @"Select";
+//    _txtf_comments.text = @"";
+//    _txtf_team_a_point.text = @"";
+//    _txtf_team_b_point.text =@"";
+//    _lbl_man_of_the_match.text = @"Select";
+//    _lbl_man_of_the_series.text = @"Select";
+//    _lbl_select_best_batsman.text = @"Select";
+//    _lbl_select_best_bowler.text = @"Select";
+//    _lbl_select_allrounder.text = @"Select";
+//    _lbl_select_most_valu_player.text= @"Select";
 
+    
+    
+    _lbl_result_type.text=@"";
+    _lbl_team.text=@"";
+    _txtf_comments.text=@"";
+    _txtf_team_a_point.text = @"";
+     _txtf_team_b_point.text =@"";
+    _lbl_man_of_the_match.text=@"";
+    _lbl_man_of_the_series.text=@"";
+    _lbl_select_best_batsman.text=@"";
+    _lbl_select_best_bowler.text=@"";
+    _lbl_select_allrounder.text=@"";
+    _lbl_select_most_valu_player.text=@"";
 
     fetchMatchResult = [[FetchMatchResult alloc]init];
     [fetchMatchResult getMatchReultsDetails:self.competitionCode :self.matchCode :self.TEAMACODE :self.INNINGSNO];
@@ -161,16 +185,35 @@ SelectPlayerRecord *selectedMostValuPlayer;
     }
     
     //Set Data
-    
     if([ fetchMatchResult.GetMatchResultDetails count]>0){
         GetMatchResultDetail *matchResult = [fetchMatchResult.GetMatchResultDetails objectAtIndex:0];
         _lbl_result_type.text =matchResult.RESULTTYPE;
         _txtf_comments.text = matchResult.COMMENTS;
-        _txtf_team_a_point.text = matchResult.TEAMAPOINTS == nil ? @"":matchResult.TEAMAPOINTS;
-        _txtf_team_b_point.text = matchResult.TEAMBPOINTS == nil ? @"":matchResult.TEAMBPOINTS;
+        
+        NSString *ta1= matchResult.TEAMAPOINTS == nil ? @"":matchResult.TEAMAPOINTS;
+        
+        if([ta1 isEqualToString:@""])
+        {
+            _txtf_team_a_point.text = @"0";
+        }
+        else
+        {
+            _txtf_team_a_point.text = matchResult.TEAMAPOINTS == nil ? @"":matchResult.TEAMAPOINTS;
+        }
+        
+        NSString *ta= matchResult.TEAMBPOINTS == nil ? @"":matchResult.TEAMBPOINTS;
+        if([ta isEqualToString:@""])
+        {
+            _txtf_team_b_point.text =@"0";
+        }
+        else
+        {
+            _txtf_team_b_point.text = matchResult.TEAMBPOINTS == nil ? @"":matchResult.TEAMBPOINTS;
+        }
         _lbl_team.text = matchResult.TEAM ;
         _lbl_man_of_the_match.text = matchResult.MANOFTHEMATCH;
         [_btn_submit_id setTitle:@"UPDATE" forState:UIControlStateNormal];
+
         
         
         
@@ -785,6 +828,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
     BOOL flag = YES;
     
     NSString *errorMessage = @"";
+   
     
     if(selectedResultType==nil){
         errorMessage = [NSString stringWithFormat:@"%@",@"Please select Result type.\n"];
@@ -805,13 +849,24 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
         flag = NO;
     }
     
-    if(![self textValidation:_txtf_team_a_point.text] && ([_txtf_team_a_point.text intValue]<0 || [_txtf_team_a_point.text intValue]>9)){
-        errorMessage = [NSString stringWithFormat:@"%@%@",errorMessage,@"Please enter A point between 0 to 9.\n"];
+    else if (![self textValidation:self.txtf_team_a_point.text] || ([_txtf_team_a_point.text intValue]<0 || [_txtf_team_a_point.text intValue]>9)) {
+        
+        
+        [self showDialog:@"Please enter A point between 0 to 9.\n" andTitle:@"Match Result"];
         flag = NO;
-    }else if(![self textValidation:_txtf_team_b_point.text] && ([_txtf_team_b_point.text intValue]<0 || [_txtf_team_b_point.text intValue]>9)){
-        errorMessage = [NSString stringWithFormat:@"%@%@",errorMessage,@"Please enter point between 0 to 9.\n"];
-        flag = NO;
+        
     }
+    else if (![self textValidation:self.txtf_team_b_point.text]  || ([_txtf_team_b_point.text intValue]<0 || [_txtf_team_b_point.text intValue]>9)) {
+        
+        
+        [self showDialog:@"Please enter B point between 0 to 9.\n" andTitle:@"Match Result"];
+        flag = NO;
+        
+    }
+
+    
+    
+
     
     if(![errorMessage isEqual:@""]){
         [self showDialog:errorMessage andTitle:@"MatchResult"];

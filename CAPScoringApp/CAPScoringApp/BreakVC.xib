@@ -91,7 +91,7 @@
                                         <constraint firstItem="sHz-La-AVF" firstAttribute="top" secondItem="d3y-cX-in1" secondAttribute="top" constant="7" id="uaa-6N-wON"/>
                                     </constraints>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BREAK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Fh-Oe-scr">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BREAKS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Fh-Oe-scr">
                                     <rect key="frame" x="197" y="13" width="146" height="34"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="146" id="UQg-cB-Mv0"/>

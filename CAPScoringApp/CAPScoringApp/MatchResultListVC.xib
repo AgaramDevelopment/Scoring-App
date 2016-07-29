@@ -428,7 +428,7 @@
                                                 <action selector="btn_result_type:" destination="-1" eventType="touchUpInside" id="bTd-w4-zMW"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epa-yr-bnM">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="epa-yr-bnM">
                                             <rect key="frame" x="8" y="0.0" width="363" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="A7O-cf-sac"/>
@@ -514,7 +514,7 @@
                                                 <action selector="btn_team:" destination="-1" eventType="touchUpInside" id="w1p-un-M7R"/>
                                             </connections>
                                         </button>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAv-LX-OCo">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WAv-LX-OCo">
                                             <rect key="frame" x="8" y="0.0" width="363" height="50"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="50" id="aMF-sJ-ynr"/>
@@ -608,7 +608,7 @@
                                                         <action selector="btn_man_of_the_match:" destination="-1" eventType="touchUpInside" id="45X-mF-aCP"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5j6-Lp-IE1">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5j6-Lp-IE1">
                                                     <rect key="frame" x="8" y="0.0" width="363" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="250" id="8n9-DK-gbS"/>
@@ -768,7 +768,7 @@
                                                         <action selector="btn_man_of_the_series:" destination="-1" eventType="touchUpInside" id="eZs-dj-1hA"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgG-Pn-Zy4">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bgG-Pn-Zy4">
                                                     <rect key="frame" x="8" y="0.0" width="363" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="250" id="O3w-ZB-IDd"/>
@@ -922,7 +922,7 @@
                                                         <action selector="btn_best_batsman:" destination="-1" eventType="touchUpInside" id="VnO-Z6-uBQ"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkY-NB-1uL">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tkY-NB-1uL">
                                                     <rect key="frame" x="8" y="0.0" width="363" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="250" id="KCv-Ba-lC4"/>
@@ -1081,7 +1081,7 @@
                                                         <action selector="btn_best_bowler:" destination="-1" eventType="touchUpInside" id="4v7-gR-yEc"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajw-G4-gXf">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajw-G4-gXf">
                                                     <rect key="frame" x="8" y="0.0" width="363" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="UIk-j8-y4H"/>
@@ -1246,7 +1246,7 @@
                                                         <action selector="btn_allrounder:" destination="-1" eventType="touchUpInside" id="NyE-ZS-ROi"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EbM-KW-isd">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EbM-KW-isd">
                                                     <rect key="frame" x="8" y="0.0" width="363" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="FFc-OP-VIQ"/>
@@ -1411,7 +1411,7 @@
                                                         <action selector="btn_most_valu_player:" destination="-1" eventType="touchUpInside" id="wzQ-2M-dwc"/>
                                                     </connections>
                                                 </button>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Select" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhE-lS-8Cp">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhE-lS-8Cp">
                                                     <rect key="frame" x="8" y="0.0" width="363" height="50"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="250" id="MXK-cg-mbV"/>

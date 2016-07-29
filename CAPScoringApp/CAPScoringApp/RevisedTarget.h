@@ -34,7 +34,9 @@
 - (IBAction)btn_targetok:(id)sender;
 
 
+- (IBAction)didClickBackbtnAction:(id)sender;
 
+@property (strong, nonatomic) IBOutlet UIButton *didClickBackbtnAction;
 
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;
