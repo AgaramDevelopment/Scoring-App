@@ -31,9 +31,9 @@
 @property(strong,nonatomic) NSString *month;
 @property(strong,nonatomic) NSString *matchCode;
 @property(strong,nonatomic) NSString *competitionCode;
-@property(strong,nonatomic)NSString *matchTypeCode;
-@property(strong,nonatomic)NSString *teamAcode;
-@property(strong,nonatomic)NSString *teamBcode;
+@property(strong,nonatomic) NSString *matchTypeCode;
+@property(strong,nonatomic) NSString *teamAcode;
+@property(strong,nonatomic) NSString *teamBcode;
 
 
 @property(nonatomic,strong) NSMutableArray *playingXIPlayers;
@@ -43,6 +43,8 @@
 @property(strong,nonatomic) NSString *chooseTeam;
 //@property (strong,nonatomic) NSString *matchCode;
 @property(assign,nonatomic) BOOL isEdit;
+
+
 
 
 

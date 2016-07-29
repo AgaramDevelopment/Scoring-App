@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="RAJDHANI-MEDIUM.TTF">
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
+        <mutableArray key="RAJDHANI-BOLD.TTF">
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -30,7 +30,7 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="160" id="iMq-1H-fK0"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
+                        <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="18"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -39,13 +39,13 @@
                         <constraints>
                             <constraint firstAttribute="width" constant="160" id="vr6-8O-ZXr"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                        <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SLr-av-brS">
                         <rect key="frame" x="360" y="2" width="180" height="40"/>
-                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                        <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>

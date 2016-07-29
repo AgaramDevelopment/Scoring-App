@@ -8,20 +8,19 @@
         <mutableArray key="RAJDHANI-BOLD.TTF">
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
-        </mutableArray>
-        <mutableArray key="RAJDHANI-REGULAR.TTF">
-            <string>Rajdhani-Regular</string>
-            <string>Rajdhani-Regular</string>
-            <string>Rajdhani-Regular</string>
-            <string>Rajdhani-Regular</string>
-            <string>Rajdhani-Regular</string>
-            <string>Rajdhani-Regular</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RevisedTarget">
             <connections>
                 <outlet property="btn_targetok" destination="F2i-8l-LWa" id="ICf-ig-l10"/>
+                <outlet property="didClickBackbtnAction" destination="VOU-NK-97y" id="LcY-2s-G2Q"/>
                 <outlet property="txt_commentss" destination="Elt-0y-JyS" id="il9-9i-9HL"/>
                 <outlet property="txt_overs" destination="Qf8-hd-i3z" id="h8F-yt-NdA"/>
                 <outlet property="txt_target" destination="ZeO-rx-Qa3" id="BxF-7O-wBO"/>
@@ -42,7 +41,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="enf-DN-FPk">
                             <rect key="frame" x="0.0" y="0.0" width="550" height="75"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REVISED TARGET" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDa-Vk-toL">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="REVISED TARGETS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDa-Vk-toL">
                                     <rect key="frame" x="175" y="15" width="200" height="45"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="45" id="kWb-sL-9Dk"/>
@@ -60,7 +59,7 @@
                                     </constraints>
                                     <state key="normal" image="ico-back-btn"/>
                                     <connections>
-                                        <action selector="didClickBackbtnAction:" destination="-1" eventType="touchUpInside" id="8Qa-Fs-c02"/>
+                                        <action selector="didClickBackbtnAction:" destination="-1" eventType="touchUpInside" id="wCv-03-lm0"/>
                                     </connections>
                                 </button>
                             </subviews>
@@ -76,12 +75,12 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sxn-ye-yWI">
                             <rect key="frame" x="55" y="154" width="440" height="50"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No.Of Overs Per Side" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRh-Cd-l5X">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No.Of Overs Per Side" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oRh-Cd-l5X">
                                     <rect key="frame" x="8" y="15" width="206" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="d3K-bF-Hl5"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="25"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="24"/>
                                     <color key="textColor" red="0.99108743320000003" green="1" blue="0.98888242749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -92,7 +91,7 @@
                                         <constraint firstAttribute="width" constant="147" id="hLM-SJ-wJn"/>
                                     </constraints>
                                     <color key="textColor" red="0.99108743320000003" green="1" blue="0.98888242749999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="NSg-Od-U6J"/>
@@ -113,19 +112,19 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o5l-gs-5aj">
                             <rect key="frame" x="54" y="218" width="440" height="50"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKV-uq-Ia3">
-                                    <rect key="frame" x="142" y="14" width="65" height="21"/>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="25"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKV-uq-Ia3">
+                                    <rect key="frame" x="88" y="0.0" width="121" height="35"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
                                     <color key="textColor" red="0.99108743320000003" green="1" blue="0.98888242749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <textField opaque="NO" clipsSubviews="YES" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZeO-rx-Qa3">
+                                <textField opaque="NO" clipsSubviews="YES" tag="24" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZeO-rx-Qa3">
                                     <rect key="frame" x="293" y="5" width="147" height="40"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="Br1-ea-MtS"/>
+                                        <constraint firstAttribute="width" constant="147" id="CAV-kB-7pa"/>
                                     </constraints>
                                     <color key="textColor" red="0.99108743320000003" green="1" blue="0.98888242749999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     <connections>
                                         <outlet property="delegate" destination="-1" id="B5p-4H-0VD"/>
@@ -134,14 +133,14 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="ZeO-rx-Qa3" firstAttribute="top" secondItem="o5l-gs-5aj" secondAttribute="top" constant="5" id="14Q-9W-Wdr"/>
-                                <constraint firstItem="XKV-uq-Ia3" firstAttribute="top" secondItem="o5l-gs-5aj" secondAttribute="top" constant="14" id="DSP-oE-sfP"/>
-                                <constraint firstAttribute="trailing" secondItem="ZeO-rx-Qa3" secondAttribute="trailing" id="DtB-qN-yUa"/>
-                                <constraint firstItem="XKV-uq-Ia3" firstAttribute="centerY" secondItem="ZeO-rx-Qa3" secondAttribute="centerY" id="L7N-4G-1Ie"/>
-                                <constraint firstItem="ZeO-rx-Qa3" firstAttribute="leading" secondItem="XKV-uq-Ia3" secondAttribute="trailing" constant="86" id="QdK-De-WBF"/>
+                                <constraint firstItem="ZeO-rx-Qa3" firstAttribute="leading" secondItem="XKV-uq-Ia3" secondAttribute="trailing" constant="84" id="7h3-dR-DXN"/>
+                                <constraint firstAttribute="trailing" secondItem="ZeO-rx-Qa3" secondAttribute="trailing" id="IBY-lL-02V"/>
+                                <constraint firstItem="ZeO-rx-Qa3" firstAttribute="centerY" secondItem="o5l-gs-5aj" secondAttribute="centerY" id="Kfg-ru-dGV"/>
+                                <constraint firstAttribute="bottom" secondItem="XKV-uq-Ia3" secondAttribute="bottom" constant="15" id="bcc-xb-JDk"/>
                                 <constraint firstAttribute="height" constant="50" id="chk-7h-aJZ"/>
-                                <constraint firstItem="XKV-uq-Ia3" firstAttribute="leading" secondItem="o5l-gs-5aj" secondAttribute="leading" constant="142" id="iOy-YH-uO4"/>
-                                <constraint firstAttribute="bottom" secondItem="ZeO-rx-Qa3" secondAttribute="bottom" constant="5" id="oyi-HK-MTS"/>
+                                <constraint firstItem="XKV-uq-Ia3" firstAttribute="top" secondItem="o5l-gs-5aj" secondAttribute="top" id="rcQ-Jt-OfP"/>
+                                <constraint firstItem="ZeO-rx-Qa3" firstAttribute="top" secondItem="o5l-gs-5aj" secondAttribute="top" constant="5" id="rnM-ke-ysg"/>
+                                <constraint firstItem="XKV-uq-Ia3" firstAttribute="leading" secondItem="o5l-gs-5aj" secondAttribute="leading" constant="88" id="yxk-Xn-O0c"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i6w-ze-Y8z">
@@ -149,7 +148,7 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Comments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DFV-bn-QSy">
                                     <rect key="frame" x="8" y="8" width="116" height="25"/>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="25"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
                                     <color key="textColor" red="0.99108743320000003" green="1" blue="0.98888242749999999" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -157,7 +156,7 @@
                                     <rect key="frame" x="8" y="41" width="445" height="150"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="14"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="18"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                             </subviews>

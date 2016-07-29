@@ -11,10 +11,13 @@
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-REGULAR.TTF">
-            <string>Rajdhani-Regular</string>
-            <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
         </mutableArray>
@@ -104,7 +107,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3PM-Jx-xqt">
                             <rect key="frame" x="54" y="145" width="440" height="50"/>
                             <subviews>
-                                <textField opaque="NO" clipsSubviews="YES" tag="26" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pxV-PS-xaS">
+                                <textField opaque="NO" clipsSubviews="YES" tag="26" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="bezel" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pxV-PS-xaS">
                                     <rect key="frame" x="141" y="0.0" width="237" height="50"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
@@ -113,24 +116,25 @@
                                         <outlet property="delegate" destination="-1" id="xmF-6S-LJ1"/>
                                     </connections>
                                 </textField>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runs" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfO-qL-L3R">
-                                    <rect key="frame" x="71" y="12" width="50" height="25"/>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="25"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Runs" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TfO-qL-L3R">
+                                    <rect key="frame" x="43" y="12" width="88" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="88" id="lHA-YE-8hZ"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="TfO-qL-L3R" firstAttribute="baseline" secondItem="pxV-PS-xaS" secondAttribute="baseline" id="8ED-OQ-VCD"/>
                                 <constraint firstAttribute="trailing" secondItem="pxV-PS-xaS" secondAttribute="trailing" constant="62" id="G3h-dF-ajs"/>
                                 <constraint firstItem="pxV-PS-xaS" firstAttribute="top" secondItem="3PM-Jx-xqt" secondAttribute="top" id="PU2-C4-Jtx"/>
-                                <constraint firstItem="TfO-qL-L3R" firstAttribute="leading" secondItem="3PM-Jx-xqt" secondAttribute="leading" constant="71" id="VKz-76-UOl"/>
+                                <constraint firstItem="TfO-qL-L3R" firstAttribute="leading" secondItem="3PM-Jx-xqt" secondAttribute="leading" constant="43" id="UPM-lR-QNO"/>
+                                <constraint firstItem="pxV-PS-xaS" firstAttribute="leading" secondItem="TfO-qL-L3R" secondAttribute="trailing" constant="10" id="WD0-DW-XCU"/>
                                 <constraint firstAttribute="bottom" secondItem="pxV-PS-xaS" secondAttribute="bottom" id="cOZ-Lz-EPr"/>
                                 <constraint firstAttribute="bottom" secondItem="pxV-PS-xaS" secondAttribute="bottom" constant="6" id="hJ0-X5-MJh"/>
-                                <constraint firstItem="pxV-PS-xaS" firstAttribute="leading" secondItem="TfO-qL-L3R" secondAttribute="trailing" constant="20" id="hUv-cU-z0H"/>
-                                <constraint firstItem="pxV-PS-xaS" firstAttribute="leading" secondItem="TfO-qL-L3R" secondAttribute="trailing" constant="20" id="kCM-hg-Ekc"/>
-                                <constraint firstItem="TfO-qL-L3R" firstAttribute="top" secondItem="3PM-Jx-xqt" secondAttribute="top" constant="12" id="lwx-BG-e6f"/>
-                                <constraint firstAttribute="bottom" secondItem="TfO-qL-L3R" secondAttribute="bottom" constant="13" id="yk9-bT-Jbi"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
@@ -158,7 +162,7 @@
                                         <constraint firstAttribute="height" constant="50" id="Vg2-cH-u6g"/>
                                         <constraint firstAttribute="width" constant="363" id="dwA-Vw-72n"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -244,19 +248,19 @@
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Penalty Awarded to" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xpc-fF-mAW">
                                     <rect key="frame" x="15" y="10" width="160" height="30"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Penalty Runs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23A-3M-T3i">
                                     <rect key="frame" x="195" y="10" width="160" height="30"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Penalty Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TmX-gx-U3H">
                                     <rect key="frame" x="375" y="10" width="160" height="30"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -282,7 +286,7 @@
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uYa-Cg-H5y">
                             <rect key="frame" x="0.0" y="125" width="550" height="475"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.1019607843" green="0.12941176469999999" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="4G1-FL-k5w"/>
@@ -290,7 +294,7 @@
                             </connections>
                         </tableView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.1019607843" green="0.12941176469999999" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="pf3-om-hwo" secondAttribute="trailing" id="1Lj-ZF-Uoy"/>
                         <constraint firstItem="lfP-0L-EcM" firstAttribute="leading" secondItem="poV-4y-jP4" secondAttribute="leading" id="3xd-Lo-Nbc"/>

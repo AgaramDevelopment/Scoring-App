@@ -101,7 +101,7 @@
 {
     CustomNavigationVC *objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
     [self.view addSubview:objCustomNavigation.view];
-    objCustomNavigation.lbl_titleName.text=@"SELECT TOURNAMENT";
+    objCustomNavigation.lbl_titleName.text=@"TOURNAMENT";
     [objCustomNavigation.Btn_Back addTarget:self action:@selector(Back_BtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
 }
@@ -405,7 +405,7 @@ else{
 - (BOOL) formValidation
 {
     
-    if([ self.selectMatchName.text isEqualToString:@"Select"] || self.selectMatchName.text==nil)
+    if([ self.selectMatchName.text isEqualToString:@""] || self.selectMatchName.text==nil)
     {
         [self ShowAlterView:@"Please Select Any Tournament"];
         return NO;
