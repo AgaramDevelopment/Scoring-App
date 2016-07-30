@@ -11,7 +11,9 @@
 @protocol RevisedTargetDelegate <NSObject>
 @required
 
-- (void) ChangeVCBackBtnAction;
+- (void) ChangeVCRevisedBackBtnAction;
+
+- (void) _selectOvers;
 @end
 
 

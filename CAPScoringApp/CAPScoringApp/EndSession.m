@@ -27,6 +27,7 @@
     UITableView *objDrobDowntbl;
     NSString  * Dominate;
     NSString *MatchDate;
+    NSString *MatchDateWithTime;
     DBManagerEndSession *dbEndSession;
     
 }
@@ -52,17 +53,19 @@ int POS_TEAM_TYPE = 1;
 @implementation EndSession
 @synthesize MATCHTYPECODE;
 @synthesize SESSIONNO;
+@synthesize STARTOVERNO;
+@synthesize ENDOVERNO;
+@synthesize RUNSSCORED;
+@synthesize DAYNO;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
     //self.view.frame =CGRectMake(0,0, [[UIScreen mainScreen] bounds].size.width, 100);
- 
+  [self.tbl_session setBackgroundColor:[UIColor clearColor]];
     
 }
-
-
 
 
 -(void)fetchPageEndSession:(NSObject *) fetchRecord:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE
@@ -84,6 +87,18 @@ int POS_TEAM_TYPE = 1;
     DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
     
     MatchDate = [dbEndInnings GetMatchDateForFetchEndInnings : COMPETITIONCODE :MATCHCODE];
+    
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSDate *date = [formatter dateFromString:MatchDate];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *MATCHDATE1 = [formatter stringFromDate:date];
+    
+    NSString *timeString=@"00:00:00";
+    
+    MatchDateWithTime = [NSString stringWithFormat:@"%@ %@",MATCHDATE1,timeString];
+    
     
    battingTeamArray = [[NSMutableArray alloc]init];
     battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
@@ -116,15 +131,21 @@ int POS_TEAM_TYPE = 1;
     _lbl_sessionNo.text = [NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO];
     _lbl_InningsNo.text = [NSString stringWithFormat:@"%@",sessionRecords.INNINGSNOS];
     _lbl_teamBatting.text = sessionRecords.TEAMNAMES;
-    _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO];
+    _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO == nil ? @"0" : sessionRecords.STARTOVERNO];
     
-    _lbl_sessionEndOver.text = [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO];
+    _lbl_sessionEndOver.text = [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO = @"" ? @"0" :sessionRecords.ENDOVERNO];
     
     _lbl_runScored.text = [NSString stringWithFormat:@"%@",sessionRecords.RUNSSCORED];
     _lbl_wicketLost.text = [NSString stringWithFormat:@"%@",sessionRecords.WICKETLOST];
 
     
     SESSIONNO = sessionRecords.SESSIONNO;
+    DAYNO = sessionRecords.DAYNO;
+
+    STARTOVERNO = sessionRecords.STARTOVERNO;
+    ENDOVERNO = sessionRecords.ENDOVERNO;
+    RUNSSCORED = sessionRecords.RUNSSCORED;
+    
     
 
     [self.view layoutIfNeeded];
@@ -176,6 +197,8 @@ int POS_TEAM_TYPE = 1;
     [self duration];
       self.view_allControls.hidden = YES;
     self.view_datePicker.hidden=YES;
+    
+    
 }
 
 -(void)datePicker{
@@ -194,11 +217,21 @@ int POS_TEAM_TYPE = 1;
     [self.txt_startTime setInputView:datePicker];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    //   2016-06-25 12:00:00
-    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate * currentDate = [dateFormat dateFromString:MatchDate];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
+    NSDate * currentDate = [dateFormat dateFromString:MatchDateWithTime];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
+    
+   
+//    NSDate *date = [formatter dateFromString:MatchDate];
+//    [formatter setDateFormat:@"yyyy-MM-dd"];
+//    
+//    NSString *MATCHDATE1 = [formatter stringFromDate:date];
+//    NSString *timeString=@"00:00:00";
+//    
+//    MATCHDATETIME=[NSString stringWithFormat:@"%@ %@",MATCHDATE1,timeString];
+
     
     
     NSDateComponents *comps = [[NSDateComponents alloc] init];
@@ -379,11 +412,11 @@ int POS_TEAM_TYPE = 1;
     cell.lbl_startSessionTime.text = end.SESSIONSTARTTIME;
     cell.lbl_endSessionTime.text = end.SESSIONENDTIME;
     cell.lbl_teamName.text = end.SHORTTEAMNAME;
-    //int sessionno = [end.SESSIONNO intValue];
+
         
-     
-        NSString * str= [NSString stringWithFormat:@"%d",[sessionRecords.SESSIONNO integerValue]];
-        cell.lbl_sessionNo.text =str;//[end.SESSIONNO stringValue];
+        cell.lbl_sessionNo.text = [NSString stringWithFormat:@"%@", end.SESSIONNO];
+        
+        
         cell.lbl_dayNo.text = end.DAYNO;
     
     
@@ -425,6 +458,7 @@ int POS_TEAM_TYPE = 1;
         
     NSString *endOverNO = [dbEndSession GetEndOverNoForFetchEndSession:competitioncode :matchcode :sessionRecords.SESSIONNO :obj.DAYNO :obj.INNINGSNO];
         
+        
     NSString*startInningsTime = obj.SESSIONSTARTTIME;
     NSString*endInningsTime  = obj.SESSIONENDTIME;
     NSString*teamName = obj.TEAMNAME;
@@ -447,7 +481,7 @@ int POS_TEAM_TYPE = 1;
 
     
     self.lbl_day.text = dayNo;
-   // self.lbl_sessionNo.text = [NSString stringWithFormat:@"%@", sessionNo];
+        self.lbl_sessionNo.text = [NSString stringWithFormat:@"%@",obj.SESSIONNO];
     self.lbl_InningsNo.text = [NSString stringWithFormat:@"%@",inningsNo];
     
         _lbl_sessionStartOver.text = startOver;
@@ -486,21 +520,37 @@ int POS_TEAM_TYPE = 1;
     
 }
 
+-(BOOL) checkValidation{
+    
+    if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
+        [self showDialog:@"Duration should be greated than zero" andTitle:@""];
+        return NO;
+    }
+    return YES;
+}
+
+/**
+ * Show message for given title and content
+ */
+-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
 
 - (IBAction)btn_save:(id)sender {
-        
-    [sessionRecords FetchEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
     
+    if ([self checkValidation]) {
     
     if ([BtnurrentTittle isEqualToString:@"INSERT"]) {
         
-        int SESSIONNO =[sessionRecords.SESSIONNO intValue];
+        //int SESSIONNO =[sessionRecords.SESSIONNO intValue];
         int STARTOVERNO  = [sessionRecords.STARTOVERNO intValue];
         int ENDOVERNO   =[sessionRecords.ENDOVERNO intValue];
         int  RUNSSCORED =[sessionRecords.RUNSSCORED intValue];
         
         
-        [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :fetchSeRecord.DAYNO : sessionRecords.SESSIONNO :_txt_startTime.text :_txt_endTime.text :[NSString stringWithFormat:@"%d",STARTOVERNO]: [NSString stringWithFormat:@"%d",ENDOVERNO] :[NSString stringWithFormat:@"%d" ,RUNSSCORED] :[NSString stringWithFormat:@"%d",fetchSeRecord.BATTEAMWICKETS] :Dominate];
+        [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :fetchSeRecord.DAYNO : SESSIONNO :_txt_startTime.text :_txt_endTime.text :[NSString stringWithFormat:@"%d",STARTOVERNO]: [NSString stringWithFormat:@"%d",ENDOVERNO] :[NSString stringWithFormat:@"%d" ,RUNSSCORED] :[NSString stringWithFormat:@"%d",fetchSeRecord.BATTEAMWICKETS] :Dominate];
         
         if(self.checkInternetConnection){
             
@@ -547,7 +597,7 @@ int POS_TEAM_TYPE = 1;
             
         }
         
-        
+     
     }else{
         
         
@@ -609,13 +659,15 @@ int POS_TEAM_TYPE = 1;
     }
     
     
-//    [sessionRecords FetchEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
 
+    
+    [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
+    [self.tbl_session reloadData];
     self.tbl_session.hidden = NO;
     self.view_allControls.hidden = YES;
     self.view_heading.hidden = NO;
-
-    
+  
+    }
 }
 
 - (IBAction)btn_delete:(id)sender {
@@ -626,10 +678,14 @@ int POS_TEAM_TYPE = 1;
     
       NSString *dayNO =  [dbEndSession getDayNo : competitioncode: matchcode];
         
-        NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : sessionNo];
+        if ([dayNO isEqualToString:@"0"]) {
         
+            dayNO = @"1";
+        }
         
-        [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO : sessionRecords.DAYNO : sessionRecords.SESSIONNO];
+        NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : dayNO];
+
+        [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO : dayNO : sessionNo];
         
         
         if(self.checkInternetConnection){
@@ -678,7 +734,8 @@ int POS_TEAM_TYPE = 1;
     //sessionRecords = [[EndSessionRecords alloc]init];
     
     
-    
+//        [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
+//        [self.tbl_session reloadData];
         [endSessionArray removeLastObject];
         self.tbl_session.hidden = NO;
         self.view_heading.hidden = NO;
@@ -729,6 +786,7 @@ int POS_TEAM_TYPE = 1;
         self.view_allControls.hidden = YES;
         self.tbl_session.hidden = NO;
         self.view_heading.hidden = NO;
+        self.view_datePicker.hidden = YES;
         back = YES;
         
     }else if (back == YES){
@@ -752,7 +810,7 @@ int POS_TEAM_TYPE = 1;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *matchdate = [dateFormat dateFromString:MatchDate];
+    NSDate *matchdate = [dateFormat dateFromString:MatchDateWithTime];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     // for minimum date
     [datePicker setMinimumDate:matchdate];

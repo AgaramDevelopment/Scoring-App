@@ -17,10 +17,10 @@
 - (IBAction)btnCancel:(id)sender;
 - (IBAction)btnsave:(id)sender;
 @property (strong, nonatomic) IBOutlet UITextView *txt_info;
-
+@property(nonatomic,strong)NSString *selectDashBoard;
 
 @property(nonatomic,strong)NSString *CompitionCode;
 
-
+@property(nonatomic,strong)NSMutableArray*selectindexarray;
 @end
 

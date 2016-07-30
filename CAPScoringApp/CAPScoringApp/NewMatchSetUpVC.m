@@ -16,6 +16,7 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "Utitliy.h"
+#import "FixturesVC.h"
 
 @interface NewMatchSetUpVC ()
 {
@@ -60,6 +61,8 @@ NSRegularExpression *isMatchedByRegex;
     self.lab_matchType.text = self.matchType;
     self.txt_overs.text = self.overs;
     self.lbl_date.text = self.date;
+    
+    
     self.lbl_time.text = self.time;
     self.lbl_monYear.text = self.month;
     self.lbl_venu.text = self.matchVenu;
@@ -369,7 +372,29 @@ NSRegularExpression *isMatchedByRegex;
 
 - (IBAction)btn_back:(id)sender {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"]) {
+        NSLog(@"no");
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ScoreEnginExit"];
+        [self.navigationController popViewControllerAnimated:YES];
+       
+    }
+    
+    
+    
+    else if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetUp"]) {
+        NSLog(@"yes");
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetUp"];
+        
+    FixturesVC*Fixvc = [[FixturesVC alloc]init];
+        
+        Fixvc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
+   Fixvc.CompitionCode=competitionCode;
+        [self.navigationController pushViewController:Fixvc animated:YES];
+        
+    } else {
+        NSLog(@"no");
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 /**

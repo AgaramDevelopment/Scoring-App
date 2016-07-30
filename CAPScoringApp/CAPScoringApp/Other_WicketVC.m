@@ -354,7 +354,7 @@ else
         
         self.Wicket_tableview.hidden=YES;
         isEnableTbl=YES;
-        self.selectplayer_lbl.text=@"select";
+        self.selectplayer_lbl.text=@"Select";
     }
     
    
@@ -459,7 +459,7 @@ else
         return flag;
     }
     
-    if([self.selectplayer_lbl.text isEqual:@"select"]){
+    if([self.selectplayer_lbl.text isEqual:@"Select"]){
         [self showDialog:@"Please enter Player Name." andTitle:@"Other Wicket"];
        // errorMessage = [NSString stringWithFormat:@"%@%@",@"Please Select Player Name.\n",errorMessage];
         flag = NO;
@@ -531,7 +531,7 @@ else
     self.Btn_Add.hidden=YES;
     isAddWicket=YES;
     isWicketlist=YES;
-    self.selectplayer_lbl.text=@"select";
+    self.selectplayer_lbl.text=@"Select";
     self. Wicket_lbl.text =@"Select";
     
     [self.btn_delete setBackgroundColor:[UIColor grayColor]];
@@ -602,7 +602,7 @@ else
 //                     completion:nil];
     }
     else{
-        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No Record selected" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Other Wicket" message:@"No Record selected" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
 
     }
@@ -814,7 +814,7 @@ else
     
     NSMutableArray *GetWicketEventsDetails=[ dbOtherWicket GetWicketEventDetailsForInsertOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
     
-    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Other Wicket Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Other Wicket" message:@"Other Wicket Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alter show];
     
     [ dbOtherWicket GetWicketNoForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
@@ -915,7 +915,7 @@ else
 //        [self.tbl_Wicketlist reloadData];
 
         
-        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Other Wicket Updated Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Other Wicket" message:@"Other Wicket Updated Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
 
         
@@ -992,7 +992,7 @@ else
     
     [dbOtherWicket GetWicketNoForDeleteOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
     
-    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Other Wicket Deleted Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Other Wicket" message:@"Other Wicket Deleted Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alter show];
 }
 
