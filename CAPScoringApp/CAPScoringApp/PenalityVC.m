@@ -431,8 +431,6 @@
     else if([penaltyreasonTxtf isEqual:@"Choose Penalty Type"] || [penaltyreasonTxtf isEqualToString:@""]){
         [self showDialog:@"Please Choose  Penalty Type" andTitle:@"Penalty"];
         return NO;
-        
-        
     }
     else{
         if([penaltyTxtf isEqual:@""]){
