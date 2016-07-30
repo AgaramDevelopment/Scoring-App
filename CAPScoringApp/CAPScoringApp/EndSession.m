@@ -27,7 +27,7 @@
     UITableView *objDrobDowntbl;
     NSString  * Dominate;
     NSString *MatchDate;
-    NSString *MATCHDATETIME;
+    NSString *MatchDateWithTime;
     DBManagerEndSession *dbEndSession;
     
 }
@@ -87,6 +87,18 @@ int POS_TEAM_TYPE = 1;
     DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
     
     MatchDate = [dbEndInnings GetMatchDateForFetchEndInnings : COMPETITIONCODE :MATCHCODE];
+    
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSDate *date = [formatter dateFromString:MatchDate];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *MATCHDATE1 = [formatter stringFromDate:date];
+    
+    NSString *timeString=@"00:00:00";
+    
+    MatchDateWithTime = [NSString stringWithFormat:@"%@ %@",MATCHDATE1,timeString];
+    
     
    battingTeamArray = [[NSMutableArray alloc]init];
     battingTeamArray =[dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.BOWLINGTEAMCODE];
@@ -207,7 +219,7 @@ int POS_TEAM_TYPE = 1;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
-    NSDate * currentDate = [dateFormat dateFromString:MatchDate];
+    NSDate * currentDate = [dateFormat dateFromString:MatchDateWithTime];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     
@@ -508,10 +520,28 @@ int POS_TEAM_TYPE = 1;
     
 }
 
+-(BOOL) checkValidation{
+    
+    if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
+        [self showDialog:@"Duration should be greated than zero" andTitle:@""];
+        return NO;
+    }
+    return YES;
+}
+
+/**
+ * Show message for given title and content
+ */
+-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
 
 - (IBAction)btn_save:(id)sender {
     
-
+    if ([self checkValidation]) {
+    
     if ([BtnurrentTittle isEqualToString:@"INSERT"]) {
         
         //int SESSIONNO =[sessionRecords.SESSIONNO intValue];
@@ -637,7 +667,7 @@ int POS_TEAM_TYPE = 1;
     self.view_allControls.hidden = YES;
     self.view_heading.hidden = NO;
   
-    
+    }
 }
 
 - (IBAction)btn_delete:(id)sender {
@@ -780,10 +810,10 @@ int POS_TEAM_TYPE = 1;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *matchdate = [dateFormat dateFromString:MatchDate];
+    NSDate *matchdate = [dateFormat dateFromString:MatchDateWithTime];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     // for minimum date
-    [datePicker setMinimumDate:MATCHDATETIME];
+    [datePicker setMinimumDate:matchdate];
     
     // for maximumDate
     int daysToAdd = 1;

@@ -401,14 +401,14 @@ NSDateFormatter *formatter;
 
 }
 
-//-(BOOL) checkValidation{
-// 
-//    if([self.lbl_duration.text integerValue]<=0){
-//        [self showDialog:@"Duration should be greated than zero" andTitle:@""];
-//        return NO;
-//    }
-//    return YES;
-//}
+-(BOOL) checkValidation{
+ 
+    if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
+        [self showDialog:@"Duration should be greated than zero" andTitle:@""];
+        return NO;
+    }
+    return YES;
+}
 
 /**
  * Show message for given title and content
@@ -422,7 +422,7 @@ NSDateFormatter *formatter;
 
 
 - (IBAction)btn_save:(id)sender {
- // if([self checkValidation]){
+  if([self checkValidation]){
         if(IsEditMode){
             NSString *endDayTime = _txt_endTime.text;
 
@@ -491,7 +491,7 @@ NSDateFormatter *formatter;
         
         [self.tbl_endday reloadData];
         
-   // }
+    }
   
     
     
