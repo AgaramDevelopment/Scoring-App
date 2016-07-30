@@ -147,7 +147,7 @@
         
     }
     if([txt_overs.text isEqual:@""]){
-        [self showDialog:@"Please enter Revised Over." andTitle:@"Revised Over"];
+        [self showDialog:@"Please enter number only" andTitle:@"Revised Over"];
                 return NO;
     } if([txt_commentss.text isEqual:@""]){
         [self showDialog:@"Please enter Comments." andTitle:@"Revised Over"];
