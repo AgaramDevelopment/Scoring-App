@@ -205,17 +205,17 @@ int POS_TEAM_TYPE = 1;
     [self.txt_startTime setInputView:datePicker];
     NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    
     NSDate * currentDate = [dateFormat dateFromString:MatchDate];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
-//    NSDate *date = [formatter dateFromString:_MATCHDATE];
+   
+//    NSDate *date = [formatter dateFromString:MatchDate];
 //    [formatter setDateFormat:@"yyyy-MM-dd"];
-//    NSString *MATCHDATE1 = [formatter stringFromDate:currentDate];
+//    
+//    NSString *MATCHDATE1 = [formatter stringFromDate:date];
 //    NSString *timeString=@"00:00:00";
 //    
 //    MATCHDATETIME=[NSString stringWithFormat:@"%@ %@",MATCHDATE1,timeString];
@@ -756,6 +756,7 @@ int POS_TEAM_TYPE = 1;
         self.view_allControls.hidden = YES;
         self.tbl_session.hidden = NO;
         self.view_heading.hidden = NO;
+        self.view_datePicker.hidden = YES;
         back = YES;
         
     }else if (back == YES){
@@ -782,7 +783,7 @@ int POS_TEAM_TYPE = 1;
     NSDate *matchdate = [dateFormat dateFromString:MatchDate];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     // for minimum date
-    [datePicker setMinimumDate:matchdate];
+    [datePicker setMinimumDate:MATCHDATETIME];
     
     // for maximumDate
     int daysToAdd = 1;

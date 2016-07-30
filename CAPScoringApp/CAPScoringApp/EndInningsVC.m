@@ -538,6 +538,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         self.tbl_endInnings.hidden = NO;
          self.view_Header.hidden = NO;
         self.Btn_Add.hidden=NO;
+        self.view_datepicker.hidden = YES;
         IsBack = YES;
     
     }else if (IsBack == YES){
