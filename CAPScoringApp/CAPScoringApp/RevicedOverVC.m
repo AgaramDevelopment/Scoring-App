@@ -133,23 +133,23 @@
     }
     
     
-    else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){
+    if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){
         if(OdiText > 50){
             
             [self showDialog:@"Please Enter Below 50 Overs" andTitle:@"Error"];
             return NO;
         }
     }
-    else if([OldOvers intValue] < [txt_overs.text intValue]){
+    if([OldOvers intValue] < [txt_overs.text intValue]){
         [self showDialog:@"The Revised Over is not possible when the data exist for this innings." andTitle:@"Revised Over"];
         return NO;
         
         
     }
-    else if([txt_overs.text isEqual:@""]){
-        [self showDialog:@"Please enter Revised Over." andTitle:@"Revised Over"];
+    if([txt_overs.text isEqual:@""]){
+        [self showDialog:@"Please enter number only" andTitle:@"Revised Over"];
                 return NO;
-    }else if([txt_commentss.text isEqual:@""]){
+    } if([txt_commentss.text isEqual:@""]){
         [self showDialog:@"Please enter Comments." andTitle:@"Revised Over"];
         return NO;
     }

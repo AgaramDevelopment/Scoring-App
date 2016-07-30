@@ -49,16 +49,16 @@
     
     if([self.txt_user_name.text isEqualToString:@""] || self.txt_user_name.text==nil && [self.txt_password.text isEqualToString:@""] || self.txt_password.text==nil)
     {
-         [self showDialog:@"Please Enter User Name\nPlease Enter Password" andTitle:@""];
+         [self showDialog:@"Please Enter User Name\nPlease Enter Password" andTitle:@"Login"];
     }
     else if([self.txt_user_name.text isEqualToString:@""] || self.txt_user_name.text==nil)
     {
-        [self showDialog:@"Please Enter User Name." andTitle:@""];
+        [self showDialog:@"Please Enter User Name." andTitle:@"Login"];
 
     }
     else if([self.txt_password.text isEqualToString:@""] || self.txt_password.text==nil)
     {
-        [self showDialog:@"Please Enter Password." andTitle:@""];
+        [self showDialog:@"Please Enter Password." andTitle:@"Login"];
 
     }
         else{
@@ -271,11 +271,11 @@
                 }
                 else if ([responseData length] == 0 && error == nil)
                 {
-                    [self showDialog:@"Server error please try again" andTitle:@""];
+                    [self showDialog:@"Server error please try again" andTitle:@"Login"];
 
                 }
                 else if (responseData != nil){
-                    [self showDialog:@"Server error please try again" andTitle:@""];
+                    [self showDialog:@"Server error please try again" andTitle:@"Login"];
 
                 }
                 
@@ -325,14 +325,14 @@
                          
                      }
                      else{
-                         [self showDialog:@"SecurityId expired" andTitle:@""];
+                         [self showDialog:@"SecurityId expired" andTitle:@"Login"];
                      }
                     
                 }else{
-                    [self showDialog:@"Login expired" andTitle:@""];
+                    [self showDialog:@"Login expired" andTitle:@"Login"];
                 }
             }else{
-                [self showDialog:@"No internet connection" andTitle:@"Error"];
+                [self showDialog:@"No internet connection" andTitle:@"Login"];
             }
         }
     }
@@ -398,15 +398,15 @@
     NSString *userNameTxtf = self.txt_user_name.text;
     NSString *passwordTxtf = self.txt_password.text;
    if([userNameTxtf isEqual:@""]||[passwordTxtf isEqual:@""])
-   {  [self showDialog:@"Please Enter User Name\nPlease Enter Password" andTitle:@""];
+   {  [self showDialog:@"Please Enter User Name\nPlease Enter Password" andTitle:@"Login"];
          return NO;
    }
     
     else if([userNameTxtf isEqual:@""]){
-        [self showDialog:@"Please Enter User Name." andTitle:@""];
+        [self showDialog:@"Please Enter User Name." andTitle:@"Login"];
         return NO;
     }else if([passwordTxtf isEqual:@""]){
-        [self showDialog:@"Please Enter User Name." andTitle:@""];
+        [self showDialog:@"Please Enter User Name." andTitle:@"Login"];
         return NO;
     }
     

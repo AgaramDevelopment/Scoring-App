@@ -557,6 +557,7 @@
     
       [self MatcheventMethod];
     [self getLastBowlerDetails];
+    
 }
 -(void)MatcheventMethod
 {
@@ -2184,7 +2185,9 @@
     //    else {
     //        cell.textLabel.text = [self.selectbtnvalueArray objectAtIndex:indexPath.row];
     //    }
-
+    
+    tbl_bowlType.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
 
  return cell;
 }
@@ -3931,7 +3934,7 @@
             
             if(self.ballEventRecord.objIssix.intValue == 1){
                 
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Score Engine"
                                                                 message:@"Wicket not possible in B6"
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
@@ -3939,7 +3942,7 @@
                 [alert show];
                 
             }else if(self.ballEventRecord.objIsFour.intValue == 1){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Score Engine"
                                                                 message:@"Wicket not possible in B4"
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
@@ -7783,7 +7786,7 @@ self.lbl_umpirename.text=@"";
         
         self.view_bowlType.hidden = YES;
         
-        
+        self.tbl_bowlType.separatorColor = [UIColor clearColor];
 
         
         
@@ -8465,7 +8468,7 @@ self.lbl_umpirename.text=@"";
 
     
     NSMutableArray *getPlayerRecord = [objDBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS] BALLNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVRBALLS] ];
-    
+     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
     NewMatchSetUpVC *detail = [[NewMatchSetUpVC alloc]init];
     
     detail =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
@@ -8796,6 +8799,15 @@ self.lbl_umpirename.text=@"";
     
 }
 
+-(void) _selectOvers{
+    [self reloadBowlerTeamBatsmanDetails];
+}
+
+- (void) ChangeVCRevisedBackBtnAction
+{
+    [fullview removeFromSuperview];
+    
+}
 -(void) revisiedTarget
 {
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -8810,7 +8822,7 @@ self.lbl_umpirename.text=@"";
      revisedTarget.matchTypeCode=self.matchTypeCode;
     
     revisedTarget.targetruns=  fetchSEPageLoadRecord.TARGETRUNS;
-    
+    revisedTarget.delegate=self;
     [fullview addSubview:revisedTarget.view];
  //   [fullview addSubview:breakvc.view];
     

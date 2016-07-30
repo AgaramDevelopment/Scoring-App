@@ -210,14 +210,14 @@
                         <exclude reference="B7p-Zk-p1k"/>
                         <exclude reference="u4m-uV-6Xb"/>
                         <exclude reference="vn6-nT-ud6"/>
-                        <exclude reference="7DN-BN-Izl"/>
-                        <exclude reference="JfT-56-XhK"/>
-                        <exclude reference="Uvc-Va-Ilr"/>
-                        <exclude reference="wQd-oa-fXa"/>
                         <exclude reference="Clu-gO-Arg"/>
                         <exclude reference="RH1-nt-LIn"/>
                         <exclude reference="Uyf-te-lFJ"/>
                         <exclude reference="jlS-JJ-zel"/>
+                        <exclude reference="7DN-BN-Izl"/>
+                        <exclude reference="JfT-56-XhK"/>
+                        <exclude reference="Uvc-Va-Ilr"/>
+                        <exclude reference="wQd-oa-fXa"/>
                     </mask>
                 </variation>
                 <variation key="heightClass=regular-widthClass=regular">
@@ -247,14 +247,14 @@
                         <include reference="B7p-Zk-p1k"/>
                         <include reference="u4m-uV-6Xb"/>
                         <include reference="vn6-nT-ud6"/>
-                        <include reference="7DN-BN-Izl"/>
-                        <include reference="JfT-56-XhK"/>
-                        <include reference="Uvc-Va-Ilr"/>
-                        <include reference="wQd-oa-fXa"/>
                         <include reference="Clu-gO-Arg"/>
                         <include reference="RH1-nt-LIn"/>
                         <include reference="Uyf-te-lFJ"/>
                         <include reference="jlS-JJ-zel"/>
+                        <include reference="7DN-BN-Izl"/>
+                        <include reference="JfT-56-XhK"/>
+                        <include reference="Uvc-Va-Ilr"/>
+                        <include reference="wQd-oa-fXa"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

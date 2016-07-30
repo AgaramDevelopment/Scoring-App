@@ -245,7 +245,7 @@
         }
         else
         {
-            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Start Innings"
                                                             message: @"Striker and Non-Striker cannot be same.\nPlease Select different Player"
                                                            delegate: self
                                                   cancelButtonTitle:@"Ok"
@@ -268,7 +268,7 @@
         }
         else
         {
-            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Start Innings"
                                                             message: @"Striker and Non-Striker cannot be same.\nPlease Select different Player"
                                                            delegate: self
                                                   cancelButtonTitle:@"Ok"
@@ -354,18 +354,39 @@
 //    if([self.lbl_Striker.text isEqualToString:@""],[self.lbl_NonStriker.text isEqualToString:@""],[self.lbl_Bowler.text isEqualToString:@""])
 //    {  [self ShowAlterView:@"Please Select Striker\nPlease Select NonStriker\nPlease Select Bowler"];
 //   }
-    if([self.lbl_Striker.text isEqualToString:@""] || self.lbl_Striker.text==nil)
+    if (([self.lbl_Striker.text isEqualToString:@""] || self.lbl_Striker.text==nil) && ([self.lbl_NonStriker.text isEqualToString:@""] || self.lbl_NonStriker.text==nil) && ([self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)) {
+        
+    [self ShowAlterView:@"Please Select Striker\nPlease Select NonStriker\nPlease Select Bowler" ];
+        
+    }
+
+    else if(([self.lbl_NonStriker.text isEqualToString:@""] || self.lbl_NonStriker.text==nil) && ([self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil))
     {
+        [self ShowAlterView:@"Please Select NonStriker\nPlease Select Bowler"];
+    }else if (([self.lbl_Striker.text isEqualToString:@""] || self.lbl_Striker.text==nil) && ([self.lbl_NonStriker.text isEqualToString:@""] || self.lbl_NonStriker.text==nil)){
+        
+        [self ShowAlterView:@"Please Select Striker\nPlease Select NonStriker" ];
+
+    }    else if (([self.lbl_Striker.text isEqualToString:@""] || self.lbl_Striker.text==nil)  && ([self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)){
+        
+        [self ShowAlterView:@"Please Select Striker\nPlease Select Bowler" ];
+        
+    }
+    
+    else if (([self.lbl_Striker.text isEqualToString:@""] || self.lbl_Striker.text==nil)){
         [self ShowAlterView:@"Please Select Striker"];
-    }
-    else if([self.lbl_NonStriker.text isEqualToString:@""] || self.lbl_NonStriker.text==nil)
-    {
+        
+    }else if (([self.lbl_NonStriker.text isEqualToString:@""] || self.lbl_NonStriker.text==nil)){
         [self ShowAlterView:@"Please Select NonStriker"];
+        
     }
-    else if([self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)
-    {
+    else if([self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil){
         [self ShowAlterView:@"Please Select Bowler"];
+        
     }
+    
+ 
+    
     
     else{
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Start Innings"

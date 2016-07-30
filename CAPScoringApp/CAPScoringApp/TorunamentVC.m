@@ -280,7 +280,8 @@
         Fixvc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
         EventRecord *eventRecord = [selectindexarray objectAtIndex:0] ;
         Fixvc.CompitionCode=eventRecord.competitioncode;
-
+        Fixvc.selectDashBoard=self.selectDashBoard;
+        Fixvc.selectindexarray=selectindexarray;
         [self.navigationController pushViewController:Fixvc animated:YES];
     }
 else{
