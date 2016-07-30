@@ -372,8 +372,16 @@ NSRegularExpression *isMatchedByRegex;
 
 - (IBAction)btn_back:(id)sender {
     
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"]) {
+        NSLog(@"no");
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ScoreEnginExit"];
+        [self.navigationController popViewControllerAnimated:YES];
+       
+    }
     
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetUp"]) {
+    
+    
+    else if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetUp"]) {
         NSLog(@"yes");
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetUp"];
         

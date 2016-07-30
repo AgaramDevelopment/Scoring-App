@@ -458,6 +458,7 @@
        [delegate hideLoading];
     [objDBManager updateCapitainWicketkeeper :self.competitionCode :self.matchCode capitainAteam:self.captainAcode capitainBteam:self.captainBcode wicketkeeperAteam:self.WKTkeeperAcode wicketkeeperBteam:self.WKTkeeperBcode];
      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetUp"];
+     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
        NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
        objNewMatchSetUp =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
        objNewMatchSetUp.matchCode=self.matchCode;

@@ -3925,7 +3925,7 @@
             
             if(self.ballEventRecord.objIssix.intValue == 1){
                 
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Score Engine"
                                                                 message:@"Wicket not possible in B6"
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
@@ -3933,7 +3933,7 @@
                 [alert show];
                 
             }else if(self.ballEventRecord.objIsFour.intValue == 1){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Score Engine"
                                                                 message:@"Wicket not possible in B4"
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
@@ -8418,7 +8418,7 @@ self.lbl_umpirename.text=@"";
 
     
     NSMutableArray *getPlayerRecord = [objDBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS] BALLNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVRBALLS] ];
-    
+     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
     NewMatchSetUpVC *detail = [[NewMatchSetUpVC alloc]init];
     
     detail =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
