@@ -2307,7 +2307,7 @@
          self.ballEventRecord.objUncomfortclassification :
          selectedWicketEvent];
         
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
         }
     }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){ // Check Is Over started
        

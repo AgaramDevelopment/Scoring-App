@@ -60,14 +60,17 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dH5-56-dAC">
                                     <rect key="frame" x="0.0" y="0.0" width="175" height="45"/>
+                                    <color key="backgroundColor" red="0.1333333333" green="0.1764705882" blue="0.4039215686" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="40" id="0i1-aw-fRS"/>
+                                        <constraint firstAttribute="height" constant="40" id="0i1-aw-fRS">
+                                            <variation key="heightClass=regular-widthClass=regular" constant="35"/>
+                                        </constraint>
                                         <constraint firstAttribute="width" constant="175" id="WJr-cT-EcM"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="16"/>
                                     <inset key="contentEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <inset key="titleEdgeInsets" minX="-10" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <inset key="imageEdgeInsets" minX="-14" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="titleEdgeInsets" minX="-5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="imageEdgeInsets" minX="-20" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="ADD OTHER WICKETS" image="ico-add">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
@@ -137,7 +140,9 @@
                             <color key="backgroundColor" red="0.18039215689999999" green="0.24313725489999999" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="X1j-KB-3Tm" firstAttribute="top" secondItem="9u9-f1-exm" secondAttribute="top" constant="21" id="CpT-eW-JB0"/>
-                                <constraint firstItem="dH5-56-dAC" firstAttribute="top" secondItem="9u9-f1-exm" secondAttribute="top" constant="21" id="KFg-ns-1PL"/>
+                                <constraint firstItem="dH5-56-dAC" firstAttribute="top" secondItem="9u9-f1-exm" secondAttribute="top" constant="21" id="KFg-ns-1PL">
+                                    <variation key="heightClass=regular-widthClass=regular" constant="20"/>
+                                </constraint>
                                 <constraint firstItem="IKe-Fg-RTV" firstAttribute="top" secondItem="9u9-f1-exm" secondAttribute="top" constant="15" id="Myw-6Q-lBx"/>
                                 <constraint firstAttribute="height" constant="75" id="WNP-T1-1aL"/>
                                 <constraint firstAttribute="trailing" secondItem="dH5-56-dAC" secondAttribute="trailing" constant="5" id="of5-iw-tIR"/>
@@ -324,7 +329,7 @@
                                 <constraint firstAttribute="bottom" secondItem="GGH-bK-Q64" secondAttribute="bottom" constant="4" id="7xM-Fp-HqV"/>
                                 <constraint firstItem="lcq-as-LLx" firstAttribute="top" secondItem="VXH-Yk-PYh" secondAttribute="top" id="8k4-by-yur"/>
                                 <constraint firstItem="lcq-as-LLx" firstAttribute="leading" secondItem="VXH-Yk-PYh" secondAttribute="leading" id="9iF-Ji-hnj">
-                                    <variation key="heightClass=regular-widthClass=regular" constant="5"/>
+                                    <variation key="heightClass=regular-widthClass=regular" constant="10"/>
                                 </constraint>
                                 <constraint firstAttribute="width" constant="272" id="AKh-ID-ori"/>
                                 <constraint firstAttribute="height" constant="44" id="Kh1-iE-lQ4"/>

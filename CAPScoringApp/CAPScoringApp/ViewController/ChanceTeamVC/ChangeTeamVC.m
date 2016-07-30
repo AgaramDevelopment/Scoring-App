@@ -164,19 +164,11 @@
 
 -(IBAction)didClickResumeInnings:(id)sender
 {
-    if([self.lbl_StrikerName.text isEqualToString:@""] || self.lbl_StrikerName.text==nil)
+    if([self formValidation])
     {
-        [self ShowAlterView:@"Please Select Stricker"];
+        
     }
-    else if([self.lbl_NonStrikerName.text isEqualToString:@""] || self.lbl_NonStrikerName.text==nil)
-    {
-        [self ShowAlterView:@"Please Select NonStricker"];
-    }
-    else if([self.lbl_BowlerName.text isEqualToString:@""] || self.lbl_BowlerName.text==nil)
-    {
-        [self ShowAlterView:@"Please Select Bowler"];
-    }
-    else{
+        else{
         DBManagerChangeTeam *objDBManagerChangeTeam = [[DBManagerChangeTeam alloc] init];
         [objDBManagerChangeTeam InsertChangeTeam:self.compitionCode :self.MatchCode :BattingTeamCode :[NSNumber numberWithInt:maximumInnings.intValue] :selectStrikercode :selectnonStrikercode :selectBowlercode :[NSNumber numberWithInt:self.inningsno.intValue] :self.currentBattingTeamCode :@"" :@""];
         [self.delegate processSuccessful];
@@ -185,8 +177,36 @@
    
 }
 
+- (BOOL) formValidation
+{
+    NSString *alterStricker,*alterNonstricker,*alterBowler;
+    
+    
+    alterStricker=([self.lbl_StrikerName.text isEqualToString:@""]||[self.lbl_StrikerName.text  isEqual:@"(null)"])? @"Striker":@"";;
+    alterNonstricker=([self.lbl_NonStrikerName.text isEqualToString:@""]||[self.lbl_NonStrikerName.text  isEqual: @"(null)"])? @"NonStriker":@"";
+    alterBowler=([self.lbl_BowlerName.text isEqualToString:@""]||self.lbl_BowlerName.text == nil)? @"Bowler":@"";
+    if([self.lbl_StrikerName.text isEqualToString:@""] || (self.lbl_StrikerName.text==nil && [self.lbl_NonStrikerName.text isEqualToString:@""]) || (self.lbl_NonStrikerName.text==nil && [self.lbl_BowlerName.text isEqualToString:@""]) || self.lbl_BowlerName.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Striker \n NonStriker \n Bowler"];
+        return YES;
+    }
+    else if (![alterStricker isEqual:@""]||![alterNonstricker isEqual:@""]||![alterBowler isEqual:@""])
+    {
+        
+        [self ShowAlterView:[NSString stringWithFormat:@"Please Select %@\n%@\n%@",alterStricker,alterNonstricker,alterBowler]];
+        return YES;
+    }
+    return NO;
+}
+
+
 -(void)ShowAlterView:(NSString *) alterMsg
 {
+//    while ([alterMsg rangeOfString:@"  "].location != NSNotFound) {
+//        alterMsg = [alterMsg stringByReplacingOccurrencesOfString:@"  " withString:@" "];
+//    }
+    alterMsg = [alterMsg stringByReplacingOccurrencesOfString:@"\n\n" withString:@"\n"];
+    
     UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:@"Change Team" message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [objAlter show];
 }

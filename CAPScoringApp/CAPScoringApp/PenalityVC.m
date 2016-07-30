@@ -264,8 +264,8 @@
     
     //CGSize size =  //[cell.lbl_penalitycell.text sizeWithFont:[UIFont systemFontOfSize:17]      constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     NSString *obj =cell.lbl_penalitycell.text;
-    CGFloat height =objmetaRecord.metasubcodedescription.length ;
-    
+    CGFloat strheight =objmetaRecord.metasubcodedescription.length ;
+     CGFloat height =(strheight > 40)? strheight:40;
     return height;
     }
 }
@@ -419,10 +419,16 @@
 - (BOOL) formValidation{
     NSString *penaltyTxtf = self.txt_penalityruns.text;
     NSString *penaltyreasonTxtf = self.lbl_penaltytype.text;
-    if([penaltyTxtf isEqual:@""]){
-        [self showDialog:@"Please Enter Penalty Runs." andTitle:@"Penalty"];
+    if([penaltyTxtf isEqual:@""] && [penaltyreasonTxtf isEqual:@"Choose Penalty Type"] || [penaltyreasonTxtf isEqualToString:@""]){
+        [self showDialog:@"Please Enter Penalty Runs And Choose  Penalty Type " andTitle:@"Penalty"];
         return NO;
-    }else if([penaltyreasonTxtf isEqual:@"Choose Penalty Type"] || [penaltyreasonTxtf isEqualToString:@""]){
+    }
+     else if([penaltyTxtf isEqual:@""])
+     {
+          [self showDialog:@"Please Enter Penalty Runs." andTitle:@"Penalty"];
+         return NO;
+     }
+    else if([penaltyreasonTxtf isEqual:@"Choose Penalty Type"] || [penaltyreasonTxtf isEqualToString:@""]){
         [self showDialog:@"Please Choose  Penalty Type" andTitle:@"Penalty"];
         return NO;
     }
