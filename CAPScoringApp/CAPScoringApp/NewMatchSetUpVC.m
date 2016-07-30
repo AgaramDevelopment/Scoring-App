@@ -16,6 +16,7 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "Utitliy.h"
+#import "FixturesVC.h"
 
 @interface NewMatchSetUpVC ()
 {
@@ -369,7 +370,16 @@ NSRegularExpression *isMatchedByRegex;
 
 - (IBAction)btn_back:(id)sender {
     
-    [self.navigationController popViewControllerAnimated:YES];
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetupExit"];
+    
+    FixturesVC*Fixvc = [[FixturesVC alloc]init];
+    
+    Fixvc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
+        Fixvc.CompitionCode=competitionCode;
+    
+    [self.navigationController pushViewController:Fixvc animated:YES];
+    
+   // [self.navigationController popViewControllerAnimated:YES];
 }
 
 /**
