@@ -330,8 +330,25 @@
 }
 
 - (IBAction)btn_back:(id)sender {
+        [self.navigationController popViewControllerAnimated:YES];
     
-    [self.navigationController popViewControllerAnimated:YES];
+//    if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetupExit"]) {
+//        NSLog(@"yes");
+//        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetupExit"];
+//        TorunamentVC*tournmentVc = [[TorunamentVC alloc]init];
+//        
+//        tournmentVc =  (TorunamentVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"tornmentid"];
+//      tournmentVc.selectDashBoard=_selectDashBoard;
+//        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//        NSString *userCode = [defaults objectForKey:@"userCode"];
+//     tournmentVc.userCode=userCode;
+//        tournmentVc .selectindexarray=_selectindexarray;
+//        [self.navigationController pushViewController:tournmentVc animated:YES];
+//        
+//    } else {
+//        NSLog(@"no");
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
 }
 
 /*

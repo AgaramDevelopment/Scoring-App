@@ -1332,9 +1332,10 @@
                                 </mask>
                             </variation>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vw3-Zx-yTi">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Vw3-Zx-yTi">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.1058823529" green="0.1333333333" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="vbt-68-Cq5"/>
                                 <outlet property="delegate" destination="-1" id="XfE-hX-dRo"/>
@@ -1457,7 +1458,7 @@
                             </variation>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.1058823529" green="0.1333333333" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="hpq-Gy-OqZ" firstAttribute="leading" secondItem="cvY-Zp-y6y" secondAttribute="leading" constant="150" id="27j-hV-JtV">
                             <variation key="heightClass=regular-widthClass=regular" constant="140"/>

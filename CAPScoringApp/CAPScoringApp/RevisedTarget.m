@@ -54,25 +54,32 @@ objDBManager = [[DBManager alloc]init];
     
     self.txt_overs.text=objrevisedoverRecord.overs;
 
-    
+    self.txt_commentss.text=objrevisedoverRecord.matchovercomments;
     
     [self.txt_commentss.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.txt_commentss.layer.borderWidth = 2;
     
    _selecttargets =[objDBManager RetrieveRevisedTargetData:self.matchCode competitionCode:self.competitionCode];
     
-    MatcheventRecord *objrevisedtarget =[self.selecttargets objectAtIndex:0];
+ MatcheventRecord *objrevisedtarget =[self.selecttargets objectAtIndex:0];
     
 
     
-    strovers=objrevisedtarget.targetovers;
-    OldOvers=objrevisedtarget.targetovers;
-    strruns=objrevisedtarget.targetruns;
-    strcomments=objrevisedtarget.targetcomments;
+//    strovers=objrevisedtarget.targetovers;
+//    OldOvers=objrevisedtarget.targetovers;
+//    strruns=objrevisedtarget.targetruns;
+//    strcomments=objrevisedtarget.targetcomments;
     
       //  self.txt_overs.text =strovers;
-        self.txt_target.text =objrevisedtarget.targetruns;
-        self.txt_commentss.text=objrevisedtarget.targetcomments;
+        //self.txt_target.text =objrevisedtarget.targetruns;
+        //self.txt_commentss.text=objrevisedtarget.targetcomments;
+    NSString * str_target=_targetruns;
+    self.txt_target.text= [NSString stringWithFormat:@"%d",[str_target intValue] ];
+    OldOvers=objrevisedoverRecord.overs;
+    strovers=objrevisedoverRecord.overs;
+    strruns= [NSString stringWithFormat:@"%d",[str_target intValue] ];
+    strcomments=objrevisedoverRecord.matchovercomments;
+
     
     }
 
@@ -161,7 +168,7 @@ objDBManager = [[DBManager alloc]init];
     }
     
     
-    else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){
+    if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){
         if(OdiText > 50){
             
             [self showDialog:@"Please Enter Below 50 Overs" andTitle:@"Revised Target"];
@@ -175,7 +182,7 @@ objDBManager = [[DBManager alloc]init];
         [self showDialog:@"Please enter Over." andTitle:@"Revised Target"];
         return NO;
     } if([txt_target.text isEqual:@""]){
-        [self showDialog:@"Please enter Targets." andTitle:@"Revised Target"];
+        [self showDialog:@"Please enter Target." andTitle:@"Revised Target"];
         return NO;
     } if([txt_commentss.text isEqual:@""]){
         [self showDialog:@"Please enter Comments." andTitle:@"Revised Target"];
@@ -202,8 +209,19 @@ objDBManager = [[DBManager alloc]init];
        
        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Revised Target" message:@"Revised Target Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
        [alter show];
+          alter.tag =100;
+       [self startService];
+
        
-    if(self.checkInternetConnection){
+    }
+}
+
+
+
+-(void) startService{
+    if(self.checkInternetConnection)
+        
+    {
         NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/REVISEOVER/%@/%@/TEA0000013/1/%@/%@",self.competitionCode,self.matchCode,strovers,strcomments];
         
         NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -217,12 +235,27 @@ objDBManager = [[DBManager alloc]init];
         NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
         
     }
-       
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if(buttonIndex == 0)//OK button pressed
+    {
+        if(alertView.tag == 100)
+        {
+            [self.delegate ChangeVCRevisedBackBtnAction];
+            [self.delegate  _selectOvers];
+        }
+    }
+    else if(buttonIndex == 1)//Annul button pressed.
+    {
+        [self.delegate ChangeVCRevisedBackBtnAction];
     }
 }
 
+
 - (IBAction)didClickBackbtnAction:(id)sender {
-    [self.delegate ChangeVCBackBtnAction];
+    [self.delegate ChangeVCRevisedBackBtnAction];
 
 }
 

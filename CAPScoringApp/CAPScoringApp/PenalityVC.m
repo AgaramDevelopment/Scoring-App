@@ -529,12 +529,12 @@
                 
                 if([self.selectStartBallStatus isEqualToString:@"No"])
                 {
-                   [objDBManager SetPenaltyDetails:self.competitionCode :self.matchCode :self.inningsNo :self.ballcode :penaltycode :self.teamcode : penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
+                   [objDBManager SetPenaltyDetails:self.competitionCode :self.matchCode :self.inningsNo :self.ballcode :penaltycode :self.awardedToteam : penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
                 
                 }
                 else
                 {
-                    [self.delegate InsertPenaltyMethod:self.teamcode :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
+                    [self.delegate InsertPenaltyMethod:self.awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
                 }
                 
                 UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Penalty" message:@"Penalty Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
