@@ -52,6 +52,7 @@ BOOL IsBack;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view_datepicker.hidden=YES;
+    [self.tbl_endInnings setBackgroundColor:[UIColor clearColor]];
 }
 -(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE{
     
@@ -339,6 +340,7 @@ BOOL IsBack;
     self.tbl_endInnings.hidden = YES;
     self.view_Header.hidden = YES;
     self.Btn_Add.hidden=YES;
+    
     
     
     [self.btn_save setTitle: @"SAVE" forState: UIControlStateNormal];
