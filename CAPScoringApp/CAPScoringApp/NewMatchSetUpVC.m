@@ -370,16 +370,21 @@ NSRegularExpression *isMatchedByRegex;
 
 - (IBAction)btn_back:(id)sender {
     
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetupExit"];
     
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetUp"]) {
+        NSLog(@"yes");
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetUp"];
+        
     FixturesVC*Fixvc = [[FixturesVC alloc]init];
-    
-    Fixvc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
-        Fixvc.CompitionCode=competitionCode;
-    
-    [self.navigationController pushViewController:Fixvc animated:YES];
-    
-   // [self.navigationController popViewControllerAnimated:YES];
+        
+        Fixvc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
+   Fixvc.CompitionCode=competitionCode;
+        [self.navigationController pushViewController:Fixvc animated:YES];
+        
+    } else {
+        NSLog(@"no");
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 /**

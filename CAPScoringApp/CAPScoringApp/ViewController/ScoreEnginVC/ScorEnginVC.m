@@ -8746,6 +8746,15 @@ self.lbl_umpirename.text=@"";
     
 }
 
+-(void) _selectOvers{
+    [self reloadBowlerTeamBatsmanDetails];
+}
+
+- (void) ChangeVCRevisedBackBtnAction
+{
+    [fullview removeFromSuperview];
+    
+}
 -(void) revisiedTarget
 {
     fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
@@ -8760,7 +8769,7 @@ self.lbl_umpirename.text=@"";
      revisedTarget.matchTypeCode=self.matchTypeCode;
     
     revisedTarget.targetruns=  fetchSEPageLoadRecord.TARGETRUNS;
-    
+    revisedTarget.delegate=self;
     [fullview addSubview:revisedTarget.view];
  //   [fullview addSubview:breakvc.view];
     
