@@ -11,7 +11,7 @@
 
 @interface DBManagerEndSession : NSObject
 
-
+-(NSString*)getDayNo:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 -(NSString*)GetIsDayNightForFetchEndSession:(NSString*) MATCHCODE;
 -(BOOL)GetDayNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 -(NSString*)GetDayNoStatusForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
@@ -92,6 +92,7 @@
 -(BOOL)GetSessionNoWithAddDayNoForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString *) INNINGSNO:(NSString*) DAYNO;
 
 -(BOOL)DeleteSessionEventsForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) SESSIONNO;
+-(BOOL)DeleteDayEventsForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO;
 
 @end
 

@@ -61,7 +61,7 @@ int bowlerPostion = 0;
     
     //Set Table Cell Position
     batsmanHeaderPosition = 0;
-    batsmanPostion =fetchScorecard.BattingSummaryForScoreBoard.count > 0 ? 1 :0;
+    batsmanPostion = fetchScorecard.BattingSummaryForScoreBoard.count > 0 ? 1 :0;
     bowlerHeaderPosition =fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1; bowlerPostion = bowlerHeaderPosition+1;
    
     
@@ -215,7 +215,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 {
     objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
     [self.view addSubview:objCustomNavigation.view];
-    objCustomNavigation.lbl_titleName.text=@"Score Card";
+    objCustomNavigation.lbl_titleName.text=@"SCORE CARD";
     [objCustomNavigation.Btn_Back addTarget:self action:@selector(btn_back:) forControlEvents:UIControlEventTouchUpInside];
     
     

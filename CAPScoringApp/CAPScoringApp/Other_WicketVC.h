@@ -52,7 +52,7 @@
 @property(strong,nonatomic)NSString * NONSTRIKERCODE;
 @property(strong,nonatomic)NSString * NONSTRIKERNAME;
 
-@property(strong,nonatomic)NSString*WICKETTYPE;
+@property(strong,nonatomic)NSString * WICKETTYPE;
 @property(strong,nonatomic)NSString*WICKETPLAYER;
 @property(strong,nonatomic)NSNumber*WICKETNO;
 @property(assign,nonatomic)BOOL ISEDITMODE;

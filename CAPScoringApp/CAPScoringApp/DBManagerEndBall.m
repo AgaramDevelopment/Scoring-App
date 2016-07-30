@@ -1489,7 +1489,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
--(BOOL)  UpdateBowlingOrderUpdateScoreEngine : (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSString*)INNINGSNO
+-(BOOL)  UpdateBowlingOrderUpdateScoreEngine : (NSString*) MATCHCODE:(NSString*) BOWLINGTEAMCODE :(NSString*) BATTINGTEAMCODE: (NSString*)INNINGSNO
 
 {
     
@@ -1500,7 +1500,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BS.COMPETITIONCODE, BS.MATCHCODE, BS.BOWLINGTEAMCODE, BS.INNINGSNO, BS.BOWLERCODE, BS.OVERS, BS.BALLS, BS.PARTIALOVERBALLS, BS.MAIDENS, BS.RUNS, BS.WICKETS, BS.NOBALLS, BS.WIDES, BS.DOTBALLS, BS.FOURS, BS.SIXES, (SELECT COUNT(1) FROM (SELECT BE.COMPETITIONCODE, BE.MATCHCODE, BE.INNINGSNO, BE.BOWLERCODE, MIN(BE.OVERNO || '.' || BE.BALLNO || BE.BALLCOUNT) FIRSTBALL FROM BALLEVENTS BE WHERE BE.MATCHCODE = '%@' AND BE.TEAMCODE = '%@' AND BE.INNINGSNO = '1' GROUP BY BE.COMPETITIONCODE, BE.MATCHCODE, BE.INNINGSNO, BE.BOWLERCODE) BEV WHERE BEV.MATCHCODE = BE.MATCHCODE AND BEV.INNINGSNO = BE.INNINGSNO AND BEV.FIRSTBALL <= BE.FIRSTBALL) BOWLINGPOSITIONNO FROM (SELECT BE.COMPETITIONCODE, BE.MATCHCODE, BE.INNINGSNO, BE.BOWLERCODE, MIN(BE.OVERNO || '.' || BE.BALLNO || BE.BALLCOUNT) FIRSTBALL FROM BALLEVENTS BE WHERE BE.MATCHCODE = '%@' AND BE.TEAMCODE = '%@' AND BE.INNINGSNO = '1' GROUP BY BE.COMPETITIONCODE, BE.MATCHCODE, BE.INNINGSNO, BE.BOWLERCODE) BE INNER JOIN BOWLINGSUMMARY BS ON BE.MATCHCODE = BS.MATCHCODE AND BE.INNINGSNO = BS.INNINGSNO AND BE.BOWLERCODE = BS.BOWLERCODE;", MATCHCODE,TEAMCODE, MATCHCODE,TEAMCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BS.COMPETITIONCODE, BS.MATCHCODE, BS.BOWLINGTEAMCODE, BS.INNINGSNO, BS.BOWLERCODE, BS.OVERS, BS.BALLS, BS.PARTIALOVERBALLS, BS.MAIDENS, BS.RUNS, BS.WICKETS, BS.NOBALLS, BS.WIDES, BS.DOTBALLS, BS.FOURS, BS.SIXES, (SELECT COUNT(1) FROM (SELECT BE.COMPETITIONCODE, BE.MATCHCODE, BE.INNINGSNO, BE.BOWLERCODE, MIN(BE.OVERNO || '.' || BE.BALLNO || BE.BALLCOUNT) FIRSTBALL FROM BALLEVENTS BE WHERE BE.MATCHCODE = '%@' AND BE.TEAMCODE = '%@' AND BE.INNINGSNO = %@ GROUP BY BE.COMPETITIONCODE, BE.MATCHCODE, BE.INNINGSNO, BE.BOWLERCODE) BEV WHERE BEV.MATCHCODE = BE.MATCHCODE AND BEV.INNINGSNO = BE.INNINGSNO AND BEV.FIRSTBALL <= BE.FIRSTBALL) BOWLINGPOSITIONNO FROM (SELECT BE.COMPETITIONCODE, BE.MATCHCODE, BE.INNINGSNO, BE.BOWLERCODE, MIN(BE.OVERNO || '.' || BE.BALLNO || BE.BALLCOUNT) FIRSTBALL FROM BALLEVENTS BE WHERE BE.MATCHCODE = '%@' AND BE.TEAMCODE = '%@' AND BE.INNINGSNO = %@ GROUP BY BE.COMPETITIONCODE, BE.MATCHCODE, BE.INNINGSNO, BE.BOWLERCODE) BE INNER JOIN BOWLINGSUMMARY BS ON BE.MATCHCODE = BS.MATCHCODE AND BE.INNINGSNO = BS.INNINGSNO AND BE.BOWLERCODE = BS.BOWLERCODE;", MATCHCODE,BATTINGTEAMCODE, INNINGSNO,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1521,12 +1521,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.MAIDENS = [self getValueByNull: statement:8];
                 record.RUNS = [self getValueByNull: statement:9];
                 record.WICKETS = [self getValueByNull: statement:10];
-                record.NOBALLS = [self getValueByNull: statement:0];
-                record.WIDES = [self getValueByNull: statement:0];
-                record.DOTBALLS = [self getValueByNull: statement:0];
-                record.FOURS = [self getValueByNull: statement:0];
-                record.SIXES = [self getValueByNull: statement:0];
-                record.BOWLINGPOSITIONNO = [self getValueByNull: statement:0];
+                record.NOBALLS = [self getValueByNull: statement:11];
+                record.WIDES = [self getValueByNull: statement:12];
+                record.DOTBALLS = [self getValueByNull: statement:13];
+                record.FOURS = [self getValueByNull: statement:14];
+                record.SIXES = [self getValueByNull: statement:15];
+                record.BOWLINGPOSITIONNO = [self getValueByNull: statement:16];
                 
                 [bowlingSummaryArray addObject:record];
                 
@@ -1542,7 +1542,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM BOWLINGSUMMARY WHERE MATCHCODE = '%@' AND BOWLINGTEAMCODE =	'%@' AND INNINGSNO = '%@' ", MATCHCODE,TEAMCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM BOWLINGSUMMARY WHERE MATCHCODE = '%@' AND BOWLINGTEAMCODE =	'%@' AND INNINGSNO = '%@' ", MATCHCODE,BOWLINGTEAMCODE,INNINGSNO];
         const char *update_stmt = [updateSQL UTF8String];
         sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE)
@@ -2602,16 +2602,16 @@ if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
                 record.TWOS = [self getValueByNull: statement:8];
                 record.THREES = [self getValueByNull: statement:9];
                 record.FOURS = [self getValueByNull: statement:10];
-                record.SIXES = [self getValueByNull: statement:0];
-                record.DOTBALLS = [self getValueByNull: statement:0];
-                record.WICKETNO = [self getValueByNull: statement:0];
-                record.WICKETTYPE = [self getValueByNull: statement:0];
-                record.FIELDERCODE = [self getValueByNull: statement:0];
-                record.BOWLERCODE = [self getValueByNull: statement:0];
-                record.WICKETOVERNO = [self getValueByNull: statement:0];
-                record.WICKETBALLNO = [self getValueByNull: statement:0];
-                record.WICKETSCORE = [self getValueByNull: statement:0];
-                record.BATTINGPOSITIONNO = [self getValueByNull: statement:0];
+                record.SIXES = [self getValueByNull: statement:11];
+                record.DOTBALLS = [self getValueByNull: statement:12];
+                record.WICKETNO = [self getValueByNull: statement:13];
+                record.WICKETTYPE = [self getValueByNull: statement:14];
+                record.FIELDERCODE = [self getValueByNull: statement:15];
+                record.BOWLERCODE = [self getValueByNull: statement:16];
+                record.WICKETOVERNO = [self getValueByNull: statement:17];
+                record.WICKETBALLNO = [self getValueByNull: statement:18];
+                record.WICKETSCORE = [self getValueByNull: statement:19];
+                record.BATTINGPOSITIONNO = [self getValueByNull: statement:20];
                 
                 [battingSummaryArray addObject:record];
                 
@@ -2646,7 +2646,7 @@ if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         BattingSummaryRecord *record = [battingSummaryArray objectAtIndex:i];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
-            NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BATTINGSUMMARY (COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTINGPOSITIONNO,BATSMANCODE,RUNS,BALLS,ONES,TWOS,THREES,FOURS,SIXES,DOTBALLS,WICKETNO,WICKETTYPE,FIELDERCODE,BOWLERCODE,WICKETOVERNO,WICKETBALLNO,WICKETSCORE) VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')", record.COMPETITIONCODE,record.MATCHCODE,record.BATTINGTEAMCODE,record.INNINGSNO,record.BATTINGPOSITIONNO,record.BATSMANCODE,record.RUNS,record.BALLS,record.ONES,record.TWOS,record.THREES,record.FOURS,record.SIXES,record.DOTBALLS,record.WICKETNO,record.WICKETTYPE,record.FIELDERCODE,record.BOWLERCODE,record.WICKETOVERNO,record.WICKETBALLNO,record.WICKETSCORE];
+            NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BATTINGSUMMARY (COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTINGPOSITIONNO,BATSMANCODE,RUNS,BALLS,ONES,TWOS,THREES,FOURS,SIXES,DOTBALLS,WICKETNO,WICKETTYPE,FIELDERCODE,BOWLERCODE,WICKETOVERNO,WICKETBALLNO,WICKETSCORE) VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')", record.COMPETITIONCODE,record.MATCHCODE,record.BATTINGTEAMCODE,record.INNINGSNO,record.BATTINGPOSITIONNO,record.BATSMANCODE,record.RUNS,record.BALLS,record.ONES,record.TWOS,record.THREES,record.FOURS,record.SIXES,record.DOTBALLS,record.WICKETNO,record.WICKETTYPE,record.FIELDERCODE,record.BOWLERCODE,record.WICKETOVERNO,record.WICKETBALLNO,record.WICKETSCORE];
             const char *update_stmt = [updateSQL UTF8String];
             sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
             if (sqlite3_step(statement) == SQLITE_DONE)

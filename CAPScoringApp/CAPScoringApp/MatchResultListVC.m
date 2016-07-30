@@ -226,7 +226,7 @@ SelectPlayerRecord *selectedMostValuPlayer;
             [self.view_team_layer.layer setBorderColor:[UIColor colorWithRed:(46/255.0f) green:(52/255.0f) blue:(56/255.0f) alpha:(1)].CGColor];
             self.view_team_layer.layer.borderWidth=2;
             self.btn_team_id.userInteractionEnabled = NO;
-            _lbl_team.text = @"Select";
+            _lbl_team.text = @"";
             selectedTeam = nil;
             
         }
@@ -443,7 +443,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
         _lbl_result_type.text = data.RESULTTYPE;
         
         
-        _lbl_team.text = @"Select";
+        _lbl_team.text = @"";
         selectedTeam = nil;
         
         
@@ -606,7 +606,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
 - (IBAction)btn_back:(id)sender {
 }
 - (IBAction)btn_result_type:(id)sender {
-    
+  _lbl_result_type.text=@"";
     if(popTableView!=nil){
         [popTableView removeFromSuperview];
     }
@@ -725,7 +725,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
 
 
 - (IBAction)btn_team:(id)sender {
-    
+    _lbl_team.text=@"";
     if(popTableView!=nil){
         [popTableView removeFromSuperview];
     }
@@ -740,6 +740,8 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
 }
 - (IBAction)btn_man_of_the_match:(id)sender {
     
+
+    _lbl_man_of_the_match.text=@"";
     
     if(popTableView!=nil){
         [popTableView removeFromSuperview];
@@ -755,7 +757,9 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
 }
 
 - (IBAction)btn_man_of_the_series:(id)sender {
-    
+ 
+
+    _lbl_man_of_the_series.text=@"";
     
     if(popTableView!=nil){
         [popTableView removeFromSuperview];
@@ -770,6 +774,8 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
     }
 }
 - (IBAction)btn_best_batsman:(id)sender {
+      _lbl_select_best_batsman.text=@"";
+    
     if(popTableView!=nil){
         [popTableView removeFromSuperview];
     }
@@ -783,6 +789,11 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
     }
 }
 - (IBAction)btn_best_bowler:(id)sender {
+    
+
+    _lbl_select_best_bowler.text=@"";
+   
+    
     if(popTableView!=nil){
         [popTableView removeFromSuperview];
     }
@@ -797,6 +808,10 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
 }
 
 - (IBAction)btn_allrounder:(id)sender {
+
+    _lbl_select_allrounder.text=@"";
+
+    
     if(popTableView!=nil){
         [popTableView removeFromSuperview];
     }
@@ -810,6 +825,10 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
     }
 }
 - (IBAction)btn_most_valu_player:(id)sender {
+ 
+    _lbl_select_most_valu_player.text=@"";
+    
+    
     if(popTableView!=nil){
         [popTableView removeFromSuperview];
     }

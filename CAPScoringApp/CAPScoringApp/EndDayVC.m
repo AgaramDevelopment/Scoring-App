@@ -15,11 +15,20 @@
 #import "Reachability.h"
 #import "AppDelegate.h"
 #import "Utitliy.h"
+#import "DBManagerEndInnings.h"
 
-@interface EndDayVC (){
+@interface EndDayVC ()<UITextFieldDelegate>{
+    
     BOOL IsBack;
     BOOL IsEditMode;
+    BOOL isEndDate;
 NSDateFormatter *formatter;
+     NSString *MatchDate1;
+       NSString *MatchDate;
+    
+    
+    
+    
     FetchEndDayDetails *fetchEndDayDetails;
 
 }
@@ -28,9 +37,12 @@ NSDateFormatter *formatter;
 
 
 @implementation EndDayVC
+@synthesize MATCHTYPECODE;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+     self.view_datePicker.hidden=YES;
+    
      IsBack = NO;
     IsEditMode = NO;
     
@@ -41,9 +53,25 @@ NSDateFormatter *formatter;
     fetchEndDayDetails = [[FetchEndDayDetails alloc]init];
     [fetchEndDayDetails FetchEndDay:_COMPETITIONCODE :_MATCHCODE :_TEAMCODE :_INNINGSNO];
     
+        DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
+   
+        MatchDate1 = [dbEndInnings GetMatchDateForFetchEndInnings : _COMPETITIONCODE: _MATCHCODE];
+
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSDate *date = [formatter dateFromString:MatchDate1];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *MATCHDATE1 = [formatter stringFromDate:date];
+    
+    NSString *timeString=@"00:00:00";
+    
+    MatchDate=[NSString stringWithFormat:@"%@ %@",MATCHDATE1,timeString];
+    
     
     [self.view layoutIfNeeded];
     self.scroll_endDay.contentSize = CGSizeMake(self.view.frame.size.width, 780);
+    self.scroll_endDay.scrollEnabled = YES;
     
     [self.view_startTime.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.view_startTime.layer.borderWidth = 2;
@@ -80,38 +108,82 @@ NSDateFormatter *formatter;
     [self.view_innings.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.view_innings.layer.borderWidth = 2;
     
-    [self datePicker];
-    [self endDatePicker];
+   
     [self duration];
 }
 
 
 -(void)datePicker{
     
+    if(datePicker!= nil)
+    {
+        [datePicker removeFromSuperview];
+        
+    }
+    self.view_datePicker.hidden=NO;
+    
     datePicker =[[UIDatePicker alloc]init];
     
     datePicker.datePickerMode = UIDatePickerModeDateAndTime;
     
     [self.txt_startTime setInputView:datePicker];
-    UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
-    [toolbar setTintColor:[UIColor grayColor]];
-    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
-                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showSelecteddate)];
+    NSCalendar *calendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate * currentDate = [dateFormat dateFromString:MatchDate];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     
-    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     
-    [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
+    NSDateComponents *comps = [[NSDateComponents alloc] init];
+    if([self.MATCHTYPECODE isEqual:@"MSC114"] || [self.MATCHTYPECODE isEqual:@"MSC023"])
+    {
+        [comps setDay:5];
+        [comps setMonth:0];
+        [comps setYear:0];
+    }
+    else
+    {
+        [comps setDay:5];
+        [comps setMonth:0];
+        [comps setYear:0];
+        
+    }
     
-    [self.txt_startTime setInputAccessoryView:toolbar];
+    // self.timestamp = [[NSCalendar currentCalendar] dateFromComponents:comps];
+    
+    
+    NSDate *maxDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+    //[comps setYear:-1];
+    [comps setDay:0];
+    [comps setMonth:0];
+    [comps setYear:0];
+    NSDate *minDate = [calendar dateByAddingComponents:comps toDate:currentDate options:0];
+    
+    datePicker =[[UIDatePicker alloc]initWithFrame:CGRectMake(self.txt_startTime.frame.origin.x,self.txt_startTime.frame.origin.y+30,self.view.frame.size.width,100)];
+    //[datePicker setMaximumDate:maxDate];
+    //[datePicker setMinimumDate:minDate];
+    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"en_GB"];
+    [datePicker setLocale:locale];
+    
+    [datePicker setDatePickerMode:UIDatePickerModeDateAndTime];
+    [datePicker setMinimumDate:minDate];
+    [datePicker setMaximumDate:maxDate];
+    [datePicker setDate:minDate animated:YES];
+    [datePicker reloadInputViews];
+    [self.view_datePicker addSubview:datePicker];
     
     
 }
+
+
 -(void)showSelecteddate{
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    self.txt_startTime.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
+    self.txt_startTime.text=[NSString stringWithFormat:@"%@",
+                             [formatter stringFromDate:datePicker.date]];
     [self.txt_startTime resignFirstResponder];
     [self duration];
 
@@ -119,27 +191,24 @@ NSDateFormatter *formatter;
 
 -(void)endDatePicker{
     
-    datePicker =[[UIDatePicker alloc]init];
-    datePicker.datePickerMode = UIDatePickerModeDateAndTime;
-    
-    [self.txt_endTime setInputView:datePicker];
-    UIToolbar *toolbar =[[UIToolbar alloc]initWithFrame:CGRectMake(0,0,320,44)];
-    [toolbar setTintColor:[UIColor grayColor]];
-    UIBarButtonItem *doneBtn = [[UIBarButtonItem alloc]initWithTitle:@"Done"
-                                                               style:UIBarButtonItemStylePlain target:self action:@selector(showEndDatePicker)];
-    
-    
-    UIBarButtonItem *space = [[UIBarButtonItem alloc]initWithBarButtonSystemItem: UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    
-    [toolbar setItems:[NSArray arrayWithObjects:doneBtn,space, nil]];
-    
-    [self.txt_endTime setInputAccessoryView:toolbar];
+    if(datePicker!= nil)
+    {
+        [datePicker removeFromSuperview];
+        
+    }
+    [self datePicker];
+
 }
+
+
+
 -(void)showEndDatePicker{
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
     [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    self.txt_endTime.text=[NSString stringWithFormat:@"%@",[formatter stringFromDate:datePicker.date]];
+    NSDate *selectedDate = [datePicker date];
+    NSString *recordDate = [formatter stringFromDate:selectedDate];
+    self.txt_endTime.text=recordDate;
     [self.txt_endTime resignFirstResponder];
     [self duration];
 
@@ -162,6 +231,25 @@ NSDateFormatter *formatter;
     self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
     
 }
+
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if(textField.tag == 1)
+    {
+        isEndDate=NO;
+        [self datePicker];
+        [textField resignFirstResponder];
+    }
+    else if (textField.tag == 2)
+    {
+        isEndDate=YES;
+        [self endDatePicker];
+        [textField resignFirstResponder];
+    }
+}
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -221,7 +309,7 @@ NSDateFormatter *formatter;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    
+    self.scroll_endDay.scrollEnabled = YES;
     
    FetchEndDay *fetchEndInn=(FetchEndDay*)[fetchEndDayDetails.FetchEndDayArray  objectAtIndex:indexPath.row];
     
@@ -252,6 +340,42 @@ NSDateFormatter *formatter;
     
 }
 
+- (IBAction)show_SelectedDate:(id)sender {
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    //   2016-06-25 12:00:00
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *matchdate = [dateFormat dateFromString:MatchDate];
+    [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    // for minimum date
+    [datePicker setMinimumDate:matchdate];
+    
+    // for maximumDate
+    int daysToAdd = 1;
+    NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
+    
+    [datePicker setMaximumDate:newDate1];
+    
+
+    NSString *minimumdateStr = [dateFormat stringFromDate:matchdate];
+    NSString*maxmimumdateStr=[dateFormat stringFromDate:newDate1];
+    if(isEndDate==YES)
+    {
+        _txt_endTime.text=[dateFormat stringFromDate:datePicker.date];
+    }
+    else
+    {
+        _txt_startTime.text=[dateFormat stringFromDate:datePicker.date];
+    }
+    NSLog(@"check: %@",_txt_startTime.text);
+    
+    //BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_txt_startInnings text]];
+    
+    [self duration];
+    [self.view_datePicker setHidden:YES];
+
+}
+
 - (IBAction)btn_addendday:(id)sender {
     
     self.txt_startTime.text = @"";
@@ -269,6 +393,7 @@ NSDateFormatter *formatter;
     self.view_allControls.hidden = NO;
     self.tbl_endday.hidden = YES;
     self.gridHeaderView.hidden=YES;
+    self.view_datePicker.hidden=YES;
     IsBack = NO;
     IsEditMode =NO;
     
@@ -276,14 +401,14 @@ NSDateFormatter *formatter;
 
 }
 
-//-(BOOL) checkValidation{
-// 
-//    if([self.lbl_duration.text integerValue]<=0){
-//        [self showDialog:@"Duration should be greated than zero" andTitle:@""];
-//        return NO;
-//    }
-//    return YES;
-//}
+-(BOOL) checkValidation{
+ 
+    if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
+        [self showDialog:@"Duration should be greated than zero" andTitle:@""];
+        return NO;
+    }
+    return YES;
+}
 
 /**
  * Show message for given title and content
@@ -297,7 +422,7 @@ NSDateFormatter *formatter;
 
 
 - (IBAction)btn_save:(id)sender {
- // if([self checkValidation]){
+  if([self checkValidation]){
         if(IsEditMode){
             NSString *endDayTime = _txt_endTime.text;
 
@@ -366,7 +491,7 @@ NSDateFormatter *formatter;
         
         [self.tbl_endday reloadData];
         
-   // }
+    }
   
     
     
