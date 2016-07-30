@@ -34,6 +34,7 @@
     NSString *OldInningsNo;
     NSString *ballNo;
     NSString *MatchDate;
+    NSString *MatchDateWithTime;
     BOOL isEndDate;
     
 }
@@ -60,6 +61,18 @@ BOOL IsBack;
     if (fetchRecord !=0 ) {
         
        MatchDate = [dbEndInnings GetMatchDateForFetchEndInnings : COMPETITIONCODE: MATCHCODE];
+        
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+        NSDate *date = [formatter dateFromString:MatchDate];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        NSString *MATCHDATE1 = [formatter stringFromDate:date];
+        
+        NSString *timeString=@"00:00:00";
+        
+        MatchDateWithTime = [NSString stringWithFormat:@"%@ %@",MATCHDATE1,timeString];
+        
         
         fetchSePageLoad = [[FetchSEPageLoadRecord alloc]init];
         
@@ -184,7 +197,7 @@ BOOL IsBack;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate * currentDate = [dateFormat dateFromString:MatchDate];
+    NSDate * currentDate = [dateFormat dateFromString:MatchDateWithTime];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
    
     
@@ -237,7 +250,7 @@ BOOL IsBack;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     //   2016-06-25 12:00:00
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *matchdate = [dateFormat dateFromString:MatchDate];
+    NSDate *matchdate = [dateFormat dateFromString:MatchDateWithTime];
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     // for minimum date
     [datePicker setMinimumDate:matchdate];
@@ -455,10 +468,17 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
     [alertDialog show];
 }
 
-
+-(BOOL) checkValidation{
+    
+    if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
+        [self showDialog:@"Duration should be greated than zero" andTitle:@""];
+        return NO;
+    }
+    return YES;
+}
 - (IBAction)btn_save:(id)sender {
     
-    
+    if([self checkValidation]){
         
       
         if ([BtnurrentTittle isEqualToString:@"INSERT"]) {
@@ -527,7 +547,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         
     
 
-
+    }
 }
     
 - (IBAction)btn_back:(id)sender {
@@ -540,6 +560,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         self.tbl_endInnings.hidden = NO;
          self.view_Header.hidden = NO;
         self.Btn_Add.hidden=NO;
+        self.view_datepicker.hidden = YES;
         IsBack = YES;
     
     }else if (IsBack == YES){
