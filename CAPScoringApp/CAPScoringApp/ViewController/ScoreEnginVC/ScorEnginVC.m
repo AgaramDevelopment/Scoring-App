@@ -8758,6 +8758,9 @@ self.lbl_umpirename.text=@"";
     revisedTarget.teamCode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
     revisedTarget.inningsno=fetchSEPageLoadRecord.INNINGSNO;
      revisedTarget.matchTypeCode=self.matchTypeCode;
+    
+    revisedTarget.targetruns=  fetchSEPageLoadRecord.TARGETRUNS;
+    
     [fullview addSubview:revisedTarget.view];
  //   [fullview addSubview:breakvc.view];
     

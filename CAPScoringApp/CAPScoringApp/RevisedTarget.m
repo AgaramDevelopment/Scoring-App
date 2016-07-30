@@ -54,7 +54,7 @@ objDBManager = [[DBManager alloc]init];
     
     self.txt_overs.text=objrevisedoverRecord.overs;
 
-    
+    self.txt_commentss.text=objrevisedoverRecord.matchovercomments;
     
     [self.txt_commentss.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
     self.txt_commentss.layer.borderWidth = 2;
@@ -71,8 +71,10 @@ objDBManager = [[DBManager alloc]init];
     strcomments=objrevisedtarget.targetcomments;
     
       //  self.txt_overs.text =strovers;
-        self.txt_target.text =objrevisedtarget.targetruns;
-        self.txt_commentss.text=objrevisedtarget.targetcomments;
+        //self.txt_target.text =objrevisedtarget.targetruns;
+        //self.txt_commentss.text=objrevisedtarget.targetcomments;
+    NSString * str_target=_targetruns;
+    self.txt_target.text= [NSString stringWithFormat:@"%d",[str_target intValue] ];
     
     }
 

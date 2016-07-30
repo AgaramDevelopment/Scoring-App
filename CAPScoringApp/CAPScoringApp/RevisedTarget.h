@@ -29,7 +29,7 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *btn_targetok;
 @property(strong,nonatomic)NSString *matchTypeCode;
-
+@property(strong,nonatomic)NSNumber *targetruns;
 
 - (IBAction)btn_targetok:(id)sender;
 
