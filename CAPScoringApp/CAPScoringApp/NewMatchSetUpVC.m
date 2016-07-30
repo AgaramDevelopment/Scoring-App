@@ -61,6 +61,8 @@ NSRegularExpression *isMatchedByRegex;
     self.lab_matchType.text = self.matchType;
     self.txt_overs.text = self.overs;
     self.lbl_date.text = self.date;
+    
+    
     self.lbl_time.text = self.time;
     self.lbl_monYear.text = self.month;
     self.lbl_venu.text = self.matchVenu;
