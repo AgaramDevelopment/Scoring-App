@@ -102,7 +102,6 @@
 @synthesize WICKETARRAY;
 
 @synthesize PLAYERSCHECK;
-@synthesize WICKETTYPE;
 
 @synthesize MAXOVER;
 @synthesize MAXBALL;
@@ -139,7 +138,7 @@
     self.WICKET_NO_LBL.layer.borderWidth = 2;
  
     if(_ISEDITMODE){
-        self.Wicket_lbl.text=WICKETTYPE;
+        self.Wicket_lbl.text=self.WICKETTYPE;
         self.selectplayer_lbl.text=WICKETPLAYER;
         
         [self.btn_save setTitle:@"Update" forState:UIControlStateNormal];
@@ -192,19 +191,19 @@ else
     
     if (tableView == self.tbl_playername)
     {
-         if([WICKETTYPE isEqual:@"MSC133"])
+         if([self.WICKETTYPE isEqual:@"MSC133"])
     {
         return [GetPlayerDetailsOnAbsentHurtArray count];
     }
-    else if([WICKETTYPE isEqual:@"MSC101"])
+    else if([self.WICKETTYPE isEqual:@"MSC101"])
     {
         return [GetPlayerDetailsOnTimeOutArray count];
     }
-    else if([WICKETTYPE isEqual:@"MSC108"])
+    else if([self.WICKETTYPE isEqual:@"MSC108"])
     {
         return [GetPlayerDetailsOnRetiredHurtOnMSC108Array count];
     }
-    else if([WICKETTYPE isEqual:@"MSC102"])
+    else if([self.WICKETTYPE isEqual:@"MSC102"])
     {
         return [GetPlayerDetailOnRetiredHurt2Array count];
     }
@@ -276,7 +275,7 @@ else
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                           reuseIdentifier:MyIdentifier];
         }
-        if([WICKETTYPE isEqual:@"MSC133"]){
+        if([self.WICKETTYPE isEqual:@"MSC133"]){
             
      
             objAbsentHurt = (GetPlayerDetailOnAbsentHurt*)[GetPlayerDetailsOnAbsentHurtArray objectAtIndex:indexPath.row];
@@ -284,7 +283,7 @@ else
         cell.textLabel.text =objAbsentHurt.PLAYERNAME;
       
         }
-        else if([WICKETTYPE isEqual:@"MSC101"]){
+        else if([self.WICKETTYPE isEqual:@"MSC101"]){
             
            
             objTimedOut=(GetPlayerDetailOnTimeOut*)[GetPlayerDetailsOnTimeOutArray objectAtIndex:indexPath.row];
@@ -292,7 +291,7 @@ else
             cell.textLabel.text =objTimedOut.PLAYERNAME;
          
         }
-        else if([WICKETTYPE isEqual:@"MSC108"]){
+        else if([self.WICKETTYPE isEqual:@"MSC108"]){
             
 
             
@@ -302,7 +301,7 @@ else
             
             
         }
-        else if([WICKETTYPE isEqual:@"MSC102"]){
+        else if([self.WICKETTYPE isEqual:@"MSC102"]){
             
             
             objRetriedHurt =(GetPlayerDetailOnRetiredHurt*)[GetPlayerDetailOnRetiredHurt2Array objectAtIndex:indexPath.row];
@@ -327,9 +326,10 @@ else
         self.Wicket_lbl.text=veb.WICKETTYPE;
         self.selectplayer_lbl.text=veb.WICKETPLAYER;
         self.WICKET_NO_LBL.text=veb.WICKETNO;
-        WICKETTYPE=veb.WICKETTYPE;
+        self.WICKETTYPE=veb.WICKETTYPE;
         WICKETPLAYER=veb.WICKETPLAYER;
         WICKETNO=veb.WICKETNO;
+        self.WICKETTYPE =veb.WICKETTYPECODE;
         _ISEDITMODE =YES;
         self.WickAddview.hidden=YES;
         
@@ -349,7 +349,7 @@ else
         objEventRecord=(WicketTypeRecord*)[WICKETARRAY objectAtIndex:indexPath.row];
         self.Wicket_lbl.text =objEventRecord.metasubcodedescription;
        // WICKETTYPE=self.Wicket_lbl.text;
-        WICKETTYPE=objEventRecord.metasubcode;
+        self.WICKETTYPE=objEventRecord.metasubcode;
         [Wicketselectindexarray addObject:objEventRecord];
         
         self.Wicket_tableview.hidden=YES;
@@ -360,7 +360,7 @@ else
    
     if (tableView == self.tbl_playername)
     {
-        if([WICKETTYPE isEqual:@"MSC133"]){
+        if([self.WICKETTYPE isEqual:@"MSC133"]){
         
         PlayerselectindexarrayAH=[[NSMutableArray alloc]init];
         objAbsentHurt=(GetPlayerDetailOnAbsentHurt*)[GetPlayerDetailsOnAbsentHurtArray objectAtIndex:indexPath.row];
@@ -373,7 +373,7 @@ else
         self.tbl_playername.hidden=YES;
         isEnableTbl=YES;
         }
-        else if([WICKETTYPE isEqual:@"MSC101"]){
+        else if([_WICKETTYPE isEqual:@"MSC101"]){
             
             PlayerselectindexarrayTO=[[NSMutableArray alloc]init];
             objTimedOut=(GetPlayerDetailOnTimeOut*)[GetPlayerDetailsOnTimeOutArray objectAtIndex:indexPath.row];
@@ -385,7 +385,7 @@ else
             self.tbl_playername.hidden=YES;
             isEnableTbl=YES;
         }
-        else if([WICKETTYPE isEqual:@"MSC108"]){
+        else if([_WICKETTYPE isEqual:@"MSC108"]){
             PlayerselectindexarrayRO=[[NSMutableArray alloc]init];
             objretriedOut=(GetPlayerDetailOnRetiredHurtOnMSC108*)[GetPlayerDetailsOnRetiredHurtOnMSC108Array objectAtIndex:indexPath.row];
             self.selectplayer_lbl.text =objretriedOut.PLAYERNAME;
@@ -397,7 +397,7 @@ else
             isEnableTbl=YES;
             
         }
-        else if([WICKETTYPE isEqual:@"MSC102"]){
+        else if([_WICKETTYPE isEqual:@"MSC102"]){
             PlayerselectindexarrayRH=[[NSMutableArray alloc]init];
             objRetriedHurt=(GetPlayerDetailOnRetiredHurt*)[GetPlayerDetailOnRetiredHurt2Array objectAtIndex:indexPath.row];
             self.selectplayer_lbl.text =objRetriedHurt.PLAYERNAME;
@@ -410,7 +410,7 @@ else
             
         }     }
 
-    if([WICKETTYPE isEqual:@"MSC107"]){
+    if([_WICKETTYPE isEqual:@"MSC107"]){
         self.selectplayer_lbl.text= self.NONSTRIKERNAME;
        WICKETPLAYER=self.NONSTRIKERCODE;
 
@@ -475,7 +475,7 @@ else
     if([self formValidation]){
  
     if(_ISEDITMODE){
-       [self UpdateOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :WICKETTYPE :WICKETPLAYER :WICKETNO :VIDEOLOCATION :TOTALRUNS];
+       [self UpdateOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :_WICKETTYPE :WICKETPLAYER :WICKETNO :VIDEOLOCATION :TOTALRUNS];
         
         
        
@@ -483,7 +483,7 @@ else
        
        
       
-        [self InsertOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETPLAYER :WICKETTYPE : WICKETNO :VIDEOLOCATION :TOTALRUNS];
+        [self InsertOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETPLAYER :_WICKETTYPE : WICKETNO :VIDEOLOCATION :TOTALRUNS];
     
     }
     
@@ -543,7 +543,7 @@ else
     {
     if(isEnableTbl ==NO)
     {
-     [self FetchOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : WICKETTYPE:STRIKERCODE:NONSTRIKERCODE];
+     [self FetchOtherwickets : self.COMPETITIONCODE :self.MATCHCODE : self.TEAMCODE :self.INNINGSNO : self.WICKETTYPE:self.STRIKERCODE: self.NONSTRIKERCODE];
         isEnableTbl=YES;
         self.tbl_playername.hidden=NO;
          isWicketlist=YES;
@@ -565,7 +565,7 @@ else
 
 -(IBAction)didclickdelete:(id)sender{
     
-    if(WICKETTYPE != nil){
+    if(self.WICKETTYPE != nil){
     
     [self DeleteOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :WICKETNO];
         
@@ -863,7 +863,7 @@ else
 //UPDATE OTHER WICKETS
 //---------------------
 
--(void) UpdateOtherwickets:(NSString *)COMPETITIONCODE: (NSString *)  MATCHCODE : (NSString *) TEAMCODE : (NSNumber *)INNINGSNO : (NSString*)WICKETTYPE : (NSString*)WICKETPLAYER : 	(NSNumber*)WICKETNO :(NSString*)VIDEOLOCATIONNAME: (NSString*)TOTALRUNS
+-(void) UpdateOtherwickets:(NSString *)COMPETITIONCODE: (NSString *)  MATCHCODE : (NSString *) TEAMCODE : (NSNumber *)INNINGSNO : (NSString*) WICKETTYPE : (NSString*)WICKETPLAYER : 	(NSNumber*)WICKETNO :(NSString*)VIDEOLOCATIONNAME: (NSString*)TOTALRUNS
 {
    
     if([[dbOtherWicket GetBallCodeForUpdateOtherwicket : COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETPLAYER:WICKETNO:WICKETTYPE] isEqual:@""])
@@ -910,9 +910,9 @@ else
         self.WickAddview.hidden=NO;
         self.Btn_Add.hidden =NO;
         isWicketlist=NO;
-        GetWicketEventsPlayerDetails=[[NSMutableArray alloc]init];
-        //GetWicketEventsPlayerDetails= wicketdetailss;
-        //[self.tbl_Wicketlist reloadData];
+//        GetWicketEventsPlayerDetails=[[NSMutableArray alloc]init];
+//        GetWicketEventsPlayerDetails= GetWicketDetailsArray;
+//        [self.tbl_Wicketlist reloadData];
 
         
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Other Wicket" message:@"Other Wicket Updated Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -998,7 +998,7 @@ else
 
 
 - (IBAction)check:(id)sender {
-     [self FetchOtherwickets :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : WICKETTYPE:STRIKERCODE:NONSTRIKERCODE];
+     [self FetchOtherwickets :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :self.WICKETTYPE:STRIKERCODE:NONSTRIKERCODE];
 }
 
 @end

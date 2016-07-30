@@ -26,6 +26,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PowerPlayVC">
             <connections>
+                <outlet property="btn_Add" destination="2H8-v0-KhI" id="LCe-Ny-bAF"/>
                 <outlet property="btn_delete" destination="oxC-jc-yze" id="JTD-b9-XTd"/>
                 <outlet property="btn_submit" destination="3EY-A8-6cZ" id="AwZ-Xb-cka"/>
                 <outlet property="lbl_setpowerplay" destination="FOa-4n-14u" id="bQ0-OE-BJf"/>
@@ -55,12 +56,12 @@
                             <rect key="frame" x="0.0" y="0.0" width="550" height="70"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="2H8-v0-KhI">
-                                    <rect key="frame" x="370" y="10" width="170" height="50"/>
+                                    <rect key="frame" x="370" y="18" width="167" height="35"/>
                                     <color key="backgroundColor" red="0.13333333333333333" green="0.1764705882352941" blue="0.40392156862745099" alpha="1" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="Rajdhani-Regular" family="Rajdhani" pointSize="17"/>
                                     <inset key="contentEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <inset key="titleEdgeInsets" minX="8" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                    <inset key="imageEdgeInsets" minX="-6" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="imageEdgeInsets" minX="-15" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="ADD POWER PLAY" image="ico-add"/>
                                     <connections>
                                         <action selector="didClickAddBtnAction:" destination="-1" eventType="touchUpInside" id="eWb-fC-CKe"/>
