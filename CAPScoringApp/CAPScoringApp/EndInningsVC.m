@@ -64,7 +64,9 @@ BOOL IsBack;
         
         CompetitionCode = COMPETITIONCODE;
         MatchCode = MATCHCODE;
-       
+   
+        
+
         
         //fetchSePageLoad = fetchRecord;
         fetchEndinnings = fetchRecord;

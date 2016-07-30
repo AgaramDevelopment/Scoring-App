@@ -23,7 +23,12 @@
     BOOL IsEditMode;
     BOOL isEndDate;
 NSDateFormatter *formatter;
-     NSString *MatchDate;
+     NSString *MatchDate1;
+       NSString *MatchDate;
+    
+    
+    
+    
     FetchEndDayDetails *fetchEndDayDetails;
 
 }
@@ -50,8 +55,19 @@ NSDateFormatter *formatter;
     
         DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
    
-        MatchDate = [dbEndInnings GetMatchDateForFetchEndInnings : _COMPETITIONCODE: _MATCHCODE];
+        MatchDate1 = [dbEndInnings GetMatchDateForFetchEndInnings : _COMPETITIONCODE: _MATCHCODE];
 
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSDate *date = [formatter dateFromString:MatchDate1];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *MATCHDATE1 = [formatter stringFromDate:date];
+    
+    NSString *timeString=@"00:00:00";
+    
+    MatchDate=[NSString stringWithFormat:@"%@ %@",MATCHDATE1,timeString];
+    
     
     [self.view layoutIfNeeded];
     self.scroll_endDay.contentSize = CGSizeMake(self.view.frame.size.width, 780);
