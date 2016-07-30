@@ -31,7 +31,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="450" height="43"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="backgroundWithoutIcon" translatesAutoresizingMaskIntoConstraints="NO" id="SHT-2M-HKg">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundWithoutIcon" translatesAutoresizingMaskIntoConstraints="NO" id="SHT-2M-HKg">
                         <rect key="frame" x="0.0" y="0.0" width="451" height="43"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="451" id="uo5-Bx-fe8"/>

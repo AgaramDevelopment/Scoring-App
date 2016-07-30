@@ -93,11 +93,12 @@ DBManagerEndSession *dbEndSession;
         
     DAYNO=[dbEndSession  GetDayNoStatusForFetchEndSession :COMPETITIONCODE: MATCHCODE ];
         
-        if(DAYNO == nil)
+        if([DAYNO isEqualToString:@"0"])
         {
         DAYNO=[dbEndSession  GetDayNoStatusIn0ForFetchEndSession :COMPETITIONCODE: MATCHCODE];
             
         }
+        
     }
     else
     {
@@ -108,13 +109,12 @@ DBManagerEndSession *dbEndSession;
     //INNINGSNO
     INNINGSNOS = [dbEndSession  GetInningsNosForFetchEndSession :COMPETITIONCODE: MATCHCODE : BATTINGTEAMCODE];
     
-    
-    
+
     SESSIONNO=[dbEndSession  GetSessionNoForFetchEndSession :COMPETITIONCODE: MATCHCODE : DAYNO];
     
-    if([SESSIONNO isEqual:@"0"])
+    if(SESSIONNO.intValue == 0)
     {
-        SESSIONNO = @1;
+        SESSIONNO = [NSNumber numberWithInt:1];
     }
     else
     {
@@ -124,9 +124,7 @@ DBManagerEndSession *dbEndSession;
     if(SESSIONNO.intValue > 3)
     {
         
-        SESSIONNO = @1;
-        
-        
+        SESSIONNO = [NSNumber numberWithInt:1];
         
         DAYNO = [NSString stringWithFormat:@"%d",DAYNO.intValue +1];
     }
@@ -172,7 +170,7 @@ DBManagerEndSession *dbEndSession;
     OVERSTATUS=[dbEndSession GetOverStatusForFetchEndSession :COMPETITIONCODE: MATCHCODE : INNINGSNO : ENDOVERNO ];
     
     //ENDOVERBALLNO	BASED OVERSTATUS
-    if(OVERSTATUS = @"1")
+    if([OVERSTATUS isEqualToString: @"1"])
     {
         ENDOVERBALLNO = [NSString stringWithFormat:@"%d",ENDOVERNO.intValue +1];
     }
@@ -262,7 +260,7 @@ DBManagerEndSession *dbEndSession;
     
     OVERSTATUS=[dbEndSession GetOverStatusForInsertEndSession : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : OVERNO];
     
-	   if(OVERSTATUS = @"1")
+	   if([OVERSTATUS isEqualToString: @"1"])
        {
            OVERBALLNO= [NSString stringWithFormat:@"%d",OVERNO.intValue +1];
 
@@ -294,7 +292,7 @@ DBManagerEndSession *dbEndSession;
                     {
                         [dbEndSession InsertSessionEventForInsertEndSession : COMPETITIONCODE: MATCHCODE :  INNINGSNO : DAYNO  : SESSIONNO : STARTTIME  : ENDTIME :TEAMCODE: STARTOVER: ENDOVER : TOTALRUNS:TOTALWICKETS :DOMINANTTEAMCODE];
                         
-                        if(([MATCHTYPE isEqualToString:@"MSC023"] || [MATCHTYPE isEqualToString:@"MSC114"]) && (SESSIONNO = @3))
+                        if(([MATCHTYPE isEqualToString:@"MSC023"] || [MATCHTYPE isEqualToString:@"MSC114"]) && (SESSIONNO.intValue == 3))
                         {
                             if(![dbEndSession GetDayNoForInsertEndSession :COMPETITIONCODE : MATCHCODE :INNINGSNO:  DAYNO  ])
                             {
@@ -322,7 +320,7 @@ DBManagerEndSession *dbEndSession;
 
 {
     
-    STARTTIME=SESSIONENDTIME;
+    STARTTIME=SESSIONSTARTTIME;
     
     ENDTIME=SESSIONENDTIME;
    
