@@ -23,6 +23,9 @@
 }
 
 @property(nonatomic,strong) id <EnddayDelegate> delegate;
+
+@property (strong,nonatomic) NSString *MATCHTYPECODE;
+
 @property (strong,nonatomic) NSString *MATCHDATE;
 
 @property (strong,nonatomic) NSString *MATCHCODE;
@@ -70,6 +73,10 @@
 @property (strong, nonatomic) IBOutlet UITextField *txt_comments;
 
 //@property (strong,nonatomic)IBOutlet NSLayoutConstraint *saveHeight;
+
+@property (weak, nonatomic) IBOutlet UIView *view_datePicker;
+
+- (IBAction)show_SelectedDate:(id)sender;
 
 
 - (IBAction)btn_addendday:(id)sender;

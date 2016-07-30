@@ -11,7 +11,7 @@
 
 @interface DBManagerEndSession : NSObject
 
-
+-(NSString*)getDayNo:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 -(NSString*)GetIsDayNightForFetchEndSession:(NSString*) MATCHCODE;
 -(BOOL)GetDayNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 -(NSString*)GetDayNoStatusForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
