@@ -34,6 +34,11 @@
 @property (nonatomic,strong) NSObject * fetchpagedetail;
 
 @property (strong,nonatomic) NSString *SESSIONNO;
+@property (strong,nonatomic) NSString *DAYNO;
+@property (strong,nonatomic) NSNumber *STARTOVERNO;
+@property (strong,nonatomic) NSNumber *ENDOVERNO;
+@property (strong,nonatomic) NSNumber *RUNSSCORED;
+
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scroll_EndSession;
 

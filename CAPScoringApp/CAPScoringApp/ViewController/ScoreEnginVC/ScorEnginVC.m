@@ -556,6 +556,7 @@
     
       [self MatcheventMethod];
     [self getLastBowlerDetails];
+    
 }
 -(void)MatcheventMethod
 {
@@ -2181,7 +2182,9 @@
     //    else {
     //        cell.textLabel.text = [self.selectbtnvalueArray objectAtIndex:indexPath.row];
     //    }
-
+    
+    tbl_bowlType.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
 
  return cell;
 }
@@ -7743,7 +7746,7 @@ self.lbl_umpirename.text=@"";
         
         self.view_bowlType.hidden = YES;
         
-        
+        self.tbl_bowlType.separatorColor = [UIColor clearColor];
 
         
         

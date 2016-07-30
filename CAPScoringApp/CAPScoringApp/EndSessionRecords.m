@@ -368,6 +368,15 @@ if(![dbEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCODE :DAY
             {
              
             [dbEndSession DeleteSessionEventsForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO];
+                
+                
+                if ([SESSIONNO isEqualToString:@"3"])
+                {
+                    
+                    [dbEndSession DeleteDayEventsForDeleteEndSession:COMPETITIONCODE :MATCHCODE :INNINGSNO :DAYNO];
+                }
+                
+                }
             }
             
         }
@@ -375,9 +384,7 @@ if(![dbEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCODE :DAY
     }
     
   
-    
-    
-}
+
 
 
 
