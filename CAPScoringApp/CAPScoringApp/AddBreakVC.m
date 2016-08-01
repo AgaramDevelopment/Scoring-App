@@ -145,7 +145,8 @@
     _Text_BreakStart.text = objBreak.BREAKSTARTTIME;      // [test valueForKey:@"BREAKSTARTTIME"];
     
    // BREAKSTARTTIME =_Text_BreakStart.text;
-    
+    _addbreak_lbl.text=@"EDIT BREAK";
+    _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
     
     _text_EndBreak.text = objBreak.BREAKENDTIME;          //[test valueForKey:@"BREAKENDTIME"];
    // BREAKENDTIME =_text_EndBreak.text;
@@ -413,7 +414,8 @@
     
    [self InsertBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
     
-    
+        _addbreak_lbl.text=@"BREAKS";
+        _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
  [self startService:@"INSERT"];
     
     }
@@ -432,42 +434,21 @@
 -(void) InsertBreaks:COMPETITIONCODE:INNINGSNO:MATCHCODE:BREAKSTARTTIME:BREAKENDTIME:BREAKCOMMENTS:ISINCLUDEDURATION:BREAKNO
 {
     
-//    if([DBManager GetMatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE])
-//    {
-//        if(![DBManager GetCompetitionCodeForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : ISINCLUDEDURATION : BREAKNO:BREAKCOMMENTS])
-//        {
-//            if(![DBManager MatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE : INNINGSNO])
-//            {
+    if([objDBManager GetMatchCodeForInsertBreaks:BREAKSTARTTIME:BREAKENDTIME:COMPETITIONCODE : MATCHCODE])
+    {
+       if(![objDBManager GetCompetitionCodeForInsertBreaks :COMPETITIONCODE: MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : ISINCLUDEDURATION : BREAKNO:BREAKCOMMENTS])
+      {
+           if(![objDBManager MatchCodeForInsertBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE : INNINGSNO])
+{
                 [objDBManager InsertInningsEvents : COMPETITIONCODE : INNINGSNO : MATCHCODE : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : BREAKNO : ISINCLUDEDURATION];
-          //  }
-       // }
-   // }
+     }
+   }
+   }
     
     NSMutableArray*BreaksArray=[objDBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     self.resultarray =BreaksArray;
-    //BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
-    
-    
-//    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
-//   
-//    add.resultarray=BreaksArray;
-//    add.MATCHCODE=MATCHCODE;
-//    add.COMPETITIONCODE=COMPETITIONCODE;
-//    add.INNINGSNO=INNINGSNO;
-//    add.MATCHDATE=MATCHDATETIME;
-//    add.Duration= self.lbl_Duration.text;
-//    //vc2 *viewController = [[vc2 alloc]init];
-//    [self addChildViewController:add];
-//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-//    [self.view addSubview:add.view];
-//    add.view.alpha = 0;
-//    [add didMoveToParentViewController:self];
-//    
-//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-//     {
-//         add.view.alpha = 1;
-//     }
-//                     completion:nil];
+   BREAKNO =[objDBManager GetMaxBreakNoForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+
     
     self.view_gridview.hidden=NO;
     self.btn_Add.hidden=NO;
@@ -489,6 +470,18 @@
 {
     if(isShow_BreakrecordTbl == YES)
     {
+        _Text_BreakStart.text = @"";
+        
+      
+        _addbreak_lbl.text=@"ADD BREAK";
+        _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
+        
+        _text_EndBreak.text = @"";
+    
+        
+        _lbl_Duration.text = @"";
+        _text_Comments.text =@"";
+        
         self.view_gridview.hidden=YES;
        // self.view_penaltyTittle.hidden=YES;
         isShow_BreakrecordTbl= NO;
@@ -503,6 +496,18 @@
     }
     else
     {
+        
+        _Text_BreakStart.text = @"";
+        
+        
+        _addbreak_lbl.text=@"ADD BREAK";
+        _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
+        
+        _text_EndBreak.text = @"";
+        
+        
+        _lbl_Duration.text = @"";
+        _text_Comments.text =@"";
         self.view_gridview.hidden=YES;
 //        self.tbl_breaklist.hidden=YES;
        // self.view_penaltyTittle.hidden=YES;
@@ -546,7 +551,8 @@
         [ self UpdateBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
         
        
-       
+        _addbreak_lbl.text=@"BREAKS";
+        _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
 
         //  [self startService:@"UPDATE"];
         
@@ -580,16 +586,16 @@
        BREAKCOMMENTS:ISINCLUDEDURATION:BREAKNO;
 {
     
-    //    if([DBManager GetMatchCodeForUpdateBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE] !=0)
-    //    {
-    //        if(![DBManager GetCompetitionCodeForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : BREAKNO])
-    //        {
-    //            if(![DBManager GetBreakNoForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKNO ])
-    //            {
+      if([objDBManager GetMatchCodeForUpdateBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE] !=0)
+     {
+           if(![objDBManager GetCompetitionCodeForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : BREAKNO])
+          {
+            if(![objDBManager GetBreakNoForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKNO ])
+             {
     [objDBManager UpdateInningsEvents : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
-    //            }
-    //        }
-    //    }
+                }
+            }
+        }
     
     UpdateBreaksArray=[objDBManager GetInningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     self.resultarray =UpdateBreaksArray;
@@ -631,7 +637,8 @@
 //     }
 //                     completion:nil];
     
-    
+    _addbreak_lbl.text=@"BREAKS";
+    _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
     
 }
 

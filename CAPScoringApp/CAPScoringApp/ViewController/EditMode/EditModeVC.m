@@ -84,11 +84,12 @@ BOOL isWicketSelected;
     NSMutableArray * objwicketType;
     NSMutableArray * objGrandTotal;
     NSMutableArray * objBallNo;
+    NSMutableArray * objRowNumber;
     
     int EachoverWicketCount;
     UIButton *btn_Run;
     NSInteger ballCodeIndex;
-    int indexCount ;
+    //int indexCount ;
     BOOL isEdit;
     FetchScorecard*fetchScorecard;
     DBManager *objDBManager;
@@ -274,7 +275,7 @@ BOOL isWicketSelected;
 
 -(void)viewWillAppear:(BOOL)animated
 {
-     indexCount = 0;
+     //indexCount = 0;
     inningsDetail =[[NSMutableArray alloc]init];
     OversorderArray =[[NSMutableArray alloc]init];
     
@@ -342,7 +343,7 @@ BOOL isWicketSelected;
     objnoballArray   =[[NSMutableArray alloc]init];
     objGrandTotal   =[[NSMutableArray alloc]init];
     objBallNo   =[[NSMutableArray alloc]init];
-
+    objRowNumber  =[[NSMutableArray alloc]init];
 
     if (cell != nil) {
         
@@ -380,6 +381,7 @@ BOOL isWicketSelected;
                 [objnoballArray addObject:objNoBall];
                 [objGrandTotal addObject:grandTotal];
                 [objBallNo addObject:ballNo];
+                [objRowNumber addObject:objInningsBowlerDetailsRecord.rowId];
                 
             }
         }
@@ -449,6 +451,7 @@ BOOL isWicketSelected;
         NSString * objWicketNo =[objWicketno objectAtIndex:i];
         NSString * objWicketType =[objwicketType objectAtIndex:i];
         NSString * grandTotal =[objGrandTotal objectAtIndex:i];
+        NSNumber *rowId =[objRowNumber objectAtIndex:i];
         
         NSMutableArray* dicBallKeysArray = [[NSMutableArray alloc] init];
         NSMutableDictionary * dicAddbowlerdetails=[[NSMutableDictionary alloc]init];
@@ -614,7 +617,7 @@ BOOL isWicketSelected;
                 content = [content stringByAppendingString: [[dicAddbowlerdetails objectForKey:dicBallKey] stringByAppendingString:@" "]];
         }
         totalRun  =[grandTotal intValue]+totalRun;
-        [self CreateBallTickerInstance: [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] :isExtras :isSpecialEvents :objnoball :cell :indexpath];
+        [self CreateBallTickerInstance: [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] :isExtras :isSpecialEvents :objnoball :cell :indexpath: rowId.intValue];
         
     }
     
@@ -625,7 +628,7 @@ BOOL isWicketSelected;
 
 
 
--(void)CreateBallTickerInstance:(NSString *)content :(BOOL ) isextra: (BOOL) isspecialevent :(NSString *)ballno :(EditModeCell *) cell: (int) currentindex;
+-(void)CreateBallTickerInstance:(NSString *)content :(BOOL ) isextra: (BOOL) isspecialevent :(NSString *)ballno :(EditModeCell *) cell: (int) currentindex: (int) rowId;
 {
     
     btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((currentindex*40.0)+15,5.0,35.0, 35.0)];
@@ -641,9 +644,9 @@ BOOL isWicketSelected;
     btn_Run.layer.borderColor= [UIColor redColor].CGColor;
     btn_Run.layer.masksToBounds=YES;
     //btn_Run.tag =currentindex;
-    indexCount++;
+  //  indexCount++;
     
-    btn_Run.tag = indexCount;
+    btn_Run.tag = rowId;
     
     
     [btn_Run addTarget:self action:@selector(didClickEditAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -750,7 +753,7 @@ BOOL isWicketSelected;
 
 -(IBAction)didClickLeftRotation:(id)sender
 {
-    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
+    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
     ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
     scoreEngine.competitionCode=self.Comptitioncode;
     scoreEngine.matchCode = self.matchCode;
@@ -761,7 +764,7 @@ BOOL isWicketSelected;
     
     [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"BEFORE"];
     
-    indexCount = 0;
+   // indexCount = 0;
     [self.tbl_innnings reloadData];
     OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
     
@@ -778,7 +781,7 @@ BOOL isWicketSelected;
     //    int ballIndex = ((senderButton.tag-(overIndex*10))-30000)/10000;
     //
     isEdit=YES;
-    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
+    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
     ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
     
     scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
@@ -794,7 +797,7 @@ BOOL isWicketSelected;
 }
 -(IBAction)didClickRightrotation:(id)sender
 {
-    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex-1];
+    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
     ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
     scoreEngine.competitionCode=self.Comptitioncode;
     scoreEngine.matchCode = self.matchCode;
@@ -803,7 +806,7 @@ BOOL isWicketSelected;
     [self insertAfterAndBeforeMode:objInningsBowlerDetailsRecord.ballCode];
     
     [scoreEngine insertBallDetails:objInningsBowlerDetailsRecord.ballCode :@"AFTER"];
-    indexCount = 0;
+   // indexCount = 0;
 
     [self.tbl_innnings reloadData];
     OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
@@ -813,7 +816,7 @@ BOOL isWicketSelected;
 
 -(IBAction)didClickInnings1team1:(id)sender
 {
-    indexCount = 0;
+  //  indexCount = 0;
     self.highlightbtnxposition.constant=0;
     OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
     inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
@@ -822,7 +825,7 @@ BOOL isWicketSelected;
 }
 -(IBAction)didClickInnings1team2:(id)sender
 {
-    indexCount = 0;
+   // indexCount = 0;
     self.highlightbtnxposition.constant=self.Btn_innings1team2.frame.origin.x;
     OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"2"];
     inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"2"];
@@ -831,7 +834,7 @@ BOOL isWicketSelected;
 }
 -(IBAction)didClickInnings2team1:(id)sender
 {
-    indexCount = 0;
+   // indexCount = 0;
     self.highlightbtnxposition.constant=self.Btn_inning2steam1.frame.origin.x;
     OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"3"];
     inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"3"];

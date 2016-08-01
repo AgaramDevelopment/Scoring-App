@@ -390,6 +390,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 
 - (IBAction)btn_back:(id)sender {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"]; 
     
     [self.navigationController popViewControllerAnimated:YES];
 }
