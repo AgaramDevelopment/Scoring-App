@@ -2076,7 +2076,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 EndInnings *record=[[EndInnings alloc]init];
                 record.WICKETNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.WICKETTYPE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.FIELDINGPLAYER=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record.FIELDINGPLAYER= [self getValueByNull:statement :2];
+                //record.FIELDINGPLAYER= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
                // record.BOWLERCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
                 [GetWicketSDetails addObject:record];
             }
