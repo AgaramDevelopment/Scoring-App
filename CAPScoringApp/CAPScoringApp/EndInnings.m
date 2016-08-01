@@ -572,7 +572,8 @@ EndInnings *insertScoreCard;
                 T_STRIKERCODE = record.STRIKERCODE;
                 T_NONSTRIKERCODE =record.NONSTRIKERCODE;
                 T_TOTALRUNS = record.TOTALRUNS;
-                
+            }
+            
                 if(T_TOTALRUNS.intValue % 2==0)
                 {
                     T_STRIKERCODE=NONSTRIKERCODE;
@@ -604,6 +605,7 @@ EndInnings *insertScoreCard;
                 
                 
             }
+        
             
             if(BOWLERCOUNT.intValue ==1)
             {
@@ -615,7 +617,8 @@ EndInnings *insertScoreCard;
             }
             else
             {
-                [dbEndInnings UpdateBowlingSummaryFormanageOverDetails: BOWLERCOUNT : ISMAIDENOVER : COMPETITIONCODE : MATCHCODE :   INNINGSNO : overNo];
+                [dbEndInnings UpdateBowlingSummaryFormanageOver: BOWLERCOUNT : ISMAIDENOVER : COMPETITIONCODE : MATCHCODE :   INNINGSNO : overNo];
+                
                 
             }
             if(ISMAIDENOVER.intValue ==1 && BOWLERCOUNT.intValue==1)
@@ -624,7 +627,7 @@ EndInnings *insertScoreCard;
                 
             }
             
-        }
+        
         
     }
 }
@@ -639,7 +642,7 @@ EndInnings *insertScoreCard;
     
     ISWKTDTLSUPDATE = [NSNumber numberWithInt:1];
     ISBOWLERCHANGED = [NSNumber numberWithInt:0];
-    ISUPDATE = [NSNumber numberWithInt:0];
+    
     O_ISLEGALBALL = [NSNumber numberWithInt:1];
     
     O_BATTINGPOSITIONNO = [NSNumber numberWithInt:0];

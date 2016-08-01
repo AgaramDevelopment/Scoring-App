@@ -252,7 +252,7 @@
                     PENALTY = 0;
                 }
             }
-            PREVIOUSBALLCODE= [dbInsertScoreEngine GetPrevoiusBallCodeForInsertScoreEngine :OVERNO:BALLCOUNT:BALLNO:MATCHCODE:INNINGSNO];
+            PREVIOUSBALLCODE = [dbInsertScoreEngine GetPrevoiusBallCodeForInsertScoreEngine :OVERNO:BALLNO:BALLCOUNT:MATCHCODE:INNINGSNO];
             
             if([dbInsertScoreEngine GetBallcodeInBallEventForInsertScoreEngine :PREVIOUSBALLCODE:BOWLERCODE].intValue>0)
             {
