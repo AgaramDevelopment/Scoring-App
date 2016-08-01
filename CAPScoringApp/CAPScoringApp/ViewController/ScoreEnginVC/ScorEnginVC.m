@@ -1867,7 +1867,7 @@
                                                               alpha:0.5];
             wicketTypeCell.selectedBackgroundView =  customColorView;
             self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
-             [tbl_fastBowl setSeparatorColor:[UIColor blackColor]];
+             [tbl_fastBowl setSeparatorColor:[UIColor clearColor]];
             return wicketTypeCell;
             
             
@@ -1889,6 +1889,7 @@
                                                               alpha:0.5];
             strikerNonstrikerCell.selectedBackgroundView =  customColorView;
             self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
+            [tbl_fastBowl setSeparatorColor:[UIColor clearColor]];
             return strikerNonstrikerCell;
             
             
@@ -1910,6 +1911,7 @@
                                                               alpha:0.5];
             wicketEventCell.selectedBackgroundView =  customColorView;
             self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
+           [tbl_fastBowl setSeparatorColor:[UIColor clearColor]];
             return wicketEventCell;
             
             
@@ -1932,7 +1934,7 @@
                                                               alpha:0.5];
             playerlistCell.selectedBackgroundView =  customColorView;
             self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
-            
+            [tbl_fastBowl setSeparatorColor:[UIColor clearColor]];
             return playerlistCell;
             
             
@@ -1959,6 +1961,9 @@
                                                               alpha:0.5];
             fieldFactorCell.selectedBackgroundView =  customColorView;
             
+            self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
+            [tbl_fastBowl setSeparatorColor:[UIColor clearColor]];
+            
             return fieldFactorCell;
         }
         if(isFieldingSelected && fieldingOption == 2)
@@ -1976,6 +1981,9 @@
                                                                blue:79/255.0
                                                               alpha:0.5];
             fieldFactorCell.selectedBackgroundView =  customColorView;
+            self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
+            [tbl_fastBowl setSeparatorColor:[UIColor clearColor]];
+            
             return fieldFactorCell;
         }
         if(isFieldingSelected && fieldingOption == 3)
@@ -1994,6 +2002,8 @@
                                                                blue:79/255.0
                                                               alpha:0.5];
             fieldFactorCell.selectedBackgroundView =  customColorView;
+            self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
+            [tbl_fastBowl setSeparatorColor:[UIColor clearColor]];
             return fieldFactorCell;
         }
         
@@ -2017,6 +2027,9 @@
                                                            blue:79/255.0
                                                           alpha:0.5];
         cell.selectedBackgroundView =  customColorView;
+        self.table_Appeal.separatorStyle = UITableViewCellSeparatorStyleNone;
+        
+        [table_Appeal setSeparatorColor:[UIColor clearColor]];
         return cell;
         
    
@@ -2063,6 +2076,8 @@
                                                           alpha:0.5];
         fastBowlCell.selectedBackgroundView =  customColorView;
         self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
+       
+        [tbl_fastBowl setSeparatorColor:[UIColor clearColor]];
         
         return fastBowlCell;
         
@@ -2087,6 +2102,8 @@
                                                            blue:79/255.0
                                                           alpha:0.5];
         aggressiveCell.selectedBackgroundView =  customColorView;
+        self.tbl_aggressiveShot.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [tbl_aggressiveShot setSeparatorColor:[UIColor clearColor]];
         
         return aggressiveCell;
         
@@ -2109,6 +2126,8 @@
                                                            blue:79/255.0
                                                           alpha:0.5];
         aggressiveCell.selectedBackgroundView =  customColorView;
+        self.tbl_aggressiveShot.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [tbl_aggressiveShot setSeparatorColor:[UIColor clearColor]];
         
         return aggressiveCell;
     }
@@ -2233,11 +2252,32 @@
 - (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.table_Appeal.separatorStyle=UITableViewCellSeparatorStyleNone;
+        [table_Appeal setSeparatorColor:[UIColor clearColor]];
+    self.tbl_fastBowl.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [tbl_fastBowl setSeparatorColor:[UIColor clearColor]];
+    self. tbl_aggressiveShot.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [ tbl_aggressiveShot setSeparatorColor:[UIColor clearColor]];
+    self. tbl_defensive.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [ _tbl_defensive setSeparatorColor:[UIColor clearColor]];
+    self.tbl_bowlType.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [ tbl_bowlType setSeparatorColor:[UIColor clearColor]];
 }
 
 - (void)tableView:(UITableView *)tableView didUnhighlightRowAtIndexPath:(NSIndexPath *)indexPath {
     tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    self.table_Appeal.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [table_Appeal setSeparatorColor:[UIColor clearColor]];
+    self.tbl_fastBowl.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [tbl_fastBowl setSeparatorColor:[UIColor clearColor]];
+    self. tbl_aggressiveShot.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [ tbl_aggressiveShot setSeparatorColor:[UIColor clearColor]];
+    self. tbl_defensive.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [ _tbl_defensive setSeparatorColor:[UIColor clearColor]];
+    self.tbl_bowlType.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [ tbl_bowlType setSeparatorColor:[UIColor clearColor]];
+  
 }
 
 -(BOOL) checkRunsByLB_B{
@@ -6997,6 +7037,13 @@ self.lbl_umpirename.text=@"";
     
 
     if(tableView == table_Appeal){
+        
+        self.table_Appeal.separatorStyle = UITableViewCellSeparatorStyleNone;
+        [table_Appeal setSeparatorColor:[UIColor clearColor]];
+        [self.table_Appeal selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        [self.table_Appeal deselectRowAtIndexPath:indexPath animated:NO];
+       
+
 //        if(appealEventDict==nil){
 //            appealEventDict = [NSMutableDictionary dictionary];
 //        }
@@ -7203,7 +7250,8 @@ self.lbl_umpirename.text=@"";
                 [tbl_fastBowl scrollToRowAtIndexPath:indexPath
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
-               
+                self.tbl_fastBowl.separatorStyle = UITableViewCellSeparatorStyleNone;
+                [tbl_fastBowl setSeparatorColor:[UIColor clearColor]];
                 
                 
                 }

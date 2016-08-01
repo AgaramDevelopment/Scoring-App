@@ -559,7 +559,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1707"
             endingLineNumber = "1707"
-            landmarkName = "-tableView:numberOfRowsInSection:"
+            landmarkName = "-handlePanGesture:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
