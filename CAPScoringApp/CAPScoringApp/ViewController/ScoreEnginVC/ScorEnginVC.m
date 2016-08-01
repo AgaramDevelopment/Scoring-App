@@ -708,6 +708,12 @@
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     
     
+    //Logo
+    fetchSEPageLoadRecord.TEAMACODE = fetchSeBallCodeDetails.TEAMACODE;
+    fetchSEPageLoadRecord.TEAMBCODE = fetchSeBallCodeDetails.TEAMBCODE;
+    [self teamLogo];
+
+    
     //Umpire
     
     if(fetchSeBallCodeDetails.GetMatchUmpireDetailsArray.count>0){
@@ -832,7 +838,6 @@
     fetchSEPageLoadRecord.INNINGSNO = [NSString stringWithFormat:@"%d",fetchSeBallCodeDetails.INNINGSNO.intValue];
     fetchSEPageLoadRecord.SESSIONNO = fetchSeBallCodeDetails.SESSIONNO;
     fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT = fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT;
-    
     
     
     
