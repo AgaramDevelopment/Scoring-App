@@ -639,7 +639,7 @@ EndInnings *insertScoreCard;
     
     ISWKTDTLSUPDATE = [NSNumber numberWithInt:1];
     ISBOWLERCHANGED = [NSNumber numberWithInt:0];
-    ISUPDATE = [NSNumber numberWithInt:0];
+//    ISUPDATE = [NSNumber numberWithInt:0];
     O_ISLEGALBALL = [NSNumber numberWithInt:1];
     
     O_BATTINGPOSITIONNO = [NSNumber numberWithInt:0];

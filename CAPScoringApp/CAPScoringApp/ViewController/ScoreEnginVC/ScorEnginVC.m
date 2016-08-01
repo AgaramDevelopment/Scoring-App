@@ -708,6 +708,12 @@
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     
     
+    //Logo
+    fetchSEPageLoadRecord.TEAMACODE = fetchSeBallCodeDetails.TEAMACODE;
+    fetchSEPageLoadRecord.TEAMBCODE = fetchSeBallCodeDetails.TEAMBCODE;
+    [self teamLogo];
+
+    
     //Umpire
     
     if(fetchSeBallCodeDetails.GetMatchUmpireDetailsArray.count>0){
@@ -798,6 +804,11 @@
     fetchSEPageLoadRecord.BATTEAMRUNRATE  =fetchSeBallCodeDetails.BATTEAMRUNRATE;
     fetchSEPageLoadRecord.RUNSREQUIRED =fetchSeBallCodeDetails.RUNSREQUIRED;
     
+    fetchSEPageLoadRecord.REQRUNRATE =fetchSeBallCodeDetails.REQRUNRATE;
+
+    fetchSEPageLoadRecord.TARGETRUNS = fetchSeBallCodeDetails.TOTALBOWLTEAMRUNS;
+    fetchSEPageLoadRecord.REMBALLS =fetchSeBallCodeDetails.REMBALLS;
+    
     
     //ALL Innings Details
     fetchSEPageLoadRecord.MATCHDATE = fetchSeBallCodeDetails.MATCHDATE;
@@ -832,7 +843,6 @@
     fetchSEPageLoadRecord.INNINGSNO = [NSString stringWithFormat:@"%d",fetchSeBallCodeDetails.INNINGSNO.intValue];
     fetchSEPageLoadRecord.SESSIONNO = fetchSeBallCodeDetails.SESSIONNO;
     fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT = fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT;
-    
     
     
     
@@ -916,6 +926,47 @@
     //self.ballEventRecord. =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATIONCODE;
     //self.ballEventRecord. =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATIONSUBCODE;
     
+    
+    if([fetchSEPageLoadRecord INNINGSNO].intValue>1){
+        
+        if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){//Multi day
+            
+            isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue<=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]==4)?YES:NO;
+            
+            NSString *targetLeftValue = @"";
+            NSString *targetRightValue = @"";
+            
+            if([fetchSEPageLoadRecord.INNINGSNO intValue] == 4){
+                targetLeftValue = @"Target:";
+            }else{
+                targetLeftValue = fetchSEPageLoadRecord.RUNSREQUIRED.intValue > 0 ? @"Trail By":(fetchSEPageLoadRecord.RUNSREQUIRED.intValue <0 ? @"Lead by:":@"Score level");
+            }
+            
+            targetRightValue =  fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? fetchSEPageLoadRecord.TARGETRUNS : (fetchSEPageLoadRecord.RUNSREQUIRED.intValue == 0 ? @"" : [NSString stringWithFormat:@"%d", abs(fetchSEPageLoadRecord.RUNSREQUIRED.intValue) ]);
+            
+            
+            _lbl_target.text = [NSString stringWithFormat:@"%@ %@",targetLeftValue,targetRightValue];
+            
+            NSString *runsReqForBalls = fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? (isTargetReached ? @"Target achieved" : ([NSString stringWithFormat:@"%@ runs to win",fetchSEPageLoadRecord.RUNSREQUIRED])) : @"";
+            _lbl_runs_required.text = runsReqForBalls;
+        }else{// ODI / T20
+            
+            isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue <=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]>1)?YES:NO;
+            
+            NSString *targetLeftValue = @"";
+            NSString *targetRightValue = @"";
+            targetLeftValue = @"Target:";
+            targetRightValue =   fetchSEPageLoadRecord.TARGETRUNS;
+            
+            
+            _lbl_target.text = [NSString stringWithFormat:@"%@ %@",targetLeftValue,targetRightValue];
+            
+            
+            NSString *runsReqForBalls =  [NSString  stringWithFormat:@"Runs required %@ in %@ balls",fetchSEPageLoadRecord.RUNSREQUIRED.intValue<0?@"0":fetchSEPageLoadRecord.RUNSREQUIRED,fetchSEPageLoadRecord.REMBALLS.intValue<0?@"0":fetchSEPageLoadRecord.REMBALLS];
+            
+            _lbl_runs_required.text = runsReqForBalls;
+        }
+    }
     
     
     
@@ -12633,6 +12684,7 @@ self.lbl_umpirename.text=@"";
     revicedOverVc.matchCode=self.matchCode;
     revicedOverVc.competitionCode =self.competitionCode;
     revicedOverVc.matchTypeCode=self.matchTypeCode;
+     revicedOverVc.oldoverSE = [NSString stringWithFormat:@"%d.%d" ,fetchSEPageLoadRecord.BATTEAMOVERS,fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     revicedOverVc.delegate=self;
     [fullview addSubview:revicedOverVc.view];
     
