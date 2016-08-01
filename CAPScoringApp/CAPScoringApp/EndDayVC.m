@@ -405,10 +405,30 @@ NSDateFormatter *formatter;
  
     if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
         [self showDialog:@"Duration should be greated than zero" andTitle:@""];
+        
         return NO;
     }
+       // else if ((self.txt_startTime.text = @"") && (self.txt_endTime.text = @"")){
+//        
+//        [self showDialog:@"Please Select Start Time and End Time" andTitle:@""];
+//        return NO;
+//    }else if (self.txt_startTime.text = @""){
+//        [self showDialog:@"Please Select Start Time" andTitle:@""];
+//        return NO;
+//
+//        
+//    }else if (self.txt_endTime.text = @""){
+//        [self showDialog:@"Please Select End Time" andTitle:@""];
+//        return NO;
+//        
+//        
+//    }
+
+        
     return YES;
 }
+
+
 
 /**
  * Show message for given title and content

@@ -242,7 +242,7 @@ DBManagerEndSession *dbEndSession;
 {
     
   
-    STARTTIME=SESSIONENDTIME;
+    STARTTIME=SESSIONSTARTTIME;
     
     ENDTIME=SESSIONENDTIME;
     
@@ -316,7 +316,7 @@ DBManagerEndSession *dbEndSession;
 
 //SP_UPDATEENDSESSION----------------------------------------------------------------------
 
--(void) UpdateEndSession:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSNumber*)INNINGSNO:(NSString*)DAYNO:(NSString*)SESSIONNO :(NSString *)SESSIONSTARTTIME:(NSString*)SESSIONENDTIME: (NSString*)DOMINANTTEAMCODE
+-(void) UpdateEndSession:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSNumber*)INNINGSNO:(NSString*)DAYNO:(NSString*)SESSIONNO :(NSString *)SESSIONSTARTTIME:(NSString*)SESSIONENDTIME: (NSString*)DOMINANTTEAMCODE :(NSString*)BATTINGTEAMCODE;
 
 {
     
@@ -331,13 +331,13 @@ DBManagerEndSession *dbEndSession;
     {
             if(![dbEndSession GetDayNoInNotExistsForInsertEndSession :SESSIONSTARTTIME: SESSIONENDTIME : COMPETITIONCODE : MATCHCODE :INNINGSNO :DAYNO ])
             {
-                if(![dbEndSession GetSessionNoForInsertEndSession :SESSIONSTARTTIME : SESSIONENDTIME : COMPETITIONCODE: MATCHCODE ])
+                if(![dbEndSession GetSessionNoForUpdateEndSession :SESSIONSTARTTIME : SESSIONENDTIME : COMPETITIONCODE: MATCHCODE:INNINGSNO:BATTINGTEAMCODE:DAYNO])
                 {
                     
                     if([dbEndSession GetMatchCodeInNotExists:COMPETITIONCODE :MATCHCODE : SESSIONSTARTTIME : SESSIONENDTIME])
                     {
                     
-                    if([dbEndSession GetCompetitionCodeInNotExistsForInsertEndSession :COMPETITIONCODE:MATCHCODE:INNINGSNO:SESSIONNO:DAYNO ])
+                    if([dbEndSession GetCompetitionCodeInNotExists :COMPETITIONCODE:MATCHCODE:INNINGSNO:SESSIONNO])
                     {
                         
                         [dbEndSession updateEndSession:STARTTIME :ENDTIME :DOMINANTTEAMCODE :DAYNO :COMPETITIONCODE :MATCHCODE :INNINGSNO :SESSIONNO];
