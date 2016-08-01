@@ -117,10 +117,49 @@
         //tournmentVc.selectDashBoard=selectType;
         [self.navigationController pushViewController:loginVC animated:YES];
         
-    } else {
-        NSLog(@"no");
-        [self.navigationController popViewControllerAnimated:YES];
     }
+    //else {
+//        NSLog(@"no");
+//        [self.navigationController popViewControllerAnimated:YES];
+//    }
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetupExit"]) {
+        NSLog(@"yes");
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NewMatchSetupExit"];
+        DashBoardVC*loginVC = [[DashBoardVC alloc]init];
+        
+        loginVC =  (DashBoardVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+        //tournmentVc.selectDashBoard=selectType;
+        [self.navigationController pushViewController:loginVC animated:YES];
+       
+  
+        
+    }
+    
+    
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"Defaultexit"]) {
+        NSLog(@"yes");
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"Defaultexit"];
+        DashBoardVC*loginVC = [[DashBoardVC alloc]init];
+        
+        loginVC =  (DashBoardVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+        //tournmentVc.selectDashBoard=selectType;
+        [self.navigationController pushViewController:loginVC animated:YES];
+        
+        
+        
+    }
+    else {
+        NSLog(@"no");
+       
+        DashBoardVC*loginVC = [[DashBoardVC alloc]init];
+        
+        loginVC =  (DashBoardVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
+        //tournmentVc.selectDashBoard=selectType;
+        [self.navigationController pushViewController:loginVC animated:YES];
+    }
+    
+    
 
 }
 
@@ -280,6 +319,7 @@
         Fixvc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
         EventRecord *eventRecord = [selectindexarray objectAtIndex:0] ;
         Fixvc.CompitionCode=eventRecord.competitioncode;
+      [[NSUserDefaults standardUserDefaults] setObject:_selectDashBoard forKey:@"selectdashboard"];
         Fixvc.selectDashBoard=self.selectDashBoard;
         Fixvc.selectindexarray=selectindexarray;
         [self.navigationController pushViewController:Fixvc animated:YES];

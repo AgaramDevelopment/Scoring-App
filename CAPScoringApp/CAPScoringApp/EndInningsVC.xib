@@ -1411,7 +1411,7 @@
                                     </variation>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" red="0.10980392160000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="0.25083512931034485" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.070588235289999995" green="0.08235294118" blue="0.1019607843" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="cCq-p3-gr3" firstAttribute="top" secondItem="YXE-xx-Ffl" secondAttribute="top" constant="11" id="4mJ-q0-t4L"/>
                                 <constraint firstAttribute="height" constant="44" id="Ek1-RI-wzT"/>

@@ -246,21 +246,21 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pf3-om-hwo">
                             <rect key="frame" x="0.0" y="75" width="550" height="50"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PENALTY AWARDED TO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xpc-fF-mAW">
-                                    <rect key="frame" x="15" y="10" width="160" height="30"/>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PENALTY AWARDED TO" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xpc-fF-mAW">
+                                    <rect key="frame" x="0.0" y="10" width="187" height="30"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PENALTY RUNS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="23A-3M-T3i">
                                     <rect key="frame" x="195" y="10" width="160" height="30"/>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PENALTY TYPE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TmX-gx-U3H">
                                     <rect key="frame" x="375" y="10" width="160" height="30"/>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -269,15 +269,15 @@
                             <constraints>
                                 <constraint firstItem="Xpc-fF-mAW" firstAttribute="top" secondItem="pf3-om-hwo" secondAttribute="top" constant="10" id="0bG-Va-QOW"/>
                                 <constraint firstItem="23A-3M-T3i" firstAttribute="height" secondItem="Xpc-fF-mAW" secondAttribute="height" id="11a-5g-VV2"/>
-                                <constraint firstItem="23A-3M-T3i" firstAttribute="width" secondItem="Xpc-fF-mAW" secondAttribute="width" id="5Mh-hc-Tw0"/>
+                                <constraint firstItem="23A-3M-T3i" firstAttribute="width" secondItem="Xpc-fF-mAW" secondAttribute="width" constant="-27" id="5Mh-hc-Tw0"/>
                                 <constraint firstAttribute="trailing" secondItem="TmX-gx-U3H" secondAttribute="trailing" constant="15" id="9ev-fN-lek"/>
-                                <constraint firstItem="Xpc-fF-mAW" firstAttribute="leading" secondItem="pf3-om-hwo" secondAttribute="leading" constant="15" id="G8E-bl-aws"/>
+                                <constraint firstItem="Xpc-fF-mAW" firstAttribute="leading" secondItem="pf3-om-hwo" secondAttribute="leading" id="G8E-bl-aws"/>
                                 <constraint firstAttribute="bottom" secondItem="23A-3M-T3i" secondAttribute="bottom" constant="10" id="HVb-8e-3LP"/>
                                 <constraint firstItem="TmX-gx-U3H" firstAttribute="top" secondItem="pf3-om-hwo" secondAttribute="top" constant="10" id="OQ5-mX-11p"/>
-                                <constraint firstItem="23A-3M-T3i" firstAttribute="leading" secondItem="Xpc-fF-mAW" secondAttribute="trailing" constant="20" id="QSd-Dg-213"/>
+                                <constraint firstItem="23A-3M-T3i" firstAttribute="leading" secondItem="Xpc-fF-mAW" secondAttribute="trailing" constant="8" id="QSd-Dg-213"/>
                                 <constraint firstAttribute="bottom" secondItem="Xpc-fF-mAW" secondAttribute="bottom" constant="10" id="ZW6-1i-TUc"/>
                                 <constraint firstItem="23A-3M-T3i" firstAttribute="top" secondItem="pf3-om-hwo" secondAttribute="top" constant="10" id="Zaw-cx-3mS"/>
-                                <constraint firstItem="TmX-gx-U3H" firstAttribute="width" secondItem="Xpc-fF-mAW" secondAttribute="width" id="qnQ-Ak-fah"/>
+                                <constraint firstItem="TmX-gx-U3H" firstAttribute="width" secondItem="Xpc-fF-mAW" secondAttribute="width" constant="-27" id="qnQ-Ak-fah"/>
                                 <constraint firstItem="TmX-gx-U3H" firstAttribute="height" secondItem="Xpc-fF-mAW" secondAttribute="height" id="smS-jn-ciH"/>
                                 <constraint firstItem="TmX-gx-U3H" firstAttribute="leading" secondItem="23A-3M-T3i" secondAttribute="trailing" constant="20" id="tJ7-B0-QJj"/>
                                 <constraint firstAttribute="bottom" secondItem="TmX-gx-U3H" secondAttribute="bottom" constant="10" id="tKF-2z-3Dl"/>
