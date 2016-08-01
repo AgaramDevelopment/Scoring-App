@@ -43,7 +43,8 @@
 
     
     self.txt_overs.text=objrevisedoverRecord.overs;
-    OldOvers=objrevisedoverRecord.overs;
+     OldOvers=_oldoverSE;
+    //OldOvers=objrevisedoverRecord.overs;
     self.txt_commentss.text=objrevisedoverRecord.matchovercomments;
     strovers=objrevisedoverRecord.overs;
     strcomments=objrevisedoverRecord.matchovercomments;
@@ -140,12 +141,17 @@
             return NO;
         }
     }
-    if([OldOvers intValue] < [txt_overs.text intValue]){
+    
+    if([OldOvers intValue] > [txt_overs.text intValue]){
         [self showDialog:@"The Revised Over is not possible when the data exist for this innings." andTitle:@"Revised Over"];
         return NO;
-        
-        
-    }
+    
+//    if([OldOvers intValue] < [txt_overs.text intValue]){
+//        [self showDialog:@"The Revised Over is not possible when the data exist for this innings." andTitle:@"Revised Over"];
+//        return NO;
+//        
+//        
+   }
     if([txt_overs.text isEqual:@""]){
         [self showDialog:@"Please enter number only" andTitle:@"Revised Over"];
                 return NO;

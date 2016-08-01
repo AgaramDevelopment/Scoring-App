@@ -15,7 +15,7 @@
 @synthesize BALLCODE;
 @synthesize COMPETITIONCODE;
 @synthesize MATCHCODE;
-@synthesize TEAMCODE;
+//@synthesize TEAMCODE;
 @synthesize INNINGSNO;
 
 @synthesize OVERNO;
@@ -804,7 +804,9 @@ EndInnings *insertScoreBoard;
             insertScoreBoard.WICKETOVERNO = OVERNO;
            
          
-            [insertScoreBoard insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
+          //  [insertScoreBoard insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
+            [insertScoreBoard insertScordBoard:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO];
+            
     
           
         
