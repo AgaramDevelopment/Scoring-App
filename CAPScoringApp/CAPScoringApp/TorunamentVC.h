@@ -20,7 +20,6 @@
 @property (strong, nonatomic) IBOutlet UIButton * Nextbtn_outlet;
 @property(strong,nonatomic) NSString * selectDashBoard;
 
-@property(strong,nonatomic)NSString *userCode;
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * tableviewheight;
-@property(nonatomic,strong)NSMutableArray*selectindexarray;
+
 @end

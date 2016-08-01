@@ -786,7 +786,7 @@ BOOL isWicketSelected;
     scoreEngine.competitionCode=self.Comptitioncode;
     scoreEngine.isEditMode = YES;
     scoreEngine.editBallCode = objInningsBowlerDetailsRecord.ballCode;
-    [self.navigationController pushViewController:scoreEngine animated:YES];
+    [self.navigationController pushViewController:scoreEngine animated:NO];
 }
 -(IBAction)didClickCancelrotation:(id)sender
 {

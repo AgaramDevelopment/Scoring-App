@@ -140,6 +140,7 @@
     BOOL isPitchmap;
     BOOL ispichmapSelectValue;
     
+    BOOL isWagonWheelValueSelected;
     BOOL isWagonwheel;
     BOOL isAppeal;
     
@@ -963,6 +964,7 @@
     
     if(!(self.ballEventRecord.objWWX1.intValue ==221 && self.ballEventRecord.objWWX2.intValue ==221 && self.ballEventRecord.objWWY1.intValue ==186 && self.ballEventRecord.objWWY2.intValue ==186) && !(self.ballEventRecord.objWWX1.intValue ==172 && self.ballEventRecord.objWWX2.intValue ==172 && self.ballEventRecord.objWWY1.intValue ==145 && self.ballEventRecord.objWWY2.intValue ==145)){
         
+        isWagonWheelValueSelected = YES;
         [self selectedViewBg:_btn_wagonwheel];
         
         for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
@@ -992,6 +994,7 @@
     //Pitch map
     
     if(!(self.ballEventRecord.objPMX2.intValue == 1 && self.ballEventRecord.objPMY2.intValue ==1)){
+        ispichmapSelectValue = YES;
         [self selectedViewBg:_btn_pichmap];
         if(Img_ball != nil)
         {
@@ -2310,7 +2313,7 @@
          self.ballEventRecord.objUncomfortclassification :
          selectedWicketEvent];
         
-        [self.navigationController popViewControllerAnimated:YES];
+        [self.navigationController popViewControllerAnimated:NO];
         }
     }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){ // Check Is Over started
        
@@ -3670,6 +3673,11 @@
         
     }
     
+    if(isWagonWheelValueSelected == NO && selectBtnTag.tag != 111){
+        [self unselectedButtonBg:self.btn_wagonwheel];
+        isWagonwheel=NO;
+    }
+    
     
     //wicket
     if(isWicketSelected && selectBtnTag.tag != 107 && wicketOption !=0){
@@ -3833,7 +3841,8 @@
     {
         
         if([self checkBeatenOnRuns]){
-        if(isWicketSelected == YES)
+        
+        if(isWicketSelected && ![selectedwickettype.metasubcode isEqualToString:@"MSC097"])
         {
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
@@ -3855,7 +3864,7 @@
     {
         if([self checkBeatenOnRuns]){
 
-        if(isWicketSelected == YES)
+        if(isWicketSelected && ![selectedwickettype.metasubcode isEqualToString:@"MSC097"])
         {
             
             UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
@@ -3925,7 +3934,7 @@
             
             if(self.ballEventRecord.objIssix.intValue == 1){
                 
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Score Engine"
                                                                 message:@"Wicket not possible in B6"
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
@@ -3933,7 +3942,7 @@
                 [alert show];
                 
             }else if(self.ballEventRecord.objIsFour.intValue == 1){
-                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert"
+                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Score Engine"
                                                                 message:@"Wicket not possible in B4"
                                                                delegate:nil
                                                       cancelButtonTitle:@"OK"
@@ -4197,11 +4206,13 @@
         [self DisplayCommentmethod];
         self.img_WagonWheel.hidden=NO;
         isWagonwheel=YES;
-        }else{
+        }
+        
+        else{
             [self unselectedButtonBg:self.btn_wagonwheel];
             self.img_WagonWheel.hidden=YES;
             isWagonwheel=NO;
-            
+            isWagonWheelValueSelected = NO;
             
             for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
                 if ([layer.name isEqualToString:@"DrawLine"]) {
@@ -5329,6 +5340,11 @@
         isPitchmap = NO;
     }
 
+    if(isWagonWheelValueSelected == NO && selectBtnTag.tag != 111){
+        [self unselectedButtonBg:self.btn_wagonwheel];
+        isWagonwheel=NO;
+    }
+
     //wicket
     if(isWicketSelected && selectBtnTag.tag != 107 && wicketOption !=0){
         
@@ -6274,6 +6290,8 @@ self.lbl_umpirename.text=@"";
     isPitchmap =NO;
     isWagonwheel=NO;
     ispichmapSelectValue = NO;
+    isWagonWheelValueSelected = NO;
+
    
   //[self unselectedViewBg: self.View_Appeal];
   //[self unselectedViewBg: self.view_lastinstance];
@@ -6735,6 +6753,7 @@ self.lbl_umpirename.text=@"";
         }
         
         self.btn_B6.userInteractionEnabled=YES;
+        self.btn_B4.userInteractionEnabled=YES;
     }
     else{//Selected state
         
@@ -6770,6 +6789,13 @@ self.lbl_umpirename.text=@"";
             }
         }
         
+        
+        if(isWicketSelected) {
+            [self disableButtonBg:self.btn_B4];
+            self.btn_B4.userInteractionEnabled=NO;
+            [self disableButtonBg:self.btn_B6];
+            self.btn_B6.userInteractionEnabled=NO;
+        }
         
     }
 }
@@ -7428,10 +7454,12 @@ self.lbl_umpirename.text=@"";
 //                wicketOption = 1;
 //                [self.tbl_fastBowl reloadData];
 //            }
-            if(isWicketSelected ==YES) {
+            if(isWicketSelected ==YES && ![selectedwickettype.metasubcode isEqualToString:@"MSC097"]) {
                 
                 //No ball Value
                 self.ballEventRecord.objNoball = [NSNumber numberWithInt:1];
+                //is Legal ball
+                self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:0];
                 
                 
             }else{
@@ -7449,6 +7477,8 @@ self.lbl_umpirename.text=@"";
                 //B6
                 if(self.ballEventRecord.objIssix.integerValue == 0){//Six un selected
                     
+                    if(!isWicketSelected  && ![selectedwickettype.metasubcode isEqualToString:@"MSC097"]) {
+
                     if(!isMoreRunSelected){//Normal state
                         
                         if(self.ballEventRecord.objLegByes.integerValue==1 || self.ballEventRecord.objWide.integerValue==1 || self.ballEventRecord.objByes.integerValue==1){//Check for LB,WD,B selected
@@ -7460,6 +7490,7 @@ self.lbl_umpirename.text=@"";
                             self.btn_B6.userInteractionEnabled=YES;
                             
                         }
+                    }
                     }
                     
                 }
@@ -7510,10 +7541,13 @@ self.lbl_umpirename.text=@"";
 //                [self.tbl_fastBowl reloadData];
 //            }
             //B6
-           if(isWicketSelected ==YES) {
+           if(isWicketSelected ==YES  && ![selectedwickettype.metasubcode isEqualToString:@"MSC097"]) {
                
                //Wide Value
                self.ballEventRecord.objWide = [NSNumber numberWithInt:1];
+               //is Legal ball
+               self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:0];
+               
                
                
            }else{
@@ -7576,10 +7610,14 @@ self.lbl_umpirename.text=@"";
             //B6
             {
                 
+                if(!isWicketSelected  && ![selectedwickettype.metasubcode isEqualToString:@"MSC097"]) {
+                    
+                    
                 self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
                 if(!isMoreRunSelected){
                     [self disableButtonBg:self.btn_B6];
                     self.btn_B6.userInteractionEnabled=NO;
+                }
                 }
                 //Legbyes
                 self.ballEventRecord.objLegByes = [NSNumber numberWithInt:0];
@@ -7634,13 +7672,15 @@ self.lbl_umpirename.text=@"";
             //B6
             {
                 
+                if(!isWicketSelected  && ![selectedwickettype.metasubcode isEqualToString:@"MSC097"]) {
+
                 self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
                 if(!isMoreRunSelected){
                     [self disableButtonBg:self.btn_B6];
                     self.btn_B6.userInteractionEnabled=NO;
                     
                 }
-                
+                }
                 //Byes
                 self.ballEventRecord.objByes = [NSNumber numberWithInt:0];
                 NSIndexPath *byesIndexPath = [NSIndexPath indexPathForRow:2 inSection:0];
@@ -7978,10 +8018,12 @@ self.lbl_umpirename.text=@"";
             //Noball
             self.ballEventRecord.objNoball = [NSNumber numberWithInt:0];
             
-            if(!isWicketSelected) {
-                
-                            //Legalball
+            //Legalball
             self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:1];
+            
+            
+            if(!isWicketSelected ) {
+                
             
             //Recreate list
             //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
@@ -8013,6 +8055,9 @@ self.lbl_umpirename.text=@"";
             //Wide
             self.ballEventRecord.objWide = [NSNumber numberWithInt:0];
             
+            //Is Legal ball
+            self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:1];
+            
             
             if(!isWicketSelected) {
             //B6
@@ -8021,8 +8066,6 @@ self.lbl_umpirename.text=@"";
                 [self unselectedButtonBg:self.btn_B6];
             }
             
-            //Is Legal ball
-            self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:1];
             
             //Recreate list
             //self.extrasOptionArray=[[NSMutableArray alloc]initWithObjects:@"NoBall",@"Wide",@"Byes",@"LegByes", nil];
@@ -8034,9 +8077,12 @@ self.lbl_umpirename.text=@"";
             
         }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"Byes"]){//Byes
             
+            if(!isWicketSelected  && ![selectedwickettype.metasubcode isEqualToString:@"MSC097"]) {
+
             //B6
             [self unselectedButtonBg:self.btn_B6];
             self.btn_B6.userInteractionEnabled=YES;
+            }
             
             //Wide
             self.ballEventRecord.objByes = [NSNumber numberWithInt:0];
@@ -8075,10 +8121,14 @@ self.lbl_umpirename.text=@"";
             
             
         }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"LegByes"]){
-            
+          
+            if(!isWicketSelected  && ![selectedwickettype.metasubcode isEqualToString:@"MSC097"]) {
+
             //B6
             [self unselectedButtonBg:self.btn_B6];
             self.btn_B6.userInteractionEnabled=YES;
+            
+            }
             
             //Wide
             self.ballEventRecord.objLegByes = [NSNumber numberWithInt:0];
@@ -8418,7 +8468,7 @@ self.lbl_umpirename.text=@"";
 
     
     NSMutableArray *getPlayerRecord = [objDBManager getPlayedPlayersForPlayerXI:self.matchCode COMPETITIOMCODE:self.competitionCode OVERNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS] BALLNO:[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVRBALLS] ];
-    
+     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
     NewMatchSetUpVC *detail = [[NewMatchSetUpVC alloc]init];
     
     detail =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
@@ -9107,8 +9157,27 @@ self.lbl_umpirename.text=@"";
     [nonstrickerTableView removeFromSuperview];
 }
 
+-(void) reloadPMWW{
+    self.img_pichmap.hidden=YES;
+    self.PichMapTittle.hidden=YES;
+    self.view_Wagon_wheel.hidden=YES;
+    
+    if(ispichmapSelectValue==NO)
+    {
+        [self unselectedButtonBg:self.btn_pichmap];
+        isPitchmap = NO;
+        
+    }
+
+    if(isWagonWheelValueSelected == NO ){
+        [self unselectedButtonBg:self.btn_wagonwheel];
+        isWagonwheel=NO;
+    }
+
+}
 - (IBAction)btn_stricker_names:(id)sender {
     [self resetBowlerBatsmanTableView];
+    [self reloadPMWW];
     if(!isStrickerOpen){
         isStrickerOpen = YES;
         isNONStrickerOpen = NO;
@@ -9161,6 +9230,7 @@ self.lbl_umpirename.text=@"";
 }
 - (IBAction)btn_nonstricker_name:(id)sender {
     [self resetBowlerBatsmanTableView];
+    [self reloadPMWW];
     if(!isNONStrickerOpen){
         isStrickerOpen = NO;
         isNONStrickerOpen = YES;
@@ -9520,6 +9590,8 @@ self.lbl_umpirename.text=@"";
 
 
 -(void)didClickWagonWheelmapTapAction:(UIGestureRecognizer *)wagon_Wheelgesture {
+    
+    isWagonWheelValueSelected = YES;
     
     for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
         if ([layer.name isEqualToString:@"DrawLine"]) {
@@ -13109,6 +13181,16 @@ self.lbl_umpirename.text=@"";
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please complete spin option." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
         [alter setTag:3005];
+        return NO;
+    }else if(isRemarkOpen ){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please complete remark option." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:3006];
+        return NO;
+    }else if(isFieldingSelected && fieldingOption >0){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please complete fielding option." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:3007];
         return NO;
     }
     

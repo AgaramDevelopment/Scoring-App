@@ -107,7 +107,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //WICKET PLAYER
 //---------------
 
--(NSMutableArray *)  GetStrickerNonStrickerCodeForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
+-(NSMutableArray *)  GetStrickerNonStrickerCodeForFetchOtherwicketPlayerDetails: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO
 {
     NSMutableArray *arraylist=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
@@ -1625,7 +1625,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *WICKETNO =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *WICKETNO =  [self getValueByNull:statement :0];
                  sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
