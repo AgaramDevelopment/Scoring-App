@@ -43,7 +43,7 @@
 @property(nonatomic,strong)NSString* BOWLERCODE;
 @property(nonatomic,strong)NSNumber* TOTALBATTEAMRUNS;
 @property(nonatomic,strong)NSNumber* TOTALBOWLTEAMRUNS;
-@property(nonatomic,strong)NSNumber* REQRUNRATE;
+@property(nonatomic,strong)NSString* REQRUNRATE;
 @property(nonatomic,strong)NSNumber* RUNSREQUIRED;
 @property(nonatomic,strong)NSNumber* REMBALLS;
 @property(nonatomic,strong)NSString* T_ATWOROTW;

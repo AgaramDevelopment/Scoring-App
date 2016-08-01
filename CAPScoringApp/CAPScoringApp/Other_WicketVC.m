@@ -541,19 +541,28 @@ else
     
     if(![Wicket_lbl.text isEqualToString:@"Select"] && Wicket_lbl.text!=@"")
     {
-    if(isEnableTbl ==NO)
-    {
-     [self FetchOtherwickets : self.COMPETITIONCODE :self.MATCHCODE : self.TEAMCODE :self.INNINGSNO : self.WICKETTYPE:self.STRIKERCODE: self.NONSTRIKERCODE];
-        isEnableTbl=YES;
-        self.tbl_playername.hidden=NO;
-         isWicketlist=YES;
-    }
-    else{
-        isEnableTbl=NO;
-        self.tbl_playername.hidden=YES;
-         isWicketlist=YES;
-    }
-    
+        if(isEnableTbl ==NO)
+        {
+            if(![_WICKETTYPE isEqual:@"MSC107"])
+            {
+                [self FetchOtherwickets : self.COMPETITIONCODE :self.MATCHCODE : self.TEAMCODE :self.INNINGSNO : self.WICKETTYPE:self.STRIKERCODE: self.NONSTRIKERCODE];
+                isEnableTbl=YES;
+                self.tbl_playername.hidden=NO;
+                isWicketlist=YES;
+            }
+            else
+            {
+                isEnableTbl=NO;
+                self.tbl_playername.hidden=YES;
+                isWicketlist=YES;
+            }
+        }
+        else{
+            isEnableTbl=NO;
+            self.tbl_playername.hidden=YES;
+            isWicketlist=YES;
+        }
+        
     }
     else
     {
@@ -709,7 +718,7 @@ else
         else if([WICKETTYPE isEqual:@"MSC101"])
         {
             GetPlayerDetailsOnTimeOutArray=[ dbOtherWicket GetPlayerDetailOnTimeOutForFetchOtherwicketPlayerDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
-
+            
                 [self.tbl_playername reloadData];
                 self.tbl_playername.hidden=NO;
             

@@ -87,7 +87,7 @@
     
     self.view_powerplaygrid.hidden=YES;
     
-    self.btn_Add.hidden   =YES;
+    self.btn_Add.hidden   =NO;
     Resultarray =[[NSMutableArray alloc]init];
     
     Resultarray= [objDBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
@@ -204,7 +204,7 @@
          
          self.view_powerplay.hidden=YES;
          self.view_powerplaygrid.hidden=NO;
-         self.btn_Add.hidden   =NO;
+         self.btn_Add.hidden   =YES;
          [self.btn_submit setTitle:@"Update" forState:UIControlStateNormal];
          isPowerplay=YES;
          
@@ -360,7 +360,7 @@
         
     if(powerplaystartover == nil){
        
-            
+        
             [self startService];
             [self insertpowerplay];
             
@@ -384,6 +384,7 @@
     if(powerplaystartover != nil){
     [self DeleteService];
     
+       
 
     PowerPlayRecord *powerplayrecord =[[PowerPlayRecord alloc]init];
     
@@ -404,7 +405,7 @@
     //powerplayarray=[DBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
         
         self.view_powerplaygrid.hidden=YES;
-        self.btn_Add.hidden   =YES;
+        self.btn_Add.hidden   =NO;
         self.view_powerplay.hidden  =NO;
         isPowerplay =NO;
         Resultarray=[[NSMutableArray alloc]init];
@@ -663,7 +664,7 @@
                 
                 self.view_powerplay.hidden=NO;
                 self.view_powerplaygrid.hidden=YES;
-                self.btn_Add.hidden   =YES;
+                self.btn_Add.hidden   =NO;
                 isPowerplay = NO;
                 [self.tbl_powerplay reloadData];
 //                PowerPlayGridVC *add = [[PowerPlayGridVC alloc]initWithNibName:@"PowerPlayGridVC" bundle:nil];
@@ -737,7 +738,7 @@
             
             self.view_powerplay.hidden=NO;
             self.view_powerplaygrid.hidden=YES;
-            self.btn_Add.hidden   =YES;
+            self.btn_Add.hidden   =NO;
             isPowerplay = NO;
             [self.tbl_powerplay reloadData];
             
@@ -787,7 +788,7 @@
 -(IBAction)didClickAddBtnAction:(id)sender
 {
     self.view_powerplaygrid.hidden=NO;
-    self.btn_Add.hidden   =NO;
+    self.btn_Add.hidden   =YES;
     self.view_powerplay.hidden   =YES;
     isPowerplay=YES;
     [self.tbl_powerplaytype reloadData];

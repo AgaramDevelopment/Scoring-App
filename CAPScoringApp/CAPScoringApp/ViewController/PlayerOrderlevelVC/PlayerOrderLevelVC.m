@@ -309,18 +309,7 @@
                 self.selectedPlayerFilterArray=[[NSMutableArray alloc]init];
                 
                 self.selectedPlayerFilterArray =nil;
-                //[slecteplayerlist removeAllObjects];
-                
-//                for(int i=0; i< self.objSelectplayerList_Array.count; i++)
-//                {
-//                    SelectPlayerRecord *selectedPlayerFilterRecord = [self.objSelectplayerList_Array objectAtIndex:i];
-//                    if( [[selectedPlayerFilterRecord isSelected]boolValue])
-//                    {
-//                        [slecteplayerlist addObject:selectedPlayerFilterRecord];
-//                        
-//                        
-//                    }
-              }
+                }
                 [self.txt_search resignFirstResponder];
 
         }
@@ -1040,6 +1029,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 -(IBAction)Back_BtnAction:(id)sender
 {
+     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"]; 
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)changePlayerorder:(int)newplayerorder :(int)orderno :(BOOL)ismoveorder

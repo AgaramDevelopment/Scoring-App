@@ -291,7 +291,11 @@
         
         REMBALLS = [NSNumber numberWithInt: (MATCHOVERS.intValue * 6) -  TOTALBALLS.intValue ];
         
-        REQRUNRATE = REMBALLS.intValue == 0 ? [NSNumber numberWithInt:0] : [NSNumber numberWithInt: (( RUNSREQUIRED.intValue /  REMBALLS.intValue) * (REMBALLS.intValue < 6 ? 1 : 6)) ];
+        float reqRunRateData = REMBALLS.intValue == 0 ? 0 :( RUNSREQUIRED.floatValue /  REMBALLS.floatValue) * (REMBALLS.intValue < 6 ? 1 : 6) ;
+        
+        
+        
+      REQRUNRATE =  [NSString  stringWithFormat:@"%f",reqRunRateData];
     }
     
         ISFREEHIT= [[NSNumber alloc] init];
@@ -328,7 +332,7 @@
         if(  ![[ dbEditScoreEngine GetNonStrikerDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE :INNINGSNO :NONSTRIKERCODE :      BATTEAMOVERS :  BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT] isEqual:@""])
         {
             
-            self.currentNonStrickerDetail=[ dbEditScoreEngine GetNonStrikerDetailsForSEBallEvents :COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO:BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT: NONSTRIKERCODE:STRIKERBALLS ];
+            self.currentNonStrickerDetail=[ dbEditScoreEngine GetNonStrikerDetailsForSEBallEvents :COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE:  INNINGSNO:BATTEAMOVERS: BATTEAMOVRBALLS: BATTEAMOVRBALLSCNT: NONSTRIKERCODE:NONSTRIKERBALLS ];
         }
         else
         {

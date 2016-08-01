@@ -6321,6 +6321,9 @@ return @"";
 }
 
 
+
+//SELECT MATCHCODE FROM MATCHREGISTRATION WHERE COMPETITIONCODE ='UCC0000080'  AND MATCHCODE='IMSC023B8975A8DCBBB00260' AND strftime('%s' ,MATCHDATE) <= strftime('%s' ,'2016-07-30 13:00:00') 
+
 //INSERT BREAK DETAILS
 
 -(BOOL) GetMatchCodeForInsertBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
@@ -6331,7 +6334,7 @@ return @"";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE ('%@' >= MATCHDATE AND '%@'>= MATCHDATE )  AND COMPETITIONCODE ='%@'  AND MATCHCODE='%@' ",BREAKSTARTTIME,BREAKENDTIME,COMPETITIONCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE ((strftime('%%s' ,'%@') >= (strftime('%%s' MATCHDATE ) ))AND (strftime('%%s' ,'%@') >= (strftime('%%s' , MATCHDATE )))) AND COMPETITIONCODE ='%@'  AND MATCHCODE='%@' ",BREAKSTARTTIME,BREAKENDTIME,COMPETITIONCODE,MATCHCODE];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -6361,26 +6364,24 @@ return @"";
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT COMPETITIONCODE FROM INNINGSBREAKEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE='%@' AND INNINGSNO = '%@' AND BREAKSTARTTIME='%@' AND BREAKENDTIME='%@' AND BREAKCOMMENTS ='%@' AND ISINCLUDEINPLAYERDURATION='%@' AND BREAKNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,BREAKSTARTTIME,BREAKENDTIME,BREAKCOMMENTS,ISINCLUDEDURATION,BREAKNO];
-        const char *update_stmt = [updateSQL UTF8String];
-        if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-                        {
-                while(sqlite3_step(statement)==SQLITE_ROW){
-                    
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                    sqlite3_reset(statement);
-                    sqlite3_finalize(statement);
-                    sqlite3_close(dataBase);
-                    return TOTAL;
-                }
-                
+        const char *insert_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, insert_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
+            
         }
         sqlite3_close(dataBase);
         
     }
-    return @"";
+    return NO;
+
 }
 
 -(BOOL) MatchCodeForInsertBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
@@ -6470,8 +6471,8 @@ return @"";
                 BreakEventRecords *record=[[BreakEventRecords alloc]init];
                 record.BREAKNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.BREAKSTARTTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.BREAKENDTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                record.DURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.BREAKENDTIME=[self getValueByNull:statement :2];
+                record.DURATION=[self getValueByNull:statement :3];
                 record.ISINCLUDEINPLAYERDURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
                 record.BREAKCOMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
                 
@@ -6487,7 +6488,6 @@ return @"";
     }
     return BreaksArray;
 }
-
 
 -(NSString*) GetMaxBreakNoForInsertBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO
 {
@@ -8259,6 +8259,7 @@ return @"";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
+            int rowId = 0;
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=[[InningsBowlerDetailsRecord alloc]init];
@@ -8289,8 +8290,10 @@ return @"";
                 objInningsBowlerDetailsRecord.penaltyRuns=[self getValueByNull:statement :23];
                 objInningsBowlerDetailsRecord.penaltytypeCode=[self getValueByNull:statement :24];
                 objInningsBowlerDetailsRecord.grandTotal=[self getValueByNull:statement :25];
+                objInningsBowlerDetailsRecord.rowId = [NSNumber numberWithInt:rowId];
                 
                 [BOWLERDETAILS addObject:objInningsBowlerDetailsRecord];
+                rowId++;
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
