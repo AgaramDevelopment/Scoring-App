@@ -143,6 +143,7 @@
     BOOL isWagonWheelValueSelected;
     BOOL isWagonwheel;
     BOOL isAppeal;
+    BOOL isEndOverOnEndBall;
     
     BOOL isToss;
     
@@ -499,6 +500,7 @@
     
     
     isRemarkOpen = NO;
+    isEndOverOnEndBall = NO;
 
     
     //Fielding Factor
@@ -708,6 +710,12 @@
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     
     
+    //Logo
+    fetchSEPageLoadRecord.TEAMACODE = fetchSeBallCodeDetails.TEAMACODE;
+    fetchSEPageLoadRecord.TEAMBCODE = fetchSeBallCodeDetails.TEAMBCODE;
+    [self teamLogo];
+
+    
     //Umpire
     
     if(fetchSeBallCodeDetails.GetMatchUmpireDetailsArray.count>0){
@@ -798,6 +806,11 @@
     fetchSEPageLoadRecord.BATTEAMRUNRATE  =fetchSeBallCodeDetails.BATTEAMRUNRATE;
     fetchSEPageLoadRecord.RUNSREQUIRED =fetchSeBallCodeDetails.RUNSREQUIRED;
     
+    fetchSEPageLoadRecord.REQRUNRATE =fetchSeBallCodeDetails.REQRUNRATE;
+
+    fetchSEPageLoadRecord.TARGETRUNS = fetchSeBallCodeDetails.TOTALBOWLTEAMRUNS;
+    fetchSEPageLoadRecord.REMBALLS =fetchSeBallCodeDetails.REMBALLS;
+    
     
     //ALL Innings Details
     fetchSEPageLoadRecord.MATCHDATE = fetchSeBallCodeDetails.MATCHDATE;
@@ -832,7 +845,6 @@
     fetchSEPageLoadRecord.INNINGSNO = [NSString stringWithFormat:@"%d",fetchSeBallCodeDetails.INNINGSNO.intValue];
     fetchSEPageLoadRecord.SESSIONNO = fetchSeBallCodeDetails.SESSIONNO;
     fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT = fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT;
-    
     
     
     
@@ -916,6 +928,47 @@
     //self.ballEventRecord. =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATIONCODE;
     //self.ballEventRecord. =getBallDetailsForBallEventsBE.UNCOMFORTCLASSIFICATIONSUBCODE;
     
+    
+    if([fetchSEPageLoadRecord INNINGSNO].intValue>1){
+        
+        if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){//Multi day
+            
+            isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue<=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]==4)?YES:NO;
+            
+            NSString *targetLeftValue = @"";
+            NSString *targetRightValue = @"";
+            
+            if([fetchSEPageLoadRecord.INNINGSNO intValue] == 4){
+                targetLeftValue = @"Target:";
+            }else{
+                targetLeftValue = fetchSEPageLoadRecord.RUNSREQUIRED.intValue > 0 ? @"Trail By":(fetchSEPageLoadRecord.RUNSREQUIRED.intValue <0 ? @"Lead by:":@"Score level");
+            }
+            
+            targetRightValue =  fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? fetchSEPageLoadRecord.TARGETRUNS : (fetchSEPageLoadRecord.RUNSREQUIRED.intValue == 0 ? @"" : [NSString stringWithFormat:@"%d", abs(fetchSEPageLoadRecord.RUNSREQUIRED.intValue) ]);
+            
+            
+            _lbl_target.text = [NSString stringWithFormat:@"%@ %@",targetLeftValue,targetRightValue];
+            
+            NSString *runsReqForBalls = fetchSEPageLoadRecord.INNINGSNO.intValue == 4 ? (isTargetReached ? @"Target achieved" : ([NSString stringWithFormat:@"%@ runs to win",fetchSEPageLoadRecord.RUNSREQUIRED])) : @"";
+            _lbl_runs_required.text = runsReqForBalls;
+        }else{// ODI / T20
+            
+            isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue <=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]>1)?YES:NO;
+            
+            NSString *targetLeftValue = @"";
+            NSString *targetRightValue = @"";
+            targetLeftValue = @"Target:";
+            targetRightValue =   fetchSEPageLoadRecord.TARGETRUNS;
+            
+            
+            _lbl_target.text = [NSString stringWithFormat:@"%@ %@",targetLeftValue,targetRightValue];
+            
+            
+            NSString *runsReqForBalls =  [NSString  stringWithFormat:@"Runs required %@ in %@ balls",fetchSEPageLoadRecord.RUNSREQUIRED.intValue<0?@"0":fetchSEPageLoadRecord.RUNSREQUIRED,fetchSEPageLoadRecord.REMBALLS.intValue<0?@"0":fetchSEPageLoadRecord.REMBALLS];
+            
+            _lbl_runs_required.text = runsReqForBalls;
+        }
+    }
     
     
     
@@ -2434,7 +2487,7 @@
                 [self EndBallMethod];
                 [self.btn_StartBall setTitle:@"END BALL" forState:UIControlStateNormal];
                 self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
-                self.btn_StartOver.userInteractionEnabled=NO;
+              //  self.btn_StartOver.userInteractionEnabled=NO;
                 [self AllBtnEnableMethod];
                 
                 [self resetBallEventObject];
@@ -2485,7 +2538,7 @@
         
         [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
-        self.btn_StartOver.userInteractionEnabled=YES;
+     //   self.btn_StartOver.userInteractionEnabled=YES;
         //        self.btn_StartBall.userInteractionEnabled=NO;
         //        [self SaveBallEventREcordvalue];
         
@@ -2946,7 +2999,7 @@
     [btnborder setTitleColor:brushFGSplEvents forState:UIControlStateNormal] ;
     btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20];
     
-    UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, totalWidth, 10)];
+    UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0,48, totalWidth,12)];
     BallTickerNo.textAlignment = NSTextAlignmentCenter;
     BallTickerNo.font = [UIFont fontWithName:@"RAJDHANI-REGULAR" size:13];
     [BallTickerNo setText:ballno];
@@ -2962,8 +3015,10 @@
 - (void) CreateBallTickers: (NSMutableArray *) arrayBallDetails
 {
     [self.view_BallTicker.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    UIScrollView *ScrollViewer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [self.view_BallTicker bounds].size.width, 50)];
+    UIScrollView *ScrollViewer = [[UIScrollView alloc] initWithFrame:CGRectMake(self.view_BallTicker.frame.origin.x,5, [self.view_BallTicker bounds].size.width,70)];
+    ScrollViewer.showsHorizontalScrollIndicator=NO;
     CGFloat xposition = 0;
+    
     for (BallEventRecord *drballdetails in arrayBallDetails)
     {
         NSMutableArray* dicBallKeysArray = [[NSMutableArray alloc] init];
@@ -3092,8 +3147,18 @@
         else
             xposition = xposition + (isExtras ? 57 : 47);
     }
-    [ScrollViewer setFrame:CGRectMake(0, 0, xposition, [ScrollViewer bounds].size.height)];
     [ScrollViewer setContentSize:CGSizeMake(xposition, [ScrollViewer bounds].size.height)];
+    CGFloat width =ScrollViewer.contentSize.width;
+    
+    if(width > 400)
+    {
+        [ScrollViewer setFrame:CGRectMake(0,ScrollViewer.frame.origin.y,405, [ScrollViewer bounds].size.height)];
+        [ScrollViewer setContentOffset:CGPointMake(ScrollViewer.contentSize.width- ScrollViewer.frame.size.width, 0) animated:YES];
+    }
+    else
+    {
+        [ScrollViewer setFrame:CGRectMake(0,ScrollViewer.frame.origin.y, xposition, [ScrollViewer bounds].size.height)];
+    }
     [self.view_BallTicker addSubview:ScrollViewer];
 }
 
@@ -3182,30 +3247,40 @@
     else
     {
         
-//         if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
-//            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [alter show];
-//            [alter setTag:10004];
-//         }else{
-        [self overEVENT];
+        BOOL isEndBallSuccess = YES;
         
-        //Check for Striker, non Striker and bower present
         
-        if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
-            [self btn_bowler_name:0];
-
-        }else if(fetchSEPageLoadRecord.strickerPlayerName == nil){
-            [self btn_stricker_names:0];
-        }else if( fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
-            [self btn_nonstricker_name:0];
-
+        //If start ball clicked
+        if([self.btn_StartBall.currentTitle isEqualToString:@"END BALL"])
+        {
+            isEndOverOnEndBall = YES;
+            if([self checkRunsByLB_B] && [self iswicketPending]&&[self checkValidation]){
+                
+                [self StartBall];
+                
+            }else{
+                isEndBallSuccess = NO;
+            }
         }
-         
         
-        //        [self.btn_StartOver setTitle:@"START OVER" forState:UIControlStateNormal];
-        //        self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
-        //        self.btn_StartBall.userInteractionEnabled=NO;
-        //        [self AllBtndisableMethod];
+        //End over clicked
+        
+        if(isEndBallSuccess){
+            isEndOverOnEndBall = NO;
+            [self overEVENT];
+            
+            //Check for Striker, non Striker and bower present
+            
+//            if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
+//                [self btn_bowler_name:0];
+//                
+//            }else if(fetchSEPageLoadRecord.strickerPlayerName == nil){
+//                [self btn_stricker_names:0];
+//            }else if( fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
+//                [self btn_nonstricker_name:0];
+//                
+//            }
+        }
         
     }
     
@@ -3400,6 +3475,16 @@
                                 {
                                     //bowerbtn
                                 }
+                                //Check batsman and bowler empty
+                                if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
+                                    [self btn_bowler_name:0];
+                                    
+                                }else if(fetchSEPageLoadRecord.strickerPlayerName == nil){
+                                    [self btn_stricker_names:0];
+                                }else if( fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
+                                    [self btn_nonstricker_name:0];
+                                    
+                                }
                             }
                             
 
@@ -3498,16 +3583,7 @@
             [self reloadBowlerTeamBatsmanDetails];
             
             
-            //Check batsman and bowler empty
-            if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
-                [self btn_bowler_name:0];
-                
-            }else if(fetchSEPageLoadRecord.strickerPlayerName == nil){
-                [self btn_stricker_names:0];
-            }else if( fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
-                [self btn_nonstricker_name:0];
-                
-            }
+            
             
             
             if(![ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&[MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
@@ -3526,6 +3602,17 @@
                 if([self.lbl_bowler_name.text isEqualToString:@""] ||self.lbl_bowler_name.text == nil)
                 {
                     //bowerbtn
+                }
+                
+                //Check batsman and bowler empty
+                if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
+                    [self btn_bowler_name:0];
+                    
+                }else if(fetchSEPageLoadRecord.strickerPlayerName == nil){
+                    [self btn_stricker_names:0];
+                }else if( fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
+                    [self btn_nonstricker_name:0];
+                    
                 }
             }
             
@@ -3582,6 +3669,24 @@
         if (alertView.tag == 3000 ) {
             [self StartBall];
             
+            //End over clicked with out end ball
+            if(isEndOverOnEndBall){
+                isEndOverOnEndBall = NO;
+                [self overEVENT];
+                
+                //Check for Striker, non Striker and bower present
+//                
+//                if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
+//                    [self btn_bowler_name:0];
+//                    
+//                }else if(fetchSEPageLoadRecord.strickerPlayerName == nil){
+//                    [self btn_stricker_names:0];
+//                }else if( fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
+//                    [self btn_nonstricker_name:0];
+//                    
+//                }
+            }
+            
         }if (alertView.tag == 3001) {
             
         }if (alertView.tag == 2002) {
@@ -3607,7 +3712,8 @@
             [self MatchResult];
             
         }if (alertView.tag == 3000 ) {
-            
+            isEndOverOnEndBall = NO;
+
            
         }
         if(alertView.tag == 1003)
@@ -9557,7 +9663,7 @@ self.lbl_umpirename.text=@"";
             [self.btn_StartOver setTitle:@"START OVER" forState:UIControlStateNormal];
             
             self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
-            self.btn_StartOver.userInteractionEnabled=YES;
+          //  self.btn_StartOver.userInteractionEnabled=YES;
             
         }
     }

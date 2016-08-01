@@ -226,6 +226,63 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     return YES;
 }
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
+    
+    if (![string isEqualToString:@""]) {
+        
+        NSString *appStr=[textField.text stringByAppendingString:string];
+        
+        [self.selectedPlayerFilterArray removeAllObjects];
+        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",appStr];
+        
+        NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
+        
+        self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
+        
+        
+        [self.collectionView reloadData];
+        
+        return YES;
+    }
+    else {
+        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",self.txt_search.text];
+        
+        NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
+        
+        // NSLog(@"count %lu",(unsigned long)[self.selectedPlayerArray count]);
+        
+        [self.selectedPlayerFilterArray removeAllObjects];
+        
+        //    NSLog(@"count2 %lu",(unsigned long)[self.selectedPlayerArray count]);
+        
+        self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
+        
+    
+    //Relaod view
+    [self.collectionView reloadData];
+        
+        return YES;
+    }
+}
+- (void)textFieldDidEndEditing:(UITextField *)textField{
+    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",textField.text];
+    
+    NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
+    
+    // NSLog(@"count %lu",(unsigned long)[self.selectedPlayerArray count]);
+    
+    [self.selectedPlayerFilterArray removeAllObjects];
+    
+    //    NSLog(@"count2 %lu",(unsigned long)[self.selectedPlayerArray count]);
+    
+    self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
+    
+    [self.collectionView reloadData];
+}
+//Relaod view
+
+
+
 
 //Display selected players count
 -(void) setSelectCount{

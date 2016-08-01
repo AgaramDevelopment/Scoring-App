@@ -16,7 +16,7 @@
 @property(strong,nonatomic)NSString *BALLCODE;
 @property(strong,nonatomic)NSString *COMPETITIONCODE;
 @property(strong,nonatomic)NSString *MATCHCODE;
-@property(strong,nonatomic)NSString *TEAMCODE;
+//@property(strong,nonatomic)NSString *TEAMCODE;
 @property(nonatomic,assign)NSNumber *INNINGSNO;
 
 @property(nonatomic,assign)NSNumber *OVERNO;
