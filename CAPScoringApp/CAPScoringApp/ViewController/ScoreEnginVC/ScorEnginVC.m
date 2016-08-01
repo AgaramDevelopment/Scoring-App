@@ -12621,6 +12621,7 @@ self.lbl_umpirename.text=@"";
     revicedOverVc.matchCode=self.matchCode;
     revicedOverVc.competitionCode =self.competitionCode;
     revicedOverVc.matchTypeCode=self.matchTypeCode;
+     revicedOverVc.oldoverSE = [NSString stringWithFormat:@"%d.%d" ,fetchSEPageLoadRecord.BATTEAMOVERS,fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     revicedOverVc.delegate=self;
     [fullview addSubview:revicedOverVc.view];
     

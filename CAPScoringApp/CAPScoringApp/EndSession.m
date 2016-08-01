@@ -671,6 +671,10 @@ int POS_TEAM_TYPE = 1;
     self.tbl_session.hidden = NO;
     self.view_allControls.hidden = YES;
     self.view_heading.hidden = NO;
+        
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"End Session Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+
   
     }
 }
@@ -744,6 +748,8 @@ int POS_TEAM_TYPE = 1;
         self.tbl_session.hidden = NO;
         self.view_heading.hidden = NO;
         self.view_allControls.hidden = YES;
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"End Session Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
 
         //[self.Btn_back sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
