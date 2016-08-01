@@ -14,6 +14,8 @@
 #import "Reachability.h"
 #import "Utitliy.h"
 #import "AppDelegate.h"
+#import "BreakTableViewCell.h"
+#import "BreakEventRecords.h"
 
 
 //#import "Scor"
@@ -38,8 +40,12 @@
     BallEventRecord*obj;
     FetchSEPageLoadRecord*fetchSEPageLoadRecord;
     DBManager *objDBManager;
+    
+    BOOL isShow_BreakrecordTbl;
 
 }
+@property(nonatomic,strong)NSMutableArray*resultarray;
+
 @end
 @implementation AddBreakVC
 @synthesize COMPETITIONCODE;
@@ -51,6 +57,9 @@
     objDBManager = [[DBManager alloc]init];
 
 
+    DBManager *objDBManager = [[DBManager alloc]init];
+    
+    _resultarray=[objDBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     
      [_datePicker_View setHidden:YES];
     [self.View_BreakStart.layer setBorderWidth:2.0];
@@ -83,9 +92,114 @@
     NSString *timeString=@"00:00:00";
   
   MATCHDATETIME=[NSString stringWithFormat:@"%@ %@",MATCHDATE1,timeString];
+    self.btn_Update.hidden=YES;
+    self.btn_delete.hidden=YES;
+    self.btn_finish.hidden=NO;
+    isShow_BreakrecordTbl=YES;
     
 }
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    return [_resultarray count];
+    //count number of row from counting array hear cataGorry is An Array
+}
+
+
+
+- (UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    static NSString *breakidentifier = @"BreakCell";
+    
+    
+    BreakTableViewCell *cell = (BreakTableViewCell *)[tableView dequeueReusableCellWithIdentifier:breakidentifier];
+    if (cell == nil) {
+        [[NSBundle mainBundle] loadNibNamed:@"BreakTableViewCell" owner:self options:nil];
+        cell = self.GridBreakcell;
+        self.GridBreakcell = nil;
+    }
+    BreakEventRecords *veb=(BreakEventRecords*)[_resultarray objectAtIndex:indexPath.row];
+    
+    
+    cell.test.text=veb.BREAKCOMMENTS;
+    
+    cell.Starttime_lbl.text=veb.BREAKSTARTTIME;
+    cell.Endtime_lbl.text=veb.BREAKENDTIME;
+    cell.duration_lbl.text=veb.DURATION;
+    return cell;
+}
+
+
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+     BreakEventRecords * objBreak=(BreakEventRecords*)[_resultarray objectAtIndex:indexPath.row];
+    _Text_BreakStart.text = objBreak.BREAKSTARTTIME;      // [test valueForKey:@"BREAKSTARTTIME"];
+    
+   // BREAKSTARTTIME =_Text_BreakStart.text;
+    
+    
+    _text_EndBreak.text = objBreak.BREAKENDTIME;          //[test valueForKey:@"BREAKENDTIME"];
+   // BREAKENDTIME =_text_EndBreak.text;
+    
+    _lbl_Duration.text = objBreak.DURATION;       //[test valueForKey:@"DURATION"];
+    //DURATION =_lbl_Duration.text;
+    
+    _text_Comments.text = objBreak.BREAKCOMMENTS;   //[test valueForKey:@"BREAKCOMMENTS"];
+    
+   // BREAKCOMMENTS =_text_Comments.text;
+    
+    BREAKNO = objBreak.BREAKNO;       //[test valueForKey:@"BREAKNO"];
+    
+//    UpdateBreakVC*add = [[UpdateBreakVC alloc]initWithNibName:@"UpdateBreakVC" bundle:nil];
+//    
+//    
+//    
+//    
+//    //vc2 *viewController = [[vc2 alloc]init];
+//    
+//    NSDictionary *sample=[self.resultarray objectAtIndex:indexPath.row];
+//    add.test=sample;
+//    
+//    add.COMPETITIONCODE=COMPETITIONCODE;
+//    add.resultarray=_resultarray;
+//    add.MATCHCODE=MATCHCODE;
+//    add.INNINGSNO=INNINGSNO;
+//    add.MATCHDATE=_MATCHDATE;
+//    
+//    [self addChildViewController:add];
+//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//    [self.view addSubview:add.view];
+//    add.view.alpha = 0;
+//    [add didMoveToParentViewController:self];
+//    
+//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//     {
+//         add.view.alpha = 1;
+//     }
+//                     completion:nil];
+//    
+    
+    
+    // //destViewController = [CategoryVC.destViewController objectAtIndex:0];
+    
+    self.btn_Update.hidden=NO;
+    self.btn_delete.hidden=NO;
+    self.btn_finish.hidden=YES;
+    self.view_gridview.hidden=YES;
+    self.btn_Add.hidden=YES;
+    isShow_BreakrecordTbl=NO;
+    
+    
+}
 
 
 - (IBAction)StartBreack_btn:(id)sender {
@@ -330,29 +444,34 @@
    // }
     
     NSMutableArray*BreaksArray=[objDBManager GetBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+    self.resultarray =BreaksArray;
     //BREAKNO =[DBManager GetMaxBreakNoForInsertBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     
     
-    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
-   
-    add.resultarray=BreaksArray;
-    add.MATCHCODE=MATCHCODE;
-    add.COMPETITIONCODE=COMPETITIONCODE;
-    add.INNINGSNO=INNINGSNO;
-    add.MATCHDATE=MATCHDATETIME;
-    add.Duration= self.lbl_Duration.text;
-    //vc2 *viewController = [[vc2 alloc]init];
-    [self addChildViewController:add];
-    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-    [self.view addSubview:add.view];
-    add.view.alpha = 0;
-    [add didMoveToParentViewController:self];
+//    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
+//   
+//    add.resultarray=BreaksArray;
+//    add.MATCHCODE=MATCHCODE;
+//    add.COMPETITIONCODE=COMPETITIONCODE;
+//    add.INNINGSNO=INNINGSNO;
+//    add.MATCHDATE=MATCHDATETIME;
+//    add.Duration= self.lbl_Duration.text;
+//    //vc2 *viewController = [[vc2 alloc]init];
+//    [self addChildViewController:add];
+//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//    [self.view addSubview:add.view];
+//    add.view.alpha = 0;
+//    [add didMoveToParentViewController:self];
+//    
+//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//     {
+//         add.view.alpha = 1;
+//     }
+//                     completion:nil];
     
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         add.view.alpha = 1;
-     }
-                     completion:nil];
+    self.view_gridview.hidden=NO;
+    self.btn_Add.hidden=NO;
+    [self.tbl_breaklist reloadData];
 
     
     
@@ -366,28 +485,209 @@
 
 }
 
+-(IBAction)didClickAddBtnAction:(id)sender
+{
+    if(isShow_BreakrecordTbl == YES)
+    {
+        self.view_gridview.hidden=YES;
+       // self.view_penaltyTittle.hidden=YES;
+        isShow_BreakrecordTbl= NO;
+        self.btn_Add.hidden =NO;
+       // [self.btn_submitpenality setTitle:[NSString stringWithFormat:@"Submit"] forState:UIControlStateNormal];
+        //self.lbl_penaltytype.text=@"Choose Penalty Type";
+        //self.txt_penalityruns.text=@"";
+        //[_resultarray lastObject];
+        //int myCount = [_resultarray count];
+        //selectindex= myCount+1;
+        
+    }
+    else
+    {
+        self.view_gridview.hidden=YES;
+//        self.tbl_breaklist.hidden=YES;
+       // self.view_penaltyTittle.hidden=YES;
+        isShow_BreakrecordTbl= YES;
+        self.btn_Add.hidden =YES;
+        [self.tbl_breaklist reloadData];
+    }
+
+}
+
+- (IBAction)Update_btn:(id)sender {
+    self.view_gridview.hidden=NO;
+    self.btn_Add.hidden =NO;
+    BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
+    
+    if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil && [self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil && [self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Start Time\nPlease Select End Time\nPlease Add Comments"];
+    }
+    else if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Start Time"];
+    }
+    else if([self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil)
+    {
+        [self ShowAlterView:@"Please Select End Time"];
+    }
+    else if([self.lbl_Duration.text integerValue]<=0){
+        [self ShowAlterView:@"Duration should be greated than zero"];
+    }
+    //    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)
+    //    {
+    //        [self ShowAlterView:@"Duration Not Calculated"];
+    //    }
+    else if([self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
+    {
+        [self ShowAlterView:@"Please Add Comments"];
+    }
+    
+    else{
+        [ self UpdateBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
+        
+       
+       
+
+        //  [self startService:@"UPDATE"];
+        
+        
+//        BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
+//        
+//        add.COMPETITIONCODE=self.COMPETITIONCODE;
+//        add.MATCHCODE=self.MATCHCODE;
+//        add.INNINGSNO=self.INNINGSNO;
+//        add.MATCHDATE=self.MATCHDATE;
+//        add.resultarray=UpdateBreaksArray;
+//        
+//        //vc2 *viewController = [[vc2 alloc]init];
+//        [self addChildViewController:add];
+//        add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//        [self.view addSubview:add.view];
+//        add.view.alpha = 0;
+//        [add didMoveToParentViewController:self];
+//        
+//        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//         {
+//             add.view.alpha = 1;
+//         }
+//                         completion:nil];
+        
+        
+    }
+    
+}
+-(void) UpdateBreaks:COMPETITIONCODE:INNINGSNO:MATCHCODE:BREAKSTARTTIME:BREAKENDTIME:
+       BREAKCOMMENTS:ISINCLUDEDURATION:BREAKNO;
+{
+    
+    //    if([DBManager GetMatchCodeForUpdateBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE] !=0)
+    //    {
+    //        if(![DBManager GetCompetitionCodeForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : BREAKNO])
+    //        {
+    //            if(![DBManager GetBreakNoForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKNO ])
+    //            {
+    [objDBManager UpdateInningsEvents : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
+    //            }
+    //        }
+    //    }
+    
+    UpdateBreaksArray=[objDBManager GetInningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+    self.resultarray =UpdateBreaksArray;
+    [self.tbl_breaklist reloadData];
+    
+}
+
+
+- (IBAction)delete_btn:(id)sender {
+    
+    self.view_gridview.hidden=NO;
+    self.btn_Add.hidden =NO;
+    
+//    BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
+//    
+    [self DeleteBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKCOMMENTS :BREAKNO];
+    //resultarray=DeleteBreaksArray;
+    
+//    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
+//    
+//    add.COMPETITIONCODE=self.COMPETITIONCODE;
+//    add.MATCHCODE=self.MATCHCODE;
+//    add.INNINGSNO=self.INNINGSNO;
+//    add.MATCHDATE=self.MATCHDATE;
+//    //  add.test=self.test;
+//    add.resultarray=DeleteBreaksArray;
+//    //   [self startService:@"DELETE"];
+//    
+//    //vc2 *viewController = [[vc2 alloc]init];
+//    [self addChildViewController:add];
+//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//    [self.view addSubview:add.view];
+//    add.view.alpha = 0;
+//    [add didMoveToParentViewController:self];
+//    
+//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//     {
+//         add.view.alpha = 1;
+//     }
+//                     completion:nil];
+    
+    
+    
+}
+
+-(void) DeleteBreaks:COMPETITIONCODE:INNINGSNO:MATCHCODE:BREAKCOMMENTS:BREAKNO;
+
+{
+    
+    
+    
+    [objDBManager DeleteInningsEvents : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
+    
+    
+    DeleteBreaksArray=[objDBManager InningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+    self.resultarray=DeleteBreaksArray;
+    [self.tbl_breaklist reloadData];
+}
+
+
+
 - (IBAction)back_btn:(id)sender {
+    
+    
+    if(isShow_BreakrecordTbl == YES)
+    {
+        [self.delegate ChangeVCBackBtnAction];
+       // [self.delegate reloadScoreEnginOnOtherWicket];
+    }
+    else
+    {
+        self.view_gridview.hidden=NO;
+        isShow_BreakrecordTbl= YES;
+        self.btn_Add.hidden =NO;
+    }
+    
+
     
 //    
 //    intialBreakVC*add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
     
-    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
-    add.COMPETITIONCODE=self.COMPETITIONCODE;
-    add.MATCHCODE=self.MATCHCODE;
-    add.INNINGSNO=self.INNINGSNO;
-    add.MATCHDATE=self.MATCHDATE;
-    //vc2 *viewController = [[vc2 alloc]init];
-    [self addChildViewController:add];
-    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-    [self.view addSubview:add.view];
-    add.view.alpha = 0;
-    [add didMoveToParentViewController:self];
-    
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         add.view.alpha = 1;
-     }
-                     completion:nil];
+//    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
+//    add.COMPETITIONCODE=self.COMPETITIONCODE;
+//    add.MATCHCODE=self.MATCHCODE;
+//    add.INNINGSNO=self.INNINGSNO;
+//    add.MATCHDATE=self.MATCHDATE;
+//    //vc2 *viewController = [[vc2 alloc]init];
+//    [self addChildViewController:add];
+//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//    [self.view addSubview:add.view];
+//    add.view.alpha = 0;
+//    [add didMoveToParentViewController:self];
+//    
+//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//     {
+//         add.view.alpha = 1;
+//     }
+//                     completion:nil];
 }
 
 
