@@ -709,7 +709,7 @@ else
         else if([WICKETTYPE isEqual:@"MSC101"])
         {
             GetPlayerDetailsOnTimeOutArray=[ dbOtherWicket GetPlayerDetailOnTimeOutForFetchOtherwicketPlayerDetails :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
-
+            
                 [self.tbl_playername reloadData];
                 self.tbl_playername.hidden=NO;
             
