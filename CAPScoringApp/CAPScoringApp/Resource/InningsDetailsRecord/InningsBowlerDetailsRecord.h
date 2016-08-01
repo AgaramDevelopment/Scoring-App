@@ -41,6 +41,7 @@
 @property (strong,nonatomic) NSString * OverballCount;
 
 @property (strong,nonatomic) NSString * grandTotal;
+@property (strong,nonatomic) NSNumber * rowId;
 
 
 

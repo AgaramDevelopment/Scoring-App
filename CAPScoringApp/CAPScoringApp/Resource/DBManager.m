@@ -8258,6 +8258,7 @@ return @"";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
+            int rowId = 0;
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=[[InningsBowlerDetailsRecord alloc]init];
@@ -8288,8 +8289,10 @@ return @"";
                 objInningsBowlerDetailsRecord.penaltyRuns=[self getValueByNull:statement :23];
                 objInningsBowlerDetailsRecord.penaltytypeCode=[self getValueByNull:statement :24];
                 objInningsBowlerDetailsRecord.grandTotal=[self getValueByNull:statement :25];
+                objInningsBowlerDetailsRecord.rowId = [NSNumber numberWithInt:rowId];
                 
                 [BOWLERDETAILS addObject:objInningsBowlerDetailsRecord];
+                rowId++;
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
