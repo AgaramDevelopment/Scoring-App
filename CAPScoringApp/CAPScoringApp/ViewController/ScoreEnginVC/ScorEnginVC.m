@@ -2999,7 +2999,7 @@
     [btnborder setTitleColor:brushFGSplEvents forState:UIControlStateNormal] ;
     btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20];
     
-    UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0, 40, totalWidth, 10)];
+    UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0,48, totalWidth,12)];
     BallTickerNo.textAlignment = NSTextAlignmentCenter;
     BallTickerNo.font = [UIFont fontWithName:@"RAJDHANI-REGULAR" size:13];
     [BallTickerNo setText:ballno];
@@ -3015,8 +3015,10 @@
 - (void) CreateBallTickers: (NSMutableArray *) arrayBallDetails
 {
     [self.view_BallTicker.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    UIScrollView *ScrollViewer = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, [self.view_BallTicker bounds].size.width, 50)];
+    UIScrollView *ScrollViewer = [[UIScrollView alloc] initWithFrame:CGRectMake(self.view_BallTicker.frame.origin.x,5, [self.view_BallTicker bounds].size.width,70)];
+    ScrollViewer.showsHorizontalScrollIndicator=NO;
     CGFloat xposition = 0;
+    
     for (BallEventRecord *drballdetails in arrayBallDetails)
     {
         NSMutableArray* dicBallKeysArray = [[NSMutableArray alloc] init];
@@ -3145,8 +3147,18 @@
         else
             xposition = xposition + (isExtras ? 57 : 47);
     }
-    [ScrollViewer setFrame:CGRectMake(0, 0, xposition, [ScrollViewer bounds].size.height)];
     [ScrollViewer setContentSize:CGSizeMake(xposition, [ScrollViewer bounds].size.height)];
+    CGFloat width =ScrollViewer.contentSize.width;
+    
+    if(width > 400)
+    {
+        [ScrollViewer setFrame:CGRectMake(0,ScrollViewer.frame.origin.y,405, [ScrollViewer bounds].size.height)];
+        [ScrollViewer setContentOffset:CGPointMake(ScrollViewer.contentSize.width- ScrollViewer.frame.size.width, 0) animated:YES];
+    }
+    else
+    {
+        [ScrollViewer setFrame:CGRectMake(0,ScrollViewer.frame.origin.y, xposition, [ScrollViewer bounds].size.height)];
+    }
     [self.view_BallTicker addSubview:ScrollViewer];
 }
 
