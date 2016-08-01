@@ -602,12 +602,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/AddBreakVC.m"
-            timestampString = "491399872.174126"
+            timestampString = "491751471.128892"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
-            landmarkName = "-viewWillAppear:"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
+            landmarkName = "-StartBreack_btn:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -640,6 +640,22 @@
             startingLineNumber = "64"
             endingLineNumber = "64"
             landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/AddBreakVC.m"
+            timestampString = "491754287.296297"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
+            landmarkName = "-InsertBreaks::::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -27,6 +27,7 @@
 //    UIDatePicker * datepicker;
 //    UIDatePicker * datepicker1;
 }
+@property (strong, nonatomic) IBOutlet UILabel *addbreak_lbl;
 @property (strong, nonatomic) IBOutlet UIView *View_BreakStart;
 @property (strong, nonatomic) IBOutlet UITextField *Text_BreakStart;
 - (IBAction)StartBreack_btn:(id)sender;
