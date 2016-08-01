@@ -55,4 +55,9 @@
 @property(strong,nonatomic)NSString*Duration;
 @property(strong,nonatomic)NSDictionary *test;
 
+@property (strong,nonatomic) IBOutlet UIView * view_gridview;
+@property (strong,nonatomic) IBOutlet UIButton *btn_Add;
+@property (strong,nonatomic) IBOutlet UITableView * tbl_breaklist;
+
+
 @end

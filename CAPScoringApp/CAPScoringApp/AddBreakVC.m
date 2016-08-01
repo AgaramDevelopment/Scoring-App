@@ -38,6 +38,8 @@
     BallEventRecord*obj;
     FetchSEPageLoadRecord*fetchSEPageLoadRecord;
     DBManager *objDBManager;
+    
+    BOOL isShow_BreakrecordTbl;
 
 }
 @end
@@ -366,28 +368,54 @@
 
 }
 
+-(IBAction)didClickAddBtnAction:(id)sender
+{
+//    if(isShow_BreakrecordTbl == YES)
+//    {
+//        self.tbl_breaklist.hidden=YES;
+//       // self.view_penaltyTittle.hidden=YES;
+//        isShow_BreakrecordTbl= NO;
+//        self.btn_Add.hidden =YES;
+//       // [self.btn_submitpenality setTitle:[NSString stringWithFormat:@"Submit"] forState:UIControlStateNormal];
+//        self.lbl_penaltytype.text=@"Choose Penalty Type";
+//        self.txt_penalityruns.text=@"";
+//        [_resultarray lastObject];
+//        int myCount = [_resultarray count];
+//        selectindex= myCount+1;
+//        
+//    }
+//    else
+//    {
+//        self.tbl_penaltyrecord.hidden=YES;
+//        self.view_penaltyTittle.hidden=YES;
+//        isShow_BreakrecordTbl= YES;
+//        self.Btn_Add.hidden =YES;
+//    }
+
+}
+
 - (IBAction)back_btn:(id)sender {
     
 //    
 //    intialBreakVC*add = [[intialBreakVC alloc]initWithNibName:@"intialBreakVC" bundle:nil];
     
-    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
-    add.COMPETITIONCODE=self.COMPETITIONCODE;
-    add.MATCHCODE=self.MATCHCODE;
-    add.INNINGSNO=self.INNINGSNO;
-    add.MATCHDATE=self.MATCHDATE;
-    //vc2 *viewController = [[vc2 alloc]init];
-    [self addChildViewController:add];
-    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-    [self.view addSubview:add.view];
-    add.view.alpha = 0;
-    [add didMoveToParentViewController:self];
-    
-    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-     {
-         add.view.alpha = 1;
-     }
-                     completion:nil];
+//    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
+//    add.COMPETITIONCODE=self.COMPETITIONCODE;
+//    add.MATCHCODE=self.MATCHCODE;
+//    add.INNINGSNO=self.INNINGSNO;
+//    add.MATCHDATE=self.MATCHDATE;
+//    //vc2 *viewController = [[vc2 alloc]init];
+//    [self addChildViewController:add];
+//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
+//    [self.view addSubview:add.view];
+//    add.view.alpha = 0;
+//    [add didMoveToParentViewController:self];
+//    
+//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+//     {
+//         add.view.alpha = 1;
+//     }
+//                     completion:nil];
 }
 
 
