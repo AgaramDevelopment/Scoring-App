@@ -39,6 +39,7 @@
                 <outlet property="View_Comments" destination="8gv-et-8c1" id="XI3-e4-C4u"/>
                 <outlet property="View_Duration" destination="NOr-6a-qQM" id="Xhm-dW-z8u"/>
                 <outlet property="View_EndBreak" destination="LUO-Z6-JOi" id="DmN-tb-3sM"/>
+                <outlet property="addbreak_lbl" destination="j5x-Aw-HLw" id="Pip-Me-q32"/>
                 <outlet property="btn_Add" destination="Dub-7C-9ES" id="1iR-Is-gDt"/>
                 <outlet property="btn_Update" destination="vuA-2a-o51" id="9nF-7S-cv0"/>
                 <outlet property="btn_delete" destination="a5X-Hj-rZr" id="wHw-P9-nLj"/>
@@ -257,53 +258,6 @@
                                 <action selector="Finish_btn:" destination="-1" eventType="touchUpInside" id="3df-u7-ses"/>
                             </connections>
                         </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTp-rz-qa0">
-                            <rect key="frame" x="0.0" y="407" width="550" height="195"/>
-                            <subviews>
-                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="2Ji-ua-MD8">
-                                    <rect key="frame" x="0.0" y="39" width="550" height="154"/>
-                                    <date key="date" timeIntervalSinceReferenceDate="487746899.174981">
-                                        <!--2016-06-16 05:14:59 +0000-->
-                                    </date>
-                                </datePicker>
-                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tFR-v9-se5">
-                                    <rect key="frame" x="0.0" y="39" width="550" height="154"/>
-                                    <date key="date" timeIntervalSinceReferenceDate="487765400.97751403">
-                                        <!--2016-06-16 10:23:20 +0000-->
-                                    </date>
-                                </datePicker>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOW-IW-2Ng">
-                                    <rect key="frame" x="474" y="8" width="71" height="29"/>
-                                    <color key="backgroundColor" red="0.0039215686269999999" green="0.82352941180000006" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="71" id="Ogm-C3-5I3"/>
-                                        <constraint firstAttribute="height" constant="29" id="eUF-Au-ImM"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
-                                    <state key="normal" title="Done">
-                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="hidepickerbtn:" destination="-1" eventType="touchUpInside" id="kg5-hp-N8a"/>
-                                    </connections>
-                                </button>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <constraints>
-                                <constraint firstAttribute="trailing" secondItem="VOW-IW-2Ng" secondAttribute="trailing" constant="5" id="928-vR-VEj"/>
-                                <constraint firstItem="2Ji-ua-MD8" firstAttribute="leading" secondItem="rTp-rz-qa0" secondAttribute="leading" id="HbB-b6-P74"/>
-                                <constraint firstAttribute="width" constant="550" id="J2n-6D-XVj"/>
-                                <constraint firstAttribute="trailing" secondItem="tFR-v9-se5" secondAttribute="trailing" id="JpD-Rt-6Mp"/>
-                                <constraint firstItem="tFR-v9-se5" firstAttribute="leading" secondItem="rTp-rz-qa0" secondAttribute="leading" id="e0P-5G-NGi"/>
-                                <constraint firstItem="VOW-IW-2Ng" firstAttribute="top" secondItem="rTp-rz-qa0" secondAttribute="topMargin" id="gpS-ZF-rVK"/>
-                                <constraint firstItem="tFR-v9-se5" firstAttribute="top" secondItem="VOW-IW-2Ng" secondAttribute="bottom" constant="2" id="hbr-rO-mNq"/>
-                                <constraint firstAttribute="bottom" secondItem="2Ji-ua-MD8" secondAttribute="bottom" constant="2" id="ht8-n3-ibw"/>
-                                <constraint firstItem="2Ji-ua-MD8" firstAttribute="top" secondItem="rTp-rz-qa0" secondAttribute="top" constant="39" id="m6y-PN-tfw"/>
-                                <constraint firstAttribute="trailing" secondItem="2Ji-ua-MD8" secondAttribute="trailing" id="mpw-RM-Gyz"/>
-                                <constraint firstAttribute="bottom" secondItem="tFR-v9-se5" secondAttribute="bottom" constant="2" id="tsA-OY-yJx"/>
-                                <constraint firstAttribute="height" constant="195" id="zJo-xK-t6a"/>
-                            </constraints>
-                        </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MINS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hv-tp-QSo">
                             <rect key="frame" x="406" y="229" width="108" height="26"/>
                             <constraints>
@@ -333,7 +287,7 @@
                                         <action selector="didClickAddBtnAction:" destination="-1" eventType="touchUpInside" id="gYC-bN-T0m"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ADD BREAK" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5x-Aw-HLw">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BREAKS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5x-Aw-HLw">
                                     <rect key="frame" x="175" y="13" width="200" height="44"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="200" id="Crs-vN-nVq"/>
@@ -400,6 +354,53 @@
                                 <action selector="delete_btn:" destination="-1" eventType="touchUpInside" id="FsZ-Y9-FrI"/>
                             </connections>
                         </button>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTp-rz-qa0">
+                            <rect key="frame" x="0.0" y="407" width="550" height="195"/>
+                            <subviews>
+                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="2Ji-ua-MD8">
+                                    <rect key="frame" x="0.0" y="39" width="550" height="154"/>
+                                    <date key="date" timeIntervalSinceReferenceDate="487746899.174981">
+                                        <!--2016-06-16 05:14:59 +0000-->
+                                    </date>
+                                </datePicker>
+                                <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tFR-v9-se5">
+                                    <rect key="frame" x="0.0" y="39" width="550" height="154"/>
+                                    <date key="date" timeIntervalSinceReferenceDate="487765400.97751403">
+                                        <!--2016-06-16 10:23:20 +0000-->
+                                    </date>
+                                </datePicker>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VOW-IW-2Ng">
+                                    <rect key="frame" x="474" y="8" width="71" height="29"/>
+                                    <color key="backgroundColor" red="0.0039215686269999999" green="0.82352941180000006" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="71" id="Ogm-C3-5I3"/>
+                                        <constraint firstAttribute="height" constant="29" id="eUF-Au-ImM"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                    <state key="normal" title="Done">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="hidepickerbtn:" destination="-1" eventType="touchUpInside" id="kg5-hp-N8a"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="VOW-IW-2Ng" secondAttribute="trailing" constant="5" id="928-vR-VEj"/>
+                                <constraint firstItem="2Ji-ua-MD8" firstAttribute="leading" secondItem="rTp-rz-qa0" secondAttribute="leading" id="HbB-b6-P74"/>
+                                <constraint firstAttribute="width" constant="550" id="J2n-6D-XVj"/>
+                                <constraint firstAttribute="trailing" secondItem="tFR-v9-se5" secondAttribute="trailing" id="JpD-Rt-6Mp"/>
+                                <constraint firstItem="tFR-v9-se5" firstAttribute="leading" secondItem="rTp-rz-qa0" secondAttribute="leading" id="e0P-5G-NGi"/>
+                                <constraint firstItem="VOW-IW-2Ng" firstAttribute="top" secondItem="rTp-rz-qa0" secondAttribute="topMargin" id="gpS-ZF-rVK"/>
+                                <constraint firstItem="tFR-v9-se5" firstAttribute="top" secondItem="VOW-IW-2Ng" secondAttribute="bottom" constant="2" id="hbr-rO-mNq"/>
+                                <constraint firstAttribute="bottom" secondItem="2Ji-ua-MD8" secondAttribute="bottom" constant="2" id="ht8-n3-ibw"/>
+                                <constraint firstItem="2Ji-ua-MD8" firstAttribute="top" secondItem="rTp-rz-qa0" secondAttribute="top" constant="39" id="m6y-PN-tfw"/>
+                                <constraint firstAttribute="trailing" secondItem="2Ji-ua-MD8" secondAttribute="trailing" id="mpw-RM-Gyz"/>
+                                <constraint firstAttribute="bottom" secondItem="tFR-v9-se5" secondAttribute="bottom" constant="2" id="tsA-OY-yJx"/>
+                                <constraint firstAttribute="height" constant="195" id="zJo-xK-t6a"/>
+                            </constraints>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.10980392160000001" green="0.13725490200000001" blue="0.15686274510000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
