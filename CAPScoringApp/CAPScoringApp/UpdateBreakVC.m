@@ -350,27 +350,47 @@ NSString *DURATION;
     [objAlter show];
 }
 
-
-
 -(void) UpdateBreaks:COMPETITIONCODE:INNINGSNO:MATCHCODE:BREAKSTARTTIME:BREAKENDTIME:
-BREAKCOMMENTS:ISINCLUDEDURATION:BREAKNO;
+       BREAKCOMMENTS:ISINCLUDEDURATION:BREAKNO;
 {
     
-//    if([DBManager GetMatchCodeForUpdateBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE] !=0)
-//    {
-//        if(![DBManager GetCompetitionCodeForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : BREAKNO])
-//        {
-//            if(![DBManager GetBreakNoForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKNO ])
-//            {
-                [objDBManager UpdateInningsEvents : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
-//            }
-//        }
-//    }
+    //    if([DBManager GetMatchCodeForUpdateBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE] !=0)
+    //    {
+    //        if(![DBManager GetCompetitionCodeForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : BREAKNO])
+    //        {
+    //            if(![DBManager GetBreakNoForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKNO ])
+    //            {
+    [objDBManager UpdateInningsEvents : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
+    //            }
+    //        }
+    //    }
     
-   UpdateBreaksArray=[objDBManager GetInningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+    UpdateBreaksArray=[objDBManager GetInningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
     
-
+    
 }
+
+
+
+//-(void) UpdateBreaks:COMPETITIONCODE:INNINGSNO:MATCHCODE:BREAKSTARTTIME:BREAKENDTIME:
+//BREAKCOMMENTS:ISINCLUDEDURATION:BREAKNO;
+//{
+//    
+////    if([DBManager GetMatchCodeForUpdateBreaks : BREAKSTARTTIME : BREAKENDTIME : COMPETITIONCODE : MATCHCODE] !=0)
+////    {
+////        if(![DBManager GetCompetitionCodeForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : BREAKNO])
+////        {
+////            if(![DBManager GetBreakNoForUpdateBreaks : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : BREAKNO ])
+////            {
+//                [objDBManager UpdateInningsEvents : BREAKSTARTTIME : BREAKENDTIME : BREAKCOMMENTS : ISINCLUDEDURATION : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
+////            }
+////        }
+////    }
+//    
+//   UpdateBreaksArray=[objDBManager GetInningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+//    
+//
+//}
 
 
 

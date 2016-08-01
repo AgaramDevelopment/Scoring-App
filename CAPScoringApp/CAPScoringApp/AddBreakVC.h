@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BreakVC.h"
+#import "DBManager.h"
 
 @protocol AddBreakVCDelagate <NSObject>
 @required
@@ -18,10 +19,14 @@
 
 @interface AddBreakVC : UIViewController<UIPickerViewDelegate,UIPickerViewDataSource>
 
-//{
+{
+    NSMutableArray*UpdateBreaksArray;
+    NSMutableArray*DeleteBreaksArray;
+
+    
 //    UIDatePicker * datepicker;
 //    UIDatePicker * datepicker1;
-//}
+}
 @property (strong, nonatomic) IBOutlet UIView *View_BreakStart;
 @property (strong, nonatomic) IBOutlet UITextField *Text_BreakStart;
 - (IBAction)StartBreack_btn:(id)sender;
@@ -58,6 +63,9 @@
 @property (strong,nonatomic) IBOutlet UIView * view_gridview;
 @property (strong,nonatomic) IBOutlet UIButton *btn_Add;
 @property (strong,nonatomic) IBOutlet UITableView * tbl_breaklist;
-
+@property (strong, nonatomic) IBOutlet BreakTableViewCell *GridBreakcell;
+@property (strong,nonatomic) IBOutlet UIButton *btn_Update;
+@property (strong,nonatomic) IBOutlet UIButton * btn_delete;
+@property (strong ,nonatomic) IBOutlet UIButton * btn_finish;
 
 @end
