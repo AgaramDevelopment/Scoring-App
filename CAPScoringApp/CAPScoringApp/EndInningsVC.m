@@ -181,6 +181,9 @@ BOOL IsBack;
         }
         
     }
+    
+    self.btn_save.hidden = YES;
+    self.btn_delete.hidden = YES;
 }
 
 -(void)datePicker{
@@ -355,6 +358,8 @@ BOOL IsBack;
     self.tbl_endInnings.hidden = YES;
     self.view_Header.hidden = YES;
     self.Btn_Add.hidden=YES;
+    self.btn_save.hidden = NO;
+    self.btn_delete.hidden = NO;
     
     
     
@@ -453,6 +458,8 @@ BOOL IsBack;
     self.tbl_endInnings.hidden = YES;
     self.view_Header.hidden = YES;
     self.view_allControls.hidden = NO;
+    self.btn_save.hidden = NO;
+    self.btn_delete.hidden = NO;
     
 self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f];
     [_btn_delete setUserInteractionEnabled:YES];
@@ -561,13 +568,16 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
          self.view_Header.hidden = NO;
         self.Btn_Add.hidden=NO;
         self.view_datepicker.hidden = YES;
+        self.btn_save.hidden = YES;
+        self.btn_delete.hidden = YES;
+        
         IsBack = YES;
     
     }else if (IsBack == YES){
         
         
         self.view_allControls.hidden = YES;
-        
+     
         [self.delegate EndInningsBackBtnAction];
 
         

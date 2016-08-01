@@ -64,7 +64,7 @@ int POS_TEAM_TYPE = 1;
     
     //self.view.frame =CGRectMake(0,0, [[UIScreen mainScreen] bounds].size.width, 100);
   [self.tbl_session setBackgroundColor:[UIColor clearColor]];
-    
+        
 }
 
 
@@ -194,10 +194,11 @@ int POS_TEAM_TYPE = 1;
     
     
 
-    [self duration];
+   // [self duration];
       self.view_allControls.hidden = YES;
     self.view_datePicker.hidden=YES;
-    
+    self.btn_save.hidden = YES;
+    self.Btn_Delete.hidden = YES;
     
 }
 
@@ -223,27 +224,18 @@ int POS_TEAM_TYPE = 1;
     [dateFormat setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     
     
-   
-//    NSDate *date = [formatter dateFromString:MatchDate];
-//    [formatter setDateFormat:@"yyyy-MM-dd"];
-//    
-//    NSString *MATCHDATE1 = [formatter stringFromDate:date];
-//    NSString *timeString=@"00:00:00";
-//    
-//    MATCHDATETIME=[NSString stringWithFormat:@"%@ %@",MATCHDATE1,timeString];
-
     
     
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     if([self.MATCHTYPECODE isEqual:@"MSC114"] || [self.MATCHTYPECODE isEqual:@"MSC023"])
     {
-        [comps setDay:5];
+        [comps setDay:1];
         [comps setMonth:0];
         [comps setYear:0];
     }
     else
     {
-        [comps setDay:5];
+        [comps setDay:1];
         [comps setMonth:0];
         [comps setYear:0];
         
@@ -414,7 +406,7 @@ int POS_TEAM_TYPE = 1;
     cell.lbl_teamName.text = end.SHORTTEAMNAME;
 
         
-        cell.lbl_sessionNo.text = [NSString stringWithFormat:@"%@", end.SESSIONNO];
+    cell.lbl_sessionNo.text = [NSString stringWithFormat:@"%@", end.SESSIONNO];
         
         
         cell.lbl_dayNo.text = end.DAYNO;
@@ -428,12 +420,12 @@ int POS_TEAM_TYPE = 1;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+     EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
     _scroll_EndSession.scrollEnabled = YES;
     
     if(tableView== objDrobDowntbl)
     {
-        EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
+       
         if (IsDropDown == YES) {
             
             self.lbl_sessionDominant.text = obj.BATTINGTEAMNAME;
@@ -445,7 +437,7 @@ int POS_TEAM_TYPE = 1;
     }
     else
     {
-    EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
+    //EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
         
     dbEndSession = [[DBManagerEndSession alloc]init];
         
@@ -458,6 +450,7 @@ int POS_TEAM_TYPE = 1;
         
     NSString *endOverNO = [dbEndSession GetEndOverNoForFetchEndSession:competitioncode :matchcode :sessionRecords.SESSIONNO :obj.DAYNO :obj.INNINGSNO];
         
+    NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : obj.DAYNO];
         
     NSString*startInningsTime = obj.SESSIONSTARTTIME;
     NSString*endInningsTime  = obj.SESSIONENDTIME;
@@ -481,7 +474,10 @@ int POS_TEAM_TYPE = 1;
 
     
     self.lbl_day.text = dayNo;
-        self.lbl_sessionNo.text = [NSString stringWithFormat:@"%@",obj.SESSIONNO];
+        NSLog(@"SESSIONNUMBER = %@", obj.SESSIONNO);
+        
+     _lbl_sessionNo.text = [NSString stringWithFormat:@"%d",obj.SESSIONNO.intValue];
+        
     self.lbl_InningsNo.text = [NSString stringWithFormat:@"%@",inningsNo];
     
         _lbl_sessionStartOver.text = startOver;
@@ -493,7 +489,8 @@ int POS_TEAM_TYPE = 1;
          self.view_heading.hidden = YES;
     self.tbl_session.hidden = YES;
     self.view_allControls.hidden = NO;
-    
+        self.btn_save.hidden = NO;
+        self.Btn_Delete.hidden = NO;
    
     
 }
@@ -516,6 +513,8 @@ int POS_TEAM_TYPE = 1;
     self.view_heading.hidden = YES;
     self.view_allControls.hidden = NO;
     self.tbl_session.hidden = YES;
+    self.btn_save.hidden = NO;
+    self.Btn_Delete.hidden = NO;
     back=NO;
     
 }
@@ -605,9 +604,15 @@ int POS_TEAM_TYPE = 1;
         
         NSString *dayNO =  [dbEndSession getDayNo : competitioncode: matchcode];
         
-        NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : dayNO];
+        if ([dayNO isEqualToString:@"0"]) {
+            
+            dayNO = @"1";
+        }
         
-        [sessionRecords UpdateEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :dayNO :sessionNo :_txt_startTime.text :_txt_endTime.text :Dominate];
+        NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : dayNO];
+
+        
+        [sessionRecords UpdateEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :dayNO :sessionNo :_txt_startTime.text :_txt_endTime.text :Dominate:fetchSeRecord.BATTINGTEAMCODE];
         
 
         
@@ -730,12 +735,11 @@ int POS_TEAM_TYPE = 1;
         }
         
         
+
     
-    //sessionRecords = [[EndSessionRecords alloc]init];
     
-    
-//        [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
-//        [self.tbl_session reloadData];
+        [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
+        [self.tbl_session reloadData];
         [endSessionArray removeLastObject];
         self.tbl_session.hidden = NO;
         self.view_heading.hidden = NO;
@@ -787,6 +791,8 @@ int POS_TEAM_TYPE = 1;
         self.tbl_session.hidden = NO;
         self.view_heading.hidden = NO;
         self.view_datePicker.hidden = YES;
+        self.btn_save.hidden = YES;
+        self.Btn_Delete.hidden = YES;
         back = YES;
         
     }else if (back == YES){
