@@ -13182,6 +13182,16 @@ self.lbl_umpirename.text=@"";
         [alter show];
         [alter setTag:3005];
         return NO;
+    }else if(isRemarkOpen ){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please complete remark option." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:3006];
+        return NO;
+    }else if(isFieldingSelected && fieldingOption >0){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"Please complete fielding option." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:3007];
+        return NO;
     }
     
     return YES;
