@@ -391,10 +391,14 @@ NSRegularExpression *isMatchedByRegex;
    Fixvc.CompitionCode=competitionCode;
         [self.navigationController pushViewController:Fixvc animated:YES];
         
-    } else {
-        NSLog(@"no");
+    }
+   
+    else
+       {  NSLog(@"yes");
+           
         [self.navigationController popViewControllerAnimated:YES];
     }
+   
 }
 
 /**
