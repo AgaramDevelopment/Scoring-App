@@ -47,5 +47,12 @@
     NSInteger F_ISWICKET = 0;
     NSInteger F_ISWICKETCOUNTABLE = 0;
     NSString* F_WICKETTYPE = @"";
+    
+    NSInteger BC_BALLNO = 0;
+    NSInteger BC_BALLCOUNT = 0;
+    
+    NSString* OTHERBOWLER = @"";
+    
+    NSInteger OTHERBOWLEROVERBALLCNT = 0;
 }
 @end

@@ -1029,6 +1029,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 -(IBAction)Back_BtnAction:(id)sender
 {
+     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"]; 
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)changePlayerorder:(int)newplayerorder :(int)orderno :(BOOL)ismoveorder

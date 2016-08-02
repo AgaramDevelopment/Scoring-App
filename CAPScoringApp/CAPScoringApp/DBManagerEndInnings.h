@@ -118,9 +118,12 @@
 -(NSString *)  GetIsMaidenOverFormanageOverDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) OVERNO;
 -(BOOL)  GetBowlerCodeFormanageOverDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) OVERNO;
 -(NSString *)   GetCurrentBowlerCountFormanageOverDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSString*) OVERNO;
+
+-(BOOL)UpdateBowlingSummaryFormanageOver:(NSString*) BOWLERCOUNT:(NSString*) ISMAIDENOVER :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO:(NSString*)OVERNO;
+
+
 -(BOOL)  UpdateBowlingSummaryFormanageOverDetails:(NSString*) BOWLERCOUNT:(NSString*) ISMAIDENOVER :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO:(NSString*) CURRENTBOWLER;
 
--(BOOL)UpdateBowlingSummaryFormanageOver:(NSString*) BOWLERCOUNT:(NSString*) ISMAIDENOVER :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO:(NSString*) CURRENTBOWLER :(NSString*)OVERNO;
 -(BOOL) InsertBowlingMaidenSummaryInElseFormanageOverDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO:(NSString*) BOWLERCODE:(NSString*) OVERNO;
 -(BOOL) InsertBowlerOverDetailsFormanageOverDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) TEAMCODE:(NSString*) INNINGSNO :(NSString*) OVERNO:(NSString*) BOWLERCODE;
 

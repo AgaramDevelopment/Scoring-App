@@ -143,6 +143,7 @@
     BOOL isWagonWheelValueSelected;
     BOOL isWagonwheel;
     BOOL isAppeal;
+    BOOL isEndOverOnEndBall;
     
     BOOL isToss;
     
@@ -499,6 +500,7 @@
     
     
     isRemarkOpen = NO;
+    isEndOverOnEndBall = NO;
 
     
     //Fielding Factor
@@ -2485,7 +2487,7 @@
                 [self EndBallMethod];
                 [self.btn_StartBall setTitle:@"END BALL" forState:UIControlStateNormal];
                 self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(243/255.0f) green:(150/255.0f) blue:(56/255.0f) alpha:1.0f];
-                self.btn_StartOver.userInteractionEnabled=NO;
+              //  self.btn_StartOver.userInteractionEnabled=NO;
                 [self AllBtnEnableMethod];
                 
                 [self resetBallEventObject];
@@ -2536,7 +2538,7 @@
         
         [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
         self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
-        self.btn_StartOver.userInteractionEnabled=YES;
+     //   self.btn_StartOver.userInteractionEnabled=YES;
         //        self.btn_StartBall.userInteractionEnabled=NO;
         //        [self SaveBallEventREcordvalue];
         
@@ -3245,30 +3247,40 @@
     else
     {
         
-//         if(fetchSEPageLoadRecord.BATTEAMWICKETS==10){
-//            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:nil message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [alter show];
-//            [alter setTag:10004];
-//         }else{
-        [self overEVENT];
+        BOOL isEndBallSuccess = YES;
         
-        //Check for Striker, non Striker and bower present
         
-        if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
-            [self btn_bowler_name:0];
-
-        }else if(fetchSEPageLoadRecord.strickerPlayerName == nil){
-            [self btn_stricker_names:0];
-        }else if( fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
-            [self btn_nonstricker_name:0];
-
+        //If start ball clicked
+        if([self.btn_StartBall.currentTitle isEqualToString:@"END BALL"])
+        {
+            isEndOverOnEndBall = YES;
+            if([self checkRunsByLB_B] && [self iswicketPending]&&[self checkValidation]){
+                
+                [self StartBall];
+                
+            }else{
+                isEndBallSuccess = NO;
+            }
         }
-         
         
-        //        [self.btn_StartOver setTitle:@"START OVER" forState:UIControlStateNormal];
-        //        self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:1.0f];
-        //        self.btn_StartBall.userInteractionEnabled=NO;
-        //        [self AllBtndisableMethod];
+        //End over clicked
+        
+        if(isEndBallSuccess){
+            isEndOverOnEndBall = NO;
+            [self overEVENT];
+            
+            //Check for Striker, non Striker and bower present
+            
+//            if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
+//                [self btn_bowler_name:0];
+//                
+//            }else if(fetchSEPageLoadRecord.strickerPlayerName == nil){
+//                [self btn_stricker_names:0];
+//            }else if( fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
+//                [self btn_nonstricker_name:0];
+//                
+//            }
+        }
         
     }
     
@@ -3463,6 +3475,16 @@
                                 {
                                     //bowerbtn
                                 }
+                                //Check batsman and bowler empty
+                                if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
+                                    [self btn_bowler_name:0];
+                                    
+                                }else if(fetchSEPageLoadRecord.strickerPlayerName == nil){
+                                    [self btn_stricker_names:0];
+                                }else if( fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
+                                    [self btn_nonstricker_name:0];
+                                    
+                                }
                             }
                             
 
@@ -3561,16 +3583,7 @@
             [self reloadBowlerTeamBatsmanDetails];
             
             
-            //Check batsman and bowler empty
-            if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
-                [self btn_bowler_name:0];
-                
-            }else if(fetchSEPageLoadRecord.strickerPlayerName == nil){
-                [self btn_stricker_names:0];
-            }else if( fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
-                [self btn_nonstricker_name:0];
-                
-            }
+            
             
             
             if(![ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.BATTEAMOVERS >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&[MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
@@ -3589,6 +3602,17 @@
                 if([self.lbl_bowler_name.text isEqualToString:@""] ||self.lbl_bowler_name.text == nil)
                 {
                     //bowerbtn
+                }
+                
+                //Check batsman and bowler empty
+                if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
+                    [self btn_bowler_name:0];
+                    
+                }else if(fetchSEPageLoadRecord.strickerPlayerName == nil){
+                    [self btn_stricker_names:0];
+                }else if( fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
+                    [self btn_nonstricker_name:0];
+                    
                 }
             }
             
@@ -3645,6 +3669,24 @@
         if (alertView.tag == 3000 ) {
             [self StartBall];
             
+            //End over clicked with out end ball
+            if(isEndOverOnEndBall){
+                isEndOverOnEndBall = NO;
+                [self overEVENT];
+                
+                //Check for Striker, non Striker and bower present
+//                
+//                if(fetchSEPageLoadRecord.currentBowlerPlayerName  == nil){
+//                    [self btn_bowler_name:0];
+//                    
+//                }else if(fetchSEPageLoadRecord.strickerPlayerName == nil){
+//                    [self btn_stricker_names:0];
+//                }else if( fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
+//                    [self btn_nonstricker_name:0];
+//                    
+//                }
+            }
+            
         }if (alertView.tag == 3001) {
             
         }if (alertView.tag == 2002) {
@@ -3670,7 +3712,8 @@
             [self MatchResult];
             
         }if (alertView.tag == 3000 ) {
-            
+            isEndOverOnEndBall = NO;
+
            
         }
         if(alertView.tag == 1003)
@@ -9620,7 +9663,7 @@ self.lbl_umpirename.text=@"";
             [self.btn_StartOver setTitle:@"START OVER" forState:UIControlStateNormal];
             
             self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
-            self.btn_StartOver.userInteractionEnabled=YES;
+          //  self.btn_StartOver.userInteractionEnabled=YES;
             
         }
     }
