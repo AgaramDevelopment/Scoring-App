@@ -2770,102 +2770,117 @@
     }
     else
     {
-        NSNumber *temp = [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS];
-        int ballCount = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
-        //Insert Score Engine SP Call
-        [InsertSEScoreEngine InsertScoreEngine :
-         self.competitionCode :
-         self.matchCode  :
-         fetchSEPageLoadRecord.BATTINGTEAMCODE :
-         [NSNumber numberWithInt : fetchSEPageLoadRecord.INNINGSNO.intValue] :
-         BallCode :
-         [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] :
-         [NSNumber numberWithInt: ballCount] :
-         [NSNumber numberWithInt:1] : //default BALLCOUNT for Live mode
-          fetchSEPageLoadRecord.DAYNO :
-         fetchSEPageLoadRecord.SESSIONNO :
-         fetchSEPageLoadRecord.strickerPlayerCode:
-         fetchSEPageLoadRecord.nonstrickerPlayerCode:
-         fetchSEPageLoadRecord.currentBowlerPlayerCode:
-         
-         ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString :
-           fetchSEPageLoadRecord.TEAMACODE] ?
-          fetchSEPageLoadRecord.TEAMBWICKETKEEPER :
-          fetchSEPageLoadRecord.TEAMAWICKETKEEPER):
-         
-         fetchSEPageLoadRecord.UMPIRE1CODE :
-         fetchSEPageLoadRecord.UMPIRE2CODE :
-         self.ballEventRecord.objAtworotw :
-         self.ballEventRecord.objBowlingEnd :
-         self.ballEventRecord.objBowltype :
-         self.ballEventRecord.objShottype:
-         self.ballEventRecord.objShorttypecategory :
-         self.ballEventRecord.objIslegalball:
-         self.ballEventRecord.objIsFour :
-         self.ballEventRecord.objIssix :
-         self.ballEventRecord.objRuns :
-         self.ballEventRecord.objOverthrow :
-         self.ballEventRecord.objTotalruns :
-         self.ballEventRecord.objWide :
-         self.ballEventRecord.objNoball :
-         self.ballEventRecord.objByes:
-         self.ballEventRecord.objLegByes:
-         self.ballEventRecord.objPenalty:
-         self.ballEventRecord.objTotalextras:
-         self.ballEventRecord.objGrandtotal:
-         self.ballEventRecord.objRbw:
-         self.ballEventRecord.objPMlinecode:
-         self.ballEventRecord.objPMlengthcode:
-         self.ballEventRecord.objPMStrikepoint:
-         self.ballEventRecord.objPMX1:
-         self.ballEventRecord.objPMY1:
-         self.ballEventRecord.objPMX2:
-         self.ballEventRecord.objPMY2:
-         self.ballEventRecord.objPMX3:
-         self.ballEventRecord.objPMY3:
-         self.ballEventRecord.objWWREGION:
-         self.ballEventRecord.objWWX1:
-         self.ballEventRecord.objWWY1:
-         self.ballEventRecord.objWWX2:
-         self.ballEventRecord.objWWY2:
-         self.ballEventRecord.objballduration:
-         self.ballEventRecord.objIsappeal:
-         self.ballEventRecord.objIsbeaten:
-         self.ballEventRecord.objIsuncomfort:
-         self.ballEventRecord.objIswtb:
-         self.ballEventRecord.objIsreleaseshot:
-         self.ballEventRecord.objMarkedforedit:
-         self.ballEventRecord.objRemark:
-         self.ballEventRecord.objVideoFile:
-         isWicketSelected == YES ? [NSNumber numberWithInt:1] : [NSNumber numberWithInt:0]:
-         selectedwickettype.metasubcode:
-         (selectedStrikernonstrikerCode.length <= 0 ? fetchSEPageLoadRecord.strickerPlayerCode : selectedStrikernonstrikerCode):
-         selectedwicketBowlerlist.BowlerCode:
-                                      insertType:
-         self.ballEventRecord.AwardedTeam://Awarded Team:
-         self.ballEventRecord.objPenalty:
-         self.ballEventRecord.objPenaltytypecode:
-         self.ballEventRecord.objPenaltyreasoncode://(NSString *)PENALTYREASONCODE:
-         @""://(NSString *)BALLSPEED:
-         @""://(NSString *)UNCOMFORTCLASSIFCATION:
-         selectedWicketEvent:
-         [appealEventDict objectForKey:@"AppealTypeCode"]://APPEALTYPECODE:
-         [appealEventDict objectForKey:@"AppealSystemSelct"]://APPEALSYSTEMCODE:
-         [appealEventDict objectForKey:@"AppealComponentSelct"]://APPEALCOMPONENTCODE:
-         [appealEventDict objectForKey:@"AppealUmpireSelct"]://APPEALUMPIRECODE
-         [appealEventDict objectForKey:@"AppealBatsmenSelct"]://APPEALBATSMANCODE:
-         @""://APPEALISREFERRED:
-         @""://APPEALDECISION:
-         [appealEventDict objectForKey:@"Commenttext"]://APPEALCOMMENTS:
-         @""://APPEALFIELDERCODE:
-         @"I"://APPEALFLAG:
-         selectedfieldPlayer.BowlerCode://FIELDINGEVENTSFIELDERCODE:
-         @""://FIELDINGEVENTSISSUBSTITUTE:
-         selectedfieldFactor.fieldingfactorcode://FIELDINGEVENTSFIELDINGFACTOR:
-         (selectedNRS == nil || [selectedNRS isEqualToString:@""] ? @"1" : selectedNRS )://FIELDINGEVENTSNETRUNS:
-         @"I"//FIELDINGEVENTSFLAG
-         ];
-        [self reloadBowlerTeamBatsmanDetails];
+        if(_isEditMode && [insertType isEqualToString:@""])
+        {
+            self.ballEventRecord.objBallcode = self.editBallCode;
+            //Update Score Engine SP Call
+            UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
+            [updatescore UpdateScoreEngine :self.editBallCode :self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO : [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVERS] : [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLS]  :[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT] :fetchSEPageLoadRecord.SESSIONNO :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.currentBowlerPlayerCode : ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString : fetchSEPageLoadRecord.TEAMACODE] ?fetchSEPageLoadRecord.TEAMAWICKETKEEPER : fetchSEPageLoadRecord.TEAMBWICKETKEEPER) :@"":@"": self.ballEventRecord.objAtworotw :self.ballEventRecord.objBowlingEnd :self.ballEventRecord.objBowltype :self.ballEventRecord.objShottype :self.ballEventRecord.objShorttypecategory :self.ballEventRecord.objIslegalball : self.ballEventRecord.objIsFour :  self.ballEventRecord.objIssix :self.ballEventRecord.objRuns :self.ballEventRecord.objOverthrow :self.ballEventRecord.objTotalruns :self.ballEventRecord.objWide : self.ballEventRecord.objNoball :self.ballEventRecord.objByes : self.ballEventRecord.objLegByes : self.ballEventRecord.objPenalty :self.ballEventRecord.objTotalextras :self.ballEventRecord.objGrandtotal :self.ballEventRecord.objRbw :self.ballEventRecord.objPMlinecode :self.ballEventRecord.objPMlengthcode :self.ballEventRecord.objPMStrikepoint :self.ballEventRecord.objPMStrikepointlinecode :self.ballEventRecord.objPMX1 :self.ballEventRecord.objPMY1 :self.ballEventRecord.objPMX2 :self.ballEventRecord.objPMY2 : self.ballEventRecord.objPMX3 :self.ballEventRecord.objPMY3 :self.ballEventRecord.objWWREGION :self.ballEventRecord.objWWX1 :self.ballEventRecord.objWWY2 :self.ballEventRecord.objWWX2 :self.ballEventRecord.objWWY2 :self.ballEventRecord.objballduration :self.ballEventRecord.objIsbeaten :self.ballEventRecord.objIsuncomfort :self.ballEventRecord.objIswtb :self.ballEventRecord.objIsreleaseshot :self.ballEventRecord.objMarkedforedit :self.ballEventRecord.objRemark :@"" : self.ballEventRecord.objWicketType :@"" :@"" :@"" :self.ballEventRecord.AwardedTeam :self.ballEventRecord.objPenalty : self.ballEventRecord.objPenaltytypecode :self.ballEventRecord.objPenaltyreasoncode : self.ballEventRecord.objBallspeed :self.ballEventRecord.objUncomfortclassification :@"" :@"" :@""];
+            
+            
+        }
+        else
+        {
+            NSNumber *temp = [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+            int ballCount = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
+            
+            [InsertSEScoreEngine InsertScoreEngine :
+             self.competitionCode :
+             self.matchCode  :
+             fetchSEPageLoadRecord.BATTINGTEAMCODE :
+             [NSNumber numberWithInt : fetchSEPageLoadRecord.INNINGSNO.intValue] :
+                                          BallCode :
+             [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS] :
+             [NSNumber numberWithInt: ballCount] :
+             [NSNumber numberWithInt:1] : //default BALLCOUNT for Live mode
+             fetchSEPageLoadRecord.DAYNO :
+             fetchSEPageLoadRecord.SESSIONNO :
+             fetchSEPageLoadRecord.strickerPlayerCode:
+             fetchSEPageLoadRecord.nonstrickerPlayerCode:
+             fetchSEPageLoadRecord.currentBowlerPlayerCode:
+             
+             ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString :
+               fetchSEPageLoadRecord.TEAMACODE] ?
+              fetchSEPageLoadRecord.TEAMBWICKETKEEPER :
+              fetchSEPageLoadRecord.TEAMAWICKETKEEPER):
+             
+             fetchSEPageLoadRecord.UMPIRE1CODE :
+             fetchSEPageLoadRecord.UMPIRE2CODE :
+             self.ballEventRecord.objAtworotw :
+             self.ballEventRecord.objBowlingEnd :
+             self.ballEventRecord.objBowltype :
+             self.ballEventRecord.objShottype:
+             self.ballEventRecord.objShorttypecategory :
+             self.ballEventRecord.objIslegalball:
+             self.ballEventRecord.objIsFour :
+             self.ballEventRecord.objIssix :
+             self.ballEventRecord.objRuns :
+             self.ballEventRecord.objOverthrow :
+             self.ballEventRecord.objTotalruns :
+             self.ballEventRecord.objWide :
+             self.ballEventRecord.objNoball :
+             self.ballEventRecord.objByes:
+             self.ballEventRecord.objLegByes:
+             self.ballEventRecord.objPenalty:
+             self.ballEventRecord.objTotalextras:
+             self.ballEventRecord.objGrandtotal:
+             self.ballEventRecord.objRbw:
+             self.ballEventRecord.objPMlinecode:
+             self.ballEventRecord.objPMlengthcode:
+             self.ballEventRecord.objPMStrikepoint:
+             self.ballEventRecord.objPMX1:
+             self.ballEventRecord.objPMY1:
+             self.ballEventRecord.objPMX2:
+             self.ballEventRecord.objPMY2:
+             self.ballEventRecord.objPMX3:
+             self.ballEventRecord.objPMY3:
+             self.ballEventRecord.objWWREGION:
+             self.ballEventRecord.objWWX1:
+             self.ballEventRecord.objWWY1:
+             self.ballEventRecord.objWWX2:
+             self.ballEventRecord.objWWY2:
+             self.ballEventRecord.objballduration:
+             self.ballEventRecord.objIsappeal:
+             self.ballEventRecord.objIsbeaten:
+             self.ballEventRecord.objIsuncomfort:
+             self.ballEventRecord.objIswtb:
+             self.ballEventRecord.objIsreleaseshot:
+             self.ballEventRecord.objMarkedforedit:
+             self.ballEventRecord.objRemark:
+             self.ballEventRecord.objVideoFile:
+             isWicketSelected == YES ? [NSNumber numberWithInt:1] : [NSNumber numberWithInt:0]:
+             selectedwickettype.metasubcode:
+             (selectedStrikernonstrikerCode.length <= 0 ? fetchSEPageLoadRecord.strickerPlayerCode : selectedStrikernonstrikerCode):
+             selectedwicketBowlerlist.BowlerCode:
+                                         insertType:
+             self.ballEventRecord.AwardedTeam://Awarded Team:
+             self.ballEventRecord.objPenalty:
+             self.ballEventRecord.objPenaltytypecode:
+             self.ballEventRecord.objPenaltyreasoncode://(NSString *)PENALTYREASONCODE:
+             @""://(NSString *)BALLSPEED:
+             @""://(NSString *)UNCOMFORTCLASSIFCATION:
+             selectedWicketEvent:
+             [appealEventDict objectForKey:@"AppealTypeCode"]://APPEALTYPECODE:
+             [appealEventDict objectForKey:@"AppealSystemSelct"]://APPEALSYSTEMCODE:
+             [appealEventDict objectForKey:@"AppealComponentSelct"]://APPEALCOMPONENTCODE:
+             [appealEventDict objectForKey:@"AppealUmpireSelct"]://APPEALUMPIRECODE
+             [appealEventDict objectForKey:@"AppealBatsmenSelct"]://APPEALBATSMANCODE:
+             @""://APPEALISREFERRED:
+             @""://APPEALDECISION:
+             [appealEventDict objectForKey:@"Commenttext"]://APPEALCOMMENTS:
+             @""://APPEALFIELDERCODE:
+             @"I"://APPEALFLAG:
+             selectedfieldPlayer.BowlerCode://FIELDINGEVENTSFIELDERCODE:
+             @""://FIELDINGEVENTSISSUBSTITUTE:
+             selectedfieldFactor.fieldingfactorcode://FIELDINGEVENTSFIELDINGFACTOR:
+             (selectedNRS == nil || [selectedNRS isEqualToString:@""] ? @"1" : selectedNRS )://FIELDINGEVENTSNETRUNS:
+             @"I"//FIELDINGEVENTSFLAG
+             ];
+            //Insert Score Engine SP Call
+            
+            [self reloadBowlerTeamBatsmanDetails];
+            
+        }
     }
     if([self.ballEventRecord.objIslegalball intValue] == 0)
     {
