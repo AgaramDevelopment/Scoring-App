@@ -64,6 +64,8 @@ int POS_TEAM_TYPE = 1;
     
     //self.view.frame =CGRectMake(0,0, [[UIScreen mainScreen] bounds].size.width, 100);
   [self.tbl_session setBackgroundColor:[UIColor clearColor]];
+    _btn_save.hidden = YES;
+    _btn_delete.hidden = YES;
     
 }
 
@@ -494,6 +496,8 @@ int POS_TEAM_TYPE = 1;
     self.tbl_session.hidden = YES;
     self.view_allControls.hidden = NO;
     
+        _btn_save.hidden = NO;
+        _btn_delete.hidden = NO;
    
     
 }
@@ -516,6 +520,8 @@ int POS_TEAM_TYPE = 1;
     self.view_heading.hidden = YES;
     self.view_allControls.hidden = NO;
     self.tbl_session.hidden = YES;
+    _btn_save.hidden = NO;
+    _btn_delete.hidden = NO;
     back=NO;
     
 }
@@ -605,9 +611,15 @@ int POS_TEAM_TYPE = 1;
         
         NSString *dayNO =  [dbEndSession getDayNo : competitioncode: matchcode];
         
+        if ([dayNO isEqualToString:@"0"]) {
+            
+           dayNO = @"1";
+        }
+        
+        
         NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : dayNO];
         
-        [sessionRecords UpdateEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :dayNO :sessionNo :_txt_startTime.text :_txt_endTime.text :Dominate];
+        [sessionRecords UpdateEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :dayNO :sessionNo :_txt_startTime.text :_txt_endTime.text :Dominate:fetchSeRecord.INNINGSNO:fetchSeRecord.BATTINGTEAMCODE:dayNO];
         
 
         
@@ -666,7 +678,8 @@ int POS_TEAM_TYPE = 1;
     self.tbl_session.hidden = NO;
     self.view_allControls.hidden = YES;
     self.view_heading.hidden = NO;
-  
+        self.btn_delete.hidden = YES;
+        self.btn_save.hidden = YES;
     }
 }
 
@@ -734,13 +747,17 @@ int POS_TEAM_TYPE = 1;
     //sessionRecords = [[EndSessionRecords alloc]init];
     
     
-//        [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
-//        [self.tbl_session reloadData];
+      
+        [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
+          [self.tbl_session reloadData];
+        
         [endSessionArray removeLastObject];
+        
         self.tbl_session.hidden = NO;
         self.view_heading.hidden = NO;
         self.view_allControls.hidden = YES;
-
+        self.btn_delete.hidden = YES;
+        self.btn_save.hidden = YES;
         //[self.Btn_back sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 }
@@ -787,6 +804,8 @@ int POS_TEAM_TYPE = 1;
         self.tbl_session.hidden = NO;
         self.view_heading.hidden = NO;
         self.view_datePicker.hidden = YES;
+        _btn_save.hidden = YES;
+        _btn_delete.hidden = YES;
         back = YES;
         
     }else if (back == YES){
