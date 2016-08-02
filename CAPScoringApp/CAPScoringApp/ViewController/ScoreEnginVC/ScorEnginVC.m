@@ -29,7 +29,7 @@
 #import "FetchLastBallBowledPlayer.h"
 #import "InitializeInningsScoreBoardRecord.h"
 #import "AppealBatsmenRecord.h"
-
+#import "AppDelegate.h"
 #import "ArchivesVC.h"
 #import "BreakVC.h"
 #import "EndInnings.h"
@@ -7890,6 +7890,19 @@ self.lbl_umpirename.text=@"";
             
         }
     }else if(tableView == overThrowTableView){//Over throw table view
+        
+        if (_ballEventRecord.objByes.intValue == 0 && _ballEventRecord.objIsbeaten.intValue == 1)// Check beaten selected
+        {
+            
+            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Runs are not possible with Beaten. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [altert show];
+            [altert setTag:10404];
+            
+            [overThrowTableView deselectRowAtIndexPath:indexPath animated:NO];
+            
+        }else{
+
+        
         if( self.ballEventRecord.objOverthrow != [self.overThrowOptionArray objectAtIndex:indexPath.row]){
             self.ballEventRecord.objOverthrow = [self.overThrowOptionArray objectAtIndex:indexPath.row];
             [overThrowTableView removeFromSuperview];
@@ -7909,6 +7922,7 @@ self.lbl_umpirename.text=@"";
             // self.btn_RBW.backgroundColor=[UIColor colorWithRed:(12/255.0f) green:(26/255.0f) blue:(43/255.0f) alpha:0.5f];
             
             isOverthrowSelected = NO;
+        }
         }
         
     } else if(rbwTableview == tableView){
@@ -13076,6 +13090,15 @@ self.lbl_umpirename.text=@"";
    //[self reloadBowlerTeamBatsmanDetails];
 }
 - (IBAction)SyncData_btn:(id)sender {
+    if(self.checkInternetConnection){
+        
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    //Show indicator
+    [delegate showLoading];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+    
+        
     PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
     NSMutableArray*MatchRegistrationGetArray=[objPushSyncDBMANAGER RetrieveMATCHREGISTRATIONData:_competitionCode :_matchCode];
     
@@ -13184,9 +13207,43 @@ self.lbl_umpirename.text=@"";
     NSURLResponse* response;
     NSError* error = nil;
     responseData = [NSURLConnection sendSynchronousRequest:request     returningResponse:&response error:&error];
-    NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+    //NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
+        
+        
+        
+        if (responseData != nil) {
+            NSMutableArray *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+            NSDictionary  *responseDict = [serviceResponse objectAtIndex:0];
+            NSString *ErrorNoStr =[responseDict objectForKey:@"ErrorNo"];
+            
+            NSString *CompareErrorno=@"MOB0005";
+            if ([ErrorNoStr isEqualToString:CompareErrorno]) {
+              
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"SYNC DATA COMPLETED. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [altert show];
+                [altert setTag:10405];
+                
+            }else{
+                UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"SYNC DATA FAILED. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [altert show];
+                [altert setTag:10406];
+            }
+        }
+        
+        
     
-    NSLog(@"the final output is:%@",responseString);
+  //  NSLog(@"the final output is:%@",responseString);
+        [delegate hideLoading];
+    });
+    }
+    
+        else{
+            
+            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Network Error. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [altert show];
+            [altert setTag:10405];
+            
+        }
 }
 
 - (IBAction)Appeal_Cancel_btn:(id)sender {
@@ -13207,6 +13264,13 @@ self.lbl_umpirename.text=@"";
 {
     [fullview removeFromSuperview];
     
+}
+
+- (BOOL)checkInternetConnection
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
 }
 
 -(void) reloadScoreEnginOnOtherWicket{
