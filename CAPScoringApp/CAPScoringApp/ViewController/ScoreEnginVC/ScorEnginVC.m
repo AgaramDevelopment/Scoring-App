@@ -3866,6 +3866,11 @@
     //wicket
     if(isWicketSelected && selectBtnTag.tag != 107 && wicketOption !=0){
         
+        if(selectedwickettype!=nil ){
+            
+            [self setResetRunsOnWicketDeselect];
+            
+        }
         isWicketSelected= NO;
         selectedwickettype = nil;
         selectedWicketEvent = nil;
@@ -3873,7 +3878,6 @@
         selectedwicketBowlerlist =nil;
         wicketOption=0;
         [self unselectedButtonBg:self.btn_wkts];
-        [self setResetRunsOnWicketDeselect];
 
         
     }
@@ -4091,6 +4095,12 @@
 //            
 //            selectedwickettype = nil;
             
+             if(selectedwickettype!=nil ){
+                 
+                 [self setResetRunsOnWicketDeselect];
+                 
+             }
+             
             isWicketSelected = NO;
             wicketOption = 0;
             self.view_aggressiveShot.hidden = YES;
@@ -4103,7 +4113,6 @@
             selectedwicketBowlerlist =nil;
             
             [self unselectedButtonBg:selectBtnTag];
-            [self setResetRunsOnWicketDeselect];
             
          }
             else{
@@ -5532,6 +5541,13 @@
     //wicket
     if(isWicketSelected && selectBtnTag.tag != 107 && wicketOption !=0){
         
+        
+        if(selectedwickettype!=nil ){
+            
+            [self setResetRunsOnWicketDeselect];
+
+        }
+        
         isWicketSelected= NO;
         selectedwickettype = nil;
         selectedWicketEvent = nil;
@@ -5539,8 +5555,7 @@
         selectedwicketBowlerlist =nil;
         wicketOption=0;
         [self unselectedButtonBg:self.btn_wkts];
-        [self setResetRunsOnWicketDeselect];
-
+       
         
         
     }
@@ -6436,6 +6451,9 @@
     self.view_Wagon_wheel.hidden=YES;
     
     //Right buttons
+    if(rbwTableview!=nil){
+        [rbwTableview removeFromSuperview];
+    }
     [self unselectedViewBg: self.view_otw];
     [self unselectedViewBg: self.view_rtw];
     [self unselectedViewBg: self.view_spin];
@@ -6646,6 +6664,14 @@ self.lbl_umpirename.text=@"";
                 
                 
             }
+            
+            if(!isMoreRunSelected && isWicketSelected) {//Wicket selected
+                [self disableButtonBg:self.btn_B4];
+                self.btn_B4.userInteractionEnabled=NO;
+                [self disableButtonBg:self.btn_B6];
+                self.btn_B6.userInteractionEnabled=NO;
+            }
+            
             break;
         case 101: // Two, Five
             
@@ -6686,6 +6712,13 @@ self.lbl_umpirename.text=@"";
                 //                self.txt_Commantry.text =run2value;
             }
             
+            if(!isMoreRunSelected && isWicketSelected) {//Wicket selected
+                [self disableButtonBg:self.btn_B4];
+                self.btn_B4.userInteractionEnabled=NO;
+                [self disableButtonBg:self.btn_B6];
+                self.btn_B6.userInteractionEnabled=NO;
+            }
+            
             break;
         case 102: // Three, Six
             
@@ -6722,6 +6755,12 @@ self.lbl_umpirename.text=@"";
                 [self selectedButtonBg: self.btn_run3];
                 //                NSString * run3value =[NSString stringWithFormat:@" RUN FOR %@",self.ballEventRecord.objRuns];
                 //                self.txt_Commantry.text =run3value;
+            }
+            if(!isMoreRunSelected && isWicketSelected) {//Wicket selected
+                [self disableButtonBg:self.btn_B4];
+                self.btn_B4.userInteractionEnabled=NO;
+                [self disableButtonBg:self.btn_B6];
+                self.btn_B6.userInteractionEnabled=NO;
             }
             
             break;
@@ -13463,43 +13502,75 @@ self.lbl_umpirename.text=@"";
 
 -(void) setResetRunsOnWicketDeselect{
     
-    //B6
-    self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
-    [self unselectedButtonBg:self.btn_B6];
-    self.btn_B6.userInteractionEnabled =YES;
     
+    if([selectedwickettype.metasubcode isEqualToString:@"MSC097"] && !isMoreRunSelected){//Run Out
+        //B6
+        self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
+        [self unselectedButtonBg:self.btn_B6];
+        self.btn_B6.userInteractionEnabled =YES;
+        
+        
+        //B4
+        self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];
+        [self unselectedButtonBg:self.btn_B4];
+        self.btn_B4.userInteractionEnabled= YES;
+        
+    }else{
+        //B6
+        self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
+        [self unselectedButtonBg:self.btn_B6];
+        self.btn_B6.userInteractionEnabled =YES;
+        
+        
+        //B4
+        self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];
+        [self unselectedButtonBg:self.btn_B4];
+        self.btn_B4.userInteractionEnabled= YES;
+        
+        
+        //Runs
+        self.ballEventRecord.objRuns  = [NSNumber numberWithInt:0];
+        [self unselectedButtonBg: self.btn_highRun];
+        [self unselectedButtonBg: self.btn_run1];
+        [self unselectedButtonBg: self.btn_run2];
+        [self unselectedButtonBg: self.btn_run3];
+        self.btn_highRun.userInteractionEnabled= YES;
+        self.btn_run1.userInteractionEnabled= YES;
+        self.btn_run2.userInteractionEnabled= YES;
+        self.btn_run3.userInteractionEnabled= YES;
+        
+        
+        //Overthrow
+        [self unselectedButtonBg: self.btn_overthrow];
+        self.ballEventRecord.objOverthrow = [NSNumber numberWithInt:0];
+        self.btn_overthrow.userInteractionEnabled= YES;
+        
+        
+        
+          if([selectedwickettype.metasubcode isEqualToString:@"MSC095"] || [selectedwickettype.metasubcode isEqualToString:@"MSC096"] || [selectedwickettype.metasubcode isEqualToString:@"MSC098"] || [selectedwickettype.metasubcode isEqualToString:@"MSC105"]){
+            //MSC098 - LBW
+            //MSC096 - Bowled
+            //MSC095 - Caught
+            //MSC105 - c&b
+            
+            //Extras
+            [self unselectedButtonBg: self.btn_extras];
+            self.ballEventRecord.objLegByes = [NSNumber numberWithInt:0];
+            self.ballEventRecord.objNoball = [NSNumber numberWithInt:0];
+            self.ballEventRecord.objWide = [NSNumber numberWithInt:0];
+            self.ballEventRecord.objByes = [NSNumber numberWithInt:0];
+            self.btn_extras.userInteractionEnabled= YES;
+            
+            
+            
+            
+        }
+        
+      
+    }
     
-    //B4
-    self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];
-    [self unselectedButtonBg:self.btn_B4];
-    self.btn_B4.userInteractionEnabled= YES;
+   
     
-    
-    //Runs
-    self.ballEventRecord.objRuns  = [NSNumber numberWithInt:0];
-    [self unselectedButtonBg: self.btn_highRun];
-    [self unselectedButtonBg: self.btn_run1];
-    [self unselectedButtonBg: self.btn_run2];
-    [self unselectedButtonBg: self.btn_run3];
-    self.btn_highRun.userInteractionEnabled= YES;
-    self.btn_run1.userInteractionEnabled= YES;
-    self.btn_run2.userInteractionEnabled= YES;
-    self.btn_run3.userInteractionEnabled= YES;
-    
-    
-    //Overthrow
-    [self unselectedButtonBg: self.btn_overthrow];
-    self.ballEventRecord.objOverthrow = [NSNumber numberWithInt:0];
-    self.btn_overthrow.userInteractionEnabled= YES;
-    
-    
-    //Extras
-    [self unselectedButtonBg: self.btn_extras];
-    self.ballEventRecord.objLegByes = [NSNumber numberWithInt:0];
-    self.ballEventRecord.objNoball = [NSNumber numberWithInt:0];
-    self.ballEventRecord.objWide = [NSNumber numberWithInt:0];
-    self.ballEventRecord.objByes = [NSNumber numberWithInt:0];
-    self.btn_extras.userInteractionEnabled= YES;
     
 }
 
@@ -13558,7 +13629,9 @@ self.lbl_umpirename.text=@"";
             self.ballEventRecord.objWide = [NSNumber numberWithInt:0];
             self.ballEventRecord.objByes = [NSNumber numberWithInt:0];
             self.btn_extras.userInteractionEnabled= YES;
-            [self unselectedButtonBg: self.btn_extras];
+            if(self.ballEventRecord.objNoball.intValue==0){
+                [self unselectedButtonBg: self.btn_extras];
+            }
             
         }else  if([selectedwickettype.metasubcode isEqualToString:@"MSC104"] || [selectedwickettype.metasubcode isEqualToString:@"MSC099"]){    //MSC104 - Stumped
             //MSC099 - Hit Wicket
@@ -13566,7 +13639,9 @@ self.lbl_umpirename.text=@"";
             self.ballEventRecord.objNoball = [NSNumber numberWithInt:0];
             self.ballEventRecord.objByes = [NSNumber numberWithInt:0];
             self.btn_extras.userInteractionEnabled= YES;
-            [self unselectedButtonBg: self.btn_extras];
+            if(self.ballEventRecord.objWide.intValue==0){
+                [self unselectedButtonBg: self.btn_extras];
+            }
 
             
         }else if([selectedwickettype.metasubcode isEqualToString:@"MSC106"]){
@@ -13574,7 +13649,10 @@ self.lbl_umpirename.text=@"";
             self.ballEventRecord.objLegByes = [NSNumber numberWithInt:0];
             self.ballEventRecord.objByes = [NSNumber numberWithInt:0];
             self.btn_extras.userInteractionEnabled= YES;
-            [self unselectedButtonBg: self.btn_extras];
+            
+            if(self.ballEventRecord.objWide.intValue==0 && self.ballEventRecord.objNoball.intValue==0){
+                [self unselectedButtonBg: self.btn_extras];
+            }
 
         }else{
             [self disableButtonBg: self.btn_extras];
