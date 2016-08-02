@@ -214,7 +214,7 @@ BOOL IsBack;
     }
     else
     {
-        [comps setDay:5];
+        [comps setDay:1];
         [comps setMonth:0];
         [comps setYear:0];
 

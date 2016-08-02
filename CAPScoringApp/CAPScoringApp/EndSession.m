@@ -128,7 +128,7 @@ int POS_TEAM_TYPE = 1;
     
     
      _lbl_day.text = sessionRecords.DAYNO;
-    _lbl_sessionNo.text = [NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO];
+    //_lbl_sessionNo.text = [NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO];
     _lbl_InningsNo.text = [NSString stringWithFormat:@"%@",sessionRecords.INNINGSNOS];
     _lbl_teamBatting.text = sessionRecords.TEAMNAMES;
     _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO == nil ? @"0" : sessionRecords.STARTOVERNO];
@@ -422,7 +422,7 @@ int POS_TEAM_TYPE = 1;
 {
      EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
     _scroll_EndSession.scrollEnabled = YES;
-    
+  
     if(tableView== objDrobDowntbl)
     {
        
@@ -476,7 +476,7 @@ int POS_TEAM_TYPE = 1;
     self.lbl_day.text = dayNo;
         NSLog(@"SESSIONNUMBER = %@", obj.SESSIONNO);
         
-     _lbl_sessionNo.text = [NSString stringWithFormat:@"%d",obj.SESSIONNO.intValue];
+     self.lbl_SessionNo.text =obj.SESSIONNO;
         
     self.lbl_InningsNo.text = [NSString stringWithFormat:@"%@",inningsNo];
     

@@ -345,7 +345,8 @@
         [self reloadBowlerTeamBatsmanDetails];
         [self AllBtndisableMethod];
         
-    }    [self hideLabelBasedOnMatchType];
+    }
+    [self hideLabelBasedOnMatchType];
     
    
 
@@ -589,7 +590,7 @@
         [_rightSlideArray removeObjectsInArray:[[NSArray alloc] initWithObjects:@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil]];
         if (fetchSEPageLoadRecord.BATTEAMWICKETS >= 10)
             [_rightSlideArray removeObject : @"DECLARE INNINGS"];
-        if (inningsno == 1 || inningsno == 4 || inningsno ==2)
+        if (inningsno == 1 || inningsno == 4)
             [_rightSlideArray removeObject : @"FOLLOW ON"];
     }
 }
@@ -2386,9 +2387,9 @@
          fetchSEPageLoadRecord.nonstrickerPlayerCode :
          fetchSEPageLoadRecord.currentBowlerPlayerCode:
          ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString : fetchSEPageLoadRecord.TEAMACODE] ? fetchSEPageLoadRecord.TEAMAWICKETKEEPER : fetchSEPageLoadRecord.TEAMBWICKETKEEPER) :
-         @"":
+         fetchSEPageLoadRecord.UMPIRE1CODE:
          
-         @"":
+         fetchSEPageLoadRecord.UMPIRE2CODE:
          self.ballEventRecord.objAtworotw :
          self.ballEventRecord.objBowlingEnd :
          self.ballEventRecord.objBowltype :
@@ -8645,7 +8646,7 @@ self.lbl_umpirename.text=@"";
             fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
             
             objFollowOn.view.alpha = 0;
-            [objFollowOn didMoveToParentViewController:self];
+            
             objFollowOn.view.frame =CGRectMake(90, 300, objFollowOn.view.frame.size.width, objFollowOn.view.frame.size.height);
             [self.view addSubview:fullview];
             
@@ -8654,6 +8655,7 @@ self.lbl_umpirename.text=@"";
                  objFollowOn.view.alpha = 1;
              }
                              completion:nil];
+            [objFollowOn didMoveToParentViewController:self];
             [self addChildViewController:objFollowOn];
             [fullview addSubview:objFollowOn.view];
         }

@@ -68,7 +68,7 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *lbl_day;
 
-@property (weak, nonatomic) IBOutlet UILabel *lbl_sessionNo;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_SessionNo;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_InningsNo;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_teamBatting;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_sessionStartOver;
