@@ -388,6 +388,7 @@
     }
         else if (alterTosswon!=@""||alterElectorto!=@""||alterStricker!=@""||alterNonstricker!=@""||alterBowler!=@"")
     {
+        
         [self ShowAlterView:[NSString stringWithFormat:@"Please Select %@\n%@\n%@\n%@\n%@",alterTosswon,alterElectorto,alterStricker,alterNonstricker,alterBowler]];
         return YES;
     }
@@ -400,6 +401,10 @@
 
 -(void)ShowAlterView:(NSString *) alterMsg
 {
+       while ([alterMsg rangeOfString:@"  "].location != NSNotFound) {
+            alterMsg = [alterMsg stringByReplacingOccurrencesOfString:@"  " withString:@" "];
+        }
+    
     UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:@"Change Toss" message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [objAlter show];
 }

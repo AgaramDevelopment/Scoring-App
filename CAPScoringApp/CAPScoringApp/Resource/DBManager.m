@@ -6186,7 +6186,9 @@ return @"";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"WITH WICKETDETAILS(ROWNUM,WICKETPLAYER,WICKETTYPE,BALLCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO) AS ( SELECT (SELECT COUNT(*) FROM WICKETEVENTS AS t2 WHERE t2.MATCHCODE <= WKT.MATCHCODE) AS ROWNUM,WKT.WICKETPLAYER, WKT.WICKETTYPE, WKT.BALLCODE, WKT.COMPETITIONCODE, WKT.MATCHCODE, WKT.TEAMCODE, WKT.INNINGSNO FROM WICKETEVENTS WKT WHERE WKT.COMPETITIONCODE = '%@' AND WKT.MATCHCODE =   '%@' AND	WKT.TEAMCODE =   '%@' AND WKT.INNINGSNO = '%@')SELECT PM.PLAYERCODE PLAYERCODE, PM.PLAYERNAME PLAYERNAME, PM.BATTINGSTYLE FROM MATCHREGISTRATION MR INNER JOIN MATCHTEAMPLAYERDETAILS MPD ON MR.MATCHCODE = MPD.MATCHCODE AND MPD.RECORDSTATUS='MSC001' INNER JOIN COMPETITION COM ON COM.COMPETITIONCODE = MR.COMPETITIONCODE INNER JOIN TEAMMASTER TMA ON MPD.MATCHCODE = '%@' AND	MPD.TEAMCODE = '%@' AND MPD.TEAMCODE = TMA.TEAMCODE INNER JOIN PLAYERMASTER PM ON MPD.PLAYERCODE = PM.PLAYERCODE WHERE PM.PLAYERCODE NOT IN ( SELECT X.WICKETPLAYER AS WICKETPLAYER  FROM WICKETDETAILS AS X LEFT JOIN WICKETDETAILS nex ON nex.rownum = X.rownum + 1 WHERE  (X.WICKETTYPE  != 'MSC102' OR NEX.WICKETPLAYER IS NULL) AND X.COMPETITIONCODE = '%@' AND X.MATCHCODE = '%@' AND	X.TEAMCODE = '%@' AND X.INNINGSNO = '%@'  ) AND (COM.ISOTHERSMATCHTYPE = 'MSC117' Or (MPD.PLAYINGORDER <= 11)) ORDER BY MPD.PLAYINGORDER",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,MATCHCODE,BATTINGTEAMCODE,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
+//        NSString *updateSQL = [NSString stringWithFormat:@"WITH WICKETDETAILS(ROWNUM,WICKETPLAYER,WICKETTYPE,BALLCODE,COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO) AS ( SELECT (SELECT COUNT(*) FROM WICKETEVENTS AS t2 WHERE t2.MATCHCODE <= WKT.MATCHCODE) AS ROWNUM,WKT.WICKETPLAYER, WKT.WICKETTYPE, WKT.BALLCODE, WKT.COMPETITIONCODE, WKT.MATCHCODE, WKT.TEAMCODE, WKT.INNINGSNO FROM WICKETEVENTS WKT WHERE WKT.COMPETITIONCODE = '%@' AND WKT.MATCHCODE =   '%@' AND	WKT.TEAMCODE =   '%@' AND WKT.INNINGSNO = '%@')SELECT PM.PLAYERCODE PLAYERCODE, PM.PLAYERNAME PLAYERNAME, PM.BATTINGSTYLE FROM MATCHREGISTRATION MR INNER JOIN MATCHTEAMPLAYERDETAILS MPD ON MR.MATCHCODE = MPD.MATCHCODE AND MPD.RECORDSTATUS='MSC001' INNER JOIN COMPETITION COM ON COM.COMPETITIONCODE = MR.COMPETITIONCODE INNER JOIN TEAMMASTER TMA ON MPD.MATCHCODE = '%@' AND	MPD.TEAMCODE = '%@' AND MPD.TEAMCODE = TMA.TEAMCODE INNER JOIN PLAYERMASTER PM ON MPD.PLAYERCODE = PM.PLAYERCODE WHERE PM.PLAYERCODE NOT IN ( SELECT X.WICKETPLAYER AS WICKETPLAYER  FROM WICKETDETAILS AS X LEFT JOIN WICKETDETAILS nex ON nex.rownum = X.rownum + 1 WHERE  (X.WICKETTYPE  != 'MSC102' OR NEX.WICKETPLAYER IS NULL) AND X.COMPETITIONCODE = '%@' AND X.MATCHCODE = '%@' AND	X.TEAMCODE = '%@' AND X.INNINGSNO = '%@'  ) AND (COM.ISOTHERSMATCHTYPE = 'MSC117' Or (MPD.PLAYINGORDER <= 11)) ORDER BY MPD.PLAYINGORDER",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,MATCHCODE,BATTINGTEAMCODE,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
+       
+        NSString *updateSQL = [NSString stringWithFormat:@"WITH X AS(SELECT WKTEVT.COMPETITIONCODE, WKTEVT.MATCHCODE, WKTEVT.TEAMCODE, WKTEVT.INNINGSNO, WKTEVT.BALLCODE, WKTEVT.WICKETPLAYER, WKTEVT.WICKETTYPE, (SELECT IFNULL(COUNT(WKT.WICKETNO),0) FROM WICKETEVENTS WKT INNER JOIN BALLEVENTS BE ON WKT.BALLCODE = BE.BALLCODE WHERE WKT.COMPETITIONCODE = WKTEVT.COMPETITIONCODE AND WKT.MATCHCODE = WKTEVT.MATCHCODE AND WKT.TEAMCODE = WKTEVT.TEAMCODE AND WKT.INNINGSNO = WKTEVT.INNINGSNO AND CAST(BE.OVERNO AS NVARCHAR(5)) + CAST(BE.BALLNO AS NVARCHAR(5)) + CAST(BE.BALLCOUNT AS NVARCHAR(5)) <= WKTEVT.SNO) WKTNO FROM(SELECT WKTEVT.COMPETITIONCODE, WKTEVT.MATCHCODE, WKTEVT.TEAMCODE, WKTEVT.INNINGSNO, WKTEVT.BALLCODE, WKTEVT.WICKETPLAYER, WKTEVT.WICKETTYPE, WKTEVT.WICKETNO, CAST(BE.OVERNO AS NVARCHAR(5)) + CAST(BE.BALLNO AS NVARCHAR(5)) + CAST(BE.BALLCOUNT AS NVARCHAR(5)) SNO    FROM WICKETEVENTS WKTEVT INNER JOIN BALLEVENTS BE ON WKTEVT.BALLCODE = BE.BALLCODE WHERE WKTEVT.COMPETITIONCODE = '%@' AND WKTEVT.MATCHCODE =   '%@' AND	WKTEVT.TEAMCODE =   '%@' AND WKTEVT.INNINGSNO = %@) WKTEVT)SELECT PM.PLAYERCODE PLAYERCODE, PM.PLAYERNAME PLAYERNAME, PM.BATTINGSTYLE FROM MATCHREGISTRATION MR INNER JOIN MATCHTEAMPLAYERDETAILS MPD ON MR.MATCHCODE = MPD.MATCHCODE AND MPD.RECORDSTATUS='MSC001' INNER JOIN COMPETITION COM ON COM.COMPETITIONCODE = MR.COMPETITIONCODE  INNER JOIN TEAMMASTER TMA ON MPD.MATCHCODE = '%@' AND MPD.TEAMCODE = '%@' AND MPD.TEAMCODE = TMA.TEAMCODE INNER JOIN PLAYERMASTER PM ON MPD.PLAYERCODE = PM.PLAYERCODE WHERE PM.PLAYERCODE NOT IN (SELECT X.WICKETPLAYER AS WICKETPLAYER  FROM X LEFT JOIN X nex ON nex.WKTNO = X.WKTNO + 1 WHERE(X.WICKETTYPE  != 'MSC102' OR NEX.WICKETPLAYER IS NULL) AND  X.COMPETITIONCODE = '%@' AND X.MATCHCODE = '%@'  AND X.TEAMCODE = '%@'  AND X.INNINGSNO = %@   )  AND (COM.ISOTHERSMATCHTYPE = 'MSC117' Or (MPD.PLAYINGORDER <= 11))  ORDER BY MPD.PLAYINGORDER",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,MATCHCODE,BATTINGTEAMCODE,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -6319,6 +6321,9 @@ return @"";
 }
 
 
+
+//SELECT MATCHCODE FROM MATCHREGISTRATION WHERE COMPETITIONCODE ='UCC0000080'  AND MATCHCODE='IMSC023B8975A8DCBBB00260' AND strftime('%s' ,MATCHDATE) <= strftime('%s' ,'2016-07-30 13:00:00') 
+
 //INSERT BREAK DETAILS
 
 -(BOOL) GetMatchCodeForInsertBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
@@ -6329,7 +6334,7 @@ return @"";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE ('%@' >= MATCHDATE AND '%@'>= MATCHDATE )  AND COMPETITIONCODE ='%@'  AND MATCHCODE='%@' ",BREAKSTARTTIME,BREAKENDTIME,COMPETITIONCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE ((strftime('%%s' ,'%@') >= (strftime('%%s' MATCHDATE ) ))AND (strftime('%%s' ,'%@') >= (strftime('%%s' , MATCHDATE )))) AND COMPETITIONCODE ='%@'  AND MATCHCODE='%@' ",BREAKSTARTTIME,BREAKENDTIME,COMPETITIONCODE,MATCHCODE];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -6359,26 +6364,24 @@ return @"";
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"SELECT COMPETITIONCODE FROM INNINGSBREAKEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE='%@' AND INNINGSNO = '%@' AND BREAKSTARTTIME='%@' AND BREAKENDTIME='%@' AND BREAKCOMMENTS ='%@' AND ISINCLUDEINPLAYERDURATION='%@' AND BREAKNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,BREAKSTARTTIME,BREAKENDTIME,BREAKCOMMENTS,ISINCLUDEDURATION,BREAKNO];
-        const char *update_stmt = [updateSQL UTF8String];
-        if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
-                        {
-                while(sqlite3_step(statement)==SQLITE_ROW){
-                    
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                    sqlite3_reset(statement);
-                    sqlite3_finalize(statement);
-                    sqlite3_close(dataBase);
-                    return TOTAL;
-                }
-                
+        const char *insert_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, insert_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
+            
         }
         sqlite3_close(dataBase);
         
     }
-    return @"";
+    return NO;
+
 }
 
 -(BOOL) MatchCodeForInsertBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
@@ -6468,8 +6471,8 @@ return @"";
                 BreakEventRecords *record=[[BreakEventRecords alloc]init];
                 record.BREAKNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.BREAKSTARTTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.BREAKENDTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                record.DURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.BREAKENDTIME=[self getValueByNull:statement :2];
+                record.DURATION=[self getValueByNull:statement :3];
                 record.ISINCLUDEINPLAYERDURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
                 record.BREAKCOMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
                 
@@ -6485,7 +6488,6 @@ return @"";
     }
     return BreaksArray;
 }
-
 
 -(NSString*) GetMaxBreakNoForInsertBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO
 {
@@ -8257,6 +8259,7 @@ return @"";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
+            int rowId = 0;
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=[[InningsBowlerDetailsRecord alloc]init];
@@ -8287,8 +8290,10 @@ return @"";
                 objInningsBowlerDetailsRecord.penaltyRuns=[self getValueByNull:statement :23];
                 objInningsBowlerDetailsRecord.penaltytypeCode=[self getValueByNull:statement :24];
                 objInningsBowlerDetailsRecord.grandTotal=[self getValueByNull:statement :25];
+                objInningsBowlerDetailsRecord.rowId = [NSNumber numberWithInt:rowId];
                 
                 [BOWLERDETAILS addObject:objInningsBowlerDetailsRecord];
+                rowId++;
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);

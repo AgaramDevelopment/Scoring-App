@@ -183,6 +183,9 @@ BOOL IsBack;
         }
         
     }
+    
+    self.btn_save.hidden = YES;
+    self.btn_delete.hidden = YES;
 }
 
 -(void)datePicker{
@@ -480,6 +483,18 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         [self showDialog:@"Duration should be greated than zero" andTitle:@""];
         return NO;
     }
+    
+    
+    if([self.txt_startInnings.text isEqualToString:@""]){
+        [self showDialog:@"Please Choose Start Innings Time" andTitle:@"End Innings"];
+        return NO;
+    }
+    if([self.txt_endInnings.text isEqualToString:@""]){
+        [self showDialog:@"Please Choose End Innings Time" andTitle:@"End Innings"];
+        return NO;
+    }
+
+    
     return YES;
 }
 - (IBAction)btn_save:(id)sender {
@@ -576,7 +591,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         
         
         self.view_allControls.hidden = YES;
-        
+     
         [self.delegate EndInningsBackBtnAction];
 
         

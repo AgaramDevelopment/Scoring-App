@@ -252,7 +252,7 @@
                     PENALTY = 0;
                 }
             }
-            PREVIOUSBALLCODE= [dbInsertScoreEngine GetPrevoiusBallCodeForInsertScoreEngine :OVERNO:BALLCOUNT:BALLNO:MATCHCODE:INNINGSNO];
+            PREVIOUSBALLCODE = [dbInsertScoreEngine GetPrevoiusBallCodeForInsertScoreEngine :OVERNO:BALLNO:BALLCOUNT:MATCHCODE:INNINGSNO];
             
             if([dbInsertScoreEngine GetBallcodeInBallEventForInsertScoreEngine :PREVIOUSBALLCODE:BOWLERCODE].intValue>0)
             {
@@ -805,5 +805,46 @@
         
         
     }
+}
+
+//SP_INSERTSEAPPEALEVENTS
+-(void)InsertAppealEvents : (NSString*)BALLCODE : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)TEAMCODE : (NSString*)INNINGSNO : (NSString*)APPEALTYPECODE : (NSString*)APPEALSYSTEMCODE : (NSString*)APPEALCOMPONENTCODE : (NSString*)UMPIRECODE : (NSString*)BATSMANCODE : (NSString*)ISREFERRED : (NSString*)APPEALDECISION : (NSString*)APPEALCOMMENTS : (NSString*)FIELDERCODE : (NSString*)FLAG
+{
+    DBManagerInsertScoreEngine *dbInsertScoreEngine = [[DBManagerInsertScoreEngine alloc]init];
+    if([FLAG isEqualToString: @"I"])
+    {
+        [dbInsertScoreEngine InsertAppealEvents : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : BALLCODE : APPEALTYPECODE : APPEALSYSTEMCODE : APPEALCOMPONENTCODE : UMPIRECODE : BATSMANCODE : ISREFERRED : APPEALDECISION : APPEALCOMMENTS : FIELDERCODE];
+    }
+    else if([FLAG isEqualToString: @"E"])
+    {
+        [dbInsertScoreEngine UpdateAppealEvents : APPEALTYPECODE : APPEALSYSTEMCODE : APPEALCOMPONENTCODE : UMPIRECODE : BATSMANCODE : ISREFERRED : APPEALDECISION : APPEALCOMMENTS : FIELDERCODE : BALLCODE];
+        
+    }
+    else if([FLAG isEqualToString: @"D"])
+    {
+        [dbInsertScoreEngine DeleteAppealEvents : BALLCODE];
+        
+    }
+}
+
+//SP_INSERTSEFIELDINGEVENTS
+-(void) InsertFieldingEvents : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString *)TEAMCODE : (NSInteger)INNINGSNO : (NSString*)BALLCODE : (NSString*)FIELDERCODE : (NSString*)ISSUBSTITUTE : (NSString*)FIELDINGFACTOR : (NSString*)NETRUNS : (NSString*)FLAG
+{
+    DBManagerInsertScoreEngine *dbInsertScoreEngine = [[DBManagerInsertScoreEngine alloc]init];
+    if([FLAG isEqualToString: @"I"])
+    {
+        [dbInsertScoreEngine InsertFieldingEvents :COMPETITIONCODE: MATCHCODE :TEAMCODE :INNINGSNO: BALLCODE: FIELDERCODE :ISSUBSTITUTE : FIELDINGFACTOR: NETRUNS];
+    }
+				
+    else if([FLAG isEqualToString: @"E"])
+    {
+        [dbInsertScoreEngine UpdateFieldingEvents :FIELDERCODE: ISSUBSTITUTE :FIELDINGFACTOR :NETRUNS: BALLCODE: FIELDINGFACTOR ];
+        
+    }	
+    else if([FLAG isEqualToString: @"D"])
+    {
+        [dbInsertScoreEngine DeleteFieldingEvents : BALLCODE : FIELDINGFACTOR];
+        
+    }		
 }
 @end

@@ -119,7 +119,7 @@ NSRegularExpression *isMatchedByRegex;
     }
      self.btnUpdateOutlet.userInteractionEnabled=YES;
     
-      [self.btnUpdateOutlet setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+      [self.btnUpdateOutlet setBackgroundColor:[UIColor colorWithRed:(16/255.0f) green:(210/255.0f) blue:(158/255.0f) alpha:1.0f]];
     
 
     if(self.isEdit==YES)
@@ -372,8 +372,16 @@ NSRegularExpression *isMatchedByRegex;
 
 - (IBAction)btn_back:(id)sender {
     
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"]) {
+        NSLog(@"no");
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ScoreEnginExit"];
+        [self.navigationController popViewControllerAnimated:YES];
+       
+    }
     
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetUp"]) {
+    
+    
+    else if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetUp"]) {
         NSLog(@"yes");
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetUp"];
         
@@ -383,10 +391,14 @@ NSRegularExpression *isMatchedByRegex;
    Fixvc.CompitionCode=competitionCode;
         [self.navigationController pushViewController:Fixvc animated:YES];
         
-    } else {
-        NSLog(@"no");
+    }
+   
+    else
+       {  NSLog(@"yes");
+           
         [self.navigationController popViewControllerAnimated:YES];
     }
+   
 }
 
 /**

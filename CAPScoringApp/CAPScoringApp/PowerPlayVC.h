@@ -40,6 +40,8 @@
 
 @property (strong, nonatomic) IBOutlet UIButton *btn_delete;
 
+@property (strong,nonatomic) IBOutlet UIButton * btn_Add;
+
 
 - (IBAction)btn_submit:(id)sender;
 - (IBAction)btn_delete:(id)sender;

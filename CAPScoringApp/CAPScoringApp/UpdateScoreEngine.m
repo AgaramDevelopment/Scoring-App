@@ -15,7 +15,7 @@
 @synthesize BALLCODE;
 @synthesize COMPETITIONCODE;
 @synthesize MATCHCODE;
-@synthesize TEAMCODE;
+//@synthesize TEAMCODE;
 @synthesize INNINGSNO;
 
 @synthesize OVERNO;
@@ -330,9 +330,10 @@ EndInnings *insertScoreBoard;
     
     //Update Bowling Order sequence in Bowling Card when the bowler is changed or deleted.
     if (![BOWLERCODE isEqual: OLDBOWLERCODE]){
-        [objDBManagerEndBall UpdateBowlingOrderUpdateScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO];
+        [objDBManagerEndBall UpdateBowlingOrderUpdateScoreEngine: MATCHCODE :BOWLINGTEAMCODE : BATTINGTEAMCODE :INNINGSNO];
+        
     }
-    
+
    
     
     
@@ -448,9 +449,10 @@ EndInnings *insertScoreBoard;
         if (OTHERBOWLEROVERBALLCNT.intValue > 0)
         {
             
-            ISMAIDENOVER =  [objDBManagerEndBall IsMaidenOverUPSE  :  COMPETITIONCODE :MATCHCODE:INNINGSNO:OVERNO:BOWLERCODE];
             
-            ISOVERCOMPLETE = [objDBManagerEndBall IsOverCompleteUPSE  :  COMPETITIONCODE :MATCHCODE:INNINGSNO:OVERNO:BOWLERCODE];
+            ISMAIDENOVER =  [objDBManagerEndBall IsMaidenOverUPSE  :  COMPETITIONCODE :MATCHCODE:INNINGSNO:OVERNO];
+            
+            ISOVERCOMPLETE = [objDBManagerEndBall IsOverCompleteUPSE  :  COMPETITIONCODE :MATCHCODE:INNINGSNO:OVERNO];
             
             if(ISMAIDENOVER.intValue == 1 && ISOVERCOMPLETE.intValue == 1)
             {
@@ -802,7 +804,9 @@ EndInnings *insertScoreBoard;
             insertScoreBoard.WICKETOVERNO = OVERNO;
            
          
-            [insertScoreBoard insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
+          //  [insertScoreBoard insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
+            [insertScoreBoard insertScordBoard:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO];
+            
     
           
         

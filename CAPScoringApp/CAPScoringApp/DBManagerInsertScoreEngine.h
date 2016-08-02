@@ -267,5 +267,10 @@
 
 -(NSMutableArray*) GetBallDetailsForInsertScoreEngine:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE : (NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE :(NSNumber*) CURRENTOVER;
 -(NSMutableArray *) getOverBallCountDetails :(NSString *) CommpitionCode :(NSString *) matchCode:(NSString *) overNo :(NSString *) Inningsno;
-
+-(BOOL)InsertAppealEvents: (NSString*) COMPETITIONCODE : (NSString*) MATCHCODE :(NSString*) TEAMCODE : (NSInteger) INNINGSNO : (NSString*) BALLCODE : (NSString*) APPEALTYPECODE : (NSString*) APPEALSYSTEMCODE : (NSString*) APPEALCOMPONENTCODE : (NSString*) UMPIRECODE : (NSString*) BATSMANCODE : (NSString*) ISREFERRED : (NSString*) APPEALDECISION : (NSString*) APPEALCOMMENTS : (NSString*) FIELDERCODE;
+-(BOOL)  UpdateAppealEvents: (NSString*) APPEALTYPECODE : (NSString*) APPEALSYSTEMCODE : (NSString*) APPEALCOMPONENTCODE : (NSString*) UMPIRECODE : (NSString*) BATSMANCODE : (NSString*) ISREFERRED : (NSString*) APPEALDECISION : (NSString*) APPEALCOMMENTS : (NSString*) FIELDERCODE : (NSString*) BALLCODE;
+-(BOOL*) DeleteAppealEvents:(NSString*) BALLCODE;
+-(BOOL)  InsertFieldingEvents : (NSString*) COMPETITIONCODE : (NSString*) MATCHCODE : (NSString*) TEAMCODE : (NSInteger) INNINGSNO : (NSString*) BALLCODE : (NSString*) FIELDERCODE : (NSString*) ISSUBSTITUTE : (NSString*) FIELDINGFACTOR : (NSInteger) NETRUNS;
+-(BOOL)  UpdateFieldingEvents : (NSString*) FIELDERCODE : (NSString*) ISSUBSTITUTE : (NSString*) FIELDINGFACTOR : (NSInteger) NETRUNS: (NSString*) BALLCODE : (NSString*) FIELDINGFACTOR;
+-(BOOL) DeleteFieldingEvents : (NSString*) BALLCODE : (NSString*) FIELDINGFACTORCODE;
 @end

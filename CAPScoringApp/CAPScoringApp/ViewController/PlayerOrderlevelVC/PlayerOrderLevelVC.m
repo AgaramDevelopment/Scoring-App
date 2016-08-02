@@ -309,18 +309,7 @@
                 self.selectedPlayerFilterArray=[[NSMutableArray alloc]init];
                 
                 self.selectedPlayerFilterArray =nil;
-                //[slecteplayerlist removeAllObjects];
-                
-//                for(int i=0; i< self.objSelectplayerList_Array.count; i++)
-//                {
-//                    SelectPlayerRecord *selectedPlayerFilterRecord = [self.objSelectplayerList_Array objectAtIndex:i];
-//                    if( [[selectedPlayerFilterRecord isSelected]boolValue])
-//                    {
-//                        [slecteplayerlist addObject:selectedPlayerFilterRecord];
-//                        
-//                        
-//                    }
-              }
+                }
                 [self.txt_search resignFirstResponder];
 
         }
@@ -458,6 +447,7 @@
        [delegate hideLoading];
     [objDBManager updateCapitainWicketkeeper :self.competitionCode :self.matchCode capitainAteam:self.captainAcode capitainBteam:self.captainBcode wicketkeeperAteam:self.WKTkeeperAcode wicketkeeperBteam:self.WKTkeeperBcode];
      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetUp"];
+     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
        NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
        objNewMatchSetUp =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
        objNewMatchSetUp.matchCode=self.matchCode;
@@ -1039,6 +1029,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 
 -(IBAction)Back_BtnAction:(id)sender
 {
+     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"]; 
     [self.navigationController popViewControllerAnimated:YES];
 }
 -(void)changePlayerorder:(int)newplayerorder :(int)orderno :(BOOL)ismoveorder
