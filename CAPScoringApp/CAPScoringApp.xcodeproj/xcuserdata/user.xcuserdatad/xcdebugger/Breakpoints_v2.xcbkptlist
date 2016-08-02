@@ -543,7 +543,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1408"
             endingLineNumber = "1408"
-            landmarkName = "-displaystrickerdetailsmethod"
+            landmarkName = "-loadViewOnEditMode"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -559,8 +559,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1707"
             endingLineNumber = "1707"
-            landmarkName = "-handlePanGesture:"
-            landmarkType = "5">
+            landmarkName = "@implementation ScorEnginVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -646,16 +646,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/AddBreakVC.m"
-            timestampString = "491754287.296297"
+            filePath = "CAPScoringApp/PowerPlayVC.m"
+            timestampString = "491819369.259394"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "434"
-            endingLineNumber = "434"
-            landmarkName = "-InsertBreaks::::::::"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

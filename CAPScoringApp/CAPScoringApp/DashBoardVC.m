@@ -810,7 +810,7 @@
     
     
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Sign Out"
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"DashBoard"
                                                    message: @"Are You Sure Want to Signout?"
                                                   delegate: self
                                          cancelButtonTitle:@"Signout"
