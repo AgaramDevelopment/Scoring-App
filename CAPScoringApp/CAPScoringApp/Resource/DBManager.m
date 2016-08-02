@@ -6326,33 +6326,33 @@ return @"";
 
 //INSERT BREAK DETAILS
 
--(BOOL) GetMatchCodeForInsertBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
-{
-    NSString *databasePath = [self getDBPath];
-    sqlite3_stmt *statement;
-    sqlite3 *dataBase;
-    const char *dbPath = [databasePath UTF8String];
-    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
-    {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE ((strftime('%%s' ,'%@') >= (strftime('%%s' MATCHDATE ) ))AND (strftime('%%s' ,'%@') >= (strftime('%%s' , MATCHDATE )))) AND COMPETITIONCODE ='%@'  AND MATCHCODE='%@' ",BREAKSTARTTIME,BREAKENDTIME,COMPETITIONCODE,MATCHCODE];
-        const char *update_stmt = [updateSQL UTF8String];
-        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
-        {
-            while(sqlite3_step(statement)==SQLITE_ROW){
-                sqlite3_reset(statement);
-                sqlite3_finalize(statement);
-                sqlite3_close(dataBase);
-                return YES;
-            }
-            sqlite3_reset(statement);
-            sqlite3_finalize(statement);
-            
-        }
-        sqlite3_close(dataBase);
-        
-    }
-    return NO;
-}
+//-(BOOL) GetMatchCodeForInsertBreaks:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
+//{
+//    NSString *databasePath = [self getDBPath];
+//    sqlite3_stmt *statement;
+//    sqlite3 *dataBase;
+//    const char *dbPath = [databasePath UTF8String];
+//    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+//    {
+////        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE COMPETITIONCODE ='UCC0000080'  AND MATCHCODE='IMSC023B8975A8DCBBB00260' AND strftime('%%s' ,MATCHDATE) <= strftime('%%s' ,'%@') ];
+////        const char *update_stmt = [updateSQL UTF8String];
+////        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+//        {
+//            while(sqlite3_step(statement)==SQLITE_ROW){
+//                sqlite3_reset(statement);
+//                sqlite3_finalize(statement);
+//                sqlite3_close(dataBase);
+//                return YES;
+//            }
+//            sqlite3_reset(statement);
+//            sqlite3_finalize(statement);
+//            
+//        }
+//        sqlite3_close(dataBase);
+//        
+//    }
+//    return NO;
+//}
 
 
 -(BOOL) GetCompetitionCodeForInsertBreaks:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) BREAKSTARTTIME:(NSString*) BREAKENDTIME:(NSString*) ISINCLUDEDURATION:(NSString*) BREAKNO : (NSString*) BREAKCOMMENTS

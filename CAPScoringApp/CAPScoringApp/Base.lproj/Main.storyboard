@@ -164,6 +164,7 @@
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-MEDIUM.TTF">
             <string>Rajdhani-Medium</string>
@@ -239,9 +240,6 @@
             <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
             <string>Rajdhani-Regular</string>
-        </mutableArray>
-        <mutableArray key="RAJDHANI-SEMIBOLD.TTF">
-            <string>Rajdhani-Semibold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -8735,7 +8733,7 @@
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="41" id="rQf-Io-dAj"/>
                                                                 </constraints>
-                                                                <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
+                                                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <nil key="highlightedColor"/>
                                                                 <variation key="default">

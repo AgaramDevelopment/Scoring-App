@@ -2004,7 +2004,7 @@
                                                                                 forIndexPath:indexPath];
             FieldingFactorRecord *objFieldingFactorRecord=(FieldingFactorRecord*)[_fieldingfactorArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = objFieldingFactorRecord.fieldingfactor;
-            self.lbl_fast.text=@"Fielding Factor";
+            self.lbl_fast.text=@"FIELDING FACTOR";
             
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
