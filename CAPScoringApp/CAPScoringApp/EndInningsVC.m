@@ -479,24 +479,22 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
 
 -(BOOL) checkValidation{
     
+    
     if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
         [self showDialog:@"Duration should be greated than zero" andTitle:@""];
         return NO;
     }
-    
-    
-    if([self.txt_startInnings.text isEqualToString:@""]){
-        [self showDialog:@"Please Choose Start Innings Time" andTitle:@"End Innings"];
+    if([self.txt_startInnings.text isEqualToString:@""] && [self.txt_endInnings.text isEqualToString:@""]){
+        [self showDialog:@"Please Choose Start & End Innings Time" andTitle:@"End Innings"];
         return NO;
     }
     if([self.txt_endInnings.text isEqualToString:@""]){
         [self showDialog:@"Please Choose End Innings Time" andTitle:@"End Innings"];
         return NO;
     }
-
-    
     return YES;
 }
+
 - (IBAction)btn_save:(id)sender {
     
     if([self checkValidation]){
