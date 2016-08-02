@@ -3913,7 +3913,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *DeleteSQL = [NSString stringWithFormat:@"DELETE FROM FIELDINGEVENTS  WHERE BALLCODE='%@' AND   FIELDINGFACTORCODE='%@'",BALLCODE,FIELDINGFACTORCODE];
+        NSString *DeleteSQL = [NSString stringWithFormat:@"DELETE FROM FIELDINGEVENTS WHERE BALLCODE='%@' AND FIELDINGFACTORCODE='%@'",BALLCODE,FIELDINGFACTORCODE];
         const char *selectStmt = [DeleteSQL UTF8String];
         
         if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)

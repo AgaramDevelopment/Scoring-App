@@ -791,7 +791,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     return @"";
 }
--(BOOL)  UpdateInningsSummaryForInsertOtherwicket:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO{
+-(BOOL)  UpdateInningsSummaryForInsertOtherwicket:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO : (NSNumber*) WICKETNO{
     
     
     NSString *databasePath = [self getDBPath];
@@ -800,7 +800,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSSUMMARY SET INNINGSTOTALWICKETS = INNINGSTOTALWICKETS + 1	WHERE COMPETITIONCODE = '%@'	AND MATCHCODE = '%@'	AND BATTINGTEAMCODE = '%@'		AND INNINGSNO = '%@'",COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSSUMMARY SET INNINGSTOTALWICKETS = INNINGSTOTALWICKETS + '%@'	WHERE COMPETITIONCODE = '%@'	AND MATCHCODE = '%@'	AND BATTINGTEAMCODE = '%@'		AND INNINGSNO = '%@'",WICKETNO,COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO];
         
         const char *selectStmt = [updateSQL UTF8String];
         
@@ -828,7 +828,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return NO;
 }
 
--(BOOL)  InsertInningsSummaryForInsertOtherwicket:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO{
+-(BOOL)  InsertInningsSummaryForInsertOtherwicket:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO : (NSNumber*) WICKETNO{
     
     
     NSString *databasePath = [self getDBPath];
@@ -837,7 +837,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO INNINGSSUMMARY 	(COMPETITIONCODE,	MATCHCODE,BATTINGTEAMCODE,	INNINGSNO,	BYES,LEGBYES,NOBALLS,WIDES,PENALTIES,INNINGSTOTAL,INNINGSTOTALWICKETS) VALUES	(	'%@','%@','%@',	'%@',0,	0,	0,	0, 0,0,	1)",COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO INNINGSSUMMARY 	(COMPETITIONCODE,	MATCHCODE,BATTINGTEAMCODE,	INNINGSNO,	BYES,LEGBYES,NOBALLS,WIDES,PENALTIES,INNINGSTOTAL,INNINGSTOTALWICKETS) VALUES	(	'%@','%@','%@',	'%@',0,	0,	0,	0, 0,0,	'%@')",COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO,WICKETNO];
         
         const char *selectStmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)

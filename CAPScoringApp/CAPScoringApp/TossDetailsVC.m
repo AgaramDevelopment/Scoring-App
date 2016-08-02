@@ -926,6 +926,11 @@
         return NO;
     }
     
+    else if (([self.Striker_lbl.text isEqualToString:@""] || self.Striker_lbl.text==nil) &&([self.Bowler_lbl.text isEqualToString:@""] || self.Bowler_lbl.text==nil))
+    {
+        [self ShowAlterView:@"Please Striker And Bowler"];
+        return NO;
+    }
     
     else if(([self.nonStriker_lbl.text isEqualToString:@""] || self.nonStriker_lbl.text==nil) && ([self.Bowler_lbl.text isEqualToString:@""] || self.Bowler_lbl.text==nil))
     {

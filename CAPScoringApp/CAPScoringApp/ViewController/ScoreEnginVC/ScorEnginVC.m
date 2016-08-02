@@ -564,7 +564,7 @@
 -(void)MatcheventMethod
 {
     int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAKS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAKS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULT",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
     if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
     {
         if(inningsno > 1)
@@ -589,7 +589,7 @@
         [_rightSlideArray removeObjectsInArray:[[NSArray alloc] initWithObjects:@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil]];
         if (fetchSEPageLoadRecord.BATTEAMWICKETS >= 10)
             [_rightSlideArray removeObject : @"DECLARE INNINGS"];
-        if (inningsno == 1 || inningsno == 4 || inningsno ==2)
+        if (inningsno == 1 || inningsno == 4)
             [_rightSlideArray removeObject : @"FOLLOW ON"];
     }
 }
@@ -2726,12 +2726,9 @@
     }
     else
     {
-        if(_isEditMode){
-            
-        }
         NSNumber *temp = [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS];
         int ballCount = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
-        
+        //Insert Score Engine SP Call
         [InsertSEScoreEngine InsertScoreEngine :
          self.competitionCode :
          self.matchCode  :
@@ -2807,11 +2804,24 @@
          self.ballEventRecord.objPenaltyreasoncode://(NSString *)PENALTYREASONCODE:
          @""://(NSString *)BALLSPEED:
          @""://(NSString *)UNCOMFORTCLASSIFCATION:
-         selectedWicketEvent];
-        //Insert Score Engine SP Call
-        
-            [self reloadBowlerTeamBatsmanDetails];
-        
+         selectedWicketEvent:
+         [appealEventDict objectForKey:@"AppealTypeCode"]://APPEALTYPECODE:
+         [appealEventDict objectForKey:@"AppealSystemSelct"]://APPEALSYSTEMCODE:
+         [appealEventDict objectForKey:@"AppealComponentSelct"]://APPEALCOMPONENTCODE:
+         [appealEventDict objectForKey:@"AppealUmpireSelct"]://APPEALUMPIRECODE
+         [appealEventDict objectForKey:@"AppealBatsmenSelct"]://APPEALBATSMANCODE:
+         @""://APPEALISREFERRED:
+         @""://APPEALDECISION:
+         [appealEventDict objectForKey:@"Commenttext"]://APPEALCOMMENTS:
+         @""://APPEALFIELDERCODE:
+         @"I"://APPEALFLAG:
+         selectedfieldPlayer.BowlerCode://FIELDINGEVENTSFIELDERCODE:
+         @""://FIELDINGEVENTSISSUBSTITUTE:
+         selectedfieldFactor.fieldingfactorcode://FIELDINGEVENTSFIELDINGFACTOR:
+         (selectedNRS == nil || [selectedNRS isEqualToString:@""] ? @"1" : selectedNRS )://FIELDINGEVENTSNETRUNS:
+         @"I"//FIELDINGEVENTSFLAG
+         ];
+        [self reloadBowlerTeamBatsmanDetails];
     }
     if([self.ballEventRecord.objIslegalball intValue] == 0)
     {
@@ -7150,11 +7160,11 @@ self.lbl_umpirename.text=@"";
         [self.table_Appeal deselectRowAtIndexPath:indexPath animated:NO];
        
 
-//        if(appealEventDict==nil){
-//            appealEventDict = [NSMutableDictionary dictionary];
-//        }
-//        AppealComponentRecord *appealRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
-//        [appealEventDict setValue:appealRecord.AppealComponentMetaSubCode forKey:@"AppealTypeCode"];
+        if(appealEventDict==nil){
+            appealEventDict = [NSMutableDictionary dictionary];
+        }
+        AppealComponentRecord *appealRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
+        [appealEventDict setValue:appealRecord.AppealComponentMetaSubCode forKey:@"AppealTypeCode"];
         self.comments_txt.text=@"";
         self.lbl_appealsystem.text=@"";
         self.lbl_appealComponent.text=@"";
@@ -9176,25 +9186,22 @@ self.lbl_umpirename.text=@"";
 
 - (IBAction)btn_AppealSave:(id)sender {
     
-     if([self formValidation])
-     {
-    
-    // UIColor colorWithRed:84 green:106 blue:126 alpha:0
-    NSString *commentText =[NSString stringWithFormat:@"%@",[_comments_txt text]];
-  if(appealEventDict==nil){
-        appealEventDict = [NSMutableDictionary dictionary];
+    if([self formValidation])
+    {
+        // UIColor colorWithRed:84 green:106 blue:126 alpha:0
+        NSString *commentText =[NSString stringWithFormat:@"%@",[_comments_txt text]];
+        if(appealEventDict==nil){
+            appealEventDict = [NSMutableDictionary dictionary];
+        }
+        [appealEventDict setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
+        [appealEventDict setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
+        [appealEventDict setValue:UmpireSelect forKey:@"AppealUmpireSelct"];
+        [appealEventDict setValue:StrikerPlayer forKey:@"AppealBatsmenSelct"];
+        NSString*AppealBowlercode=fetchSEPageLoadRecord.currentBowlerPlayerCode;
+        [appealEventDict setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
+        [appealEventDict setValue:commentText forKey:@"Commenttext"];
+        [self.view_table_select setHidden:YES];
     }
-    
-    [appealEventDict setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
-    [appealEventDict setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
-    [appealEventDict setValue:UmpireSelect forKey:@"AppealUmpireSelct"];
-    [appealEventDict setValue:StrikerPlayer forKey:@"AppealBatsmenSelct"];
-    NSString*AppealBowlercode=fetchSEPageLoadRecord.currentBowlerPlayerCode;
-    [appealEventDict setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
-    [appealEventDict setValue:commentText forKey:@"Commenttext"];
-     [self.view_table_select setHidden:YES];
-}
-
 }
 
 
