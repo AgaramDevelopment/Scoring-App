@@ -200,7 +200,7 @@ int POS_TEAM_TYPE = 1;
       self.view_allControls.hidden = YES;
     self.view_datePicker.hidden=YES;
     self.btn_save.hidden = YES;
-    self.Btn_Delete.hidden = YES;
+    self.btn_delete.hidden = YES;
     
 }
 

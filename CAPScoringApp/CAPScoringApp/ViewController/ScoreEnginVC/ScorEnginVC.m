@@ -771,6 +771,8 @@
         fetchSEPageLoadRecord.nonstrickerSixes= record.SIXES;
         fetchSEPageLoadRecord.nonstrickerStrickRate= record.STRIKERATE;
         fetchSEPageLoadRecord.nonstrickerPlayerCode = record.PLAYERCODE;
+        fetchSEPageLoadRecord.nonstrickerBattingStyle = record.BATTINGSTYLE;
+
         
         //Add Wicket
         if(getWickets.count>0 && [selectedStrikernonstrikerCode isEqual:record.PLAYERCODE]){
@@ -1410,7 +1412,10 @@
         _lbl_teamBSecIngsScore.text = [NSString stringWithFormat:@"%@ / %@", fetchSEPageLoadRecord.FOURTHINNINGSTOTAL==nil?@"0":fetchSEPageLoadRecord.FOURTHINNINGSTOTAL,fetchSEPageLoadRecord.FOURTHINNINGSWICKET==nil?@"0":fetchSEPageLoadRecord.FOURTHINNINGSWICKET];
         _lbl_teamBSecIngsOvs.text =[NSString stringWithFormat:@"%@ OVS",fetchSEPageLoadRecord.FOURTHINNINGSOVERS==nil?@"0":fetchSEPageLoadRecord.FOURTHINNINGSOVERS];
     }
+    
 
+    //Ball ticket
+    [self CreateBallTickers : fetchSeBallCodeDetails.BallGridDetails];
     
 }
 
@@ -8180,6 +8185,8 @@ self.lbl_umpirename.text=@"";
         fetchSEPageLoadRecord.nonstrickerSixes = objFetchCurrentBatsman.Sixes;
         fetchSEPageLoadRecord.nonstrickerFours = objFetchCurrentBatsman.Fours;
         fetchSEPageLoadRecord.nonstrickerStrickRate = objFetchCurrentBatsman.StrickRate;
+        fetchSEPageLoadRecord.nonstrickerBattingStyle = objFetchCurrentBatsman.BattingStyle;
+
         
         //Non - Striker Details
         self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
@@ -9819,8 +9826,9 @@ self.lbl_umpirename.text=@"";
 - (IBAction)btn_swap:(id)sender {
     //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
     
-    
+    if(!_isEditMode){
     [InitializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.nonstrickerPlayerCode :fetchSEPageLoadRecord.strickerPlayerCode  :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+    }
     
     isBowlerOpen = NO;
     isNONStrickerOpen = NO;
@@ -9832,7 +9840,59 @@ self.lbl_umpirename.text=@"";
     
     
     if(_isEditMode){
-        [self loadViewOnEditMode];
+        
+        NSString *tempStrickerPlayerCode = fetchSEPageLoadRecord.strickerPlayerCode;
+        NSString *tempStrickerPlayerName = fetchSEPageLoadRecord.strickerPlayerName;
+        NSString *tempStrickerTotalRuns = fetchSEPageLoadRecord.strickerTotalRuns;
+        NSString *tempStrickerFours = fetchSEPageLoadRecord.strickerFours;
+        NSString *tempStrickerSixes = fetchSEPageLoadRecord.strickerSixes;
+        NSString *tempStrickerTotalBalls = fetchSEPageLoadRecord.strickerTotalBalls;
+        NSString *tempStrickerStrickRate = fetchSEPageLoadRecord.strickerStrickRate;
+        NSString *tempStrickerBattingStyle = fetchSEPageLoadRecord.strickerBattingStyle;
+        
+        //Stricker
+        fetchSEPageLoadRecord.strickerPlayerCode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
+        fetchSEPageLoadRecord.strickerPlayerName = fetchSEPageLoadRecord.nonstrickerPlayerName;
+        fetchSEPageLoadRecord.strickerTotalRuns= fetchSEPageLoadRecord.nonstrickerTotalRuns;
+        fetchSEPageLoadRecord.strickerFours= fetchSEPageLoadRecord.nonstrickerFours;
+        fetchSEPageLoadRecord.strickerSixes= fetchSEPageLoadRecord.nonstrickerSixes;
+        fetchSEPageLoadRecord.strickerTotalBalls= fetchSEPageLoadRecord.nonstrickerTotalBalls;
+        fetchSEPageLoadRecord.strickerStrickRate= fetchSEPageLoadRecord.nonstrickerStrickRate;
+        fetchSEPageLoadRecord.strickerBattingStyle= fetchSEPageLoadRecord.nonstrickerBattingStyle;
+        
+        //Non Stricker Details
+        fetchSEPageLoadRecord.nonstrickerPlayerCode = tempStrickerPlayerCode;
+        fetchSEPageLoadRecord.nonstrickerPlayerName= tempStrickerPlayerName;
+        fetchSEPageLoadRecord.nonstrickerTotalRuns= tempStrickerTotalRuns;
+        fetchSEPageLoadRecord.nonstrickerFours= tempStrickerFours;
+        fetchSEPageLoadRecord.nonstrickerSixes= tempStrickerSixes;
+        fetchSEPageLoadRecord.nonstrickerTotalBalls= tempStrickerTotalBalls;
+        fetchSEPageLoadRecord.nonstrickerStrickRate= tempStrickerStrickRate;
+        fetchSEPageLoadRecord.nonstrickerBattingStyle= tempStrickerBattingStyle;
+        
+        
+        //Striker Details
+        self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
+        self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
+        self.lbl_stricker_balls.text = fetchSEPageLoadRecord.strickerTotalBalls;
+        self.lbl_stricker_sixs.text = fetchSEPageLoadRecord.strickerSixes;
+        self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
+        self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
+        self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
+        
+        //Non Striker Details
+        self.lbl_nonstricker_name.text = fetchSEPageLoadRecord.nonstrickerPlayerName;
+        self.lbl_nonstricker_runs.text = fetchSEPageLoadRecord.nonstrickerTotalRuns;
+        self.lbl_nonstricker_balls.text = fetchSEPageLoadRecord.nonstrickerTotalBalls;
+        self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
+        self.lbl_nonstricker_sixs.text = fetchSEPageLoadRecord.nonstrickerSixes;
+        self.lbl_nonstricker_strickrate.text =[NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
+        
+        
+        
+       
+
+       // [self loadViewOnEditMode];
     }else{
         [self reloadBowlerTeamBatsmanDetails];
     }
