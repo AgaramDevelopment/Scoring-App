@@ -179,42 +179,51 @@
 {
     if(isPowerplay== YES)
     {
-//            selectindexarray=[[NSMutableArray alloc]init];
-//            powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
-//            self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
-//            powerplaytype=powerplayrecord.powerplaytypecode;
-//        
-//            [selectindexarray addObject:powerplayrecord];
-            self.tbl_powerplaytype.hidden=YES;
-            //self.view_powerplay.hidden=NO;
-            //self.view_powerplaygrid.hidden=YES;
-            isPowerplay=NO;
+        //            selectindexarray=[[NSMutableArray alloc]init];
+        //            powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
+        //            self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
+        //            powerplaytype=powerplayrecord.powerplaytypecode;
+        //
+        //            [selectindexarray addObject:powerplayrecord];
+        selectindexarray=[[NSMutableArray alloc]init];
+        powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
+        self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
+        powerplaytype=powerplayrecord.powerplaytypecode;
+        
+        [selectindexarray addObject:powerplayrecord];
+        
+        self.tbl_powerplaytype.hidden=YES;
+        //self.view_powerplay.hidden=NO;
+        //self.view_powerplaygrid.hidden=YES;
+        isPowerplay=NO;
     }
-   else
-     {
-         
-         
-         //PowerPlayGridTVC *cell = (PowerPlayGridTVC *)[tableView cellForRowAtIndexPath:indexPath];
-         powerplayrecord=(PowerPlayRecord*)[Resultarray objectAtIndex:indexPath.row];
-         powerplaystartover=powerplayrecord.startover;
-         self.txt_startover.text =powerplayrecord.startover;
-         self.txt_endover.text  =powerplayrecord.endover;
-         self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
-         powerplaycode=powerplayrecord.powerplaycode;
-         
-         self.view_powerplay.hidden=YES;
-         self.view_powerplaygrid.hidden=NO;
-         self.btn_Add.hidden   =YES;
-         [self.btn_submit setTitle:@"Update" forState:UIControlStateNormal];
-         isPowerplay=YES;
-         
-     }
-    selectindexarray=[[NSMutableArray alloc]init];
-    powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
-    self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
-    powerplaytype=powerplayrecord.powerplaytypecode;
+    else
+    {
+        
+        
+        //PowerPlayGridTVC *cell = (PowerPlayGridTVC *)[tableView cellForRowAtIndexPath:indexPath];
+        powerplayrecord=(PowerPlayRecord*)[Resultarray objectAtIndex:indexPath.row];
+        powerplaystartover=powerplayrecord.startover;
+        self.txt_startover.text =powerplayrecord.startover;
+        self.txt_endover.text  =powerplayrecord.endover;
+        self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
+        powerplaycode=powerplayrecord.powerplaycode;
+        
+        self.view_powerplay.hidden=YES;
+        self.view_powerplaygrid.hidden=NO;
+        self.btn_Add.hidden   =YES;
+        [self.btn_submit setTitle:@"Update" forState:UIControlStateNormal];
+        isPowerplay=YES;
+        
+        
+        selectindexarray=[[NSMutableArray alloc]init];
+        powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
+        //self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
+        powerplaytype=powerplayrecord.powerplaytypecode;
+        
+        [selectindexarray addObject:powerplayrecord];
+    }
     
-    [selectindexarray addObject:powerplayrecord];
 }
 
 
