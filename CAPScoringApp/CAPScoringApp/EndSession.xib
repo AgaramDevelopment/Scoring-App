@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -48,16 +48,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EndSession">
             <connections>
-                <outlet property="Btn_Delete" destination="um9-aZ-ORr" id="Jtx-OQ-iX7"/>
                 <outlet property="Btn_back" destination="OVB-uf-G9J" id="7ZH-sE-gUq"/>
+                <outlet property="btn_delete" destination="um9-aZ-ORr" id="YL7-7Z-U49"/>
                 <outlet property="btn_save" destination="ChJ-j4-yMj" id="nsT-dP-eCP"/>
                 <outlet property="lbl_InningsNo" destination="Map-XE-SXa" id="stZ-WP-ebt"/>
+                <outlet property="lbl_SessionNo" destination="6VA-Gr-vTZ" id="ouR-GQ-ZEH"/>
                 <outlet property="lbl_day" destination="iKO-aW-UNK" id="w9R-S4-iD3"/>
                 <outlet property="lbl_duration" destination="Ou6-uZ-mjt" id="mq5-kk-4Sx"/>
                 <outlet property="lbl_runScored" destination="dTJ-ny-ZHN" id="iJI-dI-Io7"/>
                 <outlet property="lbl_sessionDominant" destination="y01-c5-Gpm" id="F3a-nu-3v5"/>
                 <outlet property="lbl_sessionEndOver" destination="oK2-le-hjm" id="XMy-Lf-U15"/>
-                <outlet property="lbl_sessionNo" destination="6VA-Gr-vTZ" id="8Lm-lR-3gW"/>
                 <outlet property="lbl_sessionStartOver" destination="kjI-4n-AAH" id="28A-RU-UbD"/>
                 <outlet property="lbl_teamBatting" destination="pl4-hU-ZJO" id="w1p-iM-nqo"/>
                 <outlet property="lbl_wicketLost" destination="gn5-ua-kGe" id="TlZ-Ge-JCz"/>
@@ -720,6 +720,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6VA-Gr-vTZ">
                                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                                    <color key="backgroundColor" red="0.66666666669999997" green="0.14117647059999999" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="281" id="DCe-bU-lzD"/>
                                                         <constraint firstAttribute="height" constant="38" id="nrJ-oh-n0D"/>

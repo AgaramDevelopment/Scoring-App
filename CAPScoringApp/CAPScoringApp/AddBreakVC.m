@@ -434,7 +434,7 @@
 -(void) InsertBreaks:COMPETITIONCODE:INNINGSNO:MATCHCODE:BREAKSTARTTIME:BREAKENDTIME:BREAKCOMMENTS:ISINCLUDEDURATION:BREAKNO
 {
     
-    if([objDBManager GetMatchCodeForInsertBreaks:BREAKSTARTTIME:BREAKENDTIME:COMPETITIONCODE : MATCHCODE])
+    if([objDBManager GetMatchCodeForInsertBreaks :BREAKSTARTTIME:BREAKENDTIME:COMPETITIONCODE : MATCHCODE])
     {
        if(![objDBManager GetCompetitionCodeForInsertBreaks :COMPETITIONCODE: MATCHCODE : INNINGSNO : BREAKSTARTTIME : BREAKENDTIME : ISINCLUDEDURATION : BREAKNO:BREAKCOMMENTS])
       {
@@ -472,7 +472,9 @@
     {
         _Text_BreakStart.text = @"";
         
-      
+        _btn_finish.hidden=NO;
+        _btn_delete.hidden=YES;
+        _btn_Update.hidden=YES;
         _addbreak_lbl.text=@"ADD BREAK";
         _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
         
@@ -605,42 +607,22 @@
 
 
 - (IBAction)delete_btn:(id)sender {
-    
+    _addbreak_lbl.text=@"BREAKS";
+    _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
     self.view_gridview.hidden=NO;
     self.btn_Add.hidden =NO;
     
-//    BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
-//    
+   BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
+   
     [self DeleteBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKCOMMENTS :BREAKNO];
-    //resultarray=DeleteBreaksArray;
+ 
     
-//    BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
-//    
-//    add.COMPETITIONCODE=self.COMPETITIONCODE;
-//    add.MATCHCODE=self.MATCHCODE;
-//    add.INNINGSNO=self.INNINGSNO;
-//    add.MATCHDATE=self.MATCHDATE;
-//    //  add.test=self.test;
-//    add.resultarray=DeleteBreaksArray;
-//    //   [self startService:@"DELETE"];
-//    
-//    //vc2 *viewController = [[vc2 alloc]init];
-//    [self addChildViewController:add];
-//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-//    [self.view addSubview:add.view];
-//    add.view.alpha = 0;
-//    [add didMoveToParentViewController:self];
-//    
-//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-//     {
-//         add.view.alpha = 1;
-//     }
-//                     completion:nil];
     
-    _addbreak_lbl.text=@"BREAKS";
-    _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
+    [self.tbl_breaklist reloadData];
+   
     
 }
+
 
 -(void) DeleteBreaks:COMPETITIONCODE:INNINGSNO:MATCHCODE:BREAKCOMMENTS:BREAKNO;
 
@@ -650,17 +632,21 @@
     
     [objDBManager DeleteInningsEvents : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
     
-    
     DeleteBreaksArray=[objDBManager InningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+   
     self.resultarray=DeleteBreaksArray;
+    
     [self.tbl_breaklist reloadData];
 }
 
 
 
+
+
 - (IBAction)back_btn:(id)sender {
     
-    
+    _addbreak_lbl.text=@"BREAKS";
+    _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
     if(isShow_BreakrecordTbl == YES)
     {
         [self.delegate ChangeVCBackBtnAction];

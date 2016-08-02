@@ -513,17 +513,17 @@ BOOL isWicketSelected;
         {
             if (legalbyes > 0)
             {
-                if(noBall== 0)
-                {
-                    noBall=0;
-                }
-                else{
-                    noBall=noBall-1;
-                }
-                int objlegalbyesValues = legalbyes+noBall;
-                NSString *legalbyesValues=[NSString stringWithFormat:@"%d",objlegalbyesValues];
+//                if(noBall== 0)
+//                {
+//                    noBall=0;
+//                }
+//                else{
+//                    noBall=noBall-1;
+//                }
+//                int objlegalbyesValues = legalbyes+noBall;
+//                NSString *legalbyesValues=[NSString stringWithFormat:@"%d",objlegalbyesValues];
                 [dicAddbowlerdetails removeObjectForKey:@"RUNS"];
-                [dicAddbowlerdetails setValue:legalbyesValues forKey:@"RUNS"];
+                [dicAddbowlerdetails setValue:[NSString stringWithFormat:@"%i", (legalbyes + /*_overthrow +*/ (noBall == 0 ? 0 : noBall - 1))] forKey: @"RUNS"];
                 
             }
             if (noBall == 0)

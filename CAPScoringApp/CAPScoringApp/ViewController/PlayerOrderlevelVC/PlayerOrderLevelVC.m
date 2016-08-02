@@ -446,9 +446,20 @@
     }
        [delegate hideLoading];
     [objDBManager updateCapitainWicketkeeper :self.competitionCode :self.matchCode capitainAteam:self.captainAcode capitainBteam:self.captainBcode wicketkeeperAteam:self.WKTkeeperAcode wicketkeeperBteam:self.WKTkeeperBcode];
-     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetUp"];
-     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
-       NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
+    
+       if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"]) {
+           NSLog(@"no");
+           [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
+           
+           
+       }
+    
+          else if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetUp"]) {
+               NSLog(@"no");
+           [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetUp"];
+       }
+       
+           NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
        objNewMatchSetUp =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
        objNewMatchSetUp.matchCode=self.matchCode;
        objNewMatchSetUp.teamAcode=self.TeamCode;
@@ -574,7 +585,8 @@
             [playercell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
             playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
             [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
-            
+            isSelectCaptainType=YES;
+            isSelectWKTKeeperType=YES;
             
         }
         else if([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])
@@ -584,7 +596,7 @@
             [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
             
             //objSelectPlayerRecord.isSelectCapten=@"YES";
-            //isSelectCaptainType=YES;
+            isSelectCaptainType=YES;
            
         }
         else if(isCaptain == NO)
@@ -732,12 +744,14 @@
    NSIndexPath * indexPaths = [_tbl_playerSelectList indexPathForCell:playercell];
    SelectPlayerRecord* objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPaths.row];
     //objCapitainWicketKeeper=(CapitainWicketKeeperRecord*)[capitainWicketkeeperarray objectAtIndex:0];
+    int playerorder =[objSelectPlayerRecord.playerOrder intValue];
     
+    if(playerorder < 12)
+    {
+
     if(isSelectCaptainType==NO)
     {
-        
-        
-        if([objSelectPlayerRecord.isSelectWKTKeeper isEqualToString:@"YES"])
+                if([objSelectPlayerRecord.isSelectWKTKeeper isEqualToString:@"YES"])
         {
             
             playercell.IMg_captain.image=[UIImage imageNamed:@"Img_Captain"];
@@ -766,8 +780,11 @@
             objCapitainWicketKeeper.objTeamBCapitain=objSelectPlayerRecord.playerCode;
             self.captainBcode =objSelectPlayerRecord.playerCode;
         }
-    }
+        }
+        
+    
     else{
+        
        if(isSelectWKTKeeperType== NO)
         {
             
@@ -799,9 +816,22 @@
             }
 
         }
-    }
-   
+        }
 }
+    else
+    {
+        if(isSelectWKTKeeperType==NO)
+        {
+           [self AlterviewMethod:@"Please select Wicketkeeper from top 11 players"];
+        }
+        else if(isSelectCaptainType == YES)
+        {
+            [self AlterviewMethod:@"Please select Capitain from top 11 players"];
+        }
+    }
+    }
+
+
 
 -(IBAction)didClickCaptain_BtnAction:(id)sender
 {
