@@ -678,8 +678,7 @@ int POS_TEAM_TYPE = 1;
     self.tbl_session.hidden = NO;
     self.view_allControls.hidden = YES;
     self.view_heading.hidden = NO;
-        self.btn_delete.hidden = YES;
-        self.btn_save.hidden = YES;
+  
     }
 }
 
