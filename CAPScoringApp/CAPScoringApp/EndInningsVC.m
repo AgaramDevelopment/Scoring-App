@@ -54,6 +54,8 @@ BOOL IsBack;
     [super viewDidLoad];
     self.view_datepicker.hidden=YES;
     [self.tbl_endInnings setBackgroundColor:[UIColor clearColor]];
+    self.btn_save.hidden = YES;
+    self.btn_delete.hidden = YES;
 }
 -(void)fetchPageload:(NSObject*)fetchRecord:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE{
     
@@ -563,7 +565,8 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         self.tbl_endInnings.hidden = NO;
         self.view_Header.hidden = NO;
         self.view_allControls.hidden = YES;
-        
+        self.btn_save.hidden = YES;
+        self.btn_delete.hidden = YES;
     
 
     }
@@ -582,7 +585,6 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         self.view_datepicker.hidden = YES;
         self.btn_save.hidden = YES;
         self.btn_delete.hidden = YES;
-        
         IsBack = YES;
     
     }else if (IsBack == YES){
@@ -665,7 +667,8 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
     self.tbl_endInnings.hidden = NO;
      self.view_Header.hidden = NO;
     self.view_allControls.hidden = YES;
-    
+        self.btn_save.hidden = YES;
+        self.btn_delete.hidden = YES;
 }
 }
 
