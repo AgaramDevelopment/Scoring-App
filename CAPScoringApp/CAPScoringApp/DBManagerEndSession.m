@@ -1382,6 +1382,38 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
 }
 
 
+
+
+-(BOOL) GetSessionNoForUpdateEndSession:(NSString*) SESSIONSTARTTIME:(NSString*) SESSIONENDTIME :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*)INNINGSNO:(NSString*)BATTINGTEAMCODE:(NSString*)DAYNO  {
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT SESSIONNO  FROM   SESSIONEVENTS 	WHERE (((strftime('%%s','%@'))<=SESSIONSTARTTIME AND ('%@')>= (strftime('%%s',SESSIONSTARTTIME))) OR ((strftime('%%s','%@'))<=SESSIONENDTIME AND ('%@')>= (strftime('%%s',SESSIONENDTIME))) OR ((strftime('%%s','%@'))>=SESSIONSTARTTIME AND ('%@')<= (strftime('%%s',SESSIONENDTIME)))) AND COMPETITIONCODE = '%@' AND MATCHCODE='%@' AND INNINGSNO!='%@' AND BATTINGTEAMCODE='%@' AND DAYNO!='%@'",SESSIONSTARTTIME,SESSIONENDTIME,SESSIONSTARTTIME,SESSIONENDTIME,SESSIONSTARTTIME,SESSIONENDTIME,COMPETITIONCODE,MATCHCODE,INNINGSNO,BATTINGTEAMCODE,DAYNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+}
+
+
 -(BOOL) GetSessionNoForInsertEndSession:(NSString*) SESSIONSTARTTIME:(NSString*) SESSIONENDTIME :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE  {
     
     NSString *databasePath = [self getDBPath];
@@ -1411,7 +1443,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     return NO;
 }
 
--(BOOL) GetSessionNoForUpdateEndSession:(NSString*) SESSIONSTARTTIME:(NSString*) SESSIONENDTIME :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*)INNINGSNO:(NSString*)BATTINGTEAMCODE:(NSString*)DAYNO {
+-(BOOL)  GetCompetitionCodeInNotExistsForInsertEndSession:COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) SESSIONNO: (NSString*) DAYNO  {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1419,7 +1451,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-    NSString *updateSQL = [NSString stringWithFormat:@"SELECT SESSIONNO FROM SESSIONEVENTS WHERE  ((((CONVERT(DATETIME,'%@'))<=SESSIONSTARTTIME AND ('%@')>= (CONVERT(DATETIME,SESSIONSTARTTIME))) OR ((CONVERT(DATETIME,'%@'))<=SESSIONENDTIME AND ('%@')>= (CONVERT(DATETIME,SESSIONENDTIME))) OR ((CONVERT(DATETIME,'%@'))>=SESSIONSTARTTIME AND ('%@')<= (CONVERT(DATETIME,SESSIONENDTIME)))) AND COMPETITIONCODE = '%@' AND MATCHCODE='%@' AND INNINGSNO!='%@' AND BATTINGTEAMCODE='%@' AND DAYNO!='%@'",SESSIONSTARTTIME,SESSIONENDTIME,SESSIONSTARTTIME,SESSIONENDTIME,SESSIONSTARTTIME,SESSIONENDTIME,COMPETITIONCODE,MATCHCODE,INNINGSNO,BATTINGTEAMCODE,DAYNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT COMPETITIONCODE FROM SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@' AND SESSIONNO = '%@' AND DAYNO = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,SESSIONNO,DAYNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
@@ -1440,8 +1472,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     return NO;
 }
 
-
--(BOOL)  GetCompetitionCodeInNotExistsForInsertEndSession:COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) SESSIONNO: (NSString*) DAYNO  {
+-(BOOL)  GetCompetitionCodeInNotExistsForUpdateEndSession:COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) SESSIONNO {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1449,7 +1480,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT COMPETITIONCODE FROM SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@' AND SESSIONNO = '%@' AND DAYNO = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,SESSIONNO,DAYNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT COMPETITIONCODE FROM SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@' AND SESSIONNO = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,SESSIONNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)

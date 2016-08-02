@@ -11,10 +11,8 @@
 
 @interface DBManagerEndSession : NSObject
 
-
--(BOOL) GetSessionNoForUpdateEndSession:(NSString*) SESSIONSTARTTIME:(NSString*) SESSIONENDTIME :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*)INNINGSNO:(NSString*)BATTINGTEAMCODE:(NSString*)DAYNO;
-
--(BOOL)  GetCompetitionCodeInNotExists:COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) SESSIONNO;
+-(BOOL)  GetCompetitionCodeInNotExistsForUpdateEndSession:COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) SESSIONNO;
+-(BOOL) GetSessionNoForUpdateEndSession:(NSString*) SESSIONSTARTTIME:(NSString*) SESSIONENDTIME :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*)INNINGSNO:(NSString*)BATTINGTEAMCODE:(NSString*)DAYNO;
 
 -(NSString*)getDayNo:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 -(NSString*)GetIsDayNightForFetchEndSession:(NSString*) MATCHCODE;

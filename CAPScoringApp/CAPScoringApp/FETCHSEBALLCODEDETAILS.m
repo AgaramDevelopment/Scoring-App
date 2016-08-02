@@ -404,7 +404,7 @@
 						  
 						  
 						  
-						  NSMutableArray *GetBallCodeDetailsArray=[ dbEditScoreEngine GetBallCodeDetailsForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO:BATTEAMOVERS];
+						  _BallGridDetails=[ dbEditScoreEngine GetBallCodeDetailsForBallEvents : COMPETITIONCODE: MATCHCODE: BATTINGTEAMCODE: INNINGSNO:BATTEAMOVERS];
 						  
 						  NSMutableArray *GetSETeamDetailsForBallEventsArray=[ dbEditScoreEngine GetSETeamDetailsForBallEventsBE : COMPETITIONCODE: MATCHCODE];
 						  

@@ -316,7 +316,7 @@ DBManagerEndSession *dbEndSession;
 
 //SP_UPDATEENDSESSION----------------------------------------------------------------------
 
--(void) UpdateEndSession:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSNumber*)INNINGSNO:(NSString*)DAYNO:(NSString*)SESSIONNO :(NSString *)SESSIONSTARTTIME:(NSString*)SESSIONENDTIME: (NSString*)DOMINANTTEAMCODE :(NSString*)BATTINGTEAMCODE;
+-(void) UpdateEndSession:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSNumber*)INNINGSNO:(NSString*)DAYNO:(NSString*)SESSIONNO :(NSString *)SESSIONSTARTTIME:(NSString*)SESSIONENDTIME: (NSString*)DOMINANTTEAMCODE : (NSString*)INNINGSNO:(NSString*)BATTINGTEAMCODE :(NSString*)DAYNO
 
 {
     
@@ -337,7 +337,7 @@ DBManagerEndSession *dbEndSession;
                     if([dbEndSession GetMatchCodeInNotExists:COMPETITIONCODE :MATCHCODE : SESSIONSTARTTIME : SESSIONENDTIME])
                     {
                     
-                    if([dbEndSession GetCompetitionCodeInNotExists :COMPETITIONCODE:MATCHCODE:INNINGSNO:SESSIONNO])
+                    if([dbEndSession GetCompetitionCodeInNotExistsForUpdateEndSession :COMPETITIONCODE:MATCHCODE:INNINGSNO:SESSIONNO])
                     {
                         
                         [dbEndSession updateEndSession:STARTTIME :ENDTIME :DOMINANTTEAMCODE :DAYNO :COMPETITIONCODE :MATCHCODE :INNINGSNO :SESSIONNO];

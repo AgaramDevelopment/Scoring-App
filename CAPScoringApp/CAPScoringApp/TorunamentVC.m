@@ -118,12 +118,9 @@
         [self.navigationController pushViewController:loginVC animated:YES];
         
     }
-    //else {
-//        NSLog(@"no");
-//        [self.navigationController popViewControllerAnimated:YES];
-//    }
+
     
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetupExit"]) {
+   else  if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetupExit"]) {
         NSLog(@"yes");
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"NewMatchSetupExit"];
         DashBoardVC*loginVC = [[DashBoardVC alloc]init];
@@ -137,7 +134,7 @@
     }
     
     
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"Defaultexit"]) {
+   else if([[NSUserDefaults standardUserDefaults] boolForKey:@"Defaultexit"]) {
         NSLog(@"yes");
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"Defaultexit"];
         DashBoardVC*loginVC = [[DashBoardVC alloc]init];

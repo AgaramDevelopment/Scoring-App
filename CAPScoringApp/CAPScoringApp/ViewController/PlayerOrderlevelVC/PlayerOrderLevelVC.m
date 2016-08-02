@@ -446,9 +446,20 @@
     }
        [delegate hideLoading];
     [objDBManager updateCapitainWicketkeeper :self.competitionCode :self.matchCode capitainAteam:self.captainAcode capitainBteam:self.captainBcode wicketkeeperAteam:self.WKTkeeperAcode wicketkeeperBteam:self.WKTkeeperBcode];
-     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetUp"];
-     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
-       NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
+    
+       if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"]) {
+           NSLog(@"no");
+           [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
+           
+           
+       }
+    
+          else if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetUp"]) {
+               NSLog(@"no");
+           [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetUp"];
+       }
+       
+           NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
        objNewMatchSetUp =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
        objNewMatchSetUp.matchCode=self.matchCode;
        objNewMatchSetUp.teamAcode=self.TeamCode;

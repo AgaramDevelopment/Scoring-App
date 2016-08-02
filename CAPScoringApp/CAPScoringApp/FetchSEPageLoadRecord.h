@@ -104,6 +104,8 @@
 @property(strong,nonatomic)NSString *nonstrickerSixes ;
 @property(strong,nonatomic)NSString *nonstrickerTotalBalls;
 @property(strong,nonatomic)NSString *nonstrickerStrickRate ;
+@property(strong,nonatomic)NSString *nonstrickerBattingStyle;
+
 
 
 //Stricker Details

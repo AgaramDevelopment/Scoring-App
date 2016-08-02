@@ -416,8 +416,7 @@ NSString *DURATION;
         
         [objDBManager DeleteInningsEvents : COMPETITIONCODE : MATCHCODE : INNINGSNO : BREAKNO];
   
-    
-   DeleteBreaksArray=[objDBManager InningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
+    DeleteBreaksArray=[objDBManager InningsBreakDetails : COMPETITIONCODE : MATCHCODE : INNINGSNO];
 }
 
 

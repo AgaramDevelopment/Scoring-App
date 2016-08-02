@@ -6334,7 +6334,7 @@ return @"";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE ((strftime('%%s' ,'%@') >= (strftime('%%s' MATCHDATE ) ))AND (strftime('%%s' ,'%@') >= (strftime('%%s' , MATCHDATE )))) AND COMPETITIONCODE ='%@'  AND MATCHCODE='%@' ",BREAKSTARTTIME,BREAKENDTIME,COMPETITIONCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE,MATCHDATE FROM MATCHREGISTRATION WHERE COMPETITIONCODE ='%@'  AND MATCHCODE='%@' AND strftime('%%Y-%%m-%%d' ,MATCHDATE) <= strftime('%%Y-%%m-%%d' ,'%@')",COMPETITIONCODE,MATCHCODE,BREAKSTARTTIME ];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -6532,7 +6532,7 @@ return @"";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE ('%@' >= MATCHDATE AND '%@'>= MATCHDATE )  AND COMPETITIONCODE ='%@'  AND MATCHCODE='%@'",BREAKSTARTTIME,BREAKENDTIME,COMPETITIONCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE,MATCHDATE FROM MATCHREGISTRATION WHERE COMPETITIONCODE ='%@'  AND MATCHCODE='%@' AND strftime('%%Y-%%m-%%d' ,MATCHDATE) <= strftime('%%Y-%%m-%%d' ,'%@')",COMPETITIONCODE,MATCHCODE,BREAKSTARTTIME];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -6675,7 +6675,7 @@ return @"";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BREAKNO,BREAKSTARTTIME,BREAKENDTIME,( BREAKSTARTTIME-BREAKENDTIME) AS DURATION,ISINCLUDEINPLAYERDURATION,BREAKCOMMENTS FROM INNINGSBREAKEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"select BREAKNO,BREAKSTARTTIME,BREAKENDTIME,(strftime('%%s', BREAKENDTIME) - strftime('%%s', BREAKSTARTTIME)) / 60 AS DURATION,ISINCLUDEINPLAYERDURATION,BREAKCOMMENTS from INNINGSBREAKEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -6814,7 +6814,7 @@ return @"";
 
 
 
--(NSMutableArray*) InningsBreakDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO
+-(NSMutableArray*) InningsBreakDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO 
 {
     NSMutableArray *DeleteBreaksArray=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
@@ -6823,7 +6823,7 @@ return @"";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BREAKNO,BREAKSTARTTIME,BREAKENDTIME,( BREAKSTARTTIME-BREAKENDTIME) AS DURATION,ISINCLUDEINPLAYERDURATION,BREAKCOMMENTS FROM INNINGSBREAKEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"select BREAKNO,BREAKSTARTTIME,BREAKENDTIME,(strftime('%%s', BREAKENDTIME) - strftime('%%s', BREAKSTARTTIME)) / 60 AS DURATION,ISINCLUDEINPLAYERDURATION,BREAKCOMMENTS from INNINGSBREAKEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
@@ -6834,8 +6834,9 @@ return @"";
                 record.BREAKNO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.BREAKSTARTTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 record.BREAKENDTIME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                record.ISINCLUDEINPLAYERDURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                record.BREAKCOMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record.DURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.ISINCLUDEINPLAYERDURATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record.BREAKCOMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
                 
                 [DeleteBreaksArray addObject:record];
             }
