@@ -223,7 +223,9 @@
 
     BOOL isRemarkOpen;
     float over;
-
+    
+    BOOL isfieldingeventundo;
+    BOOL isappealeventundo;
 }
 
 
@@ -673,6 +675,7 @@
     NSMutableArray *getAppealArray = [fetchSeBallCodeDetails GetAppealDetailsForAppealEventsArray];
     if(getAppealArray.count>0){
         GetSEAppealDetailsForAppealEvents *record = [[GetSEAppealDetailsForAppealEvents alloc]init];
+        record = (GetSEAppealDetailsForAppealEvents*)[getAppealArray objectAtIndex:0];
         appealEventDict = [NSMutableDictionary dictionary];
         [appealEventDict setValue:record.APPEALSYSTEMCODE forKey:@"AppealSystemSelct"];
         [appealEventDict setValue:record.APPEALCOMPONENTCODE forKey:@"AppealComponentSelct"];
@@ -681,8 +684,7 @@
         [appealEventDict setValue:record.BOWLERNAME forKey:@"AppealBowlerSelect"];
         [appealEventDict setValue:record.APPEALCOMMENTS forKey:@"Commenttext"];
         [appealEventDict setValue:record.APPEALTYPECODE forKey:@"AppealTypeCode"];
-        
-        
+        [self selectedViewBg:_view_appeal];
     }
     
    
@@ -2456,12 +2458,12 @@
          @""://APPEALDECISION:
          [appealEventDict objectForKey:@"Commenttext"]://APPEALCOMMENTS:
          @""://APPEALFIELDERCODE:
-         @"E"://APPEALFLAG:
+         (isappealeventundo == YES ? @"D":@"E")://APPEALFLAG:
          selectedfieldPlayer.BowlerCode://FIELDINGEVENTSFIELDERCODE:
          @""://FIELDINGEVENTSISSUBSTITUTE:
          selectedfieldFactor.fieldingfactorcode://FIELDINGEVENTSFIELDINGFACTOR:
          (selectedNRS == nil || [selectedNRS isEqualToString:@""] ? @"1" : selectedNRS )://FIELDINGEVENTSNETRUNS:
-         @"E"//FIELDINGEVENTSFLAG
+         (isfieldingeventundo == YES ? @"D":@"E")//FIELDINGEVENTSFLAG
          ];
         
         [self.navigationController popViewControllerAnimated:NO];
@@ -5916,6 +5918,7 @@
             self.view_fastBowl.hidden = YES;
             //[self unselectedButtonBg:selectBtnTag];
             [self unselectedViewBg:self.view_fielding_factor];
+            isfieldingeventundo = YES;
 //            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(4/255.0f) alpha:1.0f];//Normal
             
         }else{

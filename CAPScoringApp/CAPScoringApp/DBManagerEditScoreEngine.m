@@ -1582,32 +1582,32 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL =[NSString stringWithFormat:@"SELECT	APPL.BALLCODE,(CAST(BALL.OVERNO AS NVARCHAR) +'.'+ CAST(BALL.BALLNO AS NVARCHAR)) OVERS,APPL.APPEALTYPECODE, MD1.METASUBCODEDESCRIPTION AS APPEALTYPEDES,APPL.APPEALSYSTEMCODE, MD2.METASUBCODEDESCRIPTION AS APPEALSYSTEMDES,APPL.APPEALCOMPONENTCODE, MD3.METASUBCODEDESCRIPTION AS APPEALCOMPONENTDES,APPL.UMPIRECODE,UMP.NAME AS UMPIRENAME, APPL.BATSMANCODE,PM.PLAYERNAME AS BATSMANNAME,MD5.METASUBCODEDESCRIPTION AS ISREFERREDDESC, APPL.ISREFERRED,PMBOWL.PLAYERNAME AS BOWLERNAME,MD4.METASUBCODEDESCRIPTION AS APPEALDECISIONDESC, APPL.APPEALDECISION,APPL.APPEALCOMMENTS,'F'FLAG FROM APPEALEVENTS APPL INNER JOIN METADATA MD1 ON MD1.METASUBCODE = APPL.APPEALTYPECODE LEFT JOIN METADATA MD2 ON MD2.METASUBCODE = APPL.APPEALSYSTEMCODE LEFT JOIN METADATA MD3 ON MD3.METASUBCODE = APPL.APPEALCOMPONENTCODE INNER JOIN METADATA MD4 ON MD4.METASUBCODE = APPL.APPEALDECISION INNER JOIN METADATA MD5 ON MD5.METASUBCODE = APPL.ISREFERRED INNER JOIN OFFICIALSMASTER UMP ON UMP.OFFICIALSCODE = APPL.UMPIRECODE INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE = APPL.BATSMANCODE INNER JOIN BALLEVENTS BALL ON BALL.BALLCODE = APPL.BALLCODE INNER JOIN PLAYERMASTER PMBOWL ON PMBOWL.PLAYERCODE = BALL.BOWLERCODE WHERE APPL.BALLCODE = '%@'",BALLCODE ];
+        NSString *updateSQL =[NSString stringWithFormat:@"SELECT	APPL.BALLCODE,(CAST(BALL.OVERNO AS NVARCHAR) +'.'+ CAST(BALL.BALLNO AS NVARCHAR)) OVERS,APPL.APPEALTYPECODE, MD1.METASUBCODEDESCRIPTION AS APPEALTYPEDES,APPL.APPEALSYSTEMCODE, MD2.METASUBCODEDESCRIPTION AS APPEALSYSTEMDES,APPL.APPEALCOMPONENTCODE, MD3.METASUBCODEDESCRIPTION AS APPEALCOMPONENTDES,APPL.UMPIRECODE,UMP.NAME AS UMPIRENAME, APPL.BATSMANCODE,PM.PLAYERNAME AS BATSMANNAME,MD5.METASUBCODEDESCRIPTION AS ISREFERREDDESC, APPL.ISREFERRED,PMBOWL.PLAYERNAME AS BOWLERNAME,MD4.METASUBCODEDESCRIPTION AS APPEALDECISIONDESC, APPL.APPEALDECISION,APPL.APPEALCOMMENTS,'F'FLAG FROM APPEALEVENTS APPL INNER JOIN METADATA MD1 ON MD1.METASUBCODE = APPL.APPEALTYPECODE LEFT JOIN METADATA MD2 ON MD2.METASUBCODE = APPL.APPEALSYSTEMCODE LEFT JOIN METADATA MD3 ON MD3.METASUBCODE = APPL.APPEALCOMPONENTCODE LEFT JOIN METADATA MD4 ON MD4.METASUBCODE = APPL.APPEALDECISION LEFT JOIN METADATA MD5 ON MD5.METASUBCODE = APPL.ISREFERRED INNER JOIN OFFICIALSMASTER UMP ON UMP.OFFICIALSCODE = APPL.UMPIRECODE INNER JOIN PLAYERMASTER PM ON PM.PLAYERCODE = APPL.BATSMANCODE INNER JOIN BALLEVENTS BALL ON BALL.BALLCODE = APPL.BALLCODE INNER JOIN PLAYERMASTER PMBOWL ON PMBOWL.PLAYERCODE = BALL.BOWLERCODE WHERE APPL.BALLCODE = '%@'",BALLCODE ];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 GetSEAppealDetailsForAppealEvents *record=[[GetSEAppealDetailsForAppealEvents alloc]init];
-                record.BALLCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                record.OVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.APPEALTYPECODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                record.APPEALTYPEDES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                record.APPEALSYSTEMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
-                record.APPEALSYSTEMDES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
-                record.APPEALCOMPONENTCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
-                record.APPEALCOMPONENTDES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-                record.UMPIRECODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                record.UMPIRENAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
-                record.BATSMANCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
-                record.BATSMANNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
-                record.ISREFERREDDESC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
-                record.ISREFERRED=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
-                record.BOWLERNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
-                record.APPEALDECISIONDESC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
-                record.APPEALDECISION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
-                record.APPEALCOMMENTS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
-                record.FLAG=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
+                record.BALLCODE=[self getValueByNull:statement : 0];
+                record.OVERS=[self getValueByNull:statement : 1];
+                record.APPEALTYPECODE=[self getValueByNull:statement : 2];
+                record.APPEALTYPEDES=[self getValueByNull:statement : 3];
+                record.APPEALSYSTEMCODE=[self getValueByNull:statement : 4];
+                record.APPEALSYSTEMDES=[self getValueByNull:statement : 5];
+                record.APPEALCOMPONENTCODE=[self getValueByNull:statement : 6];
+                record.APPEALCOMPONENTDES=[self getValueByNull:statement : 7];
+                record.UMPIRECODE=[self getValueByNull:statement : 8];
+                record.UMPIRENAME=[self getValueByNull:statement : 9];
+                record.BATSMANCODE=[self getValueByNull:statement : 10];
+                record.BATSMANNAME=[self getValueByNull:statement : 11];
+                record.ISREFERREDDESC=[self getValueByNull:statement : 12];
+                record.ISREFERRED=[self getValueByNull:statement : 13];
+                record.BOWLERNAME=[self getValueByNull:statement : 14];
+                record.APPEALDECISIONDESC=[self getValueByNull:statement : 15];
+                record.APPEALDECISION=[self getValueByNull:statement : 16];
+                record.APPEALCOMMENTS=[self getValueByNull:statement : 17];
+                record.FLAG=[self getValueByNull:statement : 18];
                 
                 
                 

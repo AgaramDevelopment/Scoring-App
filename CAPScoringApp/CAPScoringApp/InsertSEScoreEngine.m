@@ -833,7 +833,8 @@
     }
     else if([FLAG isEqualToString: @"E"])
     {
-        [dbInsertScoreEngine UpdateAppealEvents : APPEALTYPECODE : APPEALSYSTEMCODE : APPEALCOMPONENTCODE : UMPIRECODE : BATSMANCODE : ISREFERRED : APPEALDECISION : APPEALCOMMENTS : FIELDERCODE : BALLCODE];
+        [dbInsertScoreEngine DeleteAppealEvents : BALLCODE];
+        [dbInsertScoreEngine InsertAppealEvents : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : BALLCODE : APPEALTYPECODE : APPEALSYSTEMCODE : APPEALCOMPONENTCODE : UMPIRECODE : BATSMANCODE : ISREFERRED : APPEALDECISION : APPEALCOMMENTS : FIELDERCODE];
     }
     else if([FLAG isEqualToString: @"D"])
     {
@@ -852,11 +853,12 @@
     }
     else if([FLAG isEqualToString: @"E"])
     {
-        [dbInsertScoreEngine UpdateFieldingEvents :FIELDERCODE: ISSUBSTITUTE :FIELDINGFACTOR :NETRUNS: BALLCODE: FIELDINGFACTOR ];
+        [dbInsertScoreEngine DeleteFieldingEvents : BALLCODE];
+        [dbInsertScoreEngine InsertFieldingEvents :COMPETITIONCODE: MATCHCODE :TEAMCODE :INNINGSNO: BALLCODE: FIELDERCODE :ISSUBSTITUTE : FIELDINGFACTOR: NETRUNS];
     }
     else if([FLAG isEqualToString: @"D"])
     {
-        [dbInsertScoreEngine DeleteFieldingEvents : BALLCODE : FIELDINGFACTOR];        
+        [dbInsertScoreEngine DeleteFieldingEvents : BALLCODE];        
     }		
 }
 @end
