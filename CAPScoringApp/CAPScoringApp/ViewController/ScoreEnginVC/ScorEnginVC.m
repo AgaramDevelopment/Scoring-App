@@ -81,6 +81,7 @@
     NSString*AppealSystemSelectCode;
     AppealSystemRecords *objAppealSystemEventRecord;
     NSMutableDictionary *appealEventDict;
+    NSString *AppealTypeSelectCode;
     
     //AppealComponent
     NSMutableArray * AppealComponentSelectionArray;
@@ -7115,8 +7116,24 @@ self.lbl_umpirename.text=@"";
         if(appealEventDict==nil){
             appealEventDict = [NSMutableDictionary dictionary];
         }
-        AppealComponentRecord *appealRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
-        [appealEventDict setValue:appealRecord.AppealComponentMetaSubCode forKey:@"AppealTypeCode"];
+
+            
+      NSMutableArray* AppealTypeSelectionArray=[[NSMutableArray alloc]init];
+        
+        AppealRecord *objAppealrecord=(AppealRecord*)[self.AppealValuesArray objectAtIndex:indexPath.row];
+            
+           // cell.AppealName_lbl.text =objAppealrecord.AppealSystemMetaSubCodeDescription;
+            // selectTeam=cell.AppealName_lbl.text;
+          AppealTypeSelectCode=objAppealrecord.MetaSubCode;
+            [_AppealValuesArray addObject:objAppealrecord];
+            
+            self.table_AppealSystem.hidden=YES;
+            isEnableTbl=YES;
+       
+        
+        
+        
+       
         self.comments_txt.text=@"";
         self.lbl_appealsystem.text=@"";
         self.lbl_appealComponent.text=@"";
@@ -9162,6 +9179,7 @@ self.lbl_umpirename.text=@"";
         if(appealEventDict==nil){
             appealEventDict = [NSMutableDictionary dictionary];
         }
+        [appealEventDict setValue:AppealTypeSelectCode forKey:@"AppealTypeCode"];
         [appealEventDict setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
         [appealEventDict setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
         [appealEventDict setValue:UmpireSelect forKey:@"AppealUmpireSelct"];

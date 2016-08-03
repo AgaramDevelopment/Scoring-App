@@ -221,8 +221,8 @@ DBManagerEndSession *dbEndSession;
     
   //DATEVALIDATION(SESSION WISE)
 
-    getSessionArray = [[NSMutableArray alloc]init];
-   getSessionArray = [dbEndSession getSessionDetails:COMPETITIONCODE :MATCHCODE];
+//    getSessionArray = [[NSMutableArray alloc]init];
+//   getSessionArray = [dbEndSession getSessionDetails:COMPETITIONCODE :MATCHCODE];
 
         //DATEVALIDATION(DAY WISE)
     GetDateDayWiseDetails = [[NSMutableArray alloc]init];
