@@ -416,6 +416,7 @@
         _addbreak_lbl.text=@"BREAKS";
         _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
  [self startService:@"INSERT"];
+             [self showDialog:@"Break Inserted Successfully." andTitle:@"Breaks"];
     
     }
     
@@ -554,10 +555,8 @@
        
         _addbreak_lbl.text=@"BREAKS";
         _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
-
-        //  [self startService:@"UPDATE"];
-        
-        
+    //[self startService:@"UPDATE"];
+  [self showDialog:@"Break Updated Successfully." andTitle:@"Breaks"];
 //        BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
 //        
 //        add.COMPETITIONCODE=self.COMPETITIONCODE;
@@ -616,7 +615,7 @@
     [self DeleteBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKCOMMENTS :BREAKNO];
  
     
-    
+      [self showDialog:@"Break Deleted Successfully." andTitle:@"Breaks"];
     
     
 }
