@@ -81,6 +81,7 @@
     NSString*AppealSystemSelectCode;
     AppealSystemRecords *objAppealSystemEventRecord;
     NSMutableDictionary *appealEventDict;
+    NSString *AppealTypeSelectCode;
     
     //AppealComponent
     NSMutableArray * AppealComponentSelectionArray;
@@ -693,17 +694,14 @@
     //Fielding
     NSMutableArray *fieldingFactorArray = [fetchSeBallCodeDetails getFieldingFactorArray];
     if(fieldingFactorArray.count>0){
-        
-        
         selectedNRS = [fieldingFactorArray objectAtIndex:4];
-        
         selectedfieldPlayer = [[BowlerEvent alloc]init];
         selectedfieldPlayer.BowlerCode =  [fieldingFactorArray objectAtIndex:0];
         selectedfieldPlayer.BowlerName =  [fieldingFactorArray objectAtIndex:1];
         
         selectedfieldFactor = [[FieldingFactorRecord alloc]init];
         selectedfieldFactor.fieldingfactorcode = [fieldingFactorArray objectAtIndex:3];
-        
+        [self selectedViewBg:self.view_fielding_factor];
     }
     
     
@@ -5902,16 +5900,16 @@
             self.view_bowlType.hidden = YES;
             self.view_fastBowl.hidden = YES;
             //[self unselectedButtonBg:selectBtnTag];
-            
-            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(4/255.0f) alpha:1.0f];//Normal
+            [self unselectedViewBg:self.view_fielding_factor];
+//            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(4/255.0f) alpha:1.0f];//Normal
             
         }else{
             DBManager *objDBManager = [[DBManager alloc]init];
             //Fielding Factor
             _fieldingfactorArray=[[NSMutableArray alloc]init];
             _fieldingfactorArray =[objDBManager RetrieveFieldingFactorData];
-            
-            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+            [self selectedViewBg:self.view_fielding_factor];
+//            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
             
             isFieldingSelected = YES;
             fieldingOption = 1;
@@ -7118,8 +7116,24 @@ self.lbl_umpirename.text=@"";
         if(appealEventDict==nil){
             appealEventDict = [NSMutableDictionary dictionary];
         }
-        AppealComponentRecord *appealRecord=(AppealComponentRecord*)[AppealComponentArray objectAtIndex:indexPath.row];
-        [appealEventDict setValue:appealRecord.AppealComponentMetaSubCode forKey:@"AppealTypeCode"];
+
+            
+      NSMutableArray* AppealTypeSelectionArray=[[NSMutableArray alloc]init];
+        
+        AppealRecord *objAppealrecord=(AppealRecord*)[self.AppealValuesArray objectAtIndex:indexPath.row];
+            
+           // cell.AppealName_lbl.text =objAppealrecord.AppealSystemMetaSubCodeDescription;
+            // selectTeam=cell.AppealName_lbl.text;
+          AppealTypeSelectCode=objAppealrecord.MetaSubCode;
+            [_AppealValuesArray addObject:objAppealrecord];
+            
+            self.table_AppealSystem.hidden=YES;
+            isEnableTbl=YES;
+       
+        
+        
+        
+       
         self.comments_txt.text=@"";
         self.lbl_appealsystem.text=@"";
         self.lbl_appealComponent.text=@"";
@@ -9165,6 +9179,7 @@ self.lbl_umpirename.text=@"";
         if(appealEventDict==nil){
             appealEventDict = [NSMutableDictionary dictionary];
         }
+        [appealEventDict setValue:AppealTypeSelectCode forKey:@"AppealTypeCode"];
         [appealEventDict setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
         [appealEventDict setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];
         [appealEventDict setValue:UmpireSelect forKey:@"AppealUmpireSelct"];

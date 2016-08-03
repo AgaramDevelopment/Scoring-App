@@ -482,7 +482,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
     
     
     if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
-        [self showDialog:@"Duration should be greated than zero" andTitle:@""];
+        [self showDialog:@"Duration should be greated than zero" andTitle:@"End Innings"];
         return NO;
     }
     if([self.txt_startInnings.text isEqualToString:@""] && [self.txt_endInnings.text isEqualToString:@""]){
@@ -610,67 +610,96 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
 }
 
 - (IBAction)btn_delete:(id)sender {
-    innings = [[EndInnings alloc]init];
     
     
-    BOOL isSuccess = [innings DeleteEndInnings:CompetitionCode :MatchCode :OldTeamCode :OldInningsNo];
-    if(isSuccess){
-    [self.delegate EndInningsDeleteBtnAction];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+                                                   message: @"Do you want to Revert?"
+                                                  delegate: self
+                                         cancelButtonTitle:@"Yes"
+                                         otherButtonTitles:@"No",nil];
+    
+    alert.tag = 100;
+    [alert show];
+    
+}
 
-    
-    
-    if(self.checkInternetConnection){
-        
-        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        //Show indicator
-        [delegate showLoading];
-        //      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
-        
-        //dispatch_get_main_queue(), ^
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 100) { // UIAlertView with tag 1 detected
+        if (buttonIndex == 0)
         {
-            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],CompetitionCode,MatchCode,@"NULL",fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO,@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"DELETE"];
             
-            NSLog(@"%@",baseURL);
+            innings = [[EndInnings alloc]init];
             
-            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
             
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            NSURLResponse *response;
-            NSError *error;
-            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            
-            if(responseData != nil)
-            {
-                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+            BOOL isSuccess = [innings DeleteEndInnings:CompetitionCode :MatchCode :OldTeamCode :OldInningsNo];
+            if(isSuccess){
+                [self.delegate EndInningsDeleteBtnAction];
                 
-                if(rootArray !=nil && rootArray.count>0){
-                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                    NSString *success = [valueDict valueForKey:@"DataItem"];
-                    if([success isEqual:@"Success"]){
+                
+                
+                if(self.checkInternetConnection){
+                    
+                    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                    
+                    //Show indicator
+                    [delegate showLoading];
+                    //      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+                    
+                    //dispatch_get_main_queue(), ^
+                    {
+                        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],CompetitionCode,MatchCode,@"NULL",fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO,@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"DELETE"];
                         
+                        NSLog(@"%@",baseURL);
+                        
+                        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                        
+                        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+                        NSURLResponse *response;
+                        NSError *error;
+                        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+                        
+                        if(responseData != nil)
+                        {
+                            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+                            
+                            if(rootArray !=nil && rootArray.count>0){
+                                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                                NSString *success = [valueDict valueForKey:@"DataItem"];
+                                if([success isEqual:@"Success"]){
+                                    
+                                }
+                            }else{
+                                
+                            }
+                        }
+                        
+                        [delegate hideLoading];
                     }
-                }else{
                     
                 }
+                [endInningsArray removeLastObject];
+                
+                [self fetchPageload:fetchEndinnings :CompetitionCode :MatchCode];
+                [self.tbl_endInnings reloadData];
+                
+                self.tbl_endInnings.hidden = NO;
+                self.view_Header.hidden = NO;
+                self.view_allControls.hidden = YES;
+                self.btn_save.hidden = YES;
+                self.btn_delete.hidden = YES;
             }
-            
-            [delegate hideLoading];
         }
-        
     }
-    [endInningsArray removeLastObject];
-    
-    [self fetchPageload:fetchEndinnings :CompetitionCode :MatchCode];
-    [self.tbl_endInnings reloadData];
-    
-    self.tbl_endInnings.hidden = NO;
-     self.view_Header.hidden = NO;
-    self.view_allControls.hidden = YES;
-        self.btn_save.hidden = YES;
-        self.btn_delete.hidden = YES;
-}
-}
+        else
+        {
+            
+        }
+    }
+
+
+
 
 
 
