@@ -517,7 +517,7 @@
             
             }
             else{
-                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"The Day is already exists in the date." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Day" message:@"The Day is already exists in the date." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alter show];
             }
             [self startService:@"INSERT"];
@@ -597,7 +597,7 @@
     
     if(IsEditMode){
         
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"End Day"
                                                        message: @"Do you want to Revert?"
                                                       delegate: self
                                              cancelButtonTitle:@"Yes"

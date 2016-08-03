@@ -145,7 +145,7 @@
     _Text_BreakStart.text = objBreak.BREAKSTARTTIME;      // [test valueForKey:@"BREAKSTARTTIME"];
     
    // BREAKSTARTTIME =_Text_BreakStart.text;
-    _addbreak_lbl.text=@"EDIT BREAK";
+    _addbreak_lbl.text=@"BREAKS";
     _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
     
     _text_EndBreak.text = objBreak.BREAKENDTIME;          //[test valueForKey:@"BREAKENDTIME"];
@@ -475,7 +475,7 @@
         _btn_finish.hidden=NO;
         _btn_delete.hidden=YES;
         _btn_Update.hidden=YES;
-        _addbreak_lbl.text=@"ADD BREAK";
+        _addbreak_lbl.text=@"BREAKS";
         _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
         
         _text_EndBreak.text = @"";
@@ -487,7 +487,7 @@
         self.view_gridview.hidden=YES;
        // self.view_penaltyTittle.hidden=YES;
         isShow_BreakrecordTbl= NO;
-        self.btn_Add.hidden =NO;
+        self.btn_Add.hidden =YES;
        // [self.btn_submitpenality setTitle:[NSString stringWithFormat:@"Submit"] forState:UIControlStateNormal];
         //self.lbl_penaltytype.text=@"Choose Penalty Type";
         //self.txt_penalityruns.text=@"";
@@ -503,7 +503,7 @@
         _btn_finish.hidden=NO;
         _btn_delete.hidden=YES;
         _btn_Update.hidden=YES;
-        _addbreak_lbl.text=@"ADD BREAK";
+        _addbreak_lbl.text=@"BREAKS";
         _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
         
         _text_EndBreak.text = @"";
@@ -515,7 +515,7 @@
         self.view_gridview.hidden=YES;
         // self.view_penaltyTittle.hidden=YES;
         isShow_BreakrecordTbl= NO;
-        self.btn_Add.hidden =NO;
+        self.btn_Add.hidden =YES;
         
 //        _Text_BreakStart.text = @"";
 //        
