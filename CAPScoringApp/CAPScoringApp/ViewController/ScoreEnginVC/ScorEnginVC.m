@@ -700,7 +700,8 @@
         selectedfieldPlayer.BowlerName =  [fieldingFactorArray objectAtIndex:1];
         
         selectedfieldFactor = [[FieldingFactorRecord alloc]init];
-        selectedfieldFactor.fieldingfactorcode = [fieldingFactorArray objectAtIndex:3];
+        selectedfieldFactor.fieldingfactorcode = [fieldingFactorArray objectAtIndex:2];
+        selectedfieldFactor.fieldingfactor = [fieldingFactorArray objectAtIndex:3];
         [self selectedViewBg:self.view_fielding_factor];
     }
     
@@ -2376,8 +2377,6 @@
         [self calculateRunsOnEndBall];
         
         UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
-        
-        
         [updatescore UpdateScoreEngine :self.editBallCode :
          self.competitionCode :
          self.matchCode :
@@ -2447,7 +2446,23 @@
          self.ballEventRecord.objPenaltyreasoncode :
          self.ballEventRecord.objBallspeed :
          self.ballEventRecord.objUncomfortclassification :
-         selectedWicketEvent];
+         selectedWicketEvent:
+         [appealEventDict objectForKey:@"AppealTypeCode"]://APPEALTYPECODE:
+         [appealEventDict objectForKey:@"AppealSystemSelct"]://APPEALSYSTEMCODE:
+         [appealEventDict objectForKey:@"AppealComponentSelct"]://APPEALCOMPONENTCODE:
+         [appealEventDict objectForKey:@"AppealUmpireSelct"]://APPEALUMPIRECODE
+         [appealEventDict objectForKey:@"AppealBatsmenSelct"]://APPEALBATSMANCODE:
+         @""://APPEALISREFERRED:
+         @""://APPEALDECISION:
+         [appealEventDict objectForKey:@"Commenttext"]://APPEALCOMMENTS:
+         @""://APPEALFIELDERCODE:
+         @"E"://APPEALFLAG:
+         selectedfieldPlayer.BowlerCode://FIELDINGEVENTSFIELDERCODE:
+         @""://FIELDINGEVENTSISSUBSTITUTE:
+         selectedfieldFactor.fieldingfactorcode://FIELDINGEVENTSFIELDINGFACTOR:
+         (selectedNRS == nil || [selectedNRS isEqualToString:@""] ? @"1" : selectedNRS )://FIELDINGEVENTSNETRUNS:
+         @"E"//FIELDINGEVENTSFLAG
+         ];
         
         [self.navigationController popViewControllerAnimated:NO];
         }
@@ -5667,8 +5682,8 @@
         DBManager *objDBManager = [[DBManager alloc]init];
         
         if(_fastBowlTypeArray ==nil || _fastBowlTypeArray.count ==0){
-        _fastBowlTypeArray = [[NSMutableArray alloc]init];
-        _fastBowlTypeArray = [objDBManager getBowlFastType];
+            _fastBowlTypeArray = [[NSMutableArray alloc]init];
+            _fastBowlTypeArray = [objDBManager getBowlFastType];
         }
         
         
@@ -7116,17 +7131,10 @@ self.lbl_umpirename.text=@"";
         if(appealEventDict==nil){
             appealEventDict = [NSMutableDictionary dictionary];
         }
-
-            
-      NSMutableArray* AppealTypeSelectionArray=[[NSMutableArray alloc]init];
-        
         AppealRecord *objAppealrecord=(AppealRecord*)[self.AppealValuesArray objectAtIndex:indexPath.row];
-            
-           // cell.AppealName_lbl.text =objAppealrecord.AppealSystemMetaSubCodeDescription;
-            // selectTeam=cell.AppealName_lbl.text;
-          AppealTypeSelectCode=objAppealrecord.MetaSubCode;
-            [_AppealValuesArray addObject:objAppealrecord];
-            
+        
+        AppealTypeSelectCode=objAppealrecord.MetaSubCode;
+        
             self.table_AppealSystem.hidden=YES;
             isEnableTbl=YES;
        
