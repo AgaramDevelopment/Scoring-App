@@ -76,39 +76,44 @@
                 NSNumber* COUNT=@1;
                 NSNumber* COUNTSESSION=@3;
                 
-                while(COUNT<=COUNTSESSION)
+                while(COUNT.intValue <= COUNTSESSION.intValue)
                 {
                     if(![objDBManagerEndDay GetSessionNoForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : COUNT])
                     {
-                        if(STARTOVERBALLNO==nil)
+                        if(STARTOVERBALLNO==nil || [STARTOVERBALLNO isEqualToString:@"."])
                         {
+                            
+                            
                             TOTALOVERS=@"0.0";
-                            SESSIONNO=COUNT;
+                            SESSIONNO=[NSString stringWithFormat:@"%@",COUNT];
                             STARTOVERBALLNO=TOTALOVERS;
                             TOTALOVERS=TOTALOVERS;
-                            RUNSSCORED=0;
-                            WICKETLOST=0;
+                            RUNSSCORED=@0;
+                            WICKETLOST=@0;
                             
                         }
                         if(COUNT.intValue!=1)
                         {
-                            SESSIONNO=COUNT;
+                            
+                            
+                            
+                            SESSIONNO=[NSString stringWithFormat:@"%@",COUNT];
                             STARTOVERBALLNO=STARTOVERBALLNO;
                             TOTALOVERS=TOTALOVERS;
-                            RUNSSCORED=0;
-                            WICKETLOST=0;
+                            RUNSSCORED=@0;
+                            WICKETLOST=@"0";
                             
                         }
-                        if(SESSION==COUNT)
+                        if(SESSION==[NSString stringWithFormat:@"%@",COUNT])
                         {
-                            RUNSSCORED=RUNS;
+                            RUNSSCORED= [NSNumber numberWithInt:RUNS.intValue];
                             WICKETLOST=WICKETS;
                         }
                         else
                         {
                             STARTOVERBALLNO=TOTALOVERS;
                             TOTALOVERS=TOTALOVERS;
-                            RUNSSCORED=0;
+                            RUNSSCORED=@0;
                         }
                         [objDBManagerEndDay SetSessionEventsForInsertEndDay : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO : BATTINGTEAMCODE : STARTOVERBALLNO : TOTALOVERS : RUNSSCORED : WICKETLOST];
                         

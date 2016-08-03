@@ -2736,8 +2736,8 @@
     {
         NSNumber *temp = [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS];
         int ballCount = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
-        
-        [InsertSEScoreEngine InsertScoreEngine :
+        InsertSEScoreEngine *objInsertSEScoreEngine = [[InsertSEScoreEngine alloc] init];
+        [objInsertSEScoreEngine InsertScoreEngine :
          self.competitionCode :
          self.matchCode  :
          fetchSEPageLoadRecord.BATTINGTEAMCODE :
@@ -2812,7 +2812,7 @@
          self.ballEventRecord.objPenaltyreasoncode://PENALTYREASONCODE:
          @""://BALLSPEED:
          @""://UNCOMFORTCLASSIFCATION:
-                            selectedWicketEvent:
+         selectedWicketEvent:
          [appealEventDict objectForKey:@"AppealTypeCode"]://APPEALTYPECODE:
          [appealEventDict objectForKey:@"AppealSystemSelct"]://APPEALSYSTEMCODE:
          [appealEventDict objectForKey:@"AppealComponentSelct"]://APPEALCOMPONENTCODE:

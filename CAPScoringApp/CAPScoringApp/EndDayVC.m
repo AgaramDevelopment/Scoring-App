@@ -25,6 +25,7 @@
     NSDateFormatter *formatter;
     NSString *MatchDate1;
     NSString *MatchDate;
+    BOOL startTimeEqual;
     
     FetchEndDayDetails *fetchEndDayDetails;
 
@@ -107,6 +108,8 @@
     
    
     [self duration];
+    
+    _tbl_endday.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 
@@ -306,6 +309,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+     self.view_addbtn.hidden = YES;
     self.scroll_endDay.scrollEnabled = YES;
     
    FetchEndDay *fetchEndInn=(FetchEndDay*)[fetchEndDayDetails.FetchEndDayArray  objectAtIndex:indexPath.row];
@@ -393,33 +397,26 @@
     self.view_datePicker.hidden=YES;
     IsBack = NO;
     IsEditMode =NO;
+    self.view_addbtn.hidden = YES;
     
     [_btn_save setTitle:@"SAVE" forState:UIControlStateNormal];
 
 }
 
 -(BOOL) checkValidation{
+    
+    
+    if ([self.txt_endTime.text isEqualToString:@""]) {
+        
+        [self showDialog:@"Please Choose Day End Time" andTitle:@"End Day"];
+        return NO;
+    }
  
     if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
-        [self showDialog:@"Duration should be greated than zero" andTitle:@""];
+        [self showDialog:@"Duration should be greated than zero" andTitle:@"End Day"];
         
         return NO;
     }
-       // else if ((self.txt_startTime.text = @"") && (self.txt_endTime.text = @"")){
-//        
-//        [self showDialog:@"Please Select Start Time and End Time" andTitle:@""];
-//        return NO;
-//    }else if (self.txt_startTime.text = @""){
-//        [self showDialog:@"Please Select Start Time" andTitle:@""];
-//        return NO;
-//
-//        
-//    }else if (self.txt_endTime.text = @""){
-//        [self showDialog:@"Please Select End Time" andTitle:@""];
-//        return NO;
-//        
-//        
-//    }
 
         
     return YES;
@@ -436,6 +433,26 @@
     [alertDialog show];
 }
 
+-(void)ValidationStartAndEndTime
+{
+    startTimeEqual=(fetchEndDayDetails.FetchEndDayArray.count>0)?NO:YES;
+    for(int i=0; i<fetchEndDayDetails.FetchEndDayArray.count; i++)
+    {
+        FetchEndDay *fetchEndInn=(FetchEndDay*)[fetchEndDayDetails.FetchEndDayArray  objectAtIndex:i];
+        if([self.txt_startTime.text isEqualToString:fetchEndInn.STARTTIME] && [self.txt_endTime.text isEqualToString:fetchEndInn.ENDTIME])
+        {
+            NSLog(@"same");
+            startTimeEqual=YES;
+        }
+        else
+        {
+            NSLog(@"notsame");
+            startTimeEqual=NO;
+        }
+        
+    }
+    
+}
 
 
 - (IBAction)btn_save:(id)sender {
@@ -481,7 +498,7 @@
             NSDate *startdate = [formatter dateFromString:_txt_startTime.text];
             NSDate *enddate = [formatter dateFromString:_txt_endTime.text];
             
-            [formatter setDateFormat:@"yyyy-MM-dd"];
+            [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
 
             startTimeData = [formatter stringFromDate:startdate];
             endTimeData = [formatter stringFromDate:enddate];
@@ -492,10 +509,17 @@
             
             
            InsertEndDay *insertEndDay = [[InsertEndDay alloc]init];
+            [self ValidationStartAndEndTime];
+            if(startTimeEqual==NO)
+            {
             
             [insertEndDay InsertEndDay:self.COMPETITIONCODE :self.MATCHCODE :[NSString  stringWithFormat:@"%@",self.INNINGSNO] :_txt_startTime.text :endDayTime : _lbl_day_no.text : self.TEAMCODE :_lbl_runScored.text :_lbl_overPlayed.text :_lbl_wktLost.text :_txt_comments.text :startTimeData :endTimeData];
             
-            
+            }
+            else{
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"The Day is already exists in the date." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                [alter show];
+            }
             [self startService:@"INSERT"];
             
         }
@@ -549,6 +573,7 @@
         self.view_allControls.hidden = YES;
         self.tbl_endday.hidden = NO;
            self.gridHeaderView.hidden=NO;
+         self.view_addbtn.hidden = NO;
         IsBack = YES;
         
     }else if (IsBack == YES){
