@@ -629,15 +629,16 @@
             teamaCode=[[WonTossArray objectAtIndex:selectTeamindex] valueForKey:@"TEAMCODE_TOSSWONBY"];
             //PlayerCode =objEventRecord.TEAMCODE_TOSSWONBY;
         }
-        else if(selectTeamindex==0)
-        {
+        else{
+             if(selectTeamindex==0)
+           {
             teamaCode=[[WonTossArray objectAtIndex:selectTeamindex+1]valueForKey:@"TEAMCODE_TOSSWONBY"];
-        }
-        if(selectTeamindex==1)
-        {
+           }
+            if(selectTeamindex==1)
+             {
             teamaCode=[[WonTossArray objectAtIndex:selectTeamindex-1]valueForKey:@"TEAMCODE_TOSSWONBY"];
+              }
         }
-        
         
         
         nonStrikerArray=[[NSMutableArray alloc]init];
