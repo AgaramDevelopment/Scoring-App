@@ -29,7 +29,7 @@
     NSString *MatchDate;
     NSString *MatchDateWithTime;
     DBManagerEndSession *dbEndSession;
-    
+    BOOL startTimeEqual;
 }
 
 @end
@@ -573,18 +573,40 @@ int POS_TEAM_TYPE = 1;
     [alertDialog show];
 }
 
+-(void)ValidationStartAndEndTime
+{
+   startTimeEqual=(endSessionArray.count>0)?NO:YES;
+    for(int i=0; i<endSessionArray.count; i++)
+    {
+        EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:i];
+        if([self.txt_startTime.text isEqualToString:obj.SESSIONSTARTTIME] && [self.txt_endTime.text isEqualToString: obj.SESSIONENDTIME])
+        {
+            NSLog(@"same");
+            startTimeEqual=YES;
+        }
+        else
+        {
+            NSLog(@"notsame");
+            startTimeEqual=NO;
+        }
+        
+    }
+
+}
 - (IBAction)btn_save:(id)sender {
     
     if ([self checkValidation]) {
     
-    if ([BtnurrentTittle isEqualToString:@"INSERT"]) {
+    if ([BtnurrentTittle isEqualToString:@"INSERT"])
+    {
         
         //int SESSIONNO =[sessionRecords.SESSIONNO intValue];
         int STARTOVERNO  = [sessionRecords.STARTOVERNO intValue];
         int ENDOVERNO   =[sessionRecords.ENDOVERNO intValue];
         int  RUNSSCORED =[sessionRecords.RUNSSCORED intValue];
-        
-        
+        [self ValidationStartAndEndTime];
+     if(startTimeEqual== NO)
+    {
         [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :fetchSeRecord.DAYNO : SESSIONNO :_txt_startTime.text :_txt_endTime.text :[NSString stringWithFormat:@"%d",STARTOVERNO]: [NSString stringWithFormat:@"%d",ENDOVERNO] :[NSString stringWithFormat:@"%d" ,RUNSSCORED] :[NSString stringWithFormat:@"%d",fetchSeRecord.BATTEAMWICKETS] :Dominate];
         
         if(self.checkInternetConnection){
@@ -633,7 +655,7 @@ int POS_TEAM_TYPE = 1;
         }
         
      
-    }else{
+    else{
         
         
         dbEndSession = [[DBManagerEndSession alloc]init];
@@ -712,8 +734,14 @@ int POS_TEAM_TYPE = 1;
         
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"End Session Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
+    }
 
-  
+    else{
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"The Session is already exists in the date." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+
+    }
+    }
     }
 }
 
