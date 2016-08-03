@@ -246,7 +246,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/thushal/Desktop/Deepak%20source/3Aug2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/DBManagerEndInnings.m"
-                  timestampString = "491912164.830559"
+                  timestampString = "491917426.392964"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "676"
@@ -261,7 +261,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/thushal/Desktop/Deepak%20source/3Aug2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/DBManagerEndInnings.m"
-                  timestampString = "491912164.830715"
+                  timestampString = "491917426.393124"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "676"
@@ -1051,7 +1051,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3124"
             endingLineNumber = "3124"
-            landmarkName = "-timeLeftSinceDate:"
+            landmarkName = "-CreateBallTickers:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1627,7 +1627,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "538"
             endingLineNumber = "538"
-            landmarkName = "-alertView:clickedButtonAtIndex:"
+            landmarkName = "-btn_save:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1645,6 +1645,38 @@
             endingLineNumber = "487"
             landmarkName = "-btn_save:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EndDayVC btn_save:]"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/3Aug2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/EndDayVC.m"
+                  timestampString = "491917426.453502"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "488"
+                  endingLineNumber = "488"
+                  offsetFromSymbolStart = "1777">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EndDayVC btn_save:]"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/3Aug2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/EndDayVC.m"
+                  timestampString = "491917426.453658"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "488"
+                  endingLineNumber = "488"
+                  offsetFromSymbolStart = "1961">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2075,7 +2107,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6506"
             endingLineNumber = "6506"
-            landmarkName = "-calculateRuns:"
+            landmarkName = "-btn_AppealComponent:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2667,38 +2699,6 @@
             endingLineNumber = "7928"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ScorEnginVC tableView:didSelectRowAtIndexPath:]"
-                  moduleName = "CAPScoringApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/3Aug2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "491912164.935218"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "7940"
-                  endingLineNumber = "7940"
-                  offsetFromSymbolStart = "38863">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[ScorEnginVC tableView:didSelectRowAtIndexPath:]"
-                  moduleName = "CAPScoringApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/3Aug2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "491912164.935366"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "7940"
-                  endingLineNumber = "7940"
-                  offsetFromSymbolStart = "38885">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2777,7 +2777,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "8839"
             endingLineNumber = "8839"
-            landmarkName = "-Penalty"
+            landmarkName = "-OtherWicket"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -3268,7 +3268,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/thushal/Desktop/Deepak%20source/3Aug2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "491912164.957237"
+                  timestampString = "491917426.513402"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "230"
@@ -3283,7 +3283,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/thushal/Desktop/Deepak%20source/3Aug2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "491912164.957376"
+                  timestampString = "491917426.513544"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "230"
@@ -3700,12 +3700,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/EndSession.m"
-            timestampString = "491907767.320886"
+            timestampString = "491917075.284737"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "582"
-            endingLineNumber = "582"
-            landmarkName = "-btn_save:"
+            startingLineNumber = "580"
+            endingLineNumber = "580"
+            landmarkName = "-ValidationStartAndEndTime"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4091,6 +4091,38 @@
             endingLineNumber = "656"
             landmarkName = "-btn_save:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EndSession btn_save:]"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/3Aug2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/EndSession.m"
+                  timestampString = "491917426.547069"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "656"
+                  endingLineNumber = "656"
+                  offsetFromSymbolStart = "3836">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[EndSession btn_save:]"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/thushal/Desktop/Deepak%20source/3Aug2016/CAPScoringApp/CAPScoringApp/CAPScoringApp/EndSession.m"
+                  timestampString = "491917426.547244"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "656"
+                  endingLineNumber = "656"
+                  offsetFromSymbolStart = "3858">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4153,7 +4185,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "190"
             endingLineNumber = "190"
-            landmarkName = "-endDatePicker"
+            landmarkName = "-showSelecteddate"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4233,8 +4265,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "266"
             endingLineNumber = "266"
-            landmarkName = "@implementation EndDayVC"
-            landmarkType = "3">
+            landmarkName = "-numberOfSectionsInTableView:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4441,7 +4473,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "587"
             endingLineNumber = "587"
-            landmarkName = "-btn_save:"
+            landmarkName = "-ValidationStartAndEndTime"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4729,7 +4761,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "439"
             endingLineNumber = "439"
-            landmarkName = "-btn_save:"
+            landmarkName = "-ValidationStartAndEndTime"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4809,7 +4841,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "859"
             endingLineNumber = "859"
-            landmarkName = "-btn_back:"
+            landmarkName = "-btn_dropDown:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

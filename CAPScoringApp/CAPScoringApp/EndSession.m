@@ -576,7 +576,7 @@ int POS_TEAM_TYPE = 1;
 
 -(void)ValidationStartAndEndTime
 {
-   startTimeEqual=(endSessionArray.count>0)?NO:YES;
+   startTimeEqual=(endSessionArray.count!=0) ? YES:NO;
     for(int i=0; i<endSessionArray.count; i++)
     {
         EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:i];

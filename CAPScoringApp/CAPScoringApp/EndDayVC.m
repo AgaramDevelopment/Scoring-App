@@ -435,7 +435,7 @@
 
 -(void)ValidationStartAndEndTime
 {
-    startTimeEqual=(fetchEndDayDetails.FetchEndDayArray.count>0)?NO:YES;
+    startTimeEqual=(fetchEndDayDetails.FetchEndDayArray.count!=0)? YES:NO;
     for(int i=0; i<fetchEndDayDetails.FetchEndDayArray.count; i++)
     {
         FetchEndDay *fetchEndInn=(FetchEndDay*)[fetchEndDayDetails.FetchEndDayArray  objectAtIndex:i];
