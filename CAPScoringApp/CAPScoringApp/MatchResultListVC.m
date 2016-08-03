@@ -671,7 +671,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
     
     
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Match Result"
                                                    message: @"Do you want to Revert?"
                                                   delegate: self
                                          cancelButtonTitle:@"Yes"
@@ -878,7 +878,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
     else if (![self textValidation:self.txtf_team_b_point.text]  || ([_txtf_team_b_point.text intValue]<0 || [_txtf_team_b_point.text intValue]>9)) {
         
         
-        [self showDialog:@"Please enter B point between 0 to 9.\n" andTitle:@"Match Result"];
+[self showDialog:@"Please enter B point between 0 to 9.\n" andTitle:@"Match Result"];
         flag = NO;
         
     }
@@ -888,7 +888,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
 
     
     if(![errorMessage isEqual:@""]){
-        [self showDialog:errorMessage andTitle:@"MatchResult"];
+        [self showDialog:errorMessage andTitle:@"Match Result"];
     }
     
     return flag;
@@ -898,7 +898,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
  * Show message for given title and content
  */
 -(void) showDialog:(NSString*) message andTitle:(NSString*) title{
-    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:@"Match Result" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     
     [alertDialog show];
 }

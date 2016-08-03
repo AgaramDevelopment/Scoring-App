@@ -17,7 +17,7 @@
 
 //@property (strong,nonatomic) NSString *BOWLINGTEAMCODE;
 
-+(void) InsertScoreEngine:
+-(void) InsertScoreEngine:
 (NSString *)COMPETITIONCODE:
 (NSString*)MATCHCODE :
 (NSString*) TEAMCODE :

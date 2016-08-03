@@ -498,10 +498,11 @@
     }
     else
     {
-        
         _Text_BreakStart.text = @"";
         
-        
+        _btn_finish.hidden=NO;
+        _btn_delete.hidden=YES;
+        _btn_Update.hidden=YES;
         _addbreak_lbl.text=@"ADD BREAK";
         _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
         
@@ -510,11 +511,28 @@
         
         _lbl_Duration.text = @"";
         _text_Comments.text =@"";
+        
         self.view_gridview.hidden=YES;
-//        self.tbl_breaklist.hidden=YES;
-       // self.view_penaltyTittle.hidden=YES;
-        isShow_BreakrecordTbl= YES;
-        self.btn_Add.hidden =YES;
+        // self.view_penaltyTittle.hidden=YES;
+        isShow_BreakrecordTbl= NO;
+        self.btn_Add.hidden =NO;
+        
+//        _Text_BreakStart.text = @"";
+//        
+//        
+//        _addbreak_lbl.text=@"ADD BREAK";
+//        _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
+//        
+//        _text_EndBreak.text = @"";
+//        
+//        
+//        _lbl_Duration.text = @"";
+//        _text_Comments.text =@"";
+//        self.view_gridview.hidden=YES;
+////        self.tbl_breaklist.hidden=YES;
+//       // self.view_penaltyTittle.hidden=YES;
+//        isShow_BreakrecordTbl= YES;
+//        self.btn_Add.hidden =YES;
         [self.tbl_breaklist reloadData];
     }
 
