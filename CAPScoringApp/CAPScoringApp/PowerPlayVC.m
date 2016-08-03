@@ -179,42 +179,51 @@
 {
     if(isPowerplay== YES)
     {
-//            selectindexarray=[[NSMutableArray alloc]init];
-//            powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
-//            self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
-//            powerplaytype=powerplayrecord.powerplaytypecode;
-//        
-//            [selectindexarray addObject:powerplayrecord];
-            self.tbl_powerplaytype.hidden=YES;
-            //self.view_powerplay.hidden=NO;
-            //self.view_powerplaygrid.hidden=YES;
-            isPowerplay=NO;
+        //            selectindexarray=[[NSMutableArray alloc]init];
+        //            powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
+        //            self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
+        //            powerplaytype=powerplayrecord.powerplaytypecode;
+        //
+        //            [selectindexarray addObject:powerplayrecord];
+        selectindexarray=[[NSMutableArray alloc]init];
+        powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
+        self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
+        powerplaytype=powerplayrecord.powerplaytypecode;
+        
+        [selectindexarray addObject:powerplayrecord];
+        
+        self.tbl_powerplaytype.hidden=YES;
+        //self.view_powerplay.hidden=NO;
+        //self.view_powerplaygrid.hidden=YES;
+        isPowerplay=NO;
     }
-   else
-     {
-         
-         
-         //PowerPlayGridTVC *cell = (PowerPlayGridTVC *)[tableView cellForRowAtIndexPath:indexPath];
-         powerplayrecord=(PowerPlayRecord*)[Resultarray objectAtIndex:indexPath.row];
-         powerplaystartover=powerplayrecord.startover;
-         self.txt_startover.text =powerplayrecord.startover;
-         self.txt_endover.text  =powerplayrecord.endover;
-         self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
-         powerplaycode=powerplayrecord.powerplaycode;
-         
-         self.view_powerplay.hidden=YES;
-         self.view_powerplaygrid.hidden=NO;
-         self.btn_Add.hidden   =YES;
-         [self.btn_submit setTitle:@"Update" forState:UIControlStateNormal];
-         isPowerplay=YES;
-         
-     }
-    selectindexarray=[[NSMutableArray alloc]init];
-    powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
-    self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
-    powerplaytype=powerplayrecord.powerplaytypecode;
+    else
+    {
+        
+        
+        //PowerPlayGridTVC *cell = (PowerPlayGridTVC *)[tableView cellForRowAtIndexPath:indexPath];
+        powerplayrecord=(PowerPlayRecord*)[Resultarray objectAtIndex:indexPath.row];
+        powerplaystartover=powerplayrecord.startover;
+        self.txt_startover.text =powerplayrecord.startover;
+        self.txt_endover.text  =powerplayrecord.endover;
+        self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
+        powerplaycode=powerplayrecord.powerplaycode;
+        
+        self.view_powerplay.hidden=YES;
+        self.view_powerplaygrid.hidden=NO;
+        self.btn_Add.hidden   =YES;
+        [self.btn_submit setTitle:@"Update" forState:UIControlStateNormal];
+        isPowerplay=YES;
+        
+        
+        selectindexarray=[[NSMutableArray alloc]init];
+        powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
+        //self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
+        powerplaytype=powerplayrecord.powerplaytypecode;
+        
+        [selectindexarray addObject:powerplayrecord];
+    }
     
-    [selectindexarray addObject:powerplayrecord];
 }
 
 
@@ -299,53 +308,53 @@
 
 
 - (BOOL) formValidation{
-
-
+    
+    
     NSString *powerplaystartovertxt = self.txt_startover.text;
     NSString *powerplayendovertxt =self.txt_endover.text;
     NSString *powerplaytypetxt = self.lbl_setpowerplay.text;
     
-    if([powerplaystartovertxt isEqual:@""] && [powerplayendovertxt isEqual:@""] && [powerplaytypetxt isEqual:@"Select Power Play"]){
-         [self showDialog:@"Please enter Start Over,End Over and Powerplaytype." andTitle:@"Powerplay"];
+    if([powerplaystartovertxt isEqual:@""] && [powerplayendovertxt isEqual:@""] && [powerplaytypetxt isEqual:@"Select powerplay"]){
+        [self showDialog:@"Please enter Start Over,End Over and Powerplaytype." andTitle:@"Powerplay"];
         return NO;
-    }else if([powerplayendovertxt isEqual:@""] && [powerplaytypetxt isEqual:@"Select Power Play"]){
+    }else if([powerplayendovertxt isEqual:@""] && [powerplaytypetxt isEqual:@"Select powerplay"]){
         [self showDialog:@"Please enter End Over and Powerplaytype." andTitle:@"Powerplay"];
         return NO;
-    }else if([powerplaystartovertxt isEqual:@""] && [powerplaytypetxt isEqual:@"Select Power Play"]){
+    }else if([powerplaystartovertxt isEqual:@""] && [powerplaytypetxt isEqual:@"Select powerplay"]){
         [self showDialog:@"Please enter start Over and Powerplaytype." andTitle:@"Powerplay"];
         return NO;
     }else if([powerplaystartovertxt isEqual:@""] && [powerplayendovertxt isEqual:@""]){
         [self showDialog:@"Please enter start Over and End Over." andTitle:@"Powerplay"];
         return NO;
     }else
-
-     if([powerplaystartovertxt isEqual:@""]){
-        [self showDialog:@"Please enter Start Over." andTitle:@"Powerplay"];
-        return NO;
-    }
-    else if([powerplayendovertxt isEqual:@""]){
-        [self showDialog:@"Please enter End Over." andTitle:@"Powerplay"];
-        return NO;
-
-    }
-    else if([powerplaytypetxt isEqual:@"Select Power Play"]){
-        [self showDialog:@"Please Choose  Power Play Type" andTitle:@"Powerplay"];
-        return NO;
-    }
-    else if([powerplaystartovertxt intValue]  >= [powerplayendovertxt intValue]){
-        [self showDialog:@"End Over Should be greater than Start Over." andTitle:@"Powerplay"];
-        return NO;
-
-    }
-   else  if([matchover intValue] < [powerplaystartovertxt intValue]){
-        [self showDialog:@"Start Over Should not exceed Maximum Over." andTitle:@"Powerplay"];
-        return NO;
-
-    }
-    else if([matchover intValue] < [powerplayendovertxt intValue]){
-        [self showDialog:@"End Over Should not exceed Maximum Over." andTitle:@"Powerplay"];
-        return NO;
-    }
+        
+        if([powerplaystartovertxt isEqual:@""]){
+            [self showDialog:@"Please enter Start Over." andTitle:@"Powerplay"];
+            return NO;
+        }
+        else if([powerplayendovertxt isEqual:@""]){
+            [self showDialog:@"Please enter End Over." andTitle:@"Powerplay"];
+            return NO;
+            
+        }
+        else if([powerplaytypetxt isEqual:@"Select powerplay"]){
+            [self showDialog:@"Please Choose Powerplaytype" andTitle:@"Powerplay"];
+            return NO;
+        }
+        else if([powerplaystartovertxt intValue]  >= [powerplayendovertxt intValue]){
+            [self showDialog:@"End Over Should be greater than Start Over." andTitle:@"Powerplay"];
+            return NO;
+            
+        }
+        else  if([matchover intValue] < [powerplaystartovertxt intValue]){
+            [self showDialog:@"Start Over Should not exceed Maximum Over." andTitle:@"Powerplay"];
+            return NO;
+            
+        }
+        else if([matchover intValue] < [powerplayendovertxt intValue]){
+            [self showDialog:@"End Over Should not exceed Maximum Over." andTitle:@"Powerplay"];
+            return NO;
+        }
     
     return YES;
 }
@@ -803,7 +812,8 @@
     if(isPowerplay ==YES)
     {
         self.view_powerplaygrid.hidden=YES;
-        self.btn_Add.hidden   =YES;
+        self.btn_Add.hidden   =NO;
+        
         self.view_powerplay.hidden   =NO;
         isPowerplay=NO;
     }

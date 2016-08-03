@@ -106,4 +106,6 @@
 
 @property(strong,nonatomic)NSMutableArray *getFieldingFactorArray;
 
+@property(strong,nonatomic)NSMutableArray *BallGridDetails;
+
 @end

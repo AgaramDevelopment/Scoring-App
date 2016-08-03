@@ -119,29 +119,29 @@ NSArray *MuliteDayMatchtype;
         
     FetchSEPageLoadRecord *objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
     
-        
-    
-    cell.innings1teamname1.text=objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME;
-    cell.innings1team1runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FIRSTINNINGSTOTAL,objfetchSEPageLoadRecord.FIRSTINNINGSWICKET];
-    cell.innings1team1overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FIRSTINNINGSOVERS];
-        
-        if(![objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@""]){
-    cell.innings1teamname2.text=objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
-    cell.innings1team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
-    cell.innings1team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
-        }else{
-            cell.innings1teamname2.text=@"";
-            cell.innings1team2runs.text=@"";
-            cell.innings1team2overs.text=@"";
+        if([MuliteDayMatchtype containsObject:objFixtureRecord.matchTypeCode])
+        {
+            cell.innings1teamname1.text=objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME;
+            cell.innings1team1runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FIRSTINNINGSTOTAL,objfetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+            cell.innings1team1overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FIRSTINNINGSOVERS];
             
-        }
-       
-        if([MuliteDayMatchtype containsObject:objFixtureRecord.matchTypeCode]){
+            if(![objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@""]){
+                cell.innings1teamname2.text=objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
+                cell.innings1team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+                cell.innings1team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
+            }else{
+                cell.innings1teamname2.text=@"";
+                cell.innings1team2runs.text=@"";
+                cell.innings1team2overs.text=@"";
+                
+            }
+
+            
             if(![objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqual:@""])
             {
-            cell.innings2teamname1.text=objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME;
-            cell.innings2team1runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.THIRDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
-           cell.innings2team1overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.THIRDINNINGSOVERS];
+                cell.innings2teamname1.text=objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME;
+                cell.innings2team1runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.THIRDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+                cell.innings2team1overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.THIRDINNINGSOVERS];
             }
             else
             {
@@ -149,18 +149,50 @@ NSArray *MuliteDayMatchtype;
                 cell.innings2team1runs.text=@"";
                 cell.innings2team1overs.text=@"";
             }
-       if(![objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME isEqual:@""])
-      {
-        cell.innings2teamname2.text=objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME;
-        cell.innings2team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FOURTHINNINGSTOTAL,objfetchSEPageLoadRecord.FOURTHINNINGSWICKET];
-        cell.innings2team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FOURTHINNINGSOVERS];
-    }
-    else{
-        cell.innings2teamname2.text=@"";
-        cell.innings2team2runs.text=@"";
-        cell.innings2team2overs.text=@"";
-    }
+            if(![objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME isEqual:@""])
+            {
+                cell.innings2teamname2.text=objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME;
+                cell.innings2team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FOURTHINNINGSTOTAL,objfetchSEPageLoadRecord.FOURTHINNINGSWICKET];
+                cell.innings2team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FOURTHINNINGSOVERS];
+            }
+            else{
+                cell.innings2teamname2.text=@"";
+                cell.innings2team2runs.text=@"";
+                cell.innings2team2overs.text=@"";
+            }
+
+        
         }
+        else
+        {
+            cell.innings1teamname1.text=objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME;
+            cell.innings1team1runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FIRSTINNINGSTOTAL,objfetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+            cell.innings1team1overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+            
+            if(![objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@""]){
+                cell.innings2teamname2.text=objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
+                cell.innings2team2runs.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+                cell.innings2team2overs.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
+            }else{
+                cell.innings2teamname2.text=@"";
+                cell.innings2team2runs.text=@"";
+                cell.innings2team2overs.text=@"";
+                
+            }
+
+        }
+        
+        
+        
+        
+        
+        
+        
+    
+        
+        if([MuliteDayMatchtype containsObject:objFixtureRecord.matchTypeCode])
+        {
+                   }
         
 //        
 //        

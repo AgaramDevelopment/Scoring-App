@@ -82,6 +82,8 @@
 @synthesize nonstrickerSixes ;
 @synthesize nonstrickerTotalBalls;
 @synthesize nonstrickerStrickRate ;
+@synthesize nonstrickerBattingStyle;
+
 @synthesize RUNSREQUIRED;
 
 //Current Bowler
@@ -869,6 +871,7 @@ BOOL  getOverStatus;
         nonstrickerSixes = [nonstrickerDetaailsArray objectAtIndex:4];
         nonstrickerTotalBalls = [nonstrickerDetaailsArray objectAtIndex:5];
         nonstrickerStrickRate = [nonstrickerDetaailsArray objectAtIndex:6];
+        nonstrickerBattingStyle = [nonstrickerDetaailsArray objectAtIndex:7];
         
     }
     

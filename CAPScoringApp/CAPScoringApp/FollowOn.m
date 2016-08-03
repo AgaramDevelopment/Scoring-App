@@ -60,9 +60,10 @@
     self.Tbl_Followon.hidden=YES;
     CommonArry =[[NSMutableArray alloc]init];
    
-    followon=[[[DBManager alloc] init] getFollowOn:self.matchCode :self.compitionCode :self.inningsno];
+    
     if([self.inningsno isEqualToString:@"2"] || [self.inningsno isEqualToString:@"3"])
     {
+        followon=[[[DBManager alloc] init] getFollowOn:self.matchCode :self.compitionCode :self.inningsno];
         if([followon isEqualToString:@"1"])
         {
             
@@ -218,6 +219,9 @@
     {
         if(alertView.tag==100)
         {
+//            int innings=[self.inningsno intValue]-1;
+//            NSString *inning=[NSString stringWithFormat:@"%d",innings];
+            
             [self UpdateFollowOn:self.compitionCode :self.matchCode :self.inningsno :TEAMCODE :self.strickerCode :self.nonStrickerCode :self.bowlingPlayercode];
             UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:@"Follow on has been enforced successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [objAlter show];

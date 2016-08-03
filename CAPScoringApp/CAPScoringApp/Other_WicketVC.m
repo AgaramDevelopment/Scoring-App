@@ -453,14 +453,14 @@ else
    
     
     if([Wicket_lbl.text isEqual:@"Select"]){
-        [self showDialog:@"Please Select Wicket Type" andTitle:@"Other Wicket"];
+        [self showDialog:@"Please Select Wicket Name" andTitle:@"Other Wickets"];
 //       errorMessage = [NSString stringWithFormat:@"%@",@"Please select Wicket Type.\n"];
         flag = NO;
         return flag;
     }
     
     if([self.selectplayer_lbl.text isEqual:@"Select"]){
-        [self showDialog:@"Please enter Player Name." andTitle:@"Other Wicket"];
+        [self showDialog:@"Please enter Player Name." andTitle:@"Other Wickets"];
        // errorMessage = [NSString stringWithFormat:@"%@%@",@"Please Select Player Name.\n",errorMessage];
         flag = NO;
         return flag;
@@ -516,6 +516,7 @@ else
     {
         isEnableTbl=NO;
         self.Wicket_tableview.hidden=YES;
+        self.tbl_playername.hidden =YES;
     }
     
     
@@ -809,12 +810,36 @@ else
         }
         if([ dbOtherWicket GetInningsNoForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO]!=0)
         {
-            [ dbOtherWicket UpdateInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+            
+            if ([WICKETTYPE isEqualToString:@"MSC102"])
+            {
+                
+                WICKETNO=[NSNumber numberWithInt:0];
+                [ dbOtherWicket UpdateInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO:WICKETNO];
+            }
+            else
+            {
+                 WICKETNO=[NSNumber numberWithInt:1];
+            [ dbOtherWicket UpdateInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO: WICKETNO];
+            }
         }
         else
         {
             
-            [ dbOtherWicket InsertInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+            if ([WICKETTYPE isEqualToString:@"MSC102"])
+            {
+                
+                WICKETNO=[NSNumber numberWithInt:0];
+            
+                [ dbOtherWicket InsertInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : WICKETNO];
+            }
+            else
+            {
+                WICKETNO=[NSNumber numberWithInt:1];
+                
+                [ dbOtherWicket InsertInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO:WICKETNO];
+            
+            }
         }
        
         
@@ -916,27 +941,31 @@ else
    
         [dbOtherWicket UpdateBattingSummaryForUpdateOtherwicket :  WICKETNO: WICKETTYPE: N_FIELDERCODE : TOTALRUNS:COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO: WICKETPLAYER];
         
-        self.WickAddview.hidden=NO;
-        self.Btn_Add.hidden =NO;
-        isWicketlist=NO;
-//        GetWicketEventsPlayerDetails=[[NSMutableArray alloc]init];
-//        GetWicketEventsPlayerDetails= GetWicketDetailsArray;
-//        [self.tbl_Wicketlist reloadData];
-
+      
+        
+        
         
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Other Wicket" message:@"Other Wicket Updated Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
-
-        
-       // NSMutableArray *GetWicketEventsPlayerDetails=[ dbOtherWicket GetWicketEventDetailsForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
-        
-      
-        
         
         
         
         
     }
+    else{
+        
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Other Wicket" message:@"The Wicket Player "" already exist." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+    }
+     GetWicketEventsPlayerDetails=[[NSMutableArray alloc]init];
+   GetWicketEventsPlayerDetails=[ dbOtherWicket GetWicketEventDetailsForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+    
+    
+    self.WickAddview.hidden=NO;
+    self.Btn_Add.hidden =NO;
+    isWicketlist=NO;
+    [self.tbl_Wicketlist reloadData];
+
     NSMutableArray *GetPlayerDetails=[ dbOtherWicket GetPlayerDetailForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE];
       [ dbOtherWicket GetWicketNoForUpdateOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
     
@@ -997,7 +1026,7 @@ else
 				
     NSMutableArray *GetPlayerDetailForDeleteOtherwicket=[ dbOtherWicket GetPlayerDetailForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE];
     
-  //  NSMutableArray *GetWicketEventDetailsForDeleteOtherwicket=[ dbOtherWicket GetWicketEventDetailsForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
+    NSMutableArray *GetWicketEventDetailsForDeleteOtherwicket=[ dbOtherWicket GetWicketEventDetailsForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
     
     [dbOtherWicket GetWicketNoForDeleteOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
     

@@ -59,7 +59,7 @@
 
 // This method is called once we complete editing
 
-#define ACCEPTABLE_CHARECTERS @"0123456789"
+#define ACCEPTABLE_CHARECTERS @"0123456789."
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     NSLog(@"textField:shouldChangeCharactersInRange:replacementString:");
     

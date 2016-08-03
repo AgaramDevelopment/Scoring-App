@@ -304,7 +304,7 @@ EndInnings *insertScoreBoard;
         
         if(ISWICKETUNDO.intValue == 1)
         {
-            WICKETNO = [ objDBManagerEndBall GetWicketNoUpdateScoreEngine :  COMPETITIONCODE:  MATCHCODE: TEAMCODE : INNINGSNO : BALLCODE];
+            WICKETNO = [ objDBManagerEndBall GetWicketNoUpdateScoreEngine : MATCHCODE: COMPETITIONCODE : TEAMCODE : INNINGSNO : BALLCODE];
             
             
             

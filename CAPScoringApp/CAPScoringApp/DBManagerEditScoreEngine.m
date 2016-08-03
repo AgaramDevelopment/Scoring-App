@@ -11,6 +11,7 @@
 #import "ScoreEnginEditRecord.h"
 #import "SelectPlayerRecord.h"
 #import "BowlerEvent.h"
+#import "BallEventRecord.h"
 
 
 @implementation DBManagerEditScoreEngine
@@ -1324,47 +1325,83 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         
-        //, ISINNINGSLASTOVER
-        NSString *updateSQL =[NSString stringWithFormat:@"SELECT BALL.BALLCODE,BALL.OVERNO||'.'|| BALL.BALLNO AS BALLNO, BWLR.PLAYERNAME BOWLER,STRKR.PLAYERNAME STRIKER, NSTRKR.PLAYERNAME NONSTRIKER,  BT.BOWLTYPE BOWLTYPE, ST.SHOTNAME AS SHOTTYPE, BALL.TOTALRUNS, BALL.TOTALEXTRAS, BALL.OVERNO,BALL.BALLNO,BALL.BALLCOUNT,BALL.ISLEGALBALL,BALL.ISFOUR,BALL.ISSIX,BALL.RUNS,BALL.OVERTHROW, BALL.TOTALRUNS,BALL.WIDE,BALL.NOBALL,BALL.BYES,BALL.LEGBYES,BALL.TOTALEXTRAS,BALL.GRANDTOTAL,WE.WICKETNO,WE.WICKETTYPE,WE.WICKETEVENT,BALL.MARKEDFOREDIT , PTY.PENALTYRUNS, PTY.PENALTYTYPECODE, (MR.VIDEOLOCATION + '\' + BALL.VIDEOFILENAME) VIDEOFILEPATH FROM BALLEVENTS BALL INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE = BALL.COMPETITIONCODE AND MR.MATCHCODE = BALL.MATCHCODE INNER JOIN TEAMMASTER TM ON BALL.TEAMCODE = TM.TEAMCODE INNER JOIN PLAYERMASTER BWLR ON BALL.BOWLERCODE=BWLR.PLAYERCODE INNER JOIN PLAYERMASTER STRKR ON BALL.STRIKERCODE = STRKR.PLAYERCODE INNER JOIN PLAYERMASTER NSTRKR ON BALL.NONSTRIKERCODE = NSTRKR.PLAYERCODE LEFT JOIN BOWLTYPE BT ON BALL.BOWLTYPE = BT.BOWLTYPECODE LEFT JOIN SHOTTYPE ST ON BALL.SHOTTYPE = ST.SHOTCODE LEFT JOIN WICKETEVENTS WE ON BALL.BALLCODE = WE.BALLCODE AND WE.ISWICKET = 1 LEFT JOIN PENALTYDETAILS PTY ON BALL.BALLCODE = PTY.BALLCODE WHERE  BALL.COMPETITIONCODE='%@'  AND BALL.MATCHCODE='%@'  AND BALL.TEAMCODE='%@'  AND BALL.INNINGSNO='%@'  AND BALL.OVERNO = '%@' ORDER BY BALL.OVERNO, BALL.BALLNO, BALL.BALLCOUNT",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTEAMOVERS ];
+        NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT BALL.BALLCODE, (BALL.OVERNO||'.'|| BALL.BALLNO) AS BALLNO, BWLR.PLAYERNAME BOWLER, STRKR.PLAYERNAME STRIKER, NSTRKR.PLAYERNAME NONSTRIKER,  BT.BOWLTYPE BOWLTYPE, ST.SHOTNAME AS SHOTTYPE, BALL.TOTALRUNS, BALL.TOTALEXTRAS, BALL.OVERNO,BALL.BALLCOUNT,BALL.ISLEGALBALL,BALL.ISFOUR,BALL.ISSIX,BALL.RUNS,BALL.OVERTHROW, BALL.WIDE,BALL.NOBALL,BALL.BYES,BALL.LEGBYES,BALL.GRANDTOTAL,WE.WICKETNO,WE.WICKETTYPE,BALL.MARKEDFOREDIT, PTY.PENALTYRUNS, PTY.PENALTYTYPECODE, (MR.VIDEOLOCATION || '\' || BALL.VIDEOFILENAME) VIDEOFILEPATH FROM BALLEVENTS BALL INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE = BALL.COMPETITIONCODE AND MR.MATCHCODE = BALL.MATCHCODE INNER JOIN TEAMMASTER TM ON BALL.TEAMCODE = TM.TEAMCODE INNER JOIN PLAYERMASTER BWLR ON BALL.BOWLERCODE=BWLR.PLAYERCODE INNER JOIN PLAYERMASTER STRKR ON BALL.STRIKERCODE = STRKR.PLAYERCODE INNER JOIN PLAYERMASTER NSTRKR ON BALL.NONSTRIKERCODE = NSTRKR.PLAYERCODE LEFT JOIN BOWLTYPE BT ON BALL.BOWLTYPE = BT.BOWLTYPECODE LEFT JOIN SHOTTYPE ST ON BALL.SHOTTYPE = ST.SHOTCODE LEFT JOIN WICKETEVENTS WE ON BALL.BALLCODE = WE.BALLCODE AND WE.ISWICKET = 1 LEFT JOIN PENALTYDETAILS PTY ON BALL.BALLCODE = PTY.BALLCODE WHERE  BALL.COMPETITIONCODE='%@'  AND BALL.MATCHCODE='%@' AND BALL.TEAMCODE='%@' AND BALL.INNINGSNO=%@ AND BALL.OVERNO = %@ ORDER BY BALL.OVERNO, BALL.BALLNO, BALL.BALLCOUNT;",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTEAMOVERS];
         
-        const char *update_stmt = [updateSQL UTF8String];
+        
+        //, ISINNINGSLASTOVER
+//        NSString *updateSQL =[NSString stringWithFormat:@"SELECT BALL.BALLCODE,BALL.OVERNO||'.'|| BALL.BALLNO AS BALLNO, BWLR.PLAYERNAME BOWLER,STRKR.PLAYERNAME STRIKER, NSTRKR.PLAYERNAME NONSTRIKER,  BT.BOWLTYPE BOWLTYPE, ST.SHOTNAME AS SHOTTYPE, BALL.TOTALRUNS, BALL.TOTALEXTRAS, BALL.OVERNO,BALL.BALLNO,BALL.BALLCOUNT,BALL.ISLEGALBALL,BALL.ISFOUR,BALL.ISSIX,BALL.RUNS,BALL.OVERTHROW, BALL.TOTALRUNS,BALL.WIDE,BALL.NOBALL,BALL.BYES,BALL.LEGBYES,BALL.TOTALEXTRAS,BALL.GRANDTOTAL,WE.WICKETNO,WE.WICKETTYPE,WE.WICKETEVENT,BALL.MARKEDFOREDIT , PTY.PENALTYRUNS, PTY.PENALTYTYPECODE, (MR.VIDEOLOCATION + '\' + BALL.VIDEOFILENAME) VIDEOFILEPATH FROM BALLEVENTS BALL INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE = BALL.COMPETITIONCODE AND MR.MATCHCODE = BALL.MATCHCODE INNER JOIN TEAMMASTER TM ON BALL.TEAMCODE = TM.TEAMCODE INNER JOIN PLAYERMASTER BWLR ON BALL.BOWLERCODE=BWLR.PLAYERCODE INNER JOIN PLAYERMASTER STRKR ON BALL.STRIKERCODE = STRKR.PLAYERCODE INNER JOIN PLAYERMASTER NSTRKR ON BALL.NONSTRIKERCODE = NSTRKR.PLAYERCODE LEFT JOIN BOWLTYPE BT ON BALL.BOWLTYPE = BT.BOWLTYPECODE LEFT JOIN SHOTTYPE ST ON BALL.SHOTTYPE = ST.SHOTCODE LEFT JOIN WICKETEVENTS WE ON BALL.BALLCODE = WE.BALLCODE AND WE.ISWICKET = 1 LEFT JOIN PENALTYDETAILS PTY ON BALL.BALLCODE = PTY.BALLCODE WHERE  BALL.COMPETITIONCODE='%@'  AND BALL.MATCHCODE='%@'  AND BALL.TEAMCODE='%@'  AND BALL.INNINGSNO='%@'  AND BALL.OVERNO = '%@' ORDER BY BALL.OVERNO, BALL.BALLNO, BALL.BALLCOUNT",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTEAMOVERS ];
+        
+        const char *update_stmt = [selectPlayersSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                GetSEBallCodeDetailsForBallEvents *record=[[GetSEBallCodeDetailsForBallEvents alloc]init];
-                record.BALLCODE= [self getValueByNull: statement: 0];
-                record.BALLNO=[self getValueByNull: statement:1];
-                record.BOWLER=[self getValueByNull: statement:2];
-                record.STRIKER=[self getValueByNull: statement:3];
-                record.NONSTRIKER=[self getValueByNull: statement:4];
-                record.BOWLTYPE=[self getValueByNull: statement:5];
-                record.SHOTTYPE=[self getValueByNull: statement:6];
-                record.TOTALRUNS=[self getValueByNull: statement:7];
-                record.TOTALEXTRAS=[self getValueByNull: statement:8];
-                record.OVERNO=[self getValueByNull: statement:9];
-                record.BALLNO=[self getValueByNull: statement:10];
-                record.BALLCOUNT=[self getValueByNull: statement:11];
-                record.ISLEGALBALL=[self getValueByNull: statement:12];
-                record.ISFOUR=[self getValueByNull: statement:13];
-                record.ISSIX=[self getValueByNull: statement:14];
-                record.RUNS=[self getValueByNull: statement:15];
-                record.OVERTHROW=[self getValueByNull: statement:16];
-                record.TOTALRUNS=[self getValueByNull: statement:17];
-                record.WIDE=[self getValueByNull: statement:18];
-                record.NOBALL=[self getValueByNull: statement:19];
-                record.BYES=[self getValueByNull: statement:20];
-                record.LEGBYES=[self getValueByNull: statement:21];
-                record.TOTALEXTRAS=[self getValueByNull: statement:22];
-                record.GRANDTOTAL=[self getValueByNull: statement:23];
-                record.WICKETNO=[self getValueByNull: statement:24];
-                record.WICKETTYPE=[self getValueByNull: statement:25];
-                record.WICKETEVENT=[self getValueByNull: statement:26];
-                record.MARKEDFOREDIT=[self getValueByNull: statement:27];
-                record.PENALTYRUNS=[self getValueByNull: statement:28];
-                record.PENALTYTYPECODE=[self getValueByNull: statement:29];
-                record.ISINNINGSLASTOVER=[self getValueByNull: statement:30];
-                record.VIDEOFILEPATH=[self getValueByNull: statement:31];
+               // GetSEBallCodeDetailsForBallEvents *record=[[GetSEBallCodeDetailsForBallEvents alloc]init];
+//
+//                record.BALLCODE= [self getValueByNull: statement: 0];
+//                record.BALLNO=[self getValueByNull: statement:1];
+//                record.BOWLER=[self getValueByNull: statement:2];
+//                record.STRIKER=[self getValueByNull: statement:3];
+//                record.NONSTRIKER=[self getValueByNull: statement:4];
+//                record.BOWLTYPE=[self getValueByNull: statement:5];
+//                record.SHOTTYPE=[self getValueByNull: statement:6];
+//                record.TOTALRUNS=[self getValueByNull: statement:7];
+//                record.TOTALEXTRAS=[self getValueByNull: statement:8];
+//                record.OVERNO=[self getValueByNull: statement:9];
+//                record.BALLNO=[self getValueByNull: statement:10];
+//                record.BALLCOUNT=[self getValueByNull: statement:11];
+//                record.ISLEGALBALL=[self getValueByNull: statement:12];
+//                record.ISFOUR=[self getValueByNull: statement:13];
+//                record.ISSIX=[self getValueByNull: statement:14];
+//                record.RUNS=[self getValueByNull: statement:15];
+//                record.OVERTHROW=[self getValueByNull: statement:16];
+//                record.TOTALRUNS=[self getValueByNull: statement:17];
+//                record.WIDE=[self getValueByNull: statement:18];
+//                record.NOBALL=[self getValueByNull: statement:19];
+//                record.BYES=[self getValueByNull: statement:20];
+//                record.LEGBYES=[self getValueByNull: statement:21];
+//                record.TOTALEXTRAS=[self getValueByNull: statement:22];
+//                record.GRANDTOTAL=[self getValueByNull: statement:23];
+//                record.WICKETNO=[self getValueByNull: statement:24];
+//                record.WICKETTYPE=[self getValueByNull: statement:25];
+//                record.WICKETEVENT=[self getValueByNull: statement:26];
+//                record.MARKEDFOREDIT=[self getValueByNull: statement:27];
+//                record.PENALTYRUNS=[self getValueByNull: statement:28];
+//                record.PENALTYTYPECODE=[self getValueByNull: statement:29];
+//                record.ISINNINGSLASTOVER=[self getValueByNull: statement:30];
+//                record.VIDEOFILEPATH=[self getValueByNull: statement:31];
+//                [GetBallCodeDetailsArray addObject:record];
+                
+                BallEventRecord *record=[[BallEventRecord alloc]init];
+                record.objBallcode=[self getValueByNull:statement :0];
+                record.objBallno=[self getValueByNull:statement :1];
+                record.objBowltype=[self getValueByNull:statement :5];
+                //[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)]
+                record.objShottype=[self getValueByNull:statement :6];
+                //[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                
+                record.objTotalruns=[self getValueByNull:statement :7];
+                record.objTotalextras=[self getValueByNull:statement :8];
+                record.objOverno=[self getValueByNull:statement :9];
+                record.objBallcount=[self getValueByNull:statement :10];
+                record.objIslegalball=[self getValueByNull:statement :11];
+                record.objIsFour=[self getValueByNull:statement :12];
+                record.objIssix=[self getValueByNull:statement :13];
+                record.objRuns=[self getValueByNull:statement :14];
+                record.objOverthrow=[self getValueByNull:statement :15];
+                record.objWide=[self getValueByNull:statement :16];
+                record.objNoball=[self getValueByNull:statement :17];
+                record.objByes=[self getValueByNull:statement :18];
+                record.objLegByes=[self getValueByNull:statement :19];
+                record.objGrandtotal=[self getValueByNull:statement :20];
+                record.objWicketno=[self getValueByNull:statement :21];
+                record.objWicketType=[self getValueByNull:statement : 22];
+                record.objMarkedforedit=[self getValueByNull:statement : 23];
+                record.objPenalty=[self getValueByNull:statement : 24];
+                record.objPenaltytypecode=[self getValueByNull:statement : 25];
+//                record.objVideoFile=[self getValueByNull:statement : 26];
                 [GetBallCodeDetailsArray addObject:record];
+                
+                
             }
             sqlite3_reset(statement);
         }
