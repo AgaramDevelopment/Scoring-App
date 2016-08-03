@@ -263,7 +263,7 @@
                     [self openContentView];
                 }else{
                     
-                    [self showDialog:[errorItemObj objectForKey:@"DataItem"] andTitle:@"Login failed"];
+                    [self showDialog:[errorItemObj objectForKey:@"DataItem"] andTitle:@"Login"];
                 }
                 
                     
@@ -367,7 +367,7 @@
  * Show message for given title and content
  */
 -(void) showDialog:(NSString*) message andTitle:(NSString*) title{
-    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:@"Login" message:message delegate:self cancelButtonTitle:@"Close" otherButtonTitles: nil];
     
     [alertDialog show];
 }

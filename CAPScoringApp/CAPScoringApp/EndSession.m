@@ -749,7 +749,7 @@ int POS_TEAM_TYPE = 1;
 - (IBAction)btn_delete:(id)sender {
     
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"End Session"
                                                    message: @"Do you want to Revert?"
                                                   delegate: self
                                          cancelButtonTitle:@"Yes"
