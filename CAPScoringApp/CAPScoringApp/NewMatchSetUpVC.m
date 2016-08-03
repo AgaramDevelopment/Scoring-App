@@ -374,7 +374,7 @@ NSRegularExpression *isMatchedByRegex;
     
     if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"]) {
         NSLog(@"yes");
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ScoreEnginExit"];
         [self.navigationController popViewControllerAnimated:YES];
        
     }
