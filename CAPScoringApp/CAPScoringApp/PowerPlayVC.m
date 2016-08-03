@@ -315,44 +315,44 @@
     NSString *powerplaytypetxt = self.lbl_setpowerplay.text;
     
     if([powerplaystartovertxt isEqual:@""] && [powerplayendovertxt isEqual:@""] && [powerplaytypetxt isEqual:@"Select powerplay"]){
-        [self showDialog:@"Please enter Start Over,End Over and Powerplaytype." andTitle:@"Powerplay"];
+        [self showDialog:@"Please enter Start Over,End Over and Powerplaytype." andTitle:@"Power Play"];
         return NO;
     }else if([powerplayendovertxt isEqual:@""] && [powerplaytypetxt isEqual:@"Select powerplay"]){
-        [self showDialog:@"Please enter End Over and Powerplaytype." andTitle:@"Powerplay"];
+        [self showDialog:@"Please enter End Over and Powerplaytype." andTitle:@"Power Play"];
         return NO;
     }else if([powerplaystartovertxt isEqual:@""] && [powerplaytypetxt isEqual:@"Select powerplay"]){
-        [self showDialog:@"Please enter start Over and Powerplaytype." andTitle:@"Powerplay"];
+        [self showDialog:@"Please enter start Over and Powerplaytype." andTitle:@"Power Play"];
         return NO;
     }else if([powerplaystartovertxt isEqual:@""] && [powerplayendovertxt isEqual:@""]){
-        [self showDialog:@"Please enter start Over and End Over." andTitle:@"Powerplay"];
+        [self showDialog:@"Please enter start Over and End Over." andTitle:@"Power Play"];
         return NO;
     }else
         
         if([powerplaystartovertxt isEqual:@""]){
-            [self showDialog:@"Please enter Start Over." andTitle:@"Powerplay"];
+            [self showDialog:@"Please enter Start Over." andTitle:@"Power Play"];
             return NO;
         }
         else if([powerplayendovertxt isEqual:@""]){
-            [self showDialog:@"Please enter End Over." andTitle:@"Powerplay"];
+            [self showDialog:@"Please enter End Over." andTitle:@"Power Play"];
             return NO;
             
         }
         else if([powerplaytypetxt isEqual:@"Select powerplay"]){
-            [self showDialog:@"Please Choose Powerplaytype" andTitle:@"Powerplay"];
+            [self showDialog:@"Please Choose Powerplaytype" andTitle:@"Power Play"];
             return NO;
         }
         else if([powerplaystartovertxt intValue]  >= [powerplayendovertxt intValue]){
-            [self showDialog:@"End Over Should be greater than Start Over." andTitle:@"Powerplay"];
+            [self showDialog:@"End Over Should be greater than Start Over." andTitle:@"Power Play"];
             return NO;
             
         }
         else  if([matchover intValue] < [powerplaystartovertxt intValue]){
-            [self showDialog:@"Start Over Should not exceed Maximum Over." andTitle:@"Powerplay"];
+            [self showDialog:@"Start Over Should not exceed Maximum Over." andTitle:@"Power Play"];
             return NO;
             
         }
         else if([matchover intValue] < [powerplayendovertxt intValue]){
-            [self showDialog:@"End Over Should not exceed Maximum Over." andTitle:@"Powerplay"];
+            [self showDialog:@"End Over Should not exceed Maximum Over." andTitle:@"Power Play"];
             return NO;
         }
     
@@ -699,7 +699,7 @@
                 
             }
             else{
-                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Power play" message:@"The powerplay type already exist" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Power Play" message:@"The powerplay type already exist" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alter show];
                 return  NO;
                 

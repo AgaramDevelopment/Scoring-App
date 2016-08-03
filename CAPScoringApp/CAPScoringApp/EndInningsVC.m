@@ -648,7 +648,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
 - (IBAction)btn_delete:(id)sender {
     
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"End Innings"
                                                    message: @"Do you want to Revert?"
                                                   delegate: self
                                          cancelButtonTitle:@"Yes"
