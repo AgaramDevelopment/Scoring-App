@@ -16,7 +16,7 @@
 
 //@synthesize BOWLINGTEAMCODE;
 
-+(void) InsertScoreEngine:
+-(void) InsertScoreEngine:
 (NSString *)COMPETITIONCODE:
 (NSString*)MATCHCODE :
 (NSString*) TEAMCODE :
@@ -150,8 +150,6 @@
     if([dbInsertScoreEngine GetBallCodeForInsertScoreEngine : COMPETITIONCODE :MATCHCODE].length != 0)
     {
         BOOL SqlStatus = [dbInsertScoreEngine UpdateMatchStatusForInsertScoreEngine : COMPETITIONCODE :MATCHCODE ];
-      //  NSLog(@"%@ - status",SqlStatus);
-        
     }
     BALLCOUNT=[dbInsertScoreEngine GetBallCountForInsertScoreEngine : COMPETITIONCODE :MATCHCODE :TEAMCODE: INNINGSNO:OVERNO: BALLNO ];
     
@@ -312,6 +310,10 @@
             }
             
             [dbInsertScoreEngine UpdateInningsEventEventsForInsertScoreEngine :  T_STRIKERCODE : T_NONSTRIKERCODE :BOWLERCODE  : COMPETITIONCODE    : MATCHCODE       : TEAMCODE       : INNINGSNO];
+            
+            if(![APPEALTYPECODE isEqualToString:@""])
+                [self InsertAppealEvents : BALLCODENO : COMPETITIONCODE : MATCHCODE : TEAMCODE : [INNINGSNO integerValue] : APPEALTYPECODE : APPEALSYSTEMCODE : APPEALCOMPONENTCODE : APPEALUMPIRECODE : APPEALBATSMANCODE : APPEALISREFERRED : APPEALDECISION : APPEALCOMMENTS : APPEALFIELDERCODE : APPEALFLAG];
+            [self InsertFieldingEvents : COMPETITIONCODE : MATCHCODE : TEAMCODE : [INNINGSNO integerValue] : BALLCODENO : FIELDINGEVENTSFIELDERCODE : FIELDINGEVENTSISSUBSTITUTE : FIELDINGEVENTSFIELDINGFACTOR : FIELDINGEVENTSNETRUNS : FIELDINGEVENTSFLAG];
         }
         if([ISWICKET intValue] == 1)
         {
@@ -357,8 +359,6 @@
         
         [_dbManagerEndBall UPDATEWICKETOVERNOUPSE : COMPETITIONCODE:  MATCHCODE : INNINGSNO];
         
-        //     [INSERTSCOREBOARD  :	 COMPETITIONCODE: 	 MATCHCODE: 	 BATTINGTEAMCODE: 	 BOWLINGTEAMCODE: 	 INNINGSNO: 	 SB_STRIKERCODE: 	 ISFOUR: 	 ISSIX: 	 RUNS: 	 OVERTHROW: 	 ISWICKET: 	 WICKETTYPE: 	 WICKETPLAYER: 	 SB_BOWLERCODE: 	 N_OVERNO: 	 N_BALLNO: 	 BATTEAMRUNS: 	 WIDE: 	 NOBALL: 	 BYES: 	 LEGBYES: 	0:: 	1:	0:	0:	1];
-       // [dbInsertScoreEngine UpdateBSForInsertScoreEngine : COMPETITIONCODE:  MATCHCODE : INNINGSNO];
         
         //        BATTINGTEAMCODE =TEAMCODE;
         //
@@ -823,7 +823,7 @@
 }
 
 //SP_INSERTSEAPPEALEVENTS
--(void)InsertAppealEvents : (NSString*)BALLCODE : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)TEAMCODE : (NSString*)INNINGSNO : (NSString*)APPEALTYPECODE : (NSString*)APPEALSYSTEMCODE : (NSString*)APPEALCOMPONENTCODE : (NSString*)UMPIRECODE : (NSString*)BATSMANCODE : (NSString*)ISREFERRED : (NSString*)APPEALDECISION : (NSString*)APPEALCOMMENTS : (NSString*)FIELDERCODE : (NSString*)FLAG
+-(void)InsertAppealEvents : (NSString*)BALLCODE : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)TEAMCODE : (NSInteger)INNINGSNO : (NSString*)APPEALTYPECODE : (NSString*)APPEALSYSTEMCODE : (NSString*)APPEALCOMPONENTCODE : (NSString*)UMPIRECODE : (NSString*)BATSMANCODE : (NSString*)ISREFERRED : (NSString*)APPEALDECISION : (NSString*)APPEALCOMMENTS : (NSString*)FIELDERCODE : (NSString*)FLAG
 {
     DBManagerInsertScoreEngine *dbInsertScoreEngine = [[DBManagerInsertScoreEngine alloc]init];
     if([FLAG isEqualToString: @"I"])
