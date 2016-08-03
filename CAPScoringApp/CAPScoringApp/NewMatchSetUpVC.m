@@ -118,16 +118,13 @@ NSRegularExpression *isMatchedByRegex;
         _img_teamALogo.image = img;
     }
      self.btnUpdateOutlet.userInteractionEnabled=YES;
-    
+    self.btnUpdateOutlet.hidden=NO;
       [self.btnUpdateOutlet setBackgroundColor:[UIColor colorWithRed:(16/255.0f) green:(210/255.0f) blue:(158/255.0f) alpha:1.0f]];
     
 
     if(self.isEdit==YES)
     {
-        self.btnUpdateOutlet.userInteractionEnabled=NO;
-          self.btnUpdateOutlet.backgroundColor = [UIColor colorWithRed:(114/255.0f) green:(114/255.0f) blue:(114/255.0f) alpha:(1)];
-        
-
+       self.btnUpdateOutlet.hidden=YES;
     }
     
     
@@ -372,14 +369,24 @@ NSRegularExpression *isMatchedByRegex;
 
 - (IBAction)btn_back:(id)sender {
     
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"]) {
-        NSLog(@"yes");
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ScoreEnginExit"];
-        [self.navigationController popViewControllerAnimated:YES];
-       
+//    if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"]) {
+//        NSLog(@"yes");
+//        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"ScoreEnginExit"];
+//        [self.navigationController popViewControllerAnimated:YES];
+//       
+//    }
+    if(self.isEdit==YES)
+    {
+        ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
+        
+        scoreEngine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+        scoreEngine.matchSetUp = self.matchSetUp;
+        scoreEngine.matchCode=self.matchCode;
+        scoreEngine.competitionCode=self.competitionCode;
+        scoreEngine.matchTypeCode = self.matchTypeCode;
+        
+        [self.navigationController pushViewController:scoreEngine animated:YES];
     }
-    
-    
     
    else if([[NSUserDefaults standardUserDefaults] boolForKey:@"NewMatchSetUp"]) {
         NSLog(@"yes");
@@ -395,8 +402,13 @@ NSRegularExpression *isMatchedByRegex;
    
     else
        {  NSLog(@"yes");
+           FixturesVC*Fixvc = [[FixturesVC alloc]init];
            
-        [self.navigationController popViewControllerAnimated:YES];
+           Fixvc =  (FixturesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"fixtureSBID"];
+           Fixvc.CompitionCode=competitionCode;
+           [self.navigationController pushViewController:Fixvc animated:YES];
+ 
+        //[self.navigationController popViewControllerAnimated:YES];
     }
    
 }
