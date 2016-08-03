@@ -36,6 +36,7 @@
     NSString *MatchDate;
     NSString *MatchDateWithTime;
     BOOL isEndDate;
+    BOOL startTimeEqual;
     
 }
 @end
@@ -222,7 +223,16 @@ BOOL IsBack;
 
     }
     
-
+    if([self.MATCHTYPECODE isEqual:@"MSC116"] || [self.MATCHTYPECODE isEqual:@"MSC024"] || [self.MATCHTYPECODE isEqual:@"MSC115"] || [self.MATCHTYPECODE isEqual:@"MSC022"]){
+        
+        [comps setDay:1];
+        [comps setMonth:0];
+        [comps setYear:0];
+        
+    }
+    
+    
+    
     
    // self.timestamp = [[NSCalendar currentCalendar] dateFromComponents:comps];
     
@@ -496,11 +506,38 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
     return YES;
 }
 
+
+
+-(void)ValidationStartAndEndTime
+{
+    startTimeEqual=(endInningsArray.count!=0) ? YES:NO;
+    for(int i=0; i<endInningsArray.count; i++)
+    {
+        
+        EndInnings *obj =(EndInnings*)[endInningsArray objectAtIndex:i];
+        
+ 
+        if([self.txt_startInnings.text isEqualToString:obj.STARTTIME] && [self.txt_endInnings.text isEqualToString: obj.ENDTIME])
+        {
+            NSLog(@"same");
+            startTimeEqual=YES;
+        }
+        else
+        {
+            NSLog(@"notsame");
+            startTimeEqual=NO;
+        }
+        
+    }
+    
+}
+
 - (IBAction)btn_save:(id)sender {
     
     if([self checkValidation]){
-        
-      
+         [self ValidationStartAndEndTime];
+    
+
         if ([BtnurrentTittle isEqualToString:@"INSERT"]) {
 
              [innings InsertEndInnings : CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS: BtnurrentTittle];
@@ -515,8 +552,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
             
         }
         
-        
-     
+    
 
     if(self.checkInternetConnection){
         
