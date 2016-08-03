@@ -67,6 +67,9 @@ int POS_TEAM_TYPE = 1;
     _btn_save.hidden = YES;
     _btn_delete.hidden = YES;
     
+    self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:1.0f];
+    [_btn_delete setUserInteractionEnabled:NO];
+    
 }
 
 
@@ -200,7 +203,7 @@ int POS_TEAM_TYPE = 1;
       self.view_allControls.hidden = YES;
     self.view_datePicker.hidden=YES;
     self.btn_save.hidden = YES;
-    self.Btn_Delete.hidden = YES;
+    self.btn_delete.hidden = YES;
     
 }
 
@@ -231,17 +234,24 @@ int POS_TEAM_TYPE = 1;
     NSDateComponents *comps = [[NSDateComponents alloc] init];
     if([self.MATCHTYPECODE isEqual:@"MSC114"] || [self.MATCHTYPECODE isEqual:@"MSC023"])
     {
-        [comps setDay:1];
+        [comps setDay:5];
         [comps setMonth:0];
         [comps setYear:0];
     }
-    else
+    else if([fetchSeRecord.INNINGSNO isEqualToString:@"1"])
     {
         [comps setDay:1];
         [comps setMonth:0];
         [comps setYear:0];
         
+    }else{
+        
+        [comps setDay:1];
+        [comps setMonth:0];
+        [comps setYear:0];
     }
+    
+   
     
     // self.timestamp = [[NSCalendar currentCalendar] dateFromComponents:comps];
     
@@ -389,39 +399,41 @@ int POS_TEAM_TYPE = 1;
     
  
     }
-    else
-    {
-    static NSString *CellIdentifier = @"row";
-    EndSessionTVC *cell = (EndSessionTVC *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (cell == nil) {
-      [[NSBundle mainBundle] loadNibNamed:@"EndSessionTVC" owner:self options:nil];
-        cell = self.GridRow;
-       self.GridRow = nil;
-    }
-    
-    
-    EndSessionRecords *end=(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
-    
-    cell.lbl_startSessionTime.text = end.SESSIONSTARTTIME;
-    cell.lbl_endSessionTime.text = end.SESSIONENDTIME;
-    cell.lbl_teamName.text = end.SHORTTEAMNAME;
-
+    else if(tableView == _tbl_session){
+        static NSString *CellIdentifier = @"row";
+        EndSessionTVC *cell = (EndSessionTVC *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         
-    cell.lbl_sessionNo.text = [NSString stringWithFormat:@"%@", end.SESSIONNO];
+        if (cell == nil) {
+            [[NSBundle mainBundle] loadNibNamed:@"EndSessionTVC" owner:self options:nil];
+            cell = self.GridRow;
+            self.GridRow = nil;
+        }
+        
+        EndSessionRecords *end=(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
+        
+        
+        cell.lbl_startSessionTime.text = end.SESSIONSTARTTIME == @"" ? @"0" : end.SESSIONSTARTTIME ;
+        cell.lbl_endSessionTime.text = end.SESSIONENDTIME== @"" ? @"0" : end.SESSIONENDTIME;
+        cell.lbl_teamName.text = end.SHORTTEAMNAME;
+        
+        
+        cell.lbl_sessionNo.text = [NSString stringWithFormat:@"%@", end.SESSIONNO];
         
         
         cell.lbl_dayNo.text = end.DAYNO;
-    
-    
-    return cell;
+        
+        return cell;
+
     }
+    
+    
     return 0;
 }
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    self.view_addBtn.hidden = YES;
      EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
     _scroll_EndSession.scrollEnabled = YES;
     
@@ -494,7 +506,9 @@ int POS_TEAM_TYPE = 1;
     
         _btn_save.hidden = NO;
         _btn_delete.hidden = NO;
-   
+        
+      self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f];
+        [_btn_delete setUserInteractionEnabled:YES];
     
 }
 
@@ -513,6 +527,14 @@ int POS_TEAM_TYPE = 1;
     BtnurrentTittle = [NSString stringWithFormat:self.btn_save.currentTitle];
     BtnurrentTittle = @"INSERT";
     
+    [self.btn_save setTitle: @"SAVE" forState: UIControlStateNormal];
+    
+    self.view_addBtn.hidden = YES;
+    self.lbl_duration.text = @"";
+    self.txt_startTime.text = @"";
+    self.txt_endTime.text = @"";
+    self.lbl_sessionDominant.text = @"";
+    
     self.view_heading.hidden = YES;
     self.view_allControls.hidden = NO;
     self.tbl_session.hidden = YES;
@@ -520,14 +542,25 @@ int POS_TEAM_TYPE = 1;
     _btn_delete.hidden = NO;
     back=NO;
     
+    self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:1.0f];
+    [_btn_delete setUserInteractionEnabled:NO];
+    
 }
 
 -(BOOL) checkValidation{
     
     if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
-        [self showDialog:@"Duration should be greated than zero" andTitle:@""];
+         [self showDialog:@"Duration should be greated than zero" andTitle:@""];
         return NO;
     }
+    
+    
+
+        
+//    if([self.txt_endTime.text isEqualToString:@""]){
+//        [self showDialog:@"Please Choose End Innings Time" andTitle:@"End Innings"];
+//        return NO;
+//    }
     return YES;
 }
 
@@ -675,6 +708,7 @@ int POS_TEAM_TYPE = 1;
     self.tbl_session.hidden = NO;
     self.view_allControls.hidden = YES;
     self.view_heading.hidden = NO;
+    self.view_addBtn.hidden = NO;
         
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"End Session Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
@@ -746,17 +780,22 @@ int POS_TEAM_TYPE = 1;
 
     
     
+    
       
         [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
           [self.tbl_session reloadData];
         
-        [endSessionArray removeLastObject];
+       // [endSessionArray removeLastObject];
         
         self.tbl_session.hidden = NO;
         self.view_heading.hidden = NO;
         self.view_allControls.hidden = YES;
         self.btn_delete.hidden = YES;
         self.btn_save.hidden = YES;
+         self.view_addBtn.hidden = NO;
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"End Session Deleted Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+
         //[self.Btn_back sendActionsForControlEvents:UIControlEventTouchUpInside];
 }
 }
@@ -805,6 +844,7 @@ int POS_TEAM_TYPE = 1;
         self.view_datePicker.hidden = YES;
         _btn_save.hidden = YES;
         _btn_delete.hidden = YES;
+        self.view_addBtn.hidden = NO;
         back = YES;
         
     }else if (back == YES){

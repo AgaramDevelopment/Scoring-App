@@ -1502,7 +1502,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVl-7V-Zif">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PLAYERTEAM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcl-xV-F0o">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEAM NAME" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcl-xV-F0o">
                                     <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="145" id="OG6-1X-qoJ"/>
@@ -1824,13 +1824,10 @@
                             <exclude reference="lgz-si-jFr"/>
                         </mask>
                         <mask key="constraints">
-                            <exclude reference="2LO-4q-Mm9"/>
-                            <exclude reference="2c5-XI-RcI"/>
-                            <exclude reference="mNh-a0-CWU"/>
-                            <exclude reference="x5n-dr-XPU"/>
-                            <exclude reference="OoA-07-ODV"/>
-                            <exclude reference="bfp-o3-Pvk"/>
-                            <exclude reference="u1B-vi-oRt"/>
+                            <exclude reference="JnX-hv-aIe"/>
+                            <exclude reference="q8A-Pb-fR7"/>
+                            <exclude reference="10f-yM-cSe"/>
+                            <exclude reference="cCs-V6-MY7"/>
                             <exclude reference="0JI-3k-mrz"/>
                             <exclude reference="R56-1g-ehc"/>
                             <exclude reference="daJ-zS-MU7"/>
@@ -1838,6 +1835,10 @@
                             <exclude reference="Bq1-5S-ZHg"/>
                             <exclude reference="WLs-Hv-HY1"/>
                             <exclude reference="YA2-Az-IHE"/>
+                            <exclude reference="2LO-4q-Mm9"/>
+                            <exclude reference="2c5-XI-RcI"/>
+                            <exclude reference="mNh-a0-CWU"/>
+                            <exclude reference="x5n-dr-XPU"/>
                             <exclude reference="YeB-lb-YmF"/>
                             <exclude reference="crX-O1-Om4"/>
                             <exclude reference="qzT-Lz-2yg"/>
@@ -1846,10 +1847,9 @@
                             <exclude reference="fb0-gY-OEz"/>
                             <exclude reference="fok-2d-9lX"/>
                             <exclude reference="oOE-Kf-NpS"/>
-                            <exclude reference="10f-yM-cSe"/>
-                            <exclude reference="cCs-V6-MY7"/>
-                            <exclude reference="JnX-hv-aIe"/>
-                            <exclude reference="q8A-Pb-fR7"/>
+                            <exclude reference="OoA-07-ODV"/>
+                            <exclude reference="bfp-o3-Pvk"/>
+                            <exclude reference="u1B-vi-oRt"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=regular">
@@ -1864,13 +1864,10 @@
                             <include reference="lgz-si-jFr"/>
                         </mask>
                         <mask key="constraints">
-                            <include reference="2LO-4q-Mm9"/>
-                            <include reference="2c5-XI-RcI"/>
-                            <include reference="mNh-a0-CWU"/>
-                            <include reference="x5n-dr-XPU"/>
-                            <include reference="OoA-07-ODV"/>
-                            <include reference="bfp-o3-Pvk"/>
-                            <include reference="u1B-vi-oRt"/>
+                            <include reference="JnX-hv-aIe"/>
+                            <include reference="q8A-Pb-fR7"/>
+                            <include reference="10f-yM-cSe"/>
+                            <include reference="cCs-V6-MY7"/>
                             <include reference="0JI-3k-mrz"/>
                             <include reference="R56-1g-ehc"/>
                             <include reference="daJ-zS-MU7"/>
@@ -1878,6 +1875,10 @@
                             <include reference="Bq1-5S-ZHg"/>
                             <include reference="WLs-Hv-HY1"/>
                             <include reference="YA2-Az-IHE"/>
+                            <include reference="2LO-4q-Mm9"/>
+                            <include reference="2c5-XI-RcI"/>
+                            <include reference="mNh-a0-CWU"/>
+                            <include reference="x5n-dr-XPU"/>
                             <include reference="YeB-lb-YmF"/>
                             <include reference="crX-O1-Om4"/>
                             <include reference="qzT-Lz-2yg"/>
@@ -1886,10 +1887,9 @@
                             <include reference="fb0-gY-OEz"/>
                             <include reference="fok-2d-9lX"/>
                             <include reference="oOE-Kf-NpS"/>
-                            <include reference="10f-yM-cSe"/>
-                            <include reference="cCs-V6-MY7"/>
-                            <include reference="JnX-hv-aIe"/>
-                            <include reference="q8A-Pb-fR7"/>
+                            <include reference="OoA-07-ODV"/>
+                            <include reference="bfp-o3-Pvk"/>
+                            <include reference="u1B-vi-oRt"/>
                         </mask>
                     </variation>
                 </view>
