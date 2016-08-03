@@ -724,7 +724,7 @@
             [self officialcodeimage];
             [self groundcodeimage];
             
-        [self showDialog1:@"SYNC DATA COMPLETED" andTitle:@"DashBorad"];
+        [self showDialog1:@"SYNC DATA COMPLETED" andTitle:@"DashBoard"];
             
             }
             
@@ -737,7 +737,7 @@
     
        
             UIAlertView *alert = [[UIAlertView alloc]
-                                  initWithTitle:@"DashBorad"
+                                  initWithTitle:@"DashBoard"
                                   message:@"Failed"
                                   delegate:nil //or self
                                   cancelButtonTitle:@"Failed"
@@ -754,7 +754,7 @@
      }
     
      else{
-          [self showDialog:@"Network Error" andTitle:@"DashBorad"];
+          [self showDialog:@"Network Error" andTitle:@"DashBoard"];
      }
     
 }

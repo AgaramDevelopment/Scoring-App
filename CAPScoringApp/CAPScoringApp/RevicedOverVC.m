@@ -77,7 +77,7 @@
             }
             else
             {
-                UIAlertView * objalterview =[[UIAlertView alloc]initWithTitle:nil message:@"Please Enter Number Only" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView * objalterview =[[UIAlertView alloc]initWithTitle:@"Revised Overs" message:@"Please Enter Number Only" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [objalterview show];
             }
             return NO;
@@ -128,7 +128,7 @@
     NSInteger OdiText = [oversTxt intValue];
     if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){
         if(twentyText > 20){
-            [self showDialog:@"Please Enter Below 20 Overs" andTitle:@"Match Setup"];
+            [self showDialog:@"Please Enter Below 20 Overs" andTitle:@"Revised Overs"];
             return NO;
         }
     }
@@ -137,13 +137,13 @@
     if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){
         if(OdiText > 50){
             
-            [self showDialog:@"Please Enter Below 50 Overs" andTitle:@"Error"];
+            [self showDialog:@"Please Enter Below 50 Overs" andTitle:@"Revised Overs"];
             return NO;
         }
     }
     
     if([OldOvers intValue] > [txt_overs.text intValue]){
-        [self showDialog:@"The Revised Over is not possible when the data exist for this innings." andTitle:@"Revised Over"];
+        [self showDialog:@"The Revised Over is not possible when the data exist for this innings." andTitle:@"Revised Overs"];
         return NO;
     
 //    if([OldOvers intValue] < [txt_overs.text intValue]){
@@ -153,10 +153,10 @@
 //        
    }
     if([txt_overs.text isEqual:@""]){
-        [self showDialog:@"Please enter number only" andTitle:@"Revised Over"];
+        [self showDialog:@"Please enter number only" andTitle:@"Revised Overs"];
                 return NO;
     } if([txt_commentss.text isEqual:@""]){
-        [self showDialog:@"Please enter Comments." andTitle:@"Revised Over"];
+        [self showDialog:@"Please enter Comments." andTitle:@"Revised Overs"];
         return NO;
     }
     return YES;
@@ -178,7 +178,7 @@ if([self formValidation]){
     DBManager *objDBManager = [[DBManager alloc]init];
     
     [objDBManager updateRevisedOvers:txt_overs.text comments:txt_commentss.text matchCode:self.matchCode competitionCode:self.competitionCode];
-    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Revised Over" message:@"Revised Over Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Revised Overs" message:@"Revised Over Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alter show];
     alter.tag =100;
     [self startService];
