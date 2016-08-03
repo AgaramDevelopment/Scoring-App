@@ -1732,7 +1732,7 @@
     {
    
         [self MatcheventMethod];
-        [self.sideviewtable reloadData  ];
+        [self.sideviewtable reloadData];
         isToss=YES;
     }
     self.sideviewXposition.constant =0;
