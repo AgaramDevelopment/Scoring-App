@@ -38,6 +38,8 @@
 @property (strong,nonatomic) NSNumber *STARTOVERNO;
 @property (strong,nonatomic) NSNumber *ENDOVERNO;
 @property (strong,nonatomic) NSNumber *RUNSSCORED;
+@property (strong,nonatomic) NSString *ENDOVERBALLNO;
+@property (strong,nonatomic) NSString *STARTOVERBALLNO;
 
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scroll_EndSession;
