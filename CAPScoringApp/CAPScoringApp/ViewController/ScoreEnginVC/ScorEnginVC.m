@@ -2516,7 +2516,12 @@
             if([self checkRunsByLB_B] && [self iswicketPending]&&[self checkValidation]){
                 
                     [self StartBall];
+                
+                //Close bowler list
+                if(currentBowlersTableView!=nil){
+                    [currentBowlersTableView removeFromSuperview];
                 }
+            }
         }
     }
 }
@@ -2730,8 +2735,8 @@
     {
         NSNumber *temp = [NSNumber numberWithInteger:fetchSEPageLoadRecord.BATTEAMOVRBALLS];
         int ballCount = ((int)fetchSEPageLoadRecord.BATTEAMOVRBALLS)+1;
-        
-        [InsertSEScoreEngine InsertScoreEngine :
+        InsertSEScoreEngine *objInsertSEScoreEngine = [[InsertSEScoreEngine alloc] init];
+        [objInsertSEScoreEngine InsertScoreEngine :
          self.competitionCode :
          self.matchCode  :
          fetchSEPageLoadRecord.BATTINGTEAMCODE :
@@ -2806,7 +2811,7 @@
          self.ballEventRecord.objPenaltyreasoncode://PENALTYREASONCODE:
          @""://BALLSPEED:
          @""://UNCOMFORTCLASSIFCATION:
-                            selectedWicketEvent:
+         selectedWicketEvent:
          [appealEventDict objectForKey:@"AppealTypeCode"]://APPEALTYPECODE:
          [appealEventDict objectForKey:@"AppealSystemSelct"]://APPEALSYSTEMCODE:
          [appealEventDict objectForKey:@"AppealComponentSelct"]://APPEALCOMPONENTCODE:
@@ -3378,7 +3383,7 @@
                                     [self.btn_StartBall sendActionsForControlEvents:UIControlEventTouchUpInside];
                                 }
                                 overStatus=@"1";
-                                [endInnings manageSeOverDetails :self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code :[NSString stringWithFormat:@"%d", over]:fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode:fetchSEPageLoadRecord.currentBowlerPlayerCode];
+                                [endInnings manageSeOverDetails :self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code :[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode:fetchSEPageLoadRecord.currentBowlerPlayerCode];
                                 [self reloadBowlerTeamBatsmanDetails];
                                 if(![fetchSEPageLoadRecord.ISOTHERSMATCHTYPE isEqual:@"MSC117"] && over >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
                                 {
@@ -3408,18 +3413,12 @@
                                         
                                     }
                                 }
-                                
-                                
                             }
                         }
-                        
-                        
-                        //ballticker clear
-                        
                         if(![ValidedMatchType containsObject: [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.MATCHTYPE]] &&[self.ballEventRecord.objOverno intValue] >= fetchSEPageLoadRecord.MATCHTYPE && ![MuliteDayMatchtype containsObject: [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.MATCHTYPE]])
                         {
                             
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Enning is Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"Warning", nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings is Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                             [altert show];
                             [altert setTag:1008];
                             if(fetchSEPageLoadRecord.INNINGSNO == 2)
@@ -3546,7 +3545,6 @@
         }
         else if(alertView.tag == 1008)
         {
-            NSLog(@"dfjbgb");
             [self.btn_StartOver setTitle:@"START OVER" forState:UIControlStateNormal];
             self.btn_StartOver.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
             self.btn_StartBall.userInteractionEnabled=NO;
@@ -3725,7 +3723,7 @@
     self.img_pichmap.hidden=YES;
     self.PichMapTittle.hidden=YES;
     self.view_Wagon_wheel.hidden=YES;
-    self.objcommonRemarkview.hidden=YES;
+    //self.objcommonRemarkview.hidden=YES;
     
     
     //    if(extrasTableView !=nil){
@@ -3738,6 +3736,17 @@
     UIButton *selectBtnTag=(UIButton*)sender;
     
     
+    //Remark
+    if(isRemarkOpen && selectBtnTag.tag!=120){
+        
+        if(self.ballEventRecord.objRemark == nil || [self.ballEventRecord.objRemark isEqual:@""]){
+            [self unselectedViewBg:_view_remark];
+        }
+        
+        self.objcommonRemarkview.hidden=YES;
+        isRemarkOpen = NO;
+    }
+       
     if(ispichmapSelectValue==NO && selectBtnTag.tag != 110)
     {
         [self unselectedButtonBg:self.btn_pichmap];
@@ -3805,9 +3814,13 @@
         
     }
     
-    if(isFieldingSelected && fieldingOption>0){
+    if(isFieldingSelected && fieldingOption!=0 && selectBtnTag.tag!=118){
         fieldingOption = 0;
+        isFieldingSelected = NO;
+        self.view_fastBowl.hidden = YES;
+        [self unselectedViewBg:self.view_fielding_factor];
     }
+    
     
 //    if(isWicketSelected && wicketOption>0){
 //        wicketOption = 0;
@@ -3974,7 +3987,11 @@
         
         
             
-       
+        [self resetBowlerBatsmanTableView];
+        isStrickerOpen = NO;
+        isNONStrickerOpen = NO;
+        isBowlerOpen = NO;
+        
          if(isWicketSelected && wicketOption>0){
 //            [self unselectedButtonBg:self.btn_B4];
 //            [self unselectedButtonBg:self.btn_B6];
@@ -5413,7 +5430,18 @@
     self.img_pichmap.hidden=YES;
     self.PichMapTittle.hidden=YES;
     self.view_Wagon_wheel.hidden=YES;
-    self.objcommonRemarkview.hidden=YES;
+    
+    
+    //Remark
+    if(isRemarkOpen && selectBtnTag.tag!=120){
+        
+        if(self.ballEventRecord.objRemark == nil || [self.ballEventRecord.objRemark isEqual:@""]){
+            [self unselectedViewBg:_view_remark];
+        }
+        
+        self.objcommonRemarkview.hidden=YES;
+        isRemarkOpen = NO;
+    }
     
     if (ispichmapSelectValue== NO && selectBtnTag.tag != 110)
     {
@@ -5485,9 +5513,13 @@
     }
     
     
-    if(isFieldingSelected && fieldingOption>0){
+    if(isFieldingSelected && fieldingOption!=0 && selectBtnTag.tag!=118){
         fieldingOption = 0;
+        isFieldingSelected = NO;
+        self.view_fastBowl.hidden = YES;
+        [self unselectedViewBg:self.view_fielding_factor];
     }
+    
     
 //    if(isWicketSelected && wicketOption>0){
 //        wicketOption = 0;
@@ -5850,6 +5882,12 @@
     else if(selectBtnTag.tag==118) //fielding factor
     {
         //[self selectBtncolor_Action:@"118" :nil :207];
+        
+        //Close stricker, nonstricket and
+        [self resetBowlerBatsmanTableView];
+        isStrickerOpen = NO;
+        isNONStrickerOpen = NO;
+        isBowlerOpen = NO;
         
         if(isFieldingSelected){
             
@@ -9313,7 +9351,38 @@ self.lbl_umpirename.text=@"";
     }
 
 }
+
+-(void) hideTableViewOnStrickerNonStrickerAndBowlerSelect{
+    //wicket
+    if(isWicketSelected && wicketOption !=0){
+        
+        if(selectedwickettype!=nil ){
+            
+            [self setResetRunsOnWicketDeselect];
+            
+        }
+        isWicketSelected= NO;
+        selectedwickettype = nil;
+        selectedWicketEvent = nil;
+        selectedStrikernonstriker = nil;
+        selectedwicketBowlerlist =nil;
+        wicketOption=0;
+        [self unselectedButtonBg:self.btn_wkts];
+        self.view_fastBowl.hidden = YES;
+        
+        
+    }
+    if(isFieldingSelected && fieldingOption!=0){
+        fieldingOption = 0;
+        isFieldingSelected = NO;
+        self.view_fastBowl.hidden = YES;
+       [self unselectedViewBg:self.view_fielding_factor];
+    }
+    
+}
+
 - (IBAction)btn_stricker_names:(id)sender {
+    [self hideTableViewOnStrickerNonStrickerAndBowlerSelect];
     [self resetBowlerBatsmanTableView];
     [self reloadPMWW];
     if(!isStrickerOpen){
@@ -9367,6 +9436,7 @@ self.lbl_umpirename.text=@"";
     
 }
 - (IBAction)btn_nonstricker_name:(id)sender {
+    [self hideTableViewOnStrickerNonStrickerAndBowlerSelect];
     [self resetBowlerBatsmanTableView];
     [self reloadPMWW];
     if(!isNONStrickerOpen){
@@ -9418,7 +9488,7 @@ self.lbl_umpirename.text=@"";
     }
 }
 - (IBAction)btn_bowler_name:(id)sender {
-    
+    [self hideTableViewOnStrickerNonStrickerAndBowlerSelect];
     [self resetBowlerBatsmanTableView];
     if(!isBowlerOpen){
         isStrickerOpen = NO;

@@ -376,37 +376,36 @@
 - (IBAction)Finish_btn:(id)sender {
       [self DurationCalculation];
     
-     BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
-     BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
-       BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
-    
-    if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil && [self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil && [self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
-    {
-        [self ShowAlterView:@"Please Select Start Time\nPlease Select End Time\nPlease Add Comments"];
-    }
-    else if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil)
-    {
-        [self ShowAlterView:@"Please Select Start Time"];
-    }
-    else if([self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil)
-    {
-        [self ShowAlterView:@"Please Select End Time"];
-    }
-   else if([self.lbl_Duration.text integerValue]<=0){
-        [self ShowAlterView:@"Duration should be greated than zero"];
-   }
-//    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)
+//     BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
+//     BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
+//       BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
+//    
+//    if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil && [self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil && [self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
 //    {
-//        [self ShowAlterView:@"Duration Not Calculated"];
+//        [self ShowAlterView:@"Please Select Start Time\nPlease Select End Time\nPlease Add Comments"];
 //    }
-    else if([self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
-    {
-        [self ShowAlterView:@"Please Add Comments"];
-    }
-   
-    else{
-    
-    BREAKNO =[objDBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
+//    else if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil)
+//    {
+//        [self ShowAlterView:@"Please Select Start Time"];
+//    }
+//    else if([self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil)
+//    {
+//        [self ShowAlterView:@"Please Select End Time"];
+//    }
+//   else if([self.lbl_Duration.text integerValue]<=0){
+//        [self ShowAlterView:@"Duration should be greated than zero"];
+//   }
+////    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)
+////    {
+////        [self ShowAlterView:@"Duration Not Calculated"];
+////    }
+//    else if([self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
+//    {
+//        [self ShowAlterView:@"Please Add Comments"];
+//    }
+//   
+    if ([ self   formValidation]) {
+   BREAKNO =[objDBManager GetMaxBreakNoForInsertBreaks:COMPETITIONCODE :MATCHCODE :INNINGSNO];
     
     
 
@@ -417,6 +416,7 @@
         _addbreak_lbl.text=@"BREAKS";
         _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
  [self startService:@"INSERT"];
+             [self showDialog:@"Break Inserted Successfully." andTitle:@"Breaks"];
     
     }
     
@@ -425,7 +425,7 @@
 
 -(void)ShowAlterView:(NSString *) alterMsg
 {
-    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:@"Breaks" message:alterMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [objAlter show];
 }
 
@@ -498,10 +498,11 @@
     }
     else
     {
-        
         _Text_BreakStart.text = @"";
         
-        
+        _btn_finish.hidden=NO;
+        _btn_delete.hidden=YES;
+        _btn_Update.hidden=YES;
         _addbreak_lbl.text=@"ADD BREAK";
         _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
         
@@ -510,11 +511,28 @@
         
         _lbl_Duration.text = @"";
         _text_Comments.text =@"";
+        
         self.view_gridview.hidden=YES;
-//        self.tbl_breaklist.hidden=YES;
-       // self.view_penaltyTittle.hidden=YES;
-        isShow_BreakrecordTbl= YES;
-        self.btn_Add.hidden =YES;
+        // self.view_penaltyTittle.hidden=YES;
+        isShow_BreakrecordTbl= NO;
+        self.btn_Add.hidden =NO;
+        
+//        _Text_BreakStart.text = @"";
+//        
+//        
+//        _addbreak_lbl.text=@"ADD BREAK";
+//        _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
+//        
+//        _text_EndBreak.text = @"";
+//        
+//        
+//        _lbl_Duration.text = @"";
+//        _text_Comments.text =@"";
+//        self.view_gridview.hidden=YES;
+////        self.tbl_breaklist.hidden=YES;
+//       // self.view_penaltyTittle.hidden=YES;
+//        isShow_BreakrecordTbl= YES;
+//        self.btn_Add.hidden =YES;
         [self.tbl_breaklist reloadData];
     }
 
@@ -555,10 +573,8 @@
        
         _addbreak_lbl.text=@"BREAKS";
         _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
-
-        //  [self startService:@"UPDATE"];
-        
-        
+    //[self startService:@"UPDATE"];
+  [self showDialog:@"Break Updated Successfully." andTitle:@"Breaks"];
 //        BreakVC*add = [[BreakVC alloc]initWithNibName:@"BreakVC" bundle:nil];
 //        
 //        add.COMPETITIONCODE=self.COMPETITIONCODE;
@@ -617,9 +633,8 @@
     [self DeleteBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKCOMMENTS :BREAKNO];
  
     
+      [self showDialog:@"Break Deleted Successfully." andTitle:@"Breaks"];
     
-    [self.tbl_breaklist reloadData];
-   
     
 }
 
@@ -771,9 +786,83 @@
 
 }
 
+
+- (BOOL) formValidation{
+    
+    
+    
+    BREAKCOMMENTS=[NSString stringWithFormat:@"%@",[_text_Comments text]];
+    BREAKENDTIME =[NSString stringWithFormat:@"%@",[_text_EndBreak text]];
+    BREAKSTARTTIME =[NSString stringWithFormat:@"%@",[_Text_BreakStart text]];
+    
+    if(([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil) && ([self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil) && ([self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil))
+    {
+        [self showDialog:@"Please Select Start Time\nPlease Select End Time\nPlease Add Comments" andTitle:@"Breaks"];
+        return NO;
+    }
+    
+    else if(([self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil) && ([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil) )
+    {
+        [self showDialog:@"Please Select Start Time \n Please Add Comments" andTitle:@"Breaks"];
+        return NO;
+    }
+    else if(([self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil) && ([self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)  )
+    {
+        [self showDialog:@"Please Select End Time \n Please Add Comments" andTitle:@"Breaks"];
+        return NO;
+        
+    }
+    else if (([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil) &&  ([self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil))
+    {
+        [self showDialog:@"Please Select Start Time \n Please Select End Time" andTitle:@"Breaks"];
+        return NO;
+        
+        
+    }
+    else
+    {
+        if([self.Text_BreakStart.text isEqualToString:@""] || self.Text_BreakStart.text==nil)
+        {
+            [self showDialog:@"Please Select Start Time" andTitle:@"Breaks"];
+            return NO;
+        }
+        else if([self.text_EndBreak.text isEqualToString:@""] || self.text_EndBreak.text==nil)
+        {
+            [self showDialog:@"Please Select End Time" andTitle:@"Breaks"];
+            return NO;
+        }
+        else if([self.lbl_Duration.text integerValue]<=0){
+            [self showDialog:@"Duration should be greated than zero" andTitle:@"Breaks"];
+            return NO;
+        }
+        //    else if([self.lbl_Duration.text isEqualToString:@""] || self.lbl_Duration.text==nil)
+        //    {
+        //        [self ShowAlterView:@"Duration Not Calculated"];
+        //    }
+        else if([self.text_Comments.text isEqualToString:@""] || self.text_Comments.text==nil)
+        {
+            [self showDialog:@"Please Add Comments" andTitle:@"Breaks"];
+            return NO;
+        }
+    }
+    
+    return YES;
+}
+
+-(void) showDialog:(NSString*) message andTitle:(NSString*) title{
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    
+    [alertDialog show];
+}
+
+
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
+
 
 @end
