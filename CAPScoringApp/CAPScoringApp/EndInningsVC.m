@@ -222,6 +222,8 @@ BOOL IsBack;
 
     }
     
+
+    
    // self.timestamp = [[NSCalendar currentCalendar] dateFromComponents:comps];
     
     
@@ -363,8 +365,7 @@ BOOL IsBack;
     self.btn_save.hidden = NO;
     self.btn_delete.hidden = NO;
     
-    
-    
+
     [self.btn_save setTitle: @"SAVE" forState: UIControlStateNormal];
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -505,6 +506,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
              [innings InsertEndInnings : CompetitionCode :MatchCode :fetchSePageLoad.BOWLINGTEAMCODE :fetchSePageLoad.BATTINGTEAMCODE :fetchSePageLoad.INNINGSNO  :_txt_startInnings.text :_txt_endInnings.text :OVERNO :TOTALRUNS :WICKETS: BtnurrentTittle];
             
             [self.delegate EndInningsSaveBtnAction];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"EndInningsFinish"];
             
         }else{
             

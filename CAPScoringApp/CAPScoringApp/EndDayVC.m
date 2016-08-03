@@ -22,12 +22,9 @@
     BOOL IsBack;
     BOOL IsEditMode;
     BOOL isEndDate;
-NSDateFormatter *formatter;
-     NSString *MatchDate1;
-       NSString *MatchDate;
-    
-    
-    
+    NSDateFormatter *formatter;
+    NSString *MatchDate1;
+    NSString *MatchDate;
     
     FetchEndDayDetails *fetchEndDayDetails;
 
@@ -145,7 +142,7 @@ NSDateFormatter *formatter;
     }
     else
     {
-        [comps setDay:5];
+        [comps setDay:1];
         [comps setMonth:0];
         [comps setYear:0];
         
@@ -314,8 +311,8 @@ NSDateFormatter *formatter;
    FetchEndDay *fetchEndInn=(FetchEndDay*)[fetchEndDayDetails.FetchEndDayArray  objectAtIndex:indexPath.row];
     
     
-    self.txt_startTime.text = fetchEndInn.STARTTIME;
-    self.txt_endTime.text = fetchEndInn.ENDTIME;
+    self.txt_startTime.text = fetchEndInn.STARTTIME == @"0" ? @"" : fetchEndInn.STARTTIME;
+    self.txt_endTime.text = fetchEndInn.ENDTIME == @"0" ? @"" : fetchEndInn.ENDTIME ;
     self.lbl_teamName.text = fetchEndInn.TEAMNAME;
     self.lbl_innings.text = fetchEndInn.INNINGSNO;
     self.lbl_duration.text = fetchEndInn.DURATION;

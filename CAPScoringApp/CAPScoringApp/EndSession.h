@@ -102,6 +102,7 @@
 @property (weak, nonatomic) IBOutlet UIView *view_heading;
 
 @property (weak, nonatomic) IBOutlet UIView *view_datePicker;
+@property (weak, nonatomic) IBOutlet UIView *view_addBtn;
 
 - (IBAction)show_SelectedDate:(id)sender;
 

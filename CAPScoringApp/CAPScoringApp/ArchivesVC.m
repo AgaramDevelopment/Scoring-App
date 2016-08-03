@@ -354,9 +354,10 @@ NSArray *MuliteDayMatchtype;
 
 -(IBAction)Back_BtnAction:(id)sender
 {
-    if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"]) {
+    if([[NSUserDefaults standardUserDefaults] boolForKey:@"ScoreEnginExit"] || ![[NSUserDefaults standardUserDefaults] boolForKey:@"EndInningsFinish"]) {
         NSLog(@"yes");
          [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"];
+          [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"EndInningsFinish"];
         TorunamentVC*tournmentVc = [[TorunamentVC alloc]init];
         
         tournmentVc =  (TorunamentVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"tornmentid"];

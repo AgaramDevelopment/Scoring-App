@@ -86,7 +86,22 @@
 (NSString *)PENALTYREASONCODE:
 (NSString *)BALLSPEED:
 (NSString *)UNCOMFORTCLASSIFCATION:
-(NSString *)WICKETEVENT
+(NSString *)WICKETEVENT:
+(NSString*)APPEALTYPECODE:
+(NSString*)APPEALSYSTEMCODE:
+(NSString*)APPEALCOMPONENTCODE:
+(NSString*)APPEALUMPIRECODE:
+(NSString*)APPEALBATSMANCODE:
+(NSString*)APPEALISREFERRED:
+(NSString*)APPEALDECISION:
+(NSString*)APPEALCOMMENTS:
+(NSString*)APPEALFIELDERCODE:
+(NSString*)APPEALFLAG:
+(NSString*)FIELDINGEVENTSFIELDERCODE:
+(NSString*)FIELDINGEVENTSISSUBSTITUTE:
+(NSString*)FIELDINGEVENTSFIELDINGFACTOR:
+(NSString*)FIELDINGEVENTSNETRUNS:
+(NSString*)FIELDINGEVENTSFLAG
 {
     
     DBManagerEndBall *_dbManagerEndBall = [[DBManagerEndBall alloc]init];
@@ -818,7 +833,6 @@
     else if([FLAG isEqualToString: @"E"])
     {
         [dbInsertScoreEngine UpdateAppealEvents : APPEALTYPECODE : APPEALSYSTEMCODE : APPEALCOMPONENTCODE : UMPIRECODE : BATSMANCODE : ISREFERRED : APPEALDECISION : APPEALCOMMENTS : FIELDERCODE : BALLCODE];
-        
     }
     else if([FLAG isEqualToString: @"D"])
     {
@@ -835,16 +849,13 @@
     {
         [dbInsertScoreEngine InsertFieldingEvents :COMPETITIONCODE: MATCHCODE :TEAMCODE :INNINGSNO: BALLCODE: FIELDERCODE :ISSUBSTITUTE : FIELDINGFACTOR: NETRUNS];
     }
-				
     else if([FLAG isEqualToString: @"E"])
     {
         [dbInsertScoreEngine UpdateFieldingEvents :FIELDERCODE: ISSUBSTITUTE :FIELDINGFACTOR :NETRUNS: BALLCODE: FIELDINGFACTOR ];
-        
-    }	
+    }
     else if([FLAG isEqualToString: @"D"])
     {
-        [dbInsertScoreEngine DeleteFieldingEvents : BALLCODE : FIELDINGFACTOR];
-        
+        [dbInsertScoreEngine DeleteFieldingEvents : BALLCODE : FIELDINGFACTOR];        
     }		
 }
 @end

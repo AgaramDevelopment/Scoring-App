@@ -810,12 +810,36 @@ else
         }
         if([ dbOtherWicket GetInningsNoForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO]!=0)
         {
-            [ dbOtherWicket UpdateInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+            
+            if ([WICKETTYPE isEqualToString:@"MSC102"])
+            {
+                
+                WICKETNO=[NSNumber numberWithInt:0];
+                [ dbOtherWicket UpdateInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO:WICKETNO];
+            }
+            else
+            {
+                 WICKETNO=[NSNumber numberWithInt:1];
+            [ dbOtherWicket UpdateInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO: WICKETNO];
+            }
         }
         else
         {
             
-            [ dbOtherWicket InsertInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+            if ([WICKETTYPE isEqualToString:@"MSC102"])
+            {
+                
+                WICKETNO=[NSNumber numberWithInt:0];
+            
+                [ dbOtherWicket InsertInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO : WICKETNO];
+            }
+            else
+            {
+                WICKETNO=[NSNumber numberWithInt:1];
+                
+                [ dbOtherWicket InsertInningsSummaryForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO:WICKETNO];
+            
+            }
         }
        
         
