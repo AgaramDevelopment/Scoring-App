@@ -694,17 +694,14 @@
     //Fielding
     NSMutableArray *fieldingFactorArray = [fetchSeBallCodeDetails getFieldingFactorArray];
     if(fieldingFactorArray.count>0){
-        
-        
         selectedNRS = [fieldingFactorArray objectAtIndex:4];
-        
         selectedfieldPlayer = [[BowlerEvent alloc]init];
         selectedfieldPlayer.BowlerCode =  [fieldingFactorArray objectAtIndex:0];
         selectedfieldPlayer.BowlerName =  [fieldingFactorArray objectAtIndex:1];
         
         selectedfieldFactor = [[FieldingFactorRecord alloc]init];
         selectedfieldFactor.fieldingfactorcode = [fieldingFactorArray objectAtIndex:3];
-        
+        [self selectedViewBg:self.view_fielding_factor];
     }
     
     
@@ -5903,16 +5900,16 @@
             self.view_bowlType.hidden = YES;
             self.view_fastBowl.hidden = YES;
             //[self unselectedButtonBg:selectBtnTag];
-            
-            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(4/255.0f) alpha:1.0f];//Normal
+            [self unselectedViewBg:self.view_fielding_factor];
+//            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(4/255.0f) alpha:1.0f];//Normal
             
         }else{
             DBManager *objDBManager = [[DBManager alloc]init];
             //Fielding Factor
             _fieldingfactorArray=[[NSMutableArray alloc]init];
             _fieldingfactorArray =[objDBManager RetrieveFieldingFactorData];
-            
-            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
+            [self selectedViewBg:self.view_fielding_factor];
+//            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
             
             isFieldingSelected = YES;
             fieldingOption = 1;
