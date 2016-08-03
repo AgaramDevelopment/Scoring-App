@@ -92,7 +92,7 @@
 
 -(BOOL) SetDayEventsForInsertEndDay:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) STARTTIME:(NSString*) ENDTIME:(NSString*) DAYNO:(NSString*) BATTINGTEAMCODE:(NSString*) TOTALRUNS:(NSString*) TOTALOVERS:(NSString*) TOTALWICKETS:(NSString*) COMMENTS;
 
--(NSString*) GetSessionNoForInsertEndDay:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) DAYNO:(NSString*) COUNT;
+-(BOOL) GetSessionNoForInsertEndDay:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) DAYNO:(NSString*) COUNT;
 
 -(BOOL) SetSessionEventsForInsertEndDay:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) DAYNO:(NSString*) SESSIONNO:(NSString*) BATTINGTEAMCODE:(NSString*) STARTOVERBALLNO:(NSString*) TOTALOVERS:(NSString*) RUNSSCORED:(NSString*) WICKETLOST;
 

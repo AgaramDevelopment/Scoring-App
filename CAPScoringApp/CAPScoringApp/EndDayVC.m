@@ -107,6 +107,8 @@
     
    
     [self duration];
+    
+    _tbl_endday.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 
@@ -306,6 +308,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+     self.view_addbtn.hidden = YES;
     self.scroll_endDay.scrollEnabled = YES;
     
    FetchEndDay *fetchEndInn=(FetchEndDay*)[fetchEndDayDetails.FetchEndDayArray  objectAtIndex:indexPath.row];
@@ -393,33 +396,26 @@
     self.view_datePicker.hidden=YES;
     IsBack = NO;
     IsEditMode =NO;
+    self.view_addbtn.hidden = YES;
     
     [_btn_save setTitle:@"SAVE" forState:UIControlStateNormal];
 
 }
 
 -(BOOL) checkValidation{
+    
+    
+    if ([self.txt_endTime.text isEqualToString:@""]) {
+        
+        [self showDialog:@"Please Choose Day End Time" andTitle:@"End Day"];
+        return NO;
+    }
  
     if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
-        [self showDialog:@"Duration should be greated than zero" andTitle:@""];
+        [self showDialog:@"Duration should be greated than zero" andTitle:@"End Day"];
         
         return NO;
     }
-       // else if ((self.txt_startTime.text = @"") && (self.txt_endTime.text = @"")){
-//        
-//        [self showDialog:@"Please Select Start Time and End Time" andTitle:@""];
-//        return NO;
-//    }else if (self.txt_startTime.text = @""){
-//        [self showDialog:@"Please Select Start Time" andTitle:@""];
-//        return NO;
-//
-//        
-//    }else if (self.txt_endTime.text = @""){
-//        [self showDialog:@"Please Select End Time" andTitle:@""];
-//        return NO;
-//        
-//        
-//    }
 
         
     return YES;
@@ -549,6 +545,7 @@
         self.view_allControls.hidden = YES;
         self.tbl_endday.hidden = NO;
            self.gridHeaderView.hidden=NO;
+         self.view_addbtn.hidden = NO;
         IsBack = YES;
         
     }else if (IsBack == YES){

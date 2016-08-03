@@ -69,7 +69,7 @@ int POS_TEAM_TYPE = 1;
     
     self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:1.0f];
     [_btn_delete setUserInteractionEnabled:NO];
-    
+    _tbl_session.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 
@@ -133,7 +133,7 @@ int POS_TEAM_TYPE = 1;
     
     
      _lbl_day.text = sessionRecords.DAYNO;
-    //_lbl_sessionNo.text = [NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO];
+    _lbl_SessionNo.text = [NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO];
     _lbl_InningsNo.text = [NSString stringWithFormat:@"%@",sessionRecords.INNINGSNOS];
     _lbl_teamBatting.text = sessionRecords.TEAMNAMES;
     _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO == nil ? @"0" : sessionRecords.STARTOVERNO];
@@ -495,7 +495,7 @@ int POS_TEAM_TYPE = 1;
     self.lbl_InningsNo.text = [NSString stringWithFormat:@"%@",inningsNo];
     
         _lbl_sessionStartOver.text = startOver;
-        _lbl_sessionEndOver.text = endOverNO;
+        _lbl_sessionEndOver.text = endOverNO = @"" ? @"0" : endOverNO;
         _lbl_runScored.text = run;
         _lbl_wicketLost.text = wickets;
         _lbl_sessionDominant.text = obj.DOMINANTNAME;
@@ -549,18 +549,19 @@ int POS_TEAM_TYPE = 1;
 
 -(BOOL) checkValidation{
     
-    if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
-         [self showDialog:@"Duration should be greated than zero" andTitle:@""];
+    
+    if([self.txt_endTime.text isEqualToString:@""]){
+        [self showDialog:@"Please Choose End Session Time" andTitle:@"End Session"];
         return NO;
     }
     
+    if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
+         [self showDialog:@"Duration should be greated than zero" andTitle:@"End Session"];
+        return NO;
+    }
     
 
-        
-//    if([self.txt_endTime.text isEqualToString:@""]){
-//        [self showDialog:@"Please Choose End Innings Time" andTitle:@"End Innings"];
-//        return NO;
-//    }
+   
     return YES;
 }
 
@@ -719,85 +720,104 @@ int POS_TEAM_TYPE = 1;
 
 - (IBAction)btn_delete:(id)sender {
     
-    {
-        
-        dbEndSession = [[DBManagerEndSession alloc]init];
     
-      NSString *dayNO =  [dbEndSession getDayNo : competitioncode: matchcode];
-        
-        if ([dayNO isEqualToString:@"0"]) {
-        
-            dayNO = @"1";
-        }
-        
-        NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : dayNO];
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+                                                   message: @"Do you want to Revert?"
+                                                  delegate: self
+                                         cancelButtonTitle:@"Yes"
+                                         otherButtonTitles:@"No",nil];
+    
+    alert.tag = 100;
+    [alert show];
+    
+    
+}
 
-        [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO : dayNO : sessionNo];
-        
-        
-        if(self.checkInternetConnection){
+
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 100) { // UIAlertView with tag 1 detected
+        if (buttonIndex == 0)
+        {
             
-            AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+            dbEndSession = [[DBManagerEndSession alloc]init];
             
-            //Show indicator
-            [delegate showLoading];
-            //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+            NSString *dayNO =  [dbEndSession getDayNo : competitioncode: matchcode];
             
-            //dispatch_get_main_queue(), ^
-            {
+            if ([dayNO isEqualToString:@"0"]) {
                 
-    NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDSESSION/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],competitioncode,matchcode,@"NULL",fetchSeRecord.INNINGSNO,sessionRecords.DAYNO,[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO],@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"NULL"@"DELETE"];
+                dayNO = @"1";
+            }
+            
+            NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : dayNO];
+            
+            [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO : dayNO : sessionNo];
+            
+            
+            if(self.checkInternetConnection){
                 
-   
-                NSLog(@"%@",baseURL);
-                NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
                 
-                NSURLRequest *request = [NSURLRequest requestWithURL:url];
-                NSURLResponse *response;
-                NSError *error;
-                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+                //Show indicator
+                [delegate showLoading];
+                //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
                 
-                
-                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-                
-                if(rootArray !=nil && rootArray.count>0){
-                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                    NSString *success = [valueDict valueForKey:@"DataItem"];
-                    if([success isEqual:@"Success"]){
+                //dispatch_get_main_queue(), ^
+                {
+                    
+                    NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDSESSION/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],competitioncode,matchcode,@"NULL",fetchSeRecord.INNINGSNO,sessionRecords.DAYNO,[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO],@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"NULL"@"DELETE"];
+                    
+                    
+                    NSLog(@"%@",baseURL);
+                    NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                    
+                    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+                    NSURLResponse *response;
+                    NSError *error;
+                    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+                    
+                    
+                    NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+                    
+                    if(rootArray !=nil && rootArray.count>0){
+                        NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                        NSString *success = [valueDict valueForKey:@"DataItem"];
+                        if([success isEqual:@"Success"]){
+                            
+                        }
+                    }else{
                         
                     }
-                }else{
                     
+                    [delegate hideLoading];
                 }
                 
-                [delegate hideLoading];
+                
             }
             
             
+            [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
+            [self.tbl_session reloadData];
+            
+            // [endSessionArray removeLastObject];
+            
+            self.tbl_session.hidden = NO;
+            self.view_heading.hidden = NO;
+            self.view_allControls.hidden = YES;
+            self.btn_delete.hidden = YES;
+            self.btn_save.hidden = YES;
+            self.view_addBtn.hidden = NO;
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"End Session Deleted Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [alter show];
+            
+           
         }
-        
-        
-
+        }
     
-    
-    
-      
-        [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
-          [self.tbl_session reloadData];
+    else
+    {
         
-       // [endSessionArray removeLastObject];
-        
-        self.tbl_session.hidden = NO;
-        self.view_heading.hidden = NO;
-        self.view_allControls.hidden = YES;
-        self.btn_delete.hidden = YES;
-        self.btn_save.hidden = YES;
-         self.view_addBtn.hidden = NO;
-        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"End Session Deleted Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alter show];
-
-        //[self.Btn_back sendActionsForControlEvents:UIControlEventTouchUpInside];
-}
+    }
 }
 
 
@@ -845,6 +865,7 @@ int POS_TEAM_TYPE = 1;
         _btn_save.hidden = YES;
         _btn_delete.hidden = YES;
         self.view_addBtn.hidden = NO;
+         objDrobDowntbl.hidden=YES;
         back = YES;
         
     }else if (back == YES){
@@ -856,6 +877,7 @@ int POS_TEAM_TYPE = 1;
         
         
         [self.delegate ChangeVCBackBtnAction];
+       
 
         back = NO;
     }
