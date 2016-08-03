@@ -671,7 +671,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
     
     
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Match Results"
                                                    message: @"Do you want to Revert?"
                                                   delegate: self
                                          cancelButtonTitle:@"Yes"
@@ -871,14 +871,14 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
     else if (![self textValidation:self.txtf_team_a_point.text] || ([_txtf_team_a_point.text intValue]<0 || [_txtf_team_a_point.text intValue]>9)) {
         
         
-        [self showDialog:@"Please enter A point between 0 to 9.\n" andTitle:@"Match Result"];
+        [self showDialog:@"Please enter A point between 0 to 9.\n" andTitle:@"Match Results"];
         flag = NO;
         
     }
     else if (![self textValidation:self.txtf_team_b_point.text]  || ([_txtf_team_b_point.text intValue]<0 || [_txtf_team_b_point.text intValue]>9)) {
         
         
-        [self showDialog:@"Please enter B point between 0 to 9.\n" andTitle:@"Match Result"];
+[self showDialog:@"Please enter B point between 0 to 9.\n" andTitle:@"Match Results"];
         flag = NO;
         
     }
@@ -888,7 +888,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
 
     
     if(![errorMessage isEqual:@""]){
-        [self showDialog:errorMessage andTitle:@"MatchResult"];
+        [self showDialog:errorMessage andTitle:@"Match Results"];
     }
     
     return flag;
@@ -898,7 +898,7 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
  * Show message for given title and content
  */
 -(void) showDialog:(NSString*) message andTitle:(NSString*) title{
-    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:title message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    UIAlertView *alertDialog = [[UIAlertView alloc]initWithTitle:@"Match Results" message:message delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     
     [alertDialog show];
 }

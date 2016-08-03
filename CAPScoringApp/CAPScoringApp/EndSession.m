@@ -57,6 +57,8 @@ int POS_TEAM_TYPE = 1;
 @synthesize ENDOVERNO;
 @synthesize RUNSSCORED;
 @synthesize DAYNO;
+@synthesize ENDOVERBALLNO;
+@synthesize STARTOVERBALLNO;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -136,9 +138,14 @@ int POS_TEAM_TYPE = 1;
     _lbl_SessionNo.text = [NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO];
     _lbl_InningsNo.text = [NSString stringWithFormat:@"%@",sessionRecords.INNINGSNOS];
     _lbl_teamBatting.text = sessionRecords.TEAMNAMES;
-    _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO == nil ? @"0" : sessionRecords.STARTOVERNO];
     
-    _lbl_sessionEndOver.text = [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO = @"" ? @"0" :sessionRecords.ENDOVERNO];
+//    _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO == nil ? @"0" : sessionRecords.STARTOVERNO];
+//    
+//    _lbl_sessionEndOver.text = [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO = @"" ? @"0" :sessionRecords.ENDOVERNO];
+    
+    _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO = @"0.1" ? @"0" :sessionRecords.STARTOVERNO];
+
+    _lbl_sessionEndOver.text = sessionRecords.ENDOVERBALLNO;
     
     _lbl_runScored.text = [NSString stringWithFormat:@"%@",sessionRecords.RUNSSCORED];
     _lbl_wicketLost.text = [NSString stringWithFormat:@"%@",sessionRecords.WICKETLOST];
@@ -150,7 +157,8 @@ int POS_TEAM_TYPE = 1;
     STARTOVERNO = sessionRecords.STARTOVERNO;
     ENDOVERNO = sessionRecords.ENDOVERNO;
     RUNSSCORED = sessionRecords.RUNSSCORED;
-    
+    STARTOVERBALLNO = sessionRecords.STARTOVERBALLNO;
+    ENDOVERBALLNO = sessionRecords.ENDOVERBALLNO;
     
 
     [self.view layoutIfNeeded];
@@ -466,6 +474,10 @@ int POS_TEAM_TYPE = 1;
         
     NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : obj.DAYNO];
         
+       NSString  *ENDBALLNO=[dbEndSession GetEndBallNoForFetchEndSession :competitioncode: matchcode : sessionRecords.SESSIONNO :obj.DAYNO: obj.INNINGSNO : endOverNO];
+        
+        
+        
     NSString*startInningsTime = obj.SESSIONSTARTTIME;
     NSString*endInningsTime  = obj.SESSIONENDTIME;
     NSString*teamName = obj.TEAMNAME;
@@ -494,10 +506,12 @@ int POS_TEAM_TYPE = 1;
         
     self.lbl_InningsNo.text = [NSString stringWithFormat:@"%@",inningsNo];
     
-        _lbl_sessionStartOver.text = startOver;
-        _lbl_sessionEndOver.text = endOverNO = @"" ? @"0" : endOverNO;
-        _lbl_runScored.text = run;
-        _lbl_wicketLost.text = wickets;
+        _lbl_sessionStartOver.text = obj.STARTOVER;
+        //_lbl_sessionEndOver.text = endOverNO = @"" ? @"0" : endOverNO;
+        
+        _lbl_sessionEndOver.text = obj.ENDOVER;
+        _lbl_runScored.text = obj.TOTALRUNS;
+        _lbl_wicketLost.text = obj.TOTALWICKETS;
         _lbl_sessionDominant.text = obj.DOMINANTNAME;
         
          self.view_heading.hidden = YES;
@@ -550,10 +564,10 @@ int POS_TEAM_TYPE = 1;
 -(BOOL) checkValidation{
     
     
-    if([self.txt_endTime.text isEqualToString:@""]){
-        [self showDialog:@"Please Choose End Session Time" andTitle:@"End Session"];
-        return NO;
-    }
+//    if([self.txt_endTime.text isEqualToString:@""]){
+//        [self showDialog:@"Please Choose End Session Time" andTitle:@"End Session"];
+//        return NO;
+//    }
     
     if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
          [self showDialog:@"Duration should be greated than zero" andTitle:@"End Session"];
@@ -576,7 +590,7 @@ int POS_TEAM_TYPE = 1;
 
 -(void)ValidationStartAndEndTime
 {
-   startTimeEqual=(endSessionArray.count>0)?NO:YES;
+   startTimeEqual=(endSessionArray.count!=0) ? YES:NO;
     for(int i=0; i<endSessionArray.count; i++)
     {
         EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:i];
@@ -603,12 +617,14 @@ int POS_TEAM_TYPE = 1;
         
         //int SESSIONNO =[sessionRecords.SESSIONNO intValue];
         int STARTOVERNO  = [sessionRecords.STARTOVERNO intValue];
-        int ENDOVERNO   =[sessionRecords.ENDOVERNO intValue];
+       // float ENDOVERNO   =[sessionRecords.ENDOVERBALLNO floatValue];
         int  RUNSSCORED =[sessionRecords.RUNSSCORED intValue];
-        [self ValidationStartAndEndTime];
-     if(startTimeEqual== NO)
-    {
-        [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :fetchSeRecord.DAYNO : SESSIONNO :_txt_startTime.text :_txt_endTime.text :[NSString stringWithFormat:@"%d",STARTOVERNO]: [NSString stringWithFormat:@"%d",ENDOVERNO] :[NSString stringWithFormat:@"%d" ,RUNSSCORED] :[NSString stringWithFormat:@"%d",fetchSeRecord.BATTEAMWICKETS] :Dominate];
+        
+        //[self ValidationStartAndEndTime];
+//     if(startTimeEqual== NO)
+//    {
+        
+        [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :fetchSeRecord.DAYNO : SESSIONNO :_txt_startTime.text :_txt_endTime.text :[NSString stringWithFormat:@"%d",STARTOVERNO]: [NSString stringWithFormat:@"%@",ENDOVERBALLNO] :[NSString stringWithFormat:@"%d" ,RUNSSCORED] :[NSString stringWithFormat:@"%d",fetchSeRecord.BATTEAMWICKETS] :Dominate];
         
         if(self.checkInternetConnection){
             
@@ -651,11 +667,9 @@ int POS_TEAM_TYPE = 1;
                 [delegate hideLoading];
             }
             
-           
-            
         }
-        
-     
+    
+    }
     else{
         
         
@@ -665,16 +679,16 @@ int POS_TEAM_TYPE = 1;
         
         if ([dayNO isEqualToString:@"0"]) {
             
-           dayNO = @"1";
+            dayNO = @"1";
         }
         
         
         NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : dayNO];
-
+        
         
         [sessionRecords UpdateEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :dayNO :sessionNo :_txt_startTime.text :_txt_endTime.text :Dominate:fetchSeRecord.INNINGSNO:fetchSeRecord.BATTINGTEAMCODE:dayNO];
         
-
+        
         
         if(self.checkInternetConnection){
             
@@ -690,7 +704,7 @@ int POS_TEAM_TYPE = 1;
             {
                 
                 
-        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDSESSION/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],competitioncode, matchcode,fetchSeRecord.BATTINGTEAMCODE,fetchSeRecord.INNINGSNO,sessionRecords.DAYNO,[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO],_txt_startTime.text,_txt_endTime.text ,[NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO], [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO],[NSString stringWithFormat:@"%@" ,sessionRecords.RUNSSCORED],sessionRecords.WICKETLOST,@"(null)",BtnurrentTittle];
+                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDSESSION/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],competitioncode, matchcode,fetchSeRecord.BATTINGTEAMCODE,fetchSeRecord.INNINGSNO,sessionRecords.DAYNO,[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO],_txt_startTime.text,_txt_endTime.text ,[NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO], [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO],[NSString stringWithFormat:@"%@" ,sessionRecords.RUNSSCORED],sessionRecords.WICKETLOST,@"(null)",BtnurrentTittle];
                 
                 
                 NSLog(@"%@",baseURL);
@@ -722,34 +736,30 @@ int POS_TEAM_TYPE = 1;
         }
         
     }
-    
-    
-
-    
-    [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
-    [self.tbl_session reloadData];
-    self.tbl_session.hidden = NO;
-    self.view_allControls.hidden = YES;
-    self.view_heading.hidden = NO;
-    self.view_addBtn.hidden = NO;
+        
+        [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
+        [self.tbl_session reloadData];
+        self.tbl_session.hidden = NO;
+        self.view_allControls.hidden = YES;
+        self.view_heading.hidden = NO;
+        self.view_addBtn.hidden = NO;
         
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"End Session Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
     }
+    }
 
-    else{
-        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"The Session is already exists in the date." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alter show];
+//    else{
+//        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"The Session is already exists in the date." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [alter show];
+//        
+//    }
 
-    }
-    }
-    }
-}
 
 - (IBAction)btn_delete:(id)sender {
     
     
-    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"Alert"
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"End Session"
                                                    message: @"Do you want to Revert?"
                                                   delegate: self
                                          cancelButtonTitle:@"Yes"

@@ -160,7 +160,7 @@ BOOL isWicketSelected;
     }
     
     
-    
+    NSLog(@"constant=%@",self.highlightbtnxposition.constant);
     
     
     
@@ -179,9 +179,6 @@ BOOL isWicketSelected;
 //    }
     // Do any additional setup after loading the view.
 
-    
- 
-    
    }
 
 -(void)insertAfterAndBeforeMode:(NSString*)BALLCODE {
@@ -290,8 +287,32 @@ BOOL isWicketSelected;
     }
     if(isEdit==YES)
     {
-        [self.tbl_innnings reloadData];
+        //[self.tbl_innnings reloadData];
+        CGFloat xposition=self.selectbtnhighlight.frame.origin.x;
+        CGFloat btn1xposition=self.Btn_innings1team1.frame.origin.x;
+        CGFloat btn2xposition=self.Btn_innings1team2.frame.origin.x;
+        CGFloat btn3xposition =self.Btn_inning2steam1.frame.origin.x;
+        CGFloat btn4xposition =self.Btn_innings2team2.frame.origin.x;
+        if(xposition==btn1xposition)
+        {
+            [self.Btn_innings1team1 sendActionsForControlEvents:UIControlEventTouchUpInside];
+            NSLog(@"constant");
+        }
+       else if(xposition==btn2xposition)
+        {
+            [self.Btn_innings1team2 sendActionsForControlEvents:UIControlEventTouchUpInside];
+            NSLog(@"constant");
+        }
+        else if (xposition==btn3xposition)
+        {
+            [self.Btn_inning2steam1 sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
+        else if (xposition==btn4xposition)
+        {
+            [self.Btn_innings2team2 sendActionsForControlEvents:UIControlEventTouchUpInside];
+        }
     }
+    
   
 }
 -(void)customnavigationmethod
