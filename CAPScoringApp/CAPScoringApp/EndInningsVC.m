@@ -421,6 +421,7 @@ BOOL IsBack;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     self.Btn_Add.hidden=YES;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
