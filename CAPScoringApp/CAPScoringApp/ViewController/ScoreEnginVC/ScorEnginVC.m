@@ -3220,6 +3220,11 @@
             if([self checkRunsByLB_B] && [self iswicketPending]&&[self checkValidation]){
                 
                 [self StartBall];
+                //Close bowler list
+                if(currentBowlersTableView!=nil){
+                    [currentBowlersTableView removeFromSuperview];
+                }
+
                 
             }else{
                 isEndBallSuccess = NO;
@@ -3588,6 +3593,10 @@
 //        }
         if (alertView.tag == 3000 ) {
             [self StartBall];
+            //Close bowler list
+            if(currentBowlersTableView!=nil){
+                [currentBowlersTableView removeFromSuperview];
+            }
             
             //End over clicked with out end ball
             if(isEndOverOnEndBall){
@@ -3901,7 +3910,7 @@
         
     }
     
-    if(isDefensiveSelected && self.ballEventRecord.objShottype == nil && selectBtnTag.tag!=116){//defensive
+    if(isDefensiveSelected && self.ballEventRecord.objShottype == nil && selectBtnTag.tag!=117){//defensive
         
         [self unselectedViewBg:_view_defense];
         self.view_defensive.hidden = YES;
@@ -5578,7 +5587,7 @@
         
     }
     
-    if(isFastSelected && self.ballEventRecord.objBowltype == nil && !selectBtnTag.tag!=115){//Fast
+    if(isFastSelected && self.ballEventRecord.objBowltype == nil && selectBtnTag.tag!=115){//Fast
         
         [self unselectedViewBg:_view_fast];
         self.view_fastBowl.hidden = YES;
@@ -5594,7 +5603,7 @@
         
     }
     
-    if(isDefensiveSelected && self.ballEventRecord.objShottype == nil && selectBtnTag.tag!=116){//defensive
+    if(isDefensiveSelected && self.ballEventRecord.objShottype == nil && selectBtnTag.tag!=117){//defensive
         
         [self unselectedViewBg:_view_defense];
         self.view_defensive.hidden = YES;
@@ -6410,6 +6419,10 @@
     [_tbl_defensive reloadData];
     self.view_defensive.hidden=YES;
     isDefensiveSelected=NO;
+    
+    isFastSelected = NO;
+    isSpinSelected = NO;
+
     [self unselectedViewBg: self.view_fielding_factor];
      selectedfieldFactor = [[FieldingFactorRecord alloc]init];
     [self unselectedViewBg: self.view_Rbw];
