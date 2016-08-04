@@ -6401,7 +6401,12 @@ return @"";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                
+                
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AlertView"];
+
                 return YES;
+                
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);

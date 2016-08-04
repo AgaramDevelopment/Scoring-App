@@ -415,7 +415,17 @@
     
         _addbreak_lbl.text=@"BREAKS";
         _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
+        
+        
  [self startService:@"INSERT"];
+        
+        if([[NSUserDefaults standardUserDefaults] boolForKey:@"AlertView"]) {
+            NSLog(@"yes");
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AlertView"];
+            [self showDialog:@"Break Already Inserted." andTitle:@"Breaks"];
+        }
+        else
+        
              [self showDialog:@"Break Inserted Successfully." andTitle:@"Breaks"];
     
     }
