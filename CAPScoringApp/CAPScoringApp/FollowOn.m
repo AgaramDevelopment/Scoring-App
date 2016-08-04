@@ -59,12 +59,13 @@
     self.TEAMCODE =self.battingTeamCode;
     self.Tbl_Followon.hidden=YES;
     CommonArry =[[NSMutableArray alloc]init];
-   
     
-    if([self.inningsno isEqualToString:@"2"] || [self.inningsno isEqualToString:@"3"])
-    {
+
+    
+//    if([self.inningsno isEqualToString:@"2"] || [self.inningsno isEqualToString:@"3"])
+//    {
         followon=[[[DBManager alloc] init] getFollowOn:self.matchCode :self.compitionCode :self.inningsno];
-        if([followon isEqualToString:@"1"])
+        if([followon isEqualToString:@"1"] && [OVERNO isEqualToString:@"0"] && [BALLNO isEqualToString:@"0"] && [TOTALRUN isEqualToString:@"0"] && [WICKETS isEqualToString:@"0"])
         {
             
         [self.btn_Proceed setBackgroundColor:[UIColor grayColor]];
@@ -79,7 +80,7 @@
             [self.btn_Bowler setHidden:YES];
             
         }
-        else
+        else if([OVERNO isEqualToString:@"0"] && [BALLNO isEqualToString:@"0"] && [TOTALRUN isEqualToString:@"0"] && [WICKETS isEqualToString:@"0"])
         {
             [self.btn_Proceed setBackgroundColor:[UIColor colorWithRed:(16/255.0f) green:(210/255.0f) blue:(158/255.0f) alpha:1.0f]];
             self.btn_Proceed.userInteractionEnabled=YES;
@@ -89,15 +90,30 @@
             [self.btn_nonStriker setHidden:NO];
             [self.btn_Bowler setHidden:NO];
         }
+        else if([followon isEqualToString:@"1"] && [OVERNO isEqualToString:@"0"] && ![BALLNO isEqualToString:@"0"] && ![TOTALRUN isEqualToString:@"0"] && [WICKETS isEqualToString:@"0"])
+        {
+            [self.btn_Proceed setBackgroundColor:[UIColor grayColor]];
+            self.btn_Proceed.userInteractionEnabled=NO;
+            [self.btn_Revert setBackgroundColor:[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f]];
+            self.btn_Revert.userInteractionEnabled=YES;
+            self.lbl_Striker.text=self.strikerName;
+            self.lbl_nonStriker.text=self.nonStrikerName;
+            self.lbl_Bowler.text =self.bowlerName;
+            [self.btn_Striker setHidden:YES];
+            [self.btn_nonStriker setHidden:YES];
+            [self.btn_Bowler setHidden:YES];
+        }
 
-    }
-    else
-    {
-        [self.btn_Proceed setBackgroundColor:[UIColor grayColor]];
-        self.btn_Proceed.userInteractionEnabled=NO;
-        [self.btn_Revert setBackgroundColor:[UIColor grayColor]];
-         self.btn_Revert.userInteractionEnabled=NO;
-    }
+        else
+        {
+            [self.btn_Proceed setBackgroundColor:[UIColor colorWithRed:(16/255.0f) green:(210/255.0f) blue:(158/255.0f) alpha:1.0f]];
+            self.btn_Proceed.userInteractionEnabled=YES;
+            [self.btn_Revert setBackgroundColor:[UIColor grayColor]];
+            self.btn_Revert.userInteractionEnabled=NO;
+        }
+
+       
+    //}
     
 }
 -(IBAction)didClickStrickerSelection:(id)sender
@@ -182,9 +198,17 @@
         [self ShowAlterView:@"Please Select Bowler"];
     }
     else{
+        if([OVERNO isEqualToString:@"0"] && [BALLNO isEqualToString:@"0"] && [TOTALRUN isEqualToString:@"0"] && [WICKETS isEqualToString:@"0"])
+        {
+            UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:@"No Legitimate Balls Have Been Bowled in This Innings" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [objAlter show];
+        }
+        else
+        {
         UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:@"DO You Want To Enfourced Follow on" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"CANCEL", nil];
         [objAlter show];
         objAlter.tag = 100;
+        }
     }
     
 }
@@ -204,9 +228,18 @@
         [self ShowAlterView:@"Please Select Bowler"];
     }
     else{
+        if([OVERNO isEqualToString:@"0"] && ![BALLNO isEqualToString:@"0"] && ![TOTALRUN isEqualToString:@"0"] && [WICKETS isEqualToString:@"0"])
+        {
+            UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:@"Revert Innings not Possible When The Data Exist For Future Innings" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            [objAlter show];
+        }
+        else
+        {
+        
         UIAlertView *objAlter=[[UIAlertView alloc]initWithTitle:nil message:@"DO You Want To Revert Follow on" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:@"CANCEL", nil];
         [objAlter show];
         objAlter.tag = 102;
+        }
         //[self.delegate RedirectFollowOnPage];
         
     }
