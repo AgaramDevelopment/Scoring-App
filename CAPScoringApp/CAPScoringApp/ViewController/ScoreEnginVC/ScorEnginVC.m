@@ -2528,6 +2528,8 @@
         }
         else
         {
+            
+            
             if([self checkRunsByLB_B] && [self iswicketPending]&&[self checkValidation]){
                 
                     [self StartBall];
@@ -2537,6 +2539,7 @@
                     [currentBowlersTableView removeFromSuperview];
                 }
             }
+            
         }
     }
 }
@@ -13543,6 +13546,16 @@ self.lbl_umpirename.text=@"";
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Please complete fielding option." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
         [alter setTag:3007];
+        return NO;
+    }else if(fetchSEPageLoadRecord.strickerPlayerName==nil){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Please select Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:10002];
+        return NO;
+    }else if(fetchSEPageLoadRecord.nonstrickerPlayerName==nil){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Please select non Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:10003];
         return NO;
     }
     
