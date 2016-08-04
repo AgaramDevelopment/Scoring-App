@@ -100,6 +100,8 @@
 //DELETE OTHER WICKETS
 //------------------------
 
+-(BOOL)   UpdateInningsSummaryDetailForDeleteRetiredHurt: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO;
+
 -(NSMutableArray*) GetWicketPlayerandTypeForDeleteOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO : (NSNumber*) WICKETNO ;
 
 -(BOOL)   UpdateBattingSummaryForDeleteOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO : (NSString*) WICKETPLAYER;

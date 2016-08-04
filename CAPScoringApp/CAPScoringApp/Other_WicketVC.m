@@ -475,6 +475,7 @@ else
     if([self formValidation]){
  
     if(_ISEDITMODE){
+        
        [self UpdateOtherwickets:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO  :_WICKETTYPE :WICKETPLAYER :WICKETNO :VIDEOLOCATION :TOTALRUNS];
         
         
@@ -532,6 +533,7 @@ else
     self.Btn_Add.hidden=YES;
     isAddWicket=YES;
     isWicketlist=YES;
+    _ISEDITMODE = NO;
     self.selectplayer_lbl.text=@"Select";
     self. Wicket_lbl.text =@"Select";
     
@@ -1016,8 +1018,13 @@ else
     
     [dbOtherWicket UpdateBattingSummaryDetailForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETNO];
     
+       if ([_WICKETTYPE isEqualToString:@"MSC102"]) {
+           
+           [ dbOtherWicket UpdateInningsSummaryDetailForDeleteRetiredHurt :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO ];
+       }else{
+       
     [ dbOtherWicket UpdateInningsSummaryDetailForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO ];
-    
+       }
     [ dbOtherWicket DeleteWicketEventsForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETNO ];
     
     [ dbOtherWicket UpdateWicketEventsForDeleteOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:WICKETNO ];

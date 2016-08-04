@@ -441,6 +441,7 @@ int POS_TEAM_TYPE = 1;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    back = NO;
     self.view_addBtn.hidden = YES;
      EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
     _scroll_EndSession.scrollEnabled = YES;
