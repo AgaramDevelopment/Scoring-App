@@ -8733,13 +8733,14 @@ self.lbl_umpirename.text=@"";
 
 -(void)DeclearINNINGS
 {
-    if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
-    {
-        UIAlertView * objAlert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"No legitimate Balls Have Been Bowled" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [objAlert show];
-    }
-    else
-    {
+//    if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
+//    {
+//        
+//        UIAlertView * objAlert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"No legitimate Balls Have Been Bowled" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [objAlert show];
+//    }
+//    else
+//    {
     
     DeclareInnings *declareInning = [[DeclareInnings alloc]initWithNibName:@"DeclareInnings" bundle:nil];
     declareInning.COMPETITIONCODE = self.competitionCode;
@@ -8747,6 +8748,7 @@ self.lbl_umpirename.text=@"";
     declareInning.INNINGSNO = fetchSEPageLoadRecord.INNINGSNO;
     declareInning.TEAMCODE = fetchSEPageLoadRecord.BATTINGTEAMCODE;
     declareInning.BOWLINGTEAMCODE = fetchSEPageLoadRecord.BOWLINGTEAMCODE;
+    declareInning.TOTALRUN        = [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMRUNS];
 
      declareInning.delegate =self;
     
@@ -8772,7 +8774,7 @@ self.lbl_umpirename.text=@"";
          declareInning.view.alpha = 1;
      }
                      completion:nil];
-    }
+    //}
 }
 -(void)MatchResult
 {

@@ -1039,18 +1039,13 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
     }
     else
     {
-//        NSInteger sourceRow = sourceIndexPath.row;
-//        NSInteger destRow = destinationIndexPath.row;
-//        NSString * changeIndexId=[NSString stringWithFormat:@"%ld",destRow+1];
-//        SelectPlayerRecord*objRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:sourceRow];
-//        objRecord.playerOrder =changeIndexId;
         
         id object = [slecteplayerlist objectAtIndex:sourceRow];
         
         [slecteplayerlist removeObjectAtIndex:sourceRow];
         
         [slecteplayerlist insertObject:object atIndex:destRow];
-         [self changePlayerorder:newplayerorder :orderno :isMoveBottom];
+         [self changePlayerorder:newplayerorder :newplayerorder :isMoveBottom];
         playercell.editing=NO;
         [self.tbl_playerSelectList setEditing:playercell.editing animated:YES];
         [self.tbl_playerSelectList reloadData];
@@ -1062,10 +1057,11 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"]; 
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void)changePlayerorder:(int)newplayerorder :(int)orderno :(BOOL)ismoveorder
+-(void)changePlayerorder:(int)newplayerorder :(int)changeorder :(BOOL)ismoveorder
 
 {
     NSMutableArray * changeplayerorderArray =[[NSMutableArray alloc]init];
+    int orderno;
 
     for(int i=0; i < slecteplayerlist.count;i++)
     {
@@ -1090,10 +1086,9 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
             
             objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
         }
-        }
-        else if (ismoveorder==NO)
+        else if (changeorder == newplayerorder)
         {
-            if(newplayerorder > i)
+            if(newplayerorder < i)
             {
                 
                 if([objRecord.playerOrder isEqualToString:@"0"])
@@ -1110,6 +1105,60 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
                 
                 
                 objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
+            }
+            else
+            {
+            orderno = newplayerorder+1;
+            
+            objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
+            }
+        }
+        }
+        else if (ismoveorder==NO)
+        {
+            if(newplayerorder < i)
+            {
+                
+                if([objRecord.playerOrder isEqualToString:@"0"])
+                {
+                    orderno = [objRecord.playerOrder intValue];
+                    
+                }
+                
+                else
+                {
+                    orderno=[objRecord.playerOrder intValue]+1;
+                    //orderno = orderno-1;
+                }
+                
+                
+                objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
+            }
+            else if (newplayerorder == changeorder)
+            {
+                if(newplayerorder > i)
+                {
+                    
+//                    if([objRecord.playerOrder isEqualToString:@"0"])
+//                    {
+//                        orderno = [objRecord.playerOrder intValue];
+//                        
+//                    }
+//                    
+//                    else
+//                    {
+//                        orderno=[objRecord.playerOrder intValue]-1;
+//                        //orderno = orderno-1;
+//                    }
+                    
+                    
+//                    objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
+                }
+                else{
+                orderno = newplayerorder+1;
+                
+                objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
+                }
             }
 
         }
