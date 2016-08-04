@@ -34,5 +34,7 @@
 
 -(BOOL) DeleteInningsEventForUpdateDeclareInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) INNINGSNO;
 -(BOOL) DeleteMatchResultForUpdateDeclareInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
+-(NSString *) GetDeclareInningsStatus:(NSString *) COMPETITIONCODE:(NSString *)MATCHCODE:(NSString *)INNINGSNO;
+
 @end
 

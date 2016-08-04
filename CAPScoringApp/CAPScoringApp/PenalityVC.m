@@ -27,9 +27,9 @@
     NSString *penalty_reason;
     NSString *btnbatting;
     NSString *penaltytypereasons;
-    NSString *penaltycode;
+//    NSString *penaltycode;
     
-    NSMutableArray *penaltyarray;
+//    NSMutableArray *penaltyarray;
     PenaltyGridTVC *penaltygridTVC;
     
     PenaltyDetailsRecord *penaltyrecord;
@@ -546,7 +546,7 @@
                 
                 NSString *maxid= [objDBManager getMAXIDPENALTY];
                 NSString *paddingString = [[NSString string] stringByPaddingToLength: (7-maxid.length) withString: @"0" startingAtIndex: 0];
-                penaltycode = [NSString stringWithFormat:@"PNT%@%@",paddingString,maxid] ;
+                NSString *penaltycode = [NSString stringWithFormat:@"PNT%@%@",paddingString,maxid] ;
                 
                 if([self.selectStartBallStatus isEqualToString:@"No"])
                 {
@@ -586,24 +586,23 @@
             
             
             
-         penaltyarray=[objDBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
+//         penaltyarray=[objDBManager SetPenaltyDetailsForInsert:self.competitionCode :self.matchCode :self.inningsNo];
             
-            if (penaltyarray.count >0) {
+//            if (penaltyarray.count >0) {
+            
+//                PenaltyDetailsRecord *penalty = [penaltyarray objectAtIndex:selectindex];
+//                penaltyCode = penalty.penaltycode;
+            
                 
-                PenaltyDetailsRecord *penalty = [penaltyarray objectAtIndex:selectindex];
-                penaltyCode = penalty.penaltycode;
-                
-                
-            }
+//            }
            
             
-            [objDBManager GetUpdatePenaltyDetails:awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode :self.competitionCode :self.matchCode :self.inningsNo :penaltyCode];
+            [objDBManager GetUpdatePenaltyDetails:awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode :self.competitionCode :self.matchCode :self.inningsNo :_penaltyDetailsRecord.penaltycode];
             
             UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Penalty" message:@"Penalty Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             alter.tag =10;
-        
-            
+            _penaltyDetailsRecord = nil;
             
         }else{
             [self showDialog:@"Please Enter Runs Between 0 to 10" andTitle:@"Penalty"];
