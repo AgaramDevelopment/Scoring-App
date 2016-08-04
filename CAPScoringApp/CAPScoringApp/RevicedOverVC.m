@@ -142,22 +142,35 @@
         }
     }
     
+    if ([txt_overs.text isEqual:@""] && [txt_commentss.text isEqual:@""])
+    {
+        [self showDialog:@"Please enter number only \n Please enter Comments" andTitle:@"Revised Overs"];
+        return NO;
+        
+    }
+    else
+    {
+        if([txt_overs.text isEqual:@""]){
+            [self showDialog:@"Please enter number only" andTitle:@"Revised Overs"];
+            return NO;
+        } if([txt_commentss.text isEqual:@""]){
+            [self showDialog:@"Please enter Comments." andTitle:@"Revised Overs"];
+            return NO;
+        }
+        
+    }
+    
+    
+    
     if([OldOvers intValue] > [txt_overs.text intValue]){
         [self showDialog:@"The Revised Over is not possible when the data exist for this innings." andTitle:@"Revised Overs"];
         return NO;
-    
-//    if([OldOvers intValue] < [txt_overs.text intValue]){
-//        [self showDialog:@"The Revised Over is not possible when the data exist for this innings." andTitle:@"Revised Over"];
-//        return NO;
-//        
-//        
-   }
-    if([txt_overs.text isEqual:@""]){
-        [self showDialog:@"Please enter number only" andTitle:@"Revised Overs"];
-                return NO;
-    } if([txt_commentss.text isEqual:@""]){
-        [self showDialog:@"Please enter Comments." andTitle:@"Revised Overs"];
-        return NO;
+        
+        //    if([OldOvers intValue] < [txt_overs.text intValue]){
+        //        [self showDialog:@"The Revised Over is not possible when the data exist for this innings." andTitle:@"Revised Over"];
+        //        return NO;
+        //
+        //        
     }
     return YES;
 }
