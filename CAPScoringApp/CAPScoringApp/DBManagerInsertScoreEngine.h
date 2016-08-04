@@ -272,5 +272,5 @@
 -(BOOL*) DeleteAppealEvents:(NSString*) BALLCODE;
 -(BOOL)  InsertFieldingEvents : (NSString*) COMPETITIONCODE : (NSString*) MATCHCODE : (NSString*) TEAMCODE : (NSInteger) INNINGSNO : (NSString*) BALLCODE : (NSString*) FIELDERCODE : (NSString*) ISSUBSTITUTE : (NSString*) FIELDINGFACTOR : (NSInteger) NETRUNS;
 -(BOOL)  UpdateFieldingEvents : (NSString*) FIELDERCODE : (NSString*) ISSUBSTITUTE : (NSString*) FIELDINGFACTOR : (NSInteger) NETRUNS: (NSString*) BALLCODE : (NSString*) FIELDINGFACTOR;
--(BOOL) DeleteFieldingEvents : (NSString*) BALLCODE : (NSString*) FIELDINGFACTORCODE;
+-(BOOL) DeleteFieldingEvents : (NSString*) BALLCODE;
 @end
