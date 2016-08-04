@@ -533,7 +533,7 @@ EndInnings *insertScoreCard;
                 //EXEC SP_INSERTSCOREBOARD
     
                 WICKETOVERNO = overNo;
-                
+                self.BOWLERCODE = BowlerCode;
                 [self insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
                
                 ballNo = ballNo+1;
