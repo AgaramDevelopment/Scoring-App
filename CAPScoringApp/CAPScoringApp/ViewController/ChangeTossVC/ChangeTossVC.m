@@ -365,7 +365,7 @@
     {
        
             DBManagerChangeTeam *objDBManagerChangeTeam = [[DBManagerChangeTeam alloc] init];
-            [objDBManagerChangeTeam InsertChangeTeam:self.CompitisonCode :self.matchCode :selectTeamcode :[NSNumber numberWithInt:1] :StrikerCode :NonStrikerCode :selectBowlerCode :[NSNumber numberWithInt:1] :selectTeamcode :electedcode:BowlingEnd];
+            [objDBManagerChangeTeam InsertChangeTeam :self.CompitisonCode :self.matchCode :selectTeamcode :[NSNumber numberWithInt:1] :StrikerCode :NonStrikerCode :selectBowlerCode :[NSNumber numberWithInt:1] :selectTeamcode :electedcode:BowlingEnd];
             [self.delegate RedirectScorEngin];
             
         }
