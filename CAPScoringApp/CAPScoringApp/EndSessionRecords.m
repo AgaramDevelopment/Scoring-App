@@ -177,7 +177,7 @@ DBManagerEndSession *dbEndSession;
     else
     {
         
-        ENDOVERBALLNO = [NSString stringWithFormat:@"%d.%d",ENDOVERNO,ENDBALLNO];
+        ENDOVERBALLNO = [NSString stringWithFormat:@"%@.%@",ENDOVERNO,ENDBALLNO];
     }
     
     //ENDOVERBALLNO

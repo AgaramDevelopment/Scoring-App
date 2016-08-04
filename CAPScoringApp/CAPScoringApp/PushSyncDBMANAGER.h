@@ -37,4 +37,5 @@
 -(NSMutableArray *)RetrievePENALTYDETAILSData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
 -(NSMutableArray *)RetrievePLAYERINOUTTIMEData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
 -(NSMutableArray *)RetrieveCAPTRANSACTIONSLOGENTRYData: (NSString *) COMPETITIONCODE :(NSString *) MATCHCODE;
+-(BOOL) InsertTransactionLogEntry: (NSString*) MATCHCODE : (NSString*) TABLENAME : (NSString*)SCRIPTTYPE : (NSString*)SCRIPTDATA;
 @end

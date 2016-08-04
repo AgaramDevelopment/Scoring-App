@@ -1306,4 +1306,37 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return BOWLINGSUMMARYArray;
 }
 
+-(BOOL) InsertTransactionLogEntry: (NSString*) MATCHCODE : (NSString*) TABLENAME : (NSString*)SCRIPTTYPE : (NSString*)SCRIPTDATA
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *userCode=[defaults stringForKey:@"userCode"];
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO CAPTRANSACTIONSLOGENTRY ( MATCHCODE, TABLENAME, SCRIPTTYPE, SCRIPTDATA, USERID, LOGDATETIME, SCRIPTSTATUS ) VALUES ( '%@', '%@', '%@', '%@', '%@', datetime('now'), 'MSC247' );",MATCHCODE,TABLENAME,SCRIPTTYPE,SCRIPTDATA,userCode];
+        const char *selectStmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+}
 @end

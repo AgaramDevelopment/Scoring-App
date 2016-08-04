@@ -35,6 +35,7 @@
 #import "UpdateBreaksArrayDetails.h"
 #import "DeleteEventRecord.h"
 #import "PowerPlayRecord.h"
+#import "PushSyncDBMANAGER.h"
 
 
 @implementation DBManager
@@ -6401,7 +6402,12 @@ return @"";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                
+                
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AlertView"];
+
                 return YES;
+                
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
@@ -7606,7 +7612,7 @@ return @"";
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE ='%@'  AND TEAMCODE ='%@'  AND INNINGSNO ='%@'  AND (STRIKERCODE ='%@' OR NONSTRIKERCODE = '%@')", COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,STRIKERCODE,NONSTRIKERCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE ='%@'  AND TEAMCODE ='%@'  AND INNINGSNO ='%@'  AND (STRIKERCODE ='%@' OR NONSTRIKERCODE = '%@')", COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,STRIKERCODE,STRIKERCODE];
         
         
         const char *update_stmt = [updateSQL UTF8String];
@@ -7672,7 +7678,7 @@ return @"";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BATTINGSUMMARY (COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO, BATTINGPOSITIONNO,BATSMANCODE,RUNS,BALLS,ONES,TWOS,THREES,FOURS,SIXES,DOTBALLS) VALUES ('%@','%@','%@','%@','%@','%@',0,0,0,0,       0,0,0,0))",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,STRIKERPOSITIONNO,STRIKERCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BATTINGSUMMARY (COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO, BATTINGPOSITIONNO,BATSMANCODE,RUNS,BALLS,ONES,TWOS,THREES,FOURS,SIXES,DOTBALLS) VALUES ('%@','%@','%@','%@','%@','%@',0,0,0,0,       0,0,0,0)",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,STRIKERPOSITIONNO,STRIKERCODE];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
@@ -9733,11 +9739,12 @@ return @"";
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"POWERPLAY" :@"MSC251" :updateSQL];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return YES;
-                
             }
             else {
                 sqlite3_reset(statement);

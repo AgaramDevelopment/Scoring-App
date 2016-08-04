@@ -223,7 +223,9 @@
 
     BOOL isRemarkOpen;
     float over;
-
+    
+    BOOL isfieldingeventundo;
+    BOOL isappealeventundo;
 }
 
 
@@ -673,6 +675,7 @@
     NSMutableArray *getAppealArray = [fetchSeBallCodeDetails GetAppealDetailsForAppealEventsArray];
     if(getAppealArray.count>0){
         GetSEAppealDetailsForAppealEvents *record = [[GetSEAppealDetailsForAppealEvents alloc]init];
+        record = (GetSEAppealDetailsForAppealEvents*)[getAppealArray objectAtIndex:0];
         appealEventDict = [NSMutableDictionary dictionary];
         [appealEventDict setValue:record.APPEALSYSTEMCODE forKey:@"AppealSystemSelct"];
         [appealEventDict setValue:record.APPEALCOMPONENTCODE forKey:@"AppealComponentSelct"];
@@ -681,8 +684,7 @@
         [appealEventDict setValue:record.BOWLERNAME forKey:@"AppealBowlerSelect"];
         [appealEventDict setValue:record.APPEALCOMMENTS forKey:@"Commenttext"];
         [appealEventDict setValue:record.APPEALTYPECODE forKey:@"AppealTypeCode"];
-        
-        
+        [self selectedViewBg:_view_appeal];
     }
     
    
@@ -700,7 +702,8 @@
         selectedfieldPlayer.BowlerName =  [fieldingFactorArray objectAtIndex:1];
         
         selectedfieldFactor = [[FieldingFactorRecord alloc]init];
-        selectedfieldFactor.fieldingfactorcode = [fieldingFactorArray objectAtIndex:3];
+        selectedfieldFactor.fieldingfactorcode = [fieldingFactorArray objectAtIndex:2];
+        selectedfieldFactor.fieldingfactor = [fieldingFactorArray objectAtIndex:3];
         [self selectedViewBg:self.view_fielding_factor];
     }
     
@@ -2376,8 +2379,6 @@
         [self calculateRunsOnEndBall];
         
         UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
-        
-        
         [updatescore UpdateScoreEngine :self.editBallCode :
          self.competitionCode :
          self.matchCode :
@@ -2447,7 +2448,23 @@
          self.ballEventRecord.objPenaltyreasoncode :
          self.ballEventRecord.objBallspeed :
          self.ballEventRecord.objUncomfortclassification :
-         selectedWicketEvent];
+         selectedWicketEvent:
+         [appealEventDict objectForKey:@"AppealTypeCode"]://APPEALTYPECODE:
+         [appealEventDict objectForKey:@"AppealSystemSelct"]://APPEALSYSTEMCODE:
+         [appealEventDict objectForKey:@"AppealComponentSelct"]://APPEALCOMPONENTCODE:
+         [appealEventDict objectForKey:@"AppealUmpireSelct"]://APPEALUMPIRECODE
+         [appealEventDict objectForKey:@"AppealBatsmenSelct"]://APPEALBATSMANCODE:
+         @""://APPEALISREFERRED:
+         @""://APPEALDECISION:
+         [appealEventDict objectForKey:@"Commenttext"]://APPEALCOMMENTS:
+         @""://APPEALFIELDERCODE:
+         (isappealeventundo == YES ? @"D":@"E")://APPEALFLAG:
+         selectedfieldPlayer.BowlerCode://FIELDINGEVENTSFIELDERCODE:
+         @""://FIELDINGEVENTSISSUBSTITUTE:
+         selectedfieldFactor.fieldingfactorcode://FIELDINGEVENTSFIELDINGFACTOR:
+         (selectedNRS == nil || [selectedNRS isEqualToString:@""] ? @"1" : selectedNRS )://FIELDINGEVENTSNETRUNS:
+         (isfieldingeventundo == YES ? @"D":@"E")//FIELDINGEVENTSFLAG
+         ];
         
         [self.navigationController popViewControllerAnimated:NO];
         }
@@ -2511,6 +2528,8 @@
         }
         else
         {
+            
+            
             if([self checkRunsByLB_B] && [self iswicketPending]&&[self checkValidation]){
                 
                     [self StartBall];
@@ -2520,6 +2539,7 @@
                     [currentBowlersTableView removeFromSuperview];
                 }
             }
+            
         }
     }
 }
@@ -3203,6 +3223,11 @@
             if([self checkRunsByLB_B] && [self iswicketPending]&&[self checkValidation]){
                 
                 [self StartBall];
+                //Close bowler list
+                if(currentBowlersTableView!=nil){
+                    [currentBowlersTableView removeFromSuperview];
+                }
+
                 
             }else{
                 isEndBallSuccess = NO;
@@ -3571,6 +3596,10 @@
 //        }
         if (alertView.tag == 3000 ) {
             [self StartBall];
+            //Close bowler list
+            if(currentBowlersTableView!=nil){
+                [currentBowlersTableView removeFromSuperview];
+            }
             
             //End over clicked with out end ball
             if(isEndOverOnEndBall){
@@ -3884,7 +3913,7 @@
         
     }
     
-    if(isDefensiveSelected && self.ballEventRecord.objShottype == nil && selectBtnTag.tag!=116){//defensive
+    if(isDefensiveSelected && self.ballEventRecord.objShottype == nil && selectBtnTag.tag!=117){//defensive
         
         [self unselectedViewBg:_view_defense];
         self.view_defensive.hidden = YES;
@@ -5561,7 +5590,7 @@
         
     }
     
-    if(isFastSelected && self.ballEventRecord.objBowltype == nil && !selectBtnTag.tag!=115){//Fast
+    if(isFastSelected && self.ballEventRecord.objBowltype == nil && selectBtnTag.tag!=115){//Fast
         
         [self unselectedViewBg:_view_fast];
         self.view_fastBowl.hidden = YES;
@@ -5577,7 +5606,7 @@
         
     }
     
-    if(isDefensiveSelected && self.ballEventRecord.objShottype == nil && selectBtnTag.tag!=116){//defensive
+    if(isDefensiveSelected && self.ballEventRecord.objShottype == nil && selectBtnTag.tag!=117){//defensive
         
         [self unselectedViewBg:_view_defense];
         self.view_defensive.hidden = YES;
@@ -5667,8 +5696,8 @@
         DBManager *objDBManager = [[DBManager alloc]init];
         
         if(_fastBowlTypeArray ==nil || _fastBowlTypeArray.count ==0){
-        _fastBowlTypeArray = [[NSMutableArray alloc]init];
-        _fastBowlTypeArray = [objDBManager getBowlFastType];
+            _fastBowlTypeArray = [[NSMutableArray alloc]init];
+            _fastBowlTypeArray = [objDBManager getBowlFastType];
         }
         
         
@@ -5901,6 +5930,7 @@
             self.view_fastBowl.hidden = YES;
             //[self unselectedButtonBg:selectBtnTag];
             [self unselectedViewBg:self.view_fielding_factor];
+            isfieldingeventundo = YES;
 //            _view_fielding_factor.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(4/255.0f) alpha:1.0f];//Normal
             
         }else{
@@ -6392,6 +6422,10 @@
     [_tbl_defensive reloadData];
     self.view_defensive.hidden=YES;
     isDefensiveSelected=NO;
+    
+    isFastSelected = NO;
+    isSpinSelected = NO;
+
     [self unselectedViewBg: self.view_fielding_factor];
      selectedfieldFactor = [[FieldingFactorRecord alloc]init];
     [self unselectedViewBg: self.view_Rbw];
@@ -7116,17 +7150,10 @@ self.lbl_umpirename.text=@"";
         if(appealEventDict==nil){
             appealEventDict = [NSMutableDictionary dictionary];
         }
-
-            
-      NSMutableArray* AppealTypeSelectionArray=[[NSMutableArray alloc]init];
-        
         AppealRecord *objAppealrecord=(AppealRecord*)[self.AppealValuesArray objectAtIndex:indexPath.row];
-            
-           // cell.AppealName_lbl.text =objAppealrecord.AppealSystemMetaSubCodeDescription;
-            // selectTeam=cell.AppealName_lbl.text;
-          AppealTypeSelectCode=objAppealrecord.MetaSubCode;
-            [_AppealValuesArray addObject:objAppealrecord];
-            
+        
+        AppealTypeSelectCode=objAppealrecord.MetaSubCode;
+        
             self.table_AppealSystem.hidden=YES;
             isEnableTbl=YES;
        
@@ -8105,7 +8132,7 @@ self.lbl_umpirename.text=@"";
         
     }else if(tableView == nonstrickerTableView){
         SelectPlayerRecord *selectPlayer = [nonStrickerList objectAtIndex:indexPath.row];
-        [InitializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE : fetchSEPageLoadRecord.strickerPlayerCode:selectPlayer.playerCode   :fetchSEPageLoadRecord.currentBowlerPlayerCode];
+        [InitializeInningsScoreBoardRecord UpdatePlayers :self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE : fetchSEPageLoadRecord.strickerPlayerCode:selectPlayer.playerCode   :fetchSEPageLoadRecord.currentBowlerPlayerCode];
         
         isBowlerOpen = NO;
         isNONStrickerOpen = NO;
@@ -13521,6 +13548,16 @@ self.lbl_umpirename.text=@"";
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Please complete fielding option." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
         [alter setTag:3007];
+        return NO;
+    }else if(fetchSEPageLoadRecord.strickerPlayerName==nil){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Please select Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:10002];
+        return NO;
+    }else if(fetchSEPageLoadRecord.nonstrickerPlayerName==nil){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Please select non Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alter show];
+        [alter setTag:10003];
         return NO;
     }
     

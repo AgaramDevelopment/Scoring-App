@@ -909,6 +909,11 @@
         return NO;
     }
     
+    else if([self.Wonby_lbl.text isEqualToString:@""] || self.Wonby_lbl.text==nil && [self.Striker_lbl.text isEqualToString:@""] || self.Striker_lbl.text==nil && [self.nonStriker_lbl.text isEqualToString:@""] || self.nonStriker_lbl.text==nil && [self.Bowler_lbl.text isEqualToString:@""] || self.Bowler_lbl.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Team,Striker,NonStriker And Bowler"];
+        return NO;
+    }
     else if([self.electedTo_lbl.text isEqualToString:@""] || self.electedTo_lbl.text==nil && [self.Striker_lbl.text isEqualToString:@""] || self.Striker_lbl.text==nil && [self.nonStriker_lbl.text isEqualToString:@""] || self.nonStriker_lbl.text==nil && [self.Bowler_lbl.text isEqualToString:@""] || self.Bowler_lbl.text==nil)
     {
         [self ShowAlterView:@"Please Select ElectedTo,Striker,NonStriker And Bowler"];
