@@ -1422,7 +1422,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT SESSIONNO  FROM   SESSIONEVENTS 	WHERE (((strftime('%%s','%@'))<=SESSIONSTARTTIME AND ('%@')>= (strftime('%%s',SESSIONSTARTTIME))) OR ((strftime('%%s','%@'))<=SESSIONENDTIME AND ('%@')>= (strftime('%%s',SESSIONENDTIME))) OR ((strftime('%%s','%@'))>=SESSIONSTARTTIME AND ('%@')<= (strftime('%%s',SESSIONENDTIME)))) AND COMPETITIONCODE = '%@' AND MATCHCODE='%@'",SESSIONSTARTTIME,SESSIONENDTIME,SESSIONSTARTTIME,SESSIONENDTIME,SESSIONSTARTTIME,SESSIONENDTIME,COMPETITIONCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT SESSIONNO  FROM   SESSIONEVENTS 	WHERE (((strftime('%%s','%@'))<=SESSIONSTARTTIME AND ('%@')>= (strftime('%%s',SESSIONSTARTTIME))) AND ((strftime('%%s','%@'))<=SESSIONENDTIME AND ('%@')>= (strftime('%%s',SESSIONENDTIME))) AND ((strftime('%%s','%@'))>=SESSIONSTARTTIME AND ('%@')<= (strftime('%%s',SESSIONENDTIME)))) AND COMPETITIONCODE = '%@' AND MATCHCODE='%@'",SESSIONSTARTTIME,SESSIONENDTIME,SESSIONSTARTTIME,SESSIONENDTIME,SESSIONSTARTTIME,SESSIONENDTIME,COMPETITIONCODE,MATCHCODE];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
