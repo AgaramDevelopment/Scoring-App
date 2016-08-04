@@ -132,7 +132,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *TOTAL =  [self getValueByNull:statement :0];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -416,5 +416,38 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return NO;
 }
+
+-(NSString *) GetDeclareInningsStatus:(NSString *) COMPETITIONCODE : (NSString *)MATCHCODE :(NSString *)INNINGSNO
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT ISDECLARE FROM INNINGSEVENTS IE WHERE IE.COMPETITIONCODE='%@' AND IE.MATCHCODE='%@'  AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)== SQLITE_OK)
+            
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                NSString * innsStatus =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return innsStatus;
+            }
+            
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            
+        }
+        sqlite3_close(dataBase);
+    }
+    return @"";
+    
+}
+
 
 @end

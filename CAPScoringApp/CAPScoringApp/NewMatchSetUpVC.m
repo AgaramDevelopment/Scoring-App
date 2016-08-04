@@ -42,7 +42,7 @@ NSRegularExpression *isMatchedByRegex;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
     
     //fetch data from fixture screen and display in controls
     
@@ -79,20 +79,7 @@ NSRegularExpression *isMatchedByRegex;
         self.btn_editOvers.hidden = YES;
     }
     
-//    //logo image
-//    NSMutableArray *teamCode = [[NSMutableArray alloc]init];
-//    
-//    [teamCode addObject:@"TEA0000005"];
-//    [teamCode addObject:@"TEA0000006"];
-//    [teamCode addObject:@"TEA0000008"];
-//    
-//    
-//    
-//    for(int i=0;i<[teamCode count];i++){
-//        
-//        [self addImageInAppDocumentLocation:[teamCode objectAtIndex:i]];
-//    }
-//    
+
     
     
     NSMutableArray *mTeam = [[NSMutableArray alloc]init];
