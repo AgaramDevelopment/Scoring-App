@@ -2034,7 +2034,7 @@
                                                                                 forIndexPath:indexPath];
             BowlerEvent *bowlerEvent=(BowlerEvent*)[_fieldingPlayerArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = bowlerEvent.BowlerName;
-            self.lbl_fast.text=@"Bowlers";
+            self.lbl_fast.text=@"FIELDERS";
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
             customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
@@ -2055,7 +2055,7 @@
                                                                                 forIndexPath:indexPath];
             NSString *nrs=(NSString*)[_nrsArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = nrs;
-            self.lbl_fast.text=@"Net Run Saved";
+            self.lbl_fast.text=@"NET RUN SAVED";
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
             customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
