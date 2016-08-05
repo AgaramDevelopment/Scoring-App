@@ -396,7 +396,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 [objDBManagerChangeTeamInsert DeleteInningsEventsForChangeTeam : COMPETITIONCODE : MATCHCODE];
                 
                 
-                 [dbChangeToss InsertTossDetails : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : ELECTEDTO : STRIKERCODE : NONSTRIKERCODE : BOWLERCODE : BOWLINGEND];
+                [dbChangeToss InsertTossDetails : COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : ELECTEDTO : STRIKERCODE : NONSTRIKERCODE : BOWLERCODE : BOWLINGEND];
                 
             }
         }
