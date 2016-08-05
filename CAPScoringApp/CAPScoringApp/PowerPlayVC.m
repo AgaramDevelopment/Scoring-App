@@ -195,7 +195,8 @@ else
     self.txt_startover.text =powerplayrecord.startover;
     self.txt_endover.text  =powerplayrecord.endover;
     self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
-    powerplaycode=powerplayrecord.powerplaycode;
+    powerplaytype=powerplayrecord.powerplaytype;
+    powerplayCode=powerplayrecord.powerplaycode;
     
     self.view_powerplay.hidden=YES;
     self.view_powerplaygrid.hidden=NO;
@@ -346,10 +347,7 @@ else
 
 - (IBAction)btn_submit:(id)sender {
     
-    
-         if([self formValidation]){
-        
-    if(powerplaystartover == nil){
+       if(powerplaystartover == nil){
        
         
             [self startService];
@@ -366,7 +364,7 @@ else
         
     }
     }
-}
+
 
 }
 
@@ -627,7 +625,7 @@ else
     }
 }
 
-    -(BOOL)insertpowerplay{
+-(BOOL)insertpowerplay{
        
         
         
@@ -647,7 +645,7 @@ else
                 NSString *paddingString = [[NSString string] stringByPaddingToLength: (7-maxid.length) withString: @"0" startingAtIndex: 0];
                 powerplayCode = [NSString stringWithFormat:@"PPC%@%@",paddingString,maxid] ;
                 
-                [objDBManager SetPowerPlayDetails :powerplayCode:self.matchCode :self.inningsNo :txt_startover.text:txt_endover.text :powerplayrecord.powerplaytypecode :@"MSC001" :username :powerplayrecord.crateddate:username : powerplayrecord.modifydate];
+                [objDBManager SetPowerPlayDetails :powerplayCode:self.matchCode :self.inningsNo :txt_startover.text:txt_endover.text :powerplaytype :@"MSC001" :username :powerplayrecord.crateddate:username : powerplayrecord.modifydate];
                 Resultarray =[[NSMutableArray alloc]init];
                 
                 Resultarray= [objDBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
@@ -700,15 +698,15 @@ else
 
 -(BOOL)updatepowerplay{
    
-    if(![objDBManager checkpowerplayforupdate:txt_startover.text ENDOVER:txt_endover.text MATCHCODE:self.matchCode INNINGSNO:self.inningsNo POWERPLAYCODE:powerplaycode]){
+    if(![objDBManager checkpowerplayforupdate:txt_startover.text ENDOVER:txt_endover.text MATCHCODE:self.matchCode INNINGSNO:self.inningsNo POWERPLAYCODE:powerplayCode]){
         
-        if([objDBManager getpowerplaytypeforupdate:self.matchCode INNINGSNO:self.inningsNo POWERPLAYTYPE:powerplaytype POWERPLAYCODE:powerplaycode].count == 0){
+        if([objDBManager getpowerplaytypeforupdate:self.matchCode INNINGSNO:self.inningsNo POWERPLAYTYPE:powerplaytype POWERPLAYCODE:powerplayCode].count == 0){
             
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             NSString *username=[defaults stringForKey :@"UserFullname"];
             
             
-            [objDBManager UpdatePowerPlay:self.inningsNo :txt_startover.text :txt_endover.text :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC001" :username :powerplaycode :self.matchCode];
+            [objDBManager UpdatePowerPlay:self.inningsNo :txt_startover.text :txt_endover.text :powerplayrecord.modifydate :powerplaytype :@"MSC001" :username :powerplayCode :self.matchCode];
             
             
             //            self.view_powerplaygrid.hidden=YES;

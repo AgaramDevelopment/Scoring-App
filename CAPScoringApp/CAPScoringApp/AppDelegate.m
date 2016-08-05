@@ -9,11 +9,14 @@
 #import "AppDelegate.h"
 #import "LoginVC.h"
 #import "DBManager.h"
+#import "DBManagerCaptransactionslogEntry.h"
+#import "CaptransactionslogEntryRecord.h"
+#import "Utitliy.h"
 @interface AppDelegate ()
 {
     UIActivityIndicatorView *indicator;
     UINavigationController *navigationController;
-   
+    BOOL IsTimer;
 }
 @end
 
@@ -92,20 +95,120 @@
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    //create new uiBackgroundTask
+    __block UIBackgroundTaskIdentifier bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+        [app endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+    }];
+    
+    //and create new timer with async call:
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //run function methodRunAfterBackground
+       // NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:NO];
+        //[[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
+        //[[NSRunLoop currentRunLoop] run];
+    });
+    IsTimer=NO;
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    IsTimer=YES;
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    //create new uiBackgroundTask
+    __block UIBackgroundTaskIdentifier bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+        [app endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+    }];
+    
+    //and create new timer with async call:
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //run function methodRunAfterBackground
+        //NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:NO];
+       // [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
+        //[[NSRunLoop currentRunLoop] run];
+    });
+
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    IsTimer=YES;
+    UIApplication *app = [UIApplication sharedApplication];
+    
+    //create new uiBackgroundTask
+    __block UIBackgroundTaskIdentifier bgTask = [app beginBackgroundTaskWithExpirationHandler:^{
+        [app endBackgroundTask:bgTask];
+        bgTask = UIBackgroundTaskInvalid;
+    }];
+    
+    //and create new timer with async call:
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        //run function methodRunAfterBackground
+       // NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:YES];
+        //[[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
+        //[[NSRunLoop currentRunLoop] run];
+    });
+
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+-(void)methodRunAfterBackground
+{
+     NSLog(@"background process method");
+    if(IsTimer == YES)
+    {
+         DBManagerCaptransactionslogEntry *objCaptransactions = [[DBManagerCaptransactionslogEntry alloc]init];
+        NSMutableArray *objCaptransactionArray=[[NSMutableArray alloc]init];
+        objCaptransactionArray= [objCaptransactions GetCaptransactionslogentry];
+        if(objCaptransactionArray.count > 0)
+        {
+            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETACTIVECOMPETITION/%@",[Utitliy getSyncIPPORT],[Utitliy SecureId]];
+            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            NSURLResponse *response;
+            NSError *error;
+            
+            NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            if (responseData != nil) {
+//                //DBMANAGERSYNC *objDBMANAGERSYNC = [[DBMANAGERSYNC alloc]init];
+                NSDictionary *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+                
+                if([serviceResponse objectForKey:@"Success"])
+                {
+                    for(int i=0; objCaptransactionArray.count >i; i++)
+                    {
+                        CaptransactionslogEntryRecord * objRecord =[objCaptransactionArray objectAtIndex:i];
+                        NSString * objmatchcode= objRecord.MATCHCODE;
+                        NSString * objSeqno = objRecord.SEQNO;
+                        [objCaptransactions updateCaptransactionslogentry:@"MSC248" matchCode:objmatchcode SEQNO:objSeqno];
+                    }
+                }
+            }
+                else
+                {
+                    
+                }
+//                NSMutableArray *checkErrorItem=[serviceResponse objectForKey:@"lstErrorItem"];
+//                
+//                NSDictionary * ErrorNoDict =[checkErrorItem objectAtIndex:0];
+//                
+//                NSString *ErrorNoStr=[ErrorNoDict valueForKey:@"SUCCESS"];
+//                NSString *message=[ErrorNoDict valueForKey:@"DataItem"];
+                
+//                if ([ErrorNoStr isEqualToString:CompareErrorno]) {
+//                }
+            }
+    }
+    else
+    {
+        
+    }
+   
 }
 
 @end
