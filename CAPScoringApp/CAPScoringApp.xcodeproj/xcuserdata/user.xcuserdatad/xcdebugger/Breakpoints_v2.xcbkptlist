@@ -857,13 +857,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/DBManagerDeleteScoreEngine.m"
-            timestampString = "492082108.90505"
+            filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+            timestampString = "492084256.422279"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1001"
-            endingLineNumber = "1001"
-            landmarkName = "-UpdateOverBallCountInBallEventtForInsertScoreEngine:::::"
+            startingLineNumber = "2758"
+            endingLineNumber = "2758"
+            landmarkName = "-insertBallDetails::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -874,7 +874,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/InsertSEScoreEngine.m"
-            timestampString = "492082203.555215"
+            timestampString = "492084281.838867"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "246"
