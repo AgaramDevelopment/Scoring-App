@@ -614,7 +614,7 @@
         self.lbl_last_bowler_balls.text = lastBowlerDetailRecord.MAIDENOVERS;
         self.lbl_last_bowler_fours.text = lastBowlerDetailRecord.TOTALRUNS;
         self.lbl_last_bowler_sixs.text = lastBowlerDetailRecord.WICKETS;
-        self.lbl_last_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[lastBowlerDetailRecord.ECONOMY floatValue]];
+        self.lbl_last_bowler_strickrate.text = [NSString stringWithFormat:@"%.02f",[lastBowlerDetailRecord.ECONOMY floatValue]];
         
     }else{
         self.lbl_last_bowler_name.text = @"-";
@@ -1493,7 +1493,7 @@
         self.lbl_last_bowler_balls.text = lastBowlerDetailRecord.MAIDENOVERS;
         self.lbl_last_bowler_fours.text = lastBowlerDetailRecord.TOTALRUNS;
         self.lbl_last_bowler_sixs.text = lastBowlerDetailRecord.WICKETS;
-        self.lbl_last_bowler_strickrate.text = [NSString stringWithFormat:@"%.01f",[lastBowlerDetailRecord.ECONOMY floatValue]];
+        self.lbl_last_bowler_strickrate.text = [NSString stringWithFormat:@"%.02f",[lastBowlerDetailRecord.ECONOMY floatValue]];
         
     }else{
         self.lbl_last_bowler_name.text = @"-";
