@@ -12,6 +12,7 @@
 #import "SelectPlayerRecord.h"
 #import "BowlerEvent.h"
 #import "BallEventRecord.h"
+#import "PushSyncDBMANAGER.h"
 
 
 @implementation DBManagerEditScoreEngine
