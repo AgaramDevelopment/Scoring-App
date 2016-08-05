@@ -67,6 +67,7 @@
 #import "EditModeVC.h"
 #import "PowerPlayVC.h"
 #import "MatchRegistrationPushRecord.h"
+#import "Utitliy.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -13292,7 +13293,7 @@ self.lbl_umpirename.text=@"";
     NSLog(@"JSON String: %@",jsonString);
     
     NSData* responseData = [NSMutableData data];
-    NSString *urlString = @"http://192.168.1.49:8888/CAPMobilityService.svc/PUSHDATATOSERVER";
+    NSString *urlString = [NSString stringWithFormat: @"http://%@/CAPMobilityService.svc/PUSHDATATOSERVER",[Utitliy getSyncIPPORT]];
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
     
@@ -13305,10 +13306,6 @@ self.lbl_umpirename.text=@"";
     NSURLResponse* response;
     NSError* error = nil;
     responseData = [NSURLConnection sendSynchronousRequest:request     returningResponse:&response error:&error];
-    //NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        
-        
-        
         if (responseData != nil) {
             NSMutableArray *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
             NSDictionary  *responseDict = [serviceResponse objectAtIndex:0];
