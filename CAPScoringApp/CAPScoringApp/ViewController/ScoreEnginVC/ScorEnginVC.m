@@ -67,6 +67,7 @@
 #import "EditModeVC.h"
 #import "PowerPlayVC.h"
 #import "MatchRegistrationPushRecord.h"
+#import "Utitliy.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -2034,7 +2035,7 @@
                                                                                 forIndexPath:indexPath];
             BowlerEvent *bowlerEvent=(BowlerEvent*)[_fieldingPlayerArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = bowlerEvent.BowlerName;
-            self.lbl_fast.text=@"Bowlers";
+            self.lbl_fast.text=@"FIELDERS";
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
             customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
@@ -2055,7 +2056,7 @@
                                                                                 forIndexPath:indexPath];
             NSString *nrs=(NSString*)[_nrsArray objectAtIndex:indexPath.row];
             fieldFactorCell.lbl_fastBowl.text = nrs;
-            self.lbl_fast.text=@"Net Run Saved";
+            self.lbl_fast.text=@"NET RUN SAVED";
             // this is where you set your color view
             UIView *customColorView = [[UIView alloc] init];
             customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
@@ -8658,6 +8659,10 @@ self.lbl_umpirename.text=@"";
             objFollowOn.nonStrikerName       =fetchSEPageLoadRecord.nonstrickerPlayerName;
             objFollowOn.bowlerName           =fetchSEPageLoadRecord.currentBowlerPlayerName;
             
+            objFollowOn.OVERNO                =[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS];
+            objFollowOn.BALLNO                =[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+            objFollowOn.WICKETS               =[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMWICKETS];
+            objFollowOn.TOTALRUN =[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMRUNS];
             
             objFollowOn.objBowlingTeamdetail =fetchSEPageLoadRecord.getBowlingTeamPlayers;
             objFollowOn.delegate =self;
@@ -13288,7 +13293,7 @@ self.lbl_umpirename.text=@"";
     NSLog(@"JSON String: %@",jsonString);
     
     NSData* responseData = [NSMutableData data];
-    NSString *urlString = @"http://192.168.1.49:8888/CAPMobilityService.svc/PUSHDATATOSERVER";
+    NSString *urlString = [NSString stringWithFormat: @"http://%@/CAPMobilityService.svc/PUSHDATATOSERVER",[Utitliy getSyncIPPORT]];
     NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
     
@@ -13301,10 +13306,6 @@ self.lbl_umpirename.text=@"";
     NSURLResponse* response;
     NSError* error = nil;
     responseData = [NSURLConnection sendSynchronousRequest:request     returningResponse:&response error:&error];
-    //NSString *responseString = [[NSString alloc] initWithData:responseData encoding:NSUTF8StringEncoding];
-        
-        
-        
         if (responseData != nil) {
             NSMutableArray *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
             NSDictionary  *responseDict = [serviceResponse objectAtIndex:0];

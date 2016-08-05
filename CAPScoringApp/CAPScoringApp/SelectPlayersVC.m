@@ -228,24 +228,52 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
-    if (![string isEqualToString:@""]) {
-        
-        NSString *appStr=[textField.text stringByAppendingString:string];
-        
+//    if (![string isEqualToString:@""]) {
+//        
+//        NSString *appStr=[textField.text stringByAppendingString:string];
+//        
+//        [self.selectedPlayerFilterArray removeAllObjects];
+//        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",appStr];
+//        
+//        NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
+//        
+//        self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
+//        
+//        
+//        [self.collectionView reloadData];
+//        
+//        return YES;
+//    }
+//    else {
+//        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",self.txt_search.text];
+//        
+//        NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
+//        
+//        // NSLog(@"count %lu",(unsigned long)[self.selectedPlayerArray count]);
+//        
+//        [self.selectedPlayerFilterArray removeAllObjects];
+//        
+//        //    NSLog(@"count2 %lu",(unsigned long)[self.selectedPlayerArray count]);
+//        
+//        self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
+//        
+//    
+//    //Relaod view
+//    [self.collectionView reloadData];
+//        
+//        return YES;
+//    }
+    NSString *appStr=[textField.text stringByAppendingString:string];
+    appStr = [appStr substringToIndex:[appStr length] - range.length];
+    
+    if([appStr isEqual:@""]){
         [self.selectedPlayerFilterArray removeAllObjects];
+        self.selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: self.selectedPlayerArray ];
+        
+        
+    }else{
+        
         NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",appStr];
-        
-        NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
-        
-        self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
-        
-        
-        [self.collectionView reloadData];
-        
-        return YES;
-    }
-    else {
-        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",self.txt_search.text];
         
         NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
         
@@ -257,27 +285,52 @@ static NSString * const reuseIdentifier = @"Cell";
         
         self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
         
-    
+        
+    }
     //Relaod view
     [self.collectionView reloadData];
-        
-        return YES;
-    }
+    return YES;
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",textField.text];
+//    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",textField.text];
+//    
+//    NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
+//    
+//    // NSLog(@"count %lu",(unsigned long)[self.selectedPlayerArray count]);
+//    
+//    [self.selectedPlayerFilterArray removeAllObjects];
+//    
+//    //    NSLog(@"count2 %lu",(unsigned long)[self.selectedPlayerArray count]);
+//    
+//    self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
+//    
+//    [self.collectionView reloadData];
+    NSString *appStr=textField.text;
     
-    NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
-    
-    // NSLog(@"count %lu",(unsigned long)[self.selectedPlayerArray count]);
-    
-    [self.selectedPlayerFilterArray removeAllObjects];
-    
-    //    NSLog(@"count2 %lu",(unsigned long)[self.selectedPlayerArray count]);
-    
-    self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
-    
+    if([appStr isEqual:@""]){
+        [self.selectedPlayerFilterArray removeAllObjects];
+        self.selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: self.selectedPlayerArray ];
+        
+        
+    }else{
+        
+        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",appStr];
+        
+        NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
+        
+        // NSLog(@"count %lu",(unsigned long)[self.selectedPlayerArray count]);
+        
+        [self.selectedPlayerFilterArray removeAllObjects];
+        
+        //    NSLog(@"count2 %lu",(unsigned long)[self.selectedPlayerArray count]);
+        
+        self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
+        
+        
+    }
+    //Relaod view
     [self.collectionView reloadData];
+
 }
 //Relaod view
 

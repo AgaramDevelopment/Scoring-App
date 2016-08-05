@@ -9739,11 +9739,11 @@ return @"";
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
-                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"POWERPLAY" :@"MSC251" :updateSQL];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"POWERPLAY" :@"MSC251" :updateSQL];
                 return YES;
             }
             else {
