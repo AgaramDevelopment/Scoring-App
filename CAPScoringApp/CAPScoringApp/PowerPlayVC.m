@@ -179,22 +179,17 @@
 {
 if(isPowerplay== YES)
 {
-    //            selectindexarray=[[NSMutableArray alloc]init];
-    //            powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
-    //            self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
-    //            powerplaytype=powerplayrecord.powerplaytypecode;
-    //
-    //            [selectindexarray addObject:powerplayrecord];
     self.tbl_powerplaytype.hidden=YES;
-    //self.view_powerplay.hidden=NO;
-    //self.view_powerplaygrid.hidden=YES;
+    selectindexarray=[[NSMutableArray alloc]init];
+    powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
+    self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
+    powerplaytype=powerplayrecord.powerplaytypecode;
+    
+    [selectindexarray addObject:powerplayrecord];
     isPowerplay=NO;
 }
 else
 {
-    
-    
-    //PowerPlayGridTVC *cell = (PowerPlayGridTVC *)[tableView cellForRowAtIndexPath:indexPath];
     powerplayrecord=(PowerPlayRecord*)[Resultarray objectAtIndex:indexPath.row];
     powerplaystartover=powerplayrecord.startover;
     self.txt_startover.text =powerplayrecord.startover;
@@ -208,12 +203,7 @@ else
     isPowerplay=YES;
     
 }
-selectindexarray=[[NSMutableArray alloc]init];
-powerplayrecord=(PowerPlayRecord*)[PowerPlayData objectAtIndex:indexPath.row];
-self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
-powerplaytype=powerplayrecord.powerplaytypecode;
-
-[selectindexarray addObject:powerplayrecord];
+    
 }
 
 
@@ -223,9 +213,10 @@ powerplaytype=powerplayrecord.powerplaytypecode;
     if(isPowerplay_Tbl == NO)
     {
        self.tbl_powerplaytype.hidden=NO;
- // [self.tbl_powerplaytype reloadData];
         isPowerplay_Tbl=YES;
         isPowerplay=YES;
+      [self.tbl_powerplaytype reloadData];
+        
     }
     else{
         self.tbl_powerplaytype.hidden=YES;
