@@ -1316,7 +1316,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *userCode=[defaults stringForKey:@"userCode"];
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO CAPTRANSACTIONSLOGENTRY ( MATCHCODE, TABLENAME, SCRIPTTYPE, SCRIPTDATA, USERID, LOGDATETIME, SCRIPTSTATUS ) VALUES ( '%@', '%@', '%@', '%@', '%@', datetime('now'), 'MSC247' );",MATCHCODE,TABLENAME,SCRIPTTYPE,SCRIPTDATA,userCode];
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO CAPTRANSACTIONSLOGENTRY ( MATCHCODE, TABLENAME, SCRIPTTYPE, SCRIPTDATA, USERID, LOGDATETIME, SCRIPTSTATUS ) VALUES ( '%@', '%@', '%@', \"%@\", '%@', datetime('now'), 'MSC247' );",MATCHCODE,TABLENAME,SCRIPTTYPE,SCRIPTDATA,userCode];
         const char *selectStmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
