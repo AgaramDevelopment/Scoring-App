@@ -445,6 +445,18 @@ int POS_TEAM_TYPE = 1;
     self.view_addBtn.hidden = YES;
      EndSessionRecords *obj =(EndSessionRecords*)[endSessionArray objectAtIndex:indexPath.row];
     _scroll_EndSession.scrollEnabled = YES;
+    
+    formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSString *startDateTF = obj.SESSIONSTARTTIME;
+    NSString *startEndTF = obj.SESSIONENDTIME;
+    
+    NSDate *date1 = [formatter dateFromString:startDateTF];
+    NSDate *date2 = [formatter dateFromString:startEndTF];
+    
+    NSTimeInterval timeDifference = [date2 timeIntervalSinceDate:date1];
+    int days = timeDifference / 60;
+    NSString *Duration = [NSString stringWithFormat:@"%d", days];
   
     if(tableView== objDrobDowntbl)
     {
@@ -514,7 +526,7 @@ int POS_TEAM_TYPE = 1;
         _lbl_runScored.text = obj.TOTALRUNS;
         _lbl_wicketLost.text = obj.TOTALWICKETS;
         _lbl_sessionDominant.text = obj.DOMINANTNAME;
-        
+        _lbl_duration.text = Duration;
          self.view_heading.hidden = YES;
     self.tbl_session.hidden = YES;
     self.view_allControls.hidden = NO;
