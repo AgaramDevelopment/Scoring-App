@@ -275,9 +275,13 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
 
+    
+    NSString *appStr=[textField.text stringByAppendingString:string];
+    appStr = [appStr substringToIndex:[appStr length] - range.length];
+    
     if (![string isEqualToString:@""]) {
         
-        NSString *appStr=[textField.text stringByAppendingString:string];
+       // NSString *appStr=[textField.text stringByAppendingString:string];
         
         [self.selectedPlayerFilterArray removeAllObjects];
         NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",appStr];
@@ -292,16 +296,16 @@
         return YES;
     }
     else {
-        NSString *appStr=[textField.text stringByAppendingString:string];
-        NSString *newString = [appStr substringToIndex:[appStr length]-1];
+     //   NSString *appStr=[textField.text stringByAppendingString:string];
+      //  NSString *newString = [appStr substringToIndex:[appStr length]-1];
         [self.selectedPlayerFilterArray removeAllObjects];
-        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName beginswith[c] %@",newString];
+        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",appStr];
         
         NSArray *filtedPlayerArray =  [slecteplayerlist filteredArrayUsingPredicate:resultPredicate];
         
         self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
         
-        if([newString isEqualToString:@""])
+        if([appStr isEqualToString:@""])
         {
             if([self.Btn_objSearch.currentImage  isEqual: [UIImage imageNamed:@"ico-cancel"]]){
                 self.txt_search.text =@"";

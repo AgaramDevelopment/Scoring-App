@@ -68,7 +68,7 @@
             
         
     }
-    else if([OVERNO isEqualToString:@"0"] && [BALLNO isEqualToString:@"0"] && [TOTALRUN isEqualToString:@"0"] && [WICKETS isEqualToString:@"0"])
+    else if(![OVERNO isEqualToString:@"0"] && ![BALLNO isEqualToString:@"0"] && ![TOTALRUN isEqualToString:@"0"] && ![WICKETS isEqualToString:@"0"])
         {
             self.btn_revert.backgroundColor=[UIColor colorWithRed:(112/255.0f) green:(94/255.0f) blue:(54/255.0f) alpha:1.0f];
             [_btn_revert setUserInteractionEnabled:NO];

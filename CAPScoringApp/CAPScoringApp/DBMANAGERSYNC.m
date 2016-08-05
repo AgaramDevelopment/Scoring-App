@@ -118,7 +118,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
+            NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
         }
+        NSLog(@"Database Error Message : %s", sqlite3_errmsg(dataBase));
         sqlite3_close(dataBase);
     }
     return NO;
@@ -134,7 +136,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE COMPETITION SET  COMPETITIONNAME='%@', SEASON='%@', TROPHY='%@',STARTDATE='%@',ENDDATE='%@', MATCHTYPE='%@',ISOTHERSMATCHTYPE='%@', MODIFIEDBY='%@', MODIFIEDDATE='%@',issync='1', WHERE COMPETITIONCODE='%@'",COMPETITIONNAME,SEASON,TROPHY, STARTDATE, ENDDATE,MATCHTYPE,ISOTHERSMATCHTYPE,MODIFIEDBY,MODIFIEDDATE,COMPETITIONCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE COMPETITION SET  COMPETITIONNAME='%@', SEASON='%@', TROPHY='%@',STARTDATE='%@',ENDDATE='%@', MATCHTYPE='%@',ISOTHERSMATCHTYPE='%@', MODIFIEDBY='%@', MODIFIEDDATE='%@',issync='1' WHERE COMPETITIONCODE='%@'",COMPETITIONNAME,SEASON,TROPHY, STARTDATE, ENDDATE,MATCHTYPE,ISOTHERSMATCHTYPE,MODIFIEDBY,MODIFIEDDATE,COMPETITIONCODE];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -146,8 +148,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
+             NSLog(@"UPDATE Database Error Message : %s", sqlite3_errmsg(dataBase));
             
         }
+        NSLog(@"UPDATE Database Error Message : %s", sqlite3_errmsg(dataBase));
         sqlite3_close(dataBase);
     }
     return NO;
