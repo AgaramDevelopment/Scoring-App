@@ -8658,6 +8658,10 @@ self.lbl_umpirename.text=@"";
             objFollowOn.nonStrikerName       =fetchSEPageLoadRecord.nonstrickerPlayerName;
             objFollowOn.bowlerName           =fetchSEPageLoadRecord.currentBowlerPlayerName;
             
+            objFollowOn.OVERNO                =[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVERS];
+            objFollowOn.BALLNO                =[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMOVRBALLS];
+            objFollowOn.WICKETS               =[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMWICKETS];
+            objFollowOn.TOTALRUN =[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMRUNS];
             
             objFollowOn.objBowlingTeamdetail =fetchSEPageLoadRecord.getBowlingTeamPlayers;
             objFollowOn.delegate =self;
