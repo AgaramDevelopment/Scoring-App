@@ -144,7 +144,7 @@
                 NSString *RECORDSTATUS=[test1 objectForKey:@"Recordstatus"];
                 
                 
-                bool CheckStatus1=[objDBMANAGERSYNC CheckCompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckCompetitionCodeTeamCode :COMPETITIONCODE:TEAMCODE];
                 if (CheckStatus1==NO) {
                    [objDBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
                 }
