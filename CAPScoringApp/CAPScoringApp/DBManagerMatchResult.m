@@ -14,6 +14,7 @@
 #import "GetBestPlayerDetail.h"
 #import "GetMatchResultDetail.h"
 #import "UserRecord.h"
+#import "PushSyncDBMANAGER.h"
 
 @implementation DBManagerMatchResult
 
