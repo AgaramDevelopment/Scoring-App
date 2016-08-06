@@ -7,6 +7,7 @@
 //
 
 #import "DBManagerInsertUpdateMatchResult.h"
+#import "PushSyncDBMANAGER.h"
 
 @implementation DBManagerInsertUpdateMatchResult
 
@@ -69,7 +70,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                return YES;
+                
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:@"" :@"COMPETITION" :@"MSC251" :updateSQL];
+               return YES;
                 
             }
             sqlite3_reset(statement);
@@ -126,6 +130,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHRESULT" :@"MSC252" :updateSQL];
                 return YES;
             }
             sqlite3_reset(statement);
@@ -183,6 +189,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHRESULT" :@"MSC250" :updateSQL];
                 return YES;
                 
             }
@@ -214,6 +222,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHREGISTRATION" :@"MSC251" :updateSQL];
                 return YES;
                 
             }
@@ -245,6 +255,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHREGISTRATION" :@"MSC251" :updateSQL];
                 return YES;
                 
             }
@@ -276,6 +288,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHRESULT" :@"MSC251" :updateSQL];
                 return YES;
                 
             }
@@ -308,6 +322,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHREGISTRATION" :@"MSC251" :updateSQL];
                 return YES;
                 
             }

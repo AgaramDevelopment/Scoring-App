@@ -113,7 +113,7 @@
                     
                     bool CheckStatus=[objDBMANAGERSYNC CheckCompetitionCode:COMPETITIONCODE];
                     if (CheckStatus==YES) {
-                        [objDBMANAGERSYNC UPDATECOMPETITION:COMPETITIONCODE: COMPETITIONNAME:SEASON: TROPHY:STARTDATE:ENDDATE:MATCHTYPE:ISOTHERSMATCHTYPE : MODIFIEDBY: MODIFIEDDATE];
+                        [objDBMANAGERSYNC UPDATECOMPETITION :COMPETITIONCODE: COMPETITIONNAME:SEASON: TROPHY:STARTDATE:ENDDATE:MATCHTYPE:ISOTHERSMATCHTYPE : MODIFIEDBY: MODIFIEDDATE];
                     }
                     
                     else
@@ -144,7 +144,7 @@
                 NSString *RECORDSTATUS=[test1 objectForKey:@"Recordstatus"];
                 
                 
-                bool CheckStatus1=[objDBMANAGERSYNC CheckCompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+                bool CheckStatus1=[objDBMANAGERSYNC CheckCompetitionCodeTeamCode :COMPETITIONCODE:TEAMCODE];
                 if (CheckStatus1==NO) {
                    [objDBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
                 }

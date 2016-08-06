@@ -1305,7 +1305,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return BOWLINGSUMMARYArray;
 }
-
 -(BOOL) InsertTransactionLogEntry: (NSString*) MATCHCODE : (NSString*) TABLENAME : (NSString*)SCRIPTTYPE : (NSString*)SCRIPTDATA
 {
     NSString *databasePath = [self getDBPath];
@@ -1316,9 +1315,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         NSString *userCode=[defaults stringForKey:@"userCode"];
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO CAPTRANSACTIONSLOGENTRY ( MATCHCODE, TABLENAME, SCRIPTTYPE, SCRIPTDATA, USERID, LOGDATETIME, SCRIPTSTATUS ) VALUES ( '%@', '%@', '%@', '%@', '%@', datetime('now'), 'MSC247' );",MATCHCODE,TABLENAME,SCRIPTTYPE,SCRIPTDATA,userCode];
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO CAPTRANSACTIONSLOGENTRY ( MATCHCODE, TABLENAME, SCRIPTTYPE, SCRIPTDATA, USERID, LOGDATETIME, SCRIPTSTATUS ) VALUES ( '%@', '%@', '%@', \"%@\", '%@', datetime('now','localtime'), 'MSC247' );",MATCHCODE,TABLENAME,SCRIPTTYPE,SCRIPTDATA,userCode];
         const char *selectStmt = [updateSQL UTF8String];
-        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+        if(sqlite3_prepare(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
@@ -1332,6 +1331,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                    NSLog(@"UPDATE Database Error Message : %s", sqlite3_errmsg(dataBase));
                 return NO;
             }
         }
