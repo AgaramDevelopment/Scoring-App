@@ -33,7 +33,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fgj-a3-8H4">
                     <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="AOr-HM-ybG">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AOr-HM-ybG">
                             <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="coG-yR-hrt">
@@ -159,7 +159,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.10588235294117647" green="0.13333333333333333" blue="0.15294117647058825" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="Cqv-KU-huN" firstAttribute="leading" secondItem="Fgj-a3-8H4" secondAttribute="leading" constant="54" id="1Dk-IA-AO1"/>
                         <constraint firstItem="plE-TY-XgS" firstAttribute="leading" secondItem="Fgj-a3-8H4" secondAttribute="leading" constant="54" id="25p-5R-goG"/>
@@ -193,7 +193,6 @@
         </view>
     </objects>
     <resources>
-        <image name="BackgroundImg" width="2048" height="2732"/>
         <image name="ico-back-btn" width="30" height="30"/>
     </resources>
 </document>

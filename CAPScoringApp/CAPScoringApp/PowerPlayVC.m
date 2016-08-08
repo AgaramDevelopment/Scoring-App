@@ -16,7 +16,7 @@
 #import "Utitliy.h"
 
 
-@interface PowerPlayVC ()<UITableViewDataSource,UITableViewDelegate>
+@interface PowerPlayVC ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 {
     BOOL isPowerplay_Tbl;
     NSMutableArray * selectindexarray;
@@ -287,7 +287,22 @@ else
 //    
 //    return YES;
 //}
-
+- (BOOL)textField:(UITextField *)theTextField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (string.length == 0) {
+        return YES;
+    }
+    NSCharacterSet *myCharSet = [NSCharacterSet characterSetWithCharactersInString:@"0123456789"];
+    for (int i = 0; i < [string length]; i++) {
+        unichar c = [string characterAtIndex:i];
+        if ([myCharSet characterIsMember:c]) {
+            return YES;
+        }
+    }
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Power Play" message:@"Only Numbers Are Allowed For Participant Number." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+    return NO;
+}
 
 
 - (BOOL) formValidation{
@@ -349,10 +364,11 @@ else
     
        if(powerplaystartover == nil){
        
-        
+         if([self formValidation]){
             [self startService];
             [self insertpowerplay];
-            
+         }
+           
         }
    
     else

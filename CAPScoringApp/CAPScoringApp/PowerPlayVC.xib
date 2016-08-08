@@ -49,7 +49,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lw0-vV-9CW">
                     <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="Ah8-Sf-D7k">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ah8-Sf-D7k">
                             <rect key="frame" x="0.0" y="0.0" width="550" height="600"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pbz-yF-1aT">
@@ -160,6 +160,9 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="gqK-bt-3HM"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -234,6 +237,9 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                             <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="cRb-I1-a6b"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -242,7 +248,7 @@
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.1058823529" green="0.1333333333" blue="0.1529411765" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="Ah8-Sf-D7k" firstAttribute="top" secondItem="lw0-vV-9CW" secondAttribute="top" id="1pp-A1-JCz"/>
                         <constraint firstAttribute="bottom" secondItem="Ah8-Sf-D7k" secondAttribute="bottom" id="7nS-S4-tQ7"/>
@@ -265,7 +271,6 @@
         </view>
     </objects>
     <resources>
-        <image name="BackgroundImg" width="2048" height="2732"/>
         <image name="dropDown" width="54" height="54"/>
         <image name="ico-add" width="32" height="32"/>
         <image name="ico-back-btn" width="30" height="30"/>
