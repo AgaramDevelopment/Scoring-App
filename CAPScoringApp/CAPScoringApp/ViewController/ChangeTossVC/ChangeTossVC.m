@@ -564,7 +564,7 @@
         }
         else
         {
-            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Change Toss"
                                                             message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
                                                            delegate: self
                                                   cancelButtonTitle:@"Ok"
@@ -586,7 +586,7 @@
         }
         else
         {
-            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Alert"
+            UIAlertView *alert1 = [[UIAlertView alloc]initWithTitle:@"Change Toss"
                                                             message: @"Striker and Non Striker cannot be same.\nPlease Select different Player"
                                                            delegate: self
                                                   cancelButtonTitle:@"Ok"

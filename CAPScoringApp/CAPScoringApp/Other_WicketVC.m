@@ -452,6 +452,14 @@ else
     
    
     
+    if([Wicket_lbl.text isEqual:@"Select"] || Wicket_lbl.text==nil && [self.selectplayer_lbl.text isEqualToString:@"Select"] || self.selectplayer_lbl.text==nil && [self.WICKET_NO_LBL.text isEqualToString:@""] || self.WICKET_NO_LBL.text==nil )
+    {
+        [self showDialog:@"Please Select Wicket Name\n Please enter Player Name" andTitle:@"Other Wickets"];
+        flag = NO;
+        return flag;
+        
+    }
+    
     if([Wicket_lbl.text isEqual:@"Select"]){
         [self showDialog:@"Please Select Wicket Name" andTitle:@"Other Wickets"];
 //       errorMessage = [NSString stringWithFormat:@"%@",@"Please select Wicket Type.\n"];
@@ -467,6 +475,12 @@ else
         
         
     }
+    
+    
+
+    
+    
+    
     return flag;
 }
 

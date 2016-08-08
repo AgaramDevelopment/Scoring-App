@@ -3442,7 +3442,7 @@
                         if(![ValidedMatchType containsObject: [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.MATCHTYPE]] &&[self.ballEventRecord.objOverno intValue] >= fetchSEPageLoadRecord.MATCHTYPE && ![MuliteDayMatchtype containsObject: [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.MATCHTYPE]])
                         {
                             
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings is Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings Completed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                             [altert show];
                             [altert setTag:1008];
                             if(fetchSEPageLoadRecord.INNINGSNO == 2)
