@@ -7,15 +7,20 @@
     <customFonts key="customFonts">
         <mutableArray key="RAJDHANI-BOLD.TTF">
             <string>Rajdhani-Bold</string>
-        </mutableArray>
-        <mutableArray key="RAJDHANI-MEDIUM.TTF">
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -50,7 +55,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BOK-98-6dx">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="Fst-yg-ZRx">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundWithoutIcon" translatesAutoresizingMaskIntoConstraints="NO" id="Fst-yg-ZRx">
                             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Vg-Nc-tTl">
@@ -94,7 +99,7 @@
                                         <constraint firstAttribute="height" constant="35" id="34q-OV-lxa"/>
                                         <constraint firstAttribute="width" constant="200" id="AnE-oR-Gs2"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -104,7 +109,7 @@
                                         <constraint firstAttribute="height" constant="35" id="VVu-jb-d7Y"/>
                                         <constraint firstAttribute="width" constant="200" id="sx8-Qc-Tfq"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -114,7 +119,7 @@
                                         <constraint firstAttribute="height" constant="35" id="E7e-GM-ns2"/>
                                         <constraint firstAttribute="width" constant="200" id="Re2-iL-HR3"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -124,7 +129,7 @@
                                         <constraint firstAttribute="height" constant="35" id="Qse-27-ANn"/>
                                         <constraint firstAttribute="width" constant="200" id="gdf-mw-Iij"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -134,7 +139,7 @@
                                         <constraint firstAttribute="height" constant="35" id="JRj-zN-odv"/>
                                         <constraint firstAttribute="width" constant="200" id="uWR-Ah-AkS"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="20"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -144,7 +149,7 @@
                                         <constraint firstAttribute="width" constant="200" id="cYt-bV-wD7"/>
                                         <constraint firstAttribute="height" constant="35" id="iPi-Gm-kcb"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -168,7 +173,7 @@
                                                 <constraint firstAttribute="height" constant="35" id="WL2-HL-Puf"/>
                                                 <constraint firstAttribute="width" constant="197" id="cVm-rS-PMu"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="18"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -195,7 +200,7 @@
                                                 <constraint firstAttribute="height" constant="35" id="RdL-ur-p7Z"/>
                                                 <constraint firstAttribute="width" constant="197" id="ch9-LD-yBD"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -233,7 +238,7 @@
                                                 <constraint firstAttribute="width" constant="197" id="3Ef-mu-FoJ"/>
                                                 <constraint firstAttribute="height" constant="35" id="a4S-6Y-ezK"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -270,7 +275,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="35" id="US9-hO-8FF"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -308,7 +313,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="35" id="c1w-Vj-YDm"/>
                                             </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -344,7 +349,7 @@
                                         <constraint firstAttribute="height" constant="35" id="9Qq-ew-o7V"/>
                                         <constraint firstAttribute="width" constant="70" id="n2a-dX-xFP"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="16"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="16"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -354,7 +359,7 @@
                                         <constraint firstAttribute="height" constant="35" id="S2W-1h-5Qd"/>
                                         <constraint firstAttribute="width" constant="75" id="g6f-VH-Jjl"/>
                                     </constraints>
-                                    <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="16"/>
+                                    <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="16"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -436,6 +441,7 @@
                                 <constraint firstAttribute="height" constant="45" id="YQ6-Rl-r5w"/>
                                 <constraint firstAttribute="width" constant="200" id="m14-78-gZD"/>
                             </constraints>
+                            <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                             <state key="normal" title="Change Toss"/>
                             <connections>
                                 <action selector="didClickChangeToss:" destination="-1" eventType="touchUpInside" id="ozi-0G-s9v"/>
@@ -471,7 +477,7 @@
         </view>
     </objects>
     <resources>
-        <image name="BackgroundImg" width="2048" height="2732"/>
+        <image name="backgroundWithoutIcon" width="2048" height="2732"/>
         <image name="dropDown" width="54" height="54"/>
         <image name="ico-back-btn" width="30" height="30"/>
     </resources>

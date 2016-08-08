@@ -14,6 +14,7 @@
 #import "TossDetailRecord.h"
 #import "TossTeamDetailRecord.h"
 #import "InitializeInningsScoreBoardRecord.h"
+#import "PushSyncDBMANAGER.h"
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 @implementation DBManagerChangeToss
@@ -199,10 +200,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
         }
-       
+        
         sqlite3_close(dataBase);
     }
-
+    
     return 0;
 }
 
@@ -230,10 +231,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
         }
-
+        
         sqlite3_close(dataBase);
     }
-
+    
     return @"";
 }
 
@@ -261,10 +262,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
         }
- 
+        
         sqlite3_close(dataBase);
     }
-
+    
     return @"";
 }
 
@@ -593,8 +594,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     [dbChangeToss UpdateMatchStatusForToss : COMPETITIONCODE : MATCHCODE];
     
     
-[InitializeInningsScoreBoardRecord InitializeInningsScoreBoard :COMPETITIONCODE : MATCHCODE :BATTINGTEAMCODE :BOWLINGTEAMCODE : MaxInningsNumber : STRIKERCODE : NONSTRIKERCODE :
-     BOWLERCODE : [NSNumber numberWithInt:0]];
+    [InitializeInningsScoreBoardRecord InitializeInningsScoreBoard :COMPETITIONCODE : MATCHCODE :BATTINGTEAMCODE :BOWLINGTEAMCODE : MaxInningsNumber : STRIKERCODE : NONSTRIKERCODE :
+                                                        BOWLERCODE : [NSNumber numberWithInt:0]];
 }
 
 
@@ -612,7 +613,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL) ==SQLITE_OK)
-        
+            
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 TossTeamDetailRecord *TossWonTeamCodeForToss=[[TossTeamDetailRecord alloc]init];
@@ -709,12 +710,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             }
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
-
+            
         }
-
+        
         sqlite3_close(dataBase);
     }
-   
+    
     return @"";
 }
 
@@ -736,6 +737,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHEVENTS" :@"MSC250" :updateSQL];
+                
                 return YES;
                 
             }
@@ -775,12 +780,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             }
             sqlite3_finalize(statement);
             sqlite3_close(dataBase);
-
+            
         }
-
+        
         sqlite3_close(dataBase);
     }
-   return @"";
+    return @"";
     
 }
 
@@ -802,6 +807,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"INNINGSEVENTS" :@"MSC250" :updateSQL];
+                
                 return YES;
                 
             }
@@ -836,6 +845,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHREGISTRATION" :@"MSC251" :updateSQL];
+                
                 return YES;
                 
             }
