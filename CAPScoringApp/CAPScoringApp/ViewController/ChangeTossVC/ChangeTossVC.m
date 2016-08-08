@@ -71,33 +71,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     dbChangeToss = [[DBManagerChangeToss alloc]init];
-    self.view_TossWon.layer.borderWidth = 1.0;
-    self.view_TossWon.layer.borderColor = [UIColor colorWithRed:(48/255.0f) green:(62/255.0f) blue:(73/255.0f) alpha:1.0f].CGColor;
     
-    self.view_TossWon .layer.cornerRadius =5.0;
+    
+    
+    self.view_TossWon.layer.borderWidth = 2;
+    self.view_TossWon.layer.borderColor = [UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:1.0f].CGColor;
+    
+    //self.view_TossWon .layer.cornerRadius =5.0;
     self.view_TossWon.layer .masksToBounds =YES;
     
     
-    self.view_ElectedTo.layer.borderWidth = 1.0;
-    self.view_ElectedTo.layer.borderColor = [UIColor colorWithRed:(48/255.0f) green:(62/255.0f) blue:(73/255.0f) alpha:1.0f].CGColor;
+    self.view_ElectedTo.layer.borderWidth = 2;
+    self.view_ElectedTo.layer.borderColor = [UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:1.0f].CGColor;
     
-    self.view_ElectedTo .layer.cornerRadius =5.0;
+    //self.view_ElectedTo .layer.cornerRadius =5.0;
     self.view_ElectedTo.layer .masksToBounds =YES;
     
-    self.view_Stricker.layer.borderWidth = 1.0;
-    self.view_Stricker.layer.borderColor = [UIColor colorWithRed:(48/255.0f) green:(62/255.0f) blue:(73/255.0f) alpha:1.0f].CGColor;
-    self.view_Stricker .layer.cornerRadius =5.0;
+    self.view_Stricker.layer.borderWidth = 2;
+    self.view_Stricker.layer.borderColor = [UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:1.0f].CGColor;
+    //self.view_Stricker .layer.cornerRadius =5.0;
     self.view_Stricker.layer .masksToBounds =YES;
     
-    self.view_NonStricker.layer.borderWidth = 1.0;
-    self.view_NonStricker.layer.borderColor = [UIColor colorWithRed:(48/255.0f) green:(62/255.0f) blue:(73/255.0f) alpha:1.0f].CGColor;
-    self.view_NonStricker .layer.cornerRadius =5.0;
+    self.view_NonStricker.layer.borderWidth = 2;
+    self.view_NonStricker.layer.borderColor = [UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:1.0f].CGColor;
+    //self.view_NonStricker .layer.cornerRadius =5.0;
     self.view_NonStricker.layer .masksToBounds =YES;
     
-    self.view_Bowler.layer.borderWidth = 1.0;
-    self.view_Bowler.layer.borderColor = [UIColor colorWithRed:(48/255.0f) green:(62/255.0f) blue:(73/255.0f) alpha:1.0f].CGColor;
+    self.view_Bowler.layer.borderWidth = 2;
+    self.view_Bowler.layer.borderColor = [UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:1.0f].CGColor;
     
-    self.view_Bowler .layer.cornerRadius =5.0;
+    //self.view_Bowler .layer.cornerRadius =5.0;
     self.view_Bowler.layer .masksToBounds =YES;
 
      self.Tbl_toss.hidden=YES;
