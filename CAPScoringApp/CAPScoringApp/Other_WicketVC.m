@@ -148,6 +148,7 @@
     
     
     
+    
 }
 -(void)viewWillAppear:(BOOL)animated
 {
@@ -537,7 +538,9 @@ else
     self.selectplayer_lbl.text=@"Select";
     self. Wicket_lbl.text =@"Select";
     
-    [self.btn_delete setBackgroundColor:[UIColor grayColor]];
+    //[self.btn_delete setBackgroundColor:[UIColor grayColor]];
+    
+self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:1.0f];
     self.btn_delete.userInteractionEnabled=NO;
 }
 - (IBAction)didclicktouchplayer:(id)sender {

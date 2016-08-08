@@ -139,17 +139,18 @@ int POS_TEAM_TYPE = 1;
     _lbl_InningsNo.text = [NSString stringWithFormat:@"%@",sessionRecords.INNINGSNOS];
     _lbl_teamBatting.text = sessionRecords.TEAMNAMES;
     
-//    _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO == nil ? @"0" : sessionRecords.STARTOVERNO];
-//    
-//    _lbl_sessionEndOver.text = [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO = @"" ? @"0" :sessionRecords.ENDOVERNO];
-    
-    _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO = @"0.1" ? @"0" :sessionRecords.STARTOVERNO];
 
+    
+//    _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",sessionRecords.STARTOVERBALLNO = @"0.1" ? @"0" :sessionRecords.STARTOVERBALLNO];
+    
+    _lbl_sessionStartOver.text = sessionRecords.STARTOVERBALLNO;
     _lbl_sessionEndOver.text = sessionRecords.ENDOVERBALLNO;
     
     _lbl_runScored.text = [NSString stringWithFormat:@"%@",sessionRecords.RUNSSCORED];
     _lbl_wicketLost.text = [NSString stringWithFormat:@"%@",sessionRecords.WICKETLOST];
 
+
+    
     
     SESSIONNO = sessionRecords.SESSIONNO;
     DAYNO = sessionRecords.DAYNO;
