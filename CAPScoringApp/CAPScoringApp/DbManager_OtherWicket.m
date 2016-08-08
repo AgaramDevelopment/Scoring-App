@@ -1174,7 +1174,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return GetPlayerDetails;
 }
 
--(NSMutableArray *) GetWicketEventDetailsForUpdateOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO ;
+-(NSMutableArray *) GetWicketEventDetailsForUpdateOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO
 {
     NSMutableArray *GetWicketEventsPlayerDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];

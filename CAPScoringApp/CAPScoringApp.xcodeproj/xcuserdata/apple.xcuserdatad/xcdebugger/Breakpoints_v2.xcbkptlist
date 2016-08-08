@@ -89,22 +89,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/Other_WicketVC.m"
-            timestampString = "491814131.335259"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "569"
-            endingLineNumber = "569"
-            landmarkName = "-didclicktouchplayer:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ArchivesVC.m"
             timestampString = "491824614.173926"
             startingColumnNumber = "9223372036854775807"
@@ -239,7 +223,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9557"
             endingLineNumber = "9557"
-            landmarkName = "-GetPenaltyDetailsForUpdate::::"
+            landmarkName = "-SetPenaltyDetails:::::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -287,7 +271,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1626"
             endingLineNumber = "1626"
-            landmarkName = "-GetWicketNoForDeleteOtherwicket::::"
+            landmarkName = "-GetPlayerDetailForDeleteOtherwicket:::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -298,11 +282,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/Other_WicketVC.m"
-            timestampString = "491814131.335259"
+            timestampString = "492350392.274318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "617"
-            endingLineNumber = "617"
+            startingLineNumber = "618"
+            endingLineNumber = "618"
             landmarkName = "-didclickdelete:"
             landmarkType = "5">
          </BreakpointContent>
@@ -479,7 +463,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6456"
             endingLineNumber = "6456"
-            landmarkName = "-InsertInningsEvents::::::::"
+            landmarkName = "-MatchCodeForInsertBreaks:::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -538,12 +522,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/Other_WicketVC.m"
-            timestampString = "491814131.335259"
+            timestampString = "492350392.274318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "879"
-            endingLineNumber = "879"
-            landmarkName = "-UpdateOtherwickets:::::::::"
+            startingLineNumber = "880"
+            endingLineNumber = "880"
+            landmarkName = "-InsertOtherwickets:::::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -559,7 +543,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1041"
             endingLineNumber = "1041"
-            landmarkName = "-GetwicketForUpdateOtherwicket:::::"
+            landmarkName = "-UpdateWicKetEventUpdateOtherwicket::::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -575,7 +559,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1164"
             endingLineNumber = "1164"
-            landmarkName = "-GetWicketEventDetailsForUpdateOtherwicket::::"
+            landmarkName = "-GetPlayerDetailForUpdateOtherwicket:::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -586,43 +570,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/Other_WicketVC.m"
-            timestampString = "491814131.335259"
+            timestampString = "492350392.274318"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "921"
-            endingLineNumber = "921"
-            landmarkName = "-UpdateOtherwickets:::::::::"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/Other_WicketVC.m"
-            timestampString = "491813081.993189"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "238"
-            endingLineNumber = "238"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/Other_WicketVC.m"
-            timestampString = "491814131.335259"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "937"
-            endingLineNumber = "937"
+            startingLineNumber = "922"
+            endingLineNumber = "922"
             landmarkName = "-UpdateOtherwickets:::::::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -1706,28 +1658,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/Resource/DBManager.m"
-            timestampString = "492066070.82141"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "10078"
-            endingLineNumber = "10078"
-            landmarkName = "-checkpowerplayforupdate:ENDOVER:MATCHCODE:INNINGSNO:POWERPLAYCODE:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/Resource/DBManager.m"
             timestampString = "492066612.357834"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9683"
             endingLineNumber = "9683"
-            landmarkName = "-SetPowerPlayDetailsForInsert::"
+            landmarkName = "-SetPenaltyDetailsForInsert:::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1935,7 +1871,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9729"
             endingLineNumber = "9729"
-            landmarkName = "-UpdatePowerPlay:::::::::"
+            landmarkName = "-GetPenaltyDetailsForUpdate::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1999,7 +1935,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9983"
             endingLineNumber = "9983"
-            landmarkName = "-checkpowerplay:ENDOVER:MATCHCODE:INNINGSNO:"
+            landmarkName = "-SetMatchRegistrationTarget:competitionCode:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2015,7 +1951,87 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9609"
             endingLineNumber = "9609"
-            landmarkName = "-SetPowerPlayDetails:::::::::::"
+            landmarkName = "-GetPenaltyDetailsForPageLoadPenalty:::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/Other_WicketVC.m"
+            timestampString = "492350392.274318"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "908"
+            endingLineNumber = "908"
+            landmarkName = "-UpdateOtherwickets:::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/Other_WicketVC.m"
+            timestampString = "492351573.421699"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "958"
+            endingLineNumber = "958"
+            landmarkName = "-UpdateOtherwickets:::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DbManager_OtherWicket.m"
+            timestampString = "492349380.5786"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1179"
+            endingLineNumber = "1179"
+            landmarkName = "-GetWicketEventDetailsForUpdateOtherwicket::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/Other_WicketVC.m"
+            timestampString = "492349793.477743"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "324"
+            endingLineNumber = "324"
+            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/Other_WicketVC.m"
+            timestampString = "492350626.596129"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "477"
+            endingLineNumber = "477"
+            landmarkName = "-didclicksave:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
