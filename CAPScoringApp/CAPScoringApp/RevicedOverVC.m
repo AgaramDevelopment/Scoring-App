@@ -77,7 +77,7 @@
             }
             else
             {
-                UIAlertView * objalterview =[[UIAlertView alloc]initWithTitle:@"Revised Overs" message:@"Please Enter Number Only" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                UIAlertView * objalterview =[[UIAlertView alloc]initWithTitle:@"Revised Overs" message:@"Please Enter No Of Overs" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [objalterview show];
             }
             return NO;

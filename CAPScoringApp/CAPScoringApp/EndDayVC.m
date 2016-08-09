@@ -406,7 +406,7 @@
 -(BOOL) checkValidation{
     
     
-    if ([self.txt_endTime.text isEqualToString:@""]) {
+    if ([self.txt_endTime.text isEqualToString:@""] && ![self.txt_startTime.text isEqualToString:@""]) {
         
         [self showDialog:@"Please Choose Day End Time" andTitle:@"End Day"];
         return NO;
@@ -529,7 +529,7 @@
            self.gridHeaderView.hidden=NO;
         fetchEndDayDetails = [[FetchEndDayDetails alloc]init];
         [fetchEndDayDetails FetchEndDay:_COMPETITIONCODE :_MATCHCODE :_TEAMCODE :_INNINGSNO];
-        
+      self.view_addbtn.hidden = NO;
         [self.tbl_endday reloadData];
         
     }
@@ -705,6 +705,7 @@
         
         //[delegate hideLoading];
     }
+         self.view_addbtn.hidden = NO;
 }
 
 

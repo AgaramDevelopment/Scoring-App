@@ -210,7 +210,7 @@ objDBManager = [[DBManager alloc]init];
        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Revised Target" message:@"Revised Target Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
        [alter show];
           alter.tag =100;
-       [self startService];
+     //  [self startService];
 
        
     }

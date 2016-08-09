@@ -578,10 +578,10 @@ int POS_TEAM_TYPE = 1;
 -(BOOL) checkValidation{
     
     
-//    if([self.txt_endTime.text isEqualToString:@""]){
-//        [self showDialog:@"Please Choose End Session Time" andTitle:@"End Session"];
-//        return NO;
-//    }
+    if([self.txt_endTime.text isEqualToString:@""] && ![self.txt_startTime.text isEqualToString:@""]){
+        [self showDialog:@"Please Choose End Session Time" andTitle:@"End Session"];
+        return NO;
+    }
     
     if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
          [self showDialog:@"Duration should be greated than zero" andTitle:@"End Session"];
