@@ -284,7 +284,7 @@
             customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
                                                               green:161/255.0
                                                                blue:79/255.0
-                                                              alpha:0.5];
+                                                              alpha:1];
             cell.selectedBackgroundView =  customColorView;
 
         }

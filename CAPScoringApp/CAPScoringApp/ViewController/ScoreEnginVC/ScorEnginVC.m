@@ -3442,7 +3442,7 @@
                         if(![ValidedMatchType containsObject: [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.MATCHTYPE]] &&[self.ballEventRecord.objOverno intValue] >= fetchSEPageLoadRecord.MATCHTYPE && ![MuliteDayMatchtype containsObject: [NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.MATCHTYPE]])
                         {
                             
-                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings is Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings Completed" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                             [altert show];
                             [altert setTag:1008];
                             if(fetchSEPageLoadRecord.INNINGSNO == 2)
@@ -8853,7 +8853,7 @@ self.lbl_umpirename.text=@"";
     otherwicketvc.STRIKERCODE=fetchSEPageLoadRecord.strickerPlayerCode;
     otherwicketvc.NONSTRIKERCODE=fetchSEPageLoadRecord.nonstrickerPlayerCode;
     otherwicketvc.NONSTRIKERNAME=fetchSEPageLoadRecord.nonstrickerPlayerName;
-
+    otherwicketvc.TOTALRUNS     =[NSString stringWithFormat:@"%d",fetchSEPageLoadRecord.BATTEAMRUNS] ;
     otherwicketvc.MAXOVER=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS];
     otherwicketvc.MAXBALL=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLS];
     otherwicketvc.BALLCOUNT=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
