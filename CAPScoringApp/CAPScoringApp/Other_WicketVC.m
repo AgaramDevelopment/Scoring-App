@@ -72,7 +72,7 @@
 
 @property(nonatomic,strong)NSString *PLAYERSCHECK;
 
-@property(nonatomic,strong)NSString *TOTALRUNS;
+
 @property(nonatomic,strong)NSString *VIDEOLOCATION;
 
 @end
@@ -338,7 +338,7 @@ else
         [self.btn_delete setBackgroundColor:[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f]];
         self.btn_delete.userInteractionEnabled=YES;
         isAddWicket=YES;
-  
+        [self.btn_save setTitle:@"UPDATE" forState:UIControlStateNormal];
     }
     else
     {
@@ -540,6 +540,7 @@ else
 
 -(IBAction)didClickAddBtnAction:(id)sender
 {
+     [self.btn_save setTitle:@"SAVE" forState:UIControlStateNormal];
     [self getWicketListMethod];
     WicketStingValues = [NSString stringWithFormat:@"%@", WICKETNO];
     
@@ -946,15 +947,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255
                                   N_WICKETNO =  wicketdetailss.WICKETNO;
                                   N_WICKETTYPE =wicketdetailss.WICKETTYPE;
                                   N_FIELDERCODE =wicketdetailss.FIELDINGPLAYER;
-//                                  for(int i ; i< GetWicketEventsPlayerDetails.count;i++)
-//                                  {
-//                                       GetWicketEventsPlayerDetail *veb =(GetWicketEventsPlayerDetail*)[GetWicketEventsPlayerDetails objectAtIndex:i];
-//                                      if(veb.WICKETNO == N_WICKETNO)
-//                                      {
-//                                          veb.WICKETTYPECODE=
-//                                      }
-//                                  }
-                                  
+//
                                    }
         
    
@@ -983,6 +976,7 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255
     self.WickAddview.hidden=NO;
     self.Btn_Add.hidden =NO;
     isWicketlist=NO;
+    GetWicketEventsPlayerDetails=GetWicketEventsPlayerDetails;
     [self.tbl_Wicketlist reloadData];
 
     NSMutableArray *GetPlayerDetails=[ dbOtherWicket GetPlayerDetailForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE];

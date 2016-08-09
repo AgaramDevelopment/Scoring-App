@@ -376,11 +376,18 @@
 }
 - (BOOL) formValidation
 {
-    if([self.lbl_Tosswon.text isEqualToString:@""] || self.lbl_Tosswon.text==nil && [self.lbl_ElectedTo.text isEqualToString:@""] || self.lbl_ElectedTo.text==nil && [self.lbl_Stricker.text isEqualToString:@""] || self.lbl_Stricker.text==nil && [self.lbl_NonStricker.text isEqualToString:@""] || self.lbl_NonStricker.text==nil && [self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)
+    
+    if([self.lbl_Tosswon.text isEqualToString:@""] || self.lbl_Tosswon.text==nil && [self.lbl_Stricker.text isEqualToString:@""] || self.lbl_Stricker.text==nil && [self.lbl_NonStricker.text isEqualToString:@""] || self.lbl_NonStricker.text==nil && [self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)
+    {
+        [self ShowAlterView:@"Please Select Team,Striker,NonStriker And Bowler"];
+        return NO;
+    }
+    else if([self.lbl_Tosswon.text isEqualToString:@""] || self.lbl_Tosswon.text==nil && [self.lbl_ElectedTo.text isEqualToString:@""] || self.lbl_ElectedTo.text==nil && [self.lbl_Stricker.text isEqualToString:@""] || self.lbl_Stricker.text==nil && [self.lbl_NonStricker.text isEqualToString:@""] || self.lbl_NonStricker.text==nil && [self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)
     {
         [self ShowAlterView:@"Please Select Team,\nElectedTo,Striker,NonStriker And Bowler"];
         return NO;
     }
+    
     
     else if([self.lbl_ElectedTo.text isEqualToString:@""] || self.lbl_ElectedTo.text==nil && [self.lbl_Stricker.text isEqualToString:@""] || self.lbl_Stricker.text==nil && [self.lbl_NonStricker.text isEqualToString:@""] || self.lbl_NonStricker.text==nil && [self.lbl_Bowler.text isEqualToString:@""] || self.lbl_Bowler.text==nil)
     {
@@ -438,6 +445,7 @@
     }
     return YES;
 }
+
 -(IBAction)didClickBackBtnAction:(id)sender
 {
     [self.delegate ChangeVCBackBtnAction];
