@@ -52,7 +52,7 @@ objDBManager = [[DBManager alloc]init];
     self.txt_commentss.layer.borderWidth = 2;
     
     
-    self.txt_overs.text=objrevisedoverRecord.overs;
+   // self.txt_overs.text=objrevisedoverRecord.overs;
 
     self.txt_commentss.text=objrevisedoverRecord.matchovercomments;
     
@@ -62,17 +62,22 @@ objDBManager = [[DBManager alloc]init];
    _selecttargets =[objDBManager RetrieveRevisedTargetData:self.matchCode competitionCode:self.competitionCode];
     
  MatcheventRecord *objrevisedtarget =[self.selecttargets objectAtIndex:0];
-    
+     self.txt_overs.text=objrevisedtarget.targetovers;
 
+    if (inningsno>1)
+    {
+    strovers=objrevisedtarget.targetovers;
+    OldOvers=objrevisedtarget.targetovers;
+    strruns=objrevisedtarget.targetruns;
+    strcomments=objrevisedtarget.targetcomments;
     
-//    strovers=objrevisedtarget.targetovers;
-//    OldOvers=objrevisedtarget.targetovers;
-//    strruns=objrevisedtarget.targetruns;
-//    strcomments=objrevisedtarget.targetcomments;
+        self.txt_overs.text =strovers;
+        self.txt_target.text =objrevisedtarget.targetruns;
+        self.txt_commentss.text=objrevisedtarget.targetcomments;
+    }
     
-      //  self.txt_overs.text =strovers;
-        //self.txt_target.text =objrevisedtarget.targetruns;
-        //self.txt_commentss.text=objrevisedtarget.targetcomments;
+   else
+   {
     NSString * str_target=_targetruns;
     self.txt_target.text= [NSString stringWithFormat:@"%d",[str_target intValue] ];
     OldOvers=objrevisedoverRecord.overs;
@@ -80,7 +85,7 @@ objDBManager = [[DBManager alloc]init];
     strruns= [NSString stringWithFormat:@"%d",[str_target intValue] ];
     strcomments=objrevisedoverRecord.matchovercomments;
 
-    
+   }
     }
 
 - (void)didReceiveMemoryWarning {
@@ -160,6 +165,8 @@ objDBManager = [[DBManager alloc]init];
         NSString *oversTxt = self.txt_overs.text;
     NSInteger twentyText = [oversTxt intValue];
     NSInteger OdiText = [oversTxt intValue];
+    
+    
     if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){
         if(twentyText > 20){
             [self showDialog:@"Please Enter Below 20 Overs" andTitle:@"Revised Target"];
@@ -178,7 +185,14 @@ objDBManager = [[DBManager alloc]init];
      if([OldOvers intValue] < [txt_overs.text intValue]){
         [self showDialog:@"The Revised Target is not possible when the data exist for this innings." andTitle:@"Revised Target"];
         return NO;
-    } if([txt_overs.text isEqual:@""]){
+    }
+    
+     if([txt_overs.text  isEqual:@""] && [txt_target.text isEqual:@""] && [txt_commentss.text isEqual:@""]){
+         [self showDialog:@"Please enter Over\n Please enter Target\nPlease enter Comments." andTitle:@"Revised Target"];
+         return NO;
+     }
+    
+    if([txt_overs.text isEqual:@""]){
         [self showDialog:@"Please enter Over." andTitle:@"Revised Target"];
         return NO;
     } if([txt_target.text isEqual:@""]){
