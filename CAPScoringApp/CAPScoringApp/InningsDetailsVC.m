@@ -305,6 +305,8 @@
       
         [self.Striker_tableview reloadData];
         self.Striker_tableview.hidden=NO;
+        self.NonStriker_tableview.hidden=YES;
+        self.Bowler_tableview.hidden=YES;
         isEnableTbl=NO;
     }
     else
@@ -320,6 +322,8 @@
      
         [self.NonStriker_tableview reloadData];
         self.NonStriker_tableview.hidden=NO;
+        self.Striker_tableview.hidden=YES;
+        self.Bowler_tableview.hidden=YES;
         isEnableTbl=NO;
     }
     else
@@ -335,6 +339,8 @@
        
         [self.Bowler_tableview reloadData];
         self.Bowler_tableview.hidden=NO;
+        self.Striker_tableview.hidden=YES;
+        self.NonStriker_tableview.hidden=YES;
         isEnableTbl=NO;
     }
     else

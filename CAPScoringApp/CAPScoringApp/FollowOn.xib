@@ -46,7 +46,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fgn-bm-dAY">
                     <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="QYz-d3-EVj">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundWithoutIcon" translatesAutoresizingMaskIntoConstraints="NO" id="QYz-d3-EVj">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x0K-QQ-a5s">
@@ -799,7 +799,7 @@
         </view>
     </objects>
     <resources>
-        <image name="BackgroundImg" width="2048" height="2732"/>
+        <image name="backgroundWithoutIcon" width="2048" height="2732"/>
         <image name="dropDown" width="54" height="54"/>
         <image name="ico-back-btn" width="30" height="30"/>
     </resources>
