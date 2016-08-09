@@ -328,7 +328,7 @@ else
         self.selectplayer_lbl.text=veb.WICKETPLAYER;
         self.WICKET_NO_LBL.text=veb.WICKETNO;
         self.WICKETTYPE=veb.WICKETTYPE;
-        WICKETPLAYER=veb.WICKETPLAYER;
+       
         WICKETNO=veb.WICKETNO;
         self.WICKETTYPE =veb.WICKETTYPECODE;
         _ISEDITMODE =YES;
@@ -476,12 +476,7 @@ else
         
         
     }
-    
-    
 
-    
-    
-    
     return flag;
 }
 
@@ -534,8 +529,6 @@ else
         self.Wicket_tableview.hidden=YES;
         self.tbl_playername.hidden =YES;
     }
-    
-    
 }
 
 -(IBAction)didClickAddBtnAction:(id)sender
@@ -605,31 +598,6 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255
         [self getWicketListMethod];
         [self.tbl_Wicketlist reloadData];
     
-//    Other_WicketgridVC*add = [[Other_WicketgridVC alloc]initWithNibName:@"Other_WicketgridVC" bundle:nil];
-//    add.COMPETITIONCODE=self.COMPETITIONCODE;
-//    add.MATCHCODE=self.MATCHCODE;
-//    add.INNINGSNO=self.INNINGSNO;
-//    add.TEAMCODE=self.TEAMCODE;
-//        add.STRIKERCODE=STRIKERCODE;
-//        add.NONSTRIKERCODE=NONSTRIKERCODE;
-//        add.NONSTRIKERNAME=NONSTRIKERNAME;
-//        add.MAXOVER=MAXOVER;
-//        add.MAXBALL=MAXBALL;
-//        add.BALLCOUNT=BALLCOUNT;
-//        add.N_WICKETNO=N_WICKETNO;
-//        add.BALLCODE=BALLCODE;
-//    
-//    [self addChildViewController:add];
-//    add.view.frame =CGRectMake(0, 0, add.view.frame.size.width, add.view.frame.size.height);
-//    [self.view addSubview:add.view];
-//    add.view.alpha = 0;
-//    [add didMoveToParentViewController:self];
-//
-//    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
-//     {
-//         add.view.alpha = 1;
-//     }
-//                     completion:nil];
     }
     else{
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Other Wicket" message:@"No Record selected" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -950,7 +918,6 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255
 //
                                    }
         
-   
         [dbOtherWicket UpdateBattingSummaryForUpdateOtherwicket :  WICKETNO: WICKETTYPE: N_FIELDERCODE : TOTALRUNS:COMPETITIONCODE: MATCHCODE :TEAMCODE: INNINGSNO: WICKETPLAYER];
         
       
@@ -972,6 +939,9 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255
      GetWicketEventsPlayerDetails=[[NSMutableArray alloc]init];
    GetWicketEventsPlayerDetails=[ dbOtherWicket GetWicketEventDetailsForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE: INNINGSNO];
     
+    NSMutableArray *GetPlayerDetails=[ dbOtherWicket GetPlayerDetailForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE];
+    [ dbOtherWicket GetWicketNoForUpdateOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+
     
     self.WickAddview.hidden=NO;
     self.Btn_Add.hidden =NO;
@@ -979,8 +949,6 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255
     GetWicketEventsPlayerDetails=GetWicketEventsPlayerDetails;
     [self.tbl_Wicketlist reloadData];
 
-    NSMutableArray *GetPlayerDetails=[ dbOtherWicket GetPlayerDetailForUpdateOtherwicket :COMPETITIONCODE:MATCHCODE:TEAMCODE];
-      [ dbOtherWicket GetWicketNoForUpdateOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
     
 }
 

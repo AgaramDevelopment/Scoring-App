@@ -537,14 +537,15 @@
         [self.nonStriker setUserInteractionEnabled:YES];
         [self.view_Bowler setUserInteractionEnabled:YES];
         
+         self.Wonby_table.hidden=YES;
         self.Striker_table.hidden=YES;
-        isEnableTbl=YES;
+        //isEnableTbl=YES;
         
         self.nonStriker_table.hidden=YES;
-        isEnableTbl=YES;
+        //isEnableTbl=YES;
         
         self.Bowler_table.hidden=YES;
-        isEnableTbl=YES;
+        //isEnableTbl=YES;
     }
     else{
         self.electedTo_table.hidden=YES;

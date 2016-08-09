@@ -70,7 +70,7 @@
             
         [self.btn_Proceed setBackgroundColor:[UIColor grayColor]];
         self.btn_Proceed.userInteractionEnabled=NO;
-        [self.btn_Revert setBackgroundColor:[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f]];
+         [self.btn_Revert setBackgroundColor:[UIColor colorWithRed:(170/255.0f) green:(36/255.0f) blue:(34/255.0f) alpha:1.0f]];
         self.btn_Revert.userInteractionEnabled=YES;
             self.lbl_Striker.text=self.strikerName;
             self.lbl_nonStriker.text=self.nonStrikerName;
@@ -94,7 +94,7 @@
         {
             [self.btn_Proceed setBackgroundColor:[UIColor grayColor]];
             self.btn_Proceed.userInteractionEnabled=NO;
-            [self.btn_Revert setBackgroundColor:[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:1.0f]];
+            [self.btn_Revert setBackgroundColor:[UIColor colorWithRed:(170/255.0f) green:(36/255.0f) blue:(34/255.0f) alpha:1.0f]];
             self.btn_Revert.userInteractionEnabled=YES;
             self.lbl_Striker.text=self.strikerName;
             self.lbl_nonStriker.text=self.nonStrikerName;
