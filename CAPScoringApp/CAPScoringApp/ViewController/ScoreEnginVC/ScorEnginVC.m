@@ -8859,6 +8859,7 @@ self.lbl_umpirename.text=@"";
     otherwicketvc.BALLCOUNT=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
     otherwicketvc.N_WICKETNO=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMWICKETS];
     otherwicketvc.BALLCODE=fetchSEPageLoadRecord.BOWLTYPECODE;
+    otherwicketvc.WICKETTYPE =
     otherwicketvc.delegate=self;
     
     
