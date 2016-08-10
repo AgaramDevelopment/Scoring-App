@@ -47,6 +47,7 @@
 - (IBAction)btn_delete:(id)sender;
 - (IBAction)btn_touch:(id)sender;
 
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint * Xposition;
 @property(nonatomic,strong)PowerPlayRecord *powerplayrecord;
 
 @property(nonatomic,strong) NSString *matchCode;

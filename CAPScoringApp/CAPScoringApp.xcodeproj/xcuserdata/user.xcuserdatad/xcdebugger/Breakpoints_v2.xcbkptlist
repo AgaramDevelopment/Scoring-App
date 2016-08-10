@@ -655,7 +655,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6329"
             endingLineNumber = "6329"
-            landmarkName = "-GetMatchCodeForInsertBreaks::::"
+            landmarkName = "-FETCHSEALLINNINGSSCOREDETAILS:MATCHCODE:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -863,7 +863,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "9735"
             endingLineNumber = "9735"
-            landmarkName = "-UpdatePowerPlay:::::::::"
+            landmarkName = "-GetPenaltyDetailsForUpdate::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
