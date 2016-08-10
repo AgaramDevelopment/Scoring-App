@@ -98,7 +98,7 @@
     NSMutableArray *AppealBatsmenSelectionArray;
     NSArray*AppealBatsmenSelectCode;
     AppealBatsmenRecord *objAppealBatsmenEventRecord;
-    
+    NSString *isSelectMarkForEdit;
     NSString *StrikerPlayer;
     NSString *UmpireSelect;
     
@@ -145,6 +145,7 @@
     BOOL isWagonWheelValueSelected;
     BOOL isWagonwheel;
     BOOL isAppeal;
+    BOOL isMarksForEdit;
     BOOL isEndOverOnEndBall;
     
     BOOL isToss;
@@ -1097,6 +1098,8 @@
     //Mark for edit
     if(self.ballEventRecord.objMarkedforedit.integerValue == 1){
         [self selectedViewBg:_view_medit];
+       self.ballEventRecord.objMarkedforedit=@"1";
+        
     }
     
     //Runs
@@ -3114,11 +3117,13 @@
         }
         content = [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         //To Create ball tiker for each row.
+        
+    
         [ScrollViewer insertSubview: [self CreateBallTickerInstance
                                       :content
                                       :isExtras
                                       :isSpecialEvents
-                                      :(int)drballdetails.objMarkedforedit == 1
+                                      :[drballdetails.objMarkedforedit intValue] == 1
                                       :drballdetails.objBallno
                                       :xposition] atIndex:0];
         if (content.length >= 5)
@@ -6055,7 +6060,24 @@
     }
     else if(selectBtnTag.tag==121)
     {
-        //   [self selectBtncolor_Action:@"121" :nil :210];
+        
+        if(isMarksForEdit==NO)
+        {
+            
+            [self selectedViewBg:_view_medit];
+            
+            isMarksForEdit=YES;
+       self.ballEventRecord.objMarkedforedit=@"1";
+            NSLog(@"%@",self.ballEventRecord.objMarkedforedit);
+        }
+        else
+        {
+            [self unselectedButtonBg:_view_medit];
+            self.ballEventRecord.objMarkedforedit=@"0";
+            
+            isMarksForEdit=NO;
+        }
+//   [self selectBtncolor_Action:@"121" :nil :210];
     }
     else if(selectBtnTag.tag==122)//Appels
     {
@@ -6089,6 +6111,8 @@
   
     else if(selectBtnTag.tag==123)
     {
+        
+        
         //  [self selectBtncolor_Action:@"123" :nil :212];
     }
     
@@ -6410,6 +6434,7 @@
         [rbwTableview removeFromSuperview];
     }
     [self unselectedViewBg: self.view_otw];
+      [self unselectedViewBg: self.view_medit];
     [self unselectedViewBg: self.view_rtw];
     [self unselectedViewBg: self.view_spin];
     [self.tbl_bowlType reloadData];
