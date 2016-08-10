@@ -201,6 +201,9 @@ else
     self.view_powerplay.hidden=YES;
     self.view_powerplaygrid.hidden=NO;
     [self.btn_submit setTitle:@"Update" forState:UIControlStateNormal];
+    self.btn_Add.hidden=YES;
+     self.btn_delete.UserInteractionEnabled=YES;
+    self.btn_delete.backgroundColor=[UIColor colorWithRed:(170/255.0f) green:(36/255.0f) blue:(34/255.0f) alpha:1.0f];
     isPowerplay=YES;
     
 }
@@ -387,11 +390,11 @@ else
 - (IBAction)btn_delete:(id)sender {
     
     if(powerplaystartover != nil){
-    [self DeleteService];
+   // [self DeleteService];
     
        
 
-    PowerPlayRecord *powerplayrecord =[[PowerPlayRecord alloc]init];
+  //  PowerPlayRecord *powerplayrecord =[[PowerPlayRecord alloc]init];
     
     powerplayrecord.startover= txt_startover.text;
     powerplayrecord.endover= txt_endover.text;
@@ -405,7 +408,7 @@ else
     
     
     
-    [objDBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC002" :username :powerplaycode :self.matchCode];
+    [objDBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC002" :username :powerplayCode :self.matchCode];
     
     //powerplayarray=[DBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
         
@@ -792,6 +795,9 @@ else
 }
 -(IBAction)didClickAddBtnAction:(id)sender
 {
+    
+    self.btn_delete.UserInteractionEnabled=NO;
+   self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:1.0f];
     self.view_powerplaygrid.hidden=NO;
     self.btn_Add.hidden   =YES;
     self.view_powerplay.hidden   =YES;
