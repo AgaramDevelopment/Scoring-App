@@ -194,7 +194,10 @@
             }
             else if(INSERTTYPE == @"AFTER")
             {
-                if([T_ISLEGALBALL intValue] == [NSNumber numberWithInt:1])
+                
+                NSNumber *t_IsLegalBall = [NSNumber numberWithInt: T_ISLEGALBALL.intValue];
+
+                if(t_IsLegalBall.intValue == 1)
                 
                 {
                     N_BALLNO = [NSNumber numberWithInt: ([T_BALLNO intValue] + 1)];
@@ -328,11 +331,11 @@
         
        BATTEAMRUNS = [dbInsertScoreEngine GetbatTeamRunsForInsertScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO :BATTINGTEAMCODE];
         
-         BOWLINGTEAMCODE = [dbInsertScoreEngine getBowlingCode:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE];
+         BOWLINGTEAMCODE = [dbInsertScoreEngine getBowlingCode:COMPETITIONCODE :MATCHCODE :TEAMCODE];
         
         EndInnings *insertEndInnings = [[EndInnings alloc]init];
         
-        insertEndInnings.BATTINGTEAMCODE = BATTINGTEAMCODE;
+        insertEndInnings.BATTINGTEAMCODE = TEAMCODE;
         insertEndInnings.BOWLINGTEAMCODE = BOWLINGTEAMCODE;
         insertEndInnings.BATSMANCODE = SB_STRIKERCODE;
         insertEndInnings.ISFOUR = ISFOUR;
