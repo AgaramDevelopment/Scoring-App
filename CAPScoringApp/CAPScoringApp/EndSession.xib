@@ -904,7 +904,8 @@
                                                     <exclude reference="pgR-0Z-Y7H"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=regular">
+                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                <rect key="frame" x="23" y="514" width="223" height="22"/>
                                                 <mask key="constraints">
                                                     <include reference="39r-jR-CKL"/>
                                                     <include reference="pgR-0Z-Y7H"/>
@@ -916,6 +917,9 @@
                                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
+                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                <rect key="frame" x="23" y="433" width="153" height="30"/>
+                                            </variation>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GoA-Q4-3xh">
                                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -988,7 +992,8 @@
                                                     <exclude reference="U1k-q3-lPf"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=regular">
+                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                <rect key="frame" x="23" y="592" width="199" height="30"/>
                                                 <mask key="constraints">
                                                     <include reference="U1k-q3-lPf"/>
                                                 </mask>
@@ -1055,7 +1060,8 @@
                                                     <exclude reference="ddx-T0-20r"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=regular">
+                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                <rect key="frame" x="23" y="673" width="158" height="21"/>
                                                 <mask key="constraints">
                                                     <include reference="Xbz-hm-get"/>
                                                     <include reference="ddx-T0-20r"/>
@@ -1133,7 +1139,8 @@
                                                     <exclude reference="pug-bg-jbk"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=regular">
+                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                <rect key="frame" x="23" y="749" width="153" height="28"/>
                                                 <mask key="constraints">
                                                     <include reference="N6N-uG-idf"/>
                                                     <include reference="pug-bg-jbk"/>
@@ -1198,7 +1205,8 @@
                                                     <exclude reference="O2I-Dj-Yoj"/>
                                                 </mask>
                                             </variation>
-                                            <variation key="heightClass=regular-widthClass=regular">
+                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
+                                                <rect key="frame" x="23" y="821" width="206" height="21"/>
                                                 <mask key="constraints">
                                                     <include reference="LBt-wg-CBu"/>
                                                     <include reference="O2I-Dj-Yoj"/>

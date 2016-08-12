@@ -227,7 +227,7 @@ EndInnings *insertScoreCard;
     {
         
         //SESSION WISE
-        if([dbEndInnings GetDayNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE])
+        if(![[dbEndInnings GetDayNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE] isEqualToString:@""])
         {
             DAYNO = [dbEndInnings GetMaxDayNoForInsertEndInnings : COMPETITIONCODE : MATCHCODE];
         }
@@ -460,9 +460,7 @@ EndInnings *insertScoreCard;
     
     if([OVERSTATUS isEqualToString: @"1"])
     {
-        
-        
-        
+
         NSUInteger overNumber = [OVERNO integerValue];
         OVERBALLNO = [NSString stringWithFormat:@"%d",overNumber +1];
         

@@ -13,6 +13,7 @@
 @interface DBManagerInsertScoreEngine : NSObject
 
 
+-(BOOL)  UpdateBallEventtableForAfterInsert: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE : (NSNumber*) INNINGSNO : (NSNumber*) TEAMCODE: (NSNumber*) T_OVERNO : (NSNumber*) T_BALLNO;
 
 -(NSString*)getBowlingCode:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*)TEAMCODE;
 
