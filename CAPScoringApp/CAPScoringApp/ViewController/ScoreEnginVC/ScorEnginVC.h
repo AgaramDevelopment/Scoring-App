@@ -296,4 +296,6 @@
 @property (strong,nonatomic) NSString *editBallCode;
 - (IBAction)SyncData_btn:(id)sender;
 - (IBAction)Appeal_Cancel_btn:(id)sender;
+@property (strong, nonatomic) IBOutlet UILabel *offside_lbl;
+@property (strong, nonatomic) IBOutlet UILabel *onside_lbl;
 @end

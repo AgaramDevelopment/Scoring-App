@@ -1907,7 +1907,7 @@
         cell.backgroundColor = [UIColor clearColor];
         
         UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+        bgColorView.backgroundColor = [UIColor colorWithRed:(1/255.0f) green:(210/255.0f) blue:(162/255.0f) alpha:1.0f];
         cell.selectedBackgroundView = bgColorView;
         
         cell.textLabel.text = [self.rightSlideArray objectAtIndex:indexPath.row];
@@ -2090,6 +2090,9 @@
         
         
         cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
+        
+        
+  
         
         UIView *customColorView = [[UIView alloc] init];
         customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
@@ -4251,9 +4254,11 @@
         if([self.BatmenStyle isEqualToString:@"MSC013"])
         {
             [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
+          
         }
         else{
             [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapLH"]];
+            
         }
         UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickPichmapTapAction:)];
         tapRecognizer.numberOfTapsRequired = 1;
@@ -4321,9 +4326,13 @@
         if([self.BatmenStyle isEqualToString:@"MSC013"])
         {
             [self.img_WagonWheel setImage:[UIImage imageNamed:@"RHWagon"]];
+            self.onside_lbl.text=@"ON SIDE";
+            self.offside_lbl.text=@"OFF SIDE";
         }
         else{
             [self.img_WagonWheel setImage:[UIImage imageNamed:@"LHWagon"]];
+            self.onside_lbl.text=@"OFF SIDE";
+            self.offside_lbl.text=@"ON SIDE";
         }
         
         if (IS_IPAD_PRO) {
@@ -7195,10 +7204,11 @@ self.lbl_umpirename.text=@"";
 
     if(tableView == table_Appeal){
         
+        
         self.table_Appeal.separatorStyle = UITableViewCellSeparatorStyleNone;
         [table_Appeal setSeparatorColor:[UIColor clearColor]];
-        [self.table_Appeal selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-        [self.table_Appeal deselectRowAtIndexPath:indexPath animated:NO];
+        [self.table_Appeal selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+     
        
 
         if(appealEventDict==nil){
@@ -7210,10 +7220,6 @@ self.lbl_umpirename.text=@"";
         
             self.table_AppealSystem.hidden=YES;
             isEnableTbl=YES;
-       
-        
-        
-        
        
         self.comments_txt.text=@"";
         self.lbl_appealsystem.text=@"";
