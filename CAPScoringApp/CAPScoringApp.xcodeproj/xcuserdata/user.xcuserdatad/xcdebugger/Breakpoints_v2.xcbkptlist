@@ -810,11 +810,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "493024255.693433"
+            timestampString = "493043157.644671"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "8749"
-            endingLineNumber = "8749"
+            startingLineNumber = "8736"
+            endingLineNumber = "8736"
             landmarkName = "-matchInfoEdit"
             landmarkType = "5">
          </BreakpointContent>
@@ -954,11 +954,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "493024255.693433"
+            timestampString = "493043157.644671"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "6067"
-            endingLineNumber = "6067"
+            startingLineNumber = "6073"
+            endingLineNumber = "6073"
             landmarkName = "-didClickRightSideBtn_Action:"
             landmarkType = "5">
          </BreakpointContent>
