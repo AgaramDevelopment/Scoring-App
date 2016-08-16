@@ -2086,6 +2086,9 @@
         
         cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
         
+        
+  
+        
         UIView *customColorView = [[UIView alloc] init];
         customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
                                                           green:161/255.0
@@ -7167,10 +7170,26 @@ self.lbl_umpirename.text=@"";
 
     if(tableView == table_Appeal){
         
+//        if(selectePosition!=nil)
+//        {
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+//            [self.tableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+//            [self.tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+//            _tableView.sectionIndexBackgroundColor = [UIColor greenColor];
+//            UITableViewCell *cell = (UITableViewCell *)[self.tableView cellForRowAtIndexPath:0];
+//            UIView *customColorView = [[UIView alloc] init];
+//            customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
+//                                                              green:161/255.0
+//                                                               blue:79/255.0
+//                                                              alpha:1];
+//            cell.selectedBackgroundView =  customColorView;
+//            
+//        }
+        
         self.table_Appeal.separatorStyle = UITableViewCellSeparatorStyleNone;
         [table_Appeal setSeparatorColor:[UIColor clearColor]];
-        [self.table_Appeal selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-        [self.table_Appeal deselectRowAtIndexPath:indexPath animated:NO];
+        [self.table_Appeal selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+     //   [self.table_Appeal deselectRowAtIndexPath:indexPath animated:NO];
        
 
         if(appealEventDict==nil){
