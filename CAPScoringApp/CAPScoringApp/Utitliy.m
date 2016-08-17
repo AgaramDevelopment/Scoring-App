@@ -27,14 +27,14 @@
 @implementation Utitliy
 
 //return  @"182.74.23.197:8102"; Live
-//return  @"192.168.1.39:8096"; Testing
+//return  @"192.168.1.49:8096"; Testing
 +(NSString *)getIPPORT{
-    return  @"192.168.1.39:8096";
+    return  @"192.168.1.49:8096";
 }
 
 
 +(NSString *)getSyncIPPORT{
-    return  @"192.168.1.39:8096";
+    return  @"192.168.1.49:8096";
 }
 
 +(NSString *)SecureId{
