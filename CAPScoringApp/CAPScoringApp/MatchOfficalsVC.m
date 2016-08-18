@@ -70,9 +70,12 @@
         self.lbl_scorer1.text=username;
         
         NSMutableArray *scorearray=[objDBManager RetrieveSCORE2 :competitionCode:Matchcode:userCode];
+        if ([scorearray count ]>0) {
+           
         OfficialMasterRecord *objMatchofficalRecord1 = [scorearray objectAtIndex:0];
         self.lbl_scorer2.text=objMatchofficalRecord1.scorename2;
         //self.lbl_scorer2.text=objMatchofficalRecord.umpire1name;
+        }
     }
 }
 - (void)didReceiveMemoryWarning {

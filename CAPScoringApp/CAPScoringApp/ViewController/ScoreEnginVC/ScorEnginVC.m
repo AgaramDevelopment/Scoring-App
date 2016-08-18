@@ -286,6 +286,7 @@
 @property(nonatomic,strong) NSMutableArray *AppealValuesArray;
 @property(nonatomic,strong)NSDictionary *test;
 @property(nonatomic,strong)NSDictionary *test1;
+
 //wicketType
 @property (nonatomic,strong)NSMutableArray *WicketTypeArray;
 @property (nonatomic,strong)NSMutableArray *StrikerandNonStrikerArray;
@@ -691,18 +692,20 @@
     }
     
     //Appeals
-    NSMutableArray *getAppealArray = [fetchSeBallCodeDetails GetAppealDetailsForAppealEventsArray];
+    getAppealArray = [fetchSeBallCodeDetails GetAppealDetailsForAppealEventsArray];
     if(getAppealArray.count>0){
-        GetSEAppealDetailsForAppealEvents *record = [[GetSEAppealDetailsForAppealEvents alloc]init];
+       GetSEAppealDetailsForAppealEvents *record = [[GetSEAppealDetailsForAppealEvents alloc]init];
         record = (GetSEAppealDetailsForAppealEvents*)[getAppealArray objectAtIndex:0];
         appealEventDict = [NSMutableDictionary dictionary];
         [appealEventDict setValue:record.APPEALSYSTEMCODE forKey:@"AppealSystemSelct"];
         [appealEventDict setValue:record.APPEALCOMPONENTCODE forKey:@"AppealComponentSelct"];
+        
         [appealEventDict setValue:record.UMPIRECODE forKey:@"AppealUmpireSelct"];
         [appealEventDict setValue:record.BATSMANCODE forKey:@"AppealBatsmenSelct"];
         [appealEventDict setValue:record.BOWLERNAME forKey:@"AppealBowlerSelect"];
         [appealEventDict setValue:record.APPEALCOMMENTS forKey:@"Commenttext"];
         [appealEventDict setValue:record.APPEALTYPECODE forKey:@"AppealTypeCode"];
+        
         [self selectedViewBg:_view_appeal];
     }
     
@@ -1019,11 +1022,9 @@
     //Appeal
     if(self.ballEventRecord.objIsappeal.intValue == 1){
         [self selectedViewBg:_view_appeal];
-        
-        
-        
     }
-    
+    isAppealSelected=YES;
+
     //Remark
     if(self.ballEventRecord.objRemark!=nil && ![self.ballEventRecord.objRemark isEqual:@""]){
         [self selectedViewBg:_view_remark];
@@ -6155,7 +6156,7 @@
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
         
-        if(isAppealSelected && self.ballEventRecord.objIsappeal != nil){
+        if(isAppealSelected ==YES){
             [self selectedViewBg:_view_appeal];
             [table_Appeal reloadData];
             int indx=0;
@@ -6184,15 +6185,41 @@
             
             [self unselectedViewBg:_view_appeal];
             self.View_Appeal.hidden = YES;
-            isAppealSelected = NO;
+          
             
-        }else{
+        }
+        
+        if (isSaveAppeal==YES) {
+            [self selectedViewBg:_view_appeal];
+            [table_Appeal reloadData];
+            int indx=0;
+            int selectePosition = -1;
+            for (AppealRecord *record in self.AppealValuesArray)
+            {
+                bool chk = ([[record MetaSubCode] isEqualToString:self.ballEventRecord.objIsappeal]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    break;
+                }
+                indx ++;
+            }
+            
+            if(selectePosition!=-1){
+                
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+                [table_Appeal selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                
+                [table_Appeal scrollToRowAtIndexPath:indexPath
+                                    atScrollPosition:UITableViewScrollPositionTop
+                                            animated:YES];
+                
+            }
+        }
+        else{
             
             self.ballEventRecord.objIsappeal = nil;
-            isAppealSelected = YES;
-            
-            
-            [self selectedViewBg:_view_appeal];
+        [self selectedViewBg:_view_appeal];
             [table_Appeal reloadData];
             
         }
@@ -7288,34 +7315,44 @@ self.lbl_umpirename.text=@"";
         
         
         AppealTypeSelectCode=objAppealrecord.MetaSubCode;
-        _view_table_select.hidden=NO;
-        if(!isAppealSelected && self.ballEventRecord.objIsappeal==nil)
+               if(isAppealSelected==YES)
         {
-            isAppealSelected = YES;
+         //   isAppealSelected = YES;
             self.table_AppealSystem.hidden=YES;
             self.ballEventRecord.objIsappeal = objAppealrecord.MetaSubCode;
             isEnableTbl=YES;
-            
-            self.comments_txt.text=@"";
-            self.lbl_appealsystem.text=@"";
-            self.lbl_appealComponent.text=@"";
-            self.lbl_umpirename.text=@"";
-            self.lbl_batsmen.text=@"";
+         
+          
+                record = (GetSEAppealDetailsForAppealEvents*)[getAppealArray objectAtIndex:0];
+            self.comments_txt.text=record.APPEALCOMMENTS;
+            self.lbl_appealsystem.text=record.APPEALSYSTEMDES;
+            self.lbl_appealComponent.text=record.APPEALCOMPONENTDES;
+            self.lbl_umpirename.text=record.UMPIRENAME;
+            self.lbl_batsmen.text=record.BATSMANNAME;
             _view_table_select.hidden=NO;
         }
         
         else if(isAppealSelected && self.ballEventRecord.objIsappeal!=nil && self.ballEventRecord.objIsappeal == objAppealrecord.MetaSubCode){
-            isAppealSelected = NO;
+        
             self.ballEventRecord.objIsappeal = nil;
             [self unselectedViewBg:_view_appeal];
             
         }
         
         else{
-            isAppealSelected = YES;
+          
             
             self.ballEventRecord.objIsappeal =objAppealrecord.MetaSubCode;
+            self.comments_txt.text=@"";
+            self.lbl_appealsystem.text=@"";
+            self.lbl_appealComponent.text=@"";
+            self.lbl_umpirename.text=@"";
+            self.lbl_batsmen.text=@"";
+            _view_table_select.hidden=NO;
+
         }
+        isAppealSelected=NO;
+       
     }
     
     if(breakvc.view != nil)
@@ -9371,6 +9408,9 @@ self.lbl_umpirename.text=@"";
         [appealEventDict setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
         [appealEventDict setValue:commentText forKey:@"Commenttext"];
         [self.view_table_select setHidden:YES];
+        [self.View_Appeal setHidden:YES];
+         isSaveAppeal=YES;
+          [self unselectedViewBg:_view_appeal];
     }
 }
 
