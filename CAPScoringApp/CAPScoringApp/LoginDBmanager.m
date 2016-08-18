@@ -335,4 +335,97 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return NO;
 }
 
+
+-(BOOL) CheckUserScorerDetails: (NSString *)UserCode{
+    int retVal;
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT UserCode FROM USERDETAILS WHERE UserCode ='%@'",UserCode];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                
+                return YES;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        
+        sqlite3_close(dataBase);
+    }
+    return NO;
+}
+
+-(BOOL) InsertUserScorerDetails: (NSString *)UserCode : (NSString *)UserRoleID : (NSString *)LoginID : (NSString *)Password : (NSString *)Rememberme : (NSString *)RementDate : (NSString *)UserFullName : (NSString *)MachineID: (NSString *)LicenseUpTo : (NSString *)Recordstatus : (NSString *)Createdby : (NSString *)Createddate : (NSString *)Modifiedby : (NSString *)Modifieddate{
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO USERDETAILS(UserCode,UserRoleID,LoginID,Password,Rememberme,RementDate,UserFullName,MachineID,LicenseUpTo,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate,issync)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','1')",UserCode,UserRoleID ,LoginID,Password ,Rememberme,RementDate,UserFullName,MachineID,LicenseUpTo ,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate];
+        
+        
+        const char *update_stmt = [INSERTSQL UTF8String];
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return YES;
+                
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+    
+}
+
+-(BOOL) UpdateUserScorerDetails: (NSString *)UserCode : (NSString *)UserRoleID : (NSString *)LoginID : (NSString *)Password : (NSString *)Rememberme : (NSString *)RementDate : (NSString *)UserFullName : (NSString *)MachineID: (NSString *)LicenseUpTo : (NSString *)Recordstatus : (NSString *)Createdby : (NSString *)Createddate : (NSString *)Modifiedby : (NSString *)Modifieddate{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE USERDETAILS SET  UserCode='%@',UserRoleID='%@',LoginID='%@',Password='%@',Rememberme='%@',RementDate='%@',UserFullName='%@',MachineID='%@',LicenseUpTo='%@',Recordstatus='%@',Createdby='%@',Createddate='%@',Modifiedby='%@',Modifieddate='%@'issync='1'",UserCode,UserRoleID ,LoginID,Password ,Rememberme,RementDate,UserFullName,MachineID,LicenseUpTo ,Recordstatus,Createdby,Createddate,Modifiedby,Modifieddate];
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                
+                return YES;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+    
+    
+}
+
 @end

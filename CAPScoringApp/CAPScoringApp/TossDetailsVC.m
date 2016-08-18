@@ -386,6 +386,8 @@
         _Striker_lbl.text = @"";
         _nonStriker_lbl.text = @"";
         _Bowler_lbl.text = @"";
+        StrikerCode   =@"";
+        NonStrikerCode=@"";
         Electedselectindexarray=[[NSMutableArray alloc]init];
         objUserRecord=(UserRecord*)[ElectedToArray objectAtIndex:indexPath.row];
         self.electedTo_lbl.text =[objUserRecord.electedTo uppercaseString];
