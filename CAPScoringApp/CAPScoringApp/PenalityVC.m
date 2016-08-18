@@ -253,7 +253,7 @@
         //CGSize size =  //[cell.lbl_penalitycell.text sizeWithFont:[UIFont systemFontOfSize:17]      constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
         NSString *obj =cell.lbl_penaltytype.text;
         CGFloat strheight =objmetaRecord.penaltyreasondescription.length ;
-        CGFloat height =(strheight > 40)? strheight:40;
+        CGFloat height =(strheight > 45)? strheight:40;
         return height;
     }
     else
@@ -265,10 +265,19 @@
     //CGSize size =  //[cell.lbl_penalitycell.text sizeWithFont:[UIFont systemFontOfSize:17]      constrainedToSize:constraint lineBreakMode:UILineBreakModeWordWrap];
     NSString *obj =cell.lbl_penalitycell.text;
     CGFloat strheight =objmetaRecord.metasubcodedescription.length ;
-     CGFloat height =(strheight > 40)? strheight:40;
+     CGFloat height =(strheight > 45)? strheight:40;
     return height;
     }
 }
+
+- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
+    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
+    [tableView setSeparatorColor:[UIColor blackColor]];
+  }
+
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 
