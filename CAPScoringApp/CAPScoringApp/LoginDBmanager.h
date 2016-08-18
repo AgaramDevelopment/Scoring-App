@@ -32,5 +32,13 @@
 
 -(BOOL) UpdateMatchScorerDetails:(NSString *)Competitioncode:(NSString *)Matchcode:(NSString *)Scorercode:(NSString *)Recordstatus:(NSString *)Createdby:(NSString *)Createddate:(NSString *)Modifiedby:(NSString *)Modifieddate;
 
+//UserScorerDetails
+
+-(BOOL) CheckUserScorerDetails: (NSString *)UserCode;
+
+-(BOOL) InsertUserScorerDetails: (NSString *)UserCode : (NSString *)UserRoleID : (NSString *)LoginID : (NSString *)Password : (NSString *)Rememberme : (NSString *)RementDate : (NSString *)UserFullName : (NSString *)MachineID: (NSString *)LicenseUpTo : (NSString *)Recordstatus : (NSString *)Createdby : (NSString *)Createddate : (NSString *)Modifiedby : (NSString *)Modifieddate;
+
+-(BOOL) UpdateUserScorerDetails: (NSString *)UserCode : (NSString *)UserRoleID : (NSString *)LoginID : (NSString *)Password : (NSString *)Rememberme : (NSString *)RementDate : (NSString *)UserFullName : (NSString *)MachineID: (NSString *)LicenseUpTo : (NSString *)Recordstatus : (NSString *)Createdby : (NSString *)Createddate : (NSString *)Modifiedby : (NSString *)Modifieddate;
+
 
 @end

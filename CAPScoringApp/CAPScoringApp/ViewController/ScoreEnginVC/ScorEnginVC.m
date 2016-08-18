@@ -133,6 +133,7 @@
     BOOL isOTWselected;
     BOOL isRTWselected;
     BOOL isSpinSelected;
+   BOOL isAppealSelected;
     BOOL isFastSelected;
     BOOL isAggressiveSelected;
     BOOL isDefensiveSelected;
@@ -6103,33 +6104,64 @@
     }
     else if(selectBtnTag.tag==122)//Appels
     {
-        
-//[self selectedViewBg:_view_appeal];
-       if(isAppeal==NO)
-            {
-               [self selectedViewBg:_view_appeal];
-                DBManager *objDBManager = [[DBManager alloc]init];
-                _AppealValuesArray=[[NSMutableArray alloc]init];
-                _AppealValuesArray =[objDBManager AppealRetrieveEventData];
-                _View_Appeal.hidden=NO;
-                [table_Appeal reloadData];
-
-                
-                self.view_aggressiveShot.hidden = YES;
-                self.view_defensive.hidden = YES;
-                self.view_bowlType.hidden = YES;
-                self.view_fastBowl.hidden = YES;
-                isAppeal=YES;
-                
-            }
-            else
-            {
-                [self unselectedButtonBg:_view_appeal];
-                  _View_Appeal.hidden=YES;
-               
-                isAppeal=NO;
-            }
+        //[self selectBtncolor_Action:@"114"];
+        DBManager *objDBManager = [[DBManager alloc]init];
+        if(_AppealValuesArray==nil || _AppealValuesArray.count == 0){
+            _AppealValuesArray=[[NSMutableArray alloc]init];
+            _AppealValuesArray =[objDBManager AppealRetrieveEventData];
         }
+        
+        
+        self.View_Appeal.hidden = NO;
+        self.view_fastBowl.hidden = YES;
+        self.view_aggressiveShot.hidden = YES;
+        self.view_defensive.hidden = YES;
+        
+        if(isAppealSelected && self.ballEventRecord.objIsappeal != nil){
+            [self selectedViewBg:_view_appeal];
+            [table_Appeal reloadData];
+            int indx=0;
+            int selectePosition = -1;
+            for (AppealRecord *record in self.AppealValuesArray)
+            {
+                bool chk = ([[record MetaSubCode] isEqualToString:self.ballEventRecord.objIsappeal]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    break;
+                }
+                indx ++;
+            }
+            
+            if(selectePosition!=-1){
+                
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+                [table_Appeal selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                
+                [table_Appeal scrollToRowAtIndexPath:indexPath
+                                    atScrollPosition:UITableViewScrollPositionTop
+                                            animated:YES];
+            }
+        }else if(isAppealSelected && self.ballEventRecord.objIsappeal == nil){
+            
+            [self unselectedViewBg:_view_appeal];
+            self.View_Appeal.hidden = YES;
+            isAppealSelected = NO;
+            
+        }else{
+            
+            self.ballEventRecord.objIsappeal = nil;
+            isAppealSelected = YES;
+            
+            
+            [self selectedViewBg:_view_appeal];
+            [table_Appeal reloadData];
+            
+        }
+        
+        
+        
+    }
   
     else if(selectBtnTag.tag==123)//Last Instance
     {
@@ -7208,25 +7240,44 @@ self.lbl_umpirename.text=@"";
         self.table_Appeal.separatorStyle = UITableViewCellSeparatorStyleNone;
         [table_Appeal setSeparatorColor:[UIColor clearColor]];
         [self.table_Appeal selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
-     
-       
-
+        
+        
+        
         if(appealEventDict==nil){
             appealEventDict = [NSMutableDictionary dictionary];
         }
         AppealRecord *objAppealrecord=(AppealRecord*)[self.AppealValuesArray objectAtIndex:indexPath.row];
         
-        AppealTypeSelectCode=objAppealrecord.MetaSubCode;
         
-            self.table_AppealSystem.hidden=YES;
-            isEnableTbl=YES;
-       
-        self.comments_txt.text=@"";
-        self.lbl_appealsystem.text=@"";
-        self.lbl_appealComponent.text=@"";
-        self.lbl_umpirename.text=@"";
-        self.lbl_batsmen.text=@"";
+        AppealTypeSelectCode=objAppealrecord.MetaSubCode;
         _view_table_select.hidden=NO;
+        if(!isAppealSelected && self.ballEventRecord.objIsappeal==nil)
+        {
+            isAppealSelected = YES;
+            self.table_AppealSystem.hidden=YES;
+            self.ballEventRecord.objIsappeal = objAppealrecord.MetaSubCode;
+            isEnableTbl=YES;
+            
+            self.comments_txt.text=@"";
+            self.lbl_appealsystem.text=@"";
+            self.lbl_appealComponent.text=@"";
+            self.lbl_umpirename.text=@"";
+            self.lbl_batsmen.text=@"";
+            _view_table_select.hidden=NO;
+        }
+        
+        else if(isAppealSelected && self.ballEventRecord.objIsappeal!=nil && self.ballEventRecord.objIsappeal == objAppealrecord.MetaSubCode){
+            isAppealSelected = NO;
+            self.ballEventRecord.objIsappeal = nil;
+            [self unselectedViewBg:_view_appeal];
+            
+        }
+        
+        else{
+            isAppealSelected = YES;
+            
+            self.ballEventRecord.objIsappeal =objAppealrecord.MetaSubCode;
+        }
     }
     
     if(breakvc.view != nil)

@@ -162,7 +162,7 @@ objDBManager = [[DBManager alloc]init];
 }
 
 - (BOOL) formValidation{
-        NSString *oversTxt = self.txt_overs.text;
+    NSString *oversTxt = self.txt_overs.text;
     NSInteger twentyText = [oversTxt intValue];
     NSInteger OdiText = [oversTxt intValue];
     
@@ -182,16 +182,26 @@ objDBManager = [[DBManager alloc]init];
             return NO;
         }
     }
-     if([OldOvers intValue] < [txt_overs.text intValue]){
+    if([OldOvers intValue] < [txt_overs.text intValue]){
         [self showDialog:@"The Revised Overs is not possible when the data exist for this innings." andTitle:@"Revised Target"];
         return NO;
     }
     
     
-     if([txt_overs.text  isEqual:@""] && [txt_target.text isEqual:@""] && [txt_commentss.text isEqual:@""]){
-         [self showDialog:@"Please enter Over\n Please enter Target\nPlease enter Comments." andTitle:@"Revised Target"];
-         return NO;
-     }
+    if([txt_overs.text  isEqual:@""] && [txt_target.text isEqual:@""] && [txt_commentss.text isEqual:@""]){
+        [self showDialog:@"Please enter Over\n Please enter Target\nPlease enter Comments." andTitle:@"Revised Target"];
+        return NO;
+    }
+    
+    if([txt_overs.text  isEqual:@""] && [txt_target.text isEqual:@""]){
+        [self showDialog:@"Please enter Over\n Please enter Target." andTitle:@"Revised Target"];
+        return NO;
+    }
+    
+    if([txt_overs.text  isEqual:@""] && [txt_commentss.text isEqual:@""]) {
+        [self showDialog:@"Please enter Over\n Please enter Comments." andTitle:@"Revised Target"];
+        return NO;
+    }
     
     if([txt_overs.text isEqual:@""]){
         [self showDialog:@"Please enter Over." andTitle:@"Revised Target"];
