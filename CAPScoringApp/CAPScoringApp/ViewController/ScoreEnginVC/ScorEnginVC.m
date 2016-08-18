@@ -133,7 +133,7 @@
     BOOL isOTWselected;
     BOOL isRTWselected;
     BOOL isSpinSelected;
-   BOOL isAppealSelected;
+    BOOL isAppealSelected;
     BOOL isFastSelected;
     BOOL isAggressiveSelected;
     BOOL isDefensiveSelected;
@@ -6117,7 +6117,7 @@
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
         
-        if(isAppealSelected && self.ballEventRecord.objIsappeal != nil){
+        if(isAppealSelected != nil){
             [self selectedViewBg:_view_appeal];
             [table_Appeal reloadData];
             int indx=0;
@@ -7250,7 +7250,12 @@ self.lbl_umpirename.text=@"";
         
         
         AppealTypeSelectCode=objAppealrecord.MetaSubCode;
-        _view_table_select.hidden=NO;
+        self.comments_txt.text=@"";
+        self.lbl_appealsystem.text=@"";
+        self.lbl_appealComponent.text=@"";
+        self.lbl_umpirename.text=@"";
+        self.lbl_batsmen.text=@"";
+               _view_table_select.hidden=NO;
         if(!isAppealSelected && self.ballEventRecord.objIsappeal==nil)
         {
             isAppealSelected = YES;

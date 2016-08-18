@@ -275,11 +275,7 @@
     
     if(isShow_penaltyrecordTbl== YES)
     {
-//        selectindexarray=[[NSMutableArray alloc]init];
-//        objMetaDataRecord=(MetaDataRecord*)[_FetchPenalityArray objectAtIndex:indexPath.row];
-       
-//        self.lbl_penaltytype.text =objMetaDataRecord.metasubcodedescription;
-//        penaltytypereasons=objMetaDataRecord.metasubcode;
+
         
         [selectindexarray addObject:objMetaDataRecord];
         _penaltyDetailsRecord=(PenaltyDetailsRecord*)[_resultarray objectAtIndex:indexPath.row];
