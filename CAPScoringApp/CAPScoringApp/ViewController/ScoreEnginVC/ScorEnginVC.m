@@ -79,12 +79,14 @@
 @interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate,Other_WicketDelegate,RevisedTargetDelegate>
 {   //appeal System
     BOOL isEnableTbl;
+    BOOL isSaveAppeal;
+    GetSEAppealDetailsForAppealEvents *record;
     NSMutableArray * AppealSystemSelectionArray;
     NSString*AppealSystemSelectCode;
     AppealSystemRecords *objAppealSystemEventRecord;
     NSMutableDictionary *appealEventDict;
     NSString *AppealTypeSelectCode;
-    
+    NSMutableArray * getAppealArray;
     //AppealComponent
     NSMutableArray * AppealComponentSelectionArray;
     NSString*AppealComponentSelectCode;
