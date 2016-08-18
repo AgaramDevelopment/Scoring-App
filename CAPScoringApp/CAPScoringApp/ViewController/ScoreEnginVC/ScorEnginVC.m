@@ -134,6 +134,7 @@
     BOOL isRTWselected;
     BOOL isSpinSelected;
     BOOL isAppealSelected;
+    BOOL isSaveAppeal;
     BOOL isFastSelected;
     BOOL isAggressiveSelected;
     BOOL isDefensiveSelected;
@@ -6151,7 +6152,36 @@
             self.View_Appeal.hidden = YES;
           
             
-        }else{
+        }
+        
+        if (isSaveAppeal==YES) {
+            [self selectedViewBg:_view_appeal];
+            [table_Appeal reloadData];
+            int indx=0;
+            int selectePosition = -1;
+            for (AppealRecord *record in self.AppealValuesArray)
+            {
+                bool chk = ([[record MetaSubCode] isEqualToString:self.ballEventRecord.objIsappeal]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    break;
+                }
+                indx ++;
+            }
+            
+            if(selectePosition!=-1){
+                
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+                [table_Appeal selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                
+                [table_Appeal scrollToRowAtIndexPath:indexPath
+                                    atScrollPosition:UITableViewScrollPositionTop
+                                            animated:YES];
+                
+            }
+        }
+        else{
             
             self.ballEventRecord.objIsappeal = nil;
         [self selectedViewBg:_view_appeal];
@@ -7287,6 +7317,7 @@ self.lbl_umpirename.text=@"";
 
         }
         isAppealSelected=NO;
+       
     }
     
     if(breakvc.view != nil)
@@ -9342,6 +9373,9 @@ self.lbl_umpirename.text=@"";
         [appealEventDict setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
         [appealEventDict setValue:commentText forKey:@"Commenttext"];
         [self.view_table_select setHidden:YES];
+        [self.View_Appeal setHidden:YES];
+         isSaveAppeal=YES;
+          [self unselectedViewBg:_view_appeal];
     }
 }
 
