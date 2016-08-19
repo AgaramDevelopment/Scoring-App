@@ -36,7 +36,7 @@
 @property (strong,nonatomic) NSString * penaltytypeCode;
 
 @property (strong,nonatomic) NSString * ballCode;
-
+@property(strong,nonatomic)NSString*ismarkforedit;
 
 @property (strong,nonatomic) NSString * OverballCount;
 
