@@ -19,6 +19,7 @@
 #import "InsertSEScoreEngine.h"
 #import "FetchSEPageLoadRecord.h"
 #import "FetchScorecard.h"
+#import "CMPopTipView.h"
 
 // Border Brushes
 #define runBrushBDR [UIColor colorWithRed:(82.0/255.0) green:(131.0/255.0) blue:(174.0/255.0) alpha:1.0]
@@ -724,13 +725,8 @@ BOOL isWicketSelected;
     }
     
     [btn_Run setTitle:[NSString stringWithFormat:content] forState:UIControlStateNormal];
-
-    
     
 }
-
-
-
 
 
 -(IBAction)didClickEditAction:(id)sender
@@ -783,6 +779,40 @@ BOOL isWicketSelected;
     [Rightrotation setImage:[UIImage imageNamed:@"RightRotation"] forState:UIControlStateNormal];
     [cell addSubview:Rightrotation];
     [Rightrotation addTarget:self action:@selector(didClickRightrotation:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+//    UIView *contentView = view_addedit;
+//    
+//    CMPopTipView *popTipView;
+//    if (contentView) {
+//        popTipView = [[CMPopTipView alloc] initWithCustomView:contentView];
+//    }
+//    else {
+//        //popTipView = [[CMPopTipView alloc] initWithMessage:contentMessage];
+//        popTipView = [[CMPopTipView alloc] initWithCustomView:contentView];
+//    }
+//    popTipView.delegate = self;
+//    
+//    
+//    popTipView.animation = arc4random() % 2;
+//    popTipView.has3DStyle = (BOOL)(arc4random() % 2);
+//    
+//    popTipView.dismissTapAnywhere = YES;
+//    [popTipView autoDismissAnimated:YES atTimeInterval:3.0];
+//    
+//    if ([sender isKindOfClass:[UIButton class]]) {
+//        UIButton *button = (UIButton *)sender;
+//        [popTipView presentPointingAtView:button inView:self.view animated:YES];
+//    }
+//    else {
+//        UIBarButtonItem *barButtonItem = (UIBarButtonItem *)sender;
+//        [popTipView presentPointingAtBarButtonItem:barButtonItem animated:YES];
+//    }
+////
+//    //[self.visiblePopTipViews addObject:popTipView];
+//    //self.currentPopTipViewTarget = sender;
+
     
 }
 
