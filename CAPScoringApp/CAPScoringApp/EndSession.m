@@ -901,6 +901,7 @@ int POS_TEAM_TYPE = 1;
     else{
         IsDropDown = NO;
          objDrobDowntbl.hidden=YES;
+        self.scroll_EndSession.scrollEnabled = YES;
     }
 
     

@@ -85,6 +85,7 @@ BOOL isWicketSelected;
     NSMutableArray * objGrandTotal;
     NSMutableArray * objBallNo;
     NSMutableArray * objRowNumber;
+    NSMutableArray *objMarkEditArray;
     
     int EachoverWicketCount;
     UIButton *btn_Run;
@@ -365,6 +366,8 @@ BOOL isWicketSelected;
     objGrandTotal   =[[NSMutableArray alloc]init];
     objBallNo   =[[NSMutableArray alloc]init];
     objRowNumber  =[[NSMutableArray alloc]init];
+    objMarkEditArray=[[NSMutableArray alloc]init];
+    
 
     if (cell != nil) {
         
@@ -386,6 +389,7 @@ BOOL isWicketSelected;
             NSString  * objNoBall    =objInningsBowlerDetailsRecord.noBall;
             NSString  * grandTotal    =objInningsBowlerDetailsRecord.grandTotal;
             NSString  * ballNo    =objInningsBowlerDetailsRecord.ballNo;
+            NSString *MarkEdit=objInningsBowlerDetailsRecord.ismarkforedit;
             
             if([strCurrentRow isEqualToString:objInningsBowlerDetailsRecord.OverNo])
             {
@@ -402,6 +406,7 @@ BOOL isWicketSelected;
                 [objnoballArray addObject:objNoBall];
                 [objGrandTotal addObject:grandTotal];
                 [objBallNo addObject:ballNo];
+                [objMarkEditArray addObject:MarkEdit];
                 [objRowNumber addObject:objInningsBowlerDetailsRecord.rowId];
                 
             }
@@ -473,6 +478,7 @@ BOOL isWicketSelected;
         NSString * objWicketType =[objwicketType objectAtIndex:i];
         NSString * grandTotal =[objGrandTotal objectAtIndex:i];
         NSNumber *rowId =[objRowNumber objectAtIndex:i];
+        NSString *objisMarkForEdit=[objMarkEditArray objectAtIndex:i];
         
         NSMutableArray* dicBallKeysArray = [[NSMutableArray alloc] init];
         NSMutableDictionary * dicAddbowlerdetails=[[NSMutableDictionary alloc]init];
@@ -615,6 +621,8 @@ BOOL isWicketSelected;
         bool isExtras ;
         bool isSix =[objisSix isEqualToString:@"1"]? YES: NO;
         bool isFour =[objisFour isEqualToString:@"1"]? YES:NO;
+        bool isMarkedForEdit =[objisMarkForEdit isEqualToString:@"1"]?YES:NO;
+        
         bool isSpecialEvents;
         if(isFour == YES || isSix == YES || ![objWicketNo isEqualToString:@"0"])
         {
@@ -638,10 +646,11 @@ BOOL isWicketSelected;
                 content = [content stringByAppendingString: [[dicAddbowlerdetails objectForKey:dicBallKey] stringByAppendingString:@" "]];
         }
         totalRun  =[grandTotal intValue]+totalRun;
-        [self CreateBallTickerInstance: [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] :isExtras :isSpecialEvents :objnoball :cell :indexpath: rowId.intValue];
+        [self CreateBallTickerInstance: [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] :isExtras :isSpecialEvents :isMarkedForEdit:objnoball :cell :indexpath: rowId.intValue];
         
     }
     
+   
 }
 
 
@@ -649,7 +658,7 @@ BOOL isWicketSelected;
 
 
 
--(void)CreateBallTickerInstance:(NSString *)content :(BOOL ) isextra: (BOOL) isspecialevent :(NSString *)ballno :(EditModeCell *) cell: (int) currentindex: (int) rowId;
+-(void)CreateBallTickerInstance:(NSString *)content :(BOOL ) isextra: (BOOL) isspecialevent: (bool) isMarkedForEdit :(NSString *)ballno :(EditModeCell *) cell: (int) currentindex: (int) rowId;
 {
     
     btn_Run = [[UIButton alloc] initWithFrame:CGRectMake((currentindex*40.0)+15,5.0,35.0, 35.0)];
@@ -704,6 +713,9 @@ BOOL isWicketSelected;
         btn_Run.layer.borderColor= wicketBrushBDR.CGColor;
         
     }
+    if (isMarkedForEdit)
+        btn_Run.layer.borderColor = markedForEditBrushBDR.CGColor;
+    
     else
     {
         btn_Run.layer.borderColor=  ((isextra) ? extrasBrushBDR : runBrushBDR).CGColor;
@@ -713,6 +725,7 @@ BOOL isWicketSelected;
     
     [btn_Run setTitle:[NSString stringWithFormat:content] forState:UIControlStateNormal];
 
+    
     
 }
 
@@ -740,7 +753,7 @@ BOOL isWicketSelected;
     
     EditModeCell *cell = (EditModeCell*)[sender superview];
     NSIndexPath* indexPath = [self.tbl_innnings indexPathForCell:cell];
-    view_addedit=[[UIView alloc]initWithFrame:CGRectMake(btn_add.frame.origin.x-20,btn_add.frame.origin.y+40,175,100)];
+    view_addedit=[[UIView alloc]initWithFrame:CGRectMake(btn_add.frame.origin.x-20,btn_add.frame.origin.y+40,175,50)];
     [view_addedit setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
     [cell addSubview:view_addedit];
     leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(view_addedit.frame.origin.x, view_addedit.frame.origin.y+3,38,38)];
@@ -761,12 +774,12 @@ BOOL isWicketSelected;
     
     [Editrotation addTarget:self action:@selector(didClickEditrotation:) forControlEvents:UIControlEventTouchUpInside];
     
-    Cancelrotation=[[UIButton alloc]initWithFrame:CGRectMake(Editrotation.frame.origin.x+Editrotation.frame.size.width+8, Editrotation.frame.origin.y,38,38)];
+     Cancelrotation=[[UIButton alloc]initWithFrame:CGRectMake(Editrotation.frame.origin.x+Editrotation.frame.size.width+8, Editrotation.frame.origin.y,38,38)];
     [Cancelrotation setImage:[UIImage imageNamed:@"ArchiveCancel"] forState:UIControlStateNormal];
     [cell addSubview:Cancelrotation];
     [Cancelrotation addTarget:self action:@selector(didClickCancelrotation:) forControlEvents:UIControlEventTouchUpInside];
     
-    Rightrotation=[[UIButton alloc]initWithFrame:CGRectMake(Cancelrotation.frame.origin.x+Cancelrotation.frame.size.width+8, Cancelrotation.frame.origin.y,38,38)];
+     Rightrotation=[[UIButton alloc]initWithFrame:CGRectMake(Cancelrotation.frame.origin.x+Cancelrotation.frame.size.width+8, Cancelrotation.frame.origin.y,38,38)];
     [Rightrotation setImage:[UIImage imageNamed:@"RightRotation"] forState:UIControlStateNormal];
     [cell addSubview:Rightrotation];
     [Rightrotation addTarget:self action:@selector(didClickRightrotation:) forControlEvents:UIControlEventTouchUpInside];
