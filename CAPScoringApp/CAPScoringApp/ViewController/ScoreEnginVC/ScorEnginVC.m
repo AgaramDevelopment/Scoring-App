@@ -4375,13 +4375,13 @@
         if([self.BatmenStyle isEqualToString:@"MSC013"])
         {
             [self.img_WagonWheel setImage:[UIImage imageNamed:@"RHWagon"]];
-            self.onside_lbl.text=@"ON SIDE";
-            self.offside_lbl.text=@"OFF SIDE";
+            self.onside_lbl.text=@"OFF SIDE";
+            self.offside_lbl.text=@"ON SIDE";
         }
         else{
             [self.img_WagonWheel setImage:[UIImage imageNamed:@"LHWagon"]];
-            self.onside_lbl.text=@"OFF SIDE";
-            self.offside_lbl.text=@"ON SIDE";
+            self.onside_lbl.text=@"ON SIDE";
+            self.offside_lbl.text=@"OFF SIDE";
         }
         
         if (IS_IPAD_PRO) {
