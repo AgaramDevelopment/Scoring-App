@@ -436,16 +436,16 @@
     
      isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue<=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]==4)?YES:NO;
     
-    self.sideBar = [[CDRTranslucentSideBar alloc] init];
-    self.sideBar.sideBarWidth = 200;
-    self.sideBar.delegate = self;
-    self.sideBar.tag = 0;
-    
-    // Create Right SideBar
-    self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirectionFromRight:YES];
-    self.rightSideBar.delegate = self;
-    self.rightSideBar.translucentStyle = UIBarStyleBlack;
-    self.rightSideBar.tag = 1;
+//    self.sideBar = [[CDRTranslucentSideBar alloc] init];
+//    self.sideBar.sideBarWidth = 200;
+//    self.sideBar.delegate = self;
+//    self.sideBar.tag = 0;
+//    
+//    // Create Right SideBar
+//    self.rightSideBar = [[CDRTranslucentSideBar alloc] initWithDirectionFromRight:YES];
+//    self.rightSideBar.delegate = self;
+//    self.rightSideBar.translucentStyle = UIBarStyleBlack;
+//    self.rightSideBar.tag = 1;
     
     RightsideGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipeFromRightside:)];
     [RightsideGesture setDirection:UISwipeGestureRecognizerDirectionLeft];
@@ -460,7 +460,7 @@
     self.sideviewXposition.constant =-300;
     self.commonViewXposition.constant=0;
     self.commonViewwidthposition.constant =self.view.frame.size.width;
-    
+   // self.CommonviewRightsideposition.constant =self.view.frame.size.width;
     
     UITableView *tableView = [[UITableView alloc] init];
     UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, tableView.bounds.size.height)];
@@ -1719,11 +1719,17 @@
 {
    
     
-    [UIView animateWithDuration:5.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{ self.sideviewXposition.constant =-300;
+    [UIView animateWithDuration:0.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.sideviewXposition.constant =-300;
         self.commonViewXposition.constant=0;
-        self.commonViewwidthposition.constant =self.view.frame.size.width;
+        
+      
+       // self.commonViewwidthposition.constant =768;
+        self.commonleftrightview.frame=CGRectMake(self.commonleftrightview.frame.origin.x,self.commonleftrightview.frame.origin.y,760,361);
+        
         leftSlideSwipe = NO;
         self.CommonView.userInteractionEnabled= YES;
+        NSLog(@"alterviewwidth=%f",self.Allvaluedisplayview.frame.size.width);
     } completion:^(BOOL finished){ }];
     
     
@@ -4245,7 +4251,7 @@
         [self.img_pichmap setUserInteractionEnabled:YES];
         self.PichMapTittle =[[UILabel alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.origin.x-20,self.Allvaluedisplayview.frame.origin.y-75,self.Allvaluedisplayview.frame.size.width, 35)];
         self.PichMapTittle.text=@"PITCHMAP";
-        self.PichMapTittle.font=[UIFont fontWithName:@"RAJDHANI-MEDIUM" size:20];
+        self.PichMapTittle.font=[UIFont fontWithName:@"RAJDHANI-BOLD" size:20];
         self.PichMapTittle.textColor=[UIColor whiteColor];
         self.PichMapTittle.textAlignment=NSTextAlignmentCenter;
         self.PichMapTittle.backgroundColor=[UIColor colorWithRed:(49/255.0f) green:(72/255.0f) blue:(159/255.0f) alpha:1.0f];
