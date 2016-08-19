@@ -36,12 +36,14 @@ NSArray *muliteDayMatchtype;
 
 int batsmanHeaderPosition = 0;
 int batsmanPostion = 0;
-int bowlerHeaderPosition = 0;
-int bowlerPostion = 0;
+
 int extraPostion = 0 ;
 int overRunRatePostion = 0;
 int didNotBatPostion = 0;
+int fallOfWktHeaderPostion = 0;
 int fallOfWktPostion = 0;
+int bowlerHeaderPosition = 0;
+int bowlerPostion = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -66,19 +68,26 @@ int fallOfWktPostion = 0;
     //Set Table Cell Position
     batsmanHeaderPosition = 0;
     batsmanPostion = fetchScorecard.BattingSummaryForScoreBoard.count > 0 ? 1 :0;
+    extraPostion = fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1;
+    overRunRatePostion = extraPostion+1;
+    didNotBatPostion = overRunRatePostion+1;
     
-    bowlerHeaderPosition =fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1;
     
-//    extraPostion = fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1;
-//    
-//    overRunRatePostion = extraPostion +1;
-//    
-//    didNotBatPostion = overRunRatePostion+1;
-//    
-//    bowlerHeaderPosition = didNotBatPostion+1;
+    BOOL isFOW = NO;
+    for (BattingSummaryDetailsForScoreBoard *batSumryDtl in fetchScorecard.BattingSummaryForScoreBoard) {
+        
+        if(batSumryDtl.WICKETTYPE !=nil && ![batSumryDtl.WICKETTYPE isEqual:@"(null)"] && ![batSumryDtl.WICKETTYPE isEqual:@""]){
+            isFOW = YES;
+            break;
+        }
+    }
+    fallOfWktHeaderPostion = isFOW?didNotBatPostion+1:0;
+    fallOfWktPostion = isFOW?fallOfWktHeaderPostion+1:0;
+
+    bowlerHeaderPosition =isFOW?fallOfWktPostion+1:didNotBatPostion+1;
     bowlerPostion = bowlerHeaderPosition+1;
-    
-    //fallOfWktPostion = bowlerHeaderPosition +1;
+
+
     
     [self hideLabelBasedOnMatchType];
     
@@ -325,8 +334,10 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
- return fetchScorecard.BowlingSummaryForScoreBoard.count+ fetchScorecard.BattingSummaryForScoreBoard.count+2;   //count number of row from counting array hear cataGorry is An Array
+    int rows = fetchScorecard.BowlingSummaryForScoreBoard.count+
+    fetchScorecard.BattingSummaryForScoreBoard.count+
+    (fallOfWktHeaderPostion==0?0:1) + (fallOfWktPostion==0?0:1) + 5;
+    return rows;  //count number of row from counting array hear cataGorry is An Array
 }
 
 
@@ -343,101 +354,43 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     static NSString *overCell = @"over_run_rate_cell";
     static NSString *didNotCell =  @"did_Not_Bat_cell";
     static NSString *fallWktCell =  @"fall_wkt_cell";
+    static NSString *fallWktCellHeader = @"fall_of_wkt_header";
     
     
-//    if(extraPostion== indexPath.row){
-//        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:extraCell];
-//               if (cell == nil) {
-//            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
-//            cell = self.extraCell;
-//            self.extraCell = nil;
-//           
-//        }
-//        
-//        cell.lbl_totalExtra_runs.text = fetchScorecard.TOTALEXTRAS;
-//        
-//        cell.lbl_extras.text = [NSString stringWithFormat:@"(B: %@, LB: %@, WB: %@, P: %@)", fetchScorecard.BYES,fetchScorecard.LEGBYES,fetchScorecard.WIDES,fetchScorecard.PENALTIES];
-//        
-//        [cell setBackgroundColor:[UIColor clearColor]];
-//        
-//    return cell;
-//    }else if (overRunRatePostion == indexPath.row){
-//        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:overCell];
-//        if (cell == nil) {
-//            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
-//            cell = self.overRunRateCell;
-//            self.overRunRateCell = nil;
-//        }
-//        
-//        cell.lbl_over_run_rate.text = [NSString stringWithFormat:@"%ld / %ld (%ld.%ld) RR %.02f" ,(unsigned long)_BATTEAMRUNS,(unsigned long) _BATTEAMWICKETS,(unsigned long)_BATTEAMOVERS,(unsigned long)_BATTEAMOVRBALLS,[fetchSEpage.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEpage.BATTEAMRUNRATE floatValue]];
-//        [cell setBackgroundColor:[UIColor clearColor]];
-//        
-//        return cell;
-//
-//    }
-//    
-//    if (overRunRatePostion == indexPath.row){
-//        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:overCell];
-//        if (cell == nil) {
-//            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
-//            cell = self.overRunRateCell;
-//            self.overRunRateCell = nil;
-//        }
-//        
-//        cell.lbl_over_run_rate.text = [NSString stringWithFormat:@"%ld / %ld (%ld.%ld) RR %.02f" ,(unsigned long)_BATTEAMRUNS,(unsigned long) _BATTEAMWICKETS,(unsigned long)_BATTEAMOVERS,(unsigned long)_BATTEAMOVRBALLS,[fetchSEpage.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEpage.BATTEAMRUNRATE floatValue]];
-//        [cell setBackgroundColor:[UIColor clearColor]];
-//        
-//        return cell;
-//        
-//    }
-
-//    if (fallOfWktPostion == indexPath.row){
-//        BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
-//        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:fallWktCell];
-//        if (cell == nil) {
-//            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
-//            cell = self.wktOverCell;
-//            self.wktOverCell = nil;
-//        }
-//        
-//       // 1-0(SURYAKUMAR YADAV 2.1 ov)
-//        
-//        cell.lbl_fall_of_wkt .text = [NSString stringWithFormat:@"%@ - %@ (%@ %@.%@)ov",battingSummaryDetailsForSB.WICKETNO,battingSummaryDetailsForSB.WICKETSCORE,battingSummaryDetailsForSB.BATSMANNAME,battingSummaryDetailsForSB.WICKETOVERNO,battingSummaryDetailsForSB.WICKETBALLNO];
-//        [cell setBackgroundColor:[UIColor clearColor]];
-//        
-//        return cell;
-//        
-//    }
+    //            foreach (DataRow rowFOW in dtFOW.Rows)
+    //            {
+    //                if (!String.IsNullOrEmpty(rowFOW["WICKETTYPE"].ToString()))
+    //                {
+    //                    string strFormat = strFOW.Length > 0 ? ",\t {0}{6}-{6}{1}{6}({2}{6}{3}.{4}{6}ov)" : "{0}{6}-{6}{1}{6}({2}{6}{3}.{4}{6}ov)";
+    //
+    //                    //MSC101 - Timed Out
+    //                    //MSC107 - Mankading
+    //                    //MSC133 - Absent Hurt
+    //                    string[] exceptionalWicketTypes = { "MSC101", "MSC107", "MSC133" };
+    //
+    //                    if (exceptionalWicketTypes.Contains(rowFOW["WICKETTYPE"].ToString()))
+    //                        strFormat = strFOW.Length > 0 ? ",\t {0}{6}-{6}{1}{6}({2}{6}({5}))" : "{0}{6}-{6}{1}{6}({2}{6}({5}))";
+    //
+    //                    strFOW.Append(string.Format(
+    //                                                strFormat
+    //                                                , rowFOW["WICKETNO"].ToString()
+    //                                                , rowFOW["WICKETSCORE"].ToString()
+    //                                                , rowFOW["BATSMANNAME"].ToString().Replace(" ", NONBREAKABLESPACE)
+    //                                                , rowFOW["WICKETOVERNO"].ToString()
+    //                                                , rowFOW["WICKETBALLNO"].ToString()
+    //                                                , rowFOW["WICKETTYPEDESCRIPTION"].ToString()
+    //                                                , NONBREAKABLESPACE
+    //                                                , ZEROWIDTHSPACE
+    //                                                )
+    //                                  );
+    //                }
+    //            }
     
-//    if (didNotBatPostion == indexPath.row)
-//    {
-//        
-//        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:didNotCell];
-//        if (cell == nil) {
-//            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
-//            cell = self.didNotBatCell;
-//            self.didNotBatCell = nil;
-//        }
-//        
-//        NSMutableArray *notBatArray = fetchScorecard.DidNotBatArray ;
-//        
-//
-//            
-//            NSString *value = [[notBatArray valueForKey:@"BATSMANNAME"]componentsJoinedByString:@", "];
-//            NSLog(@"%@",value);
-//            
-//        cell.lbl_didNotBat.text = value;
-//        cell.lbl_didNotBat.lineBreakMode = NSLineBreakByWordWrapping;
-//            cell.lbl_didNotBat.numberOfLines = 0;
-//        
-//    
-//        [cell setBackgroundColor:[UIColor clearColor]];
-//        
-//        return cell;
-//       
-//    }
-
-    if(indexPath.row == 0){
+    
+    
+    
+    
+    if(indexPath.row == 0){//Batsman header
         ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:batsmanHeaderCell];
         if (cell == nil) {
             [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
@@ -447,7 +400,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         [cell setBackgroundColor:[UIColor clearColor]];
         
         return cell;
-    }else if(batsmanPostion <= indexPath.row && bowlerHeaderPosition>indexPath.row){
+    }else if(batsmanPostion <= indexPath.row && extraPostion>indexPath.row){
         BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
         
         ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:batsmanCell];
@@ -502,6 +455,120 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
         
         return cell;
+    }else if(extraPostion== indexPath.row){
+        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:extraCell];
+        if (cell == nil) {
+            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
+            cell = self.extraCell;
+            self.extraCell = nil;
+            
+        }
+        
+        cell.lbl_totalExtra_runs.text = fetchScorecard.TOTALEXTRAS;
+        
+        cell.lbl_extras.text = [NSString stringWithFormat:@"(B: %@, LB: %@, WB: %@, P: %@)", fetchScorecard.BYES,fetchScorecard.LEGBYES,fetchScorecard.WIDES,fetchScorecard.PENALTIES];
+        
+        [cell setBackgroundColor:[UIColor clearColor]];
+        
+        return cell;
+    }else if (overRunRatePostion == indexPath.row){
+        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:overCell];
+        if (cell == nil) {
+            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
+            cell = self.overRunRateCell;
+            self.overRunRateCell = nil;
+        }
+        
+        cell.lbl_over_run_rate.text = [NSString stringWithFormat:@"%ld / %ld (%ld.%ld) RR %.02f" ,(unsigned long)_BATTEAMRUNS,(unsigned long) _BATTEAMWICKETS,(unsigned long)_BATTEAMOVERS,(unsigned long)_BATTEAMOVRBALLS,[fetchSEpage.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEpage.BATTEAMRUNRATE floatValue]];
+        [cell setBackgroundColor:[UIColor clearColor]];
+        
+        return cell;
+        
+    }else if (didNotBatPostion == indexPath.row)
+    {
+        
+        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:didNotCell];
+        if (cell == nil) {
+            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
+            cell = self.didNotBatCell;
+            self.didNotBatCell = nil;
+        }
+        
+        NSMutableArray *notBatArray = fetchScorecard.DidNotBatArray ;
+        
+        
+        
+        NSString *value = [[notBatArray valueForKey:@"BATSMANNAME"]componentsJoinedByString:@", "];
+        NSLog(@"%@",value);
+        
+        cell.lbl_didNotBat.text = value;
+        cell.lbl_didNotBat.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.lbl_didNotBat.numberOfLines = 0;
+        
+        
+        [cell setBackgroundColor:[UIColor clearColor]];
+        
+        return cell;
+        
+    }else if (fallOfWktHeaderPostion == indexPath.row){
+        
+        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:fallWktCellHeader];
+        if (cell == nil) {
+            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
+            cell = self.fallOfWktCell;
+            self.fallOfWktCell = nil;
+        }
+        [cell setBackgroundColor:[UIColor clearColor]];
+        
+        return cell;
+        
+    }else if (fallOfWktPostion == indexPath.row){
+        
+        NSString *strFOW = @"";
+        
+        for (BattingSummaryDetailsForScoreBoard *batSumryDtl in fetchScorecard.BattingSummaryForScoreBoard) {
+            
+            if(batSumryDtl.WICKETTYPE !=nil && ![batSumryDtl.WICKETTYPE isEqual:@"(null)"] && ![batSumryDtl.WICKETTYPE isEqual:@""]){
+                
+                
+                
+                NSArray *exceptionalWicketTypes = [NSArray arrayWithObjects:@"MSC101",@"MSC107",@"MSC133",nil];
+                NSString *strFOWTemp;
+                
+                if ([exceptionalWicketTypes containsObject:batSumryDtl.WICKETTYPE]) {
+                    
+                    strFOWTemp = [NSString stringWithFormat:@"%@ - %@ (%@ %@)",batSumryDtl.WICKETNO,batSumryDtl.WICKETSCORE,batSumryDtl.BATSMANNAME,batSumryDtl.WICKETTYPEDESCRIPTION];
+                    
+                    
+                }else{
+                    strFOWTemp = [NSString stringWithFormat:@"%@ - %@ (%@ %@.%@)ov",batSumryDtl.WICKETNO,batSumryDtl.WICKETSCORE,batSumryDtl.BATSMANNAME,batSumryDtl.WICKETOVERNO,batSumryDtl.WICKETBALLNO];
+                    
+                }
+                
+                strFOW = strFOW.length>0?[NSString stringWithFormat:@"%@, %@",strFOW,strFOWTemp] :[NSString stringWithFormat:@"%@",strFOWTemp];
+                
+            }
+        }
+        
+        
+        
+        
+        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:fallWktCell];
+        if (cell == nil) {
+            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
+            cell = self.wktOverCell;
+            self.wktOverCell = nil;
+        }
+        
+        
+        cell.lbl_fall_of_wkt .text = strFOW;
+        cell.lbl_fall_of_wkt.lineBreakMode = NSLineBreakByWordWrapping;
+        cell.lbl_fall_of_wkt.numberOfLines = 0;
+        
+        [cell setBackgroundColor:[UIColor clearColor]];
+        
+        return cell;
+        
     }else if(bowlerHeaderPosition == indexPath.row){
         ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:bowlerHeaderCell];
         if (cell == nil) {
@@ -556,16 +623,24 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if(indexPath.row == 0){
         return 44;
-    }else if(batsmanPostion <= indexPath.row && bowlerHeaderPosition>indexPath.row){
-        
+    }else if(batsmanPostion <= indexPath.row && extraPostion>indexPath.row){
         return 70;
-    }
-    else if(bowlerHeaderPosition == indexPath.row){
+    }else if(extraPostion == indexPath.row){
         return 44;
-    }
-    else if(indexPath.row >= bowlerPostion){
+    }else if (overRunRatePostion == indexPath.row){
+        return 44;
+    }else if (didNotBatPostion == indexPath.row){
+        return 70;
+    }else if (fallOfWktHeaderPostion == indexPath.row){
+        return 44;
+    }else if (fallOfWktPostion == indexPath.row){
+        return 70;
+    }else if(bowlerHeaderPosition == indexPath.row){
+        return 44;
+    }else if(indexPath.row >= bowlerPostion){
         return 70;
     }
     
@@ -660,8 +735,26 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         //Set Table Cell Position
         batsmanHeaderPosition = 0;
         batsmanPostion =fetchScorecard.BattingSummaryForScoreBoard.count > 0 ? 1 :0;
-        bowlerHeaderPosition =fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1;
+        extraPostion = fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1;
+        overRunRatePostion = extraPostion+1;
+        didNotBatPostion = overRunRatePostion+1;
+        
+        
+        BOOL isFOW = NO;
+        for (BattingSummaryDetailsForScoreBoard *batSumryDtl in fetchScorecard.BattingSummaryForScoreBoard) {
+            
+            if(batSumryDtl.WICKETTYPE !=nil && ![batSumryDtl.WICKETTYPE isEqual:@"(null)"] && ![batSumryDtl.WICKETTYPE isEqual:@""]){
+                isFOW = YES;
+                break;
+            }
+        }
+        fallOfWktHeaderPostion = isFOW?didNotBatPostion+1:0;
+        fallOfWktPostion = isFOW?fallOfWktHeaderPostion+1:0;
+        
+        bowlerHeaderPosition =isFOW?fallOfWktPostion+1:didNotBatPostion+1;
         bowlerPostion = bowlerHeaderPosition+1;
+        
+
         
         [_tbl_scorecard reloadData];
     }
