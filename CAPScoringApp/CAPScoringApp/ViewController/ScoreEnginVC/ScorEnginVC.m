@@ -134,6 +134,7 @@
     BOOL isRTWselected;
     BOOL isSpinSelected;
     BOOL isAppealSelected;
+    BOOL isSaveAppeal;
     BOOL isFastSelected;
     BOOL isAggressiveSelected;
     BOOL isDefensiveSelected;
@@ -244,6 +245,8 @@
     UIScrollView *ScrollViewer;
     
     BOOL isEditBallInLiveMode;
+    GetSEAppealDetailsForAppealEvents *record;
+    NSMutableArray *getAppealArray;
 }
 
 
