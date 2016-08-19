@@ -16,6 +16,7 @@
 @property(strong,nonatomic)NSMutableArray *BattingSummaryForScoreBoard;
 @property(strong,nonatomic)NSMutableArray *BowlingSummaryForScoreBoard;
 @property(strong,nonatomic)NSMutableArray *MatchRegistrationForScoreBoardArray;
+@property(strong,nonatomic)NSMutableArray *DidNotBatArray;
 //
 @property(strong,nonatomic)NSString *CURRENTMATCHCODE;
 @property(strong,nonatomic)NSString *MATCHNAME;
@@ -68,23 +69,23 @@
 //
 //
 ////@property(strong,nonatomic)NSString *MATCHOVERS;
-//@property(strong,nonatomic)NSString *MATCHBALLS;
-//
-//@property(strong,nonatomic)NSString *BYES	;
-//@property(strong,nonatomic)NSString *LEGBYES;
-//@property(strong,nonatomic)NSString *NOBALLS;
-//@property(strong,nonatomic)NSString *WIDES;
-//@property(strong,nonatomic)NSString *PENALTIES;
-//@property(strong,nonatomic)NSString *TOTALEXTRAS;
-//@property(strong,nonatomic)NSString *INNINGSTOTAL;
-//@property(strong,nonatomic)NSString *INNINGSTOTALWICKETS;
-////@property(strong,nonatomic)NSString *MATCHOVERS	;
-//@property(strong,nonatomic)NSString *INNINGSRUNRATE	;
-//@property(strong,nonatomic)NSString *FINALINNINGS;
-//@property(strong,nonatomic)NSString *ISDECLARE	;
-//@property(strong,nonatomic)NSString *ISFOLLOWON	;
-//
-//
+@property(strong,nonatomic)NSString *MATCHBALLS;
+
+@property(strong,nonatomic)NSString *BYES;
+@property(strong,nonatomic)NSString *LEGBYES;
+@property(strong,nonatomic)NSString *NOBALLS;
+@property(strong,nonatomic)NSString *WIDES;
+@property(strong,nonatomic)NSString *PENALTIES;
+@property(strong,nonatomic)NSString *TOTALEXTRAS;
+@property(strong,nonatomic)NSString *INNINGSTOTAL;
+@property(strong,nonatomic)NSString *INNINGSTOTALWICKETS;
+//@property(strong,nonatomic)NSString *MATCHOVERS	;
+@property(strong,nonatomic)NSString *INNINGSRUNRATE;
+@property(strong,nonatomic)NSString *FINALINNINGS;
+@property(strong,nonatomic)NSString *ISDECLARE;
+
+
+
 //@property(strong,nonatomic)NSString *BATSMANCODE;
 ////@property(strong,nonatomic)NSString *BATSMANNAME;
 //

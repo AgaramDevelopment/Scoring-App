@@ -462,7 +462,9 @@ BOOL IsBack;
     
     self.txt_startInnings.text = startInningsTime;
     self.txt_endInnings.text = endInningsTime;
-    self.lbl_duration.text=[NSString stringWithFormat:@"%@", Duration];
+    
+    self.lbl_duration.text=[Duration isEqualToString:@"0"] ? @"" : [NSString stringWithFormat:@"%@",Duration];
+    
     self.lbl_teamName.text = teamName;
     self.lbl_runScored.text = [NSString stringWithFormat:@"%@",obj.TOTALRUNS];
     self.lbl_overPlayed.text = obj.OVERBALLNO;

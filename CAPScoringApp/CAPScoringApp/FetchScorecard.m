@@ -35,7 +35,22 @@
 @synthesize BOWLINGTEAMNAME;
 @synthesize BOWLINGTEAMLOGO;
 
+
+
+@synthesize BYES;
+@synthesize LEGBYES;
+@synthesize NOBALLS;
+@synthesize WIDES;
+@synthesize PENALTIES;
+@synthesize TOTALEXTRAS;
+@synthesize INNINGSTOTAL;
+@synthesize INNINGSTOTALWICKETS;
+@synthesize INNINGSRUNRATE;
+@synthesize FINALINNINGS;
+@synthesize ISDECLARE;
+
 @synthesize MatchRegistrationForScoreBoardArray;
+@synthesize DidNotBatArray;
 DBManagerScoreCard *dbScoreCard;
 
 -(void ) FetchScoreBoard:(NSString *) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO
@@ -126,7 +141,31 @@ DBManagerScoreCard *dbScoreCard;
     
     NSMutableArray *InningsSummaryForScoreBoard=[dbScoreCard GetInningsSummaryForScoreBoard :TEMPBATTEAMPENALTY:MATCHOVERS: MATCHBALLS: FINALINNINGS: COMPETITIONCODE: MATCHCODE : BATTINGTEAMCODE : INNINGSNO];
     
-    NSMutableArray *GetBatPlayerDetailsForScoreBoard=[dbScoreCard GetBatPlayerForScoreBoard :  COMPETITIONCODE : MATCHCODE :BATTINGTEAMCODE: INNINGSNO ];
+    if (InningsSummaryForScoreBoard.count>0) {
+        
+        MatchRegistrationDetailsForScoreBoard *scoreCard = [InningsSummaryForScoreBoard objectAtIndex:0];
+        
+        
+        BYES = scoreCard.BYES;
+        LEGBYES = scoreCard.LEGBYES;
+        NOBALLS = scoreCard.NOBALLS;
+        WIDES = scoreCard.WIDES;
+        PENALTIES = scoreCard.PENALTIES;
+        TOTALEXTRAS = scoreCard.TOTALEXTRAS;
+        INNINGSTOTAL = scoreCard.INNINGSTOTAL;
+        INNINGSTOTALWICKETS = scoreCard.INNINGSTOTALWICKETS;
+        INNINGSRUNRATE = scoreCard.INNINGSRUNRATE;
+        FINALINNINGS = scoreCard.FINALINNINGS;
+        ISDECLARE = scoreCard.ISDECLARE;
+        
+    
+        
+    }
+    
+    
+    DidNotBatArray = [dbScoreCard GetBatPlayerForScoreBoard :  COMPETITIONCODE : MATCHCODE :BATTINGTEAMCODE: INNINGSNO];
+    
+    
     
      ISTIMESHOW =[dbScoreCard GetIsTimeShowForScoreBoard: COMPETITIONCODE : MATCHCODE];
     
