@@ -9840,25 +9840,25 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ytp-Xz-BdY">
                                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                                                                 <subviews>
-                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OFF SIDE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNp-ik-UxJ">
+                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OFF SIDE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNp-ik-UxJ">
                                                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="26" id="05O-7E-7TN"/>
-                                                                            <constraint firstAttribute="width" constant="83" id="j1j-9D-q3B"/>
+                                                                            <constraint firstAttribute="height" constant="26" id="eKu-QL-3kR"/>
+                                                                            <constraint firstAttribute="width" constant="83" id="u1W-7c-f4f"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="18"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <nil key="highlightedColor"/>
                                                                         <variation key="default">
                                                                             <mask key="constraints">
-                                                                                <exclude reference="05O-7E-7TN"/>
-                                                                                <exclude reference="j1j-9D-q3B"/>
+                                                                                <exclude reference="eKu-QL-3kR"/>
+                                                                                <exclude reference="u1W-7c-f4f"/>
                                                                             </mask>
                                                                         </variation>
                                                                         <variation key="heightClass=regular-widthClass=regular">
                                                                             <mask key="constraints">
-                                                                                <include reference="05O-7E-7TN"/>
-                                                                                <include reference="j1j-9D-q3B"/>
+                                                                                <include reference="eKu-QL-3kR"/>
+                                                                                <include reference="u1W-7c-f4f"/>
                                                                             </mask>
                                                                         </variation>
                                                                     </label>
@@ -9923,13 +9923,14 @@
                                                                     <constraint firstItem="SNp-ik-UxJ" firstAttribute="top" secondItem="Ytp-Xz-BdY" secondAttribute="top" constant="414" id="ElT-p8-o0h">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="423"/>
                                                                     </constraint>
+                                                                    <constraint firstItem="SNp-ik-UxJ" firstAttribute="top" secondItem="Ytp-Xz-BdY" secondAttribute="top" constant="414" id="OHw-cV-Mnk"/>
                                                                     <constraint firstItem="SNp-ik-UxJ" firstAttribute="leading" secondItem="Ytp-Xz-BdY" secondAttribute="leading" constant="285" id="Sqf-mc-2hj">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="324"/>
                                                                     </constraint>
-                                                                    <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerY" secondItem="Ytp-Xz-BdY" secondAttribute="centerY" id="Wfb-qY-zNI"/>
-                                                                    <constraint firstItem="SNp-ik-UxJ" firstAttribute="top" secondItem="Ytp-Xz-BdY" secondAttribute="top" constant="414" id="OHw-cV-Mnk"/>
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerY" secondItem="Ytp-Xz-BdY" secondAttribute="centerY" id="WBf-Y8-bQX"/>
+                                                                    <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerY" secondItem="Ytp-Xz-BdY" secondAttribute="centerY" id="Wfb-qY-zNI"/>
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="X3r-Ch-1gf"/>
+                                                                    <constraint firstItem="SNp-ik-UxJ" firstAttribute="leading" secondItem="Ytp-Xz-BdY" secondAttribute="leading" constant="333" id="ccL-nZ-mBy"/>
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="fzf-fB-i9h">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="-4"/>
                                                                     </constraint>
@@ -9937,6 +9938,7 @@
                                                                     <constraint firstItem="SNp-ik-UxJ" firstAttribute="leading" secondItem="Ytp-Xz-BdY" secondAttribute="leading" constant="336" id="sEh-aa-iHX">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="333"/>
                                                                     </constraint>
+                                                                    <constraint firstItem="SNp-ik-UxJ" firstAttribute="top" secondItem="Ytp-Xz-BdY" secondAttribute="top" constant="423" id="yH8-h8-UFG"/>
                                                                 </constraints>
                                                                 <variation key="default">
                                                                     <mask key="subviews">
@@ -9950,6 +9952,8 @@
                                                                         <exclude reference="okq-XL-plr"/>
                                                                         <exclude reference="ElT-p8-o0h"/>
                                                                         <exclude reference="Sqf-mc-2hj"/>
+                                                                        <exclude reference="ccL-nZ-mBy"/>
+                                                                        <exclude reference="yH8-h8-UFG"/>
                                                                     </mask>
                                                                 </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
@@ -9963,8 +9967,12 @@
                                                                         <include reference="Wfb-qY-zNI"/>
                                                                         <exclude reference="fzf-fB-i9h"/>
                                                                         <include reference="okq-XL-plr"/>
-                                                                        <include reference="ElT-p8-o0h"/>
-                                                                        <include reference="Sqf-mc-2hj"/>
+                                                                        <exclude reference="ElT-p8-o0h"/>
+                                                                        <exclude reference="OHw-cV-Mnk"/>
+                                                                        <exclude reference="Sqf-mc-2hj"/>
+                                                                        <include reference="ccL-nZ-mBy"/>
+                                                                        <exclude reference="sEh-aa-iHX"/>
+                                                                        <include reference="yH8-h8-UFG"/>
                                                                     </mask>
                                                                 </variation>
                                                             </view>
