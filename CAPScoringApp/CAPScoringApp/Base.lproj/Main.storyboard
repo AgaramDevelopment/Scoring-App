@@ -9922,10 +9922,16 @@
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="12"/>
                                                                     </constraint>
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerY" secondItem="Ytp-Xz-BdY" secondAttribute="centerY" id="Wfb-qY-zNI"/>
+                                                                    <constraint firstItem="SNp-ik-UxJ" firstAttribute="top" secondItem="Ytp-Xz-BdY" secondAttribute="top" constant="414" id="OHw-cV-Mnk"/>
+                                                                    <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerY" secondItem="Ytp-Xz-BdY" secondAttribute="centerY" id="WBf-Y8-bQX"/>
+                                                                    <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="X3r-Ch-1gf"/>
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="fzf-fB-i9h">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="-4"/>
                                                                     </constraint>
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="okq-XL-plr"/>
+                                                                    <constraint firstItem="SNp-ik-UxJ" firstAttribute="leading" secondItem="Ytp-Xz-BdY" secondAttribute="leading" constant="336" id="sEh-aa-iHX">
+                                                                        <variation key="heightClass=regular-widthClass=regular" constant="333"/>
+                                                                    </constraint>
                                                                 </constraints>
                                                                 <variation key="default">
                                                                     <mask key="subviews">
@@ -9937,6 +9943,10 @@
                                                                         <exclude reference="Wfb-qY-zNI"/>
                                                                         <exclude reference="fzf-fB-i9h"/>
                                                                         <exclude reference="okq-XL-plr"/>
+                                                                        <exclude reference="29G-P8-saw"/>
+                                                                        <exclude reference="AdG-1G-EEO"/>
+                                                                        <exclude reference="OHw-cV-Mnk"/>
+                                                                        <exclude reference="sEh-aa-iHX"/>
                                                                     </mask>
                                                                 </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
@@ -9950,6 +9960,10 @@
                                                                         <include reference="Wfb-qY-zNI"/>
                                                                         <exclude reference="fzf-fB-i9h"/>
                                                                         <include reference="okq-XL-plr"/>
+                                                                        <include reference="29G-P8-saw"/>
+                                                                        <include reference="AdG-1G-EEO"/>
+                                                                        <include reference="OHw-cV-Mnk"/>
+                                                                        <include reference="sEh-aa-iHX"/>
                                                                     </mask>
                                                                 </variation>
                                                             </view>
