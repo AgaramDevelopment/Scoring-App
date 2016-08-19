@@ -16,6 +16,12 @@
 @property (strong, nonatomic) IBOutlet ScoreCardCellTVCell *batsManHeaderCell;
 @property (strong, nonatomic) IBOutlet ScoreCardCellTVCell *bowlerHeaderCell;
 @property (strong, nonatomic) IBOutlet ScoreCardCellTVCell *bowlerCell;
+@property (strong, nonatomic) IBOutlet ScoreCardCellTVCell *extraCell;
+@property (strong, nonatomic) IBOutlet ScoreCardCellTVCell *overRunRateCell;
+@property (strong, nonatomic) IBOutlet ScoreCardCellTVCell *didNotBatCell;
+@property (strong, nonatomic) IBOutlet ScoreCardCellTVCell *fallOfWktCell;
+@property (strong, nonatomic) IBOutlet ScoreCardCellTVCell *wktOverCell;
+
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *lbl_strip;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btn_tab_fst_inns;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btn_tab_second_inns;

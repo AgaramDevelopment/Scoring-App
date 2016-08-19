@@ -773,6 +773,7 @@ BOOL isWicketSelected;
     
 }
 
+
 -(IBAction)didClickLeftRotation:(id)sender
 {
     InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];

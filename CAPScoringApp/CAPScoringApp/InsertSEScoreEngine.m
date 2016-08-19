@@ -129,7 +129,7 @@
     NSNumber* T_OVERNO =[[NSNumber alloc ] init];
     NSNumber* T_BALLNO =[[NSNumber alloc ] init];
     NSNumber* T_BALLCOUNT =[[NSNumber alloc ] init];
-    NSNumber* T_ISLEGALBALL =[[NSNumber alloc ] init];
+    NSNumber  *T_ISLEGALBALL =[[NSNumber alloc ] init];
     NSString* MAXPENALTYID =[[NSString alloc ] init];
     NSString* PENALTYCODE =[[NSString alloc ] init];
     NSString* PREVIOUSBALLCODE =[[NSString alloc ] init];
@@ -188,22 +188,29 @@
                 }
                 else
                 {
-                    [dbInsertScoreEngine UpdateBallEventtableForInsertScoreEngine : COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :TEAMCODE: T_OVERNO : T_BALLNO];
+                    [dbInsertScoreEngine UpdateBallEventtableForAfterInsert : COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :TEAMCODE: T_OVERNO : T_BALLNO];
                     [dbInsertScoreEngine UpdateBallEventtablesForInsertScoreEngine : COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :TEAMCODE: T_OVERNO : T_BALLNO : T_BALLCOUNT];//Method Overloading
                 }
             }
             else if(INSERTTYPE == @"AFTER")
             {
-                if(T_ISLEGALBALL == [NSNumber numberWithInt:1])
+                
+                NSNumber *t_IsLegalBall = [NSNumber numberWithInt: T_ISLEGALBALL.intValue];
+
+                if(t_IsLegalBall.intValue == 1)
+                
                 {
                     N_BALLNO = [NSNumber numberWithInt: ([T_BALLNO intValue] + 1)];
                     N_BALLCOUNT = [NSNumber numberWithInt:1];
-                    [dbInsertScoreEngine UpdateBallEventtableForInsertScoreEngine : COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :TEAMCODE: T_OVERNO : T_BALLNO];
+                    [dbInsertScoreEngine UpdateBallEventtableForAfterInsert : COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :TEAMCODE: T_OVERNO : T_BALLNO];
                 }
                 else
                 {
-                    [dbInsertScoreEngine UpdateBallEventtableForInsertScoreEngine : COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :TEAMCODE: T_OVERNO : T_BALLNO];
-                    if  (T_BALLCOUNT > 1)
+                    [dbInsertScoreEngine UpdateBallEventtableForAfterInsert : COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :TEAMCODE: T_OVERNO : T_BALLNO];
+                    
+                    NSNumber *t_ballcount = [NSNumber numberWithInt: T_BALLCOUNT.intValue];
+                    
+                    if  (t_ballcount.intValue > 1)
                     {
                         N_BALLNO = [NSNumber numberWithInt: ([T_BALLNO intValue] + 1)];
                         N_BALLCOUNT = [NSNumber numberWithInt:1];
@@ -311,9 +318,9 @@
             
             [dbInsertScoreEngine UpdateInningsEventEventsForInsertScoreEngine :  T_STRIKERCODE : T_NONSTRIKERCODE :BOWLERCODE  : COMPETITIONCODE    : MATCHCODE       : TEAMCODE       : INNINGSNO];
             
-            if(![APPEALTYPECODE isEqualToString:@""])
+            if(APPEALTYPECODE !=nil)
                 [self InsertAppealEvents : BALLCODENO : COMPETITIONCODE : MATCHCODE : TEAMCODE : [INNINGSNO integerValue] : APPEALTYPECODE : APPEALSYSTEMCODE : APPEALCOMPONENTCODE : APPEALUMPIRECODE : APPEALBATSMANCODE : APPEALISREFERRED : APPEALDECISION : APPEALCOMMENTS : APPEALFIELDERCODE : APPEALFLAG];
-            if(![FIELDINGEVENTSFIELDINGFACTOR isEqualToString:@""])
+            if(FIELDINGEVENTSFIELDINGFACTOR  !=nil)
                 [self InsertFieldingEvents : COMPETITIONCODE : MATCHCODE : TEAMCODE : [INNINGSNO integerValue] : BALLCODENO : FIELDINGEVENTSFIELDERCODE : FIELDINGEVENTSISSUBSTITUTE : FIELDINGEVENTSFIELDINGFACTOR : FIELDINGEVENTSNETRUNS : FIELDINGEVENTSFLAG];
         }
         if([ISWICKET intValue] == 1)
@@ -324,11 +331,11 @@
         
        BATTEAMRUNS = [dbInsertScoreEngine GetbatTeamRunsForInsertScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO :BATTINGTEAMCODE];
         
-         BOWLINGTEAMCODE = [dbInsertScoreEngine getBowlingCode:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE];
+         BOWLINGTEAMCODE = [dbInsertScoreEngine getBowlingCode:COMPETITIONCODE :MATCHCODE :TEAMCODE];
         
         EndInnings *insertEndInnings = [[EndInnings alloc]init];
         
-        insertEndInnings.BATTINGTEAMCODE = BATTINGTEAMCODE;
+        insertEndInnings.BATTINGTEAMCODE = TEAMCODE;
         insertEndInnings.BOWLINGTEAMCODE = BOWLINGTEAMCODE;
         insertEndInnings.BATSMANCODE = SB_STRIKERCODE;
         insertEndInnings.ISFOUR = ISFOUR;

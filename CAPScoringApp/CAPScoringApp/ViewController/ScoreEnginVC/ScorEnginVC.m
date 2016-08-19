@@ -68,6 +68,7 @@
 #import "PowerPlayVC.h"
 #import "MatchRegistrationPushRecord.h"
 #import "Utitliy.h"
+#import "FETCHSELASTINSTANCEDTLS.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -78,12 +79,14 @@
 @interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate,Other_WicketDelegate,RevisedTargetDelegate>
 {   //appeal System
     BOOL isEnableTbl;
+    BOOL isSaveAppeal;
+    GetSEAppealDetailsForAppealEvents *record;
     NSMutableArray * AppealSystemSelectionArray;
     NSString*AppealSystemSelectCode;
     AppealSystemRecords *objAppealSystemEventRecord;
     NSMutableDictionary *appealEventDict;
     NSString *AppealTypeSelectCode;
-    
+    NSMutableArray * getAppealArray;
     //AppealComponent
     NSMutableArray * AppealComponentSelectionArray;
     NSString*AppealComponentSelectCode;
@@ -98,7 +101,7 @@
     NSMutableArray *AppealBatsmenSelectionArray;
     NSArray*AppealBatsmenSelectCode;
     AppealBatsmenRecord *objAppealBatsmenEventRecord;
-    
+    NSString *isSelectMarkForEdit;
     NSString *StrikerPlayer;
     NSString *UmpireSelect;
     
@@ -132,6 +135,7 @@
     BOOL isOTWselected;
     BOOL isRTWselected;
     BOOL isSpinSelected;
+    BOOL isAppealSelected;
     BOOL isFastSelected;
     BOOL isAggressiveSelected;
     BOOL isDefensiveSelected;
@@ -145,9 +149,13 @@
     BOOL isWagonWheelValueSelected;
     BOOL isWagonwheel;
     BOOL isAppeal;
+    BOOL isMarksForEdit;
     BOOL isEndOverOnEndBall;
     
     BOOL isToss;
+    
+    BOOL isLastInstanceSelected;
+
     
     NSMutableArray *strickerList;
     NSMutableArray *nonStrickerList;
@@ -227,6 +235,17 @@
     
     BOOL isfieldingeventundo;
     BOOL isappealeventundo;
+    
+    
+    UIView * view_addedit;
+    UIButton * Editrotation;
+    UIButton * Cancelrotation;
+    UIButton * Rightrotation;
+    UIButton * leftrotation;
+    
+    UIScrollView *ScrollViewer;
+    
+    BOOL isEditBallInLiveMode;
 }
 
 
@@ -269,6 +288,7 @@
 @property(nonatomic,strong) NSMutableArray *AppealValuesArray;
 @property(nonatomic,strong)NSDictionary *test;
 @property(nonatomic,strong)NSDictionary *test1;
+
 //wicketType
 @property (nonatomic,strong)NSMutableArray *WicketTypeArray;
 @property (nonatomic,strong)NSMutableArray *StrikerandNonStrikerArray;
@@ -507,6 +527,7 @@
     
     isRemarkOpen = NO;
     isEndOverOnEndBall = NO;
+    isLastInstanceSelected = NO;
 
     
     //Fielding Factor
@@ -673,18 +694,20 @@
     }
     
     //Appeals
-    NSMutableArray *getAppealArray = [fetchSeBallCodeDetails GetAppealDetailsForAppealEventsArray];
+    getAppealArray = [fetchSeBallCodeDetails GetAppealDetailsForAppealEventsArray];
     if(getAppealArray.count>0){
-        GetSEAppealDetailsForAppealEvents *record = [[GetSEAppealDetailsForAppealEvents alloc]init];
+       GetSEAppealDetailsForAppealEvents *record = [[GetSEAppealDetailsForAppealEvents alloc]init];
         record = (GetSEAppealDetailsForAppealEvents*)[getAppealArray objectAtIndex:0];
         appealEventDict = [NSMutableDictionary dictionary];
         [appealEventDict setValue:record.APPEALSYSTEMCODE forKey:@"AppealSystemSelct"];
         [appealEventDict setValue:record.APPEALCOMPONENTCODE forKey:@"AppealComponentSelct"];
+        
         [appealEventDict setValue:record.UMPIRECODE forKey:@"AppealUmpireSelct"];
         [appealEventDict setValue:record.BATSMANCODE forKey:@"AppealBatsmenSelct"];
         [appealEventDict setValue:record.BOWLERNAME forKey:@"AppealBowlerSelect"];
         [appealEventDict setValue:record.APPEALCOMMENTS forKey:@"Commenttext"];
         [appealEventDict setValue:record.APPEALTYPECODE forKey:@"AppealTypeCode"];
+        
         [self selectedViewBg:_view_appeal];
     }
     
@@ -1001,11 +1024,9 @@
     //Appeal
     if(self.ballEventRecord.objIsappeal.intValue == 1){
         [self selectedViewBg:_view_appeal];
-        
-        
-        
     }
-    
+    isAppealSelected=YES;
+
     //Remark
     if(self.ballEventRecord.objRemark!=nil && ![self.ballEventRecord.objRemark isEqual:@""]){
         [self selectedViewBg:_view_remark];
@@ -1097,6 +1118,8 @@
     //Mark for edit
     if(self.ballEventRecord.objMarkedforedit.integerValue == 1){
         [self selectedViewBg:_view_medit];
+       self.ballEventRecord.objMarkedforedit=@"1";
+        
     }
     
     //Runs
@@ -1419,6 +1442,8 @@
     
 
     //Ball ticket
+    fetchSEPageLoadRecord.BallGridDetails = fetchSeBallCodeDetails.BallGridDetails;
+
     [self CreateBallTickers : fetchSeBallCodeDetails.BallGridDetails];
     
 }
@@ -1905,7 +1930,7 @@
         cell.backgroundColor = [UIColor clearColor];
         
         UIView *bgColorView = [[UIView alloc] init];
-        bgColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+        bgColorView.backgroundColor = [UIColor colorWithRed:(1/255.0f) green:(210/255.0f) blue:(162/255.0f) alpha:1.0f];
         cell.selectedBackgroundView = bgColorView;
         
         cell.textLabel.text = [self.rightSlideArray objectAtIndex:indexPath.row];
@@ -2088,6 +2113,9 @@
         
         
         cell.AppealName_lbl.text=objAppealrecord.MetaSubCodeDescriptision;
+        
+        
+  
         
         UIView *customColorView = [[UIView alloc] init];
         customColorView.backgroundColor = [UIColor colorWithRed:20/255.0
@@ -2473,7 +2501,24 @@
          (isfieldingeventundo == YES ? @"D":@"E")//FIELDINGEVENTSFLAG
          ];
         
-        [self.navigationController popViewControllerAnimated:NO];
+        
+        if(!isEditBallInLiveMode){//Edit mode
+                [self.navigationController popViewControllerAnimated:NO];
+        }else{// Edit mode pressed in live mode
+            
+            self.isEditMode = NO;
+            self.editBallCode = nil;
+            isEditBallInLiveMode = NO;
+            [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
+            self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+            self.btn_StartOver.userInteractionEnabled = YES;
+            
+            [self AllBtndisableMethod];
+            [self resetBallEventObject];
+            [self resetAllButtonOnEndBall];
+            [self viewDidLoad];
+            
+            }
         }
     }else if([self.btn_StartOver.currentTitle isEqualToString:@"END OVER"]){ // Check Is Over started
        
@@ -2531,6 +2576,14 @@
                     [alter setTag:10200];
                     
                 }
+                
+                //Set Data for Last instant
+                if([fetchSEPageLoadRecord.ISDEFAULTORLASTINSTANCE isEqual:@"1"]){
+                    isLastInstanceSelected = YES;
+                    [self selectedViewBg:_view_last_instant];
+                    [self setViewOnLastInstant:@"1"];
+                }
+                
             }
         }
         else
@@ -2907,7 +2960,7 @@
     return color;
 }
 
-- (UIView *) CreateBallTickerInstance: (NSString *) content : (bool) isExtras : (bool) isSpecialEvents : (bool) isMarkedForEdit : (NSString *) ballno : (CGFloat) xposition
+- (UIView *) CreateBallTickerInstance: (NSString *) content : (bool) isExtras : (bool) isSpecialEvents : (bool) isMarkedForEdit : (NSString *) ballno : (CGFloat) xposition : (int) index
 {
     //Hints
     //WD NB LB B = Width="55" BorderBrush="#5283AE" Background="Transparent" (Foreground="#5283AE")
@@ -2986,6 +3039,10 @@
     [btnborder setTitleColor:brushFGSplEvents forState:UIControlStateNormal] ;
     btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20];
     
+    [btnborder addTarget:self action:@selector(didClickEditAction:) forControlEvents:UIControlEventTouchUpInside];
+    btnborder.tag= index;
+
+    
     UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0,48, totalWidth,12)];
     BallTickerNo.textAlignment = NSTextAlignmentCenter;
     BallTickerNo.font = [UIFont fontWithName:@"RAJDHANI-REGULAR" size:13];
@@ -3002,9 +3059,10 @@
 - (void) CreateBallTickers: (NSMutableArray *) arrayBallDetails
 {
     [self.view_BallTicker.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    UIScrollView *ScrollViewer = [[UIScrollView alloc] initWithFrame:CGRectMake(self.view_BallTicker.frame.origin.x,5, [self.view_BallTicker bounds].size.width,70)];
+    ScrollViewer = [[UIScrollView alloc] initWithFrame:CGRectMake(self.view_BallTicker.frame.origin.x,5, [self.view_BallTicker bounds].size.width,70)];
     ScrollViewer.showsHorizontalScrollIndicator=NO;
     CGFloat xposition = 0;
+    int index = 0;
     
     for (BallEventRecord *drballdetails in arrayBallDetails)
     {
@@ -3120,19 +3178,24 @@
         }
         content = [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         //To Create ball tiker for each row.
+        
+    
         [ScrollViewer insertSubview: [self CreateBallTickerInstance
                                       :content
                                       :isExtras
                                       :isSpecialEvents
-                                      :(int)drballdetails.objMarkedforedit == 1
+                                      :[drballdetails.objMarkedforedit intValue] == 1
                                       :drballdetails.objBallno
-                                      :xposition] atIndex:0];
+                                      :xposition
+                                      :index] atIndex:0];
         if (content.length >= 5)
             xposition = xposition + 7 + (15 * content.length);
         else if (content.length >= 3)
             xposition = xposition + 7 + (13 * content.length);
         else
             xposition = xposition + (isExtras ? 57 : 47);
+        
+        index ++;
     }
     [ScrollViewer setContentSize:CGSizeMake(xposition, [ScrollViewer bounds].size.height)];
     CGFloat width =ScrollViewer.contentSize.width;
@@ -4239,9 +4302,11 @@
         if([self.BatmenStyle isEqualToString:@"MSC013"])
         {
             [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapRH"]];
+          
         }
         else{
             [self.img_pichmap setImage:[UIImage imageNamed:@"pichmapLH"]];
+            
         }
         UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didClickPichmapTapAction:)];
         tapRecognizer.numberOfTapsRequired = 1;
@@ -4309,9 +4374,13 @@
         if([self.BatmenStyle isEqualToString:@"MSC013"])
         {
             [self.img_WagonWheel setImage:[UIImage imageNamed:@"RHWagon"]];
+            self.onside_lbl.text=@"ON SIDE";
+            self.offside_lbl.text=@"OFF SIDE";
         }
         else{
             [self.img_WagonWheel setImage:[UIImage imageNamed:@"LHWagon"]];
+            self.onside_lbl.text=@"OFF SIDE";
+            self.offside_lbl.text=@"ON SIDE";
         }
         
         if (IS_IPAD_PRO) {
@@ -6061,40 +6130,126 @@
     }
     else if(selectBtnTag.tag==121)
     {
-        //   [self selectBtncolor_Action:@"121" :nil :210];
+        
+        if(isMarksForEdit==NO)
+        {
+            
+            [self selectedViewBg:_view_medit];
+            
+            isMarksForEdit=YES;
+       self.ballEventRecord.objMarkedforedit=@"1";
+            NSLog(@"%@",self.ballEventRecord.objMarkedforedit);
+        }
+        else
+        {
+            [self unselectedButtonBg:_view_medit];
+            self.ballEventRecord.objMarkedforedit=@"0";
+            
+            isMarksForEdit=NO;
+        }
+//   [self selectBtncolor_Action:@"121" :nil :210];
     }
     else if(selectBtnTag.tag==122)//Appels
     {
+        //[self selectBtncolor_Action:@"114"];
+        DBManager *objDBManager = [[DBManager alloc]init];
+        if(_AppealValuesArray==nil || _AppealValuesArray.count == 0){
+            _AppealValuesArray=[[NSMutableArray alloc]init];
+            _AppealValuesArray =[objDBManager AppealRetrieveEventData];
+        }
         
-//[self selectedViewBg:_view_appeal];
-       if(isAppeal==NO)
+        
+        self.View_Appeal.hidden = NO;
+        self.view_fastBowl.hidden = YES;
+        self.view_aggressiveShot.hidden = YES;
+        self.view_defensive.hidden = YES;
+         [table_Appeal reloadData];
+        if(isAppealSelected ==YES){
+            [self selectedViewBg:_view_appeal];
+            [table_Appeal reloadData];
+            int indx=0;
+            int selectePosition = -1;
+            for (AppealRecord *record in self.AppealValuesArray)
             {
-               [self selectedViewBg:_view_appeal];
-                DBManager *objDBManager = [[DBManager alloc]init];
-                _AppealValuesArray=[[NSMutableArray alloc]init];
-                _AppealValuesArray =[objDBManager AppealRetrieveEventData];
-                _View_Appeal.hidden=NO;
-                [table_Appeal reloadData];
-
-                
-                self.view_aggressiveShot.hidden = YES;
-                self.view_defensive.hidden = YES;
-                self.view_bowlType.hidden = YES;
-                self.view_fastBowl.hidden = YES;
-                isAppeal=YES;
-                
+                bool chk = ([[record MetaSubCode] isEqualToString:self.ballEventRecord.objIsappeal]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    break;
+                }
+                indx ++;
             }
-            else
+            
+            if(selectePosition!=-1){
+                
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+                [table_Appeal selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                
+                [table_Appeal scrollToRowAtIndexPath:indexPath
+                                    atScrollPosition:UITableViewScrollPositionTop
+                                            animated:YES];
+            }
+        }else if(isAppealSelected && self.ballEventRecord.objIsappeal == nil){
+            
+            [self unselectedViewBg:_view_appeal];
+            self.View_Appeal.hidden = YES;
+          
+            
+        }
+        
+        if (isSaveAppeal==YES) {
+            [self selectedViewBg:_view_appeal];
+            [table_Appeal reloadData];
+            int indx=0;
+            int selectePosition = -1;
+            for (AppealRecord *record in self.AppealValuesArray)
             {
-                [self unselectedButtonBg:_view_appeal];
-                  _View_Appeal.hidden=YES;
-               
-                isAppeal=NO;
+                bool chk = ([[record MetaSubCode] isEqualToString:self.ballEventRecord.objIsappeal]);
+                if (chk)
+                {
+                    selectePosition = indx;
+                    break;
+                }
+                indx ++;
+            }
+            
+            if(selectePosition!=-1){
+                
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+                [table_Appeal selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+                
+                [table_Appeal scrollToRowAtIndexPath:indexPath
+                                    atScrollPosition:UITableViewScrollPositionTop
+                                            animated:YES];
+                
             }
         }
+        else{
+            
+            self.ballEventRecord.objIsappeal = nil;
+        [self selectedViewBg:_view_appeal];
+           
+            
+        }
+        
+        
+        
+    }
   
-    else if(selectBtnTag.tag==123)
+    else if(selectBtnTag.tag==123)//Last Instance
     {
+        
+        if(isLastInstanceSelected){
+            isLastInstanceSelected = NO;
+            [self unselectedViewBg:_view_last_instant];
+            [self setViewOnLastInstant:@"0"];
+        }else{
+            isLastInstanceSelected = YES;
+            [self selectedViewBg:_view_last_instant];
+            [self setViewOnLastInstant:@"1"];
+        }
+        
+        
         //  [self selectBtncolor_Action:@"123" :nil :212];
     }
     
@@ -6316,7 +6471,7 @@
     self.ballEventRecord.objGrandtotal = [NSNumber numberWithInt:0];
     
     self.ballEventRecord.objRemark = @"";
-    
+    self.ballEventRecord.objMarkedforedit=@"0";
     
     
     self.ballEventRecord.objOverno=[NSNumber numberWithInt:fetchSEPageLoadRecord.BATTEAMOVERS];
@@ -6416,6 +6571,7 @@
         [rbwTableview removeFromSuperview];
     }
     [self unselectedViewBg: self.view_otw];
+      [self unselectedViewBg: self.view_medit];
     [self unselectedViewBg: self.view_rtw];
     [self unselectedViewBg: self.view_spin];
     [self.tbl_bowlType reloadData];
@@ -6426,6 +6582,10 @@
     self.view_aggressiveShot.hidden=YES;
     isAggressiveSelected=NO;
     [self unselectedViewBg:self.view_defense];
+    
+    [self unselectedViewBg:_view_last_instant];
+    isLastInstanceSelected = NO;
+
     [_tbl_defensive reloadData];
     self.view_defensive.hidden=YES;
     isDefensiveSelected=NO;
@@ -6463,6 +6623,7 @@ self.lbl_umpirename.text=@"";
     isWagonWheelValueSelected = NO;
     ismiscFilters = NO;
     isOverthrowSelected = NO;
+    
 
    
   //[self unselectedViewBg: self.View_Appeal];
@@ -7148,32 +7309,58 @@ self.lbl_umpirename.text=@"";
 
     if(tableView == table_Appeal){
         
+        
         self.table_Appeal.separatorStyle = UITableViewCellSeparatorStyleNone;
         [table_Appeal setSeparatorColor:[UIColor clearColor]];
-        [self.table_Appeal selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
-        [self.table_Appeal deselectRowAtIndexPath:indexPath animated:NO];
-       
-
+        [self.table_Appeal selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionNone];
+        
+        
+        
         if(appealEventDict==nil){
             appealEventDict = [NSMutableDictionary dictionary];
         }
         AppealRecord *objAppealrecord=(AppealRecord*)[self.AppealValuesArray objectAtIndex:indexPath.row];
         
+        
         AppealTypeSelectCode=objAppealrecord.MetaSubCode;
-        
+               if(isAppealSelected==YES)
+        {
+         //   isAppealSelected = YES;
             self.table_AppealSystem.hidden=YES;
+            self.ballEventRecord.objIsappeal = objAppealrecord.MetaSubCode;
             isEnableTbl=YES;
+         
+          
+                record = (GetSEAppealDetailsForAppealEvents*)[getAppealArray objectAtIndex:0];
+            self.comments_txt.text=record.APPEALCOMMENTS;
+            self.lbl_appealsystem.text=record.APPEALSYSTEMDES;
+            self.lbl_appealComponent.text=record.APPEALCOMPONENTDES;
+            self.lbl_umpirename.text=record.UMPIRENAME;
+            self.lbl_batsmen.text=record.BATSMANNAME;
+            _view_table_select.hidden=NO;
+        }
+        
+        else if(isAppealSelected && self.ballEventRecord.objIsappeal!=nil && self.ballEventRecord.objIsappeal == objAppealrecord.MetaSubCode){
+        
+            self.ballEventRecord.objIsappeal = nil;
+            [self unselectedViewBg:_view_appeal];
+            
+        }
+        
+        else{
+          
+            
+            self.ballEventRecord.objIsappeal =objAppealrecord.MetaSubCode;
+            self.comments_txt.text=@"";
+            self.lbl_appealsystem.text=@"";
+            self.lbl_appealComponent.text=@"";
+            self.lbl_umpirename.text=@"";
+            self.lbl_batsmen.text=@"";
+            _view_table_select.hidden=NO;
+
+        }
+        isAppealSelected=NO;
        
-        
-        
-        
-       
-        self.comments_txt.text=@"";
-        self.lbl_appealsystem.text=@"";
-        self.lbl_appealComponent.text=@"";
-        self.lbl_umpirename.text=@"";
-        self.lbl_batsmen.text=@"";
-        _view_table_select.hidden=NO;
     }
     
     if(breakvc.view != nil)
@@ -8865,6 +9052,7 @@ self.lbl_umpirename.text=@"";
     otherwicketvc.BALLCOUNT=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
     otherwicketvc.N_WICKETNO=[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMWICKETS];
     otherwicketvc.BALLCODE=fetchSEPageLoadRecord.BOWLTYPECODE;
+    otherwicketvc.WICKETTYPE =
     otherwicketvc.delegate=self;
     
     
@@ -9228,6 +9416,9 @@ self.lbl_umpirename.text=@"";
         [appealEventDict setValue:AppealBowlercode forKey:@"AppealBowlerSelect"];
         [appealEventDict setValue:commentText forKey:@"Commenttext"];
         [self.view_table_select setHidden:YES];
+        [self.View_Appeal setHidden:YES];
+         isSaveAppeal=YES;
+          [self unselectedViewBg:_view_appeal];
     }
 }
 
@@ -13748,6 +13939,652 @@ self.lbl_umpirename.text=@"";
     }
     
     return NO;
+    
+}
+
+
+
+//Last Instant View
+-(void) setViewOnLastInstant: (NSString *)ISDEFAULTORLAST{
+    
+    
+    //Reset Data
+    
+    isMoreRunSelected = NO;
+    isExtrasSelected = NO;
+    isOverthrowSelected = NO;
+    
+    //Left buttons
+    [self unselectedButtonBg: self.btn_run1];
+    [self unselectedButtonBg: self.btn_run2];
+    [self unselectedButtonBg: self.btn_run3];
+    [self unselectedButtonBg: self.btn_highRun];
+    [self unselectedButtonBg: self.btn_B4];
+    [self unselectedButtonBg: self.btn_B6];
+    [self unselectedButtonBg: self.btn_extras];
+    
+    [extrasTableView removeFromSuperview ];
+    
+    if(overThrowTableView!=nil){
+        [overThrowTableView removeFromSuperview];
+    }
+    [self unselectedButtonBg: self.btn_overthrow];
+    [self unselectedButtonBg: self.btn_pichmap];
+    self.img_pichmap.hidden=YES;
+    self.PichMapTittle.hidden=YES;
+    [self unselectedButtonBg: self.btn_wagonwheel];
+    self.view_Wagon_wheel.hidden=YES;
+    
+    //Right buttons
+    if(rbwTableview!=nil){
+        [rbwTableview removeFromSuperview];
+    }
+    [self unselectedViewBg: self.view_medit];
+    [self unselectedViewBg: self.view_spin];
+    [self.tbl_bowlType reloadData];
+    [self unselectedViewBg: self.view_fast];
+    [self.tbl_fastBowl reloadData];
+    [self unselectedViewBg: self.view_aggressive];
+    [self.tbl_aggressiveShot reloadData];
+    self.view_aggressiveShot.hidden=YES;
+    isAggressiveSelected=NO;
+    [self unselectedViewBg:self.view_defense];
+    [_tbl_defensive reloadData];
+    self.view_defensive.hidden=YES;
+    isDefensiveSelected=NO;
+    
+    isFastSelected = NO;
+    isSpinSelected = NO;
+    
+    [self unselectedViewBg: self.view_Rbw];
+    
+    
+    isPitchmap =NO;
+    isWagonwheel=NO;
+    ispichmapSelectValue = NO;
+    isWagonWheelValueSelected = NO;
+    isOverthrowSelected = NO;
+    
+    if(Img_ball != nil)
+    {
+        [Img_ball removeFromSuperview];
+    }
+    for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
+        if ([layer.name isEqualToString:@"DrawLine"]) {
+            [layer removeFromSuperlayer];
+            break;
+        }
+    }
+    
+    
+    //More option
+    //Set up toggle image
+    [self.btn_highRun setImage:[UIImage imageNamed:@"moreRuns"] forState:UIControlStateNormal];
+    
+    //Set run button values
+    [self.btn_run1 setTitle:@"1" forState:UIControlStateNormal];
+    [self.btn_run2 setTitle:@"2" forState:UIControlStateNormal];
+    [self.btn_run3 setTitle:@"3" forState:UIControlStateNormal];
+    [self.btn_B4 setTitle:@"B4" forState:UIControlStateNormal];
+    [self.btn_B6 setTitle:@"B6" forState:UIControlStateNormal];
+    
+    
+    //FETCH RECORD FROM DATABASE
+    FETCHSELASTINSTANCEDTLS *lastInst = [[FETCHSELASTINSTANCEDTLS alloc]init];
+    [lastInst FetchLastinstance :self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :ISDEFAULTORLAST];
+    
+    //Set Data
+    if(lastInst.ballEventsArray.count > 0 && [ISDEFAULTORLAST isEqual:@"1"]){
+        
+        GetBallDetailsForBallEventsBE *getBallDetailsForBallEventsBE =[lastInst.ballEventsArray objectAtIndex:0];
+        
+        
+        
+        self.ballEventRecord.objBowltype =getBallDetailsForBallEventsBE.BOWLTYPECODE;
+        self.ballEventRecord.objShottype =getBallDetailsForBallEventsBE.SHOTCODE;
+        self.ballEventRecord.objShorttypecategory =getBallDetailsForBallEventsBE.SHOTTYPECATEGORY;
+        self.ballEventRecord.objIslegalball =getBallDetailsForBallEventsBE.ISLEGALBALL;
+        self.ballEventRecord.objIsFour =getBallDetailsForBallEventsBE.ISFOUR;
+        
+        self.ballEventRecord.objIssix =getBallDetailsForBallEventsBE.ISSIX;
+        self.ballEventRecord.objRuns =getBallDetailsForBallEventsBE.RUNS;
+        self.ballEventRecord.objTotalruns =getBallDetailsForBallEventsBE.TOTALRUNS;
+        self.ballEventRecord.objWide =getBallDetailsForBallEventsBE.WIDE;
+        self.ballEventRecord.objNoball =getBallDetailsForBallEventsBE.NOBALL;
+        self.ballEventRecord.objByes =getBallDetailsForBallEventsBE.BYES;
+        self.ballEventRecord.objLegByes =getBallDetailsForBallEventsBE.LEGBYES;
+        self.ballEventRecord.objTotalextras =getBallDetailsForBallEventsBE.TOTALEXTRAS;
+        self.ballEventRecord.objGrandtotal =getBallDetailsForBallEventsBE.GRANDTOTAL;
+        
+        self.ballEventRecord.objOverthrow =getBallDetailsForBallEventsBE.OVERTHROW;
+        
+        self.ballEventRecord.objWWX1 =getBallDetailsForBallEventsBE.WWX1;
+        self.ballEventRecord.objWWY1 =getBallDetailsForBallEventsBE.WWY1;
+        self.ballEventRecord.objWWX2 =getBallDetailsForBallEventsBE.WWX2;
+        self.ballEventRecord.objWWY2 =getBallDetailsForBallEventsBE.WWY2;
+        self.ballEventRecord.objWWREGION =getBallDetailsForBallEventsBE.WWREGION;
+        
+        self.ballEventRecord.objPMStrikepoint =getBallDetailsForBallEventsBE.PMSTRIKEPOINT;
+        self.ballEventRecord.objPMStrikepointlinecode =getBallDetailsForBallEventsBE.PMSTRIKEPOINTLINECODE;
+        self.ballEventRecord.objPMlengthcode=getBallDetailsForBallEventsBE.PMLENGTHCODE;
+        self.ballEventRecord.objPMlinecode =getBallDetailsForBallEventsBE.PMLINECODE;
+        self.ballEventRecord.objPMX1=getBallDetailsForBallEventsBE.PMX1;
+        self.ballEventRecord.objPMY1=getBallDetailsForBallEventsBE.PMY1;
+        self.ballEventRecord.objPMX2=getBallDetailsForBallEventsBE.PMX2;
+        self.ballEventRecord.objPMY2=getBallDetailsForBallEventsBE.PMY2;
+        self.ballEventRecord.objMarkedforedit =getBallDetailsForBallEventsBE.MARKEDFOREDIT;
+        
+        self.ballEventRecord.objRbw =getBallDetailsForBallEventsBE.RBW;
+        
+        
+        //Overthrow
+        if(self.ballEventRecord.objOverthrow.intValue >0){
+            [self selectedViewBg:_btn_overthrow];
+            //isOverthrowSelected = YES;
+            
+        }
+        
+        
+        //Wagon wheel
+        
+        if(!(self.ballEventRecord.objWWX1.intValue ==221 && self.ballEventRecord.objWWX2.intValue ==221 && self.ballEventRecord.objWWY1.intValue ==186 && self.ballEventRecord.objWWY2.intValue ==186) && !(self.ballEventRecord.objWWX1.intValue ==172 && self.ballEventRecord.objWWX2.intValue ==172 && self.ballEventRecord.objWWY1.intValue ==145 && self.ballEventRecord.objWWY2.intValue ==145)){
+            
+            isWagonWheelValueSelected = YES;
+            [self selectedViewBg:_btn_wagonwheel];
+            
+            for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
+                if ([layer.name isEqualToString:@"DrawLine"]) {
+                    [layer removeFromSuperlayer];
+                    break;
+                }
+            }
+            
+            CGMutablePathRef straightLinePath = CGPathCreateMutable();
+            CGPathMoveToPoint(straightLinePath, NULL, self.ballEventRecord.objWWX1.intValue, self.ballEventRecord.objWWY1.intValue);
+            CGPathAddLineToPoint(straightLinePath, NULL,self.ballEventRecord.objWWX2.intValue,self.ballEventRecord.objWWY2.intValue);
+            CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+            shapeLayer.path = straightLinePath;
+            UIColor *fillColor = [UIColor redColor];
+            shapeLayer.fillColor = fillColor.CGColor;
+            UIColor *strokeColor = [UIColor redColor];
+            shapeLayer.strokeColor = strokeColor.CGColor;
+            shapeLayer.lineWidth = 2.0f;
+            shapeLayer.fillRule = kCAFillRuleNonZero;
+            shapeLayer.name = @"DrawLine";
+            [self.img_WagonWheel.layer addSublayer:shapeLayer];
+            
+        }
+        
+        //Pitch map
+        
+        if(!(self.ballEventRecord.objPMX2.intValue == 1 && self.ballEventRecord.objPMY2.intValue ==1)){
+            ispichmapSelectValue = YES;
+            [self selectedViewBg:_btn_pichmap];
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(self.ballEventRecord.objPMX2.floatValue,self.ballEventRecord.objPMY2.floatValue,20, 20)];
+            Img_ball.image =[UIImage imageNamed:@"RedBall"];
+            [self.img_pichmap addSubview:Img_ball];
+            self.img_pichmap.hidden = YES;
+        }
+        
+        
+        
+        //Mark for edit
+        if(self.ballEventRecord.objMarkedforedit.integerValue == 1){
+            [self selectedViewBg:_view_medit];
+            self.ballEventRecord.objMarkedforedit=@"1";
+            
+        }
+        
+        
+        
+        
+        
+        
+        //Runs
+        
+        int runs =0;
+        
+        if (self.ballEventRecord.objNoball.intValue !=0)
+        {
+            if (self.ballEventRecord.objNoball.intValue > 1 && self.ballEventRecord.objRuns.intValue == 0)
+            {
+                self.ballEventRecord.objNoball.intValue;
+                if (self.ballEventRecord.objNoball.intValue - 1 == 1)
+                    [self selectedViewBg:_btn_run1];
+                else if (self.ballEventRecord.objNoball.intValue  - 1 == 2)
+                    [self selectedViewBg:_btn_run2];
+                else if (self.ballEventRecord.objNoball.intValue  - 1 == 3)
+                    [self selectedViewBg:_btn_run3];
+                //self.ballEventRecord.objRuns = [NSNumber numberWithInt: self.ballEventRecord.objNoball.intValue  - 1];
+                runs = self.ballEventRecord.objNoball.intValue  - 1;
+            }
+            [self selectedViewBg:_btn_extras];
+            //isExtrasSelected = YES;
+            self.ballEventRecord.objIslegalball = [NSNumber numberWithInt: 0];
+        }
+        if (self.ballEventRecord.objWide.intValue !=0)
+        {
+            [self selectedViewBg: _btn_extras];
+            // isExtrasSelected = YES;
+            self.ballEventRecord.objIslegalball = [NSNumber numberWithInt: 0];
+            
+            if (self.ballEventRecord.objWide.intValue  > 1 && self.ballEventRecord.objRuns.intValue == 0)
+            {
+                self.ballEventRecord.objWide = [NSNumber numberWithInt: self.ballEventRecord.objWide.intValue - self.ballEventRecord.objOverthrow.intValue];
+                if (self.ballEventRecord.objWide.intValue  - 1 == 1)
+                    [self selectedViewBg: _btn_run1];
+                else if (self.ballEventRecord.objWide.intValue  - 1 == 2)
+                    [self selectedViewBg:_btn_run2];
+                else if (self.ballEventRecord.objWide.intValue  - 1 == 3)
+                    [self selectedViewBg:_btn_run3];
+                //self.ballEventRecord.objRuns = [NSNumber numberWithInt: self.ballEventRecord.objWide.intValue  - 1];
+                runs = self.ballEventRecord.objWide.intValue  - 1;
+            }
+            
+            
+            [self disableButtonBg :_btn_B4];
+            _btn_B4.userInteractionEnabled = NO;
+            [self disableButtonBg :_btn_B6];
+            _btn_B6.userInteractionEnabled = NO;
+            
+            //btnLB.Opacity = 0.4;
+            //btnLB.IsEnabled = false;
+        }
+        
+        if (self.ballEventRecord.objLegByes.intValue !=0)
+        {
+            [self selectedViewBg: _btn_extras];
+            //isExtrasSelected = YES;
+            if (self.ballEventRecord.objLegByes.intValue  > 0 && self.ballEventRecord.objRuns.intValue  == 0)
+            {
+                // self.ballEventRecord.objRuns = [NSNumber numberWithInt:self.ballEventRecord.objLegByes.intValue - self.ballEventRecord.objOverthrow.intValue];
+                runs =  self.ballEventRecord.objLegByes.intValue - self.ballEventRecord.objOverthrow.intValue;
+                if (runs == 1)
+                    [self selectedViewBg:_btn_run1];
+                else if (runs == 2)
+                    [self selectedViewBg:_btn_run2];
+                else if (runs == 3)
+                    [self selectedViewBg:_btn_run3];
+            }
+            [self disableButtonBg :_btn_B6];
+            _btn_B6.userInteractionEnabled = NO;
+            
+        }
+        
+        if (self.ballEventRecord.objByes.intValue !=0)
+        {
+            [self selectedViewBg: _btn_extras];
+            // isExtrasSelected = YES;
+            if (self.ballEventRecord.objByes.intValue > 0 && self.ballEventRecord.objRuns.intValue == 0)
+            {
+                //self.ballEventRecord.objRuns = [NSNumber numberWithInt: self.ballEventRecord.objByes.intValue - self.ballEventRecord.objOverthrow.intValue];
+                runs = self.ballEventRecord.objByes.intValue - self.ballEventRecord.objOverthrow.intValue;
+                if (runs == 1)
+                    [self selectedViewBg:_btn_run1];
+                else if (runs == 2)
+                    [self selectedViewBg:_btn_run2];
+                else if (runs == 3)
+                    [self selectedViewBg:_btn_run3];
+            }
+            [self disableButtonBg :_btn_B6];
+            _btn_B6.userInteractionEnabled = NO;
+        }
+        
+        if (self.ballEventRecord.objIsFour.intValue ==1)
+        {
+            [self selectedViewBg: _btn_B4];
+            self.ballEventRecord.objIsFour = [NSNumber numberWithInt: 1];
+            if (self.ballEventRecord.objByes.intValue <= 0 && self.ballEventRecord.objLegByes.intValue <= 0)
+                //                Runs = int.Parse(drballdetails["RUNS"].ToString());
+                
+                [self disableButtonBg : _btn_overthrow];
+            _btn_overthrow.userInteractionEnabled = NO;
+            
+        }
+        else if (self.ballEventRecord.objIssix.intValue ==1)
+        {
+            
+            [self selectedViewBg: _btn_B6];
+            //isExtrasSelected = YES;
+            
+            self.ballEventRecord.objIssix = [NSNumber numberWithInt: 1];
+            
+            [self disableButtonBg : _btn_overthrow];
+            _btn_overthrow.userInteractionEnabled = NO;
+            //            btnWD.Opacity = 0.4;
+            //            btnWD.IsEnabled = false;
+            //            btnB.Opacity = 0.4;
+            //            btnB.IsEnabled = false;
+            //            btnLB.Opacity = 0.4;
+            //            btnLB.IsEnabled = false;
+            
+        }
+        else
+        {
+            if (self.ballEventRecord.objRuns.intValue == 1)
+                [self selectedViewBg:_btn_run1];
+            else if (self.ballEventRecord.objRuns.intValue == 2)
+                [self selectedViewBg:_btn_run2];
+            else if (self.ballEventRecord.objRuns.intValue == 3)
+                [self selectedViewBg:_btn_run3];
+            
+            runs = runs + self.ballEventRecord.objRuns.intValue;
+            
+            if (runs > 3)
+            {
+                
+                //Set down toggle image
+                [self.btn_highRun setImage:[UIImage imageNamed:@"dropDown"] forState:UIControlStateNormal];
+                [self selectedButtonBg: self.btn_highRun];
+                isMoreRunSelected = YES;
+                
+                //Set run button name
+                [self.btn_run1 setTitle:@"4" forState:UIControlStateNormal];
+                [self.btn_run2 setTitle:@"5" forState:UIControlStateNormal];
+                [self.btn_run3 setTitle:@"6" forState:UIControlStateNormal];
+                [self.btn_B4 setTitle:@"7" forState:UIControlStateNormal];
+                [self.btn_B6 setTitle:@"8" forState:UIControlStateNormal];
+                
+                if (runs == 4)
+                    [self selectedViewBg:_btn_run1];
+                else if (runs == 5)
+                    [self selectedViewBg:_btn_run2];
+                else if (runs == 6)
+                    [self selectedViewBg:_btn_run3];
+                else if (runs == 7)
+                    [self selectedViewBg:_btn_B4];
+                else if (runs == 8)
+                    [self selectedViewBg:_btn_B6];
+                
+            }
+            
+        }
+        self.ballEventRecord.objRuns = [NSNumber numberWithInt:runs];
+        
+        
+        //RBW
+        if(self.ballEventRecord.objRbw.integerValue!=0){
+            [self selectedViewBg:_view_Rbw];
+        }
+        
+        //Spin
+        if ([getBallDetailsForBallEventsBE.BOWLERTYPE isEqual: @"MSC015"])//Fast
+        {
+            [self selectedViewBg:_view_fast];
+            isFastSelected = YES;
+        }
+        else if ([getBallDetailsForBallEventsBE.BOWLERTYPE isEqual: @"MSC016"])//Spin
+        {
+            [self selectedViewBg:_view_spin];
+            isSpinSelected = YES;
+        }
+        
+        
+        if ([getBallDetailsForBallEventsBE.SHOTTYPE isEqual: @"MSC005"])//Aggressive
+        {
+            [self selectedViewBg:_view_aggressive];
+            isAggressiveSelected = YES;
+            
+        }
+        else if ([getBallDetailsForBallEventsBE.SHOTTYPE isEqual: @"MSC006"])//Defensive
+        {
+            [self selectedViewBg:_view_defense];
+            isDefensiveSelected = YES;
+            
+        }
+        
+    }else{
+        
+        self.ballEventRecord.objBowltype = nil;
+        self.ballEventRecord.objShottype = nil;
+        self.ballEventRecord.objShorttypecategory = nil;
+        self.ballEventRecord.objIsFour = [NSNumber numberWithInt:0];
+        self.ballEventRecord.objIssix = [NSNumber numberWithInt:0];
+        self.ballEventRecord.objRuns = [NSNumber numberWithInt:0];
+        self.ballEventRecord.objRbw =[NSNumber numberWithInt:0];
+
+        self.ballEventRecord.objByes = [NSNumber numberWithInt:0];;
+        self.ballEventRecord.objLegByes = [NSNumber numberWithInt:0];;
+        self.ballEventRecord.objWide = [NSNumber numberWithInt:0];;
+        self.ballEventRecord.objNoball = [NSNumber numberWithInt:0];;
+        self.ballEventRecord.objIslegalball = [NSNumber numberWithInt:1];
+        
+        
+        self.ballEventRecord.objPMlengthcode=@"";
+        self.ballEventRecord.objPMlinecode =@"";
+        self.ballEventRecord.objPMX1=@1;
+        self.ballEventRecord.objPMY1=@1;
+        self.ballEventRecord.objPMX2=@1;
+        self.ballEventRecord.objPMY2=@1;
+        if (IS_IPAD_PRO) {
+            _ballEventRecord.objWWX1=@(221);
+            _ballEventRecord.objWWY1=@(186);
+            _ballEventRecord.objWWX2=@(221);
+            _ballEventRecord.objWWY2=@(186);
+        }
+        else{
+            
+            _ballEventRecord.objWWX1=@(172);
+            _ballEventRecord.objWWY1=@(145);
+            _ballEventRecord.objWWX2=@(172);
+            _ballEventRecord.objWWY2=@(145);
+            
+        }
+        
+        self.ballEventRecord.objWWREGION=@"";
+        
+        
+        
+        self.ballEventRecord.objOverthrow = [NSNumber numberWithInt:0];;
+        self.ballEventRecord.objTotalruns = [NSNumber numberWithInt:0];;
+        self.ballEventRecord.objPenalty = [NSNumber numberWithInt:0];;
+        self.ballEventRecord.objTotalextras = [NSNumber numberWithInt:0];;
+        self.ballEventRecord.objGrandtotal = [NSNumber numberWithInt:0];
+        
+        
+        
+        
+        self.ballEventRecord.objOverno=[NSNumber numberWithInt:fetchSEPageLoadRecord.BATTEAMOVERS];
+        self.ballEventRecord.objBallno=[NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT];
+        self.ballEventRecord.objOverBallcount = [NSNumber numberWithInteger: 0 ];
+        self.ballEventRecord.objBallcount=@1;
+        self.ballEventRecord.objBowlercode = fetchSEPageLoadRecord.currentBowlerPlayerCode;
+        self.ballEventRecord.objStrikercode = fetchSEPageLoadRecord.strickerPlayerCode;
+        self.ballEventRecord.objNonstrikercode = fetchSEPageLoadRecord.nonstrickerPlayerCode;
+        
+        self.ballEventRecord.objIswtb=[NSNumber numberWithInt:0];
+        self.ballEventRecord.objIsuncomfort=[NSNumber numberWithInt:0];
+        self.ballEventRecord.objIsreleaseshot=[NSNumber numberWithInt:0];
+        self.ballEventRecord.objIsbeaten=[NSNumber numberWithInt:0];
+        self.ballEventRecord.objMarkedforedit =
+        @"0";
+        
+        GetBallDetailsForBallEventsBE *getBallDetailsForBallEventsBE;
+        
+        
+       
+        
+        
+        
+        
+        
+    }
+    
+}
+
+
+
+-(IBAction)didClickEditAction:(id)sender
+{
+    
+    if(view_addedit != nil)
+    {
+        [view_addedit removeFromSuperview];
+        [leftrotation removeFromSuperview];
+        [Rightrotation removeFromSuperview];
+        [Cancelrotation removeFromSuperview];
+        [Editrotation removeFromSuperview];
+    }
+    UIButton * btn_add = (UIButton *)sender;
+    
+    UIView *ballView = btn_add.superview;
+    
+    CGFloat width =ScrollViewer.contentSize.width;
+    
+    
+//    while (ballView && ![ballView isKindOfClass:[UIView class]]) {
+//        ballView = ballView.superview;
+//    }
+    
+   // ballCodeIndex= btn_add.tag;
+    //ScrollViewer.contentSize;
+    
+    view_addedit=[[UIView alloc]initWithFrame:CGRectMake((ScrollViewer.contentSize.width>=350  &&ScrollViewer.contentSize.width-100 <= ballView.frame.origin.x )? ballView.frame.origin.x-90:ballView.frame.origin.x,ballView.frame.origin.y+40,130, 38)];
+    [view_addedit setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+    if(width > 400){
+    [ScrollViewer addSubview:view_addedit];
+    }else{
+        [self.view_BallTicker addSubview:view_addedit];
+
+    }
+    
+    //Left
+    leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(view_addedit.frame.origin.x, view_addedit.frame.origin.y+3, 25, 25)];
+    [leftrotation setImage:[UIImage imageNamed:@"LeftRotation"] forState:UIControlStateNormal];
+    if(width > 400){
+        [ScrollViewer addSubview:leftrotation];
+    }else{
+        [self.view_BallTicker addSubview:leftrotation];
+    }
+    [leftrotation addTarget:self action:@selector(didClickLeftRotation:) forControlEvents:UIControlEventTouchUpInside];
+    leftrotation.tag = btn_add.tag;
+    
+    //Edit
+    Editrotation=[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.origin.x+leftrotation.frame.size.width+8, leftrotation.frame.origin.y, 25, 25)];
+    [Editrotation setImage:[UIImage imageNamed:@"ArchiveEdit"] forState:UIControlStateNormal];
+    if(width > 400){
+        [ScrollViewer addSubview:Editrotation];
+    }else{
+        [self.view_BallTicker addSubview:Editrotation];
+    }
+    [Editrotation addTarget:self action:@selector(didClickEditrotation:) forControlEvents:UIControlEventTouchUpInside];
+    Editrotation.tag = btn_add.tag;
+    
+    //Delete
+    Cancelrotation=[[UIButton alloc]initWithFrame:CGRectMake(Editrotation.frame.origin.x+Editrotation.frame.size.width+8, Editrotation.frame.origin.y, 25, 25)];
+    [Cancelrotation setImage:[UIImage imageNamed:@"ArchiveCancel"] forState:UIControlStateNormal];
+    if(width > 400){
+        [ScrollViewer addSubview:Cancelrotation];
+    }else{
+        [self.view_BallTicker addSubview:Cancelrotation];
+    }
+    [Cancelrotation addTarget:self action:@selector(didClickCancelrotation:) forControlEvents:UIControlEventTouchUpInside];
+    Cancelrotation.tag = btn_add.tag;
+    
+    //Right
+    Rightrotation=[[UIButton alloc]initWithFrame:CGRectMake(Cancelrotation.frame.origin.x+Cancelrotation.frame.size.width+8, Cancelrotation.frame.origin.y, 25, 25)];
+    [Rightrotation setImage:[UIImage imageNamed:@"RightRotation"] forState:UIControlStateNormal];
+    if(width > 400){
+        [ScrollViewer addSubview:Rightrotation];
+    }else{
+        [self.view_BallTicker addSubview:Rightrotation];
+    }
+    [Rightrotation addTarget:self action:@selector(didClickRightrotation:) forControlEvents:UIControlEventTouchUpInside];
+    Rightrotation.tag = btn_add.tag;
+    
+}
+
+-(IBAction)didClickRightrotation:(id)sender
+{
+    
+    UIButton * btn = (UIButton *)sender;
+    
+    BallEventRecord *record = [fetchSEPageLoadRecord.BallGridDetails objectAtIndex:btn.tag];
+    
+//    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+//    scoreEngine.competitionCode=self.competitionCode;
+//    scoreEngine.matchCode = self.matchCode;
+//    scoreEngine.isEditMode = YES;
+//    scoreEngine.editBallCode = record.objBallcode;
+//    [scoreEngine insertBallDetails:record.objBallcode :@"AFTER"];
+    
+   self.isEditMode = YES;
+    self.editBallCode = record.objBallcode;
+    [self insertBallDetails:record.objBallcode :@"AFTER"];
+    self.isEditMode = NO;
+    
+    //Reset View
+    [self reloadBowlerTeamBatsmanDetails];
+    [self resetBallEventObject];
+    [self resetAllButtonOnEndBall];
+    [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
+    self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+    [self AllBtndisableMethod];
+    
+}
+
+-(IBAction)didClickLeftRotation:(id)sender
+{
+    UIButton * btn = (UIButton *)sender;
+
+    BallEventRecord *record = [fetchSEPageLoadRecord.BallGridDetails objectAtIndex:btn.tag];
+    
+//    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+//    scoreEngine.competitionCode=self.competitionCode;
+//    scoreEngine.matchCode = self.matchCode;
+//    scoreEngine.isEditMode = YES;
+//    scoreEngine.editBallCode = record.objBallcode;
+//    [scoreEngine insertBallDetails:record.objBallcode :@"BEFORE"];
+    
+    self.isEditMode = YES;
+    self.editBallCode = record.objBallcode;
+    [self insertBallDetails:record.objBallcode :@"BEFORE"];
+    self.isEditMode = NO;
+
+    
+    //Reset View
+    [self reloadBowlerTeamBatsmanDetails];
+    [self resetBallEventObject];
+    [self resetAllButtonOnEndBall];
+    [self.btn_StartBall setTitle:@"START BALL" forState:UIControlStateNormal];
+    self.btn_StartBall.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
+    [self AllBtndisableMethod];
+    
+}
+
+-(IBAction)didClickEditrotation:(id)sender
+{
+    
+    UIButton * btn = (UIButton *)sender;
+    
+    BallEventRecord *record = [fetchSEPageLoadRecord.BallGridDetails objectAtIndex:btn.tag];
+    self.isEditMode = YES;
+    self.editBallCode = record.objBallcode;
+    
+    isEditBallInLiveMode = YES;
+    
+    [self AllBtnEnableMethod];
+    [self resetBallEventObject];
+    [self resetAllButtonOnEndBall];
+    
+    [self viewDidLoad];
+    
+//        isEdit=YES;
+//    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
+//    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
+//    
+//    scoreEngine =(ScorEnginVC*) [self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
+//    scoreEngine.matchCode=self.matchCode;
+//    scoreEngine.competitionCode=self.Comptitioncode;
+    
+}
+-(IBAction)didClickCancelrotation:(id)sender
+{
     
 }
 

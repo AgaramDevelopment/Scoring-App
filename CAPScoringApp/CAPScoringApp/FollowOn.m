@@ -32,27 +32,26 @@
     [super viewDidLoad];
     
     dbFollowOn = [[DBManagerFollowOn alloc]init];
-    self.view_teamName.layer.borderWidth = 1.0;
+    self.view_teamName.layer.borderWidth = 2;
     self.view_teamName.layer.borderColor = [UIColor colorWithRed:(48/255.0f) green:(62/255.0f) blue:(73/255.0f) alpha:1.0f].CGColor;
     
-    self.view_teamName .layer.cornerRadius =5.0;
+   
     self.view_teamName.layer .masksToBounds =YES;
     
     
-    self.view_striker.layer.borderWidth = 1.0;
+    self.view_striker.layer.borderWidth = 2;
     self.view_striker.layer.borderColor = [UIColor colorWithRed:(48/255.0f) green:(62/255.0f) blue:(73/255.0f) alpha:1.0f].CGColor;
-    
-    self.view_striker .layer.cornerRadius =5.0;
+
     self.view_striker.layer .masksToBounds =YES;
     
-    self.view_nonStriker.layer.borderWidth = 1.0;
+    self.view_nonStriker.layer.borderWidth = 2;
     self.view_nonStriker.layer.borderColor = [UIColor colorWithRed:(48/255.0f) green:(62/255.0f) blue:(73/255.0f) alpha:1.0f].CGColor;
-    self.view_nonStriker .layer.cornerRadius =5.0;
+    
     self.view_nonStriker.layer .masksToBounds =YES;
     
-    self.view_Bowler.layer.borderWidth = 1.0;
+    self.view_Bowler.layer.borderWidth = 2;
     self.view_Bowler.layer.borderColor = [UIColor colorWithRed:(48/255.0f) green:(62/255.0f) blue:(73/255.0f) alpha:1.0f].CGColor;
-    self.view_Bowler .layer.cornerRadius =5.0;
+    
     self.view_Bowler.layer .masksToBounds =YES;
     
     self.lbl_Teamname.text =self.battingTeamName;
@@ -108,7 +107,8 @@
         {
             [self.btn_Proceed setBackgroundColor:[UIColor colorWithRed:(16/255.0f) green:(210/255.0f) blue:(158/255.0f) alpha:1.0f]];
             self.btn_Proceed.userInteractionEnabled=YES;
-            [self.btn_Revert setBackgroundColor:[UIColor grayColor]];
+           // [self.btn_Revert setBackgroundColor:[UIColor grayColor]];
+             self.btn_Revert.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:1.0f];
             self.btn_Revert.userInteractionEnabled=NO;
         }
 

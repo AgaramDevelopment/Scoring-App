@@ -34,4 +34,21 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_maiden;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_bowler_runs;
 
+
+//Extras
+@property (weak, nonatomic) IBOutlet UILabel *lbl_totalExtra_runs;
+
+@property (weak, nonatomic) IBOutlet UILabel *lbl_extras;
+
+//Over runs
+
+@property (weak, nonatomic) IBOutlet UILabel *lbl_over_run_rate;
+
+//Did Not Bat
+@property (weak, nonatomic) IBOutlet UILabel *lbl_didNotBat;
+
+//Fall of Wkt
+@property (weak, nonatomic) IBOutlet UILabel *lbl_fall_of_wkt;
+
+
 @end

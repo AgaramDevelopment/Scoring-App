@@ -158,6 +158,47 @@
             }
             
             
+            //scorerUserDetail
+            
+            
+            NSArray *scorerUserDetailArray =   [serviceResponse objectForKey:@"scorerUserDetail"];
+            
+            
+            for (int fa=0; fa<[scorerUserDetailArray count]; fa++) {
+                NSDictionary*test21 =[scorerUserDetailArray objectAtIndex:fa];
+                
+                NSString *UserCode=[test21 objectForKey:@"UserCode"];
+                NSString *UserRoleID=[test21 objectForKey:@"UserRoleID"];
+                NSString *LoginID=[test21 objectForKey:@"LoginID"];
+                NSString *Password=[test21 objectForKey:@"Password"];
+                NSString *Rememberme=[test21 objectForKey:@"Rememberme"];
+                NSString *RementDate=[test21 objectForKey:@"RementDate"];
+                NSString *UserFullName=[test21 objectForKey:@"UserFullName"];
+                NSString *MachineID=[test21 objectForKey:@"MachineID"];
+                NSString*LicenseUpTo=[test21 objectForKey:@"LicenseUpTo"];
+                NSString *Recordstatus=[test21 objectForKey:@"Recordstatus"];
+                NSString *Createdby=[test21 objectForKey:@"Createdby"];
+                NSString *Createddate=[test21 objectForKey:@"Createddate"];
+                NSString*Modifiedby=[test21 objectForKey:@"Modifiedby"];
+                NSString*Modifieddate=[test21 objectForKey:@"Modifieddate"];
+                
+                LoginDBmanager *objLoginDBmanager = [[LoginDBmanager alloc] init];
+                bool CheckStatus= [objLoginDBmanager CheckUserScorerDetails:UserCode];
+                if (CheckStatus==YES)
+                {
+                    [objLoginDBmanager UpdateUserScorerDetails:UserCode :UserRoleID :LoginID :Password :Rememberme :RementDate :UserFullName :MachineID:LicenseUpTo :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
+                }
+                
+                else
+                {
+                    [objLoginDBmanager InsertUserScorerDetails:UserCode :UserRoleID :LoginID :Password :Rememberme :RementDate :UserFullName :MachineID:LicenseUpTo :Recordstatus :Createdby :Createddate :Modifiedby :Modifieddate];
+                    
+                    
+                }
+                
+                
+            }
+            
             
           //Competitionteamplayer
             
