@@ -79,12 +79,14 @@
 @interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate,Other_WicketDelegate,RevisedTargetDelegate>
 {   //appeal System
     BOOL isEnableTbl;
+    BOOL isSaveAppeal;
+    GetSEAppealDetailsForAppealEvents *record;
     NSMutableArray * AppealSystemSelectionArray;
     NSString*AppealSystemSelectCode;
     AppealSystemRecords *objAppealSystemEventRecord;
     NSMutableDictionary *appealEventDict;
     NSString *AppealTypeSelectCode;
-    
+    NSMutableArray * getAppealArray;
     //AppealComponent
     NSMutableArray * AppealComponentSelectionArray;
     NSString*AppealComponentSelectCode;
@@ -6158,7 +6160,7 @@
         self.view_fastBowl.hidden = YES;
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
-        
+         [table_Appeal reloadData];
         if(isAppealSelected ==YES){
             [self selectedViewBg:_view_appeal];
             [table_Appeal reloadData];
@@ -6223,7 +6225,7 @@
             
             self.ballEventRecord.objIsappeal = nil;
         [self selectedViewBg:_view_appeal];
-            [table_Appeal reloadData];
+           
             
         }
         

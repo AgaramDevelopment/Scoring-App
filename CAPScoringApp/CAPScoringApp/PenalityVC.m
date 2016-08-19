@@ -270,12 +270,7 @@
     }
 }
 
-- (void)tableView:(UITableView *)tableView didHighlightRowAtIndexPath:(NSIndexPath *)indexPath {
-    tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
-    tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
-    tableView.separatorStyle=UITableViewCellSeparatorStyleNone;
-    [tableView setSeparatorColor:[UIColor blackColor]];
-  }
+
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -321,7 +316,7 @@
     }
 }
 
-//batting button
+//batting buttonF
 -(IBAction)didClickBatting:(id)sender
 {
     btnbatting=@"MSC134";

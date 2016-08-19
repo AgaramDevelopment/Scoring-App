@@ -38,6 +38,10 @@ int batsmanHeaderPosition = 0;
 int batsmanPostion = 0;
 int bowlerHeaderPosition = 0;
 int bowlerPostion = 0;
+int extraPostion = 0 ;
+int overRunRatePostion = 0;
+int didNotBatPostion = 0;
+int fallOfWktPostion = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,15 +61,24 @@ int bowlerPostion = 0;
      fetchSEpage = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEpage fetchSEPageLoadDetails:competitionCode :matchCode];
     
-
+    
     
     //Set Table Cell Position
     batsmanHeaderPosition = 0;
     batsmanPostion = fetchScorecard.BattingSummaryForScoreBoard.count > 0 ? 1 :0;
-    bowlerHeaderPosition =fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1; bowlerPostion = bowlerHeaderPosition+1;
-   
     
-
+    bowlerHeaderPosition =fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1;
+    
+//    extraPostion = fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1;
+//    
+//    overRunRatePostion = extraPostion +1;
+//    
+//    didNotBatPostion = overRunRatePostion+1;
+//    
+//    bowlerHeaderPosition = didNotBatPostion+1;
+    bowlerPostion = bowlerHeaderPosition+1;
+    
+    //fallOfWktPostion = bowlerHeaderPosition +1;
     
     [self hideLabelBasedOnMatchType];
     
@@ -320,12 +333,110 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 - (UITableViewCell *)tableView:(UITableView *)tableView
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+  
+    
     static NSString *batsmanCell = @"scorecard_batsman_cell";
     static NSString *batsmanHeaderCell = @"batsman_header_cell";
     static NSString *bowlerHeaderCell = @"bowler_header_cell";
     static NSString *bowlerCell = @"scorecard_bowler_cell";
+    static NSString *extraCell = @"scorecard_extra_cell";
+    static NSString *overCell = @"over_run_rate_cell";
+    static NSString *didNotCell =  @"did_Not_Bat_cell";
+    static NSString *fallWktCell =  @"fall_wkt_cell";
     
     
+//    if(extraPostion== indexPath.row){
+//        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:extraCell];
+//               if (cell == nil) {
+//            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
+//            cell = self.extraCell;
+//            self.extraCell = nil;
+//           
+//        }
+//        
+//        cell.lbl_totalExtra_runs.text = fetchScorecard.TOTALEXTRAS;
+//        
+//        cell.lbl_extras.text = [NSString stringWithFormat:@"(B: %@, LB: %@, WB: %@, P: %@)", fetchScorecard.BYES,fetchScorecard.LEGBYES,fetchScorecard.WIDES,fetchScorecard.PENALTIES];
+//        
+//        [cell setBackgroundColor:[UIColor clearColor]];
+//        
+//    return cell;
+//    }else if (overRunRatePostion == indexPath.row){
+//        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:overCell];
+//        if (cell == nil) {
+//            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
+//            cell = self.overRunRateCell;
+//            self.overRunRateCell = nil;
+//        }
+//        
+//        cell.lbl_over_run_rate.text = [NSString stringWithFormat:@"%ld / %ld (%ld.%ld) RR %.02f" ,(unsigned long)_BATTEAMRUNS,(unsigned long) _BATTEAMWICKETS,(unsigned long)_BATTEAMOVERS,(unsigned long)_BATTEAMOVRBALLS,[fetchSEpage.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEpage.BATTEAMRUNRATE floatValue]];
+//        [cell setBackgroundColor:[UIColor clearColor]];
+//        
+//        return cell;
+//
+//    }
+//    
+//    if (overRunRatePostion == indexPath.row){
+//        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:overCell];
+//        if (cell == nil) {
+//            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
+//            cell = self.overRunRateCell;
+//            self.overRunRateCell = nil;
+//        }
+//        
+//        cell.lbl_over_run_rate.text = [NSString stringWithFormat:@"%ld / %ld (%ld.%ld) RR %.02f" ,(unsigned long)_BATTEAMRUNS,(unsigned long) _BATTEAMWICKETS,(unsigned long)_BATTEAMOVERS,(unsigned long)_BATTEAMOVRBALLS,[fetchSEpage.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEpage.BATTEAMRUNRATE floatValue]];
+//        [cell setBackgroundColor:[UIColor clearColor]];
+//        
+//        return cell;
+//        
+//    }
+
+//    if (fallOfWktPostion == indexPath.row){
+//        BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
+//        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:fallWktCell];
+//        if (cell == nil) {
+//            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
+//            cell = self.wktOverCell;
+//            self.wktOverCell = nil;
+//        }
+//        
+//       // 1-0(SURYAKUMAR YADAV 2.1 ov)
+//        
+//        cell.lbl_fall_of_wkt .text = [NSString stringWithFormat:@"%@ - %@ (%@ %@.%@)ov",battingSummaryDetailsForSB.WICKETNO,battingSummaryDetailsForSB.WICKETSCORE,battingSummaryDetailsForSB.BATSMANNAME,battingSummaryDetailsForSB.WICKETOVERNO,battingSummaryDetailsForSB.WICKETBALLNO];
+//        [cell setBackgroundColor:[UIColor clearColor]];
+//        
+//        return cell;
+//        
+//    }
+    
+//    if (didNotBatPostion == indexPath.row)
+//    {
+//        
+//        ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:didNotCell];
+//        if (cell == nil) {
+//            [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
+//            cell = self.didNotBatCell;
+//            self.didNotBatCell = nil;
+//        }
+//        
+//        NSMutableArray *notBatArray = fetchScorecard.DidNotBatArray ;
+//        
+//
+//            
+//            NSString *value = [[notBatArray valueForKey:@"BATSMANNAME"]componentsJoinedByString:@", "];
+//            NSLog(@"%@",value);
+//            
+//        cell.lbl_didNotBat.text = value;
+//        cell.lbl_didNotBat.lineBreakMode = NSLineBreakByWordWrapping;
+//            cell.lbl_didNotBat.numberOfLines = 0;
+//        
+//    
+//        [cell setBackgroundColor:[UIColor clearColor]];
+//        
+//        return cell;
+//       
+//    }
+
     if(indexPath.row == 0){
         ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:batsmanHeaderCell];
         if (cell == nil) {
@@ -431,8 +542,6 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         return bowlerCellTvc;
         
     }
-    
-    
     
     return nil;
     

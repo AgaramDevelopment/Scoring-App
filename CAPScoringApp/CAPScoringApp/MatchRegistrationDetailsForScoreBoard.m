@@ -30,4 +30,17 @@
 @synthesize BOWLINGTEAMCODE;
 @synthesize BOWLINGTEAMNAME;
 @synthesize BOWLINGTEAMLOGO;
+
+
+@synthesize BYES;
+@synthesize LEGBYES;
+@synthesize NOBALLS;
+@synthesize WIDES;
+@synthesize PENALTIES;
+@synthesize TOTALEXTRAS;
+@synthesize INNINGSTOTAL;
+@synthesize INNINGSTOTALWICKETS;
+@synthesize INNINGSRUNRATE;
+@synthesize FINALINNINGS;
+@synthesize ISDECLARE;
 @end
