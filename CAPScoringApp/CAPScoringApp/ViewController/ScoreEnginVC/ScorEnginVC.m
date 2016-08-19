@@ -1745,6 +1745,7 @@
    
     
     [UIView animateWithDuration:0.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.CommonView.userInteractionEnabled= YES;
         self.sideviewXposition.constant =-300;
         self.commonViewXposition.constant=0;
         
@@ -1753,7 +1754,7 @@
         self.commonleftrightview.frame=CGRectMake(self.commonleftrightview.frame.origin.x,self.commonleftrightview.frame.origin.y,760,361);
         
         leftSlideSwipe = NO;
-        self.CommonView.userInteractionEnabled= YES;
+        
         NSLog(@"alterviewwidth=%f",self.Allvaluedisplayview.frame.size.width);
     } completion:^(BOOL finished){ }];
     
@@ -6659,11 +6660,6 @@ self.lbl_umpirename.text=@"";
     self.view_defensive.hidden =YES;
     
 }
-
-
-
-
-
 
 //Set to normal background for runs button
 -(void) resetRunsBoundriesView{
