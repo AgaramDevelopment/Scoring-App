@@ -177,7 +177,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-if(isPowerplay== YES)
+if(isPowerplay== YES)//PowerPlay Drop down
 {
     self.tbl_powerplaytype.hidden=YES;
     selectindexarray=[[NSMutableArray alloc]init];
@@ -186,9 +186,12 @@ if(isPowerplay== YES)
     powerplaytype=powerplayrecord.powerplaytypecode;
     
     [selectindexarray addObject:powerplayrecord];
-    isPowerplay=NO;
+   // isPowerplay=NO;
+    powerplaystartover = nil;
+    isPowerplay_Tbl=NO;
+    
 }
-else
+else//Grid
 {
     powerplayrecord=(PowerPlayRecord*)[Resultarray objectAtIndex:indexPath.row];
     powerplaystartover=powerplayrecord.startover;
@@ -218,7 +221,7 @@ else
     {
        self.tbl_powerplaytype.hidden=NO;
         isPowerplay_Tbl=YES;
-        isPowerplay=YES;
+        //isPowerplay=YES;
       [self.tbl_powerplaytype reloadData];
         
     }
@@ -226,7 +229,7 @@ else
         self.tbl_powerplaytype.hidden=YES;
         
         isPowerplay_Tbl=NO;
-        isPowerplay=NO;
+       // isPowerplay=NO;
     }
     
     
@@ -811,15 +814,18 @@ else
 
 - (IBAction)btn_back:(id)sender {
     
-    if(isPowerplay ==YES)
+    if(isPowerplay ==YES)//DropDown
     {
         self.view_powerplaygrid.hidden=YES;
         self.btn_Add.hidden   =NO;
         
         self.view_powerplay.hidden   =NO;
         isPowerplay=NO;
+        self.tbl_powerplaytype.hidden=YES;
+        isPowerplay_Tbl=NO;
+        
     }
-    else
+    else//Grid
     {
 //        self.view_powerplaygrid.hidden=NO;
 //        self.view_powerplay.hidden   =YES;
