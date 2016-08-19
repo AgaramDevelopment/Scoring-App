@@ -6157,7 +6157,7 @@
         self.view_fastBowl.hidden = YES;
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
-        
+         [table_Appeal reloadData];
         if(isAppealSelected ==YES){
             [self selectedViewBg:_view_appeal];
             [table_Appeal reloadData];
@@ -6222,7 +6222,7 @@
             
             self.ballEventRecord.objIsappeal = nil;
         [self selectedViewBg:_view_appeal];
-            [table_Appeal reloadData];
+           
             
         }
         
