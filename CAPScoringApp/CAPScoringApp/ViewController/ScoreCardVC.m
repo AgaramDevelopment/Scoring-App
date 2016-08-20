@@ -357,38 +357,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     static NSString *fallWktCellHeader = @"fall_of_wkt_header";
     
     
-    //            foreach (DataRow rowFOW in dtFOW.Rows)
-    //            {
-    //                if (!String.IsNullOrEmpty(rowFOW["WICKETTYPE"].ToString()))
-    //                {
-    //                    string strFormat = strFOW.Length > 0 ? ",\t {0}{6}-{6}{1}{6}({2}{6}{3}.{4}{6}ov)" : "{0}{6}-{6}{1}{6}({2}{6}{3}.{4}{6}ov)";
-    //
-    //                    //MSC101 - Timed Out
-    //                    //MSC107 - Mankading
-    //                    //MSC133 - Absent Hurt
-    //                    string[] exceptionalWicketTypes = { "MSC101", "MSC107", "MSC133" };
-    //
-    //                    if (exceptionalWicketTypes.Contains(rowFOW["WICKETTYPE"].ToString()))
-    //                        strFormat = strFOW.Length > 0 ? ",\t {0}{6}-{6}{1}{6}({2}{6}({5}))" : "{0}{6}-{6}{1}{6}({2}{6}({5}))";
-    //
-    //                    strFOW.Append(string.Format(
-    //                                                strFormat
-    //                                                , rowFOW["WICKETNO"].ToString()
-    //                                                , rowFOW["WICKETSCORE"].ToString()
-    //                                                , rowFOW["BATSMANNAME"].ToString().Replace(" ", NONBREAKABLESPACE)
-    //                                                , rowFOW["WICKETOVERNO"].ToString()
-    //                                                , rowFOW["WICKETBALLNO"].ToString()
-    //                                                , rowFOW["WICKETTYPEDESCRIPTION"].ToString()
-    //                                                , NONBREAKABLESPACE
-    //                                                , ZEROWIDTHSPACE
-    //                                                )
-    //                                  );
-    //                }
-    //            }
-    
-    
-    
-    
+
     
     if(indexPath.row == 0){//Batsman header
         ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:batsmanHeaderCell];
@@ -479,7 +448,12 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             self.overRunRateCell = nil;
         }
         
-        cell.lbl_over_run_rate.text = [NSString stringWithFormat:@"%ld / %ld (%ld.%ld) RR %.02f" ,(unsigned long)_BATTEAMRUNS,(unsigned long) _BATTEAMWICKETS,(unsigned long)_BATTEAMOVERS,(unsigned long)_BATTEAMOVRBALLS,[fetchSEpage.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEpage.BATTEAMRUNRATE floatValue]];
+
+        
+//        cell.lbl_over_run_rate.text = [NSString stringWithFormat:@"%ld / %ld (%ld.%ld) RR %.02f" ,(unsigned long)_BATTEAMRUNS,(unsigned long) _BATTEAMWICKETS,(unsigned long)_BATTEAMOVERS,(unsigned long)_BATTEAMOVRBALLS,[fetchSEpage.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEpage.BATTEAMRUNRATE floatValue]];
+        
+    cell.lbl_over_run_rate.text = [NSString stringWithFormat:@"%ld / %ld (%ld.%ld)" ,(unsigned long)_BATTEAMRUNS,(unsigned long) _BATTEAMWICKETS,(unsigned long)_BATTEAMOVERS,(unsigned long)_BATTEAMOVRBALLS];
+        
         [cell setBackgroundColor:[UIColor clearColor]];
         
         return cell;

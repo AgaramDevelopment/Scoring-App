@@ -178,15 +178,7 @@
     [_Bowler_table setHidden:YES];
     isEnableTbl=YES;
     
-    
-    
-    
-    
-    
 }
-
-
-
 
 -(void)radiobuttonSelected:(id)sender{
     
@@ -195,8 +187,6 @@
     {     BowlingEnd=@"MSC150";
         [self.Btn_Nearend setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
         [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.off.png"] forState:UIControlStateNormal];
-        
-        
     }
     else{
         BowlingEnd=@"MSC151";
@@ -204,14 +194,7 @@
         [self.Btn_FairEnd setImage:[UIImage imageNamed:@"Radio.on.png"] forState:UIControlStateNormal];
         
     }
-    
-    
 }
-
-
-
-
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {  if (tableView == self.Wonby_table)
 {
