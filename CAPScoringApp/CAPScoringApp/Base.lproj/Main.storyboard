@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="DlM-Sb-GEI">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -9843,22 +9843,22 @@
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OFF SIDE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SNp-ik-UxJ">
                                                                         <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                                         <constraints>
-                                                                            <constraint firstAttribute="height" constant="26" id="eKu-QL-3kR"/>
-                                                                            <constraint firstAttribute="width" constant="83" id="u1W-7c-f4f"/>
+                                                                            <constraint firstAttribute="height" constant="26" id="i1n-Vx-Rpx"/>
+                                                                            <constraint firstAttribute="width" constant="83" id="teB-sc-i9n"/>
                                                                         </constraints>
                                                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="18"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                         <nil key="highlightedColor"/>
                                                                         <variation key="default">
                                                                             <mask key="constraints">
-                                                                                <exclude reference="eKu-QL-3kR"/>
-                                                                                <exclude reference="u1W-7c-f4f"/>
+                                                                                <exclude reference="i1n-Vx-Rpx"/>
+                                                                                <exclude reference="teB-sc-i9n"/>
                                                                             </mask>
                                                                         </variation>
                                                                         <variation key="heightClass=regular-widthClass=regular">
                                                                             <mask key="constraints">
-                                                                                <include reference="eKu-QL-3kR"/>
-                                                                                <include reference="u1W-7c-f4f"/>
+                                                                                <include reference="i1n-Vx-Rpx"/>
+                                                                                <include reference="teB-sc-i9n"/>
                                                                             </mask>
                                                                         </variation>
                                                                     </label>
@@ -9920,21 +9920,19 @@
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="Cdi-ih-iVb">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="12"/>
                                                                     </constraint>
-                                                                    <constraint firstItem="SNp-ik-UxJ" firstAttribute="top" secondItem="Ytp-Xz-BdY" secondAttribute="top" constant="414" id="OHw-cV-Mnk"/>
                                                                     <constraint firstItem="SNp-ik-UxJ" firstAttribute="leading" secondItem="Ytp-Xz-BdY" secondAttribute="leading" constant="285" id="Sqf-mc-2hj">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="324"/>
                                                                     </constraint>
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerY" secondItem="Ytp-Xz-BdY" secondAttribute="centerY" id="WBf-Y8-bQX"/>
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerY" secondItem="Ytp-Xz-BdY" secondAttribute="centerY" id="Wfb-qY-zNI"/>
+                                                                    <constraint firstItem="SNp-ik-UxJ" firstAttribute="top" secondItem="Ytp-Xz-BdY" secondAttribute="top" constant="424" id="WpU-v9-lrj"/>
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="X3r-Ch-1gf"/>
                                                                     <constraint firstItem="SNp-ik-UxJ" firstAttribute="leading" secondItem="Ytp-Xz-BdY" secondAttribute="leading" constant="333" id="ccL-nZ-mBy"/>
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="fzf-fB-i9h">
                                                                         <variation key="heightClass=regular-widthClass=regular" constant="-4"/>
                                                                     </constraint>
+                                                                    <constraint firstItem="SNp-ik-UxJ" firstAttribute="leading" secondItem="Ytp-Xz-BdY" secondAttribute="leading" constant="333" id="kbF-Nn-Rqo"/>
                                                                     <constraint firstItem="Hb9-Im-FDR" firstAttribute="centerX" secondItem="Ytp-Xz-BdY" secondAttribute="centerX" id="okq-XL-plr"/>
-                                                                    <constraint firstItem="SNp-ik-UxJ" firstAttribute="leading" secondItem="Ytp-Xz-BdY" secondAttribute="leading" constant="336" id="sEh-aa-iHX">
-                                                                        <variation key="heightClass=regular-widthClass=regular" constant="333"/>
-                                                                    </constraint>
                                                                     <constraint firstItem="SNp-ik-UxJ" firstAttribute="top" secondItem="Ytp-Xz-BdY" secondAttribute="top" constant="423" id="yH8-h8-UFG"/>
                                                                 </constraints>
                                                                 <variation key="default">
@@ -9944,13 +9942,13 @@
                                                                         <exclude reference="Hb9-Im-FDR"/>
                                                                     </mask>
                                                                     <mask key="constraints">
-                                                                        <exclude reference="29G-P8-saw"/>
-                                                                        <exclude reference="AdG-1G-EEO"/>
-                                                                        <exclude reference="OHw-cV-Mnk"/>
-                                                                        <exclude reference="sEh-aa-iHX"/>
                                                                         <exclude reference="Wfb-qY-zNI"/>
                                                                         <exclude reference="fzf-fB-i9h"/>
                                                                         <exclude reference="okq-XL-plr"/>
+                                                                        <exclude reference="29G-P8-saw"/>
+                                                                        <exclude reference="AdG-1G-EEO"/>
+                                                                        <exclude reference="WpU-v9-lrj"/>
+                                                                        <exclude reference="kbF-Nn-Rqo"/>
                                                                     </mask>
                                                                 </variation>
                                                                 <variation key="heightClass=regular-widthClass=regular">
@@ -9960,14 +9958,17 @@
                                                                         <include reference="Hb9-Im-FDR"/>
                                                                     </mask>
                                                                     <mask key="constraints">
-                                                                        <include reference="29G-P8-saw"/>
-                                                                        <include reference="AdG-1G-EEO"/>
-                                                                        <include reference="OHw-cV-Mnk"/>
-                                                                        <include reference="sEh-aa-iHX"/>
                                                                         <exclude reference="Cdi-ih-iVb"/>
                                                                         <include reference="Wfb-qY-zNI"/>
                                                                         <exclude reference="fzf-fB-i9h"/>
                                                                         <include reference="okq-XL-plr"/>
+                                                                        <include reference="29G-P8-saw"/>
+                                                                        <include reference="AdG-1G-EEO"/>
+                                                                        <exclude reference="Sqf-mc-2hj"/>
+                                                                        <include reference="WpU-v9-lrj"/>
+                                                                        <exclude reference="ccL-nZ-mBy"/>
+                                                                        <include reference="kbF-Nn-Rqo"/>
+                                                                        <exclude reference="yH8-h8-UFG"/>
                                                                     </mask>
                                                                 </variation>
                                                             </view>
@@ -13608,8 +13609,7 @@
                                                                     <exclude reference="fb4-gA-sbR"/>
                                                                 </mask>
                                                             </variation>
-                                                            <variation key="heightClass=regular-widthClass=regular" misplaced="YES">
-                                                                <rect key="frame" x="0.0" y="0.0" width="155" height="120"/>
+                                                            <variation key="heightClass=regular-widthClass=regular">
                                                                 <mask key="constraints">
                                                                     <include reference="fb4-gA-sbR"/>
                                                                 </mask>

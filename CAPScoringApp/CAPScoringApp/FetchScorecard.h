@@ -79,7 +79,7 @@
 @property(strong,nonatomic)NSString *TOTALEXTRAS;
 @property(strong,nonatomic)NSString *INNINGSTOTAL;
 @property(strong,nonatomic)NSString *INNINGSTOTALWICKETS;
-//@property(strong,nonatomic)NSString *MATCHOVERS	;
+@property(strong,nonatomic)NSString *INNINGSMATCHOVERS;
 @property(strong,nonatomic)NSString *INNINGSRUNRATE;
 @property(strong,nonatomic)NSString *FINALINNINGS;
 @property(strong,nonatomic)NSString *ISDECLARE;

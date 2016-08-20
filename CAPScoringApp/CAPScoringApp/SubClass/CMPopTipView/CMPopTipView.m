@@ -183,16 +183,16 @@
             blue = components[2];
             alpha = components[3];
         }
-        CGFloat colorList[] = {
-            //red, green, blue, alpha
-            (CGFloat)(red*1.16+colourHL), (CGFloat)(green*1.16+colourHL),  (CGFloat)(blue*1.16+colourHL), alpha,
-             (CGFloat)(red*1.16+colourHL),  (CGFloat)(green*1.16+colourHL),  (CGFloat)(blue*1.16+colourHL), alpha,
-             (CGFloat)(red*1.08+colourHL),  (CGFloat)(green*1.08+colourHL),  (CGFloat)(blue*1.08+colourHL), alpha,
-            red     +colourHL, green     +colourHL, blue     +colourHL, alpha,
-            red     +colourHL, green     +colourHL, blue     +colourHL, alpha
-        };
+//        CGFloat colorList[] = {
+//            //red, green, blue, alpha
+//            (CGFloat)(red*1.16+colourHL), (CGFloat)(green*1.16+colourHL),  (CGFloat)(blue*1.16+colourHL), alpha,
+//             (CGFloat)(red*1.16+colourHL),  (CGFloat)(green*1.16+colourHL),  (CGFloat)(blue*1.16+colourHL), alpha,
+//             (CGFloat)(red*1.08+colourHL),  (CGFloat)(green*1.08+colourHL),  (CGFloat)(blue*1.08+colourHL), alpha,
+//            red     +colourHL, green     +colourHL, blue     +colourHL, alpha,
+//            red     +colourHL, green     +colourHL, blue     +colourHL, alpha
+//        };
         myColorSpace = CGColorSpaceCreateDeviceRGB();
-        myGradient = CGGradientCreateWithColorComponents(myColorSpace, colorList, locationList, locationCount);
+       // myGradient = CGGradientCreateWithColorComponents(myColorSpace, colorList, locationList, locationCount);
         CGPoint startPoint, endPoint;
         startPoint.x = 0;
         startPoint.y = 0;
@@ -205,34 +205,34 @@
     }
 
     // Draw top highlight and bottom shadow
-    if (self.has3DStyle) {
-        CGContextSaveGState(c);
-        CGMutablePathRef innerShadowPath = CGPathCreateMutable();
-
-        // add a rect larger than the bounds of bubblePath
-        CGPathAddRect(innerShadowPath, NULL, CGRectInset(CGPathGetPathBoundingBox(bubblePath), -30, -30));
-
-        // add bubblePath to innershadow
-        CGPathAddPath(innerShadowPath, NULL, bubblePath);
-        CGPathCloseSubpath(innerShadowPath);
-
-        // draw top highlight
-        UIColor *highlightColor = [UIColor colorWithWhite:1.0 alpha:0.75];
-        CGContextSetFillColorWithColor(c, highlightColor.CGColor);
-        CGContextSetShadowWithColor(c, CGSizeMake(0.0, 4.0), 4.0, highlightColor.CGColor);
-        CGContextAddPath(c, innerShadowPath);
-        CGContextEOFillPath(c);
-
-        // draw bottom shadow
-        UIColor *shadowColor = [UIColor colorWithWhite:0.0 alpha:0.4];
-        CGContextSetFillColorWithColor(c, shadowColor.CGColor);
-        CGContextSetShadowWithColor(c, CGSizeMake(0.0, -4.0), 4.0, shadowColor.CGColor);
-        CGContextAddPath(c, innerShadowPath);
-        CGContextEOFillPath(c);
-
-        CGPathRelease(innerShadowPath);
-        CGContextRestoreGState(c);
-    }
+//    if (self.has3DStyle) {
+//        CGContextSaveGState(c);
+//        CGMutablePathRef innerShadowPath = CGPathCreateMutable();
+//
+//        // add a rect larger than the bounds of bubblePath
+//        CGPathAddRect(innerShadowPath, NULL, CGRectInset(CGPathGetPathBoundingBox(bubblePath), -30, -30));
+//
+//        // add bubblePath to innershadow
+//        CGPathAddPath(innerShadowPath, NULL, bubblePath);
+//        CGPathCloseSubpath(innerShadowPath);
+//
+//        // draw top highlight
+//        UIColor *highlightColor = [UIColor colorWithWhite:1.0 alpha:0.75];
+//        CGContextSetFillColorWithColor(c, highlightColor.CGColor);
+//        CGContextSetShadowWithColor(c, CGSizeMake(0.0, 4.0), 4.0, highlightColor.CGColor);
+//        CGContextAddPath(c, innerShadowPath);
+//        CGContextEOFillPath(c);
+//
+//        // draw bottom shadow
+//        UIColor *shadowColor = [UIColor colorWithWhite:0.0 alpha:0.4];
+//        CGContextSetFillColorWithColor(c, shadowColor.CGColor);
+//        CGContextSetShadowWithColor(c, CGSizeMake(0.0, -4.0), 4.0, shadowColor.CGColor);
+//        CGContextAddPath(c, innerShadowPath);
+//        CGContextEOFillPath(c);
+//
+//        CGPathRelease(innerShadowPath);
+//        CGContextRestoreGState(c);
+//    }
 
 	CGContextRestoreGState(c);
 
@@ -748,16 +748,16 @@
 		self.opaque = NO;
 
 		_topMargin = 2.0;
-		_pointerSize = 12.0;
+		_pointerSize = 8.0;
 		//_sidePadding = 2.0;
         _borderWidth = 1.0;
 
 		//self.textFont = [UIFont boldSystemFontOfSize:14.0];
 		//self.textColor = [UIColor whiteColor];
 		//self.textAlignment = NSTextAlignmentCenter;
-		self.backgroundColor = [UIColor clearColor];
+		self.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
         self.has3DStyle = YES;
-        self.borderColor = [UIColor blackColor];
+        self.borderColor = [UIColor clearColor];
         self.hasShadow = YES;
         self.animation = CMPopTipAnimationSlide;
         self.dismissTapAnywhere = NO;
@@ -824,15 +824,23 @@
 //	return self;
 //}
 
-- (id)initWithCustomView:(UIView *)aView
+- (id)initWithCustomView:(UIView *)aView :(UIButton *) button1 :(UIButton *) button2 :(UIButton *) button3 :(UIButton *) button4
 {
     CGRect frame =CGRectZero;
 
 	if ((self = [self initWithFrame:frame])) {
 		self.customView = aView;
+        self.button1    = button1;
+        self.button2    = button2;
+        self.button3    = button3;
+        self.button4    = button4;
         self.shouldEnforceCustomViewPadding = YES;
         self.shouldMaskCustomView = YES;
         [self addSubview:self.customView];
+        [self addSubview:self.button1];
+        [self addSubview:self.button2];
+        [self addSubview:self.button3];
+        [self addSubview:self.button4];
 	}
 	return self;
 }

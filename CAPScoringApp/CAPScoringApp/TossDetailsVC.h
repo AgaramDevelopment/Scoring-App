@@ -41,8 +41,7 @@
 
 
 
-@property (strong, nonatomic)
-IBOutlet UIView *nonStriker;
+@property (strong, nonatomic) IBOutlet UIView *nonStriker;
 
 @property (strong, nonatomic) IBOutlet UITableView *nonStriker_table;
 @property (strong,nonatomic) IBOutlet  NSLayoutConstraint * nonStrikerTbl_height;

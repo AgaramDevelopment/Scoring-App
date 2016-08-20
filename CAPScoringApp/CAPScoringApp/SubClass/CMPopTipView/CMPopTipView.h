@@ -111,6 +111,11 @@ typedef NS_ENUM(NSInteger, CMPopTipAnimation) {
 @property (nonatomic, strong)			NSString				*title;
 @property (nonatomic, strong)			NSString				*message;
 @property (nonatomic, strong)           UIView	                *customView;
+@property (nonatomic, strong)           UIButton                *button1;
+@property (nonatomic,strong)            UIButton                *button2;
+@property (nonatomic,strong)            UIButton                *button3;
+@property (nonatomic,strong)            UIButton                *button4;
+
 @property (nonatomic, strong, readonly)	id						targetObject;
 @property (nonatomic, strong)			UIColor					*titleColor;
 @property (nonatomic, strong)			UIFont					*titleFont;
@@ -145,7 +150,7 @@ typedef NS_ENUM(NSInteger, CMPopTipAnimation) {
 - (BOOL)isBeingShown;
 - (id)initWithTitle:(NSString *)titleToShow message:(NSString *)messageToShow;
 - (id)initWithMessage:(NSString *)messageToShow;
-- (id)initWithCustomView:(UIView *)aView;
+- (id)initWithCustomView:(UIView *)aView :(UIButton *) button1 :(UIButton *) button2 :(UIButton *) button3 :(UIButton *) button4;
 
 - (void)presentPointingAtView:(UIView *)targetView inView:(UIView *)containerView animated:(BOOL)animated;
 - (void)presentPointingAtBarButtonItem:(UIBarButtonItem *)barButtonItem animated:(BOOL)animated;

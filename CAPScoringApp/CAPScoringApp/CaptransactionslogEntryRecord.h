@@ -17,5 +17,5 @@
 @property (nonatomic,strong) NSString * SCRIPTSTATUS;
 @property (nonatomic,strong) NSString * SEQNO;
 
-
+-(NSDictionary *)CaptransactionslogEntryRecordDictionary;
 @end
