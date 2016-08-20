@@ -46,8 +46,10 @@
 @synthesize INNINGSTOTAL;
 @synthesize INNINGSTOTALWICKETS;
 @synthesize INNINGSRUNRATE;
+@synthesize INNINGSMATCHOVERS;
 @synthesize FINALINNINGS;
 @synthesize ISDECLARE;
+@synthesize MATCHBALLS;
 
 @synthesize MatchRegistrationForScoreBoardArray;
 @synthesize DidNotBatArray;
@@ -59,7 +61,7 @@ DBManagerScoreCard *dbScoreCard;
     
     NSNumber* ISINNINGSCOMPLETE = [[NSNumber alloc] init];
     NSNumber* MATCHOVERS = [[NSNumber alloc] init];
-    NSNumber* MATCHBALLS = [[NSNumber alloc] init];
+   // NSNumber* MATCHBALLS = [[NSNumber alloc] init];
     NSNumber* FINALINNINGS = [[NSNumber alloc] init];
     NSString* BATTINGTEAMCODE = [[NSString alloc] init];
     NSString* BOWLINGTEAMCODE = [[NSString alloc] init];
@@ -154,11 +156,11 @@ DBManagerScoreCard *dbScoreCard;
         TOTALEXTRAS = scoreCard.TOTALEXTRAS;
         INNINGSTOTAL = scoreCard.INNINGSTOTAL;
         INNINGSTOTALWICKETS = scoreCard.INNINGSTOTALWICKETS;
+        INNINGSMATCHOVERS = scoreCard.MATCHOVERS;
         INNINGSRUNRATE = scoreCard.INNINGSRUNRATE;
         FINALINNINGS = scoreCard.FINALINNINGS;
         ISDECLARE = scoreCard.ISDECLARE;
         
-    
         
     }
     
