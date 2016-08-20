@@ -9414,7 +9414,7 @@ self.lbl_umpirename.text=@"";
         [self.view_table_select setHidden:YES];
         [self.View_Appeal setHidden:YES];
          isSaveAppeal=YES;
-          [self unselectedViewBg:_view_appeal];
+           [self selectedViewBg:_view_appeal];
     }
 }
 
