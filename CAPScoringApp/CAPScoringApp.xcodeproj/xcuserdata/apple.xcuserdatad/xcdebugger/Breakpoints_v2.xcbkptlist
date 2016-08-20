@@ -1466,12 +1466,12 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Documents/new/Scoring-App/CAPScoringApp/CAPScoringApp/PowerPlayVC.m"
-                  timestampString = "493379829.122315"
+                  timestampString = "493384139.945391"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "441"
                   endingLineNumber = "441"
-                  offsetFromSymbolStart = "1444">
+                  offsetFromSymbolStart = "1426">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -1481,12 +1481,12 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Documents/new/Scoring-App/CAPScoringApp/CAPScoringApp/PowerPlayVC.m"
-                  timestampString = "493379829.122468"
+                  timestampString = "493384139.945551"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "441"
                   endingLineNumber = "441"
-                  offsetFromSymbolStart = "1493">
+                  offsetFromSymbolStart = "1452">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -2393,13 +2393,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/ViewController/EditMode/EditModeVC.m"
-            timestampString = "493379828.789825"
+            filePath = "CAPScoringApp/SubClass/CMPopTipView/CMPopTipView.m"
+            timestampString = "493383676.254928"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "846"
-            endingLineNumber = "846"
-            landmarkName = "-popTipViewWasDismissedByUser:"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "-drawRect:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2409,13 +2409,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/ViewController/EditMode/EditModeVC.m"
-            timestampString = "493378647.964765"
+            filePath = "CAPScoringApp/SubClass/CMPopTipView/CMPopTipView.m"
+            timestampString = "493383828.727728"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "764"
-            endingLineNumber = "764"
-            landmarkName = "-didClickEditAction:"
+            startingLineNumber = "633"
+            endingLineNumber = "633"
+            landmarkName = "-finaliseDismiss"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/SubClass/CMPopTipView/CMPopTipView.m"
+            timestampString = "493383834.207283"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "727"
+            endingLineNumber = "727"
+            landmarkName = "-dismissByUser"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

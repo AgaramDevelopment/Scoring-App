@@ -165,7 +165,7 @@ BOOL isWicketSelected;
     }
     
     
-    NSLog(@"constant=%@",self.highlightbtnxposition.constant);
+   // NSLog(@"constant=%@",self.highlightbtnxposition.constant);
     
     
     
