@@ -1745,6 +1745,7 @@
    
     
     [UIView animateWithDuration:0.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+        self.CommonView.userInteractionEnabled= YES;
         self.sideviewXposition.constant =-300;
         self.commonViewXposition.constant=0;
         
@@ -1753,7 +1754,7 @@
         self.commonleftrightview.frame=CGRectMake(self.commonleftrightview.frame.origin.x,self.commonleftrightview.frame.origin.y,760,361);
         
         leftSlideSwipe = NO;
-        self.CommonView.userInteractionEnabled= YES;
+        
         NSLog(@"alterviewwidth=%f",self.Allvaluedisplayview.frame.size.width);
     } completion:^(BOOL finished){ }];
     
@@ -4374,13 +4375,13 @@
         if([self.BatmenStyle isEqualToString:@"MSC013"])
         {
             [self.img_WagonWheel setImage:[UIImage imageNamed:@"RHWagon"]];
-            self.onside_lbl.text=@"ON SIDE";
-            self.offside_lbl.text=@"OFF SIDE";
+            self.onside_lbl.text=@"OFF SIDE";
+            self.offside_lbl.text=@"ON SIDE";
         }
         else{
             [self.img_WagonWheel setImage:[UIImage imageNamed:@"LHWagon"]];
-            self.onside_lbl.text=@"OFF SIDE";
-            self.offside_lbl.text=@"ON SIDE";
+            self.onside_lbl.text=@"ON SIDE";
+            self.offside_lbl.text=@"OFF SIDE";
         }
         
         if (IS_IPAD_PRO) {
@@ -6659,11 +6660,6 @@ self.lbl_umpirename.text=@"";
     self.view_defensive.hidden =YES;
     
 }
-
-
-
-
-
 
 //Set to normal background for runs button
 -(void) resetRunsBoundriesView{
@@ -9418,7 +9414,7 @@ self.lbl_umpirename.text=@"";
         [self.view_table_select setHidden:YES];
         [self.View_Appeal setHidden:YES];
          isSaveAppeal=YES;
-          [self unselectedViewBg:_view_appeal];
+           [self selectedViewBg:_view_appeal];
     }
 }
 
