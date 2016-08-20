@@ -479,7 +479,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             self.overRunRateCell = nil;
         }
         
-        cell.lbl_over_run_rate.text = [NSString stringWithFormat:@"%ld / %ld (%ld.%ld) RR %.02f" ,(unsigned long)_BATTEAMRUNS,(unsigned long) _BATTEAMWICKETS,(unsigned long)_BATTEAMOVERS,(unsigned long)_BATTEAMOVRBALLS,[fetchSEpage.BATTEAMRUNRATE floatValue] < 0 ? @"0.0".floatValue: [fetchSEpage.BATTEAMRUNRATE floatValue]];
+        cell.lbl_over_run_rate.text = [NSString stringWithFormat:@"%@ / %@ (%@.%@) RR %.02f" ,fetchScorecard.INNINGSTOTAL, fetchScorecard.INNINGSTOTALWICKETS,fetchScorecard.INNINGSMATCHOVERS,fetchScorecard.MATCHBALLS,fetchScorecard.INNINGSRUNRATE.floatValue];
         [cell setBackgroundColor:[UIColor clearColor]];
         
         return cell;

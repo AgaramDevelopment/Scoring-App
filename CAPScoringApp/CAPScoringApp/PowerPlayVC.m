@@ -198,9 +198,6 @@ else//Grid
     self.txt_startover.text =powerplayrecord.startover;
     self.txt_endover.text  =powerplayrecord.endover;
     self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
-    powerplaytype=powerplayrecord.powerplaytype;
-    powerplayCode=powerplayrecord.powerplaycode;
-    
     self.view_powerplay.hidden=YES;
     self.view_powerplaygrid.hidden=NO;
     [self.btn_submit setTitle:@"Update" forState:UIControlStateNormal];
