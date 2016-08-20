@@ -748,14 +748,14 @@
 		self.opaque = NO;
 
 		_topMargin = 2.0;
-		_pointerSize = 12.0;
+		_pointerSize = 8.0;
 		//_sidePadding = 2.0;
         _borderWidth = 1.0;
 
 		//self.textFont = [UIFont boldSystemFontOfSize:14.0];
 		//self.textColor = [UIColor whiteColor];
 		//self.textAlignment = NSTextAlignmentCenter;
-		self.backgroundColor = [UIColor clearColor];
+		self.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
         self.has3DStyle = YES;
         self.borderColor = [UIColor blackColor];
         self.hasShadow = YES;
@@ -824,15 +824,23 @@
 //	return self;
 //}
 
-- (id)initWithCustomView:(UIView *)aView
+- (id)initWithCustomView:(UIView *)aView :(UIButton *) button1 :(UIButton *) button2 :(UIButton *) button3 :(UIButton *) button4
 {
     CGRect frame =CGRectZero;
 
 	if ((self = [self initWithFrame:frame])) {
 		self.customView = aView;
+        self.button1    = button1;
+        self.button2    = button2;
+        self.button3    = button3;
+        self.button4    = button4;
         self.shouldEnforceCustomViewPadding = YES;
         self.shouldMaskCustomView = YES;
         [self addSubview:self.customView];
+        [self addSubview:self.button1];
+        [self addSubview:self.button2];
+        [self addSubview:self.button3];
+        [self addSubview:self.button4];
 	}
 	return self;
 }
