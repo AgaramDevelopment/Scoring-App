@@ -1600,7 +1600,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return @"";
 }
 
--(NSString*)GetBallCodeWithCurrentOverAndBowlerCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSInteger)INNINGSNO : (NSInteger)OVERNO : (NSString*)BOWLERCODE
+-(NSString*)GetBallCodeWithCurrentOverAndBowlerCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSInteger)INNINGSNO : (NSInteger)OVERNO : (NSString*)BOWLERCODE
 {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -1646,6 +1646,524 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
                 [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC252" :updateSQL];
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+}
+
+-(NSString*)GetOtherBowlerCodeWithCurrentOverAndBowlerCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSInteger)INNINGSNO : (NSInteger)OVERNO : (NSString*)BOWLERCODE
+{
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"SELECT BOWLERCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %ld AND OVERNO = %ld AND BOWLERCODE != '%@'",COMPETITIONCODE,MATCHCODE,(long)INNINGSNO,(long)OVERNO,BOWLERCODE];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSString *OtherBowlerCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return OtherBowlerCode;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return @"";
+}
+
+-(NSInteger)GetOtherBowlerOverBallCountWithCurrentOverAndBowlerCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSInteger)INNINGSNO : (NSInteger)OVERNO : (NSString*)OTHERBOWLERCODE
+{
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"SELECT COUNT(1) FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %ld AND OVERNO = %ld AND BOWLERCODE = '%@' AND ISLEGALBALL = 1",COMPETITIONCODE,MATCHCODE,(long)INNINGSNO,(long)OVERNO,OTHERBOWLERCODE];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSInteger OTHERBOWLEROVERBALLCNT = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)].integerValue;
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return OTHERBOWLEROVERBALLCNT;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return 0;
+}
+
+-(NSInteger)GetOtherBowlerOverStatusWithCurrentOverForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSInteger)INNINGSNO : (NSInteger)OVERNO
+{
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"SELECT OVERSTATUS FROM OVEREVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %ld AND OVERNO = %ld",COMPETITIONCODE,MATCHCODE,(long)INNINGSNO,(long)OVERNO];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSInteger ISOVERCOMPLETE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)].integerValue;
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return ISOVERCOMPLETE;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return 0;
+}
+
+-(BOOL) UpdateOtherBowlerBowlingSummaryForCurrentOverNoForDeleteScoreEngine: (NSString*) COMPETITIONCODE : (NSString*) MATCHCODE : (NSInteger)INNINGSNO : (NSInteger)OVERNO : (NSString*)OTHERBOWLER : (NSInteger)ISOVERCOMPLETE : (NSInteger)OTHERBOWLEROVERBALLCNT
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BOWLINGSUMMARY SET OVERS = CASE WHEN %ld = 1 THEN OVERS + 1 ELSE OVERS END, BALLS = CASE WHEN %ld = 1 THEN 0 ELSE BALLS + %ld END, PARTIALOVERBALLS = PARTIALOVERBALLS - %ld WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %ld AND OVERNO = %ld AND BOWLERCODE = '%@'",(long)ISOVERCOMPLETE,(long)ISOVERCOMPLETE,(long)OTHERBOWLEROVERBALLCNT,(long)OTHERBOWLEROVERBALLCNT,COMPETITIONCODE,MATCHCODE,(long)INNINGSNO,(long)OVERNO,OTHERBOWLER];
+        const char *selectStmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC251" :updateSQL];
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+}
+
+-(NSString*)GetBallCodeWithCurrentMatchCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE
+{
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'",COMPETITIONCODE,MATCHCODE];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSString *BallCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return BallCode;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return @"";
+}
+
+-(BOOL) UpdateMatchStatusBasedOnMatchCodeForDeleteScoreEngine: (NSString*) COMPETITIONCODE : (NSString*) MATCHCODE
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION SET MATCHSTATUS = 'MSC240' WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'",COMPETITIONCODE,MATCHCODE];
+        const char *selectStmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC251" :updateSQL];
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+}
+
+-(NSMutableArray *)GetWicketOverNoAndBallNoAndBallCountWithStrikerAndNonStrikerForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)TEAMCODE : (NSInteger)INNINGSNO : (NSString*)BATSMANCODE
+{
+    NSString *databasePath =[self getDBPath];
+    NSMutableArray *result = [[NSMutableArray alloc]init];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"SELECT BE.OVERNO, BE.BALLNO, BE.BALLCOUNT FROM BALLEVENTS BE INNER JOIN WICKETEVENTS WE ON WE.COMPETITIONCODE = BE.COMPETITIONCODE AND WE.MATCHCODE = BE.MATCHCODE AND WE.TEAMCODE = BE.TEAMCODE AND WE.INNINGSNO = BE.INNINGSNO AND WE.BALLCODE = BE.BALLCODE WHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@' AND BE.TEAMCODE = '%@' AND BE.INNINGSNO = %ld AND WE.WICKETTYPE = 'MSC102' AND WE.WICKETPLAYER = '%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,(long)INNINGSNO,BATSMANCODE];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSString* OVERNO = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString* BALLNO = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                NSString* BALLCOUNT = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                
+                [result addObject:OVERNO];
+                [result addObject:BALLNO];
+                [result addObject:BALLCOUNT];
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return result;
+}
+
+-(NSInteger)GetBallCodeCountWithWicketBallNoOverNoBallCountForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)TEAMCODE : (NSInteger)INNINGSNO : (NSString*)BATSMANCODE : (NSInteger)W_OVERNO : (NSInteger)W_BALLNO : (NSInteger)W_BALLCOUNT
+{
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"SELECT COUNT(BE.BALLCODE) FROM BALLEVENTS BE WHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@'  BE.TEAMCODE = '%@' AND BE.INNINGSNO = %ld AND (BE.STRIKERCODE = '%@' OR BE.NONSTRIKERCODE = '%@') AND (CONVERT( NUMERIC,( convert(NVARCHAR,BE.OVERNO) + '.' + convert(NVARCHAR,BE.BALLNO) + convert(NVARCHAR,BE.BALLCOUNT) ) ) > CONVERT( NUMERIC,( convert(NVARCHAR,@W_OVERNO) + '.' + convert(NVARCHAR,@W_BALLNO) + convert(NVARCHAR,@W_BALLCOUNT) ) ) )",COMPETITIONCODE,MATCHCODE,TEAMCODE,(long)INNINGSNO,BATSMANCODE,MATCHCODE];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSInteger BAALCODECO = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)].integerValue;
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return BAALCODECO;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return 0;
+}
+
+-(BOOL) UpdateWicketTypeBasedOnMatchCodeBatmanForDeleteScoreEngine: (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)TEAMCODE : (NSInteger)INNINGSNO : (NSString*)BATSMANCODE
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET WICKETTYPE = 'MSC102' WHERE (COMPETITIONCODE || MATCHCODE || BATTINGTEAMCODE || INNINGSNO || BATSMANCODE) IN ( SELECT WE.COMPETITIONCODE || WE.MATCHCODE || WE.TEAMCODE || WE.INNINGSNO || WE.WICKETPLAYER FROM WICKETEVENTS WE WHERE WE.COMPETITIONCODE = '%@' AND WE.MATCHCODE = '%@' AND WE.TEAMCODE = '%@' AND  WE.INNINGSNO = %ld AND WE.WICKETPLAYER = '%@' AND WE.WICKETTYPE = 'MSC102') AND (WICKETTYPE IS NULL OR  WICKETTYPE = '') ",COMPETITIONCODE,MATCHCODE,TEAMCODE,(long)INNINGSNO,BATSMANCODE];
+        const char *selectStmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC251" :updateSQL];
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+}
+
+-(NSString*)GetMatchCodeWithMatchCodeAndResultForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE
+{
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"SELECT MATCHCODE FROM MATCHREGISTRATION WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND (MATCHRESULT NOT IN ('','Select'))",COMPETITIONCODE,MATCHCODE];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSString *ResultMatchCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return ResultMatchCode;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return @"";
+}
+
+-(NSString*)GetTossWonTeamWithMatchCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE
+{
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"SELECT TOSSWONTEAMCODE FROM MATCHEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'",COMPETITIONCODE,MATCHCODE];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSString *TossWonTeam = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return TossWonTeam;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return @"";
+}
+
+-(NSString*)GetBallCodeFromBallEventsWithMatchCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE
+{
+    NSString *databasePath =[self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'",COMPETITIONCODE,MATCHCODE];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                NSString *BALLCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return BALLCODE;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return @"";
+}
+
+-(BOOL) UpdateMatchRegistrationWithMatchResultBasedOnMatchCodeForDeleteScoreEngine: (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)MATCHRESULT : (NSString*)MATCHSTATUS
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION SET MATCHRESULT = '%@', MATCHRESULTTEAMCODE = '%@', MATCHSTATUS='%@' WHERE  COMPETITIONCODE='%@' AND MATCHCODE = '%@'",MATCHRESULT,MATCHRESULT,MATCHSTATUS,COMPETITIONCODE,MATCHCODE];
+        const char *selectStmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC251" :updateSQL];
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+}
+
+-(BOOL) UpdateMatchResultBasedOnMatchCodeForDeleteScoreEngine: (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)MATCHRESULT
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHRESULT SET MATCHRESULTCODE='%@', MATCHWONTEAMCODE='%@', TEAMAPOINTS=0, TEAMBPOINTS=0,COMMENTS='' WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",MATCHRESULT,MATCHRESULT,COMPETITIONCODE,MATCHCODE];
+        const char *selectStmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC251" :updateSQL];
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+}
+
+-(BOOL) DeleteSessionBasedOnMatchCodeForDeleteScoreEngine: (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSInteger)MAXINNINGS : (NSInteger)MAXSESSIONNO : (NSInteger)MAXDAYNO
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE SESSIONEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO>=%ld AND SESSIONNO>=%ld AND DAYNO>=%ld",COMPETITIONCODE,MATCHCODE,(long)MAXINNINGS,(long)MAXSESSIONNO,(long)MAXDAYNO];
+        const char *selectStmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC252" :updateSQL];
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+}
+
+-(BOOL) DeleteDayEventsBasedOnMatchCodeForDeleteScoreEngine: (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSInteger)MAXINNINGS : (NSInteger)MAXSESSIONNO : (NSInteger)MAXDAYNO
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE  DAYEVENTS WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO>=%ld AND DAYNO>=%ld",COMPETITIONCODE,MATCHCODE,(long)MAXINNINGS,(long)MAXDAYNO];
+        const char *selectStmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC252" :updateSQL];
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
+        }
+        sqlite3_close(dataBase);
+    }
+    return NO;
+}
+
+-(BOOL) UpdateInningsEventsBasedOnMatchCodeForDeleteScoreEngine: (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSInteger)MAXINNINGS
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS SET INNINGSSTARTTIME=NULL, INNINGSENDTIME=NULL, INNINGSSTATUS= 0 WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND INNINGSNO=%ld",COMPETITIONCODE,MATCHCODE,(long)MAXINNINGS];
+        const char *selectStmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+        {
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC251" :updateSQL];
                 return YES;
                 
             }
