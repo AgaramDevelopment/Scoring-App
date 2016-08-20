@@ -59,7 +59,7 @@
 
 FETCHSEBALLCODEDETAILS *fetchSeBallCodeDetails;
 BOOL isWicketSelected;
-@interface EditModeVC ()
+@interface EditModeVC ()<CMPopTipViewDelegate>
 {
     CustomNavigationVC * objCustomNavigation;
     NSMutableArray* inningsDetail;
@@ -99,6 +99,9 @@ BOOL isWicketSelected;
     
 }
 @property (strong,nonatomic) BallEventRecord *ballEventRecord;
+@property (nonatomic, strong)	id				currentPopTipViewTarget;
+
+@property (nonatomic, strong)	NSMutableArray	*visiblePopTipViews;
 
 @end
 
@@ -162,7 +165,7 @@ BOOL isWicketSelected;
     }
     
     
-    NSLog(@"constant=%@",self.highlightbtnxposition.constant);
+   // NSLog(@"constant=%@",self.highlightbtnxposition.constant);
     
     
     
@@ -727,19 +730,30 @@ BOOL isWicketSelected;
     [btn_Run setTitle:[NSString stringWithFormat:content] forState:UIControlStateNormal];
     
 }
-
+- (void)dismissAllPopTipViews
+{
+    while ([self.visiblePopTipViews count] > 0) {
+        CMPopTipView *popTipView = [self.visiblePopTipViews objectAtIndex:0];
+        [popTipView dismissAnimated:YES];
+        [self.visiblePopTipViews removeObjectAtIndex:0];
+    }
+}
 
 -(IBAction)didClickEditAction:(id)sender
 {
     
     if(view_addedit != nil)
     {
+        [self dismissAllPopTipViews];
         [view_addedit removeFromSuperview];
         [leftrotation removeFromSuperview];
         [Rightrotation removeFromSuperview];
         [Cancelrotation removeFromSuperview];
         [Editrotation removeFromSuperview];
     }
+    
+    
+    
     UIButton * btn_add = (UIButton *)sender;
     
     
@@ -749,10 +763,11 @@ BOOL isWicketSelected;
     
     EditModeCell *cell = (EditModeCell*)[sender superview];
     NSIndexPath* indexPath = [self.tbl_innnings indexPathForCell:cell];
-    view_addedit=[[UIView alloc]initWithFrame:CGRectMake(btn_add.frame.origin.x-20,btn_add.frame.origin.y+40,175,50)];
+    view_addedit=[[UIView alloc]initWithFrame:CGRectMake(btn_add.frame.origin.x,btn_add.frame.origin.y,175,50)];
     [view_addedit setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
     [cell addSubview:view_addedit];
-    leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(view_addedit.frame.origin.x, view_addedit.frame.origin.y+3,38,38)];
+    leftrotation      =[[UIButton alloc]initWithFrame:CGRectMake(5,view_addedit.frame.origin.y+20,38,38)];
+    //leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(view_addedit.frame.origin.x-60, view_addedit.frame.origin.y+20,38,38)];
     [leftrotation setImage:[UIImage imageNamed:@"LeftRotation"] forState:UIControlStateNormal];
     [cell addSubview:leftrotation];
     [leftrotation addTarget:self action:@selector(didClickLeftRotation:) forControlEvents:UIControlEventTouchUpInside];
@@ -763,59 +778,74 @@ BOOL isWicketSelected;
     
     
     
-    Editrotation=[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.origin.x+leftrotation.frame.size.width+8, leftrotation.frame.origin.y,38,38)];
+    //Editrotation=[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.origin.x+leftrotation.frame.size.width+8, leftrotation.frame.origin.y,38,38)];
+     Editrotation    =[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.size.width+15,leftrotation.frame.origin.y,38,38)];
     [Editrotation setImage:[UIImage imageNamed:@"ArchiveEdit"] forState:UIControlStateNormal];
     Editrotation.imageView.contentMode = UIViewContentModeScaleAspectFill;
     [cell addSubview:Editrotation];
     
     [Editrotation addTarget:self action:@selector(didClickEditrotation:) forControlEvents:UIControlEventTouchUpInside];
     
-     Cancelrotation=[[UIButton alloc]initWithFrame:CGRectMake(Editrotation.frame.origin.x+Editrotation.frame.size.width+8, Editrotation.frame.origin.y,38,38)];
+    Cancelrotation  =[[UIButton alloc]initWithFrame:CGRectMake(Editrotation.frame.origin.y+ Editrotation.frame.size.width+40,Editrotation.frame.origin.y,38,38)];
+    // Cancelrotation=[[UIButton alloc]initWithFrame:CGRectMake(Editrotation.frame.origin.x+Editrotation.frame.size.width+8, Editrotation.frame.origin.y,38,38)];
     [Cancelrotation setImage:[UIImage imageNamed:@"ArchiveCancel"] forState:UIControlStateNormal];
     [cell addSubview:Cancelrotation];
     [Cancelrotation addTarget:self action:@selector(didClickCancelrotation:) forControlEvents:UIControlEventTouchUpInside];
     
-     Rightrotation=[[UIButton alloc]initWithFrame:CGRectMake(Cancelrotation.frame.origin.x+Cancelrotation.frame.size.width+8, Cancelrotation.frame.origin.y,38,38)];
+    Rightrotation   =[[UIButton alloc]initWithFrame:CGRectMake(view_addedit.frame.size.width-20, Cancelrotation.frame.origin.y,38,38)];
+    // Rightrotation=[[UIButton alloc]initWithFrame:CGRectMake(Cancelrotation.frame.origin.x+Cancelrotation.frame.size.width+8, Cancelrotation.frame.origin.y,38,38)];
     [Rightrotation setImage:[UIImage imageNamed:@"RightRotation"] forState:UIControlStateNormal];
     [cell addSubview:Rightrotation];
     [Rightrotation addTarget:self action:@selector(didClickRightrotation:) forControlEvents:UIControlEventTouchUpInside];
     
     
     
-//    UIView *contentView = view_addedit;
-//    
-//    CMPopTipView *popTipView;
-//    if (contentView) {
-//        popTipView = [[CMPopTipView alloc] initWithCustomView:contentView];
-//    }
-//    else {
-//        //popTipView = [[CMPopTipView alloc] initWithMessage:contentMessage];
-//        popTipView = [[CMPopTipView alloc] initWithCustomView:contentView];
-//    }
-//    popTipView.delegate = self;
-//    
-//    
-//    popTipView.animation = arc4random() % 2;
-//    popTipView.has3DStyle = (BOOL)(arc4random() % 2);
-//    
-//    popTipView.dismissTapAnywhere = YES;
-//    [popTipView autoDismissAnimated:YES atTimeInterval:3.0];
-//    
-//    if ([sender isKindOfClass:[UIButton class]]) {
-//        UIButton *button = (UIButton *)sender;
-//        [popTipView presentPointingAtView:button inView:self.view animated:YES];
-//    }
-//    else {
-//        UIBarButtonItem *barButtonItem = (UIBarButtonItem *)sender;
-//        [popTipView presentPointingAtBarButtonItem:barButtonItem animated:YES];
-//    }
-////
-//    //[self.visiblePopTipViews addObject:popTipView];
-//    //self.currentPopTipViewTarget = sender;
+   
+    
+    UIView *contentView = view_addedit;
+    UIButton * contentButton1 =leftrotation;
+    UIButton * contentbutton2 = Editrotation;
+    UIButton * contentbutton3 = Cancelrotation;
+    UIButton * contentbutton4 = Rightrotation;
+    
+    CMPopTipView *popTipView;
+    if (contentView) {
+       popTipView = [[CMPopTipView alloc] initWithCustomView:contentView :contentButton1 :contentbutton2 :contentbutton3 :contentbutton4];
+    }
+    else {
+        //popTipView = [[CMPopTipView alloc] initWithMessage:contentMessage];
+         popTipView = [[CMPopTipView alloc] initWithCustomView:contentView :contentButton1 :contentbutton2 :contentbutton3 :contentbutton4];
+    }
+    popTipView.delegate = self;
+    
+    
+    popTipView.animation = arc4random() % 2;
+    popTipView.has3DStyle = (BOOL)(arc4random() % 2);
+    
+    popTipView.dismissTapAnywhere = YES;
+    [popTipView autoDismissAnimated:YES atTimeInterval:3.0];
+    
+    if ([sender isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)sender;
+        [popTipView presentPointingAtView:button inView:self.view animated:YES];
+    }
+    else {
+        UIBarButtonItem *barButtonItem = (UIBarButtonItem *)sender;
+        [popTipView presentPointingAtBarButtonItem:barButtonItem animated:YES];
+    }
 
+    [self.visiblePopTipViews addObject:popTipView];
+    self.currentPopTipViewTarget = sender;
     
 }
 
+#pragma mark - CMPopTipViewDelegate methods
+
+- (void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView
+{
+    [self.visiblePopTipViews removeObject:popTipView];
+    self.currentPopTipViewTarget = nil;
+}
 
 -(IBAction)didClickLeftRotation:(id)sender
 {
