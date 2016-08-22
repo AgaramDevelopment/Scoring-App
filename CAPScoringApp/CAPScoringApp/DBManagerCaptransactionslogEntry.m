@@ -72,7 +72,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.SCRIPTDATA=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
                 record.SCRIPTSTATUS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,4)];
                 record.SEQNO =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,5)];
-                [transactionArray addObject:record];
+                [transactionArray addObject:[record CaptransactionslogEntryRecordDictionary]];
                 
             }
             sqlite3_reset(statement);

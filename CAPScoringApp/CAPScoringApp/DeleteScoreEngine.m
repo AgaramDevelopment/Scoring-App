@@ -9,7 +9,7 @@
 #import "DeleteScoreEngine.h"
 
 @implementation DeleteScoreEngine
--(void)DeleteScoreEngineMethod : (NSString*)BALLCODE : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)TEAMCODE : (NSString*)INNINGSNO : (NSString*)STRIKERCODE : (NSString*)BOWLERCODE : (NSString*)REVERT
+-(void)DeleteScoreEngineMethod : (NSString*)BALLCODE : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)TEAMCODE : (NSInteger)INNINGSNO : (NSString*)STRIKERCODE : (NSString*)BOWLERCODE : (NSString*)REVERT
 {
     NSString* BATTINGTEAMCODE = @"";
     NSString* BOWLINGTEAMCODE = @"";
@@ -54,5 +54,14 @@
     NSString* OTHERBOWLER = @"";
     
     NSInteger OTHERBOWLEROVERBALLCNT = 0;
+    
+    NSInteger ISOVERCOMPLETE = 0;
+    
+    NSInteger W_OVERNO = 0;
+    NSInteger W_BALLNO = 0;
+    NSInteger W_BALLCOUNT = 0;
+    
+    NSString* MATCHSTATUS = @"";
+    NSString* MATCHRESULT = @"Select";
 }
 @end

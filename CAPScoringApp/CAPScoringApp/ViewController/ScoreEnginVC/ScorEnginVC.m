@@ -1212,15 +1212,22 @@
         _btn_B6.userInteractionEnabled = NO;
     }
     
+    
     if (self.ballEventRecord.objIsFour.intValue ==1)
     {
         [self selectedViewBg: _btn_B4];
         self.ballEventRecord.objIsFour = [NSNumber numberWithInt: 1];
-        if (self.ballEventRecord.objByes.intValue <= 0 && self.ballEventRecord.objLegByes.intValue <= 0)
-            //                Runs = int.Parse(drballdetails["RUNS"].ToString());
-            
-            [self disableButtonBg : _btn_overthrow];
+        //if (self.ballEventRecord.objByes.intValue <= 0 && self.ballEventRecord.objLegByes.intValue <= 0)
+        //                Runs = int.Parse(drballdetails["RUNS"].ToString());
+        
+        [self disableButtonBg : _btn_overthrow];
         _btn_overthrow.userInteractionEnabled = NO;
+        
+        
+        if (self.ballEventRecord.objByes.intValue <= 0 && self.ballEventRecord.objLegByes.intValue <= 0){
+            runs = self.ballEventRecord.objRuns.intValue;
+        }
+        runs = self.ballEventRecord.objWide.intValue > 0 ? runs + 4 : runs;
         
     }
     else if (self.ballEventRecord.objIssix.intValue ==1)
@@ -1233,6 +1240,8 @@
         
         [self disableButtonBg : _btn_overthrow];
         _btn_overthrow.userInteractionEnabled = NO;
+        runs = self.ballEventRecord.objRuns.intValue;
+        
         //            btnWD.Opacity = 0.4;
         //            btnWD.IsEnabled = false;
         //            btnB.Opacity = 0.4;
@@ -1241,6 +1250,7 @@
         //            btnLB.IsEnabled = false;
         
     }
+    
     else
     {
         if (self.ballEventRecord.objRuns.intValue == 1)
@@ -14281,11 +14291,17 @@ self.lbl_umpirename.text=@"";
         {
             [self selectedViewBg: _btn_B4];
             self.ballEventRecord.objIsFour = [NSNumber numberWithInt: 1];
-            if (self.ballEventRecord.objByes.intValue <= 0 && self.ballEventRecord.objLegByes.intValue <= 0)
+            //if (self.ballEventRecord.objByes.intValue <= 0 && self.ballEventRecord.objLegByes.intValue <= 0)
                 //                Runs = int.Parse(drballdetails["RUNS"].ToString());
                 
                 [self disableButtonBg : _btn_overthrow];
             _btn_overthrow.userInteractionEnabled = NO;
+            
+            
+            if (self.ballEventRecord.objByes.intValue <= 0 && self.ballEventRecord.objLegByes.intValue <= 0){
+                runs = self.ballEventRecord.objRuns.intValue;
+            }
+            runs = self.ballEventRecord.objWide.intValue > 0 ? runs + 4 : runs;
             
         }
         else if (self.ballEventRecord.objIssix.intValue ==1)
@@ -14298,6 +14314,8 @@ self.lbl_umpirename.text=@"";
             
             [self disableButtonBg : _btn_overthrow];
             _btn_overthrow.userInteractionEnabled = NO;
+            runs = self.ballEventRecord.objRuns.intValue;
+
             //            btnWD.Opacity = 0.4;
             //            btnWD.IsEnabled = false;
             //            btnB.Opacity = 0.4;
