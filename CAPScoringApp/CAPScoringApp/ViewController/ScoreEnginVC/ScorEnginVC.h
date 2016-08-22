@@ -21,6 +21,7 @@
 
 @property(nonatomic,strong) NSString *teamAcode;
 @property(nonatomic,strong) NSString *teamBcode;
+@property (strong, nonatomic) IBOutlet UIView *sideView;
 
 @property(nonatomic,strong) NSString *matchCode;
 @property(nonatomic,strong) NSString *competitionCode;

@@ -1742,21 +1742,45 @@
 
 - (void)handleSwipeFromRightside:(UISwipeGestureRecognizer *)recognizer
 {
+    [UIView animateWithDuration:0.7f
+                     animations:^ {
+                         
+                       
+                         self.commonViewXposition.constant=0;
+                         
+                         CGRect frame = self.CommonView.frame;
+                         frame.origin.x =  self.commonViewXposition.constant;
+                         self.CommonView.frame = frame;
+                         
+
+                         //self.sideView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
+                     }
+                     completion:^(BOOL finished) {
+                         self.sideviewXposition.constant =-300;
+                         [UIView beginAnimations:nil context:nil];
+                         [UIView setAnimationDuration:5.3];
+                         [UIView commitAnimations];
+                         
+                     }];
    
-    
-    [UIView animateWithDuration:0.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-        self.CommonView.userInteractionEnabled= YES;
-        self.sideviewXposition.constant =-300;
-        self.commonViewXposition.constant=0;
-        
-      
-       // self.commonViewwidthposition.constant =768;
-        self.commonleftrightview.frame=CGRectMake(self.commonleftrightview.frame.origin.x,self.commonleftrightview.frame.origin.y,760,361);
-        
-        leftSlideSwipe = NO;
-        
-        NSLog(@"alterviewwidth=%f",self.Allvaluedisplayview.frame.size.width);
-    } completion:^(BOOL finished){ }];
+//    
+//    [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
+//        self.CommonView.userInteractionEnabled= YES;
+//        
+//        
+//      
+//       // self.commonViewwidthposition.constant =768;
+//        
+//        leftSlideSwipe = NO;
+//        
+//        NSLog(@"alterviewwidth=%f",self.Allvaluedisplayview.frame.size.width);
+//    } completion:^(BOOL finished){
+//        
+//        self.sideviewXposition.constant =-300;
+//        self.commonViewXposition.constant=0;
+//        //self.commonleftrightview.frame=CGRectMake(self.commonleftrightview.frame.origin.x,self.commonleftrightview.frame.origin.y,760,361);
+//
+//    }];
     
     
 }
@@ -1769,10 +1793,32 @@
         [self.sideviewtable reloadData];
         isToss=YES;
     }
-    self.sideviewXposition.constant =0;
-    self.commonViewXposition.constant=300;
-    self.commonViewwidthposition.constant =768;
-    self.CommonviewRightsideposition.constant =self.view.frame.size.width+300;
+    [UIView animateWithDuration:0.7f
+                     animations:^ {
+                         
+                         self.sideviewXposition.constant =0;
+                         self.commonViewXposition.constant=300;
+                         self.commonViewwidthposition.constant =768;
+                         self.CommonviewRightsideposition.constant =self.view.frame.size.width+300;
+                         
+                         //self.commonViewXposition.constant=0;
+                         
+                         CGRect frame = self.CommonView.frame;
+                         frame.origin.x =  self.commonViewXposition.constant;
+                         self.CommonView.frame = frame;
+                         
+                         
+                         //self.sideView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
+                     }
+                     completion:^(BOOL finished) {
+                         //self.sideviewXposition.constant =-300;
+                         [UIView beginAnimations:nil context:nil];
+                         [UIView setAnimationDuration:5.3];
+                         [UIView commitAnimations];
+                         
+                     }];
+
+    
     leftSlideSwipe = YES;
     self.CommonView.userInteractionEnabled= NO;
     [self.sideviewtable reloadData];
