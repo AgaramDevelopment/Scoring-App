@@ -2271,7 +2271,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6732"
             endingLineNumber = "6732"
-            landmarkName = "-appeal_btn:"
+            landmarkName = "-resetRunsBoundriesView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2287,7 +2287,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6739"
             endingLineNumber = "6739"
-            landmarkName = "-btn_AppealComponent:"
+            landmarkName = "-appeal_btn:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2303,7 +2303,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6752"
             endingLineNumber = "6752"
-            landmarkName = "-btn_umpireName:"
+            landmarkName = "-btn_AppealComponent:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2319,7 +2319,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6782"
             endingLineNumber = "6782"
-            landmarkName = "-calculateRuns:"
+            landmarkName = "-btn_batsmen:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
