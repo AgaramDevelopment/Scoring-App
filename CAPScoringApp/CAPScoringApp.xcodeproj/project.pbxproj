@@ -160,14 +160,11 @@
 		24F96F8C1D2FC90500798A9D /* PenaltygridVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F96F841D2FC90500798A9D /* PenaltygridVC.xib */; };
 		CE0018001CF42FA500668D8B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0017FF1CF42FA500668D8B /* main.m */; };
 		CE0018031CF42FA500668D8B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018021CF42FA500668D8B /* AppDelegate.m */; };
-		CE0018091CF42FA500668D8B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0018071CF42FA500668D8B /* Main.storyboard */; };
 		CE00180B1CF42FA500668D8B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CE00180A1CF42FA500668D8B /* Assets.xcassets */; };
-		CE00180E1CF42FA500668D8B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE00180C1CF42FA500668D8B /* LaunchScreen.storyboard */; };
 		CE0018191CF42FA500668D8B /* CAPScoringAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018181CF42FA500668D8B /* CAPScoringAppTests.m */; };
 		CE0018241CF42FA500668D8B /* CAPScoringAppUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018231CF42FA500668D8B /* CAPScoringAppUITests.m */; };
 		CE00183B1CF430E400668D8B /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018391CF430E400668D8B /* DBManager.m */; };
 		CE0018421CF431D300668D8B /* EventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018411CF431D300668D8B /* EventRecord.m */; };
-		CE0018441CF431EA00668D8B /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = CE0018431CF431EA00668D8B /* libsqlite3.0.tbd */; };
 		CE0018471CF4485500668D8B /* TorunamentVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE0018461CF4485500668D8B /* TorunamentVC.m */; };
 		CE00184E1CF460DE00668D8B /* RAJDHANI-BOLD.TTF in Resources */ = {isa = PBXBuildFile; fileRef = CE0018491CF460DE00668D8B /* RAJDHANI-BOLD.TTF */; };
 		CE00184F1CF460DE00668D8B /* RAJDHANI-LIGHT.TTF in Resources */ = {isa = PBXBuildFile; fileRef = CE00184A1CF460DE00668D8B /* RAJDHANI-LIGHT.TTF */; };
@@ -187,6 +184,8 @@
 		CE1FBF641CF9984B00A9B6FE /* FixturesRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1FBF631CF9984B00A9B6FE /* FixturesRecord.m */; };
 		CE1FBF671CF9A05B00A9B6FE /* OfficialMasterRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1FBF661CF9A05B00A9B6FE /* OfficialMasterRecord.m */; };
 		CE1FBF6A1CF9A17500A9B6FE /* MatchOfficalsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE1FBF691CF9A17500A9B6FE /* MatchOfficalsVC.m */; };
+		CE20529F1D7E97EB00089EFE /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = CE20529E1D7E97EB00089EFE /* libsqlite3.0.dylib */; };
+		CE2052A01D7E983900089EFE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CE0018071CF42FA500668D8B /* Main.storyboard */; };
 		CE22AF261CFD584D0026E0DA /* AppealCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE22AF251CFD584D0026E0DA /* AppealCell.m */; };
 		CE22AF291CFD58720026E0DA /* AppealRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE22AF281CFD58720026E0DA /* AppealRecord.m */; };
 		CE2D671A1D3E3E9D00A8246C /* SBJson4Parser.m in Sources */ = {isa = PBXBuildFile; fileRef = CE2D670D1D3E3E9D00A8246C /* SBJson4Parser.m */; };
@@ -613,6 +612,7 @@
 		CE1FBF661CF9A05B00A9B6FE /* OfficialMasterRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OfficialMasterRecord.m; sourceTree = "<group>"; };
 		CE1FBF681CF9A17500A9B6FE /* MatchOfficalsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchOfficalsVC.h; sourceTree = "<group>"; };
 		CE1FBF691CF9A17500A9B6FE /* MatchOfficalsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchOfficalsVC.m; sourceTree = "<group>"; };
+		CE20529E1D7E97EB00089EFE /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		CE22AF241CFD584D0026E0DA /* AppealCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealCell.h; sourceTree = "<group>"; };
 		CE22AF251CFD584D0026E0DA /* AppealCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppealCell.m; sourceTree = "<group>"; };
 		CE22AF271CFD58720026E0DA /* AppealRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppealRecord.h; sourceTree = "<group>"; };
@@ -744,7 +744,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CE0018441CF431EA00668D8B /* libsqlite3.0.tbd in Frameworks */,
+				CE20529F1D7E97EB00089EFE /* libsqlite3.0.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1191,6 +1191,7 @@
 		CE0017F21CF42FA500668D8B = {
 			isa = PBXGroup;
 			children = (
+				CE20529E1D7E97EB00089EFE /* libsqlite3.0.dylib */,
 				CE0017FD1CF42FA500668D8B /* CAPScoringApp */,
 				CE0018171CF42FA500668D8B /* CAPScoringAppTests */,
 				CE0018221CF42FA500668D8B /* CAPScoringAppUITests */,
@@ -1734,7 +1735,6 @@
 				TargetAttributes = {
 					CE0017FA1CF42FA500668D8B = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = L5S8VPA4A5;
 					};
 					CE0018131CF42FA500668D8B = {
 						CreatedOnToolsVersion = 7.3;
@@ -1771,6 +1771,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE2052A01D7E983900089EFE /* Main.storyboard in Resources */,
 				DCA67D521D34056A00982EF5 /* InningsDetailsVC.xib in Resources */,
 				047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */,
 				18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */,
@@ -1794,7 +1795,6 @@
 				DCEFC8651D28B72C00451485 /* ChangeTossVC.xib in Resources */,
 				CEC858AE1D1557F6007F5384 /* BreakTableViewCell.xib in Resources */,
 				24E7B4B31D23884200EF0D55 /* DeclareInnings.xib in Resources */,
-				CE00180E1CF42FA500668D8B /* LaunchScreen.storyboard in Resources */,
 				0481DD071D213B250084BFF7 /* PowerPlayVC.xib in Resources */,
 				CE00180B1CF42FA500668D8B /* Assets.xcassets in Resources */,
 				1876250A1D154495009374F8 /* RevicedOverVC.xib in Resources */,
@@ -1809,7 +1809,6 @@
 				CE0018521CF460DE00668D8B /* RAJDHANI-SEMIBOLD.TTF in Resources */,
 				1876250C1D154495009374F8 /* ScoreCardCellTVCell.xib in Resources */,
 				1872292E1D12667200CC168F /* BreakVC.xib in Resources */,
-				CE0018091CF42FA500668D8B /* Main.storyboard in Resources */,
 				24F96F8A1D2FC90500798A9D /* PenaltyGridTVC.xib in Resources */,
 				CE7463A91D166F8200D69CD9 /* UpdateBreakVC.xib in Resources */,
 			);
@@ -2180,7 +2179,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Annamalai T (G4BPEMU9A9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CAPScoringApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2196,7 +2195,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Annamalai T (G4BPEMU9A9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CAPScoringApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
