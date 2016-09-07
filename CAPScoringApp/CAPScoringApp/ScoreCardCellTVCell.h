@@ -9,6 +9,23 @@
 #import <UIKit/UIKit.h>
 
 @interface ScoreCardCellTVCell : UITableViewCell
+
+@property (strong,nonatomic) IBOutlet UIView * expand_View;
+
+
+@property (strong,nonatomic) IBOutlet UIImageView * wagonPitch_img;
+@property (strong,nonatomic) IBOutlet UIButton * spiderWagon_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * sectorWagon_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * pitch_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * onSide_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * offSide_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * wangon1s_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * wangon2s_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * wangon3s_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * wangon4s_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * wangon6s_Btn;
+
+
 @property (strong, nonatomic) IBOutlet UIButton *btn_expand;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_dot_ball_percent;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_dot_ball;

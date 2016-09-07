@@ -47,6 +47,10 @@ int bowlerPostion = 0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.table.HVTableViewDataSource = self;
+    self.table.HVTableViewDelegate = self;
+    
     muliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
 
     
@@ -325,7 +329,34 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     
 }
+-(void)tableView:(UITableView *)tableView expandCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
+{
+    UILabel *detailLabel = (UILabel *)[cell viewWithTag:3];
+    UIView *purchaseButton = (UIButton *)[cell viewWithTag:10];
+    purchaseButton.alpha = 0;
+    purchaseButton.hidden = NO;
+    
+    [UIView animateWithDuration:.5 animations:^{
+        detailLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
+        purchaseButton.alpha = 1;
+        [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(3.14);
+    }];
+}
 
+//perform your collapse stuff (may include animation) for cell here. It will be called when the user touches an expanded cell so it gets collapsed or the table is in the expandOnlyOneCell satate and the user touches another item, So the last expanded item has to collapse
+-(void)tableView:(UITableView *)tableView collapseCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
+{
+    UILabel *detailLabel = (UILabel *)[cell viewWithTag:3];
+    UIView *purchaseButton = (UIButton *)[cell viewWithTag:10];
+    
+    [UIView animateWithDuration:.5 animations:^{
+        detailLabel.text = @"Lorem ipsum dolor sit amet";
+        purchaseButton.alpha = 0;
+        [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(-3.14);
+    } completion:^(BOOL finished) {
+        purchaseButton.hidden = YES;
+    }];
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -342,7 +373,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView
-         cellForRowAtIndexPath:(NSIndexPath *)indexPath
+         cellForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isExpanded
 {
   
     
@@ -367,7 +398,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             self.batsManHeaderCell = nil;
         }
         [cell setBackgroundColor:[UIColor clearColor]];
-        tableView.allowsSelection = NO;
+        //tableView.allowsSelection = NO;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         return cell;
     }else if(batsmanPostion <= indexPath.row && extraPostion>indexPath.row){//Batsman display
         BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
@@ -376,9 +409,31 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         if (cell == nil) {
             [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
             cell = self.batsmanCell;
-            self.batsmanCell = nil;
+           // self.batsmanCell = nil;
+            
             
         }
+        UIView *purchaseButton = (UIView *)[cell viewWithTag:10];
+        [cell.spiderWagon_Btn addTarget:self action:@selector(didClickSpiderWagonAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.sectorWagon_Btn addTarget:self action:@selector(didClickSectorWagonAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+         [cell.pitch_Btn addTarget:self action:@selector(didClickpitchAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+         [cell.onSide_Btn addTarget:self action:@selector(didClickonSideAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+         [cell.offSide_Btn addTarget:self action:@selector(didClickOffSideAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+         [cell.wangon1s_Btn addTarget:self action:@selector(didClick1sAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+         [cell.wangon2s_Btn addTarget:self action:@selector(didClick2sAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+         [cell.wangon3s_Btn addTarget:self action:@selector(didClick3sAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.wangon4s_Btn addTarget:self action:@selector(didClick4sAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [cell.wangon6s_Btn addTarget:self action:@selector(didClick6sAction:) forControlEvents:UIControlEventTouchUpInside];
+        
         
         if ([battingSummaryDetailsForSB.WICKETDESCRIPTION isEqualToString:@"NOT OUT"]) {
             
@@ -406,6 +461,16 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             cell.lbl_how_out.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
             
         }
+        if (!isExpanded) //prepare the cell as if it was collapsed! (without any animation!)
+        {
+            //[cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(0);
+            purchaseButton.hidden = YES;
+        }
+        else ///prepare the cell as if it was expanded! (without any animation!)
+        {
+            purchaseButton.hidden = NO;
+
+        }
         
         cell.lbl_player_name.text = battingSummaryDetailsForSB.BATSMANNAME;
         [cell setBackgroundColor:[UIColor clearColor]];
@@ -422,7 +487,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         cell.lbl_dot_ball.text = battingSummaryDetailsForSB.DOTBALLS;
         cell.lbl_dot_ball_percent.text = [NSString stringWithFormat:@"%.02f",[battingSummaryDetailsForSB.DOTBALLPERCENTAGE floatValue]];
         
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         return cell;
     }else if(extraPostion== indexPath.row){//Extras total byes
         ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:extraCell];
@@ -438,7 +504,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         cell.lbl_extras.text = [NSString stringWithFormat:@"(B: %@, LB: %@, WB: %@, P: %@)", fetchScorecard.BYES,fetchScorecard.LEGBYES,fetchScorecard.WIDES,fetchScorecard.PENALTIES];
         
         [cell setBackgroundColor:[UIColor clearColor]];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         return cell;
     }else if (overRunRatePostion == indexPath.row){ // total overs
         ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:overCell];
@@ -450,7 +517,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
   
         cell.lbl_over_run_rate.text = [NSString stringWithFormat:@"%@ / %@ (%@) RR %.02f" ,fetchScorecard.INNINGSTOTAL, fetchScorecard.INNINGSTOTALWICKETS,fetchScorecard.INNINGSMATCHOVERS,fetchScorecard.INNINGSRUNRATE.floatValue];
         [cell setBackgroundColor:[UIColor clearColor]];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         return cell;
         
     }else if (didNotBatPostion == indexPath.row)//did not bat postion
@@ -476,7 +544,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
         
         [cell setBackgroundColor:[UIColor clearColor]];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         return cell;
         
     }else if (fallOfWktHeaderPostion == indexPath.row){//fall of wicket header
@@ -488,7 +557,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             self.fallOfWktCell = nil;
         }
         [cell setBackgroundColor:[UIColor clearColor]];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         return cell;
         
     }else if (fallOfWktPostion == indexPath.row){//fall of wkt 
@@ -535,7 +605,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         cell.lbl_fall_of_wkt.numberOfLines = 0;
         
         [cell setBackgroundColor:[UIColor clearColor]];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         return cell;
         
     }else if(bowlerHeaderPosition == indexPath.row){
@@ -546,7 +617,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             self.bowlerHeaderCell = nil;
         }
         [cell setBackgroundColor:[UIColor clearColor]];
-        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+
         return cell;
         
     }else if(indexPath.row >= bowlerPostion){
@@ -574,7 +646,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         bowlerCellTvc.lbl_bowler_noball.text = bowlingSummaryForScoreBoard.NOBALLS;
         bowlerCellTvc.lbl_bowler_wicket.text = bowlingSummaryForScoreBoard.WICKETS;
         
-        
+        bowlerCellTvc.selectionStyle = UITableViewCellSelectionStyleNone;
+
         return bowlerCellTvc;
         
     }
@@ -585,17 +658,25 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 }
 
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    NSLog(@"index:%ld",(long)indexPath.row);
+//    if(batsmanPostion <= indexPath.row && extraPostion>indexPath.row)
+//    {
+//         NSLog(@"indexpath:%ld",(long)indexPath.row);
+//    }
+// //   [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//}
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isexpanded
 {
     
     if(indexPath.row == 0){
         return 44;
     }else if(batsmanPostion <= indexPath.row && extraPostion>indexPath.row){
+        
+        if (isexpanded)
+            return 400;
         return 70;
     }else if(extraPostion == indexPath.row){
         return 44;
@@ -614,6 +695,111 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     }
     
     return 70;
+}
+
+-(IBAction)didClickSpiderWagonAction:(id)sender
+{
+    ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
+    HVTableView* view = (HVTableView*) cell.superview;
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
+    NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonPosition];
+    int row = indexPath.row;
+    
+    NSLog(@"Indexpath = %d",row);
+    
+    
+    self.batsmanCell.pitch_Btn.backgroundColor =[UIColor clearColor];
+    self.batsmanCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
+    self.batsmanCell.spiderWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+    self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
+}
+
+-(IBAction)didClickSectorWagonAction:(id)sender
+{
+   
+    ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
+    HVTableView* view = (HVTableView*) cell.superview;
+     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
+    NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonPosition];
+    int row = indexPath.row;
+
+     NSLog(@"Indexpath = %d",row);
+    
+    self.batsmanCell.pitch_Btn.backgroundColor =[UIColor clearColor];
+    self.batsmanCell.spiderWagon_Btn.backgroundColor =[UIColor clearColor];
+    self.batsmanCell.sectorWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+        self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
+    
+}
+
+-(IBAction)didClickpitchAction:(id)sender
+{
+    
+    
+    ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
+    HVTableView* view = (HVTableView*) cell.superview;
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
+    NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonPosition];
+    int row = indexPath.row;
+    
+    NSLog(@"Indexpath = %d",row);
+    
+    NSLog(@"Indexpath = %@",indexPath);
+    
+        self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"pichmapRH"];
+    
+    self.batsmanCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
+    self.batsmanCell.spiderWagon_Btn.backgroundColor =[UIColor clearColor];
+    self.batsmanCell.pitch_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+
+  
+}
+
+-(IBAction)didClickonSideAction:(id)sender
+{
+    ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
+    HVTableView* view = (HVTableView*) cell.superview;
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
+    NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonPosition];
+    
+    if([cell.wagonPitch_img.image  isEqual: @"LHWagon"] || [cell.wagonPitch_img.image  isEqual: @"RHWagon"])
+    {
+        
+    }
+    
+    else if ([cell.wagonPitch_img.image  isEqual: @"pichmapRH"] || [cell.wagonPitch_img.image  isEqual: @"pichmapLH"])
+    {
+        
+    }
+}
+
+-(IBAction)didClickOffSideAction:(id)sender
+{
+    
+}
+
+-(IBAction)didClick1sAction:(id)sender
+{
+    
+}
+
+-(IBAction)didClick2sAction:(id)sender
+{
+    
+}
+-(IBAction)didClick3sAction:(id)sender
+{
+    
+}
+
+-(IBAction)didClick4sAction:(id)sender
+{
+    
+}
+
+-(IBAction)didClick6sAction:(id)sender
+{
+    
 }
 
 -(void)teamLogo{
@@ -725,7 +911,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
 
         
-        [_tbl_scorecard reloadData];
+        [self.table reloadData];
     }
     @catch (NSException *exception) {
     }

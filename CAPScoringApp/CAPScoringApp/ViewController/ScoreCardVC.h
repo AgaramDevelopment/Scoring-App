@@ -8,9 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "ScoreCardCellTVCell.h"
+#import "HVTableView.h"
 
-@interface ScoreCardVC : UIViewController<UITableViewDelegate,UITableViewDataSource>
-@property (strong, nonatomic) IBOutlet UITableView *tbl_scorecard;
+@interface ScoreCardVC : UIViewController<HVTableViewDelegate,HVTableViewDataSource>
+
+@property (strong, nonatomic) IBOutlet HVTableView *table;
+
+
+
+
+
+
+
+//@property (strong, nonatomic) IBOutlet UITableView *tbl_scorecard;
 @property (strong, nonatomic) IBOutlet ScoreCardCellTVCell *batsmanCell;
 
 @property (strong, nonatomic) IBOutlet ScoreCardCellTVCell *batsManHeaderCell;
