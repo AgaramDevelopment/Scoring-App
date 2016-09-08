@@ -1466,7 +1466,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Documents/new/Scoring-App/CAPScoringApp/CAPScoringApp/PowerPlayVC.m"
-                  timestampString = "494944733.817666"
+                  timestampString = "495027941.141222"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "441"
@@ -1481,7 +1481,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/apple/Documents/new/Scoring-App/CAPScoringApp/CAPScoringApp/PowerPlayVC.m"
-                  timestampString = "494944733.817825"
+                  timestampString = "495027941.141378"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "441"
@@ -2209,6 +2209,38 @@
             endingLineNumber = "7967"
             landmarkName = "-tableView:didSelectRowAtIndexPath:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ScorEnginVC tableView:didSelectRowAtIndexPath:]"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/new/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+                  timestampString = "495027941.171031"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7968"
+                  endingLineNumber = "7968"
+                  offsetFromSymbolStart = "27315">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[ScorEnginVC tableView:didSelectRowAtIndexPath:]"
+                  moduleName = "CAPScoringApp"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/apple/Documents/new/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+                  timestampString = "495027941.17119"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "7968"
+                  endingLineNumber = "7968"
+                  offsetFromSymbolStart = "27337">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2287,7 +2319,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6739"
             endingLineNumber = "6739"
-            landmarkName = "-appeal_btn:"
+            landmarkName = "-resetRunsBoundriesView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2303,7 +2335,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "6752"
             endingLineNumber = "6752"
-            landmarkName = "-btn_AppealComponent:"
+            landmarkName = "-appeal_btn:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2505,11 +2537,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreCardVC.m"
-            timestampString = "494919111.535056"
+            timestampString = "495019679.346678"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
             landmarkName = "-tableView:collapseCell:withIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2520,13 +2552,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/ViewController/ScoreCardVC.m"
-            timestampString = "494943862.960785"
+            filePath = "CAPScoringApp/BattingPlayerStatistics.m"
+            timestampString = "495026876.76005"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "702"
-            endingLineNumber = "702"
-            landmarkName = "-didClickSpiderWagonAction:"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "-GetFETCHSBBATTINGPLAYERSTATISTICSWagon::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2536,13 +2568,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/ViewController/ScoreCardVC.m"
-            timestampString = "494943862.960785"
+            filePath = "CAPScoringApp/BattingPlayerStatistics.m"
+            timestampString = "495026876.76005"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "719"
-            endingLineNumber = "719"
-            landmarkName = "-didClickSectorWagonAction:"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "-GetFETCHSBBATTINGPLAYERSTATISTICSPitch::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -2552,13 +2584,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/ViewController/ScoreCardVC.m"
-            timestampString = "494943911.380757"
+            filePath = "CAPScoringApp/BattingPlayerStatistics.m"
+            timestampString = "495027155.262932"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "737"
-            endingLineNumber = "737"
-            landmarkName = "-didClickpitchAction:"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "-GetFETCHSBBATTINGPLAYERSTATISTICSPitch::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/BattingPlayerStatistics.m"
+            timestampString = "495027994.588604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "-GetFETCHSBBATTINGPLAYERSTATISTICSWagon::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

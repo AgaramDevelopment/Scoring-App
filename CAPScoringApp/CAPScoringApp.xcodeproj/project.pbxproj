@@ -100,6 +100,10 @@
 		1883950D1D50BFF50056E443 /* FetchSEPageLoadRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1881303F1D0BF3ED00908F65 /* FetchSEPageLoadRecord.m */; };
 		1883DFEC1D27C43E00854814 /* TossTeamDetailRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883DFEB1D27C43E00854814 /* TossTeamDetailRecord.m */; };
 		1883E4901D2A3C85000A279C /* OverBallCountRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883E48F1D2A3C85000A279C /* OverBallCountRecord.m */; };
+		188597021D813AFE0013507E /* BattingPlayerStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 188597011D813AFE0013507E /* BattingPlayerStatistics.m */; };
+		188597051D813B220013507E /* BowlingPlayerStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 188597041D813B220013507E /* BowlingPlayerStatistics.m */; };
+		188597081D8176D00013507E /* BattingPayerStatisticsRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 188597071D8176D00013507E /* BattingPayerStatisticsRecord.m */; };
+		1885970B1D817DEB0013507E /* BattingStatisticsPitchRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1885970A1D817DEB0013507E /* BattingStatisticsPitchRecord.m */; };
 		18859C6C1D54BE1E0022875C /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 18859C6B1D54BE1E0022875C /* TNCA_DATABASE.sqlite */; };
 		1886718A1CFFF77E004DEDA0 /* AggressiveShotTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */; };
 		188767521D67355B00846C03 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188767511D67355B00846C03 /* CMPopTipView.m */; };
@@ -449,6 +453,14 @@
 		1883DFEB1D27C43E00854814 /* TossTeamDetailRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TossTeamDetailRecord.m; sourceTree = "<group>"; };
 		1883E48E1D2A3C85000A279C /* OverBallCountRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverBallCountRecord.h; sourceTree = "<group>"; };
 		1883E48F1D2A3C85000A279C /* OverBallCountRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverBallCountRecord.m; sourceTree = "<group>"; };
+		188597001D813AFE0013507E /* BattingPlayerStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingPlayerStatistics.h; sourceTree = "<group>"; };
+		188597011D813AFE0013507E /* BattingPlayerStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingPlayerStatistics.m; sourceTree = "<group>"; };
+		188597031D813B220013507E /* BowlingPlayerStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlingPlayerStatistics.h; sourceTree = "<group>"; };
+		188597041D813B220013507E /* BowlingPlayerStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlingPlayerStatistics.m; sourceTree = "<group>"; };
+		188597061D8176D00013507E /* BattingPayerStatisticsRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingPayerStatisticsRecord.h; sourceTree = "<group>"; };
+		188597071D8176D00013507E /* BattingPayerStatisticsRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingPayerStatisticsRecord.m; sourceTree = "<group>"; };
+		188597091D817DEB0013507E /* BattingStatisticsPitchRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingStatisticsPitchRecord.h; sourceTree = "<group>"; };
+		1885970A1D817DEB0013507E /* BattingStatisticsPitchRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingStatisticsPitchRecord.m; sourceTree = "<group>"; };
 		18859C6B1D54BE1E0022875C /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		188671881CFFF77E004DEDA0 /* AggressiveShotTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AggressiveShotTypeCell.h; sourceTree = "<group>"; };
 		188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggressiveShotTypeCell.m; sourceTree = "<group>"; };
@@ -1355,6 +1367,10 @@
 				18E655FB1D548B180010B387 /* CaptransactionslogEntryRecord.m */,
 				04C325861D6320E500F0E3A0 /* DBManagerLastInstance.h */,
 				04C325871D6320E500F0E3A0 /* DBManagerLastInstance.m */,
+				188597061D8176D00013507E /* BattingPayerStatisticsRecord.h */,
+				188597071D8176D00013507E /* BattingPayerStatisticsRecord.m */,
+				188597091D817DEB0013507E /* BattingStatisticsPitchRecord.h */,
+				1885970A1D817DEB0013507E /* BattingStatisticsPitchRecord.m */,
 			);
 			name = ReSource;
 			sourceTree = "<group>";
@@ -1466,6 +1482,10 @@
 				1837AA941CFF264A00B7259C /* FastBowlTypeCell.m */,
 				188671881CFFF77E004DEDA0 /* AggressiveShotTypeCell.h */,
 				188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */,
+				188597001D813AFE0013507E /* BattingPlayerStatistics.h */,
+				188597011D813AFE0013507E /* BattingPlayerStatistics.m */,
+				188597031D813B220013507E /* BowlingPlayerStatistics.h */,
+				188597041D813B220013507E /* BowlingPlayerStatistics.m */,
 			);
 			name = SubClass;
 			sourceTree = "<group>";
@@ -1842,9 +1862,11 @@
 				DCEFC87E1D28BC4E00451485 /* GetPlayerDetailOnAbsentHurt.m in Sources */,
 				DCEFC87D1D28BC0500451485 /* FollowOn.m in Sources */,
 				DCEFC87C1D28BBF400451485 /* EndSessionRecords.m in Sources */,
+				188597021D813AFE0013507E /* BattingPlayerStatistics.m in Sources */,
 				DCEFC87A1D28BBD400451485 /* DBManagerInsertScoreEngine.m in Sources */,
 				24F96F8B1D2FC90500798A9D /* PenaltygridVC.m in Sources */,
 				DCEFC87B1D28BBD400451485 /* InsertSEScoreEngineRecord.m in Sources */,
+				188597081D8176D00013507E /* BattingPayerStatisticsRecord.m in Sources */,
 				CE2D671F1D3E3E9D00A8246C /* SBJson4StreamWriterState.m in Sources */,
 				DCF677421D27D61A00B98749 /* LoginDBmanager.m in Sources */,
 				18F8FED01D277B11007A16A9 /* DBManagerEndBall.m in Sources */,
@@ -1880,6 +1902,7 @@
 				04EC77881D2956A5005B2608 /* BALLEVENTSPushRecords.m in Sources */,
 				187625241D1544CD009374F8 /* MatchRegistrationDetailsForScoreBoard.m in Sources */,
 				187229151D1264AE00CC168F /* EditModeVC.m in Sources */,
+				188597051D813B220013507E /* BowlingPlayerStatistics.m in Sources */,
 				1881304E1D0C725100908F65 /* Breaks.m in Sources */,
 				2469625F1D1E9A1200CC30D0 /* UpdateScoreEngineRecord.m in Sources */,
 				CE2D671B1D3E3E9D00A8246C /* SBJson4StreamParser.m in Sources */,
@@ -1945,6 +1968,7 @@
 				187625201D1544CD009374F8 /* BowlingSummaryElseDetailsForScoreBoard.m in Sources */,
 				187621011D1D0BC8006E160F /* FetchEndDay.m in Sources */,
 				24EFE77F1D2823A40073DE5C /* FetchBattingTeamTossRecord.m in Sources */,
+				1885970B1D817DEB0013507E /* BattingStatisticsPitchRecord.m in Sources */,
 				CEA275151D2A20FB007F6A28 /* WicketEventsPushRecord.m in Sources */,
 				24E7B4BB1D238D8C00EF0D55 /* DBManagerEndInnings.m in Sources */,
 				DCEFC8761D28B82600451485 /* DBManagerChangeTeamInsert.m in Sources */,

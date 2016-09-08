@@ -13,9 +13,12 @@
 #import "BowlingSummaryDetailsForScoreBoard.h"
 #import "CustomNavigationVC.h"
 #import "FetchSEPageLoadRecord.h"
+#import "BattingPlayerStatistics.h"
 
 @interface ScoreCardVC (){
     CustomNavigationVC *objCustomNavigation;
+    BattingPlayerStatistics *objBattingPlayerStatistics;
+
     
 }
 @end
@@ -50,7 +53,7 @@ int bowlerPostion = 0;
     
     self.table.HVTableViewDataSource = self;
     self.table.HVTableViewDelegate = self;
-    
+    objBattingPlayerStatistics =[[BattingPlayerStatistics alloc]init];
     muliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
 
     
@@ -590,8 +593,6 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         }
         
         
-        
-        
         ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:fallWktCell];
         if (cell == nil) {
             [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
@@ -712,6 +713,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     self.batsmanCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.spiderWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
     self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
+    BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
+    NSMutableArray * objArray =[objBattingPlayerStatistics GetFETCHSBBATTINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
 }
 
 -(IBAction)didClickSectorWagonAction:(id)sender
@@ -729,6 +732,10 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     self.batsmanCell.spiderWagon_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.sectorWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
         self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
+    
+    BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
+    NSMutableArray * objArray =[objBattingPlayerStatistics GetFETCHSBBATTINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
+
     
 }
 
@@ -751,6 +758,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     self.batsmanCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.spiderWagon_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.pitch_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+    BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
+    NSMutableArray * objArray =[objBattingPlayerStatistics GetFETCHSBBATTINGPLAYERSTATISTICSPitch :competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
+
 
   
 }
