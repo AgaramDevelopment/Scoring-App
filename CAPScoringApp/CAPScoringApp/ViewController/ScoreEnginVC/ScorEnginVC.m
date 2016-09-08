@@ -4490,6 +4490,8 @@
                 _ballEventRecord.objWWY1=@(186);
                 _ballEventRecord.objWWX2=@(221);
                 _ballEventRecord.objWWY2=@(186);
+              _ballEventRecord.objWWREGION=@"";
+               
             }
             else{
                 
@@ -4497,6 +4499,7 @@
                 _ballEventRecord.objWWY1=@(145);
                 _ballEventRecord.objWWX2=@(172);
                 _ballEventRecord.objWWY2=@(145);
+                 _ballEventRecord.objWWREGION=@"";
                 
             }
             
