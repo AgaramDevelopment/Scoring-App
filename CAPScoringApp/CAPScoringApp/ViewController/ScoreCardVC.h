@@ -146,5 +146,8 @@
 @property (nonatomic,strong) NSMutableArray *selectedPlayerFilterArray;
 @property (nonatomic,strong) NSMutableArray *selectedPlayerArray;
 
+@property(nonatomic,strong) NSString * BatmenStyle;
+
+
 
 @end

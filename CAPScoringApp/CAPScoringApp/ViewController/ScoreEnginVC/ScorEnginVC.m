@@ -1769,6 +1769,7 @@
                          self.sideviewXposition.constant =-300;
                          [UIView beginAnimations:nil context:nil];
                          [UIView setAnimationDuration:5.3];
+                          self.CommonView.userInteractionEnabled= YES;
                          [UIView commitAnimations];
                          
                      }];

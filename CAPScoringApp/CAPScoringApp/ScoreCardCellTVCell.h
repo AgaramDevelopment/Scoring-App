@@ -11,8 +11,6 @@
 @interface ScoreCardCellTVCell : UITableViewCell
 
 @property (strong,nonatomic) IBOutlet UIView * expand_View;
-
-
 @property (strong,nonatomic) IBOutlet UIImageView * wagonPitch_img;
 @property (strong,nonatomic) IBOutlet UIButton * spiderWagon_Btn;
 @property (strong,nonatomic) IBOutlet UIButton * sectorWagon_Btn;
@@ -24,6 +22,24 @@
 @property (strong,nonatomic) IBOutlet UIButton * wangon3s_Btn;
 @property (strong,nonatomic) IBOutlet UIButton * wangon4s_Btn;
 @property (strong,nonatomic) IBOutlet UIButton * wangon6s_Btn;
+
+
+
+@property (strong,nonatomic) IBOutlet UIView * expandBowler_View;
+@property (strong,nonatomic) IBOutlet UIImageView * BowlerwagonPitch_img;
+@property (strong,nonatomic) IBOutlet UIButton * BowlerspiderWagon_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * BowlersectorWagon_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * Bowlerpitch_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * BowleronSide_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * BowleroffSide_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * Bowlerwangon1s_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * Bowlerwangon2s_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * Bowlerwangon3s_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * Bowlerwangon4s_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * Bowlerwangon6s_Btn;
+
+
+
 
 
 @property (strong, nonatomic) IBOutlet UIButton *btn_expand;

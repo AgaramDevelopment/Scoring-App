@@ -10,6 +10,6 @@
 
 @implementation BattingStatisticsPitchRecord
 
-@synthesize PMX2,PMy2,PMLengthCode,PMLengthName,BattingStyle,IsonSide,IsWicket,isDontBall;
+@synthesize PMLinecode,PMLineName,PMX2,PMy2,PMLengthCode,PMLengthName,BattingStyle,IsonSide,IsWicket,isDontBall;
 
 @end

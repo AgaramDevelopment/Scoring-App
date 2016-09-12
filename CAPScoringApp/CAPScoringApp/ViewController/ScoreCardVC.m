@@ -14,13 +14,28 @@
 #import "CustomNavigationVC.h"
 #import "FetchSEPageLoadRecord.h"
 #import "BattingPlayerStatistics.h"
+#import "BattingPayerStatisticsRecord.h"
+#import "BattingStatisticsPitchRecord.h"
+#import "BowlingPlayerStatistics.h"
+#import "BowlerStaticsRecord.h"
+#import "BowlerStrickPitchRecord.h"
+
+
+#define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 
 @interface ScoreCardVC (){
     CustomNavigationVC *objCustomNavigation;
     BattingPlayerStatistics *objBattingPlayerStatistics;
-
+    BowlingPlayerStatistics * objBowlingStatistics;
+    NSString *wagonregiontext;
+    NSString *regioncode;
+    UIImageView * Img_ball;
     
 }
+@property (strong, nonatomic) IBOutlet UILabel *cener_lbl;
 @end
 
 @implementation ScoreCardVC
@@ -54,6 +69,7 @@ int bowlerPostion = 0;
     self.table.HVTableViewDataSource = self;
     self.table.HVTableViewDelegate = self;
     objBattingPlayerStatistics =[[BattingPlayerStatistics alloc]init];
+    objBowlingStatistics       =[[BowlingPlayerStatistics alloc]init];
     muliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
 
     
@@ -631,6 +647,28 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             bowlerCellTvc = self.bowlerCell;
             self.bowlerCell = nil;
         }
+        
+        [bowlerCellTvc.BowlerspiderWagon_Btn addTarget:self action:@selector(didClickBowlingSpiderWagonAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [bowlerCellTvc.BowlersectorWagon_Btn addTarget:self action:@selector(didClickBowlingSectorWagonAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [bowlerCellTvc.Bowlerpitch_Btn addTarget:self action:@selector(didClickBowlingpitchAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [bowlerCellTvc.BowleronSide_Btn addTarget:self action:@selector(didClickBowlingonSideAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [bowlerCellTvc.BowleroffSide_Btn addTarget:self action:@selector(didClickBowlingOffSideAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [bowlerCellTvc.Bowlerwangon1s_Btn addTarget:self action:@selector(didClickBowling1sAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [bowlerCellTvc.Bowlerwangon2s_Btn addTarget:self action:@selector(didClickBowling2sAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [bowlerCellTvc.Bowlerwangon3s_Btn addTarget:self action:@selector(didClickBowling3sAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [bowlerCellTvc.Bowlerwangon4s_Btn addTarget:self action:@selector(didClickBowling4sAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [bowlerCellTvc.Bowlerwangon6s_Btn addTarget:self action:@selector(didClickBowling6sAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
         [bowlerCellTvc setBackgroundColor:[UIColor clearColor]];
         
         bowlerCellTvc.lbl_bowler_ecno.text =[NSString stringWithFormat:@"%.02f",[bowlingSummaryForScoreBoard.ECONOMY floatValue]];
@@ -677,7 +715,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     }else if(batsmanPostion <= indexPath.row && extraPostion>indexPath.row){
         
         if (isexpanded)
-            return 400;
+            return 550;
         return 70;
     }else if(extraPostion == indexPath.row){
         return 44;
@@ -692,6 +730,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     }else if(bowlerHeaderPosition == indexPath.row){
         return 44;
     }else if(indexPath.row >= bowlerPostion){
+        
+        if (isexpanded)
+            return 550;
         return 70;
     }
     
@@ -713,8 +754,50 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     self.batsmanCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.spiderWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
     self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
-    BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
-    NSMutableArray * objArray =[objBattingPlayerStatistics GetFETCHSBBATTINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
+    BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row-1];
+    NSMutableArray * objArray =[objBattingPlayerStatistics GetFETCHSBBATTINGPLAYERSTATISTICSWagon :competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
+    int x1position;
+    int x2position;
+    int y1position;
+    int y2position;
+    for(int i=0; i<objArray.count;i++)
+    {
+        BattingPayerStatisticsRecord * objRecord =(BattingPayerStatisticsRecord *)[objArray objectAtIndex:i];
+        x1position = [objRecord.WWX1 intValue];
+        y1position = [objRecord.WWY1 intValue];
+        x2position  =[objRecord .WWX2 intValue];
+        y2position  =[objRecord.WWY2 intValue];
+        
+        
+    if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+        
+        
+        for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
+            if ([layer.name isEqualToString:@"DrawLine"]) {
+                [layer removeFromSuperlayer];
+                break;
+            }
+        }
+        
+        //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
+        int Xposition = x1position;
+        int Yposition = y1position;
+        CGMutablePathRef straightLinePath = CGPathCreateMutable();
+        CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+        CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+        CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+        shapeLayer.path = straightLinePath;
+        UIColor *fillColor = [UIColor redColor];
+        shapeLayer.fillColor = fillColor.CGColor;
+        UIColor *strokeColor = [UIColor redColor];
+        shapeLayer.strokeColor = strokeColor.CGColor;
+        shapeLayer.lineWidth = 2.0f;
+        shapeLayer.fillRule = kCAFillRuleNonZero;
+        shapeLayer.name = @"DrawLine";
+        [self.batsmanCell.wagonPitch_img.layer addSublayer:shapeLayer];
+        
+    }
+    }
 }
 
 -(IBAction)didClickSectorWagonAction:(id)sender
@@ -735,13 +818,51 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
     NSMutableArray * objArray =[objBattingPlayerStatistics GetFETCHSBBATTINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
-
     
+    int x1position;
+    int x2position;
+    int y1position;
+    int y2position;
+
+    for(int i=0; i<objArray.count;i++)
+    {
+        BattingPayerStatisticsRecord * objRecord =(BattingPayerStatisticsRecord *)[objArray objectAtIndex:i];
+        x1position = [objRecord.WWX1 intValue];
+        y1position = [objRecord.WWY1 intValue];
+        x2position  =[objRecord .WWX2 intValue];
+        y2position  =[objRecord.WWY2 intValue];
+    
+    if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+        
+        
+        for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
+            if ([layer.name isEqualToString:@"DrawLine"]) {
+                [layer removeFromSuperlayer];
+                break;
+            }
+        }
+        
+        CGMutablePathRef straightLinePath = CGPathCreateMutable();
+        CGPathMoveToPoint(straightLinePath, NULL, x1position, y1position);
+        CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+        CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+        shapeLayer.path = straightLinePath;
+        UIColor *fillColor = [UIColor redColor];
+        shapeLayer.fillColor = fillColor.CGColor;
+        UIColor *strokeColor = [UIColor redColor];
+        shapeLayer.strokeColor = strokeColor.CGColor;
+        shapeLayer.lineWidth = 2.0f;
+        shapeLayer.fillRule = kCAFillRuleNonZero;
+        shapeLayer.name = @"DrawLine";
+        [self.batsmanCell.wagonPitch_img.layer addSublayer:shapeLayer];
+        
+    }
+    }
+
 }
 
 -(IBAction)didClickpitchAction:(id)sender
 {
-    
     
     ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
     HVTableView* view = (HVTableView*) cell.superview;
@@ -760,8 +881,30 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     self.batsmanCell.pitch_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
     BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
     NSMutableArray * objArray =[objBattingPlayerStatistics GetFETCHSBBATTINGPLAYERSTATISTICSPitch :competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
+    
+    int xposition;
+    int yposition;
 
-
+    for(int i=0; i<objArray.count;i++)
+    {
+        BattingStatisticsPitchRecord * objRecord =(BattingStatisticsPitchRecord *)[objArray objectAtIndex:i];
+        xposition = [objRecord.PMX2 intValue];
+        yposition = [objRecord.PMy2 intValue];
+        
+    if(!(xposition == 1 && yposition ==1)){
+        
+        
+        if(Img_ball != nil)
+        {
+            [Img_ball removeFromSuperview];
+        }
+        
+        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
+        Img_ball.image =[UIImage imageNamed:@"RedBall"];
+        [self.batsmanCell.wagonPitch_img addSubview:Img_ball];
+        
+    }
+    }
   
 }
 
@@ -808,6 +951,208 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 }
 
 -(IBAction)didClick6sAction:(id)sender
+{
+    
+}
+-(IBAction)didClickBowlingSpiderWagonAction:(id)sender
+{
+    ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
+    HVTableView* view = (HVTableView*) cell.superview;
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
+    NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonPosition];
+    int row = indexPath.row;
+    
+    NSLog(@"Indexpath = %d",row);
+    
+    
+    self.bowlerCell.pitch_Btn.backgroundColor =[UIColor clearColor];
+    self.bowlerCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
+    self.bowlerCell.spiderWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+    self.bowlerCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
+    BowlingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BowlingSummaryForScoreBoard objectAtIndex:indexPath.row-7];
+    NSMutableArray * objArray =[objBowlingStatistics GetFETCHSBBOWLINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BOWLERCODE];
+    int x1position;
+    int x2position;
+    int y1position;
+    int y2position;
+    for(int i=0; i<objArray.count;i++)
+    {
+        BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[objArray objectAtIndex:i];
+        x1position = [objRecord.WWX1 intValue];
+        y1position = [objRecord.WWY1 intValue];
+        x2position  =[objRecord .WWX2 intValue];
+        y2position  =[objRecord.WWY2 intValue];
+        
+        
+        if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+            
+            
+            for (CALayer *layer in self.bowlerCell.wagonPitch_img.layer.sublayers) {
+                if ([layer.name isEqualToString:@"DrawLine"]) {
+                    [layer removeFromSuperlayer];
+                    break;
+                }
+            }
+            
+            //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
+            int Xposition = x1position;
+            int Yposition = y1position;
+            CGMutablePathRef straightLinePath = CGPathCreateMutable();
+            CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+            CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+            CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+            shapeLayer.path = straightLinePath;
+            UIColor *fillColor = [UIColor redColor];
+            shapeLayer.fillColor = fillColor.CGColor;
+            UIColor *strokeColor = [UIColor redColor];
+            shapeLayer.strokeColor = strokeColor.CGColor;
+            shapeLayer.lineWidth = 2.0f;
+            shapeLayer.fillRule = kCAFillRuleNonZero;
+            shapeLayer.name = @"DrawLine";
+            [self.bowlerCell.wagonPitch_img.layer addSublayer:shapeLayer];
+            
+        }
+    }
+}
+
+-(IBAction)didClickBowlingSectorWagonAction:(id)sender
+{
+    ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
+    HVTableView* view = (HVTableView*) cell.superview;
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
+    NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonPosition];
+    int row = indexPath.row;
+    
+    NSLog(@"Indexpath = %d",row);
+    
+    
+    self.bowlerCell.pitch_Btn.backgroundColor =[UIColor clearColor];
+    self.bowlerCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
+    self.bowlerCell.spiderWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+    self.bowlerCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
+    BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:row-7];
+    NSMutableArray * objArray =[objBowlingStatistics GetFETCHSBBOWLINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BOWLERCODE];
+    int x1position;
+    int x2position;
+    int y1position;
+    int y2position;
+    for(int i=0; i<objArray.count;i++)
+    {
+        BattingPayerStatisticsRecord * objRecord =(BattingPayerStatisticsRecord *)[objArray objectAtIndex:i];
+        x1position = [objRecord.WWX1 intValue];
+        y1position = [objRecord.WWY1 intValue];
+        x2position  =[objRecord .WWX2 intValue];
+        y2position  =[objRecord.WWY2 intValue];
+        
+        
+        if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+            
+            
+            for (CALayer *layer in self.bowlerCell.wagonPitch_img.layer.sublayers) {
+                if ([layer.name isEqualToString:@"DrawLine"]) {
+                    [layer removeFromSuperlayer];
+                    break;
+                }
+            }
+            
+            //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
+            int Xposition = x1position;
+            int Yposition = y1position;
+            CGMutablePathRef straightLinePath = CGPathCreateMutable();
+            CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+            CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+            CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+            shapeLayer.path = straightLinePath;
+            UIColor *fillColor = [UIColor redColor];
+            shapeLayer.fillColor = fillColor.CGColor;
+            UIColor *strokeColor = [UIColor redColor];
+            shapeLayer.strokeColor = strokeColor.CGColor;
+            shapeLayer.lineWidth = 2.0f;
+            shapeLayer.fillRule = kCAFillRuleNonZero;
+            shapeLayer.name = @"DrawLine";
+            [self.bowlerCell.wagonPitch_img.layer addSublayer:shapeLayer];
+            
+        }
+    }
+
+}
+
+-(IBAction)didClickBowlingpitchAction:(id)sender
+{
+    ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
+    HVTableView* view = (HVTableView*) cell.superview;
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
+    NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonPosition];
+    int row = indexPath.row;
+    
+    NSLog(@"Indexpath = %d",row);
+    
+    NSLog(@"Indexpath = %@",indexPath);
+    
+    self.bowlerCell.wagonPitch_img.image=[UIImage imageNamed:@"pichmapRH"];
+    
+    self.bowlerCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
+    self.bowlerCell.spiderWagon_Btn.backgroundColor =[UIColor clearColor];
+    self.bowlerCell.pitch_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+    BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 7];
+    NSMutableArray * objArray =[objBowlingStatistics GetFETCHSBBOWLINGPLAYERSTATISTICSPitch:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
+    
+    int xposition;
+    int yposition;
+    
+    for(int i=0; i<objArray.count;i++)
+    {
+        BowlerStrickPitchRecord * objRecord =(BowlerStrickPitchRecord *)[objArray objectAtIndex:i];
+        xposition = [objRecord.PMX2 intValue];
+        yposition = [objRecord.PMY2 intValue];
+        
+        if(!(xposition == 1 && yposition ==1)){
+            
+            
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
+            Img_ball.image =[UIImage imageNamed:@"RedBall"];
+            [self.bowlerCell.wagonPitch_img addSubview:Img_ball];
+            
+        }
+    }
+
+}
+
+-(IBAction)didClickBowlingonSideAction:(id)sender
+{
+    
+}
+
+-(IBAction)didClickBowlingOffSideAction:(id)sender
+{
+    
+}
+
+-(IBAction)didClickBowling1sAction:(id)sender
+{
+    
+}
+
+-(IBAction)didClickBowling2sAction:(id)sender
+{
+    
+}
+-(IBAction)didClickBowling3sAction:(id)sender
+{
+    
+}
+
+-(IBAction)didClickBowling4sAction:(id)sender
+{
+    
+}
+
+-(IBAction)didClickBowling6sAction:(id)sender
 {
     
 }
@@ -926,7 +1271,58 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     @catch (NSException *exception) {
     }
     
-    
-    
 }
+
+
+//-(void)wagonwheel:(UIImageView *) wagonwheelImg :(int ) x1position :(int ) y1position :(int ) x2position :(int ) y2position
+//
+//{
+//    if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+//        
+//        
+//        for (CALayer *layer in wagonwheelImg.layer.sublayers) {
+//            if ([layer.name isEqualToString:@"DrawLine"]) {
+//                [layer removeFromSuperlayer];
+//                break;
+//            }
+//        }
+//        
+//        CGMutablePathRef straightLinePath = CGPathCreateMutable();
+//        CGPathMoveToPoint(straightLinePath, NULL, x1position, y1position);
+//        CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+//        CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+//        shapeLayer.path = straightLinePath;
+//        UIColor *fillColor = [UIColor redColor];
+//        shapeLayer.fillColor = fillColor.CGColor;
+//        UIColor *strokeColor = [UIColor redColor];
+//        shapeLayer.strokeColor = strokeColor.CGColor;
+//        shapeLayer.lineWidth = 2.0f;
+//        shapeLayer.fillRule = kCAFillRuleNonZero;
+//        shapeLayer.name = @"DrawLine";
+//        [wagonwheelImg.layer addSublayer:shapeLayer];
+//        
+//    }
+//
+//}
+
+
+//-(void)pitchMap :(int) xposition :(int) yposition :(UIImageView *) pitchMap
+//
+//{
+//    if(!(xposition == 1 && yposition ==1)){
+//       
+//        
+//        if(Img_ball != nil)
+//        {
+//            [Img_ball removeFromSuperview];
+//        }
+//        
+//        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
+//        Img_ball.image =[UIImage imageNamed:@"RedBall"];
+//        [pitchMap addSubview:Img_ball];
+//        
+//    }
+//
+//}
+
 @end

@@ -8,6 +8,8 @@
 
 #import "BowlingPlayerStatistics.h"
 #import <sqlite3.h>
+#import "BowlerStaticsRecord.h"
+#import "BowlerStrickPitchRecord.h"
 
 
 
@@ -61,17 +63,41 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALL.WWREGION , (BALL.WWX1 - 24) WWX1, (BALL.WWY1 + 2) WWY1, (BALL.WWX2 - 24) WWX2, (BALL.WWY2 + 2) WWY2, BALL.RUNS, BALL.ISFOUR, BALL.ISSIX, CASE WHEN BALL.WWREGION IN ('MSC152', 'MSC153', 'MSC154', 'MSC180', 'MSC181', 'MSC182', 'MSC183', 'MSC184', 'MSC185', 'MSC186', 'MSC187', 'MSC188', 'MSC189', 'MSC190', 'MSC191', 'MSC192', 'MSC193', 'MSC194', 'MSC195', 'MSC196', 'MSC197', 'MSC198', 'MSC199', 'MSC200', 'MSC201', 'MSC202', 'MSC203', 'MSC204', 'MSC205', 'MSC206', 'MSC207', 'MSC208', 'MSC209', 'MSC210', 'MSC211', 'MSC212', 'MSC213', 'MSC214', 'MSC215', 'MSC216', 'MSC217') WHEN BALL.WWREGION IN ('MSC155', 'MSC156', 'MSC157', 'MSC158', 'MSC159', 'MSC160', 'MSC161', 'MSC162', 'MSC163', 'MSC164', 'MSC165', 'MSC166', 'MSC167', 'MSC168', 'MSC169', 'MSC170', 'MSC171', 'MSC172', 'MSC173', 'MSC174', 'MSC175', 'MSC176', 'MSC177', 'MSC178', 'MSC179') , META.METADATATYPECODE SECTORREGIONCODE, META.METADATATYPEDESCRIPTION SECTORREGIONNAME, STKR.BATTINGSTYLE, CASE WHEN BYES = 0 AND LEGBYES = 0 THEN 0 ELSE 1 END OTHERRUNS FROM BALLEVENTS BALL INNER JOIN METADATA META ON BALL.WWREGION = META.METASUBCODE INNER JOIN PLAYERMASTER STKR ON BALL.STRIKERCODE = STKR.PLAYERCODE WHERE BALL.COMPETITIONCODE	= '%@' AND   BALL.MATCHCODE = '%@' AND   BALL.INNINGSNO = '%@' AND   BALL.BOWLERCODE = '%@'" ,COMPETITIONCODE,MATCHCODE,INNINGSNO,PLAYERCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT BALL.WWREGION , (BALL.WWX1 - 24) WWX1, (BALL.WWY1 + 2) WWY1, (BALL.WWX2 - 24) WWX2, (BALL.WWY2 + 2) WWY2, BALL.RUNS, BALL.ISFOUR, BALL.ISSIX,CASE WHEN BALL.WWREGION IN ('MSC152', 'MSC153', 'MSC154', 'MSC180', 'MSC181', 'MSC182', 'MSC183', 'MSC184', 'MSC185', 'MSC186', 'MSC187', 'MSC188', 'MSC189', 'MSC190', 'MSC191', 'MSC192', 'MSC193', 'MSC194', 'MSC195', 'MSC196', 'MSC197', 'MSC198', 'MSC199', 'MSC200', 'MSC201', 'MSC202', 'MSC203', 'MSC204', 'MSC205', 'MSC206', 'MSC207', 'MSC208', 'MSC209', 'MSC210', 'MSC211', 'MSC212', 'MSC213', 'MSC214', 'MSC215', 'MSC216', 'MSC217') THEN 0 WHEN BALL.WWREGION IN ('MSC155', 'MSC156', 'MSC157', 'MSC158', 'MSC159', 'MSC160', 'MSC161', 'MSC162', 'MSC163', 'MSC164', 'MSC165', 'MSC166', 'MSC167', 'MSC168', 'MSC169', 'MSC170', 'MSC171', 'MSC172', 'MSC173', 'MSC174', 'MSC175', 'MSC176', 'MSC177', 'MSC178', 'MSC179') THEN 1 ELSE -1 END ISONSIDE, META.METADATATYPECODE SECTORREGIONCODE, META.METADATATYPEDESCRIPTION SECTORREGIONNAME, STKR.BATTINGSTYLE, CASE WHEN BYES = 0 AND LEGBYES = 0 THEN 0 ELSE 1 END OTHERRUNS FROM BALLEVENTS BALL INNER JOIN METADATA META ON BALL.WWREGION = META.METASUBCODE INNER JOIN PLAYERMASTER STKR ON BALL.STRIKERCODE = STKR.PLAYERCODE WHERE BALL.COMPETITIONCODE	= '%@' AND   BALL.MATCHCODE = '%@' AND   BALL.INNINGSNO = '%@' AND   BALL.BOWLERCODE = '%@'" ,COMPETITIONCODE,MATCHCODE,INNINGSNO,PLAYERCODE];
         
         const char *update_stmt = [updateSQL UTF8String];
-        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK){
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
             
-            if (sqlite3_step(statement) == SQLITE_DONE)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW)
             {
-                //                ChangeTeamRecord *record=[[ChangeTeamRecord alloc]init];
-                //                record.TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                //                record.TEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                //                [GetBowlingTDetails addObject:record];
+                BowlerStaticsRecord *record=[[BowlerStaticsRecord alloc]init];
+                record.WWRegion=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.WWX1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                
+                record.WWY1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                
+                record.WWX2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                
+                record.WWY2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                
+                record.Runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                
+                record.ISFour=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,6)];
+                
+                record.ISSix=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                
+                record.ISonside=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,8)];
+                
+                record.Sectorregioncode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                
+                record.sectorregionname=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                
+                record.BattingStyle=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                
+                record.otherRuns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,12)];
+                
+                [GetBowlingTDetails addObject:record];
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
@@ -97,10 +123,30 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
-                //                ChangeTeamRecord *record=[[ChangeTeamRecord alloc]init];
-                //                record.TEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                //                record.TEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                //                [GetBowlingTDetails addObject:record];
+                BowlerStrickPitchRecord *record=[[BowlerStrickPitchRecord alloc]init];
+                
+                record.PMLengthCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                
+                record.PMLengthName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                
+                record.PMLengthCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                
+                record.PMLengthName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                
+                record.Runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                
+                record.PMX2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                
+                record.PMY2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                
+                record.BattingStyle=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                
+                record.ISDotBall=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                
+                record.ISWicket=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                
+                
+                [GetBowlingTDetails addObject:record];
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);

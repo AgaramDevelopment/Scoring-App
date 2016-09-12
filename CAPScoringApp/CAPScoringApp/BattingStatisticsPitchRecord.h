@@ -10,6 +10,10 @@
 
 @interface BattingStatisticsPitchRecord : NSObject
 
+@property (nonatomic,strong) NSString * PMLinecode;
+
+@property (nonatomic,strong) NSString * PMLineName;
+
 @property (nonatomic,strong) NSString * PMLengthCode;
 
 @property (nonatomic,strong) NSString * PMLengthName;
