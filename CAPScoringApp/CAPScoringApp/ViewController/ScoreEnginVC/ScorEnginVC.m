@@ -2074,7 +2074,14 @@
         FastBowlTypeCell *playerlistCell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier
                                                                            forIndexPath:indexPath];
         BowlerEvent *objPlayerlistRecord=(BowlerEvent*)[_PlayerlistArray objectAtIndex:indexPath.row];
-        playerlistCell.lbl_fastBowl.text = objPlayerlistRecord.BowlerName;
+        if(indexPath.row > 10)
+        {
+           playerlistCell.lbl_fastBowl.text =[NSString stringWithFormat:@"%@ (SUB)",objPlayerlistRecord.BowlerName] ;
+        }
+        else
+        {
+            playerlistCell.lbl_fastBowl.text = objPlayerlistRecord.BowlerName;
+        }
         self.lbl_fast.text=@"Fielders";
         
         // this is where you set your color view
