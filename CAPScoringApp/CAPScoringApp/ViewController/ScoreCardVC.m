@@ -33,6 +33,7 @@
     NSString *wagonregiontext;
     NSString *regioncode;
     UIImageView * Img_ball;
+    BOOL isPitch_Img;
     
 }
 @property (strong, nonatomic) IBOutlet UILabel *cener_lbl;
@@ -144,6 +145,7 @@ int bowlerPostion = 0;
 
     
     [self setInitView];
+   
     int btnSize =self.btn_sec_inns_id.frame.origin.x;
     
     //    self.btn_tab_fst_inns.constant =200;
@@ -348,16 +350,24 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     
 }
--(void)tableView:(UITableView *)tableView expandCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
-{
-    UILabel *detailLabel = (UILabel *)[cell viewWithTag:3];
-    UIView *purchaseButton = (UIButton *)[cell viewWithTag:10];
-    purchaseButton.alpha = 0;
-    purchaseButton.hidden = NO;
+-(void)tableView:(UITableView *)tableView expandCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *) indexPath {
+    
+
+    //UILabel *detailLabel = (UILabel *)[cell viewWithTag:3];
+    UIView * expendbattingview = (UIView *)[cell viewWithTag:10];
+    
+     UIView * expendbowlerview = (UIView *)[cell viewWithTag:11];
+    
+    expendbattingview.alpha = 0;
+    expendbattingview.hidden = NO;
+    
+    expendbowlerview.alpha = 0;
+    expendbowlerview.hidden = NO;
     
     [UIView animateWithDuration:.5 animations:^{
-        detailLabel.text = @"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-        purchaseButton.alpha = 1;
+        
+        expendbattingview.alpha = 1;
+         expendbowlerview.alpha = 1;
         [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(3.14);
     }];
 }
@@ -365,12 +375,13 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 //perform your collapse stuff (may include animation) for cell here. It will be called when the user touches an expanded cell so it gets collapsed or the table is in the expandOnlyOneCell satate and the user touches another item, So the last expanded item has to collapse
 -(void)tableView:(UITableView *)tableView collapseCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
-    UILabel *detailLabel = (UILabel *)[cell viewWithTag:3];
+   
     UIView *purchaseButton = (UIButton *)[cell viewWithTag:10];
-    
+    UIView * expendbowlerview = (UIView *)[cell viewWithTag:11];
     [UIView animateWithDuration:.5 animations:^{
-        detailLabel.text = @"Lorem ipsum dolor sit amet";
+       
         purchaseButton.alpha = 0;
+        expendbowlerview.alpha=0;
         [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(-3.14);
     } completion:^(BOOL finished) {
         purchaseButton.hidden = YES;
@@ -432,7 +443,13 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             
             
         }
-        UIView *purchaseButton = (UIView *)[cell viewWithTag:10];
+        
+        if(isPitch_Img ==NO)
+        {
+            self.batsmanCell.pitchMap_img.hidden=YES;
+        }
+        
+        UIView *ExpandBattingview = (UIView *)[cell viewWithTag:10];
         [cell.spiderWagon_Btn addTarget:self action:@selector(didClickSpiderWagonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [cell.sectorWagon_Btn addTarget:self action:@selector(didClickSectorWagonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -483,11 +500,11 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         if (!isExpanded) //prepare the cell as if it was collapsed! (without any animation!)
         {
             //[cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(0);
-            purchaseButton.hidden = YES;
+            ExpandBattingview.hidden = YES;
         }
         else ///prepare the cell as if it was expanded! (without any animation!)
         {
-            purchaseButton.hidden = NO;
+            ExpandBattingview.hidden = NO;
 
         }
         
@@ -648,6 +665,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             self.bowlerCell = nil;
         }
         
+         UIView * ExpandBowlerView = (UIView *)[bowlerCellTvc viewWithTag:11];
+        
         [bowlerCellTvc.BowlerspiderWagon_Btn addTarget:self action:@selector(didClickBowlingSpiderWagonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [bowlerCellTvc.BowlersectorWagon_Btn addTarget:self action:@selector(didClickBowlingSectorWagonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -667,6 +686,20 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         [bowlerCellTvc.Bowlerwangon4s_Btn addTarget:self action:@selector(didClickBowling4sAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [bowlerCellTvc.Bowlerwangon6s_Btn addTarget:self action:@selector(didClickBowling6sAction:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        if (!isExpanded) //prepare the cell as if it was collapsed! (without any animation!)
+        {
+            //[cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(0);
+            ExpandBowlerView.hidden = YES;
+        }
+        else ///prepare the cell as if it was expanded! (without any animation!)
+        {
+            ExpandBowlerView.hidden = NO;
+            
+        }
+
+        
         
         
         [bowlerCellTvc setBackgroundColor:[UIColor clearColor]];
@@ -741,6 +774,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
 -(IBAction)didClickSpiderWagonAction:(id)sender
 {
+    isPitch_Img = NO;
     ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
     HVTableView* view = (HVTableView*) cell.superview;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
@@ -749,7 +783,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     NSLog(@"Indexpath = %d",row);
     
-    
+    self.batsmanCell.pitchMap_img.hidden=YES;
+    self.batsmanCell.wagonPitch_img.hidden=NO;
     self.batsmanCell.pitch_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.spiderWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
@@ -802,6 +837,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
 -(IBAction)didClickSectorWagonAction:(id)sender
 {
+    isPitch_Img = NO;
    
     ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
     HVTableView* view = (HVTableView*) cell.superview;
@@ -810,6 +846,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     int row = indexPath.row;
 
      NSLog(@"Indexpath = %d",row);
+     self.batsmanCell.wagonPitch_img.hidden=NO;
+     self.batsmanCell.pitchMap_img.hidden=YES;
     
     self.batsmanCell.pitch_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.spiderWagon_Btn.backgroundColor =[UIColor clearColor];
@@ -863,7 +901,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
 -(IBAction)didClickpitchAction:(id)sender
 {
-    
+    isPitch_Img = YES;
+   
+
     ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
     HVTableView* view = (HVTableView*) cell.superview;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
@@ -873,8 +913,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     NSLog(@"Indexpath = %d",row);
     
     NSLog(@"Indexpath = %@",indexPath);
-    
-        self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"pichmapRH"];
+    self.batsmanCell.wagonPitch_img.hidden=YES;
+    self.batsmanCell.pitchMap_img.hidden=NO;
+        self.batsmanCell.pitchMap_img.image=[UIImage imageNamed:@"pichmapRH"];
     
     self.batsmanCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.spiderWagon_Btn.backgroundColor =[UIColor clearColor];
@@ -888,20 +929,20 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     for(int i=0; i<objArray.count;i++)
     {
         BattingStatisticsPitchRecord * objRecord =(BattingStatisticsPitchRecord *)[objArray objectAtIndex:i];
-        xposition = [objRecord.PMX2 intValue];
-        yposition = [objRecord.PMy2 intValue];
+        xposition = [objRecord.PMX2 intValue]+10;
+        yposition = [objRecord.PMy2 intValue]-20;
         
     if(!(xposition == 1 && yposition ==1)){
         
         
-        if(Img_ball != nil)
-        {
-            [Img_ball removeFromSuperview];
-        }
-        
+//        if(Img_ball != nil)
+//        {
+//            [Img_ball removeFromSuperview];
+//        }
+//        
         Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
         Img_ball.image =[UIImage imageNamed:@"RedBall"];
-        [self.batsmanCell.wagonPitch_img addSubview:Img_ball];
+        [self.batsmanCell.pitchMap_img addSubview:Img_ball];
         
     }
     }
@@ -910,17 +951,20 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
 -(IBAction)didClickonSideAction:(id)sender
 {
+    
+    isPitch_Img = NO;
     ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
     HVTableView* view = (HVTableView*) cell.superview;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
     NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonPosition];
     
-    if([cell.wagonPitch_img.image  isEqual: @"LHWagon"] || [cell.wagonPitch_img.image  isEqual: @"RHWagon"])
+    int row = indexPath.row;
+    if([self.batsmanCell.wagonPitch_img.image  isEqual: @"LHWagon"] || [self.batsmanCell.wagonPitch_img.image  isEqual: @"RHWagon"])
     {
         
     }
     
-    else if ([cell.wagonPitch_img.image  isEqual: @"pichmapRH"] || [cell.wagonPitch_img.image  isEqual: @"pichmapLH"])
+    else if ([self.batsmanCell.wagonPitch_img.image  isEqual: @"pichmapRH"] || [self.batsmanCell.wagonPitch_img.image  isEqual: @"pichmapLH"])
     {
         
     }
@@ -956,6 +1000,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 }
 -(IBAction)didClickBowlingSpiderWagonAction:(id)sender
 {
+    
+    isPitch_Img = NO;
     ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
     HVTableView* view = (HVTableView*) cell.superview;
     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];

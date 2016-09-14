@@ -12,6 +12,7 @@
 
 @property (strong,nonatomic) IBOutlet UIView * expand_View;
 @property (strong,nonatomic) IBOutlet UIImageView * wagonPitch_img;
+@property (strong,nonatomic) IBOutlet UIImageView *pitchMap_img;
 @property (strong,nonatomic) IBOutlet UIButton * spiderWagon_Btn;
 @property (strong,nonatomic) IBOutlet UIButton * sectorWagon_Btn;
 @property (strong,nonatomic) IBOutlet UIButton * pitch_Btn;
