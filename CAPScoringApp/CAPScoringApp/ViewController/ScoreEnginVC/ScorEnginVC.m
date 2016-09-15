@@ -2699,7 +2699,15 @@
         //Check for Striker, non Striker and bower present
         
         if(fetchSEPageLoadRecord.strickerPlayerName == nil){
-            [self btn_stricker_names:0];
+            if([self IsTeamALLOUT] == YES)
+            {
+                //NSLog(@"ENDINNINGS");
+                //[self ENDINNINGS];
+            }
+            else
+            {
+                [self btn_stricker_names:0];
+            }
         }else if(fetchSEPageLoadRecord.nonstrickerPlayerName == nil){
             [self btn_nonstricker_name:0];
         }else if(fetchSEPageLoadRecord.currentBowlerPlayerName == nil){
@@ -9880,7 +9888,6 @@
                 }
                 indx ++;
             }
-            
             
         }
         
