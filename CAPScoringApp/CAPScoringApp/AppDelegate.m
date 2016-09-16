@@ -18,6 +18,7 @@
     UIActivityIndicatorView *indicator;
     UINavigationController *navigationController;
     BOOL IsTimer;
+    NSTimer* _timer;
 }
 @end
 
@@ -106,10 +107,9 @@
     
     //and create new timer with async call:
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-       // run function methodRunAfterBackground
-//        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:NO];
-//        [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
-//        [[NSRunLoop currentRunLoop] run];
+        NSTimer * t = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:NO];
+        [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
+        [[NSRunLoop currentRunLoop] run];
     });
     IsTimer=NO;
 }
@@ -147,9 +147,9 @@
     //and create new timer with async call:
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //run function methodRunAfterBackground
-//        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:YES];
-//        [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
-//        [[NSRunLoop currentRunLoop] run];
+        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:YES];
+      [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
+       [[NSRunLoop currentRunLoop] run];
     });
 
 }
@@ -163,7 +163,7 @@
      NSLog(@"background process method");
     if(IsTimer == YES)
     {
-//         DBManagerCaptransactionslogEntry *objCaptransactions = [[DBManagerCaptransactionslogEntry alloc]init];
+//        DBManagerCaptransactionslogEntry *objCaptransactions = [[DBManagerCaptransactionslogEntry alloc]init];
 //        NSMutableArray *objCaptransactionArray=[[NSMutableArray alloc]init];
 //        objCaptransactionArray= [objCaptransactions GetCaptransactionslogentry];
 //        if(objCaptransactionArray.count > 0)
@@ -209,7 +209,11 @@
         
         //-----------------------------------
         if(self.checkInternetConnection){
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
             
+             if([defaults boolForKey:@"isUserLoggedin"])
+             {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                 
                 
@@ -238,13 +242,13 @@
                 NSError* error = nil;
                 responseData = [NSURLConnection sendSynchronousRequest:request     returningResponse:&response error:&error];
                 if (responseData != nil) {
-//                    NSMutableArray *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-//                    NSDictionary  *responseDict = [serviceResponse objectAtIndex:0];
-//                    NSString *ErrorNoStr =[responseDict objectForKey:@"ErrorNo"];
-//                    
-//                    NSString *CompareErrorno=@"MOB0005";
-//                    if ([ErrorNoStr isEqualToString:CompareErrorno]) {
-//                        
+                    NSMutableArray *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+                    NSDictionary  *responseDict = [serviceResponse objectAtIndex:0];
+                    NSString *ErrorNoStr =[responseDict objectForKey:@"ErrorNo"];
+                    
+                    NSString *CompareErrorno=@"MOB0005";
+                   // if ([ErrorNoStr isEqualToString:CompareErrorno]) {
+//
 //                        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"SYNC DATA COMPLETED. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //                        [altert show];
 //                        [altert setTag:10405];
@@ -262,25 +266,26 @@
             });
         }
         
+        
         else{
-            
+             IsTimer=NO;
 //            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Network Error. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //            [altert show];
 //            [altert setTag:10405];
             
         }
+        }
+            
         //-----------------------------------
         
-        
-        
-        
-        
-        
-        
-        
     }
-    else
+    else if( IsTimer== NO)
     {
+                //NSTimer* _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:NO];
+        if ([_timer isValid]) {
+            [_timer invalidate];
+        }
+        _timer = nil;
         
     }
    
