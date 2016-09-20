@@ -35,4 +35,12 @@
 
 -(NSMutableArray*) GetBallEventForLastBowlerDetails: (NSNumber*)  BOWLERSPELL :(NSNumber*)  BOWLERRUNS :(NSNumber*)  ISPARTIALOVER :(NSNumber*)  TOTALBALLSBOWL : (NSNumber*) MAIDENS :(NSNumber*)  WICKETS:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) INNINGSNO: (NSString*) PREVIOUSBOWLERCODE: (NSNumber*) OVERNO:(NSNumber *)LASTBOWLEROVERBALLNO;
 -(NSNumber*) GetlastOverStatusForlastBowlerDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSNumber*) LASTBOWLEROVERNO;
+
+
+-(NSString *) GETLastBowlOverNo: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
+
+-(NSString *) GETLastBowlBallNo: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSNumber *)OVERNO;
+
+-(NSString *) GETLastBowlBallCount: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO :(NSNumber *)OVERNO :(NSNumber *) BALLNO;
+
 @end

@@ -11,6 +11,8 @@
 @interface FetchLastBowler : NSObject
 
 @property(strong,nonatomic)NSMutableArray *GetLastBolwerDetails;
+
+
 -(void)LastBowlerDetails:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE :(NSString*) INNINGSNO: (NSNumber*) OVERNO : (NSNumber*) BALLNO : (NSNumber*) BALLCOUNT;
 @end
 

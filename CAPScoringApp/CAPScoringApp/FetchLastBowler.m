@@ -36,13 +36,27 @@
     NSNumber* WICKETS =[[NSNumber alloc ] init];
     NSNumber* ISPARTIALOVER =[[NSNumber alloc ] init];
     NSNumber* LASTBOWLEROVERSTATUS =[[NSNumber alloc ] init];
+    NSNumber *  PREVIOUSOVERNO;
+    NSNumber *  PREVIOUSBALLNO;
+    NSNumber *  PREVIOUSBALLCOUNT;
     
     
-    CURRENTBOWLERCODE =[dbLastBowler GetBowlerCodeForBowlerDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO : OVERNO : BALLNO : BALLCOUNT];
+    NSString * overno =[dbLastBowler GETLastBowlOverNo:COMPETITIONCODE :MATCHCODE :INNINGSNO];
+    PREVIOUSOVERNO =[NSNumber numberWithInt:overno.intValue];
+    
+   NSString * ballno =[dbLastBowler GETLastBowlBallNo:COMPETITIONCODE :MATCHCODE :INNINGSNO :PREVIOUSOVERNO];
+    
+    PREVIOUSBALLNO =[NSNumber numberWithInt:ballno.intValue];
+    
+    NSString * ballcount =[dbLastBowler GETLastBowlBallCount:COMPETITIONCODE :MATCHCODE :INNINGSNO :PREVIOUSOVERNO :PREVIOUSBALLNO];
+    
+     PREVIOUSBALLCOUNT =[NSNumber numberWithInt:ballcount.intValue];
+    
+    CURRENTBOWLERCODE =[dbLastBowler GetBowlerCodeForBowlerDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO : PREVIOUSOVERNO : PREVIOUSBALLNO : PREVIOUSBALLCOUNT];
     
     
     
-    PREVIOUSBOWLERCODE=[dbLastBowler GetTopBowlerCodeForBowlerDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO : OVERNO : BALLNO : BALLCOUNT : CURRENTBOWLERCODE];
+    PREVIOUSBOWLERCODE=[dbLastBowler GetTopBowlerCodeForBowlerDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO : PREVIOUSOVERNO : PREVIOUSBALLNO : PREVIOUSBALLCOUNT : CURRENTBOWLERCODE];
     
     WICKETS=[dbLastBowler GetWicketNoForBowlerDetails : COMPETITIONCODE: MATCHCODE: INNINGSNO:  OVERNO:  BALLNO:  BALLCOUNT:  PREVIOUSBOWLERCODE];
     
