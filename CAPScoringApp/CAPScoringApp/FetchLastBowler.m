@@ -52,7 +52,7 @@
     
      PREVIOUSBALLCOUNT =[NSNumber numberWithInt:ballcount.intValue];
     
-    CURRENTBOWLERCODE =[dbLastBowler GetBowlerCodeForBowlerDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO : PREVIOUSOVERNO : PREVIOUSBALLNO : PREVIOUSBALLCOUNT];
+    CURRENTBOWLERCODE =[dbLastBowler GetBowlerCodeForBowlerDetails: COMPETITIONCODE : MATCHCODE : INNINGSNO : OVERNO : BALLNO : BALLCOUNT];
     
     
     

@@ -457,7 +457,7 @@
 						  
         NSMutableArray *GetSpinSpeedBallDetailsForMetadataArray=[ dbEditScoreEngine GetSpinSpeedBallDetailsForMetadata];
 						  
-						  NSMutableArray *GetFastSpeedBallDetailsForMetadataArray=[ dbEditScoreEngine GetFastSpeedBallDetailsForMetadata];
+        NSMutableArray *GetFastSpeedBallDetailsForMetadataArray=[ dbEditScoreEngine GetFastSpeedBallDetailsForMetadata];
 						  
 						  
 						  
