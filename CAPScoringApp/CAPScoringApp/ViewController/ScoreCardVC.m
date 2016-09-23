@@ -34,6 +34,8 @@
     NSString *regioncode;
     UIImageView * Img_ball;
     BOOL isPitch_Img;
+    NSIndexPath *selectedIndexPath;
+    UIView *ExpandBattingview;
     
 }
 @property (strong, nonatomic) IBOutlet UILabel *cener_lbl;
@@ -352,6 +354,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 }
 -(void)tableView:(UITableView *)tableView expandCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *) indexPath {
     
+    selectedIndexPath=indexPath;
 
     //UILabel *detailLabel = (UILabel *)[cell viewWithTag:3];
     UIView * expendbattingview = (UIView *)[cell viewWithTag:10];
@@ -376,15 +379,15 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 -(void)tableView:(UITableView *)tableView collapseCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *)indexPath
 {
    
-    UIView *purchaseButton = (UIButton *)[cell viewWithTag:10];
+    UIView *expendBatmanview = (UIButton *)[cell viewWithTag:10];
     UIView * expendbowlerview = (UIView *)[cell viewWithTag:11];
     [UIView animateWithDuration:.5 animations:^{
        
-        purchaseButton.alpha = 0;
+        expendBatmanview.alpha = 0;
         expendbowlerview.alpha=0;
         [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(-3.14);
     } completion:^(BOOL finished) {
-        purchaseButton.hidden = YES;
+        expendBatmanview.hidden = YES;
     }];
 }
 
@@ -449,7 +452,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             self.batsmanCell.pitchMap_img.hidden=YES;
         }
         
-        UIView *ExpandBattingview = (UIView *)[cell viewWithTag:10];
+        ExpandBattingview = (UIView *)[cell viewWithTag:10];
         [cell.spiderWagon_Btn addTarget:self action:@selector(didClickSpiderWagonAction:) forControlEvents:UIControlEventTouchUpInside];
         
         [cell.sectorWagon_Btn addTarget:self action:@selector(didClickSectorWagonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -501,6 +504,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         {
             //[cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(0);
             ExpandBattingview.hidden = YES;
+            
         }
         else ///prepare the cell as if it was expanded! (without any animation!)
         {
@@ -747,9 +751,15 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         return 44;
     }else if(batsmanPostion <= indexPath.row && extraPostion>indexPath.row){
         
-        if (isexpanded)
+        if (indexPath == selectedIndexPath && isexpanded)
+        {
+            ExpandBattingview.hidden=NO;
             return 550;
-        return 70;
+        }
+        else{
+             ExpandBattingview.hidden=YES;
+           return 70;
+        }
     }else if(extraPostion == indexPath.row){
         return 44;
     }else if (overRunRatePostion == indexPath.row){
@@ -929,18 +939,18 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     for(int i=0; i<objArray.count;i++)
     {
         BattingStatisticsPitchRecord * objRecord =(BattingStatisticsPitchRecord *)[objArray objectAtIndex:i];
-        xposition = [objRecord.PMX2 intValue]+10;
-        yposition = [objRecord.PMy2 intValue]-20;
+        xposition = [objRecord.PMX2 intValue];
+        yposition = [objRecord.PMy2 intValue];
         
     if(!(xposition == 1 && yposition ==1)){
         
         
-//        if(Img_ball != nil)
-//        {
-//            [Img_ball removeFromSuperview];
-//        }
-//        
-        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
+        if(Img_ball != nil)
+        {
+            [Img_ball removeFromSuperview];
+        }
+//
+        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
         Img_ball.image =[UIImage imageNamed:@"RedBall"];
         [self.batsmanCell.pitchMap_img addSubview:Img_ball];
         

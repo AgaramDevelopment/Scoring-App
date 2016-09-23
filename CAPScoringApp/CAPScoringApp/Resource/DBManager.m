@@ -744,9 +744,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
     {
         
-        
-        
-        
         NSString *query=[NSString stringWithFormat:@"SELECT PM.PLAYERCODE, PM.PLAYERNAME,MTPD.RECORDSTATUS,MTPD.PLAYINGORDER  FROM PLAYERTEAMDETAILS AS PTD INNER JOIN PLAYERMASTER AS PM ON PTD.PLAYERCODE = PM.PLAYERCODE INNER JOIN MATCHTEAMPLAYERDETAILS MTPD ON MTPD.PLAYERCODE = PTD.PLAYERCODE  WHERE PM.RECORDSTATUS = 'MSC001' AND PTD.RECORDSTATUS = 'MSC001'  AND PTD.TEAMCODE = '%@' AND MTPD.MATCHCODE = '%@'  ORDER BY MTPD.PLAYINGORDER",teamCode,matchCode];
         
         stmt=[query UTF8String];
@@ -778,6 +775,164 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return selectPlayerArray;
 }
+
+-(NSMutableArray *)getSelectingPlayer: (NSString *) teamCode matchcode:(NSString *) matchcode
+{
+    NSMutableArray *selectPlayerArray=[[NSMutableArray alloc]init];
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    //NSString *dbPath = [[[NSBundle mainBundle] resourcePath ]stringByAppendingPathComponent:@"TNCA_DATABASE.sqlite"];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT distinct PM.PLAYERCODE, PM.PLAYERNAME,MTPD.RECORDSTATUS,MTPD.PLAYINGORDER  FROM PLAYERTEAMDETAILS AS PTD INNER JOIN PLAYERMASTER AS PM ON PTD.PLAYERCODE = PM.PLAYERCODE INNER JOIN COMPETITIONTEAMPLAYER CTP ON CTP.PLAYERCODE = PTD.PLAYERCODE  LEFT  JOIN MATCHTEAMPLAYERDETAILS MTPD ON MTPD.PLAYERCODE = PTD.PLAYERCODE AND  MTPD.TEAMCODE=PTD.TEAMCODE AND MATCHCODE='%@' WHERE PM.RECORDSTATUS = 'MSC001' AND PTD.RECORDSTATUS = 'MSC001'  AND PTD.TEAMCODE = '%@' order by PLAYINGORDER asc ",matchcode,teamCode];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                
+                SelectPlayerRecord *record=[[SelectPlayerRecord alloc]init];
+                record.playerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.playerName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                NSString *recordStatus=[self getValueByNull:statement :2];
+                record.playerOrder=[self getValueByNull:statement :3];
+                
+                //Set selected based on record status
+                record.isSelected = [NSNumber numberWithInteger:[recordStatus isEqual:@"MSC001"]?1:0];
+                
+                [selectPlayerArray addObject:record];
+                
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            
+        }
+        
+        
+        sqlite3_close(dataBase);
+        
+    }
+    return selectPlayerArray;
+}
+
+# pragma Create automatically TeamPlayerCode
+
+-(NSString*)  GetMaxIdForInsertMatchTeamPlayer{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT 'MRP' ||SUBSTR(SUBSTR(QUOTE(ZEROBLOB(5)),3,10) ||  CAST(CAST(IFNULL(MAX(SUBSTR(MATCHTEAMPLAYERCODE,-7)),0) AS INT)+1 AS TEXT),-7,7) FROM MATCHTEAMPLAYERDETAILS"];
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                NSString *BallCodeNo =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return BallCodeNo;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            
+            
+        }
+        sqlite3_close(dataBase);
+        
+    }
+    
+    return @"";
+}
+
+# pragma SelectPlayerExit
+
+-(NSString *)SelectPlayerExit:(NSString *) matchCode :(NSString *) PlayerCode :(NSString *) TeamCode;
+{
+    NSString * Exit;
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"select  PLAYERCODE,TEAMCODE ,MATCHCODE From MATCHTEAMPLAYERDETAILS   WHERE PLAYERCODE='%@' AND MATCHCODE='%@' AND TEAMCODE = '%@'",PlayerCode,matchCode,TeamCode];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                // MatcheventRecord *matchrecord=[[MatcheventRecord alloc]init];
+                
+                Exit = @"YES";
+                
+                
+                //[TossArray addObject:matchrecord];
+                
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        
+        
+        sqlite3_close(dataBase);
+        
+    }
+    return Exit;
+}
+
+
+
+# pragma InsertSelectPlayer Method
+
+-(BOOL)InsertSelectPlayer:(NSString*)playerCode :(NSString*) matchCode :(NSString *)MatchTeamPlayerCode:(NSString *) Teamcode:(NSString *) Playerorder :(NSString*)recordStatus
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"Insert into MATCHTEAMPLAYERDETAILS  ( MATCHTEAMPLAYERCODE,MATCHCODE,TEAMCODE,PLAYERCODE,PLAYINGORDER,RECORDSTATUS) VALUES (\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\")",MatchTeamPlayerCode,matchCode,Teamcode,playerCode,Playerorder,recordStatus];
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:matchCode :@"MATCHTEAMPLAYERDETAILS" :@"MSC251" :updateSQL];
+                
+                return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            
+        }
+        sqlite3_close(dataBase);
+        
+    }
+    return NO;
+
+}
+
 
 //Update selected player record status
 -(BOOL)updateSelectedPlayersResultCode:(NSString*)playerCode matchCode:(NSString*) matchCode recordStatus:(NSString*)recordStatus  {
@@ -1233,9 +1388,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
     {
-        
-        
-        
         
         NSString *query=[NSString stringWithFormat:@"SELECT BOWLTYPECODE,BOWLTYPE FROM BOWLTYPE WHERE BOWLERTYPE = 'MSC016' AND RECORDSTATUS = 'MSC001'"];
         

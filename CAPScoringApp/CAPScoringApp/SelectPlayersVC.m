@@ -38,40 +38,9 @@ static NSString * const reuseIdentifier = @"Cell";
 
     
     [self customnavigationmethod];
-    
-    
-    
-    
-    
-//    NSMutableArray *playersCode = [[NSMutableArray alloc]init];
-//    
-//    [playersCode addObject:@"PYC0000001"];
-//    [playersCode addObject:@"PYC0000002"];
-//    [playersCode addObject:@"PYC0000003"];
-//    [playersCode addObject:@"PYC0000004"];
-//    [playersCode addObject:@"PYC0000005"];
-//    [playersCode addObject:@"PYC0000006"];
-//    
-//    [playersCode addObject:@"PYC0000050"];
-//    [playersCode addObject:@"PYC0000051"];
-//    [playersCode addObject:@"PYC0000052"];
-//    [playersCode addObject:@"PYC0000053"];
-//    
-//    [playersCode addObject:@"PYC0000065"];
-//    [playersCode addObject:@"PYC0000066"];
-//    [playersCode addObject:@"PYC0000067"];
-//    [playersCode addObject:@"PYC0000068"];
-//    [playersCode addObject:@"PYC0000069"];
-//    [playersCode addObject:@"PYC0000070"];
-//    
-//    
-//    for(int i=0;i<[playersCode count];i++){
-//        [self addImageInAppDocumentLocation:[playersCode objectAtIndex:i]];
-//    }
-    
-   // self.teamCode = @"TEA0000001";
-    //self.matchCode= @"IMSC0221C6F6595E95A00002";
-    self.selectedPlayerArray = [objDBManager getSelectingPlayerArray :self.SelectTeamCode matchCode:self.matchCode];
+
+    self.selectedPlayerArray = [objDBManager getSelectingPlayer:self.SelectTeamCode matchcode:self.matchCode];
+    //self.selectedPlayerArray  =[objDBManager getSelectingPlayerArray:self.SelectTeamCode matchCode:self.matchCode];
     self.selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: self.selectedPlayerArray ];
     
     [self setSelectCount];
@@ -228,41 +197,7 @@ static NSString * const reuseIdentifier = @"Cell";
 }
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string{
     
-//    if (![string isEqualToString:@""]) {
-//        
-//        NSString *appStr=[textField.text stringByAppendingString:string];
-//        
-//        [self.selectedPlayerFilterArray removeAllObjects];
-//        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",appStr];
-//        
-//        NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
-//        
-//        self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
-//        
-//        
-//        [self.collectionView reloadData];
-//        
-//        return YES;
-//    }
-//    else {
-//        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",self.txt_search.text];
-//        
-//        NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
-//        
-//        // NSLog(@"count %lu",(unsigned long)[self.selectedPlayerArray count]);
-//        
-//        [self.selectedPlayerFilterArray removeAllObjects];
-//        
-//        //    NSLog(@"count2 %lu",(unsigned long)[self.selectedPlayerArray count]);
-//        
-//        self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
-//        
-//    
-//    //Relaod view
-//    [self.collectionView reloadData];
-//        
-//        return YES;
-//    }
+
     NSString *appStr=[textField.text stringByAppendingString:string];
     appStr = [appStr substringToIndex:[appStr length] - range.length];
     
@@ -292,19 +227,7 @@ static NSString * const reuseIdentifier = @"Cell";
     return YES;
 }
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-//    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",textField.text];
-//    
-//    NSArray *filtedPlayerArray =  [self.selectedPlayerArray filteredArrayUsingPredicate:resultPredicate];
-//    
-//    // NSLog(@"count %lu",(unsigned long)[self.selectedPlayerArray count]);
-//    
-//    [self.selectedPlayerFilterArray removeAllObjects];
-//    
-//    //    NSLog(@"count2 %lu",(unsigned long)[self.selectedPlayerArray count]);
-//    
-//    self.selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
-//    
-//    [self.collectionView reloadData];
+
     NSString *appStr=textField.text;
     
     if([appStr isEqual:@""]){
@@ -370,9 +293,29 @@ static NSString * const reuseIdentifier = @"Cell";
     if([self selectionValidation]){
         
         for(int i=0;i<[self.selectedPlayerArray count];i++){
+            int playerOrder = i+1;
+            NSString * playerorderLevel = [NSString stringWithFormat:@"%d",playerOrder];
             SelectPlayerRecord *selectedPlayerFilterRecord = [self.selectedPlayerArray objectAtIndex:i];
             NSString *recordStatus = [[selectedPlayerFilterRecord isSelected]boolValue]? @"MSC001":@"MSC002";
-            [objDBManager updateSelectedPlayersResultCode:[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus];
+           NSString * MTPCODE= [objDBManager GetMaxIdForInsertMatchTeamPlayer];
+            
+            NSString * playercodeExit =[objDBManager SelectPlayerExit: self.matchCode :[selectedPlayerFilterRecord playerCode] :self.SelectTeamCode];
+           
+            if([playercodeExit isEqualToString:@"YES"])
+            {
+
+            
+            //[objDBManager InsertSelectPlayer :[selectedPlayerFilterRecord playerCode] :[self matchCode] : MTPCODE :self.SelectTeamCode :playerorderLevel:recordStatus];
+                 [objDBManager updateSelectedPlayersResultCode:[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus];
+            }
+            else
+            {
+                [objDBManager InsertSelectPlayer :[selectedPlayerFilterRecord playerCode] :[self matchCode] : MTPCODE :self.SelectTeamCode :playerorderLevel:recordStatus];
+            }
+            
+            
+            //[objDBManager updatePlayerorder:self.matchCode :self.SelectTeamCode PlayerCode:[selectedPlayerFilterRecord playerCode] PlayerOrder:playerorderLevel];
+            
             
         }
         PlayerOrderLevelVC *objPlayerOrderLevelVC = [[PlayerOrderLevelVC alloc] init];
@@ -433,11 +376,6 @@ static NSString * const reuseIdentifier = @"Cell";
     }
     //Relaod view
     [self.collectionView reloadData];
-//    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
-//                                   initWithTarget:self
-//                                   action:@selector(dismissKeyboard)];
-//    
-//    [self.view addGestureRecognizer:tap];
     self.dismissKeyboard;
 
 }
@@ -474,15 +412,4 @@ static NSString * const reuseIdentifier = @"Cell";
     return (selectCount>=7)?YES:NO;
 }
 
-//- (CGSize)collectionView:(UICollectionView *)collectionView
-//                  layout:(UICollectionViewLayout *)collectionViewLayout
-//  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    CGRect screenRect = [[UIScreen mainScreen] bounds];
-//    CGFloat screenWidth = screenRect.size.width;
-//    float cellWidth = screenWidth / 3.0; //Replace the divisor with the column count requirement. Make sure to have it in float.
-//    CGSize size = CGSizeMake(cellWidth, cellWidth);
-//    
-//    return size;
-//}
 @end

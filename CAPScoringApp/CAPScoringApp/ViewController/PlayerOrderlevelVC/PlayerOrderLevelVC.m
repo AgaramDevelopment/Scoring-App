@@ -62,7 +62,8 @@
     
     objDBManager = [[DBManager alloc]init];
     [self customnavigationmethod];
-    
+//    self.objSelectplayerList_Array =[[NSMutableArray alloc]init];
+//    self.objSelectplayerList_Array =[objDBManager getSelectingPlayerArray:self.TeamCode matchCode:self.matchCode];
     
     objPreviousorderList =[[NSMutableArray alloc]init];
          slecteplayerlist=[[NSMutableArray alloc]init];
@@ -463,7 +464,7 @@
            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"NewMatchSetUp"];
        }
        
-           NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
+        NewMatchSetUpVC * objNewMatchSetUp = [[NewMatchSetUpVC alloc]init];
        objNewMatchSetUp =  (NewMatchSetUpVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchSetUpSBID"];
        objNewMatchSetUp.matchCode=self.matchCode;
        objNewMatchSetUp.teamAcode=self.TeamCode;

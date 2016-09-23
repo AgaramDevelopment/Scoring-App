@@ -39,7 +39,20 @@
 
 
 //select player
+
+-(NSMutableArray *)getSelectingPlayer: (NSString *) teamCode matchcode:(NSString *) matchcode;
+
+-(NSString*)  GetMaxIdForInsertMatchTeamPlayer;
+
+
+-(NSString *)SelectPlayerExit:(NSString *) matchCode :(NSString *) PlayerCode :(NSString *) TeamCode;
+
+
+-(BOOL)InsertSelectPlayer:(NSString*)playerCode :(NSString*) matchCode :(NSString *) MatchTeamPlayerCode :(NSString *) Teamcode :(NSString *) Playerorder :(NSString*)recordStatus;
+
+
 -(NSMutableArray *)getSelectingPlayerArray: (NSString *) teamCode matchCode:(NSString *) matchCode;
+
 -(BOOL)updateSelectedPlayersResultCode:(NSString*)playerCode matchCode:(NSString*) matchCode recordStatus:(NSString*)recordStatus;
 
 
