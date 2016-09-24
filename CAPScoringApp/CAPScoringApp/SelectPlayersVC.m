@@ -320,7 +320,7 @@ static NSString * const reuseIdentifier = @"Cell";
         }
         PlayerOrderLevelVC *objPlayerOrderLevelVC = [[PlayerOrderLevelVC alloc] init];
         objPlayerOrderLevelVC =  (PlayerOrderLevelVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"PlayerOrderLevelVC"];
-        objPlayerOrderLevelVC.objSelectplayerList_Array=self.selectedPlayerArray;
+//objPlayerOrderLevelVC.objSelectplayerList_Array=self.selectedPlayerArray;
         objPlayerOrderLevelVC.TeamCode=self.SelectTeamCode;
         objPlayerOrderLevelVC.matchCode= self.matchCode;
         objPlayerOrderLevelVC.teamA=self.teamA;

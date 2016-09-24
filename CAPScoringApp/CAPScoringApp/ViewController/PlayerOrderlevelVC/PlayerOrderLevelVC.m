@@ -62,8 +62,8 @@
     
     objDBManager = [[DBManager alloc]init];
     [self customnavigationmethod];
-//    self.objSelectplayerList_Array =[[NSMutableArray alloc]init];
-//    self.objSelectplayerList_Array =[objDBManager getSelectingPlayerArray:self.TeamCode matchCode:self.matchCode];
+    self.objSelectplayerList_Array =[[NSMutableArray alloc]init];
+    self.objSelectplayerList_Array =[objDBManager getSelectingPlayerArray:self.TeamCode matchCode:self.matchCode];
     
     objPreviousorderList =[[NSMutableArray alloc]init];
          slecteplayerlist=[[NSMutableArray alloc]init];
@@ -1076,7 +1076,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
         if(newplayerorder > i)
         {
             
-            if([objRecord.playerOrder isEqualToString:@"0"])
+            if([objRecord.playerOrder isEqualToString:@"1"])
             {
                 orderno = [objRecord.playerOrder intValue];
                 
