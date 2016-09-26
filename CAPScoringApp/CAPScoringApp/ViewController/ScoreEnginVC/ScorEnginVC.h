@@ -97,6 +97,10 @@
 
 @property(nonatomic,strong) IBOutlet UIView *commonleftrightview;
 @property(nonatomic,strong)  UILabel * PichMapTittle;
+@property (nonatomic,strong)  UIButton * PichmapSkip_Btn;
+
+@property (nonatomic,strong)  UIButton * WagonWheelSkip_Btn;
+
 
 // Buttons left property
 
