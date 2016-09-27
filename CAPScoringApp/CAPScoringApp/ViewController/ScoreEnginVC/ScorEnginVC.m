@@ -754,6 +754,7 @@
     }
     
     
+    
     //MatchType
     fetchSEPageLoadRecord.MATCHTYPE = fetchSeBallCodeDetails.MATCHTYPE;
     
@@ -1339,7 +1340,7 @@
         [alter setTag:10000];
     }
     
-    
+    self.lbl_ExtraRunBatingTeam.text =fetchSEPageLoadRecord.ExtrasRuns;
     //Striker Details
     self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
     self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;
@@ -3899,6 +3900,8 @@
     self.view_aggressiveShot.hidden = YES;
     self.view_defensive.hidden = YES;
     self.img_pichmap.hidden=YES;
+    self.PichmapSkip_Btn.hidden=YES;
+    self.WagonWheelSkip_Btn.hidden=YES;
     self.PichMapTittle.hidden=YES;
     self.view_Wagon_wheel.hidden=YES;
     //self.objcommonRemarkview.hidden=YES;
@@ -11025,6 +11028,7 @@
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
+    self.lbl_ExtraRunBatingTeam.text =fetchSEPageLoadRecord.ExtrasRuns;
     
     
     //Striker Details

@@ -5247,6 +5247,44 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
 }
 
+//ExtrasRun
+
+-(NSString *) getBatingTeamExtrasRun:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*)INNINGSNO
+{
+    int retVal;
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        
+        NSString *query = [NSString stringWithFormat:@"SELECT (ISMRY.BYES + ISMRY.LEGBYES + ISMRY.NOBALLS + ISMRY.WIDES + ISMRY.PENALTIES ) TOTALEXTRAS FROM INNINGSSUMMARY ISMRY INNER JOIN INNINGSEVENTS IEVNTS ON ISMRY.COMPETITIONCODE = IEVNTS.COMPETITIONCODE AND ISMRY.MATCHCODE = IEVNTS.MATCHCODE AND ISMRY.INNINGSNO = IEVNTS.INNINGSNO WHERE ISMRY.COMPETITIONCODE = '%@' AND ISMRY.MATCHCODE = '%@' AND ISMRY.INNINGSNO = '%@' ",COMPETITIONCODE,MATCHCODE, INNINGSNO,INNINGSNO,INNINGSNO];
+        stmt=[query UTF8String];
+        
+        if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    
+                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return TOTAL;
+                }
+                
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+        
+    }
+    return @"";
+ 
+}
+
+
 //grand total
 -(NSString *) getGrandTotal:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*)BATTINGTEAMCODE:(NSString*)INNINGSNO{
     

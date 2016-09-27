@@ -84,6 +84,9 @@
 -(void) fetchSEPageLoadDetails :(NSString*) COMPETITIONCODE :(NSString *)MATCHCODE;
 
 
+@property (nonatomic,strong) NSString * ExtrasRuns;
+
+
 //Stricker Details
 @property(strong,nonatomic)NSString *strickerPlayerCode ;
 @property(strong,nonatomic)NSString *strickerPlayerName;

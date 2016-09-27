@@ -11,6 +11,7 @@
 #import "AddBreakVC.h"
 @implementation FetchSEPageLoadRecord
 
+@synthesize ExtrasRuns;
 @synthesize INNINGSPROGRESS;
 @synthesize TEAMACODE;
 @synthesize TEAMBCODE;
@@ -409,6 +410,9 @@ BOOL  getOverStatus;
         
         TEMPBATTEAMPENALTY = penaltyS;
     }
+    
+        ExtrasRuns =[db getBatingTeamExtrasRun:COMPETITIONCODE :MATCHCODE :INNINGSNO];
+        
     //grand total
     NSString *grandTotal = [db getGrandTotal:COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO];
     NSInteger grandscore = [grandTotal integerValue];

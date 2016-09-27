@@ -507,4 +507,7 @@ INNINGSNO:(NSString *)INNINGSNO STRIKERCODE:(NSString *)STRIKERCODE NONSTRIKERCO
 
 -(NSMutableArray *) ArchivesFixturesData:(NSString*)competitionCode:(NSString*)userCode ;
 
+-(NSString *) getBatingTeamExtrasRun:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*)INNINGSNO;
+
+
 @end

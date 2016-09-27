@@ -205,6 +205,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_fast;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_fast1;
 
+@property (strong,nonatomic) IBOutlet UILabel * lbl_ExtraRunBatingTeam;
+
 
 @property (weak, nonatomic) IBOutlet UIView *view_aggressive;
 
