@@ -11,7 +11,7 @@
 #import "DBManagerChangeToss.h"
 #import "FetchBattingTeamTossRecord.h"
 #import "ScorEnginVC.h"
-
+#import "DBManager.h"
 @interface InningsDetailsVC ()
 {
     BOOL isEnableTbl;
@@ -412,12 +412,63 @@
 {
     if (buttonIndex == 0 && alertView.tag == 1)
     {
-        [dbChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : @"" : StrikerCode : NonStrikerCode : selectBowlerCode : BowlingEnd];
+        NSString *inningsNumber =  [dbChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : @"" : StrikerCode : NonStrikerCode : selectBowlerCode : BowlingEnd];
+        
+        //Power Play Submit
+        [self setPowerPlayForODIAndT20:inningsNumber];
+        
         
         [self.delegate StartInningsprocessSuccessful : self.CompetitionCode : self.MATCHCODE : self.matchTypeCode : self.matchSetUp];
         
         //[self startService:@"DONE"];
     }
+}
+
+
+
+//Power Play Code
+-(void) setPowerPlayForODIAndT20:(NSString*)inningsNo{
+    if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){ //T20
+        
+        [self insertPowerPlay:@"1" endOver:@"6" powerPlayType:@"PPT0000001" inningsNo:inningsNo];
+        
+        
+    }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){//ODI
+        [self insertPowerPlay:@"1" endOver:@"10" powerPlayType:@"PPT0000001" inningsNo:inningsNo];
+        
+        
+    }
+    
+    
+    
+}
+
+-(void)insertPowerPlay:(NSString*) startOver endOver:(NSString*) endOver powerPlayType:(NSString*)powerPlayType inningsNo:(NSString*)inningsNo{
+    
+    DBManager *objDBManager = [[DBManager alloc]init];
+    if(![objDBManager checkpowerplay:startOver ENDOVER:endOver MATCHCODE:MATCHCODE INNINGSNO:inningsNo])
+    {
+        if(![objDBManager getpowerplaytype:MATCHCODE INNINGSNO:inningsNo POWERPLAYTYPE:powerPlayType]){
+            
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *username=[defaults stringForKey :@"UserFullname"];
+            
+            NSString *maxid= [objDBManager getMAXIDPOWERPLAY];
+            
+            
+            
+            NSString *paddingString = [[NSString string] stringByPaddingToLength: (7-maxid.length) withString: @"0" startingAtIndex: 0];
+            NSString *powerplayCode = [NSString stringWithFormat:@"PPC%@%@",paddingString,maxid] ;
+            
+            [objDBManager SetPowerPlayDetails :powerplayCode:MATCHCODE :inningsNo :startOver:endOver:powerPlayType :@"MSC001" :username :@"":username : @""];
+            
+            
+            
+        }
+        
+    }
+    
 }
 
 

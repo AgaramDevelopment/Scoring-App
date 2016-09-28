@@ -772,6 +772,9 @@
         
         [self startService:@"DONE"];
         
+        [self setPowerPlayForODIAndT20];//Power Play
+
+        
         ScorEnginVC*scoreEngine = [[ScorEnginVC alloc]init];
         
         scoreEngine =  (ScorEnginVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ScoreEngineID"];
@@ -970,4 +973,137 @@
         }
         return YES;
     }}
+
+//Power Play Code
+-(void) setPowerPlayForODIAndT20{
+    if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){ //T20
+        
+        [self insertPowerPlay:@"1" endOver:@"6" powerPlayType:@"PPT0000001"];
+        // [self startPowerPlayService:@"1" endOver:@"6" powerPlayType:@"PPT0000001"];
+        
+        
+    }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){//ODI
+        [self insertPowerPlay:@"1" endOver:@"10" powerPlayType:@"PPT0000001"];
+        // [self startPowerPlayService:@"1" endOver:@"10" powerPlayType:@"PPT0000001"];
+        
+        
+    }
+    
+    
+    
+}
+
+
+
+
+-(void)insertPowerPlay:(NSString*) startOver endOver:(NSString*) endOver powerPlayType:(NSString*)powerPlayType{
+    
+    
+    
+    if(![objDBManager checkpowerplay:startOver ENDOVER:endOver MATCHCODE:MATCHCODE INNINGSNO:@"1"])
+    {
+        if(![objDBManager getpowerplaytype:MATCHCODE INNINGSNO:@"1" POWERPLAYTYPE:powerPlayType]){
+            
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *username=[defaults stringForKey :@"UserFullname"];
+            
+            NSString *maxid= [objDBManager getMAXIDPOWERPLAY];
+            
+            
+            
+            NSString *paddingString = [[NSString string] stringByPaddingToLength: (7-maxid.length) withString: @"0" startingAtIndex: 0];
+            NSString *powerplayCode = [NSString stringWithFormat:@"PPC%@%@",paddingString,maxid] ;
+            
+            [objDBManager SetPowerPlayDetails :powerplayCode:MATCHCODE :@"1" :startOver:endOver:powerPlayType :@"MSC001" :username :@"":username : @""];
+            
+            
+            
+        }
+        
+    }
+    
+}
+
+-(void) startPowerPlayService:(NSString*) startOver endOver:(NSString*) endOver powerPlayType:(NSString*)powerPlayType{
+    
+    if(self.checkInternetConnection){
+        
+        
+        
+        
+        
+        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        
+        
+        //Show indicator
+        
+        [delegate showLoading];
+        
+        
+        
+        
+        
+        
+        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETPOWERPLAY/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],MATCHCODE,@"1",startOver,endOver,powerPlayType,nil,nil,nil,nil];
+        
+        NSLog(@"-%@",baseURL);
+        
+        
+        
+        
+        
+        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+        
+        
+        
+        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+        
+        NSURLResponse *response;
+        
+        NSError *error;
+        
+        
+        
+        NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        
+        if (responseData != nil) {
+            
+            
+            
+            
+            
+            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+            
+            
+            
+            if(rootArray !=nil && rootArray.count>0){
+                
+                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+                
+                NSString *success = [valueDict valueForKey:@"DataItem"];
+                
+                if([success isEqual:@"Success"]){
+                    
+                    
+                    
+                }
+                
+            }else{
+                
+                
+                
+            }
+            
+        }
+        
+        [delegate hideLoading];
+        
+        
+    }
+    
+}
+
+
 @end

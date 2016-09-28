@@ -36,6 +36,6 @@
 
 -(BOOL) UpdateMatchStatusForToss:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE;
 
--(void) InsertTossDetails:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TOSSWONTEAMCODE:(NSString*)ELECTEDTO:(NSString*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)BOWLINGEND;
+-(NSString *) InsertTossDetails:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TOSSWONTEAMCODE:(NSString*)ELECTEDTO:(NSString*)STRIKERCODE:(NSString*)NONSTRIKERCODE:(NSString*)BOWLERCODE:(NSString*)BOWLINGEND;
 -(NSMutableDictionary *) FetchTossDetailsForInnings: (NSString*)MATCHCODE : (NSString*)COMPETITIONCODE;
 @end
