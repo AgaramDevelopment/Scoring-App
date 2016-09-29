@@ -535,7 +535,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return SrikerEventArray;
 }
 
--(void) InsertTossDetails:(NSString*) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *)TOSSWONTEAMCODE:(NSString *) ELECTEDTO:(NSString *) STRIKERCODE:(NSString *) NONSTRIKERCODE:(NSString *) BOWLERCODE:(NSString *) BOWLINGEND
+-(NSString *) InsertTossDetails:(NSString*) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *)TOSSWONTEAMCODE:(NSString *) ELECTEDTO:(NSString *) STRIKERCODE:(NSString *) NONSTRIKERCODE:(NSString *) BOWLERCODE:(NSString *) BOWLINGEND
 {
     DBManagerChangeToss *dbChangeToss = [[DBManagerChangeToss alloc]init];
     NSString* BOWLINGTEAMCODE ;
@@ -596,6 +596,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     [InitializeInningsScoreBoardRecord InitializeInningsScoreBoard :COMPETITIONCODE : MATCHCODE :BATTINGTEAMCODE :BOWLINGTEAMCODE : MaxInningsNumber : STRIKERCODE : NONSTRIKERCODE :
                                                         BOWLERCODE : [NSNumber numberWithInt:0]];
+    return MAXINNINGSNO;
 }
 
 
