@@ -69,6 +69,7 @@
 #import "MatchRegistrationPushRecord.h"
 #import "Utitliy.h"
 #import "FETCHSELASTINSTANCEDTLS.h"
+#import "BatsManINOUT.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -76,7 +77,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate,Other_WicketDelegate,RevisedTargetDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate,Other_WicketDelegate,RevisedTargetDelegate,BatsManINOUTDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     GetSEAppealDetailsForAppealEvents *record;
@@ -216,6 +217,7 @@
     RevisedTarget  *revisedTarget;
     PenalityVC *penalityVc;
     PenaltygridVC *penaltygridvc;
+    BatsManINOUT  *batsManinoutTime;
     
     
     NSString * alterviewSelect;
@@ -591,7 +593,7 @@
 -(void)MatcheventMethod
 {
     int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
-    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAKS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET", nil];
+    _rightSlideArray = [[NSMutableArray alloc]initWithObjects:@"BREAKS",@"DECLARE INNINGS",@"END DAY",@"END INNINGS",@"END SESSION",@"FOLLOW ON",@"PLAYING XI EDIT",@"MATCH RESULTS",@"OTHER WICKETS",@"PENALTY",@"POWER PLAY",@"REVISED OVERS",@"REVISED TARGET",@"BATSMAN TIME", nil];
     if(fetchSEPageLoadRecord.BATTEAMOVERS == 0 && fetchSEPageLoadRecord.BATTEAMOVRBALLS == 0 && fetchSEPageLoadRecord.BATTEAMRUNS == 0 && fetchSEPageLoadRecord.BATTEAMWICKETS == 0)
     {
         if(inningsno > 1)
@@ -8522,6 +8524,12 @@
             NSLog(@"14");
             [self revisiedTarget];
         }
+        else if([SelectedMatchEvent isEqualToString : @"BATSMAN TIME"])
+        {
+            NSLog(@"14");
+            [self BatsmanINandOutTimeMetod];
+        }
+        
         
         
     }else{
@@ -10519,6 +10527,67 @@
          }
                          completion:nil];
     }
+}
+
+-(void)BatsmanINandOutTimeMetod
+{
+    fullview=[[UIView alloc]initWithFrame:CGRectMake(self.view.frame.origin.x,self.view.frame.origin.y,self.view.frame.size.width,self.view.frame.size.height)];
+    fullview.backgroundColor =[UIColor colorWithRed:(4.0/255.0f) green:(6.0/255.0f) blue:(6.0/255.0f) alpha:0.8];
+    // didClickBackbtnAction
+    [self.view addSubview:fullview];
+    batsManinoutTime = [[BatsManINOUT alloc]initWithNibName:@"BatsManINOUT" bundle:nil];
+    batsManinoutTime.compitionCode=self.competitionCode;
+    batsManinoutTime.MATCHCODE =self.matchCode;
+    batsManinoutTime.TEAMCODE=fetchSEPageLoadRecord.BATTINGTEAMCODE;
+    batsManinoutTime.INNINGSNO=fetchSEPageLoadRecord.INNINGSNO;
+    //batsManinoutTime.matchTypeCode=self.matchTypeCode;
+    
+  //  batsManinoutTime.targetruns=  fetchSEPageLoadRecord.TARGETRUNS;
+    batsManinoutTime.delegate=self;
+    [fullview addSubview:batsManinoutTime.view];
+    //   [fullview addSubview:breakvc.view];
+    
+    [self addChildViewController:batsManinoutTime];
+    batsManinoutTime.view.frame =CGRectMake(90, 200, batsManinoutTime.view.frame.size.width, batsManinoutTime.view.frame.size.height);
+   // [batsManinoutTime.didClickBackbtnAction addTarget:self action:@selector(FullviewHideMethod:) forControlEvents:UIControlEventTouchUpInside];
+    [fullview addSubview:batsManinoutTime.view];
+    batsManinoutTime.view.alpha = 0;
+    [batsManinoutTime didMoveToParentViewController:self];
+    
+    [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+     {
+         batsManinoutTime.view.alpha = 1;
+     }
+                     completion:nil];
+    
+    
+    if (IS_IPAD_PRO) {
+        batsManinoutTime.view.frame =CGRectMake(250, 500, batsManinoutTime.view.frame.size.width, batsManinoutTime.view.frame.size.height);
+        [self.view addSubview:batsManinoutTime.view];
+        batsManinoutTime.view.alpha = 0;
+        [batsManinoutTime didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             batsManinoutTime.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+    
+    
+    else{
+        
+        batsManinoutTime.view.frame =CGRectMake(100, 200, batsManinoutTime.view.frame.size.width, batsManinoutTime.view.frame.size.height);
+        batsManinoutTime.view.alpha = 0;
+        [batsManinoutTime didMoveToParentViewController:self];
+        
+        [UIView animateWithDuration:0.25 delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^
+         {
+             batsManinoutTime.view.alpha = 1;
+         }
+                         completion:nil];
+    }
+
 }
 
 -(void)InsertPenaltyMethod :(NSString *)AwardedTeam :(NSString *)penaltyRun :(NSString *)penaltyTypecode :(NSString *)penaltyreasoncode
