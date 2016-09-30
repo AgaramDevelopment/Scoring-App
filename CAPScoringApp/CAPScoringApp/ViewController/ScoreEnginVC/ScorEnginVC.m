@@ -7648,6 +7648,7 @@
     [self unselectedButtonBg: self.btn_pichmap];
     self.img_pichmap.hidden=YES;
     self.PichMapTittle.hidden=YES;
+    self.PichmapSkip_Btn.hidden=YES;
     [self unselectedButtonBg: self.btn_wagonwheel];
     self.view_Wagon_wheel.hidden=YES;
     
@@ -18950,12 +18951,12 @@
 //    [self.img_pichmap addGestureRecognizer:tapRecognizer];
 //    [self.img_pichmap setUserInteractionEnabled:YES];
 
-    self.PichmapSkip_Btn =[[UIButton alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.origin.x+320,self.Allvaluedisplayview.frame.origin.y+50,35, 35)];
+    self.PichmapSkip_Btn =[[UIButton alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.origin.x+320,self.Allvaluedisplayview.frame.origin.y,35, 35)];
     [self.PichmapSkip_Btn setTitle:@"Skip" forState:UIControlStateNormal];
     [self.Allvaluedisplayview addSubview:self.PichmapSkip_Btn];
     [self.PichmapSkip_Btn addTarget:self action:@selector(didClickSkip_BtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.PichMapTittle =[[UILabel alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.origin.x,self.Allvaluedisplayview.frame.origin.y,self.commonleftrightview.frame.size.width+170, 35)];
+    self.PichMapTittle =[[UILabel alloc]initWithFrame:CGRectMake(self.img_pichmap.frame.origin.x,self.img_pichmap.frame.origin.y-10,self.img_pichmap.frame.size.width, 35)];
     self.PichMapTittle.text=@"PITCHMAP";
     self.PichMapTittle.font=[UIFont fontWithName:@"RAJDHANI-BOLD" size:20];
     self.PichMapTittle.textColor=[UIColor whiteColor];
