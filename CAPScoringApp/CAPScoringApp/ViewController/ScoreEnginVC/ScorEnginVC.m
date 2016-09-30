@@ -18950,13 +18950,20 @@
 //    tapRecognizer.delegate=self;
 //    [self.img_pichmap addGestureRecognizer:tapRecognizer];
 //    [self.img_pichmap setUserInteractionEnabled:YES];
-
-    self.PichmapSkip_Btn =[[UIButton alloc]initWithFrame:CGRectMake(self.commonleftrightview.frame.origin.x+320,self.Allvaluedisplayview.frame.origin.y,35, 35)];
-    [self.PichmapSkip_Btn setTitle:@"Skip" forState:UIControlStateNormal];
+    // if(self.isEditMode)
+    //{
+      
+        
+         self.PichMapTittle =[[UILabel alloc]initWithFrame:CGRectMake(0,0,410, 35)];
+        
+         self.PichmapSkip_Btn =[[UIButton alloc]initWithFrame:CGRectMake(self.PichMapTittle.frame.size.width-50,self.PichMapTittle.frame.origin.y+self.PichMapTittle.frame.size.height+10,35, 35)];
+    
+    
+        [self.PichmapSkip_Btn setTitle:@"Skip" forState:UIControlStateNormal];
     [self.Allvaluedisplayview addSubview:self.PichmapSkip_Btn];
     [self.PichmapSkip_Btn addTarget:self action:@selector(didClickSkip_BtnAction:) forControlEvents:UIControlEventTouchUpInside];
     
-    self.PichMapTittle =[[UILabel alloc]initWithFrame:CGRectMake(self.img_pichmap.frame.origin.x,self.img_pichmap.frame.origin.y-10,self.img_pichmap.frame.size.width, 35)];
+   
     self.PichMapTittle.text=@"PITCHMAP";
     self.PichMapTittle.font=[UIFont fontWithName:@"RAJDHANI-BOLD" size:20];
     self.PichMapTittle.textColor=[UIColor whiteColor];
