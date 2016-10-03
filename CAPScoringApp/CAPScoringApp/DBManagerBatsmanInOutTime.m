@@ -216,7 +216,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"DELETE PLAYERINOUTTIME WHERE COMPETITIONCODE = '%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO = '%@' AND PLAYERCODE='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,PLAYERCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"DELETE from PLAYERINOUTTIME WHERE COMPETITIONCODE = '%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO = '%@' AND PLAYERCODE='%@'",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,PLAYERCODE];
         
         const char *update_stmt = [updateSQL UTF8String];
         //   sqlite3_prepare(dataBase, update_stmt,-1, &statement, NULL);
