@@ -1171,8 +1171,8 @@
         }
         
         
-        [self disableButtonBg :_btn_B4];
-        _btn_B4.userInteractionEnabled = NO;
+        //[self disableButtonBg :_btn_B4];
+        //_btn_B4.userInteractionEnabled = NO;
         [self disableButtonBg :_btn_B6];
         _btn_B6.userInteractionEnabled = NO;
         
