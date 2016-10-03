@@ -6617,6 +6617,8 @@
     self.view_defensive.hidden = YES;
     self.img_pichmap.hidden=YES;
     self.PichMapTittle.hidden=YES;
+    self.PichmapSkip_Btn.hidden=YES;
+    self.WagonWheelSkip_Btn.hidden=YES;
     self.view_Wagon_wheel.hidden=YES;
     
     
