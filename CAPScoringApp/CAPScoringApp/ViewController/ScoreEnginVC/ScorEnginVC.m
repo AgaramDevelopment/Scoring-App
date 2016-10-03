@@ -1777,9 +1777,11 @@
                          [UIView beginAnimations:nil context:nil];
                          [UIView setAnimationDuration:5.3];
                           self.CommonView.userInteractionEnabled= YES;
+                         
                          [UIView commitAnimations];
                          
                      }];
+     leftSlideSwipe = NO;
     
     //
     //    [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
@@ -1789,7 +1791,7 @@
     //
     //       // self.commonViewwidthposition.constant =768;
     //
-    //        leftSlideSwipe = NO;
+    //       leftSlideSwipe = NO;
     //
     //        NSLog(@"alterviewwidth=%f",self.Allvaluedisplayview.frame.size.width);
     //    } completion:^(BOOL finished){
@@ -3902,6 +3904,7 @@
     self.view_aggressiveShot.hidden = YES;
     self.view_defensive.hidden = YES;
     self.img_pichmap.hidden=YES;
+   
     self.PichmapSkip_Btn.hidden=YES;
     self.WagonWheelSkip_Btn.hidden=YES;
     self.PichMapTittle.hidden=YES;
@@ -4074,6 +4077,14 @@
         [self unselectedViewBg:_view_defense];
         self.view_defensive.hidden = YES;
         isDefensiveSelected = NO;
+        
+    }
+    
+    if(isAppealSelected == NO && self.ballEventRecord.objIsappeal == nil && selectBtnTag.tag!=122){//Spin
+        
+        [self unselectedViewBg:_view_appeal];
+        //self.view_appeal.hidden = YES;
+        isAppealSelected = NO;
         
     }
     
@@ -7243,6 +7254,7 @@
         if(_AppealValuesArray==nil || _AppealValuesArray.count == 0){
             _AppealValuesArray=[[NSMutableArray alloc]init];
             _AppealValuesArray =[objDBManager AppealRetrieveEventData];
+            isAppealSelected= YES;
         }
         
         
@@ -7251,8 +7263,19 @@
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
         [table_Appeal reloadData];
-        if(isAppealSelected ==YES){
+      
+         if(isAppealSelected==NO){
+        
+               self.ballEventRecord.objIsappeal = nil;
+               [self unselectedViewBg:_view_appeal];
+               self.View_Appeal.hidden = YES;
+               isAppealSelected= YES;
+                    
+            }
+        
+        else if(isAppealSelected ==YES){
             [self selectedViewBg:_view_appeal];
+            isAppealSelected= NO;
             [table_Appeal reloadData];
             int indx=0;
             int selectePosition = -1;
@@ -7276,16 +7299,21 @@
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
             }
-        }else if(isAppealSelected && self.ballEventRecord.objIsappeal == nil){
+           
+
+            
+        }
+        else if(isAppealSelected && self.ballEventRecord.objIsappeal == nil){
             
             [self unselectedViewBg:_view_appeal];
             self.View_Appeal.hidden = YES;
             
             
         }
+       
         
         if (isSaveAppeal==YES) {
-            [self selectedViewBg:_view_appeal];
+            //[self selectedViewBg:_view_appeal];
             [table_Appeal reloadData];
             int indx=0;
             int selectePosition = -1;
@@ -7311,13 +7339,14 @@
                 
             }
         }
-        else{
-            
-            self.ballEventRecord.objIsappeal = nil;
-            [self selectedViewBg:_view_appeal];
-            
-            
-        }
+//        else{
+//            
+//            self.ballEventRecord.objIsappeal = nil;
+//            [self selectedViewBg:_view_appeal];
+//            
+//            
+//            
+//        }
         
         
         
@@ -10725,7 +10754,8 @@
         [self.view_table_select setHidden:YES];
         [self.View_Appeal setHidden:YES];
         isSaveAppeal=YES;
-        [self selectedViewBg:_view_appeal];
+        [self unselectedViewBg:_view_appeal];
+        
     }
 }
 
@@ -10755,11 +10785,11 @@
         [self ShowAlterView:@"Please Select the Batsman"];
         return NO;
     }
-    if([self.comments_txt.text isEqualToString:@""] || self.comments_txt.text==nil)
-    {
-        [self ShowAlterView:@"Please Enter the Comments"];
-        return NO;
-    }
+//    if([self.comments_txt.text isEqualToString:@""] || self.comments_txt.text==nil)
+//    {
+//        [self ShowAlterView:@"Please Enter the Comments"];
+//        return NO;
+//    }
     return YES;
 }
 
