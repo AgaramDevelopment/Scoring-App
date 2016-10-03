@@ -125,25 +125,25 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 BowlerStrickPitchRecord *record=[[BowlerStrickPitchRecord alloc]init];
                 
-                record.PMLengthCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.PMLengthCode=[self getValueByNull:statement :0];
                 
-                record.PMLengthName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record.PMLengthName=[self getValueByNull:statement :1];
                 
-                record.PMLengthCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record.PMLengthCode=[self getValueByNull:statement :2];
                 
-                record.PMLengthName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.PMLengthName=[self getValueByNull:statement :3];
                 
-                record.Runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record.Runs=[self getValueByNull:statement :4];
                 
-                record.PMX2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                record.PMX2=[self getValueByNull:statement :5];
                 
-                record.PMY2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                record.PMY2=[self getValueByNull:statement :6];
                 
-                record.BattingStyle=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record.BattingStyle=[self getValueByNull:statement :7];
                 
-                record.ISDotBall=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                record.ISDotBall=[self getValueByNull:statement :8];
                 
-                record.ISWicket=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                record.ISWicket=[self getValueByNull:statement :9];
                 
                 
                 [GetBowlingTDetails addObject:record];
