@@ -8453,6 +8453,7 @@
     
     if(leftSlideSwipe == YES){
         NSString *SelectedMatchEvent = (NSString*)[_rightSlideArray objectAtIndex:indexPath.row];
+        RightsideGesture.enabled=NO;
         if([SelectedMatchEvent isEqualToString : @"BREAKS"])
         {
             NSLog(@"1");
@@ -10468,6 +10469,7 @@
 - (void) ChangeVCRevisedBackBtnAction
 {
     [fullview removeFromSuperview];
+     RightsideGesture.enabled=YES;
     
 }
 -(void) revisiedTarget
@@ -10602,6 +10604,7 @@
 -(IBAction)FullviewHideMethod:(id)sender
 {
     [fullview removeFromSuperview];
+    RightsideGesture.enabled=YES;
 }
 
 
@@ -17740,7 +17743,7 @@
 - (void) ChangeVCBackBtnAction
 {
     [fullview removeFromSuperview];
-    
+    RightsideGesture.enabled=YES;
 }
 
 - (BOOL)checkInternetConnection
@@ -17757,6 +17760,9 @@
 -(void) EndInningsBackBtnAction{
     
     [fullview removeFromSuperview];
+    RightsideGesture.enabled=YES;
+    
+    
     //    int inningsno =[fetchSEPageLoadRecord.INNINGSNO intValue];
     //    if(inningsno > 1)
     //    {
@@ -17776,6 +17782,7 @@
         
         
         [fullview removeFromSuperview];
+        RightsideGesture.enabled=YES;
         
         [self MatchResult];
         
@@ -17784,6 +17791,7 @@
     }else{
         
         [fullview removeFromSuperview];
+         RightsideGesture.enabled=YES;
         ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
         Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
         // Archivevc.matchCode=self.matchCode;
@@ -17796,6 +17804,8 @@
 -(void) EndInningsDeleteBtnAction{
     
     [fullview removeFromSuperview];
+     RightsideGesture.enabled=YES;
+    
     ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
     Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
     // Archivevc.matchCode=self.matchCode;
@@ -17808,6 +17818,7 @@
 -(void) MatchResultFinishBtnAction{
     
     [fullview removeFromSuperview];
+     RightsideGesture.enabled=YES;
     ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
     Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
     // Archivevc.matchCode=self.matchCode;
@@ -17818,6 +17829,7 @@
 
 -(void)declareSaveBtnAction{
     [fullview removeFromSuperview];
+     RightsideGesture.enabled=YES;
     ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
     Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
     // Archivevc.matchCode=self.matchCode;
@@ -17828,10 +17840,12 @@
 -(void)declareBackBtnAction{
     
     [fullview removeFromSuperview];
+     RightsideGesture.enabled=YES;
 }
 
 -(void)declareRevertBtnAction{
     [fullview removeFromSuperview];
+     RightsideGesture.enabled=YES;
     ArchivesVC *Archivevc = [[ArchivesVC alloc]init];
     Archivevc =  (ArchivesVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ArchivesVC"];
     // Archivevc.matchCode=self.matchCode;

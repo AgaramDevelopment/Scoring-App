@@ -268,15 +268,25 @@
             self.GridRow = nil;
         }
         
-        BatsmaninoutRecord *end=(BatsmaninoutRecord*)[BatsManInOutArray objectAtIndex:indexPath.row];
+        BatsmaninoutRecord * batmaninout=(BatsmaninoutRecord*)[BatsManInOutArray objectAtIndex:indexPath.row];
         
         
-        cell.lbl_StartTime.text = end.startTime == @"" ? @"0" : end.startTime ;
-        cell.lbl_EndTime.text = end.EndTime== @"" ? @"0" : end.EndTime;
-        cell.lbl_PlayerName.text = end.playerName;
+        cell.lbl_StartTime.text = [batmaninout.startTime  isEqual: @""] ? @"0" : batmaninout.startTime ;
+        cell.lbl_EndTime.text = [batmaninout.EndTime isEqual: @""] ? @"0" : batmaninout.EndTime;
+        cell.lbl_PlayerName.text = batmaninout.playerName;
         
+        formatter = [[NSDateFormatter alloc]init];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        NSString *startDateTF = batmaninout.startTime;
+        NSString *startEndTF = batmaninout.EndTime;
         
-        cell.lbl_Duration.text = [NSString stringWithFormat:@"%@", end.Duration];
+        NSDate *date1 = [formatter dateFromString:startDateTF];
+        NSDate *date2 = [formatter dateFromString:startEndTF];
+        
+        NSTimeInterval timeDifference = [date2 timeIntervalSinceDate:date1];
+        int days = timeDifference / 60;
+        NSString * Duration = [NSString stringWithFormat:@"%d", days];
+        cell.lbl_Duration.text = Duration;
     
         
         return cell;
@@ -327,33 +337,22 @@
         oldPlayercode =obj.playercode;
         
         
-       // dbEndSession = [[DBManagerEndSession alloc]init];
         
-        //RUNSSCORED
-       /// NSString *run=[dbEndSession GetRunsScoredForFetchEndSession :competitioncode: matchcode :sessionRecords.SESSIONNO : obj.INNINGSNO : obj.DAYNO];
-        //TOTALWICKET
-       // NSString *wickets=[dbEndSession GetWicketLoftForFetchEndSession :competitioncode: matchcode :obj.INNINGSNO :sessionRecords.SESSIONNO : obj.DAYNO];
+         formatter = [[NSDateFormatter alloc]init];
+        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+         NSString *startDateTF = obj.startTime;
+         NSString *startEndTF = obj.EndTime;
         
-        //NSString *startOver =[dbEndSession GetStartOverNoForFetchEndSession :competitioncode :matchcode :sessionRecords.SESSIONNO : obj.INNINGSNO : obj.DAYNO];
+         NSDate *date1 = [formatter dateFromString:startDateTF];
+         NSDate *date2 = [formatter dateFromString:startEndTF];
         
-       // NSString *endOverNO = [dbEndSession GetEndOverNoForFetchEndSession:competitioncode :matchcode :sessionRecords.SESSIONNO :obj.DAYNO :obj.INNINGSNO];
-        
-       // NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : obj.DAYNO];
-        
-       // NSString  *ENDBALLNO=[dbEndSession GetEndBallNoForFetchEndSession :competitioncode: matchcode : sessionRecords.SESSIONNO :obj.DAYNO: obj.INNINGSNO : endOverNO];
-        
+        NSTimeInterval timeDifference = [date2 timeIntervalSinceDate:date1];
+        int days = timeDifference / 60;
+         NSString * Duration = [NSString stringWithFormat:@"%d", days];
+
         
         
-        //NSString*startInningsTime = obj.SESSIONSTARTTIME;
-      //  NSString*endInningsTime  = obj.SESSIONENDTIME;
-       // NSString*teamName = obj.TEAMNAME;
-        
-       // NSString*dayNo = obj.DAYNO;
-        
-        
-       // NSNumber *inningsNo = obj.INNINGSNO;
-        
-        
+    
         
        BtnurrentTittle = [NSString stringWithFormat:self.btn_save.currentTitle];
         BtnurrentTittle = @"UPDATE";
@@ -370,7 +369,7 @@
         
        
        
-        _lbl_duration.text = obj.Duration;
+        _lbl_duration.text = Duration;
         self.view_heading.hidden = YES;
         self.tbl_BatsManTime.hidden = YES;
         self.view_Allcontrols.hidden = NO;
@@ -401,6 +400,7 @@
     [self.btn_save setTitle: @"SAVE" forState: UIControlStateNormal];
     
     self.view_addBtn.hidden = YES;
+    self.lbl_playerName.text =@"";
     self.lbl_duration.text = @"";
     self.txt_startTime.text = @"";
     self.txt_endTime.text = @"";
@@ -601,7 +601,7 @@
             self.btn_save.hidden=YES;
             self.btn_delete.hidden=YES;
         
-        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"End Session Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"BatMan IN/OUT TIME" message:@"BatMan IN/OUT TIME Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
     }
 //}
@@ -617,7 +617,7 @@
     
     
     
-    [objDBManagerBatsmanInOutTime DELETEPLAYERINOUTTIME:_compitionCode :_MATCHCODE :_TEAMCODE :_INNINGSNO :Playercode];
+    [objDBManagerBatsmanInOutTime DELETEPLAYERINOUTTIME:_compitionCode :_MATCHCODE :_TEAMCODE :_INNINGSNO :oldPlayercode];
     
     
 //    if(self.checkInternetConnection){
@@ -662,7 +662,14 @@
 //    }
     
     
-   // [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
+    //[self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];
+    
+    
+    BatsManInOutArray=[[NSMutableArray alloc]init];
+    
+    BatsManInOutArray = [objDBManagerBatsmanInOutTime getBatsManBreakTime:_compitionCode :_MATCHCODE :_INNINGSNO :_TEAMCODE];
+
+    
     [self.tbl_BatsManTime reloadData];
     
     // [endSessionArray removeLastObject];
@@ -686,7 +693,7 @@
     {
         IsDropDown = YES;
         
-        objDrobDowntbl=[[UITableView alloc]initWithFrame:CGRectMake(self.View_playerlist.frame.origin.x, self.View_StartTime.frame.origin.y+95, 260, 300)];
+        objDrobDowntbl=[[UITableView alloc]initWithFrame:CGRectMake(self.View_playerlist.frame.origin.x, self.View_StartTime.frame.origin.y+95, 280, 300)];
         objDrobDowntbl.dataSource=self;
         objDrobDowntbl.delegate=self;
         objDrobDowntbl.hidden=NO;

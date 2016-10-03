@@ -666,7 +666,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         if (bowlerCellTvc == nil) {
             [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
             bowlerCellTvc = self.bowlerCell;
-            self.bowlerCell = nil;
+            //self.bowlerCell = nil;
         }
         
          UIView * ExpandBowlerView = (UIView *)[bowlerCellTvc viewWithTag:11];
