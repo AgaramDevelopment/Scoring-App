@@ -3389,7 +3389,7 @@
         }
         if(isEndBallSuccess){
             isEndOverOnEndBall = NO;
-            [self overEVENT];
+           BOOL isInningsCompleted =  [self overEVENT];
         }
     }
 }
@@ -11320,12 +11320,40 @@
     //Generate Ball Ticker
     [self CreateBallTickers : fetchSEPageLoadRecord.BallGridDetails];
     
-    //CHECK Wickets
+    //CHECK Wickets ,target achived,Innings completed
+
+    isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue <=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]>1)?YES:NO;
+    over=[NSString stringWithFormat:@"%d.%d",fetchSEPageLoadRecord.BATTEAMOVERS,fetchSEPageLoadRecord.BATTEAMOVRBALLS].floatValue;
+
     if(fetchSEPageLoadRecord.BATTEAMWICKETS==10 && (![fetchSEPageLoadRecord.INNINGSSTATUS isEqualToString:@"1"])){
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"No more wickets to play." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
         [alter setTag:10004];
+    }else if(isTargetReached){
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Target achieved do you want to continue?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        [alter show];
+        [alter setTag:2002];
+    }else if([ValidedMatchType containsObject:fetchSEPageLoadRecord.MATCHTYPE] && over >=[fetchSEPageLoadRecord.MATCHOVERS floatValue]  && ![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
+    {
+        NSLog(@"%@",self.matchTypeCode);
+        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Inning is Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [altert setTag:1001];
+        [altert show];
+        
+//        if([fetchSEPageLoadRecord.INNINGSNO intValue] == 2)
+//        {
+//            //NSLog(@"Match Result");
+//            [self MatchResult];
+//            
+//        }
+//        else
+//        {
+//            //NSLog(@"ENNDings");
+//            [self ENDINNINGS];
+//        }
+        
     }
+    
 }
 - (IBAction)btn_swap:(id)sender {
     //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
@@ -18848,6 +18876,7 @@
     float Yposition = p.y-10;
 
      [self PitchmapSelectposition:Xposition :Yposition];
+    [self selectedButtonBg:self.btn_pichmap];
     [self Wangon_WheelMethod];
    
 }
@@ -18947,6 +18976,7 @@
     [self Wangon_WheelSelectPosition:Xposition :Yposition];
     _view_Wagon_wheel.hidden = YES;
      self.WagonWheelSkip_Btn.hidden = YES;
+    [self selectedButtonBg:self.btn_wagonwheel];
 }
 
 -(void)EditModePitchMap
