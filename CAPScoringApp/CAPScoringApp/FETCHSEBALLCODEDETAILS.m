@@ -300,7 +300,7 @@
     
         ISFREEHIT= [[NSNumber alloc] init];
         
-        if( ![[dbEditScoreEngine GetFreeHitDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ] isEqual:@""])
+        if( ![[dbEditScoreEngine GetFreeHitDetailsForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ] isEqual:@"0"])
         {
             ISFREEHIT = [NSNumber numberWithInt:1];
         }
