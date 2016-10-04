@@ -681,9 +681,9 @@ EndInnings *insertScoreBoard;
     }
     else
     {
-        if(([ISBOWLERCHANGED  isEqual: @1]) || (([F_ISLEGALBALL  isEqual: @1]) && (NOBALL > 0 || WIDE > 0)))
+        if(([ISBOWLERCHANGED  isEqual: @1]) || ((F_ISLEGALBALL.intValue == 1) && (NOBALL > 0 || WIDE > 0)))
         {
-            U_BOWLERBALLS = ([F_NOBALL  isEqual: @0] && ([F_WIDE  isEqual: @0]) && [BOWLERCOUNT  isEqual: @1] && [ISOVERCOMPLETE  isEqual: @0]) ? ([NSNumber numberWithInt:F_BOWLERBALLS.intValue - 1]): F_BOWLERBALLS;
+            U_BOWLERBALLS = (F_NOBALL.intValue  == 0 && (F_WIDE.intValue == 0) && [BOWLERCOUNT  isEqual: @1] && ISOVERCOMPLETE.intValue == 0) ? ([NSNumber numberWithInt:F_BOWLERBALLS.intValue - 1]): F_BOWLERBALLS;
             U_BOWLERPARTIALOVERBALLS = ([F_NOBALL  isEqual:@0] && [F_WIDE  isEqual: @0] && BOWLERCOUNT.intValue > 1)? ([NSNumber numberWithInt:F_BOWLERPARTIALOVERBALLS.intValue - 1]) : F_BOWLERPARTIALOVERBALLS ;
         }
         else
