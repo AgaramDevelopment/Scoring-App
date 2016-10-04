@@ -70,6 +70,7 @@
 #import "Utitliy.h"
 #import "FETCHSELASTINSTANCEDTLS.h"
 #import "BatsManINOUT.h"
+#import "CMPopTipView.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -300,6 +301,11 @@
 @property (nonatomic, weak) IBOutlet UIView *objcommonRemarkviews;
 
 @property(nonatomic,strong)NSMutableArray *rightSlideArray;
+
+
+@property (nonatomic, strong)	NSMutableArray	*visiblePopTipViews;
+@property (nonatomic, strong)	id				currentPopTipViewTarget;
+
 
 @end
 
@@ -18691,12 +18697,16 @@
     
     if(view_addedit != nil)
     {
+        [self dismissAllPopTipViews];
         [view_addedit removeFromSuperview];
         [leftrotation removeFromSuperview];
         [Rightrotation removeFromSuperview];
         [Cancelrotation removeFromSuperview];
         [Editrotation removeFromSuperview];
     }
+    
+    
+    
     UIButton * btn_add = (UIButton *)sender;
     
     UIView *ballView = btn_add.superview;
@@ -18764,7 +18774,61 @@
     [Rightrotation addTarget:self action:@selector(didClickRightrotation:) forControlEvents:UIControlEventTouchUpInside];
     Rightrotation.tag = btn_add.tag;
     
+    UIView *contentView = view_addedit;
+    UIButton * contentButton1 =leftrotation;
+    UIButton * contentbutton2 = Editrotation;
+    UIButton * contentbutton3 = Cancelrotation;
+    UIButton * contentbutton4 = Rightrotation;
+    
+    
+    CMPopTipView *popTipView;
+    if (contentView) {
+        popTipView = [[CMPopTipView alloc] initWithCustomView:contentView :contentButton1 :contentbutton2 :contentbutton3 :contentbutton4];
+    }
+    else {
+        //popTipView = [[CMPopTipView alloc] initWithMessage:contentMessage];
+        popTipView = [[CMPopTipView alloc] initWithCustomView:contentView :contentButton1 :contentbutton2 :contentbutton3 :contentbutton4];
+    }
+    popTipView.delegate = self;
+    
+    
+    popTipView.animation = arc4random() % 2;
+    popTipView.has3DStyle = (BOOL)(arc4random() % 2);
+    
+    popTipView.dismissTapAnywhere = YES;
+    [popTipView autoDismissAnimated:YES atTimeInterval:3.0];
+    
+    if ([sender isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)sender;
+        [popTipView presentPointingAtView:button inView:self.view animated:YES];
+    }
+    else {
+        UIBarButtonItem *barButtonItem = (UIBarButtonItem *)sender;
+        [popTipView presentPointingAtBarButtonItem:barButtonItem animated:YES];
+    }
+    
+    [self.visiblePopTipViews addObject:popTipView];
+    self.currentPopTipViewTarget = sender;
+
+    
 }
+
+- (void)dismissAllPopTipViews
+{
+    while ([self.visiblePopTipViews count] > 0) {
+        CMPopTipView *popTipView = [self.visiblePopTipViews objectAtIndex:0];
+        [popTipView dismissAnimated:YES];
+        [self.visiblePopTipViews removeObjectAtIndex:0];
+    }
+}
+#pragma mark - CMPopTipViewDelegate methods
+
+- (void)popTipViewWasDismissedByUser:(CMPopTipView *)popTipView
+{
+    [self.visiblePopTipViews removeObject:popTipView];
+    self.currentPopTipViewTarget = nil;
+}
+
 
 -(IBAction)didClickRightrotation:(id)sender
 {

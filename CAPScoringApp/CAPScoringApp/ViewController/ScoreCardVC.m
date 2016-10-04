@@ -34,8 +34,10 @@
     NSString *regioncode;
     UIImageView * Img_ball;
     BOOL isPitch_Img;
+    
     NSIndexPath *selectedIndexPath;
-    UIView *ExpandBattingview;
+    UIView * ExpandBattingview;
+    UIView * ExpandBowlerView;
     
 }
 @property (strong, nonatomic) IBOutlet UILabel *cener_lbl;
@@ -373,6 +375,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
          expendbowlerview.alpha = 1;
         [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(3.14);
     }];
+    [tableView reloadData];
 }
 
 //perform your collapse stuff (may include animation) for cell here. It will be called when the user touches an expanded cell so it gets collapsed or the table is in the expandOnlyOneCell satate and the user touches another item, So the last expanded item has to collapse
@@ -388,6 +391,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(-3.14);
     } completion:^(BOOL finished) {
         expendBatmanview.hidden = YES;
+        expendbowlerview.hidden=YES;
     }];
 }
 
@@ -669,7 +673,12 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             //self.bowlerCell = nil;
         }
         
-         UIView * ExpandBowlerView = (UIView *)[bowlerCellTvc viewWithTag:11];
+        if(isPitch_Img ==NO)
+        {
+            self.bowlerCell.wagonPitch_img.hidden=YES;
+        }
+        
+         ExpandBowlerView = (UIView *)[bowlerCellTvc viewWithTag:11];
         
         [bowlerCellTvc.BowlerspiderWagon_Btn addTarget:self action:@selector(didClickBowlingSpiderWagonAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -734,15 +743,15 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 }
 
 
-//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-//{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
 //    NSLog(@"index:%ld",(long)indexPath.row);
 //    if(batsmanPostion <= indexPath.row && extraPostion>indexPath.row)
 //    {
 //         NSLog(@"indexpath:%ld",(long)indexPath.row);
 //    }
 // //   [tableView deselectRowAtIndexPath:indexPath animated:YES];
-//}
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isexpanded
 {
@@ -774,9 +783,15 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         return 44;
     }else if(indexPath.row >= bowlerPostion){
         
-        if (isexpanded)
+        if (indexPath == selectedIndexPath && isexpanded)
+        {
+            ExpandBowlerView.hidden=NO;
             return 550;
-        return 70;
+        }
+        else{
+            ExpandBowlerView.hidden=YES;
+            return 70;
+        }
     }
     
     return 70;
@@ -1021,9 +1036,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     NSLog(@"Indexpath = %d",row);
     
     
-    self.bowlerCell.pitch_Btn.backgroundColor =[UIColor clearColor];
-    self.bowlerCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
-    self.bowlerCell.spiderWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+    self.bowlerCell.Bowlerpitch_Btn.backgroundColor =[UIColor clearColor];
+    self.bowlerCell.BowlersectorWagon_Btn.backgroundColor =[UIColor clearColor];
+    self.bowlerCell.BowlerspiderWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
     self.bowlerCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
     BowlingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BowlingSummaryForScoreBoard objectAtIndex:indexPath.row-7];
     NSMutableArray * objArray =[objBowlingStatistics GetFETCHSBBOWLINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BOWLERCODE];
@@ -1082,11 +1097,11 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     NSLog(@"Indexpath = %d",row);
     
     
-    self.bowlerCell.pitch_Btn.backgroundColor =[UIColor clearColor];
-    self.bowlerCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
-    self.bowlerCell.spiderWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+    self.bowlerCell.Bowlerpitch_Btn.backgroundColor =[UIColor clearColor];
+    self.bowlerCell.BowlersectorWagon_Btn.backgroundColor =[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+    self.bowlerCell.BowlerspiderWagon_Btn.backgroundColor=[UIColor clearColor];
     self.bowlerCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
-    BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:row-7];
+    BowlingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BowlingSummaryForScoreBoard objectAtIndex:row-7];
     NSMutableArray * objArray =[objBowlingStatistics GetFETCHSBBOWLINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BOWLERCODE];
     int x1position;
     int x2position;
@@ -1094,7 +1109,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     int y2position;
     for(int i=0; i<objArray.count;i++)
     {
-        BattingPayerStatisticsRecord * objRecord =(BattingPayerStatisticsRecord *)[objArray objectAtIndex:i];
+        BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[objArray objectAtIndex:i];
         x1position = [objRecord.WWX1 intValue];
         y1position = [objRecord.WWY1 intValue];
         x2position  =[objRecord .WWX2 intValue];
@@ -1147,11 +1162,11 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     self.bowlerCell.wagonPitch_img.image=[UIImage imageNamed:@"pichmapRH"];
     
-    self.bowlerCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
-    self.bowlerCell.spiderWagon_Btn.backgroundColor =[UIColor clearColor];
-    self.bowlerCell.pitch_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
-    BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 7];
-    NSMutableArray * objArray =[objBowlingStatistics GetFETCHSBBOWLINGPLAYERSTATISTICSPitch:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
+    self.bowlerCell.Bowlerpitch_Btn.backgroundColor =[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+    self.bowlerCell.BowlerspiderWagon_Btn.backgroundColor =[UIColor clearColor];
+    self.bowlerCell.Bowlerpitch_Btn.backgroundColor=[UIColor clearColor];
+    BowlingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BowlingSummaryForScoreBoard objectAtIndex:indexPath.row-7];
+    NSMutableArray * objArray =[objBowlingStatistics GetFETCHSBBOWLINGPLAYERSTATISTICSPitch:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BOWLERCODE];
     
     int xposition;
     int yposition;

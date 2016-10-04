@@ -316,6 +316,7 @@ BOOL isWicketSelected;
         {
             [self.Btn_innings2team2 sendActionsForControlEvents:UIControlEventTouchUpInside];
         }
+        [self.tbl_innnings reloadData];
     }
     
   

@@ -1039,6 +1039,13 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pichmapLH" translatesAutoresizingMaskIntoConstraints="NO" id="UMm-rE-6Ys">
+                                        <rect key="frame" x="148" y="40" width="400" height="400"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="400" id="QFN-Ou-mHs"/>
+                                            <constraint firstAttribute="width" constant="400" id="UGS-A6-eLn"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1050,6 +1057,7 @@
                                     <constraint firstItem="pY7-dG-xPS" firstAttribute="leading" secondItem="Bju-oC-W4h" secondAttribute="leading" constant="220" id="5Px-ZO-7lg"/>
                                     <constraint firstItem="NVa-2y-OdM" firstAttribute="top" secondItem="jgj-GQ-fzH" secondAttribute="bottom" constant="5" id="6HX-U8-QQL"/>
                                     <constraint firstItem="ien-re-qjQ" firstAttribute="top" secondItem="wbT-GG-gRe" secondAttribute="bottom" constant="5" id="B7A-80-Miy"/>
+                                    <constraint firstItem="UMm-rE-6Ys" firstAttribute="top" secondItem="Bju-oC-W4h" secondAttribute="top" constant="40" id="Ovx-LH-Lh3"/>
                                     <constraint firstItem="iYN-kX-jgS" firstAttribute="leading" secondItem="N9y-Ot-Gxq" secondAttribute="trailing" constant="21" id="Pve-1R-Kne"/>
                                     <constraint firstItem="N9y-Ot-Gxq" firstAttribute="centerX" secondItem="Bju-oC-W4h" secondAttribute="centerX" id="RFr-qh-pyq"/>
                                     <constraint firstItem="hDQ-Fn-awu" firstAttribute="top" secondItem="Bju-oC-W4h" secondAttribute="top" constant="10" id="TyL-yX-qEy"/>
@@ -1063,6 +1071,7 @@
                                     <constraint firstItem="plI-xa-Zgm" firstAttribute="top" secondItem="ien-re-qjQ" secondAttribute="bottom" constant="90" id="iuo-AQ-IO7"/>
                                     <constraint firstItem="wbT-GG-gRe" firstAttribute="leading" secondItem="N9y-Ot-Gxq" secondAttribute="trailing" constant="21" id="kkd-Cz-fNR"/>
                                     <constraint firstAttribute="trailing" secondItem="plI-xa-Zgm" secondAttribute="trailing" constant="128" id="qcc-zO-cOa"/>
+                                    <constraint firstItem="jgj-GQ-fzH" firstAttribute="leading" secondItem="UMm-rE-6Ys" secondAttribute="trailing" constant="22" id="vHa-7m-Ops"/>
                                     <constraint firstItem="mXL-Ut-XV1" firstAttribute="top" secondItem="Bju-oC-W4h" secondAttribute="top" constant="10" id="ySh-e7-YCS"/>
                                 </constraints>
                             </view>
@@ -1145,6 +1154,7 @@
                 <outlet property="lbl_bowler_sixes" destination="K7U-2y-0mb" id="Ebf-ox-lRF"/>
                 <outlet property="lbl_bowler_wicket" destination="pYq-Mt-0rO" id="bTW-kc-D0R"/>
                 <outlet property="lbl_bowler_wide" destination="p7f-WM-eVR" id="Jb6-NX-2mv"/>
+                <outlet property="wagonPitch_img" destination="UMm-rE-6Ys" id="g9f-IC-MMR"/>
             </connections>
             <point key="canvasLocation" x="423" y="1132"/>
         </tableViewCell>
