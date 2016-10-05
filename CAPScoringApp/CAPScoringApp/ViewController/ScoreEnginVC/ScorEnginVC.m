@@ -18721,7 +18721,7 @@
     // ballCodeIndex= btn_add.tag;
     //ScrollViewer.contentSize;
     
-    view_addedit=[[UIView alloc]initWithFrame:CGRectMake((ScrollViewer.contentSize.width>=350  &&ScrollViewer.contentSize.width-100 <= ballView.frame.origin.x )? ballView.frame.origin.x-90:ballView.frame.origin.x,ballView.frame.origin.y+40,130, 38)];
+    view_addedit=[[UIView alloc]initWithFrame:CGRectMake((ScrollViewer.contentSize.width>=350  &&ScrollViewer.contentSize.width-100 <= ballView.frame.origin.x )? ballView.frame.origin.x-90:ballView.frame.origin.x,ballView.frame.origin.y+20,145, 38)];
     [view_addedit setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
     if(width > 400){
         [ScrollViewer addSubview:view_addedit];
@@ -18731,7 +18731,7 @@
     }
     
     //Left
-    leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(view_addedit.frame.origin.x, view_addedit.frame.origin.y+3, 25, 25)];
+    leftrotation=[[UIButton alloc]initWithFrame:CGRectMake(5,view_addedit.frame.origin.y,30,30)];
     [leftrotation setImage:[UIImage imageNamed:@"LeftRotation"] forState:UIControlStateNormal];
     if(width > 400){
         [ScrollViewer addSubview:leftrotation];
@@ -18742,7 +18742,7 @@
     leftrotation.tag = btn_add.tag;
     
     //Edit
-    Editrotation=[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.origin.x+leftrotation.frame.size.width+8, leftrotation.frame.origin.y, 25, 25)];
+    Editrotation=[[UIButton alloc]initWithFrame:CGRectMake(leftrotation.frame.size.width+15,leftrotation.frame.origin.y,30,30)];
     [Editrotation setImage:[UIImage imageNamed:@"ArchiveEdit"] forState:UIControlStateNormal];
     if(width > 400){
         [ScrollViewer addSubview:Editrotation];
@@ -18753,7 +18753,7 @@
     Editrotation.tag = btn_add.tag;
     
     //Delete
-    Cancelrotation=[[UIButton alloc]initWithFrame:CGRectMake(Editrotation.frame.origin.x+Editrotation.frame.size.width+8, Editrotation.frame.origin.y, 25, 25)];
+    Cancelrotation=[[UIButton alloc]initWithFrame:CGRectMake(Editrotation.frame.origin.y+ Editrotation.frame.size.width+40,Editrotation.frame.origin.y,30,30)];
     [Cancelrotation setImage:[UIImage imageNamed:@"ArchiveCancel"] forState:UIControlStateNormal];
     if(width > 400){
         [ScrollViewer addSubview:Cancelrotation];
@@ -18764,7 +18764,7 @@
     Cancelrotation.tag = btn_add.tag;
     
     //Right
-    Rightrotation=[[UIButton alloc]initWithFrame:CGRectMake(Cancelrotation.frame.origin.x+Cancelrotation.frame.size.width+8, Cancelrotation.frame.origin.y, 25, 25)];
+    Rightrotation=[[UIButton alloc]initWithFrame:CGRectMake(view_addedit.frame.size.width-13, Cancelrotation.frame.origin.y,30,30)];
     [Rightrotation setImage:[UIImage imageNamed:@"RightRotation"] forState:UIControlStateNormal];
     if(width > 400){
         [ScrollViewer addSubview:Rightrotation];
