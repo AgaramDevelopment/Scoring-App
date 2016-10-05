@@ -265,7 +265,7 @@
         if (cell == nil) {
             [[NSBundle mainBundle] loadNibNamed:@"BatsManINOutTime" owner:self options:nil];
             cell = self.GridRow;
-            self.GridRow = nil;
+            //self.GridRow = nil;
         }
         
         BatsmaninoutRecord * batmaninout=(BatsmaninoutRecord*)[BatsManInOutArray objectAtIndex:indexPath.row];
@@ -287,7 +287,7 @@
         int days = timeDifference / 60;
         NSString * Duration = [NSString stringWithFormat:@"%d", days];
         cell.lbl_Duration.text = Duration;
-    
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
         
         return cell;
         
@@ -722,7 +722,7 @@
     if (back == NO) {
         
         self.view_Allcontrols.hidden = YES;
-        //self.tbl_session.hidden = NO;
+        self.tbl_BatsManTime.hidden = NO;
         self.view_heading.hidden = NO;
         self.view_datePicker.hidden = YES;
         _btn_save.hidden = YES;
@@ -730,7 +730,7 @@
         self.view_addBtn.hidden = NO;
         objDrobDowntbl.hidden=YES;
         back = YES;
-        
+        [self.tbl_BatsManTime reloadData];
     }else if (back == YES){
         
         

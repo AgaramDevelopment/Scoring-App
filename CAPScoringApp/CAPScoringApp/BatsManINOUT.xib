@@ -62,6 +62,7 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="backgroundWithoutIcon" translatesAutoresizingMaskIntoConstraints="NO" id="R4L-0l-nUQ">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKe-9q-9CL">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -271,7 +272,7 @@
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tbG-iX-QPR">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="fyF-qP-BZd"/>
                                 <outlet property="delegate" destination="-1" id="dYH-r9-MEi"/>
@@ -693,7 +694,6 @@
                                     </variation>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="PYj-fY-egx" firstAttribute="leading" secondItem="X3q-bs-Xhc" secondAttribute="leading" constant="23" id="0D6-ZP-3NW"/>
                                 <constraint firstAttribute="trailing" secondItem="4ok-pD-qe3" secondAttribute="trailing" constant="34" id="4Ea-O9-Bdi"/>
