@@ -421,13 +421,22 @@
 -(BOOL) checkValidation{
     
     
-    if([self.txt_endTime.text isEqualToString:@""] && ![self.txt_startTime.text isEqualToString:@""]){
-        [self showDialog:@"Please Choose End Session Time" andTitle:@"End Session"];
+    if([self.lbl_playerName.text isEqualToString:@""]){
+        [self showDialog:@"Please Choose Player Name" andTitle:@"BatMan IN/OUT TIME"];
+        return NO;
+    }
+    else if([self.txt_startTime.text isEqualToString:@""]){
+        [self showDialog:@"Please Choose Start Time" andTitle:@"BatMan IN/OUT TIME"];
         return NO;
     }
     
-    if(![self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
-        [self showDialog:@"Duration should be greated than zero" andTitle:@"End Session"];
+    else if([self.txt_endTime.text isEqualToString:@""]){
+        [self showDialog:@"Please Choose End Time" andTitle:@"BatMan IN/OUT TIME"];
+        return NO;
+    }
+    
+   else if([self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
+        [self showDialog:@"Duration should be greated than zero" andTitle:@"BatMan IN/OUT TIME"];
         return NO;
     }
     
@@ -435,6 +444,7 @@
     
     return YES;
 }
+
 
 /**
  * Show message for given title and content
@@ -680,7 +690,7 @@
     self.btn_delete.hidden = YES;
     self.btn_save.hidden = YES;
     self.view_addBtn.hidden = NO;
-    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Session" message:@"End Session Deleted Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+    UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"BatMan IN/OUT TIME" message:@"BatMan IN/OUT TIME Deleted Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
     [alter show];
 
 

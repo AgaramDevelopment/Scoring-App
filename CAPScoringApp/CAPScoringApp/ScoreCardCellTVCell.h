@@ -23,6 +23,8 @@
 @property (strong,nonatomic) IBOutlet UIButton * wangon3s_Btn;
 @property (strong,nonatomic) IBOutlet UIButton * wangon4s_Btn;
 @property (strong,nonatomic) IBOutlet UIButton * wangon6s_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * WangonAll_Btn;
+
 
 
 
