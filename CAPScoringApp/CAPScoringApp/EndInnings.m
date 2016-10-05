@@ -1019,10 +1019,16 @@ EndInnings *insertScoreCard;
     N_BOWLEROVERS = O_BOWLEROVERS;
     N_BOWLINGPOSITIONNO = O_BOWLINGPOSITIONNO;
     N_BOWLERMAIDENS =  O_BOWLERMAIDENS;
+    int bowlRuns;
     
-    
- 
-    int bowlRuns = (BYES.intValue == 0 && LEGBYES.intValue == 0) ? (O_BOWLERRUNS.intValue + RUNS.intValue + WIDE.intValue + NOBALL.intValue + (WIDE.intValue > 0 ? 0 : OVERTHROW.intValue)) : (O_BOWLERRUNS.intValue + WIDE.intValue + NOBALL.intValue+ BYES.intValue); //Byes.intvalueAdd by Murugesh
+    if(BYES.intValue > 0 && NOBALL.intValue > 0)
+    {
+         bowlRuns = (BYES.intValue == 0 && LEGBYES.intValue == 0) ? (O_BOWLERRUNS.intValue + RUNS.intValue + WIDE.intValue + NOBALL.intValue + (WIDE.intValue > 0 ? 0 : OVERTHROW.intValue)) : (O_BOWLERRUNS.intValue + WIDE.intValue + NOBALL.intValue+BYES.intValue);
+    }
+ else
+ {
+    bowlRuns = (BYES.intValue == 0 && LEGBYES.intValue == 0) ? (O_BOWLERRUNS.intValue + RUNS.intValue + WIDE.intValue + NOBALL.intValue + (WIDE.intValue > 0 ? 0 : OVERTHROW.intValue)) : (O_BOWLERRUNS.intValue + WIDE.intValue + NOBALL.intValue);
+ }
     
     N_BOWLERRUNS = [NSNumber numberWithInt: bowlRuns];
     
