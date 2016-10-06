@@ -3535,7 +3535,7 @@
                     [self ENDINNINGS];
                 }
                 else{
-                    if([self.lbl_stricker_name.text isEqualToString:@""] ||self.lbl_stricker_name.text == nil)
+                    if([self.lbl_stricker_name.text isEqualToString:@""] ||self.lbl_stricker_name.text == nil  )
                     {
                         UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                         [altert show];
@@ -3547,7 +3547,7 @@
                         [altert show];
                         [altert setTag:1005];
                     }
-                    else if ([self.lbl_bowler_name.text isEqualToString:@""])
+                    else if ([self.lbl_bowler_name.text isEqualToString:@""] )
                     {
                         UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Bowler " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                         [altert show];
