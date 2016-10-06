@@ -1486,7 +1486,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "887"
-            endingLineNumber = "887">
+            endingLineNumber = "887"
+            landmarkName = "-insertScordBoard::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1500,7 +1502,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "640"
-            endingLineNumber = "640">
+            endingLineNumber = "640"
+            landmarkName = "-insertScordBoard::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2058,7 +2062,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "720"
-            endingLineNumber = "720">
+            endingLineNumber = "720"
+            landmarkName = "-insertScordBoard::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2072,7 +2078,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1086"
-            endingLineNumber = "1086">
+            endingLineNumber = "1086"
+            landmarkName = "-insertScordBoard::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2086,7 +2094,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "903"
-            endingLineNumber = "903">
+            endingLineNumber = "903"
+            landmarkName = "-insertScordBoard::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2100,7 +2110,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "979"
-            endingLineNumber = "979">
+            endingLineNumber = "979"
+            landmarkName = "-insertScordBoard::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2114,7 +2126,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1081"
-            endingLineNumber = "1081">
+            endingLineNumber = "1081"
+            landmarkName = "-insertScordBoard::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2128,7 +2142,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "673"
-            endingLineNumber = "673">
+            endingLineNumber = "673"
+            landmarkName = "-insertScordBoard::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2142,7 +2158,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "825"
-            endingLineNumber = "825">
+            endingLineNumber = "825"
+            landmarkName = "-insertScordBoard::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2156,7 +2174,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "916"
-            endingLineNumber = "916">
+            endingLineNumber = "916"
+            landmarkName = "-insertScordBoard::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2170,7 +2190,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1002"
-            endingLineNumber = "1002">
+            endingLineNumber = "1002"
+            landmarkName = "-insertScordBoard::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
