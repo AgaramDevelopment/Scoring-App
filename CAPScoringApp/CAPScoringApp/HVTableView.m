@@ -151,6 +151,8 @@
 		}
 		else
 		{
+            
+
 			[HVTableViewDataSource tableView:tableView expandCell:cell withIndexPath:indexPath];
             
 			actionToTake = 0;

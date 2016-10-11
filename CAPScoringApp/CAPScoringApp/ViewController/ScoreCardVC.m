@@ -40,7 +40,35 @@
     UIView * ExpandBowlerView;
     NSMutableArray * BatmanRunsArray;
     NSMutableArray * BowlerRunArray;
+    int ThirdmanCount;
+    int point;
+    int cover;
+    int longoff;
+    int longon;
+    int midWicket;
+    int squareleg;
+    int fineleg;
     
+    
+    UILabel * fineleg_lbl;
+    UILabel * squareleg_lbl;
+    UILabel * midWicket_lbl;
+    UILabel * longon_lbl;
+    UILabel * longoff_lbl;
+    UILabel * cover_lbl;
+    UILabel * point_lbl;
+    UILabel * Thirdman_lbl;
+    
+    int ThirdmanCountRun;
+    int pointRun;
+    int coverRun;
+    int longoffRun;
+    int longonRun;
+    int midWicketRun;
+    int squarelegRun;
+    int finelegRun;
+    
+
 }
 @property (strong, nonatomic) IBOutlet UILabel *cener_lbl;
 @end
@@ -358,6 +386,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 }
 -(void)tableView:(UITableView *)tableView expandCell:(UITableViewCell *)cell withIndexPath:(NSIndexPath *) indexPath {
     
+    
     selectedIndexPath=indexPath;
 
     //UILabel *detailLabel = (UILabel *)[cell viewWithTag:3];
@@ -377,7 +406,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
          expendbowlerview.alpha = 1;
         [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(3.14);
     }];
-    [tableView reloadData];
+   // [tableView reloadData];
 }
 
 //perform your collapse stuff (may include animation) for cell here. It will be called when the user touches an expanded cell so it gets collapsed or the table is in the expandOnlyOneCell satate and the user touches another item, So the last expanded item has to collapse
@@ -458,6 +487,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             self.batsmanCell.pitchMap_img.hidden=YES;
         }
         
+        
+        
         ExpandBattingview = (UIView *)[cell viewWithTag:10];
         [cell.spiderWagon_Btn addTarget:self action:@selector(didClickSpiderWagonAction:) forControlEvents:UIControlEventTouchUpInside];
         
@@ -519,6 +550,22 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             ExpandBattingview.hidden = NO;
 
         }
+        
+        
+        if([battingSummaryDetailsForSB.BATTINGSTYLE isEqualToString:@"MSC012"])
+        {
+            
+            //self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
+            self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
+            
+        }
+        else
+        {
+            
+            self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
+        }
+
+        
         
         cell.lbl_player_name.text = battingSummaryDetailsForSB.BATSMANNAME;
         [cell setBackgroundColor:[UIColor clearColor]];
@@ -679,7 +726,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
         if(isPitch_Img ==NO)
         {
-            self.bowlerCell.wagonPitch_img.hidden=YES;
+            self.bowlerCell.BowlerwagonPitch_img.hidden=YES;
         }
         
          ExpandBowlerView = (UIView *)[bowlerCellTvc viewWithTag:11];
@@ -812,18 +859,69 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     NSLog(@"Indexpath = %d",row);
     
-    self.batsmanCell.pitchMap_img.hidden=YES;
-    self.batsmanCell.wagonPitch_img.hidden=NO;
     self.batsmanCell.pitch_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.spiderWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
-    self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
+    
+    self.batsmanCell.pitchMap_img.hidden=YES;
+    self.batsmanCell.wagonPitch_img.hidden=NO;
+    fineleg_lbl.hidden =YES;
+    squareleg_lbl.hidden =YES;
+    midWicket_lbl.hidden=YES;
+    longon_lbl.hidden =YES;
+    longoff_lbl.hidden =YES;
+    cover_lbl.hidden =YES;
+    point_lbl.hidden =YES;
+    Thirdman_lbl.hidden =YES;
+    
     BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row-1];
     NSMutableArray * objArray =[objBattingPlayerStatistics GetFETCHSBBATTINGPLAYERSTATISTICSWagon :competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
+    
+    int drawlincount =0;
+    for(int i=0; i<objArray.count;i++)
+    {
+        BattingPayerStatisticsRecord * objRecord =(BattingPayerStatisticsRecord *)[objArray objectAtIndex:i];
+        
+        if(objRecord.SECTORREGIONCODE!=nil && ![objRecord.SECTORREGIONCODE isEqualToString:@""])
+        {
+            drawlincount++;
+        }
+    }
+    
+    self.batsmanCell.wangon1s_Btn.titleLabel.text= (drawlincount ==1)?@"1s | 6":@"0s | 6";
+    
+    self.batsmanCell.wangon2s_Btn.titleLabel.text= (drawlincount ==2)?@"2s | 6":@"0s | 6";
+    
+    self.batsmanCell.wangon3s_Btn.titleLabel.text= (drawlincount==3)?@"3s | 6":@"0s | 6";
+    
+    self.batsmanCell.wangon4s_Btn.titleLabel.text= (drawlincount ==4)?@"4s | 6":@"0s | 6";
+    
+    self.batsmanCell.wangon6s_Btn.titleLabel.text= (drawlincount ==5)?@"5s | 6":@"0s | 6";
+    
+
+    
+    
+    if([battingSummaryDetailsForSB.BATTINGSTYLE isEqualToString:@"MSC012"])
+    {
+      
+        //self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
+        self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
+        
+    }
+    else
+    {
+        
+        self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
+    }
+    
+
     int x1position;
     int x2position;
     int y1position;
     int y2position;
+    
+    
+    
     for(int i=0; i<objArray.count;i++)
     {
         BattingPayerStatisticsRecord * objRecord =(BattingPayerStatisticsRecord *)[objArray objectAtIndex:i];
@@ -838,17 +936,17 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
         for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
             if ([layer.name isEqualToString:@"DrawLine"]) {
-                [layer removeFromSuperlayer];
+                //[layer removeFromSuperlayer];
                 break;
             }
         }
         
         //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
-        int Xposition = x1position;
+        int Xposition = x1position+27;
         int Yposition = y1position;
         CGMutablePathRef straightLinePath = CGPathCreateMutable();
         CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-        CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+        CGPathAddLineToPoint(straightLinePath, NULL,x2position+27,y2position);
         CAShapeLayer *shapeLayer = [CAShapeLayer layer];
         shapeLayer.path = straightLinePath;
         UIColor *fillColor = [UIColor redColor];
@@ -866,49 +964,78 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
 -(IBAction)didClickSectorWagonAction:(id)sender
 {
-//    isPitch_Img = NO;
-//   
-//    ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
-//    HVTableView* view = (HVTableView*) cell.superview;
-//     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
-//    NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonPosition];
-//    int row = indexPath.row;
-//
-//     NSLog(@"Indexpath = %d",row);
-//     self.batsmanCell.wagonPitch_img.hidden=NO;
-//     self.batsmanCell.pitchMap_img.hidden=YES;
-//    
-//    self.batsmanCell.pitch_Btn.backgroundColor =[UIColor clearColor];
-//    self.batsmanCell.spiderWagon_Btn.backgroundColor =[UIColor clearColor];
-//    self.batsmanCell.sectorWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
-//        self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
-//    
-//    BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
-//    NSMutableArray * objArray =[objBattingPlayerStatistics GetFETCHSBBATTINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
-//    
-//    int x1position;
-//    int x2position;
-//    int y1position;
-//    int y2position;
-//
-//    for(int i=0; i<objArray.count;i++)
-//    {
-//        BattingPayerStatisticsRecord * objRecord =(BattingPayerStatisticsRecord *)[objArray objectAtIndex:i];
-//        x1position = [objRecord.WWX1 intValue];
-//        y1position = [objRecord.WWY1 intValue];
-//        x2position  =[objRecord .WWX2 intValue];
-//        y2position  =[objRecord.WWY2 intValue];
-//    
-//    if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
-//        
-//        
-//        for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
-//            if ([layer.name isEqualToString:@"DrawLine"]) {
-//               // [layer removeFromSuperlayer];
-//                break;
-//            }
-//        }
-//        
+    isPitch_Img = NO;
+   
+    ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
+    HVTableView* view = (HVTableView*) cell.superview;
+     CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
+    NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonPosition];
+    int row = indexPath.row;
+
+     NSLog(@"Indexpath = %d",row);
+     self.batsmanCell.wagonPitch_img.hidden=NO;
+     self.batsmanCell.pitchMap_img.hidden=YES;
+    fineleg_lbl.hidden =NO;
+    squareleg_lbl.hidden =NO;
+    midWicket_lbl.hidden=NO;
+    longon_lbl.hidden =NO;
+    longoff_lbl.hidden =NO;
+    cover_lbl.hidden =NO;
+    point_lbl.hidden =NO;
+    Thirdman_lbl.hidden =NO;
+
+    
+    self.batsmanCell.pitch_Btn.backgroundColor =[UIColor clearColor];
+    self.batsmanCell.spiderWagon_Btn.backgroundColor =[UIColor clearColor];
+    self.batsmanCell.sectorWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+        self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"Sector_Img"];
+    
+    BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
+    NSMutableArray * objArray =[objBattingPlayerStatistics GetFETCHSBBATTINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
+    
+    int x1position;
+    int x2position;
+    int y1position;
+    int y2position;
+    
+    fineleg =0;
+    squareleg=0;
+    midWicket=0;
+    longon=0;
+    longoff=0;
+    cover =0;
+    point=0;
+    ThirdmanCount=0;
+    
+    
+    finelegRun =0;
+    squarelegRun=0;
+    midWicketRun=0;
+    longonRun=0;
+    longoffRun=0;
+    coverRun =0;
+    pointRun=0;
+    ThirdmanCountRun=0;
+
+    for(int i=0; i<objArray.count;i++)
+    {
+        BattingPayerStatisticsRecord * objRecord =(BattingPayerStatisticsRecord *)[objArray objectAtIndex:i];
+        x1position = [objRecord.WWX1 intValue];
+        y1position = [objRecord.WWY1 intValue];
+        x2position  =[objRecord .WWX2 intValue];
+        y2position  =[objRecord.WWY2 intValue];
+    
+    if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+        
+        
+        for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
+            if ([layer.name isEqualToString:@"DrawLine"]) {
+                [layer removeFromSuperlayer];
+                break;
+            }
+        }
+        [self sectorWagonwheel :objRecord.SECTORREGIONCODE :battingSummaryDetailsForSB.BATTINGSTYLE:objRecord.RUNS];
+        
 //        CGMutablePathRef straightLinePath = CGPathCreateMutable();
 //        CGPathMoveToPoint(straightLinePath, NULL, x1position, y1position);
 //        CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
@@ -922,9 +1049,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 //        shapeLayer.fillRule = kCAFillRuleNonZero;
 //        shapeLayer.name = @"DrawLine";
 //        [self.batsmanCell.wagonPitch_img.layer addSublayer:shapeLayer];
-//        
-//    }
-//    }
+        
+    }
+    }
 
 }
 
@@ -941,15 +1068,28 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     NSLog(@"Indexpath = %d",row);
     
-    NSLog(@"Indexpath = %@",indexPath);
-    self.batsmanCell.wagonPitch_img.hidden=YES;
-    self.batsmanCell.pitchMap_img.hidden=NO;
-        self.batsmanCell.pitchMap_img.image=[UIImage imageNamed:@"pichmapRH"];
-    
     self.batsmanCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.spiderWagon_Btn.backgroundColor =[UIColor clearColor];
     self.batsmanCell.pitch_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
-    BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
+
+    self.batsmanCell.wagonPitch_img.hidden=YES;
+    self.batsmanCell.pitchMap_img.hidden=NO;
+    
+    
+    
+       BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
+    if([battingSummaryDetailsForSB.BATTINGSTYLE isEqualToString:@"MSC013"])
+    {
+        self.batsmanCell.pitchMap_img.image=[UIImage imageNamed:@"pichmapRH"];
+        
+    }
+    else{
+        
+        self.batsmanCell.pitchMap_img.image=[UIImage imageNamed:@"pichmapLH"];
+        
+    }
+
+    
     BatmanRunsArray =[objBattingPlayerStatistics GetFETCHSBBATTINGPLAYERSTATISTICSPitch :competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BATSMANCODE];
     
     self.batsmanCell.wangon1s_Btn.titleLabel.text= (BatmanRunsArray.count ==1)?@"1s | 6":@"0s | 6";
@@ -1079,7 +1219,10 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 
             }
         }
-
+else
+{
+    self.batsmanCell.wangon1s_Btn.titleLabel.text=@"0s| 6";
+}
     
 }
 
@@ -1115,6 +1258,11 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     }
     
     }
+    else
+    {
+        self.batsmanCell.wangon2s_Btn.titleLabel.text=@"0s| 6";
+    }
+
 }
 -(IBAction)didClick3sAction:(id)sender
 {
@@ -1147,6 +1295,11 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         }
         
     }
+    else
+    {
+        self.batsmanCell.wangon3s_Btn.titleLabel.text=@"0s| 6";
+    }
+
 }
 
 -(IBAction)didClick4sAction:(id)sender
@@ -1180,6 +1333,11 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         }
         
     }
+    else
+    {
+        self.batsmanCell.wangon4s_Btn.titleLabel.text=@"0s| 6";
+    }
+
 }
 
 -(IBAction)didClick6sAction:(id)sender
@@ -1213,6 +1371,11 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         }
         
     }
+    else
+    {
+        self.batsmanCell.wangon6s_Btn.titleLabel.text=@"0s| 6";
+    }
+
 }
 -(IBAction)didClickBowlingSpiderWagonAction:(id)sender
 {
@@ -1225,14 +1388,53 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     int row = indexPath.row;
     
     NSLog(@"Indexpath = %d",row);
+    self.bowlerCell.wagonPitch_img.hidden=NO;
+    self.bowlerCell.BowlerwagonPitch_img.hidden=YES;
+    
+    fineleg_lbl.hidden =YES;
+    squareleg_lbl.hidden =YES;
+    midWicket_lbl.hidden=YES;
+    longon_lbl.hidden =YES;
+    longoff_lbl.hidden =YES;
+    cover_lbl.hidden =YES;
+    point_lbl.hidden =YES;
+    Thirdman_lbl.hidden =YES;
+    
     
     
     self.bowlerCell.Bowlerpitch_Btn.backgroundColor =[UIColor clearColor];
     self.bowlerCell.BowlersectorWagon_Btn.backgroundColor =[UIColor clearColor];
     self.bowlerCell.BowlerspiderWagon_Btn.backgroundColor=[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
     self.bowlerCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
+    
     BowlingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BowlingSummaryForScoreBoard objectAtIndex:indexPath.row-7];
     NSMutableArray * objArray =[objBowlingStatistics GetFETCHSBBOWLINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BOWLERCODE];
+    
+    
+    int drawlincount =0;
+    for(int i=0; i<objArray.count;i++)
+    {
+        BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[objArray objectAtIndex:i];
+        
+        if(objRecord.Sectorregioncode!=nil && ![objRecord.Sectorregioncode isEqualToString:@""])
+        {
+            drawlincount++;
+        }
+    }
+    
+    self.bowlerCell.Bowlerwangon1s_Btn.titleLabel.text= (drawlincount ==1)?@"1s | 6":@"0s | 6";
+    
+    self.bowlerCell.Bowlerwangon2s_Btn.titleLabel.text= (drawlincount ==2)?@"2s | 6":@"0s | 6";
+    
+    self.bowlerCell.Bowlerwangon3s_Btn.titleLabel.text= (drawlincount==3)?@"3s | 6":@"0s | 6";
+    
+    self.bowlerCell.Bowlerwangon4s_Btn.titleLabel.text= (drawlincount ==4)?@"4s | 6":@"0s | 6";
+    
+    self.bowlerCell.Bowlerwangon6s_Btn.titleLabel.text= (drawlincount ==5)?@"5s | 6":@"0s | 6";
+    
+
+    
+    
     int x1position;
     int x2position;
     int y1position;
@@ -1249,19 +1451,19 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
             
             
-            for (CALayer *layer in self.bowlerCell.wagonPitch_img.layer.sublayers) {
+            for (CALayer *layer in self.bowlerCell.BowlerwagonPitch_img.layer.sublayers) {
                 if ([layer.name isEqualToString:@"DrawLine"]) {
-                    [layer removeFromSuperlayer];
+                    //[layer removeFromSuperlayer];
                     break;
                 }
             }
             
             //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
-            int Xposition = x1position;
+            int Xposition = x1position+27;
             int Yposition = y1position;
             CGMutablePathRef straightLinePath = CGPathCreateMutable();
             CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-            CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+            CGPathAddLineToPoint(straightLinePath, NULL,x2position+27,y2position);
             CAShapeLayer *shapeLayer = [CAShapeLayer layer];
             shapeLayer.path = straightLinePath;
             UIColor *fillColor = [UIColor redColor];
@@ -1279,63 +1481,83 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
 -(IBAction)didClickBowlingSectorWagonAction:(id)sender
 {
-//    ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
-//    HVTableView* view = (HVTableView*) cell.superview;
-//    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
-//    NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonPosition];
-//    int row = indexPath.row;
-//    
-//    NSLog(@"Indexpath = %d",row);
-//    
-//    
-//    self.bowlerCell.Bowlerpitch_Btn.backgroundColor =[UIColor clearColor];
-//    self.bowlerCell.BowlersectorWagon_Btn.backgroundColor =[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
-//    self.bowlerCell.BowlerspiderWagon_Btn.backgroundColor=[UIColor clearColor];
-//    self.bowlerCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
-//    BowlingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BowlingSummaryForScoreBoard objectAtIndex:row-7];
-//    NSMutableArray * objArray =[objBowlingStatistics GetFETCHSBBOWLINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BOWLERCODE];
-//    int x1position;
-//    int x2position;
-//    int y1position;
-//    int y2position;
-//    for(int i=0; i<objArray.count;i++)
-//    {
-//        BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[objArray objectAtIndex:i];
-//        x1position = [objRecord.WWX1 intValue];
-//        y1position = [objRecord.WWY1 intValue];
-//        x2position  =[objRecord .WWX2 intValue];
-//        y2position  =[objRecord.WWY2 intValue];
-//        
-//        
-//        if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
-//            
-//            
-//            for (CALayer *layer in self.bowlerCell.wagonPitch_img.layer.sublayers) {
-//                if ([layer.name isEqualToString:@"DrawLine"]) {
-//                    [layer removeFromSuperlayer];
-//                    break;
-//                }
-//            }
-//            
-//            //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
-//            int Xposition = x1position;
-//            int Yposition = y1position;
-//            CGMutablePathRef straightLinePath = CGPathCreateMutable();
-//            CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-//            CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
-//            CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-//            shapeLayer.path = straightLinePath;
-//            UIColor *fillColor = [UIColor redColor];
-//            shapeLayer.fillColor = fillColor.CGColor;
-//            UIColor *strokeColor = [UIColor redColor];
-//            shapeLayer.strokeColor = strokeColor.CGColor;
-//            shapeLayer.lineWidth = 2.0f;
-//            shapeLayer.fillRule = kCAFillRuleNonZero;
-//            shapeLayer.name = @"DrawLine";
-//            [self.bowlerCell.wagonPitch_img.layer addSublayer:shapeLayer];
-//            
-//        }
-//    }
+    ScoreCardCellTVCell* cell = (ScoreCardCellTVCell*) [self.table superview].superview;
+    HVTableView* view = (HVTableView*) cell.superview;
+    CGPoint buttonPosition = [sender convertPoint:CGPointZero toView:view];
+    NSIndexPath *indexPath = [self.table indexPathForRowAtPoint:buttonPosition];
+    int row = indexPath.row;
+    
+
+    
+    NSLog(@"Indexpath = %d",row);
+    self.bowlerCell.wagonPitch_img.hidden=NO;
+    self.bowlerCell.BowlerwagonPitch_img.hidden=YES;
+    fineleg_lbl.hidden =NO;
+    squareleg_lbl.hidden =NO;
+    midWicket_lbl.hidden=NO;
+    longon_lbl.hidden =NO;
+    longoff_lbl.hidden =NO;
+    cover_lbl.hidden =NO;
+    point_lbl.hidden =NO;
+    Thirdman_lbl.hidden =NO;
+    
+    
+    self.bowlerCell.Bowlerpitch_Btn.backgroundColor =[UIColor clearColor];
+    self.bowlerCell.BowlersectorWagon_Btn.backgroundColor =[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
+    self.bowlerCell.BowlerspiderWagon_Btn.backgroundColor=[UIColor clearColor];
+    self.bowlerCell.wagonPitch_img.image=[UIImage imageNamed:@"Sector_Img"];
+
+    
+    BowlingSummaryDetailsForScoreBoard *bowlerSummaryDetailsForSB = [fetchScorecard.BowlingSummaryForScoreBoard objectAtIndex:indexPath.row - 7];
+    NSMutableArray * objArray =[objBowlingStatistics GetFETCHSBBOWLINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :bowlerSummaryDetailsForSB.BOWLERCODE];
+    
+    int x1position;
+    int x2position;
+    int y1position;
+    int y2position;
+    
+    fineleg =0;
+    squareleg=0;
+    midWicket=0;
+    longon=0;
+    longoff=0;
+    cover =0;
+    point=0;
+    ThirdmanCount=0;
+    
+    
+    finelegRun =0;
+    squarelegRun=0;
+    midWicketRun=0;
+    longonRun=0;
+    longoffRun=0;
+    coverRun =0;
+    pointRun=0;
+    ThirdmanCountRun=0;
+    
+    for(int i=0; i<objArray.count;i++)
+    {
+        BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[objArray objectAtIndex:i];
+        x1position = [objRecord.WWX1 intValue];
+        y1position = [objRecord.WWY1 intValue];
+        x2position  =[objRecord .WWX2 intValue];
+        y2position  =[objRecord.WWY2 intValue];
+        
+        if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+            
+            
+            for (CALayer *layer in self.bowlerCell.wagonPitch_img.layer.sublayers) {
+                if ([layer.name isEqualToString:@"DrawLine"]) {
+                    [layer removeFromSuperlayer];
+                    break;
+                }
+            }
+            [self BowlersectorWagonwheel :objRecord.Sectorregioncode :objRecord.Runs];
+
+    
+        }
+    
+   }
 
 }
 
@@ -1351,13 +1573,26 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     NSLog(@"Indexpath = %@",indexPath);
     
-    self.bowlerCell.wagonPitch_img.image=[UIImage imageNamed:@"pichmapRH"];
+    self.bowlerCell.BowlerwagonPitch_img.hidden=NO;
+    self.bowlerCell.wagonPitch_img.hidden=YES;
+    
+    self.bowlerCell.BowlerwagonPitch_img.image=[UIImage imageNamed:@"pichmapRH"];
     
     self.bowlerCell.Bowlerpitch_Btn.backgroundColor =[UIColor colorWithRed:(0/255.0f) green:(143/255.0f) blue:(73/255.0f) alpha:1.0f];
     self.bowlerCell.BowlerspiderWagon_Btn.backgroundColor =[UIColor clearColor];
-    self.bowlerCell.Bowlerpitch_Btn.backgroundColor=[UIColor clearColor];
+    self.bowlerCell.BowlersectorWagon_Btn.backgroundColor=[UIColor clearColor];
     BowlingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BowlingSummaryForScoreBoard objectAtIndex:indexPath.row-7];
    BowlerRunArray =[objBowlingStatistics GetFETCHSBBOWLINGPLAYERSTATISTICSPitch:competitionCode :matchCode :inningsNo :battingSummaryDetailsForSB.BOWLERCODE];
+    
+    self.batsmanCell.wangon1s_Btn.titleLabel.text= (BowlerRunArray.count ==1)?@"1s | 6":@"0s | 6";
+    
+    self.batsmanCell.wangon2s_Btn.titleLabel.text= (BowlerRunArray.count ==2)?@"2s | 6":@"0s | 6";
+    
+    self.batsmanCell.wangon3s_Btn.titleLabel.text= (BowlerRunArray.count ==3)?@"3s | 6":@"0s | 6";
+    
+    self.batsmanCell.wangon4s_Btn.titleLabel.text= (BowlerRunArray.count ==4)?@"4s | 6":@"0s | 6";
+    
+    self.batsmanCell.wangon6s_Btn.titleLabel.text= (BowlerRunArray.count ==5)?@"5s | 6":@"0s | 6";
     
     int xposition;
     int yposition;
@@ -1378,7 +1613,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             
             Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
-            [self.bowlerCell.wagonPitch_img addSubview:Img_ball];
+            [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
             
         }
     }
@@ -1417,7 +1652,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 
                 Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
                 Img_ball.image =[UIImage imageNamed:@"RedBall"];
-                [self.bowlerCell.wagonPitch_img addSubview:Img_ball];
+                [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
                 
             }
         }
@@ -1448,7 +1683,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             
             Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
-            [self.bowlerCell.wagonPitch_img addSubview:Img_ball];
+            [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
             
         }
     }
@@ -1479,7 +1714,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 
                 Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
                 Img_ball.image =[UIImage imageNamed:@"RedBall"];
-                [self.bowlerCell.wagonPitch_img addSubview:Img_ball];
+                [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
                 
             }
         }
@@ -1511,7 +1746,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 
                 Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
                 Img_ball.image =[UIImage imageNamed:@"RedBall"];
-                [self.bowlerCell.wagonPitch_img addSubview:Img_ball];
+                [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
                 
             }
         }
@@ -1543,7 +1778,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 
                 Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
                 Img_ball.image =[UIImage imageNamed:@"RedBall"];
-                [self.bowlerCell.wagonPitch_img addSubview:Img_ball];
+                [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
                 
             }
         }
@@ -1717,5 +1952,375 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 //    }
 //
 //}
+
+
+-(void)sectorWagonwheel:(NSString *) secotorwognwheelcode :(NSString *) batmanStyle :(NSString *) Run
+
+{
+    
+    if([secotorwognwheelcode isEqualToString:@"MDT036"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            fineleg++;
+            finelegRun = [Run intValue]+finelegRun;
+        }
+        else
+        {
+            fineleg++;
+             NSLog(@"RH");
+            finelegRun = [Run intValue]+finelegRun;
+        }
+        
+        if(fineleg_lbl !=nil)
+        {
+             [fineleg_lbl removeFromSuperview];
+        }
+        
+        fineleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(230, 30,35, 35)];
+        fineleg_lbl.textColor=[UIColor whiteColor];
+        fineleg_lbl.text =[NSString stringWithFormat:@"%d",fineleg];
+        [self.batsmanCell.wagonPitch_img addSubview:fineleg_lbl];
+        self.batsmanCell.WangonAll_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",finelegRun];
+        
+         NSLog(@"fineleg=%d",fineleg);
+    }
+    else if([secotorwognwheelcode isEqualToString:@"MDT037"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            squareleg++;
+            squarelegRun =squarelegRun+[Run intValue];
+        }
+        else
+        {
+            NSLog(@"RH");
+            squareleg++;
+            squarelegRun =squarelegRun+[Run intValue];
+        }
+        squareleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(300,110,35, 35)];
+        squareleg_lbl.textColor=[UIColor whiteColor];
+        squareleg_lbl.text =[NSString stringWithFormat:@"%d",squareleg];
+        [self.batsmanCell.wagonPitch_img addSubview:squareleg_lbl];
+         self.batsmanCell.wangon1s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",squarelegRun];
+         NSLog(@"squareleg=%d",squareleg);
+    }
+    else if([secotorwognwheelcode isEqualToString:@"MDT038"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            midWicket++;
+            midWicketRun =midWicketRun+[Run intValue];
+        }
+        else
+        {
+            NSLog(@"RH");
+            midWicket++;
+            midWicketRun =midWicketRun+[Run intValue];
+        }
+        midWicket_lbl=[[UILabel alloc]initWithFrame:CGRectMake(280,190,35, 35)];
+        midWicket_lbl.textColor=[UIColor whiteColor];
+        midWicket_lbl.text =[NSString stringWithFormat:@"%d",midWicket];
+        [self.batsmanCell.wagonPitch_img addSubview:midWicket_lbl];
+        self.batsmanCell.wangon2s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",midWicketRun];
+         NSLog(@"%d",midWicket);
+    }
+    else if([secotorwognwheelcode isEqualToString:@"MDT039"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            longon++;
+            longonRun =longonRun+[Run intValue];
+        }
+        else
+        {
+            NSLog(@"RH");
+            longon++;
+            longonRun =longonRun+[Run intValue];
+        }
+         longon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(250,250,35, 35)];
+        longon_lbl.textColor=[UIColor whiteColor];
+        longon_lbl.text =[NSString stringWithFormat:@"%d",longon];
+        [self.batsmanCell.wagonPitch_img addSubview:longon_lbl];
+         self.batsmanCell.wangon3s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",longonRun];
+         NSLog(@"%d",longon);
+    }
+    else if([secotorwognwheelcode isEqualToString:@"MDT041"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            longoff++;
+            longoffRun =longoffRun +[Run intValue];
+        }
+        else
+        {
+            NSLog(@"RH");
+            longoff++;
+            longoffRun =longoffRun +[Run intValue];
+        }
+        longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(100,190,35, 35)];
+        longoff_lbl.textColor=[UIColor whiteColor];
+        longoff_lbl.text =[NSString stringWithFormat:@"%d",longoff];
+        [self.batsmanCell.wagonPitch_img addSubview:longoff_lbl];
+        self.batsmanCell.wangon4s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",longoffRun];
+
+         NSLog(@"%d",longoff);
+    }
+    else if([secotorwognwheelcode isEqualToString:@"MDT042"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            cover++;
+            coverRun = coverRun+[Run intValue];
+        }
+        else
+        {
+            NSLog(@"RH");
+            cover++;
+            coverRun = coverRun+[Run intValue];
+        }
+        cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(100,150,35, 35)];
+        cover_lbl.textColor=[UIColor whiteColor];
+        cover_lbl.text =[NSString stringWithFormat:@"%d",cover];
+        [self.batsmanCell.wagonPitch_img addSubview:cover_lbl];
+         self.batsmanCell.wangon6s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",coverRun];
+         NSLog(@"%d",cover);
+    }
+    else if([secotorwognwheelcode isEqualToString:@"MDT043"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            point++;
+        }
+        else
+        {
+            NSLog(@"RH");
+            point++;
+        }
+        point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,120,35, 35)];
+        point_lbl.textColor=[UIColor whiteColor];
+        point_lbl.text =[NSString stringWithFormat:@"%d",point];
+        [self.batsmanCell.wagonPitch_img addSubview:point_lbl];
+         NSLog(@"%d",point);
+    }
+    else if([secotorwognwheelcode isEqualToString:@"MDT044"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            ThirdmanCount++;
+        }
+        else
+        {
+            NSLog(@"RH");
+            ThirdmanCount++;
+            
+        }
+        
+        if(Thirdman_lbl !=nil)
+        {
+            [Thirdman_lbl removeFromSuperview];
+        }
+        
+        Thirdman_lbl=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+        Thirdman_lbl.textColor=[UIColor whiteColor];
+        Thirdman_lbl.text =[NSString stringWithFormat:@"%d",ThirdmanCount];
+        [self.batsmanCell.wagonPitch_img addSubview:Thirdman_lbl];
+        NSLog(@"%d",ThirdmanCount);
+    }
+    
+}
+
+-(void)BowlersectorWagonwheel:(NSString *) secotorwognwheelcode :(NSString *) Run
+        
+        {
+            
+            if([secotorwognwheelcode isEqualToString:@"MDT036"])
+            {
+//                if([batmanStyle isEqualToString:@"MSC012"])
+//                {
+//                    NSLog(@"LH");
+//                    fineleg++;
+//                    finelegRun = [Run intValue]+finelegRun;
+//                }
+//                else
+//                {
+                    fineleg++;
+                    NSLog(@"RH");
+                    finelegRun = [Run intValue]+finelegRun;
+               // }
+                
+                if(fineleg_lbl !=nil)
+                {
+                    [fineleg_lbl removeFromSuperview];
+                }
+                
+                fineleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(230, 30,35, 35)];
+                fineleg_lbl.textColor=[UIColor whiteColor];
+                fineleg_lbl.text =[NSString stringWithFormat:@"%d",fineleg];
+                [self.bowlerCell.wagonPitch_img addSubview:fineleg_lbl];
+                self.bowlerCell.BowlerWangonAll_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",finelegRun];
+                
+                NSLog(@"fineleg=%d",fineleg);
+            }
+            else if([secotorwognwheelcode isEqualToString:@"MDT037"])
+            {
+//                if([batmanStyle isEqualToString:@"MSC012"])
+//                {
+//                    NSLog(@"LH");
+//                    squareleg++;
+//                    squarelegRun =squarelegRun+[Run intValue];
+//                }
+//                else
+//                {
+                    NSLog(@"RH");
+                    squareleg++;
+                    squarelegRun =squarelegRun+[Run intValue];
+               // }
+                squareleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(300,110,35, 35)];
+                squareleg_lbl.textColor=[UIColor whiteColor];
+                squareleg_lbl.text =[NSString stringWithFormat:@"%d",squareleg];
+                [self.bowlerCell.wagonPitch_img addSubview:squareleg_lbl];
+                self.bowlerCell.Bowlerwangon1s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",squarelegRun];
+                NSLog(@"squareleg=%d",squareleg);
+            }
+            else if([secotorwognwheelcode isEqualToString:@"MDT038"])
+            {
+//                if([batmanStyle isEqualToString:@"MSC012"])
+//                {
+//                    NSLog(@"LH");
+//                    midWicket++;
+//                    midWicketRun =midWicketRun+[Run intValue];
+//                }
+//                else
+//                {
+                    NSLog(@"RH");
+                    midWicket++;
+                    midWicketRun =midWicketRun+[Run intValue];
+                //}
+                midWicket_lbl=[[UILabel alloc]initWithFrame:CGRectMake(280,190,35, 35)];
+                midWicket_lbl.textColor=[UIColor whiteColor];
+                midWicket_lbl.text =[NSString stringWithFormat:@"%d",midWicket];
+                [self.bowlerCell.wagonPitch_img addSubview:midWicket_lbl];
+                self.bowlerCell.Bowlerwangon2s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",midWicketRun];
+                NSLog(@"%d",midWicket);
+            }
+            else if([secotorwognwheelcode isEqualToString:@"MDT039"])
+            {
+//                if([batmanStyle isEqualToString:@"MSC012"])
+//                {
+//                    NSLog(@"LH");
+//                    longon++;
+//                    longonRun =longonRun+[Run intValue];
+//                }
+//                else
+                //{
+                    NSLog(@"RH");
+                    longon++;
+                    longonRun =longonRun+[Run intValue];
+               // }
+                longon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(250,250,35, 35)];
+                longon_lbl.textColor=[UIColor whiteColor];
+                longon_lbl.text =[NSString stringWithFormat:@"%d",longon];
+                [self.bowlerCell.wagonPitch_img addSubview:longon_lbl];
+                self.bowlerCell.Bowlerwangon3s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",longonRun];
+                NSLog(@"%d",longon);
+            }
+            else if([secotorwognwheelcode isEqualToString:@"MDT041"])
+            {
+//                if([batmanStyle isEqualToString:@"MSC012"])
+//                {
+//                    NSLog(@"LH");
+//                    longoff++;
+//                    longoffRun =longoffRun +[Run intValue];
+//                }
+//                else
+//                {
+                    NSLog(@"RH");
+                    longoff++;
+                    longoffRun =longoffRun +[Run intValue];
+                //}
+                longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(100,190,35, 35)];
+                longoff_lbl.textColor=[UIColor whiteColor];
+                longoff_lbl.text =[NSString stringWithFormat:@"%d",longoff];
+                [self.bowlerCell.wagonPitch_img addSubview:longoff_lbl];
+                self.bowlerCell.Bowlerwangon4s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",longoffRun];
+                
+                NSLog(@"%d",longoff);
+            }
+            else if([secotorwognwheelcode isEqualToString:@"MDT042"])
+            {
+//                if([batmanStyle isEqualToString:@"MSC012"])
+//                {
+//                    NSLog(@"LH");
+//                    cover++;
+//                    coverRun = coverRun+[Run intValue];
+//                }
+//                else
+//                {
+                    NSLog(@"RH");
+                    cover++;
+                    coverRun = coverRun+[Run intValue];
+               // }
+                cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(100,150,35, 35)];
+                cover_lbl.textColor=[UIColor whiteColor];
+                cover_lbl.text =[NSString stringWithFormat:@"%d",cover];
+                [self.bowlerCell.wagonPitch_img addSubview:cover_lbl];
+                self.bowlerCell.Bowlerwangon6s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",coverRun];
+                NSLog(@"%d",cover);
+            }
+            else if([secotorwognwheelcode isEqualToString:@"MDT043"])
+            {
+//                if([batmanStyle isEqualToString:@"MSC012"])
+//                {
+//                    NSLog(@"LH");
+//                    point++;
+//                }
+//                else
+//                {
+                    NSLog(@"RH");
+                    point++;
+               // }
+                point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,120,35, 35)];
+                point_lbl.textColor=[UIColor whiteColor];
+                point_lbl.text =[NSString stringWithFormat:@"%d",point];
+                [self.bowlerCell.wagonPitch_img addSubview:point_lbl];
+                NSLog(@"%d",point);
+            }
+            else if([secotorwognwheelcode isEqualToString:@"MDT044"])
+            {
+//                if([batmanStyle isEqualToString:@"MSC012"])
+//                {
+//                    NSLog(@"LH");
+//                    ThirdmanCount++;
+//                }
+//                else
+//                {
+                    NSLog(@"RH");
+                    ThirdmanCount++;
+                    
+                //}
+                
+                if(Thirdman_lbl !=nil)
+                {
+                    [Thirdman_lbl removeFromSuperview];
+                }
+                
+                Thirdman_lbl=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+                Thirdman_lbl.textColor=[UIColor whiteColor];
+                Thirdman_lbl.text =[NSString stringWithFormat:@"%d",ThirdmanCount];
+                [self.bowlerCell.wagonPitch_img addSubview:Thirdman_lbl];
+                NSLog(@"%d",ThirdmanCount);
+            }
+            
+        }
+
 
 @end

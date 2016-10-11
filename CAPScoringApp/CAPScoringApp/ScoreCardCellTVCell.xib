@@ -78,6 +78,7 @@
             <string>Rajdhani-Semibold</string>
             <string>Rajdhani-Semibold</string>
             <string>Rajdhani-Semibold</string>
+            <string>Rajdhani-Semibold</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -267,7 +268,7 @@
                                             <userDefinedRuntimeAttribute type="string" keyPath="layer.cornerRadius" value="15"/>
                                         </userDefinedRuntimeAttributes>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="RHWagon" translatesAutoresizingMaskIntoConstraints="NO" id="yHx-Jm-VHI">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yHx-Jm-VHI">
                                         <rect key="frame" x="199" y="60" width="350" height="350"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="350" id="DyV-eC-yKG"/>
@@ -314,7 +315,7 @@
                                             <constraint firstAttribute="width" constant="400" id="qSA-gC-Cw1"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CD3-Fi-ar4">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="CD3-Fi-ar4">
                                         <rect key="frame" x="580" y="180" width="80" height="40"/>
                                         <color key="backgroundColor" red="1" green="0.023529411764705882" blue="0.98039215686274506" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -326,7 +327,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKO-Hy-kw0">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="cKO-Hy-kw0">
                                         <rect key="frame" x="580" y="225" width="80" height="40"/>
                                         <color key="backgroundColor" red="0.73725490196078436" green="0.71372549019607845" blue="0.19215686274509802" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -338,7 +339,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hEY-cQ-kfQ">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="hEY-cQ-kfQ">
                                         <rect key="frame" x="580" y="318" width="80" height="40"/>
                                         <color key="backgroundColor" red="0.23921568627450979" green="0.10588235294117647" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -350,7 +351,7 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3y-Kj-oIl">
+                                    <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="J3y-Kj-oIl">
                                         <rect key="frame" x="580" y="135" width="80" height="40"/>
                                         <color key="backgroundColor" red="1" green="0.42745098039215684" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -362,15 +363,19 @@
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUm-tA-egR">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zUm-tA-egR">
                                         <rect key="frame" x="580" y="85" width="80" height="40"/>
                                         <color key="backgroundColor" red="0.0" green="0.56078431370000004" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="UYm-fl-drS"/>
+                                            <constraint firstAttribute="width" constant="80" id="hhG-pf-TMQ"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
                                         <state key="normal" title="All">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zhv-il-yeR">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="zhv-il-yeR">
                                         <rect key="frame" x="580" y="270" width="81" height="40"/>
                                         <color key="backgroundColor" red="0.85098039215686272" green="0.12549019607843137" blue="0.13725490196078433" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -386,6 +391,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="hEY-cQ-kfQ" firstAttribute="leading" secondItem="yHx-Jm-VHI" secondAttribute="trailing" constant="31" id="1Le-A6-pNG"/>
+                                    <constraint firstItem="zUm-tA-egR" firstAttribute="top" secondItem="Hf2-Hq-4Hd" secondAttribute="top" constant="85" id="3nf-2H-ceQ"/>
                                     <constraint firstItem="bCB-nF-LXS" firstAttribute="top" secondItem="Hf2-Hq-4Hd" secondAttribute="top" constant="10" id="6Od-0c-oKW"/>
                                     <constraint firstItem="yHx-Jm-VHI" firstAttribute="top" secondItem="NV6-dz-qmH" secondAttribute="bottom" constant="15" id="8eN-hp-R3o"/>
                                     <constraint firstItem="CD3-Fi-ar4" firstAttribute="leading" secondItem="yHx-Jm-VHI" secondAttribute="trailing" constant="31" id="Ah3-m0-oGV"/>
@@ -405,6 +411,7 @@
                                     <constraint firstItem="cKO-Hy-kw0" firstAttribute="top" secondItem="CD3-Fi-ar4" secondAttribute="bottom" constant="5" id="pZs-8n-M8K"/>
                                     <constraint firstItem="Ibq-hw-slC" firstAttribute="top" secondItem="yHx-Jm-VHI" secondAttribute="bottom" constant="35" id="q47-rP-hJt"/>
                                     <constraint firstItem="zhv-il-yeR" firstAttribute="top" secondItem="cKO-Hy-kw0" secondAttribute="bottom" constant="5" id="sDp-Z4-29e"/>
+                                    <constraint firstItem="zUm-tA-egR" firstAttribute="leading" secondItem="yHx-Jm-VHI" secondAttribute="trailing" constant="31" id="snD-0N-unp"/>
                                     <constraint firstItem="yHx-Jm-VHI" firstAttribute="centerX" secondItem="Hf2-Hq-4Hd" secondAttribute="centerX" id="tCx-aN-rcB"/>
                                     <constraint firstItem="CD3-Fi-ar4" firstAttribute="top" secondItem="J3y-Kj-oIl" secondAttribute="bottom" constant="5" id="uhg-Nw-G54"/>
                                     <constraint firstItem="NV6-dz-qmH" firstAttribute="leading" secondItem="bCB-nF-LXS" secondAttribute="trailing" constant="10" id="vBR-vg-iJC"/>
@@ -916,6 +923,18 @@
                             <view tag="11" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bju-oC-W4h">
                                 <rect key="frame" x="0.0" y="69" width="748" height="480"/>
                                 <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qrx-jn-MTL">
+                                        <rect key="frame" x="571" y="85" width="80" height="40"/>
+                                        <color key="backgroundColor" red="0.0" green="0.56078431370000004" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="80" id="Wog-zc-Ffh"/>
+                                            <constraint firstAttribute="height" constant="40" id="wtk-1z-bcc"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
+                                        <state key="normal" title="ALL">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pY7-dG-xPS">
                                         <rect key="frame" x="220" y="10" width="100" height="35"/>
                                         <color key="backgroundColor" red="0.0" green="0.56078431370000004" blue="0.28627450980000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1050,15 +1069,16 @@
                                         </state>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pichmapLH" translatesAutoresizingMaskIntoConstraints="NO" id="UMm-rE-6Ys">
-                                        <rect key="frame" x="148" y="40" width="400" height="400"/>
+                                        <rect key="frame" x="195" y="63" width="350" height="350"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="400" id="QFN-Ou-mHs"/>
-                                            <constraint firstAttribute="width" constant="400" id="UGS-A6-eLn"/>
+                                            <constraint firstAttribute="height" constant="350" id="QFN-Ou-mHs"/>
+                                            <constraint firstAttribute="width" constant="350" id="UGS-A6-eLn"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="Qrx-jn-MTL" firstAttribute="leading" secondItem="N9y-Ot-Gxq" secondAttribute="trailing" constant="22" id="0bi-nw-MW3"/>
                                     <constraint firstAttribute="trailing" secondItem="mXL-Ut-XV1" secondAttribute="trailing" constant="208" id="0sZ-k6-f08"/>
                                     <constraint firstItem="NVa-2y-OdM" firstAttribute="leading" secondItem="N9y-Ot-Gxq" secondAttribute="trailing" constant="21" id="3yU-KB-F3i"/>
                                     <constraint firstItem="iYN-kX-jgS" firstAttribute="top" secondItem="NVa-2y-OdM" secondAttribute="bottom" constant="5" id="535-Zi-SNK"/>
@@ -1067,7 +1087,7 @@
                                     <constraint firstItem="pY7-dG-xPS" firstAttribute="leading" secondItem="Bju-oC-W4h" secondAttribute="leading" constant="220" id="5Px-ZO-7lg"/>
                                     <constraint firstItem="NVa-2y-OdM" firstAttribute="top" secondItem="jgj-GQ-fzH" secondAttribute="bottom" constant="5" id="6HX-U8-QQL"/>
                                     <constraint firstItem="ien-re-qjQ" firstAttribute="top" secondItem="wbT-GG-gRe" secondAttribute="bottom" constant="5" id="B7A-80-Miy"/>
-                                    <constraint firstItem="UMm-rE-6Ys" firstAttribute="top" secondItem="Bju-oC-W4h" secondAttribute="top" constant="40" id="Ovx-LH-Lh3"/>
+                                    <constraint firstItem="UMm-rE-6Ys" firstAttribute="top" secondItem="Bju-oC-W4h" secondAttribute="top" constant="63" id="Ovx-LH-Lh3"/>
                                     <constraint firstItem="iYN-kX-jgS" firstAttribute="leading" secondItem="N9y-Ot-Gxq" secondAttribute="trailing" constant="21" id="Pve-1R-Kne"/>
                                     <constraint firstItem="N9y-Ot-Gxq" firstAttribute="centerX" secondItem="Bju-oC-W4h" secondAttribute="centerX" id="RFr-qh-pyq"/>
                                     <constraint firstItem="hDQ-Fn-awu" firstAttribute="top" secondItem="Bju-oC-W4h" secondAttribute="top" constant="10" id="TyL-yX-qEy"/>
@@ -1081,7 +1101,8 @@
                                     <constraint firstItem="plI-xa-Zgm" firstAttribute="top" secondItem="ien-re-qjQ" secondAttribute="bottom" constant="90" id="iuo-AQ-IO7"/>
                                     <constraint firstItem="wbT-GG-gRe" firstAttribute="leading" secondItem="N9y-Ot-Gxq" secondAttribute="trailing" constant="21" id="kkd-Cz-fNR"/>
                                     <constraint firstAttribute="trailing" secondItem="plI-xa-Zgm" secondAttribute="trailing" constant="128" id="qcc-zO-cOa"/>
-                                    <constraint firstItem="jgj-GQ-fzH" firstAttribute="leading" secondItem="UMm-rE-6Ys" secondAttribute="trailing" constant="22" id="vHa-7m-Ops"/>
+                                    <constraint firstItem="jgj-GQ-fzH" firstAttribute="leading" secondItem="UMm-rE-6Ys" secondAttribute="trailing" constant="25" id="vHa-7m-Ops"/>
+                                    <constraint firstItem="Qrx-jn-MTL" firstAttribute="top" secondItem="Bju-oC-W4h" secondAttribute="top" constant="85" id="wuL-K8-XF1"/>
                                     <constraint firstItem="mXL-Ut-XV1" firstAttribute="top" secondItem="Bju-oC-W4h" secondAttribute="top" constant="10" id="ySh-e7-YCS"/>
                                 </constraints>
                             </view>
@@ -1140,12 +1161,13 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="BowlerWangonAll_Btn" destination="Qrx-jn-MTL" id="Etu-oU-o4T"/>
                 <outlet property="BowleroffSide_Btn" destination="plI-xa-Zgm" id="vTK-wU-OCj"/>
                 <outlet property="BowleronSide_Btn" destination="jaS-xj-iZM" id="XUU-ph-1Iq"/>
                 <outlet property="Bowlerpitch_Btn" destination="mXL-Ut-XV1" id="hjI-WF-rpE"/>
                 <outlet property="BowlersectorWagon_Btn" destination="hDQ-Fn-awu" id="LLd-Mp-sbk"/>
                 <outlet property="BowlerspiderWagon_Btn" destination="pY7-dG-xPS" id="yqE-jS-5wl"/>
-                <outlet property="BowlerwagonPitch_img" destination="N9y-Ot-Gxq" id="ehJ-n1-vbu"/>
+                <outlet property="BowlerwagonPitch_img" destination="N9y-Ot-Gxq" id="k3Q-ku-lwS"/>
                 <outlet property="Bowlerwangon1s_Btn" destination="jgj-GQ-fzH" id="iQm-Sn-ixq"/>
                 <outlet property="Bowlerwangon2s_Btn" destination="NVa-2y-OdM" id="N4I-dw-z5b"/>
                 <outlet property="Bowlerwangon3s_Btn" destination="iYN-kX-jgS" id="xkJ-MY-IcW"/>

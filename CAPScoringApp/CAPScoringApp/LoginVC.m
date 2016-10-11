@@ -325,7 +325,8 @@
                          
                      }
                      else{
-                         [self showDialog:@"SecurityId expired" andTitle:@"Login"];
+                         //[self showDialog:@"SecurityId expired" andTitle:@"Login"];
+                          [self openContentView];
                      }
                     
                 }else{

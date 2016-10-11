@@ -40,6 +40,8 @@
 @property (strong,nonatomic) IBOutlet UIButton * Bowlerwangon3s_Btn;
 @property (strong,nonatomic) IBOutlet UIButton * Bowlerwangon4s_Btn;
 @property (strong,nonatomic) IBOutlet UIButton * Bowlerwangon6s_Btn;
+@property (strong,nonatomic) IBOutlet UIButton * BowlerWangonAll_Btn;
+
 
 
 
