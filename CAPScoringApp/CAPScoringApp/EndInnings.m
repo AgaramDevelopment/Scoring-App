@@ -532,6 +532,7 @@ EndInnings *insertScoreCard;
     
                 WICKETOVERNO = overNo;
                 self.BOWLERCODE = BowlerCode;
+                O_ISLEGALBALL = @1;// Added for default value.
                 [self insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
                
                 ballNo = ballNo+1;
@@ -641,7 +642,7 @@ EndInnings *insertScoreCard;
     ISWKTDTLSUPDATE = [NSNumber numberWithInt:1];
     ISBOWLERCHANGED = [NSNumber numberWithInt:0];
     
-    O_ISLEGALBALL = [NSNumber numberWithInt:1];
+  //  O_ISLEGALBALL = [NSNumber numberWithInt:1]; Default value issue
     
     O_BATTINGPOSITIONNO = [NSNumber numberWithInt:0];
     O_RUNS = [NSNumber numberWithInt:0];
@@ -998,7 +999,7 @@ EndInnings *insertScoreCard;
     else
     {
         
-        if (ISBOWLERCHANGED.intValue == 1 && (O_ISLEGALBALL.intValue == 0 && NOBALL.intValue == 0 && WIDE.intValue == 0))
+        if (ISBOWLERCHANGED.intValue == 1 || (O_ISLEGALBALL.intValue == 0 && NOBALL.intValue == 0 && WIDE.intValue == 0))
         {
             
             int bowlerBalls =  (NOBALL.intValue == 0 && WIDE.intValue == 0 && BOWLERCOUNT.intValue == 1 && ISOVERCOMPLETE.intValue == 0) ? (O_BOWLERBALLS.intValue + 1) : O_BOWLERBALLS.intValue;

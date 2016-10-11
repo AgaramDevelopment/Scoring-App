@@ -7,6 +7,9 @@
 //
 
 #import "Utitliy.h"
+#import "AppDelegate.h"
+
+
 //Public IP host
 @implementation Utitliy
 
@@ -22,6 +25,134 @@
 +(NSString *)SecureId{
     return  @"SecureId";
 }
+
+//NSNumber *basePMWidth = [NSNumber numberWithInt:295];
+//NSNumber *basePMHeight = [NSNumber numberWithInt:380];
+//
+//NSNumber *deviceProWidth = [NSNumber numberWithInt:623];
+//NSNumber *deviceProHeight = [NSNumber numberWithInt:700];
+//
+//NSNumber *deviceOtherWidth = [NSNumber numberWithInt:367];
+//NSNumber *deviceOtherHeight = [NSNumber numberWithInt:406];
+
+//PitchMap
++(NSNumber *) getPitchMapXAxisForDevice:(NSNumber*) pmX {
+    
+    NSNumber *basePMWidth = [NSNumber numberWithInt:380];
+    
+    NSNumber *deviceProWidth = [NSNumber numberWithInt:623];
+    
+    NSNumber *deviceOtherWidth = [NSNumber numberWithInt:367];
+    
+    NSNumber *result = [NSNumber numberWithFloat:((pmX.floatValue/basePMWidth.floatValue)*( [AppDelegate isIpadPro] ?deviceProWidth.floatValue: deviceOtherWidth.floatValue))];
+        
+        return result;
+}
+
++(NSNumber *) getPitchMapYAxisForDevice:(NSNumber*) pmY {
+    
+    
+    
+    NSNumber *basePMHeight = [NSNumber numberWithInt:295];
+    
+    NSNumber *deviceProHeight = [NSNumber numberWithInt:(700-95)];
+    
+    NSNumber *deviceOtherHeight = [NSNumber numberWithInt:(406-40)];
+    
+    
+    NSNumber *result = [NSNumber numberWithFloat:((pmY.floatValue/basePMHeight.floatValue)*( [AppDelegate isIpadPro] ?deviceProHeight.floatValue: deviceOtherHeight.floatValue))];
+    NSNumber *newResult = [AppDelegate isIpadPro] ? [NSNumber numberWithFloat:result.floatValue+95.0] : [NSNumber numberWithFloat:result.floatValue+40.0];
+
+    return newResult;
+}
+
++(NSNumber *) getPitchMapXAxisForDB:(NSNumber*) pmX {
+    
+    NSNumber *basePMWidth = [NSNumber numberWithInt:380];
+    
+    NSNumber *deviceProWidth = [NSNumber numberWithInt:623];
+    
+    NSNumber *deviceOtherWidth = [NSNumber numberWithInt:367];
+    
+    NSNumber *result = [NSNumber numberWithFloat:((pmX.floatValue/( [AppDelegate isIpadPro] ?deviceProWidth.floatValue: deviceOtherWidth.floatValue) )*basePMWidth.floatValue)];
+    
+    return result;
+}
+
++(NSNumber *) getPitchMapYAxisForDB:(NSNumber*) pmY {
+    
+    NSNumber *basePMHeight = [NSNumber numberWithInt:295];
+    
+    NSNumber *deviceProHeight = [NSNumber numberWithInt:(700-95)];
+    
+    NSNumber *deviceOtherHeight = [NSNumber numberWithInt:(406-40)];
+
+    NSNumber *newPmY = [AppDelegate isIpadPro] ? [NSNumber numberWithInt:pmY.intValue-95] : [NSNumber numberWithInt:pmY.intValue-40];
+
+    NSNumber *result = [NSNumber numberWithFloat:((newPmY.floatValue/ ( [AppDelegate isIpadPro] ?deviceProHeight.floatValue: deviceOtherHeight.floatValue) )*basePMHeight.floatValue)];
+    
+    
+    return result;
+}
+
+
+
+//WagonWheel
+
++(NSNumber *) getWagonWheelXAxisForDevice:(NSNumber*) pmX {
+    
+    NSNumber *baseWWWidth = [NSNumber numberWithInt:322];
+    
+    NSNumber *deviceProWidth = [NSNumber numberWithInt:350];
+    
+    NSNumber *deviceOtherWidth = [NSNumber numberWithInt:350];
+    
+    NSNumber *result = [NSNumber numberWithFloat:((pmX.floatValue/baseWWWidth.floatValue)*( [AppDelegate isIpadPro] ?deviceProWidth.floatValue: deviceOtherWidth.floatValue))];
+    
+    return result;
+}
+
++(NSNumber *) getWagonWheelYAxisForDevice:(NSNumber*) pmY {
+    
+    NSNumber *baseWWHeight = [NSNumber numberWithInt:295];
+    
+    NSNumber *deviceProHeight = [NSNumber numberWithInt:350];
+    
+    NSNumber *deviceOtherHeight = [NSNumber numberWithInt:350];
+    
+    NSNumber *result = [NSNumber numberWithFloat:((pmY.floatValue/baseWWHeight.floatValue)*( [AppDelegate isIpadPro] ?deviceProHeight.floatValue: deviceOtherHeight.floatValue))];
+    
+    return result;
+}
+
++(NSNumber *) getWagonWheelXAxisForDB:(NSNumber*) pmX {
+    
+    NSNumber *baseWWWidth = [NSNumber numberWithInt:322];
+    
+    NSNumber *deviceProWidth = [NSNumber numberWithInt:350];
+    
+    NSNumber *deviceOtherWidth = [NSNumber numberWithInt:350];
+    
+    NSNumber *result = [NSNumber numberWithFloat:((pmX.floatValue/( [AppDelegate isIpadPro] ?deviceProWidth.floatValue: deviceOtherWidth.floatValue) )*baseWWWidth.floatValue)];
+    
+    return result;
+}
+
++(NSNumber *) getWagonWheelYAxisForDB:(NSNumber*) pmY {
+    
+    NSNumber *baseWWHeight = [NSNumber numberWithInt:295];
+    
+    NSNumber *deviceProHeight = [NSNumber numberWithInt:350];
+    
+    NSNumber *deviceOtherHeight = [NSNumber numberWithInt:350];
+    
+    NSNumber *result = [NSNumber numberWithFloat:((pmY.floatValue/ ( [AppDelegate isIpadPro] ?deviceProHeight.floatValue: deviceOtherHeight.floatValue) )*baseWWHeight.floatValue)];
+    
+    return result;
+}
+
+
+
 @end
 
 //@implementation Utitliy

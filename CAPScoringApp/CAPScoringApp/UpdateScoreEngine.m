@@ -307,8 +307,11 @@ EndInnings *insertScoreBoard;
         }
         else
         {
+            //: (NSString*) MATCHCODE:(NSString*) COMPETITIONCODE:(NSString*) TEAMCODE :(NSNumber*) INNINGSNO{
+            
+                NSString *tempWickNo = [objDBManagerEndBall GetBallCodeExistsUpdateScoreEngine:  MATCHCODE: COMPETITIONCODE: TEAMCODE : INNINGSNO];
 
-        [objDBManagerEndBall InsertWicEventsUpdateScoreEngine : WICKETNO :BALLCODE :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :ISWICKET :WICKETTYPE :WICKETPLAYER :FIELDINGPLAYER :WICKETEVENT];
+        [objDBManagerEndBall InsertWicEventsUpdateScoreEngine : tempWickNo:BALLCODE :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :ISWICKET :WICKETTYPE :WICKETPLAYER :FIELDINGPLAYER :WICKETEVENT];
             
         }
         
@@ -681,7 +684,7 @@ EndInnings *insertScoreBoard;
     }
     else
     {
-        if(([ISBOWLERCHANGED  isEqual: @1]) || ((F_ISLEGALBALL.intValue == 1) && (NOBALL > 0 || WIDE > 0)))
+        if(([ISBOWLERCHANGED  isEqual: @1]) || ((F_ISLEGALBALL.intValue == 1) && (NOBALL.intValue > 0 || WIDE.intValue > 0)))
         {
             U_BOWLERBALLS = (F_NOBALL.intValue  == 0 && (F_WIDE.intValue == 0) && [BOWLERCOUNT  isEqual: @1] && ISOVERCOMPLETE.intValue == 0) ? ([NSNumber numberWithInt:F_BOWLERBALLS.intValue - 1]): F_BOWLERBALLS;
             U_BOWLERPARTIALOVERBALLS = ([F_NOBALL  isEqual:@0] && [F_WIDE  isEqual: @0] && BOWLERCOUNT.intValue > 1)? ([NSNumber numberWithInt:F_BOWLERPARTIALOVERBALLS.intValue - 1]) : F_BOWLERPARTIALOVERBALLS ;

@@ -86,6 +86,16 @@
     
 }
 
++(BOOL) isIpadPro
+{
+    
+    
+    if ([UIScreen mainScreen].bounds.size.height == 1366) {
+        return  YES;
+    }
+    return NO;
+}
+
 -(void)hideLoading {
     [indicator removeFromSuperview];
     indicator = nil;

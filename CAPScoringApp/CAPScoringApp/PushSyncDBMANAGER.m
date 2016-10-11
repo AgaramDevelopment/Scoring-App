@@ -647,7 +647,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
                 f.numberStyle = NSNumberFormatterDecimalStyle;
                 
-                
+
                 record.BALLCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 record.COMPETITIONCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 record. MATCHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
@@ -686,19 +686,24 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. PMLINECODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 35)];
                 
                 record. PMLENGTHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 36)];
-                record. PMX1=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 37)]];
-                record. PMY1=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 38) ]];
-                record. PMX2=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 39)]];
-                record. PMY2=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 40)]];
-                record. PMX3=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 41)]];
-                record. PMY3=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 42)]];
+                
+                record. PMX1=[NSNumber numberWithInt: [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 37)]].intValue];
+                record. PMY1=[NSNumber numberWithInt: [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 38) ]].intValue];
+                record. PMX2=[NSNumber numberWithInt: [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 39)]].intValue];
+                record. PMY2=[NSNumber numberWithInt: [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 40)]].intValue];
+                
+                record. PMX3=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 41)]]==nil?@1:[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 41)]];
+                record. PMY3=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 42)]]==nil?@1:[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 42)]];
+                
                 record. WWREGION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 43)];
-                record. WWX1=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 44)]];
-                record. WWY1=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 45)]];
-                record.WWX2=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 46)]];
-                record.WWY2=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 47)]];
-                record. BALLDURATION=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 48)]];
-                record. ISAPPEAL=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 49)]];
+                record. WWX1=[NSNumber numberWithInt: [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 44)]].intValue];
+                record. WWY1=[NSNumber numberWithInt: [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 45)]].intValue];
+                record.WWX2=[NSNumber numberWithInt: [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 46)]].intValue];
+                record.WWY2=[NSNumber numberWithInt: [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 47)]].intValue];
+                
+                record. BALLDURATION=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 48)]]==nil?@0:[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 48)]];
+                
+                record. ISAPPEAL=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 49)]]==nil?@0:[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 49)]];
                 record. ISBEATEN=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 50)]];
                 record. ISUNCOMFORT=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 51)]];
                 record. ISWTB=[f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 52)]];
