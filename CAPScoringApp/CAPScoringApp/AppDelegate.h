@@ -14,6 +14,7 @@
 
 - (void)showLoading;
 - (void)hideLoading;
++(BOOL) isIpadPro;
 
 @end
 
