@@ -14234,6 +14234,9 @@
         
     }
     
+    if([regioncode isEqualToString:@""]){
+        [self setWagonWheelRegionCodeByAngle:Xposition :Yposition];
+    }
 }
 
 -(void)didClickWagonWheelmapTapAction:(UIGestureRecognizer *)wagon_Wheelgesture {
@@ -16186,5 +16189,102 @@
     isWagonwheel=YES;
 }
 
+-(void) setWagonWheelRegionCodeByAngle:(int) Xposition :(int) Yposition{
+    
+    
+    int n = 270 - (atan2((IS_IPAD_PRO?186:145) + 1 - Yposition, (IS_IPAD_PRO?221:172) + 1 - Xposition)) * 180 / M_PI;//Get Angle value for Wagon Wheel
+    int wagonwheelangle = (n % 360);
+    
+    if([self.BatmenStyle isEqualToString:@"MSC013"])//MSC013-Right Hand Batting.
+    {
+        if (wagonwheelangle >= 0 && wagonwheelangle <= 35)
+        {
+            wagonregiontext = @"Long On";
+            regioncode = @"MSC178";
+        }
+        else if (wagonwheelangle >= 36 && wagonwheelangle <= 75)
+        {
+            wagonregiontext = @"Mid Wicket";
+            regioncode = @"MSC171";
+        }
+        else if (wagonwheelangle >= 76 && wagonwheelangle <= 119)
+        {
+            wagonregiontext = @"Square Leg";
+            regioncode = @"MSC163";
+        }
+        else if (wagonwheelangle >= 120 && wagonwheelangle <= 179)
+        {
+            wagonregiontext = @"Fine Leg";
+            regioncode = @"MSC156";
+        }
+        else if (wagonwheelangle >= 180 && wagonwheelangle <= 240)
+        {
+            wagonregiontext = @"Third Man";
+            regioncode = @"MSC216";
+        }
+        else if (wagonwheelangle >= 241 && wagonwheelangle <= 282)
+        {
+            wagonregiontext = @"Point";
+            regioncode = @"MSC194";
+        }
+        else if (wagonwheelangle >= 283 && wagonwheelangle <= 324)
+        {
+            wagonregiontext = @"Cover";
+            regioncode = @"MSC189";
+        }
+        else if (wagonwheelangle >= 325 && wagonwheelangle <= 360)
+        {
+            wagonregiontext = @"Long Off";
+            regioncode = @"MSC185";
+        }
+    }
+    else//MSC012-Left Hand Batting.
+    {
+        if (wagonwheelangle >= 0 && wagonwheelangle <= 35)
+        {
+            wagonregiontext = @"Long Off";
+            regioncode = @"MSC185";
+        }
+        else if (wagonwheelangle >= 36 && wagonwheelangle <= 75)
+        {
+            wagonregiontext = @"Covers";
+            regioncode = @"MSC189";
+        }
+        else if (wagonwheelangle >= 76 && wagonwheelangle <= 119)
+        {
+            wagonregiontext = @"Point";
+            regioncode = @"MSC194";
+        }
+        else if (wagonwheelangle >= 120 && wagonwheelangle <= 179)
+        {
+            wagonregiontext = @"Third Man";
+            regioncode = @"MSC216";
+        }
+        else if (wagonwheelangle >= 180 && wagonwheelangle <= 240)
+        {
+            wagonregiontext = @"Fine Leg";
+            regioncode = @"MSC156";
+        }
+        else if (wagonwheelangle >= 241 && wagonwheelangle <= 282)
+        {
+            wagonregiontext = @"Square Leg";
+            regioncode = @"MSC163";
+        }
+        else if (wagonwheelangle >= 283 && wagonwheelangle <= 324)
+        {
+            wagonregiontext = @"Mid Wicket";
+            regioncode = @"MSC171";
+        }
+        else if (wagonwheelangle >= 325 && wagonwheelangle <= 360)
+        {
+            wagonregiontext = @"Long On";
+            regioncode = @"MSC178";
+        }
+    }
+    
+    _ballEventRecord.objWWREGION=regioncode;
+
+    
+}
 
 @end
