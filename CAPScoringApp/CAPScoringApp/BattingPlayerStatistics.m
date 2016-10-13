@@ -10,6 +10,7 @@
 #import <sqlite3.h>
 #import "BattingPayerStatisticsRecord.h"
 #import "BattingStatisticsPitchRecord.h"
+#import "Utitliy.h"
 
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
@@ -73,13 +74,24 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
                 BattingPayerStatisticsRecord *record=[[BattingPayerStatisticsRecord alloc]init];
                 record.WWRegion=[self getValueByNull:statement :0];
-                record.WWX1=[self getValueByNull:statement :1];
+//                record.WWX1=[self getValueByNull:statement :1];
+//                
+//                record.WWY1=[self getValueByNull:statement :2];
+//                
+//                record.WWX2=[self getValueByNull:statement :3];
+//                
+//                record.WWY2=[self getValueByNull:statement :4];
+//                
                 
-                record.WWY1=[self getValueByNull:statement :2];
                 
-                record.WWX2=[self getValueByNull:statement :3];
                 
-                record.WWY2=[self getValueByNull:statement :4];
+                record.WWX1 = [Utitliy getWagonWheelXAxisForDevice:[self getValueByNull:statement :1]];
+                record.WWY1 =[Utitliy getWagonWheelYAxisForDevice:[self getValueByNull:statement :2]];
+                record.WWX2   =[Utitliy getWagonWheelXAxisForDevice:[self getValueByNull:statement :3]];
+                record.WWY2       =[Utitliy getWagonWheelYAxisForDevice:[self getValueByNull:statement :4]];
+                
+                
+
                 
                 record.RUNS=[self getValueByNull:statement :5];
                 
@@ -129,8 +141,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.PMLineName=[self getValueByNull:statement :1];
                 record.PMLengthCode=[self getValueByNull:statement :2];
                 record.PMLengthName=[self getValueByNull:statement :3];
-                record.PMX2=[self getValueByNull:statement :4];
-                record.PMy2=[self getValueByNull:statement :5];
+                //record.PMX2=[self getValueByNull:statement :4];
+                //record.PMy2=[self getValueByNull:statement :5];
+                
+                record.PMX2 = [Utitliy getPitchMapXAxisForDevice:[self getValueByNull:statement :4]];
+                record.PMy2 = [Utitliy getPitchMapYAxisForDevice:[self getValueByNull:statement :5]];
+                
+                
                 record.BattingStyle=[self getValueByNull:statement :6];
                 record.Runs=[self getValueByNull:statement :7];
                 record.isDontBall=[self getValueByNull:statement :8];

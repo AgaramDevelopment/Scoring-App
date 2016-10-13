@@ -10,7 +10,7 @@
 #import <sqlite3.h>
 #import "BowlerStaticsRecord.h"
 #import "BowlerStrickPitchRecord.h"
-
+#import "Utitliy.h"
 
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
@@ -73,13 +73,23 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 BowlerStaticsRecord *record=[[BowlerStaticsRecord alloc]init];
                 record.WWRegion=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                record.WWX1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+//                record.WWX1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+//                
+//                record.WWY1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+//                
+//                record.WWX2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+//                
+//                record.WWY2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+//               
                 
-                record.WWY1=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record.WWX1 = [Utitliy getWagonWheelXAxisForDevice:[self getValueByNull:statement :1]];
+                record.WWY1 =[Utitliy getWagonWheelYAxisForDevice:[self getValueByNull:statement :2]];
+                record.WWX2       =[Utitliy getWagonWheelXAxisForDevice:[self getValueByNull:statement :3]];
+                record.WWY2                    =[Utitliy getWagonWheelYAxisForDevice:[self getValueByNull:statement :4]];
+             
+
                 
-                record.WWX2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
                 
-                record.WWY2=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
                 
                 record.Runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
                 
@@ -121,7 +131,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK){
             
-            if (sqlite3_step(statement) == SQLITE_DONE)
+            if (sqlite3_step(statement) == SQLITE_ROW)
             {
                 BowlerStrickPitchRecord *record=[[BowlerStrickPitchRecord alloc]init];
                 
@@ -135,9 +145,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                 record.Runs=[self getValueByNull:statement :4];
                 
-                record.PMX2=[self getValueByNull:statement :5];
+              //  record.PMX2=[self getValueByNull:statement :5];
                 
-                record.PMY2=[self getValueByNull:statement :6];
+             //   record.PMY2=[self getValueByNull:statement :6];
+                
+                record.PMX2 = [Utitliy getPitchMapXAxisForDevice:[self getValueByNull:statement :5]];
+                record.PMY2 = [Utitliy getPitchMapYAxisForDevice:[self getValueByNull:statement :6]];
                 
                 record.BattingStyle=[self getValueByNull:statement :7];
                 
@@ -155,5 +168,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return GetBowlingTDetails;
 }
+
+
 
 @end
