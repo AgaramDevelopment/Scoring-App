@@ -810,7 +810,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/EditMode/EditModeVC.h"
-                  timestampString = "497539874.764626"
+                  timestampString = "498054225.84376"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "162"
@@ -825,7 +825,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/EditMode/EditModeVC.h"
-                  timestampString = "497539874.764777"
+                  timestampString = "498054225.84392"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "162"
@@ -1002,11 +1002,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "494935875.816148"
+            timestampString = "498050498.427211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "7840"
-            endingLineNumber = "7840"
+            startingLineNumber = "7851"
+            endingLineNumber = "7851"
             landmarkName = "-btn_batsmen:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1114,13 +1114,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "497191538.372853"
+            timestampString = "498050498.427211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17964"
-            endingLineNumber = "17964"
-            landmarkName = "-checkBeatenOnRuns"
-            landmarkType = "5">
+            startingLineNumber = "18007"
+            endingLineNumber = "18007">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1194,11 +1192,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "497191538.372853"
+            timestampString = "498050498.427211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "11336"
-            endingLineNumber = "11336"
+            startingLineNumber = "11347"
+            endingLineNumber = "11347"
             landmarkName = "-reloadBowlerTeamBatsmanDetails"
             landmarkType = "5">
          </BreakpointContent>
@@ -1210,11 +1208,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "497191557.29551"
+            timestampString = "498050498.427211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "11338"
-            endingLineNumber = "11338"
+            startingLineNumber = "11349"
+            endingLineNumber = "11349"
             landmarkName = "-reloadBowlerTeamBatsmanDetails"
             landmarkType = "5">
          </BreakpointContent>
@@ -1226,11 +1224,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "497191594.390481"
+            timestampString = "498050498.427211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "9956"
-            endingLineNumber = "9956"
+            startingLineNumber = "9967"
+            endingLineNumber = "9967"
             landmarkName = "-ChangeTeam"
             landmarkType = "5">
          </BreakpointContent>
@@ -1466,11 +1464,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/EndInnings.m"
-            timestampString = "497355059.018518"
+            timestampString = "498054224.635765"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "887"
-            endingLineNumber = "887"
+            startingLineNumber = "891"
+            endingLineNumber = "891"
             landmarkName = "-insertScordBoard::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -1770,11 +1768,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "497338740.857383"
+            timestampString = "498050498.427211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "11357"
-            endingLineNumber = "11357"
+            startingLineNumber = "11368"
+            endingLineNumber = "11368"
             landmarkName = "-reloadBowlerTeamBatsmanDetails"
             landmarkType = "5">
          </BreakpointContent>
@@ -2058,11 +2056,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/EndInnings.m"
-            timestampString = "497355059.018518"
+            timestampString = "498054224.635765"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1086"
-            endingLineNumber = "1086"
+            startingLineNumber = "1090"
+            endingLineNumber = "1090"
             landmarkName = "-insertScordBoard::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -2074,11 +2072,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/EndInnings.m"
-            timestampString = "497355059.018518"
+            timestampString = "498054224.635765"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "903"
-            endingLineNumber = "903"
+            startingLineNumber = "907"
+            endingLineNumber = "907"
             landmarkName = "-insertScordBoard::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -2090,11 +2088,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/EndInnings.m"
-            timestampString = "497355059.018518"
+            timestampString = "498054224.635765"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "979"
-            endingLineNumber = "979"
+            startingLineNumber = "983"
+            endingLineNumber = "983"
             landmarkName = "-insertScordBoard::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -2106,11 +2104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/EndInnings.m"
-            timestampString = "497355059.018518"
+            timestampString = "498054224.635765"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1081"
-            endingLineNumber = "1081"
+            startingLineNumber = "1085"
+            endingLineNumber = "1085"
             landmarkName = "-insertScordBoard::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -2154,11 +2152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/EndInnings.m"
-            timestampString = "497355059.018518"
+            timestampString = "498054224.635765"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "916"
-            endingLineNumber = "916"
+            startingLineNumber = "920"
+            endingLineNumber = "920"
             landmarkName = "-insertScordBoard::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -2170,11 +2168,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/EndInnings.m"
-            timestampString = "497355059.018518"
+            timestampString = "498054224.635765"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1002"
-            endingLineNumber = "1002"
+            startingLineNumber = "1006"
+            endingLineNumber = "1006"
             landmarkName = "-insertScordBoard::::"
             landmarkType = "5">
          </BreakpointContent>
@@ -2202,13 +2200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "497452685.136807"
+            timestampString = "498050498.427211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17645"
-            endingLineNumber = "17645"
-            landmarkName = "-SyncData_btn:"
-            landmarkType = "5">
+            startingLineNumber = "17688"
+            endingLineNumber = "17688">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2218,13 +2214,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "497452762.448715"
+            timestampString = "498050498.427211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17734"
-            endingLineNumber = "17734"
-            landmarkName = "-SyncData_btn:"
-            landmarkType = "5">
+            startingLineNumber = "17777"
+            endingLineNumber = "17777">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2234,13 +2228,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "497452764.528706"
+            timestampString = "498050498.427211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17747"
-            endingLineNumber = "17747"
-            landmarkName = "-SyncData_btn:"
-            landmarkType = "5">
+            startingLineNumber = "17790"
+            endingLineNumber = "17790">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2250,13 +2242,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "497452839.232806"
+            timestampString = "498050498.427211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17757"
-            endingLineNumber = "17757"
-            landmarkName = "-SyncData_btn:"
-            landmarkType = "5">
+            startingLineNumber = "17800"
+            endingLineNumber = "17800">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2282,13 +2272,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-            timestampString = "497454453.680602"
+            timestampString = "498050498.427211"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17669"
-            endingLineNumber = "17669"
-            landmarkName = "-SyncData_btn:"
-            landmarkType = "5">
+            startingLineNumber = "17712"
+            endingLineNumber = "17712">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2448,6 +2436,438 @@
             startingLineNumber = "1445"
             endingLineNumber = "1445"
             landmarkName = "-GetBallDetailsForBallEvents:::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/ViewController/EditMode/EditModeVC.m"
+            timestampString = "498050498.427211"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "875"
+            endingLineNumber = "875"
+            landmarkName = "-didClickEditrotation:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+            timestampString = "498050498.427211"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15674"
+            endingLineNumber = "15674"
+            landmarkName = "-didClickEditAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+            timestampString = "498050498.427211"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15898"
+            endingLineNumber = "15898"
+            landmarkName = "-didClickEditrotation:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+            timestampString = "498050498.427211"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15896"
+            endingLineNumber = "15896"
+            landmarkName = "-didClickEditrotation:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
+            timestampString = "498050498.427211"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "15785"
+            endingLineNumber = "15785"
+            landmarkName = "-didClickEditAction:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/ViewController/EditMode/EditModeVC.m"
+            timestampString = "498050498.427211"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "902"
+            endingLineNumber = "902"
+            landmarkName = "-didClickCancelrotation:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/FetchSEPageLoadRecord.m"
+            timestampString = "498050972.13868"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "414"
+            endingLineNumber = "414"
+            landmarkName = "-fetchSEPageLoadDetails::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndBall.m"
+            timestampString = "498051748.790263"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "-UPDATEINNINGSSUMMARYUPSC::::::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndBall.m"
+            timestampString = "498051777.537972"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "223"
+            endingLineNumber = "223"
+            landmarkName = "-UPDATEINNINGSSUMMARYUPSC::::::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndBall.m"
+            timestampString = "498051777.970435"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
+            landmarkName = "-UPDATEINNINGSSUMMARYUPSC::::::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndBall.m"
+            timestampString = "498051778.362176"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "-UPDATEINNINGSSUMMARYUPSC::::::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndBall.m"
+            timestampString = "498051778.793967"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "220"
+            endingLineNumber = "220"
+            landmarkName = "-UPDATEINNINGSSUMMARYUPSC::::::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndBall.m"
+            timestampString = "498051779.218217"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "219"
+            endingLineNumber = "219"
+            landmarkName = "-UPDATEINNINGSSUMMARYUPSC::::::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndBall.m"
+            timestampString = "498051779.6339"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "-UPDATEINNINGSSUMMARYUPSC::::::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndBall.m"
+            timestampString = "498051780.098432"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "218"
+            endingLineNumber = "218"
+            landmarkName = "-UPDATEINNINGSSUMMARYUPSC::::::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DbManager_OtherWicket.m"
+            timestampString = "498051815.626479"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "810"
+            endingLineNumber = "810"
+            landmarkName = "-UpdateInningsSummaryForInsertOtherwicket:::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DbManager_OtherWicket.m"
+            timestampString = "498051818.673889"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1470"
+            endingLineNumber = "1470"
+            landmarkName = "-UpdateInningsSummaryDetailForDeleteOtherwicket::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DbManager_OtherWicket.m"
+            timestampString = "498051821.545189"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1508"
+            endingLineNumber = "1508"
+            landmarkName = "-UpdateInningsSummaryDetailForDeleteRetiredHurt::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndBall.m"
+            timestampString = "498051825.848507"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1839"
+            endingLineNumber = "1839"
+            landmarkName = "-UpdateInningsSummary::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndInnings.m"
+            timestampString = "498051828.210004"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2290"
+            endingLineNumber = "2290"
+            landmarkName = "-UpdateInningsSummaryForInsertScoreBoard:::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndInnings.m"
+            timestampString = "498051864.681893"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2251"
+            endingLineNumber = "2251"
+            landmarkName = "-InsertInningsSummaryForInsertScoreBoard:::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndInnings.m"
+            timestampString = "498051865.306335"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2250"
+            endingLineNumber = "2250"
+            landmarkName = "-InsertInningsSummaryForInsertScoreBoard:::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndInnings.m"
+            timestampString = "498051865.971681"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2249"
+            endingLineNumber = "2249"
+            landmarkName = "-InsertInningsSummaryForInsertScoreBoard:::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndInnings.m"
+            timestampString = "498051866.930488"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2248"
+            endingLineNumber = "2248"
+            landmarkName = "-InsertInningsSummaryForInsertScoreBoard:::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndInnings.m"
+            timestampString = "498051867.762014"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2247"
+            endingLineNumber = "2247"
+            landmarkName = "-InsertInningsSummaryForInsertScoreBoard:::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndInnings.m"
+            timestampString = "498051868.210253"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2246"
+            endingLineNumber = "2246"
+            landmarkName = "-InsertInningsSummaryForInsertScoreBoard:::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/DBManagerEndInnings.m"
+            timestampString = "498051868.66607"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2245"
+            endingLineNumber = "2245"
+            landmarkName = "-InsertInningsSummaryForInsertScoreBoard:::::::::::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -6624,6 +6624,17 @@
 -(IBAction)didClickRightSideBtn_Action:(id)sender
 {
     
+    if(view_addedit != nil)
+    {
+        [self dismissAllPopTipViews];
+        [view_addedit removeFromSuperview];
+        [leftrotation removeFromSuperview];
+        [Rightrotation removeFromSuperview];
+        [Cancelrotation removeFromSuperview];
+        [Editrotation removeFromSuperview];
+    }
+    
+    
     UIButton *selectBtnTag=(UIButton*)sender;
     
     
@@ -15771,7 +15782,7 @@
         UIBarButtonItem *barButtonItem = (UIBarButtonItem *)sender;
         [popTipView presentPointingAtBarButtonItem:barButtonItem animated:YES];
     }
-    
+    self.visiblePopTipViews = [[NSMutableArray alloc]init];
     [self.visiblePopTipViews addObject:popTipView];
     self.currentPopTipViewTarget = sender;
 
@@ -15826,6 +15837,16 @@
 
 -(IBAction)didClickLeftRotation:(id)sender
 {
+    if(view_addedit != nil)
+    {
+        [self dismissAllPopTipViews];
+        [view_addedit removeFromSuperview];
+        [leftrotation removeFromSuperview];
+        [Rightrotation removeFromSuperview];
+        [Cancelrotation removeFromSuperview];
+        [Editrotation removeFromSuperview];
+    }
+    
     UIButton * btn = (UIButton *)sender;
     
     BallEventRecord *record = [fetchSEPageLoadRecord.BallGridDetails objectAtIndex:btn.tag];
@@ -15856,6 +15877,8 @@
 -(IBAction)didClickEditrotation:(id)sender
 {
     
+    
+    
     UIButton * btn = (UIButton *)sender;
     
     BallEventRecord *record = [fetchSEPageLoadRecord.BallGridDetails objectAtIndex:btn.tag];
@@ -15870,6 +15893,18 @@
     
     [self viewDidLoad];
     
+    
+    if(view_addedit != nil)
+    {
+        [self dismissAllPopTipViews];
+        [view_addedit removeFromSuperview];
+        [leftrotation removeFromSuperview];
+        [Rightrotation removeFromSuperview];
+        [Cancelrotation removeFromSuperview];
+        [Editrotation removeFromSuperview];
+    }
+    
+    
     //        isEdit=YES;
     //    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
     //    ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
@@ -15881,6 +15916,15 @@
 }
 -(IBAction)didClickCancelrotation:(id)sender
 {
+    if(view_addedit != nil)
+    {
+        [self dismissAllPopTipViews];
+        [view_addedit removeFromSuperview];
+        [leftrotation removeFromSuperview];
+        [Rightrotation removeFromSuperview];
+        [Cancelrotation removeFromSuperview];
+        [Editrotation removeFromSuperview];
+    }
     
 }
 

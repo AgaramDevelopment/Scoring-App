@@ -850,7 +850,11 @@ EndInnings *insertScoreCard;
     int nLegByess = O_LEGBYES.intValue + (NOBALL.intValue > 0 && LEGBYES.intValue > 0 ? 0 : LEGBYES.intValue);
     N_LEGBYES = [NSNumber numberWithInt:nLegByess];
     
-    
+    int nNoBall = (NOBALL.intValue>0 && BYES.intValue>0)? O_NOBALLS.intValue+NOBALL.intValue+BYES.intValue :
+                                (NOBALL.intValue>0 && LEGBYES.intValue>0) ? O_NOBALLS.intValue+NOBALL.intValue+LEGBYES.intValue :
+                                        NOBALL.intValue>0 ? O_NOBALLS.intValue+NOBALL.intValue :
+                                                O_NOBALLS.intValue;
+    N_NOBALLS = [NSNumber numberWithInt:nNoBall];
     
     int wide = WIDE.intValue > 0 ? O_WIDES.intValue + WIDE.intValue : O_WIDES.intValue;
     
