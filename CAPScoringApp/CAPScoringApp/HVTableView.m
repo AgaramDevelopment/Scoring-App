@@ -94,36 +94,36 @@
 	UITableViewCell* cell;
 	
 	if (self.expandOnlyOneCell)
-//	{
-//		if (actionToTake == 0) // e.g. the first time or an expanded cell from before gets in to view
-//		{
-//			if (selectedIndexPath)
-//				if (selectedIndexPath.row == indexPath.row && selectedIndexPath.section == indexPath.section)
-//				{
-//					cell = [HVTableViewDataSource tableView:tableView cellForRowAtIndexPath:indexPath isExpanded:YES];//i want it expanded
-//					return cell;
-//				}
-//			
-//			cell = [HVTableViewDataSource tableView:tableView cellForRowAtIndexPath:indexPath isExpanded:NO];
-//			
-//			return cell; //it's already collapsed!
-//		}
-//		
-//		cell = [HVTableViewDataSource tableView:tableView cellForRowAtIndexPath:indexPath isExpanded:NO];
-//		
-//		if(actionToTake == -1)
-//		{
-//			[HVTableViewDataSource tableView:tableView collapseCell:cell withIndexPath:indexPath];
-//			actionToTake = 0;
-//		}
-//		else
-//		{
-//			[HVTableViewDataSource tableView:tableView expandCell:cell withIndexPath:indexPath];
-//			actionToTake = 0;
-//		}
-//	}
-//	else
-//	{
+	{
+		if (actionToTake == 0) // e.g. the first time or an expanded cell from before gets in to view
+		{
+			if (selectedIndexPath)
+				if (selectedIndexPath.row == indexPath.row && selectedIndexPath.section == indexPath.section)
+				{
+					cell = [HVTableViewDataSource tableView:tableView cellForRowAtIndexPath:indexPath isExpanded:YES];//i want it expanded
+					return cell;
+				}
+			
+			cell = [HVTableViewDataSource tableView:tableView cellForRowAtIndexPath:indexPath isExpanded:NO];
+			
+			return cell; //it's already collapsed!
+		}
+		
+		//cell = [HVTableViewDataSource tableView:tableView cellForRowAtIndexPath:indexPath isExpanded:NO];
+		
+		if(actionToTake == -1)
+		{
+			[HVTableViewDataSource tableView:tableView collapseCell:cell withIndexPath:indexPath];
+			actionToTake = 0;
+		}
+		else
+		{
+			[HVTableViewDataSource tableView:tableView expandCell:cell withIndexPath:indexPath];
+			actionToTake = 0;
+		}
+	}
+	else
+	{
 		if (actionToTake == 0) // e.g. the first time or an expanded cell from before gets in to view
 		{
 			BOOL alreadyExpanded = NO;
@@ -142,7 +142,8 @@
 
 		}
 		
-		cell = [HVTableViewDataSource tableView:tableView cellForRowAtIndexPath:indexPath isExpanded:NO];
+        cell = [HVTableViewDataSource tableView:tableView cellForRowAtIndexPath:indexPath isExpanded:NO];
+
 		
 		if(actionToTake == -1)
 		{
@@ -157,7 +158,7 @@
             
 			actionToTake = 0;
 		}
-	//}
+	}
 	
 	return cell;
 }
@@ -348,16 +349,16 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-//	if (self.expandOnlyOneCell)
-//	{
-//		if (selectedIndexPath)
-//		if(selectedIndexPath.row == indexPath.row && selectedIndexPath.section == indexPath.section)
-//			return [HVTableViewDelegate tableView:tableView heightForRowAtIndexPath:indexPath isExpanded:YES];
-//		
-//		return [HVTableViewDelegate tableView:tableView heightForRowAtIndexPath:indexPath isExpanded:NO];
-//	}
-//	else
-//	{
+	if (self.expandOnlyOneCell)
+	{
+		if (selectedIndexPath)
+		if(selectedIndexPath.row == indexPath.row && selectedIndexPath.section == indexPath.section)
+			return [HVTableViewDelegate tableView:tableView heightForRowAtIndexPath:indexPath isExpanded:YES];
+		
+		return [HVTableViewDelegate tableView:tableView heightForRowAtIndexPath:indexPath isExpanded:NO];
+	}
+	else
+	{
 		BOOL alreadyExpanded = NO;
 		NSIndexPath* correspondingIndexPath;
 		for (NSIndexPath* anIndexPath in expandedIndexPaths) {
@@ -371,7 +372,7 @@
 			return [HVTableViewDelegate tableView:tableView heightForRowAtIndexPath:indexPath isExpanded:YES];
 		else
 			return [HVTableViewDelegate tableView:tableView heightForRowAtIndexPath:indexPath isExpanded:NO];
-	//}
+	}
 }
 
 
@@ -453,8 +454,8 @@
                 [tableView beginUpdates];
                 [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                 [tableView endUpdates];
-//                if (self.enableAutoScroll)
-//                    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+                if (self.enableAutoScroll)
+                    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
             }
             else
             {
@@ -463,8 +464,8 @@
                 [tableView beginUpdates];
                 [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
                 [tableView endUpdates];
-//                if (self.enableAutoScroll)
-//                    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+                if (self.enableAutoScroll)
+                    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
             }
 		}
 		else ///expand it!
@@ -474,8 +475,8 @@
 			[tableView beginUpdates];
 			[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
 			[tableView endUpdates];
-//			if (self.enableAutoScroll)
-//				[tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+			if (self.enableAutoScroll)
+				[tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 		}
 	//}
 }
