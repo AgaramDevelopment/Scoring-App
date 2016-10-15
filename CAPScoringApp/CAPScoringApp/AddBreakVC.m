@@ -417,7 +417,7 @@
         _addbreak_lbl.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
         
         
- [self startService:@"INSERT"];
+ //[self startService:@"INSERT"];
         
         if([[NSUserDefaults standardUserDefaults] boolForKey:@"AlertView"]) {
             NSLog(@"yes");
@@ -723,78 +723,78 @@
 }
 
 
--(void) startService:(NSString *)OPERATIONTYPE{
-    if(self.checkInternetConnection){
-           NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];
-        [dateFmt setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
-        NSDate *date = [dateFmt dateFromString:BREAKSTARTTIME];
-        NSLog(@"date:",date);
-        
-        [dateFmt setDateFormat:@"yyyy-MM-dd"];
-        NSString *BREAKSTARTTIME1 = [dateFmt stringFromDate:date];
-        NSLog(@"dateString:",BREAKSTARTTIME1);
-        
-        
-           NSDateFormatter *dateFmt1 = [[NSDateFormatter alloc] init];
-        [dateFmt1 setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
-        NSDate *date1= [dateFmt1 dateFromString:BREAKENDTIME];
-        NSLog(@"date:",date1);
-        
-        [dateFmt1 setDateFormat:@"yyyy-MM-dd"];
-        NSString *BREAKENDTIME1 = [dateFmt1 stringFromDate:date1];
-        NSLog(@"dateString:",BREAKENDTIME1);
-        
-        
-        MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
-        COMPETITIONCODE = COMPETITIONCODE == nil ?@"NULL":COMPETITIONCODE;
-        INNINGSNO= INNINGSNO == nil ?@"NULL":INNINGSNO;
-        
-        
-        BREAKSTARTTIME1 = BREAKSTARTTIME1 == nil ?@"NULL":BREAKSTARTTIME1;
-        BREAKENDTIME1 = BREAKENDTIME1 == nil ?@"":BREAKENDTIME1;
-        BREAKCOMMENTS= BREAKCOMMENTS == nil ?@"NULL":BREAKCOMMENTS;
-        ISINCLUDEDURATION = ISINCLUDEDURATION == nil ?@"NULL":ISINCLUDEDURATION;
-        BREAKNO = BREAKNO == nil ?@"NULL":BREAKNO;
-        
-        
-        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        //Show indicator
-        [delegate showLoading];
-                  
-            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETBREAK/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], COMPETITIONCODE,INNINGSNO,MATCHCODE,BREAKSTARTTIME1,BREAKENDTIME1,BREAKCOMMENTS,ISINCLUDEDURATION,BREAKNO,OPERATIONTYPE];
-            NSLog(@"-%@",baseURL);
-            
-            
-            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            NSURLResponse *response;
-            NSError *error;
-            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            if (responseData != nil) {
-            
-            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-            
-            if(rootArray !=nil && rootArray.count>0){
-                NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                NSString *success = [valueDict valueForKey:@"DataItem"];
-                if([success isEqual:@"Success"]){
-                    
-                }
-            }else{
-                
-            }
-           
-            [delegate hideLoading];
-            }
-
-        
-       
-    }
-    
-
-}
+//-(void) startService:(NSString *)OPERATIONTYPE{
+//    if(self.checkInternetConnection){
+//           NSDateFormatter *dateFmt = [[NSDateFormatter alloc] init];
+//        [dateFmt setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+//        NSDate *date = [dateFmt dateFromString:BREAKSTARTTIME];
+//        NSLog(@"date:",date);
+//        
+//        [dateFmt setDateFormat:@"yyyy-MM-dd"];
+//        NSString *BREAKSTARTTIME1 = [dateFmt stringFromDate:date];
+//        NSLog(@"dateString:",BREAKSTARTTIME1);
+//        
+//        
+//           NSDateFormatter *dateFmt1 = [[NSDateFormatter alloc] init];
+//        [dateFmt1 setDateFormat:@"MM/dd/yyyy HH:mm:ss a"];
+//        NSDate *date1= [dateFmt1 dateFromString:BREAKENDTIME];
+//        NSLog(@"date:",date1);
+//        
+//        [dateFmt1 setDateFormat:@"yyyy-MM-dd"];
+//        NSString *BREAKENDTIME1 = [dateFmt1 stringFromDate:date1];
+//        NSLog(@"dateString:",BREAKENDTIME1);
+//        
+//        
+//        MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
+//        COMPETITIONCODE = COMPETITIONCODE == nil ?@"NULL":COMPETITIONCODE;
+//        INNINGSNO= INNINGSNO == nil ?@"NULL":INNINGSNO;
+//        
+//        
+//        BREAKSTARTTIME1 = BREAKSTARTTIME1 == nil ?@"NULL":BREAKSTARTTIME1;
+//        BREAKENDTIME1 = BREAKENDTIME1 == nil ?@"":BREAKENDTIME1;
+//        BREAKCOMMENTS= BREAKCOMMENTS == nil ?@"NULL":BREAKCOMMENTS;
+//        ISINCLUDEDURATION = ISINCLUDEDURATION == nil ?@"NULL":ISINCLUDEDURATION;
+//        BREAKNO = BREAKNO == nil ?@"NULL":BREAKNO;
+//        
+//        
+//        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//        
+//        //Show indicator
+//        [delegate showLoading];
+//                  
+//            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETBREAK/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT], COMPETITIONCODE,INNINGSNO,MATCHCODE,BREAKSTARTTIME1,BREAKENDTIME1,BREAKCOMMENTS,ISINCLUDEDURATION,BREAKNO,OPERATIONTYPE];
+//            NSLog(@"-%@",baseURL);
+//            
+//            
+//            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//            
+//            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//            NSURLResponse *response;
+//            NSError *error;
+//            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//            if (responseData != nil) {
+//            
+//            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//            
+//            if(rootArray !=nil && rootArray.count>0){
+//                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                NSString *success = [valueDict valueForKey:@"DataItem"];
+//                if([success isEqual:@"Success"]){
+//                    
+//                }
+//            }else{
+//                
+//            }
+//           
+//            [delegate hideLoading];
+//            }
+//
+//        
+//       
+//    }
+//    
+//
+//}
 
 
 - (BOOL) formValidation{
