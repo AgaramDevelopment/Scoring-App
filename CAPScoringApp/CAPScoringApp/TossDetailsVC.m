@@ -770,7 +770,7 @@
     {
         [dbChangeToss InsertTossDetails: self.CompetitionCode : self.MATCHCODE :selectTeamcode : electedcode : StrikerCode : NonStrikerCode : selectBowlerCode :BowlingEnd];
         
-        [self startService:@"DONE"];
+        //[self startService:@"DONE"];
         
         [self setPowerPlayForODIAndT20];//Power Play
 
@@ -816,78 +816,78 @@
 }
 
 
--(void) startService:(NSString *)OPERATIONTYPE{
-    if(self.checkInternetConnection){
-        
-        MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
-        CompetitionCode = CompetitionCode == nil ?@"NULL":CompetitionCode;
-        selectTeamcode= selectTeamcode == nil ?@"NULL":selectTeamcode;
-        electedcode = electedcode == nil ?@"NULL":electedcode;
-        StrikerCode = StrikerCode == nil ?@"":StrikerCode;
-        NonStrikerCode= NonStrikerCode == nil ?@"NULL":NonStrikerCode;
-        BowlingEnd = BowlingEnd == nil ?@"NULL":BowlingEnd;
-        
-        
-        
-        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        //Show indicator
-        [delegate showLoading];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            
-            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/TOSSEVENTS/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getSyncIPPORT], CompetitionCode,MATCHCODE,selectTeamcode,electedcode,StrikerCode,NonStrikerCode,BowlingEnd,OPERATIONTYPE];
-            NSLog(@"-%@",baseURL);
-            
-            
-            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            NSURLResponse *response;
-            NSError *error;
-            
-            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            if(responseData != nil)
-            {
-            
-            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-            
-            if(rootArray !=nil && rootArray.count>0){
-                NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                NSString *success = [valueDict valueForKey:@"DataItem"];
-                if([success isEqual:@"Success"]){
-                    
-                }
-            }else{
-                
-            }
-            }
-            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
-            //            NSLog(@"%@",errorCode);
-            //
-            //
-            //            if([errorCode boolValue] == YES)
-            //            {
-            //
-            //                BOOL isUserLogin = YES;
-            //
-            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
-            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
-            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
-            //                [[NSUserDefaults standardUserDefaults] synchronize];
-            //
-            //                [self openContentView];
-            //
-            //            }else{
-            //
-            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
-            //            }
-            [delegate hideLoading];
-        });
-        
-        //[delegate hideLoading];
-    }
-}
+//-(void) startService:(NSString *)OPERATIONTYPE{
+//    if(self.checkInternetConnection){
+//        
+//        MATCHCODE = MATCHCODE == nil ?@"NULL":MATCHCODE;
+//        CompetitionCode = CompetitionCode == nil ?@"NULL":CompetitionCode;
+//        selectTeamcode= selectTeamcode == nil ?@"NULL":selectTeamcode;
+//        electedcode = electedcode == nil ?@"NULL":electedcode;
+//        StrikerCode = StrikerCode == nil ?@"":StrikerCode;
+//        NonStrikerCode= NonStrikerCode == nil ?@"NULL":NonStrikerCode;
+//        BowlingEnd = BowlingEnd == nil ?@"NULL":BowlingEnd;
+//        
+//        
+//        
+//        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//        
+//        //Show indicator
+//        [delegate showLoading];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            
+//            
+//            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/TOSSEVENTS/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getSyncIPPORT], CompetitionCode,MATCHCODE,selectTeamcode,electedcode,StrikerCode,NonStrikerCode,BowlingEnd,OPERATIONTYPE];
+//            NSLog(@"-%@",baseURL);
+//            
+//            
+//            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//            
+//            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//            NSURLResponse *response;
+//            NSError *error;
+//            
+//            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//            if(responseData != nil)
+//            {
+//            
+//            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//            
+//            if(rootArray !=nil && rootArray.count>0){
+//                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                NSString *success = [valueDict valueForKey:@"DataItem"];
+//                if([success isEqual:@"Success"]){
+//                    
+//                }
+//            }else{
+//                
+//            }
+//            }
+//            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
+//            //            NSLog(@"%@",errorCode);
+//            //
+//            //
+//            //            if([errorCode boolValue] == YES)
+//            //            {
+//            //
+//            //                BOOL isUserLogin = YES;
+//            //
+//            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+//            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+//            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+//            //                [[NSUserDefaults standardUserDefaults] synchronize];
+//            //
+//            //                [self openContentView];
+//            //
+//            //            }else{
+//            //
+//            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+//            //            }
+//            [delegate hideLoading];
+//        });
+//        
+//        //[delegate hideLoading];
+//    }
+//}
 
 
 - (BOOL) formValidation
@@ -1025,85 +1025,85 @@
     
 }
 
--(void) startPowerPlayService:(NSString*) startOver endOver:(NSString*) endOver powerPlayType:(NSString*)powerPlayType{
-    
-    if(self.checkInternetConnection){
-        
-        
-        
-        
-        
-        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        
-        
-        //Show indicator
-        
-        [delegate showLoading];
-        
-        
-        
-        
-        
-        
-        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETPOWERPLAY/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],MATCHCODE,@"1",startOver,endOver,powerPlayType,nil,nil,nil,nil];
-        
-        NSLog(@"-%@",baseURL);
-        
-        
-        
-        
-        
-        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
-        
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        
-        NSURLResponse *response;
-        
-        NSError *error;
-        
-        
-        
-        NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
-        if (responseData != nil) {
-            
-            
-            
-            
-            
-            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-            
-            
-            
-            if(rootArray !=nil && rootArray.count>0){
-                
-                NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                
-                NSString *success = [valueDict valueForKey:@"DataItem"];
-                
-                if([success isEqual:@"Success"]){
-                    
-                    
-                    
-                }
-                
-            }else{
-                
-                
-                
-            }
-            
-        }
-        
-        [delegate hideLoading];
-        
-        
-    }
-    
-}
+//-(void) startPowerPlayService:(NSString*) startOver endOver:(NSString*) endOver powerPlayType:(NSString*)powerPlayType{
+//    
+//    if(self.checkInternetConnection){
+//        
+//        
+//        
+//        
+//        
+//        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//        
+//        
+//        
+//        //Show indicator
+//        
+//        [delegate showLoading];
+//        
+//        
+//        
+//        
+//        
+//        
+//        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETPOWERPLAY/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],MATCHCODE,@"1",startOver,endOver,powerPlayType,nil,nil,nil,nil];
+//        
+//        NSLog(@"-%@",baseURL);
+//        
+//        
+//        
+//        
+//        
+//        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//        
+//        
+//        
+//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//        
+//        NSURLResponse *response;
+//        
+//        NSError *error;
+//        
+//        
+//        
+//        NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//        
+//        if (responseData != nil) {
+//            
+//            
+//            
+//            
+//            
+//            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//            
+//            
+//            
+//            if(rootArray !=nil && rootArray.count>0){
+//                
+//                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                
+//                NSString *success = [valueDict valueForKey:@"DataItem"];
+//                
+//                if([success isEqual:@"Success"]){
+//                    
+//                    
+//                    
+//                }
+//                
+//            }else{
+//                
+//                
+//                
+//            }
+//            
+//        }
+//        
+//        [delegate hideLoading];
+//        
+//        
+//    }
+//    
+//}
 
 
 @end

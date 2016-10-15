@@ -406,47 +406,47 @@
         SelectPlayerRecord *playerorderRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:i];
         [objDBManager updatePlayerorder :self.matchCode :self.TeamCode PlayerCode:playerorderRecord.playerCode PlayerOrder:playerorderRecord.playerOrder];
         
-        if(self.checkInternetConnection){
-              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-//
+//        if(self.checkInternetConnection){
+//              dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+////
+////            
+////            _matchCode = (self.matchCode == nil) ?@"NULL":_matchCode;
+////            _TeamCode = (_TeamCode == nil) ?@"NULL":_TeamCode;
+////            NSString*PlayerCode = playerorderRecord.playerCode == nil ?@"NULL":playerorderRecord.playerCode;
+////             NSString*PlayerOrder = playerorderRecord.playerOrder == nil ?@"NULL":playerorderRecord.playerOrder;
+////            
+//           
 //            
-//            _matchCode = (self.matchCode == nil) ?@"NULL":_matchCode;
-//            _TeamCode = (_TeamCode == nil) ?@"NULL":_TeamCode;
-//            NSString*PlayerCode = playerorderRecord.playerCode == nil ?@"NULL":playerorderRecord.playerCode;
-//             NSString*PlayerOrder = playerorderRecord.playerOrder == nil ?@"NULL":playerorderRecord.playerOrder;
 //            
-           
-            
-            
-                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHTEAMPLAYERORDER/%@/%@/%@/%@",[Utitliy getSyncIPPORT],_matchCode,_TeamCode,playerorderRecord.playerCode ,playerorderRecord.playerOrder];
-                NSLog(@"-%@",baseURL);
-            
-            
-                NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-                NSURLRequest *request = [NSURLRequest requestWithURL:url];
-                NSURLResponse *response;
-                NSError *error;
-                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            
-                if(responseData !=nil)
-                {
-                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-                
-                if(rootArray !=nil && rootArray.count>0){
-                   NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                   NSString *success = [valueDict valueForKey:@"DataItem"];
-                   if([success isEqual:@"Success"]){
-                       
-                    }
-               }else{
-    
-                }
-                }
-});
-            
-        }
-                             
+//                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHTEAMPLAYERORDER/%@/%@/%@/%@",[Utitliy getSyncIPPORT],_matchCode,_TeamCode,playerorderRecord.playerCode ,playerorderRecord.playerOrder];
+//                NSLog(@"-%@",baseURL);
+//            
+//            
+//                NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//            
+//                NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//                NSURLResponse *response;
+//                NSError *error;
+//                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//            
+//                if(responseData !=nil)
+//                {
+//                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//                
+//                if(rootArray !=nil && rootArray.count>0){
+//                   NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                   NSString *success = [valueDict valueForKey:@"DataItem"];
+//                   if([success isEqual:@"Success"]){
+//                       
+//                    }
+//               }else{
+//    
+//                }
+//                }
+//});
+//            
+//        }
+        
         
     }
        [delegate hideLoading];
