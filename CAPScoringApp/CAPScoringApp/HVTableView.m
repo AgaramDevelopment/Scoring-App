@@ -384,39 +384,39 @@
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	
-//	if (self.expandOnlyOneCell)
-//	{
-//		if (selectedIndexPath.row != -1 && selectedIndexPath.row != -2) //collapse the last expanded item (if any)
-//		{
-//			BOOL dontExpandNewCell = NO;
-//			if (selectedIndexPath.row == indexPath.row && selectedIndexPath.section == indexPath.section)
-//				dontExpandNewCell = YES;
-//			
-//			NSIndexPath* tmp = [NSIndexPath indexPathForRow:selectedIndexPath.row inSection:selectedIndexPath.section];//tmp now holds the last expanded item
-//			selectedIndexPath = [NSIndexPath indexPathForRow:-1 inSection:0];
-//			
-//			actionToTake = -1;
-//			
-//			[tableView beginUpdates];
-//			[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:tmp] withRowAnimation:UITableViewRowAnimationAutomatic];
-//			[tableView endUpdates];
-//			
-//			if (dontExpandNewCell) return; //the same expanded cell was touched and now I collapsed it. No new cell is touched
-//		}
-//		
-//		actionToTake = 1;
-//		///expand the new touched item
-//		
-//		selectedIndexPath = indexPath;
-//		[tableView beginUpdates];
-//		[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-//		[tableView endUpdates];
-//		if (self.enableAutoScroll)
-//			[tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-//		
-//	}
-//	else
-//	{
+	if (self.expandOnlyOneCell)
+	{
+		if (selectedIndexPath.row != -1 && selectedIndexPath.row != -2) //collapse the last expanded item (if any)
+		{
+			BOOL dontExpandNewCell = NO;
+			if (selectedIndexPath.row == indexPath.row && selectedIndexPath.section == indexPath.section)
+				dontExpandNewCell = YES;
+			
+			NSIndexPath* tmp = [NSIndexPath indexPathForRow:selectedIndexPath.row inSection:selectedIndexPath.section];//tmp now holds the last expanded item
+			selectedIndexPath = [NSIndexPath indexPathForRow:-1 inSection:0];
+			
+			actionToTake = -1;
+			
+			[tableView beginUpdates];
+			[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:tmp] withRowAnimation:UITableViewRowAnimationAutomatic];
+			[tableView endUpdates];
+			
+			if (dontExpandNewCell) return; //the same expanded cell was touched and now I collapsed it. No new cell is touched
+		}
+		
+		actionToTake = 1;
+		///expand the new touched item
+		
+		selectedIndexPath = indexPath;
+		[tableView beginUpdates];
+		[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+		[tableView endUpdates];
+		if (self.enableAutoScroll)
+			[tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+		
+	}
+	else
+	{
 		BOOL alreadyExpanded = NO;
         BOOL anotherRowExpand=NO;
 		NSIndexPath* correspondingIndexPath;
@@ -426,39 +426,39 @@
 			{
                 alreadyExpanded = YES; correspondingIndexPath = anIndexPath;
             }
-            else
-            {
-                anotherRowExpand=YES;
-                alreadyExpanded = YES; correspondingIndexPath = anIndexPath;
-                NSLog(@"index=%d",indexPath.row);
-                NSLog(@"index=%d",anIndexPath.row);
-            }
+//            else
+//            {
+//                anotherRowExpand=YES;
+//                alreadyExpanded = YES; correspondingIndexPath = anIndexPath;
+//                NSLog(@"index=%d",indexPath.row);
+//                NSLog(@"index=%d",anIndexPath.row);
+//            }
 		}
 		
 		if (alreadyExpanded)////collapse it!
 		{
-            if(anotherRowExpand==YES)
-            {
-			actionToTake = -1;
-                
-			[expandedIndexPaths removeObject:correspondingIndexPath];
-			[tableView beginUpdates];
-			[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:correspondingIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-			[tableView endUpdates];
+//            if(anotherRowExpand==YES)
+//            {
+//			actionToTake = -1;
+//                
+//			[expandedIndexPaths removeObject:correspondingIndexPath];
+//			[tableView beginUpdates];
+//			[tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:correspondingIndexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//			[tableView endUpdates];
+////                if (self.enableAutoScroll)
+////                    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
+////                
+//                
+//                actionToTake = 1;
+//                [expandedIndexPaths addObject:indexPath];
+//                [tableView beginUpdates];
+//                [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+//                [tableView endUpdates];
 //                if (self.enableAutoScroll)
 //                    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-//                
-                
-                actionToTake = 1;
-                [expandedIndexPaths addObject:indexPath];
-                [tableView beginUpdates];
-                [tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-                [tableView endUpdates];
-                if (self.enableAutoScroll)
-                    [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-            }
-            else
-            {
+//            }
+//            else
+//            {
                 actionToTake = -1;
                 [expandedIndexPaths removeObject:correspondingIndexPath];
                 [tableView beginUpdates];
@@ -466,7 +466,7 @@
                 [tableView endUpdates];
                 if (self.enableAutoScroll)
                     [tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
-            }
+            //}
 		}
 		else ///expand it!
 		{
@@ -478,7 +478,7 @@
 			if (self.enableAutoScroll)
 				[tableView scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionMiddle animated:YES];
 		}
-	//}
+	}
 }
 
 /*
