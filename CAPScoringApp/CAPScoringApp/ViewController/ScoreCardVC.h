@@ -16,8 +16,9 @@
 
 
 
+@property (nonatomic,strong) IBOutlet UIScrollView * backScroll;
 
-
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * tblView_Height;
 
 
 //@property (strong, nonatomic) IBOutlet UITableView *tbl_scorecard;

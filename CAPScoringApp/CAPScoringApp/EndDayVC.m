@@ -483,7 +483,7 @@
             [updateEndDay UpdateEndDay:self.COMPETITIONCODE :self.MATCHCODE :[NSString  stringWithFormat:@"%@",self.INNINGSNO] :_txt_startTime.text :endDayTime : _lbl_day_no.text : self.TEAMCODE :_txt_comments.text :startTimeData :endTimeData];
            
             [self duration];
-            [self startService:@"UPDATE"];
+          //  [self startService:@"UPDATE"];
            
         }else{
             NSString *endDayTime = _txt_endTime.text;
@@ -520,7 +520,7 @@
                 UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"End Day" message:@"The Day is already exists in the date." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [alter show];
             }
-            [self startService:@"INSERT"];
+        //    [self startService:@"INSERT"];
             
         }
         
@@ -549,7 +549,7 @@
             [deleteEndDay DeleteEndDay:self.COMPETITIONCODE :self.MATCHCODE :[NSString  stringWithFormat:@"%@",self.INNINGSNO] :_lbl_day_no.text];
             
     
-            [self startService:@"DELETE"];
+         //   [self startService:@"DELETE"];
             
             fetchEndDayDetails = [[FetchEndDayDetails alloc]init];
             [fetchEndDayDetails FetchEndDay:_COMPETITIONCODE :_MATCHCODE :_TEAMCODE :_INNINGSNO];
@@ -626,87 +626,87 @@
 }
 
 
--(void) startService:(NSString *)OPERATIONTYPE{
-    if(self.checkInternetConnection){
-
-        
-        NSString *startTimeData;
-        NSString *endTimeData;
-        
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        
-        NSDate *startdate = [formatter dateFromString:_txt_startTime.text];
-        NSDate *enddate = [formatter dateFromString:_txt_endTime.text];
-        
-        [formatter setDateFormat:@"yyyy-MM-dd"];
-        
-        startTimeData = [formatter stringFromDate:startdate];
-        endTimeData = [formatter stringFromDate:enddate];
-        
-        NSString *COMMENTS = [_txt_comments.text isEqual: @""] ?@"NULL":_txt_comments.text;
-        
-        
-        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        //Show indicator
-        [delegate showLoading];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            
-            NSString *baseURL =[NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDDAY/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],_COMPETITIONCODE ,_MATCHCODE ,_INNINGSNO,_txt_startTime.text,_txt_endTime.text,_lbl_day_no.text,_TEAMCODE,_lbl_runScored.text,_lbl_overPlayed.text,_lbl_wktLost.text,COMMENTS,startTimeData,endTimeData,OPERATIONTYPE];
-            NSLog(@"-%@",baseURL);
-            
-//            SETENDDAY/{COMPETITIONCODE}/{MATCHCODE}/{INNINGSNO}/{STARTTIME}/{ENDTIME}/{DAYNO}/{BATTINGTEAMCODE}/{TOTALRUNS}/{TOTALOVERS}/{TOTALWICKETS}/{COMMENTS}/{STARTTIMEFORMAT}/{ENDTIMEFORMAT}/{OPERATIONTYPE}
+//-(void) startService:(NSString *)OPERATIONTYPE{
+//    if(self.checkInternetConnection){
+//
+//        
+//        NSString *startTimeData;
+//        NSString *endTimeData;
+//        
+//        
+//        NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+//        [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+//        
+//        NSDate *startdate = [formatter dateFromString:_txt_startTime.text];
+//        NSDate *enddate = [formatter dateFromString:_txt_endTime.text];
+//        
+//        [formatter setDateFormat:@"yyyy-MM-dd"];
+//        
+//        startTimeData = [formatter stringFromDate:startdate];
+//        endTimeData = [formatter stringFromDate:enddate];
+//        
+//        NSString *COMMENTS = [_txt_comments.text isEqual: @""] ?@"NULL":_txt_comments.text;
+//        
+//        
+//        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//        
+//        //Show indicator
+//        [delegate showLoading];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
 //            
-            
-            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            NSURLResponse *response;
-            NSError *error;
-            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            
-            
-            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-            
-            if(rootArray !=nil && rootArray.count>0){
-                NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                NSString *success = [valueDict valueForKey:@"DataItem"];
-                if([success isEqual:@"Success"]){
-                    
-                }
-            }else{
-                
-            }
-            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
-            //            NSLog(@"%@",errorCode);
-            //
-            //
-            //            if([errorCode boolValue] == YES)
-            //            {
-            //
-            //                BOOL isUserLogin = YES;
-            //
-            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
-            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
-            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
-            //                [[NSUserDefaults standardUserDefaults] synchronize];
-            //
-            //                [self openContentView];
-            //
-            //            }else{
-            //
-            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
-            //            }
-            [delegate hideLoading];
-        });
-        
-        //[delegate hideLoading];
-    }
-         self.view_addbtn.hidden = NO;
-}
+//            
+//            NSString *baseURL =[NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDDAY/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],_COMPETITIONCODE ,_MATCHCODE ,_INNINGSNO,_txt_startTime.text,_txt_endTime.text,_lbl_day_no.text,_TEAMCODE,_lbl_runScored.text,_lbl_overPlayed.text,_lbl_wktLost.text,COMMENTS,startTimeData,endTimeData,OPERATIONTYPE];
+//            NSLog(@"-%@",baseURL);
+//            
+////            SETENDDAY/{COMPETITIONCODE}/{MATCHCODE}/{INNINGSNO}/{STARTTIME}/{ENDTIME}/{DAYNO}/{BATTINGTEAMCODE}/{TOTALRUNS}/{TOTALOVERS}/{TOTALWICKETS}/{COMMENTS}/{STARTTIMEFORMAT}/{ENDTIMEFORMAT}/{OPERATIONTYPE}
+////            
+//            
+//            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//            
+//            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//            NSURLResponse *response;
+//            NSError *error;
+//            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//            
+//            
+//            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//            
+//            if(rootArray !=nil && rootArray.count>0){
+//                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                NSString *success = [valueDict valueForKey:@"DataItem"];
+//                if([success isEqual:@"Success"]){
+//                    
+//                }
+//            }else{
+//                
+//            }
+//            //            NSNumber * errorCode = (NSNumber *)[rootDictionary objectForKey: @"LOGIN_STATUS"];
+//            //            NSLog(@"%@",errorCode);
+//            //
+//            //
+//            //            if([errorCode boolValue] == YES)
+//            //            {
+//            //
+//            //                BOOL isUserLogin = YES;
+//            //
+//            //                NSString *userCode = [rootDictionary valueForKey:@"L_USERID"];
+//            //                [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+//            //                [[NSUserDefaults standardUserDefaults] setObject:userCode forKey:@"userCode"];
+//            //                [[NSUserDefaults standardUserDefaults] synchronize];
+//            //
+//            //                [self openContentView];
+//            //
+//            //            }else{
+//            //
+//            //                [self showDialog:@"Invalid user name and password" andTitle:@"Login failed"];
+//            //            }
+//            [delegate hideLoading];
+//        });
+//        
+//        //[delegate hideLoading];
+//    }
+//         self.view_addbtn.hidden = NO;
+//}
 
 
 

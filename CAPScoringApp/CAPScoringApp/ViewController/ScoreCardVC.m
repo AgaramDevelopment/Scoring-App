@@ -113,7 +113,7 @@ int bowlerPostion = 0;
     objBattingPlayerStatistics =[[BattingPlayerStatistics alloc]init];
     objBowlingStatistics       =[[BowlingPlayerStatistics alloc]init];
     muliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
-
+    [self.table setScrollEnabled:NO];
     
     [self customnavigationmethod];
     
@@ -447,6 +447,13 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
         [self.bowlerCell.BowlerspiderWagon_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
     }
+    
+    
+    //self.tblView_Height.constant =self.table.contentSize.height+500;
+     [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant+300)];
+    
+    
+    //[self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width, self.table.contentSize.height)];
    // [tableView reloadData];
 }
 
@@ -467,7 +474,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         expendBatmanview.hidden = YES;
         expendbowlerview.hidden=YES;
     }];
-    
+    self.tblView_Height.constant =self.table.contentSize.height+100;
+    [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant)];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -518,13 +526,14 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         BattingSummaryDetailsForScoreBoard *battingSummaryDetailsForSB = [fetchScorecard.BattingSummaryForScoreBoard objectAtIndex:indexPath.row - 1];
         
         ScoreCardCellTVCell *cell = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:batsmanCell];
-        if (cell == nil) {
+        //if (cell == nil) {
+        
             [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
             cell = self.batsmanCell;
            // self.batsmanCell = nil;
             
             
-        }
+        //}
         
         if(isPitch_Img ==NO)
         {
@@ -768,11 +777,11 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         //bowlerIndex = indexPath.row-bowlerPostion;
         
         ScoreCardCellTVCell *bowlerCellTvc = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:bowlerCell];
-        if (bowlerCellTvc == nil) {
+       // if (bowlerCellTvc == nil) {
             [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
             bowlerCellTvc = self.bowlerCell;
             //self.bowlerCell = nil;
-        }
+        //}
         
         if(isPitch_Img ==NO)
         {
@@ -840,7 +849,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         return bowlerCellTvc;
         
     }
-    
+//    [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width, self.table.contentSize.height)];
+
+    //self.tblView_Height.constant =self.backScroll.contentSize.height;
     return nil;
     
     
@@ -867,10 +878,13 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         if (indexPath == selectedIndexPath && isexpanded==YES)
         {
             ExpandBattingview.hidden=NO;
+            
             return 550;
         }
         else{
              ExpandBattingview.hidden=YES;
+            
+
            return 70;
         }
     }else if(extraPostion == indexPath.row){
@@ -890,10 +904,13 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         if (indexPath == selectedIndexPath && isexpanded== YES)
         {
             ExpandBowlerView.hidden=NO;
+           
+            
             return 550;
         }
         else{
             ExpandBowlerView.hidden=YES;
+           
             return 70;
         }
     }
@@ -1226,6 +1243,10 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     [self.batsmanCell.wangon6s_Btn setTitle:line5 forState:UIControlStateNormal];
 
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
     
     
     
