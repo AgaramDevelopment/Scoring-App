@@ -204,17 +204,17 @@ if([self formValidation]){
 
 -(void) startService{
     if(self.checkInternetConnection){
-        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/REVISEOVER/%@/%@/%@/%@/%@",[Utitliy getIPPORT],self.competitionCode,self.matchCode,self.inningsNo,strovers,strcomments];
-        
-        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSURLResponse *response;
-        NSError *error;
-        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
-        
-        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/REVISEOVER/%@/%@/%@/%@/%@",[Utitliy getIPPORT],self.competitionCode,self.matchCode,self.inningsNo,strovers,strcomments];
+//        
+//        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//        
+//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//        NSURLResponse *response;
+//        NSError *error;
+//        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//        
+//        
+//        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
         
         
     }

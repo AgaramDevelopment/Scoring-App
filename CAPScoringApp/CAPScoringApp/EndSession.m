@@ -640,48 +640,48 @@ int POS_TEAM_TYPE = 1;
         
         [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :fetchSeRecord.DAYNO : SESSIONNO :_txt_startTime.text :_txt_endTime.text :[NSString stringWithFormat:@"%d",STARTOVERNO]: [NSString stringWithFormat:@"%@",ENDOVERBALLNO] :[NSString stringWithFormat:@"%d" ,RUNSSCORED] :[NSString stringWithFormat:@"%d",fetchSeRecord.BATTEAMWICKETS] :Dominate];
         
-        if(self.checkInternetConnection){
-            
-            
-            
-            AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-            
-            //Show indicator
-            [delegate showLoading];
-            //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
-            
-            //dispatch_get_main_queue(), ^
-            {
-                
-                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDSESSION/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],competitioncode, matchcode,fetchSeRecord.BATTINGTEAMCODE,fetchSeRecord.INNINGSNO,sessionRecords.DAYNO,[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO],_txt_startTime.text,_txt_endTime.text ,[NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO], [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO],[NSString stringWithFormat:@"%@" ,sessionRecords.RUNSSCORED],sessionRecords.WICKETLOST,@"(null)",BtnurrentTittle];
-         
-                
-                NSLog(@"%@",baseURL);
-                
-                NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                
-                NSURLRequest *request = [NSURLRequest requestWithURL:url];
-                NSURLResponse *response;
-                NSError *error;
-                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-                
-                
-                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-                
-                if(rootArray !=nil && rootArray.count>0){
-                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                    NSString *success = [valueDict valueForKey:@"DataItem"];
-                    if([success isEqual:@"Success"]){
-                        
-                    }
-                }else{
-                    
-                }
-                
-                [delegate hideLoading];
-            }
-            
-        }
+//        if(self.checkInternetConnection){
+//            
+//            
+//            
+//            AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//            
+//            //Show indicator
+//            [delegate showLoading];
+//            //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+//            
+//            //dispatch_get_main_queue(), ^
+//            {
+//                
+//                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDSESSION/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],competitioncode, matchcode,fetchSeRecord.BATTINGTEAMCODE,fetchSeRecord.INNINGSNO,sessionRecords.DAYNO,[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO],_txt_startTime.text,_txt_endTime.text ,[NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO], [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO],[NSString stringWithFormat:@"%@" ,sessionRecords.RUNSSCORED],sessionRecords.WICKETLOST,@"(null)",BtnurrentTittle];
+//         
+//                
+//                NSLog(@"%@",baseURL);
+//                
+//                NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//                
+//                NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//                NSURLResponse *response;
+//                NSError *error;
+//                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//                
+//                
+//                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//                
+//                if(rootArray !=nil && rootArray.count>0){
+//                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                    NSString *success = [valueDict valueForKey:@"DataItem"];
+//                    if([success isEqual:@"Success"]){
+//                        
+//                    }
+//                }else{
+//                    
+//                }
+//                
+//                [delegate hideLoading];
+//            }
+//            
+//        }
     
     }
     else{
@@ -704,50 +704,50 @@ int POS_TEAM_TYPE = 1;
         
         
         
-        if(self.checkInternetConnection){
-            
-            
-            
-            AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-            
-            //Show indicator
-            [delegate showLoading];
-            //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
-            
-            //dispatch_get_main_queue(), ^
-            {
-                
-                
-                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDSESSION/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],competitioncode, matchcode,fetchSeRecord.BATTINGTEAMCODE,fetchSeRecord.INNINGSNO,sessionRecords.DAYNO,[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO],_txt_startTime.text,_txt_endTime.text ,[NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO], [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO],[NSString stringWithFormat:@"%@" ,sessionRecords.RUNSSCORED],sessionRecords.WICKETLOST,@"(null)",BtnurrentTittle];
-                
-                
-                NSLog(@"%@",baseURL);
-                
-                NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                
-                NSURLRequest *request = [NSURLRequest requestWithURL:url];
-                NSURLResponse *response;
-                NSError *error;
-                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-                
-                
-                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-                
-                if(rootArray !=nil && rootArray.count>0){
-                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                    NSString *success = [valueDict valueForKey:@"DataItem"];
-                    if([success isEqual:@"Success"]){
-                        
-                    }
-                }else{
-                    
-                }
-                
-                [delegate hideLoading];
-            }
-            
-            
-        }
+//        if(self.checkInternetConnection){
+//            
+//            
+//            
+//            AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//            
+//            //Show indicator
+//            [delegate showLoading];
+//            //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+//            
+//            //dispatch_get_main_queue(), ^
+//            {
+//                
+//                
+//                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDSESSION/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],competitioncode, matchcode,fetchSeRecord.BATTINGTEAMCODE,fetchSeRecord.INNINGSNO,sessionRecords.DAYNO,[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO],_txt_startTime.text,_txt_endTime.text ,[NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO], [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO],[NSString stringWithFormat:@"%@" ,sessionRecords.RUNSSCORED],sessionRecords.WICKETLOST,@"(null)",BtnurrentTittle];
+//                
+//                
+//                NSLog(@"%@",baseURL);
+//                
+//                NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//                
+//                NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//                NSURLResponse *response;
+//                NSError *error;
+//                NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//                
+//                
+//                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//                
+//                if(rootArray !=nil && rootArray.count>0){
+//                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                    NSString *success = [valueDict valueForKey:@"DataItem"];
+//                    if([success isEqual:@"Success"]){
+//                        
+//                    }
+//                }else{
+//                    
+//                }
+//                
+//                [delegate hideLoading];
+//            }
+//            
+//            
+//        }
         
     }
         
@@ -806,46 +806,46 @@ int POS_TEAM_TYPE = 1;
             [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO : dayNO : sessionNo];
             
             
-            if(self.checkInternetConnection){
-                
-                AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-                
-                //Show indicator
-                [delegate showLoading];
-                //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
-                
-                //dispatch_get_main_queue(), ^
-                {
-                    
-                    NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDSESSION/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],competitioncode,matchcode,@"NULL",fetchSeRecord.INNINGSNO,sessionRecords.DAYNO,[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO],@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"NULL"@"DELETE"];
-                    
-                    
-                    NSLog(@"%@",baseURL);
-                    NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                    
-                    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-                    NSURLResponse *response;
-                    NSError *error;
-                    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-                    
-                    
-                    NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-                    
-                    if(rootArray !=nil && rootArray.count>0){
-                        NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                        NSString *success = [valueDict valueForKey:@"DataItem"];
-                        if([success isEqual:@"Success"]){
-                            
-                        }
-                    }else{
-                        
-                    }
-                    
-                    [delegate hideLoading];
-                }
-                
-                
-            }
+//            if(self.checkInternetConnection){
+//                
+//                AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//                
+//                //Show indicator
+//                [delegate showLoading];
+//                //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+//                
+//                //dispatch_get_main_queue(), ^
+//                {
+//                    
+//                    NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDSESSION/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],competitioncode,matchcode,@"NULL",fetchSeRecord.INNINGSNO,sessionRecords.DAYNO,[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO],@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"NULL"@"DELETE"];
+//                    
+//                    
+//                    NSLog(@"%@",baseURL);
+//                    NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//                    
+//                    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//                    NSURLResponse *response;
+//                    NSError *error;
+//                    NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//                    
+//                    
+//                    NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//                    
+//                    if(rootArray !=nil && rootArray.count>0){
+//                        NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                        NSString *success = [valueDict valueForKey:@"DataItem"];
+//                        if([success isEqual:@"Success"]){
+//                            
+//                        }
+//                    }else{
+//                        
+//                    }
+//                    
+//                    [delegate hideLoading];
+//                }
+//                
+//                
+//            }
             
             
             [self fetchPageEndSession : fetchSeRecord: competitioncode : matchcode];

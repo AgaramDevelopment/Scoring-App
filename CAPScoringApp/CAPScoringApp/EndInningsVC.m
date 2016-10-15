@@ -554,46 +554,46 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
         
     
 
-    if(self.checkInternetConnection){
-        
-        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        
-        //Show indicator
-        [delegate showLoading];
-        //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
-        
-        //dispatch_get_main_queue(), ^
-        {
-            
-            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],CompetitionCode,MatchCode,fetchSePageLoad.BOWLINGTEAMCODE,fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO ,_txt_startInnings.text,_txt_endInnings.text,OVERNO,TOTALRUNS,WICKETS,BtnurrentTittle];
-            
-            
-            NSLog(@"%@",baseURL);
-            
-            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            NSURLResponse *response;
-            NSError *error;
-            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            
-            if(responseData != nil)
-            {
-                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-                
-                if(rootArray !=nil && rootArray.count>0){
-                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                    NSString *success = [valueDict valueForKey:@"DataItem"];
-                    if([success isEqual:@"Success"]){
-                        
-                    }
-                }else{
-                    
-                }
-            }
-            [delegate hideLoading];
-        }
-    }
+//    if(self.checkInternetConnection){
+//        
+//        AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//        
+//        //Show indicator
+//        [delegate showLoading];
+//        //        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+//        
+//        //dispatch_get_main_queue(), ^
+//        {
+//            
+//            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],CompetitionCode,MatchCode,fetchSePageLoad.BOWLINGTEAMCODE,fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO ,_txt_startInnings.text,_txt_endInnings.text,OVERNO,TOTALRUNS,WICKETS,BtnurrentTittle];
+//            
+//            
+//            NSLog(@"%@",baseURL);
+//            
+//            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//            
+//            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//            NSURLResponse *response;
+//            NSError *error;
+//            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//            
+//            if(responseData != nil)
+//            {
+//                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//                
+//                if(rootArray !=nil && rootArray.count>0){
+//                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                    NSString *success = [valueDict valueForKey:@"DataItem"];
+//                    if([success isEqual:@"Success"]){
+//                        
+//                    }
+//                }else{
+//                    
+//                }
+//            }
+//            [delegate hideLoading];
+//        }
+//    }
         [self.tbl_endInnings reloadData];
         [self fetchPageload:fetchEndinnings :CompetitionCode :MatchCode];
         
@@ -675,46 +675,46 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(255/255.0f) green:(86/255
                 
                 
                 
-                if(self.checkInternetConnection){
-                    
-                    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-                    
-                    //Show indicator
-                    [delegate showLoading];
-                    //      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
-                    
-                    //dispatch_get_main_queue(), ^
-                    {
-                        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],CompetitionCode,MatchCode,@"NULL",fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO,@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"DELETE"];
-                        
-                        NSLog(@"%@",baseURL);
-                        
-                        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                        
-                        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-                        NSURLResponse *response;
-                        NSError *error;
-                        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-                        
-                        if(responseData != nil)
-                        {
-                            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-                            
-                            if(rootArray !=nil && rootArray.count>0){
-                                NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                                NSString *success = [valueDict valueForKey:@"DataItem"];
-                                if([success isEqual:@"Success"]){
-                                    
-                                }
-                            }else{
-                                
-                            }
-                        }
-                        
-                        [delegate hideLoading];
-                    }
-                    
-                }
+//                if(self.checkInternetConnection){
+//                    
+//                    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//                    
+//                    //Show indicator
+//                    [delegate showLoading];
+//                    //      dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)),
+//                    
+//                    //dispatch_get_main_queue(), ^
+//                    {
+//                        NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDINNINGS/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],CompetitionCode,MatchCode,@"NULL",fetchSePageLoad.BATTINGTEAMCODE,fetchSePageLoad.INNINGSNO,@"NULL",@"NULL",@"NULL",@"NULL",@"NULL",@"DELETE"];
+//                        
+//                        NSLog(@"%@",baseURL);
+//                        
+//                        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//                        
+//                        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//                        NSURLResponse *response;
+//                        NSError *error;
+//                        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//                        
+//                        if(responseData != nil)
+//                        {
+//                            NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//                            
+//                            if(rootArray !=nil && rootArray.count>0){
+//                                NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                                NSString *success = [valueDict valueForKey:@"DataItem"];
+//                                if([success isEqual:@"Success"]){
+//                                    
+//                                }
+//                            }else{
+//                                
+//                            }
+//                        }
+//                        
+//                        [delegate hideLoading];
+//                    }
+//                    
+//                }
                 [endInningsArray removeLastObject];
                 
                 [self fetchPageload:fetchEndinnings :CompetitionCode :MatchCode];

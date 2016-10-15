@@ -247,17 +247,17 @@ objDBManager = [[DBManager alloc]init];
     if(self.checkInternetConnection)
         
     {
-        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/REVISEOVER/%@/%@/TEA0000013/1/%@/%@",self.competitionCode,self.matchCode,strovers,strcomments];
-        
-        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-        
-        NSURLRequest *request = [NSURLRequest requestWithURL:url];
-        NSURLResponse *response;
-        NSError *error;
-        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-        
-        
-        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//        NSString *baseURL = [NSString stringWithFormat:@"http://192.168.1.49:8079/CAPMobilityService.svc/REVISEOVER/%@/%@/TEA0000013/1/%@/%@",self.competitionCode,self.matchCode,strovers,strcomments];
+//        
+//        NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//        
+//        NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//        NSURLResponse *response;
+//        NSError *error;
+//        NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//        
+//        
+//        NSMutableArray *rootDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
         
     }
 }

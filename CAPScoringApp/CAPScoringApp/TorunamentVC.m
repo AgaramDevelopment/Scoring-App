@@ -63,7 +63,7 @@
 }
 
 - (void)refresh:(UIRefreshControl *)refreshControl {
-    [self startService:@"DONE"];
+    //[self startService:@"DONE"];
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
@@ -342,101 +342,101 @@ else{
 
 
 
--(void) startService:(NSString *)OPERATIONTYPE{
-    if(self.checkInternetConnection){
-        
-              
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETACTIVECOMPETITION/%@",[Utitliy getSyncIPPORT],[Utitliy SecureId]];
-            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            NSURLResponse *response;
-            NSError *error;
-            
-            NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            if (responseData != nil) {
-                DBMANAGERSYNC *objDBMANAGERSYNC = [[DBMANAGERSYNC alloc]init];
-                NSDictionary *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-              NSMutableArray *checkErrorItem=[serviceResponse objectForKey:@"lstErrorItem"];
-                
-                NSDictionary * ErrorNoDict =[checkErrorItem objectAtIndex:0];
-                
-                NSString *ErrorNoStr=[ErrorNoDict valueForKey:@"ErrorNo"];
-                NSString *message=[ErrorNoDict valueForKey:@"DataItem"];
-                NSString *CompareErrorno=@"MOB0005";
-                if ([ErrorNoStr isEqualToString:CompareErrorno]) {
-                    
-                  //Cometititon
-                    NSArray *temp =   [serviceResponse objectForKey:@"lstCompetition"];
-                     int i;
-                    for (i=0; i<[temp count]; i++) {
-                        NSDictionary*test=[temp objectAtIndex:i];
-                        NSString*COMPETITIONCODE=[test objectForKey:@"Competitioncode"];
-                        NSString *COMPETITIONNAME=[test objectForKey:@"Competitionname"];
-                        NSString *SEASON=[test objectForKey:@"Season"];
-                        NSString *TROPHY=[test objectForKey:@"Trophy"];
-                        NSString *STARTDATE=[test objectForKey:@"Startdate"];
-                        NSString *ENDDATE=[test objectForKey:@"Enddate"];
-                        NSString *MATCHTYPE=[test objectForKey:@"Matchtype"];
-                        NSString *ISOTHERSMATCHTYPE=[test objectForKey:@"Isothersmatchtype"];
-                        NSString*MANOFTHESERIESCODE=[test objectForKey:@"Manoftheseriescode"];
-                        NSString*BESTBATSMANCODE =[test objectForKey:@"Bestbatsmancode"];
-                        NSString*BESTBOWLERCODE=[test objectForKey:@"Bestbowlercode"];
-                        NSString*BESTALLROUNDERCODE=[test objectForKey:@"Bestallroundercode"];
-                        NSString*MOSTVALUABLEPLAYERCODE=[test objectForKey:@"Mostvaluableplayercode"];
-                        NSString*RECORDSTATUS=[test objectForKey:@"Recordstatus"];
-                        NSString*CREATEDBY=[test objectForKey:@"Createdby"];
-                        NSString*CREATEDDATE=[test objectForKey:@"Createddate"];
-                        NSString*MODIFIEDBY=[test objectForKey:@"Modifiedby"];
-                        NSString*MODIFIEDDATE=[test objectForKey:@"Modifieddate"];
-                        
-                        
-                        
-                        
-                        
-                        bool CheckStatus=[objDBMANAGERSYNC CheckCompetitionCode:COMPETITIONCODE];
-                        if (CheckStatus==YES) {
-                            [objDBMANAGERSYNC UPDATECOMPETITION:COMPETITIONCODE: COMPETITIONNAME:SEASON: TROPHY:STARTDATE:ENDDATE:MATCHTYPE:ISOTHERSMATCHTYPE : MODIFIEDBY: MODIFIEDDATE];
-                        }
-                        
-                        else
-                        {
-                            [objDBMANAGERSYNC  InsertMASTEREvents:COMPETITIONCODE:COMPETITIONNAME:SEASON:TROPHY:STARTDATE:ENDDATE:MATCHTYPE: ISOTHERSMATCHTYPE :MANOFTHESERIESCODE:BESTBATSMANCODE : BESTBOWLERCODE:BESTALLROUNDERCODE:MOSTVALUABLEPLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
-                            
-                        }
-                         }
-                    
-                    //  Competitionteamdetails
-                    
-                    NSArray *temp1 =   [serviceResponse objectForKey:@"Competitionteamdetails"];
-                     int j;
-                    for (j=0; j<[temp1 count]; j++) {
-                        NSDictionary*test1=[temp1 objectAtIndex:j];
-                        NSString*COMPETITIONTEAMCODE=[test1 objectForKey:@"Competitionteamcode"];
-                        NSString *COMPETITIONCODE=[test1 objectForKey:@"Competitioncode"];
-                        NSString *TEAMCODE=[test1 objectForKey:@"Teamcode"];
-                        NSString *RECORDSTATUS=[test1 objectForKey:@"Recordstatus"];
-                        
-                        
-                        bool CheckStatus1=[objDBMANAGERSYNC CheckCompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
-                        if (CheckStatus1==NO) {
-                            [objDBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
-                        }
-                else{ [objDBMANAGERSYNC DELETECompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
-                    [objDBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
-                        
-                        }
-                        
-                    }
-            
-                }
-            }
-        });
-        
-        //[delegate hideLoading];
-    }
-}
+//-(void) startService:(NSString *)OPERATIONTYPE{
+//    if(self.checkInternetConnection){
+//        
+//              
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            
+//            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETACTIVECOMPETITION/%@",[Utitliy getSyncIPPORT],[Utitliy SecureId]];
+//            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//            NSURLResponse *response;
+//            NSError *error;
+//            
+//            NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//            if (responseData != nil) {
+//                DBMANAGERSYNC *objDBMANAGERSYNC = [[DBMANAGERSYNC alloc]init];
+//                NSDictionary *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//              NSMutableArray *checkErrorItem=[serviceResponse objectForKey:@"lstErrorItem"];
+//                
+//                NSDictionary * ErrorNoDict =[checkErrorItem objectAtIndex:0];
+//                
+//                NSString *ErrorNoStr=[ErrorNoDict valueForKey:@"ErrorNo"];
+//                NSString *message=[ErrorNoDict valueForKey:@"DataItem"];
+//                NSString *CompareErrorno=@"MOB0005";
+//                if ([ErrorNoStr isEqualToString:CompareErrorno]) {
+//                    
+//                  //Cometititon
+//                    NSArray *temp =   [serviceResponse objectForKey:@"lstCompetition"];
+//                     int i;
+//                    for (i=0; i<[temp count]; i++) {
+//                        NSDictionary*test=[temp objectAtIndex:i];
+//                        NSString*COMPETITIONCODE=[test objectForKey:@"Competitioncode"];
+//                        NSString *COMPETITIONNAME=[test objectForKey:@"Competitionname"];
+//                        NSString *SEASON=[test objectForKey:@"Season"];
+//                        NSString *TROPHY=[test objectForKey:@"Trophy"];
+//                        NSString *STARTDATE=[test objectForKey:@"Startdate"];
+//                        NSString *ENDDATE=[test objectForKey:@"Enddate"];
+//                        NSString *MATCHTYPE=[test objectForKey:@"Matchtype"];
+//                        NSString *ISOTHERSMATCHTYPE=[test objectForKey:@"Isothersmatchtype"];
+//                        NSString*MANOFTHESERIESCODE=[test objectForKey:@"Manoftheseriescode"];
+//                        NSString*BESTBATSMANCODE =[test objectForKey:@"Bestbatsmancode"];
+//                        NSString*BESTBOWLERCODE=[test objectForKey:@"Bestbowlercode"];
+//                        NSString*BESTALLROUNDERCODE=[test objectForKey:@"Bestallroundercode"];
+//                        NSString*MOSTVALUABLEPLAYERCODE=[test objectForKey:@"Mostvaluableplayercode"];
+//                        NSString*RECORDSTATUS=[test objectForKey:@"Recordstatus"];
+//                        NSString*CREATEDBY=[test objectForKey:@"Createdby"];
+//                        NSString*CREATEDDATE=[test objectForKey:@"Createddate"];
+//                        NSString*MODIFIEDBY=[test objectForKey:@"Modifiedby"];
+//                        NSString*MODIFIEDDATE=[test objectForKey:@"Modifieddate"];
+//                        
+//                        
+//                        
+//                        
+//                        
+//                        bool CheckStatus=[objDBMANAGERSYNC CheckCompetitionCode:COMPETITIONCODE];
+//                        if (CheckStatus==YES) {
+//                            [objDBMANAGERSYNC UPDATECOMPETITION:COMPETITIONCODE: COMPETITIONNAME:SEASON: TROPHY:STARTDATE:ENDDATE:MATCHTYPE:ISOTHERSMATCHTYPE : MODIFIEDBY: MODIFIEDDATE];
+//                        }
+//                        
+//                        else
+//                        {
+//                            [objDBMANAGERSYNC  InsertMASTEREvents:COMPETITIONCODE:COMPETITIONNAME:SEASON:TROPHY:STARTDATE:ENDDATE:MATCHTYPE: ISOTHERSMATCHTYPE :MANOFTHESERIESCODE:BESTBATSMANCODE : BESTBOWLERCODE:BESTALLROUNDERCODE:MOSTVALUABLEPLAYERCODE:RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+//                            
+//                        }
+//                         }
+//                    
+//                    //  Competitionteamdetails
+//                    
+//                    NSArray *temp1 =   [serviceResponse objectForKey:@"Competitionteamdetails"];
+//                     int j;
+//                    for (j=0; j<[temp1 count]; j++) {
+//                        NSDictionary*test1=[temp1 objectAtIndex:j];
+//                        NSString*COMPETITIONTEAMCODE=[test1 objectForKey:@"Competitionteamcode"];
+//                        NSString *COMPETITIONCODE=[test1 objectForKey:@"Competitioncode"];
+//                        NSString *TEAMCODE=[test1 objectForKey:@"Teamcode"];
+//                        NSString *RECORDSTATUS=[test1 objectForKey:@"Recordstatus"];
+//                        
+//                        
+//                        bool CheckStatus1=[objDBMANAGERSYNC CheckCompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+//                        if (CheckStatus1==NO) {
+//                            [objDBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
+//                        }
+//                else{ [objDBMANAGERSYNC DELETECompetitionCodeTeamCode:COMPETITIONCODE:TEAMCODE];
+//                    [objDBMANAGERSYNC  InsertCompetitionTeamDetails:COMPETITIONTEAMCODE:COMPETITIONCODE:TEAMCODE: RECORDSTATUS];
+//                        
+//                        }
+//                        
+//                    }
+//            
+//                }
+//            }
+//        });
+//        
+//        //[delegate hideLoading];
+//    }
+//}
 
 
 

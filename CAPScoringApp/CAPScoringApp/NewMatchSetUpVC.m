@@ -462,7 +462,7 @@ NSRegularExpression *isMatchedByRegex;
 
             
             [self.navigationController pushViewController:matchvc animated:YES];
-            [self startService:@"MATCHUPDATEOVER"];
+           // [self startService:@"MATCHUPDATEOVER"];
         }else{
             
             [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Match Setup"];
@@ -492,7 +492,7 @@ NSRegularExpression *isMatchedByRegex;
 
             
             [self.navigationController pushViewController:matchvc animated:YES];
-            [self startService:@"MATCHUPDATEOVER"];
+           // [self startService:@"MATCHUPDATEOVER"];
         }else{
             
             [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Match Setup"];
@@ -515,7 +515,7 @@ NSRegularExpression *isMatchedByRegex;
             matchvc.matchTypeCode =self.matchTypeCode;
             
             [self.navigationController pushViewController:matchvc animated:YES];
-            [self startService:@"MATCHUPDATEOVER"];
+            //[self startService:@"MATCHUPDATEOVER"];
         }else{
             
             [self showDialog:@"Please Select Minimum Seven Players" andTitle:@"Match Setup"];
@@ -593,45 +593,45 @@ NSRegularExpression *isMatchedByRegex;
     
     //Show indicator
     [delegate showLoading];
-    if(self.checkInternetConnection){
-        NSString*OVER=self.txt_overs.text;
-        
-        matchCode = matchCode == nil ?@"NULL":matchCode;
-        competitionCode = competitionCode == nil ?@"NULL":competitionCode;
-        OVER = OVER == nil ?@"NULL":OVER;
-        
-        
-        
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            
-            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHUPDATEOVER/%@/%@/%@",[Utitliy getSyncIPPORT], competitionCode,matchCode,OVER];
-            NSLog(@"-%@",baseURL);
-            
-            
-            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-            
-            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-            NSURLResponse *response;
-            NSError *error;
-            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-            
-            if(responseData != nil)
-            {
-                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-                
-                if(rootArray !=nil && rootArray.count>0){
-                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
-                    NSString *success = [valueDict valueForKey:@"DataItem"];
-                    if([success isEqual:@"Success"]){
-                        
-                    }
-                }else{
-                    
-                }
-            }
-        });
-    }
+//    if(self.checkInternetConnection){
+//        NSString*OVER=self.txt_overs.text;
+//        
+//        matchCode = matchCode == nil ?@"NULL":matchCode;
+//        competitionCode = competitionCode == nil ?@"NULL":competitionCode;
+//        OVER = OVER == nil ?@"NULL":OVER;
+//        
+//        
+//        
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            
+//            
+//            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/MATCHUPDATEOVER/%@/%@/%@",[Utitliy getSyncIPPORT], competitionCode,matchCode,OVER];
+//            NSLog(@"-%@",baseURL);
+//            
+//            
+//            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//            
+//            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//            NSURLResponse *response;
+//            NSError *error;
+//            NSData *responseData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+//            
+//            if(responseData != nil)
+//            {
+//                NSMutableArray *rootArray = [NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//                
+//                if(rootArray !=nil && rootArray.count>0){
+//                    NSDictionary *valueDict = [rootArray objectAtIndex:0];
+//                    NSString *success = [valueDict valueForKey:@"DataItem"];
+//                    if([success isEqual:@"Success"]){
+//                        
+//                    }
+//                }else{
+//                    
+//                }
+//            }
+//        });
+//    }
     [delegate hideLoading];
 }
 @end
