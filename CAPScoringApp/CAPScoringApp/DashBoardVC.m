@@ -17,6 +17,7 @@
 #import "AppDelegate.h"
 #import "Utitliy.h"
 #import "LoginDBmanager.h"
+#import "FixtureAndResultsVC.h"
 
 @interface DashBoardVC ()
 
@@ -840,6 +841,10 @@
     _img_reports.image = [UIImage imageNamed:@"ico-reports02.png"];
     
     _view_reports.backgroundColor = [UIColor colorWithRed:(20/255.0f) green:(161/255.0f) blue:(79/255.0f) alpha:(1)];
+    
+    FixtureAndResultsVC*TETS =  (FixtureAndResultsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"FixtureAndResultsVC"];
+    //TETS.selectDashBoard=selectType;
+    [self.navigationController pushViewController:TETS animated:YES];
     
 }
 

@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LiveMatchCell.h"
 
 @interface FixtureAndResultsVC : UIViewController
+
+@property (nonatomic,strong) IBOutlet UITableView * FixResult_Tbl;
+
+@property (strong, nonatomic) IBOutlet LiveMatchCell * livematchCell;
 
 @end
