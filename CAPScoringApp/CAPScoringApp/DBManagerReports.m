@@ -62,7 +62,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //Fixtures
 -(NSMutableArray *)FixturesData:(NSString*)competitionCode :(NSString*)userCode {
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
-    int retVal;
     
     NSString *dbPath = [self getDBPath];
     
@@ -120,7 +119,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSMutableArray *)fetchLiveMatches:(NSString*)competitionCode :(NSString*)userCode {
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
-    int retVal;
     
     NSString *dbPath = [self getDBPath];
     

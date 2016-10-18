@@ -11,6 +11,8 @@
 #import "ResultMatchCell.h"
 #import "LiveMatchCell.h"
 #import "FixturesCell.h"
+#import "DBManagerReports.h"
+#import "LiveReportRecord.h"
 
 @interface FixtureAndResultsVC ()
 {
@@ -18,9 +20,11 @@
     BOOL isLive;
     BOOL isResult;
     BOOL isFixture;
+    DBManagerReports *objDBManagerReports;
+    
 }
 
-@property (nonatomic,strong) NSMutableArray * CommonArray;
+@property (nonatomic,strong) NSMutableArray *fixturesResultArray;
 
 @end
 
@@ -28,10 +32,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.CommonArray =[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4", nil];
     
-    isLive =YES;
     [self customnavigationmethod];
+    
+    [self didClickLiveBtn:0];
 }
 -(void)customnavigationmethod
 {
@@ -53,7 +57,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [self.CommonArray count];    //count number of row from counting array hear cataGorry is An Array
+    return [_fixturesResultArray count];    //count number of row from counting array hear cataGorry is An Array
 }
 
 
@@ -79,6 +83,14 @@
     [cell setBackgroundColor:[UIColor clearColor]];
     //tableView.allowsSelection = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        LiveReportRecord *record = [_fixturesResultArray objectAtIndex:indexPath.row];
+        
+        cell.lbl_team_a_name.text = record.teamAname;
+        cell.lbl_team_b_name.text = record.teamBname;
+        
+    
+        
     
     return cell;
     
@@ -139,32 +151,42 @@
 
 -(IBAction)didClickLiveBtn:(id)sender
 {
+    
+    objDBManagerReports = [[DBManagerReports alloc]init];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userCode = [defaults objectForKey:@"userCode"];
+    _fixturesResultArray =[objDBManagerReports fetchLiveMatches:@"":userCode];
+    
     isLive = YES;
     isResult = NO;
     isFixture = NO;
-    NSMutableArray * Livematchlist =[[NSMutableArray alloc]init];
-    self.CommonArray =Livematchlist;
     [self.FixResult_Tbl reloadData];
 }
 
 -(IBAction)didClickResultBtn:(id)sender
 {
+    
+    objDBManagerReports = [[DBManagerReports alloc]init];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userCode = [defaults objectForKey:@"userCode"];
+    _fixturesResultArray =[objDBManagerReports fetchResultsMatches:@"":userCode];
+    
     isLive = NO;
     isResult = YES;
     isFixture = NO;
-    NSMutableArray * Resultmatchlist =[[NSMutableArray alloc]init];
-    self.CommonArray =Resultmatchlist;
     [self.FixResult_Tbl reloadData];
 }
 
 -(IBAction)didClickFixtureBtn:(id)sender
 {
-    isLive = NO;
-    isResult = NO;
-    isFixture = YES;
-    NSMutableArray * MatchFixerlist =[[NSMutableArray alloc]init];
-    self.CommonArray =MatchFixerlist;
-    [self.FixResult_Tbl reloadData];
+//    isLive = NO;
+//    isResult = NO;
+//    isFixture = YES;
+//    NSMutableArray * MatchFixerlist =[[NSMutableArray alloc]init];
+//    self.CommonArray =MatchFixerlist;
+//    [self.FixResult_Tbl reloadData];
 
 }
 
