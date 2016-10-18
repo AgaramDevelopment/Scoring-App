@@ -46,6 +46,7 @@
     
 
     [self customnavigationmethod];
+     self.sepratorYposition.constant =self.view.frame.size.width/2.5;
     
     [self didClickLiveBtn:0];
 }
@@ -239,6 +240,7 @@
     isLive = YES;
     isResult = NO;
     isFixture = NO;
+    self.sepratorYposition.constant =self.Live_Btn.frame.origin.x+30;
     [self.FixResult_Tbl reloadData];
 }
 
@@ -254,6 +256,7 @@
     isLive = NO;
     isResult = YES;
     isFixture = NO;
+     self.sepratorYposition.constant =30;
     [self.FixResult_Tbl reloadData];
 }
 
@@ -268,6 +271,8 @@
     isLive = NO;
     isResult = NO;
     isFixture = YES;
+    
+     self.sepratorYposition.constant =self.Fixture_Btn.frame.origin.x+30;
     [self.FixResult_Tbl reloadData];
 
 }
