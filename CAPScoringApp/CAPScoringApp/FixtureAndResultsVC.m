@@ -13,6 +13,7 @@
 #import "FixtureTVC.h"
 #import "DBManagerReports.h"
 #import "LiveReportRecord.h"
+#import "ResultReportRecord.h"
 #import "FixtureReportRecord.h"
 
 @interface FixtureAndResultsVC ()
@@ -150,10 +151,14 @@
     {
         FixtureTVC *cell = (FixtureTVC *)[tableView dequeueReusableCellWithIdentifier:FixtureMatch];
         if (cell == nil) {
-            [[NSBundle mainBundle] loadNibNamed:@"FixtureCell" owner:self options:nil];
+            [[NSBundle mainBundle] loadNibNamed:@"FixtureTVC" owner:self options:nil];
             cell = self.fixtureCell;
             
         }
+        
+        [cell setBackgroundColor:[UIColor clearColor]];
+        //tableView.allowsSelection = NO;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         FixtureReportRecord *objFixtureRecord=(FixtureReportRecord*)[_fixturesResultArray objectAtIndex:indexPath.row];
         
@@ -163,7 +168,7 @@
         
         NSDate *date = [formatter dateFromString:objFixtureRecord.matchDate];
         [formatter setDateFormat:@"dd"];
-        cell.day_no_txt.text=[formatter stringFromDate:date];
+       // cell.day_no_txt.text=[formatter stringFromDate:date];
         
         [formatter setDateFormat:@"MMMM"];
         cell.month_txt.text=[formatter stringFromDate:date];
@@ -177,11 +182,10 @@
             cell.match_type.text = objFixtureRecord.matchName;
             cell.venu_txt.text = [NSString stringWithFormat:@"%@ , %@", objFixtureRecord.groundName,objFixtureRecord.city];
             
-      
+        [self setImage:objFixtureRecord.teamAcode : cell.teamA_img];
         
-        [cell setBackgroundColor:[UIColor clearColor]];
-        //tableView.allowsSelection = NO;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        [self setImage:objFixtureRecord.teamBcode : cell.teamB_img];
+        
         
         return cell;
     }
@@ -223,8 +227,6 @@
     isLive = YES;
     isResult = NO;
     isFixture = NO;
-    NSMutableArray * Livematchlist =[[NSMutableArray alloc]init];
-    self.fixturesResultArray =Livematchlist;
     [self.FixResult_Tbl reloadData];
 }
 
@@ -240,8 +242,6 @@
     isLive = NO;
     isResult = YES;
     isFixture = NO;
-    NSMutableArray * Resultmatchlist =[[NSMutableArray alloc]init];
-    self.fixturesResultArray =Resultmatchlist;
     [self.FixResult_Tbl reloadData];
 }
 
@@ -257,8 +257,6 @@
     isResult = NO;
     isFixture = YES;
     
-    NSMutableArray * MatchFixerlist =[[NSMutableArray alloc]init];
-    self.fixturesResultArray = MatchFixerlist;
     [self.FixResult_Tbl reloadData];
 
 }
@@ -269,5 +267,23 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void) setImage:(NSString *)teamCode:(UIImageView *)teamLogoImg {
+ 
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir,teamCode];
+    
+    
+    BOOL isFileExist = [fileManager fileExistsAtPath:pngFilePath];
+    UIImage *img;
+    if(isFileExist){
+        img = [UIImage imageWithContentsOfFile:pngFilePath];
+        teamLogoImg.image = img;
+    }else{
+        img  = [UIImage imageNamed: @"no_image.png"];
+        teamLogoImg.image = img;
+    }
+}
 
 @end
