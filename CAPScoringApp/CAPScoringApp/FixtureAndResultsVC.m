@@ -12,9 +12,11 @@
 #import "LiveMatchCell.h"
 #import "FixtureTVC.h"
 #import "DBManagerReports.h"
+#import "FixtureReportRecord.h"
 #import "LiveReportRecord.h"
 #import "ResultReportRecord.h"
 #import "FixtureReportRecord.h"
+#import "ResultReportRecord.h"
 
 @interface FixtureAndResultsVC ()
 {
@@ -38,7 +40,14 @@
     [super viewDidLoad];
     //self.CommonArray =[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4", nil];
     
+    isLive =YES;
+    [self.matchListview .layer setBorderWidth:2.0];
+    [self.matchListview.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    [self.matchListview .layer setMasksToBounds:YES];
+    
+
     [self customnavigationmethod];
+     self.sepratorYposition.constant =self.view.frame.size.width/2.5;
     
     [self didClickLiveBtn:0];
 }
@@ -108,7 +117,9 @@
         [formatter setDateFormat:@"EEEE"];
         cell.lbl_week_day.text=[formatter stringFromDate:date];
         
-        
+        cell.lbl_match_type.text = record.matchTypeName;
+        [self setImage:record.teamAcode :cell.img_team_a_logo ];
+        [self setImage:record.teamBcode :cell.lbl_team_b_logo ];
     
     return cell;
     
@@ -144,6 +155,12 @@
         
         [formatter setDateFormat:@"EEEE"];
         cell.lbl_week_day.text=[formatter stringFromDate:date];
+        
+        cell.lbl_match_type.text = record.matchTypeName;
+        
+        [self setImage:record.teamAcode :cell.img_team_a_logo ];
+        [self setImage:record.teamBcode :cell.lbl_team_b_logo ];
+        
         
         return cell;
     }
@@ -196,7 +213,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return 197;
+    return 160;
     
 }
 
@@ -269,6 +286,25 @@
 
 -(void) setImage:(NSString *)teamCode:(UIImageView *)teamLogoImg {
  
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir,teamCode];
+    
+    
+    BOOL isFileExist = [fileManager fileExistsAtPath:pngFilePath];
+    UIImage *img;
+    if(isFileExist){
+        img = [UIImage imageWithContentsOfFile:pngFilePath];
+        teamLogoImg.image = img;
+    }else{
+        img  = [UIImage imageNamed: @"no_image.png"];
+        teamLogoImg.image = img;
+    }
+}
+
+-(void) setImage:(NSString *)teamCode:(UIImageView *)teamLogoImg {
+    
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
