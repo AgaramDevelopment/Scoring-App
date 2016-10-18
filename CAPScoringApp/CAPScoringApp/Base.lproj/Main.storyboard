@@ -3108,6 +3108,9 @@
                                         <state key="normal" title="Result">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didClickResultBtn:" destination="uP8-qy-8xi" eventType="touchUpInside" id="gsd-N3-xJD"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3g1-aW-nmy">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -3115,6 +3118,9 @@
                                         <state key="normal" title="Live">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didClickLiveBtn:" destination="uP8-qy-8xi" eventType="touchUpInside" id="tev-6e-dkj"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AEJ-MU-VSM">
                                         <rect key="frame" x="-23" y="-15" width="46" height="30"/>
@@ -3122,6 +3128,9 @@
                                         <state key="normal" title="Fixture">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="didClickFixtureBtn:" destination="uP8-qy-8xi" eventType="touchUpInside" id="T48-vF-AKZ"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.047058823529411764" green="0.062745098039215685" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>

@@ -16,9 +16,6 @@
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
         </mutableArray>
-        <mutableArray key="RAJDHANI-MEDIUM.TTF">
-            <string>Rajdhani-Medium</string>
-        </mutableArray>
         <mutableArray key="RAJDHANI-SEMIBOLD.TTF">
             <string>Rajdhani-Semibold</string>
         </mutableArray>
@@ -110,12 +107,6 @@
                                             <constraint firstAttribute="width" constant="35" id="Eye-CR-Agp"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U91-dm-UZg">
-                                        <rect key="frame" x="444" y="46" width="35" height="35"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="35" id="8x0-tM-He5"/>
-                                        </constraints>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="INDIA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CZu-yB-gmV">
                                         <rect key="frame" x="51" y="43" width="58" height="21"/>
                                         <constraints>
@@ -146,12 +137,12 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Jawahar Lal Nehru Stadium, Ghaziabad" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bsf-aW-dBE">
-                                        <rect key="frame" x="62" y="80" width="376" height="21"/>
-                                        <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="19"/>
-                                        <color key="textColor" red="1" green="0.98689520470000003" blue="0.97839160439999995" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="U91-dm-UZg">
+                                        <rect key="frame" x="444" y="46" width="35" height="35"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="35" id="8x0-tM-He5"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.14999999999999999" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -164,8 +155,6 @@
                                     <constraint firstItem="Z1v-lp-ZOA" firstAttribute="leading" secondItem="GnA-Oy-9fy" secondAttribute="leading" constant="8" id="DXe-XH-mHI"/>
                                     <constraint firstItem="W3Y-5T-wSQ" firstAttribute="leading" secondItem="9sK-zg-ph0" secondAttribute="leading" id="DfV-Hi-Diu"/>
                                     <constraint firstItem="9sK-zg-ph0" firstAttribute="top" secondItem="W3Y-5T-wSQ" secondAttribute="bottom" constant="13" id="Dif-Q6-A4N"/>
-                                    <constraint firstItem="bsf-aW-dBE" firstAttribute="leading" secondItem="CZu-yB-gmV" secondAttribute="leading" constant="11" id="Hbw-hC-4wX"/>
-                                    <constraint firstItem="bsf-aW-dBE" firstAttribute="top" secondItem="CZu-yB-gmV" secondAttribute="bottom" constant="16" id="Jw0-2N-Vba"/>
                                     <constraint firstItem="U91-dm-UZg" firstAttribute="bottom" secondItem="Z1v-lp-ZOA" secondAttribute="bottom" id="P9j-7O-ffu"/>
                                     <constraint firstItem="W3Y-5T-wSQ" firstAttribute="top" secondItem="GnA-Oy-9fy" secondAttribute="topMargin" id="PeS-zq-laA"/>
                                     <constraint firstItem="W0t-fk-WKW" firstAttribute="centerY" secondItem="CZu-yB-gmV" secondAttribute="centerY" id="VhI-nM-4TJ"/>
@@ -174,10 +163,7 @@
                                     <constraint firstAttribute="trailing" secondItem="U91-dm-UZg" secondAttribute="trailing" constant="21" id="a8A-1u-KkB"/>
                                     <constraint firstItem="W3Y-5T-wSQ" firstAttribute="trailing" secondItem="9sK-zg-ph0" secondAttribute="trailing" id="aFt-5C-BSC"/>
                                     <constraint firstItem="Z1v-lp-ZOA" firstAttribute="top" secondItem="GnA-Oy-9fy" secondAttribute="top" constant="46" id="abl-Qw-kU4"/>
-                                    <constraint firstItem="bsf-aW-dBE" firstAttribute="top" secondItem="W0t-fk-WKW" secondAttribute="bottom" constant="14" id="bch-sJ-VA2"/>
-                                    <constraint firstAttribute="bottom" secondItem="bsf-aW-dBE" secondAttribute="bottom" constant="10" id="bhe-Uc-tLR"/>
                                     <constraint firstItem="CZu-yB-gmV" firstAttribute="leading" secondItem="Z1v-lp-ZOA" secondAttribute="trailing" constant="8" symbolic="YES" id="feR-V3-aua"/>
-                                    <constraint firstItem="U91-dm-UZg" firstAttribute="leading" secondItem="bsf-aW-dBE" secondAttribute="trailing" constant="6" id="gMW-Y2-K2d"/>
                                     <constraint firstItem="CZu-yB-gmV" firstAttribute="firstBaseline" secondItem="9sK-zg-ph0" secondAttribute="baseline" id="mux-2a-MRB">
                                         <variation key="heightClass=regular-widthClass=regular" constant="-4"/>
                                     </constraint>
@@ -189,7 +175,6 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="bch-sJ-VA2"/>
                                         <exclude reference="VhI-nM-4TJ"/>
                                         <exclude reference="om2-7v-rge"/>
                                         <exclude reference="qTC-UD-Il9"/>
@@ -197,7 +182,6 @@
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="constraints">
-                                        <include reference="bch-sJ-VA2"/>
                                         <exclude reference="8XF-ut-eP2"/>
                                         <exclude reference="B9V-nw-60S"/>
                                         <include reference="VhI-nM-4TJ"/>
@@ -235,6 +219,16 @@
                     <constraint firstItem="FwY-4D-ar5" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="Ohm-Lt-CfV"/>
                 </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="img_team_a_logo" destination="Z1v-lp-ZOA" id="cWh-NX-dKa"/>
+                <outlet property="lbl_day" destination="gvG-Ik-4H0" id="lYL-2m-Os0"/>
+                <outlet property="lbl_match_type" destination="W3Y-5T-wSQ" id="DZ1-1G-NRR"/>
+                <outlet property="lbl_month" destination="twF-PM-BMS" id="8ku-S3-HkW"/>
+                <outlet property="lbl_team_a_name" destination="CZu-yB-gmV" id="tXo-q5-v1w"/>
+                <outlet property="lbl_team_b_logo" destination="U91-dm-UZg" id="S0S-FG-gPM"/>
+                <outlet property="lbl_team_b_name" destination="W0t-fk-WKW" id="1CJ-iD-ccH"/>
+                <outlet property="lbl_week_day" destination="3KH-PT-U5B" id="CXz-Pz-AaE"/>
+            </connections>
         </tableViewCell>
     </objects>
     <resources>

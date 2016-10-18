@@ -44,6 +44,8 @@
     
     
     [self customnavigationmethod];
+    
+    [self didClickLiveBtn:0];
 }
 -(void)customnavigationmethod
 {
@@ -91,6 +93,14 @@
     [cell setBackgroundColor:[UIColor clearColor]];
     //tableView.allowsSelection = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        LiveReportRecord *record = [_fixturesResultArray objectAtIndex:indexPath.row];
+        
+        cell.lbl_team_a_name.text = record.teamAname;
+        cell.lbl_team_b_name.text = record.teamBname;
+        
+    
+        
     
     return cell;
     
@@ -159,6 +169,13 @@
 
 -(IBAction)didClickLiveBtn:(id)sender
 {
+    
+    objDBManagerReports = [[DBManagerReports alloc]init];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userCode = [defaults objectForKey:@"userCode"];
+    _fixturesResultArray =[objDBManagerReports fetchLiveMatches:@"":userCode];
+    
     isLive = YES;
     isResult = NO;
     isFixture = NO;
@@ -169,6 +186,13 @@
 
 -(IBAction)didClickResultBtn:(id)sender
 {
+    
+    objDBManagerReports = [[DBManagerReports alloc]init];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    NSString *userCode = [defaults objectForKey:@"userCode"];
+    _fixturesResultArray =[objDBManagerReports fetchResultsMatches:@"":userCode];
+    
     isLive = NO;
     isResult = YES;
     isFixture = NO;

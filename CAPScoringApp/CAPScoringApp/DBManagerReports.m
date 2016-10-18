@@ -10,6 +10,7 @@
 #import "FixturesRecord.h"
 #import "LiveReportRecord.h"
 #import "FixtureReportRecord.h"
+#import "LiveReportRecord.h"
 
 @implementation DBManagerReports
 
@@ -63,7 +64,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //Fixtures
 -(NSMutableArray *)FixturesData:(NSString*)competitionCode :(NSString*)userCode {
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
-  
+    
     NSString *dbPath = [self getDBPath];
     
     sqlite3 *dataBase;
@@ -124,7 +125,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSMutableArray *)fetchLiveMatches:(NSString*)competitionCode :(NSString*)userCode {
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
-    int retVal;
     
     NSString *dbPath = [self getDBPath];
     
