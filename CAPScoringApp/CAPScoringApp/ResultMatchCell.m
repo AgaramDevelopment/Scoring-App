@@ -1,14 +1,14 @@
 //
-//  FixtureAndResultsTVC.m
+//  ResultMatchCell.m
 //  CAPScoringApp
 //
-//  Created by Raja sssss on 17/10/16.
+//  Created by APPLE on 18/10/16.
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
-#import "FixtureTVC.h"
+#import "ResultMatchCell.h"
 
-@implementation FixtureTVC
+@implementation ResultMatchCell
 
 - (void)awakeFromNib {
     [super awakeFromNib];
