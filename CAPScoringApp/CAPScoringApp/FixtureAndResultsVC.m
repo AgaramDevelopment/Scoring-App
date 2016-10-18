@@ -12,6 +12,7 @@
 #import "LiveMatchCell.h"
 #import "FixtureTVC.h"
 #import "DBManagerReports.h"
+#import "FixtureReportRecord.h"
 #import "LiveReportRecord.h"
 #import "ResultReportRecord.h"
 
@@ -114,7 +115,9 @@
         [formatter setDateFormat:@"EEEE"];
         cell.lbl_week_day.text=[formatter stringFromDate:date];
         
-        
+        cell.lbl_match_type.text = record.matchTypeName;
+        [self setImage:record.teamAcode :cell.img_team_a_logo ];
+        [self setImage:record.teamBcode :cell.lbl_team_b_logo ];
     
     return cell;
     
@@ -150,6 +153,12 @@
         
         [formatter setDateFormat:@"EEEE"];
         cell.lbl_week_day.text=[formatter stringFromDate:date];
+        
+        cell.lbl_match_type.text = record.matchTypeName;
+        
+        [self setImage:record.teamAcode :cell.img_team_a_logo ];
+        [self setImage:record.teamBcode :cell.lbl_team_b_logo ];
+        
         
         return cell;
     }
@@ -213,8 +222,6 @@
     isLive = YES;
     isResult = NO;
     isFixture = NO;
-    NSMutableArray * Livematchlist =[[NSMutableArray alloc]init];
-    self.fixturesResultArray =Livematchlist;
     [self.FixResult_Tbl reloadData];
 }
 
@@ -230,8 +237,6 @@
     isLive = NO;
     isResult = YES;
     isFixture = NO;
-    NSMutableArray * Resultmatchlist =[[NSMutableArray alloc]init];
-    self.fixturesResultArray =Resultmatchlist;
     [self.FixResult_Tbl reloadData];
 }
 
@@ -246,8 +251,6 @@
     isLive = NO;
     isResult = NO;
     isFixture = YES;
-    NSMutableArray * MatchFixerlist =[[NSMutableArray alloc]init];
-    self.fixturesResultArray =MatchFixerlist;
     [self.FixResult_Tbl reloadData];
 
 }
@@ -258,5 +261,24 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+-(void) setImage:(NSString *)teamCode:(UIImageView *)teamLogoImg {
+    
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir,teamCode];
+    
+    
+    BOOL isFileExist = [fileManager fileExistsAtPath:pngFilePath];
+    UIImage *img;
+    if(isFileExist){
+        img = [UIImage imageWithContentsOfFile:pngFilePath];
+        teamLogoImg.image = img;
+    }else{
+        img  = [UIImage imageNamed: @"no_image.png"];
+        teamLogoImg.image = img;
+    }
+}
 
 @end

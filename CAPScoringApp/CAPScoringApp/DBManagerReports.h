@@ -11,4 +11,6 @@
 
 @interface DBManagerReports : NSObject
 -(NSMutableArray *)FixturesData:(NSString*)competitionCode :(NSString*)userCode;
+-(NSMutableArray *)fetchResultsMatches:(NSString*)competitionCode :(NSString*)userCode;
+-(NSMutableArray *)fetchLiveMatches:(NSString*)competitionCode :(NSString*)userCode ;
 @end
