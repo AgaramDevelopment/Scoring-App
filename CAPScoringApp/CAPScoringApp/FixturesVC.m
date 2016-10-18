@@ -108,7 +108,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
         _FetchCompitionArray=[[NSMutableArray alloc]init];
-    _FetchCompitionArray =[objDBManager RetrieveFixturesData:CompitionCode:userCode];
+    _FetchCompitionArray =[objDBManager RetrieveFixturesData :CompitionCode:userCode];
     self.popView.hidden=YES;
     [self customnavigationmethod];
    
