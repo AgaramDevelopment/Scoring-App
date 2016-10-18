@@ -3265,9 +3265,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "864"
-            endingLineNumber = "864"
-            landmarkName = "-tableView:heightForRowAtIndexPath:isExpanded:"
-            landmarkType = "5">
+            endingLineNumber = "864">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3281,9 +3279,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "493"
-            endingLineNumber = "493"
-            landmarkName = "-tableView:cellForRowAtIndexPath:isExpanded:"
-            landmarkType = "5">
+            endingLineNumber = "493">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3297,9 +3293,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "481"
-            endingLineNumber = "481"
-            landmarkName = "-tableView:numberOfRowsInSection:"
-            landmarkType = "5">
+            endingLineNumber = "481">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3313,9 +3307,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "457"
-            endingLineNumber = "457"
-            landmarkName = "-tableView:collapseCell:withIndexPath:"
-            landmarkType = "5">
+            endingLineNumber = "457">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3329,9 +3321,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "394"
-            endingLineNumber = "394"
-            landmarkName = "-tableView:expandCell:withIndexPath:"
-            landmarkType = "5">
+            endingLineNumber = "394">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3345,9 +3335,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "489"
-            endingLineNumber = "489"
-            landmarkName = "-tableView:cellForRowAtIndexPath:isExpanded:"
-            landmarkType = "5">
+            endingLineNumber = "489">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3361,9 +3349,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1181"
-            endingLineNumber = "1181"
-            landmarkName = "-didClickpitchAction:"
-            landmarkType = "5">
+            endingLineNumber = "1181">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3377,9 +3363,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1050"
-            endingLineNumber = "1050"
-            landmarkName = "-didClickSectorWagonAction:"
-            landmarkType = "5">
+            endingLineNumber = "1050">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3393,9 +3377,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "918"
-            endingLineNumber = "918"
-            landmarkName = "-didClickSpiderWagonAction:"
-            landmarkType = "5">
+            endingLineNumber = "918">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3409,9 +3391,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "128"
-            endingLineNumber = "128"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            endingLineNumber = "128">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3425,9 +3405,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "480"
-            endingLineNumber = "480"
-            landmarkName = "-tableView:numberOfRowsInSection:"
-            landmarkType = "5">
+            endingLineNumber = "480">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3441,9 +3419,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "484"
-            endingLineNumber = "484"
-            landmarkName = "-tableView:numberOfRowsInSection:"
-            landmarkType = "5">
+            endingLineNumber = "484">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3457,9 +3433,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "501"
-            endingLineNumber = "501"
-            landmarkName = "-tableView:cellForRowAtIndexPath:isExpanded:"
-            landmarkType = "5">
+            endingLineNumber = "501">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3473,9 +3447,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "857"
-            endingLineNumber = "857"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            endingLineNumber = "857">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3489,9 +3461,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "855"
-            endingLineNumber = "855"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            endingLineNumber = "855">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3505,9 +3475,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "854"
-            endingLineNumber = "854"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            endingLineNumber = "854">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3521,9 +3489,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "853"
-            endingLineNumber = "853"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
+            endingLineNumber = "853">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3537,9 +3503,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1274"
-            endingLineNumber = "1274"
-            landmarkName = "-didClickonSideAction:"
-            landmarkType = "5">
+            endingLineNumber = "1274">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3553,9 +3517,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1302"
-            endingLineNumber = "1302"
-            landmarkName = "-didClickAll_BtnAction:"
-            landmarkType = "5">
+            endingLineNumber = "1302">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3569,9 +3531,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1301"
-            endingLineNumber = "1301"
-            landmarkName = "-didClickAll_BtnAction:"
-            landmarkType = "5">
+            endingLineNumber = "1301">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3585,9 +3545,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1335"
-            endingLineNumber = "1335"
-            landmarkName = "-didClick1sAction:"
-            landmarkType = "5">
+            endingLineNumber = "1335">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3601,9 +3559,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1370"
-            endingLineNumber = "1370"
-            landmarkName = "-didClick2sAction:"
-            landmarkType = "5">
+            endingLineNumber = "1370">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3617,9 +3573,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1407"
-            endingLineNumber = "1407"
-            landmarkName = "-didClick3sAction:"
-            landmarkType = "5">
+            endingLineNumber = "1407">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3633,9 +3587,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1445"
-            endingLineNumber = "1445"
-            landmarkName = "-didClick4sAction:"
-            landmarkType = "5">
+            endingLineNumber = "1445">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3649,9 +3601,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1483"
-            endingLineNumber = "1483"
-            landmarkName = "-didClick6sAction:"
-            landmarkType = "5">
+            endingLineNumber = "1483">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3665,9 +3615,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1521"
-            endingLineNumber = "1521"
-            landmarkName = "-didClickBowlingSpiderWagonAction:"
-            landmarkType = "5">
+            endingLineNumber = "1521">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3681,9 +3629,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1658"
-            endingLineNumber = "1658"
-            landmarkName = "-didClickBowlingSectorWagonAction:"
-            landmarkType = "5">
+            endingLineNumber = "1658">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3697,9 +3643,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1795"
-            endingLineNumber = "1795"
-            landmarkName = "-didClickBowlingpitchAction:"
-            landmarkType = "5">
+            endingLineNumber = "1795">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3713,9 +3657,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1878"
-            endingLineNumber = "1878"
-            landmarkName = "-didClickBowling1sAction:"
-            landmarkType = "5">
+            endingLineNumber = "1878">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3729,9 +3671,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1907"
-            endingLineNumber = "1907"
-            landmarkName = "-didClickBowling2sAction:"
-            landmarkType = "5">
+            endingLineNumber = "1907">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3745,9 +3685,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1938"
-            endingLineNumber = "1938"
-            landmarkName = "-didClickBowling3sAction:"
-            landmarkType = "5">
+            endingLineNumber = "1938">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3761,9 +3699,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1971"
-            endingLineNumber = "1971"
-            landmarkName = "-didClickBowling4sAction:"
-            landmarkType = "5">
+            endingLineNumber = "1971">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3777,9 +3713,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1970"
-            endingLineNumber = "1970"
-            landmarkName = "-didClickBowling4sAction:"
-            landmarkType = "5">
+            endingLineNumber = "1970">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3793,9 +3727,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2002"
-            endingLineNumber = "2002"
-            landmarkName = "-didClickBowling6sAction:"
-            landmarkType = "5">
+            endingLineNumber = "2002">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3809,9 +3741,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2205"
-            endingLineNumber = "2205"
-            landmarkName = "-sectorWagonwheel:::"
-            landmarkType = "5">
+            endingLineNumber = "2205">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3825,9 +3755,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2429"
-            endingLineNumber = "2429"
-            landmarkName = "-sectorWagonwheel:::"
-            landmarkType = "5">
+            endingLineNumber = "2429">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3841,9 +3769,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2428"
-            endingLineNumber = "2428"
-            landmarkName = "-sectorWagonwheel:::"
-            landmarkType = "5">
+            endingLineNumber = "2428">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3857,9 +3783,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2447"
-            endingLineNumber = "2447"
-            landmarkName = "-BowlersectorWagonwheel::"
-            landmarkType = "5">
+            endingLineNumber = "2447">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3873,9 +3797,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2660"
-            endingLineNumber = "2660"
-            landmarkName = "-BowlersectorWagonwheel::"
-            landmarkType = "5">
+            endingLineNumber = "2660">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3889,9 +3811,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "595"
-            endingLineNumber = "595"
-            landmarkName = "-tableView:cellForRowAtIndexPath:isExpanded:"
-            landmarkType = "5">
+            endingLineNumber = "595">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3905,9 +3825,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "464"
-            endingLineNumber = "464"
-            landmarkName = "-tableView:collapseCell:withIndexPath:"
-            landmarkType = "5">
+            endingLineNumber = "464">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3921,9 +3839,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "875"
-            endingLineNumber = "875"
-            landmarkName = "-tableView:heightForRowAtIndexPath:isExpanded:"
-            landmarkType = "5">
+            endingLineNumber = "875">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -3937,9 +3853,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1746"
-            endingLineNumber = "1746"
-            landmarkName = "-didClickBowlingSectorWagonAction:"
-            landmarkType = "5">
+            endingLineNumber = "1746">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
