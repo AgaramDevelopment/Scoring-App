@@ -7,6 +7,8 @@
 //
 
 #import "DBManagerReports.h"
+#import "FixturesRecord.h"
+#import "LiveReportRecord.h"
 #import "FixtureReportRecord.h"
 
 @implementation DBManagerReports
