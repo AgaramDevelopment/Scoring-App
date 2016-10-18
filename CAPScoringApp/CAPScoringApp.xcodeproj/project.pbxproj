@@ -118,6 +118,10 @@
 		18AB07CF1D2A75C100AEEB1B /* EndSessionTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A5A1D26344400E02DAE /* EndSessionTVC.m */; };
 		18AB07D01D2A75C100AEEB1B /* EndSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2710671D25B9A40011C7B0 /* EndSession.m */; };
 		18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A93A5B1D26344400E02DAE /* EndSessionTVC.xib */; };
+		18DE9F651DB60897001013B6 /* LiveMatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DE9F631DB60897001013B6 /* LiveMatchCell.m */; };
+		18DE9F661DB60897001013B6 /* LiveMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DE9F641DB60897001013B6 /* LiveMatchCell.xib */; };
+		18DE9F6A1DB608E9001013B6 /* ResultMatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DE9F681DB608E9001013B6 /* ResultMatchCell.m */; };
+		18DE9F6B1DB608E9001013B6 /* ResultMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DE9F691DB608E9001013B6 /* ResultMatchCell.xib */; };
 		18E18CED1D93D4AC00CD5CF2 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 18E18CEC1D93D44200CD5CF2 /* TNCA_DATABASE.sqlite */; };
 		18E655F91D5489510010B387 /* DBManagerCaptransactionslogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E655F81D5489510010B387 /* DBManagerCaptransactionslogEntry.m */; };
 		18E655FC1D548B180010B387 /* CaptransactionslogEntryRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E655FB1D548B180010B387 /* CaptransactionslogEntryRecord.m */; };
@@ -217,6 +221,7 @@
 		CE3DD41F1CFBFB4F00D93A55 /* SelectPlayerCVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD41E1CFBFB4F00D93A55 /* SelectPlayerCVCell.m */; };
 		CE3DD4221CFBFD4400D93A55 /* NewMatchSetUpVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD4211CFBFD4400D93A55 /* NewMatchSetUpVC.m */; };
 		CE3DD4251CFBFDD400D93A55 /* TeamLogoRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD4241CFBFDD400D93A55 /* TeamLogoRecords.m */; };
+		CE6D63E21DB5FC2400472312 /* LiveReportRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6D63E11DB5FC2400472312 /* LiveReportRecord.m */; };
 		CE7463A81D166F8200D69CD9 /* UpdateBreakVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463A61D166F8200D69CD9 /* UpdateBreakVC.m */; };
 		CE7463A91D166F8200D69CD9 /* UpdateBreakVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */; };
 		CE7463AC1D16942200D69CD9 /* UpdateBreaksArrayDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463AB1D16942200D69CD9 /* UpdateBreaksArrayDetails.m */; };
@@ -498,6 +503,12 @@
 		188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggressiveShotTypeCell.m; sourceTree = "<group>"; };
 		188767501D67355B00846C03 /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMPopTipView.h; path = SubClass/CMPopTipView/CMPopTipView.h; sourceTree = "<group>"; };
 		188767511D67355B00846C03 /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMPopTipView.m; path = SubClass/CMPopTipView/CMPopTipView.m; sourceTree = "<group>"; };
+		18DE9F621DB60897001013B6 /* LiveMatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveMatchCell.h; sourceTree = "<group>"; };
+		18DE9F631DB60897001013B6 /* LiveMatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveMatchCell.m; sourceTree = "<group>"; };
+		18DE9F641DB60897001013B6 /* LiveMatchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveMatchCell.xib; sourceTree = "<group>"; };
+		18DE9F671DB608E9001013B6 /* ResultMatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultMatchCell.h; sourceTree = "<group>"; };
+		18DE9F681DB608E9001013B6 /* ResultMatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultMatchCell.m; sourceTree = "<group>"; };
+		18DE9F691DB608E9001013B6 /* ResultMatchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultMatchCell.xib; sourceTree = "<group>"; };
 		18E18CEC1D93D44200CD5CF2 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		18E655F71D5489510010B387 /* DBManagerCaptransactionslogEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerCaptransactionslogEntry.h; sourceTree = "<group>"; };
 		18E655F81D5489510010B387 /* DBManagerCaptransactionslogEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerCaptransactionslogEntry.m; sourceTree = "<group>"; };
@@ -696,6 +707,8 @@
 		CE3DD4241CFBFDD400D93A55 /* TeamLogoRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeamLogoRecords.m; sourceTree = "<group>"; };
 		CE47456F1D263DC4007A49B8 /* LoginDBmanager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginDBmanager.h; sourceTree = "<group>"; };
 		CE4745701D263DC4007A49B8 /* LoginDBmanager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginDBmanager.m; sourceTree = "<group>"; };
+		CE6D63E01DB5FC2400472312 /* LiveReportRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveReportRecord.h; sourceTree = "<group>"; };
+		CE6D63E11DB5FC2400472312 /* LiveReportRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveReportRecord.m; sourceTree = "<group>"; };
 		CE7463A51D166F8200D69CD9 /* UpdateBreakVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateBreakVC.h; sourceTree = "<group>"; };
 		CE7463A61D166F8200D69CD9 /* UpdateBreakVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBreakVC.m; sourceTree = "<group>"; };
 		CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateBreakVC.xib; sourceTree = "<group>"; };
@@ -1097,6 +1110,19 @@
 				DCEFC8631D28B72C00451485 /* ChangeTossVC.xib */,
 			);
 			name = ChangeTossVc;
+			sourceTree = "<group>";
+		};
+		18DE9F611DB6084F001013B6 /* ReportCell */ = {
+			isa = PBXGroup;
+			children = (
+				18DE9F621DB60897001013B6 /* LiveMatchCell.h */,
+				18DE9F631DB60897001013B6 /* LiveMatchCell.m */,
+				18DE9F641DB60897001013B6 /* LiveMatchCell.xib */,
+				18DE9F671DB608E9001013B6 /* ResultMatchCell.h */,
+				18DE9F681DB608E9001013B6 /* ResultMatchCell.m */,
+				18DE9F691DB608E9001013B6 /* ResultMatchCell.xib */,
+			);
+			name = ReportCell;
 			sourceTree = "<group>";
 		};
 		18F022961D19469600C881F1 /* MatchResult */ = {
@@ -1562,6 +1588,7 @@
 		CE0018371CF4308C00668D8B /* SubClass */ = {
 			isa = PBXGroup;
 			children = (
+				18DE9F611DB6084F001013B6 /* ReportCell */,
 				1874621E1D9BC7780093721B /* BatsmaninoutTimeCell */,
 				CE95A26B1D81365800F2EEDB /* HVTableView.h */,
 				CE95A26C1D81365800F2EEDB /* HVTableView.m */,
@@ -1735,6 +1762,8 @@
 				1883B5F31D867DF6009E9CB3 /* BowlerStrickPitchRecord.m */,
 				36E57AAA1DB5F8110012A1B6 /* FixtureReportRecord.h */,
 				36E57AAB1DB5F8110012A1B6 /* FixtureReportRecord.m */,
+				CE6D63E01DB5FC2400472312 /* LiveReportRecord.h */,
+				CE6D63E11DB5FC2400472312 /* LiveReportRecord.m */,
 			);
 			name = Records;
 			sourceTree = "<group>";
@@ -1923,6 +1952,7 @@
 			files = (
 				18E18CED1D93D4AC00CD5CF2 /* TNCA_DATABASE.sqlite in Resources */,
 				CE2052A01D7E983900089EFE /* Main.storyboard in Resources */,
+				18DE9F6B1DB608E9001013B6 /* ResultMatchCell.xib in Resources */,
 				DCA67D521D34056A00982EF5 /* InningsDetailsVC.xib in Resources */,
 				047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */,
 				186D5E401D9AA617000AFB85 /* BatsManINOUT.xib in Resources */,
@@ -1956,6 +1986,7 @@
 				CE00184E1CF460DE00668D8B /* RAJDHANI-BOLD.TTF in Resources */,
 				187229291D12665600CC168F /* AddBreakVC.xib in Resources */,
 				246125081D13C5D1004B85E7 /* RightSlideVC.xib in Resources */,
+				18DE9F661DB60897001013B6 /* LiveMatchCell.xib in Resources */,
 				187621201D1D625A006E160F /* EndDayTVC.xib in Resources */,
 				1876210A1D1D3749006E160F /* EndDayVC.xib in Resources */,
 				187462231D9BC7C60093721B /* BatsManINOutTime.xib in Resources */,
@@ -2023,6 +2054,7 @@
 				185060561D0300190030E3E2 /* FastBowlTypeCell.m in Sources */,
 				2461251D1D13C931004B85E7 /* RevisedTarget.m in Sources */,
 				18704EE41D1959B900996BF3 /* GetBestPlayerDetail.m in Sources */,
+				18DE9F6A1DB608E9001013B6 /* ResultMatchCell.m in Sources */,
 				187952351D02AD28001A1224 /* FieldingFactorRecord.m in Sources */,
 				047669DD1D14229600572E39 /* PenaltyDetailsRecord.m in Sources */,
 				1878CD9A1D1167D700A80BEE /* DBManagerScoreCard.m in Sources */,
@@ -2120,6 +2152,7 @@
 				DCEFC8761D28B82600451485 /* DBManagerChangeTeamInsert.m in Sources */,
 				187462221D9BC7C60093721B /* BatsManINOutTime.m in Sources */,
 				DCEFC8601D28B6CF00451485 /* DBManagerChangeToss.m in Sources */,
+				18DE9F651DB60897001013B6 /* LiveMatchCell.m in Sources */,
 				24EFE7801D2823A40073DE5C /* TossDetailRecord.m in Sources */,
 				CE1FBF671CF9A05B00A9B6FE /* OfficialMasterRecord.m in Sources */,
 				1877776D1D2232FA002F31E5 /* Batsmancell.m in Sources */,
@@ -2194,6 +2227,7 @@
 				CE7463A81D166F8200D69CD9 /* UpdateBreakVC.m in Sources */,
 				CED03D261D1AAE3B00522B89 /* DBMANAGERSYNC.m in Sources */,
 				CE7463B31D16B03800D69CD9 /* DeleteEventRecord.m in Sources */,
+				CE6D63E21DB5FC2400472312 /* LiveReportRecord.m in Sources */,
 				CE0018001CF42FA500668D8B /* main.m in Sources */,
 				0481DCFF1D213B250084BFF7 /* PowerPlayGridTVC.m in Sources */,
 				0485A5361D2A23E00059990F /* BOWLINGMAIDENSUMMARYPushRecord.m in Sources */,
