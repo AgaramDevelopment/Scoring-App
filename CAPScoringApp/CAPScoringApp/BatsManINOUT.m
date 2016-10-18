@@ -25,6 +25,7 @@
     BOOL startTimeEqual;
     NSDateFormatter *formatter;
     NSMutableArray * BatsManInOutArray;
+    NSMutableArray * BatsmanlistArray;
     UITableView *objDrobDowntbl;
     NSString * BtnurrentTittle;
     BatsmaninoutRecord * batsmaninoutRecord;
@@ -231,8 +232,14 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:
 (NSInteger)section
 {
-    
-    return [BatsManInOutArray count];
+     if(tableView== _tbl_BatsManTime)
+     {
+       return [BatsManInOutArray count];
+     }
+    else
+    {
+        return BatsmanlistArray.count;
+    }
 }
 
 
@@ -251,7 +258,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                           reuseIdentifier:CellIdentifier];
         }
-        BatsmanPlayerList * objBatsmanPlayer=(BatsmanPlayerList*)[BatsManInOutArray objectAtIndex:indexPath.row];
+        BatsmanPlayerList * objBatsmanPlayer=(BatsmanPlayerList*)[BatsmanlistArray objectAtIndex:indexPath.row];
         cell.textLabel.text = objBatsmanPlayer.playerName;
         return cell;
         
@@ -303,7 +310,7 @@
     back = NO;
     self.view_addBtn.hidden = YES;
    //BatsmaninoutRecord *obj =(BatsmaninoutRecord *)[BatsManInOutArray objectAtIndex:indexPath.row];
-     BatsmanPlayerList *obj =(BatsmanPlayerList *)[BatsManInOutArray objectAtIndex:indexPath.row];
+    
     //_scroll_EndSession.scrollEnabled = YES;
     
    // formatter = [[NSDateFormatter alloc]init];
@@ -320,7 +327,7 @@
     
     if(tableView== objDrobDowntbl)
     {
-        
+         BatsmanPlayerList *obj =(BatsmanPlayerList *)[BatsmanlistArray objectAtIndex:indexPath.row];
         if (IsDropDown == YES) {
             
            
@@ -711,9 +718,11 @@
         [self.view addSubview:objDrobDowntbl];
 //        self.scroll_EndSession.scrollEnabled = NO;
 //
+        BatsmanlistArray=[[NSMutableArray alloc]init];
+        
         NSMutableArray *teamArray = [objDBManagerBatsmanInOutTime getBATTINGPLAYERSTATISTICS: self.compitionCode : self.MATCHCODE :self.INNINGSNO :self.TEAMCODE];;
         
-        BatsManInOutArray = teamArray;
+        BatsmanlistArray = teamArray;
         
         
         [objDrobDowntbl reloadData];
@@ -721,7 +730,7 @@
     else{
         IsDropDown = NO;
         objDrobDowntbl.hidden=YES;
-       // self.scroll_EndSession.scrollEnabled = YES;
+       
     }
     
     
