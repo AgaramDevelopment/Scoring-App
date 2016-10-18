@@ -8,11 +8,14 @@
 
 #import <UIKit/UIKit.h>
 #import "LiveMatchCell.h"
+#import "FixtureTVC.h"
 
 @interface FixtureAndResultsVC : UIViewController
 
 @property (nonatomic,strong) IBOutlet UITableView * FixResult_Tbl;
 
 @property (strong, nonatomic) IBOutlet LiveMatchCell * livematchCell;
+@property (strong, nonatomic) IBOutlet FixtureTVC *fixtureCell;
+
 
 @end

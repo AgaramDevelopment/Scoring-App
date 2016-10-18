@@ -12,6 +12,7 @@
 #import "LiveMatchCell.h"
 #import "FixtureTVC.h"
 #import "DBManagerReports.h"
+#import "LiveReportRecord.h"
 #import "FixtureReportRecord.h"
 
 @interface FixtureAndResultsVC ()
@@ -22,9 +23,10 @@
     BOOL isResult;
     BOOL isFixture;
     DBManagerReports *objDBManagerReports;
+    
 }
 
-@property (nonatomic,strong) NSMutableArray * fixturesResultArray;
+@property (nonatomic,strong) NSMutableArray *fixturesResultArray;
 
 
 @end
@@ -34,14 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     //self.CommonArray =[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4", nil];
-    
-    
-    
-    isLive =YES;
-    
-    
-
-    
     
     [self customnavigationmethod];
     
@@ -124,17 +118,34 @@
         FixtureTVC *cell = (FixtureTVC *)[tableView dequeueReusableCellWithIdentifier:FixtureMatch];
         if (cell == nil) {
             [[NSBundle mainBundle] loadNibNamed:@"FixtureCell" owner:self options:nil];
+            cell = self.fixtureCell;
             
+        }
+        
         FixtureReportRecord *objFixtureRecord=(FixtureReportRecord*)[_fixturesResultArray objectAtIndex:indexPath.row];
-            
-          //  cell.month_txt.text = objFixtureRecord.
+        
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+        
+        NSDate *date = [formatter dateFromString:objFixtureRecord.matchDate];
+        [formatter setDateFormat:@"dd"];
+        cell.day_no_txt.text=[formatter stringFromDate:date];
+        
+        [formatter setDateFormat:@"MMMM"];
+        cell.month_txt.text=[formatter stringFromDate:date];
+        
+        [formatter setDateFormat:@"EEEE"];
+        cell.day_txt.text=[formatter stringFromDate:date];
+        
+        
             cell.teamA_txt.text = objFixtureRecord.teamAname;
             cell.teamB_txt.text = objFixtureRecord.teamBname;
             cell.match_type.text = objFixtureRecord.matchName;
             cell.venu_txt.text = [NSString stringWithFormat:@"%@ , %@", objFixtureRecord.groundName,objFixtureRecord.city];
             
       
-        }
+        
         [cell setBackgroundColor:[UIColor clearColor]];
         //tableView.allowsSelection = NO;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -212,8 +223,9 @@
     isLive = NO;
     isResult = NO;
     isFixture = YES;
+    
     NSMutableArray * MatchFixerlist =[[NSMutableArray alloc]init];
-    self.fixturesResultArray =MatchFixerlist;
+    self.fixturesResultArray = MatchFixerlist;
     [self.FixResult_Tbl reloadData];
 
 }

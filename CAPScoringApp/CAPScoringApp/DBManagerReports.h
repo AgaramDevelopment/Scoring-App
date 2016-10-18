@@ -10,5 +10,12 @@
 #import <sqlite3.h>
 
 @interface DBManagerReports : NSObject
+
+-(NSMutableArray *)fetchResultsMatches:(NSString*)competitionCode :(NSString*)userCode ;
+    
+-(NSMutableArray *)fetchLiveMatches:(NSString*)competitionCode :(NSString*)userCode ;
+        
+
+
 -(NSMutableArray *)FixturesData:(NSString*)competitionCode :(NSString*)userCode;
 @end
