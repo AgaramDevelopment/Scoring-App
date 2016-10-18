@@ -8,7 +8,7 @@
 
 #import "FixtureTVC.h"
 
-@implementation FixtureAndResultsTVC
+@implementation FixtureTVC
 
 - (void)awakeFromNib {
     [super awakeFromNib];
