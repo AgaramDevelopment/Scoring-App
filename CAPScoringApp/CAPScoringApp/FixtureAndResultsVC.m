@@ -13,6 +13,7 @@
 #import "FixturesCell.h"
 #import "DBManagerReports.h"
 #import "LiveReportRecord.h"
+#import "ResultReportRecord.h"
 
 @interface FixtureAndResultsVC ()
 {
@@ -90,6 +91,19 @@
         cell.lbl_team_b_name.text = record.teamBname;
         
     
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+        
+        NSDate *date = [formatter dateFromString:record.matchDate];
+        [formatter setDateFormat:@"dd"];
+        cell.lbl_day.text=[formatter stringFromDate:date];
+        
+        [formatter setDateFormat:@"MMMM"];
+        cell.lbl_month.text=[formatter stringFromDate:date];
+        
+        [formatter setDateFormat:@"EEEE"];
+        cell.lbl_week_day.text=[formatter stringFromDate:date];
+        
         
     
     return cell;
@@ -100,12 +114,32 @@
         ResultMatchCell *cell = (ResultMatchCell *)[tableView dequeueReusableCellWithIdentifier:ResultMatch];
         if (cell == nil) {
             [[NSBundle mainBundle] loadNibNamed:@"ResultMatchCell" owner:self options:nil];
-            //cell = self.batsManHeaderCell;
+            cell = self.resultmatchCell;
             //self.batsManHeaderCell = nil;
         }
         [cell setBackgroundColor:[UIColor clearColor]];
         //tableView.allowsSelection = NO;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        
+        ResultReportRecord *record = [_fixturesResultArray objectAtIndex:indexPath.row];
+        
+        cell.lbl_team_a_name.text = record.teamAname;
+        cell.lbl_team_b_name.text = record.teamBname;
+        
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+        
+        NSDate *date = [formatter dateFromString:record.matchDate];
+        [formatter setDateFormat:@"dd"];
+        cell.lbl_day.text=[formatter stringFromDate:date];
+        
+        [formatter setDateFormat:@"MMMM"];
+        cell.lbl_month.text=[formatter stringFromDate:date];
+        
+        [formatter setDateFormat:@"EEEE"];
+        cell.lbl_week_day.text=[formatter stringFromDate:date];
         
         return cell;
     }
