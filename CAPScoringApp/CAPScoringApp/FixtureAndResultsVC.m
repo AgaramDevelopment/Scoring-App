@@ -28,10 +28,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+   
+}
+-(void)viewWillAppear:(BOOL)animated
+
+{
+     self.sepratorYposition.constant = self.view.frame.size.width/2.5;
     self.CommonArray =[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4", nil];
     
     isLive =YES;
+    [self.matchListview .layer setBorderWidth:2.0];
+    [self.matchListview.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    [self.matchListview .layer setMasksToBounds:YES];
+    
+
     [self customnavigationmethod];
+   
+
 }
 -(void)customnavigationmethod
 {
@@ -118,7 +131,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return 197;
+    return 160;
     
 }
 
@@ -142,6 +155,12 @@
     isLive = YES;
     isResult = NO;
     isFixture = NO;
+    [UIView animateWithDuration:1.0 delay:0.0 options: UIViewAnimationOptionRepeat
+                     animations:^{
+                         self.sepratorYposition.constant =self.Live_Btn.frame.origin.x+30;
+
+                     }completion:^(BOOL finished){
+                     }];
     NSMutableArray * Livematchlist =[[NSMutableArray alloc]init];
     self.CommonArray =Livematchlist;
     [self.FixResult_Tbl reloadData];
@@ -152,6 +171,13 @@
     isLive = NO;
     isResult = YES;
     isFixture = NO;
+    [UIView animateWithDuration:1.0 delay:0.0 options: UIViewAnimationOptionRepeat
+                     animations:^{
+                         self.sepratorYposition.constant =60;
+                     }completion:^(BOOL finished){
+                     }];
+
+    
     NSMutableArray * Resultmatchlist =[[NSMutableArray alloc]init];
     self.CommonArray =Resultmatchlist;
     [self.FixResult_Tbl reloadData];
@@ -162,6 +188,12 @@
     isLive = NO;
     isResult = NO;
     isFixture = YES;
+    [UIView animateWithDuration:1.0 delay:0.0 options: UIViewAnimationOptionRepeat
+                     animations:^{
+                          self.sepratorYposition.constant =self.Fixture_Btn.frame.origin.x+30;
+                     }completion:^(BOOL finished){
+                     }];
+   
     NSMutableArray * MatchFixerlist =[[NSMutableArray alloc]init];
     self.CommonArray =MatchFixerlist;
     [self.FixResult_Tbl reloadData];
