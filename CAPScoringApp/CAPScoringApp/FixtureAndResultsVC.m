@@ -303,23 +303,6 @@
     }
 }
 
--(void) setImage:(NSString *)teamCode:(UIImageView *)teamLogoImg {
-    
-    
-    NSFileManager *fileManager = [NSFileManager defaultManager];
-    NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir,teamCode];
-    
-    
-    BOOL isFileExist = [fileManager fileExistsAtPath:pngFilePath];
-    UIImage *img;
-    if(isFileExist){
-        img = [UIImage imageWithContentsOfFile:pngFilePath];
-        teamLogoImg.image = img;
-    }else{
-        img  = [UIImage imageNamed: @"no_image.png"];
-        teamLogoImg.image = img;
-    }
-}
+
 
 @end

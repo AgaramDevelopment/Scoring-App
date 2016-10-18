@@ -175,7 +175,6 @@
 		24F96F8B1D2FC90500798A9D /* PenaltygridVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24F96F831D2FC90500798A9D /* PenaltygridVC.m */; };
 		24F96F8C1D2FC90500798A9D /* PenaltygridVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24F96F841D2FC90500798A9D /* PenaltygridVC.xib */; };
 		36347C001DB4CC7600ADEF9F /* FixtureAndResultsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 36347BFE1DB4CC7600ADEF9F /* FixtureAndResultsVC.m */; };
-		36347C011DB4CC7600ADEF9F /* FixtureAndResultsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36347BFF1DB4CC7600ADEF9F /* FixtureAndResultsVC.xib */; };
 		36347C051DB4DAA200ADEF9F /* FixtureTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 36347C031DB4DAA200ADEF9F /* FixtureTVC.m */; };
 		36347C061DB4DAA200ADEF9F /* FixtureTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36347C041DB4DAA200ADEF9F /* FixtureTVC.xib */; };
 		36E57AA81DB5EA570012A1B6 /* DBManagerReports.m in Sources */ = {isa = PBXBuildFile; fileRef = 36E57AA71DB5EA570012A1B6 /* DBManagerReports.m */; };
@@ -615,7 +614,6 @@
 		24F96F841D2FC90500798A9D /* PenaltygridVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PenaltygridVC.xib; sourceTree = "<group>"; };
 		36347BFD1DB4CC7600ADEF9F /* FixtureAndResultsVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixtureAndResultsVC.h; sourceTree = "<group>"; };
 		36347BFE1DB4CC7600ADEF9F /* FixtureAndResultsVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixtureAndResultsVC.m; sourceTree = "<group>"; };
-		36347BFF1DB4CC7600ADEF9F /* FixtureAndResultsVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FixtureAndResultsVC.xib; sourceTree = "<group>"; };
 		36347C021DB4DAA200ADEF9F /* FixtureTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixtureTVC.h; sourceTree = "<group>"; };
 		36347C031DB4DAA200ADEF9F /* FixtureTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixtureTVC.m; sourceTree = "<group>"; };
 		36347C041DB4DAA200ADEF9F /* FixtureTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FixtureTVC.xib; sourceTree = "<group>"; };
@@ -1326,7 +1324,6 @@
 			children = (
 				36347BFD1DB4CC7600ADEF9F /* FixtureAndResultsVC.h */,
 				36347BFE1DB4CC7600ADEF9F /* FixtureAndResultsVC.m */,
-				36347BFF1DB4CC7600ADEF9F /* FixtureAndResultsVC.xib */,
 			);
 			name = FixtureAndResult;
 			sourceTree = "<group>";
@@ -1962,7 +1959,6 @@
 				047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */,
 				186D5E401D9AA617000AFB85 /* BatsManINOUT.xib in Resources */,
 				18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */,
-				36347C011DB4CC7600ADEF9F /* FixtureAndResultsVC.xib in Resources */,
 				24F96F881D2FC90500798A9D /* PenalityVC.xib in Resources */,
 				187CA6AA1D28CD7A005E3DCF /* FollowOn.xib in Resources */,
 				047E52ED1D27D71F00D4CAC6 /* Other_WicketgridVC.xib in Resources */,
