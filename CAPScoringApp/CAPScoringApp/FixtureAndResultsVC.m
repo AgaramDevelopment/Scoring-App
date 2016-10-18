@@ -14,7 +14,7 @@
 #import "DBManagerReports.h"
 #import "FixtureReportRecord.h"
 #import "LiveReportRecord.h"
-#import "ResultReportRecord.h"
+#import "FixtureReportRecord.h"
 
 @interface FixtureAndResultsVC ()
 {
@@ -24,9 +24,10 @@
     BOOL isResult;
     BOOL isFixture;
     DBManagerReports *objDBManagerReports;
+    
 }
 
-@property (nonatomic,strong) NSMutableArray * fixturesResultArray;
+@property (nonatomic,strong) NSMutableArray *fixturesResultArray;
 
 
 @end
@@ -35,19 +36,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    //self.CommonArray =[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4", nil];
-    
-    
+   
+}
+-(void)viewWillAppear:(BOOL)animated
+
+{
+     self.sepratorYposition.constant = self.view.frame.size.width/2.5;
+    self.CommonArray =[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4", nil];
     
     isLive =YES;
-    
+    [self.matchListview .layer setBorderWidth:2.0];
+    [self.matchListview.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    [self.matchListview .layer setMasksToBounds:YES];
     
 
-    
-    
     [self customnavigationmethod];
-    
-    [self didClickLiveBtn:0];
+   
+
 }
 -(void)customnavigationmethod
 {
@@ -167,17 +172,34 @@
         FixtureTVC *cell = (FixtureTVC *)[tableView dequeueReusableCellWithIdentifier:FixtureMatch];
         if (cell == nil) {
             [[NSBundle mainBundle] loadNibNamed:@"FixtureCell" owner:self options:nil];
+            cell = self.fixtureCell;
             
+        }
+        
         FixtureReportRecord *objFixtureRecord=(FixtureReportRecord*)[_fixturesResultArray objectAtIndex:indexPath.row];
-            
-          //  cell.month_txt.text = objFixtureRecord.
+        
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+        
+        NSDate *date = [formatter dateFromString:objFixtureRecord.matchDate];
+        [formatter setDateFormat:@"dd"];
+        cell.day_no_txt.text=[formatter stringFromDate:date];
+        
+        [formatter setDateFormat:@"MMMM"];
+        cell.month_txt.text=[formatter stringFromDate:date];
+        
+        [formatter setDateFormat:@"EEEE"];
+        cell.day_txt.text=[formatter stringFromDate:date];
+        
+        
             cell.teamA_txt.text = objFixtureRecord.teamAname;
             cell.teamB_txt.text = objFixtureRecord.teamBname;
             cell.match_type.text = objFixtureRecord.matchName;
             cell.venu_txt.text = [NSString stringWithFormat:@"%@ , %@", objFixtureRecord.groundName,objFixtureRecord.city];
             
       
-        }
+        
         [cell setBackgroundColor:[UIColor clearColor]];
         //tableView.allowsSelection = NO;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -191,7 +213,7 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    return 197;
+    return 160;
     
 }
 
