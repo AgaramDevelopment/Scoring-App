@@ -278,6 +278,8 @@
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="constraints">
+                                        <exclude reference="8XF-ut-eP2"/>
+                                        <exclude reference="B9V-nw-60S"/>
                                         <include reference="VhI-nM-4TJ"/>
                                         <include reference="om2-7v-rge"/>
                                         <include reference="qTC-UD-Il9"/>

@@ -15,6 +15,7 @@
 #import "FixtureReportRecord.h"
 #import "LiveReportRecord.h"
 #import "FixtureReportRecord.h"
+#import "ResultReportRecord.h"
 
 @interface FixtureAndResultsVC ()
 {
@@ -36,13 +37,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-   
-}
--(void)viewWillAppear:(BOOL)animated
-
-{
-     self.sepratorYposition.constant = self.view.frame.size.width/2.5;
-    self.CommonArray =[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4", nil];
+    //self.CommonArray =[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4", nil];
     
     isLive =YES;
     [self.matchListview .layer setBorderWidth:2.0];
@@ -51,8 +46,8 @@
     
 
     [self customnavigationmethod];
-   
-
+    
+    [self didClickLiveBtn:0];
 }
 -(void)customnavigationmethod
 {
