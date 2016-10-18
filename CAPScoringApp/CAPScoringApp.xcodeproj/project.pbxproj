@@ -1760,6 +1760,8 @@
 				CEA2751A1D2A25DE007F6A28 /* PlayerInOutPushRecord.m */,
 				1883B5F21D867DF6009E9CB3 /* BowlerStrickPitchRecord.h */,
 				1883B5F31D867DF6009E9CB3 /* BowlerStrickPitchRecord.m */,
+				36E57AAA1DB5F8110012A1B6 /* FixtureReportRecord.h */,
+				36E57AAB1DB5F8110012A1B6 /* FixtureReportRecord.m */,
 				CE6D63E01DB5FC2400472312 /* LiveReportRecord.h */,
 				CE6D63E11DB5FC2400472312 /* LiveReportRecord.m */,
 			);
