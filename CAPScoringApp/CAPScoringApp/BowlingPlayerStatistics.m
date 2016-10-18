@@ -131,7 +131,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK){
             
-            if (sqlite3_step(statement) == SQLITE_ROW)
+            while (sqlite3_step(statement) == SQLITE_ROW)
             {
                 BowlerStrickPitchRecord *record=[[BowlerStrickPitchRecord alloc]init];
                 
