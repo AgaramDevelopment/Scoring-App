@@ -154,8 +154,6 @@
         
         LiveReportRecord *record = [_fixturesResultArray objectAtIndex:indexPath.row];
         
-        cell.lbl_team_a_name.text = record.teamAname;
-        cell.lbl_team_b_name.text = record.teamBname;
         
     
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -172,15 +170,32 @@
         cell.lbl_week_day.text=[formatter stringFromDate:date];
         
         cell.lbl_match_type.text = record.matchTypeName;
+        
+        
         [self setImage:record.teamAcode :cell.img_team_a_logo ];
         [self setImage:record.teamBcode :cell.lbl_team_b_logo ];
+        
+        cell.lbl_team_a_name.text = record.teamAname;
+        cell.lbl_team_b_name.text = record.teamBname;
         
         
         NSMutableArray* objInniningsarray=[[[DBManager alloc]init] FETCHSEALLINNINGSSCOREDETAILS:record.competitionCode MATCHCODE:record.matchCode];
         
         if(objInniningsarray.count>0){
             
+            
+            
             FetchSEPageLoadRecord *objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
+            
+            if(![objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME isEqualToString:record.teamAshortName]){
+                [self setImage:record.teamAcode :cell.lbl_team_b_logo ];
+                [self setImage:record.teamBcode :cell.img_team_a_logo ];
+                
+                cell.lbl_team_a_name.text = record.teamBname;
+                cell.lbl_team_b_name.text = record.teamAname;
+            }
+                
+            
             
             if([MuliteDayMatchtype containsObject:record.matchTypeCode])
             {
@@ -265,12 +280,9 @@
         cell.lbl_team_b_fst_inn_over.text = @"";
         cell.lbl_team_a_sec_inn_over.text = @"";
         cell.lbl_team_b_sec_inn_over.text = @"";
-        
         ResultReportRecord *record = [_fixturesResultArray objectAtIndex:indexPath.row];
         
-        cell.lbl_team_a_name.text = record.teamAname;
-        cell.lbl_team_b_name.text = record.teamBname;
-        cell.lbl_match_status.text = record.comments;
+         cell.lbl_match_status.text = record.comments;
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
@@ -287,6 +299,9 @@
         
         cell.lbl_match_type.text = record.matchTypeName;
         
+        cell.lbl_team_a_name.text = record.teamAname;
+        cell.lbl_team_b_name.text = record.teamBname;
+        
         [self setImage:record.teamAcode :cell.img_team_a_logo ];
         [self setImage:record.teamBcode :cell.lbl_team_b_logo ];
         
@@ -296,6 +311,14 @@
         if(objInniningsarray.count>0){
             
             FetchSEPageLoadRecord *objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
+            
+            if(![objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME isEqualToString:record.teamAshortName]){
+                [self setImage:record.teamAcode :cell.lbl_team_b_logo ];
+                [self setImage:record.teamBcode :cell.img_team_a_logo ];
+                
+                cell.lbl_team_a_name.text = record.teamBname;
+                cell.lbl_team_b_name.text = record.teamAname;
+            }
             
             if([MuliteDayMatchtype containsObject:record.matchTypeCode])
             {
