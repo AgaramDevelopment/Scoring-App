@@ -134,7 +134,20 @@
              cell = self.livematchCell;
             //self.batsManHeaderCell = nil;
          }
+        
+        cell.lbl_team_b_and.text = @"";
+        cell.lbl_team_a_and.text = @"";
         cell.lbl_match_status.text = @"";
+        cell.lbl_team_a_fst_inn_score.text = @"";
+        cell.lbl_team_b_fst_inn_score.text = @"";
+        cell.lbl_team_a_sec_inn_score.text = @"";
+        cell.lbl_team_b_sec_inn_score.text = @"";
+        cell.lbl_team_a_fst_inn_over.text = @"";
+        cell.lbl_team_b_fst_inn_over.text = @"";
+        cell.lbl_team_a_sec_inn_over.text = @"";
+        cell.lbl_team_b_sec_inn_over.text = @"";
+
+        
     [cell setBackgroundColor:[UIColor clearColor]];
     //tableView.allowsSelection = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -186,6 +199,7 @@
                 
                 if(![objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqual:@""])
                 {
+                    cell.lbl_team_a_and.text=@"&";
                     cell.lbl_team_a_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.THIRDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
                     cell.lbl_team_a_sec_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.THIRDINNINGSOVERS];
                 }
@@ -196,6 +210,7 @@
                 }
                 if(![objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME isEqual:@""])
                 {
+                    cell.lbl_team_b_and.text=@"&";
                     cell.lbl_team_b_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FOURTHINNINGSTOTAL,objfetchSEPageLoadRecord.FOURTHINNINGSWICKET];
                     cell.lbl_team_b_sec_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FOURTHINNINGSOVERS];
                 }
@@ -239,6 +254,17 @@
         //tableView.allowsSelection = NO;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+        cell.lbl_team_b_and.text = @"";
+        cell.lbl_team_a_and.text = @"";
+        cell.lbl_match_status.text = @"";
+        cell.lbl_team_a_fst_inn_score.text = @"";
+        cell.lbl_team_b_fst_inn_score.text = @"";
+        cell.lbl_team_a_sec_inn_score.text = @"";
+        cell.lbl_team_b_sec_inn_score.text = @"";
+        cell.lbl_team_a_fst_inn_over.text = @"";
+        cell.lbl_team_b_fst_inn_over.text = @"";
+        cell.lbl_team_a_sec_inn_over.text = @"";
+        cell.lbl_team_b_sec_inn_over.text = @"";
         
         ResultReportRecord *record = [_fixturesResultArray objectAtIndex:indexPath.row];
         
@@ -288,6 +314,7 @@
                 
                 if(![objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqual:@""])
                 {
+                    cell.lbl_team_a_and.text=@"&";
                     cell.lbl_team_a_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.THIRDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
                     cell.lbl_team_a_sec_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.THIRDINNINGSOVERS];
                 }
@@ -298,6 +325,7 @@
                 }
                 if(![objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME isEqual:@""])
                 {
+                    cell.lbl_team_b_and.text=@"&";
                     cell.lbl_team_b_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FOURTHINNINGSTOTAL,objfetchSEPageLoadRecord.FOURTHINNINGSWICKET];
                     cell.lbl_team_b_sec_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FOURTHINNINGSOVERS];
                 }
