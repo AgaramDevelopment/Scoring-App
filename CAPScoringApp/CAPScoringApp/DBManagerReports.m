@@ -13,6 +13,7 @@
 #import "LiveReportRecord.h"
 #import "ResultReportRecord.h"
 #import "PlayingSquadRecords.h"
+#import "EventRecord.h"
 
 @implementation DBManagerReports
 

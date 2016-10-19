@@ -14,7 +14,7 @@
 #import "FixtureReportRecord.h"
 #import "LiveReportRecord.h"
 #import "FixtureReportRecord.h"
-#import "ChartVC.h"
+#import "ReportVC.h"
 #import "DBManager.h"
 #import "FetchSEPageLoadRecord.h"
 #import "EventRecord.h"
@@ -24,6 +24,7 @@
 #import "ReportVC.h"
 #import "PlayingSquadRecords.h"
 #import "PlayingSquadVC.h"
+#import "EventRecord.h"
 
 @interface FixtureAndResultsVC ()
 {
