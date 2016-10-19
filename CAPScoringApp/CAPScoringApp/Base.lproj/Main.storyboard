@@ -3285,6 +3285,9 @@
                                                         <include reference="YzV-V4-oEP"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="torunament_click:" destination="uP8-qy-8xi" eventType="touchUpInside" id="4me-ZA-FvG"/>
+                                                </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dropDown" translatesAutoresizingMaskIntoConstraints="NO" id="DrK-cx-POc">
                                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
@@ -3498,6 +3501,7 @@
                         <viewControllerLayoutGuide type="bottom" id="Qg0-Ar-kAp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Lyl-E7-BoL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZZ-nZ-Axa">

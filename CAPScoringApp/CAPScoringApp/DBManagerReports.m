@@ -256,6 +256,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3 *dataBase;
     const char *stmt;
     sqlite3_stmt *statement;
+    EventRecord *allEvent=[[EventRecord alloc]init];
+    //            record.id=(int)sqlite3_column_int(statement, 0);
+    allEvent.competitioncode=@"";
+    allEvent.competitionname=@"All";
+    allEvent.recordstatus=@"";
+    [eventArray addObject:allEvent];
+
     if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
     {
         //AND MATCHSTATUS IN('MSC123','MSC281')
