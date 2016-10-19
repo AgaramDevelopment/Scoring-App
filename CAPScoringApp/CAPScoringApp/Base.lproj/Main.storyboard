@@ -173,6 +173,7 @@
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-MEDIUM.TTF">
             <string>Rajdhani-Medium</string>
@@ -247,7 +248,6 @@
             <string>Rajdhani-Regular</string>
         </mutableArray>
         <mutableArray key="RAJDHANI-SEMIBOLD.TTF">
-            <string>Rajdhani-Semibold</string>
             <string>Rajdhani-Semibold</string>
             <string>Rajdhani-Semibold</string>
             <string>Rajdhani-Semibold</string>
@@ -3254,7 +3254,7 @@
                                                     </constraint>
                                                     <constraint firstAttribute="height" constant="44" id="tpC-L5-FIV"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="18"/>
+                                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="21"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="default">
@@ -3478,6 +3478,8 @@
                         <outlet property="Fixture_Btn" destination="AEJ-MU-VSM" id="XZc-MJ-fJr"/>
                         <outlet property="Live_Btn" destination="3g1-aW-nmy" id="dKW-if-Z6U"/>
                         <outlet property="Result_Btn" destination="yWw-RU-oru" id="kVM-NH-CdH"/>
+                        <outlet property="btn_compitionselect" destination="deE-EB-KPW" id="gXH-zi-2br"/>
+                        <outlet property="lbl_compition" destination="kZt-0Y-JzL" id="ag6-YV-MtJ"/>
                         <outlet property="matchListview" destination="MWO-WG-qVb" id="3GT-de-rfc"/>
                         <outlet property="sepratorYposition" destination="YDl-Kn-ebT" id="Bd1-j9-GMD"/>
                         <outlet property="sepratorlbl" destination="0ae-go-quw" id="jUV-AI-5Fa"/>
@@ -3486,6 +3488,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xkl-EK-o6A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1158.75" y="-1454.25"/>
+        </scene>
+        <!--ChartVC-->
+        <scene sceneID="me7-5a-Lcv">
+            <objects>
+                <viewController storyboardIdentifier="ChartVC" id="3ig-vI-MCP" customClass="ChartVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7wG-1A-R2g"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qg0-Ar-kAp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Lyl-E7-BoL">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZZ-nZ-Axa">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="BO0-Iv-E5B"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="BO0-Iv-E5B"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="BO0-Iv-E5B"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DZZ-nZ-Axa" firstAttribute="top" secondItem="7wG-1A-R2g" secondAttribute="bottom" constant="70" id="RmJ-xd-HNF"/>
+                            <constraint firstItem="DZZ-nZ-Axa" firstAttribute="leading" secondItem="Lyl-E7-BoL" secondAttribute="leading" id="mL1-Sv-d7S"/>
+                            <constraint firstAttribute="trailing" secondItem="DZZ-nZ-Axa" secondAttribute="trailing" id="tvl-qX-yTp"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="DZZ-nZ-Axa"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="RmJ-xd-HNF"/>
+                                <exclude reference="mL1-Sv-d7S"/>
+                                <exclude reference="tvl-qX-yTp"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="DZZ-nZ-Axa"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="RmJ-xd-HNF"/>
+                                <include reference="mL1-Sv-d7S"/>
+                                <include reference="tvl-qX-yTp"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
+                    <connections>
+                        <outlet property="chartList_view" destination="DZZ-nZ-Axa" id="blF-7j-byv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JKb-Oj-SHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1692.75" y="-1614"/>
         </scene>
         <!--Scor EnginVC-->
         <scene sceneID="MvX-gf-qcU">

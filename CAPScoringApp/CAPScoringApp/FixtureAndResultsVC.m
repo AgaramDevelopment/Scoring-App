@@ -17,8 +17,7 @@
 #import "ResultReportRecord.h"
 #import "FixtureReportRecord.h"
 #import "ResultReportRecord.h"
-#import "DBManager.h"
-#import "FetchSEPageLoadRecord.h"
+#import "ChartVC.h"
 
 @interface FixtureAndResultsVC ()
 {
@@ -354,12 +353,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    Yourstring=[catagorry objectAtIndex:indexPath.row];
-//    
-//    //Pushing next view
-//    cntrSecondViewController *cntrinnerService = [[cntrSecondViewController alloc] initWithNibName:@"cntrSecondViewController" bundle:nil];
-//    [self.navigationController pushViewController:cntrinnerService animated:YES];
-    
+    ChartVC*TETS =  (ChartVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ChartVC"];
+    [self.navigationController pushViewController:TETS animated:YES];
 }
 - (IBAction)btn_back:(id)sender {
     
