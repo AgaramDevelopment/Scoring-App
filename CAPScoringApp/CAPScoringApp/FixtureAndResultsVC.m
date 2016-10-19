@@ -22,13 +22,14 @@
 
 @interface FixtureAndResultsVC ()
 {
-     CustomNavigationVC *objCustomNavigation;
+    CustomNavigationVC *objCustomNavigation;
     
     BOOL isLive;
     BOOL isResult;
     BOOL isFixture;
     DBManagerReports *objDBManagerReports;
-    
+    NSArray *MuliteDayMatchtype;
+    UITableView* rbwTableview;
 }
 
 @property (nonatomic,strong) NSMutableArray *fixturesResultArray;
@@ -38,8 +39,12 @@
 
 @implementation FixtureAndResultsVC
 
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
+    
     //self.CommonArray =[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4", nil];
     
     isLive =YES;
@@ -49,9 +54,14 @@
     
 
     [self customnavigationmethod];
-     self.sepratorYposition.constant =self.view.frame.size.width/2.5;
+    
     
     [self didClickLiveBtn:0];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.sepratorYposition.constant =self.view.frame.size.width/2.5;
 }
 -(void)customnavigationmethod
 {
@@ -122,6 +132,68 @@
         cell.lbl_match_type.text = record.matchTypeName;
         [self setImage:record.teamAcode :cell.img_team_a_logo ];
         [self setImage:record.teamBcode :cell.lbl_team_b_logo ];
+        
+        
+        NSMutableArray* objInniningsarray=[[[DBManager alloc]init] FETCHSEALLINNINGSSCOREDETAILS:record.competitionCode MATCHCODE:record.matchCode];
+        
+        if(objInniningsarray.count>0){
+            
+            FetchSEPageLoadRecord *objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
+            
+            if([MuliteDayMatchtype containsObject:record.matchTypeCode])
+            {
+                cell.lbl_team_a_fst_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FIRSTINNINGSTOTAL,objfetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+                cell.lbl_team_a_fst_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+                
+                if(![objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@""]){
+                    cell.lbl_team_b_fst_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+                    cell.lbl_team_b_fst_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
+                }else{
+                    cell.lbl_team_b_fst_inn_score.text=@"";
+                    cell.lbl_team_b_fst_inn_over.text=@"";
+                    
+                }
+                
+                
+                if(![objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqual:@""])
+                {
+                    cell.lbl_team_a_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.THIRDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+                    cell.lbl_team_a_sec_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.THIRDINNINGSOVERS];
+                }
+                else
+                {
+                    cell.lbl_team_a_sec_inn_score.text=@"";
+                    cell.lbl_team_a_sec_inn_over.text=@"";
+                }
+                if(![objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME isEqual:@""])
+                {
+                    cell.lbl_team_b_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FOURTHINNINGSTOTAL,objfetchSEPageLoadRecord.FOURTHINNINGSWICKET];
+                    cell.lbl_team_b_sec_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FOURTHINNINGSOVERS];
+                }
+                else{
+                    cell.lbl_team_b_sec_inn_score.text=@"";
+                    cell.lbl_team_b_sec_inn_over.text=@"";
+                }
+                
+                
+            }
+            else
+            {
+                cell.lbl_team_a_fst_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FIRSTINNINGSTOTAL,objfetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+                cell.lbl_team_a_fst_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+                
+                if(![objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@""]){
+                    cell.lbl_team_b_fst_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+                    cell.lbl_team_b_fst_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
+                }else{
+                    cell.lbl_team_b_fst_inn_score.text=@"";
+                    cell.lbl_team_b_fst_inn_over.text=@"";
+                    
+                }
+                
+            }
+            
+        }
     
     return cell;
     
@@ -163,6 +235,67 @@
         [self setImage:record.teamAcode :cell.img_team_a_logo ];
         [self setImage:record.teamBcode :cell.lbl_team_b_logo ];
         
+        
+        NSMutableArray* objInniningsarray=[[[DBManager alloc]init] FETCHSEALLINNINGSSCOREDETAILS:record.competitionCode MATCHCODE:record.matchCode];
+        
+        if(objInniningsarray.count>0){
+            
+            FetchSEPageLoadRecord *objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
+            
+            if([MuliteDayMatchtype containsObject:record.matchTypeCode])
+            {
+                cell.lbl_team_a_fst_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FIRSTINNINGSTOTAL,objfetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+                cell.lbl_team_a_fst_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+                
+                if(![objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@""]){
+                    cell.lbl_team_b_fst_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+                    cell.lbl_team_b_fst_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
+                }else{
+                    cell.lbl_team_b_fst_inn_score.text=@"";
+                    cell.lbl_team_b_fst_inn_over.text=@"";
+                    
+                }
+                
+                
+                if(![objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqual:@""])
+                {
+                    cell.lbl_team_a_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.THIRDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+                    cell.lbl_team_a_sec_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.THIRDINNINGSOVERS];
+                }
+                else
+                {
+                    cell.lbl_team_a_sec_inn_score.text=@"";
+                    cell.lbl_team_a_sec_inn_over.text=@"";
+                }
+                if(![objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME isEqual:@""])
+                {
+                    cell.lbl_team_b_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FOURTHINNINGSTOTAL,objfetchSEPageLoadRecord.FOURTHINNINGSWICKET];
+                    cell.lbl_team_b_sec_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FOURTHINNINGSOVERS];
+                }
+                else{
+                    cell.lbl_team_b_sec_inn_score.text=@"";
+                    cell.lbl_team_b_sec_inn_over.text=@"";
+                }
+                
+                
+            }
+            else
+            {
+                cell.lbl_team_a_fst_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FIRSTINNINGSTOTAL,objfetchSEPageLoadRecord.FIRSTINNINGSWICKET];
+                cell.lbl_team_a_fst_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FIRSTINNINGSOVERS];
+                
+                if(![objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqual:@""]){
+                    cell.lbl_team_b_fst_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+                    cell.lbl_team_b_fst_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
+                }else{
+                    cell.lbl_team_b_fst_inn_score.text=@"";
+                    cell.lbl_team_b_fst_inn_over.text=@"";
+                    
+                }
+                
+            }
+            
+        }
         
         return cell;
     }
@@ -261,7 +394,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
     _fixturesResultArray =[objDBManagerReports fetchLiveMatches:@"":userCode];
-    
+     self.sepratorYposition.constant =self.Live_Btn.frame.origin.x+30;
     isLive = YES;
     isResult = NO;
     isFixture = NO;
@@ -276,7 +409,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
     _fixturesResultArray =[objDBManagerReports fetchResultsMatches:@"":userCode];
-    
+    self.sepratorYposition.constant =self.Result_Btn.frame.origin.x+30;
     isLive = NO;
     isResult = YES;
     isFixture = NO;
@@ -289,7 +422,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
     _fixturesResultArray =[objDBManagerReports FixturesData :@"":userCode];
-
+ self.sepratorYposition.constant =self.Fixture_Btn.frame.origin.x+30;
     
     isLive = NO;
     isResult = NO;
@@ -305,7 +438,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void) setImage:(NSString *)teamCode:(UIImageView *)teamLogoImg {
+-(void) setImage:(NSString *)teamCode :(UIImageView *)teamLogoImg {
  
     
     NSFileManager *fileManager = [NSFileManager defaultManager];

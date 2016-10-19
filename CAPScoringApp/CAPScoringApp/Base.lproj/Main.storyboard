@@ -257,7 +257,6 @@
             <string>Rajdhani-Semibold</string>
             <string>Rajdhani-Semibold</string>
             <string>Rajdhani-Semibold</string>
-            <string>Rajdhani-Semibold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -3256,10 +3255,12 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZt-0Y-JzL">
                                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="349" id="n4B-Az-0ma"/>
+                                                    <constraint firstAttribute="width" constant="349" id="n4B-Az-0ma">
+                                                        <variation key="heightClass=regular-widthClass=regular" constant="340"/>
+                                                    </constraint>
                                                     <constraint firstAttribute="height" constant="44" id="tpC-L5-FIV"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="18"/>
+                                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="21"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                                 <variation key="default">
@@ -3313,14 +3314,22 @@
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstItem="DrK-cx-POc" firstAttribute="top" secondItem="MWO-WG-qVb" secondAttribute="top" constant="9" id="FJw-3B-MGf"/>
+                                            <constraint firstItem="DrK-cx-POc" firstAttribute="top" secondItem="MWO-WG-qVb" secondAttribute="top" constant="9" id="FJw-3B-MGf">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="15"/>
+                                            </constraint>
                                             <constraint firstAttribute="trailing" secondItem="deE-EB-KPW" secondAttribute="trailing" id="H3x-a4-o6e"/>
                                             <constraint firstAttribute="width" constant="420" id="HkV-qa-8ku"/>
                                             <constraint firstAttribute="height" constant="70" id="JP6-aB-TMJ"/>
-                                            <constraint firstItem="kZt-0Y-JzL" firstAttribute="top" secondItem="MWO-WG-qVb" secondAttribute="top" constant="7" id="JZc-ec-xR9"/>
-                                            <constraint firstItem="kZt-0Y-JzL" firstAttribute="leading" secondItem="MWO-WG-qVb" secondAttribute="leading" constant="1" id="gKk-BK-iMB"/>
+                                            <constraint firstItem="kZt-0Y-JzL" firstAttribute="top" secondItem="MWO-WG-qVb" secondAttribute="top" constant="7" id="JZc-ec-xR9">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="13"/>
+                                            </constraint>
+                                            <constraint firstItem="kZt-0Y-JzL" firstAttribute="leading" secondItem="MWO-WG-qVb" secondAttribute="leading" constant="1" id="gKk-BK-iMB">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="10"/>
+                                            </constraint>
                                             <constraint firstAttribute="trailing" secondItem="DrK-cx-POc" secondAttribute="trailing" constant="10" id="jlm-ra-WcY"/>
-                                            <constraint firstItem="deE-EB-KPW" firstAttribute="top" secondItem="MWO-WG-qVb" secondAttribute="top" constant="7" id="lza-TH-uZd"/>
+                                            <constraint firstItem="deE-EB-KPW" firstAttribute="top" secondItem="MWO-WG-qVb" secondAttribute="top" constant="7" id="lza-TH-uZd">
+                                                <variation key="heightClass=regular-widthClass=regular" constant="13"/>
+                                            </constraint>
                                             <constraint firstItem="deE-EB-KPW" firstAttribute="leading" secondItem="MWO-WG-qVb" secondAttribute="leading" id="u0j-Xl-Fvu"/>
                                         </constraints>
                                         <variation key="default">
@@ -3475,6 +3484,8 @@
                         <outlet property="Fixture_Btn" destination="AEJ-MU-VSM" id="XZc-MJ-fJr"/>
                         <outlet property="Live_Btn" destination="3g1-aW-nmy" id="dKW-if-Z6U"/>
                         <outlet property="Result_Btn" destination="yWw-RU-oru" id="kVM-NH-CdH"/>
+                        <outlet property="btn_compitionselect" destination="deE-EB-KPW" id="gXH-zi-2br"/>
+                        <outlet property="lbl_compition" destination="kZt-0Y-JzL" id="ag6-YV-MtJ"/>
                         <outlet property="matchListview" destination="MWO-WG-qVb" id="3GT-de-rfc"/>
                         <outlet property="sepratorYposition" destination="YDl-Kn-ebT" id="Bd1-j9-GMD"/>
                         <outlet property="sepratorlbl" destination="0ae-go-quw" id="jUV-AI-5Fa"/>
@@ -3483,6 +3494,72 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xkl-EK-o6A" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1158.75" y="-1454.25"/>
+        </scene>
+        <!--ChartVC-->
+        <scene sceneID="me7-5a-Lcv">
+            <objects>
+                <viewController storyboardIdentifier="ChartVC" id="3ig-vI-MCP" customClass="ChartVC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7wG-1A-R2g"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qg0-Ar-kAp"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Lyl-E7-BoL">
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZZ-nZ-Axa">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="BO0-Iv-E5B"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="BO0-Iv-E5B"/>
+                                    </mask>
+                                </variation>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <mask key="constraints">
+                                        <include reference="BO0-Iv-E5B"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="DZZ-nZ-Axa" firstAttribute="top" secondItem="7wG-1A-R2g" secondAttribute="bottom" constant="70" id="RmJ-xd-HNF"/>
+                            <constraint firstItem="DZZ-nZ-Axa" firstAttribute="leading" secondItem="Lyl-E7-BoL" secondAttribute="leading" id="mL1-Sv-d7S"/>
+                            <constraint firstAttribute="trailing" secondItem="DZZ-nZ-Axa" secondAttribute="trailing" id="tvl-qX-yTp"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="DZZ-nZ-Axa"/>
+                            </mask>
+                            <mask key="constraints">
+                                <exclude reference="RmJ-xd-HNF"/>
+                                <exclude reference="mL1-Sv-d7S"/>
+                                <exclude reference="tvl-qX-yTp"/>
+                            </mask>
+                        </variation>
+                        <variation key="heightClass=regular-widthClass=regular">
+                            <mask key="subviews">
+                                <include reference="DZZ-nZ-Axa"/>
+                            </mask>
+                            <mask key="constraints">
+                                <include reference="RmJ-xd-HNF"/>
+                                <include reference="mL1-Sv-d7S"/>
+                                <include reference="tvl-qX-yTp"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="600"/>
+                    <connections>
+                        <outlet property="chartList_view" destination="DZZ-nZ-Axa" id="blF-7j-byv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JKb-Oj-SHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1692.75" y="-1614"/>
         </scene>
         <!--Scor EnginVC-->
         <scene sceneID="MvX-gf-qcU">

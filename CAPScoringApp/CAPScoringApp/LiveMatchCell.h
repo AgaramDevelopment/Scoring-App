@@ -25,5 +25,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_team_a_fst_inn_over;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_team_a_sec_inn_score;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_team_a_sec_inn_over;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_team_b_and;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_team_a_and;
+@property (strong, nonatomic) IBOutlet UILabel *lbl_match_status;
 
 @end
