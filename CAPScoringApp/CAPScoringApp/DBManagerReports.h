@@ -20,5 +20,6 @@
 
 -(NSMutableArray *)fetchPlayers:(NSString*)matchCode;
 
+-(NSMutableArray *)retrieveTorunamentData: (NSString *) userCode;
 
 @end

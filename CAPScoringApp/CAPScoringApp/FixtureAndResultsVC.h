@@ -34,5 +34,6 @@
 @property (nonatomic,strong) IBOutlet UIButton * Live_Btn;
 
 @property (nonatomic,strong) IBOutlet UIButton * Fixture_Btn;
+- (IBAction)torunament_click:(id)sender;
 
 @end

@@ -6,17 +6,17 @@
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
-#import "ChartVC.h"
+#import "ReportVC.h"
 #import "CustomNavigationVC.h"
 
-@interface ChartVC ()
+@interface ReportVC ()
 {
     CustomNavigationVC * objCustomNavigation;
 }
 
 @end
 
-@implementation ChartVC
+@implementation ReportVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -37,36 +37,42 @@
 -(void)CreateChartList
 {
 //    [self.view_BallTicker.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-    UIScrollView *ScrollViewer = [[UIScrollView alloc] initWithFrame:CGRectMake(self.chartList_view.frame.origin.x,5, self.view.frame.size.width,self.chartList_view.frame.size.height)];
-    ScrollViewer.showsHorizontalScrollIndicator=NO;
+   // UIScrollView *ScrollViewer = [[UIScrollView alloc] init ];
+   // self.scrolllistview.showsHorizontalScrollIndicator=YES;
+    //self.scrolllistview.showsVerticalScrollIndicator=YES;
     
-    [ScrollViewer setBackgroundColor:[UIColor redColor]];
-    CGFloat xposition = 0;
+
+
+    //[ScrollViewer setBackgroundColor:[UIColor redColor]];
+    //CGFloat xposition = 0;
     
     NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report", nil];
 
         
-        
+    
         for(int i = 0; i < objhartlistArray.count; i++)
         {
             NSString *dicBallKey = [objhartlistArray objectAtIndex:i];
             
-            UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(i * 100+10, 0,100, 40)];
+            UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(i * 100+10,10,100, 40)];
             
             btnborder.clipsToBounds = NO;
             btnborder.layer.borderWidth = 3.5;
             btnborder.layer.borderColor = [UIColor greenColor].CGColor;
             btnborder.layer.masksToBounds = YES;
             [btnborder setTitle:[NSString stringWithFormat:@"%@",dicBallKey] forState:UIControlStateNormal];
-            [ScrollViewer addSubview:btnborder];
+            [self.scrolllistview addSubview:btnborder];
 
         }
-    
+   // [ScrollViewer layoutIfNeeded];
         //To Create ball tiker for each row.
-    
-    [ScrollViewer setContentSize:CGSizeMake(xposition, 1000)];
-     
-       [self.chartList_view addSubview:ScrollViewer];
+    //[ScrollViewer setFrame:CGRectMake(0,ScrollViewer.frame.origin.y,405, [ScrollViewer bounds].size.height)];
+    //[ScrollViewer setContentOffset:CGPointMake(ScrollViewer.contentSize.width- ScrollViewer.frame.size.width, 0) animated:YES];
+   // ScrollViewer.frame = CGRectMake(self.chartList_view.frame.origin.x,400,3000,70);
+
+    [self.scrolllistview setContentSize:CGSizeMake(16*100,70)];
+
+      // [self.view addSubview:ScrollViewer];
 }
 
 - (IBAction)btn_back:(id)sender {
