@@ -12,6 +12,7 @@
 #import "LiveMatchCell.h"
 #import "FixtureTVC.h"
 #import "DBManagerReports.h"
+#import "DBManager.h"
 #import "FixtureReportRecord.h"
 #import "LiveReportRecord.h"
 #import "ResultReportRecord.h"
@@ -19,6 +20,8 @@
 #import "ResultReportRecord.h"
 #import "PlayingSquadRecords.h"
 #import "PlayingSquadVC.h"
+#import "ChartVC.h"
+#import "FetchSEPageLoadRecord.h"
 
 @interface FixtureAndResultsVC ()
 {
@@ -99,7 +102,7 @@
     
     if(isLive == YES)
     {
-          LiveMatchCell *cell = (LiveMatchCell *)[tableView dequeueReusableCellWithIdentifier:LiveMatch];
+        LiveMatchCell *cell = (LiveMatchCell *)[tableView dequeueReusableCellWithIdentifier:LiveMatch];
          if (cell == nil)
          {
             [[NSBundle mainBundle] loadNibNamed:@"LiveMatchCell" owner:self options:nil];
@@ -378,6 +381,15 @@
    // PlayingSquadVC *playing = [[PlayingSquadVC alloc] initWithNibName:@"playingSquadId" bundle:nil];
     [self.navigationController pushViewController:detail animated:YES];
         
+    }else if (isResult ==YES){
+    
+    ChartVC*TETS =  (ChartVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ChartVC"];
+    [self.navigationController pushViewController:TETS animated:YES];
+    }else if (isLive == YES){
+        
+        ChartVC*TETS =  (ChartVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ChartVC"];
+        [self.navigationController pushViewController:TETS animated:YES];
+    }
     
 }
 - (IBAction)btn_back:(id)sender {
