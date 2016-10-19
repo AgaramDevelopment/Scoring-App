@@ -12,6 +12,7 @@
 #import "FixtureReportRecord.h"
 #import "LiveReportRecord.h"
 #import "ResultReportRecord.h"
+#import "PlayingSquadRecords.h"
 
 @implementation DBManagerReports
 
@@ -231,6 +232,53 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.matchTypeName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
                 record.matchTypeCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
                 record.matchStatus = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
+                
+                [eventArray addObject:record];
+                
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        
+        
+        sqlite3_close(dataBase);
+        
+    }
+    return eventArray;
+    
+}
+
+//Playing Squad------------------------------------------------------------------------------------
+
+-(NSMutableArray *)fetchPlayers:(NSString*)matchCode  {
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    
+    NSString *dbPath = [self getDBPath];
+    
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        
+        
+    NSString *query=[NSString stringWithFormat:@"SELECT PM.PLAYERNAME,MP.TEAMCODE,AT.TEAMNAME, ME.METASUBCODEDESCRIPTION AS PLAYERROLE, COUNT (CASE WHEN MP.PLAYINGORDER <11 THEN 'PLAYED' END) PLAYER FROM MATCHTEAMPLAYERDETAILS AS MP INNER JOIN PLAYERMASTER AS PM ON PM.PLAYERCODE = MP.PLAYERCODE INNER JOIN TEAMMASTER AT ON AT.TEAMCODE = MP.TEAMCODE INNER JOIN METADATA ME ON ME.METASUBCODE = PM.PLAYERROLE WHERE MP.RECORDSTATUS = 'MSC001' AND PM.RECORDSTATUS = 'MSC001' AND MP.MATCHCODE = '%@' GROUP BY PLAYINGORDER, PM.PLAYERNAME,MP.TEAMCODE,AT.TEAMNAME,ME.METASUBCODEDESCRIPTION ORDER BY MP.TEAMCODE",matchCode];
+        
+        
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                PlayingSquadRecords *record=[[PlayingSquadRecords alloc]init];
+                
+                record.playerName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.teamCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record.teamName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+    
+                record.playerRole=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record.player=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
                 
                 [eventArray addObject:record];
                 

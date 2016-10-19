@@ -17,6 +17,8 @@
 #import "ResultReportRecord.h"
 #import "FixtureReportRecord.h"
 #import "ResultReportRecord.h"
+#import "PlayingSquadRecords.h"
+#import "PlayingSquadVC.h"
 
 @interface FixtureAndResultsVC ()
 {
@@ -219,11 +221,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-//    Yourstring=[catagorry objectAtIndex:indexPath.row];
-//    
-//    //Pushing next view
-//    cntrSecondViewController *cntrinnerService = [[cntrSecondViewController alloc] initWithNibName:@"cntrSecondViewController" bundle:nil];
-//    [self.navigationController pushViewController:cntrinnerService animated:YES];
+    if (isFixture ==YES)
+    {
+    
+    NSMutableArray *mSetUp = [[NSMutableArray alloc]init];
+    
+    FixtureReportRecord *objFixtureRecord=(FixtureReportRecord*)[_fixturesResultArray objectAtIndex:indexPath.row];
+    
+    [mSetUp addObject:objFixtureRecord];
+    
+    NSIndexPath *selectedIndexPath = [tableView indexPathForSelectedRow];
+    
+    
+    
+    PlayingSquadVC*detail = [[PlayingSquadVC alloc]init];
+    
+    detail =  (PlayingSquadVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"playingSquadID"];
+    
+    NSString*matchCode = objFixtureRecord.matchCode;
+   
+    detail.matchCode = matchCode;
+    
+   // PlayingSquadVC *playing = [[PlayingSquadVC alloc] initWithNibName:@"playingSquadId" bundle:nil];
+    [self.navigationController pushViewController:detail animated:YES];
+    }
     
 }
 - (IBAction)btn_back:(id)sender {
