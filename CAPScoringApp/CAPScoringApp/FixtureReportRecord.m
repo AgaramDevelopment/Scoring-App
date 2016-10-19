@@ -29,4 +29,14 @@
 @synthesize matchTypeCode;
 @synthesize matchStatus;
 
+
+@synthesize playerName;
+@synthesize teamCode;
+@synthesize teamName;
+@synthesize playerRole;
+@synthesize player;
+
+
+
+
 @end

@@ -8,13 +8,11 @@
 
 #import "FixtureAndResultsVC.h"
 #import "CustomNavigationVC.h"
-#import "ResultMatchCell.h"
 #import "LiveMatchCell.h"
 #import "FixtureTVC.h"
 #import "DBManagerReports.h"
 #import "FixtureReportRecord.h"
 #import "LiveReportRecord.h"
-#import "ResultReportRecord.h"
 #import "FixtureReportRecord.h"
 #import "ResultReportRecord.h"
 #import "DBManager.h"
@@ -23,17 +21,20 @@
 
 @interface FixtureAndResultsVC ()
 {
-     CustomNavigationVC *objCustomNavigation;
+    CustomNavigationVC *objCustomNavigation;
     
     BOOL isLive;
     BOOL isResult;
     BOOL isFixture;
+    BOOL isFilter;
+    NSString *comptnCode;
     DBManagerReports *objDBManagerReports;
     NSArray *MuliteDayMatchtype;
-
+    UITableView* tournamentTableview;
 }
 
 @property (nonatomic,strong) NSMutableArray *fixturesResultArray;
+@property (nonatomic,strong) NSMutableArray *torunamentArray;
 
 
 @end
@@ -45,7 +46,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
-    
+    comptnCode= @"";
+    self.lbl_compition.text = @"All";
+
     //self.CommonArray =[[NSMutableArray alloc]initWithObjects:@"1",@"2",@"3",@"4", nil];
     
     isLive =YES;
@@ -83,8 +86,11 @@
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
+    if(tableView == tournamentTableview){
+        return self.torunamentArray.count;
+    }else{
     return [_fixturesResultArray count];    //count number of row from counting array hear cataGorry is An Array
+    }
 }
 
 
@@ -94,11 +100,25 @@
 {
     static NSString * LiveMatch = @"LiveMatch";
     
-    static NSString * ResultMatch = @"ResultMatch";
     
     static NSString * FixtureMatch = @"FixtureMatch";
     
-    if(isLive == YES)
+    if(tableView == tournamentTableview){
+        //Other Cells
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        }
+        cell.backgroundColor = [UIColor clearColor];
+        
+        UIView *bgColorView = [[UIView alloc] init];
+        bgColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
+        cell.selectedBackgroundView = bgColorView;
+        EventRecord *evRec = [self.torunamentArray objectAtIndex:indexPath.row];
+        cell.textLabel.text = evRec.competitionname;
+        return cell;
+
+    }else if(isLive == YES)
     {
           LiveMatchCell *cell = (LiveMatchCell *)[tableView dequeueReusableCellWithIdentifier:LiveMatch];
          if (cell == nil)
@@ -107,6 +127,7 @@
              cell = self.livematchCell;
             //self.batsManHeaderCell = nil;
          }
+        cell.lbl_match_status.text = @"";
     [cell setBackgroundColor:[UIColor clearColor]];
     //tableView.allowsSelection = NO;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -201,9 +222,9 @@
     }
     else if (isResult ==YES)
     {
-        ResultMatchCell *cell = (ResultMatchCell *)[tableView dequeueReusableCellWithIdentifier:ResultMatch];
+        LiveMatchCell *cell = (LiveMatchCell *)[tableView dequeueReusableCellWithIdentifier:LiveMatch];
         if (cell == nil) {
-            [[NSBundle mainBundle] loadNibNamed:@"ResultMatchCell" owner:self options:nil];
+            [[NSBundle mainBundle] loadNibNamed:@"LiveMatchCell" owner:self options:nil];
             cell = self.resultmatchCell;
             //self.batsManHeaderCell = nil;
         }
@@ -216,7 +237,7 @@
         
         cell.lbl_team_a_name.text = record.teamAname;
         cell.lbl_team_b_name.text = record.teamBname;
-        
+        cell.lbl_match_status.text = record.comments;
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
@@ -348,9 +369,12 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    return 160;
-    
+ 
+    if(tableView == tournamentTableview){
+        return 40;
+    }else{
+        return 160;
+    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -371,7 +395,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
-    _fixturesResultArray =[objDBManagerReports fetchLiveMatches:@"":userCode];
+    _fixturesResultArray =[objDBManagerReports fetchLiveMatches:comptnCode==nil?@"":comptnCode :userCode];
      self.sepratorYposition.constant =self.Live_Btn.frame.origin.x+30;
     isLive = YES;
     isResult = NO;
@@ -386,7 +410,7 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
-    _fixturesResultArray =[objDBManagerReports fetchResultsMatches:@"":userCode];
+    _fixturesResultArray =[objDBManagerReports fetchResultsMatches:comptnCode==nil?@"": comptnCode :userCode];
     self.sepratorYposition.constant =self.Result_Btn.frame.origin.x+30;
     isLive = NO;
     isResult = YES;
@@ -399,7 +423,7 @@
     objDBManagerReports = [[DBManagerReports alloc]init];
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
-    _fixturesResultArray =[objDBManagerReports FixturesData :@"":userCode];
+    _fixturesResultArray =[objDBManagerReports FixturesData :comptnCode==nil?@"":comptnCode:userCode];
  self.sepratorYposition.constant =self.Fixture_Btn.frame.origin.x+30;
     
     isLive = NO;
@@ -437,4 +461,54 @@
 
 
 
+- (IBAction)torunament_click:(id)sender {
+    
+    if(isFilter){
+        isFilter = NO;
+    if(tournamentTableview!=nil){
+        [tournamentTableview removeFromSuperview];
+    }
+    }else{
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        NSString *userCode = [defaults objectForKey:@"userCode"];
+        
+        self.torunamentArray = [objDBManagerReports retrieveTorunamentData:userCode];
+        isFilter=YES;
+    tournamentTableview =[[UITableView alloc]initWithFrame:CGRectMake(175, 655,self.btn_compitionselect.frame.size.width,250)];
+    tournamentTableview.backgroundColor=[UIColor whiteColor];
+    tournamentTableview.separatorStyle = UITableViewCellSeparatorStyleNone;
+    [tournamentTableview setSeparatorColor:[UIColor whiteColor]];
+    
+    
+    tournamentTableview.dataSource = self;
+    tournamentTableview.delegate = self;
+    [self.view addSubview:tournamentTableview];
+    [tournamentTableview reloadData];
+    
+    }
+    
+    int indx=0;
+    int selectePosition = -1;
+    for (EventRecord *record in self.torunamentArray)
+    {
+        bool chk = ([[record competitioncode] isEqualToString:comptnCode]);
+        if (chk)
+        {
+            selectePosition = indx;
+            break;
+        }
+        indx ++;
+    }
+    
+    if(selectePosition!=-1){
+        
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:selectePosition inSection:0];
+        [tournamentTableview selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
+        
+        [tournamentTableview scrollToRowAtIndexPath:indexPath
+                            atScrollPosition:UITableViewScrollPositionTop
+                                    animated:YES];
+    }
+    
+}
 @end

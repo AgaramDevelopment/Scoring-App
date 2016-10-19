@@ -12,6 +12,7 @@
 #import "FixtureReportRecord.h"
 #import "LiveReportRecord.h"
 #import "ResultReportRecord.h"
+#import "PlayingSquadRecords.h"
 
 @implementation DBManagerReports
 
@@ -201,7 +202,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         NSString *filter = [NSString stringWithFormat:@" MR.COMPETITIONCODE='%@' AND ",competitionCode ];
         
-        NSString *query=[NSString stringWithFormat:@"SELECT MR.MATCHCODE,MR.MATCHNAME,MR.COMPETITIONCODE,MR.MATCHOVERCOMMENTS,MR.MATCHDATE,MR.GROUNDCODE,GM.GROUNDNAME,GM.CITY,MR.TEAMACODE,MR.TEAMBCODE ,TM.TEAMNAME AS TEAMANAME, TM1.TEAMNAME AS TEAMBNAME,TM.SHORTTEAMNAME AS TEAMASHORTNAME, TM1.SHORTTEAMNAME AS TEAMBSHORTNAME, MR.MATCHOVERS,MD.METASUBCODEDESCRIPTION AS MATCHTYPENAME, CP.MATCHTYPE AS MATCHTYPECODE, MR.MATCHSTATUS FROM MATCHREGISTRATION MR INNER JOIN TEAMMASTER TM ON TM.TEAMCODE = MR.TEAMACODE INNER JOIN TEAMMASTER TM1 ON TM1.TEAMCODE = MR.TEAMBCODE INNER JOIN GROUNDMASTER GM ON GM.GROUNDCODE = MR.GROUNDCODE INNER JOIN COMPETITION CP ON CP.COMPETITIONCODE = MR.COMPETITIONCODE INNER JOIN METADATA MD ON CP.MATCHTYPE = MD.METASUBCODE INNER JOIN  MATCHSCORERDETAILS MSD ON CP.COMPETITIONCODE = MSD.COMPETITIONCODE AND MSD.SCORERCODE = '%@' AND MSD.MATCHCODE = MR.MATCHCODE WHERE %@  MR.MATCHSTATUS in ('MSC125') GROUP BY MSD.MATCHCODE ORDER BY MATCHDATE ASC" ,userCode,[competitionCode isEqual:@""]?@"":filter];
+        NSString *query=[NSString stringWithFormat:@"SELECT MR.MATCHCODE,MR.MATCHNAME,MR.COMPETITIONCODE,MR.MATCHOVERCOMMENTS,MR.MATCHDATE,MR.GROUNDCODE,GM.GROUNDNAME,GM.CITY,MR.TEAMACODE,MR.TEAMBCODE ,TM.TEAMNAME AS TEAMANAME, TM1.TEAMNAME AS TEAMBNAME,TM.SHORTTEAMNAME AS TEAMASHORTNAME, TM1.SHORTTEAMNAME AS TEAMBSHORTNAME, MR.MATCHOVERS,MD.METASUBCODEDESCRIPTION AS MATCHTYPENAME, CP.MATCHTYPE AS MATCHTYPECODE, MR.MATCHSTATUS ,MRT.COMMENTS FROM MATCHREGISTRATION MR INNER JOIN TEAMMASTER TM ON TM.TEAMCODE = MR.TEAMACODE INNER JOIN TEAMMASTER TM1 ON TM1.TEAMCODE = MR.TEAMBCODE INNER JOIN GROUNDMASTER GM ON GM.GROUNDCODE = MR.GROUNDCODE INNER JOIN COMPETITION CP ON CP.COMPETITIONCODE = MR.COMPETITIONCODE INNER JOIN METADATA MD ON CP.MATCHTYPE = MD.METASUBCODE INNER JOIN  MATCHSCORERDETAILS MSD ON CP.COMPETITIONCODE = MSD.COMPETITIONCODE AND MSD.SCORERCODE = '%@' AND MSD.MATCHCODE = MR.MATCHCODE INNER JOIN  MATCHRESULT MRT ON CP.COMPETITIONCODE = MRT.COMPETITIONCODE  AND MRT.MATCHCODE = MR.MATCHCODE WHERE %@  MR.MATCHSTATUS in ('MSC125') GROUP BY MSD.MATCHCODE ORDER BY MATCHDATE ASC" ,userCode,[competitionCode isEqual:@""]?@"":filter];
         
         
         
@@ -231,6 +232,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.matchTypeName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
                 record.matchTypeCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
                 record.matchStatus = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
+                record.comments = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
                 
                 [eventArray addObject:record];
                 
@@ -246,6 +248,98 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return eventArray;
     
 }
+
+//Playing Squad------------------------------------------------------------------------------------
+
+-(NSMutableArray *)fetchPlayers:(NSString*)matchCode  {
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    
+    NSString *dbPath = [self getDBPath];
+    
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        
+        
+    NSString *query=[NSString stringWithFormat:@"SELECT PM.PLAYERNAME,MP.TEAMCODE,AT.TEAMNAME, ME.METASUBCODEDESCRIPTION AS PLAYERROLE, COUNT (CASE WHEN MP.PLAYINGORDER <11 THEN 'PLAYED' END) PLAYER FROM MATCHTEAMPLAYERDETAILS AS MP INNER JOIN PLAYERMASTER AS PM ON PM.PLAYERCODE = MP.PLAYERCODE INNER JOIN TEAMMASTER AT ON AT.TEAMCODE = MP.TEAMCODE INNER JOIN METADATA ME ON ME.METASUBCODE = PM.PLAYERROLE WHERE MP.RECORDSTATUS = 'MSC001' AND PM.RECORDSTATUS = 'MSC001' AND MP.MATCHCODE = '%@' GROUP BY PLAYINGORDER, PM.PLAYERNAME,MP.TEAMCODE,AT.TEAMNAME,ME.METASUBCODEDESCRIPTION ORDER BY MP.TEAMCODE",matchCode];
+        
+        
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                PlayingSquadRecords *record=[[PlayingSquadRecords alloc]init];
+                
+                record.playerName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.teamCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record.teamName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+    
+                record.playerRole=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record.player=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                
+                [eventArray addObject:record];
+                
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        
+        
+        sqlite3_close(dataBase);
+        
+    }
+    return eventArray;
+    
+}
+
+
+
+-(NSMutableArray *)retrieveTorunamentData: (NSString *) userCode{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    EventRecord *allEvent=[[EventRecord alloc]init];
+    //            record.id=(int)sqlite3_column_int(statement, 0);
+    allEvent.competitioncode=@"";
+    allEvent.competitionname=@"All";
+    allEvent.recordstatus=@"";
+    [eventArray addObject:allEvent];
+
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        //AND MATCHSTATUS IN('MSC123','MSC281')
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT  COM.COMPETITIONCODE,COM.COMPETITIONNAME,COM.RECORDSTATUS FROM COMPETITION COM INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE=COM.COMPETITIONCODE INNER JOIN MATCHSCORERDETAILS MATSC ON MR.COMPETITIONCODE=MATSC.COMPETITIONCODE AND MR.MATCHCODE=MATSC.MATCHCODE WHERE   MATSC.SCORERCODE='%@' GROUP BY   COM.COMPETITIONCODE,COM.COMPETITIONNAME,COM.RECORDSTATUS",userCode];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                EventRecord *record=[[EventRecord alloc]init];
+                //            record.id=(int)sqlite3_column_int(statement, 0);
+                record.competitioncode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.competitionname=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record.recordstatus=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                [eventArray addObject:record];
+                
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        
+        
+        sqlite3_close(dataBase);
+        
+    }
+    return eventArray;
+    
+}
+
 
 
 

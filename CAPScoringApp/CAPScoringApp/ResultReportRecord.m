@@ -27,5 +27,6 @@
 @synthesize matchTypeName;
 @synthesize matchTypeCode;
 @synthesize matchStatus;
+@synthesize comments;
 
 @end
