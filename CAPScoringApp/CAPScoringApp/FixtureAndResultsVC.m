@@ -22,14 +22,14 @@
 
 @interface FixtureAndResultsVC ()
 {
-     CustomNavigationVC *objCustomNavigation;
+    CustomNavigationVC *objCustomNavigation;
     
     BOOL isLive;
     BOOL isResult;
     BOOL isFixture;
     DBManagerReports *objDBManagerReports;
     NSArray *MuliteDayMatchtype;
-
+    UITableView* rbwTableview;
 }
 
 @property (nonatomic,strong) NSMutableArray *fixturesResultArray;
