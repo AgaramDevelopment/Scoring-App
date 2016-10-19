@@ -23,6 +23,9 @@
 
 
 @property (nonatomic,strong) IBOutlet UILabel * sepratorlbl;
+@property (nonatomic,strong) IBOutlet UIButton * btn_compitionselect;
+@property (nonatomic,strong) IBOutlet UILabel * lbl_compition;
+
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * sepratorYposition;
 
