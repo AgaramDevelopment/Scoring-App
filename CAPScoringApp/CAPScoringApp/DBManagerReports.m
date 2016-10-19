@@ -15,6 +15,7 @@
 #import "PlayingSquadRecords.h"
 #import "EventRecord.h"
 
+#import "EventRecord.h"
 @implementation DBManagerReports
 
 
@@ -296,8 +297,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return eventArray;
     
 }
-
-
 
 -(NSMutableArray *)retrieveTorunamentData: (NSString *) userCode{
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];

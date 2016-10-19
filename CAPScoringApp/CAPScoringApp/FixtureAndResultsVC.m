@@ -11,6 +11,7 @@
 #import "LiveMatchCell.h"
 #import "FixtureTVC.h"
 #import "DBManagerReports.h"
+#import "DBManager.h"
 #import "FixtureReportRecord.h"
 #import "LiveReportRecord.h"
 #import "FixtureReportRecord.h"
@@ -127,7 +128,7 @@
 
     }else if(isLive == YES)
     {
-          LiveMatchCell *cell = (LiveMatchCell *)[tableView dequeueReusableCellWithIdentifier:LiveMatch];
+        LiveMatchCell *cell = (LiveMatchCell *)[tableView dequeueReusableCellWithIdentifier:LiveMatch];
          if (cell == nil)
          {
             [[NSBundle mainBundle] loadNibNamed:@"LiveMatchCell" owner:self options:nil];
@@ -381,12 +382,24 @@
     }
     else if (isFixture ==YES)
     {
-        FixtureTVC *cell = (FixtureTVC *)[tableView dequeueReusableCellWithIdentifier:FixtureMatch];
+        LiveMatchCell *cell = (LiveMatchCell *)[tableView dequeueReusableCellWithIdentifier:LiveMatch];
         if (cell == nil) {
-            [[NSBundle mainBundle] loadNibNamed:@"FixtureTVC" owner:self options:nil];
-            cell = self.fixtureCell;
+            [[NSBundle mainBundle] loadNibNamed:@"LiveMatchCell" owner:self options:nil];
+            cell = self.livematchCell;
             
         }
+        
+        cell.lbl_team_b_and.text = @"";
+        cell.lbl_team_a_and.text = @"";
+        cell.lbl_match_status.text = @"";
+        cell.lbl_team_a_fst_inn_score.text = @"";
+        cell.lbl_team_b_fst_inn_score.text = @"";
+        cell.lbl_team_a_sec_inn_score.text = @"";
+        cell.lbl_team_b_sec_inn_score.text = @"";
+        cell.lbl_team_a_fst_inn_over.text = @"";
+        cell.lbl_team_b_fst_inn_over.text = @"";
+        cell.lbl_team_a_sec_inn_over.text = @"";
+        cell.lbl_team_b_sec_inn_over.text = @"";
         
         [cell setBackgroundColor:[UIColor clearColor]];
         //tableView.allowsSelection = NO;
@@ -394,29 +407,28 @@
         
         FixtureReportRecord *objFixtureRecord=(FixtureReportRecord*)[_fixturesResultArray objectAtIndex:indexPath.row];
         
+        cell.lbl_team_a_name.text = objFixtureRecord.teamAname;
+        cell.lbl_team_b_name.text = objFixtureRecord.teamBname;
+        
         
         NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
         [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
         
         NSDate *date = [formatter dateFromString:objFixtureRecord.matchDate];
         [formatter setDateFormat:@"dd"];
-       // cell.day_no_txt.text=[formatter stringFromDate:date];
+        cell.lbl_day.text=[formatter stringFromDate:date];
         
         [formatter setDateFormat:@"MMMM"];
-        cell.month_txt.text=[formatter stringFromDate:date];
+        cell.lbl_month.text=[formatter stringFromDate:date];
         
         [formatter setDateFormat:@"EEEE"];
-        cell.day_txt.text=[formatter stringFromDate:date];
+        cell.lbl_week_day.text=[formatter stringFromDate:date];
         
+        cell.lbl_match_type.text = objFixtureRecord.matchTypeName;
+        cell.lbl_match_status.text = [NSString stringWithFormat:@"%@,%@",objFixtureRecord.groundName,objFixtureRecord.city];
         
-            cell.teamA_txt.text = objFixtureRecord.teamAname;
-            cell.teamB_txt.text = objFixtureRecord.teamBname;
-            cell.match_type.text = objFixtureRecord.matchName;
-            cell.venu_txt.text = [NSString stringWithFormat:@"%@ , %@", objFixtureRecord.groundName,objFixtureRecord.city];
-            
-        [self setImage:objFixtureRecord.teamAcode : cell.teamA_img];
-        
-        [self setImage:objFixtureRecord.teamBcode : cell.teamB_img];
+        [self setImage:objFixtureRecord.teamAcode :cell.img_team_a_logo ];
+        [self setImage:objFixtureRecord.teamBcode :cell.lbl_team_b_logo ];
         
         
         return cell;
@@ -484,6 +496,7 @@
         ReportVC * objReport =  (ReportVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ChartVC"];
         [self.navigationController pushViewController:objReport animated:YES];
     }
+    
 }
 - (IBAction)btn_back:(id)sender {
     
