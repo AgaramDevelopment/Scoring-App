@@ -71,22 +71,6 @@
                                     <constraint firstItem="D0e-54-yih" firstAttribute="top" secondItem="CqM-Zb-NO9" secondAttribute="bottom" constant="3" id="lWI-fq-5eG"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yf1-dw-cQF">
-                                <rect key="frame" x="30" y="10" width="132" height="30"/>
-                                <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="JANUARY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xw-9I-rNj">
-                                        <rect key="frame" x="8" y="1" width="116" height="30"/>
-                                        <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" red="0.054901960780000002" green="0.72941176470000002" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="132" id="MsR-lG-KYA"/>
-                                    <constraint firstAttribute="height" constant="30" id="UUo-mp-TIr"/>
-                                </constraints>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="C85-PY-9G3">
                                 <rect key="frame" x="178" y="10" width="6" height="140"/>
                                 <color key="backgroundColor" red="1" green="0.33725490200000002" blue="0.34509803919999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -270,6 +254,22 @@
                                     <constraint firstItem="SJn-Kk-1Sp" firstAttribute="top" secondItem="aMb-bp-T9p" secondAttribute="bottom" constant="7" id="ybS-7i-f46"/>
                                     <constraint firstItem="dvl-OJ-n2K" firstAttribute="top" secondItem="Fv8-vR-6S1" secondAttribute="top" constant="45" id="z6f-eV-TF6"/>
                                     <constraint firstAttribute="trailing" secondItem="S5g-BQ-yhd" secondAttribute="trailing" constant="8" id="zvO-gd-tfK"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yf1-dw-cQF">
+                                <rect key="frame" x="30" y="10" width="132" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="JANUARY" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4xw-9I-rNj">
+                                        <rect key="frame" x="8" y="1" width="116" height="30"/>
+                                        <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="17"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.054901960780000002" green="0.72941176470000002" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="132" id="MsR-lG-KYA"/>
+                                    <constraint firstAttribute="height" constant="30" id="UUo-mp-TIr"/>
                                 </constraints>
                             </view>
                         </subviews>
