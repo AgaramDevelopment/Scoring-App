@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ChartVC : UIViewController
+@interface ReportVC : UIViewController
 @property (nonatomic,strong) IBOutlet UIView * chartList_view;
+@property (strong, nonatomic) IBOutlet UIScrollView *scrolllistview;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * chartviewwidth;
 
 @end

@@ -17,7 +17,9 @@
 #import "ResultReportRecord.h"
 #import "FixtureReportRecord.h"
 #import "ResultReportRecord.h"
-#import "ChartVC.h"
+#import "DBManager.h"
+#import "FetchSEPageLoadRecord.h"
+#import "ReportVC.h"
 
 @interface FixtureAndResultsVC ()
 {
@@ -353,8 +355,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    ChartVC*TETS =  (ChartVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ChartVC"];
-    [self.navigationController pushViewController:TETS animated:YES];
+    ReportVC * objReport =  (ReportVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ChartVC"];
+    [self.navigationController pushViewController:objReport animated:YES];
 }
 - (IBAction)btn_back:(id)sender {
     

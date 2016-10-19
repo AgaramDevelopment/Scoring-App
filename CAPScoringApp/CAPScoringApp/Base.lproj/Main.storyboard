@@ -3489,66 +3489,69 @@
             </objects>
             <point key="canvasLocation" x="1158.75" y="-1454.25"/>
         </scene>
-        <!--ChartVC-->
+        <!--ReportVC-->
         <scene sceneID="me7-5a-Lcv">
             <objects>
-                <viewController storyboardIdentifier="ChartVC" id="3ig-vI-MCP" customClass="ChartVC" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChartVC" id="3ig-vI-MCP" customClass="ReportVC" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7wG-1A-R2g"/>
                         <viewControllerLayoutGuide type="bottom" id="Qg0-Ar-kAp"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Lyl-E7-BoL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZZ-nZ-Axa">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" alwaysBounceHorizontal="YES" translatesAutoresizingMaskIntoConstraints="NO" id="spP-B4-AZA">
                                 <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.047058823529411764" green="0.062745098039215685" blue="0.074509803921568626" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="BO0-Iv-E5B"/>
+                                    <constraint firstAttribute="height" constant="80" id="ua4-Rc-D2R"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="BO0-Iv-E5B"/>
+                                        <exclude reference="ua4-Rc-D2R"/>
                                     </mask>
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="constraints">
-                                        <include reference="BO0-Iv-E5B"/>
+                                        <include reference="ua4-Rc-D2R"/>
                                     </mask>
                                 </variation>
-                            </view>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="DZZ-nZ-Axa" firstAttribute="top" secondItem="7wG-1A-R2g" secondAttribute="bottom" constant="70" id="RmJ-xd-HNF"/>
-                            <constraint firstItem="DZZ-nZ-Axa" firstAttribute="leading" secondItem="Lyl-E7-BoL" secondAttribute="leading" id="mL1-Sv-d7S"/>
-                            <constraint firstAttribute="trailing" secondItem="DZZ-nZ-Axa" secondAttribute="trailing" id="tvl-qX-yTp"/>
+                            <constraint firstItem="spP-B4-AZA" firstAttribute="centerX" secondItem="Lyl-E7-BoL" secondAttribute="centerX" id="SWd-Jv-fe0"/>
+                            <constraint firstItem="spP-B4-AZA" firstAttribute="leading" secondItem="Lyl-E7-BoL" secondAttribute="leading" id="ecS-4L-lou"/>
+                            <constraint firstItem="spP-B4-AZA" firstAttribute="top" secondItem="7wG-1A-R2g" secondAttribute="bottom" constant="50" id="gZC-Jh-KWM">
+                                <variation key="heightClass=regular-widthClass=regular" constant="80"/>
+                            </constraint>
                         </constraints>
                         <variation key="default">
                             <mask key="subviews">
-                                <exclude reference="DZZ-nZ-Axa"/>
+                                <exclude reference="spP-B4-AZA"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="RmJ-xd-HNF"/>
-                                <exclude reference="mL1-Sv-d7S"/>
-                                <exclude reference="tvl-qX-yTp"/>
+                                <exclude reference="SWd-Jv-fe0"/>
+                                <exclude reference="ecS-4L-lou"/>
+                                <exclude reference="gZC-Jh-KWM"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
                             <mask key="subviews">
-                                <include reference="DZZ-nZ-Axa"/>
+                                <include reference="spP-B4-AZA"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="RmJ-xd-HNF"/>
-                                <include reference="mL1-Sv-d7S"/>
-                                <include reference="tvl-qX-yTp"/>
+                                <include reference="SWd-Jv-fe0"/>
+                                <include reference="ecS-4L-lou"/>
+                                <include reference="gZC-Jh-KWM"/>
                             </mask>
                         </variation>
                     </view>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
-                        <outlet property="chartList_view" destination="DZZ-nZ-Axa" id="blF-7j-byv"/>
+                        <outlet property="scrolllistview" destination="spP-B4-AZA" id="e62-Ln-QZD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JKb-Oj-SHK" userLabel="First Responder" sceneMemberID="firstResponder"/>
