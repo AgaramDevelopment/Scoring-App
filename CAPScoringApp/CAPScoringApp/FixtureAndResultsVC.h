@@ -20,7 +20,6 @@
 @property (strong, nonatomic) IBOutlet LiveMatchCell * livematchCell;
 @property (strong, nonatomic) IBOutlet ResultMatchCell *resultmatchCell;
 @property (strong, nonatomic) IBOutlet FixtureTVC *fixtureCell;
-@property (strong, nonatomic) IBOutlet ResultMatchCell *resultmatchCell;
 
 
 @property (nonatomic,strong) IBOutlet UILabel * sepratorlbl;
