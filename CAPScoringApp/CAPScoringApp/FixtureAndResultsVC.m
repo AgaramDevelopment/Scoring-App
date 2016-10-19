@@ -47,9 +47,14 @@
     
 
     [self customnavigationmethod];
-     self.sepratorYposition.constant =self.view.frame.size.width/2.5;
+    
     
     [self didClickLiveBtn:0];
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    self.sepratorYposition.constant =self.view.frame.size.width/2.5;
 }
 -(void)customnavigationmethod
 {
@@ -240,7 +245,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
     _fixturesResultArray =[objDBManagerReports fetchLiveMatches:@"":userCode];
-    
+     self.sepratorYposition.constant =self.Live_Btn.frame.origin.x+30;
     isLive = YES;
     isResult = NO;
     isFixture = NO;
@@ -255,7 +260,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
     _fixturesResultArray =[objDBManagerReports fetchResultsMatches:@"":userCode];
-    
+    self.sepratorYposition.constant =self.Result_Btn.frame.origin.x+30;
     isLive = NO;
     isResult = YES;
     isFixture = NO;
@@ -268,7 +273,7 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     NSString *userCode = [defaults objectForKey:@"userCode"];
     _fixturesResultArray =[objDBManagerReports FixturesData :@"":userCode];
-
+ self.sepratorYposition.constant =self.Fixture_Btn.frame.origin.x+30;
     
     isLive = NO;
     isResult = NO;
