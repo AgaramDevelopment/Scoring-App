@@ -29,6 +29,13 @@
 @property(strong,nonatomic)NSString *matchStatus;
 
 
+@property(strong,nonatomic)NSString *playerName;
+@property(strong,nonatomic)NSString *teamCode;
+@property(strong,nonatomic)NSString *teamName;
+@property(strong,nonatomic)NSString *playerRole;
+@property(strong,nonatomic)NSString *player;
+
+
 
 
 
