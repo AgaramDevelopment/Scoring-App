@@ -810,7 +810,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/EditMode/EditModeVC.h"
-                  timestampString = "498485506.834785"
+                  timestampString = "498490366.625732"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "162"
@@ -825,7 +825,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/EditMode/EditModeVC.h"
-                  timestampString = "498485506.834929"
+                  timestampString = "498490366.625996"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "162"
@@ -2958,7 +2958,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "498485506.894433"
+                  timestampString = "498490366.738721"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "16071"
@@ -2973,7 +2973,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "498485506.894584"
+                  timestampString = "498490366.73896"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "16071"
@@ -3629,7 +3629,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreCardVC.m"
-                  timestampString = "498485506.906995"
+                  timestampString = "498490366.768663"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1407"
@@ -3644,7 +3644,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreCardVC.m"
-                  timestampString = "498485506.907234"
+                  timestampString = "498490366.768935"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1407"
@@ -3821,7 +3821,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreCardVC.m"
-                  timestampString = "498485506.913663"
+                  timestampString = "498490366.779475"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1971"
@@ -3836,7 +3836,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreCardVC.m"
-                  timestampString = "498485506.913797"
+                  timestampString = "498490366.779751"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1971"
@@ -4066,7 +4066,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "197"
             endingLineNumber = "197"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4082,7 +4082,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "212"
             endingLineNumber = "212"
-            landmarkName = "-didClickLiveBtn:"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -4098,7 +4098,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "69"
             endingLineNumber = "69"
-            landmarkName = "-tableView:numberOfRowsInSection:"
+            landmarkName = "-numberOfSectionsInTableView:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

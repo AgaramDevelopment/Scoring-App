@@ -285,9 +285,17 @@
                 <outlet property="lbl_day" destination="CqM-Zb-NO9" id="nDl-on-yct"/>
                 <outlet property="lbl_match_type" destination="lp8-MV-ZJJ" id="14K-aZ-2KO"/>
                 <outlet property="lbl_month" destination="4xw-9I-rNj" id="Eqj-xW-52S"/>
+                <outlet property="lbl_team_a_fst_inn_over" destination="NQz-zh-BeL" id="7xX-pQ-ltQ"/>
+                <outlet property="lbl_team_a_fst_inn_score" destination="uvj-f4-gTf" id="2JP-aI-frU"/>
                 <outlet property="lbl_team_a_name" destination="pf8-JX-ZYk" id="H9p-lO-8QJ"/>
+                <outlet property="lbl_team_a_sec_inn_over" destination="dmd-Ou-dEs" id="JUe-D3-lzk"/>
+                <outlet property="lbl_team_a_sec_inn_score" destination="Jq7-0p-Pzr" id="gu5-zZ-sA6"/>
+                <outlet property="lbl_team_b_fst_inn_over" destination="8Ch-ss-8Em" id="wiA-C5-4tj"/>
+                <outlet property="lbl_team_b_fst_inn_score" destination="ky1-84-uKk" id="kFl-fd-Jhp"/>
                 <outlet property="lbl_team_b_logo" destination="S5g-BQ-yhd" id="lcE-Na-w7d"/>
                 <outlet property="lbl_team_b_name" destination="aMb-bp-T9p" id="yoq-kh-ArB"/>
+                <outlet property="lbl_team_b_sec_inn_over" destination="i4J-YF-SwG" id="wrX-re-xUm"/>
+                <outlet property="lbl_team_b_sec_inn_score" destination="SJn-Kk-1Sp" id="h9v-AA-Kx7"/>
                 <outlet property="lbl_week_day" destination="D0e-54-yih" id="cMn-X0-fhQ"/>
             </connections>
         </tableViewCell>
