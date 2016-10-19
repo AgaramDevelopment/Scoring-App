@@ -179,16 +179,6 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Wn-85-Fpr">
-                                        <rect key="frame" x="330" y="50" width="75" height="21"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="21" id="YE4-Pr-iBf"/>
-                                            <constraint firstAttribute="width" constant="75" id="htg-qG-gVo"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BwU-mo-YHs">
                                         <rect key="frame" x="330" y="75" width="75" height="21"/>
                                         <constraints>
@@ -234,6 +224,16 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="75" id="L71-i7-9M4"/>
                                             <constraint firstAttribute="height" constant="21" id="ift-Gf-kTd"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Wn-85-Fpr">
+                                        <rect key="frame" x="330" y="50" width="75" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="YE4-Pr-iBf"/>
+                                            <constraint firstAttribute="width" constant="75" id="htg-qG-gVo"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -324,9 +324,17 @@
                 <outlet property="lbl_day" destination="gvG-Ik-4H0" id="lYL-2m-Os0"/>
                 <outlet property="lbl_match_type" destination="W3Y-5T-wSQ" id="DZ1-1G-NRR"/>
                 <outlet property="lbl_month" destination="twF-PM-BMS" id="8ku-S3-HkW"/>
+                <outlet property="lbl_team_a_fst_inn_over" destination="KeX-1M-KTW" id="Asv-iV-eD9"/>
+                <outlet property="lbl_team_a_fst_inn_score" destination="h7O-sO-LeC" id="SKz-vh-ykp"/>
                 <outlet property="lbl_team_a_name" destination="CZu-yB-gmV" id="tXo-q5-v1w"/>
+                <outlet property="lbl_team_a_sec_inn_over" destination="tw0-ph-YXj" id="mFc-kk-GUN"/>
+                <outlet property="lbl_team_a_sec_inn_score" destination="ROG-Ch-sV4" id="tVN-yV-Oj4"/>
+                <outlet property="lbl_team_b_fst_inn_over" destination="BwU-mo-YHs" id="gq0-Rc-a0q"/>
+                <outlet property="lbl_team_b_fst_inn_score" destination="1Wn-85-Fpr" id="gmI-9J-zJm"/>
                 <outlet property="lbl_team_b_logo" destination="U91-dm-UZg" id="S0S-FG-gPM"/>
                 <outlet property="lbl_team_b_name" destination="W0t-fk-WKW" id="1CJ-iD-ccH"/>
+                <outlet property="lbl_team_b_sec_inn_over" destination="YrH-Ou-UQT" id="VDO-d0-Ohe"/>
+                <outlet property="lbl_team_b_sec_inn_score" destination="6rW-7p-HSq" id="8KT-sw-MyN"/>
                 <outlet property="lbl_week_day" destination="3KH-PT-U5B" id="CXz-Pz-AaE"/>
             </connections>
         </tableViewCell>
