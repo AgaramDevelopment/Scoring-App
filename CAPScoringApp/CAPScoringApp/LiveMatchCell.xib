@@ -13,6 +13,9 @@
             <string>Rajdhani-Bold</string>
             <string>Rajdhani-Bold</string>
         </mutableArray>
+        <mutableArray key="RAJDHANI-MEDIUM.TTF">
+            <string>Rajdhani-Medium</string>
+        </mutableArray>
         <mutableArray key="RAJDHANI-SEMIBOLD.TTF">
             <string>Rajdhani-Semibold</string>
         </mutableArray>
@@ -278,8 +281,6 @@
                                 </variation>
                                 <variation key="heightClass=regular-widthClass=regular">
                                     <mask key="constraints">
-                                        <exclude reference="8XF-ut-eP2"/>
-                                        <exclude reference="B9V-nw-60S"/>
                                         <include reference="VhI-nM-4TJ"/>
                                         <include reference="om2-7v-rge"/>
                                         <include reference="qTC-UD-Il9"/>
