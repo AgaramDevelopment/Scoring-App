@@ -19,6 +19,8 @@
 #import "FetchSEPageLoadRecord.h"
 #import "EventRecord.h"
 #import "ResultReportRecord.h"
+#import "PlayingSquadRecords.h"
+#import "PlayingSquadVC.h"
 
 @interface FixtureAndResultsVC ()
 {
@@ -380,22 +382,46 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    if(tableView == tournamentTableview){
-        isFilter = NO;
-        EventRecord *evRec = [self.torunamentArray objectAtIndex:indexPath.row];
-        comptnCode =  evRec.competitioncode;
-        self.lbl_compition.text = evRec.competitionname;
+    if (isFixture ==YES)
+    {
+    
+    NSMutableArray *mSetUp = [[NSMutableArray alloc]init];
+    
+    FixtureReportRecord *objFixtureRecord=(FixtureReportRecord*)[_fixturesResultArray objectAtIndex:indexPath.row];
+    
+    [mSetUp addObject:objFixtureRecord];
+    
+    NSIndexPath *selectedIndexPath = [tableView indexPathForSelectedRow];
+    
+    
+    
+    PlayingSquadVC*detail = [[PlayingSquadVC alloc]init];
+    
+    detail =  (PlayingSquadVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"playingSquadID"];
+    
+    NSString*matchCode = objFixtureRecord.matchCode;
+   
+    detail.matchCode = matchCode;
+    
+   // PlayingSquadVC *playing = [[PlayingSquadVC alloc] initWithNibName:@"playingSquadId" bundle:nil];
+    [self.navigationController pushViewController:detail animated:YES];
         
-        if(tournamentTableview!=nil){
-            [tournamentTableview removeFromSuperview];
-        }
-        if(isLive){
-            [self didClickLiveBtn:0];
-        }else if(isResult){
-            [self didClickResultBtn:0];
-        }else if(isFixture){
-            [self didClickFixtureBtn:0];
-        }
+    }else if(tableView == tournamentTableview){
+            isFilter = NO;
+            EventRecord *evRec = [self.torunamentArray objectAtIndex:indexPath.row];
+            comptnCode =  evRec.competitioncode;
+            self.lbl_compition.text = evRec.competitionname;
+            
+            if(tournamentTableview!=nil){
+                [tournamentTableview removeFromSuperview];
+            }
+            if(isLive){
+                [self didClickLiveBtn:0];
+            }else if(isResult){
+                [self didClickResultBtn:0];
+            }else if(isFixture){
+                [self didClickFixtureBtn:0];
+            }
         
         
     }else{
