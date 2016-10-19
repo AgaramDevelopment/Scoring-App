@@ -244,7 +244,7 @@
     
    // PlayingSquadVC *playing = [[PlayingSquadVC alloc] initWithNibName:@"playingSquadId" bundle:nil];
     [self.navigationController pushViewController:detail animated:YES];
-    }
+        
     
 }
 - (IBAction)btn_back:(id)sender {
