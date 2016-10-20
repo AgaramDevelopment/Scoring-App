@@ -13,6 +13,7 @@
 @interface ReportVC ()
 {
     CustomNavigationVC * objCustomNavigation;
+    PitchmapVC * objPitchview;
 }
 
 @end
@@ -38,12 +39,6 @@
 }
 -(void)CreateChartList
 {
-//    [self.view_BallTicker.subviews makeObjectsPerformSelector: @selector(removeFromSuperview)];
-   // UIScrollView *ScrollViewer = [[UIScrollView alloc] init ];
-   // self.scrolllistview.showsHorizontalScrollIndicator=YES;
-    //self.scrolllistview.showsVerticalScrollIndicator=YES;
-    
-
 
     //[ScrollViewer setBackgroundColor:[UIColor redColor]];
     //CGFloat xposition = 0;
@@ -57,30 +52,92 @@
             NSString *dicBallKey = [objhartlistArray objectAtIndex:i];
             
             UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(i * 200,20,180, 40)];
-            
-           // btnborder.clipsToBounds = NO;
-           // btnborder.layer.borderWidth = 3.5;
-           // btnborder.layer.borderColor = [UIColor greenColor].CGColor;
-           // btnborder.layer.masksToBounds = YES;
+            btnborder.tag=i+1;
             [btnborder setTitle:[NSString stringWithFormat:@"%@",dicBallKey] forState:UIControlStateNormal];
+            [btnborder addTarget:self action:@selector(didClickreportlistbtn:) forControlEvents:UIControlEventTouchUpInside];
             [self.scrolllistview addSubview:btnborder];
+            
 
         }
-   // [ScrollViewer layoutIfNeeded];
-        //To Create ball tiker for each row.
-    //[ScrollViewer setFrame:CGRectMake(0,ScrollViewer.frame.origin.y,405, [ScrollViewer bounds].size.height)];
-    //[ScrollViewer setContentOffset:CGPointMake(ScrollViewer.contentSize.width- ScrollViewer.frame.size.width, 0) animated:YES];
-   // ScrollViewer.frame = CGRectMake(self.chartList_view.frame.origin.x,400,3000,70);
+   
+     [self.scrolllistview setContentSize:CGSizeMake(13*200,70)];
 
     [self.scrolllistview setContentSize:CGSizeMake(14*200,70)];
 
-      // [self.view addSubview:ScrollViewer];
+-(IBAction)didClickreportlistbtn:(id)sender
+{
+    UIButton * objBtn =(UIButton*)sender;
+    
+     self.sepratoryposition.constant = objBtn.frame.origin.x+15;
+    if(objBtn.tag == 1)
+    {
+        NSLog(@"%d",objBtn.tag);
+       
+    }
+    else if(objBtn.tag == 2)
+    {
+         NSLog(@"%d",objBtn.tag);
+        
+        
+    }
+    else if(objBtn.tag == 3)
+    {
+         NSLog(@"%d",objBtn.tag);
+        objPitchview =[[PitchmapVC alloc] initWithNibName:@"PitchmapVC" bundle:nil];
+        objPitchview.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+        //[objPitchview.filter_Btn addTarget:self action:@selector(didClickFilterbtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:objPitchview.view];
+       
+        
+    }
+    else if(objBtn.tag == 4)
+    {
+         NSLog(@"%d",objBtn.tag);
+    }
+    else if(objBtn.tag == 5)
+    {
+         NSLog(@"%d",objBtn.tag);
+    }
+    else if(objBtn.tag == 6)
+    {
+         NSLog(@"%d",objBtn.tag);
+    }
+    else if(objBtn.tag == 7)
+    {
+         NSLog(@"%d",objBtn.tag);
+    }
+    else if(objBtn.tag == 8)
+    {
+         NSLog(@"%d",objBtn.tag);
+    }
+    else if(objBtn.tag == 9)
+    {
+         NSLog(@"%d",objBtn.tag);
+    }
+    else if(objBtn.tag == 10)
+    {
+         NSLog(@"%d",objBtn.tag);
+    }
+    else if(objBtn.tag == 11)
+    {
+         NSLog(@"%d",objBtn.tag);
+    }
+    else if(objBtn.tag == 12)
+    {
+         NSLog(@"%d",objBtn.tag);
+    }
+    else if(objBtn.tag == 13)
+    {
+         NSLog(@"%d",objBtn.tag);
+    }
 }
 
 - (IBAction)btn_back:(id)sender {
     
     [self.navigationController popViewControllerAnimated:YES];
 }
+
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

@@ -172,7 +172,6 @@
         
         cell.lbl_match_type.text = record.matchTypeName;
         
-        
         [self setImage:record.teamAcode :cell.img_team_a_logo ];
         [self setImage:record.teamBcode :cell.lbl_team_b_logo ];
         
@@ -466,9 +465,39 @@
     
     detail =  (PlayingSquadVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"playingSquadID"];
     
-    NSString*matchCode = objFixtureRecord.matchCode;
+    NSString *matchCode = objFixtureRecord.matchCode;
+    NSString *teamAName = objFixtureRecord.teamAname;
+    NSString *teamBName = objFixtureRecord.teamBname;
+    NSString *venu = objFixtureRecord.groundName;
+    NSString *city = objFixtureRecord.city;
+    NSString *matchDate = objFixtureRecord.matchDate;
+        NSString *matchType = objFixtureRecord.matchTypeName;
    
-    detail.matchCode = matchCode;
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+        
+        NSDate *date = [formatter dateFromString:matchDate];
+        
+        [formatter setDateFormat:@"dd"];
+        NSString *Date=[formatter stringFromDate:date];
+        
+        [formatter setDateFormat:@"MMM ''yy"];
+        NSString *month=[formatter stringFromDate:date];
+        
+       [formatter setDateFormat:@"hh:mm a"];
+        NSString *year=[formatter stringFromDate:date];
+        
+        detail.matchCode = matchCode;
+        detail.teamAname = teamAName;
+        detail.teamBname = teamBName;
+        detail.venu = venu;
+        detail.city = city;
+        detail.date = Date;
+        detail.month = month;
+        detail.year = year;
+        detail.teamACode = objFixtureRecord.teamAcode;
+        detail.teamBCode = objFixtureRecord.teamBcode;
+        detail.matchType = matchType;
     
    // PlayingSquadVC *playing = [[PlayingSquadVC alloc] initWithNibName:@"playingSquadId" bundle:nil];
     [self.navigationController pushViewController:detail animated:YES];

@@ -253,7 +253,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 //Playing Squad------------------------------------------------------------------------------------
 
--(NSMutableArray *)fetchPlayers:(NSString*)matchCode  {
+-(NSMutableArray *)fetchPlayers:(NSString*)matchCode :(NSString*)teamCode  {
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
     
     NSString *dbPath = [self getDBPath];
@@ -265,7 +265,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         
         
-    NSString *query=[NSString stringWithFormat:@"SELECT PM.PLAYERNAME,MP.TEAMCODE,AT.TEAMNAME, ME.METASUBCODEDESCRIPTION AS PLAYERROLE, COUNT (CASE WHEN MP.PLAYINGORDER <11 THEN 'PLAYED' END) PLAYER FROM MATCHTEAMPLAYERDETAILS AS MP INNER JOIN PLAYERMASTER AS PM ON PM.PLAYERCODE = MP.PLAYERCODE INNER JOIN TEAMMASTER AT ON AT.TEAMCODE = MP.TEAMCODE INNER JOIN METADATA ME ON ME.METASUBCODE = PM.PLAYERROLE WHERE MP.RECORDSTATUS = 'MSC001' AND PM.RECORDSTATUS = 'MSC001' AND MP.MATCHCODE = '%@' GROUP BY PLAYINGORDER, PM.PLAYERNAME,MP.TEAMCODE,AT.TEAMNAME,ME.METASUBCODEDESCRIPTION ORDER BY MP.TEAMCODE",matchCode];
+    NSString *query=[NSString stringWithFormat:@"SELECT PM.PLAYERNAME,MP.TEAMCODE,AT.TEAMNAME, ME.METASUBCODEDESCRIPTION AS PLAYERROLE, COUNT (CASE WHEN MP.PLAYINGORDER <11 THEN 'PLAYED' END) PLAYER FROM MATCHTEAMPLAYERDETAILS AS MP INNER JOIN PLAYERMASTER AS PM ON PM.PLAYERCODE = MP.PLAYERCODE INNER JOIN TEAMMASTER AT ON AT.TEAMCODE = MP.TEAMCODE INNER JOIN METADATA ME ON ME.METASUBCODE = PM.PLAYERROLE WHERE MP.RECORDSTATUS = 'MSC001' AND PM.RECORDSTATUS = 'MSC001' AND MP.MATCHCODE = '%@' AND MP.TEAMCODE = '%@' GROUP BY PLAYINGORDER, PM.PLAYERNAME,MP.TEAMCODE,AT.TEAMNAME,ME.METASUBCODEDESCRIPTION ORDER BY MP.TEAMCODE",matchCode,teamCode];
         
         
         
@@ -280,7 +280,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.teamCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 record.teamName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
     
-                record.playerRole=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record.playerRole=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
                 record.player=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
                 
                 [eventArray addObject:record];
