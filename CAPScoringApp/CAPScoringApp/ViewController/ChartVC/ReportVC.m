@@ -54,12 +54,12 @@
         {
             NSString *dicBallKey = [objhartlistArray objectAtIndex:i];
             
-            UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(i * 100+10,10,100, 40)];
+            UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(i * 200,20,180, 40)];
             
-            btnborder.clipsToBounds = NO;
-            btnborder.layer.borderWidth = 3.5;
-            btnborder.layer.borderColor = [UIColor greenColor].CGColor;
-            btnborder.layer.masksToBounds = YES;
+           // btnborder.clipsToBounds = NO;
+           // btnborder.layer.borderWidth = 3.5;
+           // btnborder.layer.borderColor = [UIColor greenColor].CGColor;
+           // btnborder.layer.masksToBounds = YES;
             [btnborder setTitle:[NSString stringWithFormat:@"%@",dicBallKey] forState:UIControlStateNormal];
             [self.scrolllistview addSubview:btnborder];
 
@@ -70,7 +70,7 @@
     //[ScrollViewer setContentOffset:CGPointMake(ScrollViewer.contentSize.width- ScrollViewer.frame.size.width, 0) animated:YES];
    // ScrollViewer.frame = CGRectMake(self.chartList_view.frame.origin.x,400,3000,70);
 
-    [self.scrolllistview setContentSize:CGSizeMake(16*100,70)];
+    [self.scrolllistview setContentSize:CGSizeMake(13*200,70)];
 
       // [self.view addSubview:ScrollViewer];
 }
