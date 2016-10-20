@@ -4126,8 +4126,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "539"
             endingLineNumber = "539"
-            landmarkName = "@implementation FixtureAndResultsVC"
-            landmarkType = "3">
+            landmarkName = "-didClickFixtureBtn:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
