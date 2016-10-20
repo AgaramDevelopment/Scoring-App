@@ -10,6 +10,7 @@
 
 @interface ReportVC : UIViewController
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *sepratoryposition;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrolllistview;
 
 
