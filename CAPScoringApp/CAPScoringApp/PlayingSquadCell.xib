@@ -13,7 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PlayingSquadVC">
             <connections>
-                <outlet property="playingSquadCell" destination="KGk-i7-Jjw" id="cX4-vH-vGR"/>
+                <outlet property="playingSquadCell" destination="dxh-cP-u7K" id="yrC-Z1-zG7"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -135,14 +135,14 @@
                                 <exclude reference="vau-Gj-3Jv"/>
                             </mask>
                             <mask key="constraints">
-                                <exclude reference="TPd-9I-jIw"/>
-                                <exclude reference="m1H-UB-cAf"/>
+                                <exclude reference="veQ-c0-6fx"/>
                                 <exclude reference="Xe6-tg-yQZ"/>
                                 <exclude reference="wDA-Zx-hQs"/>
-                                <exclude reference="veQ-c0-6fx"/>
                                 <exclude reference="Hp3-v1-wRT"/>
                                 <exclude reference="Mio-Za-hyb"/>
                                 <exclude reference="XPj-4U-Pba"/>
+                                <exclude reference="TPd-9I-jIw"/>
+                                <exclude reference="m1H-UB-cAf"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=regular-widthClass=regular">
@@ -153,14 +153,14 @@
                                 <include reference="vau-Gj-3Jv"/>
                             </mask>
                             <mask key="constraints">
-                                <include reference="TPd-9I-jIw"/>
-                                <include reference="m1H-UB-cAf"/>
+                                <include reference="veQ-c0-6fx"/>
                                 <include reference="Xe6-tg-yQZ"/>
                                 <include reference="wDA-Zx-hQs"/>
-                                <include reference="veQ-c0-6fx"/>
                                 <include reference="Hp3-v1-wRT"/>
                                 <include reference="Mio-Za-hyb"/>
                                 <include reference="XPj-4U-Pba"/>
+                                <include reference="TPd-9I-jIw"/>
+                                <include reference="m1H-UB-cAf"/>
                             </mask>
                         </variation>
                     </view>
