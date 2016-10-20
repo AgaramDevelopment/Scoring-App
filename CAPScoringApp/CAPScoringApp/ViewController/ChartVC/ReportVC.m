@@ -8,6 +8,7 @@
 
 #import "ReportVC.h"
 #import "CustomNavigationVC.h"
+#import "CommentaryVC.h"
 
 @interface ReportVC ()
 {
@@ -24,6 +25,7 @@
     
     [self customnavigationmethod];
     [self CreateChartList];
+    [self setCommentaryView];
 }
 
 -(void)customnavigationmethod
@@ -46,7 +48,7 @@
     //[ScrollViewer setBackgroundColor:[UIColor redColor]];
     //CGFloat xposition = 0;
     
-    NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report", nil];
+    NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report", nil];
 
         
     
@@ -70,7 +72,7 @@
     //[ScrollViewer setContentOffset:CGPointMake(ScrollViewer.contentSize.width- ScrollViewer.frame.size.width, 0) animated:YES];
    // ScrollViewer.frame = CGRectMake(self.chartList_view.frame.origin.x,400,3000,70);
 
-    [self.scrolllistview setContentSize:CGSizeMake(13*200,70)];
+    [self.scrolllistview setContentSize:CGSizeMake(14*200,70)];
 
       // [self.view addSubview:ScrollViewer];
 }
@@ -94,5 +96,13 @@
     // Pass the selected object to the new view controller.
 }
 */
+//initWithFrame:CGRectMake(175, 655,self.btn_compitionselect.frame.size.width,250)];
+-(void) setCommentaryView{
+   // CommentaryView *cmntryView = [[CommentaryView alloc]initWithFrame:CGRectMake(0, 400, 700, 1000)];
+     CommentaryVC *cmntryView = [[CommentaryVC alloc]initWithNibName:@"CommentaryVC" bundle:nil];
+    
+    
+    [self.view addSubview:cmntryView.view];
+}
 
 @end
