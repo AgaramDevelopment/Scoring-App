@@ -164,7 +164,7 @@
         [formatter setDateFormat:@"dd"];
         cell.lbl_day.text=[formatter stringFromDate:date];
         
-        [formatter setDateFormat:@"MMMM"];
+        [formatter setDateFormat:@"MMMM yyyy"];
         cell.lbl_month.text=[formatter stringFromDate:date];
         
         [formatter setDateFormat:@"EEEE"];
@@ -292,7 +292,7 @@
         [formatter setDateFormat:@"dd"];
         cell.lbl_day.text=[formatter stringFromDate:date];
         
-        [formatter setDateFormat:@"MMMM"];
+        [formatter setDateFormat:@"MMMM yyyy"];
         cell.lbl_month.text=[formatter stringFromDate:date];
         
         [formatter setDateFormat:@"EEEE"];
@@ -418,7 +418,7 @@
         [formatter setDateFormat:@"dd"];
         cell.lbl_day.text=[formatter stringFromDate:date];
         
-        [formatter setDateFormat:@"MMMM"];
+        [formatter setDateFormat:@"MMMM yyyy"];
         cell.lbl_month.text=[formatter stringFromDate:date];
         
         [formatter setDateFormat:@"EEEE"];
