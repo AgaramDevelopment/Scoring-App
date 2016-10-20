@@ -118,6 +118,8 @@
 		18AB07CF1D2A75C100AEEB1B /* EndSessionTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A5A1D26344400E02DAE /* EndSessionTVC.m */; };
 		18AB07D01D2A75C100AEEB1B /* EndSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2710671D25B9A40011C7B0 /* EndSession.m */; };
 		18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A93A5B1D26344400E02DAE /* EndSessionTVC.xib */; };
+		18C3018B1DB8A221000E8272 /* PitchmapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C301891DB8A221000E8272 /* PitchmapVC.m */; };
+		18C3018C1DB8A221000E8272 /* PitchmapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C3018A1DB8A221000E8272 /* PitchmapVC.xib */; };
 		18DE9F651DB60897001013B6 /* LiveMatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DE9F631DB60897001013B6 /* LiveMatchCell.m */; };
 		18DE9F661DB60897001013B6 /* LiveMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DE9F641DB60897001013B6 /* LiveMatchCell.xib */; };
 		18DE9F6A1DB608E9001013B6 /* ResultMatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DE9F681DB608E9001013B6 /* ResultMatchCell.m */; };
@@ -509,6 +511,9 @@
 		188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggressiveShotTypeCell.m; sourceTree = "<group>"; };
 		188767501D67355B00846C03 /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMPopTipView.h; path = SubClass/CMPopTipView/CMPopTipView.h; sourceTree = "<group>"; };
 		188767511D67355B00846C03 /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMPopTipView.m; path = SubClass/CMPopTipView/CMPopTipView.m; sourceTree = "<group>"; };
+		18C301881DB8A221000E8272 /* PitchmapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchmapVC.h; path = SubClass/PitchView/PitchmapVC.h; sourceTree = "<group>"; };
+		18C301891DB8A221000E8272 /* PitchmapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PitchmapVC.m; path = SubClass/PitchView/PitchmapVC.m; sourceTree = "<group>"; };
+		18C3018A1DB8A221000E8272 /* PitchmapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PitchmapVC.xib; path = SubClass/PitchView/PitchmapVC.xib; sourceTree = "<group>"; };
 		18DE9F621DB60897001013B6 /* LiveMatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveMatchCell.h; sourceTree = "<group>"; };
 		18DE9F631DB60897001013B6 /* LiveMatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveMatchCell.m; sourceTree = "<group>"; };
 		18DE9F641DB60897001013B6 /* LiveMatchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveMatchCell.xib; sourceTree = "<group>"; };
@@ -1129,6 +1134,16 @@
 			name = ChangeTossVc;
 			sourceTree = "<group>";
 		};
+		18C9CE6E1DB890EB00BCCA4A /* ReportSubview */ = {
+			isa = PBXGroup;
+			children = (
+				18C301881DB8A221000E8272 /* PitchmapVC.h */,
+				18C301891DB8A221000E8272 /* PitchmapVC.m */,
+				18C3018A1DB8A221000E8272 /* PitchmapVC.xib */,
+			);
+			name = ReportSubview;
+			sourceTree = "<group>";
+		};
 		18DE9F611DB6084F001013B6 /* ReportCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1570,7 +1585,6 @@
 				18E3946E1DB7AA830014A5F5 /* ReportVC.h */,
 				18E3946F1DB7AA830014A5F5 /* ReportVC.m */,
 				36DF65E21DB750D10038C1AE /* PlayingSquad */,
-				18E394671DB752C80014A5F5 /* ChartVC */,
 				36347BF71DB4C66900ADEF9F /* FixtureAndResult */,
 				186D5E3B1D9AA5B9000AFB85 /* BatMan IN/OUT */,
 				DCA67D4E1D34056A00982EF5 /* InningsDetailsVC.h */,
@@ -1628,6 +1642,7 @@
 		CE0018371CF4308C00668D8B /* SubClass */ = {
 			isa = PBXGroup;
 			children = (
+				18C9CE6E1DB890EB00BCCA4A /* ReportSubview */,
 				36DF65E81DB77D4A0038C1AE /* PlayingSquadCell */,
 				18DE9F611DB6084F001013B6 /* ReportCell */,
 				1874621E1D9BC7780093721B /* BatsmaninoutTimeCell */,
@@ -2005,6 +2020,7 @@
 				24F96F881D2FC90500798A9D /* PenalityVC.xib in Resources */,
 				187CA6AA1D28CD7A005E3DCF /* FollowOn.xib in Resources */,
 				047E52ED1D27D71F00D4CAC6 /* Other_WicketgridVC.xib in Resources */,
+				18C3018C1DB8A221000E8272 /* PitchmapVC.xib in Resources */,
 				246465191D17255C0078A446 /* EndInningsTVC.xib in Resources */,
 				243F8E441D2237D600333AD8 /* PowerPlayGridVC.xib in Resources */,
 				DC2710771D25B9A40011C7B0 /* EndSession.xib in Resources */,
@@ -2140,6 +2156,7 @@
 				CE0F19C01CF5D3D60030FFA2 /* UserRecord.m in Sources */,
 				24E7B4B21D23884200EF0D55 /* DeclareInnings.m in Sources */,
 				24F96F891D2FC90500798A9D /* PenaltyGridTVC.m in Sources */,
+				18C3018B1DB8A221000E8272 /* PitchmapVC.m in Sources */,
 				CE2D671A1D3E3E9D00A8246C /* SBJson4Parser.m in Sources */,
 				18704EDE1D19594D00996BF3 /* GetTeamBNameDetails.m in Sources */,
 				18704ED21D1954E100996BF3 /* FetchMatchResult.m in Sources */,
