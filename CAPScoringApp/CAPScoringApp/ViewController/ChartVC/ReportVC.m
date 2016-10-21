@@ -15,6 +15,7 @@
 {
     CustomNavigationVC * objCustomNavigation;
     PitchmapVC * objPitchview;
+    CommentaryVC *cmntryView  ;
 }
 
 @end
@@ -75,6 +76,7 @@
     if(objBtn.tag == 1)
     {
         NSLog(@"%d",objBtn.tag);
+        [self setCommentaryView];
        
     }
     else if(objBtn.tag == 2)
@@ -86,16 +88,17 @@
     else if(objBtn.tag == 3)
     {
          NSLog(@"%d",objBtn.tag);
-        objPitchview =[[PitchmapVC alloc] initWithNibName:@"PitchmapVC" bundle:nil];
-        objPitchview.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
-        //[objPitchview.filter_Btn addTarget:self action:@selector(didClickFilterbtn:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:objPitchview.view];
+       
        
         
     }
     else if(objBtn.tag == 4)
     {
          NSLog(@"%d",objBtn.tag);
+        objPitchview =[[PitchmapVC alloc] initWithNibName:@"PitchmapVC" bundle:nil];
+        objPitchview.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+        //[objPitchview.filter_Btn addTarget:self action:@selector(didClickFilterbtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:objPitchview.view];
     }
     else if(objBtn.tag == 5)
     {
@@ -156,12 +159,12 @@
     // Pass the selected object to the new view controller.
 }
 */
-//initWithFrame:CGRectMake(175, 655,self.btn_compitionselect.frame.size.width,250)];
+
 -(void) setCommentaryView{
-   // CommentaryView *cmntryView = [[CommentaryView alloc]initWithFrame:CGRectMake(0, 400, 700, 1000)];
-     CommentaryVC *cmntryView = [[CommentaryVC alloc]initWithNibName:@"CommentaryVC" bundle:nil];
-    
-    
+     cmntryView = [[CommentaryVC alloc]initWithNibName:@"CommentaryVC" bundle:nil];
+    cmntryView.matchCode = self.matchCode;
+
+    cmntryView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:cmntryView.view];
 }
 

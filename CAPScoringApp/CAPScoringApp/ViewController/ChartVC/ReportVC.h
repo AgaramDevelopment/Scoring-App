@@ -16,5 +16,8 @@
 
 @property (nonatomic, weak) IBOutlet UIView *referencedView;
 
+@property(strong,nonatomic)NSString *matchCode;
+@property(strong,nonatomic)NSString *competitionCode;
+
 
 @end

@@ -101,8 +101,6 @@
 
 -(IBAction)didClickStatistics:(id)sender
 {
-    
-    
     self.statistics_Btn.backgroundColor=[UIColor blackColor];
     self.standard_Btn.backgroundColor=[UIColor clearColor];
 }

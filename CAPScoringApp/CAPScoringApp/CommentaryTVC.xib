@@ -48,23 +48,23 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHu-BY-Lf4">
-                                        <rect key="frame" x="618" y="0.0" width="150" height="46"/>
-                                        <color key="backgroundColor" red="0.23137254900000001" green="0.27058823529999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZ0-fr-X6y">
+                                        <rect key="frame" x="0.0" y="0.0" width="134" height="46"/>
+                                        <color key="backgroundColor" red="0.13725490196078433" green="0.45490196078431372" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="46" id="3vZ-ym-OPH"/>
-                                            <constraint firstAttribute="width" constant="150" id="ol1-tl-iGS"/>
+                                            <constraint firstAttribute="width" constant="134" id="6Le-1P-nGF"/>
+                                            <constraint firstAttribute="height" constant="46" id="Dh7-JS-7cI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZ0-fr-X6y">
-                                        <rect key="frame" x="0.0" y="0.0" width="134" height="46"/>
-                                        <color key="backgroundColor" red="0.23137254900000001" green="0.27058823529999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHu-BY-Lf4">
+                                        <rect key="frame" x="618" y="0.0" width="150" height="46"/>
+                                        <color key="backgroundColor" red="0.13725490196078433" green="0.45490196078431372" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="134" id="6Le-1P-nGF"/>
-                                            <constraint firstAttribute="height" constant="46" id="Dh7-JS-7cI"/>
+                                            <constraint firstAttribute="height" constant="46" id="3vZ-ym-OPH"/>
+                                            <constraint firstAttribute="width" constant="150" id="ol1-tl-iGS"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -132,7 +132,8 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.23993990379999999" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.14999999999999999" colorSpace="calibratedRGB"/>
+                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="fCP-WX-pff" firstAttribute="leading" secondItem="4Wy-fs-7ac" secondAttribute="trailing" constant="22" id="2H2-9l-wXh"/>
                                     <constraint firstItem="4Wy-fs-7ac" firstAttribute="leading" secondItem="Yj6-Uh-bdF" secondAttribute="leading" constant="13" id="DrN-25-48g"/>
@@ -149,7 +150,8 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.15103365384615386" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Yj6-Uh-bdF" firstAttribute="leading" secondItem="WRB-iN-2zO" secondAttribute="leading" id="5BI-QX-nhs"/>
                             <constraint firstItem="Yj6-Uh-bdF" firstAttribute="top" secondItem="2C5-MV-fed" secondAttribute="bottom" id="AYc-W9-Xxj"/>
@@ -162,6 +164,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="tintColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstAttribute="trailingMargin" secondItem="WRB-iN-2zO" secondAttribute="trailing" constant="-8" id="D8D-vl-9n8"/>
                     <constraint firstItem="WRB-iN-2zO" firstAttribute="leading" secondItem="THS-dY-bpM" secondAttribute="leadingMargin" constant="-8" id="Xnc-LL-z59"/>
@@ -170,6 +173,7 @@
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="lbl_ball_ticker" destination="s19-YD-y13" id="aVQ-qe-dM6"/>
                 <outlet property="lbl_commentary" destination="fCP-WX-pff" id="Emx-93-FHs"/>
@@ -178,6 +182,7 @@
                 <outlet property="lbl_players_name" destination="h13-KN-bfw" id="2cA-c4-qfj"/>
                 <outlet property="lbl_runs_wicks" destination="AHu-BY-Lf4" id="RJl-NM-X9b"/>
                 <outlet property="lbl_team_score" destination="enz-n5-D6G" id="cdA-wa-5J7"/>
+                <outlet property="view_header" destination="2C5-MV-fed" id="eSn-Pd-r64"/>
             </connections>
             <point key="canvasLocation" x="420" y="1049"/>
         </tableViewCell>
