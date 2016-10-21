@@ -246,6 +246,10 @@
 		CEA2751B1D2A25DE007F6A28 /* PlayerInOutPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA2751A1D2A25DE007F6A28 /* PlayerInOutPushRecord.m */; };
 		CEA2751E1D2A2755007F6A28 /* PenalityDetailsPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA2751D1D2A2755007F6A28 /* PenalityDetailsPushRecord.m */; };
 		CEA275211D2A298E007F6A28 /* CapTransactionslogentryPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEA275201D2A298E007F6A28 /* CapTransactionslogentryPushRecord.m */; };
+		CEB2CC991DB899C60053DA72 /* CommentaryTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2CC971DB899C60053DA72 /* CommentaryTVC.m */; };
+		CEB2CC9A1DB899C60053DA72 /* CommentaryTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB2CC981DB899C60053DA72 /* CommentaryTVC.xib */; };
+		CEB2CC9E1DB8CC4B0053DA72 /* CommentaryVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CEB2CC9C1DB8CC4B0053DA72 /* CommentaryVC.m */; };
+		CEB2CC9F1DB8CC4B0053DA72 /* CommentaryVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEB2CC9D1DB8CC4B0053DA72 /* CommentaryVC.xib */; };
 		CEC25DFA1D28F8A2009D99F0 /* PushSyncDBMANAGER.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC25DF91D28F8A2009D99F0 /* PushSyncDBMANAGER.m */; };
 		CEC25DFD1D28F8F0009D99F0 /* MatchRegistrationPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC25DFC1D28F8F0009D99F0 /* MatchRegistrationPushRecord.m */; };
 		CEC25E001D28FE1B009D99F0 /* MatchTeamPlayerDetailsPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC25DFF1D28FE1B009D99F0 /* MatchTeamPlayerDetailsPushRecord.m */; };
@@ -759,6 +763,12 @@
 		CEA2751D1D2A2755007F6A28 /* PenalityDetailsPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenalityDetailsPushRecord.m; sourceTree = "<group>"; };
 		CEA2751F1D2A298E007F6A28 /* CapTransactionslogentryPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CapTransactionslogentryPushRecord.h; sourceTree = "<group>"; };
 		CEA275201D2A298E007F6A28 /* CapTransactionslogentryPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CapTransactionslogentryPushRecord.m; sourceTree = "<group>"; };
+		CEB2CC961DB899C60053DA72 /* CommentaryTVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentaryTVC.h; sourceTree = "<group>"; };
+		CEB2CC971DB899C60053DA72 /* CommentaryTVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentaryTVC.m; sourceTree = "<group>"; };
+		CEB2CC981DB899C60053DA72 /* CommentaryTVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentaryTVC.xib; sourceTree = "<group>"; };
+		CEB2CC9B1DB8CC4B0053DA72 /* CommentaryVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentaryVC.h; sourceTree = "<group>"; };
+		CEB2CC9C1DB8CC4B0053DA72 /* CommentaryVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentaryVC.m; sourceTree = "<group>"; };
+		CEB2CC9D1DB8CC4B0053DA72 /* CommentaryVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentaryVC.xib; sourceTree = "<group>"; };
 		CEBA5CA51D22343800CE2472 /* Batsmancell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Batsmancell.h; sourceTree = "<group>"; };
 		CEBA5CA61D22343800CE2472 /* Batsmancell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Batsmancell.m; sourceTree = "<group>"; };
 		CEBA5CA71D22343800CE2472 /* DBManagerEndBall.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerEndBall.h; sourceTree = "<group>"; };
@@ -1902,6 +1912,12 @@
 				CECDC3821DB4E87700A70A9D /* CommentaryView.h */,
 				CECDC3831DB4E87700A70A9D /* CommentaryView.m */,
 				CECDC3851DB4E8A900A70A9D /* CommentaryView.xib */,
+				CEB2CC961DB899C60053DA72 /* CommentaryTVC.h */,
+				CEB2CC971DB899C60053DA72 /* CommentaryTVC.m */,
+				CEB2CC981DB899C60053DA72 /* CommentaryTVC.xib */,
+				CEB2CC9B1DB8CC4B0053DA72 /* CommentaryVC.h */,
+				CEB2CC9C1DB8CC4B0053DA72 /* CommentaryVC.m */,
+				CEB2CC9D1DB8CC4B0053DA72 /* CommentaryVC.xib */,
 			);
 			name = ReportView;
 			sourceTree = "<group>";
@@ -2019,6 +2035,7 @@
 				18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */,
 				24F96F881D2FC90500798A9D /* PenalityVC.xib in Resources */,
 				187CA6AA1D28CD7A005E3DCF /* FollowOn.xib in Resources */,
+				CEB2CC9F1DB8CC4B0053DA72 /* CommentaryVC.xib in Resources */,
 				047E52ED1D27D71F00D4CAC6 /* Other_WicketgridVC.xib in Resources */,
 				18C3018C1DB8A221000E8272 /* PitchmapVC.xib in Resources */,
 				246465191D17255C0078A446 /* EndInningsTVC.xib in Resources */,
@@ -2046,6 +2063,7 @@
 				24F96F861D2FC90500798A9D /* PenalityTVC.xib in Resources */,
 				CE00184E1CF460DE00668D8B /* RAJDHANI-BOLD.TTF in Resources */,
 				187229291D12665600CC168F /* AddBreakVC.xib in Resources */,
+				CEB2CC9A1DB899C60053DA72 /* CommentaryTVC.xib in Resources */,
 				246125081D13C5D1004B85E7 /* RightSlideVC.xib in Resources */,
 				18DE9F661DB60897001013B6 /* LiveMatchCell.xib in Resources */,
 				187621201D1D625A006E160F /* EndDayTVC.xib in Resources */,
@@ -2097,6 +2115,8 @@
 				DCEFC87C1D28BBF400451485 /* EndSessionRecords.m in Sources */,
 				188597021D813AFE0013507E /* BattingPlayerStatistics.m in Sources */,
 				DCEFC87A1D28BBD400451485 /* DBManagerInsertScoreEngine.m in Sources */,
+				CEB2CC9E1DB8CC4B0053DA72 /* CommentaryVC.m in Sources */,
+				CEB2CC991DB899C60053DA72 /* CommentaryTVC.m in Sources */,
 				24F96F8B1D2FC90500798A9D /* PenaltygridVC.m in Sources */,
 				DCEFC87B1D28BBD400451485 /* InsertSEScoreEngineRecord.m in Sources */,
 				188597081D8176D00013507E /* BattingPayerStatisticsRecord.m in Sources */,

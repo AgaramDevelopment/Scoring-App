@@ -8,7 +8,7 @@
 
 #import "ReportVC.h"
 #import "CustomNavigationVC.h"
-#import "PitchmapVC.h"
+#import "CommentaryVC.h"
 
 @interface ReportVC ()
 {
@@ -26,6 +26,7 @@
     
     [self customnavigationmethod];
     [self CreateChartList];
+    [self setCommentaryView];
 }
 
 -(void)customnavigationmethod
@@ -39,8 +40,14 @@
 -(void)CreateChartList
 {
 
-    NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report", nil];
-       for(int i = 0; i < objhartlistArray.count; i++)
+    //[ScrollViewer setBackgroundColor:[UIColor redColor]];
+    //CGFloat xposition = 0;
+    
+    NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report", nil];
+
+        
+    
+        for(int i = 0; i < objhartlistArray.count; i++)
         {
             NSString *dicBallKey = [objhartlistArray objectAtIndex:i];
             
@@ -55,7 +62,7 @@
    
      [self.scrolllistview setContentSize:CGSizeMake(13*200,70)];
 
-}
+    [self.scrolllistview setContentSize:CGSizeMake(14*200,70)];
 
 -(IBAction)didClickreportlistbtn:(id)sender
 {
@@ -137,5 +144,22 @@
     // Dispose of any resources that can be recreated.
 }
 
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+//initWithFrame:CGRectMake(175, 655,self.btn_compitionselect.frame.size.width,250)];
+-(void) setCommentaryView{
+   // CommentaryView *cmntryView = [[CommentaryView alloc]initWithFrame:CGRectMake(0, 400, 700, 1000)];
+     CommentaryVC *cmntryView = [[CommentaryVC alloc]initWithNibName:@"CommentaryVC" bundle:nil];
+    
+    
+    [self.view addSubview:cmntryView.view];
+}
 
 @end

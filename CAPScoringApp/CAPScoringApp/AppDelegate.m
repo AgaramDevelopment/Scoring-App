@@ -42,13 +42,13 @@
             DBManager *objDBManager = [[DBManager alloc]init];
 
             if([objDBManager checkExpiryDate:[defaults objectForKey:@"userCode"]]){
-                if ([objDBManager checkSecurityExpiryDate: [defaults objectForKey:@"USERNAME"]]) {
+              //  if ([objDBManager checkSecurityExpiryDate: [defaults objectForKey:@"USERNAME"]]) { redo
                 
     
            initViewController = [storyBoard instantiateViewControllerWithIdentifier:@"dashboard_sbid"];
     
                 isValiduser = NO;
-                }
+             //   }
             }
         }
     
