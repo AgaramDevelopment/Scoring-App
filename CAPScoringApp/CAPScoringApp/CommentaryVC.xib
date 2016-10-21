@@ -35,6 +35,9 @@
                                     <state key="normal" title="Inns 2">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="did_click_inn_two:" destination="-1" eventType="touchUpInside" id="DR9-YD-7kK"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3C9-ZP-ccN">
                                     <rect key="frame" x="200" y="10" width="80" height="50"/>
@@ -46,6 +49,9 @@
                                     <state key="normal" title="Inns 3">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="did_click_inn_three:" destination="-1" eventType="touchUpInside" id="c3O-8L-L6n"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Vz-Ws-4L6">
                                     <rect key="frame" x="295" y="10" width="80" height="50"/>
@@ -57,6 +63,9 @@
                                     <state key="normal" title="Inns 4">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="did_click_inn_four:" destination="-1" eventType="touchUpInside" id="CQ3-sp-3UY"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efv-aA-HFW">
                                     <rect key="frame" x="10" y="10" width="80" height="50"/>
@@ -68,6 +77,9 @@
                                     <state key="normal" title="Inns 1">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="did_click_inn_one:" destination="-1" eventType="touchUpInside" id="D3E-Io-4NV"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

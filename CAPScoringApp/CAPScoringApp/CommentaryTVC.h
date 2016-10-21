@@ -16,4 +16,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_over;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_players_name;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_commentary;
+@property (strong, nonatomic) IBOutlet UIView *view_header;
 @end

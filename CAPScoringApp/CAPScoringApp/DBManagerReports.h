@@ -17,5 +17,5 @@
 -(NSMutableArray *)retrieveTorunamentData: (NSString *) userCode;
 
 -(NSMutableArray *)fetchPlayers:(NSString*)matchCode :(NSString*)teamCode;
--(NSMutableArray *)retrieveCommentaryData: (NSString *) matchCode;
+-(NSMutableArray *)retrieveCommentaryData: (NSString *) matchCode : (NSString *) inningsNo ;
 @end

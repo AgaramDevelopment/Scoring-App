@@ -26,7 +26,7 @@
 @property(strong,nonatomic)NSString *wide;
 @property(strong,nonatomic)NSString *legbyes;
 @property(strong,nonatomic)NSString *byes;
-
+@property(strong,nonatomic)NSString *isHeader;
 
 
 @end
