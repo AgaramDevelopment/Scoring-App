@@ -9,6 +9,7 @@
 #import "ReportVC.h"
 #import "CustomNavigationVC.h"
 #import "CommentaryVC.h"
+#import "PitchmapVC.h"
 
 @interface ReportVC ()
 {
@@ -63,6 +64,7 @@
      [self.scrolllistview setContentSize:CGSizeMake(13*200,70)];
 
     [self.scrolllistview setContentSize:CGSizeMake(14*200,70)];
+}
 
 -(IBAction)didClickreportlistbtn:(id)sender
 {
@@ -83,16 +85,17 @@
     else if(objBtn.tag == 3)
     {
          NSLog(@"%d",objBtn.tag);
-        objPitchview =[[PitchmapVC alloc] initWithNibName:@"PitchmapVC" bundle:nil];
-        objPitchview.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
-        //[objPitchview.filter_Btn addTarget:self action:@selector(didClickFilterbtn:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addSubview:objPitchview.view];
+       
        
         
     }
     else if(objBtn.tag == 4)
     {
          NSLog(@"%d",objBtn.tag);
+        objPitchview =[[PitchmapVC alloc] initWithNibName:@"PitchmapVC" bundle:nil];
+        objPitchview.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+        //[objPitchview.filter_Btn addTarget:self action:@selector(didClickFilterbtn:) forControlEvents:UIControlEventTouchUpInside];
+        [self.view addSubview:objPitchview.view];
     }
     else if(objBtn.tag == 5)
     {

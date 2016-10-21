@@ -109,6 +109,7 @@
 		1883B5F41D867DF6009E9CB3 /* BowlerStrickPitchRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B5F31D867DF6009E9CB3 /* BowlerStrickPitchRecord.m */; };
 		1883DFEC1D27C43E00854814 /* TossTeamDetailRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883DFEB1D27C43E00854814 /* TossTeamDetailRecord.m */; };
 		1883E4901D2A3C85000A279C /* OverBallCountRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883E48F1D2A3C85000A279C /* OverBallCountRecord.m */; };
+		1884EC891DB9D9890059A2B9 /* DBManagerpitchmapReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 1884EC881DB9D9890059A2B9 /* DBManagerpitchmapReport.m */; };
 		188597021D813AFE0013507E /* BattingPlayerStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 188597011D813AFE0013507E /* BattingPlayerStatistics.m */; };
 		188597051D813B220013507E /* BowlingPlayerStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 188597041D813B220013507E /* BowlingPlayerStatistics.m */; };
 		188597081D8176D00013507E /* BattingPayerStatisticsRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 188597071D8176D00013507E /* BattingPayerStatisticsRecord.m */; };
@@ -503,6 +504,8 @@
 		1883DFEB1D27C43E00854814 /* TossTeamDetailRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TossTeamDetailRecord.m; sourceTree = "<group>"; };
 		1883E48E1D2A3C85000A279C /* OverBallCountRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OverBallCountRecord.h; sourceTree = "<group>"; };
 		1883E48F1D2A3C85000A279C /* OverBallCountRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OverBallCountRecord.m; sourceTree = "<group>"; };
+		1884EC871DB9D9890059A2B9 /* DBManagerpitchmapReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManagerpitchmapReport.h; path = Resource/DBManagerpitchReport/DBManagerpitchmapReport.h; sourceTree = "<group>"; };
+		1884EC881DB9D9890059A2B9 /* DBManagerpitchmapReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManagerpitchmapReport.m; path = Resource/DBManagerpitchReport/DBManagerpitchmapReport.m; sourceTree = "<group>"; };
 		188597001D813AFE0013507E /* BattingPlayerStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingPlayerStatistics.h; sourceTree = "<group>"; };
 		188597011D813AFE0013507E /* BattingPlayerStatistics.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingPlayerStatistics.m; sourceTree = "<group>"; };
 		188597031D813B220013507E /* BowlingPlayerStatistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlingPlayerStatistics.h; sourceTree = "<group>"; };
@@ -1115,6 +1118,15 @@
 			name = ScoreCard;
 			sourceTree = "<group>";
 		};
+		1884EC831DB9D8800059A2B9 /* DBmanagerPitchmapReport */ = {
+			isa = PBXGroup;
+			children = (
+				1884EC871DB9D9890059A2B9 /* DBManagerpitchmapReport.h */,
+				1884EC881DB9D9890059A2B9 /* DBManagerpitchmapReport.m */,
+			);
+			name = DBmanagerPitchmapReport;
+			sourceTree = "<group>";
+		};
 		1887674F1D67352B00846C03 /* PopView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1478,6 +1490,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				1884EC831DB9D8800059A2B9 /* DBmanagerPitchmapReport */,
 				36E57AA51DB5E9B40012A1B6 /* DBManagerReports */,
 				1874622C1D9BDCAE0093721B /* BatsmanPlayerList */,
 				187462281D9BD5400093721B /* DBManagerBatsmaninoutTime */,
@@ -2264,6 +2277,7 @@
 				187625231D1544CD009374F8 /* MatchOverandBallDetailsForScoreBoard.m in Sources */,
 				187229281D12665600CC168F /* AddBreakVC.m in Sources */,
 				2483771D1D2ABE8900FAC40D /* BowlingSummeryPushRecord.m in Sources */,
+				1884EC891DB9D9890059A2B9 /* DBManagerpitchmapReport.m in Sources */,
 				DCEFC86D1D28B79300451485 /* DBManagerChangeTeam.m in Sources */,
 				DCF6773C1D27D17600B98749 /* DBManagerEndSession.m in Sources */,
 				187952331D02A410001A1224 /* FieldingEventRecord.m in Sources */,
