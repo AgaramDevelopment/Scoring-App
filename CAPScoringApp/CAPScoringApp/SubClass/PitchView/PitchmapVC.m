@@ -7,21 +7,34 @@
 //
 
 #import "PitchmapVC.h"
+#import "DBManagerpitchmapReport.h"
 
 @interface PitchmapVC ()
 {
     BOOL isStriker;
     BOOL isLength;
     BOOL isLine;
+    DBManagerpitchmapReport * DBMpitchReport;
 }
+
+@property (nonatomic,strong) NSString * teamCode;
+@property (nonatomic,strong) NSMutableArray * lineArray;
+@property (nonatomic,strong) NSMutableArray * lengthArray;
 
 @end
 
 @implementation PitchmapVC
+@synthesize lineArray,lengthArray;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    lineArray =[[NSMutableArray alloc]init];
+    lengthArray =[[NSMutableArray alloc]init];
+    
+    
+    
     self.filter_view.hidden =YES;
     
     [self.striker_view .layer setBorderWidth:2.0];
@@ -37,6 +50,35 @@
     [self.length_View .layer setMasksToBounds:YES];
     
      self.striker_Tbl.hidden=YES;
+    DBMpitchReport =[[DBManagerpitchmapReport alloc]init];
+    
+    lineArray =[DBMpitchReport getLine];
+    lengthArray =[DBMpitchReport getLength];
+    
+    [self.Inn1_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
+    
+    
+}
+
+-(IBAction)didClickInns1:(id)sender
+{
+   self.teamCode =[DBMpitchReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
+}
+
+-(IBAction)didClickInns2:(id)sender
+{
+    self.teamCode =[DBMpitchReport getTeamCode:self.compititionCode :self.matchCode :@"2"];
+}
+
+-(IBAction)didClickInns3:(id)sender
+{
+    self.teamCode =[DBMpitchReport getTeamCode:self.compititionCode :self.matchCode :@"3"];
+}
+
+-(IBAction)didClickInns4:(id)sender
+{
+    self.teamCode =[DBMpitchReport getTeamCode:self.compititionCode :self.matchCode :@"4"];
 }
 
 -(IBAction)didclickShowFilerviewbtn:(id)sender
@@ -49,6 +91,7 @@
     self.strikerTblYposition.constant =self.striker_view.frame.origin.y;
     if(isStriker==NO)
     {
+        
         self.striker_Tbl.hidden=NO;
         isStriker=YES;
     }
