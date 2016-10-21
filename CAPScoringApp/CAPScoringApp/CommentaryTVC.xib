@@ -182,6 +182,7 @@
                 <outlet property="lbl_players_name" destination="h13-KN-bfw" id="2cA-c4-qfj"/>
                 <outlet property="lbl_runs_wicks" destination="AHu-BY-Lf4" id="RJl-NM-X9b"/>
                 <outlet property="lbl_team_score" destination="enz-n5-D6G" id="cdA-wa-5J7"/>
+                <outlet property="view_header" destination="2C5-MV-fed" id="eSn-Pd-r64"/>
             </connections>
             <point key="canvasLocation" x="420" y="1049"/>
         </tableViewCell>

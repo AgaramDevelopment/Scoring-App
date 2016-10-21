@@ -25,7 +25,8 @@
     
     DBManagerReports *dbReports = [[DBManagerReports alloc]init];
     
-    _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode];
+    _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode:@"1"];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,13 +83,17 @@
       tableView.allowsSelection = NO;
        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
-        
+                
         cell.lbl_header_over.text = cmntryRpt.overString;
         cell.lbl_commentary.text = cmntryRpt.commentary;
         cell.lbl_team_score.text = cmntryRpt.teamTotal;
         cell.lbl_players_name.text = cmntryRpt.sAndNsName;
         cell.lbl_over.text = cmntryRpt.ballNo;
-        
+        if([cmntryRpt.isHeader isEqualToString:@"1"]){
+            cell.view_header.hidden = NO;
+        }else{
+            cell.view_header.hidden = YES;
+        }
         
         return cell;
     }
@@ -97,8 +102,12 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    return 200;
+    CommentaryReport *cmntryRpt = [_commentaryArray objectAtIndex:indexPath.row];
+    if([cmntryRpt.isHeader isEqualToString:@"1"]){
+        return 200;
+    }else{
+        return 200-46;
+    }
     
 }
 
@@ -367,4 +376,35 @@
 
 
 
+- (IBAction)did_click_inn_one:(id)sender {
+    
+    DBManagerReports *dbReports = [[DBManagerReports alloc]init];
+    
+    _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode:@"1"];
+    
+    [_commentary_tableview reloadData];
+}
+
+- (IBAction)did_click_inn_four:(id)sender {
+    
+    DBManagerReports *dbReports = [[DBManagerReports alloc]init];
+    
+    _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode:@"4"];
+    [_commentary_tableview reloadData];
+}
+- (IBAction)did_click_inn_two:(id)sender {
+    
+    DBManagerReports *dbReports = [[DBManagerReports alloc]init];
+    
+    _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode:@"2"];
+    [_commentary_tableview reloadData];
+}
+
+- (IBAction)did_click_inn_three:(id)sender {
+    
+    DBManagerReports *dbReports = [[DBManagerReports alloc]init];
+    
+    _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode :@"3"];
+    [_commentary_tableview reloadData];
+}
 @end
