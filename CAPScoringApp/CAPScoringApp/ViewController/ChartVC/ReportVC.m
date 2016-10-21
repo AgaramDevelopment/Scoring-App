@@ -9,6 +9,7 @@
 #import "ReportVC.h"
 #import "CustomNavigationVC.h"
 #import "CommentaryVC.h"
+#import "PitchmapVC.h"
 
 @interface ReportVC ()
 {
@@ -63,9 +64,11 @@
      [self.scrolllistview setContentSize:CGSizeMake(13*200,70)];
 
     [self.scrolllistview setContentSize:CGSizeMake(14*200,70)];
+    
+}
 
--(IBAction)didClickreportlistbtn:(id)sender
-{
+    -(IBAction)didClickreportlistbtn:(id)sender{
+
     UIButton * objBtn =(UIButton*)sender;
     
      self.sepratoryposition.constant = objBtn.frame.origin.x+15;
@@ -162,4 +165,7 @@
     [self.view addSubview:cmntryView.view];
 }
 
-@end
+    
+    @end
+
+
