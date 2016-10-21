@@ -521,8 +521,21 @@
         
         
     }else{
-    
+        
         ReportVC * objReport =  (ReportVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ChartVC"];
+
+        if(isLive == YES){
+            LiveReportRecord *record = [_fixturesResultArray objectAtIndex:indexPath.row];
+            objReport.matchCode = record.matchCode;
+            objReport.competitionCode = record.competitionCode;
+            
+        }else if (isResult ==YES)
+        {
+            ResultReportRecord *record = [_fixturesResultArray objectAtIndex:indexPath.row];
+            objReport.matchCode = record.matchCode;
+            objReport.competitionCode = record.competitionCode;
+        }
+        
         [self.navigationController pushViewController:objReport animated:YES];
     }
     

@@ -9,11 +9,12 @@
 #import "ReportVC.h"
 #import "CustomNavigationVC.h"
 #import "CommentaryVC.h"
-
+#import "PitchmapVC.h"
 @interface ReportVC ()
 {
     CustomNavigationVC * objCustomNavigation;
     PitchmapVC * objPitchview;
+    CommentaryVC *cmntryView  ;
 }
 
 @end
@@ -63,7 +64,7 @@
      [self.scrolllistview setContentSize:CGSizeMake(13*200,70)];
 
     [self.scrolllistview setContentSize:CGSizeMake(14*200,70)];
-
+}
 -(IBAction)didClickreportlistbtn:(id)sender
 {
     UIButton * objBtn =(UIButton*)sender;
@@ -72,6 +73,7 @@
     if(objBtn.tag == 1)
     {
         NSLog(@"%d",objBtn.tag);
+        [self setCommentaryView];
        
     }
     else if(objBtn.tag == 2)
@@ -153,12 +155,12 @@
     // Pass the selected object to the new view controller.
 }
 */
-//initWithFrame:CGRectMake(175, 655,self.btn_compitionselect.frame.size.width,250)];
+
 -(void) setCommentaryView{
-   // CommentaryView *cmntryView = [[CommentaryView alloc]initWithFrame:CGRectMake(0, 400, 700, 1000)];
-     CommentaryVC *cmntryView = [[CommentaryVC alloc]initWithNibName:@"CommentaryVC" bundle:nil];
-    
-    
+     cmntryView = [[CommentaryVC alloc]initWithNibName:@"CommentaryVC" bundle:nil];
+    cmntryView.matchCode = self.matchCode;
+
+    cmntryView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:cmntryView.view];
 }
 
