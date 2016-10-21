@@ -14,12 +14,8 @@
 -(NSMutableArray *)fetchResultsMatches:(NSString*)competitionCode :(NSString*)userCode ;
 -(NSMutableArray *)fetchLiveMatches:(NSString*)competitionCode :(NSString*)userCode ;
 -(NSMutableArray *)FixturesData:(NSString*)competitionCode :(NSString*)userCode;
--(NSMutableArray *)fetchResultsMatches:(NSString*)competitionCode :(NSString*)userCode;
--(NSMutableArray *)fetchLiveMatches:(NSString*)competitionCode :(NSString*)userCode ;
 -(NSMutableArray *)retrieveTorunamentData: (NSString *) userCode;
 
 -(NSMutableArray *)fetchPlayers:(NSString*)matchCode :(NSString*)teamCode;
-
--(NSMutableArray *)retrieveTorunamentData: (NSString *) userCode;
-
+-(NSMutableArray *)retrieveCommentaryData: (NSString *) matchCode;
 @end

@@ -231,6 +231,7 @@
 		CE3DD4251CFBFDD400D93A55 /* TeamLogoRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD4241CFBFDD400D93A55 /* TeamLogoRecords.m */; };
 		CE6D63E21DB5FC2400472312 /* LiveReportRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6D63E11DB5FC2400472312 /* LiveReportRecord.m */; };
 		CE6D63E51DB63A3F00472312 /* ResultReportRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6D63E41DB63A3F00472312 /* ResultReportRecord.m */; };
+		CE6E944C1DBA2E18005E4EE6 /* CommentaryReport.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6E944B1DBA2E18005E4EE6 /* CommentaryReport.m */; };
 		CE7463A81D166F8200D69CD9 /* UpdateBreakVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463A61D166F8200D69CD9 /* UpdateBreakVC.m */; };
 		CE7463A91D166F8200D69CD9 /* UpdateBreakVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */; };
 		CE7463AC1D16942200D69CD9 /* UpdateBreaksArrayDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463AB1D16942200D69CD9 /* UpdateBreaksArrayDetails.m */; };
@@ -263,8 +264,6 @@
 		CEC858A91D154AEF007F5384 /* testViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC858A81D154AEF007F5384 /* testViewController.m */; };
 		CEC858AD1D1557F6007F5384 /* BreakTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CEC858AB1D1557F6007F5384 /* BreakTableViewCell.m */; };
 		CEC858AE1D1557F6007F5384 /* BreakTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CEC858AC1D1557F6007F5384 /* BreakTableViewCell.xib */; };
-		CECDC3841DB4E87700A70A9D /* CommentaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = CECDC3831DB4E87700A70A9D /* CommentaryView.m */; };
-		CECDC3861DB4E8A900A70A9D /* CommentaryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CECDC3851DB4E8A900A70A9D /* CommentaryView.xib */; };
 		CED03D261D1AAE3B00522B89 /* DBMANAGERSYNC.m in Sources */ = {isa = PBXBuildFile; fileRef = CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */; };
 		DC133E2B1D4AF35B00798DD6 /* DBManagerDeleteScoreEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 187E5A4C1D30DAB4008470EB /* DBManagerDeleteScoreEngine.m */; };
 		DC133E2C1D4AF35B00798DD6 /* DeleteScoreEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 187E5A491D30DA8A008470EB /* DeleteScoreEngine.m */; };
@@ -738,6 +737,8 @@
 		CE6D63E11DB5FC2400472312 /* LiveReportRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveReportRecord.m; sourceTree = "<group>"; };
 		CE6D63E31DB63A3F00472312 /* ResultReportRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultReportRecord.h; sourceTree = "<group>"; };
 		CE6D63E41DB63A3F00472312 /* ResultReportRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultReportRecord.m; sourceTree = "<group>"; };
+		CE6E944A1DBA2E18005E4EE6 /* CommentaryReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentaryReport.h; sourceTree = "<group>"; };
+		CE6E944B1DBA2E18005E4EE6 /* CommentaryReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentaryReport.m; sourceTree = "<group>"; };
 		CE7463A51D166F8200D69CD9 /* UpdateBreakVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateBreakVC.h; sourceTree = "<group>"; };
 		CE7463A61D166F8200D69CD9 /* UpdateBreakVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBreakVC.m; sourceTree = "<group>"; };
 		CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateBreakVC.xib; sourceTree = "<group>"; };
@@ -803,9 +804,6 @@
 		CEC858AA1D1557F6007F5384 /* BreakTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BreakTableViewCell.h; sourceTree = "<group>"; };
 		CEC858AB1D1557F6007F5384 /* BreakTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BreakTableViewCell.m; sourceTree = "<group>"; };
 		CEC858AC1D1557F6007F5384 /* BreakTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BreakTableViewCell.xib; sourceTree = "<group>"; };
-		CECDC3821DB4E87700A70A9D /* CommentaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentaryView.h; sourceTree = "<group>"; };
-		CECDC3831DB4E87700A70A9D /* CommentaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentaryView.m; sourceTree = "<group>"; };
-		CECDC3851DB4E8A900A70A9D /* CommentaryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CommentaryView.xib; sourceTree = "<group>"; };
 		CED03D241D1AAE3B00522B89 /* DBMANAGERSYNC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBMANAGERSYNC.h; sourceTree = "<group>"; };
 		CED03D251D1AAE3B00522B89 /* DBMANAGERSYNC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBMANAGERSYNC.m; sourceTree = "<group>"; };
 		DC2710661D25B9A40011C7B0 /* EndSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EndSession.h; sourceTree = "<group>"; };
@@ -1847,6 +1845,8 @@
 				CE6D63E41DB63A3F00472312 /* ResultReportRecord.m */,
 				36DF65EE1DB788110038C1AE /* PlayingSquadRecords.h */,
 				36DF65EF1DB788110038C1AE /* PlayingSquadRecords.m */,
+				CE6E944A1DBA2E18005E4EE6 /* CommentaryReport.h */,
+				CE6E944B1DBA2E18005E4EE6 /* CommentaryReport.m */,
 			);
 			name = Records;
 			sourceTree = "<group>";
@@ -1922,9 +1922,6 @@
 		CECDC3811DB4E77100A70A9D /* ReportView */ = {
 			isa = PBXGroup;
 			children = (
-				CECDC3821DB4E87700A70A9D /* CommentaryView.h */,
-				CECDC3831DB4E87700A70A9D /* CommentaryView.m */,
-				CECDC3851DB4E8A900A70A9D /* CommentaryView.xib */,
 				CEB2CC961DB899C60053DA72 /* CommentaryTVC.h */,
 				CEB2CC971DB899C60053DA72 /* CommentaryTVC.m */,
 				CEB2CC981DB899C60053DA72 /* CommentaryTVC.xib */,
@@ -2069,7 +2066,6 @@
 				CEC858AE1D1557F6007F5384 /* BreakTableViewCell.xib in Resources */,
 				24E7B4B31D23884200EF0D55 /* DeclareInnings.xib in Resources */,
 				0481DD071D213B250084BFF7 /* PowerPlayVC.xib in Resources */,
-				CECDC3861DB4E8A900A70A9D /* CommentaryView.xib in Resources */,
 				CE00180B1CF42FA500668D8B /* Assets.xcassets in Resources */,
 				1876250A1D154495009374F8 /* RevicedOverVC.xib in Resources */,
 				CE0018501CF460DE00668D8B /* RAJDHANI-MEDIUM.TTF in Resources */,
@@ -2135,7 +2131,6 @@
 				188597081D8176D00013507E /* BattingPayerStatisticsRecord.m in Sources */,
 				CE2D671F1D3E3E9D00A8246C /* SBJson4StreamWriterState.m in Sources */,
 				DCF677421D27D61A00B98749 /* LoginDBmanager.m in Sources */,
-				CECDC3841DB4E87700A70A9D /* CommentaryView.m in Sources */,
 				18F8FED01D277B11007A16A9 /* DBManagerEndBall.m in Sources */,
 				24E7B4C21D23D21700EF0D55 /* DBManagerEditScoreEngine.m in Sources */,
 				186DC8191D21451500293B7F /* EndDayTVC.m in Sources */,
@@ -2227,6 +2222,7 @@
 				047E52F11D27D84B00D4CAC6 /* Other_WicketgridTVC.m in Sources */,
 				CE2D671E1D3E3E9D00A8246C /* SBJson4StreamWriter.m in Sources */,
 				2483771E1D2ABE8900FAC40D /* SessionEventPushRecord.m in Sources */,
+				CE6E944C1DBA2E18005E4EE6 /* CommentaryReport.m in Sources */,
 				CEC305811D014C3400301ED3 /* AppealSystemRecords.m in Sources */,
 				047E52E31D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m in Sources */,
 				CE1FBF5B1CF96FE400A9B6FE /* BowlerEvent.m in Sources */,

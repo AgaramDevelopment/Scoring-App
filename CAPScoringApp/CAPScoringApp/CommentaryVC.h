@@ -12,5 +12,6 @@
 @interface CommentaryVC : UIViewController
 @property (strong, nonatomic) IBOutlet CommentaryTVC *commentry_tvc;
 @property (strong, nonatomic) IBOutlet UITableView *commentary_tableview;
+@property(strong,nonatomic)NSString *matchCode;
 
 @end
