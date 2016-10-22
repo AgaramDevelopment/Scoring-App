@@ -10,6 +10,22 @@
 
 @interface PitchmapVC : UIViewController
 
+
+@property(nonatomic,strong) NSString * compititionCode;
+
+@property (nonatomic,strong) NSString * matchCode;
+
+
+
+
+
+
+
+
+
+
+
+
 @property (nonatomic,strong) IBOutlet UIView * filter_view;
 
 @property (nonatomic,strong) IBOutlet UIView * striker_view;
@@ -47,5 +63,7 @@
 @property (nonatomic,strong) IBOutlet UITableView * striker_Tbl;
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * strikerTblYposition;
+
+
 
 @end

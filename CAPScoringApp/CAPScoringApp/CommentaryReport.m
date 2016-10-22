@@ -26,4 +26,9 @@
 @synthesize wide;
 @synthesize legbyes;
 @synthesize byes;
+@synthesize overRuns;
+@synthesize overThrow;
+@synthesize objPenalty;
+@synthesize objPenaltytypecode;
+@synthesize wicketType;
 @end

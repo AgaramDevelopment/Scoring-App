@@ -7,6 +7,7 @@
 //
 
 #import "DBManagerpitchmapReport.h"
+#import "StrikerDetails.h"
 
 
 
@@ -323,6 +324,76 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return eventArray;
 
+}
+
+-(NSString *)getTeamCode:(NSString *)COMPETITIONCODE:(NSString *)MATCHCODE:(NSString *)INNINGSNO
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"select teamcode from inningsevents where competitioncode='%@' and  matchcode ='%@' and inningsno='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+            
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return TOTAL;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            
+            
+        }
+        sqlite3_close(dataBase);
+        
+    }
+    return @"";
+
+}
+-(NSMutableArray *) getStrickerdetail :(NSString *) matchCode :(NSString * )Teamcode
+{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    
+    NSString *dbPath = [self getDBPath];
+    
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        
+        NSString *query=[NSString stringWithFormat:@"SELECT PM.PLAYERNAME,MP.TEAMCODE, COUNT (CASE WHEN MP.PLAYINGORDER <11 THEN 'PLAYED' END) PLAYER FROM MATCHTEAMPLAYERDETAILS AS MP INNER JOIN PLAYERMASTER AS PM ON PM.PLAYERCODE = MP.PLAYERCODE INNER JOIN TEAMMASTER AT ON AT.TEAMCODE = MP.TEAMCODE INNER JOIN METADATA ME ON ME.METASUBCODE = PM.PLAYERROLE WHERE MP.RECORDSTATUS = 'MSC001' AND PM.RECORDSTATUS = 'MSC001' AND MP.MATCHCODE = '%@' AND MP.TEAMCODE = '%@' GROUP BY PLAYINGORDER, PM.PLAYERNAME,MP.TEAMCODE,AT.TEAMNAME,ME.METASUBCODEDESCRIPTION ORDER BY MP.TEAMCODE",matchCode,Teamcode ];
+        
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                StrikerDetails *record=[[StrikerDetails alloc]init];
+        
+                record.playername=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.playercode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                [eventArray addObject:record];
+ 
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        
+        
+        sqlite3_close(dataBase);
+        
+    }
+    return eventArray;
 }
 
 @end

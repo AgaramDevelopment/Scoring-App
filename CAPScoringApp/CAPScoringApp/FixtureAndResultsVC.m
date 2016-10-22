@@ -502,7 +502,8 @@
    // PlayingSquadVC *playing = [[PlayingSquadVC alloc] initWithNibName:@"playingSquadId" bundle:nil];
     [self.navigationController pushViewController:detail animated:YES];
         
-    }else if(tableView == tournamentTableview){
+    }
+    else if(tableView == tournamentTableview){
             isFilter = NO;
             EventRecord *evRec = [self.torunamentArray objectAtIndex:indexPath.row];
             comptnCode =  evRec.competitioncode;
@@ -528,6 +529,7 @@
             LiveReportRecord *record = [_fixturesResultArray objectAtIndex:indexPath.row];
             objReport.matchCode = record.matchCode;
             objReport.competitionCode = record.competitionCode;
+            objReport.matchTypeCode =record.matchTypeCode;
             
         }else if (isResult ==YES)
         {

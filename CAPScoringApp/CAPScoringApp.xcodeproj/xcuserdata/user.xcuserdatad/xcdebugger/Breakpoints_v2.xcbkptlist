@@ -810,7 +810,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/EditMode/EditModeVC.h"
-                  timestampString = "498748368.255907"
+                  timestampString = "498827293.292037"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "162"
@@ -825,7 +825,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/EditMode/EditModeVC.h"
-                  timestampString = "498748368.256164"
+                  timestampString = "498827293.29218"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "162"
@@ -2958,7 +2958,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "498748368.317034"
+                  timestampString = "498827293.347251"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "16071"
@@ -2973,7 +2973,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreEnginVC/ScorEnginVC.m"
-                  timestampString = "498748368.317327"
+                  timestampString = "498827293.347392"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "16071"
@@ -3629,7 +3629,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreCardVC.m"
-                  timestampString = "498748368.33079"
+                  timestampString = "498827293.359041"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1407"
@@ -3644,7 +3644,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreCardVC.m"
-                  timestampString = "498748368.330938"
+                  timestampString = "498827293.359178"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1407"
@@ -3821,7 +3821,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreCardVC.m"
-                  timestampString = "498748368.339338"
+                  timestampString = "498827293.365693"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1971"
@@ -3836,7 +3836,7 @@
                   moduleName = "CAPScoringApp"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/user/Desktop/NEW%20SCA/Scoring-App/CAPScoringApp/CAPScoringApp/ViewController/ScoreCardVC.m"
-                  timestampString = "498748368.339487"
+                  timestampString = "498827293.365834"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1971"
@@ -4290,8 +4290,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "160"
             endingLineNumber = "160"
-            landmarkName = "-setCommentaryView"
-            landmarkType = "5">
+            landmarkName = "@implementation ReportVC"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -4301,12 +4301,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/DBManagerReports.m"
-            timestampString = "498748294.408108"
+            timestampString = "498814769.684471"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "372"
-            endingLineNumber = "372"
+            startingLineNumber = "374"
+            endingLineNumber = "374"
             landmarkName = "-retrieveCommentaryData::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/CommentaryVC.m"
+            timestampString = "498828321.006068"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/CommentaryVC.m"
+            timestampString = "498828321.006068"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "140"
+            endingLineNumber = "140"
+            landmarkName = "-createBallTickers::::::::::::"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CAPScoringApp/CommentaryVC.m"
+            timestampString = "498828321.006068"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
+            landmarkName = "-createBallTickerInstance:::"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -99,7 +99,8 @@
          NSLog(@"%d",objBtn.tag);
         objPitchview =[[PitchmapVC alloc] initWithNibName:@"PitchmapVC" bundle:nil];
         objPitchview.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
-        //[objPitchview.filter_Btn addTarget:self action:@selector(didClickFilterbtn:) forControlEvents:UIControlEventTouchUpInside];
+        objPitchview.matchCode =self.matchCode;
+        objPitchview.compititionCode =self.competitionCode;
         [self.view addSubview:objPitchview.view];
     }
     else if(objBtn.tag == 5)
