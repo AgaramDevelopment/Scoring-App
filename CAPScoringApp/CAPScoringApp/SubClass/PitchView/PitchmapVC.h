@@ -15,6 +15,8 @@
 
 @property (nonatomic,strong) NSString * matchCode;
 
+@property (nonatomic,strong) NSString * matchTypecode;
+
 
 
 
@@ -27,6 +29,32 @@
 
 
 @property (nonatomic,strong) IBOutlet UIView * filter_view;
+
+@property (nonatomic,strong) IBOutlet UIButton * all_Btn;
+
+@property (nonatomic,strong) IBOutlet UIButton * Run1_Btn;
+
+@property (nonatomic,strong) IBOutlet UIButton * Run2_Btn;
+
+@property (nonatomic,strong) IBOutlet UIButton * Run3_Btn;
+
+@property (nonatomic,strong) IBOutlet UIButton * Run4_Btn;
+
+@property (nonatomic,strong) IBOutlet UIButton * Run6_Btn;
+
+
+
+@property (nonatomic,strong) IBOutlet UIButton * ball_Btn;
+
+@property (nonatomic,strong) IBOutlet UIButton * dotball_Btn;
+
+@property (nonatomic,strong) IBOutlet UIButton * wicket_Btn;
+
+
+
+
+
+
 
 @property (nonatomic,strong) IBOutlet UIView * striker_view;
 

@@ -1518,7 +1518,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                         y1position = [objRecord.WWY1 intValue];
                         x2position  =[objRecord .WWX2 intValue];
                         y2position  =[objRecord.WWY2 intValue];
-        
+                       
         
                         if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
         
