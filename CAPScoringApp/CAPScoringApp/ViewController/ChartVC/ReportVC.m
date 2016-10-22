@@ -10,12 +10,14 @@
 #import "CustomNavigationVC.h"
 #import "CommentaryVC.h"
 #import "PitchmapVC.h"
+#import "SpiderWagonReportVC.h"
 
 @interface ReportVC ()
 {
     CustomNavigationVC * objCustomNavigation;
     PitchmapVC * objPitchview;
-    CommentaryVC *cmntryView  ;
+    CommentaryVC *cmntryView;
+    SpiderWagonReportVC *spiderView;
 }
 
 @end
@@ -111,6 +113,7 @@
     else if(objBtn.tag == 6)
     {
          NSLog(@"%d",objBtn.tag);
+        [self setSpiderView];
     }
     else if(objBtn.tag == 7)
     {
@@ -172,6 +175,18 @@
     [self.view addSubview:cmntryView.view];
 }
 
+
+
+
+-(void) setSpiderView{
+    
+    spiderView = [[SpiderWagonReportVC alloc]initWithNibName:@"SpiderWagonReportVC" bundle:nil];
+   //spiderView.matchCode = self.matchCode;
+    
+    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:spiderView.view];
+    
+}
     
     @end
 
