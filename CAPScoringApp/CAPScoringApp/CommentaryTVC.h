@@ -17,4 +17,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_players_name;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_commentary;
 @property (strong, nonatomic) IBOutlet UIView *view_header;
+@property(nonatomic,strong) IBOutlet NSLayoutConstraint *yContentView;
+
 @end

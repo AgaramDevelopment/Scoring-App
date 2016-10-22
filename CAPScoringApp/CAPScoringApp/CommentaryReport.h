@@ -27,6 +27,12 @@
 @property(strong,nonatomic)NSString *legbyes;
 @property(strong,nonatomic)NSString *byes;
 @property(strong,nonatomic)NSString *isHeader;
+@property(strong,nonatomic)NSString *overRuns;
+@property(strong,nonatomic)NSString *overThrow;
+@property(strong,nonatomic)NSString *objPenalty;
+@property(strong,nonatomic)NSString *objPenaltytypecode;
+@property(strong,nonatomic)NSString *wicketType;
+
 
 
 @end

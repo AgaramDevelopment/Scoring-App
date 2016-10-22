@@ -12,8 +12,8 @@
 
 @interface CommentaryVC ()
 @property (nonatomic,strong) NSMutableArray *commentaryArray;
-
 @end
+
 
 @implementation CommentaryVC
 
@@ -89,11 +89,31 @@
         cell.lbl_team_score.text = cmntryRpt.teamTotal;
         cell.lbl_players_name.text = cmntryRpt.sAndNsName;
         cell.lbl_over.text = cmntryRpt.ballNo;
+        cell.lbl_runs_wicks.text = [NSString stringWithFormat:@"%@ Runs %@ Wicket",cmntryRpt.overRuns,cmntryRpt.wicket];
         if([cmntryRpt.isHeader isEqualToString:@"1"]){
+            cell.yContentView.constant = 0;
             cell.view_header.hidden = NO;
+          
         }else{
+            cell.yContentView.constant = -46;
             cell.view_header.hidden = YES;
         }
+        
+        
+        for (UIView *subView in cell.lbl_ball_ticker.subviews)
+        {
+            if (subView.tag == 99)
+            {
+                [subView removeFromSuperview];
+            }
+        }
+        
+        [cell.lbl_ball_ticker addSubview:[self createBallTickers:[cmntryRpt.overThrow intValue] :[cmntryRpt.runs intValue] :[cmntryRpt.noBall intValue] :[cmntryRpt.wide intValue] :[cmntryRpt.legbyes intValue] :[cmntryRpt.byes intValue] :cmntryRpt.isFour :cmntryRpt.isSix  :cmntryRpt.wicketNo  :cmntryRpt.wicketType :cmntryRpt.objPenaltytypecode  :cmntryRpt.objPenalty]];
+//        
+//    createBallTickers: (int) _overthrow : (int) _runs : (int) _noball :(int) _wide :(int) _legbyes :(int) _byes : (NSString*)objIsFour :(NSString*) objIssix :(NSString*) objWicketno :(NSString*) objWicketType :(NSString*) objPenaltytypecode :(NSString*) objPenalty
+
+        
+        
         
         return cell;
     }
@@ -106,152 +126,144 @@
     if([cmntryRpt.isHeader isEqualToString:@"1"]){
         return 200;
     }else{
-        return 200-46;
+        return 154;
     }
-    
+
 }
 
-//
-//- (void) CreateBallTickers: (NSMutableArray *) arrayBallDetails
-//{
-//    for (BallEventRecord *drballdetails in arrayBallDetails)
-//    {
-//        NSMutableArray* dicBallKeysArray = [[NSMutableArray alloc] init];
-//        NSMutableDictionary *dicBall = [[NSMutableDictionary alloc] init];
+
+- (UIView *)  createBallTickers: (int) _overthrow : (int) _runs : (int) _noball :(int) _wide :(int) _legbyes :(int) _byes : (NSString*)objIsFour :(NSString*) objIssix :(NSString*) objWicketno :(NSString*) objWicketType :(NSString*) objPenaltytypecode :(NSString*) objPenalty
+
+{
+    
+    
+        NSMutableArray* dicBallKeysArray = [[NSMutableArray alloc] init];
+        NSMutableDictionary *dicBall = [[NSMutableDictionary alloc] init];
 //        int _overthrow = [drballdetails.objOverthrow intValue];
 //        int _runs = [drballdetails.objRuns intValue] + _overthrow;
 //        int _noball = [drballdetails.objNoball intValue];
 //        int _wide = [drballdetails.objWide intValue];
 //        int _legbyes = [drballdetails.objLegByes intValue];
 //        int _byes = [drballdetails.objByes intValue];
-//        
-//        _noball = _noball > 1 ? _noball - 1 : _noball;
-//        
-//        if ([drballdetails.objIsFour intValue] == 1)//Boundary Four
-//            [dicBall setValue:@"4" forKey: @"RUNS"];
-//        else if ([drballdetails.objIssix intValue] == 1)//Boundary Six
-//            [dicBall setValue:@"6" forKey: @"RUNS"];
-//        else
-//            [dicBall setValue:[NSString stringWithFormat:@"%i", _runs] forKey: @"RUNS"];
-//        [dicBallKeysArray addObject:@"RUNS"];
-//        if (_noball != 0)//Ball ticker for no balls.
-//        {
-//            if (_noball > 0)
-//            {
-//                [dicBall removeObjectForKey:@"RUNS"];
-//                [dicBall setValue:[NSString stringWithFormat:@"%i", (_runs + _noball - 1)] forKey: @"RUNS"];
-//            }
-//            [dicBall setValue:@"NB" forKey: @"EXTRAS-NB"];
-//            [dicBallKeysArray addObject:@"EXTRAS-NB"];
-//        }
-//        
-//        if (_wide != 0)//Ball ticker for wide balls.
-//        {
-//            if (_wide > 0)
-//            {
-//                [dicBall removeObjectForKey:@"RUNS"];
-//                [dicBall setValue:[NSString stringWithFormat:@"%i", (_wide - 1)] forKey: @"RUNS"];
-//            }
-//            [dicBall setValue:@"WD" forKey: @"EXTRAS"];
-//            [dicBallKeysArray addObject:@"EXTRAS"];
-//        }
-//        
-//        if (_legbyes != 0)//Ball ticker for leg byes.
-//        {
-//            if (_legbyes > 0)
-//            {
-//                [dicBall removeObjectForKey:@"RUNS"];
-//                [dicBall setValue:[NSString stringWithFormat:@"%i", (_legbyes + /*_overthrow +*/ (_noball == 0 ? 0 : _noball - 1))] forKey: @"RUNS"];
-//            }
-//            if (_noball == 0)
-//            {
-//                [dicBall setValue:@"LB" forKey: @"EXTRAS"];
-//                [dicBallKeysArray addObject:@"EXTRAS"];
-//            }
-//        }
-//        
-//        if (_byes != 0)//Ball ticker for byes.
-//        {
-//            if (_byes > 0)
-//            {
-//                [dicBall removeObjectForKey:@"RUNS"];
-//                [dicBall setValue:[NSString stringWithFormat:@"%i", (_byes + /*_overthrow +*/ (_noball == 0 ? 0 : _noball - 1))] forKey: @"RUNS"];
-//            }
-//            if (_noball == 0)
-//            {
-//                [dicBall setValue:@"B" forKey: @"EXTRAS"];
-//                [dicBallKeysArray addObject:@"EXTRAS"];
-//            }
-//        }
-//        if ([drballdetails.objWicketno intValue] > 0)
-//        {
-//            if ([drballdetails.objWicketType  isEqual: @"MSC102"])
-//                [dicBall setValue:@"RH" forKey: @"WICKETS"];
-//            else
-//                [dicBall setValue:@"W" forKey: @"WICKETS"];
-//            [dicBallKeysArray addObject:@"WICKETS"];
-//        }
-//        //MSC134 - BATTING, MSC135 - BOWLING
-//        int _penalty;
-//        NSString* _penaltyLabel = drballdetails.objPenaltytypecode;
-//        _penalty = [drballdetails.objPenalty intValue];
-//        if (_penaltyLabel.length > 0 && _penalty > 0)
-//        {
-//            _penaltyLabel = [_penaltyLabel isEqual: @"MSC134"] ?
-//            ([@"BP " stringByAppendingString: [NSString stringWithFormat:@"%i", _penalty]]) :
-//            ([_penaltyLabel isEqual: @"MSC135"] ?
-//             ([@"FP " stringByAppendingString: [NSString stringWithFormat:@"%i", _penalty]]) :
-//             @"");
-//            [dicBall setValue:_penaltyLabel forKey: @"PENALTY"];
-//            [dicBallKeysArray addObject:@"PENALTY"];
-//        }
-//        
-//        NSString* content = [[NSString alloc] init];
-//        bool isExtras = false;
-//        bool isSix = [drballdetails.objIssix intValue] == 1;
-//        bool isFour = [drballdetails.objIsFour intValue] == 1;
-//        bool isSpecialEvents = isFour || isSix || !([[NSString stringWithFormat:@"%i",[drballdetails.objWicketno intValue]]  isEqual: @"0"]);
-//        
-//        for(int i = 0; i < dicBallKeysArray.count; i++)
-//        {
-//            NSString *dicBallKey = [dicBallKeysArray objectAtIndex:i];
-//            isExtras = [[dicBall objectForKey:dicBallKey] isEqual : @"WD"] ||
-//            [[dicBall objectForKey:dicBallKey] isEqual : @"NB"] ||
-//            [[dicBall objectForKey:dicBallKey] isEqual : @"B"] ||
-//            [[dicBall objectForKey:dicBallKey] isEqual : @"LB"] ||
-//            [[dicBall objectForKey:dicBallKey] isEqual : @"PENALTY"];
-//            
-//            if ([dicBallKey isEqual: @"RUNS"] && [[dicBall objectForKey:dicBallKey] isEqual : @"0"] && dicBall.count > 1)
-//                content = [content stringByAppendingString: content];
-//            else
-//                content = [content stringByAppendingString: [[dicBall objectForKey:dicBallKey] stringByAppendingString:@" " ]];
-//        }
-//        content = [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-//        //To Create ball tiker for each row.
-//        
-//        
-//        [ScrollViewer insertSubview: [self CreateBallTickerInstance
-//                                      :content
-//                                      :isExtras
-//                                      :isSpecialEvents
-//                                      :[drballdetails.objMarkedforedit intValue] == 1
-//                                      :drballdetails.objBallno
-//                                      :xposition
-//                                      :index] atIndex:0];
-//        if (content.length >= 5)
-//            xposition = xposition + 7 + (15 * content.length);
-//        else if (content.length >= 3)
-//            xposition = xposition + 7 + (13 * content.length);
-//        else
-//            xposition = xposition + (isExtras ? 57 : 47);
-//        
-//        index ++;
-//    }
-//   
-//}
-//
+    
+    
+        _runs += _overthrow;
+    
+        _noball = _noball > 1 ? _noball - 1 : _noball;
+        
+        if ([objIsFour intValue] == 1)//Boundary Four
+            [dicBall setValue:@"4" forKey: @"RUNS"];
+        else if ([objIssix intValue] == 1)//Boundary Six
+            [dicBall setValue:@"6" forKey: @"RUNS"];
+        else
+            [dicBall setValue:[NSString stringWithFormat:@"%i", _runs] forKey: @"RUNS"];
+        [dicBallKeysArray addObject:@"RUNS"];
+        if (_noball != 0)//Ball ticker for no balls.
+        {
+            if (_noball > 0)
+            {
+                [dicBall removeObjectForKey:@"RUNS"];
+                [dicBall setValue:[NSString stringWithFormat:@"%i", (_runs + _noball - 1)] forKey: @"RUNS"];
+            }
+            [dicBall setValue:@"NB" forKey: @"EXTRAS-NB"];
+            [dicBallKeysArray addObject:@"EXTRAS-NB"];
+        }
+        
+        if (_wide != 0)//Ball ticker for wide balls.
+        {
+            if (_wide > 0)
+            {
+                [dicBall removeObjectForKey:@"RUNS"];
+                [dicBall setValue:[NSString stringWithFormat:@"%i", (_wide - 1)] forKey: @"RUNS"];
+            }
+            [dicBall setValue:@"WD" forKey: @"EXTRAS"];
+            [dicBallKeysArray addObject:@"EXTRAS"];
+        }
+        
+        if (_legbyes != 0)//Ball ticker for leg byes.
+        {
+            if (_legbyes > 0)
+            {
+                [dicBall removeObjectForKey:@"RUNS"];
+                [dicBall setValue:[NSString stringWithFormat:@"%i", (_legbyes + /*_overthrow +*/ (_noball == 0 ? 0 : _noball - 1))] forKey: @"RUNS"];
+            }
+            if (_noball == 0)
+            {
+                [dicBall setValue:@"LB" forKey: @"EXTRAS"];
+                [dicBallKeysArray addObject:@"EXTRAS"];
+            }
+        }
+        
+        if (_byes != 0)//Ball ticker for byes.
+        {
+            if (_byes > 0)
+            {
+                [dicBall removeObjectForKey:@"RUNS"];
+                [dicBall setValue:[NSString stringWithFormat:@"%i", (_byes + /*_overthrow +*/ (_noball == 0 ? 0 : _noball - 1))] forKey: @"RUNS"];
+            }
+            if (_noball == 0)
+            {
+                [dicBall setValue:@"B" forKey: @"EXTRAS"];
+                [dicBallKeysArray addObject:@"EXTRAS"];
+            }
+        }
+        if ([objWicketno intValue] > 0)
+        {
+            if ([objWicketType  isEqual: @"MSC102"])
+                [dicBall setValue:@"RH" forKey: @"WICKETS"];
+            else
+                [dicBall setValue:@"W" forKey: @"WICKETS"];
+            [dicBallKeysArray addObject:@"WICKETS"];
+        }
+        //MSC134 - BATTING, MSC135 - BOWLING
+        int _penalty;
+        NSString* _penaltyLabel = objPenaltytypecode;
+        _penalty = [objPenalty intValue];
+        if (_penaltyLabel.length > 0 && _penalty > 0)
+        {
+            _penaltyLabel = [_penaltyLabel isEqual: @"MSC134"] ?
+            ([@"BP " stringByAppendingString: [NSString stringWithFormat:@"%i", _penalty]]) :
+            ([_penaltyLabel isEqual: @"MSC135"] ?
+             ([@"FP " stringByAppendingString: [NSString stringWithFormat:@"%i", _penalty]]) :
+             @"");
+            [dicBall setValue:_penaltyLabel forKey: @"PENALTY"];
+            [dicBallKeysArray addObject:@"PENALTY"];
+        }
+        
+        NSString* content = [[NSString alloc] init];
+        bool isExtras = false;
+        bool isSix = [objIssix intValue] == 1;
+        bool isFour = [objIsFour intValue] == 1;
+        bool isSpecialEvents = isFour || isSix || !([[NSString stringWithFormat:@"%i",[objWicketno intValue]]  isEqual: @"0"]);
+        
+        for(int i = 0; i < dicBallKeysArray.count; i++)
+        {
+            NSString *dicBallKey = [dicBallKeysArray objectAtIndex:i];
+            isExtras = [[dicBall objectForKey:dicBallKey] isEqual : @"WD"] ||
+            [[dicBall objectForKey:dicBallKey] isEqual : @"NB"] ||
+            [[dicBall objectForKey:dicBallKey] isEqual : @"B"] ||
+            [[dicBall objectForKey:dicBallKey] isEqual : @"LB"] ||
+            [[dicBall objectForKey:dicBallKey] isEqual : @"PENALTY"];
+            
+            if ([dicBallKey isEqual: @"RUNS"] && [[dicBall objectForKey:dicBallKey] isEqual : @"0"] && dicBall.count > 1)
+                content = [content stringByAppendingString: content];
+            else
+                content = [content stringByAppendingString: [[dicBall objectForKey:dicBallKey] stringByAppendingString:@" " ]];
+        }
+        content = [content stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        //To Create ball tiker for each row.
+        
+    return   [self createBallTickerInstance
+                                      :content
+                                      :isExtras
+                                      :isSpecialEvents];
+    
+    
+   
+}
 
-- (UIView *) CreateBallTickerInstance: (NSString *) content : (bool) isExtras : (bool) isSpecialEvents : (bool) isMarkedForEdit : (NSString *) ballno : (CGFloat) xposition : (int) index
+
+- (UIView *) createBallTickerInstance: (NSString *) content : (bool) isExtras : (bool) isSpecialEvents
 {
     //Hints
     //WD NB LB B = Width="55" BorderBrush="#5283AE" Background="Transparent" (Foreground="#5283AE")
@@ -291,10 +303,10 @@
     else if (content.length >= 3)
         totalWidth = 13 * content.length;
     
-    UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(xposition, 0, totalWidth, 50)];
+    UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 48, 48)];
     
     // Border Control
-    UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, BallTicker.frame.size.width, 40)];
+    UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 48, 48)];
     btnborder.layer.cornerRadius = isExtras ? (content.length >= 5 ? btnborder.frame.size.width / 3.5 : btnborder.frame.size.width / 2.5) : (content.length >= 3 ? btnborder.frame.size.width / 2.5 : btnborder.frame.size.width / 2);
     btnborder.clipsToBounds = NO;
     btnborder.layer.borderWidth = 3.5;
@@ -321,8 +333,6 @@
         btnborder.layer.backgroundColor =(isExtras ? extrasBrushBG : runBrushBG).CGColor;
     }
     
-    if (isMarkedForEdit)
-        btnborder.layer.borderColor = markedForEditBrushBDR.CGColor;
     
     [btnborder setTitle:content forState:UIControlStateNormal];
     //for showing different color in ballticker text based on event
@@ -330,18 +340,10 @@
     [btnborder setTitleColor:brushFGSplEvents forState:UIControlStateNormal] ;
     btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20];
     
-    btnborder.tag= index;
-    
-    
-    UILabel *BallTickerNo = [[UILabel alloc] initWithFrame:CGRectMake(0,48, totalWidth,12)];
-    BallTickerNo.textAlignment = NSTextAlignmentCenter;
-    BallTickerNo.font = [UIFont fontWithName:@"RAJDHANI-REGULAR" size:13];
-    [BallTickerNo setText:ballno];
-    [BallTickerNo setTextColor:brushFGSplEvents];
-    
     
     [BallTicker addSubview:btnborder];
-    [BallTicker insertSubview:BallTickerNo atIndex:0];
+    
+        BallTicker.tag = 99;
     return BallTicker;
     
     
