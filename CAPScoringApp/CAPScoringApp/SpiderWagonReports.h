@@ -52,6 +52,8 @@
 @property(nonatomic,assign)NSNumber *V_FROMOVER;
 @property(nonatomic,assign)NSNumber *V_TOOVER;
 
+@property(strong,nonatomic)NSString *DEFAULT;
+
 
 
 -(void)fetchSpiderWagon:(NSString*)MATCHTYPECODE:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSString*)SESSIONS:(NSString*)DAYS:(NSString*)STRIKER:(NSString*)NONSTRIKER:(NSString*)BOWLER:(NSString*)SHOT:(NSString*)REGION:(NSString*)RUNS:(NSString*)BOUNFOUR:(NSString*)BOUNSIX:(NSString*)WIDE:(NSString*)NOBALL:(NSString*)BYES:(NSString*)LEGBYES:(NSString*)ISAPPEAL:(NSString*)ISUNCOMFORATABLE:(NSString*)ISBEATEN:(NSString*)ISWICKETTAKINGBALL:(NSString*)ISRELEASESHOT:(NSString*)FROMOVER:(NSString*)TOOVER:(NSString*)SHOTTYPECATEGORY:(NSString*)BATTINGSTYLE:(NSString*)BOWLINGSTYLE:(NSString*)BOWLINGTYPE:(NSString*)WICKETTYPE:(NSString*)BOWLINGSPEC:(NSString*)STARTDATE:(NSString*)ENDDATE:(NSString*)VENUE;
