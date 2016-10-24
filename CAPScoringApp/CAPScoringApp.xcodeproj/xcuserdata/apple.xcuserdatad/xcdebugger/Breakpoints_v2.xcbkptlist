@@ -698,22 +698,6 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/SubClass/PitchView/PitchmapVC.m"
-            timestampString = "498996949.451528"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "80"
-            endingLineNumber = "80"
-            landmarkName = "-viewDidLoad"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CAPScoringApp/SubClass/PitchView/PitchmapVC.m"
             timestampString = "499005428.044563"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
@@ -746,12 +730,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/SubClass/PitchView/PitchmapVC.m"
-            timestampString = "499005428.044563"
+            timestampString = "499006520.540079"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
-            landmarkName = "-drawpitchMethod"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
+            landmarkName = "-didClickStandard:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -762,12 +746,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CAPScoringApp/SubClass/PitchView/PitchmapVC.m"
-            timestampString = "499005395.088379"
+            timestampString = "499006556.837298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "98"
-            endingLineNumber = "98"
-            landmarkName = "-drawpitchMethod"
+            startingLineNumber = "349"
+            endingLineNumber = "349"
+            landmarkName = "-didClickStatistics:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

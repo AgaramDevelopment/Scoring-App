@@ -341,12 +341,47 @@
 {
     self.statistics_Btn.backgroundColor=[UIColor clearColor];
     self.standard_Btn.backgroundColor=[UIColor blackColor];
+    [self Stardardpitchmap];
+    
 }
 
 -(IBAction)didClickStatistics:(id)sender
 {
     self.statistics_Btn.backgroundColor=[UIColor blackColor];
     self.standard_Btn.backgroundColor=[UIColor clearColor];
+    
+}
+
+-(void)Stardardpitchmap;
+{
+    
+    for(UIImageView * obj in [self.pitch_Img subviews])
+    {
+        NSLog(@"%@",obj);
+        [obj removeFromSuperview];
+    }
+
+    
+    NSMutableArray * objPitchdetail=[DBMpitchReport getPitchmapdetails :self.matchTypecode :self.compititionCode :self.matchCode :_teamCode :self.lnningsno  :self.selectStrikerCode : self.selectRun: self.selectLineCode : self.selectLengthCode];
+    
+    int xposition;
+    int yposition;
+
+    
+    for(int i=0; i<objPitchdetail.count;i++)
+    {
+        PitchReportdetailRecord * objRecord =(PitchReportdetailRecord *)[objPitchdetail objectAtIndex:i];
+        
+        xposition = [objRecord.PMX2 intValue];
+        yposition = [objRecord.PMY2 intValue];
+        
+        if(!(xposition == 1 && yposition ==1)){
+            
+           
+            [self pitchpositioncount :objRecord.PMlengthcode :objRecord.PMlineCode :objRecord.BattingStyle];
+            
+        }
+    }
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -436,7 +471,41 @@
     self.striker_Tbl.hidden=YES;
 }
 
-
+-(void)pitchpositioncount:(NSString *) PMLengthcode :(NSString *) PMLinecode :(NSString *) battingStyle
+{
+    if([battingStyle isEqualToString:@"MSC013"])
+    {
+        if([PMLengthcode isEqualToString:@"MSC037"])
+        {
+            if([PMLinecode isEqualToString:@"MSC031"])
+            {
+                ///lable
+            }
+            else if ([PMLinecode isEqualToString:@"MSC028"])
+            {
+                //lable
+                
+            }
+            else if ([PMLinecode isEqualToString:@"MSC026"])
+            {
+                
+            }
+            else if ([PMLinecode isEqualToString:@"MSC029"])
+            {
+                
+            }
+            else if ([PMLinecode isEqualToString:@"MSC030"])
+            {
+                
+            }
+        }
+    }
+    else
+    {
+        
+    }
+    
+}
 
 
 
@@ -445,14 +514,5 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end
