@@ -187,9 +187,13 @@
 -(void) setSpiderView{
     
     spiderView = [[SpiderWagonReportVC alloc]initWithNibName:@"SpiderWagonReportVC" bundle:nil];
-   //spiderView.matchCode = self.matchCode;
+    spiderView.matchCode = self.matchCode;
+    spiderView.compititionCode = self.competitionCode;
+    spiderView.matchTypeCode = self.matchTypeCode;
     
-    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    spiderView.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    
+//    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:spiderView.view];
     
 }

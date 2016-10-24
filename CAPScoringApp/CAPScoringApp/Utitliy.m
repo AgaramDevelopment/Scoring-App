@@ -152,6 +152,33 @@
 }
 
 
+//For Report
+
++(NSNumber *) getWagonWheelXAxisForReportDevice:(NSNumber*) pmX {
+    
+    NSNumber *baseWWWidth = [NSNumber numberWithInt:322];
+    
+    NSNumber *deviceProWidth = [NSNumber numberWithInt:600];
+    
+    NSNumber *deviceOtherWidth = [NSNumber numberWithInt:600];
+    
+    NSNumber *result = [NSNumber numberWithFloat:((pmX.floatValue/baseWWWidth.floatValue)*( [AppDelegate isIpadPro] ?deviceProWidth.floatValue: deviceOtherWidth.floatValue))];
+    
+    return result;
+}
+
++(NSNumber *) getWagonWheelYAxisForReportDevice:(NSNumber*) pmY {
+    
+    NSNumber *baseWWHeight = [NSNumber numberWithInt:295];
+    
+    NSNumber *deviceProHeight = [NSNumber numberWithInt:600];
+    
+    NSNumber *deviceOtherHeight = [NSNumber numberWithInt:600];
+    
+    NSNumber *result = [NSNumber numberWithFloat:((pmY.floatValue/baseWWHeight.floatValue)*( [AppDelegate isIpadPro] ?deviceProHeight.floatValue: deviceOtherHeight.floatValue))];
+    
+    return result;
+}
 
 @end
 
