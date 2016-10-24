@@ -33,5 +33,6 @@
 //For Report
 +(NSNumber *) getWagonWheelXAxisForReportDevice:(NSNumber*) pmX;
 +(NSNumber *) getWagonWheelYAxisForReportDevice:(NSNumber*) pmY;
-
++(NSNumber *) getWagonWheelXAxisForReportDB:(NSNumber*) pmX;
++(NSNumber *) getWagonWheelYAxisForReportDB:(NSNumber*) pmY;
 @end

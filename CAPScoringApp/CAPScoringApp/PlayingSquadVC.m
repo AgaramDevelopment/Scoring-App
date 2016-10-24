@@ -138,13 +138,40 @@
         PlayingSquadRecords *recordB = [_teamBplayerArray objectAtIndex:indexPath.row];
     
     
-    if ([_teamBplayerArray count]>indexPath.row) {
-        
-        
-    }
+//    if ([_playerArray count] < indexPath.row) {
+//        
+//        
+//        cell.txt_teamA_players.text = record.playerName;
+//        cell.txt_teamB_players.text = recordB.playerName;
+//        
+//        
+//    }else{
+//        
+//        cell.txt_teamA_players.text = @"";
+//        cell.txt_teamB_players.text = @"";
+//        
+//    }
+    
+    
+//    if ([_teamBplayerArray count]<indexPath.row) {
+//        
+//        
+//        cell.txt_teamA_players.text = record.playerName;
+//        cell.txt_teamB_players.text = recordB.playerName;
+//
+//        
+//    }else{
+//        
+//        cell.txt_teamA_players.text = @"";
+//        cell.txt_teamB_players.text = @"";
+//
+//    }
+//
+    
     
     cell.txt_teamA_players.text = record.playerName;
     cell.txt_teamB_players.text = recordB.playerName;
+    
     
     //set icon for player roles - team A
     

@@ -339,7 +339,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 }
 
--(NSString *)getTeamCode:(NSString *)COMPETITIONCODE:(NSString *)MATCHCODE:(NSString *)INNINGSNO
+-(NSString *) getTeamCode:(NSString *)COMPETITIONCODE:(NSString *)MATCHCODE:(NSString *)INNINGSNO
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
