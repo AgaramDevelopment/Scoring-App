@@ -10,6 +10,13 @@
 
 @interface SpiderWagonReportVC : UIViewController
 
+
+@property(nonatomic,strong) NSString * compititionCode;
+@property (nonatomic,strong) NSString * matchCode;
+@property (nonatomic,strong) NSString * matchTypeCode;
+
+
+
 - (IBAction)btn_first_inns:(id)sender;
 
 - (IBAction)btn_sec_inns:(id)sender;
@@ -18,7 +25,11 @@
 
 - (IBAction)btn_fourth_inns:(id)sender;
 
-@property (strong, nonatomic) IBOutlet UIImageView *img_wagon;
+- (IBAction)hide_Filer_view:(id)sender;
+
 @property (strong, nonatomic) IBOutlet UIView *filter_view;
+@property (strong, nonatomic) IBOutlet UIImageView *img_wagon;
+
+
 
 @end

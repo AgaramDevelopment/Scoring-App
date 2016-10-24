@@ -60,43 +60,10 @@
 {
     
     DBManagerSpiderWagonReport *dbSpiderWagon = [[DBManagerSpiderWagonReport alloc]init];
-    
-    V_FROMOVER = [NSNumber numberWithInt:0];
-    V_TOOVER = [NSNumber numberWithInt:0];
+
     
     
-    if ([FROMOVER isEqualToString:nil] || [FROMOVER isEqualToString:@""]) {
-        
-        V_FROMOVER = [NSNumber numberWithInt: -1];
-    }else{
-        V_FROMOVER = [NSNumber numberWithInt: FROMOVER.intValue];
-    }
-    
-    
-    if ([TOOVER isEqualToString:nil] || [TOOVER isEqualToString:@""]) {
-        
-    V_TOOVER = [NSNumber numberWithInt: -1];
-        
-    }else{
-        V_TOOVER = [NSNumber numberWithInt: TOOVER.intValue];
-    }
-    
-    
-    DEFAULT = @"0001-01-01";
-    
-    if ([STARTDATE isEqualToString:@""]) {
-        
-        STARTDATE = [NSString stringWithFormat:@"%@",DEFAULT];
-        
-    }
-        
-    if ([ENDDATE isEqualToString:@""]) {
-        
-        ENDDATE = [NSString stringWithFormat:@"%@",DEFAULT];
-    }
-    
-    
-    [dbSpiderWagon getSpiderWagon:MATCHTYPECODE:COMPETITIONCODE:MATCHCODE:TEAMCODE:INNINGSNO:DAYS:SESSIONS:STRIKER:NONSTRIKER:BOWLER:SHOT:REGION:RUNS:BOUNFOUR:BOUNSIX:V_FROMOVER:V_TOOVER:WIDE:NOBALL:BYES:LEGBYES:WIDE:NOBALL:BYES:LEGBYES:ISAPPEAL:ISBEATEN:ISWICKETTAKINGBALL:ISUNCOMFORATABLE:ISRELEASESHOT:ISBEATEN:ISWICKETTAKINGBALL:ISUNCOMFORATABLE:ISRELEASESHOT:BATTINGSTYLE:BOWLINGSTYLE:SHOTTYPECATEGORY:BOWLINGSPEC:STARTDATE:DEFAULT:ENDDATE];
+//   [dbSpiderWagon getSpiderWagon:MATCHTYPECODE :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :STRIKERCODE :NONSTRIKERCODE :BOWLERCODE :RUNS :ISFOUR :ISSIX];
     
     
     
