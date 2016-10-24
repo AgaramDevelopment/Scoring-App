@@ -32,6 +32,7 @@
 @property(strong,nonatomic)NSString *objPenalty;
 @property(strong,nonatomic)NSString *objPenaltytypecode;
 @property(strong,nonatomic)NSString *wicketType;
+@property(strong,nonatomic)NSString *teamShortName;
 
 
 

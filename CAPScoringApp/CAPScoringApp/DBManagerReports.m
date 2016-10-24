@@ -367,7 +367,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.overRuns=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
 
                 record.sAndNsName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
-                
+                record.teamShortName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+
                 record.runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
                 
                 record.wicket=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];

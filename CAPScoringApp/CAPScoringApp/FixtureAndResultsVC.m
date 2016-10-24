@@ -69,11 +69,12 @@
     
     
     [self didClickLiveBtn:0];
+    self.sepratorYposition.constant =self.view.frame.size.width/2.5;
+
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    self.sepratorYposition.constant =self.view.frame.size.width/2.5;
 }
 -(void)customnavigationmethod
 {
@@ -179,7 +180,7 @@
         cell.lbl_team_b_name.text = record.teamBname;
         
         
-        NSMutableArray* objInniningsarray=[[[DBManager alloc]init] FETCHSEALLINNINGSSCOREDETAILS:record.competitionCode MATCHCODE:record.matchCode];
+        NSMutableArray* objInniningsarray=[[[DBManager alloc]init] FETCHSEALLINNINGSSCOREDETAILS :record.competitionCode MATCHCODE :record.matchCode];
         
         if(objInniningsarray.count>0){
             
@@ -212,22 +213,52 @@
                 }
                 
                 
+                if(![objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME isEqualToString:objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME]){
+                    [self setImage:record.teamAcode :cell.lbl_team_b_logo ];
+                    [self setImage:record.teamBcode :cell.img_team_a_logo ];
+                    
+                    cell.lbl_team_a_name.text = record.teamBname;
+                    cell.lbl_team_b_name.text = record.teamAname;
+                }
+
+                
+                
                 if(![objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqual:@""])
                 {
+                    
+                    if(![objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME isEqualToString:objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME]){
+                        
+                        cell.lbl_team_b_and.text=@"&";
+                        cell.lbl_team_b_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.THIRDINNINGSTOTAL,objfetchSEPageLoadRecord.THIRDINNINGSWICKET];
+                        cell.lbl_team_b_sec_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.THIRDINNINGSOVERS];
+                        
+                    }else{
+                    
                     cell.lbl_team_a_and.text=@"&";
-                    cell.lbl_team_a_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.THIRDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
+                    cell.lbl_team_a_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.THIRDINNINGSTOTAL,objfetchSEPageLoadRecord.THIRDINNINGSWICKET];
                     cell.lbl_team_a_sec_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.THIRDINNINGSOVERS];
+                    }
                 }
                 else
                 {
                     cell.lbl_team_a_sec_inn_score.text=@"";
                     cell.lbl_team_a_sec_inn_over.text=@"";
                 }
+                
+                
                 if(![objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME isEqual:@""])
                 {
+                    
+                    if([objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME isEqualToString:objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME]){
+                        cell.lbl_team_a_and.text=@"&";
+                        cell.lbl_team_a_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FOURTHINNINGSTOTAL,objfetchSEPageLoadRecord.FOURTHINNINGSWICKET];
+                        cell.lbl_team_a_sec_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FOURTHINNINGSOVERS];
+                    }else{
+                    
                     cell.lbl_team_b_and.text=@"&";
                     cell.lbl_team_b_sec_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.FOURTHINNINGSTOTAL,objfetchSEPageLoadRecord.FOURTHINNINGSWICKET];
                     cell.lbl_team_b_sec_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.FOURTHINNINGSOVERS];
+                    }
                 }
                 else{
                     cell.lbl_team_b_sec_inn_score.text=@"";
@@ -524,24 +555,75 @@
     }else{
         
         ReportVC * objReport =  (ReportVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"ChartVC"];
-
+        NSMutableArray* objInniningsarray;
+        NSString *teamA;
+        NSString *teamB;
+        
         if(isLive == YES){
             LiveReportRecord *record = [_fixturesResultArray objectAtIndex:indexPath.row];
             objReport.matchCode = record.matchCode;
             objReport.competitionCode = record.competitionCode;
             objReport.matchTypeCode =record.matchTypeCode;
             
+            
+            
+            teamA = record.teamAshortName;
+            teamB = record.teamBshortName;
+            
+            
+            objInniningsarray=[[[DBManager alloc]init] FETCHSEALLINNINGSSCOREDETAILS :record.competitionCode MATCHCODE :record.matchCode];
+
+            
+            
         }else if (isResult ==YES)
         {
             ResultReportRecord *record = [_fixturesResultArray objectAtIndex:indexPath.row];
             objReport.matchCode = record.matchCode;
             objReport.competitionCode = record.competitionCode;
+            objReport.matchTypeCode =record.matchTypeCode;
+
+         
+            
+            objInniningsarray=[[[DBManager alloc]init] FETCHSEALLINNINGSSCOREDETAILS :record.competitionCode MATCHCODE :record.matchCode];
+
+        }
+        
+        objReport.fstInnShortName = teamA;
+        objReport.secInnShortName = teamB;
+        objReport.thrdInnShortName = teamA;
+        objReport.frthInnShortName = teamB;
+        
+       
+        
+        if(objInniningsarray.count>0){
+            FetchSEPageLoadRecord *objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
+
+            objReport.fstInnShortName = objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME;
+            
+            objReport.secInnShortName =  [objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqualToString:@""]?[teamA isEqualToString:objReport.fstInnShortName]?teamB:teamA:objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME;
+            
+            objReport.thrdInnShortName =  [objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqualToString:@""]?[teamA isEqualToString:objReport.fstInnShortName]?teamA:teamB:objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME;
+            
+            objReport.frthInnShortName =
+                    [objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME isEqualToString:@""]?
+                    [objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqualToString:@""]?
+                    [teamA isEqualToString:objReport.fstInnShortName]?
+                    teamB:teamA
+                    :[objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqualToString:objReport.fstInnShortName]?
+                    objReport.secInnShortName:objReport.fstInnShortName
+                    :objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME;
+
         }
         
         [self.navigationController pushViewController:objReport animated:YES];
     }
     
 }
+
+
+
+
+
 - (IBAction)btn_back:(id)sender {
     
     [self.navigationController popViewControllerAnimated:YES];

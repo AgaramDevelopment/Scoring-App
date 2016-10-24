@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="RAJDHANI-SEMIBOLD.TTF">
+            <string>Rajdhani-Semibold</string>
+            <string>Rajdhani-Semibold</string>
+            <string>Rajdhani-Semibold</string>
+            <string>Rajdhani-Semibold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommentaryVC">
             <connections>
                 <outlet property="commentary_tableview" destination="Fbn-sq-AsW" id="NZg-11-A3t"/>
+                <outlet property="inns_four" destination="7Vz-Ws-4L6" id="Ko9-Jn-G2K"/>
+                <outlet property="inns_one" destination="Efv-aA-HFW" id="VjL-zO-Nli"/>
+                <outlet property="inns_one_width" destination="aIM-8I-Yzy" id="KdJ-eC-WIw"/>
+                <outlet property="inns_three" destination="3C9-ZP-ccN" id="y3q-w6-5E0"/>
+                <outlet property="inns_two" destination="83n-Jg-XHZ" id="e1f-TE-OKv"/>
+                <outlet property="inns_two_width" destination="cm0-JO-LvE" id="hOx-rc-M7d"/>
                 <outlet property="view" destination="ZF9-fT-zq4" id="W6v-bb-J8k"/>
             </connections>
         </placeholder>
@@ -25,79 +39,95 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eP-zp-PtE">
                             <rect key="frame" x="0.0" y="0.0" width="768" height="70"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="83n-Jg-XHZ">
-                                    <rect key="frame" x="105" y="10" width="80" height="50"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.098178666410000004" alpha="0.25248798080000001" colorSpace="calibratedRGB"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IyP-P8-slo">
+                                    <rect key="frame" x="0.0" y="15" width="768" height="53"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efv-aA-HFW">
+                                            <rect key="frame" x="0.0" y="0.0" width="192" height="50"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.098178666410000004" alpha="0.25248798080000001" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="Q2e-MS-fUl"/>
+                                                <constraint firstAttribute="width" constant="192" id="aIM-8I-Yzy"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
+                                            <state key="normal" title="Inns 1">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="did_click_inn_one:" destination="-1" eventType="touchUpInside" id="D3E-Io-4NV"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="83n-Jg-XHZ">
+                                            <rect key="frame" x="192" y="0.0" width="192" height="50"/>
+                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="2pB-Js-h78"/>
+                                                <constraint firstAttribute="width" constant="192" id="cm0-JO-LvE"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
+                                            <state key="normal" title="Inns 2">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="did_click_inn_two:" destination="-1" eventType="touchUpInside" id="DR9-YD-7kK"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3C9-ZP-ccN">
+                                            <rect key="frame" x="384" y="0.0" width="192" height="50"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.098178666410000004" alpha="0.25248798080000001" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="MyT-7T-pLT"/>
+                                                <constraint firstAttribute="width" constant="192" id="mmI-bh-xu0"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
+                                            <state key="normal" title="Inns 3">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="did_click_inn_three:" destination="-1" eventType="touchUpInside" id="c3O-8L-L6n"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Vz-Ws-4L6">
+                                            <rect key="frame" x="576" y="0.0" width="192" height="50"/>
+                                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.098178666410000004" alpha="0.25248798080000001" colorSpace="calibratedRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="50" id="2QH-qb-DZR"/>
+                                                <constraint firstAttribute="width" constant="192" id="vTJ-vo-s2Q"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
+                                            <state key="normal" title="Inns 4">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="did_click_inn_four:" destination="-1" eventType="touchUpInside" id="CQ3-sp-3UY"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.13725490196078433" green="0.45490196078431372" blue="0.80392156862745101" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="NG7-f7-YZU"/>
-                                        <constraint firstAttribute="width" constant="80" id="aDn-2Q-nkJ"/>
+                                        <constraint firstAttribute="height" constant="53" id="1pB-Gk-ySj"/>
+                                        <constraint firstItem="Efv-aA-HFW" firstAttribute="top" secondItem="IyP-P8-slo" secondAttribute="top" id="4Ll-3i-Ayv"/>
+                                        <constraint firstItem="83n-Jg-XHZ" firstAttribute="top" secondItem="IyP-P8-slo" secondAttribute="top" id="Gpr-yt-XbM"/>
+                                        <constraint firstAttribute="bottom" secondItem="7Vz-Ws-4L6" secondAttribute="bottom" constant="3" id="LRy-k6-CHq"/>
+                                        <constraint firstItem="Efv-aA-HFW" firstAttribute="leading" secondItem="IyP-P8-slo" secondAttribute="leading" id="Q3Q-lu-B3D"/>
+                                        <constraint firstItem="7Vz-Ws-4L6" firstAttribute="top" secondItem="IyP-P8-slo" secondAttribute="top" id="RRx-Sp-z7T"/>
+                                        <constraint firstItem="83n-Jg-XHZ" firstAttribute="leading" secondItem="Efv-aA-HFW" secondAttribute="trailing" id="TAM-aS-o5c"/>
+                                        <constraint firstAttribute="bottom" secondItem="3C9-ZP-ccN" secondAttribute="bottom" constant="3" id="VXZ-d6-zB1"/>
+                                        <constraint firstAttribute="bottom" secondItem="Efv-aA-HFW" secondAttribute="bottom" constant="3" id="blQ-f2-1nL"/>
+                                        <constraint firstItem="7Vz-Ws-4L6" firstAttribute="leading" secondItem="3C9-ZP-ccN" secondAttribute="trailing" id="bu6-hP-4WE"/>
+                                        <constraint firstAttribute="bottom" secondItem="83n-Jg-XHZ" secondAttribute="bottom" constant="3" id="cba-Lc-IfS"/>
+                                        <constraint firstItem="3C9-ZP-ccN" firstAttribute="leading" secondItem="83n-Jg-XHZ" secondAttribute="trailing" id="tIe-tz-1wb"/>
+                                        <constraint firstItem="3C9-ZP-ccN" firstAttribute="top" secondItem="IyP-P8-slo" secondAttribute="top" id="yNV-nT-E6d"/>
                                     </constraints>
-                                    <state key="normal" title="Inns 2">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="did_click_inn_two:" destination="-1" eventType="touchUpInside" id="DR9-YD-7kK"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3C9-ZP-ccN">
-                                    <rect key="frame" x="200" y="10" width="80" height="50"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.098178666410000004" alpha="0.25248798080000001" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="Mle-ZJ-4b6"/>
-                                        <constraint firstAttribute="width" constant="80" id="SU2-CJ-ogq"/>
-                                    </constraints>
-                                    <state key="normal" title="Inns 3">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="did_click_inn_three:" destination="-1" eventType="touchUpInside" id="c3O-8L-L6n"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Vz-Ws-4L6">
-                                    <rect key="frame" x="295" y="10" width="80" height="50"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.098178666410000004" alpha="0.25248798080000001" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="80" id="NMe-JD-Huf"/>
-                                        <constraint firstAttribute="height" constant="50" id="PoI-RD-gyt"/>
-                                    </constraints>
-                                    <state key="normal" title="Inns 4">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="did_click_inn_four:" destination="-1" eventType="touchUpInside" id="CQ3-sp-3UY"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efv-aA-HFW">
-                                    <rect key="frame" x="10" y="10" width="80" height="50"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.098178666410000004" alpha="0.25248798080000001" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="50" id="GuP-kk-qiG"/>
-                                        <constraint firstAttribute="width" constant="80" id="cAq-5g-gmo"/>
-                                    </constraints>
-                                    <state key="normal" title="Inns 1">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="did_click_inn_one:" destination="-1" eventType="touchUpInside" id="D3E-Io-4NV"/>
-                                    </connections>
-                                </button>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="768" id="0Xp-UZ-8IF"/>
-                                <constraint firstItem="Efv-aA-HFW" firstAttribute="leading" secondItem="3eP-zp-PtE" secondAttribute="leading" constant="10" id="2C0-IK-uZS"/>
-                                <constraint firstItem="83n-Jg-XHZ" firstAttribute="top" secondItem="3eP-zp-PtE" secondAttribute="top" constant="10" id="4yF-qi-xPj"/>
-                                <constraint firstAttribute="bottom" secondItem="83n-Jg-XHZ" secondAttribute="bottom" constant="10" id="AZ8-4d-01X"/>
-                                <constraint firstItem="Efv-aA-HFW" firstAttribute="top" secondItem="3eP-zp-PtE" secondAttribute="top" constant="10" id="BUZ-Iw-ECH"/>
-                                <constraint firstItem="7Vz-Ws-4L6" firstAttribute="top" secondItem="3eP-zp-PtE" secondAttribute="top" constant="10" id="Dr2-mT-OKH"/>
-                                <constraint firstItem="7Vz-Ws-4L6" firstAttribute="leading" secondItem="3C9-ZP-ccN" secondAttribute="trailing" constant="15" id="FAe-bW-heK"/>
-                                <constraint firstAttribute="bottom" secondItem="3C9-ZP-ccN" secondAttribute="bottom" constant="10" id="J1S-Rn-RrZ"/>
-                                <constraint firstItem="3C9-ZP-ccN" firstAttribute="top" secondItem="3eP-zp-PtE" secondAttribute="top" constant="10" id="KXI-6e-ese"/>
-                                <constraint firstAttribute="bottom" secondItem="7Vz-Ws-4L6" secondAttribute="bottom" constant="10" id="MHW-p1-FyP"/>
+                                <constraint firstItem="IyP-P8-slo" firstAttribute="leading" secondItem="3eP-zp-PtE" secondAttribute="leading" id="HSM-pd-aCO"/>
                                 <constraint firstAttribute="height" constant="70" id="NO4-nr-I6i"/>
-                                <constraint firstItem="3C9-ZP-ccN" firstAttribute="leading" secondItem="83n-Jg-XHZ" secondAttribute="trailing" constant="15" id="n61-rN-lEd"/>
-                                <constraint firstItem="83n-Jg-XHZ" firstAttribute="leading" secondItem="Efv-aA-HFW" secondAttribute="trailing" constant="15" id="xB9-Et-wpE"/>
-                                <constraint firstAttribute="bottom" secondItem="Efv-aA-HFW" secondAttribute="bottom" constant="10" id="xmT-yA-kg9"/>
+                                <constraint firstItem="IyP-P8-slo" firstAttribute="top" secondItem="3eP-zp-PtE" secondAttribute="top" constant="15" id="f5x-u4-JyZ"/>
+                                <constraint firstAttribute="trailing" secondItem="IyP-P8-slo" secondAttribute="trailing" id="mH7-sm-0KX"/>
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Fbn-sq-AsW">
@@ -136,7 +166,7 @@
                 <constraint firstAttribute="bottom" secondItem="rlg-S3-7r5" secondAttribute="bottom" id="yW7-Ym-vbJ"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="467" y="321"/>
+            <point key="canvasLocation" x="457" y="323"/>
         </view>
     </objects>
     <resources>

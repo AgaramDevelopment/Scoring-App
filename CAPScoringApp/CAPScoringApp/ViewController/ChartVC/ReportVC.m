@@ -170,7 +170,13 @@
 -(void) setCommentaryView{
      cmntryView = [[CommentaryVC alloc]initWithNibName:@"CommentaryVC" bundle:nil];
     cmntryView.matchCode = self.matchCode;
+    cmntryView.matchTypeCode =self.matchTypeCode;
 
+    cmntryView.fstInnShortName = self.fstInnShortName;
+    cmntryView.secInnShortName = self.secInnShortName;
+    cmntryView.thrdInnShortName = self.thrdInnShortName;
+    cmntryView.frthInnShortName = self.frthInnShortName;
+    
     cmntryView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:cmntryView.view];
 }
