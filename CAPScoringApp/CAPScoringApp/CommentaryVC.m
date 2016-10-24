@@ -26,7 +26,9 @@
     DBManagerReports *dbReports = [[DBManagerReports alloc]init];
     
     _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode:@"1"];
-    
+    [self setInningsView];
+    [self setInningsBySelection:@"1"];
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -299,14 +301,14 @@
     double singleInstanceWidth = isExtras ? 50 : 40;
     double totalWidth = singleInstanceWidth;
     if (content.length >= 5)
-        totalWidth = 15 * content.length;
+        totalWidth = 12 * content.length;
     else if (content.length >= 3)
-        totalWidth = 13 * content.length;
+        totalWidth = 10 * content.length;
     
-    UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 48, 48)];
+    UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(0, 0, totalWidth, 48)];
     
     // Border Control
-    UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 48, 48)];
+    UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, BallTicker.frame.size.width, 40)];
     btnborder.layer.cornerRadius = isExtras ? (content.length >= 5 ? btnborder.frame.size.width / 3.5 : btnborder.frame.size.width / 2.5) : (content.length >= 3 ? btnborder.frame.size.width / 2.5 : btnborder.frame.size.width / 2);
     btnborder.clipsToBounds = NO;
     btnborder.layer.borderWidth = 3.5;
@@ -338,7 +340,7 @@
     //for showing different color in ballticker text based on event
     //    [btnborder setTitleColor:(isSpecialEvents || isExtras) ? ((content.length > 1 && !isExtras) ? brushFGNormal : brushFGSplEvents) : brushFGNormal forState:UIControlStateNormal] ;
     [btnborder setTitleColor:brushFGSplEvents forState:UIControlStateNormal] ;
-    btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20];
+    btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:18];
     
     
     [BallTicker addSubview:btnborder];
@@ -380,6 +382,7 @@
 
 - (IBAction)did_click_inn_one:(id)sender {
     
+    [self setInningsBySelection:@"1"];
     DBManagerReports *dbReports = [[DBManagerReports alloc]init];
     
     _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode:@"1"];
@@ -387,15 +390,8 @@
     [_commentary_tableview reloadData];
 }
 
-- (IBAction)did_click_inn_four:(id)sender {
-    
-    DBManagerReports *dbReports = [[DBManagerReports alloc]init];
-    
-    _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode:@"4"];
-    [_commentary_tableview reloadData];
-}
 - (IBAction)did_click_inn_two:(id)sender {
-    
+    [self setInningsBySelection:@"2"];
     DBManagerReports *dbReports = [[DBManagerReports alloc]init];
     
     _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode:@"2"];
@@ -404,9 +400,106 @@
 
 - (IBAction)did_click_inn_three:(id)sender {
     
+    [self setInningsBySelection:@"3"];
     DBManagerReports *dbReports = [[DBManagerReports alloc]init];
     
     _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode :@"3"];
     [_commentary_tableview reloadData];
 }
+
+- (IBAction)did_click_inn_four:(id)sender {
+    [self setInningsBySelection:@"4"];
+    DBManagerReports *dbReports = [[DBManagerReports alloc]init];
+    
+    _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode:@"4"];
+    [_commentary_tableview reloadData];
+}
+
+
+
+-(void) setInningsView{
+    if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){//T20
+        
+        self.inns_one.hidden = NO;
+        self.inns_two.hidden = NO;
+        self.inns_three.hidden = YES;
+        self.inns_four.hidden = YES;
+        
+     //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
+        //[self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
+        self.inns_two_width.constant = 384;
+        self.inns_one_width.constant = 384;
+
+        
+    }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){//ODI
+        self.inns_one.hidden = NO;
+        self.inns_two.hidden = NO;
+        self.inns_three.hidden = YES;
+        self.inns_four.hidden = YES;
+        self.inns_two_width.constant = 384;
+        self.inns_one_width.constant = 384;
+
+  //     [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
+    //    [self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
+        
+    }else if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){//Test
+        
+        self.inns_one.hidden = NO;
+        self.inns_two.hidden = NO;
+        self.inns_three.hidden = NO;
+        self.inns_four.hidden = NO;
+    }
+}
+
+-(void) setInningsBySelection: (NSString*) innsNo{
+    
+    [self setInningsButtonUnselect:self.inns_one];
+    [self setInningsButtonUnselect:self.inns_two];
+    [self setInningsButtonUnselect:self.inns_three];
+    [self setInningsButtonUnselect:self.inns_four];
+    
+    [self.inns_one setTitle:[NSString stringWithFormat:@"%@ 1st INNS",self.fstInnShortName] forState:UIControlStateNormal];
+    [self.inns_two setTitle:[NSString stringWithFormat:@"%@ 1st INNS",self.secInnShortName] forState:UIControlStateNormal];
+    [self.inns_three setTitle:[NSString stringWithFormat:@"%@ 2nd INNS",self.thrdInnShortName] forState:UIControlStateNormal];
+    [self.inns_four setTitle:[NSString stringWithFormat:@"%@ 2nd INNS",self.frthInnShortName] forState:UIControlStateNormal];
+
+    if([innsNo isEqualToString:@"1"]){
+
+        [self setInningsButtonSelect:self.inns_one];
+      
+    }else if([innsNo isEqualToString:@"2"]){
+        
+        [self setInningsButtonSelect:self.inns_two];
+        
+    }else if([innsNo isEqualToString:@"3"]){
+        
+        [self setInningsButtonSelect:self.inns_three];
+        
+    }else if([innsNo isEqualToString:@"4"]){
+        
+        [self setInningsButtonSelect:self.inns_four];
+        
+    }
+}
+
+-(void) setInningsButtonSelect : (UIButton*) innsBtn{
+   // innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#2374CD"];
+
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+
+}
+
+-(void) setInningsButtonUnselect : (UIButton*) innsBtn{
+  //  innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#000000"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    
+}
+
+
+
+
+
 @end

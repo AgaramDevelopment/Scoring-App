@@ -20,5 +20,9 @@
 @property(strong,nonatomic)NSString * competitionCode;
 @property (strong ,nonatomic) NSString * matchTypeCode;
 
+@property(strong,nonatomic)NSString *fstInnShortName;
+@property(strong,nonatomic)NSString *secInnShortName;
+@property(strong,nonatomic)NSString *thrdInnShortName;
+@property(strong,nonatomic)NSString *frthInnShortName;
 
 @end

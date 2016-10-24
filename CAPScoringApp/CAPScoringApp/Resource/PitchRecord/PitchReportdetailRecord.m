@@ -1,4 +1,4 @@
-//
+//,w
 //  PitchReportdetailRecord.m
 //  CAPScoringApp
 //
@@ -9,5 +9,7 @@
 #import "PitchReportdetailRecord.h"
 
 @implementation PitchReportdetailRecord
+
+@synthesize PMlineCode,PMlineName,PMlengthcode,PMLengthName,PMX2,PMY2,Runs,BattingStyle,ballno,BallRuns,IsDotBall,WicketType,IsWicket,matchName,playerdetail,line,length,lineType;
 
 @end

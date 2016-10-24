@@ -56,6 +56,7 @@
             NSString *dicBallKey = [objhartlistArray objectAtIndex:i];
             
             UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(i * 200,20,180, 40)];
+            btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20];
             btnborder.tag=i+1;
             [btnborder setTitle:[NSString stringWithFormat:@"%@",dicBallKey] forState:UIControlStateNormal];
             [btnborder addTarget:self action:@selector(didClickreportlistbtn:) forControlEvents:UIControlEventTouchUpInside];
@@ -170,7 +171,13 @@
 -(void) setCommentaryView{
      cmntryView = [[CommentaryVC alloc]initWithNibName:@"CommentaryVC" bundle:nil];
     cmntryView.matchCode = self.matchCode;
+    cmntryView.matchTypeCode =self.matchTypeCode;
 
+    cmntryView.fstInnShortName = self.fstInnShortName;
+    cmntryView.secInnShortName = self.secInnShortName;
+    cmntryView.thrdInnShortName = self.thrdInnShortName;
+    cmntryView.frthInnShortName = self.frthInnShortName;
+    
     cmntryView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:cmntryView.view];
 }

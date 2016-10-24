@@ -31,4 +31,6 @@
 @synthesize objPenalty;
 @synthesize objPenaltytypecode;
 @synthesize wicketType;
+@synthesize teamShortName;
+
 @end
