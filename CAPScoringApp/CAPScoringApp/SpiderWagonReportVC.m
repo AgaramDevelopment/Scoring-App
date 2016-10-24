@@ -9,6 +9,7 @@
 #import "SpiderWagonReportVC.h"
 #import "DBManagerSpiderWagonReport.h"
 #import "SpiderWagonRecords.h"
+#import "Utitliy.h"
 
 @interface SpiderWagonReportVC ()
 {
@@ -31,6 +32,11 @@
     objDBManagerSpiderWagonReport = [[DBManagerSpiderWagonReport alloc]init];
     
    // _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon];
+    
+ _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon:self.matchTypeCode :self.compititionCode :self.matchCode :@"" :@"" :@"" :@"" :@"" :@"" :@"" :@""];
+    
+    
+//     _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon:self.matchTypeCode :self.compititionCode :self.matchCode :@"" :INNINGSNO :STRIKERCODE :NONSTRIKERCODE :BOWLERCODE :RUNS :ISFOUR :ISSIX];
 
     [self drawSpiderWagonLine];
     
@@ -58,12 +64,12 @@
         if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
         
             
-            int Xposition = x1position+190;
-            int Yposition = y1position+170;
+            int Xposition = x1position+140;
+            int Yposition = y1position+130;
             
             CGMutablePathRef straightLinePath = CGPathCreateMutable();
             CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-            CGPathAddLineToPoint(straightLinePath, NULL,x2position+190,y2position+170);
+            CGPathAddLineToPoint(straightLinePath, NULL,x2position+140,y2position+130);
             CAShapeLayer *shapeLayer = [CAShapeLayer layer];
             shapeLayer.path = straightLinePath;
             UIColor *fillColor = [UIColor redColor];
@@ -110,5 +116,10 @@
 
 - (IBAction)btn_fourth_inns:(id)sender {
     
+}
+
+- (IBAction)hide_Filer_view:(id)sender {
+    
+     self.filter_view.hidden =NO;
 }
 @end

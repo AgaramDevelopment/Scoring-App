@@ -91,10 +91,10 @@
                                 <rect key="frame" x="0.0" y="46" width="728" height="154"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s19-YD-y13">
-                                        <rect key="frame" x="13" y="17" width="48" height="48"/>
+                                        <rect key="frame" x="13" y="17" width="70" height="48"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="48" id="YlV-y8-Pq0"/>
-                                            <constraint firstAttribute="width" constant="48" id="qoe-e5-qSh"/>
+                                            <constraint firstAttribute="width" constant="70" id="qoe-e5-qSh"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -111,9 +111,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h13-KN-bfw">
-                                        <rect key="frame" x="83" y="26" width="576" height="21"/>
+                                        <rect key="frame" x="103" y="26" width="556" height="21"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="576" id="PU0-rm-p4e"/>
+                                            <constraint firstAttribute="width" constant="556" id="PU0-rm-p4e"/>
                                             <constraint firstAttribute="height" constant="21" id="Sc4-ai-7m7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
@@ -121,9 +121,9 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCP-WX-pff">
-                                        <rect key="frame" x="83" y="58" width="626" height="52"/>
+                                        <rect key="frame" x="103" y="58" width="606" height="52"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="626" id="R7q-Bv-Dpo"/>
+                                            <constraint firstAttribute="width" constant="606" id="R7q-Bv-Dpo"/>
                                             <constraint firstAttribute="height" constant="52" id="gSY-zK-9uf"/>
                                         </constraints>
                                         <string key="text">cxzcxzcxc ac axc xzc xz cxz c zxc xz c xzczxc zxc zxc zx czx c xzc zx czx c zx czx c xz cxz c xzc u u u u u u  u u u  uuuu  d sg dsfg  et g df gsdf gdv t e sg d gd g dg df gdf g fdg df g dg df gfd g sd gfd g d gdf g fdg g  fdg df gd g dfg df gdf g dfg df g dfg df g dg d gd fg  ggd g dg d g dg sdf gsdf gd fg d gd sg ds g dfsg sfd g cxzcxzcxc ac axc xzc xz cxz c zxc xz c xzczxc zxc zxc zx czx c xzc zx czx c zx czx c xz cxz c xzc u u u u u u  u u u  uuuu  d sg dsfg  et g df gsdf gdv t e sg d gd g dg df gdf g fdg df g dg df gfd g sd gfd g d gdf g fdg g  fdg df gd g dfg df gdf g dfg df g dfg df g dg d gd fg  ggd g dg d g dg sdf gsdf gd fg d gd sg ds g dfsg sfd g cxzcxzcxc ac axc xzc xz cxz c zxc xz c xzczxc zxc zxc zx czx c xzc zx czx c zx czx c xz cxz c xzc u u u u u u  u u u  uuuu  d sg dsfg  et g df gsdf gdv t e sg d gd g dg df gdf g fdg df g dg df gfd g sd gfd g d gdf g fdg g  fdg df gd g dfg df gdf g dfg df g dfg df g dg d gd fg  ggd g dg d g dg sdf gsdf gd fg d gd sg ds g dfsg sfd g cxzcxzcxc ac axc xzc xz cxz c zxc xz c xzczxc zxc zxc zx czx c xzc zx czx c zx czx c xz cxz c xzc u u u u u u  u u u  uuuu  d sg dsfg  et g df gsdf gdv t e sg d gd g dg df gdf g fdg df g dg df gfd g sd gfd g d gdf g fdg g  fdg df gd g dfg df gdf g dfg df g dfg df g dg d gd fg  ggd g dg d g dg sdf gsdf gd fg d gd sg ds g dfsg sfd g </string>
@@ -135,7 +135,7 @@
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.14999999999999999" colorSpace="calibratedRGB"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="fCP-WX-pff" firstAttribute="leading" secondItem="4Wy-fs-7ac" secondAttribute="trailing" constant="22" id="2H2-9l-wXh"/>
+                                    <constraint firstItem="fCP-WX-pff" firstAttribute="leading" secondItem="4Wy-fs-7ac" secondAttribute="trailing" constant="42" id="2H2-9l-wXh"/>
                                     <constraint firstItem="4Wy-fs-7ac" firstAttribute="leading" secondItem="Yj6-Uh-bdF" secondAttribute="leading" constant="13" id="DrN-25-48g"/>
                                     <constraint firstItem="fCP-WX-pff" firstAttribute="top" secondItem="h13-KN-bfw" secondAttribute="bottom" constant="11" id="LQV-EM-zgZ"/>
                                     <constraint firstAttribute="trailing" secondItem="h13-KN-bfw" secondAttribute="trailing" constant="69" id="SXU-HD-OLS"/>
@@ -143,7 +143,7 @@
                                     <constraint firstAttribute="trailing" secondItem="fCP-WX-pff" secondAttribute="trailing" constant="19" id="WmP-a2-q2j"/>
                                     <constraint firstItem="s19-YD-y13" firstAttribute="top" secondItem="Yj6-Uh-bdF" secondAttribute="top" constant="17" id="WsO-rg-EOQ"/>
                                     <constraint firstItem="s19-YD-y13" firstAttribute="leading" secondItem="Yj6-Uh-bdF" secondAttribute="leading" constant="13" id="eul-Wt-gea"/>
-                                    <constraint firstItem="h13-KN-bfw" firstAttribute="leading" secondItem="s19-YD-y13" secondAttribute="trailing" constant="22" id="iub-5H-pBc"/>
+                                    <constraint firstItem="h13-KN-bfw" firstAttribute="leading" secondItem="s19-YD-y13" secondAttribute="trailing" constant="20" id="iub-5H-pBc"/>
                                     <constraint firstAttribute="height" constant="154" id="jZH-RZ-ZOp"/>
                                     <constraint firstAttribute="width" constant="728" id="kpt-3y-ACc"/>
                                     <constraint firstItem="4Wy-fs-7ac" firstAttribute="top" secondItem="s19-YD-y13" secondAttribute="bottom" constant="14" id="xYx-Nl-GHQ"/>
