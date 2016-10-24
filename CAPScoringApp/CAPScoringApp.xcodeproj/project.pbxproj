@@ -35,6 +35,11 @@
 		04EC778E1D2956C2005B2608 /* InningsEventPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC778C1D2956C2005B2608 /* InningsEventPushRecord.m */; };
 		04EC77911D2956F0005B2608 /* OVEREVENTSPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC77901D2956F0005B2608 /* OVEREVENTSPushRecord.m */; };
 		04EC77941D29570F005B2608 /* BATTINGSUMMARYPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC77931D29570F005B2608 /* BATTINGSUMMARYPushRecord.m */; };
+		182BFDA81DBB25730084BDDC /* DBManagerpitchmapReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 1884EC881DB9D9890059A2B9 /* DBManagerpitchmapReport.m */; };
+		182BFDAB1DBB26CD0084BDDC /* CommentaryReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BFDAA1DBB26CD0084BDDC /* CommentaryReport.m */; };
+		182BFDB61DBB3D8D0084BDDC /* LengthReportRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BFDB51DBB3D8D0084BDDC /* LengthReportRecord.m */; };
+		182BFDB91DBB3D9D0084BDDC /* LineReportRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BFDB81DBB3D9D0084BDDC /* LineReportRecord.m */; };
+		182BFDC01DBBA28C0084BDDC /* PitchReportdetailRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BFDBF1DBBA28C0084BDDC /* PitchReportdetailRecord.m */; };
 		1837AA8C1CFF125B00B7259C /* BowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA8B1CFF125B00B7259C /* BowlTypeCell.m */; };
 		185060561D0300190030E3E2 /* FastBowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA941CFF264A00B7259C /* FastBowlTypeCell.m */; };
 		18674AC31D1A4F9600DB7C71 /* MatchResultListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18674AC11D1A4F9600DB7C71 /* MatchResultListVC.m */; };
@@ -109,7 +114,6 @@
 		1883B5F41D867DF6009E9CB3 /* BowlerStrickPitchRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883B5F31D867DF6009E9CB3 /* BowlerStrickPitchRecord.m */; };
 		1883DFEC1D27C43E00854814 /* TossTeamDetailRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883DFEB1D27C43E00854814 /* TossTeamDetailRecord.m */; };
 		1883E4901D2A3C85000A279C /* OverBallCountRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1883E48F1D2A3C85000A279C /* OverBallCountRecord.m */; };
-		1884EC891DB9D9890059A2B9 /* DBManagerpitchmapReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 1884EC881DB9D9890059A2B9 /* DBManagerpitchmapReport.m */; };
 		1884EC901DBA4EFB0059A2B9 /* StrikerDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 1884EC8F1DBA4EFB0059A2B9 /* StrikerDetails.m */; };
 		188597021D813AFE0013507E /* BattingPlayerStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 188597011D813AFE0013507E /* BattingPlayerStatistics.m */; };
 		188597051D813B220013507E /* BowlingPlayerStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 188597041D813B220013507E /* BowlingPlayerStatistics.m */; };
@@ -237,7 +241,6 @@
 		CE3DD4251CFBFDD400D93A55 /* TeamLogoRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = CE3DD4241CFBFDD400D93A55 /* TeamLogoRecords.m */; };
 		CE6D63E21DB5FC2400472312 /* LiveReportRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6D63E11DB5FC2400472312 /* LiveReportRecord.m */; };
 		CE6D63E51DB63A3F00472312 /* ResultReportRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6D63E41DB63A3F00472312 /* ResultReportRecord.m */; };
-		CE6E944C1DBA2E18005E4EE6 /* CommentaryReport.m in Sources */ = {isa = PBXBuildFile; fileRef = CE6E944B1DBA2E18005E4EE6 /* CommentaryReport.m */; };
 		CE7463A81D166F8200D69CD9 /* UpdateBreakVC.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463A61D166F8200D69CD9 /* UpdateBreakVC.m */; };
 		CE7463A91D166F8200D69CD9 /* UpdateBreakVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */; };
 		CE7463AC1D16942200D69CD9 /* UpdateBreaksArrayDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = CE7463AB1D16942200D69CD9 /* UpdateBreaksArrayDetails.m */; };
@@ -367,6 +370,14 @@
 		04EC77901D2956F0005B2608 /* OVEREVENTSPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVEREVENTSPushRecord.m; sourceTree = "<group>"; };
 		04EC77921D29570F005B2608 /* BATTINGSUMMARYPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BATTINGSUMMARYPushRecord.h; sourceTree = "<group>"; };
 		04EC77931D29570F005B2608 /* BATTINGSUMMARYPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BATTINGSUMMARYPushRecord.m; sourceTree = "<group>"; };
+		182BFDA91DBB26CD0084BDDC /* CommentaryReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentaryReport.h; sourceTree = "<group>"; };
+		182BFDAA1DBB26CD0084BDDC /* CommentaryReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentaryReport.m; sourceTree = "<group>"; };
+		182BFDB41DBB3D8D0084BDDC /* LengthReportRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LengthReportRecord.h; path = Resource/LengthReportRecord/LengthReportRecord.h; sourceTree = "<group>"; };
+		182BFDB51DBB3D8D0084BDDC /* LengthReportRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LengthReportRecord.m; path = Resource/LengthReportRecord/LengthReportRecord.m; sourceTree = "<group>"; };
+		182BFDB71DBB3D9D0084BDDC /* LineReportRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LineReportRecord.h; path = Resource/LineReportRecord/LineReportRecord.h; sourceTree = "<group>"; };
+		182BFDB81DBB3D9D0084BDDC /* LineReportRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LineReportRecord.m; path = Resource/LineReportRecord/LineReportRecord.m; sourceTree = "<group>"; };
+		182BFDBE1DBBA28C0084BDDC /* PitchReportdetailRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchReportdetailRecord.h; path = Resource/PitchRecord/PitchReportdetailRecord.h; sourceTree = "<group>"; };
+		182BFDBF1DBBA28C0084BDDC /* PitchReportdetailRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PitchReportdetailRecord.m; path = Resource/PitchRecord/PitchReportdetailRecord.m; sourceTree = "<group>"; };
 		1837AA8A1CFF125B00B7259C /* BowlTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlTypeCell.h; sourceTree = "<group>"; };
 		1837AA8B1CFF125B00B7259C /* BowlTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlTypeCell.m; sourceTree = "<group>"; };
 		1837AA931CFF264A00B7259C /* FastBowlTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FastBowlTypeCell.h; sourceTree = "<group>"; };
@@ -754,8 +765,6 @@
 		CE6D63E11DB5FC2400472312 /* LiveReportRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveReportRecord.m; sourceTree = "<group>"; };
 		CE6D63E31DB63A3F00472312 /* ResultReportRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultReportRecord.h; sourceTree = "<group>"; };
 		CE6D63E41DB63A3F00472312 /* ResultReportRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultReportRecord.m; sourceTree = "<group>"; };
-		CE6E944A1DBA2E18005E4EE6 /* CommentaryReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentaryReport.h; sourceTree = "<group>"; };
-		CE6E944B1DBA2E18005E4EE6 /* CommentaryReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentaryReport.m; sourceTree = "<group>"; };
 		CE7463A51D166F8200D69CD9 /* UpdateBreakVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UpdateBreakVC.h; sourceTree = "<group>"; };
 		CE7463A61D166F8200D69CD9 /* UpdateBreakVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UpdateBreakVC.m; sourceTree = "<group>"; };
 		CE7463A71D166F8200D69CD9 /* UpdateBreakVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UpdateBreakVC.xib; sourceTree = "<group>"; };
@@ -940,6 +949,33 @@
 				04C325841D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.m */,
 			);
 			name = "Last Instance";
+			sourceTree = "<group>";
+		};
+		182BFDAC1DBB3B710084BDDC /* LineReportRecord */ = {
+			isa = PBXGroup;
+			children = (
+				182BFDB71DBB3D9D0084BDDC /* LineReportRecord.h */,
+				182BFDB81DBB3D9D0084BDDC /* LineReportRecord.m */,
+			);
+			name = LineReportRecord;
+			sourceTree = "<group>";
+		};
+		182BFDB01DBB3BCA0084BDDC /* LengthReportRecord */ = {
+			isa = PBXGroup;
+			children = (
+				182BFDB41DBB3D8D0084BDDC /* LengthReportRecord.h */,
+				182BFDB51DBB3D8D0084BDDC /* LengthReportRecord.m */,
+			);
+			name = LengthReportRecord;
+			sourceTree = "<group>";
+		};
+		182BFDBA1DBBA1CB0084BDDC /* PitchReportDetailRecord */ = {
+			isa = PBXGroup;
+			children = (
+				182BFDBE1DBBA28C0084BDDC /* PitchReportdetailRecord.h */,
+				182BFDBF1DBBA28C0084BDDC /* PitchReportdetailRecord.m */,
+			);
+			name = PitchReportDetailRecord;
 			sourceTree = "<group>";
 		};
 		186D5E3B1D9AA5B9000AFB85 /* BatMan IN/OUT */ = {
@@ -1526,6 +1562,11 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				182BFDBA1DBBA1CB0084BDDC /* PitchReportDetailRecord */,
+				182BFDB01DBB3BCA0084BDDC /* LengthReportRecord */,
+				182BFDAC1DBB3B710084BDDC /* LineReportRecord */,
+				182BFDA91DBB26CD0084BDDC /* CommentaryReport.h */,
+				182BFDAA1DBB26CD0084BDDC /* CommentaryReport.m */,
 				1884EC831DB9D8800059A2B9 /* DBmanagerPitchmapReport */,
 				36E57AA51DB5E9B40012A1B6 /* DBManagerReports */,
 				1874622C1D9BDCAE0093721B /* BatsmanPlayerList */,
@@ -2155,6 +2196,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				182BFDA81DBB25730084BDDC /* DBManagerpitchmapReport.m in Sources */,
 				DC133E2B1D4AF35B00798DD6 /* DBManagerDeleteScoreEngine.m in Sources */,
 				DC133E2C1D4AF35B00798DD6 /* DeleteScoreEngine.m in Sources */,
 				36347C051DB4DAA200ADEF9F /* FixtureTVC.m in Sources */,
@@ -2201,6 +2243,7 @@
 				CE7C6DD21D23CE5300B694D5 /* Other_WicketVC.m in Sources */,
 				CE2D671D1D3E3E9D00A8246C /* SBJson4StreamTokeniser.m in Sources */,
 				187462271D9BCD5D0093721B /* BatsmaninoutRecord.m in Sources */,
+				182BFDAB1DBB26CD0084BDDC /* CommentaryReport.m in Sources */,
 				187625221D1544CD009374F8 /* InningsSummaryDetailsForScoreBoard.m in Sources */,
 				1876251D1D1544CD009374F8 /* BatPlayerDetailsForScoreBoard.m in Sources */,
 				18785EE51D16630500A09AEC /* LastBolwerDetailRecord.m in Sources */,
@@ -2208,6 +2251,7 @@
 				CE0F19C91CF6C2CC0030FFA2 /* TossDetailsVC.m in Sources */,
 				24E7B4B71D23895300EF0D55 /* DBManagerDeclareInnings.m in Sources */,
 				1878CD961D114FBB00A80BEE /* ScoreCardVC.m in Sources */,
+				182BFDB61DBB3D8D0084BDDC /* LengthReportRecord.m in Sources */,
 				24E7B4EB1D23D4C800EF0D55 /* ScoreEnginEditRecord.m in Sources */,
 				1884EC901DBA4EFB0059A2B9 /* StrikerDetails.m in Sources */,
 				CEC858A91D154AEF007F5384 /* testViewController.m in Sources */,
@@ -2271,7 +2315,6 @@
 				047E52F11D27D84B00D4CAC6 /* Other_WicketgridTVC.m in Sources */,
 				CE2D671E1D3E3E9D00A8246C /* SBJson4StreamWriter.m in Sources */,
 				2483771E1D2ABE8900FAC40D /* SessionEventPushRecord.m in Sources */,
-				CE6E944C1DBA2E18005E4EE6 /* CommentaryReport.m in Sources */,
 				CEC305811D014C3400301ED3 /* AppealSystemRecords.m in Sources */,
 				047E52E31D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m in Sources */,
 				CE1FBF5B1CF96FE400A9B6FE /* BowlerEvent.m in Sources */,
@@ -2357,7 +2400,9 @@
 				18785EEA1D1667A900A09AEC /* FetchLastBowler.m in Sources */,
 				18674AC31D1A4F9600DB7C71 /* MatchResultListVC.m in Sources */,
 				CE3DD4191CFBFA1600D93A55 /* SelectPlayersVC.m in Sources */,
+				182BFDC01DBBA28C0084BDDC /* PitchReportdetailRecord.m in Sources */,
 				047E52E01D279E8D00D4CAC6 /* GetWicketDetail.m in Sources */,
+				182BFDB91DBB3D9D0084BDDC /* LineReportRecord.m in Sources */,
 				CE0F19C31CF5D81D0030FFA2 /* DashBoardVC.m in Sources */,
 				187621251D1D644C006E160F /* EndInningsVC.m in Sources */,
 				CE1FBF5E1CF992C900A9B6FE /* FixturesCell.m in Sources */,

@@ -70,7 +70,7 @@
     
 }
 
-    -(IBAction)didClickreportlistbtn:(id)sender{
+-(IBAction)didClickreportlistbtn:(id)sender{
 
     UIButton * objBtn =(UIButton*)sender;
     
@@ -98,9 +98,12 @@
     {
          NSLog(@"%d",objBtn.tag);
         objPitchview =[[PitchmapVC alloc] initWithNibName:@"PitchmapVC" bundle:nil];
-        objPitchview.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+        
         objPitchview.matchCode =self.matchCode;
         objPitchview.compititionCode =self.competitionCode;
+        objPitchview.matchTypecode =self.matchTypeCode;
+        
+        objPitchview.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
         [self.view addSubview:objPitchview.view];
     }
     else if(objBtn.tag == 5)

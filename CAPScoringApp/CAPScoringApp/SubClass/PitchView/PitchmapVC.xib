@@ -437,6 +437,9 @@
                             <state key="normal" title="OK">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="didClickHidefilterBtn:" destination="-1" eventType="touchUpInside" id="hLl-fl-qWK"/>
+                            </connections>
                         </button>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tib-lr-vmC">
                             <rect key="frame" x="15" y="60" width="335" height="120"/>
@@ -445,6 +448,10 @@
                                 <constraint firstAttribute="height" constant="120" id="HNF-Q2-gsI"/>
                                 <constraint firstAttribute="width" constant="335" id="yv0-8J-0K6"/>
                             </constraints>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="3iv-9H-EsG"/>
+                                <outlet property="delegate" destination="-1" id="qzP-cG-5hU"/>
+                            </connections>
                         </tableView>
                     </subviews>
                     <color key="backgroundColor" red="0.047058823530000002" green="0.062745098040000002" blue="0.074509803920000006" alpha="1" colorSpace="calibratedRGB"/>

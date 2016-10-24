@@ -27,5 +27,8 @@
 
 -(NSMutableArray *) getLine;
 -(NSMutableArray *)getLength;
+-(NSMutableArray *) getStrickerdetail :(NSString *) matchCode :(NSString * )Teamcode;
+
+
 
 @end
