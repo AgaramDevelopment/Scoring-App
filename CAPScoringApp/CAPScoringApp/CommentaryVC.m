@@ -301,14 +301,14 @@
     double singleInstanceWidth = isExtras ? 50 : 40;
     double totalWidth = singleInstanceWidth;
     if (content.length >= 5)
-        totalWidth = 15 * content.length;
+        totalWidth = 12 * content.length;
     else if (content.length >= 3)
-        totalWidth = 13 * content.length;
+        totalWidth = 10 * content.length;
     
-    UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(0, 0, 48, 48)];
+    UIView *BallTicker = [[UIView alloc] initWithFrame: CGRectMake(0, 0, totalWidth, 48)];
     
     // Border Control
-    UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, 48, 48)];
+    UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(0, 0, BallTicker.frame.size.width, 40)];
     btnborder.layer.cornerRadius = isExtras ? (content.length >= 5 ? btnborder.frame.size.width / 3.5 : btnborder.frame.size.width / 2.5) : (content.length >= 3 ? btnborder.frame.size.width / 2.5 : btnborder.frame.size.width / 2);
     btnborder.clipsToBounds = NO;
     btnborder.layer.borderWidth = 3.5;
@@ -340,7 +340,7 @@
     //for showing different color in ballticker text based on event
     //    [btnborder setTitleColor:(isSpecialEvents || isExtras) ? ((content.length > 1 && !isExtras) ? brushFGNormal : brushFGSplEvents) : brushFGNormal forState:UIControlStateNormal] ;
     [btnborder setTitleColor:brushFGSplEvents forState:UIControlStateNormal] ;
-    btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20];
+    btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:18];
     
     
     [BallTicker addSubview:btnborder];

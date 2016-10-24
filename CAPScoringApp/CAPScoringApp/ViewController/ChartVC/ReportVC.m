@@ -56,6 +56,7 @@
             NSString *dicBallKey = [objhartlistArray objectAtIndex:i];
             
             UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(i * 200,20,180, 40)];
+            btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20];
             btnborder.tag=i+1;
             [btnborder setTitle:[NSString stringWithFormat:@"%@",dicBallKey] forState:UIControlStateNormal];
             [btnborder addTarget:self action:@selector(didClickreportlistbtn:) forControlEvents:UIControlEventTouchUpInside];
