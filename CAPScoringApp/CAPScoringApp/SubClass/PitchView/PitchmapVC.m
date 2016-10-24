@@ -11,6 +11,7 @@
 #import "StrikerDetails.h"
 #import "LineReportRecord.h"
 #import "LengthReportRecord.h"
+#import "PitchReportdetailRecord.h"
 
 @interface PitchmapVC ()
 {
@@ -18,6 +19,7 @@
     BOOL isLength;
     BOOL isLine;
     DBManagerpitchmapReport * DBMpitchReport;
+     UIImageView * Img_ball;
 }
 
 @property (nonatomic,strong) NSString * teamCode;
@@ -31,6 +33,9 @@
 @property (nonatomic,strong) NSMutableArray * lineArray;
 @property (nonatomic,strong) NSMutableArray * lengthArray;
 @property (nonatomic,strong) NSMutableArray * strickerArray;
+
+@property (nonatomic,strong) NSString * lnningsno;
+@property (nonatomic,strong) NSString * selectRun;
 
 @end
 
@@ -67,30 +72,100 @@
     lengthArray =[DBMpitchReport getLength];
     
     [self.Inn1_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+    self.lnningsno=@"1";
+    self.selectStrikerCode =(self.selectStrikerCode !=nil)?self.selectStrikerCode :@"";
+    self.selectRun=@"";
+    self.selectLengthCode =@"";
+    self.selectLineCode = @"";
+    [self drawpitchMethod];
+}
+
+-(void)drawpitchMethod
+{
     
-    NSMutableArray * objPitchdetail=[DBMpitchReport getPitchmapdetails:self.matchTypecode :self.compititionCode :self.matchCode :_teamCode :@"1" :@"" :@"" :self.selectStrikerCode :@"" :@"" :@"" :@"" :@"" :@"":@"" :@"0" :@"0" :@"0" :@"0" :@"0" :@"0" :@"0" :@"0" :@"0" :@"" :@"" :@"" :@"" :@"" :@"" :@"" :@"" :@"" :@"" :@"" :@""];
+    for(UIImageView * obj in [self.pitch_Img subviews])
+    {
+        NSLog(@"%@",obj);
+        [obj removeFromSuperview];
+    }
+
     
+    NSMutableArray * objPitchdetail=[DBMpitchReport getPitchmapdetails :self.matchTypecode :self.compititionCode :self.matchCode :_teamCode :self.lnningsno  :self.selectStrikerCode : self.selectRun: self.selectLineCode : self.selectLengthCode];
     
+    int xposition;
+    int yposition;
     
+   
+    for(int i=0; i<objPitchdetail.count;i++)
+    {
+        PitchReportdetailRecord * objRecord =(PitchReportdetailRecord *)[objPitchdetail objectAtIndex:i];
+        xposition = [objRecord.PMX2 intValue];
+        yposition = [objRecord.PMY2 intValue];
+        
+        if(!(xposition == 1 && yposition ==1)){
+            
+            
+            //        if(Img_ball != nil)
+            //        {
+            //            [Img_ball removeFromSuperview];
+            //        }
+            //
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+(xposition/1.2),yposition+(yposition/4),20, 20)];
+            Img_ball.image =[UIImage imageNamed:@"RedBall"];
+            [self.pitch_Img addSubview:Img_ball];
+            
+            
+        }
+    }
 }
 
 -(IBAction)didClickInns1:(id)sender
 {
+    self.lnningsno=@"1";
+    [self.Inn1_Btn setBackgroundColor:[UIColor blueColor]];
+    [self.Inn2_Btn setBackgroundColor:[UIColor clearColor]];
+    [self.Inn3_Btn setBackgroundColor:[UIColor clearColor]];
+    [self.Inn4_Btn setBackgroundColor:[UIColor clearColor]];
+    
+    
    self.teamCode =[DBMpitchReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
 }
 
 -(IBAction)didClickInns2:(id)sender
 {
+    self.lnningsno=@"2";
+    [self.Inn2_Btn setBackgroundColor:[UIColor blueColor]];
+    [self.Inn1_Btn setBackgroundColor:[UIColor clearColor]];
+    [self.Inn3_Btn setBackgroundColor:[UIColor clearColor]];
+    [self.Inn4_Btn setBackgroundColor:[UIColor clearColor]];
+
+    
+
     self.teamCode =[DBMpitchReport getTeamCode:self.compititionCode :self.matchCode :@"2"];
 }
 
 -(IBAction)didClickInns3:(id)sender
 {
+    self.lnningsno=@"3";
+    [self.Inn3_Btn setBackgroundColor:[UIColor blueColor]];
+    [self.Inn1_Btn setBackgroundColor:[UIColor clearColor]];
+    [self.Inn2_Btn setBackgroundColor:[UIColor clearColor]];
+    [self.Inn4_Btn setBackgroundColor:[UIColor clearColor]];
+
+    
     self.teamCode =[DBMpitchReport getTeamCode:self.compititionCode :self.matchCode :@"3"];
 }
 
 -(IBAction)didClickInns4:(id)sender
 {
+    self.lnningsno=@"4";
+    [self.Inn4_Btn setBackgroundColor:[UIColor blueColor]];
+    [self.Inn1_Btn setBackgroundColor:[UIColor clearColor]];
+    [self.Inn2_Btn setBackgroundColor:[UIColor clearColor]];
+    [self.Inn3_Btn setBackgroundColor:[UIColor clearColor]];
+
+    
+    
     self.teamCode =[DBMpitchReport getTeamCode:self.compititionCode :self.matchCode :@"4"];
 }
 
@@ -168,6 +243,7 @@
 
 -(IBAction)didClickAllRuns:(id)sender
 {
+    
     [self.all_Btn setImage:[UIImage imageNamed:@"On_Circle"] forState:UIControlStateNormal];
     [self.Run1_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
     [self.Run2_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
@@ -178,6 +254,7 @@
 
 -(IBAction)didSelectrun1:(id)sender
 {
+    self.selectRun =@"1";
     [self.Run1_Btn setImage:[UIImage imageNamed:@"On_Circle"] forState:UIControlStateNormal];
     [self.all_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
     [self.Run2_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
@@ -190,6 +267,7 @@
 }
 -(IBAction)didSelectrun2:(id)sender
 {
+    self.selectRun =@"2";
     [self.Run2_Btn setImage:[UIImage imageNamed:@"On_Circle"] forState:UIControlStateNormal];
     [self.all_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
     [self.Run1_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
@@ -200,6 +278,7 @@
 }
 -(IBAction)didClickSelectrun3:(id)sender
 {
+    self.selectRun =@"3";
     [self.Run3_Btn setImage:[UIImage imageNamed:@"On_Circle"] forState:UIControlStateNormal];
     [self.all_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
     [self.Run1_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
@@ -210,6 +289,7 @@
 }
 -(IBAction)didSelectrun4:(id)sender
 {
+      self.selectRun =@"4";
     [self.Run4_Btn setImage:[UIImage imageNamed:@"On_Circle"] forState:UIControlStateNormal];
     [self.all_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
     [self.Run1_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
@@ -221,6 +301,7 @@
 }
 -(IBAction)didClickSelectrun6:(id)sender
 {
+     self.selectRun =@"6";
     [self.Run6_Btn setImage:[UIImage imageNamed:@"On_Circle"] forState:UIControlStateNormal];
     [self.all_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
     [self.Run1_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
@@ -253,6 +334,8 @@
 -(IBAction)didClickHidefilterBtn:(id)sender
 {
     self.filter_view.hidden=YES;
+    [self drawpitchMethod];
+    
 }
 -(IBAction)didClickStandard:(id)sender
 {
@@ -329,23 +412,28 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    
     if(isStriker == YES)
     {
         
         StrikerDetails * objStriker =[self.strickerArray objectAtIndex:indexPath.row];
         self.selectStrikerCode =objStriker.playercode;
+        self.striker_Lbl.text =objStriker.playername;
+        
     }
     else if(isLine == YES)
     {
         LineReportRecord * objLine =[self.lineArray objectAtIndex:indexPath.row];
         self.selectLineCode= objLine.metasubcode;
+        self.line_lbl.text =objLine.metasubcodedescription;
     }
     else if (isLength == YES)
     {
         LengthReportRecord * objLength =[self.lengthArray objectAtIndex:indexPath.row];
         self.selectLengthCode = objLength.metasubcode;
+        self.length_Lbl.text =objLength.metasubcodedescription;
     }
-    
+    self.striker_Tbl.hidden=YES;
 }
 
 
