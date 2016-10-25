@@ -51,5 +51,11 @@
  @synthesize VIDEOFILEPATH;
  @synthesize WICKETTYPE;
 
+@synthesize STRIKERCODE;
+@synthesize NONSTRIKERCODE;
+@synthesize BOWLERCODE;
+
+@synthesize BOWLERNAME;
+@synthesize STRIKERNAME;
 
 @end

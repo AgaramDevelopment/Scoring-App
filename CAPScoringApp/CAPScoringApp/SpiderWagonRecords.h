@@ -55,4 +55,7 @@
 @property(strong,nonatomic)NSString *NONSTRIKERCODE;
 @property(strong,nonatomic)NSString *BOWLERCODE;
 
+@property(strong,nonatomic)NSString *STRIKERNAME;
+@property(strong,nonatomic)NSString *BOWLERNAME;
+
 @end

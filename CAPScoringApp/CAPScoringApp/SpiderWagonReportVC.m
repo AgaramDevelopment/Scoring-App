@@ -27,6 +27,8 @@
 @property (nonatomic,strong) NSMutableArray * bowlerArray;
 @property (nonatomic,strong) NSMutableArray * strikerArray;
 
+@property (nonatomic,strong) NSString * selectRun;
+
 @end
 
 @implementation SpiderWagonReportVC
@@ -49,18 +51,18 @@
     
      self.tbl_players.hidden=YES;
     
+    [self setInningsBySelection:@"1"];
+    
+    
     objDBManagerSpiderWagonReport = [[DBManagerSpiderWagonReport alloc]init];
     objDBManagerpitchmapReport =[[DBManagerpitchmapReport alloc]init];
     
  self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
     
- _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"" :@"" :@"" :@"" :@"" :@"" :@""];
+ _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"1" :@"" :@"" :@"" :@"" :@""];
     
-    
-//     _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon:self.matchTypeCode :self.compititionCode :self.matchCode :@"" :INNINGSNO :STRIKERCODE :NONSTRIKERCODE :BOWLERCODE :RUNS :ISFOUR :ISSIX];
-
     [self drawSpiderWagonLine];
-    
+    [self setInningsView];
     
 }
 
@@ -72,6 +74,8 @@
     int y1position;
     int x2position;
     int y2position;
+    
+    
     
     for(int i=0; i< _spiderWagonArray.count;i++)
     {
@@ -126,22 +130,87 @@
 */
 
 - (IBAction)btn_first_inns:(id)sender {
-    
+    self.img_wagon.layer.sublayers = nil;
+    self.img_wagon.layer.sublayers = nil;
+
+    [self setInningsBySelection:@"1"];
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
+
+    
+    
+//        for (CALayer *layer in self.img_wagon.layer.sublayers) {
+//        if ([layer.name isEqualToString:@"DrawLine"]) {
+//                [layer removeFromSuperlayer];
+//            //break;
+//    
+//            }
+//    }
+      [self drawSpiderWagonLine];
+    
+    _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"1" :@"" :@"" :@"" :@"" :@""];
+ 
+ 
+    
+    [self.tbl_players reloadData];
 }
 
 - (IBAction)btn_sec_inns:(id)sender {
     
+    self.img_wagon.layer.sublayers = nil;
+    self.img_wagon.layer.sublayers = nil;
+
+    [self setInningsBySelection:@"2"];
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"2"];
+//    for (CALayer *layer in self.img_wagon.layer.sublayers) {
+//        if ([layer.name isEqualToString:@"DrawLine"]) {
+//            [layer removeFromSuperlayer];
+//           // break;
+//        }
+//    }
+    [self drawSpiderWagonLine];
+    _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"2" :@"" :@"" :@"" :@"" :@""];
+    
+    
+
+    
+    [self.tbl_players reloadData];
 }
 
 - (IBAction)btn_third_inns:(id)sender {
+    
+    [self setInningsBySelection:@"3"];
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"3"];
+    
+    
+    for (CALayer *layer in self.img_wagon.layer.sublayers) {
+        if ([layer.name isEqualToString:@"DrawLine"]) {
+            [layer removeFromSuperlayer];
+         //    break;
+        }
+    }
+    
+     _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"3" :@"" :@"" :@"" :@"" :@""];
+     [self drawSpiderWagonLine];
+    
+    [self.tbl_players reloadData];
 }
 
 - (IBAction)btn_fourth_inns:(id)sender {
-    
+    [self setInningsBySelection:@"4"];
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"4"];
+
+    
+    for (CALayer *layer in self.img_wagon.layer.sublayers) {
+        if ([layer.name isEqualToString:@"DrawLine"]) {
+            [layer removeFromSuperlayer];
+          //  break;
+        }
+    }
+
+    _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"4" :@"" :@"" :@"" :@"" :@""];
+     [self drawSpiderWagonLine];
+    
+    [self.tbl_players reloadData];
 }
 
 - (IBAction)hide_Filer_view:(id)sender {
@@ -153,7 +222,7 @@
     
     self.strikerTblYposition.constant =self.striker_view.frame.origin.y;
     self.strikerArray=[[NSMutableArray alloc]init];
-    self.strikerArray= [objDBManagerpitchmapReport getStrickerdetail:self.matchCode :_teamCode];
+    self.strikerArray= [objDBManagerSpiderWagonReport getStrickerdetail:self.matchCode :_teamCode];
     
     if(isStriker==NO)
     {
@@ -178,7 +247,7 @@
     
     self.strikerTblYposition.constant = self.bowler_view.frame.origin.y;
     self.bowlerArray=[[NSMutableArray alloc]init];
-    self.bowlerArray= [objDBManagerpitchmapReport getStrickerdetail:self.matchCode :_teamCode];
+    self.bowlerArray= [objDBManagerSpiderWagonReport getStrickerdetail:self.matchCode :_teamCode];
     
     if(isBowler==NO)
     {
@@ -242,13 +311,13 @@
     if(isStriker == YES)
     {
         
-        StrikerDetails * objStriker =[self.strikerArray objectAtIndex:indexPath.row];
-        cell.textLabel.text =objStriker.playername;
+        SpiderWagonRecords * objStriker =[self.strikerArray objectAtIndex:indexPath.row];
+        cell.textLabel.text =objStriker.STRIKERNAME;
     }
     else if(isBowler == YES)
     {
-        StrikerDetails * objStriker =[self.bowlerArray objectAtIndex:indexPath.row];
-        cell.textLabel.text = objStriker.playername;
+        SpiderWagonRecords * objStriker =[self.bowlerArray objectAtIndex:indexPath.row];
+        //cell.textLabel.text = objStriker.playername;
 
     }
  
@@ -265,22 +334,221 @@
     if(isStriker == YES)
     {
         
-        StrikerDetails * objStriker =[self.strikerArray objectAtIndex:indexPath.row];
-        self.lbl_striker.text = objStriker.playername;
-        self.selectStrikerCode =objStriker.playercode;
+        SpiderWagonRecords * objStriker =[self.strikerArray objectAtIndex:indexPath.row];
+        
+        
+        self.lbl_striker.text = objStriker.STRIKERNAME;
+        self.selectStrikerCode =objStriker.STRIKERCODE;
+        self.selectBattingStyle = objStriker.BATTINGSTYLE;
+        
+        
         self.tbl_players.hidden=YES;
         
     }
     else if(isBowler == YES)
     {
-        StrikerDetails * objBowler =[self.bowlerArray objectAtIndex:indexPath.row];
-        self.selectBowlerCode= objBowler.playercode;
-        _lbl_bowler.text = objBowler.playername;
+        SpiderWagonRecords *objBowler =[self.bowlerArray objectAtIndex:indexPath.row];
+//        self.selectBowlerCode= objBowler.playercode;
+//        _lbl_bowler.text = objBowler.playername;
         self.tbl_players.hidden = YES;
     }
     
 }
 
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    //-----------------------------------------
+    // Convert hex string to an integer
+    //-----------------------------------------
+    unsigned int hexint = 0;
+    
+    // Create scanner
+    NSScanner *scanner = [NSScanner scannerWithString:hex];
+    
+    // Tell scanner to skip the # character
+    [scanner setCharactersToBeSkipped:[NSCharacterSet
+                                       characterSetWithCharactersInString:@"#"]];
+    [scanner scanHexInt:&hexint];
+    
+    //-----------------------------------------
+    // Create color object, specifying alpha
+    //-----------------------------------------
+    UIColor *color =
+    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
+                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
+                     blue:((CGFloat) (hexint & 0xFF))/255
+                    alpha:1.0f];
+    
+    return color;
+}
 
 
+-(void) setInningsBySelection: (NSString*) innsNo{
+    
+    [self setInningsButtonUnselect:self.inns_one];
+    [self setInningsButtonUnselect:self.inns_two];
+    [self setInningsButtonUnselect:self.inns_three];
+    [self setInningsButtonUnselect:self.inns_four];
+    
+    
+    if([innsNo isEqualToString:@"1"]){
+        
+        [self setInningsButtonSelect:self.inns_one];
+        
+    }else if([innsNo isEqualToString:@"2"]){
+        
+        [self setInningsButtonSelect:self.inns_two];
+        
+    }else if([innsNo isEqualToString:@"3"]){
+        
+        [self setInningsButtonSelect:self.inns_three];
+        
+    }else if([innsNo isEqualToString:@"4"]){
+        
+        [self setInningsButtonSelect:self.inns_four];
+        
+    }
+}
+
+
+
+
+-(void) setInningsButtonSelect : (UIButton*) innsBtn{
+    // innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#2374CD"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    
+}
+
+-(void) setInningsButtonUnselect : (UIButton*) innsBtn{
+    //  innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#000000"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    
+}
+
+
+-(void) setInningsView{
+    if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){//T20
+        
+        self.inns_one.hidden = NO;
+        self.inns_two.hidden = NO;
+        self.inns_three.hidden = YES;
+        self.inns_four.hidden = YES;
+        
+        //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
+        //[self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
+        self.inns_two_width.constant = 384;
+        self.inns_one_width.constant = 384;
+        
+        
+    }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){//ODI
+        self.inns_one.hidden = NO;
+        self.inns_two.hidden = NO;
+        self.inns_three.hidden = YES;
+        self.inns_four.hidden = YES;
+        
+        self.inns_two_width.constant = 384;
+        self.inns_one_width.constant = 384;
+        
+//   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
+//   [self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
+        
+    }else if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){//Test
+        
+        self.inns_one.hidden = NO;
+        self.inns_two.hidden = NO;
+        self.inns_three.hidden = NO;
+        self.inns_four.hidden = NO;
+    }
+}
+
+
+
+- (IBAction)btn_done:(id)sender {
+    
+    
+    //changing wagon wheel image based on batting style
+    if ([self.selectBattingStyle isEqualToString:@"MSC012"]) {
+        
+        self.img_wagon.image = [UIImage imageNamed:@"LHWagon.png"];
+        
+    }else if ([self.selectBattingStyle isEqualToString:@"MSC013"]){
+        
+        self.img_wagon.image = [UIImage imageNamed:@"RHWagon.png"];
+    }
+
+    
+    _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"" :self.selectStrikerCode :@"" :self.selectRun :@"" :@""];
+     [self drawSpiderWagonLine];
+    
+    
+    
+    self.filter_view.hidden=YES;
+}
+
+- (IBAction)btn_hide_filter:(id)sender {
+    
+     self.filter_view.hidden=YES;
+}
+
+- (IBAction)ones:(id)sender {
+    
+    self.selectRun =@"1";
+    [self.one_run setImage:[UIImage imageNamed:@"Radio.on"] forState:UIControlStateNormal];
+    [self.two_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.three_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.four_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.six_runs setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+
+}
+
+- (IBAction)twos:(id)sender {
+    self.selectRun =@"2";
+    [self.one_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.two_run setImage:[UIImage imageNamed:@"Radio.on"] forState:UIControlStateNormal];
+    [self.three_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.four_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.six_runs setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+}
+
+- (IBAction)threes:(id)sender {
+    
+    self.selectRun =@"3";
+    [self.one_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.two_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.three_run setImage:[UIImage imageNamed:@"Radio.on"] forState:UIControlStateNormal];
+    [self.four_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.six_runs setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+}
+
+- (IBAction)fours:(id)sender {
+    
+    self.selectRun =@"4";
+    [self.one_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.two_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.three_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.four_run setImage:[UIImage imageNamed:@"Radio.on"] forState:UIControlStateNormal];
+    [self.six_runs setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+}
+
+- (IBAction)six:(id)sender {
+    
+    self.selectRun =@"6";
+    [self.one_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.two_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.three_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.four_run setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.six_runs setImage:[UIImage imageNamed:@"Radio.on"] forState:UIControlStateNormal];
+    
+}
+
+- (IBAction)onSide:(id)sender {
+    
+}
+
+- (IBAction)offSide:(id)sender {
+}
 @end
