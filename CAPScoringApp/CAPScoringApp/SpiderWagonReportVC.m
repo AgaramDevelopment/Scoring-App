@@ -208,6 +208,7 @@ self.img_wagon.layer.sublayers = nil;
 - (IBAction)hide_Filer_view:(id)sender {
     
      self.filter_view.hidden =NO;
+       self.hide_btn_view.hidden = YES;
 }
 
 - (IBAction)didClickStricker:(id)sender {
@@ -378,6 +379,13 @@ self.img_wagon.layer.sublayers = nil;
     [self setInningsButtonUnselect:self.inns_four];
     
     
+    [self.inns_one setTitle:[NSString stringWithFormat:@"%@ 1st INNS",self.fstInnShortName] forState:UIControlStateNormal];
+    [self.inns_two setTitle:[NSString stringWithFormat:@"%@ 1st INNS",self.secInnShortName] forState:UIControlStateNormal];
+    [self.inns_three setTitle:[NSString stringWithFormat:@"%@ 2nd INNS",self.thrdInnShortName] forState:UIControlStateNormal];
+    [self.inns_four setTitle:[NSString stringWithFormat:@"%@ 2nd INNS",self.frthInnShortName] forState:UIControlStateNormal];
+    
+    
+    
     if([innsNo isEqualToString:@"1"]){
         
         [self setInningsButtonSelect:self.inns_one];
@@ -475,11 +483,17 @@ self.img_wagon.layer.sublayers = nil;
     
       [self drawSpiderWagonLine];
     self.filter_view.hidden=YES;
+    self.hide_btn_view.hidden = NO;
 }
 
 - (IBAction)btn_hide_filter:(id)sender {
     
-     self.filter_view.hidden=YES;
+    
+    
+    self.filter_view.hidden=YES;
+    self.hide_btn_view.hidden = YES;
+    
+ 
 }
 
 - (IBAction)ones:(id)sender {
