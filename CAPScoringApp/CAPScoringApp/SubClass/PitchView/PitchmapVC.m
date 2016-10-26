@@ -209,10 +209,11 @@
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.pitch_Img addSubview:Img_ball];
             
-            
+        
         }
     }
 }
+
 
 -(IBAction)didClickInns1:(id)sender
 {
