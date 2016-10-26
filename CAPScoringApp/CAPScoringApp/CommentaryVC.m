@@ -87,7 +87,12 @@
         
                 
         cell.lbl_header_over.text = cmntryRpt.overString;
-        cell.lbl_commentary.text = cmntryRpt.commentary;
+        
+        NSCharacterSet *punChrSet = [NSCharacterSet punctuationCharacterSet];
+        NSCharacterSet *punSpaceSet = [NSCharacterSet whitespaceCharacterSet];
+cmntryRpt.commentary = [cmntryRpt.commentary stringByTrimmingCharactersInSet:punSpaceSet];
+
+        cell.lbl_commentary.text = [cmntryRpt.commentary stringByTrimmingCharactersInSet:punChrSet];
         cell.lbl_team_score.text = cmntryRpt.teamTotal;
         cell.lbl_players_name.text = cmntryRpt.sAndNsName;
         cell.lbl_over.text = cmntryRpt.ballNo;
@@ -385,7 +390,7 @@
     [self setInningsBySelection:@"1"];
     DBManagerReports *dbReports = [[DBManagerReports alloc]init];
     
-    _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode:@"1"];
+    _commentaryArray = [dbReports retrieveCommentaryData :self.matchCode :@"1"];
     
     [_commentary_tableview reloadData];
 }
@@ -481,6 +486,10 @@
         
     }
 }
+
+
+
+
 
 -(void) setInningsButtonSelect : (UIButton*) innsBtn{
    // innsBtn.layer.cornerRadius = 25;

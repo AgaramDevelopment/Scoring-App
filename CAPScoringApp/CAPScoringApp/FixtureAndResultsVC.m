@@ -261,8 +261,11 @@
                     }
                 }
                 else{
+                    if(!(![objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqual:@""] && (![objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME isEqualToString:objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME])))
+                    {
                     cell.lbl_team_b_sec_inn_score.text=@"";
                     cell.lbl_team_b_sec_inn_over.text=@"";
+                    }
                 }
                 
                 
@@ -276,10 +279,10 @@
                     cell.lbl_team_b_fst_inn_score.text=[NSString stringWithFormat:@"%@/%@",objfetchSEPageLoadRecord.SECONDINNINGSTOTAL,objfetchSEPageLoadRecord.SECONDINNINGSWICKET];
                     cell.lbl_team_b_fst_inn_over.text=[NSString stringWithFormat:@"%@ OVS",objfetchSEPageLoadRecord.SECONDINNINGSOVERS];
                 }else{
-                    cell.lbl_team_b_fst_inn_score.text=@"";
-                    cell.lbl_team_b_fst_inn_over.text=@"";
                     
-                }
+                   
+                        
+                                  }
                 
             }
             
