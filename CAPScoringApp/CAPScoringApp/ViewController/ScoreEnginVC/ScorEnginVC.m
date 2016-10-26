@@ -1785,8 +1785,7 @@
                          [UIView commitAnimations];
                          
                      }];
-     leftSlideSwipe = NO;
-    
+     leftSlideSwipe = NO;    
     
 }
 - (void)handleSwipeFromLeftside:(UISwipeGestureRecognizer *)recognizer
