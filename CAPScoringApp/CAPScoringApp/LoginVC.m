@@ -334,6 +334,7 @@
                 }
             }else{
                 [self showDialog:@"No internet connection" andTitle:@"Login"];
+                 
             }
         }
     }
