@@ -13,9 +13,14 @@
 
 
 
--(NSMutableArray *)getSpiderWagon:(NSString*)MATCHTYPECODE:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSString*)STRIKERCODE:(NSString*)BOWLERCODE:(NSString*)RUNS:(NSString*)ISFOUR:(NSString*)ISSIX;
+-(NSMutableArray *)getSpiderWagon:(NSString*)MATCHTYPECODE:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSString*)STRIKERCODE:(NSString*)BOWLERCODE:(NSString*)RUNS:(NSString*)ISFOUR:(NSString*)ISSIX:(NSString*)ISONSIDE;
 
 -(NSMutableArray *) getStrickerdetail :(NSString *) matchCode :(NSString * )Teamcode;
+
+
+-(NSMutableArray *) getBowlerdetail :(NSString *) matchCode :(NSString * )Teamcode:(NSString * )InningsNo;
+
+-(NSString *) getTeamBCode:(NSString *)COMPETITIONCODE:(NSString *)MATCHCODE;
 
 
 @end

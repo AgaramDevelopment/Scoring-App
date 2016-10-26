@@ -27,7 +27,9 @@
 @property (nonatomic,strong) NSMutableArray * bowlerArray;
 @property (nonatomic,strong) NSMutableArray * strikerArray;
 
-@property (nonatomic,strong) NSString * selectRun;
+@property (nonatomic,strong) NSString *selectRun;
+@property (nonatomic,strong) NSString *selectOnSide;
+@property (nonatomic,strong) NSString *teamBcode;
 
 @end
 
@@ -51,15 +53,23 @@
     
      self.tbl_players.hidden=YES;
     
-    [self setInningsBySelection:@"1"];
-    
-    
     objDBManagerSpiderWagonReport = [[DBManagerSpiderWagonReport alloc]init];
     objDBManagerpitchmapReport =[[DBManagerpitchmapReport alloc]init];
     
- self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
+    _teamBcode = [objDBManagerSpiderWagonReport getTeamBCode:self.compititionCode :self.matchCode];
     
- _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"1" :@"" :@"" :@"" :@"" :@""];
+
+    
+    [self setInningsBySelection:@"1"];
+    
+    
+    
+ self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
+//    
+// _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"1" :@"" :@"" :@"" :@"" :@"",@""];
+    
+    _spiderWagonArray = [objDBManagerSpiderWagonReport getSpiderWagon:self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode :@"1" :@"" :@"" :@"" :@"" :@"" :@""];
+    
     
     [self drawSpiderWagonLine];
     [self setInningsView];
@@ -81,7 +91,7 @@
     {
         SpiderWagonRecords * objRecord =(SpiderWagonRecords *)[_spiderWagonArray objectAtIndex:i];
         
-        
+    
         x1position = [objRecord.WWX1 intValue];
         y1position = [objRecord.WWY1 intValue];
         x2position  =[objRecord.WWX2 intValue];
@@ -93,7 +103,8 @@
             
             int Xposition = x1position+7;
             int Yposition = y1position+4;
-            
+        
+        
             CGMutablePathRef straightLinePath = CGPathCreateMutable();
             CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
             CGPathAddLineToPoint(straightLinePath, NULL,x2position+7,y2position+4);
@@ -130,25 +141,18 @@
 */
 
 - (IBAction)btn_first_inns:(id)sender {
-    self.img_wagon.layer.sublayers = nil;
-    self.img_wagon.layer.sublayers = nil;
+    
+
+self.img_wagon.layer.sublayers = nil;
+    
 
     [self setInningsBySelection:@"1"];
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
+        _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"1"];
 
     
-    
-//        for (CALayer *layer in self.img_wagon.layer.sublayers) {
-//        if ([layer.name isEqualToString:@"DrawLine"]) {
-//                [layer removeFromSuperlayer];
-//            //break;
-//    
-//            }
-//    }
-      [self drawSpiderWagonLine];
-    
-    _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"1" :@"" :@"" :@"" :@"" :@""];
- 
+    _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"1" :@"" :@"" :@"" :@"" :@"":@""];
+   [self drawSpiderWagonLine];
  
     
     [self.tbl_players reloadData];
@@ -156,59 +160,47 @@
 
 - (IBAction)btn_sec_inns:(id)sender {
     
-    self.img_wagon.layer.sublayers = nil;
-    self.img_wagon.layer.sublayers = nil;
+  
+  self.img_wagon.layer.sublayers = nil;
 
+    
     [self setInningsBySelection:@"2"];
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"2"];
-//    for (CALayer *layer in self.img_wagon.layer.sublayers) {
-//        if ([layer.name isEqualToString:@"DrawLine"]) {
-//            [layer removeFromSuperlayer];
-//           // break;
-//        }
-//    }
+        _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"2"];
+    
+   
+    _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"2" :@"" :@"" :@"" :@"" :@"":@""];
+    
     [self drawSpiderWagonLine];
-    _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"2" :@"" :@"" :@"" :@"" :@""];
-    
-    
-
-    
     [self.tbl_players reloadData];
 }
 
 - (IBAction)btn_third_inns:(id)sender {
     
+     self.img_wagon.layer.sublayers = nil;
+    
     [self setInningsBySelection:@"3"];
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"3"];
+        _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"3"];
     
     
-    for (CALayer *layer in self.img_wagon.layer.sublayers) {
-        if ([layer.name isEqualToString:@"DrawLine"]) {
-            [layer removeFromSuperlayer];
-         //    break;
-        }
-    }
-    
-     _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"3" :@"" :@"" :@"" :@"" :@""];
-     [self drawSpiderWagonLine];
+    [self drawSpiderWagonLine];
+     _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"3" :@"" :@"" :@"" :@"" :@"":@""];
     
     [self.tbl_players reloadData];
 }
 
 - (IBAction)btn_fourth_inns:(id)sender {
+    
+     self.img_wagon.layer.sublayers = nil;
     [self setInningsBySelection:@"4"];
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"4"];
+        _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"4"];
 
+
+    [self drawSpiderWagonLine];
+    _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"4" :@"" :@"" :@"" :@"" :@"":@""];
     
-    for (CALayer *layer in self.img_wagon.layer.sublayers) {
-        if ([layer.name isEqualToString:@"DrawLine"]) {
-            [layer removeFromSuperlayer];
-          //  break;
-        }
-    }
-
-    _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"4" :@"" :@"" :@"" :@"" :@""];
-     [self drawSpiderWagonLine];
     
     [self.tbl_players reloadData];
 }
@@ -247,7 +239,7 @@
     
     self.strikerTblYposition.constant = self.bowler_view.frame.origin.y;
     self.bowlerArray=[[NSMutableArray alloc]init];
-    self.bowlerArray= [objDBManagerSpiderWagonReport getStrickerdetail:self.matchCode :_teamCode];
+    _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"1"];
     
     if(isBowler==NO)
     {
@@ -265,11 +257,6 @@
     
     [self.tbl_players reloadData];
 
-    
-}
-
-- (IBAction)demo_Ww:(id)sender {
-    
     
 }
 
@@ -317,7 +304,7 @@
     else if(isBowler == YES)
     {
         SpiderWagonRecords * objStriker =[self.bowlerArray objectAtIndex:indexPath.row];
-        //cell.textLabel.text = objStriker.playername;
+        cell.textLabel.text = objStriker.BOWLERNAME;
 
     }
  
@@ -348,8 +335,8 @@
     else if(isBowler == YES)
     {
         SpiderWagonRecords *objBowler =[self.bowlerArray objectAtIndex:indexPath.row];
-//        self.selectBowlerCode= objBowler.playercode;
-//        _lbl_bowler.text = objBowler.playername;
+        self.selectBowlerCode= objBowler.BOWLERCODE;
+        _lbl_bowler.text = objBowler.BOWLERNAME;
         self.tbl_players.hidden = YES;
     }
     
@@ -440,9 +427,9 @@
         
         //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
         //[self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
-        self.inns_two_width.constant = 384;
         self.inns_one_width.constant = 384;
-        
+        self.inns_two_width.constant = 384;
+       
         
     }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){//ODI
         self.inns_one.hidden = NO;
@@ -450,8 +437,9 @@
         self.inns_three.hidden = YES;
         self.inns_four.hidden = YES;
         
-        self.inns_two_width.constant = 384;
+       
         self.inns_one_width.constant = 384;
+ self.inns_two_width.constant = 384;
         
 //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
 //   [self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
@@ -469,6 +457,7 @@
 
 - (IBAction)btn_done:(id)sender {
     
+    self.img_wagon.layer.sublayers = nil;
     
     //changing wagon wheel image based on batting style
     if ([self.selectBattingStyle isEqualToString:@"MSC012"]) {
@@ -481,11 +470,10 @@
     }
 
     
-    _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"" :self.selectStrikerCode :@"" :self.selectRun :@"" :@""];
-     [self drawSpiderWagonLine];
     
+    _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"" : self.selectStrikerCode == nil ? @"" : self.selectStrikerCode : self.selectBowlerCode == nil ? @"":self.selectBowlerCode :[self.selectRun isEqual:nil]?@"":self.selectRun == nil ? @"" : self.selectRun :@"" :@"":self.selectOnSide == nil ? @"" :self.selectOnSide];
     
-    
+      [self drawSpiderWagonLine];
     self.filter_view.hidden=YES;
 }
 
@@ -546,9 +534,17 @@
 }
 
 - (IBAction)onSide:(id)sender {
+    self.selectOnSide = @"1";
+    
+    [self.btn_onSide setImage:[UIImage imageNamed:@"Radio.on"] forState:UIControlStateNormal];
+    [self.btn_offSide setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
     
 }
 
 - (IBAction)offSide:(id)sender {
+    
+    self.selectOnSide = @"0";
+    [self.btn_onSide setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
+    [self.btn_offSide setImage:[UIImage imageNamed:@"Radio.on"] forState:UIControlStateNormal];
 }
 @end
