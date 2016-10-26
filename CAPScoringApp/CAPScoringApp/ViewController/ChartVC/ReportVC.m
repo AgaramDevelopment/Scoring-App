@@ -196,6 +196,12 @@
     spiderView.compititionCode = self.competitionCode;
     spiderView.matchTypeCode = self.matchTypeCode;
     
+    
+    spiderView.fstInnShortName = self.fstInnShortName;
+    spiderView.secInnShortName = self.secInnShortName;
+    spiderView.thrdInnShortName = self.thrdInnShortName;
+    spiderView.frthInnShortName = self.frthInnShortName;
+    
     spiderView.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
     
 //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);

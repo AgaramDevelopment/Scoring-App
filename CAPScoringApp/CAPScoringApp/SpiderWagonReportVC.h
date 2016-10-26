@@ -15,6 +15,12 @@
 @property (nonatomic,strong) NSString * matchCode;
 @property (nonatomic,strong) NSString * matchTypeCode;
 @property (nonatomic,strong) NSString * teamCode;
+
+@property(strong,nonatomic)NSString *fstInnShortName;
+@property(strong,nonatomic)NSString *secInnShortName;
+@property(strong,nonatomic)NSString *thrdInnShortName;
+@property(strong,nonatomic)NSString *frthInnShortName;
+
 @property (nonatomic,strong) NSString * selectStrikerCode;
 @property (nonatomic,strong) NSString * selectBowlerCode;
 @property (nonatomic,strong) NSString *selectBattingStyle;
@@ -38,6 +44,7 @@
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * strikerTblYposition;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *inns_two_width;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *inns_one_width;
+@property (strong, nonatomic) IBOutlet UIView *hide_btn_view;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *inns_x;
 
