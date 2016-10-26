@@ -103,6 +103,10 @@
         objPitchview.matchCode =self.matchCode;
         objPitchview.compititionCode =self.competitionCode;
         objPitchview.matchTypecode =self.matchTypeCode;
+        objPitchview.fstInnShortName = self.fstInnShortName;
+        objPitchview.secInnShortName = self.secInnShortName;
+        objPitchview.thrdInnShortName = self.thrdInnShortName;
+        objPitchview.frthInnShortName = self.frthInnShortName;
         
         objPitchview.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
         [self.view addSubview:objPitchview.view];
