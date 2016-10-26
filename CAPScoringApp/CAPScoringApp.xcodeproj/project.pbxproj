@@ -130,6 +130,8 @@
 		18DE9F661DB60897001013B6 /* LiveMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DE9F641DB60897001013B6 /* LiveMatchCell.xib */; };
 		18DE9F6A1DB608E9001013B6 /* ResultMatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DE9F681DB608E9001013B6 /* ResultMatchCell.m */; };
 		18DE9F6B1DB608E9001013B6 /* ResultMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DE9F691DB608E9001013B6 /* ResultMatchCell.xib */; };
+		18E0F2B71DC0DD03006E93EE /* SessionReportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E0F2B51DC0DD03006E93EE /* SessionReportVC.m */; };
+		18E0F2B81DC0DD03006E93EE /* SessionReportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18E0F2B61DC0DD03006E93EE /* SessionReportVC.xib */; };
 		18E18CED1D93D4AC00CD5CF2 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 18E18CEC1D93D44200CD5CF2 /* TNCA_DATABASE.sqlite */; };
 		18E394701DB7AA830014A5F5 /* ReportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3946F1DB7AA830014A5F5 /* ReportVC.m */; };
 		18E655F91D5489510010B387 /* DBManagerCaptransactionslogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E655F81D5489510010B387 /* DBManagerCaptransactionslogEntry.m */; };
@@ -545,6 +547,9 @@
 		18DE9F671DB608E9001013B6 /* ResultMatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResultMatchCell.h; sourceTree = "<group>"; };
 		18DE9F681DB608E9001013B6 /* ResultMatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResultMatchCell.m; sourceTree = "<group>"; };
 		18DE9F691DB608E9001013B6 /* ResultMatchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ResultMatchCell.xib; sourceTree = "<group>"; };
+		18E0F2B41DC0DD03006E93EE /* SessionReportVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionReportVC.h; path = SubClass/SessionReportVC/SessionReportVC.h; sourceTree = "<group>"; };
+		18E0F2B51DC0DD03006E93EE /* SessionReportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionReportVC.m; path = SubClass/SessionReportVC/SessionReportVC.m; sourceTree = "<group>"; };
+		18E0F2B61DC0DD03006E93EE /* SessionReportVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SessionReportVC.xib; path = SubClass/SessionReportVC/SessionReportVC.xib; sourceTree = "<group>"; };
 		18E18CEC1D93D44200CD5CF2 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		18E3946E1DB7AA830014A5F5 /* ReportVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportVC.h; path = ViewController/ChartVC/ReportVC.h; sourceTree = "<group>"; };
 		18E3946F1DB7AA830014A5F5 /* ReportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReportVC.m; path = ViewController/ChartVC/ReportVC.m; sourceTree = "<group>"; };
@@ -1239,6 +1244,16 @@
 			name = ReportCell;
 			sourceTree = "<group>";
 		};
+		18E0F2AE1DC0DC35006E93EE /* SessionReport */ = {
+			isa = PBXGroup;
+			children = (
+				18E0F2B41DC0DD03006E93EE /* SessionReportVC.h */,
+				18E0F2B51DC0DD03006E93EE /* SessionReportVC.m */,
+				18E0F2B61DC0DD03006E93EE /* SessionReportVC.xib */,
+			);
+			name = SessionReport;
+			sourceTree = "<group>";
+		};
 		18F022961D19469600C881F1 /* MatchResult */ = {
 			isa = PBXGroup;
 			children = (
@@ -1743,6 +1758,7 @@
 		CE0018371CF4308C00668D8B /* SubClass */ = {
 			isa = PBXGroup;
 			children = (
+				18E0F2AE1DC0DC35006E93EE /* SessionReport */,
 				18C9CE6E1DB890EB00BCCA4A /* ReportSubview */,
 				36DF65E81DB77D4A0038C1AE /* PlayingSquadCell */,
 				18DE9F611DB6084F001013B6 /* ReportCell */,
@@ -1930,8 +1946,6 @@
 				36206C311DBA24CF007F7101 /* SpiderWagonReports.m */,
 				36206C361DBA3435007F7101 /* SpiderWagonRecords.h */,
 				36206C371DBA3435007F7101 /* SpiderWagonRecords.m */,
-				CE6E944A1DBA2E18005E4EE6 /* CommentaryReport.h */,
-				CE6E944B1DBA2E18005E4EE6 /* CommentaryReport.m */,
 			);
 			name = Records;
 			sourceTree = "<group>";
@@ -2126,6 +2140,7 @@
 				18DE9F6B1DB608E9001013B6 /* ResultMatchCell.xib in Resources */,
 				DCA67D521D34056A00982EF5 /* InningsDetailsVC.xib in Resources */,
 				047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */,
+				18E0F2B81DC0DD03006E93EE /* SessionReportVC.xib in Resources */,
 				186D5E401D9AA617000AFB85 /* BatsManINOUT.xib in Resources */,
 				18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */,
 				24F96F881D2FC90500798A9D /* PenalityVC.xib in Resources */,
@@ -2321,6 +2336,7 @@
 				24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */,
 				CE1FBF6A1CF9A17500A9B6FE /* MatchOfficalsVC.m in Sources */,
 				1878CD911D11101600A80BEE /* InitializeInningsScoreBoardRecord.m in Sources */,
+				18E0F2B71DC0DD03006E93EE /* SessionReportVC.m in Sources */,
 				246124F61D13C429004B85E7 /* EndInnings.m in Sources */,
 				18E655FC1D548B180010B387 /* CaptransactionslogEntryRecord.m in Sources */,
 				188767521D67355B00846C03 /* CMPopTipView.m in Sources */,
@@ -2366,7 +2382,6 @@
 				187229281D12665600CC168F /* AddBreakVC.m in Sources */,
 				2483771D1D2ABE8900FAC40D /* BowlingSummeryPushRecord.m in Sources */,
 				36206C381DBA3435007F7101 /* SpiderWagonRecords.m in Sources */,
-				1884EC891DB9D9890059A2B9 /* DBManagerpitchmapReport.m in Sources */,
 				DCEFC86D1D28B79300451485 /* DBManagerChangeTeam.m in Sources */,
 				DCF6773C1D27D17600B98749 /* DBManagerEndSession.m in Sources */,
 				187952331D02A410001A1224 /* FieldingEventRecord.m in Sources */,
