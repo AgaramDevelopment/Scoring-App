@@ -1775,8 +1775,6 @@
                          frame.origin.x =  self.commonViewXposition.constant;
                          self.CommonView.frame = frame;
                          
-                         
-                         //self.sideView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
                      }
                      completion:^(BOOL finished) {
                          self.sideviewXposition.constant =-300;
@@ -1788,26 +1786,6 @@
                          
                      }];
      leftSlideSwipe = NO;
-    
-    //
-    //    [UIView animateWithDuration:2.0 delay:0.0 options:UIViewAnimationOptionCurveEaseIn animations:^{
-    //        self.CommonView.userInteractionEnabled= YES;
-    //
-    //
-    //
-    //       // self.commonViewwidthposition.constant =768;
-    //
-    //       leftSlideSwipe = NO;
-    //
-    //        NSLog(@"alterviewwidth=%f",self.Allvaluedisplayview.frame.size.width);
-    //    } completion:^(BOOL finished){
-    //
-    //        self.sideviewXposition.constant =-300;
-    //        self.commonViewXposition.constant=0;
-    //        //self.commonleftrightview.frame=CGRectMake(self.commonleftrightview.frame.origin.x,self.commonleftrightview.frame.origin.y,760,361);
-    //
-    //    }];
-    
     
 }
 - (void)handleSwipeFromLeftside:(UISwipeGestureRecognizer *)recognizer

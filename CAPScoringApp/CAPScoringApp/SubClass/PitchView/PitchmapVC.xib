@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -36,8 +36,18 @@
                 <outlet property="Inn2_Btn" destination="KuF-Fq-N6N" id="c5x-61-Wmx"/>
                 <outlet property="Inn3_Btn" destination="b6t-m2-CH7" id="wMd-tw-KkM"/>
                 <outlet property="Inn4_Btn" destination="tRS-vL-Xsz" id="XeL-Eq-8fp"/>
+                <outlet property="Run1_Btn" destination="bdD-U3-w4I" id="FSF-eM-kBh"/>
+                <outlet property="Run2_Btn" destination="MTA-Vl-9ej" id="bff-Jp-wOr"/>
+                <outlet property="Run3_Btn" destination="7Az-gW-kRi" id="sve-G0-HZw"/>
+                <outlet property="Run4_Btn" destination="QsO-Ty-ta1" id="VXj-DZ-LBk"/>
+                <outlet property="Run6_Btn" destination="EoN-sa-Xuh" id="Rv6-qU-GE6"/>
+                <outlet property="all_Btn" destination="VAz-FQ-ZFD" id="Ibi-JB-dbu"/>
+                <outlet property="ball_Btn" destination="eca-jF-5F0" id="Qme-OC-CzZ"/>
+                <outlet property="dotball_Btn" destination="E1W-CZ-SaU" id="cBg-R5-Imh"/>
                 <outlet property="filter_Btn" destination="5j1-59-xdU" id="b17-3k-rSp"/>
                 <outlet property="filter_view" destination="9xh-8n-Xv9" id="tkV-EP-lD1"/>
+                <outlet property="inn1_btnWidth" destination="S0t-Ja-LxE" id="JjA-pX-VhW"/>
+                <outlet property="inns2_btnWidth" destination="Riw-8Q-Xt9" id="DbB-Ms-FKK"/>
                 <outlet property="length_Lbl" destination="eDM-ms-Vpr" id="PHU-X3-EE4"/>
                 <outlet property="length_View" destination="bB8-7b-9jT" id="dNw-EE-uYV"/>
                 <outlet property="line_Vew" destination="9lw-UP-b2o" id="H1z-KU-1aS"/>
@@ -51,6 +61,7 @@
                 <outlet property="striker_Tbl" destination="Tib-lr-vmC" id="OiQ-I2-fVl"/>
                 <outlet property="striker_view" destination="bGD-8c-c53" id="ytb-2u-rdv"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="wicket_Btn" destination="hTO-n8-wpq" id="UQx-lD-Jjf"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -224,6 +235,9 @@
                                 <constraint firstAttribute="width" constant="31" id="zGb-We-NJT"/>
                             </constraints>
                             <state key="normal" image="Off_Circle"/>
+                            <connections>
+                                <action selector="didClickAllRuns:" destination="-1" eventType="touchUpInside" id="DaO-3t-RmV"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALL Runs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMZ-1x-Orp">
                             <rect key="frame" x="61" y="164" width="95" height="30"/>
@@ -288,6 +302,9 @@
                                 <constraint firstAttribute="width" constant="30" id="sBe-0T-Jv1"/>
                             </constraints>
                             <state key="normal" image="Off_Circle"/>
+                            <connections>
+                                <action selector="didSelectrun1:" destination="-1" eventType="touchUpInside" id="vE8-pI-QLB"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8FH-uW-rZc">
                             <rect key="frame" x="60" y="204" width="31" height="30"/>
@@ -316,6 +333,9 @@
                                 <constraint firstAttribute="height" constant="30" id="wk6-we-IZM"/>
                             </constraints>
                             <state key="normal" image="Off_Circle"/>
+                            <connections>
+                                <action selector="didSelectrun2:" destination="-1" eventType="touchUpInside" id="bJR-0q-asK"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="90w-0r-rPU">
                             <rect key="frame" x="222" y="204" width="30" height="30"/>
@@ -334,6 +354,9 @@
                                 <constraint firstAttribute="width" constant="30" id="g9f-mh-PCD"/>
                             </constraints>
                             <state key="normal" image="Off_Circle"/>
+                            <connections>
+                                <action selector="didClickSelectrun3:" destination="-1" eventType="touchUpInside" id="Qqg-Vb-Hvs"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VaB-wF-qh0">
                             <rect key="frame" x="302" y="204" width="30" height="30"/>
@@ -352,6 +375,9 @@
                                 <constraint firstAttribute="width" constant="30" id="uKO-35-Uzy"/>
                             </constraints>
                             <state key="normal" image="Off_Circle"/>
+                            <connections>
+                                <action selector="didSelectrun4:" destination="-1" eventType="touchUpInside" id="UHf-nP-3CM"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="6s" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2L-nJ-nU1">
                             <rect key="frame" x="382" y="204" width="30" height="30"/>
@@ -370,6 +396,9 @@
                                 <constraint firstAttribute="height" constant="30" id="PkF-YR-bLF"/>
                             </constraints>
                             <state key="normal" image="Off_Circle"/>
+                            <connections>
+                                <action selector="didClickSelectrun6:" destination="-1" eventType="touchUpInside" id="LOs-Ae-qhD"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balls" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mfK-MM-uk8">
                             <rect key="frame" x="60" y="250" width="70" height="30"/>
@@ -388,6 +417,9 @@
                                 <constraint firstAttribute="width" constant="30" id="oqL-zm-8rv"/>
                             </constraints>
                             <state key="normal" image="Off_Circle"/>
+                            <connections>
+                                <action selector="didSelectBalls:" destination="-1" eventType="touchUpInside" id="o4Z-uJ-bF3"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Dot Balls" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kkR-fB-urT">
                             <rect key="frame" x="180" y="250" width="90" height="30"/>
@@ -406,6 +438,9 @@
                                 <constraint firstAttribute="width" constant="30" id="iTM-gk-Sgn"/>
                             </constraints>
                             <state key="normal" image="Off_Circle"/>
+                            <connections>
+                                <action selector="didSelectDotBall:" destination="-1" eventType="touchUpInside" id="tHT-Sw-r7J"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hTO-n8-wpq">
                             <rect key="frame" x="280" y="249" width="30" height="30"/>
@@ -414,6 +449,9 @@
                                 <constraint firstAttribute="width" constant="30" id="IzX-TF-UQ1"/>
                             </constraints>
                             <state key="normal" image="Off_Circle"/>
+                            <connections>
+                                <action selector="didSelectWicket:" destination="-1" eventType="touchUpInside" id="gz9-zC-hmv"/>
+                            </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wickets" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cl4-pR-vxz">
                             <rect key="frame" x="320" y="250" width="72" height="30"/>

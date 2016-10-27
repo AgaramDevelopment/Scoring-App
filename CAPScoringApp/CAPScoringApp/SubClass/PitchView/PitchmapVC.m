@@ -104,12 +104,10 @@
 
 @property (nonatomic,strong) NSString * lnningsno;
 @property (nonatomic,strong) NSString * selectRun;
+@property (nonatomic,strong) NSString * selectballwkt;
 
 
-@property(strong,nonatomic)NSString *fstInnShortName;
-@property(strong,nonatomic)NSString *secInnShortName;
-@property(strong,nonatomic)NSString *thrdInnShortName;
-@property(strong,nonatomic)NSString *frthInnShortName;
+
 
 @end
 
@@ -123,7 +121,7 @@
     lineArray =[[NSMutableArray alloc]init];
     lengthArray =[[NSMutableArray alloc]init];
     
-    
+     [self setInningsView];
     isSelectStriker = NO;
     self.filter_view.hidden =YES;
     
@@ -145,18 +143,56 @@
     lineArray =[DBMpitchReport getLine];
     lengthArray =[DBMpitchReport getLength];
     
-    [self.Inn1_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
     self.lnningsno=@"1";
     self.selectStrikerCode =(self.selectStrikerCode !=nil)?self.selectStrikerCode :@"";
     self.selectRun=@"";
     self.selectLengthCode =@"";
     self.selectLineCode = @"";
-    [self drawpitchMethod];
+    self.selectballwkt  =@"0";
+    [self.Inn1_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+    
+}
+
+
+-(void) setInningsView{
+    if([self.matchTypecode isEqual:@"MSC116"] || [self.matchTypecode isEqual:@"MSC024"]){//T20
+        
+        self.Inn1_Btn.hidden = NO;
+        self.Inn2_Btn.hidden = NO;
+        self.Inn3_Btn.hidden = YES;
+        self.Inn4_Btn.hidden = YES;
+        
+        //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
+        //[self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
+        self.inns2_btnWidth.constant = self.view.frame.size.width/2;
+        self.inn1_btnWidth.constant =  self.view.frame.size.width/2;
+        
+        
+    }else if([self.matchTypecode isEqual:@"MSC115"] || [self.matchTypecode isEqual:@"MSC022"]){//ODI
+        self.Inn1_Btn.hidden = NO;
+        self.Inn2_Btn.hidden = NO;
+        self.Inn3_Btn.hidden = YES;
+        self.Inn4_Btn.hidden = YES;
+        self.inns2_btnWidth.constant = self.view.frame.size.width/2;
+        self.inn1_btnWidth.constant = self.view.frame.size.width/2;
+        
+        //     [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
+        //    [self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
+        
+    }else if([self.matchTypecode isEqual:@"MSC114"] || [self.matchTypecode isEqual:@"MSC023"]){//Test
+        
+        self.Inn1_Btn.hidden = NO;
+        self.Inn2_Btn.hidden = NO;
+        self.Inn3_Btn.hidden = NO;
+        self.Inn4_Btn.hidden = NO;
+    }
 }
 
 -(void)drawpitchMethod
 {
     
+
     for(UIImageView * obj in [self.pitch_Img subviews])
     {
         NSLog(@"%@",obj);
@@ -164,7 +200,7 @@
     }
 
     
-    NSMutableArray * objPitchdetail=[DBMpitchReport getPitchmapdetails :self.matchTypecode :self.compititionCode :self.matchCode :_teamCode :self.lnningsno  :self.selectStrikerCode : self.selectRun: self.selectLineCode : self.selectLengthCode];
+    NSMutableArray * objPitchdetail=[DBMpitchReport getPitchmapdetails :self.matchTypecode :self.compititionCode :self.matchCode :_teamCode :self.lnningsno  :self.selectStrikerCode : self.selectRun: self.selectLineCode : self.selectLengthCode:self.selectballwkt];
     
       if(objPitchdetail.count > 0)
       {
@@ -221,6 +257,8 @@
     [self setInningsBySelection:@"1"];
     
    self.teamCode =[DBMpitchReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
+    [self.standard_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+    [self drawpitchMethod];
 }
 
 -(IBAction)didClickInns2:(id)sender
@@ -230,6 +268,10 @@
     
 
     self.teamCode =[DBMpitchReport getTeamCode:self.compititionCode :self.matchCode :@"2"];
+    [self.standard_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+
+    [self drawpitchMethod];
+
 }
 
 -(IBAction)didClickInns3:(id)sender
@@ -238,6 +280,10 @@
      [self setInningsBySelection:@"3"];
     
     self.teamCode =[DBMpitchReport getTeamCode:self.compititionCode :self.matchCode :@"3"];
+    [self.standard_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+
+    [self drawpitchMethod];
+
 }
 
 -(IBAction)didClickInns4:(id)sender
@@ -247,6 +293,10 @@
     
     
     self.teamCode =[DBMpitchReport getTeamCode:self.compititionCode :self.matchCode :@"4"];
+    [self.standard_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+
+    [self drawpitchMethod];
+
 }
 
 -(IBAction)didclickShowFilerviewbtn:(id)sender
@@ -330,6 +380,9 @@
     [self.Run3_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
     [self.Run4_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
     [self.Run6_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
+    
+    self.selectRun=@"";
+    
 }
 
 -(IBAction)didSelectrun1:(id)sender
@@ -398,6 +451,7 @@
 }
 -(IBAction)didSelectDotBall:(id)sender
 {
+     self.selectballwkt=@"1";
     [self.dotball_Btn setImage:[UIImage imageNamed:@"On_Circle"] forState:UIControlStateNormal];
     [self.ball_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
     [self.wicket_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
@@ -405,6 +459,7 @@
 }
 -(IBAction)didSelectWicket:(id)sender
 {
+     self.selectballwkt=@"1";
     [self.wicket_Btn setImage:[UIImage imageNamed:@"On_Circle"] forState:UIControlStateNormal];
     [self.dotball_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
     [self.ball_Btn setImage:[UIImage imageNamed:@"Off_Circle"] forState:UIControlStateNormal];
@@ -487,21 +542,23 @@
 -(IBAction)didClickHidefilterBtn:(id)sender
 {
     self.filter_view.hidden=YES;
+    [self.standard_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
+
     [self drawpitchMethod];
     
 }
 -(IBAction)didClickStandard:(id)sender
 {
-    self.statistics_Btn.backgroundColor=[UIColor clearColor];
-    self.standard_Btn.backgroundColor=[UIColor blackColor];
+    self.statistics_Btn.backgroundColor=[UIColor blackColor];
+    self.standard_Btn.backgroundColor=[UIColor clearColor];
     [self drawpitchMethod];
     
 }
 
 -(IBAction)didClickStatistics:(id)sender
 {
-    self.statistics_Btn.backgroundColor=[UIColor blackColor];
-    self.standard_Btn.backgroundColor=[UIColor clearColor];
+    self.statistics_Btn.backgroundColor=[UIColor clearColor];
+    self.standard_Btn.backgroundColor=[UIColor blackColor];
     [self Stardardpitchmap];
     
 }
@@ -549,12 +606,13 @@
       bouncerwideOLRun=0;
     
     
-    NSMutableArray * objPitchdetail=[DBMpitchReport getPitchmapdetails :self.matchTypecode :self.compititionCode :self.matchCode :_teamCode :self.lnningsno  :self.selectStrikerCode : self.selectRun: self.selectLineCode : self.selectLengthCode];
+    NSMutableArray * objPitchdetail=[DBMpitchReport getPitchmapdetails :self.matchTypecode :self.compititionCode :self.matchCode :_teamCode :self.lnningsno  :self.selectStrikerCode : self.selectRun: self.selectLineCode : self.selectLengthCode:self.selectballwkt];
     
-     PitchReportdetailRecord * objRecord =(PitchReportdetailRecord *)[objPitchdetail objectAtIndex:0];
+    
     
     if(objPitchdetail.count > 0)
     {
+        PitchReportdetailRecord * objRecord =(PitchReportdetailRecord *)[objPitchdetail objectAtIndex:0];
     if(isSelectStriker == YES)
     {
         if([objRecord.BattingStyle isEqualToString:@"MSC013"])

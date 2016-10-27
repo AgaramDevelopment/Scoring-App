@@ -17,8 +17,15 @@
 
 @property (nonatomic,strong) NSString * matchTypecode;
 
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * inn1_btnWidth;
+
+@property (nonatomic,strong)  IBOutlet NSLayoutConstraint * inns2_btnWidth;
 
 
+@property(strong,nonatomic)NSString *fstInnShortName;
+@property(strong,nonatomic)NSString *secInnShortName;
+@property(strong,nonatomic)NSString *thrdInnShortName;
+@property(strong,nonatomic)NSString *frthInnShortName;
 
 
 
