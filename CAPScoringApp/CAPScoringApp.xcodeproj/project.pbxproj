@@ -26,6 +26,8 @@
 		0485A5391D2A25D70059990F /* BOWLEROVERDETAILSPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A5381D2A25D70059990F /* BOWLEROVERDETAILSPushRecord.m */; };
 		0485A53C1D2A297D0059990F /* FIELDINGEVENTSPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A53B1D2A297D0059990F /* FIELDINGEVENTSPushRecord.m */; };
 		0485A53F1D2A2D240059990F /* DAYEVENTSPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A53E1D2A2D240059990F /* DAYEVENTSPushRecord.m */; };
+		048882DC1DC1DF51007528E0 /* BatsmanVsBowlerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 048882DA1DC1DF51007528E0 /* BatsmanVsBowlerVC.m */; };
+		048882DD1DC1DF51007528E0 /* BatsmanVsBowlerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048882DB1DC1DF51007528E0 /* BatsmanVsBowlerVC.xib */; };
 		048B5A9E1D0AF1A7009F12B8 /* WicketTypeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */; };
 		048F6F591CFFFEE600F2C5F5 /* FieldingFactorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048F6F581CFFFEE600F2C5F5 /* FieldingFactorCell.m */; };
 		04C325851D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C325841D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.m */; };
@@ -354,6 +356,9 @@
 		0485A53B1D2A297D0059990F /* FIELDINGEVENTSPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FIELDINGEVENTSPushRecord.m; sourceTree = "<group>"; };
 		0485A53D1D2A2D240059990F /* DAYEVENTSPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DAYEVENTSPushRecord.h; sourceTree = "<group>"; };
 		0485A53E1D2A2D240059990F /* DAYEVENTSPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DAYEVENTSPushRecord.m; sourceTree = "<group>"; };
+		048882D91DC1DF51007528E0 /* BatsmanVsBowlerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatsmanVsBowlerVC.h; sourceTree = "<group>"; };
+		048882DA1DC1DF51007528E0 /* BatsmanVsBowlerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatsmanVsBowlerVC.m; sourceTree = "<group>"; };
+		048882DB1DC1DF51007528E0 /* BatsmanVsBowlerVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BatsmanVsBowlerVC.xib; sourceTree = "<group>"; };
 		048B5A9C1D0AF1A7009F12B8 /* WicketTypeRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WicketTypeRecord.h; sourceTree = "<group>"; };
 		048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WicketTypeRecord.m; sourceTree = "<group>"; };
 		048F6F571CFFFEE600F2C5F5 /* FieldingFactorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldingFactorCell.h; sourceTree = "<group>"; };
@@ -2027,6 +2032,9 @@
 				CEB2CC9B1DB8CC4B0053DA72 /* CommentaryVC.h */,
 				CEB2CC9C1DB8CC4B0053DA72 /* CommentaryVC.m */,
 				CEB2CC9D1DB8CC4B0053DA72 /* CommentaryVC.xib */,
+				048882D91DC1DF51007528E0 /* BatsmanVsBowlerVC.h */,
+				048882DA1DC1DF51007528E0 /* BatsmanVsBowlerVC.m */,
+				048882DB1DC1DF51007528E0 /* BatsmanVsBowlerVC.xib */,
 			);
 			name = ReportView;
 			sourceTree = "<group>";
@@ -2155,6 +2163,7 @@
 				CE0018511CF460DE00668D8B /* RAJDHANI-REGULAR.TTF in Resources */,
 				2461251E1D13C931004B85E7 /* RevisedTarget.xib in Resources */,
 				047E52F21D27D84B00D4CAC6 /* Other_WicketgridTVC.xib in Resources */,
+				048882DD1DC1DF51007528E0 /* BatsmanVsBowlerVC.xib in Resources */,
 				24D24CF01CFEF50000CD75D2 /* CustomNavigationVC.xib in Resources */,
 				36DF65E71DB751830038C1AE /* PlayingSquadVC.xib in Resources */,
 				24F96F8C1D2FC90500798A9D /* PenaltygridVC.xib in Resources */,
@@ -2302,6 +2311,7 @@
 				CE1FBF641CF9984B00A9B6FE /* FixturesRecord.m in Sources */,
 				047E52EC1D27D71F00D4CAC6 /* Other_WicketgridVC.m in Sources */,
 				04EC77941D29570F005B2608 /* BATTINGSUMMARYPushRecord.m in Sources */,
+				048882DC1DC1DF51007528E0 /* BatsmanVsBowlerVC.m in Sources */,
 				18704ED81D19590000996BF3 /* GetMatchResultTypeAndCodeDetails.m in Sources */,
 				2479C3E31CFC3FD300A3CCA2 /* BallEventRecord.m in Sources */,
 				245E9F161D0143C200D7C07A /* PlayerLevelCell.m in Sources */,
