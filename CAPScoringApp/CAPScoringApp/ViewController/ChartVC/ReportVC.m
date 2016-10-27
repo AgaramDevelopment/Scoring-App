@@ -12,6 +12,7 @@
 #import "PitchmapVC.h"
 #import "SpiderWagonReportVC.h"
 #import "SectorWagonReportVC.h"
+#import "BatsmanVsBowlerVC.h"
 
 @interface ReportVC ()
 {
@@ -20,6 +21,7 @@
     CommentaryVC *cmntryView;
     SpiderWagonReportVC *spiderView;
     SectorWagonReportVC *sectorView;
+    BatsmanVsBowlerVC *batsmanVsBowlerVC;
 }
 
 @end
@@ -141,7 +143,8 @@
     }
     else if(objBtn.tag == 11)
     {
-         NSLog(@"%d",objBtn.tag);
+        [self setBatsmanVsBowlerView];
+        
     }
     else if(objBtn.tag == 12)
     {
@@ -189,6 +192,16 @@
     
     cmntryView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:cmntryView.view];
+}
+
+
+
+-(void) setBatsmanVsBowlerView{
+    batsmanVsBowlerVC = [[BatsmanVsBowlerVC alloc]initWithNibName:@"BatsmanVsBowlerVC" bundle:nil];
+    batsmanVsBowlerVC.matchCode = self.matchCode;
+    batsmanVsBowlerVC.matchTypeCode =self.matchTypeCode;
+    batsmanVsBowlerVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:batsmanVsBowlerVC.view];
 }
 
 

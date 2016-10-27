@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface BatsmanVsBowlerVC : UIViewController
-
+@property(strong,nonatomic)NSString *matchCode;
+@property(strong,nonatomic)NSString *matchTypeCode;
 @end
