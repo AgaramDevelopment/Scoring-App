@@ -20,9 +20,13 @@
 @property(strong,nonatomic)NSString *thrdInnShortName;
 @property(strong,nonatomic)NSString *frthInnShortName;
 
-@property (nonatomic,strong) NSString * selectStrikerCode;
-@property (nonatomic,strong) NSString * selectBowlerCode;
+@property (nonatomic,strong) NSString *selectStrikerCode;
+@property (nonatomic,strong) NSString *selectBowlerCode;
 @property (nonatomic,strong) NSString *selectBattingStyle;
+
+@property (nonatomic,strong) NSString *selectRegionCode;
+@property (nonatomic,strong) NSString *selectRuns;
+
 
 
 @property (strong, nonatomic) IBOutlet UIImageView *img_sector;

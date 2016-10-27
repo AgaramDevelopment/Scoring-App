@@ -20,6 +20,35 @@
     BOOL isBowler;
     DBManagerSpiderWagonReport *objDBManagerSpiderWagonReport;
     DBManagerpitchmapReport *objDBManagerpitchmapReport;
+    
+    
+    int zerocount;
+    int Run1Count;
+    int Run2Count;
+    int Run3Count;
+    int Run4Count;
+    int Run6Count;
+    
+    
+    
+    UILabel * fineleg_lbl;
+    UILabel * squareleg_lbl;
+    UILabel * midWicket_lbl;
+    UILabel * longon_lbl;
+    UILabel * longoff_lbl;
+    UILabel * cover_lbl;
+    UILabel * point_lbl;
+    UILabel * Thirdman_lbl;
+    
+    int ThirdmanCountRun;
+    int pointRun;
+    int coverRun;
+    int longoffRun;
+    int longonRun;
+    int midWicketRun;
+    int squarelegRun;
+    int finelegRun;
+
 }
 
 @property (nonatomic,strong) NSMutableArray *sectorWagonArray;
@@ -62,7 +91,17 @@
     
     _sectorWagonArray = [objDBManagerSpiderWagonReport getSectorWagon:self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode :@"1" :@"" :@"" :@"" :@"" :@"" :@""];
     
+    if(_sectorWagonArray.count>0){
+        
+        SpiderWagonRecords * objStriker =[self.sectorWagonArray objectAtIndex:0];
     
+        _selectRegionCode = objStriker.SECTORREGIONCODE;
+        _selectRuns = objStriker.RUNS;
+        _selectBattingStyle = objStriker.BATTINGSTYLE;
+        
+    }
+
+    [self sectorWagonwheel: _selectRegionCode : _selectBattingStyle : _selectRuns];
     [self setInningsBySelection:@"1"];
     [self setInningsView];
     
@@ -446,8 +485,263 @@
     self.hide_btn_view.hidden = NO;
     
     
+    
+    
 }
 
+
+-(void)sectorWagonwheel:(NSString *) sectorwognwheelcode :(NSString *) batmanStyle :(NSString *) Run
+
+{
+    if([Run isEqualToString:@"1"])
+    {
+        Run1Count++;
+    }
+    else if ([Run isEqualToString:@"0"])
+    {
+        zerocount++;
+    }
+    else if ([Run isEqualToString:@"2"])
+    {
+        Run2Count++;
+    }
+    else if ([Run isEqualToString:@"3"])
+    {
+        Run3Count++;
+    }
+    else if ([Run isEqualToString:@"4"])
+    {
+        Run4Count++;
+    }
+    else if ([Run isEqualToString:@"6"])
+    {
+        Run6Count++;
+    }
+    
+    
+    if([sectorwognwheelcode isEqualToString:@"MDT036"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            // fineleg++;
+            finelegRun = [Run intValue]+finelegRun;
+        }
+        else
+        {
+            // fineleg++;
+            NSLog(@"RH");
+            finelegRun = [Run intValue]+finelegRun;
+        }
+        
+        if(fineleg_lbl !=nil)
+        {
+            [fineleg_lbl removeFromSuperview];
+        }
+        
+        fineleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(230, 30,35, 35)];
+        fineleg_lbl.textColor=[UIColor whiteColor];
+        fineleg_lbl.text =[NSString stringWithFormat:@"%d",finelegRun];
+        [self.img_sector addSubview:fineleg_lbl];
+        // self.batsmanCell.WangonAll_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",finelegRun];
+        
+        
+    }
+    else if([sectorwognwheelcode isEqualToString:@"MDT037"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            //squareleg++;
+            squarelegRun =squarelegRun+[Run intValue];
+        }
+        else
+        {
+            NSLog(@"RH");
+            //            //squareleg++;
+            squarelegRun =squarelegRun+[Run intValue];
+        }
+        
+        if(squareleg_lbl !=nil)
+        {
+            [squareleg_lbl removeFromSuperview];
+        }
+        
+        squareleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(280,110,35, 35)];
+        squareleg_lbl.textColor=[UIColor whiteColor];
+        squareleg_lbl.text =[NSString stringWithFormat:@"%d",squarelegRun];
+        [self.img_sector addSubview:squareleg_lbl];
+        // self.batsmanCell.wangon1s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",squarelegRun];
+        
+    }
+    else if([sectorwognwheelcode isEqualToString:@"MDT038"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            //midWicket++;
+            midWicketRun =midWicketRun+[Run intValue];
+        }
+        else
+        {
+            NSLog(@"RH");
+            //midWicket++;
+            midWicketRun =midWicketRun+[Run intValue];
+        }
+        
+        if(midWicket_lbl !=nil)
+        {
+            [midWicket_lbl removeFromSuperview];
+        }
+        
+        
+        midWicket_lbl=[[UILabel alloc]initWithFrame:CGRectMake(280,190,35, 35)];
+        midWicket_lbl.textColor=[UIColor whiteColor];
+        midWicket_lbl.text =[NSString stringWithFormat:@"%d",midWicketRun];
+        [self.img_sector addSubview:midWicket_lbl];
+        //   self.batsmanCell.wangon2s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",midWicketRun];
+        
+    }
+    else if([sectorwognwheelcode isEqualToString:@"MDT039"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            // longon++;
+            longonRun =longonRun+[Run intValue];
+        }
+        else
+        {
+            //            NSLog(@"RH");
+            //longon++;
+            longonRun =longonRun+[Run intValue];
+        }
+        
+        if(longon_lbl !=nil)
+        {
+            [longon_lbl removeFromSuperview];
+        }
+        
+        longon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(220,270,35, 35)];
+        longon_lbl.textColor=[UIColor whiteColor];
+        longon_lbl.text =[NSString stringWithFormat:@"%d",longonRun];
+        [self.img_sector addSubview:longon_lbl];
+        // self.batsmanCell.wangon3s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",longonRun];
+        
+    }
+    else if([sectorwognwheelcode isEqualToString:@"MDT041"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            // longoff++;
+            longoffRun =longoffRun +[Run intValue];
+        }
+        else
+        {
+            //            NSLog(@"RH");
+            // longoff++;
+            longoffRun =longoffRun +[Run intValue];
+        }
+        
+        if(longoff_lbl !=nil)
+        {
+            [longoff_lbl removeFromSuperview];
+        }
+        
+        longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,190,35, 35)];
+        longoff_lbl.textColor=[UIColor whiteColor];
+        longoff_lbl.text =[NSString stringWithFormat:@"%d",longoffRun];
+        [self.img_sector addSubview:longoff_lbl];
+        // self.batsmanCell.wangon4s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",longoffRun];
+        
+        
+    }
+    else if([sectorwognwheelcode isEqualToString:@"MDT042"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            //cover++;
+            coverRun = coverRun+[Run intValue];
+        }
+        else
+        {
+            //            NSLog(@"RH");
+            //           // cover++;
+            coverRun = coverRun+[Run intValue];
+        }
+        
+        if(cover_lbl !=nil)
+        {
+            [cover_lbl removeFromSuperview];
+        }
+        
+        cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,100,35, 35)];
+        cover_lbl.textColor=[UIColor whiteColor];
+        cover_lbl.text =[NSString stringWithFormat:@"%d",coverRun];
+        [self.img_sector addSubview:cover_lbl];
+        // self.batsmanCell.wangon6s_Btn.titleLabel.text=[NSString stringWithFormat:@"%d",coverRun];
+        
+    }
+    else if([sectorwognwheelcode isEqualToString:@"MDT043"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            // point++;
+            pointRun = pointRun+[Run intValue];
+            
+        }
+        else
+        {
+            //            NSLog(@"RH");
+            //            //point++;
+            pointRun = pointRun+[Run intValue];
+        }
+        
+        if(point_lbl !=nil)
+        {
+            [point_lbl removeFromSuperview];
+        }
+        
+        
+        point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,120,35, 35)];
+        point_lbl.textColor=[UIColor whiteColor];
+        point_lbl.text =[NSString stringWithFormat:@"%d",pointRun];
+        [self.img_sector addSubview:point_lbl];
+        
+    }
+    else if([sectorwognwheelcode isEqualToString:@"MDT044"])
+    {
+        if([batmanStyle isEqualToString:@"MSC012"])
+        {
+            NSLog(@"LH");
+            // ThirdmanCount++;
+            ThirdmanCountRun = ThirdmanCountRun+[Run intValue];
+        }
+        else
+        {
+            NSLog(@"RH");
+            //            //ThirdmanCount++;
+            ThirdmanCountRun = ThirdmanCountRun+[Run intValue];
+            
+            
+        }
+        
+        
+        if(Thirdman_lbl !=nil)
+        {
+            [Thirdman_lbl removeFromSuperview];
+        }
+        
+        Thirdman_lbl=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+        Thirdman_lbl.textColor=[UIColor whiteColor];
+        Thirdman_lbl.text =[NSString stringWithFormat:@"%d",ThirdmanCountRun];
+        [self.img_sector addSubview:Thirdman_lbl];
+        
+    }
+}
 
 
 @end
