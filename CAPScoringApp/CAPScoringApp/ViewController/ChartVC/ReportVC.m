@@ -11,6 +11,7 @@
 #import "CommentaryVC.h"
 #import "PitchmapVC.h"
 #import "SpiderWagonReportVC.h"
+#import "SectorWagonReportVC.h"
 
 @interface ReportVC ()
 {
@@ -18,6 +19,7 @@
     PitchmapVC * objPitchview;
     CommentaryVC *cmntryView;
     SpiderWagonReportVC *spiderView;
+    SectorWagonReportVC *sectorView;
 }
 
 @end
@@ -119,6 +121,7 @@
     else if(objBtn.tag == 7)
     {
          NSLog(@"%d",objBtn.tag);
+        [self setSectorView];
     }
     else if(objBtn.tag == 8)
     {
@@ -144,6 +147,8 @@
     {
          NSLog(@"%d",objBtn.tag);
     }
+    
+
 }
 
 - (IBAction)btn_back:(id)sender {
@@ -202,6 +207,28 @@
     
 //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:spiderView.view];
+    
+}
+
+
+
+-(void) setSectorView{
+    
+    sectorView = [[SectorWagonReportVC alloc]initWithNibName:@"SectorWagonReportVC" bundle:nil];
+    sectorView.matchCode = self.matchCode;
+    sectorView.compititionCode = self.competitionCode;
+    sectorView.matchTypeCode = self.matchTypeCode;
+    
+    
+    sectorView.fstInnShortName = self.fstInnShortName;
+    sectorView.secInnShortName = self.secInnShortName;
+    sectorView.thrdInnShortName = self.thrdInnShortName;
+    sectorView.frthInnShortName = self.frthInnShortName;
+    
+    sectorView.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    
+    //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:sectorView.view];
     
 }
     
