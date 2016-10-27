@@ -12,8 +12,11 @@
 @interface DBManagerSpiderWagonReport : NSObject
 
 
-
+//Spider Wagon Wheel
 -(NSMutableArray *)getSpiderWagon:(NSString*)MATCHTYPECODE:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSString*)STRIKERCODE:(NSString*)BOWLERCODE:(NSString*)RUNS:(NSString*)ISFOUR:(NSString*)ISSIX:(NSString*)ISONSIDE;
+
+//Sector Wagon Wheel
+-(NSMutableArray *)getSectorWagon:(NSString*)MATCHTYPECODE:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSString*)STRIKERCODE:(NSString*)BOWLERCODE:(NSString*)RUNS:(NSString*)ISFOUR:(NSString*)ISSIX:(NSString*)ISONSIDE;
 
 -(NSMutableArray *) getStrickerdetail :(NSString *) matchCode :(NSString * )Teamcode;
 
