@@ -15,6 +15,8 @@
 #import "PlayingSquadRecords.h"
 #import "EventRecord.h"
 #import "CommentaryReport.h"
+#import "BvsBBowler.h"
+#import "BvsBBatsman.h"
 @implementation DBManagerReports
 
 
@@ -408,6 +410,110 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
+//Batsman Vs Bowler
+
+-(NSMutableArray *)retrieveBatVsBowlBowlersList: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@" SELECT  BE.COMPETITIONCODE, BE.MATCHCODE, BE.STRIKERCODE, BE.BOWLERCODE, MR.MATCHNAME, 'Batsman: ' || SC.PLAYERNAME BATSMANNAME,BE.INNINGSNO,BC.PLAYERNAME BOWLERNAME,TM.TEAMNAME AS BATTINGTEAMNAME 		,(SELECT TM.TEAMNAME FROM MATCHREGISTRATION MR INNER JOIN TEAMMASTER TM ON TM.TEAMCODE = (CASE BE.TEAMCODE WHEN MR.TEAMACODE THEN MR.TEAMBCODE ELSE MR.TEAMACODE END) WHERE MR.MATCHCODE = BE.MATCHCODE) AS TEAMNAME 		,MAX(MDWT.METASUBCODEDESCRIPTION) WICKETTYPE 		,COUNT(BALLCOUNT)BALLS, SUM(CASE WHEN BYES = 0 AND LEGBYES = 0 THEN RUNS + OVERTHROW ELSE RUNS END)AS RUNS 		,SUM(CASE WHEN RUNS = 0 AND ISLEGALBALL=1 THEN 1 ELSE 0 END)AS DOTS 		,SUM(CASE WHEN RUNS = 1 THEN 1 ELSE 0 END)AS ONES 		,SUM(CASE WHEN RUNS = 2 THEN 1 ELSE 0 END)AS TWOS 		,SUM(CASE WHEN RUNS = 3 THEN 1 ELSE 0 END)AS THREES 		,SUM(CASE WHEN RUNS = 4 AND ISFOUR =0 THEN 1 ELSE 0 END)AS FOURS 		,SUM(CASE WHEN RUNS = 5 THEN 1 ELSE 0 END)AS FIVES 		,SUM(CASE WHEN RUNS = 6 AND ISSIX = 0 THEN 1 ELSE 0 END)AS SIXES 		, SUM(CASE WHEN ISFOUR = 1 AND BE.BYES = 0 AND BE.LEGBYES = 0  THEN 1 ELSE 0 END) BOUNDARY4S 		, SUM(CASE WHEN ISSIX = 1 AND BE.BYES = 0 AND BE.LEGBYES = 0 THEN 1 ELSE 0 END) BOUNDARY6S 		,SUM(CASE WHEN RUNS = 7 THEN 1 ELSE 0 END)AS SEVEN 		,SUM(CASE WHEN ISUNCOMFORT = 1 THEN 1 ELSE 0 END)AS UNCOMFORTABLE 		,SUM(CASE WHEN ISBEATEN = 1 THEN 1 ELSE 0 END)AS BEATEN 		,SUM(CASE WHEN ISWTB = 1 THEN 1 ELSE 0 END)AS WTB 		,CAST(CAST((SUM(CASE WHEN BYES = 0 AND LEGBYES = 0 THEN RUNS + OVERTHROW ELSE RUNS END)/COUNT(BALLCOUNT))*100 AS NUMERIC(8,2))AS VARCHAR) STRIKERATE 		 FROM    BALLEVENTS BE 		INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE = BE.COMPETITIONCODE AND MR.MATCHCODE = BE.MATCHCODE AND MR.RECORDSTATUS='MSC001' 		INNER JOIN COMPETITION CM ON CM.COMPETITIONCODE=MR.COMPETITIONCODE  AND CM.RECORDSTATUS='MSC001'	 		INNER JOIN PLAYERMASTER SC ON SC.PLAYERCODE = BE.STRIKERCODE AND SC.RECORDSTATUS='MSC001' 		INNER JOIN PLAYERMASTER BC ON BC.PLAYERCODE = BE.BOWLERCODE AND BC.RECORDSTATUS='MSC001' 		INNER JOIN TEAMMASTER TM ON TM.TEAMCODE = BE.TEAMCODE  AND TM.RECORDSTATUS='MSC001' 		LEFT JOIN WICKETEVENTS WE ON WE.COMPETITIONCODE = BE.COMPETITIONCODE 				AND WE.MATCHCODE = BE.MATCHCODE 				AND WE.TEAMCODE = BE.TEAMCODE 				AND WE.BALLCODE = BE.BALLCODE 		LEFT JOIN METADATA MDWT ON  WE.WICKETTYPE = MDWT.METASUBCODE AND WE.WICKETTYPE IN('MSC095','MSC096','MSC104','MSC098','MSC099','MSC105') WHERE	 		 BE.COMPETITIONCODE = '%@' 		AND BE.MATCHCODE = '%@' 		AND BE.INNINGSNO = %@ 				 GROUP BY BE.COMPETITIONCODE, BE.STRIKERCODE, BE.BOWLERCODE, MR.MATCHNAME, 'Batsman: ' + SC.PLAYERNAME,BE.INNINGSNO,BC.PLAYERNAME,TM.TEAMNAME,BE.TEAMCODE,BE.BOWLERCODE,BE.MATCHCODE  ORDER BY BE.MATCHCODE        ",competitionCode,matchCode,inningsNo];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+           
+                
+                BvsBBowler *record=[[BvsBBowler alloc]init];
+                record.strickerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record.bowlerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.name=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record.teamName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                record.wicketType=[self getValueByNull:statement :10];
+                record.balls=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                record.runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
+                record.dots=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
+                record.ones=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
+                record.twos=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
+                record.threes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
+                record.bFours=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 20)];
+                record.bSixes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 21)];
+                record.uncomfort=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)];
+                record.beaten=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 24)];
+                record.wtb=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 25)];
+                
+                [eventArray addObject:record];
+                
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        
+        
+        sqlite3_close(dataBase);
+        
+    }
+    return eventArray;
+    
+}
+
+
+-(NSMutableArray *)retrieveBatVsBowlBatsmanList: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@" SELECT BE.STRIKERCODE,BE.BATSMANNAME,BE.TOTALMATCH,BE.RUNS,BE.DOTS,BE.ONES,BE.TWOS,BE.THREES,BE.FOURS,BE.FIVES,BE.SIXES,BE.SEVEN,BE.BALLS 		,BE.BOUNDARY4S,BE.BOUNDARY6S,BE.BEATEN,BE.WTB,BE.STRIKERATE,BE.	WICKETTYPE,BE.UNCOMFORTABLE, 		 		(SELECT COUNT(INNINGSNO) FROM BATTINGSUMMARY BS 						INNER JOIN MATCHREGISTRATION MR ON BS.COMPETITIONCODE=MR.COMPETITIONCODE AND MR.MATCHCODE=BS.MATCHCODE AND MR.RECORDSTATUS='MSC001' 						WHERE BS.COMPETITIONCODE = '%@' 							AND BS.MATCHCODE = '%@' 							AND BS.INNINGSNO = %@ 							AND ( BS.BATSMANCODE = BE.STRIKERCODE) AND (BS.BALLS+BS.RUNS)!=0) AS TOTALINNINGS  FROM ( SELECT    BE.STRIKERCODE , SC.PLAYERNAME BATSMANNAME 		,COUNT (DISTINCT  BE.MATCHCODE) TOTALMATCH 		,COUNT(BALLCOUNT)BALLS, SUM(CASE WHEN BYES = 0 AND LEGBYES = 0 THEN RUNS + OVERTHROW ELSE RUNS END)AS RUNS 		,SUM(CASE WHEN RUNS = 0 AND ISLEGALBALL=1 THEN 1 ELSE 0 END)AS DOTS 		,SUM(CASE WHEN RUNS = 1 THEN 1 ELSE 0 END)AS ONES 		,SUM(CASE WHEN RUNS = 2 THEN 1 ELSE 0 END)AS TWOS 		,SUM(CASE WHEN RUNS = 3 THEN 1 ELSE 0 END)AS THREES 		,SUM(CASE WHEN RUNS = 4 AND ISFOUR =0 THEN 1 ELSE 0 END)AS FOURS 		,SUM(CASE WHEN RUNS = 5 THEN 1 ELSE 0 END)AS FIVES 		,SUM(CASE WHEN RUNS = 6 AND ISSIX = 0 THEN 1 ELSE 0 END)AS SIXES 		, SUM(CASE WHEN ISFOUR = 1 AND BE.BYES = 0 AND BE.LEGBYES = 0  THEN 1 ELSE 0 END) BOUNDARY4S 		, SUM(CASE WHEN ISSIX = 1 AND BE.BYES = 0 AND BE.LEGBYES = 0 THEN 1 ELSE 0 END) BOUNDARY6S 		,SUM(CASE WHEN RUNS = 7 THEN 1 ELSE 0 END)AS SEVEN 		,SUM(CASE WHEN ISUNCOMFORT = 1 THEN 1 ELSE 0 END)AS UNCOMFORTABLE 		,SUM(CASE WHEN ISBEATEN = 1 THEN 1 ELSE 0 END)AS BEATEN 		,SUM(CASE WHEN ISWTB = 1 THEN 1 ELSE 0 END)AS WTB 		,(SUM(CASE WHEN BYES = 0 AND LEGBYES = 0 THEN RUNS + OVERTHROW ELSE RUNS END)*1.0/COUNT(BALLCOUNT)*1.0)*100.0 STRIKERATE 		,REPLACE(REPLACE(REPLACE((SELECT group_concat(DISTINCT MDWT.METASUBCODEDESCRIPTION) WICKETTYPE FROM WICKETEVENTS  WE 		  LEFT JOIN METADATA MDWT ON  WE.WICKETTYPE = MDWT.METASUBCODE AND WE.WICKETTYPE IN('MSC095','MSC096','MSC104','MSC098','MSC099','MSC105')  	       WHERE WE.WICKETPLAYER= STRIKERCODE),'<WICKETTYPE>',''),'</WICKETTYPE>',' ,'),'&amp;','&') AS WICKETTYPE 		 FROM    BALLEVENTS BE 		INNER JOIN MATCHREGISTRATION MR ON MR.COMPETITIONCODE = BE.COMPETITIONCODE AND MR.MATCHCODE = BE.MATCHCODE AND MR.RECORDSTATUS='MSC001' 		INNER JOIN PLAYERMASTER SC ON SC.PLAYERCODE = BE.STRIKERCODE AND SC.RECORDSTATUS='MSC001' 		INNER JOIN PLAYERMASTER BC ON BC.PLAYERCODE = BE.BOWLERCODE AND BC.RECORDSTATUS='MSC001' 		LEFT JOIN WICKETEVENTS WE ON WE.COMPETITIONCODE = BE.COMPETITIONCODE 		AND WE.MATCHCODE = BE.MATCHCODE 		AND WE.TEAMCODE = BE.TEAMCODE 		AND WE.BALLCODE = BE.BALLCODE 		INNER JOIN COMPETITION CM ON CM.COMPETITIONCODE=MR.COMPETITIONCODE  AND CM.RECORDSTATUS='MSC001'	 		 WHERE   		BE.COMPETITIONCODE = '%@' 		AND  BE.MATCHCODE = '%@' 		AND BE.INNINGSNO = %@ 		 GROUP BY BE.STRIKERCODE,    SC.PLAYERNAME ) AS BE GROUP BY BE.STRIKERCODE,BE.BATSMANNAME,BE.TOTALMATCH,BE.RUNS,BE.ONES,BE.DOTS,BE.BALLS,BE.UNCOMFORTABLE ,BE.TWOS,BE.THREES,BE.FOURS,BE.FIVES,BE.SIXES,BE.SEVEN,BE.BOUNDARY4S,BE.BOUNDARY6S,BE.BEATEN,BE.WTB,BE.STRIKERATE,BE.WICKETTYPE ",competitionCode,matchCode,inningsNo,competitionCode,matchCode,inningsNo];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+               
+                
+                BvsBBatsman *record=[[BvsBBatsman alloc]init];
+                record.strickerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.name=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record.runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.dots=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record.ones=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                record.twos=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                record.threes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record.fours=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                record.fives=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
+                record.sixes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                record.sevens=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
+                record.balls=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
+                
+                
+                record.bFours=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
+                record.bSixes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
+                
+                record.beaten=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
+                record.wtb=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
+                record.sr=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
+                record.uncomfort=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
+                
+                [eventArray addObject:record];
+                
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        
+        
+        sqlite3_close(dataBase);
+        
+    }
+    return eventArray;
+    
+}
 
 
 

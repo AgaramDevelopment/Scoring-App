@@ -68,7 +68,37 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BatsmanVsBowlerVC">
             <connections>
+                <outlet property="batsman_name" destination="AiT-b6-tOo" id="n1v-2v-UqE"/>
+                <outlet property="btn_filter_ok" destination="g9b-SO-aOD" id="1qa-zH-S47"/>
+                <outlet property="img_batsman_photo" destination="tfp-vz-yAV" id="mgS-KG-zpu"/>
+                <outlet property="inns_four" destination="Oae-0D-2iL" id="xo4-39-xiL"/>
+                <outlet property="inns_one" destination="jlx-AX-70e" id="Tae-OJ-7FF"/>
+                <outlet property="inns_one_width" destination="y54-h3-SEC" id="g4p-ap-Yjs"/>
+                <outlet property="inns_three" destination="hl3-i0-cc2" id="pJ3-zA-5W5"/>
+                <outlet property="inns_two" destination="UU3-0N-FW2" id="zQe-zT-YSf"/>
+                <outlet property="inns_two_width" destination="RKF-GD-JRF" id="XZg-QY-cyL"/>
+                <outlet property="lbl_b4s" destination="5I4-c1-bIa" id="Jbn-OS-SaA"/>
+                <outlet property="lbl_b6s" destination="ToR-re-2wR" id="pEn-gH-NSb"/>
+                <outlet property="lbl_balls" destination="Lc8-tS-IOl" id="65U-Pj-ivU"/>
+                <outlet property="lbl_btn" destination="RkS-oM-PTJ" id="xov-RQ-zuG"/>
+                <outlet property="lbl_dots" destination="nK4-PF-jjH" id="zar-0B-bm7"/>
+                <outlet property="lbl_filter_stricker_name" destination="C2n-Tg-r84" id="Sr3-Nu-S6D"/>
+                <outlet property="lbl_fives" destination="nuP-ce-d8u" id="tg2-bW-jSb"/>
+                <outlet property="lbl_fours" destination="GQf-dY-pIU" id="Usq-8i-EE4"/>
+                <outlet property="lbl_ones" destination="2Ls-fa-R3Q" id="ETi-SJ-Od1"/>
+                <outlet property="lbl_runs" destination="NJF-y1-0lv" id="sK4-oc-Gmy"/>
+                <outlet property="lbl_sevens" destination="uY0-8i-t3B" id="HgZ-M6-JNf"/>
+                <outlet property="lbl_sixes" destination="9Qn-t9-bSs" id="b8S-6H-bre"/>
+                <outlet property="lbl_sr" destination="c1y-hw-Yjh" id="Czi-Qj-Hul"/>
+                <outlet property="lbl_threes" destination="Gzb-fr-W98" id="0TW-SK-9DG"/>
+                <outlet property="lbl_twos" destination="5U5-W2-cU4" id="epL-m6-0Wj"/>
+                <outlet property="lbl_unc" destination="KLw-nH-SJI" id="ZfT-Yc-1FR"/>
+                <outlet property="lbl_wtb" destination="6Wc-4t-eMV" id="xhP-WY-CJr"/>
+                <outlet property="tableview_bowlers" destination="Ztz-bb-rG9" id="N3z-bj-tvE"/>
+                <outlet property="tableview_stricker" destination="nWa-RS-IzL" id="tPM-YO-VcQ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="view_filter" destination="x3c-G9-hpB" id="s6n-Ns-Vrs"/>
+                <outlet property="view_open_filter" destination="hQN-Ri-Q22" id="6sL-x4-asY"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -100,6 +130,9 @@
                                     <state key="normal" title="Inns 1">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="did_click_inn_one:" destination="-1" eventType="touchUpInside" id="Waa-fV-3bn"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UU3-0N-FW2">
                                     <rect key="frame" x="192" y="0.0" width="192" height="50"/>
@@ -112,6 +145,9 @@
                                     <state key="normal" title="Inns 2">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="did_click_inn_two:" destination="-1" eventType="touchUpInside" id="P8V-KT-KuU"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hl3-i0-cc2">
                                     <rect key="frame" x="384" y="0.0" width="192" height="50"/>
@@ -124,6 +160,9 @@
                                     <state key="normal" title="Inns 3">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="did_click_inn_three:" destination="-1" eventType="touchUpInside" id="4cv-QF-n0O"/>
+                                    </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oae-0D-2iL">
                                     <rect key="frame" x="576" y="0.0" width="192" height="50"/>
@@ -136,6 +175,9 @@
                                     <state key="normal" title="Inns 4">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
+                                    <connections>
+                                        <action selector="did_click_inn_four:" destination="-1" eventType="touchUpInside" id="Nmc-5n-Qgh"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -1093,6 +1135,10 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="768" id="B4N-Im-3Lv"/>
                     </constraints>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="LXF-19-Js7"/>
+                        <outlet property="delegate" destination="-1" id="fMY-Ce-mnf"/>
+                    </connections>
                 </tableView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQN-Ri-Q22">
                     <rect key="frame" x="0.0" y="794" width="768" height="50"/>
@@ -1107,6 +1153,9 @@
                             <state key="normal">
                                 <color key="titleColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </state>
+                            <connections>
+                                <action selector="did_click_open_filter:" destination="-1" eventType="touchUpInside" id="Gr2-Yq-Wne"/>
+                            </connections>
                         </button>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_up" translatesAutoresizingMaskIntoConstraints="NO" id="MLE-bk-zhK">
                             <rect key="frame" x="367" y="7" width="35" height="35"/>
@@ -1138,6 +1187,9 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RrV-WB-Yd8">
                                     <rect key="frame" x="0.0" y="0.0" width="333" height="40"/>
+                                    <connections>
+                                        <action selector="did_click_filter_stricker:" destination="-1" eventType="touchUpInside" id="HbI-fe-QA3"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Striker" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2n-Tg-r84">
                                     <rect key="frame" x="10" y="5" width="273" height="30"/>
@@ -1181,6 +1233,10 @@
                                 <constraint firstAttribute="height" constant="120" id="1NL-Jm-7le"/>
                                 <constraint firstAttribute="width" constant="335" id="g9w-Ob-qE4"/>
                             </constraints>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="6fe-B5-EM9"/>
+                                <outlet property="delegate" destination="-1" id="lnG-QB-u6f"/>
+                            </connections>
                         </tableView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9b-SO-aOD">
                             <rect key="frame" x="660" y="148" width="100" height="40"/>
