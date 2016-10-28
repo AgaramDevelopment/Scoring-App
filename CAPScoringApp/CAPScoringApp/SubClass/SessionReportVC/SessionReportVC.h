@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SKSTableView.h"
 
 @interface SessionReportVC : UIViewController
+
+@property (nonatomic,strong) NSString * compitioncode;
+
+@property (nonatomic,strong) NSString * matchcode;
+
+@property (nonatomic,strong) IBOutlet SKSTableView * tableView;
 
 @end
