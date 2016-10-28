@@ -11,7 +11,7 @@
 #import "CommentaryVC.h"
 #import "PitchmapVC.h"
 #import "SpiderWagonReportVC.h"
-#import "SectorWagonReportVC.h"
+#import "SessionReportVC.h"
 
 @interface ReportVC ()
 {
@@ -19,7 +19,7 @@
     PitchmapVC * objPitchview;
     CommentaryVC *cmntryView;
     SpiderWagonReportVC *spiderView;
-    SectorWagonReportVC *sectorView;
+    SessionReportVC * SessionReportvc;
 }
 
 @end
@@ -49,7 +49,7 @@
     //[ScrollViewer setBackgroundColor:[UIColor redColor]];
     //CGFloat xposition = 0;
     
-    NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report", nil];
+    NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
 
         
     
@@ -93,7 +93,7 @@
     else if(objBtn.tag == 3)
     {
          NSLog(@"%d",objBtn.tag);
-       
+        
        
         
     }
@@ -141,7 +141,8 @@
     }
     else if(objBtn.tag == 11)
     {
-         NSLog(@"%d",objBtn.tag);
+        [self setBatsmanVsBowlerView];
+        
     }
     else if(objBtn.tag == 12)
     {
@@ -151,8 +152,21 @@
     {
          NSLog(@"%d",objBtn.tag);
     }
-    
+    else if(objBtn.tag == 14)
+    {
+        NSLog(@"%d",objBtn.tag);
+    }
+    else if(objBtn.tag == 15)
+    {
+        NSLog(@"%d",objBtn.tag);
+        SessionReportvc =[[SessionReportVC alloc] initWithNibName:@"SessionReportVC" bundle:nil];
+        
+        SessionReportvc.matchcode =self.matchCode;
+        SessionReportvc.compitioncode =self.competitionCode;
+        SessionReportvc.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+        [self.view addSubview:SessionReportvc.view];
 
+    }
 }
 
 - (IBAction)btn_back:(id)sender {
@@ -189,6 +203,22 @@
     
     cmntryView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:cmntryView.view];
+}
+
+
+
+-(void) setBatsmanVsBowlerView{
+    batsmanVsBowlerVC = [[BatsmanVsBowlerVC alloc]initWithNibName:@"BatsmanVsBowlerVC" bundle:nil];
+    batsmanVsBowlerVC.matchCode = self.matchCode;
+    batsmanVsBowlerVC.matchTypeCode =self.matchTypeCode;
+    batsmanVsBowlerVC.compititionCode = self.competitionCode;
+    batsmanVsBowlerVC.fstInnShortName = self.fstInnShortName;
+    batsmanVsBowlerVC.secInnShortName = self.secInnShortName;
+    batsmanVsBowlerVC.thrdInnShortName = self.thrdInnShortName;
+    batsmanVsBowlerVC.frthInnShortName = self.frthInnShortName;
+    
+    batsmanVsBowlerVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:batsmanVsBowlerVC.view];
 }
 
 
