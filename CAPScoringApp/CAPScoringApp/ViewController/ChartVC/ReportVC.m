@@ -125,6 +125,7 @@
     else if(objBtn.tag == 7)
     {
          NSLog(@"%d",objBtn.tag);
+        [self setSectorView];
     }
     else if(objBtn.tag == 8)
     {
@@ -140,7 +141,8 @@
     }
     else if(objBtn.tag == 11)
     {
-         NSLog(@"%d",objBtn.tag);
+        [self setBatsmanVsBowlerView];
+        
     }
     else if(objBtn.tag == 12)
     {
@@ -205,6 +207,16 @@
 
 
 
+-(void) setBatsmanVsBowlerView{
+    batsmanVsBowlerVC = [[BatsmanVsBowlerVC alloc]initWithNibName:@"BatsmanVsBowlerVC" bundle:nil];
+    batsmanVsBowlerVC.matchCode = self.matchCode;
+    batsmanVsBowlerVC.matchTypeCode =self.matchTypeCode;
+    batsmanVsBowlerVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:batsmanVsBowlerVC.view];
+}
+
+
+
 
 -(void) setSpiderView{
     
@@ -223,6 +235,28 @@
     
 //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:spiderView.view];
+    
+}
+
+
+
+-(void) setSectorView{
+    
+    sectorView = [[SectorWagonReportVC alloc]initWithNibName:@"SectorWagonReportVC" bundle:nil];
+    sectorView.matchCode = self.matchCode;
+    sectorView.compititionCode = self.competitionCode;
+    sectorView.matchTypeCode = self.matchTypeCode;
+    
+    
+    sectorView.fstInnShortName = self.fstInnShortName;
+    sectorView.secInnShortName = self.secInnShortName;
+    sectorView.thrdInnShortName = self.thrdInnShortName;
+    sectorView.frthInnShortName = self.frthInnShortName;
+    
+    sectorView.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    
+    //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:sectorView.view];
     
 }
     

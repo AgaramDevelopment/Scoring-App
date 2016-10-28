@@ -209,6 +209,8 @@ self.img_wagon.layer.sublayers = nil;
     
      self.filter_view.hidden =NO;
        self.hide_btn_view.hidden = YES;
+    
+   
 }
 
 - (IBAction)didClickStricker:(id)sender {
