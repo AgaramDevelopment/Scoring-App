@@ -318,8 +318,38 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 
-
-
-
+-(NSString *) getTotalRuns:(NSString*)MATCHTYPECODE:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO
+{
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT IFNULL(SUM(BALL.RUNS + CASE WHEN BALL.BYES = 0 AND BALL.LEGBYES = 0 THEN BALL.OVERTHROW ELSE 0 END),0) RUNS FROM BALLEVENTS BALL INNER JOIN MATCHREGISTRATION MRM ON MRM.MATCHCODE = BALL.MATCHCODE AND MRM.RECORDSTATUS='MSC001' INNER JOIN COMPETITION CM ON CM.COMPETITIONCODE=MRM.COMPETITIONCODE AND CM.RECORDSTATUS='MSC001' WHERE ('%@'='' OR CM.MATCHTYPE = '%@') AND ('%@'='' OR BALL.COMPETITIONCODE = '%@') AND ('%@'='' OR BALL.MATCHCODE = '%@') AND ('%@'='' OR BALL.TEAMCODE = '%@') AND ('%@'='' OR BALL.INNINGSNO = '%@')ORDER BY  BALL.BALLCODE",MATCHTYPECODE,MATCHTYPECODE,COMPETITIONCODE,COMPETITIONCODE,MATCHCODE,MATCHCODE,TEAMCODE,TEAMCODE,INNINGSNO,INNINGSNO];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+            
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                NSString *teamBCode =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return teamBCode;
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+            
+            
+        }
+        sqlite3_close(dataBase);
+        
+    }
+    return @"";
+    
+}
 
 @end
