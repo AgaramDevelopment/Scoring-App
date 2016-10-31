@@ -13,7 +13,8 @@
 #import "BatsmanVsBowlerTVCell.h"
 @interface BatsmanVsBowlerVC (){
     BOOL isStriker;
-    NSString *selectedFilterStricker;
+   // NSString *selectedFilterStricker;
+    BvsBBatsman *selectedFilterBatsman;
     
 }
 @property (nonatomic,strong) NSMutableArray *batsmansArray;
@@ -29,20 +30,13 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    DBManagerReports *dbReports = [[DBManagerReports alloc]init];
+    [self.view_filter_stricker .layer setBorderWidth:2.0];
+    [self.view_filter_stricker.layer setBorderColor:[UIColor colorWithRed:(82/255.0f) green:(106/255.0f) blue:(124/255.0f) alpha:(1)].CGColor];
+    [self.view_filter_stricker .layer setMasksToBounds:YES];
     
-    self.batsmansArray = [dbReports retrieveBatVsBowlBatsmanList:self.matchCode :self.compititionCode :@"1"];
-    self.bowlersArray = [dbReports retrieveBatVsBowlBowlersList:self.matchCode :self.compititionCode :@"1"];
     
-    if(_batsmansArray.count>0){
-        BvsBBatsman *bvsBBatsman = [_batsmansArray objectAtIndex:0];
-        selectedFilterStricker = bvsBBatsman.strickerCode;
-        [self setBatsmanVeiw:bvsBBatsman];
-        [self setBowlerFilterArray];
-
-    }
+    [self setInningsDetailsView:@"1"];
     
-    self.view_filter.hidden =YES;
     self.tableview_stricker.hidden=YES;
 
 
@@ -64,7 +58,7 @@
     _bowlersFilterArray = [[NSMutableArray alloc]init];
     
     for (BvsBBowler *bvsBowler in self.bowlersArray) {
-        if([bvsBowler.strickerCode isEqualToString:selectedFilterStricker]){
+        if([bvsBowler.strickerCode isEqualToString:selectedFilterBatsman.strickerCode]){
             [_bowlersFilterArray addObject:bvsBowler];
         }
     }
@@ -76,42 +70,63 @@
 
 - (IBAction)did_click_inn_one:(id)sender {
     
-    [self setInningsBySelection:@"1"];
-    DBManagerReports *dbReports = [[DBManagerReports alloc]init];
-    
-    self.batsmansArray = [dbReports retrieveBatVsBowlBatsmanList:self.matchCode :self.compititionCode :@"1"];
-    self.bowlersArray = [dbReports retrieveBatVsBowlBowlersList:self.matchCode :self.compititionCode :@"1"];
-    
-    [self setBowlerFilterArray];
+    [self setInningsDetailsView:@"1"];
 }
 
 - (IBAction)did_click_inn_two:(id)sender {
-    [self setInningsBySelection:@"2"];
-    DBManagerReports *dbReports = [[DBManagerReports alloc]init];
+   [self setInningsDetailsView:@"2"];
     
-    self.batsmansArray = [dbReports retrieveBatVsBowlBatsmanList:self.matchCode :self.compititionCode :@"2"];
-    self.bowlersArray = [dbReports retrieveBatVsBowlBowlersList:self.matchCode :self.compititionCode :@"2"];
-    [self setBowlerFilterArray];
 }
 
 - (IBAction)did_click_inn_three:(id)sender {
     
-    [self setInningsBySelection:@"3"];
-    DBManagerReports *dbReports = [[DBManagerReports alloc]init];
-    
-    self.batsmansArray = [dbReports retrieveBatVsBowlBatsmanList:self.matchCode :self.compititionCode :@"3"];
-    self.bowlersArray = [dbReports retrieveBatVsBowlBowlersList:self.matchCode :self.compititionCode :@"3"];
-    
-    [self setBowlerFilterArray];
+  [self setInningsDetailsView:@"3"];
 }
 
 - (IBAction)did_click_inn_four:(id)sender {
-    [self setInningsBySelection:@"4"];
+    [self setInningsDetailsView:@"4"];
+}
+
+
+-(void )setInningsDetailsView: (NSString *) innsNo{
+    [self setInningsBySelection:innsNo];
+   
     DBManagerReports *dbReports = [[DBManagerReports alloc]init];
+    self.batsmansArray = [dbReports retrieveBatVsBowlBatsmanList:self.matchCode :self.compititionCode :innsNo];
+    self.bowlersArray = [dbReports retrieveBatVsBowlBowlersList:self.matchCode :self.compititionCode :innsNo];
     
-    self.batsmansArray = [dbReports retrieveBatVsBowlBatsmanList:self.matchCode :self.compititionCode :@"4"];
-    self.bowlersArray = [dbReports retrieveBatVsBowlBowlersList:self.matchCode :self.compititionCode :@"4"];
-    [self setBowlerFilterArray];
+    if(_batsmansArray.count>0){
+        BvsBBatsman *bvsBBatsman = [_batsmansArray objectAtIndex:0];
+        selectedFilterBatsman = bvsBBatsman;
+        [self setBatsmanVeiw:bvsBBatsman];
+        
+        [self setBowlerFilterArray];
+        _lbl_filter_stricker_name.text = bvsBBatsman.name;
+        [self setViewWhenDataPresent];
+        [_tableview_stricker reloadData];
+        
+    }else{
+        [self setViewWhenNoData];
+    }
+}
+
+
+-(void) setViewWhenNoData{
+    self.view_open_filter.hidden = YES;
+    self.view_filter.hidden=YES;
+    self.view_bowler_header.hidden=YES;
+    self.view_batsman_details.hidden=YES;
+    self.tableview_bowlers.hidden=YES;
+
+}
+
+
+-(void) setViewWhenDataPresent{
+    self.view_open_filter.hidden = NO;
+    self.view_filter.hidden=YES;
+    self.view_bowler_header.hidden=NO;
+    self.view_batsman_details.hidden=NO;
+    self.tableview_bowlers.hidden=NO;
 }
 
 -(void) setBatsmanVeiw:(BvsBBatsman *) bvsBBatsman{
@@ -134,7 +149,10 @@
     self.lbl_wtb.text= [bvsBBatsman wtb];
     self.lbl_balls.text= [bvsBBatsman balls];
     self.lbl_runs.text= [bvsBBatsman runs];
-    self.lbl_sr.text= [bvsBBatsman sr];
+   // self.lbl_sr.text= [bvsBBatsman sr];
+    
+    self.lbl_sr.text = [NSString stringWithFormat:@" %.02f",[bvsBBatsman.sr floatValue]];
+
     
 }
 
@@ -271,6 +289,7 @@
 - (IBAction)did_click_open_filter:(id)sender {
     self.view_filter.hidden =NO;
     self.view_open_filter.hidden = YES;
+    self.lbl_filter_stricker_name.text = selectedFilterBatsman.name;
 }
 
 
@@ -370,16 +389,14 @@
 
     BvsBBatsman *bvsBBatsman = [self.batsmansArray objectAtIndex:indexPath.row];
     
-        selectedFilterStricker = bvsBBatsman.strickerCode;
+//        selectedFilterStricker = bvsBBatsman.strickerCode;
+        selectedFilterBatsman = bvsBBatsman;
 
-    [self setBatsmanVeiw:bvsBBatsman];
+        _lbl_filter_stricker_name.text = bvsBBatsman.name;
         self.tableview_stricker.hidden=YES;
 
-        self.view_filter.hidden =YES;
-        self.view_open_filter.hidden = NO;
-        
-        [self setBowlerFilterArray];
-        
+        isStriker=NO;
+
     }
 }
 
@@ -390,10 +407,15 @@
     NSString *docDir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
     NSString *pngFilePath = [NSString stringWithFormat:@"%@/%@.png", docDir,playerCode];
     
+    NSError *attributesError = nil;
+    NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:pngFilePath error:&attributesError];
+    
+    NSNumber *fileSizeNumber = [fileAttributes objectForKey:NSFileSize];
+    
     
     BOOL isFileExist = [fileManager fileExistsAtPath:pngFilePath];
     UIImage *img;
-    if(isFileExist){
+    if(isFileExist && fileSizeNumber.intValue>0){
         img = [UIImage imageWithContentsOfFile:pngFilePath];
         teamLogoImg.image = img;
     }else{
@@ -402,4 +424,26 @@
     }
 }
 
+- (IBAction)did_click_filter_ok:(id)sender {
+    
+    
+    self.tableview_stricker.hidden=YES;
+    isStriker=NO;
+
+    [self setBatsmanVeiw:selectedFilterBatsman];
+    
+    self.view_filter.hidden =YES;
+    self.view_open_filter.hidden = NO;
+    
+    [self setBowlerFilterArray];
+}
+- (IBAction)did_click_close_filter:(id)sender {
+    
+    self.tableview_stricker.hidden=YES;
+    isStriker=NO;
+
+    self.view_filter.hidden =YES;
+    self.view_open_filter.hidden = NO;
+
+}
 @end

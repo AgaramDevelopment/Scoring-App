@@ -25,7 +25,7 @@
     
     DBManagerReports *dbReports = [[DBManagerReports alloc]init];
     
-    _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode:@"1"];
+    _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode :@"1"];
     [self setInningsView];
     [self setInningsBySelection:@"1"];
 
@@ -90,8 +90,11 @@
         
         NSCharacterSet *punChrSet = [NSCharacterSet punctuationCharacterSet];
         NSCharacterSet *punSpaceSet = [NSCharacterSet whitespaceCharacterSet];
-cmntryRpt.commentary = [cmntryRpt.commentary stringByTrimmingCharactersInSet:punSpaceSet];
-
+        
+        for(int i=0;i<4;i++){
+        cmntryRpt.commentary = [cmntryRpt.commentary stringByTrimmingCharactersInSet:punSpaceSet];
+        cmntryRpt.commentary = [cmntryRpt.commentary stringByTrimmingCharactersInSet:punChrSet];
+        }
         cell.lbl_commentary.text = [cmntryRpt.commentary stringByTrimmingCharactersInSet:punChrSet];
         cell.lbl_team_score.text = cmntryRpt.teamTotal;
         cell.lbl_players_name.text = cmntryRpt.sAndNsName;

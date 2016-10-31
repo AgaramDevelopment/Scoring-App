@@ -65,6 +65,12 @@
 
 - (IBAction)did_click_open_filter:(id)sender;
 
+- (IBAction)did_click_filter_ok:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIView *view_batsman_details;
+@property (weak, nonatomic) IBOutlet UIView *view_bowler_header;
+
+- (IBAction)did_click_close_filter:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *view_filter_stricker;
 
 @end
