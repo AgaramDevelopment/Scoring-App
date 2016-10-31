@@ -18,4 +18,7 @@
 
 -(NSMutableArray *)fetchPlayers:(NSString*)matchCode :(NSString*)teamCode;
 -(NSMutableArray *)retrieveCommentaryData: (NSString *) matchCode : (NSString *) inningsNo ;
+-(NSMutableArray *)retrieveBatVsBowlBowlersList: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo;
+-(NSMutableArray *)retrieveBatVsBowlBatsmanList: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo;
+
 @end

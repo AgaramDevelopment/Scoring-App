@@ -243,6 +243,12 @@
     batsmanVsBowlerVC = [[BatsmanVsBowlerVC alloc]initWithNibName:@"BatsmanVsBowlerVC" bundle:nil];
     batsmanVsBowlerVC.matchCode = self.matchCode;
     batsmanVsBowlerVC.matchTypeCode =self.matchTypeCode;
+    batsmanVsBowlerVC.compititionCode = self.competitionCode;
+    batsmanVsBowlerVC.fstInnShortName = self.fstInnShortName;
+    batsmanVsBowlerVC.secInnShortName = self.secInnShortName;
+    batsmanVsBowlerVC.thrdInnShortName = self.thrdInnShortName;
+    batsmanVsBowlerVC.frthInnShortName = self.frthInnShortName;
+    
     batsmanVsBowlerVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:batsmanVsBowlerVC.view];
 }

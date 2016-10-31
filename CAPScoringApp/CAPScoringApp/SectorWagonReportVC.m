@@ -89,19 +89,14 @@
     
     _teamBcode = [objDBManagerSpiderWagonReport getTeamBCode:self.compititionCode :self.matchCode];
     
+    
+    
+        
+    
     _sectorWagonArray = [objDBManagerSpiderWagonReport getSectorWagon:self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode :@"1" :@"" :@"" :@"" :@"" :@"" :@""];
+   
+    [self displayRuns];
     
-    if(_sectorWagonArray.count>0){
-        
-        SpiderWagonRecords * objStriker =[self.sectorWagonArray objectAtIndex:0];
-    
-        _selectRegionCode = objStriker.SECTORREGIONCODE;
-        _selectRuns = objStriker.RUNS;
-        _selectBattingStyle = objStriker.BATTINGSTYLE;
-        
-    }
-
-    [self sectorWagonwheel: _selectRegionCode : _selectBattingStyle : _selectRuns];
     [self setInningsBySelection:@"1"];
     [self setInningsView];
     
@@ -120,6 +115,10 @@
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
     _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"1"];
     
+    _sectorWagonArray = [objDBManagerSpiderWagonReport getSectorWagon:self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode :@"1" :@"" :@"" :@"" :@"" :@"" :@""];
+
+     [self displayRuns];
+    
      [self.tbl_players reloadData];
 }
 
@@ -130,6 +129,11 @@
     _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"2"];
     
 
+    _sectorWagonArray = [objDBManagerSpiderWagonReport getSectorWagon:self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode :@"2" :@"" :@"" :@"" :@"" :@"" :@""];
+    
+    [self displayRuns];
+    
+    
     [self.tbl_players reloadData];
 }
 
@@ -138,6 +142,9 @@
     [self setInningsBySelection:@"3"];
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"3"];
     _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"3"];
+    _sectorWagonArray = [objDBManagerSpiderWagonReport getSectorWagon:self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode :@"3" :@"" :@"" :@"" :@"" :@"" :@""];
+    
+    [self displayRuns];
     
     [self.tbl_players reloadData];
 }
@@ -149,6 +156,9 @@
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"4"];
     _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"4"];
     
+    _sectorWagonArray = [objDBManagerSpiderWagonReport getSectorWagon:self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode :@"4" :@"" :@"" :@"" :@"" :@"" :@""];
+    
+    [self displayRuns];
     [self.tbl_players reloadData];
 }
 
@@ -484,6 +494,30 @@
     self.filter_view.hidden=YES;
     self.hide_btn_view.hidden = NO;
     
+    finelegRun =0;
+    squarelegRun=0;
+    midWicketRun=0;
+    longonRun=0;
+    longoffRun=0;
+    coverRun =0;
+    pointRun=0;
+    ThirdmanCountRun=0;
+    
+    
+    zerocount=0;
+    Run1Count=0;
+    Run2Count=0;
+    Run3Count=0;
+    Run4Count=0;
+    Run6Count=0;
+
+    
+    
+    _sectorWagonArray =[objDBManagerSpiderWagonReport getSectorWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"" : self.selectStrikerCode == nil ? @"" : self.selectStrikerCode : self.selectBowlerCode == nil ? @"":self.selectBowlerCode :[self.selectRun isEqual:nil]?@"":self.selectRun == nil ? @"" : self.selectRun :@"" :@"":self.selectOnSide == nil ? @"" :self.selectOnSide];
+    
+    
+    [self displayRuns];
+    
     
     
     
@@ -493,30 +527,30 @@
 -(void)sectorWagonwheel:(NSString *) sectorwognwheelcode :(NSString *) batmanStyle :(NSString *) Run
 
 {
-    if([Run isEqualToString:@"1"])
-    {
-        Run1Count++;
-    }
-    else if ([Run isEqualToString:@"0"])
-    {
-        zerocount++;
-    }
-    else if ([Run isEqualToString:@"2"])
-    {
-        Run2Count++;
-    }
-    else if ([Run isEqualToString:@"3"])
-    {
-        Run3Count++;
-    }
-    else if ([Run isEqualToString:@"4"])
-    {
-        Run4Count++;
-    }
-    else if ([Run isEqualToString:@"6"])
-    {
-        Run6Count++;
-    }
+//    if([Run isEqualToString:@"1"])
+//    {
+//        Run1Count++;
+//    }
+//    else if ([Run isEqualToString:@"0"])
+//    {
+//        zerocount++;
+//    }
+//    else if ([Run isEqualToString:@"2"])
+//    {
+//        Run2Count++;
+//    }
+//    else if ([Run isEqualToString:@"3"])
+//    {
+//        Run3Count++;
+//    }
+//    else if ([Run isEqualToString:@"4"])
+//    {
+//        Run4Count++;
+//    }
+//    else if ([Run isEqualToString:@"6"])
+//    {
+//        Run6Count++;
+//    }
     
     
     if([sectorwognwheelcode isEqualToString:@"MDT036"])
@@ -526,6 +560,7 @@
             NSLog(@"LH");
             // fineleg++;
             finelegRun = [Run intValue]+finelegRun;
+            
         }
         else
         {
@@ -539,7 +574,7 @@
             [fineleg_lbl removeFromSuperview];
         }
         
-        fineleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(230, 30,35, 35)];
+        fineleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(370,70,35, 35)];
         fineleg_lbl.textColor=[UIColor whiteColor];
         fineleg_lbl.text =[NSString stringWithFormat:@"%d",finelegRun];
         [self.img_sector addSubview:fineleg_lbl];
@@ -567,7 +602,7 @@
             [squareleg_lbl removeFromSuperview];
         }
         
-        squareleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(280,110,35, 35)];
+        squareleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(480,180,35, 35)];
         squareleg_lbl.textColor=[UIColor whiteColor];
         squareleg_lbl.text =[NSString stringWithFormat:@"%d",squarelegRun];
         [self.img_sector addSubview:squareleg_lbl];
@@ -595,7 +630,7 @@
         }
         
         
-        midWicket_lbl=[[UILabel alloc]initWithFrame:CGRectMake(280,190,35, 35)];
+        midWicket_lbl=[[UILabel alloc]initWithFrame:CGRectMake(480,390,35, 35)];
         midWicket_lbl.textColor=[UIColor whiteColor];
         midWicket_lbl.text =[NSString stringWithFormat:@"%d",midWicketRun];
         [self.img_sector addSubview:midWicket_lbl];
@@ -622,7 +657,7 @@
             [longon_lbl removeFromSuperview];
         }
         
-        longon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(220,270,35, 35)];
+        longon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(370,490,35, 35)];
         longon_lbl.textColor=[UIColor whiteColor];
         longon_lbl.text =[NSString stringWithFormat:@"%d",longonRun];
         [self.img_sector addSubview:longon_lbl];
@@ -649,7 +684,7 @@
             [longoff_lbl removeFromSuperview];
         }
         
-        longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,190,35, 35)];
+        longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(220,490,35, 35)];
         longoff_lbl.textColor=[UIColor whiteColor];
         longoff_lbl.text =[NSString stringWithFormat:@"%d",longoffRun];
         [self.img_sector addSubview:longoff_lbl];
@@ -677,7 +712,7 @@
             [cover_lbl removeFromSuperview];
         }
         
-        cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,100,35, 35)];
+        cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(60,350,35, 35)];
         cover_lbl.textColor=[UIColor whiteColor];
         cover_lbl.text =[NSString stringWithFormat:@"%d",coverRun];
         [self.img_sector addSubview:cover_lbl];
@@ -706,7 +741,7 @@
         }
         
         
-        point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,120,35, 35)];
+        point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(70,200,35, 35)];
         point_lbl.textColor=[UIColor whiteColor];
         point_lbl.text =[NSString stringWithFormat:@"%d",pointRun];
         [self.img_sector addSubview:point_lbl];
@@ -719,6 +754,18 @@
             NSLog(@"LH");
             // ThirdmanCount++;
             ThirdmanCountRun = ThirdmanCountRun+[Run intValue];
+            
+//            if(fineleg_lbl !=nil)
+//            {
+//                [fineleg_lbl removeFromSuperview];
+//            }
+//            
+//            fineleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(370,70,35, 35)];
+//            fineleg_lbl.textColor=[UIColor whiteColor];
+//            [fineleg_lbl setBackgroundColor:[UIColor redColor]];
+//            fineleg_lbl.text =[NSString stringWithFormat:@"%d",finelegRun];
+//            [self.img_sector addSubview:fineleg_lbl];
+
         }
         else
         {
@@ -726,22 +773,85 @@
             //            //ThirdmanCount++;
             ThirdmanCountRun = ThirdmanCountRun+[Run intValue];
             
-            
+           
         }
-        
         
         if(Thirdman_lbl !=nil)
         {
             [Thirdman_lbl removeFromSuperview];
         }
         
-        Thirdman_lbl=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+        Thirdman_lbl=[[UILabel alloc]initWithFrame:CGRectMake(160,80,35, 35)];
         Thirdman_lbl.textColor=[UIColor whiteColor];
         Thirdman_lbl.text =[NSString stringWithFormat:@"%d",ThirdmanCountRun];
         [self.img_sector addSubview:Thirdman_lbl];
+
         
     }
 }
+
+-(void) displayRuns {
+    
+    
+    
+    
+    if(fineleg_lbl != nil)
+    {
+        [fineleg_lbl removeFromSuperview];
+    }
+    
+    else if(squareleg_lbl != nil)
+    {
+        [squareleg_lbl removeFromSuperview];
+    }
+    
+    else if(midWicket_lbl != nil)
+    {
+        [midWicket_lbl removeFromSuperview];
+    }
+    
+    else if(longon_lbl != nil)
+    {
+        [longon_lbl removeFromSuperview];
+    }
+    
+    else if(longoff_lbl != nil)
+    {
+        [longoff_lbl removeFromSuperview];
+    }
+    
+    else if(cover_lbl != nil)
+    {
+        [cover_lbl removeFromSuperview];
+    }
+    else if(point_lbl != nil)
+    {
+        [point_lbl removeFromSuperview];
+    }
+    else if(Thirdman_lbl != nil)
+    {
+        [Thirdman_lbl removeFromSuperview];
+    }
+    
+    
+    
+    
+    
+    
+    for (int i = 0 ; i < _sectorWagonArray.count; i++) {
+        
+        SpiderWagonRecords * objStriker =[self.sectorWagonArray objectAtIndex:i];
+        
+        _selectRegionCode = objStriker.SECTORREGIONCODE;
+        _selectRuns = objStriker.RUNS;
+        _selectBattingStyle = objStriker.BATTINGSTYLE;
+        
+        
+        [self sectorWagonwheel: _selectRegionCode : _selectBattingStyle : _selectRuns];
+        
+    }
+    
+    }
 
 
 @end
