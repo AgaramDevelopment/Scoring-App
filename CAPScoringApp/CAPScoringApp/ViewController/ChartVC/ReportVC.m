@@ -12,6 +12,9 @@
 #import "PitchmapVC.h"
 #import "SpiderWagonReportVC.h"
 #import "SessionReportVC.h"
+#import "SectorWagonReportVC.h"
+#import "BatsmanVsBowlerVC.h"
+#import "Manhattan.h"
 
 @interface ReportVC ()
 {
@@ -19,7 +22,10 @@
     PitchmapVC * objPitchview;
     CommentaryVC *cmntryView;
     SpiderWagonReportVC *spiderView;
+    SectorWagonReportVC *sectorView;
+    BatsmanVsBowlerVC *batsmanVsBowlerVC;
     SessionReportVC * SessionReportvc;
+    Manhattan * objManhattan;
 }
 
 @end
@@ -77,6 +83,21 @@
 
     UIButton * objBtn =(UIButton*)sender;
     
+    if(objPitchview!= nil)
+    {
+        [objPitchview.view removeFromSuperview];
+    }
+    
+    if(SessionReportvc !=nil)
+    {
+        [SessionReportvc.view removeFromSuperview];
+    }
+    
+    if(cmntryView !=nil)
+    {
+        [cmntryView.view removeFromSuperview];
+    }
+    
      self.sepratoryposition.constant = objBtn.frame.origin.x+15;
     if(objBtn.tag == 1)
     {
@@ -116,6 +137,16 @@
     else if(objBtn.tag == 5)
     {
          NSLog(@"%d",objBtn.tag);
+        //manhatten
+        
+        objManhattan =[[Manhattan alloc] initWithNibName:@"Manhattan" bundle:nil];
+        
+        objManhattan.matchCode =self.matchCode;
+        objManhattan.compititionCode =self.competitionCode;
+        objManhattan.matchTypecode =self.matchTypeCode;
+        objManhattan.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+        [self.view addSubview:objManhattan.view];
+
     }
     else if(objBtn.tag == 6)
     {
@@ -152,6 +183,7 @@
     {
          NSLog(@"%d",objBtn.tag);
     }
+    
     else if(objBtn.tag == 14)
     {
         NSLog(@"%d",objBtn.tag);

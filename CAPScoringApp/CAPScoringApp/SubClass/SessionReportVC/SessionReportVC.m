@@ -122,11 +122,47 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         if(i== 12)
         {
-            //[sessionvalue insertObject:dict3 atIndex:9];
+            SessionReportRecord *record=[[SessionReportRecord alloc]init];
+            record.dayno = @"DAY 4";
+            record.sessionno=@"";
+            record.Teamcode=@"";
+            record.TeamName=@"";
+            
+            record.Runs=@"";
+            
+            record.overs=@"";
+            
+            record.wickets=@"";
+            
+            record.fours=@"";
+            
+            record.sixes=@"";
+            
+            record.RunRate=@"";
+            record.BDRY=@"";
+            [sessionvalue addObject:record];
         }
         if(i== 16)
         {
-            //[sessionvalue insertObject:dict3 atIndex:9];
+            SessionReportRecord *record=[[SessionReportRecord alloc]init];
+            record.dayno = @"DAY 5";
+            record.sessionno=@"";
+            record.Teamcode=@"";
+            record.TeamName=@"";
+            
+            record.Runs=@"";
+            
+            record.overs=@"";
+            
+            record.wickets=@"";
+            
+            record.fours=@"";
+            
+            record.sixes=@"";
+            
+            record.RunRate=@"";
+            record.BDRY=@"";
+            [sessionvalue addObject:record];
         }
     }
     

@@ -39,6 +39,8 @@
 		04EC778E1D2956C2005B2608 /* InningsEventPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC778C1D2956C2005B2608 /* InningsEventPushRecord.m */; };
 		04EC77911D2956F0005B2608 /* OVEREVENTSPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC77901D2956F0005B2608 /* OVEREVENTSPushRecord.m */; };
 		04EC77941D29570F005B2608 /* BATTINGSUMMARYPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC77931D29570F005B2608 /* BATTINGSUMMARYPushRecord.m */; };
+		182294561DC367FC00B5F519 /* Manhattan.m in Sources */ = {isa = PBXBuildFile; fileRef = 182294541DC367FC00B5F519 /* Manhattan.m */; };
+		182294571DC367FC00B5F519 /* Manhattan.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182294551DC367FC00B5F519 /* Manhattan.xib */; };
 		182BFDA81DBB25730084BDDC /* DBManagerpitchmapReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 1884EC881DB9D9890059A2B9 /* DBManagerpitchmapReport.m */; };
 		182BFDAB1DBB26CD0084BDDC /* CommentaryReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BFDAA1DBB26CD0084BDDC /* CommentaryReport.m */; };
 		182BFDB61DBB3D8D0084BDDC /* LengthReportRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 182BFDB51DBB3D8D0084BDDC /* LengthReportRecord.m */; };
@@ -115,6 +117,9 @@
 		187952321D02A410001A1224 /* BowlAndShotTypeRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 1879522F1D02A410001A1224 /* BowlAndShotTypeRecords.m */; };
 		187952331D02A410001A1224 /* FieldingEventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 187952311D02A410001A1224 /* FieldingEventRecord.m */; };
 		187952351D02AD28001A1224 /* FieldingFactorRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1879522C1D02A0B4001A1224 /* FieldingFactorRecord.m */; };
+		187A8B541DC661BE00A5D31E /* ManhattanRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A8B531DC661BE00A5D31E /* ManhattanRecord.m */; };
+		187A8B581DC66B0500A5D31E /* MCBarChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A8B571DC66B0500A5D31E /* MCBarChartView.m */; };
+		187A8B5B1DC66BBF00A5D31E /* MCChartInformationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187A8B5A1DC66BBF00A5D31E /* MCChartInformationView.m */; };
 		187CA6AA1D28CD7A005E3DCF /* FollowOn.xib in Resources */ = {isa = PBXBuildFile; fileRef = DC2710701D25B9A40011C7B0 /* FollowOn.xib */; };
 		18803C791D2579EC00849850 /* UpdateScoreEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 18803C781D2579EC00849850 /* UpdateScoreEngine.m */; };
 		188130401D0BF3ED00908F65 /* FetchSEPageLoadRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1881303F1D0BF3ED00908F65 /* FetchSEPageLoadRecord.m */; };
@@ -390,6 +395,9 @@
 		04EC77901D2956F0005B2608 /* OVEREVENTSPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OVEREVENTSPushRecord.m; sourceTree = "<group>"; };
 		04EC77921D29570F005B2608 /* BATTINGSUMMARYPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BATTINGSUMMARYPushRecord.h; sourceTree = "<group>"; };
 		04EC77931D29570F005B2608 /* BATTINGSUMMARYPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BATTINGSUMMARYPushRecord.m; sourceTree = "<group>"; };
+		182294531DC367FC00B5F519 /* Manhattan.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Manhattan.h; path = SubClass/Manhattan/Manhattan.h; sourceTree = "<group>"; };
+		182294541DC367FC00B5F519 /* Manhattan.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Manhattan.m; path = SubClass/Manhattan/Manhattan.m; sourceTree = "<group>"; };
+		182294551DC367FC00B5F519 /* Manhattan.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = Manhattan.xib; path = SubClass/Manhattan/Manhattan.xib; sourceTree = "<group>"; };
 		182BFDA91DBB26CD0084BDDC /* CommentaryReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommentaryReport.h; sourceTree = "<group>"; };
 		182BFDAA1DBB26CD0084BDDC /* CommentaryReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CommentaryReport.m; sourceTree = "<group>"; };
 		182BFDB41DBB3D8D0084BDDC /* LengthReportRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LengthReportRecord.h; path = Resource/LengthReportRecord/LengthReportRecord.h; sourceTree = "<group>"; };
@@ -528,6 +536,12 @@
 		1879522F1D02A410001A1224 /* BowlAndShotTypeRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlAndShotTypeRecords.m; sourceTree = "<group>"; };
 		187952301D02A410001A1224 /* FieldingEventRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldingEventRecord.h; sourceTree = "<group>"; };
 		187952311D02A410001A1224 /* FieldingEventRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldingEventRecord.m; sourceTree = "<group>"; };
+		187A8B521DC661BE00A5D31E /* ManhattanRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManhattanRecord.h; path = Resource/ManhattanRecord/ManhattanRecord.h; sourceTree = "<group>"; };
+		187A8B531DC661BE00A5D31E /* ManhattanRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManhattanRecord.m; path = Resource/ManhattanRecord/ManhattanRecord.m; sourceTree = "<group>"; };
+		187A8B561DC66B0500A5D31E /* MCBarChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCBarChartView.h; path = SubClass/chartSubview/MCBarChartView.h; sourceTree = "<group>"; };
+		187A8B571DC66B0500A5D31E /* MCBarChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCBarChartView.m; path = SubClass/chartSubview/MCBarChartView.m; sourceTree = "<group>"; };
+		187A8B591DC66BBF00A5D31E /* MCChartInformationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCChartInformationView.h; path = SubClass/chartSubview/MCChartInformationView.h; sourceTree = "<group>"; };
+		187A8B5A1DC66BBF00A5D31E /* MCChartInformationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCChartInformationView.m; path = SubClass/chartSubview/MCChartInformationView.m; sourceTree = "<group>"; };
 		187AC2971D26647F00DC2A9E /* DBManagerEndSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerEndSession.h; sourceTree = "<group>"; };
 		187AC2991D2664AD00DC2A9E /* DBManagerInsertScoreEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerInsertScoreEngine.h; sourceTree = "<group>"; };
 		187AC29A1D2664AD00DC2A9E /* DBManagerInsertScoreEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerInsertScoreEngine.m; sourceTree = "<group>"; };
@@ -988,6 +1002,16 @@
 			name = "Last Instance";
 			sourceTree = "<group>";
 		};
+		1822944D1DC3670900B5F519 /* Manhattan */ = {
+			isa = PBXGroup;
+			children = (
+				182294531DC367FC00B5F519 /* Manhattan.h */,
+				182294541DC367FC00B5F519 /* Manhattan.m */,
+				182294551DC367FC00B5F519 /* Manhattan.xib */,
+			);
+			name = Manhattan;
+			sourceTree = "<group>";
+		};
 		182BFDAC1DBB3B710084BDDC /* LineReportRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -1223,6 +1247,26 @@
 				1878CD941D114FBB00A80BEE /* ScoreCardVC.m */,
 			);
 			name = ScoreCard;
+			sourceTree = "<group>";
+		};
+		187A8B4B1DC660A200A5D31E /* ManhattanRecord */ = {
+			isa = PBXGroup;
+			children = (
+				187A8B521DC661BE00A5D31E /* ManhattanRecord.h */,
+				187A8B531DC661BE00A5D31E /* ManhattanRecord.m */,
+			);
+			name = ManhattanRecord;
+			sourceTree = "<group>";
+		};
+		187A8B551DC66A1900A5D31E /* chartView */ = {
+			isa = PBXGroup;
+			children = (
+				187A8B591DC66BBF00A5D31E /* MCChartInformationView.h */,
+				187A8B5A1DC66BBF00A5D31E /* MCChartInformationView.m */,
+				187A8B561DC66B0500A5D31E /* MCBarChartView.h */,
+				187A8B571DC66B0500A5D31E /* MCBarChartView.m */,
+			);
+			name = chartView;
 			sourceTree = "<group>";
 		};
 		1884EC831DB9D8800059A2B9 /* DBmanagerPitchmapReport */ = {
@@ -1638,6 +1682,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				187A8B4B1DC660A200A5D31E /* ManhattanRecord */,
 				186E454B1DC1CBAC00BDE258 /* SessionRecord */,
 				182BFDBA1DBBA1CB0084BDDC /* PitchReportDetailRecord */,
 				182BFDB01DBB3BCA0084BDDC /* LengthReportRecord */,
@@ -1821,6 +1866,8 @@
 		CE0018371CF4308C00668D8B /* SubClass */ = {
 			isa = PBXGroup;
 			children = (
+				187A8B551DC66A1900A5D31E /* chartView */,
+				1822944D1DC3670900B5F519 /* Manhattan */,
 				1872FE7B1DC2D6D3007C31F7 /* SessionReportCell */,
 				186E45581DC22D3A00BDE258 /* SKSTableViewCellIndicator.h */,
 				186E45591DC22D3A00BDE258 /* SKSTableViewCellIndicator.m */,
@@ -2255,6 +2302,7 @@
 				187229291D12665600CC168F /* AddBreakVC.xib in Resources */,
 				CEB2CC9A1DB899C60053DA72 /* CommentaryTVC.xib in Resources */,
 				246125081D13C5D1004B85E7 /* RightSlideVC.xib in Resources */,
+				182294571DC367FC00B5F519 /* Manhattan.xib in Resources */,
 				18DE9F661DB60897001013B6 /* LiveMatchCell.xib in Resources */,
 				187621201D1D625A006E160F /* EndDayTVC.xib in Resources */,
 				1876210A1D1D3749006E160F /* EndDayVC.xib in Resources */,
@@ -2318,6 +2366,7 @@
 				186DC8191D21451500293B7F /* EndDayTVC.m in Sources */,
 				187620FE1D1D0126006E160F /* DBManagerEndDay.m in Sources */,
 				186D5E3F1D9AA617000AFB85 /* BatsManINOUT.m in Sources */,
+				187A8B581DC66B0500A5D31E /* MCBarChartView.m in Sources */,
 				CE7C6DD61D23E14A00B694D5 /* DbManager_OtherWicket.m in Sources */,
 				DCA67D511D34056A00982EF5 /* InningsDetailsVC.m in Sources */,
 				187625091D154495009374F8 /* RevicedOverVC.m in Sources */,
@@ -2369,6 +2418,7 @@
 				24EFE77E1D2823A40073DE5C /* ChangeTeamRecord.m in Sources */,
 				CE0018421CF431D300668D8B /* EventRecord.m in Sources */,
 				18803C791D2579EC00849850 /* UpdateScoreEngine.m in Sources */,
+				182294561DC367FC00B5F519 /* Manhattan.m in Sources */,
 				CE0F19C01CF5D3D60030FFA2 /* UserRecord.m in Sources */,
 				24E7B4B21D23884200EF0D55 /* DeclareInnings.m in Sources */,
 				24F96F891D2FC90500798A9D /* PenaltyGridTVC.m in Sources */,
@@ -2457,6 +2507,7 @@
 				187620F51D1D004B006E160F /* DeleteEndDay.m in Sources */,
 				187621091D1D3749006E160F /* EndDayVC.m in Sources */,
 				1876250B1D154495009374F8 /* ScoreCardCellTVCell.m in Sources */,
+				187A8B541DC661BE00A5D31E /* ManhattanRecord.m in Sources */,
 				CE1FBF611CF997FB00A9B6FE /* FixturesVC.m in Sources */,
 				36E57AA81DB5EA570012A1B6 /* DBManagerReports.m in Sources */,
 				246465181D17255C0078A446 /* EndInningsTVC.m in Sources */,
@@ -2470,6 +2521,7 @@
 				2483771D1D2ABE8900FAC40D /* BowlingSummeryPushRecord.m in Sources */,
 				36206C381DBA3435007F7101 /* SpiderWagonRecords.m in Sources */,
 				DCEFC86D1D28B79300451485 /* DBManagerChangeTeam.m in Sources */,
+				187A8B5B1DC66BBF00A5D31E /* MCChartInformationView.m in Sources */,
 				186E455A1DC22D3A00BDE258 /* SKSTableViewCellIndicator.m in Sources */,
 				DCF6773C1D27D17600B98749 /* DBManagerEndSession.m in Sources */,
 				187952331D02A410001A1224 /* FieldingEventRecord.m in Sources */,
