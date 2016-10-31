@@ -176,15 +176,15 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
     
     NSAssert([self.dataSource respondsToSelector:@selector(barChartView:numberOfBarsInSection:)], @"BarChartView // delegate must implement barChartView:numberOfBarsInSection:");
     
-    _paddingSection = PADDING_SECTION_DEFAULT;
+   // _paddingSection = PADDING_SECTION_DEFAULT;
     if ([self.delegate respondsToSelector:@selector(paddingForSectionInBarChartView:)]) {
         _paddingSection = [self.delegate paddingForSectionInBarChartView:self];
     }
-    _paddingBar = PADDING_BAR_DEFAULT;
+   // _paddingBar = PADDING_BAR_DEFAULT;
     if ([self.delegate respondsToSelector:@selector(paddingForBarInBarChartView:)]) {
         _paddingBar = [self.delegate paddingForBarInBarChartView:self];
     }
-    _barWidth = BAR_WIDTH_DEFAULT;
+   /// _barWidth = BAR_WIDTH_DEFAULT;
     if ([self.delegate respondsToSelector:@selector(barWidthInBarChartView:)]) {
         _barWidth = [self.delegate barWidthInBarChartView:self];
     }
@@ -192,12 +192,12 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
     NSAssert(([self.dataSource respondsToSelector:@selector(barChartView:valueOfBarInSection:index:)]), @"MCBarChartView // delegate must implement - (CGFloat)barChartView:(MCBarChartView *)barChartView valueOfBarsInSection:(NSUInteger)section index:(NSUInteger)index");
     
     NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:_sections];
-    CGFloat contentWidth = _paddingSection;
+    //CGFloat contentWidth = _paddingSection;
     for (NSUInteger i = 0; i < _sections; i ++) {
         NSUInteger barCount = [self.dataSource barChartView:self numberOfBarsInSection:i];
 
-        contentWidth += barCount * _barWidth + (barCount - 1) * _paddingBar;
-        contentWidth += _paddingSection;
+        //contentWidth += barCount * _barWidth + (barCount - 1) * _paddingBar;
+       // contentWidth += _paddingSection;
         
         NSMutableArray *barArray = [NSMutableArray arrayWithCapacity:barCount];
         for (NSInteger j = 0; j < barCount; j ++) {
@@ -206,7 +206,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
         }
         [dataArray addObject:barArray];
     }
-    _scrollView.contentSize = CGSizeMake(contentWidth, 0);
+    //_scrollView.contentSize = CGSizeMake(contentWidth, 0);
     _chartDataSource = [[NSMutableArray alloc] initWithArray:dataArray];
 }
 
@@ -291,32 +291,36 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                 }
             } else if ([self.delegate respondsToSelector:@selector(barChartView:informationOfBarInSection:index:)]) {
                 
-                UILabel *Run_lbl = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 250,50, 20)];
-                Run_lbl.textColor = _colorOfYText;
-                Run_lbl.textAlignment = NSTextAlignmentRight;
-                Run_lbl.font = [UIFont systemFontOfSize:14];
-                Run_lbl.numberOfLines = 0;
-                Run_lbl.text = [NSString stringWithFormat:@"OVER"];
-               // [Run_lbl setTransform:CGAffineTransformMakeRotation(-M_PI / 2)];
+                UILabel *over_lbl = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 250,50, 20)];
+                over_lbl.textColor = _colorOfYText;
+                over_lbl.textAlignment = NSTextAlignmentRight;
+                over_lbl.font = [UIFont systemFontOfSize:14];
+                over_lbl.numberOfLines = 0;
+                over_lbl.text = [NSString stringWithFormat:@"OVER"];
+               
                 
-                [self addSubview:Run_lbl];
+                [self addSubview:over_lbl];
 
                 
-                NSString *information = [self.delegate barChartView:self informationOfBarInSection:section index:index];
-                if (information) {
-                    MCChartInformationView *informationView = [[MCChartInformationView alloc] initWithText:information];
-                    informationView.center = CGPointMake(xOffset, chartYOffset - height - CGRectGetHeight(informationView.bounds)/2);
-                    informationView.alpha = 0.0;
-                    [_scrollView addSubview:informationView];
-                    
+               // NSString *information = [self.delegate barChartView:self informationOfBarInSection:section index:index];
+//                if (information) {
+//                    MCChartInformationView *informationView = [[MCChartInformationView alloc] initWithText:information];
+//                    informationView.center = CGPointMake(xOffset, chartYOffset - height - CGRectGetHeight(informationView.bounds)/2);
+//                    informationView.alpha = 0.0;
+//                    [_scrollView addSubview:informationView];
+                
 //                    [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
 //                        informationView.alpha = 1.0;
 //                    } completion:nil];
-                }
+                //}
             }
             
             xOffset += _barWidth + (index == array.count - 1 ? 0 : _paddingBar);
         }
+        
+        
+        //create ball;
+        
         
         if ([self.delegate respondsToSelector:@selector(barChartView:titleOfBarInSection:)]) {
             UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(xSection - _paddingSection/2, _chartHeight + BAR_CHART_TOP_PADDING, xOffset - xSection + _paddingSection, BAR_CHART_TEXT_HEIGHT)];
