@@ -144,6 +144,10 @@
         objManhattan.matchCode =self.matchCode;
         objManhattan.compititionCode =self.competitionCode;
         objManhattan.matchTypecode =self.matchTypeCode;
+        objManhattan.fstInnShortName = self.fstInnShortName;
+        objManhattan.secInnShortName = self.secInnShortName;
+        objManhattan.thrdInnShortName = self.thrdInnShortName;
+        objManhattan.frthInnShortName = self.frthInnShortName;
         objManhattan.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
         [self.view addSubview:objManhattan.view];
 

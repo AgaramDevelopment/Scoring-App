@@ -138,6 +138,7 @@
 		1885970B1D817DEB0013507E /* BattingStatisticsPitchRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1885970A1D817DEB0013507E /* BattingStatisticsPitchRecord.m */; };
 		1886718A1CFFF77E004DEDA0 /* AggressiveShotTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */; };
 		188767521D67355B00846C03 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188767511D67355B00846C03 /* CMPopTipView.m */; };
+		1892DC581DC762F3005EC9BD /* ManhattenWKTRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892DC571DC762F3005EC9BD /* ManhattenWKTRecord.m */; };
 		18AB07CF1D2A75C100AEEB1B /* EndSessionTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A5A1D26344400E02DAE /* EndSessionTVC.m */; };
 		18AB07D01D2A75C100AEEB1B /* EndSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2710671D25B9A40011C7B0 /* EndSession.m */; };
 		18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A93A5B1D26344400E02DAE /* EndSessionTVC.xib */; };
@@ -587,6 +588,8 @@
 		188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggressiveShotTypeCell.m; sourceTree = "<group>"; };
 		188767501D67355B00846C03 /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMPopTipView.h; path = SubClass/CMPopTipView/CMPopTipView.h; sourceTree = "<group>"; };
 		188767511D67355B00846C03 /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMPopTipView.m; path = SubClass/CMPopTipView/CMPopTipView.m; sourceTree = "<group>"; };
+		1892DC561DC762F3005EC9BD /* ManhattenWKTRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManhattenWKTRecord.h; path = Resource/ManhattenWKTRecord/ManhattenWKTRecord.h; sourceTree = "<group>"; };
+		1892DC571DC762F3005EC9BD /* ManhattenWKTRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManhattenWKTRecord.m; path = Resource/ManhattenWKTRecord/ManhattenWKTRecord.m; sourceTree = "<group>"; };
 		18C301881DB8A221000E8272 /* PitchmapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchmapVC.h; path = SubClass/PitchView/PitchmapVC.h; sourceTree = "<group>"; };
 		18C301891DB8A221000E8272 /* PitchmapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PitchmapVC.m; path = SubClass/PitchView/PitchmapVC.m; sourceTree = "<group>"; };
 		18C3018A1DB8A221000E8272 /* PitchmapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PitchmapVC.xib; path = SubClass/PitchView/PitchmapVC.xib; sourceTree = "<group>"; };
@@ -1322,6 +1325,15 @@
 			name = ChangeTossVc;
 			sourceTree = "<group>";
 		};
+		1892DC521DC76079005EC9BD /* ManhattenWktRecord */ = {
+			isa = PBXGroup;
+			children = (
+				1892DC561DC762F3005EC9BD /* ManhattenWKTRecord.h */,
+				1892DC571DC762F3005EC9BD /* ManhattenWKTRecord.m */,
+			);
+			name = ManhattenWktRecord;
+			sourceTree = "<group>";
+		};
 		18C9CE6E1DB890EB00BCCA4A /* ReportSubview */ = {
 			isa = PBXGroup;
 			children = (
@@ -1688,6 +1700,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				1892DC521DC76079005EC9BD /* ManhattenWktRecord */,
 				187A8B4B1DC660A200A5D31E /* ManhattanRecord */,
 				186E454B1DC1CBAC00BDE258 /* SessionRecord */,
 				182BFDBA1DBBA1CB0084BDDC /* PitchReportDetailRecord */,
@@ -2438,6 +2451,7 @@
 				18704ED21D1954E100996BF3 /* FetchMatchResult.m in Sources */,
 				CEC858AD1D1557F6007F5384 /* BreakTableViewCell.m in Sources */,
 				18704EE71D197D6B00996BF3 /* DBManagerInsertUpdateMatchResult.m in Sources */,
+				1892DC581DC762F3005EC9BD /* ManhattenWKTRecord.m in Sources */,
 				2468C0E11D1177D7007C68AA /* Archive.m in Sources */,
 				04713EAD1DC3463000667AF0 /* BvsBBowler.m in Sources */,
 				CE3DD41F1CFBFB4F00D93A55 /* SelectPlayerCVCell.m in Sources */,
