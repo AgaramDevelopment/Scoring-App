@@ -28,7 +28,8 @@
 @property(strong,nonatomic)NSString *beaten;
 @property(strong,nonatomic)NSString *wtb;
 @property(strong,nonatomic)NSString *sr;
-
-
+@property(strong,nonatomic)NSString *teamName;
+@property(strong,nonatomic)NSString *bowlerCode;
+@property(strong,nonatomic)NSString *wicketType;
 
 @end

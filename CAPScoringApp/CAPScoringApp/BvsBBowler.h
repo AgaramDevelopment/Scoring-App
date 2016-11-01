@@ -26,6 +26,11 @@
 @property(strong,nonatomic)NSString *uncomfort;
 @property(strong,nonatomic)NSString *beaten;
 @property(strong,nonatomic)NSString *wtb;
+@property(strong,nonatomic)NSString *sr;
+@property(strong,nonatomic)NSString *fours;
+@property(strong,nonatomic)NSString *fives;
+@property(strong,nonatomic)NSString *sixes;
+@property(strong,nonatomic)NSString *sevens;
 
 
 @end

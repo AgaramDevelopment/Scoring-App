@@ -29,6 +29,10 @@
 @synthesize beaten;
 @synthesize wtb;
 @synthesize sr;
+@synthesize teamName;
+@synthesize bowlerCode;
+@synthesize wicketType;
+
 
 
 @end
