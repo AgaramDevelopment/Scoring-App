@@ -18,6 +18,7 @@
     UIActivityIndicatorView *indicator;
     UINavigationController *navigationController;
     BOOL IsTimer;
+    BOOL isBackGroundTaskRunning;
     NSTimer* _timer;
 }
 @end
@@ -154,10 +155,11 @@
         bgTask = UIBackgroundTaskInvalid;
     }];
     
+    
     //and create new timer with async call:
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         //run function methodRunAfterBackground
-        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:YES];
+        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:YES];
       [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
        [[NSRunLoop currentRunLoop] run];
     });
@@ -170,6 +172,9 @@
 
 -(void)methodRunAfterBackground
 {
+    
+    
+
      NSLog(@"background process method");
     if(IsTimer == YES)
     {
@@ -218,25 +223,28 @@
         
         
         //-----------------------------------
-        if(self.checkInternetConnection){
+        if(self.checkInternetConnection && !isBackGroundTaskRunning){
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 
             
              if([defaults boolForKey:@"isUserLoggedin"])
              {
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                
-                
-                DBManagerCaptransactionslogEntry *objCaptransactions = [[DBManagerCaptransactionslogEntry alloc]init];
-                NSMutableArray *DBManagerCaptransactionslogEntryArray=[objCaptransactions GetCaptransactionslogentry];
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+
+                    DBManagerCaptransactionslogEntry *objCaptransactions = [[DBManagerCaptransactionslogEntry alloc]init];
+                    NSMutableArray *DBManagerCaptransactionslogEntryArray=[objCaptransactions GetCaptransactionslogentry];
+                    
+                    if([DBManagerCaptransactionslogEntryArray count]>0){
+                    isBackGroundTaskRunning = YES;
                 
                 NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
                 [PushDict setValue :DBManagerCaptransactionslogEntryArray forKey:@"ScriptData"];
                 
                 NSData *jsonData = [NSJSONSerialization dataWithJSONObject:PushDict options:kNilOptions error:nil];
                 NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-                NSLog(@"JSON String: %@",jsonString);
-                
+               // NSLog(@"JSON String: %@",jsonString);
+                 NSLog(@"BG Start Service Called");
                 NSData* responseData = [NSMutableData data];
                 NSString *urlString = [NSString stringWithFormat: @"http://%@/CAPMobilityService.svc/ONLINEPUSHDATA",[Utitliy getSyncIPPORT]];
                 NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
@@ -257,6 +265,12 @@
                     NSString *ErrorNoStr =[responseDict objectForKey:@"ErrorNo"];
                     
                     NSString *CompareErrorno=@"MOB0005";
+                    
+                    if([ErrorNoStr isEqualToString:@"MOB0005"]){
+                        [objCaptransactions deactivateCaptransactionslogentry];
+                    }
+                    NSLog(@"BG end Service Called");
+                    
                    // if ([ErrorNoStr isEqualToString:CompareErrorno]) {
 //
 //                        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"SYNC DATA COMPLETED. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
@@ -270,15 +284,18 @@
 //                    }
                 }
                 
-                
+                    isBackGroundTaskRunning = NO;
                 
                 //  NSLog(@"the final output is:%@",responseString);
+                    
+                }
+                });
             });
         }
         
         
         else{
-             IsTimer=NO;
+  //           IsTimer=NO;
 //            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Network Error. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
 //            [altert show];
 //            [altert setTag:10405];
@@ -298,6 +315,7 @@
         _timer = nil;
         
     }
+    
    
 }
 

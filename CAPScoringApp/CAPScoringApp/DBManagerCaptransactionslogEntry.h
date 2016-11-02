@@ -11,4 +11,5 @@
 @interface DBManagerCaptransactionslogEntry : NSObject
 -(NSMutableArray *) GetCaptransactionslogentry;
 -(BOOL)updateCaptransactionslogentry:(NSString*)SCRIPTSTATUS matchCode:(NSString*) matchCode SEQNO:(NSString*)SEQNO;
+-(NSMutableArray *) deactivateCaptransactionslogentry;
 @end

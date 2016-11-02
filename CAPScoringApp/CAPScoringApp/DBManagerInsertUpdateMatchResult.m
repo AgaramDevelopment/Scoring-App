@@ -122,26 +122,57 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
         NSString *updateSQL = [NSString stringWithFormat:@"DELETE FROM MATCHRESULT  WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
-        const char *selectStmt = [updateSQL UTF8String];
         
-        if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
-        {
-            while(sqlite3_step(statement)==SQLITE_ROW){
+        const char *query_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, query_stmt, -1, &statement, NULL)==SQLITE_OK){
+            if (sqlite3_step(statement) == SQLITE_DONE)
+            {
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
                 [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHRESULT" :@"MSC252" :updateSQL];
                 return YES;
+                
+            }
+            else {
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                sqlite3_close(dataBase);
+                return NO;
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
         }
         sqlite3_close(dataBase);
+        
     }
-    return NO;
     
+    return NO;
 }
+
+//
+//const char *selectStmt = [updateSQL UTF8String];
+//
+//if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
+//{
+//    while(sqlite3_step(statement)==SQLITE_ROW){
+//        sqlite3_reset(statement);
+//        sqlite3_finalize(statement);
+//        sqlite3_close(dataBase);
+//        PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+//        [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHRESULT" :@"MSC252" :updateSQL];
+//        return YES;
+//    }
+//    sqlite3_reset(statement);
+//    sqlite3_finalize(statement);
+//}
+//sqlite3_close(dataBase);
+//}
+//return NO;
+//
+//}
 
 -(NSString*)  GetMatchresultCodeInElseIfForInsertMatchResult :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) BUTTONNAME {
     NSString *databasePath = [self getDBPath];
@@ -179,7 +210,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO MATCHRESULT   (  COMPETITIONCODE, 	MATCHCODE, 	MATCHRESULTCODE, 	MATCHWONTEAMCODE, 	TEAMAPOINTS,TEAMBPOINTS,	MANOFTHEMATCHCODE, 	COMMENTS) 	VALUES 	( 	'%@', 	'%@',  '%@','%@' , '%@' , '%@', '%@', '%@' )",COMPETITIONCODE,MATCHCODE,MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,TEAMBPOINTS,MANOFTHEMATCHCODE,COMMENTS];
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO MATCHRESULT   (  COMPETITIONCODE, 	MATCHCODE, 	MATCHRESULTCODE, 	MATCHWONTEAMCODE, 	TEAMAPOINTS,TEAMBPOINTS,	MANOFTHEMATCHCODE, 	COMMENTS) 	VALUES 	( 	'%@', 	'%@',  '%@','%@' , '%@' , '%@', '%@', '%@' )",COMPETITIONCODE,MATCHCODE,MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,(TEAMBPOINTS ==nil || [TEAMBPOINTS isEqualToString:@"(null)"] || [TEAMBPOINTS isEqualToString:@""])?@"0":TEAMBPOINTS,MANOFTHEMATCHCODE,COMMENTS];
         const char *selectStmt = [updateSQL UTF8String];
         
         if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
@@ -223,7 +254,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHREGISTRATION" :@"MSC251" :updateSQL];
+                 NSString *updateSQLForLive = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION  SET MATCHRESULT = '' ,MATCHRESULTTEAMCODE = '' ,[MATCHSTATUS] = 'MSC124'  ,MODIFIEDBY = 'USER'  ,MODIFIEDDATE = GETDATE() WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHREGISTRATION" :@"MSC251" :updateSQLForLive];
                 return YES;
                 
             }
@@ -256,7 +288,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHREGISTRATION" :@"MSC251" :updateSQL];
+                  NSString *updateSQLForOnline = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION SET MATCHRESULT = '%@' ,MATCHRESULTTEAMCODE = '%@' ,TEAMAPOINTS = '%@' ,TEAMBPOINTS = '%@' ,MATCHSTATUS = 'MSC125'  ,MODIFIEDBY = 'USER'				  ,MODIFIEDDATE = GETDATE() WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,(TEAMBPOINTS ==nil || [TEAMBPOINTS isEqualToString:@"(null)"] || [TEAMBPOINTS isEqualToString:@""])?@"0":TEAMBPOINTS,COMPETITIONCODE,MATCHCODE];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHREGISTRATION" :@"MSC251" :updateSQLForOnline];
                 return YES;
                 
             }
@@ -323,7 +356,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHREGISTRATION" :@"MSC251" :updateSQL];
+                NSString *updateSQLForOnline = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION  SET MATCHRESULT = '%@'  ,MATCHRESULTTEAMCODE = '%@'  ,[TEAMAPOINTS] = '%@' ,TEAMBPOINTS = '%@' ,MATCHSTATUS = 'MSC125'  ,MODIFIEDBY = 'USER'  ,MODIFIEDDATE =  GETDATE() WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,TEAMBPOINTS,COMPETITIONCODE,MATCHCODE];
+                
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHREGISTRATION" :@"MSC251" :updateSQLForOnline];
                 return YES;
                 
             }

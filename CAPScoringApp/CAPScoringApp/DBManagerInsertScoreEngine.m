@@ -910,7 +910,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BOWLEROVERDETAILS SET ENDTIME = datetime('now','localtime') WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@' AND OVERNO='%@' AND BOWLERCODE = '%@'",COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,PREVIOUSBOWLERCODE];
+        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        
+      //  NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BOWLEROVERDETAILS SET ENDTIME = datetime('now','localtime') WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@' AND OVERNO='%@' AND BOWLERCODE = '%@'",COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,PREVIOUSBOWLERCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BOWLEROVERDETAILS SET ENDTIME = '%@' WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@' AND OVERNO='%@' AND BOWLERCODE = '%@'",[dateFormatter stringFromDate:[NSDate date]],COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,PREVIOUSBOWLERCODE];
         
         const char *selectStmt = [updateSQL UTF8String];
         
@@ -986,7 +990,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BOWLEROVERDETAILS(COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BOWLERCODE,STARTTIME,ENDTIME)     VALUES('%@','%@','%@','%@','%@','%@',datetime('now','localtime'),'')",COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BOWLERCODE];
+        NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        
+       // NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BOWLEROVERDETAILS(COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BOWLERCODE,STARTTIME,ENDTIME)     VALUES('%@','%@','%@','%@','%@','%@',datetime('now','localtime'),'')",COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BOWLERCODE];
+        
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BOWLEROVERDETAILS(COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BOWLERCODE,STARTTIME,ENDTIME)     VALUES('%@','%@','%@','%@','%@','%@','%@','')",COMPETITIONCODE, MATCHCODE,TEAMCODE,INNINGSNO,OVERNO,BOWLERCODE,[dateFormatter stringFromDate:[NSDate date]]];
+        
         
         const char *selectStmt = [updateSQL UTF8String];
         
@@ -1234,7 +1244,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"WICKETEVENTS" :@"MSC250" :updateSQL];
+                
+                NSString *updateSQLForOnline = [NSString stringWithFormat:@" INSERT INTO WICKETEVENTS  (    BALLCODE,   COMPETITIONCODE,   MATCHCODE,   TEAMCODE,  INNINGSNO,   ISWICKET,   WICKETNO,   WICKETTYPE,    WICKETPLAYER,     FIELDINGPLAYER,     VIDEOLOCATION,     WICKETEVENT     )    VALUES    (     '%@',     '%@',     '%@',     '%@',     '%@',     '%@',     (      SELECT ISNULL(COUNT(WKT.WICKETNO),0) + 1      FROM WICKETEVENTS WKT      WHERE WKT.COMPETITIONCODE = '%@'       AND WKT.MATCHCODE = '%@'      AND WKT.TEAMCODE = '%@'       AND WKT.INNINGSNO = '%@'      AND WKT.WICKETTYPE != 'MSC102'    ),     '%@',     '%@',     '%@',     '',     '%@'    )  "      , BALLCODENO, COMPETITIONCODE  , MATCHCODE,TEAMCODE, INNINGSNO,ISWICKET,COMPETITIONCODE  , MATCHCODE,TEAMCODE, INNINGSNO,WICKETTYPE, WICKETPLAYER,FIELDINGPLAYER,WICKETEVENT];
+                
+                
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"WICKETEVENTS" :@"MSC250" :updateSQLForOnline];
                 return YES;
                 
             }
@@ -3852,7 +3866,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *InsertSQL = [NSString stringWithFormat:@"INSERT INTO APPEALEVENTS(COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,BALLCODE,APPEALTYPECODE,APPEALSYSTEMCODE,APPEALCOMPONENTCODE,UMPIRECODE,BATSMANCODE,ISREFERRED,APPEALDECISION,APPEALCOMMENTS,FIELDERCODE)VALUES('%@','%@','%@',%ld,'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",COMPETITIONCODE,MATCHCODE,TEAMCODE,(long)INNINGSNO,BALLCODE,APPEALTYPECODE,APPEALSYSTEMCODE,APPEALCOMPONENTCODE,UMPIRECODE,BATSMANCODE,ISREFERRED,APPEALDECISION,APPEALCOMMENTS,FIELDERCODE];
+        NSString *InsertSQL = [NSString stringWithFormat:@"INSERT INTO APPEALEVENTS(COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,BALLCODE,APPEALTYPECODE,APPEALSYSTEMCODE,APPEALCOMPONENTCODE,UMPIRECODE,BATSMANCODE,ISREFERRED,APPEALDECISION,APPEALCOMMENTS,FIELDERCODE)VALUES('%@','%@','%@',%ld,'%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')",COMPETITIONCODE,MATCHCODE,TEAMCODE,(long)INNINGSNO,BALLCODE,(APPEALTYPECODE==nil || [APPEALTYPECODE isEqualToString:@"(null)"])?@"":APPEALTYPECODE,APPEALSYSTEMCODE,APPEALCOMPONENTCODE,
+                               (UMPIRECODE==nil || [UMPIRECODE isEqualToString:@"(null)"])?@"":UMPIRECODE,(BATSMANCODE==nil || [BATSMANCODE isEqualToString:@"(null)"])?@"":BATSMANCODE,ISREFERRED,APPEALDECISION,APPEALCOMMENTS,FIELDERCODE];
         
         const char *selectStmt = [InsertSQL UTF8String];
         
@@ -3941,7 +3956,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *InsertSQL = [NSString stringWithFormat:@"INSERT INTO FIELDINGEVENTS(COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,BALLCODE,FIELDERCODE,ISSUBSTITUTE,FIELDINGFACTORCODE,NRS)VALUES('%@','%@','%@',%ld,'%@','%@','%@','%@','%@')",COMPETITIONCODE, MATCHCODE,TEAMCODE,(long)INNINGSNO,BALLCODE,FIELDERCODE,ISSUBSTITUTE,FIELDINGFACTOR,NETRUNS];
+        NSString *InsertSQL = [NSString stringWithFormat:@"INSERT INTO FIELDINGEVENTS(COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,BALLCODE,FIELDERCODE,ISSUBSTITUTE,FIELDINGFACTORCODE,NRS)VALUES('%@','%@','%@',%ld,'%@','%@','%@','%@','%@')",COMPETITIONCODE, MATCHCODE,TEAMCODE,(long)INNINGSNO,BALLCODE,(FIELDERCODE == nil ||[FIELDERCODE isEqualToString:@"(null)"] )?@"":FIELDERCODE,ISSUBSTITUTE,(FIELDINGFACTOR == nil ||[FIELDINGFACTOR isEqualToString:@"(null)"] )?@"":FIELDINGFACTOR,NETRUNS];
         
         const char *selectStmt = [InsertSQL UTF8String];
         
