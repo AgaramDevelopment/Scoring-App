@@ -173,6 +173,7 @@
 -(void)methodRunAfterBackground
 {
     
+ //   return ;
     
 
      NSLog(@"background process method");

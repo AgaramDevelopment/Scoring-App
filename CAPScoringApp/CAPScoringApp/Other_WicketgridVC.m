@@ -157,7 +157,7 @@ DbManager_OtherWicket *dbOtherWicket;
     add.NONSTRIKERNAME=self.NONSTRIKERNAME;
     add.NONSTRIKERCODE=self.NONSTRIKERCODE;
    // add.WICKETNO = [NSString stringWithFormat:@"%@",self.N_WICKETNO];
-    add.WICKETNO=[dbOtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
+    add.WICKETNO=[dbOtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
     add.ISEDITMODE=NO;
  //    WICKETNO =[dbOtherWicket GetWicketNoForInsertOtherwicket:COMPETITIONCODE :MATCHCODE:TEAMCODE :INNINGSNO];
     

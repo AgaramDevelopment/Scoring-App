@@ -111,7 +111,7 @@
 @synthesize N_WICKETNO;
 @synthesize N_WICKETTYPE;
 @synthesize N_FIELDERCODE;
-@synthesize BATTINGPOSITIONNO;
+//@synthesize BATTINGPOSITIONNO;
 
 @synthesize WICKETPLAYER;
 @synthesize TOTALRUNS;
@@ -792,9 +792,9 @@ self.btn_delete.backgroundColor=[UIColor colorWithRed:(119/255.0f) green:(57/255
         }
         else
         {
-            [ dbOtherWicket GetBattingPositionNoForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
+           NSNumber *battingPositionNo = [ dbOtherWicket GetBattingPositionNoForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
             
-            [ dbOtherWicket InsertBattingSummaryForInsertOtherwicket :COMPETITIONCODE: MATCHCODE:TEAMCODE:INNINGSNO:BATTINGPOSITIONNO:WICKETPLAYER:N_WICKETNO:N_WICKETTYPE:TOTALRUNS];
+            [ dbOtherWicket InsertBattingSummaryForInsertOtherwicket :COMPETITIONCODE: MATCHCODE:TEAMCODE:INNINGSNO:battingPositionNo:WICKETPLAYER:N_WICKETNO:N_WICKETTYPE:TOTALRUNS];
         }
         if([ dbOtherWicket GetInningsNoForInsertOtherwicket :COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO]!=0)
         {

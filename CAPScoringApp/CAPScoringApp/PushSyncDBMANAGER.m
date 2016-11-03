@@ -711,13 +711,21 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record. MARKEDFOREDIT=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 54)];
                 
                 record.REMARKS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 55)];
-                record. VIDEOFILENAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 56)];
-                record. SHOTTYPECATEGORY=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 57)];
+                //record. VIDEOFILENAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 56)];
+                record. VIDEOFILENAME=@"";
+                //record. SHOTTYPECATEGORY=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 57)];
+                record. SHOTTYPECATEGORY=[self getValueByNull :statement:57];
                 record. PMSTRIKEPOINT=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 58)];
-                record. PMSTRIKEPOINTLINECODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 59)];
-                record. BALLSPEED=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 60)];
-                record. UNCOMFORTCLASSIFCATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 61)];
-                record. ISSYNC=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 62)];
+                
+                //record. PMSTRIKEPOINTLINECODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 59)];
+                record. PMSTRIKEPOINTLINECODE=[self getValueByNull :statement:59];
+                //[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 60)];
+                
+                record. BALLSPEED=[self getValueByNull :statement:60];
+                record. UNCOMFORTCLASSIFCATION=[self getValueByNull :statement:61];
+                //record. UNCOMFORTCLASSIFCATION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 61)];
+                record. ISSYNC=[self getValueByNull :statement:62];
+                //[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 62)];
                 [BALLEVENTSArray addObject:[record BALLEVENTSPushRecordsDictionary]];
                 
             }
@@ -1310,7 +1318,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return BOWLINGSUMMARYArray;
 }
--(BOOL) InsertTransactionLogEntry: (NSString*) MATCHCODE : (NSString*) TABLENAME : (NSString*)SCRIPTTYPE : (NSString*)SCRIPTDATA
+-(BOOL) InsertTransactionLogEntry: (NSString*) MATCHCODE : (NSString*) TABLENAME : (NSString*)SCRIPTTYPE : (NSString*)
+SCRIPTDATA
 {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
