@@ -156,17 +156,17 @@
 
 
 -(void) setInningsView{
-    if([self.matchTypecode isEqual:@"MSC116"] || [self.matchTypecode isEqual:@"MSC024"]){//T20
+    if([self.matchTypecode isEqual:@"MSC116"] || [self.matchTypecode isEqual:@"MSC024"]){
+        //T20
         
         self.Inn1_Btn.hidden = NO;
         self.Inn2_Btn.hidden = NO;
         self.Inn3_Btn.hidden = YES;
         self.Inn4_Btn.hidden = YES;
         
-        //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
-        //[self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
-        self.inns2_btnWidth.constant = self.view.frame.size.width/2;
-        self.inn1_btnWidth.constant =  self.view.frame.size.width/2;
+        self.inn1_btnWidth.constant =  (self.view.frame.size.width/2)+100;
+        self.inn1_btnYposition.constant = self.inn1_btnWidth.constant;
+        self.inns2_btnWidth.constant = (self.view.frame.size.width/2);
         
         
     }else if([self.matchTypecode isEqual:@"MSC115"] || [self.matchTypecode isEqual:@"MSC022"]){//ODI
@@ -174,11 +174,9 @@
         self.Inn2_Btn.hidden = NO;
         self.Inn3_Btn.hidden = YES;
         self.Inn4_Btn.hidden = YES;
-        self.inns2_btnWidth.constant = self.view.frame.size.width/2;
-        self.inn1_btnWidth.constant = self.view.frame.size.width/2;
-        
-        //     [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
-        //    [self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
+        //self.inn1_btnWidth.constant = self.view.frame.size.width/2;
+        //self.inns2_btnWidth.constant = self.view.frame.size.width/2;
+
         
     }else if([self.matchTypecode isEqual:@"MSC114"] || [self.matchTypecode isEqual:@"MSC023"]){//Test
         

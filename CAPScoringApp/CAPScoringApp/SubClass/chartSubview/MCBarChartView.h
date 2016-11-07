@@ -36,6 +36,9 @@
 - (NSArray *)barChartView:(MCBarChartView *)barChartView selectionColorForBarInSection:(NSUInteger)section;
 
 - (NSString *)barChartView:(MCBarChartView *)barChartView informationOfBarInSection:(NSInteger)section index:(NSInteger)index;
+
+- (NSMutableArray *)barChartView:(MCBarChartView *)barChartView informationOfWicketInSection:(NSInteger)section;
+
 - (UIView *)barChartView:(MCBarChartView *)barChartView hintViewOfBarInSection:(NSInteger)section index:(NSInteger)index;
 
 @end

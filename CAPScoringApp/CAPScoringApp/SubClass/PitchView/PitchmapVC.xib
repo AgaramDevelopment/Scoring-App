@@ -46,8 +46,6 @@
                 <outlet property="dotball_Btn" destination="E1W-CZ-SaU" id="cBg-R5-Imh"/>
                 <outlet property="filter_Btn" destination="5j1-59-xdU" id="b17-3k-rSp"/>
                 <outlet property="filter_view" destination="9xh-8n-Xv9" id="tkV-EP-lD1"/>
-                <outlet property="inn1_btnWidth" destination="S0t-Ja-LxE" id="JjA-pX-VhW"/>
-                <outlet property="inns2_btnWidth" destination="Riw-8Q-Xt9" id="DbB-Ms-FKK"/>
                 <outlet property="length_Lbl" destination="eDM-ms-Vpr" id="PHU-X3-EE4"/>
                 <outlet property="length_View" destination="bB8-7b-9jT" id="dNw-EE-uYV"/>
                 <outlet property="line_Vew" destination="9lw-UP-b2o" id="H1z-KU-1aS"/>
@@ -549,7 +547,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rD-9w-ybE">
                             <rect key="frame" x="0.0" y="10" width="600" height="53"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaS-a1-cAj">
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaS-a1-cAj">
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.098039215686274508" alpha="0.24657866379310345" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
@@ -560,7 +558,7 @@
                                         <action selector="didClickInns1:" destination="-1" eventType="touchUpInside" id="K0g-dy-9nD"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KuF-Fq-N6N">
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KuF-Fq-N6N">
                                     <rect key="frame" x="150" y="0.0" width="150" height="50"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
@@ -571,7 +569,7 @@
                                         <action selector="didClickInns2:" destination="-1" eventType="touchUpInside" id="2XU-SF-vON"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6t-m2-CH7">
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6t-m2-CH7">
                                     <rect key="frame" x="300" y="0.0" width="150" height="50"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.098039215686274508" alpha="0.25" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
@@ -582,7 +580,7 @@
                                         <action selector="didClickInns3:" destination="-1" eventType="touchUpInside" id="95N-C7-4v9"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRS-vL-Xsz">
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRS-vL-Xsz">
                                     <rect key="frame" x="450" y="0.0" width="150" height="50"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.098039215686274508" alpha="0.25" colorSpace="calibratedRGB"/>
                                     <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
@@ -596,35 +594,17 @@
                             </subviews>
                             <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
-                                <constraint firstItem="tRS-vL-Xsz" firstAttribute="width" secondItem="MaS-a1-cAj" secondAttribute="width" id="0du-2R-3Ei"/>
-                                <constraint firstAttribute="bottom" secondItem="tRS-vL-Xsz" secondAttribute="bottom" constant="3" id="70R-6g-rAl"/>
-                                <constraint firstItem="tRS-vL-Xsz" firstAttribute="top" secondItem="8rD-9w-ybE" secondAttribute="top" id="7Qx-ox-YKQ"/>
-                                <constraint firstAttribute="bottom" secondItem="KuF-Fq-N6N" secondAttribute="bottom" constant="3" id="7sV-N1-ED9"/>
-                                <constraint firstItem="MaS-a1-cAj" firstAttribute="top" secondItem="8rD-9w-ybE" secondAttribute="top" id="Fok-m1-lM6"/>
-                                <constraint firstItem="b6t-m2-CH7" firstAttribute="leading" secondItem="KuF-Fq-N6N" secondAttribute="trailing" id="Lf0-Iz-mhk"/>
-                                <constraint firstItem="b6t-m2-CH7" firstAttribute="width" secondItem="MaS-a1-cAj" secondAttribute="width" id="NLw-nC-aHp"/>
-                                <constraint firstItem="KuF-Fq-N6N" firstAttribute="leading" secondItem="MaS-a1-cAj" secondAttribute="trailing" id="QqP-tB-Khv"/>
-                                <constraint firstItem="KuF-Fq-N6N" firstAttribute="top" secondItem="8rD-9w-ybE" secondAttribute="top" id="Riw-8Q-Xt9"/>
-                                <constraint firstItem="MaS-a1-cAj" firstAttribute="leading" secondItem="8rD-9w-ybE" secondAttribute="leading" id="S0t-Ja-LxE"/>
-                                <constraint firstItem="b6t-m2-CH7" firstAttribute="top" secondItem="8rD-9w-ybE" secondAttribute="top" id="a76-iW-cU3"/>
-                                <constraint firstItem="b6t-m2-CH7" firstAttribute="height" secondItem="MaS-a1-cAj" secondAttribute="height" id="fNI-fw-cTf"/>
-                                <constraint firstItem="tRS-vL-Xsz" firstAttribute="leading" secondItem="b6t-m2-CH7" secondAttribute="trailing" id="k59-Pi-VCv"/>
-                                <constraint firstItem="KuF-Fq-N6N" firstAttribute="width" secondItem="MaS-a1-cAj" secondAttribute="width" id="lZi-hg-B7T"/>
-                                <constraint firstAttribute="bottom" secondItem="b6t-m2-CH7" secondAttribute="bottom" constant="3" id="mc2-L8-TbN"/>
-                                <constraint firstItem="KuF-Fq-N6N" firstAttribute="height" secondItem="MaS-a1-cAj" secondAttribute="height" id="o7V-i2-CBz"/>
-                                <constraint firstAttribute="bottom" secondItem="MaS-a1-cAj" secondAttribute="bottom" constant="3" id="oSW-d5-poG"/>
-                                <constraint firstAttribute="trailing" secondItem="tRS-vL-Xsz" secondAttribute="trailing" id="ppf-2T-QEk"/>
-                                <constraint firstItem="tRS-vL-Xsz" firstAttribute="height" secondItem="MaS-a1-cAj" secondAttribute="height" id="y7Y-3G-O4o"/>
+                                <constraint firstAttribute="height" constant="53" id="zXj-mU-R4t"/>
                             </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstItem="8rD-9w-ybE" firstAttribute="top" secondItem="U5s-Ni-Ou8" secondAttribute="top" constant="10" id="CG3-NU-ucQ"/>
                         <constraint firstAttribute="height" constant="70" id="EKo-ve-0gA"/>
-                        <constraint firstAttribute="trailing" secondItem="8rD-9w-ybE" secondAttribute="trailing" id="W8r-xB-u3J"/>
-                        <constraint firstAttribute="bottom" secondItem="8rD-9w-ybE" secondAttribute="bottom" constant="7" id="hqb-8f-VHW"/>
-                        <constraint firstItem="8rD-9w-ybE" firstAttribute="leading" secondItem="U5s-Ni-Ou8" secondAttribute="leading" id="zdk-Pw-lWe"/>
+                        <constraint firstItem="8rD-9w-ybE" firstAttribute="top" secondItem="U5s-Ni-Ou8" secondAttribute="top" constant="10" id="bUV-HU-KMv"/>
+                        <constraint firstAttribute="trailing" secondItem="8rD-9w-ybE" secondAttribute="trailing" id="cL8-Yp-bpv"/>
+                        <constraint firstAttribute="bottom" secondItem="8rD-9w-ybE" secondAttribute="bottom" constant="7" id="gHF-iX-sUM"/>
+                        <constraint firstItem="8rD-9w-ybE" firstAttribute="leading" secondItem="U5s-Ni-Ou8" secondAttribute="leading" id="sJ8-AG-h2J"/>
                     </constraints>
                 </view>
             </subviews>

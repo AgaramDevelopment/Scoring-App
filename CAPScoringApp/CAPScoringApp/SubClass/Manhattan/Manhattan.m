@@ -30,11 +30,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     NSMutableArray * objInnings4RunArray ;
     NSMutableArray * objInnings4OverArray ;
+    
+    NSMutableArray * wicketDetail;
 }
 
 @property (strong, nonatomic) MCBarChartView *barChartView;
 
-@property (strong, nonatomic) NSArray *titles;
+@property (strong, nonatomic) NSArray * titles;
 
 @property (strong, nonatomic) NSMutableArray *dataSource;
 
@@ -58,6 +60,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     objInnings4RunArray =[[NSMutableArray alloc]init];
     objInnings4OverArray =[[NSMutableArray alloc]init];
+    
+    wicketDetail=[[NSMutableArray alloc]init];
     
     manhattendetail =[self getChartDetail:self.matchTypecode :self.compititionCode :self.matchCode];
     NSString * innings1 = @"1";
@@ -93,10 +97,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         objManhattanRecord =(ManhattanRecord *)[manhattendetail objectAtIndex:i];
         
-        [objRunArray addObject:objManhattanRecord.runs];
+        NSString * overno =objManhattanRecord.overno;
         
-        [objOverArray addObject:objManhattanRecord.overno];
-    
+            if(objOverArray.count >0)
+            {
+            NSString * Addoverno =[objOverArray objectAtIndex:i-1];
+            
+            if(![overno isEqualToString: Addoverno])
+            {
+              [objOverArray addObject:objManhattanRecord.overno];
+              [objRunArray addObject:objManhattanRecord.runs];
+            }
+            }
+        
+        
+        if(objOverArray.count == 0)
+        {
+           [objOverArray addObject:objManhattanRecord.overno];
+            [objRunArray addObject:objManhattanRecord.runs];
+        }
+
        
     }
     
@@ -104,10 +124,33 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         objManhattanRecord =(ManhattanRecord *)[manhattendetail objectAtIndex:i];
         
-        [objInnings2RunArray addObject:objManhattanRecord.runs];
         
-        [objInnings2OverArray addObject:objManhattanRecord.overno];
+        NSString * overno =objManhattanRecord.overno;
         
+        if(objInnings2OverArray.count >0)
+        {
+            NSString * Addoverno =[objInnings2OverArray objectAtIndex:i-1];
+            
+            if(![overno isEqualToString: Addoverno])
+            {
+                [objInnings2RunArray addObject:objManhattanRecord.runs];
+                
+                [objInnings2OverArray addObject:objManhattanRecord.overno];
+                
+
+            }
+        }
+        
+        
+        if(objInnings2OverArray.count == 0)
+        {
+            [objInnings2RunArray addObject:objManhattanRecord.runs];
+            
+            [objInnings2OverArray addObject:objManhattanRecord.overno];
+            
+
+        }
+
         
     }
 
@@ -116,9 +159,28 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         objManhattanRecord =(ManhattanRecord *)[manhattendetail objectAtIndex:i];
         
-        [objInnings3RunArray addObject:objManhattanRecord.runs];
         
-        [objInnings3OverArray addObject:objManhattanRecord.overno];
+        NSString * overno =objManhattanRecord.overno;
+        
+        if(objInnings3OverArray.count >0)
+        {
+            NSString * Addoverno =[objInnings3OverArray objectAtIndex:i-1];
+            
+            if(![overno isEqualToString: Addoverno])
+            {
+                [objInnings3RunArray addObject:objManhattanRecord.runs];
+                
+                [objInnings3OverArray addObject:objManhattanRecord.overno];
+            }
+        }
+        
+        
+        if(objInnings3OverArray.count == 0)
+        {
+            [objInnings3RunArray addObject:objManhattanRecord.runs];
+            
+            [objInnings3OverArray addObject:objManhattanRecord.overno];
+        }
         
         
     }
@@ -127,12 +189,36 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         objManhattanRecord =(ManhattanRecord *)[manhattendetail objectAtIndex:i];
         
-        [objInnings4RunArray addObject:objManhattanRecord.runs];
+        NSString * overno =objManhattanRecord.overno;
         
-        [objInnings4OverArray addObject:objManhattanRecord.overno];
+        if(objInnings4OverArray.count >0)
+        {
+            NSString * Addoverno =[objInnings4OverArray objectAtIndex:i-1];
+            
+            if(![overno isEqualToString: Addoverno])
+            {
+                [objInnings4RunArray addObject:objManhattanRecord.runs];
+                
+                [objInnings4OverArray addObject:objManhattanRecord.overno];
+                
+
+            }
+        }
         
+        
+        if(objInnings4OverArray.count == 0)
+        {
+            
+            [objInnings4RunArray addObject:objManhattanRecord.runs];
+            
+            [objInnings4OverArray addObject:objManhattanRecord.overno];
+            
+
+        }
         
     }
+    
+    
     [self.manhattan_Scroll setContentSize:CGSizeMake(self.view.frame.size.width,1500)];
 
     
@@ -156,7 +242,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                                    selector:@selector(BarChartMethodFirstInnigs4)
                                    userInfo:nil
                                     repeats:NO];
-  //   [self getwicket:self.compititionCode :self.matchCode];
+   wicketDetail = [self getwicket:self.compititionCode :self.matchCode];
 
 }
 
@@ -533,19 +619,25 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 - (NSString *)barChartView:(MCBarChartView *)barChartView informationOfBarInSection:(NSInteger)section index:(NSInteger)index {
-    if (barChartView.tag == 111) {
-        if ([_dataSource[section] floatValue] >= 130) {
-            return @"";
-        } else if ([_dataSource[section] floatValue] >= 110) {
-            return @"";
-        } else if ([_dataSource[section] floatValue] >= 90) {
-            return @"";
-        } else {
-            return @"";
-        }
-    }
+//    if (barChartView.tag == 111) {
+//        if ([_dataSource[section] floatValue] >= 130) {
+//            return @"dssf";
+//        } else if ([_dataSource[section] floatValue] >= 110) {
+//            return @"sff";
+//        } else if ([_dataSource[section] floatValue] >= 90) {
+//            return @"rtt";
+//        } else {
+//            return @"ttt";
+//        }
+//    }
     return nil;
 }
+
+- (NSMutableArray *)barChartView:(MCBarChartView *)barChartView informationOfWicketInSection:(NSInteger)section
+{
+    return wicketDetail;
+}
+
 
 - (CGFloat)barWidthInBarChartView:(MCBarChartView *)barChartView {
     //if (barChartView.tag == 111) {
