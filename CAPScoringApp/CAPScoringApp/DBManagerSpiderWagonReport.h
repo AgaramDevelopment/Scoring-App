@@ -25,5 +25,7 @@
 
 -(NSString *) getTeamBCode:(NSString *)COMPETITIONCODE:(NSString *)MATCHCODE;
 
+-(NSString *) getTotalRuns:(NSString*)MATCHTYPECODE:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO;
+
 
 @end

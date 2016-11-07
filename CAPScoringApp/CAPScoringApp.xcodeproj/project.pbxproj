@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04679C131DC8589500EB2CDF /* BowlerVsBatsmanVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04679C111DC8589500EB2CDF /* BowlerVsBatsmanVC.m */; };
+		04679C141DC8589500EB2CDF /* BowlerVsBatsmanVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04679C121DC8589500EB2CDF /* BowlerVsBatsmanVC.xib */; };
+		04679C181DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04679C161DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.m */; };
+		04679C191DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04679C171DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.xib */; };
 		0468B3921D12AD2100B98576 /* MetaDataRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0468B3911D12AD2100B98576 /* MetaDataRecord.m */; };
 		04713EAD1DC3463000667AF0 /* BvsBBowler.m in Sources */ = {isa = PBXBuildFile; fileRef = 04713EAC1DC3463000667AF0 /* BvsBBowler.m */; };
 		04713EB01DC3464B00667AF0 /* BvsBBatsman.m in Sources */ = {isa = PBXBuildFile; fileRef = 04713EAF1DC3464B00667AF0 /* BvsBBatsman.m */; };
@@ -341,6 +345,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		04679C101DC8589500EB2CDF /* BowlerVsBatsmanVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlerVsBatsmanVC.h; sourceTree = "<group>"; };
+		04679C111DC8589500EB2CDF /* BowlerVsBatsmanVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlerVsBatsmanVC.m; sourceTree = "<group>"; };
+		04679C121DC8589500EB2CDF /* BowlerVsBatsmanVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BowlerVsBatsmanVC.xib; sourceTree = "<group>"; };
+		04679C151DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlerVsBatsmanTVCell.h; sourceTree = "<group>"; };
+		04679C161DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlerVsBatsmanTVCell.m; sourceTree = "<group>"; };
+		04679C171DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BowlerVsBatsmanTVCell.xib; sourceTree = "<group>"; };
 		0468B3901D12AD2100B98576 /* MetaDataRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MetaDataRecord.h; sourceTree = "<group>"; };
 		0468B3911D12AD2100B98576 /* MetaDataRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MetaDataRecord.m; sourceTree = "<group>"; };
 		04713EAB1DC3463000667AF0 /* BvsBBowler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BvsBBowler.h; sourceTree = "<group>"; };
@@ -2173,6 +2183,12 @@
 				04713EB41DC3562300667AF0 /* BatsmanVsBowlerTVCell.h */,
 				04713EB51DC3562300667AF0 /* BatsmanVsBowlerTVCell.m */,
 				04713EB61DC3562300667AF0 /* BatsmanVsBowlerTVCell.xib */,
+				04679C101DC8589500EB2CDF /* BowlerVsBatsmanVC.h */,
+				04679C111DC8589500EB2CDF /* BowlerVsBatsmanVC.m */,
+				04679C121DC8589500EB2CDF /* BowlerVsBatsmanVC.xib */,
+				04679C151DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.h */,
+				04679C161DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.m */,
+				04679C171DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.xib */,
 			);
 			name = ReportView;
 			sourceTree = "<group>";
@@ -2292,6 +2308,7 @@
 				24F96F881D2FC90500798A9D /* PenalityVC.xib in Resources */,
 				187CA6AA1D28CD7A005E3DCF /* FollowOn.xib in Resources */,
 				CEB2CC9F1DB8CC4B0053DA72 /* CommentaryVC.xib in Resources */,
+				04679C191DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.xib in Resources */,
 				047E52ED1D27D71F00D4CAC6 /* Other_WicketgridVC.xib in Resources */,
 				36A7E15A1DBB208E00C11C1E /* SpiderWagonReportVC.xib in Resources */,
 				18C3018C1DB8A221000E8272 /* PitchmapVC.xib in Resources */,
@@ -2314,6 +2331,7 @@
 				18674AC41D1A4F9600DB7C71 /* MatchResultListVC.xib in Resources */,
 				DCEFC8651D28B72C00451485 /* ChangeTossVC.xib in Resources */,
 				CEC858AE1D1557F6007F5384 /* BreakTableViewCell.xib in Resources */,
+				04679C141DC8589500EB2CDF /* BowlerVsBatsmanVC.xib in Resources */,
 				24E7B4B31D23884200EF0D55 /* DeclareInnings.xib in Resources */,
 				0481DD071D213B250084BFF7 /* PowerPlayVC.xib in Resources */,
 				CE00180B1CF42FA500668D8B /* Assets.xcassets in Resources */,
@@ -2399,6 +2417,7 @@
 				2461251D1D13C931004B85E7 /* RevisedTarget.m in Sources */,
 				18E394701DB7AA830014A5F5 /* ReportVC.m in Sources */,
 				18704EE41D1959B900996BF3 /* GetBestPlayerDetail.m in Sources */,
+				04679C131DC8589500EB2CDF /* BowlerVsBatsmanVC.m in Sources */,
 				18DE9F6A1DB608E9001013B6 /* ResultMatchCell.m in Sources */,
 				187952351D02AD28001A1224 /* FieldingFactorRecord.m in Sources */,
 				047669DD1D14229600572E39 /* PenaltyDetailsRecord.m in Sources */,
@@ -2482,6 +2501,7 @@
 				24A93A6E1D26365D00E02DAE /* GetPlayerDetailOnTimeOut.m in Sources */,
 				36E57AAC1DB5F8110012A1B6 /* FixtureReportRecord.m in Sources */,
 				1876251E1D1544CD009374F8 /* BattingSummaryDetailsForScoreBoard.m in Sources */,
+				04679C181DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.m in Sources */,
 				186E45511DC1CC6800BDE258 /* SessionReportRecord.m in Sources */,
 				188130401D0BF3ED00908F65 /* FetchSEPageLoadRecord.m in Sources */,
 				CEA2751B1D2A25DE007F6A28 /* PlayerInOutPushRecord.m in Sources */,

@@ -484,6 +484,10 @@ EndInnings *insertScoreCard;
 
 
 {
+    
+    BATTINGTEAMCODE = BATTINGTEAMCODE == nil ? TEAMCODE : BATTINGTEAMCODE;
+    BATSMANCODE = BATSMANCODE == nil ? strickerCode : BATSMANCODE;
+    
      DBManagerEndInnings *dbEndInnings = [[DBManagerEndInnings alloc]init];
     
     DBManagerInsertScoreEngine *dbInsertScoreEngine = [[DBManagerInsertScoreEngine alloc]init];

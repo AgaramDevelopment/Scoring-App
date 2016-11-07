@@ -150,7 +150,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BATTINGSUMMARY" :@"MSC251" :updateSQL];
+                NSString *updateSQLForOnline = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET RUNS = CASE WHEN (%@ = 0 AND %@ = 0 AND %@ = 0) THEN (RUNS - (%@ + %@)) ELSE (RUNS - %@) END,BALLS = CASE WHEN %@ = 0 THEN (BALLS - 1) ELSE BALLS END,ONES = CASE WHEN (%@ + %@ = 1) AND (%@ = 0 AND %@ = 0 AND %@ = 0) THEN (ONES - 1) ELSE ONES END,TWOS = CASE WHEN (%@ + %@ = 2) AND (%@ = 0 AND %@ = 0 AND %@ = 0) THEN (TWOS - 1) ELSE TWOS END,THREES = CASE WHEN (%@ + %@ = 3) AND (%@ = 0 AND %@ = 0 AND %@ = 0) THEN (THREES - 1) ELSE THREES END,FOURS = CASE WHEN (%@ = 1 AND %@ = 0 AND %@ = 0 AND %@ = 0) THEN (FOURS - 1) ELSE FOURS END,SIXES = CASE WHEN (%@ = 1 AND %@ = 0 AND %@ = 0 AND %@ = 0) THEN (SIXES - 1) ELSE SIXES END,DOTBALLS = CASE WHEN (%@ = 0 AND %@ = 0) THEN (DOTBALLS - 1) ELSE DOTBALLS END  WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@' AND INNINGSNO = '%@' AND BATSMANCODE = '%@'",F_WIDE,F_BYES,F_LEGBYES,F_RUNS,F_OVERTHROW,F_RUNS,F_WIDE,F_RUNS,F_OVERTHROW,F_WIDE,F_BYES,F_LEGBYES,F_RUNS,F_OVERTHROW,F_WIDE,F_BYES,F_LEGBYES,F_RUNS,F_OVERTHROW,F_WIDE,F_BYES,F_LEGBYES,F_ISFOUR,F_WIDE,F_BYES,F_LEGBYES,F_ISSIX,F_WIDE,F_BYES,F_LEGBYES,F_RUNS,F_WIDE, COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,F_STRIKERCODE];
+                
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BATTINGSUMMARY" :@"MSC251" :updateSQLForOnline];
                 return YES;
                 
             }
@@ -192,7 +194,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BATTINGSUMMARY" :@"MSC251" :updateSQL];
+                
+                NSString *updateSQLForOnline = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET WICKETSCORE = WICKETSCORE - (%@ - %@)	WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@'	AND INNINGSNO = '%@' AND CONVERT(NUMERIC(5,2),CONVERT(NVARCHAR,WICKETOVERNO) + '.' +CONVERT(NVARCHAR,WICKETBALLNO))  >= CONVERT(NUMERIC(5,2),CONVERT(NVARCHAR,%@) + '.' +CONVERT(NVARCHAR,%@))",O_RUNS,N_RUNS,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,F_OVERS,F_BALLS];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BATTINGSUMMARY" :@"MSC251" :updateSQLForOnline];
                 
                 return YES;
                 
@@ -232,7 +236,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"INNINGSSUMMARY" :@"MSC251" :updateSQL];
+                 NSString *updateSQLForOnline = [NSString stringWithFormat:@"UPDATE INNINGSSUMMARY SET BYES = BYES - (CASE WHEN %@ > 0 AND %@ > 0 THEN 0 ELSE %@ END),LEGBYES = LEGBYES - (CASE WHEN %@ > 0 AND %@ > 0 THEN 0 ELSE %@ END),NOBALLS = NOBALLS - (CASE	WHEN %@ > 0 AND %@ > 0 THEN %@ + %@ WHEN %@ > 0 AND %@ > 0 THEN %@ + %@ ELSE %@  END),WIDES = WIDES - (CASE WHEN %@ > 0 THEN %@ ELSE %@ END),PENALTIES = PENALTIES - %@, INNINGSTOTAL = INNINGSTOTAL - (%@ + (CASE WHEN %@ > 0 OR %@ > 0 OR %@ > 0 THEN 0 ELSE %@ END) + %@ + %@ + %@ + %@ + %@),INNINGSTOTALWICKETS = CASE WHEN (%@ = 1 AND '%@' <> 'MSC102') OR (%@ = 0 AND '%@' IN ('MSC107', 'MSC108', 'MSC133')) THEN (INNINGSTOTALWICKETS - 1) ELSE INNINGSTOTALWICKETS END WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@' AND INNINGSNO = '%@'",F_NOBALL,F_BYES,F_BYES,F_NOBALL,F_LEGBYES,F_LEGBYES,F_NOBALL,F_BYES,F_NOBALL,F_BYES,F_NOBALL,F_LEGBYES,F_NOBALL,F_LEGBYES,F_NOBALL,F_WIDE,F_WIDE,F_WIDE,F_PENALTY,F_RUNS,F_BYES,F_LEGBYES,F_WIDE,F_OVERTHROW,F_BYES,F_LEGBYES,F_NOBALL,F_WIDE,F_PENALTY,F_ISWICKET,F_WICKETTYPE,F_ISWICKET,F_WICKETTYPE,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"INNINGSSUMMARY" :@"MSC251" :updateSQLForOnline];
                 
                 return YES;
                 
@@ -1917,7 +1922,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE PENALTYDETAILS SET AWARDEDTOTEAMCODE = '%@',PENALTYRUNS = '%@', PENALTYTYPECODE = '%@', PENALTYREASONCODE = '%@' WHERE COMPETITIONCODE = '%@'AND MATCHCODE = '%@' AND INNINGSNO = '%@'AND BALLCODE = '%@'",AWARDEDTOTEAMCODE,PENALTYRUNS,PENALTYTYPECODE,PENALTYREASONCODE,COMPETITIONCODE,MATCHCODE,INNINGSNO,BALLCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE PENALTYDETAILS SET AWARDEDTOTEAMCODE = '%@',PENALTYRUNS = '%@', PENALTYTYPECODE = '%@', PENALTYREASONCODE = '%@' WHERE COMPETITIONCODE = '%@'AND MATCHCODE = '%@' AND INNINGSNO = '%@'AND BALLCODE = '%@'",AWARDEDTOTEAMCODE,PENALTYRUNS,(PENALTYTYPECODE == nil || [PENALTYTYPECODE isEqualToString:@"(null)"]) ?@"":PENALTYTYPECODE,PENALTYREASONCODE,COMPETITIONCODE,MATCHCODE,INNINGSNO,BALLCODE];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK){
             
@@ -1994,7 +1999,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO PENALTYDETAILS (COMPETITIONCODE,MATCHCODE,INNINGSNO,BALLCODE,PENALTYCODE,AWARDEDTOTEAMCODE,PENALTYRUNS,PENALTYTYPECODE,PENALTYREASONCODE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@')",COMPETITIONCODE,MATCHCODE,INNINGSNO,BALLCODE,PENALTYCODE,AWARDEDTOTEAMCODE,PENALTYRUNS,PENALTYTYPECODE,PENALTYREASONCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO PENALTYDETAILS (COMPETITIONCODE,MATCHCODE,INNINGSNO,BALLCODE,PENALTYCODE,AWARDEDTOTEAMCODE,PENALTYRUNS,PENALTYTYPECODE,PENALTYREASONCODE)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@')",COMPETITIONCODE,MATCHCODE,INNINGSNO,BALLCODE, (PENALTYCODE == nil ||[PENALTYCODE isEqualToString:@"(null)"] )?@"": PENALTYCODE,AWARDEDTOTEAMCODE,PENALTYRUNS,  (PENALTYTYPECODE == nil ||[PENALTYTYPECODE isEqualToString:@"(null)"] )?@"": PENALTYTYPECODE,PENALTYREASONCODE];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK){
             

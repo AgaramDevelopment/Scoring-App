@@ -71,6 +71,7 @@
 #import "FETCHSELASTINSTANCEDTLS.h"
 #import "BatsManINOUT.h"
 #import "CMPopTipView.h"
+#import "DBManagerCaptransactionslogEntry.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -14721,6 +14722,11 @@
                 
                 NSString *CompareErrorno=@"MOB0005";
                 if ([ErrorNoStr isEqualToString:CompareErrorno]) {
+                    
+                    
+                    DBManagerCaptransactionslogEntry *dBManagerCaptransactionslogEntry = [[DBManagerCaptransactionslogEntry alloc] init];
+                    [dBManagerCaptransactionslogEntry deactivateCaptransactionsLogEntryByMatchCode:_matchCode];
+
                     
                     UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"SYNC DATA COMPLETED. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                     [altert show];

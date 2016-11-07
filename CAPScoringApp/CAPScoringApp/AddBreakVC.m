@@ -87,6 +87,7 @@
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSString *MATCHDATE1 = [formatter stringFromDate:date];
     
+    ISINCLUDEDURATION=@"0";
 
     
     NSString *timeString=@"00:00:00";

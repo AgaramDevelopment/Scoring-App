@@ -77,7 +77,7 @@
 @property(nonatomic,strong)NSNumber *N_WICKETNO;
 @property(nonatomic,strong)NSString *N_WICKETTYPE;
 @property(nonatomic,strong)NSNumber *N_FIELDERCODE;
-@property(nonatomic,strong)NSNumber *BATTINGPOSITIONNO;
+//@property(nonatomic,strong)NSNumber *BATTINGPOSITIONNO;
 
 
 @property (strong, nonatomic) IBOutlet UILabel *WICKET_NO_LBL;
