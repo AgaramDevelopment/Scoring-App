@@ -143,7 +143,7 @@
 		1886718A1CFFF77E004DEDA0 /* AggressiveShotTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */; };
 		188767521D67355B00846C03 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188767511D67355B00846C03 /* CMPopTipView.m */; };
 		1892DC581DC762F3005EC9BD /* ManhattenWKTRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892DC571DC762F3005EC9BD /* ManhattenWKTRecord.m */; };
-		189F3B301DD04C9200D128D7 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 189F3B2F1DD04C9200D128D7 /* TNCA_DATABASE.sqlite */; };
+		189F3B331DD0B3E000D128D7 /* TNCA_DATABASE.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 189F3B311DD0B15800D128D7 /* TNCA_DATABASE.sqlite */; };
 		18AB07CF1D2A75C100AEEB1B /* EndSessionTVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 24A93A5A1D26344400E02DAE /* EndSessionTVC.m */; };
 		18AB07D01D2A75C100AEEB1B /* EndSession.m in Sources */ = {isa = PBXBuildFile; fileRef = DC2710671D25B9A40011C7B0 /* EndSession.m */; };
 		18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A93A5B1D26344400E02DAE /* EndSessionTVC.xib */; };
@@ -600,7 +600,7 @@
 		188767511D67355B00846C03 /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMPopTipView.m; path = SubClass/CMPopTipView/CMPopTipView.m; sourceTree = "<group>"; };
 		1892DC561DC762F3005EC9BD /* ManhattenWKTRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ManhattenWKTRecord.h; path = Resource/ManhattenWKTRecord/ManhattenWKTRecord.h; sourceTree = "<group>"; };
 		1892DC571DC762F3005EC9BD /* ManhattenWKTRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ManhattenWKTRecord.m; path = Resource/ManhattenWKTRecord/ManhattenWKTRecord.m; sourceTree = "<group>"; };
-		189F3B2F1DD04C9200D128D7 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
+		189F3B311DD0B15800D128D7 /* TNCA_DATABASE.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; name = TNCA_DATABASE.sqlite; path = Resource/TNCA_DATABASE.sqlite; sourceTree = "<group>"; };
 		18C301881DB8A221000E8272 /* PitchmapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchmapVC.h; path = SubClass/PitchView/PitchmapVC.h; sourceTree = "<group>"; };
 		18C301891DB8A221000E8272 /* PitchmapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PitchmapVC.m; path = SubClass/PitchView/PitchmapVC.m; sourceTree = "<group>"; };
 		18C3018A1DB8A221000E8272 /* PitchmapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PitchmapVC.xib; path = SubClass/PitchView/PitchmapVC.xib; sourceTree = "<group>"; };
@@ -1710,7 +1710,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
-				189F3B2F1DD04C9200D128D7 /* TNCA_DATABASE.sqlite */,
+				189F3B311DD0B15800D128D7 /* TNCA_DATABASE.sqlite */,
 				1892DC521DC76079005EC9BD /* ManhattenWktRecord */,
 				187A8B4B1DC660A200A5D31E /* ManhattanRecord */,
 				186E454B1DC1CBAC00BDE258 /* SessionRecord */,
@@ -2297,6 +2297,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				189F3B331DD0B3E000D128D7 /* TNCA_DATABASE.sqlite in Resources */,
 				CE2052A01D7E983900089EFE /* Main.storyboard in Resources */,
 				18DE9F6B1DB608E9001013B6 /* ResultMatchCell.xib in Resources */,
 				DCA67D521D34056A00982EF5 /* InningsDetailsVC.xib in Resources */,
@@ -2342,7 +2343,6 @@
 				CEB2CC9A1DB899C60053DA72 /* CommentaryTVC.xib in Resources */,
 				246125081D13C5D1004B85E7 /* RightSlideVC.xib in Resources */,
 				182294571DC367FC00B5F519 /* Manhattan.xib in Resources */,
-				189F3B301DD04C9200D128D7 /* TNCA_DATABASE.sqlite in Resources */,
 				18DE9F661DB60897001013B6 /* LiveMatchCell.xib in Resources */,
 				187621201D1D625A006E160F /* EndDayTVC.xib in Resources */,
 				1876210A1D1D3749006E160F /* EndDayVC.xib in Resources */,

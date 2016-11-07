@@ -46,6 +46,8 @@
                 <outlet property="dotball_Btn" destination="E1W-CZ-SaU" id="cBg-R5-Imh"/>
                 <outlet property="filter_Btn" destination="5j1-59-xdU" id="b17-3k-rSp"/>
                 <outlet property="filter_view" destination="9xh-8n-Xv9" id="tkV-EP-lD1"/>
+                <outlet property="inn1_btnWidth" destination="P3X-rq-G5F" id="c2g-dV-kWW"/>
+                <outlet property="inns2_btnWidth" destination="kYg-yr-r5K" id="VeG-Gg-sA1"/>
                 <outlet property="length_Lbl" destination="eDM-ms-Vpr" id="PHU-X3-EE4"/>
                 <outlet property="length_View" destination="bB8-7b-9jT" id="dNw-EE-uYV"/>
                 <outlet property="line_Vew" destination="9lw-UP-b2o" id="H1z-KU-1aS"/>
@@ -547,9 +549,13 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8rD-9w-ybE">
                             <rect key="frame" x="0.0" y="10" width="600" height="53"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaS-a1-cAj">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MaS-a1-cAj">
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.098039215686274508" alpha="0.24657866379310345" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="2JE-Lk-361"/>
+                                        <constraint firstAttribute="width" constant="150" id="P3X-rq-G5F"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
                                     <state key="normal" title="Inn 1">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -558,9 +564,13 @@
                                         <action selector="didClickInns1:" destination="-1" eventType="touchUpInside" id="K0g-dy-9nD"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KuF-Fq-N6N">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KuF-Fq-N6N">
                                     <rect key="frame" x="150" y="0.0" width="150" height="50"/>
                                     <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="50" id="O8C-wN-g0a"/>
+                                        <constraint firstAttribute="width" constant="150" id="kYg-yr-r5K"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
                                     <state key="normal" title="Inn 2">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -569,9 +579,13 @@
                                         <action selector="didClickInns2:" destination="-1" eventType="touchUpInside" id="2XU-SF-vON"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6t-m2-CH7">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b6t-m2-CH7">
                                     <rect key="frame" x="300" y="0.0" width="150" height="50"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.098039215686274508" alpha="0.25" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="150" id="Vo2-76-cZI"/>
+                                        <constraint firstAttribute="height" constant="50" id="eYL-Nv-Wrz"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
                                     <state key="normal" title="Inn 3">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -580,9 +594,13 @@
                                         <action selector="didClickInns3:" destination="-1" eventType="touchUpInside" id="95N-C7-4v9"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRS-vL-Xsz">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tRS-vL-Xsz">
                                     <rect key="frame" x="450" y="0.0" width="150" height="50"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.098039215686274508" alpha="0.25" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="150" id="oI1-MN-HGe"/>
+                                        <constraint firstAttribute="height" constant="50" id="qAm-a6-XOU"/>
+                                    </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
                                     <state key="normal" title="Inn 4">
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -594,6 +612,21 @@
                             </subviews>
                             <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstItem="tRS-vL-Xsz" firstAttribute="top" secondItem="8rD-9w-ybE" secondAttribute="top" id="5gk-oP-K47"/>
+                                <constraint firstAttribute="bottom" secondItem="MaS-a1-cAj" secondAttribute="bottom" constant="3" id="92K-nY-iK2"/>
+                                <constraint firstItem="tRS-vL-Xsz" firstAttribute="leading" secondItem="b6t-m2-CH7" secondAttribute="trailing" id="IAf-3L-d2E"/>
+                                <constraint firstItem="KuF-Fq-N6N" firstAttribute="leading" secondItem="MaS-a1-cAj" secondAttribute="trailing" id="ITf-Zq-VmR"/>
+                                <constraint firstItem="MaS-a1-cAj" firstAttribute="leading" secondItem="8rD-9w-ybE" secondAttribute="leading" id="J8s-Ou-m5x"/>
+                                <constraint firstItem="KuF-Fq-N6N" firstAttribute="leading" secondItem="MaS-a1-cAj" secondAttribute="trailing" id="MHS-f4-1xd"/>
+                                <constraint firstItem="tRS-vL-Xsz" firstAttribute="leading" secondItem="b6t-m2-CH7" secondAttribute="trailing" id="Qur-Ke-LFE"/>
+                                <constraint firstItem="b6t-m2-CH7" firstAttribute="leading" secondItem="KuF-Fq-N6N" secondAttribute="trailing" id="ReR-ay-FYs"/>
+                                <constraint firstAttribute="bottom" secondItem="tRS-vL-Xsz" secondAttribute="bottom" constant="3" id="blJ-Ja-bdC"/>
+                                <constraint firstAttribute="bottom" secondItem="b6t-m2-CH7" secondAttribute="bottom" constant="3" id="mFR-Lt-Lwq"/>
+                                <constraint firstItem="b6t-m2-CH7" firstAttribute="leading" secondItem="KuF-Fq-N6N" secondAttribute="trailing" id="mK3-Yn-KNu"/>
+                                <constraint firstItem="b6t-m2-CH7" firstAttribute="top" secondItem="8rD-9w-ybE" secondAttribute="top" id="sOA-NP-HAq"/>
+                                <constraint firstItem="MaS-a1-cAj" firstAttribute="top" secondItem="8rD-9w-ybE" secondAttribute="top" id="thu-hf-Ld3"/>
+                                <constraint firstItem="KuF-Fq-N6N" firstAttribute="top" secondItem="8rD-9w-ybE" secondAttribute="top" id="xVs-qO-K7h"/>
+                                <constraint firstAttribute="bottom" secondItem="KuF-Fq-N6N" secondAttribute="bottom" constant="3" id="yoX-0T-3Os"/>
                                 <constraint firstAttribute="height" constant="53" id="zXj-mU-R4t"/>
                             </constraints>
                         </view>

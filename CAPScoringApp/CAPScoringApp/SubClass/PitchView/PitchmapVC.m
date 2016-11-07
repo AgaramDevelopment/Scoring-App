@@ -164,9 +164,9 @@
         self.Inn3_Btn.hidden = YES;
         self.Inn4_Btn.hidden = YES;
         
-        self.inn1_btnWidth.constant =  (self.view.frame.size.width/2)+100;
-        self.inn1_btnYposition.constant = self.inn1_btnWidth.constant;
-        self.inns2_btnWidth.constant = (self.view.frame.size.width/2);
+        self.inn1_btnWidth.constant =  384; //(self.view.frame.size.width/2);
+        //self.inn1_btnYposition.constant = self.inn1_btnWidth.constant;
+        self.inns2_btnWidth.constant =  384; //(self.view.frame.size.width/2);
         
         
     }else if([self.matchTypecode isEqual:@"MSC115"] || [self.matchTypecode isEqual:@"MSC022"]){//ODI
@@ -174,8 +174,8 @@
         self.Inn2_Btn.hidden = NO;
         self.Inn3_Btn.hidden = YES;
         self.Inn4_Btn.hidden = YES;
-        //self.inn1_btnWidth.constant = self.view.frame.size.width/2;
-        //self.inns2_btnWidth.constant = self.view.frame.size.width/2;
+        self.inn1_btnWidth.constant =   384;   //self.view.frame.size.width/2;
+        self.inns2_btnWidth.constant =  384;      //self.view.frame.size.width/2;
 
         
     }else if([self.matchTypecode isEqual:@"MSC114"] || [self.matchTypecode isEqual:@"MSC023"]){//Test
@@ -237,7 +237,7 @@
         xposition = [objRecord.PMX2 intValue];
         yposition = [objRecord.PMY2 intValue];
         
-        if(!(xposition == 1 && yposition ==1)){
+        if(!(xposition == 1 && yposition == 1) && (xposition!=0 && yposition !=0)){
             
             Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+(xposition/1.2),yposition+(yposition/4),20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
