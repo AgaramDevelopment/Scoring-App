@@ -25,7 +25,9 @@
 @protocol MCBarChartViewDelegate <NSObject>
 
 @optional
-- (void)barChartView:(MCBarChartView *)barChartView didSelectBarAtIndex:(NSUInteger)index;
+- (void) barChartView:(MCBarChartView *)barChartView didSelectBarAtIndex:(NSUInteger)index;
+
+-(void) TooltipMethod :(UIButton *)selectwicket;
 
 - (CGFloat)barWidthInBarChartView:(MCBarChartView *)barChartView;
 
