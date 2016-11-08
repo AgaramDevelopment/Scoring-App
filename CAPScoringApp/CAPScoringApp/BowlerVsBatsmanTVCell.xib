@@ -1,18 +1,257 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="RAJDHANI-BOLD.TTF">
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+            <string>Rajdhani-Bold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BowlerVsBatsmanVC">
+            <connections>
+                <outlet property="bowl_vs_bats_tvcell" destination="KGk-i7-Jjw" id="bOz-0q-Dhq"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="KGk-i7-Jjw" customClass="BowlerVsBatsmanTVCell">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="batsman_cell" id="KGk-i7-Jjw" customClass="BowlerVsBatsmanTVCell">
+            <rect key="frame" x="0.0" y="0.0" width="768" height="41"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="768" height="40"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="00x-ZO-UsY">
+                        <rect key="frame" x="0.0" y="0.0" width="768" height="40"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bastsman" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCa-cD-M3J">
+                                <rect key="frame" x="8" y="10" width="160" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="160" id="bB9-s8-gkq"/>
+                                    <constraint firstAttribute="height" constant="20" id="xpa-Xk-2Y7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAb-W1-JlN">
+                                <rect key="frame" x="174" y="10" width="45" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="DRa-aG-9MO"/>
+                                    <constraint firstAttribute="height" constant="20" id="Xjc-gL-iNJ"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tfn-qo-KDR">
+                                <rect key="frame" x="263" y="10" width="34" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="34" id="qXz-dY-a09"/>
+                                    <constraint firstAttribute="height" constant="20" id="tkh-lQ-YWn"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CNx-bh-xm1">
+                                <rect key="frame" x="224" y="10" width="34" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="65N-hc-FMw"/>
+                                    <constraint firstAttribute="width" constant="34" id="AwC-cJ-AVE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uDq-oe-uUu">
+                                <rect key="frame" x="302" y="10" width="28" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="Bgk-gI-Mof"/>
+                                    <constraint firstAttribute="height" constant="20" id="GQ8-ol-S0d"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J4o-QB-bv2">
+                                <rect key="frame" x="335" y="10" width="28" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="UxJ-88-6PL"/>
+                                    <constraint firstAttribute="height" constant="20" id="ilo-6w-Shf"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h7K-6r-MI9">
+                                <rect key="frame" x="368" y="10" width="28" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="fK0-hw-Qlc"/>
+                                    <constraint firstAttribute="width" constant="28" id="hg1-QF-Akd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OcC-Gz-zq9">
+                                <rect key="frame" x="401" y="10" width="28" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="Jr0-in-Vmg"/>
+                                    <constraint firstAttribute="height" constant="20" id="ZTM-wa-fua"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B4" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPB-j9-10Q">
+                                <rect key="frame" x="434" y="10" width="30" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="4Lt-oY-yva"/>
+                                    <constraint firstAttribute="height" constant="20" id="JZJ-Qo-GQI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="B6's" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RoN-sq-Gl0">
+                                <rect key="frame" x="469" y="10" width="30" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="C2F-c0-KNH"/>
+                                    <constraint firstAttribute="width" constant="30" id="kLD-jO-je7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unc" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gFO-Ia-Z1V">
+                                <rect key="frame" x="504" y="10" width="28" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="28" id="MOQ-AX-E4s"/>
+                                    <constraint firstAttribute="height" constant="20" id="TEg-5b-JSU"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Btn" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hk6-ty-U9p">
+                                <rect key="frame" x="537" y="10" width="28" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Z9g-XQ-8G6"/>
+                                    <constraint firstAttribute="width" constant="28" id="leS-3q-xp4"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WTB" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OwR-YK-HWE">
+                                <rect key="frame" x="570" y="10" width="34" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="B14-WL-rji"/>
+                                    <constraint firstAttribute="width" constant="34" id="Ivl-Uc-BrS"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Wicket Type" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vbl-3t-u8p">
+                                <rect key="frame" x="609" y="10" width="87" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Ky5-Ik-n5N"/>
+                                    <constraint firstAttribute="width" constant="87" id="rIN-93-VU8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SR" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGl-Db-KR5">
+                                <rect key="frame" x="701" y="10" width="59" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Vdm-Mr-YDE"/>
+                                    <constraint firstAttribute="width" constant="59" id="dX4-Yb-R2H"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.15182692307692308" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="JCa-cD-M3J" secondAttribute="baseline" id="5f3-eE-Br9"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="Hk6-ty-U9p" secondAttribute="baseline" id="8GG-Dj-QmC"/>
+                            <constraint firstItem="oPB-j9-10Q" firstAttribute="leading" secondItem="OcC-Gz-zq9" secondAttribute="trailing" constant="5" id="9IO-Wi-33Y"/>
+                            <constraint firstItem="Hk6-ty-U9p" firstAttribute="leading" secondItem="gFO-Ia-Z1V" secondAttribute="trailing" constant="5" id="9v0-Yz-I6v"/>
+                            <constraint firstItem="RoN-sq-Gl0" firstAttribute="leading" secondItem="oPB-j9-10Q" secondAttribute="trailing" constant="5" id="AIN-oI-Asy"/>
+                            <constraint firstItem="gFO-Ia-Z1V" firstAttribute="leading" secondItem="RoN-sq-Gl0" secondAttribute="trailing" constant="5" id="DTX-sJ-tes"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="OcC-Gz-zq9" secondAttribute="baseline" id="IDU-oe-104"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="TGl-Db-KR5" secondAttribute="baseline" id="Iac-wh-7Jv"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="oPB-j9-10Q" secondAttribute="baseline" id="JBh-4e-agT"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="Vbl-3t-u8p" secondAttribute="baseline" id="Ky5-Zb-FGh"/>
+                            <constraint firstAttribute="width" constant="768" id="QrP-tO-pbs"/>
+                            <constraint firstItem="OwR-YK-HWE" firstAttribute="leading" secondItem="Hk6-ty-U9p" secondAttribute="trailing" constant="5" id="RYY-4z-LWy"/>
+                            <constraint firstItem="h7K-6r-MI9" firstAttribute="leading" secondItem="J4o-QB-bv2" secondAttribute="trailing" constant="5" id="S6x-es-lVb"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="BAb-W1-JlN" secondAttribute="baseline" id="UVw-1k-Cdj"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="uDq-oe-uUu" secondAttribute="baseline" id="Wn8-LQ-lQp"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="OwR-YK-HWE" secondAttribute="baseline" id="ZeK-8T-xyv"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="centerY" secondItem="00x-ZO-UsY" secondAttribute="centerY" id="Znj-uj-Bnq"/>
+                            <constraint firstItem="tfn-qo-KDR" firstAttribute="leading" secondItem="CNx-bh-xm1" secondAttribute="trailing" constant="5" id="aGr-6i-ZDT"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="J4o-QB-bv2" secondAttribute="baseline" id="dze-k4-pVl"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="RoN-sq-Gl0" secondAttribute="baseline" id="ebL-bV-og4"/>
+                            <constraint firstItem="TGl-Db-KR5" firstAttribute="leading" secondItem="Vbl-3t-u8p" secondAttribute="trailing" constant="5" id="fBT-RY-A3a"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="leading" secondItem="00x-ZO-UsY" secondAttribute="leading" constant="224" id="fDu-Ue-Rwr"/>
+                            <constraint firstAttribute="height" constant="40" id="hXX-5m-x7B"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="tfn-qo-KDR" secondAttribute="baseline" id="jBe-5G-4i0"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="h7K-6r-MI9" secondAttribute="baseline" id="kNa-Ym-NfY"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="baseline" secondItem="gFO-Ia-Z1V" secondAttribute="baseline" id="oO7-jb-TTw"/>
+                            <constraint firstItem="CNx-bh-xm1" firstAttribute="leading" secondItem="BAb-W1-JlN" secondAttribute="trailing" constant="5" id="sPQ-1h-TvX"/>
+                            <constraint firstItem="uDq-oe-uUu" firstAttribute="leading" secondItem="tfn-qo-KDR" secondAttribute="trailing" constant="5" id="slD-CY-yvc"/>
+                            <constraint firstItem="OcC-Gz-zq9" firstAttribute="leading" secondItem="h7K-6r-MI9" secondAttribute="trailing" constant="5" id="wLj-V2-QP3"/>
+                            <constraint firstItem="J4o-QB-bv2" firstAttribute="leading" secondItem="uDq-oe-uUu" secondAttribute="trailing" constant="5" id="xsb-Ny-lTx"/>
+                            <constraint firstItem="BAb-W1-JlN" firstAttribute="leading" secondItem="JCa-cD-M3J" secondAttribute="trailing" constant="6" id="xsf-1J-HaD"/>
+                            <constraint firstItem="Vbl-3t-u8p" firstAttribute="leading" secondItem="OwR-YK-HWE" secondAttribute="trailing" constant="5" id="z9b-Mh-FgA"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="00x-ZO-UsY" secondAttribute="trailing" id="VRJ-Jb-XoL"/>
+                    <constraint firstItem="00x-ZO-UsY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="fVK-p6-295"/>
+                    <constraint firstItem="00x-ZO-UsY" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="mEz-hD-cSe"/>
+                    <constraint firstAttribute="bottom" secondItem="00x-ZO-UsY" secondAttribute="bottom" id="yzC-aJ-40A"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="lbl_b4" destination="oPB-j9-10Q" id="iST-ms-ym2"/>
+                <outlet property="lbl_b6" destination="RoN-sq-Gl0" id="oIk-kV-hF5"/>
+                <outlet property="lbl_balls" destination="CNx-bh-xm1" id="Djm-RC-SCc"/>
+                <outlet property="lbl_btn" destination="Hk6-ty-U9p" id="bsQ-hv-smv"/>
+                <outlet property="lbl_name" destination="JCa-cD-M3J" id="LmL-Mp-6nh"/>
+                <outlet property="lbl_ones" destination="J4o-QB-bv2" id="Ndj-HK-Va6"/>
+                <outlet property="lbl_runs" destination="tfn-qo-KDR" id="09R-f1-fPg"/>
+                <outlet property="lbl_sr" destination="TGl-Db-KR5" id="6oy-Er-STd"/>
+                <outlet property="lbl_team_name" destination="BAb-W1-JlN" id="Zlg-oB-VWi"/>
+                <outlet property="lbl_threes" destination="OcC-Gz-zq9" id="LBt-5Z-gfP"/>
+                <outlet property="lbl_twos" destination="h7K-6r-MI9" id="dy2-Oq-VRJ"/>
+                <outlet property="lbl_unc" destination="gFO-Ia-Z1V" id="otE-eC-cpl"/>
+                <outlet property="lbl_wicket_type" destination="Vbl-3t-u8p" id="XG1-IN-x0m"/>
+                <outlet property="lbl_wtb" destination="OwR-YK-HWE" id="hvz-2e-7cj"/>
+                <outlet property="lbl_zeros" destination="uDq-oe-uUu" id="7H1-kC-pRF"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

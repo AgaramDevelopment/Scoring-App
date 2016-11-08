@@ -20,5 +20,6 @@
 -(NSMutableArray *)retrieveCommentaryData: (NSString *) matchCode : (NSString *) inningsNo ;
 -(NSMutableArray *)retrieveBatVsBowlBowlersList: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo;
 -(NSMutableArray *)retrieveBatVsBowlBatsmanList: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo;
-
+-(NSMutableArray *)retrieveBowVsBatsBowlersList: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo;
+-(NSMutableArray *)retrieveBowVsBatsBatsmanList: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo;
 @end

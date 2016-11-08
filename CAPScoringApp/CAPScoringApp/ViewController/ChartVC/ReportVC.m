@@ -14,6 +14,7 @@
 #import "SessionReportVC.h"
 #import "SectorWagonReportVC.h"
 #import "BatsmanVsBowlerVC.h"
+#import "BowlerVsBatsmanVC.h"
 #import "Manhattan.h"
 
 @interface ReportVC ()
@@ -24,6 +25,7 @@
     SpiderWagonReportVC *spiderView;
     SectorWagonReportVC *sectorView;
     BatsmanVsBowlerVC *batsmanVsBowlerVC;
+    BowlerVsBatsmanVC *bowlerVsBatsmanVC;
     SessionReportVC * SessionReportvc;
     Manhattan * objManhattan;
 }
@@ -108,7 +110,7 @@
     else if(objBtn.tag == 2)
     {
          NSLog(@"%d",objBtn.tag);
-        
+        [self setBowlerVsBatsmanView];
         
     }
     else if(objBtn.tag == 3)
@@ -256,6 +258,21 @@
     batsmanVsBowlerVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:batsmanVsBowlerVC.view];
 }
+
+-(void) setBowlerVsBatsmanView{
+    bowlerVsBatsmanVC = [[BowlerVsBatsmanVC alloc]initWithNibName:@"BowlerVsBatsmanVC" bundle:nil];
+    bowlerVsBatsmanVC.matchCode = self.matchCode;
+    bowlerVsBatsmanVC.matchTypeCode =self.matchTypeCode;
+    bowlerVsBatsmanVC.compititionCode = self.competitionCode;
+    bowlerVsBatsmanVC.fstInnShortName = self.fstInnShortName;
+    bowlerVsBatsmanVC.secInnShortName = self.secInnShortName;
+    bowlerVsBatsmanVC.thrdInnShortName = self.thrdInnShortName;
+    bowlerVsBatsmanVC.frthInnShortName = self.frthInnShortName;
+    
+    bowlerVsBatsmanVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:bowlerVsBatsmanVC.view];
+}
+
 
 
 
