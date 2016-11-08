@@ -8,6 +8,7 @@
 
 #import "MCBarChartView.h"
 #import "MCChartInformationView.h"
+#import "ManhattenWKTRecord.h"
 
 #define RGBA(r,g,b,a)   [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 #define RGB(r,g,b)      RGBA(r,g,b,1.0f)
@@ -168,7 +169,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
 - (void)reloadChartDataSource {
     _cachedMaxHeight = kChartViewUndefinedCachedHeight;
     _cachedMinHeight = kChartViewUndefinedCachedHeight;
-    
+
     _sections = 1;
     if ([self.dataSource respondsToSelector:@selector(numberOfSectionsInBarChartView:)]) {
         _sections = [self.dataSource numberOfSectionsInBarChartView:self];
@@ -301,18 +302,6 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                 
                 [self addSubview:over_lbl];
 
-                
-               // NSString *information = [self.delegate barChartView:self informationOfBarInSection:section index:index];
-//                if (information) {
-//                    MCChartInformationView *informationView = [[MCChartInformationView alloc] initWithText:information];
-//                    informationView.center = CGPointMake(xOffset, chartYOffset - height - CGRectGetHeight(informationView.bounds)/2);
-//                    informationView.alpha = 0.0;
-//                    [_scrollView addSubview:informationView];
-                
-//                    [UIView animateWithDuration:0.5 delay:delay options:UIViewAnimationOptionCurveEaseInOut animations:^{
-//                        informationView.alpha = 1.0;
-//                    } completion:nil];
-                //}
             }
             
             xOffset += _barWidth + (index == array.count - 1 ? 0 : _paddingBar);
@@ -321,15 +310,40 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
         
         //create ball;
         
-        
         if ([self.delegate respondsToSelector:@selector(barChartView:titleOfBarInSection:)]) {
             UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(xSection - _paddingSection/2, _chartHeight + BAR_CHART_TOP_PADDING, xOffset - xSection + _paddingSection, BAR_CHART_TEXT_HEIGHT)];
             textLabel.textColor = _colorOfXText;
             textLabel.textAlignment = NSTextAlignmentCenter;
             textLabel.font = [UIFont systemFontOfSize:14];
             textLabel.numberOfLines = 0;
+            
             textLabel.text = [self.dataSource barChartView:self titleOfBarInSection:section];
             [_scrollView addSubview:textLabel];
+            
+            NSMutableArray * wicket =[self.delegate barChartView:self informationOfWicketInSection:section];
+            
+            for (int i=0; wicket.count > i; i++) {
+                
+                ManhattenWKTRecord * objManhattanRecord =(ManhattenWKTRecord *)[wicket objectAtIndex:i];
+                
+                if([textLabel.text isEqualToString:objManhattanRecord.wicketoverno])
+                {
+                if(![objManhattanRecord.wicketno isEqualToString:@"0"] && objManhattanRecord.wicketno!= nil)
+                {
+                    UIButton * wicket_Btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+                
+                    wicket_Btn.center = CGPointMake(xOffset-25, chartYOffset - [objManhattanRecord.Run floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2);
+                    [wicket_Btn setImage:[UIImage imageNamed:@"ballImg"] forState:UIControlStateNormal];
+                   // wicket_Btn.imageEdgeInsets = UIEdgeInsetsMake(0,0,0,0);
+                    wicket_Btn.alpha = 0.0;
+                    [_scrollView addSubview:wicket_Btn];
+                    
+                    [UIView animateWithDuration:0.5 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                        wicket_Btn.alpha = 1.0;
+                    } completion:nil];
+                }
+            }
+            }
         }
         xOffset += _paddingSection;
         xSection = xOffset;

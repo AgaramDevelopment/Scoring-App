@@ -60,7 +60,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT  MATCHCODE, TABLENAME,SCRIPTTYPE,SCRIPTDATA,SCRIPTSTATUS,SEQNO FROM  captransactionslogentry WHERE SCRIPTSTATUS  = 'MSC247'"];
+        NSString *query=[NSString stringWithFormat:@"SELECT  MATCHCODE, TABLENAME,SCRIPTTYPE,SCRIPTDATA,SCRIPTSTATUS,SEQNO FROM  captransactionslogentry WHERE SCRIPTSTATUS  = 'MSC247'   ORDER BY SEQNO LIMIT 100 "];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -73,6 +73,68 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.SCRIPTSTATUS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,4)];
                 record.SEQNO =[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement,5)];
                 [transactionArray addObject:[record CaptransactionslogEntryRecordDictionary]];
+                
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        
+        
+        sqlite3_close(dataBase);
+    }
+    return transactionArray;
+    
+}
+
+
+-(NSMutableArray *) deactivateCaptransactionsLogEntryByMatchCode : (NSString *) matchCode
+{
+    NSMutableArray *transactionArray=[[NSMutableArray alloc]init];
+    
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"UPDATE CAPTRANSACTIONSLOGENTRY SET SCRIPTSTATUS = 'MSC249' WHERE MATCHCODE  = '%@'",matchCode];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        
+        
+        sqlite3_close(dataBase);
+    }
+    return transactionArray;
+    
+}
+
+
+-(NSMutableArray *) deactivateCaptransactionslogentry
+{
+    NSMutableArray *transactionArray=[[NSMutableArray alloc]init];
+    
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"UPDATE CAPTRANSACTIONSLOGENTRY SET SCRIPTSTATUS = 'MSC249' WHERE SCRIPTSTATUS  = 'MSC247'   ORDER BY SEQNO LIMIT 100 "];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+               
                 
             }
             sqlite3_reset(statement);

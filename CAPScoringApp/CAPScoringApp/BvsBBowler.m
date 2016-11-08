@@ -26,5 +26,10 @@
 @synthesize wtb;
 @synthesize bowlerCode;
 @synthesize strickerCode;
+@synthesize sr;
+@synthesize fours;
+@synthesize fives;
+@synthesize sixes;
+@synthesize sevens;
 
 @end
