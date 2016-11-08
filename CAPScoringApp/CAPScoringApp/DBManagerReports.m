@@ -594,7 +594,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                 record.strickerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
                 record.bowlerCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                record.name=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record.name=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
                 record.teamName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
                 record.wicketType=[self getValueByNull:statement :9];
                 record.balls=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
@@ -608,7 +608,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.uncomfort=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 22)];
                 record.beaten=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 23)];
                 record.wtb=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 24)];
-                
+                record.sr=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 25)];
+
                 
                 
                 [eventArray addObject:record];
