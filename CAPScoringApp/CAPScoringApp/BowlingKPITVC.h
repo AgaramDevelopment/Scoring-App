@@ -28,4 +28,5 @@
 @property (strong, nonatomic) IBOutlet UILabel *lbl_b4_per;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_b6_per;
 
+
 @end

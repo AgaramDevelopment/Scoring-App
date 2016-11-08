@@ -16,6 +16,7 @@
 #import "BatsmanVsBowlerVC.h"
 #import "BowlerVsBatsmanVC.h"
 #import "Manhattan.h"
+#import "BowlingKPIVC.h"
 
 @interface ReportVC ()
 {
@@ -28,6 +29,7 @@
     BowlerVsBatsmanVC *bowlerVsBatsmanVC;
     SessionReportVC * SessionReportvc;
     Manhattan * objManhattan;
+    BowlingKPIVC * bowlingKpiView;
 }
 
 @end
@@ -174,7 +176,9 @@
     }
     else if(objBtn.tag == 10)
     {
+        
          NSLog(@"%d",objBtn.tag);
+        [self setBowlingKpi];
     }
     else if(objBtn.tag == 11)
     {
@@ -318,7 +322,30 @@
     [self.view addSubview:sectorView.view];
     
 }
+
+
+
+-(void) setBowlingKpi{
     
+    bowlingKpiView = [[BowlingKPIVC alloc]initWithNibName:@"BowlingKPIVC" bundle:nil];
+    bowlingKpiView.matchCode = self.matchCode;
+    bowlingKpiView.compititionCode = self.competitionCode;
+    bowlingKpiView.matchTypeCode = self.matchTypeCode;
+    
+    
+    bowlingKpiView.fstInnShortName = self.fstInnShortName;
+    bowlingKpiView.secInnShortName = self.secInnShortName;
+    bowlingKpiView.thrdInnShortName = self.thrdInnShortName;
+    bowlingKpiView.frthInnShortName = self.frthInnShortName;
+    
+    bowlingKpiView.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    
+    //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:bowlingKpiView.view];
+
+    
+    
+}
     @end
 
 
