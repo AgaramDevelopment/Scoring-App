@@ -29,6 +29,12 @@
     int Run4Count;
     int Run6Count;
     
+    int ones;
+    int twos;
+    int threes;
+    int fours;
+    int sixes;
+    int onesq;
     
     
     
@@ -51,6 +57,17 @@
     UILabel * lbl_cover_per;
     UILabel * lbl_point_per;
     UILabel * lbl_Thirdman_per;
+    
+    
+    UILabel * lbl_fineleg_count;
+    UILabel * lbl_squareleg_count;
+    UILabel * lbl_midWicket_count;
+    UILabel * lbl_longon_count;
+    UILabel * lbl_longoff_count;
+    UILabel * lbl_cover_count;
+    UILabel * lbl_point_count;
+    UILabel * lbl_Thirdman_count;
+    
     
     
     int ThirdmanCountRun;
@@ -84,7 +101,20 @@
 @property (nonatomic,strong) NSString *selectOnSide;
 @property (nonatomic,strong) NSString *teamBcode;
 @property (nonatomic,strong) NSString *totalRuns;
+@property (nonatomic,assign) NSNumber *Runs;
 @property (nonatomic,assign) NSNumber *tRuns;
+
+
+
+@property (nonatomic,strong) NSString *fineLegRuns;
+@property (nonatomic,strong) NSString *squareLegRuns;
+@property (nonatomic,strong) NSString *midWktRuns;
+@property (nonatomic,strong) NSString *longOnRuns;
+@property (nonatomic,strong) NSString *longOffRuns;
+@property (nonatomic,strong) NSString *coverRuns;
+@property (nonatomic,strong) NSString *pointRuns;
+@property (nonatomic,strong) NSString *thirdManRuns;
+
 
 @end
 
@@ -616,7 +646,7 @@
         
        
         
-        fineleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(320,70,200,35)];
+        fineleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(320,60,200,35)];
         fineleg_lbl.textColor=[UIColor whiteColor];
         //fineleg_lbl.text =[NSString stringWithFormat:@"%d",finelegRun];
         fineleg_lbl.text =[NSString stringWithFormat:@"%d %@ %d %@",finelegRun,@"RUNS", finelegCount,@"BALLS"];
@@ -629,10 +659,24 @@
         
         float finelegper = (_tRuns.intValue != 0) ? ((float)(finelegRun) / ((float)([_tRuns intValue])/100)) : 0 ;
         
-        lbl_fineleg_per=[[UILabel alloc]initWithFrame:CGRectMake(350,75,70, 70)];
+        lbl_fineleg_per=[[UILabel alloc]initWithFrame:CGRectMake(350,65,70, 70)];
         lbl_fineleg_per.textColor=[UIColor whiteColor];
         lbl_fineleg_per.text =[NSString stringWithFormat:@"%.2f %@",finelegper,@"%"];
         [self.img_sector addSubview:lbl_fineleg_per];
+        
+        if(lbl_fineleg_count !=nil)
+        {
+            [lbl_fineleg_count removeFromSuperview];
+        }
+        
+        lbl_fineleg_count =[[UILabel alloc]initWithFrame:CGRectMake(320,68,130,110)];
+        lbl_Thirdman_count.lineBreakMode = NSLineBreakByClipping;
+        lbl_Thirdman_count.numberOfLines = 10;
+        lbl_fineleg_count.textColor=[UIColor whiteColor];
+        lbl_fineleg_count.text =[NSString stringWithFormat:@"%@",_fineLegRuns];
+        [self.img_sector addSubview:lbl_fineleg_count];
+        
+        
         
     }
     else if([sectorwognwheelcode isEqualToString:@"MDT037"])//Square
@@ -698,7 +742,17 @@
         lbl_squareleg_per.text =[NSString stringWithFormat:@"%.2f %@",squarelegper,@"%"];
         [self.img_sector addSubview:lbl_squareleg_per];
         
-        
+        if(lbl_squareleg_count !=nil)
+        {
+            [lbl_squareleg_count removeFromSuperview];
+        }
+        lbl_squareleg_count =[[UILabel alloc]initWithFrame:CGRectMake(425,217,130,70)];
+        lbl_squareleg_count.lineBreakMode = NSLineBreakByWordWrapping;
+        lbl_squareleg_count.numberOfLines = 2;
+        lbl_squareleg_count.textColor=[UIColor whiteColor];
+        //lbl_squareleg_count.text =[NSString stringWithFormat:@"1sx %d, 2sx %d, 3sx %d, 4sx %d, 6sx %d",ones,twos,threes,fours,sixes];
+        lbl_squareleg_count.text =[NSString stringWithFormat:@"%@",_squareLegRuns];
+        [self.img_sector addSubview:lbl_squareleg_count];
         
     }
     else if([sectorwognwheelcode isEqualToString:@"MDT038"])//Mid Wkt
@@ -747,7 +801,7 @@
         }
         
         
-        midWicket_lbl=[[UILabel alloc]initWithFrame:CGRectMake(430,360,200, 35)];
+        midWicket_lbl=[[UILabel alloc]initWithFrame:CGRectMake(430,330,200, 35)];
         midWicket_lbl.textColor=[UIColor whiteColor];
         midWicket_lbl.text = [NSString stringWithFormat:@"%d %@ %d %@",midWicketRun,@"RUNS", midWicketCount,@"BALLS"];
         
@@ -761,12 +815,26 @@
         
         float midWktPer = (_tRuns.intValue != 0) ? ((float)(midWicketRun) / ((float)([_tRuns intValue])/100)) : 0 ;
         
-        lbl_midWicket_per=[[UILabel alloc]initWithFrame:CGRectMake(450,365,200,70)];
+        lbl_midWicket_per=[[UILabel alloc]initWithFrame:CGRectMake(455,335,200,70)];
         lbl_midWicket_per.textColor=[UIColor whiteColor];
         lbl_midWicket_per.text =[NSString stringWithFormat:@"%.2f %@",midWktPer,@"%"];
         [self.img_sector addSubview:lbl_midWicket_per];
         
 
+        if(lbl_midWicket_count !=nil)
+        {
+            [lbl_midWicket_count removeFromSuperview];
+        }
+        
+        lbl_midWicket_count =[[UILabel alloc]initWithFrame:CGRectMake(440,345,130,110)];
+        lbl_midWicket_count.lineBreakMode = NSLineBreakByClipping;
+        lbl_midWicket_count.numberOfLines = 10;
+        lbl_midWicket_count.textColor=[UIColor whiteColor];
+        
+        //lbl_midWicket_count.text =[NSString stringWithFormat:@"1sx %d, 2sx %d, 3sx %d, 4sx %d, 6sx %d",ones,twos,threes,fours,sixes];
+        lbl_midWicket_count.text =[NSString stringWithFormat:@"%@",_midWktRuns];
+        [self.img_sector addSubview:lbl_midWicket_count];
+        
         
     }
     else if([sectorwognwheelcode isEqualToString:@"MDT039"])//Long on
@@ -812,7 +880,7 @@
             [longon_lbl removeFromSuperview];
         }
         
-        longon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(370,490,200, 35)];
+        longon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(305,435,200,35)];
         longon_lbl.textColor=[UIColor whiteColor];
         longon_lbl.text = [NSString stringWithFormat:@"%d %@ %d %@",longonRun,@"RUNS", longonCount,@"BALLS"];
         [self.img_sector addSubview:longon_lbl];
@@ -825,10 +893,25 @@
         
         float longOnPer = (_tRuns.intValue != 0) ? ((float)(longonRun) / ((float)([_tRuns intValue])/100)) : 0 ;
         
-        lbl_longon_per=[[UILabel alloc]initWithFrame:CGRectMake(360,495,200,70)];
+        lbl_longon_per=[[UILabel alloc]initWithFrame:CGRectMake(330,440,200,70)];
         lbl_longon_per.textColor=[UIColor whiteColor];
         lbl_longon_per.text =[NSString stringWithFormat:@"%.2f %@",longOnPer,@"%"];
         [self.img_sector addSubview:lbl_longon_per];
+        
+        if(lbl_longon_count !=nil)
+        {
+            [lbl_longon_count removeFromSuperview];
+        }
+        
+        
+        lbl_longon_count =[[UILabel alloc]initWithFrame:CGRectMake(305,450,140,110)];
+        lbl_longon_count.lineBreakMode = NSLineBreakByClipping;
+        lbl_longon_count.numberOfLines = 10;
+        lbl_longon_count.textColor=[UIColor whiteColor];
+        
+        //lbl_longon_count.text =[NSString stringWithFormat:@"1sx %d, 2sx %d, 3sx %d, 4sx %d, 6sx %d",ones,twos,threes,fours,sixes];
+        lbl_longon_count.text =[NSString stringWithFormat:@"%@",_longOnRuns];
+        [self.img_sector addSubview:lbl_longon_count];
         
         
     }
@@ -875,7 +958,7 @@
             [longoff_lbl removeFromSuperview];
         }
         
-        longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(160,490,200, 35)];
+        longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(160,450,200, 35)];
         longoff_lbl.textColor=[UIColor whiteColor];
         longoff_lbl.text = [NSString stringWithFormat:@"%d %@ %d %@",longoffRun,@"RUNS", longoffCount,@"BALLS"];
         [self.img_sector addSubview:longoff_lbl];
@@ -885,13 +968,28 @@
             [lbl_longoff_per removeFromSuperview];
         }
         
-        float longOffPer = (_tRuns.intValue != 0) ? ((float)(longoffRun) / ((float)([_tRuns intValue])/100)) : 0 ;
+        float longOffPer = (_tRuns.intValue != 0) ? ((float)(longoffRun) / ((float)([_tRuns intValue])/100)) : 0;
         
-        lbl_longoff_per=[[UILabel alloc]initWithFrame:CGRectMake(190,495,200,70)];
+        lbl_longoff_per=[[UILabel alloc]initWithFrame:CGRectMake(190,455,200,70)];
         lbl_longoff_per.textColor=[UIColor whiteColor];
         lbl_longoff_per.text =[NSString stringWithFormat:@"%.2f %@",longOffPer,@"%"];
         [self.img_sector addSubview:lbl_longoff_per];
 
+        if(lbl_longoff_count !=nil)
+        {
+            [lbl_longoff_count removeFromSuperview];
+        }
+        
+        lbl_longoff_count =[[UILabel alloc]initWithFrame:CGRectMake(160,470,140,110)];
+        lbl_longoff_count.lineBreakMode = NSLineBreakByClipping;
+        lbl_longoff_count.numberOfLines = 10;
+        lbl_longoff_count.textColor=[UIColor whiteColor];
+        
+        //lbl_longoff_count.text =[NSString stringWithFormat:@"1sx %d, 2sx %d, 3sx %d, 4sx %d, 6sx %d",ones,twos,threes,fours,sixes];
+        lbl_longoff_count.text =[NSString stringWithFormat:@"%@",_longOffRuns];
+        [self.img_sector addSubview:lbl_longoff_count];
+        
+       
         
         
     }
@@ -940,7 +1038,7 @@
             [cover_lbl removeFromSuperview];
         }
         
-        cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(40,350,200, 35)];
+        cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(35,320,200, 35)];
         cover_lbl.textColor=[UIColor whiteColor];
        cover_lbl.text =[NSString stringWithFormat:@"%d %@ %d %@",coverRun,@"RUNS", coverCount,@"BALLS"];
         [self.img_sector addSubview:cover_lbl];
@@ -952,11 +1050,24 @@
         
         float coverPer = (_tRuns.intValue != 0) ? ((float)(coverRun) / ((float)([_tRuns intValue])/100)) : 0 ;
         
-        lbl_cover_per=[[UILabel alloc]initWithFrame:CGRectMake(50,350,200,70)];
+        lbl_cover_per=[[UILabel alloc]initWithFrame:CGRectMake(50,325,200,70)];
         lbl_cover_per.textColor=[UIColor whiteColor];
         lbl_cover_per.text =[NSString stringWithFormat:@"%.2f %@",coverPer,@"%"];
         [self.img_sector addSubview:lbl_cover_per];
+        
+        if(lbl_cover_count !=nil)
+        {
+            [lbl_cover_count removeFromSuperview];
+        }
 
+        lbl_cover_count =[[UILabel alloc]initWithFrame:CGRectMake(35,335,140,110)];
+        lbl_cover_count.lineBreakMode = NSLineBreakByClipping;
+        lbl_cover_count.numberOfLines = 10;
+        lbl_cover_count.textColor=[UIColor whiteColor];
+        //lbl_cover_count.text =[NSString stringWithFormat:@"1sx %d, 2sx %d, 3sx %d, 4sx %d, 6sx %d",ones,twos,threes,fours,sixes];
+        lbl_cover_count.text =[NSString stringWithFormat:@"%@",_coverRuns];
+        [self.img_sector addSubview:lbl_cover_count];
+        
         
         
     }
@@ -1008,7 +1119,7 @@
         }
         
         
-        point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,200,200, 35)];
+        point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,180,200, 35)];
         point_lbl.textColor=[UIColor whiteColor];
         point_lbl.text =[NSString stringWithFormat:@"%d %@ %d %@",pointRun,@"RUNS", pointCount,@"BALLS"];
         [self.img_sector addSubview:point_lbl];
@@ -1021,10 +1132,23 @@
         
         float pointPer = (_tRuns.intValue != 0) ? ((float)(pointRun) / ((float)([_tRuns intValue])/100)) : 0 ;
         
-        lbl_point_per=[[UILabel alloc]initWithFrame:CGRectMake(60,205,200,70)];
+        lbl_point_per=[[UILabel alloc]initWithFrame:CGRectMake(60,185,200,70)];
         lbl_point_per.textColor=[UIColor whiteColor];
         lbl_point_per.text =[NSString stringWithFormat:@"%.2f %@",pointPer,@"%"];
         [self.img_sector addSubview:lbl_point_per];
+        
+        
+        if(lbl_point_count !=nil)
+        {
+            [lbl_point_count removeFromSuperview];
+        }
+        lbl_point_count =[[UILabel alloc]initWithFrame:CGRectMake(50,197,140,110)];
+        lbl_point_count.lineBreakMode = NSLineBreakByClipping;
+        lbl_point_count.numberOfLines = 10;
+        lbl_point_count.textColor=[UIColor whiteColor];
+        //lbl_point_count.text =[NSString stringWithFormat:@"1sx %d, 2sx %d, 3sx %d, 4sx %d, 6sx %d",ones,twos,threes,fours,sixes];
+         lbl_point_count.text =[NSString stringWithFormat:@"%@",_pointRuns];
+        [self.img_sector addSubview:lbl_point_count];
         
     }
     else if([sectorwognwheelcode isEqualToString:@"MDT044"])//Third man
@@ -1080,7 +1204,7 @@
        
         
         
-        Thirdman_lbl=[[UILabel alloc]initWithFrame:CGRectMake(140,70,200,35)];
+        Thirdman_lbl=[[UILabel alloc]initWithFrame:CGRectMake(140,60,200,35)];
         Thirdman_lbl.textColor=[UIColor whiteColor];
         Thirdman_lbl.text =[NSString stringWithFormat:@"%d %@ %d %@",ThirdmanCountRun,@"RUNS", ThirdmanCount,@"BALLS"];
         [self.img_sector addSubview:Thirdman_lbl];
@@ -1093,18 +1217,57 @@
         
         float thirdmanper = (_tRuns.intValue != 0) ? ((float)(ThirdmanCountRun) / ((float)([_tRuns intValue])/100)) : 0 ;
         
-        lbl_Thirdman_per=[[UILabel alloc]initWithFrame:CGRectMake(160,80,200, 70)];
+        lbl_Thirdman_per=[[UILabel alloc]initWithFrame:CGRectMake(165,65,200, 70)];
         lbl_Thirdman_per.textColor=[UIColor whiteColor];
         lbl_Thirdman_per.text =[NSString stringWithFormat:@"%.2f %@",thirdmanper,@"%"];
         [self.img_sector addSubview:lbl_Thirdman_per];
+        
+        if(lbl_Thirdman_count !=nil)
+        {
+            [lbl_Thirdman_count removeFromSuperview];
+        }
+        
+        lbl_Thirdman_count =[[UILabel alloc]initWithFrame:CGRectMake(140,75,130,110)];
+        lbl_Thirdman_count.lineBreakMode = NSLineBreakByClipping;
+        lbl_Thirdman_count.numberOfLines = 10;
+        lbl_Thirdman_count.textColor=[UIColor whiteColor];
+        
+        //lbl_Thirdman_count.text =[NSString stringWithFormat:@"1sx %d, 2sx %d, 3sx %d, 4sx %d, 6sx %d",ones,twos,threes,fours,sixes];
+        lbl_Thirdman_count.text =[NSString stringWithFormat:@"%@",_thirdManRuns];
+        [self.img_sector addSubview:lbl_Thirdman_count];
 
         
     }
 }
 
 -(void) displayRuns {
+    // 1,2,3,b4,b6
+    int fineLegArray[] ={0,0,0,0,0};
+    int squareLegArray[] ={0,0,0,0,0};
+    int midWktArray[] ={0,0,0,0,0};
+    int longOnArray[] ={0,0,0,0,0};
+    int longOffArray[] ={0,0,0,0,0};
+    int coversArray[] ={0,0,0,0,0};
+    int pointArray[] ={0,0,0,0,0};
+    int thirdManArray[] ={0,0,0,0,0};
+
+
+//    NSArray * fineLegArray = @[@0,@0,@0,@0,@0];
+//    NSArray * squareLegArray = @[@0,@0,@0,@0,@0];
+//    NSArray * midWktArray = @[@0,@0,@0,@0,@0];
+//    NSArray * longOnArray = @[@0,@0,@0,@0,@0];
+//    NSArray * longOffArray = @[@0,@0,@0,@0,@0];
+//    NSArray * coversArray = @[@0,@0,@0,@0,@0];
+//    NSArray * pointArray = @[@0,@0,@0,@0,@0];
+//    NSArray * thirdManArray = @[@0,@0,@0,@0,@0];
     
 
+     ones = 0;
+     twos = 0;
+     threes = 0;
+     fours = 0;
+     sixes = 0;
+    
     for (int i = 0 ; i < _sectorWagonArray.count; i++) {
         
         [self showLbl];
@@ -1114,58 +1277,100 @@
         _selectRegionCode = objStriker.SECTORREGIONCODE;
         _selectRuns = objStriker.RUNS;
         _selectBattingStyle = objStriker.BATTINGSTYLE;
-        
-        
 
         if ([_selectRegionCode isEqualToString:@"MDT036"]) {
             
+            [self runsCount:objStriker.RUNS : fineLegArray];
+            
             finelegCount += _selectRun != 0 || _selectRun == nil ? 1 : 0;
+           
+            
+            
         }
         
         if ([_selectRegionCode isEqualToString:@"MDT037"]) {
+            
+            [self runsCount:objStriker.RUNS : squareLegArray];
             
             squarelegCount += _selectRun != 0 || _selectRun == nil ? 1 : 0;
         }
         
         if ([_selectRegionCode isEqualToString:@"MDT038"]) {
             
+            [self runsCount:objStriker.RUNS : midWktArray];
+            
             midWicketCount += _selectRun != 0 || _selectRun == nil ? 1 : 0;
+            
+            
         }
         
         if ([_selectRegionCode isEqualToString:@"MDT039"]) {
+            [self runsCount:objStriker.RUNS : longOnArray];
             
             longonCount += _selectRun != 0 || _selectRun == nil ? 1 : 0;
         }
         
         if ([_selectRegionCode isEqualToString:@"MDT041"]) {
-            
+            [self runsCount:objStriker.RUNS : longOffArray];
             longoffCount += _selectRun != 0 || _selectRun == nil ? 1 : 0;
         }
         
         if ([_selectRegionCode isEqualToString:@"MDT042"]) {
-            
+            [self runsCount:objStriker.RUNS : coversArray];
+      
             coverCount += _selectRun != 0 || _selectRun == nil ? 1 : 0;
         }
         if ([_selectRegionCode isEqualToString:@"MDT043"]) {
-            
+            [self runsCount:objStriker.RUNS : pointArray];
+           
             pointCount += _selectRun != 0 || _selectRun == nil ? 1 : 0;
         }
         
         if ([_selectRegionCode isEqualToString:@"MDT044"]) {
             
+            [self runsCount:objStriker.RUNS : thirdManArray];
    
             ThirdmanCount += _selectRun != 0 || _selectRun == nil ? 1 : 0;
       
             
         }
   
-        
+        _fineLegRuns = [self generateRegionRuns:fineLegArray];
+        _squareLegRuns = [self generateRegionRuns:squareLegArray];
+        _midWktRuns = [self generateRegionRuns:midWktArray];
+        _longOnRuns = [self generateRegionRuns:longOnArray];
+        _longOffRuns = [self generateRegionRuns:longOffArray];
+        _coverRuns =  [self generateRegionRuns:coversArray];
+        _pointRuns = [self generateRegionRuns:pointArray];
+        _thirdManRuns = [self generateRegionRuns:thirdManArray];
         
         [self sectorWagonwheel: _selectRegionCode : _selectBattingStyle : _selectRuns];
         
     }
     
+    
+   
+
     }
+
+
+-(NSString *) generateRegionRuns: (int[]) regionRuns {
+    
+    NSString *result = @"";
+    for(int i=0;i<5;i++){
+        
+        if(regionRuns[i]!=0){
+            if([result isEqualToString:@""]){
+                result = [NSString stringWithFormat:@"%ds x%d",i==4?6:(i+1),regionRuns[i]];
+            }else{
+                result =[NSString stringWithFormat:@"%@, %@",result,[NSString stringWithFormat:@"%ds x%d",i==4?6:(i+1),regionRuns[i]]];
+            }
+            
+        }
+        
+    }
+    return result;
+}
 
 
 -(void)clearLbl{
@@ -1248,6 +1453,56 @@
         [lbl_Thirdman_per removeFromSuperview];
         
     }
+    
+    
+    
+
+    
+    
+    if(lbl_fineleg_count != nil )
+    {
+        [lbl_fineleg_count removeFromSuperview];
+        
+    }
+    
+    if(lbl_squareleg_count != nil )
+    {
+        [lbl_squareleg_count removeFromSuperview];
+        
+    }
+    if(lbl_midWicket_count != nil)
+    {
+        [lbl_midWicket_count removeFromSuperview];
+    }
+    
+    if(lbl_longon_count != nil )
+    {
+        [lbl_longon_count removeFromSuperview];
+        
+    }
+    if(lbl_longoff_count != nil )
+    {
+        [lbl_longoff_count removeFromSuperview];
+        
+    }
+    if(lbl_cover_count != nil )
+    {
+        [lbl_cover_count removeFromSuperview];
+        
+    }
+    if(lbl_point_count != nil )
+    {
+        [lbl_point_count removeFromSuperview];
+        
+    }
+    if(lbl_Thirdman_count != nil )
+    {
+        [lbl_Thirdman_count removeFromSuperview];
+        
+    }
+ 
+    
+    
 }
 
 -(void)hideLbl{
@@ -1270,6 +1525,17 @@
         lbl_longoff_per .hidden = YES;
         lbl_cover_per .hidden = YES;
         lbl_point_per .hidden = YES;
+    
+    lbl_fineleg_count.hidden = YES;
+     lbl_squareleg_count.hidden = YES;
+    lbl_midWicket_count.hidden = YES;
+     lbl_longon_count.hidden = YES;
+    lbl_longoff_count.hidden = YES;
+     lbl_cover_count.hidden = YES;
+     lbl_point_count.hidden = YES;
+     lbl_Thirdman_count.hidden = YES;
+    
+    
  
 }
 
@@ -1283,15 +1549,24 @@
     cover_lbl .hidden = NO;
     point_lbl .hidden = NO;
     Thirdman_lbl .hidden = NO;
+    
     lbl_fineleg_per .hidden = NO;
-    lbl_Thirdman_per.hidden = NO;
     lbl_squareleg_per .hidden = NO;
     lbl_midWicket_per .hidden = NO;
     lbl_longon_per .hidden = NO;
     lbl_longoff_per .hidden = NO;
     lbl_cover_per .hidden = NO;
     lbl_point_per .hidden = NO;
-    
+    lbl_Thirdman_per.hidden = NO;
+ 
+    lbl_fineleg_count.hidden = NO;
+    lbl_squareleg_count.hidden = NO;
+    lbl_midWicket_count.hidden = NO;
+    lbl_longon_count.hidden = NO;
+    lbl_longoff_count.hidden = NO;
+    lbl_cover_count.hidden = NO;
+    lbl_point_count.hidden = NO;
+    lbl_Thirdman_count.hidden = NO;
 }
 
 
@@ -1324,6 +1599,43 @@
     Run3Count=0;
     Run4Count=0;
     Run6Count=0;
+    
+    
+    
+    ones = 0;
+    twos = 0;
+    threes = 0;
+    fours = 0;
+    sixes = 0;
+    
+    
+}
+
+
+-(void) runsCount :(NSString *) runs : (int[] ) regionRuns {
+    
+    if ([runs isEqualToString:@"1"]) {
+        
+        regionRuns[0]++;
+        
+        
+    }else if ([runs isEqualToString:@"2"]) {
+        
+       regionRuns[1]++;
+        
+    }else if ([runs isEqualToString:@"3"]) {
+        
+        regionRuns[2]++;
+        
+    }else if ([runs isEqualToString:@"4"]) {
+        
+        regionRuns[3]++;
+        
+    }else if ([runs isEqualToString:@"6"]) {
+        
+        regionRuns[4]++;
+        
+    }
 }
 
 @end
