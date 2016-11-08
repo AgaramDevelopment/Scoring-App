@@ -128,6 +128,8 @@
     
     _tRuns = [NSNumber numberWithInt:[_totalRuns intValue]];
     
+    
+    
     [self displayRuns];
     
     [self setInningsBySelection:@"1"];
@@ -554,6 +556,9 @@
     
     _sectorWagonArray =[objDBManagerSpiderWagonReport getSectorWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"" : self.selectStrikerCode == nil ? @"" : self.selectStrikerCode : self.selectBowlerCode == nil ? @"":self.selectBowlerCode :[self.selectRun isEqual:nil]?@"":self.selectRun == nil ? @"" : self.selectRun :@"" :@"":self.selectOnSide == nil ? @"" :self.selectOnSide];
     
+    _tRuns = [NSNumber numberWithInt:[_totalRuns intValue]];
+    
+    [self clearLbl];
     
     [self displayRuns];
     
@@ -573,12 +578,12 @@
         {
             NSLog(@"LH");
             
-//            finelegRun = [Run intValue]+finelegRun;
-//            if(fineleg_lbl !=nil)
-//            {
-//                [fineleg_lbl removeFromSuperview];
-//            }
-//            
+           finelegRun = [Run intValue]+finelegRun;
+            if(fineleg_lbl !=nil)
+            {
+                [fineleg_lbl removeFromSuperview];
+            }
+//
 //            fineleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(140,70,200,35)];
 //            fineleg_lbl.textColor=[UIColor whiteColor];
 //            fineleg_lbl.text =[NSString stringWithFormat:@"%d %@ %d %@",finelegRun,@"RUNS", finelegCount,@"BALLS"];
@@ -600,17 +605,16 @@
         }
         else
         {
-            
             NSLog(@"RH");
-       
-            
+            finelegRun = [Run intValue]+finelegRun;
+            if(fineleg_lbl !=nil)
+            {
+                [fineleg_lbl removeFromSuperview];
+            }
         }
         
-        finelegRun = [Run intValue]+finelegRun;
-        if(fineleg_lbl !=nil)
-        {
-            [fineleg_lbl removeFromSuperview];
-        }
+        
+       
         
         fineleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(320,70,200,35)];
         fineleg_lbl.textColor=[UIColor whiteColor];
@@ -1029,14 +1033,14 @@
         {
             NSLog(@"LH");
             // ThirdmanCount++;
-//            ThirdmanCountRun = ThirdmanCountRun+[Run intValue];
-//            
-//            
-//            if(Thirdman_lbl !=nil)
-//            {
-//                [Thirdman_lbl removeFromSuperview];
-//            }
-//            
+            ThirdmanCountRun = ThirdmanCountRun+[Run intValue];
+            
+            
+            if(Thirdman_lbl !=nil)
+            {
+                [Thirdman_lbl removeFromSuperview];
+            }
+//
 //            
 //            
 //            Thirdman_lbl=[[UILabel alloc]initWithFrame:CGRectMake(320,70,200,35)];
@@ -1062,18 +1066,18 @@
         else
         {
             NSLog(@"RH");
+            ThirdmanCountRun = ThirdmanCountRun+[Run intValue];
+            
+            
+            if(Thirdman_lbl !=nil)
+            {
+                [Thirdman_lbl removeFromSuperview];
+            }
             
             
         }
         
-        ThirdmanCountRun = ThirdmanCountRun+[Run intValue];
-        
-        
-        if(Thirdman_lbl !=nil)
-        {
-            [Thirdman_lbl removeFromSuperview];
-        }
-        
+       
         
         
         Thirdman_lbl=[[UILabel alloc]initWithFrame:CGRectMake(140,70,200,35)];
@@ -1165,40 +1169,41 @@
 
 
 -(void)clearLbl{
+    
     if(fineleg_lbl != nil)
     {
         [fineleg_lbl removeFromSuperview];
     }
     
-    else if(squareleg_lbl != nil)
+     if(squareleg_lbl != nil)
     {
         [squareleg_lbl removeFromSuperview];
     }
     
-    else if(midWicket_lbl != nil)
+     if(midWicket_lbl != nil)
     {
         [midWicket_lbl removeFromSuperview];
     }
     
-    else if(longon_lbl != nil )
+     if(longon_lbl != nil )
     {
         [longon_lbl removeFromSuperview];
     }
     
-    else if(longoff_lbl != nil)
+     if(longoff_lbl != nil)
     {
         [longoff_lbl removeFromSuperview];
     }
     
-    else if(cover_lbl != nil)
+     if(cover_lbl != nil)
     {
         [cover_lbl removeFromSuperview];
     }
-    else if(point_lbl != nil)
+     if(point_lbl != nil)
     {
         [point_lbl removeFromSuperview];
     }
-    else if(Thirdman_lbl != nil)
+     if(Thirdman_lbl != nil)
     {
         [Thirdman_lbl removeFromSuperview];
         
@@ -1210,35 +1215,35 @@
         [lbl_fineleg_per removeFromSuperview];
     }
     
-    else if(lbl_squareleg_per != nil )
+     if(lbl_squareleg_per != nil )
     {
         [lbl_squareleg_per removeFromSuperview];
     }
     
-    else if(lbl_midWicket_per != nil)
+     if(lbl_midWicket_per != nil)
     {
         [lbl_midWicket_per removeFromSuperview];
     }
     
-    else if(lbl_longon_per != nil)
+     if(lbl_longon_per != nil)
     {
         [lbl_longon_per removeFromSuperview];
     }
     
-    else if(lbl_longoff_per != nil)
+     if(lbl_longoff_per != nil)
     {
         [lbl_longoff_per removeFromSuperview];
     }
     
-    else if(lbl_cover_per != nil )
+     if(lbl_cover_per != nil )
     {
         [lbl_cover_per removeFromSuperview];
     }
-    else if(lbl_point_per != nil )
+     if(lbl_point_per != nil )
     {
         [lbl_point_per removeFromSuperview];
     }
-    else if(lbl_Thirdman_per != nil )
+     if(lbl_Thirdman_per != nil )
     {
         [lbl_Thirdman_per removeFromSuperview];
         
@@ -1258,8 +1263,8 @@
     
     
         lbl_fineleg_per .hidden = YES;
-    lbl_Thirdman_per.hidden = YES;
-    lbl_squareleg_per .hidden = YES;
+        lbl_Thirdman_per.hidden = YES;
+        lbl_squareleg_per .hidden = YES;
         lbl_midWicket_per .hidden = YES;
         lbl_longon_per .hidden = YES;
         lbl_longoff_per .hidden = YES;

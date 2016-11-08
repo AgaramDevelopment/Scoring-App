@@ -1,4 +1,4 @@
-//
+ //
 //  MCBarChartView.m
 //  zhixue_parents
 //
@@ -334,9 +334,14 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                 
                     wicket_Btn.center = CGPointMake(xOffset-25, chartYOffset - [objManhattanRecord.Run floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2);
                     [wicket_Btn setImage:[UIImage imageNamed:@"ballImg"] forState:UIControlStateNormal];
-                   // wicket_Btn.imageEdgeInsets = UIEdgeInsetsMake(0,0,0,0);
+                    //[wicket_Btn setTitle:objManhattanRecord.wicketno forState:UIControlStateNormal];
                     wicket_Btn.alpha = 0.0;
                     [_scrollView addSubview:wicket_Btn];
+                    
+                    UILabel * wicketno_lbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,30,30)];
+                    wicketno_lbl.text = objManhattanRecord.wicketno;
+                    [wicket_Btn addSubview:wicketno_lbl];
+                    wicketno_lbl.textAlignment=UITextAlignmentCenter;
                     
                     [UIView animateWithDuration:0.5 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                         wicket_Btn.alpha = 1.0;
