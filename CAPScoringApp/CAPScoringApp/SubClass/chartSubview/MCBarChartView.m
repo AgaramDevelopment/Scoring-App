@@ -332,11 +332,13 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                 {
                     UIButton * wicket_Btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
                 
+                    wicket_Btn.tag = [objManhattanRecord.wicketno intValue];
                     wicket_Btn.center = CGPointMake(xOffset-25, chartYOffset - [objManhattanRecord.Run floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2);
                     [wicket_Btn setImage:[UIImage imageNamed:@"ballImg"] forState:UIControlStateNormal];
                     //[wicket_Btn setTitle:objManhattanRecord.wicketno forState:UIControlStateNormal];
                     wicket_Btn.alpha = 0.0;
                     [_scrollView addSubview:wicket_Btn];
+                    [wicket_Btn addTarget:self action:@selector(didClickWicket:) forControlEvents:UIControlEventTouchUpInside];
                     
                     UILabel * wicketno_lbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,30,30)];
                     wicketno_lbl.text = objManhattanRecord.wicketno;
@@ -355,6 +357,12 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
     }
 }
 
-
+-(IBAction)didClickWicket:(id)sender
+{
+    UIButton * obj_Btn =(UIButton *) sender;
+   
+    [self.delegate TooltipMethod:obj_Btn];
+    
+}
 
 @end
