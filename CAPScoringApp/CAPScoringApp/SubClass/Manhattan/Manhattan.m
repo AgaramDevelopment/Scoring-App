@@ -99,9 +99,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         NSString * overno =objManhattanRecord.overno;
         
-            if(objOverArray.count >0)
+            if(objOverArray.count > 0)
             {
-            NSString * Addoverno =[objOverArray objectAtIndex:i-1];
+            NSString * Addoverno =[objOverArray lastObject];
             
             if(![overno isEqualToString: Addoverno])
             {
