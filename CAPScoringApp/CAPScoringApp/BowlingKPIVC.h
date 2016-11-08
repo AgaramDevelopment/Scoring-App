@@ -10,4 +10,6 @@
 
 @interface BowlingKPIVC : UIViewController
 
+@property (strong, nonatomic) IBOutlet UITableView *tbl_details;
+
 @end
