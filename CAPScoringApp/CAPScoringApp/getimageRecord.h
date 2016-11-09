@@ -12,4 +12,6 @@
 @property(nonatomic,strong)NSString*playercodeimage;
 @property(nonatomic,strong)NSString*groundcodeimage;
 @property(nonatomic,strong)NSString*officialscodeimage;
+@property(nonatomic,strong)NSString*teamCodeImage;
+
 @end

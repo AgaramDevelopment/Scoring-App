@@ -12,4 +12,5 @@
 @synthesize groundcodeimage;
 @synthesize playercodeimage;
 @synthesize officialscodeimage;
+@synthesize teamCodeImage;
 @end

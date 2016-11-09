@@ -389,11 +389,11 @@
                 bool CheckStatus1=[objDBMANAGERSYNC CheckTeamMaster:TEAMCODE];
                 if (CheckStatus1==YES) {
                     
-                    [objDBMANAGERSYNC UpdateTeamMaster:TEAMNAME:SHORTTEAMNAME:TEAMTYPE:TEAMLOGO:RECORDSTATUS: MODIFIEDBY:MODIFIEDDATE:TEAMCODE];
+                    [objDBMANAGERSYNC UpdateTeamMaster :TEAMNAME:SHORTTEAMNAME:TEAMTYPE:TEAMLOGO:RECORDSTATUS: MODIFIEDBY:MODIFIEDDATE:TEAMCODE];
 
                 }
                 else{
-                      [objDBMANAGERSYNC InsertTeamMaster:TEAMCODE:TEAMNAME:SHORTTEAMNAME:TEAMTYPE:TEAMLOGO: RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
+                      [objDBMANAGERSYNC InsertTeamMaster :TEAMCODE:TEAMNAME:SHORTTEAMNAME:TEAMTYPE:TEAMLOGO: RECORDSTATUS:CREATEDBY:CREATEDDATE:MODIFIEDBY:MODIFIEDDATE];
                 }
                 
                 
@@ -763,8 +763,9 @@
             
             
             [self playercodeimage];
-            [self officialcodeimage];
-            [self groundcodeimage];
+            [self teamCodeImage];
+            //[self officialcodeimage];
+            //[self groundcodeimage];
             
         [self showDialog1:@"SYNC DATA COMPLETED" andTitle:@"DashBoard"];
             
@@ -1023,6 +1024,33 @@ for (i=0; i<[officialscode count]; i++)
     {
         NSDictionary*test=[groundcode objectAtIndex:i];
         NSString *groundcodestr=[test valueForKey:@"groundcodeimage"];
+        NSString *ImgeURL1 = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETIMAGE/%@",[Utitliy getSyncIPPORT],groundcodestr];
+        
+        
+        UIImage *image = [[UIImage alloc] initWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:ImgeURL1]]];
+        
+        NSLog(@"%f,%f",image.size.width,image.size.height);
+        
+        
+        NSData *data1 = [NSData dataWithData:UIImagePNGRepresentation(image)];
+        
+        NSString *Dir = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+        
+        NSString *pngPath = [Dir stringByAppendingPathComponent:[NSString stringWithFormat:@"%@.png",groundcodestr]];// this path if you want save reference path in sqlite
+        
+        [data1 writeToFile:pngPath atomically:YES];
+        
+    }
+}
+
+-(void)teamCodeImage{
+    DBMANAGERSYNC *objDBMANAGERSYNC = [[DBMANAGERSYNC alloc] init];
+    NSMutableArray*groundcode=[objDBMANAGERSYNC getTeamCode];
+    int i;
+    for (i=0; i<[groundcode count]; i++)
+    {
+        NSDictionary*test=[groundcode objectAtIndex:i];
+        NSString *groundcodestr=[test valueForKey:@"teamCodeImage"];
         NSString *ImgeURL1 = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETIMAGE/%@",[Utitliy getSyncIPPORT],groundcodestr];
         
         

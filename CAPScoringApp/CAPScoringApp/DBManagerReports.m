@@ -17,6 +17,7 @@
 #import "CommentaryReport.h"
 #import "BvsBBowler.h"
 #import "BvsBBatsman.h"
+#import "WormRecord.h"
 @implementation DBManagerReports
 
 
@@ -626,6 +627,50 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return eventArray;
     
 }
+
+
+//Worm Chart
+
+
+-(NSMutableArray *)retrieveWormChartDetails: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    NSString *dbPath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+    {
+        NSString *query=[NSString stringWithFormat:@"WITH WORMCHART 	AS 	( 	 		SELECT   CASE WHEN COM.MATCHTYPE = 'MSC023' OR COM.MATCHTYPE = 'MSC114' THEN 1 ELSE 0 END ISMULTIDAY 		, BE.TEAMCODE, TM.TEAMNAME TEAMNAME, BE.INNINGSNO,(BE.OVERNO + 1) OVERNO, SUM(BE.GRANDTOTAL) SCORE 		, SUM(BE.RUNS) RUNS , BE.MATCHCODE 		FROM    BALLEVENTS BE 				INNER JOIN TEAMMASTER TM ON BE.TEAMCODE = TM.TEAMCODE 				INNER JOIN COMPETITION COM ON BE.COMPETITIONCODE = COM.COMPETITIONCODE 				 		WHERE  BE.COMPETITIONCODE = '%@' 				AND BE.MATCHCODE = '%@' 				AND BE.INNINGSNO = %@ 				 		GROUP BY COM.MATCHTYPE, BE.TEAMCODE, TM.TEAMNAME, BE.INNINGSNO, BE.OVERNO, BE.MATCHCODE 		 		 	),WICKETSDETAILS AS 	( 		SELECT   BE.TEAMCODE, BE.INNINGSNO,(BE.OVERNO + 1) OVERNO, WE.WICKETNO WICKETS 		FROM    BALLEVENTS BE 				INNER JOIN TEAMMASTER TM ON BE.TEAMCODE = TM.TEAMCODE 				INNER JOIN COMPETITION COM ON BE.COMPETITIONCODE = COM.COMPETITIONCODE 				INNER JOIN  WICKETEVENTS WE ON WE.COMPETITIONCODE = BE.COMPETITIONCODE 							AND WE.MATCHCODE = BE.MATCHCODE 							AND WE.TEAMCODE = BE.TEAMCODE 							AND WE.BALLCODE = BE.BALLCODE AND WE.WICKETTYPE NOT IN ('MSC102') 				 		WHERE  BE.COMPETITIONCODE = '%@' 				AND BE.MATCHCODE = '%@' 				AND BE.INNINGSNO = %@ 				 		GROUP BY BE.TEAMCODE, BE.INNINGSNO, BE.OVERNO, WE.WICKETNO 	) 	SELECT   CHARTDATA.MATCHCODE,CHARTDATA.ISMULTIDAY, CHARTDATA.TEAMCODE, CHARTDATA.TEAMNAME, CHARTDATA.INNINGSNO, CHARTDATA.OVERNO, IFNULL((WKT.WICKETS),0) WICKETS, CHARTDATA.RUNS, CHARTDATA.SCORE 	, CASE  WHEN PP.POWERPLAYCODE IS NOT NULL THEN 1 ELSE 0 END AS ISPOWERPLAY ,PP.POWERPLAYTYPE 	FROM 	( 		SELECT   WCI.MATCHCODE,WCI.ISMULTIDAY, WCI.TEAMCODE, WCI.TEAMNAME, WCI.INNINGSNO, WCI.OVERNO, WCI.RUNS, SUM(WCA.SCORE) SCORE  		FROM	 WORMCHART WCI 				INNER JOIN WORMCHART WCA ON WCI.TEAMCODE = WCA.TEAMCODE AND WCI.INNINGSNO = WCA.INNINGSNO AND WCA.OVERNO <= WCI.OVERNO 				 				 		GROUP BY WCI.ISMULTIDAY, WCI.TEAMCODE, WCI.TEAMNAME, WCI.INNINGSNO, WCI.OVERNO, WCI.RUNS,WCI.MATCHCODE 	)CHARTDATA 	LEFT JOIN POWERPLAY PP ON 	CHARTDATA.OVERNO BETWEEN PP.STARTOVER AND PP.ENDOVER AND CHARTDATA.MATCHCODE = PP.MATCHCODE AND CHARTDATA.INNINGSNO=PP.INNINGSNO AND PP.RECORDSTATUS='MSC001' 	LEFT JOIN WICKETSDETAILS WKT ON WKT.TEAMCODE = CHARTDATA.TEAMCODE AND WKT.INNINGSNO = CHARTDATA.INNINGSNO AND WKT.OVERNO = CHARTDATA.OVERNO 	ORDER BY CHARTDATA.INNINGSNO, CHARTDATA.OVERNO",competitionCode,matchCode,inningsNo,competitionCode,matchCode,inningsNo];
+        stmt=[query UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                
+                WormRecord *record=[[WormRecord alloc]init];
+            
+                record.teamCode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                record.teamName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.innsNo=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record.over=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                record.wicket=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                record.runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record.score=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                
+                [eventArray addObject:record];
+    
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        
+        
+        sqlite3_close(dataBase);
+        
+    }
+    return eventArray;
+    
+}
+
 
 
 @end
