@@ -43,4 +43,14 @@
 @property(strong,nonatomic)NSString *BOUNDART6SPERCENTAGE;
 @property(strong,nonatomic)NSString *OVERS;
 
+
+//BATSMAN KPI
+@property(strong,nonatomic)NSString *STRIKERCODE;
+@property(strong,nonatomic)NSString *STRIKERNAME;
+@property(strong,nonatomic)NSString *SHOTTYPEAGGRESSIVE;
+@property(strong,nonatomic)NSString *SHOTTYPEDEFENSIVE;
+@property(strong,nonatomic)NSString *RPSS;
+@property(strong,nonatomic)NSString *SHOTTYPEAGGRESSIVEPER;
+@property(strong,nonatomic)NSString *SHOTTYPEDEFENSIVEPER;
+
 @end

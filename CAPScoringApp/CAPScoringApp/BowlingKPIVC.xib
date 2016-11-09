@@ -657,7 +657,7 @@
                             </variation>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="gYw-nh-Z3F" firstAttribute="leading" secondItem="8l0-8h-pA5" secondAttribute="trailing" constant="6" id="0zt-Zz-RUq"/>
                         <constraint firstAttribute="trailing" secondItem="lqm-Zf-gsr" secondAttribute="trailing" constant="510" id="1h5-QT-qyq">

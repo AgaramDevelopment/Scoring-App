@@ -1,49 +1,43 @@
 //
-//  BowlingKPIVC.m
+//  BatsmanKPIVC.m
 //  CAPScoringApp
 //
-//  Created by Raja sssss on 01/11/16.
+//  Created by Raja sssss on 09/11/16.
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
-#import "BowlingKPIVC.h"
+#import "BatsmanKPIVC.h"
 #import "DBManagerPlayersKPI.h"
-#import "BowlingKPITVC.h"
+#import "BatsmanKPITVC.h"
 #import "PlayerKPIRecords.h"
 #import "DBManagerpitchmapReport.h"
 
-
-@interface BowlingKPIVC (){
+@interface BatsmanKPIVC (){
+    
     DBManagerpitchmapReport *objDBManagerpitchmapReport;
-     DBManagerPlayersKPI *objDBManagerPlayersKPI;
+    DBManagerPlayersKPI *objDBManagerPlayersKPI;
 }
 
-@property (nonatomic,strong) NSMutableArray *bowlerArray;
+@property (nonatomic,strong) NSMutableArray *batsmanArray;
 @end
 
-@implementation BowlingKPIVC
+@implementation BatsmanKPIVC
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
     objDBManagerPlayersKPI = [[DBManagerPlayersKPI alloc]init];
-     objDBManagerpitchmapReport = [[DBManagerpitchmapReport alloc]init];
+    objDBManagerpitchmapReport = [[DBManagerpitchmapReport alloc]init];
     
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
-    _bowlerArray =[objDBManagerPlayersKPI  getBowlingKpi:_matchTypeCode :_compititionCode :_matchCode :_teamCode :@"1" :@"" :@""];
+   _batsmanArray = [objDBManagerPlayersKPI getBatsmanKpi :_matchTypeCode :_compititionCode :_matchCode :_teamCode :@"1"];
     
-     [self setInningsBySelection:@"1"];
-     [self setInningsView];
-      self.tbl_details.separatorColor = [UIColor clearColor];
+    [self setInningsBySelection:@"1"];
+    [self setInningsView];
+    self.tbl_details.separatorColor = [UIColor clearColor];
+
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;    //count of section
@@ -52,7 +46,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [_bowlerArray count];
+    return [_batsmanArray count];
     
     
     //count number of row from counting array hear cataGorry is An Array
@@ -69,15 +63,13 @@
         static NSString * bowlerCell = @"Cell";
         
         
-          PlayerKPIRecords *record = [_bowlerArray objectAtIndex:indexPath.row];
+        PlayerKPIRecords *record = [_batsmanArray objectAtIndex:indexPath.row];
         
-    
-        
-BowlingKPITVC *cell = (BowlingKPITVC *)[tableView dequeueReusableCellWithIdentifier:bowlerCell];
+        BatsmanKPITVC *cell = (BatsmanKPITVC *)[tableView dequeueReusableCellWithIdentifier:bowlerCell];
         if (cell == nil)
         {
-            [[NSBundle mainBundle] loadNibNamed:@"BowlingKPITVC" owner:self options:nil];
-            cell = self.bowlingKPIcell;
+            [[NSBundle mainBundle] loadNibNamed:@"BatsmanKPITVC" owner:self options:nil];
+            cell = self.batsmanKPIcell;
         }
         
         [cell setBackgroundColor:[UIColor clearColor]];
@@ -85,23 +77,22 @@ BowlingKPITVC *cell = (BowlingKPITVC *)[tableView dequeueReusableCellWithIdentif
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         
-        cell.lbl_bowler_name.text =  record.BOWLERNAME;
-        cell.lbl_over.text = record.OVERS;
-        cell.lbl_ball.text = record.BALLS;
+        cell.lbl_striker_name.text =  record.STRIKERNAME;
+        
+        cell.lbl_balls.text = record.BALLS;
         cell.lbl_runs.text = record.RUNS;
-        cell.lbl_eco.text = record.ECONOMYRATE;
-        cell.lbl_dB.text = record.DOTBALL;
+        cell.lbl_db.text = record.DOTBALL;
         cell.lbl_ones.text = record.ONES;
         cell.lbl_twos.text = record.TWOS;
         cell.lbl_threes.text = record.THREES;
         cell.lbl_b4.text = record.BOUNDARY4S;
         cell.lbl_b6.text = record.BOUNDARY6S;
-      //cell.lbl_one_per.text = [NSString stringWithFormat:@"%@%@",record.ONESPERCENTAGE,@"%"];
-        cell.lbl_one_per.text = record.ONESPERCENTAGE;
-        cell.lbl_two_per.text = record.TWOSPERCENTAGE;
-        cell.lbl_three_per.text = record.THREESPERCENTAGE;
-        cell.lbl_b4_per.text = record.FOURSPERCENTAGE;
-        cell.lbl_b6_per.text = record.SIXESPERCENTAGE;
+        //cell.lbl_one_per.text = [NSString stringWithFormat:@"%@%@",record.ONESPERCENTAGE,@"%"];
+        cell.lbl_ones_per.text = record.ONESPERCENTAGE;
+        cell.lbl_twos_per.text = record.TWOSPERCENTAGE;
+        cell.lbl_threes_per.text = record.THREESPERCENTAGE;
+        cell.lbl_fours_per.text = record.FOURSPERCENTAGE;
+        cell.lbl_six_per.text = record.SIXESPERCENTAGE;
         
         
         
@@ -112,53 +103,9 @@ BowlingKPITVC *cell = (BowlingKPITVC *)[tableView dequeueReusableCellWithIdentif
 
 
 
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    return 41;
-    
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
-    
-    
-}
-
-
-- (IBAction)btn_first_inns:(id)sender{
-    
-    [self setInningsBySelection:@"1"];
-    
-    _teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
-        _bowlerArray =[objDBManagerPlayersKPI  getBowlingKpi:_matchTypeCode :_compititionCode :_matchCode :_teamCode :@"1" :@"" :@""];
-    [self.tbl_details reloadData];
-}
-
-- (IBAction)btn_sec_inns:(id)sender{
-    
-    [self setInningsBySelection:@"2"];
-    _teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"2"];
-        _bowlerArray =[objDBManagerPlayersKPI  getBowlingKpi:_matchTypeCode :_compititionCode :_matchCode :_teamCode :@"2" :@"" :@""];
-    [self.tbl_details reloadData];
-    
-}
-
-- (IBAction)btn_third_inns:(id)sender{
-    [self setInningsBySelection:@"3"];
-    _teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"3"];
-        _bowlerArray =[objDBManagerPlayersKPI  getBowlingKpi:_matchTypeCode :_compititionCode :_matchCode :_teamCode :@"3" :@"" :@""];
-    [self.tbl_details reloadData];
-}
-
-- (IBAction)btn_fourth_inns:(id)sender{
-    
-    [self setInningsBySelection:@"4"];
-    _teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"4"];
-        _bowlerArray =[objDBManagerPlayersKPI  getBowlingKpi:_matchTypeCode :_compititionCode :_matchCode :_teamCode :@"4" :@"" :@""];
-    [self.tbl_details reloadData];
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 -(void) setInningsView{
@@ -276,7 +223,6 @@ BowlingKPITVC *cell = (BowlingKPITVC *)[tableView dequeueReusableCellWithIdentif
     innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
     
 }
-
 
 
 /*
