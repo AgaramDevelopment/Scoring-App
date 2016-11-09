@@ -88,11 +88,11 @@
         cell.lbl_b4.text = record.BOUNDARY4S;
         cell.lbl_b6.text = record.BOUNDARY6S;
         //cell.lbl_one_per.text = [NSString stringWithFormat:@"%@%@",record.ONESPERCENTAGE,@"%"];
-        cell.lbl_ones_per.text = record.ONESPERCENTAGE;
-        cell.lbl_twos_per.text = record.TWOSPERCENTAGE;
-        cell.lbl_threes_per.text = record.THREESPERCENTAGE;
-        cell.lbl_fours_per.text = record.FOURSPERCENTAGE;
-        cell.lbl_six_per.text = record.SIXESPERCENTAGE;
+        cell.lbl_ones_per.text = [NSString stringWithFormat:@"%.2f",[record.ONESPERCENTAGE floatValue]];
+        cell.lbl_twos_per.text = [NSString stringWithFormat:@"%.2f",[record.TWOSPERCENTAGE floatValue]];
+        cell.lbl_threes_per.text = [NSString stringWithFormat:@"%.2f",[record.THREESPERCENTAGE floatValue]];
+        cell.lbl_fours_per.text = [NSString stringWithFormat:@"%.2f",[record.BOUNDARY4SPERCENTAGE floatValue]];
+        cell.lbl_six_per.text = [NSString stringWithFormat:@"%.2f",[record.BOUNDART6SPERCENTAGE floatValue]];
         
         
         
@@ -102,6 +102,38 @@
 }
 
 
+- (IBAction)btn_first_inns:(id)sender{
+    
+    [self setInningsBySelection:@"1"];
+    
+    _teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
+    _batsmanArray = [objDBManagerPlayersKPI getBatsmanKpi :_matchTypeCode :_compititionCode :_matchCode :_teamCode :@"1"];
+    [self.tbl_details reloadData];
+}
+
+- (IBAction)btn_sec_inns:(id)sender{
+    
+    [self setInningsBySelection:@"2"];
+    _teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"2"];
+    _batsmanArray = [objDBManagerPlayersKPI getBatsmanKpi :_matchTypeCode :_compititionCode :_matchCode :_teamCode :@"2"];
+    [self.tbl_details reloadData];
+    
+}
+
+- (IBAction)btn_third_inns:(id)sender{
+    [self setInningsBySelection:@"3"];
+    _teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"3"];
+    _batsmanArray = [objDBManagerPlayersKPI getBatsmanKpi :_matchTypeCode :_compititionCode :_matchCode :_teamCode :@"3"];
+    [self.tbl_details reloadData];
+}
+
+- (IBAction)btn_fourth_inns:(id)sender{
+    
+    [self setInningsBySelection:@"4"];
+    _teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"4"];
+    _batsmanArray = [objDBManagerPlayersKPI getBatsmanKpi :_matchTypeCode :_compititionCode :_matchCode :_teamCode :@"4"];
+    [self.tbl_details reloadData];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
