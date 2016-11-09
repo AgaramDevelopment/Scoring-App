@@ -176,6 +176,7 @@
     else if(objBtn.tag == 9)
     {
          NSLog(@"%d",objBtn.tag);
+        [self setBatsmanKpi];
     }
     else if(objBtn.tag == 10)
     {
@@ -364,6 +365,31 @@
     
     
 }
+
+
+
+-(void) setBatsmanKpi{
+    
+    batsmanKpiView = [[BatsmanKPIVC alloc]initWithNibName:@"BatsmanKPIVC" bundle:nil];
+    batsmanKpiView.matchCode = self.matchCode;
+    batsmanKpiView.compititionCode = self.competitionCode;
+    batsmanKpiView.matchTypeCode = self.matchTypeCode;
+    
+    
+    batsmanKpiView.fstInnShortName = self.fstInnShortName;
+    batsmanKpiView.secInnShortName = self.secInnShortName;
+    batsmanKpiView.thrdInnShortName = self.thrdInnShortName;
+    batsmanKpiView.frthInnShortName = self.frthInnShortName;
+    
+    batsmanKpiView.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    
+    //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:batsmanKpiView.view];
+    
+    
+    
+}
+
     @end
 
 

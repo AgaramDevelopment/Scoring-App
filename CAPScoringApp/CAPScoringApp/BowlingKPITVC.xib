@@ -297,7 +297,7 @@
                 <outlet property="lbl_two_per" destination="fTZ-30-mj6" id="ckx-a2-x0b"/>
                 <outlet property="lbl_twos" destination="sMp-iF-o7f" id="AhZ-N2-Knk"/>
             </connections>
-            <point key="canvasLocation" x="186" y="319.5"/>
+            <point key="canvasLocation" x="120" y="319.5"/>
         </tableViewCell>
     </objects>
 </document>

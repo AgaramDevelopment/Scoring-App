@@ -12,4 +12,6 @@
 @interface DBManagerPlayersKPI : NSObject
 
 -(NSMutableArray *)getBowlingKpi:(NSString*)MATCHTYPECODE:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO:(NSString*)STRIKERCODE:(NSString*)BOWLERCODE;
+
+-(NSMutableArray *)getBatsmanKpi:(NSString*)MATCHTYPECODE:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO;
 @end
