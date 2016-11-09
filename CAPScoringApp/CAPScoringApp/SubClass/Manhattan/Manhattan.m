@@ -11,6 +11,7 @@
 #import "ManhattanRecord.h"
 #import "MCBarChartView.h"
 #import "ManhattenWKTRecord.h"
+#import "ToolTipRecord.h"
 
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
@@ -32,6 +33,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     NSMutableArray * objInnings4OverArray ;
     
     NSMutableArray * wicketDetail;
+    
+    NSMutableArray * objinnings1Wicket;
+    NSMutableArray * objinnings2wicket;
+    NSMutableArray * ToolTipDetails;
+    
+     UIView * tooltip_view;
 }
 
 @property (strong, nonatomic) MCBarChartView *barChartView;
@@ -62,6 +69,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     objInnings4OverArray =[[NSMutableArray alloc]init];
     
     wicketDetail=[[NSMutableArray alloc]init];
+    
+    objinnings1Wicket =[[NSMutableArray alloc]init];
+    objinnings2wicket =[[NSMutableArray alloc]init];
+    
+    ToolTipDetails =[[NSMutableArray alloc]init];
+    
     
     manhattendetail =[self getChartDetail:self.matchTypecode :self.compititionCode :self.matchCode];
     NSString * innings1 = @"1";
@@ -95,7 +108,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     for(int i=0; i < Innings1.count; i++)
     {
-        objManhattanRecord =(ManhattanRecord *)[manhattendetail objectAtIndex:i];
+        objManhattanRecord =(ManhattanRecord *)[Innings1 objectAtIndex:i];
         
         NSString * overno =objManhattanRecord.overno;
         
@@ -122,14 +135,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     for(int i=0; i < Innings2.count; i++)
     {
-        objManhattanRecord =(ManhattanRecord *)[manhattendetail objectAtIndex:i];
+        objManhattanRecord =(ManhattanRecord *)[Innings2 objectAtIndex:i];
         
         
         NSString * overno =objManhattanRecord.overno;
         
         if(objInnings2OverArray.count >0)
         {
-            NSString * Addoverno =[objInnings2OverArray objectAtIndex:i-1];
+            NSString * Addoverno =[objInnings2OverArray lastObject];
             
             if(![overno isEqualToString: Addoverno])
             {
@@ -164,7 +177,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         if(objInnings3OverArray.count >0)
         {
-            NSString * Addoverno =[objInnings3OverArray objectAtIndex:i-1];
+            NSString * Addoverno =[objInnings3OverArray lastObject];
             
             if(![overno isEqualToString: Addoverno])
             {
@@ -223,7 +236,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     
     [self BarChartMethodFirstInnigs];
-    
+   
     [NSTimer scheduledTimerWithTimeInterval:1.0
                                      target:self
                                    selector:@selector(BarChartMethodFirstInnigs2)
@@ -231,20 +244,76 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                                     repeats:NO];
     
     
-    [NSTimer scheduledTimerWithTimeInterval:1.0
-                                     target:self
-                                   selector:@selector(BarChartMethodFirstInnigs3)
-                                   userInfo:nil
-                                    repeats:NO];
+//    [NSTimer scheduledTimerWithTimeInterval:2.0
+//                                     target:self
+//                                   selector:@selector(BarChartMethodFirstInnigs3)
+//                                   userInfo:nil
+//                                    repeats:NO];
+//    
+//    [NSTimer scheduledTimerWithTimeInterval:1.0
+//                                     target:self
+//                                   selector:@selector(BarChartMethodFirstInnigs4)
+//                                   userInfo:nil
+//                                    repeats:NO];
     
-    [NSTimer scheduledTimerWithTimeInterval:1.0
-                                     target:self
-                                   selector:@selector(BarChartMethodFirstInnigs4)
-                                   userInfo:nil
-                                    repeats:NO];
-   wicketDetail = [self getwicket:self.compititionCode :self.matchCode];
+    wicketDetail = [self getwicket:self.compititionCode :self.matchCode];
+    
+//    NSPredicate* wicketPredicate = [NSPredicate predicateWithFormat:@"inningsno == %@",innings1];
+//    
+//    NSArray * Innings1wicket = [wicketDetail filteredArrayUsingPredicate:wicketPredicate];
+//    
+    for(int i=0; i < wicketDetail.count; i++)
+    {
+     ManhattenWKTRecord * ManhattanWktRecord =(ManhattenWKTRecord *)[wicketDetail objectAtIndex:i];
+        
+        
+        NSString * inningsno =ManhattanWktRecord.inningno;
+        
+//        if(objInnings2OverArray.count >0)
+//        {
+//            NSString * Addoverno =[objInnings2OverArray lastObject];
+        
+            if([inningsno isEqualToString: @"1"])
+            {
+                [objinnings1Wicket addObject:ManhattanWktRecord];
+            }
 
-}
+        
+    }
+
+    for(int i=0; i < wicketDetail.count; i++)
+    {
+         ManhattenWKTRecord * ManhattanWktRecord =(ManhattenWKTRecord *)[wicketDetail objectAtIndex:i];
+        
+        
+        NSString * inningsno =ManhattanWktRecord.inningno;
+        
+        //        if(objInnings2OverArray.count >0)
+        //        {
+        //            NSString * Addoverno =[objInnings2OverArray lastObject];
+        
+        if([inningsno isEqualToString: @"2"])
+        {
+            [objinnings2wicket addObject:ManhattanWktRecord];
+        }
+        
+        
+    }
+
+    
+    
+//    NSPredicate* wicketinnings2Predicate = [NSPredicate predicateWithFormat:@"inningsno == %@",innings2];
+//    
+//    NSArray * Innings2wicket = [wicketDetail filteredArrayUsingPredicate:wicketinnings2Predicate];
+//    
+//    objinnings2wicket =[Innings2wicket copy];
+//    
+
+    
+    ToolTipDetails =[self getToolTip:self.compititionCode :self.matchCode];
+    
+
+  }
 
 
 -(void) BarChartMethodFirstInnigs
@@ -574,89 +643,161 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 - (NSInteger)numberOfSectionsInBarChartView:(MCBarChartView *)barChartView {
-    // if (barChartView.tag == 111) {
+    
     return [_dataSource count];
-    //}
-    //else {
-    //        return [_dataSource count];
-    //    }
+  
     
 }
 
 - (NSInteger)barChartView:(MCBarChartView *)barChartView numberOfBarsInSection:(NSInteger)section {
-    //if (barChartView.tag == 111) {
     return 1;
-    //}
-    //    else {
-    //        return [_dataSource2[section] count];
-    //    }
+    
 }
 
 - (id)barChartView:(MCBarChartView *)barChartView valueOfBarInSection:(NSInteger)section index:(NSInteger)index {
-    //if (barChartView.tag == 111) {
     return _dataSource[section];
-    //    } else {
-    //        return _dataSource2[section][index];
-    //    }
+   
 }
 
 - (UIColor *)barChartView:(MCBarChartView *)barChartView colorOfBarInSection:(NSInteger)section index:(NSInteger)index {
-    //if (barChartView.tag == 111) {
+    
     return [UIColor colorWithRed:2/255.0 green:185/255.0 blue:187/255.0 alpha:1.0];
-    //}
     
-    
-    //    else {
-    //        if (index == 0) {
-    //            return [UIColor colorWithRed:105/255.0 green:105/255.0 blue:147/255.0 alpha:1.0];
-    //        }
-    //        return [UIColor colorWithRed:2/255.0 green:185/255.0 blue:187/255.0 alpha:1.0];
-    //    }
-}
+   }
 
 - (NSString *)barChartView:(MCBarChartView *)barChartView titleOfBarInSection:(NSInteger)section {
     return _titles[section];
 }
 
 - (NSString *)barChartView:(MCBarChartView *)barChartView informationOfBarInSection:(NSInteger)section index:(NSInteger)index {
-//    if (barChartView.tag == 111) {
-//        if ([_dataSource[section] floatValue] >= 130) {
-//            return @"dssf";
-//        } else if ([_dataSource[section] floatValue] >= 110) {
-//            return @"sff";
-//        } else if ([_dataSource[section] floatValue] >= 90) {
-//            return @"rtt";
-//        } else {
-//            return @"ttt";
-//        }
-//    }
+
+    if (barChartView.tag == 111) {
+        if ([_dataSource[section] floatValue] >= 130) {
+            return @"";
+        } else if ([_dataSource[section] floatValue] >= 110) {
+            return @"";
+        } else if ([_dataSource[section] floatValue] >= 90) {
+            return @"";
+        } else {
+            return @"";
+        }
+    }
     return nil;
 }
 
 - (NSMutableArray *)barChartView:(MCBarChartView *)barChartView informationOfWicketInSection:(NSInteger)section
 {
-    return wicketDetail;
+    if(barChartView.tag == 111)
+    {
+    return objinnings1Wicket;
+    }
+    else
+    {
+        return objinnings2wicket;
+    }
 }
 
 
 - (CGFloat)barWidthInBarChartView:(MCBarChartView *)barChartView {
-    //if (barChartView.tag == 111) {
-    return 26;
-    //    } else {
-    //        return 26;
-    //    }
+        return 26;
+    
 }
 
 - (CGFloat)paddingForSectionInBarChartView:(MCBarChartView *)barChartView {
-    //if (barChartView.tag == 111) {
     return 24;
-    //    } else {
-    //        return 12;
-    //    }
+   
 }
 
+-(NSMutableArray *) getToolTip :(NSString *) compitioncode :(NSString *) matchcode
+{
+    NSMutableArray * getTooltipdetail=[[NSMutableArray alloc]init];
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT   BAT.INNINGSNO, BAT.BATSMANCODE  , BAT.BOWLERCODE, BATSMANNAME , BAT.RUNS, BALLS , BOWLERNAME, WICKETDESCRIPTION, WICKETNO, (BE.BALLNO) AS WICKETBALLNO, WICKETSCORE, WICKETTYPEDESCRIPTION ,(BE.OVERNO+1) AS WICKETOVERNO FROM (SELECT BS.BATTINGPOSITIONNO, BS.BATSMANCODE, BMC.PLAYERNAME BATSMANNAME,BS.BOWLERCODE, BWLC.PLAYERNAME BOWLERNAME, CAST(BS.RUNS AS NVARCHAR) RUNS, CAST(BS.BALLS AS NVARCHAR) BALLS, CASE BS.WICKETTYPE WHEN 'MSC095' THEN 'c ' + FLDRC.PLAYERNAME + ' b ' + BWLC.PLAYERNAME WHEN 'MSC096' THEN 'b ' + BWLC.PLAYERNAME WHEN 'MSC097' THEN 'run out ' + FLDRC.PLAYERNAME WHEN 'MSC104' THEN 'st ' + FLDRC.PLAYERNAME + ' b '+ BWLC.PLAYERNAME WHEN 'MSC098' THEN 'lbw ' + BWLC.PLAYERNAME WHEN 'MSC099' THEN 'hit wicket' +' '+ BWLC.PLAYERNAME WHEN 'MSC100' THEN 'Handled the ball' WHEN 'MSC105' THEN 'c & b' +' '+ BWLC.PLAYERNAME WHEN 'MSC101' THEN 'Timed Out' WHEN 'MSC102' THEN 'Retired Hurt' WHEN 'MSC103' THEN 'Hitting Twice' WHEN 'MSC107' THEN 'Mankading' WHEN 'MSC108' THEN 'Retired Out' WHEN 'MSC106' THEN 'Obstructing the field' WHEN 'MSC133' THEN 'Absent Hurt' ELSE 'Not Out' END AS WICKETDESCRIPTION, BS.WICKETNO WICKETNO, CAST(BS.WICKETOVERNO AS NVARCHAR)+1 WICKETOVERNO, CAST(BS.WICKETBALLNO AS NVARCHAR) WICKETBALLNO, CAST(BS.WICKETSCORE AS NVARCHAR) WICKETSCORE, MDWT.METASUBCODEDESCRIPTION WICKETTYPEDESCRIPTION, BS.INNINGSNO,WE.BALLCODE AS BALLCODE FROM BATTINGSUMMARY BS INNER JOIN PLAYERMASTER BMC  ON BMC.PLAYERCODE = BS.BATSMANCODE LEFT JOIN PLAYERMASTER BWLC   ON BWLC.PLAYERCODE = BS.BOWLERCODE LEFT JOIN PLAYERMASTER FLDRC   ON FLDRC.PLAYERCODE = BS.FIELDERCODE LEFT JOIN METADATA MDWT   ON BS.WICKETTYPE = MDWT.METASUBCODE LEFT JOIN WICKETEVENTS WE ON WE.COMPETITIONCODE=BS.COMPETITIONCODE  AND WE.MATCHCODE=BS.MATCHCODE AND WE.INNINGSNO =BS.INNINGSNO  AND WE.WICKETPLAYER=BS.BATSMANCODE WHERE ('' = '%@' OR  BS.COMPETITIONCODE = '%@') AND BS.MATCHCODE = '%@' AND BS.WICKETNO IS NOT NULL GROUP BY BS.BATSMANCODE, BMC.PLAYERNAME, BS.BOWLERCODE,BS.RUNS, BS.BALLS, BS.WICKETTYPE, BS.WICKETNO, BS.WICKETOVERNO, BS.WICKETBALLNO, BS.WICKETSCORE , FLDRC.PLAYERNAME, BWLC.PLAYERNAME, BS.BATTINGPOSITIONNO, MDWT.METASUBCODEDESCRIPTION  , BS.INNINGSNO,WE.BALLCODE) BAT INNER JOIN BALLEVENTS BE ON  BE.BALLCODE =BAT.BALLCODE ORDER BY WICKETNO;",compitioncode,compitioncode,matchcode];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+            
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                ToolTipRecord *record=[[ToolTipRecord alloc]init];
+                record.inningsno = [self getValueByNull:statement :0];
+                record.batsmancode=[self getValueByNull:statement :1];
+                record.bowlercode=[self getValueByNull:statement :2];
+                record.batsmanname=[self getValueByNull:statement :3];
+                
+                record.runs=[self getValueByNull:statement :4];
+                
+                record.balls=[self getValueByNull:statement :5];
+                
+                record.bowlername=[self getValueByNull:statement :6];
+                
+                record.wicketdescription=[self getValueByNull:statement :7];
+                
+                record.wicketno=[self getValueByNull:statement :8];
+                
+                record.wicketballno=[self getValueByNull:statement :9];
+                
+                record.wicketscore=[self getValueByNull:statement :10];
+                
+                record.wickettypedescription=[self getValueByNull:statement :11];
+                
+                record.wicketoverno=[self getValueByNull:statement :12];
+                
+                [getTooltipdetail addObject:record];
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return getTooltipdetail;
 
-     
+}
+
+-(void) TooltipMethod :(UIButton *)selectwicket
+{
+    NSLog(@"%@",selectwicket);
+   
+    if(tooltip_view !=nil)
+    {
+        [tooltip_view removeFromSuperview];
+    }
+    
+   tooltip_view =[[UIView alloc]initWithFrame:CGRectMake(selectwicket.frame.origin.x+50,selectwicket.frame.origin.y-80, 200, 140)];
+    
+    [tooltip_view setBackgroundColor:[UIColor clearColor]];
+    [self.view addSubview:tooltip_view];
+    
+    tooltip_view.layer.borderColor = [UIColor whiteColor].CGColor;
+    tooltip_view.layer.borderWidth = 2.0f;
+    
+    UILabel * objwicketText =[[UILabel alloc]initWithFrame:CGRectMake(5, 0, tooltip_view.frame.size.width,tooltip_view.frame.size.height)];
+    objwicketText.numberOfLines=10;
+    objwicketText.textColor =[UIColor whiteColor];
+    
+    ToolTipRecord * wicketdetail =[ToolTipDetails objectAtIndex:selectwicket.tag-1];
+    objwicketText.text = [NSString stringWithFormat:@" Team Score : %@,\n Bowler Name : %@,\n overno : %@,\n Runs : %@,\n Wicket : %@ ",wicketdetail.wicketscore,wicketdetail.bowlername,wicketdetail.wicketoverno,wicketdetail.runs,wicketdetail.wicketno];
+    //objwicketText.textAlignment =UITextAlignmentCenter;
+    [tooltip_view addSubview:objwicketText];
+    [NSTimer scheduledTimerWithTimeInterval:3.0
+                                     target:self
+                                   selector:@selector(hidepopview)
+                                   userInfo:nil
+                                    repeats:NO];
+}
+-(void)hidepopview
+{
+    if(tooltip_view !=nil)
+    {
+        [tooltip_view removeFromSuperview];
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

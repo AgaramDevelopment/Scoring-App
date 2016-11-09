@@ -56,6 +56,7 @@
 		185060561D0300190030E3E2 /* FastBowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA941CFF264A00B7259C /* FastBowlTypeCell.m */; };
 		18674AC31D1A4F9600DB7C71 /* MatchResultListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18674AC11D1A4F9600DB7C71 /* MatchResultListVC.m */; };
 		18674AC41D1A4F9600DB7C71 /* MatchResultListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18674AC21D1A4F9600DB7C71 /* MatchResultListVC.xib */; };
+		186B00C51DD1D606008E00D4 /* ToolTipRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 186B00C41DD1D606008E00D4 /* ToolTipRecord.m */; };
 		186D5E3F1D9AA617000AFB85 /* BatsManINOUT.m in Sources */ = {isa = PBXBuildFile; fileRef = 186D5E3D1D9AA617000AFB85 /* BatsManINOUT.m */; };
 		186D5E401D9AA617000AFB85 /* BatsManINOUT.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186D5E3E1D9AA617000AFB85 /* BatsManINOUT.xib */; };
 		186DC7F81D1E56DC00293B7F /* Utitliy.m in Sources */ = {isa = PBXBuildFile; fileRef = 186DC7F71D1E56DC00293B7F /* Utitliy.m */; };
@@ -436,6 +437,8 @@
 		18674AC01D1A4F9600DB7C71 /* MatchResultListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchResultListVC.h; sourceTree = "<group>"; };
 		18674AC11D1A4F9600DB7C71 /* MatchResultListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchResultListVC.m; sourceTree = "<group>"; };
 		18674AC21D1A4F9600DB7C71 /* MatchResultListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchResultListVC.xib; sourceTree = "<group>"; };
+		186B00C31DD1D606008E00D4 /* ToolTipRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToolTipRecord.h; path = Resource/ToolTipRecord/ToolTipRecord.h; sourceTree = "<group>"; };
+		186B00C41DD1D606008E00D4 /* ToolTipRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToolTipRecord.m; path = Resource/ToolTipRecord/ToolTipRecord.m; sourceTree = "<group>"; };
 		186D5E3C1D9AA617000AFB85 /* BatsManINOUT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatsManINOUT.h; sourceTree = "<group>"; };
 		186D5E3D1D9AA617000AFB85 /* BatsManINOUT.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatsManINOUT.m; sourceTree = "<group>"; };
 		186D5E3E1D9AA617000AFB85 /* BatsManINOUT.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BatsManINOUT.xib; sourceTree = "<group>"; };
@@ -1072,6 +1075,15 @@
 				182BFDBF1DBBA28C0084BDDC /* PitchReportdetailRecord.m */,
 			);
 			name = PitchReportDetailRecord;
+			sourceTree = "<group>";
+		};
+		186B00BF1DD1D55A008E00D4 /* ToolTipRecord */ = {
+			isa = PBXGroup;
+			children = (
+				186B00C31DD1D606008E00D4 /* ToolTipRecord.h */,
+				186B00C41DD1D606008E00D4 /* ToolTipRecord.m */,
+			);
+			name = ToolTipRecord;
 			sourceTree = "<group>";
 		};
 		186D5E3B1D9AA5B9000AFB85 /* BatMan IN/OUT */ = {
@@ -1741,6 +1753,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				186B00BF1DD1D55A008E00D4 /* ToolTipRecord */,
 				189F3B311DD0B15800D128D7 /* TNCA_DATABASE.sqlite */,
 				1892DC521DC76079005EC9BD /* ManhattenWktRecord */,
 				187A8B4B1DC660A200A5D31E /* ManhattanRecord */,
@@ -2569,6 +2582,7 @@
 				24E7B4BB1D238D8C00EF0D55 /* DBManagerEndInnings.m in Sources */,
 				1883B5F41D867DF6009E9CB3 /* BowlerStrickPitchRecord.m in Sources */,
 				DCEFC8761D28B82600451485 /* DBManagerChangeTeamInsert.m in Sources */,
+				186B00C51DD1D606008E00D4 /* ToolTipRecord.m in Sources */,
 				36DF65E61DB751830038C1AE /* PlayingSquadVC.m in Sources */,
 				187462221D9BC7C60093721B /* BatsManINOutTime.m in Sources */,
 				DCEFC8601D28B6CF00451485 /* DBManagerChangeToss.m in Sources */,
