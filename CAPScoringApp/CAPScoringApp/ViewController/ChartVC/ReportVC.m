@@ -16,6 +16,7 @@
 #import "BatsmanVsBowlerVC.h"
 #import "BowlerVsBatsmanVC.h"
 #import "Manhattan.h"
+#import "PartnershipVC.h"
 
 @interface ReportVC ()
 {
@@ -28,6 +29,7 @@
     BowlerVsBatsmanVC *bowlerVsBatsmanVC;
     SessionReportVC * SessionReportvc;
     Manhattan * objManhattan;
+    PartnershipVC * objPartnershipvc;
 }
 
 @end
@@ -110,7 +112,23 @@
     else if(objBtn.tag == 2)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setBowlerVsBatsmanView];
+        
+      //  [self setBowlerVsBatsmanView];
+        
+        objPartnershipvc =[[PartnershipVC alloc] initWithNibName:@"PartnershipVC" bundle:nil];
+        
+        objPartnershipvc.matchcode =self.matchCode;
+        objPartnershipvc.compitioncode =self.competitionCode;
+        objPartnershipvc.matchtypecode =self.matchTypeCode;
+        objPartnershipvc.teamcode      = self.teamcode;
+        
+        objPartnershipvc.fstInnShortName = self.fstInnShortName;
+        objPartnershipvc.secInnShortName = self.secInnShortName;
+        objPartnershipvc.thrdInnShortName = self.thrdInnShortName;
+        objPartnershipvc.frthInnShortName = self.frthInnShortName;
+        
+        objPartnershipvc.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+        [self.view addSubview:objPartnershipvc.view];
         
     }
     else if(objBtn.tag == 3)

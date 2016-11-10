@@ -567,6 +567,7 @@
             objReport.matchCode = record.matchCode;
             objReport.competitionCode = record.competitionCode;
             objReport.matchTypeCode =record.matchTypeCode;
+            objReport.teamcode  = record.teamAcode;
             
             
             
