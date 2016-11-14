@@ -87,13 +87,19 @@
         cell.lbl_threes.text = record.THREES;
         cell.lbl_b4.text = record.BOUNDARY4S;
         cell.lbl_b6.text = record.BOUNDARY6S;
-        //cell.lbl_one_per.text = [NSString stringWithFormat:@"%@%@",record.ONESPERCENTAGE,@"%"];
+      //cell.lbl_one_per.text = [NSString stringWithFormat:@"%@%@",record.ONESPERCENTAGE,@"%"];
+//        cell.lbl_ones_per.text = [NSString stringWithFormat:@"%.2f %@",[record.ONESPERCENTAGE floatValue],@"%"];
+//        cell.lbl_twos_per.text = [NSString stringWithFormat:@"%.2f %@",[record.TWOSPERCENTAGE floatValue],@"%"];
+//        cell.lbl_threes_per.text = [NSString stringWithFormat:@"%.2f %@",[record.THREESPERCENTAGE floatValue],@"%"];
+//        cell.lbl_fours_per.text = [NSString stringWithFormat:@"%.2f %@",[record.BOUNDARY4SPERCENTAGE floatValue],@"%"];
+//        cell.lbl_six_per.text = [NSString stringWithFormat:@"%.2f %@",[record.BOUNDART6SPERCENTAGE floatValue],@"%"];
+        
         cell.lbl_ones_per.text = [NSString stringWithFormat:@"%.2f",[record.ONESPERCENTAGE floatValue]];
         cell.lbl_twos_per.text = [NSString stringWithFormat:@"%.2f",[record.TWOSPERCENTAGE floatValue]];
         cell.lbl_threes_per.text = [NSString stringWithFormat:@"%.2f",[record.THREESPERCENTAGE floatValue]];
         cell.lbl_fours_per.text = [NSString stringWithFormat:@"%.2f",[record.BOUNDARY4SPERCENTAGE floatValue]];
         cell.lbl_six_per.text = [NSString stringWithFormat:@"%.2f",[record.BOUNDART6SPERCENTAGE floatValue]];
-        
+
         
         
         return cell;
@@ -148,7 +154,7 @@
         self.inns_three.hidden = YES;
         self.inns_four.hidden = YES;
         
-        //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
+        //[self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
         //[self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
         self.inns_one_width.constant = 384;
         self.inns_two_width.constant = 384;

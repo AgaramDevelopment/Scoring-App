@@ -111,8 +111,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    return [_playerArray count];
-    return [_teamBplayerArray count];
+    return [_playerArray count]>[_teamBplayerArray count] ? [_playerArray count] : [_teamBplayerArray count];
+    
     
     //count number of row from counting array hear cataGorry is An Array
 }
@@ -134,89 +134,89 @@
   
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
+    
+    
+    if ([_playerArray count] > indexPath.row) {
+        
         PlayingSquadRecords *record = [_playerArray objectAtIndex:indexPath.row];
+
+        cell.txt_teamA_players.text = record.playerName;
+        
+        //set icon for player roles - team A
+        
+        if ([record.playerRole isEqualToString:@"All Rounder"]) {
+            
+            cell.img_teamA.image = [UIImage imageNamed:@"ico_allrounder.png"];
+            
+            
+        }
+        
+        if ([record.playerRole isEqualToString:@"Bowler"]) {
+            
+            cell.img_teamA.image = [UIImage imageNamed:@"ico_bowler.png"];
+            
+            
+        }
+        
+        if ([record.playerRole isEqualToString:@"Batsman"]) {
+            
+            cell.img_teamA.image = [UIImage imageNamed:@"ico_batsmen.png"];
+            
+        }
+        
+        
+    }else{
+        
+        cell.txt_teamA_players.text = @"";
+         cell.img_teamA.image = nil;
+        
+    }
+    
+    
+    if ([_teamBplayerArray count]>indexPath.row) {
         PlayingSquadRecords *recordB = [_teamBplayerArray objectAtIndex:indexPath.row];
-    
-    
-//    if ([_playerArray count] < indexPath.row) {
-//        
-//        
-//        cell.txt_teamA_players.text = record.playerName;
-//        cell.txt_teamB_players.text = recordB.playerName;
-//        
-//        
-//    }else{
-//        
-//        cell.txt_teamA_players.text = @"";
-//        cell.txt_teamB_players.text = @"";
-//        
-//    }
-    
-    
-//    if ([_teamBplayerArray count]<indexPath.row) {
-//        
-//        
-//        cell.txt_teamA_players.text = record.playerName;
-//        cell.txt_teamB_players.text = recordB.playerName;
-//
-//        
-//    }else{
-//        
-//        cell.txt_teamA_players.text = @"";
-//        cell.txt_teamB_players.text = @"";
-//
-//    }
-//
-    
-    
-    cell.txt_teamA_players.text = record.playerName;
-    cell.txt_teamB_players.text = recordB.playerName;
-    
-    
-    //set icon for player roles - team A
-    
-    if ([record.playerRole isEqualToString:@"All Rounder"]) {
-    
-        cell.img_teamA.image = [UIImage imageNamed:@"ico_allrounder.png"];
+
         
+        cell.txt_teamB_players.text = recordB.playerName;
         
+        //set icon for player roles - team B
+        if ([recordB.playerRole isEqualToString:@"All Rounder"]) {
+            
+            cell.img_teamB.image = [UIImage imageNamed:@"ico_allrounder.png"];
+            
+        }
+        
+        if ([recordB.playerRole isEqualToString:@"Bowler"]) {
+            
+            
+            cell.img_teamB.image = [UIImage imageNamed:@"ico_bowler.png"];
+            
+        }
+        
+        if ([recordB.playerRole isEqualToString:@"Batsman"]) {
+            
+            
+            cell.img_teamB.image = [UIImage imageNamed:@"ico_batsmen.png"];
+        }
+        
+
+        
+    }else{
+        
+        cell.txt_teamB_players.text = @"";
+        cell.img_teamB.image = nil;
+
     }
+
     
-    if ([record.playerRole isEqualToString:@"Bowler"]) {
-        
-        cell.img_teamA.image = [UIImage imageNamed:@"ico_bowler.png"];
-        
-        
-    }
     
-    if ([record.playerRole isEqualToString:@"Batsman"]) {
-        
-        cell.img_teamA.image = [UIImage imageNamed:@"ico_batsmen.png"];
-        
-    }
+   
     
     
     
-      //set icon for player roles - team B
-    if ([recordB.playerRole isEqualToString:@"All Rounder"]) {
-        
-        cell.img_teamB.image = [UIImage imageNamed:@"ico_allrounder.png"];
-        
-    }
     
-    if ([recordB.playerRole isEqualToString:@"Bowler"]) {
-        
-       
-        cell.img_teamB.image = [UIImage imageNamed:@"ico_bowler.png"];
-        
-    }
     
-    if ([recordB.playerRole isEqualToString:@"Batsman"]) {
-        
-       
-        cell.img_teamB.image = [UIImage imageNamed:@"ico_batsmen.png"];
-    }
-    
+
     
     
         //[self setImage:record.teamCode :cell.img_teamA];

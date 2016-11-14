@@ -87,8 +87,8 @@ BowlingKPITVC *cell = (BowlingKPITVC *)[tableView dequeueReusableCellWithIdentif
         
         cell.lbl_bowler_name.text =  record.BOWLERNAME;
         cell.lbl_over.text = record.OVERS;
-        cell.lbl_ball.text = record.BALLS;
-        cell.lbl_runs.text = record.RUNS;
+        cell.lbl_ball.text = record.RUNS;
+        cell.lbl_runs.text = record.BALLS;
         cell.lbl_eco.text = record.ECONOMYRATE;
         cell.lbl_dB.text = record.DOTBALL;
         cell.lbl_ones.text = record.ONES;
@@ -97,11 +97,11 @@ BowlingKPITVC *cell = (BowlingKPITVC *)[tableView dequeueReusableCellWithIdentif
         cell.lbl_b4.text = record.BOUNDARY4S;
         cell.lbl_b6.text = record.BOUNDARY6S;
       //cell.lbl_one_per.text = [NSString stringWithFormat:@"%@%@",record.ONESPERCENTAGE,@"%"];
-        cell.lbl_one_per.text = record.ONESPERCENTAGE;
-        cell.lbl_two_per.text = record.TWOSPERCENTAGE;
-        cell.lbl_three_per.text = record.THREESPERCENTAGE;
-        cell.lbl_b4_per.text = record.FOURSPERCENTAGE;
-        cell.lbl_b6_per.text = record.SIXESPERCENTAGE;
+        cell.lbl_one_per.text = [NSString stringWithFormat:@"%.2f",[record.ONESPERCENTAGE floatValue]];
+        cell.lbl_two_per.text =  [NSString stringWithFormat:@"%.2f", [record.TWOSPERCENTAGE floatValue]];
+        cell.lbl_three_per.text = [NSString stringWithFormat:@"%.2f",[record.THREESPERCENTAGE floatValue]];
+        cell.lbl_b4_per.text = [NSString stringWithFormat:@"%.2f", [record.BOUNDARY4SPERCENTAGE floatValue]];
+        cell.lbl_b6_per.text = [NSString stringWithFormat:@"%.2f",[record.BOUNDART6SPERCENTAGE floatValue]];
         
         
         
