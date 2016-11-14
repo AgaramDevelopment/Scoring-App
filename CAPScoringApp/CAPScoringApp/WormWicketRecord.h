@@ -17,5 +17,6 @@
 @property(strong,nonatomic) NSString *wicketDesc;
 @property(strong,nonatomic) NSString *wicketOver;
 @property(strong,nonatomic) NSString *wicketScore;
+@property(strong,nonatomic) NSNumber *tag;
 
 @end

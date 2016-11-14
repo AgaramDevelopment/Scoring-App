@@ -121,7 +121,7 @@
     else if(objBtn.tag == 3)
     {
          NSLog(@"%d",objBtn.tag);
-        
+        [self setWormChartView];
        
         
     }

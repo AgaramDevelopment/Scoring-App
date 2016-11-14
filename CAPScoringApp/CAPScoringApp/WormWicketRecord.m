@@ -17,4 +17,5 @@
 @synthesize wicketOver;
 @synthesize runs;
 @synthesize wicketScore;
+@synthesize tag;
 @end
