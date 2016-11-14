@@ -93,6 +93,12 @@
       cell.strikerName_lbl.text =objRecord.STRIKER1;
     
       cell.nonstrikerName_lbl.text =objRecord.NONSTRIKER1;
+    [cell layoutIfNeeded];
+    
+    cell.striker_progress.progress = [objRecord.PLAYER1 floatValue]/[objRecord.RUNS floatValue];
+    cell.nonStriker_progress.progress = [objRecord.PLAYER2 floatValue]/[objRecord.RUNS floatValue];
+    cell.combination_progress.progress =[objRecord.PLAYER1 floatValue]/[objRecord.RUNS floatValue];
+    cell.combinationnonStriker.progress = [objRecord.PLAYER2 floatValue]/[objRecord.RUNS floatValue];
     
     cell.comparestriker_lbl.text =[NSString stringWithFormat:@"%@(%@) %@(%@)",objRecord.PLAYER1,objRecord.PLAYER1BALLS,objRecord.PLAYER2,objRecord.PLAYER2BALLS];
     

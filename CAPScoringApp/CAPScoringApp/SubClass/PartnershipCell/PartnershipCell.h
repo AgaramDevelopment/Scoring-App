@@ -16,4 +16,12 @@
 
 @property (nonatomic,strong) IBOutlet UILabel * comparestriker_lbl;
 
+@property (nonatomic,strong) IBOutlet UIProgressView * striker_progress;
+
+@property (nonatomic,strong) IBOutlet UIProgressView * nonStriker_progress;
+
+@property (nonatomic,strong) IBOutlet UIProgressView * combination_progress;
+
+@property (nonatomic,strong) IBOutlet UIProgressView * combinationnonStriker;
+
 @end
