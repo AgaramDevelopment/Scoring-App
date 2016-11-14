@@ -101,6 +101,7 @@
 @property (nonatomic,strong) IBOutlet UITableView * striker_Tbl;
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * strikerTblYposition;
+@property (strong, nonatomic) IBOutlet UIView *show_view;
 
 
 
