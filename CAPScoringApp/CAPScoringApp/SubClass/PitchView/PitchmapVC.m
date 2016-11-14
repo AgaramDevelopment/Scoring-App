@@ -653,7 +653,7 @@
         xposition = [objRecord.PMX2 intValue];
         yposition = [objRecord.PMY2 intValue];
         
-        if(!(xposition == 1 && yposition ==1)){
+        if(!(xposition == 1 && yposition ==1)&& (xposition!=0 && yposition !=0)){
             
            
             [self pitchpositioncount :objRecord.PMlengthcode :objRecord.PMlineCode :objRecord.BattingStyle:objRecord.Runs];
@@ -1439,12 +1439,14 @@
         else if ([PMLinecode isEqualToString:@"MSC026"])
         {
 
-            bouncermiddleRun =[Run intValue]+bouncermiddleRun;
-
             if(bouncermiddle !=nil)
             {
                 [bouncermiddle removeFromSuperview];
             }
+            
+            bouncermiddleRun =[Run intValue]+bouncermiddleRun;
+
+            
             
             bouncermiddle=[[UILabel alloc]initWithFrame:CGRectMake(350,400,35, 35)];
             bouncermiddle.textColor=[UIColor whiteColor];

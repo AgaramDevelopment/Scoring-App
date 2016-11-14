@@ -21,7 +21,7 @@
 #import "WormReportVC.h"
 #import "PartnershipVC.h"
 
-@interface ReportVC ()
+@interface ReportVC ()<UIScrollViewDelegate>
 {
     CustomNavigationVC * objCustomNavigation;
     PitchmapVC * objPitchview;
@@ -48,9 +48,17 @@
     
     [self customnavigationmethod];
     [self CreateChartList];
+    
     [self setCommentaryView];
+    
+   // [self.scrolllistview setContentSize:CGSizeMake(3200, 70)]   ;
+   
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [self.scrolllistview setContentSize:CGSizeMake(3000, 80)];
+}
 -(void)customnavigationmethod
 {
     objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
@@ -68,14 +76,15 @@
     
     
     NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
-
-        
+    
+    
+   // self.scrolllistview.frame =CGRectMake(0,self.view.frame.origin.y,764, 70);
     
         for(int i = 0; i < objhartlistArray.count; i++)
         {
             NSString *dicBallKey = [objhartlistArray objectAtIndex:i];
             
-            UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(i * 200,20,180, 40)];
+             UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(i * 200,20,180, 40)];
             btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20];
             btnborder.tag=i+1;
             [btnborder setTitle:[NSString stringWithFormat:@"%@",dicBallKey] forState:UIControlStateNormal];
@@ -85,9 +94,11 @@
 
         }
    
-     [self.scrolllistview setContentSize:CGSizeMake(13*200,70)];
+   
+  //  [self.scrolllistview setContentSize:CGSizeMake(self.scrolllistview.frame.size.width*15,70)];
+    
 
-    [self.scrolllistview setContentSize:CGSizeMake(14*200,70)];
+    //[self.scrolllistview setContentSize:CGSizeMake(13*200,70)];
     
 }
 
@@ -238,6 +249,7 @@
         [self.view addSubview:SessionReportvc.view];
 
     }
+    [self viewDidLayoutSubviews];
 }
 
 - (IBAction)btn_back:(id)sender {
