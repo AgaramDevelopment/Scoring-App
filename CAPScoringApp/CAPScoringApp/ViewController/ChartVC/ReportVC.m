@@ -59,6 +59,8 @@
     //[ScrollViewer setBackgroundColor:[UIColor redColor]];
     //CGFloat xposition = 0;
     
+    
+    
     NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
 
         
@@ -134,7 +136,7 @@
     else if(objBtn.tag == 3)
     {
          NSLog(@"%d",objBtn.tag);
-        
+        [self setWormChartView];
        
         
     }
@@ -185,14 +187,19 @@
     else if(objBtn.tag == 8)
     {
          NSLog(@"%d",objBtn.tag);
+        [self setWormChartView];
+
     }
     else if(objBtn.tag == 9)
     {
          NSLog(@"%d",objBtn.tag);
+        [self setBatsmanKpi];
     }
     else if(objBtn.tag == 10)
     {
+        
          NSLog(@"%d",objBtn.tag);
+        [self setBowlingKpi];
     }
     else if(objBtn.tag == 11)
     {
@@ -202,6 +209,8 @@
     else if(objBtn.tag == 12)
     {
          NSLog(@"%d",objBtn.tag);
+        [self setBowlerVsBatsmanView];
+
     }
     else if(objBtn.tag == 13)
     {
@@ -291,6 +300,19 @@
     [self.view addSubview:bowlerVsBatsmanVC.view];
 }
 
+-(void) setWormChartView{
+    wormReportVC = [[WormReportVC alloc]initWithNibName:@"WormReportVC" bundle:nil];
+    wormReportVC.matchCode = self.matchCode;
+    wormReportVC.matchTypeCode =self.matchTypeCode;
+    wormReportVC.compititionCode = self.competitionCode;
+    wormReportVC.fstInnShortName = self.fstInnShortName;
+    wormReportVC.secInnShortName = self.secInnShortName;
+    wormReportVC.thrdInnShortName = self.thrdInnShortName;
+    wormReportVC.frthInnShortName = self.frthInnShortName;
+    
+    wormReportVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:wormReportVC.view];
+}
 
 
 
@@ -336,7 +358,55 @@
     [self.view addSubview:sectorView.view];
     
 }
+
+
+
+-(void) setBowlingKpi{
     
+    bowlingKpiView = [[BowlingKPIVC alloc]initWithNibName:@"BowlingKPIVC" bundle:nil];
+    bowlingKpiView.matchCode = self.matchCode;
+    bowlingKpiView.compititionCode = self.competitionCode;
+    bowlingKpiView.matchTypeCode = self.matchTypeCode;
+    
+    
+    bowlingKpiView.fstInnShortName = self.fstInnShortName;
+    bowlingKpiView.secInnShortName = self.secInnShortName;
+    bowlingKpiView.thrdInnShortName = self.thrdInnShortName;
+    bowlingKpiView.frthInnShortName = self.frthInnShortName;
+    
+    bowlingKpiView.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    
+    //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:bowlingKpiView.view];
+
+    
+    
+}
+
+
+
+-(void) setBatsmanKpi{
+    
+    batsmanKpiView = [[BatsmanKPIVC alloc]initWithNibName:@"BatsmanKPIVC" bundle:nil];
+    batsmanKpiView.matchCode = self.matchCode;
+    batsmanKpiView.compititionCode = self.competitionCode;
+    batsmanKpiView.matchTypeCode = self.matchTypeCode;
+    
+    
+    batsmanKpiView.fstInnShortName = self.fstInnShortName;
+    batsmanKpiView.secInnShortName = self.secInnShortName;
+    batsmanKpiView.thrdInnShortName = self.thrdInnShortName;
+    batsmanKpiView.frthInnShortName = self.frthInnShortName;
+    
+    batsmanKpiView.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    
+    //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:batsmanKpiView.view];
+    
+    
+    
+}
+
     @end
 
 

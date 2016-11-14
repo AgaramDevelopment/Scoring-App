@@ -22,4 +22,6 @@
 -(NSMutableArray *)retrieveBatVsBowlBatsmanList: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo;
 -(NSMutableArray *)retrieveBowVsBatsBowlersList: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo;
 -(NSMutableArray *)retrieveBowVsBatsBatsmanList: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo;
+-(NSMutableArray *)retrieveWormChartDetails: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo;
+-(NSMutableArray *)retrieveWormWicketDetails: (NSString *) matchCode : (NSString *) competitionCode : (NSString *) inningsNo;
 @end

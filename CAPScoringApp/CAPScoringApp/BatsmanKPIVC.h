@@ -1,15 +1,21 @@
 //
-//  BowlingKPIVC.h
+//  BatsmanKPIVC.h
 //  CAPScoringApp
 //
-//  Created by Raja sssss on 01/11/16.
+//  Created by Raja sssss on 09/11/16.
 //  Copyright © 2016 agaram. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
-#import "BowlingKPITVC.h"
+#import "BatsmanKPITVC.h"
 
-@interface BowlingKPIVC : UIViewController
+@interface BatsmanKPIVC : UIViewController
+
+
+
+
+@property (strong, nonatomic) IBOutlet BatsmanKPITVC *batsmanKPIcell;
+
 
 @property(nonatomic,strong) NSString * compititionCode;
 @property (nonatomic,strong) NSString * matchCode;
@@ -23,8 +29,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *tbl_details;
 
-
-@property (strong, nonatomic) IBOutlet BowlingKPITVC *bowlingKPIcell;
 
 
 @property (strong, nonatomic) IBOutlet UIButton *inns_one;
