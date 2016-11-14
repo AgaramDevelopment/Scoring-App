@@ -18,6 +18,7 @@
 		04713EB81DC3562300667AF0 /* BatsmanVsBowlerTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04713EB61DC3562300667AF0 /* BatsmanVsBowlerTVCell.xib */; };
 		047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCF31D213B250084BFF7 /* PowerPlayGridTVC.xib */; };
 		047669DD1D14229600572E39 /* PenaltyDetailsRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */; };
+		047679B41DD4964E0008C124 /* WormWicketRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 047679B31DD4964E0008C124 /* WormWicketRecord.m */; };
 		047E52E01D279E8D00D4CAC6 /* GetWicketDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52DF1D279E8D00D4CAC6 /* GetWicketDetail.m */; };
 		047E52E31D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52E21D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m */; };
 		047E52EC1D27D71F00D4CAC6 /* Other_WicketgridVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52EA1D27D71F00D4CAC6 /* Other_WicketgridVC.m */; };
@@ -377,6 +378,8 @@
 		04713EB61DC3562300667AF0 /* BatsmanVsBowlerTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BatsmanVsBowlerTVCell.xib; sourceTree = "<group>"; };
 		047669DB1D14229600572E39 /* PenaltyDetailsRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PenaltyDetailsRecord.h; sourceTree = "<group>"; };
 		047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenaltyDetailsRecord.m; sourceTree = "<group>"; };
+		047679B21DD4964E0008C124 /* WormWicketRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WormWicketRecord.h; sourceTree = "<group>"; };
+		047679B31DD4964E0008C124 /* WormWicketRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WormWicketRecord.m; sourceTree = "<group>"; };
 		047E52DE1D279E8D00D4CAC6 /* GetWicketDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetWicketDetail.h; sourceTree = "<group>"; };
 		047E52DF1D279E8D00D4CAC6 /* GetWicketDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetWicketDetail.m; sourceTree = "<group>"; };
 		047E52E11D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetWicketEventsPlayerDetail.h; sourceTree = "<group>"; };
@@ -2182,6 +2185,8 @@
 				36EA715B1DC87713004B0C68 /* PlayerKPIRecords.m */,
 				0482ED0F1DD333C600FF0D2D /* WormRecord.h */,
 				0482ED101DD333C600FF0D2D /* WormRecord.m */,
+				047679B21DD4964E0008C124 /* WormWicketRecord.h */,
+				047679B31DD4964E0008C124 /* WormWicketRecord.m */,
 			);
 			name = Records;
 			sourceTree = "<group>";
@@ -2710,6 +2715,7 @@
 				CE0F19C31CF5D81D0030FFA2 /* DashBoardVC.m in Sources */,
 				187621251D1D644C006E160F /* EndInningsVC.m in Sources */,
 				CE1FBF5E1CF992C900A9B6FE /* FixturesCell.m in Sources */,
+				047679B41DD4964E0008C124 /* WormWicketRecord.m in Sources */,
 				CE2D671C1D3E3E9D00A8246C /* SBJson4StreamParserState.m in Sources */,
 				187952321D02A410001A1224 /* BowlAndShotTypeRecords.m in Sources */,
 				0481DD041D213B250084BFF7 /* PowerPlayTVCell.m in Sources */,

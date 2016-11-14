@@ -17,7 +17,7 @@
 
 @optional
 - (NSUInteger)numberOfLinesInLineChartView:(MCLineChartView *)lineChartView;
-- (NSString *)lineChartView:(MCLineChartView *)lineChartView titleAtLineNumber:(NSInteger)number;
+- (NSString *)lineChartView:(MCLineChartView *)lineChartView titleAtLineNumber:(NSInteger)number :(NSInteger)linenumber :(NSInteger)dummy;
 
 @end
 
@@ -32,6 +32,8 @@
 - (NSString *)lineChartView:(MCLineChartView *)lineChartView informationOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index;
 - (UIView *)lineChartView:(MCLineChartView *)lineChartView hintViewOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index;
 - (UIView *)lineChartView:(MCLineChartView *)lineChartView pointViewOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index;
+- (NSMutableArray *)lineChartView:(MCLineChartView *)lineChartView informationOfWicketInSection:(NSInteger)section;
+- (UIView *)lineChartView:(MCLineChartView *)lineChartView hintViewOfLineInSection:(NSInteger)section index:(NSInteger)index;
 
 @end
 

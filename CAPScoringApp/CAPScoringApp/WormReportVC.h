@@ -9,5 +9,14 @@
 #import <UIKit/UIKit.h>
 
 @interface WormReportVC : UIViewController
+@property(strong,nonatomic)NSString *matchCode;
+@property(strong,nonatomic)NSString *matchTypeCode;
+@property(strong,nonatomic)NSString *compititionCode;
+
+@property(strong,nonatomic)NSString *fstInnShortName;
+@property(strong,nonatomic)NSString *secInnShortName;
+@property(strong,nonatomic)NSString *thrdInnShortName;
+@property(strong,nonatomic)NSString *frthInnShortName;
+//@property (weak, nonatomic) IBOutlet UIScrollView *scroll_view;
 
 @end

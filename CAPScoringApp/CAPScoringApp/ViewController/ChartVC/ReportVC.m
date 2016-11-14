@@ -17,6 +17,7 @@
 #import "BowlerVsBatsmanVC.h"
 #import "Manhattan.h"
 #import "BowlingKPIVC.h"
+#import "BatsmanKPIVC.h"
 #import "WormReportVC.h"
 
 @interface ReportVC ()
@@ -31,6 +32,7 @@
     SessionReportVC * SessionReportvc;
     Manhattan * objManhattan;
     BowlingKPIVC * bowlingKpiView;
+    BatsmanKPIVC * batsmanKpiView;
     WormReportVC *wormReportVC;
 }
 
@@ -285,13 +287,13 @@
 
 -(void) setWormChartView{
     wormReportVC = [[WormReportVC alloc]initWithNibName:@"WormReportVC" bundle:nil];
-//    wormReportVC.matchCode = self.matchCode;
-//    wormReportVC.matchTypeCode =self.matchTypeCode;
-//    wormReportVC.compititionCode = self.competitionCode;
-//    wormReportVC.fstInnShortName = self.fstInnShortName;
-//    wormReportVC.secInnShortName = self.secInnShortName;
-//    wormReportVC.thrdInnShortName = self.thrdInnShortName;
-//    wormReportVC.frthInnShortName = self.frthInnShortName;
+    wormReportVC.matchCode = self.matchCode;
+    wormReportVC.matchTypeCode =self.matchTypeCode;
+    wormReportVC.compititionCode = self.competitionCode;
+    wormReportVC.fstInnShortName = self.fstInnShortName;
+    wormReportVC.secInnShortName = self.secInnShortName;
+    wormReportVC.thrdInnShortName = self.thrdInnShortName;
+    wormReportVC.frthInnShortName = self.frthInnShortName;
     
     wormReportVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:wormReportVC.view];

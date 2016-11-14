@@ -9,6 +9,7 @@
 
 #import "MCLineChartView.h"
 #import "MCChartInformationView.h"
+#import "WormWicketRecord.h"
 
 #define RGBA(r,g,b,a)   [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 #define RGB(r,g,b)      RGBA(r,g,b,1.0f)
@@ -210,7 +211,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
         }
         [dataArray addObject:barArray];
     }
-    _scrollView.contentSize = CGSizeMake(contentWidth, 0);
+    _scrollView.contentSize = CGSizeMake(maxContentWith, 0);
     _chartDataSource = [[NSMutableArray alloc] initWithArray:dataArray];
 }
 
@@ -251,7 +252,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
             lineLayer.strokeColor = color;
             lineLayer.fillColor = [UIColor clearColor].CGColor;
             pointLayer.strokeColor = color;
-            pointLayer.fillColor = [UIColor whiteColor].CGColor;
+           pointLayer.fillColor = [UIColor whiteColor].CGColor;
         } else {
             CGColorRef color = [UIColor redColor].CGColor;
             lineLayer.strokeColor = color;
@@ -272,7 +273,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
         CGFloat xOffset = _dotPadding/2;
         CGFloat chartYOffset = _oppositeY ? LINE_CHART_TOP_PADDING : _chartHeight + LINE_CHART_TOP_PADDING;
         UIBezierPath *lineBezierPath = [UIBezierPath bezierPath];
-        UIBezierPath *pointBezierPath = [UIBezierPath bezierPath];
+        //UIBezierPath *pointBezierPath = [UIBezierPath bezierPath];
         for (NSInteger index = 0; index < array.count; index ++) {
             CGFloat normalizedHeight = [self normalizedHeightForRawHeight:array[index]];
             CGFloat yOffset = chartYOffset + (_oppositeY ? normalizedHeight : -normalizedHeight);
@@ -282,30 +283,35 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                     view.center = CGPointMake(xOffset, yOffset);
                     [_scrollView addSubview:view];
                 } else {
-                    [pointBezierPath moveToPoint:CGPointMake(xOffset + _dotRadius, yOffset)];
-                    [pointBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:0 endAngle:2 * M_PI clockwise:YES];
+                   // [pointBezierPath moveToPoint:CGPointMake(xOffset + _dotRadius, yOffset)];
+                   // [pointBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:0 endAngle:2 * M_PI clockwise:YES];
                 }
             } else {
-                [pointBezierPath moveToPoint:CGPointMake(xOffset + _dotRadius, yOffset)];
-                [pointBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:0 endAngle:2 * M_PI clockwise:YES];
+               // [pointBezierPath moveToPoint:CGPointMake(xOffset + _dotRadius, yOffset)];
+               // [pointBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:0 endAngle:2 * M_PI clockwise:YES];
             }
             
             if (index == 0) {
-                [lineBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:-M_PI endAngle:M_PI clockwise:YES];
+                [lineBezierPath addLineToPoint:CGPointMake(xOffset, yOffset)];
+               // [lineBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:-M_PI endAngle:M_PI clockwise:YES];
                 [lineBezierPath moveToPoint:CGPointMake(xOffset, yOffset)];
                 
             } else {
                 CGPoint currentPoint = lineBezierPath.currentPoint;
                 CGFloat distance = sqrt((xOffset - currentPoint.x) * (xOffset - currentPoint.x) + (yOffset - currentPoint.y) * (yOffset - currentPoint.y));
-                CGFloat xDistance = (xOffset - currentPoint.x) * _dotRadius/distance;
-                CGFloat yDistance = (yOffset - currentPoint.y) * _dotRadius/distance;
-                CGPoint fromPoint = CGPointMake(currentPoint.x + xDistance, currentPoint.y + yDistance);
-                CGPoint toPoint = CGPointMake(xOffset - xDistance, yOffset - yDistance);
+               // CGFloat xDistance = (xOffset - currentPoint.x) * _dotRadius/distance;
+               // CGFloat yDistance = (yOffset - currentPoint.y) * _dotRadius/distance;
+                CGPoint fromPoint = CGPointMake(currentPoint.x , currentPoint.y );
+                CGPoint toPoint = CGPointMake(xOffset , yOffset );
+                
+                
                 [lineBezierPath moveToPoint:fromPoint];
                 [lineBezierPath addLineToPoint:toPoint];
                 
-                [lineBezierPath moveToPoint:CGPointMake(xOffset - _dotRadius, yOffset)];
-                [lineBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:-M_PI endAngle:M_PI clockwise:YES];
+                [lineBezierPath moveToPoint:CGPointMake(xOffset, yOffset)];
+              //  [lineBezierPath addLineToPoint:CGPointMake(xOffset, yOffset)];
+
+                //[lineBezierPath addArcWithCenter:CGPointMake(xOffset, yOffset) radius:_dotRadius startAngle:-M_PI endAngle:M_PI clockwise:YES];
                 [lineBezierPath moveToPoint:CGPointMake(xOffset, yOffset)];
             }
             
@@ -335,22 +341,62 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
             }
 
             
-            if (lineNumber == 0 && [self.delegate respondsToSelector:@selector(lineChartView:titleAtLineNumber:)]) {
+            if (lineNumber == 0 && [self.delegate respondsToSelector:@selector(lineChartView:titleAtLineNumber:::)]) {
                 UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(xOffset - _dotPadding/2 + 4, _chartHeight + LINE_CHART_TOP_PADDING, _dotPadding - 8, LINE_CHART_TEXT_HEIGHT)];
                 textLabel.textColor = _colorOfXText;
                 textLabel.numberOfLines = 0;
                 textLabel.textAlignment = NSTextAlignmentCenter;
                 textLabel.font = [UIFont systemFontOfSize:_xFontSize];
                 textLabel.numberOfLines = 0;
-                textLabel.text = [self.dataSource lineChartView:self titleAtLineNumber:index];
+                textLabel.text = [self.dataSource lineChartView:self titleAtLineNumber:index :lineNumber :0];
+                
+
+                
                 [_scrollView addSubview:textLabel];
+                
+                
+                
+                
+                NSMutableArray * wicket =[self.delegate lineChartView:self informationOfWicketInSection:lineNumber];
+                
+                for (int i=0; wicket.count > i; i++) {
+                    
+                    WormWicketRecord * record =(WormWicketRecord *)[wicket objectAtIndex:i];
+                    
+                    if([textLabel.text isEqualToString:record.wicketOver])
+                    {
+                        if(![record.wicketNo isEqualToString:@"0"] && record.wicketNo!= nil)
+                        {
+                            UIButton * wicket_Btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+                            
+                            wicket_Btn.tag = [record.wicketNo intValue];
+                            wicket_Btn.center = CGPointMake(xOffset, yOffset);
+                            [wicket_Btn setImage:[UIImage imageNamed:@"ballImg"] forState:UIControlStateNormal];
+                            //[wicket_Btn setTitle:objManhattanRecord.wicketno forState:UIControlStateNormal];
+                            wicket_Btn.alpha = 0.0;
+                            [_scrollView addSubview:wicket_Btn];
+                          //  [wicket_Btn addTarget:self action:@selector(didClickWicket:) forControlEvents:UIControlEventTouchUpInside];
+                            
+                            UILabel * wicketno_lbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,30,30)];
+                            wicketno_lbl.text = record.wicketNo;
+                            [wicket_Btn addSubview:wicketno_lbl];
+                            wicketno_lbl.textAlignment=UITextAlignmentCenter;
+                            
+                            [UIView animateWithDuration:0.5 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+                                wicket_Btn.alpha = 1.0;
+                            } completion:nil];
+                        }
+                    }
+                }
+                
+                
             }
             
             xOffset += _dotPadding;
         }
         lineLayer.path = lineBezierPath.CGPath;
-        pointLayer.path = pointBezierPath.CGPath;
-        pointLayer.fillColor = _solidDot ? lineLayer.strokeColor : [UIColor clearColor].CGColor;
+        // pointLayer.path = pointBezierPath.CGPath;
+     //   pointLayer.fillColor = _solidDot ? lineLayer.strokeColor : [UIColor clearColor].CGColor;
         [_scrollView.layer insertSublayer:lineLayer atIndex:(unsigned)lineNumber];
         [_scrollView.layer insertSublayer:pointLayer above:lineLayer];
         
