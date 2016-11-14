@@ -70,13 +70,13 @@ NSMutableArray * objhartlistArray;
     
 //    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
         
-         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Session", nil];
+         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Session", nil];
 
     }else{
         
 //         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report", nil];
         
-    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman", nil];
+    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman", nil];
     }
     
         for(int i = 0; i < objhartlistArray.count; i++)
@@ -131,7 +131,7 @@ NSMutableArray * objhartlistArray;
          NSLog(@"%d",objBtn.tag);
         
       //  [self setBowlerVsBatsmanView];
-        [self setPartnership];
+        [self setPitchMap];
         
 
         
@@ -139,60 +139,60 @@ NSMutableArray * objhartlistArray;
     else if(objBtn.tag == 3)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setPitchMap];
+        [self setManhattan];
        
         
     }
     else if(objBtn.tag == 4)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setManhattan];
+        [self setSpiderView];
 
     }
     else if(objBtn.tag == 5)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setSpiderView];
+        [self setSectorView];
    
 
     }
     else if(objBtn.tag == 6)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setSectorView];
+        [self setWormChartView];
     }
     else if(objBtn.tag == 7)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setWormChartView];
+        [self setBatsmanKpi];
     }
     else if(objBtn.tag == 8)
     {
          NSLog(@"%d",objBtn.tag);
-       
-        [self setBatsmanKpi];
+       [self setBowlingKpi];
+        
 
     }
     else if(objBtn.tag == 9)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setBowlingKpi];
+        [self setBatsmanVsBowlerView];
     }
     else if(objBtn.tag == 10)
     {
         
          NSLog(@"%d",objBtn.tag);
-        [self setBatsmanVsBowlerView];
+        [self setBowlerVsBatsmanView];
     }
     else if(objBtn.tag == 11)
     {
-        [self setBowlerVsBatsmanView];
+        [self setSession];
         
     }
     else if(objBtn.tag == 12)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setSession];
+        
 
     }
     else if(objBtn.tag == 13)
