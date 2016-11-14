@@ -10,6 +10,7 @@
 #import "MCLineChartView.h"
 #import "DBManagerReports.h"
 #import "WormRecord.h"
+#import "WormWicketRecord.h"
 
 @interface WormReportVC ()  <MCLineChartViewDataSource, MCLineChartViewDelegate>
 @property (strong, nonatomic) MCLineChartView *lineChartViewOne;
@@ -46,6 +47,17 @@
     self.wicketInnsOne = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"1"];
     self.wicketInnsTwo = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"2"];
     
+    int tag = 0;
+    //Set tag for tool tip
+    for(WormWicketRecord *wick in self.wicketInnsOne){
+        wick.tag =[NSNumber numberWithInt:tag];
+        tag++;
+    }
+    
+    for(WormWicketRecord *wick in self.wicketInnsTwo){
+        wick.tag =[NSNumber numberWithInt:tag];
+        tag++;
+    }
     
     
     if([self.wormDataInns1Array count]>0 || [self.wormDataInns2Array count]>0){
@@ -61,6 +73,19 @@
         
         self.wicketInnsThree = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"3"];
         self.wicketInnsFour = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"4"];
+        
+        
+        
+        for(WormWicketRecord *wick in self.wicketInnsThree){
+            wick.tag =[NSNumber numberWithInt:tag];
+            tag++;
+        }
+        
+        
+        for(WormWicketRecord *wick in self.wicketInnsFour){
+            wick.tag =[NSNumber numberWithInt:tag];
+            tag++;
+        }
         
         
         if([self.wormDataInns3Array count]>0 || [self.wormDataInns4Array count]>0){
@@ -296,5 +321,45 @@
     return nil;
 }
 
+-(WormWicketRecord *) getWicketByTag:(NSInteger) tag{
+    
+    for(WormWicketRecord *wick in self.wicketInnsOne){
+        if([wick.tag integerValue] == tag){
+            return wick;
+        }
+    }
+    
+    for(WormWicketRecord *wick in self.wicketInnsTwo){
+        if([wick.tag integerValue] == tag){
+            return wick;
+        }
+    }
+    
+    if([self isTestMatch]){//Test
+
+    
+        for(WormWicketRecord *wick in self.wicketInnsThree){
+            if([wick.tag integerValue] == tag){
+                return wick;
+            }
+        }
+    
+        for(WormWicketRecord *wick in self.wicketInnsFour){
+            if([wick.tag integerValue] == tag){
+                return wick;
+            }
+        }
+    }
+    
+    return nil;
+}
+
+
+- (NSString *)getWicketDetails:(UIButton *)selectwicket{
+    WormWicketRecord *wicketdetail = [self getWicketByTag:selectwicket.tag];
+    
+    return [NSString stringWithFormat:@" Batsman : %@,\n Bowler : %@,\n Over : %@,\n Wicket No : %@,\n Wicket Type : %@ ",wicketdetail.batsmanName,wicketdetail.bowlerName,wicketdetail.wicketOver,wicketdetail.wicketNo,wicketdetail.wicketDesc];
+ 
+}
 
 @end

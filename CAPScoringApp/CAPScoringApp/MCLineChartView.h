@@ -24,6 +24,10 @@
 @protocol MCLineChartViewDelegate <NSObject>
 
 @optional
+-(void) TooltipMethod :(UIButton *)selectwicket;
+
+- (NSString *)getWicketDetails:(UIButton *)selectwicket;
+
 - (UIColor *)lineChartView:(MCLineChartView *)lineChartView lineColorWithLineNumber:(NSInteger)lineNumber;
 - (CGFloat)lineChartView:(MCLineChartView *)lineChartView lineWidthWithLineNumber:(NSInteger)lineNumber;
 

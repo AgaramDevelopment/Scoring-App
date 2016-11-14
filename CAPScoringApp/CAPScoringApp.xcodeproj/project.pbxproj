@@ -61,6 +61,9 @@
 		185060561D0300190030E3E2 /* FastBowlTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1837AA941CFF264A00B7259C /* FastBowlTypeCell.m */; };
 		18674AC31D1A4F9600DB7C71 /* MatchResultListVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18674AC11D1A4F9600DB7C71 /* MatchResultListVC.m */; };
 		18674AC41D1A4F9600DB7C71 /* MatchResultListVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18674AC21D1A4F9600DB7C71 /* MatchResultListVC.xib */; };
+		1867C8DD1DD469CA00EFCC80 /* PartnershipRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867C8DC1DD469CA00EFCC80 /* PartnershipRecord.m */; };
+		1867C8EC1DD485E600EFCC80 /* PartnershipCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1867C8EA1DD485E600EFCC80 /* PartnershipCell.m */; };
+		1867C8ED1DD485E600EFCC80 /* PartnershipCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1867C8EB1DD485E600EFCC80 /* PartnershipCell.xib */; };
 		186B00C51DD1D606008E00D4 /* ToolTipRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 186B00C41DD1D606008E00D4 /* ToolTipRecord.m */; };
 		186D5E3F1D9AA617000AFB85 /* BatsManINOUT.m in Sources */ = {isa = PBXBuildFile; fileRef = 186D5E3D1D9AA617000AFB85 /* BatsManINOUT.m */; };
 		186D5E401D9AA617000AFB85 /* BatsManINOUT.xib in Resources */ = {isa = PBXBuildFile; fileRef = 186D5E3E1D9AA617000AFB85 /* BatsManINOUT.xib */; };
@@ -146,6 +149,9 @@
 		188597051D813B220013507E /* BowlingPlayerStatistics.m in Sources */ = {isa = PBXBuildFile; fileRef = 188597041D813B220013507E /* BowlingPlayerStatistics.m */; };
 		188597081D8176D00013507E /* BattingPayerStatisticsRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 188597071D8176D00013507E /* BattingPayerStatisticsRecord.m */; };
 		1885970B1D817DEB0013507E /* BattingStatisticsPitchRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1885970A1D817DEB0013507E /* BattingStatisticsPitchRecord.m */; };
+		1885B59D1DD339C700DF7F65 /* PartnershipVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1885B59B1DD339C700DF7F65 /* PartnershipVC.m */; };
+		1885B59E1DD339C700DF7F65 /* PartnershipVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1885B59C1DD339C700DF7F65 /* PartnershipVC.xib */; };
+		1885B5A51DD343DD00DF7F65 /* DBManagerPartnership.m in Sources */ = {isa = PBXBuildFile; fileRef = 1885B5A41DD343DD00DF7F65 /* DBManagerPartnership.m */; };
 		1886718A1CFFF77E004DEDA0 /* AggressiveShotTypeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */; };
 		188767521D67355B00846C03 /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = 188767511D67355B00846C03 /* CMPopTipView.m */; };
 		1892DC581DC762F3005EC9BD /* ManhattenWKTRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1892DC571DC762F3005EC9BD /* ManhattenWKTRecord.m */; };
@@ -455,6 +461,11 @@
 		18674AC01D1A4F9600DB7C71 /* MatchResultListVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchResultListVC.h; sourceTree = "<group>"; };
 		18674AC11D1A4F9600DB7C71 /* MatchResultListVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchResultListVC.m; sourceTree = "<group>"; };
 		18674AC21D1A4F9600DB7C71 /* MatchResultListVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MatchResultListVC.xib; sourceTree = "<group>"; };
+		1867C8DB1DD469CA00EFCC80 /* PartnershipRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PartnershipRecord.h; path = Resource/PartnershipRecord/PartnershipRecord.h; sourceTree = "<group>"; };
+		1867C8DC1DD469CA00EFCC80 /* PartnershipRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PartnershipRecord.m; path = Resource/PartnershipRecord/PartnershipRecord.m; sourceTree = "<group>"; };
+		1867C8E91DD485E600EFCC80 /* PartnershipCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PartnershipCell.h; path = SubClass/PartnershipCell/PartnershipCell.h; sourceTree = "<group>"; };
+		1867C8EA1DD485E600EFCC80 /* PartnershipCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PartnershipCell.m; path = SubClass/PartnershipCell/PartnershipCell.m; sourceTree = "<group>"; };
+		1867C8EB1DD485E600EFCC80 /* PartnershipCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PartnershipCell.xib; path = SubClass/PartnershipCell/PartnershipCell.xib; sourceTree = "<group>"; };
 		186B00C31DD1D606008E00D4 /* ToolTipRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ToolTipRecord.h; path = Resource/ToolTipRecord/ToolTipRecord.h; sourceTree = "<group>"; };
 		186B00C41DD1D606008E00D4 /* ToolTipRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ToolTipRecord.m; path = Resource/ToolTipRecord/ToolTipRecord.m; sourceTree = "<group>"; };
 		186D5E3C1D9AA617000AFB85 /* BatsManINOUT.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatsManINOUT.h; sourceTree = "<group>"; };
@@ -621,6 +632,11 @@
 		188597071D8176D00013507E /* BattingPayerStatisticsRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingPayerStatisticsRecord.m; sourceTree = "<group>"; };
 		188597091D817DEB0013507E /* BattingStatisticsPitchRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BattingStatisticsPitchRecord.h; sourceTree = "<group>"; };
 		1885970A1D817DEB0013507E /* BattingStatisticsPitchRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BattingStatisticsPitchRecord.m; sourceTree = "<group>"; };
+		1885B59A1DD339C700DF7F65 /* PartnershipVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PartnershipVC.h; path = SubClass/PartnershipVC/PartnershipVC.h; sourceTree = "<group>"; };
+		1885B59B1DD339C700DF7F65 /* PartnershipVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PartnershipVC.m; path = SubClass/PartnershipVC/PartnershipVC.m; sourceTree = "<group>"; };
+		1885B59C1DD339C700DF7F65 /* PartnershipVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PartnershipVC.xib; path = SubClass/PartnershipVC/PartnershipVC.xib; sourceTree = "<group>"; };
+		1885B5A31DD343DD00DF7F65 /* DBManagerPartnership.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManagerPartnership.h; path = Resource/DBManagerPartnership/DBManagerPartnership.h; sourceTree = "<group>"; };
+		1885B5A41DD343DD00DF7F65 /* DBManagerPartnership.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManagerPartnership.m; path = Resource/DBManagerPartnership/DBManagerPartnership.m; sourceTree = "<group>"; };
 		188671881CFFF77E004DEDA0 /* AggressiveShotTypeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AggressiveShotTypeCell.h; sourceTree = "<group>"; };
 		188671891CFFF77E004DEDA0 /* AggressiveShotTypeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AggressiveShotTypeCell.m; sourceTree = "<group>"; };
 		188767501D67355B00846C03 /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMPopTipView.h; path = SubClass/CMPopTipView/CMPopTipView.h; sourceTree = "<group>"; };
@@ -1101,6 +1117,25 @@
 			name = PitchReportDetailRecord;
 			sourceTree = "<group>";
 		};
+		1867C8D71DD4693500EFCC80 /* PartnershipRecord */ = {
+			isa = PBXGroup;
+			children = (
+				1867C8DB1DD469CA00EFCC80 /* PartnershipRecord.h */,
+				1867C8DC1DD469CA00EFCC80 /* PartnershipRecord.m */,
+			);
+			name = PartnershipRecord;
+			sourceTree = "<group>";
+		};
+		1867C8DE1DD4850600EFCC80 /* PartnershipCell */ = {
+			isa = PBXGroup;
+			children = (
+				1867C8E91DD485E600EFCC80 /* PartnershipCell.h */,
+				1867C8EA1DD485E600EFCC80 /* PartnershipCell.m */,
+				1867C8EB1DD485E600EFCC80 /* PartnershipCell.xib */,
+			);
+			name = PartnershipCell;
+			sourceTree = "<group>";
+		};
 		186B00BF1DD1D55A008E00D4 /* ToolTipRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -1358,6 +1393,25 @@
 				1884EC8F1DBA4EFB0059A2B9 /* StrikerDetails.m */,
 			);
 			name = PitchmapRecord;
+			sourceTree = "<group>";
+		};
+		1885B58F1DD336C400DF7F65 /* PartnerShipvc */ = {
+			isa = PBXGroup;
+			children = (
+				1885B59A1DD339C700DF7F65 /* PartnershipVC.h */,
+				1885B59B1DD339C700DF7F65 /* PartnershipVC.m */,
+				1885B59C1DD339C700DF7F65 /* PartnershipVC.xib */,
+			);
+			name = PartnerShipvc;
+			sourceTree = "<group>";
+		};
+		1885B59F1DD3431200DF7F65 /* DBManagerPartnership */ = {
+			isa = PBXGroup;
+			children = (
+				1885B5A31DD343DD00DF7F65 /* DBManagerPartnership.h */,
+				1885B5A41DD343DD00DF7F65 /* DBManagerPartnership.m */,
+			);
+			name = DBManagerPartnership;
 			sourceTree = "<group>";
 		};
 		1887674F1D67352B00846C03 /* PopView */ = {
@@ -1792,6 +1846,8 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				1867C8D71DD4693500EFCC80 /* PartnershipRecord */,
+				1885B59F1DD3431200DF7F65 /* DBManagerPartnership */,
 				186B00BF1DD1D55A008E00D4 /* ToolTipRecord */,
 				189F3B311DD0B15800D128D7 /* TNCA_DATABASE.sqlite */,
 				1892DC521DC76079005EC9BD /* ManhattenWktRecord */,
@@ -1980,6 +2036,8 @@
 		CE0018371CF4308C00668D8B /* SubClass */ = {
 			isa = PBXGroup;
 			children = (
+				1867C8DE1DD4850600EFCC80 /* PartnershipCell */,
+				1885B58F1DD336C400DF7F65 /* PartnerShipvc */,
 				187A8B551DC66A1900A5D31E /* chartView */,
 				1822944D1DC3670900B5F519 /* Manhattan */,
 				1872FE7B1DC2D6D3007C31F7 /* SessionReportCell */,
@@ -2398,6 +2456,7 @@
 				047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */,
 				18E0F2B81DC0DD03006E93EE /* SessionReportVC.xib in Resources */,
 				36E4BF7D1DD3184100B8E344 /* BatsmanKPIVC.xib in Resources */,
+				1867C8ED1DD485E600EFCC80 /* PartnershipCell.xib in Resources */,
 				186D5E401D9AA617000AFB85 /* BatsManINOUT.xib in Resources */,
 				18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */,
 				24F96F881D2FC90500798A9D /* PenalityVC.xib in Resources */,
@@ -2413,8 +2472,9 @@
 				DC2710771D25B9A40011C7B0 /* EndSession.xib in Resources */,
 				CE0018511CF460DE00668D8B /* RAJDHANI-REGULAR.TTF in Resources */,
 				2461251E1D13C931004B85E7 /* RevisedTarget.xib in Resources */,
+				1885B59E1DD339C700DF7F65 /* PartnershipVC.xib in Resources */,
 				0482ED161DD3385800FF0D2D /* WormReportVC.xib in Resources */,
-				1872FE8A1DC2D80F007C31F7 /* SessionReportCell.xib in Resources */,
+				1885B59E1DD339C700DF7F65 /* PartnershipVC.xib in Resources */,
 				047E52F21D27D84B00D4CAC6 /* Other_WicketgridTVC.xib in Resources */,
 				3629C9651DD199C300A6C647 /* BowlingKPITVC.xib in Resources */,
 				048882DD1DC1DF51007528E0 /* BatsmanVsBowlerVC.xib in Resources */,
@@ -2510,6 +2570,7 @@
 				CE7C6DD61D23E14A00B694D5 /* DbManager_OtherWicket.m in Sources */,
 				DCA67D511D34056A00982EF5 /* InningsDetailsVC.m in Sources */,
 				187625091D154495009374F8 /* RevicedOverVC.m in Sources */,
+				1867C8DD1DD469CA00EFCC80 /* PartnershipRecord.m in Sources */,
 				CE95A26D1D81365800F2EEDB /* HVTableView.m in Sources */,
 				246125191D13C85E004B85E7 /* Reachability.m in Sources */,
 				185060561D0300190030E3E2 /* FastBowlTypeCell.m in Sources */,
@@ -2628,6 +2689,7 @@
 				187625201D1544CD009374F8 /* BowlingSummaryElseDetailsForScoreBoard.m in Sources */,
 				0482ED151DD3385800FF0D2D /* WormReportVC.m in Sources */,
 				187621011D1D0BC8006E160F /* FetchEndDay.m in Sources */,
+				1867C8EC1DD485E600EFCC80 /* PartnershipCell.m in Sources */,
 				24EFE77F1D2823A40073DE5C /* FetchBattingTeamTossRecord.m in Sources */,
 				1885970B1D817DEB0013507E /* BattingStatisticsPitchRecord.m in Sources */,
 				CEA275151D2A20FB007F6A28 /* WicketEventsPushRecord.m in Sources */,
@@ -2679,6 +2741,7 @@
 				0468B3921D12AD2100B98576 /* MetaDataRecord.m in Sources */,
 				187625081D154495009374F8 /* BreakEventRecords.m in Sources */,
 				CEA2751E1D2A2755007F6A28 /* PenalityDetailsPushRecord.m in Sources */,
+				1885B5A51DD343DD00DF7F65 /* DBManagerPartnership.m in Sources */,
 				CEA275181D2A244B007F6A28 /* PowerPlayPushRecord.m in Sources */,
 				24D24CEE1CFEF4EE00CD75D2 /* CustomNavigationVC.m in Sources */,
 				0482ED191DD33D8500FF0D2D /* MCLineChartView.m in Sources */,
@@ -2715,8 +2778,9 @@
 				CE0F19C31CF5D81D0030FFA2 /* DashBoardVC.m in Sources */,
 				187621251D1D644C006E160F /* EndInningsVC.m in Sources */,
 				CE1FBF5E1CF992C900A9B6FE /* FixturesCell.m in Sources */,
+				1885B59D1DD339C700DF7F65 /* PartnershipVC.m in Sources */,
 				047679B41DD4964E0008C124 /* WormWicketRecord.m in Sources */,
-				CE2D671C1D3E3E9D00A8246C /* SBJson4StreamParserState.m in Sources */,
+				1885B59D1DD339C700DF7F65 /* PartnershipVC.m in Sources */,
 				187952321D02A410001A1224 /* BowlAndShotTypeRecords.m in Sources */,
 				0481DD041D213B250084BFF7 /* PowerPlayTVCell.m in Sources */,
 				24E7B4BF1D23D18B00EF0D55 /* FETCHSEBALLCODEDETAILS.m in Sources */,
