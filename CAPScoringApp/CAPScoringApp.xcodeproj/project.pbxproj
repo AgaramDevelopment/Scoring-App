@@ -18,6 +18,7 @@
 		04713EB81DC3562300667AF0 /* BatsmanVsBowlerTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04713EB61DC3562300667AF0 /* BatsmanVsBowlerTVCell.xib */; };
 		047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCF31D213B250084BFF7 /* PowerPlayGridTVC.xib */; };
 		047669DD1D14229600572E39 /* PenaltyDetailsRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */; };
+		047679B41DD4964E0008C124 /* WormWicketRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 047679B31DD4964E0008C124 /* WormWicketRecord.m */; };
 		047E52E01D279E8D00D4CAC6 /* GetWicketDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52DF1D279E8D00D4CAC6 /* GetWicketDetail.m */; };
 		047E52E31D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52E21D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m */; };
 		047E52EC1D27D71F00D4CAC6 /* Other_WicketgridVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52EA1D27D71F00D4CAC6 /* Other_WicketgridVC.m */; };
@@ -30,6 +31,10 @@
 		0481DD051D213B250084BFF7 /* PowerPlayTVCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCFB1D213B250084BFF7 /* PowerPlayTVCell.xib */; };
 		0481DD061D213B250084BFF7 /* PowerPlayVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0481DCFD1D213B250084BFF7 /* PowerPlayVC.m */; };
 		0481DD071D213B250084BFF7 /* PowerPlayVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCFE1D213B250084BFF7 /* PowerPlayVC.xib */; };
+		0482ED111DD333C600FF0D2D /* WormRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482ED101DD333C600FF0D2D /* WormRecord.m */; };
+		0482ED151DD3385800FF0D2D /* WormReportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482ED131DD3385800FF0D2D /* WormReportVC.m */; };
+		0482ED161DD3385800FF0D2D /* WormReportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0482ED141DD3385800FF0D2D /* WormReportVC.xib */; };
+		0482ED191DD33D8500FF0D2D /* MCLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0482ED181DD33D8500FF0D2D /* MCLineChartView.m */; };
 		0485A5361D2A23E00059990F /* BOWLINGMAIDENSUMMARYPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A5351D2A23E00059990F /* BOWLINGMAIDENSUMMARYPushRecord.m */; };
 		0485A5391D2A25D70059990F /* BOWLEROVERDETAILSPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A5381D2A25D70059990F /* BOWLEROVERDETAILSPushRecord.m */; };
 		0485A53C1D2A297D0059990F /* FIELDINGEVENTSPushRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 0485A53B1D2A297D0059990F /* FIELDINGEVENTSPushRecord.m */; };
@@ -373,6 +378,8 @@
 		04713EB61DC3562300667AF0 /* BatsmanVsBowlerTVCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BatsmanVsBowlerTVCell.xib; sourceTree = "<group>"; };
 		047669DB1D14229600572E39 /* PenaltyDetailsRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PenaltyDetailsRecord.h; sourceTree = "<group>"; };
 		047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenaltyDetailsRecord.m; sourceTree = "<group>"; };
+		047679B21DD4964E0008C124 /* WormWicketRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WormWicketRecord.h; sourceTree = "<group>"; };
+		047679B31DD4964E0008C124 /* WormWicketRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WormWicketRecord.m; sourceTree = "<group>"; };
 		047E52DE1D279E8D00D4CAC6 /* GetWicketDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetWicketDetail.h; sourceTree = "<group>"; };
 		047E52DF1D279E8D00D4CAC6 /* GetWicketDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetWicketDetail.m; sourceTree = "<group>"; };
 		047E52E11D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetWicketEventsPlayerDetail.h; sourceTree = "<group>"; };
@@ -394,6 +401,13 @@
 		0481DCFC1D213B250084BFF7 /* PowerPlayVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PowerPlayVC.h; sourceTree = "<group>"; };
 		0481DCFD1D213B250084BFF7 /* PowerPlayVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PowerPlayVC.m; sourceTree = "<group>"; };
 		0481DCFE1D213B250084BFF7 /* PowerPlayVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PowerPlayVC.xib; sourceTree = "<group>"; };
+		0482ED0F1DD333C600FF0D2D /* WormRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WormRecord.h; sourceTree = "<group>"; };
+		0482ED101DD333C600FF0D2D /* WormRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WormRecord.m; sourceTree = "<group>"; };
+		0482ED121DD3385800FF0D2D /* WormReportVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WormReportVC.h; sourceTree = "<group>"; };
+		0482ED131DD3385800FF0D2D /* WormReportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WormReportVC.m; sourceTree = "<group>"; };
+		0482ED141DD3385800FF0D2D /* WormReportVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WormReportVC.xib; sourceTree = "<group>"; };
+		0482ED171DD33D8500FF0D2D /* MCLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MCLineChartView.h; sourceTree = "<group>"; };
+		0482ED181DD33D8500FF0D2D /* MCLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MCLineChartView.m; sourceTree = "<group>"; };
 		0485A5341D2A23E00059990F /* BOWLINGMAIDENSUMMARYPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOWLINGMAIDENSUMMARYPushRecord.h; sourceTree = "<group>"; };
 		0485A5351D2A23E00059990F /* BOWLINGMAIDENSUMMARYPushRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BOWLINGMAIDENSUMMARYPushRecord.m; sourceTree = "<group>"; };
 		0485A5371D2A25D70059990F /* BOWLEROVERDETAILSPushRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BOWLEROVERDETAILSPushRecord.h; sourceTree = "<group>"; };
@@ -1318,6 +1332,8 @@
 		187A8B551DC66A1900A5D31E /* chartView */ = {
 			isa = PBXGroup;
 			children = (
+				0482ED171DD33D8500FF0D2D /* MCLineChartView.h */,
+				0482ED181DD33D8500FF0D2D /* MCLineChartView.m */,
 				187A8B591DC66BBF00A5D31E /* MCChartInformationView.h */,
 				187A8B5A1DC66BBF00A5D31E /* MCChartInformationView.m */,
 				187A8B561DC66B0500A5D31E /* MCBarChartView.h */,
@@ -2167,6 +2183,10 @@
 				04713EAF1DC3464B00667AF0 /* BvsBBatsman.m */,
 				36EA715A1DC87713004B0C68 /* PlayerKPIRecords.h */,
 				36EA715B1DC87713004B0C68 /* PlayerKPIRecords.m */,
+				0482ED0F1DD333C600FF0D2D /* WormRecord.h */,
+				0482ED101DD333C600FF0D2D /* WormRecord.m */,
+				047679B21DD4964E0008C124 /* WormWicketRecord.h */,
+				047679B31DD4964E0008C124 /* WormWicketRecord.m */,
 			);
 			name = Records;
 			sourceTree = "<group>";
@@ -2260,6 +2280,9 @@
 				04679C151DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.h */,
 				04679C161DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.m */,
 				04679C171DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.xib */,
+				0482ED121DD3385800FF0D2D /* WormReportVC.h */,
+				0482ED131DD3385800FF0D2D /* WormReportVC.m */,
+				0482ED141DD3385800FF0D2D /* WormReportVC.xib */,
 			);
 			name = ReportView;
 			sourceTree = "<group>";
@@ -2390,6 +2413,7 @@
 				DC2710771D25B9A40011C7B0 /* EndSession.xib in Resources */,
 				CE0018511CF460DE00668D8B /* RAJDHANI-REGULAR.TTF in Resources */,
 				2461251E1D13C931004B85E7 /* RevisedTarget.xib in Resources */,
+				0482ED161DD3385800FF0D2D /* WormReportVC.xib in Resources */,
 				1872FE8A1DC2D80F007C31F7 /* SessionReportCell.xib in Resources */,
 				047E52F21D27D84B00D4CAC6 /* Other_WicketgridTVC.xib in Resources */,
 				3629C9651DD199C300A6C647 /* BowlingKPITVC.xib in Resources */,
@@ -2563,6 +2587,7 @@
 				CE0162E51D000EDB0066B683 /* MatcheventRecord.m in Sources */,
 				04EC778E1D2956C2005B2608 /* InningsEventPushRecord.m in Sources */,
 				CEC305841D01566100301ED3 /* AppealComponentRecord.m in Sources */,
+				0482ED111DD333C600FF0D2D /* WormRecord.m in Sources */,
 				24A93A6C1D26365D00E02DAE /* GetPlayerDetailOnRetiredHurt2.m in Sources */,
 				187620F81D1D0076006E160F /* InsertEndDay.m in Sources */,
 				CE00185C1CF4667400668D8B /* CDRTranslucentSideBar.m in Sources */,
@@ -2601,6 +2626,7 @@
 				CEC305871D015BB900301ED3 /* AppealUmpireRecord.m in Sources */,
 				1883DFEC1D27C43E00854814 /* TossTeamDetailRecord.m in Sources */,
 				187625201D1544CD009374F8 /* BowlingSummaryElseDetailsForScoreBoard.m in Sources */,
+				0482ED151DD3385800FF0D2D /* WormReportVC.m in Sources */,
 				187621011D1D0BC8006E160F /* FetchEndDay.m in Sources */,
 				24EFE77F1D2823A40073DE5C /* FetchBattingTeamTossRecord.m in Sources */,
 				1885970B1D817DEB0013507E /* BattingStatisticsPitchRecord.m in Sources */,
@@ -2655,6 +2681,7 @@
 				CEA2751E1D2A2755007F6A28 /* PenalityDetailsPushRecord.m in Sources */,
 				CEA275181D2A244B007F6A28 /* PowerPlayPushRecord.m in Sources */,
 				24D24CEE1CFEF4EE00CD75D2 /* CustomNavigationVC.m in Sources */,
+				0482ED191DD33D8500FF0D2D /* MCLineChartView.m in Sources */,
 				36EA71581DC876E0004B0C68 /* BowlingKPIVC.m in Sources */,
 				CEC25DFA1D28F8A2009D99F0 /* PushSyncDBMANAGER.m in Sources */,
 				CE7C6DDC1D23E73D00B694D5 /* GetPlayerDetail.m in Sources */,
@@ -2688,6 +2715,7 @@
 				CE0F19C31CF5D81D0030FFA2 /* DashBoardVC.m in Sources */,
 				187621251D1D644C006E160F /* EndInningsVC.m in Sources */,
 				CE1FBF5E1CF992C900A9B6FE /* FixturesCell.m in Sources */,
+				047679B41DD4964E0008C124 /* WormWicketRecord.m in Sources */,
 				CE2D671C1D3E3E9D00A8246C /* SBJson4StreamParserState.m in Sources */,
 				187952321D02A410001A1224 /* BowlAndShotTypeRecords.m in Sources */,
 				0481DD041D213B250084BFF7 /* PowerPlayTVCell.m in Sources */,

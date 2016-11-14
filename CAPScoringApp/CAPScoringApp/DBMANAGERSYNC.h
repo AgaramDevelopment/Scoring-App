@@ -152,6 +152,7 @@
 
 //fetch the image
 -(NSMutableArray *)getPlayerCode;
+-(NSMutableArray *)getTeamCode;
 
 -(NSMutableArray *)getofficailCode;
 -(NSMutableArray *)getgroundcode;

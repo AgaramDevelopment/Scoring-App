@@ -562,7 +562,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO TEAMMASTER(TEAMCODE,TEAMNAME, SHORTTEAMNAME,TEAMTYPE,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,  MODIFIEDDATE,issync)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','1')",TEAMCODE,TEAMNAME, SHORTTEAMNAME,TEAMTYPE,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE];
+        NSString *INSERTSQL = [NSString stringWithFormat:@"INSERT INTO TEAMMASTER(TEAMCODE,TEAMNAME, SHORTTEAMNAME,TEAMTYPE,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,  MODIFIEDDATE,issync,TEAMLOGO)VALUES('%@','%@','%@','%@','%@','%@','%@','%@','%@','1','%@')",TEAMCODE,TEAMNAME, SHORTTEAMNAME,TEAMTYPE,RECORDSTATUS,CREATEDBY,CREATEDDATE,MODIFIEDBY,MODIFIEDDATE,TEAMLOGO];
         
         
         const char *update_stmt = [INSERTSQL UTF8String];
@@ -596,7 +596,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE TEAMMASTER SET TEAMNAME='%@', SHORTTEAMNAME='%@', TEAMTYPE='%@',RECORDSTATUS='%@', MODIFIEDBY='%@',MODIFIEDDATE='%@',issync='1' WHERE TEAMCODE='%@'",TEAMNAME,SHORTTEAMNAME,TEAMTYPE,RECORDSTATUS,MODIFIEDBY,MODIFIEDDATE,TEAMCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE TEAMMASTER SET TEAMNAME='%@', SHORTTEAMNAME='%@', TEAMTYPE='%@',RECORDSTATUS='%@', MODIFIEDBY='%@',MODIFIEDDATE='%@',issync='1',TEAMLOGO='%@' WHERE TEAMCODE='%@'",TEAMNAME,SHORTTEAMNAME,TEAMTYPE,RECORDSTATUS,MODIFIEDBY,MODIFIEDDATE,TEAMLOGO,TEAMCODE];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
@@ -1578,7 +1578,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT PLAYERCODE FROM PLAYERMASTER"];
+        NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT PLAYERCODE FROM PLAYERMASTER WHERE PLAYERPHOTO = '1'"];
         stmt=[selectPlayersSQL UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
             
@@ -1639,6 +1639,47 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     
 }
+
+-(NSMutableArray *)getTeamCode
+{
+    NSMutableArray *eventArray=[[NSMutableArray alloc]init];
+    
+    // NSString *count = [[NSString alloc]init];
+    
+    int retVal;
+    
+    
+    NSString *databasePath = [self getDBPath];
+    sqlite3 *dataBase;
+    const char *stmt;
+    sqlite3_stmt *statement;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        
+        NSString *selectPlayersSQL = [NSString stringWithFormat:@"SELECT TEAMCODE FROM TEAMMASTER WHERE TEAMLOGO = '1'"];
+        stmt=[selectPlayersSQL UTF8String];
+        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                getimageRecord *record=[[getimageRecord alloc]init];
+                record.teamCodeImage=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                [eventArray addObject:record];
+            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        
+        sqlite3_close(dataBase);
+    }
+    return eventArray;
+    
+    
+}
+
+
+
 
 -(NSMutableArray *)getgroundcode
 {
