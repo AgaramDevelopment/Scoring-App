@@ -16,6 +16,9 @@
 #import "BatsmanVsBowlerVC.h"
 #import "BowlerVsBatsmanVC.h"
 #import "Manhattan.h"
+#import "BowlingKPIVC.h"
+#import "BatsmanKPIVC.h"
+#import "WormReportVC.h"
 #import "PartnershipVC.h"
 
 @interface ReportVC ()
@@ -29,6 +32,9 @@
     BowlerVsBatsmanVC *bowlerVsBatsmanVC;
     SessionReportVC * SessionReportvc;
     Manhattan * objManhattan;
+    BowlingKPIVC * bowlingKpiView;
+    BatsmanKPIVC * batsmanKpiView;
+    WormReportVC *wormReportVC;
     PartnershipVC * objPartnershipvc;
 }
 
