@@ -650,24 +650,7 @@
             {
                 [fineleg_lbl removeFromSuperview];
             }
-//
-//            fineleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(140,70,200,35)];
-//            fineleg_lbl.textColor=[UIColor whiteColor];
-//            fineleg_lbl.text =[NSString stringWithFormat:@"%d %@ %d %@",finelegRun,@"RUNS", finelegCount,@"BALLS"];
-//            [self.img_sector addSubview:fineleg_lbl];
-//            
-//            if(lbl_fineleg_per !=nil)
-//            {
-//                [lbl_fineleg_per removeFromSuperview];
-//            }
-//            
-//            float finelegper = (_tRuns.intValue != 0) ? ((float)(finelegRun) / ((float)([_tRuns intValue])/100)) : 0 ;
-//            
-//            lbl_fineleg_per=[[UILabel alloc]initWithFrame:CGRectMake(160,80,70, 70)];
-//            lbl_fineleg_per.textColor=[UIColor whiteColor];
-//            lbl_fineleg_per.text =[NSString stringWithFormat:@"%.2f %@",finelegper,@"%"];
-//            [self.img_sector addSubview:lbl_fineleg_per];
-//            
+
             
         }
         else
@@ -722,29 +705,7 @@
         {
             NSLog(@"LH");
             
-//            squarelegRun =squarelegRun+[Run intValue];
-//            if(squareleg_lbl !=nil)
-//            {
-//                [squareleg_lbl removeFromSuperview];
-//            }
-//            
-//            squareleg_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,190,200, 35)];
-//            squareleg_lbl.textColor=[UIColor whiteColor];
-//            squareleg_lbl.text =[NSString stringWithFormat:@"%d %@ %d %@",squarelegRun,@"RUNS", squarelegCount,@"BALLS"];
-//            [self.img_sector addSubview:squareleg_lbl];
-//            
-//            
-//            if(lbl_squareleg_per !=nil)
-//            {
-//                [lbl_squareleg_per removeFromSuperview];
-//            }
-//            
-//            float squarelegper = (_tRuns.intValue != 0) ? ((float)(squarelegRun) / ((float)([_tRuns intValue])/100)) : 0 ;
-//            
-//            lbl_squareleg_per=[[UILabel alloc]initWithFrame:CGRectMake(70,195,200,70)];
-//            lbl_squareleg_per.textColor=[UIColor whiteColor];
-//            lbl_squareleg_per.text =[NSString stringWithFormat:@"%.2f %@",squarelegper,@"%"];
-//            [self.img_sector addSubview:lbl_squareleg_per];
+
             
         }
         else
@@ -798,32 +759,6 @@
         {
             NSLog(@"LH");
             
-//            midWicketRun =midWicketRun+[Run intValue];
-//            if(midWicket_lbl !=nil)
-//            {
-//                [midWicket_lbl removeFromSuperview];
-//            }
-//            
-//            
-//            midWicket_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,330,200, 35)];
-//            midWicket_lbl.textColor=[UIColor whiteColor];
-//            midWicket_lbl.text = [NSString stringWithFormat:@"%d %@ %d %@",midWicketRun,@"RUNS", midWicketCount,@"BALLS"];
-//            
-//            
-//            [self.img_sector addSubview:midWicket_lbl];
-//            
-//            
-//            if(lbl_midWicket_per !=nil)
-//            {
-//                [lbl_midWicket_per removeFromSuperview];
-//            }
-//            
-//            float midWktPer = (_tRuns.intValue != 0) ? ((float)(midWicketRun) / ((float)([_tRuns intValue])/100)) : 0 ;
-//            
-//            lbl_midWicket_per=[[UILabel alloc]initWithFrame:CGRectMake(80,335,200,70)];
-//            lbl_midWicket_per.textColor=[UIColor whiteColor];
-//            lbl_midWicket_per.text =[NSString stringWithFormat:@"%.2f %@",midWktPer,@"%"];
-//            [self.img_sector addSubview:lbl_midWicket_per];
             
         }
         else
@@ -880,29 +815,6 @@
         {
             NSLog(@"LH");
             
-//            longonRun =longonRun+[Run intValue];
-//            if(longon_lbl !=nil)
-//            {
-//                [longon_lbl removeFromSuperview];
-//            }
-//            
-//            longon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(320,460,200, 35)];
-//            longon_lbl.textColor=[UIColor whiteColor];
-//            longon_lbl.text = [NSString stringWithFormat:@"%d %@ %d %@",longonRun,@"RUNS", longonCount,@"BALLS"];
-//            [self.img_sector addSubview:longon_lbl];
-//            
-//            
-//            if(lbl_longon_per !=nil)
-//            {
-//                [lbl_longon_per removeFromSuperview];
-//            }
-//            
-//            float longOnPer = (_tRuns.intValue != 0) ? ((float)(longonRun) / ((float)([_tRuns intValue])/100)) : 0 ;
-//            
-//            lbl_longon_per=[[UILabel alloc]initWithFrame:CGRectMake(340,465,200,70)];
-//            lbl_longon_per.textColor=[UIColor whiteColor];
-//            lbl_longon_per.text =[NSString stringWithFormat:@"%.2f %@",longOnPer,@"%"];
-//            [self.img_sector addSubview:lbl_longon_per];
             
         }
         else
@@ -959,28 +871,7 @@
             NSLog(@"LH");
             
             longoffRun =longoffRun +[Run intValue];
-//            
-//            if(longoff_lbl !=nil)
-//            {
-//                [longoff_lbl removeFromSuperview];
-//            }
-//            
-//            longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(165,460,200, 35)];
-//            longoff_lbl.textColor=[UIColor whiteColor];
-//            longoff_lbl.text =[NSString stringWithFormat:@"%d %@ %d %@",longoffRun,@"RUNS", longoffCount,@"BALLS"];
-//            [self.img_sector addSubview:longoff_lbl];
-//            
-//            if(lbl_longoff_per !=nil)
-//            {
-//                [lbl_longoff_per removeFromSuperview];
-//            }
-//            
-//            float longOffPer = (_tRuns.intValue != 0) ? ((float)(longoffRun) / ((float)([_tRuns intValue])/100)) : 0 ;
-//            
-//            lbl_longoff_per=[[UILabel alloc]initWithFrame:CGRectMake(200,480,200,35)];
-//            lbl_longoff_per.textColor=[UIColor whiteColor];
-//            lbl_longoff_per.text =[NSString stringWithFormat:@"%.2f %@",longOffPer,@"%"];
-//            [self.img_sector addSubview:lbl_longoff_per];
+
         }
         else
         {
@@ -995,7 +886,7 @@
             [longoff_lbl removeFromSuperview];
         }
         
-        longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(160,450,200, 35)];
+        longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(160,440,200, 35)];
         longoff_lbl.textColor=[UIColor whiteColor];
         longoff_lbl.text = [NSString stringWithFormat:@"%d %@ %d %@",longoffRun,@"RUNS", longoffCount,@"BALLS"];
         [self.img_sector addSubview:longoff_lbl];
@@ -1007,7 +898,7 @@
         
         float longOffPer = (_tRuns.intValue != 0) ? ((float)(longoffRun) / ((float)([_tRuns intValue])/100)) : 0;
         
-        lbl_longoff_per=[[UILabel alloc]initWithFrame:CGRectMake(190,455,200,70)];
+        lbl_longoff_per=[[UILabel alloc]initWithFrame:CGRectMake(190,445,200,70)];
         lbl_longoff_per.textColor=[UIColor whiteColor];
         lbl_longoff_per.text =[NSString stringWithFormat:@"%.2f %@",longOffPer,@"%"];
         [self.img_sector addSubview:lbl_longoff_per];
@@ -1017,7 +908,7 @@
             [lbl_longoff_count removeFromSuperview];
         }
         
-        lbl_longoff_count =[[UILabel alloc]initWithFrame:CGRectMake(160,470,140,110)];
+        lbl_longoff_count =[[UILabel alloc]initWithFrame:CGRectMake(160,450,140,110)];
         lbl_longoff_count.lineBreakMode = NSLineBreakByClipping;
         lbl_longoff_count.numberOfLines = 10;
         lbl_longoff_count.textColor=[UIColor whiteColor];
@@ -1038,28 +929,7 @@
             NSLog(@"LH");
             
            coverRun = coverRun+[Run intValue];
-//            
-//            if(cover_lbl !=nil)
-//            {
-//                [cover_lbl removeFromSuperview];
-//            }
-//            
-//            cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(420,330,200,35)];
-//            cover_lbl.textColor=[UIColor whiteColor];
-//            cover_lbl.text =[NSString stringWithFormat:@"%d %@ %d %@",coverRun,@"RUNS", coverCount,@"BALLS"];
-//            [self.img_sector addSubview:cover_lbl];
-//            
-//            if(lbl_cover_per !=nil)
-//            {
-//                [lbl_cover_per removeFromSuperview];
-//            }
-//            
-//            float coverPer = (_tRuns.intValue != 0) ? ((float)(coverRun) / ((float)([_tRuns intValue])/100)) : 0 ;
-//            
-//            lbl_cover_per=[[UILabel alloc]initWithFrame:CGRectMake(465,335,200,70)];
-//            lbl_cover_per.textColor=[UIColor whiteColor];
-//            lbl_cover_per.text =[NSString stringWithFormat:@"%.2f %@",coverPer,@"%"];
-//            [self.img_sector addSubview:lbl_cover_per];
+
             
         }
         else
@@ -1114,32 +984,6 @@
         {
             NSLog(@"LH");
             
-//            pointRun = pointRun+[Run intValue];
-//            
-//            if(point_lbl !=nil)
-//            {
-//                [point_lbl removeFromSuperview];
-//            }
-//            
-//            
-//            point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(425,180,200, 35)];
-//            point_lbl.textColor=[UIColor whiteColor];
-//            point_lbl.text =[NSString stringWithFormat:@"%d %@ %d %@",pointRun,@"RUNS", pointCount,@"BALLS"];
-//            [self.img_sector addSubview:point_lbl];
-//            
-//            
-//            if(lbl_point_per !=nil)
-//            {
-//                [lbl_point_per removeFromSuperview];
-//            }
-//            
-//            float pointPer = (_tRuns.intValue != 0) ? ((float)(pointRun) / ((float)([_tRuns intValue])/100)) : 0 ;
-//            
-//            lbl_point_per=[[UILabel alloc]initWithFrame:CGRectMake(470,185,200, 70)];
-//            lbl_point_per.textColor=[UIColor whiteColor];
-//            lbl_point_per.text =[NSString stringWithFormat:@"%.2f %@",pointPer,@"%"];
-//            [self.img_sector addSubview:lbl_point_per];
-//            
             
         }
         else
@@ -1201,28 +1045,7 @@
             {
                 [Thirdman_lbl removeFromSuperview];
             }
-//
-//            
-//            
-//            Thirdman_lbl=[[UILabel alloc]initWithFrame:CGRectMake(320,70,200,35)];
-//            Thirdman_lbl.textColor=[UIColor whiteColor];
-//            Thirdman_lbl.text =[NSString stringWithFormat:@"%d %@ %d %@",ThirdmanCountRun,@"RUNS", ThirdmanCount,@"BALLS"];
-//            [self.img_sector addSubview:Thirdman_lbl];
-//            
-//            
-//            if(lbl_Thirdman_per !=nil)
-//            {
-//                [lbl_Thirdman_per removeFromSuperview];
-//            }
-//            
-//            float thirdmanper = (_tRuns.intValue != 0) ? ((float)(ThirdmanCountRun) / ((float)([_tRuns intValue])/100)) : 0 ;
-//            
-//            lbl_Thirdman_per=[[UILabel alloc]initWithFrame:CGRectMake(350,75,70, 70)];
-//            lbl_Thirdman_per.textColor=[UIColor whiteColor];
-//            lbl_Thirdman_per.text =[NSString stringWithFormat:@"%.2f %@",thirdmanper,@"%"];
-//            [self.img_sector addSubview:lbl_Thirdman_per];
-            
-            
+        
         }
         else
         {
@@ -1276,6 +1099,7 @@
         
     }
 }
+
 
 
 // filter players by left or right hand batsman
@@ -2043,25 +1867,14 @@
     int thirdManArray[] ={0,0,0,0,0};
 
 
-//    NSArray * fineLegArray = @[@0,@0,@0,@0,@0];
-//    NSArray * squareLegArray = @[@0,@0,@0,@0,@0];
-//    NSArray * midWktArray = @[@0,@0,@0,@0,@0];
-//    NSArray * longOnArray = @[@0,@0,@0,@0,@0];
-//    NSArray * longOffArray = @[@0,@0,@0,@0,@0];
-//    NSArray * coversArray = @[@0,@0,@0,@0,@0];
-//    NSArray * pointArray = @[@0,@0,@0,@0,@0];
-//    NSArray * thirdManArray = @[@0,@0,@0,@0,@0];
-    
 
-     ones = 0;
-     twos = 0;
-     threes = 0;
-     fours = 0;
-     sixes = 0;
+    [self clearValues];
+
     
     for (int i = 0 ; i < _sectorWagonArray.count; i++) {
         
         [self showLbl];
+        
         
         SpiderWagonRecords * objStriker =[self.sectorWagonArray objectAtIndex:i];
         
