@@ -33,6 +33,7 @@
 
 @end
 UIColor *strokeColor;
+
 @implementation SpiderWagonReportVC
 
 - (void)viewDidLoad {
@@ -85,7 +86,13 @@ UIColor *strokeColor;
     int x2position;
     int y2position;
     
+    int BASE_X = 320;
     
+//    if (batsManType.equals(AppConstant.BATMAN_STYLE_RIGHT_BATSMAN)) {
+//        if (spiderDetail.getBattingStyle().equals(AppConstant.BATMAN_STYLE_LEFT_BATSMAN)) {
+//            x = BASE_X + (BASE_X - x1position);
+//        }
+//    }
     
     for(int i=0; i< _spiderWagonArray.count;i++)
     {
@@ -98,6 +105,15 @@ UIColor *strokeColor;
         y2position  =[objRecord.WWY2 intValue];
         
         
+        
+        if ([_lbl_striker.text isEqualToString:@"Striker"]) {
+            
+        if ([objRecord.BATTINGSTYLE isEqualToString:@"MSC012"]) {
+            
+             x2position = BASE_X + (BASE_X - x2position);
+            
+            }
+        }
 //        if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
         
             

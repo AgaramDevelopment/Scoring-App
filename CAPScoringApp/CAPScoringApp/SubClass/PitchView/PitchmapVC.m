@@ -311,7 +311,7 @@
 
 -(IBAction)didclickStrikerSelection:(id)sender
 {
-    self.strikerTblYposition.constant =self.striker_view.frame.origin.y;
+    self.strikerTblYposition.constant =self.striker_view.frame.origin.y-55;
     self.strickerArray=[[NSMutableArray alloc]init];
     self.strickerArray= [DBMpitchReport getStrickerdetail:self.matchCode :_teamCode];
    
@@ -335,7 +335,7 @@
 
 -(IBAction)didclicklengthSelection:(id)sender
 {
-    self.strikerTblYposition.constant =self.length_View.frame.origin.y;
+    self.strikerTblYposition.constant =self.length_View.frame.origin.y-55;
     
     if(isLength==NO)
     {
@@ -358,7 +358,7 @@
 
 -(IBAction)DidclicklineSelection:(id)sender
 {
-    self.strikerTblYposition.constant =self.line_Vew.frame.origin.y;
+    self.strikerTblYposition.constant =self.line_Vew.frame.origin.y-55;
     
     if(isLine==NO)
     {
