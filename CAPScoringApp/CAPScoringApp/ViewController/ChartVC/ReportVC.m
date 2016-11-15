@@ -57,7 +57,7 @@ NSMutableArray * objhartlistArray;
 
 - (void)viewDidLayoutSubviews
 {
-    [self.scrolllistview setContentSize:CGSizeMake(3000, 80)];
+    [self.scrolllistview setContentSize:CGSizeMake(objhartlistArray.count*200, 80)];
 }
 -(void)customnavigationmethod
 {
@@ -227,7 +227,7 @@ NSMutableArray * objhartlistArray;
 
 
     }
-    [self viewDidLayoutSubviews];
+  //  [self viewDidLayoutSubviews];
 }
 
 - (IBAction)btn_back:(id)sender {

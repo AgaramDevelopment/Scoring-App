@@ -227,7 +227,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
     }
     
     
-    UILabel *Run_lbl = [[UILabel alloc] initWithFrame:CGRectMake(-15, 130,50, 20)];
+    UILabel *Run_lbl = [[UILabel alloc] initWithFrame:CGRectMake(-30, 130,50, 15)];
     Run_lbl.textColor = _colorOfYText;
     Run_lbl.textAlignment = NSTextAlignmentRight;
     Run_lbl.font = [UIFont systemFontOfSize:14];
@@ -356,7 +356,8 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
             }
 
             
-            if (lineNumber == 0 && [self.delegate respondsToSelector:@selector(lineChartView:titleAtLineNumber:::)]) {
+            if ([self.delegate respondsToSelector:@selector(lineChartView:titleAtLineNumber:::)]) {
+                
                 UILabel *textLabel = [[UILabel alloc] initWithFrame:CGRectMake(xOffset - _dotPadding/2 + 4, _chartHeight + LINE_CHART_TOP_PADDING, _dotPadding - 8, LINE_CHART_TEXT_HEIGHT)];
                 textLabel.textColor = _colorOfXText;
                 textLabel.numberOfLines = 0;
@@ -365,15 +366,14 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                 textLabel.numberOfLines = 0;
                 textLabel.text = [self.dataSource lineChartView :self titleAtLineNumber :index :lineNumber :0];
                 
-
-                
-                [_scrollView addSubview:textLabel];
-                
+                //if(lineNumber == 0){
+                    [_scrollView addSubview:textLabel];
+                //}
                 
                 
                 
                 NSMutableArray * wicket =[self.delegate lineChartView:self informationOfWicketInSection:lineNumber];
-                
+                CGFloat position = 0;
                 for (int i=0; wicket.count > i; i++) {
                     
                     WormWicketRecord * record =(WormWicketRecord *)[wicket objectAtIndex:i];
@@ -382,13 +382,13 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                     {
                         if(![record.wicketNo isEqualToString:@"0"] && record.wicketNo!= nil)
                         {
-                            UIButton * wicket_Btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
+                            UIButton * wicket_Btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
                             CGColorRef color = [self.delegate lineChartView:self lineColorWithLineNumber:lineNumber].CGColor;
 
                             wicket_Btn.tag = [record.tag intValue];
-                            wicket_Btn.center = CGPointMake(xOffset, yOffset);
+                            wicket_Btn.center = CGPointMake(xOffset+position, yOffset);
                             //[wicket_Btn setImage:[UIImage imageNamed:@"ballImg"] forState:UIControlStateNormal];
-                            wicket_Btn.layer.cornerRadius = 15;
+                            wicket_Btn.layer.cornerRadius = 12;
                             wicket_Btn.layer.borderColor=color;
                             wicket_Btn.layer.backgroundColor=color;
                             
@@ -398,11 +398,14 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                             [_scrollView addSubview:wicket_Btn];
                             [wicket_Btn addTarget:self action:@selector(tooltipMethod:) forControlEvents:UIControlEventTouchUpInside];
                             
-                            UILabel * wicketno_lbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,30,30)];
+                            UILabel * wicketno_lbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,25,25)];
                             wicketno_lbl.text = record.wicketNo;
                             wicketno_lbl.textColor = [UIColor whiteColor];
                             [wicket_Btn addSubview:wicketno_lbl];
                             wicketno_lbl.textAlignment=UITextAlignmentCenter;
+                            
+                            
+                            position = position +25;
                             
                             [UIView animateWithDuration:0.5 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                                 wicket_Btn.alpha = 1.0;
@@ -435,7 +438,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
         }
     }
     
-    UILabel *over_lbl = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 250,50, 20)];
+    UILabel *over_lbl = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 300,50, 15)];
     over_lbl.textColor = [UIColor whiteColor];
     over_lbl.textAlignment = NSTextAlignmentRight;
     over_lbl.font = [UIFont systemFontOfSize:14];
@@ -458,7 +461,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
     }
     
     
-    tooltip_view =[[UIView alloc]initWithFrame:CGRectMake((selectwicket.frame.origin.x+140)>_scrollView.frame.size.width?selectwicket.frame.origin.x-200:selectwicket.frame.origin.x+30,(_scrollView.frame.size.height/2)-70, 200, 140)];
+    tooltip_view =[[UIView alloc]initWithFrame:CGRectMake((selectwicket.frame.origin.x+140)>_scrollView.frame.size.width?selectwicket.frame.origin.x-200:selectwicket.frame.origin.x+30,selectwicket.frame.origin.y> ((_scrollView.frame.size.height/2)-80)?((_scrollView.frame.size.height/2)-80):selectwicket.frame.origin.y, 200, 160)];
     
     [tooltip_view setBackgroundColor:[UIColor clearColor]];
     [_scrollView addSubview:tooltip_view];

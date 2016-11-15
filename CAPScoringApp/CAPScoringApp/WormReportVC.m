@@ -41,8 +41,11 @@
     
     DBManagerReports *dbMngr = [[DBManagerReports alloc]init];
     
-    self.wormDataInns1Array = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :@"1"];
-    self.wormDataInns2Array = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :@"2"];
+   // self.wormDataInns1Array = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :@"1"];
+   // self.wormDataInns2Array = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :@"2"];
+    self.wormDataInns1Array = [self generateInningsArray :@"1"];
+    self.wormDataInns2Array =[self generateInningsArray :@"2"];
+   
     
     self.wicketInnsOne = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"1"];
     self.wicketInnsTwo = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"2"];
@@ -70,6 +73,10 @@
 
         self.wormDataInns3Array = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :@"3"];
         self.wormDataInns4Array = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :@"4"];
+        
+        self.wormDataInns3Array =[self generateInningsArray :@"3"];
+        self.wormDataInns4Array  =[self generateInningsArray:@"4"];
+
         
         self.wicketInnsThree = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"3"];
         self.wicketInnsFour = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"4"];
@@ -106,6 +113,39 @@
 
 }
 
+- (NSMutableArray*) generateInningsArray : (NSString* ) inninsNo{
+    
+   NSMutableArray *innigsArray = [[NSMutableArray alloc]init];
+    
+    DBManagerReports *dbMngr = [[DBManagerReports alloc]init];
+    NSMutableArray *tempArray = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :inninsNo];
+
+    
+    for(int i=0;i<[tempArray count];i++){
+        bool isOverPresent = NO;
+        WormRecord *tempWR = [tempArray objectAtIndex:i];
+
+        
+        for(int j=0;j<[innigsArray count];j++){
+            WormRecord *wr = [innigsArray objectAtIndex:j];
+            if([[wr  over] isEqualToString:[tempWR over]]){
+                isOverPresent = YES;
+            }
+            
+        }
+        
+        if(!isOverPresent){
+            
+            [innigsArray addObject:tempWR];
+            
+            isOverPresent = NO;
+        }
+        
+    }
+    
+    return innigsArray;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -114,9 +154,25 @@
 
 -(void) setChartOne{
     
-    WormRecord *wormRecord = [self.wormDataInns1Array lastObject];
+    WormRecord *wormRecord;
     
-    self.lineChartViewOne = [[MCLineChartView alloc] initWithFrame:CGRectMake(20, 60, [UIScreen mainScreen].bounds.size.width, 260)];
+    wormRecord  = [self.wormDataInns1Array lastObject];
+    
+    if(_wormDataInns2Array != nil && _wormDataInns2Array.count>0){
+        
+        WormRecord *wormRecord2;
+        
+        wormRecord2  = [self.wormDataInns2Array lastObject];
+
+        
+        if([wormRecord.score intValue] < [wormRecord2.score intValue]){
+            wormRecord = wormRecord2;
+        }
+        
+    }
+
+    
+    self.lineChartViewOne = [[MCLineChartView alloc] initWithFrame:CGRectMake(20, 60, [UIScreen mainScreen].bounds.size.width-40, 300)];
 
     self.lineChartViewOne.dotRadius = 5;
     self.lineChartViewOne.dataSource = self;
@@ -134,20 +190,21 @@
     [self.view addSubview:self.lineChartViewOne];
 
     
-    UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_lineChartViewOne.frame.origin.x, _lineChartViewOne.frame.origin.y-50,self.view.frame.size.width, 60)];
+    UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_lineChartViewOne.frame.origin.x, _lineChartViewOne.frame.origin.y-60,self.lineChartViewOne.frame.size.width, 60)];
     
-    UILabel * title_lbl =[[UILabel alloc]initWithFrame:CGRectMake(70, 0,self.view.frame.size.width, 40)];
+    UILabel * title_lbl =[[UILabel alloc]initWithFrame:CGRectMake(0, 10,self.lineChartViewOne.frame.size.width, 30)];
     
 
-    title_lbl.text =@"INNING 1";
+    title_lbl.text =@"INNING 1 & 2";
     title_lbl.textColor =[UIColor whiteColor];
     title_lbl.textAlignment=UITextAlignmentCenter;
     title_lbl.font = [UIFont systemFontOfSize:25];
     
     [tittleview addSubview:title_lbl];
     
-    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(20,title_lbl.frame.origin.y+30,self.view.frame.size.width/2, 40)];
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(60,title_lbl.frame.origin.y+30,70, 30)];
     BattingTeam_lbl.text =self.fstInnShortName;
+    BattingTeam_lbl.backgroundColor= [UIColor  colorWithRed:(218/255.0f) green:(61/255.0f) blue:(67/255.0f) alpha:1.0f];
     BattingTeam_lbl.textColor =[UIColor whiteColor];
     BattingTeam_lbl.textAlignment=UITextAlignmentCenter;
     BattingTeam_lbl.font = [UIFont systemFontOfSize:23];
@@ -155,8 +212,9 @@
     
     [tittleview addSubview:BattingTeam_lbl];
     
-    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2+100,title_lbl.frame.origin.y+30,self.view.frame.size.width/2, 40)];
+    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.lineChartViewOne.frame.size.width-120,title_lbl.frame.origin.y+30,70, 30)];
     BowlingTeam_lbl.text =self.secInnShortName;
+    BowlingTeam_lbl.backgroundColor=[UIColor  colorWithRed:(35/255.0f) green:(116/255.0f) blue:(203/255.0f) alpha:1.0f];
     BowlingTeam_lbl.textColor =[UIColor whiteColor];
     BowlingTeam_lbl.textAlignment=UITextAlignmentCenter;
     BowlingTeam_lbl.font = [UIFont systemFontOfSize:23];
@@ -171,26 +229,107 @@
     [self.lineChartViewOne reloadDataWithAnimate:YES];
 }
 
--(void) setChartTwo{
-    WormRecord *wormRecord = [self.wormDataInns2Array lastObject];
 
-    self.lineChartViewTwo = [[MCLineChartView alloc] initWithFrame:CGRectMake(20, 60, [UIScreen mainScreen].bounds.size.width, 260)];
+
+-(void) setChartTwo{
+    
+    WormRecord *wormRecord;
+    
+    wormRecord  = [self.wormDataInns3Array lastObject];
+    
+    if(_wormDataInns4Array != nil && _wormDataInns4Array.count>0){
+        
+        WormRecord *wormRecord2;
+        
+        wormRecord2  = [self.wormDataInns4Array lastObject];
+        
+        
+        if([wormRecord.score intValue] < [wormRecord2.score intValue]){
+            wormRecord = wormRecord2;
+        }
+        
+    }
+    
+    
+    self.lineChartViewTwo = [[MCLineChartView alloc] initWithFrame:CGRectMake(20, 480, [UIScreen mainScreen].bounds.size.width-40, 300)];
+    
     self.lineChartViewTwo.dotRadius = 5;
     self.lineChartViewTwo.dataSource = self;
     self.lineChartViewTwo.delegate = self;
     self.lineChartViewTwo.minValue = @1;
     self.lineChartViewTwo.maxValue = [wormRecord score];
     self.lineChartViewTwo.solidDot = YES;
-    self.lineChartViewTwo.unitOfYAxis = @"Score";
     self.lineChartViewTwo.numberOfYAxis = 7;
+    //self.lineChartViewInnsOne.unitOfYAxis = @"Score";
     self.lineChartViewTwo.colorOfXAxis = [UIColor whiteColor];
     self.lineChartViewTwo.colorOfXText = [UIColor whiteColor];
     self.lineChartViewTwo.colorOfYAxis = [UIColor whiteColor];
     self.lineChartViewTwo.colorOfYText = [UIColor whiteColor];
+    
     [self.view addSubview:self.lineChartViewTwo];
+    
+    
+    UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_lineChartViewTwo.frame.origin.x, _lineChartViewTwo.frame.origin.y-60,self.lineChartViewTwo.frame.size.width, 60)];
+    
+    UILabel * title_lbl =[[UILabel alloc]initWithFrame:CGRectMake(0, 10,self.lineChartViewTwo.frame.size.width, 30)];
+    
+    
+    title_lbl.text =@"INNING 3 & 4";
+    title_lbl.textColor =[UIColor whiteColor];
+    title_lbl.textAlignment=UITextAlignmentCenter;
+    title_lbl.font = [UIFont systemFontOfSize:25];
+    
+    [tittleview addSubview:title_lbl];
+    
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(60,title_lbl.frame.origin.y+30,70, 30)];
+    BattingTeam_lbl.text =self.thrdInnShortName;
+    BattingTeam_lbl.backgroundColor=[UIColor  colorWithRed:(218/255.0f) green:(61/255.0f) blue:(67/255.0f) alpha:1.0f];
+    BattingTeam_lbl.textColor =[UIColor whiteColor];
+    BattingTeam_lbl.textAlignment=UITextAlignmentCenter;
+    BattingTeam_lbl.font = [UIFont systemFontOfSize:23];
+    
+    
+    [tittleview addSubview:BattingTeam_lbl];
+    
+    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.lineChartViewTwo.frame.size.width-120,title_lbl.frame.origin.y+30,70, 30)];
+    BowlingTeam_lbl.text =self.frthInnShortName;
+    BowlingTeam_lbl.backgroundColor=[UIColor  colorWithRed:(35/255.0f) green:(116/255.0f) blue:(203/255.0f) alpha:1.0f];
+    BowlingTeam_lbl.textColor =[UIColor whiteColor];
+    BowlingTeam_lbl.textAlignment=UITextAlignmentCenter;
+    BowlingTeam_lbl.font = [UIFont systemFontOfSize:23];
+    
+    
+    [tittleview addSubview:BowlingTeam_lbl];
+    
+    [self.view addSubview:tittleview];
+    
+    
     
     [self.lineChartViewTwo reloadDataWithAnimate:YES];
 }
+
+
+
+//-(void) setChartTwo{
+//    WormRecord *wormRecord = [self.wormDataInns2Array lastObject];
+//
+//    self.lineChartViewTwo = [[MCLineChartView alloc] initWithFrame:CGRectMake(20, 60, [UIScreen mainScreen].bounds.size.width, 260)];
+//    self.lineChartViewTwo.dotRadius = 5;
+//    self.lineChartViewTwo.dataSource = self;
+//    self.lineChartViewTwo.delegate = self;
+//    self.lineChartViewTwo.minValue = @1;
+//    self.lineChartViewTwo.maxValue = [wormRecord score];
+//    self.lineChartViewTwo.solidDot = YES;
+//    self.lineChartViewTwo.unitOfYAxis = @"Score";
+//    self.lineChartViewTwo.numberOfYAxis = 7;
+//    self.lineChartViewTwo.colorOfXAxis = [UIColor whiteColor];
+//    self.lineChartViewTwo.colorOfXText = [UIColor whiteColor];
+//    self.lineChartViewTwo.colorOfYAxis = [UIColor whiteColor];
+//    self.lineChartViewTwo.colorOfYText = [UIColor whiteColor];
+//    [self.view addSubview:self.lineChartViewTwo];
+//    
+//    [self.lineChartViewTwo reloadDataWithAnimate:YES];
+//}
 
 
 -(bool) isTestMatch {
@@ -285,9 +424,9 @@
 - (UIColor *)lineChartView:(MCLineChartView *)lineChartView lineColorWithLineNumber:(NSInteger)lineNumber {
     
     if(lineNumber == 0){
-        return [UIColor blueColor];
+        return     [UIColor  colorWithRed:(218/255.0f) green:(61/255.0f) blue:(67/255.0f) alpha:1.0f];
     }else{
-        return [UIColor redColor];
+        return     [UIColor  colorWithRed:(35/255.0f) green:(116/255.0f) blue:(203/255.0f) alpha:1.0f];
     }
 
 }
@@ -358,7 +497,7 @@
 - (NSString *)getWicketDetails:(UIButton *)selectwicket{
     WormWicketRecord *wicketdetail = [self getWicketByTag:selectwicket.tag];
     
-    return [NSString stringWithFormat:@" Batsman : %@,\n Bowler : %@,\n Over : %@,\n Wicket No : %@,\n Wicket Type : %@ ",wicketdetail.batsmanName,wicketdetail.bowlerName,wicketdetail.wicketOver,wicketdetail.wicketNo,wicketdetail.wicketDesc];
+    return [NSString stringWithFormat:@" Batsman : %@ \n Bowler : %@ \n Over : %@.%@ \n Wicket No : %@ \n Wicket Type : %@ ",wicketdetail.batsmanName,wicketdetail.bowlerName,wicketdetail.wicketOver,wicketdetail.wicketOverBall, wicketdetail.wicketNo,wicketdetail.wicketDesc];
  
 }
 

@@ -184,6 +184,12 @@
         self.Inn2_Btn.hidden = NO;
         self.Inn3_Btn.hidden = NO;
         self.Inn4_Btn.hidden = NO;
+        
+        self.inn1_btnWidth.constant  = 192;   //self.view.frame.size.width/2;
+        self.inns2_btnWidth.constant = 192;      //self.view.frame.size.width/2;
+        self.inns3_btnwidth.constant  = 192;   //self.view.frame.size.width/2;
+        self.inns4_btnwidth.constant = 192;
+
     }
 }
 
@@ -1149,17 +1155,21 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 goodwideOORun =[Run intValue]+goodwideOORun;
+                
+                goodwideOO=[[UILabel alloc]initWithFrame:CGRectMake(190,210,35, 35)];
 
             }
             else
             {
                 goodwideOORun =[Run intValue]+goodwideOORun;
-
+                
+                goodwideOO=[[UILabel alloc]initWithFrame:CGRectMake(480,210,35, 35)];
             }
             
             
-            goodwideOO=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+//            goodwideOO=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
             goodwideOO.textColor=[UIColor whiteColor];
+
             goodwideOO.text =[NSString stringWithFormat:@"%d",goodwideOORun];
             [self.pitch_Img addSubview:goodwideOO];
         }
@@ -1215,17 +1225,21 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 goodoutsidelegRun =[Run intValue]+goodoutsidelegRun;
+                goodoutsideleg=[[UILabel alloc]initWithFrame:CGRectMake(400,210,35, 35)];
+
 
             }
             else
             {
                 goodoutsidelegRun =[Run intValue]+goodoutsidelegRun;
+                goodoutsideleg=[[UILabel alloc]initWithFrame:CGRectMake(280,210,35, 35)];
 
             }
             
             
-            goodoutsideleg=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+//            goodoutsideleg=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
             goodoutsideleg.textColor=[UIColor whiteColor];
+
             goodoutsideleg.text =[NSString stringWithFormat:@"%d",goodoutsidelegRun];
             [self.pitch_Img addSubview:goodoutsideleg];
         }
@@ -1239,19 +1253,18 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 goodwideoutlegRun =[Run intValue]+goodwideoutlegRun;
-                goodwideoutleg=[[UILabel alloc]initWithFrame:CGRectMake(480,210,35, 35)];
-                
+               goodwideoutleg=[[UILabel alloc]initWithFrame:CGRectMake(500,210,35, 35)];
+
             }
             else
             {
                 goodwideoutlegRun =[Run intValue]+goodwideoutlegRun;
-                goodwideoutleg=[[UILabel alloc]initWithFrame:CGRectMake(200,210,35, 35)];
+                goodwideoutleg=[[UILabel alloc]initWithFrame:CGRectMake(120,210,35, 35)];
 
             }
             
             
             goodwideoutleg.textColor=[UIColor whiteColor];
-            [goodoutsideleg setBackgroundColor:[UIColor greenColor]];
 
             goodwideoutleg.text =[NSString stringWithFormat:@"%d",goodwideoutlegRun];
             [self.pitch_Img addSubview:goodwideoutleg];
@@ -1271,18 +1284,21 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 shortwideOORun =[Run intValue]+shortwideOORun;
+                shortwideOO=[[UILabel alloc]initWithFrame:CGRectMake(160,310,35, 35)];
 
             }
             else
             {
                 shortwideOORun =[Run intValue]+shortwideOORun;
+                shortwideOO=[[UILabel alloc]initWithFrame:CGRectMake(500,320,35, 35)];
 
             }
             
            
             
-            shortwideOO=[[UILabel alloc]initWithFrame:CGRectMake(480,320,35, 35)];
+            //shortwideOO=[[UILabel alloc]initWithFrame:CGRectMake(480,320,35, 35)];
             shortwideOO.textColor=[UIColor whiteColor];
+
             shortwideOO.text =[NSString stringWithFormat:@"%d",shortwideOORun];
             [self.pitch_Img addSubview:shortwideOO];
         }
@@ -1297,18 +1313,19 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 shortoutsideoffRun =[Run intValue]+shortoutsideoffRun;
-                shortoutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(420,310,35, 35)];
+                shortoutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(270,310,35, 35)];
 
 
             }
             else
             {
                 shortoutsideoffRun =[Run intValue]+shortoutsideoffRun;
-                shortoutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(180,310,35, 35)];
+                shortoutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(420,310,35, 35)];
 
             }
             
             shortoutsideoff.textColor=[UIColor whiteColor];
+
             shortoutsideoff.text =[NSString stringWithFormat:@"%d",shortoutsideoffRun];
             [self.pitch_Img addSubview:shortoutsideoff];
             
@@ -1326,6 +1343,7 @@
             
             shortmiddle=[[UILabel alloc]initWithFrame:CGRectMake(350,310,35, 35)];
             shortmiddle.textColor=[UIColor whiteColor];
+
             shortmiddle.text =[NSString stringWithFormat:@"%d",shortmiddleRun];
             [self.pitch_Img addSubview:shortmiddle];
         }
@@ -1340,16 +1358,18 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 shortoutsidelegRun =[Run intValue]+shortoutsidelegRun;
+                
+                shortoutsideleg=[[UILabel alloc]initWithFrame:CGRectMake(420,310,35, 35)];
 
             }
             else
             {
                 shortoutsidelegRun =[Run intValue]+shortoutsidelegRun;
-
+                
+                shortoutsideleg=[[UILabel alloc]initWithFrame:CGRectMake(270,310,35, 35)];
             }
             
             
-            shortoutsideleg=[[UILabel alloc]initWithFrame:CGRectMake(280,320,35, 35)];
             shortoutsideleg.textColor=[UIColor whiteColor];
             shortoutsideleg.text =[NSString stringWithFormat:@"%d",shortoutsidelegRun];
             [self.pitch_Img addSubview:shortoutsideleg];
@@ -1375,6 +1395,7 @@
             }
         
             shortwideOL.textColor=[UIColor whiteColor];
+
             shortwideOL.text =[NSString stringWithFormat:@"%d",shortwideOLRun];
             [self.pitch_Img addSubview:shortwideOL];
         }
@@ -1394,16 +1415,18 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 bouncerwideOORun =[Run intValue]+bouncerwideOORun;
+                bouncerwideOO=[[UILabel alloc]initWithFrame:CGRectMake(150,400,35, 35)];
 
             }
             else
             {
                 bouncerwideOORun =[Run intValue]+bouncerwideOORun;
+                bouncerwideOO=[[UILabel alloc]initWithFrame:CGRectMake(120,400,35, 35)];
 
             }
             
             
-            bouncerwideOO=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+//            bouncerwideOO=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
             bouncerwideOO.textColor=[UIColor whiteColor];
             bouncerwideOO.text =[NSString stringWithFormat:@"%d",bouncerwideOORun];
             [self.pitch_Img addSubview:bouncerwideOO];
@@ -1463,17 +1486,20 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 bouncerousidelegRun =[Run intValue]+bouncerousidelegRun;
+                bouncerousideleg=[[UILabel alloc]initWithFrame:CGRectMake(430,400,35, 35)];
 
             }
             else
             {
                 bouncerousidelegRun =[Run intValue]+bouncerousidelegRun;
+                bouncerousideleg=[[UILabel alloc]initWithFrame:CGRectMake(140,400,35, 35)];
 
             }
         
             
-            bouncerousideleg=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+//            bouncerousideleg=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
             bouncerousideleg.textColor=[UIColor whiteColor];
+
             bouncerousideleg.text =[NSString stringWithFormat:@"%d",bouncerousidelegRun];
             [self.pitch_Img addSubview:bouncerousideleg];
         }

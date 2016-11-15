@@ -21,8 +21,9 @@
 
 @property (nonatomic,strong)  IBOutlet NSLayoutConstraint * inns2_btnWidth;
 
-@property (nonatomic,strong) IBOutlet NSLayoutConstraint * inn1_btnYposition;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * inns3_btnwidth;
 
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * inns4_btnwidth;
 
 
 @property(strong,nonatomic)NSString *fstInnShortName;
