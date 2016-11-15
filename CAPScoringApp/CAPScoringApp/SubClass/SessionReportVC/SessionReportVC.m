@@ -71,9 +71,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             record.RunRate=@"";
             record.BDRY=@"";
             [sessionvalue addObject:record];
-//            
-//            NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"Day 1", @"dayno", nil];
-           // [sessionvalue insertObject:dict atIndex:0];
+
         }
         if(i==4)
         {
@@ -210,7 +208,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         else
         {
+            if(sessionvalue.count > day)
+            {
             objRecord =(SessionReportRecord *)[sessionvalue objectAtIndex:day];
+            }
+            else{
+                return ;
+            }
         }
        NSString * dayno = objRecord.dayno;
         

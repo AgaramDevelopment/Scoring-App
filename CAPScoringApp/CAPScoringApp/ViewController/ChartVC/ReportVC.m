@@ -19,8 +19,9 @@
 #import "BowlingKPIVC.h"
 #import "BatsmanKPIVC.h"
 #import "WormReportVC.h"
+#import "PartnershipVC.h"
 
-@interface ReportVC ()
+@interface ReportVC ()<UIScrollViewDelegate>
 {
     CustomNavigationVC * objCustomNavigation;
     PitchmapVC * objPitchview;
@@ -34,10 +35,11 @@
     BowlingKPIVC * bowlingKpiView;
     BatsmanKPIVC * batsmanKpiView;
     WormReportVC *wormReportVC;
+    PartnershipVC * objPartnershipvc;
 }
 
 @end
-
+NSMutableArray * objhartlistArray;
 @implementation ReportVC
 
 - (void)viewDidLoad {
@@ -46,9 +48,17 @@
     
     [self customnavigationmethod];
     [self CreateChartList];
+    
     [self setCommentaryView];
+    
+   // [self.scrolllistview setContentSize:CGSizeMake(3200, 70)]   ;
+   
 }
 
+- (void)viewDidLayoutSubviews
+{
+    [self.scrolllistview setContentSize:CGSizeMake(3000, 80)];
+}
 -(void)customnavigationmethod
 {
     objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
@@ -64,16 +74,28 @@
     //CGFloat xposition = 0;
     
     
+    if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){
     
-    NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
-
+//    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
         
+         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Session", nil];
+
+    }else{
+        
+//         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report", nil];
+        
+    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman", nil];
+    }
+    NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
+    
+    
+   // self.scrolllistview.frame =CGRectMake(0,self.view.frame.origin.y,764, 70);
     
         for(int i = 0; i < objhartlistArray.count; i++)
         {
             NSString *dicBallKey = [objhartlistArray objectAtIndex:i];
             
-            UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(i * 200,20,180, 40)];
+             UIButton *btnborder = [[UIButton alloc] initWithFrame: CGRectMake(i * 200,20,180, 40)];
             btnborder.titleLabel.font = [UIFont fontWithName:@"Rajdhani-Bold" size:20];
             btnborder.tag=i+1;
             [btnborder setTitle:[NSString stringWithFormat:@"%@",dicBallKey] forState:UIControlStateNormal];
@@ -83,9 +105,11 @@
 
         }
    
-     [self.scrolllistview setContentSize:CGSizeMake(13*200,70)];
+   
+  //  [self.scrolllistview setContentSize:CGSizeMake(self.scrolllistview.frame.size.width*15,70)];
+    
 
-    [self.scrolllistview setContentSize:CGSizeMake(14*200,70)];
+    //[self.scrolllistview setContentSize:CGSizeMake(13*200,70)];
     
 }
 
@@ -113,90 +137,76 @@
     {
         NSLog(@"%d",objBtn.tag);
         [self setCommentaryView];
+
        
     }
     else if(objBtn.tag == 2)
     {
          NSLog(@"%d",objBtn.tag);
         
+      //  [self setBowlerVsBatsmanView];
+        [self setPitchMap];
+        
+
+        
     }
     else if(objBtn.tag == 3)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setWormChartView];
+        [self setManhattan];
        
         
     }
     else if(objBtn.tag == 4)
     {
          NSLog(@"%d",objBtn.tag);
-        objPitchview =[[PitchmapVC alloc] initWithNibName:@"PitchmapVC" bundle:nil];
-        
-        objPitchview.matchCode =self.matchCode;
-        objPitchview.compititionCode =self.competitionCode;
-        objPitchview.matchTypecode =self.matchTypeCode;
-        objPitchview.fstInnShortName = self.fstInnShortName;
-        objPitchview.secInnShortName = self.secInnShortName;
-        objPitchview.thrdInnShortName = self.thrdInnShortName;
-        objPitchview.frthInnShortName = self.frthInnShortName;
-        
-        objPitchview.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
-        [self.view addSubview:objPitchview.view];
+        [self setSpiderView];
+
     }
     else if(objBtn.tag == 5)
     {
          NSLog(@"%d",objBtn.tag);
-        //manhatten
-        
-        objManhattan =[[Manhattan alloc] initWithNibName:@"Manhattan" bundle:nil];
-        
-        objManhattan.matchCode =self.matchCode;
-        objManhattan.compititionCode =self.competitionCode;
-        objManhattan.matchTypecode =self.matchTypeCode;
-        objManhattan.fstInnShortName = self.fstInnShortName;
-        objManhattan.secInnShortName = self.secInnShortName;
-        objManhattan.thrdInnShortName = self.thrdInnShortName;
-        objManhattan.frthInnShortName = self.frthInnShortName;
-        objManhattan.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
-        [self.view addSubview:objManhattan.view];
+        [self setSectorView];
+   
 
     }
     else if(objBtn.tag == 6)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setSpiderView];
+        [self setWormChartView];
     }
     else if(objBtn.tag == 7)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setSectorView];
+        [self setBatsmanKpi];
     }
     else if(objBtn.tag == 8)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setWormChartView];
+       [self setBowlingKpi];
+        
 
     }
     else if(objBtn.tag == 9)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setBatsmanKpi];
+        [self setBatsmanVsBowlerView];
     }
     else if(objBtn.tag == 10)
     {
         
          NSLog(@"%d",objBtn.tag);
-        [self setBowlingKpi];
+        [self setBowlerVsBatsmanView];
     }
     else if(objBtn.tag == 11)
     {
-        [self setBatsmanVsBowlerView];
+        [self setSession];
         
     }
     else if(objBtn.tag == 12)
     {
          NSLog(@"%d",objBtn.tag);
-        [self setBowlerVsBatsmanView];
+        
 
     }
     else if(objBtn.tag == 13)
@@ -211,14 +221,10 @@
     else if(objBtn.tag == 15)
     {
         NSLog(@"%d",objBtn.tag);
-        SessionReportvc =[[SessionReportVC alloc] initWithNibName:@"SessionReportVC" bundle:nil];
-        
-        SessionReportvc.matchcode =self.matchCode;
-        SessionReportvc.compitioncode =self.competitionCode;
-        SessionReportvc.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
-        [self.view addSubview:SessionReportvc.view];
+
 
     }
+    [self viewDidLayoutSubviews];
 }
 
 - (IBAction)btn_back:(id)sender {
@@ -257,7 +263,21 @@
     [self.view addSubview:cmntryView.view];
 }
 
-
+-(void) setPitchMap{
+    
+    objPitchview =[[PitchmapVC alloc] initWithNibName:@"PitchmapVC" bundle:nil];
+    
+    objPitchview.matchCode =self.matchCode;
+    objPitchview.compititionCode =self.competitionCode;
+    objPitchview.matchTypecode =self.matchTypeCode;
+    objPitchview.fstInnShortName = self.fstInnShortName;
+    objPitchview.secInnShortName = self.secInnShortName;
+    objPitchview.thrdInnShortName = self.thrdInnShortName;
+    objPitchview.frthInnShortName = self.frthInnShortName;
+    
+    objPitchview.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:objPitchview.view];
+}
 
 -(void) setBatsmanVsBowlerView{
     batsmanVsBowlerVC = [[BatsmanVsBowlerVC alloc]initWithNibName:@"BatsmanVsBowlerVC" bundle:nil];
@@ -394,6 +414,47 @@
     
 }
 
+
+-(void)setManhattan{
+    
+    objManhattan =[[Manhattan alloc] initWithNibName:@"Manhattan" bundle:nil];
+    
+    objManhattan.matchCode =self.matchCode;
+    objManhattan.compititionCode =self.competitionCode;
+    objManhattan.matchTypecode =self.matchTypeCode;
+    objManhattan.fstInnShortName = self.fstInnShortName;
+    objManhattan.secInnShortName = self.secInnShortName;
+    objManhattan.thrdInnShortName = self.thrdInnShortName;
+    objManhattan.frthInnShortName = self.frthInnShortName;
+    objManhattan.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:objManhattan.view];
+}
+-(void) setSession{
+    SessionReportvc =[[SessionReportVC alloc] initWithNibName:@"SessionReportVC" bundle:nil];
+    
+    SessionReportvc.matchcode =self.matchCode;
+    SessionReportvc.compitioncode =self.competitionCode;
+    SessionReportvc.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:SessionReportvc.view];
+}
+
+
+-(void)setPartnership{
+    objPartnershipvc =[[PartnershipVC alloc] initWithNibName:@"PartnershipVC" bundle:nil];
+    
+    objPartnershipvc.matchcode =self.matchCode;
+    objPartnershipvc.compitioncode =self.competitionCode;
+    objPartnershipvc.matchtypecode =self.matchTypeCode;
+    objPartnershipvc.teamcode      = self.teamcode;
+    
+    objPartnershipvc.fstInnShortName = self.fstInnShortName;
+    objPartnershipvc.secInnShortName = self.secInnShortName;
+    objPartnershipvc.thrdInnShortName = self.thrdInnShortName;
+    objPartnershipvc.frthInnShortName = self.frthInnShortName;
+    
+    objPartnershipvc.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:objPartnershipvc.view];
+}
     @end
 
 

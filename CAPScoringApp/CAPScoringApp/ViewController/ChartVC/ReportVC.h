@@ -17,8 +17,13 @@
 @property (nonatomic, weak) IBOutlet UIView *referencedView;
 
 @property(strong,nonatomic)NSString * matchCode;
+
 @property(strong,nonatomic)NSString * competitionCode;
+
 @property (strong ,nonatomic) NSString * matchTypeCode;
+
+@property (strong,nonatomic) NSString * teamcode;
+
 
 @property(strong,nonatomic)NSString *fstInnShortName;
 @property(strong,nonatomic)NSString *secInnShortName;

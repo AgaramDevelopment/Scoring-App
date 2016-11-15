@@ -76,8 +76,8 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(BAR_CHART_LEFT_PADDING, 0, width - BAR_CHART_RIGHT_PADDING - BAR_CHART_LEFT_PADDING, CGRectGetHeight(self.bounds))];
     _scrollView.backgroundColor = [UIColor clearColor];
     _scrollView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
-    _scrollView.showsHorizontalScrollIndicator = NO;
-    _scrollView.showsVerticalScrollIndicator = NO;
+    _scrollView.showsHorizontalScrollIndicator = YES;
+    _scrollView.showsVerticalScrollIndicator = YES;
     [self addSubview:_scrollView];
 }
 
@@ -193,12 +193,12 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
     NSAssert(([self.dataSource respondsToSelector:@selector(barChartView:valueOfBarInSection:index:)]), @"MCBarChartView // delegate must implement - (CGFloat)barChartView:(MCBarChartView *)barChartView valueOfBarsInSection:(NSUInteger)section index:(NSUInteger)index");
     
     NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:_sections];
-    //CGFloat contentWidth = _paddingSection;
+    CGFloat contentWidth = _paddingSection;
     for (NSUInteger i = 0; i < _sections; i ++) {
         NSUInteger barCount = [self.dataSource barChartView:self numberOfBarsInSection:i];
 
-        //contentWidth += barCount * _barWidth + (barCount - 1) * _paddingBar;
-       // contentWidth += _paddingSection;
+        contentWidth += barCount * _barWidth + (barCount - 1) * _paddingBar;
+        contentWidth += _paddingSection;
         
         NSMutableArray *barArray = [NSMutableArray arrayWithCapacity:barCount];
         for (NSInteger j = 0; j < barCount; j ++) {
@@ -207,7 +207,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
         }
         [dataArray addObject:barArray];
     }
-    //_scrollView.contentSize = CGSizeMake(contentWidth, 0);
+    _scrollView.contentSize = CGSizeMake(contentWidth, 0);
     _chartDataSource = [[NSMutableArray alloc] initWithArray:dataArray];
 }
 
