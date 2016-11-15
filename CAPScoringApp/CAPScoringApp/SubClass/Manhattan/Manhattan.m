@@ -232,29 +232,47 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     
     
-    [self.manhattan_Scroll setContentSize:CGSizeMake(self.view.frame.size.width,1500)];
 
+    if(Innings1.count > 0)
+    {
+      [self BarChartMethodFirstInnigs];
+      [self.manhattan_Scroll setContentSize:CGSizeMake(self.view.frame.size.width,1* 350)];
+
+    }
     
-    [self BarChartMethodFirstInnigs];
-   
-    [NSTimer scheduledTimerWithTimeInterval:1.0
+    else if (Innings2.count > 0)
+    {
+     [NSTimer scheduledTimerWithTimeInterval:1.0
                                      target:self
                                    selector:@selector(BarChartMethodFirstInnigs2)
                                    userInfo:nil
                                     repeats:NO];
+        [self.manhattan_Scroll setContentSize:CGSizeMake(self.view.frame.size.width,2* 350)];
+
+    }
     
+    else if (Innings3.count > 0)
+    {
+    [NSTimer scheduledTimerWithTimeInterval:2.0
+                                     target:self
+                                   selector:@selector(BarChartMethodFirstInnigs3)
+                                   userInfo:nil
+                                    repeats:NO];
+        [self.manhattan_Scroll setContentSize:CGSizeMake(self.view.frame.size.width,3* 350)];
+
+    }
     
-//    [NSTimer scheduledTimerWithTimeInterval:2.0
-//                                     target:self
-//                                   selector:@selector(BarChartMethodFirstInnigs3)
-//                                   userInfo:nil
-//                                    repeats:NO];
-//    
-//    [NSTimer scheduledTimerWithTimeInterval:1.0
-//                                     target:self
-//                                   selector:@selector(BarChartMethodFirstInnigs4)
-//                                   userInfo:nil
-//                                    repeats:NO];
+    else if (Innings4.count >0)
+    {
+    
+    [NSTimer scheduledTimerWithTimeInterval:1.0
+                                     target:self
+                                   selector:@selector(BarChartMethodFirstInnigs4)
+                                   userInfo:nil
+                            repeats:NO];
+        [self.manhattan_Scroll setContentSize:CGSizeMake(self.view.frame.size.width,4* 350)];
+
+    }
     
     wicketDetail = [self getwicket:self.compititionCode :self.matchCode];
     
@@ -345,7 +363,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     [tittleview addSubview:title_lbl];
     
-    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(20,title_lbl.frame.origin.y+30,self.manhattan_Scroll.frame.size.width/2, 40)];
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/2.7,title_lbl.frame.origin.y+30,self.manhattan_Scroll.frame.size.width/2, 40)];
     BattingTeam_lbl.text =self.fstInnShortName;
     BattingTeam_lbl.textColor =[UIColor whiteColor];
     BattingTeam_lbl.textAlignment=UITextAlignmentCenter;
@@ -354,14 +372,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     [tittleview addSubview:BattingTeam_lbl];
     
-    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2+100,title_lbl.frame.origin.y+30,self.manhattan_Scroll.frame.size.width/2, 40)];
-    BowlingTeam_lbl.text =self.secInnShortName;
-    BowlingTeam_lbl.textColor =[UIColor whiteColor];
-    BowlingTeam_lbl.textAlignment=UITextAlignmentCenter;
-    BowlingTeam_lbl.font = [UIFont systemFontOfSize:23];
-
-    
-    [tittleview addSubview:BowlingTeam_lbl];
+//    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2+100,title_lbl.frame.origin.y+30,self.manhattan_Scroll.frame.size.width/2, 40)];
+//    BowlingTeam_lbl.text =self.secInnShortName;
+//    BowlingTeam_lbl.textColor =[UIColor whiteColor];
+//    BowlingTeam_lbl.textAlignment=UITextAlignmentCenter;
+//    BowlingTeam_lbl.font = [UIFont systemFontOfSize:23];
+//
+//    
+//    [tittleview addSubview:BowlingTeam_lbl];
 
     [self.manhattan_Scroll addSubview: tittleview];
 }
@@ -394,7 +412,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     [tittleview addSubview:title_lbl];
     
-    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(0,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/2.7,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
     BattingTeam_lbl.text =self.secInnShortName;
     BattingTeam_lbl.textColor =[UIColor whiteColor];
     BattingTeam_lbl.textAlignment=UITextAlignmentCenter;
@@ -402,13 +420,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     [tittleview addSubview:BattingTeam_lbl];
     
-    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
-    BowlingTeam_lbl.text =self.thrdInnShortName;
-    BowlingTeam_lbl.textColor =[UIColor whiteColor];
-    BowlingTeam_lbl.textAlignment=UITextAlignmentCenter;
-    BowlingTeam_lbl.font = [UIFont systemFontOfSize:23];
-
-    [tittleview addSubview:BowlingTeam_lbl];
+//    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
+//    BowlingTeam_lbl.text =self.thrdInnShortName;
+//    BowlingTeam_lbl.textColor =[UIColor whiteColor];
+//    BowlingTeam_lbl.textAlignment=UITextAlignmentCenter;
+//    BowlingTeam_lbl.font = [UIFont systemFontOfSize:23];
+//
+//    [tittleview addSubview:BowlingTeam_lbl];
     
     [self.manhattan_Scroll addSubview: tittleview];
 }
@@ -440,7 +458,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     title_lbl.font = [UIFont systemFontOfSize:25];
     [tittleview addSubview:title_lbl];
     
-    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(0,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/2.7,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
     BattingTeam_lbl.text =self.thrdInnShortName;
     BattingTeam_lbl.textColor =[UIColor whiteColor];
     BattingTeam_lbl.textAlignment=UITextAlignmentCenter;
@@ -448,14 +466,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     [tittleview addSubview:BattingTeam_lbl];
     
-    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
-    BowlingTeam_lbl.text =self.frthInnShortName;
-    BowlingTeam_lbl.textColor =[UIColor whiteColor];
-    BowlingTeam_lbl.textAlignment=UITextAlignmentCenter;
-    BowlingTeam_lbl.font = [UIFont systemFontOfSize:23];
-
-    [tittleview addSubview:BowlingTeam_lbl];
-    
+//    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
+//    BowlingTeam_lbl.text =self.frthInnShortName;
+//    BowlingTeam_lbl.textColor =[UIColor whiteColor];
+//    BowlingTeam_lbl.textAlignment=UITextAlignmentCenter;
+//    BowlingTeam_lbl.font = [UIFont systemFontOfSize:23];
+//
+//    [tittleview addSubview:BowlingTeam_lbl];
+//    
     [self.manhattan_Scroll addSubview: tittleview];
 }
 
@@ -487,21 +505,21 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     [tittleview addSubview:title_lbl];
     
-    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(0,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/2.7,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
     BattingTeam_lbl.text =self.frthInnShortName;
     BattingTeam_lbl.textColor =[UIColor whiteColor];
     BattingTeam_lbl.textAlignment=UITextAlignmentCenter;
     BattingTeam_lbl.font = [UIFont systemFontOfSize:23];
     [tittleview addSubview:BattingTeam_lbl];
     
-    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
-    BowlingTeam_lbl.text =self.fstInnShortName;
-    BowlingTeam_lbl.textColor =[UIColor whiteColor];
-    BowlingTeam_lbl.textAlignment=UITextAlignmentCenter;
-    BowlingTeam_lbl.font = [UIFont systemFontOfSize:23];
-
-    [tittleview addSubview:BowlingTeam_lbl];
-    
+//    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
+//    BowlingTeam_lbl.text =self.fstInnShortName;
+//    BowlingTeam_lbl.textColor =[UIColor whiteColor];
+//    BowlingTeam_lbl.textAlignment=UITextAlignmentCenter;
+//    BowlingTeam_lbl.font = [UIFont systemFontOfSize:23];
+//
+//    [tittleview addSubview:BowlingTeam_lbl];
+//    
     [self.manhattan_Scroll addSubview: tittleview];
 }
 
@@ -661,7 +679,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 - (UIColor *)barChartView:(MCBarChartView *)barChartView colorOfBarInSection:(NSInteger)section index:(NSInteger)index {
     
-    return [UIColor colorWithRed:2/255.0 green:185/255.0 blue:187/255.0 alpha:1.0];
+    return [UIColor colorWithRed:35/255.0 green:116/255.0 blue:205/255.0 alpha:1.0];
     
    }
 
@@ -771,7 +789,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
    tooltip_view =[[UIView alloc]initWithFrame:CGRectMake(selectwicket.frame.origin.x+50,selectwicket.frame.origin.y-80, 200, 140)];
     
     [tooltip_view setBackgroundColor:[UIColor clearColor]];
-    [self.view addSubview:tooltip_view];
+    [self.manhattan_Scroll addSubview:tooltip_view];
     
     tooltip_view.layer.borderColor = [UIColor whiteColor].CGColor;
     tooltip_view.layer.borderWidth = 2.0f;

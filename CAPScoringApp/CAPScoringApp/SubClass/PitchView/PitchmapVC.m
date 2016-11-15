@@ -241,11 +241,11 @@
     {
         PitchReportdetailRecord * objRecord =(PitchReportdetailRecord *)[objPitchdetail objectAtIndex:i];
         xposition = [objRecord.PMX2 intValue];
-        yposition = [objRecord.PMY2 intValue];
+        yposition = [objRecord.PMY2 intValue]-50;
         
         if(!(xposition == 1 && yposition == 1) && (xposition!=0 && yposition !=0)){
             
-            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+(xposition/1.2),yposition+(yposition/4),20, 20)];
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+(xposition/1.2),yposition+(yposition/1.8),20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.pitch_Img addSubview:Img_ball];
             
@@ -780,18 +780,19 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 fullTosswideOORun =[Run intValue]+fullTosswideOORun;
-                fullTosswideOO=[[UILabel alloc]initWithFrame:CGRectMake(440,60,35, 35)];
+                fullTosswideOO=[[UILabel alloc]initWithFrame:CGRectMake(240,60,35, 35)];
 
             }
             else
             {
                 fullTosswideOORun =[Run intValue]+fullTosswideOORun;
-                fullTosswideOO=[[UILabel alloc]initWithFrame:CGRectMake(250,60,35, 35)];
+                fullTosswideOO=[[UILabel alloc]initWithFrame:CGRectMake(440,60,35, 35)];
 
             }
             
            
             fullTosswideOO.textColor=[UIColor whiteColor];
+            
             fullTosswideOO.text =[NSString stringWithFormat:@"%d",fullTosswideOORun];
             [self.pitch_Img addSubview:fullTosswideOO];
         }
@@ -806,14 +807,18 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 fullTossoutsideoffRun =[Run intValue]+fullTossoutsideoffRun;
+                fullTossoutsideoff =[[UILabel alloc]initWithFrame:CGRectMake(310,60,35, 35)];
+
             }
             else
             {
                 fullTossoutsideoffRun =[Run intValue]+fullTossoutsideoffRun;
+                fullTossoutsideoff =[[UILabel alloc]initWithFrame:CGRectMake(380,60,35, 35)];
+
             }
             
             
-            fullTossoutsideoff =[[UILabel alloc]initWithFrame:CGRectMake(300,40,35, 35)];
+           // fullTossoutsideoff =[[UILabel alloc]initWithFrame:CGRectMake(300,40,35, 35)];
             fullTossoutsideoff.textColor=[UIColor whiteColor];
             fullTossoutsideoff.text =[NSString stringWithFormat:@"%d",fullTossoutsideoffRun];
             [self.pitch_Img addSubview:fullTossoutsideoff];
@@ -829,7 +834,7 @@
                 [Fulltossmiddle removeFromSuperview];
             }
             
-            Fulltossmiddle=[[UILabel alloc]initWithFrame:CGRectMake(120,60,35, 35)];
+            Fulltossmiddle=[[UILabel alloc]initWithFrame:CGRectMake(350,60,35, 35)];
             Fulltossmiddle.textColor=[UIColor whiteColor];
             Fulltossmiddle.text =[NSString stringWithFormat:@"%d",FulltossmiddleRun];
             [self.pitch_Img addSubview:Fulltossmiddle];
@@ -844,17 +849,19 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 FullTossOSLegRun =[Run intValue]+FullTossOSLegRun;
+                FullTossOSLeg=[[UILabel alloc]initWithFrame:CGRectMake(380,60,35, 35)];
 
             }
             else
             {
                 FullTossOSLegRun =[Run intValue]+FullTossOSLegRun;
+                FullTossOSLeg=[[UILabel alloc]initWithFrame:CGRectMake(310,60,35, 35)];
 
             }
             
             
             
-            FullTossOSLeg=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+            //FullTossOSLeg=[[UILabel alloc]initWithFrame:CGRectMake(120,60,35, 35)];
             FullTossOSLeg.textColor=[UIColor whiteColor];
             FullTossOSLeg.text =[NSString stringWithFormat:@"%d",FullTossOSLegRun];
             [self.pitch_Img addSubview:FullTossOSLeg];
@@ -869,18 +876,20 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 FulltosswideWLRun =[Run intValue]+FulltosswideWLRun;
+                FulltosswideWL =[[UILabel alloc]initWithFrame:CGRectMake(440,60,35, 35)];
 
             }
             else
             {
                 FulltosswideWLRun =[Run intValue]+FulltosswideWLRun;
+                FulltosswideWL =[[UILabel alloc]initWithFrame:CGRectMake(240,60,35, 35)];
 
             }
             
            
             
-            FulltosswideWL =[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
             FulltosswideWL.textColor=[UIColor whiteColor];
+
             FulltosswideWL.text =[NSString stringWithFormat:@"%d",FulltosswideWLRun];
             [self.pitch_Img addSubview:FulltosswideWL];
         }
@@ -901,13 +910,13 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 yorkerwideOORun =[Run intValue]+yorkerwideOORun;
-                yorkerwideOO =[[UILabel alloc]initWithFrame:CGRectMake(450,100,35, 35)];
+                yorkerwideOO =[[UILabel alloc]initWithFrame:CGRectMake(220,100,35, 35)];
 
             }
             else
             {
                 yorkerwideOORun =[Run intValue]+yorkerwideOORun;
-                yorkerwideOO =[[UILabel alloc]initWithFrame:CGRectMake(240,100,35, 35)];
+                yorkerwideOO =[[UILabel alloc]initWithFrame:CGRectMake(450,100,35, 35)];
             }
             
             
@@ -928,13 +937,13 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 yorkeroutsideoffRun =[Run intValue]+yorkeroutsideoffRun;
-                yorkeroutsideoff = [[UILabel alloc]initWithFrame:CGRectMake(390,100,35, 35)];
+                yorkeroutsideoff = [[UILabel alloc]initWithFrame:CGRectMake(290,100,35, 35)];
 
             }
             else
             {
                 yorkeroutsideoffRun =[Run intValue]+yorkeroutsideoffRun;
-                yorkeroutsideoff = [[UILabel alloc]initWithFrame:CGRectMake(310,100,35, 35)];
+                yorkeroutsideoff = [[UILabel alloc]initWithFrame:CGRectMake(390,100,35, 35)];
 
             }
             
@@ -973,16 +982,18 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 yorkeroutsidelegRun =[Run intValue]+yorkeroutsidelegRun;
+                yorkeroutsideleg = [[UILabel alloc]initWithFrame:CGRectMake(390,100,35, 35)];
 
             }
             else
             {
                 yorkeroutsidelegRun =[Run intValue]+yorkeroutsidelegRun;
+                yorkeroutsideleg = [[UILabel alloc]initWithFrame:CGRectMake(230,100,35, 35)];
 
             }
             
             
-            yorkeroutsideleg = [[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+//            yorkeroutsideleg = [[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
             yorkeroutsideleg.textColor=[UIColor whiteColor];
             yorkeroutsideleg.text =[NSString stringWithFormat:@"%d",yorkeroutsidelegRun];
             [self.pitch_Img addSubview:yorkeroutsideleg];
@@ -998,15 +1009,17 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 yorkerwideOLRun =[Run intValue]+yorkerwideOLRun;
+                yorkerwideOL=[[UILabel alloc]initWithFrame:CGRectMake(450,100,35, 35)];
 
             }
             else
             {
                 yorkerwideOLRun =[Run intValue]+yorkerwideOLRun;
+                yorkerwideOL=[[UILabel alloc]initWithFrame:CGRectMake(220,100,35, 35)];
 
             }
             
-            yorkerwideOL=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+//            yorkerwideOL=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
             yorkerwideOL.textColor=[UIColor whiteColor];
             yorkerwideOL.text =[NSString stringWithFormat:@"%d",yorkerwideOLRun];
             [self.pitch_Img addSubview:yorkerwideOL];
@@ -1029,13 +1042,13 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 fullwideOORun =[Run intValue]+fullwideOORun;
-                fullwideOO = [[UILabel alloc]initWithFrame:CGRectMake(460,150,35, 35)];
+                fullwideOO = [[UILabel alloc]initWithFrame:CGRectMake(220,150,35, 35)];
 
             }
             else
             {
                 fullwideOORun =[Run intValue]+fullwideOORun;
-                fullwideOO = [[UILabel alloc]initWithFrame:CGRectMake(220,150,35, 35)];
+                fullwideOO = [[UILabel alloc]initWithFrame:CGRectMake(460,150,35, 35)];
 
             }
             
@@ -1097,17 +1110,18 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 fulloutsidelegRun =[Run intValue]+fulloutsidelegRun;
+                fulloutsideleg=[[UILabel alloc]initWithFrame:CGRectMake(390,150,35, 35)];
 
             }
             else
             {
                 fulloutsidelegRun =[Run intValue]+fulloutsidelegRun;
-
+                fulloutsideleg=[[UILabel alloc]initWithFrame:CGRectMake(295,150,35, 35)];
             }
             
             
             
-            fulloutsideleg=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+//            fulloutsideleg=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
             fulloutsideleg.textColor=[UIColor whiteColor];
             fulloutsideleg.text =[NSString stringWithFormat:@"%d",fulloutsidelegRun];
             [self.pitch_Img addSubview:fulloutsideleg];
@@ -1123,18 +1137,19 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 fullwideoutlegRun =[Run intValue]+fullwideoutlegRun;
-                fullwideoutleg=[[UILabel alloc]initWithFrame:CGRectMake(400,150,35, 35)];
+                fullwideoutleg=[[UILabel alloc]initWithFrame:CGRectMake(460,150,35, 35)];
 
             }
             else
             {
                 fullwideoutlegRun =[Run intValue]+fullwideoutlegRun;
-                fullwideoutleg=[[UILabel alloc]initWithFrame:CGRectMake(300,150,35, 35)];
+                fullwideoutleg=[[UILabel alloc]initWithFrame:CGRectMake(200,150,35, 35)];
 
             }
             
             
             fullwideoutleg.textColor=[UIColor whiteColor];
+
             fullwideoutleg.text =[NSString stringWithFormat:@"%d",fullwideoutlegRun];
             [self.pitch_Img addSubview:fullwideoutleg];
         }
@@ -1183,13 +1198,13 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 goodoutsideoffRun =[Run intValue]+goodoutsideoffRun;
-                goodoutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(405,210,35, 35)];
+                goodoutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(290,210,35, 35)];
 
             }
             else
             {
                 goodoutsideoffRun =[Run intValue]+goodoutsideoffRun;
-                goodoutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(290,210,35, 35)];
+                goodoutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(405,210,35, 35)];
 
             }
           
@@ -1421,7 +1436,7 @@
             else
             {
                 bouncerwideOORun =[Run intValue]+bouncerwideOORun;
-                bouncerwideOO=[[UILabel alloc]initWithFrame:CGRectMake(120,400,35, 35)];
+                bouncerwideOO=[[UILabel alloc]initWithFrame:CGRectMake(540,400,35, 35)];
 
             }
             
@@ -1443,13 +1458,13 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 bounceroutsideoffRun =[Run intValue]+bounceroutsideoffRun;
-                bounceroutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(450,400,35, 35)];
+                bounceroutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(250,400,35, 35)];
 
             }
             else
             {
                 bounceroutsideoffRun =[Run intValue]+bounceroutsideoffRun;
-                bounceroutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(250,400,35, 35)];
+                bounceroutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(450,400,35, 35)];
 
             }
             

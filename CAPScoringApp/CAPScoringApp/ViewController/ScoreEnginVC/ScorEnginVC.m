@@ -5109,6 +5109,7 @@
         //               [self.img_pichmap addSubview:Img_ball];
         //           }
         
+        
         if(Xposition >96 && Yposition > 37 && Xposition < 265 && Yposition < 105)
         {
             if(Xposition > 96 && Yposition > 37 && Xposition < 158)
@@ -5186,8 +5187,8 @@
             Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.img_pichmap addSubview:Img_ball];
-            self.ballEventRecord.objPMlengthcode=@"MSC037";
-            self.ballEventRecord.objPMlinecode =@"MSC031";
+            //self.ballEventRecord.objPMlengthcode=@"MSC037";
+           // self.ballEventRecord.objPMlinecode =@"MSC031";
             
         }
         else if ((Xposition > 100 && Yposition > 104 && Xposition < 271 && Yposition < 128))
