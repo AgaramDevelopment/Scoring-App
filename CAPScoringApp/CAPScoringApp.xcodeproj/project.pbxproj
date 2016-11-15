@@ -96,6 +96,7 @@
 		187462271D9BCD5D0093721B /* BatsmaninoutRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 187462261D9BCD5D0093721B /* BatsmaninoutRecord.m */; };
 		1874622B1D9BD5890093721B /* DBManagerBatsmanInOutTime.m in Sources */ = {isa = PBXBuildFile; fileRef = 1874622A1D9BD5890093721B /* DBManagerBatsmanInOutTime.m */; };
 		1874622F1D9BDCE50093721B /* BatsmanPlayerList.m in Sources */ = {isa = PBXBuildFile; fileRef = 1874622E1D9BDCE50093721B /* BatsmanPlayerList.m */; };
+		1875A92C1DDAEBAC00F8BF01 /* SessionReportCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1875A92B1DDAEBAC00F8BF01 /* SessionReportCell.xib */; };
 		18761F2F1D82EC4A00D52F79 /* BowlerStaticsRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 18761F2E1D82EC4A00D52F79 /* BowlerStaticsRecord.m */; };
 		187620F21D1D000B006E160F /* FetchEndDayDetails.m in Sources */ = {isa = PBXBuildFile; fileRef = 187620F11D1D000B006E160F /* FetchEndDayDetails.m */; };
 		187620F51D1D004B006E160F /* DeleteEndDay.m in Sources */ = {isa = PBXBuildFile; fileRef = 187620F41D1D004B006E160F /* DeleteEndDay.m */; };
@@ -505,7 +506,6 @@
 		1872292C1D12667200CC168F /* BreakVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BreakVC.xib; sourceTree = "<group>"; };
 		1872FE861DC2D80F007C31F7 /* SessionReportCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SessionReportCell.h; path = SubClass/SessionReportCell/SessionReportCell.h; sourceTree = "<group>"; };
 		1872FE871DC2D80F007C31F7 /* SessionReportCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SessionReportCell.m; path = SubClass/SessionReportCell/SessionReportCell.m; sourceTree = "<group>"; };
-		1872FE881DC2D80F007C31F7 /* SessionReportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SessionReportCell.xib; path = SubClass/SessionReportCell/SessionReportCell.xib; sourceTree = "<group>"; };
 		1874621F1D9BC7C60093721B /* BatsManINOutTime.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatsManINOutTime.h; sourceTree = "<group>"; };
 		187462201D9BC7C60093721B /* BatsManINOutTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatsManINOutTime.m; sourceTree = "<group>"; };
 		187462211D9BC7C60093721B /* BatsManINOutTime.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BatsManINOutTime.xib; sourceTree = "<group>"; };
@@ -515,6 +515,7 @@
 		1874622A1D9BD5890093721B /* DBManagerBatsmanInOutTime.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerBatsmanInOutTime.m; sourceTree = "<group>"; };
 		1874622D1D9BDCE50093721B /* BatsmanPlayerList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BatsmanPlayerList.h; sourceTree = "<group>"; };
 		1874622E1D9BDCE50093721B /* BatsmanPlayerList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BatsmanPlayerList.m; sourceTree = "<group>"; };
+		1875A92B1DDAEBAC00F8BF01 /* SessionReportCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SessionReportCell.xib; path = SubClass/SessionReportCell/SessionReportCell.xib; sourceTree = "<group>"; };
 		18761F2D1D82EC4A00D52F79 /* BowlerStaticsRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlerStaticsRecord.h; sourceTree = "<group>"; };
 		18761F2E1D82EC4A00D52F79 /* BowlerStaticsRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BowlerStaticsRecord.m; sourceTree = "<group>"; };
 		187620F01D1D000B006E160F /* FetchEndDayDetails.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FetchEndDayDetails.h; sourceTree = "<group>"; };
@@ -1211,7 +1212,7 @@
 			children = (
 				1872FE861DC2D80F007C31F7 /* SessionReportCell.h */,
 				1872FE871DC2D80F007C31F7 /* SessionReportCell.m */,
-				1872FE881DC2D80F007C31F7 /* SessionReportCell.xib */,
+				1875A92B1DDAEBAC00F8BF01 /* SessionReportCell.xib */,
 			);
 			name = SessionReportCell;
 			sourceTree = "<group>";
@@ -2419,6 +2420,7 @@
 				18E0F2B81DC0DD03006E93EE /* SessionReportVC.xib in Resources */,
 				36E4BF7D1DD3184100B8E344 /* BatsmanKPIVC.xib in Resources */,
 				1867C8ED1DD485E600EFCC80 /* PartnershipCell.xib in Resources */,
+				1875A92C1DDAEBAC00F8BF01 /* SessionReportCell.xib in Resources */,
 				186D5E401D9AA617000AFB85 /* BatsManINOUT.xib in Resources */,
 				18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */,
 				24F96F881D2FC90500798A9D /* PenalityVC.xib in Resources */,

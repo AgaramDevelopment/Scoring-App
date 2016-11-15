@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -50,6 +50,8 @@
                 <outlet property="filter_view" destination="9xh-8n-Xv9" id="tkV-EP-lD1"/>
                 <outlet property="inn1_btnWidth" destination="P3X-rq-G5F" id="c2g-dV-kWW"/>
                 <outlet property="inns2_btnWidth" destination="kYg-yr-r5K" id="VeG-Gg-sA1"/>
+                <outlet property="inns3_btnwidth" destination="Vo2-76-cZI" id="YOV-YV-FZw"/>
+                <outlet property="inns4_btnwidth" destination="oI1-MN-HGe" id="VwD-g2-SFh"/>
                 <outlet property="length_Lbl" destination="eDM-ms-Vpr" id="PHU-X3-EE4"/>
                 <outlet property="length_View" destination="bB8-7b-9jT" id="dNw-EE-uYV"/>
                 <outlet property="line_Vew" destination="9lw-UP-b2o" id="H1z-KU-1aS"/>
@@ -199,11 +201,11 @@
                         <mask key="constraints">
                             <exclude reference="8ej-JJ-5Pg"/>
                             <exclude reference="UPL-bI-Ryh"/>
+                            <exclude reference="EIW-bk-Ic7"/>
+                            <exclude reference="OJB-x6-Fjf"/>
                             <exclude reference="5yO-rF-5Ld"/>
                             <exclude reference="bPJ-T9-74e"/>
                             <exclude reference="ytp-Fh-TlT"/>
-                            <exclude reference="EIW-bk-Ic7"/>
-                            <exclude reference="OJB-x6-Fjf"/>
                         </mask>
                     </variation>
                     <variation key="heightClass=regular-widthClass=regular">
@@ -214,15 +216,15 @@
                         <mask key="constraints">
                             <include reference="8ej-JJ-5Pg"/>
                             <include reference="UPL-bI-Ryh"/>
+                            <include reference="EIW-bk-Ic7"/>
+                            <include reference="OJB-x6-Fjf"/>
                             <include reference="5yO-rF-5Ld"/>
                             <include reference="bPJ-T9-74e"/>
                             <include reference="ytp-Fh-TlT"/>
-                            <include reference="EIW-bk-Ic7"/>
-                            <include reference="OJB-x6-Fjf"/>
                         </mask>
                     </variation>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pichmapLH" translatesAutoresizingMaskIntoConstraints="NO" id="xx3-6o-ffY">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="pichmapLH" translatesAutoresizingMaskIntoConstraints="NO" id="xx3-6o-ffY">
                     <rect key="frame" x="50" y="165" width="500" height="310"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9xh-8n-Xv9">
@@ -816,15 +818,15 @@
                     <exclude reference="tKP-5i-bWL"/>
                 </mask>
                 <mask key="constraints">
-                    <exclude reference="DWs-fx-zwf"/>
-                    <exclude reference="EDV-SC-2M0"/>
-                    <exclude reference="m5Z-xd-wZj"/>
-                    <exclude reference="xcN-Vj-yBr"/>
                     <exclude reference="84d-U9-ZfD"/>
                     <exclude reference="S4Q-Hq-ddf"/>
                     <exclude reference="Xle-oX-m7T"/>
                     <exclude reference="bt9-jH-qwb"/>
                     <exclude reference="yN4-QF-x1o"/>
+                    <exclude reference="DWs-fx-zwf"/>
+                    <exclude reference="EDV-SC-2M0"/>
+                    <exclude reference="m5Z-xd-wZj"/>
+                    <exclude reference="xcN-Vj-yBr"/>
                 </mask>
             </variation>
             <variation key="heightClass=regular-widthClass=regular">
@@ -832,15 +834,15 @@
                     <include reference="tKP-5i-bWL"/>
                 </mask>
                 <mask key="constraints">
-                    <include reference="DWs-fx-zwf"/>
-                    <include reference="EDV-SC-2M0"/>
-                    <include reference="m5Z-xd-wZj"/>
-                    <include reference="xcN-Vj-yBr"/>
                     <include reference="84d-U9-ZfD"/>
                     <include reference="S4Q-Hq-ddf"/>
                     <include reference="Xle-oX-m7T"/>
                     <include reference="bt9-jH-qwb"/>
                     <include reference="yN4-QF-x1o"/>
+                    <include reference="DWs-fx-zwf"/>
+                    <include reference="EDV-SC-2M0"/>
+                    <include reference="m5Z-xd-wZj"/>
+                    <include reference="xcN-Vj-yBr"/>
                 </mask>
             </variation>
         </view>

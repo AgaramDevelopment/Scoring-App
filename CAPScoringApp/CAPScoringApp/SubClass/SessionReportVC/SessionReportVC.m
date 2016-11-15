@@ -285,7 +285,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"UITableViewCell";
+    static NSString *CellIdentifier = @"SessionReportCell";
     
     SessionReportCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     

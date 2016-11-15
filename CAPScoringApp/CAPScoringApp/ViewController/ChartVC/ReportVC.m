@@ -57,7 +57,7 @@ NSMutableArray * objhartlistArray;
 
 - (void)viewDidLayoutSubviews
 {
-    [self.scrolllistview setContentSize:CGSizeMake(3000, 80)];
+    [self.scrolllistview setContentSize:CGSizeMake(objhartlistArray.count*200, 80)];
 }
 -(void)customnavigationmethod
 {
@@ -86,7 +86,7 @@ NSMutableArray * objhartlistArray;
         
     objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman", nil];
     }
-    NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
+//    NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
     
     
    // self.scrolllistview.frame =CGRectMake(0,self.view.frame.origin.y,764, 70);
@@ -224,7 +224,7 @@ NSMutableArray * objhartlistArray;
 
 
     }
-    [self viewDidLayoutSubviews];
+  //  [self viewDidLayoutSubviews];
 }
 
 - (IBAction)btn_back:(id)sender {
