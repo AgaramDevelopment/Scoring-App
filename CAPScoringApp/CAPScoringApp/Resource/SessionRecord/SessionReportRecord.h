@@ -32,4 +32,6 @@
 
 @property (nonatomic,strong) NSString * BDRY;
 
+@property (nonatomic,strong) NSString * shortName;
+
 @end
