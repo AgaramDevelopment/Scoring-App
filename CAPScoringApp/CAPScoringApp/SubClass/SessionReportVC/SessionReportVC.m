@@ -274,6 +274,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     cell.textLabel.text = [NSString stringWithFormat:@"DAY %d",indexPath.row+1];
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.textLabel.textColor=[UIColor whiteColor];
+   cell.textLabel.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
     
     if ((indexPath.section == 0 && (indexPath.row == 1 || indexPath.row == 0)) || (indexPath.section == 1 && (indexPath.row == 0 || indexPath.row == 2)))
         cell.expandable = YES;
@@ -298,7 +299,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
      //NSMutableArray *objRecords = commonArray[indexPath.section][indexPath.row][indexPath.subRow];
      SessionReportRecord *objRecord = commonArray[indexPath.section][indexPath.row][indexPath.subRow];
     cell.sessionno.text = objRecord.sessionno;
-    cell.BattingTeam.text =objRecord.TeamName;
+    cell.BattingTeam.text =objRecord.shortName;
     cell.overs.text      =objRecord.overs;
     cell.Run.text        =objRecord.Runs;
     cell.WKT.text       =objRecord.wickets;
@@ -384,7 +385,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT  'DAY'||' '||CAST(DAYNO AS NVARCHAR)  AS DAYNO, 'SESSION'||' '|| CAST(SESSIONNO AS NVARCHAR)  AS SESSIONNO, TEAMCODE, TEAMNAME, RUNS, CAST((BALLS / 6) AS TEXT) || '.' || CAST((BALLS / 6) AS TEXT) OVERS, WICKETS, FOURS, SIXES, CAST((CASE WHEN BALLS = 0 THEN 0 ELSE ((RUNS / BALLS) * 6) END) AS NUMERIC(5,2)) RUNRATE, CAST((CASE WHEN RUNS = 0 THEN 0 ELSE (((FOURS * 4) + (SIXES * 6)) / RUNS) * 100 END) AS NUMERIC(5,2)) BOUNDARIESPERCENTAGE FROM (SELECT BE.COMPETITIONCODE, BE.MATCHCODE, BE.INNINGSNO, BE.DAYNO, BE.SESSIONNO, BE.TEAMCODE, TM.TEAMNAME, SUM(BE.GRANDTOTAL) RUNS, SUM(CASE WHEN BE.ISLEGALBALL = 1 THEN 1 ELSE 0 END) BALLS, SUM(CASE WHEN BE.ISFOUR = 1 THEN 1 ELSE 0 END) FOURS, SUM(CASE WHEN BE.ISSIX = 1 THEN 1 ELSE 0 END) SIXES, SUM(CASE WHEN BE.ISLEGALBALL = 1 AND (BE.RUNS + (CASE WHEN BE.BYES + BE.LEGBYES = 0 THEN BE.OVERTHROW ELSE 0 END)) = 0 THEN 1 ELSE 0 END) DOTBALLS, SUM(CASE WHEN LENGTH(IFNULL(WE.WICKETTYPE,''))<0 OR WE.WICKETTYPE = 'MSC102' THEN 0 ELSE 1 END) WICKETS FROM BALLEVENTS BE INNER JOIN TEAMMASTER TM ON BE.TEAMCODE = TM.TEAMCODE LEFT JOIN WICKETEVENTS WE ON  BE.COMPETITIONCODE = WE.COMPETITIONCODE AND BE.MATCHCODE = WE.MATCHCODE AND BE.INNINGSNO = WE.INNINGSNO AND BE.BALLCODE = WE.BALLCODE WHERE  ('%@'='' OR BE.COMPETITIONCODE = '%@') AND ('%@'='' OR BE.MATCHCODE = '%@') GROUP BY BE.COMPETITIONCODE, BE.MATCHCODE, BE.INNINGSNO, BE.DAYNO, BE.SESSIONNO, BE.TEAMCODE, TM.TEAMNAME) SSN",COMPETITIONCODE,COMPETITIONCODE,MATCHCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT  'DAY'||' '||CAST(DAYNO AS NVARCHAR)  AS DAYNO, 'SESSION'||' '|| CAST(SESSIONNO AS NVARCHAR)  AS SESSIONNO, TEAMCODE, TEAMNAME,SHORTTEAMNAME, RUNS, CAST((BALLS / 6) AS TEXT) || '.' || CAST((BALLS / 6) AS TEXT) OVERS, WICKETS, FOURS, SIXES, CAST((CASE WHEN BALLS = 0 THEN 0 ELSE ((RUNS / BALLS) * 6) END) AS NUMERIC(5,2)) RUNRATE, CAST((CASE WHEN RUNS = 0 THEN 0 ELSE (((FOURS * 4) + (SIXES * 6)) / RUNS) * 100 END) AS NUMERIC(5,2)) BOUNDARIESPERCENTAGE FROM (SELECT BE.COMPETITIONCODE, BE.MATCHCODE, BE.INNINGSNO, BE.DAYNO, BE.SESSIONNO, BE.TEAMCODE, TM.TEAMNAME,TM.SHORTTEAMNAME, SUM(BE.GRANDTOTAL) RUNS, SUM(CASE WHEN BE.ISLEGALBALL = 1 THEN 1 ELSE 0 END) BALLS, SUM(CASE WHEN BE.ISFOUR = 1 THEN 1 ELSE 0 END) FOURS, SUM(CASE WHEN BE.ISSIX = 1 THEN 1 ELSE 0 END) SIXES, SUM(CASE WHEN BE.ISLEGALBALL = 1 AND (BE.RUNS + (CASE WHEN BE.BYES + BE.LEGBYES = 0 THEN BE.OVERTHROW ELSE 0 END)) = 0 THEN 1 ELSE 0 END) DOTBALLS, SUM(CASE WHEN LENGTH(IFNULL(WE.WICKETTYPE,''))<0 OR WE.WICKETTYPE = 'MSC102' THEN 0 ELSE 1 END) WICKETS FROM BALLEVENTS BE INNER JOIN TEAMMASTER TM ON BE.TEAMCODE = TM.TEAMCODE LEFT JOIN WICKETEVENTS WE ON  BE.COMPETITIONCODE = WE.COMPETITIONCODE AND BE.MATCHCODE = WE.MATCHCODE AND BE.INNINGSNO = WE.INNINGSNO AND BE.BALLCODE = WE.BALLCODE WHERE  ('%@'='' OR BE.COMPETITIONCODE = '%@') AND ('%@'='' OR BE.MATCHCODE = '%@') GROUP BY BE.COMPETITIONCODE, BE.MATCHCODE, BE.INNINGSNO, BE.DAYNO, BE.SESSIONNO, BE.TEAMCODE, TM.TEAMNAME) SSN",COMPETITIONCODE,COMPETITIONCODE,MATCHCODE,MATCHCODE];
         
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
@@ -396,19 +397,20 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.sessionno=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 record.Teamcode=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
                 record.TeamName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.shortName=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
                 
-                record.Runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                record.Runs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
                 
-                record.overs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                record.overs=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
                 
-                record.wickets=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
+                record.wickets=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
                 
-                record.fours=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                record.fours=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
                 
-                record.sixes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                record.sixes=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
                 
-                 record.RunRate=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
-                record.BDRY=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                 record.RunRate=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
+                record.BDRY=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
                 [getSessiondetail addObject:record];
             }
             sqlite3_reset(statement);

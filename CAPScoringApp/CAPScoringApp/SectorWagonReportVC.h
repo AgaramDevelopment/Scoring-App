@@ -73,6 +73,7 @@
 - (IBAction)onSide:(id)sender;
 - (IBAction)offSide:(id)sender;
 
+- (IBAction)btn_hide_filter:(id)sender;
 
 - (IBAction)btn_first_inns:(id)sender;
 - (IBAction)btn_sec_inns:(id)sender;

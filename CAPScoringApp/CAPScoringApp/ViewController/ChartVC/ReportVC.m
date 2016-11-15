@@ -86,7 +86,10 @@ NSMutableArray * objhartlistArray;
         
     objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman", nil];
     }
-//    NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
+    
+    
+    
+ // NSMutableArray * objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
     
     
    // self.scrolllistview.frame =CGRectMake(0,self.view.frame.origin.y,764, 70);
@@ -409,8 +412,6 @@ NSMutableArray * objhartlistArray;
     
     //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:batsmanKpiView.view];
-    
-    
     
 }
 

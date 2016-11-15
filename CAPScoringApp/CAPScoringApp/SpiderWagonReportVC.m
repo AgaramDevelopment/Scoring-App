@@ -32,6 +32,7 @@
 @property (nonatomic,strong) NSString *teamBcode;
 
 @end
+UIColor *strokeColor;
 
 @implementation SpiderWagonReportVC
 
@@ -85,7 +86,13 @@
     int x2position;
     int y2position;
     
+    int BASE_X = 320;
     
+//    if (batsManType.equals(AppConstant.BATMAN_STYLE_RIGHT_BATSMAN)) {
+//        if (spiderDetail.getBattingStyle().equals(AppConstant.BATMAN_STYLE_LEFT_BATSMAN)) {
+//            x = BASE_X + (BASE_X - x1position);
+//        }
+//    }
     
     for(int i=0; i< _spiderWagonArray.count;i++)
     {
@@ -98,6 +105,15 @@
         y2position  =[objRecord.WWY2 intValue];
         
         
+        
+        if ([_lbl_striker.text isEqualToString:@"Striker"]) {
+            
+        if ([objRecord.BATTINGSTYLE isEqualToString:@"MSC012"]) {
+            
+             x2position = BASE_X + (BASE_X - x2position);
+            
+            }
+        }
 //        if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
         
             
@@ -112,7 +128,38 @@
             shapeLayer.path = straightLinePath;
             UIColor *fillColor = [UIColor redColor];
             shapeLayer.fillColor = fillColor.CGColor;
-            UIColor *strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(0/255.0f) alpha:1.0f];
+        
+//        6 - 255 0 255
+//        5 - 255 204 153
+//        4 - 208 31 27
+//        3 - 221 245 10
+//        2 - 35 116 205
+//        1 - 255 108 0
+//        0 - 255 255 255 
+//        w - 150 57 57
+    
+        
+        if ([objRecord.RUNS isEqualToString: @"1"]) {
+            
+         strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.RUNS isEqualToString: @"2"]){
+            strokeColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.RUNS isEqualToString: @"3"]){
+            strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.RUNS isEqualToString: @"4"]){
+            strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.RUNS isEqualToString: @"5"]){
+            strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.RUNS isEqualToString: @"6"]){
+            strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+            
+        }
+        
             shapeLayer.strokeColor = strokeColor.CGColor;
             shapeLayer.lineWidth = 2.0f;
             shapeLayer.fillRule = kCAFillRuleNonZero;
@@ -215,7 +262,7 @@ self.img_wagon.layer.sublayers = nil;
 
 - (IBAction)didClickStricker:(id)sender {
     
-    self.strikerTblYposition.constant =self.striker_view.frame.origin.y;
+    self.strikerTblYposition.constant =self.striker_view.frame.origin.y-55;
     self.strikerArray=[[NSMutableArray alloc]init];
     self.strikerArray= [objDBManagerSpiderWagonReport getStrickerdetail:self.matchCode :_teamCode];
     
@@ -240,7 +287,7 @@ self.img_wagon.layer.sublayers = nil;
 
 - (IBAction)didClickBowler:(id)sender {
     
-    self.strikerTblYposition.constant = self.bowler_view.frame.origin.y;
+    self.strikerTblYposition.constant = self.bowler_view.frame.origin.y-55;
     self.bowlerArray=[[NSMutableArray alloc]init];
     _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"1"];
     
@@ -260,6 +307,13 @@ self.img_wagon.layer.sublayers = nil;
     
     [self.tbl_players reloadData];
 
+    
+}
+
+- (IBAction)btn_hide_view:(id)sender {
+    
+    self.filter_view.hidden=YES;
+    self.hide_btn_view.hidden = NO;
     
 }
 

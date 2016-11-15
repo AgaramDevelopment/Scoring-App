@@ -353,6 +353,12 @@
     [self.btn_offSide setImage:[UIImage imageNamed:@"Radio.on"] forState:UIControlStateNormal];
 }
 
+- (IBAction)btn_hide_filter:(id)sender {
+    
+    self.filter_view.hidden=YES;
+    self.hide_btn_view.hidden = NO;
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -439,7 +445,7 @@
 
 - (IBAction)didClickStricker:(id)sender {
     
-    self.strikerTblYposition.constant =self.striker_view.frame.origin.y;
+    self.strikerTblYposition.constant =self.striker_view.frame.origin.y-55;
     self.strikerArray=[[NSMutableArray alloc]init];
     self.strikerArray= [objDBManagerSpiderWagonReport getStrickerdetail:self.matchCode :_teamCode];
     
@@ -466,7 +472,7 @@
 - (IBAction)didClickBowler:(id)sender {
     
     
-    self.strikerTblYposition.constant = self.bowler_view.frame.origin.y;
+    self.strikerTblYposition.constant = self.bowler_view.frame.origin.y-55;
     self.bowlerArray=[[NSMutableArray alloc]init];
     _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"1"];
     

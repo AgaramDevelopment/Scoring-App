@@ -104,6 +104,7 @@
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * strikerTblYposition;
 @property (strong, nonatomic) IBOutlet UIView *show_view;
 
+- (IBAction)btn_hide_view:(id)sender;
 
 
 @end
