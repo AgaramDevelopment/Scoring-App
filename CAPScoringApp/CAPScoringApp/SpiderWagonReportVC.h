@@ -73,6 +73,7 @@
 - (IBAction)hide_Filer_view:(id)sender;
 - (IBAction)didClickStricker:(id)sender;
 - (IBAction)didClickBowler:(id)sender;
+- (IBAction)btn_hide_view:(id)sender;
 
 
 @end

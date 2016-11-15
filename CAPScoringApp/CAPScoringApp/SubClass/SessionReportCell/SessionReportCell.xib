@@ -136,7 +136,7 @@
                                     </mask>
                                 </variation>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WKT" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdL-qd-hIT">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdL-qd-hIT">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -237,7 +237,7 @@
                                 </variation>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.074509803921568626" green="0.090196078431372548" blue="0.11372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="Q90-d7-oP3" firstAttribute="width" secondItem="AV7-Qa-Wk2" secondAttribute="width" id="1xs-In-7Rv"/>
                             <constraint firstItem="dkM-UE-3dg" firstAttribute="top" secondItem="Oz4-qB-A5E" secondAttribute="top" constant="10" id="23G-Vg-y93"/>
@@ -364,7 +364,7 @@
                         </variation>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="Oz4-qB-A5E" secondAttribute="trailing" id="2Ta-V5-lXX"/>
                     <constraint firstAttribute="bottom" secondItem="Oz4-qB-A5E" secondAttribute="bottom" constant="1" id="PtX-mQ-TMT">
@@ -390,7 +390,6 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="BDRY" destination="Q90-d7-oP3" id="ThG-1E-sNv"/>
                 <outlet property="BattingTeam" destination="irK-9W-Izm" id="pKj-DM-SWe"/>

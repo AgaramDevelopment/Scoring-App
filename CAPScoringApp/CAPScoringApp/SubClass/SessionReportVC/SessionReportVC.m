@@ -274,6 +274,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     cell.textLabel.text = [NSString stringWithFormat:@"DAY %d",indexPath.row+1];
     [cell setBackgroundColor:[UIColor clearColor]];
     cell.textLabel.textColor=[UIColor whiteColor];
+   cell.textLabel.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
     
     if ((indexPath.section == 0 && (indexPath.row == 1 || indexPath.row == 0)) || (indexPath.section == 1 && (indexPath.row == 0 || indexPath.row == 2)))
         cell.expandable = YES;

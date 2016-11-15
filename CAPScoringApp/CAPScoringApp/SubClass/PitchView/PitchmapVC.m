@@ -1542,4 +1542,10 @@
 }
 
 
+- (IBAction)btn_hide_view:(id)sender {
+    
+    
+    self.filter_view.hidden =YES;
+    self.show_view.hidden = NO;
+}
 @end

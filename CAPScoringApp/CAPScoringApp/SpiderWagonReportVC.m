@@ -263,6 +263,13 @@ self.img_wagon.layer.sublayers = nil;
     
 }
 
+- (IBAction)btn_hide_view:(id)sender {
+    
+    self.filter_view.hidden=YES;
+    self.hide_btn_view.hidden = NO;
+    
+}
+
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

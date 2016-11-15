@@ -353,6 +353,12 @@
     [self.btn_offSide setImage:[UIImage imageNamed:@"Radio.on"] forState:UIControlStateNormal];
 }
 
+- (IBAction)btn_hide_filter:(id)sender {
+    
+    self.filter_view.hidden=YES;
+    self.hide_btn_view.hidden = NO;
+}
+
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
