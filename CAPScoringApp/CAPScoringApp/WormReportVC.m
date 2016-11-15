@@ -202,7 +202,7 @@
     
     [tittleview addSubview:title_lbl];
     
-    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(40,title_lbl.frame.origin.y+30,50, 30)];
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(60,title_lbl.frame.origin.y+30,70, 30)];
     BattingTeam_lbl.text =self.fstInnShortName;
     BattingTeam_lbl.backgroundColor= [UIColor  colorWithRed:(218/255.0f) green:(61/255.0f) blue:(67/255.0f) alpha:1.0f];
     BattingTeam_lbl.textColor =[UIColor whiteColor];
@@ -212,7 +212,7 @@
     
     [tittleview addSubview:BattingTeam_lbl];
     
-    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.lineChartViewOne.frame.size.width-80,title_lbl.frame.origin.y+30,50, 30)];
+    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.lineChartViewOne.frame.size.width-120,title_lbl.frame.origin.y+30,70, 30)];
     BowlingTeam_lbl.text =self.secInnShortName;
     BowlingTeam_lbl.backgroundColor=[UIColor  colorWithRed:(35/255.0f) green:(116/255.0f) blue:(203/255.0f) alpha:1.0f];
     BowlingTeam_lbl.textColor =[UIColor whiteColor];
@@ -281,7 +281,7 @@
     
     [tittleview addSubview:title_lbl];
     
-    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(40,title_lbl.frame.origin.y+30,50, 30)];
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(60,title_lbl.frame.origin.y+30,70, 30)];
     BattingTeam_lbl.text =self.thrdInnShortName;
     BattingTeam_lbl.backgroundColor=[UIColor  colorWithRed:(218/255.0f) green:(61/255.0f) blue:(67/255.0f) alpha:1.0f];
     BattingTeam_lbl.textColor =[UIColor whiteColor];
@@ -291,7 +291,7 @@
     
     [tittleview addSubview:BattingTeam_lbl];
     
-    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.lineChartViewTwo.frame.size.width-80,title_lbl.frame.origin.y+30,50, 30)];
+    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.lineChartViewTwo.frame.size.width-120,title_lbl.frame.origin.y+30,70, 30)];
     BowlingTeam_lbl.text =self.frthInnShortName;
     BowlingTeam_lbl.backgroundColor=[UIColor  colorWithRed:(35/255.0f) green:(116/255.0f) blue:(203/255.0f) alpha:1.0f];
     BowlingTeam_lbl.textColor =[UIColor whiteColor];
