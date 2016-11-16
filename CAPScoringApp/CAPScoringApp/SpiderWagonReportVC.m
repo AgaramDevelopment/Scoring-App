@@ -88,11 +88,6 @@ UIColor *strokeColor;
     
     int BASE_X = 320;
     
-//    if (batsManType.equals(AppConstant.BATMAN_STYLE_RIGHT_BATSMAN)) {
-//        if (spiderDetail.getBattingStyle().equals(AppConstant.BATMAN_STYLE_LEFT_BATSMAN)) {
-//            x = BASE_X + (BASE_X - x1position);
-//        }
-//    }
     
     for(int i=0; i< _spiderWagonArray.count;i++)
     {
@@ -114,6 +109,7 @@ UIColor *strokeColor;
             
             }
         }
+        
 //        if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
         
             
@@ -129,14 +125,7 @@ UIColor *strokeColor;
             UIColor *fillColor = [UIColor redColor];
             shapeLayer.fillColor = fillColor.CGColor;
         
-//        6 - 255 0 255
-//        5 - 255 204 153
-//        4 - 208 31 27
-//        3 - 221 245 10
-//        2 - 35 116 205
-//        1 - 255 108 0
-//        0 - 255 255 255 
-//        w - 150 57 57
+
     
         
         if ([objRecord.RUNS isEqualToString: @"1"]) {
@@ -158,6 +147,12 @@ UIColor *strokeColor;
         }else if ([objRecord.RUNS isEqualToString: @"6"]){
             strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
             
+        }else if ([objRecord.RUNS isEqualToString: @"0"]){
+            
+        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
+            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
         }
         
             shapeLayer.strokeColor = strokeColor.CGColor;
@@ -543,8 +538,6 @@ self.img_wagon.layer.sublayers = nil;
 }
 
 - (IBAction)btn_hide_filter:(id)sender {
-    
-    
     
     self.filter_view.hidden=YES;
     self.hide_btn_view.hidden = YES;
