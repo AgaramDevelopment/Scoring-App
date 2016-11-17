@@ -20,6 +20,7 @@
 #import "BatsmanKPIVC.h"
 #import "WormReportVC.h"
 #import "PartnershipVC.h"
+#import "FieldingReportVC.h"
 
 @interface ReportVC ()<UIScrollViewDelegate>
 {
@@ -36,6 +37,7 @@
     BatsmanKPIVC * batsmanKpiView;
     WormReportVC *wormReportVC;
     PartnershipVC * objPartnershipvc;
+    FieldingReportVC * FieldingReport;
 }
 
 @end
@@ -78,7 +80,7 @@ NSMutableArray * objhartlistArray;
     
 //    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
         
-         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Session", nil];
+         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Session",@"Fielding Report", nil];
 
     }else{
         
@@ -209,6 +211,19 @@ NSMutableArray * objhartlistArray;
     else if(objBtn.tag == 12)
     {
          NSLog(@"%d",objBtn.tag);
+        FieldingReport = [[FieldingReportVC alloc]initWithNibName:@"FieldingReportVC" bundle:nil];
+        FieldingReport.matchCode = self.matchCode;
+        FieldingReport.matchTypeCode =self.matchTypeCode;
+        FieldingReport.compitionCode =self.competitionCode;
+        FieldingReport.Teamcode      = self.teamcode;
+        FieldingReport.fstInnShortName = self.fstInnShortName;
+        FieldingReport.secInnShortName = self.secInnShortName;
+        FieldingReport.thrdInnShortName = self.thrdInnShortName;
+        FieldingReport.frthInnShortName = self.frthInnShortName;
+        
+        FieldingReport.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+        [self.view addSubview:FieldingReport.view];
+
         
 
     }

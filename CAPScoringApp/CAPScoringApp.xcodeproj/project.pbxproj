@@ -161,6 +161,9 @@
 		18AB07D11D2A79E000AEEB1B /* EndSessionTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24A93A5B1D26344400E02DAE /* EndSessionTVC.xib */; };
 		18C3018B1DB8A221000E8272 /* PitchmapVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C301891DB8A221000E8272 /* PitchmapVC.m */; };
 		18C3018C1DB8A221000E8272 /* PitchmapVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C3018A1DB8A221000E8272 /* PitchmapVC.xib */; };
+		18CC24221DDC2D3F005FACB1 /* FieldingReportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC24201DDC2D3F005FACB1 /* FieldingReportVC.m */; };
+		18CC24231DDC2D3F005FACB1 /* FieldingReportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CC24211DDC2D3F005FACB1 /* FieldingReportVC.xib */; };
+		18CC242D1DDC6B5C005FACB1 /* DBManagerFieldReport.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC242C1DDC6B5C005FACB1 /* DBManagerFieldReport.m */; };
 		18DE9F651DB60897001013B6 /* LiveMatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DE9F631DB60897001013B6 /* LiveMatchCell.m */; };
 		18DE9F661DB60897001013B6 /* LiveMatchCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18DE9F641DB60897001013B6 /* LiveMatchCell.xib */; };
 		18DE9F6A1DB608E9001013B6 /* ResultMatchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18DE9F681DB608E9001013B6 /* ResultMatchCell.m */; };
@@ -170,6 +173,9 @@
 		18E394701DB7AA830014A5F5 /* ReportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E3946F1DB7AA830014A5F5 /* ReportVC.m */; };
 		18E655F91D5489510010B387 /* DBManagerCaptransactionslogEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E655F81D5489510010B387 /* DBManagerCaptransactionslogEntry.m */; };
 		18E655FC1D548B180010B387 /* CaptransactionslogEntryRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 18E655FB1D548B180010B387 /* CaptransactionslogEntryRecord.m */; };
+		18F1AC351DDD82CD00821755 /* FFactorRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F1AC341DDD82CD00821755 /* FFactorRecord.m */; };
+		18F1AC381DDD848F00821755 /* FFactoredRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F1AC371DDD848F00821755 /* FFactoredRecord.m */; };
+		18F1AC3B1DDD85F900821755 /* FFactorDetailRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F1AC3A1DDD85F900821755 /* FFactorDetailRecord.m */; };
 		18F8FED01D277B11007A16A9 /* DBManagerEndBall.m in Sources */ = {isa = PBXBuildFile; fileRef = CEBA5CA81D22343800CE2472 /* DBManagerEndBall.m */; };
 		243F8E3F1D2236CF00333AD8 /* AppealBatsmenRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 243F8E3D1D2236CF00333AD8 /* AppealBatsmenRecord.m */; };
 		243F8E441D2237D600333AD8 /* PowerPlayGridVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 243F8E411D2237D600333AD8 /* PowerPlayGridVC.xib */; };
@@ -640,6 +646,11 @@
 		18C301881DB8A221000E8272 /* PitchmapVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PitchmapVC.h; path = SubClass/PitchView/PitchmapVC.h; sourceTree = "<group>"; };
 		18C301891DB8A221000E8272 /* PitchmapVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PitchmapVC.m; path = SubClass/PitchView/PitchmapVC.m; sourceTree = "<group>"; };
 		18C3018A1DB8A221000E8272 /* PitchmapVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PitchmapVC.xib; path = SubClass/PitchView/PitchmapVC.xib; sourceTree = "<group>"; };
+		18CC241F1DDC2D3F005FACB1 /* FieldingReportVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FieldingReportVC.h; path = SubClass/FieldingReport/FieldingReportVC.h; sourceTree = "<group>"; };
+		18CC24201DDC2D3F005FACB1 /* FieldingReportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FieldingReportVC.m; path = SubClass/FieldingReport/FieldingReportVC.m; sourceTree = "<group>"; };
+		18CC24211DDC2D3F005FACB1 /* FieldingReportVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FieldingReportVC.xib; path = SubClass/FieldingReport/FieldingReportVC.xib; sourceTree = "<group>"; };
+		18CC242B1DDC6B5C005FACB1 /* DBManagerFieldReport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManagerFieldReport.h; path = Resource/DBManagerFieldreport/DBManagerFieldReport.h; sourceTree = "<group>"; };
+		18CC242C1DDC6B5C005FACB1 /* DBManagerFieldReport.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManagerFieldReport.m; path = Resource/DBManagerFieldreport/DBManagerFieldReport.m; sourceTree = "<group>"; };
 		18DE9F621DB60897001013B6 /* LiveMatchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LiveMatchCell.h; sourceTree = "<group>"; };
 		18DE9F631DB60897001013B6 /* LiveMatchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LiveMatchCell.m; sourceTree = "<group>"; };
 		18DE9F641DB60897001013B6 /* LiveMatchCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LiveMatchCell.xib; sourceTree = "<group>"; };
@@ -655,6 +666,12 @@
 		18E655F81D5489510010B387 /* DBManagerCaptransactionslogEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerCaptransactionslogEntry.m; sourceTree = "<group>"; };
 		18E655FA1D548B180010B387 /* CaptransactionslogEntryRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaptransactionslogEntryRecord.h; sourceTree = "<group>"; };
 		18E655FB1D548B180010B387 /* CaptransactionslogEntryRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CaptransactionslogEntryRecord.m; sourceTree = "<group>"; };
+		18F1AC331DDD82CD00821755 /* FFactorRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FFactorRecord.h; path = Resource/FieldingFactoreRecord/FFactorRecord.h; sourceTree = "<group>"; };
+		18F1AC341DDD82CD00821755 /* FFactorRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FFactorRecord.m; path = Resource/FieldingFactoreRecord/FFactorRecord.m; sourceTree = "<group>"; };
+		18F1AC361DDD848F00821755 /* FFactoredRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FFactoredRecord.h; path = Resource/FieldingFactoreRecord/FFactoredRecord.h; sourceTree = "<group>"; };
+		18F1AC371DDD848F00821755 /* FFactoredRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FFactoredRecord.m; path = Resource/FieldingFactoreRecord/FFactoredRecord.m; sourceTree = "<group>"; };
+		18F1AC391DDD85F900821755 /* FFactorDetailRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FFactorDetailRecord.h; path = Resource/FieldingFactoreRecord/FFactorDetailRecord.h; sourceTree = "<group>"; };
+		18F1AC3A1DDD85F900821755 /* FFactorDetailRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FFactorDetailRecord.m; path = Resource/FieldingFactoreRecord/FFactorDetailRecord.m; sourceTree = "<group>"; };
 		243F8E3D1D2236CF00333AD8 /* AppealBatsmenRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppealBatsmenRecord.m; path = Resource/AppealBatsmenRecord/AppealBatsmenRecord.m; sourceTree = "<group>"; };
 		243F8E3E1D2236CF00333AD8 /* AppealBatsmenRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppealBatsmenRecord.h; path = Resource/AppealBatsmenRecord/AppealBatsmenRecord.h; sourceTree = "<group>"; };
 		243F8E411D2237D600333AD8 /* PowerPlayGridVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PowerPlayGridVC.xib; path = SubClass/PowerplayGridVC/PowerPlayGridVC.xib; sourceTree = "<group>"; };
@@ -1440,6 +1457,25 @@
 			name = ReportSubview;
 			sourceTree = "<group>";
 		};
+		18CC24191DDC2C9B005FACB1 /* FieldingReport */ = {
+			isa = PBXGroup;
+			children = (
+				18CC241F1DDC2D3F005FACB1 /* FieldingReportVC.h */,
+				18CC24201DDC2D3F005FACB1 /* FieldingReportVC.m */,
+				18CC24211DDC2D3F005FACB1 /* FieldingReportVC.xib */,
+			);
+			name = FieldingReport;
+			sourceTree = "<group>";
+		};
+		18CC24241DDC6A8D005FACB1 /* DBManagerFieldReport */ = {
+			isa = PBXGroup;
+			children = (
+				18CC242B1DDC6B5C005FACB1 /* DBManagerFieldReport.h */,
+				18CC242C1DDC6B5C005FACB1 /* DBManagerFieldReport.m */,
+			);
+			name = DBManagerFieldReport;
+			sourceTree = "<group>";
+		};
 		18DE9F611DB6084F001013B6 /* ReportCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1471,6 +1507,19 @@
 				18674AC21D1A4F9600DB7C71 /* MatchResultListVC.xib */,
 			);
 			name = MatchResult;
+			sourceTree = "<group>";
+		};
+		18F1AC2C1DDD809500821755 /* FieldingFactorRecord */ = {
+			isa = PBXGroup;
+			children = (
+				18F1AC331DDD82CD00821755 /* FFactorRecord.h */,
+				18F1AC341DDD82CD00821755 /* FFactorRecord.m */,
+				18F1AC361DDD848F00821755 /* FFactoredRecord.h */,
+				18F1AC371DDD848F00821755 /* FFactoredRecord.m */,
+				18F1AC391DDD85F900821755 /* FFactorDetailRecord.h */,
+				18F1AC3A1DDD85F900821755 /* FFactorDetailRecord.m */,
+			);
+			name = FieldingFactorRecord;
 			sourceTree = "<group>";
 		};
 		243F8E3C1D2236A300333AD8 /* AppealBatsmenRecord */ = {
@@ -1824,6 +1873,8 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				18F1AC2C1DDD809500821755 /* FieldingFactorRecord */,
+				18CC24241DDC6A8D005FACB1 /* DBManagerFieldReport */,
 				1867C8D71DD4693500EFCC80 /* PartnershipRecord */,
 				1885B59F1DD3431200DF7F65 /* DBManagerPartnership */,
 				186B00BF1DD1D55A008E00D4 /* ToolTipRecord */,
@@ -2014,6 +2065,7 @@
 		CE0018371CF4308C00668D8B /* SubClass */ = {
 			isa = PBXGroup;
 			children = (
+				18CC24191DDC2C9B005FACB1 /* FieldingReport */,
 				1867C8DE1DD4850600EFCC80 /* PartnershipCell */,
 				1885B58F1DD336C400DF7F65 /* PartnerShipvc */,
 				187A8B551DC66A1900A5D31E /* chartView */,
@@ -2428,6 +2480,7 @@
 				36EA71591DC876E0004B0C68 /* BowlingKPIVC.xib in Resources */,
 				CEB2CC9F1DB8CC4B0053DA72 /* CommentaryVC.xib in Resources */,
 				04679C191DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.xib in Resources */,
+				18CC24231DDC2D3F005FACB1 /* FieldingReportVC.xib in Resources */,
 				047E52ED1D27D71F00D4CAC6 /* Other_WicketgridVC.xib in Resources */,
 				36A7E15A1DBB208E00C11C1E /* SpiderWagonReportVC.xib in Resources */,
 				18C3018C1DB8A221000E8272 /* PitchmapVC.xib in Resources */,
@@ -2509,6 +2562,7 @@
 				18AB07CF1D2A75C100AEEB1B /* EndSessionTVC.m in Sources */,
 				18AB07D01D2A75C100AEEB1B /* EndSession.m in Sources */,
 				DCEFC8801D28BC8800451485 /* UmpireDetailRecord.m in Sources */,
+				18F1AC3B1DDD85F900821755 /* FFactorDetailRecord.m in Sources */,
 				DCEFC87F1D28BC6800451485 /* GetStrickerNonStrickerPlayerCode.m in Sources */,
 				DCEFC87E1D28BC4E00451485 /* GetPlayerDetailOnAbsentHurt.m in Sources */,
 				36347C001DB4CC7600ADEF9F /* FixtureAndResultsVC.m in Sources */,
@@ -2542,6 +2596,7 @@
 				04679C131DC8589500EB2CDF /* BowlerVsBatsmanVC.m in Sources */,
 				18DE9F6A1DB608E9001013B6 /* ResultMatchCell.m in Sources */,
 				187952351D02AD28001A1224 /* FieldingFactorRecord.m in Sources */,
+				18F1AC351DDD82CD00821755 /* FFactorRecord.m in Sources */,
 				047669DD1D14229600572E39 /* PenaltyDetailsRecord.m in Sources */,
 				1878CD9A1D1167D700A80BEE /* DBManagerScoreCard.m in Sources */,
 				18704EEB1D197E4F00996BF3 /* InsertUpdateMatchResult.m in Sources */,
@@ -2634,6 +2689,7 @@
 				24D24CDF1CFEC70A00CD75D2 /* ScorEnginVC.m in Sources */,
 				CE1FBF6A1CF9A17500A9B6FE /* MatchOfficalsVC.m in Sources */,
 				1878CD911D11101600A80BEE /* InitializeInningsScoreBoardRecord.m in Sources */,
+				18CC24221DDC2D3F005FACB1 /* FieldingReportVC.m in Sources */,
 				18E0F2B71DC0DD03006E93EE /* SessionReportVC.m in Sources */,
 				246124F61D13C429004B85E7 /* EndInnings.m in Sources */,
 				18E655FC1D548B180010B387 /* CaptransactionslogEntryRecord.m in Sources */,
@@ -2694,6 +2750,7 @@
 				DCF6773C1D27D17600B98749 /* DBManagerEndSession.m in Sources */,
 				187952331D02A410001A1224 /* FieldingEventRecord.m in Sources */,
 				04C325851D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.m in Sources */,
+				18CC242D1DDC6B5C005FACB1 /* DBManagerFieldReport.m in Sources */,
 				1886718A1CFFF77E004DEDA0 /* AggressiveShotTypeCell.m in Sources */,
 				0468B3921D12AD2100B98576 /* MetaDataRecord.m in Sources */,
 				187625081D154495009374F8 /* BreakEventRecords.m in Sources */,
@@ -2709,6 +2766,7 @@
 				1837AA8C1CFF125B00B7259C /* BowlTypeCell.m in Sources */,
 				CE0018471CF4485500668D8B /* TorunamentVC.m in Sources */,
 				187625291D154548009374F8 /* EditModeCell.m in Sources */,
+				18F1AC381DDD848F00821755 /* FFactoredRecord.m in Sources */,
 				187620F21D1D000B006E160F /* FetchEndDayDetails.m in Sources */,
 				18705DC51D165D1800AED30D /* DBManagerLastBowler.m in Sources */,
 				24622DBE1D0AD8860057A08A /* ArchivesVC.m in Sources */,
