@@ -80,13 +80,13 @@ NSMutableArray * objhartlistArray;
     
 //    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
         
-         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Session",@"Fielding Report", nil];
+         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Fielding Report",@"Session", nil];
 
     }else{
         
 //         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report", nil];
         
-    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman", nil];
+    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Fielding Report", nil];
     }
     
     
@@ -205,12 +205,6 @@ NSMutableArray * objhartlistArray;
     }
     else if(objBtn.tag == 11)
     {
-        [self setSession];
-        
-    }
-    else if(objBtn.tag == 12)
-    {
-         NSLog(@"%d",objBtn.tag);
         FieldingReport = [[FieldingReportVC alloc]initWithNibName:@"FieldingReportVC" bundle:nil];
         FieldingReport.matchCode = self.matchCode;
         FieldingReport.matchTypeCode =self.matchTypeCode;
@@ -224,7 +218,13 @@ NSMutableArray * objhartlistArray;
         FieldingReport.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
         [self.view addSubview:FieldingReport.view];
 
+    }
+    else if(objBtn.tag == 12)
+    {
+         NSLog(@"%d",objBtn.tag);
         
+        [self setSession];
+
 
     }
     else if(objBtn.tag == 13)

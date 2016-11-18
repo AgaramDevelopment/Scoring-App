@@ -10,7 +10,7 @@
 
 @interface DBManagerFieldReport : NSObject
 
--(NSMutableArray *) getFieldingdetails:(NSString *) COMPETITIONCODE :(NSString *) MATCHCODE :(NSString *)TEAMCODE :(NSString *) INNINGSNO :(NSString *) FIELDERCODE :(NSString *) FIELDINGFACTORCODE ;
+-(NSMutableArray *) getFieldingdetails:(NSString *) COMPETITIONCODE :(NSString *) MATCHCODE :(NSString *)TEAMCODE :(NSString *) INNINGSNO:(NSString *) FIELDINGFACTORCODE ;
 
 -(NSMutableArray *)GETFIELDINGFACTORCODE;
 
