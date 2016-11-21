@@ -23,10 +23,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FieldingReportVC">
             <connections>
                 <outlet property="FielderName_lbl" destination="iZZ-nK-XdA" id="GW3-5P-CLi"/>
-                <outlet property="Inn1_Btn" destination="egA-dD-I43" id="cpV-dh-Poa"/>
-                <outlet property="Inn2_Btn" destination="fNy-gF-ZY3" id="0mZ-GM-YAH"/>
-                <outlet property="Inn3_Btn" destination="Dtc-I7-m5y" id="pl3-u9-cJf"/>
-                <outlet property="Inn4_Btn" destination="f4e-1q-uji" id="TcJ-wQ-sg0"/>
                 <outlet property="filter_view" destination="S0g-Cm-Hz2" id="KBa-aS-LCA"/>
                 <outlet property="hide_btn_view" destination="Szy-Vd-R7v" id="pQC-d2-Tml"/>
                 <outlet property="inn1_btnWidth" destination="DrT-6G-Sgq" id="ls9-Wg-d4g"/>

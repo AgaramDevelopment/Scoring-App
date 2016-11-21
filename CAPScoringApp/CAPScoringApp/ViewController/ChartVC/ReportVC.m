@@ -21,6 +21,7 @@
 #import "WormReportVC.h"
 #import "PartnershipVC.h"
 #import "FieldingReportVC.h"
+#import "SpellReportVC.h"
 
 @interface ReportVC ()<UIScrollViewDelegate>
 {
@@ -38,6 +39,7 @@
     WormReportVC *wormReportVC;
     PartnershipVC * objPartnershipvc;
     FieldingReportVC * FieldingReport;
+    SpellReportVC * SpellReport;
 }
 
 @end
@@ -80,13 +82,13 @@ NSMutableArray * objhartlistArray;
     
 //    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report",@"Session", nil];
         
-         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Fielding Report",@"Session", nil];
+         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Fielding Report",@"Spell Report",@"Session", nil];
 
     }else{
         
 //         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report", nil];
         
-    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Fielding Report", nil];
+    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Fielding Report",@"Spell Report", nil];
     }
     
     
@@ -223,13 +225,25 @@ NSMutableArray * objhartlistArray;
     {
          NSLog(@"%d",objBtn.tag);
         
-        [self setSession];
+        SpellReport = [[SpellReportVC alloc]initWithNibName:@"SpellReportVC" bundle:nil];
+        SpellReport.matchCode = self.matchCode;
+        SpellReport.matchTypeCode =self.matchTypeCode;
+        SpellReport.compitionCode =self.competitionCode;
+        SpellReport.Teamcode      = self.teamcode;
+        SpellReport.fstInnShortName = self.fstInnShortName;
+        SpellReport.secInnShortName = self.secInnShortName;
+        SpellReport.thrdInnShortName = self.thrdInnShortName;
+        SpellReport.frthInnShortName = self.frthInnShortName;
+        
+        SpellReport.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+        [self.view addSubview:SpellReport.view];
 
 
     }
     else if(objBtn.tag == 13)
     {
          NSLog(@"%d",objBtn.tag);
+        [self setSession];
     }
     
     else if(objBtn.tag == 14)

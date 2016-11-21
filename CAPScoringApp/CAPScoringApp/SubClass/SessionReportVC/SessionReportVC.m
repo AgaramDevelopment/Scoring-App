@@ -295,9 +295,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         cell = self.sessionCell;
         
     }
-    
-     //NSMutableArray *objRecords = commonArray[indexPath.section][indexPath.row][indexPath.subRow];
-     SessionReportRecord *objRecord = commonArray[indexPath.section][indexPath.row][indexPath.subRow];
+    SessionReportRecord *objRecord = commonArray[indexPath.section][indexPath.row][indexPath.subRow];
     cell.sessionno.text = objRecord.sessionno;
     cell.BattingTeam.text =objRecord.shortName;
     cell.overs.text      =objRecord.overs;

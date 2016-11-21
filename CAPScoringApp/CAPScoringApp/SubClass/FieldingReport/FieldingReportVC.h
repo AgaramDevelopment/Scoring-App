@@ -28,17 +28,6 @@
 
 
 
-
-@property (nonatomic,strong) IBOutlet UIButton * Inn1_Btn;
-
-@property (nonatomic,strong) IBOutlet UIButton * Inn2_Btn;
-
-@property (nonatomic,strong) IBOutlet UIButton * Inn3_Btn;
-
-@property (nonatomic,strong) IBOutlet UIButton * Inn4_Btn;
-
-
-
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * inn1_btnWidth;
 
 @property (nonatomic,strong)  IBOutlet NSLayoutConstraint * inns2_btnWidth;

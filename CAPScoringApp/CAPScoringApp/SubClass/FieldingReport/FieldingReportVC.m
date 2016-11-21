@@ -203,10 +203,10 @@
     if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){
         //T20
         
-        self.Inn1_Btn.hidden = NO;
-        self.Inn2_Btn.hidden = NO;
-        self.Inn3_Btn.hidden = YES;
-        self.Inn4_Btn.hidden = YES;
+        self.innings1_Btn.hidden = NO;
+        self.innings2_Btn.hidden = NO;
+        self.innings3_Btn.hidden = YES;
+        self.innings4_Btn.hidden = YES;
         
         self.inn1_btnWidth.constant =  384; //(self.view.frame.size.width/2);
         //self.inn1_btnYposition.constant = self.inn1_btnWidth.constant;
@@ -214,20 +214,20 @@
         
         
     }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){//ODI
-        self.Inn1_Btn.hidden = NO;
-        self.Inn2_Btn.hidden = NO;
-        self.Inn3_Btn.hidden = YES;
-        self.Inn4_Btn.hidden = YES;
+        self.innings1_Btn.hidden = NO;
+        self.innings2_Btn.hidden = NO;
+        self.innings3_Btn.hidden = YES;
+        self.innings4_Btn.hidden = YES;
         self.inn1_btnWidth.constant =   384;   //self.view.frame.size.width/2;
         self.inns2_btnWidth.constant =  384;      //self.view.frame.size.width/2;
         
         
     }else if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){//Test
         
-        self.Inn1_Btn.hidden = NO;
-        self.Inn2_Btn.hidden = NO;
-        self.Inn3_Btn.hidden = NO;
-        self.Inn4_Btn.hidden = NO;
+        self.innings1_Btn.hidden = NO;
+        self.innings2_Btn.hidden = NO;
+        self.innings3_Btn.hidden = NO;
+        self.innings4_Btn.hidden = NO;
         
         self.inn1_btnWidth.constant  = 192;   //self.view.frame.size.width/2;
         self.inns2_btnWidth.constant = 192;      //self.view.frame.size.width/2;
