@@ -984,7 +984,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     NSString * line2 =(Run2Count !=0)? [NSString stringWithFormat:@"2s | %d",Run2Count]:@"2s | 0";
     NSString * line3 = (Run3Count !=0)?[NSString stringWithFormat:@"3s | %d",Run3Count]:@"3s | 0";
     NSString * line4 =  (Run4Count !=0)?[NSString stringWithFormat:@"4s | %d",Run4Count]:@"4s | 0";
-    NSString * line5 = (Run6Count !=0)?[NSString stringWithFormat:@"5s | %d",Run6Count]:@"6s | 0";
+    NSString * line5 = (Run6Count !=0)?[NSString stringWithFormat:@"6s | %d",Run6Count]:@"6s | 0";
     
     
     [self.batsmanCell.BowlerWangonAll_Btn setTitle:@"All" forState:UIControlStateNormal];
@@ -1226,7 +1226,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     NSString * line2 =(Run2Count !=0)? [NSString stringWithFormat:@"2s | %d",Run2Count]:@"2s | 0";
     NSString * line3 = (Run3Count !=0)?[NSString stringWithFormat:@"3s | %d",Run3Count]:@"3s | 0";
     NSString * line4 =  (Run4Count !=0)?[NSString stringWithFormat:@"4s | %d",Run4Count]:@"4s | 0";
-    NSString * line5 = (Run6Count !=0)?[NSString stringWithFormat:@"5s | %d",Run6Count]:@"6s | 0";
+    NSString * line5 = (Run6Count !=0)?[NSString stringWithFormat:@"6s | %d",Run6Count]:@"6s | 0";
 
     
     self.batsmanCell.sectorWagon_Btn.backgroundColor =[UIColor clearColor];
@@ -1683,15 +1683,6 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 
                 if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
-                    
-                    //        for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
-                    //            if ([layer.name isEqualToString:@"DrawLine"]) {
-                    //              //  [layer removeFromSuperlayer];
-                    //                break;
-                    //            }
-                    //        }
-                    
-                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
                     int Xposition = x1position+28;
                     int Yposition = y1position;
                     CGMutablePathRef straightLinePath = CGPathCreateMutable();
@@ -1701,7 +1692,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     shapeLayer.path = straightLinePath;
                     UIColor *fillColor = [UIColor redColor];
                     shapeLayer.fillColor = fillColor.CGColor;
-                    UIColor *strokeColor = [UIColor colorWithRed:(255/255.0f) green:(109/255.0f) blue:(37/255.0f) alpha:1.0f];
+                    UIColor *strokeColor = [UIColor colorWithRed:(255/255.0f) green:(6/255.0f) blue:(250/255.0f) alpha:1.0f];
                     shapeLayer.strokeColor = strokeColor.CGColor;
                     shapeLayer.lineWidth = 2.0f;
                     shapeLayer.fillRule = kCAFillRuleNonZero;
@@ -1869,7 +1860,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     shapeLayer.path = straightLinePath;
                     UIColor *fillColor = [UIColor redColor];
                     shapeLayer.fillColor = fillColor.CGColor;
-                    UIColor *strokeColor = [UIColor colorWithRed:(255/255.0f) green:(109/255.0f) blue:(37/255.0f) alpha:1.0f];
+                    UIColor *strokeColor = [UIColor colorWithRed:(188/255.0f) green:(182/255.0f) blue:(49/255.0f) alpha:1.0f];
                     shapeLayer.strokeColor = strokeColor.CGColor;
                     shapeLayer.lineWidth = 2.0f;
                     shapeLayer.fillRule = kCAFillRuleNonZero;
@@ -2017,15 +2008,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 
                 if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
-                    
-                    //        for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
-                    //            if ([layer.name isEqualToString:@"DrawLine"]) {
-                    //              //  [layer removeFromSuperlayer];
-                    //                break;
-                    //            }
-                    //        }
-                    
-                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
+
                     int Xposition = x1position+28;
                     int Yposition = y1position;
                     CGMutablePathRef straightLinePath = CGPathCreateMutable();
@@ -2035,7 +2018,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     shapeLayer.path = straightLinePath;
                     UIColor *fillColor = [UIColor redColor];
                     shapeLayer.fillColor = fillColor.CGColor;
-                    UIColor *strokeColor = [UIColor colorWithRed:(255/255.0f) green:(109/255.0f) blue:(37/255.0f) alpha:1.0f];
+                    UIColor *strokeColor = [UIColor colorWithRed:(217/255.0f) green:(32/255.0f) blue:(35/255.0f) alpha:1.0f];
                     shapeLayer.strokeColor = strokeColor.CGColor;
                     shapeLayer.lineWidth = 2.0f;
                     shapeLayer.fillRule = kCAFillRuleNonZero;
@@ -2184,15 +2167,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 
                 if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
-                    
-                    //        for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
-                    //            if ([layer.name isEqualToString:@"DrawLine"]) {
-                    //              //  [layer removeFromSuperlayer];
-                    //                break;
-                    //            }
-                    //        }
-                    
-                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
+                
                     int Xposition = x1position+28;
                     int Yposition = y1position;
                     CGMutablePathRef straightLinePath = CGPathCreateMutable();
@@ -2202,7 +2177,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     shapeLayer.path = straightLinePath;
                     UIColor *fillColor = [UIColor redColor];
                     shapeLayer.fillColor = fillColor.CGColor;
-                    UIColor *strokeColor = [UIColor colorWithRed:(255/255.0f) green:(109/255.0f) blue:(37/255.0f) alpha:1.0f];
+                    UIColor *strokeColor = [UIColor colorWithRed:(61/255.0f) green:(27/255.0f) blue:(207/255.0f) alpha:1.0f];
                     shapeLayer.strokeColor = strokeColor.CGColor;
                     shapeLayer.lineWidth = 2.0f;
                     shapeLayer.fillRule = kCAFillRuleNonZero;
@@ -2327,9 +2302,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
     
     
-    for(int i=0; i<expendBowlerCellArray.count;i++)
+    for(int i=0; i<BowlerRunArray.count;i++)
     {
-        BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
+        BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[BowlerRunArray objectAtIndex:i];
         
         if([objRecord.Runs isEqualToString:@"1"])
         {
@@ -3011,128 +2986,6 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         }
         NSLog(@"pitch");
     }
-//    if(BowlerRunArray.count == 1)
-//    {
-//        if(self.batsmanCell.wagonPitch_img.hidden == NO)
-//        {
-//            int x1position;
-//            int x2position;
-//            int y1position;
-//            int y2position;
-//            for(int i=0; i< 1;i++)
-//            {
-//                BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
-//                x1position = [objRecord.WWX1 intValue];
-//                y1position = [objRecord.WWY1 intValue];
-//                x2position  =[objRecord .WWX2 intValue];
-//                y2position  =[objRecord.WWY2 intValue];
-//                
-//                
-//                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
-//                    
-//                    
-//                    for (CALayer *layer in self.bowlerCell.BowlerwagonPitch_img.layer.sublayers) {
-//                        if ([layer.name isEqualToString:@"DrawLine"]) {
-//                            //[layer removeFromSuperlayer];
-//                            break;
-//                        }
-//                    }
-//                    
-//                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
-//                    int Xposition = x1position+28;
-//                    int Yposition = y1position;
-//                    CGMutablePathRef straightLinePath = CGPathCreateMutable();
-//                    CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-//                    CGPathAddLineToPoint(straightLinePath, NULL,x2position+28,y2position);
-//                    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-//                    shapeLayer.path = straightLinePath;
-//                    UIColor *fillColor = [UIColor redColor];
-//                    shapeLayer.fillColor = fillColor.CGColor;
-//                    UIColor *strokeColor = [UIColor redColor];
-//                    shapeLayer.strokeColor = strokeColor.CGColor;
-//                    shapeLayer.lineWidth = 2.0f;
-//                    shapeLayer.fillRule = kCAFillRuleNonZero;
-//                    shapeLayer.name = @"DrawLine";
-//                    [self.bowlerCell.wagonPitch_img.layer addSublayer:shapeLayer];
-//                    
-//                }
-//            }
-//
-//        }
-//        else
-//        {
-//        int xposition;
-//        int yposition;
-//        
-//        
-//            BowlerStrickPitchRecord * objRecord =(BowlerStrickPitchRecord *)[BowlerRunArray objectAtIndex:0];
-//            xposition = [objRecord.PMX2 intValue];
-//            yposition = [objRecord.PMY2 intValue];
-//            
-//            if(!(xposition == 1 && yposition ==1)){
-//                
-//                
-//                if(Img_ball != nil)
-//                {
-//                    [Img_ball removeFromSuperview];
-//                }
-//                
-//                Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
-//                Img_ball.image =[UIImage imageNamed:@"RedBall"];
-//                [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
-//                
-//            
-//            }
-//        }
-//        }
-//    
-//    else
-//    {
-//        
-//        
-//        if(self.bowlerCell.BowlerwagonPitch_img.hidden == NO)
-//        {
-//            for(int i=0 ;i<expendBowlerCellArray.count;i++)
-//            {
-//                for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
-//                    if ([layer.name isEqualToString:@"DrawLine"]) {
-//                        [layer removeFromSuperlayer];
-//                        break;
-//                    }
-//                }
-//            }
-//            
-//        }
-//        else
-//        {
-//            for(int i=0 ;i<BowlerRunArray.count;i++)
-//            {
-//                if(Img_ball != nil)
-//                {
-//                    [Img_ball removeFromSuperview];
-//                }
-//                
-//            }
-//        }
-    
-//       if(self.bowlerCell.wagonPitch_img.hidden==NO)
-//       {
-//           for (CALayer *layer in self.bowlerCell.wagonPitch_img.layer.sublayers) {
-//               if ([layer.name isEqualToString:@"DrawLine"]) {
-//                   [layer removeFromSuperlayer];
-//                   break;
-//               }
-//           }
-//
-//       }
-//       else{
-//           if(Img_ball != nil)
-//           {
-//               [Img_ball removeFromSuperview];
-//           }
-//       }
-  // }
-        
 }
 
 -(IBAction)didClickBowling2sAction:(id)sender
