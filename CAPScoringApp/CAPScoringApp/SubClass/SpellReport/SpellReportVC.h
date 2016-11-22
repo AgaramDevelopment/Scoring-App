@@ -39,7 +39,7 @@
 
 @property (nonatomic,strong) IBOutlet UIButton * Inn4_Btn;
 
-@property (nonatomic,strong) IBOutlet SKSTableView * spellReport_Tbl;
+@property (nonatomic,strong) IBOutlet UITableView * spellReport_Tbl;
 
 
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * inn1_btnWidth;

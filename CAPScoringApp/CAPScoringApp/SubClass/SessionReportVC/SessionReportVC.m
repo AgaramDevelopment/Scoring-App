@@ -41,13 +41,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     int Daycount =0;
     SessionReportRecord * objRecord;
     
-    
-    
-//    NSDictionary *dict = [[NSDictionary alloc] initWithObjectsAndKeys:@"dayno", @"Day 1",@"dayno", @"Day 2", nil];
-//    
-//    NSDictionary *dict2 = [[NSDictionary alloc] initWithObjectsAndKeys:@"dayno", @"Day 2", nil];
-//    NSDictionary *dict3 = [[NSDictionary alloc] initWithObjectsAndKeys:@"dayno", @"Day 3", nil];
-
     for(int i=0; i< sessionvalue.count; i++)
     {
         if(i==0)

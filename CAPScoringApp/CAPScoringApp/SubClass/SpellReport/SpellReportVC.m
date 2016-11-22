@@ -17,6 +17,7 @@
 {
     DBManagerSpellReport *  objDBManagerSpellReport;
     NSMutableArray * objSpellReport;
+    
 }
 
 @property (nonatomic,strong) NSString * inningsno;
@@ -30,6 +31,8 @@
     [self setInningsView];
     objDBManagerSpellReport =[[DBManagerSpellReport alloc]init];
     objSpellReport   =[[NSMutableArray alloc]init];
+   
+    
     [self.Inn1_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
     }
 
@@ -150,55 +153,9 @@
 {
     [self setInningsBySelection:@"1"];
     self.inningsno=@"1";
-     NSMutableArray * objarray =[[NSMutableArray alloc]init];
-    NSMutableArray * EmptyArray =[[NSMutableArray alloc]init];
-    objarray =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :self.Teamcode : self.inningsno];
-   
-    
-    
-    for(int i=0; i< objarray.count; i++)
-    {
-        SpellReportRecord * objRecord =[objarray objectAtIndex:i];
-        NSString * objBowlerCode = objRecord.Bowlercode;
-        //[EmptyArray addObject:objBowlerCode];
-        
-        NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"Bowlercode =%@",objBowlerCode];
-        
-        NSArray * filtedPlayerArray =  [objarray filteredArrayUsingPredicate:resultPredicate];
-        
-        NSMutableArray * selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
-        
-        
-        if(objSpellReport.count== 0)
-        {
-        
-           [objSpellReport addObject:selectedPlayerFilterArray];
-        }
-        else
-        {
-//            for(NSObject * record in objSpellReport)
-//                {
-//                    
-//                  if(record != objRecord.Bowlercode)
-//                  {
-//                    [objSpellReport addObject:selectedPlayerFilterArray];
-//                  }
-//                }
-        }
-        
-    }
-    
-    
-    
-  
-    
-//    NSString * bowlerCode = 
-//    NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"playerName contains[c] %@",appStr];
-//    
-//    NSArray *filtedPlayerArray =  [slecteplayerlist filteredArrayUsingPredicate:resultPredicate];
-//    
-//    NSMutableArray * selectedPlayerFilterArray = [[NSMutableArray alloc] initWithArray:filtedPlayerArray];
-//    
+
+    objSpellReport =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :self.Teamcode : self.inningsno];
+    [self.spellReport_Tbl reloadData];
    
 }
 -(IBAction)didClickInns2:(id)sender
@@ -206,6 +163,7 @@
     [self setInningsBySelection:@"2"];
     self.inningsno=@"2";
     objSpellReport =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :self.Teamcode : self.inningsno];
+    [self.spellReport_Tbl reloadData];
 }
 
 -(IBAction)didClickInn3:(id)sender
@@ -213,6 +171,7 @@
     [self setInningsBySelection:@"3"];
      self.inningsno=@"3";
     objSpellReport =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :self.Teamcode : self.inningsno];
+    [self.spellReport_Tbl reloadData];
 
 }
 -(IBAction)didClickInns4:(id)sender
@@ -220,6 +179,7 @@
     [self setInningsBySelection:@"4"];
      self.inningsno=@"4";
     objSpellReport =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :self.Teamcode : self.inningsno];
+    [self.spellReport_Tbl reloadData];
 
 }
 
@@ -227,53 +187,17 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [objSpellReport count];
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [objSpellReport [section] count];
-}
-
-- (NSInteger)tableView:(SKSTableView *)tableView numberOfSubRowsAtIndexPath:(NSIndexPath *)indexPath
-{
-    return  [objSpellReport [indexPath.section][indexPath.row] count] - 1;
-}
-
-- (BOOL)tableView:(SKSTableView *)tableView shouldExpandSubRowsOfCellAtIndexPath:(NSIndexPath *)indexPath
-{
-    //    if (indexPath.section == 1 && indexPath.row == 0 && indexPath.row == 3)
-    //    {
-    return YES;
-    //    }
-    //
-    //    return NO;
+    return [objSpellReport count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"SKSTableViewCell";
     
-    SKSTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (!cell)
-        cell = [[SKSTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    
-    cell.textLabel.text = [NSString stringWithFormat:@"DAY %d",indexPath.row+1];
-    [cell setBackgroundColor:[UIColor clearColor]];
-    cell.textLabel.textColor=[UIColor whiteColor];
-    cell.textLabel.font= [UIFont fontWithName:@"Rajdhani-Bold" size:20];
-    
-    if ((indexPath.section == 0 && (indexPath.row == 1 || indexPath.row == 0)) || (indexPath.section == 1 && (indexPath.row == 0 || indexPath.row == 2)))
-        cell.expandable = YES;
-    else
-        cell.expandable = NO;
-    
-    return cell;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForSubRowAtIndexPath:(NSIndexPath *)indexPath
-{
     static NSString *CellIdentifier = @"SpellReportCell";
     
     SpellReportCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
@@ -284,8 +208,7 @@
         
     }
     
-    
-    SpellReportRecord *objRecord = objSpellReport[indexPath.section][indexPath.row][indexPath.subRow];
+    SpellReportRecord *objRecord = [objSpellReport objectAtIndex:indexPath.row];
     cell.Batsname_lbl.text = objRecord.BowlerName;
     cell.spell_lbl.text =objRecord.Spell;
     cell.inningsno_lbl.text      =objRecord.inningsno;
@@ -298,47 +221,22 @@
     cell.fours_lbl.text = objRecord.Fours;
     cell.sixes_lbl.text = objRecord.Sixs;
     cell.boundary_lbl.text = objRecord.Boundaries;
-    cell.boundaries_lbl.text = objRecord.Boundariesper;
+    cell.boundaries_lbl.text = [NSString stringWithFormat:@" %.02f",[objRecord.Boundariesper floatValue]];;
     cell.SB_lbl.text = objRecord.SB;
     cell.Runs_lbl.text = objRecord.Runs;
     cell.RSS_lbl.text = objRecord.RPSS;
     cell.Wickets_lbl.text = objRecord.Wickets;
     cell.maidens_lbl.text = objRecord.Maidens;
-    cell.Economy_lbl.text = objRecord.Economy;
-
-
-     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    cell.Economy_lbl.text = [NSString stringWithFormat:@" %.02f",[objRecord.Economy floatValue]];
     
     return cell;
+
 }
 
-- (CGFloat)tableView:(SKSTableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60.0f;
+    return 75.0f;
 }
-- (CGFloat)tableView:(SKSTableView *)tableView heightForSubRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 70.0f;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"Section: %d, Row:%d, Subrow:%d", indexPath.section, indexPath.row, indexPath.subRow);
-}
-
-- (void)tableView:(SKSTableView *)tableView didSelectSubRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"Section: %d, Row:%d, Subrow:%d", indexPath.section, indexPath.row, indexPath.subRow);
-}
-
-#pragma mark - Actions
-
-- (void)collapseSubrows
-{
-    //[self.tableView collapseCurrentlyExpandedIndexPaths];
-}
-
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
