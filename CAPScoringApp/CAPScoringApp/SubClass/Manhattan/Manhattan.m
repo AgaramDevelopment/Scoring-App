@@ -240,7 +240,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     }
     
-    else if (Innings2.count > 0)
+    if (Innings2.count > 0)
     {
      [NSTimer scheduledTimerWithTimeInterval:1.0
                                      target:self
@@ -251,7 +251,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     }
     
-    else if (Innings3.count > 0)
+    if (Innings3.count > 0)
     {
     [NSTimer scheduledTimerWithTimeInterval:2.0
                                      target:self
@@ -262,7 +262,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
     }
     
-    else if (Innings4.count >0)
+     if (Innings4.count >0)
     {
     
     [NSTimer scheduledTimerWithTimeInterval:1.0
@@ -336,6 +336,25 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(void) BarChartMethodFirstInnigs
 {
+    
+    //WormRecord *wormRecord;
+    
+    objManhattanRecord  = [objRunArray lastObject];
+    
+//    if(_wormDataInns2Array != nil && _wormDataInns2Array.count>0){
+//        
+//        WormRecord *wormRecord2;
+//        
+//        wormRecord2  = [self.wormDataInns2Array lastObject];
+//        
+//        
+//        if([wormRecord.score intValue] < [wormRecord2.score intValue]){
+//            wormRecord = wormRecord2;
+//        }
+//        
+//    }
+
+    
     _titles = objOverArray;
     _dataSource = objRunArray;
     
@@ -343,8 +362,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.tag = 111;
     _barChartView.dataSource = self;
     _barChartView.delegate = self;
-    _barChartView.maxValue = @25;
-    _barChartView.unitOfYAxis = @"Run";
+    _barChartView.maxValue = @50;
+   // _barChartView.unitOfYAxis = @"Run";
     
     _barChartView.colorOfXAxis = [UIColor whiteColor];
     _barChartView.colorOfXText = [UIColor whiteColor];
@@ -352,18 +371,18 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.colorOfYText = [UIColor whiteColor];
     [self.manhattan_Scroll addSubview:_barChartView];
     
-    UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_barChartView.frame.origin.x, _barChartView.frame.origin.y-50,self.view.frame.size.width, 60)];
+    UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_barChartView.frame.origin.x, _barChartView.frame.origin.y-40,self.view.frame.size.width, 60)];
     
     UILabel * title_lbl =[[UILabel alloc]initWithFrame:CGRectMake(70, 0,self.view.frame.size.width, 40)];
     
-    title_lbl.text =@"INNING 1";
+    title_lbl.text =@"INNINGS 1";
     title_lbl.textColor =[UIColor whiteColor];
     title_lbl.textAlignment=UITextAlignmentCenter;
     title_lbl.font = [UIFont systemFontOfSize:25];
 
     [tittleview addSubview:title_lbl];
     
-    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/2.7,title_lbl.frame.origin.y+30,self.manhattan_Scroll.frame.size.width/2, 40)];
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/2.9,title_lbl.frame.origin.y+30,self.manhattan_Scroll.frame.size.width/2, 40)];
     BattingTeam_lbl.text =self.fstInnShortName;
     BattingTeam_lbl.textColor =[UIColor whiteColor];
     BattingTeam_lbl.textAlignment=UITextAlignmentCenter;
@@ -393,8 +412,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.tag = 112;
     _barChartView.dataSource = self;
     _barChartView.delegate = self;
-    _barChartView.maxValue = @25;
-    _barChartView.unitOfYAxis = @"Run";
+    _barChartView.maxValue = @50;
+  //  _barChartView.unitOfYAxis = @"Run";
     
     _barChartView.colorOfXAxis = [UIColor whiteColor];
     _barChartView.colorOfXText = [UIColor whiteColor];
@@ -402,17 +421,17 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.colorOfYText = [UIColor whiteColor];
     [self.manhattan_Scroll addSubview:_barChartView];
     
-    UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_barChartView.frame.origin.x, _barChartView.frame.origin.y-55,self.view.frame.size.width, 60)];
+    UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_barChartView.frame.origin.x, _barChartView.frame.origin.y-80,self.view.frame.size.width, 60)];
     
     UILabel * title_lbl =[[UILabel alloc]initWithFrame:CGRectMake(0, 0,self.manhattan_Scroll.frame.size.width, 40)];
-    title_lbl.text =@"INNING 2";
+    title_lbl.text =@"INNINGS 2";
     title_lbl.textColor =[UIColor whiteColor];
     title_lbl.textAlignment=UITextAlignmentCenter;
     title_lbl.font = [UIFont systemFontOfSize:25];
 
     [tittleview addSubview:title_lbl];
     
-    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/2.7,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/4,title_lbl.frame.origin.y+25,self.manhattan_Scroll.frame.size.width/2, 40)];
     BattingTeam_lbl.text =self.secInnShortName;
     BattingTeam_lbl.textColor =[UIColor whiteColor];
     BattingTeam_lbl.textAlignment=UITextAlignmentCenter;
@@ -440,8 +459,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.tag = 113;
     _barChartView.dataSource = self;
     _barChartView.delegate = self;
-    _barChartView.maxValue = @25;
-    _barChartView.unitOfYAxis = @"Run";
+    _barChartView.maxValue = @50;
+   // _barChartView.unitOfYAxis = @"Run";
     
     _barChartView.colorOfXAxis = [UIColor whiteColor];
     _barChartView.colorOfXText = [UIColor whiteColor];
@@ -449,16 +468,16 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.colorOfYText = [UIColor whiteColor];
     [self.manhattan_Scroll addSubview:_barChartView];
     
-    UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_barChartView.frame.origin.x, _barChartView.frame.origin.y-50,self.view.frame.size.width, 60)];
+    UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_barChartView.frame.origin.x, _barChartView.frame.origin.y-40,self.view.frame.size.width, 60)];
     
     UILabel * title_lbl =[[UILabel alloc]initWithFrame:CGRectMake(0, 0,self.manhattan_Scroll.frame.size.width, 40)];
-    title_lbl.text =@"INNING 3";
+    title_lbl.text =@"INNINGS 3";
     title_lbl.textColor =[UIColor whiteColor];
     title_lbl.textAlignment=UITextAlignmentCenter;
     title_lbl.font = [UIFont systemFontOfSize:25];
     [tittleview addSubview:title_lbl];
     
-    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/2.7,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/2.9,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
     BattingTeam_lbl.text =self.thrdInnShortName;
     BattingTeam_lbl.textColor =[UIColor whiteColor];
     BattingTeam_lbl.textAlignment=UITextAlignmentCenter;
@@ -486,8 +505,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.tag = 114;
     _barChartView.dataSource = self;
     _barChartView.delegate = self;
-    _barChartView.maxValue = @25;
-    _barChartView.unitOfYAxis = @"Run";
+    _barChartView.maxValue = @50;
+   // _barChartView.unitOfYAxis = @"Run";
     
     _barChartView.colorOfXAxis = [UIColor whiteColor];
     _barChartView.colorOfXText = [UIColor whiteColor];
@@ -495,17 +514,17 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.colorOfYText = [UIColor whiteColor];
     [self.manhattan_Scroll addSubview:_barChartView];
     
-    UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_barChartView.frame.origin.x, _barChartView.frame.origin.y-50,self.view.frame.size.width, 60)];
+    UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_barChartView.frame.origin.x, _barChartView.frame.origin.y-40,self.view.frame.size.width, 60)];
     
     UILabel * title_lbl =[[UILabel alloc]initWithFrame:CGRectMake(0, 0,self.manhattan_Scroll.frame.size.width, 40)];
-    title_lbl.text =@"INNING 4";
+    title_lbl.text =@"INNINGS 4";
     title_lbl.textColor =[UIColor whiteColor];
     title_lbl.textAlignment=UITextAlignmentCenter;
     title_lbl.font = [UIFont systemFontOfSize:25];
     
     [tittleview addSubview:title_lbl];
     
-    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/2.7,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/2.9,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
     BattingTeam_lbl.text =self.frthInnShortName;
     BattingTeam_lbl.textColor =[UIColor whiteColor];
     BattingTeam_lbl.textAlignment=UITextAlignmentCenter;

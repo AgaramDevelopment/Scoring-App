@@ -245,7 +245,7 @@
         
         if(!(xposition == 1 && yposition == 1) && (xposition!=0 && yposition !=0)){
             
-            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+(xposition/1.2),yposition+(yposition/1.8),20, 20)];
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+(xposition/1.12),yposition+(yposition/1.5),20, 20)];
             Img_ball.image =[UIImage imageNamed:@"RedBall"];
             [self.pitch_Img addSubview:Img_ball];
             
@@ -937,7 +937,7 @@
             if([battingStyle isEqualToString:@"MSC013"])
             {
                 yorkeroutsideoffRun =[Run intValue]+yorkeroutsideoffRun;
-                yorkeroutsideoff = [[UILabel alloc]initWithFrame:CGRectMake(290,100,35, 35)];
+                yorkeroutsideoff = [[UILabel alloc]initWithFrame:CGRectMake(310,100,35, 35)];
 
             }
             else
@@ -1078,8 +1078,9 @@
             
             
             
-            fulloutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
+            fulloutsideoff=[[UILabel alloc]initWithFrame:CGRectMake(300,150,35, 35)];
             fulloutsideoff.textColor=[UIColor whiteColor];
+            
             fulloutsideoff.text =[NSString stringWithFormat:@"%d",fulloutsideoffRun];
             [self.pitch_Img addSubview:fulloutsideoff];
             

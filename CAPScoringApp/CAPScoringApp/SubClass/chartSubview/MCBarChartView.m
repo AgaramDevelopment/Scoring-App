@@ -223,7 +223,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
     Run_lbl.textAlignment = NSTextAlignmentRight;
     Run_lbl.font = [UIFont systemFontOfSize:14];
     Run_lbl.numberOfLines = 0;
-    Run_lbl.text = [NSString stringWithFormat:@"RUN"];
+    Run_lbl.text = [NSString stringWithFormat:@"RUNS"];
     [Run_lbl setTransform:CGAffineTransformMakeRotation(-M_PI / 2)];
 
     [self addSubview:Run_lbl];
@@ -292,16 +292,15 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                 }
             } else if ([self.delegate respondsToSelector:@selector(barChartView:informationOfBarInSection:index:)]) {
                 
-                UILabel *over_lbl = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2, 250,50, 20)];
-                over_lbl.textColor = _colorOfYText;
+                UILabel *over_lbl = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2,250,50, 15)];
+                over_lbl.textColor = _colorOfYText  ;
                 over_lbl.textAlignment = NSTextAlignmentRight;
                 over_lbl.font = [UIFont systemFontOfSize:14];
                 over_lbl.numberOfLines = 0;
-                over_lbl.text = [NSString stringWithFormat:@"OVER"];
-               
+                over_lbl.text = [NSString stringWithFormat:@"OVERS"];
+                
                 
                 [self addSubview:over_lbl];
-
             }
             
             xOffset += _barWidth + (index == array.count - 1 ? 0 : _paddingBar);
