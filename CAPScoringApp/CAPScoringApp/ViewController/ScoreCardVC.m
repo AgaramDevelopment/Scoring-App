@@ -655,7 +655,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
         cell.lbl_totalExtra_runs.text = fetchScorecard.TOTALEXTRAS;
         
-        cell.lbl_extras.text = [NSString stringWithFormat:@"(B: %@, LB: %@, WB: %@, P: %@)", fetchScorecard.BYES,fetchScorecard.LEGBYES,fetchScorecard.WIDES,fetchScorecard.PENALTIES];
+        cell.lbl_extras.text = [NSString stringWithFormat:@"(B: %@, NB: %@, LB: %@, WD: %@, P: %@)", fetchScorecard.BYES,fetchScorecard.NOBALLS,fetchScorecard.LEGBYES,fetchScorecard.WIDES,fetchScorecard.PENALTIES];
         
         [cell setBackgroundColor:[UIColor clearColor]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

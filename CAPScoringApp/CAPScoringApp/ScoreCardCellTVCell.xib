@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -1225,7 +1225,9 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(B: 0, LB: 0, WB:0, P:0)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBJ-g9-uvu">
                                 <rect key="frame" x="-42" y="-21" width="42" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="170" id="Fzq-vi-bmM"/>
+                                    <constraint firstAttribute="width" constant="170" id="Fzq-vi-bmM">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="340"/>
+                                    </constraint>
                                     <constraint firstAttribute="height" constant="21" id="cQF-hZ-Csa"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="18"/>
@@ -1275,7 +1277,7 @@
                             </constraint>
                             <constraint firstItem="TvM-NR-Qn8" firstAttribute="top" secondItem="EHo-s8-hwa" secondAttribute="top" constant="11" id="FgC-MM-3um"/>
                             <constraint firstAttribute="trailing" secondItem="TBJ-g9-uvu" secondAttribute="trailing" constant="278" id="HDq-U5-S87">
-                                <variation key="heightClass=regular-widthClass=regular" constant="263"/>
+                                <variation key="heightClass=regular-widthClass=regular" constant="93"/>
                             </constraint>
                             <constraint firstAttribute="bottom" secondItem="TBJ-g9-uvu" secondAttribute="bottom" constant="12" id="IzX-7T-9BX"/>
                             <constraint firstAttribute="bottom" secondItem="TAz-QM-4Er" secondAttribute="bottom" constant="11" id="bvg-va-hBH"/>

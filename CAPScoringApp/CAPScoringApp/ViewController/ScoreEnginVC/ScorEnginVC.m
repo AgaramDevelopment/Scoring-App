@@ -72,6 +72,7 @@
 #import "BatsManINOUT.h"
 #import "CMPopTipView.h"
 #import "DBManagerCaptransactionslogEntry.h"
+#import "FetchScorecard.h"
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -166,6 +167,7 @@
     
     NSString * ballnoStr;
     NSDate * startBallTime;
+    FetchScorecard *fetchScorecard;
     
     FieldingFactorRecord *selectedfieldFactor;
     BowlerEvent *selectedfieldPlayer;
@@ -10020,7 +10022,13 @@
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEPageLoadRecord fetchSEPageLoadDetails:self.competitionCode :self.matchCode];
     
-    self.lbl_ExtraRunBatingTeam.text =fetchSEPageLoadRecord.ExtrasRuns;
+    
+    fetchScorecard = [[FetchScorecard alloc]init];
+    [fetchScorecard FetchScoreBoard:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO];
+
+    
+    //self.lbl_ExtraRunBatingTeam.text =fetchSEPageLoadRecord.ExtrasRuns;
+    self.lbl_ExtraRunBatingTeam.text =fetchScorecard.TOTALEXTRAS;;
     
     
     //Striker Details
