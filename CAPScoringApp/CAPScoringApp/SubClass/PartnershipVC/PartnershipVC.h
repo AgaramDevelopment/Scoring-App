@@ -33,4 +33,14 @@
 @property(strong,nonatomic)NSString *thrdInnShortName;
 @property(strong,nonatomic)NSString *frthInnShortName;
 
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * inn1_btnWidth;
+
+@property (nonatomic,strong)  IBOutlet NSLayoutConstraint * inns2_btnWidth;
+
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * inns3_btnwidth;
+
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * inns4_btnwidth;
+
+
+
 @end

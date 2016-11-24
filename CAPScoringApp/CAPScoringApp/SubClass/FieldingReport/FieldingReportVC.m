@@ -26,6 +26,7 @@
     UILabel * firs_lbl;
     UILabel * second_lbl ;
     UILabel * third_lbl;
+    UILabel * RunSaved_lbl;
     int lbl_colorindex;
 
 }
@@ -71,6 +72,7 @@
     
     self.inningsno =@"1";
    [self FielderDetailsMethod];
+    [self.striker_Tbl reloadData];
 }
 
 -(IBAction)didClickInns2:(id)sender
@@ -80,6 +82,7 @@
     self.inningsno =@"2";
     
     [self FielderDetailsMethod];
+    [self.striker_Tbl reloadData];
 }
 
 -(IBAction)didClickInn3:(id)sender
@@ -89,6 +92,7 @@
     self.inningsno =@"3";
     
    [self FielderDetailsMethod];
+    [self.striker_Tbl reloadData];
 }
 -(IBAction)didClickInns4:(id)sender
 {
@@ -96,6 +100,7 @@
     
     self.inningsno =@"4";
     [self FielderDetailsMethod];
+    [self.striker_Tbl reloadData];
   
 }
 
@@ -103,8 +108,8 @@
 {
     fielderArray   =[[NSMutableArray alloc]init];
     
-    fielderArray =[objDBManagerFieldReport GETFIELDERCODE:self.compitionCode :self.matchCode :self.Teamcode :self.inningsno];
-    fielderArray =[objDBManagerFieldReport GETFIELDERCODE:self.compitionCode :self.matchCode :self.Teamcode :self.inningsno];
+    fielderArray =[objDBManagerFieldReport  GETFIELDERCODE:self.compitionCode :self.matchCode :@"" :self.inningsno];
+    //fielderArray =[objDBManagerFieldReport GETFIELDERCODE:self.compitionCode :self.matchCode :self.Teamcode :self.inningsno];
     
     if(fielderArray.count > 0)
     {
@@ -119,7 +124,7 @@
         self.FielderName_lbl.text =@"";
     }
     
-    FieldreportDetail =[objDBManagerFieldReport getFieldingdetails:self.compitionCode :self.matchCode :self.Teamcode :self.inningsno : self.selectStrikerCode];
+    FieldreportDetail =[objDBManagerFieldReport getFieldingdetails:self.compitionCode :self.matchCode :@"" :self.inningsno : self.selectStrikerCode];
     
     [self displayValuemethod];
 }
@@ -242,7 +247,7 @@
 {
     //self.strikerTblYposition.constant =self.striker_view.frame.origin.y-55;
     fielderArray=[[NSMutableArray alloc]init];
-    fielderArray =[objDBManagerFieldReport GETFIELDERCODE:self.compitionCode :self.matchCode :self.Teamcode :@"1"];
+    fielderArray =[objDBManagerFieldReport GETFIELDERCODE:self.compitionCode :self.matchCode :@"" :self.inningsno];
     if(isStriker==NO)
     {
         
@@ -264,6 +269,7 @@
     
     self.filter_view.hidden =NO;
     self.hide_btn_view.hidden = YES;
+    self.striker_Lbl.text=self.FielderName_lbl.text;
     
     
 }
@@ -280,12 +286,13 @@
     self.hide_btn_view.hidden = NO;
     
     self.FielderName_lbl.text = self.striker_Lbl.text;
-    FieldreportDetail =[objDBManagerFieldReport getFieldingdetails:self.compitionCode :self.matchCode :self.Teamcode :self.inningsno : self.selectStrikerCode];
+    FieldreportDetail =[objDBManagerFieldReport getFieldingdetails:self.compitionCode :self.matchCode :@"" :self.inningsno : self.selectStrikerCode];
     
     [self displayValuemethod];
 }
 -(void) displayValuemethod
 {
+    int runSaved = 0;
     if(self.detail_View != nil)
     {
         [self.detail_View removeFromSuperview];
@@ -300,6 +307,8 @@
     {
         
         FFactorDetailRecord * record= [FieldreportDetail objectAtIndex:i];
+        runSaved =[record.Runssaved intValue]+runSaved;
+        
         if(i ==0)
         {
             firs_lbl =[[UILabel alloc]initWithFrame:CGRectMake(25,15,width,50)];
@@ -309,12 +318,12 @@
             firs_lbl.textAlignment = NSTextAlignmentCenter;
             [self.detail_View addSubview:firs_lbl];
             
-            second_lbl =[[UILabel alloc]initWithFrame:CGRectMake(width+50,15,width,50)];
-            [second_lbl setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(156/255.0f) blue:(121/255.0f) alpha:1.0f]];
-            second_lbl.text = [NSString stringWithFormat:@"RUN SAVED : %@",record.Runssaved];
-            second_lbl.textAlignment = NSTextAlignmentCenter;
-            second_lbl.textColor =[UIColor whiteColor];
-            [self.detail_View addSubview:second_lbl];
+            RunSaved_lbl =[[UILabel alloc]initWithFrame:CGRectMake(width+50,15,width,50)];
+            [RunSaved_lbl setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(156/255.0f) blue:(121/255.0f) alpha:1.0f]];
+//            RunSaved_lbl.text = [NSString stringWithFormat:@"RUN SAVED : %@",record.Runssaved];
+            RunSaved_lbl.textAlignment = NSTextAlignmentCenter;
+            RunSaved_lbl.textColor =[UIColor whiteColor];
+            [self.detail_View addSubview:RunSaved_lbl];
             
             third_lbl =[[UILabel alloc]initWithFrame:CGRectMake(2*width+75,15,width,50)];
             third_lbl.text =[NSString stringWithFormat:@" %@ : %@",record.Fieldingfactor,record.Ballsfielded];
@@ -342,7 +351,7 @@
             }
             else if (moduloResult == 2)
             {
-                second_lbl =[[UILabel alloc]initWithFrame:CGRectMake(width+50,second_lbl.frame.origin.y+80,width,50)];
+                second_lbl =[[UILabel alloc]initWithFrame:CGRectMake(width+50,RunSaved_lbl.frame.origin.y+80,width,50)];
                 [second_lbl setBackgroundColor:indexColor];
                 second_lbl.text =[NSString stringWithFormat:@" %@ : %@",record.Fieldingfactor,record.Ballsfielded];
                 second_lbl.textColor =[UIColor whiteColor];
@@ -361,6 +370,7 @@
                 [self.detail_View addSubview:third_lbl];
             }
         }
+         RunSaved_lbl.text = [NSString stringWithFormat:@"RUN SAVED : %d",runSaved];
     }
 }
 

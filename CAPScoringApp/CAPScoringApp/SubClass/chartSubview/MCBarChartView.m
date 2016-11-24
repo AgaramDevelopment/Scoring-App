@@ -330,7 +330,8 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                 if(![objManhattanRecord.wicketno isEqualToString:@"0"] && objManhattanRecord.wicketno!= nil)
                 {
                     UIButton * wicket_Btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
-                
+                   
+                    
                     wicket_Btn.tag = [objManhattanRecord.wicketno intValue];
                     wicket_Btn.center = CGPointMake(xOffset-25, chartYOffset - [objManhattanRecord.Run floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2);
                     [wicket_Btn setBackgroundColor:[UIColor redColor]];
@@ -363,9 +364,9 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
 
 -(IBAction)didClickWicket:(id)sender
 {
-    UIButton * obj_Btn =(UIButton *) sender;
+   // UIButton * obj_Btn =(UIButton *) sender;
    
-    [self.delegate TooltipMethod:obj_Btn];
+    //[self.delegate TooltipMethod:obj_Btn];
     
 }
 

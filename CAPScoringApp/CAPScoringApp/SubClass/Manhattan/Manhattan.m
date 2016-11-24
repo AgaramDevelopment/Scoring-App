@@ -796,9 +796,24 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         [tooltip_view removeFromSuperview];
     }
+    ToolTipRecord * wicketdetail =[ToolTipDetails objectAtIndex:selectwicket.tag-1];
+    if([wicketdetail.inningsno  isEqual: @"1"])
+    {
     
    tooltip_view =[[UIView alloc]initWithFrame:CGRectMake(selectwicket.frame.origin.x+50,selectwicket.frame.origin.y-80, 200, 140)];
-    
+    }
+    else if ([wicketdetail.inningsno  isEqual: @"2"])
+    {
+        tooltip_view =[[UIView alloc]initWithFrame:CGRectMake(selectwicket.frame.origin.x+50,selectwicket.frame.origin.y*2.7, 200, 140)];
+    }
+    else if ([wicketdetail.inningsno  isEqual: @"3"])
+    {
+        tooltip_view =[[UIView alloc]initWithFrame:CGRectMake(selectwicket.frame.origin.x+50,selectwicket.frame.origin.y*4.7, 200, 140)];
+    }
+    else if ([wicketdetail.inningsno  isEqual: @"4"])
+    {
+        tooltip_view =[[UIView alloc]initWithFrame:CGRectMake(selectwicket.frame.origin.x+50,selectwicket.frame.origin.y*6.7, 200, 140)];
+    }
     [tooltip_view setBackgroundColor:[UIColor clearColor]];
     [self.manhattan_Scroll addSubview:tooltip_view];
     
@@ -809,7 +824,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     objwicketText.numberOfLines=10;
     objwicketText.textColor =[UIColor whiteColor];
     
-    ToolTipRecord * wicketdetail =[ToolTipDetails objectAtIndex:selectwicket.tag-1];
+    //ToolTipRecord * wicketdetail =[ToolTipDetails objectAtIndex:selectwicket.tag-1];
     objwicketText.text = [NSString stringWithFormat:@" Team Score : %@,\n Bowler Name : %@,\n overno : %@,\n Runs : %@,\n Wicket : %@ ",wicketdetail.wicketscore,wicketdetail.bowlername,wicketdetail.wicketoverno,wicketdetail.runs,wicketdetail.wicketno];
     //objwicketText.textAlignment =UITextAlignmentCenter;
     [tooltip_view addSubview:objwicketText];

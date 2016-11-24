@@ -91,8 +91,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.BATTINGTEAMCODE=[self getValueByNull:statement :14];
                 record.BATTINGTEAMNAME=[self getValueByNull:statement :15];
                 //record.BATTINGTEAMLOGO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
-                record.BOWLINGTEAMCODE=[self getValueByNull:statement :16];
-                record.BOWLINGTEAMNAME=[self getValueByNull:statement :17];
+                record.BOWLINGTEAMCODE=[self getValueByNull:statement :17];
+                record.BOWLINGTEAMNAME=[self getValueByNull:statement :18];
                // record.BOWLINGTEAMLOGO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
                 
                 

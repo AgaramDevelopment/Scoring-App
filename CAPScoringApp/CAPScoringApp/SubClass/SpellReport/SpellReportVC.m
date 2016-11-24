@@ -154,7 +154,7 @@
     [self setInningsBySelection:@"1"];
     self.inningsno=@"1";
 
-    objSpellReport =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :self.Teamcode : self.inningsno];
+    objSpellReport =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :@"" : self.inningsno];
     [self.spellReport_Tbl reloadData];
    
 }
@@ -162,7 +162,7 @@
 {
     [self setInningsBySelection:@"2"];
     self.inningsno=@"2";
-    objSpellReport =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :self.Teamcode : self.inningsno];
+    objSpellReport =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :@"" : self.inningsno];
     [self.spellReport_Tbl reloadData];
 }
 
@@ -170,7 +170,7 @@
 {
     [self setInningsBySelection:@"3"];
      self.inningsno=@"3";
-    objSpellReport =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :self.Teamcode : self.inningsno];
+    objSpellReport =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :@"": self.inningsno];
     [self.spellReport_Tbl reloadData];
 
 }
@@ -178,7 +178,7 @@
 {
     [self setInningsBySelection:@"4"];
      self.inningsno=@"4";
-    objSpellReport =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :self.Teamcode : self.inningsno];
+    objSpellReport =[objDBManagerSpellReport getSpellReportDetail:self.compitionCode :self.matchCode :@"" : self.inningsno];
     [self.spellReport_Tbl reloadData];
 
 }
@@ -227,8 +227,9 @@
     cell.RSS_lbl.text = objRecord.RPSS;
     cell.Wickets_lbl.text = objRecord.Wickets;
     cell.maidens_lbl.text = objRecord.Maidens;
-    cell.Economy_lbl.text = [NSString stringWithFormat:@" %.02f",[objRecord.Economy floatValue]];
-    
+   // cell.Economy_lbl.text = [NSString stringWithFormat:@" %.02f",[objRecord.Economy floatValue]];
+    [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
+
     return cell;
 
 }
