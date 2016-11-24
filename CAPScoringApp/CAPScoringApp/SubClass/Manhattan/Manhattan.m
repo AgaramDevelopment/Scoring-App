@@ -337,23 +337,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 -(void) BarChartMethodFirstInnigs
 {
     
-    //WormRecord *wormRecord;
     
-    objManhattanRecord  = [objRunArray lastObject];
-    
-//    if(_wormDataInns2Array != nil && _wormDataInns2Array.count>0){
-//        
-//        WormRecord *wormRecord2;
-//        
-//        wormRecord2  = [self.wormDataInns2Array lastObject];
-//        
-//        
-//        if([wormRecord.score intValue] < [wormRecord2.score intValue]){
-//            wormRecord = wormRecord2;
-//        }
-//        
-//    }
-
+    id max = [objRunArray valueForKeyPath:@"@max.intValue"];
     
     _titles = objOverArray;
     _dataSource = objRunArray;
@@ -362,7 +347,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.tag = 111;
     _barChartView.dataSource = self;
     _barChartView.delegate = self;
-    _barChartView.maxValue = @50;
+    _barChartView.maxValue = max;
    // _barChartView.unitOfYAxis = @"Run";
     
     _barChartView.colorOfXAxis = [UIColor whiteColor];
@@ -405,6 +390,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(void) BarChartMethodFirstInnigs2
 {
+    id max = [objInnings2RunArray valueForKeyPath:@"@max.intValue"];
     _titles = objInnings2OverArray;
     _dataSource = objInnings2RunArray;
     
@@ -412,7 +398,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.tag = 112;
     _barChartView.dataSource = self;
     _barChartView.delegate = self;
-    _barChartView.maxValue = @50;
+    _barChartView.maxValue = max;
   //  _barChartView.unitOfYAxis = @"Run";
     
     _barChartView.colorOfXAxis = [UIColor whiteColor];
@@ -452,6 +438,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(void) BarChartMethodFirstInnigs3
 {
+    
+    id max = [objInnings3RunArray valueForKeyPath:@"@max.intValue"];
+
     _titles = objInnings3OverArray;
     _dataSource = objInnings3RunArray;
     
@@ -459,7 +448,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.tag = 113;
     _barChartView.dataSource = self;
     _barChartView.delegate = self;
-    _barChartView.maxValue = @50;
+    _barChartView.maxValue = max;
    // _barChartView.unitOfYAxis = @"Run";
     
     _barChartView.colorOfXAxis = [UIColor whiteColor];
@@ -498,6 +487,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(void) BarChartMethodFirstInnigs4
 {
+    
+    id max = [objInnings4RunArray valueForKeyPath:@"@max.intValue"];
+
     _titles = objInnings4OverArray;
     _dataSource = objInnings4RunArray;
     
@@ -505,7 +497,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.tag = 114;
     _barChartView.dataSource = self;
     _barChartView.delegate = self;
-    _barChartView.maxValue = @50;
+    _barChartView.maxValue = max;
    // _barChartView.unitOfYAxis = @"Run";
     
     _barChartView.colorOfXAxis = [UIColor whiteColor];

@@ -30,6 +30,7 @@
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YNO-7e-qpY">
                                 <rect key="frame" x="5" y="5" width="200" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="WEs-ZL-AMY"/>
                                     <constraint firstAttribute="width" constant="200" id="Ymk-te-hx9"/>
@@ -40,6 +41,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eNw-a6-D4V">
                                 <rect key="frame" x="237" y="5" width="125" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="it5-tm-HxX"/>
                                     <constraint firstAttribute="width" constant="125" id="lLy-Ix-Bao"/>
@@ -50,6 +52,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Zq-4Y-xbm">
                                 <rect key="frame" x="395" y="5" width="200" height="30"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="EUK-XY-ycT"/>
                                     <constraint firstAttribute="width" constant="200" id="JGh-D3-rbI"/>
@@ -58,8 +61,9 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progressViewStyle="bar" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="GZl-4w-naN">
+                            <progressView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progressViewStyle="bar" progress="0.10000000000000001" translatesAutoresizingMaskIntoConstraints="NO" id="GZl-4w-naN">
                                 <rect key="frame" x="35" y="64" width="130" height="11"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="X4c-Tx-BxA"/>
                                     <constraint firstAttribute="height" constant="10" id="gjO-ix-avV"/>
@@ -69,6 +73,7 @@
                             </progressView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Mof-in-cRc">
                                 <rect key="frame" x="440" y="64" width="130" height="11"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="130" id="63F-28-WAX"/>
                                     <constraint firstAttribute="height" constant="10" id="Xas-Bi-Fni"/>
@@ -79,11 +84,12 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WzZ-UE-Atr">
                                 <rect key="frame" x="235" y="55" width="130" height="30"/>
                                 <subviews>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="tsv-r0-qlC">
+                                    <progressView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" verticalHuggingPriority="750" misplaced="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="tsv-r0-qlC">
                                         <rect key="frame" x="2" y="10" width="60" height="11"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="60" id="2OA-Zz-who"/>
-                                            <constraint firstAttribute="height" constant="10" id="4bR-8c-CcU"/>
+                                            <constraint firstAttribute="height" constant="10" id="LzT-L1-cde"/>
+                                            <constraint firstAttribute="width" constant="60" id="pA9-si-7Ig"/>
                                         </constraints>
                                         <color key="progressTintColor" red="0.85490196080000003" green="0.23921568630000001" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <color key="trackTintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -92,16 +98,18 @@
                                         <rect key="frame" x="64" y="10" width="2" height="10"/>
                                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="2" id="c2g-Ne-KNT"/>
-                                            <constraint firstAttribute="height" constant="10" id="xvF-6Q-cUr"/>
+                                            <constraint firstAttribute="width" constant="2" id="DCM-BH-e21"/>
+                                            <constraint firstAttribute="height" constant="10" id="P9d-SG-Gi3"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i77-MB-KoZ">
+                                    <progressView opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" verticalHuggingPriority="750" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="i77-MB-KoZ">
                                         <rect key="frame" x="68" y="10" width="60" height="10"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="10" id="5Jg-ZX-oBd"/>
                                             <constraint firstAttribute="height" constant="10" id="TDQ-dk-sfh"/>
                                             <constraint firstAttribute="width" constant="60" id="r79-Xn-Otc"/>
                                         </constraints>
@@ -111,18 +119,22 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="i77-MB-KoZ" firstAttribute="leading" secondItem="UTe-yd-pD9" secondAttribute="trailing" constant="2" id="3oy-mF-CLk"/>
+                                    <constraint firstAttribute="bottom" secondItem="i77-MB-KoZ" secondAttribute="bottom" constant="10" id="4Cd-HG-u8Q"/>
                                     <constraint firstAttribute="height" constant="30" id="4VE-hK-25c"/>
-                                    <constraint firstItem="UTe-yd-pD9" firstAttribute="top" secondItem="WzZ-UE-Atr" secondAttribute="top" constant="10" id="EDU-4X-s7v"/>
-                                    <constraint firstItem="tsv-r0-qlC" firstAttribute="top" secondItem="WzZ-UE-Atr" secondAttribute="top" constant="10" id="HPD-af-hPH"/>
-                                    <constraint firstItem="tsv-r0-qlC" firstAttribute="leading" secondItem="WzZ-UE-Atr" secondAttribute="leading" constant="2" id="Jl6-tp-u9A"/>
+                                    <constraint firstItem="tsv-r0-qlC" firstAttribute="top" secondItem="WzZ-UE-Atr" secondAttribute="top" constant="10" id="UFk-kz-2KP"/>
+                                    <constraint firstItem="UTe-yd-pD9" firstAttribute="centerX" secondItem="WzZ-UE-Atr" secondAttribute="centerX" id="VJw-j6-AVG"/>
                                     <constraint firstAttribute="width" constant="130" id="WQn-rF-bJO"/>
                                     <constraint firstItem="i77-MB-KoZ" firstAttribute="top" secondItem="WzZ-UE-Atr" secondAttribute="top" constant="10" id="YtO-0k-ehz"/>
                                     <constraint firstAttribute="trailing" secondItem="i77-MB-KoZ" secondAttribute="trailing" constant="2" id="aHL-oS-ztc"/>
-                                    <constraint firstItem="UTe-yd-pD9" firstAttribute="leading" secondItem="tsv-r0-qlC" secondAttribute="trailing" constant="2" id="yv7-HN-a6T"/>
+                                    <constraint firstItem="i77-MB-KoZ" firstAttribute="top" secondItem="WzZ-UE-Atr" secondAttribute="top" constant="10" id="edz-9Q-5Ko"/>
+                                    <constraint firstAttribute="bottom" secondItem="UTe-yd-pD9" secondAttribute="bottom" constant="10" id="en9-4n-6rU"/>
+                                    <constraint firstItem="UTe-yd-pD9" firstAttribute="top" secondItem="WzZ-UE-Atr" secondAttribute="top" constant="10" id="gKb-4w-JLg"/>
+                                    <constraint firstItem="UTe-yd-pD9" firstAttribute="leading" secondItem="tsv-r0-qlC" secondAttribute="trailing" constant="2" id="svU-74-dVa"/>
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.14509803921568626" green="0.14509803921568626" blue="0.14509803921568626" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="WzZ-UE-Atr" secondAttribute="bottom" constant="13" id="08d-yK-LcK"/>
                             <constraint firstItem="eNw-a6-D4V" firstAttribute="centerX" secondItem="jU6-so-0tC" secondAttribute="centerX" id="AlL-Vh-Mzu"/>
@@ -139,6 +151,7 @@
                         </constraints>
                     </view>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstItem="jU6-so-0tC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Dk2-mC-EvI"/>
                     <constraint firstAttribute="bottom" secondItem="jU6-so-0tC" secondAttribute="bottom" constant="1" id="Ptk-M4-mf4"/>

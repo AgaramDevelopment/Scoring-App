@@ -2249,7 +2249,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSString *getInnings = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *getInnings = [self getValueByNull:statement :0];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -2495,7 +2495,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                 NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
                 f.numberStyle = NSNumberFormatterDecimalStyle;
-                NSNumber *NOBALL = [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
+                NSNumber *NOBALL = [f numberFromString:[self getValueByNull:statement :0]];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -2533,11 +2533,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
                 f.numberStyle = NSNumberFormatterDecimalStyle;
-                NSString *STRIKERCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                NSString *NONSTRIKERCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                NSString *T_STRIKERCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                NSString *T_NONSTRIKERCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                NSString *BOWLERCODE = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                NSString *STRIKERCODE = [self getValueByNull:statement :0];
+                NSString *NONSTRIKERCODE = [self getValueByNull:statement :1];
+                NSString *T_STRIKERCODE = [self getValueByNull:statement :2];
+                NSString *T_NONSTRIKERCODE = [self getValueByNull:statement :3];
+                NSString *BOWLERCODE = [self getValueByNull:statement :4];
                 NSString *T_BOWLINGEND = [self getValueByNull:statement :5];
                 
                 [result addObject:STRIKERCODE];
@@ -2759,17 +2759,17 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *playerCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                NSString *playerName = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                NSString *totalRuns = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                NSString *playerCode = [self getValueByNull:statement :0];
+                NSString *playerName = [self getValueByNull:statement :1];
+                NSString *totalRuns = [self getValueByNull:statement :2];
                 
-                NSString *fours = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                NSString *fours = [self getValueByNull:statement :3];
                 
-                NSString *sixes = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
+                NSString *sixes = [self getValueByNull:statement :4];
                 
-                NSString *totalBalls = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
-                NSString *strickRate = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
-                NSString *battingStyle = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
+                NSString *totalBalls = [self getValueByNull:statement :5];
+                NSString *strickRate = [self getValueByNull:statement :6];
+                NSString *battingStyle = [self getValueByNull:statement :7];
                 
                 
                 [result addObject:playerCode];
@@ -2861,7 +2861,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
                 f.numberStyle = NSNumberFormatterDecimalStyle;
-                NSNumber *BALLCOUNT = [f numberFromString:[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)]];
+                NSNumber *BALLCOUNT = [f numberFromString:[self  getValueByNull:statement :0]];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -4302,7 +4302,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                inningsNumber = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                inningsNumber = [self getValueByNull:statement :0];
                 
             }
             sqlite3_reset(statement);
@@ -4333,7 +4333,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                batsmanCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                batsmanCode = [self getValueByNull:statement :0];
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 return batsmanCode;
@@ -4370,7 +4370,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                dayNumber = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                dayNumber = [self getValueByNull:statement :0];
                 
             }
             sqlite3_reset(statement);
@@ -4401,7 +4401,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                sessionNumber = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                sessionNumber = [self getValueByNull:statement :0];
                 
             }
             sqlite3_reset(statement);
@@ -4433,7 +4433,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                inningStatus = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                inningStatus = [self getValueByNull:statement :0];
                 
             }
             sqlite3_reset(statement);
@@ -4556,7 +4556,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 FetchSEPageLoadRecord *record = [[FetchSEPageLoadRecord alloc]init];
-                record.INNINGSPROGRESS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                record.INNINGSPROGRESS=[self getValueByNull:statement :0];
                 [eventArray addObject:record];
                 
             }
@@ -4896,8 +4896,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 FetchSEPageLoadRecord *record = [[FetchSEPageLoadRecord alloc]init];
-                record.BATTEAMSHORTNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                record.BATTEAMNAME = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record.BATTEAMSHORTNAME=[self getValueByNull:statement :0];
+                record.BATTEAMNAME = [self getValueByNull:statement :1];
                 [eventArray addObject:record];
                 
             }
@@ -4935,8 +4935,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 FetchSEPageLoadRecord *record = [[FetchSEPageLoadRecord alloc]init];
-                record.BOWLTEAMSHORTNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                record.BOWLTEAMNAME = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
+                record.BOWLTEAMSHORTNAME=[self getValueByNull:statement :0];
+                record.BOWLTEAMNAME = [self getValueByNull:statement :1];
                 [eventArray addObject:record];
                 
             }
@@ -5035,13 +5035,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 //            record.MATCHOVERS =[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 7)];
                 //            record.ISOTHERSMATCHTYPE =[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 8)];
                 
-                record.TEAMAWICKETKEEPER =[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 0)];
-                record.TEAMBWICKETKEEPER =[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 1)];
-                record.TEAMACAPTAIN =[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 2)];
-                record.TEAMBCAPTAIN =[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 3)];
-                record.TEAMACODE =[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 4)];
-                record.TEAMBCODE =[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 5)];
-                record.ISDEFAULTORLASTINSTANCE =[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 6)];
+                record.TEAMAWICKETKEEPER =[self getValueByNull:statement :0];
+                record.TEAMBWICKETKEEPER =[self getValueByNull:statement :1];
+                record.TEAMACAPTAIN =[self getValueByNull:statement :2];
+                record.TEAMBCAPTAIN =[self getValueByNull:statement :3];
+                record.TEAMACODE =[self getValueByNull:statement :4];
+                record.TEAMBCODE =[self getValueByNull:statement :5];
+                record.ISDEFAULTORLASTINSTANCE =[self getValueByNull:statement :6];
                 // record.INNINGSSTATUS =[NSString stringWithUTF8String:(char*)sqlite3_column_text(statement, 7)];
                 [eventArray addObject:record];
                 
@@ -5163,7 +5163,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -5235,7 +5235,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -5272,7 +5272,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -5309,7 +5309,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -5346,7 +5346,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -5725,7 +5725,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -5760,7 +5760,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(sqlite3_prepare_v2(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK){
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *TOTAL =  [self getValueByNull:statement :0];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -5799,7 +5799,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -5837,7 +5837,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -5873,7 +5873,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -5910,7 +5910,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -5948,7 +5948,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -5986,7 +5986,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -6059,7 +6059,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -6097,7 +6097,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -6135,7 +6135,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -6235,7 +6235,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -6273,7 +6273,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             {
                 while(sqlite3_step(statement)==SQLITE_ROW){
                     
-                    NSString *TOTAL =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    NSString *TOTAL =  [self getValueByNull:statement :0];
                     sqlite3_reset(statement);
                     sqlite3_finalize(statement);
                     sqlite3_close(dataBase);
@@ -6308,10 +6308,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 BowlerEvent *bowlerEvnt = [[BowlerEvent alloc]init];
-                bowlerEvnt.BowlerCode =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                bowlerEvnt.BowlerName =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                bowlerEvnt.bowlingType =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                bowlerEvnt.bowlingStyle =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                bowlerEvnt.BowlerCode =  [self getValueByNull:statement :0];
+                bowlerEvnt.BowlerName =  [self getValueByNull:statement :1];
+                bowlerEvnt.bowlingType =  [self getValueByNull:statement :2];
+                bowlerEvnt.bowlingStyle =  [self getValueByNull:statement :3];
                 
                 [bowlerCodeArray addObject:bowlerEvnt];
                 
@@ -6444,9 +6444,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 SelectPlayerRecord *player = [[SelectPlayerRecord alloc]init];
-                player.playerCode =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                player.playerName =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                player.battingStyle =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
+                player.playerCode =  [self getValueByNull:statement :0];
+                player.playerName =  [self getValueByNull:statement :1];
+                player.battingStyle =  [self getValueByNull:statement :2];
                 [result addObject:player];
                 
             }

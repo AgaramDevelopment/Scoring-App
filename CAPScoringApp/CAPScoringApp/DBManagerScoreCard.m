@@ -74,25 +74,25 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
        
                 MatchRegistrationDetailsForScoreBoard *record=[[MatchRegistrationDetailsForScoreBoard alloc]init];
-                record.MATCHCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                record.MATCHNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.MATCHDATE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                record.MATCHOVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                record.UMPIRE1CODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
-                record.UMPIRE1NAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
-                record.UMPIRE2CODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
-                record.UMPIRE2NAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-                record.MATCHREFEREECODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
-                record.MATCHREFEREENAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)];
-                record.TOSSWONTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
-                record.TOSSWONTEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
-                record.ELECTEDTO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
-                record.ELECTEDTODESCRIPTION=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 13)];
-                record.BATTINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 14)];
-                record.BATTINGTEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 15)];
+                record.MATCHCODE=[self getValueByNull:statement :0];
+                record.MATCHNAME=[self getValueByNull:statement :1];
+                record.MATCHDATE=[self getValueByNull:statement :2];
+                record.MATCHOVERS=[self getValueByNull:statement :3];
+                record.UMPIRE1CODE=[self getValueByNull:statement :4];
+                record.UMPIRE1NAME=[self getValueByNull:statement :5];
+                record.UMPIRE2CODE=[self getValueByNull:statement :6];
+                record.UMPIRE2NAME=[self getValueByNull:statement :7];
+                record.MATCHREFEREECODE=[self getValueByNull:statement :8];
+                record.MATCHREFEREENAME=[self getValueByNull:statement :9];
+                record.TOSSWONTEAMCODE=[self getValueByNull:statement :10];
+                record.TOSSWONTEAMNAME=[self getValueByNull:statement :11];
+                record.ELECTEDTO=[self getValueByNull:statement :12];
+                record.ELECTEDTODESCRIPTION=[self getValueByNull:statement :13];
+                record.BATTINGTEAMCODE=[self getValueByNull:statement :14];
+                record.BATTINGTEAMNAME=[self getValueByNull:statement :15];
                 //record.BATTINGTEAMLOGO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 16)];
-                record.BOWLINGTEAMCODE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 17)];
-                record.BOWLINGTEAMNAME=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
+                record.BOWLINGTEAMCODE=[self getValueByNull:statement :16];
+                record.BOWLINGTEAMNAME=[self getValueByNull:statement :17];
                // record.BOWLINGTEAMLOGO=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 19)];
                 
                 
