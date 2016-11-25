@@ -36,6 +36,8 @@
 
 @property (nonatomic,strong) NSString * wicketoverno;
 
+@property (nonatomic,strong) NSNumber * tag;
+
 
 
 @end
