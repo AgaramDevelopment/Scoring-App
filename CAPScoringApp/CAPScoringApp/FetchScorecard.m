@@ -108,6 +108,8 @@ DBManagerScoreCard *dbScoreCard;
     
      self.BattingSummaryForScoreBoard=[ dbScoreCard GetBattingSummaryForScoreBoard :  COMPETITIONCODE : MATCHCODE : INNINGSNO ];
     
+    self.BattingSummaryForScoreBoardWkt=[ dbScoreCard GetBattingSummaryForScoreBoardWkt :  COMPETITIONCODE : MATCHCODE : INNINGSNO ];
+    
     ISINNINGSCOMPLETE = [dbScoreCard GetInningsStatusForScoreBoard : COMPETITIONCODE : MATCHCODE: INNINGSNO];
     
     NSMutableArray *MatchOverandBallForScoreBoard=[dbScoreCard GetMatchOverForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO ];

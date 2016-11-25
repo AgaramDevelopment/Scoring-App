@@ -14,6 +14,7 @@
 -(void ) FetchScoreBoard:(NSString *) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO;
 
 @property(strong,nonatomic)NSMutableArray *BattingSummaryForScoreBoard;
+@property(strong,nonatomic)NSMutableArray *BattingSummaryForScoreBoardWkt;
 @property(strong,nonatomic)NSMutableArray *BowlingSummaryForScoreBoard;
 @property(strong,nonatomic)NSMutableArray *MatchRegistrationForScoreBoardArray;
 @property(strong,nonatomic)NSMutableArray *DidNotBatArray;

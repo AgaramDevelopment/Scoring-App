@@ -534,7 +534,10 @@ EndInnings *insertScoreCard;
                 
                 //EXEC SP_INSERTSCOREBOARD
     
+               
                 WICKETOVERNO = overNo;
+//                NSNumber *myNum = [NSNumber numberWithInteger:ballNo];
+//                 WICKETBALLNO = myNum;
                 self.BOWLERCODE = BowlerCode;
                 O_ISLEGALBALL = @1;// Added for default value.
                 [self insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];

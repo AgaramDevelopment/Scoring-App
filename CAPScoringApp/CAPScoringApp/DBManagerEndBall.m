@@ -183,7 +183,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         
         
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET WICKETSCORE = WICKETSCORE - ('%@' - '%@')	WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@'	AND INNINGSNO = '%@' AND ((WICKETOVERNO || '.' || WICKETBALLNO) >= ('%@' || '.' || '%@'))",O_RUNS,N_RUNS,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,F_OVERS,F_BALLS];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET WICKETSCORE = WICKETSCORE - ('%@' - '%@')	WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@'	AND INNINGSNO = '%@' AND ((WICKETOVERNO || '.' || WICKETBALLNO) >= (%@ || '.' || %@))",O_RUNS,N_RUNS,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,F_OVERS,F_BALLS];
         const char *update_stmt = [updateSQL UTF8String];
         if( sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK){
             
@@ -1472,16 +1472,16 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.TWOS = [self getValueByNull: statement:8];
                 record.THREES = [self getValueByNull: statement:9];
                 record.FOURS = [self getValueByNull: statement:10];
-                record.SIXES = [self getValueByNull: statement:0];
-                record.DOTBALLS = [self getValueByNull: statement:0];
-                record.WICKETNO = [self getValueByNull: statement:0];
-                record.WICKETTYPE = [self getValueByNull: statement:0];
-                record.FIELDERCODE = [self getValueByNull: statement:0];
-                record.BOWLERCODE = [self getValueByNull: statement:0];
-                record.WICKETOVERNO = [self getValueByNull: statement:0];
-                record.WICKETBALLNO = [self getValueByNull: statement:0];
-                record.WICKETSCORE = [self getValueByNull: statement:0];
-                record.BATTINGPOSITIONNO = [self getValueByNull: statement:0];
+                record.SIXES = [self getValueByNull: statement:11];
+                record.DOTBALLS = [self getValueByNull: statement:12];
+                record.WICKETNO = [self getValueByNull: statement:13];
+                record.WICKETTYPE = [self getValueByNull: statement:14];
+                record.FIELDERCODE = [self getValueByNull: statement:15];
+                record.BOWLERCODE = [self getValueByNull: statement:16];
+                record.WICKETOVERNO = [self getValueByNull: statement:17];
+                record.WICKETBALLNO = [self getValueByNull: statement:18];
+                record.WICKETSCORE = [self getValueByNull: statement:19];
+                record.BATTINGPOSITIONNO = [self getValueByNull: statement:20];
                 
                 [battingSummaryArray addObject:record];
                 
