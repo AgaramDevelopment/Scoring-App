@@ -107,7 +107,7 @@
     NSString *isSelectMarkForEdit;
     NSString *StrikerPlayer;
     NSString *UmpireSelect;
-    
+    NSInteger index;
     //Remark
     NSString *remarks;
     
@@ -252,6 +252,7 @@
     UIScrollView *ScrollViewer;
     
     BOOL isEditBallInLiveMode;
+    
 }
 
 
@@ -308,6 +309,7 @@
 
 @property (nonatomic, strong)	NSMutableArray	*visiblePopTipViews;
 @property (nonatomic, strong)	id				currentPopTipViewTarget;
+@property (assign,atomic) NSInteger bowlerIndex;
 
 
 @end
@@ -331,11 +333,14 @@
     [super viewDidLoad];
     DBManager *objDBManager = [[DBManager alloc]init];
     
+   
+    
     //Initialize Matchtype Dictionary
     MuliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
     ValidedMatchType = [[NSArray alloc]initWithObjects:@"MSC022",@"MSC023",@"MSC024",@"MSC114",@"MSC115",@"MSC116", nil];
     
     NSLog(@"self.matchTypeCode%@",self.matchTypeCode);
+    
     
     
     AppealSystemArray=[[NSMutableArray alloc]init];
@@ -1847,6 +1852,7 @@
         return  nonStrickerList.count;
     }
     if(tableView == currentBowlersTableView && fetchSEPageLoadRecord != nil){
+       
         return  fetchSEPageLoadRecord.getBowlingTeamPlayers.count;
     }
     //wicket type
@@ -2355,7 +2361,10 @@
     }else if(tableView == overThrowTableView){
         cell.textLabel.text = [self.overThrowOptionArray objectAtIndex:indexPath.row];
     }else if(tableView == currentBowlersTableView){
+        
         BowlerEvent *bowlerEvent = [fetchSEPageLoadRecord.getBowlingTeamPlayers objectAtIndex:indexPath.row];
+    //[fetchSEPageLoadRecord.getBowlingTeamPlayers replaceObjectAtIndex:index withObject:0];
+        
         cell.textLabel.text = bowlerEvent.BowlerName;
     }else if(tableView == nonstrickerTableView){
         SelectPlayerRecord *battingEvent = [nonStrickerList objectAtIndex:indexPath.row];
@@ -3642,6 +3651,16 @@
             }
             overStatus=@"1";
             [endInnings manageSeOverDetails :self.competitionCode :self.matchCode :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.INNINGSNO :self.ballEventRecord :overStatus :Umpire1Code :umpire2Code:[NSString stringWithFormat:@"%d", fetchSEPageLoadRecord.BATTEAMOVERS]:fetchSEPageLoadRecord.strickerPlayerCode:fetchSEPageLoadRecord.nonstrickerPlayerCode : fetchSEPageLoadRecord.currentBowlerPlayerCode];
+            
+//            if (fetchSEPageLoadRecord.BATTEAMOVERS > 0) {
+//                
+//                
+//                NSInteger indexPath = [[NSUserDefaults standardUserDefaults] integerForKey:@"key1"];
+//                
+//                [fetchSEPageLoadRecord.getBowlingTeamPlayers replaceObjectAtIndex:indexPath withObject:0];
+//                
+//            }
+        
             [self reloadBowlerTeamBatsmanDetails];
             
             
@@ -8441,6 +8460,22 @@
         }else if(tableView == currentBowlersTableView){
             
             BowlerEvent *bowlEvent = [fetchSEPageLoadRecord.getBowlingTeamPlayers objectAtIndex:indexPath.row];
+         
+            
+            if (fetchSEPageLoadRecord.BATTEAMOVERS > 0) {
+                
+                _bowlerIndex = indexPath.row;
+                
+                [[NSUserDefaults standardUserDefaults] setInteger:_bowlerIndex forKey:@"key1"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+
+            }
+            
+            
+            
+        
+            
+         //[fetchSEPageLoadRecord.getBowlingTeamPlayers replaceObjectAtIndex:index withObject:0];
             
             [InitializeInningsScoreBoardRecord UpdatePlayers:self.competitionCode :self.matchCode :fetchSEPageLoadRecord.INNINGSNO :fetchSEPageLoadRecord.BATTINGTEAMCODE :fetchSEPageLoadRecord.BOWLINGTEAMCODE :fetchSEPageLoadRecord.strickerPlayerCode :fetchSEPageLoadRecord.nonstrickerPlayerCode :bowlEvent.BowlerCode];
             
@@ -9961,6 +9996,16 @@
 - (IBAction)btn_bowler_name:(id)sender {
     [self hideTableViewOnStrickerNonStrickerAndBowlerSelect];
     [self resetBowlerBatsmanTableView];
+    
+    if (fetchSEPageLoadRecord.BATTEAMOVERS > 0) {
+
+   
+    NSInteger indexPath = [[NSUserDefaults standardUserDefaults] integerForKey:@"key1"];
+    
+    //[fetchSEPageLoadRecord.getBowlingTeamPlayers replaceObjectAtIndex:indexPath withObject:0];
+        
+    }
+    
     if(!isBowlerOpen){
         isStrickerOpen = NO;
         isNONStrickerOpen = NO;
@@ -9972,6 +10017,8 @@
         currentBowlersTableView.delegate = self;
         [self.CommonView addSubview:currentBowlersTableView];
         [currentBowlersTableView reloadData];
+        
+     
         
         
         int indx=0;

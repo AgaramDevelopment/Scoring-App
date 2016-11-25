@@ -824,6 +824,7 @@ EndInnings *insertScoreBoard;
             insertScoreBoard.O_ISLEGALBALL = F_ISLEGALBALL;
             insertScoreBoard.BOWLINGTEAMCODE = BOWLINGTEAMCODE;
             insertScoreBoard.WICKETOVERNO = OVERNO;
+            insertScoreBoard.WICKETBALLNO = BALLNO;
            
          
           //  [insertScoreBoard insertScordBoard:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO];
