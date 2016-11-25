@@ -14,12 +14,12 @@
 @implementation Utitliy
 
 +(NSString *)getIPPORT{
-    return  @"192.168.1.49:8096";
+    return  @"192.168.1.191:8100";
 }
 
 
 +(NSString *)getSyncIPPORT{
-    return  @"192.168.1.49:8888";
+    return  @"192.168.1.191:8100";
 }
 
 +(NSString *)SecureId{
@@ -219,7 +219,7 @@
 //
 //+(NSString *)getIPPORT{
 //    return  @"182.74.23.197:8102";
-//}
+//}192.168.1.191:8100
 //
 //
 //+(NSString *)getSyncIPPORT{
