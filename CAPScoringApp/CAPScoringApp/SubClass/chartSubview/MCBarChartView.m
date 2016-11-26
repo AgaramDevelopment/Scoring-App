@@ -26,6 +26,9 @@
 CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
 
 @interface MCBarChartView ()
+{
+    UIView * tooltip_view;
+}
 
 @property (nonatomic, strong) NSArray *chartDataSource;
 
@@ -332,7 +335,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                     UIButton * wicket_Btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 30, 30)];
                    
                     
-                    wicket_Btn.tag = [objManhattanRecord.wicketno intValue];
+                    wicket_Btn.tag = [objManhattanRecord.tag intValue];
                     wicket_Btn.center = CGPointMake(xOffset-25, chartYOffset - [objManhattanRecord.Run floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2);
                     [wicket_Btn setBackgroundColor:[UIColor redColor]];
                     wicket_Btn.layer.cornerRadius=15;
@@ -343,7 +346,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                     wicket_Btn.alpha = 0.0;
                     [_scrollView addSubview:wicket_Btn];
                     [wicket_Btn addTarget:self action:@selector(didClickWicket:) forControlEvents:UIControlEventTouchUpInside];
-                    
+
                     UILabel * wicketno_lbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,30,30)];
                     wicketno_lbl.text = objManhattanRecord.wicketno;
                     [wicket_Btn addSubview:wicketno_lbl];
@@ -362,12 +365,57 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
     }
 }
 
--(IBAction)didClickWicket:(id)sender
+
+//- (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
+//{
+//    CGPoint touchPoint=[gesture locationInView:_scrollView];
+//}
+
+
+-(IBAction)didClickWicket:(UIButton *) selectwicket
 {
-   // UIButton * obj_Btn =(UIButton *) sender;
-   
-    //[self.delegate TooltipMethod:obj_Btn];
     
+    if(tooltip_view !=nil)
+    {
+        [tooltip_view removeFromSuperview];
+    }
+    
+    
+    tooltip_view =[[UIView alloc]initWithFrame:CGRectMake((selectwicket.frame.origin.x+140)>_scrollView.frame.size.width?selectwicket.frame.origin.x-200:selectwicket.frame.origin.x+30,selectwicket.frame.origin.y> ((_scrollView.frame.size.height/2)-80)?((_scrollView.frame.size.height/2)-80):selectwicket.frame.origin.y, 200, 160)];
+    
+    [tooltip_view setBackgroundColor:[UIColor clearColor]];
+    [_scrollView addSubview:tooltip_view];
+    
+    tooltip_view.layer.borderColor = [UIColor whiteColor].CGColor;
+    tooltip_view.layer.borderWidth = 2.0f;
+    
+    UILabel * objwicketText =[[UILabel alloc]initWithFrame:CGRectMake(5, 0, tooltip_view.frame.size.width,tooltip_view.frame.size.height)];
+    objwicketText.numberOfLines=10;
+    objwicketText.textColor =[UIColor whiteColor];
+    
+    NSString *result = [self.delegate getWicketDetails:selectwicket];
+    
+    objwicketText.text = result;
+    
+    [tooltip_view addSubview:objwicketText];
+    [NSTimer scheduledTimerWithTimeInterval:5.0
+                                     target:self
+                                   selector:@selector(hidepopview)
+                                   userInfo:nil
+                                    repeats:NO];
+
+//    UIButton * obj_Btn =(UIButton *) sender;
+//   
+//    [self.delegate TooltipMethod:obj_Btn];
+    
+}
+
+-(void)hidepopview
+{
+    if(tooltip_view !=nil)
+    {
+        [tooltip_view removeFromSuperview];
+    }
 }
 
 @end

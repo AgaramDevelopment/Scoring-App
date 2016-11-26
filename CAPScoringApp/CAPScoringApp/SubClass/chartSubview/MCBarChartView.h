@@ -29,6 +29,9 @@
 
 -(void) TooltipMethod :(UIButton *)selectwicket;
 
+- (NSString *) getWicketDetails:(UIButton *)selectwicket;
+
+
 - (CGFloat)barWidthInBarChartView:(MCBarChartView *)barChartView;
 
 - (CGFloat)paddingForSectionInBarChartView:(MCBarChartView *)barChartView;
@@ -64,6 +67,8 @@
 @property (nonatomic, strong) UIColor *colorOfXAxis;
 /// x轴文本数据颜色
 @property (nonatomic, strong) UIColor *colorOfXText;
+
+
 
 - (void)reloadData;
 - (void)reloadDataWithAnimate:(BOOL)animate;
