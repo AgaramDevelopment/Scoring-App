@@ -241,6 +241,9 @@
 		36347C061DB4DAA200ADEF9F /* FixtureTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36347C041DB4DAA200ADEF9F /* FixtureTVC.xib */; };
 		36A7E1591DBB208E00C11C1E /* SpiderWagonReportVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 36A7E1571DBB208E00C11C1E /* SpiderWagonReportVC.m */; };
 		36A7E15A1DBB208E00C11C1E /* SpiderWagonReportVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36A7E1581DBB208E00C11C1E /* SpiderWagonReportVC.xib */; };
+		36BB85651DE9479500AAB943 /* PlayerWormChartRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB85641DE9479500AAB943 /* PlayerWormChartRecords.m */; };
+		36BB85681DE947D400AAB943 /* DBManagerPlayerWormChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB85671DE947D400AAB943 /* DBManagerPlayerWormChart.m */; };
+		36BB856B1DE9480500AAB943 /* PlayerWormChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 36BB856A1DE9480500AAB943 /* PlayerWormChart.m */; };
 		36DF65E61DB751830038C1AE /* PlayingSquadVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DF65E41DB751830038C1AE /* PlayingSquadVC.m */; };
 		36DF65E71DB751830038C1AE /* PlayingSquadVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 36DF65E51DB751830038C1AE /* PlayingSquadVC.xib */; };
 		36DF65EC1DB77DB10038C1AE /* PlayingSquadCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 36DF65EA1DB77DB10038C1AE /* PlayingSquadCell.m */; };
@@ -803,6 +806,12 @@
 		36A7E1561DBB208E00C11C1E /* SpiderWagonReportVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpiderWagonReportVC.h; sourceTree = "<group>"; };
 		36A7E1571DBB208E00C11C1E /* SpiderWagonReportVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpiderWagonReportVC.m; sourceTree = "<group>"; };
 		36A7E1581DBB208E00C11C1E /* SpiderWagonReportVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SpiderWagonReportVC.xib; sourceTree = "<group>"; };
+		36BB85631DE9467D00AAB943 /* PlayerWormChartRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerWormChartRecords.h; path = "../../../../15Nov2016/Scoring-App/CAPScoringApp/CAPScoringApp/PlayerWormChartRecords.h"; sourceTree = "<group>"; };
+		36BB85641DE9479500AAB943 /* PlayerWormChartRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerWormChartRecords.m; path = "../../../../15Nov2016/Scoring-App/CAPScoringApp/CAPScoringApp/PlayerWormChartRecords.m"; sourceTree = "<group>"; };
+		36BB85661DE947D400AAB943 /* DBManagerPlayerWormChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManagerPlayerWormChart.h; path = "../../../../15Nov2016/Scoring-App/CAPScoringApp/CAPScoringApp/DBManagerPlayerWormChart.h"; sourceTree = "<group>"; };
+		36BB85671DE947D400AAB943 /* DBManagerPlayerWormChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManagerPlayerWormChart.m; path = "../../../../15Nov2016/Scoring-App/CAPScoringApp/CAPScoringApp/DBManagerPlayerWormChart.m"; sourceTree = "<group>"; };
+		36BB85691DE9480500AAB943 /* PlayerWormChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerWormChart.h; path = "../../../../15Nov2016/Scoring-App/CAPScoringApp/CAPScoringApp/PlayerWormChart.h"; sourceTree = "<group>"; };
+		36BB856A1DE9480500AAB943 /* PlayerWormChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerWormChart.m; path = "../../../../15Nov2016/Scoring-App/CAPScoringApp/CAPScoringApp/PlayerWormChart.m"; sourceTree = "<group>"; };
 		36DF65E31DB751830038C1AE /* PlayingSquadVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayingSquadVC.h; sourceTree = "<group>"; };
 		36DF65E41DB751830038C1AE /* PlayingSquadVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayingSquadVC.m; sourceTree = "<group>"; };
 		36DF65E51DB751830038C1AE /* PlayingSquadVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayingSquadVC.xib; sourceTree = "<group>"; };
@@ -1778,6 +1787,19 @@
 			name = SpiderWagonReportVC;
 			sourceTree = "<group>";
 		};
+		36BB855A1DE9460D00AAB943 /* PlayerWormChart */ = {
+			isa = PBXGroup;
+			children = (
+				36BB85691DE9480500AAB943 /* PlayerWormChart.h */,
+				36BB856A1DE9480500AAB943 /* PlayerWormChart.m */,
+				36BB85661DE947D400AAB943 /* DBManagerPlayerWormChart.h */,
+				36BB85671DE947D400AAB943 /* DBManagerPlayerWormChart.m */,
+				36BB85641DE9479500AAB943 /* PlayerWormChartRecords.m */,
+				36BB85631DE9467D00AAB943 /* PlayerWormChartRecords.h */,
+			);
+			name = PlayerWormChart;
+			sourceTree = "<group>";
+		};
 		36DF65E21DB750D10038C1AE /* PlayingSquad */ = {
 			isa = PBXGroup;
 			children = (
@@ -2056,6 +2078,7 @@
 		CE0018361CF4308000668D8B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				36BB855A1DE9460D00AAB943 /* PlayerWormChart */,
 				36E4BF781DD317E900B8E344 /* BatsmanKPI */,
 				36EA71541DC87694004B0C68 /* BowlingKPIVC */,
 				36E4FD331DC1CDCF00BF47B7 /* SectorWagonReportVC */,
@@ -2736,6 +2759,7 @@
 				18704EDB1D19591F00996BF3 /* GetTeamANameDetails.m in Sources */,
 				36206C321DBA24CF007F7101 /* SpiderWagonReports.m in Sources */,
 				24A93A6E1D26365D00E02DAE /* GetPlayerDetailOnTimeOut.m in Sources */,
+				36BB85681DE947D400AAB943 /* DBManagerPlayerWormChart.m in Sources */,
 				36E57AAC1DB5F8110012A1B6 /* FixtureReportRecord.m in Sources */,
 				1876251E1D1544CD009374F8 /* BattingSummaryDetailsForScoreBoard.m in Sources */,
 				04679C181DC858BD00EB2CDF /* BowlerVsBatsmanTVCell.m in Sources */,
@@ -2785,6 +2809,7 @@
 				246125021D13C4FC004B85E7 /* OversorderRecord.m in Sources */,
 				185AFBD51DE2D8D700C5655E /* SpellReportCell.m in Sources */,
 				DCEFC8641D28B72C00451485 /* ChangeTossVC.m in Sources */,
+				36BB85651DE9479500AAB943 /* PlayerWormChartRecords.m in Sources */,
 				CE22AF291CFD58720026E0DA /* AppealRecord.m in Sources */,
 				187620FB1D1D00A3006E160F /* UpdateEndDay.m in Sources */,
 				CE3DD4221CFBFD4400D93A55 /* NewMatchSetUpVC.m in Sources */,
@@ -2824,6 +2849,7 @@
 				24D24CEE1CFEF4EE00CD75D2 /* CustomNavigationVC.m in Sources */,
 				0482ED191DD33D8500FF0D2D /* MCLineChartView.m in Sources */,
 				36EA71581DC876E0004B0C68 /* BowlingKPIVC.m in Sources */,
+				36BB856B1DE9480500AAB943 /* PlayerWormChart.m in Sources */,
 				181AD9821DD9CDA8002C369D /* PartnershipVC.m in Sources */,
 				CEC25DFA1D28F8A2009D99F0 /* PushSyncDBMANAGER.m in Sources */,
 				CE7C6DDC1D23E73D00B694D5 /* GetPlayerDetail.m in Sources */,
