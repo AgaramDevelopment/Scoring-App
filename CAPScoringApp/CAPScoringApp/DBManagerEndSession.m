@@ -1555,7 +1555,9 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"SESSIONEVENTS" :@"MSC250" :updateSQL];
+                NSString *updateSQLForSync = [NSString stringWithFormat:@"INSERT INTO SESSIONEVENTS (COMPETITIONCODE,MATCHCODE, INNINGSNO, DAYNO, SESSIONNO, SESSIONSTARTTIME,SESSIONENDTIME,BATTINGTEAMCODE, STARTOVER, ENDOVER,TOTALRUNS, TOTALWICKETS, DOMINANTTEAMCODE, SESSIONSTATUS) VALUES ('%@', '%@',%@, %@, %@, '%@', '%@', '%@', %@, %@, %@, %@, '%@', 1)", COMPETITIONCODE,MATCHCODE, INNINGSNO,DAYNO ,SESSIONNO, STARTTIME , ENDTIME,TEAMCODE, STARTOVER, ENDOVER , TOTALRUNS,TOTALWICKETS ,DOMINANTTEAMCODE];
+                
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"SESSIONEVENTS" :@"MSC250" :updateSQLForSync];
 
                 return YES;
                 
@@ -1714,7 +1716,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
 //SP_DELETEENDSESSION-----------------------------------------------------------------------------
 
 
--(BOOL) GetBallCodeForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) DAYNO: (NSString*) SESSIONNO   {
+-(BOOL) GetBallCodeForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSInteger*) DAYNO: (NSString*) SESSIONNO   {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
