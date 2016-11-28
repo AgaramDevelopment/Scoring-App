@@ -13,4 +13,5 @@
 @synthesize BowlerCode;
 @synthesize bowlingType;
 @synthesize bowlingStyle;
+@synthesize penaltyMate;
 @end

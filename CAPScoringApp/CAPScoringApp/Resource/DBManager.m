@@ -6264,7 +6264,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
         
-        NSString *query=[NSString stringWithFormat:@"SELECT BOWLERCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = (CASE WHEN '%@' = 1 THEN %@ - 1 ELSE %@ - 2 END) LIMIT 1", COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,ISOVERCOMPLETE,OVERNO,OVERNO];
+        NSString *query=[NSString stringWithFormat:@"SELECT BOWLERCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = (CASE WHEN '%@' = 1 THEN %@ - 1 ELSE %@ - 1 END) LIMIT 1", COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,ISOVERCOMPLETE,OVERNO,OVERNO];
         
         
         
@@ -6314,6 +6314,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 bowlerEvnt.BowlerName =  [self getValueByNull:statement :1];
                 bowlerEvnt.bowlingType =  [self getValueByNull:statement :2];
                 bowlerEvnt.bowlingStyle =  [self getValueByNull:statement :3];
+                bowlerEvnt.penaltyMate = [self getValueByNull:statement :4];
                 
                 [bowlerCodeArray addObject:bowlerEvnt];
                 

@@ -13,6 +13,7 @@
 @property(strong,nonatomic)NSString *BowlerCode;
 @property(strong,nonatomic)NSString *bowlingType;
 @property(strong,nonatomic)NSString *bowlingStyle;
+@property(strong,nonatomic)NSString *penaltyMate;
 
 
 //@property(strong,nonatomic)NSString *PlaerNameStrike_nonStrike;
