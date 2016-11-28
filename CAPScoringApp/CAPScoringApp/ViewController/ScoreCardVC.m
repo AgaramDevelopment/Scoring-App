@@ -32,7 +32,7 @@
     BowlingPlayerStatistics * objBowlingStatistics;
     NSString *wagonregiontext;
     NSString *regioncode;
-    UIImageView * Img_ball;
+    UIButton * Img_ball;
     BOOL isPitch_Img;
     
     NSIndexPath *selectedIndexPath;
@@ -1049,6 +1049,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         UIColor *fillColor = [UIColor redColor];
         shapeLayer.fillColor = fillColor.CGColor;
         UIColor *strokeColor = [UIColor redColor];
+        
+        
+        if ([objRecord.RUNS isEqualToString: @"1"]) {
+            
+            strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.RUNS isEqualToString: @"2"]){
+            strokeColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.RUNS isEqualToString: @"3"]){
+            strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.RUNS isEqualToString: @"4"]){
+            strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.RUNS isEqualToString: @"5"]){
+            strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.RUNS isEqualToString: @"6"]){
+            strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.RUNS isEqualToString: @"0"]){
+            
+            strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+            
+       }
+    //        else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
+//            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
+//        }
+
+        
         shapeLayer.strokeColor = strokeColor.CGColor;
         shapeLayer.lineWidth = 2.0f;
         shapeLayer.fillRule = kCAFillRuleNonZero;
@@ -1289,8 +1320,36 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 //            [Img_ball removeFromSuperview];
 //        }
 //
-        Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
-        Img_ball.image =[UIImage imageNamed:@"RedBall"];
+        Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition,yposition,20, 20)];
+        Img_ball.layer.cornerRadius =10;
+        Img_ball.layer.masksToBounds=YES;
+        //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+        
+        if ([objRecord.Runs isEqualToString: @"1"]) {
+            
+            Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.Runs isEqualToString: @"2"]){
+            Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.Runs isEqualToString: @"3"]){
+            Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.Runs isEqualToString: @"4"]){
+            Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.Runs isEqualToString: @"5"]){
+            Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.Runs isEqualToString: @"6"]){
+            Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+            
+        }else if ([objRecord.Runs isEqualToString: @"0"]){
+            
+            Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+            
+        }
+
         [self.batsmanCell.pitchMap_img addSubview:Img_ball];
         
         
@@ -1425,8 +1484,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 
                 if(!(xposition == 1 && yposition ==1)){
                     
-                    Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
-                    Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
+                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball.layer.cornerRadius =10;
+                    Img_ball.layer.masksToBounds=YES;
+                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
                     [self.batsmanCell.pitchMap_img addSubview:Img_ball];
                     
                     
@@ -1583,8 +1671,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             if(!(xposition == 1 && yposition ==1)){
             
             
-            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
-            Img_ball.image =[UIImage imageNamed:@"RedBall"];
+            Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
+           // Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                Img_ball.layer.cornerRadius =10;
+                Img_ball.layer.masksToBounds=YES;
+                //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                
+                if ([objRecord.Runs isEqualToString: @"1"]) {
+                    
+                    Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.Runs isEqualToString: @"2"]){
+                    Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.Runs isEqualToString: @"3"]){
+                    Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.Runs isEqualToString: @"4"]){
+                    Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.Runs isEqualToString: @"5"]){
+                    Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.Runs isEqualToString: @"6"]){
+                    Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.Runs isEqualToString: @"0"]){
+                    
+                    Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                    
+                }
+
             [self.batsmanCell.pitchMap_img addSubview:Img_ball];
                             
 
@@ -1747,8 +1864,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     //            [Img_ball removeFromSuperview];
                     //        }
                     //
-                    Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
-                    Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
+                   // Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball.layer.cornerRadius =10;
+                    Img_ball.layer.masksToBounds=YES;
+                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
                     [self.batsmanCell.pitchMap_img addSubview:Img_ball];
                     
                     
@@ -1913,8 +2059,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     //            [Img_ball removeFromSuperview];
                     //        }
                     //
-                    Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
-                    Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
+                   // Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball.layer.cornerRadius =10;
+                    Img_ball.layer.masksToBounds=YES;
+                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
                     [self.batsmanCell.pitchMap_img addSubview:Img_ball];
                     
                     
@@ -2072,8 +2247,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     //            [Img_ball removeFromSuperview];
                     //        }
                     //
-                    Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
-                    Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
+                    Img_ball.layer.cornerRadius =10;
+                    Img_ball.layer.masksToBounds=YES;
+                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
+                  //  Img_ball.image =[UIImage imageNamed:@"RedBall"];
                     [self.batsmanCell.pitchMap_img addSubview:Img_ball];
                     
                     
@@ -2229,8 +2433,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     //            [Img_ball removeFromSuperview];
                     //        }
                     //
-                    Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
-                    Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
+                   // Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball.layer.cornerRadius =10;
+                    Img_ball.layer.masksToBounds=YES;
+                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
                     [self.batsmanCell.pitchMap_img addSubview:Img_ball];
                     
                     
@@ -2392,6 +2625,38 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             UIColor *fillColor = [UIColor redColor];
             shapeLayer.fillColor = fillColor.CGColor;
             UIColor *strokeColor = [UIColor redColor];
+            
+            if ([objRecord.Runs isEqualToString: @"1"]) {
+                
+                strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"2"]){
+                strokeColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"3"]){
+                strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"4"]){
+                strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"5"]){
+                strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"6"]){
+                strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"0"]){
+                
+                strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                
+            }
+            //        else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
+            //            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
+            //        }
+            
+            
+
+            
             shapeLayer.strokeColor = strokeColor.CGColor;
             shapeLayer.lineWidth = 2.0f;
             shapeLayer.fillRule = kCAFillRuleNonZero;
@@ -2667,8 +2932,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 //                [Img_ball removeFromSuperview];
 //            }
             
-            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition-10,yposition-40,20, 20)];
-            Img_ball.image =[UIImage imageNamed:@"RedBall"];
+            Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition-10,yposition-40,20, 20)];
+           // Img_ball.image =[UIImage imageNamed:@"RedBall"];
+            Img_ball.layer.cornerRadius =10;
+            Img_ball.layer.masksToBounds=YES;
+            //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+            
+            if ([objRecord.Runs isEqualToString: @"1"]) {
+                
+                Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"2"]){
+                Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"3"]){
+                Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"4"]){
+                Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"5"]){
+                Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"6"]){
+                Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"0"]){
+                
+                Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                
+            }
+
             [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
             
         }
@@ -2783,8 +3077,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 
                 if(!(xposition == 1 && yposition ==1)){
                     
-                    Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
-                    Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition+10,yposition-20,20, 20)];
+                 //   Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball.layer.cornerRadius =10;
+                    Img_ball.layer.masksToBounds=YES;
+                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
                     [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
                     
                     
@@ -2946,8 +3269,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 if(!(xposition == 1 && yposition ==1) && (xposition!=0 && yposition !=0)){
                     
                     
-                    Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition-10,yposition-40,20, 20)];
-                    Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition-10,yposition-40,20, 20)];
+              //      Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball.layer.cornerRadius =10;
+                    Img_ball.layer.masksToBounds=YES;
+                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
                     [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
                     
                     
@@ -3116,8 +3468,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     //            [Img_ball removeFromSuperview];
                     //        }
                     //
-                    Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition-10,yposition-40,20, 20)];
-                    Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition-10,yposition-40,20, 20)];
+                 //   Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball.layer.cornerRadius =10;
+                    Img_ball.layer.masksToBounds=YES;
+                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
                     [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
                     
                     
@@ -3285,8 +3666,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     //            [Img_ball removeFromSuperview];
                     //        }
                     //
-                    Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition-10,yposition-40,20, 20)];
-                    Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition-10,yposition-40,20, 20)];
+                   // Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball.layer.cornerRadius =10;
+                    Img_ball.layer.masksToBounds=YES;
+                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
                     [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
                     
                     
@@ -3451,8 +3861,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     //            [Img_ball removeFromSuperview];
                     //        }
                     //
-                    Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition-10,yposition-40,20, 20)];
-                    Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition-10,yposition-40,20, 20)];
+                //    Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball.layer.cornerRadius =10;
+                    Img_ball.layer.masksToBounds=YES;
+                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
                     [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
                     
                     
@@ -3616,8 +4055,37 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     //            [Img_ball removeFromSuperview];
                     //        }
                     //
-                    Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition-10,yposition-40,20, 20)];
-                    Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition-10,yposition-40,20, 20)];
+                   // Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    Img_ball.layer.cornerRadius =10;
+                    Img_ball.layer.masksToBounds=YES;
+                    //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
                     [self.bowlerCell.BowlerwagonPitch_img addSubview:Img_ball];
                     
                     

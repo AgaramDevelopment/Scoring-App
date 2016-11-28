@@ -253,6 +253,8 @@
     
     BOOL isEditBallInLiveMode;
     
+    CMPopTipView *popTipView;
+    
 }
 
 
@@ -1754,6 +1756,7 @@
                          CGRect frame = self.CommonView.frame;
                          frame.origin.x =  self.commonViewXposition.constant;
                          self.CommonView.frame = frame;
+                         popTipView.frame=CGRectMake(popTipView.frame.origin.x-300,popTipView.frame.origin.y,popTipView.frame.size.width,popTipView.frame.size.height);
                          
                      }
                      completion:^(BOOL finished) {
@@ -1790,7 +1793,7 @@
                          CGRect frame = self.CommonView.frame;
                          frame.origin.x =  self.commonViewXposition.constant;
                          self.CommonView.frame = frame;
-                         
+                         popTipView.frame=CGRectMake(popTipView.frame.origin.x+300,popTipView.frame.origin.y,popTipView.frame.size.width,popTipView.frame.size.height);
                          
                          //self.sideView.transform = CGAffineTransformScale(CGAffineTransformIdentity, 1.0, 1.0);
                      }
@@ -2453,6 +2456,8 @@
     if(self.isEditMode){ //Edit Mode
         
         if([self checkRunsByLB_B] && [self iswicketPending]){
+            
+            
             [self calculateRunsOnEndBall];
             
             UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
@@ -2542,6 +2547,8 @@
              (selectedNRS == nil || [selectedNRS isEqualToString:@""] ? @"1" : selectedNRS )://FIELDINGEVENTSNETRUNS:
              (isfieldingeventundo == YES ? @"D":@"E")//FIELDINGEVENTSFLAG
              ];
+            DBManager * objDBManager =[[DBManager alloc]init];
+            [objDBManager UpdateInningsEventsForPlayers : fetchSEPageLoadRecord.strickerPlayerCode  : fetchSEPageLoadRecord.nonstrickerPlayerCode : fetchSEPageLoadRecord.currentBowlerPlayerCode: self.competitionCode : self.matchCode : ([fetchSEPageLoadRecord.BATTINGTEAMCODE isEqualToString : fetchSEPageLoadRecord.TEAMACODE] ? fetchSEPageLoadRecord.TEAMAWICKETKEEPER : fetchSEPageLoadRecord.TEAMBWICKETKEEPER)  : fetchSEPageLoadRecord.INNINGSNO];
             
             
             if(!isEditBallInLiveMode){//Edit mode
@@ -2559,6 +2566,8 @@
                 [self resetBallEventObject];
                 [self resetAllButtonOnEndBall];
                 [self viewDidLoad];
+                //edit odd number to even number change striker and nonstricker
+                //[self loadViewOnEditMode];
                 
             }
         }
@@ -14690,7 +14699,7 @@
     UIButton * contentbutton4 = Rightrotation;
     
     
-    CMPopTipView *popTipView;
+    
     if (contentView) {
         popTipView = [[CMPopTipView alloc] initWithCustomView:contentView :contentButton1 :contentbutton2 :contentbutton3 :contentbutton4];
     }

@@ -19,7 +19,7 @@
     BOOL isLength;
     BOOL isLine;
     DBManagerpitchmapReport * DBMpitchReport;
-     UIImageView * Img_ball;
+     UIButton * Img_ball;
     
     BOOL isSelectStriker;
     
@@ -245,8 +245,36 @@
         
         if(!(xposition == 1 && yposition == 1) && (xposition!=0 && yposition !=0)){
             
-            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(xposition+(xposition/1.12),yposition+(yposition/1.5),20, 20)];
-            Img_ball.image =[UIImage imageNamed:@"RedBall"];
+            Img_ball =[[UIButton alloc]initWithFrame:CGRectMake(xposition+(xposition/1.12),yposition+(yposition/1.5),20, 20)];
+            //Img_ball.image =[UIImage imageNamed:@"RedBall"];
+            
+            Img_ball.layer.cornerRadius =10;
+            Img_ball.layer.masksToBounds=YES;
+            if ([objRecord.Runs isEqualToString: @"1"]) {
+                
+                Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"2"]){
+                Img_ball.backgroundColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"3"]){
+                Img_ball.backgroundColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"4"]){
+                Img_ball.backgroundColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"5"]){
+                Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"6"]){
+                Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                
+            }else if ([objRecord.Runs isEqualToString: @"0"]){
+                
+                Img_ball.backgroundColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                
+            }
+
             [self.pitch_Img addSubview:Img_ball];
             
         
