@@ -22,6 +22,7 @@
 #import "PartnershipVC.h"
 #import "FieldingReportVC.h"
 #import "SpellReportVC.h"
+#import "PlayerWormChartVC.h"
 
 @interface ReportVC ()<UIScrollViewDelegate>
 {
@@ -40,6 +41,7 @@
     PartnershipVC * objPartnershipvc;
     FieldingReportVC * FieldingReport;
     SpellReportVC * SpellReport;
+    PlayerWormChartVC *playerWormChartVC;
 }
 
 @end
@@ -88,7 +90,7 @@ NSMutableArray * objhartlistArray;
         
 //         objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Partnership Chart",@"Spell Report",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Player Worm Chart",@"Fielding Report", nil];
         
-    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Fielding Report",@"Spell Report",@"Partnership Chart", nil];
+    objhartlistArray=[[NSMutableArray alloc]initWithObjects:@"Commentary",@"Pitch Map",@"Manhattan",@"Spider",@"Sector",@"Worm",@"Batsman KPI",@"Bowler KPI",@"Batsman Vs Bowler",@"Bowler Vs Batsman",@"Fielding Report",@"Spell Report",@"Partnership Chart",@"Player Worm Chart", nil];
     }
     
     
@@ -225,6 +227,7 @@ NSMutableArray * objhartlistArray;
     {
          NSLog(@"%d",objBtn.tag);
         
+        
         SpellReport = [[SpellReportVC alloc]initWithNibName:@"SpellReportVC" bundle:nil];
         SpellReport.matchCode = self.matchCode;
         SpellReport.matchTypeCode =self.matchTypeCode;
@@ -249,7 +252,12 @@ NSMutableArray * objhartlistArray;
     else if(objBtn.tag == 14)
     {
         NSLog(@"%d",objBtn.tag);
+        if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){
+
         [self setSession];
+        }else{
+            [self setPlayerWormChartView];
+        }
     }
     else if(objBtn.tag == 15)
     {
@@ -354,7 +362,19 @@ NSMutableArray * objhartlistArray;
     [self.view addSubview:wormReportVC.view];
 }
 
-
+-(void) setPlayerWormChartView{
+    playerWormChartVC = [[PlayerWormChartVC alloc]initWithNibName:@"PlayerWormChartVC" bundle:nil];
+    playerWormChartVC.matchCode = self.matchCode;
+    playerWormChartVC.matchTypeCode =self.matchTypeCode;
+    playerWormChartVC.compititionCode = self.competitionCode;
+    playerWormChartVC.fstInnShortName = self.fstInnShortName;
+    playerWormChartVC.secInnShortName = self.secInnShortName;
+    playerWormChartVC.thrdInnShortName = self.thrdInnShortName;
+    playerWormChartVC.frthInnShortName = self.frthInnShortName;
+    
+    playerWormChartVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:playerWormChartVC.view];
+}
 
 
 -(void) setSpiderView{

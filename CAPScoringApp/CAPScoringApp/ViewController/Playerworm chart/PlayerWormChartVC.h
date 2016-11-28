@@ -20,6 +20,8 @@
 @property(strong,nonatomic)NSString *thrdInnShortName;
 @property(strong,nonatomic)NSString *frthInnShortName;
 
+
+
 - (IBAction)did_click_inn_one:(id)sender;
 - (IBAction)did_click_inn_four:(id)sender;
 - (IBAction)did_click_inn_two:(id)sender;
