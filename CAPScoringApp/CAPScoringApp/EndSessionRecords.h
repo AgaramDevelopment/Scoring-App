@@ -89,6 +89,6 @@
 
 -(void) UpdateEndSession:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSNumber*)INNINGSNO:(NSString*)DAYNO:(NSString*)SESSIONNO :(NSString *)SESSIONSTARTTIME:(NSString*)SESSIONENDTIME: (NSString*)DOMINANTTEAMCODE : (NSString*)INNINGSNO:(NSString*)BATTINGTEAMCODE :(NSString*)DAYNO;
 
--(void) DeleteEndSession:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)INNINGSNO:(NSString*)DAYNO:(NSString*)SESSIONNO;
+-(void) DeleteEndSession:(NSString *)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)INNINGSNO:(NSString*)DAYNO:(NSString*)sesaksionNo;
 
 @end

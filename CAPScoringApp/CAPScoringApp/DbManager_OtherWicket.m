@@ -1351,7 +1351,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY 	SET WICKETNO = '',WICKETTYPE = '',	FIELDERCODE = ''	WHERE COMPETITIONCODE = '%@'	AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@'		AND INNINGSNO = '%@'	AND BATSMANCODE = '%@'",COMPETITIONCODE, MATCHCODE,TEAMNAME,INNINGSNO,WICKETPLAYER];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET WICKETNO = '',WICKETTYPE = '',	FIELDERCODE = ''	WHERE COMPETITIONCODE = '%@'	AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@'		AND INNINGSNO = '%@'	AND BATSMANCODE = '%@'",COMPETITIONCODE, MATCHCODE,TEAMNAME,INNINGSNO,WICKETPLAYER];
         
         const char *selectStmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
@@ -1362,7 +1362,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BATTINGSUMMARY" :@"MSC251" :updateSQL];
+            NSString *updateSQLForSync = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET WICKETNO = NULL ,WICKETTYPE = NULL,	FIELDERCODE = NULL	WHERE COMPETITIONCODE = '%@'	AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@'		AND INNINGSNO = '%@'	AND BATSMANCODE = '%@'",COMPETITIONCODE, MATCHCODE,TEAMNAME,INNINGSNO,WICKETPLAYER];
+                
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BATTINGSUMMARY" :@"MSC251" :updateSQLForSync];
                 return YES;
                 
             }
@@ -1421,7 +1423,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 -(BOOL)  UpdateBattingSummaryDetailForDeleteOtherwicket: (NSString*) COMPETITIONCODE: (NSString*) MATCHCODE:(NSString*) TEAMCODE: (NSNumber*) INNINGSNO : (NSNumber*) WICKETNO{
-    
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;

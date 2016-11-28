@@ -268,7 +268,7 @@ DBManagerEndSession *dbEndSession;
        }
        else
        {
-           OVERBALLNO = [NSString stringWithFormat:@"%d.%d",OVERNO,BALLNO];
+           OVERBALLNO = [NSString stringWithFormat:@"%d.%d",[OVERNO intValue],[BALLNO intValue]];
        }
 	   if(OVERBALLNO == nil)
        {
@@ -296,7 +296,7 @@ DBManagerEndSession *dbEndSession;
                         {
                             if(![dbEndSession GetDayNoForInsertEndSession :COMPETITIONCODE : MATCHCODE :INNINGSNO:  DAYNO  ])
                             {
-                                [dbEndSession InsertDayEventForInsertEndSession :COMPETITIONCODE : MATCHCODE :INNINGSNO:  DAYNO : TEAMCODE : RUNS  : OVERBALLNO : WICKETS];
+                                [dbEndSession InsertDayEventForInsertEndSession :COMPETITIONCODE : MATCHCODE :INNINGSNO:  DAYNO : TEAMCODE : RUNS  : ENDOVER : WICKETS];
                                 
                                 
                                 
@@ -354,23 +354,25 @@ DBManagerEndSession *dbEndSession;
 
 //SP_DELETEENDSESSION---------------------------------------------------------------------------
 
--(void) DeleteEndSession:(NSString *)COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) DAYNO:(NSString*) SESSIONNO
+-(void) DeleteEndSession:(NSString *)COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) INNINGSNO:(NSString*) DayNo:(NSString*) sessionNo
 
 {
    
+    NSInteger dayno = [DayNo integerValue];
     
-if(![dbEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCODE :DAYNO :SESSIONNO] && ![dbEndSession GetBallCodeWithAddDayNoForDeleteEndSession: COMPETITIONCODE : MATCHCODE : DAYNO ])
+    
+if(![dbEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCODE :dayno-1 :sessionNo] && ![dbEndSession GetBallCodeWithAddDayNoForDeleteEndSession: COMPETITIONCODE : MATCHCODE : DayNo ])
     {
         
-        if(![dbEndSession GetSessionNoForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO ])
+        if(![dbEndSession GetSessionNoForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : sessionNo ])
         {
             if(![dbEndSession GetSessionNoWithAddDayNoForDeleteEndSession: COMPETITIONCODE :MATCHCODE :INNINGSNO :DAYNO])
             {
              
-            [dbEndSession DeleteSessionEventsForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : SESSIONNO];
+            [dbEndSession DeleteSessionEventsForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : sessionNo];
                 
                 
-                if ([SESSIONNO isEqualToString:@"3"])
+                if ([sessionNo isEqual:@"3"])
                 {
                     
                     [dbEndSession DeleteDayEventsForDeleteEndSession:COMPETITIONCODE :MATCHCODE :INNINGSNO :DAYNO];

@@ -14,7 +14,7 @@
 @implementation Utitliy
 
 +(NSString *)getIPPORT{
-    return  @"192.168.1.49:8096";
+    return  @"192.168.1.49:8096";    //betaioswebservice.upca.tv
 }
 
 

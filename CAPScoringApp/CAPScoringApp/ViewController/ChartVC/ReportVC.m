@@ -63,7 +63,9 @@ NSMutableArray * objhartlistArray;
 
 - (void)viewDidLayoutSubviews
 {
+    [super viewWillLayoutSubviews];
     [self.scrolllistview setContentSize:CGSizeMake(objhartlistArray.count*200, 80)];
+    //[self.scrolllistview setContentOffset:CGPointMake(objhartlistArray.count*200, 80)];
 }
 -(void)customnavigationmethod
 {
@@ -99,6 +101,7 @@ NSMutableArray * objhartlistArray;
     
     
    // self.scrolllistview.frame =CGRectMake(0,self.view.frame.origin.y,764, 70);
+    
     
         for(int i = 0; i < objhartlistArray.count; i++)
         {
@@ -156,13 +159,15 @@ NSMutableArray * objhartlistArray;
       //  [self setBowlerVsBatsmanView];
         [self setPitchMap];
         
-
+   [self.scrolllistview setContentSize:CGSizeMake(2800, 80)];
         
     }
     else if(objBtn.tag == 3)
     {
          NSLog(@"%d",objBtn.tag);
         [self setManhattan];
+      //  [self.scrolllistview setContentSize:CGSizeMake(2800, 80)];
+      //  [self.view addSubview:SpellReport.view];
        
         
     }
@@ -221,6 +226,7 @@ NSMutableArray * objhartlistArray;
         
         FieldingReport.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
         [self.view addSubview:FieldingReport.view];
+        
 
     }
     else if(objBtn.tag == 12)
@@ -239,7 +245,7 @@ NSMutableArray * objhartlistArray;
         SpellReport.frthInnShortName = self.frthInnShortName;
         
         SpellReport.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
-        [self.view addSubview:SpellReport.view];
+        
 
 
     }
@@ -265,7 +271,12 @@ NSMutableArray * objhartlistArray;
 
 
     }
-  //  [self viewDidLayoutSubviews];
+    //self.scrolllistview.delaysContentTouches = NO;
+    
+   // self.scrolllistview.canCancelContentTouches = YES;
+    
+    NSLog(@"scrolllistview contentsize:%f",self.scrolllistview.contentSize.width);
+   // NSLog(@"scrolllistview contentOffset:%f",self.scrolllistview.contentOffset);
 }
 
 - (IBAction)btn_back:(id)sender {
@@ -317,6 +328,7 @@ NSMutableArray * objhartlistArray;
     objPitchview.frthInnShortName = self.frthInnShortName;
     
     objPitchview.view.frame =CGRectMake(0,self.scrolllistview.frame.origin.y+self.scrolllistview.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    
     [self.view addSubview:objPitchview.view];
 }
 
