@@ -148,6 +148,10 @@
 @synthesize UMPIRE1NAME;
 @synthesize UMPIRE2NAME;
 
+//@synthesize playercode;
+//@synthesize playerName;
+//@synthesize bowlingType;
+//@synthesize bowlingStyle;
 
 BOOL overNo;
 BOOL  getOverStatus;
@@ -156,6 +160,7 @@ BOOL  getOverStatus;
 @synthesize REMBALLS;
 @synthesize BallGridDetails;
 
+NSString *bowlerCode;
 
 -(void) fetchSEPageLoadDetails :(NSString*) COMPETITIONCODE :(NSString *)MATCHCODE{
     DBManager *db = [[DBManager alloc]init];
@@ -607,6 +612,28 @@ BOOL  getOverStatus;
         
     getBowlingTeamPlayers = [db GETBOWLINGTEAMPLAYERS:penaltyBowlerCode MATCHCODE:MATCHCODE BOWLINGTEAMCODE:BOWLINGTEAMCODE COMPETITIONCODE:COMPETITIONCODE BATTINGTEAMCODE:BATTINGTEAMCODE INNINGSNO:INNINGSNO ISOVERCOMPLETE:[NSString stringWithFormat:@"%d", ISOVERCOMPLETE] BATTEAMOVERS:batTeamOver];
         
+        
+        
+        
+            
+    for (int i = 0; i < getBowlingTeamPlayers.count; i++) {
+        
+        BowlerEvent *fsePg = [getBowlingTeamPlayers objectAtIndex:i];
+
+        
+       NSString *playercode = fsePg.BowlerCode;
+
+        
+            if([playercode isEqualToString: penaltyBowlerCode]){
+                
+                [getBowlingTeamPlayers exchangeObjectAtIndex:0 withObjectAtIndex:i];
+                
+                break;
+           
+                
+            }
+            
+    }
        
     
        
