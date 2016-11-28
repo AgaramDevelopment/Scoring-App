@@ -472,7 +472,7 @@
     
     self.View_Appeal.hidden = YES;
     
-    isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue<=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]==4)?YES:NO;
+//    isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue<=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]==4)?YES:NO;
     
     //    self.sideBar = [[CDRTranslucentSideBar alloc] init];
     //    self.sideBar.sideBarWidth = 200;
@@ -2366,9 +2366,16 @@
     }else if(tableView == currentBowlersTableView){
         
         BowlerEvent *bowlerEvent = [fetchSEPageLoadRecord.getBowlingTeamPlayers objectAtIndex:indexPath.row];
-    //[fetchSEPageLoadRecord.getBowlingTeamPlayers replaceObjectAtIndex:index withObject:0];
+    
         
-        cell.textLabel.text = bowlerEvent.BowlerName;
+        
+      //  if ([bowlerEvent.penaltyMate isEqualToString:bowlerEvent.BowlerCode]) {
+            
+            cell.textLabel.text = bowlerEvent.BowlerName;
+        
+     //   }
+        
+        
     }else if(tableView == nonstrickerTableView){
         SelectPlayerRecord *battingEvent = [nonStrickerList objectAtIndex:indexPath.row];
         cell.textLabel.text = battingEvent.playerName;
@@ -2759,7 +2766,7 @@
                 else if (isTargetReached)
                 {
                     UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Target achieved do you want to continue?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
-                    [alter show];
+                  [alter show];
                     [alter setTag:2002];
                     
                     
@@ -6287,7 +6294,7 @@
         
         else if(isAppealSelected ==YES){
             [self selectedViewBg:_view_appeal];
-            isAppealSelected= NO;
+            //isAppealSelected= NO;
             [table_Appeal reloadData];
             int indx=0;
             int selectePosition = -1;
@@ -7462,6 +7469,7 @@
             self.lbl_umpirename.text=record.UMPIRENAME;
             self.lbl_batsmen.text=record.BATSMANNAME;
             _view_table_select.hidden=NO;
+            isAppealSelected = NO;
         }
         
         else if(isAppealSelected && self.ballEventRecord.objIsappeal!=nil && self.ballEventRecord.objIsappeal == objAppealrecord.MetaSubCode){
@@ -8470,6 +8478,13 @@
             
             BowlerEvent *bowlEvent = [fetchSEPageLoadRecord.getBowlingTeamPlayers objectAtIndex:indexPath.row];
          
+            [self lastIndexPath];
+            
+            
+//            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:(_bowlerIndex - 1) inSection:(numberOfSections - 1)];
+//
+            
+           // NSIndexPath *indexpath = [NSIndexPath indexPathForRow:(_bowlerIndex -1) inSection:<#(NSInteger)#>]
             
             if (fetchSEPageLoadRecord.BATTEAMOVERS > 0) {
                 
@@ -8627,6 +8642,14 @@
 }
 
 
+
+-(NSIndexPath*)lastIndexPath
+{
+    NSInteger sectionsAmount = [currentBowlersTableView numberOfSections];
+    NSInteger rowsAmount = [currentBowlersTableView numberOfRowsInSection:sectionsAmount-1];
+    NSIndexPath *lastIndexPath = [NSIndexPath indexPathForRow:(rowsAmount - 1) inSection:(sectionsAmount - 1)];
+    return lastIndexPath;
+}
 
 
 - (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -10006,14 +10029,10 @@
     [self hideTableViewOnStrickerNonStrickerAndBowlerSelect];
     [self resetBowlerBatsmanTableView];
     
-    if (fetchSEPageLoadRecord.BATTEAMOVERS > 0) {
-
    
-    NSInteger indexPath = [[NSUserDefaults standardUserDefaults] integerForKey:@"key1"];
     
-    //[fetchSEPageLoadRecord.getBowlingTeamPlayers replaceObjectAtIndex:indexPath withObject:0];
-        
-    }
+  
+    
     
     if(!isBowlerOpen){
         isStrickerOpen = NO;
@@ -10303,7 +10322,8 @@
     
     //CHECK Wickets ,target achived,Innings completed
 
-    isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue <=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]>1)?YES:NO;
+//    isTargetReached = (fetchSEPageLoadRecord.RUNSREQUIRED.intValue <=0 && [fetchSEPageLoadRecord.INNINGSNO intValue]>1)?YES:NO;
+    
     over=[NSString stringWithFormat:@"%d.%d",fetchSEPageLoadRecord.BATTEAMOVERS,fetchSEPageLoadRecord.BATTEAMOVRBALLS].floatValue;
 
     if(fetchSEPageLoadRecord.BATTEAMWICKETS==10 && (![fetchSEPageLoadRecord.INNINGSSTATUS isEqualToString:@"1"])){

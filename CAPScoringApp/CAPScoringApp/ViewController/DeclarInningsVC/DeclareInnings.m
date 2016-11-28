@@ -213,9 +213,11 @@
             {
                 //OVERBALLNO = (OVERNO(".")BALLNO);
                 
-                OVERBALLNO = [NSString stringWithFormat:@"%d.@%d" ,overNo,BALLNO];
+                OVERBALLNO = [NSString stringWithFormat:@"%@.%@" ,OVERNO,BALLNO];
             }
             
+           
+
             WICKETS=[objDBManagerDeclareInnings GetWicketForUpdateDeclareInnings : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO];
             
             [objDBManagerDeclareInnings UpdateInningsEventForUpdateDeclareInnings:TEAMCODE :TOTALRUN :OVERBALLNO :WICKETS :ISDECLARE :COMPETITIONCODE :MATCHCODE :INNINGSNO];

@@ -34,6 +34,11 @@
 @property(strong,nonatomic)NSNumber *TARGETRUNS;
 @property(strong,nonatomic)NSNumber *REMBALLS;
 
+//@property(strong,nonatomic)NSString *playercode;
+//@property(strong,nonatomic)NSString *playerName;
+//@property(strong,nonatomic)NSString *bowlingType;
+//@property(strong,nonatomic)NSString *bowlingStyle;
+
 
 
 

@@ -43,6 +43,11 @@
 		048882DD1DC1DF51007528E0 /* BatsmanVsBowlerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048882DB1DC1DF51007528E0 /* BatsmanVsBowlerVC.xib */; };
 		048B5A9E1D0AF1A7009F12B8 /* WicketTypeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */; };
 		048F6F591CFFFEE600F2C5F5 /* FieldingFactorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048F6F581CFFFEE600F2C5F5 /* FieldingFactorCell.m */; };
+		04960F551DE9649F00B23DA5 /* DBManagerPlayerWormChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04960F501DE9649F00B23DA5 /* DBManagerPlayerWormChart.m */; };
+		04960F561DE9649F00B23DA5 /* PlayerWormChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04960F521DE9649F00B23DA5 /* PlayerWormChart.m */; };
+		04960F571DE9649F00B23DA5 /* PlayerWormChartRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 04960F541DE9649F00B23DA5 /* PlayerWormChartRecords.m */; };
+		04960F631DE9676D00B23DA5 /* PlayerWormChartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04960F611DE9676D00B23DA5 /* PlayerWormChartVC.m */; };
+		04960F641DE9676D00B23DA5 /* PlayerWormChartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04960F621DE9676D00B23DA5 /* PlayerWormChartVC.xib */; };
 		04C325851D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C325841D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.m */; };
 		04C325881D6320E500F0E3A0 /* DBManagerLastInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C325871D6320E500F0E3A0 /* DBManagerLastInstance.m */; };
 		04EC77881D2956A5005B2608 /* BALLEVENTSPushRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC77871D2956A5005B2608 /* BALLEVENTSPushRecords.m */; };
@@ -434,6 +439,15 @@
 		048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WicketTypeRecord.m; sourceTree = "<group>"; };
 		048F6F571CFFFEE600F2C5F5 /* FieldingFactorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldingFactorCell.h; sourceTree = "<group>"; };
 		048F6F581CFFFEE600F2C5F5 /* FieldingFactorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldingFactorCell.m; sourceTree = "<group>"; };
+		04960F4F1DE9649F00B23DA5 /* DBManagerPlayerWormChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManagerPlayerWormChart.h; path = "ViewController/Playerworm chart/DBManagerPlayerWormChart.h"; sourceTree = "<group>"; };
+		04960F501DE9649F00B23DA5 /* DBManagerPlayerWormChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManagerPlayerWormChart.m; path = "ViewController/Playerworm chart/DBManagerPlayerWormChart.m"; sourceTree = "<group>"; };
+		04960F511DE9649F00B23DA5 /* PlayerWormChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerWormChart.h; path = "ViewController/Playerworm chart/PlayerWormChart.h"; sourceTree = "<group>"; };
+		04960F521DE9649F00B23DA5 /* PlayerWormChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerWormChart.m; path = "ViewController/Playerworm chart/PlayerWormChart.m"; sourceTree = "<group>"; };
+		04960F531DE9649F00B23DA5 /* PlayerWormChartRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerWormChartRecords.h; path = "ViewController/Playerworm chart/PlayerWormChartRecords.h"; sourceTree = "<group>"; };
+		04960F541DE9649F00B23DA5 /* PlayerWormChartRecords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerWormChartRecords.m; path = "ViewController/Playerworm chart/PlayerWormChartRecords.m"; sourceTree = "<group>"; };
+		04960F601DE9676D00B23DA5 /* PlayerWormChartVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerWormChartVC.h; path = "ViewController/Playerworm chart/PlayerWormChartVC.h"; sourceTree = "<group>"; };
+		04960F611DE9676D00B23DA5 /* PlayerWormChartVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerWormChartVC.m; path = "ViewController/Playerworm chart/PlayerWormChartVC.m"; sourceTree = "<group>"; };
+		04960F621DE9676D00B23DA5 /* PlayerWormChartVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerWormChartVC.xib; path = "ViewController/Playerworm chart/PlayerWormChartVC.xib"; sourceTree = "<group>"; };
 		04C325831D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FETCHSELASTINSTANCEDTLS.h; sourceTree = "<group>"; };
 		04C325841D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FETCHSELASTINSTANCEDTLS.m; sourceTree = "<group>"; };
 		04C325861D6320E500F0E3A0 /* DBManagerLastInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerLastInstance.h; sourceTree = "<group>"; };
@@ -1778,6 +1792,22 @@
 			name = SpiderWagonReportVC;
 			sourceTree = "<group>";
 		};
+		36BB855A1DE9460D00AAB943 /* PlayerWormChart */ = {
+			isa = PBXGroup;
+			children = (
+				04960F4F1DE9649F00B23DA5 /* DBManagerPlayerWormChart.h */,
+				04960F501DE9649F00B23DA5 /* DBManagerPlayerWormChart.m */,
+				04960F511DE9649F00B23DA5 /* PlayerWormChart.h */,
+				04960F521DE9649F00B23DA5 /* PlayerWormChart.m */,
+				04960F531DE9649F00B23DA5 /* PlayerWormChartRecords.h */,
+				04960F541DE9649F00B23DA5 /* PlayerWormChartRecords.m */,
+				04960F601DE9676D00B23DA5 /* PlayerWormChartVC.h */,
+				04960F611DE9676D00B23DA5 /* PlayerWormChartVC.m */,
+				04960F621DE9676D00B23DA5 /* PlayerWormChartVC.xib */,
+			);
+			name = PlayerWormChart;
+			sourceTree = "<group>";
+		};
 		36DF65E21DB750D10038C1AE /* PlayingSquad */ = {
 			isa = PBXGroup;
 			children = (
@@ -2056,6 +2086,7 @@
 		CE0018361CF4308000668D8B /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				36BB855A1DE9460D00AAB943 /* PlayerWormChart */,
 				36E4BF781DD317E900B8E344 /* BatsmanKPI */,
 				36EA71541DC87694004B0C68 /* BowlingKPIVC */,
 				36E4FD331DC1CDCF00BF47B7 /* SectorWagonReportVC */,
@@ -2581,6 +2612,7 @@
 				18DE9F661DB60897001013B6 /* LiveMatchCell.xib in Resources */,
 				187621201D1D625A006E160F /* EndDayTVC.xib in Resources */,
 				1876210A1D1D3749006E160F /* EndDayVC.xib in Resources */,
+				04960F641DE9676D00B23DA5 /* PlayerWormChartVC.xib in Resources */,
 				36DF65ED1DB77DB10038C1AE /* PlayingSquadCell.xib in Resources */,
 				187462231D9BC7C60093721B /* BatsManINOutTime.xib in Resources */,
 				DCEFC86A1D28B75300451485 /* ChangeTeamVC.xib in Resources */,
@@ -2627,6 +2659,7 @@
 				DCEFC87F1D28BC6800451485 /* GetStrickerNonStrickerPlayerCode.m in Sources */,
 				DCEFC87E1D28BC4E00451485 /* GetPlayerDetailOnAbsentHurt.m in Sources */,
 				36347C001DB4CC7600ADEF9F /* FixtureAndResultsVC.m in Sources */,
+				04960F561DE9649F00B23DA5 /* PlayerWormChart.m in Sources */,
 				18761F2F1D82EC4A00D52F79 /* BowlerStaticsRecord.m in Sources */,
 				DCEFC87D1D28BC0500451485 /* FollowOn.m in Sources */,
 				DCEFC87C1D28BBF400451485 /* EndSessionRecords.m in Sources */,
@@ -2661,6 +2694,7 @@
 				047669DD1D14229600572E39 /* PenaltyDetailsRecord.m in Sources */,
 				1878CD9A1D1167D700A80BEE /* DBManagerScoreCard.m in Sources */,
 				18704EEB1D197E4F00996BF3 /* InsertUpdateMatchResult.m in Sources */,
+				04960F631DE9676D00B23DA5 /* PlayerWormChartVC.m in Sources */,
 				CEC25E001D28FE1B009D99F0 /* MatchTeamPlayerDetailsPushRecord.m in Sources */,
 				CE1FBF581CF96EDB00A9B6FE /* TossDeatilsEvent.m in Sources */,
 				DC27107D1D25B9A40011C7B0 /* FollowOnRecords.m in Sources */,
@@ -2770,6 +2804,7 @@
 				24E7B4BB1D238D8C00EF0D55 /* DBManagerEndInnings.m in Sources */,
 				1883B5F41D867DF6009E9CB3 /* BowlerStrickPitchRecord.m in Sources */,
 				DCEFC8761D28B82600451485 /* DBManagerChangeTeamInsert.m in Sources */,
+				04960F551DE9649F00B23DA5 /* DBManagerPlayerWormChart.m in Sources */,
 				186B00C51DD1D606008E00D4 /* ToolTipRecord.m in Sources */,
 				36DF65E61DB751830038C1AE /* PlayingSquadVC.m in Sources */,
 				187462221D9BC7C60093721B /* BatsManINOutTime.m in Sources */,
@@ -2779,6 +2814,7 @@
 				24EFE7801D2823A40073DE5C /* TossDetailRecord.m in Sources */,
 				36E4BF7C1DD3184100B8E344 /* BatsmanKPIVC.m in Sources */,
 				CE1FBF671CF9A05B00A9B6FE /* OfficialMasterRecord.m in Sources */,
+				04960F571DE9649F00B23DA5 /* PlayerWormChartRecords.m in Sources */,
 				1877776D1D2232FA002F31E5 /* Batsmancell.m in Sources */,
 				DCEFC8721D28B7C300451485 /* InningsEventTossDetail.m in Sources */,
 				CEC25DFD1D28F8F0009D99F0 /* MatchRegistrationPushRecord.m in Sources */,
@@ -3030,8 +3066,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Annamalai T (G4BPEMU9A9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Annamalai T (G4BPEMU9A9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CAPScoringApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -3046,8 +3082,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Annamalai T (G4BPEMU9A9)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Annamalai T (G4BPEMU9A9)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = CAPScoringApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
