@@ -10,10 +10,10 @@
 
 @interface PlayerWormChart : NSObject
 
-@property(nonatomic,assign)NSInteger *MAXINN;
-@property(nonatomic,assign)NSInteger *ICOUNT;
-@property(nonatomic,assign)NSInteger *LOOPCOUNT;
-@property(nonatomic,assign)NSInteger *PERFORMANCELOOPCOUNT;
+@property(nonatomic,assign)NSInteger MAXINN;
+@property(nonatomic,assign)NSInteger ICOUNT;
+@property(nonatomic,assign)NSInteger LOOPCOUNT;
+@property(nonatomic,assign)NSInteger PERFORMANCELOOPCOUNT;
 
 @property(strong,nonatomic)NSString *MAXOVERSTRIKER;
 @property(strong,nonatomic)NSString *MINOVERSTRIKER;
@@ -46,5 +46,8 @@
 @property(strong,nonatomic)NSString *STRIKERRUNS;
 @property(strong,nonatomic)NSString *BOWLERRUNS;
 
+@property(strong,nonatomic)NSMutableArray *playerWormList;
+
+-(void)fetchPlayerWormChart: (NSString*) COMPETITIONCODE :(NSString*)MATCHCODE;
 
 @end
