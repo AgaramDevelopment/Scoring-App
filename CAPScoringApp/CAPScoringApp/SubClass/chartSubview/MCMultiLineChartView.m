@@ -39,6 +39,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
 
 @property (nonatomic, assign) CGFloat cachedMaxHeight;
 @property (nonatomic, assign) CGFloat cachedMinHeight;
+@property (nonatomic,strong) NSMutableArray *wicketDetails;
 
 @end
 
@@ -181,6 +182,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
 }
 
 - (void)reloadChartDataSource {
+    _wicketDetails = [[NSMutableArray alloc]init];
     _cachedMaxHeight = kChartViewUndefinedCachedHeight;
     _cachedMinHeight = kChartViewUndefinedCachedHeight;
     
@@ -380,47 +382,82 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                 
                 
                 
-                NSMutableArray * wicket =[self.delegate lineChartView:self informationOfWicketInSection:lineNumber];
-                CGFloat position = 0;
-                for (int i=0; wicket.count > i; i++) {
+                PlayerWormChartRecords * wicket =[self.delegate lineChartView :self informationOfWicketInSection:lineNumber index:index];
+                
+                if(![wicket.WICKETNO isEqual:@"0"]){
                     
-                    WormWicketRecord * record =(WormWicketRecord *)[wicket objectAtIndex:i];
                     
-                    if([textLabel.text isEqualToString:record.wicketOver])
-                    {
-                        if(![record.wicketNo isEqualToString:@"0"] && record.wicketNo!= nil)
-                        {
                             UIButton * wicket_Btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
                             CGColorRef color = [self.delegate lineChartView:self lineColorWithLineNumber:lineNumber].CGColor;
                             
-                            wicket_Btn.tag = [record.tag intValue];
-                            wicket_Btn.center = CGPointMake(xOffset+position, yOffset);
+                            wicket_Btn.tag = _wicketDetails.count;
+                            wicket_Btn.center = CGPointMake(xOffset, yOffset);
                             //[wicket_Btn setImage:[UIImage imageNamed:@"ballImg"] forState:UIControlStateNormal];
                             wicket_Btn.layer.cornerRadius = 12;
                             wicket_Btn.layer.borderColor=color;
                             wicket_Btn.layer.backgroundColor=color;
                             
-                            
+                    
                             //[wicket_Btn setTitle:objManhattanRecord.wicketno forState:UIControlStateNormal];
                             wicket_Btn.alpha = 0.0;
                             [_scrollView addSubview:wicket_Btn];
                             [wicket_Btn addTarget:self action:@selector(tooltipMethod:) forControlEvents:UIControlEventTouchUpInside];
                             
                             UILabel * wicketno_lbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,25,25)];
-                            wicketno_lbl.text = record.wicketNo;
+                            wicketno_lbl.text = wicket.WICKETNO;
                             wicketno_lbl.textColor = [UIColor whiteColor];
                             [wicket_Btn addSubview:wicketno_lbl];
                             wicketno_lbl.textAlignment=UITextAlignmentCenter;
                             
-                            
-                            position = position +25;
-                            
+                            [_wicketDetails addObject:wicket];
                             [UIView animateWithDuration:0.5 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
                                 wicket_Btn.alpha = 1.0;
                             } completion:nil];
-                        }
-                    }
+                        
+                    
                 }
+                
+                
+//                CGFloat position = 0;
+//                for (int i=0; wicket.count > i; i++) {
+//                    
+//                    WormWicketRecord * record =(WormWicketRecord *)[wicket objectAtIndex:i];
+//                    
+//                    if([textLabel.text isEqualToString:record.wicketOver])
+//                    {
+//                        if(![record.wicketNo isEqualToString:@"0"] && record.wicketNo!= nil)
+//                        {
+//                            UIButton * wicket_Btn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, 25, 25)];
+//                            CGColorRef color = [self.delegate lineChartView:self lineColorWithLineNumber:lineNumber].CGColor;
+//                            
+//                            wicket_Btn.tag = [record.tag intValue];
+//                            wicket_Btn.center = CGPointMake(xOffset+position, yOffset);
+//                            //[wicket_Btn setImage:[UIImage imageNamed:@"ballImg"] forState:UIControlStateNormal];
+//                            wicket_Btn.layer.cornerRadius = 12;
+//                            wicket_Btn.layer.borderColor=color;
+//                            wicket_Btn.layer.backgroundColor=color;
+//                            
+//                            
+//                            //[wicket_Btn setTitle:objManhattanRecord.wicketno forState:UIControlStateNormal];
+//                            wicket_Btn.alpha = 0.0;
+//                            [_scrollView addSubview:wicket_Btn];
+//                            [wicket_Btn addTarget:self action:@selector(tooltipMethod:) forControlEvents:UIControlEventTouchUpInside];
+//                            
+//                            UILabel * wicketno_lbl=[[UILabel alloc]initWithFrame:CGRectMake(0,0,25,25)];
+//                            wicketno_lbl.text = record.wicketNo;
+//                            wicketno_lbl.textColor = [UIColor whiteColor];
+//                            [wicket_Btn addSubview:wicketno_lbl];
+//                            wicketno_lbl.textAlignment=UITextAlignmentCenter;
+//                            
+//                            
+//                            position = position +25;
+//                            
+//                            [UIView animateWithDuration:0.5 delay:0.2 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//                                wicket_Btn.alpha = 1.0;
+//                            } completion:nil];
+//                        }
+//                    }
+//                }
                 
                 
             }
@@ -481,7 +518,11 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
     objwicketText.numberOfLines=10;
     objwicketText.textColor =[UIColor whiteColor];
     
-    NSString *result = [self.delegate getWicketDetails:selectwicket];
+    PlayerWormChartRecords *wicketdetail = [_wicketDetails objectAtIndex:selectwicket.tag];
+    
+    NSString *result = [NSString stringWithFormat:@" Batsman : %@ \n Bowler : %@ \n Over : %@ \n Wicket No : %@ \n Wicket Type : %@ ",wicketdetail.STRIKERNAME,wicketdetail.BOWLERNAME,wicketdetail.OVERBYOVER,wicketdetail.WICKETNO, wicketdetail.WICKERDESCRIPTION];
+
+    
     
     objwicketText.text = result;
     

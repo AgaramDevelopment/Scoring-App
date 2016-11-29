@@ -603,26 +603,10 @@
     return nil;
 }
 
-- (NSMutableArray *)lineChartView:(MCMultiLineChartView *)lineChartView informationOfWicketInSection:(NSInteger)lineNumber{
-    
-//    if(lineChartView == _lineChartViewOne){
-//        
-//        if(lineNumber == 0){
-//            return _wicketInnsOne;
-//            
-//        }else{
-//            return _wicketInnsTwo;
-//        }
-//    }else if(lineChartView == _lineChartViewTwo){
-//        if(lineNumber == 0){
-//            return _wicketInnsThree;
-//        }else{
-//            return _wicketInnsFour;
-//        }
-//        
-//    }
-    
-    return nil;
+- (PlayerWormChartRecords *)lineChartView:(MCMultiLineChartView *)lineChartView informationOfWicketInSection:(NSInteger)lineNumber index:(NSInteger)index{
+    NSMutableArray * subArray = [self.playerWormInninsOneArray objectAtIndex:lineNumber];
+    PlayerWormChartRecords *record = [subArray objectAtIndex:index];
+    return record;
 }
 
 
