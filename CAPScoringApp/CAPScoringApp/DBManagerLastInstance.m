@@ -8,6 +8,7 @@
 
 #import "DBManagerLastInstance.h"
 #import "ScoreEnginEditRecord.h"
+#import "Utitliy.h"
 #import <sqlite3.h>
 
 @implementation DBManagerLastInstance
@@ -295,18 +296,27 @@ NSMutableArray *GetBallDetailsForBallEventsArray=[[NSMutableArray alloc]init];
                 record.PMLENGTHCODE  =[self getValueByNull:statement :39];
                 record.PMSTRIKEPOINT =[self getValueByNull:statement :40];
                 record.PMSTRIKEPOINTLINECODE   =[self getValueByNull:statement :41];
+                
                 record.PMX1                    =[self getValueByNull:statement :42];
                 record.PMY1                    =[self getValueByNull:statement :43];
-                record.PMX2                    =[self getValueByNull:statement :44];
-                record.PMY2                    =[self getValueByNull:statement :45];
+                record.PMX2 = [Utitliy getPitchMapXAxisForDevice:[self getValueByNull:statement :44]];
+                record.PMY2 = [Utitliy getPitchMapYAxisForDevice:[self getValueByNull:statement :45]];
+
                 record.PMX3                    =[self getValueByNull:statement :46];
                 record.PMY3                    =[self getValueByNull:statement :47];
                 record.WWREGION                =[self getValueByNull:statement :48];
                 record.REGIONNAME              =[self getValueByNull:statement :49];
-                record.WWX1                    =[self getValueByNull:statement :50];
-                record.WWY1                    =[self getValueByNull:statement :51];
-                record.WWX2                    =[self getValueByNull:statement :52];
-                record.WWY2                    =[self getValueByNull:statement :53];
+                
+                record.WWX1                    =[Utitliy getWagonWheelXAxisForDevice:[self getValueByNull:statement :50]];
+                record.WWY1                    =[Utitliy getWagonWheelYAxisForDevice:[self getValueByNull:statement :51]];
+                record.WWX2                    =[Utitliy getWagonWheelXAxisForDevice:[self getValueByNull:statement :52]];
+                record.WWY2                    =[Utitliy getWagonWheelYAxisForDevice:[self getValueByNull:statement :53]];
+
+//                
+//                record.WWX1                    =[self getValueByNull:statement :50];
+//                record.WWY1                    =[self getValueByNull:statement :51];
+//                record.WWX2                    =[self getValueByNull:statement :52];
+//                record.WWY2                    =[self getValueByNull:statement :53];
                 record.BALLDURATION            =[self getValueByNull:statement :54];
                 record.ISAPPEAL                =[self getValueByNull:statement :55];
                 record.ISBEATEN                =[self getValueByNull:statement :56];
