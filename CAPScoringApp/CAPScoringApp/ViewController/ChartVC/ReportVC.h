@@ -9,15 +9,17 @@
 #import <UIKit/UIKit.h>
 
 @interface ReportVC : UIViewController
+//@property (strong, nonatomic) IBOutlet UIView *commonView;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *sepratoryposition;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrolllistview;
+//@property (strong, nonatomic)  UIScrollView *scrolllistview;
 
 
 @property (nonatomic, weak) IBOutlet UIView *referencedView;
 
 @property(strong,nonatomic)NSString * matchCode;
 
+@property (strong, nonatomic) IBOutlet UICollectionView *Tittle_scroll;
 @property(strong,nonatomic)NSString * competitionCode;
 
 @property (strong ,nonatomic) NSString * matchTypeCode;
