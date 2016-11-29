@@ -9,11 +9,11 @@
 #import "PlayerWormChartVC.h"
 #import "BvsBBatsman.h"
 #import "PlayerWormChart.h"
-#import "MCLineChartView.h"
+#import "MCMultiLineChartView.h"
 #import "PlayerWormChartRecords.h"
 
 
-@interface PlayerWormChartVC () <MCLineChartViewDataSource, MCLineChartViewDelegate>{
+@interface PlayerWormChartVC () <MCMultiLineChartViewDataSource, MCMultiLineChartViewDelegate>{
     
     BOOL isStriker;
     // NSString *selectedFilterStricker;
@@ -21,8 +21,8 @@
 
 
 }
-@property (strong, nonatomic) MCLineChartView *lineChartViewOne;
-@property (strong, nonatomic) MCLineChartView *lineChartViewTwo;
+@property (strong, nonatomic) MCMultiLineChartView *lineChartViewOne;
+@property (strong, nonatomic) MCMultiLineChartView *lineChartViewTwo;
 
 
 @property(strong,nonatomic)NSMutableArray *playerWormInninsOneArray;
@@ -63,11 +63,19 @@
     self.batsmanFilterInnsOneArray = [[NSMutableArray alloc] init];
     self.batsmanFilterInnsTwoArray = [[NSMutableArray alloc] init];
     
+    
+    NSMutableArray *xAxisValuesFstInns = [[NSMutableArray alloc]init];
+    NSMutableArray *xAxisValuesSecInns = [[NSMutableArray alloc]init];
+    
     for(int i=0;i<playerWC.playerWormList.count;i++){
         
         PlayerWormChartRecords *record= [playerWC.playerWormList objectAtIndex:i];
         
+        
         if([record.INNINGSNO isEqual:@"1"]){
+            
+            [xAxisValuesFstInns addObject:record];
+            
             
             int fetchPosition = 0;
             bool flag = NO;
@@ -94,12 +102,14 @@
             [self.playerWormInninsOneArray addObject:subplayerWormInninsOneArray];
 
             }else{
-               NSMutableArray  *subplayerWormInninsOneArray = [self.playerWormInninsOneArray objectAtIndex:fetchPosition];
+                NSMutableArray  *subplayerWormInninsOneArray = [self.playerWormInninsOneArray objectAtIndex:fetchPosition];
                 [subplayerWormInninsOneArray addObject:record];
             }
             
-        }else{
             
+        }else{
+            [xAxisValuesSecInns addObject:record];
+
             int fetchPosition = 0;
             bool flag = NO;
             
@@ -140,6 +150,18 @@
     }
     
     
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"XAXIS" ascending:YES];
+    [xAxisValuesFstInns sortUsingDescriptors:[NSArray arrayWithObject:sort]];
+    [xAxisValuesSecInns sortUsingDescriptors:[NSArray arrayWithObject:sort]];
+
+    
+   // [xAxisValuesFstInns sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+   // [xAxisValuesSecInns sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    
+    
+    [self.playerWormInninsOneArray insertObject:xAxisValuesFstInns atIndex:0];
+    [self.playerWormInninsTwoArray insertObject:xAxisValuesSecInns atIndex:0];
+    
         if([self.playerWormInninsOneArray count]>0 || [self.playerWormInninsTwoArray count]>0){
             [self setChartOne];
         }
@@ -173,7 +195,7 @@
 //    }
     
     
-    self.lineChartViewOne = [[MCLineChartView alloc] initWithFrame:CGRectMake(20, 150, [UIScreen mainScreen].bounds.size.width-40, 300)];
+    self.lineChartViewOne = [[MCMultiLineChartView alloc] initWithFrame:CGRectMake(20, 150, [UIScreen mainScreen].bounds.size.width-40, 300)];
     
     self.lineChartViewOne.dotRadius = 5;
     self.lineChartViewOne.dataSource = self;
@@ -182,6 +204,7 @@
     self.lineChartViewOne.maxValue = @100;//[wormRecord score];
     self.lineChartViewOne.solidDot = YES;
     self.lineChartViewOne.numberOfYAxis = 7;
+    
     //self.lineChartViewInnsOne.unitOfYAxis = @"Score";
     self.lineChartViewOne.colorOfXAxis = [UIColor whiteColor];
     self.lineChartViewOne.colorOfXText = [UIColor whiteColor];
@@ -492,11 +515,11 @@
 
 
 
-- (NSUInteger)numberOfLinesInLineChartView:(MCLineChartView *)lineChartView {
+- (NSUInteger)numberOfLinesInLineChartView:(MCMultiLineChartView *)lineChartView {
     return self.playerWormInninsOneArray.count;
 }
 
-- (NSUInteger)lineChartView:(MCLineChartView *)lineChartView lineCountAtLineNumber:(NSInteger)number {
+- (NSUInteger)lineChartView:(MCMultiLineChartView *)lineChartView lineCountAtLineNumber:(NSInteger)number {
     
     if(lineChartView == _lineChartViewOne){
         
@@ -514,7 +537,7 @@
     return 0;
 }
 
-- (id)lineChartView:(MCLineChartView *)lineChartView valueAtLineNumber:(NSInteger)lineNumber index:(NSInteger)index {
+- (id)lineChartView:(MCMultiLineChartView *)lineChartView valueAtLineNumber:(NSInteger)lineNumber index:(NSInteger)index {
     
     if(lineChartView == _lineChartViewOne){
         
@@ -534,15 +557,16 @@
     return @"";
 }
 
-//- (NSString *)lineChartView:(MCLineChartView *)lineChartView titleAtLineNumber:(NSInteger)number {
-- (NSString *)lineChartView:(MCLineChartView *)lineChartView titleAtLineNumber:(NSInteger)number :(NSInteger)linenumber :(NSInteger)dummy{
+//- (NSString *)lineChartView:(MCMultiLineChartView *)lineChartView titleAtLineNumber:(NSInteger)number {
+- (NSString *)lineChartView:(MCMultiLineChartView *)lineChartView titleAtLineNumber:(NSInteger)number :(NSInteger)linenumber :(NSInteger)dummy{
     
     
     if(lineChartView == _lineChartViewOne){
         
         NSMutableArray * subArray = [self.playerWormInninsOneArray objectAtIndex:linenumber];
         PlayerWormChartRecords *record = [subArray objectAtIndex:number];
-        return record.OVERBYOVER;
+        return [NSString stringWithFormat:@"%@%@",record.ACTUALOVER,record.BALLNO];
+        //return record.OVERBYOVER;
         
         
     }else if(lineChartView == _lineChartViewTwo){
@@ -561,9 +585,10 @@
     
 }
 
-- (UIColor *)lineChartView:(MCLineChartView *)lineChartView lineColorWithLineNumber:(NSInteger)lineNumber {
-    
+- (UIColor *)lineChartView:(MCMultiLineChartView *)lineChartView lineColorWithLineNumber:(NSInteger)lineNumber {
     if(lineNumber == 0){
+        return     [UIColor  clearColor];
+    }else if(lineNumber == 1){
         return     [UIColor  colorWithRed:(218/255.0f) green:(61/255.0f) blue:(67/255.0f) alpha:1.0f];
     }else{
         return     [UIColor  colorWithRed:(35/255.0f) green:(116/255.0f) blue:(203/255.0f) alpha:1.0f];
@@ -571,14 +596,14 @@
     
 }
 
-- (NSString *)lineChartView:(MCLineChartView *)lineChartView informationOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index {
+- (NSString *)lineChartView:(MCMultiLineChartView *)lineChartView informationOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index {
     //if (index == 0 || index == _dataSource.count - 1) {
     //  return [NSString stringWithFormat:@"%@", _dataSource[index]];
     //}
     return nil;
 }
 
-- (NSMutableArray *)lineChartView:(MCLineChartView *)lineChartView informationOfWicketInSection:(NSInteger)lineNumber{
+- (NSMutableArray *)lineChartView:(MCMultiLineChartView *)lineChartView informationOfWicketInSection:(NSInteger)lineNumber{
     
 //    if(lineChartView == _lineChartViewOne){
 //        
@@ -601,6 +626,28 @@
 }
 
 
+- (int)getStartIndex:(MCMultiLineChartView *)lineChartView titleAtLineNumber:(NSInteger)number :(NSInteger)linenumber{
+    
+    NSMutableArray * subArray = [self.playerWormInninsOneArray objectAtIndex:linenumber];
+    if(subArray.count>0){
+        PlayerWormChartRecords *recordFst = [subArray objectAtIndex:number];
+        NSMutableArray * firstSubArray = [self.playerWormInninsOneArray objectAtIndex:0];
+
+    
+    for(int i=0;i<firstSubArray.count;i++){
+        
+        PlayerWormChartRecords *record = [firstSubArray objectAtIndex:i];
+
+        
+        if([recordFst.XAXIS isEqual:record.XAXIS]){
+            return i+1;
+        }
+        
+    }
+    
+    }
+    return 1;
+}
 
 
 @end

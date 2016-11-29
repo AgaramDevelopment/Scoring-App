@@ -477,6 +477,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                  record.BOWLERRUNS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 18)];
 
                 
+                record.XAXIS = [NSString stringWithFormat:@"%@%@",record.ACTUALOVER,record.BALLNO];
                 
                 
                 [InningsArray addObject:record];
