@@ -14,7 +14,7 @@
 @implementation Utitliy
 
 +(NSString *)getIPPORT{
-    return  @"192.168.1.49:8096";    //betaioswebservice.upca.tv
+    return  @"192.168.1.49:8096";    //betaioswebservice.upca.tv betaioswebservice.upca.tv
 }
 
 
@@ -25,6 +25,24 @@
 +(NSString *)SecureId{
     return  @"SecureId";
 }
+
+
+
+//+(NSString *)getIPPORT{
+//    return  @"betaioswebservice.upca.tv";
+//}
+//
+//
+//+(NSString *)getSyncIPPORT{
+//    return  @"betaioswebservice.upca.tv";
+//}
+//
+//+(NSString *)SecureId{
+//    return  @"SecureId";
+//}
+
+
+
 
 //NSNumber *basePMWidth = [NSNumber numberWithInt:295];
 //NSNumber *basePMHeight = [NSNumber numberWithInt:380];

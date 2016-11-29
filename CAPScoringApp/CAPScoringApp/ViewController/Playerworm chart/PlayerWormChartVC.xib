@@ -31,6 +31,7 @@
                 <outlet property="inns_two_width" destination="Xcs-75-Pt5" id="7Ca-ap-uzK"/>
                 <outlet property="lbl_filter_batsman_name" destination="MC6-HT-hhl" id="agV-hf-AsN"/>
                 <outlet property="tableview_batsman" destination="GHV-Zj-1mo" id="EY8-Pu-aQs"/>
+                <outlet property="view" destination="LYx-Mu-ZJw" id="Ap7-iX-vzp"/>
                 <outlet property="view_filter" destination="a7Y-hc-UGS" id="1Jr-Iv-NEh"/>
                 <outlet property="view_filter_batsman" destination="c6H-st-kDV" id="nRa-ew-esG"/>
                 <outlet property="view_open_filter" destination="PQQ-gh-Prj" id="qgD-op-c0E"/>
@@ -269,6 +270,10 @@
                                         <constraint firstAttribute="width" constant="335" id="Nod-4C-BNX"/>
                                         <constraint firstAttribute="height" constant="120" id="rra-ir-OEd"/>
                                     </constraints>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="LlH-0v-Z55"/>
+                                        <outlet property="delegate" destination="-1" id="8Xd-Pv-3f0"/>
+                                    </connections>
                                 </tableView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AIL-WI-dUJ">
                                     <rect key="frame" x="660" y="148" width="100" height="40"/>

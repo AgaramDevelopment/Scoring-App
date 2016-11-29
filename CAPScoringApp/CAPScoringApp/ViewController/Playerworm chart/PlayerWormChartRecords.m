@@ -36,5 +36,6 @@
 
 @synthesize MINOVERSTRIKER;
 @synthesize MAXOVERSTRIKER;
+@synthesize XAXIS;
 
 @end

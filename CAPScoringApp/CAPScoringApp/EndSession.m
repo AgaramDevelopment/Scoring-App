@@ -143,8 +143,9 @@ int POS_TEAM_TYPE = 1;
     
 //    _lbl_sessionStartOver.text = [NSString stringWithFormat:@"%@",sessionRecords.STARTOVERBALLNO = @"0.1" ? @"0" :sessionRecords.STARTOVERBALLNO];
     
-    _lbl_sessionStartOver.text = sessionRecords.STARTOVERBALLNO;
-    _lbl_sessionEndOver.text = sessionRecords.ENDOVERBALLNO;
+  
+    _lbl_sessionStartOver.text = [sessionRecords.STARTOVERBALLNO isEqual: @"(null)."] ? @"0.0" : sessionRecords.STARTOVERBALLNO;
+    _lbl_sessionEndOver.text = [sessionRecords.ENDOVERBALLNO isEqual: @"."] ? @"0.0" : sessionRecords.ENDOVERBALLNO;
     
     _lbl_runScored.text = [NSString stringWithFormat:@"%@",sessionRecords.RUNSSCORED];
     _lbl_wicketLost.text = [NSString stringWithFormat:@"%@",sessionRecords.WICKETLOST];
@@ -631,14 +632,21 @@ int POS_TEAM_TYPE = 1;
         
         //int SESSIONNO =[sessionRecords.SESSIONNO intValue];
         int STARTOVERNO  = [sessionRecords.STARTOVERNO intValue];
-       // float ENDOVERNO   =[sessionRecords.ENDOVERBALLNO floatValue];
+        int ENDOVERNO   =[sessionRecords.ENDOVERBALLNO intValue];
         int  RUNSSCORED =[sessionRecords.RUNSSCORED intValue];
         
         //[self ValidationStartAndEndTime];
 //     if(startTimeEqual== NO)
 //    {
         
-        [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :fetchSeRecord.DAYNO : SESSIONNO :_txt_startTime.text :_txt_endTime.text :[NSString stringWithFormat:@"%d",STARTOVERNO]: [NSString stringWithFormat:@"%@",ENDOVERBALLNO] :[NSString stringWithFormat:@"%d" ,RUNSSCORED] :[NSString stringWithFormat:@"%d",fetchSeRecord.BATTEAMWICKETS] :Dominate];
+//        [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :fetchSeRecord.DAYNO : SESSIONNO :_txt_startTime.text :_txt_endTime.text :[NSString stringWithFormat:@"%d",STARTOVERNO]: [NSString stringWithFormat:@"%@",ENDOVERBALLNO] :[NSString stringWithFormat:@"%d" ,RUNSSCORED] :[NSString stringWithFormat:@"%d",fetchSeRecord.BATTEAMWICKETS] :Dominate];
+        
+//        _lbl_sessionStartOver.text
+//        _lbl_sessionEndOver.text
+        
+        
+           [sessionRecords InsertEndSession:competitioncode : matchcode :fetchSeRecord.BATTINGTEAMCODE :fetchSeRecord.INNINGSNO :fetchSeRecord.DAYNO : SESSIONNO :_txt_startTime.text :_txt_endTime.text :_lbl_sessionStartOver.text:  _lbl_sessionEndOver.text :[NSString stringWithFormat:@"%d" ,RUNSSCORED] :[NSString stringWithFormat:@"%d",fetchSeRecord.BATTEAMWICKETS] :Dominate];
+        
         
 //        if(self.checkInternetConnection){
 //            
@@ -801,9 +809,11 @@ int POS_TEAM_TYPE = 1;
                 dayNO = @"1";
             }
             
-            NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : dayNO];
+            NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : DAYNO];
             
-            [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO : dayNO : sessionNo];
+            dayNO = @"0";
+            
+            [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO : DAYNO : sessionNo];
             
             
 //            if(self.checkInternetConnection){

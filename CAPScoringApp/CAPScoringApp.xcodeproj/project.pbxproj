@@ -19,6 +19,7 @@
 		047480671D2E496B005BDC68 /* PowerPlayGridTVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0481DCF31D213B250084BFF7 /* PowerPlayGridTVC.xib */; };
 		047669DD1D14229600572E39 /* PenaltyDetailsRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */; };
 		047679B41DD4964E0008C124 /* WormWicketRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 047679B31DD4964E0008C124 /* WormWicketRecord.m */; };
+		047805261DED75A2005BFCF8 /* MCMultiLineChartView.m in Sources */ = {isa = PBXBuildFile; fileRef = 047805251DED75A2005BFCF8 /* MCMultiLineChartView.m */; };
 		047E52E01D279E8D00D4CAC6 /* GetWicketDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52DF1D279E8D00D4CAC6 /* GetWicketDetail.m */; };
 		047E52E31D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52E21D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.m */; };
 		047E52EC1D27D71F00D4CAC6 /* Other_WicketgridVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 047E52EA1D27D71F00D4CAC6 /* Other_WicketgridVC.m */; };
@@ -397,6 +398,8 @@
 		047669DC1D14229600572E39 /* PenaltyDetailsRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PenaltyDetailsRecord.m; sourceTree = "<group>"; };
 		047679B21DD4964E0008C124 /* WormWicketRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WormWicketRecord.h; sourceTree = "<group>"; };
 		047679B31DD4964E0008C124 /* WormWicketRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WormWicketRecord.m; sourceTree = "<group>"; };
+		047805241DED75A2005BFCF8 /* MCMultiLineChartView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MCMultiLineChartView.h; path = SubClass/chartSubview/MCMultiLineChartView.h; sourceTree = "<group>"; };
+		047805251DED75A2005BFCF8 /* MCMultiLineChartView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MCMultiLineChartView.m; path = SubClass/chartSubview/MCMultiLineChartView.m; sourceTree = "<group>"; };
 		047E52DE1D279E8D00D4CAC6 /* GetWicketDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetWicketDetail.h; sourceTree = "<group>"; };
 		047E52DF1D279E8D00D4CAC6 /* GetWicketDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetWicketDetail.m; sourceTree = "<group>"; };
 		047E52E11D27A15700D4CAC6 /* GetWicketEventsPlayerDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetWicketEventsPlayerDetail.h; sourceTree = "<group>"; };
@@ -1448,6 +1451,8 @@
 				187A8B5A1DC66BBF00A5D31E /* MCChartInformationView.m */,
 				187A8B561DC66B0500A5D31E /* MCBarChartView.h */,
 				187A8B571DC66B0500A5D31E /* MCBarChartView.m */,
+				047805241DED75A2005BFCF8 /* MCMultiLineChartView.h */,
+				047805251DED75A2005BFCF8 /* MCMultiLineChartView.m */,
 			);
 			name = chartView;
 			sourceTree = "<group>";
@@ -2906,6 +2911,7 @@
 				04713EB71DC3562300667AF0 /* BatsmanVsBowlerTVCell.m in Sources */,
 				182BFDB91DBB3D9D0084BDDC /* LineReportRecord.m in Sources */,
 				CE0F19C31CF5D81D0030FFA2 /* DashBoardVC.m in Sources */,
+				047805261DED75A2005BFCF8 /* MCMultiLineChartView.m in Sources */,
 				187621251D1D644C006E160F /* EndInningsVC.m in Sources */,
 				CE1FBF5E1CF992C900A9B6FE /* FixturesCell.m in Sources */,
 				047679B41DD4964E0008C124 /* WormWicketRecord.m in Sources */,
@@ -3080,14 +3086,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Annamalai T (L5S8VPA4A5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Annamalai T (L5S8VPA4A5)";
 				INFOPLIST_FILE = CAPScoringApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agaraminfotech.CAPScoringApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "69c36342-bb6b-41bd-af2d-8f393d47ea7d";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -3096,14 +3102,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Annamalai T (L5S8VPA4A5)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Annamalai T (L5S8VPA4A5)";
 				INFOPLIST_FILE = CAPScoringApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.agaraminfotech.CAPScoringApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "69c36342-bb6b-41bd-af2d-8f393d47ea7d";
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
