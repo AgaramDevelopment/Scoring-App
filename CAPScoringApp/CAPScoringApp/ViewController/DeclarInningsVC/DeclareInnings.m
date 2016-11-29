@@ -231,7 +231,7 @@
         {
             [objDBManagerDeclareInnings UpdateInningsEventInRevertInningsForUpdateDeclareInnings: ISDECLARE: COMPETITIONCODE: MATCHCODE : INNINGSNO];
             
-            [objDBManagerDeclareInnings DeleteInningsEventForUpdateDeclareInnings: COMPETITIONCODE: MATCHCODE : INNINGSNO];
+            [objDBManagerDeclareInnings DeleteInningsEventForUpdateDeclareInnings : COMPETITIONCODE: MATCHCODE : INNINGSNO];
             
             [objDBManagerDeclareInnings DeleteMatchResultForUpdateDeclareInnings: COMPETITIONCODE: MATCHCODE];
         }
