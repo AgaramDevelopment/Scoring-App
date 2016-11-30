@@ -35,6 +35,8 @@
 @property(strong,nonatomic)NSString *MINOVERSTRIKER;
 @property(strong,nonatomic)NSString *MAXOVERSTRIKER;
 @property(strong,nonatomic)NSString *XAXIS;
+@property(strong,nonatomic)NSString *XDisplayAxis;
+
 
 
 
