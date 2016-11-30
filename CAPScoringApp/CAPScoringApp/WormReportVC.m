@@ -26,10 +26,14 @@
 
 @property (strong, nonatomic) NSArray *titles;
 @property (strong, nonatomic) NSArray *dataSource;
+
 @property (strong, nonatomic) NSMutableArray *wormDataInns1Array;
 @property (strong, nonatomic) NSMutableArray *wormDataInns2Array;
 @property (strong, nonatomic) NSMutableArray *wormDataInns3Array;
 @property (strong, nonatomic) NSMutableArray *wormDataInns4Array;
+
+
+
 
 @end
 
