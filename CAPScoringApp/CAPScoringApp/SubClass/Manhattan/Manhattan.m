@@ -329,186 +329,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     wicketDetail = [self getwicket:self.compititionCode :self.matchCode:innings1];
     
-//    NSPredicate* wicketPredicate = [NSPredicate predicateWithFormat:@"inningsno == %@",innings1];
-//    
-//    NSArray * Innings1wicket = [wicketDetail filteredArrayUsingPredicate:wicketPredicate];
-//    
-//    for(int i=0; i < wicketDetail.count; i++)
-//    {
-//     ManhattenWKTRecord * ManhattanWktRecord =(ManhattenWKTRecord *)[wicketDetail objectAtIndex:i];
-//        
-//        
-//        NSString * inningsno =ManhattanWktRecord.inningno;
-//        
-////        if(objInnings2OverArray.count >0)
-////        {
-////            NSString * Addoverno =[objInnings2OverArray lastObject];
-//        
-//            if([inningsno isEqualToString: @"1"])
-//            {
-//                [objinnings1Wicket addObject:ManhattanWktRecord];
-//            }
-//
-//        
-//    }
-//
-//    for(int i=0; i < wicketDetail.count; i++)
-//    {
-//         ManhattenWKTRecord * ManhattanWktRecord =(ManhattenWKTRecord *)[wicketDetail objectAtIndex:i];
-//        
-//        
-//        NSString * inningsno =ManhattanWktRecord.inningno;
-//        
-//        //        if(objInnings2OverArray.count >0)
-//        //        {
-//        //            NSString * Addoverno =[objInnings2OverArray lastObject];
-//        
-//        if([inningsno isEqualToString: @"2"])
-//        {
-//            [objinnings2wicket addObject:ManhattanWktRecord];
-//        }
-//        
-//        
-//    }
-
-//    DBManagerReports *dbMngr = [[DBManagerReports alloc]init];
-//    
-//    // self.wormDataInns1Array = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :@"1"];
-//    // self.wormDataInns2Array = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :@"2"];
-//    self.wormDataInns1Array = [self generateInningsArray :@"1"];
-//    self.wormDataInns2Array =[self generateInningsArray :@"2"];
-//    
-//    
-//    self.wicketInnsOne = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"1"];
-//    self.wicketInnsTwo = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"2"];
-//    
-//    int tag = 0;
-//    //Set tag for tool tip
-//    for(WormWicketRecord *wick in self.wicketInnsOne){
-//        wick.tag =[NSNumber numberWithInt:tag];
-//        tag++;
-//    }
-//    
-//    for(WormWicketRecord *wick in self.wicketInnsTwo){
-//        wick.tag =[NSNumber numberWithInt:tag];
-//        tag++;
-//    }
-//    
-//    
-//    if([self.wormDataInns1Array count]>0 || [self.wormDataInns2Array count]>0){
-//        [self setChartOne];
-//    }
-//    
-//    
-//    
-//    if([self isTestMatch]){//Test
-//        
-//        self.wormDataInns3Array = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :@"3"];
-//        self.wormDataInns4Array = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :@"4"];
-//        
-//        self.wormDataInns3Array =[self generateInningsArray :@"3"];
-//        self.wormDataInns4Array  =[self generateInningsArray:@"4"];
-//        
-//        
-//        self.wicketInnsThree = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"3"];
-//        self.wicketInnsFour = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"4"];
-//        
-//        
-//        
-//        for(WormWicketRecord *wick in self.wicketInnsThree){
-//            wick.tag =[NSNumber numberWithInt:tag];
-//            tag++;
-//        }
-//        
-//        
-//        for(WormWicketRecord *wick in self.wicketInnsFour){
-//            wick.tag =[NSNumber numberWithInt:tag];
-//            tag++;
-//        }
-//        
-//        
-//        if([self.wormDataInns3Array count]>0 || [self.wormDataInns4Array count]>0){
-//            [self setChartTwo];
-//        }
-//        
-//        
-//    }
-//    
-//    DBManagerReports *dbMngr = [[DBManagerReports alloc]init];
-//    
-//    // self.wormDataInns1Array = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :@"1"];
-//    // self.wormDataInns2Array = [dbMngr retrieveWormChartDetails :self.matchCode :self.compititionCode :@"2"];
-//    self.wormDataInns1Array = [self generateInningsArray :@"1"];
-//    self.wormDataInns2Array =[self generateInningsArray :@"2"];
-//    
-//
-     //wicketDetail = [self getwicket:self.compititionCode :self.matchCode:innings1];
-//    objinnings1Wicket = [self getwicket:self.compititionCode :self.matchCode:@"1"];
-//    objinnings2wicket = [self getwicket:self.compititionCode :self.matchCode:@"2"];
-//    
-//    int tag = 0;
-//    //Set tag for tool tip
-//    
-//    for(ManhattenWKTRecord * wick in objinnings1Wicket){
-//        wick.tag =[NSNumber numberWithInt:tag];
-//        tag++;
-//    }
-//    
-//    for(ManhattenWKTRecord *wick in objinnings2wicket){
-//        wick.tag =[NSNumber numberWithInt:tag];
-//        tag++;
-//    }
-//    
-//    
-////    if([self.objinnings1Wicket count]>0 || [self.objinnings2wicket count]>0){
-////        [self setChartOne];
-////    }
-//    
-//    
-//    
-//  //  if([self isTestMatch]){//Test
-//        
-//        objinnings3Wicket = [self getwicket:self.compititionCode :self.matchCode:@"3"];
-//        objinnings4wicket = [self getwicket:self.compititionCode :self.matchCode:@"4"];
-//        
-//        //self.wormDataInns3Array =[self generateInningsArray :@"3"];
-//       // self.wormDataInns4Array  =[self generateInningsArray:@"4"];
-//        
-////        
-////        self.wicketInnsThree = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"3"];
-////        self.wicketInnsFour = [dbMngr retrieveWormWicketDetails :self.matchCode :self.compititionCode :@"4"];
-//        
-//        
-//        
-//        for(ManhattenWKTRecord *wick in objinnings3Wicket){
-//            wick.tag =[NSNumber numberWithInt:tag];
-//            tag++;
-//        }
-//        
-//        
-//        for(ManhattenWKTRecord *wick in objinnings4wicket){
-//            wick.tag =[NSNumber numberWithInt:tag];
-//            tag++;
-//        }
-    
-        
-//        if([self.wormDataInns3Array count]>0 || [self.wormDataInns4Array count]>0){
-//            [self setChartTwo];
-//        }
-        
-        
-  //  }
-    
-
-    
-    
-//    NSPredicate* wicketinnings2Predicate = [NSPredicate predicateWithFormat:@"inningsno == %@",innings2];
-//    
-//    NSArray * Innings2wicket = [wicketDetail filteredArrayUsingPredicate:wicketinnings2Predicate];
-//    
-//    objinnings2wicket =[Innings2wicket copy];
-//    
-
     
     ToolTipDetails =[self getToolTip:self.compititionCode :self.matchCode];
     
@@ -576,36 +396,36 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _titles = objInnings2OverArray;
     _dataSource = objInnings2RunArray;
     
-    _barChartView = [[MCBarChartView alloc] initWithFrame:CGRectMake(20, 450, [UIScreen mainScreen].bounds.size.width, 260)];
+    _barChartView = [[MCBarChartView alloc] initWithFrame:CGRectMake(_barChartView.frame.origin.x+25, _barChartView.frame.origin.y, [UIScreen mainScreen].bounds.size.width, 260)];
     _barChartView.tag = 112;
     _barChartView.dataSource = self;
     _barChartView.delegate = self;
     _barChartView.maxValue = max;
   //  _barChartView.unitOfYAxis = @"Run";
     
-    _barChartView.colorOfXAxis = [UIColor whiteColor];
-    _barChartView.colorOfXText = [UIColor whiteColor];
-    _barChartView.colorOfYAxis = [UIColor whiteColor];
-    _barChartView.colorOfYText = [UIColor whiteColor];
+    _barChartView.colorOfXAxis = [UIColor clearColor];
+    _barChartView.colorOfXText = [UIColor clearColor];
+    _barChartView.colorOfYAxis = [UIColor clearColor];
+    _barChartView.colorOfYText = [UIColor clearColor];
     [self.manhattan_Scroll addSubview:_barChartView];
     
     UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_barChartView.frame.origin.x, _barChartView.frame.origin.y-80,self.view.frame.size.width, 60)];
     
-    UILabel * title_lbl =[[UILabel alloc]initWithFrame:CGRectMake(0, 0,self.manhattan_Scroll.frame.size.width, 40)];
-    title_lbl.text =@"INNINGS 2";
-    title_lbl.textColor =[UIColor whiteColor];
-    title_lbl.textAlignment=UITextAlignmentCenter;
-    title_lbl.font = [UIFont systemFontOfSize:25];
+//    UILabel * title_lbl =[[UILabel alloc]initWithFrame:CGRectMake(0, 0,self.manhattan_Scroll.frame.size.width, 40)];
+//    title_lbl.text =@"INNINGS 2";
+//    title_lbl.textColor =[UIColor whiteColor];
+//    title_lbl.textAlignment=UITextAlignmentCenter;
+//    title_lbl.font = [UIFont systemFontOfSize:25];
+//
+//    [tittleview addSubview:title_lbl];
+//    
+//    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/4,title_lbl.frame.origin.y+25,self.manhattan_Scroll.frame.size.width/2, 40)];
+//    BattingTeam_lbl.text =self.secInnShortName;
+//    BattingTeam_lbl.textColor =[UIColor whiteColor];
+//    BattingTeam_lbl.textAlignment=UITextAlignmentCenter;
+//    BattingTeam_lbl.font = [UIFont systemFontOfSize:23];
 
-    [tittleview addSubview:title_lbl];
-    
-    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(tittleview.frame.size.width/4,title_lbl.frame.origin.y+25,self.manhattan_Scroll.frame.size.width/2, 40)];
-    BattingTeam_lbl.text =self.secInnShortName;
-    BattingTeam_lbl.textColor =[UIColor whiteColor];
-    BattingTeam_lbl.textAlignment=UITextAlignmentCenter;
-    BattingTeam_lbl.font = [UIFont systemFontOfSize:23];
-
-    [tittleview addSubview:BattingTeam_lbl];
+  //  [tittleview addSubview:BattingTeam_lbl];
     
 //    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.view.frame.size.width/2,title_lbl.frame.origin.y+20,self.manhattan_Scroll.frame.size.width/2, 40)];
 //    BowlingTeam_lbl.text =self.thrdInnShortName;
@@ -872,7 +692,18 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 - (UIColor *)barChartView:(MCBarChartView *)barChartView colorOfBarInSection:(NSInteger)section index:(NSInteger)index {
     
-    return [UIColor colorWithRed:35/255.0 green:116/255.0 blue:205/255.0 alpha:1.0];
+        if (barChartView.tag == 111) {
+            return [UIColor colorWithRed:2/255.0 green:185/255.0 blue:187/255.0 alpha:1.0];
+        }
+        
+        
+        else {
+            if (index == 0) {
+                return [UIColor colorWithRed:105/255.0 green:105/255.0 blue:147/255.0 alpha:1.0];
+            }
+            return [UIColor colorWithRed:2/255.0 green:185/255.0 blue:187/255.0 alpha:1.0];
+        }
+
     
    }
 
@@ -921,12 +752,21 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 - (CGFloat)barWidthInBarChartView:(MCBarChartView *)barChartView {
-        return 26;
+    
+    if (barChartView.tag == 111) {
+        return 20;
+    } else {
+        return 16;
+    }
     
 }
 
 - (CGFloat)paddingForSectionInBarChartView:(MCBarChartView *)barChartView {
-    return 24;
+    if (barChartView.tag == 111) {
+        return 25;
+    } else {
+        return 25;
+    }
    
 }
 

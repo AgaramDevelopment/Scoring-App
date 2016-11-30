@@ -143,6 +143,7 @@
 		1878CD911D11101600A80BEE /* InitializeInningsScoreBoardRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1878CD901D11101600A80BEE /* InitializeInningsScoreBoardRecord.m */; };
 		1878CD961D114FBB00A80BEE /* ScoreCardVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 1878CD941D114FBB00A80BEE /* ScoreCardVC.m */; };
 		1878CD9A1D1167D700A80BEE /* DBManagerScoreCard.m in Sources */ = {isa = PBXBuildFile; fileRef = 1878CD991D1167D700A80BEE /* DBManagerScoreCard.m */; };
+		187935311DED430200938A43 /* ReportCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 187935301DED430200938A43 /* ReportCell.m */; };
 		187952321D02A410001A1224 /* BowlAndShotTypeRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 1879522F1D02A410001A1224 /* BowlAndShotTypeRecords.m */; };
 		187952331D02A410001A1224 /* FieldingEventRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 187952311D02A410001A1224 /* FieldingEventRecord.m */; };
 		187952351D02AD28001A1224 /* FieldingFactorRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 1879522C1D02A0B4001A1224 /* FieldingFactorRecord.m */; };
@@ -620,6 +621,8 @@
 		1878CD941D114FBB00A80BEE /* ScoreCardVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ScoreCardVC.m; path = ViewController/ScoreCardVC.m; sourceTree = "<group>"; };
 		1878CD981D1167D700A80BEE /* DBManagerScoreCard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerScoreCard.h; sourceTree = "<group>"; };
 		1878CD991D1167D700A80BEE /* DBManagerScoreCard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManagerScoreCard.m; sourceTree = "<group>"; };
+		1879352F1DED430200938A43 /* ReportCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReportCell.h; path = SubClass/ReportCell/ReportCell.h; sourceTree = "<group>"; };
+		187935301DED430200938A43 /* ReportCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReportCell.m; path = SubClass/ReportCell/ReportCell.m; sourceTree = "<group>"; };
 		1879522B1D02A0B4001A1224 /* FieldingFactorRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldingFactorRecord.h; sourceTree = "<group>"; };
 		1879522C1D02A0B4001A1224 /* FieldingFactorRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldingFactorRecord.m; sourceTree = "<group>"; };
 		1879522E1D02A410001A1224 /* BowlAndShotTypeRecords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BowlAndShotTypeRecords.h; sourceTree = "<group>"; };
@@ -1421,6 +1424,15 @@
 			name = ScoreCard;
 			sourceTree = "<group>";
 		};
+		187935291DED417700938A43 /* ReportCell */ = {
+			isa = PBXGroup;
+			children = (
+				1879352F1DED430200938A43 /* ReportCell.h */,
+				187935301DED430200938A43 /* ReportCell.m */,
+			);
+			name = ReportCell;
+			sourceTree = "<group>";
+		};
 		187A8B4B1DC660A200A5D31E /* ManhattanRecord */ = {
 			isa = PBXGroup;
 			children = (
@@ -2156,6 +2168,7 @@
 		CE0018371CF4308C00668D8B /* SubClass */ = {
 			isa = PBXGroup;
 			children = (
+				187935291DED417700938A43 /* ReportCell */,
 				CECDC3811DB4E77100A70A9D /* ReportView */,
 				185AFBCC1DE2D81400C5655E /* SpellReportCell */,
 				18782BBB1DE0531A005064B9 /* SpellReport */,
@@ -2699,6 +2712,7 @@
 				047669DD1D14229600572E39 /* PenaltyDetailsRecord.m in Sources */,
 				1878CD9A1D1167D700A80BEE /* DBManagerScoreCard.m in Sources */,
 				18704EEB1D197E4F00996BF3 /* InsertUpdateMatchResult.m in Sources */,
+				187935311DED430200938A43 /* ReportCell.m in Sources */,
 				04960F631DE9676D00B23DA5 /* PlayerWormChartVC.m in Sources */,
 				CEC25E001D28FE1B009D99F0 /* MatchTeamPlayerDetailsPushRecord.m in Sources */,
 				CE1FBF581CF96EDB00A9B6FE /* TossDeatilsEvent.m in Sources */,
