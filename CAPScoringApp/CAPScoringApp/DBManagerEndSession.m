@@ -1716,7 +1716,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
 //SP_DELETEENDSESSION-----------------------------------------------------------------------------
 
 
--(BOOL) GetBallCodeForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSInteger*) DAYNO: (NSString*) SESSIONNO   {
+-(BOOL) GetBallCodeForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) DAYNO: (NSString*) SESSIONNO   {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;

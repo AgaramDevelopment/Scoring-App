@@ -6285,7 +6285,10 @@
       
          if(isAppealSelected==NO){
         
-               self.ballEventRecord.objIsappeal = nil;
+             NSNumberFormatter *appeal = [[NSNumberFormatter alloc] init];
+             appeal.numberStyle = NSNumberFormatterDecimalStyle;
+             NSNumber *isappeal= [appeal numberFromString:@"1"];
+               self.ballEventRecord.objIsappeal = isappeal;
                [self unselectedViewBg:_view_appeal];
                self.View_Appeal.hidden = YES;
                isAppealSelected= YES;
@@ -6293,6 +6296,12 @@
             }
         
         else if(isAppealSelected ==YES){
+            
+            NSNumberFormatter *appeal = [[NSNumberFormatter alloc] init];
+            appeal.numberStyle = NSNumberFormatterDecimalStyle;
+            NSNumber *isappeal= [appeal numberFromString:@"1"];
+            self.ballEventRecord.objIsappeal = isappeal;
+            
             [self selectedViewBg:_view_appeal];
             //isAppealSelected= NO;
             [table_Appeal reloadData];
@@ -6300,7 +6309,7 @@
             int selectePosition = -1;
             for (AppealRecord *record in self.AppealValuesArray)
             {
-                bool chk = ([[record MetaSubCode] isEqualToString:self.ballEventRecord.objIsappeal]);
+                bool chk = ([[record MetaSubCode] isEqualToString:AppealTypeSelectCode]);
                 if (chk)
                 {
                     selectePosition = indx;
@@ -6322,7 +6331,7 @@
 
             
         }
-        else if(isAppealSelected && self.ballEventRecord.objIsappeal == nil){
+        else if(isAppealSelected && AppealTypeSelectCode == nil){
             
             [self unselectedViewBg:_view_appeal];
             self.View_Appeal.hidden = YES;
@@ -6338,7 +6347,8 @@
             int selectePosition = -1;
             for (AppealRecord *record in self.AppealValuesArray)
             {
-                bool chk = ([[record MetaSubCode] isEqualToString:self.ballEventRecord.objIsappeal]);
+               // bool chk = ([[record MetaSubCode] isEqualToString:self.ballEventRecord.objIsappeal]);
+                bool chk = ([[record MetaSubCode] isEqualToString:AppealTypeSelectCode]);
                 if (chk)
                 {
                     selectePosition = indx;
@@ -7458,10 +7468,10 @@
         {
             //   isAppealSelected = YES;
             self.table_AppealSystem.hidden=YES;
-            self.ballEventRecord.objIsappeal = objAppealrecord.MetaSubCode;
+            //self.ballEventRecord.objIsappeal = objAppealrecord.MetaSubCode;
             isEnableTbl=YES;
             
-            
+        
             record = (GetSEAppealDetailsForAppealEvents*)[getAppealArray objectAtIndex:0];
             self.comments_txt.text=record.APPEALCOMMENTS;
             self.lbl_appealsystem.text=record.APPEALSYSTEMDES;
@@ -9699,6 +9709,7 @@
         if(appealEventDict==nil){
             appealEventDict = [NSMutableDictionary dictionary];
         }
+   
         [appealEventDict setValue:AppealTypeSelectCode forKey:@"AppealTypeCode"];
         [appealEventDict setValue:AppealSystemSelectCode forKey:@"AppealSystemSelct"];
         [appealEventDict setValue:AppealComponentSelectCode forKey:@"AppealComponentSelct"];

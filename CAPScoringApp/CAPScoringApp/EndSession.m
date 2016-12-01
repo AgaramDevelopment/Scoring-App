@@ -809,11 +809,11 @@ int POS_TEAM_TYPE = 1;
                 dayNO = @"1";
             }
             
-            NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode : DAYNO];
+            NSString *sessionNo =[dbEndSession  GetSessionNoForFetchEndSession :competitioncode: matchcode :  _lbl_day.text];
             
             dayNO = @"0";
             
-            [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO : DAYNO : sessionNo];
+            [sessionRecords DeleteEndSession:competitioncode :matchcode :fetchSeRecord.INNINGSNO :  _lbl_day.text : sessionNo];
             
             
 //            if(self.checkInternetConnection){
