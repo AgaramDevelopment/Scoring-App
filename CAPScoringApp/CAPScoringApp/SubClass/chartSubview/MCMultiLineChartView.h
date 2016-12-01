@@ -9,6 +9,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PlayerWormChartRecords.h"
 
 @class MCMultiLineChartView;
 @protocol MCMultiLineChartViewDataSource <NSObject>
@@ -40,7 +41,7 @@
 - (NSString *)lineChartView:(MCMultiLineChartView *)lineChartView informationOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index;
 - (UIView *)lineChartView:(MCMultiLineChartView *)lineChartView hintViewOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index;
 - (UIView *)lineChartView:(MCMultiLineChartView *)lineChartView pointViewOfDotInLineNumber:(NSInteger)lineNumber index:(NSInteger)index;
-- (NSMutableArray *)lineChartView:(MCMultiLineChartView *)lineChartView informationOfWicketInSection:(NSInteger)section;
+- (PlayerWormChartRecords *)lineChartView:(MCMultiLineChartView *)lineChartView informationOfWicketInSection:(NSInteger)lineNumber index:(NSInteger)index;
 - (UIView *)lineChartView:(MCMultiLineChartView *)lineChartView hintViewOfLineInSection:(NSInteger)section index:(NSInteger)index;
 
 @end

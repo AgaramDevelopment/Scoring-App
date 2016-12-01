@@ -2298,7 +2298,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     {
         
         
-        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(OVERSTATUS,0) FROM OVEREVENTS WHERE COMPETITIONCODE= '%@' AND MATCHCODE= '%@' AND INNINGSNO='%@' 	AND OVERNO ='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
+        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL((OVERSTATUS),0) FROM OVEREVENTS WHERE COMPETITIONCODE= '%@' AND MATCHCODE= '%@' AND INNINGSNO='%@' 	AND OVERNO ='%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {

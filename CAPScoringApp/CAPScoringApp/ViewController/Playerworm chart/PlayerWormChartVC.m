@@ -18,6 +18,11 @@
     BOOL isStriker;
     // NSString *selectedFilterStricker;
     BvsBBatsman *selectedFilterBatsman;
+    int selectedBatsmanPosition;
+    int selectedInningsPosition;
+    
+    NSString *fstInningsHighScore;
+    NSString *secInningsHighScore;
 
 
 }
@@ -66,13 +71,30 @@
     
     NSMutableArray *xAxisValuesFstInns = [[NSMutableArray alloc]init];
     NSMutableArray *xAxisValuesSecInns = [[NSMutableArray alloc]init];
+
+    
+    fstInningsHighScore = @"0";
+    secInningsHighScore = @"0";
+    selectedInningsPosition =1;
+    
+    BvsBBatsman *allBatsMan = [[BvsBBatsman alloc]init];
+    allBatsMan.name = @"Select Player";
+    allBatsMan.strickerCode = @"";
+    
+    selectedFilterBatsman = allBatsMan;
+    
+    [self.batsmanFilterInnsOneArray addObject:allBatsMan];
+    [self.batsmanFilterInnsTwoArray addObject:allBatsMan];
+    
+    
     
     for(int i=0;i<playerWC.playerWormList.count;i++){
         
         PlayerWormChartRecords *record= [playerWC.playerWormList objectAtIndex:i];
         
-        
         if([record.INNINGSNO isEqual:@"1"]){
+            
+            fstInningsHighScore = fstInningsHighScore.intValue> record.STRIKERRUNS.intValue ? fstInningsHighScore : record.STRIKERRUNS;
             
             [xAxisValuesFstInns addObject:record];
             
@@ -85,7 +107,7 @@
 
                 if([batsMan.strickerCode isEqualToString:record.STRIKERCODE]){
                     flag = YES;
-                    fetchPosition = j;
+                    fetchPosition = j-1;
                     break;
                 }
             }
@@ -118,7 +140,7 @@
                 
                 if([batsMan.strickerCode isEqualToString:record.STRIKERCODE]){
                     flag = YES;
-                    fetchPosition = j;
+                    fetchPosition = j-1;
                     break;
                 }
                 
@@ -159,14 +181,19 @@
    // [xAxisValuesSecInns sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     
-    [self.playerWormInninsOneArray insertObject:xAxisValuesFstInns atIndex:0];
-    [self.playerWormInninsTwoArray insertObject:xAxisValuesSecInns atIndex:0];
     
-        if([self.playerWormInninsOneArray count]>0 || [self.playerWormInninsTwoArray count]>0){
+        if([self.playerWormInninsOneArray count]>0){
+            [self.playerWormInninsOneArray insertObject:xAxisValuesFstInns atIndex:0];
             [self setChartOne];
         }
     
+    if([self.playerWormInninsTwoArray count]>0){
+        
+        [self.playerWormInninsTwoArray insertObject:xAxisValuesSecInns atIndex:0];
+
+    }
     
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -177,23 +204,13 @@
 
 -(void) setChartOne{
     
-//    WormRecord *wormRecord;
-//    
-//    wormRecord  = [self.wormDataInns1Array lastObject];
-//    
-//    if(_wormDataInns2Array != nil && _wormDataInns2Array.count>0){
-//        
-//        WormRecord *wormRecord2;
-//        
-//        wormRecord2  = [self.wormDataInns2Array lastObject];
-//        
-//        
-//        if([wormRecord.score intValue] < [wormRecord2.score intValue]){
-//            wormRecord = wormRecord2;
-//        }
-//        
-//    }
+
     
+    if(self.lineChartViewTwo != nil){
+        self.lineChartViewTwo.hidden = YES;
+    }
+    
+    if(self.lineChartViewOne==nil){
     
     self.lineChartViewOne = [[MCMultiLineChartView alloc] initWithFrame:CGRectMake(20, 150, [UIScreen mainScreen].bounds.size.width-40, 300)];
     
@@ -201,7 +218,7 @@
     self.lineChartViewOne.dataSource = self;
     self.lineChartViewOne.delegate = self;
     self.lineChartViewOne.minValue = @1;
-    self.lineChartViewOne.maxValue = @100;//[wormRecord score];
+    self.lineChartViewOne.maxValue = fstInningsHighScore;
     self.lineChartViewOne.solidDot = YES;
     self.lineChartViewOne.numberOfYAxis = 7;
     
@@ -212,6 +229,9 @@
     self.lineChartViewOne.colorOfYText = [UIColor whiteColor];
     
     [self.view addSubview:self.lineChartViewOne];
+    }else{
+        self.lineChartViewOne.hidden = NO;
+    }
     
     
     UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_lineChartViewOne.frame.origin.x, _lineChartViewOne.frame.origin.y-60,self.lineChartViewOne.frame.size.width, 60)];
@@ -224,7 +244,7 @@
     title_lbl.textAlignment=UITextAlignmentCenter;
     title_lbl.font = [UIFont systemFontOfSize:25];
     
-    [tittleview addSubview:title_lbl];
+    //[tittleview addSubview:title_lbl];
     
     UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(60,title_lbl.frame.origin.y+30,70, 30)];
     BattingTeam_lbl.text =self.fstInnShortName;
@@ -234,7 +254,7 @@
     BattingTeam_lbl.font = [UIFont systemFontOfSize:23];
     
     
-    [tittleview addSubview:BattingTeam_lbl];
+   // [tittleview addSubview:BattingTeam_lbl];
     
     UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.lineChartViewOne.frame.size.width-120,title_lbl.frame.origin.y+30,70, 30)];
     BowlingTeam_lbl.text =self.secInnShortName;
@@ -244,7 +264,7 @@
     BowlingTeam_lbl.font = [UIFont systemFontOfSize:23];
     
     
-    [tittleview addSubview:BowlingTeam_lbl];
+  //  [tittleview addSubview:BowlingTeam_lbl];
     
     [self.view addSubview:tittleview];
     
@@ -253,6 +273,77 @@
     [self.lineChartViewOne reloadDataWithAnimate:YES];
 }
 
+
+
+-(void) setChartTwo{
+    
+    
+    if(self.lineChartViewOne != nil){
+        self.lineChartViewOne.hidden = YES;
+    }
+    
+    if(self.lineChartViewTwo==nil){
+        
+        self.lineChartViewTwo = [[MCMultiLineChartView alloc] initWithFrame:CGRectMake(20, 150, [UIScreen mainScreen].bounds.size.width-40, 300)];
+        
+        self.lineChartViewTwo.dotRadius = 5;
+        self.lineChartViewTwo.dataSource = self;
+        self.lineChartViewTwo.delegate = self;
+        self.lineChartViewTwo.minValue = @1;
+        self.lineChartViewTwo.maxValue = fstInningsHighScore;
+        self.lineChartViewTwo.solidDot = YES;
+        self.lineChartViewTwo.numberOfYAxis = 7;
+        
+        //self.lineChartViewInnsOne.unitOfYAxis = @"Score";
+        self.lineChartViewTwo.colorOfXAxis = [UIColor whiteColor];
+        self.lineChartViewTwo.colorOfXText = [UIColor whiteColor];
+        self.lineChartViewTwo.colorOfYAxis = [UIColor whiteColor];
+        self.lineChartViewTwo.colorOfYText = [UIColor whiteColor];
+        
+        [self.view addSubview:self.lineChartViewTwo];
+    }else{
+        self.lineChartViewTwo.hidden = NO;
+    }
+    
+    
+    UIView * tittleview =[[UIView alloc]initWithFrame:CGRectMake(_lineChartViewTwo.frame.origin.x, _lineChartViewTwo.frame.origin.y-60,self.lineChartViewTwo.frame.size.width, 60)];
+    
+    UILabel * title_lbl =[[UILabel alloc]initWithFrame:CGRectMake(0, 10,self.lineChartViewTwo.frame.size.width, 30)];
+    
+    
+    title_lbl.text =@"INNING 1 & 2";
+    title_lbl.textColor =[UIColor whiteColor];
+    title_lbl.textAlignment=UITextAlignmentCenter;
+    title_lbl.font = [UIFont systemFontOfSize:25];
+    
+    //[tittleview addSubview:title_lbl];
+    
+    UILabel * BattingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(60,title_lbl.frame.origin.y+30,70, 30)];
+    BattingTeam_lbl.text =self.fstInnShortName;
+    BattingTeam_lbl.backgroundColor= [UIColor  colorWithRed:(218/255.0f) green:(61/255.0f) blue:(67/255.0f) alpha:1.0f];
+    BattingTeam_lbl.textColor =[UIColor whiteColor];
+    BattingTeam_lbl.textAlignment=UITextAlignmentCenter;
+    BattingTeam_lbl.font = [UIFont systemFontOfSize:23];
+    
+    
+    // [tittleview addSubview:BattingTeam_lbl];
+    
+    UILabel * BowlingTeam_lbl =[[UILabel alloc]initWithFrame:CGRectMake(self.lineChartViewTwo.frame.size.width-120,title_lbl.frame.origin.y+30,70, 30)];
+    BowlingTeam_lbl.text =self.secInnShortName;
+    BowlingTeam_lbl.backgroundColor=[UIColor  colorWithRed:(35/255.0f) green:(116/255.0f) blue:(203/255.0f) alpha:1.0f];
+    BowlingTeam_lbl.textColor =[UIColor whiteColor];
+    BowlingTeam_lbl.textAlignment=UITextAlignmentCenter;
+    BowlingTeam_lbl.font = [UIFont systemFontOfSize:23];
+    
+    
+    //  [tittleview addSubview:BowlingTeam_lbl];
+    
+    [self.view addSubview:tittleview];
+    
+    
+    
+    [self.lineChartViewTwo reloadDataWithAnimate:YES];
+}
 
 -(void) setViewWhenNoData{
     self.view_open_filter.hidden = YES;
@@ -267,11 +358,49 @@
 
 - (IBAction)did_click_inn_one:(id)sender {
     
-  //  [self setInningsDetailsView:@"1"];
+    
+    selectedBatsmanPosition = 0;
+    selectedInningsPosition = 1;
+    
+    
+    BvsBBatsman *allBatsMan = [[BvsBBatsman alloc]init];
+    allBatsMan.name = @"Select Player";
+    allBatsMan.strickerCode = @"";
+    
+    selectedFilterBatsman = allBatsMan;
+
+    if([self.playerWormInninsOneArray count]>0){
+        [self setChartOne];
+    }else if(self.lineChartViewTwo !=nil){
+        _lineChartViewTwo.hidden = YES;
+    }
+
+    
+    [self setInningsBySelection:@"1"];
+    [_tableview_batsman reloadData];
+
 }
 
 - (IBAction)did_click_inn_two:(id)sender {
- //   [self setInningsDetailsView:@"2"];
+
+    selectedBatsmanPosition = 0;
+    selectedInningsPosition = 2;
+    
+    
+    BvsBBatsman *allBatsMan = [[BvsBBatsman alloc]init];
+    allBatsMan.name = @"Select Player";
+    allBatsMan.strickerCode = @"";
+    
+    selectedFilterBatsman = allBatsMan;
+
+    if([self.playerWormInninsTwoArray count]>0){
+        [self setChartTwo];
+    }else if(self.lineChartViewOne !=nil){
+        _lineChartViewOne.hidden = YES;
+    }
+    
+    [self setInningsBySelection:@"2"];
+[_tableview_batsman reloadData];
     
 }
 
@@ -419,9 +548,14 @@
     
 }
 - (IBAction)did_click_open_filter:(id)sender {
+    if([selectedFilterBatsman.strickerCode isEqual:@""]){
+        selectedBatsmanPosition = 0;
+    }
     self.view_filter.hidden =NO;
     self.view_open_filter.hidden = YES;
     self.lbl_filter_batsman_name.text = selectedFilterBatsman.name;
+    
+   
 }
 
 
@@ -436,7 +570,12 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if(tableView==self.tableview_batsman){
+        if(selectedInningsPosition == 1){
         return [self.batsmanFilterInnsOneArray count];
+        }else if(selectedInningsPosition == 2){
+            return [self.batsmanFilterInnsTwoArray count];
+
+        }
     }
     return 0;
 }
@@ -464,6 +603,14 @@
         BvsBBatsman *bvsBBatsman = [self.batsmanFilterInnsOneArray objectAtIndex:indexPath.row];
         
         
+        if(selectedInningsPosition == 1){
+            bvsBBatsman = [self.batsmanFilterInnsOneArray objectAtIndex:indexPath.row];
+        }else if(selectedInningsPosition == 2){
+            bvsBBatsman = [self.batsmanFilterInnsTwoArray objectAtIndex:indexPath.row];
+            
+        }
+        
+        
         cell.textLabel.text = [bvsBBatsman name];
         
         
@@ -479,15 +626,22 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(tableView == self.tableview_batsman){
         
-        BvsBBatsman *bvsBBatsman = [self.batsmanFilterInnsOneArray objectAtIndex:indexPath.row];
+        selectedBatsmanPosition = indexPath.row;
         
-        //        selectedFilterStricker = bvsBBatsman.strickerCode;
-        selectedFilterBatsman = bvsBBatsman;
+        BvsBBatsman *bvsBBatsman;
+        
+        if(selectedInningsPosition == 1){
+            bvsBBatsman = [self.batsmanFilterInnsOneArray objectAtIndex:indexPath.row];
+        }else if(selectedInningsPosition == 2){
+            bvsBBatsman = [self.batsmanFilterInnsTwoArray objectAtIndex:indexPath.row];
+            
+        }
         
         _lbl_filter_batsman_name.text = bvsBBatsman.name;
         self.tableview_batsman.hidden=YES;
         
         isStriker=NO;
+        
         
     }
 }
@@ -501,6 +655,23 @@
     
     self.view_filter.hidden =YES;
     self.view_open_filter.hidden = NO;
+    
+    
+    BvsBBatsman *bvsBBatsman = [self.batsmanFilterInnsOneArray objectAtIndex:selectedBatsmanPosition];
+    
+    selectedFilterBatsman = bvsBBatsman;
+    
+    if(selectedInningsPosition ==1 ){
+        [_lineChartViewOne reloadDataWithAnimate:YES];
+
+    }else if(selectedInningsPosition == 2){
+        [_lineChartViewTwo reloadDataWithAnimate:YES];
+
+    }
+    
+    
+
+
     
 }
 - (IBAction)did_click_close_filter:(id)sender {
@@ -516,23 +687,58 @@
 
 
 - (NSUInteger)numberOfLinesInLineChartView:(MCMultiLineChartView *)lineChartView {
-    return self.playerWormInninsOneArray.count;
+    
+    if(lineChartView == _lineChartViewOne){
+
+    if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+        return self.playerWormInninsOneArray.count;
+    }else{
+        return 2;
+    }
+
+    }else if(lineChartView == _lineChartViewTwo){
+        if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+            return self.playerWormInninsTwoArray.count;
+        }else{
+            return 2;
+        }
+    }
+    
+    return 0;
 }
 
 - (NSUInteger)lineChartView:(MCMultiLineChartView *)lineChartView lineCountAtLineNumber:(NSInteger)number {
     
     if(lineChartView == _lineChartViewOne){
         
-        NSMutableArray * subArray = [self.playerWormInninsOneArray objectAtIndex:number];
         
-        return subArray.count;
+        
+        if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+            
+            NSMutableArray * subArray = [self.playerWormInninsOneArray objectAtIndex:number];
+            
+            return subArray.count;
+        }else{
+            NSMutableArray * subArray = [self.playerWormInninsOneArray objectAtIndex:selectedBatsmanPosition];
+            return subArray.count;
+
+        }
+        
+        
         
     }else if(lineChartView == _lineChartViewTwo){
+        if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+            
+            NSMutableArray * subArray = [self.playerWormInninsTwoArray objectAtIndex:number];
         
-        NSMutableArray * subArray = [self.playerWormInninsTwoArray objectAtIndex:number];
-        
-        return subArray.count;
-       
+            return subArray.count;
+        }else{
+            
+            NSMutableArray * subArray = [self.playerWormInninsTwoArray objectAtIndex:selectedBatsmanPosition];
+
+            return subArray.count;
+
+        }
     }
     return 0;
 }
@@ -541,17 +747,30 @@
     
     if(lineChartView == _lineChartViewOne){
         
+        if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+
         NSMutableArray * subArray = [self.playerWormInninsOneArray objectAtIndex:lineNumber];
         PlayerWormChartRecords *record = [subArray objectAtIndex:index];
         return record.STRIKERRUNS;
+        }else{
+            NSMutableArray * subArray = [self.playerWormInninsOneArray objectAtIndex:selectedBatsmanPosition];
+            PlayerWormChartRecords *record = [subArray objectAtIndex:index];
+            return record.STRIKERRUNS;
+
+        }
     }else if(lineChartView == _lineChartViewTwo){
-//        if(lineNumber == 0){
-//            WormRecord *record = [self.wormDataInns3Array objectAtIndex:index];
-//            return record.score;
-//        }else{
-//            WormRecord *record = [self.wormDataInns4Array objectAtIndex:index];
-//            return record.score;
-//        }
+
+        if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+            
+            NSMutableArray * subArray = [self.playerWormInninsTwoArray objectAtIndex:lineNumber];
+            PlayerWormChartRecords *record = [subArray objectAtIndex:index];
+            return record.STRIKERRUNS;
+        }else{
+            NSMutableArray * subArray = [self.playerWormInninsTwoArray objectAtIndex:selectedBatsmanPosition];
+            PlayerWormChartRecords *record = [subArray objectAtIndex:index];
+            return record.STRIKERRUNS;
+            
+        }
         
     }
     return @"";
@@ -562,24 +781,31 @@
     
     
     if(lineChartView == _lineChartViewOne){
-        
-        NSMutableArray * subArray = [self.playerWormInninsOneArray objectAtIndex:linenumber];
+        NSMutableArray * subArray;
+
+        if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+            subArray = [self.playerWormInninsOneArray objectAtIndex:linenumber];
+        }else{
+            subArray = [self.playerWormInninsOneArray objectAtIndex:selectedBatsmanPosition];
+
+        }
         PlayerWormChartRecords *record = [subArray objectAtIndex:number];
-        return [NSString stringWithFormat:@"%@%@",record.ACTUALOVER,record.BALLNO];
-        //return record.OVERBYOVER;
+        return [NSString stringWithFormat:@"%@.%@",record.ACTUALOVER,record.BALLNO];
         
         
     }else if(lineChartView == _lineChartViewTwo){
         
-//        if(linenumber == 0){
-//            WormRecord *record = [self.wormDataInns3Array objectAtIndex:number];
-//            return record.over;
-//            
-//        }else{
-//            WormRecord *record = [self.wormDataInns4Array objectAtIndex:number];
-//            return record.over;
-//            
-//        }
+        NSMutableArray * subArray;
+        
+        if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+            subArray = [self.playerWormInninsTwoArray objectAtIndex:linenumber];
+        }else{
+            subArray = [self.playerWormInninsTwoArray objectAtIndex:selectedBatsmanPosition];
+            
+        }
+        PlayerWormChartRecords *record = [subArray objectAtIndex:number];
+        return [NSString stringWithFormat:@"%@.%@",record.ACTUALOVER,record.BALLNO];
+        
     }
     return @"";
     
@@ -590,6 +816,26 @@
         return     [UIColor  clearColor];
     }else if(lineNumber == 1){
         return     [UIColor  colorWithRed:(218/255.0f) green:(61/255.0f) blue:(67/255.0f) alpha:1.0f];
+    }else if(lineNumber == 2){
+        return     [UIColor  colorWithRed:(150/255.0f) green:(61/255.0f) blue:(67/255.0f) alpha:1.0f];
+    }else if(lineNumber == 3){
+        return     [UIColor  colorWithRed:(200/255.0f) green:(200/255.0f) blue:(67/255.0f) alpha:1.0f];
+    }else if(lineNumber == 4){
+        return     [UIColor  colorWithRed:(100/255.0f) green:(200/255.0f) blue:(100/255.0f) alpha:1.0f];
+    }else if(lineNumber == 5){
+        return     [UIColor  colorWithRed:(218/255.0f) green:(200/255.0f) blue:(200/255.0f) alpha:1.0f];
+    }else if(lineNumber == 6){
+        return     [UIColor  colorWithRed:(150/255.0f) green:(61/255.0f) blue:(150/255.0f) alpha:1.0f];
+    }else if(lineNumber == 7){
+        return     [UIColor  colorWithRed:(218/255.0f) green:(180/255.0f) blue:(200/255.0f) alpha:1.0f];
+    }else if(lineNumber == 8){
+        return     [UIColor  colorWithRed:(200/255.0f) green:(105/255.0f) blue:(67/255.0f) alpha:1.0f];
+    }else if(lineNumber == 9){
+        return     [UIColor  colorWithRed:(170/255.0f) green:(161/255.0f) blue:(100/255.0f) alpha:1.0f];
+    }else if(lineNumber == 10){
+        return     [UIColor  colorWithRed:(170/255.0f) green:(61/255.0f) blue:(60/255.0f) alpha:1.0f];
+    }else if(lineNumber == 11){
+        return     [UIColor  colorWithRed:(218/255.0f) green:(115/255.0f) blue:(120/255.0f) alpha:1.0f];
     }else{
         return     [UIColor  colorWithRed:(35/255.0f) green:(116/255.0f) blue:(203/255.0f) alpha:1.0f];
     }
@@ -603,50 +849,129 @@
     return nil;
 }
 
-- (NSMutableArray *)lineChartView:(MCMultiLineChartView *)lineChartView informationOfWicketInSection:(NSInteger)lineNumber{
+- (PlayerWormChartRecords *)lineChartView:(MCMultiLineChartView *)lineChartView informationOfWicketInSection:(NSInteger)lineNumber index:(NSInteger)index{
     
-//    if(lineChartView == _lineChartViewOne){
-//        
-//        if(lineNumber == 0){
-//            return _wicketInnsOne;
-//            
-//        }else{
-//            return _wicketInnsTwo;
-//        }
-//    }else if(lineChartView == _lineChartViewTwo){
-//        if(lineNumber == 0){
-//            return _wicketInnsThree;
-//        }else{
-//            return _wicketInnsFour;
-//        }
-//        
-//    }
     
+    
+    if(lineChartView == _lineChartViewOne){
+        NSMutableArray * subArray;
+        
+        if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+
+            subArray = [self.playerWormInninsOneArray objectAtIndex:lineNumber];
+            
+        }else{
+            subArray = [self.playerWormInninsOneArray objectAtIndex:selectedBatsmanPosition];
+            
+        }
+        PlayerWormChartRecords *record = [subArray objectAtIndex:index];
+        return record;
+        
+        
+    }else if(lineChartView == _lineChartViewTwo){
+        
+        NSMutableArray * subArray;
+        
+        if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+            subArray = [self.playerWormInninsTwoArray objectAtIndex:lineNumber];
+        }else{
+            subArray = [self.playerWormInninsTwoArray objectAtIndex:selectedBatsmanPosition];
+            
+        }
+        PlayerWormChartRecords *record = [subArray objectAtIndex:index];
+        return record;
+        
+    }
     return nil;
+    
+    
 }
 
 
 - (int)getStartIndex:(MCMultiLineChartView *)lineChartView titleAtLineNumber:(NSInteger)number :(NSInteger)linenumber{
     
-    NSMutableArray * subArray = [self.playerWormInninsOneArray objectAtIndex:linenumber];
-    if(subArray.count>0){
-        PlayerWormChartRecords *recordFst = [subArray objectAtIndex:number];
-        NSMutableArray * firstSubArray = [self.playerWormInninsOneArray objectAtIndex:0];
-
+ 
     
-    for(int i=0;i<firstSubArray.count;i++){
+    
+    
+    if(lineChartView == _lineChartViewOne){
+        NSMutableArray * subArray;
         
-        PlayerWormChartRecords *record = [firstSubArray objectAtIndex:i];
+        if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+            
+            subArray = [self.playerWormInninsOneArray objectAtIndex:linenumber];
+            
+        }else{
+            subArray = [self.playerWormInninsOneArray objectAtIndex:selectedBatsmanPosition];
+            
+        }
+        
+        if(subArray.count>0){
+            PlayerWormChartRecords *recordFst = [subArray objectAtIndex:number];
+            NSMutableArray * firstSubArray;
+            if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
 
+             firstSubArray = [self.playerWormInninsOneArray objectAtIndex:0];
+            }else{
+                firstSubArray = [self.playerWormInninsOneArray objectAtIndex:selectedBatsmanPosition];
+
+            }
+            
+            
+            for(int i=0;i<firstSubArray.count;i++){
+                
+                PlayerWormChartRecords *record = [firstSubArray objectAtIndex:i];
+                
+                
+                if([recordFst.XAXIS isEqual:record.XAXIS]){
+                    return i+1;
+                }
+                
+            }
+            
+        }
         
-        if([recordFst.XAXIS isEqual:record.XAXIS]){
-            return i+1;
+    }else if(lineChartView == _lineChartViewTwo){
+        
+        NSMutableArray * subArray;
+        
+        if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+            subArray = [self.playerWormInninsTwoArray objectAtIndex:linenumber];
+        }else{
+            subArray = [self.playerWormInninsTwoArray objectAtIndex:selectedBatsmanPosition];
+            
+        }
+        if(subArray.count>0){
+            PlayerWormChartRecords *recordFst = [subArray objectAtIndex:number];
+            
+            
+            NSMutableArray * firstSubArray;
+            if([selectedFilterBatsman.strickerCode isEqual:@""]){//Filter not applied
+                
+                firstSubArray = [self.playerWormInninsTwoArray objectAtIndex:0];
+            }else{
+                firstSubArray = [self.playerWormInninsTwoArray objectAtIndex:selectedBatsmanPosition];
+                
+            }
+            
+            for(int i=0;i<firstSubArray.count;i++){
+                
+                PlayerWormChartRecords *record = [firstSubArray objectAtIndex:i];
+                
+                
+                if([recordFst.XAXIS isEqual:record.XAXIS]){
+                    return i+1;
+                }
+                
+            }
+            
         }
         
     }
-    
-    }
     return 1;
+
+    
+    
 }
 
 

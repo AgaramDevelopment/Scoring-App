@@ -178,6 +178,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
         _sections = [self.dataSource numberOfSectionsInBarChartView:self];
     }
     
+    
     NSAssert([self.dataSource respondsToSelector:@selector(barChartView:numberOfBarsInSection:)], @"BarChartView // delegate must implement barChartView:numberOfBarsInSection:");
     
    // _paddingSection = PADDING_SECTION_DEFAULT;
@@ -336,8 +337,8 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                    
                     
                     wicket_Btn.tag = [objManhattanRecord.tag intValue];
-                    wicket_Btn.center = CGPointMake(xOffset-25, chartYOffset - [objManhattanRecord.Run floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2);
-                    [wicket_Btn setBackgroundColor:[UIColor redColor]];
+                    wicket_Btn.center = CGPointMake(xOffset-20, chartYOffset - [objManhattanRecord.Run floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2);
+                    [wicket_Btn setBackgroundColor:[UIColor colorWithRed:(16/255.0f) green:(210/255.0f) blue:(158/255.0f) alpha:1.0f]];
                     wicket_Btn.layer.cornerRadius=15;
                     wicket_Btn.layer.masksToBounds=YES;
                     
