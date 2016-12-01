@@ -23,6 +23,7 @@
 #import "FieldingReportVC.h"
 #import "SpellReportVC.h"
 #import "ReportCell.h"
+#import "PlayerWormChartVC.h"
 
 @interface ReportVC ()<UIScrollViewDelegate>
 {
@@ -41,6 +42,7 @@
     PartnershipVC * objPartnershipvc;
     FieldingReportVC * FieldingReport;
     SpellReportVC * SpellReport;
+    PlayerWormChartVC *playerWormChartVC;
     UILabel * sep_lbl;
 }
 @property (nonatomic) BOOL subViewLayoutCalled;
@@ -263,11 +265,13 @@ NSMutableArray * objhartlistArray;
     
     else if(indexPath.row == 13)
     {
-        
-        [self setSession];
+        if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){
+            
+            [self setSession];
         }else{
             [self setPlayerWormChartView];
         }
+
     }
     else if(indexPath.row == 14)
     {
