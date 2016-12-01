@@ -275,7 +275,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS SET BATTINGTEAMCODE='%@',TOTALRUNS='%@',TOTALOVERS='%@',TOTALWICKETS='%@', INNINGSSTATUS='%@',ISDECLARE = '%@'  WHERE  COMPETITIONCODE='%@' AND MATCHCODE = '%@' AND   	INNINGSNO = '%@'",TEAMCODE,TOTALRUN,OVERBALLNO,WICKETS,ISDECLARE,ISDECLARE,COMPETITIONCODE,MATCHCODE,INNINGSNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS SET BATTINGTEAMCODE='%@',TOTALRUNS='%@',TOTALOVERS='%@',TOTALWICKETS='%@', INNINGSSTATUS='%@',ISDECLARE = '%@'  WHERE  COMPETITIONCODE='%@' AND MATCHCODE = '%@' AND   	INNINGSNO = %@",TEAMCODE,TOTALRUN,OVERBALLNO,WICKETS,ISDECLARE,ISDECLARE,COMPETITIONCODE,MATCHCODE,INNINGSNO];
         const char *selectStmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
@@ -314,7 +314,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
+            while(sqlite3_step(statement)==SQLITE_DONE){
                 
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
@@ -345,7 +345,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         const char *selectStmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
+            while(sqlite3_step(statement)==SQLITE_DONE){
                 
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
@@ -376,7 +376,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
           const char *selectStmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
+            while(sqlite3_step(statement)==SQLITE_DONE){
                 
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
@@ -408,7 +408,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
         if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
+            while(sqlite3_step(statement)==SQLITE_DONE){
                 
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
@@ -439,9 +439,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)== SQLITE_OK)
             
         {
-            while(sqlite3_step(statement)==SQLITE_ROW){
+            while(sqlite3_step(statement)==SQLITE_DONE){
                 
-                NSString * innsStatus =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString * innsStatus =  [self getValueByNull:statement :0];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
