@@ -44,7 +44,6 @@
     SpellReportVC * SpellReport;
     PlayerWormChartVC *playerWormChartVC;
     UILabel * sep_lbl;
-    PlayerWormChartVC *playerWormChartVC;
 }
 @property (nonatomic) BOOL subViewLayoutCalled;
 
@@ -265,6 +264,8 @@ NSMutableArray * objhartlistArray;
     
     else if(indexPath.row == 13)
     {
+        
+       // NSLog(@"%d",objBtn.tag);
         if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){
             
             [self setSession];
