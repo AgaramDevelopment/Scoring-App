@@ -44,6 +44,7 @@
     SpellReportVC * SpellReport;
     PlayerWormChartVC *playerWormChartVC;
     UILabel * sep_lbl;
+    PlayerWormChartVC *playerWormChartVC;
 }
 @property (nonatomic) BOOL subViewLayoutCalled;
 
@@ -239,7 +240,6 @@ NSMutableArray * objhartlistArray;
     }
     else if(indexPath.row == 11)
     {
-        
         
         
         SpellReport = [[SpellReportVC alloc]initWithNibName:@"SpellReportVC" bundle:nil];
