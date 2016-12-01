@@ -42,8 +42,8 @@
     PartnershipVC * objPartnershipvc;
     FieldingReportVC * FieldingReport;
     SpellReportVC * SpellReport;
-    UILabel * sep_lbl;
     PlayerWormChartVC *playerWormChartVC;
+    UILabel * sep_lbl;
 }
 @property (nonatomic) BOOL subViewLayoutCalled;
 
@@ -267,11 +267,12 @@ NSMutableArray * objhartlistArray;
         
        // NSLog(@"%d",objBtn.tag);
         if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){
-
-        [self setSession];
+            
+            [self setSession];
         }else{
             [self setPlayerWormChartView];
         }
+
     }
     else if(indexPath.row == 14)
     {
