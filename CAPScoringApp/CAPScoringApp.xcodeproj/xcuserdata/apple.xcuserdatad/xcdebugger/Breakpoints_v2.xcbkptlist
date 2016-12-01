@@ -446,9 +446,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1727"
-            endingLineNumber = "1727"
-            landmarkName = "-GetBallCodeForDeleteEndSession::::"
-            landmarkType = "5">
+            endingLineNumber = "1727">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -462,9 +460,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1721"
-            endingLineNumber = "1721"
-            landmarkName = "-GetBallCodeForDeleteEndSession::::"
-            landmarkType = "5">
+            endingLineNumber = "1721">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -478,9 +474,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "361"
-            endingLineNumber = "361"
-            landmarkName = "-DeleteEndSession:::::"
-            landmarkType = "5">
+            endingLineNumber = "361">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -622,9 +616,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "86"
-            endingLineNumber = "86"
-            landmarkName = "-FetchEndSession:::::"
-            landmarkType = "5">
+            endingLineNumber = "86">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -638,9 +630,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
-            endingLineNumber = "94"
-            landmarkName = "-FetchEndSession:::::"
-            landmarkType = "5">
+            endingLineNumber = "94">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -654,9 +644,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "170"
-            endingLineNumber = "170"
-            landmarkName = "-GetDayNoStatusForFetchEndSession::"
-            landmarkType = "5">
+            endingLineNumber = "170">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -670,9 +658,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
-            endingLineNumber = "178"
-            landmarkName = "-GetDayNoStatusForFetchEndSession::"
-            landmarkType = "5">
+            endingLineNumber = "178">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
