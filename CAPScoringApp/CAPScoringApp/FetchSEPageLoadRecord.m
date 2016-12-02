@@ -724,7 +724,7 @@ NSString *bowlerCode;
         if(matchInningsEqual){
             TOTALBOWLTEAMRUNS =  [NSNumber numberWithInt: TOTALBOWLTEAMRUNS.intValue + 1];
         }else if(matchInningsNOTEqual){
-            TOTALBOWLTEAMRUNS =  [NSNumber numberWithInt: TOTALBOWLTEAMRUNS.intValue + 1];
+            TOTALBOWLTEAMRUNS =  [NSNumber numberWithInt: TOTALBOWLTEAMRUNS.intValue ];
         }
 //        else{
 //            TOTALBOWLTEAMRUNS = TOTALBOWLTEAMRUNS;

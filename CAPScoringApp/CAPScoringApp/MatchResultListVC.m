@@ -86,6 +86,8 @@ SelectPlayerRecord *selectedMostValuPlayer;
     selectedTablePostition = 0;
 //    isTableOpen = NO;
     
+    [self.btn_revert_id.layer setBackgroundColor:[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:(1)].CGColor];
+     _btn_revert_id.userInteractionEnabled = NO;
 
     [self resetPage];
     
@@ -258,7 +260,11 @@ SelectPlayerRecord *selectedMostValuPlayer;
         
         [self.btn_revert_id.layer setBackgroundColor:[UIColor colorWithRed:(255/255.0f) green:(86/255.0f) blue:(88/255.0f) alpha:(1)].CGColor];
                 _btn_revert_id.userInteractionEnabled = YES;
-
+    }
+    
+    
+    ///revert after display manofseries,all round values
+    
         if([ fetchMatchResult.GetBestPlayerDetails count]>0){
             GetBestPlayerDetail *playerDetail = [fetchMatchResult.GetBestPlayerDetails objectAtIndex:0];
             
@@ -312,11 +318,11 @@ SelectPlayerRecord *selectedMostValuPlayer;
             
         }
         
-    }else{
-        [self.btn_revert_id.layer setBackgroundColor:[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:(1)].CGColor];
-        _btn_revert_id.userInteractionEnabled = NO;
+    //else{
+//        [self.btn_revert_id.layer setBackgroundColor:[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:(1)].CGColor];
+//        _btn_revert_id.userInteractionEnabled = NO;
 
-    }
+    //}
     
 
     
@@ -914,6 +920,13 @@ else if(selectedTablePostition == POS_BEST_BATSMAN){
 
 
 -(void) startService:(NSString *)OPERATIONTYPE{
+    
+    if([OPERATIONTYPE isEqualToString:@"REVERT"])
+    {
+    [self.btn_revert_id.layer setBackgroundColor:[UIColor colorWithRed:(119/255.0f) green:(57/255.0f) blue:(58/255.0f) alpha:(1)].CGColor];
+    _btn_revert_id.userInteractionEnabled = NO;
+    }
+    
 //    if(self.checkInternetConnection){
 //        
 //        NSString *MANOFTHESERIESCODE = selectedManOfTheSeries == nil ?@"NULL":selectedManOfTheSeries.playerCode;

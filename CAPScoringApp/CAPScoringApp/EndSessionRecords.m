@@ -370,8 +370,8 @@ if(![dbEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCODE :Day
         {
             if(![dbEndSession GetSessionNoWithAddDayNoForDeleteEndSession: COMPETITIONCODE :MATCHCODE :INNINGSNO :DayNo])
             {
-             
-            [dbEndSession DeleteSessionEventsForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DayNo : sessionNo];
+                
+                [dbEndSession DeleteSessionEventsForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DayNo : sessionNo];
                 
                 
                 if ([sessionNo isEqual:@"3"])
@@ -380,14 +380,15 @@ if(![dbEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCODE :Day
                     [dbEndSession DeleteDayEventsForDeleteEndSession:COMPETITIONCODE :MATCHCODE :INNINGSNO :DayNo];
                 }
                 
-                }
             }
-            
         }
         
     }
     
-  
+}
+
+
+
 
 
 

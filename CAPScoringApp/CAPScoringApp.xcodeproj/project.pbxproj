@@ -2534,7 +2534,6 @@
 				TargetAttributes = {
 					CE0017FA1CF42FA500668D8B = {
 						CreatedOnToolsVersion = 7.3;
-						DevelopmentTeam = L5S8VPA4A5;
 					};
 					CE0018131CF42FA500668D8B = {
 						CreatedOnToolsVersion = 7.3;

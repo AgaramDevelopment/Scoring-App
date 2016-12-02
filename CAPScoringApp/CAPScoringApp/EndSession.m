@@ -661,7 +661,7 @@ int POS_TEAM_TYPE = 1;
 //            //dispatch_get_main_queue(), ^
 //            {
 //                
-//                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDSESSION/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],competitioncode, matchcode,fetchSeRecord.BATTINGTEAMCODE,fetchSeRecord.INNINGSNO,sessionRecords.DAYNO,[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO],_txt_startTime.text,_txt_endTime.text ,[NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO], [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO],[NSString stringWithFormat:@"%@" ,sessionRecords.RUNSSCORED],sessionRecords.WICKETLOST,@"(null)",BtnurrentTittle];
+//                NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/SETENDSESSION/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@/%@",[Utitliy getIPPORT],competitioncode, matchcode,fetchSeRecord.BATTINGTEAMCODE,fetchSeRecord.INNINGSNO,sessionRecords.DAYNO,[NSString stringWithFormat:@"%@",sessionRecords.SESSIONNO],_txt_startTime.text,_txt_endTime.text ,[NSString stringWithFormat:@"%@",sessionRecords.STARTOVERNO], [NSString stringWithFormat:@"%@",sessionRecords.ENDOVERNO],[NSString stringWithFormat:@"%@" ,sessionRecords.RUNSSCORED],sessionRecords.WICKETLOST,@"",BtnurrentTittle];
 //         
 //                
 //                NSLog(@"%@",baseURL);
@@ -901,7 +901,7 @@ int POS_TEAM_TYPE = 1;
     [self.scroll_EndSession addSubview:objDrobDowntbl];
     self.scroll_EndSession.scrollEnabled = NO;
     
-    NSMutableArray *teamArray = [dbEndSession GetBattingTeamForFetchEndSession:fetchSeRecord.BATTINGTEAMCODE:fetchSeRecord.BOWLINGTEAMCODE];
+    NSMutableArray *teamArray = [dbEndSession GetBattingTeamForFetchEndSession : fetchSeRecord.BATTINGTEAMCODE:fetchSeRecord.BOWLINGTEAMCODE];
     
     endSessionArray = teamArray;
     
