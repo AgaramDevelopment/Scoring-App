@@ -446,7 +446,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1727"
-            endingLineNumber = "1727">
+            endingLineNumber = "1727"
+            landmarkName = "-GetBallCodeForDeleteEndSession::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -460,7 +462,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1721"
-            endingLineNumber = "1721">
+            endingLineNumber = "1721"
+            landmarkName = "-GetBallCodeForDeleteEndSession::::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -644,7 +648,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "170"
-            endingLineNumber = "170">
+            endingLineNumber = "170"
+            landmarkName = "-GetDayNoStatusForFetchEndSession::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -658,7 +664,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "178"
-            endingLineNumber = "178">
+            endingLineNumber = "178"
+            landmarkName = "-GetDayNoStatusForFetchEndSession::"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -849,7 +857,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "13576"
             endingLineNumber = "13576"
-            landmarkName = "-SyncData_btn:"
+            landmarkName = "-RedirectFollowOnPage"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -865,7 +873,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "13585"
             endingLineNumber = "13585"
-            landmarkName = "-SyncData_btn:"
+            landmarkName = "-RedirectFollowOnPage"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
