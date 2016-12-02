@@ -243,7 +243,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION  SET MATCHRESULT = '' ,MATCHRESULTTEAMCODE = '' ,[MATCHSTATUS] = 'MSC124'  ,MODIFIEDBY = 'USER'  ,MODIFIEDDATE = strftime('%%Y-%%m-%%d %%H-%%M-%%S','now') WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION  SET MATCHRESULT = '' ,MATCHRESULTTEAMCODE = '' ,[MATCHSTATUS] = 'MSC124'  ,MODIFIEDBY = 'USER'  ,MODIFIEDDATE = strftime('%%m/%%d/%%Y %%H:%%M:%%S','now') WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
         const char *selectStmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -277,7 +277,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION SET MATCHRESULT = '%@' ,MATCHRESULTTEAMCODE = '%@' ,TEAMAPOINTS = '%@' ,TEAMBPOINTS = '%@' ,MATCHSTATUS = 'MSC125'  ,MODIFIEDBY = 'USER'				  ,MODIFIEDDATE = strftime('%%Y-%%m-%%d %%H-%%M-%%S','now')			 WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,TEAMBPOINTS,COMPETITIONCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION SET MATCHRESULT = '%@' ,MATCHRESULTTEAMCODE = '%@' ,TEAMAPOINTS = '%@' ,TEAMBPOINTS = '%@' ,MATCHSTATUS = 'MSC125'  ,MODIFIEDBY = 'USER'				  ,MODIFIEDDATE = strftime('%%m/%%d/%%Y %%H:%%M:%%S','now')			 WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,TEAMBPOINTS,COMPETITIONCODE,MATCHCODE];
         const char *selectStmt = [updateSQL UTF8String];
         
         if(sqlite3_prepare(dataBase, selectStmt, -1, &statement, NULL)==SQLITE_OK)
@@ -344,7 +344,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION  SET MATCHRESULT = '%@'  ,MATCHRESULTTEAMCODE = '%@'  ,[TEAMAPOINTS] = '%@' ,TEAMBPOINTS = '%@' ,MATCHSTATUS = 'MSC125'  ,MODIFIEDBY = 'USER'  ,MODIFIEDDATE =  strftime('%%Y-%%m-%%d %%H-%%M-%%S','now') WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,TEAMBPOINTS,COMPETITIONCODE,MATCHCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE MATCHREGISTRATION  SET MATCHRESULT = '%@'  ,MATCHRESULTTEAMCODE = '%@'  ,[TEAMAPOINTS] = '%@' ,TEAMBPOINTS = '%@' ,MATCHSTATUS = 'MSC125'  ,MODIFIEDBY = 'USER'  ,MODIFIEDDATE =  strftime('%%m/%%d/%%Y %%H:%%M:%%S','now') WHERE COMPETITIONCODE='%@' AND MATCHCODE='%@'",MATCHRESULTCODE,MATCHWONTEAMCODE,TEAMAPOINTS,TEAMBPOINTS,COMPETITIONCODE,MATCHCODE];
         const char *selectStmt = [updateSQL UTF8String];
         
         

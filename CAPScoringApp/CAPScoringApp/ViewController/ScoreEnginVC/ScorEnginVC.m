@@ -13706,6 +13706,31 @@
                 NSDictionary  *responseDict = [serviceResponse objectAtIndex:0];
                 NSString *ErrorNoStr =[responseDict objectForKey:@"ErrorNo"];
                 
+               // NSString *CompareErrorno=@"MOB0005";
+
+            
+            
+            
+            
+            
+            
+//            NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+//            NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
+//            
+//            [request setHTTPMethod:@"POST"];
+//            [request setHTTPBody:jsonData];
+//            [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+//            [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//            [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField : @"Content-Length"];
+//            
+//            NSURLResponse* response;
+//            NSError* error = nil;
+//            responseData = [NSURLConnection sendSynchronousRequest:request  returningResponse:&response error:&error];
+//            if (responseData != nil) {
+//                NSMutableArray *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+//                NSDictionary  *responseDict = [serviceResponse objectAtIndex:0];
+//                NSString *ErrorNoStr =[responseDict objectForKey:@"ErrorNo"];
+//                
                 NSString *CompareErrorno=@"MOB0005";
                 if ([ErrorNoStr isEqualToString:CompareErrorno]) {
                     
