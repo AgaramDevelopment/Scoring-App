@@ -901,7 +901,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"Insert into MATCHTEAMPLAYERDETAILS  ( MATCHTEAMPLAYERCODE,MATCHCODE,TEAMCODE,PLAYERCODE,PLAYINGORDER,RECORDSTATUS) VALUES (\"%@\",\"%@\",\"%@\",\"%@\",\"%@\",\"%@\")",MatchTeamPlayerCode,matchCode,Teamcode,playerCode,Playerorder,recordStatus];
+        NSString *updateSQL = [NSString stringWithFormat:@"Insert into MATCHTEAMPLAYERDETAILS  ( MATCHTEAMPLAYERCODE,MATCHCODE,TEAMCODE,PLAYERCODE,PLAYINGORDER,RECORDSTATUS) VALUES (\'%@\',\'%@\',\'%@\',\'%@\',\'%@\',\'%@\')",MatchTeamPlayerCode,matchCode,Teamcode,playerCode,Playerorder,recordStatus];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK){
             if (sqlite3_step(statement) == SQLITE_DONE)
@@ -953,6 +953,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
                 
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+            
+                
                 [objPushSyncDBMANAGER InsertTransactionLogEntry:matchCode :@"MATCHTEAMPLAYERDETAILS" :@"MSC251" :updateSQL];
                 
                 return YES;

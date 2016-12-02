@@ -309,6 +309,7 @@ static NSString * const reuseIdentifier = @"Cell";
                  [objDBManager updateSelectedPlayersResultCode:[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus];
             }
             else
+               // if ([recordStatus isEqualToString:@"MSC001" ])
             {
                 [objDBManager InsertSelectPlayer :[selectedPlayerFilterRecord playerCode] :[self matchCode] : MTPCODE :self.SelectTeamCode :playerorderLevel:recordStatus];
             }
