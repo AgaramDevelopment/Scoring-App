@@ -358,24 +358,25 @@ DBManagerEndSession *dbEndSession;
 
 {
    
-    NSInteger dayno = [DayNo integerValue];
+    int dayno = [DayNo intValue]-1;
     
+    NSString *dayStr = [NSString stringWithFormat: @"%d", day];
     
-if(![dbEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCODE :dayno-1 :sessionNo] && ![dbEndSession GetBallCodeWithAddDayNoForDeleteEndSession: COMPETITIONCODE : MATCHCODE : DayNo ])
+if(![dbEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCODE :[NSString stringWithFormat:DAYNO] :sessionNo] && ![dbEndSession GetBallCodeWithAddDayNoForDeleteEndSession: COMPETITIONCODE : MATCHCODE : DayNo ])
     {
         
-        if(![dbEndSession GetSessionNoForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : sessionNo ])
+        if(![dbEndSession GetSessionNoForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DayNo : sessionNo ])
         {
-            if(![dbEndSession GetSessionNoWithAddDayNoForDeleteEndSession: COMPETITIONCODE :MATCHCODE :INNINGSNO :DAYNO])
+            if(![dbEndSession GetSessionNoWithAddDayNoForDeleteEndSession: COMPETITIONCODE :MATCHCODE :INNINGSNO :DayNo])
             {
              
-            [dbEndSession DeleteSessionEventsForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DAYNO : sessionNo];
+            [dbEndSession DeleteSessionEventsForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DayNo : sessionNo];
                 
                 
                 if ([sessionNo isEqual:@"3"])
                 {
                     
-                    [dbEndSession DeleteDayEventsForDeleteEndSession:COMPETITIONCODE :MATCHCODE :INNINGSNO :DAYNO];
+                    [dbEndSession DeleteDayEventsForDeleteEndSession:COMPETITIONCODE :MATCHCODE :INNINGSNO :DayNo];
                 }
                 
                 }

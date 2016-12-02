@@ -186,7 +186,7 @@
 {
     DBManagerDeclareInnings *objDBManagerDeclareInnings = [[DBManagerDeclareInnings alloc]init];
     
-    if(ISDECLARE.intValue == 1)
+    if(ISDECLARE.intValue ==1)
     {
         
         if([objDBManagerDeclareInnings GetBallCodeForUpdateDeclareInnings : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO])
@@ -229,7 +229,7 @@
         if(![objDBManagerDeclareInnings GetBallCodeInRevertInningsForUpdateDeclareInnings : COMPETITIONCODE : MATCHCODE : TEAMCODE : INNINGSNO])
             
         {
-            [objDBManagerDeclareInnings UpdateInningsEventInRevertInningsForUpdateDeclareInnings: ISDECLARE: COMPETITIONCODE: MATCHCODE : INNINGSNO];
+            [objDBManagerDeclareInnings UpdateInningsEventInRevertInningsForUpdateDeclareInnings : ISDECLARE: COMPETITIONCODE: MATCHCODE : INNINGSNO];
             
             [objDBManagerDeclareInnings DeleteInningsEventForUpdateDeclareInnings : COMPETITIONCODE: MATCHCODE : INNINGSNO];
             
