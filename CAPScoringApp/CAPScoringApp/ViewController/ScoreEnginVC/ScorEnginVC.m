@@ -6289,7 +6289,9 @@
              appeal.numberStyle = NSNumberFormatterDecimalStyle;
              NSNumber *isappeal= [appeal numberFromString:@"1"];
                self.ballEventRecord.objIsappeal = isappeal;
-               [self unselectedViewBg:_view_appeal];
+             // [self unselectedViewBg:_view_appeal];
+             
+             
                self.View_Appeal.hidden = YES;
                isAppealSelected= YES;
                     
@@ -6326,6 +6328,7 @@
                 [table_Appeal scrollToRowAtIndexPath:indexPath
                                     atScrollPosition:UITableViewScrollPositionTop
                                             animated:YES];
+                //isAppealSelected = NO;
             }
            
 
@@ -7473,34 +7476,41 @@
             
         
             record = (GetSEAppealDetailsForAppealEvents*)[getAppealArray objectAtIndex:0];
-            self.comments_txt.text=record.APPEALCOMMENTS;
-            self.lbl_appealsystem.text=record.APPEALSYSTEMDES;
-            self.lbl_appealComponent.text=record.APPEALCOMPONENTDES;
-            self.lbl_umpirename.text=record.UMPIRENAME;
-            self.lbl_batsmen.text=record.BATSMANNAME;
-            _view_table_select.hidden=NO;
-            isAppealSelected = NO;
-        }
-        
-        else if(isAppealSelected && self.ballEventRecord.objIsappeal!=nil && self.ballEventRecord.objIsappeal == objAppealrecord.MetaSubCode){
-            
-            self.ballEventRecord.objIsappeal = nil;
-            [self unselectedViewBg:_view_appeal];
-            
-        }
-        
-        else{
+            if ([getAppealArray count]>0) {
+                self.comments_txt.text=record.APPEALCOMMENTS;
+                self.lbl_appealsystem.text=record.APPEALSYSTEMDES;
+                self.lbl_appealComponent.text=record.APPEALCOMPONENTDES;
+                self.lbl_umpirename.text=record.UMPIRENAME;
+                self.lbl_batsmen.text=record.BATSMANNAME;
+            }
+       _view_table_select.hidden=NO;
+           // isAppealSelected = NO;
+        } else{
             
             
-            self.ballEventRecord.objIsappeal =objAppealrecord.MetaSubCode;
-            self.comments_txt.text=@"";
-            self.lbl_appealsystem.text=@"";
-            self.lbl_appealComponent.text=@"";
-            self.lbl_umpirename.text=@"";
-            self.lbl_batsmen.text=@"";
+            AppealTypeSelectCode =objAppealrecord.MetaSubCode;
+            //            self.comments_txt.text=@"";
+            //            self.lbl_appealsystem.text=@"";
+            //            self.lbl_appealComponent.text=@"";
+            //            self.lbl_umpirename.text=@"";
+            //            self.lbl_batsmen.text=@"";
             _view_table_select.hidden=NO;
             
         }
+
+        
+//         if(isAppealSelected && AppealTypeSelectCode!=nil && AppealTypeSelectCode == objAppealrecord.MetaSubCode){
+//            
+//            self.ballEventRecord.objIsappeal = nil;
+//                         self.comments_txt.text=@"";
+//                         self.lbl_appealsystem.text=@"";
+//                         self.lbl_appealComponent.text=@"";
+//                         self.lbl_umpirename.text=@"";
+//                         self.lbl_batsmen.text=@"";
+//            [self unselectedViewBg:_view_appeal];
+//            
+//        }
+        
         isAppealSelected=NO;
         
     }
@@ -7611,9 +7621,13 @@
             
             self.table_AppealSystem.hidden=YES;
             isEnableTbl=YES;
+            
+        }else if(isAppealSelected && objAppealSystemEventRecord.AppealSystemMetaSubCodeDescription!=nil && AppealSystemSelectCode==objAppealSystemEventRecord.AppealSystemMetaSubCode){
+            isAppealSelected = NO;
+            objAppealSystemEventRecord.AppealSystemMetaSubCodeDescription = nil;
+                        [self unselectedViewBg:_view_appeal];
+        
         }
-        
-        
         
         
         if (tableView == self.table_AppealComponent)
@@ -9721,7 +9735,8 @@
         [self.view_table_select setHidden:YES];
         [self.View_Appeal setHidden:YES];
         isSaveAppeal=YES;
-        [self unselectedViewBg:_view_appeal];
+        isAppealSelected = YES;
+        //[self unselectedViewBg:_view_appeal];
         
     }
 }
