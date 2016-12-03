@@ -3383,7 +3383,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"INNINGSEVENTS" :@"MSC251" :updateSQL];
+                
+            NSString *updateInnings = [NSString stringWithFormat:@"UPDATE INNINGSEVENTS  SET  INNINGSSTARTTIME=NULL,INNINGSENDTIME=NULL,TOTALRUNS=NULL,TOTALOVERS=NULL,TOTALWICKETS=NULL,INNINGSSTATUS='0',ISDECLARE='0'  WHERE  COMPETITIONCODE='%@' AND MATCHCODE='%@' AND TEAMCODE='%@' AND INNINGSNO='%@'",COMPETITIONCODE,MATCHCODE,OLDTEAMCODE,OLDINNINGSNO];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"INNINGSEVENTS" :@"MSC251" :updateInnings];
                 return YES;
                 
             }
