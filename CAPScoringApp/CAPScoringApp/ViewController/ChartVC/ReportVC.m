@@ -150,6 +150,13 @@ NSMutableArray * objhartlistArray;
         [cmntryView.view removeFromSuperview];
     }
     
+    if(spiderView != nil)
+    {
+        [spiderView.view removeFromSuperview];
+    }
+    
+    
+    
     // cell.sepratorXposition .constant = indexPath.row*150;
     if(indexPath.row == 0)
     {
@@ -556,7 +563,7 @@ NSMutableArray * objhartlistArray;
     spiderView.thrdInnShortName = self.thrdInnShortName;
     spiderView.frthInnShortName = self.frthInnShortName;
     
-    spiderView.view.frame =CGRectMake(0,self.view.frame.origin.y+self.view.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    spiderView.view.frame =CGRectMake(0,self.Tittle_scroll.frame.origin.y+self.Tittle_scroll.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
     
 //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:spiderView.view];
@@ -578,7 +585,7 @@ NSMutableArray * objhartlistArray;
     sectorView.thrdInnShortName = self.thrdInnShortName;
     sectorView.frthInnShortName = self.frthInnShortName;
     
-    sectorView.view.frame =CGRectMake(0,self.view.frame.origin.y+self.view.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    sectorView.view.frame =CGRectMake(0,self.Tittle_scroll.frame.origin.y+self.Tittle_scroll.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
     
     //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:sectorView.view];
@@ -600,7 +607,7 @@ NSMutableArray * objhartlistArray;
     bowlingKpiView.thrdInnShortName = self.thrdInnShortName;
     bowlingKpiView.frthInnShortName = self.frthInnShortName;
     
-    bowlingKpiView.view.frame =CGRectMake(0,self.view.frame.origin.y+self.view.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    bowlingKpiView.view.frame =CGRectMake(0,self.Tittle_scroll.frame.origin.y+self.Tittle_scroll.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
     
     //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:bowlingKpiView.view];
@@ -651,7 +658,7 @@ NSMutableArray * objhartlistArray;
     
     SessionReportvc.matchcode =self.matchCode;
     SessionReportvc.compitioncode =self.competitionCode;
-    SessionReportvc.view.frame =CGRectMake(0,self.view.frame.origin.y+self.view.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    SessionReportvc.view.frame =CGRectMake(0,self.Tittle_scroll.frame.origin.y+self.Tittle_scroll.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:SessionReportvc.view];
 }
 
@@ -669,7 +676,7 @@ NSMutableArray * objhartlistArray;
     objPartnershipvc.thrdInnShortName = self.thrdInnShortName;
     objPartnershipvc.frthInnShortName = self.frthInnShortName;
     
-    objPartnershipvc.view.frame =CGRectMake(0,self.view.frame.origin.y+self.view.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    objPartnershipvc.view.frame =CGRectMake(0,self.Tittle_scroll.frame.origin.y+self.Tittle_scroll.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:objPartnershipvc.view];
 }
     @end

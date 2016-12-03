@@ -230,7 +230,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
           self.btn_fourth_inns_id.hidden = YES;
     }
     
-
+    
 }
 
 -(void) setInitView{
@@ -450,9 +450,10 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     }
     
     
-    //self.tblView_Height.constant =self.table.contentSize.height+500;
-     [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant+300)];
-    
+    self.tblView_Height.constant =self.table.contentSize.height+500;
+     [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant)];
+   // self.tblView_Height.constant =self.backScroll.frame.size.height+300;
+
     
     //[self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width, self.table.contentSize.height)];
    // [tableView reloadData];
@@ -475,8 +476,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         expendBatmanview.hidden = YES;
         expendbowlerview.hidden=YES;
     }];
-    self.tblView_Height.constant =self.table.contentSize.height+100;
-    [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant)];
+   // self.tblView_Height.constant =self.table.contentSize.height-400;
+    [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant-400)];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

@@ -9,7 +9,7 @@
 #import "PowerPlayVC.h"
 #import "PowerPlayTVCell.h"
 #import "PowerPlayRecord.h"
-#import "PowerPlayGridVC.h"
+//#import "PowerPlayGridVC.h"
 #import "DBManager.h"
 #import "Reachability.h"
 #import "AppDelegate.h"
@@ -198,6 +198,8 @@ else//Grid
     self.txt_startover.text =powerplayrecord.startover;
     self.txt_endover.text  =powerplayrecord.endover;
     self.lbl_setpowerplay.text =powerplayrecord.powerplaytypename;
+    powerplayCode              =powerplayrecord.powerplaycode;
+    powerplaytype               =powerplayrecord.powerplaytype;
     self.view_powerplay.hidden=YES;
     self.view_powerplaygrid.hidden=NO;
     [self.btn_submit setTitle:@"Update" forState:UIControlStateNormal];
@@ -390,35 +392,42 @@ else//Grid
 - (IBAction)btn_delete:(id)sender {
     
     if(powerplaystartover != nil){
+        
+        
+        UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Power Play" message:@"Do you want to delete Powerplay details ?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        alter.tag =1000;
+        [alter show];
+        
+        
    // [self DeleteService];
     
        
 
   //  PowerPlayRecord *powerplayrecord =[[PowerPlayRecord alloc]init];
     
-    powerplayrecord.startover= txt_startover.text;
-    powerplayrecord.endover= txt_endover.text;
-    powerplayrecord.powerplaytypecode= powerplaytype;
-    
-    
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    NSString *username=[defaults stringForKey :@"UserFullname"];
-    
-   // [DBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC001" :username :powerplaycode :self.matchCode];
-    
-    
-    
-    [objDBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC002" :username :powerplayCode :self.matchCode];
-    
-    //powerplayarray=[DBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
-        
-        self.view_powerplaygrid.hidden=YES;
-        self.btn_Add.hidden   =NO;
-        self.view_powerplay.hidden  =NO;
-        isPowerplay =NO;
-        Resultarray=[[NSMutableArray alloc]init];
-        Resultarray= [objDBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
-        [self.tbl_powerplay reloadData];
+//    powerplayrecord.startover= txt_startover.text;
+//    powerplayrecord.endover= txt_endover.text;
+//    powerplayrecord.powerplaytypecode= powerplaytype;
+//    
+//    
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    NSString *username=[defaults stringForKey :@"UserFullname"];
+//    
+//   // [DBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC001" :username :powerplaycode :self.matchCode];
+//    
+//    
+//    
+//    [objDBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC002" :username :powerplayCode :self.matchCode];
+//    
+//    //powerplayarray=[DBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
+//        
+//        self.view_powerplaygrid.hidden=YES;
+//        self.btn_Add.hidden   =NO;
+//        self.view_powerplay.hidden  =NO;
+//        isPowerplay =NO;
+//        Resultarray=[[NSMutableArray alloc]init];
+//        Resultarray= [objDBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
+//        [self.tbl_powerplay reloadData];
         
 //    PowerPlayGridVC *add = [[PowerPlayGridVC alloc]initWithNibName:@"PowerPlayGridVC" bundle:nil];
 //    add.resultarray=powerplayarray;
@@ -441,9 +450,43 @@ else//Grid
     }else{
         
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Power Play" message:@"No Record selected" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
         [alter show];
     }
     
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 1000) { // UIAlertView with tag 1 detected
+        if (buttonIndex == 0)
+        {
+            powerplayrecord.startover= txt_startover.text;
+            powerplayrecord.endover= txt_endover.text;
+            powerplayrecord.powerplaytypecode= powerplaytype;
+            
+            
+            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+            NSString *username=[defaults stringForKey :@"UserFullname"];
+        
+            [objDBManager UpdatePowerPlay:self.inningsNo :powerplayrecord.startover :powerplayrecord.endover :powerplayrecord.modifydate :powerplayrecord.powerplaytypecode :@"MSC002" :username :powerplayCode :self.matchCode];
+            
+            self.view_powerplaygrid.hidden=YES;
+            self.btn_Add.hidden   =NO;
+            self.view_powerplay.hidden  =NO;
+            isPowerplay =NO;
+            Resultarray=[[NSMutableArray alloc]init];
+            Resultarray= [objDBManager SetPowerPlayDetailsForInsert:self.matchCode :self.inningsNo];
+            [self.tbl_powerplay reloadData];
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Power Play" message:@"The power Play has been Deleted Successfully." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            
+            [alter show];
+
+            
+        }
+        
+    }
+
 }
 
 //Check internet connection

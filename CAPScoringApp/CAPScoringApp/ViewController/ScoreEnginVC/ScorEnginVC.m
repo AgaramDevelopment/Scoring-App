@@ -31,7 +31,7 @@
 #import "AppealBatsmenRecord.h"
 #import "AppDelegate.h"
 #import "ArchivesVC.h"
-#import "BreakVC.h"
+//#import "BreakVC.h"
 #import "EndInnings.h"
 #import "RevicedOverVC.h"
 #import "FixturesRecord.h"
@@ -45,7 +45,7 @@
 #import "MatchResultListVC.h"
 #import "EndDayVC.h"
 #import "DBManagerEndDay.h"
-#import "PowerPlayGridVC.h"
+//#import "PowerPlayGridVC.h"
 #import "PenaltygridVC.h"
 #import "AppealRecord.h"
 #import "umpiretablecell.h"
@@ -80,7 +80,7 @@
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 //#define IS_IPAD (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1024.0)
 
-@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,BreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate,Other_WicketDelegate,RevisedTargetDelegate,BatsManINOUTDelegate>
+@interface ScorEnginVC () <CDRTranslucentSideBarDelegate,UITableViewDelegate,UITableViewDataSource,UIGestureRecognizerDelegate,UIAlertViewDelegate,ChangeTeamDelegate,ChangeTossDelegate,FollowonDelegate,EditmodeDelegate,EndSedsessionDelegate,AddBreakVCDelagate,EndInningsVCDelagate,PenaltygridVCDelegate,DeclareInningsVCDelagate,MatchResultListVCDelagate,EnddayDelegate,RevisedoverDelegate,penalityDelegate,PowerplayDelegate,Other_WicketDelegate,RevisedTargetDelegate,BatsManINOUTDelegate>
 {   //appeal System
     BOOL isEnableTbl;
     GetSEAppealDetailsForAppealEvents *record;

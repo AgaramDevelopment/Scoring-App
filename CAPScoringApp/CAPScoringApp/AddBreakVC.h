@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "BreakVC.h"
+//#import "BreakVC.h"
 #import "DBManager.h"
+#import "BreakTableViewCell.h"
 
 @protocol AddBreakVCDelagate <NSObject>
 @required

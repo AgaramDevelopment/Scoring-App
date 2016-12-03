@@ -361,9 +361,12 @@ DBManagerEndSession *dbEndSession;
     NSInteger dayno = [DayNo integerValue];
     NSInteger day = dayno -1;
     
+   // NSInteger dayno = [DayNo integerValue];
+   // NSInteger day = dayno -1;
+    
     NSString *dayStr = [NSString stringWithFormat: @"%d", day];
     
-if(![dbEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCODE :DayNo :sessionNo] && ![dbEndSession GetBallCodeWithAddDayNoForDeleteEndSession: COMPETITIONCODE : MATCHCODE : DayNo ])
+    if(![dbEndSession GetBallCodeForDeleteEndSession:COMPETITIONCODE :MATCHCODE :DayNo :sessionNo] && ![dbEndSession GetBallCodeWithAddDayNoForDeleteEndSession: COMPETITIONCODE : MATCHCODE : DayNo ])
     {
         
         if(![dbEndSession GetSessionNoForDeleteEndSession : COMPETITIONCODE : MATCHCODE : INNINGSNO : DayNo : sessionNo ])

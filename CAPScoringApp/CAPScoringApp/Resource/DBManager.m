@@ -6842,7 +6842,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE,MATCHDATE FROM MATCHREGISTRATION WHERE COMPETITIONCODE ='%@'  AND MATCHCODE='%@' AND strftime('%%Y-%%m-%%d' ,MATCHDATE) <= strftime('%%Y-%%m-%%d' ,'%@')",COMPETITIONCODE,MATCHCODE,BREAKSTARTTIME];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT MATCHCODE,MATCHDATE FROM MATCHREGISTRATION WHERE COMPETITIONCODE ='%@'  AND MATCHCODE='%@' AND strftime('%%Y-%%m-%%d' ,MATCHDATE) <= strftime('%%Y-%%m-%%d' ,'%@')",COMPETITIONCODE,MATCHCODE,BREAKENDTIME];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {

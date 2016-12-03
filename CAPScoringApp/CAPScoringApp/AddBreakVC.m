@@ -10,7 +10,7 @@
 #import "DBManager.h"
 #import "BallEventRecord.h"
 #import "FetchSEPageLoadRecord.h"
-#import "BreakVC.h"
+//#import "BreakVC.h"
 #import "Reachability.h"
 #import "Utitliy.h"
 #import "AppDelegate.h"
@@ -579,7 +579,7 @@
     }
     
     else{
-        [ self UpdateBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :BREAKSTARTTIME :BREAKENDTIME :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
+        [ self UpdateBreaks:COMPETITIONCODE :INNINGSNO :MATCHCODE :self.Text_BreakStart.text :self.text_EndBreak.text :BREAKCOMMENTS :ISINCLUDEDURATION :BREAKNO];
         
        
         _addbreak_lbl.text=@"BREAKS";

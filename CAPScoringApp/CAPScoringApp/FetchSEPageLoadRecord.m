@@ -719,12 +719,12 @@ NSString *bowlerCode;
         
         BOOL matchInningsEqual = (([MATCHTYPE isEqual: @"MSC023"]|| [MATCHTYPE isEqual: @"MSC114"])  && [INNINGSNO isEqual: @"4"] && TOTALBOWLTEAMRUNS > 0);
         
-        BOOL matchInningsNOTEqual = (![MATCHTYPE isEqual: @"MSC023"]|| ![MATCHTYPE isEqual: @"MSC114"] && [INNINGSNO isEqual: @"2"] && TOTALBOWLTEAMRUNS > 0);
+        BOOL matchInningsNOTEqual = (![MATCHTYPE isEqual: @"MSC023"] && ![MATCHTYPE isEqual: @"MSC114"] && [INNINGSNO isEqual: @"2"] && TOTALBOWLTEAMRUNS > 0);
         
         if(matchInningsEqual){
             TOTALBOWLTEAMRUNS =  [NSNumber numberWithInt: TOTALBOWLTEAMRUNS.intValue + 1];
         }else if(matchInningsNOTEqual){
-            TOTALBOWLTEAMRUNS =  [NSNumber numberWithInt: TOTALBOWLTEAMRUNS.intValue ];
+            TOTALBOWLTEAMRUNS =  [NSNumber numberWithInt: TOTALBOWLTEAMRUNS.intValue +1];
         }
 //        else{
 //            TOTALBOWLTEAMRUNS = TOTALBOWLTEAMRUNS;
