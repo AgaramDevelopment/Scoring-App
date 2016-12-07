@@ -155,7 +155,14 @@ NSMutableArray * objhartlistArray;
         [spiderView.view removeFromSuperview];
     }
     
-    
+    if(objManhattan != nil)
+    {
+        [objManhattan.view removeFromSuperview];
+    }
+    if(sectorView != nil)
+    {
+        [sectorView.view removeFromSuperview];
+    }
     
     // cell.sepratorXposition .constant = indexPath.row*150;
     if(indexPath.row == 0)
@@ -260,7 +267,7 @@ NSMutableArray * objhartlistArray;
         
         SpellReport.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
         
-        
+         [self.view addSubview:SpellReport.view];
         
     }
     else if(indexPath.row == 12)
@@ -291,154 +298,7 @@ NSMutableArray * objhartlistArray;
 
 }
 
-//-(IBAction)didClickreportlistbtn:(id)sender{
-//
-//    UIButton * objBtn =(UIButton*)sender;
-//    
-//    if(objPitchview!= nil)
-//    {
-//        [objPitchview.view removeFromSuperview];
-//    }
-//    
-//    if(SessionReportvc !=nil)
-//    {
-//        [SessionReportvc.view removeFromSuperview];
-//    }
-//    
-//    if(cmntryView !=nil)
-//    {
-//        [cmntryView.view removeFromSuperview];
-//    }
-//    
-//     self.sepratoryposition.constant = objBtn.frame.origin.x+15;
-//    if(objBtn.tag == 1)
-//    {
-//        NSLog(@"%d",objBtn.tag);
-//        [self setCommentaryView];
-//
-//       
-//    }
-//    else if(objBtn.tag == 2)
-//    {
-//         NSLog(@"%d",objBtn.tag);
-//        
-//      //  [self setBowlerVsBatsmanView];
-//        [self setPitchMap];
-//        
-//   //[self.scrolllistview setContentSize:CGSizeMake(2800, 80)];
-//        
-//    }
-//    else if(objBtn.tag == 3)
-//    {
-//         NSLog(@"%d",objBtn.tag);
-//        [self setManhattan];
-//      //  [self.scrolllistview setContentSize:CGSizeMake(2800, 80)];
-//      //  [self.view addSubview:SpellReport.view];
-//       
-//        
-//    }
-//    else if(objBtn.tag == 4)
-//    {
-//         NSLog(@"%d",objBtn.tag);
-//        [self setSpiderView];
-//
-//    }
-//    else if(objBtn.tag == 5)
-//    {
-//         NSLog(@"%d",objBtn.tag);
-//        [self setSectorView];
-//   
-//
-//    }
-//    else if(objBtn.tag == 6)
-//    {
-//         NSLog(@"%d",objBtn.tag);
-//        [self setWormChartView];
-//    }
-//    else if(objBtn.tag == 7)
-//    {
-//         NSLog(@"%d",objBtn.tag);
-//        [self setBatsmanKpi];
-//    }
-//    else if(objBtn.tag == 8)
-//    {
-//         NSLog(@"%d",objBtn.tag);
-//       [self setBowlingKpi];
-//        
-//
-//    }
-//    else if(objBtn.tag == 9)
-//    {
-//         NSLog(@"%d",objBtn.tag);
-//        [self setBatsmanVsBowlerView];
-//    }
-//    else if(objBtn.tag == 10)
-//    {
-//        
-//         NSLog(@"%d",objBtn.tag);
-//        [self setBowlerVsBatsmanView];
-//    }
-//    else if(objBtn.tag == 11)
-//    {
-//        FieldingReport = [[FieldingReportVC alloc]initWithNibName:@"FieldingReportVC" bundle:nil];
-//        FieldingReport.matchCode = self.matchCode;
-//        FieldingReport.matchTypeCode =self.matchTypeCode;
-//        FieldingReport.compitionCode =self.competitionCode;
-//        FieldingReport.Teamcode      = self.teamcode;
-//        FieldingReport.fstInnShortName = self.fstInnShortName;
-//        FieldingReport.secInnShortName = self.secInnShortName;
-//        FieldingReport.thrdInnShortName = self.thrdInnShortName;
-//        FieldingReport.frthInnShortName = self.frthInnShortName;
-//        
-//        FieldingReport.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
-//        [self.view addSubview:FieldingReport.view];
-//        
-//
-//    }
-//    else if(objBtn.tag == 12)
-//    {
-//         NSLog(@"%d",objBtn.tag);
-//        
-//        SpellReport = [[SpellReportVC alloc]initWithNibName:@"SpellReportVC" bundle:nil];
-//        SpellReport.matchCode = self.matchCode;
-//        SpellReport.matchTypeCode =self.matchTypeCode;
-//        SpellReport.compitionCode =self.competitionCode;
-//        SpellReport.Teamcode      = self.teamcode;
-//        SpellReport.fstInnShortName = self.fstInnShortName;
-//        SpellReport.secInnShortName = self.secInnShortName;
-//        SpellReport.thrdInnShortName = self.thrdInnShortName;
-//        SpellReport.frthInnShortName = self.frthInnShortName;
-//        
-//        SpellReport.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
-//        
-//
-//
-//    }
-//    else if(objBtn.tag == 13)
-//    {
-//         NSLog(@"%d",objBtn.tag);
-//        [self setPartnership];
-//    }
-//    
-//    else if(objBtn.tag == 14)
-//    {
-//        NSLog(@"%d",objBtn.tag);
-//        [self setSession];
-//    }
-//    else if(objBtn.tag == 15)
-//    {
-//        NSLog(@"%d",objBtn.tag);
-//
-//
-//    }
-//    
-//    //self.scrolllistview.delaysContentTouches = NO;
-//    
-//   // self.scrolllistview.canCancelContentTouches = YES;
-//    
-//    //NSLog(@"scrolllistview contentsize:%f",self.scrolllistview.contentSize.width);
-//   // NSLog(@"scrolllistview contentOffset:%f",self.scrolllistview.contentOffset);
-//}
+
 
 - (IBAction)btn_back:(id)sender {
     
@@ -503,7 +363,7 @@ NSMutableArray * objhartlistArray;
     batsmanVsBowlerVC.thrdInnShortName = self.thrdInnShortName;
     batsmanVsBowlerVC.frthInnShortName = self.frthInnShortName;
     
-    batsmanVsBowlerVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    batsmanVsBowlerVC.view.frame =CGRectMake(0,self.Tittle_scroll.frame.origin.y+self.Tittle_scroll.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:batsmanVsBowlerVC.view];
 }
 
@@ -517,7 +377,7 @@ NSMutableArray * objhartlistArray;
     bowlerVsBatsmanVC.thrdInnShortName = self.thrdInnShortName;
     bowlerVsBatsmanVC.frthInnShortName = self.frthInnShortName;
     
-    bowlerVsBatsmanVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    bowlerVsBatsmanVC.view.frame =CGRectMake(0,self.Tittle_scroll.frame.origin.y+self.Tittle_scroll.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:bowlerVsBatsmanVC.view];
 }
 
@@ -531,7 +391,7 @@ NSMutableArray * objhartlistArray;
     wormReportVC.thrdInnShortName = self.thrdInnShortName;
     wormReportVC.frthInnShortName = self.frthInnShortName;
     
-    wormReportVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    wormReportVC.view.frame =CGRectMake(0,self.Tittle_scroll.frame.origin.y+self.Tittle_scroll.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:wormReportVC.view];
 }
 
@@ -545,7 +405,7 @@ NSMutableArray * objhartlistArray;
     playerWormChartVC.thrdInnShortName = self.thrdInnShortName;
     playerWormChartVC.frthInnShortName = self.frthInnShortName;
     
-    playerWormChartVC.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    playerWormChartVC.view.frame =CGRectMake(0,self.Tittle_scroll.frame.origin.y+self.Tittle_scroll.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:playerWormChartVC.view];
 }
 
@@ -631,7 +491,7 @@ NSMutableArray * objhartlistArray;
     batsmanKpiView.thrdInnShortName = self.thrdInnShortName;
     batsmanKpiView.frthInnShortName = self.frthInnShortName;
     
-    batsmanKpiView.view.frame =CGRectMake(0,self.view.frame.origin.y+self.view.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
+    batsmanKpiView.view.frame =CGRectMake(0,self.Tittle_scroll.frame.origin.y+self.Tittle_scroll.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
     
     //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:batsmanKpiView.view];

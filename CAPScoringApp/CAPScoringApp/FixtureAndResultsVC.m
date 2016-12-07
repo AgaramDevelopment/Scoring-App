@@ -534,7 +534,7 @@
         detail.matchType = matchType;
     
    // PlayingSquadVC *playing = [[PlayingSquadVC alloc] initWithNibName:@"playingSquadId" bundle:nil];
-    [self.navigationController pushViewController:detail animated:YES];
+    [self.navigationController pushViewController:detail animated:NO];
         
     }
     else if(tableView == tournamentTableview){
@@ -619,7 +619,7 @@
 
         }
         
-        [self.navigationController pushViewController:objReport animated:YES];
+        [self.navigationController pushViewController:objReport animated:NO];
     }
     
 }

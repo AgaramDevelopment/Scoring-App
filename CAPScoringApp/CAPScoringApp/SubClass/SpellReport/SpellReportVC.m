@@ -7,13 +7,13 @@
 //
 
 #import "SpellReportVC.h"
-#import "SKSTableView.h"
-#import "SKSTableViewCell.h"
+//#import "SKSTableView.h"
+//#import "SKSTableViewCell.h"
 #import "SpellReportRecord.h"
 #import "DBManagerSpellReport.h"
 #import "SpellReportCell.h"
 
-@interface SpellReportVC ()
+@interface SpellReportVC () 
 {
     DBManagerSpellReport *  objDBManagerSpellReport;
     NSMutableArray * objSpellReport;
@@ -32,7 +32,7 @@
     objDBManagerSpellReport =[[DBManagerSpellReport alloc]init];
     objSpellReport   =[[NSMutableArray alloc]init];
    
-    
+    [self setInningsView];
     [self.Inn1_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
     }
 

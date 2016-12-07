@@ -40,7 +40,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="768" height="70"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IyP-P8-slo">
-                                    <rect key="frame" x="0.0" y="15" width="768" height="53"/>
+                                    <rect key="frame" x="0.0" y="10" width="768" height="53"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Efv-aA-HFW">
                                             <rect key="frame" x="0.0" y="0.0" width="192" height="50"/>
@@ -126,7 +126,7 @@
                                 <constraint firstAttribute="width" constant="768" id="0Xp-UZ-8IF"/>
                                 <constraint firstItem="IyP-P8-slo" firstAttribute="leading" secondItem="3eP-zp-PtE" secondAttribute="leading" id="HSM-pd-aCO"/>
                                 <constraint firstAttribute="height" constant="70" id="NO4-nr-I6i"/>
-                                <constraint firstItem="IyP-P8-slo" firstAttribute="top" secondItem="3eP-zp-PtE" secondAttribute="top" constant="15" id="f5x-u4-JyZ"/>
+                                <constraint firstItem="IyP-P8-slo" firstAttribute="top" secondItem="3eP-zp-PtE" secondAttribute="top" constant="10" id="f5x-u4-JyZ"/>
                                 <constraint firstAttribute="trailing" secondItem="IyP-P8-slo" secondAttribute="trailing" id="mH7-sm-0KX"/>
                             </constraints>
                         </view>
