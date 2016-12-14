@@ -1452,6 +1452,33 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 UIColor *fillColor = [UIColor redColor];
                 shapeLayer.fillColor = fillColor.CGColor;
                 UIColor *strokeColor = [UIColor whiteColor];
+                
+                if ([objRecord.RUNS isEqualToString: @"1"]) {
+                    
+                    strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.RUNS isEqualToString: @"2"]){
+                    strokeColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.RUNS isEqualToString: @"3"]){
+                    strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.RUNS isEqualToString: @"4"]){
+                    strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.RUNS isEqualToString: @"5"]){
+                    strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.RUNS isEqualToString: @"6"]){
+                    strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.RUNS isEqualToString: @"0"]){
+                    
+                    strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                    
+                }
+
+                
                 shapeLayer.strokeColor = strokeColor.CGColor;
                 shapeLayer.lineWidth = 2.0f;
                 shapeLayer.fillRule = kCAFillRuleNonZero;
@@ -3045,6 +3072,33 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     UIColor *fillColor = [UIColor redColor];
                     shapeLayer.fillColor = fillColor.CGColor;
                     UIColor *strokeColor = [UIColor whiteColor];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        strokeColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
+                    
                     shapeLayer.strokeColor = strokeColor.CGColor;
                     shapeLayer.lineWidth = 2.0f;
                     shapeLayer.fillRule = kCAFillRuleNonZero;
