@@ -172,7 +172,7 @@
     }
     
     
-    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"XAXIS" ascending:YES];
+    NSSortDescriptor *sort = [NSSortDescriptor sortDescriptorWithKey:@"XAXISFORSORT" ascending:YES];
     [xAxisValuesFstInns sortUsingDescriptors:[NSArray arrayWithObject:sort]];
     [xAxisValuesSecInns sortUsingDescriptors:[NSArray arrayWithObject:sort]];
 
@@ -600,7 +600,7 @@
         bgColorView.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];
         cell.selectedBackgroundView = bgColorView;
         
-        BvsBBatsman *bvsBBatsman = [self.batsmanFilterInnsOneArray objectAtIndex:indexPath.row];
+        BvsBBatsman *bvsBBatsman;
         
         
         if(selectedInningsPosition == 1){
@@ -657,9 +657,17 @@
     self.view_open_filter.hidden = NO;
     
     
-    BvsBBatsman *bvsBBatsman = [self.batsmanFilterInnsOneArray objectAtIndex:selectedBatsmanPosition];
     
-    selectedFilterBatsman = bvsBBatsman;
+    
+    if(selectedInningsPosition == 1){
+        BvsBBatsman *bvsBBatsman = [self.batsmanFilterInnsOneArray objectAtIndex:selectedBatsmanPosition];
+        selectedFilterBatsman = bvsBBatsman;
+
+    }else if(selectedInningsPosition == 2){
+        BvsBBatsman *bvsBBatsman = [self.batsmanFilterInnsTwoArray objectAtIndex:selectedBatsmanPosition];
+        selectedFilterBatsman = bvsBBatsman;
+
+    }
     
     if(selectedInningsPosition ==1 ){
         [_lineChartViewOne reloadDataWithAnimate:YES];
@@ -923,7 +931,7 @@
                 PlayerWormChartRecords *record = [firstSubArray objectAtIndex:i];
                 
                 
-                if([recordFst.XAXIS isEqual:record.XAXIS]){
+                if(recordFst.XAXISFORSORT.intValue == record.XAXISFORSORT.intValue){
                     return i+1;
                 }
                 
@@ -959,7 +967,7 @@
                 PlayerWormChartRecords *record = [firstSubArray objectAtIndex:i];
                 
                 
-                if([recordFst.XAXIS isEqual:record.XAXIS]){
+                if(recordFst.XAXISFORSORT.intValue == record.XAXISFORSORT.intValue){
                     return i+1;
                 }
                 
