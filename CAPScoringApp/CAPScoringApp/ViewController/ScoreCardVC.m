@@ -230,6 +230,12 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
           self.btn_fourth_inns_id.hidden = YES;
     }
     
+//    int rows = fetchScorecard.BowlingSummaryForScoreBoard.count+
+//    fetchScorecard.BattingSummaryForScoreBoard.count+
+//    (fallOfWktHeaderPostion==0?0:1) + (fallOfWktPostion==0?0:1) + 5;
+//
+//    self.tblView_Height.constant = rows* 70;
+//    [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.table.contentSize.height)];
     
 }
 
@@ -853,12 +859,13 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         bowlerCellTvc.lbl_bowler_wicket.text = bowlingSummaryForScoreBoard.WICKETS;
         
         bowlerCellTvc.selectionStyle = UITableViewCellSelectionStyleNone;
-        self.tblView_Height.constant =self.table.contentSize.height;
-        [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant)];
-
         return bowlerCellTvc;
         
     }
+
+//            self.tblView_Height.constant =self.table.contentSize.height;
+//        [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.table.contentSize.height)];
+    
 
     return nil;
     
@@ -922,6 +929,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             return 70;
         }
     }
+    
+    
+
     
     return 70;
 }

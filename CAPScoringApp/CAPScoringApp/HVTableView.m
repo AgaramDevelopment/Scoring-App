@@ -371,7 +371,10 @@
 		if (alreadyExpanded)
 			return [HVTableViewDelegate tableView:tableView heightForRowAtIndexPath:indexPath isExpanded:YES];
 		else
+        {
+            
 			return [HVTableViewDelegate tableView:tableView heightForRowAtIndexPath:indexPath isExpanded:NO];
+        }
 	}
 }
 
