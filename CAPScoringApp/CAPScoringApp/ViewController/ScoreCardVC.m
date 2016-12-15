@@ -477,7 +477,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         expendbowlerview.hidden=YES;
     }];
    // self.tblView_Height.constant =self.table.contentSize.height-400;
-    [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant-400)];
+    self.tblView_Height.constant =self.table.contentSize.height-500;
+    [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant)];
+  //  [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant-400)];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -851,6 +853,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         bowlerCellTvc.lbl_bowler_wicket.text = bowlingSummaryForScoreBoard.WICKETS;
         
         bowlerCellTvc.selectionStyle = UITableViewCellSelectionStyleNone;
+        self.tblView_Height.constant =self.table.contentSize.height;
+        [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant)];
 
         return bowlerCellTvc;
         
