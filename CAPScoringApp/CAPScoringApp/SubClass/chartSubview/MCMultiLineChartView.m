@@ -391,7 +391,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                             CGColorRef color = [self.delegate lineChartView:self lineColorWithLineNumber:lineNumber].CGColor;
                             
                             wicket_Btn.tag = _wicketDetails.count;
-                            wicket_Btn.center = CGPointMake(xOffset, yOffset);
+                    wicket_Btn.center = CGPointMake(xOffset, isnan( yOffset)?0:yOffset);
                             //[wicket_Btn setImage:[UIImage imageNamed:@"ballImg"] forState:UIControlStateNormal];
                             wicket_Btn.layer.cornerRadius = 12;
                             wicket_Btn.layer.borderColor=color;
@@ -488,7 +488,7 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
     over_lbl.textAlignment = NSTextAlignmentRight;
     over_lbl.font = [UIFont systemFontOfSize:14];
     over_lbl.numberOfLines = 0;
-    over_lbl.text = [NSString stringWithFormat:@"OVER"];
+    over_lbl.text = [NSString stringWithFormat:@"BALLS"];
     
     
     [self addSubview:over_lbl];

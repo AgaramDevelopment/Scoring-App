@@ -14,12 +14,12 @@
 @implementation Utitliy
 
 +(NSString *)getIPPORT{
-    return  @"192.168.1.151:8888";    //betaioswebservice.upca.tv betaioswebservice.upca.tv
+    return  @"192.168.1.116:8888";    //betaioswebservice.upca.tv betaioswebservice.upca.tv
 }
 
 
 +(NSString *)getSyncIPPORT{
-    return  @"192.168.1.151:8888";   //192.168.1.49:8096
+    return  @"192.168.1.116:8888";     //@"192.168.1.151:8888";   //192.168.1.49:8096
 }
 
 +(NSString *)SecureId{
