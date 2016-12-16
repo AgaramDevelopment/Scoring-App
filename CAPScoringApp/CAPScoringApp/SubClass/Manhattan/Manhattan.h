@@ -28,6 +28,6 @@
 
 @property (nonatomic,strong) IBOutlet UIImageView * bg_Img;
 
-//@property (nonatomic,strong) IBOutlet UIScrollView * manhattan_Scroll;
+@property (nonatomic,strong) IBOutlet UIScrollView * manhattan_Scroll;
 
 @end
