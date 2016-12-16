@@ -292,6 +292,25 @@ static NSString * const reuseIdentifier = @"Cell";
     
     if([self selectionValidation]){
         
+        
+        
+        int selectedPlayerOrder = 1;
+        
+        
+        int unselectedPlayerOrder = 0;
+        
+        //Set selected count
+        for(int i=0;i<[self.selectedPlayerArray count];i++){
+            SelectPlayerRecord *selectedPlayerFilterRecord = [self.selectedPlayerArray objectAtIndex:i];
+            if([[selectedPlayerFilterRecord isSelected] boolValue]){
+                unselectedPlayerOrder++;
+            }
+        }
+        
+        unselectedPlayerOrder++;
+        
+        
+        
         for(int i=0;i<[self.selectedPlayerArray count];i++){
             int playerOrder = i+1;
             NSString * playerorderLevel = [NSString stringWithFormat:@"%d",playerOrder];
@@ -300,18 +319,36 @@ static NSString * const reuseIdentifier = @"Cell";
            NSString * MTPCODE= [objDBManager GetMaxIdForInsertMatchTeamPlayer];
             
             NSString * playercodeExit =[objDBManager SelectPlayerExit: self.matchCode :[selectedPlayerFilterRecord playerCode] :self.SelectTeamCode];
+            
+            int playingOrder = 0;
+            if([recordStatus isEqualToString:@"MSC001"]){
+                playingOrder = selectedPlayerOrder;
+                selectedPlayerOrder++;
+            }else{
+                playingOrder = unselectedPlayerOrder;
+                unselectedPlayerOrder++;
+            }
+            
+             NSString *strPlayingorder = [NSString stringWithFormat:@"%d",playingOrder];
            
             if([playercodeExit isEqualToString:@"YES"])
             {
 
             
             //[objDBManager InsertSelectPlayer :[selectedPlayerFilterRecord playerCode] :[self matchCode] : MTPCODE :self.SelectTeamCode :playerorderLevel:recordStatus];
-                 [objDBManager updateSelectedPlayersResultCode:[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus];
+               
+                
+                [objDBManager updateSelectedPlayersResultCode :[selectedPlayerFilterRecord playerCode] matchCode:[self matchCode] recordStatus:recordStatus: strPlayingorder];
+                
+
+                
+                
+                
             }
             else
                // if ([recordStatus isEqualToString:@"MSC001" ])
             {
-                [objDBManager InsertSelectPlayer :[selectedPlayerFilterRecord playerCode] :[self matchCode] : MTPCODE :self.SelectTeamCode :playerorderLevel:recordStatus];
+                [objDBManager InsertSelectPlayer :[selectedPlayerFilterRecord playerCode] :[self matchCode] : MTPCODE :self.SelectTeamCode :strPlayingorder:recordStatus];
             }
             
             
