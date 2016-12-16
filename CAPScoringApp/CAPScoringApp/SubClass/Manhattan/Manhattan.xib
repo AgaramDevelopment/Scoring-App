@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Manhattan">
             <connections>
                 <outlet property="bg_Img" destination="24a-Et-Jc8" id="SOq-rT-SMc"/>
+                <outlet property="manhattan_Scroll" destination="Jg9-Ld-abv" id="o85-HW-GeW"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,12 +20,19 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundImg" translatesAutoresizingMaskIntoConstraints="NO" id="24a-Et-Jc8">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jg9-Ld-abv">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="24a-Et-Jc8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2Hm-vj-8iA"/>
+                <constraint firstAttribute="bottom" secondItem="Jg9-Ld-abv" secondAttribute="bottom" id="3Yt-Ct-mOp"/>
                 <constraint firstAttribute="bottom" secondItem="24a-Et-Jc8" secondAttribute="bottom" id="NFf-PL-7LE"/>
+                <constraint firstItem="Jg9-Ld-abv" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="O4P-M0-czN"/>
                 <constraint firstItem="24a-Et-Jc8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="S1u-nW-LYO"/>
+                <constraint firstItem="Jg9-Ld-abv" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="boq-xV-71Y"/>
+                <constraint firstAttribute="trailing" secondItem="Jg9-Ld-abv" secondAttribute="trailing" id="cvq-rM-Yl7"/>
                 <constraint firstAttribute="trailing" secondItem="24a-Et-Jc8" secondAttribute="trailing" id="tdu-1i-LQA"/>
             </constraints>
         </view>
