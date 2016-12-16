@@ -364,6 +364,9 @@ NSString *bowlerCode;
       BOWLTEAMSHORTNAME = bowlingTeam.BOWLTEAMSHORTNAME;
     }
     
+    //T_TARGETRUNS = [NSNumber numberWithInt:0];
+    //T_TARGETOVERS = [NSNumber numberWithInt:0];
+    
     //total runs and total overs
     NSMutableArray *totalOvers = [db getTargetRunsOvers:COMPETITIONCODE :MATCHCODE];
     
@@ -730,7 +733,7 @@ NSString *bowlerCode;
 //            TOTALBOWLTEAMRUNS = TOTALBOWLTEAMRUNS;
 //        }
         
-        TARGETRUNS = T_TARGETRUNS.intValue > 0 ? T_TARGETRUNS : TARGETRUNS;
+        TARGETRUNS = (T_TARGETRUNS.intValue > 0) ? T_TARGETRUNS : TARGETRUNS;
         
         TOTALBOWLTEAMRUNS =  T_TARGETRUNS.intValue > 0 ? T_TARGETRUNS : TOTALBOWLTEAMRUNS;
         

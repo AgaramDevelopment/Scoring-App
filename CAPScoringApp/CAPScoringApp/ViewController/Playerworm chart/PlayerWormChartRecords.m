@@ -36,6 +36,6 @@
 
 @synthesize MINOVERSTRIKER;
 @synthesize MAXOVERSTRIKER;
-@synthesize XAXIS;
+@synthesize XAXISFORSORT;
 @synthesize XDisplayAxis;
 @end
