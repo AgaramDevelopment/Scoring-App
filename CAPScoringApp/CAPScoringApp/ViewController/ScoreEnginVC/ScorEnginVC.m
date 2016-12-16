@@ -1448,6 +1448,18 @@
     
     //Ball ticket
     fetchSEPageLoadRecord.BallGridDetails = fetchSeBallCodeDetails.BallGridDetails;
+   
+    if(fetchSeBallCodeDetails.GetPenaltyDetailsForPenaltyEventsArray!= nil && fetchSeBallCodeDetails.GetPenaltyDetailsForPenaltyEventsArray.count>0){
+        
+        GetSEPenaltyDetailsForPenaltyEvents *gPDtl = [fetchSeBallCodeDetails.GetPenaltyDetailsForPenaltyEventsArray objectAtIndex:0];
+        self.ballEventRecord.AwardedTeam =gPDtl.AWARDEDTOTEAMCODE;
+        self.ballEventRecord.objPenalty = gPDtl.PENALTYRUNS;
+        self.ballEventRecord.objPenaltytypecode= gPDtl.PENALTYTYPECODE;
+        self.ballEventRecord.objPenaltyreasoncode =gPDtl.PENALTYREASONCODE;
+    }
+    
+    
+   
     
     [self CreateBallTickers : fetchSeBallCodeDetails.BallGridDetails];
     

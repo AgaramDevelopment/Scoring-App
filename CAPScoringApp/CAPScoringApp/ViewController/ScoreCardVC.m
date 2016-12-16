@@ -230,12 +230,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
           self.btn_fourth_inns_id.hidden = YES;
     }
     
-//    int rows = fetchScorecard.BowlingSummaryForScoreBoard.count+
-//    fetchScorecard.BattingSummaryForScoreBoard.count+
-//    (fallOfWktHeaderPostion==0?0:1) + (fallOfWktPostion==0?0:1) + 5;
-//
-//    self.tblView_Height.constant = rows* 70;
-//    [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.table.contentSize.height)];
+
+    
     
 }
 
@@ -456,13 +452,12 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     }
     
     
-    self.tblView_Height.constant =self.table.contentSize.height+500;
-     [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant)];
-   // self.tblView_Height.constant =self.backScroll.frame.size.height+300;
+    //self.tblView_Height.constant =self.table.contentSize.height+500;
+     [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.table.contentSize.height+500)];
+   
 
     
-    //[self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width, self.table.contentSize.height)];
-   // [tableView reloadData];
+   
 }
 
 //perform your collapse stuff (may include animation) for cell here. It will be called when the user touches an expanded cell so it gets collapsed or the table is in the expandOnlyOneCell satate and the user touches another item, So the last expanded item has to collapse
@@ -605,10 +600,17 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         }
         if (isExpanded== NO) //prepare the cell as if it was collapsed! (without any animation!)
         {
+//            if(indexPath.row ==1)
+//            {
+//                ExpandBattingview.hidden = NO;
+//
+//            }
+//            else
+//            {
             //[cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(0);
             ExpandBattingview.hidden = YES;
             // [cell.spiderWagon_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
-            
+            //}
             
         }
         else ///prepare the cell as if it was expanded! (without any animation!)
@@ -863,9 +865,6 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
     }
 
-//            self.tblView_Height.constant =self.table.contentSize.height;
-//        [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.table.contentSize.height)];
-    
 
     return nil;
     
@@ -898,7 +897,6 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         }
         else{
              ExpandBattingview.hidden=YES;
-            
 
            return 70;
         }
@@ -930,9 +928,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         }
     }
     
-    
 
-    
     return 70;
 }
 
