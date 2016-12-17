@@ -47,6 +47,7 @@
 
 
 
+@property (weak, nonatomic) IBOutlet UILabel *lbl_batsman_mins;
 @property (strong, nonatomic) IBOutlet UIButton *btn_expand;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_dot_ball_percent;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_dot_ball;

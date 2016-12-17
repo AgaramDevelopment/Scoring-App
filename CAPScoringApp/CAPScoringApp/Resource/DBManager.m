@@ -523,7 +523,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
     {
         //
-        NSString *query=[NSString stringWithFormat:@"SELECT SCORERCODE,USD.USERFULLNAME FROM MATCHSCORERDETAILS MAS INNER JOIN USERDETAILS USD ON USD.USERCODE=MAS.SCORERCODE WHERE MAS.COMPETITIONCODE='%@' AND MAS.MATCHCODE='%@' AND MAS.SCORERCODE!='%@' LIMIT 1" ,userCode,matchcode,competitionCode];
+        NSString *query=[NSString stringWithFormat:@"SELECT SCORERCODE,USD.USERFULLNAME FROM MATCHSCORERDETAILS MAS INNER JOIN USERDETAILS USD ON USD.USERCODE=MAS.SCORERCODE WHERE MAS.COMPETITIONCODE='%@' AND MAS.MATCHCODE='%@' AND MAS.SCORERCODE!='%@' LIMIT 1",competitionCode,matchcode,userCode];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
             
