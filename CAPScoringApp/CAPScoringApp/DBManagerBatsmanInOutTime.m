@@ -279,4 +279,35 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 }
 
+
+
+
+
+-(NSString*) FETCHDURATION :(NSString *)COMPETITIONCODE:(NSString *)MATCHCODE:(NSString *)INNINGSNO:(NSString *)PLAYERCODE
+{
+   // NSString *Duration = @"";
+    NSString *databasePath = [self getDBPath];
+    sqlite3_stmt *statement;
+    sqlite3 *dataBase;
+    const char *dbPath = [databasePath UTF8String];
+    if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+    {
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT  IFNULL(SUM((strftime('%%s', OUTTIME) - strftime('%%s', INTIME))/60),0)  AS DURATION FROM PLAYERINOUTTIME WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND PLAYERCODE = '%@' GROUP BY PLAYERCODE",COMPETITIONCODE,MATCHCODE,INNINGSNO,PLAYERCODE];
+        
+        const char *update_stmt = [updateSQL UTF8String];
+        if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+            
+        {
+            while(sqlite3_step(statement)==SQLITE_ROW){
+                return  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                            }
+            sqlite3_reset(statement);
+            sqlite3_finalize(statement);
+        }
+        sqlite3_close(dataBase);
+    }
+    return @"";
+    
+}
+
 @end
