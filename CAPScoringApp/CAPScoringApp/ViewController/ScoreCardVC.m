@@ -20,7 +20,6 @@
 #import "BowlerStaticsRecord.h"
 #import "BowlerStrickPitchRecord.h"
 #import "DBManagerBatsmanInOutTime.h"
-#import "BatsmaninoutRecord.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -95,8 +94,6 @@
 
 FetchScorecard *fetchScorecard ;
 FetchSEPageLoadRecord *fetchSEpage;
-DBManagerBatsmanInOutTime *dbmanagerBatsmanInOutTime;
-BatsmaninoutRecord *batsmanInOutRecord;
 
 NSArray *muliteDayMatchtype;
 
@@ -135,10 +132,9 @@ int bowlerPostion = 0;
     [fetchSEpage fetchSEPageLoadDetails:competitionCode :matchCode];
     
     //FOR BATSMAN DURATION 
-    dbmanagerBatsmanInOutTime = [[DBManagerBatsmanInOutTime alloc]init];
     for (BattingSummaryDetailsForScoreBoard *batSumryDtl in fetchScorecard.BattingSummaryForScoreBoard) {
         
-        
+        DBManagerBatsmanInOutTime     *dbmanagerBatsmanInOutTime = [[DBManagerBatsmanInOutTime alloc]init];
        batSumryDtl.DURATION = [dbmanagerBatsmanInOutTime FETCHDURATION:competitionCode :matchCode :inningsNo :batSumryDtl.BATSMANCODE];
         
         
