@@ -1994,9 +1994,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "967"
-            endingLineNumber = "967"
-            landmarkName = "-tableView:heightForRowAtIndexPath:isExpanded:"
-            landmarkType = "5">
+            endingLineNumber = "967">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -2010,9 +2008,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "894"
-            endingLineNumber = "894"
-            landmarkName = "-tableView:cellForRowAtIndexPath:isExpanded:"
-            landmarkType = "5">
+            endingLineNumber = "894">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
