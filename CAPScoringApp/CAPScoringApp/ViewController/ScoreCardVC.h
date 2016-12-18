@@ -77,6 +77,7 @@
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsScore;
 @property (strong,nonatomic) IBOutlet UILabel  * lbl_teamBSecIngsOvs;
 
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *scrolviewheight;
 
 @property (weak, nonatomic) IBOutlet UILabel *lbl_battingShrtName;
 @property (weak, nonatomic) IBOutlet UILabel *lbl_battingScoreWkts;

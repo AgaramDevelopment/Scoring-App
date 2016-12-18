@@ -135,7 +135,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             if(![overno isEqualToString: Addoverno])
             {
               [objOverArray addObject:objManhattanRecord.overno];
-              [objRunArray addObject:objManhattanRecord.runs];
+              //[objRunArray addObject:objManhattanRecord.runs];
             }
             }
         
@@ -143,7 +143,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(objOverArray.count == 0)
         {
            [objOverArray addObject:objManhattanRecord.overno];
-            [objRunArray addObject:objManhattanRecord.runs];
+           // [objRunArray addObject:objManhattanRecord.runs];
         }
 
        
@@ -401,26 +401,26 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(void) BarChartMethodFirstInnigs
 {
-//    ManhattanRecord *wormRecord;
-//    
-//    wormRecord  = [objRunArray lastObject];
-//    
-//    if(objInnings2RunArray != nil && objInnings2RunArray.count>0){
-//        
-//        ManhattanRecord *wormRecord2;
-//        
-//        wormRecord2  = [objInnings2RunArray lastObject];
-//        
-//        
-//        if([wormRecord.score intValue] < [wormRecord2.score intValue]){
-//            wormRecord = wormRecord2;
-//        }
-//        
-//    }
+    ManhattanRecord *wormRecord;
+    
+    wormRecord  = [objRunArray lastObject];
+    
+    if(objInnings2RunArray != nil && objInnings2RunArray.count>0){
+        
+        ManhattanRecord *wormRecord2;
+        
+        wormRecord2  = [objInnings2RunArray lastObject];
+        
+        
+        if([wormRecord.score intValue] < [wormRecord2.score intValue]){
+            wormRecord = wormRecord2;
+        }
+        
+    }
 
     
-    
-    id max = [objRunArray valueForKeyPath:@"@max.intValue"];
+    //NSNumber * max = [objRunArray valueForKeyPath:@"@max.intValue"];
+   // id max = [objRunArray valueForKeyPath:@"@max.intValue"];
     
     _titles_1 = objOverArray;
    // _dataSource = objRunArray;
@@ -429,7 +429,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.tag = 111;
     _barChartView.dataSource = self;
     _barChartView.delegate = self;
-    _barChartView.maxValue = max;
+    _barChartView.maxValue = [wormRecord score];
    // _barChartView.unitOfYAxis = @"Run";
     
     _barChartView.colorOfXAxis = [UIColor whiteColor];
@@ -552,25 +552,25 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 -(void) BarChartMethodFirstInnigs3
 {
     
-//    ManhattanRecord *wormRecord;
-//    
-//    wormRecord  = [objInnings3RunArray lastObject];
-//    
-//    if(objInnings4RunArray != nil && objInnings4RunArray.count>0){
-//        
-//        ManhattanRecord *wormRecord2;
-//    
-//        wormRecord2  = [objInnings4RunArray lastObject];
-//        
-//        
-//        if([wormRecord.score intValue] < [wormRecord2.score intValue]){
-//            wormRecord = wormRecord2;
-//        }
-//        
-//    }
+    ManhattanRecord *wormRecord;
+    
+    wormRecord  = [objInnings3RunArray lastObject];
+    
+    if(objInnings4RunArray != nil && objInnings4RunArray.count>0){
+        
+        ManhattanRecord *wormRecord2;
+    
+        wormRecord2  = [objInnings4RunArray lastObject];
+        
+        
+        if([wormRecord.score intValue] < [wormRecord2.score intValue]){
+            wormRecord = wormRecord2;
+        }
+        
+    }
 
     
-    id max = [objInnings3RunArray valueForKeyPath:@"@max.intValue"];
+   // id max = [objInnings3RunArray valueForKeyPath:@"@max.intValue"];
 
     _titles_1 = objInnings3OverArray;
    // _dataSource = objInnings3RunArray;
@@ -579,7 +579,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.tag = 113;
     _barChartView.dataSource = self;
     _barChartView.delegate = self;
-    _barChartView.maxValue = max;
+    _barChartView.maxValue = [wormRecord score];
    // _barChartView.unitOfYAxis = @"Run";
     
     _barChartView.colorOfXAxis = [UIColor whiteColor];
@@ -631,24 +631,24 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(void) BarChartMethodFirstInnigs4
 {
-    //ManhattanRecord *wormRecord;
+    ManhattanRecord *wormRecord;
     
-    //wormRecord  = [objInnings3RunArray lastObject];
+    wormRecord  = [objInnings3RunArray lastObject];
     
-    //if(objInnings4RunArray != nil && objInnings4RunArray.count>0){
+    if(objInnings4RunArray != nil && objInnings4RunArray.count>0){
         
-     //   ManhattanRecord *wormRecord2;
+        ManhattanRecord *wormRecord2;
         
-       // wormRecord2  = [objInnings4RunArray lastObject];
+        wormRecord2  = [objInnings4RunArray lastObject];
         
         
-     //   if([wormRecord.score intValue] < [wormRecord2.score intValue]){
-       //     wormRecord = wormRecord2;
-       // }
+        if([wormRecord.score intValue] < [wormRecord2.score intValue]){
+            wormRecord = wormRecord2;
+        }
         
-   // }
+    }
 
-    id max = [objInnings4RunArray valueForKeyPath:@"@max.intValue"];
+  //  id max = [objInnings4RunArray valueForKeyPath:@"@max.intValue"];
 
     _titles_1 = objInnings4OverArray;
     //_dataSource = objInnings4RunArray;
@@ -657,7 +657,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     _barChartView.tag = 114;
     _barChartView.dataSource = self;
     _barChartView.delegate = self;
-    _barChartView.maxValue = max;
+    _barChartView.maxValue = [wormRecord score];
     _barChartView.unitOfYAxis = @"Run";
     
     _barChartView.colorOfXAxis = [UIColor whiteColor];
