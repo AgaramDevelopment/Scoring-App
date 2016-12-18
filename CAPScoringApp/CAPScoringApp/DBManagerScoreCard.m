@@ -543,19 +543,19 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
                 InningsSummaryDetailsForScoreBoard *record=[[InningsSummaryDetailsForScoreBoard alloc]init];
-                record.BYES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
-                record.LEGBYES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
-                record.NOBALLS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
-                record.WIDES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
+                record.BYES=[self getValueByNull:statement :0];
+                record.LEGBYES=[self getValueByNull:statement :1];
+                record.NOBALLS=[self getValueByNull:statement :2];
+                record.WIDES=[self getValueByNull:statement :3];
                 record.PENALTIES=[self getValueByNull:statement :4];
                 record.TOTALEXTRAS=[self getValueByNull:statement :5];
                 record.INNINGSTOTAL=[self getValueByNull:statement :6];
-                record.INNINGSTOTALWICKETS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)];
-                record.MATCHOVERS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 8)];
+                record.INNINGSTOTALWICKETS=[self getValueByNull:statement :7];
+                record.MATCHOVERS=[self getValueByNull:statement :8];
                 record.INNINGSRUNRATE=[self getValueByNull:statement :9];
-                record.FINALINNINGS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)];
-                record.ISDECLARE=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)];
-                record.ISFOLLOWON=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)];
+                record.FINALINNINGS=[self getValueByNull:statement :10];
+                record.ISDECLARE=[self getValueByNull:statement :11];
+                record.ISFOLLOWON=[self getValueByNull:statement :12];
                 
                 
                 

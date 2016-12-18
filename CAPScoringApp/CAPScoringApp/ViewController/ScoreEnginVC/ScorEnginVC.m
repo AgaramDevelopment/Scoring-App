@@ -1103,8 +1103,13 @@
         }
         
         Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(self.ballEventRecord.objPMX2.floatValue,self.ballEventRecord.objPMY2.floatValue,20, 20)];
-        Img_ball.image =[UIImage imageNamed:@"RedBall"];
-        [self.img_pichmap addSubview:Img_ball];
+        CGFloat xposition =[self.ballEventRecord.objPMX2 floatValue];
+        CGFloat yposition =[self.ballEventRecord.objPMY2 floatValue];
+        if(xposition > 1 && yposition > 1)
+        {
+           Img_ball.image =[UIImage imageNamed:@"RedBall"];
+           [self.img_pichmap addSubview:Img_ball];
+        }
         self.img_pichmap.hidden = YES;
         [self EditModePitchMap];
         
