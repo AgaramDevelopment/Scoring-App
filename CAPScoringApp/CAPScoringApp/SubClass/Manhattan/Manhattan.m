@@ -487,22 +487,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(void) BarChartMethodFirstInnigs2
 {
-//    ManhattanRecord *wormRecord;
-//    
-//    wormRecord  = [objRunArray lastObject];
-//    
-//    if(objInnings2RunArray != nil && objInnings2RunArray.count>0){
-//        
-//        ManhattanRecord *wormRecord2;
-//        
-//        wormRecord2  = [objInnings2RunArray lastObject];
-//        
-//        
-//        if([wormRecord.score intValue] < [wormRecord2.score intValue]){
-//            wormRecord = wormRecord2;
-//        }
-//        
-//    }
+
     
     NSMutableArray * runValue=[[NSMutableArray alloc]init];
     
@@ -563,22 +548,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 -(void) BarChartMethodFirstInnigs3
 {
     
-//    ManhattanRecord *wormRecord;
-//    
-//    wormRecord  = [objInnings3RunArray lastObject];
-//    
-//    if(objInnings4RunArray != nil && objInnings4RunArray.count>0){
-//        
-//        ManhattanRecord *wormRecord2;
-//    
-//        wormRecord2  = [objInnings4RunArray lastObject];
-//        
-//        
-//        if([wormRecord.score intValue] < [wormRecord2.score intValue]){
-//            wormRecord = wormRecord2;
-//        }
-//        
-//    }
+
 
     NSMutableArray * runValue=[[NSMutableArray alloc]init];
     
