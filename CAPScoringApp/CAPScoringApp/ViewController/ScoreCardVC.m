@@ -20,6 +20,7 @@
 #import "BowlerStaticsRecord.h"
 #import "BowlerStrickPitchRecord.h"
 #import "AppDelegate.h"
+#import "DBManagerBatsmanInOutTime.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
