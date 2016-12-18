@@ -134,6 +134,15 @@ int bowlerPostion = 0;
      fetchSEpage = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEpage fetchSEPageLoadDetails:competitionCode :matchCode];
     
+    //FOR BATSMAN DURATION 
+    for (BattingSummaryDetailsForScoreBoard *batSumryDtl in fetchScorecard.BattingSummaryForScoreBoard) {
+        
+        DBManagerBatsmanInOutTime     *dbmanagerBatsmanInOutTime = [[DBManagerBatsmanInOutTime alloc]init];
+       batSumryDtl.DURATION = [dbmanagerBatsmanInOutTime FETCHDURATION:competitionCode :matchCode :inningsNo :batSumryDtl.BATSMANCODE];
+        
+        
+    }
+    
     
     
     //Set Table Cell Position
@@ -142,6 +151,7 @@ int bowlerPostion = 0;
     extraPostion = fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1;
     overRunRatePostion = extraPostion+1;
     didNotBatPostion = overRunRatePostion+1;
+    
     
     
     BOOL isFOW = NO;
@@ -618,6 +628,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
          cell.lbl_dot_ball.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(115/255.0f) alpha:1.0f];
          cell.lbl_dot_ball_percent.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(115/255.0f) alpha:1.0f];
          cell.lbl_how_out.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(115/255.0f) alpha:1.0f];
+            cell.lbl_batsman_mins.textColor =[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(115/255.0f) alpha:1.0f];
         }else{
             
             cell.lbl_player_name.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
@@ -630,6 +641,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             cell.lbl_dot_ball.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
             cell.lbl_dot_ball_percent.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
             cell.lbl_how_out.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+            cell.lbl_batsman_mins.textColor =[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
             
         }
         if (isExpanded== NO) //prepare the cell as if it was collapsed! (without any animation!)
@@ -677,6 +689,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         cell.lbl_how_out.text = battingSummaryDetailsForSB.WICKETDESCRIPTION;
         cell.lbl_dot_ball.text = battingSummaryDetailsForSB.DOTBALLS;
         cell.lbl_dot_ball_percent.text = [NSString stringWithFormat:@"%.02f",[battingSummaryDetailsForSB.DOTBALLPERCENTAGE floatValue]];
+        cell.lbl_batsman_mins.text = battingSummaryDetailsForSB.DURATION;
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 

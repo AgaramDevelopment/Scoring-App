@@ -2543,7 +2543,7 @@
              (selectedStrikernonstrikerCode.length <= 0 ? fetchSEPageLoadRecord.strickerPlayerCode : selectedStrikernonstrikerCode) :
              selectedwicketBowlerlist.BowlerCode:
              (isOldWicketSelectedOnEdit && !isWicketSelected)? [NSNumber numberWithInt:1] : [NSNumber numberWithInt:0]:
-             @"1" :
+             self.ballEventRecord.AwardedTeam:
              self.ballEventRecord.objPenalty :
              self.ballEventRecord.objPenaltytypecode :
              self.ballEventRecord.objPenaltyreasoncode :

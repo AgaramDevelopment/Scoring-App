@@ -35,5 +35,6 @@
 @property(strong,nonatomic)NSString *WICKETSCORE;
 @property(strong,nonatomic)NSString *WICKETTYPE;
 @property(strong,nonatomic)NSString *WICKETTYPEDESCRIPTION;
+@property(strong,nonatomic)NSString *DURATION;
 
 @end
