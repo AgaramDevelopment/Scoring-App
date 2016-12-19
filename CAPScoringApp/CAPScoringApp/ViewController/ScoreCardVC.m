@@ -19,6 +19,7 @@
 #import "BowlingPlayerStatistics.h"
 #import "BowlerStaticsRecord.h"
 #import "BowlerStrickPitchRecord.h"
+#import "AppDelegate.h"
 #import "DBManagerBatsmanInOutTime.h"
 
 
@@ -78,6 +79,8 @@
     
     BOOL isSectorEnableBatsman;
     BOOL isSectorEnableBowler;
+    BOOL isScrollheight;
+    CGFloat tableheight;
 
 }
 @property (strong, nonatomic) IBOutlet UILabel *cener_lbl;
@@ -116,7 +119,8 @@ int bowlerPostion = 0;
     objBattingPlayerStatistics =[[BattingPlayerStatistics alloc]init];
     objBowlingStatistics       =[[BowlingPlayerStatistics alloc]init];
     muliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
-    [self.table setScrollEnabled:NO];
+    [self.table setBackgroundColor:[UIColor clearColor]];
+    [self.table setScrollEnabled:YES];
     
     [self customnavigationmethod];
     
@@ -241,9 +245,32 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
           self.btn_fourth_inns_id.hidden = YES;
     }
     
-
+    int rows = fetchScorecard.BowlingSummaryForScoreBoard.count+
+    fetchScorecard.BattingSummaryForScoreBoard.count+
+    (fallOfWktHeaderPostion==0?0:1) + (fallOfWktPostion==0?0:1) + 5;
     
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
+    //Show indicator
+    [delegate showLoading];
+    [NSTimer scheduledTimerWithTimeInterval:2.0
+                                     target:self
+                                   selector:@selector(TimerStop)
+                                   userInfo:nil
+                                    repeats:NO];
+   
+}
+-(void)TimerStop
+{
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    //Show indicator
+    [delegate hideLoading];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    //[self.view layoutIfNeeded];
+     //[self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width, self.tblView_Height.constant)];
 }
 
 -(void) setInitView{
@@ -429,6 +456,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
          expendbowlerview.alpha = 1;
         [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(3.14);
     }];
+   
     
     if(batsmanPostion <= expendIndex && extraPostion> expendIndex){
         
@@ -461,10 +489,12 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
         [self.bowlerCell.BowlerspiderWagon_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
     }
+   
+    //self.tblView_Height.constant = self.table.contentSize.height+500;
     
     
-    //self.tblView_Height.constant =self.table.contentSize.height+500;
-     [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.table.contentSize.height+500)];
+//    self.tblView_Height.constant =self.table.contentSize.height+500;
+//    [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant)];
    
 
     
@@ -487,11 +517,15 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     } completion:^(BOOL finished) {
         expendBatmanview.hidden = YES;
         expendbowlerview.hidden=YES;
+        //self.tblView_Height.constant =tableheight-550;
+        //[self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,tableheight-550)];
+       
     }];
-   // self.tblView_Height.constant =self.table.contentSize.height-400;
-    self.tblView_Height.constant =self.table.contentSize.height-500;
-    [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant)];
-  //  [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant-400)];
+    //self.tblView_Height.constant = self.table.contentSize.height-500;
+    //[self.table reloadData];
+//    self.tblView_Height.constant =self.table.contentSize.height-500;
+   // [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,2000)];
+  
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -613,17 +647,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         }
         if (isExpanded== NO) //prepare the cell as if it was collapsed! (without any animation!)
         {
-//            if(indexPath.row ==1)
-//            {
-//                ExpandBattingview.hidden = NO;
-//
-//            }
-//            else
-//            {
-            //[cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(0);
+
             ExpandBattingview.hidden = YES;
-            // [cell.spiderWagon_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
-            //}
+        
             
         }
         else ///prepare the cell as if it was expanded! (without any animation!)
@@ -878,8 +904,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         return bowlerCellTvc;
         
     }
-
-
+   
+    
     return nil;
     
     
@@ -898,6 +924,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isexpanded
 {
+   
+   
+     NSLog(@"scroll=%ld",(long)self.tblView_Height.constant);
     
     if(indexPath.row == 0){
         return 44;
@@ -907,10 +936,17 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         {
             ExpandBattingview.hidden=NO;
             
+            //self.tblView_Height.constant =tableheight+550;
+            //[self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.table.contentSize.height+550)];
             return 550;
         }
         else{
-             ExpandBattingview.hidden=YES;
+            ExpandBattingview.hidden=YES;
+
+//            if(indexPath.row == 0)
+//            {
+//                return 550;
+//            }
 
            return 70;
         }
@@ -931,19 +967,20 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         if (indexPath == selectedIndexPath && isexpanded== YES)
         {
             ExpandBowlerView.hidden=NO;
+           // self.tblView_Height.constant =tableheight+550;
+           // [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,tableheight+550)];
            
-            
             return 550;
         }
         else{
             ExpandBowlerView.hidden=YES;
-           
             return 70;
         }
+        
     }
-    
+   
 
-    return 70;
+    return 0;
 }
 
 -(IBAction)didClickSpiderWagonAction:(id)sender
