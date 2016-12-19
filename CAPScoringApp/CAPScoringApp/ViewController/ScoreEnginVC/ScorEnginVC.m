@@ -754,6 +754,8 @@
     fetchSEPageLoadRecord = nil;
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     
+    //Match overs
+    fetchSEPageLoadRecord.MATCHOVERS = fetchSeBallCodeDetails.MATCHOVERS;
     
     //Logo
     fetchSEPageLoadRecord.TEAMACODE = fetchSeBallCodeDetails.TEAMACODE;
@@ -2887,7 +2889,8 @@
         [altert setTag:1001];
         [altert show];
         
-        if([fetchSEPageLoadRecord.INNINGSNO intValue] == 2)
+
+        if(fetchSEPageLoadRecord.INNINGSNO.intValue == 2)
         {
             [self MatchResult];
         }
