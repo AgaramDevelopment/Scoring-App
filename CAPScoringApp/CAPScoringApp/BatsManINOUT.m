@@ -74,6 +74,7 @@
     self.view_datePicker.hidden=YES;
     self.btn_save.hidden = YES;
     self.btn_delete.hidden = YES;
+    back = YES;
 }
 
 
@@ -260,6 +261,7 @@
         }
         BatsmanPlayerList * objBatsmanPlayer=(BatsmanPlayerList*)[BatsmanlistArray objectAtIndex:indexPath.row];
         cell.textLabel.text = objBatsmanPlayer.playerName;
+        Playercode = objBatsmanPlayer.playerCode;
         return cell;
         
         
@@ -339,7 +341,11 @@
         objDrobDowntbl.hidden=YES;
     }
     else
-    {
+        {
+//        BatsmanPlayerList *obj1 =(BatsmanPlayerList *)[BatsmanlistArray objectAtIndex:indexPath.row];
+//            Playercode  =obj1.playerCode;
+        BatsmaninoutRecord *objnew =(BatsmaninoutRecord *)[BatsManInOutArray objectAtIndex:indexPath.row];
+             Playercode  =objnew.playercode;
         BatsmaninoutRecord *obj =(BatsmaninoutRecord *)[BatsManInOutArray objectAtIndex:indexPath.row];
         oldPlayercode =obj.playercode;
         
@@ -489,6 +495,7 @@
         if ([BtnurrentTittle isEqualToString:@"INSERT"])
         {
             
+            back = YES;
            [objDBManagerBatsmanInOutTime INSERTPLAYERINOUTTIME:_compitionCode :_INNINGSNO :_MATCHCODE :_TEAMCODE :Playercode : self.txt_startTime.text :self.txt_endTime.text];
                 
 
@@ -551,8 +558,9 @@
             
         }
         else{
+            back = YES;
             
-            [objDBManagerBatsmanInOutTime UPDATEPLAYERINOUT:_compitionCode :_MATCHCODE :_TEAMCODE :_INNINGSNO :Playercode :self.txt_startTime.text : self.txt_endTime.text:oldPlayercode];
+            [objDBManagerBatsmanInOutTime UPDATEPLAYERINOUT :_compitionCode :_MATCHCODE :_TEAMCODE :_INNINGSNO :Playercode :self.txt_startTime.text : self.txt_endTime.text:oldPlayercode];
 //            BatsManInOutArray=[[NSMutableArray alloc]init];
 //            
 //            BatsManInOutArray = [objDBManagerBatsmanInOutTime getBatsManBreakTime:_compitionCode :_MATCHCODE :_INNINGSNO :_TEAMCODE];
@@ -633,7 +641,7 @@
 - (IBAction)btn_delete:(id)sender {
     
     
-    
+    back = YES;
     [objDBManagerBatsmanInOutTime DELETEPLAYERINOUTTIME:_compitionCode :_MATCHCODE :_TEAMCODE :_INNINGSNO :oldPlayercode];
     
     
