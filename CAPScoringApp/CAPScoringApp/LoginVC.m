@@ -330,7 +330,7 @@
                      }
                     
                 }else{
-                    [self showDialog:@"Login expired" andTitle:@"Login"];
+                    [self showDialog:@"User Licence expired" andTitle:@"Login"];
                 }
             }else{
                 [self showDialog:@"No internet connection" andTitle:@"Login"];
