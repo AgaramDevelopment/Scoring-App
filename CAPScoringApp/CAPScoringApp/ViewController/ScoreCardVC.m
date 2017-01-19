@@ -19,6 +19,8 @@
 #import "BowlingPlayerStatistics.h"
 #import "BowlerStaticsRecord.h"
 #import "BowlerStrickPitchRecord.h"
+#import "AppDelegate.h"
+#import "DBManagerBatsmanInOutTime.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -77,6 +79,8 @@
     
     BOOL isSectorEnableBatsman;
     BOOL isSectorEnableBowler;
+    BOOL isScrollheight;
+    CGFloat tableheight;
 
 }
 @property (strong, nonatomic) IBOutlet UILabel *cener_lbl;
@@ -115,7 +119,8 @@ int bowlerPostion = 0;
     objBattingPlayerStatistics =[[BattingPlayerStatistics alloc]init];
     objBowlingStatistics       =[[BowlingPlayerStatistics alloc]init];
     muliteDayMatchtype =[[NSArray alloc]initWithObjects:@"MSC023",@"MSC114", nil];
-    [self.table setScrollEnabled:NO];
+    [self.table setBackgroundColor:[UIColor clearColor]];
+    [self.table setScrollEnabled:YES];
     
     [self customnavigationmethod];
     
@@ -130,6 +135,15 @@ int bowlerPostion = 0;
      fetchSEpage = [[FetchSEPageLoadRecord alloc]init];
     [fetchSEpage fetchSEPageLoadDetails:competitionCode :matchCode];
     
+    //FOR BATSMAN DURATION 
+    for (BattingSummaryDetailsForScoreBoard *batSumryDtl in fetchScorecard.BattingSummaryForScoreBoard) {
+        
+        DBManagerBatsmanInOutTime     *dbmanagerBatsmanInOutTime = [[DBManagerBatsmanInOutTime alloc]init];
+       batSumryDtl.DURATION = [dbmanagerBatsmanInOutTime FETCHDURATION:competitionCode :matchCode :inningsNo :batSumryDtl.BATSMANCODE];
+        
+        
+    }
+    
     
     
     //Set Table Cell Position
@@ -138,6 +152,7 @@ int bowlerPostion = 0;
     extraPostion = fetchScorecard.BattingSummaryForScoreBoard.count>0?fetchScorecard.BattingSummaryForScoreBoard.count+1:1;
     overRunRatePostion = extraPostion+1;
     didNotBatPostion = overRunRatePostion+1;
+    
     
     
     BOOL isFOW = NO;
@@ -230,7 +245,32 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
           self.btn_fourth_inns_id.hidden = YES;
     }
     
+    int rows = fetchScorecard.BowlingSummaryForScoreBoard.count+
+    fetchScorecard.BattingSummaryForScoreBoard.count+
+    (fallOfWktHeaderPostion==0?0:1) + (fallOfWktPostion==0?0:1) + 5;
     
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    //Show indicator
+    [delegate showLoading];
+    [NSTimer scheduledTimerWithTimeInterval:2.0
+                                     target:self
+                                   selector:@selector(TimerStop)
+                                   userInfo:nil
+                                    repeats:NO];
+   
+}
+-(void)TimerStop
+{
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    
+    //Show indicator
+    [delegate hideLoading];
+}
+-(void)viewWillAppear:(BOOL)animated
+{
+    //[self.view layoutIfNeeded];
+     //[self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width, self.tblView_Height.constant)];
 }
 
 -(void) setInitView{
@@ -416,6 +456,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
          expendbowlerview.alpha = 1;
         [cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(3.14);
     }];
+   
     
     if(batsmanPostion <= expendIndex && extraPostion> expendIndex){
         
@@ -448,15 +489,16 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
         [self.bowlerCell.BowlerspiderWagon_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
     }
+   
+    //self.tblView_Height.constant = self.table.contentSize.height+500;
     
     
-    self.tblView_Height.constant =self.table.contentSize.height+500;
-     [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant)];
-   // self.tblView_Height.constant =self.backScroll.frame.size.height+300;
+//    self.tblView_Height.constant =self.table.contentSize.height+500;
+//    [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant)];
+   
 
     
-    //[self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width, self.table.contentSize.height)];
-   // [tableView reloadData];
+   
 }
 
 //perform your collapse stuff (may include animation) for cell here. It will be called when the user touches an expanded cell so it gets collapsed or the table is in the expandOnlyOneCell satate and the user touches another item, So the last expanded item has to collapse
@@ -475,9 +517,15 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     } completion:^(BOOL finished) {
         expendBatmanview.hidden = YES;
         expendbowlerview.hidden=YES;
+        //self.tblView_Height.constant =tableheight-550;
+        //[self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,tableheight-550)];
+       
     }];
-   // self.tblView_Height.constant =self.table.contentSize.height-400;
-    [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.tblView_Height.constant-400)];
+    //self.tblView_Height.constant = self.table.contentSize.height-500;
+    //[self.table reloadData];
+//    self.tblView_Height.constant =self.table.contentSize.height-500;
+   // [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,2000)];
+  
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -581,6 +629,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
          cell.lbl_dot_ball.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(115/255.0f) alpha:1.0f];
          cell.lbl_dot_ball_percent.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(115/255.0f) alpha:1.0f];
          cell.lbl_how_out.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(115/255.0f) alpha:1.0f];
+            cell.lbl_batsman_mins.textColor =[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(115/255.0f) alpha:1.0f];
         }else{
             
             cell.lbl_player_name.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
@@ -593,14 +642,14 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             cell.lbl_dot_ball.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
             cell.lbl_dot_ball_percent.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
             cell.lbl_how_out.textColor=[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+            cell.lbl_batsman_mins.textColor =[UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
             
         }
         if (isExpanded== NO) //prepare the cell as if it was collapsed! (without any animation!)
         {
-            //[cell.contentView viewWithTag:7].transform = CGAffineTransformMakeRotation(0);
+
             ExpandBattingview.hidden = YES;
-            // [cell.spiderWagon_Btn sendActionsForControlEvents:UIControlEventTouchUpInside];
-            
+        
             
         }
         else ///prepare the cell as if it was expanded! (without any animation!)
@@ -641,6 +690,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         cell.lbl_how_out.text = battingSummaryDetailsForSB.WICKETDESCRIPTION;
         cell.lbl_dot_ball.text = battingSummaryDetailsForSB.DOTBALLS;
         cell.lbl_dot_ball_percent.text = [NSString stringWithFormat:@"%.02f",[battingSummaryDetailsForSB.DOTBALLPERCENTAGE floatValue]];
+        cell.lbl_batsman_mins.text = battingSummaryDetailsForSB.DURATION;
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
@@ -851,11 +901,11 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         bowlerCellTvc.lbl_bowler_wicket.text = bowlingSummaryForScoreBoard.WICKETS;
         
         bowlerCellTvc.selectionStyle = UITableViewCellSelectionStyleNone;
-
         return bowlerCellTvc;
         
     }
-
+   
+    
     return nil;
     
     
@@ -874,6 +924,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath isExpanded:(BOOL)isexpanded
 {
+   
+   
+     NSLog(@"scroll=%ld",(long)self.tblView_Height.constant);
     
     if(indexPath.row == 0){
         return 44;
@@ -883,11 +936,17 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         {
             ExpandBattingview.hidden=NO;
             
+            //self.tblView_Height.constant =tableheight+550;
+            //[self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,self.table.contentSize.height+550)];
             return 550;
         }
         else{
-             ExpandBattingview.hidden=YES;
-            
+            ExpandBattingview.hidden=YES;
+
+//            if(indexPath.row == 0)
+//            {
+//                return 550;
+//            }
 
            return 70;
         }
@@ -908,18 +967,20 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         if (indexPath == selectedIndexPath && isexpanded== YES)
         {
             ExpandBowlerView.hidden=NO;
+           // self.tblView_Height.constant =tableheight+550;
+           // [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,tableheight+550)];
            
-            
             return 550;
         }
         else{
             ExpandBowlerView.hidden=YES;
-           
             return 70;
         }
+        
     }
-    
-    return 70;
+   
+
+    return 0;
 }
 
 -(IBAction)didClickSpiderWagonAction:(id)sender
@@ -1452,6 +1513,33 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 UIColor *fillColor = [UIColor redColor];
                 shapeLayer.fillColor = fillColor.CGColor;
                 UIColor *strokeColor = [UIColor whiteColor];
+                
+                if ([objRecord.RUNS isEqualToString: @"1"]) {
+                    
+                    strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.RUNS isEqualToString: @"2"]){
+                    strokeColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.RUNS isEqualToString: @"3"]){
+                    strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.RUNS isEqualToString: @"4"]){
+                    strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.RUNS isEqualToString: @"5"]){
+                    strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.RUNS isEqualToString: @"6"]){
+                    strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                    
+                }else if ([objRecord.RUNS isEqualToString: @"0"]){
+                    
+                    strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                    
+                }
+
+                
                 shapeLayer.strokeColor = strokeColor.CGColor;
                 shapeLayer.lineWidth = 2.0f;
                 shapeLayer.fillRule = kCAFillRuleNonZero;
@@ -3045,6 +3133,33 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     UIColor *fillColor = [UIColor redColor];
                     shapeLayer.fillColor = fillColor.CGColor;
                     UIColor *strokeColor = [UIColor whiteColor];
+                    
+                    if ([objRecord.Runs isEqualToString: @"1"]) {
+                        
+                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+                        strokeColor = [UIColor colorWithRed:(35/255.0f) green:(116/255.0f) blue:(205/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+                        strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+                        strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+                        
+                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+                        
+                    }
+
+                    
                     shapeLayer.strokeColor = strokeColor.CGColor;
                     shapeLayer.lineWidth = 2.0f;
                     shapeLayer.fillRule = kCAFillRuleNonZero;

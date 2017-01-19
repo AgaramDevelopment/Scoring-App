@@ -754,6 +754,8 @@
     fetchSEPageLoadRecord = nil;
     fetchSEPageLoadRecord = [[FetchSEPageLoadRecord alloc]init];
     
+    //Match overs
+    fetchSEPageLoadRecord.MATCHOVERS = fetchSeBallCodeDetails.MATCHOVERS;
     
     //Logo
     fetchSEPageLoadRecord.TEAMACODE = fetchSeBallCodeDetails.TEAMACODE;
@@ -1103,8 +1105,13 @@
         }
         
         Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(self.ballEventRecord.objPMX2.floatValue,self.ballEventRecord.objPMY2.floatValue,20, 20)];
-        Img_ball.image =[UIImage imageNamed:@"RedBall"];
-        [self.img_pichmap addSubview:Img_ball];
+        CGFloat xposition =[self.ballEventRecord.objPMX2 floatValue];
+        CGFloat yposition =[self.ballEventRecord.objPMY2 floatValue];
+        if(xposition > 1 && yposition > 1)
+        {
+           Img_ball.image =[UIImage imageNamed:@"RedBall"];
+           [self.img_pichmap addSubview:Img_ball];
+        }
         self.img_pichmap.hidden = YES;
         [self EditModePitchMap];
         
@@ -1448,6 +1455,18 @@
     
     //Ball ticket
     fetchSEPageLoadRecord.BallGridDetails = fetchSeBallCodeDetails.BallGridDetails;
+   
+    if(fetchSeBallCodeDetails.GetPenaltyDetailsForPenaltyEventsArray!= nil && fetchSeBallCodeDetails.GetPenaltyDetailsForPenaltyEventsArray.count>0){
+        
+        GetSEPenaltyDetailsForPenaltyEvents *gPDtl = [fetchSeBallCodeDetails.GetPenaltyDetailsForPenaltyEventsArray objectAtIndex:0];
+        self.ballEventRecord.AwardedTeam =gPDtl.AWARDEDTOTEAMCODE;
+        self.ballEventRecord.objPenalty = gPDtl.PENALTYRUNS;
+        self.ballEventRecord.objPenaltytypecode= gPDtl.PENALTYTYPECODE;
+        self.ballEventRecord.objPenaltyreasoncode =gPDtl.PENALTYREASONCODE;
+    }
+    
+    
+   
     
     [self CreateBallTickers : fetchSeBallCodeDetails.BallGridDetails];
     
@@ -2531,7 +2550,7 @@
              (selectedStrikernonstrikerCode.length <= 0 ? fetchSEPageLoadRecord.strickerPlayerCode : selectedStrikernonstrikerCode) :
              selectedwicketBowlerlist.BowlerCode:
              (isOldWicketSelectedOnEdit && !isWicketSelected)? [NSNumber numberWithInt:1] : [NSNumber numberWithInt:0]:
-             @"1" :
+             self.ballEventRecord.AwardedTeam:
              self.ballEventRecord.objPenalty :
              self.ballEventRecord.objPenaltytypecode :
              self.ballEventRecord.objPenaltyreasoncode :
@@ -2870,7 +2889,8 @@
         [altert setTag:1001];
         [altert show];
         
-        if([fetchSEPageLoadRecord.INNINGSNO intValue] == 2)
+
+        if(fetchSEPageLoadRecord.INNINGSNO.intValue == 2)
         {
             [self MatchResult];
         }

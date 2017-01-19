@@ -2228,8 +2228,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.LEGBYES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)];
                 record.NOBALLS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)];
                 record.WIDES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 3)];
-                record.PENALTIES=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)];
-                record.INNINGSTOTAL=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)];
+                record.PENALTIES=[self getValueByNull:statement :4];
+                record.INNINGSTOTAL=[self getValueByNull:statement :5];
                 record.INNINGSTOTALWICKETS=[NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)];
                 
                 

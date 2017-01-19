@@ -10,6 +10,9 @@
 
 @implementation BatsmaninoutRecord
 
-@synthesize startTime,EndTime,Duration,playerName;
+@synthesize startTime;
+@synthesize EndTime;
+@synthesize Duration;
+@synthesize playerName;
 
 @end

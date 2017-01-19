@@ -1523,7 +1523,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         BattingSummaryRecord *record = [battingSummaryArray objectAtIndex:i];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
-            NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BATTINGSUMMARY (COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTINGPOSITIONNO,BATSMANCODE,RUNS,BALLS,ONES,TWOS,THREES,FOURS,SIXES,DOTBALLS,WICKETNO,WICKETTYPE,FIELDERCODE,BOWLERCODE,WICKETOVERNO,WICKETBALLNO,WICKETSCORE) VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')", record.COMPETITIONCODE,record.MATCHCODE,record.BATTINGTEAMCODE,record.INNINGSNO,record.BATTINGPOSITIONNO,record.BATSMANCODE,record.RUNS,record.BALLS,record.ONES,record.TWOS,record.THREES,record.FOURS,record.SIXES,record.DOTBALLS,record.WICKETNO,record.WICKETTYPE,record.FIELDERCODE,record.BOWLERCODE,record.WICKETOVERNO,record.WICKETBALLNO,record.WICKETSCORE];
+            NSString *error = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@",[record.WICKETNO isEqualToString:@""]?@"NULL" : record.WICKETNO,[record.WICKETTYPE isEqualToString:@""]?@"NULL" : record.WICKETTYPE,[record.FIELDERCODE isEqualToString:@""]?@"NULL" : record.FIELDERCODE ,[record.BOWLERCODE isEqualToString:@""]?@"NULL" : record.BOWLERCODE ,[record.WICKETOVERNO isEqualToString:@""]?@"NULL" : record.WICKETOVERNO,[record.WICKETBALLNO isEqualToString:@""]?@"NULL" : record.WICKETBALLNO,[record.WICKETSCORE isEqualToString:@""]?@"NULL" : record.WICKETSCORE];
+            
+            NSString *Noerror = [NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@'",[record.WICKETNO isEqualToString:@""]?@"NULL" : record.WICKETNO,[record.WICKETTYPE isEqualToString:@""]?@"NULL" : record.WICKETTYPE,[record.FIELDERCODE isEqualToString:@""]?@"NULL" : record.FIELDERCODE ,[record.BOWLERCODE isEqualToString:@""]?@"NULL" : record.BOWLERCODE ,[record.WICKETOVERNO isEqualToString:@""]?@"NULL" : record.WICKETOVERNO,[record.WICKETBALLNO isEqualToString:@""]?@"NULL" : record.WICKETBALLNO,[record.WICKETSCORE isEqualToString:@""]?@"NULL" : record.WICKETSCORE];
+            
+            NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BATTINGSUMMARY (COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTINGPOSITIONNO,BATSMANCODE,RUNS,BALLS,ONES,TWOS,THREES,FOURS,SIXES,DOTBALLS,WICKETNO,WICKETTYPE,FIELDERCODE,BOWLERCODE,WICKETOVERNO,WICKETBALLNO,WICKETSCORE) VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@',%@)", record.COMPETITIONCODE,record.MATCHCODE,record.BATTINGTEAMCODE,record.INNINGSNO,record.BATTINGPOSITIONNO,record.BATSMANCODE,record.RUNS,record.BALLS,record.ONES,record.TWOS,record.THREES,record.FOURS,record.SIXES,record.DOTBALLS, [record.WICKETNO isEqualToString:@""] ? error : Noerror];
+            
             const char *update_stmt = [updateSQL UTF8String];
             sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
             if (sqlite3_step(statement) == SQLITE_DONE)
@@ -2798,7 +2803,17 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         BattingSummaryRecord *record = [battingSummaryArray objectAtIndex:i];
         if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
         {
-            NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BATTINGSUMMARY (COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTINGPOSITIONNO,BATSMANCODE,RUNS,BALLS,ONES,TWOS,THREES,FOURS,SIXES,DOTBALLS,WICKETNO,WICKETTYPE,FIELDERCODE,BOWLERCODE,WICKETOVERNO,WICKETBALLNO,WICKETSCORE) VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@')", record.COMPETITIONCODE,record.MATCHCODE,record.BATTINGTEAMCODE,record.INNINGSNO,record.BATTINGPOSITIONNO,record.BATSMANCODE,record.RUNS,record.BALLS,record.ONES,record.TWOS,record.THREES,record.FOURS,record.SIXES,record.DOTBALLS,record.WICKETNO,record.WICKETTYPE,record.FIELDERCODE,record.BOWLERCODE,record.WICKETOVERNO,record.WICKETBALLNO,record.WICKETSCORE];
+            
+            
+            // NSString *filter =[NSString stringWithFormat:@"MR.COMPETITIONCODE='%@' AND",competitionCode];
+            
+            
+            NSString *error = [NSString stringWithFormat:@"%@,%@,%@,%@,%@,%@,%@",[record.WICKETNO isEqualToString:@""]?@"NULL" : record.WICKETNO,[record.WICKETTYPE isEqualToString:@""]?@"NULL" : record.WICKETTYPE,[record.FIELDERCODE isEqualToString:@""]?@"NULL" : record.FIELDERCODE ,[record.BOWLERCODE isEqualToString:@""]?@"NULL" : record.BOWLERCODE ,[record.WICKETOVERNO isEqualToString:@""]?@"NULL" : record.WICKETOVERNO,[record.WICKETBALLNO isEqualToString:@""]?@"NULL" : record.WICKETBALLNO,[record.WICKETSCORE isEqualToString:@""]?@"NULL" : record.WICKETSCORE];
+            
+            NSString *Noerror = [NSString stringWithFormat:@"'%@','%@','%@','%@','%@','%@','%@'",[record.WICKETNO isEqualToString:@""]?@"NULL" : record.WICKETNO,[record.WICKETTYPE isEqualToString:@""]?@"NULL" : record.WICKETTYPE,[record.FIELDERCODE isEqualToString:@""]?@"NULL" : record.FIELDERCODE ,[record.BOWLERCODE isEqualToString:@""]?@"NULL" : record.BOWLERCODE ,[record.WICKETOVERNO isEqualToString:@""]?@"NULL" : record.WICKETOVERNO,[record.WICKETBALLNO isEqualToString:@""]?@"NULL" : record.WICKETBALLNO,[record.WICKETSCORE isEqualToString:@""]?@"NULL" : record.WICKETSCORE];
+            
+            NSString *updateSQL = [NSString stringWithFormat:@"INSERT INTO BATTINGSUMMARY (COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTINGPOSITIONNO,BATSMANCODE,RUNS,BALLS,ONES,TWOS,THREES,FOURS,SIXES,DOTBALLS,WICKETNO,WICKETTYPE,FIELDERCODE,BOWLERCODE,WICKETOVERNO,WICKETBALLNO,WICKETSCORE) VALUES ('%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@','%@',%@)", record.COMPETITIONCODE,record.MATCHCODE,record.BATTINGTEAMCODE,record.INNINGSNO,record.BATTINGPOSITIONNO,record.BATSMANCODE,record.RUNS,record.BALLS,record.ONES,record.TWOS,record.THREES,record.FOURS,record.SIXES,record.DOTBALLS, [record.WICKETNO isEqualToString:@""] ? error : Noerror];
+            
             const char *update_stmt = [updateSQL UTF8String];
             sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
             if (sqlite3_step(statement) == SQLITE_DONE)

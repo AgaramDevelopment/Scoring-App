@@ -564,7 +564,7 @@ EndInnings *insertScoreBoard;
         F_NOBALL =   updateScoreEngRec.NOBALL;
         F_BYES =  updateScoreEngRec.BYES;
         F_LEGBYES  = updateScoreEngRec.LEGBYES;
-        F_PENALTY = updateScoreEngRec.PENALTY;
+       // F_PENALTY = updateScoreEngRec.PENALTY;
         
     }
     

@@ -630,6 +630,8 @@
         self.view_penaltyTittle.hidden=NO;
         isShow_penaltyrecordTbl= YES;
         self.Btn_Add.hidden =NO;
+        [self.tbl_penaltyrecord reloadData];
+        _penaltyDetailsRecord=nil;
     }
     
 }

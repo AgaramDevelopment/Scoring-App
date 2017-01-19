@@ -68,6 +68,7 @@
         self.lbl_umpire3.text=objMatchofficalRecord.umpire3name;
         self.lbl_matchreferee.text=objMatchofficalRecord.matchrefereename;
         self.lbl_scorer1.text=username;
+        self.lbl_scorer2.text =[NSString stringWithFormat:@"-"];
         
         NSMutableArray *scorearray=[objDBManager RetrieveSCORE2 :competitionCode:Matchcode:userCode];
         if ([scorearray count ]>0) {

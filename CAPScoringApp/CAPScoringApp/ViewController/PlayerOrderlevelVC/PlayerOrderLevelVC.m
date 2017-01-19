@@ -1028,7 +1028,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 //                
 //                    [changeplayerorderArray addObject:objRecord];
 //                }
-                 [self changePlayerorder:newplayerorder :orderno :isMoveBottom];
+                [self changePlayerorder:newplayerorder :orderno:sourceRow :isMoveBottom];
 //                slecteplayerlist=changeplayerorderArray;
                 playercell.editing=NO;
                 [self.tbl_playerSelectList setEditing:playercell.editing animated:YES];
@@ -1050,7 +1050,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
         [slecteplayerlist removeObjectAtIndex:sourceRow];
         
         [slecteplayerlist insertObject:object atIndex:destRow];
-         [self changePlayerorder:newplayerorder :newplayerorder :isMoveBottom];
+        [self changePlayerorder:newplayerorder :newplayerorder :sourceRow:isMoveBottom];
         playercell.editing=NO;
         [self.tbl_playerSelectList setEditing:playercell.editing animated:YES];
         [self.tbl_playerSelectList reloadData];
@@ -1062,7 +1062,7 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
      [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"ScoreEnginExit"]; 
     [self.navigationController popViewControllerAnimated:YES];
 }
--(void)changePlayerorder:(int)newplayerorder :(int)changeorder :(BOOL)ismoveorder
+-(void)changePlayerorder:(int)newplayerorder :(int)changeorder :(int) destination:(BOOL)ismoveorder
 
 {
     NSMutableArray * changeplayerorderArray =[[NSMutableArray alloc]init];
@@ -1102,10 +1102,14 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
                     
                 }
                 
-                else
+                else if(newplayerorder < i)
+                {
+                    orderno=[objRecord.playerOrder intValue];
+                    //orderno = orderno-1;
+                }
+                else if(newplayerorder >i)
                 {
                     orderno=[objRecord.playerOrder intValue]+1;
-                    //orderno = orderno-1;
                 }
                 
                 
@@ -1126,13 +1130,19 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
                 
                 if([objRecord.playerOrder isEqualToString:@"0"])
                 {
-                    orderno = [objRecord.playerOrder intValue];
+                    orderno = 1;
                     
                 }
                 
-                else
+                if(destination >= i)
                 {
                     orderno=[objRecord.playerOrder intValue]+1;
+                }
+                
+                if(destination < i)
+              
+                {
+                    orderno=[objRecord.playerOrder intValue];
                     //orderno = orderno-1;
                 }
                 
@@ -1141,15 +1151,28 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
             }
             else if (newplayerorder == changeorder)
             {
-                if(newplayerorder > i)
+                if(newplayerorder == i)
                 {
+                    int orderposition =[objRecord.playerOrder intValue]-destination;
+                    orderno =newplayerorder+orderposition;
                     
-//                    if([objRecord.playerOrder isEqualToString:@"0"])
+//                    if(destination > i)
 //                    {
-//                        orderno = [objRecord.playerOrder intValue];
+//                        orderno=[objRecord.playerOrder intValue]-1;
 //                        
 //                    }
-//                    
+                    if(destination < i)
+                    {
+                        orderno=[objRecord.playerOrder intValue]+1;
+                    }
+                    
+                    if(newplayerorder == 0 && i==0)
+                    {
+                        orderno =1;
+                    }
+
+                    
+//
 //                    else
 //                    {
 //                        orderno=[objRecord.playerOrder intValue]-1;
@@ -1157,9 +1180,10 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
 //                    }
                     
                     
-//                    objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
+                   objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
                 }
-                else{
+                
+                else if(newplayerorder < i){
                 orderno = newplayerorder+1;
                 
                 objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
