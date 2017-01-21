@@ -77,6 +77,7 @@
                 
                 
                 NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETAUTHORIZATIONDETAILS/%@/%@/admin",[Utitliy getSyncIPPORT] ,userNameLbl,passwordLbl];
+                NSLog(@"LoginURL=%@",baseURL);
                 NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
                 
                 NSURLRequest *request = [NSURLRequest requestWithURL:url];
@@ -337,6 +338,7 @@
                  
             }
         }
+            
     }
     
 }

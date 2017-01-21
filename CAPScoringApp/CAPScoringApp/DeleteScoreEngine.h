@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 
 @interface DeleteScoreEngine : NSObject
--(void)DeleteScoreEngineMethod : (NSString*)BALLCODE : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)TEAMCODE : (NSInteger)INNINGSNO : (NSString*)STRIKERCODE : (NSString*)BOWLERCODE : (NSString*)REVERT;
+-(void)DeleteScoreEngineMethod : (NSString*)BALLCODE : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BOWLERCODE : (NSString*)REVERT;
 @end

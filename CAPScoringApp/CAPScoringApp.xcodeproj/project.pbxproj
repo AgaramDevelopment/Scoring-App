@@ -44,6 +44,7 @@
 		048882DD1DC1DF51007528E0 /* BatsmanVsBowlerVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 048882DB1DC1DF51007528E0 /* BatsmanVsBowlerVC.xib */; };
 		048B5A9E1D0AF1A7009F12B8 /* WicketTypeRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */; };
 		048F6F591CFFFEE600F2C5F5 /* FieldingFactorCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 048F6F581CFFFEE600F2C5F5 /* FieldingFactorCell.m */; };
+		049573DB1E32168B0017126D /* DeleteBallRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 049573DA1E32168B0017126D /* DeleteBallRecord.m */; };
 		04960F551DE9649F00B23DA5 /* DBManagerPlayerWormChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04960F501DE9649F00B23DA5 /* DBManagerPlayerWormChart.m */; };
 		04960F561DE9649F00B23DA5 /* PlayerWormChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 04960F521DE9649F00B23DA5 /* PlayerWormChart.m */; };
 		04960F571DE9649F00B23DA5 /* PlayerWormChartRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 04960F541DE9649F00B23DA5 /* PlayerWormChartRecords.m */; };
@@ -436,6 +437,8 @@
 		048B5A9D1D0AF1A7009F12B8 /* WicketTypeRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WicketTypeRecord.m; sourceTree = "<group>"; };
 		048F6F571CFFFEE600F2C5F5 /* FieldingFactorCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FieldingFactorCell.h; sourceTree = "<group>"; };
 		048F6F581CFFFEE600F2C5F5 /* FieldingFactorCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FieldingFactorCell.m; sourceTree = "<group>"; };
+		049573D91E32168B0017126D /* DeleteBallRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DeleteBallRecord.h; path = Resource/ScoreEnginBallDelete/DeleteBallRecord.h; sourceTree = "<group>"; };
+		049573DA1E32168B0017126D /* DeleteBallRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DeleteBallRecord.m; path = Resource/ScoreEnginBallDelete/DeleteBallRecord.m; sourceTree = "<group>"; };
 		04960F4F1DE9649F00B23DA5 /* DBManagerPlayerWormChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DBManagerPlayerWormChart.h; path = "ViewController/Playerworm chart/DBManagerPlayerWormChart.h"; sourceTree = "<group>"; };
 		04960F501DE9649F00B23DA5 /* DBManagerPlayerWormChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DBManagerPlayerWormChart.m; path = "ViewController/Playerworm chart/DBManagerPlayerWormChart.m"; sourceTree = "<group>"; };
 		04960F511DE9649F00B23DA5 /* PlayerWormChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerWormChart.h; path = "ViewController/Playerworm chart/PlayerWormChart.h"; sourceTree = "<group>"; };
@@ -1036,6 +1039,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0444948F1E308E3100E04926 /* ScoreEnginBallDeleteRecord */ = {
+			isa = PBXGroup;
+			children = (
+				049573D91E32168B0017126D /* DeleteBallRecord.h */,
+				049573DA1E32168B0017126D /* DeleteBallRecord.m */,
+			);
+			name = ScoreEnginBallDeleteRecord;
+			sourceTree = "<group>";
+		};
 		0468B3841D126F9100B98576 /* Penality */ = {
 			isa = PBXGroup;
 			children = (
@@ -1946,6 +1958,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				0444948F1E308E3100E04926 /* ScoreEnginBallDeleteRecord */,
 				18782BCD1DE06496005064B9 /* DBManagerSpellReport */,
 				18782BC61DE0609E005064B9 /* SpellReportRecord */,
 				18F1AC2C1DDD809500821755 /* FieldingFactorRecord */,
@@ -2751,6 +2764,7 @@
 				1872FE891DC2D80F007C31F7 /* SessionReportCell.m in Sources */,
 				CEC25E061D290B04009D99F0 /* MatchEventPushRecord.m in Sources */,
 				CE3DD41C1CFBFA7000D93A55 /* SelectPlayerRecord.m in Sources */,
+				049573DB1E32168B0017126D /* DeleteBallRecord.m in Sources */,
 				1877776F1D2232FA002F31E5 /* getimageRecord.m in Sources */,
 				0481DD061D213B250084BFF7 /* PowerPlayVC.m in Sources */,
 				18704EDB1D19591F00996BF3 /* GetTeamANameDetails.m in Sources */,

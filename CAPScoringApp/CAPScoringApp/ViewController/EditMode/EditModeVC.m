@@ -20,6 +20,7 @@
 #import "FetchSEPageLoadRecord.h"
 #import "FetchScorecard.h"
 #import "CMPopTipView.h"
+#import "DeleteScoreEngine.h"
 
 // Border Brushes
 #define runBrushBDR [UIColor colorWithRed:(82.0/255.0) green:(131.0/255.0) blue:(174.0/255.0) alpha:1.0]
@@ -95,6 +96,7 @@ BOOL isWicketSelected;
     BOOL isEdit;
     FetchScorecard*fetchScorecard;
     DBManager *objDBManager;
+    DeleteScoreEngine * objDeleteScoreEngine;
 
     
 }
@@ -111,14 +113,14 @@ BOOL isWicketSelected;
     //indexCount = 0;
     [super viewDidLoad];
     [self customnavigationmethod];
-    
-     objDBManager = [[DBManager alloc] init];
-    isEdit=NO;
+    FetchSEPageLoadRecord *objfetchSEPageLoadRecord;
+      objDBManager = [[DBManager alloc] init];
+      isEdit=NO;
       isWicketSelected=NO;
     //CGFloat totalwidth =1200;
     
     [self.view layoutIfNeeded];
-    FetchSEPageLoadRecord *objfetchSEPageLoadRecord;
+   
   
     self.Btn_innings1team1.frame= CGRectMake(self.Btn_innings1team1.frame.origin.x, self.Btn_innings1team1.frame.origin.y, 400, self.Btn_innings1team1.frame.size.height);
    self. Btn_innings1team2.userInteractionEnabled=NO;
@@ -127,62 +129,46 @@ BOOL isWicketSelected;
     self.lbl_1stseprator.hidden=YES;
     self.lbl_2seprator.hidden=YES;
     self.lbl_3seprator.hidden=YES;
-    
+
     NSMutableArray* objInniningsarray=[objDBManager FETCHSEALLINNINGSSCOREDETAILS:self.Comptitioncode MATCHCODE:self.matchCode];
     
     if(objInniningsarray.count>0){
-    objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
+        objfetchSEPageLoadRecord=(FetchSEPageLoadRecord*)[objInniningsarray objectAtIndex:0];
     }
     if(![objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME isEqualToString:@""])
     {
-    [self.Btn_innings1team1 setTitle:[NSString stringWithFormat:@"1st INNS %@ ",objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME] forState: UIControlStateNormal];
+        [self.Btn_innings1team1 setTitle:[NSString stringWithFormat:@"1st INNS %@ ",objfetchSEPageLoadRecord.FIRSTINNINGSSHORTNAME] forState: UIControlStateNormal];
     }
     
     if(![objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqualToString:@""])
     {
-       NSString *secondinningsTeamName=([objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqualToString:@""] || objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME == nil)?@"":[NSString stringWithFormat:@"2nd INNS %@",objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME];
+        NSString *secondinningsTeamName=([objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME isEqualToString:@""] || objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME == nil)?@"":[NSString stringWithFormat:@"2nd INNS %@",objfetchSEPageLoadRecord.SECONDINNINGSSHORTNAME];
         [self.Btn_innings1team2 setTitle: [NSString stringWithFormat:secondinningsTeamName] forState: UIControlStateNormal];
         self. Btn_innings1team2.userInteractionEnabled=YES;
         self.lbl_1stseprator.hidden=NO;
-
+        
     }
     
     if(![objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqualToString:@""])
     {
-     NSString *ThirdinningsTeamName=([objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqualToString:@""] || objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME == nil)?@"":[NSString stringWithFormat:@"3rd INNS %@",objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME];
-         [self.Btn_inning2steam1 setTitle: [NSString stringWithFormat:ThirdinningsTeamName] forState: UIControlStateNormal];
+        NSString *ThirdinningsTeamName=([objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqualToString:@""] || objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME == nil)?@"":[NSString stringWithFormat:@"3rd INNS %@",objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME];
+        [self.Btn_inning2steam1 setTitle: [NSString stringWithFormat:ThirdinningsTeamName] forState: UIControlStateNormal];
         self. Btn_inning2steam1.userInteractionEnabled=YES;
         self.lbl_2seprator.hidden=NO;
     }
     
     if(![objfetchSEPageLoadRecord.THIRDINNINGSSHORTNAME isEqualToString:@""])
     {
-    NSString *FourinningsTeamName=([objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME isEqualToString:@""] || objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME == nil)?@"":[NSString stringWithFormat:@"4th INNS %@",objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME];
+        NSString *FourinningsTeamName=([objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME isEqualToString:@""] || objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME == nil)?@"":[NSString stringWithFormat:@"4th INNS %@",objfetchSEPageLoadRecord.FOURTHINNINGSSHORTNAME];
         
-    [self.Btn_innings2team2 setTitle: [NSString stringWithFormat:FourinningsTeamName] forState: UIControlStateNormal];
-         self. Btn_innings2team2.userInteractionEnabled=YES;
+        [self.Btn_innings2team2 setTitle: [NSString stringWithFormat:FourinningsTeamName] forState: UIControlStateNormal];
+        self. Btn_innings2team2.userInteractionEnabled=YES;
         self.lbl_3seprator.hidden=NO;
     }
     
-    
-   // NSLog(@"constant=%@",self.highlightbtnxposition.constant);
-    
-    
-    
+    objDeleteScoreEngine =[[DeleteScoreEngine alloc]init];
 
-    //self.inningsviewWidth.constant =totalwidth;
-    //self.btn_innings1Widthposition.constant=400;
-    //self.btn_innings2xposition.constant     =self.btn_innings1Widthposition.constant+10;
-    // self.inningButtonView.constant = totalwidth;
-//    OversorderArray =[DBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
-//    inningsDetail=[DBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
-//    
-//    if ([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] ||
-//        [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"]) {
-//        // self.btn_third_inns_id.hidden = YES;
-//        // self.btn_fourth_inns_id.hidden = YES;
-//    }
-    // Do any additional setup after loading the view.
+    
 
    }
 
@@ -872,11 +858,7 @@ BOOL isWicketSelected;
 
 -(IBAction)didClickEditrotation:(id)sender
 {
-    
-    //
-    //    int overIndex = ((senderButton.tag-30000)%10000)/10;
-    //    int ballIndex = ((senderButton.tag-(overIndex*10))-30000)/10000;
-    //
+   
     isEdit=YES;
     InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
     ScorEnginVC *scoreEngine=[[ScorEnginVC alloc]init];
@@ -890,7 +872,24 @@ BOOL isWicketSelected;
 }
 -(IBAction)didClickCancelrotation:(id)sender
 {
+    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
+    [objDeleteScoreEngine DeleteScoreEngineMethod:objInningsBowlerDetailsRecord.ballCode :_Comptitioncode :_matchCode :objInningsBowlerDetailsRecord.BowlerCode :@"NO"];
+    //[self InningFetchMethod];
+    OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+    inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
     
+    [self.tbl_innnings reloadData];
+    if(view_addedit != nil)
+    {
+        
+        [view_addedit removeFromSuperview];
+        [leftrotation removeFromSuperview];
+        [Rightrotation removeFromSuperview];
+        [Cancelrotation removeFromSuperview];
+        [Editrotation removeFromSuperview];
+        [self popTipViewWasDismissedByUser:_currentPopTipViewTarget ];
+    }
+
 }
 -(IBAction)didClickRightrotation:(id)sender
 {
