@@ -137,7 +137,7 @@
     BOOL isExtrasSelected;
     BOOL isOverthrowSelected;
     BOOL isFieldingSelected;
-    int fieldingOption;
+    int  fieldingOption;
     BOOL isOTWselected;
     BOOL isRTWselected;
     BOOL isSpinSelected;
@@ -260,6 +260,9 @@
     
     NSString * deleteBallBowlerCode;
     
+    NSString * pitchCommantryStr;
+    
+     NSString * wangonWheelCommantry;
 }
 
 
@@ -4628,6 +4631,7 @@
     {
         Shottype =self.ballEventRecord.objShottype;
     }
+    [self comantryTextValue];
     //Comment is in hold
     //  self.txt_Commantry.text=[NSString stringWithFormat:@" %@ %@ %@ %@ %@ %@ %@ %@",runSix,runFour,Extras,Wicket,overthrow,unComfort,beaten,Shottype];
 }
@@ -4635,6 +4639,7 @@
 
 -(void)PitchmapSelectposition:(int) Xposition :(int) Yposition
 {
+    pitchCommantryStr=@"";
     if(IS_IPAD_PRO)
     {
         //Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(Xposition,Yposition,20, 20)];
@@ -4648,11 +4653,13 @@
                     NSLog(@"full toss wide0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"full toss wide0.0";
                 }
                 else{
                     NSLog(@"full toss wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"full toss wide D.L";
                 }
                 
             }
@@ -4664,11 +4671,13 @@
                     NSLog(@"full toss outside OFF");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"full toss outside OFF";
                 }
                 else{
                     NSLog(@"full toss outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"full toss outside LEG";
                 }
             }
             else if(Xposition > 304 && Yposition >85 && Xposition < 341)
@@ -4677,6 +4686,7 @@
                 NSLog(@"full toss Middle");
                 self.ballEventRecord.objPMlengthcode=@"MSC037";
                 self.ballEventRecord.objPMlinecode =@"MSC026";
+                pitchCommantryStr=@"full toss Middle";
                 
             }
             else if(Xposition >342 && Yposition >85 && Xposition < 366)
@@ -4686,11 +4696,13 @@
                     NSLog(@"full toss outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"full toss outside LEG";
                 }
                 else{
                     NSLog(@"full toss outside off");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"full toss outside off";
                 }
             }
             else if(Xposition >366 && Yposition >85 && Xposition < 455)
@@ -4700,12 +4712,14 @@
                     NSLog(@"full toss wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"full toss wide D.L";
                 }
                 else{
                     
                     NSLog(@"full toss wide 0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"full toss wide 0.0";
                 }
             }
             
@@ -4731,11 +4745,13 @@
                     NSLog(@"yorker wide0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"yorker wide0.0";
                 }
                 else{
                     NSLog(@"yorker wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"yorker wide D.L";
                 }
                 
             }
@@ -4747,11 +4763,13 @@
                     NSLog(@"yorker outside OFF");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"yorker outside OFF";
                 }
                 else{
                     NSLog(@"yorker outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"yorker outside LEG";
                 }
             }
             else if(Xposition >310 && Yposition >200 && Xposition < 341)
@@ -4760,6 +4778,7 @@
                 NSLog(@"yorker Middle");
                 self.ballEventRecord.objPMlengthcode=@"MSC036";
                 self.ballEventRecord.objPMlinecode =@"MSC026";
+                pitchCommantryStr=@"yorker Middle";
                 
             }
             else if(Xposition >342 && Yposition >200 && Xposition < 377)
@@ -4769,11 +4788,14 @@
                     NSLog(@"yorker outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"yorker outside LEG";
+
                 }
                 else{
                     NSLog(@"yorker outside off");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"yorker outside off";
                 }
             }
             else if(Xposition >375 && Yposition >200 && Xposition < 463)
@@ -4783,12 +4805,15 @@
                     NSLog(@"yorker wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"yorker wide D.L";
                 }
                 else{
                     
                     NSLog(@"yorker wide 0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"yorker wide 0.0";
+
                 }
             }
             //Clear ball
@@ -4814,11 +4839,14 @@
                     NSLog(@"Full wide0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"Full wide0.0";
                 }
                 else{
                     NSLog(@"Full wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"Full wide D.L";
+
                 }
                 
             }
@@ -4829,11 +4857,14 @@
                     NSLog(@"full outside OFF");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"full outside OFF";
+
                 }
                 else{
                     NSLog(@"full outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"full outside LEG";
                 }
                 
             }
@@ -4843,6 +4874,8 @@
                 NSLog(@"full Middle");
                 self.ballEventRecord.objPMlengthcode=@"MSC035";
                 self.ballEventRecord.objPMlinecode =@"MSC026";
+                pitchCommantryStr=@"full Middle";
+
             }
             else if(Xposition >343 && Yposition >240 && Xposition < 390)
             {
@@ -4851,11 +4884,13 @@
                     NSLog(@"full outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"full outside LEG";
                 }
                 else{
                     NSLog(@"full outside off");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"full outside off";
                 }
                 
             }
@@ -4866,12 +4901,14 @@
                     NSLog(@"full wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"full wide D.L";
                 }
                 else{
                     
                     NSLog(@"full wide 0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"full wide 0.0";
                 }
                 
             }
@@ -4898,11 +4935,14 @@
                     NSLog(@"good wide0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"good wide0.0";
+
                 }
                 else{
                     NSLog(@"good wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"good wide D.L";
                 }
                 
             }
@@ -4913,11 +4953,13 @@
                     NSLog(@"good outside OFF");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"good outside OFF";
                 }
                 else{
                     NSLog(@"good outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"good outside LEG";
                 }
             }
             
@@ -4926,6 +4968,7 @@
                 NSLog(@"good Middle");
                 self.ballEventRecord.objPMlengthcode=@"MSC034";
                 self.ballEventRecord.objPMlinecode =@"MSC026";
+                pitchCommantryStr=@"good Middle";
             }
             else if(Xposition >350 && Yposition >297 && Xposition < 409)
             {
@@ -4934,11 +4977,13 @@
                     NSLog(@"good outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"good outside LEG";
                 }
                 else{
                     NSLog(@"good outside off");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"good outside off";
                 }
                 
             }
@@ -4949,12 +4994,14 @@
                     NSLog(@"good wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"good wide D.L";
                 }
                 else{
                     
                     NSLog(@"good wide 0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"good wide 0.0";
                 }
                 //NSLog(@"good wide 0.0");
             }
@@ -4982,11 +5029,13 @@
                     NSLog(@"short wide0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"short wide0.0";
                 }
                 else{
                     NSLog(@"short wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"short wide D.L";
                 }
                 
             }
@@ -4997,11 +5046,13 @@
                     NSLog(@"short outside OFF");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"short outside OFF";
                 }
                 else{
                     NSLog(@"short outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"short outside LEG";
                 }
             }
             else if(Xposition >291 && Yposition >398 && Xposition < 358)
@@ -5009,6 +5060,7 @@
                 NSLog(@"short Middle");
                 self.ballEventRecord.objPMlengthcode=@"MSC033";
                 self.ballEventRecord.objPMlinecode =@"MSC026";
+                pitchCommantryStr=@"short Middle";
             }
             else if(Xposition >358 && Yposition >398 && Xposition < 435)
             {
@@ -5017,11 +5069,13 @@
                     NSLog(@"short outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"short outside LEG";
                 }
                 else{
                     NSLog(@"short outside off");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"short outside off";
                 }
                 
             }
@@ -5032,12 +5086,14 @@
                     NSLog(@"short wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"short wide D.L";
                 }
                 else{
                     
                     NSLog(@"short wide 0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"short wide 0.0";
                 }
                 
             }
@@ -5064,11 +5120,14 @@
                     NSLog(@"Bouncer wide0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"Bouncer wide0.0";
                 }
                 else{
                     NSLog(@"Bouncer wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"Bouncer wide D.L";
+
                 }
                 
             }
@@ -5079,11 +5138,15 @@
                     NSLog(@"Bouncer outside OFF");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"Bouncer outside OFF";
+
                 }
                 else{
                     NSLog(@"Bouncer outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"Bouncer outside LEG";
+
                 }
             }
             else if(Xposition >280 && Yposition >500 && Xposition < 363)
@@ -5091,6 +5154,7 @@
                 NSLog(@"Bouncer Middle");
                 self.ballEventRecord.objPMlengthcode=@"MSC032";
                 self.ballEventRecord.objPMlinecode =@"MSC026";
+                pitchCommantryStr=@"Bouncer Middle";
             }
             else if(Xposition >368 && Yposition >500 && Xposition < 455)
             {
@@ -5099,11 +5163,13 @@
                     NSLog(@"Bouncer outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"Bouncer outside LEG";
                 }
                 else{
                     NSLog(@"Bouncer outside off");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"Bouncer outside off";
                 }
                 
             }
@@ -5114,12 +5180,14 @@
                     NSLog(@"Bouncer wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"Bouncer wide D.L";
                 }
                 else{
                     
                     NSLog(@"Bouncer wide 0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"Bouncer wide 0.0";
                 }
                 
             }
@@ -5158,11 +5226,13 @@
                     NSLog(@"Full over wide0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"Full over wide0.0";
                 }
                 else{
                     NSLog(@"Full over wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"Full over wide D.L";
                 }
             }
             else if(Xposition >157 && Yposition >37 && Xposition < 177)
@@ -5172,11 +5242,14 @@
                     NSLog(@"Full over outside OFF");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"Full over outside OFF";
+
                 }
                 else{
                     NSLog(@"Full over outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"Full over outside LEG";
                 }
                 
             }
@@ -5185,6 +5258,7 @@
                 NSLog(@"Full over Middle");
                 self.ballEventRecord.objPMlengthcode=@"MSC037";
                 self.ballEventRecord.objPMlinecode =@"MSC026";
+                pitchCommantryStr=@"Full over Middle";
             }
             else if(Xposition >195 && Yposition >37 && Xposition < 218)
             {
@@ -5193,11 +5267,13 @@
                     NSLog(@"Full over outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"Full over outside LEG";
                 }
                 else{
                     NSLog(@"Full over outside off");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"Full over outside off";
                 }
                 
             }
@@ -5208,12 +5284,14 @@
                     NSLog(@"yorker wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"yorker wide D.L";
                 }
                 else{
                     
                     NSLog(@"yorker wide 0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC037";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"yorker wide 0.0";
                 }
             }
             
@@ -5239,11 +5317,13 @@
                     NSLog(@"yorker wide0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"yorker wide 0.0";
                 }
                 else{
                     NSLog(@"yorker wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"yorker wide D.L";
                 }
             }
             else if(Xposition >156 && Yposition >104 && Xposition < 177)
@@ -5253,11 +5333,13 @@
                     NSLog(@"yorker outside OFF");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"yorker outside OFF";
                 }
                 else{
                     NSLog(@"yorker outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"yorker outside LEG";
                 }
                 
             }
@@ -5266,6 +5348,8 @@
                 NSLog(@"yorker Middle");
                 self.ballEventRecord.objPMlengthcode=@"MSC036";
                 self.ballEventRecord.objPMlinecode =@"MSC026";
+                pitchCommantryStr=@"yorker Middle";
+
             }
             else if(Xposition >197 && Yposition >104 && Xposition < 219)
             {
@@ -5274,11 +5358,13 @@
                     NSLog(@"yorker outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"yorker outside LEG";
                 }
                 else{
                     NSLog(@"yorker outside off");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"yorker outside off";
                 }
                 
             }
@@ -5289,12 +5375,15 @@
                     NSLog(@"yorker wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"yorker wide D.L";
+
                 }
                 else{
                     
                     NSLog(@"yorker wide 0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC036";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"yorker wide 0.0";
                 }
             }
             
@@ -5317,11 +5406,14 @@
                     NSLog(@"Full wide0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"Full wide0.0";
+
                 }
                 else{
                     NSLog(@"Full wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"Full wide D.L";
                 }
             }
             else if(Xposition >93 && Yposition >127 && Xposition < 174)
@@ -5331,11 +5423,14 @@
                     NSLog(@"full outside OFF");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"full outside OFF";
+
                 }
                 else{
                     NSLog(@"full outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"full outside LEG";
                 }
                 
             }
@@ -5344,6 +5439,8 @@
                 NSLog(@"full Middle");
                 self.ballEventRecord.objPMlengthcode=@"MSC035";
                 self.ballEventRecord.objPMlinecode =@"MSC026";
+                pitchCommantryStr=@"full Middle";
+
             }
             else if(Xposition >198 && Yposition >127 && Xposition < 227)
             {
@@ -5352,11 +5449,15 @@
                     NSLog(@"full outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"full outside LEG";
+
                 }
                 else{
                     NSLog(@"full outside off");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"full outside off";
+
                 }
                 
             }
@@ -5367,12 +5468,16 @@
                     NSLog(@"full wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"full wide D.L";
+
                 }
                 else{
                     
                     NSLog(@"full wide 0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC035";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"full wide 0.0";
+
                 }
             }
             //Clear ball
@@ -5394,11 +5499,15 @@
                     NSLog(@"good wide0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"good wide0.0";
+
                 }
                 else{
                     NSLog(@"good wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"good wide D.L";
+
                 }
                 
             }
@@ -5409,11 +5518,15 @@
                     NSLog(@"good outside OFF");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"good outside OFF";
+
                 }
                 else{
                     NSLog(@"good outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"good outside LEG";
+
                 }
             }
             else if(Xposition >162 && Yposition >160 && Xposition < 203)
@@ -5421,6 +5534,8 @@
                 NSLog(@"good Middle");
                 self.ballEventRecord.objPMlengthcode=@"MSC034";
                 self.ballEventRecord.objPMlinecode =@"MSC026";
+                pitchCommantryStr=@"good Middle";
+
             }
             else if(Xposition >203 && Yposition >160 && Xposition < 239)
             {
@@ -5429,11 +5544,15 @@
                     NSLog(@"good outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"good outside LEG";
+
                 }
                 else{
                     NSLog(@"good outside off");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"good outside off";
+
                 }
             }
             else if(Xposition >215 && Yposition >134 && Xposition < 294)
@@ -5443,12 +5562,16 @@
                     NSLog(@"good wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"good wide D.L";
+
                 }
                 else{
                     
                     NSLog(@"good wide 0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC034";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"good wide 0.0";
+
                 }
             }
             //Clear ball
@@ -5470,11 +5593,15 @@
                     NSLog(@"short wide0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"short wide0.0";
+
                 }
                 else{
                     NSLog(@"short wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"short wide D.L";
+
                 }
                 
             }
@@ -5485,11 +5612,15 @@
                     NSLog(@"short outside OFF");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"short outside OFF";
+
                 }
                 else{
                     NSLog(@"short outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"short outside LEG";
+
                 }
                 
             }
@@ -5498,6 +5629,8 @@
                 NSLog(@"short Middle");
                 self.ballEventRecord.objPMlengthcode=@"MSC033";
                 self.ballEventRecord.objPMlinecode =@"MSC026";
+                pitchCommantryStr=@"short Middle";
+
             }
             else if(Xposition >207 && Yposition >220 && Xposition < 250)
             {
@@ -5506,11 +5639,15 @@
                     NSLog(@"short outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"short outside LEG";
+
                 }
                 else{
                     NSLog(@"short outside off");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"short outside off";
+
                 }
                 
             }
@@ -5521,12 +5658,16 @@
                     NSLog(@"short wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"short wide D.L";
+
                 }
                 else{
                     
                     NSLog(@"short wide 0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC033";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"short wide 0.0";
+
                 }
                 
             }
@@ -5549,11 +5690,15 @@
                     NSLog(@"Bouncer wide0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"Bouncer wide0.0";
+
                 }
                 else{
                     NSLog(@"Bouncer wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"Bouncer wide D.L";
+
                 }
                 
             }
@@ -5564,11 +5709,15 @@
                     NSLog(@"Bouncer outside OFF");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"Bouncer outside OFF";
+
                 }
                 else{
                     NSLog(@"Bouncer outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"Bouncer outside LEG";
+
                 }
                 
             }
@@ -5577,6 +5726,8 @@
                 NSLog(@"Bouncer Middle");
                 self.ballEventRecord.objPMlengthcode=@"MSC032";
                 self.ballEventRecord.objPMlinecode =@"MSC026";
+                pitchCommantryStr=@"Bouncer Middle";
+
             }
             else if(Xposition >213 && Yposition >290 && Xposition < 268)
             {
@@ -5585,11 +5736,15 @@
                     NSLog(@"Bouncer outside LEG");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC029";
+                    pitchCommantryStr=@"Bouncer outside LEG";
+
                 }
                 else{
                     NSLog(@"Bouncer outside off");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC028";
+                    pitchCommantryStr=@"Bouncer outside off";
+
                 }
             }
             else if(Xposition >260 && Yposition >290 && Xposition < 325 )
@@ -5599,12 +5754,16 @@
                     NSLog(@"Bouncer wide D.L");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC030";
+                    pitchCommantryStr=@"Bouncer wide D.L";
+
                 }
                 else{
                     
                     NSLog(@"Bouncer wide 0.0");
                     self.ballEventRecord.objPMlengthcode=@"MSC032";
                     self.ballEventRecord.objPMlinecode =@"MSC031";
+                    pitchCommantryStr=@"Bouncer wide 0.0";
+
                 }
             }
             //Clear ball
@@ -5622,7 +5781,23 @@
         _ballEventRecord.objPMX2=@(Xposition);
         _ballEventRecord.objPMY2=@(Yposition);
     }
+  
+}
 
+-(void)comantryTextValue
+{
+    NSString* CommantryStr;
+    if(pitchCommantryStr!=nil && pitchCommantryStr !=@"")
+    {
+        CommantryStr = pitchCommantryStr;
+    }
+    else if (wangonWheelCommantry !=nil && wangonWheelCommantry!=@"")
+    {
+        CommantryStr =[wangonWheelCommantry stringByAppendingString:CommantryStr];
+    }
+    
+    self.txt_Commantry.text=[NSString stringWithFormat:@"%@",CommantryStr];
+    
 }
 
 - (void)didClickPichmapTapAction:(UIGestureRecognizer *)pichmapGesture
@@ -10517,6 +10692,9 @@
     
         
     //Long Stop Third Man
+    
+    wangonWheelCommantry=@"";
+    
     if (IS_IPAD_PRO)
     {
         
@@ -10529,16 +10707,19 @@
                 
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
                 
+               
+                
             }
             
             else{
                 wagonregiontext = @"Long Stop";
                 regioncode = @"MSC217";
-                
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
-            
+            wangonWheelCommantry =@"Long Stop";
+
             
         }
         
@@ -10546,6 +10727,8 @@
             wagonregiontext = @"Long Stop";
             regioncode = @"MSC217";
             
+            wangonWheelCommantry =@"Long Stop";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }
@@ -10570,7 +10753,8 @@
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
-        
+        wangonWheelCommantry =@"Long Stop";
+
     }
     
     
@@ -10579,6 +10763,8 @@
     {
         wagonregiontext = @"Long Stop";
         regioncode = @"MSC217";
+        wangonWheelCommantry =@"Long Stop";
+
         
         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
@@ -10598,6 +10784,8 @@
             regioncode = @"MSC244";
             
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
+            wangonWheelCommantry =@"Straight";
+
         }
         
     }
@@ -10608,6 +10796,8 @@
     {
         wagonregiontext = @"Straight";
         regioncode = @"MSC244";
+
+        wangonWheelCommantry =@"Straight";
 
         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
@@ -10626,6 +10816,8 @@
             {
                 wagonregiontext = @"Long Leg";
                 regioncode = @"MSC155";
+                wangonWheelCommantry =@"Long Leg";
+
                 
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
@@ -10633,6 +10825,9 @@
             else{
                 wagonregiontext = @"Third Man - Fine";
                 regioncode = @"MSC215";
+                
+                wangonWheelCommantry =@"Third Man - Fine";
+
                 
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
@@ -10651,6 +10846,9 @@
             wagonregiontext = @"Third Man - Fine";
             regioncode = @"MSC215";
             
+            wangonWheelCommantry =@"Third Man - Fine";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -10658,6 +10856,9 @@
             
             wagonregiontext = @"Long Leg";
             regioncode = @"MSC155";
+            
+            wangonWheelCommantry =@"Long Leg";
+
             
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
@@ -10676,12 +10877,19 @@
             {
                 wagonregiontext = @"Fine Leg";
                 regioncode = @"MSC156";
+                
+                wangonWheelCommantry =@"Fine Leg";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else
             {
                 wagonregiontext = @"Third Man";
                 regioncode = @"MSC216";
+                wangonWheelCommantry =@"Third Man";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -10696,12 +10904,18 @@
         {
             wagonregiontext = @"Third Man";
             regioncode = @"MSC216";
+            wangonWheelCommantry =@"Third Man";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else
         {
             wagonregiontext = @"Fine Leg";
             regioncode = @"MSC156";
+            wangonWheelCommantry =@"Fine Leg";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
            
         }
@@ -10722,12 +10936,20 @@
             {
                 wagonregiontext = @"Deep Fine Leg";
                 regioncode = @"MSC157";
+                wangonWheelCommantry =@"Deep Fine Leg";
+
+                
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else
             {
                 wagonregiontext = @"Third Man - Deep";
                 regioncode = @"MSC214";
+                wangonWheelCommantry =@"Third Man - Deep";
+
+                
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -10743,12 +10965,19 @@
         {
             wagonregiontext = @"Deep Fine Leg";
             regioncode = @"MSC157";
+            wangonWheelCommantry =@"Deep Fine Leg";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else
         {
             wagonregiontext = @"Third Man - Deep";
             regioncode = @"MSC214";
+            wangonWheelCommantry =@"Third Man - Deep";
+
+            
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -10764,12 +10993,18 @@
             {
                 wagonregiontext = @"Short Fine Leg";
                 regioncode = @"MSC158";
+                wangonWheelCommantry =@"Short Fine Leg";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Short Third Man";
                 regioncode = @"MSC212";
+                wangonWheelCommantry =@"Short Third Man";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -10785,6 +11020,9 @@
         {
             wagonregiontext = @"Short Third Man";
             regioncode = @"MSC212";
+            wangonWheelCommantry =@"Short Third Man";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -10792,6 +11030,9 @@
             
             wagonregiontext = @"Short Fine Leg";
             regioncode = @"MSC158";
+            wangonWheelCommantry =@"Short Fine Leg";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -10809,12 +11050,18 @@
             {
                 wagonregiontext = @"Backward Short Leg";
                 regioncode = @"MSC159";
+                wangonWheelCommantry =@"Backward Short Leg";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Fly Slip";
                 regioncode = @"MSC211";
+                wangonWheelCommantry =@"Fly Slip";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -10833,6 +11080,10 @@
             
             wagonregiontext = @"Fly Slip";
             regioncode = @"MSC211";
+            
+            wangonWheelCommantry =@"Fly Slip";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
             
@@ -10843,6 +11094,9 @@
         else{
             wagonregiontext = @"Backward Short Leg";
             regioncode = @"MSC159";
+            wangonWheelCommantry =@"Backward Short Leg";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -10861,11 +11115,17 @@
             {
                 wagonregiontext = @"Leg Gully";
                 regioncode = @"MSC160";
+                wangonWheelCommantry =@"Leg Gully";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Gully";
                 regioncode = @"MSC201";
+                wangonWheelCommantry =@"Gully";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -10881,11 +11141,16 @@
         {
             wagonregiontext = @"Leg Gully";
             regioncode = @"MSC160";
+            wangonWheelCommantry =@"Leg Gully";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Gully";
             regioncode = @"MSC201";
+            wangonWheelCommantry =@"Gully";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -10903,6 +11168,9 @@
         {
             wagonregiontext = @"Leg Slip";
             regioncode = @"MSC161";
+            wangonWheelCommantry =@"Leg Slip";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
             }
@@ -10913,6 +11181,9 @@
     {
         wagonregiontext = @"Leg Slip";
         regioncode = @"MSC161";
+        wangonWheelCommantry =@"Leg Slip";
+
+        
         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
     
@@ -10931,11 +11202,16 @@
             {
                 wagonregiontext = @"Short Leg";
                 regioncode = @"MSC162";
+                wangonWheelCommantry =@"Short Leg";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Silly Point";
                 regioncode = @"MSC193";
+                wangonWheelCommantry =@"Silly Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -10950,11 +11226,16 @@
         {
             wagonregiontext = @"Short Leg";
             regioncode = @"MSC162";
+            wangonWheelCommantry =@"Short Leg";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Silly Point";
             regioncode = @"MSC193";
+            wangonWheelCommantry =@"Silly Point";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -10973,11 +11254,17 @@
                 
                 wagonregiontext = @"Wicket Keeper";
                 regioncode = @"MSC152";
+                wangonWheelCommantry =@"Wicket Keeper";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Wicket Keeper";
                 regioncode = @"MSC152";
+                wangonWheelCommantry =@"Wicket Keeper";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -10994,11 +11281,15 @@
             
             wagonregiontext = @"Wicket Keeper";
             regioncode = @"MSC152";
+            wangonWheelCommantry =@"Wicket Keeper";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Wicket Keeper";
             regioncode = @"MSC152";
+            wangonWheelCommantry =@"Wicket Keeper";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -11014,6 +11305,8 @@
         {
             wagonregiontext = @"Slip 1";
             regioncode = @"MSC202";
+            wangonWheelCommantry =@"Slip 1";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
        
@@ -11025,6 +11318,8 @@
     {
         wagonregiontext = @"Slip 1";
         regioncode = @"MSC202";
+        wangonWheelCommantry =@"Slip 1";
+
         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
     
@@ -11039,6 +11334,8 @@
         {
             wagonregiontext = @"Slip 2";
             regioncode = @"MSC203";
+            wangonWheelCommantry =@"Slip 2";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
             }
@@ -11049,6 +11346,8 @@
     {
         wagonregiontext = @"Slip 2";
         regioncode = @"MSC203";
+        wangonWheelCommantry =@"Slip 2";
+
         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
     
@@ -11064,6 +11363,9 @@
         {
             wagonregiontext = @"Slip 3";
             regioncode = @"MSC204";
+            wangonWheelCommantry =@"Slip 3";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
        
@@ -11075,6 +11377,8 @@
     {
         wagonregiontext = @"Slip 3";
         regioncode = @"MSC204";
+        wangonWheelCommantry =@"Slip 3";
+
         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
     
@@ -11088,6 +11392,8 @@
         {
             wagonregiontext = @"Slip 4";
             regioncode = @"MSC205";
+            wangonWheelCommantry =@"Slip 4";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -11099,6 +11405,8 @@
     {
         wagonregiontext = @"Slip 4";
         regioncode = @"MSC205";
+        wangonWheelCommantry =@"Slip 4";
+
         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
     
@@ -11114,6 +11422,8 @@
         {
             wagonregiontext = @"Slip 5";
             regioncode = @"MSC206";
+            wangonWheelCommantry =@"Slip 5";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
            }
@@ -11124,6 +11434,8 @@
     {
         wagonregiontext = @"Slip 5";
         regioncode = @"MSC206";
+        wangonWheelCommantry =@"Slip 5";
+
         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
     
@@ -11136,6 +11448,8 @@
         {
             wagonregiontext = @"Slip 6";
             regioncode = @"MSC207";
+            wangonWheelCommantry =@"Slip 6";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -11146,6 +11460,8 @@
     {
         wagonregiontext = @"Slip 6";
         regioncode = @"MSC207";
+        wangonWheelCommantry =@"Slip 6";
+
         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
     
@@ -11158,6 +11474,9 @@
         {
             wagonregiontext = @"Slip 7";
             regioncode = @"MSC208";
+            wangonWheelCommantry =@"Slip 7";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -11169,6 +11488,10 @@
     {
         wagonregiontext = @"Slip 6";
         regioncode = @"MSC208";
+        
+        wangonWheelCommantry =@"Slip 6";
+
+        
         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
 
@@ -11182,6 +11505,9 @@
         {
             wagonregiontext = @"Slip 8";
             regioncode = @"MSC209";
+            wangonWheelCommantry =@"Slip 8";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -11193,6 +11519,8 @@
     {
         wagonregiontext = @"Slip 8";
         regioncode = @"MSC209";
+        wangonWheelCommantry =@"Slip 8";
+
         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
     
@@ -11205,6 +11533,9 @@
         {
             wagonregiontext = @"Slip 9";
             regioncode = @"MSC210";
+            wangonWheelCommantry =@"Slip 9";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -11215,6 +11546,8 @@
     {
         wagonregiontext = @"Slip 9";
         regioncode = @"MSC210";
+        wangonWheelCommantry =@"Slip 9";
+
         NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
     }
     
@@ -11230,11 +11563,16 @@
             {
                 wagonregiontext = @"Square";
                 regioncode = @"MSC243";
+                wangonWheelCommantry =@"Square";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Third Man - Square";
                 regioncode = @"MSC213";
+                wangonWheelCommantry =@"Third Man - Square";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
                 
             }
@@ -11249,11 +11587,17 @@
         {
             wagonregiontext = @"Square";
             regioncode = @"MSC243";
+            
+            wangonWheelCommantry =@"Square";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Third Man - Square";
             regioncode = @"MSC213";
+            wangonWheelCommantry =@"Third Man - Square";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }
@@ -11275,11 +11619,16 @@
             {
                 wagonregiontext = @"Deep Backward Square Leg";
                 regioncode = @"MSC166";
+                wangonWheelCommantry =@"Deep Backward Square Leg";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Deep Backward Point";
                 regioncode = @"MSC199";
+                wangonWheelCommantry =@"Deep Backward Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -11295,12 +11644,18 @@
         {
             wagonregiontext = @"Deep Backward Point";
             regioncode = @"MSC199";
+            wangonWheelCommantry =@"Deep Backward Point";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             
             wagonregiontext = @"Deep Backward Square Leg";
             regioncode = @"MSC166";
+            wangonWheelCommantry =@"Deep Backward Square Leg";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
             
@@ -11324,6 +11679,8 @@
             {
                 wagonregiontext = @"Deep Square Leg";
                 regioncode = @"MSC164";
+                wangonWheelCommantry =@"Deep Square Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -11331,6 +11688,9 @@
                 
                 wagonregiontext = @"Deep Point";
                 regioncode = @"MSC198";
+                wangonWheelCommantry =@"Deep Point";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -11344,6 +11704,10 @@
         {
             wagonregiontext = @"Deep Square Leg";
             regioncode = @"MSC164";
+            wangonWheelCommantry =@"Deep Square Leg";
+
+            
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -11351,6 +11715,9 @@
             
             wagonregiontext = @"Deep Point";
             regioncode = @"MSC198";
+            wangonWheelCommantry =@"Deep Point";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -11368,12 +11735,18 @@
             {
                 wagonregiontext = @"Deep Forward Square Leg";
                 regioncode = @"MSC168";
+                wangonWheelCommantry =@"Deep Forward Square Leg";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Deep Farward Point";
                 regioncode = @"MSC200";
+                wangonWheelCommantry =@"Deep Farward Point";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -11387,12 +11760,18 @@
         {
             wagonregiontext = @"Deep Forward Square Leg";
             regioncode = @"MSC168";
+            wangonWheelCommantry =@"Deep Forward Square Leg";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Deep Farward Point";
             regioncode = @"MSC200";
+            wangonWheelCommantry =@"Deep Farward Point";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -11408,11 +11787,16 @@
             {
                 wagonregiontext = @"Backward Square Leg";
                 regioncode = @"MSC165";
+                
+                wangonWheelCommantry =@"Backward Square Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{ wagonregiontext = @"Backward Point";
                 regioncode = @"MSC196";
+                wangonWheelCommantry =@"Backward Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -11427,6 +11811,9 @@
         {
             wagonregiontext = @"Backward Point";
             regioncode = @"MSC196";
+            wangonWheelCommantry =@"Backward Point";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -11434,17 +11821,15 @@
             
             wagonregiontext = @"Backward Square Leg";
             regioncode = @"MSC165";
+            wangonWheelCommantry =@"Backward Square Leg";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
-            
-            
             
         }
     }
 
-    
-    
-    
-    
+
     //Square Leg
     
     
@@ -11457,12 +11842,16 @@
             {
                 wagonregiontext = @"Square Leg";
                 regioncode = @"MSC163";
+                wangonWheelCommantry =@"Square Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Point";
                 regioncode = @"MSC194";
+                wangonWheelCommantry =@"Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -11476,6 +11865,8 @@
         {
             wagonregiontext = @"Point";
             regioncode = @"MSC194";
+            wangonWheelCommantry =@"Point";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
 
         }
@@ -11484,6 +11875,8 @@
             
             wagonregiontext = @"Square Leg";
             regioncode = @"MSC163";
+            wangonWheelCommantry =@"Square Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
             
@@ -11504,12 +11897,16 @@
             {
                 wagonregiontext = @"Forward Square Leg";
                 regioncode = @"MSC167";
+                wangonWheelCommantry =@"Forward Square Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Farward Point";
                 regioncode = @"MSC197";
+                wangonWheelCommantry =@"Farward Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -11522,12 +11919,16 @@
         {
             wagonregiontext = @"Forward Square Leg";
             regioncode = @"MSC167";
+            wangonWheelCommantry =@"Forward Square Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Farward Point";
             regioncode = @"MSC197";
+            wangonWheelCommantry =@"Farward Point";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -11545,11 +11946,15 @@
             {
                 wagonregiontext = @"Short Mid Wicket";
                 regioncode = @"MSC170";
+                wangonWheelCommantry =@"Short Mid Wicket";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Short Covers";
                 regioncode = @"MSC188";
+                wangonWheelCommantry =@"Short Covers";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
                 
             }
@@ -11564,11 +11969,15 @@
         {
             wagonregiontext = @"Short Mid Wicket";
             regioncode = @"MSC170";
+            wangonWheelCommantry =@"Short Mid Wicket";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Short Covers";
             regioncode = @"MSC188";
+            wangonWheelCommantry =@"Short Covers";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }
@@ -11585,12 +11994,16 @@
             {
                 wagonregiontext = @"Mid Wicket";
                 regioncode = @"MSC171";
+                wangonWheelCommantry =@"Mid Wicket";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Covers";
                 regioncode = @"MSC189";
+                wangonWheelCommantry =@"Covers";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -11606,6 +12019,8 @@
             
             wagonregiontext = @"Covers";
             regioncode = @"MSC189";
+            wangonWheelCommantry =@"Covers";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }
@@ -11614,6 +12029,8 @@
             
             wagonregiontext = @"Mid Wicket";
             regioncode = @"MSC171";
+            wangonWheelCommantry =@"Mid Wicket";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
 
             
@@ -11632,12 +12049,16 @@
             {
                 wagonregiontext = @"Deep Mid Wicket (Sweeper)";
                 regioncode = @"MSC172";
+                wangonWheelCommantry =@"Deep Mid Wicket (Sweeper)";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else
             {
                 wagonregiontext = @"Deep Cover";
                 regioncode = @"MSC191";
+                wangonWheelCommantry =@"Deep Cover";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -11650,12 +12071,18 @@
         {
             wagonregiontext = @"Deep Cover";
             regioncode = @"MSC172";
+            wangonWheelCommantry =@"Deep Cover";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else
         {
             wagonregiontext = @"Deep Mid Wicket (Sweeper)";
             regioncode = @"MSC191";
+            wangonWheelCommantry =@"Deep Mid Wicket (Sweeper)";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -11674,12 +12101,16 @@
                 
                 wagonregiontext = @"Deep Forward (Sweeper)";
                 regioncode = @"MSC173";
+                wangonWheelCommantry =@"Deep Forward (Sweeper)";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Deep Extra Cover (Sweeper)";
                 regioncode = @"MSC192";
+                wangonWheelCommantry =@"Deep Extra Cover (Sweeper)";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -11694,12 +12125,16 @@
             
             wagonregiontext = @"Deep Forward (Sweeper)";
             regioncode = @"MSC173";
+            wangonWheelCommantry =@"Deep Forward (Sweeper)";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Deep Extra Cover (Sweeper)";
             regioncode = @"MSC192";
+            wangonWheelCommantry =@"Deep Extra Cover (Sweeper)";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -11716,6 +12151,8 @@
             {
                 wagonregiontext = @"Silly Mid On";
                 regioncode = @"MSC169";
+                wangonWheelCommantry =@"Silly Mid On";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -11723,6 +12160,8 @@
                 
                 wagonregiontext = @"Silly Mid Off";
                 regioncode = @"MSC187";
+                wangonWheelCommantry =@"Silly Mid Off";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -11735,6 +12174,8 @@
         {
             wagonregiontext = @"Silly Mid On";
             regioncode = @"MSC169";
+            wangonWheelCommantry =@"Silly Mid On";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -11742,6 +12183,8 @@
             
             wagonregiontext = @"Silly Mid Off";
             regioncode = @"MSC187";
+            wangonWheelCommantry =@"Silly Mid Off";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -11760,11 +12203,15 @@
             {
                 wagonregiontext = @"Short Mid On";
                 regioncode = @"MSC174";
+                wangonWheelCommantry =@"Short Mid On";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Short Mid Off";
                 regioncode = @"MSC182";
+                wangonWheelCommantry =@"Short Mid Off";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -11777,11 +12224,15 @@
         {
             wagonregiontext = @"Short Mid On";
             regioncode = @"MSC174";
+            wangonWheelCommantry =@"Short Mid On";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Short Mid Off";
             regioncode = @"MSC182";
+            wangonWheelCommantry =@"Short Mid Off";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -11797,12 +12248,16 @@
             {
                 wagonregiontext = @"Mid On";
                 regioncode = @"MSC175";
+                wangonWheelCommantry =@"Mid On";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else
             {
                 wagonregiontext = @"Mid Off";
                 regioncode = @"MSC181";
+                wangonWheelCommantry =@"Mid Off";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
                 
             }
@@ -11816,12 +12271,16 @@
         {
             wagonregiontext = @"Mid On";
             regioncode = @"MSC175";
+            wangonWheelCommantry =@"Mid On";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else
         {
             wagonregiontext = @"Mid Off";
             regioncode = @"MSC181";
+            wangonWheelCommantry =@"Mid Off";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }
@@ -11843,12 +12302,16 @@
             {
                 wagonregiontext = @"Deep Mid On";
                 regioncode = @"MSC176";
+                wangonWheelCommantry =@"Deep Mid On";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Deep Mid Off";
                 regioncode = @"MSC186";
+                wangonWheelCommantry =@"Deep Mid Off";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -11862,12 +12325,18 @@
         {
             wagonregiontext = @"Deep Mid On";
             regioncode = @"MSC176";
+            wangonWheelCommantry =@"Deep Mid On";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Deep Mid Off";
             regioncode = @"MSC186";
+            wangonWheelCommantry =@"Deep Mid Off";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -11886,12 +12355,17 @@
             {
                 wagonregiontext = @"Wide Long On";
                 regioncode = @"MSC179";
+                wangonWheelCommantry =@"Wide Long On";
+
+                
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Wide Long Off";
                 regioncode = @"MSC186";
+                wangonWheelCommantry =@"Wide Long Off";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -11906,12 +12380,16 @@
         {
             wagonregiontext = @"Wide Long On";
             regioncode = @"MSC179";
+            wangonWheelCommantry =@"Wide Long On";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Wide Long Off";
             regioncode = @"MSC186";
+            wangonWheelCommantry =@"Wide Long Off";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -11929,11 +12407,15 @@
             {
                 wagonregiontext = @"Long On";
                 regioncode = @"MSC178";
+                wangonWheelCommantry =@"Long On";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Long Off";
                 regioncode = @"MSC185";
+                wangonWheelCommantry =@"Long Off";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
                 
             }
@@ -11949,11 +12431,15 @@
         {
             wagonregiontext = @"Long On";
             regioncode = @"MSC178";
+            wangonWheelCommantry =@"Long On";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Long Off";
             regioncode = @"MSC185";
+            wangonWheelCommantry =@"Long Off";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }
@@ -11973,12 +12459,16 @@
             {
                 wagonregiontext = @"Straight";
                 regioncode = @"MSC242";
+                wangonWheelCommantry =@"Straight";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Straight";
                 regioncode = @"MSC241";
+                wangonWheelCommantry =@"Straight";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -11992,12 +12482,16 @@
         {
             wagonregiontext = @"Straight";
             regioncode = @"MSC242";
+            wangonWheelCommantry =@"Straight";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
 
         else{
             wagonregiontext = @"Straight";
             regioncode = @"MSC241";
+            wangonWheelCommantry =@"Straight";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -12015,12 +12509,16 @@
             {
                 wagonregiontext = @"Straight";
                 regioncode = @"MSC180";
+                wangonWheelCommantry =@"Straight";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else
             {
                 wagonregiontext = @"Straight";
                 regioncode = @"MSC180";
+                wangonWheelCommantry =@"Straight";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -12036,12 +12534,16 @@
             
             wagonregiontext = @"Straight";
             regioncode = @"MSC180";
+            wangonWheelCommantry =@"Straight";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else
         {
             wagonregiontext = @"Straight";
             regioncode = @"MSC180";
+            wangonWheelCommantry =@"Straight";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -12059,12 +12561,16 @@
             {
                 wagonregiontext = @"Short Mid Off";
                 regioncode = @"MSC182";
+                wangonWheelCommantry =@"Short Mid Off";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else
             {
                 wagonregiontext = @"Short Mid On";
                 regioncode = @"MSC174";
+                wangonWheelCommantry =@"Short Mid On";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
                 
             }
@@ -12079,12 +12585,16 @@
         {
             wagonregiontext = @"Short Mid Off";
             regioncode = @"MSC182";
+            wangonWheelCommantry =@"Short Mid Off";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else
         {
             wagonregiontext = @"Short Mid On";
             regioncode = @"MSC174";
+            wangonWheelCommantry =@"Short Mid On";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }
@@ -12104,11 +12614,15 @@
             {
                 wagonregiontext = @"Mid Off";
                 regioncode = @"MSC181";
+                wangonWheelCommantry =@"Mid Off";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Mid On";
                 regioncode = @"MSC175";
+                wangonWheelCommantry =@"Mid On";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
                 
             }
@@ -12123,11 +12637,15 @@
         {
             wagonregiontext = @"Mid Off";
             regioncode = @"MSC181";
+            wangonWheelCommantry =@"Mid Off";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Mid On";
             regioncode = @"MSC175";
+            wangonWheelCommantry =@"Mid On";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }
@@ -12148,12 +12666,16 @@
             {
                 wagonregiontext = @"Deep Mid Off";
                 regioncode = @"MSC184";
+                wangonWheelCommantry =@"Deep Mid Off";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Deep Mid On";
                 regioncode = @"MSC176";
+                wangonWheelCommantry =@"Deep Mid On";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -12167,12 +12689,16 @@
         {
             wagonregiontext = @"Deep Mid Off";
             regioncode = @"MSC184";
+            wangonWheelCommantry =@"Deep Mid Off";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Deep Mid On";
             regioncode = @"MSC176";
+            wangonWheelCommantry =@"Deep Mid On";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -12193,11 +12719,15 @@
             {
                 wagonregiontext = @"Wide Long Off";
                 regioncode = @"MSC186";
+                wangonWheelCommantry =@"Wide Long Off";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Wide Long On";
                 regioncode = @"MSC179";
+                wangonWheelCommantry =@"Wide Long On";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
                 
             }
@@ -12211,11 +12741,15 @@
         {
             wagonregiontext = @"Wide Long Off";
             regioncode = @"MSC186";
+            wangonWheelCommantry =@"Wide Long Off";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Wide Long On";
             regioncode = @"MSC179";
+            wangonWheelCommantry =@"Wide Long On";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }    }
@@ -12233,12 +12767,16 @@
             {
                 wagonregiontext = @"Long Off";
                 regioncode = @"MSC185";
+                wangonWheelCommantry =@"Long Off";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Long On";
                 regioncode = @"MSC178";
+                wangonWheelCommantry =@"Long On";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -12254,12 +12792,16 @@
         {
             wagonregiontext = @"Long Off";
             regioncode = @"MSC185";
+            wangonWheelCommantry =@"Long Off";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Long On";
             regioncode = @"MSC178";
+            wangonWheelCommantry =@"Long On";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -12279,12 +12821,16 @@
             {
                 wagonregiontext = @"Straight";
                 regioncode = @"MSC241";
+                wangonWheelCommantry =@"Straight";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Straight";
                 regioncode = @"MSC242";
+                wangonWheelCommantry =@"Straight";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -12297,12 +12843,16 @@
         {
             wagonregiontext = @"Straight";
             regioncode = @"MSC241";
+            wangonWheelCommantry =@"Straight";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Straight";
             regioncode = @"MSC242";
+            wangonWheelCommantry =@"Straight";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -12321,11 +12871,15 @@
             {
                 wagonregiontext = @"Silly Mid Off";
                 regioncode = @"MSC187";
+                wangonWheelCommantry =@"Silly Mid Off";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Silly Mid On";
                 regioncode = @"MSC169";
+                wangonWheelCommantry =@"Silly Mid On";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -12339,11 +12893,15 @@
         {
             wagonregiontext = @"Silly Mid Off";
             regioncode = @"MSC187";
+            wangonWheelCommantry =@"Silly Mid Off";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Silly Mid On";
             regioncode = @"MSC169";
+            wangonWheelCommantry =@"Silly Mid On";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -12361,11 +12919,15 @@
             {
                 wagonregiontext = @"Short Covers";
                 regioncode = @"MSC188";
+                wangonWheelCommantry =@"Short Covers";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Short Mid Wicket";
                 regioncode = @"MSC170";
+                wangonWheelCommantry =@"Short Mid Wicket";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -12379,11 +12941,15 @@
         {
             wagonregiontext = @"Short Covers";
             regioncode = @"MSC188";
+            wangonWheelCommantry =@"Short Covers";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Short Mid Wicket";
             regioncode = @"MSC170";
+            wangonWheelCommantry =@"Short Mid Wicket";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -12401,12 +12967,16 @@
             {
                 wagonregiontext = @"Covers";
                 regioncode = @"MSC189";
+                wangonWheelCommantry =@"Covers";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Mid Wicket";
                 regioncode = @"MSC171";
+                wangonWheelCommantry =@"Mid Wicket";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -12421,12 +12991,16 @@
         {
             wagonregiontext = @"Covers";
             regioncode = @"MSC189";
+            wangonWheelCommantry =@"Covers";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Mid Wicket";
             regioncode = @"MSC171";
+            wangonWheelCommantry =@"Mid Wicket";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -12445,11 +13019,15 @@
             {
                 wagonregiontext = @"Extra Cover";
                 regioncode = @"MSC190";
+                wangonWheelCommantry =@"Extra Cover";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Extra Cover";
                 regioncode = @"MSC190";
+                wangonWheelCommantry =@"Extra Cover";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -12463,11 +13041,15 @@
         {
             wagonregiontext = @"Extra Cover";
             regioncode = @"MSC190";
+            wangonWheelCommantry =@"Extra Cover";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Extra Cover";
             regioncode = @"MSC190";
+            wangonWheelCommantry =@"Extra Cover";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -12486,11 +13068,15 @@
             {
                 wagonregiontext = @"Deep Cover";
                 regioncode = @"MSC191";
+                wangonWheelCommantry =@"Deep Cover";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Deep Mid Wicket (Sweeper)";
                 regioncode = @"MSC172";
+                wangonWheelCommantry =@"Deep Mid Wicket (Sweeper)";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -12504,11 +13090,15 @@
         {
             wagonregiontext = @"Deep Cover";
             regioncode = @"MSC191";
+            wangonWheelCommantry =@"Deep Cover";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Deep Mid Wicket (Sweeper)";
             regioncode = @"MSC172";
+            wangonWheelCommantry =@"Deep Mid Wicket (Sweeper)";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -12526,12 +13116,16 @@
             {
                 wagonregiontext = @"Deep Extra Cover (Sweeper)";
                 regioncode = @"MSC192";
+                wangonWheelCommantry =@"Deep Extra Cover (Sweeper)";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else
             {
                 wagonregiontext = @"Deep Forward (Sweeper)";
                 regioncode = @"MSC173";
+                wangonWheelCommantry =@"Deep Forward (Sweeper)";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -12544,12 +13138,16 @@
         {
             wagonregiontext = @"Deep Extra Cover (Sweeper)";
             regioncode = @"MSC192";
+            wangonWheelCommantry =@"Deep Extra Cover (Sweeper)";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else
         {
             wagonregiontext = @"Deep Forward (Sweeper)";
             regioncode = @"MSC173";
+            wangonWheelCommantry =@"Deep Forward (Sweeper)";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -12566,12 +13164,16 @@
             {
                 wagonregiontext = @"Cover Point";
                 regioncode = @"MSC195";
+                wangonWheelCommantry =@"Cover Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Cover Point";
                 regioncode = @"MSC195";
+                wangonWheelCommantry =@"Cover Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -12585,12 +13187,16 @@
         {
             wagonregiontext = @"Cover Point";
             regioncode = @"MSC195";
+            wangonWheelCommantry =@"Cover Point";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Cover Point";
             regioncode = @"MSC195";
+            wangonWheelCommantry =@"Cover Point";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -12608,12 +13214,16 @@
             {
                 wagonregiontext = @"Farward Point";
                 regioncode = @"MSC197";
+                wangonWheelCommantry =@"Farward Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else
             {
                 wagonregiontext = @"Forward Square Leg";
                 regioncode = @"MSC167";
+                wangonWheelCommantry =@"Forward Square Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
                 
             }
@@ -12628,12 +13238,16 @@
         {
             wagonregiontext = @"Farward Point";
             regioncode = @"MSC197";
+            wangonWheelCommantry =@"Farward Point";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else
         {
             wagonregiontext = @"Forward Square Leg";
             regioncode = @"MSC167";
+            wangonWheelCommantry =@"Forward Square Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }
@@ -12651,11 +13265,17 @@
             {
                 wagonregiontext = @"Point";
                 regioncode = @"MSC194";
+                wangonWheelCommantry =@"Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Square Leg";
                 regioncode = @"MSC163";
+                
+                wangonWheelCommantry =@"Square Leg";
+
+               
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -12670,11 +13290,16 @@
         {
             wagonregiontext = @"Point";
             regioncode = @"MSC194";
+            wangonWheelCommantry =@"Point";
+
+            
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Square Leg";
             regioncode = @"MSC163";
+            wangonWheelCommantry =@"Square Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -12695,11 +13320,15 @@
             {
                 wagonregiontext = @"Backward Point";
                 regioncode = @"MSC196";
+                wangonWheelCommantry =@"Backward Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Backward Square Leg";
                 regioncode = @"MSC165";
+                wangonWheelCommantry =@"Backward Square Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -12712,11 +13341,15 @@
         {
             wagonregiontext = @"Backward Point";
             regioncode = @"MSC196";
+            wangonWheelCommantry =@"Backward Point";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Backward Square Leg";
             regioncode = @"MSC165";
+            wangonWheelCommantry =@"Backward Square Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -12735,12 +13368,16 @@
                 
                 wagonregiontext = @"Silly Point";
                 regioncode = @"MSC193";
+                wangonWheelCommantry =@"Silly Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 
                 wagonregiontext = @"Short Leg";
                 regioncode = @"MSC162";
+                wangonWheelCommantry =@"Short Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -12755,12 +13392,16 @@
             
             wagonregiontext = @"Silly Point";
             regioncode = @"MSC193";
+            wangonWheelCommantry =@"Silly Point";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             
             wagonregiontext = @"Short Leg";
             regioncode = @"MSC162";
+            wangonWheelCommantry =@"Short Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -12779,11 +13420,15 @@
             {
                 wagonregiontext = @"Deep Farward Point";
                 regioncode = @"MSC200";
+                wangonWheelCommantry =@"Deep Farward Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Deep Forward Square Leg";
                 regioncode = @"MSC168";
+                wangonWheelCommantry =@"Deep Forward Square Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -12797,11 +13442,15 @@
         {
             wagonregiontext = @"Deep Farward Point";
             regioncode = @"MSC200";
+            wangonWheelCommantry =@"Deep Farward Point";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Deep Forward Square Leg";
             regioncode = @"MSC168";
+            wangonWheelCommantry =@"Deep Forward Square Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -12818,12 +13467,16 @@
             {
                 wagonregiontext = @"Deep Point";
                 regioncode = @"MSC198";
+                wangonWheelCommantry =@"Deep Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Deep Square Leg";
                 regioncode = @"MSC164";
+                wangonWheelCommantry =@"Deep Square Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
                 
             }
@@ -12837,12 +13490,16 @@
         {
             wagonregiontext = @"Deep Point";
             regioncode = @"MSC198";
+            wangonWheelCommantry =@"Deep Point";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Deep Square Leg";
             regioncode = @"MSC164";
+            wangonWheelCommantry =@"Deep Square Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }
@@ -12860,12 +13517,16 @@
             {
                 wagonregiontext = @"Deep Backward Point";
                 regioncode = @"MSC199";
+                wangonWheelCommantry =@"Deep Backward Point";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Deep Backward Square Leg";
                 regioncode = @"MSC166";
+                wangonWheelCommantry =@"Deep Backward Square Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -12879,12 +13540,16 @@
         {
             wagonregiontext = @"Deep Backward Point";
             regioncode = @"MSC199";
+            wangonWheelCommantry =@"Deep Backward Point";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Deep Backward Square Leg";
             regioncode = @"MSC166";
+            wangonWheelCommantry =@"Deep Backward Square Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -12903,6 +13568,8 @@
             {
                 wagonregiontext = @"Fly Slip";
                 regioncode = @"MSC211";
+                wangonWheelCommantry =@"Fly Slip";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -12910,6 +13577,8 @@
                 
                 wagonregiontext = @"Backward Short Leg";
                 regioncode = @"MSC159";
+                wangonWheelCommantry =@"Backward Short Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -12923,6 +13592,8 @@
         {
             wagonregiontext = @"Fly Slip";
             regioncode = @"MSC211";
+            wangonWheelCommantry =@"Fly Slip";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -12930,6 +13601,8 @@
             
             wagonregiontext = @"Backward Short Leg";
             regioncode = @"MSC159";
+            wangonWheelCommantry =@"Backward Short Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -12948,6 +13621,8 @@
             {
                 wagonregiontext = @"Gully";
                 regioncode = @"MSC201";
+                wangonWheelCommantry =@"Gully";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -12955,6 +13630,8 @@
                 
                 wagonregiontext = @"Leg Gully";
                 regioncode = @"MSC160";
+                wangonWheelCommantry =@"Leg Gully";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -12967,6 +13644,8 @@
         {
             wagonregiontext = @"Gully";
             regioncode = @"MSC201";
+            wangonWheelCommantry =@"Gully";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
@@ -12974,6 +13653,8 @@
             
             wagonregiontext = @"Leg Gully";
             regioncode = @"MSC160";
+            wangonWheelCommantry =@"Leg Gully";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -12990,12 +13671,16 @@
             {
                 wagonregiontext = @"Short Third Man";
                 regioncode = @"MSC212";
+                wangonWheelCommantry =@"Short Third Man";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Short Fine Leg";
                 regioncode = @"MSC158";
+                wangonWheelCommantry =@"Short Fine Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -13008,12 +13693,16 @@
         {
             wagonregiontext = @"Short Third Man";
             regioncode = @"MSC212";
+            wangonWheelCommantry =@"Short Third Man";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Short Fine Leg";
             regioncode = @"MSC158";
+            wangonWheelCommantry =@"Short Fine Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -13030,11 +13719,15 @@
             {
                 wagonregiontext = @"Third Man";
                 regioncode = @"MSC216";
+                wangonWheelCommantry =@"Third Man";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Fine Leg";
                 regioncode = @"MSC156";
+                wangonWheelCommantry =@"Fine Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -13048,11 +13741,15 @@
         {
             wagonregiontext = @"Third Man";
             regioncode = @"MSC216";
+            wangonWheelCommantry =@"Third Man";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Fine Leg";
             regioncode = @"MSC156";
+            wangonWheelCommantry =@"Fine Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -13069,11 +13766,15 @@
             {
                 wagonregiontext = @"Third Man - Square";
                 regioncode = @"MSC213";
+                wangonWheelCommantry =@"Third Man - Square";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Square";
                 regioncode = @"MSC243";
+                wangonWheelCommantry =@"Square";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
                 
             }
@@ -13087,11 +13788,15 @@
         {
             wagonregiontext = @"Third Man - Square";
             regioncode = @"MSC213";
+            wangonWheelCommantry =@"Third Man - Square";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Square";
             regioncode = @"MSC243";
+            wangonWheelCommantry =@"Square";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
         }
@@ -13110,11 +13815,15 @@
             {
                 wagonregiontext = @"Third Man - Deep";
                 regioncode = @"MSC214";
+                wangonWheelCommantry =@"Third Man - Deep";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             else{
                 wagonregiontext = @"Deep Fine Leg";
                 regioncode = @"MSC157";
+                wangonWheelCommantry =@"Deep Fine Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
         }
@@ -13128,11 +13837,15 @@
         {
             wagonregiontext = @"Third Man - Deep";
             regioncode = @"MSC214";
+            wangonWheelCommantry =@"Third Man - Deep";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else{
             wagonregiontext = @"Deep Fine Leg";
             regioncode = @"MSC157";
+            wangonWheelCommantry =@"Deep Fine Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -13151,12 +13864,16 @@
             {
                 wagonregiontext = @"Third Man - Fine";
                 regioncode = @"MSC215";
+                wangonWheelCommantry =@"Third Man - Fine";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
             else{
                 wagonregiontext = @"Long Leg";
                 regioncode = @"MSC155";
+                wangonWheelCommantry =@"Long Leg";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
                 
                 
@@ -13172,12 +13889,16 @@
         {
             wagonregiontext = @"Third Man - Fine";
             regioncode = @"MSC215";
+            wangonWheelCommantry =@"Third Man - Fine";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         
         else{
             wagonregiontext = @"Long Leg";
             regioncode = @"MSC155";
+            wangonWheelCommantry =@"Long Leg";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             
             
@@ -13197,6 +13918,8 @@
             {
                 wagonregiontext = @"Long Stop";
                 regioncode = @"MSC154";
+                wangonWheelCommantry =@"Long Stop";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -13204,6 +13927,8 @@
             {
                 wagonregiontext = @"Long Stop";
                 regioncode = @"MSC154";
+                wangonWheelCommantry =@"Long Stop";
+
                 NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
             }
             
@@ -13217,12 +13942,16 @@
         {
             wagonregiontext = @"Long Stop";
             regioncode = @"MSC154";
+            wangonWheelCommantry =@"Long Stop";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
         else
         {
             wagonregiontext = @"Long Stop";
             regioncode = @"MSC154";
+            wangonWheelCommantry =@"Long Stop";
+
             NSLog(@"pointx=%@,pointY=%@",wagonregiontext,regioncode);
         }
     }
@@ -13247,6 +13976,7 @@
     if([regioncode isEqualToString:@""]){
         [self setWagonWheelRegionCodeByAngle:Xposition :Yposition];
     }
+    [self comantryTextValue];
 }
 
 -(void)didClickWagonWheelmapTapAction:(UIGestureRecognizer *)wagon_Wheelgesture {
@@ -14699,12 +15429,6 @@
         GetBallDetailsForBallEventsBE *getBallDetailsForBallEventsBE;
         
         
-        
-        
-        
-        
-        
-        
     }
     
 }
@@ -15273,41 +15997,51 @@
         {
             wagonregiontext = @"Long On";
             regioncode = @"MSC178";
+            
         }
         else if (wagonwheelangle >= 36 && wagonwheelangle <= 75)
         {
             wagonregiontext = @"Mid Wicket";
             regioncode = @"MSC171";
+            
         }
         else if (wagonwheelangle >= 76 && wagonwheelangle <= 119)
         {
             wagonregiontext = @"Square Leg";
             regioncode = @"MSC163";
+           
         }
         else if (wagonwheelangle >= 120 && wagonwheelangle <= 179)
         {
             wagonregiontext = @"Fine Leg";
             regioncode = @"MSC156";
+            
         }
         else if (wagonwheelangle >= 180 && wagonwheelangle <= 240)
         {
             wagonregiontext = @"Third Man";
             regioncode = @"MSC216";
+            
         }
         else if (wagonwheelangle >= 241 && wagonwheelangle <= 282)
         {
             wagonregiontext = @"Point";
             regioncode = @"MSC194";
+            
         }
         else if (wagonwheelangle >= 283 && wagonwheelangle <= 324)
         {
             wagonregiontext = @"Cover";
             regioncode = @"MSC189";
+            
+
         }
         else if (wagonwheelangle >= 325 && wagonwheelangle <= 360)
         {
             wagonregiontext = @"Long Off";
             regioncode = @"MSC185";
+           
+
         }
     }
     else//MSC012-Left Hand Batting.
@@ -15316,46 +16050,63 @@
         {
             wagonregiontext = @"Long Off";
             regioncode = @"MSC185";
+            
+
         }
         else if (wagonwheelangle >= 36 && wagonwheelangle <= 75)
         {
             wagonregiontext = @"Covers";
             regioncode = @"MSC189";
+            
+
         }
         else if (wagonwheelangle >= 76 && wagonwheelangle <= 119)
         {
             wagonregiontext = @"Point";
             regioncode = @"MSC194";
+            
+
         }
         else if (wagonwheelangle >= 120 && wagonwheelangle <= 179)
         {
             wagonregiontext = @"Third Man";
             regioncode = @"MSC216";
+            
+
         }
         else if (wagonwheelangle >= 180 && wagonwheelangle <= 240)
         {
             wagonregiontext = @"Fine Leg";
             regioncode = @"MSC156";
+            
+
         }
         else if (wagonwheelangle >= 241 && wagonwheelangle <= 282)
         {
             wagonregiontext = @"Square Leg";
             regioncode = @"MSC163";
+            
+
         }
         else if (wagonwheelangle >= 283 && wagonwheelangle <= 324)
         {
             wagonregiontext = @"Mid Wicket";
             regioncode = @"MSC171";
+            
+
         }
         else if (wagonwheelangle >= 325 && wagonwheelangle <= 360)
         {
             wagonregiontext = @"Long On";
             regioncode = @"MSC178";
+            
+
         }
     }
     
     _ballEventRecord.objWWREGION=regioncode;
 
+     //[self comantryTextValue];
     
 }
 

@@ -291,8 +291,8 @@ NSArray *MuliteDayMatchtype;
      mSetUp = [[NSMutableArray alloc]init];
     [mSetUp addObject:objFixtureRecord];
     
-    if([objFixtureRecord.MatchStatus isEqualToString:@"MSC124"]||[objFixtureRecord.MatchStatus isEqualToString:@"MSC240"])
-    {
+//    if([objFixtureRecord.MatchStatus isEqualToString:@"MSC124"]||[objFixtureRecord.MatchStatus isEqualToString:@"MSC240"])
+//    {
         if([objFixtureRecord.InningsStatus isEqualToString:@"1"])
         {
             InningsDetailsVC *_InningsDetailsVC = [[InningsDetailsVC alloc]initWithNibName:@"InningsDetailsVC" bundle:nil];
@@ -313,13 +313,13 @@ NSArray *MuliteDayMatchtype;
             scoreEngine.matchTypeCode=matchTypeCode;
             [self.navigationController pushViewController:scoreEngine animated:YES];
         }
-    }
-else if([objFixtureRecord.MatchStatus isEqualToString:@"MSC125"]){
-        UIAlertView * objAlert =[[UIAlertView alloc]initWithTitle:@"Archives" message:@"The selected game is already updated with result do you want to proceed?" delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
-        objAlert.tag =100;
-        [objAlert show];
-        
-    }
+  //  }
+//else if([objFixtureRecord.MatchStatus isEqualToString:@"MSC125"]){
+//        UIAlertView * objAlert =[[UIAlertView alloc]initWithTitle:@"Archives" message:@"The selected game is already updated with result do you want to proceed?" delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
+//        objAlert.tag =100;
+//        [objAlert show];
+//        
+//    }
 }
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
