@@ -54,6 +54,50 @@
 
 @property (nonatomic,strong) NSString * wicketPlayer;
 
+@property (nonatomic,strong) NSString * sessionNo;
+
+@property (nonatomic,strong) NSString * wicketKeeperCode;
+
+@property (nonatomic,strong) NSString * Umpire1code;
+
+@property (nonatomic,strong) NSString * Umpire2Code;
+
+@property (nonatomic,strong) NSString * atworotw;
+@property (nonatomic,strong) NSString * bowlingend;
+@property (nonatomic,strong) NSString * bowltype;
+@property (nonatomic,strong) NSString * shottype;
+@property (nonatomic,strong) NSString * islegalball;
+@property (nonatomic,strong) NSString * totalruns;
+@property (nonatomic,strong) NSString * totalextras;
+@property (nonatomic,strong) NSString * grandtotal;
+@property (nonatomic,strong) NSString * rbw;
+@property (nonatomic,strong) NSString * pmlinecode;
+@property (nonatomic,strong) NSString * pmlengthcode;
+@property (nonatomic,strong) NSString * pmx1;
+@property (nonatomic,strong) NSString * pmy1;
+@property (nonatomic,strong) NSString * pmx2;
+@property (nonatomic,strong) NSString * pmy2;
+@property (nonatomic,strong) NSString * pmx3;
+@property (nonatomic,strong) NSString * pmy3;
+@property (nonatomic,strong) NSString * wwregion;
+@property (nonatomic,strong) NSString * wwx1;
+@property (nonatomic,strong) NSString * wwy1;
+@property (nonatomic,strong) NSString * wwx2;
+@property (nonatomic,strong) NSString * wwy2;
+@property (nonatomic,strong) NSString * ballduration;
+@property (nonatomic,strong) NSString * isappeal;
+@property (nonatomic,strong) NSString * isbeaten;
+@property (nonatomic,strong) NSString * isuncomfort;
+@property (nonatomic,strong) NSString * iswtb;
+@property (nonatomic,strong) NSString * isreleaseshot;
+@property (nonatomic,strong) NSString * markedforedit;
+@property (nonatomic,strong) NSString * remarks;
+@property (nonatomic,strong) NSString * shottypecategory;
+@property (nonatomic,strong) NSString * pmstrikepoint;
+@property (nonatomic,strong) NSString * pmstrikepointlinecode;
+@property (nonatomic,strong) NSString * ballspeed;
+@property (nonatomic,strong) NSString * uncomfortclassifcation;
+
 
 
 @end

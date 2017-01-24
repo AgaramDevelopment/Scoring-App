@@ -73,6 +73,9 @@
 #import "CMPopTipView.h"
 #import "DBManagerCaptransactionslogEntry.h"
 #import "FetchScorecard.h"
+#import "DeleteScoreEngine.h"
+
+
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
 #define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
@@ -254,6 +257,8 @@
     BOOL isEditBallInLiveMode;
     
     CMPopTipView *popTipView;
+    
+    NSString * deleteBallBowlerCode;
     
 }
 
@@ -3785,6 +3790,11 @@
         
         if(alertView.tag == 10004){
             [self ENDINNINGS];
+        }
+        
+        if(alertView.tag ==4000)
+        {
+            [self deleteBalltickerBallMethod];
         }
         
     }    else if(buttonIndex == 1)//Annul button pressed.
@@ -14949,6 +14959,26 @@
 }
 -(IBAction)didClickCancelrotation:(id)sender
 {
+    UIButton * btn = (UIButton *)sender;
+    
+    BallEventRecord *record = [fetchSEPageLoadRecord.BallGridDetails objectAtIndex:btn.tag];
+    
+
+    UIAlertView * objalert =[[UIAlertView alloc]initWithTitle:@"EditMode" message:@"We want delete this ball" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+    objalert.tag =4000;
+    [objalert show];
+
+    
+    self.isEditMode = YES;
+    self.editBallCode = record.objBallcode;
+    deleteBallBowlerCode =record.objBowlercode;
+    self.isEditMode = NO;
+    
+
+   }
+
+-(void)deleteBalltickerBallMethod
+{
     if(view_addedit != nil)
     {
         [self dismissAllPopTipViews];
@@ -14958,7 +14988,19 @@
         [Cancelrotation removeFromSuperview];
         [Editrotation removeFromSuperview];
     }
+    DeleteScoreEngine * objDeleteScoreEngine =[[DeleteScoreEngine alloc]init];
     
+    //InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
+    [objDeleteScoreEngine DeleteScoreEngineMethod: self.editBallCode :self.competitionCode :self.matchCode :deleteBallBowlerCode:@"NO"];
+    
+    
+    //Reset View
+    [self reloadBowlerTeamBatsmanDetails];
+    [self resetBallEventObject];
+    [self resetAllButtonOnEndBall];
+    [self AllBtndisableMethod];
+
+
 }
 
 -(void)PichMapMethod

@@ -251,17 +251,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 record.Penalty    =[self getValueByNull:statement :14];
                 record.Byes       =[self getValueByNull:statement :15];
                 record.legByes    =[self getValueByNull:statement :16];
-                
-                
-//                [result addObject:BATTINGTEAMCODE];
-//                [result addObject:S_INNINGSNO];
-//                [result addObject:S_OVERNO];
-//                [result addObject:S_BALLNO];
-//                [result addObject:S_BALLCOUNT];
-//                [result addObject:S_NOBALL];
-//                [result addObject:S_WIDE];
-//                [result addObject:SB_STRIKERCODE];
-//                [result addObject:SB_BOWLERCODE];
                 [result addObject:record];
             }
             sqlite3_reset(statement);

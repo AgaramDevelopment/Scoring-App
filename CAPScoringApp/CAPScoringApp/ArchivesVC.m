@@ -313,7 +313,8 @@ NSArray *MuliteDayMatchtype;
             scoreEngine.matchTypeCode=matchTypeCode;
             [self.navigationController pushViewController:scoreEngine animated:YES];
         }
-    }else if([objFixtureRecord.MatchStatus isEqualToString:@"MSC125"]){
+    }
+else if([objFixtureRecord.MatchStatus isEqualToString:@"MSC125"]){
         UIAlertView * objAlert =[[UIAlertView alloc]initWithTitle:@"Archives" message:@"The selected game is already updated with result do you want to proceed?" delegate:self cancelButtonTitle:@"YES" otherButtonTitles:@"NO", nil];
         objAlert.tag =100;
         [objAlert show];

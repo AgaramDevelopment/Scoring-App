@@ -872,24 +872,10 @@ BOOL isWicketSelected;
 }
 -(IBAction)didClickCancelrotation:(id)sender
 {
-    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
-    [objDeleteScoreEngine DeleteScoreEngineMethod:objInningsBowlerDetailsRecord.ballCode :_Comptitioncode :_matchCode :objInningsBowlerDetailsRecord.BowlerCode :@"NO"];
-    //[self InningFetchMethod];
-    OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
-    inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+    UIAlertView * objalert =[[UIAlertView alloc]initWithTitle:@"EditMode" message:@"We want delete this ball" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+    objalert.tag =100;
+    [objalert show];
     
-    [self.tbl_innnings reloadData];
-    if(view_addedit != nil)
-    {
-        
-        [view_addedit removeFromSuperview];
-        [leftrotation removeFromSuperview];
-        [Rightrotation removeFromSuperview];
-        [Cancelrotation removeFromSuperview];
-        [Editrotation removeFromSuperview];
-        [self popTipViewWasDismissedByUser:_currentPopTipViewTarget ];
-    }
-
 }
 -(IBAction)didClickRightrotation:(id)sender
 {
@@ -975,8 +961,41 @@ BOOL isWicketSelected;
     return color;
 }
 
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if(buttonIndex == 0)//OK button pressed
+    {
+        if(alertView.tag == 100)
+        {
+            [self deleteBallMethod];
+        }
+    }
+    else{
+        
+    }
+}
 
+-(void) deleteBallMethod
+{
+    InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
+    [objDeleteScoreEngine DeleteScoreEngineMethod:objInningsBowlerDetailsRecord.ballCode :_Comptitioncode :_matchCode :objInningsBowlerDetailsRecord.BowlerCode :@"NO"];
+    //[self InningFetchMethod];
+    OversorderArray =[objDBManager getBowlerOversorder:self.Comptitioncode :self.matchCode :@"1"];
+    inningsDetail=[objDBManager GetBolwerDetailsonEdit:self.Comptitioncode :self.matchCode :@"1"];
+    
+    [self.tbl_innnings reloadData];
+    if(view_addedit != nil)
+    {
+        
+        [view_addedit removeFromSuperview];
+        [leftrotation removeFromSuperview];
+        [Rightrotation removeFromSuperview];
+        [Cancelrotation removeFromSuperview];
+        [Editrotation removeFromSuperview];
+        [self popTipViewWasDismissedByUser:_currentPopTipViewTarget ];
+    }
 
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

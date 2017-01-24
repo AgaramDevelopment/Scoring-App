@@ -33,11 +33,8 @@
     NSNumber * S_BYES =[NSNumber numberWithInt:0];
     NSNumber * S_LEGBYES =[NSNumber numberWithInt:0];
     NSNumber * S_PENALTY =[NSNumber numberWithInt:0];
-    NSNumber * S_ISDELETE =[NSNumber numberWithInt:0];
+    NSNumber * S_ISDELETE =[NSNumber numberWithInt:1];
     NSNumber * S_WICKETSCORE =[NSNumber numberWithInt:0];
-    
-    
-    
     NSNumber *ISWICKETUNDO = [NSNumber numberWithInt:0];
     NSString* WICKETPLAYER;
     
@@ -148,6 +145,8 @@
     BOOL DeleteFieldingDetails = [objDBManagerDeleteScoreEngine DeleteFieldingDetailsForDeleteScoreEngine:BALLCODE];
     
     UpdateScoreEngine * objupdateScoreEngine = [[UpdateScoreEngine alloc]init];
+        
+
     
     [objupdateScoreEngine UpdateScoreBoard : BALLCODE :COMPETITIONCODE :MATCHCODE : BATTINGTEAMCODE :BOWLINGTEAMCODE :INNINGSNO :SB_STRIKERCODE :S_ISFOUR :S_ISSIX :S_RUNS :S_OVERTHROW :F_ISWICKET :F_WICKETTYPE :WICKETPLAYER :CURRENTBOWLERCODE :S_OVERNO :S_BALLNO : S_WICKETSCORE :S_WIDE :S_NOBALL :S_BYES :S_LEGBYES :S_PENALTY :S_ISDELETE :ISWICKETUNDO :F_ISWICKETCOUNTABLE :F_ISWICKET :[NSNumber numberWithInteger: [F_WICKETTYPE integerValue]]];
     
