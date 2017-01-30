@@ -10,11 +10,13 @@
 #import "DBManagerDeclareInnings.h"
 #import "ScorEnginVC.h"
 #import "FetchSEPageLoadRecord.h"
+#import "CustomNavigationVC.h"
 
 @interface DeclareInnings ()
 {
     NSInteger overNo;
     NSInteger ballNo;
+    CustomNavigationVC * objCustomNavigation;
 }
 
 @end
@@ -40,7 +42,7 @@
     // Do any additional setup after loading the view from its nib.
     
     
-    
+    [self customnavigationmethod];
     
     [self.btn_revert addTarget:self action:@selector(btn_revert:) forControlEvents:UIControlEventTouchUpInside];
     [self.btn_yes addTarget:self action:@selector(btn_yes:) forControlEvents:UIControlEventTouchUpInside];
@@ -112,6 +114,14 @@
     
 }
 
+-(void)customnavigationmethod
+{
+    objCustomNavigation=[[CustomNavigationVC alloc] initWithNibName:@"CustomNavigationVC" bundle:nil];
+    [self.view addSubview:objCustomNavigation.view];
+    objCustomNavigation.lbl_titleName.text=@"ARCHIVES";
+    [objCustomNavigation.Btn_Back addTarget:self action:@selector(Back_BtnAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

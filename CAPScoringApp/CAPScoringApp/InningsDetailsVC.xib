@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="ipad9_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="RAJDHANI-BOLD.TTF">
+        <array key="RAJDHANI-BOLD.TTF">
             <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="InningsDetailsVC">
@@ -57,7 +50,7 @@
                                 <constraint firstAttribute="width" constant="82" id="cpd-qc-VcI"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -73,16 +66,16 @@
                             </variation>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t4E-jr-z4y">
-                            <rect key="frame" x="367" y="164" width="281" height="38"/>
+                            <rect key="frame" x="367" y="185" width="281" height="38"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tn-H0-MOg">
-                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                    <rect key="frame" x="4" y="0.0" width="277" height="38"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="277" id="Xjo-qQ-W6O"/>
                                         <constraint firstAttribute="height" constant="38" id="Xz8-02-yRc"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -98,7 +91,7 @@
                                     </variation>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="0tn-H0-MOg" secondAttribute="trailing" id="aTr-aW-ZtK"/>
                                 <constraint firstItem="0tn-H0-MOg" firstAttribute="leading" secondItem="t4E-jr-z4y" secondAttribute="leading" constant="4" id="i5p-7S-G6j"/>
@@ -136,7 +129,7 @@
                                 <constraint firstAttribute="width" constant="101" id="tqT-Nh-5TH"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -152,16 +145,16 @@
                             </variation>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tm6-f1-tig">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <rect key="frame" x="367" y="267" width="281" height="38"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WWo-4a-TbU">
-                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                    <rect key="frame" x="4" y="0.0" width="220" height="38"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="220" id="h4P-rs-gSi"/>
                                         <constraint firstAttribute="height" constant="38" id="xNV-Oo-uN5"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -177,7 +170,7 @@
                                     </variation>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QJi-SK-3Cc">
-                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                    <rect key="frame" x="0.0" y="-7" width="280" height="52"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="52" id="d8B-P1-ugE"/>
                                     </constraints>
@@ -198,7 +191,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="WWo-4a-TbU" firstAttribute="leading" secondItem="tm6-f1-tig" secondAttribute="leading" constant="4" id="6fH-pO-8Li"/>
                                 <constraint firstItem="QJi-SK-3Cc" firstAttribute="leading" secondItem="tm6-f1-tig" secondAttribute="leading" id="Gip-EY-RuQ"/>
@@ -240,13 +233,13 @@
                             </variation>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NON STRIKER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UhM-Os-huk">
-                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <rect key="frame" x="154" y="348" width="143" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="28" id="jSU-Lq-gb6"/>
                                 <constraint firstAttribute="width" constant="143" id="t15-od-n41"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -262,10 +255,10 @@
                             </variation>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bbW-lC-jmg">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <rect key="frame" x="367" y="338" width="281" height="38"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMB-7L-JXn">
-                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                    <rect key="frame" x="5" y="-5" width="222" height="43"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="43" id="L7Z-v4-CcT"/>
                                         <constraint firstAttribute="width" constant="227" id="mNO-9K-JvM">
@@ -273,7 +266,7 @@
                                         </constraint>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -289,7 +282,7 @@
                                     </variation>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1cx-ua-t0M">
-                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                    <rect key="frame" x="0.0" y="-7" width="280" height="52"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="52" id="Cvp-KK-owv"/>
                                     </constraints>
@@ -310,7 +303,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="1cx-ua-t0M" secondAttribute="trailing" constant="1" id="8O6-qh-dg0"/>
                                 <constraint firstItem="iMB-7L-JXn" firstAttribute="leading" secondItem="bbW-lC-jmg" secondAttribute="leading" id="8TT-dl-rrY">
@@ -360,13 +353,13 @@
                             </variation>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOWLER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sMZ-iT-LgO">
-                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <rect key="frame" x="154" y="425" width="143" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="143" id="2Yk-Rs-3vH"/>
                                 <constraint firstAttribute="height" constant="28" id="Kv3-hd-JX9"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -382,10 +375,10 @@
                             </variation>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lf8-od-qg6">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                            <rect key="frame" x="367" y="420" width="281" height="38"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sHy-dR-7hb">
-                                    <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                                    <rect key="frame" x="5" y="-5" width="222" height="43"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="227" id="HJ6-X1-2gG">
                                             <variation key="heightClass=regular-widthClass=regular" constant="222"/>
@@ -393,7 +386,7 @@
                                         <constraint firstAttribute="height" constant="43" id="p69-z0-NhG"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -409,7 +402,7 @@
                                     </variation>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ill-gC-1g3">
-                                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                                    <rect key="frame" x="0.0" y="-7" width="280" height="52"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="52" id="1lI-Jm-TBz"/>
                                     </constraints>
@@ -430,7 +423,7 @@
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="sHy-dR-7hb" secondAttribute="bottom" id="6LV-0C-Pwu"/>
                                 <constraint firstItem="Ill-gC-1g3" firstAttribute="leading" secondItem="lf8-od-qg6" secondAttribute="leading" id="9HJ-1h-WQ3"/>
@@ -480,13 +473,13 @@
                             </variation>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BOWLING END" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q5L-uC-ycK">
-                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <rect key="frame" x="154" y="502" width="158" height="28"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="158" id="DFN-Vh-ZTJ"/>
                                 <constraint firstAttribute="height" constant="28" id="fyL-rH-3Fx"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -502,7 +495,7 @@
                             </variation>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wrt-N8-Vsy">
-                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <rect key="frame" x="362" y="501" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="DdD-mu-igc"/>
                                 <constraint firstAttribute="width" constant="30" id="HB0-bX-r7k"/>
@@ -522,7 +515,7 @@
                             </variation>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Hb-jG-lll">
-                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <rect key="frame" x="533" y="498" width="30" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="30" id="9Wk-73-6UF"/>
                                 <constraint firstAttribute="height" constant="30" id="HQk-Pw-97j"/>
@@ -542,13 +535,13 @@
                             </variation>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NEAR END" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nec-Pw-xWZ">
-                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <rect key="frame" x="405" y="501" width="118" height="27"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="27" id="mWL-Bp-tvK"/>
                                 <constraint firstAttribute="width" constant="118" id="pDw-Ea-Ewy"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -564,13 +557,13 @@
                             </variation>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FAR END" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W66-Vu-Wf4">
-                            <rect key="frame" x="-42" y="-21" width="42" height="21"/>
+                            <rect key="frame" x="576" y="499" width="118" height="27"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="27" id="nE5-RG-vPy"/>
                                 <constraint firstAttribute="width" constant="118" id="stf-gr-SlW"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -586,8 +579,8 @@
                             </variation>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8ea-S2-moa">
-                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
-                            <color key="backgroundColor" red="0.0039215686269999999" green="0.82352941180000006" blue="0.63529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <rect key="frame" x="244" y="588" width="280" height="44"/>
+                            <color key="backgroundColor" red="0.0039215686269999999" green="0.82352941180000006" blue="0.63529411759999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="264" id="cpu-fk-sfW">
                                     <variation key="heightClass=regular-widthClass=regular" constant="280"/>
@@ -598,7 +591,7 @@
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="24"/>
                             <state key="normal" title="Start Innings">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <variation key="default">
                                 <mask key="constraints">
@@ -617,8 +610,8 @@
                             </connections>
                         </button>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Svn-NI-w55">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="367" y="458" width="281" height="128"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="281" id="Xai-cv-bZ9"/>
                                 <constraint firstAttribute="height" constant="128" id="f1E-yX-ILV"/>
@@ -641,8 +634,8 @@
                             </connections>
                         </tableView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WDQ-ue-eL4">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="367" y="376" width="281" height="128"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="281" id="6SU-ia-N8O"/>
                                 <constraint firstAttribute="height" constant="128" id="fbg-Xo-JEH"/>
@@ -665,8 +658,8 @@
                             </connections>
                         </tableView>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NEf-d4-lwo">
-                            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <rect key="frame" x="367" y="305" width="281" height="128"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="281" id="Dtc-76-85g"/>
                                 <constraint firstAttribute="height" constant="128" id="UcK-T5-JuB"/>
@@ -689,7 +682,7 @@
                             </connections>
                         </tableView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="W66-Vu-Wf4" firstAttribute="top" secondItem="lf8-od-qg6" secondAttribute="bottom" constant="41" id="2Jk-rE-sDY"/>
                         <constraint firstAttribute="trailing" secondItem="bbW-lC-jmg" secondAttribute="trailing" constant="120" id="3FO-ce-EVd"/>
@@ -865,7 +858,7 @@
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="j8J-A1-mGa" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ONW-Ew-CRj"/>
                 <constraint firstAttribute="bottom" secondItem="j8J-A1-mGa" secondAttribute="bottom" id="ekC-sF-AOx"/>

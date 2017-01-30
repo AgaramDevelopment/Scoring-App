@@ -2776,48 +2776,91 @@
         }
         [self resetBallEventObject];
         [self resetAllButtonOnEndBall];
-         pitchCommantryStr =@"";
+        // pitchCommantryStr =@"";
         
-         wangonWheelCommantry=@"";
+        // wangonWheelCommantry=@"";
         
-         SelectRunCommantry=@"";
+        // SelectRunCommantry=@"";
         
-         SelectOTWCommantry=@"";
+        // SelectOTWCommantry=@"";
         
-         SelectRTWCommantry=@"";
+        // SelectRTWCommantry=@"";
         
-         selectSpinCommantry=@"";
+        // selectSpinCommantry=@"";
         
-        selectFastCommantry=@"";
+       // selectFastCommantry=@"";
         
-        selectAggressveCommantry=@"";
+      //  selectAggressveCommantry=@"";
         
-        selectDefensiveCommantry=@"";
+       // selectDefensiveCommantry=@"";
         
-        selectRBWCommantry=@"";
+     //   selectRBWCommantry=@"";
         
-        SelectAppealCommantry=@"";
+     //   SelectAppealCommantry=@"";
         
-        SelectNoballCommantry=@"";
+     //   SelectNoballCommantry=@"";
         
-        SelectWideCommantry=@"";
+     //   SelectWideCommantry=@"";
         
-        SelectByesCommantry=@"";
+     //   SelectByesCommantry=@"";
         
-        SelectLegByesCommantry=@"";
+     //   SelectLegByesCommantry=@"";
         
-        SelectUncomfortCommantry=@"";
+     //   SelectUncomfortCommantry=@"";
         
-        SelectBeatenCommantry=@"";
+     //   SelectBeatenCommantry=@"";
         
-        SelectReleaseShotCommantry=@"";
+     //   SelectReleaseShotCommantry=@"";
         
-        SelectWTBCommantry=@"";
+      //  SelectWTBCommantry=@"";
         
-        SelectOverThrowCommantry=@"";
+      //  SelectOverThrowCommantry=@"";
+        [self clearCommantryMethod];
     }
 }
+-(void) clearCommantryMethod
+{
+    pitchCommantryStr =@"";
+    
+    wangonWheelCommantry=@"";
+    
+    SelectRunCommantry=@"";
+    
+    SelectOTWCommantry=@"";
+    
+    SelectRTWCommantry=@"";
+    
+    selectSpinCommantry=@"";
+    
+    selectFastCommantry=@"";
+    
+    selectAggressveCommantry=@"";
+    
+    selectDefensiveCommantry=@"";
+    
+    selectRBWCommantry=@"";
+    
+    SelectAppealCommantry=@"";
+    
+    SelectNoballCommantry=@"";
+    
+    SelectWideCommantry=@"";
+    
+    SelectByesCommantry=@"";
+    
+    SelectLegByesCommantry=@"";
+    
+    SelectUncomfortCommantry=@"";
+    
+    SelectBeatenCommantry=@"";
+    
+    SelectReleaseShotCommantry=@"";
+    
+    SelectWTBCommantry=@"";
+    
+    SelectOverThrowCommantry=@"";
 
+}
 -(void)EndBallMethod
 {
     if([fetchSEPageLoadRecord.SESSIONNO intValue] <4)
@@ -3480,6 +3523,8 @@
         if(isEndBallSuccess){
             isEndOverOnEndBall = NO;
            BOOL isInningsCompleted =  [self overEVENT];
+            [self clearCommantryMethod];
+
         }
     }
 }
