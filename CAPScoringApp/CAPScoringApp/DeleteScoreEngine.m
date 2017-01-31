@@ -52,7 +52,7 @@
     
     MAXINNINGS = [objDBManagerDeleteScoreEngine GetMaxInningsNoForDeleteScoreEngine:COMPETITIONCODE :MATCHCODE];
     
-    MAXOVER   = [objDBManagerDeleteScoreEngine GetMaxOverNoForDeleteScoreEngine:COMPETITIONCODE :MATCHCODE:MAXINNINGS];
+    MAXOVER   = [objDBManagerDeleteScoreEngine GetMaxOverNoForDeleteScoreEngine:COMPETITIONCODE :MATCHCODE :MAXINNINGS];
     
     MAXBALL  = [objDBManagerDeleteScoreEngine GetMaxBallNoForDeleteScoreEngine:COMPETITIONCODE :MATCHCODE :MAXINNINGS :MAXOVER];
     

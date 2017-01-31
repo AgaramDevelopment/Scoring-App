@@ -3124,7 +3124,7 @@
          @"I"//FIELDINGEVENTSFLAG
          ];
         //Insert Score Engine SP Call
-        
+       
         [self reloadBowlerTeamBatsmanDetails];
     }
     DBManager *objDBManager = [[DBManager alloc]init];
@@ -3149,6 +3149,7 @@
     else{
         wicketkeepercode =@"";
     }
+    self.txt_Commantry.text =@"";
 }
 -(UIColor*)colorWithHexString:(NSString*)hex
 {
@@ -3825,7 +3826,7 @@
 //                [fetchSEPageLoadRecord.getBowlingTeamPlayers replaceObjectAtIndex:indexPath withObject:0];
 //                
 //            }
-        
+            [self clearCommantryMethod];
             [self reloadBowlerTeamBatsmanDetails];
             
             
@@ -5907,135 +5908,161 @@
 
 -(void)comantryTextValue
 {
-    NSString* CommantryStr;
+    //NSString* CommantryStr;
+    
+    NSMutableArray * Commantry =[[NSMutableArray alloc]init];
+    
     
     if(pitchCommantryStr!=nil && pitchCommantryStr !=@"")
     {
-        CommantryStr = pitchCommantryStr;
+        //CommantryStr = pitchCommantryStr;
+        [Commantry addObject:pitchCommantryStr];
     }
     if (wangonWheelCommantry !=nil && wangonWheelCommantry!=@"")
     {
-        CommantryStr =(CommantryStr== nil)?wangonWheelCommantry:[CommantryStr  stringByAppendingString:wangonWheelCommantry];
+        //CommantryStr =(CommantryStr== nil)?wangonWheelCommantry:[CommantryStr  stringByAppendingString:wangonWheelCommantry];
+        [Commantry addObject:wangonWheelCommantry];
     }
     if(SelectRunCommantry !=nil && SelectRunCommantry!=@"")
     {
-        CommantryStr =(CommantryStr== nil)?SelectRunCommantry:[CommantryStr  stringByAppendingString:SelectRunCommantry];
-       
+        //CommantryStr =(CommantryStr== nil)?SelectRunCommantry:[CommantryStr  stringByAppendingString:SelectRunCommantry];
+        [Commantry addObject:SelectRunCommantry];
+
     }
     if(SelectOTWCommantry != nil && SelectOTWCommantry !=@"")
     {
-        CommantryStr =(CommantryStr== nil)?SelectOTWCommantry:[CommantryStr  stringByAppendingString:SelectOTWCommantry];
+       // CommantryStr =(CommantryStr== nil)?SelectOTWCommantry:[CommantryStr  stringByAppendingString:SelectOTWCommantry];
+        [Commantry addObject:SelectOTWCommantry];
 
     }
     if (SelectRTWCommantry !=nil && SelectRTWCommantry !=@"") {
         
-        CommantryStr =(CommantryStr== nil)?SelectRTWCommantry:[CommantryStr  stringByAppendingString:SelectRTWCommantry];
+       // CommantryStr =(CommantryStr== nil)?SelectRTWCommantry:[CommantryStr  stringByAppendingString:SelectRTWCommantry];
+        [Commantry addObject:SelectRTWCommantry];
 
      }
     if(selectSpinCommantry !=nil && selectSpinCommantry !=@"")
     {
-        CommantryStr =(CommantryStr== nil)?selectSpinCommantry:[CommantryStr  stringByAppendingString:selectSpinCommantry];
+       // CommantryStr =(CommantryStr== nil)?selectSpinCommantry:[CommantryStr  stringByAppendingString:selectSpinCommantry];
+        [Commantry addObject:selectSpinCommantry];
 
     }
     if(selectFastCommantry != nil && selectFastCommantry!=@"")
     {
-        CommantryStr =(CommantryStr== nil)?selectFastCommantry:[CommantryStr  stringByAppendingString:selectFastCommantry];
+        //CommantryStr =(CommantryStr== nil)?selectFastCommantry:[CommantryStr  stringByAppendingString:selectFastCommantry];
+        [Commantry addObject:selectFastCommantry];
 
      }
     if(selectAggressveCommantry != nil && selectAggressveCommantry!=@"")
     {
         //CommantryStr =[CommantryStr  stringByAppendingString:selectAggressveCommantry];
-        CommantryStr =(CommantryStr== nil)?selectAggressveCommantry:[CommantryStr  stringByAppendingString:selectAggressveCommantry];
+       // CommantryStr =(CommantryStr== nil)?selectAggressveCommantry:[CommantryStr  stringByAppendingString:selectAggressveCommantry];
+        [Commantry addObject:selectAggressveCommantry];
 
     }
     if(selectDefensiveCommantry !=nil && selectDefensiveCommantry!= @"")
     {
-        CommantryStr =(CommantryStr== nil)?selectDefensiveCommantry:[CommantryStr  stringByAppendingString:selectDefensiveCommantry];
+        //CommantryStr =(CommantryStr== nil)?selectDefensiveCommantry:[CommantryStr  stringByAppendingString:selectDefensiveCommantry];
+        [Commantry addObject:selectDefensiveCommantry];
 
     }
     if(selectedNRS !=nil && selectedNRS != @"")
     {
-        CommantryStr =(CommantryStr== nil)?selectedNRS:[CommantryStr  stringByAppendingString:selectedNRS];
+        //CommantryStr =(CommantryStr== nil)?selectedNRS:[CommantryStr  stringByAppendingString:selectedNRS];
+        [Commantry addObject:selectedNRS];
 
     }
     if(selectRBWCommantry !=nil && selectRBWCommantry !=@"")
     {
-        CommantryStr =(CommantryStr== nil)?selectRBWCommantry:[CommantryStr  stringByAppendingString:selectRBWCommantry];
+        //CommantryStr =(CommantryStr== nil)?selectRBWCommantry:[CommantryStr  stringByAppendingString:selectRBWCommantry];
+        [Commantry addObject:selectRBWCommantry];
 
     }
     if(SelectAppealCommantry!=nil && SelectAppealCommantry!= @"")
     {
         //CommantryStr =[CommantryStr  stringByAppendingString:SelectAppealCommantry];
-        CommantryStr =(CommantryStr== nil)?SelectAppealCommantry:[CommantryStr  stringByAppendingString:SelectAppealCommantry];
+       // CommantryStr =(CommantryStr== nil)?SelectAppealCommantry:[CommantryStr  stringByAppendingString:SelectAppealCommantry];
+        [Commantry addObject:SelectAppealCommantry];
 
     }
     if(SelectNoballCommantry != nil && SelectNoballCommantry != @"")
     {
-        CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objNoball stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objNoball stringValue]];
+       // CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objNoball stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objNoball stringValue]];
+        [Commantry addObject:SelectNoballCommantry];
 
-       // CommantryStr =[CommantryStr  stringByAppendingString:self.ballEventRecord.objNoball];
     }
     if(SelectWideCommantry !=nil && SelectWideCommantry!= @"")
     {
-        //CommantryStr =[CommantryStr  stringByAppendingString:self.ballEventRecord.objWide];
-        CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objWide stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objWide stringValue]];
+        //CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objWide stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objWide stringValue]];
+        [Commantry addObject:SelectWideCommantry];
 
     }
     if( SelectByesCommantry != nil && SelectByesCommantry!= @"")
     {
-        //CommantryStr =[CommantryStr  stringByAppendingString:self.ballEventRecord.objByes];
-        CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objByes stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objByes stringValue]];
+       // CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objByes stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objByes stringValue]];
+        [Commantry addObject:SelectByesCommantry];
 
     }
     if(SelectLegByesCommantry!= nil && SelectLegByesCommantry!= @"")
     {
-        //CommantryStr =[CommantryStr  stringByAppendingString:self.ballEventRecord.objLegByes];
-        CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objLegByes stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objLegByes stringValue]];
+       // CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objLegByes stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objLegByes stringValue]];
+        [Commantry addObject:SelectLegByesCommantry];
 
     }
     if(selectedwicketBowlerlist != nil && selectedwicketBowlerlist!= @"")
     {
-        //CommantryStr =[CommantryStr  stringByAppendingString:selectedwicketBowlerlist.BowlerName];
-        CommantryStr =(CommantryStr== nil)?selectedwicketBowlerlist.BowlerName:[CommantryStr  stringByAppendingString:selectedwicketBowlerlist.BowlerName];
+       // CommantryStr =(CommantryStr== nil)?selectedwicketBowlerlist.BowlerName:[CommantryStr  stringByAppendingString:selectedwicketBowlerlist.BowlerName];
+        [Commantry addObject:selectedwicketBowlerlist.BowlerName];
 
     }
     if(SelectOverThrowCommantry!=nil && SelectOverThrowCommantry !=@"")
     {
-       // CommantryStr =[CommantryStr  stringByAppendingString:self.ballEventRecord.objOverthrow];
-        CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objOverthrow stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objOverthrow stringValue]];
+       // CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objOverthrow stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objOverthrow stringValue]];
+        [Commantry addObject:SelectOverThrowCommantry];
 
     }
     if(SelectUncomfortCommantry!= nil && SelectUncomfortCommantry != @"")
     {
-        //CommantryStr =[CommantryStr  stringByAppendingString:self.ballEventRecord.objIsuncomfort];
-        CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objIsuncomfort stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objIsuncomfort stringValue]];
+       // CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objIsuncomfort stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objIsuncomfort stringValue]];
+        [Commantry addObject:SelectUncomfortCommantry];
 
     }
     if(SelectBeatenCommantry!=nil && SelectBeatenCommantry!= @"")
     {
-        //CommantryStr =[CommantryStr  stringByAppendingString:self.ballEventRecord.objIsbeaten];
-        CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objIsbeaten stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objIsbeaten stringValue]];
+//        CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objIsbeaten stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objIsbeaten stringValue]];
+        [Commantry addObject:SelectBeatenCommantry];
 
     }
     if(SelectReleaseShotCommantry != nil && SelectReleaseShotCommantry!= @"")
     {
-        //CommantryStr =[CommantryStr  stringByAppendingString:self.ballEventRecord.objIsreleaseshot];
-        CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objIsreleaseshot stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objIsreleaseshot stringValue]];
+//        CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objIsreleaseshot stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objIsreleaseshot stringValue]];
+        [Commantry addObject:SelectReleaseShotCommantry];
+
 
     }
     if(SelectWTBCommantry != nil && SelectWTBCommantry !=@"")
     {
-       // CommantryStr =[CommantryStr  stringByAppendingString:self.ballEventRecord.objIswtb];
-        CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objIswtb stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objIswtb stringValue]];
+        //CommantryStr =(CommantryStr== nil)?[self.ballEventRecord.objIswtb stringValue]:[CommantryStr  stringByAppendingString:[self.ballEventRecord.objIswtb stringValue]];
+        [Commantry addObject:SelectWTBCommantry];
+
     }
     
-    //NSMutableString* theStrings = [NSMutableString string];
-    //for (int i=0; i<=theString.count;i++){
+    NSString* theStrings;
+    for (int i=0; i < Commantry.count;i++){
         
-       // [theStrings appendString:[NSString stringWithFormat:@"%i ",i]];
-   // }
+       // NSString * obj =[Commantry objectAtIndex:i];
+        if(theStrings != nil)
+        {
+         theStrings=[theStrings stringByAppendingString:[NSString stringWithFormat:@", %@",[Commantry objectAtIndex:i]]];
+        }
+        else
+        {
+            theStrings= [Commantry objectAtIndex:i];
+        }
+        
+    }
     //label.text = theString;
-    self.txt_Commantry.text=[NSString stringWithFormat:@"%@",CommantryStr];
+    self.txt_Commantry.text= theStrings;//[NSString stringWithFormat:@"%@",CommantryStr];
     
 }
 
@@ -8677,7 +8704,7 @@
                         [extrasTableView selectRowAtIndexPath:legbyesIndexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
                     }
                     
-                   SelectNoballCommantry= [self.ballEventRecord.objNoball stringValue];
+                   SelectNoballCommantry= [NSString stringWithFormat:@"NoBall %@", self.ballEventRecord.objNoball];
                     [self comantryTextValue];
                 }
                 
@@ -8726,7 +8753,7 @@
                     [extrasTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionNone];
                 }
                 
-                 SelectWideCommantry= [self.ballEventRecord.objWide stringValue];
+                 SelectWideCommantry= [NSString stringWithFormat:@"Wide %@",self.ballEventRecord.objWide];
                 [self comantryTextValue];
                 
             }else if([[self.extrasOptionArray objectAtIndex:indexPath.row] isEqual:@"Byes"]){//Byes
@@ -8833,7 +8860,7 @@
                     
                     isOverthrowSelected = NO;
                 }
-                SelectOverThrowCommantry=[self.ballEventRecord.objOverthrow stringValue];
+                SelectOverThrowCommantry=[NSString stringWithFormat:@"OverThrow %@", self.ballEventRecord.objOverthrow];
                 [self comantryTextValue];
             }
             
@@ -8865,7 +8892,7 @@
             
             if([[self.miscfiltersOptionArray objectAtIndex:indexPath.row]  isEqual: @"Uncomfort"]){
                 self.ballEventRecord.objIsuncomfort = [NSNumber numberWithInt:1];
-                SelectUncomfortCommantry = [self.ballEventRecord.objIsuncomfort stringValue];
+                SelectUncomfortCommantry = [NSString stringWithFormat:@"Uncomfort %@", self.ballEventRecord.objIsuncomfort];
                 
             }else if([[self.miscfiltersOptionArray objectAtIndex:indexPath.row]  isEqual: @"Beaten"]){
                 
@@ -8877,17 +8904,17 @@
                     [miscFiltersTableview deselectRowAtIndexPath:indexPath animated:NO];
 
                 }
-                SelectBeatenCommantry = [self.ballEventRecord.objIsbeaten stringValue];
+                SelectBeatenCommantry = [NSString stringWithFormat:@"Beaten %@",self.ballEventRecord.objIsbeaten];
 
                 
             }else if([[self.miscfiltersOptionArray objectAtIndex:indexPath.row]  isEqual: @"Release Shot"]){
                 self.ballEventRecord.objIsreleaseshot = [NSNumber numberWithInt:1];
-                SelectReleaseShotCommantry = [self.ballEventRecord.objIsreleaseshot stringValue];
+                SelectReleaseShotCommantry = [NSString stringWithFormat:@"ISReleaseshot %@",self.ballEventRecord.objIsreleaseshot];
 
                 
             }else if([[self.miscfiltersOptionArray objectAtIndex:indexPath.row]  isEqual: @"WTB"]){
                 self.ballEventRecord.objIswtb = [NSNumber numberWithInt:1];
-                SelectWTBCommantry = [self.ballEventRecord.objIswtb stringValue];
+                SelectWTBCommantry = [NSString stringWithFormat:@"ISWTB %@",self.ballEventRecord.objIswtb];
 
             }
             [self comantryTextValue];
