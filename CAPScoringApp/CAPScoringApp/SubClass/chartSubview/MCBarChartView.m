@@ -337,7 +337,14 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                    
                     
                     wicket_Btn.tag = [objManhattanRecord.tag intValue];
-                    wicket_Btn.center = CGPointMake(xOffset-20, chartYOffset - [objManhattanRecord.Run floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2);
+                    if([objManhattanRecord.inningno isEqualToString:@"1"] || [objManhattanRecord.inningno isEqualToString:@"3"])
+                    {
+                    wicket_Btn.center = CGPointMake(xOffset-40, chartYOffset - [objManhattanRecord.Run floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2);
+                    }
+                    else
+                    {
+                        wicket_Btn.center = CGPointMake(xOffset-20, chartYOffset - [objManhattanRecord.Run floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2);
+                    }
                     [wicket_Btn setBackgroundColor:[UIColor colorWithRed:(16/255.0f) green:(210/255.0f) blue:(158/255.0f) alpha:1.0f]];
                     wicket_Btn.layer.cornerRadius=15;
                     wicket_Btn.layer.masksToBounds=YES;
