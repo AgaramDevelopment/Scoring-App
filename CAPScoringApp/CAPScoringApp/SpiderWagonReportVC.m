@@ -284,7 +284,7 @@ self.img_wagon.layer.sublayers = nil;
     
     self.strikerTblYposition.constant = self.bowler_view.frame.origin.y-55;
     self.bowlerArray=[[NSMutableArray alloc]init];
-    _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"1"];
+    _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail :self.matchCode :_teamBcode:@"1"];
     
     if(isBowler==NO)
     {
