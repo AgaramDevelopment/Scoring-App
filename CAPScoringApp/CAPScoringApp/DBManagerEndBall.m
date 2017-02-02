@@ -195,8 +195,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
                 
-                NSString *updateSQLForOnline = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET WICKETSCORE = WICKETSCORE - (%@ - %@)	WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@'	AND INNINGSNO = '%@' AND (WICKETOVERNO)|| '.' ||(WICKETBALLNO)  >= (%@) + '.' +(%@)",O_RUNS,N_RUNS,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,F_OVERS,F_BALLS];
+                NSString *updateSQLForOnline = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET WICKETSCORE = WICKETSCORE - (%@ - %@)	WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@'	AND INNINGSNO = '%@' AND ((cast(WICKETOVERNO as varchar))+ '.' +(cast(WICKETBALLNO as varchar)))  >= ((cast(%@ as varchar)) +'.'+ (cast(%@ AS varchar)))",O_RUNS,N_RUNS,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,F_OVERS,F_BALLS];
                 [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BATTINGSUMMARY" :@"MSC251" :updateSQLForOnline];
+                
+//                
+//                UPDATE BATTINGSUMMARY SET WICKETSCORE = WICKETSCORE - (4 - 0)	WHERE COMPETITIONCODE = 'UCC0000001' AND MATCHCODE = 'IMSC024B8975AA55AB900123' AND BATTINGTEAMCODE = 'TEA0000073'	AND INNINGSNO = 2 AND ((cast(WICKETOVERNO as varchar))+ '.' +(cast(WICKETBALLNO as varchar)))  >= ((cast(%@ as varchar)) +'.'+ (cast(%@ AS varchar)))
+                
                 
                 return YES;
                 
@@ -683,7 +687,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET WICKETNO = NULL,WICKETTYPE = NULL,FIELDERCODE = NULL,BOWLERCODE = NULL,WICKETOVERNO = NULL,WICKETBALLNO = NULL 	WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@' AND INNINGSNO = '%@' AND BATSMANCODE = '%@'",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,BATTINGTEAMCODE,INNINGSNO,WICKETPLAYER];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BATTINGSUMMARY SET WICKETNO = NULL,WICKETTYPE = NULL,FIELDERCODE = NULL,BOWLERCODE = NULL,WICKETOVERNO = NULL,WICKETBALLNO = NULL 	WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BATTINGTEAMCODE = '%@' AND INNINGSNO = '%@' AND BATSMANCODE = '%@'",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,WICKETPLAYER];
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK){
             
