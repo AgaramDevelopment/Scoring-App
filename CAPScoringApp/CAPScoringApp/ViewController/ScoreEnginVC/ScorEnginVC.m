@@ -268,11 +268,11 @@
     
     NSString * SelectOTWCommantry;
     
-    NSString * SelectRTWCommantry;
+    //NSString * SelectRTWCommantry;
     
     NSString * selectSpinCommantry;
     
-    NSString * selectFastCommantry;
+    //NSString * selectFastCommantry;
     
     NSString * selectAggressveCommantry;
     
@@ -2530,7 +2530,7 @@
             
             
             [self calculateRunsOnEndBall];
-            
+             
             UpdateScoreEngine *updatescore = [[UpdateScoreEngine alloc]init];
             [updatescore UpdateScoreEngine :self.editBallCode :
              self.competitionCode :
@@ -2776,45 +2776,7 @@
         }
         [self resetBallEventObject];
         [self resetAllButtonOnEndBall];
-        // pitchCommantryStr =@"";
         
-        // wangonWheelCommantry=@"";
-        
-        // SelectRunCommantry=@"";
-        
-        // SelectOTWCommantry=@"";
-        
-        // SelectRTWCommantry=@"";
-        
-        // selectSpinCommantry=@"";
-        
-       // selectFastCommantry=@"";
-        
-      //  selectAggressveCommantry=@"";
-        
-       // selectDefensiveCommantry=@"";
-        
-     //   selectRBWCommantry=@"";
-        
-     //   SelectAppealCommantry=@"";
-        
-     //   SelectNoballCommantry=@"";
-        
-     //   SelectWideCommantry=@"";
-        
-     //   SelectByesCommantry=@"";
-        
-     //   SelectLegByesCommantry=@"";
-        
-     //   SelectUncomfortCommantry=@"";
-        
-     //   SelectBeatenCommantry=@"";
-        
-     //   SelectReleaseShotCommantry=@"";
-        
-      //  SelectWTBCommantry=@"";
-        
-      //  SelectOverThrowCommantry=@"";
         [self clearCommantryMethod];
     }
 }
@@ -2828,16 +2790,16 @@
     
     SelectOTWCommantry=@"";
     
-    SelectRTWCommantry=@"";
+    //SelectRTWCommantry=@"";
     
     selectSpinCommantry=@"";
     
-    selectFastCommantry=@"";
+    //selectFastCommantry=@"";
     
     selectAggressveCommantry=@"";
     
-    selectDefensiveCommantry=@"";
-    
+   // selectDefensiveCommantry=@"";
+    selectedNRS =@"";
     selectRBWCommantry=@"";
     
     SelectAppealCommantry=@"";
@@ -5935,24 +5897,24 @@
         [Commantry addObject:SelectOTWCommantry];
 
     }
-    if (SelectRTWCommantry !=nil && SelectRTWCommantry !=@"") {
-        
-       // CommantryStr =(CommantryStr== nil)?SelectRTWCommantry:[CommantryStr  stringByAppendingString:SelectRTWCommantry];
-        [Commantry addObject:SelectRTWCommantry];
-
-     }
+//    if (SelectRTWCommantry !=nil && SelectRTWCommantry !=@"") {
+//        
+//       // CommantryStr =(CommantryStr== nil)?SelectRTWCommantry:[CommantryStr  stringByAppendingString:SelectRTWCommantry];
+//        [Commantry addObject:SelectRTWCommantry];
+//
+//     }
     if(selectSpinCommantry !=nil && selectSpinCommantry !=@"")
     {
        // CommantryStr =(CommantryStr== nil)?selectSpinCommantry:[CommantryStr  stringByAppendingString:selectSpinCommantry];
         [Commantry addObject:selectSpinCommantry];
 
     }
-    if(selectFastCommantry != nil && selectFastCommantry!=@"")
-    {
-        //CommantryStr =(CommantryStr== nil)?selectFastCommantry:[CommantryStr  stringByAppendingString:selectFastCommantry];
-        [Commantry addObject:selectFastCommantry];
-
-     }
+//    if(selectFastCommantry != nil && selectFastCommantry!=@"")
+//    {
+//        //CommantryStr =(CommantryStr== nil)?selectFastCommantry:[CommantryStr  stringByAppendingString:selectFastCommantry];
+//        [Commantry addObject:selectFastCommantry];
+//
+//     }
     if(selectAggressveCommantry != nil && selectAggressveCommantry!=@"")
     {
         //CommantryStr =[CommantryStr  stringByAppendingString:selectAggressveCommantry];
@@ -5960,12 +5922,12 @@
         [Commantry addObject:selectAggressveCommantry];
 
     }
-    if(selectDefensiveCommantry !=nil && selectDefensiveCommantry!= @"")
-    {
-        //CommantryStr =(CommantryStr== nil)?selectDefensiveCommantry:[CommantryStr  stringByAppendingString:selectDefensiveCommantry];
-        [Commantry addObject:selectDefensiveCommantry];
-
-    }
+//    if(selectDefensiveCommantry !=nil && selectDefensiveCommantry!= @"")
+//    {
+//        //CommantryStr =(CommantryStr== nil)?selectDefensiveCommantry:[CommantryStr  stringByAppendingString:selectDefensiveCommantry];
+//        [Commantry addObject:selectDefensiveCommantry];
+//
+//    }
     if(selectedNRS !=nil && selectedNRS != @"")
     {
         //CommantryStr =(CommantryStr== nil)?selectedNRS:[CommantryStr  stringByAppendingString:selectedNRS];
@@ -6012,7 +5974,10 @@
     if(selectedwicketBowlerlist != nil && selectedwicketBowlerlist!= @"")
     {
        // CommantryStr =(CommantryStr== nil)?selectedwicketBowlerlist.BowlerName:[CommantryStr  stringByAppendingString:selectedwicketBowlerlist.BowlerName];
-        [Commantry addObject:selectedwicketBowlerlist.BowlerName];
+        
+        NSString * objStr =(selectedwicketBowlerlist.BowlerName == nil)?fetchSEPageLoadRecord.currentBowlerPlayerName:selectedwicketBowlerlist.BowlerName;
+        
+        [Commantry addObject:objStr];
 
     }
     if(SelectOverThrowCommantry!=nil && SelectOverThrowCommantry !=@"")
@@ -6350,7 +6315,8 @@
         }
         
         [self unselectedViewBg:_view_fast];
-        
+        selectSpinCommantry=@"";
+        [self comantryTextValue];
         
     }
     else if(selectBtnTag.tag==115)//fast
@@ -6417,6 +6383,8 @@
         }
         
         [self unselectedViewBg:_view_spin];
+        selectSpinCommantry=@"";
+        [self comantryTextValue];
         
         //        }else{
         //            self.ballEventRecord.objBowltype = nil;
@@ -6489,6 +6457,8 @@
             
             [self selectedViewBg:_view_aggressive];
             [tbl_aggressiveShot reloadData];
+            selectAggressveCommantry=@"";
+            [self comantryTextValue];
             
         }
         
@@ -6548,6 +6518,7 @@
             [self unselectedViewBg:_view_defense];
             self.view_defensive.hidden = YES;
             isDefensiveSelected = NO;
+
             
         }else{
             
@@ -6559,7 +6530,10 @@
             [_tbl_defensive reloadData];
             
         }
-        
+        selectAggressveCommantry =@"";
+
+        [self comantryTextValue];
+
         [self unselectedViewBg:_view_aggressive];
         
         //View
@@ -6614,6 +6588,7 @@
             self.view_fastBowl.hidden = NO;
             
             [self.tbl_fastBowl reloadData];
+           
             
             if(selectedNRS!=nil){
                 
@@ -6640,7 +6615,8 @@
                 
             }
         }
-        
+         selectedNRS =@"";
+        [self comantryTextValue];
     }
     else if(selectBtnTag.tag==119)//RBW
     {
@@ -6692,6 +6668,9 @@
                 
             }
         }
+    
+         selectRBWCommantry =@"";
+        [self comantryTextValue];
     }
     else if(selectBtnTag.tag==120)
     {
@@ -6890,7 +6869,7 @@
         
         _view_otw.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         self.ballEventRecord.objAtworotw = nil;
-        
+        SelectOTWCommantry =@"";
         
     }else{
         _view_otw.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
@@ -6912,13 +6891,13 @@
         
         _view_rtw.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         self.ballEventRecord.objAtworotw = nil;
-        
-        
+        SelectOTWCommantry =@"";
+
     }else{
         _view_rtw.backgroundColor = [UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f];//Selected
         _view_otw.backgroundColor = [UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];//Normal
         self.ballEventRecord.objAtworotw = @"MSC149";
-        SelectRTWCommantry =@"Select RTW";
+        SelectOTWCommantry =@"Select RTW";
         
     }
     
@@ -7978,8 +7957,9 @@
             isEnableTbl=YES;
             
         
-            record = (GetSEAppealDetailsForAppealEvents*)[getAppealArray objectAtIndex:0];
             if ([getAppealArray count]>0) {
+                record = (GetSEAppealDetailsForAppealEvents*)[getAppealArray objectAtIndex:0];
+
                 self.comments_txt.text=record.APPEALCOMMENTS;
                 self.lbl_appealsystem.text=record.APPEALSYSTEMDES;
                 self.lbl_appealComponent.text=record.APPEALCOMPONENTDES;
@@ -8604,6 +8584,7 @@
             self.view_defensive.hidden =YES;
             
             isFieldingSelected = NO;
+            
             [self comantryTextValue];
             
         }else if (tbl_fastBowl == tableView){ // Fast bowling
@@ -8622,17 +8603,18 @@
                 isFastSelected = NO;
                 self.ballEventRecord.objBowltype = nil;
                 [self unselectedViewBg:_view_fast];
-                
+                selectSpinCommantry=@"";
             }
             else{
                 isFastSelected = YES;
                 isSpinSelected = NO;
                 self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+                NSString *  selectfastBowltype =[NSString stringWithFormat:@" Select Fast %@",bowlAndShortTypeRecord.BowlType];
+                selectSpinCommantry  = selectfastBowltype;
             }
             
             
-            NSString *  selectfastBowltype =[NSString stringWithFormat:@" Select Fast %@",bowlAndShortTypeRecord.BowlType];
-            selectFastCommantry  = selectfastBowltype;
+            
             self.view_fastBowl.hidden = YES;
             [self comantryTextValue];
             
@@ -8777,7 +8759,7 @@
                     //Byes
                     self.ballEventRecord.objByes = [NSNumber numberWithInt:1];
                     
-                     SelectByesCommantry= [self.ballEventRecord.objByes stringValue];
+                     SelectByesCommantry= [NSString stringWithFormat:@"Select Byes %@",[self.ballEventRecord.objByes stringValue]];
                     [self comantryTextValue];
                 }
                 
@@ -8819,13 +8801,14 @@
                         
                         //Legbyes
                         self.ballEventRecord.objLegByes = [NSNumber numberWithInt:1];
+                        SelectLegByesCommantry= [NSString stringWithFormat:@"Select LegByes %@",[self.ballEventRecord.objLegByes stringValue]];
+                        [self comantryTextValue];
                     }
                 }
                 
             }
             
-             SelectLegByesCommantry= [self.ballEventRecord.objLegByes stringValue];
-            [self comantryTextValue];
+            
         }else if(tableView == overThrowTableView){//Over throw table view
             
             if (_ballEventRecord.objByes.intValue == 0 && _ballEventRecord.objIsbeaten.intValue == 1)// Check beaten selected
@@ -8877,6 +8860,8 @@
                 }else{
                     self.view_Rbw.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
                 }
+                selectRBWCommantry =self.ballEventRecord.objRbw;
+                [self comantryTextValue];
             }else{
                 self.ballEventRecord.objRbw = [NSNumber numberWithInteger:0];
                 [rbwTableview removeFromSuperview];
@@ -8884,9 +8869,9 @@
                 self.view_Rbw.backgroundColor=[UIColor colorWithRed:(16/255.0f) green:(21/255.0f) blue:(24/255.0f) alpha:1.0f];
                 
                 isRBWSelected = NO;
-               selectRBWCommantry =self.ballEventRecord.objRbw;
-                [self comantryTextValue];
             }
+            
+            
             
         }else if(miscFiltersTableview == tableView){
             
@@ -8898,13 +8883,15 @@
                 
                 if([self checkBeatenOnSelect]){ //Check run is selected
                     self.ballEventRecord.objIsbeaten = [NSNumber numberWithInt:1];
+                    SelectUncomfortCommantry = [NSString stringWithFormat:@"Beaten %@", self.ballEventRecord.objIsbeaten];
+
 
                 }else{
                     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:1 inSection:0];
                     [miscFiltersTableview deselectRowAtIndexPath:indexPath animated:NO];
 
                 }
-                SelectBeatenCommantry = [NSString stringWithFormat:@"Beaten %@",self.ballEventRecord.objIsbeaten];
+                
 
                 
             }else if([[self.miscfiltersOptionArray objectAtIndex:indexPath.row]  isEqual: @"Release Shot"]){
@@ -8935,16 +8922,17 @@
                 isSpinSelected = NO;
                 self.ballEventRecord.objBowltype = nil;
                 [self unselectedViewBg:_view_spin];
-                
+                selectSpinCommantry=@"";
             }
             else{
                 isSpinSelected = YES;
                 isFastSelected = NO;
                 self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
+                NSString * selectBowltype =[NSString stringWithFormat:@"Select Spin %@",bowlAndShortTypeRecord.BowlType];
+                selectSpinCommantry =selectBowltype;
             }
             
-            NSString * selectBowltype =[NSString stringWithFormat:@"Select Spin %@",self.ballEventRecord.objBowltype];
-            selectSpinCommantry =selectBowltype;
+           
             
             self.view_bowlType.hidden = YES;
             
@@ -8975,23 +8963,25 @@
                 isAggressiveSelected = YES;
                 isDefensiveSelected = NO;
                 self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+                selectAggressveCommantry=[NSString stringWithFormat:@"Select Aggressive %@", bowlAndShortTypeRecord.ShotType] ;
+
                 
             }else if(isAggressiveSelected && self.ballEventRecord.objShottype!=nil && self.ballEventRecord.objShottype == bowlAndShortTypeRecord.ShotTypeCode){
                 isAggressiveSelected = NO;
                 self.ballEventRecord.objShottype = nil;
                 [self unselectedViewBg:_view_aggressive];
-                
+                selectAggressveCommantry=@"";
             }
             else{
                 isAggressiveSelected = YES;
                 isDefensiveSelected = NO;
                 self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
-                selectAggressveCommantry=self.ballEventRecord.objShottype;
-                [self comantryTextValue];
+               selectAggressveCommantry=[NSString stringWithFormat:@"Select Aggressive %@",bowlAndShortTypeRecord.ShotType ];
                 
             }
             
             
+            [self comantryTextValue];
             
             self.view_aggressiveShot.hidden = YES;
             
@@ -9008,23 +8998,24 @@
                 isDefensiveSelected = YES;
                 isAggressiveSelected = NO;
                 self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
+                selectAggressveCommantry=[NSString stringWithFormat:@"Select Defensive %@",bowlAndShortTypeRecord.ShotType];
+
                 
             }else if(isDefensiveSelected && self.ballEventRecord.objShottype!=nil && self.ballEventRecord.objShottype == bowlAndShortTypeRecord.ShotTypeCode){
                 isDefensiveSelected = NO;
                 self.ballEventRecord.objShottype = nil;
                 [self unselectedViewBg:_view_defense];
-                
+                selectAggressveCommantry=@"";
+
             }
             else{
                 isDefensiveSelected = YES;
                 isAggressiveSelected = NO;
                 self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
-                selectDefensiveCommantry= self.ballEventRecord.objShottype;
-                [self comantryTextValue];
+                selectAggressveCommantry= [NSString stringWithFormat:@"Select Defensive %@",bowlAndShortTypeRecord.ShotType];
             }
             
-            
-            
+            [self comantryTextValue];
             self.view_defensive.hidden = YES;
             
             

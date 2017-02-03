@@ -1,28 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="RAJDHANI-BOLD.TTF">
+        <array key="RAJDHANI-BOLD.TTF">
             <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-        </mutableArray>
-        <mutableArray key="RAJDHANI-MEDIUM.TTF">
+        </array>
+        <array key="RAJDHANI-MEDIUM.TTF">
             <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-            <string>Rajdhani-Medium</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SectorWagonReportVC">
@@ -65,7 +57,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZR-Dy-Muh">
                             <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
-                            <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="53" id="ZLN-Zi-LJn"/>
                             </constraints>
@@ -82,14 +74,14 @@
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5wM-GE-2at">
                             <rect key="frame" x="120" y="10" width="100" height="50"/>
-                            <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="SuZ-Q3-1f9"/>
                                 <constraint firstAttribute="width" constant="192" id="fa1-5r-58E"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                             <state key="normal" title="Inn 1">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <variation key="default">
                                 <mask key="constraints">
@@ -109,14 +101,14 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zwo-PX-nQL">
                             <rect key="frame" x="230" y="10" width="100" height="50"/>
-                            <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="AGX-PL-pgz"/>
                                 <constraint firstAttribute="width" constant="192" id="z55-WE-nbY"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                             <state key="normal" title="Inn 2">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <variation key="default">
                                 <mask key="constraints">
@@ -136,14 +128,14 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="prD-mO-UHg">
                             <rect key="frame" x="340" y="10" width="100" height="50"/>
-                            <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="192" id="jik-VI-WYW"/>
                                 <constraint firstAttribute="height" constant="50" id="yoN-Ab-q8j"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                             <state key="normal" title="Inn 3">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <variation key="default">
                                 <mask key="constraints">
@@ -163,14 +155,14 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xwe-Vs-kWk">
                             <rect key="frame" x="450" y="10" width="100" height="50"/>
-                            <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="eQd-Fg-wbl"/>
                                 <constraint firstAttribute="width" constant="193" id="pXz-cD-bI5"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
                             <state key="normal" title="Inn 4">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <variation key="default">
                                 <mask key="constraints">
@@ -189,7 +181,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="Zwo-PX-nQL" firstAttribute="top" secondItem="xfi-NG-Kj6" secondAttribute="top" constant="9" id="AXB-cZ-4pT"/>
                         <constraint firstItem="xwe-Vs-kWk" firstAttribute="top" secondItem="xfi-NG-Kj6" secondAttribute="top" constant="9" id="FiQ-JI-kTh"/>
@@ -288,12 +280,12 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AMm-e7-gNI">
                             <rect key="frame" x="500" y="500" width="60" height="50"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="sIZ-Uq-kR0"/>
                             </constraints>
                             <state key="normal">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <variation key="default">
                                 <mask key="constraints">
@@ -329,7 +321,7 @@
                             </variation>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstItem="8jO-eE-A6q" firstAttribute="centerX" secondItem="2FW-F3-13Z" secondAttribute="centerX" id="06Z-ka-NYt"/>
                         <constraint firstItem="AMm-e7-gNI" firstAttribute="leading" secondItem="2FW-F3-13Z" secondAttribute="leading" id="9LF-N1-Cjj"/>
@@ -375,13 +367,13 @@
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vgq-Gr-lMa">
                                     <rect key="frame" x="500" y="500" width="60" height="50"/>
-                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="3fy-0a-bdr"/>
                                         <constraint firstAttribute="width" constant="600" id="UfB-X9-hoE"/>
                                     </constraints>
                                     <state key="normal">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -478,7 +470,7 @@
                                         <constraint firstAttribute="width" constant="273" id="kMa-EA-fYe"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -513,7 +505,7 @@
                                     </variation>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="Y0r-qt-LMS" firstAttribute="top" secondItem="d22-uR-V6R" secondAttribute="top" id="8R8-5j-9lP"/>
                                 <constraint firstItem="wJg-p8-DHh" firstAttribute="top" secondItem="d22-uR-V6R" secondAttribute="top" id="8cB-ki-tfg"/>
@@ -571,7 +563,7 @@
                                         <constraint firstAttribute="width" constant="273" id="ad3-i2-n5J"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
-                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -606,7 +598,7 @@
                                     </variation>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="88o-WQ-eVq" secondAttribute="trailing" id="9vu-GL-6IT"/>
                                 <constraint firstAttribute="height" constant="40" id="9z7-Yt-fyV"/>
@@ -654,7 +646,7 @@
                                 <constraint firstAttribute="width" constant="31" id="E3A-ro-9i1"/>
                                 <constraint firstAttribute="height" constant="31" id="lAw-Fa-Qdt"/>
                             </constraints>
-                            <state key="normal" image="Radio.off"/>
+                            <state key="normal" image="Off_Circle"/>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="E3A-ro-9i1"/>
@@ -678,7 +670,7 @@
                                 <constraint firstAttribute="height" constant="30" id="lUJ-IG-E9N"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -699,7 +691,7 @@
                                 <constraint firstAttribute="width" constant="31" id="GsV-Ja-Ze5"/>
                                 <constraint firstAttribute="height" constant="31" id="aRy-BV-iXU"/>
                             </constraints>
-                            <state key="normal" image="Radio.off"/>
+                            <state key="normal" image="Off_Circle"/>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="GsV-Ja-Ze5"/>
@@ -723,7 +715,7 @@
                                 <constraint firstAttribute="width" constant="95" id="YiF-ef-jtZ"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="18"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -744,7 +736,7 @@
                                 <constraint firstAttribute="height" constant="30" id="aas-Di-GxI"/>
                                 <constraint firstAttribute="width" constant="30" id="npC-OL-SdC"/>
                             </constraints>
-                            <state key="normal" image="Radio.off"/>
+                            <state key="normal" image="Off_Circle"/>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="aas-Di-GxI"/>
@@ -768,7 +760,7 @@
                                 <constraint firstAttribute="height" constant="30" id="TDd-vT-Lxo"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="21"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -790,7 +782,7 @@
                                 <constraint firstAttribute="width" constant="31" id="Rcu-Ar-Zr0"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="21"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -811,7 +803,7 @@
                                 <constraint firstAttribute="width" constant="30" id="7dP-6j-LdD"/>
                                 <constraint firstAttribute="height" constant="30" id="wz2-Rc-pml"/>
                             </constraints>
-                            <state key="normal" image="Radio.off"/>
+                            <state key="normal" image="Off_Circle"/>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="7dP-6j-LdD"/>
@@ -835,7 +827,7 @@
                                 <constraint firstAttribute="width" constant="30" id="WR3-3U-Mvf"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="21"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -856,7 +848,7 @@
                                 <constraint firstAttribute="width" constant="30" id="ElS-Mc-JFM"/>
                                 <constraint firstAttribute="height" constant="30" id="gmK-67-Xz6"/>
                             </constraints>
-                            <state key="normal" image="Radio.off"/>
+                            <state key="normal" image="Off_Circle"/>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="ElS-Mc-JFM"/>
@@ -880,7 +872,7 @@
                                 <constraint firstAttribute="width" constant="30" id="ygo-zB-MUQ"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="21"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -901,7 +893,7 @@
                                 <constraint firstAttribute="height" constant="30" id="N4N-sj-8bd"/>
                                 <constraint firstAttribute="width" constant="30" id="cYD-B3-ztO"/>
                             </constraints>
-                            <state key="normal" image="Radio.off"/>
+                            <state key="normal" image="Off_Circle"/>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="N4N-sj-8bd"/>
@@ -924,7 +916,7 @@
                                 <constraint firstAttribute="width" constant="30" id="M9S-hX-flq"/>
                                 <constraint firstAttribute="height" constant="30" id="Usb-Fn-bDf"/>
                             </constraints>
-                            <state key="normal" image="Radio.off"/>
+                            <state key="normal" image="Off_Circle"/>
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="M9S-hX-flq"/>
@@ -943,14 +935,14 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axu-C5-sYB">
                             <rect key="frame" x="500" y="238" width="60" height="40"/>
-                            <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="98" id="kxN-gZ-b4J"/>
                                 <constraint firstAttribute="height" constant="40" id="pHc-Xk-cGk"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="25"/>
                             <state key="normal" title="OK">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <variation key="default">
                                 <mask key="constraints">
@@ -970,7 +962,7 @@
                         </button>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="cPA-vv-4bC">
                             <rect key="frame" x="15" y="60" width="335" height="120"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="120" id="CYK-SU-tSS"/>
                                 <constraint firstAttribute="width" constant="335" id="WUx-LR-mKD"/>
@@ -999,7 +991,7 @@
                                 <constraint firstAttribute="width" constant="30" id="RIL-Tg-bjd"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="Rajdhani-Medium" family="Rajdhani" pointSize="21"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                             <variation key="default">
                                 <mask key="constraints">
@@ -1015,7 +1007,7 @@
                             </variation>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" red="0.047058823530000002" green="0.062745098040000002" blue="0.074509803920000006" alpha="0.5" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.047058823530000002" green="0.062745098040000002" blue="0.074509803920000006" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="cGw-nG-DZG" secondAttribute="bottom" constant="18" id="0Bv-mj-DJb"/>
                         <constraint firstItem="ivb-ht-Ino" firstAttribute="leading" secondItem="MSe-F5-vSs" secondAttribute="trailing" constant="10" id="0MV-dj-b4E"/>
@@ -1199,7 +1191,7 @@
                     </variation>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="oUZ-3Z-3FH" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="1d8-JC-Y0h"/>
                 <constraint firstItem="x84-2i-d1r" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="2Hq-8m-v7O"/>
@@ -1292,7 +1284,7 @@
     </objects>
     <resources>
         <image name="BackgroundImg" width="2048" height="2732"/>
-        <image name="Radio.off" width="72" height="72"/>
+        <image name="Off_Circle" width="31" height="31"/>
         <image name="Sector_Img" width="284" height="284"/>
         <image name="dropDown" width="54" height="54"/>
         <image name="ico_down" width="30" height="30"/>
