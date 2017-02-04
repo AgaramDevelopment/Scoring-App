@@ -321,7 +321,7 @@
     [_date_picker1 setMinimumDate:matchdate];
     
     // for maximumDate
-    int daysToAdd = 1;
+    int daysToAdd = 2;
     NSDate *newDate1 = [matchdate dateByAddingTimeInterval:60*60*24*daysToAdd];
     
     [_date_picker1 setMaximumDate:newDate1];
