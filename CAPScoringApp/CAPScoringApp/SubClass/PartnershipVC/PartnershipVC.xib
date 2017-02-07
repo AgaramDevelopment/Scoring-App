@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="RAJDHANI-SEMIBOLD.TTF">
+        <array key="RAJDHANI-SEMIBOLD.TTF">
             <string>Rajdhani-Semibold</string>
-            <string>Rajdhani-Semibold</string>
-            <string>Rajdhani-Semibold</string>
-            <string>Rajdhani-Semibold</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PartnershipVC">
@@ -36,21 +37,21 @@
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aRc-9z-0Eq">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="70"/>
+                    <rect key="frame" x="0.0" y="10" width="600" height="70"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7hc-8q-pWa">
                             <rect key="frame" x="0.0" y="10" width="600" height="53"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ygH-0A-vVa">
                                     <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.098039215690000001" alpha="0.24657866379999999" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.098039215690000001" alpha="0.24657866379999999" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="I8h-7Y-LPU"/>
                                         <constraint firstAttribute="width" constant="150" id="NId-BM-2OA"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
                                     <state key="normal" title="Inn 1">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="didClickInnigs1:" destination="-1" eventType="touchUpInside" id="SBk-fd-Ays"/>
@@ -58,14 +59,14 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jdh-1u-Z0x">
                                     <rect key="frame" x="150" y="0.0" width="150" height="50"/>
-                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="150" id="Xqk-pE-hPq"/>
                                         <constraint firstAttribute="height" constant="50" id="ZVt-OW-QXf"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
                                     <state key="normal" title="Inn 2">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="didClickInnings2:" destination="-1" eventType="touchUpInside" id="CWi-3R-s1l"/>
@@ -73,14 +74,14 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QIR-Bm-MlB">
                                     <rect key="frame" x="300" y="0.0" width="150" height="50"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.098039215690000001" alpha="0.25" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.098039215690000001" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="150" id="YRE-wb-cYY"/>
                                         <constraint firstAttribute="height" constant="50" id="tq8-oe-d7z"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
                                     <state key="normal" title="Inn 3">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="didClickInnings3:" destination="-1" eventType="touchUpInside" id="8i9-TV-Q4v"/>
@@ -88,21 +89,21 @@
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RIK-Uv-qve">
                                     <rect key="frame" x="450" y="0.0" width="150" height="50"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.098039215690000001" alpha="0.25" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.098039215690000001" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="50" id="aLa-ZL-Wq8"/>
                                         <constraint firstAttribute="width" constant="150" id="lEd-7m-BDS"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="20"/>
                                     <state key="normal" title="Inn 4">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="didClickInnings4:" destination="-1" eventType="touchUpInside" id="hLy-Lr-E15"/>
                                     </connections>
                                 </button>
                             </subviews>
-                            <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.13725490200000001" green="0.4549019608" blue="0.80392156859999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="Jdh-1u-Z0x" firstAttribute="top" secondItem="7hc-8q-pWa" secondAttribute="top" id="0RF-f0-cqY"/>
                                 <constraint firstAttribute="bottom" secondItem="ygH-0A-vVa" secondAttribute="bottom" constant="3" id="ECQ-3R-2DP"/>
@@ -120,7 +121,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="3cj-na-nGm"/>
                         <constraint firstItem="7hc-8q-pWa" firstAttribute="leading" secondItem="aRc-9z-0Eq" secondAttribute="leading" id="J6W-Tv-a69"/>
@@ -129,23 +130,23 @@
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HiZ-Za-NEg">
-                    <rect key="frame" x="0.0" y="70" width="600" height="530"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <rect key="frame" x="0.0" y="80" width="600" height="520"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="sectionIndexBackgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="LvZ-Ka-iu1"/>
                         <outlet property="delegate" destination="-1" id="JDz-tB-0Mp"/>
                     </connections>
                 </tableView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="HiZ-Za-NEg" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="CjQ-c5-etq"/>
                 <constraint firstAttribute="trailing" secondItem="aRc-9z-0Eq" secondAttribute="trailing" id="K0u-M5-J5F"/>
                 <constraint firstItem="BzF-EX-faE" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="L26-A5-DF2"/>
                 <constraint firstItem="BzF-EX-faE" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Mc0-vG-OP4"/>
                 <constraint firstAttribute="bottom" secondItem="BzF-EX-faE" secondAttribute="bottom" id="Nal-Wp-yFN"/>
-                <constraint firstItem="aRc-9z-0Eq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="TyP-QQ-d9Y"/>
+                <constraint firstItem="aRc-9z-0Eq" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="10" id="TyP-QQ-d9Y"/>
                 <constraint firstAttribute="trailing" secondItem="BzF-EX-faE" secondAttribute="trailing" id="U79-nX-s4H"/>
                 <constraint firstItem="HiZ-Za-NEg" firstAttribute="top" secondItem="aRc-9z-0Eq" secondAttribute="bottom" id="bGB-Yx-UCb"/>
                 <constraint firstAttribute="trailing" secondItem="HiZ-Za-NEg" secondAttribute="trailing" id="j7f-qz-Lp8"/>

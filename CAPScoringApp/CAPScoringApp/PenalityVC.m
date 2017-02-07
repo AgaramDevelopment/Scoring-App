@@ -599,6 +599,10 @@
             
             [objDBManager GetUpdatePenaltyDetails:awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode :self.competitionCode :self.matchCode :self.inningsNo :_penaltyDetailsRecord.penaltycode];
             
+            if([self.selectStartBallStatus isEqualToString:@"Yes"])
+            {
+                [self.delegate InsertPenaltyMethod:self.awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
+            }
             UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Penalty" message:@"Penalty Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             alter.tag =10;
