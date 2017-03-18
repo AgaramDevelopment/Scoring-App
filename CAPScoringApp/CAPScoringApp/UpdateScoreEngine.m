@@ -651,7 +651,7 @@ EndInnings *insertScoreBoard;
     
 
 
-    ISOVERCOMPLETE = [objDBManagerEndBall GETISOVERCOMPLETE : COMPETITIONCODE:MATCHCODE:BATTINGTEAMCODE:INNINGSNO:F_OVERS];
+    ISOVERCOMPLETE = [objDBManagerEndBall GETISOVERCOMPLETE : COMPETITIONCODE :MATCHCODE:BATTINGTEAMCODE:INNINGSNO:F_OVERS];
     
     
     BOWLERCOUNT  = [NSNumber numberWithInt:[objDBManagerEndBall GETBALLCOUNT : COMPETITIONCODE:MATCHCODE:INNINGSNO:OVERNO].intValue];
@@ -668,10 +668,12 @@ EndInnings *insertScoreBoard;
     
     if([ISDELETE  isEqual: @1])
     {
-        if(ISOVERCOMPLETE == 0 || BOWLERCOUNT.intValue > [NSNumber numberWithInt:1])
+        
+        //Need to check
+        if(ISOVERCOMPLETE.intValue == 0 || BOWLERCOUNT.intValue > [NSNumber numberWithInt:1])
         {
-            U_BOWLERBALLS = ((F_NOBALL == 0) && (F_WIDE == 0) && [BOWLERCOUNT  isEqual: @"1"]) ? [NSNumber numberWithInt:F_BOWLERBALLS.intValue - 1 ]: F_BOWLERBALLS;
-            U_BOWLERPARTIALOVERBALLS = (F_NOBALL == 0  && F_WIDE == 0 && BOWLERCOUNT > 1) ? ([NSNumber numberWithInt:F_BOWLERPARTIALOVERBALLS.intValue - 1]) :[NSNumber numberWithInt:F_BOWLERPARTIALOVERBALLS]  ;
+            U_BOWLERBALLS = ((F_NOBALL.intValue == 0) && (F_WIDE.intValue == 0) && (BOWLERCOUNT.intValue == 1)) ? [NSNumber numberWithInt:F_BOWLERBALLS.intValue - 1 ]: F_BOWLERBALLS;
+            U_BOWLERPARTIALOVERBALLS = (F_NOBALL.intValue == 0  && F_WIDE.intValue == 0 && BOWLERCOUNT.intValue > 1) ? ([NSNumber numberWithInt:F_BOWLERPARTIALOVERBALLS.intValue - 1]) :[NSNumber numberWithInt:F_BOWLERPARTIALOVERBALLS.intValue]  ;
         }
         else
         {
