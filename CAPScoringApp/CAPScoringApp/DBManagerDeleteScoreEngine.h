@@ -26,11 +26,11 @@
 
 -(NSString*) GetBowlingTeamForDeleteScoreEngine:(NSString*) COMPETITIONCODE :(NSString*) MATCHCODE :(NSString*) BATTINGTEAMCODE;
 
--(NSInteger)GetBatteamOversForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSInteger)MAXINNINGS;
+-(NSInteger)GetBatteamOversForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)MAXINNINGS;
 
--(NSInteger)GetBatteamOversWithExtraBallsForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSInteger)MAXINNINGS : (NSInteger)BATTEAMOVERS;
+-(NSInteger)GetBatteamOversWithExtraBallsForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber *)MAXINNINGS : (NSInteger)BATTEAMOVERS;
 
--(NSInteger)GetBatteamOversBallsCountForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSInteger)MAXINNINGS : (NSInteger)BATTEAMOVERS : (NSInteger)BATTEAMOVRWITHEXTRASBALLS;
+-(NSInteger)GetBatteamOversBallsCountForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber *)MAXINNINGS : (NSInteger)BATTEAMOVERS : (NSInteger)BATTEAMOVRWITHEXTRASBALLS;
 
 -(NSMutableArray *)GetCurrentPlayersDetailsForDeleteScoreEngine : (NSString *)COMPETITIONCODE MATCHCODE:(NSString *)MATCHCODE BATTINGTEAMCODE:(NSString*)BATTINGTEAMCODE INNINGSNO:(NSNumber*)INNINGSNO BATTEAMOVERS:(NSInteger)BATTEAMOVERS BATTEAMOVRWITHEXTRASBALLS:(NSInteger)BATTEAMOVRWITHEXTRASBALLS BATTEAMOVRBALLSCNT:(NSInteger)BATTEAMOVRBALLSCNT;
 
@@ -98,15 +98,15 @@
 
 -(NSInteger)GetMaxOverBallCountWithCurrentOverBallNoForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSInteger)OVERNO : (NSInteger)BALLNO;
 
--(NSInteger)GetMaxOverBallNoWithCurrentOverBallNoForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSInteger)OVERNO;
+-(NSInteger)GetMaxOverBallNoWithCurrentOverBallNoForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSString*)OVERNO;
 
 -(NSInteger)GetMaxOverBallNoWithCurrentOverNoForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSInteger)OVERNO;
 
--(NSInteger)GetMaxOverBallCountWithCurrentOverNoAndBallNoForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSInteger)OVERNO : (NSInteger)BALLNO;
+-(NSInteger)GetMaxOverBallCountWithCurrentOverNoAndBallNoForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSString*)OVERNO : (NSInteger)BALLNO;
 
--(NSString*)GetBallCodeWithCurrentOverBallNoAndBallCountForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSInteger)OVERNO : (NSInteger)BALLNO : (NSInteger)BALLCOUNT;
+-(NSString*)GetBallCodeWithCurrentOverBallNoAndBallCountForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSString*)OVERNO : (NSInteger)BALLNO : (NSInteger)BALLCOUNT;
 
--(NSString*)GetBallCodeWithCurrentOverAndBowlerCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSNumber*)INNINGSNO : (NSInteger)OVERNO : (NSString*)BOWLERCODE;
+-(NSString*)GetBallCodeWithCurrentOverAndBowlerCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSNumber*)INNINGSNO : (NSString *)OVERNO : (NSString*)BOWLERCODE;
 
 -(BOOL) DeleteBowlerOverEventForCurrentOverNoForDeleteScoreEngine: (NSString*) COMPETITIONCODE : (NSString*) MATCHCODE : (NSNumber*)INNINGSNO : (NSInteger)OVERNO : (NSString*)BOWLERCODE;
 

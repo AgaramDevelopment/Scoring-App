@@ -289,7 +289,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return @"";
 }
 
--(NSInteger)GetBatteamOversForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSInteger)MAXINNINGS
+-(NSInteger)GetBatteamOversForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*) MAXINNINGS
 {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -297,7 +297,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(MAX(OVERNO),0) FROM OVEREVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO = %ld AND OVERSTATUS = 0",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,(long)MAXINNINGS];
+        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(MAX(OVERNO),0) FROM OVEREVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO = '%@' AND OVERSTATUS = 0",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,MAXINNINGS];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -315,7 +315,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return 0;
 }
--(NSInteger)GetBatteamOversWithExtraBallsForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSInteger)MAXINNINGS : (NSInteger)BATTEAMOVERS
+-(NSInteger)GetBatteamOversWithExtraBallsForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber *)MAXINNINGS : (NSInteger)BATTEAMOVERS
 {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -323,12 +323,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(MAX(BALLNO),0) FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO = %ld AND OVERNO = %ld",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,(long)MAXINNINGS,(long)BATTEAMOVERS];
+        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(MAX(BALLNO),0) FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = %ld",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,MAXINNINGS,(long)BATTEAMOVERS];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSInteger BatteamOversWithExtraBalls = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)].integerValue;
+                NSInteger BatteamOversWithExtraBalls = [self getValueByNull:statement :0].integerValue;
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -342,7 +342,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return 0;
 }
 
--(NSInteger)GetBatteamOversBallsCountForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSInteger)MAXINNINGS : (NSInteger)BATTEAMOVERS : (NSInteger)BATTEAMOVRWITHEXTRASBALLS
+-(NSInteger)GetBatteamOversBallsCountForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)MAXINNINGS : (NSInteger)BATTEAMOVERS : (NSInteger)BATTEAMOVRWITHEXTRASBALLS
 {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -350,7 +350,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(MAX(BALLCOUNT),0) FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO = %ld AND OVERNO = %ld AND BALLNO = %ld",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,(long)MAXINNINGS,(long)BATTEAMOVERS,(long)BATTEAMOVRWITHEXTRASBALLS];
+        NSString *query=[NSString stringWithFormat:@"SELECT IFNULL(MAX(BALLCOUNT),1) FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE = '%@' AND INNINGSNO = '%@' AND OVERNO = %ld AND BALLNO = %ld",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,MAXINNINGS,(long)BATTEAMOVERS,(long)BATTEAMOVRWITHEXTRASBALLS];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -487,7 +487,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSNumber* WicketsCountableCount = [self getValueByNull:statement :0];
+                NSNumber* WicketsCountableCount =  [self getValueByNull:statement :0];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -1501,7 +1501,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return 0;
 }
 
--(NSInteger)GetMaxOverBallNoWithCurrentOverBallNoForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSInteger)OVERNO
+-(NSInteger)GetMaxOverBallNoWithCurrentOverBallNoForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSString*)OVERNO
 {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -1509,12 +1509,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT MAX(BALLNO) FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO=%@ AND OVERNO = %ld",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,(long)OVERNO];
+        NSString *query=[NSString stringWithFormat:@"SELECT MAX(BALLNO) FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO=%@ AND OVERNO = %@",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,OVERNO];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSInteger CURRENTOVERBALLCOUNT = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)].integerValue;
+                NSInteger CURRENTOVERBALLCOUNT = [self getValueByNull:statement :0].integerValue;
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -1555,7 +1555,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return 0;
 }
 
--(NSInteger)GetMaxOverBallCountWithCurrentOverNoAndBallNoForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSInteger)OVERNO : (NSInteger)BALLNO
+-(NSInteger)GetMaxOverBallCountWithCurrentOverNoAndBallNoForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSString*)OVERNO : (NSInteger)BALLNO
 {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -1563,12 +1563,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT MAX(BALLCOUNT) FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO=%@ AND OVERNO = %ld AND BALLNO = %ld",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,(long)OVERNO,(long)BALLNO];
+        NSString *query=[NSString stringWithFormat:@"SELECT MAX(BALLCOUNT) FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO=%@ AND OVERNO = '%@' AND BALLNO = %ld",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,OVERNO,(long)BALLNO];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSInteger CURRENTOVERBALLCOUNT = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)].integerValue;
+                NSInteger CURRENTOVERBALLCOUNT = [self getValueByNull:statement :0].integerValue;
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -1582,7 +1582,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return 0;
 }
 
--(NSString*)GetBallCodeWithCurrentOverBallNoAndBallCountForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSInteger)OVERNO : (NSInteger)BALLNO : (NSInteger)BALLCOUNT
+-(NSString*)GetBallCodeWithCurrentOverBallNoAndBallCountForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSString*)OVERNO : (NSInteger)BALLNO : (NSInteger)BALLCOUNT
 {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -1590,12 +1590,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO=%@ AND OVERNO = %ld AND BALLNO = %ld AND BALLCOUNT = %ld",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,(long)OVERNO,(long)BALLNO,(long)BALLCOUNT];
+        NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO=%@ AND OVERNO = '%@' AND BALLNO = %ld AND BALLCOUNT = %ld",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,OVERNO,(long)BALLNO,(long)BALLCOUNT];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSString *BallCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *BallCode = [self getValueByNull:statement :0];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
@@ -1609,7 +1609,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return @"";
 }
 
--(NSString*)GetBallCodeWithCurrentOverAndBowlerCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSNumber*)INNINGSNO : (NSInteger)OVERNO : (NSString*)BOWLERCODE
+-(NSString*)GetBallCodeWithCurrentOverAndBowlerCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSNumber*)INNINGSNO : (NSString *)OVERNO : (NSString*)BOWLERCODE
 {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -1617,7 +1617,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %@ AND OVERNO = %ld AND BOWLERCODE = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,(long)OVERNO,BOWLERCODE];
+        NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %@ AND OVERNO = '%@' AND BOWLERCODE = '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO,BOWLERCODE];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {

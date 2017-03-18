@@ -16034,7 +16034,7 @@
     DeleteScoreEngine * objDeleteScoreEngine =[[DeleteScoreEngine alloc]init];
     
     //InningsBowlerDetailsRecord *objInningsBowlerDetailsRecord=(InningsBowlerDetailsRecord *)[inningsDetail objectAtIndex:ballCodeIndex];
-    [objDeleteScoreEngine DeleteScoreEngineMethod: self.editBallCode :self.competitionCode :self.matchCode :deleteBallBowlerCode:@"NO"];
+    [objDeleteScoreEngine DeleteScoreEngineMethod: self.editBallCode :self.competitionCode :self.matchCode : deleteBallBowlerCode : @"NO"];
     
     
     //Reset View
