@@ -107,6 +107,7 @@
                     
                   LoginDBmanager *objLoginDBmanager = [[LoginDBmanager alloc] init];
                     [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"isUserLoggedin"];
+                    [[NSUserDefaults standardUserDefaults] setBool:isUserLogin forKey:@"onlineSyn"];
 
                     
                     NSArray *temp =   [rootDictionary objectForKey:@"UserDetails"];

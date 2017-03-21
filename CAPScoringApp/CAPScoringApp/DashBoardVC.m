@@ -849,12 +849,30 @@
     
 }
 
+-(IBAction)didClicksynenableanddisable:(id)sender
+{
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
 
+    if([self.btn_synenableanddisable.currentImage isEqual:[UIImage imageNamed:@"syn_enable_img"]])
+    {
+     [self.btn_synenableanddisable setImage:[UIImage imageNamed:@"syn_disable_img"] forState:UIControlStateNormal];
+        self.btn_synenableanddisable.titleLabel.textColor =[UIColor colorWithRed:(204/255.0f) green:(204/255.0f) blue:(204/255.0f) alpha:(1.0)];
+        
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"onlineSyn"];
+        [delegate SynenableanddisbleMethod];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"onlineSyn"];
+
+        [self.btn_synenableanddisable setImage:[UIImage imageNamed:@"syn_enable_img"] forState:UIControlStateNormal];
+        self.btn_synenableanddisable.titleLabel.textColor =[UIColor colorWithRed:(24/255.0f) green:(162/255.0f) blue:(84/255.0f) alpha:(1)];
+
+        [delegate SynenableanddisbleMethod];
+        
+    }
+}
 
 - (IBAction)btn_signOut:(id)sender {
-    
-        
-    
     
     
     UIAlertView *alert = [[UIAlertView alloc]initWithTitle: @"DashBoard"
@@ -885,6 +903,12 @@
         NSUserDefaults * removeUD = [NSUserDefaults standardUserDefaults];
         [removeUD removeObjectForKey:@"isUserLoggedin"];
         [[NSUserDefaults standardUserDefaults]synchronize ];
+        
+        
+        NSUserDefaults * onlineSyn = [NSUserDefaults standardUserDefaults];
+        [onlineSyn removeObjectForKey:@"onlineSyn"];
+        [[NSUserDefaults standardUserDefaults]synchronize ];
+        
         
         NSLog(@"user pressed Button Indexed 0");
         

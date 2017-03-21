@@ -14,6 +14,7 @@
 
 - (void)showLoading;
 - (void)hideLoading;
+-(void) SynenableanddisbleMethod;
 +(BOOL) isIpadPro;
 
 @end

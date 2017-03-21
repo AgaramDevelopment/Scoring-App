@@ -4503,10 +4503,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 {
     NSMutableArray *eventArray=[[NSMutableArray alloc]init];
     
-    
-    
     int retVal;
-    
     
     NSString *databasePath = [self getDBPath];
     sqlite3 *dataBase;

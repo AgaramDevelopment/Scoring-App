@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img_newMatch;
 
 @property (weak, nonatomic) IBOutlet UIImageView *img_archives;
+@property (weak, nonatomic) IBOutlet UIButton *btn_synenableanddisable;
 
 
 @property (weak, nonatomic) IBOutlet UIImageView *img_reports;
