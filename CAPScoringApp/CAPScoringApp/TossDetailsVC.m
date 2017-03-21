@@ -386,8 +386,10 @@
     
     if (tableView == self.Striker_table)
     {
+         self.Striker_lbl.text =@"";
         Strikerselectindexarray=[[NSMutableArray alloc]init];
         objTossDeatilsRecord=(TossDeatilsEvent*)[StrikerArray objectAtIndex:indexPath.row];
+        
         if(![NonStrikerCode isEqualToString: objTossDeatilsRecord.PlaercodeStrike_nonStrike])
         {
         self.Striker_lbl.text =objTossDeatilsRecord.PlaerNameStrike_nonStrike;
@@ -412,6 +414,8 @@
     
     if (tableView == self.nonStriker_table)
     {
+        
+        self.nonStriker_lbl.text=@"";
         NonStrikerselectindexarray=[[NSMutableArray alloc]init];
         objTossDeatilsRecord=(TossDeatilsEvent*)[nonStrikerArray objectAtIndex:indexPath.row];
         if(![StrikerCode isEqualToString: objTossDeatilsRecord.PlaercodeStrike_nonStrike])

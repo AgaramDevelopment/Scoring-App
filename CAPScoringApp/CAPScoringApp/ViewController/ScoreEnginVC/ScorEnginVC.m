@@ -5953,12 +5953,12 @@
         [Commantry addObject:SelectWideCommantry];
 
     }
-    if( SelectByesCommantry != nil && SelectByesCommantry!= 0)
+    if( SelectByesCommantry != nil && SelectByesCommantry!= 0 && SelectByesCommantry!=@"")
     {
         [Commantry addObject:SelectByesCommantry];
 
     }
-    if(SelectLegByesCommantry!= nil && SelectLegByesCommantry!= 0)
+    if(SelectLegByesCommantry!= nil && SelectLegByesCommantry!= 0 && SelectByesCommantry!=@"")
     {
         [Commantry addObject:SelectLegByesCommantry];
 
@@ -15999,7 +15999,7 @@
     BallEventRecord *record = [fetchSEPageLoadRecord.BallGridDetails objectAtIndex:btn.tag];
     
 
-    UIAlertView * objalert =[[UIAlertView alloc]initWithTitle:@"EditMode" message:@"We want delete this ball" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+    UIAlertView * objalert =[[UIAlertView alloc]initWithTitle:@"EditMode" message:@"You want delete this ball" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
     objalert.tag =4000;
     [objalert show];
 

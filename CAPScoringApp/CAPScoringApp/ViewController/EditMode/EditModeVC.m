@@ -872,7 +872,7 @@ BOOL isWicketSelected;
 }
 -(IBAction)didClickCancelrotation:(id)sender
 {
-    UIAlertView * objalert =[[UIAlertView alloc]initWithTitle:@"EditMode" message:@"We want delete this ball" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+    UIAlertView * objalert =[[UIAlertView alloc]initWithTitle:@"EditMode" message:@"You want delete this ball" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
     objalert.tag =100;
     [objalert show];
     

@@ -275,7 +275,7 @@
                     [self showDialog:@"Server error please try again" andTitle:@"Login"];
 
                 }
-                else if (responseData != nil){
+                else if (responseData == nil){
                     [self showDialog:@"Server error please try again" andTitle:@"Login"];
 
                 }
