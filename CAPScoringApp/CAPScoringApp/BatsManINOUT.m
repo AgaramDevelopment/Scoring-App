@@ -448,11 +448,14 @@
         return NO;
     }
     
-   else if([self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
-        [self showDialog:@"Duration should be greated than zero" andTitle:@"BatMan IN/OUT TIME"];
-        return NO;
-    }
-    
+   //else if([self.lbl_duration.text isEqualToString:@""] && [self.lbl_duration.text integerValue]<=0){
+   //     [self showDialog:@"Duration should be greated than zero" andTitle:@"BatMan IN/OUT TIME"];
+   //     return NO;
+    //}
+   else if([self.lbl_duration.text integerValue]<=0){
+       [self showDialog:@"Duration should be greated than zero" andTitle:@"BatMan IN/OUT TIME"];
+       return NO;
+   }
     
     
     return YES;
