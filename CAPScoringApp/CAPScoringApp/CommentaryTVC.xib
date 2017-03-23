@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="NO">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <development version="7000" identifier="xcode"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="RAJDHANI-BOLD.TTF">
+        <array key="RAJDHANI-BOLD.TTF">
             <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-            <string>Rajdhani-Bold</string>
-        </mutableArray>
-        <mutableArray key="RAJDHANI-SEMIBOLD.TTF">
+        </array>
+        <array key="RAJDHANI-SEMIBOLD.TTF">
             <string>Rajdhani-Semibold</string>
-            <string>Rajdhani-Semibold</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CommentaryVC">
@@ -29,7 +25,7 @@
             <rect key="frame" x="0.0" y="0.0" width="728" height="200"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6Gq-qE-Ag0" id="THS-dY-bpM">
-                <rect key="frame" x="0.0" y="0.0" width="728" height="199"/>
+                <rect key="frame" x="0.0" y="0.0" width="728" height="199.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WRB-iN-2zO">
@@ -45,7 +41,7 @@
                                             <constraint firstAttribute="width" constant="297" id="N4E-Y5-hi2"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hZ0-fr-X6y">
@@ -56,7 +52,7 @@
                                             <constraint firstAttribute="height" constant="46" id="Dh7-JS-7cI"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AHu-BY-Lf4">
@@ -67,11 +63,11 @@
                                             <constraint firstAttribute="width" constant="150" id="ol1-tl-iGS"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="enz-n5-D6G" firstAttribute="leading" secondItem="hZ0-fr-X6y" secondAttribute="trailing" constant="102" id="ABE-Zf-KJF"/>
                                     <constraint firstAttribute="bottom" secondItem="hZ0-fr-X6y" secondAttribute="bottom" id="IfO-OB-925"/>
@@ -97,7 +93,7 @@
                                             <constraint firstAttribute="width" constant="70" id="qoe-e5-qSh"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="20"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Wy-fs-7ac">
@@ -107,7 +103,7 @@
                                             <constraint firstAttribute="width" constant="48" id="J3f-nR-VuN"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h13-KN-bfw">
@@ -117,7 +113,7 @@
                                             <constraint firstAttribute="height" constant="21" id="Sc4-ai-7m7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="Rajdhani-Bold" family="Rajdhani" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="10" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCP-WX-pff">
@@ -128,12 +124,12 @@
                                         </constraints>
                                         <string key="text">cxzcxzcxc ac axc xzc xz cxz c zxc xz c xzczxc zxc zxc zx czx c xzc zx czx c zx czx c xz cxz c xzc u u u u u u  u u u  uuuu  d sg dsfg  et g df gsdf gdv t e sg d gd g dg df gdf g fdg df g dg df gfd g sd gfd g d gdf g fdg g  fdg df gd g dfg df gdf g dfg df g dfg df g dg d gd fg  ggd g dg d g dg sdf gsdf gd fg d gd sg ds g dfsg sfd g cxzcxzcxc ac axc xzc xz cxz c zxc xz c xzczxc zxc zxc zx czx c xzc zx czx c zx czx c xz cxz c xzc u u u u u u  u u u  uuuu  d sg dsfg  et g df gsdf gdv t e sg d gd g dg df gdf g fdg df g dg df gfd g sd gfd g d gdf g fdg g  fdg df gd g dfg df gdf g dfg df g dfg df g dg d gd fg  ggd g dg d g dg sdf gsdf gd fg d gd sg ds g dfsg sfd g cxzcxzcxc ac axc xzc xz cxz c zxc xz c xzczxc zxc zxc zx czx c xzc zx czx c zx czx c xz cxz c xzc u u u u u u  u u u  uuuu  d sg dsfg  et g df gsdf gdv t e sg d gd g dg df gdf g fdg df g dg df gfd g sd gfd g d gdf g fdg g  fdg df gd g dfg df gdf g dfg df g dfg df g dg d gd fg  ggd g dg d g dg sdf gsdf gd fg d gd sg ds g dfsg sfd g cxzcxzcxc ac axc xzc xz cxz c zxc xz c xzczxc zxc zxc zx czx c xzc zx czx c zx czx c xz cxz c xzc u u u u u u  u u u  uuuu  d sg dsfg  et g df gsdf gdv t e sg d gd g dg df gdf g fdg df g dg df gfd g sd gfd g d gdf g fdg g  fdg df gd g dfg df gdf g dfg df g dfg df g dg d gd fg  ggd g dg d g dg sdf gsdf gd fg d gd sg ds g dfsg sfd g </string>
                                         <fontDescription key="fontDescription" name="Rajdhani-Semibold" family="Rajdhani" pointSize="17"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.14999999999999999" colorSpace="calibratedRGB"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="fCP-WX-pff" firstAttribute="leading" secondItem="4Wy-fs-7ac" secondAttribute="trailing" constant="42" id="2H2-9l-wXh"/>
                                     <constraint firstItem="4Wy-fs-7ac" firstAttribute="leading" secondItem="Yj6-Uh-bdF" secondAttribute="leading" constant="13" id="DrN-25-48g"/>
@@ -179,8 +175,8 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
+            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="lbl_ball_ticker" destination="s19-YD-y13" id="aVQ-qe-dM6"/>
                 <outlet property="lbl_commentary" destination="fCP-WX-pff" id="Emx-93-FHs"/>

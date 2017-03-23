@@ -22,6 +22,7 @@
 #import "TossDetailRecord.h"
 #import "TossTeamDetailRecord.h"
 #import "InitializeInningsScoreBoardRecord.h"
+#import "PowerPlayRecord.h"
 
 @interface TossDetailsVC ()
 {
@@ -980,19 +981,26 @@
 
 //Power Play Code
 -(void) setPowerPlayForODIAndT20{
+    
+   NSMutableArray* PowerPlayData = [objDBManager fetchpowerplaytype];
+    
+    if(PowerPlayData.count > 0)
+    {
+
+        PowerPlayRecord * objPowerplayRecord =[PowerPlayData objectAtIndex:0];
     if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){ //T20
         
-        [self insertPowerPlay:@"1" endOver:@"6" powerPlayType:@"PPT0000001"];
+        [self insertPowerPlay:@"1" endOver:@"6" powerPlayType:objPowerplayRecord.powerplaytypecode];
         // [self startPowerPlayService:@"1" endOver:@"6" powerPlayType:@"PPT0000001"];
         
         
     }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){//ODI
-        [self insertPowerPlay:@"1" endOver:@"10" powerPlayType:@"PPT0000001"];
+        [self insertPowerPlay:@"1" endOver:@"10" powerPlayType:objPowerplayRecord.powerplaytypecode];
         // [self startPowerPlayService:@"1" endOver:@"10" powerPlayType:@"PPT0000001"];
         
         
     }
-    
+    }
     
     
 }

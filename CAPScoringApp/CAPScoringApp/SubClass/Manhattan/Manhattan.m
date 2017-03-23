@@ -158,8 +158,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
 
     
-    objinnings1Wicket = [self getwicket:self.compititionCode :self.matchCode:@"1"];
-    objinnings2wicket = [self getwicket:self.compititionCode :self.matchCode:@"2"];
+   // objinnings1Wicket = [self getwicket:self.compititionCode :self.matchCode:@"1"];
+   // objinnings2wicket = [self getwicket:self.compititionCode :self.matchCode:@"2"];
     
     int tag = 0;
     //Set tag for tool tip
