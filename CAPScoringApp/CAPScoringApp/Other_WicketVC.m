@@ -412,10 +412,23 @@ else
         }     }
 
     if([_WICKETTYPE isEqual:@"MSC107"]){
-        self.selectplayer_lbl.text= self.NONSTRIKERNAME;
-       WICKETPLAYER=self.NONSTRIKERCODE;
-
         
+        self.selectplayer_lbl.text= self.NONSTRIKERNAME;
+        WICKETPLAYER=self.NONSTRIKERCODE;
+        
+        for (int i=0; i< [GetWicketEventsPlayerDetails count] ; i++) {
+        
+            GetWicketEventsPlayerDetail *str =[GetWicketEventsPlayerDetails objectAtIndex:i];
+            if([str.WICKETPLAYER isEqualToString:self.NONSTRIKERNAME])
+            {
+                 self.selectplayer_lbl.text=@"";
+            }
+            else
+            {
+                self.selectplayer_lbl.text= self.NONSTRIKERNAME;
+                 WICKETPLAYER=self.NONSTRIKERCODE;
+            }
+        }
     }
     }
 
