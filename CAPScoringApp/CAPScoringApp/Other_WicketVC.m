@@ -489,6 +489,14 @@ else
         
         
     }
+    if([self.selectplayer_lbl.text isEqualToString:@""]){
+        [self showDialog:@"already exit this player" andTitle:@"Other Wickets"];
+        // errorMessage = [NSString stringWithFormat:@"%@%@",@"Please Select Player Name.\n",errorMessage];
+        flag = NO;
+        return flag;
+        
+        
+    }
 
     return flag;
 }

@@ -36,9 +36,18 @@
     // Do any additional setup after loading the view.
     
 
-  
-    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    if([defaults boolForKey:@"onlineSyn"])
+    {
+        [self.onlineenabledisable setOn:YES animated:YES];
+
     }
+   else
+    {
+        [self.onlineenabledisable setOn:NO animated:YES];
+
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -852,12 +861,12 @@
 -(IBAction)didClicksynenableanddisable:(id)sender
 {
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-
+    
     if([sender isOn]){
         NSLog(@"Switch is ON");
         
-        [self.btn_synenableanddisable setImage:[UIImage imageNamed:@"syn_disable_img"] forState:UIControlStateNormal];
-        self.btn_synenableanddisable.titleLabel.textColor =[UIColor colorWithRed:(204/255.0f) green:(204/255.0f) blue:(204/255.0f) alpha:(1.0)];
+       // [self.btn_synenableanddisable setImage:[UIImage imageNamed:@"syn_disable_img"] forState:UIControlStateNormal];
+        //self.btn_synenableanddisable.titleLabel.textColor =[UIColor colorWithRed:(204/255.0f) green:(204/255.0f) blue:(204/255.0f) alpha:(1.0)];
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"onlineSyn"];
         [delegate SynenableanddisbleMethod];
@@ -865,7 +874,7 @@
         NSLog(@"Switch is OFF");
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"onlineSyn"];
         
-        self.btn_synenableanddisable.titleLabel.textColor =[UIColor colorWithRed:(24/255.0f) green:(162/255.0f) blue:(84/255.0f) alpha:(1)];
+       // self.btn_synenableanddisable.titleLabel.textColor =[UIColor colorWithRed:(24/255.0f) green:(162/255.0f) blue:(84/255.0f) alpha:(1)];
         
         [delegate SynenableanddisbleMethod];
     }
