@@ -3684,8 +3684,8 @@
                                 [self reloadBowlerTeamBatsmanDetails];
                                 if(![fetchSEPageLoadRecord.ISOTHERSMATCHTYPE isEqual:@"MSC117"] && over >= [fetchSEPageLoadRecord.MATCHOVERS intValue] &&![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE])
                                 {
-                                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-                                    [altert show];
+//                                    UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Innings Completed " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//                                    [altert show];
                                     if((![MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.INNINGSNO.intValue ==2) ||([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE] && fetchSEPageLoadRecord.INNINGSNO.intValue ==4) )
                                     {
                                         [self MatchResult];
@@ -3891,9 +3891,11 @@
                 [self overEVENT];
             }
             
-        }if (alertView.tag == 3001) {
+        }
+        if (alertView.tag == 3001) {
             
-        }if (alertView.tag == 2002) {
+        }
+        if (alertView.tag == 2002) {
             
         }
         
