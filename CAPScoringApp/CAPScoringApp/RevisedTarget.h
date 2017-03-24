@@ -44,6 +44,9 @@
 @property(nonatomic,strong) NSString *competitionCode;
 @property(nonatomic,strong) NSString *teamCode;
 @property(nonatomic,strong) NSNumber *inningsno;
+@property(nonatomic,strong) NSNumber *currentOver;
+
+
 
 
 @end

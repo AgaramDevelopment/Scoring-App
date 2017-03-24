@@ -10010,6 +10010,7 @@
     revisedTarget.teamCode=fetchSEPageLoadRecord.BATTINGTEAMCODE;
     revisedTarget.inningsno=fetchSEPageLoadRecord.INNINGSNO;
     revisedTarget.matchTypeCode=self.matchTypeCode;
+    revisedTarget.currentOver = [NSNumber numberWithInteger: fetchSEPageLoadRecord.BATTEAMOVERS];
     
     revisedTarget.targetruns=  fetchSEPageLoadRecord.TARGETRUNS;
     revisedTarget.delegate=self;
