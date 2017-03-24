@@ -6728,6 +6728,7 @@
         self.view_aggressiveShot.hidden = YES;
         self.view_defensive.hidden = YES;
         [table_Appeal reloadData];
+        [_table_BatsmenName reloadData];
       
          if(isAppealSelected==NO){
         
@@ -8103,7 +8104,7 @@
             
         }else if(isAppealSelected && objAppealSystemEventRecord.AppealSystemMetaSubCodeDescription!=nil && AppealSystemSelectCode==objAppealSystemEventRecord.AppealSystemMetaSubCode){
             isAppealSelected = NO;
-            objAppealSystemEventRecord.AppealSystemMetaSubCodeDescription = nil;
+           // objAppealSystemEventRecord.AppealSystemMetaSubCodeDescription = nil;
                         [self unselectedViewBg:_view_appeal];
         
         }
@@ -9118,6 +9119,27 @@
             self.lbl_nonstricker_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.nonstrickerStrickRate floatValue]];
             self.lbl_nonstricker_fours.text = fetchSEPageLoadRecord.nonstrickerFours;
             
+            
+            // for appeal batsman list
+            NSString*Playerstickercode=fetchSEPageLoadRecord.strickerPlayerCode;
+            NSString*PlayerstickerName=fetchSEPageLoadRecord.strickerPlayerName;
+            NSString*Playernonstickercode=fetchSEPageLoadRecord.nonstrickerPlayerCode;
+            NSString*Playernonstickername=fetchSEPageLoadRecord.nonstrickerPlayerName;
+            
+            NSMutableDictionary *Dict1=[[NSMutableDictionary alloc]init];
+            [Dict1 setValue:Playerstickercode forKey:@"AppealBatsmenPlayerCode"];
+            [Dict1 setValue:PlayerstickerName forKey:@"AppealBatsmenPlayerName"];
+            
+            
+            NSMutableDictionary *Dict2=[[NSMutableDictionary alloc]init];
+            [Dict2 setValue:Playernonstickercode forKey:@"AppealBatsmenPlayerCode"];
+            [Dict2 setValue:Playernonstickername forKey:@"AppealBatsmenPlayerName"];
+            
+            
+            
+            AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:Dict1,Dict2 ,nil];
+
+            
         }else if(tableView == strickerTableView){
             SelectPlayerRecord *selectPlayer = [strickerList objectAtIndex:indexPath.row];
             //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
@@ -9151,6 +9173,27 @@
             self.lbl_stricker_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.strickerStrickRate floatValue]];
             self.lbl_stricker_fours.text = fetchSEPageLoadRecord.strickerFours;
             self.BatmenStyle = fetchSEPageLoadRecord.strickerBattingStyle;
+            
+            
+            // for appeal batsman list
+            NSString*Playerstickercode=fetchSEPageLoadRecord.strickerPlayerCode;
+            NSString*PlayerstickerName=fetchSEPageLoadRecord.strickerPlayerName;
+            NSString*Playernonstickercode=fetchSEPageLoadRecord.nonstrickerPlayerCode;
+            NSString*Playernonstickername=fetchSEPageLoadRecord.nonstrickerPlayerName;
+            
+            NSMutableDictionary *Dict1=[[NSMutableDictionary alloc]init];
+            [Dict1 setValue:Playerstickercode forKey:@"AppealBatsmenPlayerCode"];
+            [Dict1 setValue:PlayerstickerName forKey:@"AppealBatsmenPlayerName"];
+            
+            
+            NSMutableDictionary *Dict2=[[NSMutableDictionary alloc]init];
+            [Dict2 setValue:Playernonstickercode forKey:@"AppealBatsmenPlayerCode"];
+            [Dict2 setValue:Playernonstickername forKey:@"AppealBatsmenPlayerName"];
+            
+            
+            
+            AppealBatsmenArray=[[NSMutableArray alloc]initWithObjects:Dict1,Dict2 ,nil];
+
         }
         
     }
@@ -10780,6 +10823,8 @@
     }
     
     
+    
+    
     if([fetchSEPageLoadRecord INNINGSNO].intValue>1){
         
         if([MuliteDayMatchtype containsObject:fetchSEPageLoadRecord.MATCHTYPE]){//Multi day
@@ -10902,7 +10947,8 @@
         
     }
     
-}
+    
+   }
 - (IBAction)btn_swap:(id)sender {
     //InitializeInningsScoreBoardRecord *initializeInningsScoreBoardRecord = [[InitializeInningsScoreBoardRecord alloc]init];
     
