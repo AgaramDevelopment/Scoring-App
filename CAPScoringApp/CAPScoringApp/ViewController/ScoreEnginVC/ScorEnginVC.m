@@ -2948,14 +2948,16 @@
         }
         else {
             
+            NSString * strickername = self.lbl_stricker_name.text;
+            NSString * nonStrickname = self.lbl_nonstricker_name.text;
             
-            if([self.lbl_stricker_name.text isEqualToString:@""] )
+            if([strickername isEqualToString:@""] || strickername== nil)
             {
                 UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select Striker " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [altert show];
                 [altert setTag:2007];
             }
-            else if ([self.lbl_nonstricker_name.text isEqualToString:@""])
+            else if ([nonStrickname isEqualToString:@""] || nonStrickname == nil)
             {
                 UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Select nonStricker " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
                 [altert show];
@@ -3469,7 +3471,8 @@
             UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Please select Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             [alter setTag:10002];
-        }else if(fetchSEPageLoadRecord.nonstrickerPlayerName==nil){
+        }
+        else if(fetchSEPageLoadRecord.nonstrickerPlayerName==nil){
             UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Please select non Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             [alter setTag:10003];
@@ -14724,7 +14727,7 @@
             
             NSMutableArray*PenalitydetailsGetArray= [objPushSyncDBMANAGER RetrievePENALTYDETAILSData:_competitionCode :_matchCode];
             
-            NSMutableArray*CapTransactionLogEntryGetArray= [objPushSyncDBMANAGER RetrieveCAPTRANSACTIONSLOGENTRYData:_competitionCode :_matchCode];
+           // NSMutableArray*CapTransactionLogEntryGetArray= [objPushSyncDBMANAGER RetrieveCAPTRANSACTIONSLOGENTRYData:_competitionCode :_matchCode];
             
             NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
             [PushDict setValue :MatchRegistrationGetArray forKey:@"MatchRegistration"];
@@ -14769,7 +14772,7 @@
             
             [PushDict setValue:PenalitydetailsGetArray forKey:@"Penalitydetails"];
             
-            [PushDict setValue:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
+           // [PushDict setValue:CapTransactionLogEntryGetArray forKey:@"CapTransactionLogEntry"];
             
             NSData *jsonData = [NSJSONSerialization dataWithJSONObject:PushDict options:kNilOptions error:nil];
             NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
@@ -15032,19 +15035,7 @@
 
 -(BOOL) checkValidation {
     
-    if (self.ballEventRecord.objWWREGION == @"" &&
-        self.ballEventRecord.objRuns.intValue > 0 &&
-        self.ballEventRecord.objByes.intValue == 0 &&
-        self.ballEventRecord.objLegByes.intValue == 0 &&
-        self.ballEventRecord.objWide.intValue == 0)
-    {
-        
-        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Wagon Wheel Point is not Selected.\n Do you want to continue ?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
-        [altert setTag:3000];
-        [altert show];
-        
-        return NO;
-    }else if(isDefensiveSelected && self.ballEventRecord.objShottype == nil){
+     if(isDefensiveSelected && self.ballEventRecord.objShottype == nil){
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Please complete defensive option." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
         [alter setTag:3002];
@@ -15079,10 +15070,23 @@
         [alter show];
         [alter setTag:10002];
         return NO;
-    }else if(fetchSEPageLoadRecord.nonstrickerPlayerName==nil){
+    }
+    else if(fetchSEPageLoadRecord.nonstrickerPlayerName==nil){
         UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Please select non Striker" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alter show];
         [alter setTag:10003];
+        return NO;
+    }else if (self.ballEventRecord.objWWREGION == @"" &&
+              self.ballEventRecord.objRuns.intValue > 0 &&
+              self.ballEventRecord.objByes.intValue == 0 &&
+              self.ballEventRecord.objLegByes.intValue == 0 &&
+              self.ballEventRecord.objWide.intValue == 0)
+    {
+        
+        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Wagon Wheel Point is not Selected.\n Do you want to continue ?" delegate:self cancelButtonTitle:@"Yes" otherButtonTitles:@"No", nil];
+        [altert setTag:3000];
+        [altert show];
+        
         return NO;
     }
     

@@ -13,7 +13,7 @@
 #import "CaptransactionslogEntryRecord.h"
 #import "Utitliy.h"
 #import "Reachability.h"
-
+//#import "IOKitLib.h"
 
 @interface AppDelegate ()
 {
@@ -107,11 +107,27 @@
 -(NSString *)getUniqueDeviceIdentifierAsString
 {
     
-    NSUUID *myDevice = [NSUUID UUID];
-    NSString *deviceUDID = myDevice.UUIDString;
+//    NSString *serial = nil;
+//    io_service_t platformExpert = IOServiceGetMatchingService(kIOMasterPortDefault,
+//                                                              IOServiceMatching("IOPlatformExpertDevice"));
+//    if (platformExpert) {
+//        CFTypeRef serialNumberAsCFString =
+//        IORegistryEntryCreateCFProperty(platformExpert,
+//                                        CFSTR(kIOPlatformSerialNumberKey),
+//                                        kCFAllocatorDefault, 0);
+//        if (serialNumberAsCFString) {
+//            serial = CFBridgingRelease(serialNumberAsCFString);
+//        }
+//        
+//        IOObjectRelease(platformExpert);
+//    }
+//    return serial;
+    
+    //NSUUID *myDevice = [NSUUID UUID];
+    //NSString *deviceUDID = myDevice.UUIDString;
 
-   // NSString* Identifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString]; // IOS 6+
-    return deviceUDID;
+    NSString* Identifier = [[[UIDevice currentDevice] identifierForVendor] UUIDString]; // IOS 6+
+    return Identifier;
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

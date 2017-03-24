@@ -448,6 +448,7 @@
 		04960F601DE9676D00B23DA5 /* PlayerWormChartVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerWormChartVC.h; path = "ViewController/Playerworm chart/PlayerWormChartVC.h"; sourceTree = "<group>"; };
 		04960F611DE9676D00B23DA5 /* PlayerWormChartVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerWormChartVC.m; path = "ViewController/Playerworm chart/PlayerWormChartVC.m"; sourceTree = "<group>"; };
 		04960F621DE9676D00B23DA5 /* PlayerWormChartVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerWormChartVC.xib; path = "ViewController/Playerworm chart/PlayerWormChartVC.xib"; sourceTree = "<group>"; };
+		04A270791E852FF60040895B /* libTelephonyIOKitDynamic.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libTelephonyIOKitDynamic.tbd; path = usr/lib/libTelephonyIOKitDynamic.tbd; sourceTree = SDKROOT; };
 		04C325831D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FETCHSELASTINSTANCEDTLS.h; sourceTree = "<group>"; };
 		04C325841D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FETCHSELASTINSTANCEDTLS.m; sourceTree = "<group>"; };
 		04C325861D6320E500F0E3A0 /* DBManagerLastInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerLastInstance.h; sourceTree = "<group>"; };
@@ -1094,6 +1095,14 @@
 				187625041D154495009374F8 /* RevicedOverVC.xib */,
 			);
 			name = RevicedOver;
+			sourceTree = "<group>";
+		};
+		04A270781E852FF60040895B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				04A270791E852FF60040895B /* libTelephonyIOKitDynamic.tbd */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		04C325821D631FA300F0E3A0 /* Last Instance */ = {
@@ -1886,6 +1895,7 @@
 				CE0018171CF42FA500668D8B /* CAPScoringAppTests */,
 				CE0018221CF42FA500668D8B /* CAPScoringAppUITests */,
 				CE0017FC1CF42FA500668D8B /* Products */,
+				04A270781E852FF60040895B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2519,7 +2529,7 @@
 					CE0017FA1CF42FA500668D8B = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = L5S8VPA4A5;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 					};
 					CE0018131CF42FA500668D8B = {
 						CreatedOnToolsVersion = 7.3;
@@ -3065,17 +3075,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Annamalai T (L5S8VPA4A5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Annamalai T (G4BPEMU9A9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Annamalai T (G4BPEMU9A9)";
+				DEVELOPMENT_TEAM = L5S8VPA4A5;
 				INFOPLIST_FILE = CAPScoringApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.agaraminfotech.CAPScoringApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f45691e5-4fea-4dda-9a4b-6e09c29ae625";
+				PROVISIONING_PROFILE_SPECIFIER = newCapProvision;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -3084,17 +3094,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Annamalai T (L5S8VPA4A5)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Annamalai T (G4BPEMU9A9)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Annamalai T (G4BPEMU9A9)";
+				DEVELOPMENT_TEAM = L5S8VPA4A5;
 				INFOPLIST_FILE = CAPScoringApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.agaraminfotech.CAPScoringApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "f45691e5-4fea-4dda-9a4b-6e09c29ae625";
+				PROVISIONING_PROFILE_SPECIFIER = newCapProvision;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;
