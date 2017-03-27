@@ -296,7 +296,7 @@
         LiveMatchCell *cell = (LiveMatchCell *)[tableView dequeueReusableCellWithIdentifier:LiveMatch];
         if (cell == nil) {
             [[NSBundle mainBundle] loadNibNamed:@"LiveMatchCell" owner:self options:nil];
-            cell = self.resultmatchCell;
+            cell = self.livematchCell;
             //self.batsManHeaderCell = nil;
         }
         [cell setBackgroundColor:[UIColor clearColor]];
