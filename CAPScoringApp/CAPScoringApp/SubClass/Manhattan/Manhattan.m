@@ -91,8 +91,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     ToolTipDetails =[[NSMutableArray alloc]init];
     
     
-    objRunArray = [self getChartDetail:self.matchTypecode :self.compititionCode :self.matchCode:@"1"];
-    objInnings2RunArray = [self getChartDetail:self.matchTypecode :self.compititionCode :self.matchCode:@"2"];
+    objRunArray = [self getChartDetail :self.matchTypecode :self.compititionCode :self.matchCode:@"1"];
+    objInnings2RunArray = [self getChartDetail :self.matchTypecode :self.compititionCode :self.matchCode:@"2"];
     
 
     
@@ -158,8 +158,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
 
     
-   // objinnings1Wicket = [self getwicket:self.compititionCode :self.matchCode:@"1"];
-   // objinnings2wicket = [self getwicket:self.compititionCode :self.matchCode:@"2"];
+    objinnings1Wicket = [self getwicket :self.compititionCode :self.matchCode:@"1"];
+    objinnings2wicket = [self getwicket :self.compititionCode :self.matchCode:@"2"];
     
     int tag = 0;
     //Set tag for tool tip
@@ -830,16 +830,17 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 - (NSString *)barChartView:(MCBarChartView *)barChartView titleOfBarInSection:(NSInteger)section {
     
     if (barChartView ==  self.BarChartView) {
-        return _titles_1[section];
+        if(_titles_1.count > section)
+        {
+          return _titles_1[section];
+        }
     } else if (barChartView == self.barChartView_2){
         return _titles_3[section];
     }
     return nil;
     
 }
-//- (NSString *)barChartView:(MCBarChartView *)barChartView titleOfBarInSection:(NSInteger)section {
-//    return _titles_1[section];
-//}
+
 - (NSString *)barChartView:(MCBarChartView *)barChartView informationOfBarInSection:(NSInteger)section index:(NSInteger)index {
 
     return nil;

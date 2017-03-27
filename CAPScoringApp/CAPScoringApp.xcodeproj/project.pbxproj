@@ -3084,8 +3084,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.agaraminfotech.CAPScoringApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f45691e5-4fea-4dda-9a4b-6e09c29ae625";
-				PROVISIONING_PROFILE_SPECIFIER = newCapProvision;
+				PROVISIONING_PROFILE = "b0cb9b0d-f5dc-4ddc-a7e9-f4584d31687e";
+				PROVISIONING_PROFILE_SPECIFIER = AgramCapProvisionProfile;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Debug;
@@ -3103,8 +3103,8 @@
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = com.agaraminfotech.CAPScoringApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f45691e5-4fea-4dda-9a4b-6e09c29ae625";
-				PROVISIONING_PROFILE_SPECIFIER = newCapProvision;
+				PROVISIONING_PROFILE = "b0cb9b0d-f5dc-4ddc-a7e9-f4584d31687e";
+				PROVISIONING_PROFILE_SPECIFIER = AgramCapProvisionProfile;
 				TARGETED_DEVICE_FAMILY = 2;
 			};
 			name = Release;

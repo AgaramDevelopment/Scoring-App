@@ -87,7 +87,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return @"";
 }
 
--(NSString*) GetDayNoForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
+/*-(NSString*) GetDayNoForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
 {
 
     NSString *databasePath =[self getDBPath];
@@ -120,7 +120,43 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return @"";
     
 }
+*/
 
+-(NSString*) GetDayNoForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
+{
+    //@synchronized ([Utitliy syncId]) {
+        NSString *databasePath =[self getDBPath];
+        sqlite3 *dataBase;
+        sqlite3_stmt *statement;
+        
+        const char *dbPath = [databasePath UTF8String];
+        
+        if (sqlite3_open(dbPath, &dataBase)==SQLITE_OK) {
+            NSString *query=[NSString stringWithFormat:@"SELECT DAYNO AS DAYNO FROM DAYEVENTS WHERE COMPETITIONCODE='%@'AND MATCHCODE='%@'",COMPETITIONCODE,MATCHCODE];
+            const char *update_stmt  =[query UTF8String];
+            //if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+            
+            if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    
+                    NSString *getDayNo= [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return getDayNo;
+                    
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                
+            }
+            sqlite3_close(dataBase);
+        }
+        
+        return @"";
+    //}
+}
 
 -(NSString*) GetMaxDayNoForInsertEndInnings:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
     

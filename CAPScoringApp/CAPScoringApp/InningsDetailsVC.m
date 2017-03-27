@@ -452,7 +452,7 @@
             
             
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-            NSString *username=[defaults stringForKey :@"UserFullname"];
+            NSString *username=[defaults stringForKey :@"userCode"];
             
             NSString *maxid= [objDBManager getMAXIDPOWERPLAY];
             
