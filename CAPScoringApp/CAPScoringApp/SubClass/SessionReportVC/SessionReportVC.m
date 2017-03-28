@@ -12,7 +12,7 @@
 #import "SKSTableView.h"
 #import "SKSTableViewCell.h"
 #import "SessionReportCell.h"
-
+#import "Utitliy.h"
 
 
 
@@ -369,6 +369,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSMutableArray *)getSession:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * getSessiondetail=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -410,8 +411,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return getSessiondetail;
-    
-
+    }
 }
 
 @end

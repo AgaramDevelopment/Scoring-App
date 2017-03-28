@@ -55,7 +55,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 -(NSString *) fetchMaxInnsNo:(NSString*) MATCHCODE{
-    
+    @synchronized ([Utitliy syncId])  {
     NSString *count = @"0";
     NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
@@ -83,11 +83,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return count;
+    }
     
 }
 
 -(NSString *) FetchMinBatNo:(NSString*) MATCHCODE :(NSInteger )ICOUNT{
     
+    @synchronized ([Utitliy syncId])  {
     NSString *count = [[NSString alloc]init];
     NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
@@ -115,11 +117,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return count;
-    
+    }
 }
 
 -(NSString *) FetchTeamCode:(NSString*)COMPETITIONCODE : (NSString*) MATCHCODE :(NSInteger )ICOUNT{
     
+    @synchronized ([Utitliy syncId])  {
     NSString *count = [[NSString alloc]init];
     NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
@@ -147,11 +150,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return count;
-    
+    }
 }
 
 -(NSString *) FetchTeamCount:(NSString*)TEAMCODE : (NSString*) MATCHCODE{
     
+    @synchronized ([Utitliy syncId])  {
     NSString *count = [[NSString alloc]init];
     NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
@@ -179,12 +183,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return count;
-    
+    }
 }
 
 
 -(NSString *) FetchStrikerCode:(NSString*)MATCHCODE : (NSInteger ) ICOUNT : (NSInteger) LOOPCOUNT{
     
+    @synchronized ([Utitliy syncId])  {
     NSString *count = [[NSString alloc]init];
     NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
@@ -214,13 +219,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return count;
     
 }
-
+}
 
 
 
 
 -(NSMutableArray *) fetchMinAndMaxOver:(NSString*) COMPETITIONCODE : (NSString*)MATCHCODE :(NSInteger ) ICOUNT : (NSString*) STRIKERCODE
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray *InningsArray=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -253,11 +259,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return InningsArray;
 }
-
+}
 
 
 -(NSMutableArray *) fetchMinAndMaxOverNotEqual:(NSString*) COMPETITIONCODE : (NSString*)MATCHCODE :(NSInteger ) ICOUNT : (NSString*) STRIKERCODE
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray *InningsArray=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -290,10 +297,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return InningsArray;
 }
+}
 
 
 -(NSString *) FetchMinBall:(NSString*) COMPETITIONCODE : (NSString*) MATCHCODE :(NSInteger ) ICOUNT : (NSString*) STRIKERCODE : (NSString *) MINOVERSTRIKER{
     
+ @synchronized ([Utitliy syncId])  {
     NSString *count = [[NSString alloc]init];
     NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
@@ -321,11 +330,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return count;
-    
+ }
 }
 
 -(NSString *) FetchMinBallEquals:(NSString*) COMPETITIONCODE : (NSString*)MATCHCODE :(NSInteger ) ICOUNT : (NSString*) STRIKERCODE : (NSString *) MINOVERSTRIKER{
-    
+ @synchronized ([Utitliy syncId])  {
     NSString *count = [[NSString alloc]init];
     NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
@@ -353,12 +362,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return count;
-    
+ }
 }
 
 
 -(NSString *) FetchMaxBall :(NSString*) COMPETITIONCODE : (NSString*)MATCHCODE :(NSInteger ) ICOUNT : (NSString*) STRIKERCODE : (NSString *) MAXOVERSTRIKER{
-    
+  @synchronized ([Utitliy syncId])  {
     NSString *count = [[NSString alloc]init];
     NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
@@ -386,12 +395,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return count;
-    
+  }
 }
 
 
 -(NSString *) FetchMaxBallEquals:(NSString*) COMPETITIONCODE : (NSString*)MATCHCODE :(NSInteger ) ICOUNT : (NSString*) STRIKERCODE : (NSString *) MAXOVERSTRIKER{
-    
+ @synchronized ([Utitliy syncId])  {
     NSString *count = [[NSString alloc]init];
     NSString *dbPath = [self getDBPath];
     sqlite3 *dataBase;
@@ -421,12 +430,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return count;
     
 }
+}
 
 
 
 
 -(NSMutableArray *) fetchPlayerWormdetails:(NSString*) COMPETITIONCODE : (NSString*)MATCHCODE :(NSString *) STRIKERCODE
 {
+    
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray *InningsArray=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -496,9 +508,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return InningsArray;
 }
-
-
-
-
+}
 
 @end

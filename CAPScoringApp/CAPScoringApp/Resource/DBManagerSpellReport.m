@@ -9,7 +9,7 @@
 #import "DBManagerSpellReport.h"
 #import <sqlite3.h>
 #import "SpellReportRecord.h"
-
+#import "Utitliy.h"
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
@@ -59,6 +59,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSMutableArray *)getSpellReportDetail:(NSString *) COMPETITIONCODE :(NSString *) MATCHCODE:(NSString *)TEAMCODE:(NSString *) INNINGSNO
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * FFactordetail=[[NSMutableArray alloc]init];
     
     NSString *dbPath = [self getDBPath];
@@ -131,6 +132,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
     }
     return FFactordetail;
-
+    }
 }
 @end

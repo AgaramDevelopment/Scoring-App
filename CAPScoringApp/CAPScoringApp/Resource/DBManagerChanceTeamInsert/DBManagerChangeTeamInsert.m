@@ -8,6 +8,9 @@
 #import "PushSyncDBMANAGER.h"
 #import "DBManagerChangeTeamInsert.h"
 #import <sqlite3.h>
+#import "Utitliy.h"
+
+
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 @implementation DBManagerChangeTeamInsert
 
@@ -44,6 +47,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 
 -(BOOL) SetBallCodeForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*) CURRENTBATTINGTEAM:(NSNumber*) CURRENTINNINGSNO{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -66,10 +70,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 
 -(BOOL) SetBallCodeForInsertChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) CURRENTINNINGSNO{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -92,10 +98,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 
 -(BOOL) DeleteInningsBreaksEventsForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -123,9 +131,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeleteBallEventsForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -154,9 +164,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeleteBattingSummaryForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -185,9 +197,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeleteOverEventsForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -216,9 +230,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeleteBowlingSummaryForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -248,9 +264,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeleteBowlingMaidenSummaryForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -280,9 +298,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeleteBowlerOverDetailsForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -310,9 +330,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeleteFieldingEventsForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -341,9 +363,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeleteDayEventsForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -372,9 +396,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeleteSessionEventsForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -404,9 +430,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeleteAppealEventsForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -436,9 +464,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeleteWicketEventsForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -468,9 +498,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeletePowerplayForChangeTeam:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -500,9 +532,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeletePlayerInOutTimeForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -533,9 +567,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     
     return NO;
+	}
 }
 
 -(BOOL) DeletePenaltyDetailsForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -565,9 +601,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     
     return NO;
+	}
 }
 
 -(BOOL) DeleteMatchEventsForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -595,9 +633,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+	}
 }
 
 -(BOOL) DeleteInningsSummaryForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -628,9 +668,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     
     return NO;
+	}
 }
 
 -(BOOL) DeleteInningsEventsForChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -660,9 +702,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     
     return NO;
+	}
 }
 
 -(BOOL) UpadateInningsEventsForChangeTeam:(NSString *) STRIKER:(NSString *) NONSTRIKERCODE:(NSString*) BOWLERCODE:(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE:(NSString *) BATTINGTEAMCODE:(NSNumber *) INNINGSNO{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -691,9 +735,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     
     return NO;
+	}
 }
 
 -(BOOL) DeleteInningsEventsForInsertChangeTeam:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSNumber*) INNINGSNO{
+@synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -723,5 +769,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     
     return NO;
+	}
 }
 @end

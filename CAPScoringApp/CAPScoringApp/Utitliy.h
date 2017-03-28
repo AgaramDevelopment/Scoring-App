@@ -13,7 +13,7 @@
 +(NSString *)getSyncIPPORT;
 +(NSString *) SecureId;
 //+(NSString *) getPitchMapAxis :(NSNumber*) pmX ;
-
++ (NSString *)syncId;
 
 +(NSNumber *) getPitchMapXAxisForDevice:(NSNumber*) pmX ;
 +(NSNumber *) getPitchMapYAxisForDevice:(NSNumber*) pmY;

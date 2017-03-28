@@ -12,5 +12,8 @@
 -(NSMutableArray *) GetCaptransactionslogentry;
 -(BOOL)updateCaptransactionslogentry:(NSString*)SCRIPTSTATUS matchCode:(NSString*) matchCode SEQNO:(NSString*)SEQNO;
 -(NSMutableArray *) deactivateCaptransactionslogentry;
+
 -(NSMutableArray *) deactivateCaptransactionsLogEntryByMatchCode : (NSString *) matchCode;
+-(BOOL) deactivateCaptransactionslogentry:(NSString*)SEQNO;
+
 @end

@@ -12,6 +12,7 @@
 #import "MCBarChartView.h"
 #import "ManhattenWKTRecord.h"
 #import "ToolTipRecord.h"
+#import "Utitliy.h"
 
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
@@ -669,6 +670,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSMutableArray *)getChartDetail:(NSString *) MatchTypecode:(NSString *) compititionCode :(NSString *) matchcode:(NSString *)inningsno
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * getManhattendetail=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -710,10 +712,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return getManhattendetail;
+    }
 }
 
 -(NSMutableArray *)getwicket:(NSString *)compitioncode :(NSString *) matchcode:(NSString *)inningsno
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * getWicketdetail=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -759,7 +763,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return getWicketdetail;
-
+    }
 }
 
 
@@ -768,7 +772,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     
     if (barChartView == self.BarChartView) {
-        return [com2array count];
+        return [objOverArray count];
     }
     
     
@@ -830,10 +834,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 - (NSString *)barChartView:(MCBarChartView *)barChartView titleOfBarInSection:(NSInteger)section {
     
     if (barChartView ==  self.BarChartView) {
-        if(_titles_1.count > section)
-        {
+        
           return _titles_1[section];
-        }
+        
     } else if (barChartView == self.barChartView_2){
         return _titles_3[section];
     }
@@ -883,6 +886,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSMutableArray *) getToolTip :(NSString *) compitioncode :(NSString *) matchcode
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * getTooltipdetail=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -929,6 +933,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return getTooltipdetail;
+    }
 
 }
 

@@ -11,6 +11,7 @@
 #import "FFactorRecord.h"
 #import "FFactoredRecord.h"
 #import "FFactorDetailRecord.h"
+#import "Utitliy.h"
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
@@ -59,6 +60,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSMutableArray *)GETFIELDINGFACTORCODE
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * FFactore=[[NSMutableArray alloc]init];
     
     NSString *dbPath = [self getDBPath];
@@ -94,10 +96,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return FFactore;
 }
+}
 
 
 -(NSMutableArray *) GETFIELDERCODE:(NSString *) COMPETITIONCODE :(NSString *) MATCHCODE :(NSString *)TEAMCODE :(NSString *) INNINGSNO
 {
+    
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * FFactored=[[NSMutableArray alloc]init];
 
     
@@ -131,10 +136,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
     }
     return FFactored;
+    }
 }
 
--(NSMutableArray *) getFieldingdetails:(NSString *) COMPETITIONCODE :(NSString *) MATCHCODE :(NSString *)TEAMCODE :(NSString *) INNINGSNO :(NSString *) FIELDINGFACTORCODE 
+-(NSMutableArray *) getFieldingdetails:(NSString *) COMPETITIONCODE :(NSString *) MATCHCODE :(NSString *)TEAMCODE :(NSString *) INNINGSNO :(NSString *) FIELDINGFACTORCODE
 {
+    
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * FFactordetail=[[NSMutableArray alloc]init];
     
     NSString *dbPath = [self getDBPath];
@@ -178,5 +186,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         
     }
     return FFactordetail;
+    }
 }
 @end

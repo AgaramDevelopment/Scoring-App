@@ -13,7 +13,7 @@
 #import "CaptransactionslogEntryRecord.h"
 #import "Utitliy.h"
 #import "Reachability.h"
-//#import "IOKitLib.h"
+
 
 @interface AppDelegate ()
 {
@@ -248,151 +248,140 @@
 -(void)methodRunAfterBackground
 {
     
- //   return ;
-    
-
-     NSLog(@"background process method");
-    if(IsTimer == YES)
     {
-//        DBManagerCaptransactionslogEntry *objCaptransactions = [[DBManagerCaptransactionslogEntry alloc]init];
-//        NSMutableArray *objCaptransactionArray=[[NSMutableArray alloc]init];
-//        objCaptransactionArray= [objCaptransactions GetCaptransactionslogentry];
-//        if(objCaptransactionArray.count > 0)
-//        {
-//            NSString *baseURL = [NSString stringWithFormat:@"http://%@/CAPMobilityService.svc/GETACTIVECOMPETITION/%@",[Utitliy getSyncIPPORT],[Utitliy SecureId]];
-//            NSURL *url = [NSURL URLWithString:[baseURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-//            NSURLRequest *request = [NSURLRequest requestWithURL:url];
-//            NSURLResponse *response;
-//            NSError *error;
-//            
-//            NSData *responseData =[NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-//            if (responseData != nil) {
-////                //DBMANAGERSYNC *objDBMANAGERSYNC = [[DBMANAGERSYNC alloc]init];
-//                NSDictionary *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-//                
-//                if([serviceResponse objectForKey:@"Success"])
-//                {
-//                    for(int i=0; objCaptransactionArray.count >i; i++)
-//                    {
-//                        CaptransactionslogEntryRecord * objRecord =[objCaptransactionArray objectAtIndex:i];
-//                        NSString * objmatchcode= objRecord.MATCHCODE;
-//                        NSString * objSeqno = objRecord.SEQNO;
-//                        [objCaptransactions updateCaptransactionslogentry:@"MSC248" matchCode:objmatchcode SEQNO:objSeqno];
-//                    }
-//                }
-//            }
-//                else
-//                {
-//                    
-//                }
-////                NSMutableArray *checkErrorItem=[serviceResponse objectForKey:@"lstErrorItem"];
-////                
-////                NSDictionary * ErrorNoDict =[checkErrorItem objectAtIndex:0];
-////                
-////                NSString *ErrorNoStr=[ErrorNoDict valueForKey:@"SUCCESS"];
-////                NSString *message=[ErrorNoDict valueForKey:@"DataItem"];
-//                
-////                if ([ErrorNoStr isEqualToString:CompareErrorno]) {
-////                }
-//            }
+        
+        //   return ;
         
         
-        
-        //-----------------------------------
-        if(self.checkInternetConnection && !isBackGroundTaskRunning){
-            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-
+        NSLog(@"background process method");
+        if(IsTimer == YES)
+        {
             
-             if([defaults boolForKey:@"isUserLoggedin"])
-             {
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-
-                    DBManagerCaptransactionslogEntry *objCaptransactions = [[DBManagerCaptransactionslogEntry alloc]init];
-                    NSMutableArray *DBManagerCaptransactionslogEntryArray=[objCaptransactions GetCaptransactionslogentry];
-                    
-                    if([DBManagerCaptransactionslogEntryArray count]>0){
-                    isBackGroundTaskRunning = YES;
+            //-----------------------------------
+            if(self.checkInternetConnection && !isBackGroundTaskRunning){
+                NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
                 
-                NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
-                [PushDict setValue :DBManagerCaptransactionslogEntryArray forKey:@"ScriptData"];
                 
-                NSData *jsonData = [NSJSONSerialization dataWithJSONObject:PushDict options:kNilOptions error:nil];
-                NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-               // NSLog(@"JSON String: %@",jsonString);
-                 NSLog(@"BG Start Service Called");
-                NSData* responseData = [NSMutableData data];
-                NSString *urlString = [NSString stringWithFormat: @"http://%@/CAPMobilityService.svc/ONLINEPUSHDATA",[Utitliy getSyncIPPORT]];
-                NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
-                NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
-                
-                [request setHTTPMethod:@"POST"];
-                [request setHTTPBody:jsonData];
-                [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
-                [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-                [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField : @"Content-Length"];
-                
-                NSURLResponse* response;
-                NSError* error = nil;
-                responseData = [NSURLConnection sendSynchronousRequest:request     returningResponse:&response error:&error];
-                if (responseData != nil) {
-                    NSMutableArray *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
-                    NSDictionary  *responseDict = [serviceResponse objectAtIndex:0];
-                    NSString *ErrorNoStr =[responseDict objectForKey:@"ErrorNo"];
-                    
-                    NSString *CompareErrorno=@"MOB0005";
-                    
-                    if([ErrorNoStr isEqualToString:@"MOB0005"]){
-                        [objCaptransactions deactivateCaptransactionslogentry];
-                    }
-                    NSLog(@"BG end Service Called");
-                    
-                   // if ([ErrorNoStr isEqualToString:CompareErrorno]) {
-//
-//                        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"SYNC DATA COMPLETED. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                        [altert show];
-//                        [altert setTag:10405];
-//                        
-//                    }else{
-//                        UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"SYNC DATA FAILED. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//                        [altert show];
-//                        [altert setTag:10406];
-//                    }
+                if([defaults boolForKey:@"isUserLoggedin"])
+                {
+                    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                            
+                            DBManagerCaptransactionslogEntry * objCaptransactions = [[DBManagerCaptransactionslogEntry alloc]init];
+                            NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+                            
+                            NSString *pendingSequenceNo =[defaults objectForKey:@"seqNo"];
+                            
+                            NSLog(@"pendingSequenceNo= %@",pendingSequenceNo);
+                            
+                            if(![pendingSequenceNo isEqualToString:@""] && ![pendingSequenceNo isEqualToString:@"(null)"] ){
+                                
+                                BOOL result =  [objCaptransactions deactivateCaptransactionslogentry :pendingSequenceNo];
+                                
+                                if(result){
+                                    [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"seqNo"];
+                                }else{
+                                    [[NSUserDefaults standardUserDefaults] setObject:pendingSequenceNo forKey:@"seqNo"];
+                                }
+                                
+                            }else{
+                                
+                                
+                                
+                                
+                                NSMutableArray *DBManagerCaptransactionslogEntryArray=[objCaptransactions GetCaptransactionslogentry];
+                                
+                                if([DBManagerCaptransactionslogEntryArray count]>0){
+                                    IsTimer = NO;
+                                    isBackGroundTaskRunning = YES;
+                                    
+                                    NSMutableDictionary *PushDict =[[NSMutableDictionary alloc]init];
+                                    [PushDict setValue :DBManagerCaptransactionslogEntryArray forKey:@"ScriptData"];
+                                    
+                                    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:PushDict options:kNilOptions error:nil];
+                                    NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+                                    // NSLog(@"JSON String: %@",jsonString);
+                                    NSLog(@"BG Start Service Called");
+                                    NSData* responseData = [NSMutableData data];
+                                    NSString *urlString = [NSString stringWithFormat: @"http://%@/CAPMobilityService.svc/ONLINEPUSHDATA",[Utitliy getSyncIPPORT]];
+                                    NSURL *url=[NSURL URLWithString:[urlString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+                                    NSMutableURLRequest *request=[NSMutableURLRequest requestWithURL:url];
+                                    
+                                    [request setHTTPMethod:@"POST"];
+                                    [request setHTTPBody:jsonData];
+                                    [request setValue:@"application/json" forHTTPHeaderField:@"Accept"];
+                                    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+                                    [request setValue:[NSString stringWithFormat:@"%d", [jsonData length]] forHTTPHeaderField : @"Content-Length"];
+                                    
+                                    NSURLResponse* response;
+                                    NSError* error = nil;
+                                    responseData = [NSURLConnection sendSynchronousRequest:request     returningResponse:&response error:&error];
+                                    if (responseData != nil) {
+                                        NSLog(@"NSMutableArray B");
+                                        NSMutableArray *serviceResponse=[NSJSONSerialization JSONObjectWithData:responseData options:NSJSONReadingMutableContainers error:&error];
+                                        NSLog(@"NSMutableArray A");
+                                        NSDictionary  *responseDict = [serviceResponse objectAtIndex:0];
+                                        NSString *ErrorNoStr =[responseDict objectForKey:@"ErrorNo"];
+                                        
+                                        NSString *CompareErrorno=@"MOB0005";
+                                        
+                                        if([ErrorNoStr isEqualToString:@"MOB0005"]){
+                                            NSString *seqNo =[responseDict objectForKey:@"SeqNo"];
+                                            
+                                            NSLog(@"SeqNo %@",seqNo);
+                                            BOOL result =  [objCaptransactions deactivateCaptransactionslogentry :seqNo];
+                                            
+                                            if(result){
+                                                [[NSUserDefaults standardUserDefaults] setObject:@"" forKey:@"seqNo"];
+                                            }else{
+                                                [[NSUserDefaults standardUserDefaults] setObject:seqNo forKey:@"seqNo"];
+                                            }
+                                            
+                                            //[objCaptransactions deactivateCaptransactionslogentry];
+                                        }
+                                        NSLog(@"BG end Service Called");
+                                        
+                                        
+                                        IsTimer = YES;
+                                        isBackGroundTaskRunning = NO;
+                                        
+                                    }else{
+                                        IsTimer = YES;
+                                        isBackGroundTaskRunning = NO;
+                                        
+                                    }
+                                    
+                                }
+                            }
+                        });
+                    });
                 }
                 
-                    isBackGroundTaskRunning = NO;
                 
-                //  NSLog(@"the final output is:%@",responseString);
+                else{
+                    //           IsTimer=NO;
+                    //            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Network Error. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+                    //            [altert show];
+                    //            [altert setTag:10405];
                     
                 }
-                });
-            });
-        }
-        
-        
-        else{
-  //           IsTimer=NO;
-//            UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"Network Error. " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//            [altert show];
-//            [altert setTag:10405];
+            }
+            
+            //-----------------------------------
             
         }
-        }
+        else if( IsTimer== NO)
+        {
+            //NSTimer* _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:NO];
+            if ([_timer isValid]) {
+                [_timer invalidate];
+            }
+            _timer = nil;
             
-        //-----------------------------------
-        
-    }
-    else if( IsTimer== NO)
-    {
-                //NSTimer* _timer = [NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(methodRunAfterBackground) userInfo:nil repeats:NO];
-        if ([_timer isValid]) {
-            [_timer invalidate];
         }
-        _timer = nil;
         
-    }
-    
-   
+        
+    }   
 }
 
 - (BOOL)checkInternetConnection

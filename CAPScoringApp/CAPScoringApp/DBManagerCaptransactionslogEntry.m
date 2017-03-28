@@ -8,6 +8,9 @@
 #import <sqlite3.h>
 #import "DBManagerCaptransactionslogEntry.h"
 #import "CaptransactionslogEntryRecord.h"
+#import "Utitliy.h"
+
+
 
 @implementation DBManagerCaptransactionslogEntry
 
@@ -51,6 +54,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 -(NSMutableArray *) GetCaptransactionslogentry
 {
+@synchronized ([Utitliy syncId]) {
     NSMutableArray *transactionArray=[[NSMutableArray alloc]init];
    
     NSString *dbPath = [self getDBPath];
@@ -83,12 +87,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return transactionArray;
-    
+    }
 }
 
 
 -(NSMutableArray *) deactivateCaptransactionsLogEntryByMatchCode : (NSString *) matchCode
 {
+@synchronized ([Utitliy syncId]) {
     NSMutableArray *transactionArray=[[NSMutableArray alloc]init];
     
     NSString *dbPath = [self getDBPath];
@@ -114,12 +119,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return transactionArray;
-    
+    }
 }
 
 
 -(NSMutableArray *) deactivateCaptransactionslogentry
 {
+@synchronized ([Utitliy syncId]) {
     NSMutableArray *transactionArray=[[NSMutableArray alloc]init];
     
     NSString *dbPath = [self getDBPath];
@@ -145,12 +151,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return transactionArray;
-    
+    }
 }
 
 -(BOOL)updateCaptransactionslogentry:(NSString*)SCRIPTSTATUS matchCode:(NSString*) matchCode SEQNO:(NSString*)SEQNO  {
     
-    
+    @synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -183,7 +189,52 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     
     return NO;
-    
+    }
 }
+-(BOOL) deactivateCaptransactionslogentry:(NSString*)SEQNO
+{
+    @synchronized ([Utitliy syncId]) {
+        
+        BOOL result = NO;
+        
+        NSString *dbPath = [self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        
+        if (sqlite3_open([dbPath UTF8String], &dataBase) == SQLITE_OK)
+        {
+            NSLog(@"Before");
+            // sqlite3_busy_timeout(dataBase, 500);//Sleep 500
+            NSLog(@"After");
+            NSString *query=[NSString stringWithFormat:@"UPDATE CAPTRANSACTIONSLOGENTRY SET SCRIPTSTATUS = 'MSC249' WHERE SCRIPTSTATUS  = 'MSC247' AND SEQNO <= %@",SEQNO];
+            stmt=[query UTF8String];
+            if(sqlite3_prepare_v2(dataBase, stmt,-1, &statement, NULL)==SQLITE_OK)
+            {
+                if (sqlite3_step(statement) == SQLITE_DONE)
+                {
+                    //        if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+                    //        {
+                    //            while(sqlite3_step(statement)==SQLITE_DONE){
+                    
+                    NSLog(@"Sync Update Success %@",SEQNO);
+                    result = YES;
+                    
+                }else{
+                    NSLog(@"Sync Update failed Stat: %s.", sqlite3_errmsg(dataBase));
+                    NSLog(@"Sync Update failed %@",SEQNO);
+                    result = NO;
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            
+            
+            sqlite3_close(dataBase);
+        }
+        return result;
+        
+    }
 
+}
 @end

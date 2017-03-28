@@ -9,6 +9,7 @@
 #import "DBManagerEndSession.h"
 #import "EndSessionRecords.h"
 #import "PushSyncDBMANAGER.h"
+#import "Utitliy.h"
 
 @implementation DBManagerEndSession
 
@@ -61,7 +62,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 -(NSString*)GetIsDayNightForFetchEndSession:(NSString*) MATCHCODE
     
 {
-
+@synchronized ([Utitliy syncId])  {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -94,10 +95,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return 0;
     
 }
-
+}
 
 
 -(BOOL)GetDayNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -123,11 +125,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 -(NSString*)getDayNo:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
     
-    
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -161,12 +164,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return 0;
     
 }
-
+}
 
 
 -(NSString*)GetDayNoStatusForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
     
-    
+    @synchronized ([Utitliy syncId])  {
         int retVal;
         NSString *databasePath =[self getDBPath];
         sqlite3 *dataBase;
@@ -200,10 +203,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         return 0;
         
     }
-    
+}
 
 
 -(NSString*)GetDayNoStatusIn0ForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -234,10 +238,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     
     return @"";
+    }
 }
 
 -(NSNumber*) GetInningsNosForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) BATTINGTEAMCODE{
-    
+ 
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -270,11 +276,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return 0;
     
-    
+    }
 }
 
 -(NSNumber*)  GetSessionNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) DAYNO{
     
+    
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -307,11 +315,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_close(dataBase);
     }
     return 0;
-    
+    }
    
 }
 
 -(BOOL) GetOverNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSNumber*) INNINGSNO:(NSString*) DAYNO {
+    
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -336,12 +346,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 
 
 -(NSString*) GetStartOverNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSNumber*) INNINGSNO:(NSString*) DAYNO {
     
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -373,11 +385,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_close(dataBase);
     }
     return 0;
-    
+    }
 }
 
 -(NSString*) GetNewStartOverNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) INNINGSNO {
     
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -410,13 +423,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return 0;
     
-
+    }
 }
 
 
 -(NSString*)  GetStartBallNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSString*) DAYNO:(NSNumber*) INNINGSNO: (NSString*) STARTOVERNO {
    
-    
+   @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -449,11 +462,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return 0;
     
-    
+   }
 }
 
 -(NSString*) GetEndOverNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSString*) DAYNO:(NSNumber*) INNINGSNO{
     
+  @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -485,12 +499,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_close(dataBase);
 }
     return 0;
-    
+  }
 
     }
 
 -(NSString*) GetEndBallNoForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSString*) DAYNO:(NSNumber*) INNINGSNO :(NSString*) ENDOVERNO{
-    
+   
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -523,11 +538,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return 0;
     
-    
+    }
 }
 
 -(NSString*) GetOverStatusForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO :(NSString*) ENDOVERNO{
     
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -560,12 +576,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
     return 0;
     
-    
+    }
 }
 
 
 -(NSString*) GetTeamNamesForFetchEndSession:(NSString*) BATTINGTEAMCODE{
     
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -599,13 +616,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return 0;
     
-    
+    }
     
 }
 
 
 
 -(NSString*)GetPenaltyRunsForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO :(NSString*) BATTINGTEAMCODE{
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -638,11 +656,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return 0;
     }
-
+}
 
 -(NSString*) GetRunsScoredForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) SESSIONNO:(NSNumber*) INNINGSNO: (NSString*) DAYNO {
     
-    
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -674,11 +692,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_close(dataBase);
     }
     return 0;
-    
+    }
 }
 
 -(NSString*) GetWicketLoftForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO: (NSString*) SESSIONNO: (NSString*) DAYNO {
     
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -712,13 +731,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return 0;
     
-    
+    }
 }
 
 
 
 -(NSMutableArray*) GetBattingTeamForFetchEndSession:(NSString *)BATTINGTEAMCODE :(NSString *)BOWLINGTEAMCODE
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray *GetBattingTeamDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -752,10 +772,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     sqlite3_close(dataBase);
     return GetBattingTeamDetails;
+    }
 }
 
 -(NSMutableArray *) GetBattingTeamUsingBowlingCode:(NSString*) BOWLINGTEAMCODE
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray *GetBattingTeamDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -783,10 +805,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
    
     sqlite3_close(dataBase);
     return GetBattingTeamDetails;
+    }
 }
 
 -(NSMutableArray*) GetMetaSubCode
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray *GetBattingTeamDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -816,6 +840,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     sqlite3_close(dataBase);
     return GetBattingTeamDetails;
+    }
 }
 
 
@@ -823,6 +848,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 -(NSMutableArray*) GetSessionEventsForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
                         
             {
+                
+                @synchronized ([Utitliy syncId])  {
         NSMutableArray *GetSessionEventDetails=[[NSMutableArray alloc]init];
                 NSString *databasePath = [self getDBPath];
                 sqlite3_stmt *statement;
@@ -865,11 +892,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_close(dataBase);
             return GetSessionEventDetails;
         }
-                                           
+            }
 
 -(NSString*) GetStartDateForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE {
    
     
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -905,14 +933,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     
     }
-                                           
-
-
-
+}
 
 -(NSMutableArray*)getSessionDetails:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
 
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray *getSession=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -945,12 +971,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return getSession;
 }
 
-
+}
 
 
 -(NSMutableArray*)GetDateDayWiseForFetchEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE
 
     {
+        @synchronized ([Utitliy syncId])  {
         NSMutableArray *GetDateDayWiseDetails=[[NSMutableArray alloc]init];
         NSString *databasePath = [self getDBPath];
         sqlite3_stmt *statement;
@@ -983,12 +1010,14 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_close(dataBase);
     return GetDateDayWiseDetails;
     }
-                                   
+    }
+
    
 //SP_INSERTENDSESSION----------------------------------------------------------------------
 
 -(NSString*)  GetMatchTypeForInsertEndSession :(NSString*) COMPETITIONCODE{
-    
+   
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -1021,13 +1050,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return 0;
     
-    
+    }
 }
 
 
 -(NSString*)  GetWicketsForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE:(NSNumber*) INNINGSNO {
     
-    
+   @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -1059,12 +1088,12 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         sqlite3_close(dataBase);
     }
     return 0;
-    
+   }
 }
 
 
 -(NSString*)  GetPenaltyRunsForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO:(NSString*) TEAMCODE {
-    
+  @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -1096,13 +1125,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     sqlite3_close(dataBase);
     }
     return 0;
-    
+  }
 }
 
 
 
 -(NSString*)  GetRunsForInsertEndSession:(NSString*) INNINGSNO:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE {
-    
+    @synchronized ([Utitliy syncId])  {
     
     int retVal;
     NSString *databasePath =[self getDBPath];
@@ -1138,10 +1167,12 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     return 0;
     
    }
+}
 
 
 -(NSString*)  GetOverNoForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE:(NSNumber*) INNINGSNO {
     
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -1175,10 +1206,12 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
 }
     return 0;
 }
+}
 
 
 -(NSString*)  GetBallNoForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE:(NSString*) OVERNO:(NSNumber*) INNINGSNO {
     
+  @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -1210,12 +1243,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     sqlite3_close(dataBase);
     }
     return 0;
-
+  }
 }
 
 -(NSString*) GetOverStatusForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) TEAMCODE:(NSNumber*) INNINGSNO: (NSString*) OVERNO {
     
-    
+   
+    @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -1248,12 +1282,12 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     sqlite3_close(dataBase);
     }
     return 0;
-    
+    }
 }
 
 -(NSString*)  GetOversPlayedForInsertEndSession:(NSString*) INNINGSNO:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE : (NSString*) TEAMCODE {
     
-    
+  @synchronized ([Utitliy syncId])  {
     int retVal;
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
@@ -1287,12 +1321,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
 }
     return 0;
     
-
+  }
 }
 
 
 -(BOOL) GetSessionStartTimeForInsertEndSession:(NSString*) DAYNO:(NSString*) MATCHCODE: (NSString*) CHECKSTARTDATE {
-    
+  
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1318,12 +1353,14 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 
 
 -(BOOL) GetCompetitionCodeForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO:(NSString*) TEAMCODE {
     
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1350,11 +1387,12 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     }
     return NO;
 }
-
+}
 
 
 -(BOOL) GetDayNoInNotExistsForInsertEndSession:(NSString*) SESSIONSTARTTIME:(NSString*) SESSIONENDTIME :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) DAYNO {
     
+  @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1381,12 +1419,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     }
     return NO;
 }
-
+}
 
 
 
 -(BOOL) GetSessionNoForUpdateEndSession:(NSString*) SESSIONSTARTTIME:(NSString*) SESSIONENDTIME :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE:(NSString*)INNINGSNO:(NSString*)BATTINGTEAMCODE:(NSString*)DAYNO  {
     
+   @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1413,10 +1452,12 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     }
     return NO;
 }
+}
 
 
 -(BOOL) GetSessionNoForInsertEndSession:(NSString*) SESSIONSTARTTIME:(NSString*) SESSIONENDTIME :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE  {
-    
+   
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1443,10 +1484,11 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     }
     return NO;
 }
-
+}
 
 
 -(BOOL)  GetCompetitionCodeInNotExistsForInsertEndSession:COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) SESSIONNO: (NSString*) DAYNO  {
+    @synchronized ([Utitliy syncId])  {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1473,9 +1515,11 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 -(BOOL)  GetCompetitionCodeInNotExistsForUpdateEndSession:COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) SESSIONNO {
+    @synchronized ([Utitliy syncId])  {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1502,11 +1546,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 
 -(BOOL)  GetCompetitionCodeInNotExists:COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO: (NSString*) SESSIONNO {
     
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1532,12 +1578,14 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 
 
 
 -(BOOL) InsertSessionEventForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) SESSIONNO:(NSString*) STARTTIME : (NSString*) ENDTIME:(NSString*) TEAMCODE: (NSString*) STARTOVER:(NSString*) ENDOVER :(NSString*) TOTALRUNS:(NSString*) TOTALWICKETS :(NSString*) DOMINANTTEAMCODE  {
+    @synchronized ([Utitliy syncId])  {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1574,11 +1622,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     }
     
     return NO;
+    }
 }
 
 
 -(BOOL) GetDayNoForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO {
-    
+  
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1604,6 +1654,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 
@@ -1612,6 +1663,8 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
 
 -(BOOL) InsertDayEventForInsertEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) TEAMCODE:(NSString*) RUNS : (NSString*) OVERBALLNO:(NSString*) WICKETS {
     
+    
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1644,12 +1697,14 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     }
     
     return NO;
+    }
 }
 
 //SP_UPDATEENDSESSION-------------------------------
 
 -(BOOL)  GetMatchCodeInNotExists:(NSString*)COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*)STARTTIME :(NSString*)ENDTIME  {
     
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1675,10 +1730,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 -(BOOL)updateEndSession:(NSString*) STARTTIME:(NSString*) ENDTIME : (NSString*) DOMINANTTEAMCODE:(NSString*) DAYNO :(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSString*) INNINGSNO:(NSString*) SESSIONNO
 {
+    
+    @synchronized ([Utitliy syncId])  {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1712,11 +1770,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     }
     
     return NO;
+    }
 }
 //SP_DELETEENDSESSION-----------------------------------------------------------------------------
 
 
 -(BOOL) GetBallCodeForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) DAYNO: (NSString*) SESSIONNO   {
+    @synchronized ([Utitliy syncId])  {
     
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -1745,9 +1805,11 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     }
     return NO;
 }
+}
 
 -(BOOL) GetBallCodeWithAddDayNoForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString*) DAYNO{
     
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1773,10 +1835,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 -(BOOL) GetSessionNoForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) SESSIONNO{
     
+    
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1802,10 +1867,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 -(BOOL)GetSessionNoWithAddDayNoForDeleteEndSession: (NSString*) COMPETITIONCODE:(NSString*) MATCHCODE :(NSString *) INNINGSNO:(NSString*) DAYNO{
     
+    
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1832,11 +1900,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     }
     return NO;
 }
+}
 
 
 -(BOOL)DeleteSessionEventsForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO :(NSString*) SESSIONNO
 {
     
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1869,11 +1939,13 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     }
     
     return NO;
+    }
 }
 
 -(BOOL)DeleteDayEventsForDeleteEndSession:(NSString*) COMPETITIONCODE:(NSString*) MATCHCODE: (NSNumber*) INNINGSNO:(NSString*) DAYNO
 {
     
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -1908,7 +1980,7 @@ NSString *query=[NSString stringWithFormat:@"SELECT COUNT(WKT.BALLCODE) AS EXTRA
     return NO;
 }
 
-
+}
 
 
 

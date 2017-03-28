@@ -9,6 +9,7 @@
 #import "DBManagerPartnership.h"
 #import <sqlite3.h>
 #import "PartnershipRecord.h"
+#import "Utitliy.h"
 
 static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
@@ -59,6 +60,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSMutableArray *) getPartnershipdetail :(NSString *) COMPETITIONCODES :(NSString *) MATCHCODES:(NSString *) TEAMCODES :(NSString *) INNINGS
 {
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * partnershipdetail=[[NSMutableArray alloc]init];
     
     NSString *dbPath = [self getDBPath];
@@ -133,6 +135,6 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return partnershipdetail;
 }
-
+}
 
 @end

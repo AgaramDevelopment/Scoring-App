@@ -56,6 +56,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSMutableArray*)  GetFETCHSBBOWLINGPLAYERSTATISTICSWagon :(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE : (NSString *) INNINGSNO : (NSString*) PLAYERCODE
 {
+@synchronized ([Utitliy syncId]) {
     NSMutableArray *GetBowlingTDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -115,10 +116,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return GetBowlingTDetails;
-
+}
 }
 -(NSMutableArray*)  GetFETCHSBBOWLINGPLAYERSTATISTICSPitch :(NSString *) COMPETITIONCODE:(NSString *) MATCHCODE : (NSString *) INNINGSNO : (NSString*) PLAYERCODE
 {
+@synchronized ([Utitliy syncId]) {
     NSMutableArray *GetBowlingTDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -167,6 +169,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return GetBowlingTDetails;
+	}
 }
 
 

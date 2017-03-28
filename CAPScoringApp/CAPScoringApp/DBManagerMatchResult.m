@@ -15,6 +15,7 @@
 #import "GetMatchResultDetail.h"
 #import "UserRecord.h"
 #import "PushSyncDBMANAGER.h"
+#import "Utitliy.h"
 
 @implementation DBManagerMatchResult
 
@@ -60,6 +61,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSMutableArray *) GetMatchResultTypeAndCodeForFetchMatchResult{
     
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * GetMatchResultTypeAndCode=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -85,6 +87,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return GetMatchResultTypeAndCode;
+    }
 }
 
 
@@ -94,6 +97,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(NSMutableArray *) GetTeamANameDetailsForFetchMatchResult: (NSString*) COMPETITIONCODE :(NSString*) MATCHCODE{
     
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * GetTeamANameDetail=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -120,9 +124,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return GetTeamANameDetail;
+    }
 }
 -(NSMutableArray *) GetTeamBNameDetailsForFetchMatchResult: (NSString*) COMPETITIONCODE :(NSString*) MATCHCODE{
     
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * GetTeamBNameDetail=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -149,9 +155,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return GetTeamBNameDetail;
+    }
 }
 -(NSMutableArray *) GetManOfTheMatchDetailsForFetchMatchResult :(NSString*) MATCHCODE{
     
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * GetManOfTheMatchDetail=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -177,9 +185,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return GetManOfTheMatchDetail;
+    }
 }
 -(NSMutableArray *) GetManOfTheSeriesDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE{
     
+    
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * GetManOfTheSeriesDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -205,9 +216,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return GetManOfTheSeriesDetails;
+    }
 }
 -(NSMutableArray *) GetBestBatsManDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE{
     
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * GetBestBatsManDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -233,9 +246,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return GetBestBatsManDetails;
+    }
 }
 -(NSMutableArray *) GetBestBowlerDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE{
     
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * GetBestBowlerDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -263,10 +278,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return GetBestBowlerDetails;
+    }
 }
 
 -(NSMutableArray *) GetMatchresultDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE : (NSString*) MATCHCODE{
     
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * resultArray=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -296,10 +313,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return resultArray;
+    }
 }
 
 -(NSMutableArray *) GetBestPlayerDetailsForFetchMatchResult :(NSString*) COMPETITIONCODE{
     
+    @synchronized ([Utitliy syncId])  {
     NSMutableArray * GetBestPlayerDetails=[[NSMutableArray alloc]init];
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -330,7 +349,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     return GetBestPlayerDetails;
 }
-
+}
 
 
 @end

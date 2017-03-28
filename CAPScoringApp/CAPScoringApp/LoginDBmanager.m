@@ -9,6 +9,8 @@
 #import "LoginDBmanager.h"
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
+#import "Utitliy.h"
+
 @implementation LoginDBmanager
 
 
@@ -51,7 +53,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //UserDetails insert&Update
 
 -(BOOL) CheckUserDetails:(NSString *)LOGINID:(NSString *)PASSWORD{
-    int retVal;
+    @synchronized ([Utitliy syncId])  {
+    
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -80,6 +83,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 
@@ -88,6 +92,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 
 -(BOOL) INSERTUSERDETAILS:(NSString *)USERCODE:(NSString *)USERROLEID:(NSString *)LOGINID: (NSString *)PASSWORD:(NSString *)REMEMBERME:(NSString *)REMENTDATE:(NSString *)USERFULLNAME:(NSString *)MACHINEID:(NSString *)LICENSEUPTO:(NSString *)CREATEDBY:(NSString *)CREATEDDATE:(NSString *)MODIFIEDBY:(NSString *)MODIFIEDDATE:(NSString *)RECORDSTATUS
 {
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -114,11 +119,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 
 
 -(BOOL) UPDATEUSERDETAILS:(NSString *)LOGINID: (NSString *)PASSWORD:(NSString *)LICENSEUPTO{
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -143,6 +150,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 
@@ -150,7 +158,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //SecureIdDetails
 
 -(BOOL) CheckSecureIdDetails:(NSString *)USERNAME{
-    int retVal;
+    @synchronized ([Utitliy syncId])  {
+    
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -179,10 +188,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 -(BOOL) INSERTSECUREIDDETAILS:(NSString *)USERNAME:(NSString *)SECUREID:(NSString *)STARTDATE:(NSString *)ENDDATE:(NSString *)CREATEDBY:(NSString *)CREATEDDATE:(NSString *)MODIFIEDBY:(NSString *)MODIFIEDDATE:(NSString *)RECORDSTATUS
 {
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -209,12 +220,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         }
         sqlite3_close(dataBase);
     }
-    return NO;    
+    return NO;
+    }
 }
 
 -(BOOL) UPDATESECUREIDDETAILS:(NSString *)USERNAME:(NSString *)SECUREID:(NSString *)STARTDATE:(NSString *)ENDDATE:(NSString *)CREATEDBY:(NSString *)CREATEDDATE:(NSString *)MODIFIEDBY:(NSString *)MODIFIEDDATE:(NSString *)RECORDSTATUS
 {
-    
+   @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -240,6 +252,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+   }
 }
 
 
@@ -247,7 +260,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 //MatchScorerDetails
 
 -(BOOL) CheckMatchScorerDetails:(NSString *)Competitioncode : (NSString *)Matchcode : (NSString *)Scorercode{
-    int retVal;
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -275,10 +288,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 -(BOOL) InsertMatchScorerDetails:(NSString *)Competitioncode:(NSString *)Matchcode:(NSString *)Scorercode:(NSString *)Recordstatus:(NSString *)Createdby:(NSString *)Createddate:(NSString *)Modifiedby:(NSString *)Modifieddate
 {
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -305,11 +320,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+    }
 }
 
 -(BOOL) UpdateMatchScorerDetails:(NSString *)Competitioncode:(NSString *)Matchcode:(NSString *)Scorercode:(NSString *)Recordstatus:(NSString *)Createdby:(NSString *)Createddate:(NSString *)Modifiedby:(NSString *)Modifieddate
 {
-    
+   @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -333,11 +349,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+   }
 }
 
 
 -(BOOL) CheckUserScorerDetails: (NSString *)UserCode{
-    int retVal;
+   @synchronized ([Utitliy syncId])  {
     NSString *databasePath =[self getDBPath];
     sqlite3 *dataBase;
     const char *stmt;
@@ -366,10 +383,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+   }
 }
 
 -(BOOL) InsertUserScorerDetails: (NSString *)UserCode : (NSString *)UserRoleID : (NSString *)LoginID : (NSString *)Password : (NSString *)Rememberme : (NSString *)RementDate : (NSString *)UserFullName : (NSString *)MachineID: (NSString *)LicenseUpTo : (NSString *)Recordstatus : (NSString *)Createdby : (NSString *)Createddate : (NSString *)Modifiedby : (NSString *)Modifieddate{
-    
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -396,10 +414,13 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
+    }
     
 }
 
 -(BOOL) UpdateUserScorerDetails: (NSString *)UserCode : (NSString *)UserRoleID : (NSString *)LoginID : (NSString *)Password : (NSString *)Rememberme : (NSString *)RementDate : (NSString *)UserFullName : (NSString *)MachineID: (NSString *)LicenseUpTo : (NSString *)Recordstatus : (NSString *)Createdby : (NSString *)Createddate : (NSString *)Modifiedby : (NSString *)Modifieddate{
+    
+    @synchronized ([Utitliy syncId])  {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
     sqlite3 *dataBase;
@@ -424,7 +445,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         sqlite3_close(dataBase);
     }
     return NO;
-    
+    }
     
 }
 

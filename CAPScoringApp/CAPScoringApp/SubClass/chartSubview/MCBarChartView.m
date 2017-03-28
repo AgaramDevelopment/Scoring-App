@@ -339,7 +339,9 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                     wicket_Btn.tag = [objManhattanRecord.tag intValue];
                     if([objManhattanRecord.inningno isEqualToString:@"1"] || [objManhattanRecord.inningno isEqualToString:@"3"])
                     {
-                    wicket_Btn.center = CGPointMake(xOffset-40, chartYOffset - [objManhattanRecord.Run floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2);
+                      
+                    wicket_Btn.center = CGPointMake(xOffset-40, chartYOffset - _chartHeight/_numberOfYAxis * i - 10);
+                        //chartYOffset - [objManhattanRecord.wicketscore floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2
                     }
                     else
                     {
