@@ -1215,7 +1215,7 @@
                 [self selectedViewBg:_btn_run3];
             //self.ballEventRecord.objRuns = [NSNumber numberWithInt: self.ballEventRecord.objWide.intValue  - 1];
             runs = self.ballEventRecord.objWide.intValue  - 1;
-            SelectWideCommantry =[NSString stringWithFormat:@"Wide %@",runs];
+            SelectWideCommantry =[NSString stringWithFormat:@"Wide %d",runs];
         }
         
         
@@ -4594,6 +4594,40 @@
     }
     else if(selectBtnTag.tag==111)
     {
+        if(_isEditMode)
+        {
+            if(!(self.ballEventRecord.objWWX1.intValue ==221 && self.ballEventRecord.objWWX2.intValue ==221 && self.ballEventRecord.objWWY1.intValue ==186 && self.ballEventRecord.objWWY2.intValue ==186) && !(self.ballEventRecord.objWWX1.intValue ==172 && self.ballEventRecord.objWWX2.intValue ==172 && self.ballEventRecord.objWWY1.intValue ==145 && self.ballEventRecord.objWWY2.intValue ==145)){
+                
+                isWagonWheelValueSelected = YES;
+                [self selectedViewBg:_btn_wagonwheel];
+                
+                for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
+                    if ([layer.name isEqualToString:@"DrawLine"]) {
+                        [layer removeFromSuperlayer];
+                        break;
+                    }
+                }
+                
+                CGMutablePathRef straightLinePath = CGPathCreateMutable();
+                CGPathMoveToPoint(straightLinePath, NULL, self.ballEventRecord.objWWX1.intValue, self.ballEventRecord.objWWY1.intValue);
+                CGPathAddLineToPoint(straightLinePath, NULL,self.ballEventRecord.objWWX2.intValue,self.ballEventRecord.objWWY2.intValue);
+                CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+                shapeLayer.path = straightLinePath;
+                UIColor *fillColor = [UIColor redColor];
+                shapeLayer.fillColor = fillColor.CGColor;
+                UIColor *strokeColor = [UIColor redColor];
+                shapeLayer.strokeColor = strokeColor.CGColor;
+                shapeLayer.lineWidth = 2.0f;
+                shapeLayer.fillRule = kCAFillRuleNonZero;
+                shapeLayer.name = @"DrawLine";
+                [self.img_WagonWheel.layer addSublayer:shapeLayer];
+                [self EditWangon_Wheel];
+                
+            }
+            
+            
+        }
+        else{
         if(isWagonwheel == NO){
             [self selectedButtonBg:selectBtnTag];
             // [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
@@ -4681,9 +4715,10 @@
                 
             }
             
-            
+        
         }
         
+    }
     }
     
 }
@@ -4750,6 +4785,33 @@
 
 -(void)PitchmapSelectposition:(int) Xposition :(int) Yposition
 {
+    
+    if(_isEditMode)
+    {
+        if(!(self.ballEventRecord.objPMX2.intValue == 1 && self.ballEventRecord.objPMY2.intValue ==1)){
+            ispichmapSelectValue = YES;
+            [self selectedViewBg:_btn_pichmap];
+            
+            if(Img_ball != nil)
+            {
+                [Img_ball removeFromSuperview];
+            }
+            
+            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(self.ballEventRecord.objPMX2.floatValue,self.ballEventRecord.objPMY2.floatValue,20, 20)];
+            CGFloat xposition =[self.ballEventRecord.objPMX2 floatValue];
+            CGFloat yposition =[self.ballEventRecord.objPMY2 floatValue];
+            if(xposition > 1 && yposition > 1)
+            {
+                Img_ball.image =[UIImage imageNamed:@"RedBall"];
+                [self.img_pichmap addSubview:Img_ball];
+            }
+            self.img_pichmap.hidden = YES;
+            [self EditModePitchMap];
+            
+        }
+
+    }
+    else{
     pitchCommantryStr=@"";
     if(IS_IPAD_PRO)
     {
@@ -5892,7 +5954,7 @@
         _ballEventRecord.objPMX2=@(Xposition);
         _ballEventRecord.objPMY2=@(Yposition);
     }
-  
+    }
 }
 
 -(void)comantryTextValue
@@ -5917,7 +5979,7 @@
     }
     if(SelectOTWCommantry != nil && SelectOTWCommantry !=@"")
     {
-        NSString * objValue =([SelectOTWCommantry isEqualToString:@"MSC148"])?@"Select OTW":@"Select RTW";
+        NSString * objValue =([SelectOTWCommantry isEqualToString:@"MSC148"])?@"OTW":@"RTW";
         [Commantry addObject:objValue];
 
     }
@@ -8606,7 +8668,7 @@
                 isFastSelected = YES;
                 isSpinSelected = NO;
                 self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
-                NSString *  selectfastBowltype =[NSString stringWithFormat:@" Select Fast %@",bowlAndShortTypeRecord.BowlType];
+                NSString *  selectfastBowltype =[NSString stringWithFormat:@"Fast %@",bowlAndShortTypeRecord.BowlType];
                 selectSpinCommantry  = selectfastBowltype;
             }
             
@@ -8756,7 +8818,7 @@
                     //Byes
                     self.ballEventRecord.objByes = [NSNumber numberWithInt:1];
                     
-                     SelectByesCommantry= [NSString stringWithFormat:@"Select Byes %@",[self.ballEventRecord.objByes stringValue]];
+                     SelectByesCommantry= [NSString stringWithFormat:@"Byes %@",[self.ballEventRecord.objByes stringValue]];
                     [self comantryTextValue];
                 }
                 
@@ -8798,7 +8860,7 @@
                         
                         //Legbyes
                         self.ballEventRecord.objLegByes = [NSNumber numberWithInt:1];
-                        SelectLegByesCommantry= [NSString stringWithFormat:@"Select LegByes %@",[self.ballEventRecord.objLegByes stringValue]];
+                        SelectLegByesCommantry= [NSString stringWithFormat:@"LegByes %@",[self.ballEventRecord.objLegByes stringValue]];
                         [self comantryTextValue];
                     }
                 }
@@ -8925,7 +8987,7 @@
                 isSpinSelected = YES;
                 isFastSelected = NO;
                 self.ballEventRecord.objBowltype = bowlAndShortTypeRecord.BowlTypeCode;
-                NSString * selectBowltype =[NSString stringWithFormat:@"Select Spin %@",bowlAndShortTypeRecord.BowlType];
+                NSString * selectBowltype =[NSString stringWithFormat:@"Spin %@",bowlAndShortTypeRecord.BowlType];
                 selectSpinCommantry =selectBowltype;
             }
             
@@ -8960,7 +9022,7 @@
                 isAggressiveSelected = YES;
                 isDefensiveSelected = NO;
                 self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
-                selectAggressveCommantry=[NSString stringWithFormat:@"Select Aggressive %@", bowlAndShortTypeRecord.ShotType] ;
+                selectAggressveCommantry=[NSString stringWithFormat:@"Aggressive %@", bowlAndShortTypeRecord.ShotType] ;
 
                 
             }else if(isAggressiveSelected && self.ballEventRecord.objShottype!=nil && self.ballEventRecord.objShottype == bowlAndShortTypeRecord.ShotTypeCode){
@@ -8973,7 +9035,7 @@
                 isAggressiveSelected = YES;
                 isDefensiveSelected = NO;
                 self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
-               selectAggressveCommantry=[NSString stringWithFormat:@"Select Aggressive %@",bowlAndShortTypeRecord.ShotType ];
+               selectAggressveCommantry=[NSString stringWithFormat:@"Aggressive %@",bowlAndShortTypeRecord.ShotType ];
                 
             }
             
@@ -8995,7 +9057,7 @@
                 isDefensiveSelected = YES;
                 isAggressiveSelected = NO;
                 self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
-                selectAggressveCommantry=[NSString stringWithFormat:@"Select Defensive %@",bowlAndShortTypeRecord.ShotType];
+                selectAggressveCommantry=[NSString stringWithFormat:@"Defensive %@",bowlAndShortTypeRecord.ShotType];
 
                 
             }else if(isDefensiveSelected && self.ballEventRecord.objShottype!=nil && self.ballEventRecord.objShottype == bowlAndShortTypeRecord.ShotTypeCode){
@@ -9009,7 +9071,7 @@
                 isDefensiveSelected = YES;
                 isAggressiveSelected = NO;
                 self.ballEventRecord.objShottype = bowlAndShortTypeRecord.ShotTypeCode;
-                selectAggressveCommantry= [NSString stringWithFormat:@"Select Defensive %@",bowlAndShortTypeRecord.ShotType];
+                selectAggressveCommantry= [NSString stringWithFormat:@"Defensive %@",bowlAndShortTypeRecord.ShotType];
             }
             
             [self comantryTextValue];
@@ -9072,6 +9134,11 @@
                 self.lbl_bowler_sixs.text = currentBowlerDetailRecord.WICKETS;
                 self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.02f",[currentBowlerDetailRecord.ECONOMY floatValue]];
                 self.lbl_bowler_strickrate.adjustsFontSizeToFitWidth = YES;
+                
+                if([self.btn_StartOver.currentTitle isEqualToString:@"START OVER"])
+                {
+                    [self DidClickStartOver:self.btn_StartOver];
+                }
                 
             }else{
                 fetchSEPageLoadRecord.currentBowlerPlayerName = bowlEvent.BowlerName;
@@ -10261,9 +10328,11 @@
     //Total runs scored for the particular ball including byes or legbyes.
     
     int totalExtras = (self.ballEventRecord.objNoball.intValue +self.ballEventRecord.objWide.intValue+self.ballEventRecord.objByes.intValue+self.ballEventRecord.objLegByes.intValue+self.ballEventRecord.objPenalty.intValue);
+    self.ballEventRecord.objGrandtotal =[NSNumber numberWithInt: totalRns];
+     //self.ballEventRecord.objGrandtotal =[NSNumber numberWithInt: totalRns+totalExtras];
+
     self.ballEventRecord.objTotalextras = [NSNumber numberWithInt: totalExtras];
     
-    self.ballEventRecord.objGrandtotal =[NSNumber numberWithInt: totalRns+totalExtras];
     NSNumber * overballCount =(self.ballEventRecord.objBallno == nil)?[NSNumber numberWithInt:0]:[NSNumber numberWithInt:self.ballEventRecord.objNoball];
     //
     /*+ ((Byes > 0 || Legbyes > 0) ? Overthrow : 0)*/;
@@ -14338,6 +14407,7 @@
     if([regioncode isEqualToString:@""]){
         [self setWagonWheelRegionCodeByAngle:Xposition :Yposition];
     }
+    
     [self comantryTextValue];
 }
 

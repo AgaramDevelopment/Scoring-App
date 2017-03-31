@@ -313,9 +313,11 @@ NSString *bowlerCode;
     
     DAYNO = [db dayNO:MATCHCODE :COMPETITIONCODE];
     
+    SESSIONNO = [db sessionNo:MATCHCODE :COMPETITIONCODE :DAYNO];
+    
     INNINGSSTATUS = [db inningsStatus:MATCHCODE :COMPETITIONCODE :INNINGSNO];
     
-    SESSIONNO = [db sessionNo:MATCHCODE :COMPETITIONCODE :DAYNO];
+    
     
     
     if (BATTINGTEAMCODE == nil || [BATTINGTEAMCODE isEqual:@""] || [BOWLINGTEAMCODE isEqual:@""] ||  BOWLINGTEAMCODE == nil) {

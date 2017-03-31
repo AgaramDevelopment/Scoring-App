@@ -599,7 +599,7 @@
             
             [objDBManager GetUpdatePenaltyDetails:awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode :self.competitionCode :self.matchCode :self.inningsNo :_penaltyDetailsRecord.penaltycode];
             
-            if([self.selectStartBallStatus isEqualToString:@"Yes"])
+            if([self.selectStartBallStatus isEqualToString:@"Yes"] && isShow_penaltyrecordTbl == YES)
             {
                 [self.delegate InsertPenaltyMethod:self.awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
             }
