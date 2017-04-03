@@ -12,6 +12,7 @@
 #import "FetchBattingTeamTossRecord.h"
 #import "ScorEnginVC.h"
 #import "DBManager.h"
+#import "PowerPlayRecord.h"
 @interface InningsDetailsVC ()
 {
     BOOL isEnableTbl;
@@ -40,6 +41,7 @@
     
     NSString* BowlingEnd;
     DBManagerChangeToss *dbChangeToss;
+    DBManager * objDBManager;
     
 }
 @property (nonatomic,strong)NSMutableArray*StrikerArray;
@@ -59,6 +61,7 @@
     // Do any additional setup after loading the view from its nib.
     //[self customnavigationmethod];
     dbChangeToss = [[DBManagerChangeToss alloc]init];
+    objDBManager =[[DBManager alloc]init];
     [self.Striker_View setUserInteractionEnabled:YES];
     [self.NonStriker_View setUserInteractionEnabled:YES];
     [self.Bowler_View setUserInteractionEnabled:YES];
@@ -428,24 +431,30 @@
 
 //Power Play Code
 -(void) setPowerPlayForODIAndT20:(NSString*)inningsNo{
+    
+    NSMutableArray* PowerPlayData = [objDBManager fetchpowerplaytype];
+    
+    if(PowerPlayData.count > 0)
+    {
+    PowerPlayRecord * objPowerplayRecord =[PowerPlayData objectAtIndex:0];
+
     if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){ //T20
         
-        [self insertPowerPlay:@"1" endOver:@"6" powerPlayType:@"PPT0000001" inningsNo:inningsNo];
+        [self insertPowerPlay:@"1" endOver:@"6" powerPlayType:objPowerplayRecord.powerplaytypecode inningsNo:inningsNo];
         
         
     }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){//ODI
-        [self insertPowerPlay:@"1" endOver:@"10" powerPlayType:@"PPT0000001" inningsNo:inningsNo];
+        [self insertPowerPlay:@"1" endOver:@"10" powerPlayType:objPowerplayRecord.powerplaytypecode inningsNo:inningsNo];
         
         
     }
-    
-    
+    }
     
 }
 
 -(void)insertPowerPlay:(NSString*) startOver endOver:(NSString*) endOver powerPlayType:(NSString*)powerPlayType inningsNo:(NSString*)inningsNo{
     
-    DBManager *objDBManager = [[DBManager alloc]init];
+   // DBManager *objDBManager = [[DBManager alloc]init];
     if(![objDBManager checkpowerplay:startOver ENDOVER:endOver MATCHCODE:MATCHCODE INNINGSNO:inningsNo])
     {
         if(![objDBManager getpowerplaytype:MATCHCODE INNINGSNO:inningsNo POWERPLAYTYPE:powerPlayType]){

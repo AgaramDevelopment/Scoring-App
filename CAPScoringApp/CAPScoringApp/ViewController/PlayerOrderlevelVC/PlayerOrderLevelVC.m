@@ -696,6 +696,7 @@
     
     if(ordernumber==12)
     {
+        
         playercell.lbl_playerName.text =[NSString stringWithFormat:@"%@   (12 Member)",objSelectPlayerRecord.playerName] ;
     }
     else if (ordernumber > 12)
@@ -840,7 +841,7 @@
 
 -(IBAction)didClickCaptain_BtnAction:(id)sender
 {
-    
+
     PlayerLevelCell *Cell = (PlayerLevelCell *)[[sender superview] superview];
     NSIndexPath *indexPath = [_tbl_playerSelectList indexPathForCell:Cell];
     SelectPlayerRecord * objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
@@ -1146,7 +1147,21 @@ forRowAtIndexPath:(NSIndexPath *)indexPath
                     //orderno = orderno-1;
                 }
                 
-                
+                if(orderno >11)
+                {
+                    if([objRecord.isSelectCapten isEqualToString:@"YES"])
+                    {
+                        objRecord.isSelectCapten =nil;
+                        isSelectCaptainType = NO;
+                       
+                    }
+                    else if ([objRecord.isSelectWKTKeeper isEqualToString:@"YES"])
+                    {
+                        objRecord.isSelectWKTKeeper =nil;
+                        isSelectWKTKeeperType =NO;
+                        
+                    }
+                }
                 objRecord.playerOrder=[ objRecord.playerOrder stringByReplacingOccurrencesOfString:objRecord.playerOrder withString:[NSString stringWithFormat:@"%d",orderno]];
             }
             else if (newplayerorder == changeorder)

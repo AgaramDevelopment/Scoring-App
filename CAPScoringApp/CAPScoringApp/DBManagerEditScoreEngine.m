@@ -585,7 +585,8 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT IFNULL(SUM(GRANDTOTAL),0) AS GRANDTOTAL FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'AND TEAMCODE = '%@' AND INNINGSNO = '%@' AND OVERNO || '.' || BALLNO || BALLCOUNT <= '%@' || '.' ||'%@'||'%@'",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTEAMOVERS,BATTEAMOVRBALLS,BATTEAMOVRBALLSCNT];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT IFNULL(SUM(GRANDTOTAL),0) FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'AND TEAMCODE = '%@' AND INNINGSNO = '%@' AND OVERNO || '.' || BALLNO || BALLCOUNT <= '%@' || '.' ||'%@'||'%@'",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,BATTEAMOVERS,BATTEAMOVRBALLS,BATTEAMOVRBALLSCNT];
+        
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -609,7 +610,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 }
 
 
--(NSString*) GetPenaltyRunsForBallCodeDetails:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO: (NSString*) BATTINGTEAMCODE{
+-(NSString*) GetPenaltyRunsForBallCodeDetails:(NSString*) COMPETITIONCODE: (NSString*) MATCHCODE: (NSNumber*) INNINGSNO: (NSString*) BATTINGTEAMCODE {
 @synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
     sqlite3_stmt *statement;
@@ -617,7 +618,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0) AS PENALTYRUNS FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND AWARDEDTOTEAMCODE = '%@'AND BALLCODE IS NULL",COMPETITIONCODE,MATCHCODE,INNINGSNO,BATTINGTEAMCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT IFNULL(SUM(PENALTYRUNS),0) AS PENALTYRUNS FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND AWARDEDTOTEAMCODE = '%@' AND BALLCODE IS NULL",COMPETITIONCODE,MATCHCODE,INNINGSNO,BATTINGTEAMCODE];
+        
+      //  @"SELECT IFNULL(SUM(PENALTYRUNS),0) AS PENALTYRUNS FROM PENALTYDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = '%@' AND AWARDEDTOTEAMCODE = '%@'AND BALLCODE IS NULL
         const char *update_stmt = [updateSQL UTF8String];
         if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
         {

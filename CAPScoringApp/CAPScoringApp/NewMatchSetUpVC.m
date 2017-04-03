@@ -339,10 +339,7 @@ NSRegularExpression *isMatchedByRegex;
 }
 
 - (IBAction)btn_proceed:(id)sender {
-    //    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    //
-    //    //Show indicator
-    //    [delegate showLoading];
+   
     if (![self textValidation:self.txt_overs.text]) {
         
         
@@ -352,7 +349,7 @@ NSRegularExpression *isMatchedByRegex;
         [self overValidation];
         
     }
-    //    [delegate hideLoading];
+    
 }
 
 - (IBAction)btn_back:(id)sender {
@@ -452,6 +449,8 @@ NSRegularExpression *isMatchedByRegex;
         
         else if (teamCountA >= 7 && teamCountB >= 7){
             [objDBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
+            [objDBManager updateMatchStatusProcced:competitionCode :matchCode];
+            
             
             MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
             
@@ -482,7 +481,7 @@ NSRegularExpression *isMatchedByRegex;
         
         else if (teamCountA >= 7 && teamCountB >= 7){
             [objDBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
-            
+            [objDBManager updateMatchStatusProcced:competitionCode :matchCode];
             MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
             
             matchvc =  (MatchOfficalsVC*)[self.storyboard instantiateViewControllerWithIdentifier:@"matchofficial"];
@@ -506,6 +505,7 @@ NSRegularExpression *isMatchedByRegex;
         
         if (teamCountA >= 7 && teamCountB >= 7){
             [objDBManager updateOverInfo:self.txt_overs.text matchCode:self.matchCode competitionCode:self.competitionCode];
+            [objDBManager updateMatchStatusProcced:competitionCode :matchCode];
             
             MatchOfficalsVC * matchvc = [[MatchOfficalsVC alloc]init];
             

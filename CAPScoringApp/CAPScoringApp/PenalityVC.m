@@ -603,7 +603,7 @@
             {
                 [self.delegate InsertPenaltyMethod:self.awardedToteam :penaltyrecord.penaltyruns :penaltyrecord.penaltytypecode :penaltyrecord.penaltyreasoncode];
             }
-            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Penalty" message:@"Penalty Saved Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+            UIAlertView * alter =[[UIAlertView alloc]initWithTitle:@"Penalty" message:@"Penalty Update Successfully" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
             [alter show];
             alter.tag =10;
             _penaltyDetailsRecord = nil;

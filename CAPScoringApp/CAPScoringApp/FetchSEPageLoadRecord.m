@@ -427,9 +427,9 @@ NSString *bowlerCode;
     NSString *grandTotal = [db getGrandTotal:COMPETITIONCODE : MATCHCODE : BATTINGTEAMCODE : INNINGSNO];
     NSInteger grandscore = [grandTotal integerValue];
     BATTEAMRUNS = grandscore;
-    int tempBatteamRuns = (BATTEAMRUNS == nil ? 0: (int)BATTEAMRUNS);
+    int tempBatteamRuns = (BATTEAMRUNS == nil ? 0: BATTEAMRUNS);
     
-    int tempBatTeamPenalty =  (TEMPBATTEAMPENALTY == nil ? 0 :(int)TEMPBATTEAMPENALTY);
+    int tempBatTeamPenalty =  (TEMPBATTEAMPENALTY == nil ? 0 :TEMPBATTEAMPENALTY);
     
     BATTEAMRUNS = tempBatteamRuns + tempBatTeamPenalty;
     

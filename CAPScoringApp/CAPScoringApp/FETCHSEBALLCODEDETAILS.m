@@ -228,7 +228,8 @@
     
     BATTEAMRUNS =[ dbEditScoreEngine GetSEGrandTotalForBallEvents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO : BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT : BATTEAMOVERS ];
     
-    int battingTeamRunsData = BATTEAMRUNS.intValue +[[ dbEditScoreEngine GetPenaltyRunsForBallCodeDetails :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO ] intValue];
+   
+    int battingTeamRunsData = BATTEAMRUNS.intValue + [[ dbEditScoreEngine GetPenaltyRunsForBallCodeDetails :  COMPETITIONCODE : MATCHCODE: INNINGSNO : BATTINGTEAMCODE] intValue];
     
     BATTEAMRUNS =[NSNumber numberWithInt:battingTeamRunsData];
     

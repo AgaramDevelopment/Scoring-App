@@ -1265,7 +1265,7 @@
             else if (runs == 3)
                 [self selectedViewBg:_btn_run3];
             
-            SelectLegByesCommantry =[NSString stringWithFormat:@"Byes %@",runs];
+            SelectLegByesCommantry =[NSString stringWithFormat:@"Byes %d",runs];
 
         }
         [self disableButtonBg :_btn_B6];
@@ -3110,8 +3110,8 @@
          @"I"//FIELDINGEVENTSFLAG
          ];
         //Insert Score Engine SP Call
-       
-        [self reloadBowlerTeamBatsmanDetails];
+       [self reloadBowlerTeamBatsmanDetails];
+        
     }
     DBManager *objDBManager = [[DBManager alloc]init];
     NSMutableArray * objUmpireArray =[objDBManager GETUMPIRE:self.competitionCode :self.matchCode ];
@@ -4534,6 +4534,8 @@
     }
     else if(selectBtnTag.tag==110)
     {
+        
+
         if(isPitchmap==NO)
         {
             [self selectedButtonBg:selectBtnTag];
@@ -4591,49 +4593,52 @@
             }
             
         }
+        
     }
     else if(selectBtnTag.tag==111)
     {
-        if(_isEditMode)
-        {
-            if(!(self.ballEventRecord.objWWX1.intValue ==221 && self.ballEventRecord.objWWX2.intValue ==221 && self.ballEventRecord.objWWY1.intValue ==186 && self.ballEventRecord.objWWY2.intValue ==186) && !(self.ballEventRecord.objWWX1.intValue ==172 && self.ballEventRecord.objWWX2.intValue ==172 && self.ballEventRecord.objWWY1.intValue ==145 && self.ballEventRecord.objWWY2.intValue ==145)){
-                
-                isWagonWheelValueSelected = YES;
-                [self selectedViewBg:_btn_wagonwheel];
-                
-                for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
-                    if ([layer.name isEqualToString:@"DrawLine"]) {
-                        [layer removeFromSuperlayer];
-                        break;
-                    }
-                }
-                
-                CGMutablePathRef straightLinePath = CGPathCreateMutable();
-                CGPathMoveToPoint(straightLinePath, NULL, self.ballEventRecord.objWWX1.intValue, self.ballEventRecord.objWWY1.intValue);
-                CGPathAddLineToPoint(straightLinePath, NULL,self.ballEventRecord.objWWX2.intValue,self.ballEventRecord.objWWY2.intValue);
-                CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-                shapeLayer.path = straightLinePath;
-                UIColor *fillColor = [UIColor redColor];
-                shapeLayer.fillColor = fillColor.CGColor;
-                UIColor *strokeColor = [UIColor redColor];
-                shapeLayer.strokeColor = strokeColor.CGColor;
-                shapeLayer.lineWidth = 2.0f;
-                shapeLayer.fillRule = kCAFillRuleNonZero;
-                shapeLayer.name = @"DrawLine";
-                [self.img_WagonWheel.layer addSublayer:shapeLayer];
-                [self EditWangon_Wheel];
-                
-            }
-            
-            
-        }
-        else{
-        if(isWagonwheel == NO){
+               if(isWagonwheel == NO){
+                   
+                   if(_isEditMode)
+                   {
+                       if(!(self.ballEventRecord.objWWX1.intValue ==221 && self.ballEventRecord.objWWX2.intValue ==221 && self.ballEventRecord.objWWY1.intValue ==186 && self.ballEventRecord.objWWY2.intValue ==186) && !(self.ballEventRecord.objWWX1.intValue ==172 && self.ballEventRecord.objWWX2.intValue ==172 && self.ballEventRecord.objWWY1.intValue ==145 && self.ballEventRecord.objWWY2.intValue ==145)){
+                           
+                           isWagonWheelValueSelected = YES;
+                           [self selectedViewBg:_btn_wagonwheel];
+                           
+                           for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
+                               if ([layer.name isEqualToString:@"DrawLine"]) {
+                                   [layer removeFromSuperlayer];
+                                   break;
+                               }
+                           }
+                           
+                           CGMutablePathRef straightLinePath = CGPathCreateMutable();
+                           CGPathMoveToPoint(straightLinePath, NULL, self.ballEventRecord.objWWX1.intValue, self.ballEventRecord.objWWY1.intValue);
+                           CGPathAddLineToPoint(straightLinePath, NULL,self.ballEventRecord.objWWX2.intValue,self.ballEventRecord.objWWY2.intValue);
+                           CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+                           shapeLayer.path = straightLinePath;
+                           UIColor *fillColor = [UIColor redColor];
+                           shapeLayer.fillColor = fillColor.CGColor;
+                           UIColor *strokeColor = [UIColor redColor];
+                           shapeLayer.strokeColor = strokeColor.CGColor;
+                           shapeLayer.lineWidth = 2.0f;
+                           shapeLayer.fillRule = kCAFillRuleNonZero;
+                           shapeLayer.name = @"DrawLine";
+                           [self.img_WagonWheel.layer addSublayer:shapeLayer];
+                           [self EditWangon_Wheel];
+                           
+                       }
+                       
+                       
+                   }
+                   else{
             [self selectedButtonBg:selectBtnTag];
             // [self selectBtncolor_Action:@"111" :self.btn_wagonwheel :0];
             //[self.img_pichmap setImage:[UIImage imageNamed:@"WagonWheel_img"]];
             // _View_Appeal.hidden=YES;
             _view_Wagon_wheel.hidden=NO;
+                   
             
             if(IS_IPAD_PRO)
             {
@@ -4681,9 +4686,12 @@
             [self DisplayCommentmethod];
             self.img_WagonWheel.hidden=NO;
             isWagonwheel=YES;
+                   }
+                  
         }
         
         else{
+           
             [self unselectedButtonBg:self.btn_wagonwheel];
             self.img_WagonWheel.hidden=YES;
             isWagonwheel=NO;
@@ -4696,7 +4704,8 @@
                 }
             }
             
-            
+            if(!_isEditMode)
+            {
             if (IS_IPAD_PRO) {
                 _ballEventRecord.objWWX1=@(221);
                 _ballEventRecord.objWWY1=@(186);
@@ -4717,8 +4726,8 @@
             
         
         }
+        }
         
-    }
     }
     
 }
@@ -4786,32 +4795,6 @@
 -(void)PitchmapSelectposition:(int) Xposition :(int) Yposition
 {
     
-    if(_isEditMode)
-    {
-        if(!(self.ballEventRecord.objPMX2.intValue == 1 && self.ballEventRecord.objPMY2.intValue ==1)){
-            ispichmapSelectValue = YES;
-            [self selectedViewBg:_btn_pichmap];
-            
-            if(Img_ball != nil)
-            {
-                [Img_ball removeFromSuperview];
-            }
-            
-            Img_ball =[[UIImageView alloc]initWithFrame:CGRectMake(self.ballEventRecord.objPMX2.floatValue,self.ballEventRecord.objPMY2.floatValue,20, 20)];
-            CGFloat xposition =[self.ballEventRecord.objPMX2 floatValue];
-            CGFloat yposition =[self.ballEventRecord.objPMY2 floatValue];
-            if(xposition > 1 && yposition > 1)
-            {
-                Img_ball.image =[UIImage imageNamed:@"RedBall"];
-                [self.img_pichmap addSubview:Img_ball];
-            }
-            self.img_pichmap.hidden = YES;
-            [self EditModePitchMap];
-            
-        }
-
-    }
-    else{
     pitchCommantryStr=@"";
     if(IS_IPAD_PRO)
     {
@@ -5954,7 +5937,7 @@
         _ballEventRecord.objPMX2=@(Xposition);
         _ballEventRecord.objPMY2=@(Yposition);
     }
-    }
+    
 }
 
 -(void)comantryTextValue
@@ -9135,10 +9118,6 @@
                 self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.02f",[currentBowlerDetailRecord.ECONOMY floatValue]];
                 self.lbl_bowler_strickrate.adjustsFontSizeToFitWidth = YES;
                 
-                if([self.btn_StartOver.currentTitle isEqualToString:@"START OVER"])
-                {
-                    [self DidClickStartOver:self.btn_StartOver];
-                }
                 
             }else{
                 fetchSEPageLoadRecord.currentBowlerPlayerName = bowlEvent.BowlerName;
@@ -9157,6 +9136,14 @@
                 self.lbl_bowler_strickrate.text = [NSString stringWithFormat:@"%.02f",[fetchSEPageLoadRecord.currentBowlerEcoRate floatValue]];
                 self.lbl_bowler_strickrate.adjustsFontSizeToFitWidth = YES;
             }
+            if(fetchSEPageLoadRecord.BATTEAMOVERS >0)
+            {
+            if([self.btn_StartOver.currentTitle isEqualToString:@"START OVER"])
+            {
+                [self DidClickStartOver:self.btn_StartOver];
+            }
+            }
+
             
         }else if(tableView == nonstrickerTableView){
             SelectPlayerRecord *selectPlayer = [nonStrickerList objectAtIndex:indexPath.row];
@@ -10328,8 +10315,9 @@
     //Total runs scored for the particular ball including byes or legbyes.
     
     int totalExtras = (self.ballEventRecord.objNoball.intValue +self.ballEventRecord.objWide.intValue+self.ballEventRecord.objByes.intValue+self.ballEventRecord.objLegByes.intValue+self.ballEventRecord.objPenalty.intValue);
-    self.ballEventRecord.objGrandtotal =[NSNumber numberWithInt: totalRns];
-     //self.ballEventRecord.objGrandtotal =[NSNumber numberWithInt: totalRns+totalExtras];
+    
+   // self.ballEventRecord.objGrandtotal =[NSNumber numberWithInt: totalRns];
+     self.ballEventRecord.objGrandtotal =[NSNumber numberWithInt: totalRns+totalExtras];
 
     self.ballEventRecord.objTotalextras = [NSNumber numberWithInt: totalExtras];
     
@@ -11112,6 +11100,8 @@
     shapeLayer.fillRule = kCAFillRuleNonZero;
     shapeLayer.name = @"DrawLine";
     [self.img_WagonWheel.layer addSublayer:shapeLayer];
+    
+    //isWagonwheel =NO;
     //
     //    CGPoint p = [wagon_Wheelgesture locationInView:self.img_WagonWheel];
     //    float Xposition = p.x;
@@ -14408,13 +14398,13 @@
         [self setWagonWheelRegionCodeByAngle:Xposition :Yposition];
     }
     
-    [self comantryTextValue];
+   
 }
 
 -(void)didClickWagonWheelmapTapAction:(UIGestureRecognizer *)wagon_Wheelgesture {
     
     isWagonWheelValueSelected = YES;
-    
+    // [self unselectedButtonBg:self.btn_wagonwheel];
     for (CALayer *layer in self.img_WagonWheel.layer.sublayers) {
         if ([layer.name isEqualToString:@"DrawLine"]) {
             [layer removeFromSuperlayer];
@@ -16424,6 +16414,8 @@
     
     [self DisplayCommentmethod];
     self.img_WagonWheel.hidden=NO;
+    [self selectedButtonBg:self.btn_wagonwheel];
+
     isWagonwheel=YES;
 }
 
@@ -16549,6 +16541,7 @@
     _ballEventRecord.objWWREGION=regioncode;
 
      //[self comantryTextValue];
+     [self comantryTextValue];
     
 }
 
