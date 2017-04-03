@@ -969,7 +969,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             ExpandBowlerView.hidden=NO;
            // self.tblView_Height.constant =tableheight+550;
            // [self.backScroll setContentSize:CGSizeMake(self.table.frame.size.width,tableheight+550)];
-           
+            NSLog(@"expendscroll=%ld",(long)self.tblView_Height.constant);
             return 550;
         }
         else{
@@ -1069,12 +1069,17 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
       
         //self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
         self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
+        [self.batsmanCell.onSide_Btn setTitle:@"onSide" forState:UIControlStateNormal];
+        [self.batsmanCell.offSide_Btn setTitle:@"OffSide" forState:UIControlStateNormal];
         
     }
     else
     {
         
         self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
+        
+        [self.batsmanCell.onSide_Btn setTitle:@"OffSide" forState:UIControlStateNormal];
+        [self.batsmanCell.offSide_Btn setTitle:@"onSide" forState:UIControlStateNormal];
     }
     
 
@@ -4230,9 +4235,11 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
     NSMutableArray *mTeam = [[NSMutableArray alloc]init];
     [mTeam addObject:self.matchCode];
+    if(fetchScorecard.CURRENTBATTINGTEAMCODE > 0)
+    {
     [mTeam addObject:fetchScorecard.CURRENTBATTINGTEAMCODE];
 
-
+    }
     selectedPlayerFilterArray = [[NSMutableArray alloc]initWithArray: selectedPlayerArray];
 
 
