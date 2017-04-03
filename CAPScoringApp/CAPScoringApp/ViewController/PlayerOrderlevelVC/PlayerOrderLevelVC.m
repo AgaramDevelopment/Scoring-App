@@ -23,6 +23,7 @@
    
     BOOL isSelectCaptainType;
     BOOL isSelectWKTKeeperType;
+    BOOL deselectwicketkeeper;
     NSMutableArray*slecteplayerlist;
     UIGestureRecognizer *_dndLongPressGestureRecognizer;
     PlayerLevelCell*playercell;
@@ -624,7 +625,7 @@
      if ([objSelectPlayerRecord.playerCode isEqualToString:self.WKTkeeperAcode] || [objSelectPlayerRecord.playerCode isEqualToString:self.WKTkeeperBcode])
     {
         //objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
-       objSelectPlayerRecord.isSelectWKTKeeper=@"YES";
+        objSelectPlayerRecord.isSelectWKTKeeper=@"YES";
         isSelectWKTKeeperType=YES;
         
          if([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])
@@ -696,6 +697,20 @@
     
     if(ordernumber==12)
     {
+//        if([objSelectPlayerRecord.isSelectWKTKeeper isEqualToString:@"YES"] && isSelectWKTKeeperType==YES)
+//        {
+//            playercell.Img_wktkeeper.image=[UIImage imageNamed:@""];
+//            [playercell.Img_wktkeeper setBackgroundColor:[UIColor clearColor]];
+//            deselectwicketkeeper =YES;
+//            
+//        }
+//        else
+//        {
+////            playercell.Img_wktkeeper.image=[UIImage imageNamed:@""];
+////            [playercell.Img_wktkeeper setBackgroundColor:[UIColor clearColor]];
+//            //objSelectPlayerRecord.isSelectWKTKeeper=nil;
+//        }
+
         
         playercell.lbl_playerName.text =[NSString stringWithFormat:@"%@   (12 Member)",objSelectPlayerRecord.playerName] ;
     }
@@ -791,7 +806,7 @@
     
     else{
         
-       if(isSelectWKTKeeperType== NO)
+       if(isSelectWKTKeeperType== NO && deselectwicketkeeper==NO)
         {
             
             if([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])
@@ -802,9 +817,28 @@
                 [playercell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
             }
             else{
+                
                playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
                 [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
             }
+            }
+       else if (deselectwicketkeeper==YES){
+           deselectwicketkeeper=NO;
+           if([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])
+           {
+               playercell.IMg_captain.image =[UIImage imageNamed:@"Img_Captain"];
+               playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
+               [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+               [playercell.IMg_captain setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+           }
+           else{
+               
+               playercell.Img_wktkeeper.image=[UIImage imageNamed:@"Img_wktKeeper"];
+               [playercell.Img_wktkeeper setBackgroundColor:[UIColor colorWithRed:(0/255.0f) green:(160/255.0f) blue:(90/255.0f) alpha:1.0f]];
+           }
+
+           
+       }
 
              //objSelectPlayerRecord=(SelectPlayerRecord*)[slecteplayerlist objectAtIndex:indexPath.row];
             objSelectPlayerRecord.isSelectWKTKeeper=@"YES";
@@ -821,7 +855,7 @@
                 self.WKTkeeperBcode =objSelectPlayerRecord.playerCode;
             }
 
-        }
+        
         }
 }
     else
@@ -879,6 +913,8 @@
         objSelectPlayerRecord.isSelectWKTKeeper=nil;
         
         isSelectWKTKeeperType=NO;
+        //deselectwicketkeeper =YES;
+        
         if([objSelectPlayerRecord.isSelectCapten isEqualToString:@"YES"])
         {
             Cell.IMg_captain.image =[UIImage imageNamed:@""];
