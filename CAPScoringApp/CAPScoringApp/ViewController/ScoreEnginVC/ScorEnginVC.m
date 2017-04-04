@@ -935,7 +935,7 @@
     fetchSEPageLoadRecord.BATTINGTEAMCODE = fetchSeBallCodeDetails.BATTINGTEAMCODE;
     fetchSEPageLoadRecord.INNINGSNO = [NSString stringWithFormat:@"%d",fetchSeBallCodeDetails.INNINGSNO.intValue];
     fetchSEPageLoadRecord.SESSIONNO = fetchSeBallCodeDetails.SESSIONNO;
-    fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT = fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT;
+    fetchSEPageLoadRecord.BATTEAMOVRBALLSCNT = fetchSeBallCodeDetails.BATTEAMOVRBALLSCNT.integerValue;
     
     
     
@@ -1242,7 +1242,7 @@
                 [self selectedViewBg:_btn_run2];
             else if (runs == 3)
                 [self selectedViewBg:_btn_run3];
-            SelectLegByesCommantry =[NSString stringWithFormat:@"LegByes %@",runs];
+            SelectLegByesCommantry =[NSString stringWithFormat:@"LegByes %d",runs];
 
         }
         [self disableButtonBg :_btn_B6];

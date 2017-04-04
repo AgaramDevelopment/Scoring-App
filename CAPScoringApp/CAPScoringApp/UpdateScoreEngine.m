@@ -405,7 +405,7 @@ EndInnings *insertScoreBoard;
     
     if(OLDISLEGALBALL.intValue == 1 && ISLEGALBALL.intValue == 0)
     {
-        [objDBManagerEndBall UpdateBallPlusoneScoreEngine:BALLCOUNT :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :OVERNO :BALLCODE];
+        [objDBManagerEndBall UpdateBallPlusoneScoreEngine:BALLCOUNT :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO :OVERNO :BALLNO];
         
         
         [objDBManagerEndBall UpdateBallMinusoneScoreEngine :COMPETITIONCODE :MATCHCODE:TEAMCODE:INNINGSNO:OVERNO:BALLNO];
@@ -419,8 +419,10 @@ EndInnings *insertScoreBoard;
         
         [objDBManagerEndBall LegalBallByOverNoUpdateScoreEngine:COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : OVERNO :BALLNO];
         
-        [objDBManagerEndBall LegalBallByOverNoUpdateScoreEngine :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : OVERNO :BALLNO];
+//        [objDBManagerEndBall LegalBallByOverNoUpdateScoreEngine :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : OVERNO :BALLNO];
+        [objDBManagerEndBall LegalBallByOverNoUpdateScoreEngine :COMPETITIONCODE :MATCHCODE :TEAMCODE :INNINGSNO : OVERNO :BALLNO : [NSString stringWithFormat:@"%d",BALLCOUNT.intValue]];
         
+
         
     }
     
