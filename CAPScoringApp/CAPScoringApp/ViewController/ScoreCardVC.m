@@ -4158,8 +4158,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
                     
-                    int Xposition = x1position-10;
-                    int Yposition = y1position-40;
+                    int Xposition = x1position+28;
+                    int Yposition = y1position;
                     CGMutablePathRef straightLinePath = CGPathCreateMutable();
                     CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
                     CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
