@@ -11,14 +11,17 @@
 #import "HVTableView.h"
 
 @interface ScoreCardVC : UIViewController<HVTableViewDelegate,HVTableViewDataSource>
+{
+     NSMutableArray  *arrayForBool;
+}
 
-@property (strong, nonatomic) IBOutlet HVTableView *table;
+@property (strong, nonatomic) IBOutlet UITableView *table;
 
 
 
-@property (nonatomic,strong) IBOutlet UIScrollView * backScroll;
+//@property (nonatomic,strong) IBOutlet UIScrollView * backScroll;
 
-@property (nonatomic,strong) IBOutlet NSLayoutConstraint * tblView_Height;
+//@property (nonatomic,strong) IBOutlet NSLayoutConstraint * tblView_Height;
 
 
 //@property (strong, nonatomic) IBOutlet UITableView *tbl_scorecard;

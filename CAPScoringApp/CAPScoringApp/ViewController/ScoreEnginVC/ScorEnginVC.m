@@ -3765,6 +3765,9 @@
     {
         UIAlertView *altert =[[UIAlertView alloc]initWithTitle:@"Score Engine" message:@"No More Wicket to play " delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [altert show];
+        //[alter setTag:10004];
+
+        
         return YES;
     }
     return NO;

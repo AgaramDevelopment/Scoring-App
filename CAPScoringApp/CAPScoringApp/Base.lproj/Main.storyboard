@@ -12973,7 +12973,7 @@
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yHA-PV-TTA">
                                         <rect key="frame" x="0.0" y="230" width="768" height="684"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qho-pK-tBa" customClass="HVTableView">
+                                            <tableView clipsSubviews="YES" contentMode="scaleAspectFit" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qho-pK-tBa">
                                                 <rect key="frame" x="0.0" y="0.0" width="768" height="1200"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -12994,6 +12994,10 @@
                                                         <include reference="mpr-ka-25Q"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <outlet property="dataSource" destination="srV-8K-Ywy" id="TuB-K6-OF2"/>
+                                                    <outlet property="delegate" destination="srV-8K-Ywy" id="dSY-B1-KiL"/>
+                                                </connections>
                                             </tableView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
@@ -13144,7 +13148,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="768" height="1024"/>
                     <connections>
-                        <outlet property="backScroll" destination="yHA-PV-TTA" id="oOP-M6-UCc"/>
                         <outlet property="btn_fourth_inns_id" destination="a9f-Y7-9Lr" id="MCg-aY-yoO"/>
                         <outlet property="btn_fst_inn_width" destination="xsH-B7-dro" id="dhg-CC-cPH"/>
                         <outlet property="btn_fst_inn_x" destination="KJh-HY-Z3f" id="hc4-R3-VgN"/>
@@ -13181,8 +13184,7 @@
                         <outlet property="lbl_teamBsecIngsHeading" destination="dMK-Wx-LWq" id="oii-qx-nFj"/>
                         <outlet property="lbl_third_div" destination="GuY-uz-Zxx" id="Zev-Mw-tKR"/>
                         <outlet property="scrolviewheight" destination="efc-tr-2It" id="YBC-b3-jt2"/>
-                        <outlet property="table" destination="Qho-pK-tBa" id="cuI-z1-dnK"/>
-                        <outlet property="tblView_Height" destination="mpr-ka-25Q" id="6IQ-lB-pxW"/>
+                        <outlet property="table" destination="Qho-pK-tBa" id="CPM-CO-EI7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="96J-Y0-rBd" userLabel="First Responder" sceneMemberID="firstResponder"/>
