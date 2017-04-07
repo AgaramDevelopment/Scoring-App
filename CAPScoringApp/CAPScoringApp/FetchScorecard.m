@@ -112,7 +112,7 @@ DBManagerScoreCard *dbScoreCard;
     
     ISINNINGSCOMPLETE = [dbScoreCard GetInningsStatusForScoreBoard : COMPETITIONCODE : MATCHCODE: INNINGSNO];
     
-    NSMutableArray *MatchOverandBallForScoreBoard=[dbScoreCard GetMatchOverForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO ];
+    NSMutableArray * MatchOverandBallForScoreBoard=[dbScoreCard GetMatchOverForScoreBoard : COMPETITIONCODE : MATCHCODE : INNINGSNO ];
     
     if([MatchOverandBallForScoreBoard count]>0){
         

@@ -22,5 +22,6 @@
 @property(strong,nonatomic)NSString *FOURS	;
 @property(strong,nonatomic)NSString *SIXES	;
 @property(strong,nonatomic)NSString *ECONOMY;
+@property (strong,nonatomic) NSString * BATTINGSTYLE;
 
 @end
