@@ -42,11 +42,13 @@
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btn_tab_third_inns;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *btn_tab_fourth_inns;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *lbl_header_strip;
 @property(nonatomic,assign)NSInteger  *RunRate;
 
 @property (strong, nonatomic) IBOutlet UIButton *btn_fst_inns_id;
 - (IBAction)btn_fst_inns_action:(id)sender;
 @property (strong, nonatomic) IBOutlet UILabel *lbl_fst_div;
+@property (weak, nonatomic) IBOutlet UIView *view_common;
 
 
 @property (strong, nonatomic) IBOutlet UIButton *btn_sec_inns_id;
@@ -91,6 +93,17 @@
 @property (weak, nonatomic) IBOutlet UIImageView *img_firstIngsTeamName;
 @property (weak, nonatomic) IBOutlet UIImageView *img_secIngsTeamName;
 
+@property (weak, nonatomic) IBOutlet UIButton *btn_scorecard;
+@property (weak, nonatomic) IBOutlet UIButton *btn_commentry;
+@property (weak, nonatomic) IBOutlet UIButton *btn_wangonWheel;
+@property (weak, nonatomic) IBOutlet UILabel *lbl_selectSec;
+@property (weak, nonatomic) IBOutlet UIView *view_headerview;
+
+
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *inns_two_width;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *inns_one_width;
+
+
 
 @property(nonatomic,assign)NSInteger BATTEAMWICKETS;
 @property(nonatomic,assign)NSInteger *BATTEAMOVERS;
@@ -110,6 +123,13 @@
 @property(strong,nonatomic) NSString *inningsNo;
 @property(strong,nonatomic) NSString *BATTEAMSHORTNAME;
 @property(strong,nonatomic) NSString *BOWLTEAMSHORTNAME;
+
+
+//select button name string
+@property(strong,nonatomic)NSString *fstInnShortName;
+@property(strong,nonatomic)NSString *secInnShortName;
+@property(strong,nonatomic)NSString *thrdInnShortName;
+@property(strong,nonatomic)NSString *frthInnShortName;
 
 
 

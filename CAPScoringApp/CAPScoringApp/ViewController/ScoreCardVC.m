@@ -86,6 +86,11 @@
     BOOL isScrollheight;
     CGFloat tableheight;
 
+    BOOL isFirstInn;
+    BOOL isSecInn;
+    BOOL isThirdInn;
+    BOOL isFourthInn;
+    BOOL isDone;
 }
 @property (strong, nonatomic) IBOutlet UILabel *cener_lbl;
 @end
@@ -4082,11 +4087,12 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             {
                 BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
                 NSString * batsmanstyle = objRecord.BattingStyle;
-                NSString * wwregion  =objRecord.WWRegion;
-                if([batsmanstyle isEqualToString:self.BatmenStyle])
+                NSString * wwregion  =objRecord.Sectorregioncode;
+                if(![batsmanstyle isEqualToString:self.BatmenStyle])
                
                 {
-                    if([wwregion isEqualToString:@"MSC216"] ||[wwregion isEqualToString:@"MSC194"] ||[wwregion isEqualToString:@"MSC189"] ||[wwregion isEqualToString:@"MSC185"])
+                   // if([wwregion isEqualToString:@"MSC216"] ||[wwregion isEqualToString:@"MSC194"] ||[wwregion isEqualToString:@"MSC189"] ||[wwregion isEqualToString:@"MSC185"])
+                    if([wwregion isEqualToString:@"MDT041"] ||[wwregion isEqualToString:@"mdt042"] ||[wwregion isEqualToString:@"MDT043"] ||[wwregion isEqualToString:@"mdt044"])
                     {
                         [onsideRegionValue addObject:objRecord];
                     }
@@ -5459,33 +5465,212 @@ else
     return [fileManager fileExistsAtPath:filePath];
 }
 
+-(UIColor*)colorWithHexString:(NSString*)hex
+{
+    //-----------------------------------------
+    // Convert hex string to an integer
+    //-----------------------------------------
+    unsigned int hexint = 0;
+    
+    // Create scanner
+    NSScanner *scanner = [NSScanner scannerWithString:hex];
+    
+    // Tell scanner to skip the # character
+    [scanner setCharactersToBeSkipped:[NSCharacterSet
+                                       characterSetWithCharactersInString:@"#"]];
+    [scanner scanHexInt:&hexint];
+    
+    //-----------------------------------------
+    // Create color object, specifying alpha
+    //-----------------------------------------
+    UIColor *color =
+    [UIColor colorWithRed:((CGFloat) ((hexint & 0xFF0000) >> 16))/255
+                    green:((CGFloat) ((hexint & 0xFF00) >> 8))/255
+                     blue:((CGFloat) (hexint & 0xFF))/255
+                    alpha:1.0f];
+    
+    return color;
+}
+
+-(void) setInningsButtonSelect : (UIButton*) innsBtn{
+    // innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#2374CD"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    
+}
+
+-(void) setInningsButtonUnselect : (UIButton*) innsBtn{
+    //  innsBtn.layer.cornerRadius = 25;
+    UIColor *extrasBrushBG = [self colorWithHexString : @"#000000"];
+    
+    innsBtn.layer.backgroundColor = extrasBrushBG.CGColor;
+    
+}
+
+
+-(void) setInningsBySelection: (NSString*) innsNo{
+    
+    [self setInningsButtonUnselect:self.btn_fst_inns_id];
+    [self setInningsButtonUnselect:self.btn_sec_inns_id];
+    [self setInningsButtonUnselect:self.btn_third_inns_id];
+    [self setInningsButtonUnselect:self.btn_fourth_inns_id];
+    
+    
+    [self.btn_fst_inns_id setTitle:[NSString stringWithFormat:@"%@ 1st INNS",self.fstInnShortName] forState:UIControlStateNormal];
+    [self.btn_sec_inns_id setTitle:[NSString stringWithFormat:@"%@ 1st INNS",self.secInnShortName] forState:UIControlStateNormal];
+    [self.btn_third_inns_id setTitle:[NSString stringWithFormat:@"%@ 2nd INNS",self.thrdInnShortName] forState:UIControlStateNormal];
+    [self.btn_fourth_inns_id setTitle:[NSString stringWithFormat:@"%@ 2nd INNS",self.frthInnShortName] forState:UIControlStateNormal];
+    
+    
+    
+    if([innsNo isEqualToString:@"1"]){
+        
+        [self setInningsButtonSelect:self.btn_fst_inns_id];
+        
+    }else if([innsNo isEqualToString:@"2"]){
+        
+        [self setInningsButtonSelect:self.btn_sec_inns_id];
+        
+    }else if([innsNo isEqualToString:@"3"]){
+        
+        [self setInningsButtonSelect:self.btn_third_inns_id];
+        
+    }else if([innsNo isEqualToString:@"4"]){
+        
+        [self setInningsButtonSelect:self.btn_fourth_inns_id];
+        
+    }
+}
+-(void) setInningsView{
+    if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){//T20
+        
+        self.btn_fst_inns_id.hidden = NO;
+        self.btn_sec_inns_id.hidden = NO;
+        self.btn_third_inns_id.hidden = YES;
+        self.btn_fourth_inns_id.hidden = YES;
+        
+        //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
+        //[self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
+        self.inns_one_width.constant = 384;
+        self.inns_two_width.constant = 384;
+        
+        
+    }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){//ODI
+        self.btn_fst_inns_id.hidden = NO;
+        self.btn_sec_inns_id.hidden = NO;
+        self.btn_third_inns_id.hidden = YES;
+        self.btn_fourth_inns_id.hidden = YES;
+        
+        
+        self.inns_one_width.constant = 384;
+        self.inns_two_width.constant = 384;
+        
+        //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
+        //   [self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
+        
+    }else if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){//Test
+        
+        self.btn_fst_inns_id.hidden = NO;
+        self.btn_sec_inns_id.hidden = NO;
+        self.btn_third_inns_id.hidden = NO;
+        self.btn_fourth_inns_id.hidden = NO;
+    }
+}
+
+
 
 - (IBAction)btn_fst_inns_action:(id)sender {
-    self.lbl_strip.constant=0;
-    inningsNo = @"1";
+   // self.lbl_strip.constant=0;
+    //inningsNo = @"1";
+//    [self reloadScroeCard];
+    
+    
+    
+    isFirstInn = YES;
+    isSecInn = NO;
+    isThirdInn = NO;
+    isFourthInn = NO;
+    //isDone = NO;
+    
+    [self setInningsBySelection:@"1"];
+    [self setInningsView];
     [self reloadScroeCard];
+    
+    //self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
+   // _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"1"];
+    
+   // _sectorWagonArray = [objDBManagerSpiderWagonReport getSectorWagon:self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode :@"1" :@"" :@"" :@"" :@"" :@"" :@""];
+    
+   // _totalRuns =  [objDBManagerSpiderWagonReport getTotalRuns:self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode :@"1"];
+   // _tRuns = [NSNumber numberWithInt:[_totalRuns intValue]];
+    
+    
+   // [self displayRuns];
+    
+    //[self.tbl_players reloadData];
+
     
 }
 - (IBAction)btn_sec_inns_action:(id)sender {
-    self.lbl_strip.constant=self.btn_sec_inns_id.frame.origin.x;
-    inningsNo = @"2";
+    //self.lbl_strip.constant=self.btn_sec_inns_id.frame.origin.x;
+//inningsNo = @"2";
+    
+    isFirstInn = NO;
+    isSecInn = YES;
+    isThirdInn = NO;
+    isFourthInn = NO;
+    //isDone = NO;
+    
+    [self setInningsBySelection:@"2"];
+    [self setInningsView];
     [self reloadScroeCard];
 }
 - (IBAction)btn_third_inns_action:(id)sender {
-    self.lbl_strip.constant=self.btn_third_inns_id.frame.origin.x;
-    inningsNo = @"3";
+    //self.lbl_strip.constant=self.btn_third_inns_id.frame.origin.x;
+    //inningsNo = @"3";
+    
+    isFirstInn = NO;
+    isSecInn = NO;
+    isThirdInn = YES;
+    isFourthInn = NO;
+    //isDone = NO;
+    
+    [self setInningsBySelection:@"3"];
+    [self setInningsView];
     [self reloadScroeCard];
 }
 - (IBAction)btn_fourth_inns_action:(id)sender {
-    self.lbl_strip.constant=self.btn_fourth_inns_id.frame.origin.x;
-    inningsNo = @"4";
+    //self.lbl_strip.constant=self.btn_fourth_inns_id.frame.origin.x;
+    //inningsNo = @"4";
+    
+    isFirstInn = NO;
+    isSecInn = NO;
+    isThirdInn = NO;
+    isFourthInn = YES;
+    //isDone = NO;
+    
+    [self setInningsBySelection:@"4"];
+    [self setInningsView];
     [self reloadScroeCard];
 }
 
+-(IBAction)didClickScoreCardAction:(id)sender
+{
+    self.lbl_header_strip.constant=0;
+}
 
+-(IBAction)didClickCommentryAction:(id)sender
+{
+    self.lbl_header_strip.constant=self.btn_commentry.frame.origin.x;
 
+}
 
+-(IBAction)didClickWagonAction:(id)sender
+{
+    self.lbl_header_strip.constant=self.btn_wangonWheel.frame.origin.x;
 
+}
 
 -(void) reloadScroeCard{
     @try {
@@ -6030,7 +6215,7 @@ else
             NSLog(@"LH");
             //  cover++;
             coverRun = coverRun+[Run intValue];
-            cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(280,100,35, 35)];
+            cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(280,180,35, 35)];
             
         }
         else
@@ -6038,7 +6223,7 @@ else
             // NSLog(@"RH");
             //cover++;
             coverRun = coverRun+[Run intValue];
-            cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,100,35, 35)];
+            cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,180,35, 35)];
             
         }
         
@@ -6060,7 +6245,7 @@ else
             NSLog(@"LH");
             //
             pointRun=pointRun+[Run intValue];
-            point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,120,35, 35)];
+            point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(280,100,35, 35)];
             
             //point++;
         }
@@ -6068,7 +6253,7 @@ else
         {
             NSLog(@"RH");
             pointRun=pointRun+[Run intValue];
-            point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(280,120,35, 35)];
+            point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,100,35, 35)];
             
             //     point++;
         }
