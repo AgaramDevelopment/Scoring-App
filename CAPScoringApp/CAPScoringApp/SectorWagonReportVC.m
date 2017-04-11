@@ -445,6 +445,7 @@
 
 - (IBAction)didClickStricker:(id)sender {
     
+    
     self.strikerTblYposition.constant =self.striker_view.frame.origin.y-55;
     self.strikerArray=[[NSMutableArray alloc]init];
     self.strikerArray= [objDBManagerSpiderWagonReport getStrickerdetail:self.matchCode :_teamCode];

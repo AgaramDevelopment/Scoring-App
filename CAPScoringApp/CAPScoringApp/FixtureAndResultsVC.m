@@ -15,7 +15,6 @@
 #import "FixtureReportRecord.h"
 #import "LiveReportRecord.h"
 #import "FixtureReportRecord.h"
-#import "ReportVC.h"
 #import "DBManager.h"
 #import "FetchSEPageLoadRecord.h"
 #import "EventRecord.h"

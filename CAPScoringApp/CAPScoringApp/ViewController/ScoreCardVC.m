@@ -21,6 +21,8 @@
 #import "BowlerStrickPitchRecord.h"
 #import "AppDelegate.h"
 #import "DBManagerBatsmanInOutTime.h"
+#import "CommentaryVC.h"
+#import "SpiderWagonReportVC.h"
 
 
 #define IS_IPAD (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad)
@@ -80,6 +82,11 @@
     
     NSMutableArray * expendBattsmanCellArray;
     NSMutableArray * expendBowlerCellArray;
+    
+    CommentaryVC *cmntryView;
+    SpiderWagonReportVC *spiderView;
+
+
     
     BOOL isSectorEnableBatsman;
     BOOL isSectorEnableBowler;
@@ -261,30 +268,19 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     int rows = fetchScorecard.BowlingSummaryForScoreBoard.count+
     fetchScorecard.BattingSummaryForScoreBoard.count+
     (fallOfWktHeaderPostion==0?0:1) + (fallOfWktPostion==0?0:1) + 5;
-    
-    //AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    
-    //Show indicator
-    //[delegate showLoading];
-//    [NSTimer scheduledTimerWithTimeInterval:2.0
-//                                     target:self
-//                                   selector:@selector(TimerStop)
-//                                   userInfo:nil
-//                                    repeats:NO];
-    
-   
+
     arrayForBool=[[NSMutableArray alloc]init];
     for (int i=0; i< rows; i++) {
         [arrayForBool addObject:[NSNumber numberWithBool:NO]];
     }
+    self.fstInnShortName =fetchSEpage.FIRSTINNINGSSHORTNAME;
+    self.secInnShortName = _lbl_secIngsTeamName.text;
+    self.thrdInnShortName=fetchSEpage.THIRDINNINGSSHORTNAME;
+    self.FOURTHINNINGSSHORTNAME =fetchSEpage.FOURTHINNINGSSHORTNAME;
+    [self setInningsBySelection:@"1"];
+    [self setInningsView];
 }
--(void)TimerStop
-{
-    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    
-    //Show indicator
-    [delegate hideLoading];
-}
+
 -(void)viewWillAppear:(BOOL)animated
 {
     //[self.view layoutIfNeeded];
@@ -5658,19 +5654,76 @@ else
 -(IBAction)didClickScoreCardAction:(id)sender
 {
     self.lbl_header_strip.constant=0;
+    self.view_common.hidden =NO;
+    if(spiderView!=nil)
+    {
+        [spiderView.view removeFromSuperview];
+    }
+    if(cmntryView!=nil)
+    {
+        [cmntryView.view removeFromSuperview];
+    }
 }
 
 -(IBAction)didClickCommentryAction:(id)sender
 {
     self.lbl_header_strip.constant=self.btn_commentry.frame.origin.x;
+    self.view_common.hidden =YES;
+    if(spiderView!=nil)
+    {
+        [spiderView.view removeFromSuperview];
+    }
+    [self setCommentaryView];
 
 }
 
 -(IBAction)didClickWagonAction:(id)sender
 {
     self.lbl_header_strip.constant=self.btn_wangonWheel.frame.origin.x;
+     self.view_common.hidden =YES;
+    if(cmntryView!=nil)
+    {
+        [cmntryView.view removeFromSuperview];
+    }
 
+    [self setSpiderView];
 }
+
+-(void) setCommentaryView{
+    cmntryView = [[CommentaryVC alloc]initWithNibName:@"CommentaryVC" bundle:nil];
+    cmntryView.matchCode = self.matchCode;
+    cmntryView.matchTypeCode =self.matchTypeCode;
+    
+    cmntryView.fstInnShortName = self.fstInnShortName;
+    cmntryView.secInnShortName = self.secInnShortName;
+    cmntryView.thrdInnShortName = self.thrdInnShortName;
+    cmntryView.frthInnShortName = self.frthInnShortName;
+    
+    cmntryView.view.frame =CGRectMake(0,self.view_common.frame.origin.y+self.view_headerview.frame.size.height+30,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:cmntryView.view];
+}
+
+-(void) setSpiderView{
+    
+    spiderView = [[SpiderWagonReportVC alloc]initWithNibName:@"SpiderWagonReportVC" bundle:nil];
+    spiderView.matchCode = self.matchCode;
+    spiderView.compititionCode = self.competitionCode;
+    spiderView.matchTypeCode = self.matchTypeCode;
+    
+    
+    spiderView.fstInnShortName = self.fstInnShortName;
+    spiderView.secInnShortName = self.secInnShortName;
+    spiderView.thrdInnShortName = self.thrdInnShortName;
+    spiderView.frthInnShortName = self.frthInnShortName;
+    spiderView.scordtoSelectview =YES;
+    
+    spiderView.view.frame =CGRectMake(0,self.view_common.frame.origin.y+self.view_headerview.frame.size.height+30,self.view.frame.size.width,self.view.frame.size.height-180);
+    
+    //    spiderView.view.frame =CGRectMake(0,180,self.view.frame.size.width,self.view.frame.size.height-180);
+    [self.view addSubview:spiderView.view];
+    
+}
+
 
 -(void) reloadScroeCard{
     @try {

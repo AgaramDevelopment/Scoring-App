@@ -74,6 +74,15 @@ UIColor *strokeColor;
     
     [self drawSpiderWagonLine];
     [self setInningsView];
+    if(self.scordtoSelectview == YES)
+    {
+      self.filterviewYposition.constant =150;
+      self.filterview1Yposition.constant =150;
+    }
+    else{
+        self.filterviewYposition.constant =0;
+        self.filterview1Yposition.constant =0;
+    }
     
 }
 
@@ -112,9 +121,9 @@ UIColor *strokeColor;
         
 //        if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
         
-            
-            int Xposition = x1position+7;
-            int Yposition = y1position+4;
+        
+            int Xposition = x1position+4;
+            int Yposition = y1position-24;
         
         
             CGMutablePathRef straightLinePath = CGPathCreateMutable();
@@ -257,7 +266,9 @@ self.img_wagon.layer.sublayers = nil;
 
 - (IBAction)didClickStricker:(id)sender {
     
-    self.strikerTblYposition.constant =self.striker_view.frame.origin.y-55;
+    
+    self.strikerTblYposition.constant =self.striker_view.frame.origin.y-5;
+    
     self.strikerArray=[[NSMutableArray alloc]init];
     self.strikerArray= [objDBManagerSpiderWagonReport getStrickerdetail:self.matchCode :_teamCode];
     
@@ -282,7 +293,8 @@ self.img_wagon.layer.sublayers = nil;
 
 - (IBAction)didClickBowler:(id)sender {
     
-    self.strikerTblYposition.constant = self.bowler_view.frame.origin.y-55;
+    self.strikerTblYposition.constant = self.bowler_view.frame.origin.y-5;
+    
     self.bowlerArray=[[NSMutableArray alloc]init];
     _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail :self.matchCode :_teamBcode:@"1"];
     

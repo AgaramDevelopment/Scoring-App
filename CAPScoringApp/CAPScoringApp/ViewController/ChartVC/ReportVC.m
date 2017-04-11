@@ -422,6 +422,7 @@ NSMutableArray * objhartlistArray;
     spiderView.secInnShortName = self.secInnShortName;
     spiderView.thrdInnShortName = self.thrdInnShortName;
     spiderView.frthInnShortName = self.frthInnShortName;
+    spiderView.scordtoSelectview =NO;
     
     spiderView.view.frame =CGRectMake(0,self.Tittle_scroll.frame.origin.y+self.Tittle_scroll.frame.size.height,self.view.frame.size.width,self.view.frame.size.height-180);
     

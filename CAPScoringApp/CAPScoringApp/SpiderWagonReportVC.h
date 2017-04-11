@@ -10,7 +10,7 @@
 
 @interface SpiderWagonReportVC : UIViewController
 
-
+@property (nonatomic,assign) BOOL scordtoSelectview;
 @property(nonatomic,strong) NSString * compititionCode;
 @property (nonatomic,strong) NSString * matchCode;
 @property (nonatomic,strong) NSString * matchTypeCode;
@@ -47,6 +47,11 @@
 @property (strong, nonatomic) IBOutlet UIView *hide_btn_view;
 
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *inns_x;
+
+@property (strong,nonatomic) IBOutlet NSLayoutConstraint * filterviewYposition;
+
+@property (strong,nonatomic) IBOutlet NSLayoutConstraint * filterview1Yposition;
+
 
 @property (strong, nonatomic) IBOutlet UIButton *one_run;
 @property (strong, nonatomic) IBOutlet UIButton *two_run;
