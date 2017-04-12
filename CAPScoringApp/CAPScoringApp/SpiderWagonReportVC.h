@@ -41,6 +41,8 @@
 @property (strong, nonatomic) IBOutlet UIImageView *img_wagon;
 @property (strong, nonatomic) IBOutlet UIButton *btn_ok;
 
+@property (strong,nonatomic) IBOutlet UIButton * btn_share;
+
 @property (nonatomic,strong) IBOutlet NSLayoutConstraint * strikerTblYposition;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *inns_two_width;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *inns_one_width;
@@ -52,6 +54,7 @@
 
 @property (strong,nonatomic) IBOutlet NSLayoutConstraint * filterview1Yposition;
 
+@property (strong,nonatomic) IBOutlet NSLayoutConstraint * wagonImgYposition;
 
 @property (strong, nonatomic) IBOutlet UIButton *one_run;
 @property (strong, nonatomic) IBOutlet UIButton *two_run;
@@ -60,6 +63,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *six_runs;
 @property (strong, nonatomic) IBOutlet UIButton *btn_onSide;
 @property (strong, nonatomic) IBOutlet UIButton *btn_offSide;
+
 
 - (IBAction)btn_done:(id)sender;
 - (IBAction)btn_hide_filter:(id)sender;

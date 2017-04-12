@@ -30,6 +30,9 @@
 #define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
 #define IS_IPAD_PRO (IS_IPAD && MAX(SCREEN_WIDTH,SCREEN_HEIGHT) == 1366.0)
 
+#define DEGREES_RADIANS(angle) ((angle) / 90.0 * M_PI)
+
+
 @interface ScoreCardVC (){
     CustomNavigationVC *objCustomNavigation;
     BattingPlayerStatistics *objBattingPlayerStatistics;
@@ -274,9 +277,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         [arrayForBool addObject:[NSNumber numberWithBool:NO]];
     }
     self.fstInnShortName =fetchSEpage.FIRSTINNINGSSHORTNAME;
-    self.secInnShortName = _lbl_secIngsTeamName.text;
-    self.thrdInnShortName=fetchSEpage.THIRDINNINGSSHORTNAME;
-    self.FOURTHINNINGSSHORTNAME =fetchSEpage.FOURTHINNINGSSHORTNAME;
+    self.secInnShortName = fetchSEpage.BOWLTEAMSHORTNAME;
+    self.thrdInnShortName=fetchSEpage.FIRSTINNINGSSHORTNAME;
+    self.FOURTHINNINGSSHORTNAME =fetchSEpage.BOWLTEAMSHORTNAME;
     [self setInningsBySelection:@"1"];
     [self setInningsView];
 }
@@ -474,10 +477,10 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 
                 [[cell btn_expand] setTag:[indexPath row]];
                 NSLog(@"btn%ld",(long)cell.btn_expand.tag);
-                [[cell sectorWagon_Btn] setTag:[indexPath row]];
+                 [[cell sectorWagon_Btn] setTag:[indexPath row]];
                  [[cell spiderWagon_Btn] setTag:[indexPath row]];
                  [[cell pitch_Btn] setTag:[indexPath row]];
-                [[cell WangonAll_Btn] setTag:[indexPath row]];
+                 [[cell WangonAll_Btn] setTag:[indexPath row]];
                  [[cell wangon1s_Btn] setTag:[indexPath row]];
                  [[cell wangon2s_Btn] setTag:[indexPath row]];
                  [[cell wangon3s_Btn] setTag:[indexPath row]];
@@ -745,7 +748,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
                  //ExpandBowlerView = (UIView *)[bowlerCellTvc viewWithTag:11];
                 bowlerCellTvc.expandBowler_View.hidden =YES;
-        
+               // bowlerCellTvc.pitchMap_img.hidden=YES;
+
                 [[bowlerCellTvc btn_expand] setTag:[indexPath row]];
                 
                 [[bowlerCellTvc BowlersectorWagon_Btn] setTag:[indexPath row]];
@@ -805,7 +809,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 if(indexPath.row == indexOfReadMoreButton)
                 {
                      bowlerCellTvc.expandBowler_View.hidden =NO;
-                    bowlerCellTvc.pitchMap_img.hidden=YES;
+                     bowlerCellTvc.wagonPitch_img.hidden=YES;
 
                 }
                 
@@ -3191,17 +3195,17 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     //BowlingSummaryDetailsForScoreBoard *bowlingSummaryDetailsForSB = [fetchScorecard.BowlingSummaryForScoreBoard objectAtIndex:bowlerIndex];
     //NSMutableArray * objArray =[objBowlingStatistics GetFETCHSBBOWLINGPLAYERSTATISTICSWagon:competitionCode :matchCode :inningsNo :bowlingSummaryDetailsForSB.BOWLERCODE];
     
-    if([self.BatmenStyle isEqualToString:@"MSC013"])
-    {
+//    if([self.BatmenStyle isEqualToString:@"MSC013"])
+//    {
         cell.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
         [cell.BowleronSide_Btn setTitle:@"OffSide" forState:UIControlStateNormal];
         [cell.BowleroffSide_Btn setTitle:@"OnSide" forState:UIControlStateNormal];
-    }
-    else{
-        
-        cell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
-        
-    }
+//    }
+//    else{
+//        
+//        cell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
+//        
+//    }
 
     
     
@@ -3273,24 +3277,30 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         x2position  =[objRecord .WWX2 intValue];
         y2position  =[objRecord.WWY2 intValue];
         
-        
+        int Xposition;
+        int Yposition;
         if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
             
-//            
-//            for (CALayer *layer in self.bowlerCell.BowlerwagonPitch_img.layer.sublayers) {
-//                if ([layer.name isEqualToString:@"DrawLine"]) {
-//                    //[layer removeFromSuperlayer];
-//                    break;
-//                }
-//            }
-            
-            //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
-            int Xposition = x1position+28;
-            int Yposition = y1position;
             CGMutablePathRef straightLinePath = CGPathCreateMutable();
-            CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-            CGPathAddLineToPoint(straightLinePath, NULL,x2position+28,y2position);
+            if([objRecord.BattingStyle isEqualToString:@"MSC012"])
+            {
+                 Xposition = x1position-50;
+                 Yposition = y1position;
+                CGPathMoveToPoint(straightLinePath, NULL, x2position-45, Yposition);
+                CGPathAddLineToPoint(straightLinePath, NULL,Xposition, y2position);
+            }
+            
+            else
+            {
+                  Xposition = x1position+28;
+                  Yposition = y1position;
+                CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+                CGPathAddLineToPoint(straightLinePath, NULL,x2position, y2position);
+            }
+            
+            
             CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+            
             shapeLayer.path = straightLinePath;
             UIColor *fillColor = [UIColor redColor];
             shapeLayer.fillColor = fillColor.CGColor;
@@ -3325,9 +3335,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             //            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
             //        }
             
-            
 
-            
             shapeLayer.strokeColor = strokeColor.CGColor;
             shapeLayer.lineWidth = 2.0f;
             shapeLayer.fillRule = kCAFillRuleNonZero;
@@ -3461,7 +3469,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     break;
                 }
             }
-            [self BowlersectorWagonwheel :objRecord.Sectorregioncode:objRecord.BattingStyle :objRecord.Runs:cell];
+            [self BowlersectorWagonwheel :objRecord.Sectorregioncode:@"MSC013" : objRecord.Runs: cell];
 
     
         }
@@ -6056,7 +6064,7 @@ else
 
 }
 
--(void)BowlersectorWagonwheel:(NSString *) secotorwognwheelcode :(NSString *) BatmenStyle :(NSString *) Run:(ScoreCardCellTVCell *) cell
+-(void)BowlersectorWagonwheel:(NSString *) secotorwognwheelcode :(NSString *) BatmenStyle :(NSString *) Run :(ScoreCardCellTVCell *) cell
         
 {
     

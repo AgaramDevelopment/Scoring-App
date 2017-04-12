@@ -13,7 +13,7 @@
 #import "Utitliy.h"
 #import "StrikerDetails.h"
 
-@interface SpiderWagonReportVC ()
+@interface SpiderWagonReportVC ()<UIPopoverControllerDelegate>
 {
     BOOL isStriker;
     BOOL isBowler;
@@ -78,10 +78,16 @@ UIColor *strokeColor;
     {
       self.filterviewYposition.constant =150;
       self.filterview1Yposition.constant =150;
+      self.wagonImgYposition.constant   = 0;
+        self.btn_share.hidden  =NO;
+
     }
     else{
-        self.filterviewYposition.constant =0;
-        self.filterview1Yposition.constant =0;
+        self.filterviewYposition.constant = 0;
+        self.filterview1Yposition.constant = 0;
+        self.wagonImgYposition.constant    = 50;
+        self.btn_share.hidden  =YES;
+
     }
     
 }
@@ -95,7 +101,7 @@ UIColor *strokeColor;
     int x2position;
     int y2position;
     
-    int BASE_X = 320;
+    int BASE_X = 280;
     
     
     for(int i=0; i< _spiderWagonArray.count;i++)
@@ -122,13 +128,13 @@ UIColor *strokeColor;
 //        if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
         
         
-            int Xposition = x1position+4;
-            int Yposition = y1position-24;
+            int Xposition = x1position-43;
+            int Yposition = y1position-38;
         
         
             CGMutablePathRef straightLinePath = CGPathCreateMutable();
             CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-            CGPathAddLineToPoint(straightLinePath, NULL,x2position+7,y2position+4);
+            CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
             CAShapeLayer *shapeLayer = [CAShapeLayer layer];
             shapeLayer.path = straightLinePath;
             UIColor *fillColor = [UIColor redColor];
@@ -621,5 +627,51 @@ self.img_wagon.layer.sublayers = nil;
     self.selectOnSide = @"0";
     [self.btn_onSide setImage:[UIImage imageNamed:@"Radio.off"] forState:UIControlStateNormal];
     [self.btn_offSide setImage:[UIImage imageNamed:@"Radio.on"] forState:UIControlStateNormal];
+}
+-(IBAction)didClickShareBtnAction:(id)sender
+{
+    //takes screenshot
+    //UIWindow *keyWindow = [[UIApplication sharedApplication] keyWindow];
+   // UIView * wagon_img = [[UIApplication sharedApplication] keyWindow];
+    CGRect rect = self.img_wagon.frame;
+    UIGraphicsBeginImageContextWithOptions(rect.size,YES,0.0f);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    [self.img_wagon.layer renderInContext:context];
+    UIImage *capturedScreen = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    //Share image and text
+    
+    NSString *text = [NSString stringWithFormat:@"My score"];
+    
+    UIActivityViewController *controller =[[UIActivityViewController alloc]
+     initWithActivityItems:@[text, capturedScreen]
+     applicationActivities:nil];
+    //UIPopoverPresentationController *controllers = self.popoverPresentationController;
+
+    controller.excludedActivityTypes = @[
+                                         UIActivityTypeAssignToContact,
+                                         UIActivityTypePostToFlickr,
+                                         UIActivityTypePostToVimeo,
+                                         UIActivityTypePostToTencentWeibo,UIActivityTypePrint,UIActivityTypeAirDrop,UIActivityTypeOpenInIBooks,UIActivityTypeCopyToPasteboard,
+                                         ];
+    
+   // [self presentViewController:controller animated:YES completion:nil];
+   // [self popoverPresentationControllerDidDismissPopover:controller];
+    
+    //configure UIPopoverPresentationController
+    UIPopoverPresentationController *cityErrorPopover =
+    controller.popoverPresentationController;
+    cityErrorPopover.delegate = self;
+    
+    cityErrorPopover.sourceView = self.btn_share;
+    
+   // cityErrorPopover.sourceRect = button.frame; cityErrorPopover.permittedArrowDirections =
+   // UIPopoverArrowDirectionUp; cityErrorPopover.backgroundColor = greenNormal;
+    
+    // present popup
+    [self presentViewController:controller animated:YES completion:nil];
+   
+
 }
 @end

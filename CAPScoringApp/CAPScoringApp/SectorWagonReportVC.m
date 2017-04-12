@@ -952,7 +952,7 @@
             [cover_lbl removeFromSuperview];
         }
         
-        cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(35,320,200, 35)];
+        cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(35,280,200, 35)];
         cover_lbl.textColor=[UIColor whiteColor];
         cover_lbl.text =[NSString stringWithFormat:@"%d %@ %d %@",coverRun,@"RUNS", coverCount,@"BALLS"];
         [self.img_sector addSubview:cover_lbl];
@@ -964,7 +964,7 @@
         
         float coverPer = (_tRuns.intValue != 0) ? ((float)(coverRun) / ((float)([_tRuns intValue])/100)) : 0 ;
         
-        lbl_cover_per=[[UILabel alloc]initWithFrame:CGRectMake(50,325,200,70)];
+        lbl_cover_per=[[UILabel alloc]initWithFrame:CGRectMake(50,320,200,70)];
         lbl_cover_per.textColor=[UIColor whiteColor];
         lbl_cover_per.text =[NSString stringWithFormat:@"%.2f %@",coverPer,@"%"];
         [self.img_sector addSubview:lbl_cover_per];
@@ -974,7 +974,7 @@
             [lbl_cover_count removeFromSuperview];
         }
         
-        lbl_cover_count =[[UILabel alloc]initWithFrame:CGRectMake(35,335,140,110)];
+        lbl_cover_count =[[UILabel alloc]initWithFrame:CGRectMake(35,300,140,50)];
         lbl_cover_count.lineBreakMode = NSLineBreakByClipping;
         lbl_cover_count.numberOfLines = 10;
         lbl_cover_count.textColor=[UIColor whiteColor];
