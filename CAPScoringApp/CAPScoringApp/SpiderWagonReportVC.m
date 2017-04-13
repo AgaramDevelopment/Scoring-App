@@ -66,6 +66,12 @@ UIColor *strokeColor;
     
     
  self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
+    
+    if([self.teamCode isEqualToString:_teamBcode])
+    {
+        _teamBcode =[objDBManagerSpiderWagonReport getBowlingTeamCode:self.compititionCode :self.matchCode];
+    }
+    
 //    
 // _spiderWagonArray =[objDBManagerSpiderWagonReport getSpiderWagon :self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode:@"1" :@"" :@"" :@"" :@"" :@"",@""];
     
@@ -134,7 +140,7 @@ UIColor *strokeColor;
         
             CGMutablePathRef straightLinePath = CGPathCreateMutable();
             CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-            CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+            CGPathAddLineToPoint(straightLinePath, NULL,x2position-45,y2position);
             CAShapeLayer *shapeLayer = [CAShapeLayer layer];
             shapeLayer.path = straightLinePath;
             UIColor *fillColor = [UIColor redColor];
@@ -200,7 +206,7 @@ UIColor *strokeColor;
 - (IBAction)btn_first_inns:(id)sender {
     
 
-self.img_wagon.layer.sublayers = nil;
+    self.img_wagon.layer.sublayers = nil;
     
 
     [self setInningsBySelection:@"1"];
@@ -218,7 +224,7 @@ self.img_wagon.layer.sublayers = nil;
 - (IBAction)btn_sec_inns:(id)sender {
     
   
-  self.img_wagon.layer.sublayers = nil;
+    self.img_wagon.layer.sublayers = nil;
 
     
     [self setInningsBySelection:@"2"];
@@ -252,7 +258,7 @@ self.img_wagon.layer.sublayers = nil;
      self.img_wagon.layer.sublayers = nil;
     [self setInningsBySelection:@"4"];
     self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"4"];
-        _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"4"];
+        _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail :self.matchCode :_teamBcode:@"4"];
 
 
     [self drawSpiderWagonLine];

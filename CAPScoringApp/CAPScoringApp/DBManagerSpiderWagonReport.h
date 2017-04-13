@@ -27,5 +27,7 @@
 
 -(NSString *) getTotalRuns:(NSString*)MATCHTYPECODE:(NSString*)COMPETITIONCODE:(NSString*)MATCHCODE:(NSString*)TEAMCODE:(NSString*)INNINGSNO;
 
+-(NSString *) getBowlingTeamCode:(NSString *)COMPETITIONCODE:(NSString *)MATCHCODE;
+
 
 @end

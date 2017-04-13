@@ -65,7 +65,7 @@
     UILabel * point_lbl;
     UILabel * Thirdman_lbl;
     
-    UILabel * RHlongon_lbl;
+    
     
     int ThirdmanCountRun;
     int pointRun;
@@ -76,10 +76,10 @@
     int squarelegRun;
     int finelegRun;
     
-    int RHlongonRun;
+   
     
     int battsmanIndex;
-    //int bowlerIndex;
+  
     
     int expendIndex;
     
@@ -279,7 +279,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     self.fstInnShortName =fetchSEpage.FIRSTINNINGSSHORTNAME;
     self.secInnShortName = fetchSEpage.BOWLTEAMSHORTNAME;
     self.thrdInnShortName=fetchSEpage.FIRSTINNINGSSHORTNAME;
-    self.FOURTHINNINGSSHORTNAME =fetchSEpage.BOWLTEAMSHORTNAME;
+    self.frthInnShortName =fetchSEpage.BOWLTEAMSHORTNAME;
     [self setInningsBySelection:@"1"];
     [self setInningsView];
 }
@@ -810,6 +810,20 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 {
                      bowlerCellTvc.expandBowler_View.hidden =NO;
                      bowlerCellTvc.wagonPitch_img.hidden=YES;
+//                    if([battingSummaryDetailsForSB.BATTINGSTYLE isEqualToString:@"MSC012"])
+//                    {
+//                        
+//                        //self.batsmanCell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
+//                        cell.wagonPitch_img.image=[UIImage imageNamed:@"LHWagon"];
+//                        
+//                    }
+//                    else
+//                    {
+                    
+                        bowlerCellTvc.wagonPitch_img.image=[UIImage imageNamed:@"RHWagon"];
+                        
+                    //}
+                    
 
                 }
                 
@@ -875,6 +889,8 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 
 - (IBAction)btn_back:(id)sender {
     
+     isReadMoreButtonTouched = NO;
+     indexOfReadMoreButton = -1;
     [self.navigationController popViewControllerAnimated:YES];
 }
 
@@ -3178,7 +3194,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     cover_lbl.hidden =YES;
     point_lbl.hidden =YES;
     Thirdman_lbl.hidden =YES;
-    RHlongon_lbl.hidden =YES;
+   
     
     zerocount=0;
     Run1Count=0;
@@ -3257,8 +3273,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     [cell.Bowlerwangon6s_Btn setTitle:line5 forState:UIControlStateNormal];
     
-
-    for (CALayer *layer in cell.BowlerwagonPitch_img.layer.sublayers) {
+    for (CALayer *layer in cell.wagonPitch_img.layer.sublayers) {
         if ([layer.name isEqualToString:@"DrawLine"]) {
             [layer removeFromSuperlayer];
             break;
@@ -3269,6 +3284,10 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     int x2position;
     int y1position;
     int y2position;
+    
+    int BASE_X = 150;
+    
+    
     for(int i=0; i<expendBowlerCellArray.count;i++)
     {
         BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
@@ -3276,36 +3295,33 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         y1position = [objRecord.WWY1 intValue];
         x2position  =[objRecord .WWX2 intValue];
         y2position  =[objRecord.WWY2 intValue];
+        //objRecord.BattingStyle =@"MSC013";
         
-        int Xposition;
-        int Yposition;
-        if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+        //int Xposition;
+        //int Yposition;
+       // if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+        
+        
+        
+        if ([objRecord.BattingStyle isEqualToString:@"MSC012"]) {
             
-            CGMutablePathRef straightLinePath = CGPathCreateMutable();
-            if([objRecord.BattingStyle isEqualToString:@"MSC012"])
-            {
-                 Xposition = x1position-50;
-                 Yposition = y1position;
-                CGPathMoveToPoint(straightLinePath, NULL, x2position-45, Yposition);
-                CGPathAddLineToPoint(straightLinePath, NULL,Xposition, y2position);
-            }
+            x2position = BASE_X + (BASE_X - x2position);
             
-            else
-            {
-                  Xposition = x1position+28;
-                  Yposition = y1position;
-                CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-                CGPathAddLineToPoint(straightLinePath, NULL,x2position, y2position);
-            }
-            
-            
-            CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-            
-            shapeLayer.path = straightLinePath;
-            UIColor *fillColor = [UIColor redColor];
-            shapeLayer.fillColor = fillColor.CGColor;
-            UIColor *strokeColor = [UIColor redColor];
-            
+        }
+        int Xposition = x1position;
+        int Yposition = y1position;
+        
+        
+        CGMutablePathRef straightLinePath = CGPathCreateMutable();
+        CGPathMoveToPoint(straightLinePath, NULL, Xposition+30, Yposition);
+        CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
+        CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+        shapeLayer.path = straightLinePath;
+        UIColor *strokeColor = [UIColor redColor];
+        shapeLayer.fillColor = strokeColor.CGColor;
+        
+
+        
             if ([objRecord.Runs isEqualToString: @"1"]) {
                 
                 strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
@@ -3343,7 +3359,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             [cell.wagonPitch_img.layer addSublayer:shapeLayer];
             
         }
-    }
+    //}
 }
 
 -(IBAction)didClickBowlingSectorWagonAction:(id)sender
@@ -3435,7 +3451,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     coverRun =0;
     pointRun=0;
     ThirdmanCountRun=0;
-    RHlongonRun =0;
+   // RHlongonRun =0;
     
     
 
@@ -3451,7 +3467,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         cover_lbl.hidden =NO;
         point_lbl.hidden =NO;
         Thirdman_lbl.hidden =NO;
-        RHlongon_lbl.hidden =NO;
+      
         
         
         BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
@@ -3646,141 +3662,141 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
        if(cell.wagonPitch_img.hidden == NO)
     {
-        if([self.BatmenStyle isEqualToString:@"MSC012"])
-        {
-            NSLog(@"LH");
-            int x1position;
-            int x2position;
-            int y1position;
-            int y2position;
-            NSMutableArray * onsideRegionValue =[[NSMutableArray alloc]init];
-            
-            
-            for(int i=0; i<expendBowlerCellArray.count;i++)
-            {
-                BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
-                NSString * batstyle = objRecord.BattingStyle;
-                NSString * wwregion   =objRecord.WWRegion;
-                if([batstyle isEqualToString:self.BatmenStyle])
-                {
-                   // if([wwregion isEqualToString:@"MSC216"] ||[wwregion isEqualToString:@"MSC194"] ||[wwregion isEqualToString:@"MSC189"] ||[wwregion isEqualToString:@"MSC185"])
-                    ///{
-                        [onsideRegionValue addObject:objRecord];
-                    //}
-                }
-            }
-            
-            
-            for(int i=0 ;i<expendBowlerCellArray.count;i++)
-            {
-                for (CALayer *layer in cell.wagonPitch_img.layer.sublayers)
-                {
-                    if ([layer.name isEqualToString:@"DrawLine"])
-                    {
-                        [layer removeFromSuperlayer];
-                        break;
-                    }
-                }
-            }
-            if(isSectorEnableBowler == YES)
-            {
-                
-                
-                [self SectorReplaceLableMethod];
-                for(int i=0; i< onsideRegionValue.count;i++)
-                {
-                    BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[onsideRegionValue objectAtIndex:i];
-                    x1position = [objRecord.WWX1 intValue];
-                    y1position = [objRecord.WWY1 intValue];
-                    x2position  =[objRecord .WWX2 intValue];
-                    y2position  =[objRecord.WWY2 intValue];
-                    
-                    
-                    if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
-                        
-                        [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode :self.BatmenStyle:objRecord.Runs:cell];
-                    }
-                }
-            }
-            
-            else
-            {
-
-            for(int i=0; i<onsideRegionValue.count;i++)
-            {
-                BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
-                x1position = [objRecord.WWX1 intValue];
-                y1position = [objRecord.WWY1 intValue];
-                x2position  =[objRecord .WWX2 intValue];
-                y2position  =[objRecord.WWY2 intValue];
-                
-                
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
-                    
-                    
-                    for (CALayer *layer in cell.BowlerwagonPitch_img.layer.sublayers) {
-                        if ([layer.name isEqualToString:@"DrawLine"]) {
-                            //[layer removeFromSuperlayer];
-                            break;
-                        }
-                    }
-                    
-                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
-                    int Xposition = x1position+28;
-                    int Yposition = y1position;
-                    CGMutablePathRef straightLinePath = CGPathCreateMutable();
-                    CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-                    CGPathAddLineToPoint(straightLinePath, NULL,x2position+28,y2position);
-                    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-                    shapeLayer.path = straightLinePath;
-                    UIColor *fillColor = [UIColor redColor];
-                    shapeLayer.fillColor = fillColor.CGColor;
-                    UIColor *strokeColor = [UIColor redColor];
-                    
-                    if ([objRecord.Runs isEqualToString: @"1"]) {
-                        
-                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
-                        
-                    }else if ([objRecord.Runs isEqualToString: @"2"]){
-                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
-                        
-                    }else if ([objRecord.Runs isEqualToString: @"3"]){
-                        strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
-                        
-                    }else if ([objRecord.Runs isEqualToString: @"4"]){
-                        strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
-                        
-                    }else if ([objRecord.Runs isEqualToString: @"5"]){
-                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
-                        
-                    }else if ([objRecord.Runs isEqualToString: @"6"]){
-                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
-                        strokeColor = [UIColor colorWithRed:(61/255.0f) green:(27/255.0f) blue:(207/255.0f) alpha:1.0f];
-                        
-                    }else if ([objRecord.Runs isEqualToString: @"0"]){
-                        
-                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-                        
-                    }
-                    //        else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
-                    //            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
-                    //        }
-                    
-                    
-                    
-                    
-                    shapeLayer.strokeColor = strokeColor.CGColor;
-                    shapeLayer.lineWidth = 2.0f;
-                    shapeLayer.fillRule = kCAFillRuleNonZero;
-                    shapeLayer.name = @"DrawLine";
-                    [cell.wagonPitch_img.layer addSublayer:shapeLayer];
-                    
-                }
-            }
-            }
-            
-        }
-        else{
+  //      if([self.BatmenStyle isEqualToString:@"MSC012"])
+//        {
+//            NSLog(@"LH");
+//            int x1position;
+//            int x2position;
+//            int y1position;
+//            int y2position;
+//            NSMutableArray * onsideRegionValue =[[NSMutableArray alloc]init];
+//            
+//            
+//            for(int i=0; i<expendBowlerCellArray.count;i++)
+//            {
+//                BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
+//                NSString * batstyle = objRecord.BattingStyle;
+//                NSString * wwregion   =objRecord.WWRegion;
+//                if([batstyle isEqualToString:self.BatmenStyle])
+//                {
+//                   // if([wwregion isEqualToString:@"MSC216"] ||[wwregion isEqualToString:@"MSC194"] ||[wwregion isEqualToString:@"MSC189"] ||[wwregion isEqualToString:@"MSC185"])
+//                    ///{
+//                        [onsideRegionValue addObject:objRecord];
+//                    //}
+//                }
+//            }
+//            
+//            
+//            for(int i=0 ;i<expendBowlerCellArray.count;i++)
+//            {
+//                for (CALayer *layer in cell.wagonPitch_img.layer.sublayers)
+//                {
+//                    if ([layer.name isEqualToString:@"DrawLine"])
+//                    {
+//                        [layer removeFromSuperlayer];
+//                        break;
+//                    }
+//                }
+//            }
+//            if(isSectorEnableBowler == YES)
+//            {
+//                
+//                
+//                [self SectorReplaceLableMethod];
+//                for(int i=0; i< onsideRegionValue.count;i++)
+//                {
+//                    BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[onsideRegionValue objectAtIndex:i];
+//                    x1position = [objRecord.WWX1 intValue];
+//                    y1position = [objRecord.WWY1 intValue];
+//                    x2position  =[objRecord .WWX2 intValue];
+//                    y2position  =[objRecord.WWY2 intValue];
+//                    
+//                    
+//                    if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+//                        
+//                        [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode :self.BatmenStyle:objRecord.Runs:cell];
+//                    }
+//                }
+//            }
+//            
+//            else
+//            {
+//
+//            for(int i=0; i<onsideRegionValue.count;i++)
+//            {
+//                BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
+//                x1position = [objRecord.WWX1 intValue];
+//                y1position = [objRecord.WWY1 intValue];
+//                x2position  =[objRecord .WWX2 intValue];
+//                y2position  =[objRecord.WWY2 intValue];
+//                
+//                
+//                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+//                    
+//                    
+//                    for (CALayer *layer in cell.BowlerwagonPitch_img.layer.sublayers) {
+//                        if ([layer.name isEqualToString:@"DrawLine"]) {
+//                            //[layer removeFromSuperlayer];
+//                            break;
+//                        }
+//                    }
+//                    
+//                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
+//                    int Xposition = x1position+28;
+//                    int Yposition = y1position;
+//                    CGMutablePathRef straightLinePath = CGPathCreateMutable();
+//                    CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+//                    CGPathAddLineToPoint(straightLinePath, NULL,x2position+28,y2position);
+//                    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+//                    shapeLayer.path = straightLinePath;
+//                    UIColor *fillColor = [UIColor redColor];
+//                    shapeLayer.fillColor = fillColor.CGColor;
+//                    UIColor *strokeColor = [UIColor redColor];
+//                    
+//                    if ([objRecord.Runs isEqualToString: @"1"]) {
+//                        
+//                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+//                        
+//                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+//                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+//                        
+//                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+//                        strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+//                        
+//                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+//                        strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+//                        
+//                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+//                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+//                        
+//                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+//                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+//                        strokeColor = [UIColor colorWithRed:(61/255.0f) green:(27/255.0f) blue:(207/255.0f) alpha:1.0f];
+//                        
+//                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+//                        
+//                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//                        
+//                    }
+//                    //        else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
+//                    //            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
+//                    //        }
+//                    
+//                    
+//                    
+//                    
+//                    shapeLayer.strokeColor = strokeColor.CGColor;
+//                    shapeLayer.lineWidth = 2.0f;
+//                    shapeLayer.fillRule = kCAFillRuleNonZero;
+//                    shapeLayer.name = @"DrawLine";
+//                    [cell.wagonPitch_img.layer addSublayer:shapeLayer];
+//                    
+//                }
+//            }
+//            }
+//            
+//        }
+      //  else{
             NSLog(@"RH");
             
             
@@ -3788,6 +3804,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             int x2position;
             int y1position;
             int y2position;
+            
+             int BASE_X = 160;
+            
             NSMutableArray * onsideRegionValue =[[NSMutableArray alloc]init];
             
             
@@ -3795,10 +3814,12 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             {
                 BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
                 NSString * batstyle = objRecord.BattingStyle;
-                NSString * wwregion = objRecord.WWRegion;
-                if([batstyle isEqualToString:self.BatmenStyle])
+                NSString * wwregion = objRecord.Sectorregioncode;
+                if(![batstyle isEqualToString:self.BatmenStyle])
                 {
-                    if([wwregion isEqualToString:@"MSC216"] ||[wwregion isEqualToString:@"MSC194"] ||[wwregion isEqualToString:@"MSC189"] ||[wwregion isEqualToString:@"MSC185"])
+                    
+                    //if([wwregion isEqualToString:@"MDT036"] || [wwregion isEqualToString:@"MDT037"] ||[wwregion isEqualToString:@"MDT038"] || [wwregion isEqualToString:@"MDT039"])
+                     if([wwregion isEqualToString:@"MDT041"] ||[wwregion isEqualToString:@"MDT042"] ||[wwregion isEqualToString:@"MDT043"] ||[wwregion isEqualToString:@"MDT044"])
                     {
                         [onsideRegionValue addObject:objRecord];
                     }
@@ -3831,10 +3852,10 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     y2position  =[objRecord.WWY2 intValue];
                     
                     
-                    if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+                    //if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                         
-                        [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode :self.BatmenStyle:objRecord.Runs:cell];
-                    }
+                        [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode :@"MSC013":objRecord.Runs:cell];
+                    //}
                 }
             }
             
@@ -3849,29 +3870,27 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 x2position  =[objRecord .WWX2 intValue];
                 y2position  =[objRecord.WWY2 intValue];
                 
+                if ([objRecord.BattingStyle isEqualToString:@"MSC012"]) {
+                    
+                    x2position = BASE_X + (BASE_X - x2position);
+                    
+                }
+
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+             //   if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
                     
-//                    for (CALayer *layer in self.bowlerCell.BowlerwagonPitch_img.layer.sublayers) {
-//                        if ([layer.name isEqualToString:@"DrawLine"]) {
-//                            //[layer removeFromSuperlayer];
-//                            break;
-//                        }
-//                    }
-                    
-                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
-                    int Xposition = x1position+28;
+
+                    int Xposition = x1position+30;
                     int Yposition = y1position;
                     CGMutablePathRef straightLinePath = CGPathCreateMutable();
                     CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-                    CGPathAddLineToPoint(straightLinePath, NULL,x2position+28,y2position);
+                    CGPathAddLineToPoint(straightLinePath, NULL,x2position,y2position);
                     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
                     shapeLayer.path = straightLinePath;
-                    UIColor *fillColor = [UIColor redColor];
-                    shapeLayer.fillColor = fillColor.CGColor;
-                    UIColor *strokeColor = [UIColor redColor];
-                    
+                    UIColor * strokeColor = [UIColor redColor];
+                    shapeLayer.fillColor = strokeColor.CGColor;
+                
                     if ([objRecord.Runs isEqualToString: @"1"]) {
                         
                         strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
@@ -3889,7 +3908,6 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                         strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
                         
                     }else if ([objRecord.Runs isEqualToString: @"6"]){
-                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
                         strokeColor = [UIColor colorWithRed:(61/255.0f) green:(27/255.0f) blue:(207/255.0f) alpha:1.0f];
                         
                     }else if ([objRecord.Runs isEqualToString: @"0"]){
@@ -3897,25 +3915,20 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                         strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
                         
                     }
-                    //        else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
-                    //            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
-                    //        }
-                    
-                    
-                    
-                    
+                
                     shapeLayer.strokeColor = strokeColor.CGColor;
                     shapeLayer.lineWidth = 2.0f;
                     shapeLayer.fillRule = kCAFillRuleNonZero;
                     shapeLayer.name = @"DrawLine";
-                    [self.bowlerCell.wagonPitch_img.layer addSublayer:shapeLayer];
+                    [cell.wagonPitch_img.layer addSublayer:shapeLayer];
                     
                 }
             }
+        
             }
             
-        }
-    }
+       // }
+   // }
     else if ([cell.wagonPitch_img.image  isEqual: @"pichmapRH"] || [cell.wagonPitch_img.image  isEqual: @"pichmapLH"])
     {
         if([self.BatmenStyle isEqualToString:@"MSC013"])
@@ -3944,139 +3957,139 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     if(cell.wagonPitch_img.hidden == NO)
     {
-        if([self.BatmenStyle isEqualToString:@"MSC012"])
-        {
-            NSLog(@"LH");
-            int x1position;
-            int x2position;
-            int y1position;
-            int y2position;
-            NSMutableArray * onsideRegionValue =[[NSMutableArray alloc]init];
-            
-            
-            for(int i=0; i<expendBowlerCellArray.count;i++)
-            {
-                BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
-                NSString * batstyle = objRecord.BattingStyle;
-                NSString * wwregion   =objRecord.WWRegion;
-                if([batstyle isEqualToString:self.BatmenStyle])
-              
-                {
-                    //if([wwregion isEqualToString:@"MSC178"] ||[wwregion isEqualToString:@"MSC171"] ||[wwregion isEqualToString:@"MSC163"] ||[wwregion isEqualToString:@"MSC156"])
-                   // {
-                        [onsideRegionValue addObject:objRecord];
-                   // }
-                    
-                }
-            }
-            
-            
-            for(int i=0 ;i<expendBowlerCellArray.count;i++)
-            {
-                for (CALayer *layer in cell.wagonPitch_img.layer.sublayers)
-                {
-                    if ([layer.name isEqualToString:@"DrawLine"])
-                    {
-                        [layer removeFromSuperlayer];
-                        break;
-                    }
-                }
-            }
-            if(isSectorEnableBowler ==YES)
-            {
-                [self SectorReplaceLableMethod];
-                for(int i=0; i< onsideRegionValue.count;i++)
-                {
-                    BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[onsideRegionValue objectAtIndex:i];
-                    x1position = [objRecord.WWX1 intValue];
-                    y1position = [objRecord.WWY1 intValue];
-                    x2position  =[objRecord .WWX2 intValue];
-                    y2position  =[objRecord.WWY2 intValue];
-                    
-                    
-                    if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
-                        
-                        [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:objRecord.BattingStyle :objRecord.Runs:cell];
-                    }
-                }
-                
-            }
-            else{
-            for(int i=0; i<onsideRegionValue.count;i++)
-            {
-                BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
-                x1position = [objRecord.WWX1 intValue];
-                y1position = [objRecord.WWY1 intValue];
-                x2position  =[objRecord .WWX2 intValue];
-                y2position  =[objRecord.WWY2 intValue];
-                
-                
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
-                    
-                    
-                    for (CALayer *layer in cell.BowlerwagonPitch_img.layer.sublayers) {
-                        if ([layer.name isEqualToString:@"DrawLine"]) {
-                            //[layer removeFromSuperlayer];
-                            break;
-                        }
-                    }
-                    
-                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
-                    int Xposition = x1position+28;
-                    int Yposition = y1position;
-                    CGMutablePathRef straightLinePath = CGPathCreateMutable();
-                    CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
-                    CGPathAddLineToPoint(straightLinePath, NULL,x2position+28,y2position);
-                    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-                    shapeLayer.path = straightLinePath;
-                    UIColor *fillColor = [UIColor redColor];
-                    shapeLayer.fillColor = fillColor.CGColor;
-                    UIColor *strokeColor = [UIColor redColor];
-                    
-                    if ([objRecord.Runs isEqualToString: @"1"]) {
-                        
-                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
-                        
-                    }else if ([objRecord.Runs isEqualToString: @"2"]){
-                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
-                        
-                    }else if ([objRecord.Runs isEqualToString: @"3"]){
-                        strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
-                        
-                    }else if ([objRecord.Runs isEqualToString: @"4"]){
-                        strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
-                        
-                    }else if ([objRecord.Runs isEqualToString: @"5"]){
-                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
-                        
-                    }else if ([objRecord.Runs isEqualToString: @"6"]){
-                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
-                        strokeColor = [UIColor colorWithRed:(61/255.0f) green:(27/255.0f) blue:(207/255.0f) alpha:1.0f];
-                        
-                    }else if ([objRecord.Runs isEqualToString: @"0"]){
-                        
-                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
-                        
-                    }
-                    //        else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
-                    //            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
-                    //        }
-                    
-                    
-                    
-                    
-                    shapeLayer.strokeColor = strokeColor.CGColor;
-                    shapeLayer.lineWidth = 2.0f;
-                    shapeLayer.fillRule = kCAFillRuleNonZero;
-                    shapeLayer.name = @"DrawLine";
-                    [cell.wagonPitch_img.layer addSublayer:shapeLayer];
-                    
-                }
-            }
-            }
-            
-        }
-        else{
+ //       if([self.BatmenStyle isEqualToString:@"MSC012"])
+//        {
+//            NSLog(@"LH");
+//            int x1position;
+//            int x2position;
+//            int y1position;
+//            int y2position;
+//            NSMutableArray * onsideRegionValue =[[NSMutableArray alloc]init];
+//            
+//            
+//            for(int i=0; i<expendBowlerCellArray.count;i++)
+//            {
+//                BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
+//                NSString * batstyle = objRecord.BattingStyle;
+//                NSString * wwregion   =objRecord.WWRegion;
+//                if([batstyle isEqualToString:self.BatmenStyle])
+//              
+//                {
+//                    //if([wwregion isEqualToString:@"MSC178"] ||[wwregion isEqualToString:@"MSC171"] ||[wwregion isEqualToString:@"MSC163"] ||[wwregion isEqualToString:@"MSC156"])
+//                   // {
+//                        [onsideRegionValue addObject:objRecord];
+//                   // }
+//                    
+//                }
+//            }
+//            
+//            
+//            for(int i=0 ;i<expendBowlerCellArray.count;i++)
+//            {
+//                for (CALayer *layer in cell.wagonPitch_img.layer.sublayers)
+//                {
+//                    if ([layer.name isEqualToString:@"DrawLine"])
+//                    {
+//                        [layer removeFromSuperlayer];
+//                        break;
+//                    }
+//                }
+//            }
+//            if(isSectorEnableBowler ==YES)
+//            {
+//                [self SectorReplaceLableMethod];
+//                for(int i=0; i< onsideRegionValue.count;i++)
+//                {
+//                    BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[onsideRegionValue objectAtIndex:i];
+//                    x1position = [objRecord.WWX1 intValue];
+//                    y1position = [objRecord.WWY1 intValue];
+//                    x2position  =[objRecord .WWX2 intValue];
+//                    y2position  =[objRecord.WWY2 intValue];
+//                    
+//                    
+//                    if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+//                        
+//                        [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:objRecord.BattingStyle :objRecord.Runs:cell];
+//                    }
+//                }
+//                
+//            }
+//            else{
+//            for(int i=0; i<onsideRegionValue.count;i++)
+//            {
+//                BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[expendBowlerCellArray objectAtIndex:i];
+//                x1position = [objRecord.WWX1 intValue];
+//                y1position = [objRecord.WWY1 intValue];
+//                x2position  =[objRecord .WWX2 intValue];
+//                y2position  =[objRecord.WWY2 intValue];
+//                
+//                
+//                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+//                    
+//                    
+//                    for (CALayer *layer in cell.BowlerwagonPitch_img.layer.sublayers) {
+//                        if ([layer.name isEqualToString:@"DrawLine"]) {
+//                            //[layer removeFromSuperlayer];
+//                            break;
+//                        }
+//                    }
+//                    
+//                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
+//                    int Xposition = x1position+28;
+//                    int Yposition = y1position;
+//                    CGMutablePathRef straightLinePath = CGPathCreateMutable();
+//                    CGPathMoveToPoint(straightLinePath, NULL, Xposition, Yposition);
+//                    CGPathAddLineToPoint(straightLinePath, NULL,x2position+28,y2position);
+//                    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+//                    shapeLayer.path = straightLinePath;
+//                    UIColor *fillColor = [UIColor redColor];
+//                    shapeLayer.fillColor = fillColor.CGColor;
+//                    UIColor *strokeColor = [UIColor redColor];
+//                    
+//                    if ([objRecord.Runs isEqualToString: @"1"]) {
+//                        
+//                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(108/255.0f) blue:(0/255.0f) alpha:1.0f];
+//                        
+//                    }else if ([objRecord.Runs isEqualToString: @"2"]){
+//                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+//                        
+//                    }else if ([objRecord.Runs isEqualToString: @"3"]){
+//                        strokeColor = [UIColor colorWithRed:(221/255.0f) green:(245/255.0f) blue:(10/255.0f) alpha:1.0f];
+//                        
+//                    }else if ([objRecord.Runs isEqualToString: @"4"]){
+//                        strokeColor = [UIColor colorWithRed:(208/255.0f) green:(31/255.0f) blue:(27/255.0f) alpha:1.0f];
+//                        
+//                    }else if ([objRecord.Runs isEqualToString: @"5"]){
+//                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(204/255.0f) blue:(153/255.0f) alpha:1.0f];
+//                        
+//                    }else if ([objRecord.Runs isEqualToString: @"6"]){
+//                        //strokeColor = [UIColor colorWithRed:(255/255.0f) green:(0/255.0f) blue:(255/255.0f) alpha:1.0f];
+//                        strokeColor = [UIColor colorWithRed:(61/255.0f) green:(27/255.0f) blue:(207/255.0f) alpha:1.0f];
+//                        
+//                    }else if ([objRecord.Runs isEqualToString: @"0"]){
+//                        
+//                        strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
+//                        
+//                    }
+//                    //        else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
+//                    //            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
+//                    //        }
+//                    
+//                    
+//                    
+//                    
+//                    shapeLayer.strokeColor = strokeColor.CGColor;
+//                    shapeLayer.lineWidth = 2.0f;
+//                    shapeLayer.fillRule = kCAFillRuleNonZero;
+//                    shapeLayer.name = @"DrawLine";
+//                    [cell.wagonPitch_img.layer addSublayer:shapeLayer];
+//                    
+//                }
+//            }
+//            }
+//            
+//        }
+       // else{
             NSLog(@"RH");
             
             
@@ -4085,7 +4098,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
             int y1position;
             int y2position;
             NSMutableArray * onsideRegionValue =[[NSMutableArray alloc]init];
-            
+             int BASE_X = 150;
             
             for(int i=0; i<expendBowlerCellArray.count;i++)
             {
@@ -4095,8 +4108,9 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                 if(![batsmanstyle isEqualToString:self.BatmenStyle])
                
                 {
-                   // if([wwregion isEqualToString:@"MSC216"] ||[wwregion isEqualToString:@"MSC194"] ||[wwregion isEqualToString:@"MSC189"] ||[wwregion isEqualToString:@"MSC185"])
-                    if([wwregion isEqualToString:@"MDT041"] ||[wwregion isEqualToString:@"mdt042"] ||[wwregion isEqualToString:@"MDT043"] ||[wwregion isEqualToString:@"mdt044"])
+                   
+                    //if([wwregion isEqualToString:@"MDT041"] ||[wwregion isEqualToString:@"MDT042"] ||[wwregion isEqualToString:@"MDT043"] ||[wwregion isEqualToString:@"MDT044"])
+                    if([wwregion isEqualToString:@"MDT036"] || [wwregion isEqualToString:@"MDT037"] ||[wwregion isEqualToString:@"MDT038"] || [wwregion isEqualToString:@"MDT039"])
                     {
                         [onsideRegionValue addObject:objRecord];
                     }
@@ -4128,15 +4142,15 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
                     y2position  =[objRecord.WWY2 intValue];
                     
                     
-                    if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+                    //if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                         
-                        [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:objRecord.BattingStyle :objRecord.Runs:cell];
-                    }
+                        [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:@"MSC013" :objRecord.Runs:cell];
+                    //}
                 }
                 
             }
-else
-{
+       else
+        {
             for(int i=0; i<onsideRegionValue.count;i++)
             {
                 BowlerStaticsRecord * objRecord =(BowlerStaticsRecord *)[onsideRegionValue objectAtIndex:i];
@@ -4146,17 +4160,15 @@ else
                 y2position  =[objRecord.WWY2 intValue];
                 
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+               // if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+                
+                if ([objRecord.BattingStyle isEqualToString:@"MSC012"]) {
                     
+                    x2position = BASE_X + (BASE_X - x2position);
                     
-                    //                    for (CALayer *layer in self.bowlerCell.BowlerwagonPitch_img.layer.sublayers) {
-                    //                        if ([layer.name isEqualToString:@"DrawLine"]) {
-                    //                            //[layer removeFromSuperlayer];
-                    //                            break;
-                    //                        }
-                    //                    }
-                    
-                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
+                }
+
+    
                     int Xposition = x1position+28;
                     int Yposition = y1position;
                     CGMutablePathRef straightLinePath = CGPathCreateMutable();
@@ -4193,13 +4205,7 @@ else
                         strokeColor = [UIColor colorWithRed:(255/255.0f) green:(255/255.0f) blue:(255/255.0f) alpha:1.0f];
                         
                     }
-                    //        else if ([objRecord.WICKETTYPE isEqualToString:@"0"]){
-                    //            strokeColor = [UIColor colorWithRed:(150/255.0f) green:(57/255.0f) blue:(57/255.0f) alpha:1.0f];
-                    //        }
-                    
-                    
-                    
-                    
+                
                     shapeLayer.strokeColor = strokeColor.CGColor;
                     shapeLayer.lineWidth = 2.0f;
                     shapeLayer.fillRule = kCAFillRuleNonZero;
@@ -4208,8 +4214,8 @@ else
                     
                 }
             }
-}
-        }
+//}
+        //}
     }
     else if ([cell.wagonPitch_img.image  isEqual: @"pichmapRH"] || [cell.wagonPitch_img.image  isEqual: @"pichmapLH"])
     {
@@ -4241,7 +4247,7 @@ else
         
         for(int i=0 ;i<expendBowlerCellArray.count;i++)
         {
-            for (CALayer *layer in self.bowlerCell.wagonPitch_img.layer.sublayers)
+            for (CALayer *layer in cell.wagonPitch_img.layer.sublayers)
             {
                 if ([layer.name isEqualToString:@"DrawLine"])
                 {
@@ -4256,6 +4262,9 @@ else
         int x2position;
         int y2position;
         
+        int BASE_X = 150;
+        
+        
         if(isSectorEnableBowler == YES)
         {
             [self SectorReplaceLableMethod];
@@ -4268,10 +4277,10 @@ else
                 y2position  =[objRecord.WWY2 intValue];
                 
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+               // if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
-                    [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode :self.BatmenStyle:objRecord.Runs:cell];
-                }
+                    [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode :@"MSC013":objRecord.Runs:cell];
+               // }
             }
             
         }
@@ -4286,7 +4295,16 @@ else
                 y2position  =[objRecord.WWY2 intValue];
                 
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+                if ([objRecord.BattingStyle isEqualToString:@"MSC012"]) {
+                    
+                    x2position = BASE_X + (BASE_X - x2position);
+                    
+                }
+                //int Xposition = x1position;
+                //int Yposition = y1position;
+                
+
+               // if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
                     
                     int Xposition = x1position+28;
@@ -4334,7 +4352,7 @@ else
                     [cell.wagonPitch_img.layer addSublayer:shapeLayer];
                     
                 }
-            }
+            //}
         }
     }
     else
@@ -4456,6 +4474,9 @@ else
         int x2position;
         int y2position;
         
+        int BASE_X = 150;
+        
+        
         if(isSectorEnableBowler ==YES)
         {
             [self SectorReplaceLableMethod];
@@ -4470,7 +4491,7 @@ else
                 
                 if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
-                    [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:objRecord.BattingStyle :objRecord.Runs:cell];
+                    [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:@"MSC013" :objRecord.Runs:cell];
                 }
             }
             
@@ -4486,18 +4507,14 @@ else
                 x2position  =[objRecord .WWX2 intValue];
                 y2position  =[objRecord.WWY2 intValue];
                 
+                if ([objRecord.BattingStyle isEqualToString:@"MSC012"]) {
+                    
+                    x2position = BASE_X + (BASE_X - x2position);
+                    
+                }
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+                //if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
-                    
-                    //        for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
-                    //            if ([layer.name isEqualToString:@"DrawLine"]) {
-                    //              //  [layer removeFromSuperlayer];
-                    //                break;
-                    //            }
-                    //        }
-                    
-                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
                     int Xposition = x1position+28;
                     int Yposition = y1position;
                     CGMutablePathRef straightLinePath = CGPathCreateMutable();
@@ -4517,7 +4534,7 @@ else
                 }
             }
             
-        }
+        //}
         
     }
     else
@@ -4658,6 +4675,10 @@ else
         int x2position;
         int y2position;
         
+        int BASE_X = 150;
+
+        
+        
         if(isSectorEnableBowler ==YES)
         {
             [self SectorReplaceLableMethod];
@@ -4670,10 +4691,10 @@ else
                 y2position  =[objRecord.WWY2 intValue];
                 
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+                //if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
-                    [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:objRecord.BattingStyle :objRecord.Runs:cell];
-                }
+                    [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:@"MSC013" :objRecord.Runs:cell];
+               // }
             }
             
         }
@@ -4688,18 +4709,16 @@ else
                 x2position  =[objRecord .WWX2 intValue];
                 y2position  =[objRecord.WWY2 intValue];
                 
+                if ([objRecord.BattingStyle isEqualToString:@"MSC012"]) {
+                    
+                    x2position = BASE_X + (BASE_X - x2position);
+                    
+                }
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+              //  if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
                     
-                    //        for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
-                    //            if ([layer.name isEqualToString:@"DrawLine"]) {
-                    //              //  [layer removeFromSuperlayer];
-                    //                break;
-                    //            }
-                    //        }
-                    
-                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
+                
                     int Xposition = x1position+28;
                     int Yposition = y1position;
                     CGMutablePathRef straightLinePath = CGPathCreateMutable();
@@ -4720,7 +4739,7 @@ else
                 }
             }
             
-        }
+       // }
         
     }
     else
@@ -4860,6 +4879,8 @@ else
         int x2position;
         int y2position;
         
+        int BASE_X = 150;
+        
         if(isSectorEnableBowler ==YES)
         {
             [self SectorReplaceLableMethod];
@@ -4872,10 +4893,10 @@ else
                 y2position  =[objRecord.WWY2 intValue];
                 
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+               // if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
-                    [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:objRecord.BattingStyle :objRecord.Runs:cell];
-                }
+                    [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:@"MSC013":objRecord.Runs:cell];
+               // }
             }
             
         }
@@ -4890,18 +4911,15 @@ else
                 x2position  =[objRecord .WWX2 intValue];
                 y2position  =[objRecord.WWY2 intValue];
                 
+                if ([objRecord.BattingStyle isEqualToString:@"MSC012"]) {
+                    
+                    x2position = BASE_X + (BASE_X - x2position);
+                    
+                }
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+               // if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
-                    
-                    //        for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
-                    //            if ([layer.name isEqualToString:@"DrawLine"]) {
-                    //              //  [layer removeFromSuperlayer];
-                    //                break;
-                    //            }
-                    //        }
-                    
-                    //CGPoint p = [sender locationInView:self.batsmanCell.wagonPitch_img];
+                
                     int Xposition = x1position+28;
                     int Yposition = y1position;
                     CGMutablePathRef straightLinePath = CGPathCreateMutable();
@@ -4921,7 +4939,7 @@ else
                 }
             }
             
-        }
+        //}
         
     }
     else
@@ -5060,6 +5078,8 @@ else
         int x2position;
         int y2position;
         
+        int BASE_X = 150;
+        
         if(isSectorEnableBowler ==YES)
         {
             [self SectorReplaceLableMethod];
@@ -5072,10 +5092,10 @@ else
                 y2position  =[objRecord.WWY2 intValue];
                 
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+                //if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
-                    [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:objRecord.BattingStyle :objRecord.Runs:cell];
-                }
+                    [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:@"MSC013" :objRecord.Runs:cell];
+               // }
             }
             
         }
@@ -5090,8 +5110,14 @@ else
                 x2position  =[objRecord .WWX2 intValue];
                 y2position  =[objRecord.WWY2 intValue];
                 
+                if ([objRecord.BattingStyle isEqualToString:@"MSC012"]) {
+                    
+                    x2position = BASE_X + (BASE_X - x2position);
+                    
+                }
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+                
+                //if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
                     
                     //        for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
@@ -5121,7 +5147,7 @@ else
                 }
             }
             
-        }
+        //}
         
     }
     else
@@ -5260,6 +5286,8 @@ else
         int x2position;
         int y2position;
         
+        int BASE_X = 150;
+        
         if(isSectorEnableBowler ==YES)
         {
             [self SectorReplaceLableMethod];
@@ -5272,10 +5300,10 @@ else
                 y2position  =[objRecord.WWY2 intValue];
                 
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+                //if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
-                    [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:objRecord.BattingStyle :objRecord.Runs:cell];
-                }
+                    [self BowlersectorRunReplaceWagonwheel :objRecord.Sectorregioncode:@"MSC013" :objRecord.Runs:cell];
+                //}
             }
             
         }
@@ -5290,8 +5318,13 @@ else
                 x2position  =[objRecord .WWX2 intValue];
                 y2position  =[objRecord.WWY2 intValue];
                 
+                if ([objRecord.BattingStyle isEqualToString:@"MSC012"]) {
+                    
+                    x2position = BASE_X + (BASE_X - x2position);
+                    
+                }
                 
-                if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
+                //if(!(x1position ==221 && x2position ==221 && y1position ==186 && y2position ==186) && !(x1position ==172 && x2position ==172 && y1position ==145 && y2position ==145)){
                     
                     
                     //        for (CALayer *layer in self.batsmanCell.wagonPitch_img.layer.sublayers) {
@@ -5321,7 +5354,7 @@ else
                 }
             }
             
-        }
+        //}
         
     }
     else
@@ -6247,16 +6280,16 @@ else
         {
             NSLog(@"RH");
             //                    longoff++;
-            RHlongonRun =RHlongonRun +[Run intValue];
+            longoffRun = longoffRun +[Run intValue];
             
             
 
-            RHlongon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(110,270,35, 35)];
-            RHlongon_lbl.textColor=[UIColor whiteColor];
-            RHlongon_lbl.text =[NSString stringWithFormat:@"%d",RHlongonRun];
+            longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(110,270,35, 35)];
+            longoff_lbl.textColor=[UIColor whiteColor];
+            longoff_lbl.text =[NSString stringWithFormat:@"%d",longoffRun];
             
 
-             [cell.wagonPitch_img addSubview:RHlongon_lbl];
+             [cell.wagonPitch_img addSubview:longoff_lbl];
             
         }
         
@@ -6411,12 +6444,7 @@ else
     {
         [Thirdman_lbl removeFromSuperview];
     }
-    
-    if(RHlongon_lbl!=Nil)
-    {
-        [RHlongon_lbl removeFromSuperview];
 
-    }
     finelegRun =0;
     squarelegRun=0;
     midWicketRun=0;
@@ -6425,7 +6453,7 @@ else
     coverRun =0;
     pointRun=0;
     ThirdmanCountRun=0;
-    RHlongonRun =0;
+    
     
     
     zerocount=0;
@@ -6822,80 +6850,62 @@ else
     {
         if([BatmenStyle isEqualToString:@"MSC012"])
         {
-            NSLog(@"LH");
-            //   longon++;
+        
             longonRun =longonRun+[Run intValue];
-            if(longon_lbl !=nil)
-            {
-                [longon_lbl removeFromSuperview];
-            }
-            longon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(220,270,35, 35)];
-            longon_lbl.textColor=[UIColor whiteColor];
-            longon_lbl.text =[NSString stringWithFormat:@"%d",longonRun];
-            [cell.wagonPitch_img addSubview:longon_lbl];
-            
-
+        
         }
         else
         {
-            NSLog(@"RH");
-            //            longon++;
             longonRun =longonRun+[Run intValue];
-            if(longon_lbl !=nil)
-            {
-                [longon_lbl removeFromSuperview];
-            }
-            longon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(220,270,35, 35)];
-            longon_lbl.textColor=[UIColor whiteColor];
-            longon_lbl.text =[NSString stringWithFormat:@"%d",longonRun];
-            [cell.wagonPitch_img addSubview:longon_lbl];
             
-
         }
+        if(longon_lbl !=nil)
+        {
+            [longon_lbl removeFromSuperview];
+        }
+        longon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(220,270,35, 35)];
+        longon_lbl.textColor=[UIColor whiteColor];
+        longon_lbl.text =[NSString stringWithFormat:@"%d",longonRun];
+        [cell.wagonPitch_img addSubview:longon_lbl];
+        
+
+        
             }
     else if([secotorwognwheelcode isEqualToString:@"MDT041"])
     {
+        if(longoff_lbl !=nil)
+        {
+            [longoff_lbl removeFromSuperview];
+        }
+        
         if([BatmenStyle isEqualToString:@"MSC012"])
         {
-            NSLog(@"LH");
-            //          longoff++;
+            
             longoffRun =longoffRun +[Run intValue];
-            
-            //            if(longoff_lbl !=nil)
-            //            {
-            //                [longoff_lbl removeFromSuperview];
-            //            }
-            
-            
-            longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(220,270,35, 35)];
-            longoff_lbl.textColor=[UIColor whiteColor];
-            longoff_lbl.text =[NSString stringWithFormat:@"%d",longoffRun];
-            
-            
-            [cell.wagonPitch_img addSubview:longoff_lbl];
             
         }
         else
         {
-            NSLog(@"RH");
-            //                    longoff++;
-            RHlongonRun =RHlongonRun +[Run intValue];
+           
+            longoffRun =longoffRun +[Run intValue];
             
-            
-            
-            RHlongon_lbl=[[UILabel alloc]initWithFrame:CGRectMake(110,270,35, 35)];
-            RHlongon_lbl.textColor=[UIColor whiteColor];
-            RHlongon_lbl.text =[NSString stringWithFormat:@"%d",RHlongonRun];
-            
-            
-            [cell.wagonPitch_img addSubview:RHlongon_lbl];
-            
-        }
+       }
+        longoff_lbl=[[UILabel alloc]initWithFrame:CGRectMake(110,270,35, 35)];
+        longoff_lbl.textColor=[UIColor whiteColor];
+        longoff_lbl.text =[NSString stringWithFormat:@"%d",longoffRun];
+        
+        
+        [cell.wagonPitch_img addSubview:longoff_lbl];
 
         
     }
     else if([secotorwognwheelcode isEqualToString:@"MDT042"])
     {
+        if(cover_lbl !=nil)
+        {
+            [cover_lbl removeFromSuperview];
+        }
+ 
         if([BatmenStyle isEqualToString:@"MSC012"])
         {
             NSLog(@"LH");
@@ -6909,12 +6919,8 @@ else
             coverRun = coverRun+[Run intValue];
         }
         
-        if(cover_lbl !=nil)
-        {
-            [cover_lbl removeFromSuperview];
-        }
         
-        cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,100,35, 35)];
+        cover_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,190,35, 35)];
         cover_lbl.textColor=[UIColor whiteColor];
         cover_lbl.text =[NSString stringWithFormat:@"%d",coverRun];
         [cell.wagonPitch_img addSubview:cover_lbl];
@@ -6922,6 +6928,11 @@ else
     }
     else if([secotorwognwheelcode isEqualToString:@"MDT043"])
     {
+        if(point_lbl !=nil)
+        {
+            [point_lbl removeFromSuperview];
+        }
+        
         if([BatmenStyle isEqualToString:@"MSC012"])
         {
             NSLog(@"LH");
@@ -6937,10 +6948,7 @@ else
         }
         
         
-        if(point_lbl !=nil)
-        {
-            [point_lbl removeFromSuperview];
-        }
+       
         point_lbl=[[UILabel alloc]initWithFrame:CGRectMake(50,120,35, 35)];
         point_lbl.textColor=[UIColor whiteColor];
         point_lbl.text =[NSString stringWithFormat:@"%d",pointRun];
@@ -6949,6 +6957,12 @@ else
     }
     else if([secotorwognwheelcode isEqualToString:@"MDT044"])
     {
+        
+        if(Thirdman_lbl !=nil)
+        {
+            [Thirdman_lbl removeFromSuperview];
+        }
+        
         if([BatmenStyle isEqualToString:@"MSC012"])
         {
             NSLog(@"LH");
@@ -6963,10 +6977,7 @@ else
             
         }
         
-        if(Thirdman_lbl !=nil)
-        {
-            [Thirdman_lbl removeFromSuperview];
-        }
+        
         
         Thirdman_lbl=[[UILabel alloc]initWithFrame:CGRectMake(120,40,35, 35)];
         Thirdman_lbl.textColor=[UIColor whiteColor];

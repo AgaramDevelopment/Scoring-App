@@ -364,6 +364,42 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     }
     
 }
+-(NSString *) getBowlingTeamCode:(NSString *) COMPETITIONCODE:(NSString *)MATCHCODE
+{
+    @synchronized ([Utitliy syncId])  {
+        NSString *databasePath = [self getDBPath];
+        sqlite3_stmt *statement;
+        sqlite3 *dataBase;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            NSString *updateSQL = [NSString stringWithFormat:@"SELECT BOWLINGTEAMCODE FROM BOWLINGSUMMARY WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@'",COMPETITIONCODE,MATCHCODE];
+            
+            const char *update_stmt = [updateSQL UTF8String];
+            if(sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
+                
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    
+                    NSString *BowlerteamCode =  [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return BowlerteamCode;
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+                
+                
+            }
+            sqlite3_close(dataBase);
+            
+        }
+        return @"";
+    }
+ 
+}
+
 
 
 @end
