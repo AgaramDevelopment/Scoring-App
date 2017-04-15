@@ -629,8 +629,8 @@ EndInnings *insertScoreCard;
             }
             if(ISMAIDENOVER.intValue ==1 && BOWLERCOUNT.intValue==1)
             {
-                [dbEndInnings InsertBowlingMaidenSummaryInElseFormanageOverDetails: COMPETITIONCODE : MATCHCODE :  INNINGSNO : objBallEventRecord.objBowlercode :overNo];
-                
+                [dbEndInnings InsertBowlingMaidenSummaryInElseFormanageOverDetails: COMPETITIONCODE : MATCHCODE :  INNINGSNO : BowlerCode :overNo];
+                //bolwlercode--objBallEventRecord.BowlerCode;
             }
             
         

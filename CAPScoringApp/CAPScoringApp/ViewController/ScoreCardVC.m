@@ -732,23 +732,15 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
             }else if(indexPath.row >= bowlerPostion){
                 BowlingSummaryDetailsForScoreBoard *bowlingSummaryForScoreBoard = [fetchScorecard.BowlingSummaryForScoreBoard objectAtIndex:indexPath.row-bowlerPostion];
-                //bowlerIndex = indexPath.row-bowlerPostion;
         
                 ScoreCardCellTVCell *bowlerCellTvc = (ScoreCardCellTVCell *)[tableView dequeueReusableCellWithIdentifier:bowlerCell];
                 if (bowlerCellTvc == nil) {
                     [[NSBundle mainBundle] loadNibNamed:@"ScoreCardCellTVCell" owner:self options:nil];
                     bowlerCellTvc = self.bowlerCell;
-                    //self.bowlerCell = nil;
                 }
         
-//                if(isPitch_Img ==NO)
-//                {
-//                    self.bowlerCell.BowlerwagonPitch_img.hidden=YES;
-//                }
-        
-                 //ExpandBowlerView = (UIView *)[bowlerCellTvc viewWithTag:11];
+
                 bowlerCellTvc.expandBowler_View.hidden =YES;
-               // bowlerCellTvc.pitchMap_img.hidden=YES;
 
                 [[bowlerCellTvc btn_expand] setTag:[indexPath row]];
                 
