@@ -52,11 +52,11 @@
 
 -(BOOL) UpdateWicketEventsWicketNoForDeleteScoreEngine: (NSString*) COMPETITIONCODE : (NSString*) MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSNumber*)WICKETNO;
 
--(BOOL) DeletePenaltyDetailsForDeleteScoreEngine: (NSString*) BALLCODE;
+-(BOOL) DeletePenaltyDetailsForDeleteScoreEngine: (NSString*) BALLCODE :(NSString *)MATCHCODE;
 
--(BOOL) DeleteAppealDetailsForDeleteScoreEngine: (NSString*) BALLCODE;
+-(BOOL) DeleteAppealDetailsForDeleteScoreEngine: (NSString*) BALLCODE :(NSString *) MATCHCODE;
 
--(BOOL) DeleteFieldingDetailsForDeleteScoreEngine: (NSString*) BALLCODE;
+-(BOOL) DeleteFieldingDetailsForDeleteScoreEngine: (NSString*) BALLCODE :(NSString *)MATCHCODE;
 
 -(BOOL) DeleteBallEventDetailsForDeleteScoreEngine: (NSString*) COMPETITIONCODE : (NSString*) MATCHCODE : (NSString*)BATTINGTEAMCODE : (NSNumber*)INNINGSNO : (NSString*)BALLCODE;
 
@@ -112,7 +112,12 @@
 
 -(NSString*)GetOtherBowlerCodeWithCurrentOverAndBowlerCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSNumber*)INNINGSNO : (NSString*)OVERNO : (NSString*)BOWLERCODE;
 
+-(NSInteger)GetOtherBowlerCodeWithCurrentOverAndBowlerForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSNumber*)INNINGSNO : (NSString*)OVERNO;
+
+
 -(NSInteger)GetOtherBowlerOverBallCountWithCurrentOverAndBowlerCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSNumber*)INNINGSNO : (NSString *)OVERNO : (NSString*)OTHERBOWLERCODE;
+
+
 
 -(NSInteger)GetOtherBowlerOverStatusWithCurrentOverForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSNumber*)INNINGSNO : (NSString *)OVERNO;
 
@@ -144,6 +149,7 @@
 
 -(BOOL) UpdateInningsEventsBasedOnMatchCodeForDeleteScoreEngine: (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSInteger)MAXINNINGS;
 
+-(BOOL)ScoreboardUpdate:(NSString *)matchcode:(NSString *)competioncode:(NSInteger)inningsno;
 
 
 

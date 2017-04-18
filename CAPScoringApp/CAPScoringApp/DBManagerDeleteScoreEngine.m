@@ -723,7 +723,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 	}
 }
 
--(BOOL) DeletePenaltyDetailsForDeleteScoreEngine: (NSString*) BALLCODE
+-(BOOL) DeletePenaltyDetailsForDeleteScoreEngine: (NSString*) BALLCODE :(NSString *)MATCHCODE
 {
 @synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
@@ -742,6 +742,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"PENALTYDETAILS" :@"MSC252" :updateSQL];
+                
                 return YES;
                 
             }
@@ -758,7 +761,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 	}
 }
 
--(BOOL) DeleteAppealDetailsForDeleteScoreEngine: (NSString*) BALLCODE
+-(BOOL) DeleteAppealDetailsForDeleteScoreEngine: (NSString*) BALLCODE :(NSString *)MATCHCODE
 {
 @synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
@@ -776,6 +779,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                
+                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"APPEALEVENTS" :@"MSC252" :updateSQL];
                 return YES;
                 
             }
@@ -792,7 +798,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 	}
 }
 
--(BOOL) DeleteFieldingDetailsForDeleteScoreEngine: (NSString*) BALLCODE
+-(BOOL) DeleteFieldingDetailsForDeleteScoreEngine: (NSString*) BALLCODE :(NSString *)MATCHCODE
 {
 @synchronized ([Utitliy syncId]) {
     NSString *databasePath = [self getDBPath];
@@ -810,6 +816,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
+                
+                PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"FIELDINGEVENTS" :@"MSC252" :updateSQL];
+                
                 return YES;
                 
             }
@@ -876,11 +886,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSString *BallCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *Bowlercode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                return BallCode;
+                return Bowlercode;
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
@@ -950,6 +960,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         if (sqlite3_step(statement) == SQLITE_DONE)
         {
             //Deleted
+             PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+            [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLINGSUMMARY" :@"MSC252" :updateSQL];
+            
+
         }
         sqlite3_reset(statement);
         sqlite3_finalize(statement);
@@ -967,7 +981,12 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL);
             if (sqlite3_step(statement) == SQLITE_DONE)
             {
+                
                 //ADDED
+                
+                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLINGSUMMARY" :@"MSC250" :updateSQL];
+                
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
@@ -1342,7 +1361,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BALLEVENTS SET BALLCOUNT = ('%@' + BALLCOUNT) - 1 WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO=%@ AND OVERNO = '%@' AND BALLNO = '%@' + 1",BALLCOUNT,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,OVERNO,BALLNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BALLEVENTS SET BALLCOUNT = (%@ + BALLCOUNT) - 1 WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO=%@ AND OVERNO = %@ AND BALLNO = %@ + 1",BALLCOUNT,COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,OVERNO,BALLNO];
         const char *selectStmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
@@ -1378,7 +1397,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BALLEVENTS SET BALLNO = BALLNO - 1 WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO='%@' AND OVERNO = '%@' AND BALLNO > '%@'",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,OVERNO,BALLNO];
+        NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BALLEVENTS SET BALLNO = BALLNO - 1 WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO=%@ AND OVERNO = '%@' AND BALLNO > %@",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,OVERNO,BALLNO];
         const char *selectStmt = [updateSQL UTF8String];
         if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
         {
@@ -1450,7 +1469,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO = '%@' AND OVERNO = '%@' AND BALLNO = '%@'",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,OVERNO,BALLNO];
+        NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO = %@ AND OVERNO = '%@' AND BALLNO = %@",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,OVERNO,BALLNO];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -1479,7 +1498,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO = '%@' AND OVERNO = '%@' AND BALLNO = '%@' AND BALLCOUNT = '%@' - 1",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,OVERNO,BALLNO,BALLCOUNT];
+        NSString *query=[NSString stringWithFormat:@"SELECT BALLCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND TEAMCODE='%@' AND INNINGSNO = '%@' AND OVERNO = '%@' AND BALLNO = '%@' AND BALLCOUNT = %@ - 1",COMPETITIONCODE,MATCHCODE,BATTINGTEAMCODE,INNINGSNO,OVERNO,BALLNO,BALLCOUNT];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -1775,7 +1794,9 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT BOWLERCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %@ AND OVERNO = %ld AND BOWLERCODE != '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO,BOWLERCODE];
+        NSString *query=[NSString stringWithFormat:@"SELECT BOWLERCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %@ AND OVERNO = %@ AND BOWLERCODE != '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO,BOWLERCODE];
+        
+        
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -1795,7 +1816,38 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 	}
 }
 
--(NSInteger)GetOtherBowlerOverBallCountWithCurrentOverAndBowlerCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSNumber*)INNINGSNO : (NSString *)OVERNO : (NSString*)OTHERBOWLERCODE
+-(NSInteger)GetOtherBowlerCodeWithCurrentOverAndBowlerForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSNumber*)INNINGSNO : (NSString *)OVERNO
+{
+    @synchronized ([Utitliy syncId]) {
+        NSString *databasePath =[self getDBPath];
+        sqlite3 *dataBase;
+        const char *stmt;
+        sqlite3_stmt *statement;
+        if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
+        {
+            // NSString *query=[NSString stringWithFormat:@"SELECT BOWLERCODE FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %@ AND OVERNO = %ld AND BOWLERCODE != '%@'",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO,BOWLERCODE];
+            NSString *query=[NSString stringWithFormat:@"SELECT BOWLERCODE FROM BOWLEROVERDETAILS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %@ AND OVERNO = %@",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO];
+            
+            stmt=[query UTF8String];
+            if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    NSString *OtherBowlerCode = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return OtherBowlerCode;
+                }
+                sqlite3_reset(statement);
+                sqlite3_finalize(statement);
+            }
+            sqlite3_close(dataBase);
+        }
+        return @"";
+    }
+}
+
+-(NSInteger)GetOtherBowlerOverBallCountWithCurrentOverAndBowlerCodeForDeleteScoreEngine : (NSString*)COMPETITIONCODE : (NSString*)MATCHCODE : (NSNumber*)INNINGSNO : (NSString *)OVERNO : (NSString*) OTHERBOWLERCODE
 {
 @synchronized ([Utitliy syncId]) {
     NSString *databasePath =[self getDBPath];
@@ -1804,7 +1856,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT COUNT(1) FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %@ AND OVERNO = %ld AND BOWLERCODE = '%@' AND ISLEGALBALL = 1",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO,OTHERBOWLERCODE];
+        NSString *query=[NSString stringWithFormat:@"SELECT COUNT(1) FROM BALLEVENTS WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND INNINGSNO = %@ AND OVERNO = %@ AND BOWLERCODE = '%@' AND ISLEGALBALL = 1",COMPETITIONCODE,MATCHCODE,INNINGSNO,OVERNO,OTHERBOWLERCODE];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
@@ -1872,7 +1924,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC251" :updateSQL];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLINGSUMMARY" :@"MSC251" :updateSQL];
                 return YES;
                 
             }
@@ -1937,7 +1989,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC251" :updateSQL];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHREGISTRATION" :@"MSC251" :updateSQL];
                 return YES;
                 
             }
@@ -1995,16 +2047,16 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     sqlite3_stmt *statement;
     if (sqlite3_open([databasePath UTF8String], &dataBase) == SQLITE_OK)
     {
-        NSString *query=[NSString stringWithFormat:@"SELECT COUNT(BE.BALLCODE) FROM BALLEVENTS BE WHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@'  BE.TEAMCODE = '%@' AND BE.INNINGSNO = %@ AND (BE.STRIKERCODE = '%@' OR BE.NONSTRIKERCODE = '%@') AND (BE.OVERNO) + '.' + (BE.BALLNO) + (BE.BALLCOUNT)) >(@W_OVERNO) + '.' + (@W_BALLNO) + (@W_BALLCOUNT) ) ",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,BATSMANCODE,nonStriker];
+        NSString *query=[NSString stringWithFormat:@"SELECT COUNT(BE.BALLCODE) FROM BALLEVENTS BE WHERE BE.COMPETITIONCODE = '%@' AND BE.MATCHCODE = '%@' AND BE.TEAMCODE = '%@' AND BE.INNINGSNO = %@ AND (BE.STRIKERCODE = '%@' OR BE.NONSTRIKERCODE = '%@') AND (BE.OVERNO) + '.' + (BE.BALLNO) + (BE.BALLCOUNT) >(%ld) + '.' + (%ld) + (%ld)",COMPETITIONCODE,MATCHCODE,TEAMCODE,INNINGSNO,BATSMANCODE,nonStriker,W_OVERNO,W_BALLNO,W_BALLCOUNT];
         stmt=[query UTF8String];
         if(sqlite3_prepare(dataBase, stmt, -1, &statement, NULL)==SQLITE_OK)
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
-                NSInteger BAALCODECO = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)].integerValue;
+                NSInteger BALLCODECO = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)].integerValue;
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                return BAALCODECO;
+                return BALLCODECO;
             }
             sqlite3_reset(statement);
             sqlite3_finalize(statement);
@@ -2034,7 +2086,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC251" :updateSQL];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BATTINGSUMMARY" :@"MSC251" :updateSQL];
                 return YES;
                 
             }
@@ -2157,7 +2209,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC251" :updateSQL];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHREGISTRATION" :@"MSC251" :updateSQL];
                 return YES;
                 
             }
@@ -2193,7 +2245,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC251" :updateSQL];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"MATCHRESULT" :@"MSC251" :updateSQL];
                 return YES;
                 
             }
@@ -2229,7 +2281,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC252" :updateSQL];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"SESSIONEVENTS" :@"MSC252" :updateSQL];
                 return YES;
                 
             }
@@ -2265,7 +2317,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC252" :updateSQL];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"DAYEVENTS" :@"MSC252" :updateSQL];
                 return YES;
                 
             }
@@ -2301,7 +2353,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
                 PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
-                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"BOWLEROVERDETAILS" :@"MSC251" :updateSQL];
+                [objPushSyncDBMANAGER InsertTransactionLogEntry:MATCHCODE :@"INNINGSEVENTS" :@"MSC251" :updateSQL];
                 return YES;
                 
             }
@@ -2317,5 +2369,42 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return NO;
 	}
 }
+-(BOOL)ScoreboardUpdate:(NSString *)matchcode:(NSString *)competioncode:(NSInteger)inningsno
+{
+    @synchronized ([Utitliy syncId]) {
+        NSString *databasePath = [self getDBPath];
+        sqlite3_stmt *statement;
+        sqlite3 *dataBase;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+            NSString *updateSQL = [NSString stringWithFormat:@"UPDATE BS SET WICKETOVERNO=BE.OVERNO,WICKETBALLNO=(CASE WHEN (BE.WIDE + BE.NOBALL) > 0 THEN BE.BALLNO -1 ELSE BE.BALLNO END),WICKETSCORE=(SELECT SUM(GRANDTOTAL) FROM BALLEVENTS BES WHERE BES.COMPETITIONCODE='%@' AND BES.MATCHCODE='%@' AND BES.INNINGSNO=%ld AND (( CAST(CAST(BES.OVERNO AS NVARCHAR(MAX))+'.'+CAST(BES.BALLNO AS NVARCHAR(MAX)) AS FLOAT)) BETWEEN 0.0 AND  CAST(CAST(BE.OVERNO AS NVARCHAR(MAX))+'.'+CAST(BE.BALLNO AS NVARCHAR(MAX)) AS FLOAT))) FROM BATTINGSUMMARY BS INNER JOIN WICKETEVENTS WE ON WE.COMPETITIONCODE=BS.COMPETITIONCODE AND WE.MATCHCODE=BS.MATCHCODE AND WE.INNINGSNO=BS.INNINGSNO AND WE.WICKETPLAYER=BS.BATSMANCODE AND BS.WICKETTYPE IS NOT NULL INNER JOIN BALLEVENTS BE ON BE.BALLCODE =WE.BALLCODE WHERE BS.COMPETITIONCODE='%@' AND BS.MATCHCODE='%@' AND BS.INNINGSNO=%ld",competioncode,matchcode,(long)inningsno,competioncode,matchcode,inningsno];
+            const char *selectStmt = [updateSQL UTF8String];
+            if(sqlite3_prepare_v2(dataBase, selectStmt,-1, &statement, NULL)==SQLITE_OK)
+            {
+                if (sqlite3_step(statement) == SQLITE_DONE)
+                {
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    PushSyncDBMANAGER *objPushSyncDBMANAGER = [[PushSyncDBMANAGER alloc] init];
+                    [objPushSyncDBMANAGER InsertTransactionLogEntry:matchcode :@"BALLEVENTS" :@"MSC251" :updateSQL];
+                    return YES;
+                    
+                }
+                else {
+                    sqlite3_reset(statement);
+                    sqlite3_finalize(statement);
+                    sqlite3_close(dataBase);
+                    return NO;
+                }
+            }
+            sqlite3_close(dataBase);
+        }
+        return NO;
+    }
+}
+
+
 
 @end

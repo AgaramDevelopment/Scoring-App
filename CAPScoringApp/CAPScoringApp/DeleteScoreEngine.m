@@ -156,11 +156,11 @@
     
     }
     
-    BOOL DeletePenaltyDetails = [objDBManagerDeleteScoreEngine DeletePenaltyDetailsForDeleteScoreEngine:BALLCODE];
+    BOOL DeletePenaltyDetails = [objDBManagerDeleteScoreEngine DeletePenaltyDetailsForDeleteScoreEngine:BALLCODE:MATCHCODE];
     
-    BOOL DeleteAppealDetails = [objDBManagerDeleteScoreEngine DeleteAppealDetailsForDeleteScoreEngine:BALLCODE];
+    BOOL DeleteAppealDetails = [objDBManagerDeleteScoreEngine DeleteAppealDetailsForDeleteScoreEngine:BALLCODE:MATCHCODE];
     
-    BOOL DeleteFieldingDetails = [objDBManagerDeleteScoreEngine DeleteFieldingDetailsForDeleteScoreEngine:BALLCODE];
+    BOOL DeleteFieldingDetails = [objDBManagerDeleteScoreEngine DeleteFieldingDetailsForDeleteScoreEngine:BALLCODE:MATCHCODE];
     
     UpdateScoreEngine * objupdateScoreEngine = [[UpdateScoreEngine alloc]init];
         
@@ -219,8 +219,13 @@
     
     if(S_WIDE.intValue == 0 && S_NOBALL.intValue == 0 ){
 
+      
+        
         BOOL UpdateBallEventForBallCountWithOldBallCount =[objDBManagerDeleteScoreEngine UpdateBallEventForBallCountWithOldBallCountForDeleteScoreEngine:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO :S_OVERNO :S_BALLCOUNT :S_BALLNO];
     
+        
+        //ballno is change
+        
         BOOL UpdateBallEventForBallNoWithOldBallNo =[objDBManagerDeleteScoreEngine UpdateBallEventForBallNoWithOldBallNoForDeleteScoreEngine:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO :S_OVERNO :S_BALLNO];
     }else{
     
@@ -279,11 +284,14 @@
     
         BOOL DeleteBowlerOverEventForCurrentOverNo =[objDBManagerDeleteScoreEngine DeleteBowlerOverEventForCurrentOverNoForDeleteScoreEngine :COMPETITIONCODE :MATCHCODE :INNINGSNO :S_OVERNO :SB_BOWLERCODE];
     
+        NSInteger  OTHERBOWLERCNT =[objDBManagerDeleteScoreEngine GetOtherBowlerCodeWithCurrentOverAndBowlerForDeleteScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO :S_OVERNO];
+        
         NSString * OTHERBOWLER =[objDBManagerDeleteScoreEngine GetOtherBowlerCodeWithCurrentOverAndBowlerCodeForDeleteScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO :S_OVERNO :SB_BOWLERCODE];
+
     
         NSInteger OTHERBOWLEROVERBALLCNT =[objDBManagerDeleteScoreEngine GetOtherBowlerOverBallCountWithCurrentOverAndBowlerCodeForDeleteScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO :S_OVERNO :OTHERBOWLER];
             
-        if(OTHERBOWLEROVERBALLCNT > 0){
+        if(OTHERBOWLEROVERBALLCNT > 0 && OTHERBOWLERCNT ==1){
     
             NSInteger ISOVERCOMPLETE =[objDBManagerDeleteScoreEngine GetOtherBowlerOverStatusWithCurrentOverForDeleteScoreEngine:COMPETITIONCODE :MATCHCODE :INNINGSNO :S_OVERNO];
     
@@ -316,7 +324,7 @@
         W_BALLCOUNT = [[WicketOverNoAndBallNoAndBallCountWithStrikerAndNonStriker objectAtIndex:2] integerValue];
     }
     
-    NSInteger BallCodeCountWithWicketBallNoOverNoBallCount =[objDBManagerDeleteScoreEngine GetBallCodeCountWithWicketBallNoOverNoBallCountForDeleteScoreEngine:COMPETITIONCODE :MATCHCODE :BATTINGTEAMCODE :INNINGSNO :SB_STRIKERCODE :SB_NONSTRIKERCODE:W_OVERNO :W_BALLNO :W_BALLCOUNT];
+NSInteger BallCodeCountWithWicketBallNoOverNoBallCount =[objDBManagerDeleteScoreEngine  GetBallCodeCountWithWicketBallNoOverNoBallCountForDeleteScoreEngine:COMPETITIONCODE : MATCHCODE :BATTINGTEAMCODE :INNINGSNO :SB_STRIKERCODE :  SB_NONSTRIKERCODE: W_OVERNO :W_BALLNO :W_BALLCOUNT];
     
     
     
@@ -392,6 +400,9 @@
         }
     }
     
+    //scorecard update
+    
+    BOOL scoreBoardUpdate =[objDBManagerDeleteScoreEngine ScoreboardUpdate:COMPETITIONCODE :MATCHCODE :INNINGSNO];
     
     
   

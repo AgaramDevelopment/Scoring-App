@@ -280,7 +280,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     const char *dbPath = [databasePath UTF8String];
     if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
     {
-        NSString *updateSQL = [NSString stringWithFormat:@"SELECT OVERS, BALLS, PARTIALOVERBALLS, RUNS, WICKETS, MAIDENS, NOBALLS, WIDES, DOTBALLS, FOURS, SIXES FROM BOWLINGSUMMARY WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BOWLINGTEAMCODE = '%@' AND INNINGSNO = '%@' AND BOWLERCODE = '%@'",COMPETITIONCODE,MATCHCODE,BOWLINGTEAMCODE,INNINGSNO,BOWLERCODE];
+        NSString *updateSQL = [NSString stringWithFormat:@"SELECT OVERS, BALLS, PARTIALOVERBALLS, RUNS, WICKETS, MAIDENS, NOBALLS, WIDES, DOTBALLS, FOURS, SIXES FROM BOWLINGSUMMARY WHERE COMPETITIONCODE = '%@' AND MATCHCODE = '%@' AND BOWLINGTEAMCODE = '%@' AND INNINGSNO = %@ AND BOWLERCODE = '%@'",COMPETITIONCODE,MATCHCODE,BOWLINGTEAMCODE,INNINGSNO,BOWLERCODE];
         const char *update_stmt = [updateSQL UTF8String];
         if( sqlite3_prepare_v2(dataBase, update_stmt,-1, &statement, NULL)==SQLITE_OK)
         {
@@ -798,11 +798,11 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             while(sqlite3_step(statement)==SQLITE_ROW){
                 
-                NSString *isDayNight = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
+                NSString *bowleroverballcount = [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 0)];
                 sqlite3_reset(statement);
                 sqlite3_finalize(statement);
                 sqlite3_close(dataBase);
-                return isDayNight;
+                return bowleroverballcount;
                 
                 
             }

@@ -10754,7 +10754,7 @@
 
     
     //self.lbl_ExtraRunBatingTeam.text =fetchSEPageLoadRecord.ExtrasRuns;
-    self.lbl_ExtraRunBatingTeam.text =fetchScorecard.TOTALEXTRAS;;
+    self.lbl_ExtraRunBatingTeam.text =fetchScorecard.TOTALEXTRAS;
     
     
     //Striker Details
