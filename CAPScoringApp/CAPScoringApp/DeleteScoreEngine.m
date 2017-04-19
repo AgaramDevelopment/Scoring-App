@@ -84,6 +84,9 @@
         S_LEGBYES       = objRecord.legByes;
         SB_BOWLERCODE   = objRecord.bowlerCode;
         SB_NONSTRIKERCODE =objRecord.NonStrikerCode;
+        S_BALLCOUNT       =[NSNumber numberWithInt:objRecord.ballCount.intValue];
+        S_NOBALL          = [NSNumber numberWithInt:objRecord.NoBall.intValue];
+        S_WIDE           = [NSNumber numberWithInt:objRecord.Wide.intValue];
     }
     
     

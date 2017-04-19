@@ -50,6 +50,7 @@
 		04960F571DE9649F00B23DA5 /* PlayerWormChartRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 04960F541DE9649F00B23DA5 /* PlayerWormChartRecords.m */; };
 		04960F631DE9676D00B23DA5 /* PlayerWormChartVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 04960F611DE9676D00B23DA5 /* PlayerWormChartVC.m */; };
 		04960F641DE9676D00B23DA5 /* PlayerWormChartVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 04960F621DE9676D00B23DA5 /* PlayerWormChartVC.xib */; };
+		04A6367C1EA75C3B001B6FF5 /* ExtrasRunRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 04A6367B1EA75C3B001B6FF5 /* ExtrasRunRecord.m */; };
 		04C325851D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C325841D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.m */; };
 		04C325881D6320E500F0E3A0 /* DBManagerLastInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C325871D6320E500F0E3A0 /* DBManagerLastInstance.m */; };
 		04EC77881D2956A5005B2608 /* BALLEVENTSPushRecords.m in Sources */ = {isa = PBXBuildFile; fileRef = 04EC77871D2956A5005B2608 /* BALLEVENTSPushRecords.m */; };
@@ -449,6 +450,8 @@
 		04960F611DE9676D00B23DA5 /* PlayerWormChartVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerWormChartVC.m; path = "ViewController/Playerworm chart/PlayerWormChartVC.m"; sourceTree = "<group>"; };
 		04960F621DE9676D00B23DA5 /* PlayerWormChartVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = PlayerWormChartVC.xib; path = "ViewController/Playerworm chart/PlayerWormChartVC.xib"; sourceTree = "<group>"; };
 		04A270791E852FF60040895B /* libTelephonyIOKitDynamic.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libTelephonyIOKitDynamic.tbd; path = usr/lib/libTelephonyIOKitDynamic.tbd; sourceTree = SDKROOT; };
+		04A6367A1EA75C3B001B6FF5 /* ExtrasRunRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExtrasRunRecord.h; path = Resource/ExtrasRunRecord/ExtrasRunRecord.h; sourceTree = "<group>"; };
+		04A6367B1EA75C3B001B6FF5 /* ExtrasRunRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExtrasRunRecord.m; path = Resource/ExtrasRunRecord/ExtrasRunRecord.m; sourceTree = "<group>"; };
 		04C325831D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FETCHSELASTINSTANCEDTLS.h; sourceTree = "<group>"; };
 		04C325841D63202000F0E3A0 /* FETCHSELASTINSTANCEDTLS.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FETCHSELASTINSTANCEDTLS.m; sourceTree = "<group>"; };
 		04C325861D6320E500F0E3A0 /* DBManagerLastInstance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManagerLastInstance.h; sourceTree = "<group>"; };
@@ -1103,6 +1106,15 @@
 				04A270791E852FF60040895B /* libTelephonyIOKitDynamic.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		04A636791EA75BEF001B6FF5 /* ExtrasRunRecord */ = {
+			isa = PBXGroup;
+			children = (
+				04A6367A1EA75C3B001B6FF5 /* ExtrasRunRecord.h */,
+				04A6367B1EA75C3B001B6FF5 /* ExtrasRunRecord.m */,
+			);
+			name = ExtrasRunRecord;
 			sourceTree = "<group>";
 		};
 		04C325821D631FA300F0E3A0 /* Last Instance */ = {
@@ -1968,6 +1980,7 @@
 		CE0018341CF4305100668D8B /* ReSource */ = {
 			isa = PBXGroup;
 			children = (
+				04A636791EA75BEF001B6FF5 /* ExtrasRunRecord */,
 				0444948F1E308E3100E04926 /* ScoreEnginBallDeleteRecord */,
 				18782BCD1DE06496005064B9 /* DBManagerSpellReport */,
 				18782BC61DE0609E005064B9 /* SpellReportRecord */,
@@ -2740,6 +2753,7 @@
 				24EFE77E1D2823A40073DE5C /* ChangeTeamRecord.m in Sources */,
 				CE0018421CF431D300668D8B /* EventRecord.m in Sources */,
 				18803C791D2579EC00849850 /* UpdateScoreEngine.m in Sources */,
+				04A6367C1EA75C3B001B6FF5 /* ExtrasRunRecord.m in Sources */,
 				182294561DC367FC00B5F519 /* Manhattan.m in Sources */,
 				CE0F19C01CF5D3D60030FFA2 /* UserRecord.m in Sources */,
 				24E7B4B21D23884200EF0D55 /* DeclareInnings.m in Sources */,

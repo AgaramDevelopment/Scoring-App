@@ -10,6 +10,7 @@
 #import "DBManagerEditScoreEngine.h"
 #import "ScoreEnginEditRecord.h"
 #import "FetchSEPageLoadRecord.h"
+#import "ExtrasRunRecord.h"
 #import "DBManager.h"
 
 @implementation FETCHSEBALLCODEDETAILS
@@ -217,6 +218,30 @@
         
         
     }
+    
+     NSMutableArray * extrasRunArray =[[NSMutableArray alloc]init];
+     extrasRunArray = [dbEditScoreEngine FetchextrasRun:MATCHCODE :INNINGSNO :BATTEAMOVERS :BATTEAMOVRBALLS :BATTEAMOVRBALLSCNT];
+    
+    int noball =0;
+    int wide=0;
+    int byes=0;
+    int legbyes=0;
+    int penality=0;
+    if(extrasRunArray.count >0)
+    {
+        ExtrasRunRecord * objExtrasRun =[extrasRunArray objectAtIndex:0];
+        noball = ([objExtrasRun.noball isEqualToString:@""])?0:[objExtrasRun.noball intValue];
+        wide = ([objExtrasRun.wide isEqualToString:@""])?0:[objExtrasRun.wide intValue];
+        byes = ([objExtrasRun.byes isEqualToString:@""])?0:[objExtrasRun.byes intValue];
+        legbyes = ([objExtrasRun.legbyes isEqualToString:@""])?0:[objExtrasRun.legbyes intValue];
+        penality = ([objExtrasRun.penality isEqualToString:@""])?0:[objExtrasRun.penality intValue];
+
+    }
+    int extraTotalRun = noball+wide+byes+legbyes+penality;
+    self.extrasRun =[NSString stringWithFormat:@"%d",extraTotalRun] ;
+    
+   // -(NSString *)FetchextrasRun :(NSString *) MATCHCODE :(NSNumber *)INNINGSNO:(NSNumber *)OVERNO :(NSNumber*)BALLNO:(NSNumber *)BALLCOUNT
+
     //X =
 //    NSMutableArray *GetRetiredHurtChangesArray=[ dbEditScoreEngine GetRetiredHurtChangesForBallevents :  COMPETITIONCODE : MATCHCODE: BATTINGTEAMCODE : INNINGSNO ];
     

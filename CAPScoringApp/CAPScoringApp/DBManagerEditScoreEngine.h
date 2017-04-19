@@ -110,6 +110,7 @@
 
 -(NSMutableArray *) GetFastSpeedBallDetailsForMetadata;
 -(NSMutableArray *) getFieldingFactorDetails:(NSString*) COMPETITIONCODE :(NSString*) MATCHCODE :(NSString*) TEAMCODE :(NSString*) BALLCODE;
+-(NSString *)FetchextrasRun :(NSString *) MATCHCODE :(NSNumber *)INNINGSNO:(NSNumber *)OVERNO :(NSNumber*)BALLNO:(NSNumber *)BALLCOUNT;
 
 
 @end

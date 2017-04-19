@@ -819,6 +819,7 @@
     //MatchType
     fetchSEPageLoadRecord.MATCHTYPE = fetchSeBallCodeDetails.MATCHTYPE;
     
+    self.lbl_ExtraRunBatingTeam.text = fetchSeBallCodeDetails.extrasRun;
     
     //Batting and bowling players
     fetchSEPageLoadRecord.getBattingTeamPlayers = fetchSeBallCodeDetails.GetBattingTeamPlayersArray;
@@ -1058,6 +1059,7 @@
             NSString *runsReqForBalls =  [NSString  stringWithFormat:@"Runs required %@ in %@ balls",fetchSEPageLoadRecord.RUNSREQUIRED.intValue<0?@"0":fetchSEPageLoadRecord.RUNSREQUIRED,fetchSEPageLoadRecord.REMBALLS.intValue<0?@"0":fetchSEPageLoadRecord.REMBALLS];
             
             _lbl_runs_required.text = runsReqForBalls;
+            
         }
     }
     
@@ -1409,7 +1411,7 @@
         [alter setTag:10000];
     }
     
-    self.lbl_ExtraRunBatingTeam.text =fetchSEPageLoadRecord.ExtrasRuns;
+  //  self.lbl_ExtraRunBatingTeam.text =fetchSEPageLoadRecord.ExtrasRuns;
     //Striker Details
     self.lbl_stricker_name.text = fetchSEPageLoadRecord.strickerPlayerName;
     self.lbl_stricker_runs.text = fetchSEPageLoadRecord.strickerTotalRuns;

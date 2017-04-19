@@ -31,6 +31,7 @@
 @property(nonatomic,strong)NSString* MATCHTYPE;
 @property(nonatomic,strong)NSString* ISOTHERSMATCHTYPE;
 
+@property (nonatomic,strong) NSString * extrasRun;
 
 @property(nonatomic,strong)NSNumber* BATTEAMRUNS;;
 @property(nonatomic,strong)NSNumber* BATTEAMWICKETS;

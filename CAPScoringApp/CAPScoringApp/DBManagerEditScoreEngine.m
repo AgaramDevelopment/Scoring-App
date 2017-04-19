@@ -13,6 +13,7 @@
 #import "BowlerEvent.h"
 #import "BallEventRecord.h"
 #import "PushSyncDBMANAGER.h"
+#import "ExtrasRunRecord.h"
 #import "Utitliy.h"
 
 
@@ -1880,7 +1881,38 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     return fieldingFactorArray;
 	}
 }
+-(NSMutableArray *)FetchextrasRun :(NSString *) MATCHCODE :(NSNumber *)INNINGSNO:(NSNumber *)OVERNO :(NSNumber*)BALLNO:(NSNumber *)BALLCOUNT
+{
+    @synchronized ([Utitliy syncId]) {
+        NSMutableArray *extrasRun =[[NSMutableArray alloc]init];
+        NSString *databasePath = [self getDBPath];
+        sqlite3_stmt *statement;
+        sqlite3 *dataBase;
+        const char *dbPath = [databasePath UTF8String];
+        if (sqlite3_open(dbPath, &dataBase) == SQLITE_OK)
+        {
+          NSString *updateSQL = [NSString stringWithFormat:@"SELECT  SUM(CASE WHEN NOBALL > 0 THEN NOBALL+BYES+LEGBYES ELSE 0 END)  AS NOBALLS, SUM(CASE WHEN WIDE > 0 THEN WIDE ELSE 0 END) WIDEBALLS, SUM(CASE WHEN (NOBALL > 0 AND BYES>0) THEN 0 ELSE BYES END) as BYES, SUM(CASE WHEN (NOBALL > 0 AND LEGBYES>0 ) THEN 0 ELSE (CASE WHEN BYES=0 AND LEGBYES>0 THEN LEGBYES ELSE 0 END )END) AS LEGBYES, IFNULL(SUM(CASE WHEN PENALTY > 0 THEN PENALTY ELSE 0 END),0) PENALTY FROM BALLEVENTS BE LEFT JOIN PENALTYDETAILS PTY ON BE.BALLCODE = PTY.BALLCODE where   BE.MATCHCODE='%@' AND BE.INNINGSNO=%@  AND (BE.OVERNO  || BE.BALLNO || BE.BALLCOUNT)<=  (%@||%@||%@)",MATCHCODE,INNINGSNO,OVERNO,BALLNO,BALLCOUNT];
+            const char *update_stmt = [updateSQL UTF8String];
+            if(sqlite3_prepare(dataBase, update_stmt, -1, &statement, NULL)==SQLITE_OK)
+            {
+                while(sqlite3_step(statement)==SQLITE_ROW){
+                    ExtrasRunRecord *record=[[ExtrasRunRecord alloc]init];
+                    record.noball=[self getValueByNull:statement :0];
+                    record.wide=[self getValueByNull:statement :1];
+                    record.byes=[self getValueByNull:statement :2];
+                    record.legbyes=[self getValueByNull:statement :3];
+                    record.penality=[self getValueByNull:statement :4];
 
+                    [extrasRun addObject:record];
+                }
+                sqlite3_reset(statement);
+            }
+        }
+        sqlite3_finalize(statement);
+        sqlite3_close(dataBase);
+        return extrasRun;
+    }
+}
 
 
 
