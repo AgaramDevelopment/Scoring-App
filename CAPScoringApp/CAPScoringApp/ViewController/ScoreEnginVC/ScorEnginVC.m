@@ -6786,7 +6786,8 @@
              appeal.numberStyle = NSNumberFormatterDecimalStyle;
              NSNumber *isappeal= [appeal numberFromString:@"1"];
                self.ballEventRecord.objIsappeal = isappeal;
-             // [self unselectedViewBg:_view_appeal];
+             
+              [self unselectedViewBg:_view_appeal];
              
              
                self.View_Appeal.hidden = YES;
@@ -6802,7 +6803,7 @@
             self.ballEventRecord.objIsappeal = isappeal;
             
             [self selectedViewBg:_view_appeal];
-            //isAppealSelected= NO;
+            isAppealSelected= NO;
             [table_Appeal reloadData];
             int indx=0;
             int selectePosition = -1;

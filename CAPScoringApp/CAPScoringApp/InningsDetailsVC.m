@@ -59,7 +59,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    //[self customnavigationmethod];
+    [self customnavigationmethod];
     dbChangeToss = [[DBManagerChangeToss alloc]init];
     objDBManager =[[DBManager alloc]init];
     [self.Striker_View setUserInteractionEnabled:YES];

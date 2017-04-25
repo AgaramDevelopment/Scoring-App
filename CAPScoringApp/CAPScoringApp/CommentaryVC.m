@@ -24,6 +24,13 @@
     
     
     DBManagerReports *dbReports = [[DBManagerReports alloc]init];
+    if(self.scordSelectCmty == YES)
+    {
+        self.table_hight.constant =160;
+    }
+    else{
+        self.table_hight.constant =0;
+    }
     
     _commentaryArray = [dbReports retrieveCommentaryData:self.matchCode :@"1"];
     [self setInningsView];

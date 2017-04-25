@@ -276,10 +276,10 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     for (int i=0; i< rows; i++) {
         [arrayForBool addObject:[NSNumber numberWithBool:NO]];
     }
-    self.fstInnShortName =fetchSEpage.FIRSTINNINGSSHORTNAME;
-    self.secInnShortName = fetchSEpage.BOWLTEAMSHORTNAME;
-    self.thrdInnShortName=fetchSEpage.FIRSTINNINGSSHORTNAME;
-    self.frthInnShortName =fetchSEpage.BOWLTEAMSHORTNAME;
+    //self.fstInnShortName =fetchSEpage.FIRSTINNINGSSHORTNAME;
+   // self.secInnShortName = fetchSEpage.BOWLTEAMSHORTNAME;
+   // self.thrdInnShortName=fetchSEpage.FIRSTINNINGSSHORTNAME;
+    //self.frthInnShortName =fetchSEpage.BOWLTEAMSHORTNAME;
     [self setInningsBySelection:@"1"];
     [self setInningsView];
 }
@@ -5624,7 +5624,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     [self setInningsBySelection:@"1"];
     [self setInningsView];
-    [self reloadScroeCard];
+    [self reloadScroeCard:@"1"];
     
     //self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
    // _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"1"];
@@ -5653,7 +5653,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     [self setInningsBySelection:@"2"];
     [self setInningsView];
-    [self reloadScroeCard];
+    [self reloadScroeCard:@"2"];
 }
 - (IBAction)btn_third_inns_action:(id)sender {
     //self.lbl_strip.constant=self.btn_third_inns_id.frame.origin.x;
@@ -5667,7 +5667,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     [self setInningsBySelection:@"3"];
     [self setInningsView];
-    [self reloadScroeCard];
+    [self reloadScroeCard:@"3"];
 }
 - (IBAction)btn_fourth_inns_action:(id)sender {
     //self.lbl_strip.constant=self.btn_fourth_inns_id.frame.origin.x;
@@ -5681,7 +5681,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     
     [self setInningsBySelection:@"4"];
     [self setInningsView];
-    [self reloadScroeCard];
+    [self reloadScroeCard:@"4"];
 }
 
 -(IBAction)didClickScoreCardAction:(id)sender
@@ -5731,7 +5731,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     cmntryView.secInnShortName = self.secInnShortName;
     cmntryView.thrdInnShortName = self.thrdInnShortName;
     cmntryView.frthInnShortName = self.frthInnShortName;
-    
+    cmntryView.scordSelectCmty =YES;
     cmntryView.view.frame =CGRectMake(0,self.view_common.frame.origin.y+self.view_headerview.frame.size.height+30,self.view.frame.size.width,self.view.frame.size.height-180);
     [self.view addSubview:cmntryView.view];
 }
@@ -5758,10 +5758,10 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 }
 
 
--(void) reloadScroeCard{
+-(void) reloadScroeCard :(NSString *) inningsno{
     @try {
         fetchScorecard = [[FetchScorecard alloc]init];
-        [fetchScorecard FetchScoreBoard:competitionCode :matchCode :inningsNo];
+        [fetchScorecard FetchScoreBoard:competitionCode :matchCode :inningsno];
         //Set Table Cell Position
         batsmanHeaderPosition = 0;
         batsmanPostion =fetchScorecard.BattingSummaryForScoreBoard.count > 0 ? 1 :0;

@@ -9,6 +9,7 @@
 #import "MCBarChartView.h"
 #import "MCChartInformationView.h"
 #import "ManhattenWKTRecord.h"
+#import "ManhattanRecord.h"
 
 #define RGBA(r,g,b,a)   [UIColor colorWithRed:r/255.0f green:g/255.0f blue:b/255.0f alpha:a]
 #define RGB(r,g,b)      RGBA(r,g,b,1.0f)
@@ -339,13 +340,13 @@ CGFloat static const kChartViewUndefinedCachedHeight = -1.0f;
                     wicket_Btn.tag = [objManhattanRecord.tag intValue];
                     if([objManhattanRecord.inningno isEqualToString:@"1"] || [objManhattanRecord.inningno isEqualToString:@"3"])
                     {
-                      
-                    wicket_Btn.center = CGPointMake(xOffset-40, chartYOffset - _chartHeight/_numberOfYAxis * i - 10);
+                    wicket_Btn.center = CGPointMake(xOffset-40, chartYOffset - [objManhattanRecord.Run floatValue]*10);
                         //chartYOffset - [objManhattanRecord.wicketscore floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2
                     }
                     else
                     {
-                        wicket_Btn.center = CGPointMake(xOffset-20, chartYOffset - [objManhattanRecord.Run floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2);
+                        wicket_Btn.center = CGPointMake(xOffset-20,chartYOffset - [objManhattanRecord.Run floatValue]*5);
+                        //chartYOffset - [objManhattanRecord.runs floatValue]  - CGRectGetHeight(wicket_Btn.bounds)/2
                     }
                     [wicket_Btn setBackgroundColor:[UIColor colorWithRed:(16/255.0f) green:(210/255.0f) blue:(158/255.0f) alpha:1.0f]];
                     wicket_Btn.layer.cornerRadius=15;

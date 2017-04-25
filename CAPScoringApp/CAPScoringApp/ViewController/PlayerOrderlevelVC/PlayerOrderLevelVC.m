@@ -492,11 +492,11 @@
    else{
        if (isSelectCaptainType == NO && isSelectWKTKeeperType == NO )
        {
-           [self AlterviewMethod:@"Please Select Captain And Wicketkeeper"];
+           [self AlterviewMethod:@"Please Select Capitain And Wicketkeeper"];
        }
       else if(isSelectCaptainType == NO)
        {
-           [self AlterviewMethod:@"Please Select Captain"];
+           [self AlterviewMethod:@"Please Select Capitain"];
        }
        else if(isSelectWKTKeeperType == NO)
        {

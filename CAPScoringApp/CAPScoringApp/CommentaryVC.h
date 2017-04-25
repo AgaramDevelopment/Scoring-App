@@ -32,5 +32,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *inns_two;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *inns_two_width;
 @property (strong, nonatomic) IBOutlet NSLayoutConstraint *inns_one_width;
+@property (nonatomic,assign) BOOL scordSelectCmty;
+@property (nonatomic,strong) IBOutlet NSLayoutConstraint * table_hight;
 
 @end

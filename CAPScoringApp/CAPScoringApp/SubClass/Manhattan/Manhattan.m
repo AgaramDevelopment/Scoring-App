@@ -184,7 +184,15 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
         {
             
             ManhattenWKTRecord * wicket =(ManhattenWKTRecord *)[objinnings1Wicket objectAtIndex:i];
-            [com2Wicket addObject:wicket];
+            for(int j=0; objRunArray.count >j; j++)
+            {
+                ManhattanRecord * objManhatten =(ManhattanRecord*)[objRunArray objectAtIndex:j];
+                if([objManhatten.overno isEqualToString:wicket.wicketoverno] && [objManhatten.wickets isEqualToString:wicket.wicketno])
+                {
+                     [com2Wicket addObject:wicket];
+                }
+            }
+           
             if(objinnings2wicket.count > i)
             {
                 ManhattenWKTRecord *wicket =(ManhattenWKTRecord *)[objinnings2wicket objectAtIndex:i];
@@ -202,13 +210,35 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             if(objinnings1Wicket.count > i)
             {
                 ManhattenWKTRecord *wick =(ManhattenWKTRecord *)[objinnings1Wicket objectAtIndex:i];
-                [com2Wicket addObject:wick];
+                for(int j=0; objRunArray.count >j; j++)
+                {
+                    ManhattanRecord * objManhatten =(ManhattanRecord*)[objRunArray objectAtIndex:j];
+                    if([objManhatten.overno isEqualToString:wick.wicketoverno] && [objManhatten.wickets isEqualToString:wick.wicketno])
+                    {
+                        [com2Wicket addObject:wick];
+                    }
+                }
+                
+
+               // [com2Wicket addObject:wick];
 
             }
-            
-            ManhattenWKTRecord *wick =(ManhattenWKTRecord *)[objinnings2wicket objectAtIndex:i];
-           
-            [com2Wicket addObject:wick];
+            if(objinnings2wicket.count >i)
+            {
+                ManhattenWKTRecord *wick =(ManhattenWKTRecord *)[objinnings2wicket objectAtIndex:i];
+                for(int j=0; objInnings2RunArray.count >j; j++)
+                {
+                    ManhattanRecord * objManhatten =(ManhattanRecord*)[objInnings2RunArray objectAtIndex:j];
+                    if([objManhatten.overno isEqualToString:wick.wicketoverno] && [objManhatten.wickets isEqualToString:wick.wicketno])
+                    {
+                        [com2Wicket addObject:wick];
+                    }
+                }
+                
+                
+                
+//            [com2Wicket addObject:wick];
+            }
             
         }
 
@@ -216,19 +246,44 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     
     com2array =[[NSMutableArray alloc]init];
-        if([objRunArray count]>0 || [objInnings2RunArray count]>0){
+        if([objRunArray count]>0 || [objInnings2RunArray count]>0)
+        {
 
             if(objRunArray.count > objInnings2RunArray.count)
             {
-               
-                NSArray * obj2;
+                
+                NSMutableArray *fetchOverno = [NSMutableArray array];
+                
+                for (int i=0;objRunArray.count>i; i++) {
+                    objManhattanRecord =(ManhattanRecord *)[objRunArray objectAtIndex:i];
 
-                for(int i=0;objRunArray.count>i; i++)
+                    if (![fetchOverno containsObject:objManhattanRecord]) {
+                        if(fetchOverno.count > 0)
+                        {
+                            
+                             ManhattanRecord*  objManhattanRecord1 =(ManhattanRecord *)[fetchOverno lastObject];
+
+                              if(![objManhattanRecord1.overno isEqualToString:objManhattanRecord.overno])
+                               [fetchOverno addObject:objManhattanRecord];
+                            
+                        }
+                        else{
+                            [fetchOverno addObject:objManhattanRecord];
+ 
+                        }
+                    }
+                }
+                
+                
+                NSArray * obj2;
+                
+                for(int i=0;fetchOverno.count>i; i++)
                 {
                     NSMutableArray*commonArray =[[NSMutableArray alloc]init];
 
                     
-                    objManhattanRecord =(ManhattanRecord *)[objRunArray objectAtIndex:i];
+                    objManhattanRecord =(ManhattanRecord *)[fetchOverno objectAtIndex:i];
+                    
                     NSArray * obj1 =[NSArray arrayWithObjects:[NSNumber numberWithInt:objManhattanRecord.runs.intValue], nil];
                     
                     if(objInnings2RunArray.count > i)
@@ -252,23 +307,61 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
             }
             else
             {
+                NSMutableArray *fetchOverno = [NSMutableArray array];
+
+                for (int i=0;objRunArray.count>i; i++) {
+                    objManhattanRecord =(ManhattanRecord *)[objRunArray objectAtIndex:i];
+                    
+                    if (![fetchOverno containsObject:objManhattanRecord]) {
+                        if(fetchOverno.count > 0)
+                        {
+                            
+                            ManhattanRecord*  objManhattanRecord1 =(ManhattanRecord *)[fetchOverno lastObject];
+                            
+                            if(![objManhattanRecord1.overno isEqualToString:objManhattanRecord.overno])
+                                [fetchOverno addObject:objManhattanRecord];
+                            
+                        }
+                        else{
+                            [fetchOverno addObject:objManhattanRecord];
+                            
+                        }
+                    }
+                }
                 NSArray * obj1;
                 
-                for(int i=0;objInnings2RunArray.count>i; i++)
-                {
+//                for(int i=0;objInnings2RunArray.count>i; i++)
+//                {
+                
+                    for(int i=0;fetchOverno.count>i; i++)
+                    {
                     NSMutableArray*commonArray =[[NSMutableArray alloc]init];
                     
-                    if(objRunArray.count > i)
-                    {
-                        objManhattanRecord =(ManhattanRecord *)[objRunArray objectAtIndex:i];
-                        obj1 =[NSArray arrayWithObjects:[NSNumber numberWithInt:objManhattanRecord.runs.intValue], nil];
-                        
-                        
-                    }
-                    else
-                    {
-                        obj1 =[NSArray arrayWithObjects:[NSNumber numberWithInt:0], nil];
-                    }
+                        objManhattanRecord =(ManhattanRecord *)[fetchOverno objectAtIndex:i];
+
+//                    if(objRunArray.count > i)
+//                    {
+//                        objManhattanRecord =(ManhattanRecord *)[objRunArray objectAtIndex:i];
+//                        obj1 =[NSArray arrayWithObjects:[NSNumber numberWithInt:objManhattanRecord.runs.intValue], nil];
+//                        
+//                        
+//                    }
+//                    else
+//                    {
+//                        obj1 =[NSArray arrayWithObjects:[NSNumber numberWithInt:0], nil];
+//                    }
+//
+                        if(objRunArray.count > i)
+                        {
+                            objManhattanRecord =(ManhattanRecord *)[objRunArray objectAtIndex:i];
+                            obj1 =[NSArray arrayWithObjects:[NSNumber numberWithInt:objManhattanRecord.runs.intValue], nil];
+                            
+                            
+                        }
+                        else
+                        {
+                            obj1 =[NSArray arrayWithObjects:[NSNumber numberWithInt:0], nil];
+                        }
 
                     
                     objManhattanRecord =(ManhattanRecord *)[objInnings2RunArray objectAtIndex:i];
@@ -280,7 +373,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
                     [com2array addObject:commonArray];
                     
                 }
- 
+                //}
             }
             
             
@@ -514,10 +607,10 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
 {
     NSMutableArray * runValue=[[NSMutableArray alloc]init];
     
-        runValue =[objRunArray valueForKey:@"_score"];
+        runValue =[objRunArray valueForKey:@"_runs"];
     
     id max = [runValue valueForKeyPath:@"@max.intValue"];
-    
+
     _titles_1 = objOverArray;
     
     self.BarChartView = [[MCBarChartView alloc] initWithFrame:CGRectMake(20, 100, [UIScreen mainScreen].bounds.size.width, 260)];
@@ -573,7 +666,7 @@ static NSString *SQLITE_FILE_NAME = @"TNCA_DATABASE.sqlite";
     
     NSMutableArray * runValue=[[NSMutableArray alloc]init];
     
-    runValue =[objInnings3RunArray valueForKey:@"_score"];
+    runValue =[objInnings3RunArray valueForKey:@"_runs"];
     
     id max = [runValue valueForKeyPath:@"@max.intValue"];
     

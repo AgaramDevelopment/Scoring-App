@@ -32,4 +32,7 @@
 
 @property (nonatomic,strong) NSString * powerplayType;
 
+@property (nonatomic,strong) NSNumber * tag;
+
+
 @end
