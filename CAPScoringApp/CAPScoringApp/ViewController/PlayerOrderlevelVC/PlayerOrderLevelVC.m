@@ -196,17 +196,17 @@
                 selectedPlayerFilterRecord.isSelectCapten=@"YES";
                 isSelectCaptainType=YES;
             }
-            else if ([self.WKTkeeperAcode isEqualToString:selectedPlayerFilterRecord.playerCode])
+           if ([self.WKTkeeperAcode isEqualToString:selectedPlayerFilterRecord.playerCode])
             {
                 selectedPlayerFilterRecord.isSelectWKTKeeper=@"YES";
                 isSelectWKTKeeperType=YES;
             }
-            else if([self.captainBcode isEqualToString :selectedPlayerFilterRecord.playerCode ])
+            if([self.captainBcode isEqualToString :selectedPlayerFilterRecord.playerCode ])
             {
                 selectedPlayerFilterRecord.isSelectCapten=@"YES";
                 isSelectCaptainType=YES;
             }
-            else if ([self.WKTkeeperBcode isEqualToString:selectedPlayerFilterRecord.playerCode])
+            if ([self.WKTkeeperBcode isEqualToString:selectedPlayerFilterRecord.playerCode])
             {
                 selectedPlayerFilterRecord.isSelectWKTKeeper=@"YES";
                 isSelectWKTKeeperType=YES;
@@ -830,13 +830,15 @@
 }
     else
     {
-        if(isSelectWKTKeeperType==NO)
-        {
-           [self AlterviewMethod:@"Please select Wicketkeeper from top 11 players"];
-        }
-        else if(isSelectCaptainType == YES)
+        
+        if(isSelectCaptainType == NO)
         {
             [self AlterviewMethod:@"Please select Capitain from top 11 players"];
+        }
+        
+       else if(isSelectWKTKeeperType==NO)
+        {
+            [self AlterviewMethod:@"Please select Wicketkeeper from top 11 players"];
         }
     }
     }

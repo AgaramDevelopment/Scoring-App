@@ -224,8 +224,9 @@ int indexOfReadMoreButton = -1;
     
     
 
-    
-    [self setInitView];
+   [self setInningsBySelection:@"1"];
+    [self setInningsView];
+   // [self setInitView];
    
     int btnSize =self.btn_sec_inns_id.frame.origin.x;
     
@@ -247,26 +248,26 @@ int indexOfReadMoreButton = -1;
     
     [self teamLogo];
     
-if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] || [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"] || [self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]) &&[inningsNo isEqualToString:@"1"]) {
-    
-    
-        [self.btn_sec_inns_id setHidden:YES];
-    
-    self.btn_third_inns_id.hidden = YES;
-    self.btn_fourth_inns_id.hidden = YES;
-    }
-    
-    //test match
-    if (([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])&&[inningsNo isEqualToString:@"2"]) {
-        
-     
-        self.btn_third_inns_id.hidden = YES;
-        self.btn_fourth_inns_id.hidden = YES;
-        
-    }else if (([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])&&[inningsNo isEqualToString:@"3"]){
-        
-          self.btn_fourth_inns_id.hidden = YES;
-    }
+//if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqualToString:@"MSC116"] || [self.matchTypeCode isEqualToString:@"MSC022"] || [self.matchTypeCode isEqualToString:@"MSC024"] || [self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]) &&[inningsNo isEqualToString:@"1"]) {
+//    
+//    
+//        [self.btn_sec_inns_id setHidden:YES];
+//    
+//    self.btn_third_inns_id.hidden = YES;
+//    self.btn_fourth_inns_id.hidden = YES;
+//    }
+//    
+//    //test match
+//    if (([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])&&[inningsNo isEqualToString:@"2"]) {
+//        
+//     
+//        self.btn_third_inns_id.hidden = YES;
+//        self.btn_fourth_inns_id.hidden = YES;
+//        
+//    }else if (([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"])&&[inningsNo isEqualToString:@"3"]){
+//        
+//          self.btn_fourth_inns_id.hidden = YES;
+//    }
     
     int rows = fetchScorecard.BowlingSummaryForScoreBoard.count+
     fetchScorecard.BattingSummaryForScoreBoard.count+
@@ -280,8 +281,7 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
    // self.secInnShortName = fetchSEpage.BOWLTEAMSHORTNAME;
    // self.thrdInnShortName=fetchSEpage.FIRSTINNINGSSHORTNAME;
     //self.frthInnShortName =fetchSEpage.BOWLTEAMSHORTNAME;
-    [self setInningsBySelection:@"1"];
-    [self setInningsView];
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated
@@ -345,9 +345,82 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
         
     
     }
-    
-    
 }
+
+-(void) setInningsBySelection: (NSString*) innsNo{
+    
+    [self setInningsButtonUnselect:self.btn_fst_inns_id];
+    [self setInningsButtonUnselect:self.btn_sec_inns_id];
+    [self setInningsButtonUnselect:self.btn_third_inns_id];
+    [self setInningsButtonUnselect:self.btn_fourth_inns_id];
+    
+    
+    [self.btn_fst_inns_id setTitle:[NSString stringWithFormat:@"%@ 1st INNS",self.FIRSTINNINGSSHORTNAME] forState:UIControlStateNormal];
+    [self.btn_sec_inns_id setTitle:[NSString stringWithFormat:@"%@ 1st INNS",self.SECONDINNINGSSHORTNAME] forState:UIControlStateNormal];
+    [self.btn_third_inns_id setTitle:[NSString stringWithFormat:@"%@ 2nd INNS",([self.THIRDINNINGSSHORTNAME isEqualToString:@""]?self.FIRSTINNINGSSHORTNAME:self.FIRSTINNINGSSHORTNAME)] forState:UIControlStateNormal];
+    [self.btn_fourth_inns_id setTitle:[NSString stringWithFormat:@"%@ 2nd INNS",([self.FOURTHINNINGSSHORTNAME isEqualToString:@""]?self.SECONDINNINGSSHORTNAME:self.FOURTHINNINGSSHORTNAME)] forState:UIControlStateNormal];
+    
+    
+    
+    if([innsNo isEqualToString:@"1"]){
+        
+        [self setInningsButtonSelect:self.btn_fst_inns_id];
+       
+        
+        
+    }else if([innsNo isEqualToString:@"2"]){
+        
+        [self setInningsButtonSelect:self.btn_sec_inns_id];
+        
+        
+    }else if([innsNo isEqualToString:@"3"]){
+        
+        [self setInningsButtonSelect:self.btn_third_inns_id];
+        
+    }else if([innsNo isEqualToString:@"4"]){
+        
+        
+        [self setInningsButtonSelect:self.btn_fourth_inns_id];
+        
+    }
+}
+
+-(void) setInningsView{
+    if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){//T20
+        
+        self.btn_fst_inns_id.hidden = NO;
+        self.btn_sec_inns_id.hidden = NO;
+        self.btn_third_inns_id.hidden = YES;
+        self.btn_fourth_inns_id.hidden = YES;
+        
+        //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
+        //[self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
+        self.inns_one_width.constant = 384;
+        self.inns_two_width.constant = 384;
+        
+        
+    }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){//ODI
+        self.btn_fst_inns_id.hidden = NO;
+        self.btn_sec_inns_id.hidden = NO;
+        self.btn_third_inns_id.hidden = YES;
+        self.btn_fourth_inns_id.hidden = YES;
+        
+        
+        self.inns_one_width.constant = 384;
+        self.inns_two_width.constant = 384;
+        
+        //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
+        //   [self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
+        
+    }else if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){//Test
+        
+        self.btn_fst_inns_id.hidden = NO;
+        self.btn_sec_inns_id.hidden = NO;
+        self.btn_third_inns_id.hidden = NO;
+        self.btn_fourth_inns_id.hidden = NO;
+    }
+}
+
 -(IBAction)batsmancellExpand:(id)sender
 {
     UIButton *readMoreButton = (UIButton *)sender;
@@ -5538,74 +5611,6 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
 }
 
 
--(void) setInningsBySelection: (NSString*) innsNo{
-    
-    [self setInningsButtonUnselect:self.btn_fst_inns_id];
-    [self setInningsButtonUnselect:self.btn_sec_inns_id];
-    [self setInningsButtonUnselect:self.btn_third_inns_id];
-    [self setInningsButtonUnselect:self.btn_fourth_inns_id];
-    
-    
-    [self.btn_fst_inns_id setTitle:[NSString stringWithFormat:@"%@ 1st INNS",self.fstInnShortName] forState:UIControlStateNormal];
-    [self.btn_sec_inns_id setTitle:[NSString stringWithFormat:@"%@ 1st INNS",self.secInnShortName] forState:UIControlStateNormal];
-    [self.btn_third_inns_id setTitle:[NSString stringWithFormat:@"%@ 2nd INNS",self.thrdInnShortName] forState:UIControlStateNormal];
-    [self.btn_fourth_inns_id setTitle:[NSString stringWithFormat:@"%@ 2nd INNS",self.frthInnShortName] forState:UIControlStateNormal];
-    
-    
-    
-    if([innsNo isEqualToString:@"1"]){
-        
-        [self setInningsButtonSelect:self.btn_fst_inns_id];
-        
-    }else if([innsNo isEqualToString:@"2"]){
-        
-        [self setInningsButtonSelect:self.btn_sec_inns_id];
-        
-    }else if([innsNo isEqualToString:@"3"]){
-        
-        [self setInningsButtonSelect:self.btn_third_inns_id];
-        
-    }else if([innsNo isEqualToString:@"4"]){
-        
-        [self setInningsButtonSelect:self.btn_fourth_inns_id];
-        
-    }
-}
--(void) setInningsView{
-    if([self.matchTypeCode isEqual:@"MSC116"] || [self.matchTypeCode isEqual:@"MSC024"]){//T20
-        
-        self.btn_fst_inns_id.hidden = NO;
-        self.btn_sec_inns_id.hidden = NO;
-        self.btn_third_inns_id.hidden = YES;
-        self.btn_fourth_inns_id.hidden = YES;
-        
-        //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
-        //[self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
-        self.inns_one_width.constant = 384;
-        self.inns_two_width.constant = 384;
-        
-        
-    }else if([self.matchTypeCode isEqual:@"MSC115"] || [self.matchTypeCode isEqual:@"MSC022"]){//ODI
-        self.btn_fst_inns_id.hidden = NO;
-        self.btn_sec_inns_id.hidden = NO;
-        self.btn_third_inns_id.hidden = YES;
-        self.btn_fourth_inns_id.hidden = YES;
-        
-        
-        self.inns_one_width.constant = 384;
-        self.inns_two_width.constant = 384;
-        
-        //   [self.inns_one setFrame:CGRectMake(0, 0, 160, 50)];
-        //   [self.inns_two setFrame:CGRectMake(160, 0, 160, 50)];
-        
-    }else if([self.matchTypeCode isEqual:@"MSC114"] || [self.matchTypeCode isEqual:@"MSC023"]){//Test
-        
-        self.btn_fst_inns_id.hidden = NO;
-        self.btn_sec_inns_id.hidden = NO;
-        self.btn_third_inns_id.hidden = NO;
-        self.btn_fourth_inns_id.hidden = NO;
-    }
-}
 
 
 
@@ -5621,23 +5626,12 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     isThirdInn = NO;
     isFourthInn = NO;
     //isDone = NO;
-    
-    [self setInningsBySelection:@"1"];
-    [self setInningsView];
+   // [self setInitView];
     [self reloadScroeCard:@"1"];
-    
-    //self.teamCode =[objDBManagerpitchmapReport getTeamCode:self.compititionCode :self.matchCode :@"1"];
-   // _bowlerArray = [objDBManagerSpiderWagonReport getBowlerdetail:self.matchCode :_teamBcode:@"1"];
-    
-   // _sectorWagonArray = [objDBManagerSpiderWagonReport getSectorWagon:self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode :@"1" :@"" :@"" :@"" :@"" :@"" :@""];
-    
-   // _totalRuns =  [objDBManagerSpiderWagonReport getTotalRuns:self.matchTypeCode :self.compititionCode :self.matchCode :self.teamCode :@"1"];
-   // _tRuns = [NSNumber numberWithInt:[_totalRuns intValue]];
-    
-    
-   // [self displayRuns];
-    
-    //[self.tbl_players reloadData];
+
+    [self setInningsBySelection:@"1"];
+      [self setInningsView];
+
 
     
 }
@@ -5651,9 +5645,12 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     isFourthInn = NO;
     //isDone = NO;
     
-    [self setInningsBySelection:@"2"];
-    [self setInningsView];
+    
+   // [self setInitView];
     [self reloadScroeCard:@"2"];
+
+    [self setInningsView];
+    [self setInningsBySelection:@"2"];
 }
 - (IBAction)btn_third_inns_action:(id)sender {
     //self.lbl_strip.constant=self.btn_third_inns_id.frame.origin.x;
@@ -5664,10 +5661,13 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     isThirdInn = YES;
     isFourthInn = NO;
     //isDone = NO;
-    
+
+   [self setInningsView];
     [self setInningsBySelection:@"3"];
-    [self setInningsView];
     [self reloadScroeCard:@"3"];
+
+
+   // [self setInitView];
 }
 - (IBAction)btn_fourth_inns_action:(id)sender {
     //self.lbl_strip.constant=self.btn_fourth_inns_id.frame.origin.x;
@@ -5678,10 +5678,12 @@ if (([self.matchTypeCode isEqualToString:@"MSC115"] || [self.matchTypeCode isEqu
     isThirdInn = NO;
     isFourthInn = YES;
     //isDone = NO;
-    
-    [self setInningsBySelection:@"4"];
+
     [self setInningsView];
+    [self setInningsBySelection:@"4"];
     [self reloadScroeCard:@"4"];
+
+   // [self setInitView];
 }
 
 -(IBAction)didClickScoreCardAction:(id)sender
