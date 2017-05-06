@@ -14,7 +14,8 @@
 @implementation Utitliy
 
 +(NSString *)getIPPORT{
-    return  @"192.168.1.116:8065";    //betaioswebservice.upca.tv betaioswebservice.upca.tv
+   return @"ioswebservice.upca.tv";
+  //  return  @"192.168.1.116:8065";    //betaioswebservice.upca.tv betaioswebservice.upca.tv
     
     //return @"192.168.1.209:8101";    //http://192.168.1.209:8101  internal testing
     
@@ -31,7 +32,8 @@
 
 
 +(NSString *)getSyncIPPORT{
-    return  @"192.168.1.116:8065";   //192.168.1.49:8096 //@"192.168.1.116:8888";
+    return @"ioswebservice.upca.tv";
+  //  return  @"192.168.1.116:8065";   //192.168.1.49:8096 //@"192.168.1.116:8888";
     
     // return @"192.168.1.209:8101";
     
